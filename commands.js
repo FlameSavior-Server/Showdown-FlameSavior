@@ -11,9 +11,606 @@
  * @license MIT license
  */
 
+if (typeof tour == "undefined") {
+	tour = new Object();
+}
+tour.tiers = new Array();
+setTimeout(function() {for (var i in Data.base.Formats) {tour.tiers.push(i);}}, 1000);
+tour.reset = function(rid) {
+	tour[rid] = {
+		status: 0,
+		tier: undefined,
+		size: 0,
+		roundNum: 0,
+		players: new Array(),
+		winners: new Array(),
+		losers: new Array(),
+		round: new Array(),
+		history: new Array()
+	};
+};
+tour.shuffle = function(list) {
+  var i, j, t;
+  for (i = 1; i < list.length; i++) {
+    j = Math.floor(Math.random()*(1+i));  // choose j in [0..i]
+    if (j != i) {
+      t = list[i];                        // swap list[i] and list[j]
+      list[i] = list[j];
+      list[j] = t;
+    }
+  }
+  return list;
+};
+tour.splint = function(target) {
+	//splittyDiddles
+	var cmdArr =  target.split(",");
+	for(var i = 0; i < cmdArr.length; i++) {
+		cmdArr[i] = cmdArr[i].trim();
+	}
+	return cmdArr;
+};
+tour.join = function(uid, rid) {
+	var players = tour[rid].players;
+	var init = 0;
+	for (var i in players) {
+		if (players[i] == uid) {
+			init = 1;
+		}
+	}
+	if (init) {
+		return false;
+	}
+	players.push(uid);
+	return true;
+};
+tour.leave = function(uid, rid) {
+	var players = tour[rid].players;
+	var init = 0;
+	var key;
+	for (var i in players) {
+		if (players[i] == uid) {
+			init = 1;
+			key = i;
+		}
+	}
+	if (!init) {
+		return false;
+	}
+	players.splice(key, 1);
+	return true;
+};
+tour.lose = function(uid, rid) {
+	/*
+		if couldn't disqualify return false
+		if could disqualify return the opponents userid
+	*/
+	var r = tour[rid].round;
+	for (var i in r) {
+		if (r[i][0] == uid) {
+			var key = i;
+			var p = 0;
+		}
+		if (r[i][1] == uid) {
+			var key = i;
+			var p = 1;
+		}
+	}
+	if (!key) {
+		//user not in tour
+		return -1;
+	}
+	else {
+		if (r[key][1] == undefined) {
+			//no opponent
+			return 0;
+		}
+		if (r[key][2] != undefined && r[key][2] != -1) {
+			//already did match
+			return 1;
+		}
+		var winner = 0;
+		var loser = 1;
+		if (p == 0) {
+			winner = 1;
+			loser = 0;
+		}
+		r[key][2] = r[key][winner];
+		tour[rid].winners.push(r[key][winner]);
+		tour[rid].losers.push(r[key][loser]);
+		tour[rid].history.push(r[key][winner] + "|" + r[key][loser]);
+		return r[key][winner];
+	}
+};
+tour.start = function(rid) {
+	var isValid = false;
+	var numByes = 0;
+	if (tour[rid].size <= 4) {
+        	if (tour[rid].size % 2 == 0) {
+            		isValid = true;
+        	} else {
+            		isValid = true;
+            		numByes = 1;
+		}
+	}
+		do
+		{
+			var numPlayers = ((tour[rid].size - numByes) / 2 + numByes);
+			do
+			{
+					numPlayers = numPlayers / 2;
+			}
+		while (numPlayers > 1);
+		if (numPlayers == 1) {
+						isValid = true;
+			} else {
+						numByes += 1;
+			}
+		}
+	while (isValid == false);
+	var r = tour[rid].round;
+	var sList = tour[rid].players;
+	tour.shuffle(sList);
+	var key = 0;
+	do
+		{
+			if (numByes > 0) {
+				r.push([sList[key], undefined, sList[key]]);
+				tour[rid].winners.push(sList[key]);
+				numByes -= 1
+				key++;
+			}
+		}
+	while (numByes > 0);
+	do
+		{
+			var match = new Array(); //[p1, p2, result]
+			match.push(sList[key]);
+			key++;
+			match.push(sList[key]);
+			key++;
+			match.push(undefined);
+			r.push(match);
+		}
+	while (key != sList.length);
+	tour[rid].roundNum++;
+	tour[rid].status = 2;
+};
+tour.nextRound = function(rid) {
+	var w = tour[rid].winners;
+	var l = tour[rid].losers;
+	tour[rid].roundNum++;
+	tour[rid].history.push(tour[rid].round);
+	tour[rid].round = new Array();
+	tour[rid].losers = new Array();
+	tour[rid].winners = new Array();
+	if (w.length == 1) {
+		//end tour
+		Rooms.rooms[rid].addRaw('<h2><font color="green">Congratulations <font color="black">' + Users.users[w[0]].name + '</font>!  You have won the ' + Data.base.Formats[tour[rid].tier].name + ' Tournament!</font></h2>' + '<br><font color="blue"><b>SECOND PLACE:</b></font> ' + Users.users[l[0]].name + '<hr />');
+		tour[rid].status = 0;
+	}
+	else {
+		var html = '<hr /><h3><font color="green">Round '+ tour[rid].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[rid].tier].name + "<hr /><center>";
+		for (var i = 0; w.length / 2 > i; i++) {
+			var p1 = i * 2;
+			var p2 = p1 + 1;
+			tour[rid].round.push([w[p1], w[p2], undefined]);
+			html += w[p1] + " VS " + w[p2] + "<br />";
+		}
+		Rooms.rooms[rid].addRaw(html + "</center>");
+	}
+};
+for (var i in Rooms.rooms) {
+	if (Rooms.rooms[i].type == "chat" && !tour[i]) {
+		tour[i] = new Object();
+		tour.reset(i);
+	}
+}
+
 var crypto = require('crypto');
+var poofeh = true;
+var aList = new Array();
+var canTalk;
 
 var commands = exports.commands = {
+
+/**** tour commands, also by StevoDuhHero ****/
+	tour: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if (tour[room.id].status != 0) {
+			return this.sendReply('There is already a tournament running, or there is one in a signup phase.');
+		}
+		if (!target) {
+			return this.sendReply('Proper syntax for this command: /tour tier, size');
+		}
+		var targets = tour.splint(target);
+		var tierMatch = false;
+		var tempTourTier = '';
+		for (var i = 0; i < tour.tiers.length; i++) {
+			if ((targets[0].trim().toLowerCase()) == tour.tiers[i].trim().toLowerCase()) {
+			tierMatch = true;
+			tempTourTier = tour.tiers[i];
+			}
+		}
+		if (!tierMatch) {
+			return this.sendReply('Please use one of the following tiers: ' + tour.tiers.join(','));
+		}
+		targets[1] = parseInt(targets[1]);
+		if (isNaN(targets[1])) {
+			return this.sendReply('Proper syntax for this command: /tour tier, size');
+		}
+		if (targets[1] < 3) {
+			return this.sendReply('Tournaments must contain 3 or more people.');
+		}
+
+		tour.reset(room.id);
+		tour[room.id].tier = tempTourTier;
+		tour[room.id].size = targets[1];
+		tour[room.id].status = 1;
+		tour[room.id].players = new Array();		
+
+		room.addRaw('<hr /><h2><font color="green">' + sanitize(user.name) + ' has started a ' + Data.base.Formats[tempTourTier].name + ' Tournament.</font> <font color="red">/j</font> <font color="green">to join!</font></h2><b><font color="blueviolet">PLAYERS:</font></b> ' + targets[1] + '<br /><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tempTourTier].name + '<hr />');
+	},
+	
+	endtour: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if (tour[room.id] == undefined || tour[room.id].status == 0) {
+			return this.sendReply('There is no active tournament.');
+		}
+		tour[room.id].status = 0;
+		room.addRaw('<h2><b>' + user.name + '</b> has ended the tournament.</h2>');
+	},
+	
+	toursize: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if(tour[room.id] == undefined)
+			return this.sendReply('There is no active tournament in this room.');
+		
+		if (tour[room.id].status > 1) {
+			return this.sendReply('The tournament size cannot be changed now!');
+		}
+		if (!target) {
+			return this.sendReply('Proper syntax for this command: /toursize size');
+		}
+		target = parseInt(target);
+		if (isNaN(target)) {
+			return this.sendReply('Proper syntax for this command: /tour size');
+		}
+		if (target < 3) {
+			return this.sendReply('A tournament must have at least 3 people in it.');
+		}
+		if (target < tour[room.id].players.length) {
+			return this.sendReply('Target size must be greater than or equal to the amount of players in the tournament.');
+		}
+		tour[room.id].size = target;
+		room.addRaw('<b>' + user.name + '</b> has changed the tournament size to: ' + target + '. <b><i>' + (target - tour[room.id].players.length) + ' slots remaining.</b></i>');
+		if (target == tour[room.id].players.length) {
+			tour.start(room.id);
+			room.addRaw('<hr /><h3><font color="green">Round '+ tour[room.id].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[room.id].tier].name + "<hr /><center>");
+			var html = "";
+			var round = tour[room.id].round;
+			for (var i in round) {
+				if (!round[i][1]) {
+						html += "<font color=\"red\">" + round[i][0] + " has received a bye!</font><br />";
+				}
+				else {
+					html += round[i][0] + " VS " + round[i][1] + "<br />";
+				}
+			}
+			room.addRaw(html + "</center>");
+		}
+	},
+	
+	jt: 'j',
+	jointour: 'j',
+	j: function(target, room, user, connection) {
+		if (tour[room.id] == undefined || tour[room.id].status == 0) {
+			return this.sendReply('There is no active tournament to join.');
+		}
+		if (tour[room.id].status == 2) {
+			return this.sendReply('Signups for the current tournament are over.');
+		}
+		if (tour.join(user.userid, room.id)) {
+			room.addRaw('<b>' + user.name + '</b> has joined the tournament. <b><i>' + (tour[room.id].size - tour[room.id].players.length) + ' slots remaining.</b></i>');
+			if (tour[room.id].size == tour[room.id].players.length) {
+				tour.start(room.id);
+				var html = '<hr /><h3><font color="green">Round '+ tour[room.id].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[room.id].tier].name + "<hr /><center>";
+				var round = tour[room.id].round;
+				for (var i in round) {
+					if (!round[i][1]) {
+						html += "<font color=\"red\">" + round[i][0] + " has received a bye!</font><br />";
+					}
+					else {
+						html += round[i][0] + " VS " + round[i][1] + "<br />";
+					}
+				}
+				room.addRaw(html + "</center>");
+			}
+		} else {
+			return this.sendReply('You could not enter the tournament. You may already be in the tournament. Type /l if you want to leave the tournament.');
+		}
+	},
+	
+	forcejoin: 'fj',
+	fj: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if (tour[room.id] == undefined || tour[room.id].status == 0 || tour[room.id].status == 2) {
+			return this.sendReply('There is no tournament in a sign-up phase.');
+		}
+		if (!target) {
+			return this.sendReply('Please specify a user who you\'d like to participate.');
+		}
+		var targetUser = Users.get(target);
+		if (targetUser) {
+			target = targetUser.userid;
+		}
+		else {
+			return this.sendReply('The user \'' + target + '\' doesn\'t exist.');
+		}
+		if (tour.join(target, room.id)) {
+			room.addRaw(user.name + ' has forced <b>' + target + '</b> to join the tournament. <b><i>' + (tour[room.id].size - tour[room.id].players.length) + ' slots remaining.</b></i>');
+			if (tour[room.id].size == tour[room.id].players.length) {
+				tour.start(room.id);
+				var html = '<hr /><h3><font color="green">Round '+ tour[room.id].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[room.id].tier].name + "<hr /><center>";
+				var round = tour[room.id].round;
+				for (var i in round) {
+					if (!round[i][1]) {
+						html += "<font color=\"red\">" + round[i][0] + " has received a bye!</font><br />";
+					}
+					else {
+						html += round[i][0] + " VS " + round[i][1] + "<br />";
+					}
+				}
+				room.addRaw(html + "</center>");
+			}
+		}
+		else {
+			return this.sendReply('The user that you specified is already in the tournament.');
+		}
+	},
+	
+	lt: 'l',
+	leavetour: 'l',
+	l: function(target, room, user, connection) {
+		if (tour[room.id] == undefined || tour[room.id].status == 0) {
+			return this.sendReply('There is no active tournament to leave.');
+		}
+		var spotRemover = false;
+		if (tour[room.id].status == 1) {
+			if (tour.leave(user.userid, room.id)) {
+				room.addRaw('<b>' + user.name + '</b> has left the tournament. <b><i>' + (tour[room.id].size - tour[room.id].players.length) + ' slots remaining.</b></i>');
+			}
+			else {
+				return this.sendReply("You're not in the tournament.");
+			}
+		}
+		else {
+			var dqopp = tour.lose(user.userid, room.id);
+			if (dqopp) {
+				room.addRaw('<b>' + user.userid + '</b> has left the tournament. <b>' + dqopp + '</b> will advance.');
+				var r = tour[room.id].round;
+				var c = 0;
+				for (var i in r) {
+					if (r[i][2] && r[i][2] != -1) {
+						c++;
+					}
+				}
+				if (r.length == c) {
+					tour.nextRound(room.id);
+				}
+			}
+			else {
+				return this.sendReply("You're not in the tournament or your opponent is unavailable.");
+			}
+		}
+	},
+	
+	forceleave: 'fl',
+	fl: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if (tour[room.id] == undefined || tour[room.id].status == 0 || tour[room.id].status == 2) {
+			return this.sendReply('There is no tournament in a sign-up phase.  Use /dq username if you wish to remove someone in an active tournament.');
+		}
+		if (!target) {
+			return this.sendReply('Please specify a user to kick from this signup.');
+		}
+		var targetUser = Users.get(target);
+		if (targetUser) {
+			target = targetUser.userid;
+		}
+		else {
+			return this.sendReply('The user \'' + target + '\' doesn\'t exist.');
+		}
+		if (tour.leave(target, room.id)) {
+			room.addRaw(user.name + ' has forced <b>' + target + '</b> to leave the tournament. <b><i>' + (tour[room.id].size - tour[room.id].players.length) + ' slots remaining.</b></i>');
+		}
+		else {
+			return this.sendReply('The user that you specified is not in the tournament.');
+		}
+	},
+	
+	remind: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if(tour[room.id] == undefined)
+			return this.sendReply('There is no active tournament in this room.');
+			
+		if (tour[room.id].status != 1) {
+			return this.sendReply('There is no tournament in its sign up phase.');
+		}
+		room.addRaw('<hr /><h2><font color="green">Please sign up for the ' + Data.base.Formats[tour[room.id].tier].name + ' Tournament.</font> <font color="red">/j</font> <font color="green">to join!</font></h2><b><font color="blueviolet">PLAYERS:</font></b> ' + tour[room.id].size + '<br /><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[room.id].tier].name + '<hr />');
+	},
+	
+	viewround: 'vr',
+	vr: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+				return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if(tour[room.id] == undefined)
+			return this.sendReply('There is no active tournament in this room.');
+			
+		if (tour[room.id].status < 2) {
+				return this.sendReply('There is no tournament out of its signup phase.');
+		}
+		var html = '<hr /><h3><font color="green">Round '+ tour[room.id].roundNum + '!</font></h3><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[room.id].tier].name + "<hr /><center><small>Red = lost, Green = won, Bold = battling</small><center>";
+		var r = tour[room.id].round;
+		for (var i in r) {
+			if (!r[i][1]) {
+				//bye
+				html += "<font color=\"red\">" + r[i][0] + " has received a bye.</font><br />";
+			}
+			else {
+				if (r[i][2] == undefined) {
+					//haven't started
+					html += r[i][0] + " VS " + r[i][1] + "<br />";
+				}
+				else if (r[i][2] == -1) {
+					//currently battling
+					html += "<b>" + r[i][0] + " VS " + r[i][1] + "</b><br />";
+				}
+				else {
+					//match completed
+					var p1 = "red";
+					var p2 = "green";
+					if (r[i][2] == r[i][0]) {
+						p1 = "green";
+						p2 = "red";
+					}
+					html += "<b><font color=\"" + p1 + "\">" + r[i][0] + "</font> VS <font color=\"" + p2 + "\">" + r[i][1] + "</font></b><br />";
+				}
+			}
+		}
+		room.addRaw(html + "</center>");
+	},
+	
+	disqualify: 'dq',
+	dq: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if (!target) {
+			return this.sendReply('Proper syntax for this command is: /dq username');
+		}
+		if(tour[room.id] == undefined){
+			return this.sendReply('There is no active tournament in this room.');
+		}
+		if (tour[room.id].status < 2) {
+			return this.sendReply('There is no tournament out of its sign up phase.');
+		}
+		var targetUser = Users.get(target);
+		if (!targetUser) {
+			var dqGuy = sanitize(target.toLowerCase());
+		} else {
+			var dqGuy = targetUser.userid;
+		}
+		var error = tour.lose(dqGuy, room.id);
+		if (error == -1) {
+			return this.sendReply('The user \'' + target + '\' was not in the tournament.');
+		}
+		else if (error == 0) {
+			return this.sendReply('The user \'' + target + '\' was not assigned an opponent. Wait till next round to disqualify them.');
+		}
+		else if (error == 1) {
+			return this.sendReply('The user \'' + target + '\' already played their battle. Wait till next round to disqualify them.');
+		}
+		else {
+			room.addRaw('<b>' + dqGuy + '</b> was disqualified by ' + user.name + ' so ' + error + ' advances.');
+			var r = tour[room.id].round;
+			var c = 0;
+			for (var i in r) {
+				if (r[i][2] && r[i][2] != -1) {
+					c++;
+				}
+			}
+			if (r.length == c) {
+				tour.nextRound(room.id);
+			}
+		}
+	},
+	
+	replace: function(target, room, user, connection) {
+		if (!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		if (tour[room.id] == undefined || tour[room.id].status != 2) {
+			return this.sendReply('The tournament is currently in a sign-up phase or is not active, and replacing users only works mid-tournament.');
+		}
+		if (!target) {
+			return this.sendReply('Proper syntax for this command is: /replace user1, user2.  User 2 will replace User 1 in the current tournament.');
+		}
+		var t = tour.splint(target);
+		if (!t[1]) {
+			return this.sendReply('Proper syntax for this command is: /replace user1, user2.  User 2 will replace User 1 in the current tournament.');
+		}
+		var userOne = Users.get(t[0]); 
+		var userTwo = Users.get(t[1]);
+		if (!userTwo) {
+			return this.sendReply('Proper syntax for this command is: /replace user1, user2.  The user you specified to be placed in the tournament is not present!');
+		} else {
+			t[1] = userTwo.userid;
+		}
+		if (userOne) {
+			t[0] = userOne.userid;
+		}
+		var rt = tour[room.id];
+		var init1 = false;
+		var init2 = false;
+		var players = rt.players;
+		//check if replacee in tour
+		for (var i in players) {
+			if (players[i] ==  t[0]) {
+				init1 = true;
+			}
+		}
+		//check if replacer in tour
+		for (var i in players) {
+			if (players[i] ==  t[1]) {
+				init2 = true;
+			}
+		}
+		if (!init1) {
+			return this.sendReply(t[0]  + ' cannot be replaced by ' + t[1] + " because they are not in the tournament.");
+		}
+		if (init2) {
+			return this.sendReply(t[1] + ' cannot replace ' + t[0] + ' because they are already in the tournament.');
+		}
+		var outof = ["players", "winners", "losers", "round"];
+		for (var x in outof) {
+			for (var y in rt[outof[x]]) {
+				var c = rt[outof[x]][y];
+				if (outof[x] == "round") {
+					if (c[0] == t[0]) {
+						c[0] = t[1];
+					}
+					if (c[1] == t[0]) {
+						c[1] = t[1];
+					}
+					if (c[2] == t[0]) {
+						c[2] = t[1];
+					}
+				}
+				else {
+					if (c == t[0]) {
+						rt[outof[x]][y] = t[1];
+					}
+				}
+			}
+		}
+		rt.history.push(t[0] + "->" + t[1]);
+		room.addRaw('<b>' + t[0] +'</b> has left the tournament and is replaced by <b>' + t[1] + '</b>.');
+	},
+
+	/**** normal stuff ****/
 
 	version: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -123,6 +720,17 @@ var commands = exports.commands = {
 		}
 	},
 
+	adultroom: function(target, room, user) {
+		if(!user.can('makeroom')) return;
+		if(target === 'off'){
+			room.isAdult = false;
+			return this.addModCommand(user.name + ' has made the room available to everyone.');
+		} else {
+			room.isAdult = true;
+			return this.addModCommand(user.name + ' has made the room available to adults.');
+		}
+	},
+
 	join: function(target, room, user, connection) {
 		var targetRoom = Rooms.get(target);
 		if (target && !targetRoom) {
@@ -131,9 +739,16 @@ var commands = exports.commands = {
 		if (targetRoom && !targetRoom.battle && targetRoom !== Rooms.lobby && !user.named) {
 			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 		}
+		if (target.toLowerCase() == "staff" && !user.can('warn')) {
+			return this.sendReply("Out peasant. OUT! This room is for staff ONLY!");
+		}
+		if(targetRoom.isAdult && aList.indexOf(user.userid) == -1){
+			return this.sendReply("You are not old enough to join this room. If you believe you are, contact a staff member.");
+		}
 		if (!user.joinRoom(targetRoom || room, connection)) {
 			// This condition appears to be impossible for now.
 			return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' could not be joined.");
+		}
 		}
 	},
 
@@ -145,6 +760,118 @@ var commands = exports.commands = {
 			return this.sendReply("The room '"+target+"' does not exist.");
 		}
 		user.leaveRoom(targetRoom || room, connection);
+	},
+
+poof: 'd',
+	d: function(target, room, user){
+		if(room.id !== 'lobby') return false;
+		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
+		var etags = '</font></strong>'
+		var targetid = toUserid(user);
+		if(!user.muted && target){
+			var tar = toUserid(target);
+			var targetUser = Users.get(tar);
+			if(user.can('poof', targetUser)){
+				
+				if(!targetUser){
+					user.emit('console', 'Cannot find user ' + target + '.', socket);	
+				}else{
+					if(poofeh)
+						Rooms.rooms.lobby.addRaw(btags + '~~ '+targetUser.name+' was vanished into nothingness by ' + user.name +'! ~~' + etags);
+					targetUser.disconnectAll();
+					return	this.logModCommand(targetUser.name+ ' was poofed by ' + user.name);
+				}
+				
+			} else {
+				return this.sendReply('/poof target - Access denied.');
+			}
+		}
+		if(poofeh && !user.muted){
+			Rooms.rooms.lobby.addRaw(btags + getRandMessage(user)+ etags);
+			user.disconnectAll();	
+		}else{
+			return this.sendReply('poof is currently disabled.');
+		}
+	},
+
+	poofoff: 'nopoof',
+	nopoof: function(target, room, user){
+		if(!user.can('warn'))
+			return this.sendReply('/nopoof - Access denied.');
+		if(!poofeh)
+			return this.sendReply('poof is currently disabled.');
+		poofeh = false;
+		return this.sendReply('poof is now disabled.');
+	},
+	
+	poofon: function(target, room, user){
+		if(!user.can('warn'))
+			return this.sendReply('/poofon - Access denied.');
+		if(poofeh)
+			return this.sendReply('poof is currently enabled.');
+		poofeh = true;
+		return this.sendReply('poof is now enabled.');
+	},
+	
+	cpoof: function(target, room, user){
+		if(!user.can('broadcast'))
+			return this.sendReply('/cpoof - Access Denied');
+		
+		if(poofeh)
+		{
+			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
+			var etags = '</font></strong>'
+			Rooms.rooms.lobby.addRaw(btags + '~~ '+user.name+' '+target+'! ~~' + etags);
+			this.logModCommand(user.name + ' used a custom poof message: \n "'+target+'"');
+			user.disconnectAll();	
+		}else{
+			return this.sendReply('Poof is currently disabled.');
+		}
+	},
+
+	alist: function(target, room, user){
+		if(!user.can('makeroom')) return;
+		target = tour.splint(target);
+		if (target[0].toLowerCase() === 'list') {
+			var aListStr = '';
+			for (var u in aList) {
+				if(aList[u] != undefined)
+					aListStr += aList[u] + ', ';
+			}
+			aListStr = aListStr.substring(0, aListStr.length-2);
+			return this.sendReply("Users currently in the list of adults: " + aListStr);
+		}
+		if(Object.size(target) < 2){
+			return this.sendReply('Insufficient parameters.');
+		}
+		var tarUser = Users.get(target[1]);
+		if(tarUser == undefined){
+			return this.sendReply('User not found.');
+		}
+		if (target[0].toLowerCase() === 'add') {
+			var size = Object.size(aList);
+			aList[size] = tarUser.userid
+			return this.sendReply(tarUser.name + ' has been added to the aList.');
+		}
+		if (target[0].toLowerCase() === 'remove') {
+			var index = aList.indexOf(tarUser.userid);
+			if(index == -1){
+				return this.sendReply('User not found on aList.');
+			} else {
+				delete aList[index];
+				return this.sendReply(tarUser.name + ' has been removed from the aList.');
+			}
+		} else {
+			return this.sendReply("Unknown command. Allowable commands are: list, add, remove.");
+		}
+	},
+	showpic: function(target, room, user) {
+		if (!target) return this.sendReply('/showpic [url] - Adds a picture to the room.');
+		if (!user.can('broadcast')) return false;
+		if (!this.canTalk()) return;
+		if (!room.isAdult) return this.sendReply('You can only do this in adult rooms.');
+		this.add('|raw|<div class="broadcast-blue"><img src=' + target + '></div>');
+		this.logModCommand(user.name +' added the image ' + target);
 	},
 
 	/*********************************************************
@@ -365,6 +1092,46 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Moderating: Other
 	 *********************************************************/
+	hide: 'hideauth',
+	hideauth: function(target, room, user){
+		if(!user.can('hideauth'))
+			return this.sendReply( '/hideauth - access denied.');
+		
+		var tar = ' ';
+		if(target){
+			target = target.trim();
+			if(config.groupsranking.indexOf(target) > -1){
+				if( config.groupsranking.indexOf(target) <= config.groupsranking.indexOf(user.group)){
+					tar = target;
+				}else{
+					this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');
+				}
+			}else{
+				this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
+			}
+		}
+	
+		user.getIdentity = function(){
+			if(this.muted)
+				return '!' + this.name;
+			if(this.locked)
+				return '#' + this.name;
+			return tar + this.name;
+		};
+		user.updateIdentity();
+		this.sendReply( 'You are now hiding your auth symbol as \''+tar+ '\'.');
+		return this.logModCommand(user.name + ' is hiding auth symbol as \''+ tar + '\'');
+	},
+	
+	showauth: function(target, room, user){
+		if(!user.can('hideauth'))
+			return	this.sendReply( '/showauth - access denied.');
+		
+		delete user.getIdentity;
+		user.updateIdentity();
+		this.sendReply('You have now revealed your auth symbol.');
+		return this.logModCommand(user.name + ' has revealed their auth symbol.');
+	},
 
 	demote: 'promote',
 	promote: function(target, room, user, connection, cmd) {
@@ -747,6 +1514,7 @@ var commands = exports.commands = {
 		Rooms.lobby.logEntry(user.name + ' used /refreshpage');
 	},
 
+	gitpull: 'updateserver',
 	updateserver: function(target, room, user, connection) {
 		if (!user.checkConsolePermission(connection)) {
 			return this.sendReply('/updateserver - Access denied.');
@@ -1156,3 +1924,142 @@ var commands = exports.commands = {
 	},
 
 };
+
+
+function getRandMessage(user){
+	var numMessages = 44; // numMessages will always be the highest case # + 1
+	var message = '~~ ';
+	switch(Math.floor(Math.random()*numMessages)){
+		case 0: message = message + user.name + ' has vanished into nothingness!';
+			break;
+		case 1: message = message + user.name + ' visited kupo\'s bedroom and never returned!';
+			break;
+		case 2: message = message + user.name + ' used Explosion!';
+			break;
+		case 3: message = message + user.name + ' fell into the void.';
+			break;
+		case 4: message = message + user.name + ' was squished by pandaw\'s large behind!';
+			break;	
+		case 5: message = message + user.name + ' became EnerG\'s slave!';
+			break;
+		case 6: message = message + user.name + ' became kupo\'s love slave!';
+			break;
+		case 7: message = message + user.name + ' has left the building.';
+			break;
+		case 8: message = message + user.name + ' felt Thundurus\'s wrath!';
+			break;
+		case 9: message = message + user.name + ' died of a broken heart.';
+			break;
+		case 10: message = message + user.name + ' got lost in a maze!';
+			break;
+		case 11: message = message + user.name + ' was hit by Magikarp\'s Revenge!';
+			break;
+		case 12: message = message + user.name + ' was sucked into a whirlpool!';
+			break;
+		case 13: message = message + user.name + ' got scared and left the server!';
+			break;
+		case 14: message = message + user.name + ' fell off a cliff!';
+			break;
+		case 15: message = message + user.name + ' got eaten by a bunch of piranhas!';
+			break;
+		case 16: message = message + user.name + ' is blasting off again!';
+			break;
+		case 17: message = message + 'A large spider descended from the sky and picked up ' + user.name + '.';
+			break;
+		case 18: message = message + user.name + ' tried to touch RisingPokeStar!';
+			break;
+		case 19: message = message + user.name + ' got their sausage smoked by Charmanderp!';
+			break;
+		case 20: message = message + user.name + ' was forced to give mpea an oil massage!';
+			break;
+		case 21: message = message + user.name + ' took an arrow to the knee... and then one to the face.';
+			break;
+		case 22: message = message + user.name + ' peered through the hole on Shedinja\'s back';
+			break;
+		case 23: message = message + user.name + ' recieved judgment from the almighty Arceus!';
+			break;
+		case 24: message = message + user.name + ' used Final Gambit and missed!';
+			break;
+		case 25: message = message + user.name + ' pissed off a Gyarados!';
+			break;
+		case 26: message = message + user.name + ' was taken away in Neku\'s black van!';
+			break;
+		case 27: message = message + user.name + ' was actually a 12 year and was banned for COPPA.';
+			break;
+		case 28: message = message + user.name + ' got lost in the illusion of reality.';
+			break;
+		case 29: message = message + user.name + ' was unfortunate and didn\'t get a cool message.';
+			break;
+		case 30: message = message + 'The Immortal accidently kicked ' + user.name + ' from the server!';
+			break;
+		case 31: message = message + user.name + ' was knocked out cold by Fallacies!';
+			break;
+		case 32: message = message + user.name + ' died making love to an Excadrill!';
+			break;
+		default: message = message + user.name + ' was Pan Hammered!';
+	};
+	message = message + ' ~~';
+	return message;
+}
+
+function MD5(f){function i(b,c){var d,e,f,g,h;f=b&2147483648;g=c&2147483648;d=b&1073741824;e=c&1073741824;h=(b&1073741823)+(c&1073741823);return d&e?h^2147483648^f^g:d|e?h&1073741824?h^3221225472^f^g:h^1073741824^f^g:h^f^g}function j(b,c,d,e,f,g,h){b=i(b,i(i(c&d|~c&e,f),h));return i(b<<g|b>>>32-g,c)}function k(b,c,d,e,f,g,h){b=i(b,i(i(c&e|d&~e,f),h));return i(b<<g|b>>>32-g,c)}function l(b,c,e,d,f,g,h){b=i(b,i(i(c^e^d,f),h));return i(b<<g|b>>>32-g,c)}function m(b,c,e,d,f,g,h){b=i(b,i(i(e^(c|~d),
+f),h));return i(b<<g|b>>>32-g,c)}function n(b){var c="",e="",d;for(d=0;d<=3;d++)e=b>>>d*8&255,e="0"+e.toString(16),c+=e.substr(e.length-2,2);return c}var g=[],o,p,q,r,b,c,d,e,f=function(b){for(var b=b.replace(/\r\n/g,"\n"),c="",e=0;e<b.length;e++){var d=b.charCodeAt(e);d<128?c+=String.fromCharCode(d):(d>127&&d<2048?c+=String.fromCharCode(d>>6|192):(c+=String.fromCharCode(d>>12|224),c+=String.fromCharCode(d>>6&63|128)),c+=String.fromCharCode(d&63|128))}return c}(f),g=function(b){var c,d=b.length;c=
+d+8;for(var e=((c-c%64)/64+1)*16,f=Array(e-1),g=0,h=0;h<d;)c=(h-h%4)/4,g=h%4*8,f[c]|=b.charCodeAt(h)<<g,h++;f[(h-h%4)/4]|=128<<h%4*8;f[e-2]=d<<3;f[e-1]=d>>>29;return f}(f);b=1732584193;c=4023233417;d=2562383102;e=271733878;for(f=0;f<g.length;f+=16)o=b,p=c,q=d,r=e,b=j(b,c,d,e,g[f+0],7,3614090360),e=j(e,b,c,d,g[f+1],12,3905402710),d=j(d,e,b,c,g[f+2],17,606105819),c=j(c,d,e,b,g[f+3],22,3250441966),b=j(b,c,d,e,g[f+4],7,4118548399),e=j(e,b,c,d,g[f+5],12,1200080426),d=j(d,e,b,c,g[f+6],17,2821735955),c=
+j(c,d,e,b,g[f+7],22,4249261313),b=j(b,c,d,e,g[f+8],7,1770035416),e=j(e,b,c,d,g[f+9],12,2336552879),d=j(d,e,b,c,g[f+10],17,4294925233),c=j(c,d,e,b,g[f+11],22,2304563134),b=j(b,c,d,e,g[f+12],7,1804603682),e=j(e,b,c,d,g[f+13],12,4254626195),d=j(d,e,b,c,g[f+14],17,2792965006),c=j(c,d,e,b,g[f+15],22,1236535329),b=k(b,c,d,e,g[f+1],5,4129170786),e=k(e,b,c,d,g[f+6],9,3225465664),d=k(d,e,b,c,g[f+11],14,643717713),c=k(c,d,e,b,g[f+0],20,3921069994),b=k(b,c,d,e,g[f+5],5,3593408605),e=k(e,b,c,d,g[f+10],9,38016083),
+d=k(d,e,b,c,g[f+15],14,3634488961),c=k(c,d,e,b,g[f+4],20,3889429448),b=k(b,c,d,e,g[f+9],5,568446438),e=k(e,b,c,d,g[f+14],9,3275163606),d=k(d,e,b,c,g[f+3],14,4107603335),c=k(c,d,e,b,g[f+8],20,1163531501),b=k(b,c,d,e,g[f+13],5,2850285829),e=k(e,b,c,d,g[f+2],9,4243563512),d=k(d,e,b,c,g[f+7],14,1735328473),c=k(c,d,e,b,g[f+12],20,2368359562),b=l(b,c,d,e,g[f+5],4,4294588738),e=l(e,b,c,d,g[f+8],11,2272392833),d=l(d,e,b,c,g[f+11],16,1839030562),c=l(c,d,e,b,g[f+14],23,4259657740),b=l(b,c,d,e,g[f+1],4,2763975236),
+e=l(e,b,c,d,g[f+4],11,1272893353),d=l(d,e,b,c,g[f+7],16,4139469664),c=l(c,d,e,b,g[f+10],23,3200236656),b=l(b,c,d,e,g[f+13],4,681279174),e=l(e,b,c,d,g[f+0],11,3936430074),d=l(d,e,b,c,g[f+3],16,3572445317),c=l(c,d,e,b,g[f+6],23,76029189),b=l(b,c,d,e,g[f+9],4,3654602809),e=l(e,b,c,d,g[f+12],11,3873151461),d=l(d,e,b,c,g[f+15],16,530742520),c=l(c,d,e,b,g[f+2],23,3299628645),b=m(b,c,d,e,g[f+0],6,4096336452),e=m(e,b,c,d,g[f+7],10,1126891415),d=m(d,e,b,c,g[f+14],15,2878612391),c=m(c,d,e,b,g[f+5],21,4237533241),
+b=m(b,c,d,e,g[f+12],6,1700485571),e=m(e,b,c,d,g[f+3],10,2399980690),d=m(d,e,b,c,g[f+10],15,4293915773),c=m(c,d,e,b,g[f+1],21,2240044497),b=m(b,c,d,e,g[f+8],6,1873313359),e=m(e,b,c,d,g[f+15],10,4264355552),d=m(d,e,b,c,g[f+6],15,2734768916),c=m(c,d,e,b,g[f+13],21,1309151649),b=m(b,c,d,e,g[f+4],6,4149444226),e=m(e,b,c,d,g[f+11],10,3174756917),d=m(d,e,b,c,g[f+2],15,718787259),c=m(c,d,e,b,g[f+9],21,3951481745),b=i(b,o),c=i(c,p),d=i(d,q),e=i(e,r);return(n(b)+n(c)+n(d)+n(e)).toLowerCase()};
+
+
+
+var colorCache = {};
+
+function hashColor(name) {
+	if (colorCache[name]) return colorCache[name];
+	
+	var hash = MD5(name);
+	var H = parseInt(hash.substr(4, 4), 16) % 360;
+	var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
+	var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
+	
+	var m1, m2, hue;
+	var r, g, b
+	S /=100;
+	L /= 100;
+	if (S == 0)
+		r = g = b = (L * 255).toString(16);
+	else {
+		if (L <= 0.5)
+			m2 = L * (S + 1);
+		else
+			m2 = L + S - L * S;
+		m1 = L * 2 - m2;
+		hue = H / 360;
+		r = HueToRgb(m1, m2, hue + 1/3);
+		g = HueToRgb(m1, m2, hue);
+		b = HueToRgb(m1, m2, hue - 1/3);
+	}
+	
+	
+	colorCache[name] = '#' + r + g + b;
+	return colorCache[name];
+}
+
+function HueToRgb(m1, m2, hue) {
+	var v;
+	if (hue < 0)
+		hue += 1;
+	else if (hue > 1)
+		hue -= 1;
+
+	if (6 * hue < 1)
+		v = m1 + (m2 - m1) * hue * 6;
+	else if (2 * hue < 1)
+		v = m2;
+	else if (3 * hue < 2)
+		v = m1 + (m2 - m1) * (2/3 - hue) * 6;
+	else
+		v = m1;
+
+	return (255 * v).toString(16);
+}

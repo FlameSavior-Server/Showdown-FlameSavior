@@ -425,9 +425,15 @@ var commands = exports.commands = {
 			'~ <b>Administrator</b> - They can do anything, like change what this message says');
 	},
 
+	git: 'opensource',
 	opensource: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Pokemon Showdown is open source:<br />- Language: JavaScript<br />- <a href="https://github.com/Zarel/Pokemon-Showdown/commits/master" target="_blank">What\'s new?</a><br />- <a href="https://github.com/Zarel/Pokemon-Showdown" target="_blank">Server source code</a><br />- <a href="https://github.com/Zarel/Pokemon-Showdown-Client" target="_blank">Client source code</a>');
+		this.sendReplyBox('Pokemon Showdown is open source:<br />- Language: JavaScript<br />'+
+				'- <a href="https://github.com/Zarel/Pokemon-Showdown/commits/master" target="_blank">What\'s new?</a><br />'+
+				'- <a href="https://github.com/Zarel/Pokemon-Showdown" target="_blank">Server source code</a><br />'+
+				'- <a href="https://github.com/Zarel/Pokemon-Showdown-Client" target="_blank">Client source code</a><br />'+
+				'- <a href="https://github.com/kupochu/Pokemon-Showdown" target="_blank">TBT Server source code</a><br />'+
+				'- <a href="https://github.com/kupochu/Pokemon-Showdown/commits/master" target="_blank">What\'s new with TBT?</a>');
 	},
 
 	avatars: function(target, room, user) {
@@ -679,11 +685,23 @@ var commands = exports.commands = {
 			return this.sendReplyBox('Pokemon, item, move, or ability not found for generation ' + generation.toUpperCase() + '.');
 		}
 	},
+	
+	fourms: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		return this.sendReplyBox('The Battle Tower Forums can be found <a href="http://thebattletower.xiaotai.org/index.php" >here</a>.');
+	},
 
 	/*********************************************************
 	 * Miscellaneous commands
 	 *********************************************************/
 
+	kupo: function(target, room, user){
+		if(!user.canBroadcast()) return this.sendReply('/kupo - Access Denied.');
+		if(!target) return this.sendReply('Insufficent Parameters.');
+		room.add('|c|kupo|/me '+ target);
+		this.logModCommand(user.name + ' used /kupo to say ' + target);
+	},
+	
 	birkal: function(target, room, user) {
 		this.sendReply("It's not funny anymore.");
 	},

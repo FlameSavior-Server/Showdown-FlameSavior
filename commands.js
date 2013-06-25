@@ -613,7 +613,7 @@ var commands = exports.commands = {
 	/**** normal stuff ****/
 	poker: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<div class="infobox">Play Poker Online:<br />&nbsp;&nbsp;- <a href="http://pokemonshowdown.com/rules" target="_blank">Play Poker</a><img src="http://www.picgifs.com/sport-graphics/sport-graphics/playing-cards/sport-graphics-playing-cards-590406.gif" style="float: left;" height="30px" /></div>');
+		this.sendReplyBox('<div class="infobox">Play Poker Online:<br />&nbsp;&nbsp;- <a href="http://www.pogo.com/games/free-online-poker" target="_blank">Play Poker</a><img src="http://www.picgifs.com/sport-graphics/sport-graphics/playing-cards/sport-graphics-playing-cards-590406.gif" style="float: left;" height="30px" /></div>');
 	},
 	
 	version: function(target, room, user) {

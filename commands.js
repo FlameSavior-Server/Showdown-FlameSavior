@@ -1096,8 +1096,8 @@ var commands = exports.commands = {
 	forcejoinstaff: function(target, room, user){
 		if(!user.can('declare')) return false;
 		if(Rooms.rooms['staff'] == undefined){
-			Rooms.rooms[id] = new Rooms.ChatRoom(id, target);
-			this.sendReply("The room '"+target+"' was created.");
+			Rooms.rooms['staff'] = new Rooms.ChatRoom('staff', 'staff');
+			this.sendReply("The room 'staff' was created.");
 		}
 		for(var u in Users.users)
 			if(Users.users[u].connected && config.indexOf(Users.users[u].group) >= 2)

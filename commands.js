@@ -864,6 +864,7 @@ var commands = exports.commands = {
 			return this.sendReply("Unknown command. Allowable commands are: list, add, remove.");
 		}
 	},
+	
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url] - Adds a picture to the room.');
 		if (!user.can('broadcast')) return false;
@@ -1097,10 +1098,10 @@ var commands = exports.commands = {
 		if(!user.can('declare')) return false;
 		if(Rooms.rooms['staff'] == undefined){
 			Rooms.rooms['staff'] = new Rooms.ChatRoom('staff', 'staff');
-			this.sendReply("The room 'staff' was created.");
+			this.sendReply('The room \'staff\' was created.');
 		}
 		for(var u in Users.users)
-			if(Users.users[u].connected && config.indexOf(Users.users[u].group) >= 2)
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2)
 				Users.users[u].joinRoom('staff');
 	},
 	 

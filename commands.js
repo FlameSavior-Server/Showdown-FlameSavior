@@ -749,7 +749,6 @@ var commands = exports.commands = {
 			// This condition appears to be impossible for now.
 			return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' could not be joined.");
 		}
-		}
 	},
 
 	leave: 'part',

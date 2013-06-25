@@ -761,7 +761,7 @@ var commands = exports.commands = {
 		user.leaveRoom(targetRoom || room, connection);
 	},
 
-poof: 'd',
+	poof: 'd',
 	d: function(target, room, user){
 		if(room.id !== 'lobby') return false;
 		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
@@ -1091,6 +1091,19 @@ poof: 'd',
 	/*********************************************************
 	 * Moderating: Other
 	 *********************************************************/
+	
+	fjs: 'forcejoinstaff',
+	forcejoinstaff: function(target, room, user){
+		if(!user.can('declare')) return false;
+		if(Rooms.rooms['staff'] == undefined){
+			Rooms.rooms[id] = new Rooms.ChatRoom(id, target);
+			this.sendReply("The room '"+target+"' was created.");
+		}
+		for(var u in Users.users)
+			if(Users.users[u].connected && config.indexOf(Users.users[u].group) >= 2)
+				Users.users[u].joinRoom('staff');
+	},
+	 
 	hide: 'hideauth',
 	hideauth: function(target, room, user){
 		if(!user.can('hideauth'))

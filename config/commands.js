@@ -686,7 +686,7 @@ var commands = exports.commands = {
 		}
 	},
 	
-	fourms: function(target, room, user) {
+	forums: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('The Battle Tower Forums can be found <a href="http://thebattletower.xiaotai.org/index.php" >here</a>.');
 	},
@@ -698,7 +698,7 @@ var commands = exports.commands = {
 	kupo: function(target, room, user){
 		if(!user.canBroadcast()) return this.sendReply('/kupo - Access Denied.');
 		if(!target) return this.sendReply('Insufficent Parameters.');
-		room.add('|c|kupo|/me '+ target);
+		Rooms.rooms.lobby.add('|c|kupo|/me '+ target);
 		this.logModCommand(user.name + ' used /kupo to say ' + target);
 	},
 	

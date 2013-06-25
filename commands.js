@@ -780,7 +780,7 @@ var commands = exports.commands = {
 					user.emit('console', 'Cannot find user ' + target + '.', socket);	
 				}else{
 					if(poofeh)
-						Rooms.rooms.lobby.addRaw(btags + '~~ '+targetUser.name+' was vanished into nothingness by ' + user.name +'! ~~' + etags);
+						Rooms.rooms.lobby.addRaw(btags + '~~ '+targetUser.name+' was slaughtered by ' + user.name +'! ~~' + etags);
 					targetUser.disconnectAll();
 					return	this.logModCommand(targetUser.name+ ' was poofed by ' + user.name);
 				}

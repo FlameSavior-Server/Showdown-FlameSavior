@@ -622,15 +622,15 @@ var commands = exports.commands = {
 	},
 
 	me: function(target, room, user, connection) {
-		target = this.canTalk(target);
-		if (!target) return;
+		canTalk = this.canTalk(target);
+		if (!canTalk || (canTalk && !target)) return;
 
 		return '/me ' + target;
 	},
 
 	mee: function(target, room, user, connection) {
-		target = this.canTalk(target);
-		if (!target) return;
+		canTalk = this.canTalk(target);
+		if (!canTalk || (canTalk && !target)) return;
 
 		return '/mee ' + target;
 	},

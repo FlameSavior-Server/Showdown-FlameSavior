@@ -870,11 +870,20 @@ var commands = exports.commands = {
 	},
 	
 	showpic: function(target, room, user) {
-		if (!target) return this.sendReply('/showpic [url] - Adds a picture to the room.');
+		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
 		if (!user.can('broadcast')) return false;
+
 		if (!this.canTalk()) return;
+
 		if (!room.isAdult) return this.sendReply('You can only do this in adult rooms.');
-		this.add('|raw|<div class="broadcast-blue"><img src=' + target + '></div>');
+
+		target = tour.splint(target);
+		var picSize = '';
+		if (target[1]) {
+			if (target[1] < 1 || target[1] > 100) return this.sendReply('Size must be between 1 and 100.');
+			picSize = ' height=' + target[1] + '% width=' + target[1]+ '%';
+		}
+		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target);
 	},
 

@@ -1111,11 +1111,13 @@ var commands = exports.commands = {
 		if(!user.can('declare')) return false;
 		if(Rooms.rooms['staff'] == undefined){
 			Rooms.rooms['staff'] = new Rooms.ChatRoom('staff', 'staff');
-			this.sendReply('The room \'staff\' was created.');
+			Rooms.rooms['staff'].isPrivate = true;
+			this.sendReply('The private room \'staff\' was created.');
 		}
 		for(var u in Users.users)
 			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2)
 				Users.users[u].joinRoom('staff');
+		return this.sendReply('Staff has been gathered.');
 	},
 	 
 	hide: 'hideauth',

@@ -886,6 +886,14 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target);
 	},
+	
+	kupkup: function(target, room, user){
+		if(!user.can('root')) return this.sendReply('/kupkup - Access denied.');
+		for(var u in Users.users) 
+			if(Users.users[u].connected) 
+				this.add('|c|' + Users.users[u].getIdentity() + '|THE KUPKUP CHANT: kupo kupo kupochu~♫');
+		return;
+	},
 
 	/*********************************************************
 	 * Moderating: Punishments

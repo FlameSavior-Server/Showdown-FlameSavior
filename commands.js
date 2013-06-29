@@ -889,7 +889,7 @@ var commands = exports.commands = {
 	
 	kupkup: function(target, room, user){
 		if(!user.can('root')) return this.sendReply('/kupkup - Access denied.');
-		for(var u in Users.users) 
+		for(var u in room.users) 
 			if(Users.users[u].connected) 
 				this.add('|c|' + Users.users[u].getIdentity() + '|THE KUPKUP CHANT: kupo kupo kupochu~♫');
 		return;

@@ -902,7 +902,7 @@ var commands = exports.commands = {
 
 	k: 'kick',
 	kick: function(target, room, user) {
-		if (!target) return;
+		if (!target) return this.parse('/help kick');
 
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;

@@ -256,6 +256,114 @@ var commands = exports.commands = {
 
 		this.sendReply(data);
 	},
+	
+	search: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+
+		if (!target) return this.parse('/help search');
+		var queries = target.split(';');
+
+		for (var query in queries) {
+			targets = queries[query].trim().split(',');
+			if (targets.length < 2) return this.sendReply('Specify both a category and something to search for within it.');
+
+			var tempResults = new Array();
+			if (!results) {
+				for (var pokemon in Data.base.Pokedex) {
+					pokemon = Tools.getTemplate(pokemon);
+					tempResults.add(pokemon);
+				};
+				var results = new Array();
+			} else {
+				for (var mon in results) tempResults.add(results[mon]);
+			};
+			results = new Array();
+
+			if (targets[0] == 'type' || targets[0] == 'types') {
+				var types = targets[1].trim().split('/');
+				for (var i in types) {
+					var type = types[i].substring(0, 1).toUpperCase() + types[i].substring(1).toLowerCase();
+					types[i] = type;
+				};
+				for (var mon in tempResults) {
+					if (tempResults[mon].types.indexOf(types[0]) > -1) results.add(tempResults[mon]);
+				};
+				if (types[1]) {
+					tempResults = new Array();
+					for (var mon in results) tempResults.add(results[mon]);
+					results = new Array;
+					for (var mon in tempResults) {
+						if (tempResults[mon].types.indexOf(types[1]) > -1) results.add(tempResults[mon]);
+					};
+				};
+			}
+	
+			else if (targets[0] == 'tier' || targets[0] == 'tiers') {
+				var tier = targets[1].trim().toLowerCase();
+				if (['uber','ou','uu','ru','nu','lc','cap','bl','bl2','nfe','illegal'].indexOf(tier) == -1) return this.sendReply('Valid tiers are Uber/OU/BL/UU/BL2/RU/NU/NFE/LC/CAP/Illegal.');
+				for (var mon in tempResults) {
+					if (tier == 'cap') {
+						if (tempResults[mon].tier.toLowerCase().indexOf(tier) > -1) results.add(tempResults[mon]);
+					} else {
+						if (tempResults[mon].tier.toLowerCase() == tier) results.add(tempResults[mon]);
+					};
+				};
+			}
+
+			else if (targets[0] == 'ability' || targets[0] == 'abilities') {
+				var ability = Tools.getAbility(targets[1].trim().toLowerCase());
+				if (!ability.exists) return this.sendReply('Not a valid ability.');
+				for (var mon in tempResults) {
+					for (var monAbility in tempResults[mon].abilities) {
+						if (ability == tempResults[mon].abilities[monAbility]) results.add(tempResults[mon]);
+					};
+				};
+			}
+
+			else if (targets[0] == 'color' || targets[0] == 'colour') {
+				var colour = targets[1].trim().toLowerCase();
+				if (['green','red','blue','white','brown','yellow','purple','pink','gray','black'].indexOf(colour) == -1) return this.sendReply('Valid colors are green, red, blue, white, brown, yellow, purple, pink, gray and black.');
+				for (var mon in tempResults) {
+					if (tempResults[mon].color.toLowerCase() == colour) results.add(tempResults[mon]);
+				};
+			}
+
+			else if (targets[0] == 'moves' || targets[0] == 'move') {
+				var moves = targets[1].trim().split('/');
+				var problem;
+				var move = {};
+				for (var mon in tempResults) {
+					var lsetData = {set:{}};
+					for (var i in moves) {
+						move = Tools.getMove(moves[i]);
+						if (!move.exists) return this.sendReply('\'' + move + '" is not a known move.');
+						problem = Tools.checkLearnset(move, tempResults[mon], lsetData);
+						if (problem) break;
+					};
+					if (!problem) results.add(tempResults[mon]);
+				};
+			}
+
+			else if (targets[0] === 'gen' || targets[0] === 'generation') {
+				var gen = targets[1].trim();
+				for (var mon in tempResults) {
+					if (string(tempResults[mon].gen) === gen) results.add(tempResults[mon]);
+				};
+			}
+
+			else {
+				return this.sendReply('"' + targets[0] + '" is not a known category. Try /help search for valid search categories.');
+			};
+		};
+
+		var resultsStr = '';
+		if (results.length > 0) {
+			for (var result in results) resultsStr += results[result].species + ', ';
+		} else {
+			resultsStr = 'No Pokemon found.  ';
+		};
+		return this.sendReplyBox(resultsStr.substring(0, resultsStr.length - 2));
+	},
 
 	learnset: 'learn',
 	learnall: 'learn',
@@ -978,13 +1086,21 @@ var commands = exports.commands = {
 			this.sendReply('/kick [user], [reason] - kicks the user from the current room. Requires %, @, &, or ~.');
 			this.sendReply('Requires & or ~ if used in a battle room.');
 		}
+		if (target === 'all' || target === 'search') {
+			matched = true;
+			this.sendReply('Searches for Pokemon that fulfill the selected criteria.');
+			this.sendReply('Search categories are: type, tier, color, moves, ability, gen.');
+			this.sendReply('Separate search categories with a semicolon.');
+			this.sendReply('Within type and moves, separate terms with "/".');
+			this.sendReply('/search [category], [term]; [category], [term]...');
+		}
 		if (target === 'all' || target === 'help' || target === 'h' || target === '?' || target === 'commands') {
 			matched = true;
 			this.sendReply('/help OR /h OR /? - Gives you help.');
 		}
 		if (!target) {
 			this.sendReply('COMMANDS: /msg, /reply, /ip, /rating, /nick, /avatar, /rooms, /whois, /help, /away, /back, /timestamps');
-			this.sendReply('INFORMATIONAL COMMANDS: /data, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /calc (replace / with ! to broadcast. (Requires: + % @ & ~))');
+			this.sendReply('INFORMATIONAL COMMANDS: /data, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /search, /calc (replace / with ! to broadcast. (Requires: + % @ & ~))');
 			this.sendReply('For details on all commands, use /help all');
 			if (user.group !== config.groupsranking[0]) {
 				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /forcerename, /alts')

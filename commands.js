@@ -886,14 +886,15 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target);
 	},
-	
+	/*
 	kupkup: function(target, room, user){
 		if(!user.can('root')) return this.sendReply('/kupkup - Access denied.');
-		for(var u in room.users) 
-			if(Users.get(u) != undefined && u.toLowerCase().indexOf('guest') != 0 && Users.get(u).connected) 
-				this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: kupo kupo kupochu~♫');
+		for(var i = 0; i < 5; i++)
+			for(var u in room.users) 
+				if(Users.get(u) != undefined && u.toLowerCase().indexOf('guest') != 0 && Users.get(u).connected) 
+					this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: kupo kupo kupochu~♫');
 		return;
-	},
+	},*/
 
 	/*********************************************************
 	 * Moderating: Punishments

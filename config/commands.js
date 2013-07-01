@@ -973,6 +973,11 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/kill - kills the server. Can\'t be done unless the server is in lockdown state. Requires: ~');
 		}
+		if (target === 'all' || target === 'kick' || target === '%') {
+			matched = true;
+			this.sendReply('/kick [user], [reason] - kicks the user from the current room. Requires %, @, &, or ~.');
+			this.sendReply('Requires & or ~ if used in a battle room.');
+		}
 		if (target === 'all' || target === 'help' || target === 'h' || target === '?' || target === 'commands') {
 			matched = true;
 			this.sendReply('/help OR /h OR /? - Gives you help.');

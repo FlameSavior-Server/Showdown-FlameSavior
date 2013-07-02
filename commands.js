@@ -709,8 +709,10 @@ var commands = exports.commands = {
 		if (Rooms.rooms[id]) {
 			return this.sendReply("The room '"+target+"' already exists.");
 		}
-		Rooms.rooms[id] = new Rooms.ChatRoom(id, target);
-		return this.sendReply("The room '"+target+"' was created.");
+		if (Rooms.global.addChatRoom(target)) {
+			return this.sendReply("The room '"+target+"' was created.");
+		}
+		return this.sendReply("An error occurred while trying to create the room '"+target+"'.");
 	},
 
 	privateroom: function(target, room, user) {
@@ -1020,6 +1022,7 @@ var commands = exports.commands = {
 		this.addModCommand(""+targetUser.name+" was locked from talking by "+user.name+"." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
 		if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also locked: "+alts.join(", "));
+		this.add('|unlink|' + targetUser.userid);
 
 		targetUser.lock();
 	},
@@ -1183,6 +1186,12 @@ var commands = exports.commands = {
 		return this.logModCommand(user.name + ' has revealed their auth symbol.');
 	},
 
+	modnote: function(target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help note');
+		if (!this.can('mute')) return false;
+		return this.privateModCommand('(' + user.name + ' notes: ' + target + ')');
+	},
+	
 	demote: 'promote',
 	promote: function(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help promote');

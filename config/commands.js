@@ -261,30 +261,95 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 
 		if (!target) return this.parse('/help search');
-		var queries = target.split(';');
+		var targets = target.split(',');
+		var target;
+		var moves = new Array();
+		var types = new Array();
+		var tiers = new Array();
+		var colours = new Array();
+		var ability = new Array();
+		var gens = new Array();
+		var count = 0;
+		var all = false;
+		var output = 10;
 
-		for (var query in queries) {
-			targets = queries[query].trim().split(',');
-			if (targets.length < 2) return this.sendReply('Specify both a category and something to search for within it.');
+		for (var i in targets) {
+			target = Tools.getMove(targets[i]);
+			if (target.exists) {
+				if (moves.length === 0) {
+					count++;
+				};
+				if (moves.length === 4) {
+					return this.sendReply('Specify a maximum of 4 moves.');
+				};
+				moves.add(target);
+				continue;
+			};
 
+			target = Tools.getAbility(targets[i]);
+			if (target.exists) {
+				if (ability.length === 0) {
+					count++;
+				};
+				if (ability.length === 1) {
+					return this.sendReply('Specify only one ability.');
+				};
+				ability.add(target);
+				continue;
+			};
+
+			target = targets[i].trim().toLowerCase();
+			if (['fire','water','electric','dragon','rock','fighting','ground','ghost','psychic','dark','bug','flying','grass','poison','normal','steel','ice'].indexOf(target) > -1) {
+				if (types.length === 0) {
+					count++;
+				} else if (types.length === 2 ) {
+					return this.sendReply('Specify a maximum of two types.');
+				};
+				types.add(target.substring(0, 1).toUpperCase() + target.substring(1));
+			}
+			else if (['uber','ou','uu','ru','nu','lc','cap','bl','bl2','nfe','illegal'].indexOf(target) > -1) {
+				if (tiers.length === 0) {
+					count++;
+				};
+				tiers.add(target);
+			}
+			else if (['green','red','blue','white','brown','yellow','purple','pink','gray','black'].indexOf(target) > -1) {
+				if (colours.length === 0) {
+					count++;
+				};
+				colours.add(target);
+			}
+			else if (parseInt(target, 10) > 0) {
+				if (gens.length === 0) {
+					count++;
+				};
+				gens.add(parseInt(target, 10));
+			}
+			else if (target === 'all') {
+				if (this.broadcasting) {
+					return this.sendReply('A search with the parameter "all" cannot be broadcast.')
+				};
+				all = true;
+			}
+			else {
+				return this.sendReply('"' + target + '" could not be found in any of the search categories.');
+			};
+		};
+
+		while (count > 0) {
+			--count;
 			var tempResults = new Array();
 			if (!results) {
 				for (var pokemon in Data.base.Pokedex) {
 					pokemon = Tools.getTemplate(pokemon);
 					tempResults.add(pokemon);
 				};
-				var results = new Array();
 			} else {
 				for (var mon in results) tempResults.add(results[mon]);
 			};
-			results = new Array();
+			var results = new Array();
 
-			if (targets[0] == 'type' || targets[0] == 'types') {
-				var types = targets[1].trim().split('/');
-				for (var i in types) {
-					var type = types[i].substring(0, 1).toUpperCase() + types[i].substring(1).toLowerCase();
-					types[i] = type;
-				};
+			if (types.length > 0) {
 				for (var mon in tempResults) {
 					if (tempResults[mon].types.indexOf(types[0]) > -1) results.add(tempResults[mon]);
 				};
@@ -296,69 +361,76 @@ var commands = exports.commands = {
 						if (tempResults[mon].types.indexOf(types[1]) > -1) results.add(tempResults[mon]);
 					};
 				};
-			}
+				types = [];
+				continue;
+			};
 	
-			else if (targets[0] == 'tier' || targets[0] == 'tiers') {
-				var tier = targets[1].trim().toLowerCase();
-				if (['uber','ou','uu','ru','nu','lc','cap','bl','bl2','nfe','illegal'].indexOf(tier) == -1) return this.sendReply('Valid tiers are Uber/OU/BL/UU/BL2/RU/NU/NFE/LC/CAP/Illegal.');
+			if (tiers.length > 0) {
 				for (var mon in tempResults) {
-					if (tier == 'cap') {
-						if (tempResults[mon].tier.toLowerCase().indexOf(tier) > -1) results.add(tempResults[mon]);
-					} else {
-						if (tempResults[mon].tier.toLowerCase() == tier) results.add(tempResults[mon]);
+					if (tiers.indexOf('cap') > 0) {
+						if (tempResults[mon].tier.toLowerCase().indexOf('cap') > -1) results.add(tempResults[mon]);
 					};
+					if (tiers.indexOf(tempResults[mon].tier.toLowerCase()) > -1) results.add(tempResults[mon]);
 				};
-			}
+				tiers = [];
+				continue;
+			};
 
-			else if (targets[0] == 'ability' || targets[0] == 'abilities') {
-				var ability = Tools.getAbility(targets[1].trim().toLowerCase());
-				if (!ability.exists) return this.sendReply('Not a valid ability.');
+			if (ability.length > 0) {
 				for (var mon in tempResults) {
 					for (var monAbility in tempResults[mon].abilities) {
-						if (ability == tempResults[mon].abilities[monAbility]) results.add(tempResults[mon]);
+						if (ability[0] === Tools.getAbility(tempResults[mon].abilities[monAbility])) results.add(tempResults[mon]);
 					};
 				};
-			}
+				ability = [];
+				continue;
+			};
 
-			else if (targets[0] == 'color' || targets[0] == 'colour') {
-				var colour = targets[1].trim().toLowerCase();
-				if (['green','red','blue','white','brown','yellow','purple','pink','gray','black'].indexOf(colour) == -1) return this.sendReply('Valid colors are green, red, blue, white, brown, yellow, purple, pink, gray and black.');
+			if (colours.length > 0) {
 				for (var mon in tempResults) {
-					if (tempResults[mon].color.toLowerCase() == colour) results.add(tempResults[mon]);
+					if (colours.indexOf(tempResults[mon].color.toLowerCase()) > -1) results.add(tempResults[mon]);
 				};
-			}
+				colours = [];
+				continue;
+			};
 
-			else if (targets[0] == 'moves' || targets[0] == 'move') {
-				var moves = targets[1].trim().split('/');
+			if (moves.length > 0) {
 				var problem;
 				var move = {};
 				for (var mon in tempResults) {
 					var lsetData = {set:{}};
+					template = Tools.getTemplate(tempResults[mon].id);
 					for (var i in moves) {
-						move = Tools.getMove(moves[i]);
-						if (!move.exists) return this.sendReply('\'' + move + '" is not a known move.');
-						problem = Tools.checkLearnset(move, tempResults[mon], lsetData);
+						move = moves[i];
+						if (!move.exists) return this.sendReply('"' + move + '" is not a known move.');
+						problem = Tools.checkLearnset(move, template, lsetData);
 						if (problem) break;
 					};
 					if (!problem) results.add(tempResults[mon]);
 				};
-			}
+				moves = [];
+				continue;
+			};
 
-			else if (targets[0] === 'gen' || targets[0] === 'generation') {
-				var gen = targets[1].trim();
+			if (gens.length > 0) {
 				for (var mon in tempResults) {
-					if (string(tempResults[mon].gen) === gen) results.add(tempResults[mon]);
+					if (gens.indexOf(tempResults[mon].gen) > -1) results.add(tempResults[mon]);
 				};
-			}
-
-			else {
-				return this.sendReply('"' + targets[0] + '" is not a known category. Try /help search for valid search categories.');
+				gens = [];
+				continue;
 			};
 		};
 
 		var resultsStr = '';
 		if (results.length > 0) {
-			for (var result in results) resultsStr += results[result].species + ', ';
+			if (all || results.length < 11) {
+				for (var i = 0; i < results.length; i++) resultsStr += results[i].species + ', ';
+			} else {
+				var hidden = string(results.length - output);
+				shuffle(results);
+				for (var i = 0; i < output; i++) resultsStr += results[i].species + ', ';
+				resultsStr += ' and ' + hidden + ' more. Redo the search with "all" as a search parameter to show all results.  '
+			};
 		} else {
 			resultsStr = 'No Pokemon found.  ';
 		};
@@ -1090,9 +1162,10 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('Searches for Pokemon that fulfill the selected criteria.');
 			this.sendReply('Search categories are: type, tier, color, moves, ability, gen.');
-			this.sendReply('Separate search categories with a semicolon.');
-			this.sendReply('Within type and moves, separate terms with "/".');
-			this.sendReply('/search [category], [term]; [category], [term]...');
+			this.sendReply('Valid colors are: green, red, blue, white, brown, yellow, purple, pink, gray and black.');
+			this.sendReply('Valid tiers are: Uber/OU/BL/UU/BL2/RU/NU/NFE/LC/CAP/Illegal.');
+			this.sendReply('/search [type], [move], [move],...');
+			this.sendReply('The order of the parameters does not matter.');
 		}
 		if (target === 'all' || target === 'help' || target === 'h' || target === '?' || target === 'commands') {
 			matched = true;

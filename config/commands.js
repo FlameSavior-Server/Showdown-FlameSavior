@@ -271,7 +271,7 @@ var commands = exports.commands = {
 	dexsearch: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 
-		if (!target) return this.parse('/help search');
+		if (!target) return this.parse('/help dexsearch');
 		var targets = target.split(',');
 		var target;
 		var moves = new Array();
@@ -1169,14 +1169,14 @@ var commands = exports.commands = {
 			this.sendReply('/kick [user], [reason] - kicks the user from the current room. Requires %, @, &, or ~.');
 			this.sendReply('Requires & or ~ if used in a battle room.');
 		}
-		if (target === 'all' || target === 'search') {
+		if (target === 'all' || target === 'dexsearch') {
 			matched = true;
 			this.sendReply('Searches for Pokemon that fulfill the selected criteria.');
 			this.sendReply('Search categories are: type, tier, color, moves, ability, gen.');
 			this.sendReply('Valid colors are: green, red, blue, white, brown, yellow, purple, pink, gray and black.');
 			this.sendReply('Valid tiers are: Uber/OU/BL/UU/BL2/RU/NU/NFE/LC/CAP/Illegal.');
 			this.sendReply('Types must be followed by " type", e.g., "dragon type".');
-			this.sendReply('/search [type], [move], [move],...');
+			this.sendReply('/dexsearch [type], [move], [move],...');
 			this.sendReply('The order of the parameters does not matter.');
 		}
 		if (target === 'all' || target === 'help' || target === 'h' || target === '?' || target === 'commands') {

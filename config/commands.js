@@ -268,7 +268,7 @@ var commands = exports.commands = {
 		this.sendReply(data);
 	},
 	
-	search: function (target, room, user) {
+	dexsearch: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 
 		if (!target) return this.parse('/help search');
@@ -310,13 +310,13 @@ var commands = exports.commands = {
 			};
 
 			target = targets[i].trim().toLowerCase();
-			if (['fire','water','electric','dragon','rock','fighting','ground','ghost','psychic','dark','bug','flying','grass','poison','normal','steel','ice'].indexOf(target) > -1) {
+			if (['fire','water','electric','dragon','rock','fighting','ground','ghost','psychic','dark','bug','flying','grass','poison','normal','steel','ice'].indexOf(toId(target.substring(0, target.length - 4))) > -1) {
 				if (types.length === 0) {
 					count++;
 				} else if (types.length === 2 ) {
 					return this.sendReply('Specify a maximum of two types.');
 				};
-				types.add(target.substring(0, 1).toUpperCase() + target.substring(1));
+				types.add(toId(target.substring(0, target.length - 4)).substring(0, 1).toUpperCase() + toId(target.substring(0, target.length - 4)).substring(1));
 			}
 			else if (['uber','ou','uu','ru','nu','lc','cap','bl','bl2','nfe','illegal'].indexOf(target) > -1) {
 				if (tiers.length === 0) {
@@ -1175,6 +1175,7 @@ var commands = exports.commands = {
 			this.sendReply('Search categories are: type, tier, color, moves, ability, gen.');
 			this.sendReply('Valid colors are: green, red, blue, white, brown, yellow, purple, pink, gray and black.');
 			this.sendReply('Valid tiers are: Uber/OU/BL/UU/BL2/RU/NU/NFE/LC/CAP/Illegal.');
+			this.sendReply('Types must be followed by " type", e.g., "dragon type".');
 			this.sendReply('/search [type], [move], [move],...');
 			this.sendReply('The order of the parameters does not matter.');
 		}

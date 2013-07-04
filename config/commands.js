@@ -903,7 +903,7 @@ var commands = exports.commands = {
 	 *********************************************************/
 
 	kupo: function(target, room, user){
-		if(!this.canBroadcast()|| !this.can('cpoof')) return this.sendReply('/kupo - Access Denied.');
+		if(!this.canBroadcast()|| !user.can('broadcast')) return this.sendReply('/kupo - Access Denied.');
 		if(!target) return this.sendReply('Insufficent Parameters.');
 		Rooms.rooms.lobby.add('|c|kupo|/me '+ target);
 		this.logModCommand(user.name + ' used /kupo to say ' + target);

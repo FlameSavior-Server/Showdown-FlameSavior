@@ -215,6 +215,13 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 
 	message = canTalk(user, room, connection, message);
 	if (!message) return false;
+	
+	//spamroom
+	if (spamroom[user.userid]) {
+		Rooms.rooms.spamroom.addRaw(user.name + ': ' + message);
+		connection.sendTo(room, "|c|" + user.name + "|" + message);
+		return false;
+	}
 
 	return message;
 };

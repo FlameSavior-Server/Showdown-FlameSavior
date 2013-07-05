@@ -234,6 +234,16 @@ for (var i in Rooms.rooms) {
 	}
 }
 
+//spamroom
+if (typeof spamroom == "undefined") {
+	spamroom = new Object();
+}
+if (!Rooms.rooms.spamroom) {
+	Rooms.rooms.spamroom = new Rooms.ChatRoom("spamroom", "spamroom");
+	Rooms.rooms.spamroom.isPrivate = true;
+	tour.reset("spamroom");
+}
+
 var crypto = require('crypto');
 var poofeh = true;
 var aList = new Array();
@@ -1024,6 +1034,35 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Moderating: Punishments
 	 *********************************************************/
+	spamroom: function(target, room, user, connection) {
+		if (!this.can('mute')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		var t = toId(target);
+		if (!Users.get(t)) {
+			return this.sendReply('The user \'' + target + '\' does not exist.');
+		}
+		if (spamroom[t]) {
+			return this.sendReply('That user\'s messages are already being redirected to the spamroom.');
+		}
+		spamroom[t] = true;
+		return this.sendReply(Users.get(t).name + ' was successfully added to the spamroom list.');
+	},
+	
+	unspamroom: function(target, room, user, connection) {
+		if (!this.can('mute')) {
+			return this.sendReply('You do not have enough authority to use this command.');
+		}
+		var t = toId(target);
+		if (!Users.get(t)) {
+			return this.sendReply('The user \'' + target + '\' does not exist.');
+		}
+		if (!spamroom[t]) {
+			return this.sendReply('That user is not in the spamroom list.');
+		}
+		delete spamroom[t];
+		return this.sendReply(Users.get(t).name + ' was successfully removed from the spamroom list.');
+	},
 
 	k: 'kick',
 	kick: function(target, room, user) {

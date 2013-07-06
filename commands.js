@@ -1,4 +1,4 @@
-/**
+﻿/**
  * System commands
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -740,22 +740,22 @@ var commands = exports.commands = {
 		var message = '|pm|'+user.getIdentity()+'|'+targetUser.getIdentity()+'|'+target;
 		user.send(message);
 		// if user is not in spamroom
-		if(spamroom[user.userid] == undefined){
+		if(spamroom[user.userid] === undefined){
 			// check to see if an alt exists in list
 			for(var u in spamroom){
-				if(Users.get(user.userid) == Users.get(u)){
+				if(Users.get(user.userid) === Users.get(u)){
 					// if alt exists, add new user id to spamroom, break out of loop.
 					spamroom[user.userid] = true;
 					break;
 				}
 			}
 		}
-		if (!spamroom[user.userid]) {
-			if (targetUser !== user) targetUser.send(message);
-			targetUser.lastPM = user.userid;
-		}
-		else {
-			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|(__pm to **' + targetUser.name+ "**__):" + target );
+		
+		if (targetUser !== user) targetUser.send(message);
+		targetUser.lastPM = user.userid;
+		
+		if (user.userid in spamroom || targetUser.userid in spamroom) {
+			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|(__Private to ' + targetUser.getIdentity()+ "__) " + target );
 		}
 		user.lastPM = targetUser.userid;
 	},

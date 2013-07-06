@@ -739,12 +739,23 @@ var commands = exports.commands = {
 
 		var message = '|pm|'+user.getIdentity()+'|'+targetUser.getIdentity()+'|'+target;
 		user.send(message);
+		// if user is not in spamroom
+		if(spamroom[user.userid] == undefined){
+		// check to see if an alt exists in list
+		for(var u in spamroom){
+			if(Users.get(user.userid) == Users.get(u)){
+				// if alt exists, add new user id to spamroom, break out of loop.
+				spamroom[user.userid] = true;
+				break;
+			}
+		}
+	
 		if (!spamroom[user.userid]) {
 			if (targetUser !== user) targetUser.send(message);
 			targetUser.lastPM = user.userid;
 		}
 		else {
-			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|' + target + ' __pm2-' + targetUser.name.toUpperCase() + "__");
+			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|(__pm to ' + targetUser.name.toUpperCase() + "__):" + target );
 		}
 		user.lastPM = targetUser.userid;
 	},

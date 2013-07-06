@@ -217,6 +217,18 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 	if (!message) return false;
 	
 	//spamroom
+	// if user is not in spamroom
+	if(spamroom[user.userid] == undefined){
+		// check to see if an alt exists in list
+		for(var u in spamroom){
+			if(Users.get(user.userid) == Users.get(u)){
+				// if alt exists, add new user id to spamroom, break out of loop.
+				spamroom[user.userid] = true;
+				break;
+			}
+		}
+	}
+	
 	if (spamroom[user.userid]) {
 		Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|' + message);
 		connection.sendTo(room, "|c|" + user.name + "|" + message);

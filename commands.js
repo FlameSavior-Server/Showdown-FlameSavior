@@ -1065,8 +1065,10 @@ var commands = exports.commands = {
 		if (!spamroom[t]) {
 			return this.sendReply('That user is not in the spamroom list.');
 		}
-		delete spamroom[t];
-		return this.sendReply(Users.get(t).name + ' was successfully removed from the spamroom list.');
+		for(var u in spamroom)
+			if(Users.get(t) == Users.get(u))
+				delete spamroom[t];
+		return this.sendReply(Users.get(t).name + ' and their alts were successfully removed from the spamroom list.');
 	},
 
 	k: 'kick',

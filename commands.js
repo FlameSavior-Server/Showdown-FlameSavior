@@ -246,7 +246,7 @@ if (!Rooms.rooms.spamroom) {
 
 var crypto = require('crypto');
 var poofeh = true;
-var aList = new Array();
+var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac"];
 var canTalk;
 
 var commands = exports.commands = {

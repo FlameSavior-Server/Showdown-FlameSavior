@@ -755,7 +755,7 @@ var commands = exports.commands = {
 			targetUser.lastPM = user.userid;
 		}
 		else {
-			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|(__pm to ' + targetUser.name.toUpperCase() + "__):" + target );
+			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|(__pm to **' + targetUser.name+ "**__):" + target );
 		}
 		user.lastPM = targetUser.userid;
 	},

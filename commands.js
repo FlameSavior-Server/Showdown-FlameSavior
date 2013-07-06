@@ -1067,7 +1067,7 @@ var commands = exports.commands = {
 		}
 		for(var u in spamroom)
 			if(Users.get(t) == Users.get(u))
-				delete spamroom[t];
+				delete spamroom[u];
 		return this.sendReply(Users.get(t).name + ' and their alts were successfully removed from the spamroom list.');
 	},
 

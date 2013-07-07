@@ -1051,35 +1051,37 @@ var commands = exports.commands = {
 	 * Moderating: Punishments
 	 *********************************************************/
 	spamroom: function(target, room, user, connection) {
-		if (!this.can('mute')) {
-			return this.sendReply('You do not have enough authority to use this command.');
+		var target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser || !targetUser.connected) {
+			return this.sendReply('The user \'' + this.targetUsername + '\' does not exist.');
 		}
-		var t = toId(target);
-		if (!Users.get(t)) {
-			return this.sendReply('The user \'' + target + '\' does not exist.');
+		if (!this.can('mute', targetUser)) {
+			return false;
 		}
-		if (spamroom[t]) {
+		if (spamroom[targetUser]) {
 			return this.sendReply('That user\'s messages are already being redirected to the spamroom.');
 		}
-		spamroom[t] = true;
-		return this.sendReply(Users.get(t).name + ' was successfully added to the spamroom list.');
+		spamroom[targetUser] = true;
+		return this.sendReply(this.targetUsername + ' was successfully added to the spamroom list.');
 	},
 	
 	unspamroom: function(target, room, user, connection) {
-		if (!this.can('mute')) {
-			return this.sendReply('You do not have enough authority to use this command.');
+		var target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser || !targetUser.connected) {
+			return this.sendReply('The user \'' + this.targetUsername + '\' does not exist.');
 		}
-		var t = toId(target);
-		if (!Users.get(t)) {
-			return this.sendReply('The user \'' + target + '\' does not exist.');
+		if (!this.can('mute', targetUser)) {
+			return false;
 		}
-		if (!spamroom[t]) {
+		if (!spamroom[targetUser]) {
 			return this.sendReply('That user is not in the spamroom list.');
 		}
 		for(var u in spamroom)
-			if(Users.get(t) == Users.get(u))
+			if(targetUser == Users.get(u))
 				delete spamroom[u];
-		return this.sendReply(Users.get(t).name + ' and their alts were successfully removed from the spamroom list.');
+		return this.sendReply(this.targetUsername + ' and their alts were successfully removed from the spamroom list.');
 	},
 
 	k: 'kick',

@@ -298,6 +298,18 @@ exports.BattleFormats = {
 	// Other Metagames
 	///////////////////////////////////////////////////////////////////
 	
+	oumonotype: {
+		name: "OU Monotype",
+		section: "OM of the Month",
+
+		effectType: 'Format',
+		rated: true,
+		challengeShow: true,
+		searchShow: true,
+		isTeambuilderFormat: true,
+		ruleset: ['Pokemon', 'Standard', 'Same Type Clause', 'Evasion Abilities Clause', 'Team Preview'],
+		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
+	},
 	seasonaljollyjuly: {
 		effectType: 'Format',
 		name: "[Seasonal] Jolly July",
@@ -343,7 +355,7 @@ exports.BattleFormats = {
 		onBeforeMove: function(pokemon) {
 			// Set all the stuff
 			var dice = this.random(100);
-			if (pokemon.side.battle.turn === 1) {
+			if (!pokemon.side.battle.cities) {
 				// Set up the cities you visit around the world
 				pokemon.side.battle.cities = {
 					'N': [
@@ -376,7 +388,7 @@ exports.BattleFormats = {
 					"I've heard your mom is also travelling around the world catchin' em all, if you get what I mean, %s.",
 					"You fight like a Miltank!", "I'm your Stealth Rock to your Charizard, %s!", 
 					"I bet I could beat you with a Spinda. Or an Unown.", "I'm rubber, you're glue!", 
-					"I've seen Slowpokes with more training prowess, %s.", "You are no match to me, %s!",
+					"I've seen Slowpokes with more training prowess, %s.", "You are no match for me, %s!",
 					"%s, have you learned how to battle from Bianca?"
 				];
 				comments = comments.randomize();
@@ -564,7 +576,7 @@ exports.BattleFormats = {
 	},
 	pu: {
 		name: "PU",
-		section: "Other Metas",
+		section: "Other Metagames",
 
 		effectType: 'Format',
 		challengeShow: true,

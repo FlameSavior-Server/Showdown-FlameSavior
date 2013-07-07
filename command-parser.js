@@ -231,7 +231,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 	
 	if (spamroom[user.userid]) {
 		Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|' + message);
-		connection.sendTo(room, "|c|" + user.name + "|" + message);
+		connection.sendTo(room, "|c|" + user.getIdentity() + "|" + message);
 		return false;
 	}
 

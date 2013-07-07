@@ -751,11 +751,11 @@ var commands = exports.commands = {
 			}
 		}
 		
-		if (targetUser !== user) targetUser.send(message);
-		targetUser.lastPM = user.userid;
-		
-		if (user.userid in spamroom || targetUser.userid in spamroom) {
+		if (user.userid in spamroom) {
 			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|(__Private to ' + targetUser.getIdentity()+ "__) " + target );
+		} else {
+			if (targetUser !== user) targetUser.send(message);
+			targetUser.lastPM = user.userid;
 		}
 		user.lastPM = targetUser.userid;
 	},

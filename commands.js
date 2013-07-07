@@ -1050,6 +1050,8 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Moderating: Punishments
 	 *********************************************************/
+	spam: 'spamroom',
+	spammer: 'spamroom',
 	spamroom: function(target, room, user, connection) {
 		var target = this.splitTarget(target);
 		var targetUser = this.targetUser;
@@ -1066,6 +1068,8 @@ var commands = exports.commands = {
 		return this.sendReply(this.targetUsername + ' was successfully added to the spamroom list.');
 	},
 	
+	unspam: 'unspamroom',
+	unspammer: 'unspamroom',
 	unspamroom: function(target, room, user, connection) {
 		var target = this.splitTarget(target);
 		var targetUser = this.targetUser;

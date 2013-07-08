@@ -1065,6 +1065,7 @@ var commands = exports.commands = {
 			return this.sendReply('That user\'s messages are already being redirected to the spamroom.');
 		}
 		spamroom[targetUser] = true;
+		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was added to the spamroom list.</b>');
 		return this.sendReply(this.targetUsername + ' was successfully added to the spamroom list.');
 	},
 	
@@ -1085,6 +1086,7 @@ var commands = exports.commands = {
 		for(var u in spamroom)
 			if(targetUser == Users.get(u))
 				delete spamroom[u];
+		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was removed from the spamroom list.</b>');
 		return this.sendReply(this.targetUsername + ' and their alts were successfully removed from the spamroom list.');
 	},
 

@@ -666,14 +666,50 @@ var commands = exports.commands = {
 		canTalk = this.canTalk(target);
 		if (!canTalk || (canTalk && !target)) return;
 
-		return '/me ' + target;
+		var message = '/me ' + target;
+		// if user is not in spamroom
+		if (spamroom[user.userid] === undefined) {
+			// check to see if an alt exists in list
+			for (var u in spamroom) {
+				if (Users.get(user.userid) === Users.get(u)) {
+					// if alt exists, add new user id to spamroom, break out of loop.
+					spamroom[user.userid] = true;
+					break;
+				}
+			}
+		}
+
+		if (user.userid in spamroom) {
+			this.send('|c|' + user.getIdentity() + '|' + message);
+			return Rooms.rooms['spamroom'].add('|c|' + user.getIdentity() + '|' + message);
+		} else {
+			return message;
+		}
 	},
 
 	mee: function(target, room, user, connection) {
 		canTalk = this.canTalk(target);
 		if (!canTalk || (canTalk && !target)) return;
 
-		return '/mee ' + target;
+		var message = '/mee ' + target;
+		// if user is not in spamroom
+		if (spamroom[user.userid] === undefined) {
+			// check to see if an alt exists in list
+			for (var u in spamroom) {
+				if (Users.get(user.userid) === Users.get(u)) {
+					// if alt exists, add new user id to spamroom, break out of loop.
+					spamroom[user.userid] = true;
+					break;
+				}
+			}
+		}
+
+		if (user.userid in spamroom) {
+			this.send('|c|' + user.getIdentity() + '|' + message);
+			return Rooms.rooms['spamroom'].add('|c|' + user.getIdentity() + '|' + message);
+		} else {
+			return message;
+		}
 	},
 
 	avatar: function(target, room, user) {

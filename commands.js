@@ -680,7 +680,7 @@ var commands = exports.commands = {
 		}
 
 		if (user.userid in spamroom) {
-			this.send('|c|' + user.getIdentity() + '|' + message);
+			this.sendReply('|c|' + user.getIdentity() + '|' + message);
 			return Rooms.rooms['spamroom'].add('|c|' + user.getIdentity() + '|' + message);
 		} else {
 			return message;
@@ -705,7 +705,7 @@ var commands = exports.commands = {
 		}
 
 		if (user.userid in spamroom) {
-			this.send('|c|' + user.getIdentity() + '|' + message);
+			this.sendReply('|c|' + user.getIdentity() + '|' + message);
 			return Rooms.rooms['spamroom'].add('|c|' + user.getIdentity() + '|' + message);
 		} else {
 			return message;

@@ -31,13 +31,7 @@ tour.timerLoop = function() {
 				}
 				Rooms.rooms[i].addRaw("<i>The tournament will begin in " + difference + " seconds.</i>");
 			}
-			if (percent == 25) {
-				sendIt();
-			}
-			if (percent == 50) {
-				sendIt();
-			}
-			if (percent == 75) {
+			if (percent == 25 || percent == 50 || percent == 75) {
 				sendIt();
 			}
 			if (percent >= 100) {
@@ -47,7 +41,21 @@ tour.timerLoop = function() {
 				}
 				else {
 					if (tour[i].status == 1) {
+						tour[i].size = tour[i].players.length;
 						tour.start(i);
+						var room = Rooms.rooms[i];
+						room.addRaw('<hr /><h3><font color="green">Round '+ tour[room.id].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[room.id].tier].name + "<hr /><center>");
+						var html = "";
+						var round = tour[room.id].round;
+						for (var i in round) {
+							if (!round[i][1]) {
+									html += "<font color=\"red\">" + round[i][0] + " has received a bye!</font><br />";
+							}
+							else {
+								html += round[i][0] + " VS " + round[i][1] + "<br />";
+							}
+						}
+						room.addRaw(html + "</center>");
 					}
 				}
 				delete tour.timers[i];
@@ -322,7 +330,7 @@ var commands = exports.commands = {
 		if (!tierMatch) {
 			return this.sendReply('Please use one of the following tiers: ' + tour.tiers.join(','));
 		}
-		if (targets[1].split('minute').length - 1 > 0) {
+		if (targets[1].split('minut').length - 1 > 0) {
 			targets[1] = parseInt(targets[1]);
 			if (isNaN(targets[1]) || !targets[1]) {
 				return this.sendReply('/tour tier, NUMBER minutes');
@@ -330,8 +338,7 @@ var commands = exports.commands = {
 			targets[1] = Math.ceil(targets[1]);
 			tour.timers[room.id] = {
 				time: targets[1],
-				startTime: tour.currentSeconds,
-				parts: 0
+				startTime: tour.currentSeconds
 			};
 			targets[1] = 128;
 		}
@@ -365,6 +372,7 @@ var commands = exports.commands = {
 			return this.sendReply('There is no active tournament.');
 		}
 		tour[room.id].status = 0;
+		delete tour.timers[room.id];
 		room.addRaw('<h2><b>' + user.name + '</b> has ended the tournament.</h2>');
 	},
 

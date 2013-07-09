@@ -51,7 +51,7 @@ tour.timerLoop = function() {
 		tour.timerLoop();
 	}, 1000);
 };
-if (typeof tourTimerLoop == "undefined") {
+if (typeof tour.currentSeconds == "undefined") {
 	tour.currentSeconds = 0;
 	tour.timerLoop();
 }

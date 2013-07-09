@@ -225,6 +225,7 @@ tour.startRaw = function(i) {
 		if (!round[i][1]) {
 				var p1n = round[i][0];
 				if (Users.get(p1n)) p1n = Users.get(p1n).name;
+				if (p1n.split('Guest ').length - 1 > 0) p1n = round[i][0];
 				html += "<font color=\"red\">" + p1n + " has received a bye!</font><br />";
 		}
 		else {
@@ -232,6 +233,8 @@ tour.startRaw = function(i) {
 			var p2n = round[i][1];
 			if (Users.get(p1n)) p1n = Users.get(p1n).name;
 			if (Users.get(p2n)) p2n = Users.get(p2n).name;
+			if (p1n.split('Guest ').length - 1 > 0) p1n = round[i][0];
+			if (p2n.split('Guest ').length - 1 > 0) p2n = round[i][1];
 			html += p1n + " VS " + p2n + "<br />";
 		}
 	}
@@ -286,6 +289,8 @@ tour.nextRound = function(rid) {
 			var p2n = p[p2];
 			if (Users.get(p1n)) p1n = Users.get(p1n).name;
 			if (Users.get(p2n)) p2n = Users.get(p2n).name;
+			if (p1n.split('Guest ').length - 1 > 0) p1n = p[p1];
+			if (p2n.split('Guest ').length - 1 > 0) p2n = p[p2];
 			html += p1n + " VS " + p2n + "<br />";
 		}
 		Rooms.rooms[rid].addRaw(html + "</center>");
@@ -569,6 +574,8 @@ var commands = exports.commands = {
 					var p2n = r[i][1];
 					if (Users.get(p1n)) p1n = Users.get(p1n).name;
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
+					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
+					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
 					html += p1n + " VS " + p2n + "<br />";
 				}
 				else if (r[i][2] == -1) {
@@ -577,6 +584,8 @@ var commands = exports.commands = {
 					var p2n = r[i][1];
 					if (Users.get(p1n)) p1n = Users.get(p1n).name;
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
+					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
+					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
 					html += "<b>" + p1n + " VS " + p2n + "</b><br />";
 				}
 				else {
@@ -591,6 +600,8 @@ var commands = exports.commands = {
 					var p2n = r[i][1];
 					if (Users.get(p1n)) p1n = Users.get(p1n).name;
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
+					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
+					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
 					html += "<b><font color=\"" + p1 + "\">" + p1n + "</font> VS <font color=\"" + p2 + "\">" + p2n + "</font></b><br />";
 				}
 			}

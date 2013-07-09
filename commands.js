@@ -1128,21 +1128,8 @@ var commands = exports.commands = {
 		return this.sendReply(this.targetUsername + ' and their alts were successfully removed from the spamroom list.');
 	},
 
-	k: 'kick',
-	kick: function(target, room, user) {
-		if (!target) return this.parse('/help kick');
-
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser || !targetUser.connected) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		if (!this.can('warn', targetUser)) return false;
-		if (room.type === 'battle' && !this.can('forcerenameto', targetUser)) return false;
-		this.addModCommand('' + targetUser.name + ' was kicked from the room by ' + user.name + '.' + (target ? " (" + target + ")" : ""));
-		targetUser.leaveRoom(room);
-	},
-
+	k: 'warn',
+	kick: 'warn',
 	warn: function(target, room, user) {
 		if (!target) return this.parse('/help warn');
 
@@ -1159,22 +1146,25 @@ var commands = exports.commands = {
 
 	redirect: 'redir',
 	redir: function (target, room, user, connection) {
-	    if (!target) return this.parse('/help redir');
-	    target = this.splitTarget(target);
-	    var targetUser = this.targetUser;
-	    if (!target) return this.sendReply('You need to input a room name!');
-	    var targetRoom = Rooms.get(target);
-	    if (target && !targetRoom) {
-	            return connection.sendTo(user, "|noinit|nonexistent|The room '" + target + "' does not exist.");
-	    }
-	    if (!user.can('kick', targetUser, room)) return false;
-	    if (!targetUser || !targetUser.connected) {
-	            return this.sendReply('User '+this.targetUsername+' not found.');
-	    }
-	    var roomName = (targetRoom.isPrivate)? 'a private room' : 'room ' + target;
-	    this.addModCommand(targetUser.name + ' was forcibly redirected to ' + roomName + ' by ' + user.name + '.');
-	    targetUser.leaveRoom(room);
-	    targetUser.joinRoom(target);
+		if (!target) return this.parse('/help redir');
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!target) return this.sendReply('You need to input a room name!');
+		var targetRoom = Rooms.get(target);
+		if (target && !targetRoom) {
+	        	return connection.sendTo(user, "|noinit|nonexistent|The room '" + target + "' does not exist.");
+		}
+	    	if (!user.can('kick', targetUser, room)) return false;
+	    	if (!targetUser || !targetUser.connected) {
+	            	return this.sendReply('User '+this.targetUsername+' not found.');
+	    	}
+		if (targetRoom.isAdult) {
+			return this.sendReply('You cannot redirect to an adult room.');
+		}
+	    	var roomName = (targetRoom.isPrivate)? 'a private room' : ' the room "' + target + '"';
+	    	this.addModCommand(targetUser.name + ' was forcibly redirected to ' + roomName + ' by ' + user.name + '.');
+	    	targetUser.leaveRoom(room);
+	    	targetUser.joinRoom(target);
 	},
 
 	m: 'mute',

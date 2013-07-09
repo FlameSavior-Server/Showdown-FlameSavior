@@ -1152,19 +1152,19 @@ var commands = exports.commands = {
 		if (!target) return this.sendReply('You need to input a room name!');
 		var targetRoom = Rooms.get(target);
 		if (target && !targetRoom) {
-	        	return connection.sendTo(user, "|noinit|nonexistent|The room '" + target + "' does not exist.");
+			return connection.sendTo(user, "|noinit|nonexistent|The room '" + target + "' does not exist.");
 		}
-	    	if (!user.can('kick', targetUser, room)) return false;
-	    	if (!targetUser || !targetUser.connected) {
-	            	return this.sendReply('User '+this.targetUsername+' not found.');
-	    	}
+		if (!user.can('kick', targetUser, room)) return false;
+		if (!targetUser || !targetUser.connected) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
 		if (targetRoom.isAdult) {
 			return this.sendReply('You cannot redirect to an adult room.');
 		}
-	    	var roomName = (targetRoom.isPrivate)? 'a private room' : ' the room "' + target + '"';
-	    	this.addModCommand(targetUser.name + ' was forcibly redirected to ' + roomName + ' by ' + user.name + '.');
-	    	targetUser.leaveRoom(room);
-	    	targetUser.joinRoom(target);
+		var roomName = (targetRoom.isPrivate)? 'a private room' : ' the room "' + target + '"';
+		this.addModCommand(targetUser.name + ' was forcibly redirected to ' + roomName + ' by ' + user.name + '.');
+		targetUser.leaveRoom(room);
+		targetUser.joinRoom(target);
 	},
 
 	m: 'mute',

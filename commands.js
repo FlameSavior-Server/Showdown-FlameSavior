@@ -1160,7 +1160,7 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help tell');
 		
 		var targets = target.split(',');
-		if (!target[1]) return this.parse('/help tell');
+		if (!targets[1]) return this.parse('/help tell');
 		var targetUser = toId(targets[0]);
 
 		if (targetUser.length > 18) {

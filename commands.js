@@ -313,6 +313,11 @@ if (!Rooms.rooms.spamroom) {
 	tour.reset("spamroom");
 }
 
+//tells
+if (typeof tells === 'undefined') {
+	tells = {};
+}
+
 var crypto = require('crypto');
 var poofeh = true;
 var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac"];
@@ -1148,6 +1153,28 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target);
 	},
+	
+	tell: function(target, room, user) {
+		if (user.locked) return this.sendReply('You cannot use this command while locked.');
+		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
+
+		var targets = target.split(',');
+		var targetUser = toId(targets[0]);
+
+		if (!target) return this.sendReply('/tell [user], [message] - Leaves a message for the specified user that will be received when they next talk.\nCommas cannot be included in messages.');
+		if (targetUser.length > 18) {
+			return this.sendReply('The name of user "' + this.targetUsername + '" is too long.');
+		}
+
+		if (!tells[targetUser]) tells[targetUser] = [];
+		if (tells[targetUser].length === 5) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
+
+		var date = Date();
+		var message = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + targets[1].trim();
+		tells[targetUser].add(message);
+
+		return this.sendReply('Message "' + targets[1].trim() + '" sent to ' + targetUser + '.');
+	},
 	/*
 	kupkup: function(target, room, user){
 		if(!user.can('root')) return this.sendReply('/kupkup - Access denied.');
@@ -1268,6 +1295,7 @@ var commands = exports.commands = {
 		targetUser.mute(room.id, 7*60*1000);
 	},
 
+	hm: 'hourmute',
 	hourmute: function(target, room, user) {
 		if (!target) return this.parse('/help hourmute');
 

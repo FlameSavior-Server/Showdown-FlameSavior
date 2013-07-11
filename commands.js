@@ -1157,11 +1157,12 @@ var commands = exports.commands = {
 	tell: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
-
+		if (!target) return this.parse('/help tell');
+		
 		var targets = target.split(',');
+		if (!target[1]) return this.parse('/help tell');
 		var targetUser = toId(targets[0]);
 
-		if (!target) return this.sendReply('/tell [user], [message] - Leaves a message for the specified user that will be received when they next talk.\nCommas cannot be included in messages.');
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + this.targetUsername + '" is too long.');
 		}

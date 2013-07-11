@@ -1182,7 +1182,7 @@ var commands = exports.commands = {
 		for(var i = 0; i < 5; i++)
 			for(var u in room.users) 
 				if(Users.get(u) != undefined && u.toLowerCase().indexOf('guest') != 0 && Users.get(u).connected) 
-					this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: kupo kupo kupochu~♫');
+					this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: ♪kupo kupo kupochu~♫');
 		return;
 	},*/
 

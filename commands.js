@@ -236,7 +236,7 @@ tour.startRaw = function(i) {
 			if (Users.get(p2n)) p2n = Users.get(p2n).name;
 			if (p1n.split('Guest ').length - 1 > 0) p1n = round[i][0];
 			if (p2n.split('Guest ').length - 1 > 0) p2n = round[i][1];
-			var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
+			var tabla = "";if (!firstMatch) {var tabla = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 			html += tabla + "<tr><td align=right>" + clean(p1n) + "</td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 		}
 	}
@@ -294,7 +294,7 @@ tour.nextRound = function(rid) {
 			if (Users.get(p2n)) p2n = Users.get(p2n).name;
 			if (p1n.split('Guest ').length - 1 > 0) p1n = p[p1];
 			if (p2n.split('Guest ').length - 1 > 0) p2n = p[p2];
-			var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
+			var tabla = "";if (!firstMatch) {var tabla = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 			html += tabla + "<tr><td align=right>" + clean(p1n) + "</td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 		}
 		Rooms.rooms[rid].addRaw(html + "</table>");
@@ -599,7 +599,7 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
+					var tabla = "";if (!firstMatch) {var tabla = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 					html += tabla + "<tr><td align=right>" + clean(p1n) + "</td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 				}
 				else if (r[i][2] == -1) {
@@ -610,7 +610,7 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
+					var tabla = "";if (!firstMatch) {var tabla = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 					html += tabla + "<tr><td align=right><b>" + clean(p1n) + "</b></td><td><b>&nbsp;VS&nbsp;</b></td><td><b>" + clean(p2n) + "</b></td></tr>";
 				}
 				else {
@@ -627,7 +627,7 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
+					var tabla = "";if (!firstMatch) {var tabla = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 					html += tabla + "<tr><td align=right><b><font color=\"" + p1 + "\">" + clean(p1n) + "</font></b></td><td><b>&nbsp;VS&nbsp;</b></td><td><font color=\"" + p2 + "\"><b>" + clean(p2n) + "</b></font></td></tr>";
 				}
 			}

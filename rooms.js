@@ -462,7 +462,7 @@ var GlobalRoom = (function() {
 			var c = tour[i];
 			if (c.status == 2) {
 				for (var x in c.round) {
-					if (p1.userid == c.round[x][0] || p1.userid == c.round[x][1] && p2.userid == c.round[x][0] || p2.userid == c.round[x][1]) {
+					if ((p1.userid == c.round[x][0] && p2.userid == c.round[x][1]) || (p2.userid == c.round[x][0] && p1.userid == c.round[x][1])) {
 						if (!c.round[x][2] && c.round[x][2] != -1) {
 							if (format == c.tier.toLowerCase()) {
 								c.round[x][2] = -1;
@@ -568,7 +568,7 @@ var BattleRoom = (function() {
 			var c = tour[i];
 			if (c.status == 2) {
 				for (var x in c.round) {
-					if (p1.userid == c.round[x][0] || p1.userid == c.round[x][1] && p2.userid == c.round[x][0] || p2.userid == c.round[x][1]) {
+					if ((p1.userid == c.round[x][0] && p2.userid == c.round[x][1]) || (p2.userid == c.round[x][0] && p1.userid == c.round[x][1])) {
 						if (c.round[x][2] == -1) {
 							if (c.tier.toLowerCase() == c.tier.toLowerCase()) {
 								tour.lose(loserid, i);

@@ -1018,11 +1018,12 @@ var commands = exports.commands = {
 			return this.sendReply('/rkick is designed for rooms with their own auth.');
 		if(!this.can('roommod', null, room)) return this.sendReply('/rkick - Access Denied.');
 		target = this.splitTarget(target);
-		if(!this.targetUser) return this.sendReply('User not found.');
-		this.targetUser.popup('You have been kicked from room '+ room.title + '.');
-		this.targetUser.leaveRoom(room);
-		room.add('|raw|'+ this.targetUser.name + ' has been kicked from room by '+ user.name + '.');
-		logModCommand(this.tarUser.name + ' has been kicked from room by '+ user.name + '.');
+		var targetUser = this.targetUser;
+		if(targetUser) return this.sendReply('User not found.');
+		targetUser.popup('You have been kicked from room '+ room.title + '.');
+		targetUser.leaveRoom(room);
+		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
+		logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
 		
 	},
 	

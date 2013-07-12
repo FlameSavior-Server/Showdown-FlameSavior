@@ -1,4 +1,4 @@
-﻿/**
+/**
  * System commands
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -226,7 +226,7 @@ tour.startRaw = function(i) {
 				var p1n = round[i][0];
 				if (Users.get(p1n)) p1n = Users.get(p1n).name;
 				if (p1n.split('Guest ').length - 1 > 0) p1n = round[i][0];
-				html += "<font color=\"red\">" + p1n + " has received a bye!</font><br />";
+				html += "<font color=\"red\">" + clean(p1n) + " has received a bye!</font><br />";
 		}
 		else {
 			var p1n = round[i][0];
@@ -235,10 +235,11 @@ tour.startRaw = function(i) {
 			if (Users.get(p2n)) p2n = Users.get(p2n).name;
 			if (p1n.split('Guest ').length - 1 > 0) p1n = round[i][0];
 			if (p2n.split('Guest ').length - 1 > 0) p2n = round[i][1];
-			html += p1n + " VS " + p2n + "<br />";
+			tabla = "";if (typeof table == "undefined") tabla = "</center><table align=center cellpadding=0 cellspacing=0>";
+			html += tabla + "<tr><td><p align=right>" + clean(p1n) + "</p></td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 		}
 	}
-	room.addRaw(html + "</center>");
+	room.addRaw(html + "</table>");
 };
 tour.nextRound = function(rid) {
 	var w = tour[rid].winners;
@@ -291,9 +292,10 @@ tour.nextRound = function(rid) {
 			if (Users.get(p2n)) p2n = Users.get(p2n).name;
 			if (p1n.split('Guest ').length - 1 > 0) p1n = p[p1];
 			if (p2n.split('Guest ').length - 1 > 0) p2n = p[p2];
-			html += p1n + " VS " + p2n + "<br />";
+			tabla = "";if (typeof table == "undefined") tabla = "</center><table align=center cellpadding=0 cellspacing=0>";
+			html += tabla + "<tr><td><p align=right>" + clean(p1n) + "</p></td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 		}
-		Rooms.rooms[rid].addRaw(html + "</center>");
+		Rooms.rooms[rid].addRaw(html);
 	}
 };
 for (var i in Rooms.rooms) {
@@ -301,6 +303,19 @@ for (var i in Rooms.rooms) {
 		tour[i] = new Object();
 		tour.reset(i);
 	}
+}
+function clean(string) {
+	var entityMap = {
+		"&": "&amp;",
+		"<": "&lt;",
+		">": "&gt;",
+		'"': '&quot;',
+		"'": '&#39;',
+		"/": '&#x2F;'
+	};
+	return String(string).replace(/[&<>"'\/]/g, function (s) {
+		return entityMap[s];
+	});
 }
 
 //spamroom
@@ -570,7 +585,7 @@ var commands = exports.commands = {
 				if (Users.get(r[i][0])) {
 					byer = Users.get(r[i][0]).name;
 				}
-				html += "<font color=\"red\">" + byer + " has received a bye.</font><br />";
+				html += "<font color=\"red\">" + clean(byer) + " has received a bye.</font><br />";
 			}
 			else {
 				if (r[i][2] == undefined) {
@@ -581,7 +596,8 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					html += p1n + " VS " + p2n + "<br />";
+					tabla = "";if (typeof table == "undefined") tabla = "</center><table align=center cellpadding=0 cellspacing=0>";
+					html += tabla + "<tr><td><p align=right>" + clean(p1n) + "</p></td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 				}
 				else if (r[i][2] == -1) {
 					//currently battling
@@ -591,7 +607,8 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					html += "<b>" + p1n + " VS " + p2n + "</b><br />";
+					tabla = "";if (typeof table == "undefined") tabla = "</center><table align=center cellpadding=0 cellspacing=0>";
+					html += tabla + "<tr><td><p align=right><b>" + clean(p1n) + "</b></p></td><td><b>&nbsp;VS&nbsp;</b></td><td><b>" + clean(p2n) + "</b></td></tr>";
 				}
 				else {
 					//match completed
@@ -607,11 +624,12 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					html += "<b><font color=\"" + p1 + "\">" + p1n + "</font> VS <font color=\"" + p2 + "\">" + p2n + "</font></b><br />";
+					tabla = "";if (typeof table == "undefined") tabla = "</center><table align=center cellpadding=0 cellspacing=0>";
+					html += tabla + "<tr><td><p align=right><b><font color=\"" + p1 + "\">" + clean(p1n) + "</font></b></p></td><td><b>&nbsp;VS&nbsp;</b></td><td><font color=\"" + p2 + "\"><b>" + clean(p2n) + "</b></font></td></tr>";
 				}
 			}
 		}
-		this.sendReply("|raw|" + html + "</center>");
+		this.sendReply("|raw|" + html);
 	},
 
 	disqualify: 'dq',

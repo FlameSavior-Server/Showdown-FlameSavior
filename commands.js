@@ -653,7 +653,7 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			var dqGuy = sanitize(target.toLowerCase());
 		} else {
-			var dqGuy = targetUser.userid;
+			var dqGuy = toId(target);
 		}
 		var error = tour.lose(dqGuy, room.id);
 		if (error == -1) {
@@ -699,10 +699,10 @@ var commands = exports.commands = {
 		if (!userTwo) {
 			return this.sendReply('Proper syntax for this command is: /replace user1, user2.  The user you specified to be placed in the tournament is not present!');
 		} else {
-			t[1] = userTwo.userid;
+			t[1] = toId(t[1]);
 		}
 		if (userOne) {
-			t[0] = userOne.userid;
+			t[0] = toId(t[0]);
 		}
 		var rt = tour[room.id];
 		var init1 = false;

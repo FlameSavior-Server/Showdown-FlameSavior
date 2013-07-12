@@ -221,6 +221,7 @@ tour.startRaw = function(i) {
 	var room = Rooms.rooms[i];
 	var html = '<hr /><h3><font color="green">Round '+ tour[room.id].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[room.id].tier].name + "<hr /><center>";
 	var round = tour[room.id].round;
+	var firstMatch = false;
 	for (var i in round) {
 		if (!round[i][1]) {
 				var p1n = round[i][0];
@@ -235,7 +236,7 @@ tour.startRaw = function(i) {
 			if (Users.get(p2n)) p2n = Users.get(p2n).name;
 			if (p1n.split('Guest ').length - 1 > 0) p1n = round[i][0];
 			if (p2n.split('Guest ').length - 1 > 0) p2n = round[i][1];
-			var tabla = "";if (i == 0 || round[i - 1][2] == round[i - 1][0]) var table = "</center><table align=center cellpadding=0 cellspacing=0>";
+			var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 			html += tabla + "<tr><td align=right>" + clean(p1n) + "</td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 		}
 	}
@@ -250,6 +251,7 @@ tour.nextRound = function(rid) {
 	tour[rid].round = new Array();
 	tour[rid].losers = new Array();
 	tour[rid].winners = new Array();
+	var firstMatch = false;
 	if (w.length == 1) {
 		//end tour
 		Rooms.rooms[rid].addRaw('<h2><font color="green">Congratulations <font color="black">' + Users.users[w[0]].name + '</font>!  You have won the ' + Data.base.Formats[tour[rid].tier].name + ' Tournament!</font></h2>' + '<br><font color="blue"><b>SECOND PLACE:</b></font> ' + Users.users[l[0]].name + '<hr />');
@@ -292,7 +294,7 @@ tour.nextRound = function(rid) {
 			if (Users.get(p2n)) p2n = Users.get(p2n).name;
 			if (p1n.split('Guest ').length - 1 > 0) p1n = p[p1];
 			if (p2n.split('Guest ').length - 1 > 0) p2n = p[p2];
-			var tabla = "";if (i == 0) var table = "</center><table align=center cellpadding=0 cellspacing=0>";
+			var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 			html += tabla + "<tr><td align=right>" + clean(p1n) + "</td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 		}
 		Rooms.rooms[rid].addRaw(html + "</table>");
@@ -578,6 +580,7 @@ var commands = exports.commands = {
 		}
 		var html = '<hr /><h3><font color="green">Round '+ tour[room.id].roundNum + '!</font></h3><font color="blue"><b>TIER:</b></font> ' + Data.base.Formats[tour[room.id].tier].name + "<hr /><center><small><font color=red>Red</font> = lost, <font color=green>Green</font> = won, <b>Bold</b> = battling</small><center>";
 		var r = tour[room.id].round;
+		var firstMatch = false;
 		for (var i in r) {
 			if (!r[i][1]) {
 				//bye
@@ -596,7 +599,7 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					var tabla = "";if (i == 0 || r[i - 1][2] == r[i - 1][0]) var table = "</center><table align=center cellpadding=0 cellspacing=0>";
+					var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 					html += tabla + "<tr><td align=right>" + clean(p1n) + "</td><td>&nbsp;VS&nbsp;</td><td>" + clean(p2n) + "</td></tr>";
 				}
 				else if (r[i][2] == -1) {
@@ -607,7 +610,7 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					var tabla = "";if (i == 0 || r[i - 1][2] == r[i - 1][0]) var table = "</center><table align=center cellpadding=0 cellspacing=0>";
+					var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 					html += tabla + "<tr><td align=right><b>" + clean(p1n) + "</b></td><td><b>&nbsp;VS&nbsp;</b></td><td><b>" + clean(p2n) + "</b></td></tr>";
 				}
 				else {
@@ -624,7 +627,7 @@ var commands = exports.commands = {
 					if (Users.get(p2n)) p2n = Users.get(p2n).name;
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
-					var tabla = "";if (i == 0 || r[i - 1][2] == r[i - 1][0]) var table = "</center><table align=center cellpadding=0 cellspacing=0>";
+					var tabla = "";if (!firstMatch) {var table = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
 					html += tabla + "<tr><td align=right><b><font color=\"" + p1 + "\">" + clean(p1n) + "</font></b></td><td><b>&nbsp;VS&nbsp;</b></td><td><font color=\"" + p2 + "\"><b>" + clean(p2n) + "</b></font></td></tr>";
 				}
 			}

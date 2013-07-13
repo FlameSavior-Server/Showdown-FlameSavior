@@ -1021,7 +1021,7 @@ var commands = exports.commands = {
 		targetUser.popup('You have been kicked from room '+ room.title + '.');
 		targetUser.leaveRoom(room);
 		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
-		logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
+		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
 		
 	},
 	

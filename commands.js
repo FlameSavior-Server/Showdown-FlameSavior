@@ -1,4 +1,4 @@
-/**
+﻿/**
  * System commands
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -338,6 +338,15 @@ if (typeof tells === 'undefined') {
 var crypto = require('crypto');
 var poofeh = true;
 var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac"];
+for (var room in Rooms.rooms) {
+	if (Rooms.rooms[room].isAdult) {
+		for (var u in aList) {
+			if (!Rooms.rooms[room].chatRoomData.auth[aList[u]]) {
+				Rooms.rooms[room].chatRoomData.auth[aList[u]] = '+';
+			};
+		};
+	};
+};
 var canTalk;
 
 var commands = exports.commands = {
@@ -1100,7 +1109,7 @@ var commands = exports.commands = {
 		if (target.toLowerCase() == "staff" && !user.can('warn')) {
 			return this.sendReply("Out peasant. OUT! This room is for staff ONLY!");
 		}
-		if(targetRoom.isAdult && aList.indexOf(user.userid) == -1){
+		if(targetRoom.isAdult && aList.indexOf(user.userid) === -1){
 			return this.sendReply("You are not old enough to join this room. If you believe you are, contact a staff member.");
 		}
 		if (!user.joinRoom(targetRoom || room, connection)) {
@@ -1202,20 +1211,36 @@ var commands = exports.commands = {
 			return this.sendReply('Insufficient parameters.');
 		}
 		var tarUser = Users.get(target[1]);
-		if(tarUser == undefined){
+		if(tarUser === undefined){
 			return this.sendReply('User not found.');
 		}
 		if (target[0].toLowerCase() === 'add') {
 			var size = Object.size(aList);
 			aList[size] = tarUser.userid
+			for (var room in Rooms.rooms) {
+				if (Rooms.rooms[room].isAdult) {
+					if (!Rooms.rooms[room].chatRoomData.auth[tarUser.userid]) {
+						Rooms.rooms[room].chatRoomData.auth[tarUser.userid] = '+';
+					};
+				};
+			};
 			return this.sendReply(tarUser.name + ' has been added to the aList.');
 		}
 		if (target[0].toLowerCase() === 'remove') {
 			var index = aList.indexOf(tarUser.userid);
-			if(index == -1){
+			if(index === -1){
 				return this.sendReply('User not found on aList.');
 			} else {
+				for (var room in Rooms.rooms) {
+					if (Rooms.rooms[room].isAdult) {
+						if (Rooms.rooms[room].chatRoomData.auth[tarUser.userid] === '+') {
+							delete Rooms.rooms[room].chatRoomData.auth[tarUser.userid];
+							tarUser.leaveRoom(room);
+						};
+					};
+				};
 				delete aList[index];
+				tarUser.sendTo('lobby', 'You have been removed from the alist and all adult rooms. If you feel this was unjustified, please contact an administrator.');
 				return this.sendReply(tarUser.name + ' has been removed from the aList.');
 			}
 		} else {
@@ -1225,11 +1250,11 @@ var commands = exports.commands = {
 	
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
+		if (!this.canBroadcast()) return false;
 
 		if (!this.canTalk()) return;
 
 		if (!room.isAdult) return this.sendReply('You can only do this in adult rooms.');
-		if (aList.indexOf(user.userid) === -1) return this.sendReply('You must be in the alist to use this command.');
 		target = tour.splint(target);
 		var picSize = '';
 		if (target[1]) {

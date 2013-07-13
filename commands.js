@@ -1176,7 +1176,7 @@ var commands = exports.commands = {
 		if (!this.canTalk()) return;
 
 		if (!room.isAdult) return this.sendReply('You can only do this in adult rooms.');
-		if (alist.indexOf(user.userid) === -1) return this.sendReply('You must be in the alist to use this command.');
+		if (aList.indexOf(user.userid) === -1) return this.sendReply('You must be in the alist to use this command.');
 		target = tour.splint(target);
 		var picSize = '';
 		if (target[1]) {

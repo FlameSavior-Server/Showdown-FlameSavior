@@ -1014,12 +1014,10 @@ var commands = exports.commands = {
 	
 	rk: 'rkick',
 	rkick: function(target, room, user){
-		if(!room.auth)
-			return this.sendReply('/rkick is designed for rooms with their own auth.');
+		if(!room.auth) return this.sendReply('/rkick is designed for rooms with their own auth.');
 		if(!this.can('roommod', null, room)) return this.sendReply('/rkick - Access Denied.');
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if(targetUser) return this.sendReply('User not found.');
+		var targetUser = Users.get(target);
+		if(targetUser == undefined) return this.sendReply('User not found.');
 		targetUser.popup('You have been kicked from room '+ room.title + '.');
 		targetUser.leaveRoom(room);
 		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');

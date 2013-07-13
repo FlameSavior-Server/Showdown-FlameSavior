@@ -1099,8 +1099,9 @@ var commands = exports.commands = {
 	},
 
 	join: function(target, room, user, connection) {
+		if(!target)return this.sendReply('/join room - joins the specified room');
 		var targetRoom = Rooms.get(target) || Rooms.get(toId(target));
-		if (target && !targetRoom) {
+		if (targetRoom == undefined) {
 			return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
 		}
 		if (targetRoom && !targetRoom.battle && targetRoom !== Rooms.lobby && !user.named) {

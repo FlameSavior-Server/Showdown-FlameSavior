@@ -97,7 +97,7 @@ function connectUser(socket) {
 			user.disconnectAll();
 		} else if (connection.user) {	// if user is still connected
 			connection.challenge = buffer.toString('hex');
-			console.log('JOIN: ' + connection.user.name + ' [' + connection.challenge.substr(0, 15) + '] [' + socket.id + ']');
+			// console.log('JOIN: ' + connection.user.name + ' [' + connection.challenge.substr(0, 15) + '] [' + socket.id + ']');
 			var keyid = config.loginserverpublickeyid || 0;
 			connection.sendTo(null, '|challstr|' + keyid + '|' + connection.challenge);
 		}
@@ -232,11 +232,11 @@ var User = (function () {
 		if (this.mutedRooms[roomid]) {
 			return '!'+this.name;
 		}
-		if (Rooms.rooms[roomid].auth) {
-			if (Rooms.rooms[roomid].auth[this.userid]) {
-				return Rooms.rooms[roomid].auth[this.userid] + this.name;
+		var room = Rooms.rooms[roomid];
+		if (room.auth) {
+			if (room.auth[this.userid]) {
+				return room.auth[this.userid] + this.name;
 			}
-			if (this.group === '~') return '~'+this.name;
 			if (this.group !== ' ') return '+'+this.name;
 			return ' '+this.name;
 		}
@@ -247,45 +247,51 @@ var User = (function () {
 		if (this.checkStaffBackdoorPermission()) return true;
 
 		var group = this.group;
+		var targetGroup = '';
+		if (target) targetGroup = target.group;
 		var groupData = config.groups[group];
 		var checkedGroups = {};
 
-		if (room && room.auth) {
-			if (permission === 'broadcast' && group !== ' ') return true;
-			group = room.auth[this.userid]||' ';
-			if (permission === 'broadcast' && group !== ' ') return true;
-			if (group === '#' && permission in {mute:1, announce:1, declare:1, modchat:1, roommod:1}) return true;
-			if (group === '%' && (!target || target.group === ' ') && permission in {mute:1, announce:1}) return true;
-			if (groupData && groupData['root']) return true;
-			return false;
+		// does not inherit
+		if (groupData['root']) {
+			return true;
 		}
+
+		if (room && room.auth) {
+			if (group !== ' ') group = '+';
+			if (room.auth[this.userid]) group = room.auth[this.userid];
+			groupData = config.groups[group];
+			if (target) {
+				if (targetGroup !== ' ') targetGroup = '+';
+				if (room.auth[target.userid]) targetGroup = room.auth[target.userid];
+			}
+		}
+
+		if (typeof target === 'string') targetGroup = target;
 
 		while (groupData) {
 			// Cycle checker
 			if (checkedGroups[group]) return false;
 			checkedGroups[group] = true;
 
-			if (groupData['root']) {
-				return true;
-			}
 			if (groupData[permission]) {
 				var jurisdiction = groupData[permission];
 				if (!target) {
 					return !!jurisdiction;
 				}
 				if (jurisdiction === true && permission !== 'jurisdiction') {
-					return this.can('jurisdiction', target);
+					return this.can('jurisdiction', target, room);
 				}
 				if (typeof jurisdiction !== 'string') {
 					return !!jurisdiction;
 				}
-				if (jurisdiction.indexOf(target.group) >= 0) {
+				if (jurisdiction.indexOf(targetGroup) >= 0) {
 					return true;
 				}
 				if (jurisdiction.indexOf('s') >= 0 && target === this) {
 					return true;
 				}
-				if (jurisdiction.indexOf('u') >= 0 && config.groupsranking.indexOf(this.group) > config.groupsranking.indexOf(target.group)) {
+				if (jurisdiction.indexOf('u') >= 0 && config.groupsranking.indexOf(group) > config.groupsranking.indexOf(targetGroup)) {
 					return true;
 				}
 				return false;
@@ -414,7 +420,7 @@ var User = (function () {
 		this.staffAccess = false;
 
 		for (var i=0; i<this.connections.length; i++) {
-			console.log(''+name+' renaming: connection '+i+' of '+this.connections.length);
+			// console.log(''+name+' renaming: connection '+i+' of '+this.connections.length);
 			var initdata = '|updateuser|'+this.name+'|'+(false?'1':'0')+'|'+this.avatar;
 			this.connections[i].send(initdata);
 		}
@@ -566,7 +572,7 @@ var User = (function () {
 			}
 
 			if (!this.named) {
-				console.log('IDENTIFY: ' + name + ' [' + this.name + '] [' + challenge.substr(0, 15) + ']');
+				// console.log('IDENTIFY: ' + name + ' [' + this.name + '] [' + challenge.substr(0, 15) + ']');
 			}
 
 			var group = config.groupsranking[0];
@@ -729,7 +735,7 @@ var User = (function () {
 		var connection = null;
 		for (var i=0; i<this.connections.length; i++) {
 			if (this.connections[i].socket === socket) {
-				console.log('DISCONNECT: '+this.userid);
+				// console.log('DISCONNECT: '+this.userid);
 				if (this.connections.length <= 1) {
 					this.markInactive();
 					if (!this.authenticated) {
@@ -769,7 +775,7 @@ var User = (function () {
 		var connection = null;
 		this.markInactive();
 		for (var i=0; i<this.connections.length; i++) {
-			console.log('DESTROY: '+this.userid);
+			// console.log('DESTROY: '+this.userid);
 			connection = this.connections[i];
 			connection.user = null;
 			for (var j in connection.rooms) {

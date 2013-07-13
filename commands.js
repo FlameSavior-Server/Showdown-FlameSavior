@@ -337,7 +337,7 @@ if (typeof tells === 'undefined') {
 
 var crypto = require('crypto');
 var poofeh = true;
-var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac"];
+var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac"];
 var canTalk;
 
 var commands = exports.commands = {
@@ -1172,12 +1172,11 @@ var commands = exports.commands = {
 	
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
-		if (!user.can('broadcast')) return false;
 
 		if (!this.canTalk()) return;
 
 		if (!room.isAdult) return this.sendReply('You can only do this in adult rooms.');
-
+		if (alist.indexOf(user.userid) === -1) return this.sendReply('You must be in the alist to use this command.');
 		target = tour.splint(target);
 		var picSize = '';
 		if (target[1]) {

@@ -1283,6 +1283,19 @@ var commands = exports.commands = {
 
 		return this.sendReply('Message "' + targets[1].trim() + '" sent to ' + targetUser + '.');
 	},
+	
+	punt: function (target, room, user) {
+		if (!target) return this.sendReply('You must select a user to punt.\n/punt [user] - punts the selected user.');
+		if (!this.canBroadcast()) return false;
+		if (!this.broadcasting) return this.sendReply('This command can only be used by broadcasting it.');
+		var targetUser = Users.get(target);
+
+		if (!targetUser) return this.sendReply('User "' + target.trim() + '" could not be found.');
+
+		room.add('|c|' + user.getIdentity() + '|/me punts ' + targetUser.getIdentity());
+		return room.add('|c|' + targetUser.getIdentity() + '|/me is punted by ' + user.getIdentity());
+	},
+	
 	/*
 	kupkup: function(target, room, user){
 		if(!user.can('root')) return this.sendReply('/kupkup - Access denied.');

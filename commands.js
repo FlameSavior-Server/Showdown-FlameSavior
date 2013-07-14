@@ -760,6 +760,20 @@ var commands = exports.commands = {
 		rt.history.push(t[0] + "->" + t[1]);
 		room.addRaw('<b>' + t[0] +'</b> has left the tournament and is replaced by <b>' + t[1] + '</b>.');
 	},
+	
+	tours: function(target, room, user, connection) {
+		if (!this.canBroadcast()) return;
+		var oghtml = "<hr /><h2>Tournaments Going On:</h2>";
+		var html = oghtml;
+		for (var i in tour) {
+			var c = tour[i];
+			if (typeof c == "object") {
+				if (c.status > 0) html += '<button name="joinRoom" value="' + i + '">' + Rooms.rooms[i].title + ' - ' + c.tier + '</button>';
+			}
+		}
+		if (html == oghtml) html += "There are currently no tournaments running.";
+		this.sendReply('|raw|' + html + "<hr />");
+	},
 
 	/**** normal stuff ****/
 	poker: function(target, room, user) {

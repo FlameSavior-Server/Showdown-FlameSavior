@@ -763,15 +763,15 @@ var commands = exports.commands = {
 	
 	tours: function(target, room, user, connection) {
 		if (!this.canBroadcast()) return;
-		var oghtml = "<hr /><h2>Tournaments Going On:</h2>";
+		var oghtml = "<hr /><h2>Tournaments In Their Signup Phase:</h2>";
 		var html = oghtml;
 		for (var i in tour) {
 			var c = tour[i];
 			if (typeof c == "object") {
-				if (c.status > 0) html += '<button name="joinRoom" value="' + i + '">' + Rooms.rooms[i].title + ' - ' + c.tier + '</button>';
+				if (c.status == 1) html += '<button name="joinRoom" value="' + i + '">' + Rooms.rooms[i].title + ' - ' + c.tier + '</button>';
 			}
 		}
-		if (html == oghtml) html += "There are currently no tournaments running.";
+		if (html == oghtml) html += "There are currently no tournaments in their signup phase.";
 		this.sendReply('|raw|' + html + "<hr />");
 	},
 

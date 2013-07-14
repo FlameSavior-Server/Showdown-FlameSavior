@@ -338,15 +338,6 @@ if (typeof tells === 'undefined') {
 var crypto = require('crypto');
 var poofeh = true;
 var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac"];
-for (var room in Rooms.rooms) {
-	if (Rooms.rooms[room].isAdult) {
-		for (var u in aList) {
-			if (!Rooms.rooms[room].chatRoomData.auth[aList[u]]) {
-				Rooms.rooms[room].chatRoomData.auth[aList[u]] = '+';
-			};
-		};
-	};
-};
 var canTalk;
 
 var commands = exports.commands = {
@@ -1232,13 +1223,6 @@ var commands = exports.commands = {
 		if (target[0].toLowerCase() === 'add') {
 			var size = Object.size(aList);
 			aList[size] = tarUser.userid
-			for (var room in Rooms.rooms) {
-				if (Rooms.rooms[room].isAdult) {
-					if (!Rooms.rooms[room].chatRoomData.auth[tarUser.userid]) {
-						Rooms.rooms[room].chatRoomData.auth[tarUser.userid] = '+';
-					};
-				};
-			};
 			return this.sendReply(tarUser.name + ' has been added to the aList.');
 		}
 		if (target[0].toLowerCase() === 'remove') {
@@ -1248,10 +1232,7 @@ var commands = exports.commands = {
 			} else {
 				for (var room in Rooms.rooms) {
 					if (Rooms.rooms[room].isAdult) {
-						if (Rooms.rooms[room].chatRoomData.auth[tarUser.userid] === '+') {
-							delete Rooms.rooms[room].chatRoomData.auth[tarUser.userid];
 							tarUser.leaveRoom(room);
-						};
 					};
 				};
 				delete aList[index];
@@ -1265,7 +1246,7 @@ var commands = exports.commands = {
 	
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
-		if (!this.canBroadcast()) return false;
+		if (aList.indexOf(user.userid) === -1) return this.sendReply('You must be on the alist to use this command.');
 
 		if (!this.canTalk()) return;
 

@@ -274,12 +274,7 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help dexsearch');
 		var targets = target.split(',');
 		var target;
-		var moves = new Array();
-		var types = new Array();
-		var tiers = new Array();
-		var colours = new Array();
-		var ability = new Array();
-		var gens = new Array();
+		var moves = {}, tiers = {}, colours = {}, ability = {}, gens = {}, types = {};
 		var count = 0;
 		var all = false;
 		var output = 10;
@@ -287,54 +282,67 @@ var commands = exports.commands = {
 		for (var i in targets) {
 			target = Tools.getMove(targets[i]);
 			if (target.exists) {
-				if (moves.length === 0) {
+				if (!moves.count) {
 					count++;
+					moves.count = 0;
 				};
-				if (moves.length === 4) {
+				if (moves.count === 4) {
 					return this.sendReply('Specify a maximum of 4 moves.');
 				};
-				moves.add(target);
+				moves[target] = 1;
+				moves.count++;
 				continue;
 			};
 
 			target = Tools.getAbility(targets[i]);
 			if (target.exists) {
-				if (ability.length === 0) {
+				if (!ability.count) {
 					count++;
+					ability.count = 0;
 				};
-				if (ability.length === 1) {
+				if (ability.count === 1) {
 					return this.sendReply('Specify only one ability.');
 				};
-				ability.add(target);
+				ability[target] = 1;
+				ability.count++;
 				continue;
 			};
 
 			target = targets[i].trim().toLowerCase();
 			if (['fire','water','electric','dragon','rock','fighting','ground','ghost','psychic','dark','bug','flying','grass','poison','normal','steel','ice'].indexOf(toId(target.substring(0, target.length - 4))) > -1) {
-				if (types.length === 0) {
+				if (!types.count) {
 					count++;
-				} else if (types.length === 2 ) {
+					types.count = 0;
+				};
+				if (types.count === 2) {
 					return this.sendReply('Specify a maximum of two types.');
 				};
-				types.add(toId(target.substring(0, target.length - 4)).substring(0, 1).toUpperCase() + toId(target.substring(0, target.length - 4)).substring(1));
+				types[toId(target.substring(0, target.length - 4)).substring(0, 1).toUpperCase() + toId(target.substring(0, target.length - 4)).substring(1)] = 1;
+				types.count++;
 			}
 			else if (['uber','ou','uu','ru','nu','lc','cap','bl','bl2','nfe','illegal'].indexOf(target) > -1) {
-				if (tiers.length === 0) {
+				if (!tiers.count) {
 					count++;
+					tiers.count = 0;
 				};
-				tiers.add(target);
+				tiers[target] = 1;
+				tiers.count++;
 			}
 			else if (['green','red','blue','white','brown','yellow','purple','pink','gray','black'].indexOf(target) > -1) {
-				if (colours.length === 0) {
+				if (!colours.count) {
 					count++;
+					colours.count = 0;
 				};
-				colours.add(target);
+				colours[target] = 1;
+				colours.count++;
 			}
 			else if (parseInt(target, 10) > 0) {
-				if (gens.length === 0) {
+				if (!gens.count) {
 					count++;
+					gens.count = 0;
 				};
-				gens.add(parseInt(target, 10));
+				gens[parseInt(target, 10)] = 1;
+				gens.count++;
 			}
 			else if (target === 'all') {
 				if (this.broadcasting) {
@@ -349,96 +357,97 @@ var commands = exports.commands = {
 
 		while (count > 0) {
 			--count;
-			var tempResults = new Array();
+			var tempResults = [];
 			if (!results) {
 				for (var pokemon in Data.base.Pokedex) {
+					if (pokemon === 'arceusunknown') continue;
 					pokemon = Tools.getTemplate(pokemon);
-					tempResults.add(pokemon);
+					if (!(!('illegal' in tiers) && pokemon.tier === 'Illegal')) {
+						tempResults.add(pokemon);
+					}
 				};
 			} else {
 				for (var mon in results) tempResults.add(results[mon]);
 			};
-			var results = new Array();
+			var results = [];
 
-			if (types.length > 0) {
+			if (types.count > 0) {
 				for (var mon in tempResults) {
-					if (tempResults[mon].types.indexOf(types[0]) > -1) results.add(tempResults[mon]);
-				};
-				if (types[1]) {
-					tempResults = new Array();
-					for (var mon in results) tempResults.add(results[mon]);
-					results = new Array;
-					for (var mon in tempResults) {
-						if (tempResults[mon].types.indexOf(types[1]) > -1) results.add(tempResults[mon]);
+					if (types.count === 1) {
+						if (tempResults[mon].types[0] in types || tempResults[mon].types[1] in types) results.add(tempResults[mon]);
+					} else {
+						if (tempResults[mon].types[0] in types && tempResults[mon].types[1] in types) results.add(tempResults[mon]);
 					};
 				};
-				types = [];
+				types.count = 0;
 				continue;
 			};
 	
-			if (tiers.length > 0) {
+			if (tiers.count > 0) {
 				for (var mon in tempResults) {
-					if (tiers.indexOf('cap') > 0) {
-						if (tempResults[mon].tier.toLowerCase().indexOf('cap') > -1) results.add(tempResults[mon]);
+					if ('cap' in tiers) {
+						if (tempResults[mon].tier.substring(2).toLowerCase() === 'cap') results.add(tempResults[mon]);
 					};
-					if (tiers.indexOf(tempResults[mon].tier.toLowerCase()) > -1) results.add(tempResults[mon]);
+					if (tempResults[mon].tier.toLowerCase() in tiers) results.add(tempResults[mon]);
 				};
-				tiers = [];
+				tiers.count = 0;
 				continue;
 			};
 
-			if (ability.length > 0) {
+			if (ability.count > 0) {
 				for (var mon in tempResults) {
 					for (var monAbility in tempResults[mon].abilities) {
-						if (ability[0] === Tools.getAbility(tempResults[mon].abilities[monAbility])) results.add(tempResults[mon]);
+						if (Tools.getAbility(tempResults[mon].abilities[monAbility]) in ability) results.add(tempResults[mon]);
 					};
 				};
-				ability = [];
+				ability.count = 0;
 				continue;
 			};
 
-			if (colours.length > 0) {
+			if (colours.count > 0) {
 				for (var mon in tempResults) {
-					if (colours.indexOf(tempResults[mon].color.toLowerCase()) > -1) results.add(tempResults[mon]);
+					if (tempResults[mon].color.toLowerCase() in colours) results.add(tempResults[mon]);
 				};
-				colours = [];
+				colours.count = 0;
 				continue;
 			};
 
-			if (moves.length > 0) {
+			if (moves.count > 0) {
 				var problem;
 				var move = {};
 				for (var mon in tempResults) {
 					var lsetData = {set:{}};
 					template = Tools.getTemplate(tempResults[mon].id);
 					for (var i in moves) {
-						move = moves[i];
-						if (!move.exists) return this.sendReply('"' + move + '" is not a known move.');
-						problem = Tools.checkLearnset(move, template, lsetData);
-						if (problem) break;
+						move = Tools.getMove(i);
+						if (move.id !== 'count') {
+							if (!move.exists) return this.sendReply('"' + move + '" is not a known move.');
+							problem = Tools.checkLearnset(move, template, lsetData);
+							if (problem) break;
+						};
 					};
 					if (!problem) results.add(tempResults[mon]);
 				};
-				moves = [];
+				moves.count = 0;
 				continue;
 			};
 
-			if (gens.length > 0) {
+			if (gens.count > 0) {
 				for (var mon in tempResults) {
-					if (gens.indexOf(tempResults[mon].gen) > -1) results.add(tempResults[mon]);
+					if (tempResults[mon].gen in gens) results.add(tempResults[mon]);
 				};
-				gens = [];
+				gens.count = 0;
 				continue;
 			};
 		};
 
 		var resultsStr = '';
 		if (results.length > 0) {
-			if (all || results.length < 11) {
+			if (all || results.length <= output) {
 				for (var i = 0; i < results.length; i++) resultsStr += results[i].species + ', ';
 			} else {
 				var hidden = string(results.length - output);
-				shuffle(results);
+				results.sort(function(a,b) {return Math.round(Math.random());});
 				for (var i = 0; i < output; i++) resultsStr += results[i].species + ', ';
 				resultsStr += ' and ' + hidden + ' more. Redo the search with "all" as a search parameter to show all results.  '
 			};

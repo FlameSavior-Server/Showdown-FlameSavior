@@ -1292,8 +1292,8 @@ var commands = exports.commands = {
 
 		if (!targetUser) return this.sendReply('User "' + target.trim() + '" could not be found.');
 
-		room.add('|c|' + user.getIdentity() + '|/me punts ' + targetUser.getIdentity());
-		return room.add('|c|' + targetUser.getIdentity() + '|/me is punted by ' + user.getIdentity());
+		room.add('|c|' + user.name + '|/me punts ' + targetUser.name);
+		return room.add('|c|' + targetUser.name + '|/me is punted by ' + user.name);
 	},
 	
 	/*

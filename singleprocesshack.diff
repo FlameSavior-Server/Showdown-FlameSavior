@@ -1,0 +1,101 @@
+diff --git a/battle-engine.js b/battle-engine.js
+index 7ac2f51..ebec3c1 100644
+--- a/battle-engine.js
++++ b/battle-engine.js
+@@ -10,14 +10,14 @@ config = require('./config/config.js');
+if (config.crashguard) {
+// graceful crash - allow current battles to finish before restarting
+- process.on('uncaughtException', function (err) {
+- require('./crashlogger.js')(err, 'A simulator process');
++ //process.on('uncaughtException', function (err) {
++ // require('./crashlogger.js')(err, 'A simulator process');
+/* var stack = (""+err.stack).split("\n").slice(0,2).join("<br />");
+Rooms.lobby.addRaw('<div><b>THE SERVER HAS CRASHED:</b> '+stack+'<br 
+/>Please restart the server.</div>');
+Rooms.lobby.addRaw('<div>You will not be able to talk in the lobby or 
+start new battles until the server restarts.</div>');
+config.modchat = 'crash';
+lockdown = true; */
+- });
++ //});
+}
+/**
+@@ -91,7 +91,9 @@ var Battles = {};
+// Receive and process a message sent using Simulator.prototype.send in
+// another process.
+-process.on('message', function(message) {
++//var socket = process;
++var socket = fakeProcess.client;
++socket.on('message', function(message) {
+//console.log('CHILD MESSAGE RECV: "'+message+'"');
+var nlIndex = message.indexOf("\n");
+var more = '';
+@@ -353,7 +355,7 @@ var BattlePokemon = (function() {
+} else {
+stat = Math.floor(stat / boostTable[-boost]);
+}
+-
++
+if (this.battle.getStatCallback) {
+stat = this.battle.getStatCallback(stat, statName, this);
+}
+@@ -3293,7 +3295,7 @@ var Battle = (function() {
+// Simulator.prototype.receive in simulator.js (in another process).
+Battle.prototype.send = function(type, data) {
+if (Array.isArray(data)) data = data.join("\n");
+- process.send(this.id+"\n"+type+"\n"+data);
++ socket.send(this.id+"\n"+type+"\n"+data);
+};
+// This function is called by this process's 'message' event.
+Battle.prototype.receive = function(data, more) {
+diff --git a/rooms.js b/rooms.js
+index 27b3333..9d03b49 100644
+--- a/rooms.js
++++ b/rooms.js
+@@ -627,6 +627,7 @@ var BattleRoom = (function() {
+logs[0].push(line);
+logs[1].push(line);
+logs[2].push(line);
++ if (line === "|callback|decision" && !this.active) this.active = true; 
+// Hack
+}
+}
+var roomid = this.id;
+diff --git a/simulator.js b/simulator.js
+index 8cd4b14..2b80eef 100644
+--- a/simulator.js
++++ b/simulator.js
+@@ -3,7 +3,32 @@ var simulators = {};
+var SimulatorProcess = (function() {
+function SimulatorProcess() {
+- this.process = require('child_process').fork('battle-engine.js');
++ //this.process = require('child_process').fork('battle-engine.js');
++ if (global.fakeProcess) throw "Combined lobby and battle process hack 
+does not allow more than one SimulatorProcess";
++ var EventEmitter = require("events").EventEmitter;
++ fakeProcess = {
++ serverEmitter: new EventEmitter(),
++ clientEmitter: new EventEmitter(),
++ server: {
++ on: function (event, callback) {
++ return fakeProcess.clientEmitter.on(event, callback);
++ },
++ send: function (message) {
++ return fakeProcess.serverEmitter.emit('message', message);
++ }
++ },
++ client: {
++ on: function (event, callback) {
++ return fakeProcess.serverEmitter.on(event, callback);
++ },
++ send: function (message) {
++ return fakeProcess.clientEmitter.emit('message', message);
++ }
++ }
++ };
++ this.process = fakeProcess.server;
++ require("./battle-engine.js");
++
+this.process.on('message', function(message) {
+var lines = message.split('\n');
+var sim = simulators[lines[0]];

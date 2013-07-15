@@ -285,7 +285,7 @@ global.clampIntRange = function(num, min, max) {
 	if (typeof num !== 'number') num = 0;
 	num = Math.floor(num);
 	if (num < min) num = min;
-	if (typeof max !== 'undefined' && num > max) num = max;
+	if (max !== undefined && num > max) num = max;
 	return num;
 };
 
@@ -295,8 +295,6 @@ watchFile('./config/custom.css', function(curr, prev) {
 	LoginServer.request('invalidatecss', {}, function() {});
 });
 LoginServer.request('invalidatecss', {}, function() {});
-
-global.Data = {};
 
 global.Users = require('./users.js');
 
@@ -309,10 +307,6 @@ global.CommandParser = require('./command-parser.js');
 
 global.Simulator = require('./simulator.js');
 
-global.sendData = function(socket, data) {
-	socket.write(data);
-};
-
 if (config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting
 	process.on('uncaughtException', (function() {
@@ -324,8 +318,10 @@ if (config.crashguard) {
 			lastCrash = Date.now();
 			if (quietCrash) return;
 			var stack = (""+err.stack).split("\n").slice(0,2).join("<br />");
-			Rooms.lobby.addRaw('<div class="broadcast-red"><b>THE SERVER HAS CRASHED:</b> '+stack+'<br />Please restart the server.</div>');
-			Rooms.lobby.addRaw('<div class="broadcast-red">You will not be able to talk in the lobby or start new battles until the server restarts.</div>');
+			if (Rooms.lobby) {
+				Rooms.lobby.addRaw('<div class="broadcast-red"><b>THE SERVER HAS CRASHED:</b> '+stack+'<br />Please restart the server.</div>');
+				Rooms.lobby.addRaw('<div class="broadcast-red">You will not be able to talk in the lobby or start new battles until the server restarts.</div>');
+			}
 			config.modchat = 'crash';
 			Rooms.global.lockdown = true;
 		};
@@ -425,7 +421,8 @@ server.on('connection', function(socket) {
 
 			var roomid = message.substr(0, pipeIndex);
 			var lines = message.substr(pipeIndex + 1);
-			var room = Rooms.get(roomid, 'lobby');
+			var room = Rooms.get(roomid);
+			if (!room) room = Rooms.lobby || Rooms.global;
 			var user = connection.user;
 			if (lines.substr(0,3) === '>> ' || lines.substr(0,4) === '>>> ') {
 				user.chat(lines, room, connection);
@@ -490,3 +487,15 @@ global.Tools = require('./tools.js');
 
 // After loading tools, generate and cache the format list.
 Rooms.global.formatListText = Rooms.global.getFormatListText();
+
+// load ipbans at our leisure
+fs.readFile('./config/ipbans.txt', function (err, data) {
+	if (err) return;
+	data = (''+data).split("\n");
+	for (var i=0; i<data.length; i++) {
+		data[i] = data[i].split('#')[0].trim();
+		if (data[i] && !Users.bannedIps[data[i]]) {
+			Users.bannedIps[data[i]] = '#ipban';
+		}
+	}
+});

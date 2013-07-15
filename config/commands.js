@@ -540,7 +540,7 @@ var commands = exports.commands = {
 		}
 
 		var weaknesses = [];
-		Object.keys(Tools.data.TypeChart).forEach(function (type) {
+		Object.keys(Data.base.TypeChart).forEach(function (type) {
 			var notImmune = Tools.getImmunity(type, pokemon);
 			if (notImmune) {
 				var typeMod = Tools.getEffectiveness(type, pokemon);

@@ -464,26 +464,6 @@ var GlobalRoom = (function() {
 		if (config.reportbattles && rooms.lobby) {
 			rooms.lobby.add('|b|'+newRoom.id+'|'+p1.getIdentity()+'|'+p2.getIdentity());
 		}
-
-	//tour
-		newRoom.originalPlayers = [p1, p2];
-		var battleid = i;
-		for (var i in tour) {
-			var c = tour[i];
-			if (c.status == 2) {
-				for (var x in c.round) {
-					if ((p1.userid == c.round[x][0] && p2.userid == c.round[x][1]) || (p2.userid == c.round[x][0] && p1.userid == c.round[x][1])) {
-						if (!c.round[x][2] && c.round[x][2] != -1) {
-							if (format == c.tier.toLowerCase()) {
-								c.round[x][2] = -1;
-									Rooms.rooms[i].addRaw("<a href=\"/battle-" + formaturlid + "-" + battleid + "\" class=\"ilink\"><b>Tournament battle between " + p1.name + " and " + p2.name + " started.</b></a>");
-							}
-						}
-					}
-				}
-			}
-		}
-
 	};
 	GlobalRoom.prototype.addRoom = function(room, format, p1, p2, parent, rated) {
 		room = newRoom(room, format, p1, p2, parent, rated);
@@ -566,44 +546,6 @@ var BattleRoom = (function() {
 		}
 	};
 	BattleRoom.prototype.win = function(winner) {
-
-		//tour
-		var winnerid = toId(winner);
-		var p1 = this.originalPlayers[0];
-		var p2 = this.originalPlayers[1];
-		var loserid = p1.userid;
-		if (p1.userid == winnerid) {
-			loserid = p2.userid;
-		}
-		else {
-			winnerid = p2.userid;
-		}
-		for (var i in tour) {
-			var c = tour[i];
-			if (c.status == 2) {
-				for (var x in c.round) {
-					if ((p1.userid == c.round[x][0] && p2.userid == c.round[x][1]) || (p2.userid == c.round[x][0] && p1.userid == c.round[x][1])) {
-						if (c.round[x][2] == -1) {
-							if (c.tier.toLowerCase() == c.tier.toLowerCase()) {
-								tour.lose(loserid, i);
-								Rooms.rooms[i].addRaw('<b>' + winnerid + '</b> won their battle against ' + loserid + '.</b>');
-								var r = tour[i].round;
-								var cc = 0;
-								for (var y in r) {
-									if (r[y][2] && r[y][2] != -1) {
-										cc++;
-									}
-								}
-								if (r.length == cc) {
-									tour.nextRound(i);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
 		if (this.rated) {
 			var winnerid = toId(winner);
 			var rated = this.rated;

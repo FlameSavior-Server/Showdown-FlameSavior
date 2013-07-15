@@ -602,6 +602,19 @@ exports.BattleFormats = {
 		banlist: ['Unreleased', 'Illegal', 'Soul Dew', 'Uber','Explosion', 'Perish Song', 'Destiny Bond', 'Healing Wish', 'Selfdestruct', 'Lunar Dance', 'Final Gambit'
 		]
 	},
+	swalotworld: {
+		name: "Swalot World",
+		section: "Singles",
+
+		effectType: 'Format',
+		challengeDefault: true,
+		rated: true,
+		challengeShow: true,
+		searchShow: true,
+		isTeambuilderFormat: true,
+		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview', 'Swalot Clause'],
+		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
+	},
 	pu: {
 		name: "PU",
 		section: "Other Metagames",
@@ -615,7 +628,19 @@ exports.BattleFormats = {
 
 	// Rulesets
 	///////////////////////////////////////////////////////////////////
-
+	
+	swalotclause: {
+                effectType: 'Rule',
+                onStart: function() {
+			this.add('rule', 'Swalot Clause: Swalots are allowed.');
+		},
+                validateSet: function(set) {
+                        var template = this.getTemplate(set.species);
+                        if (set.species !== 'Swalot') {
+                                return [set.species+" is banned because it's not a swalot you hoe."];
+                        }
+                }
+        },
 	standard: {
 		effectType: 'Banlist',
 		ruleset: ['Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'HP Percentage Mod'],

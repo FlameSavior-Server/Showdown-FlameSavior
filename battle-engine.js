@@ -20,7 +20,7 @@ if (!('existsSync' in fs)) {
 global.config = require('./config/config.js');
 
 if (config.crashguard) {
-	// graceful crash - allow current battles to finish before restarting
+	graceful crash - allow current battles to finish before restarting
 	process.on('uncaughtException', function (err) {
 				//require('./crashlogger.js')(err, 'A simulator process');
 		/* var stack = (""+err.stack).split("\n").slice(0,2).join("<br />");

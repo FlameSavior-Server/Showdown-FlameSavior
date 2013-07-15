@@ -2,7 +2,7 @@
  * Functions
  *********************************************************/
 exports.tour = function(t) {
-  if (typeof t != "undefined") var tour = t; else var tour = new Object();
+	if (typeof t != "undefined") var tour = t; else var tour = new Object();
 	var tourStuff = {
 		tiers: new Array(),
 		timerLoop: function() {
@@ -81,6 +81,7 @@ exports.tour = function(t) {
 			for (var i in players) {
 				if (players[i] == uid) {
 					init = 1;
+					break;
 				}
 			}
 			if (init) {
@@ -97,6 +98,7 @@ exports.tour = function(t) {
 				if (players[i] == uid) {
 					init = 1;
 					key = i;
+					break;
 				}
 			}
 			if (!init) {
@@ -115,10 +117,11 @@ exports.tour = function(t) {
 				if (r[i][0] == uid) {
 					var key = i;
 					var p = 0;
-				}
-				if (r[i][1] == uid) {
+					break;
+				} else if (r[i][1] == uid) {
 					var key = i;
 					var p = 1;
+					break;
 				}
 			}
 			if (!key) {
@@ -335,8 +338,8 @@ var cmds = {
 		var tempTourTier = '';
 		for (var i = 0; i < tour.tiers.length; i++) {
 			if ((targets[0].trim().toLowerCase()) == tour.tiers[i].trim().toLowerCase()) {
-			tierMatch = true;
-			tempTourTier = tour.tiers[i];
+				tierMatch = true;
+				tempTourTier = tour.tiers[i];
 			}
 		}
 		if (!tierMatch) {
@@ -689,12 +692,14 @@ var cmds = {
 		for (var i in players) {
 			if (players[i] ==  t[0]) {
 				init1 = true;
+				break;
 			}
 		}
 		//check if replacer in tour
 		for (var i in players) {
 			if (players[i] ==  t[1]) {
 				init2 = true;
+				break;
 			}
 		}
 		if (!init1) {
@@ -742,19 +747,47 @@ var cmds = {
 		if (html == oghtml) html += "There are currently no tournaments in their signup phase.";
 		this.sendReply('|raw|' + html + "<hr />");
 	},
-	makechatroom: function(target, room, user) {
-		if (!this.can('makeroom')) return;
-		var id = toId(target);
-		if (Rooms.rooms[id]) {
-			return this.sendReply("The room '"+target+"' already exists.");
+	
+	invalidate: function(target,room,user) {
+		if (!this.can('broadcast')) return this.sendReply('You do not have enough authority to use this command.');
+		if (!room.decision) return this.sendReply('You can only do this in battle rooms.');
+		if (!room.tournament) return this.sendReply('This is not an official tournament battle.');
+		var rightplayers = room.users[room.originalPlayers[0]] && room.users[room.originalPlayers[1]];
+		//currently, rightplayers is assigned true when both players have exchanged positions
+
+		tourinvalidlabel:
+		{
+		for (var i in tour) {
+			var c = tour[i];
+			if (c.status == 2) {
+				for (var x in c.round) {
+					if ((room.p1.userid == c.round[x][0] && room.p2.userid == c.round[x][1]) || (room.p2.userid == c.round[x][0] && room.p1.userid == c.round[x][1])) {
+						if (c.round[x][2] == -1) {
+							if ((room.tryinvalid && this.can('ban')) || !rightplayers) {
+									c.round[x][2] = 0;
+									Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + room.p1.name + '</b>' + " and " + '<b>' + room.p2.name + '</b>' + " was " + '<b>' + "invalidated." + '</b>');
+									room.tryinvalid = false;
+									var success = true;
+									break tourinvalidlabel;
+							}
+						}
+					}
+				}
+			}
 		}
-		if (Rooms.global.addChatRoom(target)) {
-			tour.reset(id);
-			return this.sendReply("The room '"+target+"' was created.");
 		}
-		return this.sendReply("An error occurred while trying to create the room '"+target+"'.");
-	},
+		if (!success) {
+			room.tryinvalid = true;
+			if (this.can('ban')) {
+				return this.sendReply('Are you sure you want to invalidate this battle? If so, repeat the command.');
+			} else {
+				return this.sendReply('This battle is not weird enough for you to use this command. Bring a mod here to use it instead.');
+			}
+		}
+	}
+
 };
+
 for (var i in cmds) CommandParser.commands[i] = cmds[i];
 /*********************************************************
  * Events
@@ -804,17 +837,22 @@ Rooms.global.startBattle = function(p1, p2, format, rated, p1team, p2team) {
 	}
 
 	//tour
-	newRoom.originalPlayers = [p1, p2];
-	var battleid = i;
-	for (var i in tour) {
-		var c = tour[i];
-		if (c.status == 2) {
-			for (var x in c.round) {
-				if ((p1.userid == c.round[x][0] && p2.userid == c.round[x][1]) || (p2.userid == c.round[x][0] && p1.userid == c.round[x][1])) {
-					if (!c.round[x][2] && c.round[x][2] != -1) {
-						if (format == c.tier.toLowerCase()) {
-							c.round[x][2] = -1;
-							Rooms.rooms[i].addRaw("<a href=\"/battle-" + formaturlid + "-" + battleid + "\" class=\"ilink\"><b>Tournament battle between " + p1.name + " and " + p2.name + " started.</b></a>");
+	if (!rated) {
+		var name1 = p1.name;
+		var name2 = p2.name;
+		newRoom.originalPlayers = [p1.userid,p2.userid];
+		var battleid = i;
+		for (var i in tour) {
+			var c = tour[i];
+			if (c.status == 2) {
+				for (var x in c.round) {
+					if ((p1.userid == c.round[x][0] && p2.userid == c.round[x][1]) || (p2.userid == c.round[x][0] && p1.userid == c.round[x][1])) {
+						if (!c.round[x][2] && c.round[x][2] != -1) {
+							if (format == c.tier.toLowerCase()) {
+								newRoom.tournament = true;
+								c.round[x][2] = -1;
+								Rooms.rooms[i].addRaw("<a href=\"/battle-" + formaturlid + "-" + battleid + "\" class=\"ilink\"><b>Tournament battle between " + p1.name + " and " + p2.name + " started.</b></a>");
+							}
 						}
 					}
 				}
@@ -824,34 +862,43 @@ Rooms.global.startBattle = function(p1, p2, format, rated, p1team, p2team) {
 };
 Rooms.BattleRoom.prototype.win = function(winner) {
 	//tour
-	var winnerid = toId(winner);
-	var p1 = this.originalPlayers[0];
-	var p2 = this.originalPlayers[1];
-	var loserid = p1.userid;
-	if (p1.userid == winnerid) {
-		loserid = p2.userid;
-	}
-	else {
-		winnerid = p2.userid;
-	}
-	for (var i in tour) {
-		var c = tour[i];
-		if (c.status == 2) {
-			for (var x in c.round) {
-				if ((p1.userid == c.round[x][0] && p2.userid == c.round[x][1]) || (p2.userid == c.round[x][0] && p1.userid == c.round[x][1])) {
-					if (c.round[x][2] == -1) {
-						if (c.tier.toLowerCase() == c.tier.toLowerCase()) {
-							tour.lose(loserid, i);
-							Rooms.rooms[i].addRaw('<b>' + winnerid + '</b> won their battle against ' + loserid + '.</b>');
-							var r = tour[i].round;
-							var cc = 0;
-							for (var y in r) {
-								if (r[y][2] && r[y][2] != -1) {
-									cc++;
+	if (this.tournament) {
+		var winnerid = toId(winner);
+		var rightplayers = this.users[this.originalPlayers[0]] && this.users[this.originalPlayers[1]];
+		//currently, rightplayers is assigned true when both players have exchanged positions
+		var loserid = this.p1.userid;
+		if (this.p1.userid == winnerid) {
+			loserid = this.p2.userid;
+		}
+		else if (this.p2.userid != winnerid) {
+			var istie = true;
+		}
+		if (Object.keys(this.users).length == 1) var timelose = true
+		for (var i in tour) {
+			var c = tour[i];
+			if (c.status == 2) {
+				for (var x in c.round) {
+					if ((this.p1.userid == c.round[x][0] && this.p2.userid == c.round[x][1]) || (this.p2.userid == c.round[x][0] && this.p1.userid == c.round[x][1])) {
+						if (c.round[x][2] == -1) {
+							if (!rightplayers && !timelose) {
+									c.round[x][2] = 0;
+									Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + this.p1.name + '</b>' + " and " + '<b>' + this.p2.name + '</b>' + " was " + '<b>' + "invalidated." + '</b>');
+							} else if (istie && !timelose) {
+								c.round[x][2] = 0;
+								Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + this.p1.name + '</b>' + " and " + '<b>' + this.p2.name + '</b>' + " ended in a " + '<b>' + "tie." + '</b>');
+							} else {
+								tour.lose(loserid, i);
+								Rooms.rooms[i].addRaw('<b>' + winnerid + '</b> won their battle against ' + loserid + '.</b>');
+								var r = tour[i].round;
+								var cc = 0;
+								for (var y in r) {
+									if (r[y][2] && r[y][2] != -1) {
+										cc++;
+									}
 								}
-							}
-							if (r.length == cc) {
-								tour.nextRound(i);
+								if (r.length == cc) {
+									tour.nextRound(i);
+								}
 							}
 						}
 					}

@@ -18,7 +18,6 @@ if (typeof spamroom == "undefined") {
 if (!Rooms.rooms.spamroom) {
 	Rooms.rooms.spamroom = new Rooms.ChatRoom("spamroom", "spamroom");
 	Rooms.rooms.spamroom.isPrivate = true;
-	tour.reset("spamroom");
 }
 
 //tells

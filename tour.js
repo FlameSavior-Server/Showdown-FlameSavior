@@ -794,8 +794,12 @@ var cmds = {
 				return this.sendReply('This battle is not weird enough for you to use this command. Bring a mod here to use it instead.');
 			}
 		}
-	}
+	},
 
+	documentation: function() {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox("Click <a href='http://elloworld.dyndns.org/documentation.html'>here</a> to be taken to the documentation for the tournament commands.");
+	}
 };
 
 for (var i in cmds) CommandParser.commands[i] = cmds[i];
@@ -874,8 +878,27 @@ Rooms.BattleRoom.prototype.win = function(winner) {
 	//tour
 	if (this.tournament) {
 		var winnerid = toId(winner);
-		var rightplayers = this.users[this.originalPlayers[0]] && this.users[this.originalPlayers[1]];
-		//currently, rightplayers is assigned true when both players have exchanged positions
+		var missingp1 = !this.battle.getPlayer(0);
+		var missingp2 = !this.battle.getPlayer(1);
+
+		if (missingp1 || missingp2 ) {
+			var rightplayers = false;
+		} else {
+			var rightplayers = ( this.p1.userid == this.battle.getPlayer(0).userid && this.p2.userid == this.battle.getPlayer(1).userid );
+		}
+		
+		if (missingp1) {
+			if (missingp2) {
+				var rightplayer = false;
+			} else {
+				var rightplayer = this.p2.userid == this.battle.getPlayer(1).userid;
+			}
+		} else if (missingp2) {
+			var rightplayer = this.p1.userid == this.battle.getPlayer(0).userid;
+		} else {
+			var rightplayer = ( this.p1.userid == this.battle.getPlayer(0).userid || this.p2.userid == this.battle.getPlayer(1).userid );
+		}
+
 		var loserid = this.p1.userid;
 		if (this.p1.userid == winnerid) {
 			loserid = this.p2.userid;
@@ -889,33 +912,53 @@ Rooms.BattleRoom.prototype.win = function(winner) {
 				for (var x in c.round) {
 					if ((this.p1.userid == c.round[x][0] && this.p2.userid == c.round[x][1]) || (this.p2.userid == c.round[x][0] && this.p1.userid == c.round[x][1])) {
 						if (c.round[x][2] == -1) {
-							if (!rightplayers && !this.inactivitylose) {
-									c.round[x][2] = undefined;
-									Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + this.p1.name + '</b>' + " and " + '<b>' + this.p2.name + '</b>' + " was " + '<b>' + "invalidated." + '</b>');
-							} else if (istie && !this.inactivitylose) {
-								c.round[x][2] = 0;
-								Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + this.p1.name + '</b>' + " and " + '<b>' + this.p2.name + '</b>' + " ended in a " + '<b>' + "tie." + '</b>');
-							} else {
-								tour.lose(loserid, i);
-								Rooms.rooms[i].addRaw('<b>' + winnerid + '</b> won their battle against ' + loserid + '.</b>');
-								var r = tour[i].round;
-								var cc = 0;
-								for (var y in r) {
-									if (r[y][2] && r[y][2] != -1) {
-										cc++;
+									if (rightplayers) {
+										if (istie) {
+											c.round[x][2] = undefined;
+											Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + this.p1.name + '</b>' + " and " + '<b>' + this.p2.name + '</b>' + " ended in a " + '<b>' + "tie." + '</b>' + " Please have another battle.");
+										} else {
+											tour.lose(loserid, i);
+											Rooms.rooms[i].addRaw('<b>' + winnerid + '</b> won their battle against ' + loserid + '.</b>');
+											var r = tour[i].round;
+											var cc = 0;
+											for (var y in r) {
+												if (r[y][2] && r[y][2] != -1) {
+													cc++;
+												}
+											}
+											if (r.length == cc) {
+												tour.nextRound(i);
+											}
+										}
+									} else if (rightplayer) {
+										if (missingp1 || missingp2) {
+											tour.lose(loserid, i);
+											Rooms.rooms[i].addRaw('<b>' + winnerid + '</b> won their battle against ' + loserid + '.</b>');
+											var r = tour[i].round;
+											var cc = 0;
+											for (var y in r) {
+												if (r[y][2] && r[y][2] != -1) {
+													cc++;
+												}
+											}
+											if (r.length == cc) {
+												tour.nextRound(i);
+											}
+										} else {
+											c.round[x][2] = undefined;
+											Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + this.p1.name + '</b>' + " and " + '<b>' + this.p2.name + '</b>' + " was " + '<b>' + "invalidated." + '</b>' + " Please have another battle.");
+										}
+									} else {
+										c.round[x][2] = undefined;
+										Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + this.p1.name + '</b>' + " and " + '<b>' + this.p2.name + '</b>' + " was " + '<b>' + "invalidated." + '</b>' + " Please have another battle.");
 									}
-								}
-								if (r.length == cc) {
-									tour.nextRound(i);
-								}
-							}
 						}
 					}
 				}
 			}
 		}
 	}
-	
+
 	if (this.rated) {
 		var winnerid = toId(winner);
 		var rated = this.rated;
@@ -1001,7 +1044,7 @@ Rooms.BattleRoom.prototype.win = function(winner) {
 	this.active = false;
 	this.update();
 };
-Rooms.BattleRoom.prototype.kickInactive = function() {
+/*Rooms.BattleRoom.prototype.kickInactive = function() {
 		clearTimeout(this.resetTimer);
 		this.resetTimer = null;
 
@@ -1058,8 +1101,7 @@ Rooms.BattleRoom.prototype.kickInactive = function() {
 		if (this.parentid) {
 			Rooms.get(this.parentid).updateRooms();
 		}
-		this.inactivitylose = true
-};
+};*/
 Rooms.BattleRoom.prototype.requestKickInactive = function(user, force) {
 	if (this.resetTimer) {
 		this.send('|inactive|The inactivity timer is already counting down.', user);

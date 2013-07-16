@@ -43,18 +43,18 @@ var commands = exports.commands = {
 	},
 
 	slap: function(target, room, user){
-		if(target !== undefined)
+		if(target !== undefined && target.trim().length != 0)
 			return '/me slaps ' + target + ' with a large trout.';
 	},
 	
 	dk: 'dropkick',
 	dropkick: function(target, room, user){
-		if(target !== undefined)
+		if(target !== undefined && target.trim().length != 0)
 			return '/me dropkicks ' + target + ' to the moon!';
 	},
 	
 	poke: function(target, room, user){
-		if(target !== undefined)
+		if(target !== undefined && target.trim().length != 0)
 			return '/me pokes ' + target + '.';
 	},
 

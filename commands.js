@@ -594,6 +594,7 @@ var commands = exports.commands = {
 		return this.sendReply('Message "' + targets[1].trim() + '" sent to ' + targetUser + '.');
 	},
 	
+	/*
 	punt: function (target, room, user) {
 		if (!target) return this.sendReply('You must select a user to punt.\n/punt [user] - punts the selected user.');
 		if (!this.canBroadcast()) return false;
@@ -606,7 +607,7 @@ var commands = exports.commands = {
 		return room.add('|c|' + targetUser.getIdentity() + '|/me is punted by ' + user.name);
 	},
 	
-	/*
+	
 	kupkup: function(target, room, user){
 		if(!user.can('root')) return this.sendReply('/kupkup - Access denied.');
 		for(var i = 0; i < 5; i++)

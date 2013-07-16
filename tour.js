@@ -2,7 +2,7 @@
  * Functions
  *********************************************************/
 exports.tour = function(t) {
-  if (typeof t != "undefined") var tour = t; else var tour = new Object();
+	if (typeof t != "undefined") var tour = t; else var tour = new Object();
 	var tourStuff = {
 		tiers: new Array(),
 		timerLoop: function() {
@@ -386,6 +386,9 @@ var cmds = {
 		Rooms.rooms[rid].addRaw('<hr /><h2><font color="green">' + sanitize(user.name) + ' has started a ' + Tools.data.Formats[tempTourTier].name + ' Tournament.</font> <font color="red">/j</font> <font color="green">to join!</font></h2><b><font color="blueviolet">PLAYERS:</font></b> ' + targets[1] + '<br /><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tempTourTier].name + '<hr />');
 		if (tour.timers[rid]) {
 			Rooms.rooms[rid].addRaw('<i>The tournament will begin in ' + tour.timers[rid].time + ' minute(s).<i>');
+		}
+		if (rid != orid) {
+			return this.sendReply('|raw|Your tournament was started in this room: <button name="joinRoom" value="' + rid + '">Join' + rid + '.</button>');
 		}
 	},
 

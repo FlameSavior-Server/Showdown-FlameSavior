@@ -50,7 +50,7 @@ var commands = exports.commands = {
 	dk: 'dropkick',
 	dropkick: function(target, room, user){
 		if(target != undefined)
-			return '/me dropkicks' + target + ' to the moon!';
+			return '/me dropkicks ' + target + ' to the moon!';
 	},
 
 	me: function(target, room, user, connection) {

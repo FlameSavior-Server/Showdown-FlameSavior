@@ -43,18 +43,27 @@ var commands = exports.commands = {
 	},
 
 	slap: function(target, room, user){
-		if(target !== undefined && target.trim().length != 0)
+		canTalk = this.canTalk(target);
+		if (!canTalk || (canTalk && !target)) return;
 			return '/me slaps ' + target + ' with a large trout.';
+	},
+	
+	punt: function(target, room, user){
+		canTalk = this.canTalk(target);
+		if (!canTalk || (canTalk && !target)) return;
+			return '/me punts ' + target + ' to the moon!';
 	},
 	
 	dk: 'dropkick',
 	dropkick: function(target, room, user){
-		if(target !== undefined && target.trim().length != 0)
-			return '/me dropkicks ' + target + ' to the moon!';
+		canTalk = this.canTalk(target);
+		if (!canTalk || (canTalk && !target)) return;
+			return '/me dropkicks ' + target + ' across the Pokémon Stadium!';
 	},
 	
 	poke: function(target, room, user){
-		if(target !== undefined && target.trim().length != 0)
+		canTalk = this.canTalk(target);
+		if (!canTalk || (canTalk && !target)) return;
 			return '/me pokes ' + target + '.';
 	},
 

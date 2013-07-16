@@ -388,7 +388,7 @@ var cmds = {
 			Rooms.rooms[rid].addRaw('<i>The tournament will begin in ' + tour.timers[rid].time + ' minute(s).<i>');
 		}
 		if (rid != orid) {
-			return this.sendReply('|raw|Your tournament was started in this room: <button name="joinRoom" value="' + rid + '">Join' + rid + '.</button>');
+			return this.sendReply('|raw|Your tournament was started in this room: <button name="joinRoom" value="' + rid + '">Join ' + rid + '.</button>');
 		}
 	},
 

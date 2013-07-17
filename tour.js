@@ -2,7 +2,7 @@
  * Functions
  *********************************************************/
 exports.tour = function(t) {
-	if (typeof t != "undefined") var tour = t; else var tour = new Object();
+  if (typeof t != "undefined") var tour = t; else var tour = new Object();
 	var tourStuff = {
 		tiers: new Array(),
 		timerLoop: function() {
@@ -21,9 +21,7 @@ exports.tour = function(t) {
 						}
 						Rooms.rooms[i].addRaw("<i>The tournament will begin in " + difference + " seconds.</i>");
 					}
-					if (percent == 25 || percent == 50 || percent == 75) {
-						sendIt();
-					}
+					if (percent == 25 || percent == 50 || percent == 75) sendIt();
 					if (percent >= 100) {
 						if (tour[i].players.length < 3) {
 							tour.reset(i);
@@ -52,7 +50,8 @@ exports.tour = function(t) {
 				losers: new Array(),
 				round: new Array(),
 				history: new Array(),
-				byes: new Array()
+				byes: new Array(),
+				battles: new Object()
 			};
 		},
 		shuffle: function(list) {
@@ -84,9 +83,7 @@ exports.tour = function(t) {
 					break;
 				}
 			}
-			if (init) {
-				return false;
-			}
+			if (init) return false;
 			players.push(uid);
 			return true;
 		},
@@ -101,9 +98,7 @@ exports.tour = function(t) {
 					break;
 				}
 			}
-			if (!init) {
-				return false;
-			}
+			if (!init) return false;
 			players.splice(key, 1);
 			return true;
 		},
@@ -270,9 +265,7 @@ exports.tour = function(t) {
 						pNorm.splice(i, 1);
 					}
 				}
-				for (var i in pNorm) {
-					p.push(pNorm[i]);
-				}
+				for (var i in pNorm) p.push(pNorm[i]);
 				for (var i = 0; p.length / 2 > i; i++) {
 					var p1 = i * 2;
 					var p2 = p1 + 1;
@@ -290,7 +283,7 @@ exports.tour = function(t) {
 			}
 		},
 	};
-	
+
 	for (var i in tourStuff) tour[i] = tourStuff[i];
 	for (var i in Tools.data.Formats) {tour.tiers.push(i);}
 	if (typeof tour.timers == "undefined") tour.timers = new Object();
@@ -324,9 +317,12 @@ function clean(string) {
  *********************************************************/
 var cmds = {
 	tour: function(target, room, user, connection) {
-		if (!user.can('broadcast')) {
-			return this.parse('/tours');
+		if (target == "update" && this.can('hotpatch')) {
+			CommandParser.uncacheTree('./tour.js');
+			tour = require('./tour.js').tour(tour);
+			return this.sendReply('Tournament scripts were updated.');
 		}
+		if (!user.can('broadcast') && room.auth[user.userid]!='#') return this.parse('/tours');
 		var rid = room.id;
 		var orid = room.id;
 		var tourrooms = new Object();
@@ -337,13 +333,10 @@ var cmds = {
 			if (tour[rid].status > 0 && tourrooms["tournaments2"]) rid = "tournaments2";
 			if (tour[rid].status > 0) rid = orid;
 		}
-		if (tour[rid].status != 0) {
-			return this.sendReply('There is already a tournament running, or there is one in a signup phase.');
-		}
-		if (!target) {
-			return this.sendReply('Proper syntax for this command: /tour tier, size');
-		}
+		if (tour[rid].status != 0) return this.sendReply('There is already a tournament running, or there is one in a signup phase.');
+		if (!target) return this.sendReply('Proper syntax for this command: /tour tier, size');
 		var targets = tour.splint(target);
+		if (targets.length != 2) return this.sendReply('Proper syntax for this command: /tour tier, size');
 		var tierMatch = false;
 		var tempTourTier = '';
 		for (var i = 0; i < tour.tiers.length; i++) {
@@ -352,14 +345,10 @@ var cmds = {
 				tempTourTier = tour.tiers[i];
 			}
 		}
-		if (!tierMatch) {
-			return this.sendReply('Please use one of the following tiers: ' + tour.tiers.join(','));
-		}
+		if (!tierMatch) return this.sendReply('Please use one of the following tiers: ' + tour.tiers.join(','));
 		if (targets[1].split('minut').length - 1 > 0) {
 			targets[1] = parseInt(targets[1]);
-			if (isNaN(targets[1]) || !targets[1]) {
-				return this.sendReply('/tour tier, NUMBER minutes');
-			}
+			if (isNaN(targets[1]) || !targets[1]) return this.sendReply('/tour tier, NUMBER minutes');
 			targets[1] = Math.ceil(targets[1]);
 			tour.timers[rid] = {
 				time: targets[1],
@@ -370,12 +359,8 @@ var cmds = {
 		else {
 			targets[1] = parseInt(targets[1]);
 		}
-		if (isNaN(targets[1])) {
-			return this.sendReply('Proper syntax for this command: /tour tier, size');
-		}
-		if (targets[1] < 3) {
-			return this.sendReply('Tournaments must contain 3 or more people.');
-		}
+		if (isNaN(targets[1])) return this.sendReply('Proper syntax for this command: /tour tier, size');
+		if (targets[1] < 3) return this.sendReply('Tournaments must contain 3 or more people.');
 
 		tour.reset(rid);
 		tour[rid].tier = tempTourTier;
@@ -384,70 +369,40 @@ var cmds = {
 		tour[rid].players = new Array();	
 
 		Rooms.rooms[rid].addRaw('<hr /><h2><font color="green">' + sanitize(user.name) + ' has started a ' + Tools.data.Formats[tempTourTier].name + ' Tournament.</font> <font color="red">/j</font> <font color="green">to join!</font></h2><b><font color="blueviolet">PLAYERS:</font></b> ' + targets[1] + '<br /><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tempTourTier].name + '<hr />');
-		if (tour.timers[rid]) {
-			Rooms.rooms[rid].addRaw('<i>The tournament will begin in ' + tour.timers[rid].time + ' minute(s).<i>');
-		}
-		if (rid != orid) {
-			return this.sendReply('|raw|Your tournament was started in this room: <button name="joinRoom" value="' + rid + '">Join ' + rid + '.</button>');
-		}
+		if (tour.timers[rid]) Rooms.rooms[rid].addRaw('<i>The tournament will begin in ' + tour.timers[rid].time + ' minute(s).<i>');
+		if (rid != orid) return this.sendReply('|raw|Your tournament was started in this room: <button name="joinRoom" value="' + rid + '">Join ' + rid + '.</button>');	
 	},
 
 	endtour: function(target, room, user, connection) {
-		if (!user.can('broadcast')) {
-			return this.sendReply('You do not have enough authority to use this command.');
-		}
-		if (tour[room.id] == undefined || tour[room.id].status == 0) {
-			return this.sendReply('There is no active tournament.');
-		}
+		if (!user.can('broadcast') && room.auth[user.userid]!='#') return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id] == undefined || tour[room.id].status == 0) return this.sendReply('There is no active tournament.');
 		tour[room.id].status = 0;
 		delete tour.timers[room.id];
 		room.addRaw('<h2><b>' + user.name + '</b> has ended the tournament.</h2>');
 	},
 
 	toursize: function(target, room, user, connection) {
-		if (!user.can('broadcast')) {
-			return this.sendReply('You do not have enough authority to use this command.');
-		}
-		if(tour[room.id] == undefined)
-			return this.sendReply('There is no active tournament in this room.');
-
-		if (tour[room.id].status > 1) {
-			return this.sendReply('The tournament size cannot be changed now!');
-		}
-		if (!target) {
-			return this.sendReply('Proper syntax for this command: /toursize size');
-		}
+		if (!user.can('broadcast') && room.auth[user.userid]!='#') return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id] == undefined) return this.sendReply('There is no active tournament in this room.');
+		if (tour[room.id].status > 1) return this.sendReply('The tournament size cannot be changed now!');
+		if (!target) return this.sendReply('Proper syntax for this command: /toursize size');
 		target = parseInt(target);
-		if (isNaN(target)) {
-			return this.sendReply('Proper syntax for this command: /tour size');
-		}
-		if (target < 3) {
-			return this.sendReply('A tournament must have at least 3 people in it.');
-		}
-		if (target < tour[room.id].players.length) {
-			return this.sendReply('Target size must be greater than or equal to the amount of players in the tournament.');
-		}
+		if (isNaN(target)) return this.sendReply('Proper syntax for this command: /tour size');
+		if (target < 3) return this.sendReply('A tournament must have at least 3 people in it.');
+		if (target < tour[room.id].players.length) return this.sendReply('Target size must be greater than or equal to the amount of players in the tournament.');
 		tour[room.id].size = target;
 		room.addRaw('<b>' + user.name + '</b> has changed the tournament size to: ' + target + '. <b><i>' + (target - tour[room.id].players.length) + ' slots remaining.</b></i>');
-		if (target == tour[room.id].players.length) {
-			tour.start(room.id);
-		}
+		if (target == tour[room.id].players.length) tour.start(room.id);
 	},
 
 	jt: 'j',
 	jointour: 'j',
 	j: function(target, room, user, connection) {
-		if (tour[room.id] == undefined || tour[room.id].status == 0) {
-			return this.sendReply('There is no active tournament to join.');
-		}
-		if (tour[room.id].status == 2) {
-			return this.sendReply('Signups for the current tournament are over.');
-		}
+		if (tour[room.id] == undefined || tour[room.id].status == 0) return this.sendReply('There is no active tournament to join.');
+		if (tour[room.id].status == 2) return this.sendReply('Signups for the current tournament are over.');
 		if (tour.join(user.userid, room.id)) {
 			room.addRaw('<b>' + user.name + '</b> has joined the tournament. <b><i>' + (tour[room.id].size - tour[room.id].players.length) + ' slots remaining.</b></i>');
-			if (tour[room.id].size == tour[room.id].players.length) {
-				tour.start(room.id);
-			}
+			if (tour[room.id].size == tour[room.id].players.length) tour.start(room.id);
 		} else {
 			return this.sendReply('You could not enter the tournament. You may already be in the tournament. Type /l if you want to leave the tournament.');
 		}
@@ -455,15 +410,9 @@ var cmds = {
 
 	forcejoin: 'fj',
 	fj: function(target, room, user, connection) {
-		if (!user.can('broadcast')) {
-			return this.sendReply('You do not have enough authority to use this command.');
-		}
-		if (tour[room.id] == undefined || tour[room.id].status == 0 || tour[room.id].status == 2) {
-			return this.sendReply('There is no tournament in a sign-up phase.');
-		}
-		if (!target) {
-			return this.sendReply('Please specify a user who you\'d like to participate.');
-		}
+		if (!user.can('broadcast') && room.auth[user.userid]!='#') return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id] == undefined || tour[room.id].status == 0 || tour[room.id].status == 2) return this.sendReply('There is no tournament in a sign-up phase.');
+		if (!target) return this.sendReply('Please specify a user who you\'d like to participate.');
 		var targetUser = Users.get(target);
 		if (targetUser) {
 			target = targetUser.userid;
@@ -473,9 +422,7 @@ var cmds = {
 		}
 		if (tour.join(target, room.id)) {
 			room.addRaw(user.name + ' has forced <b>' + target + '</b> to join the tournament. <b><i>' + (tour[room.id].size - tour[room.id].players.length) + ' slots remaining.</b></i>');
-			if (tour[room.id].size == tour[room.id].players.length) {
-				tour.start(room.id);
-			}
+			if (tour[room.id].size == tour[room.id].players.length) tour.start(room.id);
 		}
 		else {
 			return this.sendReply('The user that you specified is already in the tournament.');
@@ -485,9 +432,7 @@ var cmds = {
 	lt: 'l',
 	leavetour: 'l',
 	l: function(target, room, user, connection) {
-		if (tour[room.id] == undefined || tour[room.id].status == 0) {
-			return this.sendReply('There is no active tournament to leave.');
-		}
+		if (tour[room.id] == undefined || tour[room.id].status == 0) return this.sendReply('There is no active tournament to leave.');
 		var spotRemover = false;
 		if (tour[room.id].status == 1) {
 			if (tour.leave(user.userid, room.id)) {
@@ -504,36 +449,22 @@ var cmds = {
 				var r = tour[room.id].round;
 				var c = 0;
 				for (var i in r) {
-					if (r[i][2] && r[i][2] != -1) {
-						c++;
-					}
+					if (r[i][2] && r[i][2] != -1) c++;
 				}
-				if (r.length == c) {
-					tour.nextRound(room.id);
-				}
+				if (r.length == c) tour.nextRound(room.id);
 			}
 			else {
-				if (dqopp == 1) {
-					return this.sendReply("You've already done your match. Wait till next round to leave.");
-				}
-				if (dqopp == 0 || dqopp == -1) {
-					return this.sendReply("You're not in the tournament or your opponent is unavailable.");
-				}
+				if (dqopp == 1) return this.sendReply("You've already done your match. Wait till next round to leave.");
+				if (dqopp == 0 || dqopp == -1) return this.sendReply("You're not in the tournament or your opponent is unavailable.");
 			}
 		}
 	},
 
 	forceleave: 'fl',
 	fl: function(target, room, user, connection) {
-		if (!user.can('broadcast')) {
-			return this.sendReply('You do not have enough authority to use this command.');
-		}
-		if (tour[room.id] == undefined || tour[room.id].status == 0 || tour[room.id].status == 2) {
-			return this.sendReply('There is no tournament in a sign-up phase.  Use /dq username if you wish to remove someone in an active tournament.');
-		}
-		if (!target) {
-			return this.sendReply('Please specify a user to kick from this signup.');
-		}
+		if (!user.can('broadcast') && room.auth[user.userid]!='#') return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id] == undefined || tour[room.id].status == 0 || tour[room.id].status == 2) return this.sendReply('There is no tournament in a sign-up phase.  Use /dq username if you wish to remove someone in an active tournament.');
+		if (!target) return this.sendReply('Please specify a user to kick from this signup.');
 		var targetUser = Users.get(target);
 		if (targetUser) {
 			target = targetUser.userid;
@@ -550,37 +481,25 @@ var cmds = {
 	},
 
 	remind: function(target, room, user, connection) {
-		if (!user.can('broadcast')) {
-			return this.sendReply('You do not have enough authority to use this command.');
-		}
-		if(tour[room.id] == undefined)
-			return this.sendReply('There is no active tournament in this room.');
-
-		if (tour[room.id].status != 1) {
-			return this.sendReply('There is no tournament in its sign up phase.');
-		}
+		if (!user.can('broadcast') && room.auth[user.userid]!='#') return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id] == undefined) return this.sendReply('There is no active tournament in this room.');
+		if (tour[room.id].status != 1) return this.sendReply('There is no tournament in its sign up phase.');
 		room.addRaw('<hr /><h2><font color="green">Please sign up for the ' + Tools.data.Formats[tour[room.id].tier].name + ' Tournament.</font> <font color="red">/j</font> <font color="green">to join!</font></h2><b><font color="blueviolet">PLAYERS:</font></b> ' + tour[room.id].size + '<br /><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tour[room.id].tier].name + '<hr />');
 	},
 
 	viewround: 'vr',
 	vr: function(target, room, user, connection) {
 		if (!this.canBroadcast()) return;
-		if(tour[room.id] == undefined)
-			return this.sendReply('There is no active tournament in this room.');
-
-		if (tour[room.id].status < 2) {
-				return this.sendReply('There is no tournament out of its signup phase.');
-		}
-		var html = '<hr /><h3><font color="green">Round '+ tour[room.id].roundNum + '!</font></h3><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tour[room.id].tier].name + "<hr /><center><small><font color=red>Red</font> = lost, <font color=green>Green</font> = won, <b>Bold</b> = battling</small><center>";
+		if (tour[room.id] == undefined) return this.sendReply('There is no active tournament in this room.');
+		if (tour[room.id].status < 2) return this.sendReply('There is no tournament out of its signup phase.');
+		var html = '<hr /><h3><font color="green">Round '+ tour[room.id].roundNum + '!</font></h3><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tour[room.id].tier].name + "<hr /><center><small><font color=red>Red</font> = lost, <font color=green>Green</font> = won, <a class='ilink'><b>URL</b></a> = battling</small><center>";
 		var r = tour[room.id].round;
 		var firstMatch = false;
 		for (var i in r) {
 			if (!r[i][1]) {
 				//bye
 				var byer = r[i][0];
-				if (Users.get(r[i][0])) {
-					byer = Users.get(r[i][0]).name;
-				}
+				if (Users.get(r[i][0])) byer = Users.get(r[i][0]).name;
 				html += "<font color=\"red\">" + clean(byer) + " has received a bye.</font><br />";
 			}
 			else {
@@ -604,7 +523,9 @@ var cmds = {
 					if (p1n.split('Guest ').length - 1 > 0) p1n = r[i][0];
 					if (p2n.split('Guest ').length - 1 > 0) p2n = r[i][1];
 					var tabla = "";if (!firstMatch) {var tabla = "</center><table align=center cellpadding=0 cellspacing=0>";firstMatch = true;}
-					html += tabla + "<tr><td align=right><b>" + clean(p1n) + "</b></td><td><b>&nbsp;VS&nbsp;</b></td><td><b>" + clean(p2n) + "</b></td></tr>";
+					var tourbattle = tour[room.id].battles[i];
+					function link(txt) {return "<a href='/" + tourbattle + "' room='" + tourbattle + "' class='ilink'>" + txt + "</a>";}
+					html += tabla + "<tr><td align=right><b>" + link(clean(p1n)) + "</b></td><td><b>&nbsp;" + link("VS") + "&nbsp;</b></td><td><b>" + link(clean(p2n)) + "</b></td></tr>";
 				}
 				else {
 					//match completed
@@ -630,18 +551,10 @@ var cmds = {
 
 	disqualify: 'dq',
 	dq: function(target, room, user, connection) {
-		if (!user.can('broadcast')) {
-			return this.sendReply('You do not have enough authority to use this command.');
-		}
-		if (!target) {
-			return this.sendReply('Proper syntax for this command is: /dq username');
-		}
-		if(tour[room.id] == undefined){
-			return this.sendReply('There is no active tournament in this room.');
-		}
-		if (tour[room.id].status < 2) {
-			return this.sendReply('There is no tournament out of its sign up phase.');
-		}
+		if (!user.can('broadcast') && room.auth[user.userid]!='#') return this.sendReply('You do not have enough authority to use this command.');
+		if (!target) return this.sendReply('Proper syntax for this command is: /dq username');
+		if (tour[room.id] == undefined) return this.sendReply('There is no active tournament in this room.');
+		if (tour[room.id].status < 2) return this.sendReply('There is no tournament out of its sign up phase.');
 		var targetUser = Users.get(target);
 		if (!targetUser) {
 			var dqGuy = sanitize(target.toLowerCase());
@@ -663,30 +576,18 @@ var cmds = {
 			var r = tour[room.id].round;
 			var c = 0;
 			for (var i in r) {
-				if (r[i][2] && r[i][2] != -1) {
-					c++;
-				}
+				if (r[i][2] && r[i][2] != -1) c++;
 			}
-			if (r.length == c) {
-				tour.nextRound(room.id);
-			}
+			if (r.length == c) tour.nextRound(room.id);
 		}
 	},
 
 	replace: function(target, room, user, connection) {
-		if (!user.can('broadcast')) {
-			return this.sendReply('You do not have enough authority to use this command.');
-		}
-		if (tour[room.id] == undefined || tour[room.id].status != 2) {
-			return this.sendReply('The tournament is currently in a sign-up phase or is not active, and replacing users only works mid-tournament.');
-		}
-		if (!target) {
-			return this.sendReply('Proper syntax for this command is: /replace user1, user2.  User 2 will replace User 1 in the current tournament.');
-		}
+		if (!user.can('broadcast') && room.auth[user.userid]!='#') return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id] == undefined || tour[room.id].status != 2) return this.sendReply('The tournament is currently in a sign-up phase or is not active, and replacing users only works mid-tournament.');
+		if (!target) return this.sendReply('Proper syntax for this command is: /replace user1, user2.  User 2 will replace User 1 in the current tournament.');
 		var t = tour.splint(target);
-		if (!t[1]) {
-			return this.sendReply('Proper syntax for this command is: /replace user1, user2.  User 2 will replace User 1 in the current tournament.');
-		}
+		if (!t[1]) return this.sendReply('Proper syntax for this command is: /replace user1, user2.  User 2 will replace User 1 in the current tournament.');
 		var userOne = Users.get(t[0]); 
 		var userTwo = Users.get(t[1]);
 		if (!userTwo) {
@@ -715,38 +616,26 @@ var cmds = {
 				break;
 			}
 		}
-		if (!init1) {
-			return this.sendReply(t[0]  + ' cannot be replaced by ' + t[1] + " because they are not in the tournament.");
-		}
-		if (init2) {
-			return this.sendReply(t[1] + ' cannot replace ' + t[0] + ' because they are already in the tournament.');
-		}
+		if (!init1) return this.sendReply(t[0]  + ' cannot be replaced by ' + t[1] + " because they are not in the tournament.");
+		if (init2) return this.sendReply(t[1] + ' cannot replace ' + t[0] + ' because they are already in the tournament.');
 		var outof = ["players", "winners", "losers", "round"];
 		for (var x in outof) {
 			for (var y in rt[outof[x]]) {
 				var c = rt[outof[x]][y];
 				if (outof[x] == "round") {
-					if (c[0] == t[0]) {
-						c[0] = t[1];
-					}
-					if (c[1] == t[0]) {
-						c[1] = t[1];
-					}
-					if (c[2] == t[0]) {
-						c[2] = t[1];
-					}
+					if (c[0] == t[0]) c[0] = t[1];
+					if (c[1] == t[0]) c[1] = t[1];
+					if (c[2] == t[0]) c[2] = t[1];
 				}
 				else {
-					if (c == t[0]) {
-						rt[outof[x]][y] = t[1];
-					}
+					if (c == t[0]) rt[outof[x]][y] = t[1];
 				}
 			}
 		}
 		rt.history.push(t[0] + "->" + t[1]);
 		room.addRaw('<b>' + t[0] +'</b> has left the tournament and is replaced by <b>' + t[1] + '</b>.');
 	},
-	
+
 	tours: function(target, room, user, connection) {
 		if (!this.canBroadcast()) return;
 		var oghtml = "<hr /><h2>Tournaments In Their Signup Phase:</h2>";
@@ -760,9 +649,9 @@ var cmds = {
 		if (html == oghtml) html += "There are currently no tournaments in their signup phase.";
 		this.sendReply('|raw|' + html + "<hr />");
 	},
-	
+
 	invalidate: function(target,room,user) {
-		if (!this.can('broadcast')) return this.sendReply('You do not have enough authority to use this command.');
+		if (!this.can('broadcast') ||  room.auth[user.userid]!='#') return this.sendReply('You do not have enough authority to use this command.');
 		if (!room.decision) return this.sendReply('You can only do this in battle rooms.');
 		if (!room.tournament) return this.sendReply('This is not an official tournament battle.');
 		var rightplayers = room.users[room.originalPlayers[0]] && room.users[room.originalPlayers[1]];
@@ -776,7 +665,7 @@ var cmds = {
 				for (var x in c.round) {
 					if ((room.p1.userid == c.round[x][0] && room.p2.userid == c.round[x][1]) || (room.p2.userid == c.round[x][0] && room.p1.userid == c.round[x][1])) {
 						if (c.round[x][2] == -1) {
-							if ((room.tryinvalid && this.can('ban')) || !rightplayers) {
+							if ((room.tryinvalid && ( room.auth[user.userid]=='#' || this.can('ban')) ) || !rightplayers) {
 									c.round[x][2] = undefined;
 									Rooms.rooms[i].addRaw("The tournament match between " + '<b>' + room.p1.name + '</b>' + " and " + '<b>' + room.p2.name + '</b>' + " was " + '<b>' + "invalidated." + '</b>');
 									room.tryinvalid = false;
@@ -791,7 +680,7 @@ var cmds = {
 		}
 		if (!success) {
 			room.tryinvalid = true;
-			if (this.can('ban')) {
+			if (this.can('ban') || room.auth[user.userid]=='#') {
 				return this.sendReply('Are you sure you want to invalidate this battle? If so, repeat the command.');
 			} else {
 				return this.sendReply('This battle is not weird enough for you to use this command. Bring a mod here to use it instead.');
@@ -867,8 +756,9 @@ Rooms.global.startBattle = function(p1, p2, format, rated, p1team, p2team) {
 						if (!c.round[x][2] && c.round[x][2] != -1) {
 							if (format == c.tier.toLowerCase()) {
 								newRoom.tournament = true;
+								c.battles[x] = "battle-" + formaturlid + "-" + battleid;
 								c.round[x][2] = -1;
-								Rooms.rooms[i].addRaw("<a href=\"/battle-" + formaturlid + "-" + battleid + "\" class=\"ilink\"><b>Tournament battle between " + p1.name + " and " + p2.name + " started.</b></a>");
+								Rooms.rooms[i].addRaw("<a href=\"/battle-" + c.battles[x] + "\" class=\"ilink\"><b>Tournament battle between " + p1.name + " and " + p2.name + " started.</b></a>");
 							}
 						}
 					}
@@ -889,7 +779,7 @@ Rooms.BattleRoom.prototype.win = function(winner) {
 		} else {
 			var rightplayers = ( this.p1.userid == this.battle.getPlayer(0).userid && this.p2.userid == this.battle.getPlayer(1).userid );
 		}
-		
+
 		if (missingp1) {
 			if (missingp2) {
 				var rightplayer = false;
@@ -1047,64 +937,7 @@ Rooms.BattleRoom.prototype.win = function(winner) {
 	this.active = false;
 	this.update();
 };
-/*Rooms.BattleRoom.prototype.kickInactive = function() {
-		clearTimeout(this.resetTimer);
-		this.resetTimer = null;
 
-		if (!this.battle || this.battle.ended || !this.battle.started) return false;
-
-		var inactiveSide = this.getInactiveSide();
-
-		var ticksLeft = [0, 0];
-		if (inactiveSide != 1) {
-			// side 0 is inactive
-			this.sideTurnTicks[0]--;
-			this.sideTicksLeft[0]--;
-		}
-		if (inactiveSide != 0) {
-			// side 1 is inactive
-			this.sideTurnTicks[1]--;
-			this.sideTicksLeft[1]--;
-		}
-		ticksLeft[0] = Math.min(this.sideTurnTicks[0], this.sideTicksLeft[0]);
-		ticksLeft[1] = Math.min(this.sideTurnTicks[1], this.sideTicksLeft[1]);
-
-		if (ticksLeft[0] && ticksLeft[1]) {
-			if (inactiveSide == 0 || inactiveSide == 1) {
-				// one side is inactive
-				var inactiveTicksLeft = ticksLeft[inactiveSide];
-				var inactiveUser = this.battle.getPlayer(inactiveSide);
-				if (inactiveTicksLeft % 3 == 0 || inactiveTicksLeft <= 4) {
-					this.send('|inactive|'+(inactiveUser?inactiveUser.name:'Player '+(inactiveSide+1))+' has '+(inactiveTicksLeft*10)+' seconds left.');
-				}
-			} else {
-				// both sides are inactive
-				var inactiveUser0 = this.battle.getPlayer(0);
-				if (ticksLeft[0] % 3 == 0 || ticksLeft[0] <= 4) {
-					this.send('|inactive|'+(inactiveUser0?inactiveUser0.name:'Player 1')+' has '+(ticksLeft[0]*10)+' seconds left.', inactiveUser0);
-				}
-
-				var inactiveUser1 = this.battle.getPlayer(1);
-				if (ticksLeft[1] % 3 == 0 || ticksLeft[1] <= 4) {
-					this.send('|inactive|'+(inactiveUser1?inactiveUser1.name:'Player 2')+' has '+(ticksLeft[1]*10)+' seconds left.', inactiveUser1);
-				}
-			}
-			this.resetTimer = setTimeout(this.kickInactive.bind(this), 10*1000);
-			return;
-		}
-
-		if (inactiveSide < 0) {
-			if (ticksLeft[0]) inactiveSide = 1;
-			else if (ticksLeft[1]) inactiveSide = 0;
-		}
-
-		this.forfeit(this.battle.getPlayer(inactiveSide),' lost due to inactivity.', inactiveSide);
-		this.resetUser = '';
-
-		if (this.parentid) {
-			Rooms.get(this.parentid).updateRooms();
-		}
-};*/
 Rooms.BattleRoom.prototype.requestKickInactive = function(user, force) {
 	if (this.resetTimer) {
 		this.send('|inactive|The inactivity timer is already counting down.', user);

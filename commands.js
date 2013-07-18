@@ -43,28 +43,29 @@ var commands = exports.commands = {
 	},
 
 	slap: function(target, room, user){
-		canTalk = this.canTalk(target);
-		if (!canTalk || (canTalk && !target)) return;
-			return '/me slaps ' + target + ' with a large trout.';
+		if(!target) return this.sendReply('/slap needs a target.');
+		return this.parse('/me slaps ' + target + ' with a large trout.');
 	},
 	
 	punt: function(target, room, user){
-		canTalk = this.canTalk(target);
-		if (!canTalk || (canTalk && !target)) return;
-			return '/me punts ' + target + ' to the moon!';
+		if(!target) return this.sendReply('/punt needs a target.');
+		return this.parse('/me punts ' + target + ' to the moon!');
+	},
+	
+	crai: 'cry',
+	cry: function(target, room, user){
+		return this.parse('/me starts tearbending dramatically.');
 	},
 	
 	dk: 'dropkick',
 	dropkick: function(target, room, user){
-		canTalk = this.canTalk(target);
-		if (!canTalk || (canTalk && !target)) return;
-			return '/me dropkicks ' + target + ' across the Pokémon Stadium!';
+		if(!target) return this.sendReply('/dropkick needs a target.');
+		return this.parse('/me dropkicks ' + target + ' across the Pokémon Stadium!');
 	},
 	
 	poke: function(target, room, user){
-		canTalk = this.canTalk(target);
-		if (!canTalk || (canTalk && !target)) return;
-			return '/me pokes ' + target + '.';
+		if(!target) return this.sendReply('/poke needs a target.');
+		return this.parse('/me pokes ' + target + '.');
 	},
 
 	me: function(target, room, user, connection) {

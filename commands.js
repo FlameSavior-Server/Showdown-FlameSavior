@@ -1828,7 +1828,7 @@ function getRandMessage(user){
 			break;
 		case 25: message = message + user.name + ' pissed off a Gyarados!';
 			break;
-		case 26: message = message + user.name + ' was taken away in Neku\'s black van!';
+		case 26: message = message + user.name + ' screamed "BSHAX IMO"!';
 			break;
 		case 27: message = message + user.name + ' was actually a 12 year and was banned for COPPA.';
 			break;
@@ -1841,6 +1841,8 @@ function getRandMessage(user){
 		case 31: message = message + user.name + ' was knocked out cold by Fallacies!';
 			break;
 		case 32: message = message + user.name + ' died making love to an Excadrill!';
+			break;
+		case 33: message = message + user.name + ' was shoved in a Blendtec Blender!';
 			break;
 		default: message = message + user.name + ' was Pan Hammered!';
 	};

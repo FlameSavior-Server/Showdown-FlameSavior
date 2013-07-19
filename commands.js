@@ -1842,7 +1842,9 @@ function getRandMessage(user){
 			break;
 		case 32: message = message + user.name + ' died making love to an Excadrill!';
 			break;
-		case 33: message = message + user.name + ' was shoved in a Blendtec Blender!';
+		case 33: message = message + user.name + ' was shoved in a Blendtec Blender with iPad!';
+			break;
+		case 34: message = message + user.name + ' was BLEGHED on by LightBlue!'; 
 			break;
 		default: message = message + user.name + ' was Pan Hammered!';
 	};

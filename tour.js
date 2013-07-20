@@ -775,26 +775,6 @@ var cmds = {
 		}
 	},
 
-	battlesended: function(target, room, user) {
-		if (!tour[room.id].status) return this.sendReply('There is no active tournament in this room.');
-		if (tour[room.id].battlesended.length == 0) return this.sendReply('No finished tournament battle is registered.');
-		var msg = new Array();
-		for (var i=0; i<tour[room.id].battlesended.length; i++) {
-			msg[i] = "<a href='/" + tour[room.id].battlesended[i] + "' class='ilink'>" + tour[room.id].battlesended[i].match(/\d+$/) + "</a>";
-		}
-		return this.sendReplyBox(msg.toString());
-	},
-
-	battlesinvtie: function(target, room, user) {
-		if (!tour[room.id].status) return this.sendReply('There is no active tournament in this room.');
-		if (tour[room.id].battlesinvtie.length == 0) return this.sendReply('No battle in this tournament has ended in a tie or been invalidated.');
-		var msg = new Array();
-		for (var i=0; i<tour[room.id].battlesinvtie.length; i++) {
-			msg[i] = "<a href='/" + tour[room.id].battlesinvtie[i] + "' class='ilink'>" + tour[room.id].battlesinvtie[i].match(/\d+$/) + "</a>";
-		}
-		return this.sendReplyBox(msg.toString());
-	},
-
 	documentation: function() {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("Click <a href='http://elloworld.dyndns.org/documentation.html'>here</a> to be taken to the documentation for the tournament commands.");

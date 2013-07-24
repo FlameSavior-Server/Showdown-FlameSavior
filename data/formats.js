@@ -615,6 +615,36 @@ exports.BattleFormats = {
 		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview', 'Swalot Clause'],
 		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
 	},
+	cottoneeworld: {
+		name: "Cottonee World",
+		section: "Singles",
+
+		effectType: 'Format',
+		maxLevel: 1,		
+		challengeDefault: true,
+		rated: true,
+		challengeShow: true,
+		searchShow: true,
+		isTeambuilderFormat: true,
+		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview', 'Swalot Clause'],
+		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
+	},
+	pu: {
+		name: "PU",
+		section: "Other Metagames",
+		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview', 'Cottonee Clause'],
+		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
+	},
+	metrenomeland: {
+		name: "Metrenome",
+		section: "Singles",
+
+		effectType: 'Format',
+		challengeShow: true,
+		isTeambuilderFormat: true,
+		ruleset: ['Pokemon', 'Evasion Abilities Clause', 'Team Preview', 'Metrenome Clause'],
+		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
+	},	
 	pu: {
 		name: "PU",
 		section: "Other Metagames",
@@ -640,7 +670,31 @@ exports.BattleFormats = {
                                 return [set.species+" is banned because it's not a swalot you hoe."];
                         }
                 }
+        },	
+	cottoneeclause: {
+                effectType: 'Rule',
+                onStart: function() {
+			this.add('rule', 'Cottnee Clause: Cottonee are allowed.');
+		},
+                validateSet: function(set) {
+                        var template = this.getTemplate(set.species);
+                        if (set.species !== 'Cottonee') {
+                                return [set.species+" is banned because it's not a cottonee you hoe."];
+                        }
+                }
         },
+	metronomeclause: {
+                effectType: 'Rule',
+                onStart: function() {
+			this.add('rule', 'Cottnee Clause: Cottonee are allowed.');
+		},
+                validateSet: function(set) {
+                        var template = this.getTemplate(set.moves);
+                        if (set.moves !== 'Metronome') {
+                                return [set.species+" is banned because it's not using meteronome you hoe."];
+                        }
+                }
+        },         
 	standard: {
 		effectType: 'Banlist',
 		ruleset: ['Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'HP Percentage Mod'],

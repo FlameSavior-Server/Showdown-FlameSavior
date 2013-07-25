@@ -859,6 +859,7 @@ var cmds = {
 	
 	pollremind: 'pr',
 	pr: function(target, room, user) {
+		var separacion = "&nbsp;&nbsp;";
 		if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');

@@ -812,15 +812,17 @@ var cmds = {
 		if (answers.length < 3) return this.sendReply('Correct syntax for this command is /poll question, option, option...');
 		var question = answers[0];
 		answers.splice(0, 1);
+		var answers = answers.join(',').toLowerCase().split(',');
 		tour[room.id].question = question;
 		tour[room.id].answerList = answers;
 		room.addRaw('<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');
 	},
 	
 	vote: function(target, room, user) {
+		var ips = JSON.stringify(user.ips);
 		if (!tour[room.id].question) return this.sendReply('There is no poll currently going on in this room.');
-		if (tour[room.id].answerList.indexOf(target) == -1) return this.sendReply('\'' + target + '\' is not an option for the current poll.');
-		tour[room.id].answers[user.userid] = target;
+		if (tour[room.id].answerList.indexOf(target.toLowerCase()) == -1) return this.sendReply('\'' + target + '\' is not an option for the current poll.');
+		tour[room.id].answers[ips] = target.toLowerCase();
 		return this.sendReply('You are now voting for ' + target + '.');
 	},
 	
@@ -853,6 +855,13 @@ var cmds = {
 		tour[room.id].question = undefined;
 		tour[room.id].answerList = new Array();
 		tour[room.id].answers = new Object();
+	},
+	
+	pollremind: 'pr',
+	pr: function(target, room, user) {
+		if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
+		if (!this.canBroadcast()) return;
+		this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');
 	}
 };
 

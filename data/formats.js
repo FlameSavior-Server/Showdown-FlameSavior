@@ -626,23 +626,17 @@ exports.BattleFormats = {
 		challengeShow: true,
 		searchShow: true,
 		isTeambuilderFormat: true,
-		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview', 'Swalot Clause'],
-		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
-	},
-	pu: {
-		name: "PU",
-		section: "Other Metagames",
 		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview', 'Cottonee Clause'],
 		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
 	},
-	metrenomeland: {
-		name: "Metrenome",
+	metronomeland: {
+		name: "Metronome",
 		section: "Singles",
 
 		effectType: 'Format',
 		challengeShow: true,
 		isTeambuilderFormat: true,
-		ruleset: ['Pokemon', 'Evasion Abilities Clause', 'Team Preview', 'Metrenome Clause'],
+		ruleset: ['Pokemon', 'Evasion Abilities Clause', 'Team Preview', 'Metronome Clause'],
 		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
 	},	
 	pu: {
@@ -667,31 +661,31 @@ exports.BattleFormats = {
                 validateSet: function(set) {
                         var template = this.getTemplate(set.species);
                         if (set.species !== 'Swalot') {
-                                return [set.species+" is banned because it's not a swalot you hoe."];
+                                return [set.species+" is banned because it's not a Swalot you hoe."];
                         }
                 }
         },	
 	cottoneeclause: {
                 effectType: 'Rule',
                 onStart: function() {
-			this.add('rule', 'Cottnee Clause: Cottonee are allowed.');
+			this.add('rule', 'Cottonee Clause: Cottonee are allowed.');
 		},
                 validateSet: function(set) {
                         var template = this.getTemplate(set.species);
                         if (set.species !== 'Cottonee') {
-                                return [set.species+" is banned because it's not a cottonee you hoe."];
+                                return [set.species+" is banned because it's not a Cottonee you hoe."];
                         }
                 }
         },
 	metronomeclause: {
                 effectType: 'Rule',
                 onStart: function() {
-			this.add('rule', 'Cottnee Clause: Cottonee are allowed.');
+			this.add('rule', 'Metronome Clause: Only Metronome is allowed.');
 		},
                 validateSet: function(set) {
                         var template = this.getTemplate(set.moves);
                         if (set.moves !== 'Metronome') {
-                                return [set.species+" is banned because it's not using meteronome you hoe."];
+                                return [set.species+" is banned because it's not using metronome you hoe."];
                         }
                 }
         },         

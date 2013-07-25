@@ -54,6 +54,9 @@ exports.tour = function(t) {
 				battles: new Object(),
 				battlesended: new Array(),
 				battlesinvtie: new Array(),
+				question: undefined,
+				answerList: new Array(),
+				answers: new Object()
 			};
 		},
 		shuffle: function(list) {
@@ -775,9 +778,81 @@ var cmds = {
 		}
 	},
 
+	battlesended: function(target, room, user) {
+		if (!tour[room.id].status) return this.sendReply('There is no active tournament in this room.');
+		if (tour[room.id].battlesended.length == 0) return this.sendReply('No finished tournament battle is registered.');
+		var msg = new Array();
+		for (var i=0; i<tour[room.id].battlesended.length; i++) {
+			msg[i] = "<a href='/" + tour[room.id].battlesended[i] + "' class='ilink'>" + tour[room.id].battlesended[i].match(/\d+$/) + "</a>";
+		}
+		return this.sendReplyBox(msg.toString());
+	},
+
+	battlesinvtie: function(target, room, user) {
+		if (!tour[room.id].status) return this.sendReply('There is no active tournament in this room.');
+		if (tour[room.id].battlesinvtie.length == 0) return this.sendReply('No battle in this tournament has ended in a tie or been invalidated.');
+		var msg = new Array();
+		for (var i=0; i<tour[room.id].battlesinvtie.length; i++) {
+			msg[i] = "<a href='/" + tour[room.id].battlesinvtie[i] + "' class='ilink'>" + tour[room.id].battlesinvtie[i].match(/\d+$/) + "</a>";
+		}
+		return this.sendReplyBox(msg.toString());
+	},
+
 	documentation: function() {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("Click <a href='http://elloworld.dyndns.org/documentation.html'>here</a> to be taken to the documentation for the tournament commands.");
+	},
+	
+	survey: 'poll',
+	poll: function(target, room, user) {
+		if (!user.can('broadcast')) return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id].question) return this.sendReply('There is currently a poll going on already.');
+		var separacion = "&nbsp;&nbsp;";
+		var answers = tour.splint(target);
+		if (answers.length < 3) return this.sendReply('Correct syntax for this command is /poll question, option, option...');
+		var question = answers[0];
+		answers.splice(0, 1);
+		tour[room.id].question = question;
+		tour[room.id].answerList = answers;
+		room.addRaw('<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');
+	},
+	
+	vote: function(target, room, user) {
+		if (!tour[room.id].question) return this.sendReply('There is no poll currently going on in this room.');
+		if (tour[room.id].answerList.indexOf(target) == -1) return this.sendReply('\'' + target + '\' is not an option for the current poll.');
+		tour[room.id].answers[user.userid] = target;
+		return this.sendReply('You are now voting for ' + target + '.');
+	},
+	
+	votes: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReply('NUMBER OF VOTES: ' + Object.keys(tour[room.id].answers).length);
+	},
+	
+	endsurvey: 'endpoll',
+	ep: 'endpoll',
+	endpoll: function(target, room, user) {
+		if (!user.can('broadcast')) return this.sendReply('You do not have enough authority to use this command.');
+		if (!tour[room.id].question) return this.sendReply('There is no poll to end in this room.');
+		var votes = Object.keys(tour[room.id].answers).length;
+		var options = new Object();
+		var obj = tour[room.id];
+		for (var i in obj.answerList) options[obj.answerList[i]] = 0;
+		for (var i in obj.answers) options[obj.answers[i]]++;
+		var sortable = new Array();
+		for (var i in options) sortable.push([i, options[i]]);
+		sortable.sort(function(a, b) {return a[1] - b[1]});
+		var html = "";
+		for (var i = sortable.length - 1; i > -1; i--) {
+			console.log(i);
+			var option = sortable[i][0];
+			var value = sortable[i][1];
+			html += "&bull; " + option + " - " + Math.floor(value / votes * 100) + "% (" + value + ")<br />";
+		}
+		room.addRaw('<div class="infobox"><h2>Results to "' + obj.question + '"</h2><hr />' + html + '</div>');
+		tour[room.id].question = undefined;
+		tour[room.id].answerList = new Array();
+		tour[room.id].answers = new Object();
 	}
 };
 
@@ -833,7 +908,6 @@ Rooms.global.startBattle = function(p1, p2, format, rated, p1team, p2team) {
 	if (!rated) {
 		var name1 = p1.name;
 		var name2 = p2.name;
-		newRoom.originalPlayers = [p1.userid,p2.userid];
 		var battleid = i;
 		for (var i in tour) {
 			var c = tour[i];

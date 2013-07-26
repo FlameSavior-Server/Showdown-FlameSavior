@@ -255,6 +255,39 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 		delete tells[user.userid];
 	}
 	
+	//dem feels
+	function clean(string) {
+		var entityMap = {
+			"&": "&amp;",
+			"<": "&lt;",
+			">": "&gt;",
+			'"': '&quot;',
+			"'": '&#39;',
+			"/": '&#x2F;'
+		};
+		return String(string).replace(/[&<>"'\/]/g, function (s) {
+			return entityMap[s];
+		});
+	}
+	var init = false;
+	var haves = new Array();
+	var list = ["batming","blu","china","coo","creep","cry","dad1","dad2","dafuq","datass","dazza1","dd","deal","dealw","disgust","drow","duckwat","duclol","Dx","eleming","evild","excite","falone","feel","feelsal","feelsbd","feelsbeard","feelsbn","feelsbr","feelsbu","feelscanada","feelsce","feelscommy","feelscr","feelscute","feelsdd","feelsde","feelsdr","feelsduke","feelseye","feelsgd","feelsgn","feelsgt","feelshitler","feelshp","feelshr","feelsht","feelsjew","feelsmario","feelsmd","feelsmoke","feelsms","feelsmug","feelsnv","feelsok","feelsold","feelspink","feelsq","feelsrs","feelssc","feelsscr","feelssp","feelsusa","feelsvp","feelswg","feelswp","feelsws","feelsww","feelszb","fliptbl","foreveralone","fuu","fuu2","fuumar","fyeah","g","goatse","gtfo","hellyeah","hface","hipnig","hmm","how","how3","how4","kid1","ling","lolnig","man","maybe","megusta","ming","mit","mit3","mit4","mog","nface","nface2","nggawat","nggwat","nicetit","nigcook","nigcry","nigglet","nighuh","nigig","niglad","nigleaf","niglol","nigmar","nigmonk","nignig","nignod","nigoof","nigrin","nigwho","nigya","ning","no","nomegusta","notbad","notsure","ohgod","okay","okay2","omd","omg","oshit","pedo","pface","pff","pirate","pirate2","santa","santrl","seewat","serious","sir","smellsgd","smugob","srs","srsno","taylor","ting","trldrum","trlfing","trollface","w","wat","who","win1","wtf","wtf2","wut","xa","XD","xd2","xe","yay","yds","yeayou","yes","yface","yuno","2cute","ahuevo","aing","alakno","allfeel","awd","babed"];
+	for (var i in list) {
+		if (message.toLowerCase().split(":" + list[i] + ":").length - 1 > 0) {
+			init = true;
+			haves.push(list[i]);
+		}
+	}
+	if (init && (typeof feels == "undefined" || feels)) {
+		message = clean(message);
+		for (var i in haves) {
+			var re = new RegExp(':' + haves[i] + ':', 'g');
+			message = message.replace(re, '<img src="http://elloworld.dyndns.org/datfeels/' + haves[i] + '.gif" title="' + haves[i] + '" />');
+		}
+		room.addRaw('<strong><small>' + user.group + '</small><font color="' + hashColor(user.userid) + '">' + user.name + ':</font></strong> ' + message);
+		return false;
+	}
+	
 	return message;
 };
 

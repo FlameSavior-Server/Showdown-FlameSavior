@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Commands
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -1119,14 +1119,14 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'pollson') {
 			matched = true;
-			this.sendReply('/pollson [none/room/all] - enables polls in the specified rooms. Requires @ & ~);
+			this.sendReply('/pollson [none/room/all] - enables polls in the specified rooms. Requires @ & ~');
 			this.sendReply('/pollson - enables polls in the current room.');
 			this.sendReply('/pollson [room] - enables polls in the specified room.');
 			this.sendReply('/pollson all - enables polls in all rooms. Requires & ~');
 		}
 		if (target === 'all' || target === 'pollsoff') {
 			matched = true;
-			this.sendReply('/pollsoff [none/room/all] - disables polls in the specified rooms. Requires @ & ~);
+			this.sendReply('/pollsoff [none/room/all] - disables polls in the specified rooms. Requires @ & ~');
 			this.sendReply('/pollsoff - disables polls in the current room.');
 			this.sendReply('/pollsoff [room] - disables polls in the specified room.');
 			this.sendReply('/pollsoff all - disables polls in all rooms. Requires & ~');

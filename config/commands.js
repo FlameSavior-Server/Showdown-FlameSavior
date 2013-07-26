@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Commands
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -143,16 +143,6 @@
  * @license MIT license
  */
 
-function shuffle(list) {
-	var i = list.length, j, temp;
-	if (i === 0) return false;
-	while (--i) {
-		j = Math.floor(Math.random() * (i + 1));
-		temp = list[i];
-		list[i] = list[j]; 
-		list[j] = temp;
-	};
-};
 
 var commands = exports.commands = {
 

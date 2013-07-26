@@ -937,6 +937,11 @@ var commands = exports.commands = {
 		return this.sendReplyBox('The Battle Tower League can be found <a href="http://thebattletower.xiaotai.org/forumdisplay.php?fid=8" >here</a>.');
 	},
 	
+	frontier: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		return this.sendReplyBox('The Battle Tower Frontier is still open for signups!<br>The signup thread can be found <a href="http://thebattletower.xiaotai.org/showthread.php?tid=25" >here</a>.');
+	},
+	
 	/*********************************************************
 	 * Miscellaneous commands
 	 *********************************************************/

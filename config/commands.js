@@ -207,6 +207,20 @@ var commands = exports.commands = {
 		this.sendReply('|raw|'+output);
 	},
 
+	ipsearch: function(target, room, user) {
+		if (!this.can('rangeban')) return;
+		var atLeastOne = false;
+		this.sendReply("Users with IP "+target+":");
+		for (var userid in Users.users) {
+			var user = Users.users[userid];
+			if (user.latestIp === target) {
+				this.sendReply((user.connected?"+":"-")+" "+user.name);
+				atLeastOne = true;
+			}
+		}
+		if (!atLeastOne) this.sendReply("No results found.");
+	},
+
 	/*********************************************************
 	 * Shortcuts
 	 *********************************************************/
@@ -659,8 +673,8 @@ var commands = exports.commands = {
 
 	gennext: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Generation NEXT is a mod that makes changes to the game:<br />' +
-			'- <a href="https://github.com/Zarel/Pokemon-Showdown/blob/master/mods/gennext/README.md">README: overview of Gen-NEXT</a><br />' +
+		this.sendReplyBox('NEXT (also called Gen-NEXT) is a mod that makes changes to the game:<br />' +
+			'- <a href="https://github.com/Zarel/Pokemon-Showdown/blob/master/mods/gennext/README.md">README: overview of NEXT</a><br />' +
 			'Example replays:<br />' +
 			'- <a href="http://pokemonshowdown.com/replay/gennextou-37815908">roseyraid vs Zarel</a><br />' +
 			'- <a href="http://pokemonshowdown.com/replay/gennextou-37900768">QwietQwilfish vs pickdenis</a>');
@@ -674,39 +688,39 @@ var commands = exports.commands = {
 		var matched = false;
 		if (!target || target === 'all') {
 			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/forumdisplay.php?f=206">Information on the Other Metagames</a><br />';
+			buffer += '- <a href="http://www.smogon.com/forums/forums/206/">Information on the Other Metagames</a><br />';
 		}
 		if (target === 'all' || target === 'hackmons') {
 			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/showthread.php?t=3475624">Hackmons</a><br />';
+			buffer += '- <a href="http://www.smogon.com/forums/threads/3475624/">Hackmons</a><br />';
 		}
 		if (target === 'all' || target === 'balancedhackmons' || target === 'bh') {
 			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/showthread.php?t=3463764">Balanced Hackmons</a><br />';
+			buffer += '- <a href="http://www.smogon.com/forums/threads/3463764/">Balanced Hackmons</a><br />';
 		}
 		if (target === 'all' || target === 'glitchmons') {
 			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/showthread.php?t=3467120">Glitchmons</a><br />';
+			buffer += '- <a href="http://www.smogon.com/forums/threads/3467120/">Glitchmons</a><br />';
 		}
 		if (target === 'all' || target === 'tiershift' || target === 'ts') {
 			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/showthread.php?t=3479358">Tier Shift</a><br />';
+			buffer += '- <a href="http://www.smogon.com/forums/threads/3479358/">Tier Shift</a><br />';
 		}
-		if (target === 'all' || target === 'seasonalladder' || target === 'seasonal') {
+		if (target === 'all' || target === 'seasonal') {
 			matched = true;
 			buffer += '- <a href="http://www.smogon.com/sim/seasonal">Seasonal Ladder</a><br />';
 		}
 		if (target === 'all' || target === 'smogondoubles' || target === 'doubles') {
 			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/showthread.php?t=3476469">Smogon Doubles</a><br />';
+			buffer += '- <a href="http://www.smogon.com/forums/threads/3476469/">Smogon Doubles</a><br />';
 		}
 		if (target === 'all' || target === 'vgc2013' || target === 'vgc') {
 			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/showthread.php?t=3471161">VGC 2013</a><br />';
+			buffer += '- <a href="http://www.smogon.com/forums/threads/3471161/">VGC 2013</a><br />';
 		}
 		if (target === 'all' || target === 'omotm' || target === 'omofthemonth' || target === 'month') {
 			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/showthread.php?t=3481155">OM of the Month</a>';
+			buffer += '- <a href="http://www.smogon.com/forums/threads/3481155/">OM of the Month</a>';
 		}
 		if (!matched) {
 			return this.sendReply('The Other Metas entry "'+target+'" was not found. Try /othermetas or /om for general help.');

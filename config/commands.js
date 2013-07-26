@@ -1117,6 +1117,20 @@ var commands = exports.commands = {
 			this.sendReply('/effectiveness [type1], [type2] - Provides the effectiveness of a [type1] attack to a [type2] Pokémon.');
 			this.sendReply('!effectiveness [type1], [type2] - Shows everyone the effectiveness of a [type1] attack to a [type2] Pokémon.');
 		}
+		if (target === 'all' || target === 'pollson') {
+			matched = true;
+			this.sendReply('/pollson [none/room/all] - enables polls in the specified rooms. Requires @ & ~);
+			this.sendReply('/pollson - enables polls in the current room.');
+			this.sendReply('/pollson [room] - enables polls in the specified room.');
+			this.sendReply('/pollson all - enables polls in all rooms. Requires & ~');
+		}
+		if (target === 'all' || target === 'pollsoff') {
+			matched = true;
+			this.sendReply('/pollsoff [none/room/all] - disables polls in the specified rooms. Requires @ & ~);
+			this.sendReply('/pollsoff - disables polls in the current room.');
+			this.sendReply('/pollsoff [room] - disables polls in the specified room.');
+			this.sendReply('/pollsoff all - disables polls in all rooms. Requires & ~');
+		}
 		if (target === '%' || target === 'modnote') {
 			matched = true;
 			this.sendReply('/modnote [note] - Adds a moderator note that can be read through modlog. Requires: % @ & ~');

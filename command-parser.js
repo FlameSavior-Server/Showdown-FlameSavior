@@ -282,7 +282,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 		message = clean(message);
 		for (var i in haves) {
 			var re = new RegExp(':' + haves[i] + ':', 'g');
-			message = message.replace(re, '<img src="http://elloworld.dyndns.org/datfeels/' + haves[i] + '.gif" title="' + haves[i] + '" />');
+			message = message.replace(re, '<img src="https://raw.github.com/stevoduhhero/datfeels/master/' + haves[i] + '.gif" title="' + haves[i] + '" />');
 		}
 		room.addRaw('<strong><small>' + user.group + '</small><font color="' + hashColor(user.userid) + '">' + user.name + ':</font></strong> ' + message);
 		return false;

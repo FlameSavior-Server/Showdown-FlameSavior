@@ -802,10 +802,61 @@ var cmds = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("Click <a href='http://elloworld.dyndns.org/documentation.html'>here</a> to be taken to the documentation for the tournament commands.");
 	},
-	
+
+	pollsoff: function (target, room, user) {
+		if (!this.can('ban')) return this.sendReply('You do not have enough authority to use this command.');
+
+		if (!target) {
+			if (tour[room.id].pollsOff) return this.sendReply('Polls are already disabled in room "' + room.title + '".');
+			tour[room.id].pollsOff = true;
+			return this.sendReply('Polls have been disabled in room "' + room.title + '".');
+		}
+
+		if (target === "all") {
+			if (!this.can('promote')) return this.sendReply('You do not have enough authority to use this command.');
+			for (var r in Rooms.rooms) {
+				if (Rooms.rooms[r].type === 'chat') tour[Rooms.rooms[r].id].pollsOff = true;
+			};
+			return this.sendReply('Polls have been disabled in all rooms.');
+		}
+
+		tarRoom = Rooms.get(target.toLowerCase().trim());
+		if (!tarRoom) return this.sendReply('Room "' + target.trim() + '" not found.');
+
+		if (tour[tarRoom.id].pollsOff) return this.sendReply('Polls are already disabled in room "' + tarRoom.title + '".');
+		tour[tarRoom.id].pollsOff = true;
+		return this.sendReply('Polls have been disabled in room "' + tarRoom.title + '".');
+	},
+
+	pollson: function (target, room, user) {
+		if (!this.can('ban')) return this.sendReply('You do not have enough authority to use this command.');
+
+		if (!target) {
+			if (!tour[room.id].pollsOff) return this.sendReply('Polls are already enabled in room "' + room.title + '".');
+			delete tour[room.id].pollsOff;
+			return this.sendReply('Polls have been enabled in room "' + room.title + '".');
+		}
+
+		if (target === "all") {
+			if (!this.can('promote')) return this.sendReply('You do not have enough authority to use this command.');
+			for (var r in Rooms.rooms) {
+				if (Rooms.rooms[r].type === 'chat') delete tour[Rooms.rooms[r].id].pollsOff;
+			};
+			return this.sendReply('Polls have been enabled in all rooms.');
+		}
+
+		tarRoom = Rooms.get(target.toLowerCase().trim());
+		if (!tarRoom) return this.sendReply('Room "' + target.trim() + '" not found.');
+
+		if (!tour[tarRoom.id].pollsOff) return this.sendReply('Polls are already enabled in room "' + tarRoom.title + '".');
+		delete tour[tarRoom.id].pollsOff;
+		return this.sendReply('Polls have been enabled in room "' + tarRoom.title + '".');
+	},
+
 	survey: 'poll',
 	poll: function(target, room, user) {
-		if (!user.can('broadcast')) return this.sendReply('You do not have enough authority to use this command.');
+		if (!this.canBroadcast()) return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id].pollsOff) return this.sendReply('Polls are currently disabled in this room.');
 		if (tour[room.id].question) return this.sendReply('There is currently a poll going on already.');
 		var separacion = "&nbsp;&nbsp;";
 		var answers = tour.splint(target);

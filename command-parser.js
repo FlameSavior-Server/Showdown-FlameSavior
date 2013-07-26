@@ -148,11 +148,11 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 				}
 				return true;
 			},
-			canBroadcast: function() {
+			canBroadcast: function(permission) {
 				if (broadcast) {
 					message = this.canTalk(message);
 					if (!message) return false;
-					if (!user.can('broadcast', null, room)) {
+					if (!user.can(permission || 'broadcast', null, room)) {
 						connection.send("You need to be voiced to broadcast this command's information.");
 						connection.send("To see it for yourself, use: /"+message.substr(1));
 						return false;
@@ -215,7 +215,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 
 	message = canTalk(user, room, connection, message);
 	if (!message) return false;
-	
+
 	//spamroom
 	// if user is not in spamroom
 	if(spamroom[user.userid] == undefined){
@@ -228,7 +228,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 			}
 		}
 	}
-	
+
 	if (spamroom[user.userid]) {
 		Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|' + message);
 		connection.sendTo(room, "|c|" + user.getIdentity() + "|" + message);
@@ -287,7 +287,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 		room.addRaw('<strong><small>' + user.group + '</small><font color="' + hashColor(user.userid) + '">' + user.name + ':</font></strong> ' + message);
 		return false;
 	}
-	
+
 	return message;
 };
 

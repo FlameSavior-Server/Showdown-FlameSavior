@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Commands
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -944,6 +944,11 @@ var commands = exports.commands = {
 	frontier: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('The Battle Tower Frontier is still open for signups!<br>The signup thread can be found <a href="http://thebattletower.xiaotai.org/showthread.php?tid=25" >here</a>.');
+	},
+
+	stafffaq: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		return this.sendReplyBox('Click <a href="http://thebattletower.xiaotai.org/showthread.php?tid=33">here</a> to find out about The Battle Tower\'s ranks and promotion system.');
 	},
 	
 	/*********************************************************

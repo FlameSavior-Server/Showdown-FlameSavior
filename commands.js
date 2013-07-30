@@ -1102,6 +1102,21 @@ var commands = exports.commands = {
 		return '/announce '+target;
 	},
 
+	announceall: function(target, room, user) {
+		if (!target) return this.parse('/help announce');
+
+		if (!this.can('announce', null, room)) return false;
+
+		target = this.canTalk(target);
+		if (!target) return;
+
+		for (var r in Rooms.rooms) {
+			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|c|' + user.getIdentity() + '|/announce ' + target);
+		}
+
+		return false;
+	},
+
 	fr: 'forcerename',
 	forcerename: function(target, room, user) {
 		if (!target) return this.parse('/help forcerename');

@@ -237,7 +237,7 @@ var User = (function () {
 			if (room.auth[this.userid]) {
 				return room.auth[this.userid] + this.name;
 			}
-			if (this.group !== ' ') return '+'+this.name;
+			if (this.group !== ' ' && this.group !== '∰') return '+'+this.name;
 			return ' '+this.name;
 		}
 		return this.group+this.name;
@@ -258,11 +258,11 @@ var User = (function () {
 		}
 
 		if (room && room.auth) {
-			if (group !== ' ') group = '+';
+			if (group !== ' ' && group !== '∰') group = '+';
 			if (room.auth[this.userid]) group = room.auth[this.userid];
 			groupData = config.groups[group];
 			if (target) {
-				if (targetGroup !== ' ') targetGroup = '+';
+				if (targetGroup !== ' ' && targetGroup !== '∰') targetGroup = '+';
 				if (room.auth[target.userid]) targetGroup = room.auth[target.userid];
 			}
 		}

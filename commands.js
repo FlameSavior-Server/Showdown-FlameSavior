@@ -1091,7 +1091,7 @@ var commands = exports.commands = {
 	},
 
 	declareall: function(target, room, user) {
-		if (!target) return this.add('/declareall - Declares a message in all chatrooms. Requires & ~');
+		if (!target) return this.sendReply('/declareall - Declares a message in all chatrooms. Requires & ~');
 		if (!this.can('declare')) return;
 
 		if (!this.canTalk()) return;

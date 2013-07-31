@@ -1090,6 +1090,19 @@ var commands = exports.commands = {
 		this.logModCommand(user.name+' declared '+target);
 	},
 
+	declareall: function(target, room, user) {
+		if (!target) return this.add('/declareall - Declares a message in all chatrooms. Requires & ~');
+		if (!this.can('forcerenameto')) return;
+
+		if (!this.canTalk()) return;
+
+		for (var r in Rooms.rooms) {
+			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|raw|<div class="broadcast-blue"><b>Message from <u>'+room.title+'</u>:<br>'+target+'</b></div>');
+		}
+
+		this.logModCommand(user.name+' declared '+target+' in all rooms.');
+	},
+
 	wall: 'announce',
 	announce: function(target, room, user) {
 		if (!target) return this.parse('/help announce');
@@ -1100,21 +1113,6 @@ var commands = exports.commands = {
 		if (!target) return;
 
 		return '/announce '+target;
-	},
-
-	announceall: function(target, room, user) {
-		if (!target) return this.parse('/help announce');
-
-		if (!this.can('announce', null, room)) return false;
-
-		target = this.canTalk(target);
-		if (!target) return;
-
-		for (var r in Rooms.rooms) {
-			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|c|' + user.getIdentity() + '|/announce ' + target);
-		}
-
-		return false;
 	},
 
 	fr: 'forcerename',

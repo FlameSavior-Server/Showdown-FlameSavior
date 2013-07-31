@@ -1092,15 +1092,15 @@ var commands = exports.commands = {
 
 	declareall: function(target, room, user) {
 		if (!target) return this.add('/declareall - Declares a message in all chatrooms. Requires & ~');
-		if (!this.can('forcerenameto')) return;
+		if (!this.can('declare')) return;
 
 		if (!this.canTalk()) return;
 
 		for (var r in Rooms.rooms) {
-			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|raw|<div class="broadcast-blue"><b>Message from <u>'+room.title+'</u>:<br>'+target+'</b></div>');
+			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|raw|<div class="broadcast-blue"><b><i>Broadcast Message from '+room.title+':</i><br />'+target+'</b></div>');
 		}
 
-		this.logModCommand(user.name+' declared '+target+' in all rooms.');
+		this.logModCommand(user.name+' declared '+target+' to all rooms.');
 	},
 
 	wall: 'announce',

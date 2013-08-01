@@ -1279,7 +1279,6 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'tell') {
 			matched = true;
 			this.sendReply('/tell [user], [message] - Leaves a message for the specified user that will be received when they next talk.');
-			this.sendReply('You cannot include a comma in the message itself.');
 		}
 		if (target === 'all' || target === 'help' || target === 'h' || target === '?' || target === 'commands') {
 			matched = true;

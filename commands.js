@@ -591,25 +591,26 @@ var commands = exports.commands = {
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
 		if (!target) return this.parse('/help tell');
 		
-		var targets = target.split(',');
-		if (!targets[1]) return this.parse('/help tell');
-		var targetUser = toId(targets[0]);
+		var commaIndex = target.indexOf(',');
+		if (commaIndex < 0) return this.sendReply('You forgot the comma.');
+		var targetUser = toId(target.slice(0, commaIndex));
+		var message = target.slice(commaIndex + 1).trim();
 
 		if (targetUser.length > 18) {
-			return this.sendReply('The name of user "' + this.targetUsername + '" is too long.');
+			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}
 
 		if (!tells[targetUser]) tells[targetUser] = [];
 		if (tells[targetUser].length === 5) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
 
 		var date = Date();
-		var message = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + targets[1].trim();
-		tells[targetUser].add(message);
+		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + message;
+		tells[targetUser].add(messageToSend);
 
-		return this.sendReply('Message "' + targets[1].trim() + '" sent to ' + targetUser + '.');
+		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
-	
-	/*
+
+	/*	
 	punt: function (target, room, user) {
 		if (!target) return this.sendReply('You must select a user to punt.\n/punt [user] - punts the selected user.');
 		if (!this.canBroadcast()) return false;
@@ -630,7 +631,8 @@ var commands = exports.commands = {
 				if(Users.get(u) != undefined && u.toLowerCase().indexOf('guest') != 0 && Users.get(u).connected) 
 					this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: ♪kupo kupo kupochu~♫');
 		return;
-	},*/
+	},
+	*/
 
 	/*********************************************************
 	 * Moderating: Punishments

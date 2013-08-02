@@ -3,6 +3,19 @@ exports.BattleFormats = {
 	// Singles
 	///////////////////////////////////////////////////////////////////
 
+	popculturemons: {
+		name: "Pop Culture Mons",
+		section: "Pop Culture",
+
+		mod: 'popculturemons',
+		effectType: 'Format',
+		rated: true,
+		challengeShow: true,
+		searchShow: true,
+		isTeambuilderFormat: true,
+		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
+		banlist: []
+	},
 	randombattle: {
 		name: "Random Battle",
 		section: "Singles",

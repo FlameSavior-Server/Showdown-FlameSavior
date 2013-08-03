@@ -118,6 +118,8 @@ global.ResourceMonitor = {
 	connectionTimes: {},
 	battles: {},
 	battleTimes: {},
+	battlePreps: {},
+	battlePrepTimes: {},
 	/**
 	 * Counts a connection. Returns true if the connection should be terminated for abuse.
 	 */
@@ -166,6 +168,22 @@ global.ResourceMonitor = {
 		} else {
 			this.battles[ip] = 1;
 			this.battleTimes[ip] = now;
+		}
+	},
+	/**
+	 * Counts battle prep. Returns true if too much
+	 */
+	countPrepBattle: function(ip) {
+		var now = Date.now();
+		var duration = now - this.battlePrepTimes[ip];
+		if (ip in this.battlePreps && duration < 3*60*1000) {
+			this.battlePreps[ip]++;
+			if (this.battlePreps[ip] > 6) {
+				return true;
+			}
+		} else {
+			this.battlePreps[ip] = 1;
+			this.battlePrepTimes[ip] = now;
 		}
 	}
 };
@@ -492,9 +510,10 @@ server.on('connection', function(socket) {
 				user.chat(lines, room, connection);
 				return;
 			}
-			lines.split('\n').forEach(function(text) {
-				user.chat(text, room, connection);
-			});
+			lines = lines.split('\n');
+			for (var i=0; i<lines.length; i++) {
+				if (user.chat(lines[i], room, connection) === false) break;
+			}
 		} catch (e) {
 			var stack = e.stack + '\n\n';
 			stack += 'Additional information:\n';

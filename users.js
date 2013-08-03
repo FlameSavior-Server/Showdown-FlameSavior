@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Users
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -763,6 +763,12 @@ var User = (function () {
 				}
 			}
 			this.roomCount = {};
+			if (!this.named && !Object.size(this.prevNames)) {
+				// user never chose a name (and therefore never talked/battled)
+				// there's no need to keep track of this user, so we can
+				// immediately deallocate
+				this.destroy();
+			}
 		}
 	};
 	User.prototype.disconnectAll = function() {
@@ -963,6 +969,37 @@ var User = (function () {
 			delete this.roomCount[room.id];
 		}
 	};
+	User.prototype.prepBattle = function(formatid, type, connection) {
+		// all validation for a battle goes through here
+		if (!connection) connection = this;
+		if (!type) type = 'challenge';
+
+		if (Rooms.global.lockdown) {
+			var message = "The server is shutting down. Battles cannot be started at this time.";
+			if (Rooms.global.lockdown === 'ddos') {
+				message = "The server is under attack. Battles cannot be started at this time.";
+			}
+			connection.popup(message);
+			return false;
+		}
+		if (ResourceMonitor.countPrepBattle(connection.ip || connection.latestIp, this.name)) {
+			connection.popup("Due to high load, you are limited to 6 battles every 3 minutes.");
+			return false;
+		}
+
+		var format = Tools.getFormat(formatid);
+		if (!format[''+type+'Show']) {
+			connection.popup("That format is not available.");
+			return false;
+		}
+		var team = this.team;
+		var problems = Tools.validateTeam(team, formatid);
+		if (problems) {
+			connection.popup("Your team was rejected for the following reasons:\n\n- "+problems.join("\n- "));
+			return false;
+		}
+		return true;
+	};
 	User.prototype.updateChallenges = function() {
 		this.send('|updatechallenges|'+JSON.stringify({
 			challengesFrom: this.challengesFrom,
@@ -1041,13 +1078,17 @@ var User = (function () {
 	User.prototype.chatQueue = null;
 	User.prototype.chatQueueTimeout = null;
 	User.prototype.lastChatMessage = 0;
+	/**
+	 * The user says message in room.
+	 * Returns false if the rest of the user's messages should be discarded.
+	 */
 	User.prototype.chat = function(message, room, connection) {
 		var now = new Date().getTime();
 
-		if (message.substr(0,5) === '/cmd ') {
-			// commands are exempt from the queue
+		if (message.substr(0,16) === '/cmd userdetails') {
+			// certain commands are exempt from the queue
 			room.chat(this, message, connection);
-			return;
+			return false; // but end the loop here
 		}
 
 		if (this.chatQueueTimeout) {
@@ -1056,6 +1097,7 @@ var User = (function () {
 				connection.sendTo(room, '|raw|' +
 					"<strong class=\"message-throttle-notice\">Your message was not sent because you've been typing too quickly.</strong>"
 				);
+				return false;
 			} else {
 				this.chatQueue.push([message, room, connection]);
 			}
@@ -1232,8 +1274,15 @@ exports.pruneInactiveTimer = setInterval(
 	config.inactiveuserthreshold || 1000*60*60
 );
 
-exports.getNextGroupSymbol = function(group, isDown) {
+exports.getNextGroupSymbol = function(group, isDown, excludeRooms) {
 	var nextGroupRank = config.groupsranking[config.groupsranking.indexOf(group) + (isDown ? -1 : 1)];
+	if (excludeRooms === true && config.groups[nextGroupRank]) {
+		var iterations = 0;
+		while (config.groups[nextGroupRank].roomonly && iterations < 10) {
+			nextGroupRank = config.groupsranking[config.groupsranking.indexOf(group) + (isDown ? -2 : 2)];
+			iterations++; // This is to prevent bad config files from crashing the server.
+		}
+	}
 	if (!nextGroupRank) {
 		if (isDown) {
 			return config.groupsranking[0];

@@ -228,6 +228,20 @@ var commands = exports.commands = {
 		return this.sendReply("An error occurred while trying to create the room '"+target+"'.");
 	},
 
+	deregisterchatroom: function(target, room, user) {
+		if (!this.can('makeroom')) return;
+		var id = toId(target);
+		var targetRoom = Rooms.get(id);
+		target = targetRoom.title || targetRoom.id;
+		if (!targetRoom) return this.sendReply("The room '"+target+"' doesn't exist.");
+		if (Rooms.global.deregisterChatRoom(id)) {
+			this.sendReply("The room '"+target+"' was deregistered.");
+			this.sendReply("It will be deleted as of the next server restart.");
+			return;
+		}
+		return this.sendReply("The room '"+target+"' isn't registered.");
+	},
+
 	privateroom: function(target, room, user) {
 		if (!this.can('makeroom')) return;
 		if (target === 'off') {
@@ -276,6 +290,7 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
+		if (!userid || userid === '') return this.sendReply("User '"+name+"' does not exist.");
 
 		if (room.auth[userid] !== '#') return this.sendReply("User '"+name+"' is not a room owner.");
 		if (!this.can('makeroom', null, room)) return false;
@@ -343,6 +358,7 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
+		if (!userid || userid === '') return this.sendReply("User '"+name+"' does not exist.");
 
 		if (room.auth[userid] !== '%') return this.sendReply("User '"+name+"' is not a room mod.");
 		if (!this.can('roommod', null, room)) return false;
@@ -416,6 +432,7 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
+		if (!userid || userid === '') return this.sendReply("User '"+name+"' does not exist.");
 
 		if (room.auth[userid] !== '+') return this.sendReply("User '"+name+"' is not a room voice.");
 		if (!this.can('roomvoice', null, room)) return false;
@@ -428,13 +445,17 @@ var commands = exports.commands = {
 		}
 	},
 
+	autojoin: function(target, room, user, connection) {
+		Rooms.global.autojoinRooms(user, connection)
+	},
+
 	join: function(target, room, user, connection) {
 		if(!target)return this.sendReply('/join room - joins the specified room');
 		var targetRoom = Rooms.get(target) || Rooms.get(toId(target));
 		if (targetRoom == undefined) {
 			return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
 		}
-		if (targetRoom && !targetRoom.battle && targetRoom !== Rooms.lobby && !user.named) {
+		if (targetRoom && targetRoom.isPrivate && !user.named) {
 			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 		}
 		if (target.toLowerCase() == "staff" && !user.can('warn')) {
@@ -689,7 +710,10 @@ var commands = exports.commands = {
 		if (!targetUser || !targetUser.connected) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
-		if (!this.can('warn', targetUser)) return false;
+		if (room.isPrivate && room.auth) {
+			return this.sendReply('You can\'t warn here: This is a privately-owned room not subject to global rules.');
+		}
+		if (!this.can('warn', targetUser, room)) return false;
 
 		this.addModCommand(''+targetUser.name+' was warned by '+user.name+'.' + (target ? " (" + target + ")" : ""));
 		targetUser.send('|c|~|/warn '+target);
@@ -994,8 +1018,8 @@ var commands = exports.commands = {
 		} else if (Users.usergroups[userid]) {
 			currentGroup = Users.usergroups[userid].substr(0,1);
 		}
-
-		var nextGroup = target ? target : Users.getNextGroupSymbol(currentGroup, cmd === 'demote');
+		
+		var nextGroup = target ? target : Users.getNextGroupSymbol(currentGroup, cmd === 'demote', true);
 		if (target === 'deauth') nextGroup = config.groupsranking[0];
 		if (!config.groups[nextGroup]) {
 			return this.sendReply('Group \'' + nextGroup + '\' does not exist.');
@@ -1263,7 +1287,7 @@ var commands = exports.commands = {
 		if (this.can('hotpatch')) return false;
 		fs.writeFile('data/learnsets.js', 'exports.BattleLearnsets = '+JSON.stringify(BattleLearnsets)+";\n");
 		this.sendReply('learnsets.js saved.');
-	},
+	},	
 
 	disableladder: function(target, room, user) {
 		if (!this.can('disableladder')) return false;
@@ -1633,10 +1657,6 @@ var commands = exports.commands = {
 
 	cancelsearch: 'search',
 	search: function(target, room, user) {
-		if (Rooms.global.lockdown) {
-			return this.popupReply("The server is shutting down. Battles cannot be started at this time.");
-		}
-
 		if (target) {
 			Rooms.global.searchBattle(user, target);
 		} else {
@@ -1645,11 +1665,7 @@ var commands = exports.commands = {
 	},
 
 	chall: 'challenge',
-	challenge: function(target, room, user) {
-		if (Rooms.global.lockdown) {
-			return this.popupReply("The server is shutting down. Battles cannot be started at this time.");
-		}
-
+	challenge: function(target, room, user, connection) {
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser || !targetUser.connected) {
@@ -1658,11 +1674,7 @@ var commands = exports.commands = {
 		if (targetUser.blockChallenges && !user.can('bypassblocks', targetUser)) {
 			return this.popupReply("The user '"+this.targetUsername+"' is not accepting challenges right now.");
 		}
-		if (typeof target !== 'string') target = 'customgame';
-		var problems = Tools.validateTeam(user.team, target);
-		if (problems) {
-			return this.popupReply("Your team was rejected for the following reasons:\n\n- "+problems.join("\n- "));
-		}
+		if (!user.prepBattle(target, 'challenge', connection)) return;
 		user.makeChallenge(targetUser, target);
 	},
 
@@ -1684,7 +1696,7 @@ var commands = exports.commands = {
 		user.cancelChallengeTo(target);
 	},
 
-	accept: function(target, room, user) {
+	accept: function(target, room, user, connection) {
 		var userid = toUserid(target);
 		var format = '';
 		if (user.challengesFrom[userid]) format = user.challengesFrom[userid].format;
@@ -1692,11 +1704,7 @@ var commands = exports.commands = {
 			this.popupReply(target+" cancelled their challenge before you could accept it.");
 			return false;
 		}
-		var problems = Tools.validateTeam(user.team, format);
-		if (problems) {
-			this.popupReply("Your team was rejected for the following reasons:\n\n- "+problems.join("\n- "));
-			return false;
-		}
+		if (!user.prepBattle(format, 'challenge', connection)) return;
 		user.acceptChallengeFrom(userid);
 	},
 

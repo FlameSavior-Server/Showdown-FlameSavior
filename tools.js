@@ -44,7 +44,7 @@ module.exports = (function () {
 						Data[mod][dataType] = require(path)['Battle' + dataType];
 					}
 				} catch (e) {
-					console.log(e.stack);
+					console.log('CRASH LOADING DATA: '+e.stack);
 				}
 				if (!Data[mod][dataType]) Data[mod][dataType] = {};
 			}, this);
@@ -59,7 +59,7 @@ module.exports = (function () {
 					}
 				}
 			} catch (e) {
-				console.log(e.stack);
+				console.log('CRASH LOADING FORMATS: '+e.stack);
 			}
 		} else {
 			dataTypes.forEach(function(dataType) {
@@ -69,7 +69,7 @@ module.exports = (function () {
 						Data[mod][dataType] = require(path)['Battle' + dataType];
 					}
 				} catch (e) {
-					console.log(e.stack);
+					console.log('CRASH LOADING MOD DATA: '+e.stack);
 				}
 				if (!Data[mod][dataType]) Data[mod][dataType] = {};
 				for (var i in Data.base[dataType]) {
@@ -460,6 +460,8 @@ module.exports = (function () {
 
 		do {
 			alreadyChecked[template.speciesid] = true;
+			// Stabmons hack to avoid copying all of validateSet to formats.
+			if (format.id === 'stabmons' && template.types.indexOf(this.getMove(move).type) > -1) return false; 
 			if (template.learnset) {
 				if (template.learnset[move] || template.learnset['sketch']) {
 					var lset = template.learnset[move];

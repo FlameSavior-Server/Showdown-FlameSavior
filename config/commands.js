@@ -690,32 +690,6 @@ var commands = exports.commands = {
 			'- <a href="http://pokemonshowdown.com/replay/gennextou-37900768">QwietQwilfish vs pickdenis</a>');
 	},
 
-	popculturemon: 'popculturemonbeta',
-	popculture: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		target = toId(target);
-		var buffer = '';
-		var matched = false;
-		if (!target || target === 'all') {
-			matched = true;
-			buffer += '- THIS METAGAME IS CURRENTLY IN BETA AND IS ONLY TO BE PLAYED BY DEVS/CODERS/STAFF, PLEASE TRY AGAIN LATER</a><br />';
-		}
-		if (target === 'megaman') {
-			matched = true;
-			buffer += '- <img src="https://secure.gravatar.com/avatar/3ffefd011a1801a2931af9b3208ef9a5?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png">This pokemon is a pop culture mon made called "Mega Man" by Oiawesome(ORIGINAL CHAR BY CAPCOM)<br />' + 
-		                  '- <b>This Pokemons Base Stats Are: hp:95,atk:90,def:90,spa:130,spd:85,spe:110</b>';  
-		}
-		if (target === 'goku') {
-			matched = true;
-			buffer += '- <img src="http://fc09.deviantart.net/fs37/f/2008/243/d/5/Goku_Sprite_by_eltantillo.gif">This pokemon is a pop culture mon called "Goku" made by Oiawesome(ORIGINAL CHAR BY AKIRA TORYAMA)<br />' + 
-		                  '- <b>This pokemons Base Stats are: hp:73,atk:145,def:65,spa:145,spd:65,spe:135</b>'; 
-		}	
-		if (!matched) {
-			return this.sendReply('The Pop Culture Mons entry "'+target+'" was not found. Try /popculturemonbeta or /opopculturemon for general help.');
-		}
-		this.sendReplyBox(buffer);
-	},
-
 	om: 'othermetas',
 	othermetas: function(target, room, user) {
 		if (!this.canBroadcast()) return;

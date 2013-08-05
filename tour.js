@@ -80,7 +80,9 @@ exports.tour = function(t) {
 		},
 		username: function(uid) {
 			if (Users.get(uid)) {
-				return Users.get(uid).name;
+				var n = Users.get(uid).name;
+				if (toId(n) != uid) return uid;
+				return n;
 			} else {
 				return uid;
 			}

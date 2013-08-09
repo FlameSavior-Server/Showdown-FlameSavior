@@ -380,10 +380,10 @@ var Tournament = (function () {
 	return Tournament;
 })();
 
-CommandParser.commands.tour = 'tournament';
-CommandParser.commands.tours = 'tournament';
-CommandParser.commands.tournaments = 'tournament';
-CommandParser.commands.tournament = function (paramString, room, user) {
+CommandParser.commands.t0ur = 't0urnament';
+CommandParser.commands.t0urs = 't0urnament';
+CommandParser.commands.t0urnaments = 't0urnament';
+CommandParser.commands.t0urnament = function (paramString, room, user) {
 	var cmdParts = paramString.split(' ');
 	var cmd = cmdParts.shift().trim().toLowerCase();
 	var params = cmdParts.join(' ').split(',').map(function (param) { return param.trim(); });

@@ -1188,6 +1188,14 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/unbanall - Unban all IP addresses. Requires: @ & ~');
 		}
+		if (target === '@' || target === 'roomban') {
+			matched = true;
+			this.sendReply('/roomban [username] - Bans a user from the current room. Requires: @ & ~');
+		}
+		if (target === '@' || target === 'unroomban') {
+			matched = true;
+			this.sendReply('/unroomban [username] - Unbans a user from the current room. Requires: @ & ~');
+		}
 		if (target === '%' || target === 'modlog') {
 			matched = true;
 			this.sendReply('/modlog [n] - If n is a number or omitted, display the last n lines of the moderator log. Defaults to 15. If n is not a number, search the moderator log for "n". Requires: % @ & ~');

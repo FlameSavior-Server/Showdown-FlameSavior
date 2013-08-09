@@ -466,6 +466,9 @@ var commands = exports.commands = {
 		if(targetRoom.isAdult && aList.indexOf(user.userid) === -1){
 			return this.sendReply("You are not old enough to join this room. If you believe you are, contact a staff member.");
 		}
+		for (var ip in user.ips) {
+			if (ip in targetRoom.bannedIps || targetRoom.id in user.bannedRooms) return this.sendReply('You are banned from this room.');
+		}
 		if (!user.joinRoom(targetRoom || room, connection)) {
 			// This condition appears to be impossible for now.
 			return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' could not be joined.");
@@ -915,6 +918,64 @@ var commands = exports.commands = {
 			delete Users.lockedIps[i];
 		}
 		this.addModCommand('All bans and locks have been lifted by '+user.name+'.');
+	},
+
+	rban: 'roomban',
+	roomban: function (target, room, user) {
+		if (!target) return this.parse('/help roomban');
+		target  = this.splitTarget(target);
+		targetUser = this.targetUser;
+
+		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
+		if (!user.can('ban', targetUser, room) && !(user.can('mute', targetUser, room) && room.auth)) return this.sendReply('/roomban - Access denied.');
+
+		if (targetUser.bannedRooms[room.id] && !target && !room.users[targetUser.userid]) {
+			var problem = ' but was already banned';
+			return this.privateModCommand('(' + targetUser.name + ' would be banned from room "' + room.title + '" by ' + user.name + problem + '.)');
+		}
+
+		targetUser.popup(user.name+" has banned you from the room \"" + room.title + "\".\nIf you feel your ban was unjustified, you can appeal the ban by pming a room owner or an administrator.\n\n"+target);
+
+		this.addModCommand(""+targetUser.name+" was banned from room \"" + room.title + "\" by "+user.name+"." + (target ? " (" + target + ")" : ""));
+		var alts = targetUser.getAlts();
+		if (alts.length) {
+			this.addModCommand(""+targetUser.name+"'s alts were also banned from room \"" + room.title + "\": "+alts.join(", "));
+			for (var i = 0; i < alts.length; ++i) {
+				if (room.users[alts[i]]) Users.users[alts[i]].leaveRoom(room.id);
+			}
+		}
+
+		for (var ip in targetUser.ips) {
+			room.bannedIps[ip] = 1;
+		}
+		targetUser.bannedRooms[room.id] = 1;
+		return targetUser.leaveRoom(room.id);
+	},
+
+	unrban: 'unroomban',
+	runban: 'unroomban',
+	roomunban: 'unroomban',
+	unroomban: function (target, room, user) {
+		if (!target) return this.parse('/help unroomban');
+		if (!user.can('ban', null, room) && !(user.can('mute', null, room) && room.auth)) return this.sendReply('/unroomban - Access denied');
+
+		var targetUser = Users.get(target);
+		if (!targetUser) return this.sendReply('The user ' + target + ' could not be found.');
+
+		var isUnbanned = false;
+		if (room.id in targetUser.bannedRooms) {
+			delete targetUser.bannedRooms[room.id];
+			isUnbanned = true;
+		}
+		for (var ip in targetUser.ips) {
+			if (ip in room.bannedIps) {
+				delete room.bannedIps[ip];
+				isUnbanned = true;
+			}
+		}
+
+		if (!isUnbanned) return this.sendReply(targetUser.name + ' is not banned from this room.');
+		return this.addModCommand(''+targetUser.name+' was unbanned from room "' + room.title + '" by '+user.name+'.');
 	},
 
 	banip: function(target, room, user) {

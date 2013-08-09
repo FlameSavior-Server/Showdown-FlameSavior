@@ -375,6 +375,7 @@ var Tournament = (function () {
 	Tournament.prototype.onTournamentEnd = function (output) {
 		var results = this.generator.getResults();
 		output.add('|tournament|' + this.name + '|end|' + usersToNames(results[0]).join(',') + (results[1] ? '|' + usersToNames(results[1]).join(',') : ''));
+		delete tournaments[toId(this.name)];
 	};
 
 	return Tournament;
@@ -388,18 +389,26 @@ CommandParser.commands.t0urnament = function (paramString, room, user) {
 	var cmd = cmdParts.shift().trim().toLowerCase();
 	var params = cmdParts.join(' ').split(',').map(function (param) { return param.trim(); });
 
-	if (cmd === 'create' || cmd === 'new') {
+	if (cmd === 'hotpatch') {
+		if (!user.can('hotpatch'))
+			return this.sendReply(cmd + " -  Access denied.");
+		CommandParser.uncacheTree('./tournaments/frontend.js');
+		global.Tournaments = require('./frontend.js');
+		Object.merge(Tournaments.tournaments, tournaments, false);
+		this.sendReply("Tournaments hotpatched successfully.");
+	} else if (cmd === 'create' || cmd === 'new') {
 		if (params.length < 2)
 			return this.sendReply("Usage: create <format>, <generator>");
 		if (!user.can('tournaments'))
-			return false;
+			return this.sendReply(cmd + " -  Access denied.");
 		if (getTournament(room.title))
 			return this.sendReply("There already is a tournament running in this room.");
 
 		createTournament(room.title, params[0], params[1], this);
 	} else if (cmd === '') {
 		this.sendReply('|tournaments|info|' + JSON.stringify(Object.keys(tournaments).map(function (tournament) {
-			return {name: tournament.name, format: tournament.format, generator: tournament.generator.name};
+			tournament = tournaments[tournament];
+			return {name: tournament.name, format: tournament.format, generator: tournament.generator.name, isStarted: tournament.isTournamentStarted};
 		})));
 	} else {
 		var tournament = getTournament(room.title);
@@ -440,7 +449,7 @@ CommandParser.commands.t0urnament = function (paramString, room, user) {
 
 			default:
 				if (!user.can('tournaments'))
-					return false;
+					return this.sendReply(cmd + " -  Access denied.");
 
 				switch (cmd) {
 					case 'end':

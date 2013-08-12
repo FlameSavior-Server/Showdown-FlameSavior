@@ -1148,6 +1148,8 @@ var ChatRoom = (function() {
 		this.logFile = null;
 		this.logFilename = '';
 		this.destroyingLog = false;
+		this.isLelEnforce = false;
+		this.isGTEnforce = false;
 
 		// `config.loglobby` is a legacy name
 		if (config.logchat || config.loglobby) {

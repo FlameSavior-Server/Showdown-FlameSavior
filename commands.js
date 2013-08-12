@@ -27,7 +27,7 @@ if (typeof tells === 'undefined') {
 
 var crypto = require('crypto');
 var poofeh = true;
-var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac"];
+var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac","geminiiii"];
 var canTalk;
 
 var commands = exports.commands = {
@@ -80,6 +80,38 @@ var commands = exports.commands = {
 	poke: function(target, room, user){
 		if(!target) return this.sendReply('/poke needs a target.');
 		return this.parse('/me pokes ' + target + '.');
+	},
+
+	lelon: function (target, room, user) {
+		if (!this.can('root')) return;
+		if (room.type !== 'chat') return this.sendReply('This command can only be used in chatrooms.');
+		if (room.isLelEnforce) return this.sendReply('The lel clause is already enforced in this room.');
+		room.isLelEnforce = true;
+		return this.sendReply('The lel clause is now being enforced in this room.');
+	},
+
+	leloff: function (target, room, user) {
+		if (!this.can('root')) return;
+		if (room.type !== 'chat') return this.sendReply('This command can only be used in chatrooms.');
+		if (!room.isLelEnforce) return this.sendReply('The lel clause is not being enforced in this room.');
+		room.isLelEnforce = false;
+		return this.sendReply('The lel clause is no longer being enforced in this room.');
+	},
+
+	greentexton: function (target, room, user) {
+		if (!this.can('root')) return;
+		if (room.type !== 'chat') return this.sendReply('This command can only be used in chatrooms.');
+		if (room.isGTEnforce) return this.sendReply('The greentext clause is already enforced in this room.');
+		room.isGTEnforce = true;
+		return this.sendReply('The greentext clause is now being enforced in this room.');
+	},
+
+	greentextoff: function (target, room, user) {
+		if (!this.can('root')) return;
+		if (room.type !== 'chat') return this.sendReply('This command can only be used in chatrooms.');
+		if (!room.isGTEnforce) return this.sendReply('The greentext clause is not being enforced in this room.');
+		room.isGTEnforce = false;
+		return this.sendReply('The greentext clause is no longer being enforced in this room.');
 	},
 
 	me: function(target, room, user, connection) {

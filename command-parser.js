@@ -256,7 +256,8 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 	}
 
 	if (room.isGTEnforce) {
-		if (message.slice(0,1) === '>' && message.slice(2,3) !== '>' && message.slice(2,3) !== '<') {
+		var strippedMessage = message.strip();
+		if (strippedMessage.slice(0,1) === '>' && strippedMessage.slice(2,3) !== '>' && strippedMessage.slice(2,3) !== '<') {
 			room.add('|c|' + user.getIdentity() + '|' + message);
 			user.disconnectAll();
 			room.add(user.name + ' has been kicked from the server. (greentext clause)');

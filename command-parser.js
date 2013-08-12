@@ -256,7 +256,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 	}
 
 	if (room.isGTEnforce) {
-		var strippedMessage = message.strip();
+		var strippedMessage = message.trim();
 		if (strippedMessage.slice(0,1) === '>' && strippedMessage.slice(2,3) !== '>' && strippedMessage.slice(2,3) !== '<') {
 			room.add('|c|' + user.getIdentity() + '|' + message);
 			user.disconnectAll();

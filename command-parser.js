@@ -255,18 +255,18 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 		delete tells[user.userid];
 	}
 
-	if (message.slice(0,1) === '>') {
-		room.add('|c|' + user.getIdentity() + '|' + message);
-		user.disconnectAll();
-		room.add(user.name + ' has been kicked from the server. (greentext clause)');
-		return false;
-	}
-	if (message.toLowerCase().indexOf('lel') > -1 && message.toLowerCase().indexOf('candlelight') === -1 && message.toLowerCase().indexOf('allele') === -1) {
-		room.add('|c|' + user.getIdentity() + '|' + message);
-		user.disconnectAll();
-		room.add(user.name + ' has been kicked from the server. (lel clause)');
-		return false;
-	}
+//	if (message.slice(0,1) === '>') {
+//		room.add('|c|' + user.getIdentity() + '|' + message);
+//		user.disconnectAll();
+//		room.add(user.name + ' has been kicked from the server. (greentext clause)');
+//		return false;
+//	}
+//	if (message.toLowerCase().indexOf('lel') > -1 && message.toLowerCase().indexOf('candlelight') === -1 && message.toLowerCase().indexOf('allele') === -1) {
+//		room.add('|c|' + user.getIdentity() + '|' + message);
+//		user.disconnectAll();
+//		room.add(user.name + ' has been kicked from the server. (lel clause)');
+//		return false;
+//	}
 	
 	return message;
 };

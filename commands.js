@@ -27,7 +27,7 @@ if (typeof tells === 'undefined') {
 
 var crypto = require('crypto');
 var poofeh = true;
-var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac","geminiiii"];
+var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","imanalt","ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac","geminiiii", "lepandaw"];
 var canTalk;
 
 var commands = exports.commands = {
@@ -84,7 +84,7 @@ var commands = exports.commands = {
 
 
 	lelon: function (target, room, user) {
-		if (!this.can('root')) return;
+		if (!this.can('roommod')) return;
 		if (room.type !== 'chat' || !room.auth) return this.sendReply('This command can only be used in unofficial chatrooms.');
 		if (room.isLelEnforce) return this.sendReply('The lel clause is already enforced in this room.');
 		room.isLelEnforce = true;
@@ -92,7 +92,7 @@ var commands = exports.commands = {
 	},
 
 	leloff: function (target, room, user) {
-		if (!this.can('root')) return;
+		if (!this.can('roommod')) return;
 		if (room.type !== 'chat' || !room.auth) return this.sendReply('This command can only be used in unofficial chatrooms.');
 		if (!room.isLelEnforce) return this.sendReply('The lel clause is not being enforced in this room.');
 		room.isLelEnforce = false;
@@ -100,7 +100,7 @@ var commands = exports.commands = {
 	},
 
 	greentexton: function (target, room, user) {
-		if (!this.can('root')) return;
+		if (!this.can('roommod')) return;
 		if (room.type !== 'chat'|| !room.auth) return this.sendReply('This command can only be used in chatrooms.');
 		if (room.isGTEnforce) return this.sendReply('The greentext clause is already enforced in this room.');
 		room.isGTEnforce = true;
@@ -108,7 +108,7 @@ var commands = exports.commands = {
 	},
 
 	greentextoff: function (target, room, user) {
-		if (!this.can('root')) return;
+		if (!this.can('roommod')) return;
 		if (room.type !== 'chat' || !room.auth) return this.sendReply('This command can only be used in chatrooms.');
 		if (!room.isGTEnforce) return this.sendReply('The greentext clause is not being enforced in this room.');
 		room.isGTEnforce = false;

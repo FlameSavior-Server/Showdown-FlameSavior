@@ -82,6 +82,7 @@ var commands = exports.commands = {
 		return this.parse('/me pokes ' + target + '.');
 	},
 
+/*
 	lelon: function (target, room, user) {
 		if (!this.can('root')) return;
 		if (room.type !== 'chat') return this.sendReply('This command can only be used in chatrooms.');
@@ -113,7 +114,7 @@ var commands = exports.commands = {
 		room.isGTEnforce = false;
 		return this.sendReply('The greentext clause is no longer being enforced in this room.');
 	},
-
+*/
 	me: function(target, room, user, connection) {
 		canTalk = this.canTalk(target);
 		if (!canTalk || (canTalk && !target)) return;

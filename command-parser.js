@@ -255,7 +255,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 		delete tells[user.userid];
 	}
 
-/*
+
 	if (room.isGTEnforce) {
 		var strippedMessage = message.trim();
 		if (strippedMessage.slice(0,1) === '>' && strippedMessage.slice(2,3) !== '>' && strippedMessage.slice(2,3) !== '<') {
@@ -274,7 +274,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 			return false;
 		}
 	}
-*/
+
 
 	return message;
 };

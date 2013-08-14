@@ -93,7 +93,7 @@ var commands = exports.commands = {
 
 	leloff: function (target, room, user) {
 		if (!this.can('root')) return;
-		if (room.type !== 'chat' && room.auth) return this.sendReply('This command can only be used in unofficial chatrooms.');
+		if (room.type !== 'chat' || room.auth) return this.sendReply('This command can only be used in unofficial chatrooms.');
 		if (!room.isLelEnforce) return this.sendReply('The lel clause is not being enforced in this room.');
 		room.isLelEnforce = false;
 		return this.sendReply('The lel clause is no longer being enforced in this room.');
@@ -101,7 +101,7 @@ var commands = exports.commands = {
 
 	greentexton: function (target, room, user) {
 		if (!this.can('root')) return;
-		if (room.type !== 'chat') return this.sendReply('This command can only be used in chatrooms.');
+		if (room.type !== 'chat'|| room.auth) return this.sendReply('This command can only be used in chatrooms.');
 		if (room.isGTEnforce) return this.sendReply('The greentext clause is already enforced in this room.');
 		room.isGTEnforce = true;
 		return this.sendReply('The greentext clause is now being enforced in this room.');

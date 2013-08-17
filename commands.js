@@ -27,7 +27,9 @@ if (typeof tells === 'undefined') {
 
 var crypto = require('crypto');
 var poofeh = true;
-var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","fallacies","imanalt","ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4","ipad","jac","geminiiii", "lepandaw"];
+var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","fallacies","imanalt",
+		"ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4",
+		"jac","geminiiii", "lepandaw", "cattelite"];
 var canTalk;
 
 var commands = exports.commands = {

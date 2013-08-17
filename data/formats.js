@@ -32,20 +32,18 @@ exports.BattleFormats = {
 
 		effectType: 'Format',
 		challengeDefault: true,
-		rated: true,
+		// rated: true,
 		challengeShow: true,
-		searchShow: true,
+		// searchShow: true,
 		isTeambuilderFormat: true,
 		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
 		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
 	},
-	/**
 	oucurrent: {
 		name: "OU (current)",
 		section: "Singles",
 
 		effectType: 'Format',
-		challengeDefault: true,
 		rated: true,
 		challengeShow: true,
 		searchShow: true,
@@ -64,21 +62,8 @@ exports.BattleFormats = {
 		searchShow: true,
 		isTeambuilderFormat: true,
 		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
-		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew', 'Landorus']
-	},*/
-	// ounostealthrock: {
-	// 	name: "OU (no Stealth Rock)",
-	// 	section: "Singles",
-
-	// 	effectType: 'Format',
-	// 	challengeDefault: true,
-	// 	rated: true,
-	// 	challengeShow: true,
-	// 	searchShow: true,
-	// 	isTeambuilderFormat: true,
-	// 	ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
-	// 	banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew', 'Stealth Rock']
-	// },
+		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew', 'Keldeo', 'Keldeo-Resolute']
+	},
 	ubers: {
 		name: "Ubers",
 		section: "Singles",
@@ -98,12 +83,12 @@ exports.BattleFormats = {
 		effectType: 'Format',
 		rated: true,
 		challengeShow: true,
-		//searchShow: true,
+		searchShow: true,
 		isTeambuilderFormat: true,
 		ruleset: ['OU'],
 		banlist: ['OU', 'BL', 'Drought', 'Sand Stream']
 	},
-	uususpecttest: {
+	/*uususpecttest: {
 		name: "UU (suspect test)",
 		section: "Singles",
 
@@ -114,21 +99,9 @@ exports.BattleFormats = {
 		isTeambuilderFormat: true,
 		ruleset: ['OU'],
 		banlist: ['OU', 'BL', 'Drought', 'Sand Stream', 'Froslass']
-	},
+	},*/
 	ru: {
 		name: "RU",
-		section: "Singles",
-
-		effectType: 'Format',
-		rated: true,
-		challengeShow: true,
-		//searchShow: true,
-		isTeambuilderFormat: true,
-		ruleset: ['UU'],
-		banlist: ['UU', 'BL2', 'Shell Smash + Baton Pass']
-	},
-	rususpecttest: {
-		name: "RU (suspect test)",
 		section: "Singles",
 
 		effectType: 'Format',
@@ -137,7 +110,7 @@ exports.BattleFormats = {
 		searchShow: true,
 		isTeambuilderFormat: true,
 		ruleset: ['UU'],
-		banlist: ['UU', 'BL2', 'Shell Smash + Baton Pass']
+		banlist: ['UU', 'BL2', 'Shell Smash + Baton Pass', 'Snow Warning']
 	},
 	nu: {
 		name: "NU",
@@ -162,7 +135,7 @@ exports.BattleFormats = {
 		searchShow: true,
 		isTeambuilderFormat: true,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
-		banlist: ['Sonicboom', 'Dragon Rage', 'Berry Juice', 'Carvanha', 'Meditite', 'Gligar', 'Scyther', 'Sneasel', 'Tangela', 'Vulpix', 'Yanma', 'Soul Dew']
+		banlist: ['Sonicboom', 'Dragon Rage', 'Berry Juice', 'Carvanha', 'Meditite', 'Gligar', 'Scyther', 'Sneasel', 'Tangela', 'Vulpix', 'Yanma', 'Soul Dew', 'Snover']
 	},
 	cap: {
 		name: "CAP",
@@ -317,7 +290,7 @@ exports.BattleFormats = {
 		searchShow: true,
 		rated: true,
 		ruleset: ['Pokemon', 'Team Preview', 'Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'Evasion Abilities Clause', 'HP Percentage Mod'],
-		banlist: ['Unreleased', 'Illegal', 'Sky Drop', 'Dark Void', 'Soul Dew',
+		banlist: ['Unreleased', 'Illegal', 'Dark Void', 'Soul Dew', 'Sky Drop',
 			'Mewtwo',
 			'Lugia',
 			'Ho-Oh',
@@ -388,7 +361,7 @@ exports.BattleFormats = {
 		isTeambuilderFormat: true,
 		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
 		banlist: ['Drizzle ++ Swift Swim', 'Soul Dew', 'Soul Dew',
-			'Mewtwo', 'Lugia', 'Ho-Oh', 'Blaziken', 'Kyogre', 'Groudon', 'Rayquaza', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Palkia', 'Giratina', 'Giratina-Origin', 'Manaphy', 'Darkrai', 'Shaymin-Sky',
+			'Mewtwo', 'Lugia', 'Ho-Oh', 'Blaziken', 'Kyogre', 'Groudon', 'Rayquaza', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Palkia', 'Giratina', 'Giratina-Origin', 'Manaphy', 'Shaymin-Sky',
 			'Arceus', 'Arceus-Bug', 'Arceus-Dark', 'Arceus-Dragon', 'Arceus-Electric', 'Arceus-Fighting', 'Arceus-Fire', 'Arceus-Flying', 'Arceus-Ghost', 'Arceus-Grass', 'Arceus-Ground', 'Arceus-Ice', 'Arceus-Poison', 'Arceus-Psychic', 'Arceus-Rock', 'Arceus-Steel', 'Arceus-Water',
 			'Reshiram', 'Zekrom', 'Kyurem-White', 'Genesect'
 		]
@@ -773,7 +746,7 @@ exports.BattleFormats = {
 				}
 			}
 			if (template.num == 647) { // Keldeo
-				if (set.species === 'Keldeo-Resolution' && set.moves.indexOf('Secret Sword') < 0) {
+				if (set.species === 'Keldeo-Resolute' && set.moves.indexOf('Secret Sword') < 0) {
 					set.species = 'Keldeo';
 				}
 			}

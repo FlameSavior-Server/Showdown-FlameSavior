@@ -1143,7 +1143,6 @@ var ChatRoom = (function() {
 		this.log = [];
 		this.lastUpdate = 0;
 		this.users = {};
-		this.bannedIps = {};
 		this.searchers = [];
 		this.logFile = null;
 		this.logFilename = '';

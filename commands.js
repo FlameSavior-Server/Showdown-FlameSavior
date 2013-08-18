@@ -834,6 +834,12 @@ var commands = exports.commands = {
 		if (targetRoom.isAdult) {
 			return this.sendReply('You cannot redirect to an adult room.');
 		}
+		if (Rooms.rooms[targetRoom.id].users[targetUser.userid]) {
+			return this.sendReply("The player " + targetUser.name + " is already in the room " + target + "!");
+		}
+		if (!Rooms.rooms[room.id].users[targetUser.userid]) {
+			return this.sendReply('User '+this.targetUsername+' is not in the room ' + room.id + '.');
+		}
 		var roomName = (targetRoom.isPrivate)? 'a private room' : ' the room "' + target + '"';
 		this.addModCommand(targetUser.name + ' was forcibly redirected to ' + roomName + ' by ' + user.name + '.');
 		targetUser.leaveRoom(room);

@@ -349,7 +349,7 @@ exports.BattleFormats = {
 
 	// Other Metagames
 	///////////////////////////////////////////////////////////////////
-	
+
 	stabmons: {
 		name: "STABmons",
 		section: "OM of the Month",
@@ -384,16 +384,16 @@ exports.BattleFormats = {
 			if (this.p1.pokemon[0].name === 'Kyogre') p1Where = 'pirates';
 			if (this.p2.pokemon[0].name === 'Kyogre') p2Where = 'pirates';
 			var shipNames = [
-				'Zarelrules', 'Joimawesome', 'Treeckonoob', 'MJailBait', 'mikelpuns', 'TTTtttttt', 'Frazzle Dazzle', 
-				'TIbot', 'CDXCIV', 'Srs Bsns Trts', 'Leemz', 'Eggymad', 'Snoffles', 'bmelted', 'Poopes', 'Hugonedugen', 
+				'Zarelrules', 'Joimawesome', 'Treeckonoob', 'MJailBait', 'mikelpuns', 'TTTtttttt', 'Frazzle Dazzle',
+				'TIbot', 'CDXCIV', 'Srs Bsns Trts', 'Leemz', 'Eggymad', 'Snoffles', 'bmelted', 'Poopes', 'Hugonedugen',
 				'Il Haunter', 'chaospwns', 'WaterBro', 'niggie', 'DOOM', 'qhore', 'Jizzmine', 'Aldarown'
 			].randomize();
-			var whereAreThey = (p1Where === 'boat' && p2Where === 'boat')? 'You both were aboard the fantastic ship S. S. ' + shipNames[0] : 
-			((p1Where === 'pirates' && p2Where === 'pirates')? 'You are two pirate gangs on a summer sea storm about to raze the ship S. S. ' +  shipNames[0] : 
-			((p1Where === 'pirates')? this.p1.name : this.p2.name) + ' leads a pirate boat to raze the ship S. S. ' + shipNames[0] 
+			var whereAreThey = (p1Where === 'boat' && p2Where === 'boat')? 'You both were aboard the fantastic ship S. S. ' + shipNames[0] :
+			((p1Where === 'pirates' && p2Where === 'pirates')? 'You are two pirate gangs on a summer sea storm about to raze the ship S. S. ' +  shipNames[0] :
+			((p1Where === 'pirates')? this.p1.name : this.p2.name) + ' leads a pirate boat to raze the ship S. S. ' + shipNames[0]
 			+ ' where ' + ((p1Where === 'pirates')? this.p2.name : this.p1.name)) + ' is enjoying a sea travel,';
-			
-			this.add('-message', 
+
+			this.add('-message',
 				'Alas, poor trainers! ' + whereAreThey + " when a sudden summer Hurricane made a Wailord hit your transport, and now it's sinking! "
 				+ "There are not enough life boats for everyone nor trainers ain't sharing their Water-type friends, "
 				+ "so you'll have to fight to access a life boat! Good luck! You have to be fast to not to be hit by the Hurricane!"
@@ -554,7 +554,26 @@ exports.BattleFormats = {
 			this.p2.pokemonLeft = this.p2.pokemon.length;
 		},
 		ruleset: ['Pokemon', 'Standard'],
-		banlist: ['Unreleased', 'Illegal', 'Soul Dew', 'Uber','Explosion', 'Perish Song', 'Destiny Bond', 'Healing Wish', 'Selfdestruct', 'Lunar Dance', 'Final Gambit'
+		banlist: ['Unreleased', 'Illegal', 'Soul Dew',
+			'Arceus', 'Arceus-Bug', 'Arceus-Dark', 'Arceus-Dragon', 'Arceus-Electric', 'Arceus-Fighting', 'Arceus-Fire', 'Arceus-Flying', 'Arceus-Ghost', 'Arceus-Grass', 'Arceus-Ground', 'Arceus-Ice', 'Arceus', 'Arceus-Poison', 'Arceus-Psychic', 'Arceus-Rock', 'Arceus-Steel', 'Arceus-Water',
+			'Blaziken',
+			'Darkrai',
+			'Deoxys', 'Deoxys-Attack',
+			'Dialga',
+			'Giratina', 'Giratina-Origin',
+			'Groudon',
+			'Ho-Oh',
+			'Kyogre',
+			'Kyurem-White',
+			'Lugia',
+			'Mewtwo',
+			'Palkia',
+			'Rayquaza',
+			'Reshiram',
+			'Shaymin-Sky',
+			'Zekrom',
+			'Memento', 'Explosion', 'Perish Song', 'Destiny Bond', 'Healing Wish', 'Selfdestruct', 'Lunar Dance', 'Final Gambit',
+			'Focus Sash'
 		]
 	},
 	swalotworld: {
@@ -575,7 +594,7 @@ exports.BattleFormats = {
 		section: "Singles",
 
 		effectType: 'Format',
-		maxLevel: 1,		
+		maxLevel: 1,
 		challengeDefault: true,
 		rated: true,
 		challengeShow: true,
@@ -593,7 +612,7 @@ exports.BattleFormats = {
 		isTeambuilderFormat: true,
 		ruleset: ['Pokemon', 'Evasion Abilities Clause', 'Team Preview', 'Metronome Clause'],
 		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
-	},	
+	},
 	pu: {
 		name: "PU",
 		section: "Other Metagames",
@@ -607,7 +626,7 @@ exports.BattleFormats = {
 
 	// Rulesets
 	///////////////////////////////////////////////////////////////////
-	
+
 	swalotclause: {
                 effectType: 'Rule',
                 onStart: function() {
@@ -619,7 +638,7 @@ exports.BattleFormats = {
                                 return [set.species+" is banned because it's not a Swalot you hoe."];
                         }
                 }
-        },	
+        },
 	cottoneeclause: {
                 effectType: 'Rule',
                 onStart: function() {
@@ -643,7 +662,7 @@ exports.BattleFormats = {
                                 return [set.species+" is banned because it's not using metronome you hoe."];
                         }
                 }
-        },         
+        },
 	standard: {
 		effectType: 'Banlist',
 		ruleset: ['Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'HP Percentage Mod'],
@@ -761,7 +780,7 @@ exports.BattleFormats = {
 		validateSet: function(set, format) {
 			// don't return
 			this.getEffect('Pokemon').validateSet.call(this, set, format);
-			
+
 			// limit one of each move
 			var moves = [];
 			if (set.moves) {

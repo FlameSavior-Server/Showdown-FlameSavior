@@ -260,9 +260,9 @@ var Tournament = (function () {
 	};
 
 	Tournament.prototype.disqualifyUser = function (user, output) {
-		var error = this.generator.disqualifyUser(user);
-		if (typeof error === 'string') {
-			output.sendReply('|tournament|error|' + error);
+		var isTournamentEnded = this.generator.disqualifyUser(user);
+		if (typeof isTournamentEnded === 'string') {
+			output.sendReply('|tournament|error|' + isTournamentEnded);
 			return;
 		}
 
@@ -284,6 +284,7 @@ var Tournament = (function () {
 		if (matchFrom) {
 			this.generator.setUserBusy(matchFrom.to, false);
 			this.inProgressMatches.set(user, null);
+			matchFrom.room.win = matchFrom.room._win;
 			matchFrom.room.forfeit(user);
 		}
 
@@ -294,7 +295,9 @@ var Tournament = (function () {
 		});
 		if (matchTo) {
 			this.generator.setUserBusy(matchTo, false);
-			this.inProgressMatches.get(matchTo).room.forfeit(user);
+			var matchRoom = this.inProgressMatches.get(matchTo).room;
+			matchRoom.win = matchRoom._win;
+			matchRoom.forfeit(user);
 			this.inProgressMatches.set(matchTo, null);
 		}
 
@@ -302,6 +305,9 @@ var Tournament = (function () {
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
 		this.update();
+
+		if (isTournamentEnded)
+			this.onTournamentEnd();
 	};
 
 	Tournament.prototype.challenge = function (from, to, output) {

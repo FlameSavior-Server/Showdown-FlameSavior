@@ -501,10 +501,8 @@ var commands = exports.commands = {
 		if(targetRoom.isAdult && aList.indexOf(user.userid) === -1){
 			return this.sendReply("You are not old enough to join this room. If you believe you are, contact a staff member.");
 		}
-		if (targetRoom.type === 'chat') {
-			for (var ip in user.ips) {
-				if (ip in targetRoom.bannedIps || targetRoom.id in user.bannedRooms) return this.sendReply('You are banned from this room.');
-			}
+		for (var ip in user.ips) {
+			if (ip in targetRoom.bannedIps || targetRoom.id in user.bannedRooms) return this.sendReply('You are banned from this room.');
 		}
 		if (!user.joinRoom(targetRoom || room, connection)) {
 			// This condition appears to be impossible for now.
@@ -1012,7 +1010,6 @@ var commands = exports.commands = {
 	rban: 'roomban',
 	roomban: function (target, room, user) {
 		if (!target) return this.parse('/help roomban');
-		if (room.type === 'battle') return this.sendReply('You cannot room ban or unban in battle rooms.');
 		target  = this.splitTarget(target);
 		targetUser = this.targetUser;
 
@@ -1047,7 +1044,6 @@ var commands = exports.commands = {
 	roomunban: 'unroomban',
 	unroomban: function (target, room, user) {
 		if (!target) return this.parse('/help unroomban');
-		if (room.type === 'battle') return this.sendReply('You cannot room ban or unban in battle rooms.')
 		if (!user.can('ban', null, room) && !(user.can('mute', null, room) && room.auth)) return this.sendReply('/unroomban - Access denied');
 
 		var targetUser = Users.get(target);

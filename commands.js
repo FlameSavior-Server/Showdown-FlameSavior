@@ -502,6 +502,7 @@ var commands = exports.commands = {
 		}
 		if(targetRoom.isAdult && aList.indexOf(user.userid) === -1){
 			return this.sendReply("|noinit|joinfailed|You are not old enough to join this room. If you believe you are, contact a staff member.");
+		}
 		if (user.userid && targetRoom.bannedUsers && user.userid in targetRoom.bannedUsers) {
 			return connection.sendTo(target, "|noinit|joinfailed|You are banned from that room!");
 		}

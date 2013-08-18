@@ -51,7 +51,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<div class="infobox">Play Poker Online:<br />&nbsp;&nbsp;- <a href="http://www.pogo.com/games/free-online-poker" target="_blank">Play Poker</a><img src="http://www.picgifs.com/sport-graphics/sport-graphics/playing-cards/sport-graphics-playing-cards-590406.gif" style="float: left;" height="30px" /></div>');
 	},
-	
+
 	version: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Server version: <b>'+CommandParser.package.version+'</b> <small>(<a href="http://pokemonshowdown.com/versions#' + CommandParser.serverVersion + '">' + CommandParser.serverVersion.substr(0,10) + '</a>)</small>');
@@ -61,24 +61,24 @@ var commands = exports.commands = {
 		if(!target) return this.sendReply('/slap needs a target.');
 		return this.parse('/me slaps ' + target + ' with a large trout.');
 	},
-	
+
 	punt: function(target, room, user){
 		if(!target) return this.sendReply('/punt needs a target.');
 		return this.parse('/me punts ' + target + ' to the moon!');
 	},
-	
+
 	crai: 'cry',
 	cry: function(target, room, user){
 		return this.parse('/me starts tearbending dramatically like Katara.');
 	},
-	
-	
+
+
 	dk: 'dropkick',
 	dropkick: function(target, room, user){
 		if(!target) return this.sendReply('/dropkick needs a target.');
 		return this.parse('/me dropkicks ' + target + ' across the Pokémon Stadium!');
 	},
-	
+
 	poke: function(target, room, user){
 		if(!target) return this.sendReply('/poke needs a target.');
 		return this.parse('/me pokes ' + target + '.');
@@ -241,7 +241,7 @@ var commands = exports.commands = {
 				}
 			}
 		}
-		
+
 		if (user.userid in spamroom) {
 			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|(__Private to ' + targetUser.getIdentity()+ "__) " + target );
 		} else {
@@ -407,7 +407,7 @@ var commands = exports.commands = {
 			Rooms.global.writeChatRoomData();
 		}
 	},
-	
+
 	rk: 'rkick',
 	rkick: function(target, room, user){
 		if(!room.auth) return this.sendReply('/rkick is designed for rooms with their own auth.');
@@ -418,9 +418,9 @@ var commands = exports.commands = {
 		targetUser.leaveRoom(room);
 		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
 		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
-		
+
 	},
-	
+
 	adultroom: function(target, room, user) {
 		if(!user.can('makeroom')) return;
 		if(target === 'off'){
@@ -489,17 +489,26 @@ var commands = exports.commands = {
 	join: function(target, room, user, connection) {
 		if(!target)return this.sendReply('/join room - joins the specified room');
 		var targetRoom = Rooms.get(target) || Rooms.get(toId(target));
-		if (targetRoom == undefined) {
+		if (!targetRoom) return false;
+		if (target && !targetRoom) {
+			if (target === 'lobby') return connection.sendTo(target, "|noinit|nonexistent|");
 			return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
 		}
 		if (targetRoom && targetRoom.isPrivate && !user.named) {
 			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 		}
 		if (target.toLowerCase() == "staff" && !user.can('warn')) {
-			return this.sendReply("Out peasant. OUT! This room is for staff ONLY!");
+			return this.sendReply("|noinit|joinfailed|Out peasant. OUT! This room is for staff ONLY!");
 		}
 		if(targetRoom.isAdult && aList.indexOf(user.userid) === -1){
-			return this.sendReply("You are not old enough to join this room. If you believe you are, contact a staff member.");
+			return this.sendReply("|noinit|joinfailed|You are not old enough to join this room. If you believe you are, contact a staff member.");
+		if (user.userid && targetRoom.bannedUsers && user.userid in targetRoom.bannedUsers) {
+			return connection.sendTo(target, "|noinit|joinfailed|You are banned from that room!");
+		}
+		if (user.ips && targetRoom.bannedIps) {
+			for (var ip in user.ips) {
+				if (ip in targetRoom.bannedIps) return connection.sendTo(target, "|noinit|joinfailed|You are banned from that room!");
+			}
 		}
 		if (!user.joinRoom(targetRoom || room, connection)) {
 			// This condition appears to be impossible for now.
@@ -514,7 +523,7 @@ var commands = exports.commands = {
 		var userid = toId(name);
 		if (!userid || userid === '') return this.sendReply("User '"+name+"' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
-		if (!Rooms.rooms[room.id].users[targetUser.userid]) {
+		if (!Rooms.rooms[room.id].users[userid]) {
 			return this.sendReply('User '+this.targetUsername+' is not in the room ' + room.id + '.');
 		}
 		room.bannedUsers[userid] = true;
@@ -579,23 +588,23 @@ var commands = exports.commands = {
 			var tar = toUserid(target);
 			var targetUser = Users.get(tar);
 			if(user.can('poof', targetUser)){
-				
+
 				if(!targetUser){
-					user.emit('console', 'Cannot find user ' + target + '.', socket);	
+					user.emit('console', 'Cannot find user ' + target + '.', socket);
 				}else{
 					if(poofeh)
 						Rooms.rooms.lobby.addRaw(btags + '~~ '+targetUser.name+' was slaughtered by ' + user.name +'! ~~' + etags);
 					targetUser.disconnectAll();
 					return	this.logModCommand(targetUser.name+ ' was poofed by ' + user.name);
 				}
-				
+
 			} else {
 				return this.sendReply('/poof target - Access denied.');
 			}
 		}
 		if(poofeh && !user.muted){
 			Rooms.rooms.lobby.addRaw(btags + getRandMessage(user)+ etags);
-			user.disconnectAll();	
+			user.disconnectAll();
 		}else{
 			return this.sendReply('poof is currently disabled.');
 		}
@@ -610,7 +619,7 @@ var commands = exports.commands = {
 		poofeh = false;
 		return this.sendReply('poof is now disabled.');
 	},
-	
+
 	poofon: function(target, room, user){
 		if(!user.can('warn'))
 			return this.sendReply('/poofon - Access denied.');
@@ -619,18 +628,18 @@ var commands = exports.commands = {
 		poofeh = true;
 		return this.sendReply('poof is now enabled.');
 	},
-	
+
 	cpoof: function(target, room, user){
 		if(!user.can('broadcast'))
 			return this.sendReply('/cpoof - Access Denied');
-		
+
 		if(poofeh)
 		{
 			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
 			var etags = '</font></strong>'
 			Rooms.rooms.lobby.addRaw(btags + '~~ '+user.name+' '+target+'! ~~' + etags);
 			this.logModCommand(user.name + ' used a custom poof message: \n "'+target+'"');
-			user.disconnectAll();	
+			user.disconnectAll();
 		}else{
 			return this.sendReply('Poof is currently disabled.');
 		}
@@ -678,7 +687,7 @@ var commands = exports.commands = {
 			return this.sendReply("Unknown command. Allowable commands are: list, add, remove.");
 		}
 	},
-	
+
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
 		if (aList.indexOf(user.userid) === -1) return this.sendReply('You must be on the alist to use this command.');
@@ -695,12 +704,12 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target);
 	},
-	
+
 	tell: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
 		if (!target) return this.parse('/help tell');
-		
+
 		var commaIndex = target.indexOf(',');
 		if (commaIndex < 0) return this.sendReply('You forgot the comma.');
 		var targetUser = toId(target.slice(0, commaIndex));
@@ -720,7 +729,7 @@ var commands = exports.commands = {
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
 
-	/*	
+	/*
 	punt: function (target, room, user) {
 		if (!target) return this.sendReply('You must select a user to punt.\n/punt [user] - punts the selected user.');
 		if (!this.canBroadcast()) return false;
@@ -732,13 +741,13 @@ var commands = exports.commands = {
 		room.add('|c|' + user.getIdentity() + '|/me punts ' + targetUser.name);
 		return room.add('|c|' + targetUser.getIdentity() + '|/me is punted by ' + user.name);
 	},
-	
-	
+
+
 	kupkup: function(target, room, user){
 		if(!user.can('root')) return this.sendReply('/kupkup - Access denied.');
 		for(var i = 0; i < 5; i++)
-			for(var u in room.users) 
-				if(Users.get(u) != undefined && u.toLowerCase().indexOf('guest') != 0 && Users.get(u).connected) 
+			for(var u in room.users)
+				if(Users.get(u) != undefined && u.toLowerCase().indexOf('guest') != 0 && Users.get(u).connected)
 					this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: ♪kupo kupo kupochu~♫');
 		return;
 	},
@@ -766,7 +775,7 @@ var commands = exports.commands = {
 		this.logModCommand(targetUser + ' was added to spamroom by ' + user.name);
 		return this.sendReply(this.targetUsername + ' was successfully added to the spamroom list.');
 	},
-	
+
 	unspam: 'unspamroom',
 	unspammer: 'unspamroom',
 	unspamroom: function(target, room, user, connection) {
@@ -1031,7 +1040,7 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Moderating: Other
 	 *********************************************************/
-	
+
 	fjs: 'forcejoinstaff',
 	forcejoinstaff: function(target, room, user){
 		if(!user.can('declare')) return false;
@@ -1045,12 +1054,12 @@ var commands = exports.commands = {
 				Users.users[u].joinRoom('staff');
 		return this.sendReply('Staff has been gathered.');
 	},
-	 
+
 	hide: 'hideauth',
 	hideauth: function(target, room, user){
 		if(!user.can('hideauth'))
 			return this.sendReply( '/hideauth - access denied.');
-		
+
 		var tar = ' ';
 		if(target){
 			target = target.trim();
@@ -1064,7 +1073,7 @@ var commands = exports.commands = {
 				this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
 			}
 		}
-	
+
 		user.getIdentity = function(){
 			if(this.muted)
 				return '!' + this.name;
@@ -1076,11 +1085,11 @@ var commands = exports.commands = {
 		this.sendReply( 'You are now hiding your auth symbol as \''+tar+ '\'.');
 		return this.logModCommand(user.name + ' is hiding auth symbol as \''+ tar + '\'');
 	},
-	
+
 	showauth: function(target, room, user){
 		if(!user.can('hideauth'))
 			return	this.sendReply( '/showauth - access denied.');
-		
+
 		delete user.getIdentity;
 		user.updateIdentity();
 		this.sendReply('You have now revealed your auth symbol.');
@@ -1092,7 +1101,7 @@ var commands = exports.commands = {
 		if (!this.can('mute')) return false;
 		return this.privateModCommand('(' + user.name + ' notes: ' + target + ')');
 	},
-	
+
 	demote: 'promote',
 	promote: function(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help promote');
@@ -1107,7 +1116,7 @@ var commands = exports.commands = {
 		} else if (Users.usergroups[userid]) {
 			currentGroup = Users.usergroups[userid].substr(0,1);
 		}
-		
+
 		var nextGroup = target ? target : Users.getNextGroupSymbol(currentGroup, cmd === 'demote', true);
 		if (target === 'deauth') nextGroup = config.groupsranking[0];
 		if (!config.groups[nextGroup]) {
@@ -1275,7 +1284,7 @@ var commands = exports.commands = {
 	modlog: function(target, room, user, connection) {
 		if (!this.can('modlog')) return false;
 		var lines = 0;
-		if (!target.match('[^0-9]')) { 
+		if (!target.match('[^0-9]')) {
 			lines = parseInt(target || 15, 10);
 			if (lines > 100) lines = 100;
 		}
@@ -1361,7 +1370,7 @@ var commands = exports.commands = {
 			// uncache the tools.js dependency tree
 			CommandParser.uncacheTree('./tools.js');
 			// reload tools.js
-			Data = {};	
+			Data = {};
 			Tools = require('./tools.js'); // note: this will lock up the server for a few seconds
 			// rebuild the formats list
 			Rooms.global.formatListText = Rooms.global.getFormatListText();
@@ -1380,7 +1389,7 @@ var commands = exports.commands = {
 		if (this.can('hotpatch')) return false;
 		fs.writeFile('data/learnsets.js', 'exports.BattleLearnsets = '+JSON.stringify(BattleLearnsets)+";\n");
 		this.sendReply('learnsets.js saved.');
-	},	
+	},
 
 	disableladder: function(target, room, user) {
 		if (!this.can('disableladder')) return false;
@@ -1980,7 +1989,7 @@ function getRandMessage(user){
 		case 3: message = message + user.name + ' fell into the void.';
 			break;
 		case 4: message = message + user.name + ' was squished by pandaw\'s large behind!';
-			break;	
+			break;
 		case 5: message = message + user.name + ' became EnerG\'s slave!';
 			break;
 		case 6: message = message + user.name + ' became kupo\'s love slave!';
@@ -2039,7 +2048,7 @@ function getRandMessage(user){
 			break;
 		case 33: message = message + user.name + ' was shoved in a Blendtec Blender with iPad!';
 			break;
-		case 34: message = message + user.name + ' was BLEGHED on by LightBlue!'; 
+		case 34: message = message + user.name + ' was BLEGHED on by LightBlue!';
 			break;
 		default: message = message + user.name + ' was Pan Hammered!';
 	};

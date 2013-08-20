@@ -392,8 +392,6 @@ watchFile('./config/custom.css', function(curr, prev) {
 });
 LoginServer.request('invalidatecss', {}, function() {});
 
-global.Data = {};
-
 global.Users = require('./users.js');
 
 global.Rooms = require('./rooms.js');

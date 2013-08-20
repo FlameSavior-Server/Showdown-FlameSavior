@@ -534,7 +534,7 @@ var BattleRoom = (function() {
 
 		var formatid = toId(format);
 
-		if (rated && Tools.getFormat(formatid).rated) {
+		if (rated && Tools.getFormat(formatid).rated !== false) {
 			rated = {
 				p1: p1.userid,
 				p2: p2.userid,

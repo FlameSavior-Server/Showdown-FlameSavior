@@ -118,8 +118,9 @@ var commands = exports.commands = {
 	},
 
 	me: function(target, room, user, connection) {
-		canTalk = this.canTalk(target);
-		if (!canTalk || (canTalk && !target)) return;
+		// By default, /me allows a blank message
+		if (target) target = this.canTalk(target);
+		if (!target) return;
 
 		var message = '/me ' + target;
 		// if user is not in spamroom
@@ -143,8 +144,9 @@ var commands = exports.commands = {
 	},
 
 	mee: function(target, room, user, connection) {
-		canTalk = this.canTalk(target);
-		if (!canTalk || (canTalk && !target)) return;
+		// By default, /mee allows a blank message
+		if (target) target = this.canTalk(target);
+		if (!target) return;
 
 		var message = '/mee ' + target;
 		// if user is not in spamroom
@@ -487,14 +489,13 @@ var commands = exports.commands = {
 	},
 
 	join: function(target, room, user, connection) {
-		if(!target)return this.sendReply('/join room - joins the specified room');
+		if (!target) return false;
 		var targetRoom = Rooms.get(target) || Rooms.get(toId(target));
-		if (!targetRoom) return false;
-		if (target && !targetRoom) {
+		if (!targetRoom) {
 			if (target === 'lobby') return connection.sendTo(target, "|noinit|nonexistent|");
 			return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
 		}
-		if (targetRoom && targetRoom.isPrivate && !user.named) {
+		if (targetRoom.isPrivate && !user.named) {
 			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 		}
 		if (target.toLowerCase() == "staff" && !user.can('warn')) {
@@ -512,20 +513,23 @@ var commands = exports.commands = {
 			}
 		}
 		if (!user.joinRoom(targetRoom || room, connection)) {
-			// This condition appears to be impossible for now.
 			return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' could not be joined.");
 		}
 	},
 
 	roomban: function(target, room, user, connection) {
-		var target = this.splitTarget(target, true);
+		if (!target) return this.parse('/help roomban');
+		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
-		if (!userid || userid === '') return this.sendReply("User '"+name+"' does not exist.");
+		if (!userid) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
 		if (!Rooms.rooms[room.id].users[userid]) {
-			return this.sendReply('User '+this.targetUsername+' is not in the room ' + room.id + '.');
+			return this.sendReply('User ' + this.targetUsername + ' is not in the room ' + room.id + '.');
+		}
+		if (!room.bannedUsers || !room.bannedIps) {
+			return this.sendReply('Room bans are not meant to be used in room ' + room.id + '.');
 		}
 		room.bannedUsers[userid] = true;
 		for (var ip in targetUser.ips) {
@@ -547,12 +551,16 @@ var commands = exports.commands = {
 	},
 
 	roomunban: function(target, room, user, connection) {
-		var target = this.splitTarget(target, true);
+		if (!target) return this.parse('/help roomunban');
+		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
-		if (!userid || userid === '') return this.sendReply("User '"+name+"' does not exist.");
+		if (!userid) return this.sendReply("User '"+name+"' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
+		if (!room.bannedUsers || !room.bannedIps) {
+			return this.sendReply('Room bans are not meant to be used in room ' + room.id + '.');
+		}
 		if (room.bannedUsers[userid]) delete room.bannedUsers[userid];
 		for (var ip in targetUser.ips) {
 			if (room.bannedIps[ip]) delete room.bannedIps[ip];
@@ -820,7 +828,7 @@ var commands = exports.commands = {
 
 	redirect: 'redir',
 	redir: function (target, room, user, connection) {
-		if (!target) return this.parse('/help redir');
+		if (!target) return this.parse('/help redirect');
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!target) return this.sendReply('You need to input a room name!');
@@ -836,13 +844,14 @@ var commands = exports.commands = {
 			return this.sendReply('You cannot redirect to an adult room.');
 		}
 		if (Rooms.rooms[targetRoom.id].users[targetUser.userid]) {
-			return this.sendReply("The player " + targetUser.name + " is already in the room " + target + "!");
+			return this.sendReply("User " + targetUser.name + " is already in the room " + target + "!");
 		}
 		if (!Rooms.rooms[room.id].users[targetUser.userid]) {
 			return this.sendReply('User '+this.targetUsername+' is not in the room ' + room.id + '.');
 		}
-		var roomName = (targetRoom.isPrivate)? 'a private room' : ' the room "' + target + '"';
-		this.addModCommand(targetUser.name + ' was forcibly redirected to ' + roomName + ' by ' + user.name + '.');
+		if (!targetUser.joinRoom(target)) return this.sendReply('User "' + targetUser.name + '" could not be joined to room ' + target + '. They could be banned from the room.');
+		var roomName = (targetRoom.isPrivate)? 'a private room' : 'room ' + target;
+		this.addModCommand(targetUser.name + ' was redirected to ' + roomName + ' by ' + user.name + '.');
 		targetUser.leaveRoom(room);
 		targetUser.joinRoom(target);
 	},

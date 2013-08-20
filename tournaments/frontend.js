@@ -105,10 +105,27 @@ var Tournament = (function () {
 			generator: this.generator.name
 		}), targetUser);
 
-		this.getBracketData(targetUser);
+		this.generator.getUsers().forEach(function (user) {
+			user.sendTo(this.room, '|tournament|isjoined');
+		}, this);
+
+		this.room.send('|tournament|bracketdata|' + JSON.stringify(this.getBracketData()), targetUser);
 
 		if (this.isTournamentStarted) {
-			this.getAvailableMatches(targetUser);
+			var availableMatches = this.getAvailableMatches();
+			availableMatches.challenges.forEach(function (opponents, user) {
+				if (targetUser && user !== targetUser)
+					return;
+				if (opponents.length > 0)
+					user.sendTo(this.room, '|tournament|challenges|' + usersToNames(opponents).join(','));
+			}, this);
+			availableMatches.challengeBys.forEach(function (opponents, user) {
+				if (targetUser && user !== targetUser)
+					return;
+				if (opponents.length > 0)
+					user.sendTo(this.room, '|tournament|challengeBys|' + usersToNames(opponents).join(','));
+			}, this);
+
 			this.pendingChallenges.forEach(function (challenge, user) {
 				if (!challenge)
 					return;
@@ -157,9 +174,8 @@ var Tournament = (function () {
 		this.update();
 	};
 
-	Tournament.prototype.getBracketData = function (targetUser) {
+	Tournament.prototype.getBracketData = function () {
 		if (this.isBracketInvalidated) {
-			targetUser = null;
 			var data = this.generator.getBracketData();
 			if (data.type === 'tree') {
 				// TODO
@@ -179,11 +195,11 @@ var Tournament = (function () {
 				data.tableHeaders.rows = usersToNames(data.tableHeaders.rows);
 			}
 
-			this.bracketCache = JSON.stringify(data);
+			this.bracketCache = data;
 			this.isBracketInvalidated = false;
 		}
 
-		this.room.send('|tournament|bracketdata|' + this.bracketCache, targetUser);
+		return this.bracketCache;
 	};
 
 	Tournament.prototype.startTournament = function () {
@@ -208,9 +224,8 @@ var Tournament = (function () {
 		this.room.send('|tournament|start');
 		this.update();
 	};
-	Tournament.prototype.getAvailableMatches = function (targetUser) {
+	Tournament.prototype.getAvailableMatches = function () {
 		if (this.isAvailableMatchesInvalidated) {
-			targetUser = null;
 			var matches = this.generator.getAvailableMatches();
 			if (typeof matches === 'string') {
 				this.room.add("Unexpected error from getAvailableMatches(): " + error + ". Please report this to an admin.");
@@ -245,18 +260,7 @@ var Tournament = (function () {
 			this.isAvailableMatchesInvalidated = false;
 		}
 
-		this.availableMatchesCache.challenges.forEach(function (opponents, user) {
-			if (targetUser && user !== targetUser)
-				return;
-			if (opponents.length > 0)
-				user.sendTo(this.room, '|tournament|challenges|' + usersToNames(opponents).join(','));
-		}, this);
-		this.availableMatchesCache.challengeBys.forEach(function (opponents, user) {
-			if (targetUser && user !== targetUser)
-				return;
-			if (opponents.length > 0)
-				user.sendTo(this.room, '|tournament|challengeBys|' + usersToNames(opponents).join(','));
-		}, this);
+		return this.availableMatchesCache;
 	};
 
 	Tournament.prototype.disqualifyUser = function (user, output) {
@@ -304,10 +308,11 @@ var Tournament = (function () {
 		this.room.send('|tournament|disqualify|' + user.name);
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
-		this.update();
 
 		if (isTournamentEnded)
 			this.onTournamentEnd();
+		else
+		this.update();
 	};
 
 	Tournament.prototype.challenge = function (from, to, output) {
@@ -397,14 +402,14 @@ var Tournament = (function () {
 
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
-		this.update();
 
 		if (isTournamentEnded)
 			this.onTournamentEnd();
+		else
+			this.update();
 	};
 	Tournament.prototype.onTournamentEnd = function () {
-		var results = this.generator.getResults();
-		this.room.add('|tournament|end|' + usersToNames(results[0]).join(',') + (results[1] ? '|' + usersToNames(results[1]).join(',') : ''));
+		this.room.add('|tournament|end|' + JSON.stringify({results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()}));
 		delete tournaments[toId(this.room.id)];
 	};
 

@@ -1237,7 +1237,7 @@ var commands = exports.commands = {
 		if (!this.canTalk()) return;
 
 		for (var r in Rooms.rooms) {
-			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|raw|<div class="broadcast-blue"><b><i>Broadcast Message from '+room.title+':</i><br />'+target+'</b></div>');
+			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|raw|<div class="broadcast-blue"><b><i>Broadcast Message from '+user.name+':</i><br />'+target+'</b></div>');
 		}
 
 		this.logModCommand(user.name+' declared '+target+' to all rooms.');

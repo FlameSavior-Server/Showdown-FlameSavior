@@ -251,6 +251,10 @@ try {
 					server = staticserver;
 				}
 				server.serve(request, response, function(e, res) {
+					fs.appendFile('logs/access.log',
+						request.socket.remoteAddress + ' - - [' + new Date().toLocaleString() + '] "' +
+						request.method + ' ' + request.url + ' HTTP/' + request.httpVersion + '" ' +
+						(e ? e.status : 200) + ' ? "' + (request.headers['referer'] || '-') + '" "' + (request.headers['user-agent'] || '-') + '"\n');
 					if (e && (e.status === 404)) {
 						staticserver.serveFile('404.html', 404, {}, request, response);
 					}

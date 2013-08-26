@@ -220,6 +220,61 @@ var commands = exports.commands = {
 		}
 		if (!atLeastOne) this.sendReply("No results found.");
 	},
+	
+	declaregreen: 'declarered',
+	declarered: function(target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help declare');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		if (cmd === 'declarered'){
+			this.add('|raw|<div class="broadcast-red"><b>'+target+'</b></div>');
+		}
+		else if (cmd === 'declaregreen'){
+			this.add('|raw|<div class="broadcast-green"><b>'+target+'</b></div>');
+		}
+		this.logModCommand(user.name+' declared '+target);
+	},
+
+	gdeclarered: 'gdeclare',
+	gdeclaregreen: 'gdeclare',
+	gdeclare: function(target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help gdeclare');
+		if (!this.can('lockdown')) return false;
+
+		var roomName = (room.isPrivate)? 'a private room' : room.id;
+
+		if (cmd === 'gdeclare'){
+			for (var id in Rooms.rooms) {
+				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b><font size=1><i>Global declare from '+roomName+'<br /></i></font size>'+target+'</b></div>');
+			}
+		}
+		if (cmd === 'gdeclarered'){
+			for (var id in Rooms.rooms) {
+				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-red"><b><font size=1><i>Global declare from '+roomName+'<br /></i></font size>'+target+'</b></div>');
+			}
+		}
+		else if (cmd === 'gdeclaregreen'){
+			for (var id in Rooms.rooms) {
+				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-green"><b><font size=1><i>Global declare from '+roomName+'<br /></i></font size>'+target+'</b></div>');
+			}
+		}
+		this.logModCommand(user.name+' globally declared '+target);
+	},
+
+	modmsg: 'declaremod',
+	moddeclare: 'declaremod',
+	declaremod: function(target, room, user) {
+		if (!target) return this.sendReply('/declaremod [message] - Also /moddeclare and /modmsg');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		this.privateModCommand('|raw|<div class="broadcast-red"><b><font size=1><i>Private Auth (Driver +) declare from '+user.name+'<br /></i></font size>'+target+'</b></div>');
+
+		this.logModCommand(user.name+' mod declared '+target);
+	},
 
 	/*********************************************************
 	 * Shortcuts

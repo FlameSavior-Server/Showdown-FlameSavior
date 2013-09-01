@@ -963,7 +963,7 @@ var cmds = {
 		var oghtml = "<hr /><h2>Active Polls:</h2>";
 		var html = oghtml;
 		for(var u in tour){
-			if(!Rooms.rooms[u].isPrivate && tour[u].question != undefined) html += '<button name="joinRoom" value="' + u + '">' + Rooms.rooms[u].title + ' - ' + tour[u].question + '</button> ';
+			if(Rooms.rooms[u].isPrivate == undefined && tour[u].question != undefined) html += '<button name="joinRoom" value="' + u + '">' + Rooms.rooms[u].title + ' - ' + tour[u].question + '</button> ';
 		}
 		if (html == oghtml) html += "There are currently no active polls.";
 		this.sendReply('|raw|' + html + "<hr />");

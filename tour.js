@@ -957,6 +957,17 @@ var cmds = {
 		if (html == oghtml) html += "There are currently no tournaments in their signup phase.";
 		this.sendReply('|raw|' + html + "<hr />");
 	},
+	
+	polls: function(target, room, user, connection){
+		if(!this.canBroadcast()) return;
+		var oghtml = "<hr /><h2>Active Polls:</h2>";
+		var html = oghtml;
+		for(var u in tour){
+			if(tour[u].question != undefined) html += '<button name="joinRoom" value="' + u + '">' + Rooms.rooms[u].title + ' - ' + tour[u].question + '</button> ';
+		}
+		if (html == oghtml) html += "There are currently no active polls.";
+		this.sendReply('|raw|' + html + "<hr />");
+	},
 
 	invalidate: function(target,room,user) {
 		if (!room.decision) return this.sendReply('You can only do this in battle rooms.');

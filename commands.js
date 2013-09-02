@@ -711,7 +711,7 @@ var commands = exports.commands = {
 			picSize = ' height=' + target[1] + '% width=' + target[1]+ '%';
 		}
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
-		this.logModCommand(user.name +' added the image ' + target);
+		this.logModCommand(user.name +' added the image ' + target[0]);
 	},
 
 	tell: function(target, room, user) {

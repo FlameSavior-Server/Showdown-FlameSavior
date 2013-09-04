@@ -447,6 +447,7 @@ var cmds = {
 			if (isNaN(targets[1]) || !targets[1]) return this.sendReply('/tour tier, NUMBER minutes');
 			targets[1] = Math.ceil(targets[1]);
 			if (targets[1] < 0) return this.sendReply('Why would you want to schedule a tournament for the past?');
+			if (targets[1] === 0) return this.sendReply('Please set a valid amount of time.');
 			tour.timers[rid] = {
 				time: targets[1],
 				startTime: tour.currentSeconds
@@ -504,6 +505,7 @@ var cmds = {
 		if (!target) return this.sendReply('Proper syntax for this command: /tourtime time');
 		target = parseInt(target);
 		if (isNaN(target)) return this.sendReply('Proper syntax for this command: /tourtime time');
+		if (target === 0) return this.sendReply('You cannot set the time to 0.');
 		target = Math.ceil(target);
 		tour.timers[room.id].time = target;
 		tour.timers[room.id].startTime = tour.currentSeconds;

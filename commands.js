@@ -765,12 +765,6 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Reminders
 	 *********************************************************/
-	
-	rv: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		if (this.broadcasting) return this.parse('!reminder view');
-		return this.parse('/reminder view');
-	},
 
 	reminders: 'reminder',
 	reminder: function (target, room, user) {
@@ -805,7 +799,7 @@ var commands = exports.commands = {
 				return this.sendReply('All reminders for '+room.title+' have been deleted.');
 			}
 		}
-		
+
 		var commaIndex = target.indexOf(',');
 		if (commaIndex === -1) {
 			this.sendReply('You forgot the comma.');

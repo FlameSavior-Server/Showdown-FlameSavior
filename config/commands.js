@@ -1291,13 +1291,20 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'dexsearch') {
 			matched = true;
-			this.sendReply('Searches for Pokemon that fulfill the selected criteria.');
+			this.sendReply('/dexsearch [type], [move], [move], ... - Searches for Pokemon that fulfill the selected criteria.');
 			this.sendReply('Search categories are: type, tier, color, moves, ability, gen.');
 			this.sendReply('Valid colors are: green, red, blue, white, brown, yellow, purple, pink, gray and black.');
 			this.sendReply('Valid tiers are: Uber/OU/BL/UU/BL2/RU/NU/NFE/LC/CAP/Illegal.');
 			this.sendReply('Types must be followed by " type", e.g., "dragon type".');
-			this.sendReply('/dexsearch [type], [move], [move],...');
 			this.sendReply('The order of the parameters does not matter.');
+		}
+		if (target === 'all' || target === 'reminder' || target === 'reminders') {
+			matched = true;
+			this.sendReply('Set up and view reminders:');
+			this.sendReply('/reminder view - Show the reminders for the current room.');
+			this.sendReply('/reminder add, [message] - Adds a reminder to the current room. Most HTML is supported. Requires: # & ~');
+			this.sendReply('/reminder delete, [number/message] - Deletes a reminder from the current room. The number of the reminder or its message both work. Requires: # & ~');
+			this.sendReply('/reminder clear - Clears all reminders from the current room. Requires: # & ~');
 		}
 		if (target === 'all' || target === 'tell') {
 			matched = true;

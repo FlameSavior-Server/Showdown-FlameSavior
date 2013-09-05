@@ -499,7 +499,7 @@ var commands = exports.commands = {
 			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 		}
 		if (target.toLowerCase() == "staff" && !user.can('warn')) {
-			return this.sendReply("|noinit|joinfailed|Out peasant. OUT! This room is for staff ONLY!");
+			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for staff ONLY!");
 		}
 		if(targetRoom.isAdult && aList.indexOf(user.userid) === -1){
 			return this.sendReply("|noinit|joinfailed|You are not old enough to join this room. If you believe you are, contact a staff member.");
@@ -761,6 +761,104 @@ var commands = exports.commands = {
 		return;
 	},
 	*/
+
+	/*********************************************************
+	 * Reminders
+	 *********************************************************/
+
+	reminders: 'reminder',
+	reminder: function (target, room, user) {
+		if (!target) return this.parse('/help reminder');
+		if (room.type !== 'chat') return this.sendReply('This command can only be used in chatrooms.');
+
+		if (!room.reminders) room.reminders = room.chatRoomData.reminders = {};
+
+		if (target.trim().toLowerCase() === 'view' || target.trim().toLowerCase() === 'display') {
+			if (!this.canBroadcast()) return;
+			var message = '<strong><font size=3>Reminders for '+room.title+':</strong></font>'+(room.reminders[1]?'<ol>':'<br /><br />There are no reminders to display. ');
+			if (room.reminders[1]) {
+				for (var r in room.reminders) {
+					message += '<li>'+room.reminders[r];
+				}
+				message += '</ol>';
+			}
+			message += 'Contact a room owner, leader, or admin if you have a reminder you would like added.';
+			return this.sendReplyBox(message);
+		}
+
+		if (target.trim().toLowerCase() === 'clear') {
+			if (!this.can('declare', null, room)) return;
+			if (!room.canClearRems) room.canClearRems = {};
+			if (!(user.userid in room.canClearRems)) {
+				room.canClearRems[user.userid] = 1;
+				return this.sendReply('WARNING: this command will clear all reminders for '+room.title+'. Type "/reminder clear" if you are certain.');
+			} else {
+				for (var i in room.reminders) delete room.reminders[i];
+				delete room.canClearRems;
+				Rooms.global.writeChatRoomData();
+				return this.sendReply('All reminders for '+room.title+' have been deleted.');
+			}
+		}
+		
+		var commaIndex = target.indexOf(',');
+		if (commaIndex === -1) {
+			this.sendReply('You forgot the comma.');
+			return this.parse('/help reminder');
+		}
+		if (!(target.slice(0, commaIndex).toLowerCase() in {'add':1,'delete':1})) {
+			this.sendReply('Unknown command.');
+			return this.parse('/help reminder');
+		}
+		if (!this.can('declare', null, room)) return;
+
+		var command = target.slice(0, commaIndex).trim().toLowerCase();
+		target = target.slice(commaIndex + 1).trim();
+		if (command === 'add') {
+			if (target.indexOf('<img') !== -1) return this.sendReply('Images are not supported in reminders.');
+			if (target.replace(/(<([^>]+)>)/ig,"").length > 50) return this.sendReply('Reminders must be 50 or fewer characters, excluding HTML.');
+			for (var i = 1; i < 11; i++) {
+				if (!room.reminders[i]) {
+					room.reminders[i] = target;
+					break;
+				}
+			}
+			if (i === 11) return this.sendReply('This room has 10 reminders already. Delete a reminder then try adding it again.');
+			Rooms.global.writeChatRoomData();
+			return this.sendReply('"' + target + '" added to reminders for '+room.title+'.');
+		}
+		if (command === 'delete') {
+			if (target > 10 || target < 1) return this.sendReply('Enter the number of the reminder you want to delete.');
+			if (target in room.reminders) {
+				this.sendReply('"'+room.reminders[target]+'" deleted from reminders for '+room.title+'.');
+				delete room.reminders[target];
+				for (var i = 1; i < 11; i++) {
+					if (!room.reminders[i] && room.reminders[i+1]) {
+						room.reminders[i] = room.reminders[i+1];
+						delete room.reminders[i+1];
+					}
+				}
+				Rooms.global.writeChatRoomData();
+				return false;
+			} else {
+				for (var r in room.reminders) {
+					if (target === room.reminders[r]) {
+						this.sendReply('"'+room.reminders[r]+'" deleted from reminders for '+room.title+'.');
+						delete room.reminders[r];
+						for (var i = 1; i < 11; i++) {
+							if (!room.reminders[i] && room.reminders[i+1]) {
+								room.reminders[i] = room.reminders[i+1];
+								delete room.reminders[i+1];
+							}
+						}
+						Rooms.global.writeChatRoomData();
+						return false;
+					}
+				}
+			}
+			return this.sendReply('The specified reminder could not be found in the reminders for '+room.title+'.');
+		}
+		return this.sendReply('You seem to have broken the command. Talk to an admin, preferably TalkTakesTime, with what you did.');
+	},
 
 	/*********************************************************
 	 * Moderating: Punishments

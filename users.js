@@ -935,6 +935,7 @@ var User = (function () {
 				room.onJoinConnection(this, connection);
 			}
 		}
+		if (room.reminders && room.reminders[1]) CommandParser.parse('/reminder view', room, this, connection);
 		return true;
 	};
 	User.prototype.leaveRoom = function(room, connection, force) {

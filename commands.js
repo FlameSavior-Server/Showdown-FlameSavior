@@ -767,6 +767,7 @@ var commands = exports.commands = {
 	 *********************************************************/
 	
 	rv: function(target, room, user) {
+		if (!this.canBroadcast()) return;
 		return this.parse('/reminder view');
 	},
 

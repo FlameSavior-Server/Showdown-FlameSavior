@@ -765,6 +765,10 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Reminders
 	 *********************************************************/
+	
+	rv: function(target, room, user) {
+		return this.parse('/reminder view');
+	},
 
 	reminders: 'reminder',
 	reminder: function (target, room, user) {

@@ -29,7 +29,7 @@ var crypto = require('crypto');
 var poofeh = true;
 var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","fallacies","imanalt",
 		"ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4",
-		"jac","geminiiii", "lepandaw", "cattelite"];
+		"jac","geminiiii", "lepandaw", "cattelite","foe"];
 var canTalk;
 
 var commands = exports.commands = {
@@ -768,6 +768,7 @@ var commands = exports.commands = {
 	
 	rv: function(target, room, user) {
 		if (!this.canBroadcast()) return;
+		if (this.broadcasting) return this.parse('!reminder view');
 		return this.parse('/reminder view');
 	},
 

@@ -815,7 +815,7 @@ var commands = exports.commands = {
 		target = target.slice(commaIndex + 1).trim();
 		if (command === 'add') {
 			if (target.indexOf('<img') !== -1) return this.sendReply('Images are not supported in reminders.');
-			if (target.replace(/(<([^>]+)>)/ig,"").length > 80) return this.sendReply('Reminders must be 80 or fewer characters, excluding HTML.');
+			if (target.replace(/(<([^>]+)>)/ig,"").length > 100) return this.sendReply('Reminders must be 100 or fewer characters, excluding HTML.');
 			for (var i = 1; i < 11; i++) {
 				if (!room.reminders[i]) {
 					room.reminders[i] = target;

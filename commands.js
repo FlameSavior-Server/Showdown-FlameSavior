@@ -226,6 +226,9 @@ var commands = exports.commands = {
 		if (targetUser.locked && !user.can('lock', targetUser)) {
 			return this.popupReply('This user is locked and cannot PM.');
 		}
+		if (targetUser.ignorePMs && !user.can('lock', targetUser) && (!targetUser.can('lock') || targetUser.can('hotpatch'))) {
+			return this.popupReply('This user is blocking Private Messages right now.');
+		}
 
 		target = this.canTalk(target, null);
 		if (!target) return false;
@@ -251,6 +254,25 @@ var commands = exports.commands = {
 			targetUser.lastPM = user.userid;
 		}
 		user.lastPM = targetUser.userid;
+	},
+
+	blockpm: 'ignorepms',
+	blockpms: 'ignorepms',
+	ignorepm: 'ignorepms',
+	ignorepms: function(target, room, user) {
+		if (user.ignorePMs) return this.sendReply('You are already blocking Private Messages!');
+		if (user.can('lock') && !user.can('hotpatch')) return this.sendReply('You are not allowed to block Private Messages.');
+		user.ignorePMs = true;
+		return this.sendReply('You are now blocking Private Messages.');
+	},
+
+	unblockpm: 'unignorepms',
+	unblockpms: 'unignorepms',
+	unignorepm: 'unignorepms',
+	unignorepms: function(target, room, user) {
+		if (!user.ignorePMs) return this.sendReply('You are not blocking Private Messages!');
+		user.ignorePMs = false;
+		return this.sendReply('You are no longer blocking Private Messages.');
 	},
 
 	makechatroom: function(target, room, user) {
@@ -320,6 +342,7 @@ var commands = exports.commands = {
 		room.onUpdateIdentity(targetUser);
 		Rooms.global.writeChatRoomData();
 	},
+	
 	roomdeowner: 'deroomowner',
 	deroomowner: function(target, room, user) {
 		if (!room.auth) {
@@ -523,7 +546,7 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
-		if (!userid) return this.sendReply("User '" + name + "' does not exist.");
+		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
 		if (!Rooms.rooms[room.id].users[userid]) {
 			return this.sendReply('User ' + this.targetUsername + ' is not in the room ' + room.id + '.');
@@ -556,7 +579,7 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
-		if (!userid) return this.sendReply("User '"+name+"' does not exist.");
+		if (!userid || !targetUser) return this.sendReply("User '"+name+"' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
 		if (!room.bannedUsers || !room.bannedIps) {
 			return this.sendReply('Room bans are not meant to be used in room ' + room.id + '.');
@@ -575,6 +598,20 @@ var commands = exports.commands = {
 				if (room.bannedUsers[altId]) delete room.bannedUsers[altId];
 			}
 		}
+	},
+
+	roomauth: function(target, room, user, connection) {
+		if (!room.auth) return this.sendReply("/roomauth - This room isn't designed for per-room moderation and therefor has no auth list.");
+		var buffer = [];
+		for (var u in room.auth) {
+			buffer.push(room.auth[u] + u);
+		}
+		if (buffer.length > 0) {
+			buffer = buffer.join(', ');
+		} else {
+			buffer = 'This room has no auth.';
+		}
+		connection.popup(buffer);
 	},
 
 	leave: 'part',
@@ -947,11 +984,10 @@ var commands = exports.commands = {
 		if (!Rooms.rooms[room.id].users[targetUser.userid]) {
 			return this.sendReply('User '+this.targetUsername+' is not in the room ' + room.id + '.');
 		}
-		if (!targetUser.joinRoom(target)) return this.sendReply('User "' + targetUser.name + '" could not be joined to room ' + target + '. They could be banned from the room.');
+		if (targetUser.joinRoom(target) === false) return this.sendReply('User "' + targetUser.name + '" could not be joined to room ' + target + '. They could be banned from the room.');
 		var roomName = (targetRoom.isPrivate)? 'a private room' : 'room ' + target;
 		this.addModCommand(targetUser.name + ' was redirected to ' + roomName + ' by ' + user.name + '.');
 		targetUser.leaveRoom(room);
-		targetUser.joinRoom(target);
 	},
 
 	m: 'mute',
@@ -1006,8 +1042,7 @@ var commands = exports.commands = {
 
 	um: 'unmute',
 	unmute: function(target, room, user) {
-		if (!target) return this.parse('/help something');
-		var targetid = toUserid(target);
+		if (!target) return this.parse('/help unmute');
 		var targetUser = Users.get(target);
 		if (!targetUser) {
 			return this.sendReply('User '+target+' not found.');
@@ -1280,7 +1315,10 @@ var commands = exports.commands = {
 		if (!target) {
 			return this.sendReply('Moderated chat is currently set to: '+room.modchat);
 		}
-		if (!this.can('modchat', null, room) || !this.canTalk()) return false;
+		if (!this.can('modchat', null, room)) return false;
+		if (room.modchat && config.groupsranking.indexOf(room.modchat) > 1 && !user.can('modchatall', null, room)) {
+			return this.sendReply('/modchat - Access denied for removing a setting higher than ' + config.groupsranking[1] + '.');
+		}
 
 		target = target.toLowerCase();
 		switch (target) {
@@ -1288,8 +1326,7 @@ var commands = exports.commands = {
 		case 'true':
 		case 'yes':
 		case 'registered':
-			this.sendReply("Modchat registered has been removed.");
-			this.sendReply("If you're dealing with a spammer, make sure to run /loadbanlist.");
+			this.sendReply("Modchat registered is no longer available.");
 			return false;
 			break;
 		case 'off':
@@ -1301,7 +1338,7 @@ var commands = exports.commands = {
 			if (!config.groups[target]) {
 				return this.parse('/help modchat');
 			}
-			if (config.groupsranking.indexOf(target) > 1 && !user.can('modchatall')) {
+			if (config.groupsranking.indexOf(target) > 1 && !user.can('modchatall', null, room)) {
 				return this.sendReply('/modchat - Access denied for setting higher than ' + config.groupsranking[1] + '.');
 			}
 			room.modchat = target;
@@ -1550,6 +1587,34 @@ var commands = exports.commands = {
 
 		this.logEntry(user.name + ' used /endlockdown');
 
+	},
+
+	emergency: function(target, room, user) {
+		if (!this.can('lockdown')) return false;
+
+		if (config.emergency) {
+			return this.sendReply("We're already in emergency mode.");
+		}
+		config.emergency = true;
+		for (var id in Rooms.rooms) {
+			if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-red">The server has entered emergency mode. Some features might be disabled or limited.</div>');
+		}
+
+		this.logEntry(user.name + ' used /emergency');
+	},
+
+	endemergency: function(target, room, user) {
+		if (!this.can('lockdown')) return false;
+
+		if (!config.emergency) {
+			return this.sendReply("We're not in emergency mode.");
+		}
+		config.emergency = false;
+		for (var id in Rooms.rooms) {
+			if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-green"><b>The server is no longer in emergency mode.</b></div>');
+		}
+
+		this.logEntry(user.name + ' used /endemergency');
 	},
 
 	kill: function(target, room, user) {
@@ -2006,6 +2071,9 @@ var commands = exports.commands = {
 
 	cmd: 'query',
 	query: function(target, room, user, connection) {
+		// Avoid guest users to use the cmd errors to ease the app-layer attacks in emergency mode
+		var trustable = (!config.emergency || (user.named && user.authenticated));
+		if (config.emergency && ResourceMonitor.countCmd(connection.ip, user.name)) return false;
 		var spaceIndex = target.indexOf(' ');
 		var cmd = target;
 		if (spaceIndex > 0) {
@@ -2017,7 +2085,7 @@ var commands = exports.commands = {
 		if (cmd === 'userdetails') {
 
 			var targetUser = Users.get(target);
-			if (!targetUser) {
+			if (!trustable || !targetUser) {
 				connection.send('|queryresponse|userdetails|'+JSON.stringify({
 					userid: toId(target),
 					rooms: false
@@ -2054,13 +2122,13 @@ var commands = exports.commands = {
 			connection.send('|queryresponse|userdetails|'+JSON.stringify(userdetails));
 
 		} else if (cmd === 'roomlist') {
-
+			if (!trustable) return false;
 			connection.send('|queryresponse|roomlist|'+JSON.stringify({
 				rooms: Rooms.global.getRoomList(true)
 			}));
 
 		} else if (cmd === 'rooms') {
-
+			if (!trustable) return false;
 			connection.send('|queryresponse|rooms|'+JSON.stringify(
 				Rooms.global.getRooms()
 			));

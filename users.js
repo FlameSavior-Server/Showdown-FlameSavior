@@ -206,6 +206,7 @@ var User = (function () {
 	User.prototype.lastMessageTime = 0;
 
 	User.prototype.blockChallenges = false;
+	User.prototype.ignorePMs = false;
 	User.prototype.lastConnected = 0;
 
 	User.prototype.sendTo = function(roomid, data) {
@@ -214,11 +215,13 @@ var User = (function () {
 		for (var i=0; i<this.connections.length; i++) {
 			if (roomid && !this.connections[i].rooms[roomid]) continue;
 			this.connections[i].socket.write(data);
+			ResourceMonitor.countNetworkUse(data.length);
 		}
 	};
 	User.prototype.send = function(data) {
 		for (var i=0; i<this.connections.length; i++) {
 			this.connections[i].socket.write(data);
+			ResourceMonitor.countNetworkUse(data.length);
 		}
 	};
 	User.prototype.popup = function(message) {
@@ -489,7 +492,7 @@ var User = (function () {
 				}
 			}
 			if (userid === this.userid && !auth) {
-				return this.forceRename(name, this.authenticated);
+				return this.forceRename(name, this.authenticated, this.forceRenamed);
 			}
 		}
 		if (users[userid] && !users[userid].authenticated && users[userid].connected && !auth) {
@@ -1093,7 +1096,9 @@ var User = (function () {
 
 		if (message.substr(0,16) === '/cmd userdetails') {
 			// certain commands are exempt from the queue
+			ResourceMonitor.activeIp = connection.ip;
 			room.chat(this, message, connection);
+			ResourceMonitor.activeIp = null;
 			return false; // but end the loop here
 		}
 
@@ -1113,7 +1118,9 @@ var User = (function () {
 				this.processChatQueue.bind(this), THROTTLE_DELAY);
 		} else {
 			this.lastChatMessage = now;
+			ResourceMonitor.activeIp = connection.ip;
 			room.chat(this, message, connection);
+			ResourceMonitor.activeIp = null;
 		}
 	};
 	User.prototype.clearChatQueue = function() {
@@ -1127,7 +1134,9 @@ var User = (function () {
 		if (!this.chatQueue) return; // this should never happen
 		var toChat = this.chatQueue.shift();
 
+		ResourceMonitor.activeIp = toChat[2].ip;
 		toChat[1].chat(this, toChat[0], toChat[2]);
+		ResourceMonitor.activeIp = null;
 
 		if (this.chatQueue && this.chatQueue.length) {
 			this.chatQueueTimeout = setTimeout(
@@ -1180,10 +1189,12 @@ var Connection = (function () {
 		if (roomid && roomid.id) roomid = roomid.id;
 		if (roomid && roomid !== 'lobby') data = '>'+roomid+'\n'+data;
 		this.socket.write(data);
+		ResourceMonitor.countNetworkUse(data.length);
 	};
 
 	Connection.prototype.send = function(data) {
 		this.socket.write(data);
+		ResourceMonitor.countNetworkUse(data.length);
 	};
 
 	Connection.prototype.popup = function(message) {

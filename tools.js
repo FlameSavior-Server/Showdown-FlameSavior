@@ -1021,6 +1021,118 @@ module.exports = (function () {
 		if (!problems.length) return false;
 		return problems;
 	};
+
+	Tools.prototype.levenshtein = function(s, t, l) { // s = string 1, t = string 2, l = limit
+		// Original levenshtein distance function by James Westgate, turned out to be the fastest
+		var d = []; // 2d matrix
+
+		// Step 1
+		var n = s.length;
+		var m = t.length;
+
+		if (n == 0) return m;
+		if (m == 0) return n;
+		if (l && Math.abs(m - n) > l) return Math.abs(m - n);
+
+		// Create an array of arrays in javascript (a descending loop is quicker)
+		for (var i = n; i >= 0; i--) d[i] = [];
+
+		// Step 2
+		for (var i = n; i >= 0; i--) d[i][0] = i;
+		for (var j = m; j >= 0; j--) d[0][j] = j;
+
+		// Step 3
+		for (var i = 1; i <= n; i++) {
+			var s_i = s.charAt(i - 1);
+
+			// Step 4
+			for (var j = 1; j <= m; j++) {
+				// Check the jagged ld total so far
+				if (i == j && d[i][j] > 4) return n;
+
+				var t_j = t.charAt(j - 1);
+				var cost = (s_i == t_j) ? 0 : 1; // Step 5
+
+				// Calculate the minimum
+				var mi = d[i - 1][j] + 1;
+				var b = d[i][j - 1] + 1;
+				var c = d[i - 1][j - 1] + cost;
+
+				if (b < mi) mi = b;
+				if (c < mi) mi = c;
+
+				d[i][j] = mi; // Step 6
+			}
+		}
+
+		// Step 7
+		return d[n][m];
+	};
+
+	Tools.prototype.dataSearch = function(target, searchIn) {
+		if (!target) {
+			return false;
+		}
+
+		searchIn = searchIn || ['Pokedex', 'Movedex', 'Abilities', 'Items'];
+
+		var searchFunctions = { Pokedex: 'getTemplate', Movedex: 'getMove', Abilities: 'getAbility', Items: 'getItem' };
+		var searchTypes = { Pokedex: 'pokemon', Movedex: 'move', Abilities: 'ability', Items: 'item' };
+		var searchResults = [];
+		for (var i = 0; i < searchIn.length; i++) {
+			if (typeof this[searchFunctions[searchIn[i]]] === "function") {
+				var res = this[searchFunctions[searchIn[i]]](target);
+				if (res.exists) {
+					res.searchType = searchTypes[searchIn[i]];
+					searchResults.push(res);
+				}
+			}
+		}
+		if (searchResults.length) {
+			return searchResults;
+		}
+
+		var cmpTarget = target.toLowerCase();
+		for (var i = 0; i < searchIn.length; i++) {
+			var searchObj = this.data[searchIn[i]];
+			if (!searchObj) {
+				continue;
+			}
+
+			for (var j in searchObj) {
+				var word = searchObj[j];
+				if (typeof word === "object") {
+					word = word.name || word.species;
+				}
+				if (!word) {
+					continue;
+				}
+
+				var ld = this.levenshtein(cmpTarget, word.toLowerCase(), 3);
+				if (ld <= 3) {
+					searchResults.push({ word: word, ld: ld });
+				}
+			}
+		}
+
+		if (searchResults.length) {
+			var newTarget = "";
+			var newLD = 10;
+			for (var i = 0, l = searchResults.length; i < l; i++) {
+				if (searchResults[i].ld < newLD) {
+					newTarget = searchResults[i];
+					newLD = searchResults[i].ld;
+				}
+			}
+
+			// To make sure we aren't in an infinite loop...
+			if (cmpTarget !== newTarget.word) {
+				return this.dataSearch(newTarget.word);
+			}
+		}
+
+		return false;
+	};
 	/**
 	 * Install our Tools functions into the battle object
 	 */

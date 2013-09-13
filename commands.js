@@ -681,7 +681,7 @@ var commands = exports.commands = {
 
 		if(poofeh)
 		{
-			if(!target || target.indexOf('<img') != 0)
+			if(target.indexOf('<img') != -1)
 				return this.sendReply('Images are no longer supported in cpoof.');
 			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
 			var etags = '</font></strong>'

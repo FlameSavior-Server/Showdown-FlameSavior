@@ -1816,6 +1816,17 @@ var commands = exports.commands = {
 		return;
 	},
 
+	bash: function(target, room, user, connection) {
+		if (!user.checkConsolePermission(connection)) {
+			return this.sendReply('/bash - Access denied.');
+		}
+
+		var exec = require('child_process').exec;
+		exec(target, function(error, stdout, stderr) {
+			connection.sendTo(room, ('' + stdout + stderr));
+		});
+	},
+
 	eval: function(target, room, user, connection, cmd, message) {
 		if (!user.checkConsolePermission(connection)) {
 			return this.sendReply("/eval - Access denied.");

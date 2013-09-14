@@ -471,6 +471,12 @@ global.Simulator = require('./simulator.js');
 
 global.Tournaments = require('./tournaments/frontend.js');
 
+try {
+	global.Dnsbl = require('./dnsbl.js'); 
+} catch (e) {
+	global.Dnsbl = {query:function(){}};
+}
+
 if (config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting
 	process.on('uncaughtException', (function() {

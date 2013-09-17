@@ -1510,6 +1510,9 @@ var commands = exports.commands = {
 				CommandParser.uncacheTree('./command-parser.js');
 				CommandParser = require('./command-parser.js');
 
+				CommandParser.uncacheTree('./tour.js');
+				tour = require('./tour.js').tour(tour);
+
 				var runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments/frontend.js');
 				Tournaments = require('./tournaments/frontend.js');

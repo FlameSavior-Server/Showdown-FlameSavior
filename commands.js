@@ -2193,7 +2193,7 @@ var commands = exports.commands = {
 
 
 function getRandMessage(user){
-	var numMessages = 44; // numMessages will always be the highest case # + 1
+	var numMessages = 48; // numMessages will always be the highest case # + 1
 	var message = '~~ ';
 	switch(Math.floor(Math.random()*numMessages)){
 		case 0: message = message + user.name + ' has vanished into nothingness!';
@@ -2265,6 +2265,10 @@ function getRandMessage(user){
 		case 33: message = message + user.name + ' was shoved in a Blendtec Blender with iPad!';
 			break;
 		case 34: message = message + user.name + ' was BLEGHED on by LightBlue!';
+			break;
+		case 35: message = message + user.name + ' was bitten by a rabid Wolfie!';
+			break;
+		case 36: message = message + user.name + ' was kicked from server! (lel clause)';
 			break;
 		default: message = message + user.name + ' was Pan Hammered!';
 	};

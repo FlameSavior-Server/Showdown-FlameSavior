@@ -626,7 +626,7 @@ var commands = exports.commands = {
 
 	groups: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox(String.fromCharCode(8752) + ' <b>Tournament Helper</b> - They can run tournaments and polls in official rooms<br />' +
+		this.sendReplyBox(String.fromCharCode(8752) + 
 			'+ <b>Voice</b> - The above, and they can use ! commands like !groups, and talk during moderated chat<br />' +
 			'% <b>Driver</b> - The above, and they can also mute and lock users and check for alts<br />' +
 			'@ <b>Moderator</b> - The above, and they can ban users<br />' +

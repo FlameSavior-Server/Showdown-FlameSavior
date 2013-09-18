@@ -57,6 +57,11 @@ var commands = exports.commands = {
 		this.sendReplyBox('Server version: <b>'+CommandParser.package.version+'</b> <small>(<a href="http://pokemonshowdown.com/versions#' + CommandParser.serverVersion + '">' + CommandParser.serverVersion.substr(0,10) + '</a>)</small>');
 	},
 
+	hug: function(target, room, user){
+		if(!target) return this.sendReply('/hug needs a target.');
+		return this.parse('/me hugs ' + target + '.');
+	},
+	
 	slap: function(target, room, user){
 		if(!target) return this.sendReply('/slap needs a target.');
 		return this.parse('/me slaps ' + target + ' with a large trout.');

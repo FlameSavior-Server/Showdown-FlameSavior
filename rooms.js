@@ -328,7 +328,8 @@ var GlobalRoom = (function() {
 		} else {
 			for (var i in this.users) {
 				user = this.users[i];
-				user.sendTo(this, message);
+				if(!(!user.sendTo))
+					user.sendTo(this, message);
 			}
 		}
 	};

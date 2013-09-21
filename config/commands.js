@@ -965,7 +965,7 @@ var commands = exports.commands = {
 
 	frontier: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('The Battle Tower Frontier is still open for signups!<br>The signup thread can be found <a href="http://thebattletower.xiaotai.org/showthread.php?tid=25" >here</a>.');
+		return this.sendReplyBox('The Battle Tower Frontier is open for challenges!<br>Read more <a href="http://thebattletower.xiaotai.org/forumdisplay.php?fid=9" >here</a>.');
 	},
 
 	stafffaq: function (target, room, user) {
@@ -980,7 +980,7 @@ var commands = exports.commands = {
 	kupo: function(target, room, user){
 		if(!this.canBroadcast()|| !user.can('broadcast')) return this.sendReply('/kupo - Access Denied.');
 		if(!target) return this.sendReply('Insufficent Parameters.');
-		room.add('|c|kupo|/me '+ target);
+		room.add('|c|~kupo|/me '+ target);
 		this.logModCommand(user.name + ' used /kupo to say ' + target);
 	},
 

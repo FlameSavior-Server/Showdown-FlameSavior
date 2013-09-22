@@ -742,14 +742,14 @@ var commands = exports.commands = {
 			return this.sendReply("Unknown command. Allowable commands are: list, add, remove.");
 		}
 	},
-
+*/
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
-		if (aList.indexOf(user.userid) === -1) return this.sendReply('You must be on the alist to use this command.');
 
 		if (!this.canTalk()) return;
+		if (!this.can('mute', null, room)) return;
 
-		if (!room.isAdult) return this.sendReply('You can only do this in adult rooms.');
+		if (!room.isPrivate || !room.auth) return this.sendReply('You can only do this in unofficial private rooms.');
 		target = tour.splint(target);
 		var picSize = '';
 		if (target[1]) {
@@ -759,7 +759,7 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target[0]);
 	},
-*/
+
 	tell: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');

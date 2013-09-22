@@ -742,7 +742,7 @@ var commands = exports.commands = {
 			return this.sendReply("Unknown command. Allowable commands are: list, add, remove.");
 		}
 	},
-*/
+
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
 		if (aList.indexOf(user.userid) === -1) return this.sendReply('You must be on the alist to use this command.');
@@ -759,7 +759,7 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target[0]);
 	},
-
+*/
 	tell: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');

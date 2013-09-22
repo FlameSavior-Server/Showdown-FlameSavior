@@ -27,9 +27,11 @@ if (typeof tells === 'undefined') {
 
 var crypto = require('crypto');
 var poofeh = true;
+/*
 var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","fallacies","imanalt",
 		"ipad","orivexes","treecko","theimmortal","talktakestime","oriv","v4",
 		"jac","geminiiii", "lepandaw", "cattelite","foe"];
+*/
 var canTalk;
 
 var commands = exports.commands = {
@@ -450,7 +452,7 @@ var commands = exports.commands = {
 		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
 
 	},
-
+/*
 	adultroom: function(target, room, user) {
 		if(!user.can('makeroom')) return;
 		if(target === 'off'){
@@ -461,7 +463,7 @@ var commands = exports.commands = {
 			return this.addModCommand(user.name + ' has made the room available to adults.');
 		}
 	},
-
+*/
 	roomvoice: function(target, room, user) {
 		if (!room.auth) {
 			this.sendReply("/roomvoice - This room isn't designed for per-room moderation");
@@ -529,9 +531,9 @@ var commands = exports.commands = {
 		if (target.toLowerCase() == "staff" && !user.can('warn')) {
 			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for staff ONLY!");
 		}
-		if(targetRoom.isAdult && aList.indexOf(user.userid) === -1){
+	/*	if(targetRoom.isAdult && aList.indexOf(user.userid) === -1){
 			return this.sendReply("|noinit|joinfailed|You are not old enough to join this room. If you believe you are, contact a staff member.");
-		}
+		}*/
 		if (user.userid && targetRoom.bannedUsers && user.userid in targetRoom.bannedUsers) {
 			return connection.sendTo(target, "|noinit|joinfailed|You are banned from that room!");
 		}
@@ -697,7 +699,7 @@ var commands = exports.commands = {
 			return this.sendReply('Poof is currently disabled.');
 		}
 	},
-
+/*
 	alist: function(target, room, user){
 		if(!user.can('makeroom')) return;
 		target = tour.splint(target);
@@ -740,7 +742,7 @@ var commands = exports.commands = {
 			return this.sendReply("Unknown command. Allowable commands are: list, add, remove.");
 		}
 	},
-
+*/
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
 		if (aList.indexOf(user.userid) === -1) return this.sendReply('You must be on the alist to use this command.');

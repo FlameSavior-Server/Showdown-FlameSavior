@@ -59,6 +59,7 @@ room's log. Otherwise, it will be in the form:
 
 For example:
 
+    |tc|2|@Moderator|Some dude will join in two seconds!
     |j| Some dude
     |c|@Moderator|hi!
     |c| Some dude|you suck and i hate you!
@@ -68,6 +69,7 @@ For example:
 
 This might be displayed as:
 
+    @Moderator: Some dude will join in two seconds!
     Some dude joined.
     @Moderator: hi!
     Some dude: you suck and i hate you!
@@ -85,6 +87,10 @@ the equivalent of their lowercase versions, but are recommended not to be
 displayed inline because they happen too often. For instance, the main server
 gets around 5 joins/leaves a second, and showing that inline with chat would
 make it near-impossible to chat.
+
+`tc` is pretty much the same as `c`, but also gives the delta time; the amount
+of seconds passed since the message has been sent. This is so that when the
+chat replays for example, the times shown are correct.
 
 Some outgoing message types
 ---------------------------
@@ -201,6 +207,9 @@ for a full list of message types.
 > more of these suffixes: `,#` if the format uses random teams, `,,` if the
 > format is only available for searching, and `,` if the format is only
 > available for challenging.
+> Sections are separated by two vertical bars with the number of the column of
+> that section prefixed by `,` in it. After that follows the name of the
+> section and another vertical bar.
 
 `|updatesearch|JSON`
 

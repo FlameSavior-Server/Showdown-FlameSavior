@@ -52,11 +52,12 @@ exports.Formats = [
 		banlist: ['OU', 'BL', 'Drought', 'Sand Stream']
 	},
 	{
-		name: "UU (suspect test)",
+		name: "UU (current)",
 		section: "Singles",
 
+		challengeShow: false,
 		ruleset: ['OU'],
-		banlist: ['OU', 'BL', 'Drought', 'Sand Stream', 'Victini']
+		banlist: ['OU', 'BL', 'Drought', 'Sand Stream']
 	},
 	{
 		name: "RU",
@@ -169,7 +170,9 @@ exports.Formats = [
 		team: 'random',
 		searchShow: false,
 		debug: true,
-		ruleset: ['PotD', 'Pokemon', 'HP Percentage Mod']
+		ruleset: ['PotD', 'Pokemon', 'HP Percentage Mod'],
+		
+		column: 2
 	},
 	{
 		name: "Smogon Doubles",
@@ -472,7 +475,9 @@ exports.Formats = [
 
 		mod: 'gen4',
 		ruleset: ['Pokemon', 'Standard'],
-		banlist: ['Uber']
+		banlist: ['Uber'],
+		
+		column: 2
 	},
 	{
 		name: "[Gen 4] UU (beta)",

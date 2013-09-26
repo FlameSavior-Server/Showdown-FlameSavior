@@ -138,17 +138,9 @@ global.ResourceMonitor = {
 		name = (name ? ': '+name : '');
 		if (ip in this.connections && duration < 30*60*1000) {
 			this.connections[ip]++;
-			if (duration < 5*60*1000 && this.connections[ip] % 10 === 0) {
-				if (this.connections[ip] >= 30) {
-					if (this.connections[ip] % 30 == 0) this.log('IP '+ip+' rejected for '+this.connections[ip]+'th connection in the last '+duration.duration()+name);
-					return true;
-				}
+			if (duration < 5*60*1000 && this.connections[ip] % 20 === 0) {
 				this.log('[ResourceMonitor] IP '+ip+' has connected '+this.connections[ip]+' times in the last '+duration.duration()+name);
-			} else if (this.connections[ip] % 50 == 0) {
-				if (this.connections[ip] >= 250) {
-					if (this.connections[ip] % 50 == 0) this.log('IP '+ip+' rejected for '+this.connections[ip]+'th connection in the last '+duration.duration()+name);
-					return true;
-				}
+			} else if (this.connections[ip] % 60 == 0) {
 				this.log('[ResourceMonitor] IP '+ip+' has connected '+this.connections[ip]+' times in the last '+duration.duration()+name);
 			}
 		} else {
@@ -477,6 +469,8 @@ try {
 	global.Dnsbl = {query:function(){}};
 }
 
+global.Cidr = require('./cidr.js');
+
 if (config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting
 	process.on('uncaughtException', (function() {
@@ -503,33 +497,7 @@ if (config.crashguard) {
  *********************************************************/
 
 // this is global so it can be hotpatched if necessary
-global.isTrustedProxyIp = (function() {
-	if (!config.proxyip) {
-		return function() {
-			return false;
-		};
-	}
-	var iplib = require('ip');
-	var patterns = [];
-	for (var i = 0; i < config.proxyip.length; ++i) {
-		var range = config.proxyip[i];
-		var parts = range.split('/');
-		var subnet = iplib.toLong(parts[0]);
-		var bits = (parts.length < 2) ? 32 : parseInt(parts[1], 10);
-		var mask = -1 << (32 - bits);
-		patterns.push([subnet & mask, mask]);
-	}
-	return function(ip) {
-		var longip = iplib.toLong(ip);
-		for (var i = 0; i < patterns.length; ++i) {
-			var p = patterns[i];
-			if ((longip & p[1]) === p[0]) {
-				return true;
-			}
-		}
-		return false;
-	};
-})();
+global.isTrustedProxyIp = Cidr.checker(config.proxyip);
 
 var socketCounter = 0;
 server.on('connection', function(socket) {
@@ -574,6 +542,9 @@ server.on('connection', function(socket) {
 		return;
 	}
 	var checkResult = Users.checkBanned(socket.remoteAddress);
+	if (!checkResult && Users.checkRangeBanned(socket.remoteAddress)) {
+		checkResult = '#ipban';
+	}
 	if (checkResult) {
 		console.log('CONNECT BLOCKED - IP BANNED: '+socket.remoteAddress+' ('+checkResult+')');
 		if (checkResult === '#ipban') {
@@ -699,12 +670,17 @@ Rooms.global.formatListText = Rooms.global.getFormatListText();
 fs.readFile('./config/ipbans.txt', function (err, data) {
 	if (err) return;
 	data = (''+data).split("\n");
+	var rangebans = [];
 	for (var i=0; i<data.length; i++) {
 		data[i] = data[i].split('#')[0].trim();
-		if (data[i] && !Users.bannedIps[data[i]]) {
+		if (!data[i]) continue;
+		if (data[i].indexOf('/') >= 0) {
+			rangebans.push(data[i]);
+		} else if (!Users.bannedIps[data[i]]) {
 			Users.bannedIps[data[i]] = '#ipban';
 		}
 	}
+	Users.checkRangeBanned = Cidr.checker(rangebans);
 });
 
 global.tour = require('./tour.js').tour();

@@ -185,8 +185,8 @@ var commands = exports.commands = {
 		if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
 			this.sendReply('Group: ' + config.groups[targetUser.group].name + ' (' + targetUser.group + ')');
 		}
-		if (targetUser.staffAccess) {
-			this.sendReply('(Pok\xE9mon Showdown Development Staff)');
+		if (targetUser.isSysop) {
+			this.sendReply('(Pok\xE9mon Showdown System Operator)');
 		}
 		if (!targetUser.authenticated) {
 			this.sendReply('(Unregistered)');
@@ -448,7 +448,7 @@ var commands = exports.commands = {
 		}
 
 		var resultsStr = '';
-		if (results.length > 0) {
+		if (results && results.length > 0) {
 			for (var i = 0; i < results.length; ++i) results[i] = results[i].species;
 			if (showAll || results.length <= output) {
 				resultsStr = results.join(', ');
@@ -460,7 +460,7 @@ var commands = exports.commands = {
 				resultsStr += ', and ' + hidden + ' more. Redo the search with "all" as a search parameter to show all results.';
 			}
 		} else {
-			resultsStr = 'No Pokemon found.';
+			resultsStr = 'No Pokémon found.';
 		}
 		return this.sendReplyBox(resultsStr);
 	},
@@ -717,10 +717,6 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'stabmons') {
 			matched = true;
 			buffer += '- <a href="http://www.smogon.com/forums/threads/3484106/">STABmons</a>';
-		}
-		if (target === 'all' || target === 'vgc2013' || target === 'vgc') {
-			matched = true;
-			buffer += '- <a href="http://www.smogon.com/forums/threads/3471161/">VGC 2013</a><br />';
 		}
 		if (target === 'all' || target === 'omotm' || target === 'omofthemonth' || target === 'month') {
 			matched = true;
@@ -1001,6 +997,28 @@ var commands = exports.commands = {
 			this.logModCommand('The Pokemon of the Day was removed by '+user.name+'.');
 		}
 	},
+	
+	roll: 'dice',
+	dice: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		var d = target.indexOf("d");
+		if (d != -1) {
+			var num = parseInt(target.substring(0,d));
+			faces = NaN;
+			if (target.length > d) var faces = parseInt(target.substring(d + 1));
+			if (isNaN(num)) num = 1;
+			if (isNaN(faces)) return this.sendReply("The number of faces must be a valid integer.");
+			if (faces < 1 || faces > 1000) return this.sendReply("The number of faces must be between 1 and 1000");
+			if (num < 1 || num > 20) return this.sendReply("The number of dice must be between 1 and 20");
+			var rolls = new Array();
+			for (var i=0; i < num; i++) rolls[i] = (Math.floor(faces * Math.random()) + 1);
+			return this.sendReplyBox('Random number ' + num + 'x(1 - ' + faces + '): ' + rolls.join());
+		}
+		if (target && isNaN(target) || target.length > 21) return this.sendReply('The max roll must be a number under 21 digits.');
+		var maxRoll = (target)? target : 6;
+		var rand = Math.floor(maxRoll * Math.random()) + 1;
+		return this.sendReplyBox('Random number (1 - ' + maxRoll + '): ' + rand);
+	},
 
 	register: function() {
 		if (!this.canBroadcast()) return;
@@ -1008,7 +1026,7 @@ var commands = exports.commands = {
 	},
 
 	br: 'banredirect',
-	banredirect: function() {
+	banredirect: function(){ 
 		this.sendReply('/banredirect - This command is obsolete and has been removed.');
 	},
 
@@ -1181,6 +1199,10 @@ var commands = exports.commands = {
 			this.sendReply('Types must be followed by " type", e.g., "dragon type".');
 			this.sendReply('The order of the parameters does not matter.');
 		}
+		if (target === 'all' || target === 'dice' || target === 'roll') {
+			matched = true;
+			this.sendReply('/dice [optional max number] - Randomly picks a number between 1 and 6, or between 1 and the number you choose.');
+		}
 		if (target === 'all' || target === 'join') {
 			matched = true;
 			this.sendReply('/join [roomname] - Attempts to join the room [roomname].');
@@ -1284,7 +1306,7 @@ var commands = exports.commands = {
 		}
 		if (target === '@' || target === 'modchat') {
 			matched = true;
-			this.sendReply('/modchat [off/+/%/@/&/~] - Set the level of moderated chat. Requires: @ for off/+ options, & ~ for all the options');
+			this.sendReply('/modchat [off/autoconfirmed/+/%/@/&/~] - Set the level of moderated chat. Requires: @ for off/autoconfirmed/+ options, & ~ for all the options');
 		}
 		if (target === '~' || target === 'hotpatch') {
 			matched = true;

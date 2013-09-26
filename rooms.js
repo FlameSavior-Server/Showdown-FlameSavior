@@ -1439,14 +1439,9 @@ var ChatRoom = (function() {
 
 		if (!merging) {
 			var userList = this.userList ? this.userList : this.getUserList();
-<<<<<<< HEAD
 			this.send('|init|chat\n|title|'+this.title+'\n'+userList+'\n'+this.log.slice(-100).join('\n'), connection);
 			if (global.Tournaments && Tournaments.getTournament(this.id))
 				Tournaments.getTournament(this.id).update(user);
-=======
-			var modchat = this.getModchatNote();
-			this.send('|init|chat\n|title|'+this.title+'\n'+userList+'\n'+this.logGetLast(100).join('\n')+modchat, connection);
->>>>>>> upstream/master
 		}
 
 		return user;

@@ -956,7 +956,10 @@ var commands = exports.commands = {
 
 	league: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('The league consists of 8 Gym Leaders, the Elite 4, and 1 Champion.\n Currently there the Champion position is empty.\n Be the first to complete the league, and the spot is yours!\nThe Battle Tower League can be found <a href="http://thebattletower.xiaotai.org/forumdisplay.php?fid=8" >here</a>.');
+		return this.sendReplyBox('The league consists of 8 Gym Leaders, the Elite 4, and 1 Champion.<br /> ' +
+					 'Currently there the Champion position is empty.<br/>' + 
+					 'Be the first to complete the league, and the spot is yours!<br />' +
+					 'The Battle Tower League can be found <a href="http://thebattletower.xiaotai.org/forumdisplay.php?fid=8" >here</a>.');
 	},
 
 	frontier: function(target, room, user) {

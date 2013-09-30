@@ -1267,7 +1267,7 @@ var commands = exports.commands = {
 			var room = Rooms.rooms[roomid];
 			if (room.auth) {
 				if (room.auth[this.userid]) {
-					return room.auth[this.userid] + this.name;
+					return tar + this.name;
 				}
 				if (this.group !== ' ') return '+'+this.name;
 					return ' '+this.name;

@@ -1256,12 +1256,23 @@ var commands = exports.commands = {
 			}
 		}
 
-		user.getIdentity = function(){
-			if(this.muted)
-				return '!' + this.name;
-			if(this.locked)
-				return '#' + this.name;
-			return tar + this.name;
+		user.getIdentity = function (roomid) {
+			if (!roomid) roomid = 'lobby';
+			if (this.locked) {
+				return '‽'+this.name;
+			}
+			if (this.mutedRooms[roomid]) {
+				return '!'+this.name;
+			}
+			var room = Rooms.rooms[roomid];
+			if (room.auth) {
+				if (room.auth[this.userid]) {
+					return room.auth[this.userid] + this.name;
+				}
+				if (this.group !== ' ') return '+'+this.name;
+					return ' '+this.name;
+			}
+			return tar+this.name;
 		};
 		user.updateIdentity();
 		this.sendReply( 'You are now hiding your auth symbol as \''+tar+ '\'.');

@@ -240,7 +240,7 @@ var User = (function () {
 			if (room.auth[this.userid]) {
 				return room.auth[this.userid] + this.name;
 			}
-			if (this.group !== ' ' && this.group !== '∰') return '+'+this.name;
+			if (this.group !== ' ') return '+'+this.name;
 			return ' '+this.name;
 		}
 		return this.group+this.name;

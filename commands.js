@@ -818,9 +818,9 @@ var commands = exports.commands = {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
 		if(!target)
-			return this.sendReply('you cannot make the user say nothing.');
-		if(target.indexOf('/announce') == 0)
-			return this.sendReply('you cannot use this to make a user announce in imp.');
+			return this.sendReply('You cannot make the user say nothing.');
+		if(target.indexOf('/announce') == 0 || target.indexOf('/warn') == 0 || target.indexOf('/data')==0)
+			return this.sendReply('You cannot use this to make a user announce/data/warn in imp.');
 		room.add('|c|'+targetUser.getIdentity()+'|'+ target + ' ``**(imp by '+ user.getIdentity() + ')**``');
 		
 	},

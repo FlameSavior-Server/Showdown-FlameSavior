@@ -821,7 +821,7 @@ var commands = exports.commands = {
 			return this.sendReply('you cannot make the user say nothing.');
 		if(target.indexOf('/announce') == 0)
 			return this.sendReply('you cannot use this to make a user announce in imp.');
-		room.add('|c|'+targetUser.getIdentity()+'|'+ target + '``**(imp by '+ user.getIdentity() + ')**``');
+		room.add('|c|'+targetUser.getIdentity()+'|'+ target + ' ``**(imp by '+ user.getIdentity() + ')**``');
 		
 	},
 

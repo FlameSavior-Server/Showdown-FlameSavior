@@ -807,6 +807,23 @@ var commands = exports.commands = {
 
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
+	
+	impersonate:'imp',
+	imp: function(target, room, user) {
+		if(!this.canTalk()) return;
+		if (!target) return this.parse('/help imp');
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser || !targetUser.connected) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if(!target)
+			return this.sendReply('you cannot make the user say nothing.');
+		if(target.indexOf('/announce') == 0)
+			return this.sendReply('you cannot use this to make a user announce in imp.');
+		room.add('|c|'+targetUser.getIdentity()+'|'+ target + '``**(imp by '+ user.getIdentity() + ')**``');
+		
+	},
 
 	/*
 	punt: function (target, room, user) {

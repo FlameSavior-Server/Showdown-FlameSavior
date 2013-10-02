@@ -209,6 +209,7 @@ exports.groups = {
 		inherit: '@',
 		jurisdiction: 'u',
 		roommod: true,
+		roomdriver: true,
 		roomonly: true,
 		declare: true,
 		modchatall: true,
@@ -221,6 +222,7 @@ exports.groups = {
 		jurisdiction: 'u',
 		ban: true,
 		modchat: true,
+		roomvoice: true,
 		forcerename: true,
 		ip: true,
 		alts: '@u',
@@ -242,8 +244,12 @@ exports.groups = {
 		alts: '%u',
 		bypassblocks: 'u%@&~',
 		receiveauthmessages: true,
+<<<<<<< HEAD
 		roomvoice: true,
 		rank: 3
+=======
+		rank: 2
+>>>>>>> upstream/master
 	},
 	'+': {
 		id: "voice",

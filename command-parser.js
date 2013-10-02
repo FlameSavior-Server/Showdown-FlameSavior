@@ -204,12 +204,15 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 	} else {
 		// Check for mod/demod/admin/deadmin/etc depending on the group ids
 		for (var g in config.groups) {
-			if (cmd === config.groups[g].id) {
+			var groupid = config.groups[g].id;
+			if (cmd === groupid) {
 				return parse('/promote ' + toUserid(target) + ',' + g, room, user, connection);
-			} else if (cmd === 'de' + config.groups[g].id || cmd === 'un' + config.groups[g].id) {
-				var nextGroup = config.groupsranking[config.groupsranking.indexOf(g) - 1];
-				if (!nextGroup) nextGroup = config.groupsranking[0];
-				return parse('/demote ' + toUserid(target) + ',' + nextGroup, room, user, connection);
+			} else if (cmd === 'de' + groupid || cmd === 'un' + groupid) {
+				return parse('/demote ' + toUserid(target), room, user, connection);
+			} else if (cmd === 'room' + groupid) {
+				return parse('/roompromote ' + toUserid(target) + ',' + g, room, user, connection);
+			} else if (cmd === 'roomde' + groupid || cmd === 'deroom' + groupid || cmd === 'roomun' + groupid) {
+				return parse('/roomdemote ' + toUserid(target), room, user, connection);
 			}
 		}
 
@@ -364,7 +367,7 @@ function canTalk(user, room, connection, message) {
 		if (/\bnimp\.org\b/i.test(message)) return false;
 
 		// remove zalgo
-		message = message.replace(/[\u0300-\u036f\u0E2F-\u0E4F]{3,}/g,'');
+		message = message.replace(/[\u0300-\u036f\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]{3,}/g,'');
 
 		if (room && room.id === 'lobby') {
 			var normalized = message.trim();

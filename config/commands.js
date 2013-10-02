@@ -731,22 +731,24 @@ var commands = exports.commands = {
 	roomhelp: function(target, room, user) {
 		if (room.id === 'lobby') return this.sendReply('This command is too spammy for lobby.');
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Room moderators (%) can use:<br />' +
+		this.sendReplyBox('Room drivers (%) can use:<br />' +
 			'- /mute <em>username</em>: 7 minute mute<br />' +
 			'- /hourmute <em>username</em>: 60 minute mute<br />' +
 			'- /unmute <em>username</em>: unmute<br />' +
-			'- /roomvoice <em>username</em>: appoint a room voice<br />' +
-			'- /deroomvoice <em>username</em>: remove a room voice<br />' +
 			'- /announce <em>message</em>: make an announcement<br />' +
 			'<br />' +
-			'Room owners (#) can use:<br />' +
-			'- /roomdesc <em>description</em>: set the room description on the room join page<br />' +
-			'- /roommod <em>username</em>: appoint a room moderator<br />' +
-			'- /deroommod <em>username</em>: remove a room moderator<br />' +
-			'- /declare <em>message</em>: make a global declaration<br />' +
-			'- /modchat <em>level</em>: set modchat (to turn off: /modchat off)<br />' +
+			'Room moderators (@) can also use:<br />' +
 			'- /roomban <em>username</em>: bans user from the room<br />' +
 			'- /roomunban <em>username</em>: unbans user from the room<br />' +
+			'- /roomvoice <em>username</em>: appoint a room voice<br />' +
+			'- /roomdevoice <em>username</em>: remove a room voice<br />' +
+			'- /modchat <em>level</em>: set modchat (to turn off: /modchat off)<br />' +
+			'<br />' +
+			'Room owners (#) can also use:<br />' +
+			'- /roomdesc <em>description</em>: set the room description on the room join page<br />' +
+			'- /roommod, /roomdriver <em>username</em>: appoint a room moderator/driver<br />' +
+			'- /roomdemod, /roomdedriver <em>username</em>: remove a room moderator/driver<br />' +
+			'- /declare <em>message</em>: make a global declaration<br />' +
 			'</div>');
 	},
 
@@ -1014,8 +1016,12 @@ var commands = exports.commands = {
 			if (faces < 1 || faces > 1000) return this.sendReply("The number of faces must be between 1 and 1000");
 			if (num < 1 || num > 20) return this.sendReply("The number of dice must be between 1 and 20");
 			var rolls = new Array();
-			for (var i=0; i < num; i++) rolls[i] = (Math.floor(faces * Math.random()) + 1);
-			return this.sendReplyBox('Random number ' + num + 'x(1 - ' + faces + '): ' + rolls.join());
+			var total = 0;
+			for (var i=0; i < num; i++) {
+				rolls[i] = (Math.floor(faces * Math.random()) + 1);
+				total += rolls[i];
+			}
+			return this.sendReplyBox('Random number ' + num + 'x(1 - ' + faces + '): ' + rolls.join(', ') + '<br />Total: ' + total);
 		}
 		if (target && isNaN(target) || target.length > 21) return this.sendReply('The max roll must be a number under 21 digits.');
 		var maxRoll = (target)? target : 6;
@@ -1205,6 +1211,7 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'dice' || target === 'roll') {
 			matched = true;
 			this.sendReply('/dice [optional max number] - Randomly picks a number between 1 and 6, or between 1 and the number you choose.');
+			this.sendReply('/dice [number of dice]d[number of sides] - Simulates rolling a number of dice, e.g., /dice 2d4 simulates rolling two 4-sided dice.');
 		}
 		if (target === 'all' || target === 'join') {
 			matched = true;
@@ -1358,8 +1365,9 @@ var commands = exports.commands = {
 			this.sendReply('/help OR /h OR /? - Gives you help.');
 		}
 		if (!target) {
-			this.sendReply('COMMANDS: /msg, /reply, /tell, /ip, /rating, /nick, /avatar, /rooms, /whois, /help, /away, /back, /timestamps');
-			this.sendReply('INFORMATIONAL COMMANDS: /data, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /search, /calc (replace / with ! to broadcast. (Requires: + % @ & ~))');
+			this.sendReply('COMMANDS: /msg, /reply, /ip, /rating, /nick, /avatar, /rooms, /whois, /help, /away, /back, /timestamps');
+			this.sendReply('INFORMATIONAL COMMANDS: /data, /dexsearch, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /calc (replace / with ! to broadcast. (Requires: + % @ & ~))');
+			this.sendReply('For details on all room commands, use /roomhelp');
 			this.sendReply('For details on all commands, use /help all');
 			if (user.group !== config.groupsranking[0]) {
 				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /forcerename, /alts')

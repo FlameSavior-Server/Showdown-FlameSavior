@@ -767,7 +767,7 @@ var commands = exports.commands = {
 	
 	impersonate:'imp',
 	imp: function(target, room, user) {
-		if (!this.canBroadcast) return;
+		if (!user.can('broadcast')) return this.sendReply('/imp - Access denied.');
 		if (!this.canTalk()) return;
 		if (!target) return this.parse('/help imp');
 		target = this.splitTarget(target);

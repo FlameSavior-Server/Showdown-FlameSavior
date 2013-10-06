@@ -244,12 +244,7 @@ exports.groups = {
 		alts: '%u',
 		bypassblocks: 'u%@&~',
 		receiveauthmessages: true,
-<<<<<<< HEAD
-		roomvoice: true,
 		rank: 3
-=======
-		rank: 2
->>>>>>> upstream/master
 	},
 	'+': {
 		id: "voice",

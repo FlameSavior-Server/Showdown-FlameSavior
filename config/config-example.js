@@ -188,6 +188,8 @@ exports.groups = {
 		name: "Administrator",
 		root: true,
 		rank: 7
+		globalonly: true,
+		gdeclare: true,
 	},
 	'&': {
 		id: "leader",
@@ -202,6 +204,7 @@ exports.groups = {
 		potd: true,
 		disableladder: true,
 		rank: 6
+		globalonly: true,
 	},
 	'#': {
 		id: "owner",
@@ -210,10 +213,10 @@ exports.groups = {
 		jurisdiction: 'u',
 		roommod: true,
 		roomdriver: true,
-		roomonly: true,
 		declare: true,
 		modchatall: true,
 		rank: 5
+		roomonly: true,
 	},
 	'@': {
 		id: "mod",

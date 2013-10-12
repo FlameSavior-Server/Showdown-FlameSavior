@@ -299,10 +299,10 @@ var BattlePokemon = (function() {
 				hpPowerX += i * (Math.floor(this.set.ivs[s] / 2) % 2);
 				i *= 2;
 			}
-			// Support for gen 6 metagame mods
-			var maxTypes = (this.battle.gen && this.battle.gen === 6)? 16 : 15;
+			// Support for gen 5 and gen 6
+			var maxTypes = (this.battle.gen && this.battle.gen < 6)? 15 : 16;
 			this.hpType = hpTypes[Math.floor(hpTypeX * maxTypes / 63)];
-			this.hpPower = Math.floor(hpPowerX * 40 / 63) + 30;
+			this.hpPower = (this.battle.gen && this.battle.gen < 6)? Math.floor(hpPowerX * 40 / 63) + 30 : 60;
 		}
 
 		this.boosts = {
@@ -985,7 +985,7 @@ var BattlePokemon = (function() {
 		if (this.ability === ability.id) {
 			return false;
 		}
-		if (ability.id === 'Multitype' || ability.id === 'Illusion' || this.ability === 'Multitype') {
+		if (ability.id === 'multitype' || ability.id === 'illusion' || this.ability === 'multitype') {
 			return false;
 		}
 		this.ability = ability.id;
@@ -1808,7 +1808,7 @@ var Battle = (function() {
 	 *   variables that are passed as arguments to the event handler, but
 	 *   they're useful for functions called by the event handler.
 	 */
-	Battle.prototype.runEvent = function(eventid, target, source, effect, relayVar) {
+	Battle.prototype.runEvent = function(eventid, target, source, effect, relayVar, onEffect) {
 		if (this.eventDepth >= 8) {
 			// oh fuck
 			this.add('message', 'STACK LIMIT EXCEEDED');
@@ -1829,6 +1829,14 @@ var Battle = (function() {
 			hasRelayVar = false;
 		} else {
 			args.unshift(relayVar);
+		}
+
+		var parentEvent = this.event;
+		this.event = {id: eventid, target: target, source: source, effect: effect, modifier: 1};
+		this.eventDepth++;
+
+		if (onEffect && 'on'+eventid in effect) {
+			statuses.unshift({status: effect, callback: effect['on'+eventid], statusData: {}, end: null, thing: target});
 		}
 		for (var i=0; i<statuses.length; i++) {
 			var status = statuses[i].status;
@@ -1885,29 +1893,34 @@ var Battle = (function() {
 			if (typeof statuses[i].callback === 'function') {
 				var parentEffect = this.effect;
 				var parentEffectData = this.effectData;
-				var parentEvent = this.event;
 				this.effect = statuses[i].status;
 				this.effectData = statuses[i].statusData;
 				this.effectData.target = thing;
-				this.event = {id: eventid, target: target, source: source, effect: effect};
-				this.eventDepth++;
+
 				returnVal = statuses[i].callback.apply(this, args);
-				this.eventDepth--;
+
 				this.effect = parentEffect;
 				this.effectData = parentEffectData;
-				this.event = parentEvent;
 			} else {
 				returnVal = statuses[i].callback;
 			}
 
 			if (returnVal !== undefined) {
 				relayVar = returnVal;
-				if (!relayVar) return relayVar;
+				if (!relayVar) break;
 				if (hasRelayVar) {
 					args[0] = relayVar;
 				}
 			}
 		}
+
+		this.eventDepth--;
+		if (this.event.modifier !== 1 && typeof relayVar === 'number') {
+			// this.debug(eventid+' modifier: 0x'+('0000'+(this.event.modifier * 4096).toString(16)).slice(-4).toUpperCase());
+			relayVar = this.modify(relayVar, this.event.modifier);
+		}
+		this.event = parentEvent;
+
 		return relayVar;
 	};
 	Battle.prototype.resolveLastPriority = function(statuses, callbackType) {
@@ -2285,6 +2298,7 @@ var Battle = (function() {
 			}
 			this.runEvent('SwitchOut', oldActive);
 			oldActive.isActive = false;
+			oldActive.isStarted = false;
 			oldActive.position = pokemon.position;
 			pokemon.position = pos;
 			side.pokemon[pokemon.position] = pokemon;
@@ -2546,7 +2560,23 @@ var Battle = (function() {
 		if (nextMod.length) nextMod = Math.floor(nextMod[0] * 4096 / nextMod[1]);
 		else nextMod = Math.floor(nextMod * 4096);
 		return ((previousMod * nextMod + 2048) >> 12) / 4096; // M'' = ((M * M') + 0x800) >> 12
-	}
+	};
+	Battle.prototype.chainModify = function(numerator, denominator) {
+		var previousMod = Math.floor(this.event.modifier * 4096);
+
+		if (numerator.length) {
+			denominator = numerator[1];
+			numerator = numerator[0];
+		}
+		var nextMod = 0;
+		if (this.event.ceilModifier) {
+			nextMod = Math.ceil(numerator * 4096 / (denominator||1));
+		} else {
+			nextMod = Math.floor(numerator * 4096 / (denominator||1));
+		}
+
+		this.event.modifier = ((previousMod * nextMod + 2048) >> 12) / 4096;
+	};
 	Battle.prototype.modify = function(value, numerator, denominator) {
 		// You can also use:
 		// modify(value, [numerator, denominator])
@@ -2592,14 +2622,6 @@ var Battle = (function() {
 			return target.maxhp;
 		}
 
-		if (!move.basePowerMultiplier && move.category !== 'Status') {
-			// happens before basePowerCallback so Acrobatics works correctly
-			// activates constant damage moves
-			// but NOT OHKO moves
-			move.basePowerMultiplier = this.runEvent('BasePowerMultiplier', pokemon, target, move, 1);
-			if (move.basePowerMultiplier != 1) this.debug('multiplier: '+move.basePowerMultiplier);
-		}
-
 		if (move.damageCallback) {
 			return move.damageCallback.call(this, pokemon, target);
 		}
@@ -2643,17 +2665,8 @@ var Battle = (function() {
 		}
 
 		// happens after crit calculation
-		if (basePower) {
-			basePower = this.singleEvent('BasePower', move, null, pokemon, target, move, basePower);
-			basePower = this.runEvent('BasePower', pokemon, target, move, basePower);
+		basePower = this.runEvent('BasePower', pokemon, target, move, basePower, true);
 
-			if (move.basePowerMultiplier && move.basePowerMultiplier != 1) {
-				basePower = this.modify(basePower, move.basePowerMultiplier);
-			}
-			if (move.basePowerModifier) {
-				basePower = this.modify(basePower, move.basePowerModifier);
-			}
-		}
 		if (!basePower) return 0;
 		basePower = clampIntRange(basePower, 1);
 
@@ -2666,42 +2679,43 @@ var Battle = (function() {
 		var statTable = {atk:'Atk', def:'Def', spa:'SpA', spd:'SpD', spe:'Spe'};
 		var attack;
 		var defense;
-		/*
-		if (move.useTargetOffensive) attacker = target;
-		if (move.useSourceDefensive) defender = pokemon;
-		*/
 
-		var atkStatMod = 1;
-		atkStatMod = this.runEvent('Modify'+statTable[attackStat], attacker, defender, move, atkStatMod);
-		var defStatMod = 1;
-		defStatMod = this.runEvent('Modify'+statTable[defenseStat], defender, attacker, move, defStatMod);
+		var atkBoosts = move.useTargetOffensive ? defender.boosts[attackStat] : attacker.boosts[attackStat];
+		var defBoosts = move.useSourceDefensive ? attacker.boosts[defenseStat] : defender.boosts[defenseStat];
 		
-		if (move.useTargetOffensive) attack = defender.calculateStat(attackStat, defender.boosts[attackStat], atkStatMod);
-		else attack = attacker.calculateStat(attackStat, attacker.boosts[attackStat], atkStatMod);
-		
-		if (move.useSourceDefensive) defense = attacker.calculateStat(defenseStat, attacker.boosts[defenseStat], defStatMod);
-		else defense = defender.calculateStat(defenseStat, defender.boosts[defenseStat], defStatMod);
-
 		var ignoreNegativeOffensive = !!move.ignoreNegativeOffensive;
 		var ignorePositiveDefensive = !!move.ignorePositiveDefensive;
+		
 		if (move.crit) {
 			ignoreNegativeOffensive = true;
 			ignorePositiveDefensive = true;
 		}
-		if (ignoreNegativeOffensive && (move.useTargetOffensive ? defender.boosts[attackStat] : attacker.boosts[attackStat]) < 0) {
-			move.ignoreOffensive = true;
+		
+		if (move.ignoreOffensive || (ignoreNegativeOffensive && atkBoosts < 0)) {
+			var ignoreOffensive = true;
 		}
-		if (move.ignoreOffensive) {
+		if (move.ignoreDefensive || (ignorePositiveDefensive && defBoosts > 0)) {
+			var ignoreDefensive = true;
+		}
+		
+		if (ignoreOffensive) {
 			this.debug('Negating (sp)atk boost/penalty.');
-			attack = attacker.calculateStat(attackStat, 0, atkStatMod);
+			atkBoosts = 0;
 		}
-		if (ignorePositiveDefensive && (move.useSourceDefensive ? attacker.boosts[defenseStat] : defender.boosts[defenseStat]) > 0) {
-			move.ignoreDefensive = true;
-		}
-		if (move.ignoreDefensive) {
+		if (ignoreDefensive) {
 			this.debug('Negating (sp)def boost/penalty.');
-			defense = target.calculateStat(defenseStat, 0, defStatMod);
+			defBoosts = 0;
 		}
+
+		if (move.useTargetOffensive) attack = defender.calculateStat(attackStat, atkBoosts);
+		else attack = attacker.calculateStat(attackStat, atkBoosts);
+		
+		if (move.useSourceDefensive) defense = attacker.calculateStat(defenseStat, defBoosts);
+		else defense = defender.calculateStat(defenseStat, defBoosts);
+		
+		// Apply Stat Modifiers
+		attack = this.runEvent('Modify'+statTable[attackStat], attacker, defender, move, attack);
+		defense = this.runEvent('Modify'+statTable[defenseStat], defender, attacker, move, defense);
 
 		//int(int(int(2*L/5+2)*A*P/D)/50);
 		var baseDamage = Math.floor(Math.floor(Math.floor(2*level/5+2) * basePower * attack/defense)/50) + 2;
@@ -2717,7 +2731,7 @@ var Battle = (function() {
 		// crit
 		if (move.crit) {
 			if (!suppressMessages) this.add('-crit', target);
-			baseDamage = this.modify(baseDamage, move.critModifier || 2);
+			baseDamage = this.modify(baseDamage, move.critModifier || (this.gen >= 6 ? 1.5 : 2));
 		}
 
 		// randomizer
@@ -2737,6 +2751,7 @@ var Battle = (function() {
 		}
 		// types
 		var totalTypeMod = this.getEffectiveness(type, target);
+		totalTypeMod = this.singleEvent('ModifyEffectiveness', move, null, target, pokemon, move, totalTypeMod);
 		if (totalTypeMod > 0) {
 			if (!suppressMessages) this.add('-supereffective', target);
 			baseDamage *= 2;
@@ -2757,8 +2772,7 @@ var Battle = (function() {
 		}
 
 		// Final modifier. Modifiers that modify damage after min damage check, such as Life Orb.
-		var finalMod = 1;
-		baseDamage = this.modify(baseDamage, this.runEvent('ModifyDamage', pokemon, target, move, finalMod));
+		baseDamage = this.runEvent('ModifyDamage', pokemon, target, move, baseDamage);
 
 		return Math.floor(baseDamage);
 	};

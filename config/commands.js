@@ -191,7 +191,7 @@ var commands = exports.commands = {
 		if (!targetUser.authenticated) {
 			this.sendReply('(Unregistered)');
 		}
-		if (!this.broadcasting && user.can('ip', targetUser)) {
+		if (!this.broadcasting && (user.can('ip', targetUser) || user === targetUser)) {
 			var ips = Object.keys(targetUser.ips);
 			this.sendReply('IP' + ((ips.length > 1) ? 's' : '') + ': ' + ips.join(', '));
 		}
@@ -270,7 +270,7 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help dexsearch');
 		var targets = target.split(',');
 		var moves = {}, tiers = {}, colours = {}, ability = {}, gens = {}, types = {};
-		var allTiers = {'uber':1,'ou':1,'uu':1,'ru':1,'nu':1,'lc':1,'cap':1,'bl':1,'bl2':1,'nfe':1};
+		var allTiers = {'uber':1,'ou':1,'uu':1,'ru':1,'nu':1,'lc':1,'cap':1,'bl':1,'bl2':1,'nfe':1, 'limbo':1};
 		var allColours = {'green':1,'red':1,'blue':1,'white':1,'brown':1,'yellow':1,'purple':1,'pink':1,'gray':1,'black':1};
 		var count = 0;
 		var showAll = false;
@@ -368,7 +368,7 @@ var commands = exports.commands = {
 			if (!results) {
 				for (var pokemon in Tools.data.Pokedex) {
 					pokemon = Tools.getTemplate(pokemon);
-					if (pokemon.tier !== 'Illegal' && (pokemon.tier.slice(2).toLowerCase() !== 'cap' || 'cap' in tiers)) {
+					if (pokemon.tier !== 'Illegal' && (pokemon.tier !== 'CAP' || 'cap' in tiers)) {
 						tempResults.add(pokemon);
 					}
 				}
@@ -391,9 +391,6 @@ var commands = exports.commands = {
 
 			if (tiers.count > 0) {
 				for (var mon in tempResults) {
-					if ('cap' in tiers) {
-						if (tempResults[mon].tier.slice(2).toLowerCase() === 'cap') results.add(tempResults[mon]);
-					}
 					if (tempResults[mon].tier.toLowerCase() in tiers) results.add(tempResults[mon]);
 				}
 				tiers.count = 0;
@@ -800,6 +797,10 @@ var commands = exports.commands = {
 			matched = true;
 			buffer += '<a href="http://www.smogon.com/sim/staff_faq">Staff FAQ</a><br />';
 		}
+		if (target === 'all' || target === 'autoconfirmed') {
+			matched = true;
+			buffer += 'A user is autoconfirmed when they have won at least one rated battle and has been registered for a week or longer.<br />';
+		}	
 		if (!matched) {
 			return this.sendReply('The FAQ entry "'+target+'" was not found. Try /faq for general help.');
 		}
@@ -1306,11 +1307,19 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/forcetie - Forces the current match to tie. Requires: & ~');
 		}
-		if (target === '&' || target === 'declare' ) {
+		if (target === '&' || target === 'declare') {
 			matched = true;
 			this.sendReply('/declare [message] - Anonymously announces a message. Requires: & ~');
 		}
-		if (target === '%' || target === 'announce' || target === 'wall' ) {
+		if (target === '~' || target === 'chatdeclare' || target === 'cdeclare') {
+			matched = true;
+			this.sendReply('/cdeclare [message] - Anonymously announces a message to all chatrooms on the server. Requires: ~');
+		}
+		if (target === '~' || target === 'globaldeclare' || target === 'gdeclare') {
+			matched = true;
+			this.sendReply('/globaldeclare [message] - Anonymously announces a message to every room on the server. Requires: ~');
+		}
+		if (target === '%' || target === 'announce' || target === 'wall') {
 			matched = true;
 			this.sendReply('/announce OR /wall [message] - Makes an announcement. Requires: % @ & ~');
 		}

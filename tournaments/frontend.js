@@ -1,7 +1,8 @@
-require("es6-shim");
+require('es6-shim');
 
 var TournamentGenerators = {
-	roundrobin: require('./generator-round-robin.js').RoundRobin
+	roundrobin: require('./generator-round-robin.js').RoundRobin,
+	elimination: require('./generator-elimination.js').Elimination
 };
 
 var tournaments = {};
@@ -10,7 +11,17 @@ function usersToNames(users) {
 	return users.map(function (user) { return user.name; });
 }
 
-function createTournament(room, format, generator, output) {
+function createTournamentGenerator(generator, args, output) {
+	var Generator = TournamentGenerators[toId(generator)];
+	if (!Generator) {
+		output.sendReply(generator + " is not a valid type.");
+		output.sendReply("Valid types: " + Object.keys(TournamentGenerators).join(", "));
+		return;
+	}
+	args.unshift(null);
+	return new (Generator.bind.apply(Generator, args));
+}
+function createTournament(room, format, generator, args, output) {
 	if (room.type !== 'chat') {
 		output.sendReply("Tournaments can only be created in chat rooms.");
 		return;
@@ -25,11 +36,11 @@ function createTournament(room, format, generator, output) {
 		return;
 	}
 	if (!TournamentGenerators[toId(generator)]) {
-		output.sendReply(generator + " is not a valid generator.");
-		output.sendReply("Valid generators: " + Object.keys(TournamentGenerators).join(", "));
+		output.sendReply(generator + " is not a valid type.");
+		output.sendReply("Valid types: " + Object.keys(TournamentGenerators).join(", "));
 		return;
 	}
-	return tournaments[room.id] = new Tournament(room, format, new TournamentGenerators[toId(generator)]());
+	return tournaments[room.id] = new Tournament(room, format, createTournamentGenerator(generator, args, output));
 }
 function deleteTournament(name, output) {
 	var id = toId(name);
@@ -172,8 +183,26 @@ var Tournament = (function () {
 	Tournament.prototype.getBracketData = function () {
 		if (this.isBracketInvalidated) {
 			var data = this.generator.getBracketData();
-			if (data.type === 'tree') {
-				// TODO
+			if (data.type === 'tree' && data.rootNode) {
+				var queue = [data.rootNode];
+				while (queue.length > 0) {
+					var node = queue.shift();
+
+					if (node.state === 'available') {
+						var inProgressMatch = this.inProgressMatches.get(node.children[0].team);
+						if (inProgressMatch && node.children[1].team === inProgressMatch.to) {
+							node.state = 'inprogress';
+							node.room = inProgressMatch.room.id;
+						}
+					}
+
+					if (node.team)
+						node.team = node.team.name;
+
+					node.children.forEach(function (child) {
+						queue.push(child);
+					});
+				}
 			} else if (data.type === 'table') {
 				if (this.isTournamentStarted)
 					data.tableContents.forEach(function (row, r) {
@@ -382,10 +411,25 @@ var Tournament = (function () {
 			result = 'win';
 		else if (to === winner)
 			result = 'loss';
+
+		if (result === 'draw' && !this.generator.isDrawingSupported) {
+			this.room.send('|tournament|battleend|' + from.name + '|' + to.name + '|' + result + '|' + room.battle.score.join(',') + '|fail');
+
+			this.generator.setUserBusy(from, false);
+			this.generator.setUserBusy(to, false);
+			this.inProgressMatches.set(from, null);
+
+			this.isBracketInvalidated = true;
+			this.isAvailableMatchesInvalidated = true;
+
+			this.update();
+			return;
+		}
+
 		var isTournamentEnded = this.generator.setMatchResult([from, to], result, room.battle.score);
 		if (typeof isTournamentEnded === 'string') {
 			// Should never happen
-			this.room.add("Unexpected " + isTournamentEnded + " from setMatchResult() in onBattleWin(" + room.id + ", " + winner.id + ", ...). Please report this to an admin.");
+			this.room.add("Unexpected " + isTournamentEnded + " from setMatchResult() in onBattleWin(" + room.id + ", " + winner.userid + "). Please report this to an admin.");
 			return;
 		}
 
@@ -419,20 +463,13 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 	var cmd = cmdParts.shift().trim().toLowerCase();
 	var params = cmdParts.join(' ').split(',').map(function (param) { return param.trim(); });
 
-	if (cmd === 'hotpatch') {
-		if (!user.can('hotpatch'))
-			return this.sendReply(cmd + " -  Access denied.");
-		CommandParser.uncacheTree('./tournaments/frontend.js');
-		global.Tournaments = require('./frontend.js');
-		Object.merge(Tournaments.tournaments, tournaments, false);
-		this.sendReply("Tournaments hotpatched successfully.");
-	} else if (cmd === 'create' || cmd === 'new') {
-		if (params.length < 2)
-			return this.sendReply("Usage: create <format>, <generator>");
+	if (cmd === 'create' || cmd === 'new') {
 		if (!user.can('tournaments'))
 			return this.sendReply(cmd + " -  Access denied.");
+		if (params.length < 2)
+			return this.sendReply("Usage: " + cmd + " <format>, <type> [, <comma-separated arguments>]");
 
-		createTournament(room, params[0], params[1], this);
+		createTournament(room, params.shift(), params.shift(), params, this);
 	} else if (cmd === '') {
 		this.sendReply('|tournaments|info|' + JSON.stringify(Object.keys(tournaments).map(function (tournament) {
 			tournament = tournaments[tournament];
@@ -480,6 +517,14 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 					return this.sendReply(cmd + " -  Access denied.");
 
 				switch (cmd) {
+					case 'settype':
+						if (params.length < 1)
+							return this.sendReply("Usage: " + cmd + " <type> [, <comma-separated arguments>]");
+						var generator = createTournamentGenerator(params.shift(), params, this);
+						if (generator)
+							tournament.setGenerator(generator, this);
+						break;
+
 					case 'end':
 					case 'delete':
 						deleteTournament(room.title, this);

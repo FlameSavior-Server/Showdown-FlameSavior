@@ -12,8 +12,8 @@ Showdown directly using WebSocket:
     wss://sim.psim.us/showdown/websocket
 
 
-Incoming messages
------------------
+Client-to-server messages
+-------------------------
 
 Messages from the user to the server are in the form:
 
@@ -29,9 +29,11 @@ way as if each line were sent to the room separately.
 
 A partial list of available commands can be found with `/help`.
 
+To log in, look at the documentation for the `|challstr|` server message.
 
-Outgoing messages
------------------
+
+Server-to-client messages
+-------------------------
 
 Messages from the server to the user are in the form:
 
@@ -57,6 +59,7 @@ room's log. Otherwise, it will be in the form:
 
 For example:
 
+    |tc|2|@Moderator|Some dude will join in two seconds!
     |j| Some dude
     |c|@Moderator|hi!
     |c| Some dude|you suck and i hate you!
@@ -66,6 +69,7 @@ For example:
 
 This might be displayed as:
 
+    @Moderator: Some dude will join in two seconds!
     Some dude joined.
     @Moderator: hi!
     Some dude: you suck and i hate you!
@@ -83,6 +87,10 @@ the equivalent of their lowercase versions, but are recommended not to be
 displayed inline because they happen too often. For instance, the main server
 gets around 5 joins/leaves a second, and showing that inline with chat would
 make it near-impossible to chat.
+
+`tc` is pretty much the same as `c`, but also gives the delta time; the amount
+of seconds passed since the message has been sent. This is so that when the
+chat replays for example, the times shown are correct.
 
 Some outgoing message types
 ---------------------------
@@ -168,20 +176,27 @@ for a full list of message types.
 
 `|challstr|KEYID|CHALLENGE`
 
-> You tried to log in, and we need confirmation that it's really you.
+> You just connected to the server, and we're giving you some information you'll need to log in.
 >
-> Make an HTTP request to
+> If you're already logged in and have session cookies, you can make an HTTP GET request to
 > `http://play.pokemonshowdown.com/action.php?act=upkeep&challengekeyid=KEYID&challenge=CHALLENGE`
 >
-> The response will start with `]` and be followed by a JSON object which
-> we'll call `data`.
+> Otherwise, you'll need to make an HTTP POST request to `http://play.pokemonshowdown.com/action.php`
+> with the data `act=login&user=USERNAME&pass=PASSWORD&challengekeyid=KEYID&challenge=CHALLENGE`
 >
-> Finish the rename by sending: `/trn NAME,0,ASSERTION`
-> where `NAME` is your desired username and `ASSERTION` is `data.assertion`.
+> `USERNAME` is your username and `PASSWORD` is your password, and `KEYID` and
+> `CHALLENGE` are the values you got from `|challstr|`. (Also feel free to make
+> the request to `https://` if your client supports it.)
+>
+> Either way, the response will start with `]` and be followed by a JSON
+> object which we'll call `data`.
+>
+> Finish logging in (or renaming) by sending: `/trn USERNAME,0,ASSERTION`
+> where `USERNAME` is your desired username and `ASSERTION` is `data.assertion`.
 
-`|updateuser|NAME|NAMED|AVATAR`
+`|updateuser|USERNAME|NAMED|AVATAR`
 
-> Your name or avatar was successfully changed. Your username is now `NAME`.
+> Your name or avatar was successfully changed. Your username is now `USERNAME`.
 > `NAMED` will be `0` if you are a guest or `1` otherwise. And your avatar is
 > now `AVATAR`.
 
@@ -192,6 +207,9 @@ for a full list of message types.
 > more of these suffixes: `,#` if the format uses random teams, `,,` if the
 > format is only available for searching, and `,` if the format is only
 > available for challenging.
+> Sections are separated by two vertical bars with the number of the column of
+> that section prefixed by `,` in it. After that follows the name of the
+> section and another vertical bar.
 
 `|updatesearch|JSON`
 

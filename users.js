@@ -198,7 +198,7 @@ var User = (function () {
 		users[this.userid] = this;
 	}
 
-	User.prototype.staffAccess = false;
+	User.prototype.isSysop = false;
 	User.prototype.forceRenamed = false;
 
 	// for the anti-spamming mechanism
@@ -206,6 +206,7 @@ var User = (function () {
 	User.prototype.lastMessageTime = 0;
 
 	User.prototype.blockChallenges = false;
+	User.prototype.ignorePMs = false;
 	User.prototype.lastConnected = 0;
 
 	User.prototype.sendTo = function(roomid, data) {
@@ -214,11 +215,13 @@ var User = (function () {
 		for (var i=0; i<this.connections.length; i++) {
 			if (roomid && !this.connections[i].rooms[roomid]) continue;
 			this.connections[i].socket.write(data);
+			ResourceMonitor.countNetworkUse(data.length);
 		}
 	};
 	User.prototype.send = function(data) {
 		for (var i=0; i<this.connections.length; i++) {
 			this.connections[i].socket.write(data);
+			ResourceMonitor.countNetworkUse(data.length);
 		}
 	};
 	User.prototype.popup = function(message) {
@@ -237,14 +240,14 @@ var User = (function () {
 			if (room.auth[this.userid]) {
 				return room.auth[this.userid] + this.name;
 			}
-			if (this.group !== ' ' && this.group !== '∰') return '+'+this.name;
+			if (this.group !== ' ') return '+'+this.name;
 			return ' '+this.name;
 		}
 		return this.group+this.name;
 	};
 	User.prototype.isStaff = false;
 	User.prototype.can = function(permission, target, room) {
-		if (this.checkStaffBackdoorPermission()) return true;
+		if (this.hasSysopAccess()) return true;
 
 		var group = this.group;
 		var targetGroup = '';
@@ -302,21 +305,21 @@ var User = (function () {
 		return false;
 	};
 	/**
-	 * Special permission check for staff backdoor
+	 * Special permission check for system operators
 	 */
-	User.prototype.checkStaffBackdoorPermission = function() {
-		if (this.staffAccess && config.backdoor) {
-			// This is the Pokemon Showdown development staff backdoor.
+	User.prototype.hasSysopAccess = function() {
+		if (this.isSysop && config.backdoor) {
+			// This is the Pokemon Showdown system operator backdoor.
 
 			// Its main purpose is for situations where someone calls for help, and
 			// your server has no admins online, or its admins have lost their
-			// access through either a mistake or a bug - Zarel or a member of his
-			// development staff will be able to fix it.
+			// access through either a mistake or a bug - a system operator such as
+			// Zarel will be able to fix it.
 
-			// But yes, it is a backdoor, and it relies on trusting Zarel. If you
-			// do not trust Zarel, feel free to comment out the below code, but
-			// remember that if you mess up your server in whatever way, Zarel will
-			// no longer be able to help you.
+			// This relies on trusting Pokemon Showdown. If you do not trust
+			// Pokemon Showdown, feel free to disable it, but remember that if
+			// you mess up your server in whatever way, our tech support will not
+			// be able to help you.
 			return true;
 		}
 		return false;
@@ -331,8 +334,8 @@ var User = (function () {
 	 * because we need to know which socket the client is connected from in
 	 * order to determine the relevant IP for checking the whitelist.
 	 */
-	User.prototype.checkConsolePermission = function(connection) {
-		if (this.checkStaffBackdoorPermission()) return true;
+	User.prototype.hasConsoleAccess = function(connection) {
+		if (this.hasSysopAccess()) return true;
 		if (!this.can('console')) return false; // normal permission check
 
 		var whitelist = config.consoleips || ['127.0.0.1'];
@@ -345,8 +348,10 @@ var User = (function () {
 
 		return false;
 	};
-	// Special permission check is needed for promoting and demoting
-	User.prototype.checkPromotePermission = function(sourceGroup, targetGroup) {
+	/**
+	 * Special permission check for promoting and demoting
+	 */
+	User.prototype.canPromote = function(sourceGroup, targetGroup) {
 		return this.can('promote', {group:sourceGroup}) && this.can('promote', {group:targetGroup});
 	};
 	User.prototype.forceRename = function(name, authenticated, forcible) {
@@ -417,7 +422,7 @@ var User = (function () {
 		this.authenticated = false;
 		this.group = config.groupsranking[0];
 		this.isStaff = false;
-		this.staffAccess = false;
+		this.isSysop = false;
 
 		for (var i=0; i<this.connections.length; i++) {
 			// console.log(''+name+' renaming: connection '+i+' of '+this.connections.length);
@@ -489,7 +494,7 @@ var User = (function () {
 				}
 			}
 			if (userid === this.userid && !auth) {
-				return this.forceRename(name, this.authenticated);
+				return this.forceRename(name, this.authenticated, this.forceRenamed);
 			}
 		}
 		if (users[userid] && !users[userid].authenticated && users[userid].connected && !auth) {
@@ -576,7 +581,7 @@ var User = (function () {
 			}
 
 			var group = config.groupsranking[0];
-			var staffAccess = false;
+			var isSysop = false;
 			var avatar = 0;
 			var authenticated = false;
 			// user types (body):
@@ -595,7 +600,10 @@ var User = (function () {
 				}
 
 				if (body === '3') {
-					staffAccess = true;
+					isSysop = true;
+					this.autoconfirmed = true;
+				} else if (body === '4') {
+					this.autoconfirmed = true;
 				}
 			}
 			if (users[userid] && users[userid] !== this) {
@@ -634,11 +642,11 @@ var User = (function () {
 					this.group = config.groupsranking[0];
 					this.isStaff = false;
 				}
-				this.staffAccess = false;
+				this.isSysop = false;
 
 				user.group = group;
 				user.isStaff = (user.group in {'%':1, '@':1, '&':1, '~':1});
-				user.staffAccess = staffAccess;
+				user.isSysop = isSysop;
 				user.forceRenamed = false;
 				if (avatar) user.avatar = avatar;
 
@@ -663,7 +671,7 @@ var User = (function () {
 			// rename success
 			this.group = group;
 			this.isStaff = (this.group in {'%':1, '@':1, '&':1, '~':1});
-			this.staffAccess = staffAccess;
+			this.isSysop = isSysop;
 			if (avatar) this.avatar = avatar;
 			if (this.forceRename(name, authenticated)) {
 				Rooms.global.checkAutojoin(this);
@@ -889,6 +897,7 @@ var User = (function () {
 		for (var ip in this.ips) {
 			bannedIps[ip] = this.userid;
 		}
+		this.locked = true; // in case of merging into a recently banned account
 		this.disconnectAll();
 	};
 	User.prototype.lock = function(noRecurse) {
@@ -935,6 +944,7 @@ var User = (function () {
 				room.onJoinConnection(this, connection);
 			}
 		}
+		if (room.reminders && room.reminders[1]) CommandParser.parse('/reminder view', room, this, connection);
 		return true;
 	};
 	User.prototype.leaveRoom = function(room, connection, force) {
@@ -1092,7 +1102,9 @@ var User = (function () {
 
 		if (message.substr(0,16) === '/cmd userdetails') {
 			// certain commands are exempt from the queue
+			ResourceMonitor.activeIp = connection.ip;
 			room.chat(this, message, connection);
+			ResourceMonitor.activeIp = null;
 			return false; // but end the loop here
 		}
 
@@ -1112,7 +1124,9 @@ var User = (function () {
 				this.processChatQueue.bind(this), THROTTLE_DELAY);
 		} else {
 			this.lastChatMessage = now;
+			ResourceMonitor.activeIp = connection.ip;
 			room.chat(this, message, connection);
+			ResourceMonitor.activeIp = null;
 		}
 	};
 	User.prototype.clearChatQueue = function() {
@@ -1126,7 +1140,9 @@ var User = (function () {
 		if (!this.chatQueue) return; // this should never happen
 		var toChat = this.chatQueue.shift();
 
+		ResourceMonitor.activeIp = toChat[2].ip;
 		toChat[1].chat(this, toChat[0], toChat[2]);
+		ResourceMonitor.activeIp = null;
 
 		if (this.chatQueue && this.chatQueue.length) {
 			this.chatQueueTimeout = setTimeout(
@@ -1179,10 +1195,12 @@ var Connection = (function () {
 		if (roomid && roomid.id) roomid = roomid.id;
 		if (roomid && roomid !== 'lobby') data = '>'+roomid+'\n'+data;
 		this.socket.write(data);
+		ResourceMonitor.countNetworkUse(data.length);
 	};
 
 	Connection.prototype.send = function(data) {
 		this.socket.write(data);
+		ResourceMonitor.countNetworkUse(data.length);
 	};
 
 	Connection.prototype.popup = function(message) {
@@ -1212,6 +1230,7 @@ function checkLocked(ip) {
 }
 exports.checkBanned = checkBanned;
 exports.checkLocked = checkLocked;
+exports.checkRangeBanned = function() {};
 
 function unban(name) {
 	var success;

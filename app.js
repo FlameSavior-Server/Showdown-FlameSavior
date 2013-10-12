@@ -120,6 +120,11 @@ global.ResourceMonitor = {
 	battleTimes: {},
 	battlePreps: {},
 	battlePrepTimes: {},
+	networkUse: {},
+	networkCount: {},
+	cmds: {},
+	cmdsTimes: {},
+	cmdsTotal: {lastCleanup: Date.now(), count: 0},
 	/**
 	 * Counts a connection. Returns true if the connection should be terminated for abuse.
 	 */
@@ -133,17 +138,9 @@ global.ResourceMonitor = {
 		name = (name ? ': '+name : '');
 		if (ip in this.connections && duration < 30*60*1000) {
 			this.connections[ip]++;
-			if (duration < 5*60*1000 && this.connections[ip] % 10 == 0) {
-				if (this.connections[ip] >= 30) {
-					if (this.connections[ip] % 30 == 0) this.log('IP '+ip+' rejected for '+this.connections[ip]+'th connection in the last '+duration.duration()+name);
-					return true;
-				}
+			if (duration < 5*60*1000 && this.connections[ip] % 20 === 0) {
 				this.log('[ResourceMonitor] IP '+ip+' has connected '+this.connections[ip]+' times in the last '+duration.duration()+name);
-			} else if (this.connections[ip] % 50 == 0) {
-				if (this.connections[ip] >= 250) {
-					if (this.connections[ip] % 50 == 0) this.log('IP '+ip+' rejected for '+this.connections[ip]+'th connection in the last '+duration.duration()+name);
-					return true;
-				}
+			} else if (this.connections[ip] % 60 == 0) {
 				this.log('[ResourceMonitor] IP '+ip+' has connected '+this.connections[ip]+' times in the last '+duration.duration()+name);
 			}
 		} else {
@@ -187,6 +184,29 @@ global.ResourceMonitor = {
 		}
 	},
 	/**
+	 * data
+	 */
+	countNetworkUse: function(size) {
+		if (this.activeIp in this.networkUse) {
+			this.networkUse[this.activeIp] += size;
+			this.networkCount[this.activeIp]++;
+		} else {
+			this.networkUse[this.activeIp] = size;
+			this.networkCount[this.activeIp] = 1;
+		}
+	},
+	writeNetworkUse: function() {
+		var buf = '';
+		for (var i in this.networkUse) {
+			buf += ''+this.networkUse[i]+'\t'+this.networkCount[i]+'\t'+i+'\n';
+		}
+		fs.writeFile('logs/networkuse.tsv', buf);
+	},
+	clearNetworkUse: function() {
+		this.networkUse = {};
+		this.networkCount = {};
+	},
+	/**
 	 * Counts roughly the size of an object to have an idea of the server load.
 	 */
 	sizeOfObject: function(object) {
@@ -206,6 +226,40 @@ global.ResourceMonitor = {
 		}
 
 		return bytes;
+	},
+	/**
+	 * Controls the amount of times a cmd command is used
+	 */
+	countCmd: function(ip, name) {
+	 	var now = Date.now();
+		var duration = now - this.cmdsTimes[ip];
+		name = (name ? ': '+name : '');
+		if (!this.cmdsTotal) this.cmdsTotal = {lastCleanup: 0, count: 0};
+		if (now - this.cmdsTotal.lastCleanup > 60*1000) {
+			this.cmdsTotal.count = 0;
+			this.cmdsTotal.lastCleanup = now;
+		}
+		this.cmdsTotal.count++;
+		if (ip in this.cmds && duration < 60*1000) {
+			this.cmds[ip]++;
+			if (duration < 60*1000 && this.cmds[ip] % 5 === 0) {
+				if (this.cmds[ip] >= 3) {
+					if (this.cmds[ip] % 30 === 0) this.log('CMD command from '+ip+' blocked for '+this.cmds[ip]+'th use in the last '+duration.duration()+name);
+					return true;
+				}
+				this.log('[ResourceMonitor] IP '+ip+' has used CMD command '+this.cmds[ip]+' times in the last '+duration.duration()+name);
+			} else if (this.cmds[ip] % 15 === 0) {
+				this.log('CMD command from '+ip+' blocked for '+this.cmds[ip]+'th use in the last '+duration.duration()+name);
+				return true;
+			}
+		} else if (this.cmdsTotal.count > 8000) {
+			// One CMD check per user per minute on average (to-do: make this better)
+			this.log('CMD command for '+ip+' blocked because CMD has been used '+this.cmdsTotal.count+' times in the last minute.');
+			return true;
+		} else {
+			this.cmds[ip] = 1;
+			this.cmdsTimes[ip] = now;
+		}
 	}
 };
 
@@ -282,18 +336,18 @@ var sockjs = require('sockjs');
 //          NaN, which leads to an infinite loop. The newest version of
 //          faye-websocket has *other* bugs, so this really is the least
 //          terrible option to deal with this critical issue.
-(function() {
-	var StreamReader = require('./node_modules/sockjs/node_modules/' +
-			'faye-websocket/lib/faye/websocket/hybi_parser/stream_reader.js');
-	var _read = StreamReader.prototype.read;
-	StreamReader.prototype.read = function() {
-		if (isNaN(this._cursor)) {
-			// This will break out of the otherwise-infinite loop.
-			return null;
-		}
-		return _read.apply(this, arguments);
-	};
-})();
+// (function() {
+// 	var StreamReader = require('./node_modules/sockjs/node_modules/' +
+// 			'faye-websocket/lib/faye/websocket/hybi_parser/stream_reader.js');
+// 	var _read = StreamReader.prototype.read;
+// 	StreamReader.prototype.read = function() {
+// 		if (isNaN(this._cursor)) {
+// 			// This will break out of the otherwise-infinite loop.
+// 			return null;
+// 		}
+// 		return _read.apply(this, arguments);
+// 	};
+// })();
 
 var server = sockjs.createServer({
 	sockjs_url: "//play.pokemonshowdown.com/js/lib/sockjs-0.3.min.js",
@@ -409,6 +463,14 @@ global.Simulator = require('./simulator.js');
 
 global.Tournaments = require('./tournaments/frontend.js');
 
+try {
+	global.Dnsbl = require('./dnsbl.js'); 
+} catch (e) {
+	global.Dnsbl = {query:function(){}};
+}
+
+global.Cidr = require('./cidr.js');
+
 if (config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting
 	process.on('uncaughtException', (function() {
@@ -435,33 +497,7 @@ if (config.crashguard) {
  *********************************************************/
 
 // this is global so it can be hotpatched if necessary
-global.isTrustedProxyIp = (function() {
-	if (!config.proxyip) {
-		return function() {
-			return false;
-		};
-	}
-	var iplib = require('ip');
-	var patterns = [];
-	for (var i = 0; i < config.proxyip.length; ++i) {
-		var range = config.proxyip[i];
-		var parts = range.split('/');
-		var subnet = iplib.toLong(parts[0]);
-		var bits = (parts.length < 2) ? 32 : parseInt(parts[1], 10);
-		var mask = -1 << (32 - bits);
-		patterns.push([subnet & mask, mask]);
-	}
-	return function(ip) {
-		var longip = iplib.toLong(ip);
-		for (var i = 0; i < patterns.length; ++i) {
-			var p = patterns[i];
-			if ((longip & p[1]) === p[0]) {
-				return true;
-			}
-		}
-		return false;
-	};
-})();
+global.isTrustedProxyIp = Cidr.checker(config.proxyip);
 
 var socketCounter = 0;
 server.on('connection', function(socket) {
@@ -489,14 +525,33 @@ server.on('connection', function(socket) {
 			}
 		}
 	}
+	// Emergency mode connections logging
+	if (config.emergency) {
+		fs.appendFile('logs/cons.emergency.log', '#'+socketCounter+' [' + socket.remoteAddress + ']\n', function(err){
+			if (err) {
+				console.log('!! Error in emergency conns log !!');
+				throw err;
+			}
+		});
+	}
 
 	if (ResourceMonitor.countConnection(socket.remoteAddress)) {
 		socket.end();
+		// After sending the FIN packet, we make sure the I/O is totally blocked for this socket
+		socket.destroy();
 		return;
 	}
 	var checkResult = Users.checkBanned(socket.remoteAddress);
+	if (!checkResult && Users.checkRangeBanned(socket.remoteAddress)) {
+		checkResult = '#ipban';
+	}
 	if (checkResult) {
 		console.log('CONNECT BLOCKED - IP BANNED: '+socket.remoteAddress+' ('+checkResult+')');
+		if (checkResult === '#ipban') {
+			socket.write("|popup|Your IP ("+socket.remoteAddress+") is on our abuse list and is permanently banned. If you are using a proxy, stop.");
+		} else {
+			socket.write("|popup|Your IP ("+socket.remoteAddress+") used is banned under the username '"+checkResult+"''. Your ban will expire in a few days."+(config.appealurl ? " Or you can appeal at:\n" + config.appealurl:""));
+		}
 		socket.end();
 		return;
 	}
@@ -536,6 +591,15 @@ server.on('connection', function(socket) {
 				return;
 			}
 			lines = lines.split('\n');
+			// Emergency logging
+			if (config.emergency) {
+				fs.appendFile('logs/emergency.log', '['+ user + ' (' + socket.remoteAddress + ')] ' + message + '\n', function(err){
+					if (err) {
+						console.log('!! Error in emergency log !!');
+						throw err;
+					}
+				});
+			}
 			for (var i=0; i<lines.length; i++) {
 				if (user.chat(lines[i], room, connection) === false) break;
 			}
@@ -568,6 +632,12 @@ server.on('connection', function(socket) {
 	});
 
 	connection = Users.connectUser(socket);
+	Dnsbl.query(connection.ip, function(isBlocked) {
+		if (isBlocked) {
+			connection.popup("Your IP is known for abuse and has been locked. If you're using a proxy, don't.");
+			if (connection.user) connection.user.lock(true);
+		}
+	});
 });
 server.installHandlers(app, {});
 app.listen(config.port);
@@ -600,12 +670,17 @@ Rooms.global.formatListText = Rooms.global.getFormatListText();
 fs.readFile('./config/ipbans.txt', function (err, data) {
 	if (err) return;
 	data = (''+data).split("\n");
+	var rangebans = [];
 	for (var i=0; i<data.length; i++) {
 		data[i] = data[i].split('#')[0].trim();
-		if (data[i] && !Users.bannedIps[data[i]]) {
+		if (!data[i]) continue;
+		if (data[i].indexOf('/') >= 0) {
+			rangebans.push(data[i]);
+		} else if (!Users.bannedIps[data[i]]) {
 			Users.bannedIps[data[i]] = '#ipban';
 		}
 	}
+	Users.checkRangeBanned = Cidr.checker(rangebans);
 });
 
 global.tour = require('./tour.js').tour();

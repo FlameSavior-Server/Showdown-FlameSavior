@@ -381,44 +381,6 @@ var cmds = {
 		return this.sendReply("An error occurred while trying to create the room '"+target+"'.");
 	},
 
-	hotpatch: function(target, room, user) {
-		if (!target) return this.parse('/help hotpatch');
-		if (!user.can('hotpatch')) return false;
-
-		this.logEntry(user.name + ' used /hotpatch ' + target);
-
-		if (target === 'chat') {
-
-			CommandParser.uncacheTree('./command-parser.js');
-			CommandParser = require('./command-parser.js');
-			CommandParser.uncacheTree('./tour.js');
-			tour = require('./tour.js').tour(tour);
-			return this.sendReply('Chat commands have been hot-patched.');
-
-		} else if (target === 'battles') {
-
-			Simulator.SimulatorProcess.respawn();
-			return this.sendReply('Battles have been hotpatched. Any battles started after now will use the new code; however, in-progress battles will continue to use the old code.');
-
-		} else if (target === 'formats') {
-
-			// uncache the tools.js dependency tree
-			CommandParser.uncacheTree('./tools.js');
-			// reload tools.js
-			Tools = require('./tools.js'); // note: this will lock up the server for a few seconds
-			// rebuild the formats list
-			Rooms.global.formatListText = Rooms.global.getFormatListText();
-			// respawn simulator processes
-			Simulator.SimulatorProcess.respawn();
-			// broadcast the new formats list to clients
-			Rooms.global.send(Rooms.global.formatListText);
-
-			return this.sendReply('Formats have been hotpatched.');
-
-		}
-		this.sendReply('Your hot-patch command was unrecognized.');
-	},
-
 	//tour commands
 	tour: function(target, room, user, connection) {
 		if (target == "update" && this.can('hotpatch')) {
@@ -447,6 +409,7 @@ var cmds = {
 			if (isNaN(targets[1]) || !targets[1]) return this.sendReply('/tour tier, NUMBER minutes');
 			targets[1] = Math.ceil(targets[1]);
 			if (targets[1] < 0) return this.sendReply('Why would you want to schedule a tournament for the past?');
+			if (targets[1] === 0) return this.sendReply('Please set a valid amount of time.');
 			tour.timers[rid] = {
 				time: targets[1],
 				startTime: tour.currentSeconds
@@ -504,6 +467,7 @@ var cmds = {
 		if (!target) return this.sendReply('Proper syntax for this command: /tourtime time');
 		target = parseInt(target);
 		if (isNaN(target)) return this.sendReply('Proper syntax for this command: /tourtime time');
+		if (target === 0) return this.sendReply('You cannot set the time to 0.');
 		target = Math.ceil(target);
 		tour.timers[room.id].time = target;
 		tour.timers[room.id].startTime = tour.currentSeconds;
@@ -955,6 +919,17 @@ var cmds = {
 			}
 		}
 		if (html == oghtml) html += "There are currently no tournaments in their signup phase.";
+		this.sendReply('|raw|' + html + "<hr />");
+	},
+
+	polls: function(target, room, user, connection){
+		if(!this.canBroadcast()) return;
+		var oghtml = "<hr /><h2>Active Polls:</h2>";
+		var html = oghtml;
+		for(var u in tour){
+			if(tour[u].question != undefined && Rooms.rooms[u].isPrivate == undefined) html += '<button name="joinRoom" value="' + u + '">' + Rooms.rooms[u].title + ' - ' + tour[u].question + '</button> ';
+		}
+		if (html == oghtml) html += "There are currently no active polls.";
 		this.sendReply('|raw|' + html + "<hr />");
 	},
 

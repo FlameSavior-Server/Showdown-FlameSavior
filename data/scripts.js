@@ -1,5 +1,5 @@
 exports.BattleScripts = {
-	gen: 5,
+	gen: 6,
 	runMove: function(move, pokemon, target, sourceEffect) {
 		if (!sourceEffect && toId(move) !== 'struggle') {
 			var changedMove = this.runEvent('OverrideDecision', pokemon, target, move);
@@ -482,6 +482,23 @@ exports.BattleScripts = {
 			return true;
 		}
 	},
+	checkAbilities: function(selectedAbilities, defaultAbilities) {
+		if (!selectedAbilities.length) return true;
+		var selectedAbility = selectedAbilities.pop();
+		var isValid = false;
+		for (var i=0; i<defaultAbilities.length; i++) {
+			var defaultAbility = defaultAbilities[i];
+			if (!defaultAbility) break;
+			if (defaultAbility.indexOf(selectedAbility) !== -1) {
+				defaultAbilities.splice(i, 1);
+				isValid = this.checkAbilities(selectedAbilities, defaultAbilities);
+				if (isValid) break;
+				defaultAbilities.splice(i, 0, defaultAbility);
+			}
+		}
+		if (!isValid) selectedAbilities.push(selectedAbility);
+		return isValid;
+	},
 	getTeam: function(side, team) {
 		var format = side.battle.getFormat();
 		if (format.team === 'random') {
@@ -798,7 +815,7 @@ exports.BattleScripts = {
 				};
 				// Moves which boost Special Attack:
 				var SpecialSetup = {
-					nastyplot:1, tailglow:1, quiverdance:1, calmmind:1
+					nastyplot:1, tailglow:1, quiverdance:1, calmmind:1, chargebeam:1
 				};
 				// Moves which boost Attack AND Special Attack:
 				var MixedSetup = {
@@ -1105,7 +1122,7 @@ exports.BattleScripts = {
 					var typeCombo = [type1, type2].sort().join('/');
 					var rejectCombo = true;
 					if (!type1 in hasStab && !type2 in hasStab) {
-						if (typeCombo === 'Electric/Ice' || typeCombo === 'Fighting/Ghost' || typeCombo === 'Dark/Fightng') rejectCombo = false;
+						if (typeCombo === 'Electric/Ice' || typeCombo === 'Fighting/Ghost' || typeCombo === 'Dark/Fighting') rejectCombo = false;
 					} else {
 						rejectCombo = false;
 					}
@@ -1423,8 +1440,6 @@ exports.BattleScripts = {
 			BL: 76,
 			OU: 74,
 			CAP: 74,
-			G4CAP: 74,
-			G5CAP: 74,
 			Unreleased: 74,
 			Uber: 70
 		};
@@ -1471,7 +1486,7 @@ exports.BattleScripts = {
 		var pokemonLeft = 0;
 		var pokemon = [];
 		for (var i in this.data.FormatsData) {
-			if (this.data.FormatsData[i].viableMoves) {
+			if (this.data.FormatsData[i].viableMoves && this.data.FormatsData[i].tier !== 'Limbo') {
 				keys.push(i);
 			}
 		}
@@ -1500,7 +1515,7 @@ exports.BattleScripts = {
 			if (tier === 'Uber' && uberCount > 1 && Math.random()*5>1) continue;
 
 			// CAPs have 20% the normal rate
-			if ((tier === 'G4CAP' || tier === 'G5CAP') && Math.random()*5>1) continue;
+			if (tier === 'CAP' && Math.random()*5>1) continue;
 			// Arceus formes have 1/17 the normal rate each (so Arceus as a whole has a normal rate)
 			if (keys[i].substr(0,6) === 'arceus' && Math.random()*17>1) continue;
 			// Basculin formes have 1/2 the normal rate each (so Basculin as a whole has a normal rate)
@@ -1565,62 +1580,39 @@ exports.BattleScripts = {
 		}
 		return pokemon;
 	},
-	randomSeasonalAATeam: function(side) {
-		// First we choose the lead
-		var dice = this.random(100);
-		var lead = (dice  < 50)? 'groudon' : 'kyogre';
-		var groudonsSailors = [
-			'alakazam', 'arbok', 'arcanine', 'arceusfire', 'bibarel', 'bisharp', 'blaziken', 'blissey', 'cacturne',
-			'chandelure', 'chansey', 'charizard', 'cloyster', 'conkeldurr', 'druddigon', 'electivire',
-			'emboar', 'entei', 'exploud', 'gardevoir', 'genesect', 'golurk', 'hariyama', 'heatran', 'infernape',
-			'jellicent', 'lilligant', 'lucario', 'luxray', 'machamp', 'machoke', 'machop', 'magmortar', 'meloetta',
-			'onix', 'poliwrath', 'primeape', 'smeargle', 'snorlax', 'toxicroak', 'typhlosion', 'weezing'
+	randomSeasonalOFTeam: function(side) {
+		var seasonalPokemonList = [
+			'absol', 'alakazam', 'banette', 'beheeyem', 'bellossom', 'bisharp', 'blissey', 'cacturne', 'carvanha', 'chandelure',
+			'cofagrigus', 'conkeldurr', 'crawdaunt', 'darkrai', 'deino', 'drapion', 'drifblim', 'drifloon', 'dusclops',
+			'dusknoir', 'duskull', 'electivire', 'frillish', 'froslass', 'gallade', 'gardevoir', 'gastly', 'gengar', 'giratina',
+			'golett', 'golurk', 'gothitelle', 'hariyama', 'haunter', 'hitmonchan', 'hitmonlee', 'hitmontop', 'honchkrow', 'houndoom',
+			'houndour', 'hydreigon', 'hypno', 'infernape', 'jellicent', 'jynx', 'krokorok', 'krookodile', 'lampent', 'leavanny',
+			'liepard', 'lilligant', 'litwick', 'lopunny', 'lucario', 'ludicolo', 'machamp', 'magmortar', 'mandibuzz', 'medicham',
+			'meloetta', 'mienshao', 'mightyena', 'misdreavus', 'mismagius', 'mrmime', 'murkrow', 'nuzleaf', 'pawniard', 'poochyena',
+			'probopass', 'purrloin', 'roserade', 'rotom', 'sableye', 'sandile', 'sawk', 'scrafty', 'scraggy', 'sharpedo', 'shedinja',
+			'shiftry', 'shuppet', 'skuntank', 'sneasel', 'snorlax', 'spiritomb', 'stunky', 'throh', 'toxicroak', 'tyranitar', 'umbreon',
+			'vullaby', 'weavile', 'wobbuffet', 'yamask', 'zoroark', 'zorua', 'zweilous'
 		];
-		var kyogresPirates = [
-			'absol', 'arceusflying', 'cofagrigus', 'crobat', 'darkrai', 'delibird', 'dragonite', 'ducklett',
-			'garchomp', 'gengar', 'golem', 'gothitelle', 'honchkrow', 'krookodile', 'landorus', 'ludicolo',
-			'mandibuzz', 'pelipper', 'pidgeot', 'pidgey', 'sableye', 'scizor', 'scyther', 'sharpedo', 'shiftry',
-			'skarmory', 'staraptor', 'swanna', 'thundurus', 'thundurustherian', 'tornadus', 'tornadustherian',
-			'tyranitar', 'volcarona', 'wailord', 'weavile', 'whimsicott', 'wingull', 'zoroark'
-		];
-		groudonsSailors = groudonsSailors.randomize();
-		kyogresPirates = kyogresPirates.randomize();
+		seasonalPokemonList = seasonalPokemonList.randomize();
+		var team = [];
 
-		// Add the lead.
-		var team = [this.randomSet(this.getTemplate(lead), 0)];
-
-		// Now, let's make the team. Each side has a different ability.
-		var teamPool = [];
-		var ability = 'Illuminate';
-		if (lead === 'kyogre') {
-			ability = 'Thick Fat';
-			teamPool = kyogresPirates;
-			moveToGet = 'hurricane';
-		} else {
-			var dice = this.random(100);
-			ability = (dice < 33)? 'Water Absorb' : 'Tinted Lens';
-			teamPool = groudonsSailors;
-			moveToGet = 'vcreate';
-		}
-		for (var i=1; i<6; i++) {
-			var pokemon = teamPool[i];
+		for (var i=0; i<6; i++) {
+			var pokemon = seasonalPokemonList[i];
 			var template = this.getTemplate(pokemon);
 			var set = this.randomSet(template, i);
-			set.ability = (template.baseSpecies && template.baseSpecies === 'Arceus')? 'Multitype' : ability;
-			var hasMoves = {};
-			for (var m in set.moves) {
-				set.moves[m] = set.moves[m].toLowerCase();
-				if (set.moves[m] === 'dynamicpunch') set.moves[m] = 'closecombat';
-				hasMoves[set.moves[m]] = true;
+			var trickindex = -1;
+			for (var j=0, l=set.moves.length; j<l; j++) {
+				if (set.moves[j].toLowerCase() === 'trick') {
+					trickindex = j;
+				}
 			}
-			if (!(moveToGet in hasMoves)) {
-				set.moves[3] = moveToGet;
+			if (trickindex === -1 || trickindex === 2) {
+				set.moves[3] = 'trick';
 			}
-			if (set.item === 'Damp Rock' && !('rain dance' in hasMoves)) set.item = 'Life Orb';
-			if (set.item === 'Heat Rock' && !('sunny day' in hasMoves)) set.item = 'Life Orb';
+			set.moves[2] = 'Present';
 			team.push(set);
 		}
-
+		
 		return team;
 	}
 };

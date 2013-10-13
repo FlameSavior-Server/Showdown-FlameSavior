@@ -713,7 +713,7 @@ var commands = exports.commands = {
 			if(target.indexOf('<img') != -1)
 				return this.sendReply('Images are no longer supported in cpoof.');
 			if(target.indexOf('<3') != -1 || target.indexOf('<:') != -1)
-				target = target.replace('<', '\<')
+				target = target.replace('<', '\u003C')
 			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
 			var etags = '</font></strong>'
 			Rooms.rooms.lobby.addRaw(btags + '~~ '+user.name+' '+target+'! ~~' + etags);
@@ -795,7 +795,7 @@ var commands = exports.commands = {
 		var message = target.slice(commaIndex + 1).trim();
 		if (message.replace(/(<([^>]+)>)/ig,"").length > 250) return this.sendReply('tells must be 250 or fewer characters, excluding HTML.');
 		if(message.indexOf('<3') != -1 || message.indexOf('<:') != -1)
-				message = message.replace('<', '\<')
+				message = message.replace('<', '\u003C')
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}

@@ -415,7 +415,7 @@ var commands = exports.commands = {
 		}
 	},
 
-roomdemote: 'roompromote',
+	roomdemote: 'roompromote',
 	roompromote: function(target, room, user, connection, cmd) {
 		if (!room.auth) {
 			this.sendReply("/roompromote - This room isn't designed for per-room moderation");
@@ -712,6 +712,8 @@ roomdemote: 'roompromote',
 		{
 			if(target.indexOf('<img') != -1)
 				return this.sendReply('Images are no longer supported in cpoof.');
+			if(target.indexOf('<3') != -1 || target.indexOf('<:') != -1)
+				target = target.replace('<', '\<')
 			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
 			var etags = '</font></strong>'
 			Rooms.rooms.lobby.addRaw(btags + '~~ '+user.name+' '+target+'! ~~' + etags);
@@ -792,7 +794,8 @@ roomdemote: 'roompromote',
 		var targetUser = toId(target.slice(0, commaIndex));
 		var message = target.slice(commaIndex + 1).trim();
 		if (message.replace(/(<([^>]+)>)/ig,"").length > 250) return this.sendReply('tells must be 250 or fewer characters, excluding HTML.');
-
+		if(message.indexOf('<3') != -1 || message.indexOf('<:') != -1)
+				message = message.replace('<', '\<')
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}

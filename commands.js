@@ -415,7 +415,7 @@ var commands = exports.commands = {
 		}
 	},
 
-	roomdemote: 'roompromote',
+roomdemote: 'roompromote',
 	roompromote: function(target, room, user, connection, cmd) {
 		if (!room.auth) {
 			this.sendReply("/roompromote - This room isn't designed for per-room moderation");
@@ -441,33 +441,6 @@ var commands = exports.commands = {
 		if (currentGroup !== ' ' && !user.can('room'+config.groups[currentGroup].id, null, room)) {
 			return this.sendReply('/' + cmd + ' - Access denied for promoting from '+config.groups[currentGroup].name+'.');
 		}
-	},
-
-	rk: 'rkick',
-	rkick: function(target, room, user){
-		if(!room.auth) return this.sendReply('/rkick is designed for rooms with their own auth.');
-		if(!this.can('roommod', null, room)) return this.sendReply('/rkick - Access Denied.');
-		var targetUser = Users.get(target);
-		if(targetUser == undefined) return this.sendReply('User not found.');
-		targetUser.popup('You have been kicked from room '+ room.title + '.');
-		targetUser.leaveRoom(room);
-		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
-		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
-
-	},
-/*
-	adultroom: function(target, room, user) {
-		if(!user.can('makeroom')) return;
-		if(target === 'off'){
-			room.isAdult = false;
-			return this.addModCommand(user.name + ' has made the room available to everyone.');
-		} else {
-			room.isAdult = true;
-			return this.addModCommand(user.name + ' has made the room available to adults.');
-		}
-	},
-*/
-	roomvoice: function(target, room, user) {
 		if (nextGroup !== ' ' && !user.can('room'+config.groups[nextGroup].id, null, room)) {
 			return this.sendReply('/' + cmd + ' - Access denied for promoting to '+config.groups[nextGroup].name+'.');
 		}
@@ -503,6 +476,66 @@ var commands = exports.commands = {
 		}
 	},
 
+	rk: 'rkick',
+	rkick: function(target, room, user){
+		if(!room.auth) return this.sendReply('/rkick is designed for rooms with their own auth.');
+		if(!this.can('roommod', null, room)) return this.sendReply('/rkick - Access Denied.');
+		var targetUser = Users.get(target);
+		if(targetUser == undefined) return this.sendReply('User not found.');
+		targetUser.popup('You have been kicked from room '+ room.title + '.');
+		targetUser.leaveRoom(room);
+		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
+		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
+
+	},
+/*
+	adultroom: function(target, room, user) {
+		if(!user.can('makeroom')) return;
+		if(target === 'off'){
+			room.isAdult = false;
+			return this.addModCommand(user.name + ' has made the room available to everyone.');
+		} else {
+			room.isAdult = true;
+			return this.addModCommand(user.name + ' has made the room available to adults.');
+		}
+	},
+
+	roomvoice: function(target, room, user) {
+		if (nextGroup !== ' ' && !user.can('room'+config.groups[nextGroup].id, null, room)) {
+			return this.sendReply('/' + cmd + ' - Access denied for promoting to '+config.groups[nextGroup].name+'.');
+		}
+		if (currentGroup === nextGroup) {
+			return this.sendReply("User '"+this.targetUsername+"' is already a "+(config.groups[nextGroup].name || 'regular user')+" in this room.");
+		}
+		if (config.groups[nextGroup].globalonly) {
+			return this.sendReply("The rank of "+config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
+		}
+
+		var isDemotion = (config.groups[nextGroup].rank < config.groups[currentGroup].rank);
+		var groupName = (config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
+
+		if (nextGroup === ' ') {
+			delete room.auth[userid];
+		} else {
+			room.auth[userid] = nextGroup;
+		}
+
+		if (isDemotion) {
+			this.privateModCommand('('+name+' was appointed to Room ' + groupName + ' by '+user.name+'.)');
+			if (targetUser) {
+				targetUser.popup('You were appointed to Room ' + groupName + ' by ' + user.name + '.');
+			}
+		} else {
+			this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
+		}
+		if (targetUser) {
+			targetUser.updateIdentity();
+		}
+		if (room.chatRoomData) {
+			Rooms.global.writeChatRoomData();
+		}
+	},
+*/
 	autojoin: function(target, room, user, connection) {
 		Rooms.global.autojoinRooms(user, connection)
 	},

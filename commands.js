@@ -866,7 +866,7 @@ var commands = exports.commands = {
 			var message = '<strong><font size=3>Reminders for '+room.title+':</strong></font>'+(room.reminders[1]?'<ol>':'<br /><br />There are no reminders to display. ');
 			if (room.reminders[1]) {
 				for (var r in room.reminders) {
-					message += htmlfix('<li>'+room.reminders[r]);
+					message += '<li>'+room.reminders[r];
 				}
 				message += '</ol>';
 			}
@@ -2415,7 +2415,7 @@ function htmlfix(target){
 	var fixings = ['<3', ':>', ':<'];
 	for(var u in fixings){
 		while(target.indexOf(fixings[u]) != -1)
-			target = target.substring(0, target.indexOf(fixings[u])-1) +'&#60'+ target.substring(target.indexOf(fixings[u])+1);
+			target = target.substring(0, target.indexOf(fixings[u])) +'< '+ target.substring(target.indexOf(fixings[u])+1);
 	}
 	
 	return target;

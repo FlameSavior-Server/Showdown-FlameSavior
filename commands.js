@@ -712,8 +712,7 @@ var commands = exports.commands = {
 		{
 			if(target.indexOf('<img') != -1)
 				return this.sendReply('Images are no longer supported in cpoof.');
-			if(target.indexOf('<3') != -1 || target.indexOf('<:') != -1)
-				target = target.replace('<', '\u003C')
+			target = htmlfix(target);
 			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
 			var etags = '</font></strong>'
 			Rooms.rooms.lobby.addRaw(btags + '~~ '+user.name+' '+target+'! ~~' + etags);
@@ -794,8 +793,7 @@ var commands = exports.commands = {
 		var targetUser = toId(target.slice(0, commaIndex));
 		var message = target.slice(commaIndex + 1).trim();
 		if (message.replace(/(<([^>]+)>)/ig,"").length > 250) return this.sendReply('tells must be 250 or fewer characters, excluding HTML.');
-		if(message.indexOf('<3') != -1 || message.indexOf('<:') != -1)
-				message = message.replace('<', '\u003C')
+		message = htmlfix(message);
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}
@@ -868,7 +866,7 @@ var commands = exports.commands = {
 			var message = '<strong><font size=3>Reminders for '+room.title+':</strong></font>'+(room.reminders[1]?'<ol>':'<br /><br />There are no reminders to display. ');
 			if (room.reminders[1]) {
 				for (var r in room.reminders) {
-					message += '<li>'+room.reminders[r];
+					message += htmlfix('<li>'+room.reminders[r]);
 				}
 				message += '</ol>';
 			}
@@ -2411,4 +2409,15 @@ function HueToRgb(m1, m2, hue) {
 		v = m1;
 
 	return (255 * v).toString(16);
+}
+
+function htmlfix(target){
+	var fixings = ['<3', ':>', ':<'];
+	for(var u in fixings){
+		while(target.indexOf(fixings[u]) != -1)
+			target = target.substring(0, target.indexOf(fixings[u])-1) +'&#60'+ target.substring(target.indexOf(fixings[u])+1);
+	}
+	
+	return target;
+	
 }

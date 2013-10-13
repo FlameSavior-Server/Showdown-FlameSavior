@@ -866,7 +866,7 @@ var commands = exports.commands = {
 			var message = '<strong><font size=3>Reminders for '+room.title+':</strong></font>'+(room.reminders[1]?'<ol>':'<br /><br />There are no reminders to display. ');
 			if (room.reminders[1]) {
 				for (var r in room.reminders) {
-					message += '<li>'+room.reminders[r];
+					message += htmlfix('<li>'+room.reminders[r]);
 				}
 				message += '</ol>';
 			}

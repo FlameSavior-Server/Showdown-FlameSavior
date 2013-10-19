@@ -36,6 +36,7 @@ var canTalk;
 
 var commands = exports.commands = {
 	/**** normal stuff ****/
+	random: 'pickrandom',
 	pickrandom: function (target, room, user) {
 		if (!target) return this.sendReply('/pickrandom [option 1], [option 2], ... - Randomly chooses one of the given options.');
 		if (!this.canBroadcast()) return;

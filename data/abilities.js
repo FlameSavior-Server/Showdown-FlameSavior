@@ -314,6 +314,29 @@ exports.BattleAbilities = {
 		rating: 2,
 		num: 16
 	},
+	"competitive": {
+		desc: "Raises the user's Special Attack stat by two stages when a stat is lowered, including the Special Attack stat. This does not include self-induced stat drops like those from Close Combat.",
+		shortDesc: "This Pokemon's SpAtk is boosted by 2 for each of its stats that is lowered by a foe.",
+		onAfterEachBoost: function(boost, target, source) {
+			if (!source || target.side === source.side) {
+				return;
+			}
+			var statsLowered = false;
+			for (var i in boost) {
+				if (boost[i] < 0) {
+					statsLowered = true;
+				}
+			}
+			if (statsLowered) {
+				this.boost({spa: 2});
+			}
+		},
+		id: "competitive",
+		name: "Competitive",
+		rating: 2,
+		num: -6,
+		gen: 6
+	},
 	"compoundeyes": {
 		desc: "The accuracy of this Pokemon's moves receives a 30% increase; for example, a 75% accurate move becomes 97.5% accurate.",
 		shortDesc: "This Pokemon's moves have their accuracy boosted to 1.3x.",
@@ -717,7 +740,27 @@ exports.BattleAbilities = {
 	"flowerveil": {
 		desc: "Prevents lowering of ally Grass-type Pokemon's stats.",
 		shortDesc: "Prevents lowering of ally Grass-type Pokemon's stats.",
-		//todo
+		onStart: function(pokemon) {
+			this.add('-ability', pokemon, 'Flower Veil');
+			pokemon.side.addSideCondition('flowerveil');
+		},
+		onSwitchOut: function(pokemon) {
+			pokemon.side.removeSideCondition('flowerveil');
+		},
+		effect: {
+			onBoost: function(boost, target, source, effect) {
+				if (source && target === source) return;
+				if (!target.hasType('Grass')) return;
+				var showMsg = false;
+				for (var i in boost) {
+					if (boost[i] < 0) {
+						delete boost[i];
+						showMsg = true;
+					}
+				}
+				if (showMsg && !effect.secondaries) this.add("-fail", target, "unboost", "[from] ability: Flower Veil", "[of] "+target);
+			}
+		},
 		id: "flowerveil",
 		name: "Flower Veil",
 		rating: 0,
@@ -816,8 +859,8 @@ exports.BattleAbilities = {
 		num: 119
 	},
 	"furcoat": {
-		desc: "Halves the damage done to the Pokemon by physical attacks.",
-		shortDesc: "Halves the damage done to the Pokemon by physical attacks.",
+		desc: "Halves the damage done to this Pokemon by physical attacks.",
+		shortDesc: "Halves physical damage done to this Pokemon.",
 		onModifyAtkPriority: 6,
 		onSourceModifyAtk: function(atk, attacker, defender, move) {
 			return this.chainModify(0.5);
@@ -829,15 +872,15 @@ exports.BattleAbilities = {
 		gen: 6
 	},
 	"galewings": {
-		desc: "Gives priority to Flying-type moves.",
-		shortDesc: "This Pokemon's Flying-type moves have their priority increased by 1.",
+		desc: "This Pokemon's Flying-type moves have their priority increased by 1.",
+		shortDesc: "Gives priority to Flying-type moves.",
 		onModifyPriority: function(priority, pokemon, target, move) {
 			if (move && move.type === 'Flying') return priority + 1;
 		},
 		id: "galewings",
 		name: "Gale Wings",
 		rating: 3.5,
-		num: -7,
+		num: -6,
 		gen: 6
 	},
 	"gluttony": {
@@ -847,6 +890,28 @@ exports.BattleAbilities = {
 		name: "Gluttony",
 		rating: 0,
 		num: 82
+	},
+	"gooey": {
+		desc: "Contact with this Pokemon lowers the attacker's Speed stat by 1.",
+		shortDesc: "Contact with this Pokemon lowers the attacker's Speed.",
+		onAfterDamage: function(damage, target, source, effect) {
+			if (effect && effect.isContact) this.boost({spe: -1}, source, target);
+		},
+		id: "gooey",
+		name: "Gooey",
+		rating: 3.5,
+		num: -6,
+		gen: 6
+	},
+	"grasspelt": {
+		desc: "This Pokemon's Defense is boosted in Grassy Terrain",
+		shortDesc: "This Pokemon's Defense is boosted in Grassy Terrain.",
+		//todo
+		id: "grasspelt",
+		name: "Grass Pelt",
+		rating: 2,
+		num: -6,
+		gen: 6
 	},
 	"guts": {
 		desc: "When this Pokemon is poisoned (including Toxic), burned, paralyzed or asleep (including self-induced Rest), its Attack stat receives a 50% boost; the burn status' Attack drop is also ignored.",
@@ -1064,8 +1129,8 @@ exports.BattleAbilities = {
 		shortDesc: "On switch-in, this Pokemon copies the foe it's facing; stats, moves, types, Ability.",
 		onStart: function(pokemon) {
 			var target = pokemon.side.foe.active[pokemon.side.foe.active.length-1-pokemon.position];
-			if (target && pokemon.transformInto(target, pokemon)) {
-				this.add('-transform', pokemon, target);
+			if (target) {
+				pokemon.transformInto(target, pokemon);
 			}
 		},
 		id: "imposter",
@@ -1179,6 +1244,9 @@ exports.BattleAbilities = {
 				boost['accuracy'] = 0;
 				if (!effect.secondaries) this.add("-fail", target, "unboost", "accuracy", "[from] ability: Keen Eye", "[of] "+target);
 			}
+		},
+		onModifyMove: function(move) {
+			move.ignoreEvasion = true;
 		},
 		id: "keeneye",
 		name: "Keen Eye",
@@ -1737,7 +1805,7 @@ exports.BattleAbilities = {
 		rating: 1,
 		num: 124
 	},
-	"pixelite": {
+	"pixilate": {
 		desc: "Turn all of this Pokemon's Normal-typed attacks into Fairy-typed.",
 		shortDesc: "This Pokemon's Normal moves become Fairy.",
 		onModifyMove: function(move) {
@@ -1745,8 +1813,8 @@ exports.BattleAbilities = {
 				move.type = 'Fairy';
 			}
 		},
-		id: "pixelite",
-		name: "Pixelite",
+		id: "pixilate",
+		name: "Pixilate",
 		rating: 3,
 		num: -6,
 		gen: 6

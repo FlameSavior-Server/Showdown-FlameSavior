@@ -3,8 +3,8 @@ exports.BattleItems = {
 		id: "abomasite",
 		name: "Abomasite",
 		spritenum: 0,
+		megaStone: "Abomasnow-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Abomasnow."
@@ -13,8 +13,8 @@ exports.BattleItems = {
 		id: "absolite",
 		name: "Absolite",
 		spritenum: 0,
+		megaStone: "Absol-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Absol."
@@ -56,8 +56,8 @@ exports.BattleItems = {
 		id: "aerodactylite",
 		name: "Aerodactylite",
 		spritenum: 0,
+		megaStone: "Aerodactyl-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Aerodactyl."
@@ -66,8 +66,8 @@ exports.BattleItems = {
 		id: "aggronite",
 		name: "Aggronite",
 		spritenum: 0,
+		megaStone: "Aggron-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Aggron."
@@ -131,8 +131,8 @@ exports.BattleItems = {
 		id: "alakazite",
 		name: "Alakazite",
 		spritenum: 0,
+		megaStone: "Alakazam-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Alakazam."
@@ -141,8 +141,8 @@ exports.BattleItems = {
 		id: "ampharosite",
 		name: "Ampharosite",
 		spritenum: 0,
+		megaStone: "Ampharos-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Ampharos."
@@ -228,8 +228,8 @@ exports.BattleItems = {
 		id: "banettite",
 		name: "Banettite",
 		spritenum: 0,
+		megaStone: "Banette-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Banette."
@@ -353,8 +353,8 @@ exports.BattleItems = {
 		id: "blastoisinite",
 		name: "Blastoisinite",
 		spritenum: 0,
+		megaStone: "Blastoise-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Blastoise."
@@ -363,8 +363,8 @@ exports.BattleItems = {
 		id: "blazikenite",
 		name: "Blazikenite",
 		spritenum: 0,
+		megaStone: "Blaziken-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Blaziken."
@@ -465,8 +465,8 @@ exports.BattleItems = {
 		id: "charizarditex",
 		name: "Charizardite X",
 		spritenum: 0,
+		megaStone: "Charizard-Mega-X",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Charizard into Mega Charizard X."
@@ -475,8 +475,8 @@ exports.BattleItems = {
 		id: "charizarditey",
 		name: "Charizardite Y",
 		spritenum: 0,
+		megaStone: "Charizard-Mega-Y",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Charizard into Mega Charizard Y."
@@ -1380,8 +1380,8 @@ exports.BattleItems = {
 		id: "garchompite",
 		name: "Garchompite",
 		spritenum: 0,
+		megaStone: "Garchomp-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Garchomp."
@@ -1390,8 +1390,8 @@ exports.BattleItems = {
 		id: "gardevoirite",
 		name: "Gardevoirite",
 		spritenum: 0,
+		megaStone: "Gardevoir-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Gardevoir."
@@ -1400,8 +1400,8 @@ exports.BattleItems = {
 		id: "gengarite",
 		name: "Gengarite",
 		spritenum: 0,
+		megaStone: "Gengar-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Gengar."
@@ -1518,8 +1518,8 @@ exports.BattleItems = {
 		id: "gyaradosite",
 		name: "Gyaradosite",
 		spritenum: 0,
+		megaStone: "Gyarados-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Gyarados."
@@ -1605,8 +1605,8 @@ exports.BattleItems = {
 		id: "heracronite",
 		name: "Heracronite",
 		spritenum: 0,
+		megaStone: "Heracross-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Heracross."
@@ -1628,8 +1628,8 @@ exports.BattleItems = {
 		id: "houndoominite",
 		name: "Houndoominite",
 		spritenum: 0,
+		megaStone: "Houndoom-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Houndoom."
@@ -1840,8 +1840,8 @@ exports.BattleItems = {
 		id: "kangaskhanite",
 		name: "Kangaskhanite",
 		spritenum: 0,
+		megaStone: "Kangaskhan-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Kangaskhan."
@@ -2081,8 +2081,8 @@ exports.BattleItems = {
 		id: "lucarionite",
 		name: "Lucarionite",
 		spritenum: 0,
+		megaStone: "Lucario-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Lucario."
@@ -2124,6 +2124,22 @@ exports.BattleItems = {
 		num: 157,
 		gen: 3,
 		desc: "Holder cures itself if it is confused or has a major status problem. Single use."
+	},
+	"luminousmoss": {
+		id: "luminousmoss",
+		name: "Luminous Moss",
+		spritenum: 0,
+		fling: {
+			basePower: 30
+		},
+		onAfterDamage: function(damage, target, source, move) {
+			if (move.type === 'Water' && target.useItem()) {
+				this.boost({spd: 1});
+			}
+		},
+		num: -6,
+		gen: 6,
+		desc: "Raises Special Defense by 1 if hit by a Water-type attack. Single use."
 	},
 	"lureball": {
 		id: "lureball",
@@ -2238,8 +2254,8 @@ exports.BattleItems = {
 		id: "manectite",
 		name: "Manectite",
 		spritenum: 0,
+		megaStone: "Manectric-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Manectric."
@@ -2256,8 +2272,8 @@ exports.BattleItems = {
 		id: "mawilite",
 		name: "Mawilite",
 		spritenum: 0,
+		megaStone: "Mawile-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Mawile."
@@ -2284,8 +2300,8 @@ exports.BattleItems = {
 		id: "medichamite",
 		name: "Medichamite",
 		spritenum: 0,
+		megaStone: "Medicham-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Medicham."
@@ -2396,8 +2412,8 @@ exports.BattleItems = {
 		id: "mewtwonitex",
 		name: "Mewtwonite X",
 		spritenum: 0,
+		megaStone: "Mewtwo-Mega-X",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Mewtwo into Mega Mewtwo X."
@@ -2406,8 +2422,8 @@ exports.BattleItems = {
 		id: "mewtwonitey",
 		name: "Mewtwonite Y",
 		spritenum: 0,
+		megaStone: "Mewtwo-Mega-Y",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Mewtwo into Mega Mewtwo Y."
@@ -2815,8 +2831,8 @@ exports.BattleItems = {
 		id: "pinsirite",
 		name: "Pinsirite",
 		spritenum: 0,
+		megaStone: "Pinsir-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Pinsir."
@@ -3247,6 +3263,28 @@ exports.BattleItems = {
 		gen: 4,
 		desc: "Holder's Grass-type attacks have 1.2x power."
 	},
+	"roseliberry": {
+		id: "roseliberry",
+		name: "Roseli Berry",
+		spritenum: 0,
+		isBerry: true,
+		naturalGift: {
+			basePower: 60,
+			type: "Fairy"
+		},
+		onSourceModifyDamage: function(damage, source, target, move) {
+			if (move.type === 'Fairy' && this.getEffectiveness(move.type, target) > 0 && !target.volatiles['substitute']) {
+				if (target.eatItem()) {
+					this.debug('-50% reduction');
+					return this.chainModify(0.5);
+				}
+			}
+		},
+		onEat: function() { },
+		num: -6,
+		gen: 6,
+		desc: "Halves damage taken from a super effective Fairy-type attack. Single use."
+	},
 	"rowapberry": {
 		id: "rowapberry",
 		name: "Rowap Berry",
@@ -3301,8 +3339,8 @@ exports.BattleItems = {
 		id: "scizorite",
 		name: "Scizorite",
 		spritenum: 0,
+		megaStone: "Scizor-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Scizor."
@@ -3514,6 +3552,22 @@ exports.BattleItems = {
 		num: 283,
 		gen: 4,
 		desc: "Holder's use of Sandstorm lasts 8 turns instead of 5."
+	},
+	"snowball": {
+		id: "snowball",
+		name: "Snowball",
+		spritenum: 0,
+		fling: {
+			basePower: 30
+		},
+		onAfterDamage: function(damage, target, source, move) {
+			if (move.type === 'Ice' && target.useItem()) {
+				this.boost({atk: 1});
+			}
+		},
+		num: -6,
+		gen: 6,
+		desc: "Raises Attack by 1 if hit by an Ice-type attack. Single use."
 	},
 	"softsand": {
 		id: "softsand",
@@ -3855,8 +3909,8 @@ exports.BattleItems = {
 		id: "tyranitarite",
 		name: "Tyranitarite",
 		spritenum: 0,
+		megaStone: "Tyranitar-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Tyranitar."
@@ -3873,8 +3927,8 @@ exports.BattleItems = {
 		id: "venusaurite",
 		name: "Venusaurite",
 		spritenum: 0,
+		megaStone: "Venusaur-Mega",
 		onTakeItem: false,
-		//todo
 		num: -6,
 		gen: 6,
 		desc: "Mega-evolves Venusaur."
@@ -3948,6 +4002,19 @@ exports.BattleItems = {
 		num: 317,
 		gen: 4,
 		desc: "Holder's Water-type attacks have 1.2x power."
+	},
+	"weaknesspolicy": {
+		id: "weaknesspolicy",
+		name: "Weakness Policy",
+		spritenum: 0,
+		onHit: function(target, source, move) {
+			if (this.getEffectiveness(move.type, target) > 0 && target.useItem()) {
+				this.boost({atk: 2, spa: 2});
+			}
+		},
+		num: -6,
+		gen: 6,
+		desc: "Attack and Sp. Atk sharply increase when hit super effectively. Single use."
 	},
 	"wepearberry": {
 		id: "wepearberry",

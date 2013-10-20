@@ -477,6 +477,27 @@ exports.BattleScripts = {
 		}
 		return damage;
 	},
+
+	runMegaEvo: function(pokemon) {
+		var side = pokemon.side;
+		var item = this.getItem(pokemon.item);
+		if (!item.megaStone) return false;
+		if (side.megaEvo) return false;
+		var template = this.getTemplate(item.megaStone);
+		if (!template.isMega) return false;
+		if (pokemon.baseTemplate.species !== template.baseSpecies) return false;
+
+		// okay, mega evolution is possible
+		this.add('-formechange', pokemon, template.species);
+		this.add('message', template.baseSpecies+" mega-evolved into "+template.species+"!");
+		pokemon.formeChange(template);
+		pokemon.baseTemplate = template; // mega evolution is permanent :o
+		pokemon.setAbility(template.abilities['0']);
+
+		side.megaEvo = 1;
+		return true;
+	},
+
 	isAdjacent: function(pokemon1, pokemon2) {
 		if (!pokemon1.fainted && !pokemon2.fainted && pokemon2.position !== pokemon1.position && Math.abs(pokemon2.position-pokemon1.position) <= 1) {
 			return true;
@@ -572,13 +593,13 @@ exports.BattleScripts = {
 
 			//random gender--already handled by PS?
 
-			//random ability (unreleased DW are par for the course)
+			//random ability (unreleased hidden are par for the course)
 			var abilities = [template.abilities['0']];
 			if (template.abilities['1']) {
 				abilities.push(template.abilities['1']);
 			}
-			if (template.abilities['DW']) {
-				abilities.push(template.abilities['DW']);
+			if (template.abilities['H']) {
+				abilities.push(template.abilities['H']);
 			}
 			var ability = abilities.sample();
 
@@ -1148,8 +1169,8 @@ exports.BattleScripts = {
 			if (template.abilities['1']) {
 				abilities.push(template.abilities['1']);
 			}
-			if (template.abilities['DW']) {
-				abilities.push(template.abilities['DW']);
+			if (template.abilities['H']) {
+				abilities.push(template.abilities['H']);
 			}
 			abilities.sort(function(a,b){
 				return this.getAbility(b).rating - this.getAbility(a).rating;

@@ -65,7 +65,7 @@ exports.BattleAbilities = {
 		num: 106
 	},
 	"aerilate": {
-		desc: "Turn all of this Pokemon's Normal-typed attacks into Flying-typed.",
+		desc: "Turns all of this Pokemon's Normal-typed attacks into Flying-typed.",
 		shortDesc: "This Pokemon's Normal moves become Flying.",
 		onModifyMove: function(move) {
 			if (move.type === 'Normal') {
@@ -346,7 +346,7 @@ exports.BattleAbilities = {
 			move.accuracy *= 1.3;
 		},
 		id: "compoundeyes",
-		name: "Compoundeyes",
+		name: "Compound Eyes",
 		rating: 3.5,
 		num: 14
 	},
@@ -421,13 +421,13 @@ exports.BattleAbilities = {
 		onBasePower: function(basePower, attacker, defender, move) {
 			var reverseAura = false;
 			for (var p in attacker.side.active) {
-				if (attacker.side.active[p].ability === 'aurabreak') {
+				if (attacker.side.active[p] && attacker.side.active[p].ability === 'aurabreak') {
 					reverseAura = true;
 					this.debug('Reversing Dark Aura due to Aura Break');
 				}
 			}
 			for (var p in defender.side.active) {
-				if (defender.side.active[p].ability === 'aurabreak') {
+				if (defender.side.active[p] && defender.side.active[p].ability === 'aurabreak') {
 					reverseAura = true;
 					this.debug('Reversing Dark Aura due to Aura Break');
 				}
@@ -594,13 +594,13 @@ exports.BattleAbilities = {
 		onBasePower: function(basePower, attacker, defender, move) {
 			var reverseAura = false;
 			for (var p in attacker.side.active) {
-				if (attacker.side.active[p].ability === 'aurabreak') {
+				if (attacker.side.active[p] && attacker.side.active[p].ability === 'aurabreak') {
 					reverseAura = true;
 					this.debug('Reversing Fairy Aura due to Aura Break');
 				}
 			}
 			for (var p in defender.side.active) {
-				if (defender.side.active[p].ability === 'aurabreak') {
+				if (defender.side.active[p] && defender.side.active[p].ability === 'aurabreak') {
 					reverseAura = true;
 					this.debug('Reversing Fairy Aura due to Aura Break');
 				}
@@ -848,9 +848,11 @@ exports.BattleAbilities = {
 		desc: "When this Pokemon enters the field, it identifies the opponent's held item; in double battles, the held item of an unrevealed, randomly selected opponent is identified.",
 		shortDesc: "On switch-in, this Pokemon identifies a random foe's held item.",
 		onStart: function(pokemon) {
-			var target = pokemon.side.foe.randomActive();
-			if (target && target.item) {
-				this.add('-item', target, target.getItem().name, '[from] ability: Frisk', '[of] '+pokemon);
+			var foeactive = pokemon.side.foe.active;
+			for (var i=0; i<foeactive.length; i++) {
+				if (foeactive[i] && foeactive[i].item) {
+					this.add('-item', foeactive[i], foeactive[i].getItem().name, '[from] ability: Frisk', '[of] '+pokemon, '[identify]');
+				}
 			}
 		},
 		id: "frisk",
@@ -906,7 +908,10 @@ exports.BattleAbilities = {
 	"grasspelt": {
 		desc: "This Pokemon's Defense is boosted in Grassy Terrain",
 		shortDesc: "This Pokemon's Defense is boosted in Grassy Terrain.",
-		//todo
+		onModifyDefPriority: 6,
+		onModifyDef: function(pokemon) {
+			if (this.pseudoWeather['grassyterrain']) return this.chainModify(1.5);
+		},
 		id: "grasspelt",
 		name: "Grass Pelt",
 		rating: 2,
@@ -1806,11 +1811,19 @@ exports.BattleAbilities = {
 		num: 124
 	},
 	"pixilate": {
-		desc: "Turn all of this Pokemon's Normal-typed attacks into Fairy-typed.",
-		shortDesc: "This Pokemon's Normal moves become Fairy.",
-		onModifyMove: function(move) {
+		desc: "Turns all of this Pokemon's Normal-typed attacks into Fairy-typed. Does 1.3x damage.",
+		shortDesc: "This Pokemon's Normal moves become Fairy. Does 1.3x damage.",
+		onModifyMove: function(move, pokemon) {
 			if (move.type === 'Normal') {
 				move.type = 'Fairy';
+				pokemon.addVolatile('pixilate');
+			}
+		},
+		effect: {
+			duration: 1,
+			onBasePowerPriority: 8,
+			onBasePower: function(basePower, pokemon, target, move) {
+				return this.chainModify([0x14CD, 0x1000]);
 			}
 		},
 		id: "pixilate",
@@ -1919,9 +1932,11 @@ exports.BattleAbilities = {
 		desc: "Changes user's type to match the user's current move before it attacks.",
 		shortDesc: "Changes user's type to match its move.",
 		onBeforeMove: function(pokemon, target, move) {
-			if (move && !pokemon.hasType(move.type)) {
-				this.add('-start', pokemon, 'typechange', move.type, '[from] Protean');
-				pokemon.types = [move.type];
+			if (!move) return;
+			var moveType = (move.id === 'hiddenpower' ? pokemon.hpType : move.type);
+			if (pokemon.types.join() !== moveType) {
+				this.add('-start', pokemon, 'typechange', moveType, '[from] Protean');
+				pokemon.types = [moveType];
 			}
 		},
 		id: "protean",
@@ -1982,7 +1997,7 @@ exports.BattleAbilities = {
 		num: 155
 	},
 	"reckless": {
-		desc: "When this Pokemon uses an attack that causes recoil damage, or an attack that has a chance to cause recoil damage such as Jump Kick and Hi Jump Kick, the attacks's power receives a 20% boost.",
+		desc: "When this Pokemon uses an attack that causes recoil damage, or an attack that has a chance to cause recoil damage such as Jump Kick and High Jump Kick, the attacks's power receives a 20% boost.",
 		shortDesc: "This Pokemon's attacks with recoil or crash damage do 1.2x damage; not Struggle.",
 		onBasePowerPriority: 8,
 		onBasePower: function(basePower, attacker, defender, move) {
@@ -1997,11 +2012,19 @@ exports.BattleAbilities = {
 		num: 120
 	},
 	"refrigerate": {
-		desc: "Turn all of this Pokemon's Normal-typed attacks into Ice-typed.",
-		shortDesc: "This Pokemon's Normal moves become Ice.",
-		onModifyMove: function(move) {
+		desc: "Turns all of this Pokemon's Normal-typed attacks into Ice-typed. Does 1.3x damage.",
+		shortDesc: "This Pokemon's Normal moves become Ice. Does 1.3x damage.",
+		onModifyMove: function(move, pokemon) {
 			if (move.type === 'Normal') {
 				move.type = 'Ice';
+				pokemon.addVolatile('refrigerate');
+			}
+		},
+		effect: {
+			duration: 1,
+			onBasePowerPriority: 8,
+			onBasePower: function(basePower, pokemon, target, move) {
+				return this.chainModify([0x14CD, 0x1000]);
 			}
 		},
 		id: "refrigerate",
@@ -2042,7 +2065,7 @@ exports.BattleAbilities = {
 		num: 79
 	},
 	"rockhead": {
-		desc: "This Pokemon does not receive recoil damage unless it uses Struggle, it misses with Jump Kick or Hi Jump Kick or it is holding Life Orb, Jaboca Berry or Rowap Berry.",
+		desc: "This Pokemon does not receive recoil damage unless it uses Struggle, it misses with Jump Kick or High Jump Kick or it is holding Life Orb, Jaboca Berry or Rowap Berry.",
 		shortDesc: "This Pokemon does not take recoil damage besides Struggle, Life Orb, crash damage.",
 		onModifyMove: function(move) {
 			delete move.recoil;
@@ -2443,6 +2466,7 @@ exports.BattleAbilities = {
 	"stancechange": {
 		desc: "The Pokemon changes form depending on how it battles. Defense form for King's Shield, and Offense form for attacking moves.",
 		shortDesc: "The Pokemon changes form depending on how it battles.",
+		onBeforeMovePriority: 10,
 		onBeforeMove: function(attacker, defender, move) {
 			if (attacker.template.baseSpecies !== 'Aegislash') return;
 			if (move.category === 'Status' && move.id !== 'kingsshield') return;

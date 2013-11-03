@@ -51,9 +51,25 @@ exports.BattleMovedex = {
 		inherit: true,
 		basePower: 60
 	},
+	copycat: {
+		inherit: true,
+		desc: "The user uses the last move used by any Pokemon, including itself. Fails if no move has been used, or if the last move used was Assist, Bestow, Chatter, Circle Throw, Copycat, Counter, Covet, Destiny Bond, Detect, Dragon Tail, Endure, Feint, Focus Punch, Follow Me, Helping Hand, Me First, Metronome, Mimic, Mirror Coat, Mirror Move, Nature Power, Protect, Rage Powder, Sketch, Sleep Talk, Snatch, Struggle, Switcheroo, Thief, Transform, or Trick.",
+		shortDesc: "Uses the last move used in the battle.",
+		onHit: function(pokemon) {
+			var noCopycat = {assist:1, bestow:1, chatter:1, circlethrow:1, copycat:1, counter:1, covet:1, destinybond:1, detect:1, dragontail:1, endure:1, feint:1, focuspunch:1, followme:1, helpinghand:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, protect:1, ragepowder:1, sketch:1, sleeptalk:1, snatch:1, struggle:1, switcheroo:1, thief:1, transform:1, trick:1};
+			if (!this.lastMove || noCopycat[this.lastMove]) {
+				return false;
+			}
+			this.useMove(this.lastMove, pokemon);
+		},
+	},
 	cottonspore: {
 		inherit: true,
 		onTryHit: function() {}
+	},
+	crabhammer: {
+		inherit: true,
+		basePower: 90
 	},
 	defog: {
 		inherit: true,
@@ -104,6 +120,10 @@ exports.BattleMovedex = {
 	flamethrower: {
 		inherit: true,
 		basePower: 95
+	},
+	followme: {
+		inherit: true,
+		priority: 3
 	},
 	frostbreath: {
 		inherit: true,
@@ -156,6 +176,11 @@ exports.BattleMovedex = {
 	gunkshot: {
 		inherit: true,
 		accuracy: 70
+	},
+	healpulse: {
+		inherit: true,
+		heal: [1,2],
+		onHit: function() {}
 	},
 	heatwave: {
 		inherit: true,
@@ -355,6 +380,15 @@ exports.BattleMovedex = {
 		basePower: 50,
 		pp: 10
 	},
+	secretpower: {
+		inherit: true,
+		secondary: {
+			chance: 30,
+			boosts: {
+				accuracy: -1
+			}
+		}
+	},
 	skullbash: {
 		inherit: true,
 		basePower: 100,
@@ -363,6 +397,14 @@ exports.BattleMovedex = {
 	sleeppowder: {
 		inherit: true,
 		onTryHit: function() {}
+	},
+	smellingsalts: {
+		inherit: true,
+		basePower: 60,
+		basePowerCallback: function(pokemon, target) {
+			if (target.status === 'par') return 120;
+			return 60;
+		}
 	},
 	smog: {
 		inherit: true,
@@ -380,6 +422,14 @@ exports.BattleMovedex = {
 		inherit: true,
 		basePower: 40
 	},
+	stringshot: {
+		inherit: true,
+		desc: "Lowers all adjacent foes' Speed by 1 stage. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
+		shortDesc: "Lowers the foe(s) Speed by 1.",
+		boosts: {
+			spe: -1
+		}
+	},
 	strugglebug: {
 		inherit: true,
 		basePower: 30
@@ -395,6 +445,14 @@ exports.BattleMovedex = {
 	sweetkiss: {
 		inherit: true,
 		type: "Normal"
+	},
+	sweetscent: {
+		inherit: true,
+		desc: "Lowers all adjacent foes' evasion by 1 stage. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
+		shortDesc: "Lowers the foe(s) evasion by 1.",
+		boosts: {
+			evasion: -1
+		}
 	},
 	swordsdance: {
 		inherit: true,

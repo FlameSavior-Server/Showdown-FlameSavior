@@ -581,7 +581,7 @@ var commands = exports.commands = {
 		var userid = toId(name);
 		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
-		if (!Rooms.rooms[room.id].users[userid]) {
+		if (!Rooms.rooms[room.id].users[userid] && room.isPrivate) {
 			return this.sendReply('User ' + this.targetUsername + ' is not in the room ' + room.id + '.');
 		}
 		if (!room.bannedUsers || !room.bannedIps) {
@@ -1632,6 +1632,18 @@ var commands = exports.commands = {
 			Rooms.global.send(Rooms.global.formatListText);
 
 			return this.sendReply('Formats have been hotpatched.');
+
+		} else if (target === 'learnsets') {
+			try {
+				// uncache the tools.js dependency tree
+				CommandParser.uncacheTree('./tools.js');
+				// reload tools.js
+				Tools = require('./tools.js'); // note: this will lock up the server for a few seconds
+
+				return this.sendReply('Learnsets have been hotpatched.');
+			} catch (e) {
+				return this.sendReply('Something failed while trying to hotpatch learnsets: \n' + e.stack);
+			}
 
 		}
 		this.sendReply('Your hot-patch command was unrecognized.');

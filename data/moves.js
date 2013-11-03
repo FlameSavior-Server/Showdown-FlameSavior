@@ -601,6 +601,7 @@ exports.BattleMovedex = {
 		name: "Aura Sphere",
 		pp: 20,
 		priority: 0,
+		isPulseMove: true,
 		secondary: false,
 		target: "any",
 		type: "Fighting"
@@ -1614,8 +1615,8 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 65,
 		category: "Special",
-		desc: "Deals damage to one adjacent or non-adjacent target. This move has an X% chance to confuse the target, where X is 0 unless the user is a Chatot that hasn't Transformed. If the user is a Chatot, X is 0 or 10 depending on the volume of Chatot's recorded cry, if any; 0 for a low volume or no recording, 10 for a medium to high volume recording. Pokemon with the Ability Soundproof are immune. (Field: Can be used to record a sound to replace Chatot's cry. The cry is reset if Chatot is deposited in a PC.)",
-		shortDesc: "10% chance to confuse the target.",
+		desc: "Deals damage to one adjacent or non-adjacent target with a 100% chance to confuse it.",
+		shortDesc: "100% chance to confuse the target.",
 		id: "chatter",
 		name: "Chatter",
 		pp: 20,
@@ -1625,7 +1626,7 @@ exports.BattleMovedex = {
 			if (pokemon.template.species !== 'Chatot') delete move.secondaries;
 		},
 		secondary: {
-			chance: 10,
+			chance: 100,
 			volatileStatus: 'confusion'
 		},
 		target: "any",
@@ -1920,7 +1921,7 @@ exports.BattleMovedex = {
 		pp: 20,
 		priority: 0,
 		onHit: function(pokemon) {
-			var noCopycat = {assist:1, bestow:1, chatter:1, circlethrow:1, copycat:1, counter:1, covet:1, destinybond:1, detect:1, dragontail:1, endure:1, feint:1, focuspunch:1, followme:1, helpinghand:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, protect:1, ragepowder:1, sketch:1, sleeptalk:1, snatch:1, struggle:1, switcheroo:1, thief:1, transform:1, trick:1};
+			var noCopycat = {assist:1, bestow:1, chatter:1, circlethrow:1, copycat:1, counter:1, covet:1, destinybond:1, detect:1, dragontail:1, endure:1, feint:1, focuspunch:1, followme:1, helpinghand:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, protect:1, ragepowder:1, roar:1, sketch:1, sleeptalk:1, snatch:1, struggle:1, switcheroo:1, thief:1, transform:1, trick:1, whirlwind:1};
 			if (!this.lastMove || noCopycat[this.lastMove]) {
 				return false;
 			}
@@ -2048,7 +2049,7 @@ exports.BattleMovedex = {
 	"crabhammer": {
 		num: 152,
 		accuracy: 90,
-		basePower: 90,
+		basePower: 100,
 		category: "Physical",
 		desc: "Deals damage to one adjacent target with a higher chance for a critical hit. Makes contact.",
 		shortDesc: "High critical hit ratio.",
@@ -2307,15 +2308,15 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 80,
 		category: "Special",
-		desc: "Deals damage to one adjacent target.",
-		shortDesc: "No additional effect.",
+		desc: "Deals damage to all adjacent foes.",
+		shortDesc: "No additional effect. Hits adjacent foes.",
 		id: "dazzlinggleam",
 		isViable: true,
 		name: "Dazzling Gleam",
 		pp: 10,
 		priority: 0,
 		secondary: false,
-		target: "normal",
+		target: "allAdjacentFoes",
 		type: "Fairy"
 	},
 	"defendorder": {
@@ -3683,7 +3684,7 @@ exports.BattleMovedex = {
 		isContact: true,
 		onTryHit: function(target, pokemon) {
 			if (pokemon.activeTurns > 1) {
-				this.debug('It\'s not your first turn out.');
+				this.add('-message', '(Fake Out only works your first turn out.)');
 				return false;
 			}
 		},
@@ -4272,7 +4273,7 @@ exports.BattleMovedex = {
 		onHitField: function(target, source) {
 			for (var i=0; i<this.sides.length; i++) {
 				for (var j=0; j<this.sides[i].active.length; j++) {
-					if (this.sides[i].active[j].hasType('Grass')) {
+					if (this.sides[i].active[j] && this.sides[i].active[j].hasType('Grass')) {
 						// Apply the boost from source's Flower Shield if it has Grass type
 						this.boost({def: 2}, this.sides[i].active[j], source, this.getMove('Flower Shield'));
 					}
@@ -4441,7 +4442,7 @@ exports.BattleMovedex = {
 		id: "followme",
 		name: "Follow Me",
 		pp: 20,
-		priority: 3,
+		priority: 2,
 		volatileStatus: 'followme',
 		effect: {
 			duration: 1,
@@ -4823,7 +4824,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 0,
 		category: "Status",
-		desc: "Causes one adjacent target's Ability to be rendered ineffective as long as it remains active. If the target uses Baton Pass, the replacement will remain under this effect. Fails if the target's Ability is Multitype. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
+		desc: "Causes one adjacent target's Ability to be rendered ineffective as long as it remains active. If the target uses Baton Pass, the replacement will remain under this effect. Fails if the target's Ability is Multitype or Stance Change. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
 		shortDesc: "Nullifies the target's Ability",
 		id: "gastroacid",
 		name: "Gastro Acid",
@@ -4832,7 +4833,8 @@ exports.BattleMovedex = {
 		isBounceable: true,
 		volatileStatus: 'gastroacid',
 		onTryHit: function(pokemon) {
-			if (pokemon.ability === 'multitype') {
+			var bannedAbilities = {multitype:1, stancechange:1};
+			if (bannedAbilities[pokemon.ability]) {
 				return false;
 			}
 		},
@@ -5676,7 +5678,11 @@ exports.BattleMovedex = {
 		pp: 10,
 		priority: 0,
 		isBounceable: true,
-		heal: [1,2],
+		isPulseMove: true,
+		onHit: function(pokemon) {
+			if (pokemon.ability === 'megalauncher') this.heal(this.modify(pokemon.maxhp, 0.75));
+			else this.heal(this.modify(pokemon.maxhp, 0.5));
+		},
 		secondary: false,
 		target: "normal",
 		type: "Psychic"
@@ -5894,10 +5900,10 @@ exports.BattleMovedex = {
 	"hex": {
 		num: 506,
 		accuracy: 100,
-		basePower: 60,
+		basePower: 65,
 		basePowerCallback: function(pokemon, target) {
-			if (target.status) return 120;
-			return 60;
+			if (target.status) return 130;
+			return 65;
 		},
 		category: "Special",
 		desc: "Deals damage to one adjacent target. Power doubles if the target has a major status problem.",
@@ -7745,20 +7751,20 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "The user protects itself and its allies from damaging moves. Priority +4.",
-		shortDesc: "Protects the user and allies from damaging moves.",
+		desc: "The user protects itself and its allies from damaging moves. Only works first turn out.",
+		shortDesc: "Protects from damaging moves. First turn out only.",
 		id: "matblock",
 		isViable: true,
 		name: "Mat Block",
 		pp: 15,
-		priority: 4,
+		priority: 0,
 		stallingMove: true, // Note: stallingMove is not used anywhere.
 		volatileStatus: 'matblock',
-		onTryHit: function(target, source, move) {
-			return !!this.willAct() && this.runEvent('StallMove', target);
-		},
-		onHit: function(pokemon) {
-			pokemon.addVolatile('stall');
+		onTryHit: function(target, pokemon) {
+			if (pokemon.activeTurns > 1) {
+				this.add('-message', '(Mat Block only works your first turn out.)');
+				return false;
+			}
 		},
 		effect: {
 			duration: 1,
@@ -8552,16 +8558,16 @@ exports.BattleMovedex = {
 		num: -6,
 		gen: 6,
 		accuracy: 100,
-		basePower: 80,
+		basePower: 65,
 		category: "Special",
-		desc: "Deals damage to one adjacent target with a 30% chance to lower its Special Attack by 1 stage.",
-		shortDesc: "30% chance to lower the target's Sp. Atk by 1.",
+		desc: "Deals damage to one adjacent target and lowers its Special Attack by 1 stage.",
+		shortDesc: "Lowers the target's Special Attack by 1.",
 		id: "mysticalfire",
 		name: "Mystical Fire",
 		pp: 10,
 		priority: 0,
 		secondary: {
-			chance: 30,
+			chance: 100,
 			boosts: {
 				spa: -1
 			}
@@ -9564,6 +9570,7 @@ exports.BattleMovedex = {
 		name: "Power-Up Punch",
 		pp: 30,
 		priority: 0,
+		isContact: true,
 		secondary: {
 			chance: 100,
 			self: {
@@ -10071,7 +10078,7 @@ exports.BattleMovedex = {
 		id: "ragepowder",
 		name: "Rage Powder",
 		pp: 20,
-		priority: 3,
+		priority: 2,
 		isPowder: true,
 		volatileStatus: 'ragepowder',
 		effect: {
@@ -11133,9 +11140,8 @@ exports.BattleMovedex = {
 		priority: 0,
 		secondary: {
 			chance: 30,
-			boosts: {
-				accuracy: -1
-			}
+			// TODO: Look into the effects on different terrain
+			status: 'par'
 		},
 		target: "normal",
 		type: "Normal"
@@ -11489,7 +11495,7 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 0,
 		category: "Status",
-		desc: "Causes one adjacent target's Ability to become Simple. Fails if the target's Ability is Multitype, Simple, or Truant. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
+		desc: "Causes one adjacent target's Ability to become Simple. Fails if the target's Ability is Multitype, Simple, Stance Change, or Truant. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
 		shortDesc: "The target's Ability becomes Simple.",
 		id: "simplebeam",
 		name: "Simple Beam",
@@ -11497,7 +11503,7 @@ exports.BattleMovedex = {
 		priority: 0,
 		isBounceable: true,
 		onTryHit: function(pokemon) {
-			var bannedAbilities = {multitype:1, simple:1, truant:1};
+			var bannedAbilities = {multitype:1, simple:1, stancechange:1, truant:1};
 			if (bannedAbilities[pokemon.ability]) {
 				return false;
 			}
@@ -11986,19 +11992,19 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Rock"
 	},
-	"smellingsalt": {
+	"smellingsalts": {
 		num: 265,
 		accuracy: 100,
-		basePower: 60,
+		basePower: 70,
 		basePowerCallback: function(pokemon, target) {
-			if (target.status === 'par') return 120;
-			return 60;
+			if (target.status === 'par') return 140;
+			return 70;
 		},
 		category: "Physical",
 		desc: "Deals damage to one adjacent target. Power doubles if the target is paralyzed, and the target is cured of paralysis. Makes contact.",
 		shortDesc: "Power doubles if target is paralyzed, and cures it.",
-		id: "smellingsalt",
-		name: "SmellingSalt",
+		id: "smellingsalts",
+		name: "Smelling Salts",
 		pp: 10,
 		priority: 0,
 		isContact: true,
@@ -12693,14 +12699,14 @@ exports.BattleMovedex = {
 		accuracy: 95,
 		basePower: 0,
 		category: "Status",
-		desc: "Lowers all adjacent foes' Speed by 1 stage. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
-		shortDesc: "Lowers the foe(s) Speed by 1.",
+		desc: "Lowers all adjacent foes' Speed by 2 stages. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
+		shortDesc: "Lowers the foe(s) Speed by 2.",
 		id: "stringshot",
 		name: "String Shot",
 		pp: 40,
 		priority: 0,
 		boosts: {
-			spe: -1
+			spe: -2
 		},
 		secondary: false,
 		target: "allAdjacentFoes",
@@ -12891,7 +12897,7 @@ exports.BattleMovedex = {
 		priority: 1,
 		isContact: true,
 		onTryHit: function(target) {
-			decision = this.willMove(target);
+			var decision = this.willMove(target);
 			if (!decision || decision.choice !== 'move' || (decision.move.category === 'Status' && decision.move.id !== 'mefirst')) {
 				return false;
 			}
@@ -13057,14 +13063,14 @@ exports.BattleMovedex = {
 		accuracy: 100,
 		basePower: 0,
 		category: "Status",
-		desc: "Lowers all adjacent foes' evasion by 1 stage. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves. (Field: Can be used to attract wild Pokemon while standing in grass. Fails if the weather is not clear.)",
-		shortDesc: "Lowers the foe(s) evasion by 1.",
+		desc: "Lowers all adjacent foes' evasion by 2 stages. Pokemon protected by Magic Coat or the Ability Magic Bounce are unaffected and instead use this move themselves.",
+		shortDesc: "Lowers the foe(s) evasion by 2.",
 		id: "sweetscent",
 		name: "Sweet Scent",
 		pp: 20,
 		priority: 0,
 		boosts: {
-			evasion: -1
+			evasion: -2
 		},
 		secondary: false,
 		target: "allAdjacentFoes",

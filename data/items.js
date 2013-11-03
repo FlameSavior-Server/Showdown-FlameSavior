@@ -5,7 +5,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Abomasnow-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 674,
 		gen: 6,
 		desc: "Mega-evolves Abomasnow."
 	},
@@ -15,7 +15,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Absol-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 677,
 		gen: 6,
 		desc: "Mega-evolves Absol."
 	},
@@ -58,7 +58,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Aerodactyl-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 672,
 		gen: 6,
 		desc: "Mega-evolves Aerodactyl."
 	},
@@ -68,7 +68,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Aggron-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 667,
 		gen: 6,
 		desc: "Mega-evolves Aggron."
 	},
@@ -130,7 +130,7 @@ exports.BattleItems = {
 	"alakazite": {
 		id: "alakazite",
 		name: "Alakazite",
-		spritenum: 0,
+		spritenum: 679,
 		megaStone: "Alakazam-Mega",
 		onTakeItem: false,
 		num: -6,
@@ -140,7 +140,7 @@ exports.BattleItems = {
 	"ampharosite": {
 		id: "ampharosite",
 		name: "Ampharosite",
-		spritenum: 0,
+		spritenum: 658,
 		megaStone: "Ampharos-Mega",
 		onTakeItem: false,
 		num: -6,
@@ -250,7 +250,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Banette-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 668,
 		gen: 6,
 		desc: "Mega-evolves Banette."
 	},
@@ -372,7 +372,7 @@ exports.BattleItems = {
 	"blastoisinite": {
 		id: "blastoisinite",
 		name: "Blastoisinite",
-		spritenum: 0,
+		spritenum: 661,
 		megaStone: "Blastoise-Mega",
 		onTakeItem: false,
 		num: -6,
@@ -385,7 +385,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Blaziken-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 664,
 		gen: 6,
 		desc: "Mega-evolves Blaziken."
 	},
@@ -421,6 +421,7 @@ exports.BattleItems = {
 	"buggem": {
 		id: "buggem",
 		name: "Bug Gem",
+		isUnreleased: true,
 		spritenum: 53,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -487,7 +488,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Charizard-Mega-X",
 		onTakeItem: false,
-		num: -6,
+		num: 660,
 		gen: 6,
 		desc: "Mega-evolves Charizard into Mega Charizard X."
 	},
@@ -497,7 +498,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Charizard-Mega-Y",
 		onTakeItem: false,
-		num: -6,
+		num: 678,
 		gen: 6,
 		desc: "Mega-evolves Charizard into Mega Charizard Y."
 	},
@@ -822,6 +823,7 @@ exports.BattleItems = {
 	"darkgem": {
 		id: "darkgem",
 		name: "Dark Gem",
+		isUnreleased: true,
 		spritenum: 89,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -957,6 +959,7 @@ exports.BattleItems = {
 	"dragongem": {
 		id: "dragongem",
 		name: "Dragon Gem",
+		isUnreleased: true,
 		spritenum: 107,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1074,6 +1077,7 @@ exports.BattleItems = {
 	"electricgem": {
 		id: "electricgem",
 		name: "Electric Gem",
+		isUnreleased: true,
 		spritenum: 120,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1179,6 +1183,7 @@ exports.BattleItems = {
 	"fightinggem": {
 		id: "fightinggem",
 		name: "Fighting Gem",
+		isUnreleased: true,
 		spritenum: 139,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1221,6 +1226,7 @@ exports.BattleItems = {
 	"firegem": {
 		id: "firegem",
 		name: "Fire Gem",
+		isUnreleased: true,
 		spritenum: 141,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1309,6 +1315,7 @@ exports.BattleItems = {
 	"flyinggem": {
 		id: "flyinggem",
 		name: "Flying Gem",
+		isUnreleased: true,
 		spritenum: 149,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1402,7 +1409,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Garchomp-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 683,
 		gen: 6,
 		desc: "Mega-evolves Garchomp."
 	},
@@ -1412,7 +1419,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Gardevoir-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 657,
 		gen: 6,
 		desc: "Mega-evolves Gardevoir."
 	},
@@ -1422,13 +1429,14 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Gengar-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 656,
 		gen: 6,
 		desc: "Mega-evolves Gengar."
 	},
 	"ghostgem": {
 		id: "ghostgem",
 		name: "Ghost Gem",
+		isUnreleased: true,
 		spritenum: 161,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1447,9 +1455,11 @@ exports.BattleItems = {
 	"grassgem": {
 		id: "grassgem",
 		name: "Grass Gem",
+		isUnreleased: true,
 		spritenum: 172,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
+			if (target === source || move.category === 'Status') return;
 			if (move.type === 'Grass') {
 				if (source.useItem()) {
 					this.add('-enditem', source, 'Grass Gem', '[from] gem', '[move] '+move.name);
@@ -1519,6 +1529,7 @@ exports.BattleItems = {
 	"groundgem": {
 		id: "groundgem",
 		name: "Ground Gem",
+		isUnreleased: true,
 		spritenum: 182,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1540,7 +1551,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Gyarados-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 676,
 		gen: 6,
 		desc: "Mega-evolves Gyarados."
 	},
@@ -1627,7 +1638,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Heracross-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 680,
 		gen: 6,
 		desc: "Mega-evolves Heracross."
 	},
@@ -1650,7 +1661,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Houndoom-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 666,
 		gen: 6,
 		desc: "Mega-evolves Houndoom."
 	},
@@ -1681,6 +1692,7 @@ exports.BattleItems = {
 	"icegem": {
 		id: "icegem",
 		name: "Ice Gem",
+		isUnreleased: true,
 		spritenum: 218,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1879,7 +1891,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Kangaskhan-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 675,
 		gen: 6,
 		desc: "Mega-evolves Kangaskhan."
 	},
@@ -2120,7 +2132,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Lucario-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 673,
 		gen: 6,
 		desc: "Mega-evolves Lucario."
 	},
@@ -2293,7 +2305,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Manectric-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 682,
 		gen: 6,
 		desc: "Mega-evolves Manectric."
 	},
@@ -2328,7 +2340,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Mawile-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 681,
 		gen: 6,
 		desc: "Mega-evolves Mawile."
 	},
@@ -2356,7 +2368,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Medicham-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 665,
 		gen: 6,
 		desc: "Mega-evolves Medicham."
 	},
@@ -2468,7 +2480,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Mewtwo-Mega-X",
 		onTakeItem: false,
-		num: -6,
+		num: 662,
 		gen: 6,
 		desc: "Mega-evolves Mewtwo into Mega Mewtwo X."
 	},
@@ -2478,7 +2490,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Mewtwo-Mega-Y",
 		onTakeItem: false,
-		num: -6,
+		num: 663,
 		gen: 6,
 		desc: "Mega-evolves Mewtwo into Mega Mewtwo Y."
 	},
@@ -2887,7 +2899,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Pinsir-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 671,
 		gen: 6,
 		desc: "Mega-evolves Pinsir."
 	},
@@ -2941,6 +2953,7 @@ exports.BattleItems = {
 	"poisongem": {
 		id: "poisongem",
 		name: "Poison Gem",
+		isUnreleased: true,
 		spritenum: 344,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -3005,6 +3018,7 @@ exports.BattleItems = {
 	"psychicgem": {
 		id: "psychicgem",
 		name: "Psychic Gem",
+		isUnreleased: true,
 		spritenum: 369,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -3240,6 +3254,7 @@ exports.BattleItems = {
 	"rockgem": {
 		id: "rockgem",
 		name: "Rock Gem",
+		isUnreleased: true,
 		spritenum: 415,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -3412,7 +3427,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Scizor-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 670,
 		gen: 6,
 		desc: "Mega-evolves Scizor."
 	},
@@ -3789,6 +3804,7 @@ exports.BattleItems = {
 	"steelgem": {
 		id: "steelgem",
 		name: "Steel Gem",
+		isUnreleased: true,
 		spritenum: 473,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -3982,7 +3998,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Tyranitar-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 669,
 		gen: 6,
 		desc: "Mega-evolves Tyranitar."
 	},
@@ -4000,7 +4016,7 @@ exports.BattleItems = {
 		spritenum: 0,
 		megaStone: "Venusaur-Mega",
 		onTakeItem: false,
-		num: -6,
+		num: 659,
 		gen: 6,
 		desc: "Mega-evolves Venusaur."
 	},
@@ -4029,6 +4045,7 @@ exports.BattleItems = {
 	"watergem": {
 		id: "watergem",
 		name: "Water Gem",
+		isUnreleased: true,
 		spritenum: 528,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {

@@ -493,7 +493,7 @@ exports.BattleScripts = {
 
 		// okay, mega evolution is possible
 		this.add('-formechange', pokemon, template.species);
-		this.add('message', template.baseSpecies+" mega-evolved into "+template.species+"!");
+		this.add('message', template.baseSpecies+" has Mega Evolved into Mega "+template.baseSpecies+"!");
 		pokemon.formeChange(template);
 		pokemon.baseTemplate = template; // mega evolution is permanent :o
 		pokemon.setAbility(template.abilities['0']);
@@ -547,7 +547,7 @@ exports.BattleScripts = {
 		for (var i=0; i<6; i++)
 		{
 			while (true) {
-				var x=Math.floor(Math.random()*649)+1;
+				var x=Math.floor(Math.random()*718)+1;
 				if (teamdexno.indexOf(x) === -1) {
 					teamdexno.push(x);
 					break;
@@ -617,6 +617,10 @@ exports.BattleScripts = {
 			//since we're selecting forme at random, we gotta make sure forme/item combo is correct
 			if (template.requiredItem) {
 				item = template.requiredItem;
+			}
+			if (this.getItem(item).megaStone) {
+				// we'll exclude mega stones for now
+				item = Object.keys(this.data.Items).sample();
 			}
 			while ((poke === 'Arceus' && item.indexOf("plate") > -1) || (poke === 'Giratina' && item === 'griseousorb')) {
 				item = Object.keys(this.data.Items).sample();
@@ -1570,7 +1574,7 @@ exports.BattleScripts = {
 						template.viableMoves = {present:1, bestow:1};
 					}
 				} else if (template.species === potd.species) {
-					continue; // No thanks, I've already got one
+					continue; // No, thanks, I've already got one
 				}
 			}
 
@@ -1588,7 +1592,7 @@ exports.BattleScripts = {
 			pokemon.push(set);
 
 			pokemonLeft++;
-			// Now that our Pokemon has passed all checks, we can increment the type counter:
+			// Now that our Pokemon has passed all checks, we can increment the type counter
 			for (var t=0; t<types.length; t++) {
 				if (types[t] in typeCount) {
 					typeCount[types[t]]++;
@@ -1597,7 +1601,7 @@ exports.BattleScripts = {
 				}
 			}
 			typeComboCount[typeCombo] = 1;
-			// Increment Uber/NU counter:
+			// Increment Uber/NU counter
 			if (tier === 'Uber') {
 				uberCount++;
 			} else if (tier === 'NU' || tier === 'NFE' || tier === 'LC') {

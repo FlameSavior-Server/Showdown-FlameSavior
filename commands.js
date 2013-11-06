@@ -663,7 +663,7 @@ var commands = exports.commands = {
 		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
 		var etags = '</font></strong>'
 		var targetid = toUserid(user);
-		if(!user.muted && target){
+		if(!user.muted && !user.locked && target){
 			var tar = toUserid(target);
 			var targetUser = Users.get(tar);
 			if(user.can('poof', targetUser)){

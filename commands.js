@@ -663,7 +663,7 @@ var commands = exports.commands = {
 		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
 		var etags = '</font></strong>'
 		var targetid = toUserid(user);
-		if(!user.muted && !user.locked && target){
+		if(!user.muted && target){
 			var tar = toUserid(target);
 			var targetUser = Users.get(tar);
 			if(user.can('poof', targetUser)){
@@ -681,7 +681,7 @@ var commands = exports.commands = {
 				return this.sendReply('/poof target - Access denied.');
 			}
 		}
-		if(poofeh && !user.muted){
+		if(poofeh && !user.muted && !user.locked){
 			Rooms.rooms.lobby.addRaw(btags + getRandMessage(user)+ etags);
 			user.disconnectAll();
 		}else{

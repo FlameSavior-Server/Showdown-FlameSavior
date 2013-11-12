@@ -189,7 +189,7 @@ var BattlePokemon = (function() {
 		this.baseTemplate = this.battle.getTemplate(set.species || set.name);
 		if (!this.baseTemplate.exists) {
 			this.battle.debug('Unidentified species: '+this.species);
-			this.baseTemplate = this.battle.getTemplate('Bulbasaur');
+			this.baseTemplate = this.battle.getTemplate('Unown');
 		}
 		this.species = this.baseTemplate.species;
 		if (set.name === set.species || !set.name || !set.species) {
@@ -281,7 +281,7 @@ var BattlePokemon = (function() {
 			this.set.ivs[i] = clampIntRange(this.set.ivs[i], 0, 31);
 		}
 
-		var hpTypes = ['Fighting','Flying','Poison','Ground','Rock','Bug','Ghost','Steel','Fire','Water','Grass','Electric','Psychic','Ice','Dragon','Dark','Fairy'];
+		var hpTypes = ['Fighting','Flying','Poison','Ground','Rock','Bug','Ghost','Steel','Fire','Water','Grass','Electric','Psychic','Ice','Dragon','Dark'];
 		if (this.battle.gen && this.battle.gen === 2) {
 			// Gen 2 specific Hidden Power check. IVs are still treated 0-31 so we get them 0-15
 			var atkDV = Math.floor(this.set.ivs.atk / 2);
@@ -299,10 +299,9 @@ var BattlePokemon = (function() {
 				hpPowerX += i * (Math.floor(this.set.ivs[s] / 2) % 2);
 				i *= 2;
 			}
-			// Support for gen 5 and gen 6
-			var maxTypes = (this.battle.gen && this.battle.gen < 6)? 15 : 16;
-			this.hpType = hpTypes[Math.floor(hpTypeX * maxTypes / 63)];
-			this.hpPower = (this.battle.gen && this.battle.gen < 6)? Math.floor(hpPowerX * 40 / 63) + 30 : 60;
+			this.hpType = hpTypes[Math.floor(hpTypeX * 15 / 63)];
+			// In Gen 6, Hidden Power is always 60 base power
+			this.hpPower = (this.battle.gen && this.battle.gen < 6) ? Math.floor(hpPowerX * 40 / 63) + 30 : 60;
 		}
 
 		this.boosts = {
@@ -390,8 +389,8 @@ var BattlePokemon = (function() {
 						// to run it again.
 						continue;
 					}
-					if ((k === 'DW') && !pokemon.template.dreamWorldRelease) {
-						// unreleased dream world ability
+					if ((k === 'H') && pokemon.template.unreleasedHidden) {
+						// unreleased hidden ability
 						continue;
 					}
 					this.battle.singleEvent('FoeMaybeTrapPokemon',
@@ -641,7 +640,6 @@ var BattlePokemon = (function() {
 		for (var statName in this.stats) {
 			this.stats[statName] = pokemon.stats[statName];
 		}
-		this.ability = pokemon.ability;
 		this.moveset = [];
 		this.moves = [];
 		this.set.ivs = (this.battle.gen >= 5 ? this.set.ivs : pokemon.set.ivs);
@@ -667,6 +665,8 @@ var BattlePokemon = (function() {
 		for (var j in pokemon.boosts) {
 			this.boosts[j] = pokemon.boosts[j];
 		}
+		this.battle.add('-transform', this, pokemon);
+		this.setAbility(pokemon.ability);
 		this.update();
 		return true;
 	};
@@ -979,13 +979,13 @@ var BattlePokemon = (function() {
 	BattlePokemon.prototype.clearItem = function() {
 		return this.setItem('');
 	};
-	BattlePokemon.prototype.setAbility = function(ability, source, effect) {
+	BattlePokemon.prototype.setAbility = function(ability, source, effect, noForce) {
 		if (!this.hp) return false;
 		ability = this.battle.getAbility(ability);
-		if (this.ability === ability.id) {
+		if (noForce && this.ability === ability.id) {
 			return false;
 		}
-		if (ability.id === 'multitype' || ability.id === 'illusion' || this.ability === 'multitype') {
+		if (ability.id === 'multitype' || ability.id === 'illusion' || ability.id === 'stancechange' || this.ability === 'multitype') {
 			return false;
 		}
 		this.ability = ability.id;
@@ -1304,6 +1304,7 @@ var Battle = (function() {
 		this.id = roomid;
 		this.rated = rated;
 		this.weatherData = {id:''};
+		this.terrainData = {id:''};
 		this.pseudoWeather = {};
 
 		this.format = toId(format);
@@ -1332,6 +1333,7 @@ var Battle = (function() {
 	Battle.prototype.lastUpdate = 0;
 	Battle.prototype.currentRequest = '';
 	Battle.prototype.weather = '';
+	Battle.prototype.terrain = '';
 	Battle.prototype.ended = false;
 	Battle.prototype.started = false;
 	Battle.prototype.active = false;
@@ -1444,7 +1446,7 @@ var Battle = (function() {
 			seed = nextSeed;
 		}
 		return seed;
-	}
+	};
 
 	Battle.prototype.setWeather = function(status, source, sourceEffect) {
 		status = this.getEffect(status);
@@ -1498,6 +1500,60 @@ var Battle = (function() {
 	Battle.prototype.getWeather = function() {
 		return this.getEffect(this.weather);
 	};
+
+	Battle.prototype.setTerrain = function(status, source, sourceEffect) {
+		status = this.getEffect(status);
+		if (sourceEffect === undefined && this.effect) sourceEffect = this.effect;
+		if (source === undefined && this.event && this.event.target) source = this.event.target;
+
+		if (this.terrain === status.id) return false;
+		if (this.terrain && !status.id) {
+			var oldstatus = this.getTerrain();
+			this.singleEvent('End', oldstatus, this.terrainData, this);
+		}
+		var prevTerrain = this.terrain;
+		var prevTerrainData = this.terrainData;
+		this.terrain = status.id;
+		this.terrainData = {id: status.id};
+		if (source) {
+			this.terrainData.source = source;
+			this.terrainData.sourcePosition = source.position;
+		}
+		if (status.duration) {
+			this.terrainData.duration = status.duration;
+		}
+		if (status.durationCallback) {
+			this.terrainData.duration = status.durationCallback.call(this, source, sourceEffect);
+		}
+		if (!this.singleEvent('Start', status, this.terrainData, this, source, sourceEffect)) {
+			this.terrain = prevTerrain;
+			this.terrainData = prevTerrainData;
+			return false;
+		}
+		this.update();
+		return true;
+	};
+	Battle.prototype.clearTerrain = function() {
+		return this.setTerrain('');
+	};
+	Battle.prototype.effectiveTerrain = function(target) {
+		if (this.event) {
+			if (!target) target = this.event.target;
+		}
+		if (!this.runEvent('TryTerrain', target)) return '';
+		return this.terrain;
+	};
+	Battle.prototype.isTerrain = function(terrain, target) {
+		var ourTerrain = this.effectiveTerrain(target);
+		if (!Array.isArray(terrain)) {
+			return ourTerrain === toId(terrain);
+		}
+		return (terrain.map(toId).indexOf(ourTerrain) >= 0);
+	};
+	Battle.prototype.getTerrain = function() {
+		return this.getEffect(this.terrain);
+	};
+
 	Battle.prototype.getFormat = function() {
 		return this.getEffect(this.format);
 	};
@@ -1967,6 +2023,11 @@ var Battle = (function() {
 				statuses.push({status: status, callback: status[callbackType], statusData: this.weatherData, end: this.clearWeather, thing: thing, priority: status[callbackType+'Priority']||0});
 				this.resolveLastPriority(statuses,callbackType);
 			}
+			status = this.getTerrain();
+			if (status[callbackType] !== undefined || (getAll && thing.terrainData[getAll])) {
+				statuses.push({status: status, callback: status[callbackType], statusData: this.terrainData, end: this.clearTerrain, thing: thing, priority: status[callbackType+'Priority']||0});
+				this.resolveLastPriority(statuses,callbackType);
+			}
 			status = this.getFormat();
 			if (status[callbackType] !== undefined || (getAll && thing.formatData[getAll])) {
 				statuses.push({status: status, callback: status[callbackType], statusData: this.formatData, end: function(){}, thing: thing, priority: status[callbackType+'Priority']||0});
@@ -2254,7 +2315,8 @@ var Battle = (function() {
 		for (var m in pokemon.moveset) {
 			pokemon.moveset[m].used = false;
 		}
-		this.add('switch', side.active[pos], side.active[pos].getDetails);
+		this.add('switch', pokemon, pokemon.getDetails);
+		if (pokemon.template.isMega) this.add('-formechange', pokemon, pokemon.template.species);
 		pokemon.update();
 		this.runEvent('SwitchIn', pokemon);
 		this.addQueue({pokemon: pokemon, choice: 'runSwitch'});
@@ -2311,7 +2373,8 @@ var Battle = (function() {
 		for (var m in pokemon.moveset) {
 			pokemon.moveset[m].used = false;
 		}
-		this.add('drag', side.active[pos], side.active[pos].getDetails);
+		this.add('drag', pokemon, pokemon.getDetails);
+		if (pokemon.template.isMega) this.add('-formechange', pokemon, pokemon.template.species);
 		pokemon.update();
 		this.runEvent('SwitchIn', pokemon);
 		this.addQueue({pokemon: pokemon, choice: 'runSwitch'});
@@ -2904,6 +2967,7 @@ var Battle = (function() {
 					'beforeTurnMove': 99,
 					'switch': 6,
 					'runSwitch': 6.1,
+					'megaEvo': 5.9,
 					'residual': -100,
 					'team': 102,
 					'start': 101
@@ -2932,11 +2996,13 @@ var Battle = (function() {
 					decision.targetPosition = target.position;
 				}
 
-				decision.move = this.getMove(decision.move);
+				decision.move = this.getMoveCopy(decision.move);
 				if (!decision.priority) {
 					var priority = decision.move.priority;
 					priority = this.runEvent('ModifyPriority', decision.pokemon, target, decision.move, priority);
 					decision.priority = priority;
+					// In Gen 6, Quick Guard blocks moves with artificially enhanced priority.
+					if (this.gen > 5) decision.move.priority = priority;
 				}
 			}
 			if (!decision.pokemon && !decision.speed) decision.speed = 1;
@@ -3041,6 +3107,9 @@ var Battle = (function() {
 			if (!decision.pokemon.isActive) return false;
 			if (decision.pokemon.fainted) return false;
 			this.runMove(decision.move, decision.pokemon, this.getTarget(decision), decision.sourceEffect);
+			break;
+		case 'megaEvo':
+			if (this.runMegaEvo) this.runMegaEvo(decision.pokemon);
 			break;
 		case 'beforeTurnMove':
 			if (!decision.pokemon.isActive) return false;
@@ -3419,6 +3488,9 @@ var Battle = (function() {
 
 			case 'move':
 				var targetLoc = 0;
+				var pokemon = side.pokemon[i];
+				var validMoves = pokemon.getValidMoves();
+				var moveid = '';
 
 				if (data.substr(data.length-2) === ' 1') targetLoc = 1;
 				if (data.substr(data.length-2) === ' 2') targetLoc = 2;
@@ -3429,9 +3501,14 @@ var Battle = (function() {
 
 				if (targetLoc) data = data.substr(0, data.lastIndexOf(' '));
 
-				var pokemon = side.pokemon[i];
-				var validMoves = pokemon.getValidMoves();
-				var moveid = '';
+				if (data.substr(data.length-5) === ' mega') {
+					decisions.push({
+						choice: 'megaEvo',
+						pokemon: pokemon
+					});
+					data = data.substr(0, data.length-5);
+				}
+
 				if (data.search(/^[0-9]+$/) >= 0) {
 					moveid = validMoves[parseInt(data, 10) - 1];
 				} else {

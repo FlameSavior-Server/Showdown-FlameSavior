@@ -46,9 +46,6 @@ exports.BattleStatuses = {
 			this.effectData.startTime = this.random(2,5);
 			this.effectData.time = this.effectData.startTime;
 		},
-		onSwitchIn: function(target) {
-			this.effectData.time = this.effectData.startTime;
-		},
 		onBeforeMovePriority: 2,
 		onBeforeMove: function(pokemon, target, move) {
 			if (pokemon.getAbility().isHalfSleep) {
@@ -175,9 +172,9 @@ exports.BattleStatuses = {
 				return;
 			}
 			if (this.effectData.source.item === 'bindingband') {
-				this.damage(pokemon.maxhp/8);
+				this.damage(pokemon.maxhp/6);
 			} else {
-				this.damage(pokemon.maxhp/16);
+				this.damage(pokemon.maxhp/8);
 			}
 		},
 		onEnd: function(pokemon) {
@@ -316,7 +313,7 @@ exports.BattleStatuses = {
 		duration: 1,
 		onBasePower: function(basePower, user, target, move) {
 			this.debug('Gem Boost');
-			return this.chainModify(1.5);
+			return this.chainModify([0x14CD, 0x1000]);
 		}
 	},
 

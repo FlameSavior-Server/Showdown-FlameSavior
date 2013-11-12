@@ -34,8 +34,11 @@ var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","fallacies","imana
 */
 var canTalk;
 
+const MAX_REASON_LENGTH = 300;
+
 var commands = exports.commands = {
 	/**** normal stuff ****/
+	random: 'pickrandom',
 	pickrandom: function (target, room, user) {
 		if (!target) return this.sendReply('/pickrandom [option 1], [option 2], ... - Randomly chooses one of the given options.');
 		if (!this.canBroadcast()) return;
@@ -219,10 +222,12 @@ var commands = exports.commands = {
 			return this.parse('/help msg');
 		}
 		if (!targetUser || !targetUser.connected) {
-			if (!target) {
-				this.sendReply('User '+this.targetUsername+' not found. Did you forget a comma?');
+			if (targetUser && !targetUser.connected) {
+				this.popupReply('User '+this.targetUsername+' is offline.');
+			} else if (!target) {
+				this.popupReply('User '+this.targetUsername+' not found. Did you forget a comma?');
 			} else {
-				this.sendReply('User '+this.targetUsername+' not found. Did you misspell their name?');
+				this.popupReply('User '+this.targetUsername+' not found. Did you misspell their name?');
 			}
 			return this.parse('/help msg');
 		}
@@ -441,33 +446,6 @@ var commands = exports.commands = {
 		if (currentGroup !== ' ' && !user.can('room'+config.groups[currentGroup].id, null, room)) {
 			return this.sendReply('/' + cmd + ' - Access denied for promoting from '+config.groups[currentGroup].name+'.');
 		}
-	},
-
-	rk: 'rkick',
-	rkick: function(target, room, user){
-		if(!room.auth) return this.sendReply('/rkick is designed for rooms with their own auth.');
-		if(!this.can('roommod', null, room)) return this.sendReply('/rkick - Access Denied.');
-		var targetUser = Users.get(target);
-		if(targetUser == undefined) return this.sendReply('User not found.');
-		targetUser.popup('You have been kicked from room '+ room.title + '.');
-		targetUser.leaveRoom(room);
-		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
-		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
-
-	},
-/*
-	adultroom: function(target, room, user) {
-		if(!user.can('makeroom')) return;
-		if(target === 'off'){
-			room.isAdult = false;
-			return this.addModCommand(user.name + ' has made the room available to everyone.');
-		} else {
-			room.isAdult = true;
-			return this.addModCommand(user.name + ' has made the room available to adults.');
-		}
-	},
-*/
-	roomvoice: function(target, room, user) {
 		if (nextGroup !== ' ' && !user.can('room'+config.groups[nextGroup].id, null, room)) {
 			return this.sendReply('/' + cmd + ' - Access denied for promoting to '+config.groups[nextGroup].name+'.');
 		}
@@ -503,6 +481,66 @@ var commands = exports.commands = {
 		}
 	},
 
+	rk: 'rkick',
+	rkick: function(target, room, user){
+		if(!room.auth) return this.sendReply('/rkick is designed for rooms with their own auth.');
+		if(!this.can('roommod', null, room)) return this.sendReply('/rkick - Access Denied.');
+		var targetUser = Users.get(target);
+		if(targetUser == undefined) return this.sendReply('User not found.');
+		targetUser.popup('You have been kicked from room '+ room.title + '.');
+		targetUser.leaveRoom(room);
+		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
+		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
+
+	},
+/*
+	adultroom: function(target, room, user) {
+		if(!user.can('makeroom')) return;
+		if(target === 'off'){
+			room.isAdult = false;
+			return this.addModCommand(user.name + ' has made the room available to everyone.');
+		} else {
+			room.isAdult = true;
+			return this.addModCommand(user.name + ' has made the room available to adults.');
+		}
+	},
+
+	roomvoice: function(target, room, user) {
+		if (nextGroup !== ' ' && !user.can('room'+config.groups[nextGroup].id, null, room)) {
+			return this.sendReply('/' + cmd + ' - Access denied for promoting to '+config.groups[nextGroup].name+'.');
+		}
+		if (currentGroup === nextGroup) {
+			return this.sendReply("User '"+this.targetUsername+"' is already a "+(config.groups[nextGroup].name || 'regular user')+" in this room.");
+		}
+		if (config.groups[nextGroup].globalonly) {
+			return this.sendReply("The rank of "+config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
+		}
+
+		var isDemotion = (config.groups[nextGroup].rank < config.groups[currentGroup].rank);
+		var groupName = (config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
+
+		if (nextGroup === ' ') {
+			delete room.auth[userid];
+		} else {
+			room.auth[userid] = nextGroup;
+		}
+
+		if (isDemotion) {
+			this.privateModCommand('('+name+' was appointed to Room ' + groupName + ' by '+user.name+'.)');
+			if (targetUser) {
+				targetUser.popup('You were appointed to Room ' + groupName + ' by ' + user.name + '.');
+			}
+		} else {
+			this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
+		}
+		if (targetUser) {
+			targetUser.updateIdentity();
+		}
+		if (room.chatRoomData) {
+			Rooms.global.writeChatRoomData();
+		}
+	},
+*/
 	autojoin: function(target, room, user, connection) {
 		Rooms.global.autojoinRooms(user, connection)
 	},
@@ -536,6 +574,7 @@ var commands = exports.commands = {
 		}
 	},
 
+	rb: 'roomban',
 	roomban: function(target, room, user, connection) {
 		if (!target) return this.parse('/help roomban');
 		target = this.splitTarget(target, true);
@@ -544,7 +583,7 @@ var commands = exports.commands = {
 		var userid = toId(name);
 		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
-		if (!Rooms.rooms[room.id].users[userid]) {
+		if (!Rooms.rooms[room.id].users[userid] && room.isPrivate) {
 			return this.sendReply('User ' + this.targetUsername + ' is not in the room ' + room.id + '.');
 		}
 		if (!room.bannedUsers || !room.bannedIps) {
@@ -644,7 +683,7 @@ var commands = exports.commands = {
 				return this.sendReply('/poof target - Access denied.');
 			}
 		}
-		if(poofeh && !user.muted){
+		if(poofeh && !user.muted && !user.locked){
 			Rooms.rooms.lobby.addRaw(btags + getRandMessage(user)+ etags);
 			user.disconnectAll();
 		}else{
@@ -679,6 +718,7 @@ var commands = exports.commands = {
 		{
 			if(target.indexOf('<img') != -1)
 				return this.sendReply('Images are no longer supported in cpoof.');
+			target = htmlfix(target);
 			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
 			var etags = '</font></strong>'
 			Rooms.rooms.lobby.addRaw(btags + '~~ '+user.name+' '+target+'! ~~' + etags);
@@ -759,7 +799,7 @@ var commands = exports.commands = {
 		var targetUser = toId(target.slice(0, commaIndex));
 		var message = target.slice(commaIndex + 1).trim();
 		if (message.replace(/(<([^>]+)>)/ig,"").length > 250) return this.sendReply('tells must be 250 or fewer characters, excluding HTML.');
-
+		message = htmlfix(message);
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}
@@ -832,7 +872,7 @@ var commands = exports.commands = {
 			var message = '<strong><font size=3>Reminders for '+room.title+':</strong></font>'+(room.reminders[1]?'<ol>':'<br /><br />There are no reminders to display. ');
 			if (room.reminders[1]) {
 				for (var r in room.reminders) {
-					message += '<li>'+room.reminders[r];
+					message += htmlfix('<li>'+room.reminders[r]);
 				}
 				message += '</ol>';
 			}
@@ -972,6 +1012,9 @@ var commands = exports.commands = {
 		if (room.isPrivate && room.auth) {
 			return this.sendReply('You can\'t warn here: This is a privately-owned room not subject to global rules.');
 		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
+		}
 		if (!this.can('warn', targetUser, room)) return false;
 
 		this.addModCommand(''+targetUser.name+' was warned by '+user.name+'.' + (target ? " (" + target + ")" : ""));
@@ -988,7 +1031,7 @@ var commands = exports.commands = {
 		if (target && !targetRoom) {
 			return connection.sendTo(user, "|noinit|nonexistent|The room '" + target + "' does not exist.");
 		}
-		if (!this.can('kick', targetUser, room)) return false;
+		if (!this.can('warn', targetUser, room) || !this.can('warn', targetUser, targetRoom)) return false;
 		if (!targetUser || !targetUser.connected) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
@@ -1016,6 +1059,9 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
+		}
 		if (!this.can('mute', targetUser, room)) return false;
 		if (targetUser.mutedRooms[room.id] || targetUser.locked || !targetUser.connected) {
 			var problem = ' but was already '+(!targetUser.connected ? 'offline' : targetUser.locked ? 'locked' : 'muted');
@@ -1042,6 +1088,9 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
 		}
 		if (!this.can('mute', targetUser, room)) return false;
 
@@ -1087,6 +1136,9 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUser+' not found.');
 		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
+		}
 		if (!user.can('lock', targetUser)) {
 			return this.sendReply('/lock - Access denied.');
 		}
@@ -1130,6 +1182,9 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
 		}
 		if (!this.can('ban', targetUser)) return false;
 
@@ -1278,6 +1333,9 @@ var commands = exports.commands = {
 
 	modnote: function(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help note');
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The note is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
+		}
 		if (!this.can('mute')) return false;
 		return this.privateModCommand('(' + user.name + ' notes: ' + target + ')');
 	},
@@ -1595,12 +1653,24 @@ var commands = exports.commands = {
 
 			return this.sendReply('Formats have been hotpatched.');
 
+		} else if (target === 'learnsets') {
+			try {
+				// uncache the tools.js dependency tree
+				CommandParser.uncacheTree('./tools.js');
+				// reload tools.js
+				Tools = require('./tools.js'); // note: this will lock up the server for a few seconds
+
+				return this.sendReply('Learnsets have been hotpatched.');
+			} catch (e) {
+				return this.sendReply('Something failed while trying to hotpatch learnsets: \n' + e.stack);
+			}
+
 		}
 		this.sendReply('Your hot-patch command was unrecognized.');
 	},
 
 	savelearnsets: function(target, room, user) {
-		if (this.can('hotpatch')) return false;
+		if (!this.can('hotpatch')) return false;
 		fs.writeFile('data/learnsets.js', 'exports.BattleLearnsets = '+JSON.stringify(BattleLearnsets)+";\n");
 		this.sendReply('learnsets.js saved.');
 	},
@@ -2375,4 +2445,15 @@ function HueToRgb(m1, m2, hue) {
 		v = m1;
 
 	return (255 * v).toString(16);
+}
+
+function htmlfix(target){
+	var fixings = ['<3', ':>', ':<'];
+	for(var u in fixings){
+		while(target.indexOf(fixings[u]) != -1)
+			target = target.substring(0, target.indexOf(fixings[u])) +'< '+ target.substring(target.indexOf(fixings[u])+1);
+	}
+	
+	return target;
+	
 }

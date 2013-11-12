@@ -1,4 +1,24 @@
 exports.BattleItems = {
+	"abomasite": {
+		id: "abomasite",
+		name: "Abomasite",
+		spritenum: 0,
+		megaStone: "Abomasnow-Mega",
+		onTakeItem: false,
+		num: 674,
+		gen: 6,
+		desc: "Mega-evolves Abomasnow."
+	},
+	"absolite": {
+		id: "absolite",
+		name: "Absolite",
+		spritenum: 0,
+		megaStone: "Absol-Mega",
+		onTakeItem: false,
+		num: 677,
+		gen: 6,
+		desc: "Mega-evolves Absol."
+	},
 	"absorbbulb": {
 		id: "absorbbulb",
 		name: "Absorb Bulb",
@@ -31,6 +51,26 @@ exports.BattleItems = {
 		num: 135,
 		gen: 4,
 		desc: "If holder is a Dialga, its Steel- and Dragon-type attacks have 1.2x power."
+	},
+	"aerodactylite": {
+		id: "aerodactylite",
+		name: "Aerodactylite",
+		spritenum: 0,
+		megaStone: "Aerodactyl-Mega",
+		onTakeItem: false,
+		num: 672,
+		gen: 6,
+		desc: "Mega-evolves Aerodactyl."
+	},
+	"aggronite": {
+		id: "aggronite",
+		name: "Aggronite",
+		spritenum: 0,
+		megaStone: "Aggron-Mega",
+		onTakeItem: false,
+		num: 667,
+		gen: 6,
+		desc: "Mega-evolves Aggron."
 	},
 	"aguavberry": {
 		id: "aguavberry",
@@ -87,6 +127,26 @@ exports.BattleItems = {
 		gen: 5,
 		desc: "Holder is immune to Ground-type attacks. Pops when holder is hit."
 	},
+	"alakazite": {
+		id: "alakazite",
+		name: "Alakazite",
+		spritenum: 679,
+		megaStone: "Alakazam-Mega",
+		onTakeItem: false,
+		num: -6,
+		gen: 6,
+		desc: "Mega-evolves Alakazam."
+	},
+	"ampharosite": {
+		id: "ampharosite",
+		name: "Ampharosite",
+		spritenum: 658,
+		megaStone: "Ampharos-Mega",
+		onTakeItem: false,
+		num: -6,
+		gen: 6,
+		desc: "Mega-evolves Ampharos."
+	},
 	"apicotberry": {
 		id: "apicotberry",
 		name: "Apicot Berry",
@@ -142,6 +202,26 @@ exports.BattleItems = {
 		gen: 3,
 		desc: "Holder is cured if it is frozen. Single use."
 	},
+	"assaultvest": {
+		id: "assaultvest",
+		name: "Assault Vest",
+		spritenum: 0,
+		onModifySpDPriority: 1,
+		onModifySpD: function(spd) {
+			return this.chainModify(1.5);
+		},
+		onModifyPokemon: function(pokemon) {
+			var moves = pokemon.moveset;
+			for (var i=0; i<moves.length; i++) {
+				if (this.getMove(moves[i].move).category === 'Status') {
+					moves[i].disabled = true;
+				}
+			}
+		},
+		num: -7,
+		gen: 6,
+		desc: "Holder's Sp. Def is 1.5x, but it can only use damaging moves."
+	},
 	"babiriberry": {
 		id: "babiriberry",
 		name: "Babiri Berry",
@@ -163,6 +243,16 @@ exports.BattleItems = {
 		num: 199,
 		gen: 4,
 		desc: "Halves damage taken from a super effective Steel-type attack. Single use."
+	},
+	"banettite": {
+		id: "banettite",
+		name: "Banettite",
+		spritenum: 0,
+		megaStone: "Banette-Mega",
+		onTakeItem: false,
+		num: 668,
+		gen: 6,
+		desc: "Mega-evolves Banette."
 	},
 	"belueberry": {
 		id: "belueberry",
@@ -264,7 +354,7 @@ exports.BattleItems = {
 	},
 	"blackglasses": {
 		id: "blackglasses",
-		name: "BlackGlasses",
+		name: "Black Glasses",
 		spritenum: 35,
 		fling: {
 			basePower: 30
@@ -279,12 +369,23 @@ exports.BattleItems = {
 		gen: 2,
 		desc: "Holder's Dark-type attacks have 1.2x power."
 	},
+	"blastoisinite": {
+		id: "blastoisinite",
+		name: "Blastoisinite",
+		spritenum: 661,
+		megaStone: "Blastoise-Mega",
+		onTakeItem: false,
+		num: -6,
+		gen: 6,
+		desc: "Mega-evolves Blastoise."
+	},
 	"blazikenite": {
 		id: "blazikenite",
 		name: "Blazikenite",
 		spritenum: 0,
-		//todo
-		num: -6,
+		megaStone: "Blaziken-Mega",
+		onTakeItem: false,
+		num: 664,
 		gen: 6,
 		desc: "Mega-evolves Blaziken."
 	},
@@ -320,6 +421,7 @@ exports.BattleItems = {
 	"buggem": {
 		id: "buggem",
 		name: "Bug Gem",
+		isUnreleased: true,
 		spritenum: 53,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -333,7 +435,7 @@ exports.BattleItems = {
 		},
 		num: 558,
 		gen: 5,
-		desc: "Holder's first successful Bug-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Bug-type attack will have 1.3x power. Single use."
 	},
 	"burndrive": {
 		id: "burndrive",
@@ -384,8 +486,9 @@ exports.BattleItems = {
 		id: "charizarditex",
 		name: "Charizardite X",
 		spritenum: 0,
-		//todo
-		num: -6,
+		megaStone: "Charizard-Mega-X",
+		onTakeItem: false,
+		num: 660,
 		gen: 6,
 		desc: "Mega-evolves Charizard into Mega Charizard X."
 	},
@@ -393,8 +496,9 @@ exports.BattleItems = {
 		id: "charizarditey",
 		name: "Charizardite Y",
 		spritenum: 0,
-		//todo
-		num: -6,
+		megaStone: "Charizard-Mega-Y",
+		onTakeItem: false,
+		num: 678,
 		gen: 6,
 		desc: "Mega-evolves Charizard into Mega Charizard Y."
 	},
@@ -719,6 +823,7 @@ exports.BattleItems = {
 	"darkgem": {
 		id: "darkgem",
 		name: "Dark Gem",
+		isUnreleased: true,
 		spritenum: 89,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -732,7 +837,7 @@ exports.BattleItems = {
 		},
 		num: 562,
 		gen: 5,
-		desc: "Holder's first successful Dark-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Dark-type attack will have 1.3x power. Single use."
 	},
 	"deepseascale": {
 		id: "deepseascale",
@@ -854,6 +959,7 @@ exports.BattleItems = {
 	"dragongem": {
 		id: "dragongem",
 		name: "Dragon Gem",
+		isUnreleased: true,
 		spritenum: 107,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -867,7 +973,7 @@ exports.BattleItems = {
 		},
 		num: 561,
 		gen: 5,
-		desc: "Holder's first successful Dragon-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Dragon-type attack will have 1.3x power. Single use."
 	},
 	"dreadplate": {
 		id: "dreadplate",
@@ -971,6 +1077,7 @@ exports.BattleItems = {
 	"electricgem": {
 		id: "electricgem",
 		name: "Electric Gem",
+		isUnreleased: true,
 		spritenum: 120,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -984,7 +1091,7 @@ exports.BattleItems = {
 		},
 		num: 550,
 		gen: 5,
-		desc: "Holder's first successful Electric-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Electric-type attack will have 1.3x power. Single use."
 	},
 	"energypowder": {
 		id: "energypowder",
@@ -1076,6 +1183,7 @@ exports.BattleItems = {
 	"fightinggem": {
 		id: "fightinggem",
 		name: "Fighting Gem",
+		isUnreleased: true,
 		spritenum: 139,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1089,7 +1197,7 @@ exports.BattleItems = {
 		},
 		num: 553,
 		gen: 5,
-		desc: "Holder's first successful Fighting-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Fighting-type attack will have 1.3x power. Single use."
 	},
 	"figyberry": {
 		id: "figyberry",
@@ -1118,6 +1226,7 @@ exports.BattleItems = {
 	"firegem": {
 		id: "firegem",
 		name: "Fire Gem",
+		isUnreleased: true,
 		spritenum: 141,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1131,7 +1240,7 @@ exports.BattleItems = {
 		},
 		num: 548,
 		gen: 5,
-		desc: "Holder's first successful Fire-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Fire-type attack will have 1.3x power. Single use."
 	},
 	"fistplate": {
 		id: "fistplate",
@@ -1206,6 +1315,7 @@ exports.BattleItems = {
 	"flyinggem": {
 		id: "flyinggem",
 		name: "Flying Gem",
+		isUnreleased: true,
 		spritenum: 149,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1219,7 +1329,7 @@ exports.BattleItems = {
 		},
 		num: 556,
 		gen: 5,
-		desc: "Holder's first successful Flying-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Flying-type attack will have 1.3x power. Single use."
 	},
 	"focusband": {
 		id: "focusband",
@@ -1293,9 +1403,40 @@ exports.BattleItems = {
 		gen: 3,
 		desc: "Raises Defense by 1 when at 1/4 max HP or less. Single use."
 	},
+	"garchompite": {
+		id: "garchompite",
+		name: "Garchompite",
+		spritenum: 0,
+		megaStone: "Garchomp-Mega",
+		onTakeItem: false,
+		num: 683,
+		gen: 6,
+		desc: "Mega-evolves Garchomp."
+	},
+	"gardevoirite": {
+		id: "gardevoirite",
+		name: "Gardevoirite",
+		spritenum: 0,
+		megaStone: "Gardevoir-Mega",
+		onTakeItem: false,
+		num: 657,
+		gen: 6,
+		desc: "Mega-evolves Gardevoir."
+	},
+	"gengarite": {
+		id: "gengarite",
+		name: "Gengarite",
+		spritenum: 0,
+		megaStone: "Gengar-Mega",
+		onTakeItem: false,
+		num: 656,
+		gen: 6,
+		desc: "Mega-evolves Gengar."
+	},
 	"ghostgem": {
 		id: "ghostgem",
 		name: "Ghost Gem",
+		isUnreleased: true,
 		spritenum: 161,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1309,14 +1450,16 @@ exports.BattleItems = {
 		},
 		num: 560,
 		gen: 5,
-		desc: "Holder's first successful Ghost-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Ghost-type attack will have 1.3x power. Single use."
 	},
 	"grassgem": {
 		id: "grassgem",
 		name: "Grass Gem",
+		isUnreleased: true,
 		spritenum: 172,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
+			if (target === source || move.category === 'Status') return;
 			if (move.type === 'Grass') {
 				if (source.useItem()) {
 					this.add('-enditem', source, 'Grass Gem', '[from] gem', '[move] '+move.name);
@@ -1326,7 +1469,7 @@ exports.BattleItems = {
 		},
 		num: 551,
 		gen: 5,
-		desc: "Holder's first successful Grass-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Grass-type attack will have 1.3x power. Single use."
 	},
 	"greatball": {
 		id: "greatball",
@@ -1386,6 +1529,7 @@ exports.BattleItems = {
 	"groundgem": {
 		id: "groundgem",
 		name: "Ground Gem",
+		isUnreleased: true,
 		spritenum: 182,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1399,7 +1543,17 @@ exports.BattleItems = {
 		},
 		num: 555,
 		gen: 5,
-		desc: "Holder's first successful Ground-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Ground-type attack will have 1.3x power. Single use."
+	},
+	"gyaradosite": {
+		id: "gyaradosite",
+		name: "Gyaradosite",
+		spritenum: 0,
+		megaStone: "Gyarados-Mega",
+		onTakeItem: false,
+		num: 676,
+		gen: 6,
+		desc: "Mega-evolves Gyarados."
 	},
 	"habanberry": {
 		id: "habanberry",
@@ -1478,6 +1632,16 @@ exports.BattleItems = {
 		gen: 3,
 		desc: "Can be revived into Omanyte."
 	},
+	"heracronite": {
+		id: "heracronite",
+		name: "Heracronite",
+		spritenum: 0,
+		megaStone: "Heracross-Mega",
+		onTakeItem: false,
+		num: 680,
+		gen: 6,
+		desc: "Mega-evolves Heracross."
+	},
 	"hondewberry": {
 		id: "hondewberry",
 		name: "Hondew Berry",
@@ -1490,6 +1654,16 @@ exports.BattleItems = {
 		num: 172,
 		gen: 3,
 		desc: "No competitive use."
+	},
+	"houndoominite": {
+		id: "houndoominite",
+		name: "Houndoominite",
+		spritenum: 0,
+		megaStone: "Houndoom-Mega",
+		onTakeItem: false,
+		num: 666,
+		gen: 6,
+		desc: "Mega-evolves Houndoom."
 	},
 	"iapapaberry": {
 		id: "iapapaberry",
@@ -1518,6 +1692,7 @@ exports.BattleItems = {
 	"icegem": {
 		id: "icegem",
 		name: "Ice Gem",
+		isUnreleased: true,
 		spritenum: 218,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -1531,7 +1706,7 @@ exports.BattleItems = {
 		},
 		num: 552,
 		gen: 5,
-		desc: "Holder's first successful Ice-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Ice-type attack will have 1.3x power. Single use."
 	},
 	"icicleplate": {
 		id: "icicleplate",
@@ -1680,6 +1855,23 @@ exports.BattleItems = {
 		gen: 4,
 		desc: "Halves damage taken from a super effective Poison-type attack. Single use."
 	},
+	"keeberry": {
+		id: "keeberry",
+		name: "Kee Berry",
+		spritenum: 0,
+		isBerry: true,
+		onAfterDamage: function(damage, target, source, move) {
+			if (move.category === 'Physical') {
+				target.eatItem();
+			}
+		},
+		onEat: function(pokemon) {
+			this.boost({def: 1});
+		},
+		num: -6,
+		gen: 6,
+		desc: "Raises Defense by 1 if hit by a Physical attack. Single use."
+	},
 	"kelpsyberry": {
 		id: "kelpsyberry",
 		name: "Kelpsy Berry",
@@ -1692,6 +1884,16 @@ exports.BattleItems = {
 		num: 170,
 		gen: 3,
 		desc: "No competitive use."
+	},
+	"kangaskhanite": {
+		id: "kangaskhanite",
+		name: "Kangaskhanite",
+		spritenum: 0,
+		megaStone: "Kangaskhan-Mega",
+		onTakeItem: false,
+		num: 675,
+		gen: 6,
+		desc: "Mega-evolves Kangaskhan."
 	},
 	"kingsrock": {
 		id: "kingsrock",
@@ -1924,6 +2126,16 @@ exports.BattleItems = {
 		gen: 2,
 		desc: "Poke Ball for catching Pokemon that are the opposite gender of your Pokemon."
 	},
+	"lucarionite": {
+		id: "lucarionite",
+		name: "Lucarionite",
+		spritenum: 0,
+		megaStone: "Lucario-Mega",
+		onTakeItem: false,
+		num: 673,
+		gen: 6,
+		desc: "Mega-evolves Lucario."
+	},
 	"luckypunch": {
 		id: "luckypunch",
 		name: "Lucky Punch",
@@ -1961,6 +2173,22 @@ exports.BattleItems = {
 		num: 157,
 		gen: 3,
 		desc: "Holder cures itself if it is confused or has a major status problem. Single use."
+	},
+	"luminousmoss": {
+		id: "luminousmoss",
+		name: "Luminous Moss",
+		spritenum: 0,
+		fling: {
+			basePower: 30
+		},
+		onAfterDamage: function(damage, target, source, move) {
+			if (move.type === 'Water' && target.useItem()) {
+				this.boost({spd: 1});
+			}
+		},
+		num: -6,
+		gen: 6,
+		desc: "Raises Special Defense by 1 if hit by a Water-type attack. Single use."
 	},
 	"lureball": {
 		id: "lureball",
@@ -2071,6 +2299,33 @@ exports.BattleItems = {
 		gen: 2,
 		desc: "This item cannot be given to or taken from a Pokemon, except by Knock Off."
 	},
+	"manectite": {
+		id: "manectite",
+		name: "Manectite",
+		spritenum: 0,
+		megaStone: "Manectric-Mega",
+		onTakeItem: false,
+		num: 682,
+		gen: 6,
+		desc: "Mega-evolves Manectric."
+	},
+	"marangaberry": {
+		id: "marangaberry",
+		name: "Maranga Berry",
+		spritenum: 0,
+		isBerry: true,
+		onAfterDamage: function(damage, target, source, move) {
+			if (move.category === 'Special') {
+				target.eatItem()
+			}
+		},
+		onEat: function(pokemon) {
+			this.boost({spd: 1});
+		},
+		num: -6,
+		gen: 6,
+		desc: "Raises Special Defense by 1 if hit by a Special attack. Single use."
+	},
 	"masterball": {
 		id: "masterball",
 		name: "Master Ball",
@@ -2078,6 +2333,16 @@ exports.BattleItems = {
 		num: 1,
 		gen: 1,
 		desc: "The best Ball with the ultimate performance. It will catch any wild Pokemon."
+	},
+	"mawilite": {
+		id: "mawilite",
+		name: "Mawilite",
+		spritenum: 0,
+		megaStone: "Mawile-Mega",
+		onTakeItem: false,
+		num: 681,
+		gen: 6,
+		desc: "Mega-evolves Mawile."
 	},
 	"meadowplate": {
 		id: "meadowplate",
@@ -2096,6 +2361,16 @@ exports.BattleItems = {
 		num: 301,
 		gen: 4,
 		desc: "Holder's Grass-type attacks have 1.2x power. Judgment is Grass-type."
+	},
+	"medichamite": {
+		id: "medichamite",
+		name: "Medichamite",
+		spritenum: 0,
+		megaStone: "Medicham-Mega",
+		onTakeItem: false,
+		num: 665,
+		gen: 6,
+		desc: "Mega-evolves Medicham."
 	},
 	"mentalherb": {
 		id: "mentalherb",
@@ -2203,8 +2478,9 @@ exports.BattleItems = {
 		id: "mewtwonitex",
 		name: "Mewtwonite X",
 		spritenum: 0,
-		//todo
-		num: -6,
+		megaStone: "Mewtwo-Mega-X",
+		onTakeItem: false,
+		num: 662,
 		gen: 6,
 		desc: "Mega-evolves Mewtwo into Mega Mewtwo X."
 	},
@@ -2212,8 +2488,9 @@ exports.BattleItems = {
 		id: "mewtwonitey",
 		name: "Mewtwonite Y",
 		spritenum: 0,
-		//todo
-		num: -6,
+		megaStone: "Mewtwo-Mega-Y",
+		onTakeItem: false,
+		num: 663,
 		gen: 6,
 		desc: "Mega-evolves Mewtwo into Mega Mewtwo Y."
 	},
@@ -2356,7 +2633,7 @@ exports.BattleItems = {
 	},
 	"nevermeltice": {
 		id: "nevermeltice",
-		name: "NeverMeltIce",
+		name: "Never-Melt Ice",
 		spritenum: 305,
 		fling: {
 			basePower: 30
@@ -2400,7 +2677,7 @@ exports.BattleItems = {
 		},
 		num: 564,
 		gen: 5,
-		desc: "Holder's first successful Normal-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Normal-type attack will have 1.3x power. Single use."
 	},
 	"occaberry": {
 		id: "occaberry",
@@ -2616,6 +2893,34 @@ exports.BattleItems = {
 		gen: 3,
 		desc: "No competitive use."
 	},
+	"pinsirite": {
+		id: "pinsirite",
+		name: "Pinsirite",
+		spritenum: 0,
+		megaStone: "Pinsir-Mega",
+		onTakeItem: false,
+		num: 671,
+		gen: 6,
+		desc: "Mega-evolves Pinsir."
+	},
+	"pixieplate": {
+		id: "pixieplate",
+		name: "Pixie Plate",
+		spritenum: -6,
+		fling: {
+			basePower: 90
+		},
+		onPlate: 'Fairy',
+		onBasePowerPriority: 6,
+		onBasePower: function(basePower, user, target, move) {
+			if (move && move.type === 'Fairy') {
+				return this.chainModify(1.2);
+			}
+		},
+		num: 311,
+		gen: 6,
+		desc: "Holder's Fairy-type attacks have 1.2x power. Judgment is Fairy-type."
+	},
 	"plumefossil": {
 		id: "plumefossil",
 		name: "Plume Fossil",
@@ -2648,6 +2953,7 @@ exports.BattleItems = {
 	"poisongem": {
 		id: "poisongem",
 		name: "Poison Gem",
+		isUnreleased: true,
 		spritenum: 344,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -2661,7 +2967,7 @@ exports.BattleItems = {
 		},
 		num: 554,
 		gen: 5,
-		desc: "Holder's first successful Poison-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Poison-type attack will have 1.3x power. Single use."
 	},
 	"pokeball": {
 		id: "pokeball",
@@ -2712,6 +3018,7 @@ exports.BattleItems = {
 	"psychicgem": {
 		id: "psychicgem",
 		name: "Psychic Gem",
+		isUnreleased: true,
 		spritenum: 369,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -2725,7 +3032,7 @@ exports.BattleItems = {
 		},
 		num: 557,
 		gen: 5,
-		desc: "Holder's first successful Psychic-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Psychic-type attack will have 1.3x power. Single use."
 	},
 	"qualotberry": {
 		id: "qualotberry",
@@ -2947,6 +3254,7 @@ exports.BattleItems = {
 	"rockgem": {
 		id: "rockgem",
 		name: "Rock Gem",
+		isUnreleased: true,
 		spritenum: 415,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -2960,7 +3268,7 @@ exports.BattleItems = {
 		},
 		num: 559,
 		gen: 5,
-		desc: "Holder's first successful Rock-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Rock-type attack will have 1.3x power. Single use."
 	},
 	"rockincense": {
 		id: "rockincense",
@@ -3024,6 +3332,28 @@ exports.BattleItems = {
 		gen: 4,
 		desc: "Holder's Grass-type attacks have 1.2x power."
 	},
+	"roseliberry": {
+		id: "roseliberry",
+		name: "Roseli Berry",
+		spritenum: 0,
+		isBerry: true,
+		naturalGift: {
+			basePower: 60,
+			type: "Fairy"
+		},
+		onSourceModifyDamage: function(damage, source, target, move) {
+			if (move.type === 'Fairy' && this.getEffectiveness(move.type, target) > 0 && !target.volatiles['substitute']) {
+				if (target.eatItem()) {
+					this.debug('-50% reduction');
+					return this.chainModify(0.5);
+				}
+			}
+		},
+		onEat: function() { },
+		num: -6,
+		gen: 6,
+		desc: "Halves damage taken from a super effective Fairy-type attack. Single use."
+	},
 	"rowapberry": {
 		id: "rowapberry",
 		name: "Rowap Berry",
@@ -3053,6 +3383,23 @@ exports.BattleItems = {
 		gen: 1,
 		desc: "A special Poke Ball that is used only in the Safari Zone and Great Marsh."
 	},
+	"safetygoggles": {
+		id: "safetygoggles",
+		name: "Safety Goggles",
+		spritenum: 0,
+		onImmunity: function(type, pokemon) {
+			if (type === 'sandstorm' || type === 'hail') return false;
+		},
+		onTryHit: function(pokemon, target, move) {
+			if (move.isPowder) {
+				this.add('-immune', pokemon, '[msg]', '[from] Safety Goggles');
+				return null;
+			}
+		},
+		num: -8,
+		gen: 6,
+		desc: "Protects the holder from weather-related damage and powder moves."
+	},
 	"salacberry": {
 		id: "salacberry",
 		name: "Salac Berry",
@@ -3073,6 +3420,16 @@ exports.BattleItems = {
 		num: 203,
 		gen: 3,
 		desc: "Raises Speed by 1 when at 1/4 max HP or less. Single use."
+	},
+	"scizorite": {
+		id: "scizorite",
+		name: "Scizorite",
+		spritenum: 0,
+		megaStone: "Scizor-Mega",
+		onTakeItem: false,
+		num: 670,
+		gen: 6,
+		desc: "Mega-evolves Scizor."
 	},
 	"scopelens": {
 		id: "scopelens",
@@ -3282,6 +3639,22 @@ exports.BattleItems = {
 		gen: 4,
 		desc: "Holder's use of Sandstorm lasts 8 turns instead of 5."
 	},
+	"snowball": {
+		id: "snowball",
+		name: "Snowball",
+		spritenum: 0,
+		fling: {
+			basePower: 30
+		},
+		onAfterDamage: function(damage, target, source, move) {
+			if (move.type === 'Ice' && target.useItem()) {
+				this.boost({atk: 1});
+			}
+		},
+		num: -6,
+		gen: 6,
+		desc: "Raises Attack by 1 if hit by an Ice-type attack. Single use."
+	},
 	"softsand": {
 		id: "softsand",
 		name: "Soft Sand",
@@ -3431,6 +3804,7 @@ exports.BattleItems = {
 	"steelgem": {
 		id: "steelgem",
 		name: "Steel Gem",
+		isUnreleased: true,
 		spritenum: 473,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -3444,7 +3818,7 @@ exports.BattleItems = {
 		},
 		num: 563,
 		gen: 5,
-		desc: "Holder's first successful Steel-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Steel-type attack will have 1.3x power. Single use."
 	},
 	"stick": {
 		id: "stick",
@@ -3618,6 +3992,16 @@ exports.BattleItems = {
 		gen: 2,
 		desc: "Holder's Psychic-type attacks have 1.2x power."
 	},
+	"tyranitarite": {
+		id: "tyranitarite",
+		name: "Tyranitarite",
+		spritenum: 0,
+		megaStone: "Tyranitar-Mega",
+		onTakeItem: false,
+		num: 669,
+		gen: 6,
+		desc: "Mega-evolves Tyranitar."
+	},
 	"ultraball": {
 		id: "ultraball",
 		name: "Ultra Ball",
@@ -3625,6 +4009,16 @@ exports.BattleItems = {
 		num: 2,
 		gen: 1,
 		desc: "An ultra-performance Ball that provides a higher catch rate than a Great Ball."
+	},
+	"venusaurite": {
+		id: "venusaurite",
+		name: "Venusaurite",
+		spritenum: 0,
+		megaStone: "Venusaur-Mega",
+		onTakeItem: false,
+		num: 659,
+		gen: 6,
+		desc: "Mega-evolves Venusaur."
 	},
 	"wacanberry": {
 		id: "wacanberry",
@@ -3651,6 +4045,7 @@ exports.BattleItems = {
 	"watergem": {
 		id: "watergem",
 		name: "Water Gem",
+		isUnreleased: true,
 		spritenum: 528,
 		isGem: true,
 		onSourceTryPrimaryHit: function(target, source, move) {
@@ -3664,7 +4059,7 @@ exports.BattleItems = {
 		},
 		num: 549,
 		gen: 5,
-		desc: "Holder's first successful Water-type attack will have 1.5x power. Single use."
+		desc: "Holder's first successful Water-type attack will have 1.3x power. Single use."
 	},
 	"watmelberry": {
 		id: "watmelberry",
@@ -3695,6 +4090,19 @@ exports.BattleItems = {
 		num: 317,
 		gen: 4,
 		desc: "Holder's Water-type attacks have 1.2x power."
+	},
+	"weaknesspolicy": {
+		id: "weaknesspolicy",
+		name: "Weakness Policy",
+		spritenum: 0,
+		onHit: function(target, source, move) {
+			if (target.hp && move.category !== 'Status' && this.getEffectiveness(move.type, target) > 0 && target.useItem()) {
+				this.boost({atk: 2, spa: 2});
+			}
+		},
+		num: -6,
+		gen: 6,
+		desc: "Attack and Sp. Atk sharply increase when hit super effectively. Single use."
 	},
 	"wepearberry": {
 		id: "wepearberry",

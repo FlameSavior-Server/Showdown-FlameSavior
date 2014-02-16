@@ -363,6 +363,17 @@ var commands = exports.commands = {
 		if (!user.joinRoom(targetRoom || room, connection)) {
 			return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' could not be joined.");
 		}
+		if (target.toLowerCase() == "pokmontrading") {
+			return connection.sendTo('pokmontrading','|html|<center><img src="http://pstradingroom.weebly.com/uploads/2/5/1/0/25107733/1386374523.png"><br />' +
+					'<b>Important Room Links:</b><br />'+
+					'-<a href="http://pstradingroom.weebly.com/rules.html">Room Rules</a><br />' +
+					'-<a href="http://pstradingroom.weebly.com/faqs.html">Room FAQs</a><br />' +
+					'-<a href="https://docs.google.com/spreadsheet/ccc?key=0AvygZBLXTtZZdFFfZ3hhVUplZm5MSGljTTJLQmJScEE#gid=0">Scammer List</a><br />' +
+					'-<a href="https://docs.google.com/spreadsheet/lv?key=0Avz7HpTxAsjIdFFSQ3BhVGpCbHVVdTJ2VVlDVVV6TWc&toomany=true">Approved Cloner List</a><br />' +
+					'-<a href="https://docs.google.com/spreadsheet/ccc?key=0AlbZk6TbwOKPdGhqbmZDb0EtRDNVY1N5UFJSRmE3UEE#gid=0">Expert Pokegenners List</a><br />' +
+					'-<a href="http://pstradingroom.weebly.com/scamming-prevention-tips.html">Scamming Prevention Tips</a><br />' +
+					'-<a href="http://pstradingroom.weebly.com/forums-and-ban-appeals.html#/20131207/ban-appeals-3460802/">Room Ban Appeals</a>');
+		}
 	},
 
 	rb: 'roomban',

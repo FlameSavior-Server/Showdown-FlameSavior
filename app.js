@@ -463,6 +463,8 @@ global.Simulator = require('./simulator.js');
 
 global.Tournaments = require('./tournaments/frontend.js');
 
+global.trivia = require('./trivia.js');
+
 try {
 	global.Dnsbl = require('./dnsbl.js'); 
 } catch (e) {
@@ -684,3 +686,4 @@ fs.readFile('./config/ipbans.txt', function (err, data) {
 });
 
 global.tour = require('./tour.js').tour();
+global.hangman = require('./hangman.js').hangman();

@@ -173,6 +173,7 @@ var commands = exports.commands = {
 				var targetAlt = Users.get(alts[j]);
 				if (!targetAlt.named && !targetAlt.connected) continue;
 
+
 				this.sendReply('Alt: '+targetAlt.name);
 				output = '';
 				for (var i in targetAlt.prevNames) {
@@ -184,6 +185,9 @@ var commands = exports.commands = {
 		}
 		if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
 			this.sendReply('Group: ' + config.groups[targetUser.group].name + ' (' + targetUser.group + ')');
+		}
+		if (targetUser.goldDev) {
+			this.sendReply('(Gold Development Staff)');
 		}
 		if (targetUser.isSysop) {
 			this.sendReply('(Pok\xE9mon Showdown System Operator)');
@@ -206,6 +210,80 @@ var commands = exports.commands = {
 		}
 		this.sendReply('|raw|'+output);
 	},
+	fork: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		if (!this.canTalk()) return;
+			this.sendReplyBox('<center><img src="http://i.imgur.com/HrDUGmr.png" width=75 height= 100>');
+			this.add('|c|%fork| .3.  ``**(fork\'d by '+user.name+')**``');
+			
+	},
+	zarel: function (target, room, user, connection, cmd) {
+		if (!this.canTalk()) return;
+			this.add('|c|~Zarel| heh  ``**(zarel\'d by '+user.name+')**``');
+	},
+	aip: 'inprivaterooms',
+	awhois: 'inprivaterooms',
+	allrooms: 'inprivaterooms',
+	prooms: 'inprivaterooms',
+	adminwhois: 'inprivaterooms',
+	inprivaterooms: function(target, room, user) {
+	if (!this.can('seeprivaterooms')) return false;
+		var targetUser = this.targetUserOrSelf(target);
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+
+		this.sendReply('User: '+targetUser.name);
+		if (user.can('seeprivaterooms', targetUser.getHighestRankedAlt())) {
+			var alts = targetUser.getAlts();
+			var output = '';
+			for (var i in targetUser.prevNames) {
+				if (output) output += ", ";
+				output += targetUser.prevNames[i];
+			}
+			if (output) this.sendReply('Previous names: '+output);
+
+			for (var j=0; j<alts.length; j++) {
+				var targetAlt = Users.get(alts[j]);
+				if (!targetAlt.named && !targetAlt.connected) continue;
+
+
+				this.sendReply('Alt: '+targetAlt.name);
+				output = '';
+				for (var i in targetAlt.prevNames) {
+					if (output) output += ", ";
+					output += targetAlt.prevNames[i];
+				}
+				if (output) this.sendReply('Previous names: '+output);
+			}
+		}
+		if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
+			this.sendReply('Group: ' + config.groups[targetUser.group].name + ' (' + targetUser.group + ')');
+		}
+		if (targetUser.isSysop) {
+			this.sendReply('(Pok\xE9mon Showdown System Operator)');
+		}
+		if (targetUser.goldDev) {
+			this.sendReply('(Gold Development Staff)');
+		}
+		if (!targetUser.authenticated) {
+			this.sendReply('(Unregistered)');
+		}
+		if (!this.broadcasting && (user.can('ip', targetUser) || user === targetUser)) {
+			var ips = Object.keys(targetUser.ips);
+			this.sendReply('IP' + ((ips.length > 1) ? 's' : '') + ': ' + ips.join(', '));
+		}
+		var output = 'In all rooms: ';
+		var first = false;
+		for (var i in targetUser.roomCount) {
+			if (i === 'global' || Rooms.get(i).isPublic) continue;
+			if (!first) output += ' | ';
+			first = false;
+
+			output += '<a href="/'+i+'" room="'+i+'">'+i+'</a>';
+		}
+		this.sendReply('|raw|'+output);
+	},
 
 	ipsearch: function(target, room, user) {
 		if (!this.can('rangeban')) return;
@@ -219,6 +297,150 @@ var commands = exports.commands = {
 			}
 		}
 		if (!atLeastOne) this.sendReply("No results found.");
+		
+	},
+
+	gdeclarered: 'gdeclare',
+	gdeclaregreen: 'gdeclare',
+	gdeclare: function(target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help gdeclare');
+		if (!this.can('lockdown')) return false;
+
+		var roomName = (room.isPrivate)? 'a private room' : room.id;
+
+		if (cmd === 'gdeclare'){
+			for (var id in Rooms.rooms) {
+				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b><font size=1><i>Global declare from '+roomName+'<br /></i></font size>'+target+'</b></div>');
+			}
+		}
+		if (cmd === 'gdeclarered'){
+			for (var id in Rooms.rooms) {
+				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-red"><b><font size=1><i>Global declare from '+roomName+'<br /></i></font size>'+target+'</b></div>');
+			}
+		}
+		else if (cmd === 'gdeclaregreen'){
+			for (var id in Rooms.rooms) {
+				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-green"><b><font size=1><i>Global declare from '+roomName+'<br /></i></font size>'+target+'</b></div>');
+			}
+		}
+		this.logEntry(user.name + ' used /gdeclare');
+
+	},
+
+	declaregreen: 'declarered',
+	declarered: function(target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help declare');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		if (cmd === 'declarered'){
+			this.add('|raw|<div class="broadcast-red"><b>'+target+'</b></div>');
+		}
+		else if (cmd === 'declaregreen'){
+			this.add('|raw|<div class="broadcast-green"><b>'+target+'</b></div>');
+		}
+		this.logModCommand(user.name+' declared '+target);
+	},
+	declaregreen: 'declarered',
+	declarered: function(target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help declare');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		if (cmd === 'declarered'){
+			this.add('|raw|<div class="broadcast-red"><b>'+target+'</b></div>');
+		}
+		else if (cmd === 'declaregreen'){
+			this.add('|raw|<div class="broadcast-green"><b>'+target+'</b></div>');
+		}
+		this.logModCommand(user.name+' declared '+target);
+	},
+
+	
+	pdeclare: function(target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help declare');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		if (cmd === 'pdeclare'){
+			this.add('|raw|<div class="broadcast-purple"><b>'+target+'</b></div>');
+		}
+		else if (cmd === 'pdeclare'){
+			this.add('|raw|<div class="broadcast-purple"><b>'+target+'</b></div>');
+		}
+		this.logModCommand(user.name+' declared '+target);
+	},
+	
+	k: 'kick',
+	aura: 'kick',
+	kick: function(target, room, user){
+		if (!this.can('lock')) return false;
+		if (!target) return this.sendReply('/help kick');
+		if (!this.canTalk()) return false;
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+
+		if (!targetUser || !targetUser.connected) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+
+		if (!this.can('lock', targetUser, room)) return false;
+
+		this.addModCommand(targetUser.name+' was kicked from the room by '+user.name+'.');
+
+		targetUser.popup('You were kicked from '+room.id+' by '+user.name+'.');
+
+		targetUser.leaveRoom(room.id);
+	},
+
+	dm: 'daymute',
+	daymute: function(target, room, user) {
+		if (!target) return this.parse('/help daymute');
+		if (!this.canTalk()) return false;
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if (!this.can('mute', targetUser, room)) return false;
+
+		if (((targetUser.mutedRooms[room.id] && (targetUser.muteDuration[room.id]||0) >= 50*60*1000) || targetUser.locked) && !target) {
+			var problem = ' but was already '+(!targetUser.connected ? 'offline' : targetUser.locked ? 'locked' : 'muted');
+			return this.privateModCommand('('+targetUser.name+' would be muted by '+user.name+problem+'.)');
+		}
+
+		targetUser.popup(user.name+' has muted you for 24 hours. '+target);
+		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 24 hours.' + (target ? " (" + target + ")" : ""));
+		var alts = targetUser.getAlts();
+		if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
+
+		targetUser.mute(room.id, 24*60*60*1000, true);
+	},
+
+	flogout: 'forcelogout',
+	forcelogout: function(target, room, user) {
+		if(!user.can('hotpatch')) return;
+		if (!this.canTalk()) return false;
+
+		if (!target) return this.sendReply('/forcelogout [username], [reason] OR /flogout [username], [reason] - You do not have to add a reason');
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+
+		if (targetUser.can('hotpatch')) return this.sendReply('You cannot force logout another Admin - nice try. Chump.');
+
+		this.addModCommand(''+targetUser.name+' was forcibly logged out by '+user.name+'.' + (target ? " (" + target + ")" : ""));
+
+		targetUser.resetName();
 	},
 	
 	declaregreen: 'declarered',
@@ -262,7 +484,8 @@ var commands = exports.commands = {
 		}
 		this.logModCommand(user.name+' globally declared '+target);
 	},
-
+	sd: 'declaremod',
+	staffdeclare: 'declaremod',
 	modmsg: 'declaremod',
 	moddeclare: 'declaremod',
 	declaremod: function(target, room, user) {
@@ -680,29 +903,217 @@ var commands = exports.commands = {
 
 	groups: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('+ <b>Voice</b> - The above, and they can use ! commands like !groups, and talk during moderated chat<br />' +
+		this.sendReplyBox('+ <b>Voice</b> -  They can use ! commands like !groups, host polls and tourneys and talk during moderated chat<br />' +
 			'% <b>Driver</b> - The above, and they can also mute and lock users and check for alts<br />' +
-			'@ <b>Moderator</b> - The above, and they can ban users<br />' +
+			'@ <b>Moderator</b> - The above, and they can ban users, set modchat and declare<br />' +
 			'&amp; <b>Leader</b> - The above, and they can promote moderators and force ties<br />'+
-			'~ <b>Administrator</b> - They can do anything, like change what this message says');
+			'~ <b>Administrator</b> - They can do anything, like change what this message says<br />'+
+			'# <b>Room Owner</b> - They are administrators of the room and can almost totally control it<br />');
 	},
 
-	git: 'opensource',
-	opensource: function(target, room, user) {
+	ca: 'customavatar',
+	customavatars: 'customavatar',
+	customavi: 'customavatar',
+	customavis: 'customavatar',
+	customavatar: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Pokemon Showdown is open source:<br />- Language: JavaScript<br />'+
-				'- <a href="https://github.com/Zarel/Pokemon-Showdown/commits/master" target="_blank">What\'s new?</a><br />'+
-				'- <a href="https://github.com/Zarel/Pokemon-Showdown" target="_blank">Server source code</a><br />'+
-				'- <a href="https://github.com/Zarel/Pokemon-Showdown-Client" target="_blank">Client source code</a><br />'+
-				'- <a href="https://github.com/kupochu/Pokemon-Showdown" target="_blank">TBT Server source code</a><br />'+
-				'- <a href="https://github.com/kupochu/Pokemon-Showdown/commits/master" target="_blank">What\'s new with TBT?</a>');
+		this.sendReplyBox('<b>Custom Avatars</b> - <br>' +
+		'People with global rank of voice (+) or higher may have an 80x80 custom avatar.<br>'+
+		'The file types that are allowed are: .png or .gif. <br>' +
+		'PM a leader or up if you meet these requirements with a link to your avatar ready.');
 	},
 
+	cc: 'customcommand',
+	customcommands: 'customcommand',
+	custombanner: 'customcommand',
+	customcommand: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Custom Commands</b> - People with global rank of Driver (%) or higher may have an custom command.  You must make a message for what you want it to say and an image that is around 100x100.  PM panpawn if you meet these requirements with a link and message for your command ready.<br />');
+	},
+	sc: 'staffcommands',
+	staffcommands: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b><center>Staff Commands:</center></b><br />' +
+		'<b>/fr</b> - Forcibly makes a user change their name. (requires %, @, & or ~).<br />' +
+		'<b>/alts</b> - Allows you to see a user`s alts and ip address. (requires %, @, & or ~).<br />' +
+		'<b>/frt</b> - Forcibly makes a user with have a new specific name. (requires ~).<br />' +
+		'<b>/flogout</b> - Forcibly makes a user logout. (requires %, @, & or ~).<br />' +
+		'<b>/warn</b> - Warns a user. (requires %, @, & or ~).<br />' +
+		'<b>/m or /mute</b> - 7 minute mutes a user. (requires %, @, & or ~).<br />' +
+		'<b>/hm</b> - hourmutes a user. (requires %, @, & or ~).<br />' +
+		'<b>/dm</b> - Mutes a user for one day. (requires %, @, & or ~).<br />' +
+		'<b>/lock</b> - Locks a user and their ip address. (requires %, @, & or ~).<br />' +
+		'<b>/b</b> - Bans a user and their ip address. (requires @, & or ~).<br />' +
+		'<b>/k</b> - Room kicks a user. (requires %, @, & or ~).<br />' +
+		'<b>/declare</b> - Declares with a blue background. (requires @, & or ~).<br />' +
+		'<b>/gdeclare</b> - Globally declares with a blue background. (requires @, & or ~).<br />' +
+		'<b>/declarered</b> - Declares with a red background. (requires @, & or ~).<br />' +
+		'<b>/declaregreen</b> - Declares with a green background. (requires @, & or ~).<br />' +
+		'<b>/gdeclarered</b> - Globally declares with a red background. (requires @, & or ~).<br />' +
+		'<b>/gdeclaregreen</b> - Globally declares with a green background. (requires @, & or ~).');
+	
+	},
+//Trainer Cards.
+
+	panpawn: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xzfPeaL.gif"><br><img src="http://i.imgur.com/PDhHorc.gif"></font></color><br><center><font color="#4F86F7">Ace: Cyndaquil</font><br>Don\'t touch me when I\'m sleeping.');
+		this.add('|c|~panpawn| I mean it, don\'t touch me. :I  ``**(touch\'d by '+user.name+')**``');
+	},
+	archbisharp: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size="6" face="Matura MT Script Capitals" color="darkblue"><b>ArchBisharp</b><br><img src="http://fc07.deviantart.net/fs70/f/2012/294/f/c/bisharp_by_xdarkblaze-d5ijnsf.gif" width="350" hieght="350"><br></font>Ruling you with an Iron Head.');
+	},
+	briyella: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/EZAEZHG.png"><br><font color="darkpink"><font size="2"><b>Goddess Briyella</b><font color="darkpink"><font size="2"> - The all mighty goddess of Gold. o3o<br />');
+	},
+
+	chimplup: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Chimplup</b> - The almighty ruler of chimchars and piplups alike, also likes pie.<br />');
+	},
+
+	shephard: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Shephard</b> - King Of Water and Ground types.<br />');
+	},
+
+	psychological: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/QPmrbiM.png"><br><img src="http://i.imgur.com/TSEXdOm.gif"><br><font color="red"><blink>Ace: Dragonite</blink></font><br>Dun make me spank you<br />');
+	},
+
+	seed: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Seed</b> - /me plant and water<br />');
+	},
+
+	auraburst: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size="orange"><font size="2"><img src="http://i.imgur.com/9guvnD7.jpg">   <b>Aura Butt</b><font size="orange"><font size="2"> - Nick Cage.   <img src="http://i.imgur.com/9guvnD7.jpg"><br />');
+	},
+
+	leo: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Leonardo DiCaprio</b> - Mirror mirror on the wall, who is the chillest of them all?<br />');
+	},
+
+	moogle: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Kupo</b> - abc!<br />');
+	},
+
+	starmaster: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Starmaster</b> - Well what were you expecting. Master of stars. Duh<br />');
+	},
+
+	ryun: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Ryun</b> - Will fuck your shit up with his army of Gloom, Chimecho, Duosion, Dunsparce, Plusle and Mr. Mime<br />');
+	},
+	miikasa: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs70/f/2010/330/2/0/cirno_neutral_special_by_generalcirno-d33ndj0.gif"><br><font color="purple"><font size="2"><b>Miikasa</b><font color="purple"><font size="2"> - There are no buses in Gensokyo.<br />');
+	},
+	poliii: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/GsI3Y75.jpg"><br><font color="blue"><font size="2"><b>Poliii</b><font color="blue"><font size="2"> -  Greninja is behind you.<br />');
+	},
+	frozengrace: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>FrozenGrace</b> -  The gentle wind blows as the song birds sing of her vibrant radiance. The vibrant flowers and luscious petals dance in the serenading wind, welcoming her arrival for the epitome of all things beautiful.  Bow down to her majesty for she is the Queen. Let her bestow upon you as she graces you with her elegance. FrozenGrace, eternal serenity.<br />');
+	},
+	awk: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Awk</b> - I have nothing to say to that!<br />');
+	},
+	screamingmilotic: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>ScreamingMilotic</b> - The shiny Milotic that wants to take over the world.<br />');
+	},
+	aikenká: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc05.deviantart.net/fs70/f/2010/004/3/4/Go_MAGIKARP_use_your_Splash_by_JoshR691.gif"><b><font size="2"><font color="blue">Aikenká</b><font size="2"><font color="blue"> - The Master of the imp.<img src="http://fc05.deviantart.net/fs70/f/2010/004/3/4/Go_MAGIKARP_use_your_Splash_by_JoshR691.gif"><br />');
+	},
+	ipad: function(target, room, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/miLUHTz.png"><br><b>iPood</b><br> - A total <font color="brown">pos</font> that panpawn will ban.<br><img src="http://i.imgur.com/miLUHTz.png"><br />');
+	},
+	rhan: 'rohansound',
+	rohansound: function(target, room, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><font size="orange"><font size="2"><b>Rohansound</b><font size="orange"><font size="2"> - The master of the Snivy!<br />');
+	},
+	energ218: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.mmii.info/icons/flymonkey102/RickAstley.gif"><font size="2"><font color="orange"><b>EnerG218</b><font size="2"><font color="orange"> - tis meh command :3   <img src="http://www.mmii.info/icons/flymonkey102/RickAstley.gif"><br />');
+	},
+	alittlepaw: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc00.deviantart.net/fs71/f/2013/025/5/d/wolf_dance_by_windwolf13-d5sq93d.gif"><br><font color="green"><font size="3"><b>ALittlePaw</b> - Fenrir would be proud.<br />');
+	},
+	smashbrosbrawl: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>SmashBrosBrawl</b> - Christian Bale<br />');
+	},
+	w00per: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/i3FYyoG.gif"><br><font size="2"><font color="brown"><b>W00per</b><font size="2"><font color="brown"> - "I CAME IN LIKE `EM WRECKIN` BALLZ!<br />');
+	},
+	empoleonxv: function(target, room, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://img.pokemondb.net/sprites/black-white/anim/normal/empoleon.gif">      <img src="http://img.pokemondb.net/sprites/black-white/anim/normal/empoleon.gif">      <img src="http://img.pokemondb.net/sprites/black-white/anim/normal/empoleon.gif"><br><font color="darkblue"><font size="2"><b>Empoleon XV</b><font color="darkblue"><font size="2"> - Hug a penguin and be happy.<br />');
+	},
+	foe: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://s21.postimg.org/durjqji4z/aaaaa.gif"><br><font size="2"><b>Foe</b><font size="2"> - Not a friend.<br />');
+	},
+	op: 'orangepoptarts',
+	orangepoptarts: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.jeboavatars.com/images/avatars/192809169066sunsetbeach.jpg"><br><b><font size="2">Orange Poptarts</b><font size="2"> - "Pop, who so you" ~ ALittlePaw<br />');
+	},
+	wd: 'windoge',
+	windoge: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/qYTABJC.jpg" width="400">');
+	},
+	party: 'dance',
+	dance: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://collegecandy.files.wordpress.com/2013/05/tumblr_inline_mhv5qyiqvk1qz4rgp1.gif" width="400">');
+	},
+	fin: 'finny',
+	finny: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Tw9Pv0j.gif" width="350"><br><font size="2"><b>Finny</b> - One fucked up pervert');
+	},
+	sammy1491862: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/d210a4875c88ed3dd91b0e729e1ebe0d/tumblr_mvjw5vIGhI1sja5w6o1_400.gif"><br><b>Sammy1491862</b> - Sammy ur Ruler and Champion of our <a href="https://docs.google.com/document/d/101DAZO8DGs-fMuoSqz7Ukd_l4l_U2scqyxhVqGEJ76k/edit">league</a> /o/.');
+	},
+	kayo: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size="2"><b>Kayo</b><br>By the Beard of Zeus that Ghost was Fat<br><img src="http://i.imgur.com/rPe9hBa.png">');
+	},
+	saburo: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font color="red" size="5"><b>Saburo</font></b><br><img src="http://i.imgur.com/pYUt8Hf.gif"><br>The god of dance.');
+	},
+//End Trainer Cards.
 	avatars: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Your avatar can be changed using the Options menu (it looks like a gear) in the upper right of Pokemon Showdown.');
 	},
-
+	git: 'opensource',
+	opensource: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Pokemon Showdown is open source:<br />- Language: JavaScript<br />'+
+				'- <a href="https://github.com/Zarel/Pokemon-Showdown" target="_blank">Pokemon Showdown source code / How to create a PS server</a><br />'+
+				'- <a href="https://github.com/Zarel/Pokemon-Showdown-Client" target="_blank">Client source code</a><br />');
+	},
 	introduction: 'intro',
 	intro: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -811,17 +1222,93 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('The server is restarting. Things to know:<br />' +
 			'- We wait a few minutes before restarting so people can finish up their battles<br />' +
-			'- The restart itself will take around 0.6 seconds<br />' +
+			'- The restart itself will take a few seconds<br />' +
 			'- Your ladder ranking and teams will not change<br />' +
-			'- We are restarting to update Pokémon Showdown to a newer version' +
+			'- We are restarting to update Gold to a newer version' +
 			'</div>');
+	},
+	
+	
+	sleep: 'sleeping',
+	sleeping: function(target, room, user, connection) {
+		if (!this.can('lock')) return false;
+
+		if (!user.isSleeping) {
+			user.originalName = user.name;
+			var sleepingName = user.name + ' Sleeping';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(sleepingName);
+			user.forceRename(sleepingName, undefined, true);
+			user.forceRename(sleepingName, undefined, true);
+			
+			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now sleeping. Please do not touch them. '+ (target ? " (" + target + ")" : ""));
+
+			user.isSleeping = true;
+		}
+		else {
+			return this.sendReply('You are already set as sleeping, type /back if you are now back');
+		}
+
+		user.updateIdentity();
+	},
+
+	woke: function(target, room, user, connection) {
+		if (!this.can('lock')) return false;
+
+		if (user.isSleeping) {
+			if (user.name.slice(-7) !== ' sleeping') {
+				user.isSleeping = false; 
+				return this.sendReply('Your name has been left unaltered and no longer marked as sleeping.');
+			}
+
+			var newName = user.originalfirstName;
+			
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(newName);
+
+			user.forceRename(newName, undefined, true);
+			
+			//user will be authenticated
+			user.authenticated = true;
+			
+			this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer sleeping');
+
+			user.originalfirstName = '';
+			user.isAway = false;
+		}
+		else {
+			return this.sendReply('You are not set as sleeping');
+		}
+
+		user.updateIdentity();
+	}, 
+	
+	tc: 'tourhelp',
+	th: 'tourhelp',
+	tourhelp: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b><font size="4"><font color="green">Tournament Commands List:</font></b><br>' +
+				'<b>/tpoll</b> - Starts a poll asking what tier users want. Requires: +, %, @, &, ~. <br>' +
+				'<b>/tour [tier], [number of people or xminutes]</b> Requires: +, %, @, &, ~.<br>' +
+				'<b>/endtour</b> - Ends the current tournement. Requires: +, %, @, &, ~.<br>' +
+				'<b>/replace [replacee], [replacement]</b> Requires: +, %, @, &, ~.<br>' +
+				'<b>/dq [username]</b> - Disqualifies a user from the tournement. Requires: +, %, @, &, ~.<br>' +
+				'<b>/fj [user]</b> - Forcibily joins a user into the tournement in the sign up phase. Requires: +, %, @, &, ~.<br>' +
+				'<b>/fl [username]</b> - Forcibily makes a user leave the tournement in the sign up phase. Requires: +, %, @, &, ~.<br>' +
+				'<b>/vr</b> - Views the current round in the tournement of whose won and whose lost and who hasn\'t started yet.<br>' +
+				'<b><font size="2"><font color="green">Polls Commands List:</b></font><br>' +
+				'<b>/poll [title], [option],[option], exc...</b> - Starts a poll. Requires: +, %, @, &, ~.<br>' +
+				'<b>/pr</b> - Reminds you of what the current poll is.<br>' +
+				'<b>/endpoll</b> - Ends the current poll. Requires: +, %, @, &, ~.<br>' +
+				'<b>/vote [opinion]</b> - votes for an option of the current poll.<br><br>' +
+				'<i>--Just ask in the lobby if you\'d like a voice or up to start a tourney!</i>');
 	},
 
 	rule: 'rules',
 	rules: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Please follow the rules:<br />' +
-			'- <a href="http://pokemonshowdown.com/rules">Rules</a><br />' +
+			'- <a href="http://pokemonshowdown.com/rules">Gold Rules</a><br />' +
 			'</div>');
 	},
 
@@ -852,7 +1339,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'staff') {
 			matched = true;
-			buffer += '<a href="http://www.smogon.com/sim/staff_faq">Staff FAQ</a><br />';
+			buffer += '<a href="http://goldserver.weebly.com/how-do-i-get-a-rank.html">Staff FAQ</a><br />';
 		}
 		if (target === 'all' || target === 'autoconfirmed') {
 			matched = true;
@@ -1007,41 +1494,82 @@ var commands = exports.commands = {
 		if (!atLeastOne) {
 			return this.sendReplyBox('Pokemon, item, move, or ability not found for generation ' + generation.toUpperCase() + '.');
 		}
+		
 	},
 
 	forums: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('The Battle Tower Forums can be found <a href="http://thebattletower.xiaotai.org/index.php" >here</a>.');
+		return this.sendReplyBox('Gold Forums can be found <a href="http://gold.lefora.com/" >here</a>.');
 	},
+	regdate: function(target, room, user, connection) { 
+		if (!this.canBroadcast()) return;
+		if (!target || target == "." || target == "," || target == "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
+		var username = target;
+		target = target.replace(/\s+/g, '');
+		var util = require("util"),
+    	http = require("http");
 
+		var options = {
+    		host: "www.pokemonshowdown.com",
+    		port: 80,
+    		path: "/forum/~"+target
+		};
+
+		var content = "";   
+		var self = this;
+		var req = http.request(options, function(res) {
+			
+		    res.setEncoding("utf8");
+		    res.on("data", function (chunk) {
+	        content += chunk;
+    		});
+	    	res.on("end", function () {
+			content = content.split("<em");
+			if (content[1]) {
+				content = content[1].split("</p>");
+				if (content[0]) {
+					content = content[0].split("</em>");
+					if (content[1]) {
+						regdate = content[1];
+						data = username+' was registered on'+regdate+'.';
+					}
+				}
+			}
+			else {
+				data = username+' is not registered.';
+			}
+			self.sendReplyBox(data);
+		    });
+		});
+		req.end();
+	},
+	
 	league: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('The league consists of 8 Gym Leaders, the Elite 4, and 1 Champion.<br /> ' +
-					 'Currently, the Champion position is empty.<br/>' + 
-					 'Be the first to complete the league, and the spot is yours!<br />' +
-					 'The Battle Tower League can be found <a href="http://thebattletower.xiaotai.org/forumdisplay.php?fid=8" >here</a>.');
-	},
-
-	frontier: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('The Battle Tower Frontier is open for challenges!<br>Read more <a href="http://thebattletower.xiaotai.org/forumdisplay.php?fid=9" >here</a>.');
+		return this.sendReplyBox('<font size="2"><b><center>Goodra League</font></b></center>' +
+					 '★The league consists of 3 Gym Leaders<br /> ' +
+					 '★Currently the Champion position is empty.<br/>' + 
+					 '★Be the first to complete the league, and the spot is yours!<br />' +
+					 '★The champion gets a FREE trainer card, custom avatar and global voice!<br />' +
+					 '★The Goodra League information can be found <a href="http://goldserver.weebly.com/league.html" >here</a>.<br />' +
+					 '★Click <button name=\"joinRoom\" value=\"goodraleague\">here</button> to enter our League\'s room!');
 	},
 
 	stafffaq: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('Click <a href="http://thebattletower.xiaotai.org/showthread.php?tid=33">here</a> to find out about The Battle Tower\'s ranks and promotion system.');
+		return this.sendReplyBox('Click <a href="http://goldserver.weebly.com/how-do-i-get-a-rank-on-gold.html">here</a> to find out about Gold\'s ranks and promotion system.');
 	},
 
 	/*********************************************************
 	 * Miscellaneous commands
 	 *********************************************************/
 
-	kupo: function(target, room, user){
-		if(!this.canBroadcast()|| !user.can('broadcast')) return this.sendReply('/kupo - Access Denied.');
-		if(!target) return this.sendReply('Insufficent Parameters.');
-		room.add('|c|~kupo|/me '+ target);
-		this.logModCommand(user.name + ' used /kupo to say ' + target);
-	},
+	//kupo: function(target, room, user){
+		//if(!this.canBroadcast()|| !user.can('broadcast')) return this.sendReply('/kupo - Access Denied.');
+		//if(!target) return this.sendReply('Insufficent Parameters.');
+		//room.add('|c|~kupo|/me '+ target);
+		//this.logModCommand(user.name + ' used /kupo to say ' + target);
+	//},
 
 	birkal: function(target, room, user) {
 		this.sendReply("It's not funny anymore.");
@@ -1058,6 +1586,169 @@ var commands = exports.commands = {
 		} else {
 			if (Rooms.lobby) Rooms.lobby.addRaw('<div class="broadcast-blue"><b>The Pokemon of the Day was removed!</b><br />No pokemon will be guaranteed in random battles.</div>');
 			this.logModCommand('The Pokemon of the Day was removed by '+user.name+'.');
+		}
+	},
+//Artist of the Day Commands:
+	
+	
+	aotdhelp: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+	//This command is room specific to prevent confusion.
+		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+	//Explains artist of the day to users who are new or unfamiliar with it.
+		this.sendReplyBox('<b>Artist of the Day:</b><br />' +
+		'This is a room actity for The Studio where users nomiate artists for the title of "Artist of the Day".  To find out more information about this activity, click <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">here</a>.<br><br />' +
+		'Commands:<br />' +
+		'/naotd (artist) - This will nominate your artist of the day; only do this once, please. <br />' +
+		'/aotd - This allows you to see who the current Artist of the Day is.<br>' +
+		'/aotd (artist) - Sets an artist of the day. (requires %, @, #) <br />' +
+		'-- <i>For more information on Artist of the Day, click <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">here</a>. <br />' +
+		'-- <i><a href="http://thepsstudioroom.weebly.com/rules.html">Room rules</a></i>.');
+	},
+	
+	 nominateartistoftheday: 'naotd',
+	 naotd: function(target, room, user){
+	       if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+			if (target.indexOf('<img ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<a href') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<font ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<marquee') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<blink') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<center') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if(!target) return this.sendReply('/naotd needs an artist.');
+			if (target.length > 25) {
+			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
+			}
+			if (!this.canTalk()) return;
+            room.addRaw(''+user.name+'\'s nomination  for Artist of the Day is: <b><i>' + target +'</i></b>');
+    },
+
+	artistoftheday: 'aotd',
+	aotd: function(target, room, user) {
+			if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+			if (target.indexOf('<img ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<a href') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<font ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<marquee') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<blink') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<center') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (!target) {
+			return this.sendReply('The current Artist of the Day is: '+room.aotd);
+			}
+			if (!this.canTalk()) return;
+			if (target.length > 25) {
+			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
+			}
+			if (!this.can('mute', null, room)) return;
+				room.aotd = target;
+			if (target) {
+			room.addRaw('<div class="broadcast-green"><font size="2"><b>The Artist of the Day is now <font color="black">'+target+'</font color>!</font size></b><br>' +
+			'<font size="1">(Set by '+user.name+'.)<br />' +
+			'This Artist will be posted on our <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">Artist of the Day page</a>.</div>');
+			this.logModCommand('The Artist of the Day was changed to '+target+' by '+user.name+'.');
+		} else {
+			room.addRaw('<div class="broadcast-green"><b>The Artist of the Day was removed!</b><br />There is no longer an Artist of the day today!</div>');
+			this.logModCommand('The Artist of the Day was removed by '+user.name+'.');
+		}
+	},
+	
+	 nstaffmemberoftheday: 'smotd',
+	 nsmotd: function(target, room, user){
+	 if (room.id !== 'lobby') return this.sendReply("This command can only be used in Lobby.");
+	//Users cannot do HTML tags with this command.
+			if (target.indexOf('<img ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<a href') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<font ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<marquee') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<blink') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<center') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if(!target) return this.sendReply('/nsmotd needs an Staff Member.');
+	//Users who are muted cannot use this command.
+			if (target.length > 25) {
+			return this.sendReply('This Staff Member\'s name is too long; it cannot exceed 25 characters.');
+			}
+			if (!this.canTalk()) return;
+            room.addRaw(''+user.name+'\'s nomination  for Staff Member of the Day is: <b><i>' + target +'</i></b>');
+    },
+
+	staffmemberoftheday: 'smotd',
+	smotd: function(target, room, user) {
+			if (room.id !== 'lobby') return this.sendReply("This command can only be used in Lobby.");
+	//User use HTML with this command.
+			if (target.indexOf('<img ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<a href') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<font ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<marquee') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<blink') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<center') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (!target) {
+	//allows user to do /smotd to view who is the Staff Member of the day if people forget.
+			return this.sendReply('The current Staff Member of the Day is: '+room.smotd);
+			}
+	//Users who are muted cannot use this command.
+			if (!this.canTalk()) return;
+	//Only room drivers and up may use this command.
+			if (target.length > 25) {
+			return this.sendReply('This Staff Member\'s name is too long; it cannot exceed 25 characters.');
+			}
+			if (!this.can('mute', null, room)) return;
+				room.smotd = target;
+			if (target) {
+	//if a user does /smotd (Staff Member name here), then we will display the Staff Member of the Day.
+			room.addRaw('<div class="broadcast-red"><font size="2"><b>The Staff Member of the Day is now <font color="black">'+target+'!</font color></font size></b> <font size="1">(Set by '+user.name+'.)<br />This Staff Member is now the honorary Staff Member of the Day!</div>');
+			this.logModCommand('The Staff Member of the Day was changed to '+target+' by '+user.name+'.');
+		} else {
+	//If there is no target, then it will remove the Staff Member of the Day.
+			room.addRaw('<div class="broadcast-green"><b>The Staff Member of the Day was removed!</b><br />There is no longer an Staff Member of the day today!</div>');
+			this.logModCommand('The Staff Member of the Day was removed by '+user.name+'.');
 		}
 	},
 	
@@ -1151,6 +1842,10 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'avatar') {
 			matched = true;
 			this.sendReply('/avatar [new avatar number] - Change your trainer sprite.');
+		}
+		if (target === 'all' || target === 'unlink') {
+			matched = true;
+			this.sendReply('/unlink [user] - Makes all prior links posted by this user unclickable. Requires: %, @, &, ~');
 		}
 		if (target === 'all' || target === 'rooms') {
 			matched = true;

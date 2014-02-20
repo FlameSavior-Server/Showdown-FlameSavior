@@ -189,6 +189,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 				var innerRoom = (relevantRoom !== undefined) ? relevantRoom : room;
 				return canTalk(user, innerRoom, connection, message);
 			},
+			 
 			targetUserOrSelf: function(target) {
 				if (!target) return user;
 				this.splitTarget(target);
@@ -224,7 +225,8 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 
 	message = canTalk(user, room, connection, message);
 	if (!message) return false;
-
+	user.numMsg++;
+	
 	//spamroom
 	// if user is not in spamroom
 	if(spamroom[user.userid] == undefined){
@@ -369,7 +371,7 @@ function canTalk(user, room, connection, message) {
 		// remove zalgo
 		message = message.replace(/[\u0300-\u036f\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]{3,}/g,'');
 
-		if (room && room.id === 'lobby') {
+		if (room && room.id === 'pornroom') {
 			var normalized = message.trim();
 			if ((normalized === user.lastMessage) &&
 					((Date.now() - user.lastMessageTime) < MESSAGE_COOLDOWN)) {
@@ -386,6 +388,7 @@ function canTalk(user, room, connection, message) {
 				}
 			}
 		}
+			
 
 		if (config.chatfilter) {
 			return config.chatfilter(user, room, connection.socket, message);

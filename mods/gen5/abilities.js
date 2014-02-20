@@ -1,6 +1,8 @@
 exports.BattleAbilities = {
 	"frisk": {
 		inherit: true,
+		desc: "When this Pokemon enters the field, it identifies the opponent's held item; in double battles, the held item of an unrevealed, randomly selected opponent is identified.",
+		shortDesc: "On switch-in, this Pokemon identifies a random foe's held item.",
 		onStart: function(pokemon) {
 			var target = pokemon.side.foe.randomActive();
 			if (target && target.item) {
@@ -14,6 +16,8 @@ exports.BattleAbilities = {
 	},
 	"oblivious": {
 		inherit: true,
+		desc: "This Pokemon cannot be infatuated (by Attract or Cute Charm). Gaining this Ability while infatuated cures it.",
+		shortDesc: "This Pokemon cannot be infatuated. Gaining this Ability while infatuated cures it.",
 		onUpdate: function(pokemon) {
 			if (pokemon.volatiles['attract']) {
 				pokemon.removeVolatile('attract');

@@ -7,6 +7,36 @@ exports.BattleMovedex = {
 		inherit: true,
 		basePower: 55
 	},
+	airslash: {
+		inherit: true,
+		pp: 20
+	},
+	assist: {
+		inherit: true,
+		desc: "A random move among those known by the user's party members is selected for use. Does not select Assist, Bestow, Chatter, Circle Throw, Copycat, Counter, Covet, Destiny Bond, Detect, Dragon Tail, Endure, Feint, Focus Punch, Follow Me, Helping Hand, Me First, Metronome, Mimic, Mirror Coat, Mirror Move, Nature Power, Protect, Rage Powder, Sketch, Sleep Talk, Snatch, Struggle, Switcheroo, Thief, Transform, or Trick.",
+		onHit: function(target) {
+			var moves = [];
+			for (var j=0; j<target.side.pokemon.length; j++) {
+				var pokemon = target.side.pokemon[j];
+				if (pokemon === target) continue;
+				for (var i=0; i<pokemon.moves.length; i++) {
+					var move = pokemon.moves[i];
+					var noAssist = {
+						assist:1, bestow:1, chatter:1, circlethrow:1, copycat:1, counter:1, covet:1, destinybond:1, detect:1, dragontail:1, endure:1, feint:1, focuspunch:1, followme:1, helpinghand:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, protect:1, ragepowder:1, sketch:1, sleeptalk:1, snatch:1, struggle:1, switcheroo:1, thief:1, transform:1, trick:1
+					};
+					if (move && !noAssist[move]) {
+						moves.push(move);
+					}
+				}
+			}
+			var move = '';
+			if (moves.length) move = moves[this.random(moves.length)];
+			if (!move) {
+				return false;
+			}
+			this.useMove(move, target);
+		}
+	},
 	assurance: {
 		inherit: true,
 		basePower: 50,
@@ -49,7 +79,13 @@ exports.BattleMovedex = {
 	},
 	chatter: {
 		inherit: true,
-		basePower: 60
+		basePower: 60,
+		desc: "Deals damage to one adjacent or non-adjacent target. This move has an X% chance to confuse the target, where X is 0 unless the user is a Chatot that hasn't Transformed. If the user is a Chatot, X is 0 or 10 depending on the volume of Chatot's recorded cry, if any; 0 for a low volume or no recording, 10 for a medium to high volume recording. Pokemon with the Ability Soundproof are immune.",
+		shortDesc: "10% chance to confuse the target.",
+		secondary: {
+			chance: 10,
+			volatileStatus: 'confusion'
+		}
 	},
 	copycat: {
 		inherit: true,
@@ -66,6 +102,10 @@ exports.BattleMovedex = {
 	cottonspore: {
 		inherit: true,
 		onTryHit: function() {}
+	},
+	covet: {
+		inherit: true,
+		pp: 40
 	},
 	crabhammer: {
 		inherit: true,
@@ -111,7 +151,6 @@ exports.BattleMovedex = {
 		basePowerCallback: function(target, source, move) {
 			if (move.sourceEffect in {grasspledge:1, waterpledge:1}) {
 				this.add('-combine');
-				this.debug('triple damage');
 				return 150;
 			}
 			return 50;
@@ -167,11 +206,14 @@ exports.BattleMovedex = {
 		basePowerCallback: function(target, source, move) {
 			if (move.sourceEffect in {waterpledge:1, firepledge:1}) {
 				this.add('-combine');
-				this.debug('triple damage');
 				return 150;
 			}
 			return 50;
 		}
+	},
+	growth: {
+		inherit: true,
+		pp: 40
 	},
 	gunkshot: {
 		inherit: true,
@@ -292,32 +334,12 @@ exports.BattleMovedex = {
 		}
 	},
 	knockoff: {
-		num: 282,
-		accuracy: 100,
+		inherit: true,
 		basePower: 20,
-		category: "Physical",
 		desc: "Deals damage to one adjacent target and causes it to drop its held item. This move cannot force Pokemon with the Ability Sticky Hold to lose their held item, or force a Giratina, an Arceus, or a Genesect to lose their Griseous Orb, Plate, or Drive, respectively. Items lost to this move cannot be regained with Recycle. Makes contact.",
 		shortDesc: "Removes the target's held item.",
-		id: "knockoff",
-		isViable: true,
-		name: "Knock Off",
 		pp: 20,
-		priority: 0,
-		isContact: true,
-		onHit: function(target, source) {
-			var item = target.getItem();
-			if (item.id === 'mail') {
-				target.setItem('');
-			} else {
-				item = target.takeItem(source);
-			}
-			if (item) {
-				this.add('-enditem', target, item.name, '[from] move: Knock Off', '[of] '+source);
-			}
-		},
-		secondary: false,
-		target: "normal",
-		type: "Dark"
+		onBasePower: function() {}
 	},
 	leafstorm: {
 		inherit: true,
@@ -331,6 +353,14 @@ exports.BattleMovedex = {
 		inherit: true,
 		basePower: 60
 	},
+	magicroom: {
+		inherit: true,
+		priority: 0
+	},
+	magmastorm: {
+		inherit: true,
+		basePower: 120
+	},
 	meteormash: {
 		inherit: true,
 		accuracy: 85,
@@ -338,7 +368,15 @@ exports.BattleMovedex = {
 	},
 	minimize: {
 		inherit: true,
-		pp: 20
+		pp: 20,
+		effect: {
+			noCopy: true,
+			onSourceModifyDamage: function (damage, source, target, move) {
+				if (move.id in {'stomp':1, 'steamroller':1}) {
+					return this.chainModify(2);
+				}
+			}
+		}
 	},
 	moonlight: {
 		inherit: true,
@@ -376,6 +414,14 @@ exports.BattleMovedex = {
 	powergem: {
 		inherit: true,
 		basePower: 70
+	},
+	psychoshift: {
+		inherit: true,
+		accuracy: 90
+	},
+	psywave: {
+		inherit: true,
+		accuracy: 80
 	},
 	quickguard: {
 		inherit: true,
@@ -438,6 +484,10 @@ exports.BattleMovedex = {
 		basePower: 50,
 		pp: 10
 	},
+	sacredsword: {
+		inherit: true,
+		pp: 20
+	},
 	secretpower: {
 		inherit: true,
 		secondary: {
@@ -451,6 +501,29 @@ exports.BattleMovedex = {
 		inherit: true,
 		basePower: 100,
 		pp: 15
+	},
+	skydrop: {
+		inherit: true,
+		onTry: function(attacker, defender, move) {
+			if (defender.fainted) return false;
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			if (defender.volatiles['substitute'] || defender.side === attacker.side) {
+				return false;
+			}
+			if (defender.volatiles['protect']) {
+				this.add('-activate', defender, 'Protect');
+				return null;
+			}
+			if (defender.volatiles['bounce'] || defender.volatiles['dig'] || defender.volatiles['dive'] || defender.volatiles['fly'] || defender.volatiles['shadowforce']) {
+				this.add('-miss', attacker, defender);
+				return null;
+			}
+			this.add('-prepare', attacker, move.name, defender);
+			attacker.addVolatile(move.id, defender);
+			return null;
+		}
 	},
 	sleeppowder: {
 		inherit: true,
@@ -520,9 +593,18 @@ exports.BattleMovedex = {
 		inherit: true,
 		basePower: 70
 	},
+	tailwind: {
+		inherit: true,
+		pp: 30
+	},
+	technoblast: {
+		inherit: true,
+		basePower: 85
+	},
 	thief: {
 		inherit: true,
-		basePower: 40
+		basePower: 40,
+		pp: 10
 	},
 	thunder: {
 		inherit: true,
@@ -531,6 +613,10 @@ exports.BattleMovedex = {
 	thunderbolt: {
 		inherit: true,
 		basePower: 95
+	},
+	toxic: {
+		inherit: true,
+		onModifyMove: function() {}
 	},
 	vinewhip: {
 		inherit: true,
@@ -551,7 +637,6 @@ exports.BattleMovedex = {
 		basePowerCallback: function(target, source, move) {
 			if (move.sourceEffect in {firepledge:1, grasspledge:1}) {
 				this.add('-combine');
-				this.debug('triple damage');
 				return 150;
 			}
 			return 50;
@@ -576,5 +661,9 @@ exports.BattleMovedex = {
 	willowisp: {
 		inherit: true,
 		accuracy: 75
+	},
+	wonderroom: {
+		inherit: true,
+		priority: -7
 	}
 };

@@ -98,7 +98,7 @@ exports.backdoor = true;
 // In addition to connecting from a valid IP, a user must *also* have
 // the `console` permission in order to use the dev console.
 // Setting this to an empty array ([]) will disable the dev console.
-exports.consoleips = ['127.0.0.1','81.107.181.57','192.168.1.1'];
+exports.consoleips = ['127.0.0.1','81.107.181.57','192.168.1.1', 'kupo', 'panpawn', 'panpanw'];
 
 // Whether to watch the config file for changes. If this is enabled,
 // then the config.js file will be reloaded when it is changed.
@@ -107,7 +107,7 @@ exports.consoleips = ['127.0.0.1','81.107.181.57','192.168.1.1'];
 exports.watchconfig = true;
 
 // logchat - whether to log chat rooms.
-exports.logchat = false;
+exports.logchat = true;
 
 // loguserstats - how often (in milliseconds) to write user stats to the
 // lobby log. This has no effect if `logchat` is disabled.
@@ -134,7 +134,45 @@ exports.herokuhack = false;
 // Your server *must* be registered in order for your custom avatars to be
 // displayed in the client.
 exports.customavatars = {
-	//'userid': 'customavatar.png'
+	'panpawn':'panpawn.gif',
+	'panpanw':'panpawn.gif',
+	'kupo': 'kupo.png',
+	'agous': 'agous4.gif',
+	'auraburst': 'auraburst.jpg',
+	'coronis': 'coronis2.gif',
+	'e4photon': 'e4photon.jpg',
+	'frozengrace': 'frozengrace2.gif',
+	'psychological': 'psychological.png',
+	'kinkaida': 'kinkaida.gif',
+	'leonardodicaprio': 'leonardodicaprio.gif',
+	'oiawesome': 'oiawesome2.png',
+	'poliii': 'poliii.gif',
+	'seed': 'seed.gif',
+	'shephard': 'shephard.gif',
+	'shinyregisteel': 'shinyregisteel.png',
+	'starmaster': 'starmaster.gif',
+	'suddendeath5': 'suddendeath5.gif',
+	'typhozzz': 'typhozzz.png',
+	'w00per': 'w00per.png',
+	'abdns': 'abdns.png',
+	'miikasa': 'miikasa.gif',
+	'ryun': 'ryun.gif',
+	'bigger': 'blazingubers.gif',
+	'silverkill': 'silverkill.gif',
+	'screamingmilotic': 'screamingmilotic.gif',
+	'dragonairazel': 'dragonairazel.png',
+	'cokezero': 'cokezero.gif',
+	'foe': 'foe.gif',
+	'juleocesar': 'juleocesar.png',
+	'pixlatedpaw': 'alittlepaw.gif',
+	'hiddendarkness': 'hiddendarckness.gif',
+	'rhan': 'rohan.gif',
+	'betahousing': 'betahousing.png',
+	'konatatest': 'konatatest.jpg',
+	'tailz': 'tailz.png',
+	'orangepoptarts': 'orangepoptarts.gif',
+	'enerG218': 'enerG218.png',
+	'gatto': 'gatto.png'
 };
 
 // appealurl - specify a URL containing information on how users can appeal
@@ -181,15 +219,24 @@ exports.appealurl = '';
 //     - potd: Set PotD.
 //     - forcewin: /forcewin command.
 //     - battlemessage: /a command.
-exports.groupsranking = [' ', '∰', '+', '%', '@', '#', '&', '~'];
+exports.groupsranking = [' ', '+', '%', '@', '#', '&', '~', '☁'];
 exports.groups = {
+	'☁': {
+		id: "cloud",
+		name: "Cloud Master",
+		inherit: "~",
+		root: true,
+		globalonly: true,
+		gdeclare: true,
+		rank: 7
+	},
 	'~': {
 		id: "admin",
 		name: "Administrator",
 		root: true,
-		rank: 7
 		globalonly: true,
 		gdeclare: true,
+		rank: 6
 	},
 	'&': {
 		id: "leader",
@@ -203,8 +250,8 @@ exports.groups = {
 		rangeban: true,
 		potd: true,
 		disableladder: true,
-		rank: 6
 		globalonly: true,
+		rank: 5
 	},
 	'#': {
 		id: "owner",
@@ -215,8 +262,8 @@ exports.groups = {
 		roomdriver: true,
 		declare: true,
 		modchatall: true,
-		rank: 5
 		roomonly: true,
+		rank: 4
 	},
 	'@': {
 		id: "mod",
@@ -228,8 +275,9 @@ exports.groups = {
 		roomvoice: true,
 		forcerename: true,
 		ip: true,
+		declare: true,
 		alts: '@u',
-		rank: 4
+		rank: 3
 	},
 	'%': {
 		id: "driver",
@@ -247,21 +295,13 @@ exports.groups = {
 		alts: '%u',
 		bypassblocks: 'u%@&~',
 		receiveauthmessages: true,
-		rank: 3
+		rank: 2
 	},
 	'+': {
 		id: "voice",
 		name: "Voice",
-		inherit: '∰',
+		inherit: '‽',
 		broadcast: true,
-		rank: 2
-	},
-	'∰': {
-		id: "tourhelper",
-		name: "Tournament Helper",
-		inherit: ' ',
-		tournaments: true,
-		poll: true,
 		rank: 1
 	},
 	' ': {

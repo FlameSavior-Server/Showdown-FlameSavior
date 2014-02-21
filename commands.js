@@ -841,7 +841,7 @@ var commands = exports.commands = {
 	},
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
-                return this.parse('/poll Next Tournament Tier?, cc1v1, OU, randombat, ubers, hackmons, mono, uu, nu, lc, reg1v1, custom, other');	
+                return this.parse('/poll Next Tournament Tier?, cc1v1, OU, randombat, ubers, hackmons, mono, uubeta, nu, lc, reg1v1, custom, other');	
 	},
 	def: function(target, room, user){
 	 if(!target) return this.sendReply('/def [word] - Will bring you to a search to define the targeted word.');

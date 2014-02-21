@@ -1105,7 +1105,7 @@ var commands = exports.commands = {
 
 	sca: 'giveavatar',
 	setcustomavatar: 'giveavatar',
-    setcustomavi: 'giveavatar,'
+    setcustomavi: 'giveavatar',
     giveavatar: function(target, room, user, connection) {
         if (!this.can('giveavatar')) return this.sendReply('/giveavatar - Access denied.');
         try { 

@@ -1104,6 +1104,10 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font color="red" size="5"><b>Saburo</font></b><br><img src="http://i.imgur.com/pYUt8Hf.gif"><br>The god of dance.');
 	},
+	garazan: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size="2">Garazan<br><img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="300" height="300">');
+	},
 //End Trainer Cards.
 	avatars: function(target, room, user) {
 		if (!this.canBroadcast()) return;

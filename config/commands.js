@@ -1106,7 +1106,7 @@ var commands = exports.commands = {
 	},
 	garazan: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="2">Garazan<br><img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="300" height="300">');
+		this.sendReplyBox('<center><font size="2">Garazan<br></font><img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150">');
 	},
 //End Trainer Cards.
 	avatars: function(target, room, user) {

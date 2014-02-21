@@ -1393,6 +1393,7 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target[0]);
 	},
+    /*
 	id: 'profile',
 	profile: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
@@ -1454,7 +1455,7 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+targetUser+' not found.');
 		}
-	},
+	},*/
 	profile2: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) {
 			return;

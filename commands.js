@@ -1043,6 +1043,7 @@ var commands = exports.commands = {
 	rb: 'roomban',
 	roomban: function(target, room, user, connection) {
 		if (!target) return this.parse('/help roomban');
+		if (targetUser.can('hotpatch')) return this.sendReply('You cannot roomban an Admin - nice try. Chump.');
 		if(room.id === 'lobby') {
 		return this.sendReply('|html|No! Bad! Do not use this command here!');
 		}

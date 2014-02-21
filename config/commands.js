@@ -235,7 +235,7 @@ var commands = exports.commands = {
 		}
 
 		this.sendReply('User: '+targetUser.name);
-		if (user.can('seeprivaterooms', targetUser.getHighestRankedAlt())) {
+		if (user.can('seeprivaterooms',targetUser)) {
 			var alts = targetUser.getAlts();
 			var output = '';
 			for (var i in targetUser.prevNames) {

@@ -1103,39 +1103,77 @@ var commands = exports.commands = {
 		}
 	},
 
-	sca: 'setcustomavi',
-	setcustomavatar: 'setcustomavi',
-	setcustomavi: function(target, room, user, connection) {
-		if (!this.can('customavatars')) return false;
-		if (!target) return connection.sendTo(room, 'Usage: /setcustomavi username, URL');
-		var http = require('http-get');
-		target = target.split(", ");
-		var username = Users.get(target[0]);
-       		var filename = target[1].split('.');
-		filename = '.'+filename.pop();
-		if (filename != ".png" && filename != ".gif") return connection.sendTo(room, '/customavatar - Invalid image type! Images are required to be png or gif.');
-		if (!username) return this.sendReply('User '+target[0]+' not found.');
-		if (filename == ".png") Users.get(username).canCustomAvatar = false;
-		if (filename == ".gif") Users.get(username).canAnimatedAvatar = false;
-     		filename = Users.get(username)+filename;
-		http.get(target[1], 'config/avatars/' + filename, function (error, result) {
-			if (error) {
-    				return connection.sendTo(room, '/customavatar - You supplied an invalid URL!');
-    			} else {
-				avatar.write('\n'+username+','+filename);
-				Users.get(username).avatar = filename;
-				connection.sendTo(room, username+' has received a custom avatar.');
-				Users.get(username).sendTo(room, 'You have received a custom avatar from ' + user.name + '.');
-				for (var u in Users.users) {
-					if (Users.users[u].group == "~" || Users.users[u].group == "&") {
-						Users.users[u].send('|pm|~Gold Server [Do Not Reply]|'+Users.users[u].group+Users.users[u].name+'|'+username+' has received a custom avatar from '+user.name+'.');
-					}
-				}
-				Rooms.rooms.staff.send(username+' has received a custom avatar from '+user.name+'.');
-	    		}
-		});
-		this.logModCommand(user.name + ' added a custom avatar for ' + username + '.');
-	},
+	sca: 'giveavatar',
+	setcustomavatar: 'giveavatar',
+    setcustomavi: 'giveavatar,'
+    giveavatar: function(target, room, user, connection) {
+        if (!this.can('giveavatar')) return this.sendReply('/giveavatar - Access denied.');
+        try { 
+            request = require('request');
+        } catch (e) {
+            return this.sendReply('/giveavatar requires the request module. Please run "npm install request" before using this command.');
+        }
+        if (!target) return this.sendReply('Usage: /giveavatar [username], [image] - Gives [username] the image specified as their avatar. -<br />' +
+            'Images are required to be .PNG or .GIF. Requires: & ~');
+        parts = target.split(',');
+        if (!parts[0] || !parts[1]) return this.sendReply('Usage: /giveavatar [username], [image] - Gives [username] the image specified as their avatar. -<br />' +
+            'Images are required to be .PNG or .GIF. Requires: & ~');
+        targetUser = Users.get(parts[0].trim());
+        filename = parts[1].trim();
+        uri = filename;
+        filename = targetUser.userid + filename.slice(filename.toLowerCase().length - 4,filename.length);
+        filetype = filename.slice(filename.toLowerCase().length - 4,filename.length);
+        if (filetype != '.png' && filetype != '.gif') {
+            return this.sendReply('/giveavatar - Invalid image format. Images are required to be in either PNG or GIF format.');
+        }
+        if (!targetUser) return this.sendReply('User '+target+' not found.');
+        self = this;
+        var download = function(uri, filename, callback) {
+            request.head(uri, function(err, res, body) {
+                var r = request(uri).pipe(fs.createWriteStream('config/avatars/'+filename));
+                r.on('close', callback);
+            });
+        };
+        download(uri, filename, function(err, res, body){
+            if (err) return console.log('/giveavatar error: '+err);
+            fs.readFile('config/avatars.csv','utf8',function(err, data) {
+                if (err) return self.sendReply('/giveavatar erred: '+e.stack);
+                match = false;
+                var row = (''+data).split("\n");
+                var line = '';
+                for (var i = row.length; i > -1; i--) {
+                    if (!row[i]) continue;
+                    var parts = row[i].split(",");
+                    if (targetUser.userid == parts[0]) {
+                        match = true;
+                        line = line + row[i];
+                        break;
+                    }
+                }
+                if (match === true) {
+                    var re = new RegExp(line,"g");
+                    var result = data.replace(re, targetUser.userid+','+filename);
+                    fs.writeFile('config/avatars.csv', result, 'utf8', function (err) {
+                        if (err) return console.log(err);
+                    });
+                } else {
+                    fs.appendFile('config/avatars.csv','\n'+targetUser.userid+','+filename);
+                }
+                self.sendReply(targetUser.name+' has received a custom avatar.');
+                targetUser.avatar = filename;
+                targetUser.sendTo(room, 'You have received a custom avatar from ' + user.name + '.');
+                for (var u in Users.users) {
+                    if (Users.users[u].group == "~" || Users.users[u].group == "&") {
+                        Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+targetUser.name+' has received a custom avatar from '+user.name+'.');
+                    }
+                }
+                Rooms.rooms.staff.add(targetUser.name+' has received a custom avatar from '+user.name+'.');
+                if (filetype == '.gif' && targetUser.canAnimatedAvatar) targetUser.canAnimatedAvatar = false;
+                if (filetype == '.png' && targetUser.canCustomAvatar) targetUser.canCustomAvatar = false;
+            });
+        });
+    },
+
 	masspm: 'pmall',
 	pmall: function(target, room, user) {
 		if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');

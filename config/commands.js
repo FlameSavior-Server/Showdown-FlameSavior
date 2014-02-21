@@ -1118,8 +1118,9 @@ var commands = exports.commands = {
 	opensource: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Pokemon Showdown is open source:<br />- Language: JavaScript<br />'+
-				'- <a href="https://github.com/Zarel/Pokemon-Showdown" target="_blank">Pokemon Showdown source code / How to create a PS server</a><br />'+
-				'- <a href="https://github.com/Zarel/Pokemon-Showdown-Client" target="_blank">Client source code</a><br />');
+				'- <a href="https://github.com/Zarel/Pokemon-Showdown" target="_blank">Pokemon Showdown Source Code / How to create a PS server</a><br />'+
+				'- <a href="https://github.com/Zarel/Pokemon-Showdown-Client" target="_blank">Client Source Code</a><br />'+
+				'- <a href="https://github.com/panpawn/Pokemon-Showdown">Gold Source Code</a>');
 	},
 	introduction: 'intro',
 	intro: function(target, room, user) {

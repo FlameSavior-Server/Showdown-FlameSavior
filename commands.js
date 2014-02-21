@@ -991,7 +991,11 @@ var commands = exports.commands = {
 			}
 		}
 		if (target.toLowerCase() == "lobby") {
-			var reminders = fs.readFileSync('config/reminders.html','utf8');
+			try {
+                reminders = fs.readFileSync('config/reminders.html','utf8');
+            } catch (e) {
+                reminders = 'The reminders list is currently empty.';
+            }
 			return connection.sendTo('lobby','|popup|'+reminders);
 		}
 		if (target.toLowerCase() == "staff") {

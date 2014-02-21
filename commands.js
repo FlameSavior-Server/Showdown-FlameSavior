@@ -1043,7 +1043,7 @@ var commands = exports.commands = {
 	rb: 'roomban',
 	roomban: function(target, room, user, connection) {
 		if (!target) return this.parse('/help roomban');
-
+		if (room.id !== 'lobby') return this.sendReply("This command can only be used in the Lobby.");
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;

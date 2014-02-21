@@ -836,9 +836,6 @@ var commands = exports.commands = {
                 return this.parse('**Panpawn is my god!** ' +
 								'I shall forever praises oh holly god, panpawn!');
 	},
-	testinggit: function(room, user, cmd){
-                return this.parse('I am testing a new command!!');
-	},
 	star: function(room, user, cmd){
                 return this.parse('/hide ★');
 	},

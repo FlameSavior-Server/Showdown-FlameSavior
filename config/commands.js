@@ -1104,9 +1104,10 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font color="red" size="5"><b>Saburo</font></b><br><img src="http://i.imgur.com/pYUt8Hf.gif"><br>The god of dance.');
 	},
+	nub: 'garazan';
 	garazan: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="2">Garazan<br></font><img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150">');
+		this.sendReplyBox('<center><font size="2" face="comic sans ms"><font color="red">G<font color="orange>a<font color="yellow">r<font color="tan">a<font color="violet">z<font color="purple">a<font color="blue">n<br></font><img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150">');
 	},
 //End Trainer Cards.
 	avatars: function(target, room, user) {

@@ -11,7 +11,7 @@ exports.BattleStatuses = {
 			this.add('-status', target, 'brn');
 		},
 		onBasePower: function(basePower, attacker, defender, move) {
-			if (move && move.category === 'Physical' && attacker && attacker.ability !== 'guts') {
+			if (move && move.category === 'Physical' && attacker && attacker.ability !== 'guts' && move.id !== 'facade') {
 				return this.chainModify(0.5); // This should really take place directly in the damage function but it's here for now
 			}
 		},
@@ -153,7 +153,10 @@ exports.BattleStatuses = {
 				delete pokemon.volatiles['trapped'];
 				return;
 			}
-			pokemon.trapped = true;
+			pokemon.tryTrap();
+		},
+		onStart: function(target) {
+			this.add('-activate', target, 'trapped');
 		}
 	},
 	partiallytrapped: {
@@ -181,24 +184,30 @@ exports.BattleStatuses = {
 			this.add('-end', pokemon, this.effectData.sourceEffect, '[partiallytrapped]');
 		},
 		onModifyPokemon: function(pokemon) {
-			pokemon.trapped = true;
+			pokemon.tryTrap();
 		}
 	},
 	lockedmove: {
 		// Outrage, Thrash, Petal Dance...
-		durationCallback: function() {
-			return this.random(2,4);
-		},
+		duration: 2,
 		onResidual: function(target) {
-			if (target.lastMove === 'struggle' || target.status === 'slp' || !target.moveThisTurn) {
+			if (target.status === 'slp') {
 				// don't lock, and bypass confusion for calming
 				delete target.volatiles['lockedmove'];
 			}
+			this.effectData.trueDuration--;
 		},
 		onStart: function(target, source, effect) {
+			this.effectData.trueDuration = this.random(2,4);
 			this.effectData.move = effect.id;
 		},
+		onRestart: function() {
+			if (this.effectData.trueDuration >= 2) {
+				this.effectData.duration = 2;
+			}
+		},
 		onEnd: function(target) {
+			if (this.effectData.trueDuration > 1) return;
 			this.add('-end', target, 'rampage');
 			target.addVolatile('confusion');
 		},
@@ -289,22 +298,18 @@ exports.BattleStatuses = {
 		duration: 2,
 		counterMax: 256,
 		onStart: function() {
-			this.effectData.counter = 2;
+			this.effectData.counter = 3;
 		},
 		onStallMove: function() {
 			// this.effectData.counter should never be undefined here.
 			// However, just in case, use 1 if it is undefined.
 			var counter = this.effectData.counter || 1;
-			if (counter >= 256) {
-				// 2^32 - special-cased because Battle.random(n) can't handle n > 2^16 - 1
-				return (this.random()*4294967296 < 1);
-			}
 			this.debug("Success chance: "+Math.round(100/counter)+"%");
 			return (this.random(counter) === 0);
 		},
 		onRestart: function() {
 			if (this.effectData.counter < this.effect.counterMax) {
-				this.effectData.counter *= 2;
+				this.effectData.counter *= 3;
 			}
 			this.effectData.duration = 2;
 		}
@@ -470,16 +475,16 @@ exports.BattleStatuses = {
 		// be their corresponding type in the Pokedex, so that needs to be
 		// overridden. This is mainly relevant for Hackmons and Balanced
 		// Hackmons.
-		onModifyPokemon: function(pokemon) {
-			if (pokemon.transformed) return;
+		onSwitchInPriority: 101,
+		onSwitchIn: function(pokemon) {
 			var type = 'Normal';
 			if (pokemon.ability === 'multitype') {
-				var type = this.runEvent('Plate', pokemon);
+				type = this.runEvent('Plate', pokemon);
 				if (!type || type === true) {
 					type = 'Normal';
 				}
 			}
-			pokemon.types = [type];
+			pokemon.setType(type, true);
 		}
 	}
 };

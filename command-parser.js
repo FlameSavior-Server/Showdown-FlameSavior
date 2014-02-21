@@ -32,7 +32,7 @@ const MAX_PARSE_RECURSION = 10;
 
 var crypto = require('crypto');
 
-var modlog = exports.modlog = modlog || fs.createWriteStream('logs/modlog.txt', {flags:'a+'});
+var modlog = exports.modlog = modlog || {lobby: fs.createWriteStream('logs/modlog/modlog_lobby.txt', {flags:'a+'})};
 
 /**
  * Command parser
@@ -145,7 +145,8 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 				this.logModCommand(text+(logOnlyText||''));
 			},
 			logModCommand: function(result) {
-				modlog.write('['+(new Date().toJSON())+'] ('+room.id+') '+result+'\n');
+				if (!modlog[room.id]) modlog[room.id] = fs.createWriteStream('logs/modlog/modlog_' + room.id + '.txt', {flags:'a+'});
+				modlog[room.id].write('['+(new Date().toJSON())+'] ('+room.id+') '+result+'\n');
 			},
 			can: function(permission, target, room) {
 				if (!user.can(permission, target, room)) {
@@ -168,7 +169,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 					var normalized = toId(message);
 					if (room.lastBroadcast === normalized &&
 							room.lastBroadcastTime >= Date.now() - BROADCAST_COOLDOWN) {
-						connection.sendTo(room, "You can't broadcast this because it was just broadcast.")
+						connection.sendTo(room, "You can't broadcast this because it was just broadcast.");
 						return false;
 					}
 					this.add('|c|'+user.getIdentity(room.id)+'|'+message);
@@ -293,7 +294,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 function splitTarget(target, exactName) {
 	var commaIndex = target.indexOf(',');
 	if (commaIndex < 0) {
-		targetUser = Users.get(target, exactName)
+		targetUser = Users.get(target, exactName);
 		this.targetUser = targetUser;
 		this.targetUsername = (targetUser?targetUser.name:target);
 		return '';
@@ -335,8 +336,8 @@ function canTalk(user, room, connection, message) {
 			if (room.auth) {
 				if (room.auth[user.userid]) {
 					userGroup = room.auth[user.userid];
-				} else if (userGroup !== ' ') {
-					userGroup = '+';
+				} else if (room.isPrivate) {
+					userGroup = ' ';
 				}
 			}
 			if (!user.autoconfirmed && (room.auth && room.auth[user.userid] || user.group) === ' ' && room.modchat === 'autoconfirmed') {
@@ -391,7 +392,7 @@ function canTalk(user, room, connection, message) {
 			
 
 		if (config.chatfilter) {
-			return config.chatfilter(user, room, connection.socket, message);
+			return config.chatfilter(user, room, connection, message);
 		}
 		return message;
 	}
@@ -465,8 +466,6 @@ var customCommands = require('./config/commands.js');
 if (customCommands && customCommands.commands) {
 	Object.merge(commands, customCommands.commands);
 }
-
-
 
 function MD5(f){function i(b,c){var d,e,f,g,h;f=b&2147483648;g=c&2147483648;d=b&1073741824;e=c&1073741824;h=(b&1073741823)+(c&1073741823);return d&e?h^2147483648^f^g:d|e?h&1073741824?h^3221225472^f^g:h^1073741824^f^g:h^f^g}function j(b,c,d,e,f,g,h){b=i(b,i(i(c&d|~c&e,f),h));return i(b<<g|b>>>32-g,c)}function k(b,c,d,e,f,g,h){b=i(b,i(i(c&e|d&~e,f),h));return i(b<<g|b>>>32-g,c)}function l(b,c,e,d,f,g,h){b=i(b,i(i(c^e^d,f),h));return i(b<<g|b>>>32-g,c)}function m(b,c,e,d,f,g,h){b=i(b,i(i(e^(c|~d),
 f),h));return i(b<<g|b>>>32-g,c)}function n(b){var c="",e="",d;for(d=0;d<=3;d++)e=b>>>d*8&255,e="0"+e.toString(16),c+=e.substr(e.length-2,2);return c}var g=[],o,p,q,r,b,c,d,e,f=function(b){for(var b=b.replace(/\r\n/g,"\n"),c="",e=0;e<b.length;e++){var d=b.charCodeAt(e);d<128?c+=String.fromCharCode(d):(d>127&&d<2048?c+=String.fromCharCode(d>>6|192):(c+=String.fromCharCode(d>>12|224),c+=String.fromCharCode(d>>6&63|128)),c+=String.fromCharCode(d&63|128))}return c}(f),g=function(b){var c,d=b.length;c=
@@ -545,4 +544,11 @@ function toHex(N) {
  N=Math.max(0,N); N=Math.min(N,255); N=Math.round(N);
  return "0123456789ABCDEF".charAt((N-N%16)/16)
       + "0123456789ABCDEF".charAt(N%16);
+  }
+/*********************************************************
+ * Install plug-in commands
+ *********************************************************/
+var plugins = require('./chat-plugins.js').plugins;
+for (var p in plugins) {
+	if (plugins[p].commands) Object.merge(commands, plugins[p].commands);
 }

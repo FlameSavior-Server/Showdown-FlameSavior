@@ -73,10 +73,12 @@ exports.reportjoins = true;
 //   getting more than 160 or so users.
 exports.reportbattles = true;
 
-// moderated chat - prevent unregistered, unvoiced users from speaking
-//   This should only be enabled temporarily, when you're dealing with
-//   huge influxes of spammy users.
-exports.modchat = false;
+// moderated chat - prevent unvoiced users from speaking
+//   This should only be enabled in special situations, such as temporarily
+//   when you're dealing with huge influxes of spammy users.
+exports.chatmodchat = false;
+exports.battlemodchat = false;
+exports.pmmodchat = false;
 
 // backdoor - allows Pokemon Showdown system operators to provide technical
 //            support for your server
@@ -99,7 +101,7 @@ exports.backdoor = true;
 // the `console` permission in order to use the dev console.
 // Setting this to an empty array ([]) will disable the dev console.
 exports.consoleips = ['127.0.0.1','81.107.181.57','192.168.1.1', 'kupo', 'panpawn', 'panpanw'];
-
+exports.goldDev = ['127.0.0.1'];
 // Whether to watch the config file for changes. If this is enabled,
 // then the config.js file will be reloaded when it is changed.
 // This can be used to change some settings using a text editor on
@@ -113,9 +115,11 @@ exports.logchat = true;
 // lobby log. This has no effect if `logchat` is disabled.
 exports.loguserstats = 1000*60*10; // 10 minutes
 
+// validatorprocesses - the number of processes to use for validating teams
 // simulatorprocesses - the number of processes to use for handling battles
-// You should leave this at 1 unless your server has a very large amount of
-// traffic (i.e. hundreds of concurrent battles).
+// You should leave both of these at 1 unless your server has a very large
+// amount of traffic (i.e. hundreds of concurrent battles).
+exports.validatorprocesses = 1;
 exports.simulatorprocesses = 1;
 
 // inactiveuserthreshold - how long a user must be inactive before being pruned
@@ -219,7 +223,8 @@ exports.appealurl = '';
 //     - potd: Set PotD.
 //     - forcewin: /forcewin command.
 //     - battlemessage: /a command.
-exports.groupsranking = [' ', '+', '%', '@', '#', '&', '~', '☁'];
+exports.groupsranking = [' ', '+', '%', '@', '\u2605', '#', '&', '~', '☁'];
+
 exports.groups = {
 	'☁': {
 		id: "cloud",
@@ -236,7 +241,7 @@ exports.groups = {
 		root: true,
 		globalonly: true,
 		gdeclare: true,
-		rank: 6
+		rank: 7
 	},
 	'&': {
 		id: "leader",
@@ -251,7 +256,7 @@ exports.groups = {
 		potd: true,
 		disableladder: true,
 		globalonly: true,
-		rank: 5
+		rank: 6
 	},
 	'#': {
 		id: "owner",
@@ -263,6 +268,16 @@ exports.groups = {
 		declare: true,
 		modchatall: true,
 		roomonly: true,
+		rank: 5
+	},
+	'\u2605': {
+		id: "player",
+		name: "Player",
+		inherit: '+',
+		roomvoice: true,
+		modchat: true,
+		roomonly: true,
+		privateroom: true,
 		rank: 4
 	},
 	'@': {
@@ -302,6 +317,7 @@ exports.groups = {
 		name: "Voice",
 		inherit: '‽',
 		broadcast: true,
+		joinbattle: true,
 		rank: 1
 	},
 	' ': {

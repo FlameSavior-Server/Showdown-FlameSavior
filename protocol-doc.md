@@ -7,9 +7,9 @@ Pokemon Showdown is implemented in SockJS. SockJS is a compatibility
 layer over raw WebSocket, so you can actually connect to Pokemon
 Showdown directly using WebSocket:
 
-    ws://sim.psim.us:8000/showdown/websocket
+    ws://sim.smogon.com:8000/showdown/websocket
       or
-    wss://sim.psim.us/showdown/websocket
+    wss://sim.smogon.com/showdown/websocket
 
 
 Client-to-server messages
@@ -182,7 +182,7 @@ for a full list of message types.
 > `http://play.pokemonshowdown.com/action.php?act=upkeep&challengekeyid=KEYID&challenge=CHALLENGE`
 >
 > Otherwise, you'll need to make an HTTP POST request to `http://play.pokemonshowdown.com/action.php`
-> with the data `act=login&user=USERNAME&pass=PASSWORD&challengekeyid=KEYID&challenge=CHALLENGE`
+> with the data `act=login&name=USERNAME&pass=PASSWORD&challengekeyid=KEYID&challenge=CHALLENGE`
 >
 > `USERNAME` is your username and `PASSWORD` is your password, and `KEYID` and
 > `CHALLENGE` are the values you got from `|challstr|`. (Also feel free to make

@@ -1040,7 +1040,7 @@ var commands = exports.commands = {
 		}
 	},
 
-
+	rb: 'roomban',
 	roomban: function(target, room, user, connection) {
 		if (!target) return this.parse('/help roomban');
 
@@ -1104,15 +1104,15 @@ var commands = exports.commands = {
 
 	sca: 'giveavatar',
 	setcustomavatar: 'giveavatar',
-    setcustomavi: 'giveavatar',
-    giveavatar: function(target, room, user, connection) {
+	setcustomavi: 'giveavatar',
+	giveavatar: function(target, room, user, connection) {
         if (!this.can('giveavatar')) return this.sendReply('/giveavatar - Access denied.');
         try { 
             request = require('request');
         } catch (e) {
             return this.sendReply('/giveavatar requires the request module. Please run "npm install request" before using this command.');
         }
-        if (!target) return this.sendReply('Usage: /giveavatar [username], [image] - Gives [username] the image specified as their avatar. -<br />' +
+        if (!target) return this.sendReply('Usage: /giveavatar [username], [image] - Gives [username] the image specified as their avatar. -' +
             'Images are required to be .PNG or .GIF. Requires: & ~');
         parts = target.split(',');
         if (!parts[0] || !parts[1]) return this.sendReply('Usage: /giveavatar [username], [image] - Gives [username] the image specified as their avatar. -<br />' +

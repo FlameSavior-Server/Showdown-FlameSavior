@@ -397,6 +397,7 @@ var GlobalRoom = (function() {
 			for (var i=0; i<this.staffAutojoin.length; i++) {
 				user.joinRoom(this.staffAutojoin[i], connection);
 			}
+			if (user.can('upperstaff')) user.joinRoom('upperstaff', connection);
 		}
 	};
 	GlobalRoom.prototype.onJoinConnection = function(user, connection) {

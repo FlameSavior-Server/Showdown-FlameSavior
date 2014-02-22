@@ -1895,7 +1895,7 @@ var commands = exports.commands = {
 			return this.privateModCommand('('+targetUser.name+' would be banned by '+user.name+problem+'.)');
 		}
 
-		targetUser.popup(user.name+" has banned you." + (config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + config.appealurl) : "") + "\n\n"+target);
+		targetUser.popup(user.name+" has banned you." + (config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:"\n\n"http:////goldserver.weebly.com/discipline-appeals.html "\n\n"+target);
 
 		this.addModCommand(""+targetUser.name+" was banned by "+user.name+"." + (target ? " (" + target + ")" : ""), ' ('+targetUser.latestIp+')');
 		var alts = targetUser.getAlts();

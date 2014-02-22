@@ -972,6 +972,9 @@ var commands = exports.commands = {
 		if (target.toLowerCase() == "spamroom" && !user.can('warn')) {
 			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for staff ONLY!");
 		}
+		if (target.toLowerCase() == "upperstaff" && !user.can('pban')) {
+			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for staff ONLY!");
+		}
 		if (target.toLowerCase() == 'room' && user.id != 'panpawn') {
 			return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
 		}

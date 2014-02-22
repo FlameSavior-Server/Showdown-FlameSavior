@@ -141,6 +141,7 @@ var cmds = {
 	gl: 'guess',
 	g: 'guess',
 	guess: function(target, room, user) {
+		if (!this.canTalk()) return;
 		if(room.id === 'Catroom') {
 				return this.sendReply('|html|Please play this in another room; it\'s too spammy for Catroom.');
 		}
@@ -191,6 +192,7 @@ var cmds = {
 
 	gw: 'guessword',
 	guessword: function(target, room, user) {
+		if (!this.canTalk()) return;
 		if(room.id === 'Catroom') {
 				return this.sendReply('|html|Please play this in another room; it\'s too spammy for Catroom.');
 		}

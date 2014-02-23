@@ -1073,7 +1073,7 @@ var commands = exports.commands = {
 	},
 	empoleonxv: function(target, room, user) {
 	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><img src="http://img.pokemondb.net/sprites/black-white/anim/normal/empoleon.gif">      <img src="http://img.pokemondb.net/sprites/black-white/anim/normal/empoleon.gif">      <img src="http://img.pokemondb.net/sprites/black-white/anim/normal/empoleon.gif"><br><font color="darkblue"><font size="2"><b>Empoleon XV</b><font color="darkblue"><font size="2"> - Hug a penguin and be happy.<br />');
+	this.sendReplyBox('<center><img src="http://i.imgur.com/IHd5yRT.gif"><br><img src="http://i.imgur.com/sfQsRlH.gif"><br><b><font color="33FFFF"><big>Smiling and Waving can\'t make you more cute than me!');
 	},
 	foe: function(target, room, user) {
 		if (!this.canBroadcast()) return;

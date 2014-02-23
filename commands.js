@@ -847,6 +847,9 @@ var commands = exports.commands = {
 	tierpoll: function(room, user, cmd){
                 return this.parse('/poll Next Tournament Tier?, cc1v1, OU, randombat, ubers, hackmons, mono, uubeta, nu, lc, reg1v1, custom, other');	
 	},
+	hc: function(room, user, cmd){
+                return this.parse('/hotpatch chat');
+	},
 	def: function(target, room, user){
 	 if(!target) return this.sendReply('/def [word] - Will bring you to a search to define the targeted word.');
                 return this.parse('[[define '+target+']]');

@@ -1079,6 +1079,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.jeboavatars.com/images/avatars/192809169066sunsetbeach.jpg"><br><b><font size="2">Orange Poptarts</b><font size="2"> - "Pop, who so you" ~ ALittlePaw<br />');
 	},
+	jack: 'jackzero',
 	jackzero: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><font size="4" color="blue">JackZero<br></font><img src="http://i.imgur.com/zNuDheU.png" width="200" height="200"><br>I prefer the freedom of being hated to the shackles of expectaional love.');

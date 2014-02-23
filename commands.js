@@ -95,6 +95,10 @@ var commands = exports.commands = {
 		if(!target) return this.sendReply('/dropkick needs a target.');
 		return this.parse('/me dropkicks ' + target + ' across the Pokémon Stadium!');
 	},
+	fart: function(target, room, user){
+		if(!target) return this.sendReply('/fart needs a target.');
+		return this.parse('/me farts on ' + target + '\'s face!');
+	},
 	poke: function(target, room, user){
 		if(!target) return this.sendReply('/poke needs a target.');
 		return this.parse('/me pokes ' + target + '.');

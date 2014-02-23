@@ -2701,7 +2701,8 @@ var commands = exports.commands = {
 		Rooms.global.send('|refresh|');
 		this.logEntry(user.name + ' used /refreshpage');
 	},
-
+	
+	us: 'updateserver',
 	gitpull: 'updateserver',
 	updateserver: function(target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {

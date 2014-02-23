@@ -973,11 +973,6 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font size="6" face="Matura MT Script Capitals" color="darkblue"><b>ArchBisharp</b><br><img src="http://fc07.deviantart.net/fs70/f/2012/294/f/c/bisharp_by_xdarkblaze-d5ijnsf.gif" width="350" hieght="350"><br></font>Ruling you with an Iron Head.');
 	},
-	briyella: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/EZAEZHG.png"><br><font color="darkpink"><font size="2"><b>Goddess Briyella</b><font color="darkpink"><font size="2"> - The all mighty goddess of Gold. o3o<br />');
-	},
-
 	chimplup: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b>Chimplup</b> - The almighty ruler of chimchars and piplups alike, also likes pie.<br />');
@@ -1083,6 +1078,10 @@ var commands = exports.commands = {
 	orangepoptarts: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.jeboavatars.com/images/avatars/192809169066sunsetbeach.jpg"><br><b><font size="2">Orange Poptarts</b><font size="2"> - "Pop, who so you" ~ ALittlePaw<br />');
+	},
+	jackzero: function(target, room, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><font size="4" color="blue">JackZero<br></font><img src="http://i.imgur.com/zNuDheU.png" width="300" height="300"><br>I prefer the freedom of being hated to the shackles of expectaional love.');
 	},
 	wd: 'windoge',
 	windoge: function(target, room, user) {

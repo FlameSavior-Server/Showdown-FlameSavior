@@ -855,7 +855,11 @@ var commands = exports.commands = {
 			if(!this.canBroadcast()|| !user.can('lock')) return this.sendReply('/authlist - Access Denied.');
                 var auth = fs.readFileSync('config/usergroups.csv','utf8');
                 return user.send('|popup|'+auth);
-    },
+	},
+	css: function(target, room, user, connection) {
+                var css = fs.readFileSync('config/custom.css','utf8');
+                return user.send('|popup|'+css);
+	},
 	pbl: 'pbanlist',
 	permabanlist: 'pbanlist',
 	pbanlist: function(target, room, user, connection) {

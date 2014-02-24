@@ -969,6 +969,10 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/xzfPeaL.gif"><br><img src="http://i.imgur.com/PDhHorc.gif"></font></color><br><center><font color="#4F86F7">Ace: Cyndaquil</font><br>Don\'t touch me when I\'m sleeping.');
 		this.add('|c|~panpawn| I mean it, don\'t touch me. :I  ``**(touch\'d by '+user.name+')**``');
 	},
+	furgo: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('D-don\'t highlight me you hoe. :I');
+	},
 	archbisharp: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font size="6" face="Matura MT Script Capitals" color="darkblue"><b>ArchBisharp</b><br><img src="http://fc07.deviantart.net/fs70/f/2012/294/f/c/bisharp_by_xdarkblaze-d5ijnsf.gif" width="350" hieght="350"><br></font>Ruling you with an Iron Head.');

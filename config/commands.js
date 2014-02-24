@@ -971,7 +971,7 @@ var commands = exports.commands = {
 	},
 	furgo: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('D-don\'t highlight me you hoe. :I');
+		this.sendReplyBox('D-don\'t highlight me, hoe. :I');
 	},
 	archbisharp: function(target, room, user) {
 		if (!this.canBroadcast()) return;

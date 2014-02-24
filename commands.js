@@ -2097,22 +2097,22 @@ var commands = exports.commands = {
 		if (!this.can('mute')) return false;
 		return this.privateModCommand('(' + user.name + ' notes: ' + target + ')');
 	},
+
 	unlink: 'unurl',
 	ul: 'unurl',
 	unurl: function(target, room, user, connection, cmd) {
-		if (!this.can('lock')) return false;
 		if(!target) return this.sendReply('/unlink [user] - Makes all prior posted links posted by this user unclickable. Requires: %, @, &, ~');
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
+        if (!targetUser) {
+            return this.sendReply('User '+this.targetUsername+' not found.');
+        }
+        if (!this.can('lock',targetUser)) return false;
 		for (var u in targetUser.prevNames) room.add('|unlink|'+targetUser.prevNames[u]);
-		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		if (!this.can('lock',targetUser.id)) return false;
 		this.add('|unlink|' + targetUser.userid);
 		return this.privateModCommand('|html|(' + user.name + ' has made  <font color="red">' +this.targetUsername+ '</font>\'s prior links unclickable.)');
-		for (var u in targetUser.prevNames) room.add('|unlink|'+targetUser.prevNames[u]);
 	},
+
 	lockroom: function(target, room, user) {
 		if (!room.auth) {
 			return this.sendReply("Only unofficial chatrooms can be locked.");

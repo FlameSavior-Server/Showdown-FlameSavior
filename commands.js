@@ -2108,7 +2108,7 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
-		if !this.can('lock',targetUser.id);
+		if (!this.can('lock',targetUser.id)) return false;
 		this.add('|unlink|' + targetUser.userid);
 		return this.privateModCommand('|html|(' + user.name + ' has made  <font color="red">' +this.targetUsername+ '</font>\'s prior links unclickable.)');
 		for (var u in targetUser.prevNames) room.add('|unlink|'+targetUser.prevNames[u]);

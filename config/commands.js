@@ -1397,7 +1397,7 @@ var commands = exports.commands = {
 			matched = true;
 			buffer += 'A user is autoconfirmed when they have won at least one rated battle and has been registered for a week or longer.<br />';
 		}
-		if (target === 'all' || target === 'league' || target === 'ac') {
+		if (target === 'all' || target === 'league') {
 			matched = true;
 			buffer += 'Welcome to Gold!  So, you\'re interested in making or moving a league here?  If so, read <a href="http://goldserver.weebly.com/making-a-league.html">this</a> and write down your answers on a <a href="http://pastebin.com">Pastebin</a> and PM it to an admin.  Good luck!<br />';
 		}

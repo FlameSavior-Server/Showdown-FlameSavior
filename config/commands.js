@@ -980,7 +980,7 @@ var commands = exports.commands = {
 	dsg:'darkshinygiratina',
 	darkshinygiratina: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="4" color="blue" face="arial">DarkShinyGiratina</font><br><img src="http://i.imgur.com/sBIqMv8.gif">');
+		this.sendReplyBox('<center><font size="4" color="blue" face="arial">DarkShinyGiratina</font><br><img src="http://i.imgur.com/sBIqMv8.gif"><br>I\'m gonna use Shadow Force on you!');
 	},
 	archbisharp: function(target, room, user) {
 		if (!this.canBroadcast()) return;

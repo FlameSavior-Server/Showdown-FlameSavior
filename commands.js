@@ -2112,10 +2112,14 @@ var commands = exports.commands = {
 		this.add('|unlink|' + targetUser.userid);
 		return this.privateModCommand('|html|(' + user.name + ' has made  <font color="red">' +this.targetUsername+ '</font>\'s prior links unclickable.)');
 	},
-
+	modchatall: function(target, room, user){
+	    if(!target) return this.sendReply('/modchatall [ac, +, %, @, &, ~].  Sets modchat in every room. Requires eval access.');
+		return this.parse('>> for (var u in Rooms.rooms) { Rooms.rooms[u].modchat = ''+target+''; }');
+                return this.sendReply("Modchat was set to '+target+' in all rooms.");
+	},
 	lockroom: function(target, room, user) {
 		if (!room.auth) {
-			return this.sendReply("Only unofficial chatrooms can be locked.");
+			c
 		}
 		if (!room.auth[user.userid] === '#' && user.group != '~') {
 			return this.sendReply('/lockroom - Access denied.');

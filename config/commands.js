@@ -973,6 +973,10 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('D-don\'t highlight me, hoe. :I');
 	},
+	mikado: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/oS2jnht.gif"><br><img src="http://i.imgur.com/oKEA0Om.png"');
+	},
 	archbisharp: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font size="6" face="Matura MT Script Capitals" color="darkblue"><b>ArchBisharp</b><br><img src="http://fc07.deviantart.net/fs70/f/2012/294/f/c/bisharp_by_xdarkblaze-d5ijnsf.gif" width="350" hieght="350"><br></font>Ruling you with an Iron Head.');

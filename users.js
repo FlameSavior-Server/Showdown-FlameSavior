@@ -33,6 +33,14 @@ var bannedIps = {};
 var lockedIps = {};
 
 var ipbans = fs.createWriteStream("config/ipbans.txt", {flags: "a"}); // do not remove this line
+
+try {
+	exports.bannedMessages = fs.readFileSync('config/bannedmessages.txt','utf8');
+} catch(e) {
+	exports.bannedMessages = '';
+	fs.writeFileSync('config/bannedmessages.txt','','utf8');
+}
+exports.bannedMessages = exports.bannedMessages.split('\n');
 	
 /**
  * Get a user.
@@ -1289,6 +1297,22 @@ var User = (function () {
 			room.chat(this, message, connection);
 			ResourceMonitor.activeIp = null;
 			return false; // but end the loop here
+		}
+
+		if (!room.isPrivate) {
+			for (var x in Users.bannedMessages) {
+				if (message.indexOf(Users.bannedMessages[x]) > -1 && Users.bannedMessages[x] != '' && message.substr(0,1) != '/') {
+					connection.user.lock();
+					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake please contact a staff member.');
+					//room.logModCommand(connection.user.name+' was automatically locked by the server for saying "'+Users.bannedMessages[x]+'"');
+					for (var u in Users.users) {
+						if (Users.users[u].group == '~' || Users.users[u].group == '&') {
+							Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+connection.user.name+' has been automatically locked for sending a message containing a banned word. Room: '+room.id+' Message: ' + message);
+						}
+					}
+					return false;
+				}
+			}
 		}
 
 		if (this.chatQueueTimeout) {

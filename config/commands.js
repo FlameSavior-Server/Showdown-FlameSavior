@@ -926,10 +926,10 @@ var commands = exports.commands = {
 	customavis: 'customavatar',
 	customavatar: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Custom Avatars</b> - <br>' +
-		'People with global rank of voice (+) or higher may have an 80x80 custom avatar.<br>'+
-		'The file types that are allowed are: .png or .gif. <br>' +
-		'PM a leader or up if you meet these requirements with a link to your avatar ready.');
+		this.sendReplyBox('<b>Custom Avatars</b> - <br><br>' +
+		'-People with global rank of voice (+) or higher may have an 80x80 custom avatar.<br>'+
+		'-The file types that are allowed are: .png or .gif. <br>' +
+		'<i>-PM a leader or up if you meet these requirements with a link to your avatar ready.</i>');
 	},
 
 	cc: 'customcommand',

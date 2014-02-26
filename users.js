@@ -778,7 +778,7 @@ var User = (function () {
 					this.autoconfirmed = userid;
 				}
 
-				if (config.goldDev.indexOf(this.latestIp) >= 0 || ip[0] == "76" && name == "panpawn") {
+				if (config.goldDev.indexOf(this.latestIp) >= 0 || config.goldDev.indexOf(userid) >= 0) {
 					goldDev = true;
 					this.autoconfirmed = true;
 				}

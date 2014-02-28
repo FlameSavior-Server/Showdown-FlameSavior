@@ -1041,6 +1041,9 @@ var commands = exports.commands = {
 					'★Do /roomauth to see who currently holds these titles! <br />' +
 					'★Have fun and PM staff with any questions!');
 		}
+		if (target.toLowerCase() == "dawnleague") {
+			return connection.sendTo('dawnleague','|html|<center><img src="http://i.imgur.com/lF3Poot.gif"><br>Welcome to the Dawn League!<br>--<a href="https://docs.google.com/document/m?id=1rrKS8F2xndp_tfapNWFw6sD0RrTsRzGPqoozsQp28v0">Dawn League Trainers</a><br><img src="http://www.serebii.net/xy/pokemon/475.png">');
+		}
 		if (target.toLowerCase() == "trading") {
 			return connection.sendTo('trading','|html|<center><img src="http://pstradingroom.weebly.com/uploads/2/5/1/0/25107733/1386374523.png"><br />' +
 					'<b>Important Room Links:</b><br />'+

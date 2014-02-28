@@ -1303,7 +1303,7 @@ var User = (function () {
 			for (var x in Users.bannedMessages) {
 				if (message.indexOf(Users.bannedMessages[x]) > -1 && Users.bannedMessages[x] != '' && message.substr(0,1) != '/') {
 					connection.user.lock();
-					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake please contact a staff member.');
+					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake, please contact a staff member.');
 					//room.logModCommand(connection.user.name+' was automatically locked by the server for saying "'+Users.bannedMessages[x]+'"');
 					for (var u in Users.users) {
 						if (Users.users[u].group == '~' || Users.users[u].group == '&') {

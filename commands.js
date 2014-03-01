@@ -848,7 +848,7 @@ var commands = exports.commands = {
 	},
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
-                return this.parse('/poll Next Tournament Tier?, cc1v1, OU, randombat, ubers, hackmons, mono, uubeta, nu, lc, reg1v1, custom,randomdoubles, other');	
+                return this.parse('/poll Next Tournament Tier?, cc1v1, OU, randombat, ubers, hackmons, oumono, uubeta, nu, lc, reg1v1, custom,randomdoubles, other');	
 	},
 	hc: function(room, user, cmd){
                 return this.parse('/hotpatch chat');

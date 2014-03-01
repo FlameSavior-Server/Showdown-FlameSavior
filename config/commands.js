@@ -190,6 +190,9 @@ var commands = exports.commands = {
 		if (targetUser.goldDev) {
 			this.sendReply('(Gold Development Staff)');
 		}
+		if (targetUser.vipUser) {
+			this.sendReply('(<font color="gold">VIP</font> User)');
+		}
 		if (targetUser.isSysop) {
 			this.sendReply('(Pok\xE9mon Showdown System Operator)');
 		}

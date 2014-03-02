@@ -974,7 +974,7 @@ var commands = exports.commands = {
 	},
 	furgo: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/0qJzTgP.gif"><br><font color="red">Ace:</font><br><img src="http://amethyst.xiaotai.org:2000/avatars/furgo.gif"><br>When I\'m sleeping, do not poke me. :I');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/0qJzTgP.gif" width="25%"><br><font color="red">Ace:</font><br><img src="http://amethyst.xiaotai.org:2000/avatars/furgo.gif"><br>When I\'m sleeping, do not poke me. :I');
 	},
 	blazingflareon: 'bf',
 	bf: function(target, room, user) {

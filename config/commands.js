@@ -976,6 +976,11 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/0qJzTgP.gif"><br><font color="red">Ace:</font><br><img src="http://amethyst.xiaotai.org:2000/avatars/furgo.gif"><br>When I\'m sleeping, do not poke me. :I');
 	},
+	blazingflareon: 'bf',
+	bf: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/h3ZTk9u.gif"><br><img src="http://fc08.deviantart.net/fs71/i/2012/251/3/f/flareon_coloured_lineart_by_noel_tf-d5e166e.jpg" width="100%"><br>♥I\'m not your boyfriend♥');
+	},
 	mikado: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/oS2jnht.gif"><br><img src="http://i.imgur.com/oKEA0Om.png"');

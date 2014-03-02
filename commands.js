@@ -1211,6 +1211,16 @@ var commands = exports.commands = {
 		}
 	},
 	
+	pas: 'pmallstaff',
+	pmallstaff: function(target, room, user) {
+		if (!target) return this.parse('/pmallstaff [message] - Sends a PM to every user in a room.');
+		if (!this.can('hotpatch')) return false;
+
+		for (var u in Users.users) { if (Users.users[u].isStaff) {
+		Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target); } }
+		}
+	},
+	
 	afk: 'away',
 	away: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;

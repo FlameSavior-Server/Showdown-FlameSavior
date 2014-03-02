@@ -1690,7 +1690,7 @@ var commands = exports.commands = {
 		}
 		spamroom[targetUser] = true;
 		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was added to the spamroom list.</b>');
-		return this.privateModCommand('|html|<font color="red">'+ targetUser + '</font> was added to the spamroom list by ' + user.name +'.');
+		return this.privateModCommand('|html|<font color="red">'+ targetUser + '</font> was added to the <button name="joinRoom" value="spamroom" target="_blank">SpamRoom</button> list by ' + user.name +'.');
 		this.logModCommand(targetUser + ' was added to spamroom by ' + user.name);
 		return this.sendReply(this.targetUsername + ' was successfully added to the spamroom list.');
 	},

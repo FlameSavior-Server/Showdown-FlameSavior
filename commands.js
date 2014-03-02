@@ -2022,7 +2022,7 @@ var commands = exports.commands = {
 			this.sendReply('The private room \'lobby\' was created.');
 		}
 		for(var u in Users.users)
-			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2)
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0)
 				Users.users[u].joinRoom('lobby');
 		return this.sendReply('Erryone tis\' in the lobby, m8.');
 	},

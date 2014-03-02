@@ -1147,7 +1147,7 @@ var commands = exports.commands = {
 				'- <a href="https://github.com/panpawn/Pokemon-Showdown">Gold Source Code</a>');
 	},
 	events: 'activities',
-	activies: function(target, room, user) {
+	activities: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font size="3" face="comic sans ms">Gold Activities:</font><font face="comic sans ms"></center></br>' +
 				'★ <b>Tournaments</b> - Here on Gold, we have a tournaments script that allows users to partake in several different tiers.  For a list of tour commands do /th.  Ask in the lobby for a voice (+) or up to start one of these if you\'re interesrted!<br>' +

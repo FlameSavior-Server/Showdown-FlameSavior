@@ -1071,10 +1071,6 @@ var commands = exports.commands = {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><font size="orange"><font size="2"><b>Rohansound</b><font size="orange"><font size="2"> - The master of the Snivy!<br />');
 	},
-	energ218: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.mmii.info/icons/flymonkey102/RickAstley.gif"><font size="2"><font color="orange"><b>EnerG218</b><font size="2"><font color="orange"> - tis meh command :3   <img src="http://www.mmii.info/icons/flymonkey102/RickAstley.gif"><br />');
-	},
 	alittlepaw: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://fc00.deviantart.net/fs71/f/2013/025/5/d/wolf_dance_by_windwolf13-d5sq93d.gif"><br><font color="green"><font size="3"><b>ALittlePaw</b> - Fenrir would be proud.<br />');
@@ -1149,6 +1145,18 @@ var commands = exports.commands = {
 				'- <a href="https://github.com/Zarel/Pokemon-Showdown" target="_blank">Pokemon Showdown Source Code / How to create a PS server</a><br />'+
 				'- <a href="https://github.com/Zarel/Pokemon-Showdown-Client" target="_blank">Client Source Code</a><br />'+
 				'- <a href="https://github.com/panpawn/Pokemon-Showdown">Gold Source Code</a>');
+	},
+	events: 'activities',
+	activies: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size="3" face="comic sans ms">Gold Activities:</font><font face="comic sans ms"></center></br>' +
+				'★ <b>Tournaments</b> - Here on Gold, we have a tournaments script that allows users to partake in several different tiers.  For a list of tour commands do /th.  Ask in the lobby for a voice (+) or up to start one of these if you\'re interesrted!<br>' +
+				'★ <b>Hangmans</b> - We have a hangans script that allows users to  partake in a "hangmans" sort of a game.  For a list of hangmans commands, do /hh.  As a voice (+) or up in the lobby to start one of these if interested.<br>' +
+				'★ <b>Leagues</b> - If you click the "join room page" to the upper right (+), it will display a list of rooms we have.  Several of these rooms are 3rd party leagues of Gold; join them to learn more about each one!<br>' +
+				'★ <b>Battle</b> - By all means, invite your friends on here so that you can battle with each other!  Here on Gold, we are always up to date on our formats, so we\'re a great place to battle on!<br>' +
+				'★ <b>Chat</b> - Gold is full of great people in it\'s community and we\'d love to have you be apart of it!<br>' +
+				'★ <b>Learn</b> - Are you new to Pokemon?  If so, then feel FREE to ask the lobby any questions you might have!<br>' +
+				'<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
 	},
 	introduction: 'intro',
 	intro: function(target, room, user) {

@@ -419,7 +419,8 @@ var commands = exports.commands = {
 	logout: function(target, room, user) {
 		user.resetName();
 	},
-		pban: 'permaban',
+	pb: 'permaban',
+	pban: 'permaban',
         permban: 'permaban',
         permaban: function(target, room, user) {
                 if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');

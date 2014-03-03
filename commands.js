@@ -1217,7 +1217,7 @@ var commands = exports.commands = {
 		if (!this.can('hotpatch')) return false;
 
 		for (var u in Users.users) { if (Users.users[u].isStaff) {
-		Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target); } }
+		Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target); } 
 		}
 	},
 	

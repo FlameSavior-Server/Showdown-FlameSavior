@@ -851,6 +851,10 @@ var commands = exports.commands = {
 	tierpoll: function(room, user, cmd){
                 return this.parse('/poll Next Tournament Tier?, cc1v1, OU, randombat, ubers, hackmons, oumono, uubeta, nu, lc, reg1v1, custom,randomdoubles, other');	
 	},
+	hv: 'helpvotes',
+	helpvotes: function(room, user, cmd){
+                return this.parse('/wall Remember to **vote** even if you don\'t want to battle; that way you\'re still voting for what tier battles you want to watch!');	
+	},
 	hc: function(room, user, cmd){
                 return this.parse('/hotpatch chat');
 	},

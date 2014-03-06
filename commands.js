@@ -424,11 +424,11 @@ var commands = exports.commands = {
                 }
                 if (target === 'orangepoptarts' || target === 'op') {
                         matched = true;
-                        this.sendReplyBox('<b>Garazan</b>:   '+comcun+'');
+                        this.sendReplyBox('<b>Orange Poptarts</b>:   '+comcun+'');
                 }
                 if (target === 'garazan') {
                         matched = true;
-                        this.sendReplyBox('<b>Orange Poptarts</b>:   '+comcun+'');
+                        this.sendReplyBox('<b>Garazan</b>:   '+comcun+'');
                 }
                 if (target === 'psychological') {
                         matched = true;

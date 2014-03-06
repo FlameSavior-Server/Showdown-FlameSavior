@@ -470,9 +470,8 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+vip+'');
                 }
-                if (!target) {
-                        this.sendReply('/badge [user] - Displays a user\'s badges.  Do /badge list for a list of badges.');
-                }
+                if (!target) target = user.userid
+             	}
                 if (!matched) {
                         this.sendReply('User "'+target+'" does not have any badges. Check your spelling?');
                 }

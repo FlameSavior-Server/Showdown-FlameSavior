@@ -409,13 +409,14 @@ var commands = exports.commands = {
                 var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Developer">';
                 var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
                 var comcun = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="Community Contributor">';
+                var leader = '<img src="http://www.smogon.com/media/forums/images/badges/aop.png" title="Server Leader">';
                 var mod = '<img src="http://www.smogon.com/media/forums/images/badges/pyramid_king.png" title="Exceptional Staff Member">';
                 var league ='<img src="http://www.smogon.com/media/forums/images/badges/forumsmod.png" title="Successful League Owner">';
                 var champ ='<img src="http://www.smogon.com/media/forums/images/badges/forumadmin_alum.png" title="Goodra League Champion">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
                 if (target === 'list') {
                         matched = true;
-                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+league+'    '+champ+'    '+vip+' <br>--Hover over them to see the meaning of each.');
+                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+vip+' <br>--Hover over them to see the meaning of each.');
                 }
                 if (target === 'shaymin') {
                         matched = true;
@@ -459,7 +460,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'jackzero') {
                         matched = true;
-                        this.sendReplyBox('<b>JackZero</b>:    '+comcun+'    '+mod+'');
+                        this.sendReplyBox('<b>JackZero</b>:    '+comcun+'    '+mod+'    '+leader+'');
                 }
                 if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;

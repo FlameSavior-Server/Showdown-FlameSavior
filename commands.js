@@ -419,7 +419,8 @@ var commands = exports.commands = {
 	logout: function(target, room, user) {
 		user.resetName();
 	},
-		pban: 'permaban',
+	pb: 'permaban',
+	pban: 'permaban',
         permban: 'permaban',
         permaban: function(target, room, user) {
                 if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
@@ -849,6 +850,10 @@ var commands = exports.commands = {
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
                 return this.parse('/poll Next Tournament Tier?, cc1v1, OU, randombat, ubers, hackmons, oumono, uubeta, nu, lc, reg1v1, custom,randomdoubles, other');	
+	},
+	hv: 'helpvotes',
+	helpvotes: function(room, user, cmd){
+                return this.parse('/wall Remember to **vote** even if you don\'t want to battle; that way you\'re still voting for what tier battles you want to watch!');	
 	},
 	hc: function(room, user, cmd){
                 return this.parse('/hotpatch chat');

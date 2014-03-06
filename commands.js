@@ -410,22 +410,31 @@ var commands = exports.commands = {
                 var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
                 var comcun = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="Community Contributor">';
                 var mod = '<img src="http://www.smogon.com/media/forums/images/badges/pyramid_king.png" title="Exceptional Staff Member">';
+                var league ='<img src="http://www.smogon.com/media/forums/images/badges/forumsmod.png" title="Successful League Owner">';
                 
                 if (target === 'list') {
                         matched = true;
-                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+' <br>--Hover over them to see the meaning of each');
+                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+league+' <br>--Hover over them to see the meaning of each');
                 }
                 if (target === 'shaymin') {
                         matched = true;
                         this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'');
                 }
+                if (target === 'mushy') {
+                        matched = true;
+                        this.sendReplyBox('<b>Mushy</b>:   '+comcun+'');
+                }
                 if (target === 'kupo') {
                         matched = true;
                         this.sendReplyBox('<b>kupo</b>:   '+admin+'');
                 }
-                if (target === 'mushy') {
+                if (target === 'champcoolwhip') {
                         matched = true;
-                        this.sendReplyBox('<b>Mushy</b>:   '+comcun+'');
+                        this.sendReplyBox('<b>ChampCoolWhip</b>:   '+league+'');
+                }
+                if (target === 'dawnadminmidst') {
+                        matched = true;
+                        this.sendReplyBox('<b>Dawn Admin Midst</b>:   '+league+'');
                 }
                 if (target === 'jackzero') {
                         matched = true;

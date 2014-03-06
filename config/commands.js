@@ -1873,13 +1873,13 @@ var commands = exports.commands = {
                 'I\'m sorry friend but stall is all part of the game.</center>');
     },
     
-    theyellowace: function(target, room, user) {
+    championyellow: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/dXbBAaO.gif">' +
-                '<img src="http://i.imgur.com/6V1u4y3.gif" width="320">' +
+                '<img src="http://i.imgur.com/01XHL7i.gif" width="320">' +
                 '<img src="http://i.imgur.com/usX9EN2.gif" height="120" width="160"><br />' +
                 '<b>Ace:</b> Pikachu<br />' +
-                'Haters never bothered me anyway. So stfu or else I will electrocute you with my Pikachu.</center>');
+                'Hugs. It\'s supper effective.</center>');
     },
     
     brittany: function(target, room, user) {

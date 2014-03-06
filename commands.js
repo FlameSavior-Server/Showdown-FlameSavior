@@ -1029,14 +1029,6 @@ var commands = exports.commands = {
 					'<b>6.</b> Have someone you wish to nominate for a rank? Do so here! State who and your reason why! <br />' +
 					'<b>7.</b> <button name="joinRoom" value="spamroom">Spam Room</button>');
 		}
-		if (target.toLowerCase() == "goodraleague") {
-			return connection.sendTo('goodraleague','|html|<font color="#4F86F7"><font size="2"><b><center>Welcome to the Goodra League\'s Room!</font></font color></b></center>' +
-					 '★The league currently consists of 3 Gym Leaders<br /> ' +
-					 '★Currently the Champion position is empty.<br/>' + 
-					 '★Be the first to complete the league, and the spot is yours!<br />' +
-					 '★The champion gets a FREE trainer card, custom avatar and global voice!<br />' +
-					 '★The Goodra League information can be found <a href="http://goldserver.weebly.com/league.html" >here</a>.<br />');
-		}
 		if (target.toLowerCase() == "wwe") {
 			return connection.sendTo('wwe','|html|<font color="#AA0000"><font size="2"><b><center>Welcome to WWE!</font></font color></b></center>' +
 					'★This is a room to talk about all things WWE! <br />' +

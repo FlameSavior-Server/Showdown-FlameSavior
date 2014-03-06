@@ -410,6 +410,7 @@ var commands = exports.commands = {
                 var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
                 var comcun = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="Community Contributor">';
                 var mod = '<img src="http://www.smogon.com/media/forums/images/badges/pyramid_king.png" title="Exceptional Staff Member">';
+                
                 if (target === 'list') {
                         matched = true;
                         this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+' <br>--Hover over them to see the meaning of each');
@@ -421,6 +422,10 @@ var commands = exports.commands = {
                 if (target === 'kupo') {
                         matched = true;
                         this.sendReplyBox('<b>kupo</b>:   '+admin+'');
+                }
+                if (target === 'mushy') {
+                        matched = true;
+                        this.sendReplyBox('<b>Mushy</b>:   '+comcun+'');
                 }
                 if (target === 'jackzero') {
                         matched = true;

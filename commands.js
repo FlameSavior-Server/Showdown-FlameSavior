@@ -411,10 +411,10 @@ var commands = exports.commands = {
                 var comcun = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="Community Contributor">';
                 var mod = '<img src="http://www.smogon.com/media/forums/images/badges/pyramid_king.png" title="Exceptional Staff Member">';
                 var league ='<img src="http://www.smogon.com/media/forums/images/badges/forumsmod.png" title="Successful League Owner">';
-                
+                var champ ='<img src="http://www.smogon.com/media/forums/images/badges/forumadmin_alum.png" title="Gooda League Champion">';
                 if (target === 'list') {
                         matched = true;
-                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+league+' <br>--Hover over them to see the meaning of each');
+                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+league+'    '+champ+' <br>--Hover over them to see the meaning of each');
                 }
                 if (target === 'shaymin') {
                         matched = true;

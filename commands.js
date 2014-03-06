@@ -406,14 +406,24 @@ var commands = exports.commands = {
                 target = target.trim();
                 var matched = false;
                 var admin = '<img src="http://www.smogon.com/media/forums/images/badges/arcade_star.png" title="Server Administrator">';
-                var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Develper">';
+                var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Developer">';
                 var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
+                var comcun = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="Community Contributor">';
+                var mod = '<img src="http://www.smogon.com/media/forums/images/badges/pyramid_king.png" title="Exceptional Staff Member">';
+                if (target === 'list') {
+                        matched = true;
+                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'');
+                }
+                if (target === 'shaymin') {
+                        matched = true;
+                        this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'');
+                }
                 if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;
-                        this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'');
+                        this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'');
                 }
                 if (!target) {
-                        this.sendReply('/badge [user] - Displays a user\'s badges.');
+                        this.sendReply('/badge [user] - Displays a user\'s badges.  Do /badge list for a list of badges.');
                 }
                 if (!matched) {
                         this.sendReply('User "'+target+'" does not have any badges. Check your spelling?');

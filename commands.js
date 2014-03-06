@@ -425,6 +425,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Garazan</b>:   '+comcun+'');
                 }
+                if (target === 'psychological') {
+                        matched = true;
+                        this.sendReplyBox('<b>Psychological</b>:   '+mod+'');
+                }
                  if (target === 'mushy') {
                         matched = true;
                         this.sendReplyBox('<b>Mushy</b>:   '+comcun+'');

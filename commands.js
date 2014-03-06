@@ -424,6 +424,18 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Mushy</b>:   '+comcun+'');
                 }
+                if (target === 'lazerbeam') {
+                        matched = true;
+                        this.sendReplyBox('<b>lazerbeam</b>:   '+comcun+'');
+                }
+                if (target === 'jd') {
+                        matched = true;
+                        this.sendReplyBox('<b>jd</b>:   '+admin+'    '+dev+'');
+                }
+                if (target === 'blazingflareon') {
+                        matched = true;
+                        this.sendReplyBox('<b>BlazingFlareon</b>:   '+comcun+'');
+                }
                 if (target === 'kupo') {
                         matched = true;
                         this.sendReplyBox('<b>kupo</b>:   '+admin+'');

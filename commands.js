@@ -191,7 +191,7 @@ var commands = exports.commands = {
 	/*********************************************************
     * Nature Commands                                  
     *********************************************************/
-		nature: 'n',
+	nature: 'n',
         n: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 target = target.toLowerCase();
@@ -355,8 +355,9 @@ var commands = exports.commands = {
                 '/getcode (gc) - Sends you a popup of all of the registered user\'s Friend Codes.<br />' +
                 '<i>--Any questions, PM papew!</i>');
                 },
+             
                 
-		friendcode: 'fc',
+	friendcode: 'fc',
         fc: function(target, room, user, connection) {
                 if (!target) {
                         return this.sendReply("Enter in your friend code. Make sure it's in the format: xxxx-xxxx-xxxx or xxxx xxxx xxxx or xxxxxxxxxxxx.");
@@ -397,6 +398,23 @@ var commands = exports.commands = {
                 }
                 code.write('\n'+user.name+': '+studiouser);
                 return this.sendReply(+user+' has been added to bee able to join TheStudioAuth.');
+        },
+                badge: function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                target = target.toLowerCase();
+                target = target.trim();
+                var matched = false;
+                var admin = '<img src="http://www.smogon.com/media/forums/images/badges/arcade_star.png" title="Server Administrator">';
+                if (target === 'panpawn' || target === 'furgo') {
+                        matched = true;
+                        this.sendReplyBox('<b>Panpawn</b>: '+admin+'');
+                }
+                if (!target) {
+                        this.sendReply('/badge [user] - Displays a user\'s badges.');
+                }
+                if (!matched) {
+                        this.sendReply('User "'+target+'" does not have any badges. Check your spelling?');
+                }
         },
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');

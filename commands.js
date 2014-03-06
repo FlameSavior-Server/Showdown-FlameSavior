@@ -422,9 +422,13 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'   '+vip+'');
                 }
-                if (target === 'garazan') {
+                if (target === 'orangepoptarts' || target === 'op') {
                         matched = true;
                         this.sendReplyBox('<b>Garazan</b>:   '+comcun+'');
+                }
+                if (target === 'garazan') {
+                        matched = true;
+                        this.sendReplyBox('<b>Orange Poptarts</b>:   '+comcun+'');
                 }
                 if (target === 'psychological') {
                         matched = true;

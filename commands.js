@@ -402,6 +402,7 @@ var commands = exports.commands = {
 	      badges: 'badge',
              badge: function(target, room, user) {
                 if (!this.canBroadcast()) return;
+                if (target == '') target = user.userid;
                 target = target.toLowerCase();
                 target = target.trim();
                 var matched = false; 
@@ -414,8 +415,7 @@ var commands = exports.commands = {
                 var league ='<img src="http://www.smogon.com/media/forums/images/badges/forumsmod.png" title="Successful League Owner">';
                 var champ ='<img src="http://www.smogon.com/media/forums/images/badges/forumadmin_alum.png" title="Goodra League Champion">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
-                if (!target) target = user.name;
-             	}
+                
                 if (!matched) {
                         this.sendReply('User "'+target+'" does not have any badges. Check your spelling?');
                 }

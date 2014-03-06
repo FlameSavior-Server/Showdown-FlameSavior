@@ -412,11 +412,19 @@ var commands = exports.commands = {
                 var mod = '<img src="http://www.smogon.com/media/forums/images/badges/pyramid_king.png" title="Exceptional Staff Member">';
                 if (target === 'list') {
                         matched = true;
-                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'');
+                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+' <br>--Hover over them to see the meaning of each');
                 }
                 if (target === 'shaymin') {
                         matched = true;
                         this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'');
+                }
+                if (target === 'kupo') {
+                        matched = true;
+                        this.sendReplyBox('<b>kupo</b>:   '+admin+'');
+                }
+                if (target === 'jackzero') {
+                        matched = true;
+                        this.sendReplyBox('<b>JackZero</b>:    '+comcun+'    '+mod+'');
                 }
                 if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;

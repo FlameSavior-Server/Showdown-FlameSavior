@@ -399,15 +399,18 @@ var commands = exports.commands = {
                 code.write('\n'+user.name+': '+studiouser);
                 return this.sendReply(+user+' has been added to bee able to join TheStudioAuth.');
         },
-                badge: function(target, room, user) {
+	      badges: 'badge',
+             badge: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 target = target.toLowerCase();
                 target = target.trim();
                 var matched = false;
                 var admin = '<img src="http://www.smogon.com/media/forums/images/badges/arcade_star.png" title="Server Administrator">';
-                if (target === 'panpawn' || target === 'furgo') {
+                var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Develper">';
+                var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
+                if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;
-                        this.sendReplyBox('<b>Panpawn</b>: '+admin+'');
+                        this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'');
                 }
                 if (!target) {
                         this.sendReply('/badge [user] - Displays a user\'s badges.');

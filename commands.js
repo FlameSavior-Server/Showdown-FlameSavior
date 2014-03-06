@@ -404,8 +404,8 @@ var commands = exports.commands = {
                 if (!this.canBroadcast()) return;
                 target = target.toLowerCase();
                 target = target.trim();
-                var matched = false;
-                var admin = '<img src="http://www.smogon.com/media/forums/images/badges/arcade_star.png" title="Server Administrator">';
+                var matched = false; 
+                var admin = '<img src="http://www.smogon.com/media/forums/images/badges/frontier.png" title="Server Administrator">';
                 var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Developer">';
                 var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
                 var comcun = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="Community Contributor">';

@@ -405,16 +405,17 @@ var commands = exports.commands = {
                 target = target.toLowerCase();
                 target = target.trim();
                 var matched = false; 
-                var admin = '<img src="http://www.smogon.com/media/forums/images/badges/frontier.png" title="Server Administrator">';
+                var admin = '<img src="http://www.smogon.com/media/forums/images/badges/sop.png" title="Server Administrator">';
                 var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Developer">';
                 var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
                 var comcun = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="Community Contributor">';
                 var mod = '<img src="http://www.smogon.com/media/forums/images/badges/pyramid_king.png" title="Exceptional Staff Member">';
                 var league ='<img src="http://www.smogon.com/media/forums/images/badges/forumsmod.png" title="Successful League Owner">';
                 var champ ='<img src="http://www.smogon.com/media/forums/images/badges/forumadmin_alum.png" title="Goodra League Champion">';
+                var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
                 if (target === 'list') {
                         matched = true;
-                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+league+'    '+champ+' <br>--Hover over them to see the meaning of each.');
+                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+league+'    '+champ+'    '+vip+' <br>--Hover over them to see the meaning of each.');
                 }
                 if (target === 'shaymin') {
                         matched = true;
@@ -458,7 +459,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;
-                        this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'');
+                        this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+vip+'');
                 }
                 if (!target) {
                         this.sendReply('/badge [user] - Displays a user\'s badges.  Do /badge list for a list of badges.');

@@ -628,6 +628,8 @@ module.exports = (function () {
 	};
 
 	Tools.prototype.packTeam = function(team) {
+		if (!team) return '';
+
 		var buf = '';
 
 		for (var i=0; i<team.length; i++) {
@@ -638,8 +640,8 @@ module.exports = (function () {
 			buf += (set.name || set.species);
 
 			// species
-			var id = toId(set.species);
-			buf += '|' + (toId(set.name) === id ? '' : id);
+			var id = toId(set.species || set.name);
+			buf += '|' + (toId(set.name || set.species) === id ? '' : id);
 
 			// item
 			buf += '|' + toId(set.item);
@@ -700,6 +702,13 @@ module.exports = (function () {
 				buf += '|'
 			}
 
+			// level
+			if (set.level && set.level != 100) {
+				buf += '|'+set.level;
+			} else {
+				buf += '|'
+			}
+
 			// happiness
 			if (set.happiness !== undefined && set.happiness !== 255) {
 				buf += '|'+set.happiness;
@@ -712,6 +721,8 @@ module.exports = (function () {
 	};
 
 	Tools.prototype.fastUnpackTeam = function(buf) {
+		if (!buf) return null;
+
 		var team = [];
 		var i = 0, j = 0;
 
@@ -789,6 +800,11 @@ module.exports = (function () {
 			// shiny
 			j = buf.indexOf('|', i);
 			if (i !== j) set.shiny = true;
+			i = j+1;
+
+			// level
+			j = buf.indexOf('|', i);
+			if (i !== j) set.level = parseInt(buf.substring(i, j), 10);
 			i = j+1;
 
 			// happiness

@@ -420,7 +420,11 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'');
                 }
-                if (target === 'mushy') {
+                if (target === 'garazan') {
+                        matched = true;
+                        this.sendReplyBox('<b>Garazan</b>:   '+comcun+'');
+                }
+                 if (target === 'mushy') {
                         matched = true;
                         this.sendReplyBox('<b>Mushy</b>:   '+comcun+'');
                 }

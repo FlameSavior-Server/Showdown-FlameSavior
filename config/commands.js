@@ -1877,7 +1877,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/dXbBAaO.gif">' +
                 '<img src="http://i.imgur.com/01XHL7i.gif" width="320">' +
-                '<img src="http://i.imgur.com/usX9EN2.gif" height="120" width="160"><br />' +
+                '<img src="http://i.imgur.com/EESqNi3.gif?1" height="120" width="160"><br />' +
                 '<b>Ace:</b> Pikachu<br />' +
                 'Hugs. It\'s supper effective.</center>');
     },

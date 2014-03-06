@@ -1383,24 +1383,15 @@ var commands = exports.commands = {
     		'If you can\'t handle the heat gtfo.</center>');
     },
 
+    	
     	tailz: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/zKKoyFJ.gif" width="150">' +
-                '<img src="http://i.imgur.com/oV29Ffb.png">' +
-                '<img src="http://i.imgur.com/PLhgZxL.gif" width="125" height="125"><br />' +
+        	if (!this.canBroadcast()) return;
+        	this.sendReplyBox('<center><img src="http://i.imgur.com/uEG05D1.gif?1">' +
+                '<img src="http://i.imgur.com/l4ipWh1.png?1">' +
+                '<img src="http://i.imgur.com/megqUvx.png?1"><br />' +
                 '<b>Ace:</b> My &<br />' +
-                'I\'m Pretty shit</center>');
-    },
-	
-
-	orihime: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/zKKoyFJ.gif" width="150">' +
-    		'<img src="http://i.imgur.com/oV29Ffb.png">' +
-    		'<img src="http://i.imgur.com/PLhgZxL.gif" width="125" height="125"><br />' +
-    		'<b>Ace:</b> My &<br />' +
-    		'Sadistic? I don\'t mind you calling me that.</center>');
-    },
+                'I\'m Pretty Shit.</center>');
+    	},
 
 	kammi: function(target, room, user) {
 		if (!this.canBroadcast()) return;

@@ -469,7 +469,7 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>JackZero</b>:    '+comcun+'    '+mod+'    '+leader+'');
                 }
-                if (target === 'serperir') {
+                if (target === 'serperir' || target === 'serperiør' || target === 'rhan') {
                         matched = true;
                         this.sendReplyBox('<b>Serperiør</b>:    '+comcun+'    '+mod+'    '+leader+'');
                 }

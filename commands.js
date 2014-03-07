@@ -442,9 +442,9 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Cometstorm</b>:   '+comcun+'');
                 }
-                 if (target === 'pancakez') {
+                if (target === 'pancakez') {
                         matched = true;
-                        this.sendReplyBox('<b>pancakez</b>:   '+admin+'    '+comcun'    '+vip+'');
+                        this.sendReplyBox('<b>pancakez</b>:  ');
                 }
                 if (target === 'skymіn') {
                         matched = true;

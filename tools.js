@@ -650,12 +650,16 @@ module.exports = (function () {
 			var template = moddedTools.base.getTemplate(set.species || set.name);
 			var abilities = template.abilities;
 			id = toId(set.ability);
-			if (id == toId(abilities['0'])) {
-				buf += '|';
-			} else if (id === toId(abilities['1'])) {
-				buf += '|1';
-			} else if (id === toId(abilities['H'])) {
-				buf += '|H';
+			if (abilities) {
+				if (id == toId(abilities['0'])) {
+					buf += '|';
+				} else if (id === toId(abilities['1'])) {
+					buf += '|1';
+				} else if (id === toId(abilities['H'])) {
+					buf += '|H';
+				} else {
+					buf += '|' + id;
+				}
 			} else {
 				buf += '|' + id;
 			}
@@ -749,7 +753,7 @@ module.exports = (function () {
 			j = buf.indexOf('|', i);
 			var ability = buf.substring(i, j);
 			var template = moddedTools.base.getTemplate(set.species);
-			set.ability = (ability in {'':1, 0:1, 1:1, H:1} ? template.abilities[ability||'0'] : ability);
+			set.ability = (template.abilities && ability in {'':1, 0:1, 1:1, H:1} ? template.abilities[ability||'0'] : ability);
 			i = j+1;
 
 			// moves

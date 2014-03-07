@@ -492,7 +492,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'champcoolwhip') {
                         matched = true;
-                        this.sendReplyBox('<b>ChampCoolWhip</b>:   '+league+'');
+                        this.sendReplyBox('<b>ChampCoolWhip</b>:   '+league+'    '+comcun+'');
                 }
                 if (target === 'dawnadminmidst') {
                         matched = true;

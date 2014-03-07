@@ -1004,9 +1004,13 @@ var commands = exports.commands = {
 	},
 
 	psychological: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/QPmrbiM.png"><br><img src="http://i.imgur.com/TSEXdOm.gif"><br><font color="red"><blink>Ace: Dragonite</blink></font><br>Dun make me spank you<br />');
-	},
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/qAKC7fU.jpg" width="480" height="280">' +
+                '<img src="http://i.imgur.com/I5glkoS.png?1">' +
+                '<img src="http://i.imgur.com/TSEXdOm.gif" width="300">' +
+                '<img src="http://i.imgur.com/DgVckTr.png"><br />' +
+                'If it isn\'t logical, it\'s probably Psychological.</center>');
+    },
 
 	seed: function(target, room, user) {
 		if (!this.canBroadcast()) return;

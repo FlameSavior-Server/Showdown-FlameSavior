@@ -444,7 +444,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'pancakez') {
                         matched = true;
-                        this.sendReplyBox('<b>pancakez</b>:  ');
+                        this.sendReplyBox('<b>pancakez</b>:    '+admin+'    '+comcun+'    '+mod+'');
                 }
                 if (target === 'skymіn') {
                         matched = true;

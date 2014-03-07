@@ -1360,7 +1360,7 @@ var commands = exports.commands = {
 		}
 		if (buffer.length > 0) {
 			buffer = buffer.join(', ');
-		} else {	},
+		} else {	
 			buffer = 'This room has no auth.';
 		}
 		connection.popup(buffer);

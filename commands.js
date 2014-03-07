@@ -510,9 +510,7 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+vip+'');
                 }
-                if (!matched) {
-			this.sendReply('The user "'+target+'" does not have any badges.');
-		}
+               
                 
         },
 	avatar: function(target, room, user) {

@@ -423,7 +423,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'shaymin') {
                         matched = true;
-                        this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'   '+vip+'');
+                        this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'   '+vip+'  '+league+'');
                 }
                 if (target === 'orangepoptarts' || target === 'op') {
                         matched = true;
@@ -1360,7 +1360,7 @@ var commands = exports.commands = {
 		}
 		if (buffer.length > 0) {
 			buffer = buffer.join(', ');
-		} else {
+		} else {	},
 			buffer = 'This room has no auth.';
 		}
 		connection.popup(buffer);

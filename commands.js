@@ -430,6 +430,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Orange Poptarts</b>:   '+comcun+'');
                 }
+                if (target === 'Fnt Admin Alcamite' || target === 'fntadminalcamite') {
+                        matched = true;
+                        this.sendReplyBox('<b>Fnt Admin Alcamite</b>:   '+twinner+'');
+                }
                 if (target === 'garazan') {
                         matched = true;
                         this.sendReplyBox('<b>Garazan</b>:   '+comcun+'');

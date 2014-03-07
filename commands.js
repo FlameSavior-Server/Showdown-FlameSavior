@@ -490,13 +490,17 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Dawn Admin Midst</b>:   '+league+'');
                 }
+                if (target === 'empoleonxv') {
+                        matched = true;
+                        this.sendReplyBox('<b>Empoleon XV</b>:   '+comcun+'');
+                }
                 if (target === 'jackzero') {
                         matched = true;
                         this.sendReplyBox('<b>JackZero</b>:    '+comcun+'    '+mod+'    '+leader+'');
                 }
                 if (target === 'serperir' || target === 'serperiør' || target === 'rhan') {
                         matched = true;
-                        this.sendReplyBox('<b>Serperiør</b>:    '+comcun+'    '+mod+'    '+leader+'');
+                        this.sendReplyBox('<b>Serperiør</b>:    '+comcun+'    '+mod+'    '+leader+'    '+league+'');
                 }
                 if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;

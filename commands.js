@@ -446,6 +446,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Skymіn</b>:   '+comcun+'');
                 }
+                if (target === 'sexipanda') {
+                        matched = true;
+                        this.sendReplyBox('<b>sexipanda</b>:   '+league+'');
+                }
                 if (target === 'fork') {
                         matched = true;
                         this.sendReplyBox('<b>Fork</b>:   '+comcun+'');

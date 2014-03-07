@@ -438,6 +438,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Garazan</b>:   '+comcun+''+league+'');
                 }
+                 if (target === 'cometstorm') {
+                        matched = true;
+                        this.sendReplyBox('<b>Cometstorm</b>:   '+comcun+'');
+                }
                 if (target === 'psychological') {
                         matched = true;
                         this.sendReplyBox('<b>Psychological</b>:   '+mod+'');

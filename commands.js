@@ -420,7 +420,7 @@ var commands = exports.commands = {
                 //Shaymin, try to do 4 spaces between each badge if you could.
                 if (target === 'list') {
                         matched = true;
-                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+twinner+'    '+vip+' <br>--Hover over them to see the meaning of each.');
+                        this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+twinner+'    '+vip+' <br>--Hover over them to see the meaning of each.<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
                 }
                 if (target === 'shaymin') {
                         matched = true;

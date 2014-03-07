@@ -447,7 +447,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'jd') {
                         matched = true;
-                        this.sendReplyBox('<b>jd</b>:   '+admin+'    '+dev+'');
+                        this.sendReplyBox('<b>jd</b>:   '+admin+'    '+dev+'    '+vip+'');
                 }
                 if (target === 'blazingflareon') {
                         matched = true;

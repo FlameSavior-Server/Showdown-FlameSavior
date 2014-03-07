@@ -436,7 +436,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'garazan') {
                         matched = true;
-                        this.sendReplyBox('<b>Garazan</b>:   '+comcun+'');
+                        this.sendReplyBox('<b>Garazan</b>:   '+comcun+''+league+'');
                 }
                 if (target === 'psychological') {
                         matched = true;
@@ -446,9 +446,13 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Mushy</b>:   '+comcun+'');
                 }
+                 if (target === 'chimplup') {
+                        matched = true;
+                        this.sendReplyBox('<b>Chimplup</b>:   '+comcun+'    '+leader+'  '+league+'');
+                }
                 if (target === 'lazerbeam') {
                         matched = true;
-                        this.sendReplyBox('<b>lazerbeam</b>:   '+comcun+'');
+                        this.sendReplyBox('<b>lazerbeam</b>:   '+comcun+' '+league+'');
                 }
                 if (target === 'jd') {
                         matched = true;

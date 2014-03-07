@@ -1005,7 +1005,7 @@ var commands = exports.commands = {
 
 	psychological: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/qAKC7fU.jpg" width="240" height="140">' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/qAKC7fU.jpg" width="240" height="140"><br>' +
                 '<img src="http://i.imgur.com/I5glkoS.png?1">' +
                 '<img src="http://i.imgur.com/TSEXdOm.gif" width="300">' +
                 '<img src="http://i.imgur.com/DgVckTr.png"><br />' +

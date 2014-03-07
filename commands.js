@@ -436,7 +436,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'garazan') {
                         matched = true;
-                        this.sendReplyBox('<b>Garazan</b>:   '+comcun+''+league+'');
+                        this.sendReplyBox('<b>Garazan</b>:   '+comcun+'    '+league+'');
                 }
                 if (target === 'cometstorm') {
                         matched = true;
@@ -456,11 +456,11 @@ var commands = exports.commands = {
                 }
                  if (target === 'chimplup') {
                         matched = true;
-                        this.sendReplyBox('<b>Chimplup</b>:   '+comcun+'    '+leader+'  '+league+'');
+                        this.sendReplyBox('<b>Chimplup</b>:   '+comcun+'    '+leader+'    '+league+'');
                 }
                 if (target === 'lazerbeam') {
                         matched = true;
-                        this.sendReplyBox('<b>lazerbeam</b>:   '+comcun+' '+league+'');
+                        this.sendReplyBox('<b>lazerbeam</b>:   '+comcun+'   '+league+'');
                 }
                 if (target === 'jd') {
                         matched = true;

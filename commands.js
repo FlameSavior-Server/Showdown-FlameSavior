@@ -469,6 +469,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>JackZero</b>:    '+comcun+'    '+mod+'    '+leader+'');
                 }
+                if (target === 'serperir') {
+                        matched = true;
+                        this.sendReplyBox('<b>Serperiør</b>:    '+comcun+'    '+mod+'    '+leader+'');
+                }
                 if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;
                         this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+vip+'');

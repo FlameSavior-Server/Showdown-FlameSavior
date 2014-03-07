@@ -442,6 +442,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Cometstorm</b>:   '+comcun+'');
                 }
+                 if (target === 'pancakez') {
+                        matched = true;
+                        this.sendReplyBox('<b>pancakez</b>:   '+admin+'    '+comcun'    '+mod+'     '+vip+'');
+                }
                 if (target === 'skymіn') {
                         matched = true;
                         this.sendReplyBox('<b>Skymіn</b>:   '+comcun+'');
@@ -472,7 +476,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'jd') {
                         matched = true;
-                        this.sendReplyBox('<b>jd</b>:   '+admin+'    '+dev+'    '+vip+'');
+                        this.sendReplyBox('<b>jd</b>:   '+admin+'    '+dev+'    '+comcun+'    '+vip+'');
                 }
                 if (target === 'blazingflareon') {
                         matched = true;
@@ -506,6 +510,9 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+vip+'');
                 }
+                if (!matched) {
+			return this.sendReply('The user "'+target+'" does not have any badges.');
+		}
                 
         },
 	avatar: function(target, room, user) {

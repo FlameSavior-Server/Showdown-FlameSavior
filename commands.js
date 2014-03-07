@@ -399,7 +399,7 @@ var commands = exports.commands = {
                 code.write('\n'+user.name+': '+studiouser);
                 return this.sendReply(+user+' has been added to bee able to join TheStudioAuth.');
         },
-	      badges: 'badge',
+	     badges: 'badge',
              badge: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 if (target == '') target = user.userid;
@@ -417,7 +417,7 @@ var commands = exports.commands = {
                 var twinner='<img src="http://www.smogon.com/media/forums/images/badges/spl.png" title="Badge Tournament Winner">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
                 
-                
+                //Shaymin, try to do 4 spaces between each badge if you could.
                 if (target === 'list') {
                         matched = true;
                         this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+twinner+'    '+vip+' <br>--Hover over them to see the meaning of each.');

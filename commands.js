@@ -416,9 +416,7 @@ var commands = exports.commands = {
                 var champ ='<img src="http://www.smogon.com/media/forums/images/badges/forumadmin_alum.png" title="Goodra League Champion">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
                 
-                if (!matched) {
-                        this.sendReply('User "'+target+'" does not have any badges. Check your spelling?');
-                }
+                
                 if (target === 'list') {
                         matched = true;
                         this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+vip+' <br>--Hover over them to see the meaning of each.');

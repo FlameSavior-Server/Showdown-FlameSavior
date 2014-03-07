@@ -1513,11 +1513,14 @@ var commands = exports.commands = {
 			'i liek cookies');
 	},
 
-	eclipse: 'kilmeclipse', 
-	kilmeclipse: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src= http://i.imgur.com/BSFJ1nS.png weigh= 190 height= 92><img src= http://i.imgur.com/d4tZGGO.gif><img src= http://i.imgur.com/v593Ee8.png weigh= 190 height= 92><center>Ace: Garchomp & Bisharp<center>"When you get hax\'d, just know that a person\'s skill doesn\'t matter whether or not you get hax\'d. Take as a example, you getting frozen when its only 10% chance, a person\'s skill doesn\'t decide whether or not you get frozen; so next time, just pray not to get hax\'d."</center>');
-	},
+	eclipse: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://24.media.tumblr.com/2566ff30ddba40d4c8062111ca840593/tumblr_n0a091rbjW1qf8rnjo1_500.gif weight="141" height="92">' +
+                '<img src="http://i.imgur.com/BQ9mXi1.gif">' +
+                '<img src="http://31.media.tumblr.com/01c13cb909e1936c4497d56d8de05d78/tumblr_mu1zt1tKWk1sz9a8no1_500.gif weigh="151" height="98"><br />' +
+                '<b>Ace:</b> Charizard X & Mew<br />' +
+                'Having decent skills doesn\'t give you the right to act cocky.</center>');
+    	},
 
 	handrelief: function(target, room, user) {
 		if (!this.canBroadcast()) return;

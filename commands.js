@@ -442,6 +442,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Cometstorm</b>:   '+comcun+'');
                 }
+                if (target === 'skymіn') {
+                        matched = true;
+                        this.sendReplyBox('<b>Skymіn</b>:   '+comcun+'');
+                }
                 if (target === 'fork') {
                         matched = true;
                         this.sendReplyBox('<b>Fork</b>:   '+comcun+'');

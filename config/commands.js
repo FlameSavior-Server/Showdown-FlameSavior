@@ -1254,6 +1254,32 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ticken: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/B0gfhrg.png" width="144" height="100">' +
+                '<img src="http://i.imgur.com/kyrJhIC.gif?1?8517" width="293" height="75">' +
+                '<img src="http://i.imgur.com/7h6peGh.png"><br />' +
+                '<b>Ace:</b> Lotad<br />' +
+                'Lost time is never found again...</center>');
+    	},
+	
+	cnorth: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/scrafty.gif">' +
+                '<img src="http://i.imgur.com/MhZBJDV.png">' +
+                '<img src="http://i.imgur.com/QF55Hcl.gif?1 width=150"><br />' +
+                '<b>Ace:</b> Scrafty<br />' +
+                '<a href="http://replay.pokemonshowdown.com/frost-oumonotype-29810">FUCKING HITMONLEE.</a></center>');
+    	},
+	
+	spec: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://livedoor.blogimg.jp/pokelog2ch/imgs/4/6/46668e86.png" width="300" height="200"><br />' +
+                '<img src="http://i.imgur.com/Y88oEBG.gif">' +
+                '<b>Ace:</b> FlameBird<br />' +
+                'Faith is the bird that feels the light when the dawn is still dark.</center>');
+    	},
+	
 	primm: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/SLsamNo.png?1">' +

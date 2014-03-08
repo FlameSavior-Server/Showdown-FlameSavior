@@ -1254,6 +1254,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ticken: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/B0gfhrg.png" width="144" height="100">' +
+                '<img src="http://i.imgur.com/kyrJhIC.gif?1?8517" width="293" height="75">' +
+                '<img src="http://i.imgur.com/7h6peGh.png"><br />' +
+                '<b>Ace:</b> Lotad<br />' +
+                'Lost time is never found again...</center>');
+    	},
+	
 	cnorth: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/scrafty.gif">' +

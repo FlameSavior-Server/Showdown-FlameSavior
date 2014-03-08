@@ -1299,61 +1299,7 @@ var commands = exports.commands = {
 			'- We are restarting to update Gold to a newer version' +
 			'</div>');
 	},
-	
-	
-	sleep: 'sleeping',
-	sleeping: function(target, room, user, connection) {
-		if (!this.can('lock')) return false;
 
-		if (!user.isSleeping) {
-			user.originalName = user.name;
-			var sleepingName = user.name + ' Sleeping';
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(sleepingName);
-			user.forceRename(sleepingName, undefined, true);
-			user.forceRename(sleepingName, undefined, true);
-			
-			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now sleeping. Please do not touch them. '+ (target ? " (" + target + ")" : ""));
-
-			user.isSleeping = true;
-		}
-		else {
-			return this.sendReply('You are already set as sleeping, type /back if you are now back');
-		}
-
-		user.updateIdentity();
-	},
-
-	woke: function(target, room, user, connection) {
-		if (!this.can('lock')) return false;
-
-		if (user.isSleeping) {
-			if (user.name.slice(-7) !== ' sleeping') {
-				user.isSleeping = false; 
-				return this.sendReply('Your name has been left unaltered and no longer marked as sleeping.');
-			}
-
-			var newName = user.originalfirstName;
-			
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(newName);
-
-			user.forceRename(newName, undefined, true);
-			
-			//user will be authenticated
-			user.authenticated = true;
-			
-			this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer sleeping');
-
-			user.originalfirstName = '';
-			user.isAway = false;
-		}
-		else {
-			return this.sendReply('You are not set as sleeping');
-		}
-
-		user.updateIdentity();
-	}, 
 	
 	tc: 'tourhelp',
 	th: 'tourhelp',

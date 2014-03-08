@@ -515,7 +515,7 @@ var commands = exports.commands = {
                         this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+vip+'');
                 }
               	if (!matched) {
-                        this.sendReply('<b>'+target+'</b>: - does not have any badges.');
+                        this.sendReplyBox('<b>'+target+'</b>: - does not have any badges.');
                 }
                
                 

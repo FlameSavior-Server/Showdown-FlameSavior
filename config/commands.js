@@ -1385,10 +1385,10 @@ var commands = exports.commands = {
 
     	
     	tailz: function(target, room, user) {
-        	if (!this.canBroadcast()) return;
-        	this.sendReplyBox('<center><img src="http://i.imgur.com/uEG05D1.gif?1">' +
-                '<img src="http://i.imgur.com/l4ipWh1.png?1">' +
-                '<img src="http://i.imgur.com/megqUvx.png?1"><br />' +
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/Ijfoz4n.png?1" width="180">' +
+                '<img src="http://i.imgur.com/UQJceOG.png">' +
+                '<img src="http://i.imgur.com/uv1baKZ.png?1" width="180"><br />' +
                 '<b>Ace:</b> My &<br />' +
                 'I\'m Pretty Shit.</center>');
     	},
@@ -1506,9 +1506,9 @@ var commands = exports.commands = {
 
 	eclipse: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://24.media.tumblr.com/2566ff30ddba40d4c8062111ca840593/tumblr_n0a091rbjW1qf8rnjo1_500.gif weight="141" height="92">' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/9jjxo0c.gif" weight="141" height="92">' +
                 '<img src="http://i.imgur.com/BQ9mXi1.gif">' +
-                '<img src="http://31.media.tumblr.com/01c13cb909e1936c4497d56d8de05d78/tumblr_mu1zt1tKWk1sz9a8no1_500.gif weigh="151" height="98"><br />' +
+                '<img src="http://i.imgur.com/9ZjN89N.gif" weigh="151" height="98"><br />' +
                 '<b>Ace:</b> Charizard X & Mew<br />' +
                 'Having decent skills doesn\'t give you the right to act cocky.</center>');
     	},
@@ -2270,9 +2270,13 @@ var commands = exports.commands = {
 	},
 	
 	psychological: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://i.imgur.com/83aCync.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://i.imgur.com/QPmrbiM.png"><br><center><img src="http://i.imgur.com/TSEXdOm.gif"><br><center><font color="red"><blink>Ace: The Brain</blink></font><br><center><b>Catchphrase:</b> If it isn\'t logical, it\'s probably Psychological.');
-	},
+        	if (!this.canBroadcast()) return;
+        	this.sendReplyBox('<center><img src="http://i.imgur.com/qAKC7fU.jpg" width="480" height="280">' +
+                '<img src="http://i.imgur.com/I5glkoS.png?1">' +
+                '<img src="http://i.imgur.com/TSEXdOm.gif" width="300">' +
+                '<img src="http://i.imgur.com/DgVckTr.png"><br />' +
+                'If it isn\'t logical, it\'s probably Psychological.</center>');
+    	},
 	
 	siem: function(target, room, user) {
 		if (!this.canBroadcast()) return;

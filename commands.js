@@ -490,9 +490,9 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>kupo</b>:   '+admin+'');
                 }
-                if (target === 'champcoolwhip') {
+                if (target === 'champcoolwhip' || target === 'yush') {
                         matched = true;
-                        this.sendReplyBox('<b>ChampCoolWhip</b>:   '+league+'    '+comcun+'');
+                        this.sendReplyBox('<b>Yush</b>:   '+league+'    '+comcun+'');
                 }
                 if (target === 'dawnadminmidst') {
                         matched = true;

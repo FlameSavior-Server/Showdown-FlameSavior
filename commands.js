@@ -464,7 +464,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'psychological') {
                         matched = true;
-                        this.sendReplyBox('<b>Psychological</b>:   '+mod+'');
+                        this.sendReplyBox('<b>Psychological</b>:   '+mod+'    '+comcun+'');
                 }
                  if (target === 'mushy') {
                         matched = true;

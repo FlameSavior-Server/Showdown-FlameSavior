@@ -1361,6 +1361,47 @@ var commands = exports.commands = {
 
 		user.updateIdentity();
 	},
+	sleep: function(target, room, user, connection) {
+		if (!this.can('lock')) return false;
+
+		if (!user.isAway) {
+			user.originalName = user.name;
+			var awayName = user.name + ' - Sleeping';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+			
+			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now sleeping.  Please do not touch them. '+ (target ? " (" + target + ")" : ""));
+
+			user.isAway = true;
+		}
+		else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
+
+		user.updateIdentity();
+	},
+	busy: function(target, room, user, connection) {
+		if (!this.can('lock')) return false;
+
+		if (!user.isAway) {
+			user.originalName = user.name;
+			var awayName = user.name + ' - Busy';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+			
+			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+
+			user.isAway = true;
+		}
+		else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
+
+		user.updateIdentity();
+	},
+
 
 	back: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;

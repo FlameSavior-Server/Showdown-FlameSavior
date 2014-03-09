@@ -445,7 +445,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'cometstorm') {
                         matched = true;
-                        this.sendReplyBox('<b>Cometstorm</b>:   '+comcun+'');
+                        this.sendReplyBox('<b>Cometstorm</b>:   '+comcun+'    '+mod+'');
                 }
                 if (target === 'pancakez') {
                         matched = true;

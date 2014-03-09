@@ -3318,6 +3318,7 @@ function getRandMessage(user){
 		case 36: message = message + user + ' fades into nothingness!'; // bought by Unknown's Remnant
 		break;
 		case 37: message = message + user + ' was swept to sleep by frost janitor'; // bought by frost janitor
+		break;
 		case 38: message = message + user + ' flies into the air and does three backward somersaults in quick succession then belts out in a rhythmic tune UP UP AND AWAY'; // bought by EricSaysHi
 		break;
 		default: message = message + user + ' bought a poisoned Coke!';

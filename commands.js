@@ -513,7 +513,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;
-                        this.sendReplyBox('<b>Panpawn</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+artist+'    '+vip+'');
+                        this.sendReplyBox('<b>papew</b>:   '+admin+'  '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+artist+'    '+vip+'');
                 }
               	if (!matched) {
                         this.sendReplyBox('<b>'+target+'</b>: - does not have any badges.');

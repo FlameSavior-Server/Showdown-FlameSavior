@@ -1318,7 +1318,7 @@ var User = (function () {
 					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake, please contact a staff member.');
 					//room.logModCommand(connection.user.name+' was automatically locked by the server for saying "'+Users.bannedMessages[x]+'"');
 					for (var u in Users.users) {
-						if (Users.users[u].group == '~' || Users.users[u].group == '&') {
+						if (Users.users[u].group == '~' || Users.users[u].group == '&' || Users.users[u].group == '@') {
 							Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+connection.user.name+' has been automatically locked for sending a message containing a banned word. Room: '+room.id+' Message: ' + message);
 						}
 					}
@@ -1330,7 +1330,7 @@ var User = (function () {
 		if (message.toLowerCase().indexOf("psim") > -1 && message.toLowerCase().indexOf("gold.psim.us") == -1 && !this.goldDev || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~gold") == -1 && !this.goldDev) {
 			connection.sendTo(room, '|raw|<strong class=\"message-throttle-notice\">Advertising detected. Your message was not sent.</strong>');
 			for (var u in Users.users) {
-				if (Users.users[u].group == '~' || Users.users[u].group == '&') {
+				if (Users.users[u].group == '~' || Users.users[u].group == '&' || Users.users[u].group == '@') {
 					Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+connection.user.name+' triggered the advertising filter. Room: '+room.id+' Message: ' + message);
 				}
 			}

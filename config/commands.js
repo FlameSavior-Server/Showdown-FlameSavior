@@ -2821,6 +2821,30 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/stafflist - Shows you the list of staff members.');
 		}
+		if (target === 'all' || target === 'poof' || target == 'd') {
+			matched = true;
+			this.sendReplyBox('/poof OR /d - Disconnects you from the server, leaving a random "poof" message behind.');
+		}
+		if (target === 'seen' || target === 'all') {
+			matched = true;
+			this.sendReplyBox('/seen [username] - Shows you when a user was last seen online.');
+		}
+		if (target === 'all' || target === 'roomauth') {
+			matched = true;
+			this.sendReplyBox('/roomauth - Shows you a list of the staff list in the room.');
+		}
+		if (target === 'all' || target === 'maxusers' || target === 'recordusers') {
+			matched = true;
+			this.sendReplyBox('/maxusers - Shows the record user count.');
+		}
+		if (target === 'all' || target === 'regdate') {
+			matched = true;
+			this.sendReplyBox('/regdate [username] - Shows you the date [username] was registered on.');
+		}
+		if (target === 'all' || target === 'time' || target === 'servertime') {
+			matched = true;
+			this.sendReplyBox('/time OR /servertime - Displays the current server time.');
+		}
     	// Driver commands
     	if (target === '%' || target === 'unlink') {
     		matched = true;
@@ -2919,6 +2943,18 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/modchat [off/autoconfirmed/+/%/@/&/~] - Set the level of moderated chat. Requires: @ for off/autoconfirmed/+ options, & ~ for all the options');
 		}
+		if (target === 'roomban') {
+			matched = true;
+			this.sendReplyBox('/roomban OR /rb [username] - bans user from the room. Requires: @ & ~');
+		}
+		if (target === 'roomunban') {
+			matched = true;
+			this.sendReplyBox('/roomunban [username] - unbans user from the room');
+		}
+		if (target === 'roompromote') {
+			matched = true;
+			this.sendReply('/roompromote [username] OR /roompromote [username], [rank] - Promotes [username] to the specified rank. If rank is left blank, promotes to the next rank up.');
+		}
 		// Leader commands
 		if (target === '&' || target === 'banip') {
 			matched = true;
@@ -2927,6 +2963,10 @@ var commands = exports.commands = {
 		if (target === '&' || target === 'permaban' || target === 'permban' || target === 'pban') {
      		matched = true;
       		this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
+    	}
+    	if (target === '&' || target === 'unpermaban') {
+    		matched = true;
+    		this.sendReplyBox('/unpermaban [IP] - Removes an IP address from the permanent ban list.');
     	}
 		if (target === '&' || target === 'promote') {
 			matched = true;
@@ -2984,6 +3024,34 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/customavatar [username], [image] - Gives [username] the image as their avatar. Requires: & ~');
 		}
+		if (target === '&' || target === 'makechatroom') {
+			matched = true;
+			this.sendReply('/makechatroom [roomname] - Creates a new room named [roomname]. Requires: & ~');
+		}
+		if (target === '&' || target === 'deregisterchatroom') {
+			matched = true;
+			this.sendReply('/deregisterchatroom [roomname] - Deletes room [roomname] after the next server restart. Requires: & ~');
+		}
+		if (target === '&' || target === 'roomowner') {
+			matched = true;
+			this.sendReply('/roomowner [username] - Appoints [username] as a room owner. Removes official status. Requires: & ~');
+		}
+		if (target === '&' || target === 'roomdeowner') {
+			matched = true;
+			this.sendReply('/roomdeowner [username] - Removes [username]\'s status as a room owner. Requires: & ~');
+		}
+		if (target === '&' || target === 'privateroom') {
+			matched = true;
+			this.sendReply('/privateroom [on/off] - Makes or unmakes a room private. Requires: & ~');
+		}
+		if (target === '&' || target === 'roomfounder') {
+			matched = true;
+			this.sendReplyBox('/roomfounder [username] - Sets [username] as the room founder. Requires: & ~');
+		}
+		if (target === '&' || target === 'giveavatar') {
+			matched = true;
+			this.sendReplyBox('/giveavatar [username], [image] - Gives [username] the specified as an avatar. Image must be either a GIF or PNG. Requires: & ~');
+		}
 		//Admin commands
 		if (target === '~' || target === 'sendpopup' || target === 'spop') {
 			matched = true;
@@ -3021,39 +3089,35 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/loadbanlist - Loads the bans located at ipbans.txt. The command is executed automatically at startup. Requires: ~');
 		}
-		if (target === '~' || target === 'makechatroom') {
+		if (target === '~' || target === 'givevip' || target === 'addvip') {
 			matched = true;
-			this.sendReply('/makechatroom [roomname] - Creates a new room named [roomname]. Requires: ~');
+			this.sendReplyBox('/givevip [username] OR /addvip [username] - Gives [username] VIP status. Requires: ~');
 		}
-		if (target === '~' || target === 'deregisterchatroom') {
+		if (target === '~' || target === 'takevip' || target === 'remvip' || target === 'removevip') {
 			matched = true;
-			this.sendReply('/deregisterchatroom [roomname] - Deletes room [roomname] after the next server restart. Requires: ~');
+			this.sendReplyBox('/takevip OR /remvip OR /removevip [username] - Removes VIP status from [username]. Requires: ~');
 		}
-		if (target === '~' || target === 'roomowner') {
+		// VIP Commands
+		if (target === 'VIP' || target === '/customavatar') {
 			matched = true;
-			this.sendReply('/roomowner [username] - Appoints [username] as a room owner. Removes official status. Requires: ~');
-		}
-		if (target === '~' || target === 'roomdeowner') {
-			matched = true;
-			this.sendReply('/roomdeowner [username] - Removes [username]\'s status as a room owner. Requires: ~');
-		}
-		if (target === '~' || target === 'privateroom') {
-			matched = true;
-			this.sendReply('/privateroom [on/off] - Makes or unmakes a room private. Requires: ~');
+			this.sendReplyBox('/customavatar [image] - Sets the specified image as your avatar. Image must be a GIF or PNG. Requires: VIP');
 		}
 		if (target === 'all' || target === 'help' || target === 'h' || target === '?' || target === 'commands') {
 			matched = true;
 			this.sendReply('/help OR /h OR /? - Gives you help.');
 		}
 		if (!target) {
-			this.sendReply('COMMANDS: /msg, /reply, /ignore, /ip, /rating, /nick, /avatar, /rooms, /whois, /help, /away, /back, /timestamps, /highlight');
-			this.sendReply('INFORMATIONAL COMMANDS: /data, /dexsearch, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /calc (replace / with ! to broadcast. (Requires: + % @ & ~))');
+			this.sendReply('COMMANDS: /msg, /reply, /ignore, /ip, /rating, /nick, /avatar, /rooms, /whois, /help, /away, /back, /timestamps, /highlight, /poof');
+			this.sendReply('INFORMATIONAL COMMANDS: /data, /dexsearch, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /time, /recordusers, /tourstats, /calc (replace / with ! to broadcast. (Requires: + % @ & ~))');
 			this.sendReply('For details on all room commands, use /roomhelp');
 			this.sendReply('For details on all commands, use /help all');
+			if (user.vip) {
+				this.sendReply('VIP COMMANDS: /customavatar');
+			}
 			if (user.group !== config.groupsranking[0]) {
 				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /modlog, /forcerename, /alts')
 				this.sendReply('MODERATOR COMMANDS: /ban, /unban, /unbanall, /ip, /redirect, /kick');
-				this.sendReply('LEADER COMMANDS: /promote, /demote, /forcewin, /forcetie, /declare, /permaban');
+				this.sendReply('LEADER COMMANDS: /promote, /demote, /forcewin, /forcetie, /declare, /permaban, /unpermaban, /makechatroom, /leagueroom, /privateroom, /roomfounder');
 				this.sendReply('For details on all moderator commands, use /help @');
 			}
 			this.sendReply('For details of a specific command, use something like: /help data');

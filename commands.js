@@ -782,7 +782,8 @@ var commands = exports.commands = {
 		if (!userid || userid === '') return this.sendReply("User '"+name+"' does not exist.");
 
 		if (room.auth[userid] !== '#') return this.sendReply("User '"+name+"' is not a room owner.");
-		if (!this.can('makeroom', null, room)) return false;
+		if (!room.founder || user.userid != room.founder && !this.can('makeroom')) return false;
+
 
 		delete room.auth[userid];
 		this.sendReply('('+name+' is no longer Room Owner.)');

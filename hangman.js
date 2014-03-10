@@ -202,6 +202,9 @@ var cmds = {
 		if(!target) {
 			return this.sendReply('Please specify the word you are trying to guess.');
 		}
+		if (target.length > 25) {
+			return this.sendReply('This guess is too long; it cannot exceed 25 characters.');
+		}
 		if(user.userid === hangman[room.id].hangmaner[0]) {
 			return this.sendReply('You cannot guess the word because you are running hangman!');
 		}

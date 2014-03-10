@@ -971,8 +971,8 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/xzfPeaL.gif"><br>' +
 			'<img src="http://th00.deviantart.net/fs44/PRE/i/2009/078/e/0/omnitrix_by_Los026.jpg" width="100"><br>' +
 			'<img src="http://i.imgur.com/PDhHorc.gif"></font></color><br>' +
-			'<center><font color="#4F86F7">Ace:</font> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font></font></font></font></font></font></font></font>' +
-			'<br>Don\'t touch me when I\'m sleeping.');
+			'<center><font color="#4F86F7">Ace:</font> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font>' +
+			'<br><font color="black">Don\'t touch me when I\'m sleeping.');
 
 	},
 	furgo: function(target, room, user) {

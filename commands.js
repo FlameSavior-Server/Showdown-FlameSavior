@@ -943,6 +943,33 @@ var commands = exports.commands = {
                 if(!target) return this.sendReply('/spank needs a target.');
                 return this.parse('/me spanks ' + target +'!');
     	},
+    	complain: function(target, room, user){
+			if (target.indexOf('<img ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<a href') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<font ') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<marquee') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<blink') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if (target.indexOf('<center') > -1) {
+			return this.sendReply('HTML is not supported in this command.')
+			}
+			if(!target) return this.sendReply('/naotd needs an artist.');
+			if (target.length > 350) {
+			return this.sendReply('This report is too long; it cannot exceed 350 characters.');
+			}
+			if (!this.canTalk()) return;
+			Rooms.rooms.staff.add(user.userid+' has reported: '+target+'');
+	}
+	},
    	
 	punishall: 'pa',
 	pa: function(target, room, user){

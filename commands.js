@@ -944,38 +944,21 @@ var commands = exports.commands = {
                 return this.parse('/me spanks ' + target +'!');
     	},
     	report: 'complain',
-    	complain: function(target, room, user){
-    			if (!target) return this.sendReply('/report [report] - Use this command to report other users.');
-			if (target.indexOf('<img ') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<a href') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<font ') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<marquee') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<blink') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<center') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.length > 350) {
-			return this.sendReply('This report is too long; it cannot exceed 350 characters.');
-			}
-			if (!this.canTalk()) return;
-			Rooms.rooms.staff.add(user.userid+' has reported: '+target+'');
-			this.sendReply('Your report "'+target+'" has been reported.');
-    			}{
-			if (Users.users[u].group == "~" || Users.users[u].group == "&" || Users.users[u].group == "@" || Users.users[u].group == "%") {
-                        Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+user.userid+' has reported: '+target+'');
-			}
-    			}
-		
+	complain: function(target, room, user){
+        if (!target) return this.sendReply('/report [report] - Use this command to report other users.');
+        if (target.indexOf('<img ') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<a href') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<font ') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<marquee') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<blink') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.length > 350) return this.sendReply('This report is too long; it cannot exceed 350 characters.');
+        if (!this.canTalk()) return;
+        Rooms.rooms.staff.add(user.userid+' ('+room.id+') has reported: '+target+'');
+        this.sendReply('Your report "'+target+'" has been reported.');
+        for(var u in Users.users)
+                if((Users.users[u].group == "~" || Users.users[u].group == "&" || Users.users[u].group == "@" || Users.users[u].group == "%")&& Users.users[u].connected)
+                        Users.users[u].send('|pm|~Server|'+Users.users[u].getIdentity()+'|'+user.userid+' ('+room.id+') has reported: '+target+'');
 	},
    	
 	punishall: 'pa',

@@ -968,7 +968,7 @@ var commands = exports.commands = {
 			}
 			if (!this.canTalk()) return;
 			Rooms.rooms.staff.add(user.userid+' has reported: '+target+'');
-	}
+	
 	},
    	
 	punishall: 'pa',

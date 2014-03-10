@@ -1552,7 +1552,7 @@ var commands = exports.commands = {
 		if (voices.length > 0) {
 			voices = voices.join(', ');
 		}
-		connection.popup('Founder: '+founder+'\nOwners: \n'+owners+'\nModerators: \n'+mods+'\nDrivers: \n'+drivers+'\nVoices: \n'+voices);
+		connection.popup('**Founder**: '+founder+'\n**Owners**: \n'+owners+'\n**Moderators**: \n'+mods+'\n**Drivers**: \n'+drivers+'\n**Voices**: \n'+voices);
 	},
 
 	leave: 'part',

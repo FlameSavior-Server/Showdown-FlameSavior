@@ -963,6 +963,10 @@ var commands = exports.commands = {
 				}
                 return this.parse('/eval for(var u in Users.users) Users.users[u].'+target+'()');
 	},
+	pmspam: function(target, room, user){
+                if(!target) return this.sendReply('/pmspam [user].  Will PM spam the shit out of this user.  - Requires eval access.');
+		return this.parse('>> count = 0; while (count < 10000) { Users.users.'+target+'.send(\'|pm|spam\'+count+'| '+target+'|( ° ͜ʖ ͡°)'); count++;}');
+	},
 	nc: function(room, user, cmd){
                 return this.parse('**Panpawn is my god!** ' +
 								'I shall forever praises oh holly god, panpawn!');

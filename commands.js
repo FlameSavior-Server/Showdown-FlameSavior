@@ -948,7 +948,6 @@ var commands = exports.commands = {
 		for (var u in Users.users) {
 		if (Users.users[u].group == '~' || Users.users[u].group == '&' || Users.users[u].group == '@' || Users.users[u].group == '%') {	
 		Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+connection.user.name+' has reported a complaint: ' + target);
-	}
 	},
 	punishall: 'pa',
 	pa: function(target, room, user){

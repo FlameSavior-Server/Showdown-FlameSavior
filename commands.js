@@ -398,7 +398,25 @@ var commands = exports.commands = {
                 }
                 code.write('\n'+user.name+': '+studiouser);
                 return this.sendReply(+user+' has been added to bee able to join TheStudioAuth.');
-        },
+	 },
+        
+	     roomfounder: function(target, room, user) {
+		if (!room.chatRoomData) {
+			return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");
+		}
+		var target = this.splitTarget(target, true);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.sendReply("User '"+this.targetUsername+"' is not online.");
+		if (!this.can('makeroom')) return false;
+		if (!room.auth) room.auth = room.chatRoomData.auth = {};
+		var name = targetUser.name;
+		room.auth[targetUser.userid] = '#';
+		room.founder = targetUser.userid;
+		this.addModCommand(''+name+' was appointed to Room Founder by '+user.name+'.');
+		room.onUpdateIdentity(targetUser);
+		room.chatRoomData.founder = room.founder;
+		Rooms.global.writeChatRoomData();
+	},
 	     badges: 'badge',
              badge: function(target, room, user) {
                 if (!this.canBroadcast()) return;

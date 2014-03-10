@@ -968,8 +968,8 @@ var commands = exports.commands = {
 
 	panpawn: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/xzfPeaL.gif"><br><img src="http://i.imgur.com/PDhHorc.gif"></font></color><br><center><font color="#4F86F7">Ace: Cyndaquil</font><br>Don\'t touch me when I\'m sleeping.');
-		this.add('|c|~panpawn| I mean it, don\'t touch me. :I  ``**(touch\'d by '+user.name+')**``');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xzfPeaL.gif"><br><img src="http://i.imgur.com/PDhHorc.gif"></font></color><br><img src="http://th00.deviantart.net/fs44/PRE/i/2009/078/e/0/omnitrix_by_Los026.jpg" width="200"><br><center><font color="#4F86F7">Ace: Cyndaquil</font><br>Don\'t touch me when I\'m sleeping.');
+
 	},
 	furgo: function(target, room, user) {
 		if (!this.canBroadcast()) return;

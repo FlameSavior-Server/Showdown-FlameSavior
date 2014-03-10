@@ -943,7 +943,9 @@ var commands = exports.commands = {
                 if(!target) return this.sendReply('/spank needs a target.');
                 return this.parse('/me spanks ' + target +'!');
     	},
+    	report: 'complain',
     	complain: function(target, room, user){
+    			if (!target) return this.sendReply('/report [report] - Use this command to report other users.');
 			if (target.indexOf('<img ') > -1) {
 			return this.sendReply('HTML is not supported in this command.')
 			}

@@ -961,7 +961,21 @@ var commands = exports.commands = {
                 if((Users.users[u].group == "~" || Users.users[u].group == "&" || Users.users[u].group == "@" || Users.users[u].group == "%")&& Users.users[u].connected)
                         Users.users[u].send('|pm|~Server|'+Users.users[u].getIdentity()+'|'+user.userid+' (in '+room.id+') has reported: '+target+'');
 	},
-   	
+	suggestion: 'suggest',
+	suggest: function(target, room, user){
+        if (!target) return this.sendReply('/suggest [suggestion] - Sends your suggestion to staff to review.');
+        if (target.indexOf('<img ') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<a href') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<font ') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<marquee') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<blink') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('panpawn sucks') > -1) return this.sendReply('Yes, we know.');
+        if (target.length > 450) return this.sendReply('This suggestion is too long; it cannot exceed 450 characters.');
+        if (!this.canTalk()) return;
+        Rooms.rooms.staff.add(user.userid+' (in '+room.id+') has suggested: '+target+'');
+        this.sendReply('Thanks, your suggestion "'+target+'" has been sent.  We\'ll review your feedback soon.');
+	},
 	punishall: 'pa',
 	pa: function(target, room, user){
                 if(!target) return this.sendReply('/punishall [lock, mute, unmute, ban]. - Requires eval access.');

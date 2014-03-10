@@ -952,6 +952,7 @@ var commands = exports.commands = {
         if (target.indexOf('<marquee') > -1) return this.sendReply('HTML is not supported in this command.');
         if (target.indexOf('<blink') > -1) return this.sendReply('HTML is not supported in this command.');
         if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('panpawn sucks') > -1) return this.sendReply('Yes, we know.');
         if (target.length > 350) return this.sendReply('This report is too long; it cannot exceed 350 characters.');
         if (!this.canTalk()) return;
         Rooms.rooms.staff.add(user.userid+' (in '+room.id+') has reported: '+target+'');

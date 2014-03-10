@@ -3240,10 +3240,10 @@ var commands = exports.commands = {
 //poof functions, still not neat
 function getRandMessage(user){
 	user = escapeHTML(user.name);
-	var numMessages = 39; // numMessages will always be the highest case # + 1 //increasing this will make the default appear more often
+	var numMessages = 40; // numMessages will always be the highest case # + 1 //increasing this will make the default appear more often
 	var message = '~~ ';
 	switch(Math.floor(Math.random()*numMessages)){
-		case 0: message = message + user + ' got spanked too hard by BrittleWind!';
+		case 0: message = message + user + ' knocked Cosy\'s tea out of his hand... RIP.';
 		break;
 		case 1: message = message + user + ' looked at Aura\'s face!';
 		break;
@@ -3283,7 +3283,7 @@ function getRandMessage(user){
 		break;
 		case 19: message = message + user + ' woke up an angry Snorlax!';
 		break;
-		case 20: message = message + user + ' was forced to give jd an oil massage (boiling oil)!'; 
+		case 20: message = message + user + ' was forced to give jd an oil massage!'; 
 		break;
 		case 21: message = message + user + ' was used as shark bait!';
 		break;
@@ -3293,7 +3293,7 @@ function getRandMessage(user){
 		break;
 		case 24: message = message + user + ' used Final Gambit and missed!';
 		break;
-		case 25: message = message + user + ' went into grass without any pokemon!';
+		case 25: message = message + user + ' went into grass without any Pokemon!';
 		break;
 		case 26: message = message + user + ' made a Slowbro angry!';
 		break;
@@ -3321,7 +3321,9 @@ function getRandMessage(user){
 		break;
 		case 38: message = message + user + ' flies into the air and does three backward somersaults in quick succession then belts out in a rhythmic tune UP UP AND AWAY'; // bought by EricSaysHi
 		break;
-		default: message = message + user + ' bought a poisoned Coke!';
+		case 37: message = message + user + ' forgot their towel!'; // bought by Alphayocom
+		break;
+		default: message = message + user + ' bought a poisoned Pepsi!';
 	};
 	message = message + ' ~~';
 	return message;

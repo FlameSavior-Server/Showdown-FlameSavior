@@ -964,7 +964,6 @@ var commands = exports.commands = {
 			if (target.indexOf('<center') > -1) {
 			return this.sendReply('HTML is not supported in this command.')
 			}
-			if(!target) return this.sendReply('/naotd needs an artist.');
 			if (target.length > 350) {
 			return this.sendReply('This report is too long; it cannot exceed 350 characters.');
 			}
@@ -974,8 +973,9 @@ var commands = exports.commands = {
     			}
 			if (Users.users[u].group == "~" || Users.users[u].group == "&" || Users.users[u].group == "@" || Users.users[u].group == "%") {
                         Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+user.userid+' has reported: '+target+'');
-                    }
-	
+			}
+    			}
+		
 	},
    	
 	punishall: 'pa',

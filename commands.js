@@ -970,7 +970,7 @@ var commands = exports.commands = {
 			}
 			if (!this.canTalk()) return;
 			Rooms.rooms.staff.add(user.userid+' has reported: '+target+'');
-			self.sendReply('Your report "'+target+'" has been reported.');
+			this.sendReply('Your report "'+target+'" has been reported.');
 	
 	},
    	

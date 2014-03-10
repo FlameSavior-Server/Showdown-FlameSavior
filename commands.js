@@ -943,12 +943,7 @@ var commands = exports.commands = {
                 if(!target) return this.sendReply('/spank needs a target.');
                 return this.parse('/me spanks ' + target +'!');
     	},
-   	complain: function(target, room, user){
-		if (!this.canTalk()) return;
-		for (var u in Users.users) {
-		if (Users.users[u].group == '~' || Users.users[u].group == '&' || Users.users[u].group == '@' || Users.users[u].group == '%') {	
-		Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+connection.user.name+' has reported a complaint: ' + target);
-	},
+   	
 	punishall: 'pa',
 	pa: function(target, room, user){
                 if(!target) return this.sendReply('/punishall [lock, mute, unmute, ban]. - Requires eval access.');

@@ -757,11 +757,6 @@ var commands = exports.commands = {
 		if (targets.length < 2) {
 			return this.sendReply('You must specify at least one move.');
 		}
-		if (target === 'panpawn') {
-                        matched = true;
-                        this.sendReplyBox('Panpawn <b><u><font color="green">can</font></b></u> learn swag.');
-                }
-
 		for (var i=1, len=targets.length; i<len; i++) {
 			move = Tools.getMove(targets[i]);
 			if (!move.exists) {

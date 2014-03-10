@@ -1287,7 +1287,10 @@ var commands = exports.commands = {
 			'- /roommod, /roomdriver <em>username</em>: appoint a room moderator/driver<br />' +
 			'- /roomdemod, /roomdedriver <em>username</em>: remove a room moderator/driver<br />' +
 			'- /modchat <em>[%/@/#]</em>: set modchat level<br />' +
-			'- /declare <em>message</em>: make a global declaration<br />' +
+			'- /declare <em>message</em>: make a room declaration<br /><br>' +
+			'The room founder can also use:<br />' +
+			'- /roomowner <em>username</em><br />' +
+			'- /roomdeowner <em>username</em><br />' +
 			'</div>');
 	},
 

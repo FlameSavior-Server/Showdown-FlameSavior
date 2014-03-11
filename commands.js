@@ -682,7 +682,7 @@ var commands = exports.commands = {
 		return this.sendReply('You are no longer blocking Private Messages.');
 	},
 
-    makechatroom: function(target, room, user) {
+    	makechatroom: function(target, room, user) {
 			if (!this.can('makeroom')) return;
             var id = toId(target);
             if (Rooms.rooms[id]) {
@@ -854,26 +854,7 @@ var commands = exports.commands = {
 			Rooms.global.writeChatRoomData();
 		}
 	},
-	roomwelcome: function(target, room, user) {
-		if(!target) {
-			if (!this.canBroadcast()) return;
-			var rw = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
-			if (!room.welcome) return this.sendReply("This room does not have a welcome message set.");
-			this.sendReplyBox('The room welcome message is: '+room.welome.replace(rw, "<a href=\"$1\">$1</a>"));
-			return;
-		}
-		if (!this.can('roommod', null, room)) return false;
-		if (target.length > 300) {
-			return this.sendReply('Error: Room welcome is too long (must be at most 300 characters).');
-		}
-		room.welcome = target;
-		this.sendReply('(The room welcome is now: '+target+')');
-
-		if (room.chatRoomData) {
-			room.chatRoomData.welcome = room.welcome;
-			Rooms.global.writeChatRoomData();
-		}
-	},
+	
 		
     roomdemote: 'roompromote',
     roompromote: function(target, room, user, connection, cmd) {
@@ -990,12 +971,45 @@ var commands = exports.commands = {
         if (target.indexOf('<marquee') > -1) return this.sendReply('HTML is not supported in this command.');
         if (target.indexOf('<blink') > -1) return this.sendReply('HTML is not supported in this command.');
         if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('panpawn sucks') > -1) return this.sendReply('Yes, we know.');
         if (target.length > 450) return this.sendReply('This suggestion is too long; it cannot exceed 450 characters.');
         if (!this.canTalk()) return;
         Rooms.rooms.staff.add(user.userid+' (in '+room.id+') has suggested: '+target+'');
         this.sendReply('Thanks, your suggestion "'+target+'" has been sent.  We\'ll review your feedback soon.');
 	},
+//New Room Commands
+	newroomfaq:function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('So, you\'re interested in making a new room on Gold, aye? Well, the process is rather simple, really! Do /newroomquestions and answer those questions with your answers and staff will review them to consider making your room!');
+	},
+	newroomquestions:function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>New Room Questions:</b><br>' +
+                	'Directions: Using the "/newroom" command, answer the following and number your answers.<br>' +
+                	'1. Prefered room name?<br>' +
+                	'2. Is this a new room, or does it already have an established user base to it that will follow it here?<br>' +
+                	'3. How many new users do you honestly think it will attract to the server?<br>' +
+                	'4. Are you willing to enforce the <a href="http://goldserver.weebly.com/rules.html">servers rules</a> as well as your room\'s rules in your room?<br>' +
+                	'5. Do you have a website for your room? If not, do you plan to create one?<br>' +
+                	'6. What makes your room different than all the others?<br><br>' +
+                	'<b>Things to Note:</b><br>'+
+                	'-Even if you do get a room on Gold, if it isn\'t active or you or your members make a severe offense against our rules than we have a right to delete it.  After all, owning any room is a responsibility and a privilege, not a right.<br>' +
+                	'-If your room is successful and active on the server for a months time, it will qualify for a welcome message when users join the room!<br>' +
+                	'-Remember, you get global voice by contributing to the server; so if your room is successful for a while, that is contribution to the server and you *could* get global voice as a result!');
+	},
+	newroom: function(target, room, user){
+        if (!target) return this.sendReply('/newroom [answers to /newroomquestions] - Requests a new chat room to be be created.');
+        if (target.indexOf('<img ') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<a href') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<font ') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<marquee') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<blink') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
+        if (target.length > 550) return this.sendReply('This new room suggestion is too long; it cannot exceed 550 characters.');
+        if (!this.canTalk()) return;
+        Rooms.rooms.staff.add(user.userid+' (in '+room.id+') suggested a *new room* (see /newroomquestions): '+target+'');
+        this.sendReply('Thanks, your new room suggestion has been sent.  We\'ll review your feedback soon and get back to you. ("'+target+'")');
+	},
+//End new room commands
 	punishall: 'pa',
 	pa: function(target, room, user){
                 if(!target) return this.sendReply('/punishall [lock, mute, unmute, ban]. - Requires eval access.');

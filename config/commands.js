@@ -956,6 +956,7 @@ var commands = exports.commands = {
 			'- /unlockroom: unlocks the room allowing users to join.<br />' +
 			'- /setwelcomemessage <em>message</em>: sets the message people will see when they join the room. Can contain html and must be bought from the store first.<br />' +
 			'- /modchat <em>[%/@/#]</em>: set modchat level<br />' +
+			'- /toggleglobaldeclares: disables/enables global declares in your room.<br />' +
 			'<br />' +
 			'The room founder can also use:<br />' +
 			'- /roomowner <em>username</em><br />' +

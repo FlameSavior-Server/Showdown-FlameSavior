@@ -1810,17 +1810,17 @@ var commands = exports.commands = {
 
 		if (cmd === 'gdeclare'){
 			for (var id in Rooms.rooms) {
-				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b><font size=1><i>Global declare from '+staff+'<br /></i></font size>'+target+'</b></div>');
+				if (id !== 'global' && !Rooms.rooms[id].blockGlobalDeclares) Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b><font size=1><i>Global declare from '+staff+'<br /></i></font size>'+target+'</b></div>');
 			}
 		}
 		if (cmd === 'gdeclarered'){
 			for (var id in Rooms.rooms) {
-				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-red"><b><font size=1><i>Global declare from '+staff+'<br /></i></font size>'+target+'</b></div>');
+				if (id !== 'global' && !Rooms.rooms[id].blockGlobalDeclares) Rooms.rooms[id].addRaw('<div class="broadcast-red"><b><font size=1><i>Global declare from '+staff+'<br /></i></font size>'+target+'</b></div>');
 			}
 		}
 		else if (cmd === 'gdeclaregreen'){
 			for (var id in Rooms.rooms) {
-				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-green"><b><font size=1><i>Global declare from '+staff+'<br /></i></font size>'+target+'</b></div>');
+				if (id !== 'global' && !Rooms.rooms[id].blockGlobalDeclares) Rooms.rooms[id].addRaw('<div class="broadcast-green"><b><font size=1><i>Global declare from '+staff+'<br /></i></font size>'+target+'</b></div>');
 			}
 		}
 		this.logModCommand(user.name+' globally declared '+target);
@@ -1833,7 +1833,7 @@ var commands = exports.commands = {
 		if (!this.canTalk()) return;
 
 		for (var r in Rooms.rooms) {
-			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|raw|<b>'+target+'</b></div>');
+			if (Rooms.rooms[r].type === 'chat' && !Rooms.rooms[r].blockGlobalDeclares) Rooms.rooms[r].add('|raw|<b>'+target+'</b></div>');
 		}
 
 		this.logModCommand(user.name+' declared '+target+' to all rooms.');
@@ -1858,7 +1858,7 @@ var commands = exports.commands = {
 		if (!this.can('gdeclare')) return false;
 
 		for (var id in Rooms.rooms) {
-			if (id !== 'global') if (Rooms.rooms[id].type !== 'battle') Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b>'+target+'</b></div>');
+			if (id !== 'global') if (Rooms.rooms[id].type !== 'battle' && !Rooms.rooms[id].blockGlobalDeclares) Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b>'+target+'</b></div>');
 		}
 		this.logModCommand(user.name+' globally declared (chat level) '+target);
 	},

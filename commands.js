@@ -984,7 +984,7 @@ var commands = exports.commands = {
 	newroomquestions:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>New Room Questions:</b><br>' +
-                	'Directions: Using the "/newroom" command, answer the following and number your answers.<br>' +
+                	'Directions: Using the "/newroom" command, answer the following and <i>number</i> your answers on one line.<br>' +
                 	'1. Prefered room name?<br>' +
                 	'2. Is this a new room, or does it already have an established user base to it that will follow it here?<br>' +
                 	'3. How many new users do you honestly think it will attract to the server?<br>' +
@@ -1006,7 +1006,7 @@ var commands = exports.commands = {
         if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
         if (target.length > 550) return this.sendReply('This new room suggestion is too long; it cannot exceed 550 characters.');
         if (!this.canTalk()) return;
-        Rooms.rooms.staff.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br>Suggested by: '+user.userid+'<br>Suggestion (see /newroomquestions):<br> '+target+'');
+        Rooms.rooms.staff.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:<b> '+user.userid+'<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> '+target+'');
         this.sendReply('Thanks, your new room suggestion has been sent.  We\'ll review your feedback soon and get back to you. ("'+target+'")');
 	},
 //End new room commands

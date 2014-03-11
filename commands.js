@@ -1409,7 +1409,7 @@ var commands = exports.commands = {
 	pas: 'pmallstaff',
 	pmallstaff: function(target, room, user) {
 		if (!target) return this.parse('/pmallstaff [message] - Sends a PM to every staff member online.');
-		if (!this.can('pmall')) return false;
+		if (!this.can('hotpatch')) return false;
 
 		for (var u in Users.users) { 
 			if (Users.users[u].isStaff) {

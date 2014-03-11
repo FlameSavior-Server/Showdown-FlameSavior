@@ -1015,6 +1015,7 @@ var commands = exports.commands = {
 
 		Users.users.target.send('|pm|~Room Request|Hello, "'+target+'".  Sorry, your recent room request has been denied.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we did\'t see a point for it on the server.  Regards, Gold Staff.'); } 
 		}
+		}
 	},
 //End new room commands
 	punishall: 'pa',

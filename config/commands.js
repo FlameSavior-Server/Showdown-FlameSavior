@@ -330,20 +330,10 @@ var commands = exports.commands = {
 		if(!target) return this.sendReply('/poke needs a target.');
 		return this.parse('/me pokes ' + target);
 	},
-	
-	twerk: function(target, room, user){
-		return this.parse('/me twerks');
-	},
-	
 
 	slap: function(target, room, user){
 		if(!target) return this.sendReply('/poke needs a target.');
 		return this.parse('/me slaps ' + target + ' in the face with a slipper');
-	},
-	
-	twerkon: function(target, room, user){
-		if(!target) return this.sendReply('/poke needs a target.');
-		return this.parse('/me twerks on ' + target + '.');
 	},
 	
 	s: function(target, room, user){
@@ -354,11 +344,6 @@ var commands = exports.commands = {
 	tierpoll: 'tiervote',
 	tiervote: function(target, room, user){
 		return this.parse('/poll Tournament Tier?, randombattle, cc1v1, 1v1, gen51v1, uu, gen5uu, nu, ru, lc, gen5lc, cap, ou, gen5ou, ou monotype, gen5mono, balanced hackmons, hackmons, ubers, doubles, gen5doubles, challenge cup, perseverance, seasonal, inverse');
-	},
-	
-	gurl: function(target, room, user){
-		if(!target) return this.sendReply('/sass needs a target.');
-		return this.parse('/me sasses ' + target + '!');
 	},
 
 	hallowme: function(target, room, user){
@@ -808,14 +793,14 @@ var commands = exports.commands = {
 		this.sendReplyBox('+ <b>Voice</b> - They can use ! commands like !groups, and talk during moderated chat<br />' +
 			'% <b>Driver</b> - The above, and they can mute. Global % can also lock users and check for alts<br />' +
 			'@ <b>Moderator</b> - The above, and they can ban users<br />' +
-			'&amp; <b>Leader</b> - The above, and they can promote to moderator and force ties<br />' +
+			'&amp; <b>Leader</b> - The above, and they can promote to moderator, force ties, make chat rooms, manage bucks and more<br />' +
 			'~ <b>Administrator</b> - They can do anything, like change what this message says<br />' +
 			'# <b>Room Owner</b> - They are administrators of the room and can almost totally control it');
 	},
 
 	opensource: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Pokemon Showdown is open source:<br />- Language: JavaScript (Node.js)<br />- <a href="https://github.com/Zarel/Pokemon-Showdown/commits/master">What\'s new?</a><br />- <a href="https://github.com/Zarel/Pokemon-Showdown">Server source code</a><br />- <a href="https://github.com/Zarel/Pokemon-Showdown-Client">Client source code</a>');
+		this.sendReplyBox('Pokemon Showdown is open source:<br />- Language: JavaScript (Node.js)<br />- <a href="https://github.com/Zarel/Pokemon-Showdown/commits/master">What\'s new?</a><br />- <a href="https://github.com/Zarel/Pokemon-Showdown">Server source code</a><br />- <a href="https://github.com/Zarel/Pokemon-Showdown-Client">Client source code</a><br />- <a href="https://github.com/FrPSServ/Pokemon-Showdown">Frost source code</a>');
 	},
 
 	avatars: function(target, room, user) {

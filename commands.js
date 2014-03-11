@@ -2530,11 +2530,23 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');
 		if (!this.can('pmall')) return false;
 
-		var pmName = '~Frost PM [Do not reply]';
+		var pmName = '~Frost PM';
 
 		for (var i in Users.users) {
 			var message = '|pm|'+pmName+'|'+Users.users[i].getIdentity()+'|'+target;
 			Users.users[i].send(message);
+		}
+	},
+	
+	pas: 'pmallstaff',
+	pmallstaff: function(target, room, user) {
+		if (!target) return this.parse('/pmallstaff [message] - Sends a PM to every staff member online.');
+		if (!this.can('pmall')) return false;
+
+		for (var u in Users.users) { 
+			if (Users.users[u].isStaff) {
+				Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target);
+			}
 		}
 	},
 

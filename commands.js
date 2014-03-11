@@ -584,6 +584,41 @@ var commands = exports.commands = {
 		}
 	},
 
+	closeleague: 'openleague',
+	openleague: function(target, room, user, connection, cmd) {
+		if (!room.isLeague) return this.sendReply("This is not a league room, if it is, get a Leader or Admin to set the room as a league room.");
+		if (!this.can('roommod', null, room)) return false;
+		if (!room.chatRoomData) {
+			return this.sendReply("This room cannot have a league toggle option.");
+		}
+		if (cmd === 'closeleague') {
+			if (!room.isOpen) return this.sendReply('The league is already marked as closed.');
+			delete room.isOpen;
+			delete room.chatRoomData.isOpen;
+			Rooms.global.writeChatRoomData();
+			return this.sendReply('This league has now been marked as closed.');
+		}
+		else {
+			if (room.isOpen) return this.sendReply('The league is already marked as open.');
+			room.isOpen = true;
+			room.chatRoomData.isOpen = true;
+			Rooms.global.writeChatRoomData();
+			return this.sendReply('This league has now been marked as open.');
+		}
+	},
+
+	leaguestatus: function(target, room, user) {
+		if (!room.isLeague) return this.sendReply("This is not a league room, if it is, get a Leader or Admin to set the room as a league room.");
+		if (!this.canBroadcast()) return;
+		if (room.isOpen) {
+			return this.sendReplyBox(room.title+' is <font color="green"><b>open</b></font> to challengers.');
+		}
+		else if (!room.isOpen) {
+			return this.sendReplyBox(room.title+' is <font color="red"><b>closed</b></font> to challengers.');
+		}
+		else return this.sendReply('This league does not have a status set.');
+	},
+
 	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");

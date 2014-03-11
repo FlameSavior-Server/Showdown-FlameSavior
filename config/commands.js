@@ -939,6 +939,8 @@ var commands = exports.commands = {
 			'- /declare <em>message</em>: make a declaration in the room<br />' +
 			'- /lockroom: locks the room preventing users from joining.<br />' +
 			'- /unlockroom: unlocks the room allowing users to join.<br />' +
+			'- /openleague: sets the league as open to challengers.<br />' +
+			'- /closeleague: sets the league as closed to challengers.<br />' +
 			'- /setwelcomemessage <em>message</em>: sets the message people will see when they join the room. Can contain html and must be bought from the store first.<br />' +
 			'- /modchat <em>[%/@/#]</em>: set modchat level<br />' +
 			'- /toggleglobaldeclares: disables/enables global declares in your room.<br />' +
@@ -2848,6 +2850,10 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'time' || target === 'servertime') {
 			matched = true;
 			this.sendReply('/time OR /servertime - Displays the current server time.');
+		}
+		if (target === 'all' || target === 'leaguestatus') {
+			matched = true;
+			this.sendReply('/leaguestatus - View whether the league you are in is open or closed to challengers.');
 		}
     	// Driver commands
     	if (target === '%' || target === 'unlink') {

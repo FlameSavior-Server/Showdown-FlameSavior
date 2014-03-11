@@ -1016,6 +1016,7 @@ var commands = exports.commands = {
         if (!this.canTalk()) return;
         Rooms.rooms.staff.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> '+user.userid+'<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> '+target+'');
         this.sendReply('Thanks, your new room suggestion has been sent.  We\'ll review your feedback soon and get back to you. ("'+target+'")');
+        //test
 	},
 	roomreply: function(target, room, user) {
 		if (!target) return this.parse('/roomreply [user] - Sends a reply to [user] saying that their room was denied. ');

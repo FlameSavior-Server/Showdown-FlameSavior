@@ -1009,6 +1009,14 @@ var commands = exports.commands = {
         Rooms.rooms.staff.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> '+user.userid+'<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> '+target+'');
         this.sendReply('Thanks, your new room suggestion has been sent.  We\'ll review your feedback soon and get back to you. ("'+target+'")');
 	},
+	roomreply: function(target, room, user) {
+		if (!target) return this.parse('/pmallstaff [message] - Sends a PM to every user in a room.');
+		if (!this.can('pban')) return false;
+
+	
+		users.users.'+target+'.send('|pm|~Room Request|Hello, "'+target+'".  Sorry, your recent room request has been denied.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we did\'t see a point for it on the server.  Regards, Gold Staff.'); } 
+		}
+	},
 //End new room commands
 	punishall: 'pa',
 	pa: function(target, room, user){

@@ -977,6 +977,14 @@ var commands = exports.commands = {
         this.sendReply('Thanks, your suggestion "'+target+'" has been sent.  We\'ll review your feedback soon.');
 	},
 //New Room Commands
+	newroomcommands:function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>New Room Commands</b><br>' +
+                	'-/newroomfaq - Shows an FAQ for making a new room.<br>' +
+                	'-/newroomquestions - A command with a list of questions for a future room founder to answer.<br>' +
+			'-/newroom - A command a future room founder will use to answer /newroomquestion\'s questions.<br>' +
+			'-/roomreply [user] - Denies a user of a room. Requires &, ~.');
+	},
 	newroomfaq:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('So, you\'re interested in making a new room on Gold, aye? Well, the process is rather simple, really! Do /newroomquestions and answer those questions with your answers and staff will review them to consider making your room!');

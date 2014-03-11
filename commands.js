@@ -1026,6 +1026,10 @@ var commands = exports.commands = {
 
 		Users.users[target].send('|pm|~Room Request|'+target+'|Hello, "'+target+'".  Sorry, your recent room request has been denied.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we did\'t see a point for it on the server.  Best of luck.  Regards, Gold Staff.');
 		
+		for (var u in Users.users) { if (Users.users[u].isStaff) {
+		Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|testing.');  
+		}
+	},
 			
 	},
 //End new room commands

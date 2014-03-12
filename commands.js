@@ -178,6 +178,34 @@ var commands = exports.commands = {
 		
 		this.logModCommand(user.name+' send a popup message to '+targetUser.name);
 	},
+	customsymbol: function(target, room, user){
+		var halloween = true;
+		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
+		if (!halloween) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
+		var symbol = '';
+		var symbols = ['☢','☠','☣','♀'];
+		var pick = Math.floor(Math.random()*3);
+		symbol = symbols[pick];
+		this.sendReply('You now have a a custom symbol!');
+		user.getIdentity = function(){
+			if(this.muted)	return '!' + this.name;
+			if(this.locked) return '‽' + this.name;
+			return symbol + this.name;
+		};
+		user.updateIdentity();
+		user.hasCustomSymbol = true;
+	},
+	resetsymbol: function(target, room, user) {
+		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');
+		user.getIdentity = function() {
+			if (this.muted) return '!' + this.name;
+			if (this.locked) return '‽' + this.name;
+			return this.group + this.name;
+		};
+		user.hasCustomSymbol = false;
+		user.updateIdentity();
+		this.sendReply('Your symbol has been reset.');
+	},
 	website:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');

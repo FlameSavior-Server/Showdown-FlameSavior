@@ -202,8 +202,7 @@ var commands = exports.commands = {
 			if (this.muted) return '!' + this.name;
 			if (this.locked) return '‽' + this.name;
 			return this.group + this.name;
-		};
-		user.hasCustomSymbol = false;
+		delete user.getIdentity;
 		user.updateIdentity();
 		this.sendReply('Your symbol has been reset.');
 	},

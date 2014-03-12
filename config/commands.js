@@ -1134,6 +1134,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font color="red" size="5"><b>Saburo</font></b><br><img src="http://i.imgur.com/pYUt8Hf.gif"><br>The god of dance.');
 	},
+	gara: 'garazan',
 	nub: 'garazan',
 	garazan: function(target, room, user) {
 		if (!this.canBroadcast()) return;

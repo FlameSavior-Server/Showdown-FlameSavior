@@ -1022,9 +1022,9 @@ var commands = exports.commands = {
         this.sendReply('Thanks, your new room suggestion has been sent.  We\'ll review your feedback soon and get back to you. ("'+target+'")');
 	      
        for (var u in Users.users) { if (Users.users[u].isStaff) {
-         Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|Attention: "'+user.userid+'" has submitted a new room suggestion. Please see staff room.'); } 
+         Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|Attention: "'+user.userid+'" has submitted a **new room suggestion**. Please see staff room.'); } 
 		}
-  },
+	},
 	roomreply: function(target, room, user) {
 		if (!target) return this.parse('/roomreply [user] - Sends a reply to [user] saying that their room was denied. ');
 		if (!this.can('pban')) return false;

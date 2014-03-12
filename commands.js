@@ -184,7 +184,7 @@ var commands = exports.commands = {
 		if (!halloween) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
 		var symbol = '';
 		var symbols = ['☢','☠','☣','♀'];
-		var pick = Math.floor(Math.random()*3);
+		var pick = Math.floor(Math.random()*4);
 		symbol = symbols[pick];
 		this.sendReply('You now have a a custom symbol!');
 		user.getIdentity = function(){

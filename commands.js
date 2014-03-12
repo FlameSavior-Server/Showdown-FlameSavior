@@ -91,7 +91,7 @@ var commands = exports.commands = {
 	},
 	crai: 'cry',
 	cry: function(target, room, user){
-		return this.parse('/me starts tearbending dramatically like Katara.');
+		return this.parse('/me starts tearbending dramatically like Katara~!');
 	},
 	dk: 'dropkick',
 	dropkick: function(target, room, user){

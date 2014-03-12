@@ -964,7 +964,8 @@ var commands = exports.commands = {
 	
 	},
 //Trainer Cards.
-
+	
+	pan: 'panpawn',
 	panpawn: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +

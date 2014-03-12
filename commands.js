@@ -2453,7 +2453,7 @@ var commands = exports.commands = {
 		this.sendReply( 'You are now hiding your auth symbol as \''+tar+ '\'.');
 		return this.logModCommand(user.name + ' is hiding auth symbol as \''+ tar + '\'');
 	},
-	resetsymbol: 'showauth',
+
 	show: 'showauth',
 	showauth: function(target, room, user){
 		if (!this.canTalk()) return;

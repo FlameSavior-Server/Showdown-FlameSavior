@@ -196,6 +196,16 @@ var commands = exports.commands = {
 		user.canCustomSymbol = false;
 		user.hasCustomSymbol = true;
 	},
+	resetsymbol: function(target, room, user) {
+ -		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');
+ -		user.getIdentity = function() {
+ -			if (this.muted) return '!' + this.name;
+ -			if (this.locked) return '‽' + this.name;
+ -			return this.group + this.name;
+ -		delete user.getIdentity;
+ -		user.updateIdentity();
+ -		this.sendReply('Your symbol has been reset.');
+ -	},
 	website:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');
@@ -2456,13 +2466,15 @@ var commands = exports.commands = {
 
 	show: 'showauth',
 	showauth: function(target, room, user){
-		if (!this.canTalk()) return;
-			return	this.sendReply( '/resetsymbol - access denied.');
+		if(!user.can('hideauth'))
+ 			return	this.sendReply( '/showauth - access denied.');
 
 		delete user.getIdentity;
 		user.updateIdentity();
+		this.sendReply('You have now revealed your auth symbol.');
+ 		return this.logModCommand(user.name + ' has revealed their auth symbol.');
 		this.sendReply('Your symbol has been reset.');
-		r
+		
 	},
 	
 	mn: 'modnote',

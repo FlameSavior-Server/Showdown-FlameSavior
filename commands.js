@@ -989,6 +989,10 @@ var commands = exports.commands = {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('So, you\'re interested in making a new room on Gold, aye? Well, the process is rather simple, really! Do /newroomquestions and answer those questions with your answers and staff will review them to consider making your room!');
 	},
+  testingstuff: function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('testing.');
+  },
 	newroomquestions:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>New Room Questions:</b><br>' +
@@ -1016,7 +1020,8 @@ var commands = exports.commands = {
         if (!this.canTalk()) return;
         Rooms.rooms.staff.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> '+user.userid+'<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> '+target+'');
         this.sendReply('Thanks, your new room suggestion has been sent.  We\'ll review your feedback soon and get back to you. ("'+target+'")');
-	},
+	//test
+  },
 	roomreply: function(target, room, user) {
 		if (!target) return this.parse('/roomreply [user] - Sends a reply to [user] saying that their room was denied. ');
 		if (!this.can('pban')) return false;

@@ -78,6 +78,7 @@ exports.BattleAliases = {
 	"wormadamground": "Wormadam-Sandy",
 	"wormadams": "Wormadam-Trash",
 	"wormadamsteel": "Wormadam-Trash",
+	"floettee": "Floette-Eternal-Flower",
 
 	// base formes
 	"nidoranfemale": "Nidoran-F",
@@ -138,8 +139,8 @@ exports.BattleAliases = {
 	"kyub": "Kyurem-Black",
 	"kyuw": "Kyurem-White",
 	"lando": "Landorus",
-	"lando-i": "Landorus",
-	"lando-t": "Landorus-Therian",
+	"landoi": "Landorus",
+	"landot": "Landorus-Therian",
 	"luke":  "Lucario",
 	"mence": "Salamence",
 	"p2": "Porygon2",

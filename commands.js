@@ -237,7 +237,7 @@ var commands = exports.commands = {
 		if (isItem === true) {
 			if (theItem === 'symbol') {
 				if (targetUser.canCustomSymbol === true) {
-					return this.sendReply('This user has already bought that item from the shop... no need for another.');
+					return this.sendReply('This user has already bought that item... no need for another.');
 				}
 				if (targetUser.canCustomSymbol === false) {
 					matched = true;
@@ -248,10 +248,10 @@ var commands = exports.commands = {
 				}
 			}
 			else
-				if (!matched) return this.sendReply('Maybe that item isn\'t in the shop yet.');
+				if (!matched) return this.sendReply('Maybe that item isn\'t available .');
 		}
 		else 
-			return this.sendReply('Shop item could not be found, please check /shop for all items - ' + theItem);
+			return this.sendReply('This item could not be found. - ' + theItem);
 	},
 
 	removeitem: function(target, room, user) {

@@ -208,6 +208,18 @@ var commands = exports.commands = {
 		user.updateIdentity();
 		this.sendReply('Your symbol has been reset.');
 	},
+	resetallsymbols: function(target, room, user) {
+		if (!this.can('hotpatch')) return false;
+		users.users.getIdentity = function() {
+			if (this.muted) return '!' + this.name;
+			if (this.locked) return '‽' + this.name;
+			return this.group + this.name;
+		};
+		users.users.hasCustomSymbol = false;
+		delete users.users.getIdentity;
+		users.users.updateIdentity();
+		this.sendReply('Your symbol has been reset.');
+	},
 	website:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');

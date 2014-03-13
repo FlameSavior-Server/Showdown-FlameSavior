@@ -247,72 +247,6 @@ var commands = exports.commands = {
 					targetUser.send(user.name + ' has given you ' + theItem + '! Use /customsymbol [symbol] to add the symbol!');
 				}
 			}
-			if (theItem === 'custom') {
-				if (targetUser.canCustomAvatar === true) {
-					return this.sendReply('This user has already bought that item from the shop... no need for another.');
-				}
-				if (targetUser.canCustomAvatar === false) {
-					matched = true;
-					targetUser.canCustomSymbol = true;
-					Rooms.rooms.lobby.add(user.name + ' has stolen a custom avatar from the shop!');
-					targetUser.send(user.name + ' has given you ' + theItem + '!');
-				}
-			}
-			if (theItem === 'animated') {
-				if (targetUser.canAnimated === true) {
-					return this.sendReply('This user has already bought that item from the shop... no need for another.');
-				}
-				if (targetUser.canCustomAvatar === false) {
-					matched = true;
-					targetUser.canCustomAvatar = true;
-					Rooms.rooms.lobby.add(user.name + ' has stolen a custom avatar from the shop!');
-					targetUser.send(user.name + ' has given you ' + theItem + '!');
-				}
-			}
-			if (theItem === 'room') {
-				if (targetUser.canChatRoom === true) {
-					return this.sendReply('This user has already bought that item from the shop... no need for another.');
-				}
-				if (targetUser.canChatRoom === false) {
-					matched = true;
-					targetUser.canChatRoom = true;
-					Rooms.rooms.lobby.add(user.name + ' has stolen a chat room from the shop!');
-					targetUser.send(user.name + ' has given you ' + theItem + '!');
-				}
-			}
-			if (theItem === 'trainer') {
-				if (targetUser.canTrainerCard === true) {
-					return this.sendReply('This user has already bought that item from the shop... no need for another.');
-				}
-				if (targetUser.canTrainerCard === false) {
-					matched = true;
-					targetUser.canTrainerCard = true;
-					Rooms.rooms.lobby.add(user.name + ' has stolen a trainer card from the shop!');
-					targetUser.send(user.name + ' has given you ' + theItem + '!');
-				}
-			}
-			if (theItem === 'fix') {
-				if (targetUser.canFixItem === true) {
-					return this.sendReply('This user has already bought that item from the shop... no need for another.');
-				}
-				if (targetUser.canFixItem === false) {
-					matched = true;
-					targetUser.canFixItem = true;
-					Rooms.rooms.lobby.add(user.name + ' has stolen the ability to alter a current trainer card or avatar from the shop!');
-					targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
-				}
-			}
-			if (theItem === 'declare') {
-				if (targetUser.canDecAdvertise === true) {
-					return this.sendReply('This user has already bought that item from the shop... no need for another.');
-				}
-				if (targetUser.canDecAdvertise === false) {
-					matched = true;
-					targetUser.canDecAdvertise = true;
-					Rooms.rooms.lobby.add(user.name + ' has stolen the ability to get a declare from the shop!');
-					targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
-				}
-			}
 			else
 				if (!matched) return this.sendReply('Maybe that item isn\'t in the shop yet.');
 		}
@@ -340,60 +274,6 @@ var commands = exports.commands = {
 			}
 			else
 				return this.sendReply('They do not have a custom symbol for you to remove.');
-		}
-		else if (target === 'custom') {
-			if (targetUser.canCustomAvatar) {
-				targetUser.canCustomAvatar = false;
-				this.sendReply(targetUser.name + ' no longer has a custom avatar ready to use.');
-				targetUser.send(user.name + ' has removed the custom avatar from you.');
-			}
-			else
-				return this.sendReply('They do not have a custom avatar for you to remove.');
-		}
-		else if (target === 'animated') {
-			if (targetUser.canAnimatedAvatar) {
-				targetUser.canAnimatedAvatar = false;
-				this.sendReply(targetUser.name + ' no longer has a animated avatar ready to use.');
-				targetUser.send(user.name + ' has removed the animated avatar from you.');
-			}
-			else
-				return this.sendReply('They do not have an animated avatar for you to remove.');
-		}
-		else if (target === 'room') {
-			if (targetUser.canChatRoom) {
-				targetUser.canChatRoom = false;
-				this.sendReply(targetUser.name + ' no longer has a chat room ready to use.');
-				targetUser.send(user.name + ' has removed the chat room from you.');
-			}
-			else
-				return this.sendReply('They do not have a chat room for you to remove.');
-		}
-		else if (target === 'trainer') {
-			if (targetUser.canTrainerCard) {
-				targetUser.canTrainerCard = false;
-				this.sendReply(targetUser.name + ' no longer has a trainer card ready to use.');
-				targetUser.send(user.name + ' has removed the trainer card from you.');
-			}
-			else
-				return this.sendReply('They do not have a trainer card for you to remove.');
-		}
-		else if (target === 'fix') {
-			if (targetUser.canFixItem) {
-				targetUser.canFixItem = false;
-				this.sendReply(targetUser.name + ' no longer has the fix to use.');
-				targetUser.send(user.name + ' has removed the fix from you.');
-			}
-			else
-				return this.sendReply('They do not have a trainer card for you to remove.');
-		}
-		else if (target === 'declare') {
-			if (targetUser.canDecAdvertise) {
-				targetUser.canDecAdvertise = false;
-				this.sendReply(targetUser.name + ' no longer has a declare ready to use.');
-				targetUser.send(user.name + ' has removed the declare from you.');
-			}
-			else
-				return this.sendReply('They do not have a trainer card for you to remove.');
 		}
 		else
 			return this.sendReply('That isn\'t a real item you fool!');

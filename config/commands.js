@@ -203,6 +203,11 @@ var commands = exports.commands = {
 			var ips = Object.keys(targetUser.ips);
 			this.sendReply('IP' + ((ips.length > 1) ? 's' : '') + ': ' + ips.join(', '));
 		}
+		if (targetUser.canCustomSymbol) {
+			var i = '';
+			if (targetUser.canCustomSymbol) i += ' Custom Symbol';
+			this.sendReply('Eligible for: ' + i);
+		}
 		var output = 'In rooms: ';
 		var first = true;
 		for (var i in targetUser.roomCount) {

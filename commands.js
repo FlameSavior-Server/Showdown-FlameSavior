@@ -204,6 +204,7 @@ var commands = exports.commands = {
 			return this.group + this.name;
 		};
 		user.hasCustomSymbol = false;
+		delete user.getIdentity;
 		user.updateIdentity();
 		this.sendReply('Your symbol has been reset.');
 	},

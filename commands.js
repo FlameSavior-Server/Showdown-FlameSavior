@@ -181,6 +181,7 @@ var commands = exports.commands = {
 	customsymbol: function(target, room, user) {
 		var free = false;
 		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
+		if (!this.canTalk()) return;
 		if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
 		if(!target || target.length > 1) return this.sendReply('/customsymbol [symbol] - changes your symbol (usergroup) to the specified symbol. The symbol can only be one character');
 		var a = target;

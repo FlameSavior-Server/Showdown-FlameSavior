@@ -245,7 +245,7 @@ var commands = exports.commands = {
 					matched = true;
 					this.sendReply(targetUser.name + ' can now use /customsymbol to get a custom symbol.');
 					targetUser.canCustomSymbol = true;
-					Rooms.rooms.staff.add(targetUser + ' has received a custom symbol from '+user.userid+'!');
+					Rooms.rooms.room.add(targetUser + ' has received a custom symbol from '+user.userid+'!');
 					targetUser.send(user.name + ' has given you ' + theItem + '! Use /customsymbol [symbol] to add the symbol!');
 				}
 			}
@@ -258,7 +258,7 @@ var commands = exports.commands = {
 
 	removeitem: function(target, room, user) {
 		if (!target) return this.parse('/help removeitem');
-		if(!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+		if(!user.can('pban')) return this.sendReply('You do not have enough authority to do this.');
 
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;

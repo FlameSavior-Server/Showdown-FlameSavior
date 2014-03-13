@@ -208,18 +208,7 @@ var commands = exports.commands = {
 		user.updateIdentity();
 		this.sendReply('Your symbol has been reset.');
 	},
-	resetallsymbols: function(target, room, user) {
-		if (!this.can('hotpatch')) return false;
-		users.users.getIdentity = function() {
-			if (this.muted) return '!' + this.name;
-			if (this.locked) return '‽' + this.name;
-			return this.group + this.name;
-		};
-		users.users.hasCustomSymbol = false;
-		delete users.users.getIdentity;
-		users.users.updateIdentity();
-		this.sendReply('Your symbol has been reset.');
-	},
+	
 	website:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');
@@ -231,8 +220,8 @@ var commands = exports.commands = {
                 this.sendReplyBox('<center>Cick the Poké Ball to enter Pawn\’s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
 	},
 	/*********************************************************
-    * Nature Commands                                  
-    *********************************************************/
+	* Nature Commands                                  
+	*********************************************************/
 	nature: 'n',
         n: function(target, room, user) {
                 if (!this.canBroadcast()) return;
@@ -416,7 +405,7 @@ var commands = exports.commands = {
                 }
                 code.write('\n'+user.name+': '+fc);
                 return this.sendReply("Your Friend Code: "+fc+" has been set.");
-        },
+        	},
 		
 		viewcode: 'gc',
 		getcodes: 'gc',
@@ -440,9 +429,9 @@ var commands = exports.commands = {
                 }
                 code.write('\n'+user.name+': '+studiouser);
                 return this.sendReply(+user+' has been added to bee able to join TheStudioAuth.');
-	 },
+	 	},
         
-	     roomfounder: function(target, room, user) {
+	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");
 		}
@@ -459,8 +448,8 @@ var commands = exports.commands = {
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
-	     badges: 'badge',
-             badge: function(target, room, user) {
+	badges: 'badge',
+        badge: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 if (target == '') target = user.userid;
                 target = target.toLowerCase();
@@ -967,7 +956,7 @@ var commands = exports.commands = {
         if (room.chatRoomData) {
             Rooms.global.writeChatRoomData();
         }
-    },
+    	},
 
 	rk: 'rkick',
 	rkick: function(target, room, user){
@@ -1034,7 +1023,7 @@ var commands = exports.commands = {
   testingstuff: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('testing.');
-  },
+	},
 	newroomquestions:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>New Room Questions:</b><br>' +
@@ -1156,7 +1145,7 @@ var commands = exports.commands = {
 	serverreminder: function(target, room, user, connection) {
                 var reminders = fs.readFileSync('config/reminders.html','utf8');
                 return user.send('|popup|'+reminders);
-    },
+	},
 	pic: 'image',
 	image: function(target, room, user){
 				if(!target) return this.sendReply('/image [url] - Shows an image using /a. Requires ~.');
@@ -1452,7 +1441,7 @@ var commands = exports.commands = {
                 if (filetype == '.png' && targetUser.canCustomAvatar) targetUser.canCustomAvatar = false;
             });
         });
-    },
+	},
 
 	masspm: 'pmall',
 	pmall: function(target, room, user) {
@@ -1840,32 +1829,7 @@ var commands = exports.commands = {
 			return this.sendReply('User '+targetUser+' not found.');
 		}
 	},*/
-	profile2: function (target, room, user, connection, cmd) {
-		if (!this.canBroadcast()) {
-			return;
-		}
-		var targetUser = this.targetUserOrSelf(target);
-		if (!targetUser) {
-            return this.sendReply('User '+this.targetUsername+' not found.');
-        }
-		var avatar = '<img src="http://play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png' + '" align="left" height="80">';
-		var name = '<b>User:</b> ' + targetUser.name;
-		
-		if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
-			c
-		} else {
-			var rank = '<b>Group:</b> Regular User';
-		}
-		/*********************************************************
-		* Display
-		*********************************************************/
-		if (!targetUser.authenticated) {
-			var unregisteredName = name + ' (Unregistered)';
-			this.sendReplyBox(avatar + unregisteredName + '<br/>' + rank + '<br/>' + pokeDollar + '<br/>' + badges + '<br/>' + tourWinsDisplay + '<br/>' + tourTrophies);
-		} else if (Users.user== true) {
-			return display;
-		}
-	},	
+	
 	tell: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');

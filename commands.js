@@ -239,7 +239,7 @@ var commands = exports.commands = {
 		if (isItem === true) {
 			if (theItem === 'symbol') {
 				if (targetUser.canCustomSymbol === true) {
-					return this.sendReply('This user has already bought that item... no need for another.');
+					return this.sendReply('This user has already has that item... no need for another.');
 				}
 				if (targetUser.canCustomSymbol === false) {
 					matched = true;

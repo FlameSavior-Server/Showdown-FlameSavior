@@ -179,11 +179,7 @@ var commands = exports.commands = {
 		this.logModCommand(user.name+' send a popup message to '+targetUser.name);
 	},
 	customsymbol: function(target, room, user) {
-  		if (target === 'free')
-  		var free = true;
-  		if (target === 'off')
   		var free = false;
-		}
   		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
  		if (!this.canTalk()) return;
   		if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');

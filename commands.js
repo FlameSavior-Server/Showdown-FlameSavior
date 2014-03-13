@@ -179,6 +179,7 @@ var commands = exports.commands = {
 		
 		this.logModCommand(user.name+' send a popup message to '+targetUser.name);
 	},
+	cs: 'customsymbol',
 	customsymbol: function(target, room, user) {
 		if(!user.canCustomSymbol) return this.sendReply('You don\'t have the permission to use this command.');
   		//var free = true;
@@ -199,6 +200,7 @@ var commands = exports.commands = {
   		user.canCustomSymbol = false;
   		user.hasCustomSymbol = true;
   	},
+  	rs: 'resetsymbol',
 	resetsymbol: function(target, room, user) {
 		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');
 		user.getIdentity = function() {
@@ -243,7 +245,7 @@ var commands = exports.commands = {
 					matched = true;
 					this.sendReply(targetUser.name + ' can now use /customsymbol to get a custom symbol.');
 					targetUser.canCustomSymbol = true;
-					Rooms.rooms.room.add(user.name + ' has received a custom symbol from Santa Clause!');
+					Rooms.rooms.staff.add(targetUser + ' has received a custom symbol from '+user.userid+'!');
 					targetUser.send(user.name + ' has given you ' + theItem + '! Use /customsymbol [symbol] to add the symbol!');
 				}
 			}

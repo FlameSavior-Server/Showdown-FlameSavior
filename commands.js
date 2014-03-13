@@ -213,6 +213,7 @@ var commands = exports.commands = {
 		user.updateIdentity();
 		this.sendReply('Your symbol has been reset.');
 	},
+	gi: 'awarditem',
 	shoplift: 'awarditem',
 	giveitem: 'awarditem',
 	awarditem: function(target, room, user) {

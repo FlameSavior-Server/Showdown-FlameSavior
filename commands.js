@@ -215,7 +215,7 @@ var commands = exports.commands = {
 	giveitem: 'awarditem',
 	awarditem: function(target, room, user) {
 		if (!target) return this.parse('/help awarditem');
-		if(!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+		if(!user.can('pban')) return this.sendReply('You do not have enough authority to do this.');
 
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;

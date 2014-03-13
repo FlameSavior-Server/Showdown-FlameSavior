@@ -243,7 +243,7 @@ var commands = exports.commands = {
 					matched = true;
 					this.sendReply(targetUser.name + ' can now use /customsymbol to get a custom symbol.');
 					targetUser.canCustomSymbol = true;
-					Rooms.rooms.lobby.add(user.name + ' has received a custom symbol from Santa Clause!');
+					Rooms.rooms.staff.add(user.name + ' has received a custom symbol from Santa Clause!');
 					targetUser.send(user.name + ' has given you ' + theItem + '! Use /customsymbol [symbol] to add the symbol!');
 				}
 			}

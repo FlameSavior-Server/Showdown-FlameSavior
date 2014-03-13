@@ -244,14 +244,14 @@ var commands = exports.commands = {
 					Rooms.rooms.lobby.add(user.name + ' has stolen custom symbol from the shop!');
 					targetUser.send(user.name + ' has given you ' + theItem + '! Use /customsymbol [symbol] to add the symbol!');
 				}
-			}
-else
+			
+			else
 				if (!matched) return this.sendReply('Maybe that item isn\'t in the shop yet.');
 		}
 		else 
 			return this.sendReply('Shop item could not be found, please check /shop for all items - ' + theItem);
 	},
-	
+
 	removeitem: function(target, room, user) {
 		if (!target) return this.parse('/help removeitem');
 		if(!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
@@ -272,9 +272,6 @@ else
 			}
 			else
 				return this.sendReply('They do not have a custom symbol for you to remove.');
-		}
-			else
-				return this.sendReply('They do not have a trainer card for you to remove.');
 		}
 		else
 			return this.sendReply('That isn\'t a real item you fool!');

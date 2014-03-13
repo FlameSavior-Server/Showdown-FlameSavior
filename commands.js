@@ -209,7 +209,76 @@ var commands = exports.commands = {
 		user.updateIdentity();
 		this.sendReply('Your symbol has been reset.');
 	},
+	shoplift: 'awarditem',
+	giveitem: 'awarditem',
+	awarditem: function(target, room, user) {
+		if (!target) return this.parse('/help awarditem');
+		if(!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+
+		if (!target) return this.parse('/help awarditem');
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+
+		var matched = false;
+		var isItem = false;
+		var theItem = '';
+		for (var i = 0; i < inShop.length; i++) {
+			if (target.toLowerCase() === inShop[i]) {
+				isItem = true;
+				theItem = inShop[i];
+			}
+		}
+		if (isItem === true) {
+			if (theItem === 'symbol') {
+				if (targetUser.canCustomSymbol === true) {
+					return this.sendReply('This user has already bought that item from the shop... no need for another.');
+				}
+				if (targetUser.canCustomSymbol === false) {
+					matched = true;
+					this.sendReply(targetUser.name + ' can now use /customsymbol to get a custom symbol.');
+					targetUser.canCustomSymbol = true;
+					Rooms.rooms.lobby.add(user.name + ' has stolen custom symbol from the shop!');
+					targetUser.send(user.name + ' has given you ' + theItem + '! Use /customsymbol [symbol] to add the symbol!');
+				}
+			}
+else
+				if (!matched) return this.sendReply('Maybe that item isn\'t in the shop yet.');
+		}
+		else 
+			return this.sendReply('Shop item could not be found, please check /shop for all items - ' + theItem);
+	},
 	
+	removeitem: function(target, room, user) {
+		if (!target) return this.parse('/help removeitem');
+		if(!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+
+		if (!target) return this.parse('/help removeitem');
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+
+		if (target === 'symbol') {
+			if (targetUser.canCustomSymbol) {
+				targetUser.canCustomSymbol = false;
+				this.sendReply(targetUser.name + ' no longer has a custom symbol ready to use.');
+				targetUser.send(user.name + ' has removed the custom symbol from you.');
+			}
+			else
+				return this.sendReply('They do not have a custom symbol for you to remove.');
+		}
+			else
+				return this.sendReply('They do not have a trainer card for you to remove.');
+		}
+		else
+			return this.sendReply('That isn\'t a real item you fool!');
+	},
 	website:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');

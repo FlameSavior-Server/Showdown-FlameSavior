@@ -624,6 +624,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Empoleon XV</b>:   '+comcun+'');
                 }
+                if (target === 'typhozzz') {
+                        matched = true;
+                        this.sendReplyBox('<b>Typhozzz</b>:   '+twinner+'');
+                }
                 if (target === 'jackzero') {
                         matched = true;
                         this.sendReplyBox('<b>JackZero</b>:    '+comcun+'    '+mod+'    '+leader+'');

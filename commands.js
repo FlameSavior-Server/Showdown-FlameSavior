@@ -12,6 +12,7 @@
  */
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
 var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
+var inShop = ['symbol'];
 var ipbans = fs.createWriteStream('config/ipbans.txt', {'flags': 'a'});
 var avatar = fs.createWriteStream('config/avatars.csv', {'flags': 'a'});
 //spamroom

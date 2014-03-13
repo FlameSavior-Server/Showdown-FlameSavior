@@ -2160,50 +2160,17 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('For the best experience, please use our custom client by clicking <a href="http://frost-server.no-ip.org">here</a>.')
 	},
-	
-		kongstunes: function(target, room, user) {
-			if (!this.canBroadcast()) return;
-			this.sendReplyBox('Get ready to go on an adventure!<br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/38_-_mine_menace__donkey_kong_country_returns_soundtrack1.mp3><button>Mine Menace </button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/73_-_crankys_theme__donkey_kong_country_returns_soundtrack.mp3><button>Kranky Kongs Theme</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/blinx_-_the_time_sweeper_-_shop_-_collection_view_music.mp3><button>Welcome to Frost!</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/04_-_london_calling_-_michael_giacchino___star_trek_into_darkness.mp3><button>Khan</button></a><br />');
-		},
 		
-		minor: function(target, room, user) {
-			if (!this.canBroadcast()) return;
-			this.sendReplyBox('Selected by BrittleWind and Pack:<br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/tron_legacy_-_soundtrack_ost_-_03_the_son_of_flynn_-_daft_punk.mp3><button>Tron: The Son of Flynn</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/audiomachine_breath_and_life_extended_version.mp3><button>Breath and Life</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/cloud_atlas_-_sextet_trailer_song_hd.mp3><button>Cloud Atlas Sextet</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/the_dark_knight_rises_official_soundtrack_-_a_fire_will_rise.mp3><button>A Fire Will Rise</button></a><br />');
-		},
+	getbucks: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('You can currently get bucks by:<br />' +
+		'<b>Signing up</b>: Sign up for the forums by clicking <a href="http://frostserver.net/forums/">here.</a> Once you have signed up, PM an Admin or Leader to get 1 buck.<br />' +
+		'<b>Introducing yourself</b>: Head over to the official Frost forum and make an introduction for yourself <a href="http://frostserver.net/forums/forumdisplay.php?fid=6">here</a>. Once you have subscribed, PM an Admin or Leader to get 2 bucks.<br />' +
+		'<b>Making a video</b>: Make a video on YouTube about anything Frost Server related! It can even be something as simple as a battle. Make sure to have the word Frost incorporated in the title of the video, ' +
+		'and a link to the server in the description of your video. Once you have made the video, PM an Admin or Leader to get between 5 - 10 bucks depending on quality.');
+	},
 		
-		getbucks: function(target, room, user) {
-			if (!this.canBroadcast()) return;
-			this.sendReplyBox('You can currently get points by:<br />' +
-			'<b>Signing up</b>: Sign up for the forums by clicking <a href="http://frostserver.forumotion.com/">here.</a> Once you have signed up, PM an admin to get 2 bucks.<br />' +
-			'<b>Subscribing</b>: Subscribe to the Frost youtube channel by clicking <a href="http://www.youtube.com/channel/UCoIYnKO7buF_N_FRDiSGFJA">here.</a> Once you have subscribed, PM an admin to get 2 bucks.<br />' +
-			'<b>Making a video</b>: Make a video on YouTube about anything Frost Server related! It can even be something as simple as a battle. Make sure to have the word Frost incorporated in the Title of description of your video. Once you have made the video, PM an admin to get 10 bucks. If the video is exceptionally good, you will recieve an extra 5 bucks.<br />' +
-			'For more ways to get bucks, check the website by clicking <a href="http://frostserver.weebly.com/prizes-and-points.html">here.</a>.');
-			},
-			
-		moviemusic: function(target, room, user) {
-			if (!this.canBroadcast()) return;
-			this.sendReplyBox('Guess the movie based on the song!<br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/inception_soundtrack-dream_is_collapsing_hans_zimmer.mp3><button>Listen!</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/sherlock_holmes__a_game_of_shadows_ost_17_-_the_end__full_hd.mp3><button>Listen!</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/hans_zimmer_-_madagascar_2_-_theme_song.mp3><button>Listen!</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/ratatouille_theme_song__colette_shows_him_le_ropes.mp3><button>Brittles Theme</button></a><br />' +
-			'<a href=http://www.weebly.com/uploads/2/1/8/8/21888580/14_-_main_theme_-_michael_giacchino___star_trek_into_darkness.mp3><button>Listen!</button></a><br />');
-		},
-		
-		trivia: function(target, room, user) {
-			if (!this.canBroadcast()) return;
-			this.sendReplyBox('<center><img src="http://i.imgur.com/9IOpaSa.gif"><font size="6" color="#172CAF"><i>Welcome to the Trivia Room!</i><img src="http://i.imgur.com/hSRAGcP.gif"><img src="http://i.imgur.com/JzKmvWD.png">')
-		},
-		
-		coolasian: function(target, room, user) {
+	coolasian: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Trainer: Cool Asian<br \>' +
 		'Ace: Politoed<br \>' + 
@@ -2431,15 +2398,10 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/tFikucg.png"><br><img src="http://i.imgur.com/wSs98Iy.gif"><br><font color="red"><blink>Ace: Weavile</blink><br></font>I\'m not even on drugs. I\'m just weird.');
 	},
-	
-	prizes: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('A list of prizes can be found <a href="http://frostserver.weebly.com/prizes-and-points.html">here</a>.')
-	},
 
 	forum: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.forumotion.com/">here</a>.')
+		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.net/forums/">here</a>.')
 	}, 
 	
 	mastersofthecolor: function(target, room, user) {

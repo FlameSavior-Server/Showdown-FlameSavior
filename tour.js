@@ -1094,6 +1094,7 @@ var cmds = {
 		if (answers[0] == 'tournament' || answers[0] == 'tour') answers = tour.splint(formats);
 		if (answers.length < 3) return this.sendReply('Correct syntax for this command is /poll question, option, option...');
 		var question = answers[0];
+		question = clean(question);
 		answers.splice(0, 1);
 		var answers = answers.join(',').toLowerCase().split(',');
 		tour[room.id].question = question;

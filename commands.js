@@ -2059,7 +2059,7 @@ var commands = exports.commands = {
 			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
 		}
 		if (!this.can('warn', targetUser, room)) return false;
-
+		if (!this.canTalk()) return;
 		this.addModCommand(''+targetUser.name+' was warned by '+user.name+'.' + (target ? " (" + target + ")" : ""));
 		targetUser.send('|c|~|/warn '+target);
 		this.add('|unlink|' + targetUser.userid);

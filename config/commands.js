@@ -1110,7 +1110,7 @@ var commands = exports.commands = {
 	jack: 'jackzero',
 	jackzero: function(target, room, user) {
 	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><font size="4" color="blue">JackZero<br></font><img src="http://i.imgur.com/zNuDheU.png" width="200" height="200"><br>I prefer the freedom of being hated to the shackles of expectaional love.');
+	this.sendReplyBox('<center><font size="4" color="blue">JackZero<br></font><img src="http://i.imgur.com/cE6LTKm.png"><br>I prefer the freedom of being hated to the shackles of expectaional love.');
 	},
 	wd: 'windoge',
 	windoge: function(target, room, user) {

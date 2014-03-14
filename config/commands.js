@@ -1393,6 +1393,10 @@ var commands = exports.commands = {
 			matched = true;
 			buffer += 'A user is autoconfirmed when they have won at least one rated battle and have been registered for a week or longer.<br />';
 		}
+		if (target === 'all' || target === 'customsymbol' || target === 'cs') {
+			matched = true;
+			buffer += 'A custom symbol will bring your name up to the top of the userlist with a custom symbol next to it.  These reset after the server restarts.<br />';
+		}
 		if (target === 'all' || target === 'league') {
 			matched = true;
 			buffer += 'Welcome to Gold!  So, you\'re interested in making or moving a league here?  If so, read <a href="http://goldserver.weebly.com/making-a-league.html">this</a> and write down your answers on a <a href="http://pastebin.com">Pastebin</a> and PM it to an admin.  Good luck!<br />';

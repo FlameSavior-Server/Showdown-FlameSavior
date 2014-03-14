@@ -1134,7 +1134,7 @@ var commands = exports.commands = {
 		}
 	},
 	roomreply: function(target, room, user) {
-		if (!target) return this.parse('/roomreply [user] - Sends a reply to [user] saying that their room was denied. ');
+		if (!target) return this.sendReply('/roomreply [user] - Denies a user of their recent room request.');
 		if (!this.can('pban')) return false;
 		var target = toUserid(target);
 		

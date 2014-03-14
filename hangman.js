@@ -201,6 +201,7 @@ var cmds = {
 		if(user.userid === hangman[room.id].hangmaner[0]) {
 			return this.sendReply('You cannot guess the word because you are running hangman!');
 		}
+		if (target.length > 10) return this.sendReply('This guess is too long; it cannot exceed 10 characters.');
 		var targetword = target.toLowerCase();
 		if(targetword === hangman[room.id].guessword[0]) {
 			this.add('|html|Congratulations! <b>' + user.name + '</b> has guessed the word, which was: \'' + hangman[room.id].guessword[0] + '\'.');

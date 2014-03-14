@@ -1237,6 +1237,18 @@ var commands = exports.commands = {
 		'/toursize [size] - Changes the size of a currently running tournament<br \>' +
 		'/replace [username], [username] - Replaces user in a tournament with the second user');
     },
+    
+    	/***************************************
+	* Music Boxes                          *
+	***************************************/
+    
+    
+    
+    	/***************************************
+	* League Cards                         *
+	***************************************/
+    
+
 
 	/***************************************
 	* Trainer Cards                        *

@@ -1234,7 +1234,11 @@ var commands = exports.commands = {
                 if(!target) return this.sendReply('/dropkick needs a target.');
                 return this.parse('/me dropkicks ' + target + ' across the Pokémon Stadium!');
 	},
-	
+	givesymbol: 'gs',
+	gs: function(target, room, user){
+                if(!target) return this.sendReply('/givesymbol [user] - Gives permission for this user to set a custom symbol.');
+                return this.parse('/gi '+target+', symbol');
+	},
 	halloween: function(target, room, user){
                 if(!target) return this.sendReply('/halloween needs a target.');
                 return this.parse('/me takes ' + target +'`s pumpkin and smashes it all over the Pokémon Stadium!');

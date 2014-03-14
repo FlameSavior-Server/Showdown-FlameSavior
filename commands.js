@@ -1138,7 +1138,8 @@ var commands = exports.commands = {
 		if (!this.can('pban')) return false;
 		var target = toUserid(target);
 		
-		Rooms.rooms.staff.add('|html|<b>'+target+'</b>\'s room request has been <font color="red">denied</font> by '+user.userid+'.');	
+		Rooms.rooms.staff.add('|html|<b>'+target+'</b>\'s room request has been <font color="red">denied</font> by '+user.userid+'.');
+		Rooms.rooms.room.add('|html|<b>'+target+'</b>\'s room request has been <font color="red">denied</font> by '+user.userid+'.');	
 
 		Users.users[target].send('|pm|~Room Request|'+target+'|Hello, "'+target+'".  Sorry, your recent room request has been denied.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we did\'t see a point for it on the server.  Best of luck.  Regards, Gold Staff.');
 		

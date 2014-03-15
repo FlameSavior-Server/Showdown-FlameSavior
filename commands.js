@@ -286,6 +286,11 @@ var commands = exports.commands = {
                 this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');
 	
 	},
+	news:function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('Gold\'s news can be found <a href="http://goldserver.weebly.com/news.html">here</a>.');
+	
+	},
 	ps: 'shop',
 	shop:function(target, room, user) {
                 if (!this.canBroadcast()) return;

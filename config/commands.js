@@ -1415,7 +1415,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/5AKQ0L3.gif">' +
                 '<img src="http://i.imgur.com/PgXqSU1.png" height="190" width="170""><br />' +
                 '<b>Ace:</b> Umbreon<br />' +
-                'You want to fight me? Go ahead. But to beat me it will take more than just raw power.</center>');
+                'Are you prepared to face the infamous dream team knows as the team team?</center>');
     },
 
 	scorpion: function(target, room, user) {

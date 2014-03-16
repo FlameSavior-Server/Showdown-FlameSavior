@@ -1262,6 +1262,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	eevee: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/NZAER3B.gif" width="170">' +
+                '<img src="http://i.imgur.com/lMqGTh2.gif" width="200">' +
+                '<img src="http://i.imgur.com/B1T2oZ2.jpg" width="150" height="170"><br />' +
+                '<b>Ace:</b> Eevee<br />' +
+                'I will not evolve.</center>');
+    	},
+	
 	sayshi: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/6AuMmY8.jpg" width="120" height="120">' +

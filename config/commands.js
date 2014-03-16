@@ -1254,6 +1254,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	sayshi: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/6AuMmY8.jpg" width="120" height="120">' +
+                '<img src="http://i.imgur.com/9XgZdfG.png?1"width="280">' +
+                '<img src="http://i.imgur.com/tBtM9J0.gif?1" width="140"><br />' +
+                '<b>Ace:</b> Togekiss<br />' +
+                'Keep Calm and Defend the Skies! #Ho-Oh.</center>');
+    	},
+	
 	falls: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/qnPzMju.gif" width="100" height="140">' +

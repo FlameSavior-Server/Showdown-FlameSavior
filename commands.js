@@ -2406,6 +2406,7 @@ var commands = exports.commands = {
                 }
         },
 
+	eating: 'away',
 	gaming: 'away',
     	sleep: 'away',
     	work: 'away',
@@ -2434,6 +2435,9 @@ var commands = exports.commands = {
 			break;
 			case 'work':
 			t = 'Working';
+			break;
+			case 'eating':
+			t = 'Eating';
 			break;
 			default:
 			t = 'Away'

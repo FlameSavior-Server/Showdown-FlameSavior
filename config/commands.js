@@ -1779,14 +1779,13 @@ var commands = exports.commands = {
     	this.sendReplyBox('<center><img src="http://img-cache.cdn.gaiaonline.com/442e3b40f5df1955620f588ccabe0b57/http://i70.photobucket.com/albums/i120/selena60007000/A%20Pokemon%20rp/Espeon.jpg" width="70" height="95"><img src="http://i.imgur.com/Ltp92WB.gif"><img src="http://th09.deviantart.net/fs71/PRE/f/2010/240/f/4/umbreon_espeon_gijinka_girls_by_peachykit-d2xh34e.jpg" width="120" height="95"><br /><center><b>Ace:Espeon </b></center><center><b>Catchphrase: Take a gander at me and youll like what you see. </b></center>');
     },
     
-    themapples : 'mapples',
-    mapples: function(target, room, user) {
+    apples: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img height="80" src="http://images.wikia.com/pokemontowerdefense/images/5/52/Infernape-infernape-23393713-629-354.png">' +
-        	'<img src="http://i.imgur.com/xSdk7j6.gif">' +
-        	'<img height="80" src="http://i806.photobucket.com/albums/yy343/double_trouble_bmgf/pokemon-dp/snapshot20100813014143.jpg"><br />' +
-        	'<b>Ace: </b>Infernape<br />' +
-        	'<b>Catchphrase: </b>My goal is to....<s>catch</s> enslave them all</center>');
+        this.sendReplyBox('<center><img src="http://fc03.deviantart.net/fs71/f/2010/147/a/7/Meowth_VS_Seviper___Infernape_by_KokinhoKokeiro.gif"  width="150">' +
+                '<img src="http://i.imgur.com/NvU4TIQ.gif"  width="260">' +
+                '<img src="http://i.imgur.com/Z1XOqL9.gif" width="140"><br />' +
+                '<b>Ace:</b> Brute Force<br />' +
+                'If you stall, I hate you.</center>');
     },
     
     

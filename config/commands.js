@@ -1253,6 +1253,16 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	falls: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/qnPzMju.gif" width="100" height="140">' +
+                '<img src="http://i.imgur.com/irz5Lfn.gif" width="180">' +
+                '<img src="http://i.imgur.com/8otty35.gif" width="120" height="160><br />' +
+                '<b>Ace:</b> Latias and Milotic<br />' +
+                'Are you epileptic?</center>');
+    	},	
+
 	pan: 'panpawn',
 	panpawn: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -1293,7 +1303,7 @@ var commands = exports.commands = {
 	spec: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://livedoor.blogimg.jp/pokelog2ch/imgs/4/6/46668e86.png" width="300" height="200"><br />' +
-                '<img src="http://i.imgur.com/Y88oEBG.gif">' +
+                '<img src="http://i.imgur.com/Y88oEBG.gif"><br />' +
                 '<b>Ace:</b> FlameBird<br />' +
                 'Faith is the bird that feels the light when the dawn is still dark.</center>');
     	},

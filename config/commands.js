@@ -317,6 +317,14 @@ var commands = exports.commands = {
 		if (!target) return this.sendReply('/pickrandom [option 1], [option 2], ... - Randomly chooses one of the given options.');
 		if (!this.canBroadcast()) return;
 		var targets;
+		if (target.toLowerCase() === 'type') {
+			var type = [];
+			for (var i in Tools.data.TypeChart) {
+				type.push(i);
+			}
+			var result = Math.floor(Math.random() * type.length);
+			return this.sendReplyBox(type[result].trim());
+		}
 		if (target.indexOf(',') === -1) {
 			targets = target.split(' ');
 		} else {

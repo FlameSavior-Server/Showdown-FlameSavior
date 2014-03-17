@@ -1939,7 +1939,7 @@ var commands = exports.commands = {
 
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
-	
+/*	
 	impersonate:'imp',
 	imp: function(target, room, user) {
 		if (!user.can('broadcast')) return this.sendReply('/imp - Access denied.');
@@ -1957,7 +1957,7 @@ var commands = exports.commands = {
 		room.add('|c|'+targetUser.getIdentity()+'|'+ target + ' ``**(imp by '+ user.getIdentity() + ')**``');
 		
 	},
-
+*/
 	/*
 	punt: function (target, room, user) {
 		if (!target) return this.sendReply('You must select a user to punt.\n/punt [user] - punts the selected user.');

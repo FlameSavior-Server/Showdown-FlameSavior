@@ -1291,11 +1291,11 @@ var commands = exports.commands = {
 	
 	falls: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/qnPzMju.gif" width="100" height="140">' +
-                '<img src="http://i.imgur.com/irz5Lfn.gif" width="180">' +
-                '<img src="http://i.imgur.com/8otty35.gif" width="120" height="160"><br />' +
-                '<b>Ace:</b> Latias and Milotic<br />' +
-                'Are you epileptic?</center>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/iW1z5vz.gif" width="150" height="120"><br />' +
+                '<img src="http://i.imgur.com/Rh5tELv.png"><br />' +
+                '<img src="http://i.imgur.com/cSf4QD1.gif" width="180"><br />' +
+                '<b>Ace:</b> Logic<br />' +
+                'That really puffled my jiggles.</center>');
     	},	
 
 	pan: 'panpawn',

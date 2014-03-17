@@ -1262,6 +1262,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	boo: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/S8ly3.gif" width="150">' +
+                '<img src="http://i.imgur.com/EyMReMo.gif" width="250">' +
+                '<img src="http://i.imgur.com/nPsQa20.gif" width="150"><br />' +
+                '<b>Ace:</b> GIMMICK<br />' +
+                'If you aren\'t playing pokemon, then you aren\'t having any fun.</center>');
+    	},
+	
+	rangermike: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/PIdZxWs.jpg weigh="190" height="133">' +
+                '<img src="http://i.imgur.com/gRqlPCX.gif">' +
+                '<img src="http://25.media.tumblr.com/4a60d16096f9d8f68c64ee71562308b1/tumblr_my110cdEsw1rfejkno1_500.gif" weigh="170" height="115"><br />' +
+                '<b>Ace:</b> Chatot<br />' +
+                'Let me serenade you.</center>');
+    	},
+
 	eevee: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/NZAER3B.gif" width="170">' +
@@ -1282,11 +1300,11 @@ var commands = exports.commands = {
 	
 	falls: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/qnPzMju.gif" width="100" height="140">' +
-                '<img src="http://i.imgur.com/irz5Lfn.gif" width="180">' +
-                '<img src="http://i.imgur.com/8otty35.gif" width="120" height="160"><br />' +
-                '<b>Ace:</b> Latias and Milotic<br />' +
-                'Are you epileptic?</center>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/iW1z5vz.gif" width="150" height="120"><br />' +
+                '<img src="http://i.imgur.com/Rh5tELv.png"><br />' +
+                '<img src="http://i.imgur.com/cSf4QD1.gif" width="180"><br />' +
+                '<b>Ace:</b> Logic<br />' +
+                'That really puffled my jiggles.</center>');
     	},	
 
 	pan: 'panpawn',

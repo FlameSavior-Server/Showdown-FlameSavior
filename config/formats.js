@@ -506,12 +506,6 @@ exports.Formats = [
 		]
 	},
 	{
-		name: "OU Monotype",
-		section: "Other Metagames",
-
-		ruleset: ['OU', 'Same Type Clause']
-	},
-	{
 		name: "Middle Cup",
 		section: "Other Metagames",
 
@@ -1026,7 +1020,7 @@ exports.Formats = [
 		section: "Other Metagames",
 
 		ruleset: ['Pokemon', 'Standard', 'Same Type Clause', 'Evasion Abilities Clause', 'Team Preview'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite']
+		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite']
 	},
 	{
 		name: "[Gen 5] Glitchmons",

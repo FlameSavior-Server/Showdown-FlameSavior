@@ -1262,6 +1262,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	boo: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/S8ly3.gif" width="150">' +
+                '<img src="http://i.imgur.com/EyMReMo.gif" width="250">' +
+                '<img src="http://i.imgur.com/nPsQa20.gif" width="150"><br />' +
+                '<b>Ace:</b> GIMMICK<br />' +
+                'If you aren\'t playing pokemon, then you aren\'t having any fun.</center>');
+    	},
+	
 	rangermike: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/PIdZxWs.jpg weigh="190" height="133">' +

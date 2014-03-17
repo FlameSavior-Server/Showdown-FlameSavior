@@ -3378,7 +3378,7 @@ function getRandMessage(user){
 		break;
 		case 41: message = message + user + ' is blasting off again!'; // bought by Noiprocs
 		break;
-		case 42: message = message + user + ' flies back to his comfy nest'; // bought by Aerodactylol
+		case 42: message = message + user + ' flies back to their comfy nest!'; // bought by Aerodactylol
 		break;
 		default: message = message + user + ' bought a poisoned Pepsi!';
 	};

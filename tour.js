@@ -1016,7 +1016,7 @@ var cmds = {
 	},
 
 	toursettings: function(target, room, user) {
-		if (!tour.maxauth(user)) return this.sendReply('You do not have enough authority to use this command.');
+		if (!tour.maxauth(user) || !this.can('declare')) return this.sendReply('You do not have enough authority to use this command.');
 		if (target === 'replace on') {
 			config.tourunlimitreplace = true;
 			return this.sendReply('Replacing past round one has been enabled.');

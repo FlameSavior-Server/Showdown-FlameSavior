@@ -1262,6 +1262,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	rangermike: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/PIdZxWs.jpg weigh="190" height="133">' +
+                '<img src="http://i.imgur.com/gRqlPCX.gif">' +
+                '<img src="http://25.media.tumblr.com/4a60d16096f9d8f68c64ee71562308b1/tumblr_my110cdEsw1rfejkno1_500.gif" weigh="170" height="115"><br />' +
+                '<b>Ace:</b> Chatot<br />' +
+                'Let me serenade you.</center>');
+    	},
+
 	eevee: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/NZAER3B.gif" width="170">' +

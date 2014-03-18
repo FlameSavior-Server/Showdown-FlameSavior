@@ -1251,7 +1251,7 @@ var commands = exports.commands = {
 	
     cosybox: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
                 '<center><h1><font color="red"><u>Cosy\'s Music Box</u></color></h1></center>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=P2mQaAT51Kw">Operation Ground and Pound</a><br>' +

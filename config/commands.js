@@ -2380,7 +2380,7 @@ var commands = exports.commands = {
 	
 	hulasaur: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img width="110" height="110" src="http://www.gamezombie.tv/wp-content/uploads/2013/10/Bulbasaur-1.png"><img src="http://i.imgur.com/qHnpJfN.png"><img width="125" height="110" src="http://willytpokemon.webs.com/photos/My-Favorite-Pokemon-Pictures/Jolteon.gif"><br /><center><b>Ace: </b>Jolteon</center><br /><center><b>Catchphrase: </b>Hula hoopin\' to the max</center>');
+		this.sendReplyBox('<center><img width="110" height="70" src="http://i.imgur.com/8owuies.gif"><img src="http://i.imgur.com/qHnpJfN.png"><img width="125" height="110" src="http://willytpokemon.webs.com/photos/My-Favorite-Pokemon-Pictures/Jolteon.gif"><br /><center><b>Ace: </b>Jolteon</center><br /><center><b>Catchphrase: </b>Hula hoopin\' to the max</center>');
 	},
 	
 	cookies: 'sirecookies',

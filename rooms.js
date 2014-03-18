@@ -535,6 +535,8 @@ var BattleRoom = (function() {
 		this.users = {};
 		this.format = format;
 		this.auth = {};
+		this.auth[p1.userid] = '+';
+		this.auth[p2.userid] = '+';
 		//console.log("NEW BATTLE");
 
 		var formatid = toId(format);

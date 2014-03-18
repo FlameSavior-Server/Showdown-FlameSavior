@@ -1901,6 +1901,7 @@ var commands = exports.commands = {
 	setmotd: 'motd',
 	motd: function (target, room, user) {
 		if (!this.can('declare')) return false;
+		return this.sendReply('Command disabled.');
 		if (!target || target.indexOf(',') == -1) {
 			return this.sendReply('The proper syntax for this command is: /motd [message], [interval (minutes)]');
 		}

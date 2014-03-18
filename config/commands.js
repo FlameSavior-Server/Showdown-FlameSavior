@@ -1257,7 +1257,7 @@ var commands = exports.commands = {
                 '<center><b><a href="https://www.youtube.com/watch?v=P2mQaAT51Kw">Operation Ground and Pound</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=XbGs_qK2PQA">Rap God</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=sENM2wA_FTg">It\'s Time</a><br></center>' +
-                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">');
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
     
     

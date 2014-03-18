@@ -23,19 +23,11 @@
  * @license MIT license
  */
 
-<<<<<<< HEAD
- var THROTTLE_DELAY = 500;
-=======
 var THROTTLE_DELAY = 600;
->>>>>>> upstream/master
 
  var users = {};
  var prevUsers = {};
  var numUsers = 0;
-
-<<<<<<< HEAD
- var bannedIps = {};
- var lockedIps = {};
 
 var ipbans = fs.createWriteStream("config/ipbans.txt", {flags: "a"}); // do not remove this line
 try {
@@ -85,12 +77,10 @@ exports.addVip = function(user) {
 		}
 	}
 }
-=======
 var bannedIps = {};
 var bannedUsers = {};
 var lockedIps = {};
 var lockedUsers = {};
->>>>>>> upstream/master
 
 /**
  * Get a user.
@@ -1306,14 +1296,10 @@ var User = (function () {
 		room = Rooms.get(room);
 		if (!room) return false;
 		if (room.staffRoom && !this.isStaff) return false;
-<<<<<<< HEAD
 		if (room.vip && !this.vip && !this.isStaff) return false;
-		if (this.userid && room.bannedUsers && this.userid in room.bannedUsers) return false;
-=======
 		if (room.bannedUsers) {
 			if (this.userid in room.bannedUsers || this.autoconfirmed in room.bannedUsers) return false;
 		}
->>>>>>> upstream/master
 		if (this.ips && room.bannedIps) {
 			for (var ip in this.ips) {
 				if (ip in room.bannedIps) return false;

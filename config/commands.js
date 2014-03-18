@@ -926,13 +926,9 @@ var commands = exports.commands = {
 			'- /mute OR /m <em>username</em>: 7 minute mute<br />' +
 			'- /hourmute OR /hm <em>username</em>: 60 minute mute<br />' +
 			'- /unmute <em>username</em>: unmute<br />' +
-<<<<<<< HEAD
-			'- /announce <em>message</em>: make an announcement<br />' +
-			'- /roomlog: view the moderator log in the room<br />' +
-=======
 			'- /announce OR /wall <em>message</em>: make an announcement<br />' +
-			'- /modlog <em>username</em>: search the moderator log of the room<br />' +
->>>>>>> upstream/master
+			'- /roomlog: view the moderator log in the room<br />' +
+			//'- /modlog <em>username</em>: search the moderator log of the room<br />' +
 			'<br />' +
 			'Room moderators (@) can also use:<br />' +
 			'- /rkick <em>username</em>: kicks the user from the room<br />' +
@@ -2766,7 +2762,7 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'tell') {
 			matched = true;
 			this.sendReply('/tell [username], [message] - Sends a message to the user which they see when they next speak');
-		 }
+		}
 		if (target === 'all' || target === 'tourstats' || target === 'ts') {
 			matched = true;
 			this.sendReply('/tourstats [username], [tier] - Shows the target users tournament stats. Tier may be replaced with \"all\" to view the targets ranking in every tier.');
@@ -2797,7 +2793,10 @@ var commands = exports.commands = {
 			this.sendReply('/ignore [user] - Ignores all messages from the user [user].');
 			this.sendReply('Note that staff messages cannot be ignored.');
 		}
-<<<<<<< HEAD
+		if (target === 'all' || target === 'invite') {
+			matched = true;
+			this.sendReply('/invite [username], [roomname] - Invites the player [username] to join the room [roomname].');
+		}
 		if (target === 'all' || target === 'resetsymbol') {
 			matched = true;
 			this.sendReply('/resetsymbol - Resets your symbol back to default, only works if you have a custom symbol.');
@@ -2838,18 +2837,11 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/leaguestatus - View whether the league you are in is open or closed to challengers.');
 		}
-    	// Driver commands
-    	if (target === '%' || target === 'unlink') {
-    		matched = true;
-    		this.sendReply('/unlink [username] - Prevents users from clicking on any links [username] has posted. Requires: % @ & ~')
-    	}
-		if (target === '%' || target === 'invite') {
-=======
-		if (target === 'all' || target === 'invite') {
->>>>>>> upstream/master
-			matched = true;
-			this.sendReply('/invite [username], [roomname] - Invites the player [username] to join the room [roomname].');
-		}
+    		// Driver commands
+    		if (target === '%' || target === 'unlink') {
+    			matched = true;
+    			this.sendReply('/unlink [username] - Prevents users from clicking on any links [username] has posted. Requires: % @ & ~')
+    		}
 		if (target === '%' || target === 'lock' || target === 'l') {
 			matched = true;
 			this.sendReply('/lock OR /l [username], [reason] - Locks the user from talking in all chats. Requires: % @ & ~');

@@ -583,15 +583,13 @@ var commands = exports.commands = {
 						for (var i in searches[search]) {
 							var move = Tools.getMove(i);
 							if (!move.exists) return this.sendReplyBox('"' + move + '" is not a known move.');
-							var canLearn = (template.learnset.sketch && !(move.id in {'chatter':1,'struggle':1,'magikarpsrevenge':1})) || template.learnset[move.id];
-							if ((!canLearn && searches[search][i]) || (searches[search][i] === false && canLearn)) dex[mon] = false;
+							var prevoTemp = Tools.getTemplate(template.id);
+							while (prevoTemp.prevo && prevoTemp.learnset && !(prevoTemp.learnset[move.id])) {
+								prevoTemp = Tools.getTemplate(prevoTemp.prevo);
+							}
+							var canLearn = (prevoTemp.learnset.sketch && !(move.id in {'chatter':1,'struggle':1,'magikarpsrevenge':1})) || prevoTemp.learnset[move.id];
+							if ((!canLearn && searches[search][i]) || (searches[search][i] === false && canLearn)) delete dex[mon];
 						}
-					}
-					for (var mon in dex) {
-						if (dex[mon] && dex[mon].evos.length) {
-							for (var evo in dex[mon].evos) if (dex[dex[mon].evos[evo]] !== false) dex[dex[mon].evos[evo]] = Tools.getTemplate(dex[mon].evos[evo]);
-						}
-						if (!dex[mon]) delete dex[mon];
 					}
 					break;
 
@@ -928,8 +926,13 @@ var commands = exports.commands = {
 			'- /mute OR /m <em>username</em>: 7 minute mute<br />' +
 			'- /hourmute OR /hm <em>username</em>: 60 minute mute<br />' +
 			'- /unmute <em>username</em>: unmute<br />' +
+<<<<<<< HEAD
 			'- /announce <em>message</em>: make an announcement<br />' +
 			'- /roomlog: view the moderator log in the room<br />' +
+=======
+			'- /announce OR /wall <em>message</em>: make an announcement<br />' +
+			'- /modlog <em>username</em>: search the moderator log of the room<br />' +
+>>>>>>> upstream/master
 			'<br />' +
 			'Room moderators (@) can also use:<br />' +
 			'- /rkick <em>username</em>: kicks the user from the room<br />' +
@@ -2794,6 +2797,7 @@ var commands = exports.commands = {
 			this.sendReply('/ignore [user] - Ignores all messages from the user [user].');
 			this.sendReply('Note that staff messages cannot be ignored.');
 		}
+<<<<<<< HEAD
 		if (target === 'all' || target === 'resetsymbol') {
 			matched = true;
 			this.sendReply('/resetsymbol - Resets your symbol back to default, only works if you have a custom symbol.');
@@ -2840,6 +2844,9 @@ var commands = exports.commands = {
     		this.sendReply('/unlink [username] - Prevents users from clicking on any links [username] has posted. Requires: % @ & ~')
     	}
 		if (target === '%' || target === 'invite') {
+=======
+		if (target === 'all' || target === 'invite') {
+>>>>>>> upstream/master
 			matched = true;
 			this.sendReply('/invite [username], [roomname] - Invites the player [username] to join the room [roomname].');
 		}

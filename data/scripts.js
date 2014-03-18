@@ -1045,7 +1045,7 @@ exports.BattleScripts = {
 					if (hasMove['gunkshot']) rejected = true;
 					break;
 				case 'psychic':
-					if (hasMove['psyshock']) rejected = true;
+					if (hasMove['psyshock'] || hasMove['storedpower']) rejected = true;
 					break;
 				case 'fusionbolt':
 					if (setupType && hasMove['boltstrike']) rejected = true;
@@ -1324,6 +1324,9 @@ exports.BattleScripts = {
 				}
 				if ((abilities[0] === 'Chlorophyll' || abilities[1] === 'Chlorophyll' || abilities[2] === 'Chlorophyll') && ability !== 'Solar Power' && hasMove['sunnyday']) {
 					ability = 'Chlorophyll';
+				}
+				if (template.id === 'sigilyph') {
+					ability = 'Magic Guard';
 				}
 				if (template.id === 'combee') {
 					// it always gets Hustle but its only physical move is Endeavor, which loses accuracy

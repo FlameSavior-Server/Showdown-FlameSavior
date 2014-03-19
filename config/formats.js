@@ -45,11 +45,18 @@ exports.Formats = [
 		banlist: []
 	},
 	{
-		name: "UU (beta)",
+		name: "UU",
 		section: "XY Singles",
 
 		ruleset: ['Pokemon', 'Standard', 'Team Preview'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Heracronite', 'Medichamite', 'Gardevoirite', 'OU', 'BL', 'Drizzle', 'Drought']
+		banlist: ['Uber', 'OU', 'BL',
+			// Banned items
+			'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Heracronite', 'Medichamite', 'Gardevoirite', 'Houndoominite',
+			// Banned moves
+			'Swagger',
+			// Banned abilities
+			'Drizzle', 'Drought'
+		]
 	},
 	{
 		name: "LC",
@@ -113,37 +120,12 @@ exports.Formats = [
 		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod']
 	},
 	{
-		name: "Smogon Doubles (suspect test)",
+		name: "Smogon Doubles",
 		section: "XY Doubles",
 
 		gameType: 'doubles',
 		ruleset: ['Pokemon', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'Evasion Abilities Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Team Preview'],
 		banlist: ['Unreleased', 'Illegal', 'Dark Void', 'Soul Dew',
-			'Mewtwo', 'Mewtwo-Mega-X', 'Mewtwo-Mega-Y',
-			'Lugia',
-			'Ho-Oh',
-			'Kyogre',
-			'Groudon',
-			'Rayquaza',
-			'Dialga',
-			'Palkia',
-			'Giratina', 'Giratina-Origin',
-			'Arceus', 'Arceus-Bug', 'Arceus-Dark', 'Arceus-Dragon', 'Arceus-Electric', 'Arceus-Fairy', 'Arceus-Fighting', 'Arceus-Fire', 'Arceus-Flying', 'Arceus-Ghost', 'Arceus-Grass', 'Arceus-Ground', 'Arceus-Ice', 'Arceus-Poison', 'Arceus-Psychic', 'Arceus-Rock', 'Arceus-Steel', 'Arceus-Water',
-			'Reshiram',
-			'Zekrom',
-			'Kyurem-White',
-			'Xerneas',
-			'Yveltal'
-		]
-	},
-	{
-		name: "Smogon Doubles",
-		section: "XY Doubles",
-
-		gameType: 'doubles',
-		searchShow: false,
-		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
-		banlist: ['Dark Void', 'Soul Dew',
 			'Mewtwo', 'Mewtwo-Mega-X', 'Mewtwo-Mega-Y',
 			'Lugia',
 			'Ho-Oh',
@@ -178,6 +160,7 @@ exports.Formats = [
 		searchShow: false,
 		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
 		banlist: ['Dark Void', 'Soul Dew',
+			// Uber Pokémon
 			'Mewtwo', 'Mewtwo-Mega-X', 'Mewtwo-Mega-Y',
 			'Lugia',
 			'Ho-Oh',
@@ -193,60 +176,14 @@ exports.Formats = [
 			'Kyurem-White',
 			'Xerneas',
 			'Yveltal',
-			'Aegislash',
-			'Alakazam',
-			'Amoonguss',
-			'Azumarill',
-			'Breloom',
-			'Chandelure',
-			'Charizard',
-			'Clefable',
-			'Cloyster',
-			'Conkeldurr',
-			'Cresselia',
-			'Dragonite',
-			'Excadrill',
-			'Ferrothorn',
-			'Garchomp',
-			'Gardevoir',
-			'Gastrodon',
-			'Genesect',
-			'Gengar',
-			'Gliscor',
-			'Goodra',
-			'Greninja',
-			'Gyarados',
-			'Heatran',
-			'Hitmontop',
-			'Infernape',
-			'Jolteon',
-			'Kangaskhan',
-			'Klefki',
-			'Landorus-Therian',
-			'Lucario',
-			'Mamoswine',
-			'Manectric',
-			'Mawile',
-			'Meowstic',
-			'Metagross',
-			'Ninetales',
-			'Politoed',
-			'Reuniclus',
-			'Rotom-Wash',
-			'Rhyperior',
-			'Sableye',
-			'Scizor',
-			'Scrafty',
-			'Sylveon',
-			'Talonflame',
-			'Terrakion',
-			'Thundurus',
-			'Togekiss',
-			'Trevenant',
-			'Tyranitar',
-			'Venusaur',
-			'Volcarona',
-			'Whimsicott']
+			// OU Pokémon
+			'Abomasnow', 'Aegislash', 'Amoonguss', 'Ampharos', 'Azumarill', 'Bisharp', 'Breloom', 'Chandelure', 'Charizard', 'Conkeldurr',
+			'Cresselia', 'Dragonite', 'Dusclops', 'Excadrill', 'Ferrothorn', 'Garchomp', 'Gardevoir', 'Gastrodon', 'Genesect', 'Gengar',
+			'Gliscor', 'Greninja', 'Gyarados', 'Heatran', 'Hitmontop', 'Jirachi', 'Kangaskhan', 'Klefki', 'Landorus-T', 'Latios', 'Lucario',
+			'Mamoswine', 'Manectric', 'Mawile', 'Metagross', 'Ninetales', 'Politoed', 'Reuniclus', 'Rhyperior', 'Rotom-W', 'Sableye',
+			'Salamence', 'Scizor', 'Shaymin-S', 'Sylveon', 'Talonflame', 'Terrakion', 'Thundurus', 'Togekiss', 'Trevenant', 'Tyranitar',
+			'Venusaur', 'Volcarona', 'Whimsicott', 'Zapdos'
+		]
 	},
 	{
 		name: "XY Battle Spot Doubles",

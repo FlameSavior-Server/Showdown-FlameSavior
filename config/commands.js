@@ -1271,6 +1271,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	mating: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i254.photobucket.com/albums/hh108/naten2006/oie_1944237QcDokLVq_zps0977c0b9.gif">' +
+                '<img src="http://i254.photobucket.com/albums/hh108/naten2006/cooltext1482514275_zps4e7ca2e6.png">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/kecleon.gif"><br />' +
+                '<b>Aces:</b> Uxie and Kecleon<br />' +
+                '<font color=purple>Maten (pronounced Mating): Now and Forever.</font></center>');
+    	},
+	
+	crypt: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/B0NESFk.jpg?1" width="150">' +
+                '<img src="http://i.imgur.com/mCe3Nja.gif" width="240">' +
+                '<img src="http://i.imgur.com/TKHoBN7.jpg?1" width="150"><br />' +
+                '<font color=blue><i>I have a disease called awesome, you wouldn\'t understand since you don\'t have it.</i></font><br />' +
+                '<font color=red><blink><b>Ace:</font></blink></b> <font color=black><blink>Awesomeness</font></blink></center>');
+    	},
+	
 	boo: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/S8ly3.gif" width="150">' +

@@ -1260,6 +1260,17 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
     
+    	tailzbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=Izx9ADLjgbM">Ain\'t It Fun</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
+                '<center><b><a href="http://youtu.be/1wYNFfgrXTI?t=1m">When I\'m Gone</a><br>' +
+                '<center><b><a href="http://youtu.be/LFhEBmNwX_E?t=30s">Alone Together</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    },
+    
     
     	/***************************************
 	* League Cards                         *
@@ -1270,6 +1281,15 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	thunderstruck: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/AXS5k3k.jpg" height="80"><br />' +
+                '<img src="http://i.imgur.com/YYFLqNU.jpg" width="250" height="80"><br />' +
+                '<img src="http://i.imgur.com/NF8AQpA.jpg" width="180" height="80"><br />' +
+                '<b>Ace:</b> Stall Scor<br />' +
+                '<marquee bgcolor=green scrollamount="5">I wonder how long... How long will I remain anchored at this harbor known as battle? And Then i said COME ON IIIN!!!</marquee></center>');
+    	},
 	
 	mating: function(target, room, user) {
         if (!this.canBroadcast()) return;

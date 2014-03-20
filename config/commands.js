@@ -2283,7 +2283,7 @@ var commands = exports.commands = {
 	
 	jd: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<img width=100% height=200 src="http://i.imgur.com/6gkSSam.jpg">');
+		this.sendReply('|raw|<img width=100% height=260 src="http://i.imgur.com/6gkSSam.jpg">');
 	},
 	
 	familymantpsn: function(target, room, user) {

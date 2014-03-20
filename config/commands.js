@@ -2283,24 +2283,7 @@ var commands = exports.commands = {
 	
 	jd: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<marquee direction="right"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif">' +
-			'<img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif">' +
-			'<img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif">' +
-			'<img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif">' +
-			'<img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif">' +
-			'<img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif">' +
-			'<img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"></marquee><br />' +
-			'<img width=100% height=400 src="http://i.imgur.com/6gkSSam.jpg"><br />' +
-			'<marquee direction="left"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif">' +
-			'<img src="http://i.imgur.com/gnG81Af.gif"></marquee>');
+		this.sendReply('|raw|<img width=100% height=200 src="http://i.imgur.com/6gkSSam.jpg">');
 	},
 	
 	familymantpsn: function(target, room, user) {

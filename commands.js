@@ -452,15 +452,16 @@ var commands = exports.commands = {
                         this.sendReply('Nature "'+target+'" not found. Check your spelling?');
                 }
         },
-	/*********************************************************
-    * Friend Codes                                    
-    *********************************************************/
-		fch: 'friendcodehelp',
-		friendcodehelp:function(target, room, user) {
+/*********************************************************
+* Friend Codes                                    
+*********************************************************/
+	fch: 'friendcodehelp',
+	friendcodehelp:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>Friend Code Help:</b> <br><br />' +
                 '/friendcode (/fc) [friendcode] - Sets your Friend Code.<br />' +
                 '/getcode (gc) - Sends you a popup of all of the registered user\'s Friend Codes.<br />' +
+                '/deletecode [user] - Deletes this user\'s friend code from the server (Requires %, @, &, ~)<br>' +
                 '<i>--Any questions, PM papew!</i>');
                 },
              
@@ -499,7 +500,7 @@ var commands = exports.commands = {
 			return this.sendReply('/deletecode [user] - Deletes the Friend Code of the User.');
 		}
 		t = this;
-		if (!this.can('warn')) return false;
+		if (!this.can('lock')) return false;
 		fs.readFile('config/friendcodes.txt','utf8',function(err,data) {
 			if (err) console.log(err);
 			hi = this;

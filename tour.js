@@ -507,10 +507,10 @@ var cmds = {
 		}
 		else {
 			targets[1] = parseInt(targets[1]);
+			if (targets[1] > 128) return this.sendReply('Tournaments are limited to a maximum of 128 players.');
 		}
 		if (isNaN(targets[1])) return this.sendReply('Proper syntax for this command: /tour tier, size');
 		if (targets[1] < 3) return this.sendReply('Tournaments must contain 3 or more people.');
-		if (targets[1] > 128) return this.sendReply('Tournaments are limited to a maximum of 128 players.');
 
 		this.parse('/endpoll');
 		tour.reset(rid);

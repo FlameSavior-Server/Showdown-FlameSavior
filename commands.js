@@ -493,6 +493,40 @@ var commands = exports.commands = {
                 var codes = fs.readFileSync('config/friendcodes.txt','utf8');
                 return user.send('|popup|'+codes);
 		},
+		
+	deletecode: function(target, room, user) {
+		if (!target) {	
+			return this.sendReply('/deletecode [user] - Deletes the Friend Code of the User.');
+		}
+		t = this;
+		if (!this.can('warn')) return false;
+		fs.readFile('config/friendcodes.txt','utf8',function(err,data) {
+			if (err) console.log(err);
+			hi = this;
+			var row = (''+data).split('\n');
+			match = false;
+			line = '';
+			for (var i = row.length; i > -1; i--) {
+				if (!row[i]) continue;
+				var line = row[i].split(':');
+				if (target === line[0]) {
+					match = true;
+					line = row[i];
+				}
+				break;
+			}
+			if (match === true) {
+				var re = new RegExp(line,'g');
+				var result = data.replace(re, '');
+				fs.writeFile('config/friendcodes.txt',result,'utf8',function(err) {
+					if (err) t.sendReply(err);
+					t.sendReply('The Friendcode '+line+' has been deleted.');
+				});
+			}else{
+				t.sendReply('There is no match.');
+			}
+		});
+	},
 //End Friend Code commands
 		studiopermissions: function(target, room, user, connection) {
 				if(!this.canBroadcast()|| !user.can('lock')) return this.sendReply('/studiopermissions - Access Denied.');

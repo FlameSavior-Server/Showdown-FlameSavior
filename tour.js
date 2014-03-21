@@ -510,6 +510,7 @@ var cmds = {
 		}
 		if (isNaN(targets[1])) return this.sendReply('Proper syntax for this command: /tour tier, size');
 		if (targets[1] < 3) return this.sendReply('Tournaments must contain 3 or more people.');
+		if (targets[1] > 128) return this.sendReply('Tournaments are limited to a maximum of 128 players.');
 
 		this.parse('/endpoll');
 		tour.reset(rid);
@@ -541,6 +542,7 @@ var cmds = {
 		target = parseInt(target);
 		if (isNaN(target)) return this.sendReply('Proper syntax for this command: /tour size');
 		if (target < 3) return this.sendReply('A tournament must have at least 3 people in it.');
+		if (target > 128) return this.sendReply('Tournaments are limited to a maximum of 128 players.');
 		if (target < tour[room.id].players.length) return this.sendReply('Target size must be greater than or equal to the amount of players in the tournament.');
 		tour[room.id].size = target;
 		tour.reportdue(room);

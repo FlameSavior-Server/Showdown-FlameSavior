@@ -607,7 +607,7 @@ var commands = exports.commands = {
 			'<tr><td>Trainer</td><td>Buys a trainer card which shows information through a command such as /brittlewind (note: third image costs 10 bucks extra, ask for more details)</td><td>40</td></tr>' +
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
-			'</table><br />To buy an item from the shop, use /buy [command]. <br />Also do /moneycommands to view money based commands.</center>');
+			'</table><br />To buy an item from the shop, use /buy [command]. </center>');
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
 	},
 

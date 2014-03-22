@@ -203,9 +203,15 @@ var commands = exports.commands = {
 			var ips = Object.keys(targetUser.ips);
 			this.sendReply('IP' + ((ips.length > 1) ? 's' : '') + ': ' + ips.join(', '));
 		}
-		if (targetUser.canCustomSymbol) {
+		if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise) {
 			var i = '';
 			if (targetUser.canCustomSymbol) i += ' Custom Symbol';
+			if (targetUser.canCustomAvatar) i += ' Custom Avatar';
+			if (targetUser.canAnimatedAvatar) i += ' Animated Avatar';
+			if (targetUser.canChatRoom) i += ' Chat Room';
+			if (targetUser.canTrainerCard) i += ' Trainer Card';
+			if (targetUser.canPOTD) i += ' Alter card/avatar';
+			if (targetUser.canDecAdvertise) i += ' Declare Advertise.';
 			this.sendReply('Eligible for: ' + i);
 		}
 		var output = 'In rooms: ';

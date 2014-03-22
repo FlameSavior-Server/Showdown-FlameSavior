@@ -354,7 +354,6 @@ exports.tour = function(t) {
 					log.write("\n"+Users.users[w[0]].userid+','+Users.users[w[0]].money);
 				}
 				tour[rid].status = 0;
-				if (tourMoney > 0) fs.appendFile('logs/transactions.log','\n'+Date()+': '+Users.users[w[0]].name+' has won '+tourMoney+' '+p+' from a tournament in '+Rooms.rooms[rid].title+'. They now have '+Users.users[w[0]].money);	
 			} else {
 				var html = '<hr /><h3><font color="green">Round '+ tour[rid].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tour[rid].tier].name + "<hr /><center>";
 				var pBye = new Array();

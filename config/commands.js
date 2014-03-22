@@ -215,6 +215,11 @@ var commands = exports.commands = {
 			if (targetUser.canBadge) i += ' VIP Badge.';
 			this.sendReply('Eligible for: ' + i);
 		}
+		if (targetUser.canVIP)
+			var i = '';
+			if (targetUser.canVIP) i+= '(VIP User)'
+		this.sendReply(''+i+'')
+		}	
 		var output = 'In rooms: ';
 		var first = true;
 		for (var i in targetUser.roomCount) {

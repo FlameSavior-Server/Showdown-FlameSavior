@@ -1843,9 +1843,10 @@ var commands = exports.commands = {
                 var pban = fs.readFileSync('config/pbanlist.txt','utf8');
                 return user.send('|popup|'+pban);
 	},
-	studiologs: function(target, room, user, connection) {
-                var logs = fs.readpathSync('logs/chat/thestudioauth/2014-02/2014-02-03.txt','utf8');
-                return user.send('|raw|'+logs);
+	vault: function(target, room, user, connection) {
+		
+                var money = fs.readFileSync('config/money.csv','utf8');
+                return user.send('|popup|'+money);
 	},
 	adminremind: 'aremind',
 	aremind: function(target, room, user, connection) {

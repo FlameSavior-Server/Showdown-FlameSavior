@@ -12,7 +12,7 @@
  */
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
 var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare'];
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge'];
 var closeShop = false;
 var closedShop = 0;
 var ipbans = fs.createWriteStream('config/ipbans.txt', {'flags': 'a'});
@@ -572,6 +572,17 @@ var commands = exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
+		if (target2 === 'badge') {
+			price = 200;
+			if (price <= user.money) {
+				user.money = user.money - price;
+				this.sendReply('You have purchased a VIP badge.');
+				user.canBadge = true;
+				this.add(user.name + ' has purchased the ability to claim a VIP badge!');
+			} else {
+				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
+			}
+		}
 		if (target2 === 'declare') {
 			price = 25;
 			if (price <= user.money) {
@@ -607,6 +618,7 @@ var commands = exports.commands = {
 			'<tr><td>Trainer</td><td>Buys a trainer card which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>40</td></tr>' +
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
+			'<tr><td>Badge</td><td>You get a VIP badge and VIP status.  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>200</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command]. </center>');
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
 	},
@@ -745,6 +757,17 @@ var commands = exports.commands = {
 					targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
 				}
 			}
+			if (theItem === 'badge') {
+				if (targetUser.caBadge === true) {
+					return this.sendReply('This user has already bought that item from the shop... no need for another.');
+				}
+				if (targetUser.canBadge === false) {
+					matched = true;
+					targetUser.canBadge = true;
+					Rooms.rooms.lobby.add(user.name + ' has stolen a badge from the shop!');
+					targetUser.send(user.name + ' has given you the ability to claim a ' + theItem + '!');
+				}
+			}
 			if (theItem === 'declare') {
 				if (targetUser.canDecAdvertise === true) {
 					return this.sendReply('This user has already bought that item from the shop... no need for another.');
@@ -828,6 +851,15 @@ var commands = exports.commands = {
 			}
 			else
 				return this.sendReply('They do not have a trainer card for you to remove.');
+		}
+		else if (target === 'badge') {
+			if (targetUser.canBadge) {
+				targetUser.canBadge = false;
+				this.sendReply(targetUser.name + ' no longer has a badge.');
+				targetUser.send(user.name + ' has removed the VIP badge from you.');
+			}
+			else
+				return this.sendReply('They do not have a VIP badge for you to remove.');
 		}
 		else if (target === 'declare') {
 			if (targetUser.canDecAdvertise) {

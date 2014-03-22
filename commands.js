@@ -854,8 +854,7 @@ var commands = exports.commands = {
                 this.sendReplyBox('Gold\'s news can be found <a href="http://goldserver.weebly.com/news.html">here</a>.');
 	
 	},
-	ps: 'shop',
-	shop:function(target, room, user) {
+	ps:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center>Cick the Poké Ball to enter Pawn\’s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
 	},

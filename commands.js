@@ -554,7 +554,7 @@ var commands = exports.commands = {
 			price = 30;
 			if (price <= user.money) {
 				user.money = user.money - price;
-				this.sendReply('You have purchased a trainer card. You need to message an Admin capable of adding this (Frost Deverloper or BrittleWind).');
+				this.sendReply('You have purchased a trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
 				user.canTrainerCard = true;
 				this.add(user.name + ' has purchased a trainer card!');
 			} else {
@@ -565,7 +565,7 @@ var commands = exports.commands = {
 			price = 10;
 			if (price <= user.money) {
 				user.money = user.money - price;
-				this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Admin capable of adding this (Frost Deverloper or BrittleWind).');
+				this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
 				user.canFixItem = true;
 				this.add(user.name + ' has purchased the ability to set alter their card or avatar!');
 			} else {

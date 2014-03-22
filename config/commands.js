@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Commands
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
@@ -217,9 +217,8 @@ var commands = exports.commands = {
 		}
 		if (targetUser.canVIP)
 			var i = '';
-			if (targetUser.canVIP) i+= '(VIP User)'
-		this.sendReply(''+i+'')
-		}
+			if (targetUser.canVIP) i += '(VIP User)';
+			this.sendReply(+i);
 		}
 		var output = 'In rooms: ';
 		var first = true;
@@ -939,7 +938,48 @@ var commands = exports.commands = {
 			'# <b>Room Owner</b> - They are administrators of the room and can almost totally control it');
 	},
 
+	ca: 'customavatar',
+	customavatars: 'customavatar',
+	customavi: 'customavatar',
+	customavis: 'customavatar',
+	customavatar: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Custom Avatars</b> - <br><br>' +
+		'-People with global rank of voice (+) or higher may have an 80x80 custom avatar.<br>'+
+		'-The file types that are allowed are: .png or .gif. <br>' +
+		'<i>-PM a leader or up if you meet these requirements with a link to your avatar ready.</i>');
+	},
 
+	cc: 'customcommand',
+	customcommands: 'customcommand',
+	custombanner: 'customcommand',
+	customcommand: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Custom Commands</b> - People with global rank of Driver (%) or higher may have an custom command.  You must make a message for what you want it to say and an image that is around 100x100.  PM panpawn if you meet these requirements with a link and message for your command ready.<br />');
+	},
+	sc: 'staffcommands',
+	staffcommands: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b><center>Staff Commands:</center></b><br />' +
+		'<b>/fr</b> - Forcibly makes a user change their name. (requires %, @, & or ~).<br />' +
+		'<b>/alts</b> - Allows you to see a user`s alts and ip address. (requires %, @, & or ~).<br />' +
+		'<b>/frt</b> - Forcibly makes a user with have a new specific name. (requires ~).<br />' +
+		'<b>/flogout</b> - Forcibly makes a user logout. (requires %, @, & or ~).<br />' +
+		'<b>/warn</b> - Warns a user. (requires %, @, & or ~).<br />' +
+		'<b>/m or /mute</b> - 7 minute mutes a user. (requires %, @, & or ~).<br />' +
+		'<b>/hm</b> - hourmutes a user. (requires %, @, & or ~).<br />' +
+		'<b>/dm</b> - Mutes a user for one day. (requires %, @, & or ~).<br />' +
+		'<b>/lock</b> - Locks a user and their ip address. (requires %, @, & or ~).<br />' +
+		'<b>/b</b> - Bans a user and their ip address. (requires @, & or ~).<br />' +
+		'<b>/k</b> - Room kicks a user. (requires %, @, & or ~).<br />' +
+		'<b>/declare</b> - Declares with a blue background. (requires @, & or ~).<br />' +
+		'<b>/gdeclare</b> - Globally declares with a blue background. (requires @, & or ~).<br />' +
+		'<b>/declarered</b> - Declares with a red background. (requires @, & or ~).<br />' +
+		'<b>/declaregreen</b> - Declares with a green background. (requires @, & or ~).<br />' +
+		'<b>/gdeclarered</b> - Globally declares with a red background. (requires @, & or ~).<br />' +
+		'<b>/gdeclaregreen</b> - Globally declares with a green background. (requires @, & or ~).');
+	
+	},
 //Trainer Cards.
 	
 	pan: 'panpawn',

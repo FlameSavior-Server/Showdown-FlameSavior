@@ -1874,6 +1874,7 @@ var commands = exports.commands = {
 		this.logModCommand(user.name+' declared '+target+' to all rooms.');
 	},
 
+	staffdeclare: 'declaremod',
 	modmsg: 'declaremod',
 	moddeclare: 'declaremod',
 	declaremod: function(target, room, user) {
@@ -1882,7 +1883,7 @@ var commands = exports.commands = {
 
 		if (!this.canTalk()) return;
 
-		this.privateModCommand('|raw|<div class="broadcast-red"><b><font size=1><i>Private Auth (Driver +) declare from '+user.name+'<br /></i></font size>'+target+'</b></div>');
+		this.privateModCommand('|raw|<div class="broadcast-red"><b><font size=1><i>Staff declare from '+user.name+'<br /></i></font size>'+target+'</b></div>');
 
 		this.logModCommand(user.name+' mod declared '+target);
 	},

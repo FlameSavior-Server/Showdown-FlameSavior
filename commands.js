@@ -398,6 +398,43 @@ var commands = exports.commands = {
 			return this.parse('/help givebucks');
 		}
 	},
+	transferbucks: function(target, room, user) {
+		if(!target) return this.sendReply('|raw|Correct Syntax: /transferbucks <i>user</i>, <i>amount</i>');
+		if (target.indexOf(',') >= 0) {
+			var parts = target.split(',');
+			if (parts[0].toLowerCase() === user.name.toLowerCase()) {
+				return this.sendReply('You can\'t transfer Bucks to yourself.');
+			}
+			parts[0] = this.splitTarget(parts[0]);
+			var targetUser = this.targetUser;
+		}
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if (isNaN(parts[1])) {
+			return this.sendReply('Very funny, now use a real number.');
+		}
+		if (parts[1] < 0) {
+			return this.sendReply('Number cannot be negative.');
+		}
+		if (String(parts[1]).indexOf('.') >= 0) {
+			return this.sendReply('You cannot transfer numbers with decimals.');
+		}
+		if (parts[1] > user.money) {
+			return this.sendReply('You cannot transfer more money than what you have.');
+		}
+		var p = 'Bucks';
+		var cleanedUp = parts[1].trim();
+		var transferMoney = Number(cleanedUp);
+		if (transferMoney === 1) {
+			p = 'Buck';
+		}
+		economy.writeMoney(user, -transferMoney);
+		//set time delay because of node asynchronous so it will update both users' money instead of either updating one or the other
+		setTimeout(function(){economy.writeMoney(targetUser, transferMoney);fs.appendFile('logs/transactions.log','\n'+Date()+': '+user.name+' has transferred '+transferMoney+' '+p+' to ' + targetUser.name + '. ' +  user.name +' now has '+user.money + ' ' + p + ' and ' + targetUser.name + ' now has ' + targetUser.money +' ' + p +'.');},3000);
+		this.sendReply('You have successfully transferred ' + transferMoney + ' to ' + targetUser.name + '. You now have ' + user.money + ' ' + p + '.');
+		targetUser.send(user.name + ' has transferred ' + transferMoney + ' ' +  p + ' to you.');
+	},
 		
 	takebucks: 'removebucks',
 	removebucks: function(target, room, user) {

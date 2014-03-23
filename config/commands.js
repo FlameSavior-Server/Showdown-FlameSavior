@@ -1282,6 +1282,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	seahutch: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/0hrEwBy.png" height="180">' +
+                '<img src="http://i.imgur.com/LYhz5WX.gif">' +
+                '<img src="http://i.imgur.com/GcoaLu2.png"><br />' +
+                '<b>Ace:</b> Greninja<br />' +
+                'A lesson without pain is meaningless. For you cannot gain anything without sacrificing something else in return, but once you have overcome it and made it your own...you will gain an irreplaceable fullmetal heart.</center>');
+    	},
+	
 	thunderstruck: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/AXS5k3k.jpg" height="80"><br />' +

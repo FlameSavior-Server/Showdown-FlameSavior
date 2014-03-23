@@ -532,6 +532,14 @@ var commands = exports.commands = {
 			return this.parse('/help givebucks');
 		}
 	},
+	getbucks: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('How to get bucks guide:<br>' +
+		'1. Play tourneys in the lobby!  Lobby tours will always give the winner money!<br>' +
+		'2. Sometimes people will do hangmans for money!<br>' +
+		'3. Casino! Click <button name="joinRoom" value="casino" target="_blank">here</button> to join!<br>' +
+		'4. Make a helpful suggestion to the server! (Bucks may vary)');
+	},
 	tb: 'transferbucks',
 	transferbucks: function(target, room, user) {
 		if(!target) return this.sendReply('|raw|Correct Syntax: /transferbucks <i>user</i>, <i>amount</i>');

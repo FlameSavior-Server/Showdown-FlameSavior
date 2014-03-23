@@ -535,7 +535,7 @@ var commands = exports.commands = {
 	getbucks: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('How to get bucks guide:<br>' +
-		'1. Play tourneys in the lobby!  Lobby tours will always give the winner money!<br>' +
+		'1. Play tournaments in the lobby!  Lobby tournaments will always give the winner money!<br>' +
 		'2. Sometimes people will do hangmans for money!<br>' +
 		'3. Casino! Click <button name="joinRoom" value="casino" target="_blank">here</button> to join!<br>' +
 		'4. Make a helpful suggestion to the server! (Bucks may vary)');
@@ -799,7 +799,7 @@ var commands = exports.commands = {
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status.  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>200</td></tr>' +
-			'</table><br />To buy an item from the shop, use /buy [command]. </center>');
+			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
 	},
 

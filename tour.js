@@ -300,7 +300,11 @@ exports.tour = function(t) {
 						tourMoney = 2;
 						p = 'buck';
 					}
-					if (tour[rid].size < 3) {
+					if (tour[rid].size = 3) {
+						tourMoney = 1;
+						p = 'buck';
+					}
+					if (tour[rid].size < 2) {
 						tourMoney = 0;
 						tooSmall = tooSmall + '(the tour was too small)';
 					}

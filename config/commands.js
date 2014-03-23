@@ -213,7 +213,7 @@ var commands = exports.commands = {
 			if (targetUser.canPOTD) i += ' Alter card/avatar';
 			if (targetUser.canDecAdvertise) i += ' Declare Advertise.';
 			if (targetUser.canBadge) i += ' VIP Badge.';
-			f (targetUser.canPOTD) i += 'POTD';
+			if (targetUser.canPOTD) i += 'POTD';
 			this.sendReply('Eligible for: ' + i);
 		}
 		var output = 'In rooms: ';

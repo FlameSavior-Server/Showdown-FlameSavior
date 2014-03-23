@@ -210,7 +210,7 @@ var commands = exports.commands = {
 			if (targetUser.canAnimatedAvatar) i += ' Animated Avatar';
 			if (targetUser.canChatRoom) i += ' Chat Room';
 			if (targetUser.canTrainerCard) i += ' Trainer Card';
-			if (targetUser.canPOTD) i += ' Alter card/avatar';
+			if (targetUser.canFixItem) i += ' Alter card/avatar';
 			if (targetUser.canDecAdvertise) i += ' Declare Advertise.';
 			if (targetUser.canBadge) i += ' VIP Badge.';
 			if (targetUser.canPOTD) i += 'POTD';

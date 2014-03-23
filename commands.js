@@ -532,6 +532,7 @@ var commands = exports.commands = {
 			return this.parse('/help givebucks');
 		}
 	},
+	tb: 'transferbucks',
 	transferbucks: function(target, room, user) {
 		if(!target) return this.sendReply('|raw|Correct Syntax: /transferbucks <i>user</i>, <i>amount</i>');
 		if (target.indexOf(',') >= 0) {

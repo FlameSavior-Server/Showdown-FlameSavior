@@ -2445,7 +2445,7 @@ var commands = exports.commands = {
 			break;
 		}
 
-		if (user.name.length > 15) return this.sendReply('Your username exceeds the length limit.');
+		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 
 		if (!user.isAway) {
 			user.originalName = user.name;

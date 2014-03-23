@@ -203,7 +203,7 @@ var commands = exports.commands = {
 			var ips = Object.keys(targetUser.ips);
 			this.sendReply('IP' + ((ips.length > 1) ? 's' : '') + ': ' + ips.join(', '));
 		}
-		if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || targetUser.canBadge || targetUser.canPOTD) {
+		if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || targetUser.canBadge || targetUser.canPOTD || targetUser.canForcerename) {
 			var i = '';
 			if (targetUser.canCustomSymbol) i += ' Custom Symbol';
 			if (targetUser.canCustomAvatar) i += ' Custom Avatar';
@@ -214,6 +214,7 @@ var commands = exports.commands = {
 			if (targetUser.canDecAdvertise) i += ' Declare Advertise.';
 			if (targetUser.canBadge) i += ' VIP Badge.';
 			if (targetUser.canPOTD) i += 'POTD';
+			if (targetUser.canForcerename) i += 'Forcerename'
 			this.sendReply('Eligible for: ' + i);
 		}
 		var output = 'In rooms: ';

@@ -809,7 +809,7 @@ var commands = exports.commands = {
 			});
 		}
 	},
-
+//Tis' big command
 	shop: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +

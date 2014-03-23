@@ -15,6 +15,140 @@ var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a
 var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge'];
 var closeShop = false;
 var closedShop = 0;
+var bank = exports.bank = {
+			bucks: function(uid, amount, take) {
+
+ 
+						var data = fs.readFileSync('config/money.csv','utf8')
+				var match = false;
+				var money = 0;
+				var row = (''+data).split("\n");
+				var line = '';
+				for (var i = row.length; i > -1; i--) {
+					if (!row[i]) continue;
+					var parts = row[i].split(",");
+					var userid = toUserid(parts[0]);
+					if (uid.userid == userid) {
+						var x = Number(parts[1]);
+						var money = x;
+						match = true;
+						if (match === true) {
+							line = line + row[i];
+							break;
+						}
+					}
+				}
+				uid.money = money;
+				if (take === true){if (amount <= uid.money){
+				uid.money = uid.money - amount; take = false;}
+				else return false;
+				}
+				else {uid.money = uid.money + amount;}
+				if (match === true) {
+					var re = new RegExp(line,"g");
+					fs.readFile('config/money.csv', 'utf8', function (err,data) {
+					if (err) {
+						return console.log(err);
+					}
+					var result = data.replace(re, uid.userid+','+uid.money);
+					fs.writeFile('config/money.csv', result, 'utf8', function (err) {
+						if (err) return console.log(err);
+					});
+					});
+				} else {
+					var log = fs.createWriteStream('config/money.csv', {'flags': 'a'});
+					log.write("\n"+uid.userid+','+uid.money);
+				}
+				return true;
+				},
+
+	    coins: function(uid, amount, take) {
+
+	    var lore = fs.readFileSync('config/coins.csv','utf8')
+                var match = false;
+                var coins = 0;
+                var spag = (''+lore).split("\n");
+                var hetti = '';
+                for (var i = spag.length; i > -1; i--) {
+                    if (!spag[i]) continue;
+                    var parts = spag[i].split(",");
+                    var userid = toUserid(parts[0]);
+					if (uid.userid == userid) {
+                        var x = Number(parts[1]);
+                        var coins = x;
+                        match = true;
+                        if (match === true) {
+                            hetti = hetti + spag[i];
+                            break;
+                        }
+                    }
+                }
+                uid.coins = coins;
+						if (take === true){if (amount <= uid.coins){
+				uid.coins = uid.coins - amount; take = false;}
+				else return false;
+				}
+				else {uid.coins = uid.coins + amount;}
+
+                if (match === true) {
+                    var be = new RegExp(hetti,"g");
+                    fs.readFile('config/coins.csv', 'utf8', function (err,lore) {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        var result = lore.replace(be, uid.userid+','+uid.coins);
+                        fs.writeFile('config/coins.csv', result, 'utf8', function (err) {
+                            if (err) return console.log(err);
+                        });
+                    });
+                } else {
+                    var log = fs.createWriteStream('config/coins.csv', {'flags': 'a'});
+                    log.write("\n"+uid.userid+','+uid.coins);
+                } return true;
+		}
+
+
+	}
+	var economy = exports.economy = {
+		writeMoney: function(uid, amount) {
+			var data = fs.readFileSync('config/money.csv','utf8')
+			var match = false;
+			var money = 0;
+			var row = (''+data).split("\n");
+			var line = '';
+			for (var i = row.length; i > -1; i--) {
+				if (!row[i]) continue;
+				var parts = row[i].split(",");
+				var userid = toUserid(parts[0]);
+				if (uid.userid == userid) {
+					var x = Number(parts[1]);
+					var money = x;
+					match = true;
+					if (match === true) {
+						line = line + row[i];
+						break;
+					}
+				}
+			}
+			uid.money = money;
+			uid.money = uid.money + amount;
+			if (match === true) {
+				var re = new RegExp(line,"g");
+				fs.readFile('config/money.csv', 'utf8', function (err,data) {
+				if (err) {
+					return console.log(err);
+				}
+				var result = data.replace(re, uid.userid+','+uid.money);
+				fs.writeFile('config/money.csv', result, 'utf8', function (err) {
+					if (err) return console.log(err);
+				});
+				});
+			} else {
+				var log = fs.createWriteStream('config/money.csv', {'flags': 'a'});
+				log.write("\n"+uid.userid+','+uid.money);
+			}
+		},
+	}
 var ipbans = fs.createWriteStream('config/ipbans.txt', {'flags': 'a'});
 var avatar = fs.createWriteStream('config/avatars.csv', {'flags': 'a'});
 //spamroom

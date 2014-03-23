@@ -12,7 +12,7 @@
  */
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
 var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd'];
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'forcerename'];
 var closeShop = false;
 var closedShop = 0;
 var bank = exports.bank = {
@@ -752,6 +752,17 @@ var commands = exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
+		if (target2 === 'forcerename') {
+			price = 10;
+			if (price <= user.money) {
+				user.money = user.money - price;
+				this.sendReply('You have purchased the ability to change your name and keep all ranks until you logout. PM an admin to claim this.');
+				user.canForcerename = true;
+				this.add(user.name + ' has purchased the ability to forcerename!');
+			} else {
+				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
+			}
+		}
 		if (target2 === 'potd') {
 			price = 45;
 			if (price <= user.money) {
@@ -810,6 +821,7 @@ var commands = exports.commands = {
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
+			'<tr><td>forcerename</td><td>You get the ability to rename yourself to anything you want, rank symbol will remain (name should be appropriate and temporary until you logout)</td><td>10</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status.  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>200</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
@@ -1054,6 +1066,15 @@ var commands = exports.commands = {
 			}
 			else
 				return this.sendReply('They do not have a trainer card for you to remove.');
+		}
+		else if (target === 'forcerename') {
+			if (targetUser.canForcerename) {
+				targetUser.canForcerename = false;
+				this.sendReply(targetUser.name + ' no longer has the forcerename to use.');
+				targetUser.send(user.name + ' has removed forcerename from you.');
+			}
+			else
+				return this.sendReply('They do not have a forcerename for you to remove.');
 		}
 		else if (target === 'potd') {
 			if (targetUser.canPOTD) {

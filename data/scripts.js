@@ -1429,10 +1429,10 @@ exports.BattleScripts = {
 				item = 'Life Orb';
 			} else if (ability === 'Unburden') {
 				item = 'Red Card';
-				// Give Unburden mons a Normal Gem if they have a Normal-type attacking move
+				// Give Unburden mons a Normal Gem if they have a Normal-type attacking move (except Explosion)
 				for (var m in moves) {
 					var move = this.getMove(moves[m]);
-					if (move.type === 'Normal' && (move.basePower || move.basePowerCallback)) {
+					if (move.type === 'Normal' && (move.basePower || move.basePowerCallback) && move.id !== 'explosion') {
 						item = 'Normal Gem';
 						break;
 					}
@@ -1509,7 +1509,7 @@ exports.BattleScripts = {
 				item = 'Air Balloon';
 			} else if (hasType['Poison']) {
 				item = 'Black Sludge';
-			} else if (counter.Status <= 1) {
+			} else if (counter.Status <= 1 && ability !== 'Sturdy') {
 				item = 'Life Orb';
 			} else {
 				item = 'Leftovers';
@@ -2130,6 +2130,9 @@ exports.BattleScripts = {
 					break;
 				case 'hiddenpowerice':
 					if (hasMove['icywind']) rejected = true;
+					break;
+				case 'stone edge':
+					if (hasMove['rockblast']) rejected = true;
 					break;
 
 				// Status:

@@ -2166,8 +2166,6 @@ var commands = exports.commands = {
 			try {
 				CommandParser.uncacheTree('./command-parser.js');
 				CommandParser = require('./command-parser.js');
-				CommandParser.uncacheTree('./tour.js');
-				tour = require('./tour.js').tour(tour);
 				try {
 					CommandParser.uncacheTree('./frost-commands.js');
 					frostcommands = require('./frost-commands.js');
@@ -2182,9 +2180,25 @@ var commands = exports.commands = {
 				}
 				CommandParser.uncacheTree('./hangman.js');
 				hangman = require('./hangman.js').hangman();
+				var runningTournaments = Tournaments.tournaments;
+				CommandParser.uncacheTree('./tournaments/frontend.js');
+				Tournaments = require('./tournaments/frontend.js');
+				Tournaments.tournaments = runningTournaments;
 				return this.sendReply('Chat commands have been hot-patched.');
 			} catch (e) {
 				return this.sendReply('Something failed while trying to hotpatch chat: \n' + e.stack);
+			}
+
+		} else if (target === 'tournaments') {
+
+			try {
+				var runningTournaments = Tournaments.tournaments;
+				CommandParser.uncacheTree('./tournaments/frontend.js');
+				Tournaments = require('./tournaments/frontend.js');
+				Tournaments.tournaments = runningTournaments;
+				return this.sendReply("Tournaments have been hot-patched.");
+			} catch (e) {
+				return this.sendReply('Something failed while trying to hotpatch tournaments: \n' + e.stack);
 			}
 
 		} else if (target === 'battles') {

@@ -430,6 +430,7 @@ var commands = exports.commands = {
 		this.sendReply(data);
 	},
 
+	ds: 'dexsearch',
 	dsearch: 'dexsearch',
 	dexsearch: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -818,7 +819,7 @@ var commands = exports.commands = {
 	intro: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('New to competitive pokemon?<br />' +
-			'- <a href="http://www.smogon.com/forums/threads/3496279/">Beginner\'s Guide to Pokémon Showdown</a><br />' +
+			'- <a href="http://www.smogon.com/sim/ps_guide">Beginner\'s Guide to Pokémon Showdown</a><br />' +
 			'- <a href="http://www.smogon.com/dp/articles/intro_comp_pokemon">An introduction to competitive Pokémon</a><br />' +
 			'- <a href="http://www.smogon.com/bw/articles/bw_tiers">What do "OU", "UU", etc mean?</a><br />' +
 			'- <a href="http://www.smogon.com/xyhub/tiers">What are the rules for each format? What is "Sleep Clause"?</a>');
@@ -829,7 +830,7 @@ var commands = exports.commands = {
 	smogintro: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Welcome to Smogon\'s Official Pokémon Showdown server! The Mentoring room can be found ' + 
-			'<a href="http://play.pokemonshowdown.com/mentoring">here</a> or by using /join mentoring.<br /><br />' +
+			'<a href="http://play.pokemonshowdown.com/communitymentoring">here</a> or by using /join communitymentoring.<br /><br />' +
 			'Here are some useful links to Smogon\'s Mentorship Program to help you get integrated into the community:<br />' +
 			'- <a href="http://www.smogon.com/mentorship/primer">Smogon Primer: A brief introduction to Smogon\'s subcommunities</a><br />' +
 			'- <a href="http://www.smogon.com/mentorship/introductions">Introduce yourself to Smogon!</a><br />' +

@@ -949,6 +949,17 @@ var commands = exports.commands = {
 					targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
 				}
 			}
+			if (theItem === 'potd') {
+				if (targetUser.canPOTD === true) {
+					return this.sendReply('This user has already bought that item from the shop... no need for another.');
+				}
+				if (targetUser.canPOTD === false) {
+					matched = true;
+					targetUser.canPOTD = true;
+					Rooms.rooms.lobby.add(user.name + ' has stolen the ability to set POTD from the shop!');
+					targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
+				}
+			}
 			if (theItem === 'badge') {
 				if (targetUser.caBadge === true) {
 					return this.sendReply('This user has already bought that item from the shop... no need for another.');

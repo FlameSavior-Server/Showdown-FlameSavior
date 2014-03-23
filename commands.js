@@ -12,7 +12,7 @@
  */
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
 var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge'];
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd'];
 var closeShop = false;
 var closedShop = 0;
 var bank = exports.bank = {
@@ -700,7 +700,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target[0] === 'animated') {
-			price = 30;
+			price = 25;
 			if (price <= user.money) {
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .gif format. ex: /buy animated, [url to the avatar]');
        				var filename = target[1].split('.');
@@ -752,6 +752,17 @@ var commands = exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
+		if (target2 === 'potd') {
+			price = 45;
+			if (price <= user.money) {
+				user.money = user.money - price;
+				this.sendReply('You have purchased the ability to pick a POTD! PM a leader or up to claim this prize.');
+				user.canPOTD = true;
+				this.add(user.name + ' has purchased the ability to set the POTD!');
+			} else {
+				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
+			}
+		}
 		if (target2 === 'badge') {
 			price = 200;
 			if (price <= user.money) {
@@ -793,11 +804,12 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
 			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>15</td></tr>' +
-			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>30</td></tr>' +
+			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>25</td></tr>' +
 			'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>80</td></tr>' +
 			'<tr><td>Trainer</td><td>Buys a trainer card which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>30</td></tr>' +
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
+			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status.  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>200</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
@@ -1031,6 +1043,15 @@ var commands = exports.commands = {
 			}
 			else
 				return this.sendReply('They do not have a trainer card for you to remove.');
+		}
+		else if (target === 'potd') {
+			if (targetUser.canPOTD) {
+				targetUser.canPOTD = false;
+				this.sendReply(targetUser.name + ' no longer can set POTD.');
+				targetUser.send(user.name + ' has removed the POTD from you.');
+			}
+			else
+				return this.sendReply('They do not have the POTD ability for you to remove.');
 		}
 		else if (target === 'badge') {
 			if (targetUser.canBadge) {

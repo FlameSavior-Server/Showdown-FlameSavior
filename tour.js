@@ -293,14 +293,14 @@ exports.tour = function(t) {
 					if (tour[rid].size >= 9) {
 						tourMoney = 4;
 					}
-					if (tour[rid].size >= 6 && tour[rid].size < 8) {
+					if (tour[rid].size >= 6 && tour[rid].size >= 8) {
 						tourMoney = 3;
 					}
-					if (tour[rid].size <=4  && tour[rid].size >= 5) {
+					if (tour[rid].size >=4  && tour[rid].size >= 5) {
 						tourMoney = 2;
 						p = 'buck';
 					}
-					if (tour[rid].size = 3) {
+					if (tour[rid].size >= 3) {
 						tourMoney = 1;
 						p = 'buck';
 					}

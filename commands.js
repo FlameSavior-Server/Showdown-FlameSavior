@@ -811,9 +811,7 @@ var commands = exports.commands = {
 	},
 //Tis' big command
 	shop: function(target, room, user) {
-		if(room.id === 'lobby') {
-				return this.sendReply('|html|Please do /shop instead, as this command is too spammy to broadcast in the lobby.');
-		}
+	
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +

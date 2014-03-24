@@ -243,6 +243,35 @@ var commands = exports.commands = {
 		if(!target) return this.sendReply('/poke needs a target.');
 		return this.parse('/me pokes ' + target + '.');
 	},
+	namelock: 'nl',
+	nl: function(target, room, user) {
+		if (!this.can('ban')) return false;
+		target = this.splitTarget(target);
+		targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('/namelock - Lock a user into a username.');
+		}
+		if (targetUser.namelock === true) {
+			return this.sendReply("The user "+targetUser+" is already namelocked.");
+		}
+		targetUser.namelock = true;
+		return this.sendReply("The user "+targetUser+" is now namelocked.");
+	},
+
+	unnamelock: 'unl',
+	unl: function(target, room, user) {
+		if (!this.can('ban')) return false;
+		target = this.splitTarget(target);
+		targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('/unnamelock - Unlock a user from a username.');
+		}
+		if (targetUser.namelock === false) {
+			return this.sendReply("The user "+targetUser+" is already un-namelocked.");
+		}
+		targetUser.namelock = false;
+		return this.sendReply("The user "+targetUser+" is now un-namelocked.");
+	},
 	pet: function(target, room, user){
 		if(!target) return this.sendReply('/pet needs a target.');
 		return this.parse('/me pets ' + target + ' lavishly.');

@@ -407,7 +407,7 @@ var Tournament = (function () {
 		user.sendTo(this.room, '|tournament|update|{"isJoined":false}');
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
-		frostcommands.addTourLoss(user.userid);
+		frostcommands.addTourLoss(user.userid,this.format);
 
 		if (isTournamentEnded) {
 			this.onTournamentEnd();
@@ -576,8 +576,8 @@ var Tournament = (function () {
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
 
-		frostcommands.addTourWin(winner.userid);
-		frostcommands.addTourLoss(loser.userid);
+		frostcommands.addTourWin(winner.userid,this.format);
+		frostcommands.addTourLoss(loser.userid,this.format);
 
 		if (isTournamentEnded) {
 			this.onTournamentEnd();

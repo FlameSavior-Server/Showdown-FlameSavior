@@ -707,7 +707,7 @@ var commands = {
 				tournament.room.hideTourBattles = false;
 				targetRoom.hideTourBattles = false;
 				targetRoom.chatRoomData.hideTourBattles = false;
-				return this.sendReply('Tournaments in this room will no longer announce when battles start.');
+				return this.sendReply('Tournaments in this room will now announce when battles start.');
 			} else {
 				return this.sendReply('Usage: ' + cmd + ' [on/off]');
 			}

@@ -1272,6 +1272,17 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
     
+    	sayshibox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="red"><u>SaysHi Music Galore</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=0KSOMA3QBU0">Dark Horse</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=XjwZAa2EjKA">Unconditionally</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=1-pUaogoX5o">Waking Up In Vegas</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=CevxZvSJLk8">Roar</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    },
+    
     
     	/***************************************
 	* League Cards                         *

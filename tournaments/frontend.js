@@ -680,11 +680,13 @@ var commands = {
 				targetRoom.hideTourWins = false;
 				targetRoom.chatRoomData.hideTourWins = false;
 				Rooms.global.writeChatRoomData();
+				return this.sendReply('Tournaments in this room will now announce when battles start.');
 			} else if (params[0].toLowerCase() == 'on') {
 				tournament.room.hideTourWins = true;
 				targetRoom.hideTourWins = true;
 				targetRoom.chatRoomData.hideTourWins = true;
 				Rooms.global.writeChatRoomData();
+				return this.sendReply('Tournaments in this room will no longer announce when battles start.');
 			} else {
 				return this.sendReply('Usage: ' + cmd + ' [on/off]');
 			}

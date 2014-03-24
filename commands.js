@@ -560,6 +560,9 @@ var commands = exports.commands = {
 		if (parts[1] < 0) {
 			return this.sendReply('Number cannot be negative.');
 		}
+		if (parts[1] == 0) {
+			return this.sendReply('No! You cannot transfer 0 bucks, you fool!');
+		}
 		if (String(parts[1]).indexOf('.') >= 0) {
 			return this.sendReply('You cannot transfer numbers with decimals.');
 		}

@@ -373,10 +373,12 @@ var Tournament = (function () {
 				this.generator.setUserBusy(challenge.to, false);
 				this.pendingChallenges.set(challenge.to, null);
 				challenge.to.sendTo(this.room, '|tournament|update|{"challenged":null}');
+				winner = challenge.to;
 			} else if (challenge.from) {
 				this.generator.setUserBusy(challenge.from, false);
 				this.pendingChallenges.set(challenge.from, null);
 				challenge.from.sendTo(this.room, '|tournament|update|{"challenging":null}');
+				winner = challenge.from;
 			}
 		}
 
@@ -405,11 +407,29 @@ var Tournament = (function () {
 		user.sendTo(this.room, '|tournament|update|{"isJoined":false}');
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
+		frostcommands.addTourLoss(user.userid);
 
-		if (isTournamentEnded)
+		if (isTournamentEnded) {
 			this.onTournamentEnd();
-		else
+			loser = user;
+			tourSize = this.generator.users.size;
+			if (this.room.isOfficial && tourSize >= 8) {
+				firstMoney = Math.ceil(tourSize/10);
+				secondMoney = Math.ceil(firstMoney/2);
+				firstBuck = 'buck';
+				secondBuck = 'buck';
+				if (firstMoney > 1) firstBuck = 'bucks';
+				if (secondMoney > 1) secondBuck = 'bucks';
+				this.room.add('|raw|<b><font color=#24678d>'+winner.userid+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
+				economy.writeMoney('money', winner.userid, firstMoney);
+				if (firstMoney >= 2) {
+					this.room.add('|raw|<b><font color=#24678d>'+loser.userid+'</font> has won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second place!</b>');
+					economy.writeMoney('money', loser.userid, secondMoney);
+				}
+			}
+		} else {
 			this.update();
+		}
 	};
 
 	Tournament.prototype.challenge = function (from, to, output) {
@@ -518,10 +538,13 @@ var Tournament = (function () {
 		var to = Users.get(room.p2);
 
 		var result = 'draw';
-		if (from === winner)
+		if (from === winner) {
 			result = 'win';
-		else if (to === winner)
+			loser = to;
+		} else if (to === winner) {
 			result = 'loss';
+			loser = from;
+		}
 
 		if (result === 'draw' && !this.generator.isDrawingSupported) {
 			this.room.add('|tournament|battleend|' + from.name + '|' + to.name + '|' + result + '|' + room.battle.score.join(',') + '|fail');
@@ -553,10 +576,29 @@ var Tournament = (function () {
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
 
-		if (isTournamentEnded)
+		frostcommands.addTourWin(winner.userid);
+		frostcommands.addTourLoss(loser.userid);
+
+		if (isTournamentEnded) {
 			this.onTournamentEnd();
-		else
+			tourSize = this.generator.users.size;
+			if (this.room.isOfficial && tourSize >= 8) {
+				firstMoney = Math.ceil(tourSize/10);
+				secondMoney = Math.ceil(firstMoney/2);
+				firstBuck = 'buck';
+				secondBuck = 'buck';
+				if (firstMoney > 1) firstBuck = 'bucks';
+				if (secondMoney > 1) secondBuck = 'bucks';
+				this.room.add('|raw|<b><font color=#24678d>'+winner.name+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
+				economy.writeMoney('money', winner.userid, firstMoney);
+				if (firstMoney >= 2) {
+					this.room.add('|raw|<b><font color=#24678d>'+loser.name+'</font> has won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second place!</b>');
+					economy.writeMoney('money', loser.userid, secondMoney);
+				}
+			}
+		} else {
 			this.update();
+		}
 	};
 	Tournament.prototype.onTournamentEnd = function () {
 		this.room.add('|tournament|end|' + JSON.stringify({results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()}));

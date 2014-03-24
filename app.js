@@ -441,11 +441,6 @@ fs.readFile('./config/ipbans.txt', function (err, data) {
 });
 
 try {
-	global.tour = require('./tour.js').tour();
-} catch (e) {
-	console.log('Error loading tour.js: '+e.stack);
-}
-try {
 	global.hangman = require('./hangman.js').hangman();
 } catch (e) {
 	console.log('Error loading hangman.js: '+e.stack);

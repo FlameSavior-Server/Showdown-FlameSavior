@@ -576,7 +576,7 @@ var Tournament = (function () {
 	Tournament.prototype.onTournamentEnd = function () {
 		this.room.add('|tournament|end|' + JSON.stringify({results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()}));
 		data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
-		winner = data['results'];
+		winner = data['results'].toString();
 		tourSize = this.generator.users.size;
 		if (this.room.isOfficial && tourSize >= 8) {
 			firstMoney = Math.ceil(tourSize/10);
@@ -588,7 +588,7 @@ var Tournament = (function () {
 			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
 			economy.writeMoney('money', winner.userid, firstMoney);
 		}
-		frostcommands.addTourWin(winner.userid,this.format);
+		frostcommands.addTourWin(winner,this.format);
 		delete exports.tournaments[toId(this.room.id)];
 	};
 

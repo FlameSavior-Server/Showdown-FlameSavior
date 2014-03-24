@@ -680,13 +680,13 @@ var commands = {
 				targetRoom.hideTourWins = false;
 				targetRoom.chatRoomData.hideTourWins = false;
 				Rooms.global.writeChatRoomData();
-				return this.sendReply('Tournaments in this room will now announce when battles start.');
+				return this.sendReply('Tournaments in this room will now announce when battles end.');
 			} else if (params[0].toLowerCase() == 'on') {
 				tournament.room.hideTourWins = true;
 				targetRoom.hideTourWins = true;
 				targetRoom.chatRoomData.hideTourWins = true;
 				Rooms.global.writeChatRoomData();
-				return this.sendReply('Tournaments in this room will no longer announce when battles start.');
+				return this.sendReply('Tournaments in this room will no longer announce when battles end.');
 			} else {
 				return this.sendReply('Usage: ' + cmd + ' [on/off]');
 			}
@@ -702,10 +702,12 @@ var commands = {
 				tournament.room.hideTourBattles = true;
 				targetRoom.hideTourBattles = true;
 				targetRoom.chatRoomData.hideTourBattles = true;
+				return this.sendReply('Tournaments in this room will no longer announce when battles start.');
 			} else if (params[0].toLowerCase() == 'on') {
 				tournament.room.hideTourBattles = false;
 				targetRoom.hideTourBattles = false;
 				targetRoom.chatRoomData.hideTourBattles = false;
+				return this.sendReply('Tournaments in this room will no longer announce when battles start.');
 			} else {
 				return this.sendReply('Usage: ' + cmd + ' [on/off]');
 			}

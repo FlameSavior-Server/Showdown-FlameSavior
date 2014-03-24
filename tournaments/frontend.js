@@ -523,7 +523,7 @@ var Tournament = (function () {
 
 		var room = Rooms.global.startBattle(challenge.from, user, this.format, this.isRated, challenge.team, user.team);
 		this.inProgressMatches.set(challenge.from, {to: user, room: room});
-		this.room.add('|tournament|battlestart|' + challenge.from.name + '|' + user.name + '|' + room.id);
+		if (!this.room.hideTourBattles) this.room.add('|tournament|battlestart|' + challenge.from.name + '|' + user.name + '|' + room.id);
 
 		this.isBracketInvalidated = true;
 		this.update();
@@ -548,7 +548,7 @@ var Tournament = (function () {
 		}
 
 		if (result === 'draw' && !this.generator.isDrawingSupported) {
-			this.room.add('|tournament|battleend|' + from.name + '|' + to.name + '|' + result + '|' + room.battle.score.join(',') + '|fail');
+			if (!this.room.hideTourWins) this.room.add('|tournament|battleend|' + from.name + '|' + to.name + '|' + result + '|' + room.battle.score.join(',') + '|fail');
 
 			this.generator.setUserBusy(from, false);
 			this.generator.setUserBusy(to, false);
@@ -568,7 +568,7 @@ var Tournament = (function () {
 			return;
 		}
 
-		this.room.add('|tournament|battleend|' + from.name + '|' + to.name + '|' + result + '|' + room.battle.score.join(','));
+		if (!this.room.hideTourWins) this.room.add('|tournament|battleend|' + from.name + '|' + to.name + '|' + result + '|' + room.battle.score.join(','));
 
 		this.generator.setUserBusy(from, false);
 		this.generator.setUserBusy(to, false);
@@ -667,6 +667,46 @@ var commands = {
 		stop: 'delete',
 		delete: function (tournament) {
 			deleteTournament(tournament.room.title, this);
+		},
+		reportwins: 'viewwins',
+		showwins: 'viewwins',
+		hidewins: 'viewwins',
+		viewwins: function (tournament, user, params, cmd) {
+			if (params.length < 1) return this.sendReply('Usage: ' + cmd + ' [on/off]');
+			if (!params[0]) return this.sendReply('Usage: ' + cmd + ' [on/off]');
+			targetRoom = Rooms.get(tournament.room.id);
+			if (params[0].toLowerCase() == 'off') {
+				tournament.room.hideTourWins = false;
+				targetRoom.hideTourWins = false;
+				targetRoom.chatRoomData.hideTourWins = false;
+				Rooms.global.writeChatRoomData();
+			} else if (params[0].toLowerCase() == 'on') {
+				tournament.room.hideTourWins = true;
+				targetRoom.hideTourWins = true;
+				targetRoom.chatRoomData.hideTourWins = true;
+				Rooms.global.writeChatRoomData();
+			} else {
+				return this.sendReply('Usage: ' + cmd + ' [on/off]');
+			}
+		},
+		reportbattles: 'viewbattles',
+		hidebattles: 'viewbattles',
+		showbattles: 'viewbattles',
+		viewbattles: function (tournament, user, params, cmd) {
+			if (params.length < 1) return this.sendReply('Usage: ' + cmd + ' [on/off]');
+			if (!params[0]) return this.sendReply('Usage: ' + cmd + ' [on/off]');
+			targetRoom = Rooms.get(tournament.room.id);
+			if (params[0].toLowerCase() == 'off') {
+				tournament.room.hideTourBattles = true;
+				targetRoom.hideTourBattles = true;
+				targetRoom.chatRoomData.hideTourBattles = true;
+			} else if (params[0].toLowerCase() == 'on') {
+				tournament.room.hideTourBattles = false;
+				targetRoom.hideTourBattles = false;
+				targetRoom.chatRoomData.hideTourBattles = false;
+			} else {
+				return this.sendReply('Usage: ' + cmd + ' [on/off]');
+			}
 		}
 	}
 };

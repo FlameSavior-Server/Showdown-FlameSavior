@@ -272,7 +272,7 @@ function socketReceive(worker, workerid, socketid, message) {
 			return;
 		}
 		lines = lines.split('\n');
-		if (lines.length >= THROTTLE_MULTILINE_WARN) {
+		if (lines.length >= THROTTLE_MULTILINE_WARN && !user.frostDev) {
 			connection.popup("You're sending too many lines at once. Try using a paste service like [[Pastebin]].");
 			return;
 		}

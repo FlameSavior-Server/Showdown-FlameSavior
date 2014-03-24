@@ -421,11 +421,11 @@ var Tournament = (function () {
 				if (firstMoney > 1) firstBuck = 'bucks';
 				if (secondMoney > 1) secondBuck = 'bucks';
 				this.room.add('|raw|<b><font color=#24678d>'+winner.name+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-				if (firstMoney >= 2) this.room.add('|raw|<b><font color=#24678d>'+loser.name+'</font> has won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second place!</b>');
+				//if (firstMoney >= 2) this.room.add('|raw|<b><font color=#24678d>'+loser.name+'</font> has won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second place!</b>');
 				economy.writeMoney('money', winner.userid, firstMoney, function() {
-					if (firstMoney >= 2) {
+					/*if (firstMoney >= 2) {
 						economy.writeMoney('money', loser.userid, secondMoney);
-					}
+					}*/
 				});
 			}
 		} else {
@@ -591,11 +591,11 @@ var Tournament = (function () {
 				if (firstMoney > 1) firstBuck = 'bucks';
 				if (secondMoney > 1) secondBuck = 'bucks';
 				this.room.add('|raw|<b><font color=#24678d>'+winner.name+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-				if (firstMoney >= 2) this.room.add('|raw|<b><font color=#24678d>'+loser.name+'</font> has won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second place!</b>');
+				//if (firstMoney >= 2) this.room.add('|raw|<b><font color=#24678d>'+loser.name+'</font> has won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second place!</b>');
 				economy.writeMoney('money', winner.userid, firstMoney, function() {
-					if (firstMoney >= 2) {
+					/*if (firstMoney >= 2) {
 						economy.writeMoney('money', loser.userid, secondMoney);
-					}
+					}*/
 				});
 			}
 		} else {

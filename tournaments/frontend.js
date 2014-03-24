@@ -417,19 +417,6 @@ var Tournament = (function () {
 
 		if (isTournamentEnded) {
 			this.onTournamentEnd();
-			loser = user;
-			tourSize = this.generator.users.size;
-			if (this.room.isOfficial && tourSize >= 8) {
-				firstMoney = Math.ceil(tourSize/10);
-				secondMoney = Math.ceil(firstMoney/2);
-				firstBuck = 'buck';
-				secondBuck = 'buck';
-				if (firstMoney > 1) firstBuck = 'bucks';
-				if (secondMoney > 1) secondBuck = 'bucks';
-				this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner.name)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-				//if (firstMoney >= 2) this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(loser.name)+'</font> has won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second place!</b>');
-				economy.writeMoney('money', winner.userid, firstMoney);
-			}
 		} else {
 			this.update();
 		}
@@ -578,30 +565,30 @@ var Tournament = (function () {
 
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
-
-		frostcommands.addTourWin(winner.userid,this.format);
 		frostcommands.addTourLoss(loser.userid,this.format);
 
 		if (isTournamentEnded) {
 			this.onTournamentEnd();
-			tourSize = this.generator.users.size;
-			if (this.room.isOfficial && tourSize >= 8) {
-				firstMoney = Math.ceil(tourSize/10);
-				secondMoney = Math.ceil(firstMoney/2);
-				firstBuck = 'buck';
-				secondBuck = 'buck';
-				if (firstMoney > 1) firstBuck = 'bucks';
-				if (secondMoney > 1) secondBuck = 'bucks';
-				this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner.name)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-				//if (firstMoney >= 2) this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(loser.name)+'</font> has won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second place!</b>');
-				economy.writeMoney('money', winner.userid, firstMoney);
-			}
 		} else {
 			this.update();
 		}
 	};
 	Tournament.prototype.onTournamentEnd = function () {
 		this.room.add('|tournament|end|' + JSON.stringify({results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()}));
+		data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
+		winner = data['results'];
+		tourSize = this.generator.users.size;
+		if (this.room.isOfficial && tourSize >= 8) {
+			firstMoney = Math.ceil(tourSize/10);
+			secondMoney = Math.ceil(firstMoney/2);
+			firstBuck = 'buck';
+			secondBuck = 'buck';
+			if (firstMoney > 1) firstBuck = 'bucks';
+			if (secondMoney > 1) secondBuck = 'bucks';
+			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
+			economy.writeMoney('money', winner.userid, firstMoney);
+		}
+		frostcommands.addTourWin(winner.userid,this.format);
 		delete exports.tournaments[toId(this.room.id)];
 	};
 

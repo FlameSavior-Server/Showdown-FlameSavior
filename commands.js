@@ -563,9 +563,6 @@ var commands = exports.commands = {
 		if (String(parts[1]).indexOf('.') >= 0) {
 			return this.sendReply('You cannot transfer numbers with decimals.');
 		}
-		if (String(parts[1]).indexOf('0') >= 0) {
-			return this.sendReply('You cannot transfer numbers with decimals.');
-		}
 		if (parts[1] > user.money) {
 			return this.sendReply('You cannot transfer more money than what you have.');
 		}

@@ -503,7 +503,7 @@ var commands = exports.commands = {
 	awardbucks: 'givebucks',
 	gb: 'givebucks',
 	givebucks: function(target, room, user) {
-		if(!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+		if(!user.can('pban')) return this.sendReply('You do not have enough authority to do this.');
 		if(!target) return this.parse('/help givebucks');
 		if (target.indexOf(',') != -1) {
 			var parts = target.split(',');
@@ -613,7 +613,7 @@ var commands = exports.commands = {
 		
 	takebucks: 'removebucks',
 	removebucks: function(target, room, user) {
-		if(!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+		if(!user.can('pban')) return this.sendReply('You do not have enough authority to do this.');
 		if(!target) return this.parse('/help removebucks');
 		if (target.indexOf(',') != -1) {
 			var parts = target.split(',');

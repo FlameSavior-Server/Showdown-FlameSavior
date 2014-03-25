@@ -1283,6 +1283,17 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
     
+    	czimbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="red"><u>Czim\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=ghb6eDopW8I">Little Talks</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=r8OipmKFDeM">Don\'t Look Back In Anger</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=32GZ3suxRn4">Slow Dancing In A Burning Room</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=MmZexg8sxyk">Electric Feel</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    },
+    
     
     	/***************************************
 	* League Cards                         *

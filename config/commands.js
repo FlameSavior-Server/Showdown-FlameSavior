@@ -1294,6 +1294,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	cc: 'crazyclown94',
+	crazyclown94: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/bwani-shiny/medicham.gif">' +
+                '<img src="http://i.imgur.com/dceDBHE.gif" width="380">' +
+                '<img src="http://i.imgur.com/8BQzKRv.jpg" width="120"><br />' +
+                '<b>Ace:</b> Medicham<br />' +
+                'Puppies eat waffles for breakfast!</center>');
+    	},
+	
 	seahutch: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/0hrEwBy.png" height="180">' +

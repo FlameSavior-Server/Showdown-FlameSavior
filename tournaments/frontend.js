@@ -587,8 +587,8 @@ var Tournament = (function () {
 		}
 		tourSize = this.generator.users.size;
 		if (this.room.isOfficial && tourSize >= 8) {
-			firstMoney = Math.ceil(tourSize/10);
-			secondMoney = Math.ceil(firstMoney/2);
+			firstMoney = Math.round(tourSize/10);
+			secondMoney = Math.round(firstMoney/2);
 			firstBuck = 'buck';
 			secondBuck = 'buck';
 			if (firstMoney > 1) firstBuck = 'bucks';

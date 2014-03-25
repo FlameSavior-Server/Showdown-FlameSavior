@@ -1294,6 +1294,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	traven: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/F9tOOFS.png" width="150">' +
+                '<img src="http://i.imgur.com/jHt6to3.gif" width="250">' +
+                '<img src="http://i.imgur.com/JFB9OIp.png" width="150"><br />' +
+                '<b>Ace:</b> Hax<br />' +
+                'Shut up and battle.</center>');
+    	},
+	
 	cc: 'crazyclown94',
 	crazyclown94: function(target, room, user) {
         if (!this.canBroadcast()) return;

@@ -213,8 +213,8 @@ var commands = exports.commands = {
 			if (targetUser.canFixItem) i += ' Alter card/avatar';
 			if (targetUser.canDecAdvertise) i += ' Declare Advertise.';
 			if (targetUser.canBadge) i += ' VIP Badge.';
-			if (targetUser.canPOTD) i += 'POTD';
-			if (targetUser.canForcerename) i += 'Forcerename'
+			if (targetUser.canPOTD) i += ' POTD';
+			if (targetUser.canForcerename) i += ' Forcerename'
 			this.sendReply('Eligible for: ' + i);
 		}
 		var output = 'In rooms: ';
@@ -1142,6 +1142,7 @@ var commands = exports.commands = {
 				'★ <b>Battle</b> - By all means, invite your friends on here so that you can battle with each other!  Here on Gold, we are always up to date on our formats, so we\'re a great place to battle on!<br>' +
 				'★ <b>Chat</b> - Gold is full of great people in it\'s community and we\'d love to have you be apart of it!<br>' +
 				'★ <b>Learn</b> - Are you new to Pokemon?  If so, then feel FREE to ask the lobby any questions you might have!<br>' +
+				'★ <b>Shop</b> - Do /shop to learn about where your Gold Bucks can go! <br>' +
 				'<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
 	},
 	introduction: 'intro',

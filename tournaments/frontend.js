@@ -576,19 +576,32 @@ var Tournament = (function () {
 	Tournament.prototype.onTournamentEnd = function () {
 		this.room.add('|tournament|end|' + JSON.stringify({results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()}));
 		data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
-		winner = data['results'].toString();
+		data = data['results'].toString();
+		runnerUp = false;
+		if (data.indexOf(',') >= 0) { 
+			data = data.split(',');
+			winner = data[0];
+			if (data[1]) runnerUp = data[1];
+		} else {
+			winner = data;
+		}
 		tourSize = this.generator.users.size;
-		if (this.room.isOfficial && tourSize >= 8) {
+		if (this.room.isOfficial && tourSize >= 1) {
 			firstMoney = Math.ceil(tourSize/10);
 			secondMoney = Math.ceil(firstMoney/2);
 			firstBuck = 'buck';
 			secondBuck = 'buck';
 			if (firstMoney > 1) firstBuck = 'bucks';
 			if (secondMoney > 1) secondBuck = 'bucks';
-			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(data['results'].toString())+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-			economy.writeMoney('money', Users.get(data['results'].toString()).userid, firstMoney);
+			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
+			if (runnerUp) this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for winning the tournament!</b>');
+			economy.writeMoney('money', toUserid(winner), firstMoney, function(){
+				if (runnerUp) {
+					economy.writeMoney('money', toUserid(runnerUp), secondMoney);
+				}
+			});
 		}
-		frostcommands.addTourWin(data['results'].toString(),this.format);
+		frostcommands.addTourWin(winner,this.format);
 		delete exports.tournaments[toId(this.room.id)];
 	};
 

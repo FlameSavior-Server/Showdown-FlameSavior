@@ -617,9 +617,9 @@ var commands = {
 				tournament.room[user.userid] = new Object();
 				tournament.room[user.userid].canJoin = true;
 			}
-			if (!tournament.room[user.userid].canJoin) return this.sendReply('|raw|<b>You have recently left this tournament. To prevent join spamming, you must wait 60 seconds before you can join.</b>');
+			if (!tournament.room[user.userid].canJoin) return this.sendReply('|raw|<b>You have recently left this tournament. To prevent join spamming, you must wait 30 seconds before you can join.</b>');
 			tournament.room[user.userid].canJoin = false;
-			tournament.room[user.userid].joinTimer = setTimeout(function(){tournament.room[user.userid].canJoin = true;},60000);
+			tournament.room[user.userid].joinTimer = setTimeout(function(){tournament.room[user.userid].canJoin = true;},30000);
 			tournament.addUser(user, false, this);
 		},
 		l: 'leave',

@@ -500,7 +500,7 @@ var cmds = {
 		
 		if (room.id === 'lobby') {
  			for (var u in room.users) {
- 				var message = '|pm|~Tournament Notification|'+Users.users[u]+'|An '+Tools.data.Formats[tempTourTier].name+' has started in lobby.';
+ 				var message = '|pm|~Tournament Notification|'+Users.users[u]+'|An '+Tools.data.Formats[tempTourTier].name+' Tournament has started in the lobby.';
  				Users.users[u].send(message);
  			}
  		}

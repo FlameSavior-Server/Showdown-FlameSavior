@@ -586,7 +586,7 @@ var Tournament = (function () {
 			if (firstMoney > 1) firstBuck = 'bucks';
 			if (secondMoney > 1) secondBuck = 'bucks';
 			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(data['results'].toString())+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-			economy.writeMoney('money', data['results'].toString(), firstMoney);
+			economy.writeMoney('money', Users.get(data['results'].toString()).userid, firstMoney);
 		}
 		frostcommands.addTourWin(data['results'].toString(),this.format);
 		delete exports.tournaments[toId(this.room.id)];

@@ -755,7 +755,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 	} else if (cmd === 'help') {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox(
-			"The following is a list of tournament commands: <br />"
+			"The following is a list of tournament commands: <br />" +
 			"/tour create/new &lt;format>, &lt;type> [, &lt;comma-separated arguments>]: Creates a new tournament in the current room.<br />" +
 			"/tour settype &lt;type> [, &lt;comma-separated arguments>]: Modifies the type of tournament after it's been created, but before it has started.<br />" +
 			"/tour end/stop/delete: Forcibly ends the tournament in the current room.<br />" +

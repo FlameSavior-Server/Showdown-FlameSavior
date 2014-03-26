@@ -755,11 +755,15 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 	} else if (cmd === 'help') {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox(
-			"- create/new &lt;format>, &lt;type> [, &lt;comma-separated arguments>]: Creates a new tournament in the current room.<br />" +
-			"- settype &lt;type> [, &lt;comma-separated arguments>]: Modifies the type of tournament after it's been created, but before it has started.<br />" +
-			"- end/stop/delete: Forcibly ends the tournament in the current room.<br />" +
-			"- begin/start: Starts the tournament in the current room.<br />" +
-			"- dq/disqualify &lt;user>: Disqualifies an user.<br />" +
+			"The following is a list of tournament commands: <br />"
+			"/tour create/new &lt;format>, &lt;type> [, &lt;comma-separated arguments>]: Creates a new tournament in the current room.<br />" +
+			"/tour settype &lt;type> [, &lt;comma-separated arguments>]: Modifies the type of tournament after it's been created, but before it has started.<br />" +
+			"/tour end/stop/delete: Forcibly ends the tournament in the current room.<br />" +
+			"/tour begin/start: Starts the tournament in the current room.<br />" +
+			"/tour dq/disqualify &lt;user>: Disqualifies a user.<br />" +
+			"/tour remind: Sends all users that have pending battles a popup reminding them to battle.<br />" +
+			"/tour reportwins on/off: Toggles showing when players win tournament battles.<br />" +
+			"/tour reportbattles on/off: Toggles showing when players start tournament battles.<br />" +
 			"More detailed help can be found <a href=\"https://gist.github.com/kotarou3/7872574\">here</a>"
 		);
 	} else if (cmd === 'create' || cmd === 'new') {

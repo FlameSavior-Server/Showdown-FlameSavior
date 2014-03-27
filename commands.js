@@ -3834,8 +3834,12 @@ var commands = exports.commands = {
 			try {
 				CommandParser.uncacheTree('./command-parser.js');
 				CommandParser = require('./command-parser.js');
+				
 				CommandParser.uncacheTree('./hangman.js');
-                hangman = require('./hangman.js').hangman(hangman);
+                		hangman = require('./hangman.js').hangman(hangman);
+                		
+                		CommandParser.uncacheTree('./tour.js');
+                		global.tour = require('./tour.js');
 
 				return this.sendReply('Chat commands have been hot-patched.');
 			} catch (e) {

@@ -3378,7 +3378,7 @@ function getRandMessage(user){
 		break;
 		case 32: message = message + user + ' fell into a snake pit!'; 
 		break;
-		case 33: message = message + user + ' got eaten by sharks!';
+		case 33: message = message + user + ' was swallowed whole by a Wailord!'; // Bought by Selena
 		break;
 		case 34: message = message + user + ' was swallowed whole by a giant wigglytuff!';// Bought by Lyrical WigglyTuff 
 		break;

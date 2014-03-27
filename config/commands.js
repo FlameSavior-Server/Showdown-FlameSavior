@@ -1305,6 +1305,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	ghettoghetsis: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/2S9mgmt.png" width="130">' +
+                '<img src="http://i.imgur.com/4X5KNXZ.png" width="280">' +
+                '<img src="http://i.imgur.com/Vgmaw34.png" width="130"><br />' +
+                '<b>Ace:</b> Shuckle<br />' +
+                '2ghetto4u.</center>');
+    	},
+	
 	traven: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/F9tOOFS.png" width="150">' +

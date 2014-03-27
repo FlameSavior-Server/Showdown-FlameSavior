@@ -20,6 +20,8 @@ var dnsblCache = {
 	'127.0.0.1': false
 };
 
+exports.dnsblCache = dnsblCache;
+
 /**
  * Dnsbl.query(ip, callback)
  *

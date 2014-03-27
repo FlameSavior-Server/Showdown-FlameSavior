@@ -3839,7 +3839,7 @@ var commands = exports.commands = {
                 		hangman = require('./hangman.js').hangman(hangman);
                 		
                 		CommandParser.uncacheTree('./tour.js');
-                		global.tour = require('./tour.js');
+                		global.tour = require('./tour.js').tour(tour);
 
 				return this.sendReply('Chat commands have been hot-patched.');
 			} catch (e) {

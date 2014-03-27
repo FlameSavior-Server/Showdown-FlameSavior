@@ -2076,7 +2076,7 @@ var commands = exports.commands = {
 	},
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
-                return this.parse('/poll Next <font color="#FF4105">Tournament</font> Tier?, cc1v1, OU, randombat, ubers, hackmons, balhackmons, doubles, oumono, uubeta, cap, nu, lc, reg1v1, custom,randomdoubles, other');	
+                return this.parse('/poll Next <font color="#FF4105">Tournament</font> Tier?, cc1v1, OU, randombat, ubers, hackmons, balhackmons, doubles, oumono, uu, cap, nu, lc, reg1v1, custom,randomdoubles, other');	
 	},
 	hv: 'helpvotes',
 	helpvotes: function(room, user, cmd){

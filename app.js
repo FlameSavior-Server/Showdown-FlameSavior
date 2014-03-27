@@ -368,7 +368,7 @@ global.CommandParser = require('./command-parser.js');
 
 global.Simulator = require('./simulator.js');
 
-global.Tournaments = require('./tournaments/frontend.js');
+//global.Tournaments = require('./tournaments/frontend.js');
 
 global.trivia = require('./trivia.js');
 

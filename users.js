@@ -23,14 +23,18 @@
  * @license MIT license
  */
 
-var THROTTLE_DELAY = 500;
+const THROTTLE_DELAY = 600;
+const THROTTLE_BUFFER_LIMIT = 6;
+const THROTTLE_MULTILINE_WARN = 4;
 
 var users = {};
 var prevUsers = {};
 var numUsers = 0;
 
 var bannedIps = {};
+var bannedUsers = {};
 var lockedIps = {};
+var lockedUsers = {};
 
 var ipbans = fs.createWriteStream("config/ipbans.txt", {flags: "a"}); // do not remove this line
 
@@ -194,6 +198,10 @@ function socketReceive(worker, workerid, socketid, message) {
 			return;
 		}
 		lines = lines.split('\n');
+		if (lines.length >= THROTTLE_MULTILINE_WARN) {
+			connection.popup("You're sending too many lines at once. Try using a paste service like [[Pastebin]].");
+			return;
+		}
 		// Emergency logging
 		if (config.emergency) {
 			fs.appendFile('logs/emergency.log', '['+ user + ' (' + connection.ip + ')] ' + message + '\n', function(err){
@@ -534,9 +542,22 @@ var User = (function () {
 		var oldid = this.userid;
 		delete users[oldid];
 		this.userid = userid;
-		users[this.userid] = this;
+		users[userid] = this;
 		this.authenticated = !!authenticated;
 		this.forceRenamed = !!forcible;
+
+		if (authenticated && userid in bannedUsers) {
+			var bannedUnder = '';
+			if (bannedUsers[userid] !== userid) bannedUnder = ' under the username '+bannedUsers[userid];
+			this.send("|popup|Your username ("+name+") is banned"+bannedUnder+"'. Your ban will expire in a few days."+(config.appealurl ? " Or you can appeal at:\n" + config.appealurl:""));
+			this.ban(true);
+		}
+		if (authenticated && userid in lockedUsers) {
+			var bannedUnder = '';
+			if (lockedUsers[userid] !== userid) bannedUnder = ' under the username '+lockedUsers[userid];
+			this.send("|popup|Your username ("+name+") is locked"+bannedUnder+"'. Your lock will expire in a few days."+(config.appealurl ? " Or you can appeal at:\n" + config.appealurl:""));
+			this.lock(true);
+		}
 
 		for (var i=0; i<this.connections.length; i++) {
 			//console.log(''+name+' renaming: socket '+i+' of '+this.connections.length);
@@ -1069,18 +1090,24 @@ var User = (function () {
 			this.updateIdentity(roomid);
 		}
 	};
-	User.prototype.ban = function(noRecurse) {
+	User.prototype.ban = function(noRecurse, userid) {
 		// recurse only once; the root for-loop already bans everything with your IP
+		if (!userid) userid = this.userid;
 		if (!noRecurse) for (var i in users) {
 			if (users[i] === this) continue;
 			if (Object.isEmpty(Object.select(this.ips, users[i].ips))) continue;
-			users[i].ban(true);
+			users[i].ban(true, userid);
 		}
 
 		for (var ip in this.ips) {
-			bannedIps[ip] = this.userid;
+			bannedIps[ip] = userid;
 		}
-		this.locked = true; // in case of merging into a recently banned account
+		if (this.autoconfirmed) bannedUsers[this.autoconfirmed] = userid;
+		if (this.authenticated) {
+			bannedUsers[this.userid] = userid;
+			this.locked = true; // in case of merging into a recently banned account
+			this.autoconfirmed = '';
+		}
 		this.disconnectAll();
 	};
 	User.prototype.lock = function(noRecurse) {
@@ -1094,14 +1121,19 @@ var User = (function () {
 		for (var ip in this.ips) {
 			lockedIps[ip] = this.userid;
 		}
+		if (this.autoconfirmed) lockedUsers[this.autoconfirmed] = this.userid;
+		if (this.authenticated) lockedUsers[this.userid] = this.userid;
 		this.locked = true;
+		this.autoconfirmed = '';
 		this.updateIdentity();
 	};
 	User.prototype.joinRoom = function(room, connection) {
 		room = Rooms.get(room);
 		if (!room) return false;
 		if (room.staffRoom && !this.isStaff) return false;
-		if (this.userid && room.bannedUsers && this.userid in room.bannedUsers) return false;
+		if (room.bannedUsers) {
+			if (this.userid in room.bannedUsers || this.autoconfirmed in room.bannedUsers) return false;
+		}
 		if (this.ips && room.bannedIps) {
 			for (var ip in this.ips) {
 				if (ip in room.bannedIps) return false;
@@ -1339,7 +1371,7 @@ var User = (function () {
 
 		if (this.chatQueueTimeout) {
 			if (!this.chatQueue) this.chatQueue = []; // this should never happen
-			if (this.chatQueue.length > 6) {
+			if (this.chatQueue.length >= THROTTLE_BUFFER_LIMIT-1) {
 				connection.sendTo(room, '|raw|' +
 					"<strong class=\"message-throttle-notice\">Your message was not sent because you've been typing too quickly.</strong>"
 				);
@@ -1494,6 +1526,12 @@ function unban(name) {
 			success = true;
 		}
 	}
+	for (var id in bannedUsers) {
+		if (bannedUsers[id] === userid || id === userid) {
+			delete bannedUsers[id];
+			success = true;
+		}
+	}
 	if (success) return name;
 	return false;
 }
@@ -1518,6 +1556,12 @@ function unlock(name, unlocked, noRecurse) {
 		if (Users.lockedIps[ip] === userid) {
 			delete Users.lockedIps[ip];
 			unlocked = unlocked || {};
+			unlocked[name] = 1;
+		}
+	}
+	for (var id in lockedUsers) {
+		if (lockedUsers[id] === userid || id === userid) {
+			delete lockedUsers[id];
 			unlocked[name] = 1;
 		}
 	}

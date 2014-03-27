@@ -1401,9 +1401,10 @@ var ChatRoom = (function() {
 	};
 	ChatRoom.prototype.onJoinConnection = function(user, connection) {
 		var userList = this.userList ? this.userList : this.getUserList();
-		this.send('|init|chat\n|title|'+this.title+'\n'+userList+'\n'+this.log.slice(-25).join('\n'), connection);
-		if (global.Tournaments && Tournaments.getTournament(this.id))
-			Tournaments.getTournament(this.id).update(user);
+		var modchat = this.getModchatNote();
+		this.send('|init|chat\n|title|'+this.title+'\n'+userList+'\n'+this.logGetLast(25).join('\n')+modchat, connection);
+		if (global.Tournaments && Tournaments.get(this.id))
+			Tournaments.get(this.id).update(user);
 	};
 	ChatRoom.prototype.onJoin = function(user, connection, merging) {
 		if (!user) return false; // ???
@@ -1425,10 +1426,11 @@ var ChatRoom = (function() {
 
 		if (!merging) {
 			var userList = this.userList ? this.userList : this.getUserList();
-			this.send('|init|chat\n|title|'+this.title+'\n'+userList+'\n'+this.log.slice(-100).join('\n'), connection);
-			if (global.Tournaments && Tournaments.getTournament(this.id))
-				Tournaments.getTournament(this.id).update(user);
+			var modchat = this.getModchatNote();
+			this.send('|init|chat\n|title|'+this.title+'\n'+userList+'\n'+this.logGetLast(100).join('\n')+modchat, connection);
 		}
+		if (global.Tournaments && Tournaments.get(this.id))
+			Tournaments.get(this.id).update(user);
 
 		return user;
 	};
@@ -1457,6 +1459,8 @@ var ChatRoom = (function() {
 			}
 			this.logEntry(entry);
 		}
+		if (global.Tournaments && Tournaments.get(this.id))
+			Tournaments.get(this.id).update(user);
 		return user;
 	};
 	/**
@@ -1475,7 +1479,7 @@ var ChatRoom = (function() {
 	ChatRoom.prototype.onLeave = function(user) {
 		if (!user) return; // ...
 		delete this.users[user.userid];
-		if (config.reportjoins) {
+		if (user.named && config.reportjoins) {
 			this.add('|l|'+user.getIdentity(this.id));
 		} else if (user.named) {
 			var entry = '|L|' + user.getIdentity(this.id);

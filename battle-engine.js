@@ -203,6 +203,7 @@ var BattlePokemon = (function() {
 		this.gender = this.template.gender || genders[set.gender] || (Math.random()*2<1?'M':'F');
 		if (this.gender === 'N') this.gender = '';
 		this.happiness = typeof set.happiness === 'number' ? clampIntRange(set.happiness, 0, 255) : 255;
+		this.pokeball = this.set.pokeball || 'pokeball';
 
 		this.fullname = this.side.id + ': ' + this.name;
 		this.details = this.species + (this.level==100?'':', L'+this.level) + (this.gender===''?'':', '+this.gender) + (this.set.shiny?', shiny':'');
@@ -950,6 +951,7 @@ var BattlePokemon = (function() {
 			this.itemData = {id: '', target: this};
 			this.usedItemThisTurn = true;
 			this.ateBerry = true;
+			this.battle.runEvent('AfterUseItem', this, null, null, item);
 			return true;
 		}
 		return false;
@@ -1267,6 +1269,7 @@ var BattleSide = (function() {
 				}),
 				baseAbility: pokemon.baseAbility,
 				item: pokemon.item,
+				pokeball: pokemon.pokeball,
 				canMegaEvo: pokemon.canMegaEvo
 			});
 		}
@@ -2402,6 +2405,9 @@ var Battle = (function() {
 		}
 		this.add('switch', pokemon, pokemon.getDetails);
 		if (pokemon.template.isMega) this.add('-formechange', pokemon, pokemon.template.species);
+		if (pokemon.illusion && pokemon.illusion.template.isMega) {
+			this.add('-formechange', pokemon.illusion, pokemon.illusion.template.species);
+		}
 		pokemon.update();
 		this.runEvent('SwitchIn', pokemon);
 		this.addQueue({pokemon: pokemon, choice: 'runSwitch'});
@@ -2460,6 +2466,9 @@ var Battle = (function() {
 		}
 		this.add('drag', pokemon, pokemon.getDetails);
 		if (pokemon.template.isMega) this.add('-formechange', pokemon, pokemon.template.species);
+		if (pokemon.illusion && pokemon.illusion.template.isMega) {
+			this.add('-formechange', pokemon.illusion, pokemon.illusion.template.species);
+		}
 		pokemon.update();
 		this.runEvent('SwitchIn', pokemon);
 		this.addQueue({pokemon: pokemon, choice: 'runSwitch'});

@@ -504,6 +504,7 @@ exports.BattleScripts = {
 		if (!template.isMega) return false;
 		if (pokemon.baseTemplate.species !== template.baseSpecies) return false;
 		if (pokemon.volatiles.mustrecharge) return false;
+		if (pokemon.getLockedMove()) return false;
 
 		// okay, mega evolution is possible
 		this.add('-formechange', pokemon, template.species);
@@ -944,7 +945,7 @@ exports.BattleScripts = {
 				case 'seismictoss': case 'nightshade': case 'superfang':
 					if (setupType) rejected = true;
 					break;
-				case 'knockoff': case 'perishsong': case 'magiccoat': case 'spikes':
+				case 'perishsong': case 'magiccoat': case 'spikes':
 					if (setupType) rejected = true;
 					break;
 				case 'uturn': case 'voltswitch':
@@ -1045,7 +1046,7 @@ exports.BattleScripts = {
 					if (hasMove['gunkshot']) rejected = true;
 					break;
 				case 'psychic':
-					if (hasMove['psyshock']) rejected = true;
+					if (hasMove['psyshock'] || hasMove['storedpower']) rejected = true;
 					break;
 				case 'fusionbolt':
 					if (setupType && hasMove['boltstrike']) rejected = true;
@@ -1067,7 +1068,7 @@ exports.BattleScripts = {
 				case 'rest':
 					if (hasMove['painsplit'] || hasMove['wish'] || hasMove['recover'] || hasMove['moonlight'] || hasMove['synthesis']) rejected = true;
 					break;
-				case 'softboiled': case 'roost':
+				case 'softboiled': case 'roost': case 'moonlight': case 'synthesis':
 					if (hasMove['wish'] || hasMove['recover']) rejected = true;
 					break;
 				case 'perishsong':
@@ -1289,7 +1290,7 @@ exports.BattleScripts = {
 				if (ability === 'Prankster' && !counter['Status']) {
 					rejectAbility = true;
 				}
-				if (ability === 'Defiant' && !counter['Physical'] && !hasMove['batonpass']) {
+				if ((ability === 'Defiant' || ability === 'Moxie') && !counter['Physical'] && !hasMove['batonpass']) {
 					rejectAbility = true;
 				}
 				// below 2 checks should be modified, when it becomes possible, to check if the team contains rain or sun
@@ -1324,6 +1325,9 @@ exports.BattleScripts = {
 				}
 				if ((abilities[0] === 'Chlorophyll' || abilities[1] === 'Chlorophyll' || abilities[2] === 'Chlorophyll') && ability !== 'Solar Power' && hasMove['sunnyday']) {
 					ability = 'Chlorophyll';
+				}
+				if (template.id === 'sigilyph') {
+					ability = 'Magic Guard';
 				}
 				if (template.id === 'combee') {
 					// it always gets Hustle but its only physical move is Endeavor, which loses accuracy
@@ -1426,10 +1430,10 @@ exports.BattleScripts = {
 				item = 'Life Orb';
 			} else if (ability === 'Unburden') {
 				item = 'Red Card';
-				// Give Unburden mons a Normal Gem if they have a Normal-type attacking move
+				// Give Unburden mons a Normal Gem if they have a Normal-type attacking move (except Explosion)
 				for (var m in moves) {
 					var move = this.getMove(moves[m]);
-					if (move.type === 'Normal' && (move.basePower || move.basePowerCallback)) {
+					if (move.type === 'Normal' && (move.basePower || move.basePowerCallback) && move.id !== 'explosion') {
 						item = 'Normal Gem';
 						break;
 					}
@@ -1484,15 +1488,13 @@ exports.BattleScripts = {
 			} else if ((template.baseStats.hp+75)*(template.baseStats.def+template.baseStats.spd+175) > 60000 || template.species === 'Skarmory' || template.species === 'Forretress') {
 				// skarmory and forretress get exceptions for their typing
 				item = 'Leftovers';
-			} else if (counter.Physical + counter.Special >= 3 && setupType) {
-				item = 'Life Orb';
-			} else if (counter.Special >= 3 && setupType) {
+			} else if ((counter.Physical + counter.Special >= 3 || counter.Special >= 3) && setupType && ability !== 'Sturdy') {
 				item = 'Life Orb';
 			} else if (counter.Physical + counter.Special >= 4 && template.baseStats.def + template.baseStats.spd > 179) {
 				item = 'Assault Vest';
 			} else if (counter.Physical + counter.Special >= 4) {
 				item = 'Expert Belt';
-			} else if (i===0 && ability !== 'Sturdy' && !counter['recoil']) {
+			} else if (i===0 && ability !== 'Sturdy' && !counter['recoil'] && template.baseStats.def + template.baseStats.spd + template.baseStats.hp < 300) {
 				item = 'Focus Sash';
 			} else if (hasMove['outrage']) {
 				item = 'Lum Berry';
@@ -1508,7 +1510,7 @@ exports.BattleScripts = {
 				item = 'Air Balloon';
 			} else if (hasType['Poison']) {
 				item = 'Black Sludge';
-			} else if (counter.Status <= 1) {
+			} else if (counter.Status <= 1 && ability !== 'Sturdy') {
 				item = 'Life Orb';
 			} else {
 				item = 'Leftovers';
@@ -1625,6 +1627,8 @@ exports.BattleScripts = {
 			if (keys[i].substr(0,8) === 'basculin' && Math.random()*2>1) continue;
 			// Genesect formes have 1/5 the normal rate each (so Genesect as a whole has a normal rate)
 			if (keys[i].substr(0,8) === 'genesect' && Math.random()*5>1) continue;
+			// Gourgeist formes have 1/4 the normal rate each (so Gourgeist as a whole has a normal rate)
+			if (keys[i].substr(0,9) === 'gourgeist' && Math.random()*4>1) continue;
 			// Not available on XY
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
@@ -2129,6 +2133,9 @@ exports.BattleScripts = {
 					break;
 				case 'hiddenpowerice':
 					if (hasMove['icywind']) rejected = true;
+					break;
+				case 'stone edge':
+					if (hasMove['rockblast']) rejected = true;
 					break;
 
 				// Status:

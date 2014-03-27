@@ -286,8 +286,77 @@ exports.tour = function(t) {
 			tour[rid].winners = new Array();
 			var firstMatch = false;
 			if (w.length == 1) {
+				var tourMoney = 0;
+				var tooSmall = '';
+				var p = 'bucks';
+				if (Rooms.rooms[rid].isOfficial) {
+					if (tour[rid].size >= 9) {
+						tourMoney = 5;
+					}
+					if (tour[rid].size >= 6 && tour[rid].size >= 8) {
+						tourMoney = 4;
+					}
+					if (tour[rid].size >=4  && tour[rid].size >= 5) {
+						tourMoney = 3;
+						p = 'bucks';
+					}
+					if (tour[rid].size >= 3) {
+						tourMoney = 2;
+						p = 'bucks';
+					}
+					if (tour[rid].size < 2) {
+						tourMoney = 0;
+						tooSmall = tooSmall + '(the tour was too small)';
+					}
+				} else {
+					tooSmall += '(this is not an official chatroom)';
+				}
 				//end tour
-				Rooms.rooms[rid].addRaw('<h2><font color="green">Congratulations <font color="black">' + Users.users[w[0]].name + '</font>!  You have won the ' + Tools.data.Formats[tour[rid].tier].name + ' Tournament!</font></h2>' + '<br><font color="blue"><b>SECOND PLACE:</b></font> ' + Users.users[l[0]].name + '<hr />');
+				Rooms.rooms[rid].addRaw('<h2><font color="green">Congratulations <font color="black">' + Users.users[w[0]].name + '</font>!  You have won the ' + Tools.data.Formats[tour[rid].tier].name + ' Tournament!<br>You have also won ' + tourMoney + ' Gold ' + p + '! ' + tooSmall + '</font></h2>' + '<br><font color="blue"><b>SECOND PLACE:</b></font> ' + Users.users[l[0]].name + '<hr />');			
+				if (tour[rid].size >= 8) {
+					try {
+						frostcommands.addTourWin(Users.users[w[0]].name, Tools.data.Formats[tour[rid].tier].name); //for recording tour stats
+						} catch (e) {
+						console.log('Error recording tournament win: '+e.stack);
+					}
+				}
+				//for now, this is the only way to get points/money
+				var data = fs.readFileSync('config/money.csv','utf8')
+				var match = false;
+				var money = 0;
+				var row = (''+data).split("\n");
+				var line = '';
+				for (var i = row.length; i > -1; i--) {
+					if (!row[i]) continue;
+					var parts = row[i].split(",");
+					var userid = toUserid(parts[0]);
+					if (Users.users[w[0]].userid == userid) {
+						var x = Number(parts[1]);
+						var money = x;
+						match = true;
+						if (match === true) {
+							line = line + row[i];
+							break;
+						}
+					}
+				}
+				Users.users[w[0]].money = money;
+				Users.users[w[0]].money = Users.users[w[0]].money + tourMoney;
+				if (match === true) {
+					var re = new RegExp(line,"g");
+					fs.readFile('config/money.csv', 'utf8', function (err,data) {
+					if (err) {
+						return console.log(err);
+					}
+					var result = data.replace(re, Users.users[w[0]].userid+','+Users.users[w[0]].money);
+					fs.writeFile('config/money.csv', result, 'utf8', function (err) {
+						if (err) return console.log(err);
+					});
+					});
+				} else {
+					var log = fs.createWriteStream('config/money.csv', {'flags': 'a'});
+					log.write("\n"+Users.users[w[0]].userid+','+Users.users[w[0]].money);
+				}
 				tour[rid].status = 0;
 			} else {
 				var html = '<hr /><h3><font color="green">Round '+ tour[rid].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tour[rid].tier].name + "<hr /><center>";
@@ -428,6 +497,13 @@ var cmds = {
 		tour[rid].size = targets[1];
 		tour[rid].status = 1;
 		tour[rid].players = new Array();
+		
+		if (room.id === 'lobby') {
+ 			for (var u in room.users) {
+ 				var message = '|pm|~Tournament Notification|'+Users.users[u]+'|A(n) '+Tools.data.Formats[tempTourTier].name+' Tournament has started in the lobby.';
+ 				Users.users[u].send(message);
+ 			}
+ 		}
 
 		Rooms.rooms[rid].addRaw('<hr /><h2><font color="green">' + sanitize(user.name) + ' has started a ' + Tools.data.Formats[tempTourTier].name + ' Tournament.</font> <font color="red">/j</font> <font color="green">to join!</font></h2><b><font color="blueviolet">PLAYERS:</font></b> ' + targets[1] + '<br /><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tempTourTier].name + '<hr />');
 		if (tour.timers[rid]) Rooms.rooms[rid].addRaw('<i>The tournament will begin in ' + tour.timers[rid].time + ' minute' + (tour.timers[rid].time == 1 ? '' : 's') + '.<i>');

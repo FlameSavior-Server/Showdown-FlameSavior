@@ -563,11 +563,11 @@ var commands = exports.commands = {
 	},
 	getbucks: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('How to get bucks guide:<br>' +
-		'1. Play tournaments in the lobby!  Lobby tournaments will always give the winner bucks!<br>' +
-		'2. Sometimes people will do hangmans for money!<br>' +
-		'3. Casino! Click <button name="joinRoom" value="casino" target="_blank">here</button> to join! In here, everyone gets room voice!<br>' +
-		'4. Make a helpful suggestion to the server! (Bucks may vary)');
+        this.sendReplyBox('How to get bucks guide:<br><ul>' +
+		'<li>Play tournaments in the Lobby!  Lobby tournaments will always give the winner bucks!</li>' +
+		'<li>Sometimes people will do hangmans for money!</li>' +
+		'<li>Casino! Click <button name="joinRoom" value="casino" target="_blank">here</button> to join! In here, everyone gets room voice!</li>' +
+		'<li>Make a helpful suggestion to the server using /suggest [suggestion] (Bucks may vary)!');
 	},
 	tb: 'transferbucks',
 	transferbucks: function(target, room, user) {

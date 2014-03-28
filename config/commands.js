@@ -1006,10 +1006,10 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b>Leonardo DiCaprio</b> - Mirror mirror on the wall, who is the chillest of them all?<br />');
 	},
-
+	kupo: 'moogle',
 	moogle: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Kupo</b> - abc!<br />');
+		this.sendReplyBox('<center><img src="http://50.62.73.114:8000/avatars/kupo.png"><br><b>Kupo</b> - abc!<br />');
 	},
 
 	starmaster: function(target, room, user) {

@@ -2544,6 +2544,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/tFikucg.png"><br><img src="http://i.imgur.com/wSs98Iy.gif"><br><font color="red"><blink>Ace: Weavile</blink><br></font>I\'m not even on drugs. I\'m just weird.');
 	},
 
+	forums: 'forum',
 	forum: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.net/forums/">here</a>.')

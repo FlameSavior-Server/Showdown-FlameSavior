@@ -983,6 +983,17 @@ var commands = exports.commands = {
 					targetUser.send(user.name + ' has given you ' + theItem + '!');
 				}
 			}
+			if (theItem === 'forcerename') {
+				if (targetUser.canForcerename === true) {
+					return this.sendReply('This user has already bought that item from the shop... no need for another.');
+				}
+				if (targetUser.canForcerename === false) {
+					matched = true;
+					targetUser.canForcerename = true;
+					Rooms.rooms.lobby.add(user.name + ' has a forcerename from the shop!');
+					targetUser.send(user.name + ' has given you ' + theItem + '!');
+				}
+			}	
 			if (theItem === 'fix') {
 				if (targetUser.canFixItem === true) {
 					return this.sendReply('This user has already bought that item from the shop... no need for another.');

@@ -945,7 +945,7 @@ var commands = exports.commands = {
 				}
 				if (targetUser.canCustomAvatar === false) {
 					matched = true;
-					targetUser.canCustomSymbol = true;
+					targetUser.canCustomAvatar = true;
 					Rooms.rooms.lobby.add(user.name + ' has stolen a custom avatar from the shop!');
 					targetUser.send(user.name + ' has given you ' + theItem + '!');
 				}

@@ -225,7 +225,7 @@ var commands = exports.commands = {
 	roomid: 'room',
 	room: function(target, room, user) {
         	if (!this.canBroadcast()) return;
-        	this.sendReplyBox('You are currently in "'+room.id+'".');
+        	this.sendReplyBox('You are currently in the room "<b>'+room.id+'</b>".');
 	},
 	punt: function(target, room, user){
 		if(!target) return this.sendReply('/punt needs a target.');

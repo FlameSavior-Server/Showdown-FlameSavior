@@ -222,9 +222,10 @@ var commands = exports.commands = {
 		if(!target) return this.sendReply('/slap needs a target.');
 		return this.parse('/me slaps ' + target + ' with a large trout.');
 	},
+	roomid: 'room',
 	room: function(target, room, user) {
         	if (!this.canBroadcast()) return;
-        	this.sendReplyBox('You are currently in "'+room.id'".');
+        	this.sendReplyBox('You are currently in "'+room.id+'".');
 	},
 	punt: function(target, room, user){
 		if(!target) return this.sendReply('/punt needs a target.');

@@ -2076,7 +2076,7 @@ var commands = exports.commands = {
 	},
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
-                return this.parse('/poll Next Tournament Tier?, cc1v1, OU, randombat, ubers, hackmons, balhackmons, doubles, oumono, uubeta, cap, nu, lc, reg1v1, custom,randomdoubles, other');	
+                return this.parse('/poll Next <font color="#FF4105">Tournament</font> Tier?, cc1v1, OU, randombat, ubers, hackmons, balhackmons, doubles, oumono, uu, cap, nu, lc, reg1v1, custom,randomdoubles, other');	
 	},
 	hv: 'helpvotes',
 	helpvotes: function(room, user, cmd){
@@ -3834,16 +3834,12 @@ var commands = exports.commands = {
 			try {
 				CommandParser.uncacheTree('./command-parser.js');
 				CommandParser = require('./command-parser.js');
+				
 				CommandParser.uncacheTree('./hangman.js');
-                hangman = require('./hangman.js').hangman(hangman);
-
-				CommandParser.uncacheTree('./tour.js');
-				tour = require('./tour.js').tour(tour);
-
-				var runningTournaments = Tournaments.tournaments;
-				CommandParser.uncacheTree('./tournaments/frontend.js');
-				Tournaments = require('./tournaments/frontend.js');
-				Tournaments.tournaments = runningTournaments;
+                		hangman = require('./hangman.js').hangman(hangman);
+                		
+                		CommandParser.uncacheTree('./tour.js');
+                		global.tour = require('./tour.js').tour(tour);
 
 				return this.sendReply('Chat commands have been hot-patched.');
 			} catch (e) {

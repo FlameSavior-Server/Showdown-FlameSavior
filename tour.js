@@ -457,12 +457,6 @@ var cmds = {
 			tour = require('./tour.js').tour(tour);
 			return this.sendReply('Tournament scripts were updated.');
 		}
-		if (target == "ignore")) {
-			return this.parse('/ignore Tournament Notification');
-		}
-		if (target == "unignore")) {
-			return this.parse('/unignore Tournament Notification');
-		}
 		if (!tour.userauth(user,room)) return this.parse('/tours');
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');
 		var rid = room.id;

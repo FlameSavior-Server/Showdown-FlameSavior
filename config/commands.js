@@ -226,6 +226,9 @@ var commands = exports.commands = {
 
 			output += '<a href="/'+i+'" room="'+i+'">'+i+'</a>';
 		}
+		if (!targetUser.connected || targetUser.isAway) {
+			this.sendReply('|raw|This user is ' + ((!targetUser.connected) ? '<font color = "red">offline</font>.' : '<font color = "orange">away</font>.'));
+		}
 		this.sendReply('|raw|'+output);
 	},
 	fork: function(target, room, user) {

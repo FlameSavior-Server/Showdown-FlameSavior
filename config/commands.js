@@ -971,7 +971,7 @@ var commands = exports.commands = {
 	},
 	archbisharp: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/ibC46tQ.png"><br><img src="http://fc07.deviantart.net/fs70/f/2012/294/f/c/bisharp_by_xdarkblaze-d5ijnsf.gif" width="350" hieght="350"><br></font<b>>Ruling you with an Iron Head.');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ibC46tQ.png"><br><img src="http://fc07.deviantart.net/fs70/f/2012/294/f/c/bisharp_by_xdarkblaze-d5ijnsf.gif" width="350" hieght="350"><br></font><b>Ruling you with an Iron Head.');
 	},
 	chimplup: function(target, room, user) {
 		if (!this.canBroadcast()) return;

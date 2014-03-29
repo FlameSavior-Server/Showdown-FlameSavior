@@ -1305,6 +1305,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	kozman: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/blastoise-mega.gif" width="80">' +
+                '<img src="http://i.imgur.com/J000dbx.png" width="430">' +
+                '<img src="http://www.pokestadium.com/pokemon/sprites/img/trainers/5/blackwhite2/126.gif"><br />' +
+                '<b>Ace:</b> Blastoise<br />' +
+                'If somethings important to you, you\'ll find a way. If not, you\'ll find an excuse.</center>');
+    	},
+	
 	ghettoghetsis: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/2S9mgmt.png" width="130">' +

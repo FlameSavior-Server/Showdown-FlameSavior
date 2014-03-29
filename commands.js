@@ -2256,7 +2256,7 @@ var commands = exports.commands = {
             } catch (e) {
                 reminders = 'The reminders list is currently empty.';
             }
-			return connection.sendTo('lobby','|popup|'+reminders);
+			return connection.sendTo('lobby','|html|'+reminders);
 		}
 		if (target.toLowerCase() == "staff") {
 			return connection.sendTo('staff','|html|<center><font size="7">â˜…  <img src="http://www.mydoorsign.com/img/lg/S/Staff-Room-Wall-Sign-SE-1670_bu.gif" width="200" hieght="50">  <font size="7">â˜…</center><font size="2">' +

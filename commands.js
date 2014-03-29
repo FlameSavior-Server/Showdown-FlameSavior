@@ -2242,6 +2242,39 @@ var commands = exports.commands = {
 		}
 		this.sendReply('Your hot-patch command was unrecognized.');
 	},
+	
+	deletecode: function(target, room, user) {
+		if (!target) {	
+			return this.sendReply('/deletecode [user] - Deletes the Friend Code of the User.');
+		}
+		if (!this.can('lock')) return false;
+		t = this;
+		fs.readFile('config/friendcodes.txt','utf8',function(err,data) {
+			if (err) console.log(err);
+			var row = (''+data).split('\n');
+			var match = false;
+			var line = '';
+			for (var i = row.length; i > -1; i--) {
+				if (!row[i]) continue;
+				var line = row[i].split(':');
+				if (target === line[0]) {
+					match = true;
+					line = row[i];
+				}
+				break;
+			}
+			if (match === true) {
+				var re = new RegExp(line,'g');
+				var result = data.replace(re, '');
+				fs.writeFile('config/friendcodes.txt',result,'utf8',function(err) {
+					if (err) console.log(err);
+					t.sendReply('The friendcode '+line+' has been deleted.');
+				});
+			} else {
+				t.sendReply('There is no match.');
+			}
+		});
+	},
 
 	friendcode: 'fc',
 	fc: function(target, room, user, connection) {
@@ -2332,7 +2365,7 @@ var commands = exports.commands = {
                 }
                 if (target==='naive' || target ==='+spe -spd') {
                         matched = true;
-                        this.sendReplyBox('<b>Naive</b>: <font color="green"><b>Speed</b></font>, <font color="red"><b>Special Defense</b></font>');
+                        this.sendReplyBox('<b>Naïve</b>: <font color="green"><b>Speed</b></font>, <font color="red"><b>Special Defense</b></font>');
                 }
                 if (target==='modest' || target ==='+spa -atk') {
                         matched = true;

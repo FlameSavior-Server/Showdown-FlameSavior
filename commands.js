@@ -17,9 +17,7 @@ var closeShop = false;
 var closedShop = 0;
 var bank = exports.bank = {
 			bucks: function(uid, amount, take) {
-
- 
-						var data = fs.readFileSync('config/money.csv','utf8')
+			   	var data = fs.readFileSync('config/money.csv','utf8')
 				var match = false;
 				var money = 0;
 				var row = (''+data).split("\n");
@@ -84,7 +82,7 @@ var bank = exports.bank = {
                     }
                 }
                 uid.coins = coins;
-						if (take === true){if (amount <= uid.coins){
+		if (take === true){if (amount <= uid.coins){
 				uid.coins = uid.coins - amount; take = false;}
 				else return false;
 				}
@@ -1239,7 +1237,7 @@ var commands = exports.commands = {
                 }
                 if (target==='naive' || target ==='+spe -spd') {
                         matched = true;
-                        this.sendReplyBox('<b>NaÃ¯ve</b>: <font color="green"><b>Speed</b></font>, <font color="red"><b>Special Defense</b></font>');
+                        this.sendReplyBox('<b>Naïve</b>: <font color="green"><b>Speed</b></font>, <font color="red"><b>Special Defense</b></font>');
                 }
                 if (target==='modest' || target ==='+spa -atk') {
                         matched = true;
@@ -1970,12 +1968,11 @@ var commands = exports.commands = {
     	report: 'complain',
 	complain: function(target, room, user){
         if (!target) return this.sendReply('/report [report] - Use this command to report other users.');
-        if (target.indexOf('<img ') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<a href') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<font ') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<marquee') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<blink') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
+        var html = ['<img ','<a href','<font ','<marquee','<blink','<center'];
+        for (var x in html) {
+        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        }
+   
         if (target.indexOf('panpawn sucks') > -1) return this.sendReply('Yes, we know.');
         if (target.length > 350) return this.sendReply('This report is too long; it cannot exceed 350 characters.');
         if (!this.canTalk()) return;
@@ -1988,12 +1985,11 @@ var commands = exports.commands = {
 	suggestion: 'suggest',
 	suggest: function(target, room, user){
         if (!target) return this.sendReply('/suggest [suggestion] - Sends your suggestion to staff to review.');
-        if (target.indexOf('<img ') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<a href') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<font ') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<marquee') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<blink') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
+         var html = ['<img ','<a href','<font ','<marquee','<blink','<center'];
+        for (var x in html) {
+        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        }
+       
         if (target.length > 450) return this.sendReply('This suggestion is too long; it cannot exceed 450 characters.');
         if (!this.canTalk()) return;
         Rooms.rooms.staff.add(user.userid+' (in '+room.id+') has suggested: '+target+'');
@@ -2033,12 +2029,10 @@ var commands = exports.commands = {
 	},
 	newroom: function(target, room, user){
         if (!target) return this.sendReply('/newroom [answers to /newroomquestions] - Requests a new chat room to be be created.');
-        if (target.indexOf('<img ') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<a href') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<font ') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<marquee') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<blink') > -1) return this.sendReply('HTML is not supported in this command.');
-        if (target.indexOf('<center') > -1) return this.sendReply('HTML is not supported in this command.');
+        var html = ['<img ','<a href','<font ','<marquee','<blink','<center'];
+        for (var x in html) {
+        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        }
         if (target.length > 550) return this.sendReply('This new room suggestion is too long; it cannot exceed 550 characters.');
         if (target.length < 15) return this.sendReply('This room suggestion is rather small; are you sure that you answered all of the questions from /newroomquestions?');
         if (!this.canTalk()) return;

@@ -2139,7 +2139,6 @@ var commands = exports.commands = {
                                         '<b>2.</b> Do /events for a list of events that we do here!<br>' +
                                         '<b>3.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
                                         '<b>4.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
-                                        '<center><a href="http://plug.dj/gold-server/"><img src="http://i.imgur.com/IJEQkRe.png" width="30" height="30"></a></center><br>' +
                                         '<hr width="85%">' +
                                         '<center><a href="http://goldserver.weebly.com/rules"><button><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button><b>FAQs</b></a></button></div>');
         },

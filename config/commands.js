@@ -1303,9 +1303,9 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://th05.deviantart.net/fs70/PRE/i/2014/049/6/5/diancie_by_theangryaron-d7718b0.png" height=130">' +
                 '<img src="http://i.imgur.com/kUij7Af.gif"><br />' +
-                '<b><font color=color>Champion:</font></b> Champion Yellow<br />' +
-                '<a href="diamond-league.weebly.com" >Come visit our website</a>' +
-                '<a href="http://diamond-league.weebly.com/challenger-rules.html" >Our Rules</a>' +
+                '<b><font color=yellow>Champion:</font></b> Champion Yellow<br />' +
+                '<a href="diamond-league.weebly.com" >Come visit our website</a><br />' +
+                '<a href="http://diamond-league.weebly.com/challenger-rules.html" >Our Rules</a><br />' +
                 '<a href="https://docs.google.com/document/d/1m-1Ed1ZuxziA3RdUXvWrvH8oFIGGHfraGhNrua_01WA/edit" >Track your progression with our Badge Sheet </a></center>');
     	},
 

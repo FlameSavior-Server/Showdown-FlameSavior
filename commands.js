@@ -2139,7 +2139,7 @@ var commands = exports.commands = {
                                         '<b>3.</b> Do /events for a list of events that we do on Gold!<br>' +
                                         '<b>4.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
                                         '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
-                                        '<center><b><a href="http://goldserver.weebly.com/rules"><button>Rules</a></button>   |   <a href="http://goldserver.weebly.com/news"><button>News</a></button>   |   <a href="http://goldserver.weebly.com/"><button>Website</a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button>FAQs</a></button></div>');
+                                        '<center><a href="http://goldserver.weebly.com/rules"><button><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button><b>FAQs</b></a></button></div>');
         },
 	pic: 'image',
 	image: function(target, room, user){
@@ -2262,7 +2262,7 @@ var commands = exports.commands = {
                                         '<b>3.</b> Do /events for a list of events that we do on Gold!<br>' +
                                         '<b>4.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
                                         '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
-                                        '<center><b><a href="http://goldserver.weebly.com/rules"><button>Rules</a></button>   |   <a href="http://goldserver.weebly.com/news"><button>News</a></button>   |   <a href="http://goldserver.weebly.com/"><button>Website</a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button>FAQs</a></button></div>');
+                                        '<center><a href="http://goldserver.weebly.com/rules"><button><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button><b>FAQs</b></a></button></div>');
                 }
 		if (target.toLowerCase() == "staff") {
 			return connection.sendTo('staff','|html|<center><font size="7">â˜…  <img src="http://www.mydoorsign.com/img/lg/S/Staff-Room-Wall-Sign-SE-1670_bu.gif" width="200" hieght="50">  <font size="7">â˜…</center><font size="2">' +

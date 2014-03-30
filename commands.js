@@ -2139,6 +2139,7 @@ var commands = exports.commands = {
                                         '<b>3.</b> Do /events for a list of events that we do on Gold!<br>' +
                                         '<b>4.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
                                         '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
+                                        '<hr width="85%"><br>' +
                                         '<center><a href="http://goldserver.weebly.com/rules"><button><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button><b>FAQs</b></a></button></div>');
         },
 	pic: 'image',
@@ -2262,6 +2263,7 @@ var commands = exports.commands = {
                                         '<b>3.</b> Do /events for a list of events that we do on Gold!<br>' +
                                         '<b>4.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
                                         '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
+                                        '<hr width="85%"><br>' +
                                         '<center><a href="http://goldserver.weebly.com/rules"><button><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button><b>FAQs</b></a></button></div>');
                 }
 		if (target.toLowerCase() == "staff") {

@@ -3638,6 +3638,7 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><b>'+target+'</b></div>');
 		this.logModCommand(user.name+' declared '+target);
 	},
+	bd: 'bdeclare',
 	bdeclare: function(target, room, user) {
 		if (!target) return this.parse('/help declare');
 		if (!this.can('declare', null, room)) return false;

@@ -1166,6 +1166,11 @@ var commands = exports.commands = {
                 this.sendReplyBox('Gold\'s news can be found <a href="http://goldserver.weebly.com/news.html">here</a>.');
 	
 	},
+	plug:function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('Gold\'s Plug.dj can be found <a href="http://plug.dj/gold-server/">here</a>.');
+	
+	},
 	ps:function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center>Cick the Pokéball to enter Pawn\'s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');

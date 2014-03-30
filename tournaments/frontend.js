@@ -613,17 +613,16 @@ var commands = {
 		j: 'join',
 		in: 'join',
 		join: function (tournament, user) {
-			if (!tournament.room[user.userid]) {
-				tournament.room[user.userid] = new Object();
-				tournament.room[user.userid].canJoin = true;
+			if (!user[tournament.room.id]) {
+				user[tournament.room.id] = new Object();
+				user[tournament.room.id].joinTime = 0;
 			}
-			if (!tournament.room[user.userid].canJoin) return this.sendReply('|raw|<b>You have recently left this tournament. To prevent join spamming, you must wait 30 seconds before you can join.</b>');
-			tournament.room[user.userid].canJoin = false;
-			tournament.room[user.userid].joinTimer = setTimeout(function() { 
-				if (!tournament.room[user.userid]) return;
-				tournament.room[user.userid].canJoin = true;
-			},30000);
+			milliseconds = Date.now() - user[tournament.room.id].joinTime;
+			seconds = ((milliseconds / 1000) % 60);
+			remainingTime = Math.round(seconds - 60);
+			if (remainingTime < 0) return this.sendReply('You have recently joined the tournamnet. To prevent joining and leaving flood, you must wait '+(remainingTime - remainingTime * 2)+' seconds before joining again.');
 			tournament.addUser(user, false, this);
+			user[tournament.room.id].joinTime = Date.now();
 		},
 		l: 'leave',
 		out: 'leave',

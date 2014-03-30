@@ -321,8 +321,42 @@ exports.tour = function(t) {
 					}
 				}
 				//for now, this is the only way to get points/money
-				addbucks(Users.users[w[0]].name,tourMoney);
-				addbucks(Users.users[l[0]].name,1);
+				var data = fs.readFileSync('config/money.csv','utf8')
+				var match = false;
+				var money = 0;
+				var row = (''+data).split("\n");
+				var line = '';
+				for (var i = row.length; i > -1; i--) {
+					if (!row[i]) continue;
+					var parts = row[i].split(",");
+					var userid = toUserid(parts[0]);
+					if (Users.users[w[0]].userid == userid) {
+						var x = Number(parts[1]);
+						var money = x;
+						match = true;
+						if (match === true) {
+							line = line + row[i];
+							break;
+						}
+					}
+				}
+				Users.users[w[0]].money = money;
+				Users.users[w[0]].money = Users.users[w[0]].money + tourMoney;
+				if (match === true) {
+					var re = new RegExp(line,"g");
+					fs.readFile('config/money.csv', 'utf8', function (err,data) {
+					if (err) {
+						return console.log(err);
+					}
+					var result = data.replace(re, Users.users[w[0]].userid+','+Users.users[w[0]].money);
+					fs.writeFile('config/money.csv', result, 'utf8', function (err) {
+						if (err) return console.log(err);
+					});
+					});
+				} else {
+					var log = fs.createWriteStream('config/money.csv', {'flags': 'a'});
+					log.write("\n"+Users.users[w[0]].userid+','+Users.users[w[0]].money);
+				}
 				tour[rid].status = 0;
 			} else {
 				var html = '<hr /><h3><font color="green">Round '+ tour[rid].roundNum +'!</font></h3><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tour[rid].tier].name + "<hr /><center>";
@@ -385,39 +419,6 @@ exports.tour = function(t) {
 	}
 	return tour;
 };
-function addbucks(target, amount) {
-	target = target.toLowerCase();
-	fs.readFile('config/money.csv','utf8',function(err, data) {
-		if (err) console.log(err);
-		var match = false;
-		var line = '';
-		var row = (''+data).split('\n');
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var splitter = row[i].split(',');
-			if (splitter[0] === target) {
-				match = true;
-				line = row[i];
-				var money = parseInt(splitter[1]);
-				var coins = splitter[2];
-			}
-		break;
-		}
-		if (match === true) {
-			var newamount = money + parseInt(amount);
-			var re = new RegExp(line,'g');
-			var newdata = data.replace(re, target+','+newamount);
-			fs.writeFile('config/money.csv',newdata,'utf8',function(err,data) {
-				if (err) console.log(err);
-			});
-		} else {
-			var newdata = '\n'+target+','+amount;
-			fs.writeFile('config/money.csv',newdata,'utf8',function(err,data) {
-				if (err) console.log(err);
-			});
-		}
-	});
-}
 function clean(string) {
 	var entityMap = {
 		"&": "&amp;",

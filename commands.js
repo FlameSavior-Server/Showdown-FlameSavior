@@ -2146,7 +2146,7 @@ var commands = exports.commands = {
                                         '<b>3.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
                                         '<b>4.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
                                         '<hr width="85%">' +
-                                        '<center><a href="http://goldserver.weebly.com/rules"><button><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button><b>Plug.dj</b></a></button></div>');
+                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton"><font color="white"><b>Plug.dj</b></a></button></div>');
         },
 	pic: 'image',
 	image: function(target, room, user){

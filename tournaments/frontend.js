@@ -620,9 +620,9 @@ var commands = {
 			milliseconds = Date.now() - user[tournament.room.id].joinTime;
 			seconds = ((milliseconds / 1000) % 60);
 			remainingTime = Math.round(seconds - 60);
-			if (remainingTime < 0 && user[tournament.room.id].joinTime != 0) return this.sendReply('You have recently joined the tournamnet. To prevent joining and leaving flood, you must wait '+(remainingTime - remainingTime * 2)+' seconds before joining again.');
-			tournament.addUser(user, false, this);*/
-			user[tournament.room.id].joinTime = Date.now();
+			if (remainingTime < 0 && user[tournament.room.id].joinTime != 0) return this.sendReply('You have recently joined the tournamnet. To prevent joining and leaving flood, you must wait '+(remainingTime - remainingTime * 2)+' seconds before joining again.');*/
+			tournament.addUser(user, false, this);
+			//user[tournament.room.id].joinTime = Date.now();
 		},
 		l: 'leave',
 		out: 'leave',

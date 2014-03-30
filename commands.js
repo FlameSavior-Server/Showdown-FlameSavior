@@ -3638,6 +3638,15 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><b>'+target+'</b></div>');
 		this.logModCommand(user.name+' declared '+target);
 	},
+	bdeclare: function(target, room, user) {
+		if (!target) return this.parse('/help declare');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		this.add('|raw|<div class="broadcast-black"><b>'+target+'</b></div>');
+		this.logModCommand(user.name+' declared '+target);
+	},
 
 	gdeclare: 'globaldeclare',
 	globaldeclare: function(target, room, user) {

@@ -387,7 +387,7 @@ exports.tour = function(t) {
 };
 function addbucks(target, amount) {
 	target = target.toLowerCase();
-	fs.readFile('config/money.txt','utf8',function(err, data) {
+	fs.readFile('config/money.csv','utf8',function(err, data) {
 		if (err) console.log(err);
 		var match = false;
 		var line = '';
@@ -407,12 +407,12 @@ function addbucks(target, amount) {
 			var newamount = money + parseInt(amount);
 			var re = new RegExp(line,'g');
 			var newdata = data.replace(re, target+','+newamount);
-			fs.writeFile('config/money.txt',newdata,'utf8',function(err,data) {
+			fs.writeFile('config/money.csv',newdata,'utf8',function(err,data) {
 				if (err) console.log(err);
 			});
 		} else {
 			var newdata = '\n'+target+','+amount;
-			fs.writeFile('config/money.txt',newdata,'utf8',function(err,data) {
+			fs.writeFile('config/money.csv',newdata,'utf8',function(err,data) {
 				if (err) console.log(err);
 			});
 		}

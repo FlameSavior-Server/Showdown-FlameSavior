@@ -2253,7 +2253,7 @@ var commands = exports.commands = {
 		if (target.toLowerCase() == "lobby") {
 			return connection.sendTo('lobby','|html|<center><img src="http://i.imgur.com/wfPqpLg.png></center><br>' +
 					'1. Please be sure to see our <a href="http://goldserver.weebly.com/rules"rules</a>.<br>' +
-					'2. If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it's very serious, an Administrator (~).<br>' +
+					'2. If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
 					'3. Do /events for a list of events that we do on Gold!<br>' +
 					'5. Our news can be located <a href="http://goldserver.weebly.com/news">here</a>!<br>' +
 					'6. Advertising another server is an auto lock by PM or in chat.<br>' +

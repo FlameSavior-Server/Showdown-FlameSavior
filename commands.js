@@ -2252,12 +2252,12 @@ var commands = exports.commands = {
 		}
 		if (target.toLowerCase() == "lobby") {
 			return connection.sendTo('lobby','|html|<center><div class="broadcast-red"><img src="http://i.imgur.com/wfPqpLg.png><br>' +
-					'1. Please be sure to see our <a href="http://goldserver.weebly.com/rules">rules</a>.<br>' +
-					'2. If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
-					'3. Do /events for a list of events that we do on Gold!<br>' +
-					'4. Our news can be located <a href="http://goldserver.weebly.com/news">here</a>!<br>' +
-					'5. Advertising another server is an auto lock by PM or in chat.<br>' +
-					'6. We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!');
+					'<b>1.</b> Please be sure to see our <a href="http://goldserver.weebly.com/rules">rules</a>.<br>' +
+					'<b>2.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
+					'<b>3.</b> Do /events for a list of events that we do on Gold!<br>' +
+					'<b>4.</b> Our news can be located <a href="http://goldserver.weebly.com/news">here</a>!<br>' +
+					'<b>5.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
+					'<b>6.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!');
 		}
 		if (target.toLowerCase() == "staff") {
 			return connection.sendTo('staff','|html|<center><font size="7">â˜…  <img src="http://www.mydoorsign.com/img/lg/S/Staff-Room-Wall-Sign-SE-1670_bu.gif" width="200" hieght="50">  <font size="7">â˜…</center><font size="2">' +

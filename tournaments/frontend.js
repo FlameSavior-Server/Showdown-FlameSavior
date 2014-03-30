@@ -619,7 +619,10 @@ var commands = {
 			}
 			if (!tournament.room[user.userid].canJoin) return this.sendReply('|raw|<b>You have recently left this tournament. To prevent join spamming, you must wait 30 seconds before you can join.</b>');
 			tournament.room[user.userid].canJoin = false;
-			tournament.room[user.userid].joinTimer = setTimeout(function(){tournament.room[user.userid].canJoin = true;},30000);
+			tournament.room[user.userid].joinTimer = setTimeout(function() { 
+				if (!tournament.room[user.userid]) return;
+				tournament.room[user.userid].canJoin = true;
+			},30000);
 			tournament.addUser(user, false, this);
 		},
 		l: 'leave',

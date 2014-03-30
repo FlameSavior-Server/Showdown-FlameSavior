@@ -2595,9 +2595,10 @@ var commands = exports.commands = {
 		}
 	},
 	
+	pmstaff: 'pmallstaff',
 	pas: 'pmallstaff',
 	pmallstaff: function(target, room, user) {
-		if (!target) return this.parse('/pmallstaff [message] - Sends a PM to every staff member online.');
+		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every staff member online.');
 		if (!this.can('pmall')) return false;
 
 		for (var u in Users.users) { 

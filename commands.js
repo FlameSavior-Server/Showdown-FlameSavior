@@ -2251,12 +2251,13 @@ var commands = exports.commands = {
 			}
 		}
 		if (target.toLowerCase() == "lobby") {
-			try {
-                reminders = fs.readFileSync('config/reminders.html','utf8');
-            } catch (e) {
-                reminders = 'The reminders list is currently empty.';
-            }
-			return connection.sendTo('lobby','|html|'+reminders);
+			return connection.sendTo('lobby','|html|<center><img src="http://i.imgur.com/wfPqpLg.png></center><br>' +
+					'1. Please be sure to see our <a href="http://goldserver.weebly.com/rules"rules</a>.<br>' +
+					'2. If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it's very serious, an Administrator (~).<br>' +
+					'3. Do /events for a list of events that we do on Gold!<br>' +
+					'5. Our news can be located <a href="http://goldserver.weebly.com/news">here</a>!<br>' +
+					'6. Advertising another server is an auto lock by PM or in chat.<br>' +
+					'7. We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!');
 		}
 		if (target.toLowerCase() == "staff") {
 			return connection.sendTo('staff','|html|<center><font size="7">â˜…  <img src="http://www.mydoorsign.com/img/lg/S/Staff-Room-Wall-Sign-SE-1670_bu.gif" width="200" hieght="50">  <font size="7">â˜…</center><font size="2">' +

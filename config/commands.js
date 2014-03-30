@@ -1313,6 +1313,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	stun: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/stunfisk-2.gif" width="120">' +
+                '<img src="http://i.imgur.com/89pT7Vg.png" width="320">' +
+                '<img src="http://i.imgur.com/dg4XFpn.png?1" width="110"><br />' +
+                '<b>Ace:</b> Stunfisk<br />' +
+                'It\'s so evil, it\'s genius!</center>');
+    	},
+	
 	kozman: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/blastoise-mega.gif" width="80">' +
@@ -1614,6 +1623,15 @@ var commands = exports.commands = {
                 '<b>Ace:</b> My &<br />' +
                 'I\'m Pretty Shit.</center>');
     	},
+    	
+    	orihime: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/zKKoyFJ.gif" width="150">' +
+                '<img src="http://i.imgur.com/oV29Ffb.png">' +
+                '<img src="http://i.imgur.com/PLhgZxL.gif" width="125" height="125"><br />' +
+                '<b>Ace:</b> My &<br />' +
+                'Sadistic? I don\'t mind you calling me that.</center>');
+        },
 
 	kammi: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2356,9 +2374,13 @@ var commands = exports.commands = {
 	},
 	
 	spike: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img width="90" height="150" src="http://th02.deviantart.net/fs71/200H/i/2013/222/d/d/lucario_mega_form_by_tomycase-d6hetwg.png"><img src="http://i.imgur.com/L4M0q0l.gif"><img width="150" height="110" src="http://25.media.tumblr.com/a79cacf7be02d0834800f2b693dd86db/tumblr_mv06m93qkX1qd09iko1_1280.png"><br /><b>Quote: OOOoooOOoo Kill\'em<br />Ace: Goomy</b></center>');
-	},
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs70/f/2014/073/6/6/scizor_mega_by_creepyjellyfish-d7a492c.gif">' +
+                '<img src="http://i.imgur.com/L4M0q0l.gif">' +
+                '<img src="http://i.imgur.com/iWPJsQ2.gif"><br />' +
+                '<b>Ace:</b> Mega Scizor And Haxorus<br />' +
+                'OOOoooOOoo Kill\'em.</center>');
+    	},
 	
 	nine:'leadernine', 
 	leadernine: function(target, room, user) {

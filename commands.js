@@ -2130,12 +2130,17 @@ var commands = exports.commands = {
                 var aremind = fs.readFileSync('config/adminreminders.txt','utf8');
                 return user.send('|popup|'+aremind);
 	},
-	sremind: 'serverreminder',
-	sreminder: 'serverreminder',
-	serverreminder: function(target, room, user, connection) {
-                var reminders = fs.readFileSync('config/reminders.html','utf8');
-                return user.send('|popup|'+reminders);
-	},
+	sremind: 'sreminder',
+	sreminder: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<div class="broadcast-gold"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif"></center><br />' +
+                                        '<b>1.</b> Welcome to Gold!<br>' +
+                                        '<b>2.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
+                                        '<b>3.</b> Do /events for a list of events that we do on Gold!<br>' +
+                                        '<b>4.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
+                                        '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
+                                        '<center><a href="http://goldserver.weebly.com/rules"><button>Rules</a></button>   |   <a href="http://goldserver.weebly.com/news"><button>News</a></button>   |   <a href="http://goldserver.weebly.com/"><button>Website</a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button>FAQs</a></button></div>');
+        },
 	pic: 'image',
 	image: function(target, room, user){
 				if(!target) return this.sendReply('/image [url] - Shows an image using /a. Requires ~.');

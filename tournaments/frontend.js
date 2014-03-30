@@ -653,12 +653,15 @@ var commands = {
 			if (params.length < 1)
 				return this.sendReply("Usage: " + cmd + " <type> [, <comma-separated arguments>]");
 			var generator = createTournamentGenerator(params.shift(), params, this);
-			if (generator)
+			if (generator) {
 				tournament.setGenerator(generator, this);
+				this.addModCommand(user.name+' changed the tournament type to "'+generator.name+'".');
+			}
 		},
 		begin: 'start',
-		start: function (tournament) {
+		start: function (tournament, user) {
 			tournament.startTournament(this);
+			this.logModCommand(user.name+' started the tournament.');
 		}
 	},
 	moderation: {
@@ -670,11 +673,13 @@ var commands = {
 			if (!targetUser)
 				return this.sendReply("User " + params[0] + " not found.");
 			tournament.disqualifyUser(targetUser, this);
+			this.logModCommand(user.name+' disqualified '+targetUser.name+'.');
 		},
 		end: 'delete',
 		stop: 'delete',
-		delete: function (tournament) {
+		delete: function (tournament, user) {
 			deleteTournament(tournament.room.title, this);
+			this.logModCommand(user.name+' ended the tournament.');
 		},
 		remind: function (tournament, user) {
 			var users = tournament.generator.getAvailableMatches().toString().split(',');
@@ -706,12 +711,14 @@ var commands = {
 				targetRoom.hideTourWins = false;
 				targetRoom.chatRoomData.hideTourWins = false;
 				Rooms.global.writeChatRoomData();
+				this.privateModCommand('('+user.name+' turned on reportwins.)');
 				return this.sendReply('Tournaments in this room will now announce when battles end.');
 			} else if (params[0].toLowerCase() == 'off') {
 				tournament.room.hideTourWins = true;
 				targetRoom.hideTourWins = true;
 				targetRoom.chatRoomData.hideTourWins = true;
 				Rooms.global.writeChatRoomData();
+				this.privateModCommand('('+user.name+' turned off reportwins.)');
 				return this.sendReply('Tournaments in this room will no longer announce when battles end.');
 			} else {
 				return this.sendReply('Usage: ' + cmd + ' [on/off]');
@@ -728,11 +735,13 @@ var commands = {
 				tournament.room.hideTourBattles = true;
 				targetRoom.hideTourBattles = true;
 				targetRoom.chatRoomData.hideTourBattles = true;
+				this.privateModCommand('('+user.name+' turned off reportbattles.)');
 				return this.sendReply('Tournaments in this room will no longer announce when battles start.');
 			} else if (params[0].toLowerCase() == 'on') {
 				tournament.room.hideTourBattles = false;
 				targetRoom.hideTourBattles = false;
 				targetRoom.chatRoomData.hideTourBattles = false;
+				this.privateModCommand('('+user.name+' turned on reportbattles.)');
 				return this.sendReply('Tournaments in this room will now announce when battles start.');
 			} else {
 				return this.sendReply('Usage: ' + cmd + ' [on/off]');

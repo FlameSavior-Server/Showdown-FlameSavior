@@ -1174,7 +1174,7 @@ var commands = exports.commands = {
 	},
 	ps:function(target, room, user) {
                 if (!this.canBroadcast()) return;
-                this.sendReplyBox('<center>Cick the PokÃ©ball to enter Pawn\'s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
+                this.sendReplyBox('<center>Cick the Poké Ball to enter Pawn\'s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
 	},
 	/*********************************************************
 	* Nature Commands                                  

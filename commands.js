@@ -236,7 +236,7 @@ var commands = exports.commands = {
 	dk: 'dropkick',
 	dropkick: function(target, room, user){
 		if(!target) return this.sendReply('/dropkick needs a target.');
-		return this.parse('/me dropkicks ' + target + ' across the PokÃ©mon Stadium!');
+		return this.parse('/me dropkicks ' + target + ' across the PokÃƒÂ©mon Stadium!');
 	},
 	fart: function(target, room, user){
 		if(!target) return this.sendReply('/fart needs a target.');
@@ -356,12 +356,12 @@ var commands = exports.commands = {
   		//if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
   		if(!target || target.length > 1) return this.sendReply('/customsymbol [symbol] - changes your symbol (usergroup) to the specified symbol. The symbol can only be one character');
   		var a = target;
-  		if (a === "+" || a === "$" || a === "%" || a === "@" || a === "&" || a === "~" || a === "#" || a === "a" || a === "b" || a === "c" || a === "d" || a === "e" || a === "f" || a === "g" || a === "h" || a === "i" || a === "j" || a === "k" || a === "l" || a === "m" || a === "n" || a === "o" || a === "p" || a === "q" || a === "r" || a === "s" || a === "t" || a === "u" || a === "v" || a === "w" || a === "x" || a === "y" || a === "z" || a === "0" || a === "1" || a === "2" || a === "3" || a === "4" || a === "5" || a === "6" || a === "7" || a === "8" || a === "9" || a === "å" ) {
+  		if (a === "+" || a === "$" || a === "%" || a === "@" || a === "&" || a === "~" || a === "#" || a === "a" || a === "b" || a === "c" || a === "d" || a === "e" || a === "f" || a === "g" || a === "h" || a === "i" || a === "j" || a === "k" || a === "l" || a === "m" || a === "n" || a === "o" || a === "p" || a === "q" || a === "r" || a === "s" || a === "t" || a === "u" || a === "v" || a === "w" || a === "x" || a === "y" || a === "z" || a === "0" || a === "1" || a === "2" || a === "3" || a === "4" || a === "5" || a === "6" || a === "7" || a === "8" || a === "9" || a === "Ã¥ÂÂ" ) {
   			return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
   		}
   		user.getIdentity = function(){
   			if(this.muted)	return '!' + this.name;
-  			if(this.locked) return 'â€½' + this.name;
+  			if(this.locked) return 'Ã¢â‚¬Â½' + this.name;
   			return target + this.name;
   		};
   		user.updateIdentity();
@@ -373,7 +373,7 @@ var commands = exports.commands = {
 		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');
 		user.getIdentity = function() {
 			if (this.muted) return '!' + this.name;
-			if (this.locked) return 'â€½' + this.name;
+			if (this.locked) return 'Ã¢â‚¬Â½' + this.name;
 			return this.group + this.name;
 		};
 		user.hasCustomSymbol = false;
@@ -1174,7 +1174,7 @@ var commands = exports.commands = {
 	},
 	ps:function(target, room, user) {
                 if (!this.canBroadcast()) return;
-                this.sendReplyBox('<center>Cick the Pokéball to enter Pawn\'s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
+                this.sendReplyBox('<center>Cick the PokÃ©ball to enter Pawn\'s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
 	},
 	/*********************************************************
 	* Nature Commands                                  
@@ -1243,7 +1243,7 @@ var commands = exports.commands = {
                 }
                 if (target==='naive' || target ==='+spe -spd') {
                         matched = true;
-                        this.sendReplyBox('<b>Naïve</b>: <font color="green"><b>Speed</b></font>, <font color="red"><b>Special Defense</b></font>');
+                        this.sendReplyBox('<b>NaÃ¯ve</b>: <font color="green"><b>Speed</b></font>, <font color="red"><b>Special Defense</b></font>');
                 }
                 if (target==='modest' || target ==='+spa -atk') {
                         matched = true;
@@ -1303,7 +1303,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'plus speed' || target === '+spe') {
                         matched = true;
-                        this.sendReplyBox("<b>+ Speed Natures: Timid, Hasty, Jolly, NaÃ¯ve</b>");
+                        this.sendReplyBox("<b>+ Speed Natures: Timid, Hasty, Jolly, NaÃƒÂ¯ve</b>");
                 }
                 if (target === 'minus attack' || target==='-atk') {
                         matched = true;
@@ -1319,7 +1319,7 @@ var commands = exports.commands = {
                 }
                 if (target ==='minus special defense' || target === '-spd') {
                         matched = true;
-                        this.sendReplyBox("<b>-Special Defense Natures: Naughty, Lax, Rash, NaÃ¯ve</b>");
+                        this.sendReplyBox("<b>-Special Defense Natures: Naughty, Lax, Rash, NaÃƒÂ¯ve</b>");
                 }
                 if (target === 'minus speed' || target === '-spe') {
                         matched = true;
@@ -1492,9 +1492,9 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>pancakez</b>:    '+admin+'    '+comcun+'    '+mod+'');
                 }
-                if (target === 'skymÑ–n') {
+                if (target === 'skymÃ‘â€“n') {
                         matched = true;
-                        this.sendReplyBox('<b>SkymÑ–n</b>:   '+comcun+'');
+                        this.sendReplyBox('<b>SkymÃ‘â€“n</b>:   '+comcun+'');
                 }
                 if (target === 'sexipanda') {
                         matched = true;
@@ -1552,9 +1552,9 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>JackZero</b>:    '+comcun+'    '+mod+'    '+leader+'');
                 }
-                if (target === 'serperir' || target === 'serperiÃ¸r' || target === 'rhan') {
+                if (target === 'serperir' || target === 'serperiÃƒÂ¸r' || target === 'rhan') {
                         matched = true;
-                        this.sendReplyBox('<b>SerperiÃ¸r</b>:    '+comcun+'    '+mod+'    '+leader+'    '+league+'');
+                        this.sendReplyBox('<b>SerperiÃƒÂ¸r</b>:    '+comcun+'    '+mod+'    '+leader+'    '+league+'');
                 }
                 if (target === 'panpawn' || target === 'furgo' || target === 'papew') {
                         matched = true;
@@ -2088,7 +2088,7 @@ var commands = exports.commands = {
 								'I shall forever praises oh holly god, panpawn!');
 	},
 	star: function(room, user, cmd){
-                return this.parse('/hide â˜…');
+                return this.parse('/hide Ã¢Ëœâ€¦');
 	},
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
@@ -2139,7 +2139,7 @@ var commands = exports.commands = {
 	sremind: 'sreminder',
 	sreminder: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<div class="broadcast-gold" border="5"><table border="2" cellspacing ="0" cellpadding="3"><th></b><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5"></center><br />' +
+		this.sendReplyBox('<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5"></center><br />' +
                                         '<center><b><font size="4">Welcome to Gold!</center></font><br>' +
                                         '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
                                         '<b>2.</b> Do /events for a list of events that we do here!<br>' +
@@ -2156,7 +2156,7 @@ var commands = exports.commands = {
 	dk: 'dropkick',
 	dropkick: function(target, room, user){
                 if(!target) return this.sendReply('/dropkick needs a target.');
-                return this.parse('/me dropkicks ' + target + ' across the PokÃ©mon Stadium!');
+                return this.parse('/me dropkicks ' + target + ' across the PokÃƒÂ©mon Stadium!');
 	},
 	givesymbol: 'gs',
 	gs: function(target, room, user){
@@ -2165,7 +2165,7 @@ var commands = exports.commands = {
 	},
 	halloween: function(target, room, user){
                 if(!target) return this.sendReply('/halloween needs a target.');
-                return this.parse('/me takes ' + target +'`s pumpkin and smashes it all over the PokÃ©mon Stadium!');
+                return this.parse('/me takes ' + target +'`s pumpkin and smashes it all over the PokÃƒÂ©mon Stadium!');
 	},
 	
 	barn: function(target, room, user){
@@ -2263,7 +2263,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target.toLowerCase() == "lobby") {
-                        return connection.sendTo('lobby','|html|<div class="broadcast-gold" border="5"><table border="2" cellspacing ="0" cellpadding="3"><th><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5"></center><br />' +
+                        return connection.sendTo('lobby','|html|<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5"></center><br />' +
                                         '<center><b><font size="4">Welcome to Gold!</center></font><br>' +
                                         '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
                                         '<b>2.</b> Do /events for a list of events that we do here!<br>' +
@@ -2273,7 +2273,7 @@ var commands = exports.commands = {
                                         '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button></div>');
 		}
 		if (target.toLowerCase() == "staff") {
-			return connection.sendTo('staff','|html|<center><font size="7">â˜…  <img src="http://www.mydoorsign.com/img/lg/S/Staff-Room-Wall-Sign-SE-1670_bu.gif" width="200" hieght="50">  <font size="7">â˜…</center><font size="2">' +
+			return connection.sendTo('staff','|html|<center><font size="7">Ã¢Ëœâ€¦  <img src="http://www.mydoorsign.com/img/lg/S/Staff-Room-Wall-Sign-SE-1670_bu.gif" width="200" hieght="50">  <font size="7">Ã¢Ëœâ€¦</center><font size="2">' +
 					'<b>1.</b> Do /pbl for the perma ban list. <br />' +
 					'<b>2.</b> Do /authlist for a list of the auth on the server. <br />' +
 					'<b>3.</b> Locking will also add a user to the spam room; vis versa for unlocking. <br />' +
@@ -2284,15 +2284,15 @@ var commands = exports.commands = {
 		}
 		if (target.toLowerCase() == "wwe") {
 			return connection.sendTo('wwe','|html|<font color="#AA0000"><font size="2"><b><center>Welcome to WWE!</font></font color></b></center>' +
-					'â˜…This is a room to talk about all things WWE! <br />' +
-					'â˜…All WWE fans are welcome! <br />' +
-					'â˜…Ranks in the room are: <br />' +
+					'Ã¢Ëœâ€¦This is a room to talk about all things WWE! <br />' +
+					'Ã¢Ëœâ€¦All WWE fans are welcome! <br />' +
+					'Ã¢Ëœâ€¦Ranks in the room are: <br />' +
 					'--(#) Server WWE World Chapion  <br />' +
 					'--(@) Intercontinental Room Champion  <br />' +
 					'--(%) Tag Team Server Champion <br />' +
 					'--(+) WWE Universe <br />' +
-					'â˜…Do /roomauth to see who currently holds these titles! <br />' +
-					'â˜…Have fun and PM staff with any questions!');
+					'Ã¢Ëœâ€¦Do /roomauth to see who currently holds these titles! <br />' +
+					'Ã¢Ëœâ€¦Have fun and PM staff with any questions!');
 		}
 		if (target.toLowerCase() == "dawnleague") {
 			return connection.sendTo('dawnleague','|html|<center><img src="http://i.imgur.com/lF3Poot.gif"><br>'+
@@ -2897,7 +2897,7 @@ var commands = exports.commands = {
 		for(var i = 0; i < 5; i++)
 			for(var u in room.users)
 				if(Users.get(u) != undefined && u.toLowerCase().indexOf('guest') != 0 && Users.get(u).connected)
-					this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: â™ªkupo kupo kupochu~â™«');
+					this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: Ã¢â„¢Âªkupo kupo kupochu~Ã¢â„¢Â«');
 		return;
 	},
 	*/
@@ -3428,7 +3428,7 @@ var commands = exports.commands = {
 		user.getIdentity = function (roomid) {
 			if (!roomid) roomid = 'lobby';
 			if (this.locked) {
-				return 'â€½'+this.name;
+				return 'Ã¢â‚¬Â½'+this.name;
 			}
 			if (this.mutedRooms[roomid]) {
 				return '!'+this.name;

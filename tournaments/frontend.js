@@ -574,6 +574,7 @@ var Tournament = (function () {
 		}
 	};
 	Tournament.prototype.onTournamentEnd = function () {
+		self = this;
 		this.room.add('|tournament|end|' + JSON.stringify({results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()}));
 		data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
 		data = data['results'].toString();
@@ -593,11 +594,13 @@ var Tournament = (function () {
 			secondBuck = 'buck';
 			if (firstMoney > 1) firstBuck = 'bucks';
 			if (secondMoney > 1) secondBuck = 'bucks';
+			fs.appendFile('logs/transactions.log','\n'+winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+this.room.title+'.');
 			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
 			if (runnerUp) this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for winning the tournament!</b>');
 			economy.writeMoney('money', toUserid(winner), firstMoney, function(){
 				if (runnerUp) {
 					economy.writeMoney('money', toUserid(runnerUp), secondMoney);
+					fs.appendFile('logs/transactions.log','\n'+runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'.');
 				}
 			});
 		}

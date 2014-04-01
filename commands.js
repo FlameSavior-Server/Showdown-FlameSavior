@@ -2999,6 +2999,7 @@ var commands = exports.commands = {
 		}
 		spamroom[targetUser] = true;
 		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was added to the spamroom list by '+user.name+'.</b>');
+		Rooms.rooms['room'].add('|raw|<b>' + this.targetUsername + ' was added to the spamroom list by '+user.name+'.</b>');
 		return this.privateModCommand('|html|<font color="red">'+ targetUser + '</font> was added to the <button name="joinRoom" value="spamroom" target="_blank">SpamRoom</button> list by ' + user.name +'.');
 		this.logModCommand(targetUser + ' was added to spamroom by ' + user.name);
 		return this.sendReply(this.targetUsername + ' was successfully added to the spamroom list.');
@@ -3022,6 +3023,7 @@ var commands = exports.commands = {
 			if(targetUser == Users.get(u))
 				delete spamroom[u];
 		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was removed from the spamroom list by '+user.name+'.</b>');
+		Rooms.rooms['room'].add('|raw|<b>' + this.targetUsername + ' was removed from the spamroom list by '+user.name+'.</b>');
 		return this.privateModCommand('|html|<font color="green">'+ this.targetUser + '</font> was removed from the spamroom list by ' + user.name +'.');
 		this.logModCommand(targetUser + ' was removed from spamroom by ' + user.name);
 		

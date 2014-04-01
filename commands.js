@@ -2248,7 +2248,7 @@ var commands = exports.commands = {
 			return this.sendReply('/deletecode [user] - Deletes the Friend Code of the User.');
 		}
 		if (!this.can('lock')) return false;
-		t = this;
+		var t = this;
 		fs.readFile('config/friendcodes.txt','utf8',function(err,data) {
 			if (err) console.log(err);
 			var row = (''+data).split('\n');

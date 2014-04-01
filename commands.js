@@ -3021,7 +3021,7 @@ var commands = exports.commands = {
 		for(var u in spamroom)
 			if(targetUser == Users.get(u))
 				delete spamroom[u];
-		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was removed from the spamroom list.</b>');
+		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was removed from the spamroom list by '+user.name+'.</b>');
 		return this.privateModCommand('|html|<font color="green">'+ this.targetUser + '</font> was removed from the spamroom list by ' + user.name +'.');
 		this.logModCommand(targetUser + ' was removed from spamroom by ' + user.name);
 		

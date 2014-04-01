@@ -199,7 +199,11 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Server version: <b>'+CommandParser.package.version+'</b> <small>(<a href="http://pokemonshowdown.com/versions#' + CommandParser.serverVersion + '">' + CommandParser.serverVersion.substr(0,10) + '</a>)</small>');
 	},
-	
+	customavatar: 'ca',
+	ca: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Custom Avatars</b> - In order to get a custom avatar, you must buy it from the shop.  For more information, do /shop.');
+	},
 	loadipbans: 'viewbanlist',
 	loadbans: 'viewbanlist',
 	vbl: 'viewbanlist',

@@ -1162,6 +1162,7 @@ var commands = exports.commands = {
 				'★ <b>Chat</b> - Gold is full of great people in it\'s community and we\'d love to have you be apart of it!<br>' +
 				'★ <b>Learn</b> - Are you new to Pokemon?  If so, then feel FREE to ask the lobby any questions you might have!<br>' +
 				'★ <b>Shop</b> - Do /shop to learn about where your Gold Bucks can go! <br>' +
+				'★ <b>Plug.dj</b> - Come listen to music with us! Click <a href="http://plug.dj/gold-server/">here</a> to start!<br>' +
 				'<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
 	},
 	introduction: 'intro',

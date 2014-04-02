@@ -3210,7 +3210,6 @@ var commands = exports.commands = {
 					((names.length > 1) ? 'were' : 'was') +
 					' unlocked by ' + user.name + '.');
 		return this.parse('/unspam '+target+'');
-		Rooms.rooms.room.add(''+targetUser.name+' was unlocked from talking by '+user.name+'.');
 		} else {
 			this.sendReply('User '+target+' is not locked.');
 		}

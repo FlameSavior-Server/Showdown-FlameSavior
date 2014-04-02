@@ -1864,6 +1864,11 @@ var commands = exports.commands = {
     	'In matters of style, swim with the current, in matters of principle, stand like a rock.</center>');
     },
     
+    anttya: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src= http://25.media.tumblr.com/tumblr_lljnf6TzP61qd87hlo1_500.gif weigh= 142 height= 82><img src= http://i.imgur.com/E4Ui1ih.gif><img src= http://25.media.tumblr.com/5bbfc020661a1e1eab025d847474cf30/tumblr_mn1uizhc441s2e0ufo1_500.gif weigh= 142 height= 82><center>Ace: Staraptor<center>"If you want to fly, then you\'ve got to give up the shit that weighs you down."');
+    },
+    
     darkjak : 'jak',
     jak: function(target, room, user) {
     	if (target) return this.sendReply('It\'s not funny anymore.');

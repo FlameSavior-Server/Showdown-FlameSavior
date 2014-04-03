@@ -3040,7 +3040,6 @@ var commands = exports.commands = {
 	aye: 'warn',
 	warn: function(target, room, user) {
 		if (!target) return this.parse('/help warn');
-		if (!this.canTalk()) return;
 		
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;

@@ -290,8 +290,23 @@ exports.tour = function(t) {
 				var tooSmall = '';
 				var p = 'bucks';
 				if (Rooms.rooms[rid].isOfficial) {
-					if (tour[rid].size >= 10) {
+					if (tour[rid].size >= 15) {
 						tourMoney = 6;
+					}
+					if (tour[rid].size === 14) {
+						tourMoney = 5;
+					}
+					if (tour[rid].size === 13) {
+						tourMoney = 5;
+					}
+					if (tour[rid].size === 12) {
+						tourMoney = 5;
+					}
+					if (tour[rid].size === 11) {
+						tourMoney = 5;
+					}
+					if (tour[rid].size === 10) {
+						tourMoney = 5;
 					}
 					if (tour[rid].size === 9) {
 						tourMoney = 5;

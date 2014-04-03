@@ -575,8 +575,8 @@ var commands = exports.commands = {
 			'3-4 Players = 2 Gold Bucks<br>' +
 			'5 Players = 3 Gold Bucks<br>' +
 			'6 Players = 4 Gold Bucks<br>' +
-			'7-9 Players = 5 Gold Bucks<br>' +
-			'10 and beyond = 6 Gold Bucks');
+			'7-14 Players = 5 Gold Bucks<br>' +
+			'15 and beyond = 6 Gold Bucks');
 	},
 	getbucks: function(target, room, user) {
         if (!this.canBroadcast()) return;

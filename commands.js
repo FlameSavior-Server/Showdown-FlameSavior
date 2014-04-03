@@ -572,11 +572,11 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>How much is a tour worth, buck wise?</b><br>' +
 			'If it\'s in the lobby or casino and has...<br>' +
-			'3-4 Players = 2 Gold Bucks<br>' +
-			'5 Players = 3 Gold Bucks<br>' +
-			'6 Players = 4 Gold Bucks<br>' +
-			'7-14 Players = 5 Gold Bucks<br>' +
-			'15 and beyond = 6 Gold Bucks');
+			'3-4 Players.... 2 Gold Bucks<br>' +
+			'5 Players...... 3 Gold Bucks<br>' +
+			'6 Players...... 4 Gold Bucks<br>' +
+			'7-14 Players... 5 Gold Bucks<br>' +
+			'15 and beyond.. 6 Gold Bucks');
 	},
 	getbucks: function(target, room, user) {
         if (!this.canBroadcast()) return;

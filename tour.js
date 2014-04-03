@@ -303,13 +303,13 @@ exports.tour = function(t) {
 						tourMoney = 5;
 					}
 					if (tour[rid].size === 6) {
-						tourMoney = 5;
-					}
-					if (tour[rid].size === 5) {
 						tourMoney = 4;
 					}
-					if (tour[rid].size === 4) {
+					if (tour[rid].size === 5) {
 						tourMoney = 3;
+					}
+					if (tour[rid].size === 4) {
+						tourMoney = 2;
 						p = 'bucks';
 					}
 					if (tour[rid].size === 3) {

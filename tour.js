@@ -290,7 +290,7 @@ exports.tour = function(t) {
 				var tooSmall = '';
 				var p = 'bucks';
 				if (Rooms.rooms[rid].isOfficial) {
-					if (tour[rid].size >== 6) {
+					if (tour[rid].size >= 6) {
 						tourMoney = 5;
 					}
 					if (tour[rid].size === 5) {

@@ -2044,7 +2044,7 @@ var commands = exports.commands = {
         	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
         }
         if (target.length > 550) return this.sendReply('This new room suggestion is too long; it cannot exceed 550 characters.');
-        if (target.length < 15) return this.sendReply('This room suggestion is rather small; are you sure that you answered all of the questions from /newroomquestions?');
+        if (target.length < 20) return this.sendReply('This room suggestion is rather small; are you sure that you answered all of the questions from /newroomquestions?');
         if (!this.canTalk()) return;
         Rooms.rooms.staff.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> '+user.userid+'<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> '+target+'');
         Rooms.rooms.room.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> '+user.userid+'<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> '+target+'');

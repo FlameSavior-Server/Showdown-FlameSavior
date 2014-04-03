@@ -290,17 +290,17 @@ exports.tour = function(t) {
 				var tooSmall = '';
 				var p = 'bucks';
 				if (Rooms.rooms[rid].isOfficial) {
-					if (tour[rid].size >= 9) {
+					if (tour[rid].size >= 6) {
 						tourMoney = 5;
 					}
-					if (tour[rid].size >= 6 && tour[rid].size >= 8) {
+					if (tour[rid].size >= 5) {
 						tourMoney = 4;
 					}
-					if (tour[rid].size >=4  && tour[rid].size >= 5) {
+					if (tour[rid].size >=4) {
 						tourMoney = 3;
 						p = 'bucks';
 					}
-					if (tour[rid].size >= 3) {
+					if (tour[rid].size = 3) {
 						tourMoney = 2;
 						p = 'bucks';
 					}
@@ -309,7 +309,7 @@ exports.tour = function(t) {
 						tooSmall = tooSmall + '(the tour was too small)';
 					}
 				} else {
-					tooSmall += '(this is not an official chatroom)';
+					tooSmall += '(this isn\'t an official room)';
 				}
 				//end tour
 				Rooms.rooms[rid].addRaw('<h2><font color="green">Congratulations <font color="black">' + Users.users[w[0]].name + '</font>!  You have won the ' + Tools.data.Formats[tour[rid].tier].name + ' Tournament!<br>You have also won ' + tourMoney + ' Gold ' + p + '! ' + tooSmall + '</font></h2>' + '<br><font color="blue"><b>SECOND PLACE:</b></font> ' + Users.users[l[0]].name + '<hr />');			

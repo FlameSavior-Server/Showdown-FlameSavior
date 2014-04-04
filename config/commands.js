@@ -952,7 +952,7 @@ var commands = exports.commands = {
     	panbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Panpawn\'s Music Box!</b><br>' +
-        	'<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"><br>' +
+        	'<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"></center><br>' +
 		'1. <a href="https://www.youtube.com/watch?v=EJR5A2dttp8"><button title="Let It Go - Connie Talbot cover">Let It Go - Connie Talbot cover</a></button><br>' +
 		'2. <a href="https://www.youtube.com/watch?v=Y2Ta0qCG8No"><button title="Crocodile Rock - Elton John">Crocodile Rock - Elton John</a></button><br>' +
 		'3. <a href="https://www.youtube.com/watch?v=ZA3vZwxnKnE"><button title="My Angel Gabriel - Lamb">My Angel Gabriel - Lamb</a></button><br>' +

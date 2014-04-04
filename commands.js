@@ -386,126 +386,44 @@ var commands = exports.commands = {
 		this.sendReply('Your symbol has been reset.');
 	},
 //Money Commands...
-	wallet: 'atm',
-	satchel: 'atm',
-	fannypack: 'atm',
-	purse: 'atm',
-	bag: 'atm',
-	atm: function(target, room, user, connection, cmd) {
-	if (!this.canBroadcast()) return;
-	var cMatch = false;
-	var mMatch = false;
-	var money = 0;
-	var coins = 0;
-	var total = '';
-	if (!target) {
-	var data = fs.readFileSync('config/money.csv','utf8')
-		var row = (''+data).split("\n");
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toUserid(parts[0]);
-			if (user.userid == userid) {
-			var x = Number(parts[1]);
-			var money = x;
-			mMatch = true;
-			if (mMatch === true) {
-				break;
-			}
-			}
-		}
-		if (mMatch === true) {
-			var p = 'Gold bucks';
-			if (money < 2) p = 'Gold buck';
-			total += user.name + ' has ' + money + ' ' + p + '.<br />';
-		}
-		if (mMatch === false) {
-			total += 'You have no Gold bucks.<br />';
-		}
-		user.money = money;
-		var data = fs.readFileSync('config/coins.csv','utf8')
-		var row = (''+data).split("\n");
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toUserid(parts[0]);
-			if (user.userid == userid) {
-			var x = Number(parts[1]);
-			var coins = x;
-			cMatch = true;
-			if (cMatch === true) {
-				break;
-			}
-			}
-		}
-		if (cMatch === true) {
-			var p = 'coins';
-			if (coins < 2) p = 'coin';
-			total += user.name + ' has ' + coins + ' ' + p + '.'
-		}
-		if (cMatch === false) {
-			total += 'You have no coins.'
-		}
-		user.coins = coins;
-	} else {
-		var data = fs.readFileSync('config/money.csv','utf8')
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		var money = 0;
-		var row = (''+data).split("\n");
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toUserid(parts[0]);
-			if (targetUser.userid == userid || target == userid) {
-			var x = Number(parts[1]);
-			var money = x;
-			mMatch = true;
-			if (mMatch === true) {
-				break;
-			}
-			}
-		}
-		if (mMatch === true) {
-			var p = 'Gold bucks';
-			if (money < 2) p = 'Gold buck';
-			total += targetUser.name + ' has ' + money + ' ' + p + '.<br />';
-		} 
-		if (mMatch === false) {
-			total += targetUser.name + ' has no Gold bucks.<br />';
-		}
-		targetUser.money = money;
-		var data = fs.readFileSync('config/coins.csv','utf8')
-		var coins = 0;
-		var row = (''+data).split("\n");
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toUserid(parts[0]);
-			if (targetUser.userid == userid || target == userid) {
-			var x = Number(parts[1]);
-			var coins = x;
-			cMatch = true;
-			if (cMatch === true) {
-				break;
-			}
-			}
-		}
-		if (cMatch === true) {
-			var p = 'coins';
-			if (coins < 2) p = 'coin';
-			total += targetUser.name + ' has ' + coins + ' ' + p + '.<br />';
-		} 
-		if (cMatch === false) {
-			total += targetUser.name + ' has no coins.<br />';
-		}
-		targetUser.coins = coins;
-	}
-	return this.sendReplyBox(total);
-	},
+ wallet: 'atm',
+        satchel: 'atm',
+        fannypack: 'atm',
+        purse: 'atm',
+        bag: 'atm',
+        atm: function(target, room, user, connection, cmd) {
+        if (!this.canBroadcast()) return;
+        var mMatch = false;
+        var money = 0;
+        var total = '';
+        if (!target) {
+        var data = fs.readFileSync('config/money.csv','utf8')
+                var row = (''+data).split("\n");
+                for (var i = row.length; i > -1; i--) {
+                        if (!row[i]) continue;
+                        var parts = row[i].split(",");
+                        var userid = toUserid(parts[0]);
+                        if (user.userid == userid) {
+                        var x = Number(parts[1]);
+                        var money = x;
+                        mMatch = true;
+                        if (mMatch === true) {
+                                break;
+                        }
+                        }
+                }
+                if (mMatch === true) {
+                        var p = 'Gold bucks';
+                        if (money < 2) p = 'Gold buck';
+                        total += user.name + ' has ' + money + ' ' + p + '.<br />';
+                }
+                if (mMatch === false) {
+                        total += 'You have no Gold bucks.<br />';
+                }
+                user.money = money;
+        }
+        return this.sendReplyBox(total);
+        },
 	
 	awardbucks: 'givebucks',
 	gb: 'givebucks',

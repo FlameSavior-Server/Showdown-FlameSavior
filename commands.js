@@ -386,7 +386,7 @@ var commands = exports.commands = {
 		this.sendReply('Your symbol has been reset.');
 	},
 //Money Commands...
-	wallet: 'atm',
+	        wallet: 'atm',
 	satchel: 'atm',
 	fannypack: 'atm',
 	purse: 'atm',
@@ -421,32 +421,6 @@ var commands = exports.commands = {
 		}
 		if (mMatch === false) {
 			total += 'You have no bucks.<br />';
-		}
-		user.money = money;
-		var data = fs.readFileSync('config/coins.csv','utf8')
-		var row = (''+data).split("\n");
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toUserid(parts[0]);
-			if (user.userid == userid) {
-			var x = Number(parts[1]);
-			var coins = x;
-			cMatch = true;
-			if (cMatch === true) {
-				break;
-			}
-			}
-		}
-		if (cMatch === true) {
-			var p = 'coins';
-			if (coins < 2) p = 'coin';
-			total += user.name + ' has ' + coins + ' ' + p + '.'
-		}
-		if (cMatch === false) {
-			total += 'You have no coins.'
-		}
-		user.coins = coins;
 	} else {
 		var data = fs.readFileSync('config/money.csv','utf8')
 		target = this.splitTarget(target);
@@ -477,32 +451,7 @@ var commands = exports.commands = {
 		if (mMatch === false) {
 			total += targetUser.name + ' has no bucks.<br />';
 		}
-		targetUser.money = money;
-		var data = fs.readFileSync('config/coins.csv','utf8')
-		var coins = 0;
-		var row = (''+data).split("\n");
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toUserid(parts[0]);
-			if (targetUser.userid == userid || target == userid) {
-			var x = Number(parts[1]);
-			var coins = x;
-			cMatch = true;
-			if (cMatch === true) {
-				break;
-			}
-			}
-		}
-		if (cMatch === true) {
-			var p = 'coins';
-			if (coins < 2) p = 'coin';
-			total += targetUser.name + ' has ' + coins + ' ' + p + '.<br />';
-		} 
-		if (cMatch === false) {
-			total += targetUser.name + ' has no coins.<br />';
-		}
-		targetUser.coins = coins;
+		targetUser.money = money;	
 	}
 	return this.sendReplyBox(total);
 	},

@@ -2080,6 +2080,8 @@ var commands = exports.commands = {
                 return this.parse('/eval for(var u in Users.users) Users.users[u].'+target+'()');
 	},
 	nc: function(room, user, cmd){
+		user.nctimes += 1;
+        	if(user.nctimes > 3) return this.sendReply('You have used /nc too many times');
                 return this.parse('**Panpawn is my god!** I shall forever praises oh holy god, panpawn!');
 	},
 	star: function(room, user, cmd){

@@ -420,6 +420,9 @@ var commands = exports.commands = {
                 if (mMatch === false) {
                         total += 'You have no Gold bucks.<br />';
                 }
+                if (!targetUser) {
+                        return this.sendReply('User '+this.targetUsername+' not found.');
+                }
                 user.money = money;
         }
         return this.sendReplyBox(total);

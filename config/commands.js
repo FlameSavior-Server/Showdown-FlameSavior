@@ -956,7 +956,8 @@ var commands = exports.commands = {
 		'2. <a href="https://www.youtube.com/watch?v=Y2Ta0qCG8No"><button title="Crocodile Rock - Elton John">Crocodile Rock - Elton John</a></button><br>' +
 		'3. <a href="https://www.youtube.com/watch?v=ZA3vZwxnKnE"><button title="My Angel Gabriel - Lamb">My Angel Gabriel - Lamb</a></button><br>' +
 		'4. <a href="https://www.youtube.com/watch?v=y8AWFf7EAc4"><button title="Hallelujah - Jeff Buckley">Hallelujah - Jeff Buckley</a></button><br>' +
-		'5. <a href="https://www.youtube.com/watch?v=aFIApXs0_Nw"><button title="Better Off Dead - Elton John">Better Off Dead - Elton John</a></button>');
+		'5. <a href="https://www.youtube.com/watch?v=aFIApXs0_Nw"><button title="Better Off Dead - Elton John">Better Off Dead - Elton John</a></button><br>' +
+		'6. <a href="https://www.youtube.com/watch?v=eJLTGHEwaR8"><button title="Your Song - Carly Rose Sonenclar cover">Your Song - Carly Rose Sonenclar cover</a></button>');
 	},
     	berry: function(target, room, user) {
         if (!this.canBroadcast()) return;

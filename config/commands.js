@@ -949,6 +949,15 @@ var commands = exports.commands = {
                 '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
                 '<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
     	},
+    	panbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Panpawn\'s Music Box!</b><br>' +
+		'1. <a href="https://www.youtube.com/watch?v=EJR5A2dttp8"><button title="Let It Go - Connie Talbot cover">Let It Go - Connie Talbot cover<a></button><br>' +
+		'2. <a href="https://www.youtube.com/watch?v=Y2Ta0qCG8No"><button title="Crocodile Rock - Elton John">Crocodile Rock - Elton John</a></button><br>' +
+		'3. <a href="https://www.youtube.com/watch?v=ZA3vZwxnKnE"><button title="My Angel Gabriel - Lamb">My Angel Gabriel - Lamb</a></button><br>' +
+		'4. <a href="https://www.youtube.com/watch?v=y8AWFf7EAc4"><button title="Hallelujah - Jeff Buckley">Hallelujah - Jeff Buckley</a></button><br>' +
+		'5. <a href="https://www.youtube.com/watch?v=aFIApXs0_Nw"><button title="Better Off Dead - Elton John">Better Off Dead - Elton John</a></button>');
+	},
     	berry: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://blog.flamingtext.com/blog/2014/04/02/flamingtext_com_1396402375_186122138.png" width="50%"><br>' +

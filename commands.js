@@ -386,7 +386,8 @@ var commands = exports.commands = {
 		this.sendReply('Your symbol has been reset.');
 	},
 //Money Commands...
- wallet: 'atm',
+
+	wallet: 'atm',
         satchel: 'atm',
         fannypack: 'atm',
         purse: 'atm',
@@ -413,18 +414,46 @@ var commands = exports.commands = {
                         }
                 }
                 if (mMatch === true) {
-                        var p = 'Gold bucks';
+                        var p = 'bucks';
                         if (money < 2) p = 'Gold buck';
                         total += user.name + ' has ' + money + ' ' + p + '.<br />';
                 }
                 if (mMatch === false) {
                         total += 'You have no Gold bucks.<br />';
                 }
+                user.money = money;
+        } else {
+                var data = fs.readFileSync('config/money.csv','utf8')
+                target = this.splitTarget(target);
+                var targetUser = this.targetUser;
                 if (!targetUser) {
                         return this.sendReply('User '+this.targetUsername+' not found.');
                 }
-                user.money = money;
-        }
+                var money = 0;
+                var row = (''+data).split("\n");
+                for (var i = row.length; i > -1; i--) {
+                        if (!row[i]) continue;
+                        var parts = row[i].split(",");
+                        var userid = toUserid(parts[0]);
+                        if (targetUser.userid == userid || target == userid) {
+                        var x = Number(parts[1]);
+                        var money = x;
+                        mMatch = true;
+                        if (mMatch === true) {
+                                break;
+                        }
+                        }
+                }
+                if (mMatch === true) {
+                        var p = 'Gold bucks';
+                        if (money < 2) p = 'Gold buck';
+                        total += targetUser.name + ' has ' + money + ' ' + p + '.<br />';
+                } 
+                if (mMatch === false) {
+                        total += targetUser.name + ' has no Gold bucks.<br />';
+                }
+                targetUser.money = money;
+                                }
         return this.sendReplyBox(total);
         },
 	

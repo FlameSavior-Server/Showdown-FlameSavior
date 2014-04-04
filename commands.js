@@ -415,12 +415,12 @@ var commands = exports.commands = {
 			}
 		}
 		if (mMatch === true) {
-			var p = 'bucks';
-			if (money < 2) p = 'buck';
+			var p = 'Gold bucks';
+			if (money < 2) p = 'Gold buck';
 			total += user.name + ' has ' + money + ' ' + p + '.<br />';
 		}
 		if (mMatch === false) {
-			total += 'You have no bucks.<br />';
+			total += 'You have no Gold bucks.<br />';
 		}
 		user.money = money;
 		var data = fs.readFileSync('config/coins.csv','utf8')
@@ -470,12 +470,12 @@ var commands = exports.commands = {
 			}
 		}
 		if (mMatch === true) {
-			var p = 'bucks';
-			if (money < 2) p = 'buck';
+			var p = 'Gold bucks';
+			if (money < 2) p = 'Gold buck';
 			total += targetUser.name + ' has ' + money + ' ' + p + '.<br />';
 		} 
 		if (mMatch === false) {
-			total += targetUser.name + ' has no bucks.<br />';
+			total += targetUser.name + ' has no Gold bucks.<br />';
 		}
 		targetUser.money = money;
 		var data = fs.readFileSync('config/coins.csv','utf8')

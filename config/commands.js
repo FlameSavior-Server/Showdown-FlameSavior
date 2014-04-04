@@ -1313,6 +1313,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	czim: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://fc01.deviantart.net/fs70/f/2011/018/3/d/bath_time___aipom_and_porygon2_by_valichan-d37ihw6.png" width="160">' +
+                '<img src="http://i.imgur.com/SyQmcOA.png">' +
+                '<img src="http://th07.deviantart.net/fs71/PRE/f/2013/055/3/7/donald_duck_lol_by_new_born_magnezone-d5w259t.png" width="160"><br />' +
+                '<b>Ace:</b> do /Donald and see for yourself :P<br />' +
+                'Ducks rule!</center>');
+    	},
+	
 	stun: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/stunfisk-2.gif" width="120">' +

@@ -453,7 +453,7 @@ var commands = exports.commands = {
 		if (mMatch === false) {
 			total += targetUser.name + ' has no bucks.<br />';
 		}
-	 	}
+	 	
 	return this.sendReplyBox(total);
 	},
 	

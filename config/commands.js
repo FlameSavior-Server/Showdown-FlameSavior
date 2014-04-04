@@ -1342,11 +1342,11 @@ var commands = exports.commands = {
 	
 	traven: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/F9tOOFS.png" width="150">' +
-                '<img src="http://i.imgur.com/jHt6to3.gif" width="250">' +
-                '<img src="http://i.imgur.com/JFB9OIp.png" width="150"><br />' +
-                '<b>Ace:</b> Hax<br />' +
-                'Shut up and battle.</center>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/U8LOY74.jpg" width="150">' +
+                '<img src="http://i.imgur.com/e8k5FnK.png" width="250">' +
+                '<img src="http://i.imgur.com/7CPcZHZ.jpg" width="150"><br />' +
+                '<b>Ace:</b> :D<br />' +
+                'Introduce a little anarchy, upset the established order, and everything becomes chaos, I\’m an agent of chaos.</center>');
     	},
 	
 	cc: 'crazyclown94',

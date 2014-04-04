@@ -386,7 +386,7 @@ var commands = exports.commands = {
 		this.sendReply('Your symbol has been reset.');
 	},
 //Money Commands...
-	        wallet: 'atm',
+	wallet: 'atm',
 	satchel: 'atm',
 	fannypack: 'atm',
 	purse: 'atm',
@@ -452,6 +452,7 @@ var commands = exports.commands = {
 			total += targetUser.name + ' has no bucks.<br />';
 		}
 		targetUser.money = money;	
+		}
 	}
 	return this.sendReplyBox(total);
 	},

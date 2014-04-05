@@ -1598,7 +1598,7 @@ var commands = exports.commands = {
     rors: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i979.photobucket.com/albums/ae277/bjoyea/T-cardButchery_zps8f48bc75.gif" width="140" height="120">' +
-                '<img src="http://static1.textcraft.net/data1/5/e/5ed14fd561daebee562becbc615de6b671ce77f8da39a3ee5e6b4b0d3255bfef95601890afd80709da39a3ee5e6b4b0d3255bfef95601890afd8070997c4ee7e494f4c179f8692768fe619e4.png" width="260">' +
+                '<img src="http://i.imgur.com/VhjJEp0.png" width="260">' +
                 '<img src="http://stream1.gifsoup.com/view4/1069409/rorschach-o.gif" width="160" hiehgt="120"><br />' +
                 '<b>Ace:</b> Your Mom<br />' +
                 'Sorry But Losing Isn\'t Really My Thing.</center>');

@@ -414,7 +414,7 @@ var commands = exports.commands = {
                         }
                 }
                 if (mMatch === true) {
-                        var p = 'bucks';
+                        var p = 'Gold bucks';
                         if (money < 2) p = 'Gold buck';
                         total += user.name + ' has ' + money + ' ' + p + '.<br />';
                 }
@@ -454,7 +454,7 @@ var commands = exports.commands = {
                 }
                 targetUser.money = money;
                                 }
-        return this.sendReplyBox(total);
+        return this.sendReplyBox('<b>Gold Wallet</b><br>'+total+'');
         },
 	
 	awardbucks: 'givebucks',

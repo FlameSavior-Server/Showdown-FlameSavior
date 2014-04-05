@@ -640,7 +640,7 @@ var commands = exports.commands = {
 	},
 
 	buy: function(target, room, user) {
-		if (!target) return this.parse('/help buy');
+		if (!target) return this.sendReply('You need to pick an item! Type /buy [item] to buy something.');
 		if (closeShop) return this.sendReply('The shop is currently closed and will open shortly.');
 		var target2 = target;
 		target = target.split(', ');

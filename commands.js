@@ -454,7 +454,7 @@ var commands = exports.commands = {
                 }
                 targetUser.money = money;
                                 }
-        return this.sendReplyBox('<b>Gold Wallet</b><br>'+total+'');
+        return this.sendReplyBox('<b>Gold Wallet</b><br><img src="http://amymickey.com/Images/Funny%20Money/dollar_pokemon_sepia.jpg" width="20%"><br>'+total+'');
         },
 	
 	awardbucks: 'givebucks',

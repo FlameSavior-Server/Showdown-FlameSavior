@@ -1015,14 +1015,15 @@ var commands = exports.commands = {
 		this.sendReplyBox('<b>Shephard</b> - King Of Water and Ground types.<br />');
 	},
 
+	logic: 'psychological',
 	psychological: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/qAKC7fU.jpg" width="240" height="140"><br>' +
-                '<img src="http://i.imgur.com/I5glkoS.png?1">' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/tRRas7O.gif" width="240" height="140"><br>' +
+                '<img src="http://i.imgur.com/F85y5iA.png">' +
                 '<img src="http://i.imgur.com/TSEXdOm.gif" width="250">' +
-                '<img src="http://i.imgur.com/DgVckTr.png"><br />' +
+                '<img src="http://i.imgur.com/FrXB9WT.png"><br />' +
                 'If it isn\'t logical, it\'s probably Psychological.</center>');
-    },
+    	},
 
 	seed: function(target, room, user) {
 		if (!this.canBroadcast()) return;

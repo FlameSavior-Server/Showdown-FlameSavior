@@ -2492,7 +2492,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/TSEXdOm.gif" width="300">' +
                 '<img src="http://i.imgur.com/1MH0mJM.png" height="90"><br />' +
                 'If it isn\'t logical, it\'s probably Psychological.</center>');
-        }
+        },
 	
 	siem: function(target, room, user) {
 		if (!this.canBroadcast()) return;

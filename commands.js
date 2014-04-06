@@ -2275,16 +2275,6 @@ var commands = exports.commands = {
                                         '<hr width="85%">' +
                                         '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button></div>');
 		}
-		if (target.toLowerCase() == "testing") {
-			return connection.sendTo('testing','|html|<div class="infobox" style="border-color:blue"><center><img src="http://i.imgur.com/RKZTxPs.png"><br />' +
-			'<b><u>Welcome to the Frost Server!</u></b><br />' + 
-			'Home of many leagues for you to join or challenge, battle users in the ladder or in tournaments, learn how to play Pokemon or just chat in lobby!<br /><br />' +
-			'Make sure to type <b>/help</b> to get a list of commands that you can use and <b>/faq</b> to check out frequently asked questions.<br /><br />' +
-			'To get a chatroom for your league, please talk to an admin (~) to receive one<br /><br />' +
-			'<b>Frost</b>-<blockquote><em>Promoting your league, one challenger at a time</em></blockquote><br />' +
-			'<hr width="85%"><br />' +
-			'<a href="http://plug.dj/frost-ps/"><button title="Plug.dj"><b>Plug.jd</a></button>   |   <a href="http://frostserver.net/"><button title="Website"><b>Website</a></button>   |   <a href="http://frostserver.net/news.html"><button title="News"><b>News</a></button>   |   <a href="http://frostserver.net/rules.html"><button title="Rules"><b>Rules</a></button></div></font></center>');
-		}
 		if (target.toLowerCase() == "dawnleague") {
 			return connection.sendTo('dawnleague','|html|<center><img src="http://i.imgur.com/lF3Poot.gif"><br>'+
 					'Welcome to the Dawn League!<br>'+

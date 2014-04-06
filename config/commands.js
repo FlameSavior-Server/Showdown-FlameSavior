@@ -2488,9 +2488,9 @@ var commands = exports.commands = {
 	psychological: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center><img src="http://i.imgur.com/tRRas7O.gif" width="200"><br />' +
-                '<img src="http://i.imgur.com/4XlnMPZ.png" height="90">' +
+                '<img src="http://i.imgur.com/1MH0mJM.png" height="90">' +
                 '<img src="http://i.imgur.com/TSEXdOm.gif" width="300">' +
-                '<img src="http://i.imgur.com/1MH0mJM.png" height="90"><br />' +
+                '<img src="http://i.imgur.com/4XlnMPZ.png" height="90"><br />' +
                 'If it isn\'t logical, it\'s probably Psychological.</center>');
         },
 	

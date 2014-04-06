@@ -210,9 +210,9 @@ var commands = exports.commands = {
 			if (targetUser.canAnimatedAvatar) i += ' Animated Avatar';
 			if (targetUser.canChatRoom) i += ' Chat Room';
 			if (targetUser.canTrainerCard) i += ' Trainer Card';
-			if (targetUser.canFixItem) i += ' Alter card/avatar';
+			if (targetUser.canFixItem) i += ' Alter card/avatar/music box';
 			if (targetUser.canDecAdvertise) i += ' Declare Advertise';
-			if (targetUser.canBadge) i += ' VIP Badge';
+			if (targetUser.canBadge) i += ' VIP Badge / Global Voice';
 			if (targetUser.canMusicBox) i += ' Music Box';
 			if (targetUser.canPOTD) i += ' POTD';
 			if (targetUser.canForcerename) i += ' Forcerename'

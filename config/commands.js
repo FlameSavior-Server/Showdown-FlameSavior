@@ -1313,6 +1313,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	sol: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/breloom.gif">' +
+                '<img src="http://i.imgur.com/qtfKdoF.gif">' +
+                '<img src="http://i.imgur.com/u6fgcbx.gif"><br />' +
+                '<b>Ace:</b> <font color=blue>Diggersby</font><br />' +
+                'Don\'t fking touch my Chicken and Ben\'s Bacon :I</center>');
+    	},
+	
+	ghast: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gengar.gif">' +
+                '<img src="http://i.imgur.com/Y7DBeqQ.png" width="370">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/honedge.gif"><br />' +
+                '<b>Ace:</b> Gengar<br />' +
+                'The greater the obstacle, the more glory in overcoming it. Keep on fighting.</center>');
+    	},
+	
 	czim: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://fc01.deviantart.net/fs70/f/2011/018/3/d/bath_time___aipom_and_porygon2_by_valichan-d37ihw6.png" width="160">' +
@@ -2466,14 +2484,15 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://fc07.deviantart.net/fs70/f/2011/138/5/6/fma__comrades_by_silverwind91-d3gn45c.gif"><br><img src="http://fc01.deviantart.net/fs70/f/2011/039/8/1/roy_mustang_firestorm_by_silverwind91-d394lp5.gif"><font size="5" color="#FF0040"><i>Colonial Mustang</i><img src="http://i.imgur.com/VRZ9qY5.gif"></font></color><br><center><br>What am I trying to accomplish, you ask...? I want to change the dress code so that all women in the Frost... ...must wear mini-skirts!!.');
 	},
 	
+	logic: 'psychological',
 	psychological: function(target, room, user) {
-        	if (!this.canBroadcast()) return;
-        	this.sendReplyBox('<center><img src="http://i.imgur.com/qAKC7fU.jpg" width="480" height="280">' +
-                '<img src="http://i.imgur.com/I5glkoS.png?1">' +
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<center><img src="http://i.imgur.com/tRRas7O.gif" width="200"><br />' +
+                '<img src="http://i.imgur.com/4XlnMPZ.png" height="90">' +
                 '<img src="http://i.imgur.com/TSEXdOm.gif" width="300">' +
-                '<img src="http://i.imgur.com/DgVckTr.png"><br />' +
+                '<img src="http://i.imgur.com/1MH0mJM.png" height="90"><br />' +
                 'If it isn\'t logical, it\'s probably Psychological.</center>');
-    	},
+        }
 	
 	siem: function(target, room, user) {
 		if (!this.canBroadcast()) return;

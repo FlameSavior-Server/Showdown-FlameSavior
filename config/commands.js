@@ -1570,6 +1570,9 @@ var commands = exports.commands = {
 	regdate: function(target, room, user, connection) { 
 		if (!this.canBroadcast()) return;
 		if (!target || target == "." || target == "," || target == "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
+		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button'];
+        	for (var x in html) {
+        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
 		var username = target;
 		target = target.replace(/\s+/g, '');
 		var util = require("util"),

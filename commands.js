@@ -3701,7 +3701,6 @@ var commands = exports.commands = {
 
 		if (targetUser.userid === toUserid(this.targetUser)) {
 			var entry = ''+targetUser.name+' was forcibly renamed to '+target+' by '+user.name+'.';
-			targetUsername.canForcerename === false;
 			this.privateModCommand('(' + entry + ')');
 			targetUser.forceRename(target, undefined, true);
 		} else {
@@ -3743,7 +3742,7 @@ var commands = exports.commands = {
 	user.send('|popup|Displaying the last 100 logged actions containing "'+target+'":\n\n' + sanitize(stdout));
 	}
 	}
-},
+	},
 
 	modlog: function(target, room, user, connection) {
 		var lines = 0;

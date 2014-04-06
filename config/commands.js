@@ -1573,6 +1573,7 @@ var commands = exports.commands = {
 		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button'];
         	for (var x in html) {
         	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        	}
 		var username = target;
 		target = target.replace(/\s+/g, '');
 		var util = require("util"),

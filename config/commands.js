@@ -1313,6 +1313,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	nnk: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/5O3tHkV.jpg">' +
+                '<img src="http://i.imgur.com/zCMe6ig.png">' +
+                '<img src="http://i.imgur.com/QeLlI2I.png"><br />' +
+                '<b>Ace:</b> Lucario<br />' +
+                'Don\'t give up, the beginning is always the hardest, so let\'s keep on going till the very end.</center>');
+    	},
+	
 	sol: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/breloom.gif">' +
@@ -2236,8 +2245,12 @@ var commands = exports.commands = {
     },
     
     barida: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img height="140" width="120" src=" http://i.imgur.com/pqdTMAM.gif"><img src="http://i.imgur.com/UD8pfs8.gif"><img  height="100" width="120" src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/zapdos.gif"><br /><center><b>Ace: </b>Dragonite</center><br /><center><b>Catchphrase: </b>Success will never come to you if you don\’t reach flight and soar to your goal</center>');
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://37.media.tumblr.com/52dbb7fcd15a5a3b785256abff5aea59/tumblr_mo9lrhDRhY1qk7puko1_400.gif" width="160">' +
+                '<img src="http://i.imgur.com/Kr0EwN6.png" width="220">' +
+                '<img src="http://31.media.tumblr.com/5eea1a2d0c1376cd7f2428891534b4b2/tumblr_myo638Opel1s2i16to1_500.jpg" width="160"><br />' +
+                '<b>Ace:</b> Talonflame<br />' +
+                'He who would learn to fly one day must first learn to stand and walk and run and climb and dance; one cannot fly into flying.</center>');
     },
     
 	epin: 'epinicion',

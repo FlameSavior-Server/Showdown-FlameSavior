@@ -495,7 +495,6 @@ var cmds = {
 			'7-14 Players..... 5 Gold Bucks<br>' +
 			'15 and beyond.. 6 Gold Bucks');
 		} 
-		else {
 		if (!tour.userauth(user,room)) return this.parse('/tours');
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');
 		var rid = room.id;

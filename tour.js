@@ -495,13 +495,14 @@ var cmds = {
 			'7-14 Players..... 5 Gold Bucks<br>' +
 			'15 and beyond.. 6 Gold Bucks');
 		}
+		}
 		if (!tour.userauth(user,room)) return this.parse('/tours');
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');
 		var rid = room.id;
 		if (tour[rid].status != 0) return this.sendReply('There is already a tournament running, or there is one in a signup phase.');
 		if (!target) return this.sendReply('Proper syntax for this command: /tour tier, size');
 		var targets = tour.splint(target);
-		if (targets.length != 5) return this.sendReply('Proper syntax for this command: /tour tier, size');
+		if (targets.length != 2) return this.sendReply('Proper syntax for this command: /tour tier, size');
 		var tierMatch = false;
 		var tempTourTier = '';
 		for (var i = 0; i < tour.tiers.length; i++) {

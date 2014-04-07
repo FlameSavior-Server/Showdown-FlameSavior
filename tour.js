@@ -546,7 +546,10 @@ var cmds = {
 		if (tour.timers[rid]) Rooms.rooms[rid].addRaw('<div class="infobox"><font color="red"><center><b>If you join, please remember that you signed up.</b>');
 		if (tour.timers[rid]) Rooms.rooms[rid].addRaw('<i>The tournament will begin in ' + tour.timers[rid].time + ' minute' + (tour.timers[rid].time == 1 ? '' : 's') + '.<i>');
 	},
-
+	players: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('This tour has '+tour[rid].size+' players.');
+	},
 	endtour: function(target, room, user, connection) {
 		if (!tour.userauth(user,room)) return this.sendReply('You do not have enough authority to use this command.');
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');

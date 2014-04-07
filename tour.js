@@ -582,6 +582,7 @@ var cmds = {
 	jt: 'j',
 	jointour: 'j',
 	j: function(target, room, user, connection) {
+		if (!this.canTalk()) return;
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');
 		if (tour[room.id] == undefined || tour[room.id].status == 0) return this.sendReply('There is no active tournament to join.');
 		if (tour[room.id].status == 2) return this.sendReply('Signups for the current tournament are over.');
@@ -681,6 +682,7 @@ var cmds = {
 	lt: 'l',
 	leavetour: 'l',
 	l: function(target, room, user, connection) {
+		if (!this.canTalk()) return;
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');
 		if (tour[room.id] == undefined || tour[room.id].status == 0) return this.sendReply('There is no active tournament to leave.');
 		var spotRemover = false;

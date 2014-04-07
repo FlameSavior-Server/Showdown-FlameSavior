@@ -518,21 +518,11 @@ var commands = exports.commands = {
 			return this.parse('/help givebucks');
 		}
 	},
-	tourbucks: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>How much is a tour worth, buck wise?</b><br>' +
-			'If it\'s in the lobby or casino and has...<br>' +
-			'3 Players.......... 1 Gold Buck<br>' +
-			'4 Players.......... 2 Gold Bucks<br>' +'
-			'5 Players.......... 3 Gold Bucks<br>' +
-			'6 Players.......... 4 Gold Bucks<br>' +
-			'7-14 Players..... 5 Gold Bucks<br>' +
-			'15 and beyond.. 6 Gold Bucks');
-	},
+
 	getbucks: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('How to get bucks guide:<br><ul>' +
-		'<li>Play tournaments in the Lobby!  Lobby tournaments will always give the winner bucks! Do /tourbucks for more information!</li>' +
+		'<li>Play tournaments in the Lobby!  Lobby tournaments will always give the winner bucks! Do /tour bucks for more information!</li>' +
 		'<li>Sometimes people will do hangmans for money!</li>' +
 		'<li>Casino! Click <button name="joinRoom" value="casino" target="_blank">here</button> to join! In here, everyone gets room voice!</li>' +
 		'<li>Make a helpful suggestion to the server using /suggest [suggestion] (Bucks may vary)!');

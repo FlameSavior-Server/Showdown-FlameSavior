@@ -1007,13 +1007,24 @@ var commands = exports.commands = {
 				}
 			}
 			if (theItem === 'badge') {
-				if (targetUser.caBadge === true) {
+				if (targetUser.canBadge === true) {
 					return this.sendReply('This user has already bought that item from the shop... no need for another.');
 				}
 				if (targetUser.canBadge === false) {
 					matched = true;
 					targetUser.canBadge = true;
 					Rooms.rooms.lobby.add(user.name + ' has stolen a badge from the shop!');
+					targetUser.send(user.name + ' has given you the ability to claim a ' + theItem + '!');
+				}
+			}
+			if (theItem === 'vip') {
+				if (targetUser.canVIP === true) {
+					return this.sendReply('This user has already bought that item from the shop... no need for another.');
+				}
+				if (targetUser.canVIP === false) {
+					matched = true;
+					targetUser.canVIP = true;
+					Rooms.rooms.lobby.add(targetUser + ' revieved VIP status from '+user.name+'!');
 					targetUser.send(user.name + ' has given you the ability to claim a ' + theItem + '!');
 				}
 			}

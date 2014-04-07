@@ -328,7 +328,7 @@ exports.tour = function(t) {
 						p = 'bucks';
 					}
 					if (tour[rid].size === 3) {
-						tourMoney = 2;
+						tourMoney = 1;
 						p = 'bucks';
 					}
 					if (tour[rid].size < 2) {

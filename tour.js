@@ -484,6 +484,16 @@ var cmds = {
 			tour = require('./tour.js').tour(tour);
 			return this.sendReply('Tournament scripts were updated.');
 		}
+		if (target == "bucks" && this.can('broadcast')) {
+			this.sendReplyBox('<b>How much is a tour worth, buck wise?</b><br>' +
+			'If it\'s in the lobby or casino and has...<br>' +
+			'3 Players.......... 1 Gold Buck<br>' +
+			'4 Players.......... 2 Gold Bucks<br>' +'
+			'5 Players.......... 3 Gold Bucks<br>' +
+			'6 Players.......... 4 Gold Bucks<br>' +
+			'7-14 Players..... 5 Gold Bucks<br>' +
+			'15 and beyond.. 6 Gold Bucks');
+		}
 		if (!tour.userauth(user,room)) return this.parse('/tours');
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');
 		var rid = room.id;

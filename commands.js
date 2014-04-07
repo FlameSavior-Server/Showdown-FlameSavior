@@ -872,21 +872,7 @@ var commands = exports.commands = {
 			}
 		}
 	},
-	
-	economy: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		var self = this;
-		fs.readFile('config/money.csv','utf8',function(err, data) {
-			var row = (''+data).split('\n');
-			var total = 0;
-			for (var i = row.length; i > -1; i--) {
-				if (!row[i]) continue;
-				total+=row[i].split(',')[1];
-			}
-			self.sendReplyBox('Amount of Gold Bucks in circulation on the server: '+total+' Gold Bucks.');
-			room.update();
-		});
-	},
+
 
 	shoplift: 'awarditem',
 	giveitem: 'awarditem',

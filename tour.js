@@ -484,7 +484,7 @@ var cmds = {
 			tour = require('./tour.js').tour(tour);
 			return this.sendReply('Tournament scripts were updated.');
 		}
-		if (target == "bucks" && this.can('broadcast')) {
+		if (target == "bucks") {
 			this.sendReplyBox('<b>How much is a tour worth, buck wise?</b><br>' +
 			'If it\'s in the lobby or casino and has...<br>' +
 			'3 Players.......... 1 Gold Buck<br>' +

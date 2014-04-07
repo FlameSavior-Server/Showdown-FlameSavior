@@ -12,7 +12,7 @@
  */
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
 var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'forcerename', 'musicbox'];
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'forcerename', 'musicbox', 'vip'];
 var closeShop = false;
 var closedShop = 0;
 var bank = exports.bank = {

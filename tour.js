@@ -502,7 +502,7 @@ var cmds = {
 		if (tour[rid].status != 0) return this.sendReply('There is already a tournament running, or there is one in a signup phase.');
 		if (!target) return this.sendReply('Proper syntax for this command: /tour tier, size');
 		var targets = tour.splint(target);
-		if (targets.length != 2.5) return this.sendReply('Proper syntax for this command: /tour tier, size');
+		if (targets.length != 2) return this.sendReply('Proper syntax for this command: /tour tier, size');
 		var tierMatch = false;
 		var tempTourTier = '';
 		for (var i = 0; i < tour.tiers.length; i++) {

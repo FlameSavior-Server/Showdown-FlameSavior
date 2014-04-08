@@ -1564,10 +1564,10 @@ var commands = exports.commands = {
 	
 	princesshigh: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/d82SdyS.png?1" width="90" height="110">' +
+		this.sendReplyBox('<center><img src="http://crystal-league.weebly.com/uploads/2/3/2/3/23236780/136756028.jpg" height="200">' +
                 '<img src="http://i.imgur.com/0xsg2uK.gif" width="370">' +
-                '<img src="http://i.imgur.com/z07qpv4.gif?1" width="90" height="110"><br />' +
-                '<b>Ace:</b> <font color=#d63265><blink>Clefable</blink></font><br />' +
+                '<img src="http://31.media.tumblr.com/tumblr_ltuo9yFLI81r5wm28o1_250.gif" ><br />' +
+                '<b>Ace:</b> <font color=#d63265><blink>Gardevior</blink></font><br />' +
                 '<b><font color=#ff0000">L</font><font color=#ff2300">i</font><font color=#ff4700">v</font><font color=#ff6a00">e</font>' +
                 '<font color=#ff8e00"> </font><font color=#ffb100">f</font><font color=#ffb100">a</font><font color=#ffd500">s</font>' +
                 '<font color=#ffd500">t</font><font color=#bdff00">,</font><font color=#9aff00"> </font><font color=#76ff00">D</font>' +

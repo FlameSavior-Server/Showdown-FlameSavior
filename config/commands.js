@@ -1320,6 +1320,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	ultimate: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/RqtZbc1.gif" width="100">' +
+                '<img src="http://i.imgur.com/VtPbIqY.gif" width="310">' +
+                '<img src="http://i.imgur.com/HpH5G0T.gif" width="120"><br />' +
+                '<b>Ace:</b> Pikachu<br />' +
+                'A real warrior doesn\'t dash off in pursuit of the next victory, nor throw a fit when experiencing a loss. A real warrior ponders the next battle.</center>');
+    	},
+	
 	dusk: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/BvlUF7p.png">' +

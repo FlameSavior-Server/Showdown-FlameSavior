@@ -1320,6 +1320,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	minatokyuubi: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/pEldH.png" width="130">' +
+                '<img src="http://i.imgur.com/HkdptoW.png" width="280">' +
+                '<img src="http://i.imgur.com/2kqFODU.jpg" width="130"><br />' +
+                '<b>Ace:</b> The Yellow Flash<br />' +
+                'Quick as Lightning.</center>');
+    	},
+	
 	ultimate: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/RqtZbc1.gif" width="100">' +

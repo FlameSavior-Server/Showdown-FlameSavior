@@ -1320,6 +1320,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	dusk: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/BvlUF7p.png">' +
+                '<img src="http://i.imgur.com/H13dKHl.png">' +
+                '<img src="http://i.imgur.com/f4swUOf.gif"><br />' +
+                '<b>Ace:</b> Mandibuzz<br />' +
+                'I\'m the guy who started the Mandibuzz hate!</center>');
+    	},
+	
 	nnk: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/5O3tHkV.jpg">' +

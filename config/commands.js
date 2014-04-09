@@ -1320,6 +1320,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	mindcrush: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20120716194029/yugioh/images/0/03/MindCrush-TF04-JP-VG.jpg" width="105">' +
+                '<img src="http://i.imgur.com/o260t0n.png" width="300">' +
+                '<img src="http://images3.alphacoders.com/153/153245.jpg" width="130"><br />' +
+                '<b>Ace:</b> Mind Crush<br />' +
+                'Games mean conflict a combat between two enemies. It\’s the same for all of them!<br /> Cards, chess, the blood-soaked wars of the human race...<br /> All these are different kinds of games. Do you know what god gave to people so they could play games in this world? A single shard called life!.</center>');
+    	},
+	
 	minatokyuubi: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/pEldH.png" width="130">' +

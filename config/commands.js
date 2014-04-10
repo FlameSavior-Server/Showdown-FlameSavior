@@ -1503,11 +1503,11 @@ var commands = exports.commands = {
 	
 	sayshi: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/6AuMmY8.jpg" width="120" height="120">' +
-                '<img src="http://i.imgur.com/9XgZdfG.png?1"width="280">' +
-                '<img src="http://i.imgur.com/tBtM9J0.gif?1" width="140"><br />' +
-                '<b>Ace:</b> Togekiss<br />' +
-                'Keep Calm and Defend the Skies! #Ho-Oh.</center>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/8XHueuZ.jpg" width="150">' +
+                '<img src="http://i.imgur.com/QJzMUIV.png?1" width="270">' +
+                '<img src="http://i.imgur.com/bqRqARg.jpg" width="120"><br />' +
+                '<b>Ace:</b> Gliscor (damn you sub stall)<br />' +
+                'Lead us not into Hell. Just tell us where it is we\’ll find it quite easily Mwahhahahahah #Eric4Life.</center>');
     	},
 	
 	falls: function(target, room, user) {

@@ -2462,6 +2462,7 @@ var commands = exports.commands = {
 	afk: 'away',
 	away: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
+		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 
 		if (!user.isAway) {
 			user.originalName = user.name;
@@ -2482,6 +2483,7 @@ var commands = exports.commands = {
 	},
 	sleep: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
+		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 
 		if (!user.isAway) {
 			user.originalName = user.name;
@@ -2490,7 +2492,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 			
-			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now sleeping.  Please do not touch them. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
 
 			user.isAway = true;
 		}
@@ -2502,6 +2504,7 @@ var commands = exports.commands = {
 	},
 	busy: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
+		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 
 		if (!user.isAway) {
 			user.originalName = user.name;
@@ -2525,7 +2528,7 @@ var commands = exports.commands = {
 		if (!this.can('lock')) return false;
 
 		if (user.isAway) {
-			if (user.name.slice(-7) !== ' - Away') {
+			if (user.name === user.originalName) {
 				user.isAway = false; 
 				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
 			}

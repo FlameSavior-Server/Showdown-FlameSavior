@@ -998,7 +998,7 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://blog.flamingtext.com/blog/2014/04/02/flamingtext_com_1396402375_186122138.png" width="50%"><br>' +
                 '<img src="http://50.62.73.114:8000/avatars/theberrymaster.gif"><br>' +
                 'Cherrim-Sunshine<br>' +
-                'I AM BERRY O: FEAR ME');
+                'I don\'t care what I end up being as long as I\'m a legend.');
     	},        
     	moist: function(target, room, user) {
         if (!this.canBroadcast()) return;

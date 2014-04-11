@@ -962,6 +962,12 @@ var commands = exports.commands = {
 		'Ace: Donnatello<br>' +
 		'"At day I own the streets, but at night I own the closet..."');
 	},
+	crowt: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/SNhcPk5.png"><br>' +
+		'<img src="http://i69.photobucket.com/albums/i64/dopzihon/dumbledore.gif" width="75%"><br>' +
+		'"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."');
+	},
     	ransu: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/kWaZd66.jpg" width="75%"><br>Develop a passion for learning. If you do, you will never cease to grow.');

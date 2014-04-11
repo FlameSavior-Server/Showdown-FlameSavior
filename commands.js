@@ -12,8 +12,9 @@
  */
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
 var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
+var isMotd = false;
 var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'forcerename', 'musicbox', 'vip'];
-var closeShop = false;
+var closeShop = false
 var closedShop = 0;
 var bank = exports.bank = {
 			bucks: function(uid, amount, take) {
@@ -333,6 +334,38 @@ var commands = exports.commands = {
 		} else {
 			return message;
 		}
+	},
+	setmotd: 'motd',
+	motd: function (target, room, user) {
+		if (!this.can('pban')) return false;
+		return this.sendReply('Command disabled.');
+		if (!target || target.indexOf(',') == -1) {
+			return this.sendReply('The proper syntax for this command is: /motd [message], [interval (minutes)]');
+		}
+		if (isMotd == true) {
+			clearInterval(motd);
+		}
+		targets = target.split(',');
+		message = targets[0];
+		time = Number(targets[1]);
+		if (isNaN(time)) {
+			return this.sendReply('Make sure the time is just the number, and not any words.');
+		}
+		motd = setInterval(function() {Rooms.rooms.lobby.add('|raw|<div class = "infobox"><b>Message of the Day:</b><br />'+message)}, time * 60 * 1000);
+		isMotd = true;
+		this.logModCommand(user.name+' set the message of the day to: '+message+' for every '+time+' minutes.');
+		return this.sendReply('The message of the day was set to "'+message+'" and it will be displayed every '+time+' minutes.');
+	},
+
+	clearmotd: 'cmotd',
+	cmotd: function (target, room, user) {
+		if (!this.can('pban')) return false;
+		if (isMotd == false) {
+			return this.sendReply('There is no motd right now.');
+		}
+		clearInterval(motd);
+		this.logModCommand(user.name+' cleared the message of the day.');
+		return this.sendReply('You cleared the message of the day.');
 	},
 	spop: 'sendpopup',
 	sendpopup: function(target, room, user) {

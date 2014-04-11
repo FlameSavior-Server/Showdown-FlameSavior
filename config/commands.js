@@ -965,6 +965,7 @@ var commands = exports.commands = {
 	crowt: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/SNhcPk5.png" width=250 height=100><br>' +
+        	'<img src="http://img2.wikia.nocookie.net/__cb20090801171054/harrypotter/images/e/ef/Potter_Puppet_Pals.jpg" width="25%"><br>' +
 		'<img src="http://i69.photobucket.com/albums/i64/dopzihon/dumbledore.gif" width="75%"><br>' +
 		'"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends." - Dumbledore<br>' +
 		'<hr width="85%">' +

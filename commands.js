@@ -2176,7 +2176,7 @@ var commands = exports.commands = {
         if (voices.length > 0) {
             voices = voices.join(', ');
         }
-        connection.popup('Gold Staff list \n\n**Administrators**: \n'+admins+'\n**Leaders**: \n'+leaders+'\n**Moderators**: \n'+mods+'\n**Drivers**: \n'+drivers+'\n**Voices**: \n'+voices);    },
+        connection.popup('Gold Staff list \n\n**Administrators**: \n'+admins+'\n**Leaders**: \n'+leaders+'\n**Moderators**: \n'+mods+'\n**Drivers**: \n'+drivers+'\n**Voices**: \n'+voices);    
 	},
 	css: function(target, room, user, connection) {
                 var css = fs.readFileSync('config/custom.css','utf8');

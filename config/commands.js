@@ -954,6 +954,14 @@ var commands = exports.commands = {
                 '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
                 '<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
     	},
+    	kricketune: 'kriсketunе',
+	kriсketunе: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/efg9ccY.png"><br>' +
+		'<img src="http://i.imgur.com/NKGYqpn.png" width="50%"><br>' +
+		'Ace: Donnatello<br>' +
+		'"At day I own the streets, but at night I own the closet..."');
+	},
     	ransu: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/kWaZd66.jpg" width="75%"><br>Develop a passion for learning. If you do, you will never cease to grow.');

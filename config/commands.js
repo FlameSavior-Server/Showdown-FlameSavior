@@ -966,7 +966,8 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/SNhcPk5.png" width=250 height=100><br>' +
 		'<img src="http://i69.photobucket.com/albums/i64/dopzihon/dumbledore.gif" width="75%"><br>' +
-		'"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."');
+		'"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."<br>' +
+		'<a href="http://www.buzzfeed.com/ariellecalderon/profound-quotes-from-the-harry-potter-books"><button title="More Harry Potter Quotes">More Harry Potter Quotes</a></button>');
 	},
     	ransu: function(target, room, user) {
         if (!this.canBroadcast()) return;

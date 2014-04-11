@@ -957,7 +957,7 @@ var commands = exports.commands = {
     	kricketune: 'kriсketunе',
 	kriсketunе: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/efg9ccY.png"><br>' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/VPcZ1rC.png"><br>' +
 		'<img src="http://i.imgur.com/NKGYqpn.png" width="50%"><br>' +
 		'Ace: Donnatello<br>' +
 		'"At day I own the streets, but at night I own the closet..."');

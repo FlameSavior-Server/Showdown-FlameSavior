@@ -1023,7 +1023,7 @@ var commands = exports.commands = {
 	blazingflareon: 'bf',
 	bf: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/h3ZTk9u.gif"><br><img src="http://fc08.deviantart.net/fs71/i/2012/251/3/f/flareon_coloured_lineart_by_noel_tf-d5e166e.jpg" width="25%"><br>Just because they\'re both decided by who wins and who loses, doesn\'t liken a battle to a game!');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/h3ZTk9u.gif"><br><img src="http://fc08.deviantart.net/fs71/i/2012/251/3/f/flareon_coloured_lineart_by_noel_tf-d5e166e.jpg" width="25%"><br><font size="3" color="red"><u><b><i>DARE TO DREAM');
 	},
 	mikado: function(target, room, user) {
 		if (!this.canBroadcast()) return;

@@ -169,12 +169,7 @@ if (!process.send) {
 
 		if (!validators[format]) validators[format] = new Validator(format);
 		var parsedTeam = [];
-		try {
-			parsedTeam = Tools.fastUnpackTeam(message.substr(pipeIndex2 + 1));
-		} catch (e) {
-			respond(id, false, "Your team was invalid and could not be parsed.");
-			return;
-		}
+		parsedTeam = Tools.fastUnpackTeam(message.substr(pipeIndex2 + 1));
 		var problems = validators[format].validateTeam(parsedTeam);
 		if (problems && problems.length) {
 			respond(id, false, problems.join('\n'));
@@ -534,7 +529,10 @@ var Validator = (function() {
 			problems = problems.concat(format.validateSet.call(tools, set, format)||[]);
 		}
 
-		if (!problems.length) return false;
+		if (!problems.length) {
+			if (set.forcedLevel) set.level = set.forcedLevel;
+			return false;
+		}
 		return problems;
 	};
 

@@ -1590,7 +1590,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/ziTxZ58.gif">' +
                 '<img src="http://i.imgur.com/356yMIq.gif" width="150" height="150"><br />' +
                 '<b>Ace:</b> Volcarona<br />' +
-                'Food, Sleep, Pokemon, and Sports.</center>');
+                'Chicken! Where?</center>');
     	},
 	
 	slim: function(target, room, user) {

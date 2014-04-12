@@ -32,6 +32,16 @@ exports.hangman = function(h) {
 	}
 	return hangman;
 };
+
+function escapeHTML(target) {
+	if (!target) return false;
+	target = target.toString();
+	target = target.replace(/&(?!\w+;)/g, '&amp;')
+	target = target.replace(/</g, '&lt;')
+	target = target.replace(/>/g, '&gt;')
+	target = target.replace(/"/g, '&quot;');
+	return target;
+}
 	
 var cmds = {	
 	hangmanhelp: function(target, room, user) {
@@ -96,7 +106,7 @@ var cmds = {
 				hangman[room.id].spaces.push('_');
 				hangman[room.id].hangmantopic[0] = targets[1];
 			}
-			return this.add('|html|<div class = "infobox"><div class = "broadcast-green"><center><font size = 2><b>' + user.name + '</b> started a game of hangman! The word has ' + targets[0].length + ' letters.<br>' + hangman[room.id].spaces.join(" ") + '<br>The category: ' + hangman[room.id].hangmantopic[0] + '</font></center></div></div>');
+			return this.add('|html|<div class = "infobox"><div class = "broadcast-green"><center><font size = 2><b>' + escapeHTML(user.name) + '</b> started a game of hangman! The word has ' + targets[0].length + ' letters.<br>' + hangman[room.id].spaces.join(" ") + '<br>The category: ' + escapeHTML(hangman[room.id].hangmantopic[0]) + '</font></center></div></div>');
 		}
 	},
 
@@ -108,7 +118,7 @@ var cmds = {
 		if(hangman[room.id].hangman === false) {
 			return this.sendReply('There is no game of hangman going on right now.');
 		}
-		this.sendReplyBox('<font size = 2>' + hangman[room.id].spaces.join(" ") + '<br>Guesses left: ' + hangman[room.id].givenguesses + '<br>Category: ' + hangman[room.id].hangmantopic[0] + '</font>');
+		this.sendReplyBox('<font size = 2>' + hangman[room.id].spaces.join(" ") + '<br>Guesses left: ' + hangman[room.id].givenguesses + '<br>Category: ' + escapeHTML(hangman[room.id].hangmantopic[0]) + '</font>');
 	},
 
 	 topic: 'category',
@@ -174,16 +184,16 @@ var cmds = {
 			hangman[room.id].givenguesses = hangman[room.id].givenguesses - 1;
 				if(hangman[room.id].givenguesses === 0) {
 					hangman.reset(room.id);
-					return this.add('|html|<b>' + user.name + '</b> guessed the letter \'' + lettertarget + '\', but it was not in the word. You have failed to guess the word, so the man has been hanged.');
+					return this.add('|html|<b>' + escapeHTML(user.name) + '</b> guessed the letter \'' + lettertarget + '\', but it was not in the word. You have failed to guess the word, so the man has been hanged.');
 				}
-			this.add('|html|<b>' + user.name + '</b> guessed the letter \'' + lettertarget + '\', but it was not in the word.');
+			this.add('|html|<b>' + escapeHTML(user.name) + '</b> guessed the letter \'' + lettertarget + '\', but it was not in the word.');
 		}
 		else {
-			this.add('|html|<b>' + user.name + '</b> guessed the letter \'' + lettertarget + '\', which was letter(s) ' + letterright.toString() + ' of the word.');
+			this.add('|html|<b>' + escapeHTML(user.name) + '</b> guessed the letter \'' + lettertarget + '\', which was letter(s) ' + letterright.toString() + ' of the word.');
 		}
 		hangman[room.id].guessedletters.push(lettertarget);
 		if(hangman[room.id].correctletters.length === hangman[room.id].guessword[0].length) {
-			this.add('|html|Congratulations! <b>' + user.name + '</b> has guessed the word, which was: \'' + hangman[room.id].guessword[0] + '\'.');
+			this.add('|html|Congratulations! <b>' + escapeHTML(user.name) + '</b> has guessed the word, which was: \'' + escapeHTML(hangman[room.id].guessword[0]) + '\'.');
 			hangman.reset(room.id)
 		}
 	},
@@ -204,7 +214,7 @@ var cmds = {
 		if (target.length > 10) return this.sendReply('This guess is too long; it cannot exceed 10 characters.');
 		var targetword = target.toLowerCase();
 		if(targetword === hangman[room.id].guessword[0]) {
-			this.add('|html|Congratulations! <b>' + user.name + '</b> has guessed the word, which was: \'' + hangman[room.id].guessword[0] + '\'.');
+			this.add('|html|Congratulations! <b>' + escapeHTML(user.name) + '</b> has guessed the word, which was: \'' + escapeHTML(hangman[room.id].guessword[0]) + '\'.');
 			hangman.reset(room.id)
 		}
 		else {
@@ -215,9 +225,9 @@ var cmds = {
 			hangman[room.id].guessedwords.push(target);
 			if(hangman[room.id].givenguesses === 0) {
 				hangman.reset(room.id)
-				return this.add('|html|<b>' + user.name + '</b> guessed the word \'' + targetword + '\', but it was not the word. You have failed to guess the word, so the man has been hanged.');
+				return this.add('|html|<b>' + escapeHTML(user.name) + '</b> guessed the word \'' + escapeHTML(targetword) + '\', but it was not the word. You have failed to guess the word, so the man has been hanged.');
 			}
-			this.add('|html|<b>' + user.name + '</b> guessed the word \'' + targetword + '\', but it was not the word.');
+			this.add('|html|<b>' + escapeHTML(user.name) + '</b> guessed the word \'' + escapeHTML(targetword) + '\', but it was not the word.');
 		}
 	},
 
@@ -232,7 +242,7 @@ var cmds = {
 			return this.sendReply('There is no game going on.');
 		}
 		if(hangman[room.id].hangman === true) {
-			this.add('|html|<b>' + user.name + '</b> ended the game of hangman.');
+			this.add('|html|<b>' + escapeHTML(user.name) + '</b> ended the game of hangman.');
 			hangman.reset(room.id);
 		}
 	}

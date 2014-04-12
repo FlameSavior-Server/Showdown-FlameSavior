@@ -848,7 +848,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		if(room.id === 'lobby') {
 		return this.sendReplyBox('<button name="send" value="/shop" class="blackbutton"><font color="white"><b>Shop</button>');
-		} else {
+		} else 
 		return this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
 			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>25</td></tr>' +

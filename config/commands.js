@@ -961,6 +961,12 @@ var commands = exports.commands = {
                 '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
                 '<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
     	},
+    	miah: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><font size="3" color="orange"><b>Miah<br>' +
+		'<img src="https://i.imgur.com/2RHOuPi.gif" width="50%"><img src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-frc1/t1.0-9/1511712_629640560439158_8415184400256062344_n.jpg" width="50%"><br></font></b>' +
+		'Ace: Gliscor<br>Catch phrase: Adding Euphemisms to Pokemon');
+	},
     	kricketune: 'kriсketunе',
 	kriсketunе: function(target, room, user) {
         if (!this.canBroadcast()) return;

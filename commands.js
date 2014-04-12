@@ -846,7 +846,10 @@ var commands = exports.commands = {
 	shop: function(target, room, user) {
 	
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
+		if(room.id === 'lobby') {
+		return this.sendReplyBox('<button name="send" value="/shop" class="blackbutton"><font color="white"><b>Shop</button>');
+		} else {
+		return this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
 			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>25</td></tr>' +
 			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>30</td></tr>' +
@@ -2240,7 +2243,7 @@ var commands = exports.commands = {
                                         '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
                                         '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
                                         '<b>2.</b> Do /events for a list of events that we do here!<br>' +
-                                        '<b>3.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
+                                        '<b>3.</b> Advertising another server is an automatic lock by PM or in chat.<br>' +
                                         '<b>4.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
                                         '<hr width="85%">' +
                                         '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button></div>');

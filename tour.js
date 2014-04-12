@@ -488,7 +488,7 @@ var cmds = {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox(
 			'<b>How much is a tour worth, buck wise?</b><br>' +
-			'If it\'s in the lobby or casino and has...<br>' +
+			'If it\'s in the lobby or any other official room and has...<br>' +
 			'3 Players.......... 1 Gold Buck<br>' +
 			'4 Players.......... 2 Gold Bucks<br>' +
 			'5 Players.......... 3 Gold Bucks<br>' +

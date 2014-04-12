@@ -554,7 +554,7 @@ var commands = exports.commands = {
 	getbucks: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<font size="2"><b>How to get bucks guide:</b><br><ul>' +
-		'<li>Play tournaments in the Lobby or Casino!  Lobby or Casino tournaments will always give the winner bucks! Do /tour bucks for more information!</li>' +
+		'<li>Play tournaments in the Lobby or any other official room!  These tournaments will always give the winner bucks! Do /tour bucks for more information!</li>' +
 		'<li>Sometimes people will do hangmans for money!</li>' +
 		'<li>Casino! Click <button name="joinRoom" value="casino" target="_blank">here</button> to join! In here, everyone gets room voice!</li>' +
 		'<li>Make a helpful suggestion to the server using /suggest [suggestion] (Bucks may vary)!');

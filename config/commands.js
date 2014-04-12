@@ -1331,6 +1331,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	alpha: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://oi61.tinypic.com/2dc75dy.jpg" width="100">' +
+                '<img src="http://i.imgur.com/50APYJL.gif" width="340">' +
+                '<img src="http://oi61.tinypic.com/vyqqdy.jpg" width="100"><br />' +
+                '<b>Ace:</b> Darmanitan<br />' +
+                '50$ down the drain. Happy now?</center>');
+    	},
+	
 	mindcrush: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20120716194029/yugioh/images/0/03/MindCrush-TF04-JP-VG.jpg" width="105">' +

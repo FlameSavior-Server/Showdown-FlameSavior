@@ -738,6 +738,11 @@ var commands = exports.commands = {
                 if (config.groups[nextGroup].globalonly) {
                         return this.sendReply("The rank of "+config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
                 }
+                targetUserGroup = ' ';
+                if (Users.usergroups[userid]) {
+					targetUserGroup = Users.usergroups[userid].substr(0,1);
+				}
+                if (config.groups[nextGroup].rank < config.groups[targetUserGroup].rank && room.isOfficial && config.groups[nextGroup].rank > 0) return this.sendReply(name+' is a Global '+config.groups[targetUserGroup].name+' and can not be demoted to a lower room rank.');
 
                 var isDemotion = (config.groups[nextGroup].rank < config.groups[currentGroup].rank);
                 var groupName = (config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';

@@ -38,11 +38,6 @@ var Profile = {
 	    return '<i>Money:</i> ' + '<img src="http://cdn.bulbagarden.net/upload/8/8c/Pok%C3%A9monDollar.png" title="PokeDollar">' + user.money;
 	},
 
-	tourWins: function (user) {
-		io.stdinNumber('config/tourWins.csv', user, 'tourWins');
-		return  ' | <i>Tournament Wins</i>: ' + user.tourWins + '<br/>';
-	},
-
 	status: function (user) {
 	    io.stdinString('config/status.csv', user, 'status');
 	    if (user.status === '') {
@@ -69,13 +64,13 @@ var cmds = {
 
 	    io.stdoutNumber('config/views.csv', targetUser, 'views', 1);
 
-	    var display = Profile.avatar(targetUser, height) + Profile.name(targetUser) + Profile.views(targetUser) + '<hr>' + Profile.rank(targetUser) + Profile.elo(targetUser) + Profile.money(targetUser) + Profile.tourWins(targetUser) + Profile.status(targetUser) + Profile.statusTime(targetUser);
+	    var display = Profile.avatar(targetUser, height) + Profile.name(targetUser) + Profile.views(targetUser) + '<hr>' + Profile.rank(targetUser) + Profile.elo(targetUser) + Profile.money(targetUser) + Profile.status(targetUser) + Profile.statusTime(targetUser);
 	  
 	    if (!targetUser.authenticated && targetUser.isAway === false) {
-	        display = Profile.avatar(targetUser, height) + Profile.unregisteredName(targetUser) + Profile.views(targetUser) + '<hr>' + Profile.rank(targetUser) + Profile.elo(targetUser) + Profile.money(targetUser) + Profile.tourWins(targetUser) + Profile.status(targetUser) + Profile.statusTime(targetUser);
+	        display = Profile.avatar(targetUser, height) + Profile.unregisteredName(targetUser) + Profile.views(targetUser) + '<hr>' + Profile.rank(targetUser) + Profile.elo(targetUser) + Profile.money(targetUser) +  Profile.status(targetUser) + Profile.statusTime(targetUser);
 	        return this.sendReplyBox(display);
 	    } else if (typeof (targetUser.avatar) === typeof ('')) {
-	        display = Profile.customAvatar(targetUser, height) + Profile.name(targetUser) + Profile.views(targetUser) + '<hr>' + Profile.rank(targetUser) + Profile.elo(targetUser) + Profile.money(targetUser) + Profile.tourWins(targetUser) + Profile.status(targetUser) + Profile.statusTime(targetUser);
+	        display = Profile.customAvatar(targetUser, height) + Profile.name(targetUser) + Profile.views(targetUser) + '<hr>' + Profile.rank(targetUser) + Profile.elo(targetUser) + Profile.money(targetUser) + Profile.status(targetUser) + Profile.statusTime(targetUser);
 	        return this.sendReplyBox(display);
 	    } else {
 	        return this.sendReplyBox(display);

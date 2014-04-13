@@ -4,7 +4,7 @@ var Profile = {
 	},
 
 	customAvatar: function (user, height) {
-	    return '<img src="http://192.184.93.98:8000/avatars/' + user.avatar + '" align="left" height="' + height + '"><br/>';
+	    return '<img src="http://50.62.73.114:8000/avatars/' + user.avatar + '" align="left" height="' + height + '"><br/>';
 	},
 
 	name: function (user) {

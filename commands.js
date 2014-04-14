@@ -410,6 +410,9 @@ var commands = exports.commands = {
             			profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
 			
                         }
+                        if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
             
             this.sendReplyBox(profile);
         },

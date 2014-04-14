@@ -482,7 +482,7 @@ var commands = exports.commands = {
                         total += targetUser.name + ' has ' + money + ' ' + p + '.<br />';
                 } 
                 if (mMatch === false) {
-                        total += targetUser.name + ' has no Gold bucks.<br />';
+                        total += targetUser.name + ' None.<br />';
                 }
                 targetUser.money = money;
                                 }
@@ -1680,7 +1680,7 @@ var commands = exports.commands = {
                         total +=  + money + ' ' + p + '.<br />';
                 } 
                 if (mMatch === false) {
-                        total += ' has no Gold bucks.<br />';
+                        total += ' None.<br />';
                 }
                 targetUser.money = money;
                                 }

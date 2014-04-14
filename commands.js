@@ -396,7 +396,8 @@ var commands = exports.commands = {
                 targetUser.money = money;
                                 }
             var profile = '';
-            profile += '<img src="'+avatar+'" height=80 width=80 align=left>';
+            profile += '<img src="http://play.pokemonshowdown.com/sprites/trainers/' + user.avatar + '.png' + '" align="left" height="80">';
+            Profile += '<img src="http://50.62.73.114:8000/avatars/' + user.avatar + '" align="left" height="80"><br/>';
             profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+userGroup+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';

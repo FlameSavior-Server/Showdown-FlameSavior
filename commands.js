@@ -1622,7 +1622,7 @@ var commands = exports.commands = {
                 if (target == '') target = user.userid;
                 target = target.toLowerCase();
                 target = target.trim();
-                var avatar = '<img src="http://50.62.73.114:8000/avatars/'+targetUser.avatar+'" align="left" height=80 width=80>';
+                var avatar = '<img src="http://50.62.73.114:8000/avatars/'+user.avatar+'" align="left" height=80 width=80>';
                 
                var mMatch = false;
         var money = 0;

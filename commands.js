@@ -1631,12 +1631,7 @@ var commands = exports.commands = {
                         } else {
                                 var userGroup = 'Regular User';
                 }
-                avatar = getAvatar(userid);    
-                        if (isNaN(avatar)) {
-                                avatar = 'http://woof.imjd.info:8000/avatars/'+avatar;
-                        } else {
-                                avatar = 'http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png';
-                        }
+                 var avatar = "<img src='http://50.62.73.114:8000/avatars/"+targetUser.avatar+"'>" || "<img src='http://play.pokemonshowdown.com/sprites/trainers/"+targetUser.avatar+".png'>";
             } else {
                 username = targetUser.name;
                 userid = targetUser.userid;

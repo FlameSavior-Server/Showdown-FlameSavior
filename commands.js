@@ -1712,7 +1712,7 @@ var commands = exports.commands = {
             profile += '<img src="'+avatar+'" height=80 width=80 align=left>';
             profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
-            profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br />';
+            profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
             this.sendReplyBox(profile);
             },
 

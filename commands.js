@@ -1623,7 +1623,13 @@ var commands = exports.commands = {
                 target = target.toLowerCase();
                 target = target.trim();
                 var avatar = '<img src="http://50.62.73.114:8000/avatars/'+user.avatar+'" align="left" height=80 width=80>';
-                 var row = (''+data).split("\n");
+                
+               var mMatch = false;
+        var money = 0;
+        var total = '';
+        if (!target) {
+        var data = fs.readFileSync('config/money.csv','utf8')
+                var row = (''+data).split("\n");
                 for (var i = row.length; i > -1; i--) {
                         if (!row[i]) continue;
                         var parts = row[i].split(",");
@@ -1643,7 +1649,7 @@ var commands = exports.commands = {
                         total += user.name + ' has ' + money + ' ' + p + '.<br />';
                 }
                 if (mMatch === false) {
-                        total += 'None';
+                        total += 'You have no Gold bucks.<br />';
                 }
                 user.money = money;
         } else {
@@ -1677,6 +1683,7 @@ var commands = exports.commands = {
                         total += targetUser.name + ' has no Gold bucks.<br />';
                 }
                 targetUser.money = money;
+                                }
                 return this.sendReplyBox(avatar+'<font size="2">'+target+'<br />' +
                 'Money: '+total+'<br clear="all">');
         },

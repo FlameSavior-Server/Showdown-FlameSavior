@@ -410,9 +410,9 @@ var commands = exports.commands = {
             			profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
 				if (!targetUser.connected) {
          			profile =+ '&nbsp;<font color=#24678d><b>This user is: <font color="green">Online </font></font>';
-		
 				}
                         }
+            }
             this.sendReplyBox(profile);
         },
 	mee: function(target, room, user, connection) {

@@ -309,6 +309,100 @@ var commands = exports.commands = {
 			return message;
 		}
 	},
+	 profile3: function(target, room, user) {
+            if (!target) target = user.name;
+            if (toUserid(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
+            if (!this.canBroadcast()) return;
+            targetUser = Users.get(target);
+            if (!targetUser) {
+                username = target;
+                userid = toUserid(target);
+                if (Users.usergroups[userid]) {
+                                var userGroup = Users.usergroups[userid].substr(0,1);
+                                userGroup = config.groups[userGroup].name
+                        } else {
+                                var userGroup = 'Regular User';
+                }
+                avatar = getAvatar(userid);    
+                        if (isNaN(avatar)) {
+                                avatar = 'http://50.62.73.114:8000/avatars/'+avatar;
+                        } else {
+                                avatar = 'http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png';
+                        }
+            } else {
+                username = targetUser.name;
+                userid = targetUser.userid;
+                userGroup = config.groups[targetUser.group].name
+                avatar = targetUser.avatar;
+            }
+            var mMatch = false;
+            var money = 0;
+            var total = '';
+            if (!target) {
+            var data = fs.readFileSync('config/money.csv','utf8')
+                var row = (''+data).split("\n");
+                for (var i = row.length; i > -1; i--) {
+                        if (!row[i]) continue;
+                        var parts = row[i].split(",");
+                        var userid = toUserid(parts[0]);
+                        if (user.userid == userid) {
+                        var x = Number(parts[1]);
+                        var money = x;
+                        mMatch = true;
+                        if (mMatch === true) {
+                                break;
+                        }
+                        }
+                }
+                if (mMatch === true) {
+                        var p = 'Gold bucks';
+                        if (money < 2) p = 'Gold buck';
+                        total += user.name + ' has ' + money + ' ' + p + '.<br />';
+                }
+                if (mMatch === false) {
+                        total += 'You have no Gold bucks.<br />';
+                }
+                user.money = money;
+        } else {
+                var data = fs.readFileSync('config/money.csv','utf8')
+                target = this.splitTarget(target);
+                var targetUser = this.targetUser;
+                if (!targetUser) {
+                        return this.sendReply('User '+this.targetUsername+' not found.');
+                }
+                var money = 0;
+                var row = (''+data).split("\n");
+                for (var i = row.length; i > -1; i--) {
+                        if (!row[i]) continue;
+                        var parts = row[i].split(",");
+                        var userid = toUserid(parts[0]);
+                        if (targetUser.userid == userid || target == userid) {
+                        var x = Number(parts[1]);
+                        var money = x;
+                        mMatch = true;
+                        if (mMatch === true) {
+                                break;
+                        }
+                        }
+                }
+                if (mMatch === true) {
+                        var p = 'Gold bucks';
+                        if (money < 2) p = 'Gold buck';
+                        total +=  + money + ' ' + p + '.<br />';
+                } 
+                if (mMatch === false) {
+                        total += ' None.<br />';
+                }
+                targetUser.money = money;
+                                }
+            var profile = '';
+            profile += '<img src="'+avatar+'" height=80 width=80 align=left>';
+            profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
+            profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+userGroup+'<br />';
+            profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
+            this.sendReplyBox(profile);
+            }
+        },
 
 	mee: function(target, room, user, connection) {
 		// By default, /mee allows a blank message

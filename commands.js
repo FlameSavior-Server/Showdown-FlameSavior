@@ -1691,7 +1691,7 @@ var commands = exports.commands = {
 		}
                 return this.sendReplyBox(avatar+'' +
                 '<font size="2">'+targetUser.name+'</font><br />' +
-                '<font size="1"><b>Money</b>: '+total+'<br>' +
+                '<font size="1"><b>Money</b>: '+total+'' +
                 '<b>Rank</b>: '+group+'<br clear="all">');
         },
 	avatar: function(target, room, user) {

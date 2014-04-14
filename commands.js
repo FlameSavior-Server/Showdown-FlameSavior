@@ -1617,6 +1617,14 @@ var commands = exports.commands = {
                
                 
         },
+        profile: function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                if (target == '') target = user.userid;
+                target = target.toLowerCase();
+                target = target.trim();
+                var avatar = '<img src="http://50.62.73.114:8000/avatars/'+user.avatar+'" align="left">';
+                return this.sendReplyBox(avatar+'<center><font size="2">'+target+'<br />');
+        },
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');
 		var parts = target.split(',');

@@ -1617,12 +1617,13 @@ var commands = exports.commands = {
                
                 
         },
+        /*/
         profile: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 if (target == '') target = user.userid;
                 target = target.toLowerCase();
                 target = target.trim();
-                var avatar = '<img src="http://50.62.73.114:8000/avatars/'+user.avatar+'" align="left" height=80 width=80>';
+                //var avatar = '<img src="http://50.62.73.114:8000/avatars/'+user.avatar+'" align="left" height=80 width=80>';
                 
                var mMatch = false;
         var money = 0;
@@ -1703,6 +1704,7 @@ var commands = exports.commands = {
 	    }
 	    return 'Status: "' + user.status + '"';
 	},
+	*///
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');
 		var parts = target.split(',');

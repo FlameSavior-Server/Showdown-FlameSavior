@@ -1695,7 +1695,7 @@ var commands = exports.commands = {
                 '<font size="2">'+targetUser.name+'</font><br />' +
                 '<font size="1"><b>Money</b>: '+total+'' +
                 '<b>Rank</b>: '+group+'<br>' +
-                ''+away+'<br clear="all">'
+                ''+away+'<br clear="all">');
                 
         },
 	avatar: function(target, room, user) {

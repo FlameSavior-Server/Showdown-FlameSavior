@@ -325,7 +325,7 @@ var commands = exports.commands = {
                 }
                 avatar = getAvatar(userid);    
                         if (isNaN(avatar)) {
-                                avatar = 'http://50.62.73.114:8000/avatars/'+avatar+';
+                                avatar = 'http://50.62.73.114:8000/avatars/'+avatar+'';
                         } else {
                                 avatar = 'http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png';
                         }

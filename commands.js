@@ -1684,9 +1684,15 @@ var commands = exports.commands = {
                 }
                 targetUser.money = money;
                                 }
+                if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
+			var group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';
+		} else {
+			var group = 'Regular User';
+		}
                 return this.sendReplyBox(avatar+'' +
                 '<font size="2">'+targetUser.name+'</font><br />' +
-                '<font size="1"><b>Money</b>: '+total+'<br clear="all">');
+                '<font size="1"><b>Money</b>: '+total+'<br>' +
+                '<b>Rank</b>: '+group+'<br clear="all">');
         },
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');

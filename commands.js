@@ -414,8 +414,7 @@ var commands = exports.commands = {
          			profile =+ '&nbsp;<font color=#24678d><b>This user is: <font color="green">Online </font></font>';
 		} else {
 				profile =+ '&nbsp;<font color=#24678d><b>This user is: <font color="red">Offline </font></font>'
-                        }
-                        }
+                     
                         }
             this.sendReplyBox(profile);
         },

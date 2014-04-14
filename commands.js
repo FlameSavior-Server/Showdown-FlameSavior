@@ -1685,8 +1685,8 @@ var commands = exports.commands = {
                 targetUser.money = money;
                                 }
                 return this.sendReplyBox(avatar+'' +
-                '<font size="2">'+targetUser.name+'</font><br /><br>' +
-                'Money: '+total+'<br clear="all">');
+                '<font size="2">'+targetUser.name+'</font><br />' +
+                '<font size="1"><b>Money</b>: '+total+'<br clear="all">');
         },
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');

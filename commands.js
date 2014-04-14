@@ -416,6 +416,7 @@ var commands = exports.commands = {
 				profile =+ '&nbsp;<font color=#24678d><b>This user is: <font color="red">Offline </font></font>'
                         }
                         }
+                        }
             this.sendReplyBox(profile);
         },
 	mee: function(target, room, user, connection) {

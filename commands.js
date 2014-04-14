@@ -1689,12 +1689,11 @@ var commands = exports.commands = {
 		} else {
 			var group = 'Regular User';
 		}
-		
                 return this.sendReplyBox(avatar+'' +
                 '<font size="2">'+targetUser.name+'</font><br />' +
                 '<font size="1"><b>Money</b>: '+total+'' +
-                '<b>Rank</b>: '+group+'<br>' +
-                '<b>Status</b>: '+user.status+'<br clear="all">');
+                '<b>Rank</b>: '+group+'<br><br>' +
+                '<b>Global Server Status</b>: '+user.status+'<br clear="all">');
                 
         },
         status: function (user) {

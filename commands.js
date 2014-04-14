@@ -1703,10 +1703,15 @@ var commands = exports.commands = {
                 }
                 targetUser.money = money;
                                 }
+                if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
+                        var group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';
+                } else {
+                        var group = 'Regular User';
+                }
             var profile = '';
             profile += '<img src="'+avatar+'" height=80 width=80 align=left>';
             profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
-            profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+userGroup+'<br />';
+            profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br />';
             this.sendReplyBox(profile);
             },

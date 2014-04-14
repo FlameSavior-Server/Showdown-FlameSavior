@@ -754,13 +754,12 @@ var commands = exports.commands = {
                 }
 
                 if (isDemotion) {
-                        this.addRoomCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.',room.id);
+                        this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
                         if (targetUser) {
                                 targetUser.popup('You were appointed to Room ' + groupName + ' by ' + user.name + '.');
                         }
                 } else {
-                        if (groupName == "Owner") this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
-                        if (!groupName != "Owner") this.addRoomCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.',room.id);
+                        this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
                 }
                 if (targetUser) {
                         targetUser.updateIdentity();
@@ -778,7 +777,7 @@ var commands = exports.commands = {
 			return this.sendReply('/lockroom - Access denied.');
 		}
 		room.lockedRoom = true;
-		this.addRoomCommand(user.name + ' has locked the room.',room.id);
+		this.addModCommand(user.name + ' has locked the room.');
 	},
 	
 	unlockroom: function(target, room, user) {
@@ -789,7 +788,7 @@ var commands = exports.commands = {
 			return this.sendReply('/unlockroom - Access denied.');
 		}
 		room.lockedRoom = false;
-		this.addRoomCommand(user.name + ' has unlocked the room.',room.id);
+		this.addModCommand(user.name + ' has unlocked the room.');
 	},
 
 	autojoin: function(target, room, user, connection) {
@@ -863,7 +862,7 @@ var commands = exports.commands = {
 		targetUser.popup('You have been kicked from room '+ room.title +' by '+user.name+'.');
 		targetUser.leaveRoom(room);
 		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
-		this.logRoomCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.', room.id);
+		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
 	},
 
 	roomban: function(target, room, user, connection) {
@@ -894,7 +893,7 @@ var commands = exports.commands = {
 		this.addModCommand(""+targetUser.name+" was banned from room " + room.id + " by "+user.name+"." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
 		if (alts.length) {
-			this.addRoomCommand(""+targetUser.name+"'s alts were also banned from room " + room.id + ": "+alts.join(", "), room.id);
+			this.addModCommand(""+targetUser.name+"'s alts were also banned from room " + room.id + ": "+alts.join(", "));
 			for (var i = 0; i < alts.length; ++i) {
 				var altId = toId(alts[i]);
 				this.add('|unlink|' + altId);
@@ -921,10 +920,10 @@ var commands = exports.commands = {
 			if (room.bannedIps[ip]) delete room.bannedIps[ip];
 		}
 		targetUser.popup(user.name+" has unbanned you from the room " + room.id + ".");
-		this.addRoomCommand(""+targetUser.name+" was unbanned from room " + room.id + " by "+user.name+".", room.id);
+		this.addModCommand(""+targetUser.name+" was unbanned from room " + room.id + " by "+user.name+".");
 		var alts = targetUser.getAlts();
 		if (alts.length) {
-			this.addRoomCommand(""+targetUser.name+"'s alts were also unbanned from room " + room.id + ": "+alts.join(", "), room.id);
+			this.addModCommand(""+targetUser.name+"'s alts were also unbanned from room " + room.id + ": "+alts.join(", "));
 			for (var i = 0; i < alts.length; ++i) {
 				var altId = toId(alts[i]);
 				if (room.bannedUsers[altId]) delete room.bannedUsers[altId];
@@ -1221,14 +1220,8 @@ var commands = exports.commands = {
 		}
 		if (targetUser.joinRoom(target) === false) return this.sendReply('User "' + targetUser.name + '" could not be joined to room ' + target + '. They could be banned from the room.');
 		var roomName = (targetRoom.isPrivate)? 'a private room' : 'room ' + target;
-		if (!room.auth) {
-			this.addModCommand(targetUser.name + ' was redirected to ' + roomName + ' by ' + user.name + '.');
-			targetUser.leaveRoom(room);
-		}
-		if (room.auth) {
-			this.addRoomCommand(targetUser.name + ' was redirected to ' + roomName + ' by ' + user.name + '.', room.id);
-			targetUser.leaveRoom(room);
-		}
+		this.addModCommand(targetUser.name + ' was redirected to ' + roomName + ' by ' + user.name + '.');
+		targetUser.leaveRoom(room);
 	},
 
 	m: 'mute',
@@ -1247,37 +1240,22 @@ var commands = exports.commands = {
 			if (!target && !room.auth) {
 				return this.privateModCommand('('+targetUser.name+' would be muted by '+user.name+problem+'.)');
 			}
-			if (room.auth) {
-				return this.addRoomCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""), room.id);
-			}
-			if (!room.auth) {
-				return this.addModCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""));
-			}
+			return this.addModCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""));
 		}
-		if (!room.auth) {
-			targetUser.punished = true;
-			targetUser.punishTimer = setTimeout(function(){
-				targetUser.punished = false;
-			},7000);
-			targetUser.popup(user.name+' has muted you for 7 minutes. '+target);
-			this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 7 minutes.' + (target ? " (" + target + ")" : ""));
-			var alts = targetUser.getAlts();
-			if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
-			targetUser.mute(room.id, 7*60*1000);
-			this.add('|unlink|' + targetUser.userid);
-			try {
-				frostcommands.addMuteCount(user.userid);
-			} catch (e) {
-				return;
-			}
-		}
-		if (room.auth) {
-			targetUser.popup(user.name+' has muted you for 7 minutes in ' + room.id + '. '+target);
-			this.addRoomCommand(''+targetUser.name+' was muted by '+user.name+' for 7 minutes.' + (target ? " (" + target + ")" : ""), room.id);
-			var alts = targetUser.getAlts();
-			if (alts.length) this.addRoomCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "), room.id);
-			targetUser.mute(room.id, 7*60*1000);
-			this.add('|unlink|' + targetUser.userid);
+		targetUser.punished = true;
+		targetUser.punishTimer = setTimeout(function(){
+			targetUser.punished = false;
+		},7000);
+		targetUser.popup(user.name+' has muted you for 7 minutes. '+target);
+		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 7 minutes.' + (target ? " (" + target + ")" : ""));
+		var alts = targetUser.getAlts();
+		if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
+		targetUser.mute(room.id, 7*60*1000);
+		this.add('|unlink|' + targetUser.userid);
+		try {
+			frostcommands.addMuteCount(user.userid);
+		} catch (e) {
+			return;
 		}
 	},
 
@@ -1299,37 +1277,22 @@ var commands = exports.commands = {
 			if (!target && !room.auth) {
 				return this.privateModCommand('('+targetUser.name+' would be muted by '+user.name+problem+'.)');
 			}
-			if (room.auth) {
-				return this.addRoomCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""), room.id);
-			}
-			if (!room.auth) {
-				return this.addModCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""));
-			}
+			return this.addModCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""));
 		}
-		if (!room.auth) {
-			targetUser.punished = true;
-			targetUser.punishTimer = setTimeout(function(){
-				targetUser.punished = false;
-			},7000);
-			targetUser.popup(user.name+' has muted you for 60 minutes. '+target);
-			this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 60 minutes.' + (target ? " (" + target + ")" : ""));
-			var alts = targetUser.getAlts();
-			if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
-			targetUser.mute(room.id, 60*60*1000);
-			this.add('|unlink|' + targetUser.userid);
-			try {
-				frostcommands.addMuteCount(user.userid);
-			} catch (e) {
-				return;
-			}
-		}
-		if (room.auth) {
-			targetUser.popup(user.name+' has muted you for 60 minutes in ' + room.id + '. '+target);
-			this.addRoomCommand(''+targetUser.name+' was muted by '+user.name+' for 60 minutes.' + (target ? " (" + target + ")" : ""), room.id);
-			var alts = targetUser.getAlts();
-			if (alts.length) this.addRoomCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "), room.id);
-			targetUser.mute(room.id, 60*60*1000);
-			this.add('|unlink|' + targetUser.userid);
+		targetUser.punished = true;
+		targetUser.punishTimer = setTimeout(function(){
+			targetUser.punished = false;
+		},7000);
+		targetUser.popup(user.name+' has muted you for 60 minutes. '+target);
+		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 60 minutes.' + (target ? " (" + target + ")" : ""));
+		var alts = targetUser.getAlts();
+		if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
+		targetUser.mute(room.id, 60*60*1000);
+		this.add('|unlink|' + targetUser.userid);
+		try {
+			frostcommands.addMuteCount(user.userid);
+		} catch (e) {
+			return;
 		}
 	},
 
@@ -1352,37 +1315,22 @@ var commands = exports.commands = {
 			if (!target && !room.auth) {
 				return this.privateModCommand('('+targetUser.name+' would be muted by '+user.name+problem+'.)');
 			}
-			if (room.auth) {
-				return this.addRoomCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""), room.id);
-			}
-			if (!room.auth) {
-				return this.addModCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""));
-			}
+			return this.addModCommand(''+targetUser.name+' would be muted by '+user.name+problem+'.' + (target ? " (" + target + ")" : ""));
 		}
-		if (!room.auth) {
-			targetUser.punished = true;
-			targetUser.punishTimer = setTimeout(function(){
-				targetUser.punished = false;
-			},7000);
-			targetUser.popup(user.name+' has muted you for 24 hours. '+target);
-			this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 24 hours.' + (target ? " (" + target + ")" : ""));
-			var alts = targetUser.getAlts();
-			if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
-			targetUser.mute(room.id, 7*60*1000);
-			this.add('|unlink|' + targetUser.userid);
-			try {
-				frostcommands.addMuteCount(user.userid);
-			} catch (e) {
-				return;
-			}
-		}
-		if (room.auth) {
-			targetUser.popup(user.name+' has muted you for 24 hours in ' + room.id + '. '+target);
-			this.addRoomCommand(''+targetUser.name+' was muted by '+user.name+' for 24 hours.' + (target ? " (" + target + ")" : ""), room.id);
-			var alts = targetUser.getAlts();
-			if (alts.length) this.addRoomCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "), room.id);
-			targetUser.mute(room.id, 24*60*60*1000);
-			this.add('|unlink|' + targetUser.userid);
+		targetUser.punished = true;
+		targetUser.punishTimer = setTimeout(function(){
+			targetUser.punished = false;
+		},7000);
+		targetUser.popup(user.name+' has muted you for 24 hours. '+target);
+		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 24 hours.' + (target ? " (" + target + ")" : ""));
+		var alts = targetUser.getAlts();
+		if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
+		targetUser.mute(room.id, 7*60*1000);
+		this.add('|unlink|' + targetUser.userid);
+		try {
+			frostcommands.addMuteCount(user.userid);
+		} catch (e) {
+			return;
 		}
 	},
 
@@ -1397,14 +1345,8 @@ var commands = exports.commands = {
 		if (!targetUser.mutedRooms[room.id]) {
 			return this.sendReply(''+targetUser.name+' isn\'t muted.');
 		}
-		if (!room.auth) {
-			this.addModCommand(''+targetUser.name+' was unmuted by '+user.name+'.');
-			targetUser.unmute(room.id);
-		}
-		if (room.auth) {
-			this.addRoomCommand(''+targetUser.name+' was unmuted by '+user.name+'.', room.id);
-			targetUser.unmute(room.id);
-		}
+		this.addModCommand(''+targetUser.name+' was unmuted by '+user.name+'.');
+		targetUser.unmute(room.id);
 	},
 
 	l: 'lock',
@@ -1828,12 +1770,7 @@ var commands = exports.commands = {
 		else if (cmd === 'declaregreen') {
 			this.add('|raw|<div class="broadcast-green"><b>'+target+'</b></div>');
 		}
-		if (!room.auth) {
-			this.logModCommand(user.name+' declared '+target);
-		}
-		if (room.auth) {
-			this.logRoomCommand(user.name+' declared '+target, room.id);
-		}
+		this.logModCommand(user.name+' declared '+target);
 	},
 
 	gdeclarered: 'gdeclare',
@@ -2085,43 +2022,6 @@ var commands = exports.commands = {
 					connection.popup('No moderator actions containing "'+target+'" were found on ' + roomNames + '.');
 				} else {
 					connection.popup('Displaying the last '+grepLimit+' logged actions containing "'+target+'" on ' + roomNames + ':\n\n'+stdout);
-				}
-			}
-		});
-	},
-
-	roomlog: function(target, room, user, connection) {
-		if (!this.can('mute', null, room)) return false;
-		var lines = 0;
-		if (!target.match('[^0-9]')) {
-			lines = parseInt(target || 15, 10);
-			if (lines > 100) lines = 100;
-		}
-		var filename = 'logs/chat/'+room.id+'/'+room.id+'.txt';
-		var command = 'tail -'+lines+' '+filename;
-		var grepLimit = 100;
-		if (!lines || lines < 0) { // searching for a word instead
-			if (target.match(/^["'].+["']$/)) target = target.substring(1,target.length-1);
-			command = "awk '{print NR,$0}' "+filename+" | sort -nr | cut -d' ' -f2- | grep -m"+grepLimit+" -i '"+target.replace(/\\/g,'\\\\\\\\').replace(/["'`]/g,'\'\\$&\'').replace(/[\{\}\[\]\(\)\$\^\.\?\+\-\*]/g,'[$&]')+"'";
-		}
-
-		require('child_process').exec(command, function(error, stdout, stderr) {
-			if (error && stderr) {
-				connection.popup('/roomlog erred - roomlog does not support Windows');
-				console.log('/roomlog error: '+error);
-				return false;
-			}
-			if (lines) {
-				if (!stdout) {
-					connection.popup('The roomlog is empty. (Weird.)');
-				} else {
-					connection.popup('Displaying the last '+lines+' lines of the Moderator Log in '+room.id+':\n\n'+stdout);
-				}
-			} else {
-				if (!stdout) {
-					connection.popup('No moderator actions containing "'+target+'" were found in '+roomid+'.');
-				} else {
-					connection.popup('Displaying the last '+grepLimit+' logged actions in '+room.id+'containing "'+target+'":\n\n'+stdout);
 				}
 			}
 		});

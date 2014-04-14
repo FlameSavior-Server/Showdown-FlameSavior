@@ -146,10 +146,6 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 				this.add(text);
 				this.logModCommand(text+(logOnlyText||''));
 			},
-			addRoomCommand: function(result, room) {
-				this.add(result);
-				this.logRoomCommand(result, room);
-			},
 			logModCommand: function(result) {
 				if (!modlog[room.id]) {
 					if (room.battle) {
@@ -159,12 +155,6 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 					}
 				}
 				modlog[room.id].write('['+(new Date().toJSON())+'] ('+room.id+') '+result+'\n');
-			},
-			logRoomCommand: function(result, room) {
-				roomtolog = room
-				var roomlog = exports.roomlog = roomlog || fs.createWriteStream('logs/chat/'+roomtolog+'/'+roomtolog+'.txt', {flags:'a+'});
-				roomlog.write('['+(new Date().toJSON())+'] '+result+'\n');
-				roomlog.close();
 			},
 			logComplaint: function(result) {
 				complaint.write('('+room.id+') '+ user.name + ': ' +result+'\n');

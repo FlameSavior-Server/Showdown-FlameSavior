@@ -325,7 +325,7 @@ var commands = exports.commands = {
                 }
                 avatar = getAvatar(userid);    
                         if (isNaN(avatar)) {
-                                avatar = 'http://50.62.73.114:8000/avatars/'+avatar;
+                                avatar = 'http://50.62.73.114:8000/avatars/'+avatar+';
                         } else {
                                 avatar = 'http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png';
                         }
@@ -396,8 +396,7 @@ var commands = exports.commands = {
                 targetUser.money = money;
                                 }
             var profile = '';
-            profile += '<img src="http://play.pokemonshowdown.com/sprites/trainers/' + user.avatar + '.png' + '" align="left" height="80">';
-            Profile += '<img src="http://50.62.73.114:8000/avatars/' + user.avatar + '" align="left" height="80"><br/>';
+            profile += '<img src="'+avatar+'" height=80 width=80 align=left>';
             profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+userGroup+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';

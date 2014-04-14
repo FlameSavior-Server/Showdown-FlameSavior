@@ -408,7 +408,7 @@ var commands = exports.commands = {
             			profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
 			
                         }
-            }
+            
             this.sendReplyBox(profile);
         },
 	mee: function(target, room, user, connection) {

@@ -308,7 +308,8 @@ var commands = exports.commands = {
 		} else {
 			return message;
 		}
-	},
+	 },
+	 profile: 'profile3',
 	 profile3: function(target, room, user) {
             if (!target) target = user.name;
             if (toUserid(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
@@ -317,12 +318,6 @@ var commands = exports.commands = {
             if (!targetUser) {
                 username = target;
                 userid = toUserid(target);
-                if (Users.usergroups[userid]) {
-                                var userGroup = Users.usergroups[userid].substr(0,1);
-                                userGroup = config.groups[userGroup].name
-                        } else {
-                                var userGroup = 'Regular User';
-                }
                 avatar = getAvatar(userid);    
                         if (isNaN(avatar)) {
                                 avatar = 'http://50.62.73.114:8000/avatars/'+avatar+'';
@@ -406,16 +401,23 @@ var commands = exports.commands = {
             profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
+            if (!targetUser.connected) {
+            profile =+ '&nbsp;<font color=#24678d><b>This user is: <font color="green">Online </font></font>';
+		} else {
+		profile =+ '&nbsp;<font color=#24678d><b>This user is: <font color="red">Offline </font></font>'
                         } else {
                                 profile += '<img src="http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png"  height=80 width=80 align=left>';
         	 		profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
             			profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
             			profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
+				if (!targetUser.connected) {
+         			profile =+ '&nbsp;<font color=#24678d><b>This user is: <font color="green">Online </font></font>';
+		} else {
+				profile =+ '&nbsp;<font color=#24678d><b>This user is: <font color="red">Offline </font></font>'
                         }
-           
+                        }
             this.sendReplyBox(profile);
         },
-
 	mee: function(target, room, user, connection) {
 		// By default, /mee allows a blank message
 		if (target) target = this.canTalk(target);

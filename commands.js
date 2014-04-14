@@ -1691,6 +1691,7 @@ var commands = exports.commands = {
 		}
 		if (!targetUser.connected || targetUser.isAway) {
 			var away = 'This user is ' + (!targetUser.connected) ? '<font color = "red">offline</font>.' : '<font color = "orange">away</font>.';
+		}
                 return this.sendReplyBox(avatar+'' +
                 '<font size="2">'+targetUser.name+'</font><br />' +
                 '<font size="1"><b>Money</b>: '+total+'' +

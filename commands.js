@@ -1693,9 +1693,17 @@ var commands = exports.commands = {
                 return this.sendReplyBox(avatar+'' +
                 '<font size="2">'+targetUser.name+'</font><br />' +
                 '<font size="1"><b>Money</b>: '+total+'' +
-                '<b>Rank</b>: '+group+'<br clear="all">');
+                '<b>Rank</b>: '+group+'<br>' +
+                '<b>Status</b>: '+user.status+'<br clear="all">');
                 
         },
+        status: function (user) {
+	    io.stdinString('config/status.csv', user, 'status');
+	    if (user.status === '') {
+	        user.status = 'This user hasn\'t set their status yet.';
+	    }
+	    return 'Status: "' + user.status + '"';
+	},
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');
 		var parts = target.split(',');

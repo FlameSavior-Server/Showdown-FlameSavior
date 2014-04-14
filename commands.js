@@ -1677,10 +1677,10 @@ var commands = exports.commands = {
                 if (mMatch === true) {
                         var p = 'Gold bucks';
                         if (money < 2) p = 'Gold buck';
-                        total += targetUser.name + ' has ' + money + ' ' + p + '.<br />';
+                        total +=  + money + ' ' + p + '.<br />';
                 } 
                 if (mMatch === false) {
-                        total += targetUser.name + ' has no Gold bucks.<br />';
+                        total += ' has no Gold bucks.<br />';
                 }
                 targetUser.money = money;
                                 }

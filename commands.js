@@ -1622,8 +1622,63 @@ var commands = exports.commands = {
                 if (target == '') target = user.userid;
                 target = target.toLowerCase();
                 target = target.trim();
-                var avatar = '<img src="http://50.62.73.114:8000/avatars/'+user.avatar+'" align="left">';
-                return this.sendReplyBox(avatar+'<center><font size="2">'+target+'<br />');
+                var avatar = '<img src="http://50.62.73.114:8000/avatars/'+user.avatar+'" align="left" height=80 width=80>';
+                 var row = (''+data).split("\n");
+                for (var i = row.length; i > -1; i--) {
+                        if (!row[i]) continue;
+                        var parts = row[i].split(",");
+                        var userid = toUserid(parts[0]);
+                        if (user.userid == userid) {
+                        var x = Number(parts[1]);
+                        var money = x;
+                        mMatch = true;
+                        if (mMatch === true) {
+                                break;
+                        }
+                        }
+                }
+                if (mMatch === true) {
+                        var p = 'Gold bucks';
+                        if (money < 2) p = 'Gold buck';
+                        total += user.name + ' has ' + money + ' ' + p + '.<br />';
+                }
+                if (mMatch === false) {
+                        total += 'None';
+                }
+                user.money = money;
+        } else {
+                var data = fs.readFileSync('config/money.csv','utf8')
+                target = this.splitTarget(target);
+                var targetUser = this.targetUser;
+                if (!targetUser) {
+                        return this.sendReply('User '+this.targetUsername+' not found.');
+                }
+                var money = 0;
+                var row = (''+data).split("\n");
+                for (var i = row.length; i > -1; i--) {
+                        if (!row[i]) continue;
+                        var parts = row[i].split(",");
+                        var userid = toUserid(parts[0]);
+                        if (targetUser.userid == userid || target == userid) {
+                        var x = Number(parts[1]);
+                        var money = x;
+                        mMatch = true;
+                        if (mMatch === true) {
+                                break;
+                        }
+                        }
+                }
+                if (mMatch === true) {
+                        var p = 'Gold bucks';
+                        if (money < 2) p = 'Gold buck';
+                        total += targetUser.name + ' has ' + money + ' ' + p + '.<br />';
+                } 
+                if (mMatch === false) {
+                        total += targetUser.name + ' has no Gold bucks.<br />';
+                }
+                targetUser.money = money;
+                return this.sendReplyBox(avatar+'<font size="2">'+target+'<br />' +
+                'Money: '+total+'<br clear="all">');
         },
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');

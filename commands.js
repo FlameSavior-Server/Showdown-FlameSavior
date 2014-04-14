@@ -1690,12 +1690,13 @@ var commands = exports.commands = {
 			var group = 'Regular User';
 		}
 		if (!targetUser.connected || targetUser.isAway) {
-			
+			var away = 'This user is ' + ((!targetUser.connected) ? '<font color = "red">offline</font>.' : '<font color = "orange">away</font>.'));');
                 return this.sendReplyBox(avatar+'' +
                 '<font size="2">'+targetUser.name+'</font><br />' +
                 '<font size="1"><b>Money</b>: '+total+'' +
-                '<b>Rank</b>: '+group+'<br clear="all">'
-                'This user is ' + ((!targetUser.connected) ? '<font color = "red">offline</font>.' : '<font color = "orange">away</font>.'));');
+                '<b>Rank</b>: '+group+'<br>' +
+                ''+away+'<br clear="all">'
+                
         },
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');

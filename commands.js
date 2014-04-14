@@ -1631,37 +1631,78 @@ var commands = exports.commands = {
                         } else {
                                 var userGroup = 'Regular User';
                 }
-		avatar = getAvatar(userid);    
+                avatar = getAvatar(userid);    
                         if (isNaN(avatar)) {
-                                avatar = '50.62.73.114:8000/avatars/'+avatar;
+                                avatar = 'http://woof.imjd.info:8000/avatars/'+avatar;
                         } else {
                                 avatar = 'http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png';
-                        }            
-                } else {
+                        }
+            } else {
                 username = targetUser.name;
                 userid = targetUser.userid;
                 userGroup = config.groups[targetUser.group].name
                 avatar = targetUser.avatar;
-        	}
-           	var money;
-        	fs.readFile(location,'utf8',function(err, data) {
-                if (err) console.log(err);
-                var match = false;
-                var row = (''+data).split('\n');
-                var line;
+            }
+              var mMatch = false;
+        var money = 0;
+        var total = '';
+        if (!target) {
+        var data = fs.readFileSync('config/money.csv','utf8')
+                var row = (''+data).split("\n");
                 for (var i = row.length; i > -1; i--) {
-                    if (!row[i]) continue;
-                    var column = row[i].split(',');
-                    if (column[0] === targetUser.userid) {
-                            match = true;
-                            var line = column[1];
+                        if (!row[i]) continue;
+                        var parts = row[i].split(",");
+                        var userid = toUserid(parts[0]);
+                        if (user.userid == userid) {
+                        var x = Number(parts[1]);
+                        var money = x;
+                        mMatch = true;
+                        if (mMatch === true) {
+                                break;
                         }
-                    }
-                if (match === false) {   
-                    var money = 0;
+                        }
                 }
-            });
-       
+                if (mMatch === true) {
+                        var p = 'Gold bucks';
+                        if (money < 2) p = 'Gold buck';
+                        total += user.name + ' has ' + money + ' ' + p + '.<br />';
+                }
+                if (mMatch === false) {
+                        total += 'You have no Gold bucks.<br />';
+                }
+                user.money = money;
+        } else {
+                var data = fs.readFileSync('config/money.csv','utf8')
+                target = this.splitTarget(target);
+                var targetUser = this.targetUser;
+                if (!targetUser) {
+                        return this.sendReply('User '+this.targetUsername+' not found.');
+                }
+                var money = 0;
+                var row = (''+data).split("\n");
+                for (var i = row.length; i > -1; i--) {
+                        if (!row[i]) continue;
+                        var parts = row[i].split(",");
+                        var userid = toUserid(parts[0]);
+                        if (targetUser.userid == userid || target == userid) {
+                        var x = Number(parts[1]);
+                        var money = x;
+                        mMatch = true;
+                        if (mMatch === true) {
+                                break;
+                        }
+                        }
+                }
+                if (mMatch === true) {
+                        var p = 'Gold bucks';
+                        if (money < 2) p = 'Gold buck';
+                        total +=  + money + ' ' + p + '.<br />';
+                } 
+                if (mMatch === false) {
+                        total += ' None.<br />';
+                }
+                targetUser.money = money;
+                                }
                 if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
                         var group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';
                 } else {
@@ -1671,7 +1712,7 @@ var commands = exports.commands = {
             profile += '<img src="'+avatar+'" height=80 width=80 align=left>';
             profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
-            profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
+            profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br />';
             this.sendReplyBox(profile);
             },
 

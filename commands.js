@@ -1617,7 +1617,8 @@ var commands = exports.commands = {
                
                 
         },
-        profile: function(target, room, user) {
+        /*/
+         profile: function(target, room, user) {
             if (!target) target = user.name;
             if (toUserid(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
             if (!this.canBroadcast()) return;
@@ -1715,7 +1716,7 @@ var commands = exports.commands = {
             profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br />';
             this.sendReplyBox(profile);
             },
-
+/*/
         
         /*/
         profile: function(target, room, user) {

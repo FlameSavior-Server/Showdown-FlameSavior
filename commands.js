@@ -402,7 +402,7 @@ var commands = exports.commands = {
                 }                
             var profile = '';
             profile += '<img src="http://50.62.73.114:8000/avatars/'+avatar+'" height=80 width=80 align=left>';
-            profile += '<img src="http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png"';
+            profile += '<img src="http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png"  height=80 width=80 align=left>';
             profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';

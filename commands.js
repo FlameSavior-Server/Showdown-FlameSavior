@@ -313,6 +313,7 @@ var commands = exports.commands = {
 	/*/
 	 profile45: function(target, room, user, connection) {
 	 if (!this.canBroadcast()) return;
+	    if (!targetUser) return this.sendReply('User not found.');	
             if (!target) target = user.name;
             if (toUserid(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
             targetUser = Users.get(target);
@@ -409,10 +410,7 @@ var commands = exports.commands = {
             			profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br clear="all">';
 			
                         }
-                        if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-            
+                        
             this.sendReplyBox(profile);
         },
 	mee: function(target, room, user, connection) {

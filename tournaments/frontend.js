@@ -765,13 +765,20 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 
 	if (cmd === '') {
 		if (!this.canBroadcast()) return;
-		this.sendReply('|tournaments|info|' + JSON.stringify(Object.keys(exports.tournaments).filter(function (tournament) {
+		var tourList = [];
+		for (var u in Tournaments.tournaments) {
+			if (!Tournaments.tournaments[u].isTournamentStarted && !Tournaments.tournaments[u].room.isPrivate) {
+				tourList.push('<a class="ilink" href="/'+Tournaments.tournaments[u].room.id+'">'+Tournaments.tournaments[u].room.title+'</a>: '+Tools.data.Formats[Tournaments.tournaments[u].format].name+' '+Tournaments.tournaments[u].generator.name);
+			}
+		}
+		this.sendReplyBox('<b><font color=#24678d>Tournaments in their signup phase: </font></b><br />'+tourList.join('<br />'));
+		/*this.sendReply('|tournaments|info|' + JSON.stringify(Object.keys(exports.tournaments).filter(function (tournament) {
 			tournament = exports.tournaments[tournament];
 			return !tournament.room.isPrivate && !tournament.room.staffRoom;
 		}).map(function (tournament) {
 			tournament = exports.tournaments[tournament];
 			return {room: tournament.room.title, format: tournament.format, generator: tournament.generator.name, isStarted: tournament.isTournamentStarted};
-		})));
+		})));*/
 	} else if (cmd === 'help') {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox(

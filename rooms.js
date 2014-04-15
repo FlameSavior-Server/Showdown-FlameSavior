@@ -408,11 +408,11 @@ var GlobalRoom = (function() {
 			for (var i=0; i<this.staffAutojoin.length; i++) {
 				user.joinRoom(this.staffAutojoin[i], connection);
 			}
-		}
+		}/*
 		if (user.vip) {
 			//user.joinRoom('vip', connection);
 			user.send('|pm|~Server|'+user.group+user.name+'|/invite VIP');
-		}
+		}*/
 	};
 	GlobalRoom.prototype.onJoinConnection = function(user, connection) {
 		var initdata = '|updateuser|'+user.name+'|'+(user.named?'1':'0')+'|'+user.avatar+'\n';

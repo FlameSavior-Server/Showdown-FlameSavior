@@ -953,7 +953,7 @@ var commands = exports.commands = {
 	
 		if (!this.canBroadcast()) return;
 		if(room.id === 'lobby') {
-		return this.sendReplyBox('<center>Click <button name="send" value="/shop146" class="blackbutton" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
+		return this.sendReplyBox('<center>Click <button name="send" value="/shop164" class="blackbutton" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
 		} else 
 		return this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
@@ -970,7 +970,7 @@ var commands = exports.commands = {
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
 	},
-	shop146: function(target, room, user) {
+	shop164: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +

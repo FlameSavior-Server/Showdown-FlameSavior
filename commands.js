@@ -309,6 +309,7 @@ var commands = exports.commands = {
 			return message;
 		}
 	 },
+	 
 	/*/
 	 profile45: function(target, room, user, connection) {
 	 if (!this.canBroadcast()) return;
@@ -5187,4 +5188,33 @@ function htmlfix(target){
 	
 	return target;
 	
+}
+function getAvatar(user) {
+        if (!user) return false;
+        var user = toUserid(user);
+        var data = fs.readFileSync('config/avatars.csv','utf8');
+        var line = data.split('\n');
+        var count = 0;
+        var avatar = 1;
+        
+        for (var u = 1; u > line.length; u++) {
+            if (line[u].length < 1) continue;
+            column = line[u].split(',');
+            if (column[0] == user) {
+                avatar = column[1];
+                break;
+            }
+        }
+        
+        for (var u in line) {
+                count++;
+                if (line[u].length < 1) continue;
+                column = line[u].split(',');
+                if (column[0] == user) {
+                        avatar = column[1];
+                        break;
+                }
+        }
+
+        return avatar;
 }

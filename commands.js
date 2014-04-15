@@ -309,7 +309,7 @@ var commands = exports.commands = {
 			return message;
 		}
 	 },
-	
+	/*/
 	 profile45: function(target, room, user, connection) {
 	 if (!this.canBroadcast()) return;
             if (!target) target = user.name;
@@ -439,6 +439,7 @@ var commands = exports.commands = {
 			return message;
 		}
 	},
+	/*///
 	setmotd: 'motd',
 	motd: function (target, room, user) {
 		if (!this.can('pban')) return false;

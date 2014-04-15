@@ -400,13 +400,13 @@ var commands = exports.commands = {
             profile += '<img src="http://50.62.73.114:8000/avatars/'+avatar+'" height=80 width=80 align=left>';
             profile += '<img src="http://i.imgur.com/RK6UUIw.png" width="40%"><br />';
             profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
-            profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
+            profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+userGroup+'<br />';
             profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br><br clear="all">';
 		} else {
                                 profile += '<img src="http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png"  height=80 width=80 align=left>';
         	 		profile += '<img src="http://i.imgur.com/RK6UUIw.png" width="40%"><br />';
         	 		profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
-            			profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
+            			profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+userGroup+'<br />';
             			profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br><br clear="all">';
 			
                         }

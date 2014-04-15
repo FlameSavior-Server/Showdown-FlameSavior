@@ -310,7 +310,7 @@ var commands = exports.commands = {
 		}
 	 },
 	 profile: 'profile3',
-	 profile3: function(target, room, user) {
+	 profile3: function(target, room, user, connection) {
             if (!target) target = user.name;
             if (toUserid(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
             if (!this.canBroadcast()) return;

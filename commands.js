@@ -313,10 +313,10 @@ var commands = exports.commands = {
 
 	 profile45: function(target, room, user, connection) {
 	 if (!this.canBroadcast()) return;
-	    if (!targetUser) return this.sendReply('User not found.');	
             if (!target) target = user.name;
             if (toUserid(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
             targetUser = Users.get(target);
+            if (!targetUser) return this.sendReply('User not found.');	
             if (!targetUser) {
                 username = target;
                 userid = toUserid(target);

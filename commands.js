@@ -309,7 +309,7 @@ var commands = exports.commands = {
 			return message;
 		}
 	 },
-	 
+	 /*/
 	 profile: 'profile45',
 	 profile45: function(target, room, user, connection) {
 	 if (!this.canBroadcast()) return;
@@ -413,6 +413,7 @@ var commands = exports.commands = {
                         
             this.sendReplyBox(profile);
         },
+        /*///
 	mee: function(target, room, user, connection) {
 		// By default, /mee allows a blank message
 		if (target) target = this.canTalk(target);

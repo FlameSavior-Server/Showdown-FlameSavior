@@ -371,7 +371,7 @@ var commands = exports.commands = {
                         if (!row[i]) continue;
                         var parts = row[i].split(",");
                         var userid = toUserid(parts[0]);
-                        if (targetUser.userid == userid || target == userid) {
+                        if (targetUser.userid == userid) {
                         var x = Number(parts[1]);
                         var money = x;
                         mMatch = true;

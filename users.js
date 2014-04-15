@@ -344,8 +344,20 @@ function removeBannedWord(word) {
 }
 importBannedWords();
 
-
-
+exports.customAvatars = [];
+function loadCustomAvatars() {
+	fs.readFile('config/avatars.csv', 'utf8', function(err, data) {
+		if (err) return;
+		var line = data.split('\n');
+		var count = 0;
+		for (var u in line) {
+			count++;
+			if (line[u].length < 1) continue;
+			Users.customAvatars.push(line[u]);
+		}
+	});
+}
+loadCustomAvatars();
 
 // User
 var User = (function () {
@@ -851,25 +863,19 @@ var User = (function () {
 			//   3: Pokemon Showdown development staff
 			if (body !== '1') {
 				authenticated = true;
-				self = this;
-				function setAvatar(data) {
-					var line = data.split('\n');
-					for (var u in line) {
-						var row = line[u].split(',');
-						if (row[0] == userid) {
-							self.avatar = row[1];
-							break;
-						}
-					}
-				}				
 
-				avatar = fs.readFile('config/avatars.csv', 'utf8', function read(err, data) {
-					if (err) {
-						console.log('Error reading avatars.csv: '+err);
-					} else {
-						setAvatar(data);
+				if (config.customavatars && config.customavatars[userid]) {
+					avatar = config.customavatars[userid];
+				}
+
+				for (var u in Users.customAvatars) {
+					var column = Users.customAvatars[u].split(',');
+					if (column[0] != userid || !column[1]) continue;
+					if (column[0] == userid) {
+						avatar = column[1];
+						break;
 					}
-				});
+				}
 
 				now = new Date();
 				day = now.getUTCDate();

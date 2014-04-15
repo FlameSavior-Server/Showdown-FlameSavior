@@ -1548,8 +1548,7 @@ exports.BattleMovedex = {
 		type: "Normal"
 	},
 	"celebrate": {
-		num: -6,
-		gen: 6,
+		num: 606,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -2485,8 +2484,7 @@ exports.BattleMovedex = {
 		type: "Fighting"
 	},
 	"diamondstorm": {
-		num: -1,
-		gen: 6,
+		num: 591,
 		accuracy: 95,
 		basePower: 100,
 		category: "Physical",
@@ -4763,7 +4761,7 @@ exports.BattleMovedex = {
 			if (!pokemon.volatiles.furycutter) {
 				pokemon.addVolatile('furycutter');
 			}
-			return 20 * pokemon.volatiles.furycutter.multiplier;
+			return 40 * pokemon.volatiles.furycutter.multiplier;
 		},
 		category: "Physical",
 		desc: "Deals damage to one adjacent target. Power doubles with each successful hit, up to a maximum of 160 power; resets to 20 power if the move misses or another move is used. Makes contact.",
@@ -4782,7 +4780,7 @@ exports.BattleMovedex = {
 				this.effectData.multiplier = 1;
 			},
 			onRestart: function() {
-				if (this.effectData.multiplier < 8) {
+				if (this.effectData.multiplier < 4) {
 					this.effectData.multiplier <<= 1;
 				}
 				this.effectData.duration = 2;
@@ -6268,7 +6266,7 @@ exports.BattleMovedex = {
 		type: "Fighting"
 	},
 	"holdback": {
-		gen: 6,
+		num: 610,
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
@@ -6470,6 +6468,23 @@ exports.BattleMovedex = {
 		},
 		target: "normal",
 		type: "Normal"
+	},
+	"hyperspacehole": {
+		num: 593,
+		accuracy: true,
+		basePower: 80,
+		category: "Special",
+		desc: "Deals damage to one adjacent target and breaks through Protect and Detect for this turn, allowing other Pokemon to attack the target normally. Makes contact.",
+		shortDesc: "Deals damage to one adjacent target. Breaks protection.",
+		id: "hyperspacehole",
+		name: "Hyperspace Hole",
+		pp: 5,
+		priority: 0,
+		isContact: true,
+		breaksProtect: true,
+		secondary: false,
+		target: "normal",
+		type: "Psychic"
 	},
 	"hypervoice": {
 		num: 304,
@@ -7325,8 +7340,7 @@ exports.BattleMovedex = {
 		type: "Ghost"
 	},
 	"lightofruin": {
-		num: -6,
-		gen: 6,
+		num: 617,
 		accuracy: 90,
 		basePower: 140,
 		category: "Special",
@@ -12613,6 +12627,25 @@ exports.BattleMovedex = {
 		target: "foeSide",
 		type: "Rock"
 	},
+	"steameruption": {
+		num: 592,
+		accuracy: 95,
+		basePower: 110,
+		category: "Special",
+		desc: "Deals damage to one adjacent target with a 30% chance to burn it.",
+		shortDesc: "30% chance to burn the target.",
+		id: "steameruption",
+		isViable: true,
+		name: "Steam Eruption",
+		pp: 5,
+		priority: 0,
+		secondary: {
+			chance: 30,
+			status: 'brn'
+		},
+		target: "normal",
+		type: "Water"
+	},
 	"steelwing": {
 		num: 211,
 		accuracy: 90,
@@ -13592,6 +13625,40 @@ exports.BattleMovedex = {
 		secondary: false,
 		target: "normal",
 		type: "Dark"
+	},
+	"thousandarrows": {
+		num: 614,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		desc: "Deals damage to one adjacent target. This move can hit a target using Bounce, Fly, or Sky Drop. If this move hits a target under the effect of Bounce, Fly, Magnet Rise, or Telekinesis, the effect ends. If the target is a Flying-type that has not used Roost this turn or a Pokemon with the Ability Levitate, it loses its immunity to Ground-type attacks and the Ability Arena Trap as long as it remains active. During the effect, Magnet Rise fails for the target and Telekinesis fails against the target.",
+		shortDesc: "Removes the target's Ground immunity.",
+		id: "thousandarrows",
+		name: "Thousand Arrows",
+		pp: 10,
+		priority: 0,
+		volatileStatus: 'smackdown',
+		secondary: false,
+		target: "normal",
+		type: "Ground"
+	},
+	"thousandwaves": {
+		num: 615,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		desc: "Deals damage to one adjacent target. Prevents the target from switching out.",
+		shortDesc: "Prevents the target from switching out.",
+		id: "thousandwaves",
+		name: "Thousand Waves",
+		pp: 10,
+		priority: 0,
+		onHit: function(target) {
+			target.addVolatile('trapped');
+		},
+		secondary: false,
+		target: "normal",
+		type: "Ground"
 	},
 	"thrash": {
 		num: 37,

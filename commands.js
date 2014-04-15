@@ -309,12 +309,11 @@ var commands = exports.commands = {
 			return message;
 		}
 	 },
-	 profile: 'profile3',
-	 profile3: function(target, room, user, connection) {
+	
+	 profile45: function(target, room, user, connection) {
 	 if (!this.canBroadcast()) return;
             if (!target) target = user.name;
             if (toUserid(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
-            if (!this.canBroadcast()) return;
             targetUser = Users.get(target);
             if (!targetUser) {
                 username = target;

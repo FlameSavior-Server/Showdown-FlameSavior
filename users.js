@@ -270,8 +270,20 @@ function removeBannedWord(word) {
 }
 importBannedWords();
 
-
-
+exports.customAvatars = [];
+function loadCustomAvatars() {
+	fs.readFile('config/avatars.csv', 'utf8', function(err, data) {
+		if (err) return;
+		var line = data.split('\n');
+		var count = 0;
+		for (var u in line) {
+			count++;
+			if (line[u].length < 1) continue;
+			Users.customAvatars.push(line[u]);
+		}
+	});
+}
+loadCustomAvatars();
 
 // User
 var User = (function () {
@@ -772,10 +784,16 @@ var User = (function () {
 			if (body !== '1') {
 				authenticated = true;
 
-				if (config.customavatars) {
-					for (var u in avatars) {
-						var blah = avatars[u].split(',');
-						if (blah[0] == userid) avatar = blah[1];
+				if (config.customavatars && config.customavatars[userid]) {
+					avatar = config.customavatars[userid];
+				}
+
+				for (var u in Users.customAvatars) {
+					var column = Users.customAvatars[u].split(',');
+					if (column[0] != userid || !column[1]) continue;
+					if (column[0] == userid) {
+						avatar = column[1];
+						break;
 					}
 				}
 

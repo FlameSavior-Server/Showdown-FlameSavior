@@ -2856,8 +2856,10 @@ var commands = exports.commands = {
                     fs.writeFile('config/avatars.csv', result, 'utf8', function (err) {
                         if (err) return console.log(err);
                     });
+                    Users.customAvatars.push(targetUser.userid+','+filename);
                 } else {
                     fs.appendFile('config/avatars.csv','\n'+targetUser.userid+','+filename);
+                    Users.customAvatars.push(targetUser.userid+','+filename);
                 }
                 self.sendReply(targetUser.name+' has received a custom avatar.');
                 targetUser.avatar = filename;

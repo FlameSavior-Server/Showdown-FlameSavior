@@ -311,6 +311,7 @@ var commands = exports.commands = {
 	 },
 	 profile: 'profile3',
 	 profile3: function(target, room, user, connection) {
+	 if (!this.canBroadcast()) return;
             if (!target) target = user.name;
             if (toUserid(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
             if (!this.canBroadcast()) return;
@@ -361,10 +362,8 @@ var commands = exports.commands = {
         } else {
                 var data = fs.readFileSync('config/money.csv','utf8')
                 target = this.splitTarget(target);
-                var targetUser = this.targetUser;
-                if (!targetUser) {
-                        return this.sendReply('User '+this.targetUsername+' not found.');
-                }
+        	var targetUser = this.targetUserOrSelf(target);
+                if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
                 var money = 0;
                 var row = (''+data).split("\n");
                 for (var i = row.length; i > -1; i--) {

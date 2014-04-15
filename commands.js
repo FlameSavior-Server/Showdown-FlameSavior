@@ -310,7 +310,7 @@ var commands = exports.commands = {
 		}
 	 },
 	 
-
+	 profile: 'profile45',
 	 profile45: function(target, room, user, connection) {
 	 if (!this.canBroadcast()) return;
             if (!target) target = user.name;

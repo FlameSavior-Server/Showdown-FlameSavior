@@ -310,7 +310,7 @@ var commands = exports.commands = {
 		}
 	 },
 	 
-	/*/
+
 	 profile45: function(target, room, user, connection) {
 	 if (!this.canBroadcast()) return;
 	    if (!targetUser) return this.sendReply('User not found.');	
@@ -438,7 +438,7 @@ var commands = exports.commands = {
 			return message;
 		}
 	},
-	/*///
+
 	setmotd: 'motd',
 	motd: function (target, room, user) {
 		if (!this.can('pban')) return false;

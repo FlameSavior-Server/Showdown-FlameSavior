@@ -205,7 +205,7 @@ var commands = exports.commands = {
 
 	version: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Server version: <b>'+CommandParser.package.version+'</b> <small>(<a href="http://pokemonshowdown.com/versions#' + CommandParser.serverVersion + '">' + CommandParser.serverVersion.substr(0,10) + '</a>)</small>');
+		this.sendReplyBox('Server version: <b>'+CommandParser.package.version+'</b>');
 	},
 
 	me: function(target, room, user, connection) {
@@ -565,6 +565,25 @@ var commands = exports.commands = {
 		}
 	},
 
+	modjoin: function(target, room, user) {
+		if (!this.can('privateroom', null, room)) return;
+		if (target === 'off') {
+			delete room.modjoin;
+			this.addModCommand(user.name+' turned off modjoin.');
+			if (room.chatRoomData) {
+				delete room.chatRoomData.modjoin;
+				Rooms.global.writeChatRoomData();
+			}
+		} else {
+			room.modjoin = true;
+			this.addModCommand(user.name+' turned on modjoin.');
+			if (room.chatRoomData) {
+				room.chatRoomData.modjoin = true;
+				Rooms.global.writeChatRoomData();
+			}
+		}
+	},
+
 	officialchatroom: 'officialroom',
 	officialroom: function(target, room, user) {
 		if (!this.can('makeroom')) return;
@@ -804,8 +823,19 @@ var commands = exports.commands = {
 			if (target === 'lobby') return connection.sendTo(target, "|noinit|nonexistent|");
 			return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
 		}
-		if (targetRoom.isPrivate && !user.named) {
-			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
+		if (targetRoom.isPrivate) {
+			if (targetRoom.modjoin) {
+				var userGroup = user.group;
+				if (targetRoom.auth) {
+					userGroup = targetRoom.auth[user.userid] || ' ';
+				}
+				if (config.groupsranking.indexOf(userGroup) < config.groupsranking.indexOf(targetRoom.modchat)) {
+					return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
+				}
+			}
+			if (!user.named) {
+				return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
+			}
 		}
 		if (target.toLowerCase() != "lobby" && !user.named) {
 			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room " + target + ".");
@@ -1717,6 +1747,11 @@ var commands = exports.commands = {
 			this.add('|raw|<div class="broadcast-red"><b>Moderated chat was set to '+modchat+'!</b><br />Only users of rank '+modchat+' and higher can talk.</div>');
 		}
 		this.logModCommand(user.name+' set modchat to '+room.modchat);
+
+		if (room.chatRoomData) {
+			room.chatRoomData.modchat = room.modchat;
+			Rooms.global.writeChatRoomData();
+		}
 	},
 
 	spop: 'sendpopup',

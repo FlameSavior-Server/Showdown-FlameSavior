@@ -1214,7 +1214,7 @@ var ChatRoom = (function() {
 		this.messageCount = 0;
 		this.active = true;
 		this.inactiveCount = 0;
-		this.modchat = (config.chatmodchat || false);
+		if (!this.modchat) this.modchat = (config.chatmodchat || false);
 
 		// `config.loglobby` is a legacy name
 		if (config.logchat || config.loglobby) {
@@ -1231,11 +1231,11 @@ var ChatRoom = (function() {
 
 		if (config.reportjoinsperiod) {
 			this.userList = this.getUserList();
+			this.reportJoinsQueue = [];
+			this.reportJoinsInterval = setInterval(
+				this.reportRecentJoins.bind(this), config.reportjoinsperiod
+			);
 		}
-		this.reportJoinsQueue = [];
-		this.reportJoinsInterval = setInterval(
-			this.reportRecentJoins.bind(this), config.reportjoinsperiod
-		);
 	}
 	ChatRoom.prototype.type = 'chat';
 

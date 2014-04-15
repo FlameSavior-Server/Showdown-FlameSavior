@@ -182,7 +182,25 @@ exports.BattleMovedex = {
 	},
 	furycutter: {
 		inherit: true,
-		basePower: 20
+		basePower: 20,
+		basePowerCallback: function(pokemon) {
+			if (!pokemon.volatiles.furycutter) {
+				pokemon.addVolatile('furycutter');
+			}
+			return 20 * pokemon.volatiles.furycutter.multiplier;
+		},
+		effect: {
+			duration: 2,
+			onStart: function() {
+				this.effectData.multiplier = 1;
+			},
+			onRestart: function() {
+				if (this.effectData.multiplier < 8) {
+					this.effectData.multiplier <<= 1;
+				}
+				this.effectData.duration = 2;
+			}
+		}
 	},
 	futuresight: {
 		inherit: true,
@@ -420,6 +438,35 @@ exports.BattleMovedex = {
 	moonlight: {
 		inherit: true,
 		type: "Normal"
+	},
+	mudsport: {
+		num: 300,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "Until the user is no longer active, all Electric-type attacks used by any active Pokemon have their power reduced to 0.33x. Fails if this move is already in effect; not stackable.",
+		shortDesc: "Weakens Electric-type attacks to 1/3 their power.",
+		id: "mudsport",
+		name: "Mud Sport",
+		pp: 15,
+		priority: 0,
+		volatileStatus: 'mudsport',
+		onTryHitField: function(target, source) {
+			if (source.volatiles['mudsport']) return false;
+		},
+		effect: {
+			noCopy: true,
+			onStart: function(pokemon) {
+				this.add("-start", pokemon, 'Mud Sport');
+			},
+			onBasePowerPriority: 1,
+			onAnyBasePower: function(basePower, user, target, move) {
+				if (move.type === 'Electric') return this.chainModify([0x548, 0x1000]); // The Mud Sport modifier is slightly higher than the usual 0.33 modifier (0x547)
+			}
+		},
+		secondary: false,
+		target: "all",
+		type: "Ground"
 	},
 	muddywater: {
 		inherit: true,
@@ -684,6 +731,35 @@ exports.BattleMovedex = {
 			}
 			return 50;
 		}
+	},
+	watersport: {
+		num: 346,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "Until the user is no longer active, all Fire-type attacks used by any active Pokemon have their power reduced to 0.33x. Fails if this move is already in effect; not stackable.",
+		shortDesc: "Weakens Fire-type attacks to 1/3 their power.",
+		id: "watersport",
+		name: "Water Sport",
+		pp: 15,
+		priority: 0,
+		volatileStatus: 'watersport',
+		onTryHitField: function(target, source) {
+			if (source.volatiles['watersport']) return false;
+		},
+		effect: {
+			noCopy: true,
+			onStart: function(pokemon) {
+				this.add("-start", pokemon, 'move: Water Sport');
+			},
+			onBasePowerPriority: 1,
+			onAnyBasePower: function(basePower, user, target, move) {
+				if (move.type === 'Fire') return this.chainModify([0x548, 0x1000]); // The Water Sport modifier is slightly higher than the usual 0.33 modifier (0x547)
+			}
+		},
+		secondary: false,
+		target: "all",
+		type: "Water"
 	},
 	whirlwind: {
 		inherit: true,

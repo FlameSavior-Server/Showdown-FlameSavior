@@ -587,7 +587,7 @@ var commands = exports.commands = {
                         total += targetUser.name + ' has ' + money + ' ' + p + '.<br />';
                 } 
                 if (mMatch === false) {
-                        total += targetUser.name + ' None.<br />';
+                        total += targetUser.name + ' has  no Gold bucks.<br />';
                 }
                 targetUser.money = money;
                                 }

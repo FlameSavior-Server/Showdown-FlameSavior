@@ -1171,10 +1171,6 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Tw9Pv0j.gif" width="350"><br><font size="2"><b>Finny</b> - One fucked up pervert');
 	},
-	sammy1491862: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/d210a4875c88ed3dd91b0e729e1ebe0d/tumblr_mvjw5vIGhI1sja5w6o1_400.gif"><br><b>Sammy1491862</b> - Sammy ur Ruler and Champion of our <a href="https://docs.google.com/document/d/101DAZO8DGs-fMuoSqz7Ukd_l4l_U2scqyxhVqGEJ76k/edit">league</a> /o/.');
-	},
 	kayo: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font size="2"><b>Kayo</b><br>By the Beard of Zeus that Ghost was Fat<br><img src="http://i.imgur.com/rPe9hBa.png">');

@@ -2856,7 +2856,13 @@ var commands = exports.commands = {
                     fs.writeFile('config/avatars.csv', result, 'utf8', function (err) {
                         if (err) return console.log(err);
                     });
-                    Users.customAvatars.push(targetUser.userid+','+filename);
+			for (var u in Users.customAvatars) {
+				var column = Users.customAvatars[u].split(',');
+				if (column[0] == targetUser.userid) {
+					Users.customAvatars[u] = targetUser.userid+','+filename;
+					break;
+				}
+			}
                 } else {
                     fs.appendFile('config/avatars.csv','\n'+targetUser.userid+','+filename);
                     Users.customAvatars.push(targetUser.userid+','+filename);

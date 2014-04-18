@@ -2456,11 +2456,9 @@ var commands = exports.commands = {
 	star: function(room, user, cmd){
                 return this.parse('/hide Ã¢Ëœâ€¦');
 	},
+	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
-                return this.parse('/poll Next <font color="#FF4105">Tournament</font> Tier?, cc1v1, cc, OU, randombat, ubers, hackmons, balhackmons, doubles, oumono, uu, cap, nu, lc, reg1v1, custom,randomdoubles, rubeta, other');	
-	},
-	tpolltest: function(room, user, cmd){
                 return this.parse('/poll Next <font color="#FF4105">Tournament</font> Tier: <br><font size="1">To vote do /vote option OR click the tier you want.</font><br><center><button name="send" value="/vote other" target="_blank" title="Vote other">other</button> <button name="send" value="/vote rubeta" target="_blank" title="Vote RU Beta">rubeta</button> <button name="send" value="/vote randomdoubles" target="_blank" title="Vote Random Doubles">randomdoubles</button> <button name="send" value="/vote custom" target="_blank" title="Vote Custom">custom</button> <button name="send" value="/vote reg1v1" target="_blank" title="Vote Regular 1v1">reg1v1</button> <button name="send" value="/vote lc" target="_blank" title="Vote LC">lc</button> <button name="send" value="/vote nu" target="_blank" title="Vote NU">nu</button> <button name="send" value="/vote cap" target="_blank" title="Vote CAP">cap</button> <button name="send" value="/vote cc" target="_blank" title="Vote CC">cc</button> <button name="send" value="/vote oumono" target="_blank" title="Vote OU Monotype">oumono</button> <button name="send" value="/vote doubles" target="_blank" title="Vote Doubles">doubles</button> <button name="send" value="/vote balhackmons" target="_blank" title="Vote Balanced Hackmons">balhackmons</button> <button name="send" value="/vote hackmons" target="_blank" title="Vote Hackmons">hackmons</button> <button name="send" value="/vote ubers" target="_blank" title="Vote Ubers">ubers</button> <button name="send" value="/vote randombat" target="_blank" title="Vote Random Battle">randombat</button> <button name="send" value="/vote ou" target="_blank" title="Vote OU">ou</button> <button name="send" value="/vote cc1v1" target="_blank" title="Vote CC1v1">cc1v1</button>  <button name="send" value="/vote uu" target="_blank" title="Vote UU">uu</button></center>, other, rubeta, randomdoubles, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balhackmons, hackmons, ubers, randombat, ou, cc1v1, uu');
 	},
 	hv: 'helpvotes',

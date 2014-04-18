@@ -408,6 +408,7 @@ var GlobalRoom = (function() {
 			for (var i=0; i<this.staffAutojoin.length; i++) {
 				user.joinRoom(this.staffAutojoin[i], connection);
 			}
+			if (user.can('seniorstaff')) user.joinRoom('seniorstaff', connection);
 		}/*
 		if (user.vip) {
 			//user.joinRoom('vip', connection);

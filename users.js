@@ -1296,6 +1296,7 @@ var User = (function () {
 		if (!room) return false;
 		if (room.staffRoom && !this.isStaff) return false;
 		if (room.vip && !this.vip && !this.isStaff) return false;
+		if (room.id == 'seniorstaff' && !this.can('seniorstaff')) return false;
 		if (room.bannedUsers) {
 			if (this.userid in room.bannedUsers || this.autoconfirmed in room.bannedUsers) return false;
 		}

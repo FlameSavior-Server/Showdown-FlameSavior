@@ -82,10 +82,10 @@ if (!('existsSync' in fs)) {
 }
 
 // Synchronously, since it's needed before we can start the server
-if (!fs.existsSync('./config/Config.js')) {
-	console.log("Config.js doesn't exist - creating one with default settings...");
-	fs.writeFileSync('./config/Config.js',
-		fs.readFileSync('./config/Config-example.js')
+if (!fs.existsSync('./config/config.js')) {
+	console.log("config.js doesn't exist - creating one with default settings...");
+	fs.writeFileSync('./config/config.js',
+		fs.readFileSync('./config/config-example.js')
 	);
 }
 
@@ -93,7 +93,7 @@ if (!fs.existsSync('./config/Config.js')) {
  * Load Configuration
  *********************************************************/
 
-global.Config = require('./config/Config.js');
+global.Config = require('./config/config.js');
 
 var watchFile = function() {
 	try {
@@ -103,13 +103,13 @@ var watchFile = function() {
 	}
 };
 
-if (Config.watchConfig) {
-	watchFile('./config/Config.js', function(curr, prev) {
+if (Config.watchconfig) {
+	watchFile('./config/config.js', function(curr, prev) {
 		if (curr.mtime <= prev.mtime) return;
 		try {
-			delete require.cache[require.resolve('./config/Config.js')];
-			Config = require('./config/Config.js');
-			console.log('Reloaded config/Config.js');
+			delete require.cache[require.resolve('./config/config.js')];
+			Config = require('./config/config.js');
+			console.log('Reloaded config/config.js');
 		} catch (e) {}
 	});
 }

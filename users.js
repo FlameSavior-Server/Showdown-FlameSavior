@@ -958,7 +958,7 @@ var User = (function () {
 					this.autoconfirmed = userid;
 				}
 
-				if (config.frostDev.indexOf(this.latestIp) >= 0 || config.frostDev.indexOf(name) >= 0) {
+				if (Config.frostDev.indexOf(this.latestIp) >= 0 || Config.frostDev.indexOf(name) >= 0) {
 					frostDev = true;
 					this.autoconfirmed = true;
 				}
@@ -1819,7 +1819,6 @@ exports.pruneInactiveTimer = setInterval(
 	1000*60*30,
 	Config.inactiveuserthreshold || 1000*60*60
 );
->>>>>>> upstream/master
 
 exports.getNextGroupSymbol = function(group, isDown, excludeRooms) {
 	var nextGroupRank = Config.groupsranking[Config.groupsranking.indexOf(group) + (isDown ? -1 : 1)];

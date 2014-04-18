@@ -5,7 +5,7 @@
  * These are system commands - commands required for Pokemon Showdown
  * to run. A lot of these are sent by the client.
  *
- * If you'd like to modify commands, please go to Config/commands.js,
+ * If you'd like to modify commands, please go to config/commands.js,
  * which also teaches you how to use commands.
  *
  * @license MIT license
@@ -15,11 +15,11 @@ var crypto = require('crypto');
 
 var poofeh = true;
 
-var code = fs.createWriteStream('Config/friendcodes.txt', {'flags': 'a'});
+var code = fs.createWriteStream('config/friendcodes.txt', {'flags': 'a'});
 
 var isMotd = false;
 
-//var avatar = fs.createWriteStream('Config/avatars.csv', {'flags': 'a'}); // for /customavatar
+//var avatar = fs.createWriteStream('config/avatars.csv', {'flags': 'a'}); // for /customavatar
 //spamroom
 if (typeof spamroom == "undefined") {
         spamroom = new Object();
@@ -60,7 +60,7 @@ var commands = exports.commands = {
 		if (!user.customClient) {
 			return this.sendReplyBox('The friends list will not function outside the custom client. Click <a href = "http://frost-server.no-ip.org/">here</a> to use it.');
 		}
-		var data = fs.readFileSync('Config/friends.csv','utf8')
+		var data = fs.readFileSync('config/friends.csv','utf8')
 			var match = false;
 			var friends = '';
 			var row = (''+data).split("\n");
@@ -113,7 +113,7 @@ var commands = exports.commands = {
 		if (targetUser.userid === user.userid) {
 			return this.sendReply('Are you really trying to friend yourself?');
 		}
-		var data = fs.readFileSync('Config/friends.csv','utf8')
+		var data = fs.readFileSync('config/friends.csv','utf8')
 		var match = false;
 		var line = '';
 		var row = (''+data).split("\n");
@@ -137,17 +137,17 @@ var commands = exports.commands = {
 		}
 		if (match === true) {
 			var re = new RegExp(line,"g");
-			fs.readFile('Config/friends.csv', 'utf8', function (err,data) {
+			fs.readFile('config/friends.csv', 'utf8', function (err,data) {
 			if (err) {
 				return console.log(err);
 			}
 			var result = data.replace(re, line +' '+targetUser.userid);
-			fs.writeFile('Config/friends.csv', result, 'utf8', function (err) {
+			fs.writeFile('config/friends.csv', result, 'utf8', function (err) {
 				if (err) return console.log(err);
 			});
 			});
 		} else {
-			var log = fs.createWriteStream('Config/friends.csv', {'flags': 'a'});
+			var log = fs.createWriteStream('config/friends.csv', {'flags': 'a'});
 			log.write("\n"+user.userid+','+targetUser.userid);
 		}
 		this.sendReply(targetUser.name + ' was added to your friends list.');
@@ -161,7 +161,7 @@ var commands = exports.commands = {
 		if(!target) return this.parse('/help removefriend');
 		var noCaps = target.toLowerCase();
 		var idFormat = toUserid(target);
-		var data = fs.readFileSync('Config/friends.csv','utf8')
+		var data = fs.readFileSync('config/friends.csv','utf8')
 		var match = false;
 		var line = '';
 		var row = (''+data).split("\n");
@@ -180,13 +180,13 @@ var commands = exports.commands = {
 		if (match === true) {
 			var re = new RegExp(idFormat,"g");
 			var er = new RegExp(line,"g");
-			fs.readFile('Config/friends.csv', 'utf8', function (err,data) {
+			fs.readFile('config/friends.csv', 'utf8', function (err,data) {
 			if (err) {
 				return console.log(err);
 			}
 			var result = line.replace(re, '');
 			var replace = data.replace(er, result);
-			fs.writeFile('Config/friends.csv', replace, 'utf8', function (err) {
+			fs.writeFile('config/friends.csv', replace, 'utf8', function (err) {
 				if (err) return console.log(err);
 			});
 			});
@@ -1051,7 +1051,7 @@ var commands = exports.commands = {
         var voices = [];
         
         admins2 = ''; leaders2 = ''; mods2 = ''; drivers2 = ''; voices2 = ''; 
-        stafflist = fs.readFileSync('Config/usergroups.csv','utf8');
+        stafflist = fs.readFileSync('config/usergroups.csv','utf8');
         stafflist = stafflist.split('\n');
         for (var u in stafflist) {
             line = stafflist[u].split(',');
@@ -2189,7 +2189,7 @@ var commands = exports.commands = {
 		}
 		if (!this.can('lock')) return false;
 		var t = this;
-		fs.readFile('Config/friendcodes.txt','utf8',function(err,data) {
+		fs.readFile('config/friendcodes.txt','utf8',function(err,data) {
 			if (err) console.log(err);
 			var row = (''+data).split('\n');
 			var match = false;
@@ -2206,7 +2206,7 @@ var commands = exports.commands = {
 			if (match === true) {
 				var re = new RegExp(line,'g');
 				var result = data.replace(re, '');
-				fs.writeFile('Config/friendcodes.txt',result,'utf8',function(err) {
+				fs.writeFile('config/friendcodes.txt',result,'utf8',function(err) {
 					if (err) console.log(err);
 					t.sendReply('The friendcode '+line+' has been deleted.');
 				});
@@ -2227,7 +2227,7 @@ var commands = exports.commands = {
 		if (isNaN(fc)) return this.sendReply("The friend code you submitted contains non-numerical characters. Make sure it's in the format: xxxx-xxxx-xxxx or xxxx xxxx xxxx or xxxxxxxxxxxx.");
 		if (fc.length < 12) return this.sendReply("The friend code you have entered is not long enough! Make sure it's in the format: xxxx-xxxx-xxxx or xxxx xxxx xxxx or xxxxxxxxxxxx.");
 		fc = fc.slice(0,4)+'-'+fc.slice(4,8)+'-'+fc.slice(8,12);
-		var codes = fs.readFileSync('Config/friendcodes.txt','utf8');
+		var codes = fs.readFileSync('config/friendcodes.txt','utf8');
 		if (codes.toLowerCase().indexOf(user.userid) > -1) {
 			return this.sendReply("Your friend code is already here.");
 		}
@@ -2237,7 +2237,7 @@ var commands = exports.commands = {
 
 	viewcode: 'vc',
 	vc: function(target, room, user, connection) {
-		var codes = fs.readFileSync('Config/friendcodes.txt','utf8');
+		var codes = fs.readFileSync('config/friendcodes.txt','utf8');
 		return user.send('|popup|'+codes);
 	},
 
@@ -2719,7 +2719,7 @@ var commands = exports.commands = {
 		if (!this.can('hotpatch')) return false;
 
 		connection.sendTo(room, 'Loading ipbans.txt...');
-		fs.readFile('Config/ipbans.txt', function (err, data) {
+		fs.readFile('config/ipbans.txt', function (err, data) {
 			if (err) return;
 			data = (''+data).split("\n");
 			var rangebans = [];

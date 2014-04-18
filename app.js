@@ -82,10 +82,10 @@ if (!('existsSync' in fs)) {
 }
 
 // Synchronously, since it's needed before we can start the server
-if (!fs.existsSync('./Config/Config.js')) {
+if (!fs.existsSync('./config/Config.js')) {
 	console.log("Config.js doesn't exist - creating one with default settings...");
-	fs.writeFileSync('./Config/Config.js',
-		fs.readFileSync('./Config/Config-example.js')
+	fs.writeFileSync('./config/Config.js',
+		fs.readFileSync('./config/Config-example.js')
 	);
 }
 
@@ -93,7 +93,7 @@ if (!fs.existsSync('./Config/Config.js')) {
  * Load Configuration
  *********************************************************/
 
-global.Config = require('./Config/Config.js');
+global.Config = require('./config/Config.js');
 
 var watchFile = function() {
 	try {
@@ -104,12 +104,12 @@ var watchFile = function() {
 };
 
 if (Config.watchConfig) {
-	watchFile('./Config/Config.js', function(curr, prev) {
+	watchFile('./config/Config.js', function(curr, prev) {
 		if (curr.mtime <= prev.mtime) return;
 		try {
-			delete require.cache[require.resolve('./Config/Config.js')];
-			Config = require('./Config/Config.js');
-			console.log('Reloaded Config/Config.js');
+			delete require.cache[require.resolve('./config/Config.js')];
+			Config = require('./config/Config.js');
+			console.log('Reloaded config/Config.js');
 		} catch (e) {}
 	});
 }
@@ -352,7 +352,7 @@ global.clampIntRange = function(num, min, max) {
 
 global.LoginServer = require('./loginserver.js');
 
-watchFile('./Config/custom.css', function(curr, prev) {
+watchFile('./config/custom.css', function(curr, prev) {
 	LoginServer.request('invalidatecss', {}, function() {});
 });
 LoginServer.request('invalidatecss', {}, function() {});
@@ -424,7 +424,7 @@ Rooms.global.formatListText = Rooms.global.getFormatListText();
 global.TeamValidator = require('./team-validator.js');
 
 // load ipbans at our leisure
-fs.readFile('./Config/ipbans.txt', function (err, data) {
+fs.readFile('./config/ipbans.txt', function (err, data) {
 	if (err) return;
 	data = (''+data).split("\n");
 	var rangebans = [];

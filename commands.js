@@ -2460,8 +2460,8 @@ var commands = exports.commands = {
 	tierpoll: function(room, user, cmd){
                 return this.parse('/poll Next <font color="#FF4105">Tournament</font> Tier?, cc1v1, cc, OU, randombat, ubers, hackmons, balhackmons, doubles, oumono, uu, cap, nu, lc, reg1v1, custom,randomdoubles, rubeta, other');	
 	},
-	deleteroom: function(room, user, cmd){
-                return this.parse('/deregisterchatroom '+room.id+'');
+	tpolltest: function(room, user, cmd){
+                return this.parse('/poll Next <font color="#FF4105">Tournament</font> Tier?, <button name="send" value="/vote cc1v1">cc1v1</button>, <button name="send" value="/vote cc">cc</button, <button name="send" value="/vote ou">OU</button>, <button name="send" value="/vote randombat">randombat</button>, <button name="send" value="/vote ubers">ubers</button>, <button name="send" value="/vote hackmons">hackmons</button>, <button name="send" value="/vote balhackmons">balhackmons</button>, <button name="send" value="/vote doubles">doubles</button>, <button name="send" value="/vote oumono">oumono</button>, <button name="send" value="/vote uu">uu</button>, <button name="send" value="/vote cap">cap</button>, <button name="send" value="/vote nu">nu</button>, <button name="send" value="/vote lc">lc</button>, <button name="send" value="/vote reg1v1">reg1v1</button>, <button name="send" value="/vote custom">custom</button>,<button name="send" value="/vote randomdoubles">randomdoubles</button>, <button name="send" value="/vote rubeta">rubeta</button>, <button name="send" value="/vote other">other</button>');	
 	},
 	hv: 'helpvotes',
 	helpvotes: function(room, user, cmd){

@@ -85,6 +85,9 @@ var cmds = {
 			if(targets[0].indexOf(' ') != -1) {
 				return this.sendReply('Please don\'t put spaces in the word.');
 			}
+			if(targets[1].indexOf('<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i') != -1) {
+				return this.sendReply('Ha, ha, ha... Thinking HTML works here... HA!');
+			}
 			hangman.reset(room.id);
 			hangman[room.id].hangman = true;
 			var targetword = targets[0].toLowerCase();

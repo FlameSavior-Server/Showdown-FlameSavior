@@ -1675,7 +1675,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'lazerbeam') {
                         matched = true;
-                        this.sendReplyBox('<b>lazerbeam</b>:   '+comcun+'   '+league+'    '+mod+'');
+                        this.sendReplyBox('<b>lazerbeam</b>:   '+comcun+'   '+league+'    '+mod+'    '+admin+'');
                 }
                 if (target === 'jd') {
                         matched = true;

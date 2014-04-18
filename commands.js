@@ -2909,6 +2909,11 @@ var commands = exports.commands = {
 	away: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
+		
+		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i'];
+        	for (var x in html) {
+        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        	}
 
 		if (!user.isAway) {
 			user.originalName = user.name;
@@ -2931,6 +2936,11 @@ var commands = exports.commands = {
 		if (!this.can('lock')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 
+		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i'];
+        	for (var x in html) {
+        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        	}
+        	
 		if (!user.isAway) {
 			user.originalName = user.name;
 			var awayName = user.name + ' - Sleeping';
@@ -2951,6 +2961,11 @@ var commands = exports.commands = {
 	busy: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
+		
+		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i'];
+        	for (var x in html) {
+        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        	}
 
 		if (!user.isAway) {
 			user.originalName = user.name;

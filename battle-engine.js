@@ -17,9 +17,9 @@ if (!('existsSync' in fs)) {
 	// for compatibility with ancient versions of node
 	fs.existsSync = require('path').existsSync;
 }
-global.config = require('./config/config.js');
+global.Config = require('./config/config.js');
 
-if (config.crashguard) {
+if (Config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting
 	process.on('uncaughtException', function (err) {
 		require('./crashlogger.js')(err, 'A simulator process');
@@ -28,7 +28,7 @@ if (config.crashguard) {
 			Rooms.lobby.addRaw('<div><b>THE SERVER HAS CRASHED:</b> '+stack+'<br />Please restart the server.</div>');
 			Rooms.lobby.addRaw('<div>You will not be able to talk in the lobby or start new battles until the server restarts.</div>');
 		}
-		config.modchat = 'crash';
+		Config.modchat = 'crash';
 		Rooms.global.lockdown = true; */
 	});
 }
@@ -580,7 +580,7 @@ var BattlePokemon = (function() {
 	BattlePokemon.prototype.getRequestData = function() {
 		var lockedMove = this.getLockedMove();
 		var data = {moves: this.getMoves(lockedMove)};
-		if (lockedMove && this.trapped) {
+		if (this.trapped) {
 			data.trapped = true;
 		} else if (this.maybeTrapped) {
 			data.maybeTrapped = true;
@@ -823,8 +823,8 @@ var BattlePokemon = (function() {
 		}
 		return false;
 	};
-	BattlePokemon.prototype.getValidMoves = function() {
-		var pMoves = this.getMoves(this.getLockedMove());
+	BattlePokemon.prototype.getValidMoves = function(lockedMove) {
+		var pMoves = this.getMoves(lockedMove);
 		var moves = [];
 		for (var i=0; i<pMoves.length; i++) {
 			if (!pMoves[i].disabled) {
@@ -1015,6 +1015,14 @@ var BattlePokemon = (function() {
 	BattlePokemon.prototype.getItem = function() {
 		return this.battle.getItem(this.item);
 	};
+	BattlePokemon.prototype.hasItem = function(item) {
+		if (this.ignore['Item']) return false;
+		var ownItem = this.item;
+		if (!Array.isArray(item)) {
+			return ownItem === toId(item);
+		}
+		return (item.map(toId).indexOf(ownItem) >= 0);
+	};
 	BattlePokemon.prototype.clearItem = function() {
 		return this.setItem('');
 	};
@@ -1035,6 +1043,14 @@ var BattlePokemon = (function() {
 	};
 	BattlePokemon.prototype.getAbility = function() {
 		return this.battle.getAbility(this.ability);
+	};
+	BattlePokemon.prototype.hasAbility = function(ability) {
+		if (this.ignore['Ability']) return false;
+		var ownAbility = this.ability;
+		if (!Array.isArray(ability)) {
+			return ownAbility === toId(ability);
+		}
+		return (ability.map(toId).indexOf(ownAbility) >= 0);
 	};
 	BattlePokemon.prototype.clearAbility = function() {
 		return this.setAbility('');
@@ -2982,14 +2998,15 @@ var Battle = (function() {
 		}
 		return false;
 	};
-	Battle.prototype.validTarget = function(target, source, targetType) {
-		var targetLoc;
+	Battle.prototype.getTargetLoc = function(target, source) {
 		if (target.side == source.side) {
-			targetLoc = -(target.position+1);
+			return -(target.position+1);
 		} else {
-			targetLoc = target.position+1;
+			return target.position+1;
 		}
-		return this.validTargetLoc(targetLoc, source, targetType);
+	};
+	Battle.prototype.validTarget = function(target, source, targetType) {
+		return this.validTargetLoc(this.getTargetLoc(target, source), source, targetType);
 	};
 	Battle.prototype.getTarget = function(decision) {
 		var move = this.getMove(decision.move);
@@ -3627,7 +3644,8 @@ var Battle = (function() {
 			case 'move':
 				var targetLoc = 0;
 				var pokemon = side.pokemon[i];
-				var validMoves = pokemon.getValidMoves();
+				var lockedMove = pokemon.getLockedMove();
+				var validMoves = pokemon.getValidMoves(lockedMove);
 				var moveid = '';
 
 				if (data.substr(data.length-2) === ' 1') targetLoc = 1;
@@ -3639,11 +3657,15 @@ var Battle = (function() {
 
 				if (targetLoc) data = data.substr(0, data.lastIndexOf(' '));
 
+				if (lockedMove) targetLoc = (this.runEvent('LockMoveTarget', pokemon) || 0);
+
 				if (data.substr(data.length-5) === ' mega') {
-					decisions.push({
-						choice: 'megaEvo',
-						pokemon: pokemon
-					});
+					if (!lockedMove) {
+						decisions.push({
+							choice: 'megaEvo',
+							pokemon: pokemon
+						});
+					}
 					data = data.substr(0, data.length-5);
 				}
 

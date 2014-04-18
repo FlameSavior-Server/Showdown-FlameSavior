@@ -153,7 +153,7 @@ var commands = exports.commands = {
 	alts: 'whois',
 	getalts: 'whois',
 	whois: function(target, room, user) {
-		var targetUser = this.targetUserOrSelf(target);
+		var targetUser = this.targetUserOrSelf(target, user.group === ' ');
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
@@ -182,8 +182,8 @@ var commands = exports.commands = {
 				if (output) this.sendReply('Previous names: '+output);
 			}
 		}
-		if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
-			this.sendReply('Group: ' + config.groups[targetUser.group].name + ' (' + targetUser.group + ')');
+		if (Config.groups[targetUser.group] && Config.groups[targetUser.group].name) {
+			this.sendReply('Group: ' + Config.groups[targetUser.group].name + ' (' + targetUser.group + ')');
 		}
 		if (targetUser.isSysop) {
 			this.sendReply('(Pok\xE9mon Showdown System Operator)');
@@ -2796,8 +2796,10 @@ var commands = exports.commands = {
 
 	potd: function(target, room, user) {
 		if (!this.can('potd')) return false;
-		config.potd = target;
-		Simulator.SimulatorProcess.eval('config.potd = \''+toId(target)+'\'');
+
+		Config.potd = target;
+		Simulator.SimulatorProcess.eval('Config.potd = \''+toId(target)+'\'');
+
 		if (target) {
 			if (Rooms.lobby) Rooms.lobby.addRaw('<div class="broadcast-blue"><b>The Pokemon of the Day is now '+target+'!</b><br />This Pokemon will be guaranteed to show up in random battles.</div>');
 			this.logModCommand('The Pokemon of the Day was changed to '+target+' by '+user.name+'.');
@@ -2854,6 +2856,20 @@ var commands = exports.commands = {
 			user.joinRoom(Rooms.lobby, connection);
 			this.sendReply('You are now receiving lobby chat.');
 		}
+	},
+
+	showimage: function(target, room, user) {
+		if (!target) return this.parse('/help showimage');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		targets = target.split(', ');
+		if (targets.length != 3) {
+			return this.parse('/help showimage');
+		}
+
+		this.add('|raw|'+sanitize(user.name)+' shows:<br /><img src="'+sanitize(targets[0])+'" alt="" width="'+toId(targets[1])+'" height="'+toId(targets[2])+'" />');
 	},
 
 	/*********************************************************
@@ -3232,6 +3248,10 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/forcetie - Forces the current match to tie. Requires: & ~');
 		}
+		if (target === '&' || target === 'showimage') {
+			matched = true;
+			this.sendReply('/showimage [url], [width], [height] - Show an image. Requires: & ~');
+		}
 		if (target === '&' || target === 'declare') {
 			matched = true;
 			this.sendReply('/declare [message] - Anonymously announces a message. Requires: & ~');
@@ -3366,7 +3386,7 @@ var commands = exports.commands = {
 			if (user.vip) {
 				this.sendReply('VIP COMMANDS: /customavatar');
 			}
-			if (user.group !== config.groupsranking[0]) {
+			if (user.group !== Config.groupsranking[0]) {
 				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /modlog, /forcerename, /alts')
 				this.sendReply('MODERATOR COMMANDS: /ban, /unban, /unbanall, /ip, /redirect, /kick');
 				this.sendReply('LEADER COMMANDS: /promote, /demote, /forcewin, /forcetie, /declare, /permaban, /unpermaban, /makechatroom, /leagueroom, /privateroom, /roomfounder');

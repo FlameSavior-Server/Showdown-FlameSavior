@@ -651,7 +651,8 @@ exports.BattleMovedex = {
 		priority: 0,
 		isSnatchable: true,
 		onTryHit: function(pokemon) {
-			if ((pokemon.ability !== 'contrary' && pokemon.boosts.spe === 6) || (pokemon.ability === 'contrary' && pokemon.boosts.spe === -6)) {
+			var hasContrary = pokemon.hasAbility('contrary');
+			if ((!hasContrary && pokemon.boosts.spe === 6) || (hasContrary && pokemon.boosts.spe === -6)) {
 				return false;
 			}
 		},
@@ -1223,17 +1224,19 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
 		effect: {
 			duration: 2,
-			onLockMove: 'bounce',
 			onAccuracy: function(accuracy, target, source, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
 					return;
 				}
 				if (move.id === 'skyuppercut' || move.id === 'thunder' || move.id === 'hurricane' || move.id === 'smackdown' || move.id === 'helpinghand') {
+					return;
+				}
+				if (source.hasAbility('noguard') || target.hasAbility('noguard')) {
 					return;
 				}
 				return 0;
@@ -2527,17 +2530,19 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
 		effect: {
 			duration: 2,
-			onLockMove: 'dig',
 			onImmunity: function(type, pokemon) {
 				if (type === 'sandstorm' || type === 'hail') return false;
 			},
 			onAccuracy: function(accuracy, target, source, move) {
 				if (move.id === 'earthquake' || move.id === 'magnitude' || move.id === 'helpinghand') {
+					return;
+				}
+				if (source.hasAbility('noguard') || target.hasAbility('noguard')) {
 					return;
 				}
 				return 0;
@@ -2671,17 +2676,19 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
 		effect: {
 			duration: 2,
-			onLockMove: 'dive',
 			onImmunity: function(type, pokemon) {
 				if (type === 'sandstorm' || type === 'hail') return false;
 			},
 			onAccuracy: function(accuracy, target, source, move) {
 				if (move.id === 'surf' || move.id === 'whirlpool' || move.id === 'helpinghand') {
+					return;
+				}
+				if (source.hasAbility('noguard') || target.hasAbility('noguard')) {
 					return;
 				}
 				return 0;
@@ -4367,17 +4374,19 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
 		effect: {
 			duration: 2,
-			onLockMove: 'fly',
 			onAccuracy: function(accuracy, target, source, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
 					return;
 				}
 				if (move.id === 'skyuppercut' || move.id === 'thunder' || move.id === 'hurricane' || move.id === 'smackdown' || move.id === 'helpinghand') {
+					return;
+				}
+				if (source.hasAbility('noguard') || target.hasAbility('noguard')) {
 					return;
 				}
 				return 0;
@@ -4667,12 +4676,8 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
-		},
-		effect: {
-			duration: 2,
-			onLockMove: 'freezeshock'
 		},
 		secondary: {
 			chance: 30,
@@ -4965,17 +4970,13 @@ exports.BattleMovedex = {
 				return;
 			}
 			this.add('-prepare', attacker, move.name, defender);
-			attacker.addVolatile(move.id, defender);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				this.add('-anim', attacker, move.name, defender);
 				attacker.removeVolatile(move.id);
 				return;
 			}
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
-		},
-		effect: {
-			duration: 2,
-			onLockMove: 'geomancy'
 		},
 		boosts: {
 			spa: 2,
@@ -5239,8 +5240,8 @@ exports.BattleMovedex = {
 		pseudoWeather: 'gravity',
 		effect: {
 			duration: 5,
-			durationCallback: function(target, source, effect) {
-				if (source && source.ability === 'persistent') {
+			durationCallback: function(source, effect) {
+				if (source && source.hasAbility('persistent')) {
 					return 7;
 				}
 				return 5;
@@ -5695,7 +5696,7 @@ exports.BattleMovedex = {
 		effect: {
 			duration: 5,
 			durationCallback: function(target, source, effect) {
-				if (source && source.ability === 'persistent') {
+				if (source && source.hasAbility('persistent')) {
 					return 7;
 				}
 				return 5;
@@ -5760,7 +5761,7 @@ exports.BattleMovedex = {
 		priority: 0,
 		isBounceable: true,
 		onHit: function(target, source) {
-			if (source.ability === 'megalauncher') this.heal(this.modify(target.maxhp, 0.75));
+			if (source.hasAbility('megalauncher')) this.heal(this.modify(target.maxhp, 0.75));
 			else this.heal(Math.ceil(target.maxhp * 0.5));
 		},
 		secondary: false,
@@ -6609,12 +6610,8 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
-		},
-		effect: {
-			duration: 2,
-			onLockMove: 'iceburn'
 		},
 		secondary: {
 			chance: 30,
@@ -7373,7 +7370,7 @@ exports.BattleMovedex = {
 		effect: {
 			duration: 5,
 			durationCallback: function(target, source, effect) {
-				if (source && source.item === 'lightclay') {
+				if (source && source.hasItem('lightclay')) {
 					return 8;
 				}
 				return 5;
@@ -7683,9 +7680,9 @@ exports.BattleMovedex = {
 		},
 		effect: {
 			duration: 5,
-			/*durationCallback: function(target, source, effect) {
+			/*durationCallback: function(source, effect) {
 				// Persistent isn't updated for BW moves
-				if (source && source.ability === 'Persistent') {
+				if (source && source.hasAbility('Persistent')) {
 					return 7;
 				}
 				return 5;
@@ -7769,7 +7766,7 @@ exports.BattleMovedex = {
 		onHitSide: function(side, source) {
 			var targets = [];
 			for (var p in side.active) {
-				if (side.active[p].ability === 'plus' || side.active[p].ability === 'minus') {
+				if (side.active[p].hasAbility(['plus', 'minus'])) {
 					targets.push(side.active[p]);
 				}
 			}
@@ -8174,7 +8171,7 @@ exports.BattleMovedex = {
 				if (i !== move.id) continue;
 				if (move.isNonstandard) continue;
 				var noMetronome = {
-					afteryou:1, assist:1, bestow:1, chatter:1, copycat:1, counter:1, covet:1, destinybond:1, detect:1, endure:1, feint:1, focuspunch:1, followme:1, freezeshock:1, helpinghand:1, iceburn:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, protect:1, quash:1, quickguard:1, ragepowder:1, relicsong:1, secretsword:1, sketch:1, sleeptalk:1, snatch:1, snarl:1, snore:1, struggle:1, switcheroo:1, technoblast:1, thief:1, transform:1, trick:1, vcreate:1, wideguard:1, diamondstorm:1, steameruption:1, hyperspacehole:1
+					afteryou:1, assist:1, bestow:1, chatter:1, copycat:1, counter:1, covet:1, destinybond:1, detect:1, endure:1, feint:1, focuspunch:1, followme:1, freezeshock:1, helpinghand:1, iceburn:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, protect:1, quash:1, quickguard:1, ragepowder:1, relicsong:1, secretsword:1, sketch:1, sleeptalk:1, snatch:1, snarl:1, snore:1, struggle:1, switcheroo:1, technoblast:1, thief:1, transform:1, trick:1, vcreate:1, wideguard:1, diamondstorm:1, steameruption:1, hyperspacehole:1, thousandarrows:1, thousandwaves:1
 				};
 				if (!noMetronome[move.id]) {
 					moves.push(move.id);
@@ -9193,7 +9190,7 @@ exports.BattleMovedex = {
 						if (!this.sides[i].active[j].volatiles['perishsong']) {
 							result = false;
 						}
-						if (this.sides[i].active[j].ability !== 'soundproof') {
+						if (!this.sides[i].active[j].hasAbility('soundproof')) {
 							this.sides[i].active[j].addVolatile('perishsong');
 						} else {
 							this.add('-immune', this.sides[i].active[j], '[msg]');
@@ -9278,14 +9275,16 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
 		effect: {
 			duration: 2,
-			onLockMove: 'phantomforce',
 			onAccuracy: function(accuracy, target, source, move) {
 				if (move.id === 'helpinghand') {
+					return;
+				}
+				if (source.hasAbility('noguard') || target.hasAbility('noguard')) {
 					return;
 				}
 				return 0;
@@ -10320,12 +10319,8 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
-		},
-		effect: {
-			duration: 2,
-			onLockMove: 'razorwind'
 		},
 		critRatio: 2,
 		secondary: false,
@@ -10389,7 +10384,7 @@ exports.BattleMovedex = {
 		effect: {
 			duration: 5,
 			durationCallback: function(target, source, effect) {
-				if (source && source.item === 'lightclay') {
+				if (source && source.hasItem('lightclay')) {
 					return 8;
 				}
 				return 5;
@@ -11071,7 +11066,7 @@ exports.BattleMovedex = {
 		effect: {
 			duration: 5,
 			durationCallback: function(target, source, effect) {
-				if (source && source.ability === 'persistent') {
+				if (source && source.hasAbility('persistent')) {
 					return 7;
 				}
 				return 5;
@@ -11421,14 +11416,16 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
 		effect: {
 			duration: 2,
-			onLockMove: 'shadowforce',
 			onAccuracy: function(accuracy, target, source, move) {
 				if (move.id === 'helpinghand') {
+					return;
+				}
+				if (source.hasAbility('noguard') || target.hasAbility('noguard')) {
 					return;
 				}
 				return 0;
@@ -11746,20 +11743,14 @@ exports.BattleMovedex = {
 				return;
 			}
 			this.add('-prepare', attacker, move.name, defender);
-			attacker.addVolatile(move.id, defender);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				this.add('-anim', attacker, move.name, defender);
 				attacker.removeVolatile(move.id);
 				return;
 			}
+			attacker.addVolatile('twoturnmove', defender);
+			this.boost({def:1}, pokemon, pokemon, this.getMove('skullbash'));
 			return null;
-		},
-		effect: {
-			duration: 2,
-			onLockMove: 'skullbash',
-			onStart: function(pokemon) {
-				this.boost({def:1}, pokemon, pokemon, this.getMove('skullbash'));
-			}
 		},
 		secondary: false,
 		target: "normal",
@@ -11787,12 +11778,8 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
-		},
-		effect: {
-			duration: 2,
-			onLockMove: 'skyattack'
 		},
 		secondary: {
 			chance: 30,
@@ -11871,6 +11858,9 @@ exports.BattleMovedex = {
 					return;
 				}
 				if (move.id === 'skyuppercut' || move.id === 'thunder' || move.id === 'hurricane' || move.id === 'smackdown' || move.id === 'helpinghand') {
+					return;
+				}
+				if (source.hasAbility('noguard') || target.hasAbility('noguard')) {
 					return;
 				}
 				return 0;
@@ -12091,7 +12081,7 @@ exports.BattleMovedex = {
 		effect: {
 			onStart: function(pokemon) {
 				var applies = false;
-				if ((pokemon.hasType('Flying') && !pokemon.volatiles['roost']) || pokemon.ability === 'levitate') applies = true;
+				if ((pokemon.hasType('Flying') && !pokemon.volatiles['roost']) || pokemon.hasAbility('levitate')) applies = true;
 				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
 					applies = true;
 					this.cancelMove(pokemon);
@@ -12359,7 +12349,7 @@ exports.BattleMovedex = {
 				this.add('-anim', attacker, move.name, defender);
 				return;
 			}
-			attacker.addVolatile(move.id, defender);
+			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
 		onBasePowerPriority: 4,
@@ -12368,10 +12358,6 @@ exports.BattleMovedex = {
 				this.debug('weakened by weather');
 				return this.chainModify(0.5);
 			}
-		},
-		effect: {
-			duration: 2,
-			onLockMove: 'solarbeam'
 		},
 		secondary: false,
 		target: "normal",
@@ -13427,7 +13413,7 @@ exports.BattleMovedex = {
 		effect: {
 			duration: 4,
 			durationCallback: function(target, source, effect) {
-				if (source && source.ability === 'persistent') {
+				if (source && source.hasAbility('persistent')) {
 					return 6;
 				}
 				return 4;
@@ -14069,8 +14055,8 @@ exports.BattleMovedex = {
 		},
 		effect: {
 			duration: 5,
-			durationCallback: function(target, source, effect) {
-				if (source && source.ability === 'persistent') {
+			durationCallback: function(source, effect) {
+				if (source && source.hasAbility('persistent')) {
 					return 7;
 				}
 				return 5;

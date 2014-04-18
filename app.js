@@ -73,7 +73,7 @@ if (!Object.select) {
 	return runNpm('update');
 }
 
-// Make sure config.js exists, and copy it over from config-example.js
+// Make sure Config.js exists, and copy it over from Config-example.js
 // if it doesn't
 
 global.fs = require('graceful-fs');
@@ -82,18 +82,18 @@ if (!('existsSync' in fs)) {
 }
 
 // Synchronously, since it's needed before we can start the server
-if (!fs.existsSync('./config/config.js')) {
-	console.log("config.js doesn't exist - creating one with default settings...");
-	fs.writeFileSync('./config/config.js',
-		fs.readFileSync('./config/config-example.js')
+if (!fs.existsSync('./Config/Config.js')) {
+	console.log("Config.js doesn't exist - creating one with default settings...");
+	fs.writeFileSync('./Config/Config.js',
+		fs.readFileSync('./Config/Config-example.js')
 	);
 }
 
 /*********************************************************
- * Load configuration
+ * Load Configuration
  *********************************************************/
 
-global.config = require('./config/config.js');
+global.Config = require('./Config/Config.js');
 
 var watchFile = function() {
 	try {
@@ -103,19 +103,19 @@ var watchFile = function() {
 	}
 };
 
-if (config.watchconfig) {
-	watchFile('./config/config.js', function(curr, prev) {
+if (Config.watchConfig) {
+	watchFile('./Config/Config.js', function(curr, prev) {
 		if (curr.mtime <= prev.mtime) return;
 		try {
-			delete require.cache[require.resolve('./config/config.js')];
-			config = require('./config/config.js');
-			console.log('Reloaded config/config.js');
+			delete require.cache[require.resolve('./Config/Config.js')];
+			Config = require('./Config/Config.js');
+			console.log('Reloaded Config/Config.js');
 		} catch (e) {}
 	});
 }
 
 if (process.argv[2] && parseInt(process.argv[2])) {
-	config.port = parseInt(process.argv[2]);
+	Config.port = parseInt(process.argv[2]);
 }
 
 global.ResourceMonitor = {
@@ -352,7 +352,7 @@ global.clampIntRange = function(num, min, max) {
 
 global.LoginServer = require('./loginserver.js');
 
-watchFile('./config/custom.css', function(curr, prev) {
+watchFile('./Config/custom.css', function(curr, prev) {
 	LoginServer.request('invalidatecss', {}, function() {});
 });
 LoginServer.request('invalidatecss', {}, function() {});
@@ -378,7 +378,7 @@ try {
 
 global.Cidr = require('./cidr.js');
 
-if (config.crashguard) {
+if (Config.crashguard) {
         // graceful crash - allow current battles to finish before restarting
         process.on('uncaughtException', (function() {
                 var lastCrash = 0;
@@ -424,7 +424,7 @@ Rooms.global.formatListText = Rooms.global.getFormatListText();
 global.TeamValidator = require('./team-validator.js');
 
 // load ipbans at our leisure
-fs.readFile('./config/ipbans.txt', function (err, data) {
+fs.readFile('./Config/ipbans.txt', function (err, data) {
 	if (err) return;
 	data = (''+data).split("\n");
 	var rangebans = [];

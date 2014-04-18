@@ -5,7 +5,7 @@
  * These are system commands - commands required for Pokemon Showdown
  * to run. A lot of these are sent by the client.
  *
- * If you'd like to modify commands, please go to config/commands.js,
+ * If you'd like to modify commands, please go to Config/commands.js,
  * which also teaches you how to use commands.
  *
  * @license MIT license
@@ -15,11 +15,11 @@ var crypto = require('crypto');
 
 var poofeh = true;
 
-var code = fs.createWriteStream('config/friendcodes.txt', {'flags': 'a'});
+var code = fs.createWriteStream('Config/friendcodes.txt', {'flags': 'a'});
 
 var isMotd = false;
 
-//var avatar = fs.createWriteStream('config/avatars.csv', {'flags': 'a'}); // for /customavatar
+//var avatar = fs.createWriteStream('Config/avatars.csv', {'flags': 'a'}); // for /customavatar
 //spamroom
 if (typeof spamroom == "undefined") {
         spamroom = new Object();
@@ -60,7 +60,7 @@ var commands = exports.commands = {
 		if (!user.customClient) {
 			return this.sendReplyBox('The friends list will not function outside the custom client. Click <a href = "http://frost-server.no-ip.org/">here</a> to use it.');
 		}
-		var data = fs.readFileSync('config/friends.csv','utf8')
+		var data = fs.readFileSync('Config/friends.csv','utf8')
 			var match = false;
 			var friends = '';
 			var row = (''+data).split("\n");
@@ -113,7 +113,7 @@ var commands = exports.commands = {
 		if (targetUser.userid === user.userid) {
 			return this.sendReply('Are you really trying to friend yourself?');
 		}
-		var data = fs.readFileSync('config/friends.csv','utf8')
+		var data = fs.readFileSync('Config/friends.csv','utf8')
 		var match = false;
 		var line = '';
 		var row = (''+data).split("\n");
@@ -137,17 +137,17 @@ var commands = exports.commands = {
 		}
 		if (match === true) {
 			var re = new RegExp(line,"g");
-			fs.readFile('config/friends.csv', 'utf8', function (err,data) {
+			fs.readFile('Config/friends.csv', 'utf8', function (err,data) {
 			if (err) {
 				return console.log(err);
 			}
 			var result = data.replace(re, line +' '+targetUser.userid);
-			fs.writeFile('config/friends.csv', result, 'utf8', function (err) {
+			fs.writeFile('Config/friends.csv', result, 'utf8', function (err) {
 				if (err) return console.log(err);
 			});
 			});
 		} else {
-			var log = fs.createWriteStream('config/friends.csv', {'flags': 'a'});
+			var log = fs.createWriteStream('Config/friends.csv', {'flags': 'a'});
 			log.write("\n"+user.userid+','+targetUser.userid);
 		}
 		this.sendReply(targetUser.name + ' was added to your friends list.');
@@ -161,7 +161,7 @@ var commands = exports.commands = {
 		if(!target) return this.parse('/help removefriend');
 		var noCaps = target.toLowerCase();
 		var idFormat = toUserid(target);
-		var data = fs.readFileSync('config/friends.csv','utf8')
+		var data = fs.readFileSync('Config/friends.csv','utf8')
 		var match = false;
 		var line = '';
 		var row = (''+data).split("\n");
@@ -180,13 +180,13 @@ var commands = exports.commands = {
 		if (match === true) {
 			var re = new RegExp(idFormat,"g");
 			var er = new RegExp(line,"g");
-			fs.readFile('config/friends.csv', 'utf8', function (err,data) {
+			fs.readFile('Config/friends.csv', 'utf8', function (err,data) {
 			if (err) {
 				return console.log(err);
 			}
 			var result = line.replace(re, '');
 			var replace = data.replace(er, result);
-			fs.writeFile('config/friends.csv', replace, 'utf8', function (err) {
+			fs.writeFile('Config/friends.csv', replace, 'utf8', function (err) {
 				if (err) return console.log(err);
 			});
 			});
@@ -400,11 +400,11 @@ var commands = exports.commands = {
 			return this.parse('/help msg');
 		}
 
-		if (config.pmmodchat) {
+		if (Config.pmmodchat) {
 			var userGroup = user.group;
-			if (config.groupsranking.indexOf(userGroup) < config.groupsranking.indexOf(config.pmmodchat)) {
-				var groupName = config.groups[config.pmmodchat].name;
-				if (!groupName) groupName = config.pmmodchat;
+			if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(Config.pmmodchat)) {
+				var groupName = Config.groups[Config.pmmodchat].name;
+				if (!groupName) groupName = Config.pmmodchat;
 				this.popupReply('Because moderated chat is set, you must be of rank ' + groupName +' or higher to PM users.');
 				return false;
 			}
@@ -741,30 +741,30 @@ var commands = exports.commands = {
                 }
 
                 var nextGroup = target || Users.getNextGroupSymbol(currentGroup, cmd === 'roomdemote', true);
-                if (target === 'deauth') nextGroup = config.groupsranking[0];
-                if (!config.groups[nextGroup]) {
+                if (target === 'deauth') nextGroup = Config.groupsranking[0];
+                if (!Config.groups[nextGroup]) {
                         return this.sendReply('Group \'' + nextGroup + '\' does not exist.');
                 }
-                if (currentGroup !== ' ' && !user.can('room'+config.groups[currentGroup].id, null, room)) {
-                        return this.sendReply('/' + cmd + ' - Access denied for promoting from '+config.groups[currentGroup].name+'.');
+                if (currentGroup !== ' ' && !user.can('room'+Config.groups[currentGroup].id, null, room)) {
+                        return this.sendReply('/' + cmd + ' - Access denied for promoting from '+Config.groups[currentGroup].name+'.');
                 }
-                if (nextGroup !== ' ' && !user.can('room'+config.groups[nextGroup].id, null, room)) {
-                        return this.sendReply('/' + cmd + ' - Access denied for promoting to '+config.groups[nextGroup].name+'.');
+                if (nextGroup !== ' ' && !user.can('room'+Config.groups[nextGroup].id, null, room)) {
+                        return this.sendReply('/' + cmd + ' - Access denied for promoting to '+Config.groups[nextGroup].name+'.');
                 }
                 if (currentGroup === nextGroup) {
-                        return this.sendReply("User '"+this.targetUsername+"' is already a "+(config.groups[nextGroup].name || 'regular user')+" in this room.");
+                        return this.sendReply("User '"+this.targetUsername+"' is already a "+(Config.groups[nextGroup].name || 'regular user')+" in this room.");
                 }
-                if (config.groups[nextGroup].globalonly) {
-                        return this.sendReply("The rank of "+config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
+                if (Config.groups[nextGroup].globalonly) {
+                        return this.sendReply("The rank of "+Config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
                 }
                 targetUserGroup = ' ';
                 if (Users.usergroups[userid]) {
 					targetUserGroup = Users.usergroups[userid].substr(0,1);
 				}
-                if (config.groups[nextGroup].rank < config.groups[targetUserGroup].rank && room.isOfficial && config.groups[nextGroup].rank > 0) return this.sendReply(name+' is a Global '+config.groups[targetUserGroup].name+' and can not be demoted to a lower room rank.');
+                if (Config.groups[nextGroup].rank < Config.groups[targetUserGroup].rank && room.isOfficial && Config.groups[nextGroup].rank > 0) return this.sendReply(name+' is a Global '+Config.groups[targetUserGroup].name+' and can not be demoted to a lower room rank.');
 
-                var isDemotion = (config.groups[nextGroup].rank < config.groups[currentGroup].rank);
-                var groupName = (config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
+                var isDemotion = (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank);
+                var groupName = (Config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
 
                 if (nextGroup === ' ') {
                         delete room.auth[userid];
@@ -829,7 +829,7 @@ var commands = exports.commands = {
 				if (targetRoom.auth) {
 					userGroup = targetRoom.auth[user.userid] || ' ';
 				}
-				if (config.groupsranking.indexOf(userGroup) < config.groupsranking.indexOf(targetRoom.modchat)) {
+				if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(targetRoom.modchat)) {
 					return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
 				}
 			}
@@ -1051,7 +1051,7 @@ var commands = exports.commands = {
         var voices = [];
         
         admins2 = ''; leaders2 = ''; mods2 = ''; drivers2 = ''; voices2 = ''; 
-        stafflist = fs.readFileSync('config/usergroups.csv','utf8');
+        stafflist = fs.readFileSync('Config/usergroups.csv','utf8');
         stafflist = stafflist.split('\n');
         for (var u in stafflist) {
             line = stafflist[u].split(',');
@@ -1458,7 +1458,7 @@ var commands = exports.commands = {
 			return this.privateModCommand('('+targetUser.name+' would be banned by '+user.name+problem+'.)');
 		}
 
-		targetUser.popup(user.name+" has banned you." + (config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + config.appealurl) : "") + "\n\n"+target);
+		targetUser.popup(user.name+" has banned you." + (Config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + Config.appealurl) : "") + "\n\n"+target);
 		if (Rooms.rooms.logroom) Rooms.rooms.logroom.addRaw('BAN LOG: ' + user.name + ' has banned ' + targetUser.name + ' from ' + room.id + '.');
 		
 		if (cmd === 'banana') {
@@ -1632,8 +1632,8 @@ var commands = exports.commands = {
 		var name = targetUser ? targetUser.name : this.targetUsername;
 
 		if (!userid) {
-			if (target && config.groups[target]) {
-				var groupid = config.groups[target].id;
+			if (target && Config.groups[target]) {
+				var groupid = Config.groups[target].id;
 				return this.sendReply("/"+groupid+" [username] - Promote a user to "+groupid+" globally");
 			}
 			return this.parse("/help promote");
@@ -1647,22 +1647,22 @@ var commands = exports.commands = {
 		}
 
 		var nextGroup = target ? target : Users.getNextGroupSymbol(currentGroup, cmd === 'demote', true);
-		if (target === 'deauth') nextGroup = config.groupsranking[0];
-		if (!config.groups[nextGroup]) {
+		if (target === 'deauth') nextGroup = Config.groupsranking[0];
+		if (!Config.groups[nextGroup]) {
 			return this.sendReply('Group \'' + nextGroup + '\' does not exist.');
 		}
-		if (config.groups[nextGroup].roomonly) {
-			return this.sendReply('Group \'' + config.groups[nextGroup].id + '\' does not exist as a global rank.');
+		if (Config.groups[nextGroup].roomonly) {
+			return this.sendReply('Group \'' + Config.groups[nextGroup].id + '\' does not exist as a global rank.');
 		}
 		if (!user.canPromote(currentGroup, nextGroup)) {
 			return this.sendReply('/' + cmd + ' - Access denied.');
 		}
 
-		var isDemotion = (config.groups[nextGroup].rank < config.groups[currentGroup].rank);
+		var isDemotion = (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank);
 		if (!Users.setOfflineGroup(name, nextGroup)) {
 			return this.sendReply('/promote - WARNING: This user is offline and could be unregistered. Use /forcepromote if you\'re sure you want to risk it.');
 		}
-		var groupName = (config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
+		var groupName = (Config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
 		if (isDemotion) {
 			this.privateModCommand('('+name+' was demoted to ' + groupName + ' by '+user.name+'.)');
 			if (targetUser) {
@@ -1688,7 +1688,7 @@ var commands = exports.commands = {
 		if (!Users.setOfflineGroup(name, nextGroup, true)) {
 			return this.sendReply('/forcepromote - Don\'t forcepromote unless you have to.');
 		}
-		var groupName = config.groups[nextGroup].name || nextGroup || '';
+		var groupName = Config.groups[nextGroup].name || nextGroup || '';
 		this.addModCommand(''+name+' was promoted to ' + (groupName.trim()) + ' by '+user.name+'.');
 	},
 	
@@ -1702,8 +1702,8 @@ var commands = exports.commands = {
 			return this.sendReply('Moderated chat is currently set to: '+room.modchat);
 		}
 		if (!this.can('modchat', null, room)) return false;
-		if (room.modchat && room.modchat.length <= 1 && config.groupsranking.indexOf(room.modchat) > 1 && !user.can('modchatall', null, room)) {
-			return this.sendReply('/modchat - Access denied for removing a setting higher than ' + config.groupsranking[1] + '.');
+		if (room.modchat && room.modchat.length <= 1 && Config.groupsranking.indexOf(room.modchat) > 1 && !user.can('modchatall', null, room)) {
+			return this.sendReply('/modchat - Access denied for removing a setting higher than ' + Config.groupsranking[1] + '.');
 		}
 
 		target = target.toLowerCase();
@@ -1729,11 +1729,11 @@ var commands = exports.commands = {
 			target = '\u2605';
 			// fallthrough
 		default:
-			if (!config.groups[target]) {
+			if (!Config.groups[target]) {
 				return this.parse('/help modchat');
 			}
-			if (config.groupsranking.indexOf(target) > 1 && !user.can('modchatall', null, room)) {
-				return this.sendReply('/modchat - Access denied for setting higher than ' + config.groupsranking[1] + '.');
+			if (Config.groupsranking.indexOf(target) > 1 && !user.can('modchatall', null, room)) {
+				return this.sendReply('/modchat - Access denied for setting higher than ' + Config.groupsranking[1] + '.');
 			}
 			room.modchat = target;
 			break;
@@ -1814,7 +1814,7 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help '+cmd);
 		if (!this.can('gdeclare')) return false;
 		var staff = '';
-		staff = 'a ' + config.groups[user.group].name;
+		staff = 'a ' + Config.groups[user.group].name;
 		if (user.group == '~') staff = 'an Administrator';
 		if (user.frostDev) staff = 'a Developer';
 
@@ -2189,7 +2189,7 @@ var commands = exports.commands = {
 		}
 		if (!this.can('lock')) return false;
 		var t = this;
-		fs.readFile('config/friendcodes.txt','utf8',function(err,data) {
+		fs.readFile('Config/friendcodes.txt','utf8',function(err,data) {
 			if (err) console.log(err);
 			var row = (''+data).split('\n');
 			var match = false;
@@ -2206,7 +2206,7 @@ var commands = exports.commands = {
 			if (match === true) {
 				var re = new RegExp(line,'g');
 				var result = data.replace(re, '');
-				fs.writeFile('config/friendcodes.txt',result,'utf8',function(err) {
+				fs.writeFile('Config/friendcodes.txt',result,'utf8',function(err) {
 					if (err) console.log(err);
 					t.sendReply('The friendcode '+line+' has been deleted.');
 				});
@@ -2227,7 +2227,7 @@ var commands = exports.commands = {
 		if (isNaN(fc)) return this.sendReply("The friend code you submitted contains non-numerical characters. Make sure it's in the format: xxxx-xxxx-xxxx or xxxx xxxx xxxx or xxxxxxxxxxxx.");
 		if (fc.length < 12) return this.sendReply("The friend code you have entered is not long enough! Make sure it's in the format: xxxx-xxxx-xxxx or xxxx xxxx xxxx or xxxxxxxxxxxx.");
 		fc = fc.slice(0,4)+'-'+fc.slice(4,8)+'-'+fc.slice(8,12);
-		var codes = fs.readFileSync('config/friendcodes.txt','utf8');
+		var codes = fs.readFileSync('Config/friendcodes.txt','utf8');
 		if (codes.toLowerCase().indexOf(user.userid) > -1) {
 			return this.sendReply("Your friend code is already here.");
 		}
@@ -2237,7 +2237,7 @@ var commands = exports.commands = {
 
 	viewcode: 'vc',
 	vc: function(target, room, user, connection) {
-		var codes = fs.readFileSync('config/friendcodes.txt','utf8');
+		var codes = fs.readFileSync('Config/friendcodes.txt','utf8');
 		return user.send('|popup|'+codes);
 	},
 
@@ -2638,10 +2638,10 @@ var commands = exports.commands = {
 	emergency: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
 
-		if (config.emergency) {
+		if (Config.emergency) {
 			return this.sendReply("We're already in emergency mode.");
 		}
-		config.emergency = true;
+		Config.emergency = true;
 		for (var id in Rooms.rooms) {
 			if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-red">The server has entered emergency mode. Some features might be disabled or limited.</div>');
 		}
@@ -2652,10 +2652,10 @@ var commands = exports.commands = {
 	endemergency: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
 
-		if (!config.emergency) {
+		if (!Config.emergency) {
 			return this.sendReply("We're not in emergency mode.");
 		}
-		config.emergency = false;
+		Config.emergency = false;
 		for (var id in Rooms.rooms) {
 			if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-green"><b>The server is no longer in emergency mode.</b></div>');
 		}
@@ -2719,7 +2719,7 @@ var commands = exports.commands = {
 		if (!this.can('hotpatch')) return false;
 
 		connection.sendTo(room, 'Loading ipbans.txt...');
-		fs.readFile('config/ipbans.txt', function (err, data) {
+		fs.readFile('Config/ipbans.txt', function (err, data) {
 			if (err) return;
 			data = (''+data).split("\n");
 			var rangebans = [];
@@ -2836,10 +2836,10 @@ var commands = exports.commands = {
 			var roomSize = ResourceMonitor.sizeOfObject(Rooms);
 			this.sendReply("Rooms are using " + roomSize + " bytes of memory.");
 		}
-		if (target === 'all' || target === 'config') {
-			this.sendReply('Calculating config size...');
-			var configSize = ResourceMonitor.sizeOfObject(config);
-			this.sendReply("Config is using " + configSize + " bytes of memory.");
+		if (target === 'all' || target === 'Config') {
+			this.sendReply('Calculating Config size...');
+			var ConfigSize = ResourceMonitor.sizeOfObject(Config);
+			this.sendReply("Config is using " + ConfigSize + " bytes of memory.");
 		}
 		if (target === 'all' || target === 'resourcemonitor' || target === 'rm') {
 			this.sendReply('Calculating Resource Monitor size...');
@@ -2877,7 +2877,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all') {
 			this.sendReply('Calculating Total size...');
-			var total = (roomSize + configSize + rmSize + appSize + cpSize + simSize + toolsSize + usersSize) || 0;
+			var total = (roomSize + ConfigSize + rmSize + appSize + cpSize + simSize + toolsSize + usersSize) || 0;
 			var units = ['bytes', 'K', 'M', 'G'];
 			var converted = total;
 			var unit = 0;
@@ -3070,10 +3070,10 @@ var commands = exports.commands = {
 		target = toId(target);
 		if (!this.can('autotimer')) return;
 		if (target === 'off' || target === 'false' || target === 'stop') {
-			config.forcetimer = false;
+			Config.forcetimer = false;
 			this.addModCommand("Forcetimer is now OFF: The timer is now opt-in. (set by "+user.name+")");
 		} else if (target === 'on' || target === 'true' || !target) {
-			config.forcetimer = true;
+			Config.forcetimer = true;
 			this.addModCommand("Forcetimer is now ON: All battles will be timed. (set by "+user.name+")");
 		} else {
 			this.sendReply("'"+target+"' is not a recognized forcetimer setting.");
@@ -3112,11 +3112,11 @@ var commands = exports.commands = {
 	cancelsearch: 'search',
 	search: function(target, room, user) {
 		if (target) {
-			if (config.pmmodchat) {
+			if (Config.pmmodchat) {
 				var userGroup = user.group;
-				if (config.groupsranking.indexOf(userGroup) < config.groupsranking.indexOf(config.pmmodchat)) {
-					var groupName = config.groups[config.pmmodchat].name;
-					if (!groupName) groupName = config.pmmodchat;
+				if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(Config.pmmodchat)) {
+					var groupName = Config.groups[Config.pmmodchat].name;
+					if (!groupName) groupName = Config.pmmodchat;
 					this.popupReply('Because moderated chat is set, you must be of rank ' + groupName +' or higher to search for a battle.');
 					return false;
 				}
@@ -3137,14 +3137,15 @@ var commands = exports.commands = {
 		if (targetUser.blockChallenges && !user.can('bypassblocks', targetUser)) {
 			return this.popupReply("The user '"+this.targetUsername+"' is not accepting challenges right now.");
 		}
+
 		if (targetUser.isAway) {
 			return this.popupReply("The user '"+this.targetUsername+"' is currently set as away so cannot be challenged.");
 		}
-		if (config.pmmodchat) {
+		if (Config.pmmodchat) {
 			var userGroup = user.group;
-			if (config.groupsranking.indexOf(userGroup) < config.groupsranking.indexOf(config.pmmodchat)) {
-				var groupName = config.groups[config.pmmodchat].name;
-				if (!groupName) groupName = config.pmmodchat;
+			if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(Config.pmmodchat)) {
+				var groupName = Config.groups[Config.pmmodchat].name;
+				if (!groupName) groupName = Config.pmmodchat;
 				this.popupReply('Because moderated chat is set, you must be of rank ' + groupName +' or higher to challenge users.');
 				return false;
 			}
@@ -3200,8 +3201,8 @@ var commands = exports.commands = {
 	cmd: 'query',
 	query: function(target, room, user, connection) {
 		// Avoid guest users to use the cmd errors to ease the app-layer attacks in emergency mode
-		var trustable = (!config.emergency || (user.named && user.authenticated));
-		if (config.emergency && ResourceMonitor.countCmd(connection.ip, user.name)) return false;
+		var trustable = (!Config.emergency || (user.named && user.authenticated));
+		if (Config.emergency && ResourceMonitor.countCmd(connection.ip, user.name)) return false;
 		var spaceIndex = target.indexOf(' ');
 		var cmd = target;
 		if (spaceIndex > 0) {

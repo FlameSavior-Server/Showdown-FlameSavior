@@ -999,6 +999,17 @@ var commands = exports.commands = {
 		'5. <a href="https://www.youtube.com/watch?v=aFIApXs0_Nw"><button title="Better Off Dead - Elton John">Better Off Dead - Elton John</a></button><br>' +
 		'6. <a href="https://www.youtube.com/watch?v=eJLTGHEwaR8"><button title="Your Song - Carly Rose Sonenclar cover">Your Song - Carly Rose Sonenclar cover</a></button>');
 	},
+	lazerbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>lazerbeam\'s Music Box!</b><br>' +
+        //This is an image of a music note! (line bellow)
+                '<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"></center><br>' +
+                '1. <a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ"><button title="Bohemian Rhapsody - Queen">Bohemian Rhapsody - Queen</a></button><br>' +
+                '2. <a href="https://www.youtube.com/watch?v=ZNaA7fVXB28"><button title="Against the Wind - Bob Seger">Against the Wind -  Bob Seger</a></button><br>'
+                '3. <a href="https://www.youtube.com/watch?v=TuCGiV-EVjA"><button title="Livin\' on the Edge - Aerosmith">Livin\' on the Edge - Aerosmith</a></button><br>' +
+                '4. <a href="https://www.youtube.com/watch?v=QZ_kYEDZVno"><button title="Rock and Roll Never Forgets - Bob Seger">Rock and Roll Never Forgets - Bob Seger</a></button><br>' +
+                '5. <a href="https://www.youtube.com/watch?v=GHjKEwV2-ZM"><button title="Jaded - Aerosmith">Jaded - Aerosmith</a></button>');
+	},
     	berry: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://blog.flamingtext.com/blog/2014/04/02/flamingtext_com_1396402375_186122138.png" width="50%"><br>' +

@@ -230,6 +230,19 @@ var commands = exports.commands = {
         	if (!this.canBroadcast()) return;
         	this.sendReplyBox('You are currently in the room "<b>'+room.id+'</b>".');
 	},
+	showimage: function(target, room, user) {
+		if (!target) return this.parse('/help showimage');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		targets = target.split(', ');
+		if (targets.length != 3) {
+			return this.parse('/help showimage');
+		}
+
+		this.add('|raw|'+sanitize(user.name)+' shows:<br /><img src="'+sanitize(targets[0])+'" alt="" width="'+toId(targets[1])+'" height="'+toId(targets[2])+'" />');
+	},
 	punt: function(target, room, user){
 		if(!target) return this.sendReply('/punt needs a target.');
 		return this.parse('/me punts ' + target + ' to the moon!');

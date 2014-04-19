@@ -243,6 +243,15 @@ var commands = exports.commands = {
 
 		this.add('|raw|'+sanitize(user.name)+' shows:<br /><img src="'+sanitize(targets[0])+'" alt="" width="'+toId(targets[1])+'" height="'+toId(targets[2])+'" />');
 	},
+	maindeclare: function(target, room, user) {
+		if (!target) return this.parse('/help declare');
+		if (!this.can('declare', null, room)) return false;
+
+		if (!this.canTalk()) return;
+
+		this.add('|raw|<div class="broadcast-blue"><b>'+sanitize(target)+'</b></div>');
+		this.logModCommand(user.name+' declared '+target);
+	}, 
 	punt: function(target, room, user){
 		if(!target) return this.sendReply('/punt needs a target.');
 		return this.parse('/me punts ' + target + ' to the moon!');

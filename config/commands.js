@@ -1002,7 +1002,6 @@ var commands = exports.commands = {
 	lazerbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>lazerbeam\'s Music Box!</b><br>' +
-        //This is an image of a music note! (line bellow)
                 '<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"></center><br>' +
                 '1. <a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ"><button title="Bohemian Rhapsody - Queen">Bohemian Rhapsody - Queen</a></button><br>' +
                 '2. <a href="https://www.youtube.com/watch?v=ZNaA7fVXB28"><button title="Against the Wind - Bob Seger">Against the Wind -  Bob Seger</a></button><br>'

@@ -2704,8 +2704,8 @@ var commands = exports.commands = {
 				return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 			}
 		}
-		if (target.toLowerCase() == "spamroom" && !user.can('warn')) {
-			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for staff ONLY!");
+		if (target.toLowerCase() == "spamroom" && !user.can('lock')) {
+			return this.sendReply("|noinit|joinfailed|The room '"+target+"' does not exist.");
 		}
 		if (target.toLowerCase() == "room" && !user.can('hotpatch')) {
 			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is not for YOU!");		

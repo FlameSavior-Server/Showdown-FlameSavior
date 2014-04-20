@@ -2710,6 +2710,9 @@ var commands = exports.commands = {
 		if (target.toLowerCase() == "room" && !user.can('hotpatch')) {
 			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is not for YOU!");		
 		}
+		if (target.toLowerCase() == "testing" && !user.name('panpawn')) {
+			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is not for YOU!");		
+		}
 		if (target.toLowerCase() == "upperstaff" && !user.can('pban')) {
 			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is for upper staff ONLY!");
 		}

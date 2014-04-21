@@ -1176,11 +1176,6 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://collegecandy.files.wordpress.com/2013/05/tumblr_inline_mhv5qyiqvk1qz4rgp1.gif" width="400">');
 	},
-	fin: 'finny',
-	finny: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/Tw9Pv0j.gif" width="350"><br><font size="2"><b>Finny</b> - One fucked up pervert');
-	},
 	kayo: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font size="2"><b>Kayo</b><br>By the Beard of Zeus that Ghost was Fat<br><img src="http://i.imgur.com/rPe9hBa.png">');

@@ -2075,15 +2075,14 @@ var commands = exports.commands = {
     },
     
     
-    chmpionxman : 'xman',
     championxman : 'xman',
     xman: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img height="80" src="http://fdzeta.net/imgcache/207158dz.gif">' +
-        	'<img src="http://i.imgur.com/9bKjjcM.gif">' +
-        	'<img src="http://img.pokemondb.net/sprites/black-white/anim/shiny/infernape.gif"><br />' +
-        	'<b>Ace: </b>Infernape<br />' +
-        	'<b>Catchphrase: </b>It may be risky, but it may be teh only way to win.</center>');
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/talonflame-2.gif" width="100">' +
+                '<img src="http://i.imgur.com/9bKjjcM.gif" width="350">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/infernape.gif" width="80"><br />' +
+                '<b>Ace:</b> Infernape<br />' +
+                'Never give up and give it your all. If you give up, you have not lost once but twice.</center>');
     },
     
     isawa: function(target, room, user) {

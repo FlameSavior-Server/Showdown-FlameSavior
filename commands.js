@@ -2920,11 +2920,11 @@ var commands = exports.commands = {
 	
 	pas: 'pmallstaff',
 	pmallstaff: function(target, room, user) {
-		if (!target) return this.parse('/pmallstaff [message] - Sends a PM to every user in a room.');
+		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every user in a room.');
 		if (!this.can('pban')) return false;
 
 		for (var u in Users.users) { if (Users.users[u].isStaff) {
-		Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target); } 
+		Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target+' (by: '+user.name+''); } 
 		}
 	},
 	

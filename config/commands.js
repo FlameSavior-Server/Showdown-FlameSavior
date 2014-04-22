@@ -961,6 +961,13 @@ var commands = exports.commands = {
                 '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
                 '<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
     	},
+    	destiny: 'itsdestiny',
+	itsdestiny: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><font size="4" color="green"><b>It$de$tiny</b></font><br>' +
+		'<img src="http://www.icleiusa.org/blog/library/images-phase1-051308/landscape/blog-images-90.jpg" width="55%">    <img src="http://mindmillion.com/images/money/money-background-seamless-fill-bluesky.jpg" width="35%"><br>' +
+		'It ain\'t luck, it\'s destiny.');
+	},
     	miah: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><font size="3" color="orange"><b>Miah<br>' +

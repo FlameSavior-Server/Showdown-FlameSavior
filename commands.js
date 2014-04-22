@@ -3124,7 +3124,6 @@ var commands = exports.commands = {
 	poof: 'd',
 	d: function(target, room, user){
 		if(room.id !== 'lobby') return false;
-		if (!this.canTalk()) return;
 		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
 		var etags = '</font></strong>'
 		var targetid = toUserid(user);

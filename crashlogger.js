@@ -9,6 +9,7 @@
  */
 
 module.exports = (function() {
+	var fs = require('fs');
 	var lastCrashLog = 0;
 	return function(err, description) {
 		console.log("\nCRASH: "+err.stack+"\n");

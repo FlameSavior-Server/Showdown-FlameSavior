@@ -967,6 +967,13 @@ var commands = exports.commands = {
 		'<img src="https://i.imgur.com/2RHOuPi.gif" width="50%"><img src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-frc1/t1.0-9/1511712_629640560439158_8415184400256062344_n.jpg" width="50%"><br></font></b>' +
 		'Ace: Gliscor<br>Catch phrase: Adding Euphemisms to Pokemon');
 	},
+	drag: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><font size="5" color="red">Akely</font><br>' +
+		'<img src="http://gamesloveres.com/wp-content/uploads/2014/03/cute-pokemon-charmandercharmander-by-inversidom-riot-on-deviantart-llfutuct.png" width="75%"><br>' +
+		'Ace: Charizard<br>' +
+		'"Real mens can cry but real mens doesn\'t give up."');
+	},
     	kricketune: 'kriсketunе',
 	kriсketunе: function(target, room, user) {
         if (!this.canBroadcast()) return;

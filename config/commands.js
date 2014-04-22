@@ -970,7 +970,7 @@ var commands = exports.commands = {
 	drag: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><font size="5" color="red">Akely</font><br>' +
-		'<img src="http://gamesloveres.com/wp-content/uploads/2014/03/cute-pokemon-charmandercharmander-by-inversidom-riot-on-deviantart-llfutuct.png" width="75%"><br>' +
+		'<img src="http://gamesloveres.com/wp-content/uploads/2014/03/cute-pokemon-charmandercharmander-by-inversidom-riot-on-deviantart-llfutuct.png" width="25%"><br>' +
 		'Ace: Charizard<br>' +
 		'"Real mens can cry but real mens doesn\'t give up."');
 	},

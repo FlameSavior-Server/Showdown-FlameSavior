@@ -3190,6 +3190,24 @@ var commands = exports.commands = {
 			return this.sendReply('Poof is currently disabled.');
 		}
 	},
+
+	setstatus: 'status',
+	status: function(target, room, user){
+		if (!target) return this.sendReply('|raw|Set your status for profile. Usage: /status <i>status information</i>');
+		if (target.length > 30) return this.sendReply('Status is too long.');
+		if (target.indexOf(',') >= 1) return this.sendReply('Unforunately, your status cannot contain a comma.');
+		var escapeHTML = sanitize(target, true);
+		io.stdoutString('status.csv', user, 'status', escapeHTML);
+		
+		var currentdate = new Date(); 
+		var datetime = "Last Updated: " + (currentdate.getMonth()+1) + "/"+currentdate.getDate() + "/" + currentdate.getFullYear() + " @ "  + Utilities.formatAMPM(currentdate);
+		io.stdoutString('statusTime.csv', user, 'statusTime', datetime);
+	
+		this.sendReply('Your status is now: "' + target + '"');
+		if('+%@&~'.indexOf(user.group) >= 0) {
+			room.add('|raw|<b> * <font color="' + Utilities.hashColor(user.name) + '">' + user.name + '</font> set their status to: </b>"' + escapeHTML + '"');
+		}
+	},
 /*
 	alist: function(target, room, user){
 		if(!user.can('makeroom')) return;
@@ -4260,7 +4278,7 @@ var commands = exports.commands = {
 	modlog: function(target, room, user, connection) {
 		var lines = 0;
 		// Specific case for modlog command. Room can be indicated with a comma, lines go after the comma.
-		// Otherwise, the text is defaulted to text search in current room's modlog.
+		// Otherwise, the text is defaulted to text search in current rooms modlog.
 		var roomId = room.id;
 		var roomLogs = {};
 
@@ -4270,7 +4288,7 @@ var commands = exports.commands = {
 			roomId = toId(targets[0]) || room.id;
 		}
 
-		// Let's check the number of lines to retrieve or if it's a word instead
+		// Lets check the number of lines to retrieve or if its a word instead
 		if (!target.match('[^0-9]')) {
 			lines = parseInt(target || 15, 10);
 			if (lines > 100) lines = 100;
@@ -5034,6 +5052,128 @@ var commands = exports.commands = {
 		user.team = target;
 	},
 
+	profile: function (target, room, user, connection) {
+	    if (!this.canBroadcast()) return;
+
+	    if (target.length >= 19) {
+	    	return this.sendReply('Usernames are required to be less than 19 characters long.');
+	    }
+
+	    var targetUser = this.targetUserOrSelf(target);
+	    var name = '';
+	    if (!targetUser) {
+	    	name = toUserid(target);
+	    } else {
+	    	name = targetUser.userid;
+	    }
+	    var avatar = Utilities.findAvatar(name);
+	    var group = Utilities.stdin('usergroups.csv', name);
+	    var status = Utilities.stdin('status.csv', name);
+	    var money = Utilities.stdin('money.csv', name);
+
+		var util = require("util");
+		var http = require("http");
+
+		var options = {
+		    host: "www.pokemonshowdown.com",
+		    port: 80,
+		    path: "/forum/~" + name
+		};
+
+		var content = "";
+		var self = this;
+
+		if (!targetUser) {
+			if (typeof(avatar) === typeof('')) {
+				avatar = 'http://192.184.93.98:8000/avatars/' + avatar;
+			} else {
+				avatar = 'http://play.pokemonshowdown.com/sprites/trainers/168.png';
+			}
+			if (group === ' ') {
+				group = 'Regular User';
+			} else {
+				group = Config.groups.bySymbol[group].name;
+			}
+			if (status === ' ') {
+				status = 'This user hasn\'t set their status yet.';
+			}
+			if (money === '' || money === ' ') {
+				money = 0;
+			}
+
+			var lastOnline = Number(Utilities.stdin('lastOnline.csv', name));
+			if (lastOnline === Number(' ')) {
+				lastOnline = ' Never';
+			} else if (Math.floor((Date.now()-lastOnline)*0.001) < 60) {
+				lastOnline = Math.floor((Date.now()-lastOnline)*0.001) + ' seconds ago';
+			} else if (Math.floor((Date.now()-lastOnline)*1.6667e-5) < 120) {
+				lastOnline = Math.floor((Date.now()-lastOnline)*1.6667e-5) + ' minutes ago'; 
+			} else if (Math.floor((Date.now()-lastOnline)*2.7778e-7) < 48) {
+				lastOnline = Math.floor((Date.now()-lastOnline)*2.7778e-7) + ' hours ago';
+			} else {
+				lastOnline = (Math.floor((Date.now()-lastOnline)*2.7778e-7)/24) + ' days ago';
+			}
+		} else {
+			io.stdinString('status.csv', user, 'status');
+			if (targetUser.status === '' || targetUser.status === '""') {
+				targetUser.status = 'This user hasn\'t set their status yet.';
+			}
+			var lastOnline = Number(Utilities.stdin('lastOnline.csv', name));
+			if (Math.floor((Date.now()-lastOnline)*0.001) < 60) {
+				lastOnline = Math.floor((Date.now()-lastOnline)*0.001) + ' seconds ago';
+			} else if (Math.floor((Date.now()-lastOnline)*1.6667e-5) < 120) {
+				lastOnline = Math.floor((Date.now()-lastOnline)*1.6667e-5) + ' minutes ago'; 
+			} else if (Math.floor((Date.now()-lastOnline)*2.7778e-7) < 48) {
+				lastOnline = Math.floor((Date.now()-lastOnline)*2.7778e-7) + ' hours ago';
+			} else {
+				lastOnline = (Math.floor((Date.now()-lastOnline)*2.7778e-7)/24) + ' days ago';
+			}
+			if (targetUser.connected === true) {
+				lastOnline = '<font color="green">Currently Online</font>';
+			}
+			io.stdinNumber('money.csv', user, 'money');
+			if (targetUser.money === Infinity) {
+				targetUser.money === Infinity;
+			}
+			io.stdinString('statusTime.csv', user, 'statusTime');
+		}
+
+		var req = http.request(options, function (res) {
+		    res.setEncoding("utf8");
+		    res.on("data", function (chunk) {
+		        content += chunk;
+		    });
+		    res.on("end", function () {
+		        content = content.split("<em");
+		        if (content[1]) {
+		            content = content[1].split("</p>");
+		            if (content[0]) {
+		                content = content[0].split("</em>");
+		                if (content[1]) {
+		                	if (!targetUser) {
+		                		self.sendReplyBox('<img src="' + avatar + '" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#24678d">Name:</font></strong> ' + target + '<br />' + '&nbsp;<strong><font color="#24678d">Registered:</font></strong>' + content[1] + '<br/>' + '&nbsp;<strong><font color="#24678d">Rank:</font></strong> ' + group + '<br/>' + '&nbsp;<strong><font color="#24678d">Money:</font></strong> ' + money + '<br/>' + '&nbsp;<strong><font color="#24678d">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#24678d">Status:</font></strong> "' + status + '" <font color="gray">' + Utilities.stdin('statusTime.csv', name) + '</font><br clear="all" />');
+		                	} else if (targetUser.authenticated === true && typeof(targetUser.avatar) === typeof('')) {
+		                		self.sendReplyBox('<img src="http://192.184.93.98:8000/avatars/' + targetUser.avatar + '" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#24678d">Name:</font></strong> ' + targetUser.name + '<br />' + '&nbsp;<strong><font color="#24678d">Registered:</font></strong>' + content[1] + '<br/>' + '&nbsp;<strong><font color="#24678d">Rank:</font></strong> ' + Config.groups.bySymbol[targetUser.group].name + '<br/>' + '&nbsp;<strong><font color="#24678d">Money:</font></strong> ' + targetUser.money + '<br/>' + '&nbsp;<strong><font color="#24678d">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#24678d">Status:</font></strong> "' + targetUser.status + '" <font color="gray">' + targetUser.statusTime + '</font><br clear="all" />');
+		                    } else {
+		                    	self.sendReplyBox('<img src="http://play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#24678d">Name:</font></strong> ' + targetUser.name + '<br />' + '&nbsp;<strong><font color="#24678d">Registered:</font></strong>' + content[1] + '<br/>' + '&nbsp;<strong><font color="#24678d">Rank:</font></strong> ' + 
+
+		                    	'Regular User'+ '<br/>' + '&nbsp;<strong><font color="#24678d">Money:</font></strong> ' + targetUser.money + '<br/>' + '&nbsp;<strong><font color="#24678d">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#24678d">Status:</font></strong> "' + targetUser.status + '" <font color="gray">' + targetUser.statusTime + '</font><br clear="all" />');
+		                    }
+		                }
+		            }
+		        } else {
+		        	if (!targetUser) {
+		        		self.sendReplyBox('<img src="' + avatar + '" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#24678d">Name:</font></strong> ' + target + '<br />' + '&nbsp;<strong><font color="#24678d">Registered:</font></strong>' + content[1] + '<br/>' + '&nbsp;<strong><font color="#24678d">Rank:</font></strong> ' + group + '<br/>' + '&nbsp;<strong><font color="#24678d">Money:</font></strong> ' + money + '<br/>' + '&nbsp;<strong><font color="#24678d">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#24678d">Status:</font></strong> "' + status + '" <font color="gray">' + Utilities.stdin('statusTime.csv', name) + '</font><br clear="all" />');
+		        	} else {
+		        		self.sendReplyBox('<img src="http://play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#24678d">Name:</font></strong> ' + targetUser.name + '<br />' + '&nbsp;<strong><font color="#24678d">Registered:</font></strong>' + ' (Unregistered)' + '<br/>' + '&nbsp;<strong><font color="#24678d">Rank:</font></strong> ' + Config.groups.bySymbol[targetUser.group].name + '<br/>' + '&nbsp;<strong><font color="#24678d">Money:</font></strong> ' + targetUser.money + '<br/>' + '&nbsp;<strong><font color="#24678d">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#24678d">Status:</font></strong> "' + targetUser.status + '" <font color="gray">' + targetUser.statusTime + '</font><br clear="all" />');
+		        	}
+		        }
+		        room.update();
+		    });
+		});
+		req.end();
+	},
+
 	/*********************************************************
 	 * Low-level
 	 *********************************************************/
@@ -5311,4 +5451,213 @@ function getAvatar(user) {
         }
 
         return avatar;
+}
+var io = {
+	stdinNumber: function(file, user, property) {
+		var info = 0;
+		var match = false;
+		
+		var data = fs.readFileSync('config/'+file,'utf8');
+		
+		var row = (''+data).split("\n");
+		for (var i = row.length; i > -1; i--) {
+			if (!row[i]) continue;
+			var parts = row[i].split(",");
+			var userid = toUserid(parts[0]);
+			if (user.userid === userid) {
+				info = Number(parts[1]);
+				match = true;
+				if (match === true) {
+					break;
+				}
+			}
+		}
+		Object.defineProperty(user, property, { value : info, writable : true });
+	},
+	stdoutNumber: function(file, user, property, amount) {
+		var data = fs.readFileSync('config/'+file,'utf8');
+	var match = false;
+	var info = 0;
+	var row = (''+data).split("\n");
+	var line = '';
+	for (var i = row.length; i > -1; i--) {
+		if (!row[i]) continue;
+		var parts = row[i].split(",");
+		var userid = toUserid(parts[0]);
+		if (user.userid === userid) {
+			info = Number(parts[1]);
+			match = true;
+			if (match === true) {
+				line = line + row[i];
+				break;
+			}
+		}
+	}
+	var total = info + amount;
+	Object.defineProperty(user, property, { value : total, writable : true });
+	if (match === true) {
+		var re = new RegExp(line,"g");
+		fs.readFile('config/'+file, 'utf8', function(err, data) {
+		if (err) {
+			return console.log(err);
+		}
+		var result = data.replace(re, user.userid+','+total);
+		fs.writeFile('config/'+file, result, 'utf8', function(err) {
+			if (err) return console.log(err);
+		});
+		});
+	} else {
+		var log = fs.createWriteStream('config/'+file, {'flags': 'a'});
+		log.write("\n"+user.userid+','+total);
+	}
+},
+stdinString: function(file, user, property) {
+		var info = "";
+		var match = false;
+	
+    	var data = fs.readFileSync('config/'+file,'utf8');
+
+        var row = (''+data).split("\n");
+        for (var i = row.length; i > -1; i--) {
+                if (!row[i]) continue;
+                var parts = row[i].split(",");
+                var userid = toUserid(parts[0]);
+                if (user.userid == userid) {
+                	info = String(parts[1]);
+                    match = true;
+                    if (match === true) {
+                            break;
+                    }
+                }
+        }
+		Object.defineProperty(user, property, { value : info, writable : true });
+	},
+	stdoutString: function(file, user, property, info) {
+		var data = fs.readFileSync('config/'+file,'utf8');
+	var match = false;
+	var row = (''+data).split("\n");
+	var line = '';
+	for (var i = row.length; i > -1; i--) {
+		if (!row[i]) continue;
+		var parts = row[i].split(",");
+		var userid = toUserid(parts[0]);
+		if (user.userid == userid) {
+			match = true;
+			if (match === true) {
+				line = line + row[i];
+				break;
+			}
+		}
+	}
+	Object.defineProperty(user, property, { value : info, writable : true });
+	if (match === true) {
+		var re = new RegExp(line,"g");
+		fs.readFile('config/'+file, 'utf8', function (err,data) {
+		if (err) {
+			return console.log(err);
+		}
+		var result = data.replace(re, user.userid+','+info);
+		fs.writeFile('config/'+file, result, 'utf8', function (err) {
+			if (err) return console.log(err);
+		});
+		});
+	} else {
+		var log = fs.createWriteStream('config/'+file, {'flags': 'a'});
+		log.write("\n"+user.userid+','+info);
+	}
+	}
+}
+
+var Utilities = {
+		stdin: function(file, name) {
+		var info = " ";
+		var match = false;
+	
+    	var data = fs.readFileSync('config/'+file,'utf8');
+
+        var row = (''+data).split("\n");
+        for (var i = row.length; i > -1; i--) {
+                if (!row[i]) continue;
+                var parts = row[i].split(",");
+                var userid = toUserid(parts[0]);
+                if (toUserid(name) == userid) {
+                	info = String(parts[1]);
+                    match = true;
+                    if (match === true) {
+                            break;
+                    }
+                }
+        }
+        return info;
+	},
+		HueToRgb: function (m1, m2, hue) {
+	    var v;
+	    if (hue < 0)
+	        hue += 1;
+	    else if (hue > 1)
+	        hue -= 1;
+
+	    if (6 * hue < 1)
+	        v = m1 + (m2 - m1) * hue * 6;
+	    else if (2 * hue < 1)
+	        v = m2;
+	    else if (3 * hue < 2)
+	        v = m1 + (m2 - m1) * (2 / 3 - hue) * 6;
+	    else
+	        v = m1;
+
+	    return (255 * v).toString(16);
+	},
+
+	hashColor: function (name) {
+	    var crypto = require('crypto');
+	    var hash = crypto.createHash('md5').update(name).digest('hex');
+	    var H = parseInt(hash.substr(4, 4), 16) % 360;
+	    var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
+	    var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
+
+	    var m1, m2, hue;
+	    var r, g, b
+	        S /= 100;
+	    L /= 100;
+	    if (S == 0)
+	        r = g = b = (L * 255).toString(16);
+	    else {
+	        if (L <= 0.5)
+	            m2 = L * (S + 1);
+	        else
+	            m2 = L + S - L * S;
+	        m1 = L * 2 - m2;
+	        hue = H / 360;
+	        r = this.HueToRgb(m1, m2, hue + 1 / 3);
+	        g = this.HueToRgb(m1, m2, hue);
+	        b = this.HueToRgb(m1, m2, hue - 1 / 3);
+	    }
+
+	    return 'rgb(' + r + ', ' + g + ', ' + b + ');';
+	},
+
+	formatAMPM: function(date) {
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		var ampm = hours >= 12 ? 'PM' : 'AM';
+		hours = hours % 12;
+		hours = hours ? hours : 12; // the hour '0' should be '12'
+		minutes = minutes < 10 ? '0'+minutes : minutes;
+		var strTime = hours + ':' + minutes + ' ' + ampm;
+		return strTime;
+	},
+
+	findAvatar: function(name) {
+		var info = "";
+
+		for (user in config.customAvatars) {
+			if (user === name) {
+				return config.customAvatars[user];
+			}
+		}
+		return 0;
+	}
+
+
 }

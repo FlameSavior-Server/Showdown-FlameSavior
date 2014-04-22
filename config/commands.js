@@ -1328,6 +1328,15 @@ var commands = exports.commands = {
 	* League Cards                         *
 	***************************************/
     
+	chaosleague: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs71/f/2013/280/3/2/02_by_nurinaki-d6pkya9.png" width="220"><br />' +
+                '<img src="http://i.imgur.com/poIZlDR.gif"><br />' +
+                '<b><font color=blue>Champion:</font></b> Maskun<br />' +
+                '<a href="http://leagueofchaos.weebly.com" >Come visit our website</a>' +
+                '<a href="http://leagueofchaos.weebly.com/league-rules.html" >Our Rules</a></center>');
+    	},
+	
 	diamondleague: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://th05.deviantart.net/fs70/PRE/i/2014/049/6/5/diancie_by_theangryaron-d7718b0.png" height=130">' +

@@ -1351,6 +1351,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	scourage: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/vtlcgj3.gif">' +
+                '<img src="http://i.imgur.com/vOiCAz1.gif" width="380">' +
+                '<img src="http://i.imgur.com/RKG5tKC.gif"><br />' +
+                '<b>Ace:</b> Anything that will cause a slow death<br />' +
+                'If you didn\'t want me to stall you to death, you should have said something... I guess it\'s too late now, sit back and enjoy the show.</center>');
+    	},
+	
 	alpha: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://oi61.tinypic.com/2dc75dy.jpg" width="100">' +

@@ -984,13 +984,12 @@ var commands = exports.commands = {
 	},
 	crowt: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/SNhcPk5.png" width=250 height=100><br>' +
-        	'<img src="http://img2.wikia.nocookie.net/__cb20090801171054/harrypotter/images/e/ef/Potter_Puppet_Pals.jpg" width="25%"><br>' +
-		'<img src="http://i69.photobucket.com/albums/i64/dopzihon/dumbledore.gif" width="75%"><br>' +
-		'"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends." - Dumbledore<br>' +
-		'<hr width="85%">' +
-		'<a href="http://www.buzzfeed.com/ariellecalderon/profound-quotes-from-the-harry-potter-books"><button title="More Harry Potter Quotes">More Harry Potter Quotes</a></button>');
-	},
+        this.sendReplyBox('<center><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
+                '<img src="http://i.imgur.com/czMd1X5.gif">' +
+                '<img src="http://50.62.73.114:8000/avatars/crowt.png"><br />' +
+                '<b><font color="#4F86F7">Ace:</font></b> <font color="blue">G<font color="black">r<font color="blue">e<font color="black">n<font color="blue">i<font color="black">n<font color="blue">i<font color="black">n<font color="blue">j<font color="black">a</font><br />' +
+                '<font color="black">""It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends." - Dumbledore"</font></center>');
+	},        
     	ransu: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/kWaZd66.jpg" width="75%"><br>Develop a passion for learning. If you do, you will never cease to grow.');

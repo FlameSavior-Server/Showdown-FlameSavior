@@ -2585,6 +2585,11 @@ var commands = exports.commands = {
                 var money = fs.readFileSync('config/money.csv','utf8');
                 return user.send('|popup|'+money);
 	},
+	statuses: function(target, room, user, connection) {
+		
+                var money = fs.readFileSync('config/status.csv','utf8');
+                return user.send('|popup|'+money);
+	},
 	adminremind: 'aremind',
 	aremind: function(target, room, user, connection) {
 		if(!this.canBroadcast()|| !user.can('hotpatch')) return this.sendReply('/adminremind - Access Denied.');

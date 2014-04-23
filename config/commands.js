@@ -2015,15 +2015,14 @@ var commands = exports.commands = {
     	this.sendReplyBox('<center><img src= http://25.media.tumblr.com/tumblr_lljnf6TzP61qd87hlo1_500.gif weigh= 142 height= 82><img src= http://i.imgur.com/E4Ui1ih.gif><img src= http://25.media.tumblr.com/5bbfc020661a1e1eab025d847474cf30/tumblr_mn1uizhc441s2e0ufo1_500.gif weigh= 142 height= 82><center>Ace: Staraptor<center>"If you want to fly, then you\'ve got to give up the shit that weighs you down."');
     },
     
-    darkjak : 'jak',
-    jak: function(target, room, user) {
-    	if (target) return this.sendReply('It\'s not funny anymore.');
+    jac : 'darkjak',
+    darkjak: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img height="100" src="http://www.freewebs.com/jak-4/Dark%20Jak%202.jpg">' +
-        	'<img height="100" src="http://i.imgur.com/eswH4MI.gif">' +
-        	'<img height="100" src="http://fc07.deviantart.net/fs70/i/2013/281/6/b/mega_charizard_x_by_magnastorm-d6ppbi7.jpg"><br />' +
-        	'<b>Ace: </b>Mega Charizard-X<br />' +
-        	'<b>Catchphrase: </b>The Darkside cannot be extinguished, when you fight</center>')
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megax.gif" width="110">' +
+                '<img src="http://i.imgur.com/GuVQ7sT.gif" width="270">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megay.gif" width="130"><br />' +
+                '<b>Ace:</b> Mega charizard Y and X<br />' +
+                'Many people say keep calm and relax, I prefer raging on and burning shit.</center>');
     },
     
     brittlewind: function(target, room, user) {

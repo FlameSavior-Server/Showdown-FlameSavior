@@ -5052,6 +5052,7 @@ var commands = exports.commands = {
 		user.team = target;
 	},
 
+	id: 'profile',
 	profile: function (target, room, user, connection) {
 	    if (!this.canBroadcast()) return;
 

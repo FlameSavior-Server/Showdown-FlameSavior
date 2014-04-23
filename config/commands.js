@@ -1351,6 +1351,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	formula: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://sprites.pokecheck.org/i/485.gif">' +
+                '<img src="http://i.imgur.com/9N1zT8M.gif?1" width="390">' +
+                '<img src="http://sprites.pokecheck.org/i/423.gif"><br />' +
+                '<b>Ace:</b> Heatran<br />' +
+                'Math + Pokemon = Quad. Formula.</center>');
+    	},
+	
+	championnyan: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/YmKDecc.png" width="90">' +
+                '<img src="http://i.imgur.com/tGfXtQC.gif" width="340">' +
+                '<img src="http://i.imgur.com/iZo6RVm.jpg" width="90"><br />' +
+                '<b>Ace:</b> Salamence<br />' +
+                'We live to make the impossible possible! That is our focus!</center>');
+    	},
+	
 	scourage: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/vtlcgj3.gif">' +

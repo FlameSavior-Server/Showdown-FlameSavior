@@ -5085,7 +5085,7 @@ var commands = exports.commands = {
 
 		if (!targetUser) {
 			if (typeof(avatar) === typeof('')) {
-				avatar = 'http://192.184.93.98:8000/avatars/' + avatar;
+				avatar = 'http://50.62.73.114:8000/avatars/' + avatar;
 			} else {
 				avatar = 'http://play.pokemonshowdown.com/sprites/trainers/168.png';
 			}

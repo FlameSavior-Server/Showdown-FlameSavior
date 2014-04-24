@@ -5059,6 +5059,7 @@ var commands = exports.commands = {
 
 	id: 'profile',
 	profile: function (target, room, user, connection) {
+try{
 	    if (!this.canBroadcast()) return;
 
 	    if (target.length >= 19) {
@@ -5106,7 +5107,7 @@ var commands = exports.commands = {
 				money = 0;
 			}
 
-			var lastOnline = Number(Utilities.stdin('db/lastOnline.csv', name));
+			var lastOnline = Number(Utilities.stdin('lastOnline.csv', name));
 			if (lastOnline === Number(' ')) {
 				lastOnline = ' Never';
 			} else if (Math.floor((Date.now()-lastOnline)*0.001) < 60) {
@@ -5123,7 +5124,7 @@ var commands = exports.commands = {
 			if (targetUser.status === '' || targetUser.status === '""') {
 				targetUser.status = 'This user hasn\'t set their status yet.';
 			}
-			var lastOnline = Number(Utilities.stdin('db/lastOnline.csv', name));
+			var lastOnline = Number(Utilities.stdin('lastOnline.csv', name));
 			if (Math.floor((Date.now()-lastOnline)*0.001) < 60) {
 				lastOnline = Math.floor((Date.now()-lastOnline)*0.001) + ' seconds ago';
 			} else if (Math.floor((Date.now()-lastOnline)*1.6667e-5) < 120) {
@@ -5177,6 +5178,7 @@ var commands = exports.commands = {
 		    });
 		});
 		req.end();
+} catch (e) { this.sendReply('something went wrong: ' + e.stack); }
 	},
 
 

@@ -213,6 +213,7 @@ var Tournament = (function () {
 		this.update();
 	};
 	Tournament.prototype.removeUser = function (user, output) {
+		if (!this.room.delayJoinedUsers) this.room.delayJoinedUsers = new Array();
 		var error = this.generator.removeUser(user);
 		if (typeof error === 'string') {
 			output.sendReply('|tournament|error|' + error);
@@ -220,6 +221,10 @@ var Tournament = (function () {
 		}
 
 		this.room.add('|tournament|leave|' + user.name);
+		var index = this.room.delayJoinedUsers.indexOf(user.name);
+		if (index > -1) {
+		    this.room.delayJoinedUsers.splice(index, 1);
+		}
 		user.sendTo(this.room, '|tournament|update|{"isJoined":false}');
 		this.isBracketInvalidated = true;
 		this.update();

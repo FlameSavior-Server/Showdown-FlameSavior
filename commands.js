@@ -2377,39 +2377,49 @@ var commands = exports.commands = {
 
 	eating: 'away',
 	gaming: 'away',
-    	sleep: 'away',
-    	work: 'away',
-    	working: 'away',
-    	sleeping: 'away',
-    	busy: 'away',    
+    sleep: 'away',
+    work: 'away',
+    working: 'away',
+    sleeping: 'away',
+    busy: 'away',    
 	afk: 'away',
 	away: function(target, room, user, connection, cmd) {
 		if (!this.can('away')) return false;
-		var t = 'Away';
+		// unicode away message idea by Siiilver
+		var t = 'Ⓐⓦⓐⓨ';
+		var t2 = 'Away';
 		switch (cmd) {
 			case 'busy':
-			t = 'Busy';
+			t = 'Ⓑⓤⓢⓨ';
+			t2 = 'Busy';
 			break;
 			case 'sleeping':
-			t = 'Sleeping';
+			t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+			t2 = 'Sleeping';
 			break;
 			case 'sleep':
-			t = 'Sleeping';
+			t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+			t2 = 'Sleeping';
 			break;
 			case 'gaming':
-			t = 'Gaming';
+			t = 'Ⓖⓐⓜⓘⓝⓖ';
+			t2 = 'Gaming';
 			break;
 			case 'working':
-			t = 'Working';
+			t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
+			t2 = 'Working';
 			break;
 			case 'work':
-			t = 'Working';
+			t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
+			t2 = 'Working';
 			break;
 			case 'eating':
-			t = 'Eating';
+			t = 'Ⓔⓐⓣⓘⓝⓖ';
+			t2 = 'Eating';
 			break;
 			default:
-			t = 'Away'
+			t = 'Ⓐⓦⓐⓨ'
+			t2 = 'Away';
 			break;
 		}
 
@@ -2422,7 +2432,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 			
-			if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + user.originalName +'</font color></b> is now '+t.toLowerCase()+'. '+ (target ? " (" + escapeHTML(target) + ")" : ""));
+			if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + user.originalName +'</font color></b> is now '+t2.toLowerCase()+'. '+ (target ? " (" + escapeHTML(target) + ")" : ""));
 
 			user.isAway = true;
 		}

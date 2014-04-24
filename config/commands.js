@@ -1357,6 +1357,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	walt: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://25.media.tumblr.com/cb6be2715a6c8520705f1759158f2725/tumblr_mtup02q9Mz1qhd8sao1_500.gif" width="160">' +
+                '<img src="http://i.imgur.com/ernBvLL.png">' +
+                '<img src="http://fc04.deviantart.net/fs71/f/2014/066/7/8/cam_s_pokesona__porygon2_by_perplexedcam-d79bhgi.png" width="140"><br />' +
+                '<b><font color="#990000"Ace:</font></b> <font color="#009900">Bulk</font><br />' +
+                'The greatest things come to those who wait. Stop whining and fight.</center>');
+    	},
+	
 	formula: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://sprites.pokecheck.org/i/485.gif">' +

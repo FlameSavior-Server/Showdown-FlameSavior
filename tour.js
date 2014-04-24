@@ -1291,7 +1291,7 @@ var cmds = {
 		var separacion = "&nbsp;&nbsp;";
 		if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
 		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; <button name="send" value="/vote">" +tour[room.id].answerList[u]+'">" + tour[room.id].answerList.join(' &bull; ') + '</button></div>');
+		this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; <button name="send" value="/vote">" + tour[room.id].answerList.join+'">" + tour[room.id].answerList.join(' &bull; ') + '</button></div>');
 	}
 };
 

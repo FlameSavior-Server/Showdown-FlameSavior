@@ -480,6 +480,10 @@ var User = (function () {
 		if (target) {
 			if (target.frostDev) return false;
 		}
+		if (room) {
+			if (this.mutedRooms[room.id]) return false;
+		}
+		if (this.locked) return false;
 		var group = this.group;
 		var targetGroup = '';
 		if (target) targetGroup = target.group;

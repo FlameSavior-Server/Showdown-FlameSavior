@@ -5096,13 +5096,12 @@ try{
 			} else {
 				avatar = 'http://play.pokemonshowdown.com/sprites/trainers/168.png';
 			}
-			if (group === ' ') {
-				group = 'Regular User';
-			if (group === 'undefined') {
-				group = 'Why don\'t you ask again when they\'re on?';
-			}	
-			} else {
-				group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';			}
+			if (Users.usergroups[userid]) {
+ 				var group = Users.usergroups[userid].substr(0,1);
+ 				group = Config.groups[userGroup].name
+ 			} else {
+				var group = 'Regular User';
+  			}
 			if (status === ' ') {
 				status = 'This user hasn\'t set their status yet.';
 			}

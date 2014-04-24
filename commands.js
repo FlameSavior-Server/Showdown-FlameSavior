@@ -5096,8 +5096,8 @@ try{
 			} else {
 				avatar = 'http://play.pokemonshowdown.com/sprites/trainers/168.png';
 			}
-			if (Users.usergroups[userid]) {
- 				var group = Users.usergroups[userid].substr(0,1);
+			if (Users.usergroups[targetUser]) {
+ 				var group = Users.usergroups[targetUser].substr(0,1);
  				group = Config.groups[userGroup].name
  			} else {
 				var group = 'Regular User';

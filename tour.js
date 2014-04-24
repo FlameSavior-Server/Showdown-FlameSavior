@@ -1277,7 +1277,7 @@ var cmds = {
                 if (!tour[room.id].answerList[u] || tour[room.id].answerList[u].length < 1) continue;
                 output += '<button name="send" value="/vote '+tour[room.id].answerList[u]+'">'+tour[room.id].answerList[u]+'</button>&nbsp;';
         }
-        room.addRaw('<div class="infobox"><h2>' + room.question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by '+user.name+'</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
+        room.addRaw('<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by '+user.name+'</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
 	},
 
 	pollremind: 'pr',

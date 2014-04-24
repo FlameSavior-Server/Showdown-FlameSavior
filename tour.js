@@ -1260,6 +1260,25 @@ var cmds = {
 		tour[room.id].answerList = new Array();
 		tour[room.id].answers = new Object();
 	},
+	
+	poll2: function(target, room, user) {
+		if (!tour.userauth(user,room)) return this.sendReply('You do not have enough authority to use this command.');
+		if (tour[room.id].question) return this.sendReply('There is currently a poll going on already.');
+		var separacion = "&nbsp;&nbsp;";
+		var answers = tour.splint(target);
+		if (answers.length < 3) return this.sendReply('Correct syntax for this command is /poll question, option, option...');
+		var question = answers[0];
+		answers.splice(0, 1);
+		var answers = answers.join(',').toLowerCase().split(',');
+		tour[room.id].question = question;
+		tour[room.id].answerList = answers;		
+		var output = '';
+        	for (var u in tour[room.id].answerList) {
+                if (!tour[room.id].answerList[u] || tour[room.id].answerList[u].length < 1) continue;
+                output += '<button name="send" value="/vote '+tour[room.id].answerList[u]+'">'+tour[room.id].answerList[u]+'</button>&nbsp;';
+        }
+        room.addRaw('<div class="infobox"><h2>' + room.question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by '+user.name+'</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
+	},
 
 	pollremind: 'pr',
 	pr: function(target, room, user) {

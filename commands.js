@@ -5100,6 +5100,7 @@ try{
 				group = 'Regular User';
 			if (group === 'undefined') {
 				group = 'Why don\'t you ask again when they\'re on?';
+			}	
 			} else {
 				group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';			}
 			if (status === ' ') {

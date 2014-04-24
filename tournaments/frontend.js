@@ -609,9 +609,9 @@ var Tournament = (function () {
 			fs.appendFile('logs/transactions.log','\n'+winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+this.room.title+'.');
 			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
 			if (runnerUp) this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for winning the tournament!</b>');
-			economy.writeMoney('money', toUserid(winner), firstMoney, function(){
+			economy.writeMoney('money', toId(winner), firstMoney, function(){
 				if (runnerUp) {
-					economy.writeMoney('money', toUserid(runnerUp), secondMoney);
+					economy.writeMoney('money', toId(runnerUp), secondMoney);
 					fs.appendFile('logs/transactions.log','\n'+runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'.');
 				}
 			});

@@ -67,7 +67,7 @@ var commands = exports.commands = {
 			for (var i = 0; i < row.length; i++) {
 				if (!row[i]) continue;
 				var parts = row[i].split(",");
-				var userid = toUserid(parts[0]);
+				var userid = toId(parts[0]);
 				if (user.userid == userid) {
 				friends += parts[1];
 				match = true;
@@ -120,7 +120,7 @@ var commands = exports.commands = {
 		for (var i = row.length; i > -1; i--) {
 			if (!row[i]) continue;
 			var parts = row[i].split(",");
-			var userid = toUserid(parts[0]);
+			var userid = toId(parts[0]);
 			if (user.userid == userid) {
 				match = true;
 			}
@@ -160,7 +160,7 @@ var commands = exports.commands = {
 		}
 		if(!target) return this.parse('/help removefriend');
 		var noCaps = target.toLowerCase();
-		var idFormat = toUserid(target);
+		var idFormat = toId(target);
 		var data = fs.readFileSync('config/friends.csv','utf8')
 		var match = false;
 		var line = '';
@@ -168,7 +168,7 @@ var commands = exports.commands = {
 		for (var i = row.length; i > -1; i--) {
 			if (!row[i]) continue;
 			var parts = row[i].split(",");
-			var userid = toUserid(parts[0]);
+			var userid = toId(parts[0]);
 			if (user.userid == userid) {
 				match = true;
 			}
@@ -264,9 +264,9 @@ var commands = exports.commands = {
 		for (var u in muted) if (muted[u] == 'lobby') return this.sendReply('You can\'t poof while muted');
 		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
 		var etags = '</font></strong>'
-		var targetid = toUserid(user);
+		var targetid = toId(user);
 		if(target){
-			var tar = toUserid(target);
+			var tar = toId(target);
 			var targetUser = Users.get(tar);
 			if(user.can('poof', targetUser)){
 				if(!targetUser){
@@ -731,7 +731,7 @@ var commands = exports.commands = {
 
                 var target = this.splitTarget(target, true);
                 var targetUser = this.targetUser;
-                var userid = toUserid(this.targetUsername);
+                var userid = toId(this.targetUsername);
                 var name = targetUser ? targetUser.name : this.targetUsername;
 
                 var currentGroup = (room.auth[userid] || ' ');

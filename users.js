@@ -65,7 +65,7 @@ exports.readVips = function() {
 exports.readVips();
 
 exports.addVip = function(user) {
-	user = toUserid(user);
+	user = toId(user);
 	exports.vips.push(user);
 	count = 0;
 	data = '';
@@ -904,7 +904,7 @@ var User = (function () {
 				for (var i in row) {
 					parts = row[i].split(",");
 					if (!parts[1]) continue;
-					if (toUserid(name) == parts[0]) {
+					if (toId(name) == parts[0]) {
 						match = true;
 						line = line + row[i];
 						break;
@@ -913,11 +913,11 @@ var User = (function () {
 				if (parts[1] != time) {
 					if (match === true) {
 						re = new RegExp(line,"g");
-						result = data.replace(re, toUserid(name)+','+time);
+						result = data.replace(re, toId(name)+','+time);
 						fs.writeFileSync('logs/lastonline.txt', result, 'utf8');
 						match = false;
 					} else {
-						fs.appendFile('logs/lastonline.txt',"\n"+toUserid(name)+','+time);
+						fs.appendFile('logs/lastonline.txt',"\n"+toId(name)+','+time);
 					}
 				}
 
@@ -965,7 +965,7 @@ var User = (function () {
 					this.autoconfirmed = true;
 				}
 
-				if (exports.vips.indexOf(toUserid(name)) >= 0) {
+				if (exports.vips.indexOf(toId(name)) >= 0) {
 					vip = true;
 				}
 			}

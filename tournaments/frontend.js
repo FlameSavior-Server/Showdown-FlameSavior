@@ -619,16 +619,16 @@ var commands = {
 		j: 'join',
 		in: 'join',
 		join: function (tournament, user) {
-			/*if (!user[tournament.room.id]) {
+			if (!user[tournament.room.id]) {
 				user[tournament.room.id] = new Object();
-				user[tournament.room.id].joinTime = 0;
+				user[tournament.room.id].joinTime = Date.now() - 60000;
 			}
-			milliseconds = Date.now() - user[tournament.room.id].joinTime;
+			milliseconds = (Date.now() - user[tournament.room.id].joinTime);
 			seconds = ((milliseconds / 1000) % 60);
 			remainingTime = Math.round(seconds - 60);
-			if (remainingTime < 0 && user[tournament.room.id].joinTime != 0) return this.sendReply('You have recently joined the tournamnet. To prevent joining and leaving flood, you must wait '+(remainingTime - remainingTime * 2)+' seconds before joining again.');*/
+			if ((Date.now() - user[tournament.room.id].joinTime) < 60000) return this.sendReply('You have recently joined the tournamnet. To prevent joining and leaving flood, you must wait '+(remainingTime - remainingTime * 2)+' seconds before joining again.');
 			tournament.addUser(user, false, this);
-			//user[tournament.room.id].joinTime = Date.now();
+			user[tournament.room.id].joinTime = Date.now();
 		},
 		l: 'leave',
 		out: 'leave',

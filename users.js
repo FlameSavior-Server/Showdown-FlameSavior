@@ -310,9 +310,6 @@ var User = (function () {
 		this.canChooseTour = false;
 		this.canDecAdvertise = false;
 		this.hasCustomSymbol = false;
-		this.status = '';
-		this.lastOnline = '';
-		this.statusTime = '';
 
 		this.isAway = false;
 		this.originalName = '';
@@ -960,7 +957,6 @@ var User = (function () {
 		this.lastConnected = Date.now();
 	};
 	User.prototype.onDisconnect = function(connection) {
-		io.stdoutString('db/lastOnline.csv', this, 'lastOnline', Date.now());
 		for (var i=0; i<this.connections.length; i++) {
 			if (this.connections[i] === connection) {
 				// console.log('DISCONNECT: '+this.userid);
@@ -1646,39 +1642,3 @@ exports.setOfflineGroup = function(name, group, force) {
 	exportUsergroups();
 	return true;
 };
-var io = {
-	stdoutString: function(file, user, property, info) {
-		var data = fs.readFileSync('config/'+file,'utf8');
-	var match = false;
-	var row = (''+data).split("\n");
-	var line = '';
-	for (var i = row.length; i > -1; i--) {
-		if (!row[i]) continue;
-		var parts = row[i].split(",");
-		var userid = toUserid(parts[0]);
-		if (user.userid == userid) {
-			match = true;
-			if (match === true) {
-				line = line + row[i];
-				break;
-			}
-		}
-	}
-	Object.defineProperty(user, property, { value : info, writable : true });
-	if (match === true) {
-		var re = new RegExp(line,"g");
-		fs.readFile('config/'+file, 'utf8', function (err,data) {
-		if (err) {
-			return console.log(err);
-		}
-		var result = data.replace(re, user.userid+','+info);
-		fs.writeFile('config/'+file, result, 'utf8', function (err) {
-			if (err) return console.log(err);
-		});
-		});
-	} else {
-		var log = fs.createWriteStream('config/'+file, {'flags': 'a'});
-		log.write("\n"+user.userid+','+info);
-	}
-	}
-}

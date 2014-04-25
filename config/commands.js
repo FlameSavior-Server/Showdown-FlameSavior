@@ -1357,6 +1357,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	okguy: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://31.media.tumblr.com/1dc6e9b9576bfd48c4b26bf3658e8c57/tumblr_mqxim5QkxB1r0b2hgo4_400.gif" width="140">' +
+                '<img src="http://i.imgur.com/5leebH9.png" width="240">' +
+                '<img src="http://37.media.tumblr.com/tumblr_mchhjxVCsE1r8wykko1_500.gif" width="140"><br />' +
+                '<b>Ace:</b> Power to the people<br />' +
+                'I\'m the spark that makes your idea bright, The same spark that lights the dark, So that you can know your left from your right.</center>');
+    	},
+	
 	walt: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://25.media.tumblr.com/cb6be2715a6c8520705f1759158f2725/tumblr_mtup02q9Mz1qhd8sao1_500.gif" width="160">' +
@@ -1781,7 +1790,7 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://i.imgur.com/Ijfoz4n.png?1" width="180">' +
                 '<img src="http://i.imgur.com/UQJceOG.png">' +
                 '<img src="http://i.imgur.com/uv1baKZ.png?1" width="180"><br />' +
-                '<b>Ace:</b> My &<br />' +
+                '<b>Ace:</b> My ~<br />' +
                 'I\'m Pretty Shit.</center>');
     	},
     	
@@ -1790,7 +1799,7 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://i.imgur.com/zKKoyFJ.gif" width="150">' +
                 '<img src="http://i.imgur.com/oV29Ffb.png">' +
                 '<img src="http://i.imgur.com/PLhgZxL.gif" width="125" height="125"><br />' +
-                '<b>Ace:</b> My &<br />' +
+                '<b>Ace:</b> My ~<br />' +
                 'Sadistic? I don\'t mind you calling me that.</center>');
         },
 

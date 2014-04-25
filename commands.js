@@ -3195,7 +3195,7 @@ var commands = exports.commands = {
 			return this.sendReply('Poof is currently disabled.');
 		}
 	},
-
+/*/
 	setstatus: 'status',
 	status: function(target, room, user){
 		if (!target) return this.sendReply('|raw|Set your status for profile. Usage: /status <i>status information</i>');
@@ -5056,7 +5056,7 @@ var commands = exports.commands = {
 	useteam: function(target, room, user) {
 		user.team = target;
 	},
-
+/*/
 	id: 'profile',
 	profile: function (target, room, user, connection) {
 try{
@@ -5463,6 +5463,7 @@ function getAvatar(user) {
 
         return avatar;
 }
+/*/
 var io = {
 	stdinNumber: function(file, user, property) {
 		var info = 0;

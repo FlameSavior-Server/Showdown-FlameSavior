@@ -1918,6 +1918,16 @@ var commands = exports.commands = {
 	
 	dicegame: function(target, room, user) {
 		if (!this.canBroadcast()) return;
+		if(!target) return this.sendReply('/dicegame [amount of bucks agreed to wager].');
+		if (isNaN(target)) {
+			return this.sendReply('Very funny, now use a real number.');
+		}
+		if (target < 0) {
+			return this.sendReply('Number cannot be negative.');
+		}
+		if (target === 0) {
+			return this.sendReply('Number cannot be 0.');
+		}
 		var player1 = Math.floor(6 * Math.random()) + 1;
 		var player2 = Math.floor(6 * Math.random()) + 1;
 		var winner = '';
@@ -1935,7 +1945,8 @@ var commands = exports.commands = {
 		loser = 'Try again!';
 		}
 		return this.sendReplyBox('<center><font size="5"><b>Dice Game!</b></font></center><br />' +
-				'<font color="red">This game is worth <b>one</b> buck.</font><br />' +
+				
+				'<font color="red">This game is worth '+target+' buck(s).</font><br />' +
 				'Loser: Tranfer bucks to the winner using /tb [winner], 1 <br />' +
 				'<hr>' +
 				'Player 1 roll: 	'+player1+'<br />' + 

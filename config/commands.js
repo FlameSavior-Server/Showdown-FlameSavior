@@ -1916,6 +1916,7 @@ var commands = exports.commands = {
 		return this.sendReplyBox('Random number (1 - ' + maxRoll + '): ' + rand);
 	},
 	
+	rollgame: 'dicegame',
 	dicegame: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if(!target) return this.sendReply('/dicegame [amount of bucks agreed to wager].');

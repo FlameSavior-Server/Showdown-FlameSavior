@@ -991,9 +991,9 @@ var commands = exports.commands = {
 	},
 	crowt: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
+        this.sendReplyBox('<center><div class="infobox"><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
                 '    <img src="http://i.imgur.com/czMd1X5.gif">' +
-                '    <img src="http://50.62.73.114:8000/avatars/crowt.png"><br />' +
+                '    <img src="http://50.62.73.114:8000/avatars/crowt.png"></div><br />' +
                 '<b><font color="#4F86F7" size="3">Ace:</font></b> <font color="blue" size="3">G</font><font color="black" size="3">r</font><font color="blue" size="3">e</font><font color="black" size="3">n</font><font color="blue" size="3">i</font><font color="black" size="3">n</font><font color="blue" size="3">j</font><font color="black" size="3">a</font></font><br />' +
                 '<font color="black">"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends." - Dumbledore</font></center>');
 	},                     

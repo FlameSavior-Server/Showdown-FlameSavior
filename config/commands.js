@@ -1923,7 +1923,7 @@ var commands = exports.commands = {
 		var winner = '';
 		var loser= '';
 		if (player1 > player2) {
-		winner = 'The </b>winner</b> is <font color="green">player 1</font>!';
+		winner = 'The <b>winner</b> is <font color="green">player 1</font>!';
 		loser = 'Better luck next time, player 2!';
 		}
 		if (player1 < player2) {

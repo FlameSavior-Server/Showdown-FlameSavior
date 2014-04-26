@@ -1942,6 +1942,33 @@ var commands = exports.commands = {
 				'Winner: '+winner+'<br />' +
 				''+loser+'');
 	},
+	
+	dicegametest: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		var player1 = Math.floor(6 * Math.random()) + 1;
+		var player2 = Math.floor(6 * Math.random()) + 1;
+		var winner = '';
+		var loser= '';
+		if (player1 > player2) {
+		winner = 'The </b>winner</b> is <font color="green">player 1</font>!';
+		loser = 'Better luck next time, player 2!';
+		}
+		if (player1 < player2) {
+		winner = 'The <b>winner</b> is <font color="green">player 2</font>!';
+		loser = 'Better luck next time, player 1!';
+		}
+		if (player1 === player2) {
+		winner = 'It\'s a <b>tie</b>!';
+		loser = 'Try again!';
+		}
+		return this.sendReplyBox('<center><font size="5"><b>Dice Game!</b></font></center><br />' +
+				'<font color="red">This game is worth <b>one</b> buck.</font><br />' +
+				'Loser: Tranfer bucks to the winner using /tb [winner], 1 <br />' +
+				'Player 1 roll: 	'+player1+'<br />' + 
+				'Player 2 roll: 	'+player2+'<br />' +
+				'<img border="5" title="Winner: '+winner+'"><br />' +
+				''+loser+'');
+	},
 
 	register: function() {
 		if (!this.canBroadcast()) return;

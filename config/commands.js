@@ -1952,6 +1952,7 @@ var commands = exports.commands = {
 				'<hr>' +
 				'Player 1 roll: 	'+player1+'<br />' + 
 				'Player 2 roll: 	'+player2+'<br />' +
+				'<hr>' +
 				'Winner: '+winner+'<br />' +
 				''+loser+'');
 	},

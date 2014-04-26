@@ -996,7 +996,7 @@ var commands = exports.commands = {
                 '    <img src="http://50.62.73.114:8000/avatars/crowt.png"></div>' +
                 '<blink><font color="red">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</font></blink><br />' +
                 '<div class="infobox"><b><font color="#4F86F7" size="3">Ace:</font></b> <font color="blue" size="3">G</font><font color="black" size="3">r</font><font color="blue" size="3">e</font><font color="black" size="3">n</font><font color="blue" size="3">i</font><font color="black" size="3">n</font><font color="blue" size="3">j</font><font color="black" size="3">a</font></font><br />' +
-                '<font color="black">"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends." - Dumbledore</font></center></div>');
+                '<font color="black">"It takes a great deal of <b>bravery</b> to <b>stand up to</b> our <b>enemies</b>, but just as much to stand up to our <b>friends</b>." - Dumbledore</font></center></div>');
 	},                     
     	ransu: function(target, room, user) {
         if (!this.canBroadcast()) return;

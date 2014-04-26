@@ -1609,16 +1609,18 @@ var commands = exports.commands = {
                 '<b>Ace:</b> Logic<br />' +
                 'That really puffled my jiggles.</center>');
     	},	
-
-	pan: 'panpawn',
-	panpawn: function(target, room, user) {
+    	
+        pan: 'crowt',
+        panapawn: 'crowt',     
+        crowt: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
-                '<img src="http://i.imgur.com/xzfPeaL.gif">' +
-                '<img src="http://i.imgur.com/PDhHorc.gif"><br />' +
-                '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font>.<br />' +
-                '<font color="black">Don\'t touch me when I\'m sleeping.</font></center>');
-    	},
+        this.sendReplyBox('<center><div class="infobox"><img src="http://i.imgur.com/BYTR6Fj.gif"  width="80" height="80" align="left">' +
+                '<img src="http://i.imgur.com/czMd1X5.gif" border="6" align="center">' +
+                '<img src="http://50.62.73.114:8000/avatars/crowt.png" align="right"><br clear="all" /></div>' +
+                '<blink><font color="red">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</font></blink><br />' +
+                '<div class="infobox"><b><font color="#4F86F7" size="3">Ace:</font></b> <font color="blue" size="3">G</font><font color="black" size="3">r</font><font color="blue" size="3">e</font><font color="black" size="3">n</font><font color="blue" size="3">i</font><font color="black" size="3">n</font><font color="blue" size="3">j</font><font color="black" size="3">a</font><br />' +
+                '<font color="black">"It takes a great deal of <b>bravery</b> to <b>stand up to</b> our <b>enemies</b>, but just as much to stand up to our <b>friends</b>." - Dumbledore</font></center></div>');
+        },
 	
 	tael: function(target, room, user) {
     	if (!this.canBroadcast()) return;

@@ -1926,7 +1926,7 @@ var commands = exports.commands = {
 		if (target < 0) {
 			return this.sendReply('Number cannot be negative.');
 		}
-		if (target === 0) {
+		if (target == 0) {
 			return this.sendReply('Number cannot be 0.');
 		}
 		var player1 = Math.floor(6 * Math.random()) + 1;

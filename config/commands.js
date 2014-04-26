@@ -991,7 +991,7 @@ var commands = exports.commands = {
 	},
 	crowt: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><div class="infobox"><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
+        this.sendReplyBox('<center><div class="infobox" border="5"><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
                 '    <img src="http://i.imgur.com/czMd1X5.gif">' +
                 '    <img src="http://50.62.73.114:8000/avatars/crowt.png"></div>' +
                 '<blink><font color="red">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</font></blink><br />' +

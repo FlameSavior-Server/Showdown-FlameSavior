@@ -2950,7 +2950,7 @@ var commands = exports.commands = {
 
 		if (!user.isAway) {
 			user.originalName = user.name;
-			var awayName = user.name + ' - Away';
+			var awayName = user.name + ' - Ⓐⓦⓐⓨ';
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);

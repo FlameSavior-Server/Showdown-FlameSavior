@@ -329,8 +329,10 @@ var Tournament = (function () {
 		}, this);
 
 		if (this.room.delayJoinedUsers) {
-			this.room.add('|raw|<b>The following users have joined the tournament: '+this.room.delayJoinedUsers.join(', ')+'.</b>');
-			this.room.delayJoinedUsers = [];
+			if (this.room.delayJoinedUsers.length >= 1) {
+				this.room.add('|raw|<b>The following users have joined the tournament: '+this.room.delayJoinedUsers.join(', ')+'.</b>');
+				this.room.delayJoinedUsers = [];
+			}
 		}
 
 		this.isTournamentStarted = true;

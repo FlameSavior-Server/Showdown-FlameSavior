@@ -1931,7 +1931,7 @@ var commands = exports.commands = {
 		winner = 'It\'s a tie! Try again!';
 		}
 		return this.sendReplyBox('<center><font size="5">Dice Game!</font></center><br />' +
-				'<font color="red">This game is worth <b>one</b> buck.</font><br />'
+				'<font color="red">This game is worth <b>one</b> buck.</font><br />' +
 				'Player 1: '+player1+'<br />' + 
 				'Player 2: '+player2+'<br />' +
 				'Winner: '+winner+'');

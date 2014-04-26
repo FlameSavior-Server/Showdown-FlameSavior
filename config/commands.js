@@ -1934,10 +1934,11 @@ var commands = exports.commands = {
 		winner = 'It\'s a <b>tie</b>!';
 		loser = 'Try again!';
 		}
-		return this.sendReplyBox('<center><font size="5">Dice Game!</font></center><br />' +
+		return this.sendReplyBox('<center><font size="5"><b>Dice Game!</b></font></center><br />' +
 				'<font color="red">This game is worth <b>one</b> buck.</font><br />' +
-				'Player 1: '+player1+'<br />' + 
-				'Player 2: '+player2+'<br />' +
+				'Loser: Tranfer bucks to the winner using /tb [winner], 1 <br />' +
+				'Player 1 roll: 	'+player1+'<br />' + 
+				'Player 2 roll: 	'+player2+'<br />' +
 				'Winner: '+winner+'<br />' +
 				''+loser+'');
 	},

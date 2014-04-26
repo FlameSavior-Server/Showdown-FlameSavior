@@ -1921,13 +1921,13 @@ var commands = exports.commands = {
 		var player1 = Math.floor(6 * Math.random()) + 1;
 		var player2 = Math.floor(6 * Math.random()) + 1;
 		var winner = '';
-		if player1 > player2 {
+		if (player1 > player2) {
 		winner = 'The winner is <font color="green">player 1!</font>';
 		}
-		if player1 < player2 {
+		if (player1 < player2) {
 		winner = 'The winner is <font color="green">player 2!</font>';
 		}
-		if player1 === player2 {
+		if (player1 === player2) {
 		winner = 'It\'s a tie!';
 		}
 		return this.sendReplyBox('<center><font size="5">Dice Game!</font></center><br />' +

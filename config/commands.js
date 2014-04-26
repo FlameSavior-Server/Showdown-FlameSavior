@@ -2632,7 +2632,9 @@ var commands = exports.commands = {
 	logic: 'psychological',
 	psychological: function(target, room, user) {
                 if (!this.canBroadcast()) return;
-                this.sendReplyBox('<center><img src="http://i.imgur.com/tRRas7O.gif" width="200"><br />' +
+                this.sendReplyBox('<center><img src="http://i.imgur.com/I0OjQqS.png?1">' +
+                '<img src="http://i.imgur.com/tRRas7O.gif" width="200">' +  
+                '<img src="http://i.imgur.com/KDLnfSA.png?1"><br />' +      
                 '<img src="http://i.imgur.com/1MH0mJM.png" height="90">' +
                 '<img src="http://i.imgur.com/TSEXdOm.gif" width="300">' +
                 '<img src="http://i.imgur.com/4XlnMPZ.png" height="90"><br />' +

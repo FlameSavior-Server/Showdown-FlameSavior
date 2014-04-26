@@ -1915,6 +1915,26 @@ var commands = exports.commands = {
 		var rand = Math.floor(maxRoll * Math.random()) + 1;
 		return this.sendReplyBox('Random number (1 - ' + maxRoll + '): ' + rand);
 	},
+	
+	dicegame: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		var player1 = Math.floor(6 * Math.random()) + 1;
+		var player2 = Math.floor(6 * Math.random()) + 1;
+		var winner = '';
+		if player1 > player2 {
+		winner = 'The winner is <font color="green">player 1!</font>';
+		}
+		if player1 < player2 {
+		winner = 'The winner is <font color="green">player 2!</font>';
+		}
+		if player1 === player2 {
+		winner = 'It\'s a tie!';
+		}
+		return this.sendReplyBox('<center><font size="5">Dice Game!</font></center><br />' +
+				'Player 1: '+player1+'<br />' + 
+				'Player 2: '+player2+'<br />' +
+				'Winner: '+winner+'');
+	},
 
 	register: function() {
 		if (!this.canBroadcast()) return;

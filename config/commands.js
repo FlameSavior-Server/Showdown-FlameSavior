@@ -1180,7 +1180,7 @@ var commands = exports.commands = {
 	jack: 'jackzero',
         jackzero: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="4" color="aqua">JackZero<br></font><img src="http://i.imgur.com/cE6LTKm.png"> <img src="http://img-cache.cdn.gaiaonline.com/65daf73eb2151b44999fb75d5f361e43/http://i866.photobucket.com/albums/ab230/darkalaric/My%20Motifakes/jack-the-ripper-jack-the-ripper-blo.jpg" height="200"><br>I prefer the freedom of being hated to the shackles of expectaional love.<br><strong><font color="indigo">Jack the Ripper</font></strong>: Crazy doesn\'t even begin to cover it.');
+        this.sendReplyBox('<center><font size="4" color="aqua">JackZero<br></font><img src="http://i.imgur.com/cE6LTKm.png"><br>I prefer the freedom of being hated to the shackles of expectaional love.<br>"Half as long, twice as bright.."');
         },
 	wd: 'windoge',
 	windoge: function(target, room, user) {

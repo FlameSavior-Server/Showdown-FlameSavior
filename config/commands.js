@@ -1947,7 +1947,7 @@ var commands = exports.commands = {
 		return this.sendReplyBox('<center><font size="5"><b>Dice Game!</b></font></center><br />' +
 				
 				'<font color="red">This game is worth '+target+' buck(s).</font><br />' +
-				'Loser: Tranfer bucks to the winner using /tb [winner], 1 <br />' +
+				'Loser: Tranfer bucks to the winner using /tb [winner], '+target+' <br />' +
 				'<hr>' +
 				'Player 1 roll: 	'+player1+'<br />' + 
 				'Player 2 roll: 	'+player2+'<br />' +

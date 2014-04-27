@@ -1357,6 +1357,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	thugking25: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/z1aGOWt.png">' +
+                '<img src="http://i.imgur.com/UcmY8VC.gif">' +
+                '<img src="http://i.imgur.com/4tiVnXB.png"><br />' +
+                '<b>Ace:</b> BLAZIKEN<br />' +
+                'You\'d do well to remember this, Frosties. The only time a Lawyer can cry ... is when it's all over.</center>');
+    	},
+	
 	okguy: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://31.media.tumblr.com/1dc6e9b9576bfd48c4b26bf3658e8c57/tumblr_mqxim5QkxB1r0b2hgo4_400.gif" width="140">' +
@@ -1610,6 +1619,7 @@ var commands = exports.commands = {
                 'That really puffled my jiggles.</center>');
     	},	
     	
+        logicaldomination: 'crowt',
         pan: 'crowt',
         panpawn: 'crowt',     
         crowt: function(target, room, user) {

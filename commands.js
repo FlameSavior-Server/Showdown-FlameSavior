@@ -12,6 +12,8 @@
  */
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
 var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
+var key = '';
+var hint = '';
 var isMotd = false;
 var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'forcerename', 'musicbox', 'vip'];
 var closeShop = false

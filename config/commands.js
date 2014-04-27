@@ -1948,7 +1948,7 @@ var commands = exports.commands = {
 		winner = 'It\'s a <b>tie</b>!';
 		loser = 'Try again!';
 		}
-		return this.sendReplyBox('<center><font size="5"><b>Dice Game!</b></font></center><br />' +
+		return this.sendReplyBox('<center><font size="4"><b>Dice Game!</b></font></center><br />' +
 				'<font color="red">This game is worth '+target+' buck(s).</font><br />' +
 				'Loser: Tranfer bucks to the winner using /tb [winner], '+target+' <br />' +
 				'<hr>' +
@@ -1966,10 +1966,10 @@ var commands = exports.commands = {
 		var random = Math.floor(1000000 * Math.random()) + 1;
 		var results = '';
 		if (random > 500000) {
-		results = '<img src="http://surviveourcollapse.com/wp-content/uploads/2013/01/zinc.png" width="15%"><br>It\'s heads!';
+		results = '<img src="http://surviveourcollapse.com/wp-content/uploads/2013/01/zinc.png" width="15%" title="Heads!"><br>It\'s heads!';
 		}
 		if (random <= 500000) {
-		results = '<img src="http://upload.wikimedia.org/wikipedia/commons/e/e5/2005_Penny_Rev_Unc_D.png" width="15%"><br>It\'s tails!';
+		results = '<img src="http://upload.wikimedia.org/wikipedia/commons/e/e5/2005_Penny_Rev_Unc_D.png" width="15%" title="Tails!"><br>It\'s tails!';
 		}
 		return this.sendReplyBox('<center><font size="3"><b>Coin Game!</b></font><br>'+results+'');
 	},

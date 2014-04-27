@@ -1984,13 +1984,13 @@ var commands = exports.commands = {
 		return this.sendReplyBox('<center><font size="3"><b>Coin Game!</b></font><br>'+results+'');
 	},
 	
-	color: function(target, room, user) {
+		color: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (target === 'list' || target === 'help' || target === 'options') {
-		return this.sendReplyBox('The random colors are: <b><font color="red">Red</font>, <font color="blue">Blue</font>, <font color="orange">Orange</font>, <font color="green">Green</font>, <font color="teal">Teal</font>, <font color="brown">Brown</font>, <font color="black">Black</font>, <font color="purple">Purple</font>.');
+		return this.sendReplyBox('The random colors are: <b><font color="red">Red</font>, <font color="blue">Blue</font>, <font color="orange">Orange</font>, <font color="green">Green</font>, <font color="teal">Teal</font>, <font color="brown">Brown</font>, <font color="black">Black</font>, <font color="purple">Purple</font>, <font color="pink">Pink</font>, <font color="gray">Gray</font>, <font color="tan">Tan</font>, <font color="gold">Gold</font>, <font color=#CC0000>R</font><font color=#AE1D00>a</font><font color=#913A00>i</font><font color=#745700>n</font><font color=#577400>b</font><font color=#3A9100>o</font><font color=#1DAE00>w</font>.');
 		}
 		if (target == '') {
-		var random = Math.floor(8 * Math.random()) + 1;
+		var random = Math.floor(13 * Math.random()) + 1;
 		var results = '';
 		if (random == 1) {
 		results = '<font color="red">Red</font>';
@@ -2015,7 +2015,22 @@ var commands = exports.commands = {
 		}
 		if (random == 8) {
 		results = '<font color="purple">Purple</font>';
-		}							
+		}	
+		if (random == 9) {
+		results = '<font color="pink">Pink</font>';
+		}
+		if (random == 10) {
+		results = '<font color="gray">Gray</font>';
+		}	
+		if (random == 11) {
+		results = '<font color="tan">Tan</font>';
+		}	
+		if (random == 12) {
+		results = '<font color="gold">Gold</font>';
+		}
+		if (random == 13) {
+		results = '<font color=#CC0000>R</font><font color=#AE1D00>a</font><font color=#913A00>i</font><font color=#745700>n</font><font color=#577400>b</font><font color=#3A9100>o</font><font color=#1DAE00>w</font>';
+		}						
 		return this.sendReplyBox('The random color is:<b> '+results+'</b>');
 		}
 	},

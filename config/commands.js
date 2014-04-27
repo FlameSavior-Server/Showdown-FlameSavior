@@ -1969,6 +1969,8 @@ var commands = exports.commands = {
 				''+loser+'');
 	},
 	
+	helixfossil: 'm8b',
+	helix: 'm8b',
 	magic8ball: 'm8b',
 	m8b: function(target, room, user) {
 		if (!this.canBroadcast()) return;

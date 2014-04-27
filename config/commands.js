@@ -2377,9 +2377,13 @@ var commands = exports.commands = {
     	this.sendReplyBox('<left><img height="100" width="125" src="http://25.media.tumblr.com/bda3fbc303632e64b6c2aa720e8cf87e/tumblr_mw09v90S3R1rb53jco1_500.png"><img height="110" width="240" src="http://i.imgur.com/QTUuGUI.gif"><right><img height="100" width="125" src="http://24.media.tumblr.com/8aaf6a29a200fa3ce48e44c8fad078c9/tumblr_mpu21087ST1sogo8so1_250.jpg"><center><br><b>Ace: </b>Keldeo/Manectric<br><b>Catchphrase: </b>I\'m a Champ, come at me bro.</center>');
     },
     
-    vlahdimirlenin: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src=http://www.pokemonreborn.com/dexsprites/animated/242.gif><img src=http://i.imgur.com/TAU7XiN.gif><img src=http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/080.gif><br><b>Ace:</b> Meloetta<br><b>Catchphrase:</b><font color=pink> IDFK YET OK</center>');
+    vlahd: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.quickmeme.com/img/59/59735e50728008fe7477f8292ec025aafb7c38ab86c39d1a4f198c3379c92669.jpg" Width="100" Height="75">' +
+                '<img src="http://i.imgur.com/TAU7XiN.gif" Width="350">' +
+                '<img src="http://24.media.tumblr.com/dae120759bc68c85e828d3ee631b9c3e/tumblr_mpstfxXqhg1s5utbmo1_500.gif" Width="100" Height="75"><br />' +
+                '<b>Most Badass Pokemon Alive:</b> Froslass<br />' +
+                '<font color=Blue><b>I want to be there when Karma butt-fucks you with a cactus.</b></font></center>');
     },
     
     egyptian: function(target, room, user) {

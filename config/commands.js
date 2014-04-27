@@ -1368,7 +1368,7 @@ var commands = exports.commands = {
 	zenith: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/cagJbsh.png"><br />' +
-                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/entei.gif">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/entei.gif"><br />' +
                 '<b>Ace:</b> Entei<br />' +
                 'Prometheus gave fire to man, I mastered it.</center>');
     	},

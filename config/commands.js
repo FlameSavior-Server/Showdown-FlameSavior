@@ -1981,6 +1981,7 @@ var commands = exports.commands = {
 		} else {
 		reply = 'Sorry, try again!';
 		}
+		return this.sendReplyBox(''+reply+'')
 	},
 
 	register: function() {

@@ -2033,7 +2033,7 @@ var commands = exports.commands = {
 		results = 'Outlook good.';
 		}
 		if (random == 20) {
-		results = 'Don't count on it.';
+		results = 'Don\'t count on it.';
 		}
 		return this.sendReplyBox(''+results+'');
 	},

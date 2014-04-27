@@ -1357,6 +1357,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	calculu: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/xmKhK6S.gif">' +
+                '<img src="http://i.imgur.com/7tMA4Pa.png">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif"><br />' +
+                '<b>Ace:</b> Garchomp<br />' +
+                'Losing is a part of life. You just need to get back up and try again.</center>');
+    	},
+	
 	stfu: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/rE7QRKe.png" width="100">' +

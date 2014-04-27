@@ -1983,6 +1983,42 @@ var commands = exports.commands = {
 		}
 		return this.sendReplyBox('<center><font size="3"><b>Coin Game!</b></font><br>'+results+'');
 	},
+	
+	color: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		if (target === 'list' || target === 'help' || target === 'options') {
+		return this.sendReplyBox('The random colors are: <b><font color="red">Red</font>, <font color="blue">Blue</font>, <font color="orange">Orange</font>, <font color="green">Green</font>, <font color="teal">Teal</font>, <font color="brown">Brown</font>, <font color="black">Black</font>, <font color="purple">Purple</font>.');
+		}
+		if (target == '') {
+		var random = Math.floor(8 * Math.random()) + 1;
+		var results = '';
+		if (random == 1) {
+		results = '<font color="red">Red</font>';
+		}
+		if (random == 2) {
+		results = '<font color="blue">Blue</font>';
+		}
+		if (random == 3) {
+		results = '<font color="orange">Orange</font>';
+		}
+		if (random == 4) {
+		results = '<font color="green">Green</font>';
+		}
+		if (random == 5) {
+		results = '<font color="teal">Teal</font>';
+		}
+		if (random == 6) {
+		results = '<font color="brown">Brown</font>';
+		}	
+		if (random == 7) {
+		results = '<font color="black">Black</font>';
+		}
+		if (random == 8) {
+		results = '<font color="purple">Purple</font>';
+		}							
+		return this.sendReplyBox('The random color is:<b> '+results+'</b>');
+		}
+	},
 
 	register: function() {
 		if (!this.canBroadcast()) return;

@@ -1983,6 +1983,18 @@ var commands = exports.commands = {
 		}
 		return this.sendReplyBox(''+reply+'')
 	},
+	
+	keytest: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		if(!target) return this.sendReply('/key [key] - Guesses the key of the day.  Hint: It\'s a color.');
+		var reply = '';
+		if (target == ''+key+'') {
+		reply = 'You won!';
+		} else {
+		reply = 'Sorry, try again!';
+		}
+		return this.sendReplyBox(''+reply+'')
+	},
 
 	register: function() {
 		if (!this.canBroadcast()) return;

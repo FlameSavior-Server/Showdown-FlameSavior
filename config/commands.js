@@ -1669,8 +1669,8 @@ var commands = exports.commands = {
 	ticken: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/B0gfhrg.png" width="144" height="100">' +
-                '<img src="http://i.imgur.com/kyrJhIC.gif?1?8517" width="293" height="75">' +
-                '<img src="http://i.imgur.com/7h6peGh.png"><br />' +
+                '<img src="http://i.imgur.com/kyrJhIC.gif?1?8517" width="300">' +
+                '<img src="http://25.media.tumblr.com/b4f01fca213952c519a54358e651992f/tumblr_mibltiuCaA1rtatqpo1_500.gif" width="120"><br />' +
                 '<b>Ace:</b> Lotad<br />' +
                 'Lost time is never found again...</center>');
     	},

@@ -1919,6 +1919,9 @@ var commands = exports.commands = {
 	rollgame: 'dicegame',
 	dicegame: function(target, room, user) {
 		if (!this.canBroadcast()) return;
+		if (Users.get(''+user.name+'').money < target) {
+			return this.sendReply('You cannot wager more than you have, nub.');
+		}
 		if(!target) return this.sendReply('/dicegame [amount of bucks agreed to wager].');
 		if (isNaN(target)) {
 			return this.sendReply('Very funny, now use a real number.');

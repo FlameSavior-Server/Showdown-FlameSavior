@@ -1969,7 +1969,7 @@ var commands = exports.commands = {
 		if (random <= 500000) {
 		results = '<img src="http://upload.wikimedia.org/wikipedia/commons/e/e5/2005_Penny_Rev_Unc_D.png" width="25%"><br>It\'s tails!';
 		}
-		return this.sendReplyBox('<center><font size="5"><b>Coin Game!</b><br>'+results+'');
+		return this.sendReplyBox('<center><font size="5"><b>Coin Game!</b></font><br>'+results+'');
 	},
 
 	register: function() {

@@ -1363,7 +1363,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/UcmY8VC.gif">' +
                 '<img src="http://i.imgur.com/4tiVnXB.png"><br />' +
                 '<b>Ace:</b> BLAZIKEN<br />' +
-                'You\'d do well to remember this, Frosties. The only time a Lawyer can cry ... is when it's all over.</center>');
+                'You\'d do well to remember this, Frosties. The only time a Lawyer can cry ... is when it\'s all over.</center>');
     	},
 	
 	okguy: function(target, room, user) {

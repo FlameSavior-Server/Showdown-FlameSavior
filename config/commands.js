@@ -1937,12 +1937,12 @@ var commands = exports.commands = {
 		var winner = '';
 		var loser= '';
 		if (player1 > player2) {
-		winner = 'The <b>winner</b> is <font color="green">player 1</font>!';
-		loser = 'Better luck next time, player 2!';
+		winner = 'The <b>winner</b> is <font color="green">'+user.name+'</font>!';
+		loser = 'Better luck next time, Opponent!';
 		}
 		if (player1 < player2) {
-		winner = 'The <b>winner</b> is <font color="green">player 2</font>!';
-		loser = 'Better luck next time, player 1!';
+		winner = 'The <b>winner</b> is <font color="green">Opponent</font>!';
+		loser = 'Better luck next time, '+user.name+'!';
 		}
 		if (player1 === player2) {
 		winner = 'It\'s a <b>tie</b>!';

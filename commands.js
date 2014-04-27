@@ -219,10 +219,6 @@ var commands = exports.commands = {
 		if(!target) return this.sendReply('/hug needs a target.');
 		return this.parse('/me hugs ' + target + '.');
 	},
-	bs: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Gold\'s Backup Server can be found <a href="http://omega.psim.us">here</a>.');
-        },
 	slap: function(target, room, user){
 		if(!target) return this.sendReply('/slap needs a target.');
 		return this.parse('/me slaps ' + target + ' with a large trout.');

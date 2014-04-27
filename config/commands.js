@@ -1357,6 +1357,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	gard: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen6/xy-animated/282.gif">' +
+                '<img src="http://i.imgur.com/cKDD2PX.gif" width="350">' +
+                '<img src="http://pldh.net/media/pokemon/gen6/xy-animated/245.gif"><br />' +
+                '<b>Ace:</b> Suicune<br />' +
+                'Having a negative approach to life just means less disappointments.</center>');
+    	},
+	
 	calculu: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/xmKhK6S.gif">' +

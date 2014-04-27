@@ -1361,7 +1361,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/rE7QRKe.png" width="100">' +
                 '<img src="http://i.imgur.com/MDYyJ9Y.png?1" width="300">' +
-                '<img src="http://i.imgur.com/cQ9fXks.png" width="100"><br />'
+                '<img src="http://i.imgur.com/cQ9fXks.png" width="100"><br />' +
                 'Stop! Just stop talking and leave.</center>');
     	},
 	

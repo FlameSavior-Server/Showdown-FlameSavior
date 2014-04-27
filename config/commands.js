@@ -1966,12 +1966,12 @@ var commands = exports.commands = {
 		var random = Math.floor(1000000 * Math.random()) + 1;
 		var results = '';
 		if (random > 500000) {
-		results = '<img src="http://surviveourcollapse.com/wp-content/uploads/2013/01/zinc.png" width="25%"><br>It\'s heads!';
+		results = '<img src="http://surviveourcollapse.com/wp-content/uploads/2013/01/zinc.png" width="15%"><br>It\'s heads!';
 		}
 		if (random <= 500000) {
-		results = '<img src="http://upload.wikimedia.org/wikipedia/commons/e/e5/2005_Penny_Rev_Unc_D.png" width="25%"><br>It\'s tails!';
+		results = '<img src="http://upload.wikimedia.org/wikipedia/commons/e/e5/2005_Penny_Rev_Unc_D.png" width="15%"><br>It\'s tails!';
 		}
-		return this.sendReplyBox('<center><font size="5"><b>Coin Game!</b></font><br>'+results+'');
+		return this.sendReplyBox('<center><font size="3"><b>Coin Game!</b></font><br>'+results+'');
 	},
 
 	register: function() {

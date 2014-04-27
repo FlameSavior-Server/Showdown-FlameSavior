@@ -1959,6 +1959,8 @@ var commands = exports.commands = {
 				''+loser+'');
 	},
 	
+	coins: 'coingame',
+	coin: 'coingame',
 	coingame: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		var random = Math.floor(1000000 * Math.random()) + 1;

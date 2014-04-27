@@ -1977,10 +1977,9 @@ var commands = exports.commands = {
 		if(!target) return this.sendReply('/key [key] - Guesses the key of the day.  Hint: It'\s a color.');
 		var reply = '';
 		if (target == 'grey') {
-		reply = 'You won!'
-		else {
-		reply = 'Sorry, try again!'
-		}
+		reply = 'You won!';
+		} else {
+		reply = 'Sorry, try again!';
 		}
 	},
 

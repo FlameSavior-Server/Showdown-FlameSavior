@@ -1974,6 +1974,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		var random = Math.floor(20 * Math.random()) + 1;
 		var results = '';
+		
 		if (random == 1) {
 		results = 'Signs point to yes.';
 		}
@@ -2034,7 +2035,7 @@ var commands = exports.commands = {
 		if (random == 20) {
 		results = 'Don't count on it.';
 		}
-		return this.sendReply(''+results+'');
+		return this.sendReplyBox(''+results+'');
 	},
 	
 	coins: 'coingame',

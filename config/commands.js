@@ -1923,6 +1923,9 @@ var commands = exports.commands = {
 		if (isNaN(target)) {
 			return this.sendReply('Very funny, now use a real number.');
 		}
+		if (String(target).indexOf('.') >= 0) {
+			return this.sendReply('You cannot wager numbers with decimals.');
+		}
 		if (target < 0) {
 			return this.sendReply('Number cannot be negative.');
 		}

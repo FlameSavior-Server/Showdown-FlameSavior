@@ -1959,31 +1959,17 @@ var commands = exports.commands = {
 				''+loser+'');
 	},
 	
-	dicegametest: function(target, room, user) {
+	coingame: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		var player1 = Math.floor(6 * Math.random()) + 1;
-		var player2 = Math.floor(6 * Math.random()) + 1;
-		var winner = '';
-		var loser= '';
-		if (player1 > player2) {
-		winner = 'The </b>winner</b> is <font color="green">player 1</font>!';
-		loser = 'Better luck next time, player 2!';
+		var random = Math.floor(1000 * Math.random()) + 1;
+		var results = '';
+		if (random > 500) {
+		results = '<img src="http://surviveourcollapse.com/wp-content/uploads/2013/01/zinc.png" width="25%"><br>It\'s heads!';
 		}
-		if (player1 < player2) {
-		winner = 'The <b>winner</b> is <font color="green">player 2</font>!';
-		loser = 'Better luck next time, player 1!';
+		if (random <= 500) {
+		results = '<img src="http://upload.wikimedia.org/wikipedia/commons/e/e5/2005_Penny_Rev_Unc_D.png" width="25%"><br>It\'s tails!';
 		}
-		if (player1 === player2) {
-		winner = 'It\'s a <b>tie</b>!';
-		loser = 'Try again!';
-		}
-		return this.sendReplyBox('<center><font size="5"><b>Dice Game!</b></font></center><br />' +
-				'<font color="red">This game is worth <b>one</b> buck.</font><br />' +
-				'Loser: Tranfer bucks to the winner using /tb [winner], 1 <br />' +
-				'Player 1 roll: 	'+player1+'<br />' + 
-				'Player 2 roll: 	'+player2+'<br />' +
-				'<img border="5" title="Winner: '+winner+'"><br />' +
-				''+loser+'');
+		return this.sendReplyBox('<center>'+results+'');
 	},
 
 	register: function() {

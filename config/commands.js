@@ -2036,6 +2036,7 @@ var commands = exports.commands = {
 		results = 'Don't count on it.';
 		}
 		return this.sendReplyBox(''+results+'');
+	}
 	},
 	
 	coins: 'coingame',

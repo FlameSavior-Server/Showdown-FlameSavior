@@ -1952,8 +1952,8 @@ var commands = exports.commands = {
 				'<font color="red">This game is worth '+target+' buck(s).</font><br />' +
 				'Loser: Tranfer bucks to the winner using /tb [winner], '+target+' <br />' +
 				'<hr>' +
-				'Player 1 roll: 	'+player1+'<br />' + 
-				'Player 2 roll: 	'+player2+'<br />' +
+				''+user.name+' roll: 	'+player1+'<br />' + 
+				'Opponent roll: 	'+player2+'<br />' +
 				'<hr>' +
 				'Winner: '+winner+'<br />' +
 				''+loser+'');

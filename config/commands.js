@@ -1971,18 +1971,6 @@ var commands = exports.commands = {
 		}
 		return this.sendReplyBox('<center><font size="5"><b>Coin Game!</b></font><br>'+results+'');
 	},
-	
-	keytest: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		if(!target) return this.sendReply('/key [key] - Guesses the key of the day.  Hint: '+hint+'');
-		var reply = '';
-		if (target == ''+key+'') {
-		reply = 'You won!';
-		} else {
-		reply = 'Sorry, try again!';
-		}
-		return this.sendReplyBox(''+reply+'')
-	},
 
 	register: function() {
 		if (!this.canBroadcast()) return;

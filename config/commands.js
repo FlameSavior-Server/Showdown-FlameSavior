@@ -1356,6 +1356,15 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	zer0: 'zero',
+	zero: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://tinyurl.com/lhjnvro" height="80" width="66">' +
+                '<img src="http://i.imgur.com/cgQkJrV.gif">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/latios.gif"><br />' +
+                '<b>Ace:</b> Latios<br />' +
+                'I\'m glad I have your blessing to make children with your sister.</center>');
+    	},
 	
 	faith: function(target, room, user) {
         if (!this.canBroadcast()) return;

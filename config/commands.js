@@ -1357,6 +1357,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	faith: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://img1.wikia.nocookie.net/__cb20101013074316/fireemblem/images/5/52/Eirika_Great_Lord.gif">' +
+                '<img src="http://i.imgur.com/TszHs6X.png">' +
+                '<img src="http://i.imgur.com/eGn35WC.png" width="180"><br />' +
+                '<b>Ace:</b> Keldeo<br />' +
+                'Why do we start pointless fights and wars? The more death and destruction that we bring to this world, the less we can take enjoying our time in it.</center>');
+    	},
+	
 	gard: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen6/xy-animated/282.gif">' +

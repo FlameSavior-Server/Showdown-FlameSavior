@@ -2343,7 +2343,7 @@ var commands = exports.commands = {
                 'I\'m sorry friend but stall is all part of the game.</center>');
     },
     
-    	kiiori: function(target, room, user) {
+    	kiiroi: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://th04.deviantart.net/fs70/PRE/i/2013/196/7/3/one_piece_chopper_png_by_bloomsama-d6dkl5d.png" width="80" height="100">' +
                 '<img src="http://i.imgur.com/cfhl4gq.gif">' +

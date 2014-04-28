@@ -1746,7 +1746,7 @@ var commands = exports.commands = {
 	
 	princesshigh: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://crystal-league.weebly.com/uploads/2/3/2/3/23236780/136756028.jpg" height="200">' +
+		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/tumblr_ltuo9yFLI81r5wm28o1_250.gif">' +
                 '<img src="http://i.imgur.com/0xsg2uK.gif" width="370">' +
                 '<img src="http://31.media.tumblr.com/tumblr_ltuo9yFLI81r5wm28o1_250.gif" ><br />' +
                 '<b>Ace:</b> <font color=#d63265><blink>Gardevior</blink></font><br />' +

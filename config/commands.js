@@ -1656,7 +1656,7 @@ var commands = exports.commands = {
 	falls: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/iW1z5vz.gif" width="150" height="120"><br />' +
-                '<img src="http://i.imgur.com/Rh5tELv.png"><br />' +
+                '<img src="http://i.imgur.com/icfZuiY.gif" width="200" height="70"><br />' +
                 '<img src="http://i.imgur.com/cSf4QD1.gif" width="180"><br />' +
                 '<b>Ace:</b> Logic<br />' +
                 'That really puffled my jiggles.</center>');

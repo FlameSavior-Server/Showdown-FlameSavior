@@ -2343,13 +2343,13 @@ var commands = exports.commands = {
                 'I\'m sorry friend but stall is all part of the game.</center>');
     },
     
-    championyellow: function(target, room, user) {
+    	kiiori: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/dXbBAaO.gif">' +
-                '<img src="http://i.imgur.com/01XHL7i.gif" width="320">' +
-                '<img src="http://i.imgur.com/EESqNi3.gif?1" height="120" width="160"><br />' +
-                '<b>Ace:</b> Pikachu<br />' +
-                'Hugs. It\'s supper effective.</center>');
+        this.sendReplyBox('<center><img src="http://th04.deviantart.net/fs70/PRE/i/2013/196/7/3/one_piece_chopper_png_by_bloomsama-d6dkl5d.png" width="80" height="100">' +
+                '<img src="http://i.imgur.com/cfhl4gq.gif">' +
+                '<img src="http://i.imgur.com/uu94Qfv.gif"><br />' +
+                '<b>Ace:</b> Keldeo<br />' +
+                'You may think I suck. But come on, at least I don\'t swallow like you do.</center>');
     },
     
     brittany: function(target, room, user) {

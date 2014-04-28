@@ -785,6 +785,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 		var tourList = [];
 		for (var u in Tournaments.tournaments) {
 			if (!Tournaments.tournaments[u].isTournamentStarted && !Tournaments.tournaments[u].room.isPrivate) {
+				if (!Tools.data.Formats[Tournaments.tournaments[u].format]) continue;
 				tourList.push('<a class="ilink" href="/'+Tournaments.tournaments[u].room.id+'">'+Tournaments.tournaments[u].room.title+'</a>: '+Tools.data.Formats[Tournaments.tournaments[u].format].name+' '+Tournaments.tournaments[u].generator.name);
 			}
 		}

@@ -1647,19 +1647,11 @@ var commands = exports.commands = {
 		if (!Users.setOfflineGroup(name, nextGroup)) {
 			return this.sendReply("/promote - WARNING: This user is offline and could be unregistered. Use /forcepromote if you're sure you want to risk it.");
 		}
-		var groupName = (Config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
-		if (isDemotion) {
-			this.privateModCommand('('+name+' was demoted to ' + groupName + ' by '+user.name+'.)');
-			if (targetUser) {
-				targetUser.popup('You were demoted to ' + groupName + ' by ' + user.name + '.');
-			}
-			if (Rooms.rooms.logroom) Rooms.rooms.logroom.addRaw('DEMOTE LOG: ' + user.name + ' has demoted ' + name + ' to ' + groupName + '.');
+		if (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank) {
+			this.privateModCommand("(" + name + " was demoted to " + groupName + " by " + user.name + ".)");
+			if (targetUser) targetUser.popup("You were demoted to " + groupName + " by " + user.name + ".");
 		} else {
-			this.addModCommand(''+name+' was promoted to ' + groupName + ' by '+user.name+'.');
-			if (Rooms.rooms.logroom) Rooms.rooms.logroom.addRaw('PROMOTE LOG: ' + user.name + ' has promoted ' + name + ' to ' + groupName + '.');
-		}
-		if (targetUser) {
-			targetUser.updateIdentity();
+			this.addModCommand("" + name + " was promoted to " + groupName + " by " + user.name + ".");
 		}
 
 		if (targetUser) targetUser.updateIdentity();

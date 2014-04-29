@@ -1300,7 +1300,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
                 '<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
-                '<center><b><a href="https://www.youtube.com/watch?v=xslDxzRnDJg">Queen Of Hearts</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=bw9CALKOvAI">Bubble Pop!</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
                 '<center><b><a href="http://youtu.be/1wYNFfgrXTI?t=1m">When I\'m Gone</a><br>' +
                 '<center><b><a href="http://youtu.be/LFhEBmNwX_E?t=30s">Alone Together</a><br></center>' +
@@ -1695,13 +1695,13 @@ var commands = exports.commands = {
         },
 	
 	tael: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/pGk94ij.png" width="164" height="150">' +
-    		'<img src="http://i.imgur.com/Y2DTSuL.gif">' + 
-    		'<img src="http://i.imgur.com/BAnZ5kd.png" width="176" height="150"><br />' +
-    		'<b>Ace:</b> Flygon<br />' +
-    		'I don\'t give a flying fuck.</center>');
-    },
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/flygon.gif">' +
+                '<img src="http://i.imgur.com/Y2DTSuL.gif">' +
+                '<img src="http://www.zeldadungeon.net/images/News/Folder/11-06-07/Link-Art-Medium.png" height="138" width="169"><br />' +
+                '<b>Ace:</b> Flygon<br />' +
+                'I like my women waist thin, sweet skin and thicker than a snicker.</center>');
+    	},
 
 	ticken: function(target, room, user) {
         if (!this.canBroadcast()) return;

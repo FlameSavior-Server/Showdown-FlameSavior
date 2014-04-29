@@ -2208,6 +2208,7 @@ var commands = exports.commands = {
                 '<font color=red>Never give up and give it your all. If you give up, you have not lost once but twice.</font></center>');
     },
     
+    	piers: 'isawa',
     	isawa: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/hwqR2b8.jpg" width="160" height="140">' +

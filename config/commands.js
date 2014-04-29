@@ -1356,6 +1356,16 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	laxus: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/wailord-2.gif">' +
+                '<img src="http://i.imgur.com/urkd5XP.gif">' +
+                '<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/282-mega.gif"><br />' +
+                '<b>Ace:</b> Mega Waifu & Fatass<br />' +
+                'Don\'t be surprised if you lose your virginity.</center>');
+    	},
+	
 	zer0: 'zero',
 	zero: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -2208,13 +2218,14 @@ var commands = exports.commands = {
                 '<font color=red>Never give up and give it your all. If you give up, you have not lost once but twice.</font></center>');
     },
     
-    isawa: function(target, room, user) {
+    	piers: 'isawa',
+    	isawa: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/hwqR2b8.jpg" width="160" height="140">' +
                 '<img src="http://i.imgur.com/qZvvpNG.png?1" width="220">' +
                 '<img src="http://farm3.static.flickr.com/2755/4122651974_353e4287e8.jpg" width="160" height="130"><br />' +
-                '<b>Ace:</b> Galvantula<br />' +
-                'Happiness doesn\'t walk to me, because I\'m walking to it. One day, one step. Three steps in three days. Three steps forward, two steps back. Life\'s a one-two punch...</center>');
+                '<b>Ace:</b> Piers Nivans<br />' +
+                'Rub-a-dub-dub, Isawa be in your tub</center>');
     },
     
     pikadagreat : 'pika', 
@@ -2343,7 +2354,7 @@ var commands = exports.commands = {
                 'I\'m sorry friend but stall is all part of the game.</center>');
     },
     
-    	kiiori: function(target, room, user) {
+    	kiiroi: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://th04.deviantart.net/fs70/PRE/i/2013/196/7/3/one_piece_chopper_png_by_bloomsama-d6dkl5d.png" width="80" height="100">' +
                 '<img src="http://i.imgur.com/cfhl4gq.gif">' +

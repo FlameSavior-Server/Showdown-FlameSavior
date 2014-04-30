@@ -19,15 +19,6 @@ var code = fs.createWriteStream('config/friendcodes.txt', {'flags': 'a'});
 
 var isMotd = false;
 
-//var avatar = fs.createWriteStream('config/avatars.csv', {'flags': 'a'}); // for /customavatar
-//spamroom
-if (typeof spamroom == "undefined") {
-        spamroom = new Object();
-}
-if (!Rooms.rooms.spamroom) {
-        Rooms.rooms.spamroom = new Rooms.ChatRoom("spamroom", "spamroom");
-        Rooms.rooms.spamroom.isPrivate = true;
-}
 if (typeof tells === 'undefined') {
 	tells = {};
 }
@@ -236,25 +227,7 @@ var commands = exports.commands = {
 			user.originalName = '';
 			user.isAway = false;
 		}
-
-		// if user is not in spamroom
-		if (spamroom[user.userid] === undefined) {
-			// check to see if an alt exists in list
-			for (var u in spamroom) {
-				if (Users.get(user.userid) === Users.get(u)) {
-					// if alt exists, add new user id to spamroom, break out of loop.
-					spamroom[user.userid] = true;
-					break;
-				}
-			}
-		}
-
-		if (user.userid in spamroom) {
-			this.sendReply('|c|' + user.getIdentity() + '|' + message);
-			return Rooms.rooms['spamroom'].add('|c|' + user.getIdentity() + '|' + message);
-		} else {
-			return message;
-		}
+		return message;
 	},
 
 	poof: 'd',
@@ -331,24 +304,7 @@ var commands = exports.commands = {
 		if (!target) return;
 
 		var message = '/mee ' + target;
-		// if user is not in spamroom
-		if (spamroom[user.userid] === undefined) {
-			// check to see if an alt exists in list
-			for (var u in spamroom) {
-				if (Users.get(user.userid) === Users.get(u)) {
-					// if alt exists, add new user id to spamroom, break out of loop.
-					spamroom[user.userid] = true;
-					break;
-				}
-			}
-		}
-
-		if (user.userid in spamroom) {
-			this.sendReply('|c|' + user.getIdentity() + '|' + message);
-			return Rooms.rooms['spamroom'].add('|c|' + user.getIdentity() + '|' + message);
-		} else {
-			return message;
-		}
+		return message;
 	},
 
 	avatar: function (target, room, user) {
@@ -432,24 +388,8 @@ var commands = exports.commands = {
 
 		var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
 		user.send(message);
-		// if user is not in spamroom
-		if(spamroom[user.userid] === undefined){
-			// check to see if an alt exists in list
-			for(var u in spamroom){
-				if(Users.get(user.userid) === Users.get(u)){
-					// if alt exists, add new user id to spamroom, break out of loop.
-					spamroom[user.userid] = true;
-					break;
-				}
-			}
-		}
-
-		if (user.userid in spamroom) {
-			Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|(__Private to ' + targetUser.getIdentity()+ "__) " + target );
-		} else {
-			if (targetUser !== user) targetUser.send(message);
-			targetUser.lastPM = user.userid;
-		}
+		if (targetUser !== user) targetUser.send(message);
+		targetUser.lastPM = user.userid;
 		user.lastPM = targetUser.userid;
 	},
 	
@@ -871,9 +811,6 @@ var commands = exports.commands = {
 				'Home of many leagues for you to join or challenge, battle users in the ladder or in tournaments, learn how to play Pokemon or just chat in lobby!<br /><br />' +
 				'Make sure to type <b>/help</b> to get a list of commands that you can use and <b>/faq</b> to check out frequently asked questions.</center>');
 		}*/
-		if (targetRoom.id === "spamroom" && !user.isStaff) {
-			return connection.sendTo(target, "|noinit|nonexistent|The room'"+target+"' does not exist.");
-		}
 	},
 
 	rk: 'roomkick',
@@ -1118,54 +1055,6 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Moderating: Punishments
 	 *********************************************************/
-
-	spam: 'spamroom',
-	spammer: 'spamroom',
-	spamroom: function (target, room, user, connection) {
-		if (!target) return this.sendReply('Please specify a user.');
-		var target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser || !targetUser.connected) {
-			return this.sendReply('The user \'' + this.targetUsername + '\' does not exist.');
-		}
-		if (!this.can('mute', targetUser)) {
-			return false;
-		}
-		if (spamroom[targetUser]) {
-			return this.sendReply('That user\'s messages are already being redirected to the spamroom.');
-		}
-		spamroom[targetUser] = true;
-		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was added to the spamroom list by '+user.name+'.</b>');
-		this.privateModCommand('('+targetUser + ' was added to spamroom by ' + user.name+')');
-		this.sendReply(this.targetUsername + ' was successfully added to the spamroom list.');
-		try {
-			frostcommands.addSpamroomCount(user.userid);
-		} catch (e) {
-			return;
-		}
-	},
-
-	unspam: 'unspamroom',
-	unspammer: 'unspamroom',
-	unspamroom: function (target, room, user, connection) {
-		var target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser || !targetUser.connected) {
-			return this.sendReply('The user \'' + this.targetUsername + '\' does not exist.');
-		}
-		if (!this.can('mute', targetUser)) {
-			return false;
-		}
-		if (!spamroom[targetUser]) {
-			return this.sendReply('That user is not in the spamroom list.');
-		}
-		for(var u in spamroom)
-			if(targetUser == Users.get(u))
-				delete spamroom[u];
-		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was removed from the spamroom list by '+user.name+'.</b>');
-		this.privateModCommand('('+targetUser + ' was removed from spamroom by ' + user.name+')');
-		return this.sendReply(this.targetUsername + ' and their alts were successfully removed from the spamroom list.');
-	},
 	
 	warn: function (target, room, user) {
 		if (!target) return this.parse('/help warn');
@@ -1232,7 +1121,6 @@ var commands = exports.commands = {
 		if (!targetRoom) {
 			return this.sendReply("/help redir - You need to add a room to redirect the user to");
 		}
-		if (targetRoom.id == 'spamroom') return this.sendReply("/help redir - You need to add a room to redirect the user to");
 		if (!this.can('warn', targetUser, room) || !this.can('warn', targetUser, targetRoom)) return false;
 		if (!targetUser || !targetUser.connected) {
 			return this.sendReply("User " + this.targetUsername + " not found.");

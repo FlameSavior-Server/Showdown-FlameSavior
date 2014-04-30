@@ -171,24 +171,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 				if (broadcast) {
 					message = this.canTalk(message);
 					if (!message) return false;
-					//spamroom
-					// if user is not in spamroom
-					if(spamroom[user.userid] == undefined){
-					// check to see if an alt exists in list
-						for(var u in spamroom){
-							if(Users.get(user.userid) == Users.get(u)){
-								// if alt exists, add new user id to spamroom, break out of loop.
-								spamroom[user.userid] = true;
-								break;
-							}
-						}
-					}
 
-					if (spamroom[user.userid]) {
-						Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|' + message);
-						connection.sendTo(room, "|c|" + user.getIdentity() + "|" + message);
-						return false;
-					}
 					if (!user.can('broadcast', null, room)) {
 						connection.sendTo(room, "You need to be voiced to broadcast this command's information.");
 						connection.sendTo(room, "To see it for yourself, use: /" + message.substr(1));
@@ -258,24 +241,6 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 
 	message = canTalk(user, room, connection, message);
 	if (!message) return false;
-	//spamroom
-	// if user is not in spamroom
-	if(spamroom[user.userid] == undefined){
-		// check to see if an alt exists in list
-		for(var u in spamroom){
-			if(Users.get(user.userid) == Users.get(u)){
-				// if alt exists, add new user id to spamroom, break out of loop.
-				spamroom[user.userid] = true;
-				break;
-			}
-		}
-	}
-
-	if (spamroom[user.userid]) {
-		Rooms.rooms.spamroom.add('|c|' + user.getIdentity() + '|' + message);
-		connection.sendTo(room, "|c|" + user.getIdentity() + "|" + message);
-		return false;
-	}
 
 	//tells
 	var alts = user.getAlts();

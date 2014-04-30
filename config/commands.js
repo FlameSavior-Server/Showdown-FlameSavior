@@ -146,12 +146,9 @@
 var commands = exports.commands = {
 
 	ip: 'whois',
-	getip: 'whois',
 	rooms: 'whois',
-	altcheck: 'whois',
 	alt: 'whois',
 	alts: 'whois',
-	getalts: 'whois',
 	whois: function (target, room, user) {
 		var targetUser = this.targetUserOrSelf(target, user.group === ' ');
 		if (!targetUser) {
@@ -428,7 +425,7 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help dexsearch');
 		var targets = target.split(',');
 		var searches = {};
-		var allTiers = {'uber':1, 'ou':1, 'uu':1, 'lc':1, 'cap':1, 'bl':1};
+		var allTiers = {'uber':1, 'ou':1, 'uu':1, 'lc':1, 'cap':1, 'bl':1, 'bl2':1};
 		var allColours = {'green':1, 'red':1, 'blue':1, 'white':1, 'brown':1, 'yellow':1, 'purple':1, 'pink':1, 'gray':1, 'black':1};
 		var showAll = false;
 		var megaSearch = null;
@@ -3050,16 +3047,6 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply("/reply OR /r [message] - Send a private message to the last person you received a message from, or sent a message to.");
 		}
-		if (target === 'all' || target === 'getip' || target === 'ip') {
-			matched = true;
-			this.sendReply("/ip - Get your own IP address.");
-			this.sendReply("/ip [username] - Get a user's IP address. Requires: @ & ~");
-		}
-		if (target === 'all' || target === 'altcheck' || target === 'alt' || target === 'alts' || target === 'getalts') {
-			matched = true;
-			this.sendReply("/alts OR /altcheck - Get your own alts.");
-			this.sendReply("/alts OR /altcheck [username] - Get a user's alts. Requires: % @ & ~");
-		}
 		if (target === 'all' || target === 'rating' || target === 'ranking' || target === 'rank' || target === 'ladder') {
 			matched = true;
 			this.sendReply("/rating - Get your own rating.");
@@ -3073,13 +3060,10 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply("/avatar [new avatar number] - Change your trainer sprite.");
 		}
-		if (target === 'all' || target === 'rooms') {
+		if (target === 'all' || target === 'whois' || target === 'alts' || target === 'ip' || target === 'rooms') {
 			matched = true;
-			this.sendReply("/rooms [username] - Show what rooms a user is in.");
-		}
-		if (target === 'all' || target === 'whois') {
-			matched = true;
-			this.sendReply("/whois [username] - Get details on a username: group, and rooms.");
+			this.sendReply("/whois - Get details on yourself: alts, group, IP address, and rooms.");
+			this.sendReply("/whois [username] - Get details on a username: alts (Requires: % @ & ~), group, IP address (Requires: @ & ~), and rooms.");
 		}
 		if (target === 'all' || target === 'data') {
 			matched = true;
@@ -3283,10 +3267,10 @@ var commands = exports.commands = {
 			this.sendReply('/leaguestatus - View whether the league you are in is open or closed to challengers.');
 		}
     		// Driver commands
-    		if (target === '%' || target === 'unlink') {
+    	if (target === '%' || target === 'unlink') {
     			matched = true;
     			this.sendReply('/unlink [username] - Prevents users from clicking on any links [username] has posted. Requires: % @ & ~')
-    		}
+    	}
 		if (target === '%' || target === 'lock' || target === 'l') {
 			matched = true;
 			this.sendReply('/lock OR /l [username], [reason] - Locks the user from talking in all chats. Requires: % @ & ~');
@@ -3375,6 +3359,14 @@ var commands = exports.commands = {
 		if (target === '@' || target === 'modchat') {
 			matched = true;
 			this.sendReply('/modchat [off/autoconfirmed/+/%/@/&/~] - Set the level of moderated chat. Requires: @ for off/autoconfirmed/+ options, & ~ for all the options');
+		}
+		if (target === '@' || target === 'shadowban' || target === 'sban') {
+			matched = true;
+			this.sendReply("/shadowban OR /sban [username], [secondary command], [reason] - Sends all the user\'s messages to the shadow ban room. Requires: @ & ~");
+		}
+		if (target === '@' || target === 'unshadowban' || target === 'unsban') {
+			matched = true;
+			this.sendReply("/unshadowban OR /unsban [username] - Undoes /shadowban (except the secondary command). Requires: @ & ~");
 		}
 		if (target === 'roomban') {
 			matched = true;

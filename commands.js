@@ -388,7 +388,13 @@ var commands = exports.commands = {
 
 		var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
 		user.send(message);
-		if (targetUser !== user) targetUser.send(message);
+		if (targetUser !== user) {
+			if (ShadowBan.isShadowBanned(user)) {
+				ShadowBan.room.add('|c|' + user.getIdentity() + "|__(Private to " + targetUser.getIdentity() + ")__ " + target);
+			} else {
+				targetUser.send(message);
+			}
+		}
 		targetUser.lastPM = user.userid;
 		user.lastPM = targetUser.userid;
 	},
@@ -1322,6 +1328,50 @@ var commands = exports.commands = {
 		}
 	},
 
+	spam: 'shadowban',
+	spamroom: 'shadowban',
+	sban: 'shadowban',
+	shadowban: function (target, room, user) {
+		if (!target) return this.parse('/help shadowban');
+
+		var params = this.splitTarget(target).split(',');
+		var action = params[0].trim().toLowerCase();
+		var reason = params.slice(1).join(',').trim();
+		if (!(action in CommandParser.commands)) {
+			action = 'mute';
+			reason = params.join(',').trim();
+		}
+
+		if (!this.targetUser) {
+			return this.sendReply("User '" + this.targetUsername + "' not found.");
+		}
+		if (!this.can('shadowban', this.targetUser)) return false;
+
+		var targets = ShadowBan.addUser(this.targetUser);
+		if (targets.length === 0) {
+			return this.sendReply("That user's messages are already being redirected to the shadow ban room.");
+		}
+		this.privateModCommand("(" + user.name + " has added to the shadow ban user list: " + targets.join(", ") + (reason ? " (" + reason + ")" : "") + ")");
+
+		return this.parse('/' + action + ' ' + this.targetUser.userid + ',' + reason);
+	},
+
+	unspam: 'unshadowban',
+	unspamroom: 'unshadowban',
+	unsban: 'unshadowban',
+	unshadowban: function (target, room, user) {
+		if (!target) return this.parse('/help unshadowban');
+		this.splitTarget(target);
+
+		if (!this.can('shadowban')) return false;
+
+		var targets = ShadowBan.removeUser(this.targetUser || this.targetUsername);
+		if (targets.length === 0) {
+			return this.sendReply("That user is not in the shadow ban list.");
+		}
+		this.privateModCommand("(" + user.name + " has removed from the shadow ban user list: " + targets.join(", ") + ")");
+	},
+
 	banana: 'ban',
 	bh: 'ban',
 	b: 'ban',
@@ -1384,7 +1434,7 @@ var commands = exports.commands = {
 	},
 
 	unbanall: function (target, room, user) {
-		if (!this.can('ban')) return false;
+		if (!this.can('rangeban')) return false;
 		// we have to do this the hard way since it's no longer a global
 		for (var i in Users.bannedIps) {
 			delete Users.bannedIps[i];

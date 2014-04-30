@@ -62,6 +62,7 @@ var cmds = {
 	},
 	
 	hangman: function(target, room, user) {
+		if (!this.canTalk()) return;
 		if (target == "update" && this.can('hotpatch')) {
 			CommandParser.uncacheTree('./hangman.js');
 			hangman = require('./hangman.js').hangman(hangman);
@@ -150,6 +151,7 @@ var cmds = {
 	},
 
 	guess: function(target, room, user) {
+		if (!this.canTalk()) return;
 		if(room.id === 'lobby') {
 				return this.sendReply('|html|Please play this in another room; it\'s too spammy for lobby.');
 		}
@@ -199,6 +201,7 @@ var cmds = {
 	},
 
 	guessword: function(target, room, user) {
+		if (!this.canTalk()) return;
 		if(room.id === 'lobby') {
 				return this.sendReply('|html|Please play this in another room; it\'s too spammy for lobby.');
 		}

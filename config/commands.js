@@ -1274,7 +1274,18 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
-    primmbox: function(target, room, user) {
+    	faithbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="blue"><u>Faith\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=YnP92_fZhQY">Moving Forward</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=miFhwa1_fwE">Get Out Alive</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=NBDAE2g4gXo">Last Spell</a><br>' +
+                '<center><b><a href="http://www.youtube.com/watch?v=L_vsutSlyJs">Rebellion</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    },
+    
+    	primmbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
                 '<center><h1><font color="blue"><u>Primm\'s Music Box</u></color></h1></center>' +
@@ -1285,7 +1296,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
     
-    cosybox: function(target, room, user) {
+    	cosybox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
                 '<center><h1><font color="red"><u>Cosy\'s Music Box</u></color></h1></center>' +
@@ -1356,6 +1367,15 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	wolfwood: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://fc09.deviantart.net/fs70/f/2011/328/c/a/hippowdon_sig_by_supersleuth10-d4h5gl9.png" width="130">' +
+                '<img src="http://i.imgur.com/rOEdRQq.png" width="320">' +
+                '<img src="http://i981.photobucket.com/albums/ae294/Sora-XIII/Pokemon%20Artwork/450.jpg" width="90" height="90"><br />' +
+                '<b>Ace:</b> Hippowdon<br />' +
+                'There comes a moment where you realize I don\'t care.</center>');
+    	},
 	
 	laxus: function(target, room, user) {
         if (!this.canBroadcast()) return;

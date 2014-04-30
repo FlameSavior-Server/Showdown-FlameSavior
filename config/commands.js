@@ -1371,7 +1371,7 @@ var commands = exports.commands = {
 	oim8: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/avalugg.gif">' +
-                '<img src="http://i.imgur.com/Re5zoVx.png">' +
+                '<img src="http://i.imgur.com/r9ElBX2.png">' +
                 '<img src="http://lh6.ggpht.com/_lqdCHczppdg/TPeXs21DbgI/AAAAAAAAAGU/rPUp6UsfSsk/shinra2.jpg" height="160"><br />' +
                 '<b>Ace:</b> Don\'t forget to hit up the 1v1 room tho. .-.<br />' +
                 'Haters will watch you walk on water and say it\'s because he can\'t swim.</center>');

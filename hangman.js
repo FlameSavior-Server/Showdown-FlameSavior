@@ -235,6 +235,7 @@ var cmds = {
 	},
 
 	endhangman: function(target, room, user) {
+		if (!this.canBroadcast()) return;
 		if(room.id === 'lobby') {
 				return this.sendReply('|html|Please play this in another room; it\'s too spammy for lobby.');
 		}

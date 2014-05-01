@@ -821,13 +821,6 @@ exports.Formats = [
         	ruleset: ['Pokemon', 'Standard Pokebank', 'Team Preview'],
         	banlist: ['Soul Dew', 'Uber', 'Farfetchd', 'Kangaskhan', 'Pinsir', 'Heracross', 'Unown', 'Girafarig', 'Dunsparce', 'Shuckle', 'Articuno', 'Zapdos', 'Moltres', 'Qwilfish', 'Corsola', 'Delibird', 'Stantler', 'Smeargle', 'Skarmory', 'Miltank', 'Tauros', 'Lapras', 'Ditto', 'Aerodactyl', 'Sableye', 'Mawile', 'Plusle', 'Minum', 'Volbeat', 'Illumise', 'Torkoal', 'Spinda', 'Seviper', 'Zangoose', 'Lunatone', 'Solrock', 'Castform', 'Kecleon', 'Tropius', 'Absol', 'Relicanth', 'Luvdisc', 'Pachirisu']
     	},
-    	{
-		name: "SlowMons",
-		section: "Other Metagames",
-
-		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Slowmons Clause'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Swagger']
-	},
 	{
 		name: "CAP",
 		section: "Other Metagames",

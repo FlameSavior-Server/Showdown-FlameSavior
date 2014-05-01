@@ -79,6 +79,18 @@ exports.addVip = function(user) {
 		}
 	}
 }
+
+function messageSeniorStaff (message) {
+	if (!message) return false;
+	for (var u in Users.users) {
+		if (Users.users[u].group == '&' || Users.users[u].group == '~') {
+			Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+message);
+		}
+	}
+}
+
+exports.messageSeniorStaff = messageSeniorStaff;
+
 var bannedIps = {};
 var bannedUsers = {};
 var lockedIps = {};
@@ -1593,13 +1605,17 @@ var User = (function () {
 			}
 		}
 
-		if (message.toLowerCase().indexOf("psim") > -1 && message.toLowerCase().indexOf("frost.psim.us") == -1 && !this.frostDev || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~frost") == -1 && !this.frostDev) {
-			connection.sendTo(room, '|raw|<strong class=\"message-throttle-notice\">Advertising detected, your message has not been sent. Senior staff have been notified.</strong>');
-			for (var u in Users.users) {
-				if (Users.users[u].group == '~' || Users.users[u].group == '&') {
-					Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+connection.user.name+' triggered the advertising filter. Room: '+room.id+' Message: ' + message);
-				}
+		if (toId(message).indexOf('psim') > -1 && message.toLowerCase().indexOf('frost.psim.us') == -1 && !this.frostDev || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~frost") == -1 && !this.frostDev) {
+			if (!this.advWarns) this.advWarns = 0;
+			this.advWarns++;
+			if (this.advWarns > 3) {
+				this.lock();
+				connection.sendTo(room, '|raw|<strong class="message-throttle-notice">You have been locked for attempting to advertise three times.');
+				Users.messageSeniorStaff(this.name+' has been locked for attempting to advertise three times. Room: '+room.id+'. Message: '+message);
+				return false;
 			}
+			Users.messageSeniorStaff(this.name+' has attempted to advertise. Room: '+room.id+'. Message: '+message);
+			connection.sendTo(room, '|raw|<strong class="message-throttle-notice">Advertising detected, your message has not been sent, senior staff have been notified, and your warn count is now '+this.advWarns+'.<br /> Upon reaching 4, you will be automatically locked.</strong>');
 			return false;
 		}
 

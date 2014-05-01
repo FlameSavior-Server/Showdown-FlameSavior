@@ -1365,6 +1365,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	kc: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/heatran.gif" width="110">' +
+                '<img src="http://i.imgur.com/zUqUdMD.gif" width="320">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/charizard.gif" width="110"><br />' +
+                '<b>Ace:</b> Charizard<br />' +
+                'Apply cold water to burn.</center>');
+    	},
+	
 	oim8: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/avalugg.gif">' +

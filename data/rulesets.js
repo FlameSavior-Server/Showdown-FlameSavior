@@ -207,17 +207,6 @@ exports.BattleFormats = {
 			return problems;
 		}
 	},
-	slowmonsclause: {
- 	effecttype: 'Rule',
- 	onStart: function(target, source) {
-                                 this.add('rule', 'SlowMons Clause: Dimensions are twisted by default.','-fieldstart', 'move: Trick Room', '[of] '+source);
- 								this.add('-message', 'The dimensions were twisted!');
-                                 this.getStatCallback = function(stat, statName) {
- 
-                                         return stat;
- 										}
- 										}
- 										},
 	cappokemon: {
 		effectType: 'Rule',
 		validateSet: function (set, format) {

@@ -2180,10 +2180,10 @@ var commands = exports.commands = {
     gemini : 'prfessorgemini',
     prfessorgemini: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img height="100" src="http://i.imgur.com/UUSMQaL.jpg">' +
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/volbeat.gif">' +
         	'<img src="http://i.imgur.com/HrHfI4e.gif">' +
-        	'<img height="100" src="http://25.media.tumblr.com/tumblr_lrmuy73LRE1r2ugr3o1_500.gif"><br />' +
-        	'<b>Ace: </b>Pinsir<br />' +
+        	'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/joltik.gif"><br />' +
+        	'<b>Ace: </b>Hotaru<br />' +
         	'<b>Catchphrase: </b>I am Professor Gemini. The best professor there is because I\'m not named after a f**king tree</center>')
     },
     

@@ -2266,7 +2266,7 @@ var commands = exports.commands = {
     	frostmedic: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/3ulYHpB.jpg">' +
-                '<img src="http://i.imgur.com/r8lESES.gif" width="340">' +
+                '<img src="http://i.imgur.com/r8lESES.gif" width="320">' +
                 '<img src="http://i.imgur.com/6tmwYT8.png" width="110"><br />' +
                 '<b>Ace:</b> Piers Nivans<br />' +
                 'Let\'s up the shots...ready for your dose? -flatlines-</center>');

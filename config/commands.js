@@ -1365,6 +1365,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	leon: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://24.media.tumblr.com/7f9e08d14b2281a4a0798ae2a8a65c58/tumblr_mn219wXLJt1rw2d66o1_500.gif" width="160">' +
+                '<img src="http://i.imgur.com/3be35l0.png">' +
+                '<img src="http://www.mundoimagenz.com/wp-content/uploads/2014/03/iDbZUsa.jpg" width="160"><br />' +
+                '<b>Ace:</b> Hydrigeon<br />' +
+                'Winning battles is about making 2 steps forward for each step backwards.</center>');
+    	},
+	
+	lando: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/F6PJBJm.png" width="80" height="140">' +
+                '<img src="http://i.imgur.com/SGHZrkT.png" width="350">' +
+                '<img src="http://i.imgur.com/8W1dEKT.png" width="100"><br />' +
+                '<b>Ace:</b> Landorus & Greninja<br />' +
+                'If you\'re going through hell, keep going.</center>');
+    	},
+	
 	kc: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/heatran.gif" width="110">' +

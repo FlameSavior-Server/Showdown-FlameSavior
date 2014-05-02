@@ -1271,6 +1271,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	taelbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="#01DF01"><u>Tael\'s Jukebox</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=zZL_psFiZu4">Dk Country 2</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=u9zZus_1_ag">Live And Learn</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=THwwagCSqag">Hold Yuh Riddim</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=VT6LFOIofRE">Libera Me From Hell</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	kcbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

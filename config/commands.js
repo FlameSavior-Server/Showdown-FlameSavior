@@ -1271,6 +1271,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	kcbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="purple"><u>Kc\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=hwsXo6fsmso">Ease My Mind</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=EGQhenjZ84w">Babylon</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=RSvuv3k4N8c">Days In The East</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=sX9DgavXiN4">High For This</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	faithbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
@@ -1364,6 +1375,24 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	kyo: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/226.gif">' +
+                '<img src="http://i.imgur.com/JZUTPTk.gif">' +
+                '<img src="http://img.pokemondb.net/sprites/black-white/anim/normal/kyogre.gif"><br />' +
+                '<b>Ace:</b> Mantine<br />' +
+                'Don\'t underestimate the drizzle. It\'s just the calm before the storm.</center>');
+    	},
+	
+	thunder: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/i4G2Dog.jpg?1" width="160">' +
+                '<img src="http://i.imgur.com/j9x28oY.gif">' +
+                '<img src="http://i.imgur.com/SblN25x.jpg?1" width="150"><br />' +
+                '<b>Ace:</b> Conkeldurr<br />' +
+                'I didn\'t choose the thug life, the thug life said "I choose you."</center>');
+    	},
 	
 	leon: function(target, room, user) {
         if (!this.canBroadcast()) return;

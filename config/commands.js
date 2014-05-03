@@ -1398,6 +1398,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	zerp: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/spewpa-2.gif" height="150" width="150">' +
+                '<img src="http://i.imgur.com/JsCCQVP.gif">' +
+                '<img src="http://i.imgur.com/K5JLIqD.png" height="106" width="150"><br />' +
+                '<b>Ace:</b> Misspells<br />' +
+                'Why don\'t you go back to kindergarten and learn how to spell.</center>');
+    	},
+	
 	qube: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/tsn7dg3.jpg" width="180">' +

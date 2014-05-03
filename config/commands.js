@@ -1400,7 +1400,7 @@ var commands = exports.commands = {
 	
 	kju: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center>KJU doesn\'t really like Trainer Cards.</center>');	
+    	this.sendReplyBox('<center>Kim Jong-un doesn\'t really like Trainer Cards.</center>');	
     	},
 	
 	hopgod: function(target, room, user) {

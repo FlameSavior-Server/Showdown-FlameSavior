@@ -1271,6 +1271,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	dolphbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="green"><u>Dolph\'s Sexy Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=CS9OO0S5w2k">YMCA</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=l5aZJBLAu1E">It\'s Raining Men</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=btPJPFnesV4">Eye Of The Tiger</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=vq6Q9wu3F6w">Miami Dolphins Fight Song</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	taelbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
@@ -1332,7 +1343,7 @@ var commands = exports.commands = {
                 '<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=bw9CALKOvAI">Bubble Pop!</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
-                '<center><b><a href="http://youtu.be/1wYNFfgrXTI?t=1m">When I\'m Gone</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=1wYNFfgrXTI">When I\'m Gone</a><br>' +
                 '<center><b><a href="http://youtu.be/LFhEBmNwX_E?t=30s">Alone Together</a><br></center>' +
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
@@ -1386,6 +1397,15 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	qube: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/tsn7dg3.jpg" width="180">' +
+                '<img src="http://i.imgur.com/MRfFBvZ.jpg">' +
+                '<img src="http://i.imgur.com/aVdJIgw.jpg" width="160"><br />' +
+                '<b>Ace:</b> Donald/2Chainz<br />' +
+                'Get rekt scrub.</center>');
+    	},
 	
 	kyo: function(target, room, user) {
         if (!this.canBroadcast()) return;

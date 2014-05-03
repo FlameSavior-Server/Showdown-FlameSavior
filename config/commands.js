@@ -2816,16 +2816,14 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/UHptfOM.gif"><font size="6" color="#FF0080"><i>Family Man TPSN</i><img src="http://i.imgur.com/XVhKJ77.gif"></font></color><br><center>Ace: Audino<br>Luck.');
 	},
 	
-	gymleaderpix: 'pack',
-	pix: 'pack',
-	pack: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img height="80" width="140" src="http://24.media.tumblr.com/tumblr_m12llhWvxE1qgzv18o1_500.gif">' +
-			'<img src="http://i.imgur.com/gYuwRDI.png">' +
-			'<img height="80" width="140" src="http://stream1.gifsoup.com/view/162044/snorlax-waking-o.gif"><br />' +
-			'<b>Ace: </b>Munchies<br />' +
-			'<b>Quote: </b>Barida < Tael</center>');
-	},
+	wrath: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/JYSIIvd.gif" width="120">' +
+                '<img src="http://i.imgur.com/RdY55b0.png" width="290">' +
+                '<img src="http://i.imgur.com/ESsVLu4.gif" width="120"><br />' +
+                '<b>Ace:</b> Edges<br />' +
+                'Appearances rarely share the whole truth.</center>');
+    	},
 	
 	salemance: 'elite4salemance',
 	elite4salemance: function(target, room, user) {

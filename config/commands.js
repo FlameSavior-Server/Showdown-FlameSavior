@@ -1398,6 +1398,11 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	kju: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center>KJU doesn\'t really like Trainer Cards.</center>');	
+    	},
+	
 	hopgod: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/8G2GuGT.jpg" width="110">' +

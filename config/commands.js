@@ -244,10 +244,7 @@ var commands = exports.commands = {
 			this.add('|c|@fork| .3.  ``**(fork\'d by '+user.name+')**``');
 			
 	},
-	zarel: function (target, room, user, connection, cmd) {
-		if (!this.canTalk()) return;
-			this.add('|c|~Zarel| heh  ``**(zarel\'d by '+user.name+')**``');
-	},
+
 	aip: 'inprivaterooms',
 	awhois: 'inprivaterooms',
 	allrooms: 'inprivaterooms',

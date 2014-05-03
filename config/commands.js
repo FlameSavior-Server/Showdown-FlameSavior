@@ -1398,6 +1398,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	hopgod: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/8G2GuGT.jpg" width="110">' +
+                '<img src="http://i.imgur.com/TDpeD6Z.gif" width="310">' +
+                '<img src="http://i.imgur.com/Tu112Os.jpg" width="110"><br />' +
+                '<b>Ace:</b> Diggersby<br />' +
+                '<i>I\'m beginning to feel like a Hopgod, Hopgod</i>.</center>');
+    	},
+	
 	zerp: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/spewpa-2.gif" height="150" width="150">' +

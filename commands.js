@@ -15,7 +15,7 @@ var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a
 var key = '';
 var hint = '';
 var isMotd = false;
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'forcerename', 'musicbox', 'vip'];
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'musicbox', 'vip'];
 var closeShop = false
 var closedShop = 0;
 var bank = exports.bank = {
@@ -911,17 +911,6 @@ var commands = exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target2 === 'forcerename') {
-			price = 10;
-			if (price <= user.money) {
-				user.money = user.money - price;
-				this.sendReply('You have purchased the ability to change your name and keep all ranks until you logout. PM an admin to claim this.');
-				user.canForcerename = true;
-				this.add(user.name + ' has purchased the ability to forcerename!');
-			} else {
-				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
-			}
-		}
 		if (target2 === 'potd') {
 			price = 45;
 			if (price <= user.money) {
@@ -984,7 +973,6 @@ var commands = exports.commands = {
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-			'<tr><td>Forcerename</td><td>You get the ability to rename yourself to anything you want, rank symbol will remain (name should be appropriate and temporary until you logout)</td><td>10</td></tr>' +
 			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>45</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND global voice!  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>500</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
@@ -1001,7 +989,6 @@ var commands = exports.commands = {
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-			'<tr><td>Forcerename</td><td>You get the ability to rename yourself to anything you want, rank symbol will remain (name should be appropriate and temporary until you logout)</td><td>10</td></tr>' +
 			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>45</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND global voice!  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>500</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');

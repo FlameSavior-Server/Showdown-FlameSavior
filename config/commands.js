@@ -1398,6 +1398,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	chaosred: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani/dragonite.gif">' +
+                '<img src="http://i.imgur.com/5AMGowt.gif" width="320">' +
+                '<img src="http://play.pokemonshowdown.com/sprites/xyani/charizard-mega-x.gif" width="140"><br />' +
+                '<b>Ace:</b> Lady Killa<br />' +
+                'Ain\'t nothing wrong with going down. It\'s STAYING DOWN that\'s WRONG.</center>');
+    },
+	
 	ehsanul: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://img1.ak.crunchyroll.com/i/spire2/fec754941ee9bccdb7dd160800fb30131236494917_full.gif" width="140">' +

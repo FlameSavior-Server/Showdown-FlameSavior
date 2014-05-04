@@ -1398,6 +1398,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	roy: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://s1.zerochan.net/Gardevoir.600.1290582.jpg" width="150">' +
+                '<img src="http://i.imgur.com/KgJnFtZ.gif">' +
+                '<img src="http://fc05.deviantart.net/fs31/f/2008/212/c/0/gallade_shiny_by_Ashuras2000.jpg" width="120"><br />' +
+                '<b>Ace:</b> Gardevoir<br />' +
+                'Sometimes life is like this dark tunnel, you can\’t always see the light at the end of the tunnel, but if you just keep moving, you will come to a better place.</center>');
+    	},
+	
+	pichu: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/NLto7aD.gif" width="160">' +
+                '<img src="http://i.imgur.com/fTPamOT.png">' +
+                '<img src="http://i.imgur.com/MO1uOld.gif" width="160"><br />' +
+                '<b>Ace:</b> Pichu<br />' +
+                'Why don\'t I get a Mega Stone?</center>');
+    	},
+	
 	kju: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center>Kim Jong-un doesn\'t really like Trainer Cards.</center>');	

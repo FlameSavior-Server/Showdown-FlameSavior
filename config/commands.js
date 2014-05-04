@@ -1400,9 +1400,9 @@ var commands = exports.commands = {
 	
 	ehsanul: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://img1.ak.crunchyroll.com/i/spire2/fec754941ee9bccdb7dd160800fb30131236494917_full.gif" width="120">' +
-                '<img src="http://i.imgur.com/iy8diTO.png" width="300">' +
-                '<img src="http://www.mytinyphone.com/uploads/users/nightwolve777/320252.gif" width="120"><br />' +
+        this.sendReplyBox('<center><img src="http://img1.ak.crunchyroll.com/i/spire2/fec754941ee9bccdb7dd160800fb30131236494917_full.gif" width="140">' +
+                '<img src="http://i.imgur.com/iy8diTO.png" width="260">' +
+                '<img src="http://www.mytinyphone.com/uploads/users/nightwolve777/320252.gif" width="140"><br />' +
                 '<b>Ace:</b> Gogeta<br />' +
                 'Power is Everything in Life!</center>');
     	},

@@ -241,8 +241,6 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		if (!this.canTalk()) return;
 			this.sendReplyBox('<center><img src="http://i.imgur.com/HrDUGmr.png" width=75 height= 100>');
-			this.add('|c|@fork| .3.  ``**(fork\'d by '+user.name+')**``');
-			
 	},
 
 	aip: 'inprivaterooms',

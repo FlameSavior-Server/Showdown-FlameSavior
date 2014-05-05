@@ -1398,6 +1398,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	lucy: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/hWl4Ltr.jpg"width="80" height="110">' +
+    		'<img src="http://i.imgur.com/nSl6dx7.png" width="400">' +
+    		'<img src="http://play.pokemonshowdown.com/sprites/xyani/klefki.gif"><br />' +
+    		'<b>Ace:</b><blink> Klefki</blink><br />' +
+    		'<blink>Just give me a reason, just a little bit\'s enough~.</blink></center>');
+    	},
+	
 	emelio: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/2NpH7pp.jpg?1" width="140">' +

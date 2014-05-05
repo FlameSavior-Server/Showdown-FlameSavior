@@ -3042,7 +3042,7 @@ var commands = exports.commands = {
 	this.sendReplyBox('<center><img src="http://i.imgur.com/REAZaJu.gif"><br />' +
 		'<img src="http://fc01.deviantart.net/fs70/f/2011/039/8/1/roy_mustang_firestorm_by_silverwind91-d394lp5.gif">' +
 		'<font size="5" color="#FF0040"><i>Colonial Mustang</i></font></color>' +
-		'<img src="http://i.imgur.com/VRZ9qY5.gif"><br />
+		'<img src="http://i.imgur.com/VRZ9qY5.gif"><br />' +
 		'What am I trying to accomplish, you ask...? I want to change the dress code so that all women in the Frost... ...must wear mini-skirts!!.</center>');
 	},
 	
@@ -3315,7 +3315,7 @@ var commands = exports.commands = {
 	frostradio : 'radio', 
     	radio: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	return this.sendReplyBox('Come visit the Frost Plug Radio <a href="http://plug.dj/frost-ps/">here</a>!')
+    	return this.sendReplyBox('Come visit the Frost Plug Radio <a href="http://plug.dj/frost-ps/">here</a>!');
     	},
 	
 	events: 'currentevents',
@@ -3327,7 +3327,7 @@ var commands = exports.commands = {
 	forums: 'forum',
 	forum: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.net/forums/">here</a>.')
+		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.net/forums/">here</a>.');
 	},
 	
 	potd: function (target, room, user) {

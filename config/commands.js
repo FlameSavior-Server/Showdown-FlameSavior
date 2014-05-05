@@ -1398,6 +1398,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	emelio: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/2NpH7pp.jpg?1" width="140">' +
+                '<img src="http://i.imgur.com/8XI7o7S.png">' +
+                '<img src="http://i.imgur.com/kysoJOc.jpg?1" width="140"><br />' +
+                '<b>Ace:</b> Lucario, Zoroark, Infernape and Lugia<br />' +
+                ':D</center>');
+    	},
+	
 	chaosred: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani/dragonite.gif">' +
@@ -1405,7 +1414,7 @@ var commands = exports.commands = {
                 '<img src="http://play.pokemonshowdown.com/sprites/xyani/charizard-mega-x.gif" width="140"><br />' +
                 '<b>Ace:</b> Lady Killa<br />' +
                 'Ain\'t nothing wrong with going down. It\'s STAYING DOWN that\'s WRONG.</center>');
-    },
+    	},
 	
 	ehsanul: function(target, room, user) {
         if (!this.canBroadcast()) return;

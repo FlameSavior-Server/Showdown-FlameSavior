@@ -2718,12 +2718,6 @@ var commands = exports.commands = {
     	return this.sendReplyBox('Come visit the Frost Plug Radio <a href="http://plug.dj/frost-ps/">here</a>!')
     },
      
-     mastersofthecolorhelp: 'motc', 
-     motc: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<h2>Masters of the Colors</h2><hr /><br />In this tournament, you will construct a team based on the color of your name. You are not allowed to <em>choose</em> the color of your name. Follow these steps if you wish to participate:<ol><li>Look at the color of your name and determine if your name color is: <b>Red, Blue, Green, Pink/Purple, Yellow/Brown</b></li><li>Once you have found out your name color, type that color in the main chat to bring up a list of pokemon with that color. Ex]BrittleWind is Blue so I would type /blue in the main chat, Cosy is Red so he would type /red in the main chat. (If your name color is Yellow/Brown you are allowed to use both yellow <em>and</em> brown Pokemon. The same goes for Pink/Purple)</li><li>Now using list of pokemon you see on your screen, make a <b>Gen 6 OU</b> team using only the pokemon on the list. Some pokemon on the list won\'t be in the OU category so ignore them. As long as your able to do a Gen 6 OU battle with only your pokemon, your good to go!</li><li>Now all you have to do is wait for the declare to come up telling you that Masters of the Colors has started! If you happen to come accross any trouble during the event, feel free to PM the room owner for your designated room.</li><li><b>IF</b> you do win, your challenge isn\'t over yet! After winning, construct a team using only <b>Black, White, or Gray</b> Pokemon (you may use /black etc. to see the list). You will go against the other winners of Masters of the Colors and the winner will recieve an extra 10 bucks!</ol>');
-    },
-
 	elitefoursalty: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('Trainer: Elite Four Salty<br \>' +
@@ -2997,12 +2991,20 @@ var commands = exports.commands = {
 	
 	aerodactylol: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvlwchWKE8tbjWjQ2uBaFBDIwE3dGSPuZCocmPYVj0tulhHbAPnw"><font size="7" color="#00733C"><i>Aerodactylol</i><img src="http://pldh.net/media/pokemon/gen3/rusa_action/142.gif"></font></color><br><center>Ace: Aerodactyl<br>I only battle... DANCING!');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/KTiZXe7.jpg">' +
+		'<font size="7" color="#00733C"><i>Aerodactylol</i></font></color>' +
+		'<img src="http://pldh.net/media/pokemon/gen3/rusa_action/142.gif"><br/ >' +
+		'Ace: Aerodactyl<br />' +
+		'I only battle... DANCING!</center>');
 	},
 	
 	robin6539: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://fc09.deviantart.net/fs4/i/2004/196/9/b/Ludidolo.gif"><img src="http://i.imgur.com/CSfl1OU.gif"><img src="http://z5.ifrm.com/30155/88/0/a3555782/avatar-3555782.jpg"></center><br /><center>Ace: Ludicolo<br />TRAINS AND COLOS');
+		this.sendReplyBox('<center><img src="http://fc09.deviantart.net/fs4/i/2004/196/9/b/Ludidolo.gif">' +
+		'<img src="http://i.imgur.com/CSfl1OU.gif">' +
+		'<img src="http://z5.ifrm.com/30155/88/0/a3555782/avatar-3555782.jpg"><br />' +
+		'Ace: Ludicolo<br />' +
+		'TRAINS AND COLOS</center>');
 	},
 	
 	nightmare: function(target, room, user) {
@@ -3016,35 +3018,34 @@ var commands = exports.commands = {
 	
 	killertiger: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://sprites.pokecheck.org/s/500.gif"><br><img src="http://i.imgur.com/diRkf6z.png"><font size="7" color="#0489B1"><i>Killer Tiger</i><img src="http://i.imgur.com/4FMzRl5.png"></font></color><br><center>Ace: Salamence<br>one for all and all for one');
+		this.sendReplyBox('<center><img src="http://sprites.pokecheck.org/s/500.gif"><br />' +
+		'<img src="http://i.imgur.com/diRkf6z.png">' +
+		'<font size="7" color="#0489B1"><i>Killer Tiger</i></font></color>' +
+		'<img src="http://i.imgur.com/4FMzRl5.png"><br />' +
+		'Ace: Salamence<br />' +
+		'One for all and all for one</center>');
 	},
 	
 	twizzy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/SGcRSab.png"><img src="http://i.imgur.com/dkwp4cu.gif"><img src="http://i.imgur.com/E04MrCc.png"><br><font color="red"><blink>Ace: Keldeo-Resolute</blink></font><br>Have you ever feel scared and there is nothing you can do about it? Challenge me and i will show you what fear is!');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/SGcRSab.png">' +
+		'<img src="http://i.imgur.com/dkwp4cu.gif">' +
+		'<img src="http://i.imgur.com/E04MrCc.png"><br />' +
+		'<font color="red"><blink>Ace: Keldeo-Resolute</blink></font><br />' +
+		'Have you ever feel scared and there is nothing you can do about it? Challenge me and i will show you what fear is!</center>');
 	},
 	
 	ag: 'arcainiagaming',
 	arcainiagaming: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/tFikucg.png"><br><img src="http://i.imgur.com/wSs98Iy.gif"><br><font color="red"><blink>Ace: Weavile</blink><br></font>I\'m not even on drugs. I\'m just weird.');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/tFikucg.png"><br />' +
+		'<img src="http://i.imgur.com/wSs98Iy.gif"><br />' +
+		'<font color="red"><blink>Ace: Weavile</blink></font><br />' +
+		'I\'m not even on drugs. I\'m just weird.</center>');
 	},
-
-	forums: 'forum',
-	forum: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.net/forums/">here</a>.')
-	}, 
 	
-	mastersofthecolor: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><b><h2>These are our current Masters of the <font color="red">C<font color="blue">o<font color="pink">l<font color="purple">o<font color="green">r<font color="brown">!</h2></b></center><hr /><br \>' +
-		'<h3><font color="blue"><b>Blue</b></font color>: <img src="http://i.imgur.com/J2D4FSX.gif"><img src="http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/112.gif"></h3><h3><font color="red"><b>Red</b></font color>: <img src="http://i.imgur.com/qvtR5Xf.gif"><img src="http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/272.gif"></h3><br \>' + 
-		'<h3><font color="green"><b>Green</b></font color>: <img src="http://i.imgur.com/hS0bpiJ.gif"><img src="http://pldh.net/media/pokemon/conquest/sprite/392.png"></h3><h3><font color="yellow"><b>Yellow</b></font color>/<font color="brown"><b>Brown</b></font color>:<img src="http://i.imgur.com/k29KbfI.gif"> <img src="http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/065.gif"></h3><br \>' +
-		'<h3><font color="purple"><b>Purple</b></font color>/<font color="pink"><b>Pink</b></font color>: Fail<img src="http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/385.gif"></h3>')
-	},
-
-	'lights': 'scarftini', 
+	
+	lights: 'scarftini', 
 	scarftini: function(target, room, user) {
 		if (!this.canBroadcast()) return; 
 		this.sendReplyBox('<center><img src="http://i.imgur.com/HbuF0aR.png"><br />' + 
@@ -3053,7 +3054,20 @@ var commands = exports.commands = {
 		'<img src="http://img-cache.cdn.gaiaonline.com/1a962e841da3af2acaced68853cd194d/http://i1070.photobucket.com/albums/u485/nitehawkXD/victini.gif"></center>');
 	},
 	
+	piiiikachuuu: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<img src="http://192.184.93.156:8000/avatars/piiiikachuuu.png"><br />' +
+		'zzzzzzzzzzzzzzzzz');
+	},
+	
 	/*Masters of the Colors commands*/
+
+	mastersofthecolorhelp: 'motc', 
+     	motc: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<h2>Masters of the Colors</h2><hr /><br />In this tournament, you will construct a team based on the color of your name. You are not allowed to <em>choose</em> the color of your name. Follow these steps if you wish to participate:<ol><li>Look at the color of your name and determine if your name color is: <b>Red, Blue, Green, Pink/Purple, Yellow/Brown</b></li><li>Once you have found out your name color, type that color in the main chat to bring up a list of pokemon with that color. Ex]BrittleWind is Blue so he would type /blue in the main chat, Cosy is Red so he would type /red in the main chat. (If your name color is Yellow/Brown you are allowed to use both yellow <em>and</em> brown Pokemon. The same goes for Pink/Purple)</li><li>Now using list of pokemon you see on your screen, make a <b>Gen 6 OU</b> team using only the pokemon on the list. Some pokemon on the list won\'t be in the OU category so ignore them. As long as your able to do a Gen 6 OU battle with only your pokemon, your good to go!</li><li>Now all you have to do is wait for the declare to come up telling you that Masters of the Colors has started! If you happen to come accross any trouble during the event, feel free to PM the room owner for your designated room.</li><li><b>IF</b> you do win, your challenge isn\'t over yet! After winning, construct a team using only <b>Black, White, or Gray</b> Pokemon (you may use /black etc. to see the list). You will go against the other winners of Masters of the Colors and the winner will recieve an extra 10 bucks!</ol>');
+    	},
+
 	blue: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Blue">here</a>. Shines are <b>not</b> allowed.');
@@ -3090,36 +3104,24 @@ var commands = exports.commands = {
 	},
 	//Ends mastersof the colors commands
 	
-	piiiikachuuu: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<img src = "http://frost-server.no-ip.org:8000/avatars/pika.png"><br />zzzzzzzzzzzzzzzzz');
-	},
-	hangmanhelp: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<font size = 2>A brief introduction to </font><font size = 3>Hangman:</font><br />' +
-						'The classic game, the basic idea of hangman is to guess the word that someone is thinking of before the man is "hanged." Players are given 8 guesses before this happens.<br />' + 
-						'Games can be started by any of the rank Voice or higher, including Room Voice, Room Mod, and Room Owner.<br />' +
-						'The commands are:<br />' +
-						'<ul><li>/hangman [word], [description] - Starts the game of hangman, with a specified word and a general category. Requires: + % @ & ~</li>' +
-						'<li>/guess [letter] - Guesses a letter.</li>' +
-						'<li>/guessword [word] - Guesses a word.</li>' +
-						'<li>/viewhangman - Shows the current status of hangman. Can be broadcasted.</li>' +
-						'<li>/word - Allows the person running hangman to view the word.</li>' +
-						'<li>/category [description] OR /topic [description] - Allows the person running hangman to changed the topic.</li>' +
-						'<li>/endhangman - Ends the game of hangman in the room. Requires: + % @ & ~</li></ul>' +
-						'Due to some recent changes, hangman can now be played in multiple rooms at once (excluding lobby, it\'s a little spammy).<br />' +
-						'Have fun, and feel free to PM me if you find any bugs! - piiiikachuuu');
-	},
+	
+	
+	/*********************************************************
+	 * Miscellaneous commands
+	 *********************************************************/
 	
 	events: 'currentevents',
 	currentevents: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Check out information on the weekly events <a href="http://frostserver.net/events.html">here</a>!');
 	},
-					
-	/*********************************************************
-	 * Miscellaneous commands
-	 *********************************************************/
+	
+	forums: 'forum',
+	forum: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.net/forums/">here</a>.')
+	},
+	
 	potd: function (target, room, user) {
 		if (!this.can('potd')) return false;
 
@@ -3189,6 +3191,23 @@ var commands = exports.commands = {
 		}
 
 		this.sendReply('|raw|<img src="' + sanitize(targets[0]) + '" alt="" width="' + toId(targets[1]) + '" height="' + toId(targets[2]) + '" />');
+	},
+	
+	hangmanhelp: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<font size = 2>A brief introduction to </font><font size = 3>Hangman:</font><br />' +
+						'The classic game, the basic idea of hangman is to guess the word that someone is thinking of before the man is "hanged." Players are given 8 guesses before this happens.<br />' + 
+						'Games can be started by any of the rank Voice or higher, including Room Voice, Room Mod, and Room Owner.<br />' +
+						'The commands are:<br />' +
+						'<ul><li>/hangman [word], [description] - Starts the game of hangman, with a specified word and a general category. Requires: + % @ & ~</li>' +
+						'<li>/guess [letter] - Guesses a letter.</li>' +
+						'<li>/guessword [word] - Guesses a word.</li>' +
+						'<li>/viewhangman - Shows the current status of hangman. Can be broadcasted.</li>' +
+						'<li>/word - Allows the person running hangman to view the word.</li>' +
+						'<li>/category [description] OR /topic [description] - Allows the person running hangman to changed the topic.</li>' +
+						'<li>/endhangman - Ends the game of hangman in the room. Requires: + % @ & ~</li></ul>' +
+						'Due to some recent changes, hangman can now be played in multiple rooms at once (excluding lobby, it\'s a little spammy).<br />' +
+						'Have fun, and feel free to PM me if you find any bugs! - piiiikachuuu');
 	},
 
 	/*********************************************************

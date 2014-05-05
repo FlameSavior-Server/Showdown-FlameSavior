@@ -3744,6 +3744,14 @@ var commands = exports.commands = {
 			this.sendReply('/announce OR /wall [message] - Makes an announcement. Requires: % @ & ~');
 		}
 		// Moderator commands
+		if (target === '@' || target === 'shadowban' || target === 'sban') {
+			matched = true;
+			this.sendReply("/shadowban OR /sban [username], [secondary command], [reason] - Sends all the user\'s messages to the shadow ban room. Requires: @ & ~");
+		}
+		if (target === '@' || target === 'unshadowban' || target === 'unsban') {
+			matched = true;
+			this.sendReply("/unshadowban OR /unsban [username] - Undoes /shadowban (except the secondary command). Requires: @ & ~");
+		}
 		if (target === '@' || target === 'forcerename' || target === 'fr') {
 			matched = true;
 			this.sendReply('/forcerename OR /fr [username], [reason] - Forcibly change a user\'s name and shows them the [reason]. Requires: @ & ~');

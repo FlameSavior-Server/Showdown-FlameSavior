@@ -1018,6 +1018,24 @@ var commands = exports.commands = {
 		'5. <a href="https://www.youtube.com/watch?v=aFIApXs0_Nw"><button title="Better Off Dead - Elton John">Better Off Dead - Elton John</a></button><br>' +
 		'6. <a href="https://www.youtube.com/watch?v=eJLTGHEwaR8"><button title="Your Song - Carly Rose Sonenclar cover">Your Song - Carly Rose Sonenclar cover</a></button>');
 	},
+	cabox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>CoolAsian\'s Music Box!</b><br>' +
+        //This is an image of a music note! (line bellow)
+                '<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"></center><br>' +
+                '1. <a href="http://youtu.be/UU8xKUoH_lU"><button title="Parkway Drive - Wild Eyes [Lyrics] [HD]">Parkway Drive - Wild Eyes [Lyrics] [HD]</a></button><br>' +
+                '2. <a href="http://youtu.be/fOLqEOK_wLc"><button title="System Of A Down - B.Y.O.B.">System Of A Down - B.Y.O.B.</a></button><br>' +
+		'3. <a href="http://youtu.be/312Sb-2PovA"><button title="SUICIDE SILENCE - You Only Live Once">SUICIDE SILENCE - You Only Live Once</a></button><br>' +
+		'4. <a href="http://youtu.be/pUA-4WCXn5o"><button title="Atreyu - Demonology and Heartache">Atreyu - Demonology and Heartache</a></button><br>' +
+		'5. <a href="http://youtu.be/zUq8I4JTOZU"><button title="Muse - Assassin (Grand Omega Bosses Edit)">Muse - Assassin (Grand Omega Bosses Edit)</a></button><br>' +
+		'6. <a href="http://youtu.be/a89Shp0YhR8"><button title="A Day to Remember - I\'m Made of Wax, Larry, What Are You Made Of?">A Day to Remember - I\'m Made of Wax, Larry, What Are You Made Of?</a></button><br>');
+	},
+	jessie: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/420CAz0.png"><br>' +
+                '<img src="http://i.imgur.com/9ERgTNi.png"><br>' +
+                'Catch phrase: I\'m from Jakarta ah ah');
+	},
 	lazerbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>lazerbeam\'s Music Box!</b><br>' +

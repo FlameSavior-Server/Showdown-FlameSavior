@@ -150,6 +150,10 @@ global.ResourceMonitor = {
 			} else if (this.connections[ip] % 60 === 0) {
 				this.log('[ResourceMonitor] IP ' + ip + ' has connected ' + this.connections[ip] + ' times in the last ' + duration.duration() + name);
 			}
+			if (this.connections[ip] > 500) {
+				this.log('[ResourceMonitor] IP ' + ip + ' banned for connection flooding');
+				return true;
+			}
 		} else {
 			this.connections[ip] = 1;
 			this.connectionTimes[ip] = now;
@@ -351,7 +355,6 @@ global.Rooms = require('./rooms.js');
 delete process.send; // in case we're a child process
 global.Verifier = require('./verifier.js');
 
-global.ShadowBan = require('./shadow-ban.js');
 global.CommandParser = require('./command-parser.js');
 
 global.Simulator = require('./simulator.js');

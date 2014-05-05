@@ -240,7 +240,6 @@ exports.groups = {
 		inherit: '%',
 		jurisdiction: 'u',
 		ban: true,
-		shadowban: true,
 		modchat: true,
 		roomvoice: true,
 		forcerename: true,

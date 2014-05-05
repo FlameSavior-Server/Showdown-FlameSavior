@@ -358,7 +358,7 @@ function removeBannedWord(word) {
 }
 importBannedWords();
 
-exports.customAvatars = [];
+exports.customAvatars = new Object();
 function loadCustomAvatars() {
 	fs.readFile('config/avatars.csv', 'utf8', function(err, data) {
 		if (err) return;
@@ -367,11 +367,36 @@ function loadCustomAvatars() {
 		for (var u in line) {
 			count++;
 			if (line[u].length < 1) continue;
-			Users.customAvatars.push(line[u]);
+			var column = line[u].split(',');
+			Users.customAvatars[column[0]] = column[1];
 		}
 	});
 }
 loadCustomAvatars();
+
+function exportCustomAvatars() {
+	var output = [];
+	for (var u in Object.keys(Users.customAvatars)) {
+		var userid = Object.keys(Users.customAvatars)[u];
+		var filename = Users.customAvatars[userid];
+		output.push(userid+','+filename);
+	}
+	fs.writeFile('config/avatars.csv', output.join('\n'));
+}
+
+function addCustomAvatar(userid, filename) {
+	if (!userid || !filename) return false;
+	userid = toId(userid);
+	Users.customAvatars[userid] = filename;
+	exportCustomAvatars();
+}
+
+function removeCustomAvatar(userid) {
+	if (!userid) return false;
+	userid = toId(userid);
+	delete Users.customAvatars[userid];
+	exportCustomAvatars();
+}
 
 // User
 var User = (function () {
@@ -884,14 +909,7 @@ var User = (function () {
 					avatar = Config.customavatars[userid];
 				}
 
-				for (var u in Users.customAvatars) {
-					var column = Users.customAvatars[u].split(',');
-					if (column[0] != userid || !column[1]) continue;
-					if (column[0] == userid) {
-						avatar = column[1];
-						break;
-					}
-				}
+				if (Users.customAvatars[userid]) avatar = Users.customAvatars[userid];
 
 				now = new Date();
 				day = now.getUTCDate();
@@ -1591,16 +1609,11 @@ var User = (function () {
 		}*/
 		if (!room.isPrivate) {
 			for (var x in Users.bannedMessages) {
-				if (message.indexOf(Users.bannedMessages[x]) > -1 && Users.bannedMessages[x] != '' && message.substr(0,1) != '/') {
+				if (message.toLowerCase().indexOf(Users.bannedMessages[x]) > -1 && Users.bannedMessages[x] != '' && message.substr(0,1) != '/') {
 					connection.user.lock();
 					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake please contact a staff member.');
-					//room.logModCommand(connection.user.name+' was automatically locked by the server for saying "'+Users.bannedMessages[x]+'"');
 					fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was automatically locked for saying a banned word. ('+Users.bannedMessages[x]+')\n');
-					for (var u in Users.users) {
-						if (Users.users[u].group == '~' || Users.users[u].group == '&') {
-							Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+connection.user.name+' has been automatically locked for sending a message containing a banned word. Room: '+room.id+' Message: ' + message);
-						}
-					}
+					messageSeniorStaff(connection.user.name+' has been automatically locked for sending a message containing a banned word. Room: '+room.id+' Message: ' + message);
 					return false;
 				}
 			}
@@ -1837,6 +1850,9 @@ exports.socketReceive = socketReceive;
 exports.importUsergroups = importUsergroups;
 exports.addBannedWord = addBannedWord;
 exports.removeBannedWord = removeBannedWord;
+
+exports.addCustomAvatar = addCustomAvatar;
+exports.removeCustomAvatar = removeCustomAvatar;
 
 exports.users = users;
 exports.prevUsers = prevUsers;

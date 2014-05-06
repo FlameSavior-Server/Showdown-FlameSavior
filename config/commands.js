@@ -966,6 +966,13 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.allgeekthings.co.uk/wp-content/uploads/Popcorn.gif">');
 	},
+	sandshrewed: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/M5vKJeP.png"><br>' +
+                '<img src="http://i.imgur.com/Da1iquW.png"> <img src="http://i.imgur.com/KUQuk23.png"> <img src="http://i.imgur.com/xavAfxc.png"><br>' +
+                'Ace: Gengar<br>' +
+                '<font color=66CCFF>Don\'t need luck, got skill</font>');
+	},
     	destiny: 'itsdestiny',
 	itsdestiny: function(target, room, user) {
         if (!this.canBroadcast()) return;

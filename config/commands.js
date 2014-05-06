@@ -1446,10 +1446,20 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	amaan: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/tgNOgxv.png"><br />' +
+                '<img src="http://i.imgur.com/I9KeWX9.png?1" height="120">' +
+                '<font size="5">Rock On</font>' +
+                '<img src="http://i.imgur.com/OnkWC8h.jpg" height="120"><br />' +
+                '<b>Ace:</b> <blink><font color="yellow">Cloyster</font></blink><br />' +
+                '<font color="purple">Remind yourself that you and your life is not always perfect</font></center>');
+    	},
+	
 	lucy: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/hWl4Ltr.jpg"width="80" height="110">' +
-    		'<img src="http://i.imgur.com/nSl6dx7.png" width="400">' +
+    		'<img src="http://i.imgur.com/nSl6dx7.png" width="390">' +
     		'<img src="http://play.pokemonshowdown.com/sprites/xyani/klefki.gif"><br />' +
     		'<b>Ace:</b><blink> Klefki</blink><br />' +
     		'<blink>Just give me a reason, just a little bit\'s enough~.</blink></center>');

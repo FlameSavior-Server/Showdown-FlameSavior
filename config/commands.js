@@ -2396,7 +2396,7 @@ var commands = exports.commands = {
         	'<b>Catchphrase: </b>Kupo!<br /></center>');
     	},
     
-    	creaturephil : 'phil',
+    	creaturephil: 'phil',
     	phil: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img height="150" src="http://fc01.deviantart.net/fs70/f/2013/167/a/7/pancham_by_haychel-d64z92n.jpg">' +
@@ -2406,13 +2406,14 @@ var commands = exports.commands = {
         	'<b>Catchphrase: </b><a href="http://creatureleague.weebly.com">http://creatureleague.weebly.com</a></center>');
     	},
     
-    	blake: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/jyIf60j.gif" width="140">' +
-		'<img src="http://oi60.tinypic.com/28iw95x.jpg" width="450">' +
-		'<img src="http://i.imgur.com/9RkauTy.gif" width="100"><br />' +
-		'<b>Ace:Espeon </b><br />' +
-		'<b>Catchphrase: Take a gander at me and you\'ll like what you see.</b></center>');
+    	esep: 'ese',
+        ese: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/y4j3JID.gif">' +
+                '<img src="http://i.imgur.com/myUfOuS.gif" width="360">' +
+                '<img src="http://i.imgur.com/9RkauTy.gif" width="90"><br />' +
+                '<b>Ace:</b> Mega Absol<br />' +
+                'No matter the matter of man the Goddess judges with a even hand.</center>');
     	},
     
     	apples: function(target, room, user) {

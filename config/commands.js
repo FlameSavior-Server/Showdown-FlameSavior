@@ -1446,6 +1446,14 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	cast: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/c8ixzB6.png"><br />' +
+                '<img src="http://i.imgur.com/8MVF1LX.png" height="100"><br />' +
+                '<b>Ace:</b> Chandelure<br />' +
+                'I\'m a lover, but that doesn\'t mean I won’t fight. Give me all you\'ve got.</center>');
+    	},
+	
 	amaan: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/tgNOgxv.png"><br />' +

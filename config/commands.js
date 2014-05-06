@@ -1286,6 +1286,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	sethbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="purple"><u>Seth\'s MP3</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=uOEu5ulb9zE">Endless Despair II</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=phz7jf0HUPs">In Da Buns</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=5ckDg2hZPq4">My Pride</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=fY_Nawg1R-4">Skull Man Stage</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	thugbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

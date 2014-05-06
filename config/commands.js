@@ -1286,6 +1286,28 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	thugbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="blue"><u>Thug\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=njJ7NZMH70M">Not Gonna Die</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=fQIfBJVFTWE">Lift</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=oNtcP6EXm3s">This Will Be The Day</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=l0T0orZR5D4">Pokemon Unbeatable</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
+    	lucybox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="pink"><u>Lucy\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=OpQFFLBMEPI">Just Give Me A Reason</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=o_v9MY_FMcw">Best Song Ever</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=KRaWnd3LJfs">Payphone</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	dolphbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
@@ -1328,7 +1350,7 @@ var commands = exports.commands = {
                 '<center><b><a href="https://www.youtube.com/watch?v=NBDAE2g4gXo">Last Spell</a><br>' +
                 '<center><b><a href="http://www.youtube.com/watch?v=L_vsutSlyJs">Rebellion</a><br></center>' +
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    },
+    	},
     
     	primmbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -1339,7 +1361,7 @@ var commands = exports.commands = {
                 '<center><b><a href="https://www.youtube.com/watch?v=wUrZNG7v5nA">Pokemon Cypher</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=ZRf_8YFPe1g">Body Bag</a><br></center>' +
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    },
+    	},
     
     	cosybox: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -1350,7 +1372,7 @@ var commands = exports.commands = {
                 '<center><b><a href="https://www.youtube.com/watch?v=XbGs_qK2PQA">Rap God</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=sENM2wA_FTg">It\'s Time</a><br></center>' +
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    },
+    	},
     
     	tailzbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -1361,7 +1383,7 @@ var commands = exports.commands = {
                 '<center><b><a href="https://www.youtube.com/watch?v=1wYNFfgrXTI">When I\'m Gone</a><br>' +
                 '<center><b><a href="http://youtu.be/LFhEBmNwX_E?t=30s">Alone Together</a><br></center>' +
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    },
+    	},
     
     	sayshibox: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -1372,7 +1394,7 @@ var commands = exports.commands = {
                 '<center><b><a href="https://www.youtube.com/watch?v=1-pUaogoX5o">Waking Up In Vegas</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=CevxZvSJLk8">Roar</a><br></center>' +
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    },
+	},
     
     	czimbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -1383,7 +1405,7 @@ var commands = exports.commands = {
                 '<center><b><a href="https://www.youtube.com/watch?v=32GZ3suxRn4">Slow Dancing In A Burning Room</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=MmZexg8sxyk">Electric Feel</a><br></center>' +
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    },
+    	},
     
     
     	/***************************************
@@ -2385,7 +2407,7 @@ var commands = exports.commands = {
         	'<b>Catchphrase: </b>Kupo!<br /></center>');
     	},
     
-    	creaturephil : 'phil',
+    	creaturephil: 'phil',
     	phil: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img height="150" src="http://fc01.deviantart.net/fs70/f/2013/167/a/7/pancham_by_haychel-d64z92n.jpg">' +
@@ -2395,13 +2417,14 @@ var commands = exports.commands = {
         	'<b>Catchphrase: </b><a href="http://creatureleague.weebly.com">http://creatureleague.weebly.com</a></center>');
     	},
     
-    	blake: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/jyIf60j.gif" width="140">' +
-		'<img src="http://oi60.tinypic.com/28iw95x.jpg" width="450">' +
-		'<img src="http://i.imgur.com/9RkauTy.gif" width="100"><br />' +
-		'<b>Ace:Espeon </b><br />' +
-		'<b>Catchphrase: Take a gander at me and you\'ll like what you see.</b></center>');
+    	esep: 'ese',
+        ese: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/y4j3JID.gif">' +
+                '<img src="http://i.imgur.com/myUfOuS.gif" width="360">' +
+                '<img src="http://i.imgur.com/9RkauTy.gif" width="90"><br />' +
+                '<b>Ace:</b> Mega Absol<br />' +
+                'No matter the matter of man the Goddess judges with a even hand.</center>');
     	},
     
     	apples: function(target, room, user) {

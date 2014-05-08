@@ -1457,6 +1457,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	ossified: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/UwxGUH3.png" width="130">' +
+                '<img src="http://i.imgur.com/3RY1HWg.gif" width="280">' +
+                '<img src="http://i.imgur.com/KHapq25.png" width="130"><br />' +
+                '<b>Ace:</b> Sableye<br />' +
+                'I can\'t resist a good prankster.</center>');
+    	},
+	
 	cast: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/c8ixzB6.png"><br />' +

@@ -1286,6 +1286,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	figgybox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="#00AF33"><u>Figgy\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=0IA3ZvCkRkQ">Hero</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=-LOgMWbDGPA">Eleanor Rigby</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=aynclw6TXeE">The Biology Song</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	sethbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

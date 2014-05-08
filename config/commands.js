@@ -3844,14 +3844,6 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/modchat [off/autoconfirmed/+/%/@/&/~] - Set the level of moderated chat. Requires: @ for off/autoconfirmed/+ options, & ~ for all the options');
 		}
-		if (target === '@' || target === 'shadowban' || target === 'sban') {
-			matched = true;
-			this.sendReply("/shadowban OR /sban [username], [secondary command], [reason] - Sends all the user\'s messages to the shadow ban room. Requires: @ & ~");
-		}
-		if (target === '@' || target === 'unshadowban' || target === 'unsban') {
-			matched = true;
-			this.sendReply("/unshadowban OR /unsban [username] - Undoes /shadowban (except the secondary command). Requires: @ & ~");
-		}
 		if (target === 'roomban') {
 			matched = true;
 			this.sendReply('/roomban OR /rb [username] - bans user from the room. Requires: @ & ~');

@@ -1480,7 +1480,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/I9KeWX9.png?1" height="120">' +
                 '<font size="5">Rock On</font>' +
                 '<img src="http://i.imgur.com/OnkWC8h.jpg" height="120"><br />' +
-                '<b>Ace:</b> <blink><font color="yellow">Cloyster</font></blink><br />' +
+                '<b>Ace:</b> <blink><font color="red">Cloyster</font></blink><br />' +
                 '<font color="purple">Remind yourself that you and your life is not always perfect</font></center>');
     	},
 	
@@ -3087,7 +3087,7 @@ var commands = exports.commands = {
 		'<font size="6" color="#298A08"><i>Meaty_Man</i></font></color>' +
 		'<img src="http://i.imgur.com/jdZVUOT.png"><br />' +
 		'Ace: Reshiram<br />' +
-		'Introducing the leaders of the anti-Fairy upsrising. Get momentum, and follow the buzzards.</center>');
+		'This is not the beginning... this is the end. Follow the Buzzards.</center>');
 	},
 	
 	jd: function(target, room, user) {

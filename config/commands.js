@@ -1457,6 +1457,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	bloodz: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/OXnvOrf.png" width="80">' +
+                '<img src="http://i.imgur.com/svehUu0.gif">' +
+                '<img src="http://i.imgur.com/mgokdZJ.gif" width="100"><br />' +
+                '<b>Ace:</b> Potato<br />' +
+                'Makes you high.</center>');
+    	},
+	
 	ossified: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/UwxGUH3.png" width="130">' +

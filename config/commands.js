@@ -1479,7 +1479,7 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://i.imgur.com/tgNOgxv.png"><br />' +
                 '<img src="http://i.imgur.com/I9KeWX9.png?1" height="120">' +
                 '<font size="5">Rock On</font>' +
-                '<img src="http://i.imgur.com/OnkWC8h.jpg" height="120"><br />' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/cloyster.gif"><br />' +
                 '<b>Ace:</b> <blink><font color="red">Cloyster</font></blink><br />' +
                 '<font color="purple">Remind yourself that you and your life is not always perfect</font></center>');
     	},

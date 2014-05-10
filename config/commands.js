@@ -1286,6 +1286,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	kdrewbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="blue"><u>Kdrew\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=JDcbvWkmOcw">Lost</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=obeXPTAV4wU">Kiss The Devil</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=47MbajGiZBg">Legend Of Thunder Theme song</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=Eb3Dr3Vgee0">Chasing Ghosts</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	figgybox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

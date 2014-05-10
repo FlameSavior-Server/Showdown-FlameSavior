@@ -1402,7 +1402,7 @@ var commands = exports.commands = {
                 '<center><h1><font color="blue"><u>Primm\'s Music Box</u></color></h1></center>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=RbtPXFlZlHg">Talk Dirty</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=518WB1IcjPI">All Of Me</a><br>' +
-                '<center><b><a href="https://www.youtube.com/watch?v=wUrZNG7v5nA">Pokemon Cypher</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=KpS-9OcYyqk">Not a Bad Thing</a><br>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=ZRf_8YFPe1g">Body Bag</a><br></center>' +
                 '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     	},

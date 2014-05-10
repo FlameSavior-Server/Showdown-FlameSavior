@@ -1286,6 +1286,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	adipravarbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="blue"><u>Adipravar\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=Rm42xAvWdvQ">Lingashtakam</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=Z2kBfiItjgs">Pokemon Advanced</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=Ly9BBdCcjLE">Ethir Neechal</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=cXIeUJE2YHo">Pokemon Destiny Deoxys</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	kdrewbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
@@ -1467,6 +1478,15 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	adipravar: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/xrsKJDk.png" width="100">' +
+                '<img src="http://i.imgur.com/yZxwkDq.png">' +
+                '<img src="http://i.imgur.com/Ulo2OfQ.png" width="100"><br />' +
+                '<b>Ace:</b> Rayquaza<br />' +
+                'Never joke be as awesome as Rayquaza.</center>');
+    	},
 	
 	bloodz: function(target, room, user) {
         if (!this.canBroadcast()) return;

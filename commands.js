@@ -2584,7 +2584,7 @@ var commands = exports.commands = {
 	sremind: 'sreminder',
 	sreminder: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5"></center><br />' +
+		this.sendReplyBox('<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5" title="Welcome to Gold!"></center><br />' +
                                         '<center><b><font size="4">Welcome to Gold!</b></font><br>' +
                                         '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
                                         '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
@@ -2723,7 +2723,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target.toLowerCase() == "lobby") {
-                        return connection.sendTo('lobby','|html|<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5"></center><br />' +
+                        return connection.sendTo('lobby','|html|<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5" title="Welcome to Gold!"></center><br />' +
                                         '<center><b><font size="4">Welcome to Gold!</b></font><br>' +
                                         '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
                                         '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +

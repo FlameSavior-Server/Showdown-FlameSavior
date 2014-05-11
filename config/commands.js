@@ -1269,23 +1269,23 @@ var commands = exports.commands = {
 			'- <a href="http://pokemonshowdown.com/replay/phoenixleague-perseverance-3900">Cosy vs Champion® Lynn</a>');
 	},
 
-	//TOUR COMMANDS
-            
-    tourcommands: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('Tournaments through /tour can be started by Voice (+) users and higher:<br \>' +
-        '/tour [tier], [size] - Starts a tournament<br \>' +
-		'/endtour - Ends a currently running tournament<br \>' +
-		'/fj [username] - Force someone to join a tournament<br \>' +
-		'/fl [username] - Force someone to leave a tournament<br \>' +
-		'/toursize [size] - Changes the size of a currently running tournament<br \>' +
-		'/replace [username], [username] - Replaces user in a tournament with the second user');
-    },
-    
+
+   
     	/***************************************
 	* Music Boxes                          *
 	***************************************/
 	
+    	handreliefbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="yellow"><u>Hand Relief\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=EbKvBT9F0Vo">Dream On</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=sxdmw4tJJ1Y">Rock You Like A Hurricane</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=CHUqE5p15C0">Last Child</a><br>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=WLE7hcSgxlM">Fade To Black</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	adipravarbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

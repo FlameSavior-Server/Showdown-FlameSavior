@@ -966,10 +966,11 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.allgeekthings.co.uk/wp-content/uploads/Popcorn.gif">');
 	},
+	sand: 'sandshrewed',
 	sandshrewed: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/M5vKJeP.png" width="100%"><br>' +
-        	'<img src="http://i.imgur.com/AMkFFwe.jpg" width="50%"><br>' +
+        	'<img src="http://i.imgur.com/AMkFFwe.jpg" width="30%"><br>' +
                 'Ace: Gengar<br>' +
                 '<font color=66CCFF>Don\'t need luck, got skill</font>');
 	},

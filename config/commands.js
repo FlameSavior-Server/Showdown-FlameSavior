@@ -2784,10 +2784,11 @@ var commands = exports.commands = {
     
     	belle: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/7Ar6RAd.png" height="140" width="200">' +
-		'<img src="http://i.imgur.com/VTxy0rU.gif"><br />' +
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/garchomp.gif">' +
+		'<img src="http://i.imgur.com/SAhOexv.png">' +
+		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/aegislash-blade.gif"> <br />' +
 		'<b>Ace: </b>Garchomp<br />' +
-		'<b>Quote: </b>Believing that you can do it means you\'re already halfway there!</center>');
+		'Did you set it to wumbo?</center>');
     	},
     
     	kishz: function(target, room, user) {

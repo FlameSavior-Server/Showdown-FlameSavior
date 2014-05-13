@@ -1482,6 +1482,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	zard: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/ogH3V0k.gif">' +
+                '<img src="http://i.imgur.com/OVPO6rt.png">' +
+                '<img src="http://i.imgur.com/jnlskzT.jpg"><br />' +
+                '<b>Ace:</b> Charizard<br />' +
+                'Try me biatch.</center>');
+    	},
+	
 	adipravar: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/xrsKJDk.png" width="100">' +

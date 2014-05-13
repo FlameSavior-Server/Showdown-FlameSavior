@@ -546,7 +546,7 @@ var cmds = {
  			}
  		}
 
-		Rooms.rooms[rid].addRaw('<hr /><h2><font color="green">' + sanitize(user.name) + ' has started a ' + Tools.data.Formats[tempTourTier].name + ' Tournament.</font> <font color="red">/j</font> <font color="green">to join!</font> OR <button name="send" value="/j" title="Join the tournament!">Click here to join!</button></h2><b><font color="blueviolet">PLAYERS:</font></b> ' + targets[1] + '<br /><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tempTourTier].name + '<hr />');
+		Rooms.rooms[rid].addRaw('<hr /><h2><font color="green">' + clean(user.name) + ' has started a ' + Tools.data.Formats[tempTourTier].name + ' Tournament.</font> <font color="red">/j</font> <font color="green">to join!</font> OR <button name="send" value="/j" title="Join the tournament!">Click here to join!</button></h2><b><font color="blueviolet">PLAYERS:</font></b> ' + targets[1] + '<br /><font color="blue"><b>TIER:</b></font> ' + Tools.data.Formats[tempTourTier].name + '<hr />');
 		if (tour.timers[rid]) Rooms.rooms[rid].addRaw('<div class="infobox"><font color="red"><center><b>If you join, please remember that you signed up.</b>');
 		if (tour.timers[rid]) Rooms.rooms[rid].addRaw('<i>The tournament will begin in ' + tour.timers[rid].time + ' minute' + (tour.timers[rid].time == 1 ? '' : 's') + '.<i>');
 	},
@@ -974,7 +974,7 @@ var cmds = {
 		if (tour[room.id].status < 2) return this.sendReply('There is no tournament out of its sign up phase.');
 		var targetUser = Users.get(target);
 		if (!targetUser) {
-			var dqGuy = sanitize(target.toLowerCase());
+			var dqGuy = clean(target.toLowerCase());
 		} else {
 			var dqGuy = toId(target);
 		}
@@ -1505,13 +1505,13 @@ Rooms.BattleRoom.prototype.win = function(winner) {
 						var acre = Math.round(data.p1rating.acre);
 						var reasons = ''+(acre-oldacre)+' for '+(p1score>.99?'winning':(p1score<.01?'losing':'tying'));
 						if (reasons.substr(0,1) !== '-') reasons = '+'+reasons;
-						self.addRaw(sanitize(p1)+'\'s rating: '+oldacre+' &rarr; <strong>'+acre+'</strong><br />('+reasons+')');
+						self.addRaw(clean(p1)+'\'s rating: '+oldacre+' &rarr; <strong>'+acre+'</strong><br />('+reasons+')');
 
 						var oldacre = Math.round(data.p2rating.oldacre);
 						var acre = Math.round(data.p2rating.acre);
 						var reasons = ''+(acre-oldacre)+' for '+(p1score>.99?'losing':(p1score<.01?'winning':'tying'));
 						if (reasons.substr(0,1) !== '-') reasons = '+'+reasons;
-						self.addRaw(sanitize(p2)+'\'s rating: '+oldacre+' &rarr; <strong>'+acre+'</strong><br />('+reasons+')');
+						self.addRaw(clean(p2)+'\'s rating: '+oldacre+' &rarr; <strong>'+acre+'</strong><br />('+reasons+')');
 
 						Users.get(p1).cacheMMR(rated.format, data.p1rating);
 						Users.get(p2).cacheMMR(rated.format, data.p2rating);

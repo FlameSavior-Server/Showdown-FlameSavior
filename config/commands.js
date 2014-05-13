@@ -229,13 +229,8 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		if (!this.canTalk()) return;
 			this.sendReplyBox('<center><img src="http://i.imgur.com/HrDUGmr.png" width=75 height= 100>');
-			this.add('|c|@fork| .3.  ``**(fork\'d by '+user.name+')**``');
-			
 	},
-	zarel: function (target, room, user, connection, cmd) {
-		if (!this.canTalk()) return;
-			this.add('|c|~Zarel| heh  ``**(zarel\'d by '+user.name+')**``');
-	},
+
 	aip: 'inprivaterooms',
 	awhois: 'inprivaterooms',
 	allrooms: 'inprivaterooms',
@@ -951,9 +946,23 @@ var commands = exports.commands = {
                 '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
                 '<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
     	},
+    	comet: 'sunako',
+	cometstorm: 'sunako',
+	sunako: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/3uyLxHC.png"><br><font color = "0F055C"><b><i>I came from the storm.');
+	},
     	popcorn: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.allgeekthings.co.uk/wp-content/uploads/Popcorn.gif">');
+	},
+	sand: 'sandshrewed',
+	sandshrewed: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/M5vKJeP.png" width="100%"><br>' +
+        	'<img src="http://i.imgur.com/AMkFFwe.jpg" width="30%"><br>' +
+                'Ace: Gengar<br>' +
+                '<font color=66CCFF>Don\'t need luck, got skill</font>');
 	},
     	destiny: 'itsdestiny',
 	itsdestiny: function(target, room, user) {
@@ -1006,6 +1015,24 @@ var commands = exports.commands = {
 		'4. <a href="https://www.youtube.com/watch?v=y8AWFf7EAc4"><button title="Hallelujah - Jeff Buckley">Hallelujah - Jeff Buckley</a></button><br>' +
 		'5. <a href="https://www.youtube.com/watch?v=aFIApXs0_Nw"><button title="Better Off Dead - Elton John">Better Off Dead - Elton John</a></button><br>' +
 		'6. <a href="https://www.youtube.com/watch?v=eJLTGHEwaR8"><button title="Your Song - Carly Rose Sonenclar cover">Your Song - Carly Rose Sonenclar cover</a></button>');
+	},
+	cabox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>CoolAsian\'s Music Box!</b><br>' +
+        //This is an image of a music note! (line bellow)
+                '<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"></center><br>' +
+                '1. <a href="http://youtu.be/UU8xKUoH_lU"><button title="Parkway Drive - Wild Eyes [Lyrics] [HD]">Parkway Drive - Wild Eyes [Lyrics] [HD]</a></button><br>' +
+                '2. <a href="http://youtu.be/fOLqEOK_wLc"><button title="System Of A Down - B.Y.O.B.">System Of A Down - B.Y.O.B.</a></button><br>' +
+		'3. <a href="http://youtu.be/312Sb-2PovA"><button title="SUICIDE SILENCE - You Only Live Once">SUICIDE SILENCE - You Only Live Once</a></button><br>' +
+		'4. <a href="http://youtu.be/pUA-4WCXn5o"><button title="Atreyu - Demonology and Heartache">Atreyu - Demonology and Heartache</a></button><br>' +
+		'5. <a href="http://youtu.be/zUq8I4JTOZU"><button title="Muse - Assassin (Grand Omega Bosses Edit)">Muse - Assassin (Grand Omega Bosses Edit)</a></button><br>' +
+		'6. <a href="http://youtu.be/a89Shp0YhR8"><button title="A Day to Remember - I\'m Made of Wax, Larry, What Are You Made Of?">A Day to Remember - I\'m Made of Wax, Larry, What Are You Made Of?</a></button><br>');
+	},
+	jessie: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/420CAz0.png"><br>' +
+                '<img src="http://i.imgur.com/9ERgTNi.png"><br>' +
+                'Catch phrase: I\'m from Jakarta ah ah');
 	},
 	lazerbox: function(target, room, user) {
         if (!this.canBroadcast()) return;

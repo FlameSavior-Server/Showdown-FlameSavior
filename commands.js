@@ -16,7 +16,7 @@ var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a
 var key = '';
 var hint = '';
 var isMotd = false;
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'forcerename', 'musicbox', 'vip'];
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'musicbox', 'vip'];
 var closeShop = false
 var closedShop = 0;
 var bank = exports.bank = {
@@ -521,7 +521,7 @@ var commands = exports.commands = {
   		//if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
   		if(!target || target.length > 1) return this.sendReply('/customsymbol [symbol] - changes your symbol (usergroup) to the specified symbol. The symbol can only be one character');
   		var a = target;
-  		if (a === "+" || a === "$" || a === "%" || a === "@" || a === "&" || a === "~" || a === "#" || a === "a" || a === "b" || a === "c" || a === "d" || a === "e" || a === "f" || a === "g" || a === "h" || a === "i" || a === "j" || a === "k" || a === "l" || a === "m" || a === "n" || a === "o" || a === "p" || a === "q" || a === "r" || a === "s" || a === "t" || a === "u" || a === "v" || a === "w" || a === "x" || a === "y" || a === "z" || a === "0" || a === "1" || a === "2" || a === "3" || a === "4" || a === "5" || a === "6" || a === "7" || a === "8" || a === "9" || a === "Ã¥ÂÂ" ) {
+  		if (a === "+" || a === "$" || a === "%" || a === "@" || a === "&" || a === "~" || a === "#" || a === "a" || a === "b" || a === "c" || a === "d" || a === "e" || a === "f" || a === "g" || a === "h" || a === "i" || a === "j" || a === "k" || a === "l" || a === "m" || a === "n" || a === "o" || a === "p" || a === "q" || a === "r" || a === "s" || a === "t" || a === "u" || a === "v" || a === "w" || a === "x" || a === "y" || a === "z" || a === "A" || a === "B" || a === "C" || a === "D" || a === "E" || a === "F" || a === "G" || a === "H" || a === "I" || a === "J" || a === "K" || a === "L" || a === "M" || a === "N" || a === "O" || a === "P" || a === "Q" || a === "R" || a === "S" || a === "T" || a === "U" || a === "V" || a === "W" || a === "X" || a === "Y" || a === "Z" || a === "0" || a === "1" || a === "2" || a === "3" || a === "4" || a === "5" || a === "6" || a === "7" || a === "8" || a === "9" || a === "Ã¥ÂÂ" ) {
   			return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
   		}
   		user.getIdentity = function(){
@@ -915,17 +915,6 @@ var commands = exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target2 === 'forcerename') {
-			price = 10;
-			if (price <= user.money) {
-				user.money = user.money - price;
-				this.sendReply('You have purchased the ability to change your name and keep all ranks until you logout. PM an admin to claim this.');
-				user.canForcerename = true;
-				this.add(user.name + ' has purchased the ability to forcerename!');
-			} else {
-				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
-			}
-		}
 		if (target2 === 'potd') {
 			price = 45;
 			if (price <= user.money) {
@@ -988,7 +977,6 @@ var commands = exports.commands = {
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-			'<tr><td>Forcerename</td><td>You get the ability to rename yourself to anything you want, rank symbol will remain (name should be appropriate and temporary until you logout)</td><td>10</td></tr>' +
 			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>45</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND global voice!  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>500</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
@@ -1005,7 +993,6 @@ var commands = exports.commands = {
 			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>10</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-			'<tr><td>Forcerename</td><td>You get the ability to rename yourself to anything you want, rank symbol will remain (name should be appropriate and temporary until you logout)</td><td>10</td></tr>' +
 			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>45</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND global voice!  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>500</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
@@ -2601,7 +2588,7 @@ var commands = exports.commands = {
 	sremind: 'sreminder',
 	sreminder: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5"></center><br />' +
+		this.sendReplyBox('<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5" title="Welcome to Gold!"></center><br />' +
                                         '<center><b><font size="4">Welcome to Gold!</b></font><br>' +
                                         '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
                                         '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
@@ -2740,7 +2727,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target.toLowerCase() == "lobby") {
-                        return connection.sendTo('lobby','|html|<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5"></center><br />' +
+                        return connection.sendTo('lobby','|html|<div class="broadcast-gold" border="5"><center><img src="http://media.tumblr.com/e40eb84460e150c6b8d51b49607574f5/tumblr_inline_mjrw7vcVu51qz4rgp.gif" border="5" title="Welcome to Gold!"></center><br />' +
                                         '<center><b><font size="4">Welcome to Gold!</b></font><br>' +
                                         '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
                                         '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
@@ -2749,6 +2736,9 @@ var commands = exports.commands = {
                                         '<b>4.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
                                         '<hr width="85%">' +
                                         '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop164" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
+		}
+		if (target.toLowerCase() == "arenakalos") {
+                        return connection.sendTo('arenakalos','|html|<div class="broadcast-black"><center><img src=http://i.imgur.com/PXfmpUm.gif><img src=http://i.imgur.com/Bbc7asF.gif><img src=http://i.imgur.com/Oq5KNTX.gif><br><strong><font color=yellow>Seja bem-vindo a sala portuguesa do Gold!<br>Visite nosso <a href="http://arenakalos.forumeiros.com">Fórum</a>!<br>Aqui você pode relaxar, pedir dicas, brincar, participar de torneios e ganhar bucks!<br>Recomendamos que você leia as regras encontradas <a href="http://arenakalos.forumeiros.com/t1-regras-arena-kalos">aqui</a>. Lendo-as, estará ciente do que não pode ser feito por aqui. Ignorando-as, estará sujeito a punições, incluindo bans.<br>Esperamos que se divirta! E, se gostar, chame seus amigos!<br><br>Everyone is welcome here, even if you don\'t speak portuguese.<br>You can get more bucks with tours, like the lobby!<br> n_n<br><br><font color=red>Atenção: Divulgação de outros servers, via Chat ou via PM, é proibido no Gold e receberá punição a nível global caso desrespeitá-la.');
 		}
 		if (target.toLowerCase() == "dawnleague") {
 			return connection.sendTo('dawnleague','|html|<center><img src="http://i.imgur.com/lF3Poot.gif"><br>'+
@@ -4212,28 +4202,7 @@ var commands = exports.commands = {
 			this.sendReply("User " + targetUser.name + " is no longer using that name.");
 		}
 	},
-
-	frt: 'forcerenameto',
-	forcerenameto: function(target, room, user) {
-		if (!target) return this.parse('/help forcerenameto');
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		if (!target) {
-			return this.sendReply('No new name was specified.');
-		}
-		if (!this.can('forcerenameto', targetUser)) return false;
-
-		if (targetUser.userid === toId(this.targetUser)) {
-			var entry = ''+targetUser.name+' was forcibly renamed to '+target+' by '+user.name+'.';
-			this.privateModCommand('(' + entry + ')');
-			targetUser.forceRename(target, undefined, true);
-		} else {
-			this.sendReply("User "+targetUser.name+" is no longer using that name.");
-		}
-	},
+	
 	sml: 'smodlog',
 	smodlog:function (target, room, user, connection) {
 		if (!this.can('modlog')) {

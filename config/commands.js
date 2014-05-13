@@ -1565,7 +1565,7 @@ var commands = exports.commands = {
 	
 	roy: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://s1.zerochan.net/Gardevoir.600.1290582.jpg" width="150">' +
+        this.sendReplyBox('<center><img src="http://i1148.photobucket.com/albums/o579/catfight09/RdhT0Vr_zps1e2b23e1.jpg" width="150">' +
                 '<img src="http://i.imgur.com/KgJnFtZ.gif">' +
                 '<img src="http://fc05.deviantart.net/fs31/f/2008/212/c/0/gallade_shiny_by_Ashuras2000.jpg" width="120"><br />' +
                 '<b>Ace:</b> Gardevoir<br />' +

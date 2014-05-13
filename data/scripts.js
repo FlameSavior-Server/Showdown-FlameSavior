@@ -510,12 +510,13 @@ exports.BattleScripts = {
 		if (pokemon.baseTemplate.species !== template.baseSpecies) return false;
 
 		// okay, mega evolution is possible
-		this.add('-formechange', pokemon, template.species);
-		this.add('message', template.baseSpecies + " has Mega Evolved into Mega " + template.baseSpecies + "!");
 		pokemon.formeChange(template);
 		pokemon.baseTemplate = template; // mega evolution is permanent :o
 		pokemon.setAbility(template.abilities['0']);
 		pokemon.baseAbility = pokemon.ability;
+		pokemon.details = template.species + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
+		this.add('detailschange', pokemon, pokemon.details);
+		this.add('message', template.baseSpecies + " has Mega Evolved into Mega " + template.baseSpecies + "!");
 
 		side.megaEvo = 1;
 		for (var i = 0; i < side.pokemon.length; i++) side.pokemon[i].canMegaEvo = false;
@@ -1541,21 +1542,16 @@ exports.BattleScripts = {
 
 		// 95-86-82-78-74-70
 		var levelScale = {
-			LC: 95,
+			LC: 94,
+			'LC Uber': 92,
 			NFE: 90,
-			'LC Uber': 86,
+			Limbo: 86,
 			NU: 86,
 			BL3: 84,
 			RU: 82,
 			BL2: 80,
 			UU: 78,
 			BL: 76,
-
-			'Limbo': 86,
-			'Limbo C': 83,
-			'Limbo B': 80,
-			'Limbo A': 77,
-
 			OU: 74,
 			CAP: 74,
 			Unreleased: 74,

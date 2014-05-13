@@ -206,6 +206,10 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 				this.splitTarget(target, exactName);
 				return this.targetUser;
 			},
+			getLastIdOf: function (user) {
+				if (typeof user === 'string') user = Users.get(user);
+				return (user.named ? user.userid : (Object.keys(user.prevNames).last() || user.userid));
+			},
 			splitTarget: splitTarget
 		};
 

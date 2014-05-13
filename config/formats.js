@@ -56,7 +56,7 @@ exports.Formats = [
 
 		maxLevel: 5,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
-		banlist: ['Sonicboom', 'Dragon Rage', 'LC Uber', 'Swagger']
+		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar']
 	},
 	{
 		name: "XY Battle Spot Singles",
@@ -125,8 +125,20 @@ exports.Formats = [
 		section: "XY Doubles",
 
 		gameType: 'doubles',
+		searchShow: false,
 		ruleset: ['Pokemon', 'Standard Doubles', 'Team Preview'],
-		banlist: ['Dark Void', 'Soul Dew',
+		banlist: ['Soul Dew', 'Dark Void',
+			'Mewtwo', 'Lugia', 'Ho-Oh', 'Kyogre', 'Groudon', 'Rayquaza', 'Dialga', 'Palkia', 'Giratina', 'Giratina-Origin',
+			'Arceus', 'Reshiram', 'Zekrom', 'Kyurem-White', 'Xerneas', 'Yveltal'
+		]
+	},
+	{
+		name: "Smogon Doubles (suspect test)",
+		section: "XY Doubles",
+
+		gameType: 'doubles',
+		ruleset: ['Pokemon', 'Standard Doubles', 'Team Preview'],
+		banlist: ['Dark Void', 'Soul Dew', 'Kangaskhanite',
 			'Mewtwo',
 			'Lugia',
 			'Ho-Oh',
@@ -264,6 +276,13 @@ exports.Formats = [
 
 		ruleset: ['CAP Pokemon', 'Standard', 'Team Preview'],
 		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Swagger']
+	},
+	{
+		name: "NU (alpha)",
+		section: "Other Metagames",
+
+		ruleset: ['RU (beta)'],
+		banlist: ['RU', 'BL3']
 	},
 	{
 		name: "Challenge Cup",
@@ -507,7 +526,7 @@ exports.Formats = [
 		mod: 'gen5',
 		maxLevel: 5,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
-		banlist: ['Sonicboom', 'Dragon Rage', 'Berry Juice', 'Carvanha', 'Meditite', 'Gligar', 'Scyther', 'Sneasel', 'Tangela', 'Vulpix', 'Yanma', 'Soul Dew']
+		banlist: ['Berry Juice', 'Soul Dew', 'Dragon Rage', 'Sonic Boom', 'LC Uber', 'Gligar', 'Scyther', 'Sneasel', 'Tangela']
 	},
 	{
 		name: "[Gen 5] GBU Singles",
@@ -636,7 +655,7 @@ exports.Formats = [
 		mod: 'gen4',
 		maxLevel: 5,
 		ruleset: ['Pokemon', 'Standard', 'Little Cup'],
-		banlist: ['Sonic Boom', 'Dragon Rage', 'DeepSeaTooth', 'Berry Juice', 'Scyther', 'Sneasel', 'Yanma', 'Tangela', 'Misdreavus', 'Meditite', 'Murkrow']
+		banlist: ['Berry Juice', 'DeepSeaTooth', 'Dragon Rage', 'Sonic Boom', 'Meditite', 'Misdreavus', 'Murkrow', 'Scyther', 'Sneasel', 'Tangela', 'Yanma']
 	},
 	{
 		name: "[Gen 4] Custom Game",

@@ -54,17 +54,6 @@ global.toName = function (name) {
 };
 
 /**
- * Escapes a string for HTML
- * If strEscape is true, escapes it for JavaScript, too
- */
-global.sanitize = function (str, strEscape) {
-	str = ('' + (str || ''));
-	str = str.escapeHTML();
-	if (strEscape) str = str.replace(/'/g, '\\\'');
-	return str;
-};
-
-/**
  * Safely ensures the passed variable is a string
  * Simply doing '' + str can crash if str.toString crashes or isn't a function
  * If we're expecting a string and being given anything that isn't a string
@@ -103,7 +92,7 @@ socket.on('message', function (message) {
 				var fakeErr = {stack: stack};
 
 				if (!require('./crashlogger.js')(fakeErr, 'A battle')) {
-					var ministack = ("" + err.stack).split("\n").slice(0, 2).join("<br />");
+					var ministack = ("" + err.stack).escapeHTML().split("\n").slice(0, 2).join("<br />");
 					process.send(data[0] + '\nupdate\n|html|<div class="broadcast-red"><b>A BATTLE PROCESS HAS CRASHED:</b> ' + ministack + '</div>');
 				} else {
 					process.send(data[0] + '\nupdate\n|html|<div class="broadcast-red"><b>The battle crashed!</b><br />Don\'t worry, we\'re working on fixing it.</div>');
@@ -702,7 +691,7 @@ var BattlePokemon = (function () {
 				var nature = this.battle.getNature(this.set.nature);
 				if (statName === nature.plus) stat *= 1.1;
 				if (statName === nature.minus) stat *= 0.9;
-				this.stats[statName] = Math.floor(stat);
+				this.baseStats[statName] = this.stats[statName] = Math.floor(stat);
 			}
 			this.speed = this.stats.spe;
 		}
@@ -2405,10 +2394,6 @@ var Battle = (function () {
 			pokemon.moveset[m].used = false;
 		}
 		this.add('switch', pokemon, pokemon.getDetails);
-		if (pokemon.template.isMega) this.add('-formechange', pokemon, pokemon.template.species);
-		if (pokemon.illusion && pokemon.illusion.template.isMega) {
-			this.add('-formechange', pokemon.illusion, pokemon.illusion.template.species);
-		}
 		pokemon.update();
 		this.runEvent('SwitchIn', pokemon);
 		this.addQueue({pokemon: pokemon, choice: 'runSwitch'});
@@ -2466,10 +2451,6 @@ var Battle = (function () {
 			pokemon.moveset[m].used = false;
 		}
 		this.add('drag', pokemon, pokemon.getDetails);
-		if (pokemon.template.isMega) this.add('-formechange', pokemon, pokemon.template.species);
-		if (pokemon.illusion && pokemon.illusion.template.isMega) {
-			this.add('-formechange', pokemon.illusion, pokemon.illusion.template.species);
-		}
 		pokemon.update();
 		this.runEvent('SwitchIn', pokemon);
 		this.addQueue({pokemon: pokemon, choice: 'runSwitch'});
@@ -3117,7 +3098,7 @@ var Battle = (function () {
 			}
 			if (decision.choice === 'move') {
 				if (this.getMove(decision.move).beforeTurnCallback) {
-					this.addQueue({choice: 'beforeTurnMove', pokemon: decision.pokemon, move: decision.move}, true);
+					this.addQueue({choice: 'beforeTurnMove', pokemon: decision.pokemon, move: decision.move, targetLoc: decision.targetLoc}, true);
 				}
 			} else if (decision.choice === 'switch') {
 				if (decision.pokemon.switchFlag && decision.pokemon.switchFlag !== true) {

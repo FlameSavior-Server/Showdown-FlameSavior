@@ -115,7 +115,7 @@ exports.logchat = false;
 
 // loguserstats - how often (in milliseconds) to write user stats to the
 // lobby log. This has no effect if `logchat` is disabled.
-exports.loguserstats = 1000*60*10; // 10 minutes
+exports.loguserstats = 1000 * 60 * 10; // 10 minutes
 
 // validatorprocesses - the number of processes to use for validating teams
 // simulatorprocesses - the number of processes to use for handling battles
@@ -126,7 +126,7 @@ exports.simulatorprocesses = 1;
 
 // inactiveuserthreshold - how long a user must be inactive before being pruned
 // from the `users` array. The default is 1 hour.
-exports.inactiveuserthreshold = 1000*60*60;
+exports.inactiveuserthreshold = 1000 * 60 * 60;
 
 // Set this to true if you are using Pokemon Showdown on Heroku.
 exports.herokuhack = false;

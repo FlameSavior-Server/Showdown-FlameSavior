@@ -12,6 +12,9 @@
     "http-proxy": "0.10.0",
     "request": "2.34.0"
   },
+  "nonDefaultDependencies": {
+    "ofe": "0.1.2"
+  },
   "engines": {
     "node": "> 0.10.1"
   },

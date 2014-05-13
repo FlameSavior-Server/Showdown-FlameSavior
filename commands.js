@@ -1122,8 +1122,7 @@ var commands = exports.commands = {
 		} catch (e) {
 			return;
 		}
-		var nickToUnlink = targetUser.named ? targetUser.userid : (Object.keys(targetUser.prevNames).last() || targetUser.userid);
-		this.add('|unlink|' + nickToUnlink);
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
 	},
 
 	kickto: 'redir',
@@ -1180,9 +1179,9 @@ var commands = exports.commands = {
 		targetUser.popup(user.name+' has muted you for 7 minutes. '+target);
 		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 7 minutes.' + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
-		if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
-		var nickToUnlink = targetUser.named ? targetUser.userid : (Object.keys(targetUser.prevNames).last() || targetUser.userid);
-		this.add('|unlink|' + nickToUnlink);
+		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also muted: " + alts.join(", "));
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
+
 		targetUser.mute(room.id, 7 * 60 * 1000);
 		try {
 			frostcommands.addMuteCount(user.userid);
@@ -1257,8 +1256,7 @@ var commands = exports.commands = {
 		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 24 hours.' + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
 		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also muted: " + alts.join(", "));
-		var nickToUnlink = targetUser.named ? targetUser.userid : (Object.keys(targetUser.prevNames).last() || targetUser.userid);
-		this.add('|unlink|' + nickToUnlink);
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.mute(room.id, 60 * 60 * 1000, true);
 		try {
@@ -1313,8 +1311,7 @@ var commands = exports.commands = {
 		this.addModCommand(""+targetUser.name+" was locked from talking by "+user.name+"." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
 		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also locked: " + alts.join(", "));
-		var nickToUnlink = targetUser.named ? targetUser.userid : (Object.keys(targetUser.prevNames).last() || targetUser.userid);
-		this.add('|unlink|' + nickToUnlink);
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.lock();
 		try {
@@ -1424,8 +1421,7 @@ var commands = exports.commands = {
 			}
 		}
 
-		var nickToUnlink = targetUser.named ? targetUser.userid : (Object.keys(targetUser.prevNames).last() || targetUser.userid);
-		this.add('|unlink|' + nickToUnlink);
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
 		targetUser.ban();
 		try {
 			frostcommands.addBanCount(user.userid);
@@ -1667,7 +1663,7 @@ var commands = exports.commands = {
 		if (!room.modchat) {
 			this.add("|raw|<div class=\"broadcast-blue\"><b>Moderated chat was disabled!</b><br />Anyone may talk now.</div>");
 		} else {
-			var modchat = sanitize(room.modchat);
+			var modchat = Tools.escapeHTML(room.modchat);
 			this.add("|raw|<div class=\"broadcast-red\"><b>Moderated chat was set to " + modchat + "!</b><br />Only users of rank " + modchat + " and higher can talk.</div>");
 		}
 		this.logModCommand(user.name + " set modchat to " + room.modchat);

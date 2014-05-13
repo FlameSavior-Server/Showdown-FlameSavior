@@ -320,17 +320,6 @@ global.toName = function (name) {
 };
 
 /**
- * Escapes a string for HTML
- * If strEscape is true, escapes it for JavaScript, too
- */
-global.sanitize = function (str, strEscape) {
-	str = ('' + (str || ''));
-	str = str.escapeHTML();
-	if (strEscape) str = str.replace(/'/g, '\\\'');
-	return str;
-};
-
-/**
  * Safely ensures the passed variable is a string
  * Simply doing '' + str can crash if str.toString crashes or isn't a function
  * If we're expecting a string and being given anything that isn't a string
@@ -380,7 +369,7 @@ if (Config.crashguard) {
                         quietCrash = quietCrash || ((dateNow - lastCrash) <= 1000 * 60 * 5)
                         lastCrash = Date.now();
                         if (quietCrash) return;
-                        var stack = (""+err.stack).split("\n").slice(0,2).join("<br />");
+                        var stack = (""+err.stack).escapeHTML().split("\n").slice(0,2).join("<br />");
                         if (Rooms.rooms.staff) {
                                 Rooms.rooms.staff.addRaw('<div class="broadcast-red"><b>The server has experienced a crash:</b> '+stack+'<br /></div>');
                                 Rooms.rooms.staff.addRaw('<div class="broadcast-green">The crash has been maintained, and the server will run fine. A restart is advised to prevent any issues.</div>');

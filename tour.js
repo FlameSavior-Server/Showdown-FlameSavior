@@ -1,6 +1,7 @@
 /*********************************************************
  * Functions
  *********************************************************/
+ var fs = require('fs');
 exports.tour = function(t) {
   if (typeof t != "undefined") var tour = t; else var tour = new Object();
 	var tourStuff = {

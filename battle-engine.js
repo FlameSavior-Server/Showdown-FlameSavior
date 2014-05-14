@@ -16,16 +16,16 @@ global.Config = require('./config/config.js');
 
 if (Config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting
-	//process.on('uncaughtException', function (err) {
-	//	require('./crashlogger.js')(err, 'A simulator process');
-		/* var stack = (""+err.stack).split("\n").slice(0,2).join("<br />");
+	process.on('uncaughtException', function (err) {
+		require('./crashlogger.js')(err, 'A simulator process');
+		/* var stack = ("" + err.stack).escapeHTML().split("\n").slice(0, 2).join("<br />");
 		if (Rooms.lobby) {
 			Rooms.lobby.addRaw('<div><b>THE SERVER HAS CRASHED:</b> ' + stack + '<br />Please restart the server.</div>');
 			Rooms.lobby.addRaw('<div>You will not be able to talk in the lobby or start new battles until the server restarts.</div>');
 		}
 		Config.modchat = 'crash';
 		Rooms.global.lockdown = true; */
-	//});
+	});
 }
 
 /**
@@ -70,10 +70,8 @@ var Battles = {};
 
 // Receive and process a message sent using Simulator.prototype.send in
 // another process.
-//var socket = process;
-var socket = fakeProcess.client;
-socket.on('message', function (message) {
-	//console.log('CHILD MESSAGE RECV: "'+message+'"');
+process.on('message', function (message) {
+	//console.log('CHILD MESSAGE RECV: "' + message + '"');
 	var nlIndex = message.indexOf("\n");
 	var more = '';
 	if (nlIndex > 0) {
@@ -2627,20 +2625,16 @@ var Battle = (function () {
 			break;
 		}
 
-		if (effect.recoil && source) {
-			this.damage(this.clampIntRange(Math.round(damage * effect.recoil[0] / effect.recoil[1]), 1), source, target, 'recoil');
-		}
 		if (effect.drain && source) {
 			this.heal(Math.ceil(damage * effect.drain[0] / effect.drain[1]), source, target, 'drain');
 		}
 
-		if (target.fainted) this.faint(target);
-		else {
+		if (target.fainted) {
+			this.faint(target);
+		} else {
 			damage = this.runEvent('AfterDamage', target, source, effect, damage);
-			if (effect && !effect.negateSecondary) {
-				this.runEvent('Secondary', target, source, effect);
-			}
 		}
+
 		return damage;
 	};
 	Battle.prototype.directDamage = function (damage, target, source, effect) {
@@ -3765,7 +3759,6 @@ var Battle = (function () {
 	// Simulator.prototype.receive in simulator.js (in another process).
 	Battle.prototype.send = function (type, data) {
 		if (Array.isArray(data)) data = data.join("\n");
-		//socket.send(this.id+"\n"+type+"\n"+data);
 		process.send(this.id + "\n" + type + "\n" + data);
 	};
 	// This function is called by this process's 'message' event.

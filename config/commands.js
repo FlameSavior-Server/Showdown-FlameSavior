@@ -1482,6 +1482,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	cat: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/breloom.gif">' +
+                '<img src="http://i.imgur.com/Lzp2Tqc.png" width="380">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/excadrill.gif"><br />' +
+                '<b>Ace:</b> Breloom<br />' +
+                'Sometimes hax and stall annoy the hell out of me, but not when I\'m using it.</center>');
+    	},
+	
 	zard: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/ogH3V0k.gif">' +

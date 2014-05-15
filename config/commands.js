@@ -1484,7 +1484,7 @@ var commands = exports.commands = {
 	
 	orange: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center>I\'ll be on showdown. See you all later. Screwyou</center>');
+    	this.sendReplyBox('<center>I\'ll be on showdown. See you all later. Screw you</center>');
     	},
 	
 	lucifer: function(target, room, user) {

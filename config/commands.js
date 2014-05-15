@@ -3329,7 +3329,7 @@ var commands = exports.commands = {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img src="http://i.imgur.com/8owuies.gif" width="110" height="70">' +
 		'<img src="http://i.imgur.com/qHnpJfN.png">' +
-		'<img src="http://i.imgur.com/8owuies.gif" width="110" height="70"><br />' +
+		'<img src="http://24.media.tumblr.com/tumblr_me7s9cLpWv1qkvue8o3_500.gif" width="110" height="70"><br />' +
 		'<b>Ace: </b>Jolteon<br />' +
 		'<b>Catchphrase: </b>Hula hoopin\' to the max</center>');
 	},

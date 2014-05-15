@@ -1482,6 +1482,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	lucifer: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://24.media.tumblr.com/5be77e95c27872eb59d16b4b083bf9af/tumblr_mevo8lJhd81r5fhkdo1_500.gif" width="100">' +
+                '<img src="http://i.imgur.com/xVmosIr.png" width="320">' +
+                '<img src="http://24.media.tumblr.com/tumblr_m9bn1657Sd1qckwxco1_500.gif" width="100"><br />' +
+                '<b>Ace:</b> Glansey<br />' +
+                '<font color=red>I will ruin your parade with some stall action, be prepared young panda.</font></center>');
+    	},
+	
 	cat: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/breloom.gif">' +

@@ -546,7 +546,7 @@ var commands = exports.commands = {
 				data += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
 			        if (newTargets[i].searchType === 'pokemon') {
 					var template = Tools.getTemplate(newTargets[i].species);
-					data += '|html|<center><b>Tier: ' + template.tier + '</b></center>';
+					data += '|html|<b>Tier: ' + template.tier + '</b>';
 			        }
 			}        
 		} else {

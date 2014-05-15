@@ -1482,6 +1482,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	kingslowking: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/FXbPyoJ.gif" width="130">' +
+                '<img src="http://i.imgur.com/Nbda726.png" width="280">' +
+                '<img src="http://i.imgur.com/O1p29AI.gif" width="130"><br />' +
+                '<b>Ace:</b> Slowking<br />' +
+                'You...Slowbro?</center>');
+    	},
+	
 	brutus: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/OfUuEL7.png" width="120">' +

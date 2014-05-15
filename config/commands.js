@@ -1482,6 +1482,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	brutus: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/OfUuEL7.png" width="120">' +
+                '<img src="http://i.imgur.com/8FhU113.png">' +
+                '<img src="http://i.imgur.com/MsqvSoA.png" width="110"><br />' +
+                '<b>Ace:</b> Gardevoir<br />' +
+                'Never give up and never surrender. Remember this and you will go far.</center>');
+    	},
+	
 	orange: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center>I\'ll be on showdown. See you all later. Screw you</center>');

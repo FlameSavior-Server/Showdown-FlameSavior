@@ -1482,6 +1482,11 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	orange: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center>I\'ll be on showdown. See you all later. Screwyou</center>');
+    	},
+	
 	lucifer: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://24.media.tumblr.com/5be77e95c27872eb59d16b4b083bf9af/tumblr_mevo8lJhd81r5fhkdo1_500.gif" width="140">' +

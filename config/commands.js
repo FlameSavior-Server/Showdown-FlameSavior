@@ -1484,6 +1484,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	rzl: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/R4dJvQf.gif" width="100">' +
+                '<img src="http://i.imgur.com/dmtcGof.png" width="340">' +
+                '<img src="http://i.imgur.com/Ihw2Avb.gif" width="100"><br />' +
+                '<b>Ace:</b> Sun Glasses Bischeon<br />' +
+                'H2O means two of me one of you.</center>');
+    	},
+	
 	gh0st: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/uN43I4G.gif">' +

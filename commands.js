@@ -3271,7 +3271,7 @@ function getRandMessage(user){
 		break;
 		case 33: message = message + user + ' was swallowed whole by a Wailord!'; // Bought by Selena
 		break;
-		case 34: message = message + user + ' was swallowed whole by a giant wigglytuff!';// Bought by Lyrical WigglyTuff 
+		case 34: message = message + user + ' was swallowed whole by a giant wigglytuff!'; // Bought by Lyrical WigglyTuff 
 		break;
 		case 35: message = message + user + ' was fused with Zarif!'; //bought by Infernape/Zarif
 		break;
@@ -3296,6 +3296,8 @@ function getRandMessage(user){
 		case 45: message = message + user + ' disapparated!'; // bought by Jedi Lion Potter
 		break;
 		case 46: message = message + user + ' was hugged by Figgybear!'; // bought by Figgy
+		break;
+		case 47: message = message + user + ' was thrown into the TV world by P4 Ka\'elbasa'; // bought by E4 Kael
 		break;
 		default: message = message + user + ' bought a poisoned Pepsi!';
 	};

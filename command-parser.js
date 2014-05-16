@@ -133,7 +133,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 			},
 			privateModCommand: function (data) {
 				for (var i in room.users) {
-					if (room.users[i].isStaff) {
+					if (room.users[i].can('warn', null, room)) {
 						room.users[i].sendTo(room, data);
 					}
 				}

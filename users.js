@@ -1684,6 +1684,7 @@ var User = (function () {
 		}
 	};
 	User.prototype.destroy = function () {
+		this.disconnectAll();
 		// deallocate user
 		for (var roomid in this.mutedRooms) {
 			clearTimeout(this.mutedRooms[roomid]);

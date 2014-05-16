@@ -1484,6 +1484,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	gh0st: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/uN43I4G.gif">' +
+                '<img src="http://i.imgur.com/8D11eGK.png">' +
+                '<img src="http://i.imgur.com/SZB352x.png" width="100"><br />' +
+                '<b>Ace:</b> Mega Gyarados<br />' +
+                'Overcome every challenge, don\'t complain about it.</center>');
+    	},
+	
 	kingslowking: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/FXbPyoJ.gif" width="130">' +

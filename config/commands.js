@@ -969,6 +969,7 @@ var commands = exports.commands = {
 			'- /unmute <em>username</em>: unmute<br />' +
 			'- /announce OR /wall <em>message</em>: make an announcement<br />' +
 			'- /modlog <em>username</em>: search the moderator log of the room<br />' +
+			'- /notes [view] OR /notes [add], [message] OR /notes [delete/del], [number]: views/adds/deletes a note.<br />' +
 			'<br />' +
 			'Room moderators (@) can also use:<br />' +
 			'- /rkick <em>username</em>: kicks the user from the room<br />' +

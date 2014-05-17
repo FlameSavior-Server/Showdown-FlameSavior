@@ -344,7 +344,8 @@ exports.Formats = [
 	{
 		name: "OU Monotype",
 		section: "Other Metagames",
-		ruleset: ['OU', 'Same Type Clause']
+		ruleset: ['OU', 'Same Type Clause'],
+		banlist: ['Talonflame']
 	},
 	{
 		name: "Sky Battles",

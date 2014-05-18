@@ -1964,6 +1964,64 @@ var commands = exports.commands = {
 		return this.sendReplyBox("Random number (1 - " + maxRoll + "): " + rand);
 	},
 	
+	rollgame2: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		if (Users.get(''+user.name+'').money < target) {
+			return this.sendReply('You cannot wager more than you have, nub.');
+		}
+		if(!target) return this.sendReply('/dicegame [amount of bucks agreed to wager].');
+		if (isNaN(target)) {
+			return this.sendReply('Very funny, now use a real number.');
+		}
+		if (String(target).indexOf('.') >= 0) {
+			return this.sendReply('You cannot wager numbers with decimals.');
+		}
+		if (target < 0) {
+			return this.sendReply('Number cannot be negative.');
+		}
+		if (target > 100) {
+			return this.sendReply('Error: You cannot wager over 100 bucks.');
+		}
+		if (target == 0) {
+			return this.sendReply('Number cannot be 0.');
+		}
+		var player1 = Math.floor(6 * Math.random()) + 1;
+		var player2 = Math.floor(6 * Math.random()) + 1;
+		var winner = '';
+		var loser= '';
+		if (player1 > player2) {
+		winner = 'The <b>winner</b> is <font color="green">'+user.name+'</font>!';
+		loser = 'Better luck next time, Opponent!';
+		}
+		if (player1 < player2) {
+		winner = 'The <b>winner</b> is <font color="green">Opponent</font>!';
+		loser = 'Better luck next time, '+user.name+'!';
+		}
+		if (player1 === player2) {
+		winner = 'It\'s a <b>tie</b>!';
+		loser = 'Try again!';
+		var player1[2] = Math.floor(6 * Math.random()) + 1;
+		var player2[2] = Math.floor(6 * Math.random()) + 1;
+		
+		if (player1[2] > player2[2]) {
+		winner = 'The <b>winner</b> is <font color="green">'+user.name+'</font>!';
+		loser = 'Better luck next time, Opponent!';
+		}
+		if (player1[2] < player2[2]) {
+		winner = 'The <b>winner</b> is <font color="green">Opponent</font>!';
+		loser = 'Better luck next time, '+user.name+'!';
+		}
+		}
+		return this.sendReplyBox('<center><font size="4"><b><img border="5" title="Dice Game!"></b></font></center><br />' +
+				'<font color="red">This game is worth '+target+' buck(s).</font><br />' +
+				'Loser: Tranfer bucks to the winner using /tb [winner], '+target+' <br />' +
+				'<hr>' +
+				''+user.name+' roll (1-6): 	'+player1+'<br />' + 
+				'Opponent roll (1-6): 	'+player2+'<br />' +
+				'<hr>' +
+				'Winner: '+winner+'<br />' +
+				''+loser+'');
+	},
 	rollgame: 'dicegame',
 	dicegame: function(target, room, user) {
 		if (!this.canBroadcast()) return;

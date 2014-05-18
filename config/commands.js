@@ -1525,14 +1525,14 @@ var commands = exports.commands = {
     	this.sendReplyBox('<center>I\'ll be on showdown. See you all later. Screw you</center>');
     	},
 	
-	lucifer: function(target, room, user) {
+	scarf: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://24.media.tumblr.com/5be77e95c27872eb59d16b4b083bf9af/tumblr_mevo8lJhd81r5fhkdo1_500.gif" width="140">' +
-                '<img src="http://i.imgur.com/4pciTd7.png">' +
-                '<img src="http://24.media.tumblr.com/tumblr_m9bn1657Sd1qckwxco1_500.gif" width="140"><br />' +
-                '<b>Ace:</b> Glansey<br />' +
-                '<font color=red>I will ruin your parade with some stall action, be prepared young panda.</font></center>');
-    	},
+        this.sendReplyBox('<center><img src="http://i.imgur.com/kt0BaT7.gif">' +
+                '<img src="http://i.imgur.com/MXPbbVK.png">' +
+                '<img src="http://i.imgur.com/NNKTX8I.gif"><br />' +
+                '<b>Ace:</b> <font color=blue>Excadrill</font><br />' +
+                '<font color=blue>Master the cards you have been given than to complain about the cards your oppenent has been dealt, become stronger, believe in yourself young panda.</font></center>');
+    },
 	
 	cat: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -2796,10 +2796,10 @@ var commands = exports.commands = {
     	kiiroi: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://th04.deviantart.net/fs70/PRE/i/2013/196/7/3/one_piece_chopper_png_by_bloomsama-d6dkl5d.png" width="80" height="100">' +
-                '<img src="http://i.imgur.com/cfhl4gq.gif">' +
-                '<img src="http://i.imgur.com/uu94Qfv.gif"><br />' +
-                '<b>Ace:</b> Keldeo<br />' +
-                'You may think I suck. But come on, at least I don\'t swallow like you do.</center>');
+                '<img src="http://i.imgur.com/ahGTbtl.gif">' +
+                '<img src="http://i.imgur.com/uezK5X4.gif"><br />' +
+                '<b>Ace:</b> Fanciness<br />' +
+                'Scuse me, I can\'t seem to find my dick. Mind if I look in your mother\'s mouth?</center>');
     	},
     
     	brittany: function(target, room, user) {

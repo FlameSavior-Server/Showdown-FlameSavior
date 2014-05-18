@@ -1998,7 +1998,7 @@ var commands = exports.commands = {
 		if (player1 < player2) {
 		winner = 'The <b>winner</b> is <font color="green">Opponent</font>!';
 		loser = 'Better luck next time, '+user.name+'!';
-		this.add('|c|~crowt|.custom /removebucks 'user.name+','+target+'');
+		this.add('|c|~crowt|.custom /removebucks '+user.name+','+target+'');
 		}
 		if (player1 === player2) {
 		winner = 'It\'s a <b>tie</b>!';

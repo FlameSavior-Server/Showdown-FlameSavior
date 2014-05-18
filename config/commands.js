@@ -2796,7 +2796,7 @@ var commands = exports.commands = {
     	kiirochu: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://th04.deviantart.net/fs70/PRE/i/2013/196/7/3/one_piece_chopper_png_by_bloomsama-d6dkl5d.png" width="80" height="100">' +
-                '<img src="http://i.imgur.com/ahGTbtl.gif">' +
+                '<img src="http://i.imgur.com/6E4jm4o.gif">' +
                 '<img src="http://i.imgur.com/uezK5X4.gif"><br />' +
                 '<b>Ace:</b> Fanciness<br />' +
                 'Scuse me, I can\'t seem to find my dick. Mind if I look in your mother\'s mouth?</center>');

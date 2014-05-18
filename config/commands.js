@@ -1484,6 +1484,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	queen: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/MAy7w0Q.png" width="120">' +
+                '<img src="http://i.imgur.com/1hsdD9E.png">' +
+                '<img src="http://i.imgur.com/mFq6t5F.png" width="120"><br />' +
+                '<b>Ace:</b> Gyarados & Zapdos<br />' +
+                'Uno DOS Tres.</center>');
+    	},
+	
 	rzl: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/R4dJvQf.gif" width="100">' +

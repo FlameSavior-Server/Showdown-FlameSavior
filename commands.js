@@ -3326,8 +3326,7 @@ var commands = exports.commands = {
 	},*/
 	
 	tell: function(target, room, user) {
-		if (user.locked) return this.sendReply('You cannot use this command while locked.');
-		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
+		if (user.locked) return this.sendReply('You cannot use this command while locked.')
 		if (!target) return this.parse('/help tell');
 
 		var commaIndex = target.indexOf(',');

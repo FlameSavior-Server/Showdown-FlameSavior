@@ -1684,6 +1684,9 @@ var commands = exports.commands = {
 	},
 	regdate: function(target, room, user, connection) { 
 		if (!this.canBroadcast()) return;
+		if (!target =="0") {
+			return this.sendReply('Lol, you can\'t do that, you nub.');
+		}
 		if (!target || target == "." || target == "," || target == "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
 		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button'];
         	for (var x in html) {

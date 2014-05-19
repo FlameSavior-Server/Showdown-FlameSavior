@@ -1484,7 +1484,13 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
-	
+	kimiko: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/2QMVuIq.jpg" height="180">' +
+                '<img src="http://i.imgur.com/IzQgU16.gif"><br />' +
+                '<b>Ace:</b> Cinccino<br />' +
+                'Sweet as sugar, Cold as ice, Hurt me once, I\'ll break you twice.</center>');
+    	},
 	
 	queen: function(target, room, user) {
         if (!this.canBroadcast()) return;

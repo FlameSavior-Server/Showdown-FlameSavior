@@ -1588,7 +1588,7 @@ var commands = exports.commands = {
                 'I can\'t resist a good prankster.</center>');
     	},
 	
-	cast: function(target, room, user) {
+	acast: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/c8ixzB6.png"><br />' +
                 '<img src="http://i.imgur.com/8MVF1LX.png" height="100"><br />' +

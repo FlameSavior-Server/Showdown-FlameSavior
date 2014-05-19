@@ -2021,6 +2021,8 @@ var commands = exports.commands = {
 	rollgame: 'dicegame',
 	dicegame: function(target, room, user) {
 		if (!this.canBroadcast()) return;
+	  	if (!this.canTalk()) return;
+	  	if (room.id !== 'casino') return this.sendReplyBox("This command can only be used in the <button name="joinRoom" value="casino" target="_blank">Casino Room</button>.");
 		if (Users.get(''+user.name+'').money < target) {
 			return this.sendReply('You cannot wager more than you have, nub.');
 		}

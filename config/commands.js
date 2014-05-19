@@ -1963,7 +1963,7 @@ var commands = exports.commands = {
 		var rand = Math.floor(maxRoll * Math.random()) + 1;
 		return this.sendReplyBox("Random number (1 - " + maxRoll + "): " + rand);
 	},
-	
+/*/	
 	rollgame: 'dicegame',
 	dicegame: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2013,6 +2013,40 @@ var commands = exports.commands = {
 				'<hr>' +
 				'Winner: '+winner+'<br />' +
 				''+loser+'');
+	},
+	*//
+	
+	gamble: 'dicegame',
+	wager: 'dicegame',
+	rollgame: 'dicegame',
+	dicegame: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		if (Users.get(''+user.name+'').money < target) {
+			return this.sendReply('You cannot wager more than you have, nub.');
+		}
+		if(!target) return this.sendReply('/wager [amount of bucks agreed to wager].');
+		if (isNaN(target)) {
+			return this.sendReply('Very funny, now use a real number.');
+		}
+		if (String(target).indexOf('.') >= 0) {
+			return this.sendReply('You cannot wager numbers with decimals.');
+		}
+		if (target < 0) {
+			return this.sendReply('Number cannot be negative.');
+		}
+		if (target > 100) {
+			return this.sendReply('Error: You cannot wager over 100 bucks.');
+		}
+		if (target == 0) {
+			return this.sendReply('Number cannot be 0.');
+		}
+		var rand= Math.floor(2 * Math.random()) + 1;
+		if (rand === 1) {
+		return this.add('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
+		}
+		if (rand === 2) {
+		return this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
+		}
 	},
 	
 	helixfossil: 'm8b',

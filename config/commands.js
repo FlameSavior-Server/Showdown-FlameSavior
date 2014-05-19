@@ -967,10 +967,10 @@ var commands = exports.commands = {
 	bug: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><font size="5" color="darkgreen">Mr. Bug</font><br />' +
-		'<img src="http://media.pocketmonsters.net/characters/2127.png" width="50%" align="left">'+ 
-		'<img src="https://1-media-cdn.foolz.us/ffuuka/board/vp/thumb/1379/30/1379304844529s.jpg" width="50%" align="right"><br />' +
+		'<img src="http://media.pocketmonsters.net/characters/2127.png" width="50%" align="left"></img>'+ 
+		'<img src="https://1-media-cdn.foolz.us/ffuuka/board/vp/thumb/1379/30/1379304844529s.jpg" width="50%" align="right"></img><br />' +
 		'"delelele woooooop"<br />' +
-		'Ace: kriketot');
+		'Ace: kriketot</center>');
     	},
     	comet: 'sunako',
 	cometstorm: 'sunako',

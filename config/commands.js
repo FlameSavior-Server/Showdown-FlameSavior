@@ -2014,7 +2014,7 @@ var commands = exports.commands = {
 				'Winner: '+winner+'<br />' +
 				''+loser+'');
 	},
-	*//
+	*/
 	
 	gamble: 'dicegame',
 	wager: 'dicegame',

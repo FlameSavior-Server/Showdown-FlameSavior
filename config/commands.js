@@ -2262,7 +2262,7 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://i.imgur.com/Ijfoz4n.png?1" width="180">' +
                 '<img src="http://i.imgur.com/UQJceOG.png">' +
                 '<img src="http://i.imgur.com/uv1baKZ.png?1" width="180"><br />' +
-                '<b>Ace:</b> Shrek<br />' +
+                '<b>Ace:</b> My ~<br />' +
                 'I\'m Pretty Shit.</center>');
     	},
     	

@@ -967,9 +967,9 @@ var commands = exports.commands = {
 	bug: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><font size="5" color="darkgreen">Mr. Bug</font><br />' +
-		'<img src="http://media.pocketmonsters.net/characters/2127.png" width="50%" align="left"></img>'+ 
-		'<img src="https://1-media-cdn.foolz.us/ffuuka/board/vp/thumb/1379/30/1379304844529s.jpg" width="50%" align="right"></img><br />' +
-		'<img src="http://fc01.deviantart.net/fs70/i/2011/341/9/8/kricketot_by_nami_tsuki-d4if7lr.png" width="50%"><br />' +
+		'<img src="http://media.pocketmonsters.net/characters/2127.png" width="40%" align="left"></img>'+ 
+		'<img src="https://1-media-cdn.foolz.us/ffuuka/board/vp/thumb/1379/30/1379304844529s.jpg" width="40%" align="right"></img><br />' +
+		'<img src="http://fc01.deviantart.net/fs70/i/2011/341/9/8/kricketot_by_nami_tsuki-d4if7lr.png" width="35%"><br />' +
 		'"delelele woooooop"<br />' +
 		'Ace: kriketot</center>');
     	},

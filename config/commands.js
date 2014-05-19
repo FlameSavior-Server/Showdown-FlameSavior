@@ -2037,7 +2037,7 @@ var commands = exports.commands = {
 			return this.sendReply('Number cannot be negative.');
 		}
 		if (target > 500) {
-			return this.sendReply('Error: You cannot wager over 100 bucks.');
+			return this.sendReply('Error: You cannot wager over 500 bucks.');
 		}
 		if (target == 0) {
 			return this.sendReply('Number cannot be 0.');

@@ -2022,7 +2022,7 @@ var commands = exports.commands = {
 	dicegame: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 	  	if (!this.canTalk()) return;
-	  	if (room.id !== 'casino') return this.sendReplyBox("This command can only be used in the <button name="joinRoom" value="casino" target="_blank">Casino Room</button>.");
+	  	if (room.id !== 'casino') return this.sendReplyBox('This command can only be used in <button name="send" value="/join casino" target="_blank">The Casino</button>.');
 		if (Users.get(''+user.name+'').money < target) {
 			return this.sendReply('You cannot wager more than you have, nub.');
 		}

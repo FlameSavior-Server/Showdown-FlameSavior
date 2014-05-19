@@ -342,19 +342,6 @@ exports.Formats = [
 		]
 	},
 	{
-		name: "OU Monotype",
-		section: "Other Metagames",
-		ruleset: ['OU', 'Same Type Clause'],
-		banlist: ['Talonflame']
-	},
-	{
-		name: "Random Monotype",
-		section: "Other Metagames",
-
-		team: 'randommonotype',
-		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod']
-	},
-	{
 		name: "Sky Battles",
 		section: "Other Metagames",
 
@@ -926,13 +913,6 @@ exports.Formats = [
 		]
 	},
 	{
-		name: "OU Monotype",
-		section: "Other Metagames",
-
-		ruleset: ['Pokemon', 'Standard', 'Same Type Clause', 'Evasion Abilities Clause', 'Team Preview'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite']
-	},
-	{
 		name: "[Gen 5] Glitchmons",
 		section: "Other Metagames",
 
@@ -1028,6 +1008,52 @@ exports.Formats = [
 			'Arceus', 'Arceus-Bug', 'Arceus-Dark', 'Arceus-Dragon', 'Arceus-Electric', 'Arceus-Fighting', 'Arceus-Fire', 'Arceus-Flying', 'Arceus-Ghost', 'Arceus-Grass', 'Arceus-Ground', 'Arceus-Ice', 'Arceus-Poison', 'Arceus-Psychic', 'Arceus-Rock', 'Arceus-Steel', 'Arceus-Water',
 			'Excadrill', 'Tornadus-Therian', 'Thundurus', 'Reshiram', 'Zekrom', 'Landorus', 'Kyurem-White', 'Genesect', 'Slaking', 'Regigigas'
 		]
+	},
+
+	// Monotype
+	///////////////////////////////////////////////////////////////////
+	{
+		name: "Random Monotype",
+		section: "Monotype",
+		column: 2,
+
+		team: 'randommonotype',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod']
+	},
+	{
+		name: "OU Monotype",
+		section: "Monotype",
+		ruleset: ['OU', 'Same Type Clause'],
+		banlist: ['Talonflame']
+	},
+	{
+		name: "Ubers Monotype",
+		section: "Monotype",
+
+		ruleset: ['Pokemon', 'Standard Ubers', 'Same Type Clause'],
+		banlist: []
+	},
+	{
+		name: "UU Monotype",
+		section: "Monotype",
+
+		ruleset: ['OU', 'Same Type Clause'],
+		banlist: ['OU', 'BL', 'Heracronite', 'Medichamite', 'Gardevoirite', 'Drizzle', 'Drought']
+	},
+	{
+		name: "RU Monotype",
+		section: "Monotype",
+
+		ruleset: ['UU', 'Same Type Clause'],
+		banlist: ['UU', 'BL2']
+	},
+	{
+		name: "LC Monotype",
+		section: "Monotype",
+
+		maxLevel: 5,
+		ruleset: ['Pokemon', 'Standard', 'Little Cup', 'Same Type Clause'],
+		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar']
 	},
 
 	// Past Generations

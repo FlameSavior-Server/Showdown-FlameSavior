@@ -2033,8 +2033,8 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 	  	if (!this.canTalk()) return;
 	  	if (room.id !== 'casino') return this.sendReplyBox('This command can only be used in <button name="send" value="/join casino" target="_blank">The Casino</button>.');
-		if (Users.get(''+user.name+'').money < target) {
-			return this.sendReply('You cannot wager more than you have, nub.');
+		if (Users.get(''+user.name+'').money < 5 && target >5) {
+			return this.sendReply('Beep! You are allowed only a 5 buck credit!');
 		}
 		if(!target) return this.sendReply('/wager [amount of bucks agreed to wager].');
 		if (isNaN(target)) {

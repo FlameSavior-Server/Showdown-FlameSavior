@@ -143,7 +143,8 @@
  * @license MIT license
  */
 
-
+var closeCasino = false
+var closedCasino = 0;
 var commands = exports.commands = {
 
 	ip: 'whois',

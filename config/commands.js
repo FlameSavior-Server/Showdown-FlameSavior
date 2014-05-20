@@ -3882,7 +3882,15 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/leaguestatus - View whether the league you are in is open or closed to challengers.');
 		}
-    		// Driver commands
+		if (target === 'all' || target === 'ud' || target === 'u') {
+			matched = true;
+			this.sendReply('/ud <phrase> - Looks up a word on urbandictionary.com');
+		}
+		if (target === 'all' || target === 'define' || target === 'def') {
+			matched = true;
+			this.sendReply('/define <word> - Displays the definition of the specified word.');
+		}
+    	// Driver commands
     	if (target === '%' || target === 'unlink') {
     			matched = true;
     			this.sendReply('/unlink [username] - Prevents users from clicking on any links [username] has posted. Requires: % @ & ~')
@@ -4153,7 +4161,7 @@ var commands = exports.commands = {
 		}
 		if (!target) {
 			this.sendReply('COMMANDS: /msg, /reply, /ignore, /ip, /rating, /nick, /avatar, /rooms, /whois, /help, /away, /back, /timestamps, /highlight, /poof');
-			this.sendReply('INFORMATIONAL COMMANDS: /data, /dexsearch, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /time, /recordusers, /tourstats, /calc (replace / with ! to broadcast. (Requires: + % @ & ~))');
+			this.sendReply('INFORMATIONAL COMMANDS: /data, /dexsearch, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /time, /recordusers, /tourstats, /calc, /ud, /define (replace / with ! to broadcast. (Requires: + % @ & ~))');
 			this.sendReply('For details on all room commands, use /roomhelp');
 			this.sendReply('For details on all commands, use /help all');
 			if (user.vip) {

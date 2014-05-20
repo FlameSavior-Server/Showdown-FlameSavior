@@ -2026,6 +2026,48 @@ var commands = exports.commands = {
 	},
 	*/
 	
+		closecasinop: function(target, room, user) {
+		if (!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+
+		if(closeClasino && closedCasino === 1) closedCasino--;
+
+		if (closeClasino ) {
+			return this.sendReply('The casino is already closed. Use /opencasino to open the casino to users.');
+		}
+		else if (!closeClasino) {
+			if (closeClasino === 0) {
+				this.sendReply('Are you sure you want to close the casino? People will not be able to gamble. If you do, use the command again.');
+				closeClasino ++;
+			}
+			else if (closeClasino === 1) {
+				closeClasino = true;
+				closeClasino --;
+				this.add('|raw|<center><h4><b>The Casino has been temporarily closed, during this time you cannot gamble.</b></h4></center>');
+			}
+		}
+	},
+
+	opencasino: function(target, room, user) {
+		if (!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+
+		if (!closeClasino && closeClasino === 1) closeClasino--;
+
+		if (!closeClasino) {
+			return this.sendRepy('The shop is already closed. Use /openshop to close the shop to buyers.');
+		}
+		else if (closeClasino) {
+			if (closeClasino === 0) {
+				this.sendReply('Are you sure you want to open the casino? People will be able to gamble again. If you do, use the command again.');
+				closeClasino++;
+			}
+			else if (closeClasino === 1) {
+				closeClasino = false;
+				closeClasino --;
+				this.add('|raw|<center><h4><b>The Casino has been opened, you can now gamble.</b></h4></center>');
+			}
+		}
+	},
+	
 	freebuck: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 	  	if (!this.canTalk()) return;
@@ -2038,6 +2080,7 @@ var commands = exports.commands = {
 		if (Users.get(''+user.name+'').money <= -1) {
 			return this.sendReply('I\'m sorry, I cannot help you if you have negitive bucks. :I');
 		}
+		if (closeCasino) return this.sendReply('|raw|<center><h3><b>The Casino is currently closed and will open shortly.</b></h3></center>');
 	},
 	
 	gamble: 'dicegame',
@@ -2073,6 +2116,7 @@ var commands = exports.commands = {
 		if (rand === 2) {
 		return this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
 		}
+		if (closeCasino) return this.sendReply('|raw|<center><h3><b>The Casino is currently closed and will open shortly.</b></h3></center>');
 	},
 	
 	helixfossil: 'm8b',

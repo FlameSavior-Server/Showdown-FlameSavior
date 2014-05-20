@@ -1048,6 +1048,13 @@ exports.Formats = [
 		banlist: ['UU', 'BL2']
 	},
 	{
+		name: "NU Monotype",
+		section: "Monotype",
+
+		ruleset: ['RU (beta)', 'Same Type Clause'],
+		banlist: ['RU', 'BL3']
+	},
+	{
 		name: "LC Monotype",
 		section: "Monotype",
 

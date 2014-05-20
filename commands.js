@@ -514,11 +514,11 @@ var commands = exports.commands = {
 	},
 	cs: 'customsymbol',
 	customsymbol: function(target, room, user) {
-		if(!user.canCustomSymbol) return this.sendReply('You don\'t have the permission to use this command.');
-  		//var free = true;
+		//if(!user.canCustomSymbol) return this.sendReply('You don\'t have the permission to use this command.');
+  		var free = true;
   		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
  		if (!this.canTalk()) return;
-  		//if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
+  		if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
   		if(!target || target.length > 1) return this.sendReply('/customsymbol [symbol] - changes your symbol (usergroup) to the specified symbol. The symbol can only be one character');
   		var a = target;
   		if (a === "+" || a === "$" || a === "%" || a === "@" || a === "&" || a === "~" || a === "#" || a === "a" || a === "b" || a === "c" || a === "d" || a === "e" || a === "f" || a === "g" || a === "h" || a === "i" || a === "j" || a === "k" || a === "l" || a === "m" || a === "n" || a === "o" || a === "p" || a === "q" || a === "r" || a === "s" || a === "t" || a === "u" || a === "v" || a === "w" || a === "x" || a === "y" || a === "z" || a === "A" || a === "B" || a === "C" || a === "D" || a === "E" || a === "F" || a === "G" || a === "H" || a === "I" || a === "J" || a === "K" || a === "L" || a === "M" || a === "N" || a === "O" || a === "P" || a === "Q" || a === "R" || a === "S" || a === "T" || a === "U" || a === "V" || a === "W" || a === "X" || a === "Y" || a === "Z" || a === "0" || a === "1" || a === "2" || a === "3" || a === "4" || a === "5" || a === "6" || a === "7" || a === "8" || a === "9" || a === "Ã¥ÂÂ" ) {

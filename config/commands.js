@@ -2027,7 +2027,7 @@ var commands = exports.commands = {
 	},
 	*/
 	
-		closecasinop: function(target, room, user) {
+	closecasino: function(target, room, user) {
 		if (!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
 
 		if(closeClasino && closedCasino === 1) closedCasino--;

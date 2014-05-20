@@ -2031,7 +2031,7 @@ var commands = exports.commands = {
 	  	if (!this.canTalk()) return;
 	  	if (room.id !== 'casino') return this.sendReplyBox('This command can only be used in <button name="send" value="/join casino" target="_blank">The Casino</button>.');
 		if (Users.get(''+user.name+'').money === 0) {
-			return this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');		}
+			return this.add('|c|~GoldBucks|.custom /tb '+user.name+',1');		}
 		else {
 			return this.sendReplyBox('You can only get a buck if you don\'t have any, ya nub.');
 		}

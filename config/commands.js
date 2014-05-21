@@ -1484,6 +1484,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	razxr: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://fc08.deviantart.net/fs71/f/2014/080/9/8/avalugg_gif_2_by_gloomymyth-d7b51o2.gif">' +
+                '<img src="http://i.imgur.com/g7p6FDN.png">' +
+                '<img src="http://i.imgur.com/xvXmCYL.png"><br />' +
+                '<b>Ace:</b> Avalugg<br />' +
+                'Nothing burns like the cold.</center>');
+    	},
+	
 	kimiko: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/2QMVuIq.jpg" height="180">' +

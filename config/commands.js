@@ -178,7 +178,7 @@ var commands = exports.commands = {
 			this.sendReply('(Gold Development Staff)');
 		}
 		if (targetUser.goldVip) {
-			this.sendReply('|html|''(<font color="gold">VIP</font> User)');
+			this.sendReply('|html|(<font color="gold">VIP</font> User)');
 		}
 		if (targetUser.isSysop) {
 			this.sendReply("(Pok\xE9mon Showdown System Operator)");

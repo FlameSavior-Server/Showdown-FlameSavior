@@ -340,7 +340,7 @@ var commands = exports.commands = {
 	
 	tierpoll: 'tiervote',
 	tiervote: function(target, room, user){
-		return this.parse('/poll Tournament Tier?, randombattle, cc1v1, 1v1, gen51v1, uu, gen5uu, nu, ru, lc, gen5lc, cap, ou, gen5ou, ou monotype, gen5mono, balanced hackmons, hackmons, ubers, doubles, gen5doubles, challenge cup, perseverance, seasonal, inverse, alphabet cup, ou theorymon, sky battles, stabmons, pu, middle cup');
+		return this.parse('/poll Tournament Tier?, randombattle, randommono, cc1v1, 1v1, gen51v1, uu, gen5uu, nu, ru, lc, gen5lc, cap, ou, gen5ou, ou monotype, gen5mono, balanced hackmons, hackmons, ubers, doubles, gen5doubles, challenge cup, perseverance, seasonal, inverse, alphabet cup, ou theorymon, sky battles, stabmons, pu, middle cup');
 	},
 
 	hallowme: function(target, room, user){

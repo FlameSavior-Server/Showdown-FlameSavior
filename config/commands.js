@@ -3539,6 +3539,11 @@ var commands = exports.commands = {
 	 * Miscellaneous commands
 	 *********************************************************/
 	
+	leagues: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center>Looking for challengers or members for your league? Post about it <a href="http://frostserver.net/forums/forumdisplay.php?fid=18">here!</a><center>');
+    	},
+	
 	frostradio : 'radio', 
     	radio: function(target, room, user) {
     	if (!this.canBroadcast()) return;

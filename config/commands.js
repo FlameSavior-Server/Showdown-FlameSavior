@@ -888,7 +888,7 @@ var commands = exports.commands = {
 		);
 	},
 
-//Trainer Cards.
+		//Trainer Cards.
 	
 	pan: 'panpawn',
 	panpawn: function(target, room, user) {
@@ -899,62 +899,72 @@ var commands = exports.commands = {
                 '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
                 '<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
     	},
+    	
     	mrbug: 'bug',
 	bug: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><font size="5" color="darkgreen">Mr. Bug</font><br />' +
-		'<img src="http://media.pocketmonsters.net/characters/2127.png" width="40%" align="left"></img>'+ 
-		'<img src="https://1-media-cdn.foolz.us/ffuuka/board/vp/thumb/1379/30/1379304844529s.jpg" width="40%" align="right"></img><br />' +
+		'<img src="http://media.pocketmonsters.net/characters/2127.png" width="40%" align="left">'+ 
+		'<img src="https://1-media-cdn.foolz.us/ffuuka/board/vp/thumb/1379/30/1379304844529s.jpg" width="40%" align="right"><br />' +
 		'<img src="http://fc01.deviantart.net/fs70/i/2011/341/9/8/kricketot_by_nami_tsuki-d4if7lr.png" width="35%"><br />' +
 		'"delelele woooooop"<br />' +
 		'Ace: kriketot</center>');
     	},
+    	
     	comet: 'sunako',
 	cometstorm: 'sunako',
 	sunako: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/3uyLxHC.png"><br><font color = "0F055C"><b><i>I came from the storm.');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/3uyLxHC.png"><br />
+        	'<font color = "0F055C"><b><i>I came from the storm.</center>');
 	},
+    	
     	popcorn: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://www.allgeekthings.co.uk/wp-content/uploads/Popcorn.gif">');
+        this.sendReplyBox('<center><img src="http://www.allgeekthings.co.uk/wp-content/uploads/Popcorn.gif"></center>');
 	},
+	
 	sand: 'sandshrewed',
 	sandshrewed: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/M5vKJeP.png" width="100%"><br>' +
-        	'<img src="http://i.imgur.com/AMkFFwe.jpg" width="30%"><br>' +
-                'Ace: Gengar<br>' +
-                '<font color=66CCFF>Don\'t need luck, got skill</font>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/M5vKJeP.png" width="100%"><br />' +
+        	'<img src="http://i.imgur.com/AMkFFwe.jpg" width="30%"><br />' +
+                'Ace: Gengar<br />' +
+                '<font color=66CCFF>Don\'t need luck, got skill</font></center>');
 	},
+    	
     	destiny: 'itsdestiny',
 	itsdestiny: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="4" color="green"><b>It$de$tiny</b></font><br>' +
-		'<img src="http://www.icleiusa.org/blog/library/images-phase1-051308/landscape/blog-images-90.jpg" width="55%">    <img src="http://mindmillion.com/images/money/money-background-seamless-fill-bluesky.jpg" width="35%"><br>' +
-		'It ain\'t luck, it\'s destiny.');
+        this.sendReplyBox('<center><font size="4" color="green"><b>It$de$tiny</b></font><br />' +
+		'<img src="http://www.icleiusa.org/blog/library/images-phase1-051308/landscape/blog-images-90.jpg" width="55%"><img src="http://mindmillion.com/images/money/money-background-seamless-fill-bluesky.jpg" width="35%"><br />' +
+		'It ain\'t luck, it\'s destiny.</center>');
 	},
+    	
     	miah: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="3" color="orange"><b>Miah<br>' +
-		'<img src="https://i.imgur.com/2RHOuPi.gif" width="50%"><img src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-frc1/t1.0-9/1511712_629640560439158_8415184400256062344_n.jpg" width="50%"><br></font></b>' +
-		'Ace: Gliscor<br>Catch phrase: Adding Euphemisms to Pokemon');
+        this.sendReplyBox('<center><font size="3" color="orange"><b>Miah</font></b><br />' +
+		'<img src="https://i.imgur.com/2RHOuPi.gif" width="50%"><img src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-frc1/t1.0-9/1511712_629640560439158_8415184400256062344_n.jpg" width="50%"><br />' +
+		'Ace: Gliscor<br>Catch phrase: Adding Euphemisms to Pokemon</center>');
 	},
+	
 	drag: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="5" color="red">Akely</font><br>' +
-		'<img src="http://gamesloveres.com/wp-content/uploads/2014/03/cute-pokemon-charmandercharmander-by-inversidom-riot-on-deviantart-llfutuct.png" width="25%"><br>' +
-		'Ace: Charizard<br>' +
-		'"Real mens can cry but real mens doesn\'t give up."');
+        this.sendReplyBox('<center><font size="5" color="red">Akely</font><br />' +
+		'<img src="http://gamesloveres.com/wp-content/uploads/2014/03/cute-pokemon-charmandercharmander-by-inversidom-riot-on-deviantart-llfutuct.png" width="25%"><br />' +
+		'Ace: Charizard<br />' +
+		'"Real mens can cry but real mens doesn\'t give up."</center>');
 	},
+    	
     	kricketune: 'kriсketunе',
 	kriсketunе: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/VPcZ1rC.png"><br>' +
-		'<img src="http://i.imgur.com/NKGYqpn.png" width="50%"><br>' +
-		'Ace: Donnatello<br>' +
-		'"At day I own the streets, but at night I own the closet..."');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/VPcZ1rC.png"><br />' +
+		'<img src="http://i.imgur.com/NKGYqpn.png" width="50%"><br />' +
+		'Ace: Donnatello<br />' +
+		'"At day I own the streets, but at night I own the closet..."</center>');
 	},
+	
 	crowt: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><div class="infobox"><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80" align="left">' +
@@ -964,102 +974,92 @@ var commands = exports.commands = {
                 '<div class="infobox"><b><font color="#4F86F7" size="3">Ace:</font></b> <font color="blue" size="3">G</font><font color="black" size="3">r</font><font color="blue" size="3">e</font><font color="black" size="3">n</font><font color="blue" size="3">i</font><font color="black" size="3">n</font><font color="blue" size="3">j</font><font color="black" size="3">a</font></font><br />' +
                 '<font color="black">"It takes a great deal of <b>bravery</b> to <b>stand up to</b> our <b>enemies</b>, but just as much to stand up to our <b>friends</b>." - Dumbledore</font></center></div>');
 	},                     
+    	
     	ransu: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/kWaZd66.jpg" width="40%"><br>Develop a passion for learning. If you do, you will never cease to grow.');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/kWaZd66.jpg" width="40%"><br />
+        	'Develop a passion for learning. If you do, you will never cease to grow.</center>');
     	},
-    	panbox: function(target, room, user) {
+    	
+    	jessie: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>Panpawn\'s Music Box!</b><br>' +
-        	'<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"></center><br>' +
-		'1. <a href="https://www.youtube.com/watch?v=EJR5A2dttp8"><button title="Let It Go - Connie Talbot cover">Let It Go - Connie Talbot cover</a></button><br>' +
-		'2. <a href="https://www.youtube.com/watch?v=Y2Ta0qCG8No"><button title="Crocodile Rock - Elton John">Crocodile Rock - Elton John</a></button><br>' +
-		'3. <a href="https://www.youtube.com/watch?v=ZA3vZwxnKnE"><button title="My Angel Gabriel - Lamb">My Angel Gabriel - Lamb</a></button><br>' +
-		'4. <a href="https://www.youtube.com/watch?v=y8AWFf7EAc4"><button title="Hallelujah - Jeff Buckley">Hallelujah - Jeff Buckley</a></button><br>' +
-		'5. <a href="https://www.youtube.com/watch?v=aFIApXs0_Nw"><button title="Better Off Dead - Elton John">Better Off Dead - Elton John</a></button><br>' +
-		'6. <a href="https://www.youtube.com/watch?v=eJLTGHEwaR8"><button title="Your Song - Carly Rose Sonenclar cover">Your Song - Carly Rose Sonenclar cover</a></button>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/420CAz0.png"><br />' +
+                '<img src="http://i.imgur.com/9ERgTNi.png"><br />' +
+                'Catch phrase: I\'m from Jakarta ah ah</center>');
 	},
-	cabox: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>CoolAsian\'s Music Box!</b><br>' +
-        //This is an image of a music note! (line bellow)
-                '<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"></center><br>' +
-                '1. <a href="http://youtu.be/UU8xKUoH_lU"><button title="Parkway Drive - Wild Eyes [Lyrics] [HD]">Parkway Drive - Wild Eyes [Lyrics] [HD]</a></button><br>' +
-                '2. <a href="http://youtu.be/fOLqEOK_wLc"><button title="System Of A Down - B.Y.O.B.">System Of A Down - B.Y.O.B.</a></button><br>' +
-		'3. <a href="http://youtu.be/312Sb-2PovA"><button title="SUICIDE SILENCE - You Only Live Once">SUICIDE SILENCE - You Only Live Once</a></button><br>' +
-		'4. <a href="http://youtu.be/pUA-4WCXn5o"><button title="Atreyu - Demonology and Heartache">Atreyu - Demonology and Heartache</a></button><br>' +
-		'5. <a href="http://youtu.be/zUq8I4JTOZU"><button title="Muse - Assassin (Grand Omega Bosses Edit)">Muse - Assassin (Grand Omega Bosses Edit)</a></button><br>' +
-		'6. <a href="http://youtu.be/a89Shp0YhR8"><button title="A Day to Remember - I\'m Made of Wax, Larry, What Are You Made Of?">A Day to Remember - I\'m Made of Wax, Larry, What Are You Made Of?</a></button><br>');
-	},
-	jessie: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/420CAz0.png"><br>' +
-                '<img src="http://i.imgur.com/9ERgTNi.png"><br>' +
-                'Catch phrase: I\'m from Jakarta ah ah');
-	},
-	lazerbox: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>lazerbeam\'s Music Box!</b><br>' +
-                '<center><img src="http://www.clipartbest.com/cliparts/ncE/eXz/ncEeXzpcA.svg" align="right" width="10%"></center><br>' +
-                '1. <a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ"><button title="Bohemian Rhapsody - Queen">Bohemian Rhapsody - Queen</a></button><br>' +
-                '2. <a href="https://www.youtube.com/watch?v=ZNaA7fVXB28"><button title="Against the Wind - Bob Seger">Against the Wind -  Bob Seger</a></button><br>' +
-                '3. <a href="https://www.youtube.com/watch?v=TuCGiV-EVjA"><button title="Livin\' on the Edge - Aerosmith">Livin\' on the Edge - Aerosmith</a></button><br>' +
-                '4. <a href="https://www.youtube.com/watch?v=QZ_kYEDZVno"><button title="Rock and Roll Never Forgets - Bob Seger">Rock and Roll Never Forgets - Bob Seger</a></button><br>' +
-                '5. <a href="https://www.youtube.com/watch?v=GHjKEwV2-ZM"><button title="Jaded - Aerosmith">Jaded - Aerosmith</a></button>');
-	},
+    	
     	berry: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://blog.flamingtext.com/blog/2014/04/02/flamingtext_com_1396402375_186122138.png" width="50%"><br>' +
-                '<img src="http://50.62.73.114:8000/avatars/theberrymaster.gif"><br>' +
-                'Cherrim-Sunshine<br>' +
-                'I don\'t care what I end up being as long as I\'m a legend.');
-    	},        
+        this.sendReplyBox('<center><img src="http://blog.flamingtext.com/blog/2014/04/02/flamingtext_com_1396402375_186122138.png" width="50%"><br />' +
+                '<img src="http://50.62.73.114:8000/avatars/theberrymaster.gif"><br />' +
+                'Cherrim-Sunshine<br />' +
+                'I don\'t care what I end up being as long as I\'m a legend.</center>');
+    	},
+    	
     	moist: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://fc04.deviantart.net/fs70/i/2010/338/6/3/moister_by_arvalis-d347xgw.jpg" width="50%">');
+        this.sendReplyBox('<center><img src="http://fc04.deviantart.net/fs70/i/2010/338/6/3/moister_by_arvalis-d347xgw.jpg" width="50%"></center>');
 	},
+    	
     	spydreigon: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/57drGn3.jpg" width="75%"><br>' +
-                '<img src="http://fc00.deviantart.net/fs70/f/2013/102/8/3/hydreigon___draco_meteor_by_ishmam-d61irtz.png" width="75%"><br>' +
-                'You wish you were as badass as me');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/57drGn3.jpg" width="75%"><br />' +
+                '<img src="http://fc00.deviantart.net/fs70/f/2013/102/8/3/hydreigon___draco_meteor_by_ishmam-d61irtz.png" width="75%"><br />' +
+                'You wish you were as badass as me</center>');
 	},
+    	
     	mushy: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="3" color="purple">Mushy</font><br>' +
-		'<img src="http://i.imgur.com/yK6aCZH.png"><br>' +
-		'Life often causes us pain, so I try to fill it up with pleasure instead. Do you want a taste? ;)');
+        this.sendReplyBox('<center><font size="3" color="purple">Mushy</font><br />' +
+		'<img src="http://i.imgur.com/yK6aCZH.png"><br />' +
+		'Life often causes us pain, so I try to fill it up with pleasure instead. Do you want a taste? ;)</center>');
 	},
+	
 	furgo: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/0qJzTgP.gif" width="25%"><br><font color="red">Ace:</font><br><img src="http://amethyst.xiaotai.org:2000/avatars/furgo.gif"><br>When I\'m sleeping, do not poke me. :I');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/0qJzTgP.gif" width="25%"><br />' +
+		'<font color="red">Ace:</font><br />' +
+		'<img src="http://amethyst.xiaotai.org:2000/avatars/furgo.gif"><br />' +
+		'When I\'m sleeping, do not poke me. :I</center>');
 	},
+	
 	blazingflareon: 'bf',
 	bf: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/h3ZTk9u.gif"><br><img src="http://fc08.deviantart.net/fs71/i/2012/251/3/f/flareon_coloured_lineart_by_noel_tf-d5e166e.jpg" width="25%"><br><font size="3" color="red"><u><b><i>DARE TO DREAM');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/h3ZTk9u.gif"><br />' +
+		'<img src="http://fc08.deviantart.net/fs71/i/2012/251/3/f/flareon_coloured_lineart_by_noel_tf-d5e166e.jpg" width="25%"><br />' +
+		'<font size="3" color="red"><u><b><i>DARE TO DREAM</font></u></i></b></center>');
 	},
+	
 	mikado: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/oS2jnht.gif"><br><img src="http://i.imgur.com/oKEA0Om.png"');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/oS2jnht.gif"><br />' +
+		'<img src="http://i.imgur.com/oKEA0Om.png"></center>');
 	},
+	
 	dsg:'darkshinygiratina',
 	darkshinygiratina: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="4" color="blue" face="arial">DarkShinyGiratina</font><br><img src="http://i.imgur.com/sBIqMv8.gif"><br>I\'m gonna use Shadow Force on you!');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><font size="4" color="blue" face="arial">DarkShinyGiratina</font><br />' +
+		'<img src="http://i.imgur.com/sBIqMv8.gif"><br />' +
+		'I\'m gonna use Shadow Force on you!</center>');
 	},
+	
 	archbisharp: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/ibC46tQ.png"><br><img src="http://fc07.deviantart.net/fs70/f/2012/294/f/c/bisharp_by_xdarkblaze-d5ijnsf.gif" width="350" hieght="350"><br></font><b>Ruling you with an Iron Head.');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/ibC46tQ.png"><br />' +
+		'<img src="http://fc07.deviantart.net/fs70/f/2012/294/f/c/bisharp_by_xdarkblaze-d5ijnsf.gif" width="350" hieght="350"><br />' +
+		'<b>Ruling you with an Iron Head.</b></center>');
 	},
+	
 	chimplup: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Chimplup</b> - The almighty ruler of chimchars and piplups alike, also likes pie.<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>Chimplup</b> - The almighty ruler of chimchars and piplups alike, also likes pie.</center>');
 	},
 
 	shephard: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Shephard</b> - King Of Water and Ground types.<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>Shephard</b> - King Of Water and Ground types.</center>');
 	},
 
 	logic: 'psychological',
@@ -1075,122 +1075,210 @@ var commands = exports.commands = {
         },
 
 	seed: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Seed</b> - /me plant and water<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>Seed</b> - /me plant and water</center>');
 	},
 
 	auraburst: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="orange"><font size="2"><img src="http://i.imgur.com/9guvnD7.jpg">   <b>Aura Butt</b><font size="orange"><font size="2"> - Nick Cage.   <img src="http://i.imgur.com/9guvnD7.jpg"><br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/9guvnD7.jpg">' +
+		'<font color="orange"><font size="2"><b>Aura Butt</b> - Nick Cage.</font>' +   
+		'<img src="http://i.imgur.com/9guvnD7.jpg"></center>');
 	},
 
 	leo: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Leonardo DiCaprio</b> - Mirror mirror on the wall, who is the chillest of them all?<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>Leonardo DiCaprio</b> - Mirror mirror on the wall, who is the chillest of them all?</center>');
 	},
+	
 	kupo: 'moogle',
 	moogle: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://50.62.73.114:8000/avatars/kupo.png"><br><b>Kupo</b> - abc!<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://50.62.73.114:8000/avatars/kupo.png"><br />' +
+		'<b>Kupo</b> - abc!</center>');
 	},
 
 	starmaster: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Starmaster</b> - Well what were you expecting. Master of stars. Duh<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>Starmaster</b> - Well what were you expecting. Master of stars. Duh</center>');
 	},
 
 	ryun: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Ryun</b> - Will fuck your shit up with his army of Gloom, Chimecho, Duosion, Dunsparce, Plusle and Mr. Mime<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>Ryun</b> - Will fuck your shit up with his army of Gloom, Chimecho, Duosion, Dunsparce, Plusle and Mr. Mime</center>');
 	},
+	
 	miikasa: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs70/f/2010/330/2/0/cirno_neutral_special_by_generalcirno-d33ndj0.gif"><br><font color="purple"><font size="2"><b>Miikasa</b><font color="purple"><font size="2"> - There are no buses in Gensokyo.<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs70/f/2010/330/2/0/cirno_neutral_special_by_generalcirno-d33ndj0.gif"><br />' +
+		'<font color="purple"><font size="2"><b>Miikasa</b></font>' +
+		'<font color="purple"><font size="2"> - There are no buses in Gensokyo.</center></font>');
 	},
+	
 	poliii: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/GsI3Y75.jpg"><br><font color="blue"><font size="2"><b>Poliii</b><font color="blue"><font size="2"> -  Greninja is behind you.<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/GsI3Y75.jpg"><br />' +
+		'<font color="blue"><font size="2"><b>Poliii</b></font>' +
+		'<font color="blue"><font size="2"> -  Greninja is behind you.</font></center>');
 	},
+	
 	frozengrace: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>FrozenGrace</b> -  The gentle wind blows as the song birds sing of her vibrant radiance. The vibrant flowers and luscious petals dance in the serenading wind, welcoming her arrival for the epitome of all things beautiful.  Bow down to her majesty for she is the Queen. Let her bestow upon you as she graces you with her elegance. FrozenGrace, eternal serenity.<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>FrozenGrace</b> -  The gentle wind blows as the song birds sing of her vibrant radiance. The vibrant flowers and luscious petals dance in the serenading wind, welcoming her arrival for the epitome of all things beautiful.  Bow down to her majesty for she is the Queen. Let her bestow upon you as she graces you with her elegance. FrozenGrace, eternal serenity.</center>');
 	},
+	
 	awk: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Awk</b> - I have nothing to say to that!<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>Awk</b> - I have nothing to say to that!</center>');
 	},
+	
 	screamingmilotic: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>ScreamingMilotic</b> - The shiny Milotic that wants to take over the world.<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>ScreamingMilotic</b> - The shiny Milotic that wants to take over the world.</center>');
 	},
-	aikenká: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://fc05.deviantart.net/fs70/f/2010/004/3/4/Go_MAGIKARP_use_your_Splash_by_JoshR691.gif"><b><font size="2"><font color="blue">Aikenká</b><font size="2"><font color="blue"> - The Master of the imp.<img src="http://fc05.deviantart.net/fs70/f/2010/004/3/4/Go_MAGIKARP_use_your_Splash_by_JoshR691.gif"><br />');
+	
+	aikenka: function(target, room, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://fc05.deviantart.net/fs70/f/2010/004/3/4/Go_MAGIKARP_use_your_Splash_by_JoshR691.gif">' +
+		'<b><font size="2"><font color="blue">Aikenká</b><font size="2"></font>' +
+		'<font color="blue"> - The Master of the imp.</font>' +
+		'<img src="http://fc05.deviantart.net/fs70/f/2010/004/3/4/Go_MAGIKARP_use_your_Splash_by_JoshR691.gif"></center>');
 	},
+	
 	ipad: function(target, room, user) {
 	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><img src="http://i.imgur.com/miLUHTz.png"><br><b>iPood</b><br> - A total <font color="brown">pos</font> that panpawn will ban.<br><img src="http://i.imgur.com/miLUHTz.png"><br />');
+	this.sendReplyBox('<center><img src="http://i.imgur.com/miLUHTz.png"><br><b>iPood</b><br />' +
+		'A total <font color="brown">pos</font> that panpawn will ban.<br />' +
+		'<img src="http://i.imgur.com/miLUHTz.png"></center>');
 	},
+	
 	rhan: 'rohansound',
 	rohansound: function(target, room, user) {
 	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><font size="orange"><font size="2"><b>Rohansound</b><font size="orange"><font size="2"> - The master of the Snivy!<br />');
+	this.sendReplyBox('<center><font color="orange"><font size="2"><b>Rohansound</b>' +
+		'<font size="orange"><font size="2"> - The master of the Snivy!</center>');
 	},
+	
 	alittlepaw: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://fc00.deviantart.net/fs71/f/2013/025/5/d/wolf_dance_by_windwolf13-d5sq93d.gif"><br><font color="green"><font size="3"><b>ALittlePaw</b> - Fenrir would be proud.<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://fc00.deviantart.net/fs71/f/2013/025/5/d/wolf_dance_by_windwolf13-d5sq93d.gif"><br />' +
+		'<font color="green"><font size="3"><b>ALittlePaw</b> - Fenrir would be proud.</center>');
 	},
+	
 	smashbrosbrawl: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>SmashBrosBrawl</b> - Christian Bale<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><b>SmashBrosBrawl</b> - Christian Bale</center>');
 	},
+	
 	w00per: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/i3FYyoG.gif"><br><font size="2"><font color="brown"><b>W00per</b><font size="2"><font color="brown"> - "I CAME IN LIKE `EM WRECKIN` BALLZ!<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/i3FYyoG.gif"><br />' +
+		'<font size="2"><font color="brown"><b>W00per</b>' +
+		'<font size="2"><font color="brown"> - "I CAME IN LIKE `EM WRECKIN` BALLZ!</center>');
 	},
+	
 	empoleonxv: function(target, room, user) {
 	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><img src="http://i.imgur.com/IHd5yRT.gif"><br><img src="http://i.imgur.com/sfQsRlH.gif"><br><b><font color="33FFFF"><big>Smiling and Waving can\'t make you more cute than me!');
+	this.sendReplyBox('<center><img src="http://i.imgur.com/IHd5yRT.gif"><br />' +
+		'<img src="http://i.imgur.com/sfQsRlH.gif"><br />' +
+		'<b><font color="33FFFF"><big>Smiling and Waving can\'t make you more cute than me!</b></center>');
 	},
+	
 	foe: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://s21.postimg.org/durjqji4z/aaaaa.gif"><br><font size="2"><b>Foe</b><font size="2"> - Not a friend.<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://s21.postimg.org/durjqji4z/aaaaa.gif"><br />' +
+		'<font size="2"><b>Foe</b><font size="2"> - Not a friend.</center>');
 	},
+	
 	op: 'orangepoptarts',
 	orangepoptarts: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.jeboavatars.com/images/avatars/192809169066sunsetbeach.jpg"><br><b><font size="2">Orange Poptarts</b><font size="2"> - "Pop, who so you" ~ ALittlePaw<br />');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://www.jeboavatars.com/images/avatars/192809169066sunsetbeach.jpg"><br />' +
+		'<b><font size="2">Orange Poptarts</b><font size="2"> - "Pop, who so you" ~ ALittlePaw</center>');
 	},
+	
+	v: 'jackzero'
 	jack: 'jackzero',
         jackzero: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="4" color="aqua">JackZero<br></font><img src="http://i.imgur.com/cE6LTKm.png"><br>I prefer the freedom of being hated to the shackles of expectaional love.<br>"Half as long, twice as bright.."');
+        this.sendReplyBox('<center><font size="4" color="aqua">JackZero<br /></font>' +
+        	'<img src="http://i.imgur.com/cE6LTKm.png"><br />' +
+        	'I prefer the freedom of being hated to the shackles of expectaional love.</center>');
         },
+	
 	wd: 'windoge',
 	windoge: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/qYTABJC.jpg" width="400">');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/qYTABJC.jpg" width="400"></center>');
 	},
+	
 	party: 'dance',
 	dance: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://collegecandy.files.wordpress.com/2013/05/tumblr_inline_mhv5qyiqvk1qz4rgp1.gif" width="400">');
+		this.sendReplyBox('<center><img src="http://collegecandy.files.wordpress.com/2013/05/tumblr_inline_mhv5qyiqvk1qz4rgp1.gif" width="400"></center>');
 	},
+	
 	kayo: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="2"><b>Kayo</b><br>By the Beard of Zeus that Ghost was Fat<br><img src="http://i.imgur.com/rPe9hBa.png">');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><font size="2"><b>Kayo</b><br />' +
+		'By the Beard of Zeus that Ghost was Fat<br />' +
+		'<img src="http://i.imgur.com/rPe9hBa.png"></center>');
 	},
+	
 	saburo: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font color="red" size="5"><b>Saburo</font></b><br><img src="http://i.imgur.com/pYUt8Hf.gif"><br>The god of dance.');
+	if (!this.canBroadcast()) return;		
+	this.sendReplyBox('<center><font color="red" size="5"><b>Saburo</font></b><br />' +
+		'<img src="http://i.imgur.com/pYUt8Hf.gif"><br>The god of dance.</center>');
 	},
+	
 	gara: 'garazan',
 	nub: 'garazan',
 	garazan: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="6" face="comic sans ms"><font color="red">G<font color="orange">a<font color="yellow">r<font color="tan">a<font color="violet">z<font color="purple">a<font color="blue">n<br></font><img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150">');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><font size="6" face="comic sans ms"><font color="red">G<font color="orange">a<font color="yellow">r<font color="tan">a<font color="violet">z<font color="purple">a<font color="blue">n</font><br />' +
+		'<img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150"></center>');
 	},
-//End Trainer Cards.
+    	
+    			//Music Boxes
+    	
+    	panbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Panpawn\'s Music Box!</b><br />' +
+		'1. <a href="https://www.youtube.com/watch?v=EJR5A2dttp8"><button title="Let It Go - Connie Talbot cover">Let It Go - Connie Talbot cover</a></button><br />' +
+		'2. <a href="https://www.youtube.com/watch?v=Y2Ta0qCG8No"><button title="Crocodile Rock - Elton John">Crocodile Rock - Elton John</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=ZA3vZwxnKnE"><button title="My Angel Gabriel - Lamb">My Angel Gabriel - Lamb</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=y8AWFf7EAc4"><button title="Hallelujah - Jeff Buckley">Hallelujah - Jeff Buckley</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=aFIApXs0_Nw"><button title="Better Off Dead - Elton John">Better Off Dead - Elton John</a></button><br />' +
+		'6. <a href="https://www.youtube.com/watch?v=eJLTGHEwaR8"><button title="Your Song - Carly Rose Sonenclar cover">Your Song - Carly Rose Sonenclar cover</a></button>');
+	},
+	
+	cabox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>CoolAsian\'s Music Box!</b><br />' +
+                '1. <a href="http://youtu.be/UU8xKUoH_lU"><button title="Parkway Drive - Wild Eyes [Lyrics] [HD]">Parkway Drive - Wild Eyes [Lyrics] [HD]</a></button><br />' +
+                '2. <a href="http://youtu.be/fOLqEOK_wLc"><button title="System Of A Down - B.Y.O.B.">System Of A Down - B.Y.O.B.</a></button><br />' +
+		'3. <a href="http://youtu.be/312Sb-2PovA"><button title="SUICIDE SILENCE - You Only Live Once">SUICIDE SILENCE - You Only Live Once</a></button><br />' +
+		'4. <a href="http://youtu.be/pUA-4WCXn5o"><button title="Atreyu - Demonology and Heartache">Atreyu - Demonology and Heartache</a></button><br />' +
+		'5. <a href="http://youtu.be/zUq8I4JTOZU"><button title="Muse - Assassin (Grand Omega Bosses Edit)">Muse - Assassin (Grand Omega Bosses Edit)</a></button><br />' +
+		'6. <a href="http://youtu.be/a89Shp0YhR8"><button title="A Day to Remember - I\'m Made of Wax, Larry, What Are You Made Of?">A Day to Remember - I\'m Made of Wax, Larry, What Are You Made Of?</a></button>');
+	},
+	
+	
+	lazerbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>lazerbeam\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ"><button title="Bohemian Rhapsody - Queen">Bohemian Rhapsody - Queen</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=ZNaA7fVXB28"><button title="Against the Wind - Bob Seger">Against the Wind -  Bob Seger</a></button><br />' +
+                '3. <a href="https://www.youtube.com/watch?v=TuCGiV-EVjA"><button title="Livin\' on the Edge - Aerosmith">Livin\' on the Edge - Aerosmith</a></button><br />' +
+                '4. <a href="https://www.youtube.com/watch?v=QZ_kYEDZVno"><button title="Rock and Roll Never Forgets - Bob Seger">Rock and Roll Never Forgets - Bob Seger</a></button><br />' +
+                '5. <a href="https://www.youtube.com/watch?v=GHjKEwV2-ZM"><button title="Jaded - Aerosmith">Jaded - Aerosmith</a></button>');
+	},
+    	
+    	        
+    
+		//End Music Boxes.
+	
+	
 	avatars: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("Your avatar can be changed using the Options menu (it looks like a gear) in the upper right of Pokemon Showdown. Custom avatars are only obtainable by staff.");

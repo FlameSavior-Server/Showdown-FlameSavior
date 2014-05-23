@@ -154,7 +154,6 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply("User " + this.targetUsername + " not found.");
 		}
-
 		this.sendReply("User: " + targetUser.name);
 		if (user.can('alts', targetUser)) {
 			var alts = targetUser.getAlts();
@@ -205,12 +204,7 @@ var commands = exports.commands = {
 			if (targetUser.canForcerename) i += ' Forcerename'
 			this.sendReply('Eligible for: ' + i);
 		}
-		if (targetUser.canVIP) { 
-			var i = '';
-			if (targetUser.canVIP) i += '(VIP User)';
-			this.sendReply(i);
-		}
-		var output = 'In rooms: ';
+		var output = "In rooms: ";
 		var first = true;
 		for (var i in targetUser.roomCount) {
 			if (i === 'global' || Rooms.get(i).isPrivate) continue;
@@ -222,8 +216,9 @@ var commands = exports.commands = {
 		if (!targetUser.connected || targetUser.isAway) {
 			this.sendReply('|raw|This user is ' + ((!targetUser.connected) ? '<font color = "red">offline</font>.' : '<font color = "orange">away</font>.'));
 		}
-		this.sendReply('|raw|'+output);
+		this.sendReply('|raw|' + output);
 	},
+	
 	fork: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (!this.canTalk()) return;

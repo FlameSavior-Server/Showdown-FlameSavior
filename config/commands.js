@@ -915,7 +915,7 @@ var commands = exports.commands = {
 	cometstorm: 'sunako',
 	sunako: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/3uyLxHC.png"><br />
+        this.sendReplyBox('<center><img src="http://i.imgur.com/3uyLxHC.png"><br />' +
         	'<font color = "0F055C"><b><i>I came from the storm.</center>');
 	},
     	

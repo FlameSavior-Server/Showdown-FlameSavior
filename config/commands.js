@@ -977,7 +977,7 @@ var commands = exports.commands = {
     	
     	ransu: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/kWaZd66.jpg" width="40%"><br />
+        this.sendReplyBox('<center><img src="http://i.imgur.com/kWaZd66.jpg" width="40%"><br />' +
         	'Develop a passion for learning. If you do, you will never cease to grow.</center>');
     	},
     	

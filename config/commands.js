@@ -1197,7 +1197,6 @@ var commands = exports.commands = {
 		'<b><font size="2">Orange Poptarts</b><font size="2"> - "Pop, who so you" ~ ALittlePaw</center>');
 	},
 	
-	v: 'jackzero'
 	jack: 'jackzero',
         jackzero: function(target, room, user) {
         if (!this.canBroadcast()) return;

@@ -901,9 +901,9 @@ var commands = exports.commands = {
 	
 	cyllage: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://imgur.com/AUTOlch"><br />' +
-                '<img src="http://imgur.com/cvJYHFV"><br />' +
-                '<img src="http://imgur.com/3PWREBG"><br />' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/AUTOlch.png"><br />' +
+                '<img src="http://i.imgur.com/Pyev2QI.jpg"><br />' +
+                '<img src="http://i.imgur.com/02Y8dAA.png"><br />' +
                 'Ace: Volcarona<br />' +
                 'Catch phrase: Kindness is a virtue that should be expressed by everyone.</center>');
 	},

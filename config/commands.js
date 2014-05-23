@@ -890,6 +890,15 @@ var commands = exports.commands = {
 
 		//Trainer Cards.
 	
+	cyllage: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://imgur.com/AUTOlch"><br>' +
+                '<img src="http://imgur.com/cvJYHFV"><br />' +
+                '<img src="http://imgur.com/3PWREBG"><br />' +
+                'Ace: Volcarona<br />' +
+                'Catch phrase: Kindness is a virtue that should be expressed by everyone.</center>');
+	},
+	
 	pan: 'panpawn',
 	panpawn: function(target, room, user) {
         if (!this.canBroadcast()) return;

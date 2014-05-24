@@ -2168,7 +2168,7 @@ var commands = exports.commands = {
 		if (rand == 3) {
                 var jackpot = (target * 20);
 		results = this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!  That means they have won 20 times their wager!**'); 
-		results = this.add('|c|~GoldBucks|.choose /tb '+user.name+', '+jackpot+'');  
+		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+', '+jackpot+'');  
 		} 
                 return (results);
 	},

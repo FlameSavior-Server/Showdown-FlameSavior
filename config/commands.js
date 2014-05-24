@@ -2158,14 +2158,14 @@ var commands = exports.commands = {
 			return this.sendReply('Number cannot be 0.');
 		}
                 var results = '';
-		var rand = Math.floor(3 * Math.random()) + 1;
-		if (rand == 1) {
+		var rand = Math.floor(100 * Math.random()) + 1;
+		if (rand <= 50) {
 		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
 		}
-		if (rand == 2) {
+		if (rand >= 51) {
 		results = this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
 		}
-		if (rand == 3) {
+		if (rand == 100) {
                 var jackpot = (target * 20);
 		results = this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!  That means they have won 20 times their wager!**'); 
 		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+', '+jackpot+'');  

@@ -2169,7 +2169,7 @@ var commands = exports.commands = {
 		}
                 if (rand == 3) {
                 var jackpot = (target * 20);
-		return this.add('|c|~GoldBucks|.custom /tb'+user.name+','+jackpot+'');
+		return room.add('|c|~GoldBucks|.custom /tb'+user.name+','+jackpot+'');
 		}
 	},
         

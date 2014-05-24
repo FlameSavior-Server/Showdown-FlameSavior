@@ -2164,9 +2164,11 @@ var commands = exports.commands = {
 		if (rand == 2) {
 		return this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
 		}
+		if (rand == 3) {
+		return this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!**');
+		}
                 if (rand == 3) {
                 var jackpot = (target * 20);
-                return this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!**');
 		return this.add('|c|~GoldBucks|.custom /tb'+user.name+','+jackpot+'');
 		}
 	},

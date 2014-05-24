@@ -2160,16 +2160,17 @@ var commands = exports.commands = {
                 var results = '';
 		var rand = Math.floor(3 * Math.random()) + 1;
 		if (rand == 1) {
-		results = ('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
+		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
 		}
 		if (rand == 2) {
-		results = ('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
+		results = this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
 		}
 		if (rand == 3) {
                 var jackpot = (target * 20);
-		results = ('|c|~GoldBucks|**'+user.name+' has hit the jackpot!**'); ('|c|~GoldBucks|.choose /tb '+user.name+', '+jackpot+'');  
+		results = this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!  That means they have won 20 times their wager!**'); 
+		results = this.add('|c|~GoldBucks|.choose /tb '+user.name+', '+jackpot+'');  
 		} 
-                return this.add(results);
+                return (results);
 	},
         
 	

@@ -1593,7 +1593,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/svehUu0.gif">' +
                 '<img src="http://i.imgur.com/mgokdZJ.gif" width="100"><br />' +
                 '<b>Ace:</b> Potato<br />' +
-                'Makes you high.</center>');
+                'They see me haxin\' .. They rage quittin.</center>');
     	},
 	
 	ossified: function(target, room, user) {

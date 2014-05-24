@@ -1484,6 +1484,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	taiyoinferno: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/i5aDCqo.jpg" width="100">' +
+                '<img src="http://i.imgur.com/jKhJZ15.png" width="320">' +
+                '<img src="http://i.imgur.com/a9eyoRx.jpg" width="110"><br />' +
+                '<b>Ace:</b> Charizard<br />' +
+                'Be Like Fire No Stances Keep Moving, There Is No Opponent I Fight To Overcome my Weaknesses Like Fire Can Evaporate Or Burn Earth, Water Etc Be Like The Sun My Friend...And Then You Can Beat...Chuck Norris\' A** ..Maybe<br />' +
+                '<img src="http://i.imgur.com/Em93ycY.gif" height="80"></center>');
+    	},
+	
 	razxr: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://fc08.deviantart.net/fs71/f/2014/080/9/8/avalugg_gif_2_by_gloomymyth-d7b51o2.gif">' +

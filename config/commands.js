@@ -885,6 +885,16 @@ var commands = exports.commands = {
 
 		//Trainer Cards.
 	
+	solox: 'solstice',
+	equinox: 'solstice',
+	solstice: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/l4Jidxb.png"><br />' +
+                '<img src="http://i.imgur.com/S6oyP7H.jpg"><br />' +
+                'Sometimes I don\'t know why we\'d rather live than die,<br />' +
+                'We look up towards the skies for answers to our lives.');
+	},
+	
 	typhozzz: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img src="http://th08.deviantart.net/fs70/PRE/i/2011/111/e/5/typhlosion_by_sharkjaw-d3ehtqh.jpg" height="100" width="100">' +

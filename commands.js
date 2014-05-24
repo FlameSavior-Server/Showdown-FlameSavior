@@ -3299,6 +3299,8 @@ function getRandMessage(user){
 		break;
 		case 47: message = message + user + ' was thrown into the TV world by P4 Ka\'elbasa'; // bought by E4 Kael
 		break;
+		case 48: message = message + user + ' was accidentally killed in a shaving accident'; // bought by DeltaFlame
+		break;
 		default: message = message + user + ' bought a poisoned Pepsi!';
 	};
 	message = message + ' ~~';

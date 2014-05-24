@@ -1267,7 +1267,7 @@ var commands = exports.commands = {
     	vbox: 'jackbox',
 	jackbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>Jack\'s Music Box!</b><br />' +
+        this.sendReplyBox('<b>CoolAsian\'s Music Box!</b><br />' +
                 '1. <a href="https://www.youtube.com/watch?v=VRFCMM3bra8"><button title="Billy Talent - Viking Death March">Billy Talent - Viking Death March</a></button><br />' +
                 '2. <a href="https://www.youtube.com/watch?v=N3472Q6kvg0"><button title="Metal Gear Rising - Rules of Nature">Metal Gear Rising - Rules of Nature</a></button><br />' +
 		'3. <a href="https://www.youtube.com/watch?v=bVbk5I4wKSk"><button title="Sick Puppies - Riptide">Sick Puppies - Riptide</a></button><br />' +
@@ -2157,20 +2157,19 @@ var commands = exports.commands = {
 		if (target == 0) {
 			return this.sendReply('Number cannot be 0.');
 		}
-		var rand= Math.floor(3 * Math.random()) + 1;
+                var results = '';
+		var rand = Math.floor(3 * Math.random()) + 1;
 		if (rand == 1) {
-		return this.add('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
+		results = ('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
 		}
 		if (rand == 2) {
-		return this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
+		results = ('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
 		}
 		if (rand == 3) {
-		return this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!**');
-		}
-                if (rand == 3) {
                 var jackpot = (target * 20);
-		return room.add('|c|~GoldBucks|.custom /tb'+user.name+','+jackpot+'');
-		}
+		results = ('|c|~GoldBucks|**'+user.name+' has hit the jackpot!**'); ('|c|~GoldBucks|.choose /tb '+user.name+', '+jackpot+'');  
+		} 
+                return this.add(results);
 	},
         
 	

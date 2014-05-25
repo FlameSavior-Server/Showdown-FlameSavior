@@ -889,6 +889,7 @@ var commands = exports.commands = {
 				this.sendReply('You have purchased a trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
 				user.canTrainerCard = true;
 				this.add(user.name + ' has purchased a trainer card!');
+				Rooms.rooms.tailz.add(user.name + ' has purchased a trainer card!');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
@@ -900,6 +901,7 @@ var commands = exports.commands = {
 				this.sendReply('You have purchased a music box. You need to message an Admin capable of adding this (Panpawn / papew).');
 				user.canMusicBox = true;
 				this.add(user.name + ' has purchased a music box!');
+				Rooms.rooms.tailz.add(user.name + ' has purchased a music box!');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}

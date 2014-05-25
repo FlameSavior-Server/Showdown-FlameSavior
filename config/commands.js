@@ -2230,15 +2230,17 @@ var commands = exports.commands = {
                 var results = '';
 		var rand = Math.floor(200 * Math.random()) + 1;
 		if (rand <= 100) {
+		results = this.add('|c|'+user.name+'|I\'m gambling!');
 		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
 		}
 		if (rand >= 101) {
+		results = this.add('|c|'+user.name+'|I\'m gambling!');	
 		results = this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
 		}
 		if (rand == 200) {
                 var jackpot = (target * 20);
+                results = this.add('|c|'+user.name+'|I\'m gambling!');
 		results = this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!  That means they have won 20 times their wager! ('+jackpot+')**'); 
-		results = '|raw|<center><img src="http://assets.sbnation.com/assets/1216701/matador.gif">';
 		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+', '+jackpot+'');
 		} 
                 return (results);

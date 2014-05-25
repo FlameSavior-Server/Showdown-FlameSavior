@@ -2200,6 +2200,62 @@ var commands = exports.commands = {
 		}
 	},
 	
+		gambleoff: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		if (!this.can('gdeclare')) return false;
+		gamble = false; 
+	},
+	gambleon: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		if (!this.can('gdeclare')) return false;
+		gamble = true; 
+	},
+
+	gamble2: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+	  	if (!this.canTalk()) return;
+	  	if (room.id !== 'casino') return this.sendReplyBox('This command can only be used in <button name="send" value="/join casino" target="_blank">The Casino</button>.');
+		if (Users.get(''+user.name+'').money < target) {
+			return this.sendReply('You cant\'t wager more than you have, nub.');
+		}
+		if(!target) return this.sendReply('/wager [amount of bucks agreed to wager].');
+		if (isNaN(target)) {
+			return this.sendReply('Very funny, now use a real number.');
+		}
+		if (String(target).indexOf('.') >= 0) {
+			return this.sendReply('You cannot wager numbers with decimals.');
+		}
+		if (target < 0) {
+			return this.sendReply('Number cannot be negative.');
+		}
+		if (target > 1000) {
+			return this.sendReply('Error: You cannot wager over 1,000 bucks.');
+		}
+		if (target == 0) {
+			return this.sendReply('Number cannot be 0.');
+		}
+		if (gamble == 'false) {
+		results = sendReply('This command is off ATM.');
+		}
+		var gamble = true;
+                var results = '';
+		var rand = Math.floor(100 * Math.random()) + 1;
+		if (rand <= 50 || gamble = true) {
+		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
+		}
+		if (rand >= 51 || gamble = true) {
+		results = this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
+		}
+		if (rand == 100 || gamble = true) {
+                var jackpot = (target * 20);
+		results = this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!  That means they have won 20 times their wager! ('+jackpot+')**'); 
+		results = '|raw|<center><img src="http://assets.sbnation.com/assets/1216701/matador.gif">';
+		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+', '+jackpot+'');
+		} 
+                return (results);
+	},
+        
+	
 	gamble: 'dicegame',
 	wager: 'dicegame',
 	rollgame: 'dicegame',

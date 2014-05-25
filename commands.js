@@ -4527,21 +4527,25 @@ var commands = exports.commands = {
 		}, 10000);
 	},
 
-    restart: function(target, room, user) {
-        if (!this.can('lockdown')) return false;
+	restart: function(target, room, user) {
+		if (!this.can('lockdown')) return false;
+		try {
+			var forever = require('forever'); 
+		} catch(e) {
+			return this.sendReply('/restart requires the "forever" module.');
+		}
 
-        if (!Rooms.global.lockdown) {
-            return this.sendReply('For safety reasons, /restart can only be used during lockdown.');
-        }
+		if (!Rooms.global.lockdown) {
+			return this.sendReply('For safety reasons, /restart can only be used during lockdown.');
+		}
 
-        if (CommandParser.updateServerLock) {
-            return this.sendReply('Wait for /updateserver to finish before using /kill.');
-        }
-        this.logModCommand(user.name + ' used /restart');
-        var exec = require('child_process').exec;
-        exec('./restart.sh');
-        Rooms.global.send('|refresh|');
-    },
+		if (CommandParser.updateServerLock) {
+			return this.sendReply('Wait for /updateserver to finish before using /restart.');
+		}
+		this.logModCommand(user.name + ' used /restart');
+		Rooms.global.send('|refresh|');
+		forever.restart('app.js');
+	},
 
 
 	loadbanlist: function(target, room, user, connection) {

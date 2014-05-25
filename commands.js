@@ -2742,7 +2742,7 @@ var commands = exports.commands = {
                                         '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop164" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
 		}
 		if (target.toLowerCase() == "casino") {
-                        return connection.sendTo('casino','|html<center><img src="http://i.imgur.com/n3RCajz.gif" width="100%"></center><br />' +
+                        return connection.sendTo('casino','|html|<center><img src="http://i.imgur.com/n3RCajz.gif" width="100%"></center><br />' +
                                         '<b>Casino Commands List:</b><br />' +
                                         '/gamble [amount to wager] - Will do one of 3 things.  1.) Will give you that many more bucks. 2.) Will remove that many bucks. 3.) Will hit jackpot where you win 20 times your wager. (1% chance).<br />' +
                                         '/freebuck - Will give you a FREE buck if you have none.<br><br>' +

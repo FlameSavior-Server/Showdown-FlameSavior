@@ -2234,7 +2234,7 @@ var commands = exports.commands = {
 		if (target == 0) {
 			return this.sendReply('Number cannot be 0.');
 		}
-		if (gamble == 'false) {
+		if (gamble == 'false') {
 		results = sendReply('This command is off ATM.');
 		}
 		var gamble = true;

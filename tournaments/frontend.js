@@ -613,13 +613,16 @@ var Tournament = (function () {
 			secondBuck = 'buck';
 			if (firstMoney > 1) firstBuck = 'bucks';
 			if (secondMoney > 1) secondBuck = 'bucks';
-			economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+this.room.title+'.');
 			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
 			if (runnerUp) this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second!</b>');
 			economy.writeMoney('money', toId(winner), firstMoney, function(){
+				var newMoney = economy.readMoney('money', toId(winner));
+				economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+this.room.title+'. They now have '+newMoney);
 				if (runnerUp) {
-					economy.writeMoney('money', toId(runnerUp), secondMoney);
-					economy.logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'.');
+					economy.writeMoney('money', toId(runnerUp), secondMoney, function() {
+						var newMoney2 = economy.readMoney('money',toId(runnerup));
+						economy.logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney2);
+					});
 				}
 			});
 		}

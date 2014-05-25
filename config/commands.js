@@ -219,6 +219,70 @@ var commands = exports.commands = {
 		this.sendReply('|raw|' + output);
 	},
 	
+	aip: 'inprivaterooms',
+	awhois: 'inprivaterooms',
+	allrooms: 'inprivaterooms',
+	prooms: 'inprivaterooms',
+	adminwhois: 'inprivaterooms',
+	inprivaterooms: function(target, room, user) {
+	if (!this.can('seeprivaterooms')) return false;
+		var targetUser = this.targetUserOrSelf(target);
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+
+		this.sendReply('User: '+targetUser.name);
+		if (user.can('seeprivaterooms',targetUser)) {
+			var alts = targetUser.getAlts();
+			var output = '';
+			for (var i in targetUser.prevNames) {
+				if (output) output += ", ";
+				output += targetUser.prevNames[i];
+			}
+			if (output) this.sendReply('Previous names: '+output);
+
+			for (var j=0; j<alts.length; j++) {
+				var targetAlt = Users.get(alts[j]);
+				if (!targetAlt.named && !targetAlt.connected) continue;
+
+
+				this.sendReply('Alt: '+targetAlt.name);
+				output = '';
+				for (var i in targetAlt.prevNames) {
+					if (output) output += ", ";
+					output += targetAlt.prevNames[i];
+				}
+				if (output) this.sendReply('Previous names: '+output);
+			}
+		}
+		if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
+			this.sendReply('Group: ' + config.groups[targetUser.group].name + ' (' + targetUser.group + ')');
+		}
+		if (targetUser.isSysop) {
+			this.sendReply('(Pok\xE9mon Showdown System Operator)');
+		}
+		if (targetUser.goldDev) {
+			this.sendReply('(Gold Development Staff)');
+		}
+		if (!targetUser.authenticated) {
+			this.sendReply('(Unregistered)');
+		}
+		if (!this.broadcasting && (user.can('ip', targetUser) || user === targetUser)) {
+			var ips = Object.keys(targetUser.ips);
+			this.sendReply('IP' + ((ips.length > 1) ? 's' : '') + ': ' + ips.join(', '));
+		}
+		var output = 'In all rooms: ';
+		var first = false;
+		for (var i in targetUser.roomCount) {
+			if (i === 'global' || Rooms.get(i).isPublic) continue;
+			if (!first) output += ' | ';
+			first = false;
+
+			output += '<a href="/'+i+'" room="'+i+'">'+i+'</a>';
+		}
+		this.sendReply('|raw|'+output);
+	},
+
 	fork: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (!this.canTalk()) return;

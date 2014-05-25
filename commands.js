@@ -1632,6 +1632,18 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+artist+'    '+twinner+'    '+vip+' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
                 }
+                if (target === 'tailz') {
+                        matched = true;
+                        this.sendReplyBox('<b>Tailz </b>:   '+dev+'   '+comcun+'');
+                }
+                if (target === 'cyllage') {
+                        matched = true;
+                        this.sendReplyBox('<b>Cyllage </b>:   '+vip+'');
+                }
+                if (target === 'sincauster' || target === 'causter') {
+                        matched = true;
+                        this.sendReplyBox('<b>SiN Causter </b>:   '+vip+'');
+                }
                 if (target === 'shaymin') {
                         matched = true;
                         this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'   '+vip+'  '+league+'');
@@ -1656,9 +1668,9 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Garazan</b>:   '+comcun+'    '+league+'');
                 }
-                if (target === 'cometstorm') {
+                if (target === 'cometstorm' || target === 'sunako') {
                         matched = true;
-                        this.sendReplyBox('<b>Cometstorm</b>:   '+comcun+'    '+mod+'    '+leader+'');
+                        this.sendReplyBox('<b>Sunako</b>:   '+comcun+'    '+mod+'    '+leader+'');
                 }
                 if (target === 'pancakez') {
                         matched = true;
@@ -1682,7 +1694,7 @@ var commands = exports.commands = {
                 }
                  if (target === 'mushy') {
                         matched = true;
-                        this.sendReplyBox('<b>Mushy</b>:   '+comcun+'');
+                        this.sendReplyBox('<b>Mushy</b>:   '+comcun+'  '+leader+'');
                 }
                  if (target === 'chimplup') {
                         matched = true;

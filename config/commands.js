@@ -1484,6 +1484,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	naoto: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.twinfinite.net/wp-content/uploads/2012/05/23415-Naoto-546x310.jpg" width="120">' +
+    		'<img src="http://i.imgur.com/OjV5Lad.png" width="320">' +
+    		'<img src="http://s1.zerochan.net/Shirogane.Naoto.240.1235899.jpg" width="100"><br />' +
+    		'<b>Ace:</b> Meloetta<br />' +
+    		'That\'s what you get for not knowing your place.</center>');
+    	},
+	
 	taiyoinferno: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/i5aDCqo.jpg" width="100">' +
@@ -3287,7 +3296,7 @@ var commands = exports.commands = {
 	psychological: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center><img src="http://i.imgur.com/c4j9EdJ.png?1">' +
-                '<img src="http://i.imgur.com/tRRas7O.gif" width="200">' +  
+                '<img src="http://i.imgur.com/R3nj8i5.png" width="200">' +  
                 '<img src="http://i.imgur.com/TwpGsh3.png?1"><br />' +      
                 '<img src="http://i.imgur.com/1MH0mJM.png" height="90">' +
                 '<img src="http://i.imgur.com/TSEXdOm.gif" width="300">' +

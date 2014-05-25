@@ -1264,6 +1264,18 @@ var commands = exports.commands = {
     	
     			//Music Boxes
     	
+    	solstereo: 'skybox',
+    	equitrax: 'skybox',
+	skybox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Sky\'s Sound Track!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=MTe9G2m0Rmg&feature=youtu.be"><button title="Linkin Park - Faint">Linkin Park - Faint</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=oOFK5VMHQ4o&feature=youtu.be"><button title="Muse - Butterflies And Hurricanes">Muse - Butterflies And Hurricanes</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=Exsu5a-rvz0&feature=youtu.be"><button title="Eric Calderone - Requiem for a Dream Meets Meta">Eric Calderone - Requiem for a Dream Meets Meta</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=szn4xlykFhQ&feature=youtu.be"><button title="Avenged Sevenfold - Bat Country (Nightcore)">Avenged Sevenfold - Bat Country (Nightcore)</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=LxQagftrJLI&feature=youtu.be"><button title="Halcyonic Falcon X - Those Of Us Who Fight">Halcyonic Falcon X - Those Of Us Who Fight</a></button><br />');
+	},
+    	
     	vbox: 'jackbox',
 	jackbox: function(target, room, user) {
         if (!this.canBroadcast()) return;

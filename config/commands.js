@@ -883,7 +883,14 @@ var commands = exports.commands = {
 		);
 	},
 
-		//Trainer Cards.
+							//Trainer Cards.
+	
+	coolasian: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/HbZN3Jm.png"><br />' +
+                '<img src="http://i.imgur.com/PxPKnUs.jpg"><br />' +
+                'Scavenge. Slay. Survive.');
+	},
 	
 	solox: 'solstice',
 	equinox: 'solstice',

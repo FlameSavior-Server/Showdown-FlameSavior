@@ -832,7 +832,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target[0] === 'custom') {
-			price = 25;
+			price = 35;
 			if (price <= user.money) {
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .png format. ex: /buy custom, [url to the avatar]');
        				var filename = target[1].split('.');
@@ -852,7 +852,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target[0] === 'animated') {
-			price = 30;
+			price = 45;
 			if (price <= user.money) {
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .gif format. ex: /buy animated, [url to the avatar]');
        				var filename = target[1].split('.');
@@ -883,7 +883,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target2 === 'trainer') {
-			price = 35;
+			price = 60;
 			if (price <= user.money) {
 				user.money = user.money - price;
 				this.sendReply('You have purchased a trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
@@ -894,7 +894,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target2 === 'musicbox') {
-			price = 45;
+			price = 60;
 			if (price <= user.money) {
 				user.money = user.money - price;
 				this.sendReply('You have purchased a music box. You need to message an Admin capable of adding this (Panpawn / papew).');
@@ -905,7 +905,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target2 === 'fix') {
-			price = 10;
+			price = 15;
 			if (price <= user.money) {
 				user.money = user.money - price;
 				this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
@@ -927,7 +927,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (target2 === 'badge') {
-			price = 500;
+			price = 1000;
 			if (price <= user.money) {
 				user.money = user.money - price;
 				this.sendReply('You have purchased a VIP badge.');
@@ -970,15 +970,15 @@ var commands = exports.commands = {
 		} else 
 		return this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
-			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>25</td></tr>' +
-			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>30</td></tr>' +
+			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
+			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
 			'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
-			'<tr><td>Trainer</td><td>Buys <a href="http://pastebin.com/1GBmc4eM">a trainer card</a> which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>35</td></tr>' +
-			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>10</td></tr>' +
+			'<tr><td>Trainer</td><td>Buys <a href="http://pastebin.com/1GBmc4eM">a trainer card</a> which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
+			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>15</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>45</td></tr>' +
-			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND global voice!  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>500</td></tr>' +
+			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>60</td></tr>' +
+			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recomended for global voice!  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,000</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
 	},
@@ -986,15 +986,15 @@ var commands = exports.commands = {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
-			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>25</td></tr>' +
-			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>30</td></tr>' +
+			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
+			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
 			'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
-			'<tr><td>Trainer</td><td>Buys <a href="http://pastebin.com/1GBmc4eM">a trainer card</a> which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>35</td></tr>' +
-			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>10</td></tr>' +
+			'<tr><td>Trainer</td><td>Buys <a href="http://pastebin.com/1GBmc4eM">a trainer card</a> which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
+			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>15</td></tr>' +
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>45</td></tr>' +
-			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND global voice!  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>500</td></tr>' +
+			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>60</td></tr>' +
+			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recomended for global voice!  A VIP can change thier avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,000</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
 	},

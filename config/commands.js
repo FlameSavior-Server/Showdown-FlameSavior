@@ -2228,14 +2228,14 @@ var commands = exports.commands = {
 		}
 		
                 var results = '';
-		var rand = Math.floor(100 * Math.random()) + 1;
-		if (rand <= 50) {
+		var rand = Math.floor(200 * Math.random()) + 1;
+		if (rand <= 100) {
 		results = this.add('|c|~GoldBucks|.custom /tb '+user.name+','+target+'');
 		}
-		if (rand >= 51) {
+		if (rand >= 101) {
 		results = this.add('|c|~GoldBucks|.custom /removebucks '+user.name+','+target+'');
 		}
-		if (rand == 100) {
+		if (rand == 200) {
                 var jackpot = (target * 20);
 		results = this.add('|c|~GoldBucks|**'+user.name+' has hit the jackpot!  That means they have won 20 times their wager! ('+jackpot+')**'); 
 		results = '|raw|<center><img src="http://assets.sbnation.com/assets/1216701/matador.gif">';

@@ -2741,9 +2741,13 @@ var commands = exports.commands = {
                                         '<hr width="85%">' +
                                         '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop164" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
 		}
-		if (target.toLowerCase() == "arenakalos") {
-                        return connection.sendTo('arenakalos','|html|<div class="broadcast-black"><center><img src=http://i.imgur.com/PXfmpUm.gif><img src=http://i.imgur.com/Bbc7asF.gif><img src=http://i.imgur.com/Oq5KNTX.gif><br><strong><font color=yellow>Seja bem-vindo a sala portuguesa do Gold!<br>Visite nosso <a href="http://arenakalos.forumeiros.com">Fórum</a>!<br>Aqui você pode relaxar, pedir dicas, brincar, participar de torneios e ganhar bucks!<br>Recomendamos que você leia as regras encontradas <a href="http://arenakalos.forumeiros.com/t1-regras-arena-kalos">aqui</a>. Lendo-as, estará ciente do que não pode ser feito por aqui. Ignorando-as, estará sujeito a punições, incluindo bans.<br>Esperamos que se divirta! E, se gostar, chame seus amigos!<br><br>Everyone is welcome here, even if you don\'t speak portuguese.<br>You can get more bucks with tours, like the lobby!<br> n_n<br><br><font color=red>Atenção: Divulgação de outros servers, via Chat ou via PM, é proibido no Gold e receberá punição a nível global caso desrespeitá-la.');
-		}
+		if (target.toLowerCase() == "casino") {
+                        return connection.sendTo('casino','|html<center><img src="http://i.imgur.com/n3RCajz.gif" width="100%"></center><br />' +
+                                        '<b>Casino Commands List:</b><br />' +
+                                        '/gamble [amount to wager] - Will do one of 3 things.  1.) Will give you that many more bucks. 2.) Will remove that many bucks. 3.) Will hit jackpot where you win 20 times your wager. (1% chance).<br />' +
+                                        '/freebuck - Will give you a FREE buck if you have none.<br><br>' +
+                                        'Good luck, and have fun gambling!');
+		}        
 		if (target.toLowerCase() == "dawnleague") {
 			return connection.sendTo('dawnleague','|html|<center><img src="http://i.imgur.com/lF3Poot.gif"><br>'+
 					'Welcome to the Dawn League!<br>'+

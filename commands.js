@@ -1634,7 +1634,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'tailz') {
                         matched = true;
-                        this.sendReplyBox('<b>Tailz </b>:   '+dev+'   '+comcun+'');
+                        this.sendReplyBox('<b>Tailz</b>:   '+dev+'   '+comcun+'');
                 }
                 if (target === 'cyllage') {
                         matched = true;
@@ -1642,7 +1642,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'sincauster' || target === 'causter') {
                         matched = true;
-                        this.sendReplyBox('<b>SiN Causter </b>:   '+vip+'');
+                        this.sendReplyBox('<b>SiN Causter</b>:   '+vip+'');
                 }
                 if (target === 'shaymin') {
                         matched = true;
@@ -1698,7 +1698,7 @@ var commands = exports.commands = {
                 }
                  if (target === 'chimplup') {
                         matched = true;
-                        this.sendReplyBox('<b>Chimplup</b>:   '+comcun+'    '+leader+'    '+league+'');
+                        this.sendReplyBox('<b>Chimplup</b>:   '+comcun+'');
                 }
                 if (target === 'lazerbeam') {
                         matched = true;

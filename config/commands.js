@@ -1335,6 +1335,26 @@ var commands = exports.commands = {
     	
     			//Music Boxes
     	
+    	cbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Cyllage\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=SRvCvsRp5ho"><button title="Bon Jovi - Wanted Dead Or Alive">Bon Jovi - Wanted Dead Or Alive</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=c901NUazf3g"><button title="Muse - Exogenesis Symphony">Muse - Exogenesis Symphony</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=4MjLKjPc7q8"><button title="Rise Against - Audience Of One">Rise Against - Audience Of One</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=gxEPV4kolz0"><button title="Billy Joel - Piano Man">Billy Joel - Piano Man</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=IwdJYdDyKUw"><button title="Griffin Village - Spring">Griffin Village - Spring</a></button><br />');
+	},
+    	
+    	spybox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Spydreigon\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=gL-ZIbF6J6s"><button title="Pursuit - Cornered">Pursuit - Cornered</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=qgP1yc1PpoU"><button title="Mega Man 10 - Abandoned Memory">Mega Man 10 - Abandoned Memory</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=yW6ECMHrGcI"><button title="Super Training! 8 Bit - Pokemon X/Y">Super Training! 8 Bit - Pokemon X/Y</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=NWYJYcpSpCs"><button title="Mighty No. 9 Theme 8 Bit">Mighty No. 9 Theme 8 Bit</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=NwaCMbfHwmQ"><button title="Mega Man X5 - X vs Zero">Mega Man X5 - X vs Zero</a></button><br />');
+	},
+    	
     	solstereo: 'skybox',
     	equitrax: 'skybox',
 	skybox: function(target, room, user) {

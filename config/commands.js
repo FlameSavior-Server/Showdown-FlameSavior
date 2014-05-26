@@ -1485,6 +1485,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	bis: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.wallchan.com/images/mediums/48275.jpg" width="180">' +
+    		'<img src="http://i.imgur.com/tuJXsEd.png">' +
+    		'<img src="http://i.imgur.com/v9re2RR.jpg" width="100"><br />' +
+    		'<b>Ace:</b> Legendary Beasts<br />' +
+    		'I\'m the Apex Predator.</center>');
+    	},
+	
 	naoto: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.twinfinite.net/wp-content/uploads/2012/05/23415-Naoto-546x310.jpg" width="120">' +

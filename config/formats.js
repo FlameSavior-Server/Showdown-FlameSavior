@@ -858,6 +858,12 @@ exports.Formats = [
 		}
 	},
 	{
+		name: "OU Discrimination",
+		section: "Other Metagames",
+
+		ruleset: ['OU', 'Different Type Clause']
+	},
+	{
 		name: "Hackmons",
 		section: "Other Metagames",
 

@@ -1640,7 +1640,11 @@ var commands = exports.commands = {
                 }
                 if (target === 'cyllage') {
                         matched = true;
-                        this.sendReplyBox('<b>Cyllage </b>:   '+vip+'');
+                        this.sendReplyBox('<b>Cyllage</b>:   '+vip+'');
+                }
+                if (target === 'sandshrewed') {
+                        matched = true;
+                        this.sendReplyBox('<b>SandShrewed</b>:   '+vip+'');
                 }
                 if (target === 'sincauster' || target === 'causter') {
                         matched = true;

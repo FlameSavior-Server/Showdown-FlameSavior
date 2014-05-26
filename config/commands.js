@@ -953,15 +953,15 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/HbZN3Jm.png"><br />' +
                 '<img src="http://i.imgur.com/PxPKnUs.jpg"><br />' +
-                'Scavenge. Slay. Survive.');
+                'Scavenge. Slay. Survive.</center>');
 	},
 	
 	aphrodisia: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/7SAR6FI.png"><br />' +
                 '<img src="http://img2.wikia.nocookie.net/__cb20140319085812/pokemon/images/7/72/Pikachu_XY.gif"><br />' +
-                'Ace: Crumbster<br>' +
-                '<font color=yellow> <b>If you want to find the secrets of the universe, think in terms of energy, frequency and vibration.</b></font>');
+                'Ace: Crumbster<br />' +
+                '<font color=yellow> <b>If you want to find the secrets of the universe, think in terms of energy, frequency and vibration.</b></font></center>');
 	},
 	
 	solox: 'solstice',
@@ -969,7 +969,7 @@ var commands = exports.commands = {
 	solstice: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/l4Jidxb.png"><br />' +
-                '<img src="http://i.imgur.com/S6oyP7H.jpg"><br />' +
+                '<img src="http://i.imgur.com/UA4rXv7.gif" width="200"><br />' +
                 'Sometimes I don\'t know why we\'d rather live than die,<br />' +
                 'We look up towards the skies for answers to our lives.');
 	},

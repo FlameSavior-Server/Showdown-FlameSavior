@@ -617,7 +617,7 @@ var Tournament = (function () {
 			if (runnerUp) this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second!</b>');
 			economy.writeMoney('money', toId(winner), firstMoney, function(){
 				var newMoney = economy.readMoney('money', toId(winner));
-				economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+this.room.title+'. They now have '+newMoney);
+				economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
 				if (runnerUp) {
 					economy.writeMoney('money', toId(runnerUp), secondMoney, function() {
 						var newMoney2 = economy.readMoney('money',toId(runnerup));

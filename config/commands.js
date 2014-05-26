@@ -1333,7 +1333,17 @@ var commands = exports.commands = {
 		'<img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150"></center>');
 	},
     	
-    			//Music Boxes
+    					//Music Boxes
+    	
+    	boxofdestiny: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Usernamehere\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=pucnAvLsgyI"><button title="Megaman Battle Network 5 Hero Theme">Megaman Battle Network 5 Hero Theme</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=ckNRHPlLBcU"><button title="Gospel - Monsters University">Gospel - Monsters University</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=sLgyd2HHvMc"><button title="Princess Kenny Theme Song">Princess Kenny Theme Song</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=9bZkp7q19f0"><button title="Psy - Gangnam Style">Psy - Gangnam Style</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=x4JdySEXrg8"><button title="Frozen - Let It Go">Frozen - Let It Go</a></button><br />');
+	},
     	
     	cbox: function(target, room, user) {
         if (!this.canBroadcast()) return;

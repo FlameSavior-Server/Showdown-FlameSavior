@@ -969,7 +969,7 @@ var commands = exports.commands = {
 	solstice: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/l4Jidxb.png"><br />' +
-                '<img src="http://i.imgur.com/UA4rXv7.gif" width="200"><br />' +
+                '<img src="http://i.imgur.com/UA4rXv7.gif" width="360"><br />' +
                 'Sometimes I don\'t know why we\'d rather live than die,<br />' +
                 'We look up towards the skies for answers to our lives.');
 	},

@@ -473,8 +473,8 @@ var commands = exports.commands = {
 		return this.sendReply("The room '" + target + "' isn't registered.");
 	},
 
-    makeprivate: 'privateroom',
-    toggleprivate: 'privateroom',      
+    	makeprivate: 'privateroom',
+    	toggleprivate: 'privateroom',      
 	privateroom: function (target, room, user) {
 		if (!this.can('privateroom', null, room)) return;
 		if (target === 'off') {
@@ -1189,7 +1189,8 @@ var commands = exports.commands = {
 			return;
 		}
 	},
-
+	
+	hm: 'hourmute',
 	hourmute: function(target, room, user) {
 		if (!target) return this.parse('/help hourmute');
 
@@ -2154,13 +2155,13 @@ var commands = exports.commands = {
 		code.write('\n'+user.name+':'+fc);
 		return this.sendReply("The friend code "+fc+" was submitted.");
 	},
-
+	
+	gc: 'viewcode',
 	viewcode: 'vc',
 	vc: function(target, room, user, connection) {
 		var codes = fs.readFileSync('config/friendcodes.txt','utf8');
 		return user.send('|popup|'+codes);
 	},
-
 	
 	nature: function(target, room, user) {
                 if (!this.canBroadcast()) return;
@@ -2317,11 +2318,11 @@ var commands = exports.commands = {
 
 	eating: 'away',
 	gaming: 'away',
-    sleep: 'away',
-    work: 'away',
-    working: 'away',
-    sleeping: 'away',
-    busy: 'away',    
+    	sleep: 'away',
+	work: 'away',
+    	working: 'away',
+    	sleeping: 'away',
+    	busy: 'away',    
 	afk: 'away',
 	away: function(target, room, user, connection, cmd) {
 		if (!this.can('away')) return false;
@@ -2740,7 +2741,7 @@ var commands = exports.commands = {
 		this.logEntry(user.name + " used /crashfixed");
 	},
 
-	'memusage': 'memoryusage',
+	memusage: 'memoryusage',
 	memoryusage: function (target) {
 		if (!this.can('hotpatch')) return false;
 		target = toId(target) || 'all';

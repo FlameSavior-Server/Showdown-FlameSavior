@@ -956,6 +956,14 @@ var commands = exports.commands = {
                 'Scavenge. Slay. Survive.');
 	},
 	
+	aphrodisia: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/7SAR6FI.png"><br />' +
+                '<img src="http://img2.wikia.nocookie.net/__cb20140319085812/pokemon/images/7/72/Pikachu_XY.gif"><br />' +
+                'Ace: Crumbster<br>' +
+                '<font color=yellow> <b>If you want to find the secrets of the universe, think in terms of energy, frequency and vibration.</b></font>');
+	},
+	
 	solox: 'solstice',
 	equinox: 'solstice',
 	solstice: function(target, room, user) {

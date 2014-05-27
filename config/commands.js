@@ -1487,9 +1487,9 @@ var commands = exports.commands = {
 	
 	happy: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="https://i.imgur.com/CDVPctR.jpg" width="180">' +
+    	this.sendReplyBox('<center><img src="https://i.imgur.com/CDVPctR.jpg" width="170">' +
     		'<img src="http://i.imgur.com/X84XGIY.png">' +
-    		'<img src="https://i.imgur.com/7SNMJza.jpg" width="140"><br />' +
+    		'<img src="https://i.imgur.com/7SNMJza.jpg" width="135"><br />' +
     		'<b>Ace:</b> Chansey<br />' +
     		'You are never too old for a Disney movie.</center>');
     	},

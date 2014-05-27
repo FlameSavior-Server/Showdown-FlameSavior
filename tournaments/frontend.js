@@ -620,7 +620,7 @@ var Tournament = (function () {
 				economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
 				if (runnerUp) {
 					economy.writeMoney('money', toId(runnerUp), secondMoney, function() {
-						var newMoney2 = economy.readMoney('money',toId(runnerup));
+						var newMoney2 = economy.readMoney('money',toId(runnerUp));
 						economy.logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney2);
 					});
 				}

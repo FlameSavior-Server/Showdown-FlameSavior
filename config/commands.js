@@ -949,6 +949,20 @@ var commands = exports.commands = {
 
 							//Trainer Cards.
 	
+	wrath: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/csloC44.gif"><br />' +
+                '<img src="http://i.imgur.com/GS0kfMW.png"><br />' +
+                'No being an asshat. Asshats will face the Wrath of Espurr.</center>');
+	},
+	
+	windy: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/CwmuZVJ.png"><br />' +
+                '<img src="http://i.imgur.com/qOMMI3O.gif"><br />' +
+                'Show Your Victory!</center>');
+	},
+	
 	coolasian: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/HbZN3Jm.png"><br />' +

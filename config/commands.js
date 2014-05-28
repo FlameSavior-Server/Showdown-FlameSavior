@@ -1281,6 +1281,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	isawabox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="5CE4FF"><u>Isawa\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=gY16msUgCYM">TwoThirds - Universal</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=-J7J_IWUhls">Paramore - The Only Exception</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=EYW7-hNXZlM">Sonic CD - Opening Sonic Boom</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=X9fLbfzCqWw">Yellowcard - Ocean Avenue</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	handreliefbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

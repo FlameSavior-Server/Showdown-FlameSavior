@@ -1359,7 +1359,7 @@ var commands = exports.commands = {
     	
     	boxofdestiny: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>Usernamehere\'s Music Box!</b><br />' +
+        this.sendReplyBox('<b>itsdestny\'s Music Box!</b><br />' +
                 '1. <a href="https://www.youtube.com/watch?v=pucnAvLsgyI"><button title="Megaman Battle Network 5 Hero Theme">Megaman Battle Network 5 Hero Theme</a></button><br />' +
                 '2. <a href="https://www.youtube.com/watch?v=ckNRHPlLBcU"><button title="Gospel - Monsters University">Gospel - Monsters University</a></button><br />' +
 		'3. <a href="https://www.youtube.com/watch?v=sLgyd2HHvMc"><button title="Princess Kenny Theme Song">Princess Kenny Theme Song</a></button><br />' +

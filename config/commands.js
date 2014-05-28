@@ -3200,11 +3200,11 @@ var commands = exports.commands = {
 	
 	spike: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://fc02.deviantart.net/fs71/f/2014/073/1/c/aron_by_creepyjellyfish-d7a43d0.gif">' +
+        this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs70/f/2014/073/b/6/goomy_by_creepyjellyfish-d7a49ke.gif">' +
                 '<img src="http://i.imgur.com/L4M0q0l.gif">' +
-                '<img src="http://fc03.deviantart.net/fs71/f/2014/073/a/9/drilbur_by_creepyjellyfish-d7a446c.gif"><br />' +
-                '<b>Ace:</b> Aron<br />' +
-                'Sometimes the world is tough, but with my steel types, its a breeze in the park.</center>');
+                '<img src="http://fc00.deviantart.net/fs71/f/2014/073/f/b/gible_by_creepyjellyfish-d7a49lo.gif"><br />' +
+                '<b>Ace:</b> Goomy<br />' +
+                'Sometimes the world is tough, but with my Pokemon, its a walk in the park..</center>');
     	},
 	
 	nine: 'leadernine', 

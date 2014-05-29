@@ -3588,6 +3588,11 @@ var commands = exports.commands = {
 	 * Miscellaneous commands
 	 *********************************************************/
 	
+	frostrules: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center>You can find our rules<a href="http://frostserver.net/rules.html">here.</a>');
+    	},
+	
 	leagues: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center>Looking for challengers or members for your league? Post about it <a href="http://frostserver.net/forums/forumdisplay.php?fid=18">here!</a><center>');

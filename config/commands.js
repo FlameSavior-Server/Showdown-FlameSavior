@@ -949,6 +949,12 @@ var commands = exports.commands = {
 
 							//Trainer Cards.
 	
+	hagrus: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/CeYqID8.jpg"><br />' +
+                'Get used to being second nubs</center>');
+	},
+	
 	wrath: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/csloC44.gif"><br />' +

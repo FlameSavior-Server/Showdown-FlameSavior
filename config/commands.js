@@ -1281,6 +1281,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	highbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="red">P</font><font color="orange">r</font><font color="yellow">i</font><font color="green">n</font><font color="blue">c</font><font color="purple">e</font><font color="red">s</font><font color="orange">s</font><font color="yellow">H</font><font color="green">i</font><font color="blue">g</font><font color="purple">h</font><font color="red">\'</font><font color="orange">s</font> <font color="yellow">L</font><font color="green">i</font><font color="blue">f</font><font color="purple">e</font></u></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch?v=A3jzMyYgPQs">Do What U Want</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=pZ12_E5R3qc">Partition</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=O-zpOMYRi0w">Fancy</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch?v=pco91kroVgQ">Applause</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	isawabox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

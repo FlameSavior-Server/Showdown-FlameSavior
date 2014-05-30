@@ -3440,14 +3440,13 @@ var commands = exports.commands = {
 		'I believe in what I think is right, even when what I think is wrong</center>');
 	},
 	
-	hope: 'vanitas',
-        vanitas: function(target, room, user) {
+        hope: function(target, room, user) {
         if(!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/EYkBb4N.jpg" width="96" height="96">' +
 		'<img src="http://i.imgur.com/SlN7Yla.gif">' +
 		'<img src="http://i.imgur.com/mIolDwv.jpg" width="96" height="96"><br />' +
-		'<font color=#00BFFF> Ace: Talonflame </font><br />' +
-		'Show me anger </center>');
+		'<font color=#00BFFF><b>Ace:</b> Artifail </font><br />' +
+		'You can\'t smoke mushrooms, but imageine a line of shrooms</center>');
         },
 	
 	shm: 'swedishmafia',

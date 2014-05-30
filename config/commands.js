@@ -3440,15 +3440,15 @@ var commands = exports.commands = {
 		'I believe in what I think is right, even when what I think is wrong</center>');
 	},
 	
-	cookies: 'sircookies',
-	sircookies: function(target, room, user) {
-	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><img src="http://i.imgur.com/OXSg9bK.gif"><br />' +
-		'<img src="http://i.imgur.com/4JGoVHH.gif">' +
-		'<font size="7" color="#B40404"><i>Sir Cookie</i></font></color>' +
-		'<img src="http://i.imgur.com/KWcACrr.gif"><br />' +
-		'Bandi is mine. MINEMINEMINE</center>');
-	},
+	hope: 'vanitas',
+        vanitas: function(target, room, user) {
+        if(!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/EYkBb4N.jpg" width="96" height="96">' +
+		'<img src="http://i.imgur.com/SlN7Yla.gif">' +
+		'<img src="http://i.imgur.com/mIolDwv.jpg" width="96" height="96"><br />' +
+		'<font color=#00BFFF> Ace: Talonflame </font><br />' +
+		'Show me anger </center>');
+        },
 	
 	shm: 'swedishmafia',
 	swedishmafia: function(target, room, user) {

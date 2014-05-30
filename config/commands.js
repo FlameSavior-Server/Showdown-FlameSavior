@@ -3446,7 +3446,7 @@ var commands = exports.commands = {
 		'<img src="http://i.imgur.com/SlN7Yla.gif">' +
 		'<img src="http://i.imgur.com/mIolDwv.jpg" width="96" height="96"><br />' +
 		'<font color=#00BFFF><b>Ace:</b> Artifail </font><br />' +
-		'You can\'t smoke mushrooms, but imageine a line of shrooms</center>');
+		'You can\'t smoke mushrooms, but imagine a line of shrooms</center>');
         },
 	
 	shm: 'swedishmafia',

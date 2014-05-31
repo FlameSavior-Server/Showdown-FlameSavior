@@ -947,7 +947,16 @@ var commands = exports.commands = {
 		);
 	},
 
-							//Trainer Cards.
+	//Trainer Cards.
+	
+	soar: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/PwfqbDk.png"><br />' +
+    		'<img src="http://i.imgur.com/hDitWiS.gif" width="200">' +
+    		'<img src="http://i.imgur.com/8ESHApV.gif"><br />' +
+    		'<b><font color="red">Ace:</b> Amelia & Richard. D</font><br />' +
+    		'<font color="red">The most difficult thing is the decision to act. The rest is merely tenacity. The fears are paper tigers. You can do anything you decide to do. You can act to change and control your life and the procedure. The process is its own reward. Flying may not be all plain sailing, but the fun of it is worth the price. -Amelia Earheart</font></center>');
+    	},
 	
 	hagrus: function(target, room, user) {
         if (!this.canBroadcast()) return;

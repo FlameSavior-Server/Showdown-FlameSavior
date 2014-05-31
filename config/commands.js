@@ -1281,6 +1281,17 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+    	hopebox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                '<center><h1><font color="skyblue"><u>Hope\'s Music Box</u></color></h1></center>' +
+                '<center><b><a href="https://www.youtube.com/watch/?v=EgmaQCffXYw">Jenova</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch/?v=pNq-8IBerXQ">Dancing Mad</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch/?v=vh7nK3ceoY4">Enter The Void</a><br>' +
+		'<center><b><a href="https://www.youtube.com/watch/?v=I1QHrM3qH_g">Cantata Mortis and God in Fire</a><br></center>' +
+                '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+    	
     	highbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

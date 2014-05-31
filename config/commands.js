@@ -1507,6 +1507,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	dagger: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/vivillon.gif">' +
+    		'<img src="http://i.imgur.com/9OY2PsE.gif">' +
+    		'<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/306.gif"><br />' +
+    		'<b>Ace:</b> Anti-Meta<br />' +
+    		'<i>Jack of all trades, Master at none. You\'re still predicting? I\'ve already won</i>.</center>');
+    	},
+	
 	happy: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="https://i.imgur.com/CDVPctR.jpg" width="170">' +

@@ -1705,10 +1705,12 @@ var commands = exports.commands = {
 	
 	acast: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/c8ixzB6.png"><br />' +
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/sableye.gif">' +
+        	'<img src="http://i.imgur.com/C5VZ07a.gif">' +
+        	'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gourgeist.gif"><br />' +
                 '<img src="http://i.imgur.com/8MVF1LX.png" height="100"><br />' +
                 '<b>Ace:</b> Chandelure<br />' +
-                'I\'m a lover, but that doesn\'t mean I won’t fight. Give me all you\'ve got.</center>');
+                'You can\'t succeed if you don\'t try.</center>');
     	},
 	
 	amaan: function(target, room, user) {

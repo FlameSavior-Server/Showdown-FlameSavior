@@ -1518,6 +1518,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	boreas: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/39fc7c50c9341c27c02ac1f909a03941/tumblr_mikoaxPZ5j1rtatqpo1_500.gif" width="160">' +
+    		'<img src="http://i.imgur.com/4I6VAQ5.png">' +
+    		'<img src="http://fc05.deviantart.net/fs71/f/2014/017/6/3/tumblr_mz5bj3hlf71qf8rnjo1_500_by_ryanthescooterguy-d72m8ce.gif" width="160"><br />' +
+    		'<b>Ace:</b> Weavile<br />' +
+    		'I only face steel. -_-</center>');
+    	},
+	
 	dagger: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/vivillon.gif">' +

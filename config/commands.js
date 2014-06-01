@@ -2033,11 +2033,11 @@ var commands = exports.commands = {
 	
 	ghast: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gengar.gif">' +
-                '<img src="http://i.imgur.com/Y7DBeqQ.png" width="370">' +
-                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/honedge.gif"><br />' +
+        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/haunter.gif">' +
+                '<img src="http://i.imgur.com/FVisHKB.png" width="370">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/spiritomb.gif"><br />' +
                 '<b>Ace:</b> Gengar<br />' +
-                'The greater the obstacle, the more glory in overcoming it. Keep on fighting.</center>');
+                'Lurking through the shadows, haunting your dreams, & creating your nightmares.</center>');
     	},
 	
 	czim: function(target, room, user) {

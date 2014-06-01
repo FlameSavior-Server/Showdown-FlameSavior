@@ -1518,6 +1518,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	crashy: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/shuckle.gif">' +
+    		'<img src="http://i.imgur.com/InJOoRs.gif" width="400">' +
+    		'<img src="http://sprites.pokecheck.org/t/102.gif"><br />' +
+    		'<b>Ace:</b> Shuckle<br />' +
+    		'Don\'t be a lemon, be a rosebud.</center>');
+    	},
+	
 	boreas: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/39fc7c50c9341c27c02ac1f909a03941/tumblr_mikoaxPZ5j1rtatqpo1_500.gif" width="160">' +

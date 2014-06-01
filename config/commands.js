@@ -1717,7 +1717,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/PZevDPT.png" height="120">' +
                 '<font size="5">Rock On</font>' +
                 '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/cloyster.gif"><br />' +
-                '<b>Ace:</b> <blink><font color="red">Cloyster</font></blink><br />' +
+                '<b>Ace:</b> <blink><font color="red">Amaan\'s Crib</font></blink><br />' +
                 '<font color="purple">Remind yourself that you and your life is not always perfect</font></center>');
     	},
 	

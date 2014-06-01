@@ -1714,7 +1714,7 @@ var commands = exports.commands = {
 	amaan: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/tgNOgxv.png"><br />' +
-                '<img src="http://i.imgur.com/I9KeWX9.png?1" height="120">' +
+                '<img src="http://i.imgur.com/PZevDPT.png" height="120">' +
                 '<font size="5">Rock On</font>' +
                 '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/cloyster.gif"><br />' +
                 '<b>Ace:</b> <blink><font color="red">Cloyster</font></blink><br />' +

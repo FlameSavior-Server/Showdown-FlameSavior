@@ -2491,14 +2491,12 @@ var commands = exports.commands = {
 
 	masspm: 'pmall',
 	pmall: function(target, room, user) {
-		if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');
 		if (!this.can('pmall')) return false;
-
-		var pmName = '~Frost PM';
+		if (!target) return this.sendReply('/pmall [message] - Sends a PM to every user on the server.');
 
 		for (var i in Users.users) {
-			var message = '|pm|'+pmName+'|'+Users.users[i].getIdentity()+'|'+target;
-			Users.users[i].send(message);
+			if (!Users.users[i].connected) continue;
+			Users.users[i].send('|pm|~Frost PM|'+Users.users[i].getIdentity()+'|'+target);
 		}
 	},
 	

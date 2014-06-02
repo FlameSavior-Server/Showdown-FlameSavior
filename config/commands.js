@@ -1518,6 +1518,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	croven: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/y9PCId4.jpg" width="160">' +
+    		'<img src="http://i.imgur.com/l71i2O9.gif">' +
+    		'<img src="http://i.imgur.com/gtCuVMu.png" width="160"><br />' +
+    		'<b>Ace:</b> Togekiss<br />' +
+    		'The reason birds can fly and we can\'t is simply because they have perfect faith, for to have faith is to have wings.</center>');
+    	},
+	
 	crashy: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/shuckle.gif">' +

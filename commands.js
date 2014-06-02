@@ -1642,6 +1642,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Cyllage</b>:   '+vip+'');
                 }
+                if (target === 'starrywindy') {
+                        matched = true;
+                        this.sendReplyBox('<b>StarryWindy</b>:   '+vip+'');
+                }
                 if (target === 'sandshrewed') {
                         matched = true;
                         this.sendReplyBox('<b>SandShrewed</b>:   '+vip+'');

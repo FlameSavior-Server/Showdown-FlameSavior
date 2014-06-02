@@ -1370,7 +1370,18 @@ var commands = exports.commands = {
 		'<img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150"></center>');
 	},
     	
-    					//Music Boxes
+    			//Music Boxes
+    	
+    	berrybox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>The Berry Master\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ"><button title="Queen - Bohemian Rhapsody">Queen - Bohemian Rhapsody</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=xDMNHvnIxic"><button title="Hamster on a Piano">Hamster on a Piano</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=BuO5Jiqn9q4"><button title="The Ink Spots - Making Believe">The Ink Spots - Making Believe</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=ws8X31TTB5E"><button title="Cowboy Bebop OST 3 Blue - Adieu">Cowboy Bebop OST 3 Blue - Adieu</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=CnDJizJsMJg"><button title="ENTER SHIKARI - MOTHERSTEP/MOTHERSHIP">ENTER SHIKARI - MOTHERSTEP/MOTHERSHIP</a></button><br />' +
+		'6. <a href="https://www.youtube.com/watch?v=-osNFEyI3vw"><button title="Gungor - Crags And Clay">Gungor - Crags And Clay</a></button><br />' );
+	},
     	
     	sphealbox: function(target, room, user) {
         if (!this.canBroadcast()) return;

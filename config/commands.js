@@ -1369,6 +1369,15 @@ var commands = exports.commands = {
 	this.sendReplyBox('<center><font size="6" face="comic sans ms"><font color="red">G<font color="orange">a<font color="yellow">r<font color="tan">a<font color="violet">z<font color="purple">a<font color="blue">n</font><br />' +
 		'<img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150"></center>');
 	},
+	
+	scizornician: 'sciz',
+	sciz: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<div class="broadcast-blue"><center><font color="#A80000" size ="3"><b>Scizornician</b></font><br />' +
+                  '<center><b>Rank:</b> Driver<br />' +
+                  '<center><b>Quote:</b> It\'s all shits and giggles until someone giggles and shits.</font><br />' +
+                  '<center><img src="https://i.imgur.com/aQc7ny4.gif"></div>');
+	},
     	
     			//Music Boxes
     	

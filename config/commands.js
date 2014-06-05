@@ -1823,8 +1823,8 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/226.gif">' +
                 '<img src="http://i.imgur.com/JZUTPTk.gif">' +
                 '<img src="http://img.pokemondb.net/sprites/black-white/anim/normal/kyogre.gif"><br />' +
-                '<b>Ace:</b> Mantine<br />' +
-                'Don\'t underestimate the drizzle. It\'s just the calm before the storm.</center>');
+                '<b>Ace:</b> Kyogre\'s Son<br />' +
+                'Pride makes us artificial and humility makes us real.</center>');
     	},
 	
 	thunder: function(target, room, user) {

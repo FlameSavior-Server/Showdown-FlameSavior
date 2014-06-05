@@ -1374,9 +1374,9 @@ var commands = exports.commands = {
 	sciz: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<div class="broadcast-blue"><center><font color="#A80000" size ="3"><b>Scizornician</b></font><br />' +
-                  '<center><b>Rank:</b> Driver<br />' +
-                  '<center><b>Quote:</b> It\'s all shits and giggles until someone giggles and shits.</font><br />' +
-                  '<center><img src="https://i.imgur.com/aQc7ny4.gif"></div>');
+                  '<b>Rank:</b> Driver<br />' +
+                  '<b>Quote:</b> It\'s all shits and giggles until someone giggles and shits.</font><br />' +
+                  '<img src="https://i.imgur.com/aQc7ny4.gif"></center></div>');
 	},
     	
     			//Music Boxes

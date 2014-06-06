@@ -1449,12 +1449,13 @@ var commands = exports.commands = {
     	vbox: 'jackbox',
 	jackbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>Jack\'s Music Box!</b><br />' +
-                '1. <a href="https://www.youtube.com/watch?v=VRFCMM3bra8"><button title="Billy Talent - Viking Death March">Billy Talent - Viking Death March</a></button><br />' +
-                '2. <a href="https://www.youtube.com/watch?v=N3472Q6kvg0"><button title="Metal Gear Rising - Rules of Nature">Metal Gear Rising - Rules of Nature</a></button><br />' +
-		'3. <a href="https://www.youtube.com/watch?v=bVbk5I4wKSk"><button title="Sick Puppies - Riptide">Sick Puppies - Riptide</a></button><br />' +
-		'4. <a href="https://www.youtube.com/watch?v=AMV_uweWW50"><button title="Best Blue Stahli Remix">Best Blue Stahli Remix</a></button><br />' +
-		'5. <a href="https://www.youtube.com/watch?v=oMe4kVNKvNk"><button title="A Perfect Circle - Passive">A Perfect Circle - Passive</a></button><br />');
+        this.sendReplyBox('<b>Usernamehere\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=a89Shp0YhR8"><button title="I\'m Made of Wax, Larry, What Are You Made Of? - Adtr">I\'m Made of Wax, Larry, What Are You Made Of? - Adtr</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=ZcpGIVbPYrI"><button title="Metal Gear Rising OST - It Has to Be This Way">Metal Gear Rising OST - It Has to Be This Way</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=wzS5-AjJ71E"><button title="The Ghost Inside - "Engine 45"">The Ghost Inside - "Engine 45"</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=AiBG6vuLrzY"><button title="Breaking Benjamin - Diary Of Jane">Breaking Benjamin - Diary Of Jane</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=Qt83YS_yay8"><button title="billy talent - fallen leaves">billy talent - fallen leaves</a></button><br />' +
+		'6. <a href="https://www.youtube.com/watch?v=3IgSvQsKkOo"><button title="Deadman\'s Gun - Red Dead Redemption">Deadman\'s Gun - Red Dead Redemption</a></button><br />' );
 	},
     	
     	panbox: function(target, room, user) {

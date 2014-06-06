@@ -949,6 +949,13 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 	
+	silver: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20091211143347/sonic/images/thumb/5/5d/Super_silver_final.png/150px-Super_silver_final.png"><br />' +
+                '<img src="http://img1.wikia.nocookie.net/__cb20111024112339/sonic/images/thumb/3/34/Sonic_Channel_-_Silver_The_Hedgehog_2011.png/120px-Sonic_Channel_-_Silver_The_Hedgehog_2011.png"><br />' +
+                'Ace: Its no use!<br />');
+	},
+	
 	soar: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/PwfqbDk.png"><br />' +
@@ -1334,7 +1341,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><font size="4" color="aqua">JackZero<br /></font>' +
         	'<img src="http://i.imgur.com/cE6LTKm.png"><br />' +
-        	'I prefer the freedom of being hated to the shackles of expectaional love.</center>');
+        	'I prefer the freedom of being hated to the shackles of expectational love.</center>');
         },
 	
 	wd: 'windoge',

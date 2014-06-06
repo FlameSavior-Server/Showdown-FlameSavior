@@ -10,7 +10,7 @@
  *
  * @license MIT license
  */
- var fs = require('fs');
+var fs = require('fs');
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
 var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
 var key = '';
@@ -2776,17 +2776,6 @@ var commands = exports.commands = {
 					'--<a href="https://docs.google.com/document/m?id=1rrKS8F2xndp_tfapNWFw6sD0RrTsRzGPqoozsQp28v0">Dawn League Trainers</a><br>'+
 					'<img src="http://www.serebii.net/xy/pokemon/475.png">');
 		}
-		if (target.toLowerCase() == "trading") {
-			return connection.sendTo('trading','|html|<center><img src="http://pstradingroom.weebly.com/uploads/2/5/1/0/25107733/1386374523.png"><br />' +
-					'<b>Important Room Links:</b><br />'+
-					'-<a href="http://pstradingroom.weebly.com/rules.html">Room Rules</a><br />' +
-					'-<a href="http://pstradingroom.weebly.com/faqs.html">Room FAQs</a><br />' +
-					'-<a href="https://docs.google.com/spreadsheet/ccc?key=0AvygZBLXTtZZdFFfZ3hhVUplZm5MSGljTTJLQmJScEE#gid=0">Scammer List</a><br />' +
-					'-<a href="https://docs.google.com/spreadsheet/lv?key=0Avz7HpTxAsjIdFFSQ3BhVGpCbHVVdTJ2VVlDVVV6TWc&toomany=true">Approved Cloner List</a><br />' +
-					'-<a href="https://docs.google.com/spreadsheet/ccc?key=0AlbZk6TbwOKPdGhqbmZDb0EtRDNVY1N5UFJSRmE3UEE#gid=0">Expert Pokegenners List</a><br />' +
-					'-<a href="http://pstradingroom.weebly.com/scamming-prevention-tips.html">Scamming Prevention Tips</a><br />' +
-					'-<a href="http://pstradingroom.weebly.com/forums-and-ban-appeals.html#/20131207/ban-appeals-3460802/">Room Ban Appeals</a>');
-		}
 	},
 
 	rb: 'roomban',
@@ -3357,7 +3346,7 @@ var commands = exports.commands = {
 	},*/
 	
 	tell: function(target, room, user) {
-		if (user.locked) return this.sendReply('You cannot use this command while locked.')
+		if (!this.canTalk()) return;
 		if (!target) return this.parse('/help tell');
 		var commaIndex = target.indexOf(',');
 		if (commaIndex < 0) return this.sendReply('You forgot the comma.');
@@ -3677,9 +3666,10 @@ var commands = exports.commands = {
 	um: 'unmute',
 	unmute: function (target, room, user) {
 		if (!target) return this.parse('/help unmute');
-		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
 		var targetUser = Users.get(target);
-		if (!targetUser) return this.sendReply("User '" + target + "' does not exist.");
+		if (!targetUser) {
+			return this.sendReply("User " + target + " not found.");
+		}
 		if (!this.can('mute', targetUser, room)) return false;
 
 		if (!targetUser.mutedRooms[room.id]) {
@@ -3690,6 +3680,7 @@ var commands = exports.commands = {
 
 		targetUser.unmute(room.id);
 	},
+
 
 	l: 'lock',
 	ipmute: 'lock',
@@ -3723,7 +3714,6 @@ var commands = exports.commands = {
 
 	unlock: function (target, room, user) {
 		if (!target) return this.parse('/help unlock');
-		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
 		if (!this.can('lock')) return false;
 
 		var unlocked = Users.unlock(target);
@@ -3736,7 +3726,7 @@ var commands = exports.commands = {
 					' unlocked by ' + user.name + '.');
 		return this.parse('/unspam '+target+'');
 		} else {
-			this.sendReply("User '" + target + "' is not locked.");
+			this.sendReply("User " + target + " is not locked.");
 		}
 	},
 	
@@ -3808,7 +3798,6 @@ var commands = exports.commands = {
 
 	unban: function(target, room, user) {
 		if (!target) return this.parse('/help unban');
-		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
 		if (!this.can('ban')) return false;
 
 		var name = Users.unban(target);
@@ -3816,7 +3805,7 @@ var commands = exports.commands = {
 		if (name) {
 			this.addModCommand("" + name + " was unbanned by " + user.name + ".");
 		} else {
-			this.sendReply("User '" + target + "' is not banned.");
+			this.sendReply("User " + target + " is not banned.");
 		}
 	},
 

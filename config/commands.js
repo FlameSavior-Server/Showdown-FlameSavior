@@ -956,14 +956,13 @@ var commands = exports.commands = {
                 'Ace: Its no use!<br />');
 	},
 	
-	soar: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/PwfqbDk.png"><br />' +
-    		'<img src="http://i.imgur.com/hDitWiS.gif" width="200">' +
-    		'<img src="http://i.imgur.com/8ESHApV.gif"><br />' +
-    		'<b><font color="red">Ace:</b> Amelia & Richard. D</font><br />' +
-    		'<font color="red">The most difficult thing is the decision to act. The rest is merely tenacity. The fears are paper tigers. You can do anything you decide to do. You can act to change and control your life and the procedure. The process is its own reward. Flying may not be all plain sailing, but the fun of it is worth the price. -Amelia Earheart</font></center>');
-    	},
+	gene: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/NO1PFB2.png"><br />' +
+                '<img src="http://static2.wikia.nocookie.net/__cb20131130005232/bleedmancomics/images/6/66/Klefki_XY.gif"><br />' +
+                '<b><font color="red">Ace:</b> Monopoly</font><br />' +
+                '<font color="purple"> Romanticism is the expression of man\'s urge to rise above reason and common sense, just as rationalism is the expression of his urge to rise above theology and emotion. Riot\'s suck, I love noodles.</font></center>');
+	},
 	
 	hagrus: function(target, room, user) {
         if (!this.canBroadcast()) return;

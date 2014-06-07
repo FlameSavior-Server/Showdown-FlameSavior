@@ -1387,6 +1387,17 @@ var commands = exports.commands = {
     	
     			//Music Boxes
     	
+    	riotbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Jack Skellington\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=ubiZDYU7mv0"><button title="Metal Gear Rising: Revengeance - The Only Thing I Know for Real ">Metal Gear Rising: Revengeance - The Only Thing I Know for Real </a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=ye0XhDdbFs4"><button title="A Day to Remember - You Had Me at Hello">A Day to Remember - You Had Me at Hello</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=vc6vs-l5dkc"><button title="Panic! At The Disco: I Write Sins Not Tragedies">Panic! At The Disco: I Write Sins Not Tragedies</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=FukeNR1ydOA"><button title="SUICIDE SILENCE - Disengage">SUICIDE SILENCE - Disengage</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=xyW9KknfwLU"><button title="A Day to Remember - Sometimes You\'re The Hammer, Sometimes You\'re The Nail">A Day to Remember - Sometimes You\'re The Hammer, Sometimes You\'re The Nail</a></button><br />' +
+		'6. <a href="https://www.youtube.com/watch?v=sA5hj7wuJLQ"><button title="Bring Me The Horizon - "Empire (Let Them Sing)">Bring Me The Horizon - Empire (Let Them Sing)</a></button><br />' );
+	},
+    	
     	berrybox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>The Berry Master\'s Music Box!</b><br />' +

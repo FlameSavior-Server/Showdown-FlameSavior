@@ -1518,6 +1518,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	tsunami: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/J2SlSed.gif" width="140">' +
+    		'<img src="http://i.imgur.com/tig1vWj.gif" width="260">' +
+    		'<img src="http://i.imgur.com/mWUrtx5.gif" width="140"><br />' +
+    		'<b>Ace:</b> Mega-Blastoise<br />' +
+    		'Only those who will risk going too far can possibly find out how far one can go.</center>');
+    	},
+	
 	croven: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/y9PCId4.jpg" width="160">' +

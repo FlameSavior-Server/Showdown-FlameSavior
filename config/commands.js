@@ -949,6 +949,13 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 	
+	tailz: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/UQJceOG.png"><br />' +
+                '<img src="http://i.imgur.com/1IrQzrV.jpg"><br />' +
+                'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+	},
+	
 	silver: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20091211143347/sonic/images/thumb/5/5d/Super_silver_final.png/150px-Super_silver_final.png"><br />' +

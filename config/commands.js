@@ -1411,7 +1411,7 @@ var commands = exports.commands = {
 		'3. <a href="https://www.youtube.com/watch?v=vc6vs-l5dkc"><button title="Panic! At The Disco - I Write Sins Not Tragedies">Panic! At The Disco: I Write Sins Not Tragedies</a></button><br />' +
 		'4. <a href="https://www.youtube.com/watch?v=FukeNR1ydOA"><button title="Suicide Silence - Disengage">Suicide Silence - Disengage</a></button><br />' +
 		'5. <a href="https://www.youtube.com/watch?v=xyW9KknfwLU"><button title="A Day to Remember - Sometimes You\'re The Hammer, Sometimes You\'re The Nail">A Day to Remember - Sometimes You\'re The Hammer, Sometimes You\'re The Nail</a></button><br />' +
-		'6. <a href="https://www.youtube.com/watch?v=sA5hj7wuJLQ"><button title="Bring Me The Horizon - Empire (Let Them Sing)>Bring Me The Horizon - Empire (Let Them Sing)</a></button><br />' );
+		'6. <a href="https://www.youtube.com/watch?v=sA5hj7wuJLQ"><button title="Bring Me The Horizon - Empire (Let Them Sing)">Bring Me The Horizon - Empire (Let Them Sing)</a></button><br />' );
 	},
     	
     	berrybox: function(target, room, user) {

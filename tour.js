@@ -1283,11 +1283,12 @@ var cmds = {
 	},
 	
 	prtest: function(target, room, user) {
-		var separacion = "&nbsp;&nbsp;";
-		if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
-		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');
-	},
+                var separacion = "&nbsp;&nbsp;";
+                if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
+                if (!this.canBroadcast()) return;
+                var output += '<button name="send" value="/vote '+tour[room.id].answerList[u]+'">'+ tour[room.id].answerList.join(' &bull; ')+'</button>&nbsp;';
+                this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + output + '</div>');
+        }
 	
 	pollremind: 'pr',
 	pr: function(target, room, user) {

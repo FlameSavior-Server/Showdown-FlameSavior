@@ -3298,8 +3298,15 @@ var commands = exports.commands = {
 	
 	nine: 'leadernine', 
 	leadernine: function(target, room, user) {
-        	if (!this.canBroadcast()) return;
-        	this.sendReply('|raw|<center><a href="http://imgur.com/9BjQ1Vc"><img src="http://i.imgur.com/9BjQ1Vc.gif"></a><br><a href="http://imgur.com/fTcILVT"><img src="http://i.imgur.com/fTcILVT.gif"></a><a href="http://imgur.com/D58V1My"><img src="http://i.imgur.com/D58V1My.gif"></a><a href="http://imgur.com/dqJ08as"><img src="http://i.imgur.com/dqJ08as.gif"></a><br>Ace: Fairies!<br><br><a href="http://imgur.com/hNB4ib0"><img src="http://i.imgur.com/hNB4ib0.png"></a><br><a href="http://imgur.com/38evGGC"><img src="http://i.imgur.com/38evGGC.png"></a><br><b>-Grimsley</b>')
+        if (!this.canBroadcast()) return;
+        this.sendReply('|raw|<center><img src="http://i.imgur.com/9BjQ1Vc.gif"><br />' +
+		'<img src="http://i.imgur.com/fTcILVT.gif">' +
+		'<img src="http://i.imgur.com/D58V1My.gif">' +
+		'<img src="http://i.imgur.com/dqJ08as.gif"><br />' +
+		'Ace: Fairies!<br />' +
+		'<img src="http://i.imgur.com/hNB4ib0.png"><br />' +
+		'<img src="http://i.imgur.com/38evGGC.png"><br />' +
+		'<b>-Grimsley</b></center>')
     	},
     	
     	wyvern: function(target, room, user) {
@@ -3358,14 +3365,14 @@ var commands = exports.commands = {
 	},
 	
 	jd: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<img width=100% height=260 src="http://i.imgur.com/6gkSSam.jpg">');
+	if (!this.canBroadcast()) return;
+	this.sendReply('|raw|<img width=100% height=260 src="http://i.imgur.com/6gkSSam.jpg">');
 	},
 	
 	familymantpsn: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img src="http://i.imgur.com/UHptfOM.gif">' +
-		'<font size="6" color="#FF0080"><i>Family Man TPSN</i></font></color>' +
+		'<img src="http://i.imgur.com/PVu7RGX.png">' +
 		'<img src="http://i.imgur.com/XVhKJ77.gif"><br />' +
 		'Ace: Audino<br />' +
 		'Luck.</center>');
@@ -3402,8 +3409,8 @@ var commands = exports.commands = {
 	
 	logic: 'psychological',
 	psychological: function(target, room, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<center><img src="http://i.imgur.com/c4j9EdJ.png?1">' +
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/c4j9EdJ.png?1">' +
                 '<a href="http://www.smogon.com/forums/members/andrew.173056/"><img src="http://i.imgur.com/R3nj8i5.png" width="200"></a>' +  
                 '<img src="http://i.imgur.com/TwpGsh3.png?1"><br />' +      
                 '<img src="http://i.imgur.com/1MH0mJM.png" height="90">' +
@@ -3443,8 +3450,12 @@ var commands = exports.commands = {
 	stein: 'frank',
 	frankenstein : 'frank',
 	frank: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<img src="http://i.imgur.com/9wSqwcb.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="green" size="6">Franken Ştein&nbsp;&nbsp;</font></b><img height="150" src="http://fc03.deviantart.net/fs70/f/2013/120/5/9/thundurus_therian_forme_by_xous54-d4zn05j.png"></font></color><br><center><b>Ace:</b><br /> Thundurus-T<br><b>Catcphrase:</b><br /> Are you ready to fight against fear itself? Will you cross beyond that door? Let your souls make the decision for you.');
+	if (!this.canBroadcast()) return;
+	this.sendReply('|raw|<center><img src="http://i.imgur.com/9wSqwcb.png">' +
+		'<b><font color="green" size="6">Franken Ştein</font></b>' +
+		'<img src="http://fc03.deviantart.net/fs70/f/2013/120/5/9/thundurus_therian_forme_by_xous54-d4zn05j.png" height="130"><br />' +
+		'<b>Ace:</b> Thundurus-T<br />' +	
+		'<b>Catcphrase:</b> Are you ready to fight against fear itself? Will you cross beyond that door? Let your souls make the decision for you.</center>');
 	},
 	
 	shadowninjask: 'ninjask',
@@ -3468,10 +3479,10 @@ var commands = exports.commands = {
 	tesla: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados/lanturn.gif>' +
-			'<img src=http://i.imgur.com/7HIXTxC.gif>' +
-			'<img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados/zapdos.gif><br />' +
-			'Ace: <font color="green">The Green Lanturn</font><br />' +
-			'<font color=#CC9900>Edison failed 10,000 times before he made the electric light. <br />Do not be discouraged if you fail a few times.</font></center>');
+		'<img src=http://i.imgur.com/7HIXTxC.gif>' +
+		'<img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados/zapdos.gif><br />' +
+		'Ace: <font color="green">The Green Lanturn</font><br />' +
+		'<font color=#CC9900>Edison failed 10,000 times before he made the electric light. <br />Do not be discouraged if you fail a few times.</font></center>');
 	},
 	
 	nocilol: function(target, room, user) {
@@ -3494,8 +3505,18 @@ var commands = exports.commands = {
 	
 	prez: 'cosy',
 	cosy: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<marquee direction="right"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"><img src="http://i.imgur.com/Cy88GTo.gif"></marquee><img width="100%" src="http://i.imgur.com/NyBEx2S.png"><marquee direction="left"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"><img src="http://i.imgur.com/gnG81Af.gif"></marquee>');
+	if (!this.canBroadcast()) return;
+	this.sendReply('|raw|<marquee direction="right"><img src="http://i.imgur.com/Cy88GTo.gif">' +
+		'<img src="http://i.imgur.com/Cy88GTo.gif">' +
+		'<img src="http://i.imgur.com/Cy88GTo.gif">' +
+		'<img src="http://i.imgur.com/Cy88GTo.gif">' +
+		'<img src="http://i.imgur.com/Cy88GTo.gif"></marquee>' +
+		'<img src="http://i.imgur.com/NyBEx2S.png" width="100%"><marquee direction="left">' +
+		'<img src="http://i.imgur.com/gnG81Af.gif">' +
+		'<img src="http://i.imgur.com/gnG81Af.gif">' +
+		'<img src="http://i.imgur.com/gnG81Af.gif">' +
+		'<img src="http://i.imgur.com/gnG81Af.gif">' +
+		'<img src="http://i.imgur.com/gnG81Af.gif"></marquee>');
 	},
 	
 	hulasaur: function(target, room, user) {
@@ -3603,7 +3624,7 @@ var commands = exports.commands = {
 	lights: 'scarftini', 
 	scarftini: function(target, room, user) {
 	if (!this.canBroadcast()) return; 
-	this.sendReplyBox('<center><img src="http://i.imgur.com/HbuF0aR.png"><br />' + 
+	this.sendReplyBox('<center><img src="http://i.imgur.com/HbuF0aR.png" width="550"><br />' + 
 		'<b>Ace:</b> Victini <br />' + 
 		'Owner of Trinity and former head of Biblia. Aggression is an art form. I am simply an artist.<br />' +
 		'<img src="http://img-cache.cdn.gaiaonline.com/1a962e841da3af2acaced68853cd194d/http://i1070.photobucket.com/albums/u485/nitehawkXD/victini.gif"></center>');

@@ -2758,9 +2758,8 @@ var commands = exports.commands = {
 		}
 		if (target.toLowerCase() == "casino") {
                         return connection.sendTo('casino','|html|<center><img src="http://i.imgur.com/n3RCajz.gif" width="100%"></center><br />' +
-                                        '<b>Casino Commands List:</b><br />' +
-                                        '/gamble [amount to wager] - Will do one of 3 things.  1.) Will give you that many more bucks. 2.) Will remove that many bucks. 3.) Will hit jackpot where you win 20 times your wager. (1% chance).<br />' +
-                                        '/freebuck - Will give you a FREE buck if you have none.<br><br>' +
+                                        'Gamble with friends and foes!  Use the !dice commands!<br>' +
+                                        'Transfer bucks to users with /tb user, amount.<br>' +
                                         'Good luck, and have fun gambling!');
 		}        
 		if (target.toLowerCase() == "dawnleague") {

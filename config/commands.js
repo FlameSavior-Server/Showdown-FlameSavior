@@ -1394,6 +1394,26 @@ var commands = exports.commands = {
     	
     			//Music Boxes
     	
+    	sandbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Sandshrewed\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=vN0I4b5YdOc"><button title="RAP Done It All - Iniquity Rhymes">RAP Done It All - Iniquity Rhymes</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=JHBnadmTReg"><button title="T.I. ft. Young Thug - About The Money">T.I. ft. Young Thug - About The Money</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=hV5sB5rRsGI"><button title="New Boyz - Colors">New Boyz - Colors</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=A1A0mIqlPiI"><button title="Young Cash feat. Shawn Jay (Field Mob) - Stress Free">Young Cash feat. Shawn Jay (Field Mob) - Stress Free</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=rqzVTNHxp7w"><button title="Young Cash - My Knob Broke">Young Cash - My Knob Broke</a></button><br />' +
+		'6. <a href="https://www.youtube.com/watch?v=P4PgrY33-UA"><button title="Drop That NaeNae">Drop That NaeNae</a></button><br />' );
+	},
+    	
+    	ampharosbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>AmpharosTheBeast\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=RRGSHvlu9Ss"><button title="Linkin Park - Castle of Glass">Linkin Park - Castle of Glass</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=ie1wU9BLGn8"><button title="Rixton - Me and My Broken Heart">Rixton - Me and My Broken Heart</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=psuRGfAaju4"><button title="Owl City - Fireflies">Owl City - Fireflies</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=hT_nvWreIhg"><button title="OneRepublic - Counting Stars">OneRepublic - Counting Stars</a></button><br />');
+	},
+    	
     	legitbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Legit Buttons\'s Music Box!</b><br />' +

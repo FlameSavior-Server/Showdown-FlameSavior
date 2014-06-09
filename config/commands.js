@@ -2537,7 +2537,6 @@ var commands = exports.commands = {
         this.sendReply('Thanks, your new color guess has been sent.  We\'ll review your color soon and get back to you. ("'+target+'")');
 	},
 
-	pr: 'pickrandom',
 	pick: 'pickrandom',
 	pickrandom: function (target, room, user) {
 		var options = target.split(',');

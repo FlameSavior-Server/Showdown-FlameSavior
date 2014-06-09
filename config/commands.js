@@ -1501,7 +1501,7 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/20cJgVY.png"><br />' +
     		'<b><font color="red">Champion:</font></b> REV Dolphin<br />' +
     		'<a href="http://revivalleague.weebly.com" >Come visit our website.</a><br />' +
-		'Looking to challenge us? Click <a href="https://docs.google.com/document/d/16lVLz79XVi2xKEBsw181tG7QGofHOavqPYxOLYpj_fs/edit">here</a>for information on how');
+		'Looking to challenge us? Click <a href="https://docs.google.com/document/d/16lVLz79XVi2xKEBsw181tG7QGofHOavqPYxOLYpj_fs/edit">here </a>for information on how');
     	},
 	
 	chaosleague: function(target, room, user) {

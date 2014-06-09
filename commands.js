@@ -3533,7 +3533,7 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help unshadowban');
 		this.splitTarget(target);
 
-		if (!this.can('shadowban')) return false;
+		if (!this.can('lock')) return false;
 
 		var targets = ShadowBan.removeUser(this.targetUser || this.targetUsername);
 		if (targets.length === 0) {

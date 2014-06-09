@@ -2719,7 +2719,7 @@ var commands = exports.commands = {
 				return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 			}
 		}
-		if (target.toLowerCase() == "spamroom" && !user.can('lock')) {
+		if (target.toLowerCase() == "shadowbanroom" && !user.can('lock')) {
 			return this.sendReply("|noinit|joinfailed|The room '"+target+"' does not exist.");
 		}
 		if (target.toLowerCase() == "room" && !user.can('hotpatch')) {
@@ -3516,7 +3516,7 @@ var commands = exports.commands = {
 		if (!this.targetUser) {
 			return this.sendReply("User '" + this.targetUsername + "' not found.");
 		}
-		if (!this.can('shadowban', this.targetUser)) return false;
+		if (!this.can('lock', this.targetUser)) return false;
 
 		var targets = ShadowBan.addUser(this.targetUser);
 		if (targets.length === 0) {

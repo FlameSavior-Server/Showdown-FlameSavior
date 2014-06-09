@@ -1238,8 +1238,10 @@ var commands = exports.commands = {
 	kupo: 'moogle',
 	moogle: function(target, room, user) {
 	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><img src="http://50.62.73.114:8000/avatars/kupo.png"><br />' +
-		'<b>Kupo</b> - abc!</center>');
+	this.sendReplyBox('<center><font size="7"><b>kupo</font</b><br />' +
+		'<img src="http://107.191.104.240:8000/avatars/kupo.png"><br />' +
+		'<img src="http://th03.deviantart.net/fs70/PRE/i/2013/193/f/1/chocobo_and_moogle_by_judeydey-d6d629x.png" width="50%"><br />'
+		'abc! O3O!</center>');
 	},
 
 	starmaster: function(target, room, user) {

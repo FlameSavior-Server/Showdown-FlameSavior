@@ -1240,7 +1240,7 @@ var commands = exports.commands = {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><font size="7"><b>kupo</font</b><br />' +
 		'<img src="http://107.191.104.240:8000/avatars/kupo.png"><br />' +
-		'<img src="http://th03.deviantart.net/fs70/PRE/i/2013/193/f/1/chocobo_and_moogle_by_judeydey-d6d629x.png" width="50%"><br />'
+		'<img src="http://th03.deviantart.net/fs70/PRE/i/2013/193/f/1/chocobo_and_moogle_by_judeydey-d6d629x.png" width="50%"><br />' +
 		'abc! O3O!</center>');
 	},
 

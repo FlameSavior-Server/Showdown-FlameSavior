@@ -4646,7 +4646,7 @@ var commands = exports.commands = {
 		this.logEntry(user.name + " used /crashfixed");
 	},
 
-	'memusage': 'memoryusage',
+	memusage: 'memoryusage',
 	memoryusage: function (target) {
 		if (!this.can('hotpatch')) return false;
 		target = toId(target) || 'all';
@@ -5242,7 +5242,7 @@ function getRandMessage(user){
 			break;
 		case 4: message = message + user.name + ' squished by panpawn\'s large behind!';
 			break;
-		case 5: message = message + user.name + ' became EnerG\'s slave!';
+		case 5: message = message + user.name + ' became panpawn\'s slave!';
 			break;
 		case 6: message = message + user.name + ' became panpawn\'s love slave!';
 			break;
@@ -5268,7 +5268,7 @@ function getRandMessage(user){
 			break;
 		case 17: message = message + 'A large spider descended from the sky and picked up ' + user.name + '.';
 			break;
-		case 18: message = message + user.name + ' tried to touch Zarel!';
+		case 18: message = message + user.name + ' tried to touch jd!';
 			break;
 		case 19: message = message + user.name + ' got their sausage smoked by Charmanderp!';
 			break;
@@ -5306,7 +5306,7 @@ function getRandMessage(user){
 			break;
 		case 36: message = message + user.name + ' was kicked from server! (lel clause)';
 			break;
-		default: message = message + user.name + ' licked the server too much!';
+		default: message = message + user.name + ' had to go urinate!';
 	};
 	message = message + ' ~~';
 	return message;

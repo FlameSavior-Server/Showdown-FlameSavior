@@ -928,11 +928,11 @@ var commands = exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target2 === 'badge') {
+		if (target2 === 'badge'|| target2 === 'vip') {
 			price = 1000;
 			if (price <= user.money) {
 				user.money = user.money - price;
-				this.sendReply('You have purchased a VIP badge.');
+				this.sendReply('You have purchased a VIP badge.  Screen shoot this as evedience for an admin.');
 				user.canBadge = true;
 				this.add(user.name + ' has purchased the ability to claim a VIP badge!');
 			} else {

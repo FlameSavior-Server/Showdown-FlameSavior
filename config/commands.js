@@ -1495,6 +1495,15 @@ var commands = exports.commands = {
 	* League Cards                         *
 	***************************************/
     
+	revleague: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/ho-oh.gif"><br />' +
+    		'<img src="http://i.imgur.com/20cJgVY.png"><br />' +
+    		'<b><font color="red">Champion:</font></b> REV Dolphin<br />' +
+    		'<a href="http://revivalleague.weebly.com" >Come visit our website.</a>' +
+		'Looking to challenge us? Click <a href="https://docs.google.com/document/d/16lVLz79XVi2xKEBsw181tG7QGofHOavqPYxOLYpj_fs/edit">here</a>for information on how');
+    	},
+	
 	chaosleague: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs71/f/2013/280/3/2/02_by_nurinaki-d6pkya9.png" width="220"><br />' +

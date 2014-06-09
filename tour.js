@@ -1292,8 +1292,7 @@ var cmds = {
                  for (var u in tour[room.id].answerList) {
                  if (!tour[room.id].answerList[u] || tour[room.id].answerList[u].length < 1) continue;
                  output += '<button name="send" value="/vote '+tour[room.id].answerList[u]+'">'+tour[room.id].answerList[u]+'</button>&nbsp;';
-                 this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + output + '</div>');
-                 return;
+                 this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />'+ separacion + " &bull; " + output + '</div>');
                  }
          }
 	/*/

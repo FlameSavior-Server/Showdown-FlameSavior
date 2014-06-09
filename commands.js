@@ -2722,6 +2722,9 @@ var commands = exports.commands = {
 		if (target.toLowerCase() == "shadowbanroom" && !user.can('lock')) {
 			return this.sendReply("|noinit|joinfailed|The room '"+target+"' does not exist.");
 		}
+		if (target.toLowerCase() == "spamroom" && !user.can('hotpatch')) {
+			return this.sendReply("|noinit|joinfailed|The room '"+target+"' does not exist.");
+		}
 		if (target.toLowerCase() == "room" && !user.can('hotpatch')) {
 			return this.sendReply("|noinit|joinfailed|Out, peasant. OUT! This room is not for YOU!");		
 		}

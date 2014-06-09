@@ -3500,51 +3500,46 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Moderating: Punishments
 	 *********************************************************/
-	spam: 'spamroom',
-	spammer: 'spamroom',
-	spamroom: function(target, room, user, connection) {
-		var target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser || !targetUser.connected) {
-			return this.sendReply('The user \'' + this.targetUsername + '\' does not exist.');
+	spam: 'shadowban',
+	spamroom: 'shadowban',
+	sban: 'shadowban',
+	shadowban: function (target, room, user) {
+		if (!target) return this.parse('/help shadowban');
+
+		var params = this.splitTarget(target).split(',');
+		var action = params[0].trim().toLowerCase();
+		var reason = params.slice(1).join(',').trim();
+		if (!(action in CommandParser.commands)) {
+			reason = params.join(',').trim();
 		}
-		if (!this.can('mute', targetUser)) {
-			return false;
+
+		if (!this.targetUser) {
+			return this.sendReply("User '" + this.targetUsername + "' not found.");
 		}
-		if (spamroom[targetUser]) {
-			return this.sendReply('That user\'s messages are already being redirected to the spamroom.');
+		if (!this.can('shadowban', this.targetUser)) return false;
+
+		var targets = ShadowBan.addUser(this.targetUser);
+		if (targets.length === 0) {
+			return this.sendReply("That user's messages are already being redirected to the shadow ban room.");
 		}
-		spamroom[targetUser] = true;
-		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was added to the spamroom list by '+user.name+'.</b>');
-		Rooms.rooms['room'].add('|raw|<b>' + this.targetUsername + ' was added to the spamroom list by '+user.name+'.</b>');
-		return this.privateModCommand('|html|(<font color="red">'+ targetUser + '</font> was added to the <button name="joinRoom" value="spamroom" target="_blank">SpamRoom</button> list by ' + user.name +'.)');
-		this.logModCommand(targetUser + ' was added to spamroom by ' + user.name);
-		return this.sendReply(this.targetUsername + ' was successfully added to the spamroom list.');
+		this.privateModCommand("(" + user.name + " has added to the shadow ban user list: " + targets.join(", ") + (reason ? " (" + reason + ")" : "") + ")");
+
 	},
 
-	unspam: 'unspamroom',
-	unspammer: 'unspamroom',
-	unspamroom: function(target, room, user, connection) {
-		var target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser || !targetUser.connected) {
-			return this.sendReply('The user \'' + this.targetUsername + '\' does not exist.');
+	unspam: 'unshadowban',
+	unspamroom: 'unshadowban',
+	unsban: 'unshadowban',
+	unshadowban: function (target, room, user) {
+		if (!target) return this.parse('/help unshadowban');
+		this.splitTarget(target);
+
+		if (!this.can('shadowban')) return false;
+
+		var targets = ShadowBan.removeUser(this.targetUser || this.targetUsername);
+		if (targets.length === 0) {
+			return this.sendReply("That user is not in the shadow ban list.");
 		}
-		if (!this.can('mute', targetUser)) {
-			return false;
-		}
-		if (!spamroom[targetUser]) {
-			return this.sendReply('That user is not in the spamroom list.');
-		}
-		for(var u in spamroom)
-			if(targetUser == Users.get(u))
-				delete spamroom[u];
-		Rooms.rooms['spamroom'].add('|raw|<b>' + this.targetUsername + ' was removed from the spamroom list by '+user.name+'.</b>');
-		Rooms.rooms['room'].add('|raw|<b>' + this.targetUsername + ' was removed from the spamroom list by '+user.name+'.</b>');
-		return this.privateModCommand('|html|(<font color="green">'+ this.targetUser + '</font> was removed from the spamroom list by ' + user.name +'.)');
-		this.logModCommand(targetUser + ' was removed from spamroom by ' + user.name);
-		
-		return this.sendReply(this.targetUsername + ' and their alts were successfully removed from the spamroom list.');
+		this.privateModCommand("(" + user.name + " has removed from the shadow ban user list: " + targets.join(", ") + ")");
 	},
 
 	aye: 'warn',

@@ -3369,6 +3369,7 @@ var commands = exports.commands = {
 	this.sendReply('|raw|<img width=100% height=260 src="http://i.imgur.com/6gkSSam.jpg">');
 	},
 	
+	familyman: 'familymantpsn',
 	familymantpsn: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img src="http://i.imgur.com/UHptfOM.gif">' +

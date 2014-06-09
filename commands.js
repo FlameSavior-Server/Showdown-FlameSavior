@@ -2939,6 +2939,19 @@ var commands = exports.commands = {
 		}
 	},
 	
+	getid: 'showuserid',
+	userid: 'showuserid',
+	showuserid: function(target, room, user) {
+		if (!target) return this.parse('/help showuserid');
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+
+		if (!this.can('lock')) return false;
+
+		this.sendReply('The ID of the target is: ' + targetUser);
+	},
+	
 	afk: 'away',
 	away: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
@@ -2977,7 +2990,7 @@ var commands = exports.commands = {
         	
 		if (!user.isAway) {
 			user.originalName = user.name;
-			var awayName = user.name + ' - Sleeping';
+			var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
@@ -3003,7 +3016,7 @@ var commands = exports.commands = {
 
 		if (!user.isAway) {
 			user.originalName = user.name;
-			var awayName = user.name + ' - Busy';
+			var awayName = user.name + ' - Ⓑⓤⓢⓨ';
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);

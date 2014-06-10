@@ -2123,6 +2123,7 @@ var commands = exports.commands = {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox('The current Artist of the Day is: '+room.aotd);
 			}
+			else {
 			if (!this.canTalk()) return;
 			if (target.length > 25) {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
@@ -2133,6 +2134,7 @@ var commands = exports.commands = {
 			'<font size="1">(Set by '+user.name+'.)<br />' +
 			'This Artist will be posted on our <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">Artist of the Day page</a>.</div>');
 			this.logModCommand('The Artist of the Day was changed to '+target+' by '+user.name+'.');
+		}	
 	},
 	
 	 nstaffmemberoftheday: 'smotd',

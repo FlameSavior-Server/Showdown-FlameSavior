@@ -2098,7 +2098,7 @@ var commands = exports.commands = {
 		if (target === 'on') {
 			room.addRaw(
 				'<font size="3"><center>Artist of the Day has started!</font> <br />' +
-				'(Started by '+user.name+')<br />' +
+				'<center>(Started by '+user.name+')<br />' +
 				'Use <b>/naotd</b> [artist] to nominate an artist!<center>'
 				);
 			aotdOn = true;	
@@ -2131,7 +2131,6 @@ var commands = exports.commands = {
 	 nominateartistoftheday: 'naotd',
 	 naotd: function(target, room, user) {
 	       if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
-	       var aotdOn = false;
 	       if (!aotdOn) {
 	       return this.sendReply('This command is shut off at the moment.');
 	       } else 

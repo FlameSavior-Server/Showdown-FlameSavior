@@ -2109,24 +2109,6 @@ var commands = exports.commands = {
 	 nominateartistoftheday: 'naotd',
 	 naotd: function(target, room, user){
 	       if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
-			if (target.indexOf('<img ') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<a href') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<font ') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<marquee') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<blink') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<center') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
 			if(!target) return this.sendReply('/naotd needs an artist.');
 			if (target.length > 25) {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
@@ -2137,29 +2119,10 @@ var commands = exports.commands = {
 
 	artistoftheday: 'aotd',
 	aotd: function(target, room, user) {
-			if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
-			if (target.indexOf('<img ') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<a href') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<font ') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<marquee') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<blink') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
-			if (target.indexOf('<center') > -1) {
-			return this.sendReply('HTML is not supported in this command.')
-			}
 			if (!target) {
-			return this.sendReply('The current Artist of the Day is: '+room.aotd);
+			return this.sendReply('The current Artist of the Day is: '+room.pie);
 			}
-			if (!room.aotd || !target) {
+			if (!room.pie || !target) {
 			return this.sendReply('The current Artist of the Day has not been set.');
 			}	
 			if (!this.canTalk()) return;
@@ -2167,7 +2130,7 @@ var commands = exports.commands = {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
 			}
 			if (!this.can('mute', null, room)) return;
-				room.aotd = target;
+				room.pie = target;
 			if (target) {
 			room.addRaw('<div class="broadcast-green"><font size="2"><b>The Artist of the Day is now <font color="black">'+target+'</font color>!</font size></b><br>' +
 			'<font size="1">(Set by '+user.name+'.)<br />' +

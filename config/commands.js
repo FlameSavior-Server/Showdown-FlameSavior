@@ -2104,7 +2104,7 @@ var commands = exports.commands = {
 		if (target === 'on') {
 			room.addRaw(
 				'<div class=\"broadcast-blue\"><font size="3"><center><b>Artist of the Day has started!</b> <br />' +
-				'</font>(Started by '+user.name+')<br />' +
+				'</font><center>(Started by '+user.name+')<br />' +
 				'Use <b>/naotd</b> [artist] to nominate an artist!</center>'
 				);
 			aotdOn = true;	

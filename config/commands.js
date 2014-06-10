@@ -2097,17 +2097,20 @@ var commands = exports.commands = {
 		}
 		if (target === 'on') {
 			room.addRaw(
-				'<font size="4">'+user.name+' has started Artist of the Day! <br />' +
-				'Use <b>/naotd</b> [artist] to nominate an artist!'
+				'<font size="3"><center>Artist of the Day has started!</font> <br />' +
+				'(Started by '+user.name+')<br />' +
+				'Use <b>/naotd</b> [artist] to nominate an artist!<center>'
 				);
 			aotdOn = true;	
+			this.logModCommand('The Artist of the Day was started by ' + user.name);
 		}
 		if (target === 'off') {
 			room.addRaw(
 				''+user.name+' has turned off the use of /naotd'
 				);
-			aotdOn = false;	
-		} else return this.sendReply('/toggleaotd [on / off] - If on, this will start AOTD, if off, this will no longer allow people to use /naotd.');
+			aotdOn = false;
+			this.logModCommand('The Artist of the Day was turned off by ' + user.name);
+		} 
 	},
 	
 	aotdhelp: function(target, room, user) {
@@ -2128,6 +2131,7 @@ var commands = exports.commands = {
 	 nominateartistoftheday: 'naotd',
 	 naotd: function(target, room, user) {
 	       if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+	       var aotdOn = false;
 	       if (!aotdOn) {
 	       return this.sendReply('This command is shut off at the moment.');
 	       } else 

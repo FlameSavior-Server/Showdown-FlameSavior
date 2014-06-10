@@ -1538,6 +1538,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	psyzen: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://th07.deviantart.net/fs70/PRE/i/2013/299/0/6/trainer_sparky_and_gallade_by_sparkytangerine-d6rvqeq.png" width="120">' +
+    		'<img src="http://i.imgur.com/ZBWaYKM.png" width="300">' +
+    		'<img src="http://th00.deviantart.net/fs71/PRE/i/2013/099/9/d/475___gallade___art_v_2_by_tails19950-d60zw22.png" width="120"><br />' +
+    		'<b>Ace:</b> Gallade<br />' +
+    		'Always Aim To Break Their Will.</center>');
+    	},
+	
 	tsunami: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/J2SlSed.gif" width="140">' +

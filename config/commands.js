@@ -142,7 +142,7 @@
  *
  * @license MIT license
  */
-
+var room.aotd = 'Not set yet.';
 var commands = exports.commands = {
 
 	ip: 'whois',

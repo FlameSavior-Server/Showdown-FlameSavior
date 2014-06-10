@@ -2089,6 +2089,11 @@ var commands = exports.commands = {
 		}
 	},
 //Artist of the Day Commands:
+
+	startaotd: function(target, room, user) {
+		if (!this.canTalk()) return;
+		return this.parse('/toggleaotd on');
+	},
 	
 	toggleaotd: function(target, room, user) {
 		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");

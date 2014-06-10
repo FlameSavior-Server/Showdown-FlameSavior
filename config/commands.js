@@ -2120,17 +2120,14 @@ var commands = exports.commands = {
 	artistoftheday: 'aotd',
 	aotd: function(target, room, user) {
 			if (!target) {
-			return this.sendReply('The current Artist of the Day is: '+room.pie);
+			return this.sendReply('The current Artist of the Day is: '+room.aotd);
 			}
-			else if (!target || !room.pie) {
-			return this.sendReply('The current Artist of the Day has not been set.');
-			}	
 			if (!this.canTalk()) return;
 			if (target.length > 25) {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
 			}
 			if (!this.can('mute', null, room)) return;
-			room.pie = target;
+			room.aotd = target;
 			room.addRaw('<div class="broadcast-green"><font size="2"><b>The Artist of the Day is now <font color="black">'+target+'</font color>!</font size></b><br>' +
 			'<font size="1">(Set by '+user.name+'.)<br />' +
 			'This Artist will be posted on our <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">Artist of the Day page</a>.</div>');

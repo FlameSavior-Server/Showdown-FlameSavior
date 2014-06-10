@@ -2122,7 +2122,7 @@ var commands = exports.commands = {
 			if (!target) {
 			return this.sendReply('The current Artist of the Day is: '+room.pie);
 			}
-			if (!target || !room.pie) {
+			else if (!target || !room.pie) {
 			return this.sendReply('The current Artist of the Day has not been set.');
 			}	
 			if (!this.canTalk()) return;

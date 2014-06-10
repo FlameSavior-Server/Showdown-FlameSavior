@@ -2133,7 +2133,7 @@ var commands = exports.commands = {
 			}
 			if (!this.canTalk()) return;
             room.addRaw(''+user.name+'\'s nomination  for Artist of the Day is: <b><i>' + target +'</i></b>');
-    },
+    	},
 
 	artistoftheday: 'aotd',
 	aotd: function(target, room, user) {
@@ -2159,6 +2159,9 @@ var commands = exports.commands = {
 			if (!target) {
 			return this.sendReply('The current Artist of the Day is: '+room.aotd);
 			}
+			if (!room.aotd || !target) {
+			return this.sendReply('The current Artist of the Day has not been set.');
+			}	
 			if (!this.canTalk()) return;
 			if (target.length > 25) {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');

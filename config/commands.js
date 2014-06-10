@@ -2110,11 +2110,8 @@ var commands = exports.commands = {
 			this.logModCommand('The Artist of the Day was started by ' + user.name);
 		}
 		if (target === 'off') {
-			room.addRaw(
-				''+user.name+' has turned off the use of /naotd.'
-				);
+			room.addRaw('<b>Nominations are over!</b> (Turned off by '+user.name+')');
 			aotdOn = false;
-			this.logModCommand('The Artist of the Day was turned off by ' + user.name);
 		} 
 	},
 	

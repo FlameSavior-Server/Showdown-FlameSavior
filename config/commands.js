@@ -2119,6 +2119,7 @@ var commands = exports.commands = {
 
 	artistoftheday: 'aotd',
 	aotd: function(target, room, user) {
+		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
 			if (!target) {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox('The current Artist of the Day is: <b>' + room.aotd + '</b>');

@@ -2114,14 +2114,14 @@ var commands = exports.commands = {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
 			}
 			if (!this.canTalk()) return;
-            room.addRaw(''+user.name+'\'s nomination  for Artist of the Day is: <b><i>' + target +'</i></b>');
+            room.addRaw(user.name + '\'s nomination  for Artist of the Day is: <b><i>' + target +'</i></b>');
     	},
 
 	artistoftheday: 'aotd',
 	aotd: function(target, room, user) {
 			if (!target) {
 			if (!this.canBroadcast()) return;
-			this.sendReplyBox('The current Artist of the Day is: '+room.aotd);
+			this.sendReplyBox('The current Artist of the Day is: <b>' + room.aotd + '</b>');
 			}
 			else {
 			if (!this.canTalk()) return;
@@ -2131,9 +2131,9 @@ var commands = exports.commands = {
 			if (!this.can('mute', null, room)) return;
 			room.aotd = target;
 			room.addRaw('<div class="broadcast-green"><font size="2"><b>The Artist of the Day is now <font color="black">'+target+'</font color>!</font size></b><br>' +
-			'<font size="1">(Set by '+user.name+'.)<br />' +
+			'<font size="1">(Set by ' + user.name + '.)<br />' +
 			'This Artist will be posted on our <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">Artist of the Day page</a>.</div>');
-			this.logModCommand('The Artist of the Day was changed to '+target+' by '+user.name+'.');
+			this.logModCommand('The Artist of the Day was changed to ' + target + ' by '+user.name+'.');
 		}	
 	},
 	

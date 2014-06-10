@@ -2102,7 +2102,7 @@ var commands = exports.commands = {
 				);
 			aotdOn = true;	
 		}
-		it (target === 'off') {
+		if (target === 'off') {
 			room.addRaw(
 				''+user.name+' has turned off the use of /naotd'
 				);

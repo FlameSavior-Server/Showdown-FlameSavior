@@ -2103,12 +2103,12 @@ var commands = exports.commands = {
 		}
 		if (target === 'on') {
 			room.addRaw(
-				'<div class=\"broadcast-blue\"><font size="3"><center><b>Artist of the Day has started!</b> <br />' +
+				'<div class=\"broadcast-blue\"><font size="3"><center><b>Artist of the Day has started!</b> <br /><br />' +
 				'</font><center>(Started by '+user.name+')<br />' +
 				'Use <b>/naotd</b> [artist] to nominate an artist!</center>'
 				);
 			aotdOn = true;	
-			this.logModCommand('The Artist of the Day was started by ' + user.name);
+			this.logModCommand('The Artist of the Day was started by ' + user.name +'.');
 		}
 		if (target === 'off') {
 			room.addRaw('<b>Nominations are over!</b> (Turned off by '+user.name+')');

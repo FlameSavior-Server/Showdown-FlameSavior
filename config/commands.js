@@ -2095,9 +2095,15 @@ var commands = exports.commands = {
 		return this.parse('/toggleaotd on');
 	},
 	
+	endaotd: function(target, room, user) {
+		if (!this.canTalk()) return;
+		return this.parse('/toggleaotd off');
+	},
+	
 	taotd: 'toggleaotd',
 	toggleaotd: function(target, room, user) {
 		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+		if (!this.can('ban', null, room)) return;
 		if (!target) {
 			return this.sendReply('/toggleaotd [on / off] - If on, this will start AOTD, if off, this will no longer allow people to use /naotd.');
 		}
@@ -2158,7 +2164,7 @@ var commands = exports.commands = {
 			if (target.length > 25) {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
 			}
-			if (!this.can('roomban', null, room)) return;
+			if (!this.can('ban', null, room)) return;
 			room.aotd = target;
 			room.addRaw('<div class=\"broadcast-green\"><font size="2"><b>The Artist of the Day is now <font color="black">'+target+'</font color>!</font size></b><br>' +
 			'<font size="1">(Set by ' + user.name + '.)<br />' +
@@ -2196,7 +2202,7 @@ var commands = exports.commands = {
 			}
 			if (!this.canTalk()) return;
             room.addRaw(''+user.name+'\'s nomination  for Staff Member of the Day is: <b><i>' + target +'</i></b>');
-    },
+    	},
 
 	staffmemberoftheday: 'smotd',
 	smotd: function(target, room, user) {

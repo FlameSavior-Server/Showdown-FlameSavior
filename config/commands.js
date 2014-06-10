@@ -2097,7 +2097,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'on') {
 			room.addRaw(
-				'<font size="3"><center>Artist of the Day has started!</font> <br />' +
+				'<div class=\"broadcast-blue\"><font size="3"><center>Artist of the Day has started!</font> <br />' +
 				'<center>(Started by '+user.name+')<br />' +
 				'Use <b>/naotd</b> [artist] to nominate an artist!<center>'
 				);
@@ -2106,7 +2106,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'off') {
 			room.addRaw(
-				''+user.name+' has turned off the use of /naotd'
+				''+user.name+' has turned off the use of /naotd.'
 				);
 			aotdOn = false;
 			this.logModCommand('The Artist of the Day was turned off by ' + user.name);
@@ -2156,7 +2156,7 @@ var commands = exports.commands = {
 			}
 			if (!this.can('roomban', null, room)) return;
 			room.aotd = target;
-			room.addRaw('<div class="broadcast-green"><font size="2"><b>The Artist of the Day is now <font color="black">'+target+'</font color>!</font size></b><br>' +
+			room.addRaw('<div class=\"broadcast-green\"><font size="2"><b>The Artist of the Day is now <font color="black">'+target+'</font color>!</font size></b><br>' +
 			'<font size="1">(Set by ' + user.name + '.)<br />' +
 			'This Artist will be posted on our <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">Artist of the Day page</a>.</div>');
 			this.logModCommand('The Artist of the Day was changed to ' + target + ' by '+user.name+'.');

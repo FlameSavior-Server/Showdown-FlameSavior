@@ -2120,7 +2120,7 @@ var commands = exports.commands = {
 	artistoftheday: 'aotd',
 	aotd: function(target, room, user) {
 			if (!target) {
-			return this.sendReply('The current Artist of the Day is: '+room.aotd);
+			return this.sendReplyBox('The current Artist of the Day is: '+room.aotd);
 			}
 			if (!this.canTalk()) return;
 			if (target.length > 25) {

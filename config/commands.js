@@ -2090,6 +2090,25 @@ var commands = exports.commands = {
 	},
 //Artist of the Day Commands:
 	
+	toggleaotd: function(target, room, user) {
+		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+		if (!target) {
+			return this.sendReply('/toggleaotd [on / off] - If on, this will start AOTD, if off, this will no longer allow people to use /naotd.');
+		}
+		if (target == 'on') {
+			room.addRaw(
+				'<font size="4">'+user.name+' has started Artist of the Day! <br />' +
+				'Use <b>/naotd</b> [artist] to nominate an artist!'
+				);
+			aotdOn = true;	
+		}
+		it (target == 'off') {
+			room.addRaw(
+				''+user.name+' has turned off the use of /naotd'
+				);
+			aotdOn = false;	
+		} else return this.sendReply('/toggleaotd [on / off] - If on, this will start AOTD, if off, this will no longer allow people to use /naotd.');
+	},
 	
 	aotdhelp: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2107,8 +2126,11 @@ var commands = exports.commands = {
 	},
 	
 	 nominateartistoftheday: 'naotd',
-	 naotd: function(target, room, user){
+	 naotd: function(target, room, user) {
 	       if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+	       if (!aotdOn) {
+	       return this.sendReply('This command is shut off at the moment.');
+	       } else 
 			if(!target) return this.sendReply('/naotd needs an artist.');
 			if (target.length > 25) {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
@@ -2129,7 +2151,7 @@ var commands = exports.commands = {
 			if (target.length > 25) {
 			return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
 			}
-			if (!this.can('mute', null, room)) return;
+			if (!this.can('roomban', null, room)) return;
 			room.aotd = target;
 			room.addRaw('<div class="broadcast-green"><font size="2"><b>The Artist of the Day is now <font color="black">'+target+'</font color>!</font size></b><br>' +
 			'<font size="1">(Set by ' + user.name + '.)<br />' +

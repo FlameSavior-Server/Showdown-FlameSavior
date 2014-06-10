@@ -2095,6 +2095,7 @@ var commands = exports.commands = {
 		return this.parse('/toggleaotd on');
 	},
 	
+	taotd: 'toggleaotd',
 	toggleaotd: function(target, room, user) {
 		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
 		if (!target) {
@@ -2102,9 +2103,9 @@ var commands = exports.commands = {
 		}
 		if (target === 'on') {
 			room.addRaw(
-				'<div class=\"broadcast-blue\"><font size="3"><center>Artist of the Day has started!</font> <br />' +
-				'<center>(Started by '+user.name+')<br />' +
-				'Use <b>/naotd</b> [artist] to nominate an artist!<center>'
+				'<div class=\"broadcast-blue\"><font size="3"><center><b>Artist of the Day has started!</b> <br />' +
+				'</font>(Started by '+user.name+')<br />' +
+				'Use <b>/naotd</b> [artist] to nominate an artist!</center>'
 				);
 			aotdOn = true;	
 			this.logModCommand('The Artist of the Day was started by ' + user.name);
@@ -2126,6 +2127,7 @@ var commands = exports.commands = {
 		'/naotd (artist) - This will nominate your artist of the day; only do this once, please. <br />' +
 		'/aotd - This allows you to see who the current Artist of the Day is.<br>' +
 		'/aotd (artist) - Sets an artist of the day. (requires %, @, #) <br />' +
+		'/taotd [on / off] - ON - will start AOTD... OFF - will turn off the use of /naotd <br />' +
 		'-- <i>For more information on Artist of the Day, click <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">here</a>. <br />' +
 		'-- <i><a href="http://thepsstudioroom.weebly.com/rules.html">Room rules</a></i>.');
 	},

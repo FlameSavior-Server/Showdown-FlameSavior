@@ -1284,7 +1284,7 @@ var commands = exports.commands = {
     	jdbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
-                '<center><h1><font color="darkblue"><u>Jd\'s Music Box</u></color></h1></center>' +
+                '<center><h1><font color="darkblue"><u>jd\'s Music Box</u></color></h1></center>' +
                 '<center><b><a href="https://www.youtube.com/watch?v=e8X3ACToii0">Savior</a><br>' +
 		'<center><b><a href="https://www.youtube.com/watch?v=6nQCxwneUwA">Satellite</a><br>' +
 		'<center><b><a href="https://www.youtube.com/watch?v=pH20zsVxxV0">State of the Union</a><br>' +

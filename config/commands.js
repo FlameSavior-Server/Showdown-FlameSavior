@@ -2095,14 +2095,14 @@ var commands = exports.commands = {
 		if (!target) {
 			return this.sendReply('/toggleaotd [on / off] - If on, this will start AOTD, if off, this will no longer allow people to use /naotd.');
 		}
-		if (target == 'on') {
+		if (target === 'on') {
 			room.addRaw(
 				'<font size="4">'+user.name+' has started Artist of the Day! <br />' +
 				'Use <b>/naotd</b> [artist] to nominate an artist!'
 				);
 			aotdOn = true;	
 		}
-		it (target == 'off') {
+		it (target === 'off') {
 			room.addRaw(
 				''+user.name+' has turned off the use of /naotd'
 				);

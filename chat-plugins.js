@@ -172,8 +172,8 @@ var plugins = exports.plugins = {
      	* Only works in a room with the id "The Studio"
      */
 	studio: {
-		aotdOn = false,
-		room.aotd = 'Not set yet.';
+		aotdOn: false,
+		room.aotd: 'Not set yet.',
         	commands: {
             		startaotd: function (target, room, user) {
                 	if (!this.canTalk()) return;

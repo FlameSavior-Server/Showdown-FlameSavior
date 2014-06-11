@@ -183,7 +183,7 @@ var plugins = exports.plugins = {
      * Only works in a room with the id "The Studio"
      */
     studio: {
-        commands {
+        commands: {
             startaotd: function (target, room, user) {
                 if (!this.canTalk()) return;
                 return this.parse('/toggleaotd on');

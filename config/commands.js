@@ -1541,7 +1541,7 @@ var commands = exports.commands = {
 	cam: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mawile-mega.gif">' +
-    		'<img src=""http://i.imgur.com/u3HWuly.png">' +
+    		'<img src="http://i.imgur.com/u3HWuly.png">' +
     		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja-3.gif" height="150"><br />' +
     		'<b>Ace:</b> Mega-Mawile<br />' +
     		'Stop Wishing, Start Doing.</center>');

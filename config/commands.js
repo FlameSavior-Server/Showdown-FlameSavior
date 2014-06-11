@@ -2308,12 +2308,19 @@ var commands = exports.commands = {
     	},
 	
 	mac: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/1xVO2RG.png" height="156" width="124">' +
-                '<img src="http://i.imgur.com/XsGOXpC.png" height="107" width="208">' +
-                '<img src="http://i.imgur.com/PLKSRCq.png"><br />' +
-                '<b>Ace:</b> Leon S. Kec<br />' +
-                'Having a passion for what you do is what makes you good at it.</center>');
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/1jVxQY2.png" width="140">' +
+    		'<img src="http://i.imgur.com/LLFGr9y.png">' +
+    		'<img src="http://i.imgur.com/7vTltT9.png" width="140"><br />' +
+    		'<b>Ace:</b> <font color="green">Kecleon</font><br />' +
+    		'<font color=#ff0000">Y</font><font color=#ff2100">o</font><font color=#ff4200">u</font><font color=#ff6300">\'</font><font color=#ff8500">l</font><font color=#ffa600">l</font> ' +
+    		'<font color=#ffe800">N</font><font color=#f3ff00">e</font><font color=#d2ff00">v</font><font color=#b1ff00">e</font><font color=#90ff00">r</font> ' +
+    		'<font color=#4dff00">F</font><font color=#2cff00">i</font><font color=#0bff00">n</font><font color=#00ff16">d</font> ' +
+    		'<font color=#00ff58">A</font><font color=#00ff79">n</font><font color=#00ff9b">y</font><font color=#00ffbc">o</font><font color=#00ffdd">n</font><font color=#00feff">e</font> ' +
+    		'<font color=#00bcff">M</font><font color=#009bff">o</font><font color=#0079ff">r</font><font color=#0058ff">e</font> ' +
+    		'<font color=#0016ff">F</font><font color=#0b00ff">a</font><font color=#2c00ff">b</font><font color=#4d00ff">u</font><font color=#6e00ff">l</font><font color=#9000ff">o</font><font color=#b100ff">u</font><font color=#d200ff">s</font> ' +
+    		'<font color=#ff00e8">T</font><font color=#ff00c7">h</font><font color=#ff00a6">a</font><font color=#ff0085">n</font ' +
+    		'<font color=#ff0042">M</font><font color=#ff0021">e</font></center>');
     	},
 	
 	princesshigh: function(target, room, user) {

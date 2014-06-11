@@ -3687,11 +3687,25 @@ var commands = exports.commands = {
 	
 	//Frost Contest Winner Commands//
 	
+	bestou: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/dLsxG5b.jpg" height="170"><br />' +
+    		'<img src="http://i.imgur.com/FMMzlI8.gif"><br />' +
+    		'Me best OU player? Think again! I\'m the best OU Staller! Let\'s start the stall!</center>');
+    	},
+	
+	nicestuser: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://fc02.deviantart.net/fs71/f/2011/006/3/0/195___quagsire_by_winter_freak-d36k65s.jpg" height="140"><br />' +
+    		'<img src="http://i.imgur.com/34stjSR.gif"><br />' +
+    		'Please say gg before you rage quit C:</center>');
+    	},
+	
 	bestbattler: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/80oFzua.jpg" height="130"><br />' +
                 '<img src="http://i.imgur.com/Z37cY6F.png" height="100"><br />' +
-                '<b>Me being the best is a regular statistic, but you being better then me? Let\'s be more realistic</b>');
+                '<b>Me being the best is a regular statistic, but you being better then me? Let\'s be more realistic</b></center>');
         },
 	
 	

@@ -1538,6 +1538,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	cam: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mawile-mega.gif">' +
+    		'<img src=""http://i.imgur.com/u3HWuly.png">' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja-3.gif" height="150"><br />' +
+    		'<b>Ace:</b> Mega-Mawile<br />' +
+    		'Stop Wishing, Start Doing.</center>');
+    	},
+	
 	psyzen: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://th07.deviantart.net/fs70/PRE/i/2013/299/0/6/trainer_sparky_and_gallade_by_sparkytangerine-d6rvqeq.png" width="120">' +
@@ -3675,6 +3684,19 @@ var commands = exports.commands = {
 		'zzzzzzzzzzzzzzzzz');
 	},
 	
+	
+	//Frost Contest Winner Commands//
+	
+	bestbattler: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/80oFzua.jpg" height="150"><br />' +
+                '<img src="http://i.imgur.com/Z37cY6F.png"><br />' +
+                '<img src="second image"><br />' +
+                '<b>Me being the best is a regular statistic, but you being better then me? Let\'s be more realistic</b>');
+        },
+	
+	
+	
 	/*Masters of the Colors commands*/
 
 	mastersofthecolorhelp: 'motc', 
@@ -3724,6 +3746,8 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Miscellaneous commands
 	 *********************************************************/
+	
+	
 	
 	frostrules: function(target, room, user) {
     	if (!this.canBroadcast()) return;

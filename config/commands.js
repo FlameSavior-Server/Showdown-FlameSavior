@@ -298,6 +298,7 @@ var commands = exports.commands = {
                         			'<font size="1">(Set by ' + Tools.escapeHTML(user.name) + '.)<br />' +
                 				'This Artist will be posted on our <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">Artist of the Day page</a>.</div>'
                 			);
+                			return;
                     				this.logModCommand('The Artist of the Day was changed to ' + Tools.escapeHTML(target) + ' by ' + Tools.escapeHTML(user.name) + '.');
                     		}
             		},

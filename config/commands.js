@@ -1838,6 +1838,17 @@ var commands = exports.commands = {
                 '<i>I\'m beginning to feel like a Hopgod, Hopgod</i>.</center>');
     	},
 	
+	n: 'ucn',
+	unovachampionn: 'ucn',
+	ucn: function(target, room, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/conquest/sprite/212.png">' +
+		'<img src="http://i.imgur.com/lZwmQZc.gif">' +
+		'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/212-mega.gif"><br />' +
+		'<b>Ace: <font color=red>Scizor</font><br>' +
+		'<font color=red><i>Incoming bullet punch... sike!</i></font></b></center>');
+	},
+	
 	zerp: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/spewpa-2.gif" height="150" width="150">' +

@@ -3690,7 +3690,7 @@ var commands = exports.commands = {
 	bestbattler: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/80oFzua.jpg" height="130"><br />' +
-                '<img src="http://i.imgur.com/Z37cY6F.png" width="100"><br />' +
+                '<img src="http://i.imgur.com/Z37cY6F.png" height="100"><br />' +
                 '<b>Me being the best is a regular statistic, but you being better then me? Let\'s be more realistic</b>');
         },
 	

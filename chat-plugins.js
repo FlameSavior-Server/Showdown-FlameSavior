@@ -173,7 +173,7 @@ var plugins = exports.plugins = {
      */
 	studio: {
 		aotdOn: false,
-		room.aotd: 'Not set yet.',
+		roomaotd: 'Not set yet.',
         	commands: {
             		startaotd: function (target, room, user) {
                 	if (!this.canTalk()) return;
@@ -243,14 +243,14 @@ var plugins = exports.plugins = {
                 		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
                 		if (!target) {
                 		if (!this.canBroadcast()) return;
-                    		this.sendReplyBox('The current Artist of the Day is: <b>' + Tools.escapeHTML(room.aotd) + '</b>');
+                    		this.sendReplyBox('The current Artist of the Day is: <b>' + Tools.escapeHTML(roomaotd) + '</b>');
                 		} else {
                     		if (!this.canTalk()) return;
                     		if (target.length > 25) {
                         		return this.sendReply('This Artist\'s name is too long; it cannot exceed 25 characters.');
                     		}
                     		if (!this.can('ban', null, room)) return;
-                    		room.aotd = target;
+                    		roomaotd = target;
                     		Rooms.rooms.thestudio.addRaw('<div class=\"broadcast-green\"><font size="2"><b>The Artist of the Day is now <font color="black">' + Tools.escapeHTML(target) + '</font color>!</font size></b><br>' +
                         		'<font size="1">(Set by ' + Tools.escapeHTML(user.name) + '.)<br />' +
                 			'This Artist will be posted on our <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">Artist of the Day page</a>.</div>');

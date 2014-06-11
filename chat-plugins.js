@@ -172,7 +172,6 @@ var plugins = exports.plugins = {
      	* Only works in a room with the id "The Studio"
      */
 	studio: {
-		aotdOn: false,
         	commands: {
             		startaotd: function (target, room, user) {
                 	if (!this.canTalk()) return;
@@ -197,12 +196,12 @@ var plugins = exports.plugins = {
                         		'</font><center>(Started by ' + Tools.escapeHTML(user.name) + ')<br />' +
                         		'Use <b>/naotd</b> [artist] to nominate an artist!</center>'
                     		);
-                    		aotdOn = true;
+                    		room.aotdOn = true;
                     		this.logModCommand('Artist of the Day was started by ' + Tools.escapeHTML(user.name) + '.');
                 		}
                 		if (target === 'off') {
                     		Rooms.rooms.thestudio.addRaw('<b>Nominations are over!</b> (Turned off by ' + Tools.escapeHTML(user.name) + ')');
-                    		aotdOn = false;
+                    		room.aotdOn = false;
                 		}
             		},
 
@@ -226,7 +225,7 @@ var plugins = exports.plugins = {
             		nominateartistoftheday: 'naotd',
             		naotd: function (target, room, user) {
                 		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
-                		if (!aotdOn) {
+                		if (!room.aotdOn) {
                     		return this.sendReply('This command is shut off at the moment.');
                 		} else
                 		if (!target) return this.sendReply('/naotd needs an artist.');

@@ -3038,7 +3038,7 @@ var commands = exports.commands = {
 			if (user.name === user.originalName) {
 				user.isAway = false; 
 				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
-				return this.parse('/back');
+				
 			}
 
 			var newName = user.originalName;
@@ -3053,6 +3053,7 @@ var commands = exports.commands = {
 			this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer away');
 			user.originalName = '';
 			user.isAway = false;
+			return this.parse('/show');
 		}
 		else {
 			return this.sendReply('You are not set as away.');

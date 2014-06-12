@@ -1538,6 +1538,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	chansey: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/TVlZQlp.jpg" width="100"><br />' +
+    		'<img src="http://i.imgur.com/4D7p44f.gif" width="400"><br />' +
+    		'<img src="http://i.imgur.com/dYeGVCZ.png" width="250"><br />' +
+    		'<b>Ace:</b> Chansey<br />' +
+    		'The Lord and Mascot for the 3rd Chaos League Master.</center>');
+    	},
+	
 	cam: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mawile-mega.gif">' +
@@ -3687,6 +3696,44 @@ var commands = exports.commands = {
 	
 	//Frost Contest Winner Commands//
 	
+	
+	
+	popular: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://a4.ec-images.myspacecdn.com/images02/19/41b06a9ea0824af081d89de237c011d9/l.jpg" height="160"><br />' +
+    		'<img src="http://i.imgur.com/tuQtMyf.gif" height="100"><br />' +
+    		'I am so fab, I mean I wouldn\'t be known as frost\'s most popular user ;).</center>');
+    	},
+	
+	smartest: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://25.media.tumblr.com/855789c7dfd76c65d425bffb0311fc62/tumblr_mid2ub92ad1rg8h5ro1_500.jpg" height="150"><br />' +
+    		'<img src="http://i.imgur.com/8xVVtfR.gif"><br />' +
+    		'<i>Intelligence without ambition is a weapon without reason. Like using a Dagger, sharpen your senses and strike through your weakness.</i></center>');
+    	},
+	
+	couple: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="https://1-media-cdn.foolz.us/ffuuka/board/vp/image/1389/99/1389993289798.png" width="130">' +
+    		'<img src="http://i.imgur.com/7vNiKOM.gif">' +
+    		'<img src="http://i.imgur.com/lRlU8KQ.gif" width="130"><br />' +
+    		'You know it\'s true love when you give each other nicknames such as, Bitch, Slut and Whore.</center>');
+    	},
+	
+	thirst: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/7TMTTD7.jpg" height="150"><br />' +
+    		'<img src="http://i.imgur.com/Y4IehdG.gif"><br />' +
+    		'There is not enough water on this earth to quench my thirst for women.</center>');
+    	},
+	
+	haxiest: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://imgur.com/RT7NRWm.png" height="140"><br />' +
+    		'<img src="http://imgur.com/vwp9x7c.png" height="100"><br />' +
+    		'It\’s impossible to predict where a lightning bolt will land. Some may call it random chance. I call it fate.</center>');
+    	},
+	
 	bestou: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/dLsxG5b.jpg" height="170"><br />' +
@@ -3694,7 +3741,7 @@ var commands = exports.commands = {
     		'Me best OU player? Think again! I\'m the best OU Staller! Let\'s start the stall!</center>');
     	},
 	
-	nicestuser: function(target, room, user) {
+	nicest: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://fc02.deviantart.net/fs71/f/2011/006/3/0/195___quagsire_by_winter_freak-d36k65s.jpg" height="140"><br />' +
     		'<img src="http://i.imgur.com/34stjSR.gif"><br />' +

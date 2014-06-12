@@ -302,7 +302,7 @@ var commands = exports.commands = {
         			if (!this.can('ban', null, room)) return;
         			room.aotd = target;
         			Rooms.rooms.thestudio.addRaw(
-        				'<div class=\"broadcast-green\"><font size="2"><b>The Artist of the Day is now </font><b><font color="black" size="2">' + Tools.escapeHTML(target) + '</font>!</b><br>' +
+        				'<div class=\"broadcast-green\"><font size="2"><b>The Artist of the Day is now </font><b><font color="black" size="2">' + Tools.escapeHTML(target) + '</font></b><br />' +
         				'(Set by ' + Tools.escapeHTML(user.name) + '.)<br />' +
         				'This Artist will be posted on our <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">Artist of the Day page</a>.</div>'
         			);

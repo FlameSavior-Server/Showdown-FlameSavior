@@ -3053,7 +3053,6 @@ var commands = exports.commands = {
 			this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer away');
 			user.originalName = '';
 			user.isAway = false;
-			this.parse('/show');
 		}
 		else {
 			return this.sendReply('You are not set as away.');

@@ -2969,7 +2969,7 @@ var commands = exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			
 			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
-
+			return this.parse('/hide +');
 			user.isAway = true;
 		}
 		else {
@@ -2995,7 +2995,7 @@ var commands = exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			
 			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
-
+			return this.parse('/hide +');
 			user.isAway = true;
 		}
 		else {
@@ -3021,7 +3021,7 @@ var commands = exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			
 			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
-
+			return this.parse('/hide +');
 			user.isAway = true;
 		}
 		else {
@@ -3044,7 +3044,7 @@ var commands = exports.commands = {
 			
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(newName);
-
+			return this.parse('/back');
 			user.forceRename(newName, undefined, true);
 			
 			//user will be authenticated

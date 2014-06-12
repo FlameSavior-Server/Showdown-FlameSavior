@@ -1542,7 +1542,7 @@ var commands = exports.commands = {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mawile-mega.gif">' +
     		'<img src="http://i.imgur.com/u3HWuly.png">' +
-    		'<img src="http://i.imgur.com/2QW5bAZ.gif" height="150"><br />' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja.gif"><br />' +
     		'<b>Ace:</b> Mega-Mawile<br />' +
     		'Stop Wishing, Start Doing.</center>');
     	},

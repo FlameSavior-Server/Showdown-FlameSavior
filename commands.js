@@ -2969,7 +2969,6 @@ var commands = exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			
 			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
-			return this.parse('/hide +');
 			user.isAway = true;
 		}
 		else {
@@ -2995,7 +2994,6 @@ var commands = exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			
 			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
-			return this.parse('/hide +');
 			user.isAway = true;
 		}
 		else {
@@ -3021,7 +3019,6 @@ var commands = exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			
 			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
-			return this.parse('/hide +');
 			user.isAway = true;
 		}
 		else {

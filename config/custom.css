@@ -2,6 +2,14 @@
 	background-color:#4594c9;
 }
 
+.chat small {
+	color:#4249F8
+}
+
+.userlist li em.group {
+	color:#4249F8;
+}
+
 .pm-window.focused h3:hover {
 	background-color:#58bbf6; 
 	border-color:#58bbf6;

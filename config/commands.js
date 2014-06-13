@@ -2288,10 +2288,10 @@ var commands = exports.commands = {
 	tael: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/flygon.gif">' +
-                '<img src="http://i.imgur.com/Y2DTSuL.gif">' +
-                '<img src="http://www.zeldadungeon.net/images/News/Folder/11-06-07/Link-Art-Medium.png" height="138" width="169"><br />' +
+                '<img src="https://i.imgur.com/VEXXmGI.gif">' +
+                '<img src="https://i.imgur.com/De5Wc6j.png" width="150"><br />' +
                 '<b>Ace:</b> Flygon<br />' +
-                'I like my women waist thin, sweet skin and thicker than a snicker.</center>');
+                'Heavenly things are often abstract.</center>');
     	},
 
 	ticken: function(target, room, user) {

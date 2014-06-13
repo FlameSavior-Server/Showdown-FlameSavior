@@ -182,11 +182,6 @@ var plugins = exports.plugins = {
                 		if (!this.canTalk()) return;
                 		return this.parse('/toggleaotd off');
             		},
-            		
-            		testinghp: function (target, room, user) {
-                		if (!this.canTalk()) return;
-                		return this.parse('hue');
-            		},
 
             		taotd: 'toggleaotd',
             		toggleaotd: function (target, room, user) {
@@ -205,6 +200,7 @@ var plugins = exports.plugins = {
                     			this.logModCommand("Artist of the Day was started by " + Tools.escapeHTML(user.name) + ".");
                 		}
                 		if (target === 'off') {
+                			if (!room.aotdOn) return this.sendReply("Artist of the day has already ended.");
                     			room.addRaw("<b>Nominations are over!</b> (Turned off by " + Tools.escapeHTML(user.name) + ")");
                     			room.aotdOn = false;
                 		}
@@ -216,7 +212,7 @@ var plugins = exports.plugins = {
                 		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
                 		this.sendReplyBox(
                     			'<b>Artist of the Day:</b><br />' +
-                    			'This is a room actity for The Studio where users nomiate artists for the title of "Artist of the Day".  To find out more information about this activity, click <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">here</a>.<br> <br />' +
+                    			'This is a room activity for The Studio where users nomiate artists for the title of "Artist of the Day".  To find out more information about this activity, click <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">here</a>.<br> <br />' +
                     			'Command List:<br />' +
                     			'/naotd (artist) - This will nominate your artist of the day; only do this once, please. <br />' +
                     			'/aotd - This allows you to see who the current Artist of the Day is. <br/>' +

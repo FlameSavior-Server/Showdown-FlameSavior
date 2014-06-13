@@ -2428,7 +2428,7 @@ var commands = exports.commands = {
       		}
       		if (target === 'on') {
       			this.logModCommand(Tools.escapeHTML(user.name) + " has enabled the Quote of the Day.");
-      			room.addRaw("The Quote of the Day was disabled by " + Tools.escapeHTML(user.name) + ".");
+      			room.addRaw("The Quote of the Day was enabled by " + Tools.escapeHTML(user.name) + ".");
       			room.quote = true;
       			return;
       		}

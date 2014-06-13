@@ -1585,11 +1585,11 @@ var commands = exports.commands = {
 	
 	crashy: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/shuckle.gif">' +
-    		'<img src="http://i.imgur.com/InJOoRs.gif" width="400">' +
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/LiQcTfm.gif" width="150">' +
+    		'<img src="http://i.imgur.com/1MpUyqF.gif">' +
     		'<img src="http://sprites.pokecheck.org/t/102.gif"><br />' +
     		'<b>Ace:</b> Shuckle<br />' +
-    		'Don\'t be a lemon, be a rosebud.</center>');
+    		'I live in a world a gray and that allows me to do things other just can\'t do.</center>');
     	},
 	
 	boreas: function(target, room, user) {

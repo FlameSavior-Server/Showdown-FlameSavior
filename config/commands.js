@@ -1643,7 +1643,7 @@ var commands = exports.commands = {
     		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus-therian.gif"><br />' +
     		'<img src="http://i.imgur.com/OdXXJCa.jpg" width="100"><br />'
     		'<b>Ace:</b> Mega Ampharos<br />' +
-    		'<i>Jack of all trades, Master at none. You\'re still predicting? I\'ve already won</i>.</center>');
+    		'Jack of all trades, Master at none. You\'re a trainer? Prepare because you can\'t run!.</center>');
     	},
 	
 	happy: function(target, room, user) {

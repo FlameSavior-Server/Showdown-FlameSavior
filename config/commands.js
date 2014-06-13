@@ -2408,9 +2408,6 @@ var commands = exports.commands = {
 	qotd: function(target, room, user) {
 		if (!this.canTalk()) return;
 		if (!target) {
-			if (room.quote !== undefined) {
-				room.quote = '... This has not been set yet.';
-			}
                 	if (!this.canBroadcast()) return;
                 	this.sendReplyBox("The current Quote of the Day is: <b>" + Tools.escapeHTML(room.quote) + "</b>");
                		return;

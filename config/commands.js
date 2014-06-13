@@ -3698,6 +3698,13 @@ var commands = exports.commands = {
 	
 	
 	
+	funniest: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="https://i.imgflip.com/9jmbk.jpg" height="160"><br />' +
+    		'<img src="http://i.imgur.com/iG5uv3h.png"><br />' +
+    		'Just a little african using humor to make it in to the USA while obtaining bad bitches and a fine collection of ramen noodles.</center>');
+    	},
+	
 	popular: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://a4.ec-images.myspacecdn.com/images02/19/41b06a9ea0824af081d89de237c011d9/l.jpg" height="160"><br />' +
@@ -3727,7 +3734,7 @@ var commands = exports.commands = {
     		'There is not enough water on this earth to quench my thirst for women.</center>');
     	},
 	
-	haxiest: function(target, room, user) {
+	hax: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://imgur.com/RT7NRWm.png" height="140"><br />' +
     		'<img src="http://imgur.com/vwp9x7c.png" height="100"><br />' +

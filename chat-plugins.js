@@ -191,6 +191,7 @@ var plugins = exports.plugins = {
                 			return this.sendReply("/toggleaotd [on / off] - If on, this will start AOTD, if off, this will no longer allow people to use /naotd.");
                 		}
                 		if (target === 'on') {
+                			if (room.aotdOn = true) return this.sendReply("The Artist of the Day has already started.");
                     			room.addRaw(
                         			'<div class=\"broadcast-blue\"><font size="3"><center><b>Artist of the Day has started!</b><br />' +
                         			'</font><center>(Started by ' + Tools.escapeHTML(user.name) + ')<br />' +

@@ -2423,14 +2423,16 @@ var commands = exports.commands = {
       		if (target === 'off' || target === 'disable') {
       			this.sendReply("The quote of the day has been disabled.");
       			this.logModCommand(Tools.escapeHTML(user.name) + " has disabled the Quote of the Day.");
-      			room.addRaw("The Quote of the Day was disabled by " + Tools.escapeHTML(target) + ".");
+      			room.addRaw("The Quote of the Day was disabled by " + Tools.escapeHTML(user.name) + ".");
       			room.quoteOn = false;
+      			return;
       		}
       		if (target === 'on') {
       			this.sendReply("The quote of the day has been enabled.");
       			this.logModCommand(Tools.escapeHTML(user.name) + " has enabled the Quote of the Day.");
-      			room.addRaw("The Quote of the Day was disabled by " + Tools.escapeHTML(target) + ".");
+      			room.addRaw("The Quote of the Day was disabled by " + Tools.escapeHTML(user.name) + ".");
       			room.quote = true;
+      			return;
       		}
 		if (target.length > 500) {
                 	return this.sendReply("This quote is too long; it cannot exceed 500 characters.");

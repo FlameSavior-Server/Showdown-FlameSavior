@@ -2405,12 +2405,13 @@ var commands = exports.commands = {
 		return this.sendReplyBox(''+results+'');
 	},
 	
+	quoteoftheday: 'qotd',
 	qotd: function(target, room, user) {
+		if (room.id !== 'thehappyplace') return this.sendReply("This command can only be used in The Happy Place.");
 		if (!this.canTalk()) return;
-		var setter = '';
 		if (!target) {
                 	if (!this.canBroadcast()) return;
-                	this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> was set by " + Tools.escapeHTML(setter) + ".  This is: <br /> " + Tools.escapeHTML(room.quote) + "");
+                	this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + Tools.escapeHTML(room.quote) + "");
                		return;
       		}
 		if (target.length > 500) {
@@ -2418,7 +2419,6 @@ var commands = exports.commands = {
         	}
         	if (!this.can('declare', null, room)) return;
 		room.quote = target;
-		setter = Tools.escapeHTML(user.name);
 		room.addRaw(
 			'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + Tools.escapeHTML(user.name) + '.</b><br />' +
 			'Quote: ' +  Tools.escapeHTML(target) + '</div>'

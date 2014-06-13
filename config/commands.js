@@ -2407,9 +2407,10 @@ var commands = exports.commands = {
 	
 	qotd: function(target, room, user) {
 		if (!this.canTalk()) return;
+		var setter = '';
 		if (!target) {
                 	if (!this.canBroadcast()) return;
-                	this.sendReplyBox("The current Quote of the Day is: <b>" + Tools.escapeHTML(room.quote) + "</b>");
+                	this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> was set by " + Tools.escapeHTML(setter) + ".  This is: <br /> " + Tools.escapeHTML(room.quote) + "");
                		return;
       		}
 		if (target.length > 500) {
@@ -2417,6 +2418,7 @@ var commands = exports.commands = {
         	}
         	if (!this.can('declare', null, room)) return;
 		room.quote = target;
+		setter = Tools.escapeHTML(user.name);
 		room.addRaw(
 			'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + Tools.escapeHTML(user.name) + '.</b><br />' +
 			'Quote: ' +  Tools.escapeHTML(target) + '</div>'

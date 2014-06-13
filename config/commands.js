@@ -3708,7 +3708,7 @@ var commands = exports.commands = {
 	smartest: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://25.media.tumblr.com/855789c7dfd76c65d425bffb0311fc62/tumblr_mid2ub92ad1rg8h5ro1_500.jpg" height="150"><br />' +
-    		'<img src="http://i.imgur.com/8xVVtfR.gif"><br />' +
+    		'<img src="http://i.imgur.com/J6eVqfI.gif"><br />' +
     		'<i>Intelligence without ambition is a weapon without reason. Like using a Dagger, sharpen your senses and strike through your weakness.</i></center>');
     	},
 	

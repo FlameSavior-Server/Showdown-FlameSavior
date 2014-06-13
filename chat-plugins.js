@@ -182,6 +182,11 @@ var plugins = exports.plugins = {
                 		if (!this.canTalk()) return;
                 		return this.parse('/toggleaotd off');
             		},
+            		
+            		testinghp: function (target, room, user) {
+                		if (!this.canTalk()) return;
+                		return this.parse('hue');
+            		},
 
             		taotd: 'toggleaotd',
             		toggleaotd: function (target, room, user) {

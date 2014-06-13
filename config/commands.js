@@ -2404,7 +2404,7 @@ var commands = exports.commands = {
 		}
 		return this.sendReplyBox(''+results+'');
 	},
-	
+
 	quoteoftheday: 'qotd',
 	qotd: function(target, room, user) {
 		if (room.id !== 'thehappyplace') return this.sendReply("This command can only be used in The Happy Place.");
@@ -2416,6 +2416,21 @@ var commands = exports.commands = {
                 	if (!this.canBroadcast()) return;
                 	this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + Tools.escapeHTML(room.quote) + "");
                		return;
+      		}
+      		if (!target || !room.quoteOn) {
+      			return this.sendReplyBox("The quote of the day has been disabled.")
+      		}
+      		if (target === 'off' || target === 'disable') {
+      			this.sendReply("The quote of the day has been disabled.");
+      			this.logModCommand(Tools.escapeHTML(user.name) + " has disabled the Quote of the Day.");
+      			room.addRaw("The Quote of the Day was disabled by " + Tools.escapeHTML(target) + ".");
+      			room.quoteOn = false;
+      		}
+      		if (target === 'on') {
+      			this.sendReply("The quote of the day has been enabled.");
+      			this.logModCommand(Tools.escapeHTML(user.name) + " has enabled the Quote of the Day.");
+      			room.addRaw("The Quote of the Day was disabled by " + Tools.escapeHTML(target) + ".");
+      			room.quote = true;
       		}
 		if (target.length > 500) {
                 	return this.sendReply("This quote is too long; it cannot exceed 500 characters.");

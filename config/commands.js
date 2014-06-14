@@ -2102,13 +2102,17 @@ var commands = exports.commands = {
                 '<b>Ace:</b> Darmanitan<br />' +
                 '50$ down the drain. Happy now?</center>');
     	},
-	
-	mindcrush: function(target, room, user) {
+    	
+	kaiba: 'mindcrush',
+	mindcrush: function(target, room, user, connection, cmd) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20120716194029/yugioh/images/0/03/MindCrush-TF04-JP-VG.jpg" width="105">' +
-                '<img src="http://i.imgur.com/o260t0n.png" width="300">' +
-                '<img src="http://images3.alphacoders.com/153/153245.jpg" width="130"><br />' +
-                '<b>Ace:</b> Mind Crush<br />' +
+        var name = "http://frostserver.no-ip.org:8000/images/kaiba.gif"
+        if (cmd == 'mindcrush') name = "http://i.imgur.com/o260t0n.png";
+
+        this.sendReplyBox('<center><img src="http://www.sherv.net/cm/emoticons/rage/steamboat-troll-rage-smiley-emoticon.gif" height="150">' +
+                '<img src="'+name+'" width="300">' +
+                '<img src="http://i991.photobucket.com/albums/af32/DoubleEdd_3/TrollGun.gif" height="150"><br />' +
+                '<b>Ace:</b> Forcing Rage Quits<br />' +
                 'Games mean conflict a combat between two enemies. It\’s the same for all of them!<br />' +
                 'Cards, chess, the blood-soaked wars of the human race...<br />' +
                 'All these are different kinds of games. Do you know what god gave to people so they could play games in this world? A single shard called life!</center>');

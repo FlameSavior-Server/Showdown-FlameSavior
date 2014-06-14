@@ -1046,7 +1046,7 @@ var commands = exports.commands = {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox("Please follow the rules:<br />" +
 				(room.rulesLink ? "- <a href=\"" + Tools.escapeHTML(room.rulesLink) + "\">" + Tools.escapeHTML(room.title) + " room rules</a><br />" : "") +
-				"- <a href=\"http://pokemonshowdown.com/rules\">" + (room.rulesLink ? "Global rules" : "Rules") + "</a>");
+				"- <a href=\"http://frostserver.no-ip.org/showthread.php?tid=536\">" + (room.rulesLink ? "Global rules" : "Rules") + "</a>");
 			return;
 		}
 		if (!this.can('roommod', null, room)) return;
@@ -3854,7 +3854,7 @@ var commands = exports.commands = {
 	
 	frostrules: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('You can find our rules <a href="http://frostserver.net/rules.html">here.</a>');
+    	this.sendReplyBox('You can find our rules <a href="http://frostserver.no-ip.org/showthread.php?tid=536">here.</a>');
     	},
 	
 	leagues: function(target, room, user) {

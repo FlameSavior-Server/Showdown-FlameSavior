@@ -3854,7 +3854,7 @@ var commands = exports.commands = {
 	
 	frostrules: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('You can find our rules <a href="http://frostserver.net/rules.html">here.</a>');
+    	this.sendReplyBox('You can find our rules <a href="http://frostserver.no-ip.org/showthread.php?tid=536">here.</a>');
     	},
 	
 	leagues: function(target, room, user) {

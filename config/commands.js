@@ -1540,6 +1540,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	fer: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/meloetta.gif">' +
+    		'<img src="http://i.imgur.com/tnclC26.png">' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/slowbro.gif"><br />' +
+    		'<b>Ace:</b> Mega Medicham<br />' +
+    		'People Need Hard Times, and Oppression To Build Psychic Muscles.</center>');
+    	},
+	
 	zamuil: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/CoCAmqW.jpg" width="160">' +

@@ -2102,7 +2102,7 @@ var commands = exports.commands = {
                 '<b>Ace:</b> Darmanitan<br />' +
                 '50$ down the drain. Happy now?</center>');
     	},
-    	
+
 	kaiba: 'mindcrush',
 	mindcrush: function(target, room, user, connection, cmd) {
         if (!this.canBroadcast()) return;
@@ -2113,9 +2113,7 @@ var commands = exports.commands = {
                 '<img src="'+name+'" width="300">' +
                 '<img src="http://i991.photobucket.com/albums/af32/DoubleEdd_3/TrollGun.gif" height="150"><br />' +
                 '<b>Ace:</b> Forcing Rage Quits<br />' +
-                'Games mean conflict a combat between two enemies. It\’s the same for all of them!<br />' +
-                'Cards, chess, the blood-soaked wars of the human race...<br />' +
-                'All these are different kinds of games. Do you know what god gave to people so they could play games in this world? A single shard called life!</center>');
+                'I\'d like to see things from your point of view, but I can\'t get my head that far up my ass.</center>');
     	},
 	
 	minatokyuubi: function(target, room, user) {

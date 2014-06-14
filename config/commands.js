@@ -1944,9 +1944,9 @@ var commands = exports.commands = {
 	
 	lando: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/F6PJBJm.png" width="80" height="140">' +
-                '<img src="http://i.imgur.com/SGHZrkT.png" width="350">' +
-                '<img src="http://i.imgur.com/8W1dEKT.png" width="100"><br />' +
+        this.sendReplyBox('<center><img src="http://th08.deviantart.net/fs71/PRE/i/2013/307/f/5/yanek_the_greninja_by_mercurythewerewulff-d6sxzol.jpg" width="100">' +
+                '<img src="http://i.imgur.com/ZjYIE2l.png" width="320">' +
+                '<img src="http://i.imgur.com/lm4bTNK.png" width="120"><br />' +
                 '<b>Ace:</b> Landorus & Greninja<br />' +
                 'If you\'re going through hell, keep going.</center>');
     	},

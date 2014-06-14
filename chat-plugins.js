@@ -214,15 +214,14 @@ var plugins = exports.plugins = {
                 		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
                 		this.sendReplyBox(
                     			'<b>Artist of the Day:</b><br />' +
-                    			'This is a room activity for The Studio where users nominate artists for the title of "Artist of the Day".<br> <br />' +
+                    			'This is a room activity for The Studio where users nominate artists for the title of "Artist of the Day".  To find out more information about this activity, click <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">here</a>.<br> <br />' +
                     			'Command List:<br />' +
                     			'/naotd (artist) - This will nominate your artist of the day; only do this once, please. <br />' +
                     			'/aotd - This allows you to see who the current Artist of the Day is. <br/>' +
                     			'/aotd (artist) - Sets an artist of the day. (requires %, @, #) <br />' +
                     			'/startaotd - Will start AOTD (requires %, @, #) <br />' +
                     			'/endaotd - Will turn off the use of /naotd, ending AOTD (requires %, @, #) <br />' +
-                    			'-- <i>For more information on Artist of the Day, click <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">here</a>.</i> <br />' +
-                    			'-- <i>For more information on these commands, click <a href="http://thepsstudioroom.weebly.com/commands.html">here</a>.</i>'
+                    			'-- <i>For more information on Artist of the Day, click <a href="http://thepsstudioroom.weebly.com/artist-of-the-day.html">here</a>.</i> <br />'
                 		);
             		},
 

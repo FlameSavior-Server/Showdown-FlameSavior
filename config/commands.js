@@ -2410,7 +2410,7 @@ var commands = exports.commands = {
 	silverkill: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img height=150 src="http://fc00.deviantart.net/fs70/f/2013/320/9/3/mega_scizor_by_silentgpanda-d6ujsmg.jpg">' +
-		'<img src="http://frostserver.net:8000/images/silverkill-tc.png">' +
+		'<img src="http://frostserver.no-ip.org:8000/images/silverkill-tc.png">' +
 		'<img height=150 src="https://1-media-cdn.foolz.us/ffuuka/board/vp/image/1367/35/1367354021540.jpg"><br />' +
 		'<b>Ace: </b>Mo\' Fuckin\' Common Sense!<br />' +
 		'<b>Quote: </b>Would you like some fresh cut nanis? No? Well your mom bought some. She LOVED it ;D</center>');
@@ -2644,7 +2644,7 @@ var commands = exports.commands = {
 	oshy: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img height=60 src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/oshawott.gif">' +
-		'<img width=580 src="http://frostserver.net:8000/images/oshy.png">' +
+		'<img width=580 src="http://frostserver.no-ip.org:8000/images/oshy.png">' +
 		'<img height=60 src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/oshawott.gif"><br />' + 
 		'<b>Ace:</b> Fluffy Oshawotts<br />' +
 		'As long as your pokemon spirit keeps burning, your pokemon will keep fighting</center>');
@@ -2672,7 +2672,7 @@ var commands = exports.commands = {
 	adamkillszombies: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/conquest/sprite/212.png" height="100">' +
-		'<img src="http://frostserver.net:8000/images/adamkillszombies.png" height="100">' +
+		'<img src="http://frostserver.no-ip.org:8000/images/adamkillszombies.png" height="100">' +
 		'<img src="http://pldh.net/media/pokemon/gen2/crystal/212.gif" height="100"><br />' +
 		'<b>Ace:</b> Scizor <br />' +
 		'My destination is close, but it\'s very far...');

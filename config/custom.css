@@ -44,11 +44,11 @@ body {
 }
 
 .mainmenuwrapper {
-	background-image:url("http://192.184.93.156:8000/images/background1.jpg");
+	background-image:url("http://frostserver.no-ip.org:8000/images/background1.jpg");
 }
 
 .chat-log{
-	background: url("http://192.184.93.156:8000/images/background2.png") right top no-repeat;
+	background: url("http://frostserver.no-ip.org:8000/images/background2.png") right top no-repeat;
 	background-color:#ffffff;
 	font-size:10pt;
 	overflow:auto

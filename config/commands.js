@@ -968,7 +968,12 @@ var commands = exports.commands = {
 			"~ <b>Administrator</b> - They can do anything, like change what this message says"
 		);
 	},
-
+	
+	staff: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');
+	},
+	
 	//Trainer Cards.
 	
 	tailz: function(target, room, user) {

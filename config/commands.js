@@ -1633,11 +1633,11 @@ var commands = exports.commands = {
 	voltaic: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus.gif">' +
-    		'<img src="http://i.imgur.com/0LZxxeR.png">' +
+    		'<img src="http://i.imgur.com/L34mXCM.gif">' +
     		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus-therian.gif"><br />' +
     		'<img src="http://i.imgur.com/OdXXJCa.jpg" width="100"><br />' +
     		'<b>Ace:</b> Mega Ampharos<br />' +
-    		'Jack of all trades, Master at none. You\'re still predicting? I\'ve already won.</center>');
+    		'Jack of all trades, Master of none. You\'re still predicting? I\'ve already won.</center>');
     	},
 	
 	happy: function(target, room, user) {

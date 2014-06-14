@@ -281,6 +281,20 @@ var commands = exports.commands = {
 		}
 		this.sendReply('|raw|'+output);
 	},
+	
+	tiertest: function(target, room, user) {
+        	if (!this.canBroadcast()) return;
+        	var targetId = toId(target);
+        	var newTargets = Tools.dataSearch(target);
+        	if (newTargets && newTargets.length) {
+                	for (var i = 0; i < newTargets.length; i++) {
+                        	var template = Tools.getTemplate(newTargets[i].species);
+                        	return this.sendReplyBox("" + template.name + " is in the " + template.tier + " tier.");
+                        	}
+        	} else {
+                	return this.sendReplyBox("No Pokemon named '" + target + "' was found.");
+        	}
+	},
 
 	fork: function(target, room, user) {
 		if (!this.canBroadcast()) return;

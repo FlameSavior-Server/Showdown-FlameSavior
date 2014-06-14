@@ -1540,6 +1540,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	zamuil: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/CoCAmqW.jpg" width="160">' +
+    		'<img src="http://i.imgur.com/83MwZKE.png">' +
+    		'<img src="http://i.imgur.com/WIQDYoS.jpg" width="160"><br />' +
+    		'<b>Ace:</b> Verne the Scarfed Jolteon<br />' +
+    		'An eye for an eye leaves the whole world blind, a tooth for a tooth and no one will smile.</center>');
+    	},
+	
 	corroc: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/k63VSUP.jpg" width="160">' +

@@ -1573,6 +1573,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	corroc: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/k63VSUP.jpg" width="160">' +
+    		'<img src="http://i.imgur.com/z5b8zp8.gif">' +
+    		'<img src="http://i.imgur.com/syCjHHW.png" width="160"><br />' +
+    		'<b>Ace:</b> Bisharp<br />' +
+    		'Paramore is love. Paramore is life. Hayley Williams is an angel.</center>');
+    	},
+	
+	kreme: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/JNtuRyG.png" width="150">' +
+    		'<img src="http://i.imgur.com/peLCM5N.gif">' +
+    		'<img src="http://i.imgur.com/3DMahw6.jpg" width="150"><br />' +
+    		'<b>Ace:</b> Dugtrio<br />' +
+    		'These hoes ain\'t loyal :I</center>');
+    	},
+	
 	chansey: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/TVlZQlp.jpg" width="100"><br />' +

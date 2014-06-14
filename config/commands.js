@@ -3859,7 +3859,7 @@ var commands = exports.commands = {
 	
 	leagues: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center>Looking for challengers or members for your league? Post about it <a href="http://frostserver.net/forums/forumdisplay.php?fid=18">here!</a><center>');
+    	this.sendReplyBox('<center>Looking for challengers or members for your league? Post about it <a href="http://frostserver.no-ip.org/forumdisplay.php?fid=18">here!</a><center>');
     	},
 	
 	frostradio : 'radio', 
@@ -3877,7 +3877,7 @@ var commands = exports.commands = {
 	forums: 'forum',
 	forum: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.net/forums/">here</a>.');
+		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.no-ip.org/index.php">here</a>.');
 	},
 	
 	potd: function (target, room, user) {

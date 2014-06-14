@@ -2418,18 +2418,12 @@ var commands = exports.commands = {
                		return;
       		}
       		if (!target && !room.quoteOn) {
-      			return this.sendReply("The quote of the day has been disabled.")
+      			return this.sendReply("The quote of the day has been disabled.");
       		}
-      		if (target === 'off' || target === 'disable') {
-      			this.logModCommand(Tools.escapeHTML(user.name) + " has disabled the Quote of the Day.");
-      			room.addRaw("The Quote of the Day was disabled by " + Tools.escapeHTML(user.name) + ".");
+      		if (target === 'off' || target === 'disable' || target === 'reset') {
+      			this.logModCommand(Tools.escapeHTML(user.name) + " has reset the Quote of the Day.");
+      			room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
       			room.quoteOn = false;
-      			return;
-      		}
-      		if (target === 'on') {
-      			this.logModCommand(Tools.escapeHTML(user.name) + " has enabled the Quote of the Day.");
-      			room.addRaw("The Quote of the Day was enabled by " + Tools.escapeHTML(user.name) + ".");
-      			room.quote = true;
       			return;
       		}
 		if (target.length > 500) {

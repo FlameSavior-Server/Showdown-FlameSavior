@@ -1540,6 +1540,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	jolts: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/excadrill.gif">' +
+    		'<img src="http://i.imgur.com/0LvU4dS.gif" width="320">' +
+    		'<img src="http://i.imgur.com/9I2ddE3.png" width="120"><br />' +
+    		'<b>Ace:</b> Drill.I.Am<br />' +
+    		'THE GLORIOUS EVOLUTION!</center>');
+    	},
+	
 	fer: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/meloetta.gif">' +
@@ -2190,9 +2199,9 @@ var commands = exports.commands = {
 	
 	stun: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/stunfisk-2.gif" width="120">' +
-                '<img src="http://i.imgur.com/89pT7Vg.png" width="320">' +
-                '<img src="http://i.imgur.com/dg4XFpn.png?1" width="110"><br />' +
+        this.sendReplyBox('<center><img src="http://media-cache-ec0.pinimg.com/236x/f3/92/0a/f3920ae587944b5ab8b6e68d48ae5186.jpg" width="90">' +
+                '<img src="http://i.imgur.com/aa34uv5.gif" width="360">' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/stunfisk.gif"><br />' +
                 '<b>Ace:</b> Stunfisk<br />' +
                 'It\'s so evil, it\'s genius!</center>');
     	},

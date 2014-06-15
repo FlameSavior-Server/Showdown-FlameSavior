@@ -2555,7 +2555,7 @@ var commands = exports.commands = {
     	},
 
 	archer: 'archerclw',
-	archerlw: function(target, room, user) {
+	archerclw: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://imagehost4.online-image-editor.com/oie_upload/images/1521112p0H3B8I2/152934Mg9ptuyC.gif" width="160">' +
     		'<img src="http://i.imgur.com/sGMZrxt.gif">' +

@@ -2555,14 +2555,14 @@ var commands = exports.commands = {
     	},
 
 	archer: 'archerclw',
-	archerclw: function(target, room, user) {
-	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><img height=200 width=200 src="http://i.imgur.com/bZ8p27u.jpg">' +
-		'<img src="http://i.imgur.com/cs23RdB.gif">' +
-		'<img src="http://i.imgur.com/wM24Mya.gif"><br />' +
-		'<b>Ace: </b>Hippowdon (Big Momma)<br />' +
-		'The South Shall Rise Again!</center>');
-		},
+	archerlw: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://imagehost4.online-image-editor.com/oie_upload/images/1521112p0H3B8I2/152934Mg9ptuyC.gif" width="160">' +
+    		'<img src="http://i.imgur.com/sGMZrxt.gif">' +
+    		'<img src="http://i.imgur.com/lFkxnAo.gif" width="150"><br />' +
+    		'<b>Ace:</b> Bullshit<br />' +
+    		' Ancient Words of Wisdom: stfu u stupid inbred.</center>');
+    	},
 
 	flare: function(target, room, user) {
     	if (!this.canBroadcast()) return;

@@ -2200,7 +2200,7 @@ var commands = exports.commands = {
 	stun: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://37.media.tumblr.com/e890b0bb20d7630e48fad7e067b32a30/tumblr_mtj1fbaHlL1rj4z3ho1_1280.png" height="150"><br />' +
-                '<img src="http://i.imgur.com/aa34uv5.gif" width="500">' +
+                '<img src="http://i.imgur.com/aa34uv5.gif" width="450">' +
                 '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/stunfisk.gif"><br />' +
                 '<b>Ace:</b> Stunfisk<br />' +
                 'It\'s so evil, it\'s genius!</center>');

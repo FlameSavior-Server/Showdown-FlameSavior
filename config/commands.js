@@ -990,6 +990,13 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
+	goal: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://cdn.bulbagarden.net/upload/thumb/4/47/181Ampharos.png/250px-181Ampharos.png">' +
+                '<img src="http://lucien0maverick.files.wordpress.com/2014/05/tails-prower.png" width="200"><br />' +
+                'The Ultimate Team Combo</center>');
+	},
+	
 	tailz: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/UQJceOG.png"><br />' +

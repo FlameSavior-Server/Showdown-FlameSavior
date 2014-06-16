@@ -1061,7 +1061,7 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://i.imgur.com/l4Jidxb.png"><br />' +
                 '<img src="http://i.imgur.com/KN7i30o.gif" width="360"><br />' +
                 'Beware the nice ones.<br />' +
-                'Sometimes things are more than what they actually seem to be.');
+                'Sometimes things are more than what they actually seem.');
 	},
 	
 	typhozzz: function(target, room, user) {

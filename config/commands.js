@@ -1056,7 +1056,7 @@ var commands = exports.commands = {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox("Please follow the rules:<br />" +
 				(room.rulesLink ? "- <a href=\"" + Tools.escapeHTML(room.rulesLink) + "\">" + Tools.escapeHTML(room.title) + " room rules</a><br />" : "") +
-				"- <a href=\"http://frostserver.no-ip.org/showthread.php?tid=536\">" + (room.rulesLink ? "Global rules" : "Rules") + "</a>");
+				"- <a href=\"http://frostserver.net/forums/showthread.php?tid=536\">" + (room.rulesLink ? "Global rules" : "Rules") + "</a>");
 			return;
 		}
 		if (!this.can('roommod', null, room)) return;
@@ -3900,18 +3900,7 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Miscellaneous commands
 	 *********************************************************/
-	
-	
-	
-	frostrules: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('You can find our rules <a href="http://frostserver.no-ip.org/showthread.php?tid=536">here.</a>');
-    	},
-	
-	leagues: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center>Looking for challengers or members for your league? Post about it <a href="http://frostserver.no-ip.org/forumdisplay.php?fid=18">here!</a><center>');
-    	},
+
 	
 	frostradio : 'radio', 
     	radio: function(target, room, user) {
@@ -3922,13 +3911,13 @@ var commands = exports.commands = {
 	events: 'currentevents',
 	currentevents: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Check out information on the weekly events <a href="http://frostserver.no-ip.org/showthread.php?tid=537">here</a>!');
+		this.sendReplyBox('Check out information on the weekly events <a href="http://frostserver.net/forums/showthread.php?tid=537">here</a>!');
 	},
 	
 	forums: 'forum',
 	forum: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.no-ip.org/index.php">here</a>.');
+		this.sendReplyBox('You can find the official Frost forum <a href="http://frostserver.net/forums/index.php">here</a>.');
 	},
 	
 	potd: function (target, room, user) {

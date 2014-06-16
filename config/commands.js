@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	zyns: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://oi57.tinypic.com/zl3yae.jpg" width="80">' +
+    		'<img src="http://i.imgur.com/qubm9ul.png" width="360">' +
+    		'<img src="http://cdn.bulbagarden.net/upload/thumb/2/21/Cher_Roserade.png/250px-Cher_Roserade.png" width="100"><br />' +
+    		'<b>Ace:</b> Roserade<br />' +
+    		'Don\'t be fooled by the natural beauty of grass it can be dangerous.</center>');
+    	},
+	
 	volky: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs71/i/2013/074/d/5/kabutops_pokedoll_art_by_methuselah_alchemist-d5y5ssk.png" width="85">' +

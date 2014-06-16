@@ -1553,7 +1553,7 @@ var commands = exports.commands = {
 	volky: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs71/i/2013/074/d/5/kabutops_pokedoll_art_by_methuselah_alchemist-d5y5ssk.png" width="85">' +
-    		'<img src="http://i.imgur.com/WaIV1TW.gif" width="380">' +
+    		'<img src="http://i.imgur.com/WaIV1TW.gif" width="370">' +
     		'<img src="http://fc01.deviantart.net/fs70/f/2011/340/e/3/pokeddex_challenge___kabutops_by_phantos-d4ie1ip.png" width="85"><br />' +
     		'<b>Ace:</b> Pretzelz<br />' +
     		'I didn\'t choose the thung life, the thug life chose me.</center>');

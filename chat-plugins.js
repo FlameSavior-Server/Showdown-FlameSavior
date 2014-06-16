@@ -262,8 +262,9 @@ var plugins = exports.plugins = {
         			room.aotdOn = false;
         			this.logModCommand("The Artist of the Day was changed to " + Tools.escapeHTML(target) + " by " + Tools.escapeHTML(user.name) + ".");
 			}
-            	},
-            	
+            	}
+	},    
+	
 	/**
 	* The Happy Place: Quote of the Day Plugin
 	* This is a command that allows a room owner to set an inspirational "quote" of the day.

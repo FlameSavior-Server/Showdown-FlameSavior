@@ -3750,6 +3750,13 @@ var commands = exports.commands = {
 	
 	
 	
+	involved: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/3wcET7B.gif" width="200"><br />' +
+    		'<img src="http://i.imgur.com/eAtWgY6.gif"><br />' +
+    		'A true gentleman keeps his calm cool.</center>');
+    	},
+	
 	funniest: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="https://i.imgflip.com/9jmbk.jpg" height="160"><br />' +

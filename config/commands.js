@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	rhydon: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://img1.wikia.nocookie.net/__cb20130108174955/pokemontowerdefense/images/5/52/Infernape-infernape-23393713-629-354.png" width="100">' +
+    		'<img src="http://i.imgur.com/gWvojqo.png" width="350">' +
+    		'<img src="http://1.bp.blogspot.com/-jSWkq15P1es/UllXd4KeuqI/AAAAAAAAEDk/Y4qUdehPZY0/s320/MegaCharizardXYSkyBattle.jpg" width="100"><br />' +
+    		'<b>Ace:</b> Infernape<br />' +
+    		'My blue flames are stronger than my red flames.</center>');
+    	},
+	
 	zyns: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://oi57.tinypic.com/zl3yae.jpg" width="80">' +

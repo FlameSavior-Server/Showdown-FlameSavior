@@ -2431,39 +2431,6 @@ var commands = exports.commands = {
 		return this.sendReplyBox(''+results+'');
 	},
 	
-	quoteoftheday: 'qotd',
-	qotd: function(target, room, user) {
-		if (room.id !== 'thehappyplace') return this.sendReply("This command can only be used in The Happy Place.");
-		if (!this.canTalk()) return;
-		if (!target) {
-			if (!room.quoteOn) {
-				room.quote = "... This has not been set yet.";
-			}
-                	if (!this.canBroadcast()) return;
-                	this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + Tools.escapeHTML(room.quote) + "");
-               		return;
-      		}
-      		if (!target && !room.quoteOn) {
-      			return this.sendReply("The quote of the day has been disabled.");
-      		}
-      		if (target === 'off' || target === 'disable' || target === 'reset') {
-      			this.logModCommand(Tools.escapeHTML(user.name) + " has reset the Quote of the Day.");
-      			room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
-      			room.quoteOn = false;
-      			return;
-      		}
-		if (target.length > 500) {
-                	return this.sendReply("This quote is too long; it cannot exceed 500 characters.");
-        	}
-        	if (!this.can('declare', null, room)) return;
-		room.quote = target;
-		room.addRaw(
-			'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + Tools.escapeHTML(user.name) + '.</b><br />' +
-			'Quote: ' +  Tools.escapeHTML(target) + '</div>'
-		);
-		room.quoteOn = true;
-		this.logModCommand(Tools.escapeHTML(user.name) + " has updated the quote of the day to: " + Tools.escapeHTML(target) + "");
-	},
 	
 	coins: 'coingame',
 	coin: 'coingame',

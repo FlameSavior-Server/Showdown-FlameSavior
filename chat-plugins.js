@@ -262,6 +262,49 @@ var plugins = exports.plugins = {
         			room.aotdOn = false;
         			this.logModCommand("The Artist of the Day was changed to " + Tools.escapeHTML(target) + " by " + Tools.escapeHTML(user.name) + ".");
 			}
-            	}
-    	}
+            	},
+            	
+	/**
+	* The Happy Place: Quote of the Day Plugin
+	* This is a command that allows a room owner to set an inspirational "quote" of the day.
+	* Others may braodcast this at any time to remind the room of such.
+	* Only works in a room with the id "The Happy Place"
+	*/
+        happy: {
+        	commands: {
+        		quoteoftheday: 'qotd',
+			qotd: function(target, room, user) {
+				if (room.id !== 'thehappyplace') return this.sendReply("This command can only be used in The Happy Place.");
+				if (!this.canTalk()) return;
+				if (!target) {
+					if (!room.quoteOn) {
+						room.quote = "... This has not been set yet.";
+					}
+                		if (!this.canBroadcast()) return;
+                		this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + Tools.escapeHTML(room.quote) + "");
+               			return;
+      				}
+      				if (!target && !room.quoteOn) {
+      					return this.sendReply("The quote of the day has been disabled.");
+      				}
+      				if (target === 'off' || target === 'disable' || target === 'reset') {
+      					this.logModCommand(Tools.escapeHTML(user.name) + " has reset the Quote of the Day.");
+      					room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
+      					room.quoteOn = false;
+      					return;
+      				}
+				if (target.length > 1,000) {
+                			return this.sendReply("This quote is too long; it cannot exceed 1,000 characters.");
+        			}
+        			if (!this.can('declare', null, room)) return;
+				room.quote = target;
+				room.addRaw(
+					'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + Tools.escapeHTML(user.name) + '.</b><br />' +
+					'Quote: ' +  Tools.escapeHTML(target) + '</div>'
+				);
+				room.quoteOn = true;
+				this.logModCommand(Tools.escapeHTML(user.name) + " has updated the quote of the day to: " + Tools.escapeHTML(target) + "");
+			}
+        	}
+        }
 };

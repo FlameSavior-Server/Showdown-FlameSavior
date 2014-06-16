@@ -3293,6 +3293,8 @@ function getRandMessage(user){
 		break;
 		case 49: message = message + user + ' faced a Xerneas with geomancy and powerherb'; // bought by FireDudeWind
 		break;
+		case 50: message = message + user + ' drowned in the ocean trying to find SeaNanners'; // bought by SeaNanners
+		break;
 		default: message = message + user + ' bought a poisoned Pepsi!';
 	};
 	message = message + ' ~~';

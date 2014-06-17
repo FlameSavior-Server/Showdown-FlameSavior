@@ -278,16 +278,18 @@ var plugins = exports.plugins = {
 			qotd: function (target, room, user) {
 				if (room.id !== 'thehappyplace') return this.sendReply("This command can only be used in The Happy Place.");
 				if (!this.canBroadcast()) return;
-				if (!this.can('declare', null, room)) {
+				if (!target) {
 					if (!plugins.happy.quote) return this.sendReply("The quote of the day has not been set.");
-                			return this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + plugins.happy.quote + "");
+                			return this.sendReplyBox("The current <b>\"Inspirational Quote of the Day\"</b> is: <br /> " + plugins.happy.quote + "");
 				}
-      				if (!target || target === 'off' || target === 'disable' || target === 'reset') {
-      					this.logModCommand(user.name + " has reset the Quote of the Day.");
-      					room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
-      					plugins.happy.quote = '';
-      					return;
-      				}
+      				if (target === 'off' || target === 'disable' || target === 'reset') {
+      					if (!this.can('declare', null, room)) {
+      						this.logModCommand(user.name + " has reset the Quote of the Day.");
+      						room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
+      						plugins.happy.quote = '';
+      						return;
+      					}
+      				}	
 				plugins.happy.quote = Tools.escapeHTML(target);
 				room.addRaw(
 					'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + Tools.escapeHTML(user.name) + '.</b><br />' +

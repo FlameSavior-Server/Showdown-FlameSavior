@@ -279,16 +279,14 @@ var plugins = exports.plugins = {
 				if (!this.canTalk()) return;
 				if (!target) {
 					if (!room.quoteOn) {
-						room.quote = "... This has not been set yet.";
-					}
-                		if (!this.canBroadcast()) return;
-                		this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + Tools.escapeHTML(room.quote) + "");
-               			return;
-      				}
-      				if (!target && !room.quoteOn) {
       					return this.sendReply("The quote of the day has been disabled.");
+					}
+                			if (!this.canBroadcast()) return;
+                			this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + Tools.escapeHTML(room.quote) + "");
+               				return;
       				}
       				if (target === 'off' || target === 'disable' || target === 'reset') {
+      					if (!this.can('declare', null, room)) return;
       					this.logModCommand(Tools.escapeHTML(user.name) + " has reset the Quote of the Day.");
       					room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
       					room.quoteOn = false;

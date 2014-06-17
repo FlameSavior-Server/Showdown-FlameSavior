@@ -279,7 +279,7 @@ var plugins = exports.plugins = {
 				if (!this.canTalk()) return;
 				if (!target) {
 					if (!room.quoteOn) {
-      					return this.sendReply("The quote of the day has been disabled.");
+      					return this.sendReply("The Quote of the Day has been disabled.");
 					}
                 			if (!this.canBroadcast()) return;
                 			this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + Tools.escapeHTML(room.quote) + "");
@@ -302,7 +302,7 @@ var plugins = exports.plugins = {
 					'Quote: ' +  Tools.escapeHTML(target) + '</div>'
 				);
 				room.quoteOn = true;
-				this.logModCommand(Tools.escapeHTML(user.name) + " has updated the quote of the day to: " + Tools.escapeHTML(target) + "");
+				this.logModCommand(Tools.escapeHTML(user.name) + " has updated the Quote of the Day to: " + Tools.escapeHTML(target) + "");
 			}
         	}
         }

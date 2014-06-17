@@ -287,15 +287,10 @@ var plugins = exports.plugins = {
       				}
       				if (target === 'off' || target === 'disable' || target === 'reset') {
       					if (!this.can('declare', null, room)) return;
-      					if (!room.qotd) {
-      						return this.sendReply("The Quote of the Day has already been reset.");
-      					}
-      					else {
-      						this.logModCommand(Tools.escapeHTML(user.name) + " has reset the Quote of the Day.");
-      						room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
-      						room.quoteOn = false;
-      						return;
-      					}
+      					this.logModCommand(Tools.escapeHTML(user.name) + " has reset the Quote of the Day.");
+      					room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
+      					room.quoteOn = false;
+      					return;
       				}	
 				if (target.length > 1,000) {
                 			return this.sendReply("This quote is too long; it cannot exceed 1,000 characters.");

@@ -284,16 +284,16 @@ var plugins = exports.plugins = {
 				}
       				if (!target || target === 'off' || target === 'disable' || target === 'reset') {
       					this.logModCommand(user.name + " has reset the Quote of the Day.");
-      					room.addRaw("The Quote of the Day was reset by " + user.name + ".");
+      					room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
       					plugins.happy.quote = '';
       					return;
       				}
 				plugins.happy.quote = Tools.escapeHTML(target);
 				room.addRaw(
-					'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + user.name + '.</b><br />' +
+					'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + Tools.escapeHTML(user.name) + '.</b><br />' +
 					'Quote: ' + plugins.happy.quote + '</div>'
 				);
-				this.logModCommand(user.name + " has updated the quote of the day to: " + plugins.happy.quote + "");
+				this.logModCommand(Tools.escapeHTML(user.name) + " has updated the quote of the day to: " + plugins.happy.quote + "");
 			}
         	}
         }

@@ -270,6 +270,7 @@ var plugins = exports.plugins = {
 	* This is a command that allows a room owner to set an inspirational "quote" of the day.
 	* Others may braodcast this at any time to remind the room of such.
 	* Only works in a room with the id "The Happy Place"
+	* Credits: panpawn, TalkTakesTime, Morfent, and sirDonovan
 	*/
         happy: {
         	quote: '',
@@ -283,12 +284,11 @@ var plugins = exports.plugins = {
                 			return this.sendReplyBox("The current <b>\"Inspirational Quote of the Day\"</b> is: <br /> " + plugins.happy.quote + "");
 				}
       				if (target === 'off' || target === 'disable' || target === 'reset') {
-      					if (!this.can('declare', null, room)) {
-      						this.logModCommand(user.name + " has reset the Quote of the Day.");
-      						room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
-      						plugins.happy.quote = '';
-      						return;
-      					}
+      					if (!this.can('declare', null, room)) return;
+      					this.logModCommand(user.name + " has reset the Quote of the Day.");
+      					room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
+      					plugins.happy.quote = '';
+      					return;
       				}	
 				plugins.happy.quote = Tools.escapeHTML(target);
 				room.addRaw(

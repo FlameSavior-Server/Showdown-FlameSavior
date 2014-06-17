@@ -222,45 +222,27 @@ function socketConnect(worker, workerid, socketid, ip) {
 				break;
 				case 'rbl.efnetrbl.org':
 				connection.popup('Your IP is listed in rbl.efnetrbl.org and has been automatically banned. For more information, please visit http://rbl.efnetrbl.org/.');
-				if (connection.user) {
-					connection.user.disconnectAll();
-					return connection.user.destroy();
-				}
+				if (connection.user) return connection.user.disconnectAll();
 				break;
 				case 'dnsbl.dronebl.org':
 				connection.popup('Your IP is listed in dnsbl.dronebl.org and has been automatically banned. For more information, please visit http://dronebl.org/lookup?ip='+connection.ip+'.');
-				if (connection.user) {
-					connection.user.disconnectAll();
-					return connection.user.destroy();
-				}
+				if (connection.user) return connection.user.disconnectAll();
 				break;
 				case '8000.156.93.184.192.ip-port.exitlist.torproject.org':
 				connection.popup('Your IP is listed as a TOR exit node and has been automatically banned.');
-				if (connection.user) {
-					connection.user.disconnectAll();
-					return connection.user.destroy();
-				}
+				if (connection.user) return connection.user.disconnectAll();
 				break;
 				case 'http.dnsbl.sorbs.net':
 				connection.popup('Your IP is known for running proxy servers and has been automatically banned.');
-				if (connection.user) {
-					connection.user.disconnectAll();
-					return connection.user.destroy();
-				}
+				if (connection.user) return connection.user.disconnectAll();
 				break;
 				case 'socks.dnsbl.sorbs.net':
 				connection.popup('Your IP is known for running proxy servers and has been automatically banned.');
-				if (connection.user) {
-					connection.user.disconnectAll();
-					return connection.user.destroy();
-				}
+				if (connection.user) return connection.user.disconnectAll();
 				break;
 				case 'misc.dnsbl.sorbs.net':
 				connection.popup('Your IP is known for running proxy servers and has been automatically banned.');
-				if (connection.user) {
-					connection.user.disconnectAll();
-					return connection.user.destroy();
-				}
+				if (connection.user) return connection.user.disconnectAll();
 				break;
 				default:
 				connection.popup('Your IP is known for abuse and has been locked. If you\'re using a proxy, don\'t.');

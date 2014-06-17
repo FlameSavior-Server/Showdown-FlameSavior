@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	kjflame013: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i7.photobucket.com/albums/y251/ProphetZA/Pokemon/445.jpg" width="100">' +
+    		'<img src="http://i.imgur.com/zmHW2Kf.gif" width="330">' +
+    		'<img src="http://th03.deviantart.net/fs71/PRE/i/2012/348/1/c/venusaur_by_nar447-d5o0dq8.jpg" width="110"><br />' +
+    		'<b>Ace:</b> Garchomp & Venusaur<br />' +
+    		'Don\’t give up! There\’s no shame in falling down! True shame is to not stand up again!</center>');
+    	},
+	
 	dating: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i254.photobucket.com/albums/hh108/naten2006/oie_17447500rCQ2IUY_zps9bdc16b7.gif" width="100">' +
@@ -1561,7 +1570,7 @@ var commands = exports.commands = {
 	
 	phantom: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/rd18bxe.jpg" width="100">' +
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/rd18bxe.jpg" width="90">' +
     		'<img src="http://i.imgur.com/Aj8pOcC.png" width="350">' +
     		'<img src="http://i.imgur.com/yvRIWI4.jpg" width="100"><br />' +
     		'<b>Ace:</b> Gliscor<br />' +

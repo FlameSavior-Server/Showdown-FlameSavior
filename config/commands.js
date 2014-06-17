@@ -1550,11 +1550,28 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	bane: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/EhYWxnE.png" width="180">' +
+    		'<img src="http://i.imgur.com/kzR8FsJ.gif"><br />' +
+    		'<b>Ace:</b> Scolipede<br />' +
+    		'Don\'t give up till the fight is over. Never stop BELIEVING.</center>');
+    	},
+	
+	impwrath: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/Juhmirh.gif" width="150">' +
+    		'<img src="http://i.imgur.com/uQClQ0R.gif">' +
+    		'<img src="http://i.imgur.com/LiMJIzg.gif" width="160"><br />' +
+    		'<b>Ace:</b> Tyrantrum<br />' +
+    		'I can clearly see your weakness with my Ultimate Eye.</center>');
+    	},
+	
 	rhydon: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://img1.wikia.nocookie.net/__cb20130108174955/pokemontowerdefense/images/5/52/Infernape-infernape-23393713-629-354.png" width="100">' +
     		'<img src="http://i.imgur.com/gWvojqo.png" width="350">' +
-    		'<img src="http://1.bp.blogspot.com/-jSWkq15P1es/UllXd4KeuqI/AAAAAAAAEDk/Y4qUdehPZY0/s320/MegaCharizardXYSkyBattle.jpg" width="100"><br />' +
+    		'<img src="http://1.bp.blogspot.com/-jSWkq15P1es/UllXd4KeuqI/AAAAAAAAEDk/Y4qUdehPZY0/s320/MegaCharizardXYSkyBattle.jpg" width="90"><br />' +
     		'<b>Ace:</b> Infernape<br />' +
     		'My blue flames are stronger than my red flames.</center>');
     	},

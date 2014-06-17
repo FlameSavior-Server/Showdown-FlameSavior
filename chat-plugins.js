@@ -272,37 +272,28 @@ var plugins = exports.plugins = {
 	* Only works in a room with the id "The Happy Place"
 	*/
         happy: {
+        	quote: '',
         	commands: {
         		quoteoftheday: 'qotd',
-			qotd: function(target, room, user) {
+			qotd: function (target, room, user) {
 				if (room.id !== 'thehappyplace') return this.sendReply("This command can only be used in The Happy Place.");
-				if (!this.canTalk()) return;
-				if (!target) {
-					if (!room.quoteOn) {
-      						return this.sendReply("The Quote of the Day has been disabled.");
-					}
-                			if (!this.canBroadcast()) return;
-                			this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + Tools.escapeHTML(room.quote) + "");
-               				return;
-      				}
-      				if (target === 'off' || target === 'disable' || target === 'reset') {
-      					if (!this.can('declare', null, room)) return;
-      					this.logModCommand(Tools.escapeHTML(user.name) + " has reset the Quote of the Day.");
+				if (!this.canBroadcast()) return;
+				if (!this.can('declare', null, room)) {
+					if (!plugins.happy.quote) return this.sendReply("The quote of the day has not been set.");
+                			return this.sendReplyBox("The current <b>\"Insiprational Quote of the Day\"</b> is: <br /> " + plugins.happy.quote + "");
+				}
+      				if (!target || target === 'off' || target === 'disable' || target === 'reset') {
+      					this.logModCommand(user.name + " has reset the Quote of the Day.");
       					room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
-      					room.quoteOn = false;
+      					plugins.happy.quote = '';
       					return;
-      				}	
-				if (target.length > 1,000) {
-                			return this.sendReply("This quote is too long; it cannot exceed 1,000 characters.");
-        			}
-        			if (!this.can('declare', null, room)) return;
-				room.quote = target;
+      				}
+				plugins.happy.quote = Tools.escapeHTML(target);
 				room.addRaw(
 					'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + Tools.escapeHTML(user.name) + '.</b><br />' +
-					'Quote: ' +  Tools.escapeHTML(target) + '</div>'
+					'Quote: ' + plugins.happy.quote + '</div>'
 				);
-				room.quoteOn = true;
-				this.logModCommand(Tools.escapeHTML(user.name) + " has updated the Quote of the Day to: " + Tools.escapeHTML(target) + "");
+				this.logModCommand(Tools.escapeHTML(user.name) + " has updated the quote of the day to: " + plugins.happy.quote + "");
 			}
         	}
         }

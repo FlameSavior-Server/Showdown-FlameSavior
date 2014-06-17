@@ -283,8 +283,8 @@ var plugins = exports.plugins = {
 					if (!plugins.happy.quote) return this.sendReply("The quote of the day has not been set.");
                 			return this.sendReplyBox("The current <b>\"Inspirational Quote of the Day\"</b> is: <br /> " + plugins.happy.quote + "");
 				}
+      				if (!this.can('declare', null, room)) return;
       				if (target === 'off' || target === 'disable' || target === 'reset') {
-      					if (!this.can('declare', null, room)) return;
       					this.logModCommand(user.name + " has reset the Quote of the Day.");
       					room.addRaw("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
       					plugins.happy.quote = '';

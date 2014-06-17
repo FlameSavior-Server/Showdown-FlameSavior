@@ -1550,6 +1550,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	dating: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i254.photobucket.com/albums/hh108/naten2006/oie_17447500rCQ2IUY_zps9bdc16b7.gif" width="100">' +
+                '<font size=5>Dating: Dolph and Mating</font>' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/blastoise-mega.gif" width="100"><br />' +
+                '<img src="https://i.chzbgr.com/maxW500/5616725504/hC9CC4D55/" width="200"><br />' +
+                '<font color="blue"> What happens in Dolph\'s car, stays in Dolph\'s car</center>');
+        },
+	
+	phantom: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/rd18bxe.jpg" width="100">' +
+    		'<img src="http://i.imgur.com/Aj8pOcC.png" width="350">' +
+    		'<img src="http://i.imgur.com/yvRIWI4.jpg" width="100"><br />' +
+    		'<b>Ace:</b> Gliscor<br />' +
+    		'Nyanpassu~.</center>');
+    	},
+	
 	bane: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/EhYWxnE.png" width="180">' +

@@ -1574,7 +1574,7 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/Aj8pOcC.png" width="350">' +
     		'<img src="http://i.imgur.com/yvRIWI4.jpg" width="100"><br />' +
     		'<b>Ace:</b> Gliscor<br />' +
-    		'Nyanpassu~.</center>');
+    		'Nyanpassu~</center>');
     	},
 	
 	bane: function(target, room, user) {
@@ -1955,11 +1955,11 @@ var commands = exports.commands = {
 	
 	roy: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i1148.photobucket.com/albums/o579/catfight09/RdhT0Vr_zps1e2b23e1.jpg" width="150">' +
-                '<img src="http://i.imgur.com/KgJnFtZ.gif">' +
-                '<img src="http://fc05.deviantart.net/fs31/f/2008/212/c/0/gallade_shiny_by_Ashuras2000.jpg" width="120"><br />' +
-                '<b>Ace:</b> Gardevoir<br />' +
-                'Sometimes life is like this dark tunnel, you can\’t always see the light at the end of the tunnel, but if you just keep moving, you will come to a better place.</center>');
+        this.sendReplyBox('<center><img src="http://i1148.photobucket.com/albums/o579/catfight09/GaryRender2Resize_zpsf564d01a.png" width="160">' +
+                '<img src="http://i.imgur.com/iW5LGFy.png">' +
+                '<img src="http://i1148.photobucket.com/albums/o579/catfight09/tumblr_mbhpnxte2H1ri9pfao1_500_zps85bee4e9.jpg" width="160"><br />' +
+                '<b>Ace:</b> Gallade<br />' +
+                'Laws only Exist for those who cannot live without clinging to them.</center>');
     	},
 	
 	pichu: function(target, room, user) {

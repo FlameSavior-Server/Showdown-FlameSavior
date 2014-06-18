@@ -263,9 +263,9 @@ var plugins = exports.plugins = {
         			this.logModCommand("The Artist of the Day was changed to " + Tools.escapeHTML(target) + " by " + Tools.escapeHTML(user.name) + ".");
 			}
             	}
-	},    
-	
-	/**
+    	},
+    	
+    /**
 	* The Happy Place: Quote of the Day Plugin
 	* This is a command that allows a room owner to set an inspirational "quote" of the day.
 	* Others may braodcast this at any time to remind the room of such.
@@ -290,7 +290,7 @@ var plugins = exports.plugins = {
       					this.sendReply("The Quote of the Day was reset by " + Tools.escapeHTML(user.name) + ".");
 					this.logModCommand(user.name + " has reset the Quote of the Day.");
       					return;
-      				}	
+      				}
 				plugins.happy.quote = Tools.escapeHTML(target);
 				room.addRaw(
 					'<div class=\"broadcast-green\"><b>The "Inspirational Quote of the Day" has been updated by ' + Tools.escapeHTML(user.name) + '.</b><br />' +

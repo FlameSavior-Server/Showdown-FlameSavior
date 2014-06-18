@@ -134,12 +134,12 @@ exports.BattleScripts = {
 					targets.push(foeActive[i]);
 				}
 			}
+			if (move.selfdestruct && this.gen >= 5) {
+				this.faint(pokemon, pokemon, move);
+			}
 			if (!targets.length) {
 				this.attrLastMove('[notarget]');
 				this.add('-notarget');
-				if (move.selfdestruct && this.gen >= 5) {
-					this.faint(pokemon, pokemon, move);
-				}
 				return true;
 			}
 			if (targets.length > 1) move.spreadHit = true;
@@ -249,8 +249,11 @@ exports.BattleScripts = {
 			if (hits.length) {
 				// yes, it's hardcoded... meh
 				if (hits[0] === 2 && hits[1] === 5) {
-					var roll = this.random(6);
-					hits = [2, 2, 3, 3, 4, 5][roll];
+					if (this.gen >= 5) {
+						hits = [2, 2, 3, 3, 4, 5][this.random(6)];
+					} else {
+						hits = [2, 2, 2, 3, 3, 3, 4, 5][this.random(8)];
+					}
 				} else {
 					hits = this.random(hits[0], hits[1] + 1);
 				}
@@ -532,9 +535,9 @@ exports.BattleScripts = {
 	},
 
 	isAdjacent: function (pokemon1, pokemon2) {
-		if (!pokemon1.fainted && !pokemon2.fainted && pokemon2.position !== pokemon1.position && Math.abs(pokemon2.position - pokemon1.position) <= 1) {
-			return true;
-		}
+		if (pokemon1.fainted || pokemon2.fainted) return false;
+		if (pokemon1.side === pokemon2.side) return Math.abs(pokemon1.position - pokemon2.position) === 1;
+		return Math.abs(pokemon1.position + pokemon2.position + 1 - pokemon1.side.active.length) <= 1;
 	},
 	checkAbilities: function (selectedAbilities, defaultAbilities) {
 		if (!selectedAbilities.length) return true;

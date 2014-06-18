@@ -11,9 +11,11 @@
  * /whois.
  *
  * But to actually define a command, it's a function:
- *   birkal: function (target, room, user) {
- *     this.sendReply("It's not funny anymore.");
- *   },
+ *
+ *   allowchallenges: function (target, room, user) {
+ *     user.blockChallenges = false;
+ *     this.sendReply("You are available for challenges from now on.");
+ *   }
  *
  * Commands are actually passed five parameters:
  *   function (target, room, user, connection, cmd, message)
@@ -88,12 +90,17 @@
  *   has permission to. This will check to see if the user used
  *   "!command" instead of "/command". If so, it will check to see
  *   if the user has permission to broadcast (by default, voice+ can),
- *   and return false if not. Otherwise, it will set it up so that
+ *   and return false if not. Otherwise, it will add the message to
+ *   the room, and turn on the flag this.broadcasting, so that
  *   this.sendReply and this.sendReplyBox will broadcast to the room
  *   instead of just the user that used the command.
  *
  *   Should usually be near the top of the command, like:
  *     if (!this.canBroadcast()) return false;
+ *
+ * this.canBroadcast(suppressMessage)
+ *   Functionally the same as this.canBroadcast(). However, it
+ *   will look as if the user had written the text suppressMessage.
  *
  * this.canTalk()
  *   Checks to see if the user can speak in the room. Returns false
@@ -103,11 +110,14 @@
  *   Should usually be near the top of the command, like:
  *     if (!this.canTalk()) return false;
  *
- * this.canTalk(message)
- *   Checks to see if the user can say the message. In addition to
- *   running the checks from this.canTalk(), it also checks to see if
- *   the message has any banned words or is too long. Returns the
- *   filtered message, or a falsy value if the user can't speak.
+ * this.canTalk(message, room)
+ *   Checks to see if the user can say the message in the room.
+ *   If a room is not specified, it will default to the current one.
+ *   If it has a falsy value, the check won't be attached to any room.
+ *   In addition to running the checks from this.canTalk(), it also
+ *   checks to see if the message has any banned words, is too long,
+ *   or was just sent by the user. Returns the filtered message, or a
+ *   falsy value if the user can't speak.
  *
  *   Should usually be near the top of the command, like:
  *     target = this.canTalk(target);
@@ -124,15 +134,22 @@
  *   called by this.parse from a command called by this.parse etc)
  *   we will assume it's a bug in your command and error out.
  *
- * this.targetUserOrSelf(target)
+ * this.targetUserOrSelf(target, exactName)
  *   If target is blank, returns the user that sent the message.
  *   Otherwise, returns the user with the username in target, or
  *   a falsy value if no user with that username exists.
+ *   By default, this will track users across name changes. However,
+ *   if exactName is true, it will enforce exact matches.
  *
- * this.splitTarget(target)
+ * this.getLastIdOf(user)
+ *   Returns the last userid of an specified user.
+ *
+ * this.splitTarget(target, exactName)
  *   Splits a target in the form "user, message" into its
  *   constituent parts. Returns message, and sets this.targetUser to
  *   the user, and this.targetUsername to the username.
+ *   By default, this will track users across name changes. However,
+ *   if exactName is true, it will enforce exact matches.
  *
  *   Remember to check if this.targetUser exists before going further.
  *
@@ -572,16 +589,27 @@ var commands = exports.commands = {
 		if (newTargets && newTargets.length) {
 			for (var i = 0; i < newTargets.length; ++i) {
 				if (newTargets[i].id !== targetId && !Tools.data.Aliases[targetId] && !i) {
-					data = "No Pokemon, item, move or ability named '" + target + "' was found. Showing the data of '" + newTargets[0].name + "' instead.\n";
+					data = "No Pokemon, item, move, ability or nature named '" + target + "' was found. Showing the data of '" + newTargets[0].name + "' instead.\n";
+				}
+				if (newTargets[i].searchType === 'nature') {
+					data += "" + newTargets[i].name + " nature: ";
+					if (newTargets[i].plus) {
+						var statNames = {'atk': "Attack", 'def': "Defense", 'spa': "Special Attack", 'spd': "Special Defense", 'spe': "Speed"};
+						data += "+10% " + statNames[newTargets[i].plus] + ", -10% " + statNames[newTargets[i].minus] + ".";
+					} else {
+						data += "No effect.";
+					}
+				} else {
+					data += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
 				}
 				data += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
 			        if (newTargets[i].searchType === 'pokemon') {
 					var template = Tools.getTemplate(newTargets[i].species);
 					data += '|html|Tier: <b>' + template.tier + '</b>';
 			        }
-			}        
+			}
 		} else {
-			data = "No Pokemon, item, move or ability named '" + target + "' was found. (Check your spelling?)";
+			data = "No Pokemon, item, move, ability or nature named '" + target + "' was found. (Check your spelling?)";
 		}
 
 		this.sendReply(data);
@@ -1637,6 +1665,17 @@ var commands = exports.commands = {
 				'★ <b>Plug.dj</b> - Come listen to music with us! Click <a href="http://plug.dj/gold-server/">here</a> to start!<br>' +
 				'<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
 	},
+
+	showtan: function (target, room, user) {
+		if (room.id !== 'showderp') return this.sendReply("The command '/showtan' was unrecognized. To send a message starting with 'showtan', type '//showtan'.");
+		if (!this.can('modchat', null, room)) return;
+		target = this.splitTarget(target);
+		if (!this.targetUser) return this.sendReply('user not found');
+		if (!room.users[this.targetUser.userid]) return this.sendReply('not a showderper');
+		this.targetUser.avatar = '#showtan';
+		room.add(user.name+' applied showtan to affected area of '+this.targetUser.name);
+	},
+
 	introduction: 'intro',
 	intro: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1705,11 +1744,11 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'hackmons') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3475624/\">Hackmons</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3500418/\">Hackmons</a><br />";
 		}
 		if (target === 'all' || target === 'balancedhackmons' || target === 'bh') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3463764/\">Balanced Hackmons</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3489849/\">Balanced Hackmons</a><br />";
 			if (target !== 'all') {
 				buffer += "- <a href=\"http://www.smogon.com/forums/threads/3499973/\">Balanced Hackmons Mentoring Program</a><br />";
 			}
@@ -1720,11 +1759,11 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'tiershift' || target === 'ts') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3479358/\">Tier Shift</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/tier-shift-xy.3508369/\">Tier Shift</a><br />";
 		}
 		if (target === 'all' || target === 'stabmons') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3484106/\">STABmons</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/stabmons-see-post-2-for-ban-considerations.3493081/\">STABmons</a><br />";
 		}
 		if (target === 'all' || target === 'omotm' || target === 'omofthemonth' || target === 'month') {
 			matched = true;
@@ -1908,31 +1947,39 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'ubers' || target === 'uber') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/bw/tiers/uber\">Uber Pokemon</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3496305/\">Ubers Viability Ranking Thread</a><br />";
 		}
 		if (target === 'all' || target === 'overused' || target === 'ou') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/bw/tiers/ou\">Overused Pokemon</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3507765/\">np: OU Stage 3</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3502428/\">OU Viability Ranking Thread</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3491371/\">Official OU Banlist</a><br />";
 		}
 		if (target === 'all' || target === 'underused' || target === 'uu') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/bw/tiers/uu\">Underused Pokemon</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3508311/\">np: UU Stage 2</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3500340/\">UU Viability Ranking Thread</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3502698/#post-5323505\">Official UU Banlist</a><br />";
 		}
 		if (target === 'all' || target === 'rarelyused' || target === 'ru') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/bw/tiers/ru\">Rarelyused Pokemon</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3508302/\">np: RU Stage 1</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3506500/\">RU Viability Ranking Thread</a><br />";
 		}
 		if (target === 'all' || target === 'neverused' || target === 'nu') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/bw/tiers/nu\">Neverused Pokemon</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3506287/\">np: NU (beta)</a><br />";
 		}
 		if (target === 'all' || target === 'littlecup' || target === 'lc') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/bw/tiers/lc\">Little Cup Pokemon</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3496013/\">LC Viability Ranking Thread</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3490462/\">Official LC Banlist</a><br />";
 		}
 		if (target === 'all' || target === 'doubles') {
 			matched = true;
-			buffer += "- <a href=\"http://www.smogon.com/bw/metagames/doubles\">Doubles</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3506251/\">np: Doubles Stage 3</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3496306/\">Doubles Viability Ranking Thread</a><br />";
+			buffer += "- <a href=\"http://www.smogon.com/forums/threads/3498688/\">Official Doubles Banlist</a><br />";
 		}
 		if (!matched) {
 			return this.sendReply("The Tiers entry '" + target + "' was not found. Try /tiers for general help.");
@@ -2797,7 +2844,7 @@ var commands = exports.commands = {
 		}
 		if (target === "%" || target === 'kickbattle ') {
 			matched = true;
-			this.sendReply("/kickbattle [username], [reason] - Kicks an user from a battle with reason. Requires: % @ & ~");
+			this.sendReply("/kickbattle [username], [reason] - Kicks a user from a battle with reason. Requires: % @ & ~");
 		}
 		if (target === "%" || target === 'warn' || target === 'k') {
 			matched = true;

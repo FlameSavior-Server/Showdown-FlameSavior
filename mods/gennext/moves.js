@@ -71,6 +71,7 @@ exports.BattleMovedex = {
 	},
 	cut: {
 		inherit: true,
+		accuracy: 100,
 		secondary: {
 			chance: 100,
 			boosts: {
@@ -144,7 +145,7 @@ exports.BattleMovedex = {
 					return;
 				}
 				if (move.category === 'Status') {
-					if (move.notSubBlocked) {
+					if (move.notSubBlocked || move.isSoundBased) {
 						return;
 					}
 					var SubBlocked = {
@@ -289,12 +290,19 @@ exports.BattleMovedex = {
 		onTryHit: function (target) {
 			target.removeVolatile('substitute');
 		},
-		effect: {
-			duration: 2,
-			onLockMove: 'skullbash',
-			onStart: function (pokemon) {
-				this.boost({def:1, spd:1, accuracy:1}, pokemon, pokemon, this.getMove('skullbash'));
+				onTry: function (attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
 			}
+			this.add('-prepare', attacker, move.name, defender);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				this.add('-anim', attacker, move.name, defender);
+				attacker.removeVolatile(move.id);
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			this.boost({def:1, spd:1, accuracy:1}, attacker, attacker, this.getMove('skullbash'));
+			return null;
 		},
 		breaksProtect: true
 	},
@@ -1238,6 +1246,19 @@ exports.BattleMovedex = {
 			status: 'tox'
 		}
 	},
+	slash: {
+		inherit: true,
+		basePower: 60,
+		onBasePower: function (power, user) {
+			if (user.template.id === 'persian') return power * 1.5;
+		},
+		secondary: {
+			chance: 30,
+			boosts: {
+				def: -1
+			}
+		}
+	},
 	sludge: {
 		inherit: true,
 		basePower: 60,
@@ -1467,6 +1488,10 @@ exports.BattleMovedex = {
 		inherit: true,
 		accuracy: 100
 	},
+	flyingpress: {
+		inherit: true,
+		accuracy: 100
+	},
 	crushclaw: {
 		inherit: true,
 		accuracy: 100
@@ -1484,6 +1509,10 @@ exports.BattleMovedex = {
 		accuracy: 100
 	},
 	diamondstorm: {
+		inherit: true,
+		accuracy: 100
+	},
+	steameruption: {
 		inherit: true,
 		accuracy: 100
 	},
@@ -1523,6 +1552,14 @@ exports.BattleMovedex = {
 			status: 'brn'
 		}
 	},
+	dragonrush: {
+		inherit: true,
+		accuracy: 80
+	},
+	rocktomb: {
+		inherit: true,
+		accuracy: 100
+	},
 	fireblast: {
 		inherit: true,
 		accuracy: 80,
@@ -1531,9 +1568,21 @@ exports.BattleMovedex = {
 			status: 'brn'
 		}
 	},
+	irontail: {
+		inherit: true,
+		accuracy: 80
+	},
 	magmastorm: {
 		inherit: true,
 		accuracy: 80
+	},
+	megahorn: {
+		inherit: true,
+		accuracy: 90
+	},
+	megapunch: {
+		inherit: true,
+		accuracy: 90
 	},
 	megakick: {
 		inherit: true,
@@ -1551,9 +1600,17 @@ exports.BattleMovedex = {
 		inherit: true,
 		accuracy: 80
 	},
+	sweetkiss: {
+		inherit: true,
+		accuracy: 80
+	},
 	lovelykiss: {
 		inherit: true,
 		accuracy: 80
+	},
+	whirlpool: {
+		inherit: true,
+		accuracy: 90
 	},
 	eggbomb: {
 		inherit: true,

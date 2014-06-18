@@ -333,7 +333,7 @@ var GlobalRoom = (function () {
 	GlobalRoom.prototype.sendAuth = function (message) {
 		for (var i in this.users) {
 			var user = this.users[i];
-			if (user.connected && user.can('receiveauthmessages')) {
+			if (user.connected && user.can('receiveauthmessages', null, this)) {
 				user.sendTo(this, message);
 			}
 		}
@@ -1364,7 +1364,7 @@ var ChatRoom = (function () {
 	ChatRoom.prototype.sendAuth = function (message) {
 		for (var i in this.users) {
 			var user = this.users[i];
-			if (user.connected && user.can('receiveauthmessages')) {
+			if (user.connected && user.can('receiveauthmessages', null, this)) {
 				user.sendTo(this, message);
 			}
 		}

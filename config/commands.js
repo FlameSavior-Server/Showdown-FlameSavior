@@ -3489,7 +3489,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs70/f/2014/073/b/6/goomy_by_creepyjellyfish-d7a49ke.gif">' +
                 '<img src="http://i.imgur.com/L4M0q0l.gif">' +
-                '<img src="http://192.184.93.156:8000/avatars/gaspoweredstick.gif"><br />' +
+                '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aron.gif"><br />' +
                 '<b>Ace:</b> Goomy and Aron<br />' +
                 'Sometimes the world is tough, but with my Pokemon, its a walk in the park..</center>');
     	},

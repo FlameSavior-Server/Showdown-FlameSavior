@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	gonny: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://images.forwallpaper.com/files/thumbs/preview/59/598146__evil-absol_p.jpg" height="80">' +
+    		'<img src="http://i.imgur.com/gniJvmV.gif" width="300">' +
+    		'<img src="http://fc09.deviantart.net/fs70/f/2013/082/0/f/milotic_by_lunasnightmare-d5yynfy.jpg" height="90"><br />' +
+    		'<b>Ace:</b> Absol<br />' +
+    		'Work until your idols become your rivals.</center>');
+    	},
+	
 	kjflame013: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i7.photobucket.com/albums/y251/ProphetZA/Pokemon/445.jpg" width="100">' +

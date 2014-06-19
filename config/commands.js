@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	zardif: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen6/xy-animated/392.gif">' +
+    		'<img src="http://i.imgur.com/P9uPxqg.gif">' +
+    		'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/006.gif"><br />' +
+    		'<b>Ace:</b> Gay love<br />' +
+    		'When we get together shit gets hot!</center>');
+    	},
+	
 	gonny: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://images.forwallpaper.com/files/thumbs/preview/59/598146__evil-absol_p.jpg" height="80">' +

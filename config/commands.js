@@ -1018,6 +1018,12 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
+	jacktr: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/X8Qshnz.gif"><br />' +
+                'With my bare hands I took back my life, now I\'ll take yours');
+	},
+	
 	goal: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://cdn.bulbagarden.net/upload/thumb/4/47/181Ampharos.png/250px-181Ampharos.png">' +

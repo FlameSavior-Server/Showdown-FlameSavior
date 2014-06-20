@@ -967,6 +967,7 @@ var cmds = {
 
 	disqualify: 'dq',
 	dq: function(target, room, user, connection) {
+		if (!this.canTalk()) return;
 		if (!tour.userauth(user,room)) return this.sendReply('You do not have enough authority to use this command.');
 		if (!target) return this.sendReply('Proper syntax for this command is: /dq username');
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');

@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	darkrida: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megax.gif">' +
+    		'<img src="http://i.imgur.com/FosZbmV.gif">' +
+    		'<img src="http://i.imgur.com/7TMTTD7.jpg" width="140"><br />' +
+    		'<b>Ace:</b> Darkjak x Barida<br />' +
+    		'The thirstiest users of Frost, we know they had to be together.</center>');
+    	},
+	
 	chris: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://th01.deviantart.net/fs71/PRE/i/2011/046/9/8/venusaur_painting_by_purplekecleon-d39n2zz.png" width="160">' +

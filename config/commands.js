@@ -1550,7 +1550,7 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
-	grove: function(target, room, user) {
+	gorve: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/DdisyPH.gif" width="130">' +
     		'<img src="http://i.imgur.com/IKfpMJJ.gif" width="270">' +

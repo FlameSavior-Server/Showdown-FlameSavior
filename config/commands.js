@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	chris: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://th01.deviantart.net/fs71/PRE/i/2011/046/9/8/venusaur_painting_by_purplekecleon-d39n2zz.png" width="160">' +
+    		'<img src="http://i.imgur.com/lCDihoi.gif">' +
+    		'<img src="http://fc09.deviantart.net/fs71/f/2012/133/6/f/pokemon_trainer_red_by_hana_mi-d4j77xx.png" width="100"><br />' +
+    		'<b>Ace:</b> Mega Venusaur<br />' +
+    		'A real warrior doesnt dash off in pursuit of the next victory nor throw a fit when experiencing a loss. A real warrior ponders the next battle.</center>');
+    	},
+	
 	zardif: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen6/xy-animated/392.gif">' +

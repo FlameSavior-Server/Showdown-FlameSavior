@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	grove: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/DdisyPH.gif" width="130">' +
+    		'<img src="http://i.imgur.com/IKfpMJJ.gif" width="270">' +
+    		'<img src="http://media.giphy.com/media/tI3Z87IstMxG0/giphy.gif" width="140"><br />' +
+    		'<b>Ace:</b> <font color="orange">Charizard</font> & <font color="pink">Mew</font><br />' +
+    		'<font color="red">Heard you had to sell your soul to beat me in Pokemon.</font></center>');
+    	},
+	
 	darkrida: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megax.gif">' +

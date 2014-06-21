@@ -1018,6 +1018,14 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
+	dsuc: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><b><Font color="#FF0000">D</Font><Font color="#FF6000">e</Font><Font color="#FFC000">m</Font><Font color="#FFff00">o</Font><Font color="#9Fff00">n</Font><Font color="#3Fff00">i</Font><Font color="#00ff00">c</Font>' +
+        	'<Font color="#00ffC0">S</Font><Font color="#00ffff">u</Font><Font color="#00C0ff">c</Font><Font color="#0060ff">c</Font><Font color="#0000ff">u</Font><Font color="#3F00ff">b</Font><Font color="#9F00ff">u</Font><Font color="#FF00ff">s</Font></b><br />' +
+                '<img src="http://fc06.deviantart.net/fs70/i/2011/139/d/1/dcp_succubus_class_by_black_cat_mew-d3gqhbi.png" width="150"><br />' +
+                'Won\'t you be my pet?');
+	},
+	
 	jacktr: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/X8Qshnz.gif"><br />' +

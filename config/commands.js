@@ -580,40 +580,35 @@ var commands = exports.commands = {
 	stats: 'data',
 	dex: 'data',
 	pokedex: 'data',
-	data: function (target, room, user) {
+	details: 'data',
+	data: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
 
-		var data = '';
+		var buffer = '';
 		var targetId = toId(target);
 		var newTargets = Tools.dataSearch(target);
+		var showDetails = (cmd === 'dt' || cmd === 'details');
 		if (newTargets && newTargets.length) {
 			for (var i = 0; i < newTargets.length; ++i) {
 				if (newTargets[i].id !== targetId && !Tools.data.Aliases[targetId] && !i) {
-					data = "No Pokemon, item, move, ability or nature named '" + target + "' was found. Showing the data of '" + newTargets[0].name + "' instead.\n";
+					buffer = "No Pokemon, item, move, ability or nature named '" + target + "' was found. Showing the data of '" + newTargets[0].name + "' instead.\n";
 				}
 				if (newTargets[i].searchType === 'nature') {
-					data += "" + newTargets[i].name + " nature: ";
+					buffer += "" + newTargets[i].name + " nature: ";
 					if (newTargets[i].plus) {
 						var statNames = {'atk': "Attack", 'def': "Defense", 'spa': "Special Attack", 'spd': "Special Defense", 'spe': "Speed"};
-						data += "+10% " + statNames[newTargets[i].plus] + ", -10% " + statNames[newTargets[i].minus] + ".";
+						buffer += "+10% " + statNames[newTargets[i].plus] + ", -10% " + statNames[newTargets[i].minus] + ".";
 					} else {
-						data += "No effect.";
+						buffer += "No effect.";
 					}
+					return this.sendReply(buffer);
 				} else {
-					data += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
+					buffer += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
 				}
-				data += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
-			        if (newTargets[i].searchType === 'pokemon') {
-					var template = Tools.getTemplate(newTargets[i].species);
-					data += '|html|Tier: <b>' + template.tier + '</b>';
-			        }
 			}
 		} else {
-			data = "No Pokemon, item, move, ability or nature named '" + target + "' was found. (Check your spelling?)";
-		}
-
-		this.sendReply(data);
-	},
+			return this.sendReply("No Pokemon, item, move, ability or nature named '" + target + "' was found. (Check your spelling?)");
+		},
 
 	ds: 'dexsearch',
 	dsearch: 'dexsearch',

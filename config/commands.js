@@ -1550,6 +1550,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	lapras: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/30zBvPA.png" width="120">' +
+    		'<img src="http://i.imgur.com/sawdbHH.png" width="300">' +
+    		'<img src="http://i.imgur.com/OUFJyu7.jpg" width="120"><br />' +
+    		'<b>Ace:</b> What ever the F*#@ I want<br />' +
+    		' Never back down and Never give up!</center>');
+    	},
+	
 	gorve: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/DdisyPH.gif" width="130">' +

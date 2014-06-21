@@ -581,6 +581,7 @@ var commands = exports.commands = {
 	dex: 'data',
 	pokedex: 'data',
 	details: 'data',
+	dt: 'data',
 	data: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
 
@@ -608,211 +609,87 @@ var commands = exports.commands = {
 			}
 		} else {
 			return this.sendReply("No Pokemon, item, move, ability or nature named '" + target + "' was found. (Check your spelling?)");
-		},
+		}
 
-	ds: 'dexsearch',
-	dsearch: 'dexsearch',
-	dexsearch: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-
-		if (!target) return this.parse('/help dexsearch');
-		var targets = target.split(',');
-		var searches = {};
-		var allTiers = {'uber':1, 'ou':1, 'uu':1, 'lc':1, 'cap':1, 'bl':1, 'bl2':1, 'ru':1, 'bl3':1, 'nu':1};
-		var allColours = {'green':1, 'red':1, 'blue':1, 'white':1, 'brown':1, 'yellow':1, 'purple':1, 'pink':1, 'gray':1, 'black':1};
-		var showAll = false;
-		var megaSearch = null;
-		var feSearch = null; // search for fully evolved pokemon only
-		var output = 10;
-
-		for (var i in targets) {
-			var isNotSearch = false;
-			target = targets[i].trim().toLowerCase();
-			if (target.slice(0, 1) === '!') {
-				isNotSearch = true;
-				target = target.slice(1);
-			}
-
-			var targetAbility = Tools.getAbility(targets[i]);
-			if (targetAbility.exists) {
-				if (!searches['ability']) searches['ability'] = {};
-				if (Object.count(searches['ability'], true) === 1 && !isNotSearch) return this.sendReplyBox("Specify only one ability.");
-				if ((searches['ability'][targetAbility.name] && isNotSearch) || (searches['ability'][targetAbility.name] === false && !isNotSearch)) return this.sendReplyBox("A search cannot both exclude and include an ability.");
-				searches['ability'][targetAbility.name] = !isNotSearch;
-				continue;
-			}
-
-			if (target in allTiers) {
-				if (!searches['tier']) searches['tier'] = {};
-				if ((searches['tier'][target] && isNotSearch) || (searches['tier'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a tier.');
-				searches['tier'][target] = !isNotSearch;
-				continue;
-			}
-
-			if (target in allColours) {
-				if (!searches['color']) searches['color'] = {};
-				if ((searches['color'][target] && isNotSearch) || (searches['color'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a color.');
-				searches['color'][target] = !isNotSearch;
-				continue;
-			}
-
-			var targetInt = parseInt(target);
-			if (0 < targetInt && targetInt < 7) {
-				if (!searches['gen']) searches['gen'] = {};
-				if ((searches['gen'][target] && isNotSearch) || (searches['gen'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a generation.');
-				searches['gen'][target] = !isNotSearch;
-				continue;
-			}
-
-			if (target === 'all') {
-				if (this.broadcasting) {
-					return this.sendReplyBox("A search with the parameter 'all' cannot be broadcast.");
+		if (showDetails) {
+			if (newTargets[0].searchType === 'pokemon') {
+				var pokemon = Tools.getTemplate(newTargets[0].name);
+				if (pokemon.weightkg >= 200) {
+					var weighthit = 120;
+				} else if (pokemon.weightkg >= 100) {
+					var weighthit = 100;
+				} else if (pokemon.weightkg >= 50) {
+					var weighthit = 80;
+				} else if (pokemon.weightkg >= 25) {
+					var weighthit = 60;
+				} else if (pokemon.weightkg >= 10) {
+					var weighthit = 40;
+				} else {
+					var weighthit = 20;
 				}
-				showAll = true;
-				continue;
-			}
-
-			if (target === 'megas' || target === 'mega') {
-				if ((megaSearch && isNotSearch) || (megaSearch === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include Mega Evolutions.');
-				megaSearch = !isNotSearch;
-				continue;
-			}
-
-			if (target === 'fe' || target === 'fullyevolved' || target === 'nfe' || target === 'notfullyevolved') {
-				if (target === 'nfe' || target === 'notfullyevolved') isNotSearch = !isNotSearch;
-				if ((feSearch && isNotSearch) || (feSearch === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include fully evolved Pokémon.');
-				feSearch = !isNotSearch;
-				continue;
-			}
-
-			var targetMove = Tools.getMove(target);
-			if (targetMove.exists) {
-				if (!searches['moves']) searches['moves'] = {};
-				if (Object.count(searches['moves'], true) === 4 && !isNotSearch) return this.sendReplyBox("Specify a maximum of 4 moves.");
-				if ((searches['moves'][targetMove.name] && isNotSearch) || (searches['moves'][targetMove.name] === false && !isNotSearch)) return this.sendReplyBox("A search cannot both exclude and include a move.");
-				searches['moves'][targetMove.name] = !isNotSearch;
-				continue;
-			}
-
-			if (target.indexOf(' type') > -1) {
-				target = target.charAt(0).toUpperCase() + target.slice(1, target.indexOf(' type'));
-				if (target in Tools.data.TypeChart) {
-					if (!searches['types']) searches['types'] = {};
-					if (Object.count(searches['types'], true) === 2 && !isNotSearch) return this.sendReplyBox("Specify a maximum of two types.");
-					if ((searches['types'][target] && isNotSearch) || (searches['types'][target] === false && !isNotSearch)) return this.sendReplyBox("A search cannot both exclude and include a type.");
-					searches['types'][target] = !isNotSearch;
-					continue;
+				var details = {
+					"Dex#": pokemon.num,
+					"Height": pokemon.heightm + " m",
+					"Weight": pokemon.weightkg + " kg <em>(" + weighthit + " BP)</em>",
+					"Dex Colour": pokemon.color,
+					"Egg Group(s)": pokemon.eggGroups.join(", ")
+				};
+				if (!pokemon.evos.length) {
+					details["Evolution"] = "<font color=#585858>Does Not Evolve</font>";
+				} else {
+					details["Evolution"] = pokemon.evos.map(function (evo) {
+						var evo = Tools.getTemplate(evo);
+						return evo.name + " (" + evo.evoLevel + ")";
+					}).join(", ");
 				}
-			}
-			return this.sendReplyBox("'" + Tools.escapeHTML(target) + "' could not be found in any of the search categories.");
-		}
 
-		if (showAll && Object.size(searches) === 0 && megaSearch === null && feSearch === null) return this.sendReplyBox("No search parameters other than 'all' were found. Try '/help dexsearch' for more information on this command.");
+		 	} else if (newTargets[0].searchType === 'move') {
+				var move = Tools.getMove(newTargets[0].name);
+				var details = {
+					"Priority": move.priority,
+				};
+				
+				if (move.secondary || move.secondaries) details["<font color=black>&#10003; Secondary Effect</font>"] = "";	
+				if (move.isContact) details["<font color=black>&#10003; Contact</font>"] = "";
 
-		var dex = {};
-		for (var pokemon in Tools.data.Pokedex) {
-			var template = Tools.getTemplate(pokemon);
-			var megaSearchResult = (megaSearch === null || (megaSearch === true && template.isMega) || (megaSearch === false && !template.isMega));
-			var feSearchResult = (feSearch === null || (feSearch === true && !template.evos.length) || (feSearch === false && template.evos.length))
-			if (template.tier !== 'Unreleased' && template.tier !== 'Illegal' && (template.tier !== 'CAP' || (searches['tier'] && searches['tier']['cap'])) &&
-				megaSearchResult && feSearchResult) {
-				dex[pokemon] = template;
-			}
-		}
+				details["Target"] = {
+					'normal': "Adjacent Pokemon",
+					'self': "Self",
+					'adjacentAlly': "Single Ally",
+					'allAdjacentFoes': "Adjacent Foes",
+					'foeSide': "All Foes",
+					'allySide': "All Allies",
+					'allAdjacent': "All Adjacent Pokemon",
+					'any': "Any Pokemon",
+					'all': "All Pokemon"
+				}[move.target] || "Unknown";
 
-		for (var search in {'moves':1, 'types':1, 'ability':1, 'tier':1, 'gen':1, 'color':1}) {
-			if (!searches[search]) continue;
-			switch (search) {
-				case 'types':
-					for (var mon in dex) {
-						if (Object.count(searches[search], true) === 2) {
-							if (!(searches[search][dex[mon].types[0]]) || !(searches[search][dex[mon].types[1]])) delete dex[mon];
-						} else {
-							if (searches[search][dex[mon].types[0]] === false || searches[search][dex[mon].types[1]] === false || (Object.count(searches[search], true) > 0 &&
-								(!(searches[search][dex[mon].types[0]]) && !(searches[search][dex[mon].types[1]])))) delete dex[mon];
-						}
-					}
-					break;
+			} else if (newTargets[0].searchType === 'item') {
+				var item = Tools.getItem(newTargets[0].name);
+				var details = {};
+				if (item.fling) {
+					details["Fling Base Power"] = item.fling.basePower;
+					if (item.fling.status) details["Fling Effect"] = item.fling.status;
+					if (item.fling.volatileStatus) details["Fling Effect"] = item.fling.volatileStatus;
+					if (item.isBerry) details["Fling Effect"] = "Activates effect of berry on target.";
+					if (item.id === 'whiteherb') details["Fling Effect"] = "Removes all negative stat levels on the target.";
+					if (item.id === 'mentalherb') details["Fling Effect"] = "Removes the effects of infatuation, Taunt, Encore, Torment, Disable, and Cursed Body on the target.";
+				}
+				if (!item.fling) details["Fling"] = "This item cannot be used with Fling";
+				if (item.naturalGift) {
+					details["Natural Gift Type"] = item.naturalGift.type;
+					details["Natural Gift BP"] = item.naturalGift.basePower;
+				}
 
-				case 'tier':
-					for (var mon in dex) {
-						if ('lc' in searches[search]) {
-							// some LC legal Pokemon are stored in other tiers (Ferroseed/Murkrow etc)
-							// this checks for LC legality using the going criteria, instead of dex[mon].tier
-							var isLC = (dex[mon].evos && dex[mon].evos.length > 0) && !dex[mon].prevo && Tools.data.Formats['lc'].banlist.indexOf(dex[mon].species) === -1;
-							if ((searches[search]['lc'] && !isLC) || (!searches[search]['lc'] && isLC)) {
-								delete dex[mon];
-								continue;
-							}
-						}
-						if (searches[search][String(dex[mon][search]).toLowerCase()] === false) {
-							delete dex[mon];
-						} else if (Object.count(searches[search], true) > 0 && !searches[search][String(dex[mon][search]).toLowerCase()]) delete dex[mon];
-					}
-					break;
-
-				case 'gen':
-				case 'color':
-					for (var mon in dex) {
-						if (searches[search][String(dex[mon][search]).toLowerCase()] === false) {
-							delete dex[mon];
-						} else if (Object.count(searches[search], true) > 0 && !searches[search][String(dex[mon][search]).toLowerCase()]) delete dex[mon];					}
-					break;
-
-				case 'ability':
-					for (var mon in dex) {
-						for (var ability in searches[search]) {
-							var needsAbility = searches[search][ability];
-							var hasAbility = Object.count(dex[mon].abilities, ability) > 0;
-							if (hasAbility !== needsAbility) {
-								delete dex[mon];
-								break;
-							}
-						}
-					}
-					break;
-
-				case 'moves':
-					for (var mon in dex) {
-						var template = Tools.getTemplate(dex[mon].id);
-						if (!template.learnset) template = Tools.getTemplate(template.baseSpecies);
-						if (!template.learnset) continue;
-						for (var i in searches[search]) {
-							var move = Tools.getMove(i);
-							if (!move.exists) return this.sendReplyBox("'" + move + "' is not a known move.");
-							var prevoTemp = Tools.getTemplate(template.id);
-							while (prevoTemp.prevo && prevoTemp.learnset && !(prevoTemp.learnset[move.id])) {
-								prevoTemp = Tools.getTemplate(prevoTemp.prevo);
-							}
-							var canLearn = (prevoTemp.learnset.sketch && !(move.id in {'chatter':1, 'struggle':1, 'magikarpsrevenge':1})) || prevoTemp.learnset[move.id];
-							if ((!canLearn && searches[search][i]) || (searches[search][i] === false && canLearn)) delete dex[mon];
-						}
-					}
-					break;
-
-				default:
-					return this.sendReplyBox("Something broke! PM TalkTakesTime here or on the Smogon forums with the command you tried.");
-			}
-		}
-
-		var results = Object.keys(dex).map(function (speciesid) {return dex[speciesid].species;});
-		results = results.filter(function (species) {
-			var template = Tools.getTemplate(species);
-			return !(species !== template.baseSpecies && results.indexOf(template.baseSpecies) > -1);
-		});
-		var resultsStr = "";
-		if (results.length > 0) {
-			if (showAll || results.length <= output) {
-				results.sort();
-				resultsStr = results.join(", ");
 			} else {
-				results.randomize()
-				resultsStr = results.slice(0, 10).join(", ") + ", and " + string(results.length - output) + " more. Redo the search with 'all' as a search parameter to show all results.";
+				var details = {};
 			}
-		} else {
-			resultsStr = "No Pokémon found.";
+
+			buffer += '|raw|<font size="1">' + Object.keys(details).map(function (detail) {
+				return '<font color=#585858>' + detail + (details[detail] !== '' ? ':</font> ' + details[detail] : '</font>');
+			}).join("&nbsp;|&ThickSpace;") + '</font>';
 		}
-		return this.sendReplyBox(resultsStr);
+		this.sendReply(buffer);
 	},
 
 	learnset: 'learn',

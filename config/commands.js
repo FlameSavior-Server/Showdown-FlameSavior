@@ -1632,6 +1632,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	toad: 'lapras',
+	lapras: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/30zBvPA.png" width="120">' +
+    		'<img src="http://i.imgur.com/W8NDuBv.png" width="300">' +
+    		'<img src="http://i.imgur.com/OUFJyu7.jpg" width="120"><br />' +
+    		'<b>Ace:</b> What ever the F*#@ I want<br />' +
+    		' Never back down and Never give up!</center>');
+    	},
+	
 	gorve: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/DdisyPH.gif" width="130">' +
@@ -1977,7 +1987,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/NNKTX8I.gif"><br />' +
                 '<b>Ace:</b> <font color=blue>Excadrill</font><br />' +
                 '<font color=blue>Master the cards you have been given than to complain about the cards your oppenent has been dealt, become stronger, believe in yourself young panda.</font></center>');
-    },
+    	},
 	
 	cat: function(target, room, user) {
         if (!this.canBroadcast()) return;

@@ -2002,9 +2002,9 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/ogH3V0k.gif">' +
                 '<img src="http://i.imgur.com/OVPO6rt.png">' +
-                '<img src="http://i.imgur.com/jnlskzT.jpg"><br />' +
+                '<img src="http://www.dcmetropolicecollector.com/dc_detective.jpg"height=200><br />' +
                 '<b>Ace:</b> Charizard<br />' +
-                'Try me biatch.</center>');
+                'Three things are infinite: Magicrap\'s will for revenge, my smartassness, and the hot chicks on showdown.</center>');
     	},
 	
 	adipravar: function(target, room, user) {

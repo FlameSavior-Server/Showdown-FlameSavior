@@ -1631,7 +1631,7 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
-	
+
 	toad: 'lapras',
 	lapras: function(target, room, user) {
     	if (!this.canBroadcast()) return;
@@ -3603,6 +3603,7 @@ var commands = exports.commands = {
 		'There ain\'t a soul or a person or thing that can stop me :]</center>');
 	},
 	
+	roseybear: 'roserade26',
 	roserade: 'roserade26',
 	roserade26: function(target, room, user) {
 	if (!this.canBroadcast()) return;

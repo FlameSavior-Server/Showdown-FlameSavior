@@ -1609,7 +1609,7 @@ var commands = exports.commands = {
 		'<b>We are Merciless and We Mean Business! Come challenge us or join today!</b><br />' +
 		'Click <a href="http://mercilessleague.weebly.com/">here</a> to see our website<br />' +
 		'Click <a href="https://docs.google.com/document/d/1OTP9JDz2Q6z6oFnvy2-jRH5o9XdFwZaJBU-ndRWpgIM/edit"> here </a>for rules and registering');
-    },
+    	},
 	
 	revleague: function(target, room, user) {
     	if (!this.canBroadcast()) return;

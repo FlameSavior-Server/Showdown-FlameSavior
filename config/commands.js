@@ -1097,7 +1097,7 @@ var commands = exports.commands = {
 	
 	stone: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/m2NcVyJ.png"><br />' +
+        this.sendReplyBox('<center><img src="https://i.imgur.com/DPy0OdR.gif" width="500"><br />' +
                 '<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/376.gif"><br />' +
                 '<b><font color="gold">Ace: Metagross</b></font><br />' +
                 '<font color="gold">The secret to winning is to open your heart to pokemon and connect them to show how much you love your pokemon. Forcing them to attack every single time makes them lose energy & lose trust in you. So loving your pokemon and treating it well</font></center>');

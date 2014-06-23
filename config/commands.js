@@ -1399,7 +1399,7 @@ var commands = exports.commands = {
         	if (!this.canBroadcast()) return;
         	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
                 	'<center><h1><font color="lightgreen"><u>Hope\'s Music Box</u></color></h1></center>' +
-                	'<center><b><a href="https://www.youtube.com/watch?v=jVJZ5MbJDzU">What I'm Made Of</a><br>' +
+                	'<center><b><a href="https://www.youtube.com/watch?v=jVJZ5MbJDzU">What I\'m Made Of</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=rM85TNMnUkA">Live and Learn</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=uEzXFuYN89k">Open Your Heart</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=75yPcHplI64">Chemical Plant Zone</a><br></center>' +

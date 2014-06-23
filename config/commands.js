@@ -1640,14 +1640,16 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+
 	turtl: function(target, room, user) {
-		if (!this:canBroadcast()) return;
+		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view8/4905727/krieg-o.gif" width="150">' +
 			'<img src="http://i.imgur.com/iCYjNaf.png?1?9582" width="250">' +
 			'<img src="http://stream1.gifsoup.com/view5/1963978/torterra-o.gif" width="150"><br />' +
 			'<b>Ace:</b>Krieg<br>' +
 			'<b>Quote:</b>"If I silence the Voices then Everything would be a lot less fun."</center>');
-	    },
+	},
+
 	toad: 'lapras',
 	lapras: function(target, room, user) {
 		if (!this.canBroadcast()) return;

@@ -1643,7 +1643,7 @@ var commands = exports.commands = {
 
 	updatedkanto: function(target, room, user) {
     		if (!this.canBroadcast()) return;
-    		this.sendReplyBox('<center><img src="http://i.imgur.com/a23GKfX.png" width="120">' +
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/a23GKfX.png" width="110">' +
     			'<img src="http://i.imgur.com/RhBTKXV.gif" width="320">' +
     			'<img src="http://i.imgur.com/vmWF8Zi.png" width="110"><br />' +
     			'<b>Ace:</b> Hand Relief<br />' +

@@ -3144,6 +3144,8 @@ function getRandMessage(user){
 		break;
 		case 50: message = message + user + ' drowned in the ocean trying to find SeaNanners'; // bought by SeaNanners
 		break;
+		case 51: message = message + user + ' was killed by Donald'; // bought by REV Czim
+		break;
 		default: message = message + user + ' bought a poisoned Pepsi!';
 	};
 	message = message + ' ~~';

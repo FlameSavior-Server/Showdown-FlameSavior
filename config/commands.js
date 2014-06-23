@@ -1641,6 +1641,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	updatedkanto: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/a23GKfX.png" width="120">' +
+    			'<img src="http://i.imgur.com/RhBTKXV.gif" width="320">' +
+    			'<img src="http://i.imgur.com/vmWF8Zi.png" width="110"><br />' +
+    			'<b>Ace:</b> Hand Relief<br />' +
+    			'Twerking is a sport.</center>');
+    	},
+	
 	turtl: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view8/4905727/krieg-o.gif" width="145">' +

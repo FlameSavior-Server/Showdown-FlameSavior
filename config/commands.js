@@ -1373,6 +1373,16 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 	
+	kjubox: function(target, room, user) {
+        	if (!this.canBroadcast()) return;
+        	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                	'<center><h1><font color="black"><u>King Jong-Un\'s Music Box</u></color></h1></center>' +
+                	'<center><b><a href="https://www.youtube.com/watch?v=_cG7ZVBXQII">Kim Jong Style</a><br>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=7pKrVB5f2W0">Alors on danse</a><br>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=oiKj0Z_Xnjc">Papaoutai</a><br></center>' +
+                	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+	
 	jdbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

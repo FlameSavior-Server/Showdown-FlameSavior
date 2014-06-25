@@ -3075,14 +3075,13 @@ var commands = exports.commands = {
 			'<b>Catchphrase: </b><a href="http://creatureleague.weebly.com">http://creatureleague.weebly.com</a></center>');
 	},
 	
-	esep: 'ese',
-	ese: function(target, room, user) {
+	gaius: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/y4j3JID.gif">' +
-			'<img src="http://i.imgur.com/myUfOuS.gif" width="360">' +
-			'<img src="http://i.imgur.com/9RkauTy.gif" width="90"><br />' +
+		this.sendReplyBox('<center><img src="https://fireden.net/4chan/images.4chan.org//vg/src/1393631347113.png" width="90">' +
+			'<img src="http://i.imgur.com/xUNUTYB.gif" width="360">' +
+			'<img src="http://24.media.tumblr.com/9b692872d59be26ce63613ec2064661c/tumblr_ms2jfw4X5k1qa2atko1_500.gif" width="90"><br />' +
 			'<b>Ace:</b> Mega Absol<br />' +
-			'No matter the matter of man the Goddess judges with a even hand.</center>');
+			'Preposterous. I will never falter as long as I have this will to guide the weak..</center>');
 	},
 	
 	apples: function(target, room, user) {

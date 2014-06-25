@@ -1623,22 +1623,20 @@ var User = (function () {
 			}
 		}
 
-		if (message.substr(0,4) !== '/msg' && message.substr(0,3) !== '/pm') {
-			if (toId(message).indexOf('psimus') > -1 && message.toLowerCase().indexOf('frost.psim.us') == -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~frost") == -1 && !this.can('seniorstaff')) {
-				if (!this.advWarns) this.advWarns = 0;
-				this.advWarns++;
-				if (this.advWarns > 1) {
-					this.lock();
-					fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was automatically locked for attempting to advertise 3 times.\n');
-					connection.sendTo(room, '|raw|<strong class="message-throttle-notice">You have been locked for attempting to advertise three times.');
-					Users.messageSeniorStaff(this.name+' has been locked for attempting to advertise three times. Room: '+room.id+'. Message: '+message);
-					return false;
-				}
-				Users.messageSeniorStaff(this.name+' has attempted to advertise. Room: '+room.id+'. Message: '+message);
-				connection.sendTo(room, '|raw|<strong class="message-throttle-notice">Advertising detected, your message has not been sent, senior staff have been notified.<br />Further attempts to advertise may result in being locked.</strong>');
-				connection.user.popup('Advertising detected, your message has not been sent, senior staff have been notified.\nFurther attempts to advertise may result in being locked.');				
+		if (toId(message).indexOf('psimus') > -1 && message.toLowerCase().indexOf('frost.psim.us') == -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~frost") == -1 && !this.can('seniorstaff')) {
+			if (!this.advWarns) this.advWarns = 0;
+			this.advWarns++;
+			if (this.advWarns > 1) {
+				this.lock();
+				fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was automatically locked for attempting to advertise 3 times.\n');
+				connection.sendTo(room, '|raw|<strong class="message-throttle-notice">You have been locked for attempting to advertise three times.');
+				Users.messageSeniorStaff(this.name+' has been locked for attempting to advertise three times. Room: '+room.id+'. Message: '+message);
 				return false;
 			}
+			Users.messageSeniorStaff(this.name+' has attempted to advertise. Room: '+room.id+'. Message: '+message);
+			connection.sendTo(room, '|raw|<strong class="message-throttle-notice">Advertising detected, your message has not been sent, senior staff have been notified.<br />Further attempts to advertise may result in being locked.</strong>');
+			connection.user.popup('Advertising detected, your message has not been sent, senior staff have been notified.\nFurther attempts to advertise may result in being locked.');				
+			return false;
 		}
 
 		if (this.chatQueueTimeout) {

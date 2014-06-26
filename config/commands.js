@@ -1138,7 +1138,7 @@ var commands = exports.commands = {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox("Please follow the rules:<br />" +
 				(room.rulesLink ? "- <a href=\"" + Tools.escapeHTML(room.rulesLink) + "\">" + Tools.escapeHTML(room.title) + " room rules</a><br />" : "") +
-				"- <a href=\"http://frostserver.net/forums/showthread.php?tid=536\">" + (room.rulesLink ? "Global rules" : "Rules") + "</a>");
+				"- <a href=\"http://frostserver.net/forums/showthread.php?tid=534\">" + (room.rulesLink ? "Global rules" : "Rules") + "</a>");
 			return;
 		}
 		if (!this.can('roommod', null, room)) return;

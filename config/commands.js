@@ -1662,10 +1662,20 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ccty: 'crazytyga',
+	crazytyga: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/jNWfZYB.png" width="100">' +
+    			'<img src="http://i.imgur.com/EU34lFA.png" width="340">' +
+    			'<img src="http://i.imgur.com/D9ZIMbV.png" width="100"><br />' +
+    			'<b>Ace:</b> Latios + Latias<br />' +
+    			'1 thing 2 do 3 words 4 you "I love you"</center>');
+    	},
+	
 	mag: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/zangoose.gif">' +
-    			'<img src="http://i.imgur.com/uQ4P665.png" width="380">' +
+    			'<img src="http://i.imgur.com/uQ4P665.png" width="370">' +
     			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magmortar.gif"><br />' +
     			'<b>Ace:</b> Zangoose<br />' +
     			'Get Rekt!</center><br />' +
@@ -1678,7 +1688,7 @@ var commands = exports.commands = {
 	dragoncrusher: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://img2.wikia.nocookie.net/__cb20140120185954/pokemonfanon/images/8/88/Mega-Charizard-X-031.jpg" width="110">' +
-    			'<img src="http://i.imgur.com/5dLVId1.png" width="330">' +
+    			'<img src="http://i.imgur.com/5dLVId1.png" width="320">' +
     			'<img src="http://i.imgur.com/3ctHPyc.jpg" width="110"><br />' +
     			'<b>Ace:</b> Mega Charzard-X<br />' +
     			'Don\'t get your underwear in a knot.</center>');

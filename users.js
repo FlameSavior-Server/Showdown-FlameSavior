@@ -1628,9 +1628,9 @@ var User = (function () {
 			this.advWarns++;
 			if (this.advWarns > 1) {
 				this.lock();
-				fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was automatically locked for attempting to advertise 3 times.\n');
-				connection.sendTo(room, '|raw|<strong class="message-throttle-notice">You have been locked for attempting to advertise three times.');
-				Users.messageSeniorStaff(this.name+' has been locked for attempting to advertise three times. Room: '+room.id+'. Message: '+message);
+				fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was automatically locked for attempting to advertise.\n');
+				connection.sendTo(room, '|raw|<strong class="message-throttle-notice">You have been locked for attempting to advertise.');
+				Users.messageSeniorStaff(this.name+' has been locked for attempting to advertise. Room: '+room.id+'. Message: '+message);
 				return false;
 			}
 			Users.messageSeniorStaff(this.name+' has attempted to advertise. Room: '+room.id+'. Message: '+message);

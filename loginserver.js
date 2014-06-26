@@ -141,6 +141,7 @@ module.exports = (function () {
 		this.requestStart(requests.length);
 		var postData = 'serverid=' + Config.serverid + '&servertoken=' + Config.servertoken + '&nocache=' + new Date().getTime() + '&json=' + encodeURIComponent(JSON.stringify(requests)) + '\n';
 		var requestOptions = url.parse(this.uri + 'action.php');
+		if (Config.ip) requestOptions.localAddress = Config.ip;
 		requestOptions.method = 'post';
 		requestOptions.headers = {
 			'Content-Type': 'application/x-www-form-urlencoded',

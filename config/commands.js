@@ -1662,6 +1662,28 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	mag: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/zangoose.gif">' +
+    			'<img src="http://i.imgur.com/uQ4P665.png" width="380">' +
+    			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magmortar.gif"><br />' +
+    			'<b>Ace:</b> Zangoose<br />' +
+    			'Get Rekt!</center><br />' +
+			'<b>Style: </b>Semistall<br />' +
+			'<b>Favorite Tier: </b>Gen5NU<br />' +
+			'<b>League: </b>Elitist');
+			
+    	},
+	
+	dragoncrusher: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://img2.wikia.nocookie.net/__cb20140120185954/pokemonfanon/images/8/88/Mega-Charizard-X-031.jpg" width="110">' +
+    			'<img src="http://i.imgur.com/5dLVId1.png" width="330">' +
+    			'<img src="http://i.imgur.com/3ctHPyc.jpg" width="110"><br />' +
+    			'<b>Ace:</b> Mega Charzard-X<br />' +
+    			'Don\'t get your underwear in a knot.</center>');
+    	},
+	
 	updatedkanto: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/a23GKfX.png" width="110">' +

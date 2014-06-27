@@ -1688,12 +1688,12 @@ var commands = exports.commands = {
 	jackbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Usernamehere\'s Music Box!</b><br />' +
-                '1. <a href="https://www.youtube.com/watch?v=a89Shp0YhR8"><button title="I\'m Made of Wax, Larry, What Are You Made Of? - Adtr">I\'m Made of Wax, Larry, What Are You Made Of? - Adtr</a></button><br />' +
-                '2. <a href="https://www.youtube.com/watch?v=ZcpGIVbPYrI"><button title="Metal Gear Rising OST - It Has to Be This Way">Metal Gear Rising OST - It Has to Be This Way</a></button><br />' +
-		'3. <a href="https://www.youtube.com/watch?v=wzS5-AjJ71E"><button title="The Ghost Inside - "Engine 45"">The Ghost Inside - "Engine 45"</a></button><br />' +
-		'4. <a href="https://www.youtube.com/watch?v=AiBG6vuLrzY"><button title="Breaking Benjamin - Diary Of Jane">Breaking Benjamin - Diary Of Jane</a></button><br />' +
-		'5. <a href="https://www.youtube.com/watch?v=Qt83YS_yay8"><button title="billy talent - fallen leaves">billy talent - fallen leaves</a></button><br />' +
-		'6. <a href="https://www.youtube.com/watch?v=3IgSvQsKkOo"><button title="Deadman\'s Gun - Red Dead Redemption">Deadman\'s Gun - Red Dead Redemption</a></button><br />' );
+                '1. <a href="https://www.youtube.com/watch?v=m0DMfaCh4aA"><button title="Attack on Titan - DOA">Attack on Titan - DOA</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=c-M34ZRM120"><button title=" ADTR - You be Tails, I\'ll be Sonic"> ADTR - You be Tails, I\'ll be Sonic</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=0B-xRO-vPPo"><button title="Papercut massacre - Lose my life">Papercut massacre - Lose my life</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=Qg_TRaiWj4o"><button title="The Who - Behind blue eyes">The Who - Behind blue eyes</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=uqG3v8YEzKo"><button title="Korn - Narcissistic Canibal">Korn - Narcissistic Canibal</a></button><br />' +
+		'6. <a href="https://www.youtube.com/watch?v=Tt10gb8yf88"><button title="12 Stones - Psycho">12 Stones - Psycho</a></button><br />' );
 	},
     	
     	panbox: function(target, room, user) {

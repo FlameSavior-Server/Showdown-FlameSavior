@@ -1930,11 +1930,11 @@ var commands = exports.commands = {
 	
 	croven: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/y9PCId4.jpg" width="160">' +
-			'<img src="http://i.imgur.com/l71i2O9.gif">' +
-			'<img src="http://i.imgur.com/gtCuVMu.png" width="160"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/GTFlmkW.gif">' +
+			'<img src="http://i.imgur.com/qt3XRrN.png">' +
+			'<img src="http://i.imgur.com/sLxyTLg.gif"><br />' +
 			'<b>Ace:</b> Togekiss<br />' +
-			'The reason birds can fly and we can\'t is simply because they have perfect faith, for to have faith is to have wings.</center>');
+			'You Humans think Greed is just for money and power! But everyone wants something they don\'t have. ~Greed</center>');
 	},
 	
 	crashy: function(target, room, user) {

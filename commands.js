@@ -1505,7 +1505,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'shikuthezorua') {
                         matched = true;
-                        this.sendReplyBox('<b>Shuku the Zorua</b>:   '+vip+'');
+                        this.sendReplyBox('<b>Shiku the Zorua</b>:   '+vip+'');
                 }
                 if (target === 'orangepoptarts' || target === 'op') {
                         matched = true;

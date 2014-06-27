@@ -2427,12 +2427,13 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Darmanitan<br />' +
 			'50$ down the drain. Happy now?</center>');
 	},
+	
 	kaiba: 'mindcrush',
 	mindcrush: function(target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
 		var name = "http://frostserver.no-ip.org:8000/images/kaiba.gif"
 		if (cmd == 'mindcrush') name = "http://i.imgur.com/o260t0n.png";
-				this.sendReplyBox('<center><img src="http://www.sherv.net/cm/emoticons/rage/steamboat-troll-rage-smiley-emoticon.gif" height="150">' +
+		this.sendReplyBox('<center><img src="http://www.sherv.net/cm/emoticons/rage/steamboat-troll-rage-smiley-emoticon.gif" height="150">' +
 			'<img src="'+name+'" width="300">' +
 			'<img src="http://i991.photobucket.com/albums/af32/DoubleEdd_3/TrollGun.gif" height="150"><br />' +
 			'<b>Ace:</b> Forcing Rage Quits<br />' +
@@ -2601,6 +2602,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Chatot<br />' +
 			'Let me serenade you.</center>');
 	},
+	
 	eevee: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/NZAER3B.gif" width="170">' +
@@ -2649,6 +2651,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Flygon<br />' +
 			'Heavenly things are often abstract.</center>');
 	},
+	
 	ticken: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/B0gfhrg.png" width="144" height="100">' +
@@ -2725,6 +2728,7 @@ var commands = exports.commands = {
 			'<font color=#ff00f9">t</font><font color=#ff00d5"> </font><font color=#ff00b1">w</font><font color=#ff008e">e</font>' +
 			'<font color=#ff006a">l</font><font color=#ff0047">l</font><font color=#ff0023">.</font></b></center>');
 	},
+	
 	silverkill: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img height=150 src="http://fc00.deviantart.net/fs70/f/2013/320/9/3/mega_scizor_by_silentgpanda-d6ujsmg.jpg">' +
@@ -2733,6 +2737,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Mo\' Fuckin\' Common Sense!<br />' +
 			'<b>Quote: </b>Would you like some fresh cut nanis? No? Well your mom bought some. She LOVED it ;D</center>');
 	},
+	
 	autumn: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/qeUBqDy.jpg">' +
@@ -2750,6 +2755,7 @@ var commands = exports.commands = {
 			'<blink><b><font color=red>Ace: </font>Terrakion</b></blink><br />' +
 			'<b>Fighting is my passion and the only thing I trust is strength!</b></center>');
 	},
+	
 	donald: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQpaW7cxyFCEUxPkYHxnkZWXqE-AEHvZfMhxU-QdPfcghuAF69Gg" width="144" height="146">' +
@@ -2758,7 +2764,6 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Bulk<br />' +
 			'If it moves, I kill it.</center>');
 	},
-	
 	
 	messiah: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2769,7 +2774,6 @@ var commands = exports.commands = {
 			'Sit back, relax, and let the undertow drown out your worries forever...</center>');
 	},
 	
-	
 	demon: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/pinsir.gif">' +
@@ -2779,7 +2783,6 @@ var commands = exports.commands = {
 			'In order to succeed, your desire to succeed must be greater than your fear of failure.</center>');
 	},
 	
-	
 	rors: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i979.photobucket.com/albums/ae277/bjoyea/T-cardButchery_zps8f48bc75.gif" width="140" height="120">' +
@@ -2788,7 +2791,6 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Your Mom<br />' +
 			'Sorry But Losing Isn\'t Really My Thing.</center>');
 	},
-	
 	
 	akkie: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2825,6 +2827,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Leek Spin<br />' +
 			'Sadistic? I don\'t mind you calling me that.</center>');
 	},
+	
 	kammi: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/fJvcdib.png" height="125" width="76" />' +
@@ -2833,6 +2836,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Stupidity.<br />' +
 			'<b>Quote: </b>What.</center></div>');
 	},
+	
 	giegue: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/IKVXSTv.png"> '+
@@ -2841,6 +2845,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Malamar<br />' +
 			'Zubats, Zubats everywhere!!!</center>')
 	},
+	
 	ssjoku: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/M9wnVcP.gif">' +
@@ -2849,6 +2854,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Mega-Venusaur-Power Whip Yo Gurl<br />' +
 			'<b>Quote: </b>I am Super Swaggy Coolio!!!</center>');
 	},
+	
 	caster: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img height=180 width=200 src="http://31.media.tumblr.com/717db8c2843b1b007c25c5fc6e1f3537/tumblr_mreje8lECf1s3kgaso5_500.gif">' +
@@ -2857,6 +2863,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Terrakion<br />' +
 			'It doesn\'t matter how far away a leader is from his group, a leader will always be a leader.</center>');
 	},
+	
 	archer: 'archerclw',
 	archerclw: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2866,6 +2873,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Bullshit<br />' +
 			' Ancient Words of Wisdom: stfu u stupid inbred.</center>');
 	},
+	
 	flare: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados-mega.gif">' +
@@ -2874,6 +2882,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Mega Gyarados/Gallade<br />' +
 			'With every set back. There\'s always a chance to comeback.</center>');
 	},
+	
 	klutzymanaphy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/manaphy.gif">' +
@@ -2882,6 +2891,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Mew and Manaphy<br />' +
 			'It\'s more important to master the cards you\'re holding than complaining about the ones your opponent was dealt. pls.</center>');
 	},
+	
 	unknownsremnant: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i701.photobucket.com/albums/ww16/jacoby746/Kingdom%20Hearts%20Sprites/roxas2.gif" height="150">' +
@@ -2890,6 +2900,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>The Darkness <br />' +
 			'A person is very strong when he seeks to protect something. I\'ll expect a good fight.');
 	},
+	
 	mattz: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/8Wq1oDL.gif" width="100" height="100">' +
@@ -2898,6 +2909,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> The Whole Swarm...Run!<br />' +
 			'Fight me? Go to sleep and dont let the bedbugs bite, kid...or burn you to a crisp.</center>');
 	},
+	
 	zarif: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(' <center><img src="http://i.imgur.com/lC0aRUH.gif">' +
@@ -2906,6 +2918,7 @@ var commands = exports.commands = {
 			'<b> <blink> Ace: </b>Infernape</blink><br />' +
 			'Three things are infinite: magikarp\'s power, human stupidity and the fucking amount of zubats in a cave; and I\'m not sure about the universe.');
 	},
+	
 	cark: 'amglcark',
 	amglcark: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2915,6 +2928,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Tsunami<br />' +
 			'Life\'s hard.');
 	},
+	
 	derp: 'derpjr',
 	derpjr: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2924,6 +2938,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Crobat<br />' +
 			'I liek cookies');
 	},
+	
 	eclipse: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/9jjxo0c.gif" weight="141" height="92">' +
@@ -2932,6 +2947,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Charizard X & Mew<br />' +
 			'Having decent skills doesn\'t give you the right to act cocky.</center>');
 	},
+	
 	handrelief: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/jniR0EF.jpg" height="120">' +
@@ -2940,6 +2956,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Scizor<br />' +
 			'<b>Catchphrase: </b>The inner machinations of my mind are an enigma</center>');
 	},
+	
 	elitefouroshy: 'oshy',
 	oshy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2949,6 +2966,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Fluffy Oshawotts<br />' +
 			'As long as your pokemon spirit keeps burning, your pokemon will keep fighting</center>');
 	},
+	
 	gryph: function(target, room, user) {
 		if (!this.canBroadcast()) return; 
 		this.sendReplyBox('<center><img height=150 src="http://pokebot.everyboty.net/pix/822.gif">' + 
@@ -2957,6 +2975,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> High or Low?<br/>' +  
 			'We all move to the beat of just one Blastoise</center>');
 	},
+	
 	piscean: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/spheal.gif">' +
@@ -2965,6 +2984,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Derp<br />' +
 			'<b>Catchphrase:</b> What am I supposed to do with this shit?</center>');
 	},
+	
 	adam: 'adamkillszombies',
 	adamkillszombies: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2974,6 +2994,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Scizor <br />' +
 			'My destination is close, but it\'s very far...');
 	},
+	
 	wiggly: 'wigglytuff',
 	wigglytuff: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2983,6 +3004,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Chatot<br />' +
 			'Don\'t shirk work! Run away and pay! Smiles go for miles!</center>');
 	},
+	
 	aerys: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://imgur.com/BAKX8Wk.jpg" height="100">' +
@@ -2991,6 +3013,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Smeargle<br />' +			
 			'<b>Catchphrase: </b>I\'m not a monster; I\'m just ahead of the curve</center>');
 	},
+	
 	dbz: 'dragonballsz',
 	dragonballsz: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -3000,6 +3023,7 @@ var commands = exports.commands = {
 			'<font color=red><blink> Ace: Princess Celestia </blink></font><br />' +
 			'*sends out ninjask* Gotta go fast.</center>');
 	},
+	
 	bigblackhoe: 'lenora',
 	oprah: 'lenora',
 	sass: 'lenora',
@@ -3011,6 +3035,7 @@ var commands = exports.commands = {
 			'Catchphrase: Sass me and see what happens.<br />' +
 			'<img src="http://hydra-images.cursecdn.com/pokemon.gamepedia.com/3/3e/LenoraBWsprite.gif">');
 	},
+	
 	thefrontierbeast: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.explodingdog.com/drawing/awesome.jpg" height="100">' +
@@ -3133,8 +3158,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Brute Force<br />' +
 			'If you stall, I hate you.</center>');
 	},
-	
-	
+
 	elitefourbalto : 'balto', 
 	balto: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -3144,7 +3168,6 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Snorlax<br />' +
 			'<b>Catchphrase: </b>To be a championship player,you need a championship team.</center>');
 	},
-	
 	
 	championxman : 'xman',
 	xman: function(target, room, user) {
@@ -3229,6 +3252,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Absol<br />' +
 			'<b>Quote: </b>If the egg is broken by outside force, life ends. If the egg is broken from inside force, life begins. Great things always begin on the inside.</center>');
 	},
+	
 	bibliaskael: 'kael',
 	kael: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -3255,6 +3279,7 @@ var commands = exports.commands = {
 			'Catchphrase: Grab your sombreros and glow sticks and lets rave!<br />' +
 			'<img height="150" src="http://www.animeyume.com/ludicolo.jpg"></center>');
 	},
+	
 	wickedweavile: 'champwickedweavile',
 	champwickedweavile: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -3263,6 +3288,7 @@ var commands = exports.commands = {
 			'Catchphrase: I suck at this game.<br />' +
 			'<img src="http://play.pokemonshowdown.com/sprites/trainers/80.png">');
 	},
+	
 	championdarkrai: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://pokecharms.com/data/trainercardmaker/characters/custom/Cosplayers/p491-1.png">' +
@@ -3298,6 +3324,7 @@ var commands = exports.commands = {
 			'Catchphrase: I love to shock you.<br />' +
 			'<img src="http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/466.gif"></center>');
 	},	
+	
 	snooki: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/1U1MFAg.png">' +
@@ -3474,8 +3501,8 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://0.media.dorkly.cvcdn.com/24/80/cc1436d5b12b108f59e8e8121e2ce766.gif" width="160">' +
 			'<img src="http://i.imgur.com/wRiZqYo.gif" width="220">' +
 			'<img src="https://38.media.tumblr.com/5a9e5618c32933506b9a66f1f9849232/tumblr_mu895wkM4b1qf1qjho1_500.gif" width="160"><br />' +
-			'<b>Ace:</b> Talonflame<br />' +
-			'He who would learn to fly one day must first learn to stand and walk and run and climb and dance; one cannot fly into flying.</center>');
+			'<b>Ace:</b> Mega Charizard X<br />' +
+			'If you don\'t like your destiny, don\'t accept it, instead have the courage to change it the way you want it to be.</center>');
 	},
 
 	epin: 'epinicion',
@@ -3487,7 +3514,8 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Crustle<br />' +
 			'<b>Quote: </b>Si Vis Pacem, Para Bellum</center>');
 	},
-			badass: 'thatonebadass',
+	
+	badass: 'thatonebadass',
 	thatonebadass: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img height=150 src=http://i.imgur.com/SsxwslQ.gif>' +
@@ -3516,14 +3544,16 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Lickilicky<br />' +
 			'<b>Catchphrase: </b>Come in we\'ll do this fast ;)</center>');
 	},
-			elite4synth: function(target, room, user) {
+	
+	elite4synth: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Trainer: Elite4^Synth<br />' +
 			'Ace: Crobat<br />' +
 			'Catchphrase: Only pussies get poisoned.<br />' +
 			'<img src="http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/169.gif">');
 	},	
-			elite4quality: function(target, room, user) {
+	
+	elite4quality: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Trainer: Elite4^Quality<br />' +
 			'Ace: Dragonite<br />' +
@@ -3555,7 +3585,8 @@ var commands = exports.commands = {
 			'Catchphrase: I will wash away your sin.<br />' +
 			'<img src="http://images3.wikia.nocookie.net/__cb20120629095010/pokemon/images/9/98/BrycenBWsprite.gif">');
 	},	
-			jiraqua: function(target, room, user) {
+	
+	jiraqua: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Trainer: Jiraqua<br />' +
 			'Ace: Jirachi<br />' +
@@ -3603,14 +3634,16 @@ var commands = exports.commands = {
 			'Catchphrase: You are not you when your zappy.<br />' +
 			'<img src="http://pldh.net/media/pokemon/gen5/blackwhite/135.png">');
 	},
-			nochansey: function(target, room, user) {
+	
+	nochansey: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Trainer: NoChansey<br />' +
 			'Ace: Miltank<br />' +
 			'Catchphrase: Moo, moo muthafuckas.<br />' +
 			'<img src="http://media.pldh.net/pokemon/gen5/blackwhite_animated_front/241.gif">');
 	},
-			championtinkler: function(target, room, user) {
+	
+	championtinkler: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/ymI1Ncv.png"><br />' +
 			'<img src="http://i.imgur.com/ytgnp0k.gif"><br />' +
@@ -3620,7 +3653,11 @@ var commands = exports.commands = {
 
 	killerjays: function(target, room,user) {
 		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<center><img height="150" src="http://i.imgur.com/hcfggvP.png"><img src="http://i.imgur.com/uLoVXAs.gif"><img src="http://i.imgur.com/RkpJbD1.png"><br><font size="2"><b>Ace:</b> Articuno</font><br><font size="2"><b>Catchphrase: </b>Birds Sing, Birds Fly, Birds kill people.</font>');
+		this.sendReply('|raw|<center><img src="http://i.imgur.com/hcfggvP.png" height="150">' +
+			'<img src="http://i.imgur.com/uLoVXAs.gif">' +
+			'<img src="http://i.imgur.com/RkpJbD1.png"><br />' +
+			'<font size="2"><b>Ace:</b> Articuno</font><br />' +
+			'<font size="2"><b>Catchphrase: </b>Birds Sing, Birds Fly, Birds kill people.</font></center>');
 	},
 
 	ryuuga: function(target, room,user) {
@@ -3700,7 +3737,8 @@ var commands = exports.commands = {
 			'<b>Ace: <font color="purple"><blink>Genesect</blink></font><br />' +
 			'<b><font color="green">TIME FOR TUBBY BYE BYE</font></center>');
 	},
-			alee: 'sweetie',
+	
+	alee: 'sweetie',
 	sweetie: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/7eTzRcI.gif" height="122" width="112">' +
@@ -3993,7 +4031,6 @@ var commands = exports.commands = {
 			'<font color="red"><blink>Ace: Weavile</blink></font><br />' +
 			'I\'m not even on drugs. I\'m just weird.</center>');
 	},
-
 
 	lights: 'scarftini', 
 	scarftini: function(target, room, user) {

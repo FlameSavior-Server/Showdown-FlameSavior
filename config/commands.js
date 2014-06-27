@@ -1588,7 +1588,9 @@ var commands = exports.commands = {
                 '1. <a href="https://www.youtube.com/watch?v=RRGSHvlu9Ss"><button title="Linkin Park - Castle of Glass">Linkin Park - Castle of Glass</a></button><br />' +
                 '2. <a href="https://www.youtube.com/watch?v=ie1wU9BLGn8"><button title="Rixton - Me and My Broken Heart">Rixton - Me and My Broken Heart</a></button><br />' +
 		'3. <a href="https://www.youtube.com/watch?v=psuRGfAaju4"><button title="Owl City - Fireflies">Owl City - Fireflies</a></button><br />' +
-		'4. <a href="https://www.youtube.com/watch?v=hT_nvWreIhg"><button title="OneRepublic - Counting Stars">OneRepublic - Counting Stars</a></button><br />');
+		'4. <a href="https://www.youtube.com/watch?v=hT_nvWreIhg"><button title="OneRepublic - Counting Stars">OneRepublic - Counting Stars</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=VDvr08sCPOc"><button title="Fort Minor - Remember The Name">Fort Minor - Remember The Name</a></button><br />' +
+		'6. <a href="https://www.youtube.com/watch?v=JPCv5rubXhU"><button title="Pokemon Bank A Parody of Bad Day">Pokemon Bank A Parody of Bad Day</a></button>');
 	},
     	
     	legitbox: function(target, room, user) {

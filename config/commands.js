@@ -1095,6 +1095,12 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
+	shikuthezorua: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://th01.deviantart.net/fs70/150/i/2013/147/5/1/zorua_by_andreehxd-d66umkw.png"><br />' +
+                'Don\'t underestimate the power of illusion, because I could make you to walk towards a cliff without you knowing it.</center>');
+	},
+	
 	stone: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="https://i.imgur.com/DPy0OdR.gif" width="500"><br />' +

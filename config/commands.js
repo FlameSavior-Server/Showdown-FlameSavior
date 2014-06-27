@@ -2039,7 +2039,7 @@ var commands = exports.commands = {
 	
 	gh0st: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/cpwkaOw.gif">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/tkXeuIQ.gif">' +
 			'<img src="http://i.imgur.com/8D11eGK.png">' +
 			'<img src="http://i.imgur.com/yXDk9Px.png" width="100"><br />' +
 			'<b>Ace:</b> Lucario<br />' +

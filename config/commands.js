@@ -1662,6 +1662,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	inferno: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/bZTyuwj.gif" width="125">' +
+    			'<img src="http://i.imgur.com/MAwiieK.gif">' +
+    			'<img src="http://i.imgur.com/Ortq3vp.gif" width="125"><br />' +
+    			'<b>Ace:</b> Honchkrow<br />' +
+    			'Fear is not evil, fear is what helps us find out our weaknesses, and once we figure out our weaknesses we become stronger and gentler people.</center>');
+    	},
+	
 	ccty: 'crazytyga',
 	crazytyga: function(target, room, user) {
     		if (!this.canBroadcast()) return;

@@ -4156,7 +4156,7 @@ var commands = exports.commands = {
 	events: 'currentevents',
 	currentevents: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Check out information on the weekly events <a href="http://frostserver.net/forums/showthread.php?tid=537">here</a>!');
+		this.sendReplyBox('Check out information on the weekly events <a href="http://frostserver.net/forums/showthread.php?tid=539">here</a>!');
 	},
 	
 	forums: 'forum',

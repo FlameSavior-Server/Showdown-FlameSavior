@@ -2039,11 +2039,11 @@ var commands = exports.commands = {
 	
 	gh0st: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/uN43I4G.gif">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/cpwkaOw.gif">' +
 			'<img src="http://i.imgur.com/8D11eGK.png">' +
-			'<img src="http://i.imgur.com/SZB352x.png" width="100"><br />' +
-			'<b>Ace:</b> Mega Gyarados<br />' +
-			'Overcome every challenge, don\'t complain about it.</center>');
+			'<img src="http://i.imgur.com/yXDk9Px.png" width="100"><br />' +
+			'<b>Ace:</b> Lucario<br />' +
+			'You have to fight. If you don\'t fight you can\'t win. — Eren Jaeger.</center>');
 	},
 	
 	kingslowking: function(target, room, user) {
@@ -3471,9 +3471,9 @@ var commands = exports.commands = {
 
 	barida: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://37.media.tumblr.com/52dbb7fcd15a5a3b785256abff5aea59/tumblr_mo9lrhDRhY1qk7puko1_400.gif" width="160">' +
-			'<img src="http://i.imgur.com/Kr0EwN6.png" width="220">' +
-			'<img src="http://31.media.tumblr.com/5eea1a2d0c1376cd7f2428891534b4b2/tumblr_myo638Opel1s2i16to1_500.jpg" width="160"><br />' +
+		this.sendReplyBox('<center><img src="http://0.media.dorkly.cvcdn.com/24/80/cc1436d5b12b108f59e8e8121e2ce766.gif" width="160">' +
+			'<img src="http://i.imgur.com/wRiZqYo.gif" width="220">' +
+			'<img src="https://38.media.tumblr.com/5a9e5618c32933506b9a66f1f9849232/tumblr_mu895wkM4b1qf1qjho1_500.gif" width="160"><br />' +
 			'<b>Ace:</b> Talonflame<br />' +
 			'He who would learn to fly one day must first learn to stand and walk and run and climb and dance; one cannot fly into flying.</center>');
 	},

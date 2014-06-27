@@ -320,6 +320,22 @@ exports.Formats = [
 		]
 	},
 	{
+		name: "OU 1v1",
+		section: "Other Metagames",
+
+		onBegin: function () {
+			this.p1.pokemon = this.p1.pokemon.slice(0, 1);
+			this.p1.pokemonLeft = this.p1.pokemon.length;
+			this.p2.pokemon = this.p2.pokemon.slice(0, 1);
+			this.p2.pokemonLeft = this.p2.pokemon.length;
+		},
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Baton Pass Clause'],
+		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Swagger', 'Unreleased', 'Illegal', 'Focus Sash',
+			'Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh',
+			'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom',
+			'Dark Void', 'Grass Whistle', 'Spore', 'Hypnosis', 'Lovely Kiss', 'Sleep Powder', 'Sing', 'Yawn']
+	},
+	{
 		name: "Hackmons",
 		section: "Other Metagames",
 

@@ -1501,7 +1501,11 @@ var commands = exports.commands = {
                 }
                 if (target === 'shaymin') {
                         matched = true;
-                        this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'   '+vip+'  '+league+'');
+                        this.sendReplyBox('<b>Shaymin</b>:   '+admin+'    '+comcun+'    '+mod+'   '+vip+'');
+                }
+                if (target === 'shikuthezorua') {
+                        matched = true;
+                        this.sendReplyBox('<b>Shaymin</b>:   '+vip+'');
                 }
                 if (target === 'orangepoptarts' || target === 'op') {
                         matched = true;

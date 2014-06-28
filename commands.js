@@ -1366,6 +1366,7 @@ var commands = exports.commands = {
 		this.privateModCommand("(" + user.name + " has removed from the shadow ban user list: " + targets.join(", ") + ")");
 	},
 
+	murder: 'ban',
 	banana: 'ban',
 	bh: 'ban',
 	b: 'ban',
@@ -1388,7 +1389,9 @@ var commands = exports.commands = {
 		targetUser.popup(user.name+" has banned you." + (Config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + Config.appealurl) : "") + "\n\n"+target);
 		if (Rooms.rooms.logroom) Rooms.rooms.logroom.addRaw('BAN LOG: ' + user.name + ' has banned ' + targetUser.name + ' from ' + room.id + '.');
 		
-		if (cmd === 'banana') {
+		if (cmd === 'murder') {
+			this.addModCommand(""+targetUser.name+" was murdered by "+user.name+"." + (target ? " (" + target + ")" : ""), ' ('+targetUser.latestIp+')');
+		} else if (cmd === 'banana') {
 			this.addModCommand(""+targetUser.name+" was hit by "+user.name+"'s banana." + (target ? " (" + target + ")" : ""), ' ('+targetUser.latestIp+')');
 		} else if (cmd === 'bh') {
 			this.addModCommand(""+targetUser.name+" was hit by "+user.name+"'s banhammer." + (target ? " (" + target + ")" : ""), ' ('+targetUser.latestIp+')');

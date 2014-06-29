@@ -3630,10 +3630,11 @@ var commands = exports.commands = {
 
 	electricapples: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Trainer: ElectricApples<br />' +
-			'Ace: Jolteon<br />' +
-			'Catchphrase: You are not you when your zappy.<br />' +
-			'<img src="http://pldh.net/media/pokemon/gen5/blackwhite/135.png">');
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/jolteon.gif">' +
+			'<img src="http://i.imgur.com/usL5WQx.png">' +
+			'<img src="http://i.imgur.com/dCZ6E7k.jpg" width="130"><br />' +
+			'<b>Ace: </a> Jolteon<br />' +
+			'Let\'s play a little game, it\'s called Apples to Apples!');
 	},
 	
 	nochansey: function(target, room, user) {

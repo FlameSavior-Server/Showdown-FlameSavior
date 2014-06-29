@@ -2435,7 +2435,7 @@ var commands = exports.commands = {
 		var name = "http://i.imgur.com/GAIxZwB.gif"
 		if (cmd == 'mindcrush') name = "http://i.imgur.com/o260t0n.png";
 		this.sendReplyBox('<center><img src="http://www.sherv.net/cm/emoticons/rage/steamboat-troll-rage-smiley-emoticon.gif" height="130">' +
-			'<img src="'+name+'" width="300">' +
+			'<img src="'+name+'" width="280">' +
 			'<img src="http://i991.photobucket.com/albums/af32/DoubleEdd_3/TrollGun.gif" height="130"><br />' +
 			'<b>Ace:</b> Forcing Rage Quits<br />' +
 			'I\'d like to see things from your point of view, but I can\'t get my head that far up my ass.</center>');

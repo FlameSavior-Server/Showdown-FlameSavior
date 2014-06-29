@@ -2022,7 +2022,7 @@ var commands = exports.commands = {
 	
 	queen: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megax.gif" width="140">' +
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megay.gif" width="140">' +
 			'<img src="http://i.imgur.com/8IJzTz5.png" width="300">' +
 			'<img src="http://i.imgur.com/nTP9Yjw.jpg" width="100"><br />' +
 			'<b>Ace:</b> Every Pokemon<br />' +

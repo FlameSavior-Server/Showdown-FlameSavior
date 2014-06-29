@@ -2022,11 +2022,11 @@ var commands = exports.commands = {
 	
 	queen: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/MAy7w0Q.png" width="120">' +
-			'<img src="http://i.imgur.com/1hsdD9E.png">' +
-			'<img src="http://i.imgur.com/mFq6t5F.png" width="120"><br />' +
-			'<b>Ace:</b> Gyarados & Zapdos<br />' +
-			'Uno DOS Tres.</center>');
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megax.gif" width="140">' +
+			'<img src="http://i.imgur.com/8IJzTz5.png" width="300">' +
+			'<img src="http://i.imgur.com/nTP9Yjw.jpg" width="100"><br />' +
+			'<b>Ace:</b> Every Pokemon<br />' +
+			'If the sky is your limit, then your flight has just ended!</center>');
 	},
 	
 	rzl: function(target, room, user) {

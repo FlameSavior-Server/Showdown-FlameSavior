@@ -1547,6 +1547,7 @@ var commands = exports.commands = {
 	note: 'modnote',
 	modnote: function(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help note');
+		if (!this.canTalk()) return this.sendReply('You are unable to speak in this room.');
 		if (target.length > MAX_REASON_LENGTH) {
 			return this.sendReply("The note is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}

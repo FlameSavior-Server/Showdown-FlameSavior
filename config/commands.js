@@ -1986,9 +1986,9 @@ var commands = exports.commands = {
 	
 	naoto: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.twinfinite.net/wp-content/uploads/2012/05/23415-Naoto-546x310.jpg" width="120">' +
+		this.sendReplyBox('<center><img src="http://i1110.photobucket.com/albums/h460/SweetLynn17/Naoto%20Shirogane/tumblr_msbpyhNegg1rce69vo3_500_zps3af56d46.gif" width="120">' +
 			'<img src="http://i.imgur.com/OjV5Lad.png" width="320">' +
-			'<img src="http://s1.zerochan.net/Shirogane.Naoto.240.1235899.jpg" width="100"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados-mega.gif" width="100"><br />' +
 			'<b>Ace:</b> Meloetta<br />' +
 			'That\'s what you get for not knowing your place.</center>');
 	},

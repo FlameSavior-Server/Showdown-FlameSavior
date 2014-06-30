@@ -1662,6 +1662,18 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	wf: 'worldsfinest',
+	bitg: 'worldsfinest',
+	bestinthegame: 'worldsfinest',
+	worldsfinest: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img height=130 src="http://i.imgur.com/I9jP2Qg.png">' +
+			'<img src="http://i.imgur.com/CiVVDgI.gif">' +
+			'<img src="http://i.imgur.com/D3i6TeI.png"><br />' +
+			'<b>Quote:</b> Best In The Game</b></center>'
+		);
+	},
 
 	inferno: function(target, room, user) {
     		if (!this.canBroadcast()) return;

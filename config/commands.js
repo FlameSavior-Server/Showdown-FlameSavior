@@ -1663,6 +1663,17 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	admincyrull: 'cyrull',
+	cyrull: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://img2.wikia.nocookie.net/__cb20140131082810/pokemon/images/8/87/Cyndaquil_XY.gif">' +
+			'<img src="http://i.imgur.com/zqWLMri.gif">' +
+			'<img height=100 src="http://i579.photobucket.com/albums/ss239/megosb/GIFs/54zhb1.gif"><br />' +
+			'<b>Ace:</b> COOKIE!!!!!!!!!!!!!<br />' +
+			'<b>Quote: </b>GIVE ME THE COOKIE and LOOK AT THE CYNDAQUIL</center>'
+		);
+	},
+
 	wf: 'worldsfinest',
 	bitg: 'worldsfinest',
 	bestinthegame: 'worldsfinest',

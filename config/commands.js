@@ -1973,7 +1973,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus.gif">' +
 			'<img src="http://i.imgur.com/L34mXCM.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus-therian.gif"><br />' +
-			'<img src="http://i.imgur.com/AM9HPM7.jpg" height="130"><br />' +
+			'<img src="http://i.imgur.com/IeyZH23.jpg" height="130"><br />' +
 			'<b>Ace:</b> Mega Ampharos<br />' +
 			'Jack of all trades, Master of none. You\'re still predicting? I\'ve already won.</center>');
 	},

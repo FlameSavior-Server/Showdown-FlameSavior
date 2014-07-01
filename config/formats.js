@@ -459,7 +459,6 @@ exports.Formats = [
 		]
 	},
 	{
-<<<<<<< HEAD
 		name: "Tier Shift",
 		section: "Other Metagames",
 
@@ -468,9 +467,6 @@ exports.Formats = [
 	},
 	{
 		name: "Ability Exchange",
-=======
-		name: "Hackmons",
->>>>>>> upstream/master
 		section: "Other Metagames",
 
 		ruleset: ['Pokemon', 'HP Percentage Mod']
@@ -540,7 +536,6 @@ exports.Formats = [
 		banlist: ['Illegal', 'Unreleased']
 	},
 	{
-<<<<<<< HEAD
 		name: "OU Discrimination",
 		section: "Other Metagames",
 
@@ -606,15 +601,6 @@ exports.Formats = [
 			'Memento', 'Explosion', 'Perish Song', 'Destiny Bond', 'Healing Wish', 'Selfdestruct', 'Lunar Dance', 'Final Gambit',
 			'Focus Sash'
 		]
-=======
-		name: "Gen-NEXT OU",
-		section: "Other Metagames",
-
-		mod: 'gennext',
-		searchShow: false,
-		ruleset: ['Pokemon', 'Standard NEXT', 'Team Preview'],
-		banlist: ['Uber']
->>>>>>> upstream/master
 	},
 
 	// BW2 Singles

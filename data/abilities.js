@@ -1291,6 +1291,7 @@ exports.BattleAbilities = {
 		shortDesc: "This Pokemon's held item has no effect, except Macho Brace. Fling cannot be used.",
 		onModifyPokemonPriority: 1,
 		onModifyPokemon: function (pokemon) {
+			if (pokemon.getItem().megaEvolves) return;
 			pokemon.ignore['Item'] = true;
 		},
 		id: "klutz",
@@ -1666,7 +1667,9 @@ exports.BattleAbilities = {
 		name: "Mummy",
 		onAfterDamage: function (damage, target, source, move) {
 			if (source && source !== target && move && move.isContact) {
-				if (source.setAbility('mummy', source, 'mummy', true)) {
+				var oldAbility = source.setAbility('mummy', source, 'mummy', true);
+				if (oldAbility) {
+					this.add('-endability', source, oldAbility, '[from] Mummy');
 					this.add('-ability', source, 'Mummy', '[from] Mummy');
 				}
 			}
@@ -1989,7 +1992,7 @@ exports.BattleAbilities = {
 			if (!move || pokemon.volatiles.mustrecharge) return;
 			var moveType = (move.id === 'hiddenpower' ? pokemon.hpType : move.type);
 			if (pokemon.getTypes().join() !== moveType) {
-				if (!pokemon.setType(moveType)) return false;
+				if (!pokemon.setType(moveType)) return;
 				this.add('-start', pokemon, 'typechange', moveType, '[from] Protean');
 			}
 		},
@@ -2328,16 +2331,9 @@ exports.BattleAbilities = {
 	"shielddust": {
 		desc: "If the opponent uses a move that has secondary effects that affect this Pokemon in addition to damage, the move's secondary effects will not trigger (For example, Ice Beam loses its 10% freeze chance).",
 		shortDesc: "This Pokemon is not affected by the secondary effect of another Pokemon's attack.",
-		onFoeModifyMovePriority: -10,
-		onFoeModifyMove: function (move, attacker, defender) {
-			if (this.effectData.target !== defender) return;
-			if (!move.secondaries) return;
-			if (attacker.hasAbility(['moldbreaker', 'turboblaze', 'teravolt'])) return;
-			// Remove secondary effects that affect the target.
-			move.secondaries = move.secondaries.filter(function (effect) {
-				if (effect.self) return true;
-				return false;
-			});
+		onTrySecondaryHit: function () {
+			this.debug('Shield Dust prevent secondary');
+			return null;
 		},
 		id: "shielddust",
 		name: "Shield Dust",

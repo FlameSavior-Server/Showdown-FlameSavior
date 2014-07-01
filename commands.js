@@ -647,26 +647,6 @@ var commands = exports.commands = {
 		}
 	},
 
-	roomdesc: function (target, room, user) {
-		if (!target) {
-			if (!this.canBroadcast()) return;
-			var re = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
-			if (!room.desc) return this.sendReply("This room does not have a description set.");
-			this.sendReplyBox("The room description is: " + room.desc.replace(re, '<a href="$1">$1</a>'));
-			return;
-		}
-		if (!this.can('roommod', null, room)) return false;
-		if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
-
-		room.desc = target;
-		this.sendReply("(The room description is now: " + target + ")");
-
-		if (room.chatRoomData) {
-			room.chatRoomData.desc = room.desc;
-			Rooms.global.writeChatRoomData();
-		}
-	},
-
 	roomdemote: 'roompromote',
         roompromote: function(target, room, user, connection, cmd) {
                 if (!room.auth) {
@@ -755,9 +735,8 @@ var commands = exports.commands = {
 		this.addModCommand(user.name + ' has unlocked the room.');
 	},
 
-	autojoin: function (target, room, user, connection) {
-		Rooms.global.autojoinRooms(user, connection);
-	},
+	roomauth: function (target, room, user, connection) {
+		if (!room.auth) return this.sendReply("/roomauth - This room isn't designed for per-room moderation and therefore has no auth list.");
 
 	join: function (target, room, user, connection) {
 		if (!target) return false;
@@ -861,7 +840,7 @@ var commands = exports.commands = {
 		this.addModCommand("" + targetUser.name + " was banned from room " + room.id + " by " + user.name + "." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
 		if (alts.length) {
-			this.addModCommand("" + targetUser.name + "'s alts were also banned from room " + room.id + ": " + alts.join(", "));
+			this.privateModCommand("(" + targetUser.name + "'s alts were also banned from room " + room.id + ": " + alts.join(", ") + ")");
 			for (var i = 0; i < alts.length; ++i) {
 				var altId = toId(alts[i]);
 				this.add('|unlink|' + altId);
@@ -910,7 +889,7 @@ var commands = exports.commands = {
 			var altId = toId(alts[i]);
 			if (room.bannedUsers[altId]) delete room.bannedUsers[altId];
 		}
-		this.addModCommand("" + targetUser.name + "'s alts were also unbanned from room " + room.id + ": " + alts.join(", "));
+		this.privateModCommand("(" + targetUser.name + "'s alts were also unbanned from room " + room.id + ": " + alts.join(", ") + ")");
 	},
 
 	roomauth: function (target, room, user, connection) {
@@ -1162,7 +1141,7 @@ var commands = exports.commands = {
 		targetUser.popup(user.name+' has muted you for 7 minutes. '+target);
 		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 7 minutes.' + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
-		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also muted: " + alts.join(", "));
+		if (alts.length) this.privateModCommand("(" + targetUser.name + "'s alts were also muted: " + alts.join(", ") + ")");
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.mute(room.id, 7 * 60 * 1000);
@@ -1238,7 +1217,7 @@ var commands = exports.commands = {
 		targetUser.popup(user.name+' has muted you for 24 hours. '+target);
 		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 24 hours.' + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
-		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also muted: " + alts.join(", "));
+		if (alts.length) this.privateModCommand("(" + targetUser.name + "'s alts were also muted: " + alts.join(", ") + ")");
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.mute(room.id, 60 * 60 * 1000, true);
@@ -1293,7 +1272,7 @@ var commands = exports.commands = {
 		if (Rooms.rooms.logroom) Rooms.rooms.logroom.addRaw('LOCK LOG: ' + user.name + ' has locked ' + targetUser.name + ' from ' + room.id + '.');
 		this.addModCommand(""+targetUser.name+" was locked from talking by "+user.name+"." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
-		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also locked: " + alts.join(", "));
+		if (alts.length) this.privateModCommand("(" + targetUser.name + "'s alts were also locked: " + alts.join(", ") + ")");
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.lock();
@@ -1401,7 +1380,7 @@ var commands = exports.commands = {
 
 		var alts = targetUser.getAlts();
 		if (alts.length) {
-			this.addModCommand("" + targetUser.name + "'s alts were also banned: " + alts.join(", "));
+			this.privateModCommand("(" + targetUser.name + "'s alts were also banned: " + alts.join(", ") + ")");
 			for (var i = 0; i < alts.length; ++i) {
 				this.add('|unlink|' + toId(alts[i]));
 			}
@@ -1915,7 +1894,7 @@ var commands = exports.commands = {
 		// Specific case for modlog command. Room can be indicated with a comma, lines go after the comma.
 		// Otherwise, the text is defaulted to text search in current room's modlog.
 		var roomId = room.id;
-		var roomLogs = {};
+		var hideIps = !user.can('ban');
 
 		if (target.indexOf(',') > -1) {
 			var targets = target.split(',');
@@ -1948,6 +1927,7 @@ var commands = exports.commands = {
 			filename = 'logs/modlog/modlog_' + roomId + '.txt';
 		}
 
+		var roomLogs = {};
 		// Seek for all input rooms for the lines or text
 		command = 'tail -' + lines + ' ' + filename;
 		var grepLimit = 100;
@@ -1962,6 +1942,9 @@ var commands = exports.commands = {
 				connection.popup("/modlog empty on " + roomNames + " or erred - modlog does not support Windows");
 				console.log("/modlog error: " + error);
 				return false;
+			}
+			if (stdout && hideIps) {
+				stdout = stdout.replace(/\([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\)/g, '');
 			}
 			if (lines) {
 				if (!stdout) {

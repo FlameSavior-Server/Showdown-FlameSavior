@@ -91,6 +91,10 @@ function messageSeniorStaff (message) {
 
 exports.messageSeniorStaff = messageSeniorStaff;
 
+var users = Object.create(null);
+var prevUsers = {};
+var numUsers = 0;
+
 var bannedIps = {};
 var bannedUsers = {};
 var lockedIps = {};

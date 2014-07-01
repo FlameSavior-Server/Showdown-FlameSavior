@@ -2271,16 +2271,17 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Diggersby<br />' +
 			'<i>I\'m beginning to feel like a Hopgod, Hopgod</i>.</center>');
 	},
-	
+	objection: 'ucn',
 	n: 'ucn',
 	unovachampionn: 'ucn',
 	ucn: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/conquest/sprite/212.png">' +
-			'<img src="http://i.imgur.com/lZwmQZc.gif">' +
-			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/212-mega.gif"><br />' +
-			'<b>Ace: <font color=red>Scizor</font><br>' +
-			'<font color=red><i>Incoming bullet punch... sike!</i></font></b></center>');
+		this.sendReplyBox('<center><img src=http://www.court-records.net/rips/bubble-(ani)objection.gif><br>'
+		'<img src=http://www.court-records.net/animation/phoenix-zoom(b).gif width=170>'
+		'<img src=http://i.imgur.com/6TR2XrL.gif>'
+		'<img src=http://www.court-records.net/animation/godot-zoom(b).gif width=170>'
+		'<br><b><font color=black>Ace: </font><font color=red><blink>Objection! </blink><br><font color=darkblue><i>Objection!...that was Objectionable!');
+		
 	},
 	
 	zerp: function(target, room, user) {

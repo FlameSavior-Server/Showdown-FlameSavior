@@ -737,82 +737,23 @@ var commands = exports.commands = {
 
 	roomauth: function (target, room, user, connection) {
 		if (!room.auth) return this.sendReply("/roomauth - This room isn't designed for per-room moderation and therefore has no auth list.");
+		var rankLists = {};
+		for (var u in room.auth) {
+			if (!rankLists[room.auth[u]]) rankLists[room.auth[u]] = [];
+			rankLists[room.auth[u]].push(u);
+		}
 
-	join: function (target, room, user, connection) {
-		if (!target) return false;
-		var targetRoom = Rooms.get(target) || Rooms.get(toId(target));
-		if (targetRoom === 'logroom' && user.group !== '~') return false;
-		if (targetRoom === 'adminroom' && user.group !== '~') return false;
-		if (!targetRoom) {
-			return connection.sendTo(target, "|noinit|nonexistent|The room '" + target + "' does not exist.");
-		}
-		if (targetRoom.isPrivate) {
-			if (targetRoom.modjoin) {
-				var userGroup = user.group;
-				if (targetRoom.auth) {
-					userGroup = targetRoom.auth[user.userid] || ' ';
-				}
-				if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(targetRoom.modchat)) {
-					return connection.sendTo(target, "|noinit|nonexistent|The room '" + target + "' does not exist.");
-				}
-			}
-			if (!user.named) {
-				return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '" + target + "'.");
-			}
-		}
-		if (target.toLowerCase() != "lobby" && !user.named) {
-			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room " + target + ".");
-		}
-		if (!user.joinRoom(targetRoom || room, connection)) {
-			return connection.sendTo(target, "|noinit|joinfailed|The room '" + target + "' could not be joined.");
-		}
-		if (targetRoom.lockedRoom === true) {
-			if ((!targetRoom.auth[user.userid]) && (!user.isStaff)) {
-				return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' is currently locked.");
-			}
-		}
-		if (target.toLowerCase() == "lobby") {
-			return connection.sendTo('lobby','|html|<div class="infobox" style="border-color:blue"><center><img src="http://i.imgur.com/RKZTxPs.png"><br />' +
-			'<b><u>Welcome to the Frost Server!</u></b><br />' + 
-			'Home of many leagues for you to join or challenge, battle users in the ladder or in tournaments, learn how to play Pokemon or just chat in lobby!<br /><br />' +
-			'Make sure to type <b>/help</b> to get a list of commands that you can use and <b>/faq</b> to check out frequently asked questions.<br /><br />' +
-			'To get a chatroom for your league, please talk to an admin (~) to receive one<br /><br />' +
-			'Feel free to jam out with Frost <a href="http://plug.dj/frost-ps/">here</a>!<br /><br />' +
-			'<b>Frost</b>-<blockquote><em>Promoting your league, one challenger at a time</em></blockquote></div></font></center>');
-		}
-		if (target.toLowerCase() === 'frostcasino' || target.toLowerCase() === 'frost casino') {
-			if (economy.closeCasino === true) {
-				return connection.sendTo('frostcasino', '|html|<div class="infobox" style="border-color:blue"><center><font size="18">Frost Casino is</font> <font size="18" color="red">closed!</font><br />' +
-					'<br />The casino is currently closed, if you would like it to be opened ask a member of staff.</center></div>');
-			}
-			else if (economy.closeCasino === false) {
+		var buffer = [];
+		Object.keys(rankLists).sort(function (a, b) {
+			return Config.groups[b].rank - Config.groups[a].rank;
+		}).forEach(function (r) {
+			buffer.push(Config.groups[r].name + "s (" + r + "):\n" + rankLists[r].sort().join(", "));
+		});
 
-			}
+		if (!buffer.length) {
+			buffer = "This room has no auth.";
 		}
-		/*
-		if (target.toLowerCase() == "lobby") {
-			return connection.sendTo('lobby','|html|<center><br><h1><font><b><img src="http://www.serebii.net/xy/pokemon/711-h.png"><font color="Orange">WELCOME </font><font color="black">TO </font><font color="Orange">FROST!</font><img src="http://www.serebii.net/xy/pokemon/711-h.png"></center></b><br />' +
-				'<center>Frost staff wish you all a happy halloween!<br /><br />' +
-				'Home of many leagues for you to join or challenge, battle users in the ladder or in tournaments, learn how to play Pokemon or just chat in lobby!<br /><br />' +
-				'Make sure to type <b>/help</b> to get a list of commands that you can use and <b>/faq</b> to check out frequently asked questions.</center>');
-		}*/
-	},
-
-	rk: 'roomkick',
-	rkick: 'roomkick',
-	kick: 'roomkick',
-	roomkick: function(target, room, user){
-		//if (!room.auth && room.id !== "staff") return this.sendReply('/rkick is designed for rooms with their own auth.');
-		if (!this.can('roommod', null, room)) return false;
-		if (!target) return this.sendReply('/rkick [username] - kicks the user from the room. Requires: @ & ~');
-		var targetUser = Users.get(target);
-		if (!targetUser) return this.sendReply('User '+target+' not found.');
-		if (!Rooms.rooms[room.id].users[targetUser.userid]) return this.sendReply(target+' is not in this room.');
-		if (targetUser.frostDev) return this.sendReply('Frost Developers can\'t be room kicked');
-		targetUser.popup('You have been kicked from room '+ room.title +' by '+user.name+'.');
-		targetUser.leaveRoom(room);
-		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
-		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
+		connection.popup(buffer.join("\n\n"));
 	},
 
 	roomban: function (target, room, user, connection) {

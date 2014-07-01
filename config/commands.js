@@ -2276,10 +2276,10 @@ var commands = exports.commands = {
 	unovachampionn: 'ucn',
 	ucn: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src=http://www.court-records.net/rips/bubble-(ani)objection.gif><br>'
-		'<img src=http://www.court-records.net/animation/phoenix-zoom(b).gif width=170>'
-		'<img src=http://i.imgur.com/6TR2XrL.gif>'
-		'<img src=http://www.court-records.net/animation/godot-zoom(b).gif width=170>'
+		this.sendReplyBox('<center><img src=http://www.court-records.net/rips/bubble-(ani)objection.gif><br>' +
+		'<img src=http://www.court-records.net/animation/phoenix-zoom(b).gif width=170>' +
+		'<img src=http://i.imgur.com/6TR2XrL.gif>' +
+		'<img src=http://www.court-records.net/animation/godot-zoom(b).gif width=170>' +
 		'<br><b><font color=black>Ace: </font><font color=red><blink>Objection! </blink><br><font color=darkblue><i>Objection!...that was Objectionable!');
 		
 	},

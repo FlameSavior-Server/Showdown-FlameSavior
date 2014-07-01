@@ -735,25 +735,41 @@ var commands = exports.commands = {
 		this.addModCommand(user.name + ' has unlocked the room.');
 	},
 
-	roomauth: function (target, room, user, connection) {
-		if (!room.auth) return this.sendReply("/roomauth - This room isn't designed for per-room moderation and therefore has no auth list.");
-		var rankLists = {};
-		for (var u in room.auth) {
-			if (!rankLists[room.auth[u]]) rankLists[room.auth[u]] = [];
-			rankLists[room.auth[u]].push(u);
+	roomdesc: function (target, room, user) {
+		if (!target) {
+			if (!this.canBroadcast()) return;
+			var re = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
+			if (!room.desc) return this.sendReply("This room does not have a description set.");
+			this.sendReplyBox("The room description is: " + room.desc.replace(re, '<a href="$1">$1</a>'));
+			return;
 		}
+		if (!this.can('declare')) return false;
+		if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
 
-		var buffer = [];
-		Object.keys(rankLists).sort(function (a, b) {
-			return Config.groups[b].rank - Config.groups[a].rank;
-		}).forEach(function (r) {
-			buffer.push(Config.groups[r].name + "s (" + r + "):\n" + rankLists[r].sort().join(", "));
-		});
+		room.desc = target;
+		this.sendReply("(The room description is now: " + target + ")");
 
-		if (!buffer.length) {
-			buffer = "This room has no auth.";
+		if (room.chatRoomData) {
+			room.chatRoomData.desc = room.desc;
+			Rooms.global.writeChatRoomData();
 		}
-		connection.popup(buffer.join("\n\n"));
+	},
+
+	rk: 'roomkick',
+ 	rkick: 'roomkick',
+ 	kick: 'roomkick',
+ 	roomkick: function(target, room, user){
+ 		//if (!room.auth && room.id !== "staff") return this.sendReply('/rkick is designed for rooms with their own auth.');
+ 		if (!this.can('roommod', null, room)) return false;
+ 		if (!target) return this.sendReply('/rkick [username] - kicks the user from the room. Requires: @ & ~');
+ 		var targetUser = Users.get(target);
+ 		if (!targetUser) return this.sendReply('User '+target+' not found.');
+ 		if (!Rooms.rooms[room.id].users[targetUser.userid]) return this.sendReply(target+' is not in this room.');
+ 		if (targetUser.frostDev) return this.sendReply('Frost Developers can\'t be room kicked');
+ 		targetUser.popup('You have been kicked from room '+ room.title +' by '+user.name+'.');
+ 		targetUser.leaveRoom(room);
+ 		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
+ 		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
 	},
 
 	roomban: function (target, room, user, connection) {

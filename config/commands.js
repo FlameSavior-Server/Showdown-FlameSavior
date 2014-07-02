@@ -2245,8 +2245,8 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i1148.photobucket.com/albums/o579/catfight09/Katekyo-Hitman-Reborn-image-katekyo-hitman-reborn-36253653-1024-768_zpsc394eb95.jpg" width="160">' +
 			'<img src="http://i.imgur.com/wOPNjVd.gif">' +
 			'<img src="http://i1148.photobucket.com/albums/o579/catfight09/Katekyo-Hitman-Reborn-image-katekyo-hitman-reborn-36253670-1680-1050_zps0e8f54a6.jpg" width="160"><br />' +
-			'<b>Ace:</b> Gallade<br />' +
-			'Laws only Exist for those who cannot live without clinging to them.</center>');
+			'<b>Ace:</b> Victini<br />' +
+			'A boss is someone who puts his life on the line for his subordinates.</center>');
 	},
 	
 	pichu: function(target, room, user) {

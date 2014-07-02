@@ -2018,10 +2018,10 @@ var commands = exports.commands = {
 	
 	voltaic: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus.gif">' +
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/ampharos-mega.gif">' +
 			'<img src="http://i.imgur.com/L34mXCM.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus-therian.gif"><br />' +
-			'<img src="http://i.imgur.com/IeyZH23.jpg" height="130"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/ampharos-mega.gif"><br />' +
+			'<img src="http://i.imgur.com/RHnllzf.gif" height="130"><br />' +
 			'<b>Ace:</b> Mega Ampharos<br />' +
 			'Jack of all trades, Master of none. You\'re still predicting? I\'ve already won.</center>');
 	},
@@ -2242,9 +2242,9 @@ var commands = exports.commands = {
 	
 	roy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i1148.photobucket.com/albums/o579/catfight09/GaryRender2Resize_zpsf564d01a.png" width="160">' +
-			'<img src="http://i.imgur.com/iW5LGFy.png">' +
-			'<img src="http://i1148.photobucket.com/albums/o579/catfight09/tumblr_mbhpnxte2H1ri9pfao1_500_zps85bee4e9.jpg" width="160"><br />' +
+		this.sendReplyBox('<center><img src="http://i1148.photobucket.com/albums/o579/catfight09/Katekyo-Hitman-Reborn-image-katekyo-hitman-reborn-36253653-1024-768_zpsc394eb95.jpg" width="160">' +
+			'<img src="http://i.imgur.com/wOPNjVd.gif">' +
+			'<img src="http://i1148.photobucket.com/albums/o579/catfight09/Katekyo-Hitman-Reborn-image-katekyo-hitman-reborn-36253670-1680-1050_zps0e8f54a6.jpg" width="160"><br />' +
 			'<b>Ace:</b> Gallade<br />' +
 			'Laws only Exist for those who cannot live without clinging to them.</center>');
 	},

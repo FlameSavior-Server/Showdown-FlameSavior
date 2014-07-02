@@ -4191,7 +4191,7 @@ var commands = exports.commands = {
 	 **********************************/
 
 	mastersofthecolorhelp: 'motc', 
-     motc: function(target, room, user) {
+     	motc: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<h2>Masters of the Colors</h2><hr /><br />In this tournament, you will construct a team based on the color of your name. ' +
     		'You are not allowed to <em>choose</em> the color of your name. Follow these steps if you wish to participate:<ol><li>Look at the color ' +
@@ -4204,41 +4204,41 @@ var commands = exports.commands = {
     		' Masters of the Colors has started! If you happen to come accross any trouble during the event, feel free to PM the room owner for your designated' +
     		' room.</li><li><b>IF</b> you do win, your challenge isn\'t over yet! After winning, construct a team using only <b>Black, White, or Gray</b>' +
     		' Pokemon (you may use /black etc. to see the list). You will go against the other winners of Masters of the Colors and the winner will recieve an extra 10 bucks!</ol>');
-    },
+    	},
 
 	blue: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Blue">here</a>. Shines are <b>not</b> allowed.');
+		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Blue">here</a>. Shinies are <b>not</b> allowed.');
 	},
 	
 	brown: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Brown">here</a>. Shines are <b>not</b> allowed.');
+		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Brown">here</a>. Shinies are <b>not</b> allowed.');
 	},
 	
 	green: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Green">here</a>. Shines are <b>not</b> allowed.');
+		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Green">here</a>. Shinies are <b>not</b> allowed.');
 	},
 	
 	pink: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Pink">here</a>. Shines are <b>not</b> allowed.');
+		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Pink">here</a>. Shinies are <b>not</b> allowed.');
 	},
 	
 	purple: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Purple">here</a>. Shines are <b>not</b> allowed.');
+		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Purple">here</a>. Shinies are <b>not</b> allowed.');
 	},
 	
 	red: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Red">here</a>. Shines are <b>not</b> allowed.');
+		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Red">here</a>. Shinies are <b>not</b> allowed.');
 	},
 	
 	yellow: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Yellow">here</a>. Shines are <i>not</i> allowed.');
+		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Yellow">here</a>. Shinies are <i>not</i> allowed.');
 	},	
 	
 

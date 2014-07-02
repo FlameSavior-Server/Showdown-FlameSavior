@@ -2016,7 +2016,38 @@ var commands = exports.commands = {
 		}
 	},
 
-	roomowner: function(target, room, user) {
+	roomintro: function (target, room, user) {
+		if (!target) {
+			if (!this.canBroadcast()) return;
+			var re = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
+			if (!room.introMessage) return this.sendReply("This room does not have an introduction set.");
+			this.sendReplyBox(room.introMessage);
+			if (!this.broadcasting && user.can('declare', null, room)) {
+				this.sendReply('Source:');
+				this.sendReplyBox('<code>'+Tools.escapeHTML(room.introMessage)+'</code>');
+			}
+			return;
+		}
+		if (!this.can('declare', null, room)) return false;
+		if (!this.canHTML(target)) return;
+		if (!/</.test(target)) {
+			// not HTML, do some simple URL linking
+			var re = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
+			target = target.replace(re, '<a href="$1">$1</a>');
+		}
+
+		if (!target.trim()) target = '';
+		room.introMessage = target;
+		this.sendReply("(The room introduction has been changed to:)");
+		this.sendReplyBox(target);
+
+		if (room.chatRoomData) {
+			room.chatRoomData.introMessage = room.introMessage;
+			Rooms.global.writeChatRoomData();
+		}
+	},
+
+	roomowner: function (target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomowner - This room isn't designed for per-room moderation to be added");
 		}
@@ -3472,7 +3503,7 @@ var commands = exports.commands = {
 		targetUser.popup("" + user.name + " has muted you for 7 minutes. " + target);
 		this.addModCommand("" + targetUser.name + " was muted by " + user.name + " for 7 minutes." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
-		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also muted: " + alts.join(", "));
+		if (alts.length) this.privateModCommand("(" + targetUser.name + "'s alts were also muted: " + alts.join(", ") + ")");
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.mute(room.id, 7 * 60 * 1000);
@@ -3499,7 +3530,7 @@ var commands = exports.commands = {
 		targetUser.popup("" + user.name + " has muted you for 60 minutes. " + target);
 		this.addModCommand("" + targetUser.name + " was muted by " + user.name + " for 60 minutes." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
-		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also muted: " + alts.join(", "));
+		if (alts.length) this.privateModCommand("(" + targetUser.name + "'s alts were also muted: " + alts.join(", ") + ")");
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.mute(room.id, 60 * 60 * 1000, true);
@@ -3547,7 +3578,7 @@ var commands = exports.commands = {
 
 		this.addModCommand("" + targetUser.name + " was locked from talking by " + user.name + "." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
-		if (alts.length) this.addModCommand("" + targetUser.name + "'s alts were also locked: " + alts.join(", "));
+		if (alts.length) this.privateModCommand("(" + targetUser.name + "'s alts were also locked: " + alts.join(", ") + ")");
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.lock();
@@ -3595,7 +3626,7 @@ var commands = exports.commands = {
 		this.addModCommand("" + targetUser.name + " was banned by " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
 		var alts = targetUser.getAlts();
 		if (alts.length) {
-			this.addModCommand("" + targetUser.name + "'s alts were also banned: " + alts.join(", "));
+			this.privateModCommand("(" + targetUser.name + "'s alts were also banned: " + alts.join(", ") + ")");
 			for (var i = 0; i < alts.length; ++i) {
 				this.add('|unlink|' + toId(alts[i]));
 			}
@@ -4105,7 +4136,7 @@ var commands = exports.commands = {
 		// Specific case for modlog command. Room can be indicated with a comma, lines go after the comma.
 		// Otherwise, the text is defaulted to text search in current rooms modlog.
 		var roomId = room.id;
-		var roomLogs = {};
+		var hideIps = !user.can('ban');
 
 		if (target.indexOf(',') > -1) {
 			var targets = target.split(',');
@@ -4138,6 +4169,7 @@ var commands = exports.commands = {
 			filename = 'logs/modlog/modlog_' + roomId + '.txt';
 		}
 
+		var roomLogs = {};
 		// Seek for all input rooms for the lines or text
 		command = 'tail -' + lines + ' ' + filename;
 		var grepLimit = 100;
@@ -4152,6 +4184,9 @@ var commands = exports.commands = {
 				connection.popup("/modlog empty on " + roomNames + " or erred - modlog does not support Windows");
 				console.log("/modlog error: " + error);
 				return false;
+			}
+			if (stdout && hideIps) {
+				stdout = stdout.replace(/\([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\)/g, '');
 			}
 			if (lines) {
 				if (!stdout) {

@@ -389,8 +389,7 @@ exports.Formats = [
 		name: "Hackmons",
 		section: "Other Metagames",
 
-		ruleset: ['OU', 'Same Type Clause'],
-		banlist: ['Talonflame']
+		ruleset: ['Pokemon', 'HP Percentage Mod']
 	},
 	{
 		name: "Tier Shift",

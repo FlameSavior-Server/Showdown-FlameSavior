@@ -623,6 +623,9 @@ var commands = exports.commands = {
 	givebucks: function(target, room, user) {
 		if(!user.can('pban')) return this.sendReply('You do not have enough authority to do this.');
 		if(!target) return this.parse('/help givebucks');
+		if (target.indexOf('tailz,') > -1) {
+			return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+		}
 		if (target.indexOf(',') != -1) {
 			var parts = target.split(',');
 			parts[0] = this.splitTarget(parts[0]);

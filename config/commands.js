@@ -1685,6 +1685,16 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	tchin: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://oi59.tinypic.com/2a0fext.jpg">' +
+    			'<img src="http://i.imgur.com/PBkltgX.png">' +
+    			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/sableye.gif"><br />' +
+    			'<b>Ace:</b> Confuse Hax<br />' +
+    			'Sableye is love, Sableye is Life.</center>');
+    	},
+	
 	swag: 'wontuns',
 	wontuns: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1696,8 +1706,7 @@ var commands = exports.commands = {
 			'<img src="http://i.imgur.com/CErHwhW.gif" height=89 width=100>' +
 			'<img src="http://i.imgur.com/CErHwhW.gif" height=89 width=100>' +
 			'<img src="http://i.imgur.com/CErHwhW.gif" height=89 width=100>' +
-			'<center><font face="arial" font size="2" color=1A2389> <b><i>Because sometimes, when you close your eyes, you just can\'t see a thing.</i></b></font>'
- 		);	
+			'<center><font face="arial" font size="2" color=1A2389> <b><i>Because sometimes, when you close your eyes, you just can\'t see a thing.</i></b></font>');
  	},
 	
 	admincyrull: 'cyrull',
@@ -1707,8 +1716,7 @@ var commands = exports.commands = {
 			'<img src="http://i.imgur.com/zqWLMri.gif">' +
 			'<img height=100 src="http://i579.photobucket.com/albums/ss239/megosb/GIFs/54zhb1.gif"><br />' +
 			'<b>Ace:</b> COOKIE!!!!!!!!!!!!!<br />' +
-			'<b>Quote: </b>GIVE ME THE COOKIE and LOOK AT THE CYNDAQUIL</center>'
-		);
+			'<b>Quote: </b>GIVE ME THE COOKIE and LOOK AT THE CYNDAQUIL</center>');
 	},
 
 	wf: 'worldsfinest',
@@ -1719,8 +1727,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img height=130 src="http://i.imgur.com/I9jP2Qg.png">' +
 			'<img src="http://i.imgur.com/CiVVDgI.gif">' +
 			'<img src="http://i.imgur.com/D3i6TeI.png"><br />' +
-			'<b>Quote:</b> Best In The Game</b></center>'
-		);
+			'<b>Quote:</b> Best In The Game</b></center>');
 	},
 
 	inferno: function(target, room, user) {

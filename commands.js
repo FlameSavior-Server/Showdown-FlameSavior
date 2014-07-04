@@ -2832,7 +2832,8 @@ var commands = exports.commands = {
 		this.sendReply('The ID of the target is: ' + targetUser);
 	},
 	
-	afktest: function(target, room, user, connection) {
+	away: 'afk',
+	afk: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 		
@@ -2870,48 +2871,35 @@ var commands = exports.commands = {
 		user.updateIdentity();
 		}
 	},
-	afk: 'away',
-	away: function(target, room, user, connection) {
-		if (!this.can('lock')) return false;
-		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
-		
-		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i'];
-        	for (var x in html) {
-        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
-        	}
-
-		if (!user.isAway) {
-			user.originalName = user.name;
-			var awayName = user.name + ' - Ⓐⓦⓐⓨ';
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(awayName);
-			user.forceRename(awayName, undefined, true);
-			
-			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
-			user.isAway = true;
-		}
-		else {
-			return this.sendReply('You are already set as away, type /back if you are now back.');
-		}
-
-		user.updateIdentity();
-	},
+	
 	sleep: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
-
-		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i'];
-        	for (var x in html) {
-        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
-        	}
-        	
+		
+		if (user.name === 'panpawn') {
 		if (!user.isAway) {
 			user.originalName = user.name;
 			var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
-			
+		
+			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
+			user.isAway = true;
+		}
+		else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
+
+		user.updateIdentity();	
+		} else {
+		if (!user.isAway) {
+			user.originalName = user.name;
+			var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+		
 			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
 			user.isAway = true;
 		}
@@ -2920,23 +2908,37 @@ var commands = exports.commands = {
 		}
 
 		user.updateIdentity();
+		}
 	},
+	
 	busy: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 		
-		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i'];
-        	for (var x in html) {
-        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
-        	}
-
+		if (user.name === 'panpawn') {
 		if (!user.isAway) {
 			user.originalName = user.name;
 			var awayName = user.name + ' - Ⓑⓤⓢⓨ';
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
-			
+		
+			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+			user.isAway = true;
+		}
+		else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
+
+		user.updateIdentity();	
+		} else {
+		if (!user.isAway) {
+			user.originalName = user.name;
+			var awayName = user.name + ' - Ⓑⓤⓢⓨ';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+		
 			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
 			user.isAway = true;
 		}
@@ -2945,24 +2947,92 @@ var commands = exports.commands = {
 		}
 
 		user.updateIdentity();
+		}
 	},
+	
+	busy: function(target, room, user, connection) {
+		if (!this.can('lock')) return false;
+		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
+		
+		if (user.name === 'panpawn') {
+		if (!user.isAway) {
+			user.originalName = user.name;
+			var awayName = user.name + ' - Ⓑⓤⓢⓨ';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+		
+			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+			user.isAway = true;
+		}
+		else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
 
+		user.updateIdentity();	
+		} else {
+		if (!user.isAway) {
+			user.originalName = user.name;
+			var awayName = user.name + ' - Ⓑⓤⓢⓨ';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+		
+			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+			user.isAway = true;
+		}
+		else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
+
+		user.updateIdentity();
+		}
+	},
+	
 	back: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
-
+		
+		if (user.name === 'panpawn') {
+		
 		if (user.isAway) {
 			if (user.name === user.originalName) {
 				user.isAway = false; 
 				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
-				
+
 			}
 
 			var newName = user.originalName;
-			
+
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(newName);
 			user.forceRename(newName, undefined, true);
-			
+
+			//user will be authenticated
+			user.authenticated = true;
+
+			this.add('|raw|-- <b><font color="'+ hashColor(''+user.name+'')+'">' + newName + '</font color></b> is no longer away');
+			user.originalName = '';
+			user.isAway = false;
+		}
+		else {
+			return this.sendReply('You are not set as away.');
+		}
+
+		user.updateIdentity();
+		}
+		if (user.isAway) {
+			if (user.name === user.originalName) {
+				user.isAway = false; 
+				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
+
+			}
+
+			var newName = user.originalName;
+
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(newName);
+			user.forceRename(newName, undefined, true);
+
 			//user will be authenticated
 			user.authenticated = true;
 

@@ -2835,14 +2835,31 @@ var commands = exports.commands = {
 	afktest: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
-
+		
+		if (user.name === 'panpawn') {
 		if (!user.isAway) {
 			user.originalName = user.name;
 			var awayName = user.name + ' - Ⓐⓦⓐⓨ';
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
+		
+			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
+			user.isAway = true;
+		}
+		else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
 
+		user.updateIdentity();	
+		} else {
+		if (!user.isAway) {
+			user.originalName = user.name;
+			var awayName = user.name + ' - Ⓐⓦⓐⓨ';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+		
 			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
 			user.isAway = true;
 		}
@@ -2851,6 +2868,7 @@ var commands = exports.commands = {
 		}
 
 		user.updateIdentity();
+		}
 	},
 	afk: 'away',
 	away: function(target, room, user, connection) {

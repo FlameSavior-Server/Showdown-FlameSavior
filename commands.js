@@ -2835,11 +2835,6 @@ var commands = exports.commands = {
 	afktest: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
-		
-		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i'];
-        	for (var x in html) {
-        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
-        	}
 
 		if (!user.isAway) {
 			user.originalName = user.name;
@@ -2847,9 +2842,8 @@ var commands = exports.commands = {
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
-			var color = hashColor(''+user.originalName'');
-			
-			this.add('|raw|-- <b><font color="'+color+'">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
+
+			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'>' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
 			user.isAway = true;
 		}
 		else {

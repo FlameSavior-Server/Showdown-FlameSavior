@@ -2832,6 +2832,32 @@ var commands = exports.commands = {
 		this.sendReply('The ID of the target is: ' + targetUser);
 	},
 	
+	afktest: function(target, room, user, connection) {
+		if (!this.can('lock')) return false;
+		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
+		
+		var html = ['<img ','<a href','<font ','<marquee','<blink','<center', '<button', '<b', '<i'];
+        	for (var x in html) {
+        	if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        	}
+
+		if (!user.isAway) {
+			user.originalName = user.name;
+			var awayName = user.name + ' - Ⓐⓦⓐⓨ';
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+			var color = hashColor(''+user.originalName'');
+			
+			this.add('|raw|-- <b><font color="'+color+'">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
+			user.isAway = true;
+		}
+		else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
+
+		user.updateIdentity();
+	},
 	afk: 'away',
 	away: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;

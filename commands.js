@@ -2869,7 +2869,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 			
-			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2894,7 +2894,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 			
-			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2919,7 +2919,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 			
-			this.add('|raw|-- <b><font color="#4F86F7">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2947,8 +2947,8 @@ var commands = exports.commands = {
 			
 			//user will be authenticated
 			user.authenticated = true;
-			
-			this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer away');
+
+			this.add('|raw|-- <b><font color="'+ hashColor(''+user.name+'')+'">' + newName + '</font color></b> is no longer away');
 			user.originalName = '';
 			user.isAway = false;
 		}

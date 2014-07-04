@@ -2843,7 +2843,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 
-			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'>' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="'+ hashColor(''+user.originalName+'')+'">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
 			user.isAway = true;
 		}
 		else {

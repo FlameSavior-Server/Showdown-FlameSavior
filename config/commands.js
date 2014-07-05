@@ -1248,7 +1248,7 @@ var commands = exports.commands = {
     	
     	popcorn: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://www.allgeekthings.co.uk/wp-content/uploads/Popcorn.gif"></center>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/jQwJOwk.gif"></center>');
 	},
 	
 	sand: 'sandshrewed',

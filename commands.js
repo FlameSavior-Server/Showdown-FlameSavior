@@ -2837,7 +2837,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
         	if (!this.canTalk()) return;
         	if (user.name === 'panpawn') {
-        		return this.sendReplyBox('Hello, <b><font color="#DA9D01">'+user.name+'</b></font>.  Your hexcose for your name color is: #DA9D01.');
+        		return this.sendReplyBox('Hello, <b><font color="#DA9D01">'+user.name+'</b></font>.  Your hexcode for your name color is: #DA9D01.');
         		return;
         	} else {
 		return this.sendReplyBox('Hello, <b><font color="'+hashColor(''+toId(user.name)+'')+'">'+user.name+'</font></b>.  Your hexcode for your name color is: '+hashColor(''+toId(user.name)+'')+'.');

@@ -3005,7 +3005,7 @@ var commands = exports.commands = {
 	back: function(target, room, user, connection) {
 		if (!this.can('lock')) return false;
 		
-		if (user.name === 'panpawn' || user.name ==='panpawn - Ⓐⓦⓐⓨ' || user.name ==='panpawn  -Ⓢⓛⓔⓔⓟⓘⓝⓖ' || user.name ==='panpawn - Ⓑⓤⓢⓨ') {  
+		if (user.userid === 'panpawn') {  
 		
 		if (user.isAway) {
 			if (user.name === user.originalName) {

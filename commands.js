@@ -2858,7 +2858,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 		
-			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2874,7 +2874,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 		
-			this.add('|raw|-- <b><font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now away. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2897,7 +2897,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 		
-			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2913,7 +2913,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 		
-			this.add('|raw|-- <b><font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now sleeping. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2936,7 +2936,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 		
-			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2952,7 +2952,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 		
-			this.add('|raw|-- <b><font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2975,7 +2975,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 		
-			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="#DA9D01">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {
@@ -2991,7 +2991,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 		
-			this.add('|raw|-- <b><font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + target + ")" : ""));
+			this.add('|raw|-- <b><font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {

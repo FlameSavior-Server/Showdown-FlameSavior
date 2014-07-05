@@ -2945,11 +2945,11 @@ var commands = exports.commands = {
 	
 	flare: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados-mega.gif">' +
-			'<img src="http://i.imgur.com/Wqcrfk0.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/blaziken-mega.gif"><br />' +
-			'<b>Ace:</b> Mega Gyarados/Gallade<br />' +
-			'With every set back. There\'s always a chance to comeback.</center>');
+		this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/282-mega.gif">' +
+			'<img src="http://i.imgur.com/dTxMRgu.gif">' +
+			'<img src="http://blog-imgs-66.fc2.com/s/o/l/solo002/2charizard-megax.gif"><br />' +
+			'<b>Ace:</b><font color="blue"> Mega Gardevior/Mega Charizard X</font><br />' +
+			'You\'ve got enemies? Good.That means you actually stood up for something in your life.</center>');
 	},
 	
 	klutzymanaphy: function(target, room, user) {

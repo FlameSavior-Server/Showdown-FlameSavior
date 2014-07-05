@@ -2874,7 +2874,7 @@ var commands = exports.commands = {
 	
 	away: 'afk',
 	afk: function(target, room, user, connection) {
-		if (!this.can('lock')) return false;
+		if (!this.can('broadcast')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 		
 		if (user.userid === 'panpawn') {        		
@@ -2913,7 +2913,7 @@ var commands = exports.commands = {
 	},
 	
 	sleep: function(target, room, user, connection) {
-		if (!this.can('lock')) return false;
+		if (!this.can('broadcast')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 		
 		if (user.userid === 'panpawn') {        		
@@ -2952,7 +2952,7 @@ var commands = exports.commands = {
 	},
 	
 	busy: function(target, room, user, connection) {
-		if (!this.can('lock')) return false;
+		if (!this.can('broadcast')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 		
 		if (user.userid === 'panpawn') {        		
@@ -2991,7 +2991,7 @@ var commands = exports.commands = {
 	},
 	
 	busy: function(target, room, user, connection) {
-		if (!this.can('lock')) return false;
+		if (!this.can('broadcast')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 		
 		if (user.userid === 'panpawn') {        		
@@ -3030,7 +3030,7 @@ var commands = exports.commands = {
 	},
 	
 	back: function(target, room, user, connection) {
-		if (!this.can('lock')) return false;
+		if (!this.can('broadcast')) return false;
 		
 		if (user.userid === 'panpawn') {  
 		

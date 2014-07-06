@@ -1686,6 +1686,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	castformz: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/i8hk0uK.jpg" width="100">' +
+    			'<img src="http://i.imgur.com/a9Ewgyr.png" width="350">' +
+    			'<img src="http://i.imgur.com/JybM3dn.jpg" width="100"><br />' +
+    			'<b>Ace:</b> 1.8 Pounds of hot air<br />' +
+    			'"I should buy a tc for no reason" ~Castformz</center>');
+    	},
+	
 	kittyhope: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/h3kX1jc.png" width="120">' +

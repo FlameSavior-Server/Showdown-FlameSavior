@@ -2674,7 +2674,7 @@ var commands = exports.commands = {
 	
 	eevee: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/NZAER3B.gif" width="170">' +
+		this.sendReplyBox('<center><img src="http://th08.deviantart.net/fs70/200H/i/2011/135/6/4/eevee_by_akuvix-d3gdtc4.png" width="170">' +
 			'<img src="http://i.imgur.com/lMqGTh2.gif" width="200">' +
 			'<img src="http://i.imgur.com/B1T2oZ2.jpg" width="150" height="170"><br />' +
 			'<b>Ace:</b> Eevee<br />' +

@@ -2565,7 +2565,7 @@ var commands = exports.commands = {
 	
 	ghast: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/h3GJIh4.gif">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/h3GJIh4.gif" width="120">' +
 			'<img src="http://i.imgur.com/Hia14zw.png" width="350">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aegislash.gif"><br />' +
 			'<b>Ace:</b> Gengar<br />' +

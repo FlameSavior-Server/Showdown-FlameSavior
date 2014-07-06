@@ -1686,6 +1686,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	kittyhope: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/h3kX1jc.png" width="120">' +
+    			'<img src="http://i.imgur.com/vEbDcla.gif" width="300">' +
+    			'<img src="http://i.imgur.com/LjLmSbB.png" width="120"><br />' +
+    			'<b>Ace:</b> The Bearers Of Light ~ Hope And Kitty<br />' +
+    			'The Light Shines on Everyone and when it Shines on you there is Greatness, Happiness, and Love~</center>');
+    	},
+	
 	perseus: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/o13YADZ.png" width="120">' +

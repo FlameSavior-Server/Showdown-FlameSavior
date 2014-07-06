@@ -1686,6 +1686,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	bariankaiser: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://img.pokemondb.net/artwork/aegislash-blade.jpg" width="140">' +
+    			'<img src="http://i.imgur.com/hLz1bUh.png">' +
+    			'<img src="http://img1.wikia.nocookie.net/__cb20130104181204/yugiohzexalencyclopedia/images/0/01/Barian_Emblem.jpg" width="150"><br />' +
+    			'<b>Ace:</b> Aegislash<br />' +
+    			'My dark side cannot be contained, I\'m the true demon of this game.</center>');
+    	},
+	
 	castformz: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/i8hk0uK.jpg" width="100">' +

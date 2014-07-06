@@ -1686,6 +1686,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	perseus: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/o13YADZ.png" width="120">' +
+    			'<img src="http://i.imgur.com/qWgacoN.png">' +
+    			'<img src="http://i.imgur.com/mbCr8LV.jpg" width="170"><br />' +
+    			'<b>Ace:</b> Scizor<br />' +
+    			'The first step to wisdom is admitting you know nothing, and that Perseus knows everything.</center>');
+    	},
+	
 	tchin: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://oi59.tinypic.com/2a0fext.jpg">' +
@@ -2556,11 +2565,11 @@ var commands = exports.commands = {
 	
 	ghast: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/haunter.gif">' +
-			'<img src="http://i.imgur.com/FVisHKB.png" width="370">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/spiritomb.gif"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/h3GJIh4.gif">' +
+			'<img src="http://i.imgur.com/Hia14zw.png" width="370">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aegislash.gif"><br />' +
 			'<b>Ace:</b> Gengar<br />' +
-			'Lurking through the shadows, haunting your dreams, & creating your nightmares.</center>');
+			'I am darkness itself. I am your nightmares, your shadows, & everything you fear.</center>');
 	},
 	
 	czim: function(target, room, user) {

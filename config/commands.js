@@ -1055,6 +1055,10 @@ var commands = exports.commands = {
 
 		this.sendReplyBox("" + atkName + " is " + factor + "x effective against " + defName + ".");
 	},
+	
+	afk2: function (target, room, user) {
+		return this.parse("/nick  "+Tools.escapeHTML(user.name)+" ⒶⒻⓀ");
+	},
 
 	uptime: (function(){
 		function formatUptime(uptime) {

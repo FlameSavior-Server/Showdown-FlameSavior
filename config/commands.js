@@ -1611,7 +1611,7 @@ var commands = exports.commands = {
 			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=BblV6AQsd2s">Swing Life Away</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=1wYNFfgrXTI">When I\'m Gone</a><br>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=BY17Rg0ppKw">Initiation</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=i1imBcVhO0M">20 Dollar Nose Bleed</a><br></center>' +
 			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
 	},
@@ -1685,6 +1685,15 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	latios: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://cdn.idigitaltimes.com/data/images/full/2013/08/13/10916.png" width="130">' +
+    			'<img src="http://i.imgur.com/BB1bObq.gif">' +
+    			'<img src="http://fc00.deviantart.net/fs46/f/2009/195/8/2/Latios_by_aocom.jpg" width="150"><br />' +
+    			'<b>Ace:</b> Latios<br />' +
+    			'Act as if it were impossible to fail, then you are sure to succeed.</center>');
+    	},
 	
 	bariankaiser: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -2921,7 +2930,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Ijfoz4n.png?1" width="180">' +
 			'<img src="http://i.imgur.com/UQJceOG.png">' +
 			'<img src="http://i.imgur.com/uv1baKZ.png?1" width="180"><br />' +
-			'<b>Ace:</b> Arcanine<br />' +
+			'<b>Ace:</b> Failz<br />' +
 			'I\'m Pretty Shit.</center>');
 	},
 	

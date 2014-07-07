@@ -1057,7 +1057,7 @@ var commands = exports.commands = {
 	},
 	
 	afk2: function (target, room, user) {
-		return this.parse("/nick " + Tools.escapeHTML(user.name) + " ⒶⒻⓀ");
+		return this.parse("/nick " + user.name + " ⒶⒻⓀ");
 	},
 
 	uptime: (function(){

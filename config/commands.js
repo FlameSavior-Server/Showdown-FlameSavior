@@ -342,15 +342,16 @@ var commands = exports.commands = {
 
 	poke: function(target, room, user){
 		if(!target) return this.sendReply('/poke needs a target.');
-		return this.parse('/me pokes ' + target);
+		return this.parse('/me pokes ' + target + '.');
 	},
 
 	slap: function(target, room, user){
-		if(!target) return this.sendReply('/poke needs a target.');
-		return this.parse('/me slaps ' + target + ' in the face with a slipper');
+		if(!target) return this.sendReply('/slap needs a target.');
+		return this.parse('/me slaps ' + target + ' in the face with a slipper!');
 	},
 	
-	s: function(target, room, user){
+	s: 'spank',
+	spank: function(target, room, user){
 		if(!target) return this.sendReply('/spank needs a target.');
 		return this.parse('/me spanks ' + target + '!');
 	},

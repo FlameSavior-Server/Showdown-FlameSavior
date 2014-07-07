@@ -5394,7 +5394,7 @@ function MD5(f) {
     return (n(b) + n(c) + n(d) + n(e)).toLowerCase()
 };
 var colorCache = {};
-var hashColor = function (name) {
+hashColor = function (name) {
     if (colorCache[name]) return colorCache[name];
 
     var hash = MD5(name);

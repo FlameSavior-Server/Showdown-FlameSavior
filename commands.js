@@ -1640,9 +1640,9 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<b>Empoleon XV</b>:   '+comcun+'');
                 }
-                if (target === 'foe') {
+                if (target === 'foe' || target === 'Foe') {
                         matched = true;
-                        this.sendReplyBox('<b>Empoleon XV</b>:   '+vip+'');
+                        this.sendReplyBox('<b>Foe XV</b>:   '+vip+'');
                 }
                 if (target === 'typhozzz') {
                         matched = true;

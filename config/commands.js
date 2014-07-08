@@ -1155,7 +1155,7 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://i.imgur.com/NO1PFB2.png"><br />' +
                 '<img src="http://static2.wikia.nocookie.net/__cb20131130005232/bleedmancomics/images/6/66/Klefki_XY.gif"><br />' +
                 '<b><font color="red">Ace:</b> Monopoly</font><br />' +
-                '<font color="purple"> Romanticism is the expression of man\'s urge to rise above reason and common sense, just as rationalism is the expression of his urge to rise above theology and emotion. Riot\'s suck, I love noodles.</font></center>');
+                '<font color="purple"> Romanticism is the expression of man\'s urge to rise above reason and common sense, just as rationalism is the expression of his urge to rise above theology and ion. Riot\'s suck, I love noodles.</font></center>');
 	},
 	
 	hagrus: function(target, room, user) {
@@ -2739,17 +2739,18 @@ var commands = exports.commands = {
 		room.add(target);
 	},
 	
-   emoticons: 'emoticon',
-    emoticon: function (target, room, user) {
-        if (!this.canBroadcast()) return;
-        var name = Object.keys(Core.emoticons),
-            emoticons = [];
-        var len = name.length;
-        while (len--) {
-            emoticons.push((Core.processEmoticons(name[(name.length-1)-len]) + '&nbsp;' + name[(name.length-1)-len]));
-        }
-        this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
-    },
+	emotes: 'emoticon',
+	emoticons: 'emoticon',
+	emoticon: function (target, room, user) {
+        	if (!this.canBroadcast()) return;
+        	var name = Object.keys(Core.emoticons),
+            	emoticons = [];
+        	var len = name.length;
+        	while (len--) {
+            		emoticons.push((Core.processEmoticons(name[(name.length-1)-len]) + '&nbsp;' + name[(name.length-1)-len]));
+        	}
+        	this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
+    	},
 
 	/*********************************************************
 	 * Help commands

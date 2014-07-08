@@ -101,9 +101,6 @@ emoticons: {
             }
         }
         
-        var emoteBlocker = false;
-        
-        if (!emoteBlocker) {
         if (!match || message.charAt(0) === '!') return true;
         message = Tools.escapeHTML(message);
         message = this.processEmoticons(message);
@@ -121,9 +118,7 @@ emoticons: {
         	room.add('|raw|<div class="chat"><strong><font color="' + hashColor(user.userid)+'"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
         	return false;
         }
-        }
-        else return this.sendReply("Chat emotes are shut off due to abuse.");
-    },
+    },        
 };
 function MD5(f) {
     function i(b, c) {

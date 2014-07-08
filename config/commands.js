@@ -1698,6 +1698,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	klefki: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://cdn.pokestache.com/2014/3/11/e3227c8735baac428641698db777a9d3.gif" width="130">' +
+    			'<img src="http://i.imgur.com/3w6c3eD.gif" width="290">' +
+    			'<img src="http://3.bp.blogspot.com/-eK2RdRCkEVo/UAOHStsSy4I/AAAAAAAAAWU/s0au53XLW3M/s1600/yU7ak.gif" width="120"><br />' +
+    			'<b>Ace:</b> Klefki<br />' +
+    			'Many have dared to challenge the organization,but few have ever succeed.</center>');
+    	},
+	
 	illumanise: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/ObJo7Hr.png" width="100">' +
@@ -1939,10 +1948,11 @@ var commands = exports.commands = {
 	
 	bane: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/EhYWxnE.png" width="180">' +
-			'<img src="http://i.imgur.com/kzR8FsJ.gif"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/YX5NfOz.jpg" width="140">' +
+			'<img src="http://i.imgur.com/kzR8FsJ.gif">' +
+			'<img src="http://i.imgur.com/BxFA5mt.jpg" width="110"><br />' +
 			'<b>Ace:</b> Scolipede<br />' +
-			'Don\'t give up till the fight is over. Never stop BELIEVING.</center>');
+			'If I Win I Win. I never lose, only learn.</center>');
 	},
 	
 	impwrath: function(target, room, user) {

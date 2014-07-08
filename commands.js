@@ -743,7 +743,7 @@ var commands = exports.commands = {
 			this.sendReplyBox("The room description is: " + room.desc.replace(re, '<a href="$1">$1</a>'));
 			return;
 		}
-		if (!this.can('declare')) return false;
+		if (!this.can('roommod', null, room)) return false;
 		if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
 
 		room.desc = target;

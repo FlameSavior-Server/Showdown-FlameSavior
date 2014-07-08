@@ -1813,8 +1813,8 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"Like this server and what to keep it going?  If so, you can make a paypal donation to Gold!  You can choose the amount.<br />" +
-			"- For donations $5 or over, you can get: a custom avatar, a custom trainer card, a custom emote, a custom symbol, and a custom music box!<br />" +
-			"- Refere to the /shop command for a more detailed description of these prizes.<br />" +
+			"- For donations $5 or over, you can get: a custom avatar, a custom trainer card, a custom symbol, and a custom music box!<br />" +
+			"- Refere to the /shop command for a more detailed description of these prizes.  After donating, PM panpawn.<br />" +
 			"Click the button below to donate!<br />" +
 			'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" title=Donate now!">'
 			);

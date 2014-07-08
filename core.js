@@ -53,6 +53,7 @@ emoticons: {
         'o_O': 'http://i18.photobucket.com/albums/b137/mcquackers/Emoticons/Emoticon.gif',
         ':I': 'http://www.pokesun.com/images/smilies/confused.gif',
         'paN': 'http://cdn3.volusion.com/heajx.zsvpy/v/vspfiles/photos/options/swiss-induction-fry-pan-255-S.jpg?1393852768',
+        'shayMin': 'http://piq.codeus.net/static/media/userpics/piq_181515_25x25.png',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

@@ -103,6 +103,11 @@ emoticons: {
         	if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="#DA9D01"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
 		room.add('|raw|<div class="chat"><strong><font color="#DA9D01"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
         	return false;
+        } 
+        else if (user.userid === 'antto') {
+        	if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="#D18010"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
+		room.add('|raw|<div class="chat"><strong><font color="#D18010"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
+        	return false;
         } else {
         	if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="' + hashColor(user.userid)+'"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
         	room.add('|raw|<div class="chat"><strong><font color="' + hashColor(user.userid)+'"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');

@@ -1812,7 +1812,7 @@ var commands = exports.commands = {
 	donate: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
-			"Like this server and what to keep it going?  If so, you can make a paypal donation to Gold!  You can choose the amount.<br />" +
+			"<center>Like this server and what to keep it going?  If so, you can make a paypal donation to Gold!  You can choose the amount.<br />" +
 			"- For donations $5 or over, you can get: a custom avatar, a custom trainer card, a custom symbol, and a custom music box!<br />" +
 			"- Refere to the /shop command for a more detailed description of these prizes.  After donating, PM panpawn.<br />" +
 			"Click the button below to donate!<br />" +

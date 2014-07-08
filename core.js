@@ -52,6 +52,7 @@ emoticons: {
         ':X': 'http://freeemoticonsandsmileys.com/emoticons/Icq%20Emoticons/don\'t%20tell%20anyone.png',
         'o_O': 'http://i18.photobucket.com/albums/b137/mcquackers/Emoticons/Emoticon.gif',
         ':I': 'http://www.pokesun.com/images/smilies/confused.gif',
+        'paN': 'http://cdn3.volusion.com/heajx.zsvpy/v/vspfiles/photos/options/swiss-induction-fry-pan-255-S.jpg?1393852768',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

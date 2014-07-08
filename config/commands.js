@@ -1698,6 +1698,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	tnv: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/BsLiFTz.gif" width="100">' +
+    			'<img src="http://i.imgur.com/DIRsxib.gif" width="340">' +
+    			'<img src="http://i.imgur.com/0kKDZQL.gif" width="100"><br />' +
+    			'<b><font color="#52CC52">Ace:</b> Anything that puts chills down my opponents\'s spine!</font><br />' +
+    			'<font color="white">Git Gud</font><br />' +
+			'<button name="send" value="/transferbucks The Neo Void, 1" target="_blank">Charity isn\'t measured by how much you give, but how little you have and still giving.</button></center>');
+    	},
+	
 	klefki: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://cdn.pokestache.com/2014/3/11/e3227c8735baac428641698db777a9d3.gif" width="130">' +

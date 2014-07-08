@@ -1815,9 +1815,11 @@ var commands = exports.commands = {
 		this.sendReplyBox(
 			"<center>Like this server and what to keep it going?  If so, you can make a paypal donation to Gold!  You can choose the amount.<br />" +
 			'<hr width="85%">' +
-			"- For donations $5 or over, you can get: a custom avatar, a custom trainer card, a custom symbol, and a custom music box!<br />" +
+			"- Donations will help Gold to upgrade the VPS so we can do more and hold more users!<br />" +
+			"- For donations <b>$5 or over</b>, you can get: a custom avatar, a custom trainer card, a custom symbol, and a custom music box!<br />" +
+			"- For donations <b>$10 and over</b>, it will get you: (the above) and VIP status along with a VIP badge!<br />" +
 			"- Refer to the /shop command for a more detailed description of these prizes.  After donating, PM panpawn.<br />" +
-			'<hr width="85%"' +
+			'<hr width="85%">' +
 			"Click the button below to donate!<br />" +
 			'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" title=Donate now!">'
 			);

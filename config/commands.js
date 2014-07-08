@@ -2757,7 +2757,7 @@ var commands = exports.commands = {
 		// secret sysop command
 		room.add(target);
 	},
-	
+	/*/
 	emotes: 'emoticon',
 	emoticons: 'emoticon',
 	emoticon: function (target, room, user) {
@@ -2770,7 +2770,8 @@ var commands = exports.commands = {
         	}
         	this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
     	},
-
+	*/
+	
 	/*********************************************************
 	 * Help commands
 	 *********************************************************/

@@ -205,10 +205,11 @@ var commands = exports.commands = {
 			var ips = Object.keys(targetUser.ips);
 			this.sendReply("IP" + ((ips.length > 1) ? "s" : "") + ": " + ips.join(", "));
 		}
-		if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || targetUser.canBadge || targetUser.canPOTD || targetUser.canForcerename || targetUser.canMusicBox) {
+		if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || targetUser.canBadge || targetUser.canPOTD || targetUser.canForcerename || targetUser.canMusicBox || targetUser.canCustomEmote) {
 			var i = '';
 			if (targetUser.canCustomSymbol) i += ' Custom Symbol';
 			if (targetUser.canCustomAvatar) i += ' Custom Avatar';
+			if (targetUser.canCustomEmote) i += ' Custom Emote'
 			if (targetUser.canAnimatedAvatar) i += ' Animated Avatar';
 			if (targetUser.canChatRoom) i += ' Chat Room';
 			if (targetUser.canTrainerCard) i += ' Trainer Card';

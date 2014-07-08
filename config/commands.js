@@ -1700,7 +1700,7 @@ var commands = exports.commands = {
 	illumanise: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/ObJo7Hr.png" width="100">' +
-    			'<img src="http://i.imgur.com/1Oa3z9T.png" width="330">' +
+    			'<img src="http://i.imgur.com/1Oa3z9T.png" width="320">' +
     			'<img src="http://i.imgur.com/1S0trTw.jpg" width="120"><br />' +
     			'<b>Ace:</b> Kammi<br />' +
     			'I &lt;3 HB</center>');

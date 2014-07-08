@@ -40,8 +40,15 @@ emoticons: {
         'BibleThump': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-f6c13c7fc0a5c93d-36x30.png',
         'feelsgd': 'http://i.imgur.com/9gj1oPV.png',
         'feelsbd': 'http://i.imgur.com/Ehfkalz.gif',
+        
+        //Custom ones
         'Doge': 'http://piq.codeus.net/static/media/userpics/piq_155181_25x25.png',
         'Whaaale': 'http://i.imgur.com/awFIfj1.gif',
+        'snaiL': 'http://fc01.deviantart.net/fs70/f/2010/314/4/5/snail_by_brave_bom-d32lj5x.gif',
+        'FrY': 'http://fc06.deviantart.net/fs13/f/2007/096/c/d/iseewhatyoudidthere_by_fadedfutures.gif',
+        'Moogle': 'http://i1083.photobucket.com/albums/j387/Nishi9261/Memoteangry.png',
+        //End custom ones
+        
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',
         'crtSSoH': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3228-src-d4b613767d7259c4-28x28.png',
         'SSSsss': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-5d019b356bd38360-24x24.png',

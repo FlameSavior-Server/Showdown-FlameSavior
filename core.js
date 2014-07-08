@@ -47,7 +47,7 @@ emoticons: {
         'snaiL': 'http://fc01.deviantart.net/fs70/f/2010/314/4/5/snail_by_brave_bom-d32lj5x.gif',
         'FrY': 'http://fc06.deviantart.net/fs13/f/2007/096/c/d/iseewhatyoudidthere_by_fadedfutures.gif',
         'Moogle': 'http://i1083.photobucket.com/albums/j387/Nishi9261/Memoteangry.png',
-        'Starr': 'http://pizzarecipes101.com/image/bookmarks/bookmark.gif',
+        'Starrr': 'http://pizzarecipes101.com/image/bookmarks/bookmark.gif',
         'sheeT': 'https://lh5.googleusercontent.com/-is1zLiGyM8s/TzOfCuMbApI/AAAAAAAAKSo/r7U1kVWgpJk/s25/toilet.jpg',
         ':X': 'http://freeemoticonsandsmileys.com/emoticons/Icq%20Emoticons/don\'t%20tell%20anyone.png',
         'o_O': 'http://i18.photobucket.com/albums/b137/mcquackers/Emoticons/Emoticon.gif',

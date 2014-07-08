@@ -55,6 +55,8 @@ emoticons: {
         'paN': 'http://cdn3.volusion.com/heajx.zsvpy/v/vspfiles/photos/options/swiss-induction-fry-pan-255-S.jpg?1393852768',
         'shayMin': 'http://piq.codeus.net/static/media/userpics/piq_181515_25x25.png',
         'kiTTy': 'http://www.smileyarena.com/emoticons/Main/Cats/cat03.jpg',
+        'wyNaut': 'http://i.imgur.com/UO1Wf2j.png',
+        
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

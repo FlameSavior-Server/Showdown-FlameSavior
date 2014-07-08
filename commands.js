@@ -4371,6 +4371,9 @@ var commands = exports.commands = {
                 		
                 		CommandParser.uncacheTree('./tour.js');
                 		global.tour = require('./tour.js').tour(tour);
+                		
+                		CommandParser.uncacheTree('./core.js'); 
+                		Core = require('./core.js').core;
 
 				return this.sendReply("Chat commands have been hot-patched.");
 			} catch (e) {

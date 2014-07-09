@@ -1102,7 +1102,7 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
-	kricketune: function(target, room, user) {
+	sexykricketune: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/VPcZ1rC.png"><br />' +
                 '<img src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpa1/v/t34.0-12/10537833_1479515712290994_1126670309_n.jpg?oh=52eb7d293765697c3c9e0a6ee235dd7d&oe=53BD3B02&__gda__=1404931411_57a9e1bbf14ec5949be27acfae62bf5f" width="500"><br />' +

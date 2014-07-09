@@ -4648,7 +4648,7 @@ var commands = exports.commands = {
 	us: 'updateserver',
 	gitpull: 'updateserver',
 	updateserver: function(target, room, user, connection) {
-		if (!user.hasConsoleAccess(connection) || !user.userid === 'tailz') {
+		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/updateserver - Access denied.");
 		}
 

@@ -1968,7 +1968,7 @@ var commands = exports.commands = {
 	bane: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/YX5NfOz.jpg" width="140">' +
-			'<img src="http://i.imgur.com/kzR8FsJ.gif">' +
+			'<img src="http://i.imgur.com/jxIUJZt.png" width="280">' +
 			'<img src="http://i.imgur.com/BxFA5mt.jpg" width="110"><br />' +
 			'<b>Ace:</b> Blue Beast<br />' +
 			'If I Win I Win. I never lose, only learn.</center>');

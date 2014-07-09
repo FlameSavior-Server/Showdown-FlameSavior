@@ -38,8 +38,8 @@ emoticons: {
         'PogChamp': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-60aa1af305e32d49-23x30.png',
         'BloodTrail': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-f124d3a96eff228a-41x28.png',
         'BibleThump': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-f6c13c7fc0a5c93d-36x30.png',
-        'feelsgd': 'http://i.imgur.com/9gj1oPV.png',
-        'feelsbd': 'http://i.imgur.com/Ehfkalz.gif',
+        'feelsgd': 'http://i.imgur.com/qQswXLN.png',
+        'feelsbd': 'http://i.imgur.com/5LHzn78.png',
         
         //Custom ones
         'Doge': 'http://piq.codeus.net/static/media/userpics/piq_155181_25x25.png',

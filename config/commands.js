@@ -2109,12 +2109,11 @@ var commands = exports.commands = {
 	
 	voltaic: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/ampharos-mega.gif">' +
-			'<img src="http://i.imgur.com/L34mXCM.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/ampharos-mega.gif"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/FEEZ0vf.gif">' +
+			'<img src="http://i.imgur.com/nZhy15g.jpg">' +
 			'<img src="http://i.imgur.com/RHnllzf.gif" height="130"><br />' +
-			'<b>Ace:</b> Mega Ampharos<br />' +
-			'Jack of all trades, Master of none. You\'re still predicting? I\'ve already won.</center>');
+			'<b>Type:</b> <font color="#C3C3C3">Electric</font><br />' +
+			'Please explain why your silence makes more noise than thunder.</center>');
 	},
 	
 	happy: function(target, room, user) {

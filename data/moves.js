@@ -1558,7 +1558,7 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "No in-game effect.",
+		desc: "The Pokémon congratulates you on your special day!",
 		shortDesc: "No in-game effect.",
 		id: "celebrate",
 		name: "Celebrate",
@@ -1887,26 +1887,16 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "The user's type changes to match the original type of one of its four moves besides this move, at random, but not either of its current types. Fails if the user cannot change its type, or if this move would only be able to select one of the user's current types.",
-		shortDesc: "Changes user's type to match a known move.",
+		desc: "The user's type changes to match the original type of the move in its first move slot. Fails if the user cannot change its type, or if this move is one of the user's current types.",
+		shortDesc: "Changes user's type to match its first move.",
 		id: "conversion",
 		name: "Conversion",
 		pp: 30,
 		priority: 0,
 		isSnatchable: true,
 		onHit: function (target) {
-			var possibleTypes = target.moveset.map(function (val){
-				var move = this.getMove(val.id);
-				if (move.id !== 'conversion' && !target.hasType(move.type)) {
-					return move.type;
-				}
-			}, this).compact();
-			if (!possibleTypes.length) {
-				return false;
-			}
-			var type = possibleTypes[this.random(possibleTypes.length)];
-
-			if (!target.setType(type)) return false;
+			var type = this.getMove(target.moveset[0].id).type;
+			if (target.hasType(type) || !target.setType(type)) return false;
 			this.add('-start', target, 'typechange', type);
 		},
 		secondary: false,
@@ -6317,6 +6307,24 @@ exports.BattleMovedex = {
 		noFaint: true,
 		secondary: false,
 		target: "normal",
+		type: "Normal"
+	},
+	"holdhands": {
+		num: 615,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "Ally Pokémon hold hands. This makes them very happy.",
+		shortDesc: "No in-game effect.",
+		id: "holdhands",
+		name: "Hold Hands",
+		pp: 40,
+		priority: 0,
+		onTryHit: function (target, source) {
+			return null;
+		},
+		secondary: false,
+		target: "adjacentAlly",
 		type: "Normal"
 	},
 	"honeclaws": {
@@ -13135,7 +13143,7 @@ exports.BattleMovedex = {
 		isContact: true,
 		onTryHit: function (target) {
 			var decision = this.willMove(target);
-			if (!decision || decision.choice !== 'move' || (decision.move.category === 'Status' && decision.move.id !== 'mefirst')) {
+			if (!decision || decision.choice !== 'move' || (decision.move.category === 'Status' && decision.move.id !== 'mefirst') || target.volatiles.mustrecharge) {
 				return false;
 			}
 		},

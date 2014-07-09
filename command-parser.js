@@ -20,7 +20,7 @@ To reload chat commands:
 
 /hotpatch chat
 
-*/c
+*/
 
 const MAX_MESSAGE_LENGTH = 300;
 

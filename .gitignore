@@ -3,6 +3,8 @@
 /node_modules
 npm-debug.log
 /config/bannedwords.txt
+frost-commands.js
+economy.js
 
 # boilerplate #
 ###############

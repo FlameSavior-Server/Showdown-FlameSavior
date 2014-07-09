@@ -1698,6 +1698,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	jeli: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src=http://i.imgur.com/iRbumTr.jpg>' +
+			'<img src=http://i.imgur.com/kQbWDUE.png>' +
+			'<img height=150 src=https://cookingplanit.com/public/uploads/inventory/bratwurst_1338322491.jpg><br />' +
+			'<b> Ace:</b> The taste of our cookies and sausage<br />' +
+			'You jeli, bro?</center>');
+	},
+
 	tnv: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/BsLiFTz.gif" width="100">' +

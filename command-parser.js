@@ -20,7 +20,7 @@ To reload chat commands:
 
 /hotpatch chat
 
-*/
+*/c
 
 const MAX_MESSAGE_LENGTH = 300;
 
@@ -314,7 +314,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		}
 	}
 
-	//if (!Core.processChatData(user, room, connection, message)) return false;
+	if (!Core.processChatData(user, room, connection, message)) return false;
 	 
 	return message;
 };

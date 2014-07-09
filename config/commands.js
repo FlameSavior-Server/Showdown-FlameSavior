@@ -4056,11 +4056,11 @@ var commands = exports.commands = {
 
 	tesla: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados/lanturn.gif>' +
-			'<img src=http://i.imgur.com/7HIXTxC.gif>' +
-			'<img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados/zapdos.gif><br />' +
-			'Ace: <font color="green">The Green Lanturn</font><br />' +
-			'<font color=#CC9900>Edison failed 10,000 times before he made the electric light. <br />Do not be discouraged if you fail a few times.</font></center>');
+		this.sendReplyBox('<center><img src="http://oi57.tinypic.com/t54ow6.jpg" width="120">' +
+			'<img src="http://oi60.tinypic.com/2898nc0.jpg" width="300">' +
+			'<img src="http://oi62.tinypic.com/zkiqyw.jpg" width="120"><br />' +
+			'Type: <font color="CCCC00">Electric</font><br />' +
+			'If you believe in your dreams, I will prove to you, that you can achieve your dreams just by working hard.</center>');
 	},
 
 	nocilol: function(target, room, user) {

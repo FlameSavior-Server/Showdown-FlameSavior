@@ -286,6 +286,21 @@ exports.Formats = [
 		ruleset: ['Team Preview']
 	},
 
+	// XY Triples
+	///////////////////////////////////////////////////////////////////
+
+	{
+		name: "Triples Custom Game",
+		section: "XY Triples",
+
+		gameType: 'triples',
+		searchShow: false,
+		maxLevel: 9999,
+		defaultLevel: 100,
+		debug: true,
+		ruleset: ['Team Preview']
+	},
+
 	// Other Metagames
 	///////////////////////////////////////////////////////////////////
 
@@ -294,7 +309,7 @@ exports.Formats = [
 		section: "OM of the Month",
 
 		ruleset: ['OU'],
-		banlist: ['Clefable', 'Kingdra', 'Abomasite', 'Mawilite', 'Medichamite', 'Huge Power', 'Pure Power'],
+		banlist: ['Clefable', 'Kingdra', 'Venomoth', 'Abomasite', 'Mawilite', 'Medichamite', 'Huge Power', 'Pure Power'],
 		validateSet: function (set) {
 			var template = this.getTemplate(set.species || set.name);
 			for (var stat in template.baseStats) {

@@ -1687,6 +1687,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	inwhale: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/bwani/scizor-mega.gif">' +
+    			'<img src="http://i.imgur.com/34vV7nU.png" width="350">' +
+    			'<img src="http://play.pokemonshowdown.com/sprites/bwani-shiny/volcarona.gif"><br />' +
+    			'<b>Ace:</b> Scizor<br />' +
+    			'A pestilence upon you, nerds!</center>');
+    	},
+	
 	jeli: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src=http://i.imgur.com/iRbumTr.jpg>' +

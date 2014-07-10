@@ -1707,9 +1707,9 @@ var commands = exports.commands = {
 
 	tnv: function(target, room, user) {
     		if (!this.canBroadcast()) return;
-    		this.sendReplyBox('<center><img src="http://i.imgur.com/BsLiFTz.gif" width="100">' +
+    		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados.gif">' +
     			'<img src="http://i.imgur.com/DIRsxib.gif" width="340">' +
-    			'<img src="http://i.imgur.com/0kKDZQL.gif" width="100"><br />' +
+    			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/banette-mega.gif"><br />' +
     			'<b><font color="#52CC52">Ace:</b> Anything that puts chills down my opponents\'s spine!</font><br />' +
     			'<font color="white">Git Gud</font><br />' +
 			'<button name="send" value="/transferbucks The Neo Void, 1" target="_blank">Charity isn\'t measured by how much you give, but how little you have and still giving.</button></center>');
@@ -1885,7 +1885,7 @@ var commands = exports.commands = {
 	lapras: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/30zBvPA.png" width="120">' +
-			'<img src="http://i.imgur.com/W8NDuBv.png" width="300">' +
+			'<img src="http://i.gyazo.com/a2fcd18f88cee0464e3610eeea91f1ee.png" width="300">' +
 			'<img src="http://i.imgur.com/OUFJyu7.jpg" width="120"><br />' +
 			'<b>Ace:</b> What ever the F*#@ I want<br />' +
 			' Never back down and Never give up!</center>');

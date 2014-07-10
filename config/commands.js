@@ -3940,6 +3940,11 @@ var commands = exports.commands = {
 
 	jd: function(target, room, user) {
 		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.snag.gy/QWGOz.jpg"><br /><font size=3><i><font color=blue><b>JD</b></font></i></font><br /><b><blink>Ace: Sexual Tension</blink></b><br />');
+	},
+
+	jd2: function(target, room, user) {
+		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img width=100% height=260 src="http://i.imgur.com/6gkSSam.jpg">');
 	},
 

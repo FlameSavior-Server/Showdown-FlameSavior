@@ -1591,6 +1591,15 @@ var commands = exports.commands = {
     	
     			//Music Boxes
     	
+    	silverbox: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Silver\'s Music Box!</b><br />' +
+                '1. <a href="https://www.youtube.com/watch?v=GEEYhzaeNus"><button>Union J - Carry You</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=cmSbXsFE3l8"><button>Anna Kendrick - Cups</a></button><br />' +
+		'3. <a href="https://www.youtube.com/watch?v=iKaSbac2roQ"><button>Vacation - Vitamin C</a></button><br />' +
+		'4. <a href="https://www.youtube.com/watch?v=LiaYDPRedWQ"><button>Avril Lavigne - Hello Kitty</a></button><br />');
+	},
+    	
     	sandbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Sandshrewed\'s Music Box!</b><br />' +

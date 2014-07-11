@@ -1687,6 +1687,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	ciaran: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/bogEbbB.jpg width="120">' +
+    			'<img src="http://i.imgur.com/ComsY8I.gif" width="320">' +
+    			'<img src="http://i.imgur.com/SFOqjKU.jpg" width="110"><br />' +
+    			'<b><font color="red">Ace:</b> Any and all lolis</font><br />' +
+    			'It seems that my penis got bit by a snake, mind if I use your mouth as an antidote?</center>');
+    	},
+	
 	hailz: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/6yYefUg.png" width="190">' +

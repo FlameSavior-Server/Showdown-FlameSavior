@@ -235,17 +235,17 @@ var commands = exports.commands = {
 		if(!target){
 			this.sendReplyBox('<center><b>Your name\'s hexcode is:<font color="'+hashColor(''+toId(user.name)+'')+'"> '+hashColor(''+toId(user.name)+''));
 			return;
-		};
+		}
 		if(target.indexOf('#') < 0){
 			this.sendReplyBox('Please include the \'#\' symbol');
 			return false;
-		};
+		}
 		var verify = /^#[0-9A-F]{6}$/i;
 		if(verify.test(target)){
 			this.sendReplyBox('<center><b><font size="5" color="' + target + '">' + target + '</font></b></center>');
 		}else{
 			this.sendReplyBox('Could not find a valid color to match your hex code');
-		};
+		}
 	},
 	
 	poof: 'd',

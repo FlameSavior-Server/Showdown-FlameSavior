@@ -1591,7 +1591,7 @@ var commands = exports.commands = {
     	
     			//Music Boxes
     	
-    	silverbox: function(target, room, user) {
+    	silrbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Silver\'s Music Box!</b><br />' +
                 '1. <a href="https://www.youtube.com/watch?v=GEEYhzaeNus"><button>Union J - Carry You</a></button><br />' +

@@ -1689,8 +1689,8 @@ var commands = exports.commands = {
 	
 	ciaran: function(target, room, user) {
     		if (!this.canBroadcast()) return;
-    		this.sendReplyBox('<center><img src="http://i.imgur.com/bogEbbB.jpg" width="120">' +
-    			'<img src="http://i.imgur.com/ComsY8I.gif" width="320">' +
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/bogEbbB.jpg" width="130">' +
+    			'<img src="http://i.imgur.com/ComsY8I.gif" width="300">' +
     			'<img src="http://i.imgur.com/SFOqjKU.jpg" width="110"><br />' +
     			'<b><font color="red">Ace:</b> Any and all lolis</font><br />' +
     			'It seems that my penis got bit by a snake, mind if I use your mouth as an antidote?</center>');

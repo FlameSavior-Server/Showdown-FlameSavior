@@ -1689,7 +1689,7 @@ var commands = exports.commands = {
 	
 	ciaran: function(target, room, user) {
     		if (!this.canBroadcast()) return;
-    		this.sendReplyBox('<center><img src="http://i.imgur.com/bogEbbB.jpg width="120">' +
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/bogEbbB.jpg" width="120">' +
     			'<img src="http://i.imgur.com/ComsY8I.gif" width="320">' +
     			'<img src="http://i.imgur.com/SFOqjKU.jpg" width="110"><br />' +
     			'<b><font color="red">Ace:</b> Any and all lolis</font><br />' +

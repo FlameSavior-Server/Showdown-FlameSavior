@@ -1687,6 +1687,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	hailz: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/6yYefUg.png" width="190">' +
+    			'<img src="http://i.imgur.com/V3OTef3.png">' +
+    			'<img src="http://i.imgur.com/cw1vy36.jpg" width="160"><br />' +
+    			'<b>Ace:</b> Medical Science<br />' +
+    			'You want to kiss me, don\'t you? I always want to kiss you</center>');
+    	},
+	
 	inwhale: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/bwani/scizor-mega.gif">' +
@@ -2119,9 +2128,9 @@ var commands = exports.commands = {
 	voltaic: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/FEEZ0vf.gif">' +
-			'<img src="http://i.imgur.com/nZhy15g.jpg">' +
-			'<img src="http://i.imgur.com/RHnllzf.gif" height="130"><br />' +
-			'<b>Type:</b> <font color="#C3C3C3">Electric</font><br />' +
+			'<img src="http://i.imgur.com/MvsfTwg.gif">' +
+			'<img src="http://i.imgur.com/Zx8UR5m.gif" width="120">' +
+			'<b>Type:</b> <font color="#FDD315">Electric</font><br />' +
 			'Please explain why your silence makes more noise than thunder.</center>');
 	},
 	

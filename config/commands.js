@@ -2129,7 +2129,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/FEEZ0vf.gif">' +
 			'<img src="http://i.imgur.com/MvsfTwg.gif">' +
-			'<img src="http://i.imgur.com/Zx8UR5m.gif" width="120">' +
+			'<img src="http://i.imgur.com/Zx8UR5m.gif" width="120"><br />' +
 			'<b>Type:</b> <font color="#FDD315">Electric</font><br />' +
 			'Please explain why your silence makes more noise than thunder.</center>');
 	},

@@ -41,21 +41,12 @@ exports.Formats = [
 		section: "XY Singles",
 
 		ruleset: ['OU'],
-		banlist: ['OU', 'BL', 'Heracronite', 'Medichamite', 'Gardevoirite', 'Drizzle', 'Drought', 'Alakazite']
+		banlist: ['OU', 'BL', 'Alakazite', 'Heracronite', 'Gardevoirite', 'Medichamite', 'Drizzle', 'Drought', 'Shadow Tag']
 	},
 	{
 		name: "RU",
 		section: "XY Singles",
 
-		searchShow: false,
-		ruleset: ['UU'],
-		banlist: ['UU', 'BL2']
-	},
-	{
-		name: "RU (suspect test)",
-		section: "XY Singles",
-
-		challengeShow: false,
 		ruleset: ['UU'],
 		banlist: ['UU', 'BL2']
 	},
@@ -70,6 +61,16 @@ exports.Formats = [
 		name: "LC",
 		section: "XY Singles",
 
+		searchShow: false,
+		maxLevel: 5,
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
+		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar']
+	},
+	{
+		name: "LC (suspect test)",
+		section: "XY Singles",
+
+		challengeShow: false,
 		maxLevel: 5,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
 		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar']
@@ -103,7 +104,7 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview GBU'],
 		banlist: [], // The neccessary bans are in Standard GBU
 		validateTeam: function (team, format) {
-			if (team.length < 3) return ['You must bring at least 3 Pokemon.'];
+			if (team.length < 3) return ['You must bring at least three Pokémon.'];
 		}
 	},
 	{
@@ -122,7 +123,7 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview GBU'],
 		banlist: [], // The neccessary bans are in Standard GBU
 		validateTeam: function (team, format) {
-			if (team.length < 3) return ['You must bring at least 3 Pokemon.'];
+			if (team.length < 3) return ['You must bring at least three Pokémon.'];
 		}
 	},
 	/*{
@@ -206,7 +207,7 @@ exports.Formats = [
 		maxForcedLevel: 50,
 		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview VGC'],
 		validateTeam: function (team, format) {
-			if (team.length < 4) return ['You must bring at least 4 Pokémon.'];
+			if (team.length < 4) return ['You must bring at least four Pokémon.'];
 		}
 	},
 	{
@@ -226,7 +227,7 @@ exports.Formats = [
 		requirePentagon: true,
 		banlist: [], // The neccessary bans are in Standard GBU
 		validateTeam: function (team, format) {
-			if (team.length < 4) return ['You must bring at least 4 Pokémon.'];
+			if (team.length < 4) return ['You must bring at least four Pokémon.'];
 		}
 	},
 	{
@@ -245,7 +246,7 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'Species Clause', 'Item Clause', 'Team Preview VGC'],
 		banlist: ['Unreleased', 'Illegal'],
 		validateTeam: function (team, format) {
-			if (team.length < 4) return ['You must bring at least 4 Pokémon.'];
+			if (team.length < 4) return ['You must bring at least four Pokémon.'];
 			var legends = {Mewtwo:1, Mew:1, Lugia:1, 'Ho-Oh':1, Kyogre:1, Groudon:1, Rayquaza:1, Jirachi:1, Deoxys:1, Dialga:1, Palkia:1, Giratina:1, Phione:1, Manaphy:1, Darkrai:1, Shaymin:1, Arceus:1, Victini:1, Reshiram:1, Zekrom:1, Kyurem:1, Keldeo:1, Meloetta:1, Genesect:1, Xerneas:1, Yveltal:1, Zygarde:1};
 			var legendCount = 0;
 			for (var i = 0; i < team.length; i++) {
@@ -283,6 +284,7 @@ exports.Formats = [
 		maxLevel: 9999,
 		defaultLevel: 100,
 		debug: true,
+		// no restrictions, for serious (other than team preview)
 		ruleset: ['Team Preview']
 	},
 
@@ -290,14 +292,37 @@ exports.Formats = [
 	///////////////////////////////////////////////////////////////////
 
 	{
-		name: "Triples Custom Game",
-		section: "XY Triples",
+		name: "XY Battle Spot Triples",
+		section: "XY Triples (beta)",
 
 		gameType: 'triples',
 		searchShow: false,
+		maxForcedLevel: 50,
+		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview VGC'],
+		validateTeam: function (team, format) {
+			if (team.length < 6) return ['You must bring six Pokémon.'];
+		}
+	},
+	{
+		name: "Triples Challenge Cup",
+		section: 'XY Triples (beta)',
+
+		gameType: 'triples',
+		team: 'randomCC',
+		searchShow: false,
+		ruleset: ['Pokemon', 'HP Percentage Mod']
+	},
+	{
+		name: "Triples Custom Game",
+		section: "XY Triples (beta)",
+
+		gameType: 'triples',
+		searchShow: false,
+		canUseRandomTeam: true,
 		maxLevel: 9999,
 		defaultLevel: 100,
 		debug: true,
+		// no restrictions, for serious (other than team preview)
 		ruleset: ['Team Preview']
 	},
 
@@ -307,6 +332,7 @@ exports.Formats = [
 	{
 		name: "Mediocremons",
 		section: "OM of the Month",
+		column: 2,
 
 		ruleset: ['OU'],
 		banlist: ['Clefable', 'Kingdra', 'Venomoth', 'Abomasite', 'Mawilite', 'Medichamite', 'Huge Power', 'Pure Power'],
@@ -328,6 +354,7 @@ exports.Formats = [
 	{
 		name: "CAP",
 		section: "Other Metagames",
+		column: 2,
 
 		ruleset: ['CAP Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
 		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite']
@@ -481,18 +508,6 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'HP Percentage Mod']
 	},
 	{
-		name: "Ability Shift",
-		section: "Other Metagames",
-
-		mod: 'abilityshift',
-		searchShow: false,
-		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
-		banlist: ['Ampharosite', 'Gyaradosite',
-			'Arceus', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kyurem-White',
-			'Lugia', 'Meloetta', 'Mewtwo', 'Palkia', 'Rayquaza', 'Regigigas', 'Reshiram', 'Slaking', 'Xerneas', 'Zekrom'
-		]
-	},
-	{
 		name: "Alphabet Cup",
 		section: "Other Metagames",
 
@@ -618,7 +633,7 @@ exports.Formats = [
 	{
 		name: "[Gen 5] OU",
 		section: "BW2 Singles",
-		column: 2,
+		column: 3,
 
 		mod: 'gen5',
 		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
@@ -756,7 +771,7 @@ exports.Formats = [
 	{
 		name: "[Gen 5] Smogon Doubles",
 		section: 'BW2 Doubles',
-		column: 2,
+		column: 3,
 
 		mod: 'gen5',
 		gameType: 'doubles',
@@ -919,7 +934,7 @@ exports.Formats = [
 	{
 		name: "[Gen 4] OU",
 		section: "Past Generations",
-		column: 2,
+		column: 3,
 
 		mod: 'gen4',
 		ruleset: ['Pokemon', 'Standard'],
@@ -956,8 +971,12 @@ exports.Formats = [
 
 		mod: 'gen4',
 		searchShow: false,
+		canUseRandomTeam: true,
 		debug: true,
-		ruleset: ['Pokemon', 'HP Percentage Mod']
+		maxLevel: 9999,
+		defaultLevel: 100,
+		// no restrictions
+		ruleset: []
 	},
 	{
 		name: "[Gen 3] OU (beta)",

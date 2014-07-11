@@ -4076,9 +4076,9 @@ var commands = exports.commands = {
 
 	tesla: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://oi57.tinypic.com/t54ow6.jpg" width="120">' +
-			'<img src="http://oi60.tinypic.com/2898nc0.jpg" width="300">' +
-			'<img src="http://oi62.tinypic.com/zkiqyw.jpg" width="120"><br />' +
+		this.sendReplyBox('<center><img src="http://oi57.tinypic.com/t54ow6.jpg" width="140">' +
+			'<img src="http://oi60.tinypic.com/2898nc0.jpg" width="260">' +
+			'<img src="http://oi62.tinypic.com/zkiqyw.jpg" width="140"><br />' +
 			'Type: <font color="CCCC00">Electric</font><br />' +
 			'If you believe in your dreams, I will prove to you, that you can achieve your dreams just by working hard.</center>');
 	},

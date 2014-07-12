@@ -247,6 +247,10 @@ var Tournament = (function () {
 		user.sendTo(this.room, '|tournament|update|{"isJoined":true}');
 		this.isBracketInvalidated = true;
 		this.update();
+		if (!this.maxUserCount) this.maxUserCount = Infinity;
+		if (this.generator.getUsers().length >= this.maxUserCount) {
+			this.startTournament(this);
+		}
 	};
 	Tournament.prototype.removeUser = function (user, output) {
 		if (!this.room.delayJoinedUsers) this.room.delayJoinedUsers = new Array();
@@ -848,6 +852,13 @@ var commands = {
 			deleteTournament(tournament.room.title, this);
 			this.logModCommand(user.name+' ended the tournament.');
 		},
+		size: function(tournament, user, params, cmd) {
+			if (params.length < 1) return this.sendReply("Usage: " + cmd + " <size>");
+			if (isNaN(params[0])) return this.sendReply("Please enter a number no less than 3.");
+			if (params[0] < 3) return this.sendReply("You may not limit a tournament to less than 3 players.");
+			tournament.maxUserCount = params[0];
+			return this.addModCommand(user.name + ' set the tournament player limit to '+params[0]+'.');
+		},
 		remind: function (tournament, user) {
 			var users = tournament.generator.getAvailableMatches().toString().split(',');
 			var offlineUsers = new Array();
@@ -959,6 +970,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 			"/tour autodq/setautodq &lt;minutes|off>: Sets the automatic disqualification timeout.<br />" +
 			"/tour runautodq: Manually run the automatic disqualifier.<br />" +
 			"/tour getusers: Lists the users in the current tournament.<br />" +
+			"/tour size &lt;size>: Sets the maximum number of players allowed in the tournament.<br />" +
 			"More detailed help can be found <a href=\"https://gist.github.com/kotarou3/7872574\">here</a>"
 		);
 	} else if (cmd === 'create' || cmd === 'new') {

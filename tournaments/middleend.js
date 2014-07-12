@@ -730,6 +730,7 @@ var Tournament = (function () {
 			var secondMoney = Math.round(firstMoney/2);
 			var firstBuck = 'buck';
 			var secondBuck = 'buck';
+			var self = this;
 
 			if (firstMoney > 1) firstBuck = 'bucks';
 			if (secondMoney > 1) secondBuck = 'bucks';

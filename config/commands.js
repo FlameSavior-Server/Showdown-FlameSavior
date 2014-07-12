@@ -1739,7 +1739,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/NjTTPWo.png" width="350">' +
     			'<img src="http://i.imgur.com/fPaOhi2.jpg" width="100"><br />' +
     			'<b>Ace:</b> Vaporeon<br />' +
-    			'font size=10> <font color=salmon> :^)</center>');
+    			'<font size=10> <font color=salmon> :^)</center>');
     	},
 	
 	cfrios: function(target, room, user) {

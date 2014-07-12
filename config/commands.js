@@ -1487,6 +1487,17 @@ var commands = exports.commands = {
                 	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     	},
 	
+	hopebox4: function(target, room, user) {
+        	if (!this.canBroadcast()) return;
+        	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+                	'<center><h1><font color="darkorange"><u>Hope\'s Kingdom Hearts Box</u></color></h1></center>' +
+                	'<center><b><a href="https://www.youtube.com/watch?v=LoZabebGiDo">Enter the Darkness</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=wTLXGqkD4Zc">Forze Del Male</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=JyaWwq4CfTk">Lord of the Castle</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=YtAFN2LFBpQ">L\'Impeto Oscuro</a><br /></center>' +
+                	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    	},
+	
 	highbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

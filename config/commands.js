@@ -1267,7 +1267,7 @@ var commands = exports.commands = {
 	sandshrewed: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/M5vKJeP.png" width="100%"><br />' +
-        	'<img src="http://i.imgur.com/AMkFFwe.jpg" width="30%"><br />' +
+        	'<img src="http://i.imgur.com/lgNPrpK.png"><br />' +
                 'Ace: Gengar<br />' +
                 '<font color=66CCFF>Don\'t need luck, got skill</font></center>');
 	},
@@ -1604,10 +1604,10 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Sandshrewed\'s Music Box!</b><br />' +
                 '1. <a href="https://www.youtube.com/watch?v=vN0I4b5YdOc"><button title="RAP Done It All - Iniquity Rhymes">RAP Done It All - Iniquity Rhymes</a></button><br />' +
-                '2. <a href="https://www.youtube.com/watch?v=JHBnadmTReg"><button title="T.I. ft. Young Thug - About The Money">T.I. ft. Young Thug - About The Money</a></button><br />' +
+                '2. <a href="https://www.youtube.com/watch?v=n3QmHNd0HWo"><button title="Metal Gear Rising: Revengeance ~ The Only Thing I Know For Real">Metal Gear Rising: Revengeance ~ The Only Thing I Know For Real</a></button><br />' +
 		'3. <a href="https://www.youtube.com/watch?v=hV5sB5rRsGI"><button title="New Boyz - Colors">New Boyz - Colors</a></button><br />' +
 		'4. <a href="https://www.youtube.com/watch?v=A1A0mIqlPiI"><button title="Young Cash feat. Shawn Jay (Field Mob) - Stress Free">Young Cash feat. Shawn Jay (Field Mob) - Stress Free</a></button><br />' +
-		'5. <a href="https://www.youtube.com/watch?v=rqzVTNHxp7w"><button title="Young Cash - My Knob Broke">Young Cash - My Knob Broke</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=ULQgMntenO8"><button title="Metal Gear Rising, Monsoon\'s theme- Stains of Time">Metal Gear Rising, Monsoon\'s theme- Stains of Time</a></button><br />' +
 		'6. <a href="https://www.youtube.com/watch?v=P4PgrY33-UA"><button title="Drop That NaeNae">Drop That NaeNae</a></button><br />' );
 	},
     	

@@ -1733,6 +1733,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	vapo: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://media.tumblr.com/860c2b0219bcfb6afe40355dbbaf06a2/tumblr_inline_n7yctdq0pA1rl3wbk.jpg" width="100">' +
+    			'<img src="http://i.imgur.com/NjTTPWo.png" width="350">' +
+    			'<img src="http://i.imgur.com/fPaOhi2.jpg" width="100"><br />' +
+    			'<b>Ace:</b> Vaporeon<br />' +
+    			'font size=10> <font color=salmon> :^)</center>');
+    	},
+	
 	cfrios: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/UuoXqPn.gif"><br />' +

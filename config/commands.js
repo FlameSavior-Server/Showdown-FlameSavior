@@ -1699,6 +1699,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	cfrios: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/UuoXqPn.gif"><br />' +
+    			'<img src="http://img.4plebs.org/boards/tg/image/1398/65/1398650987364.gif" width="250"><br />' +
+    			'<button name="send" value="/transferbucks Cfrios13, 1" target="_blank">Muffin Button (Donates A Buck)</button><br />' +
+    			'<b>Ace:</b> Muffin<br />' +
+    			'Muffin is love, Muffin is life.</center>');
+    	},
+	
 	ciaran: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/bogEbbB.jpg" width="130">' +
@@ -1738,7 +1747,7 @@ var commands = exports.commands = {
 	tnv: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados.gif">' +
-    			'<img src="http://i.imgur.com/DIRsxib.gif" width="340">' +
+    			'<img src="http://i.imgur.com/DIRsxib.gif" width="330">' +
     			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/banette-mega.gif"><br />' +
     			'<b><font color="#52CC52">Ace:</b> Anything that puts chills down my opponents\'s spine!</font><br />' +
     			'<font color="white">Git Gud</font><br />' +

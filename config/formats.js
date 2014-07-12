@@ -627,6 +627,15 @@ exports.Formats = [
 		]
 	},
 
+	{
+		name: "C&E",
+		section: "Other Metagames",
+
+		searchShow: false,
+		maxLevel: 100,
+		ruleset: ['Team Preview']
+	},
+
 	// BW2 Singles
 	///////////////////////////////////////////////////////////////////
 

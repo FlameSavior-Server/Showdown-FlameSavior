@@ -2065,7 +2065,7 @@ var commands = exports.commands = {
 			'If I Win I Win. I never lose, only learn.</center>');
 	},
 	
-	impwrath: function(target, room, user) {
+	bosswrath: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Juhmirh.gif" width="150">' +
 			'<img src="http://i.imgur.com/uQClQ0R.gif">' +

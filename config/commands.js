@@ -1805,7 +1805,7 @@ var commands = exports.commands = {
     			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/banette-mega.gif"><br />' +
     			'<b><font color="#52CC52">Ace:</b> Anything that puts chills down my opponents\'s spine!</font><br />' +
     			'<font color="white">Git Gud</font><br />' +
-			'<button name="send" value="/transferbucks The Neo Void, 1" target="_blank">Charity isn\'t measured by how much you give, but how little you have and still giving.</button></center>');
+			'<button name="send" value="/transferbucks The Neo Void, 1" target="_blank">Charity isn\'t measured by how much you give, but how little you have and still giving.(Donates A Buck)</button></center>');
     	},
 	
 	klefki: function(target, room, user) {
@@ -2464,6 +2464,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b> Diggersby<br />' +
 			'<i>I\'m beginning to feel like a Hopgod, Hopgod</i>.</center>');
 	},
+	
 	objection: 'ucn',
 	n: 'ucn',
 	unovachampionn: 'ucn',
@@ -4256,13 +4257,10 @@ var commands = exports.commands = {
 			'TRAINS AND COLOS</center>');
 	},
 
-	nightmare: function(target, room, user) {
+	thekirito: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.smogon.com/media/forums/avatars/gengar.gif.v.RgUmg2XMx1gWsiUcJc9b0w">' +
-			'<img src="http://i.imgur.com/3Shcj1m.png" width="347">' +
-			'<img src="http://www.smogon.com/media/forums/avatars/darkrai.gif.v.74wEympImux6JCL0v_MbPA"><br />' +
-			'<b>Ace:</b> Darkrai<br />' +
-			'Prepare for your nightmare.</center>');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/rUyvCbl.jpg"><br />' +
+			'<button name="send" value="/transferbucks TheKirito, 1" target="_blank">Charity is good for your heart and good for my wallet (Donates A Buck)</button></center>');
 	},
 
 	killertiger: function(target, room, user) {

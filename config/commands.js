@@ -4134,7 +4134,7 @@ var commands = exports.commands = {
 	frankenstein : 'frank',
 	frank: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReply('|raw|<center><img src="http://media20.giphy.com/media/TNW1OpTRqXkhG/giphy.gif" height="130">' +
+		this.sendReply('|raw|<center><img src="http://media20.giphy.com/media/TNW1OpTRqXkhG/giphy.gif" height="110">' +
 			'<b><font color="blue" size="6">Professor Stein</font></b>' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/keldeo.gif"><br />' +
 			'<b>Ace:</b> Keldeo<br />' +	

@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	whores: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://static.fjcdn.com/gifs/Vine_596aed_395011.gif" width="130">' +
+    			'<img src="http://i.imgur.com/HF11y72.png width="300">' +
+    			'<img src="http://24.media.tumblr.com/tumblr_lyb5bfPNdT1qd8t4mo1_500.gif" width="110"><br />' +
+    			'<b>Ace:</b> Onix & Cloyster<br />' +
+    			'Hoes b4 Bros</center>');
+    	},
+	
 	vapo: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://media.tumblr.com/860c2b0219bcfb6afe40355dbbaf06a2/tumblr_inline_n7yctdq0pA1rl3wbk.jpg" width="100">' +

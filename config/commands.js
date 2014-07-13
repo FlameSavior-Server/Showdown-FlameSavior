@@ -2166,10 +2166,10 @@ var commands = exports.commands = {
 	
 	cam: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mawile-mega.gif">' +
-			'<img src="http://i.imgur.com/u3HWuly.png">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja.gif"><br />' +
-			'<b>Ace:</b> Mega-Mawile<br />' +
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/skarmory.gif">' +
+			'<img src="http://i.imgur.com/YQCPBYU.gif">' +
+			'<img src="http://fc02.deviantart.net/fs70/f/2012/192/e/0/cheren_by_otakuron-d56rf8z.png" width="100"><br />' +
+			'<b>Ace:</b> Skarmory<br />' +
 			'Stop Wishing, Start Doing.</center>');
 	},
 	

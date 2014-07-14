@@ -299,11 +299,30 @@ exports.Formats = [
 	///////////////////////////////////////////////////////////////////
 
 	{
-		name: "XY Battle Spot Triples",
-		section: "XY Triples (beta)",
+		name: "Random Triples Battle",
+		section: "XY Triples",
+
+		gameType: 'triples',
+		team: 'randomDoubles',
+		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod']
+	},
+	{
+		name: "Smogon Triples",
+		section: "XY Triples",
 
 		gameType: 'triples',
 		searchShow: false,
+		ruleset: ['Pokemon', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Team Preview'],
+		banlist: ['Soul Dew', 'Dark Void',
+			'Mewtwo', 'Lugia', 'Ho-Oh', 'Kyogre', 'Groudon', 'Rayquaza', 'Dialga', 'Palkia', 'Giratina', 'Giratina-Origin',
+			'Arceus', 'Reshiram', 'Zekrom', 'Kyurem-White', 'Xerneas', 'Yveltal'
+		]
+	},
+	{
+		name: "XY Battle Spot Triples",
+		section: "XY Triples",
+
+		gameType: 'triples',
 		maxForcedLevel: 50,
 		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview VGC'],
 		validateTeam: function (team, format) {
@@ -312,7 +331,7 @@ exports.Formats = [
 	},
 	{
 		name: "Triples Challenge Cup",
-		section: 'XY Triples (beta)',
+		section: "XY Triples",
 
 		gameType: 'triples',
 		team: 'randomCC',
@@ -321,7 +340,7 @@ exports.Formats = [
 	},
 	{
 		name: "Triples Custom Game",
-		section: "XY Triples (beta)",
+		section: "XY Triples",
 
 		gameType: 'triples',
 		searchShow: false,

@@ -2494,7 +2494,7 @@ exports.BattleMovedex = {
 		priority: 4,
 		stallingMove: true, // Note: stallingMove is not used anywhere.
 		volatileStatus: 'protect',
-		onTryHit: function (pokemon) {
+		onPrepareHit: function (pokemon) {
 			return !!this.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit: function (pokemon) {
@@ -3981,10 +3981,10 @@ exports.BattleMovedex = {
 		name: "Fire Pledge",
 		pp: 10,
 		priority: 0,
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			for (var i = 0; i < this.queue.length; i++) {
 				var decision = this.queue[i];
-				if (!decision.pokemon || !decision.move) continue;
+				if (!decision.move || !decision.pokemon || !decision.pokemon.isActive || decision.pokemon.fainted) continue;
 				if (decision.pokemon.side === source.side && decision.move.id in {grasspledge:1, waterpledge:1}) {
 					this.prioritizeQueue(decision);
 					this.add('-waiting', source, decision.pokemon);
@@ -4308,7 +4308,7 @@ exports.BattleMovedex = {
 				pokemon.setItem('');
 			}
 		},
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			if (!source.volatiles['fling']) return false;
 			var item = this.getItem(source.volatiles['fling'].item);
 			this.add("-enditem", source, item.name, '[from] move: Fling');
@@ -5139,10 +5139,10 @@ exports.BattleMovedex = {
 		name: "Grass Pledge",
 		pp: 10,
 		priority: 0,
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			for (var i = 0; i < this.queue.length; i++) {
 				var decision = this.queue[i];
-				if (!decision.pokemon || !decision.move) continue;
+				if (!decision.move || !decision.pokemon || !decision.pokemon.isActive || decision.pokemon.fainted) continue;
 				if (decision.pokemon.side === source.side && decision.move.id in {waterpledge:1, firepledge:1}) {
 					this.prioritizeQueue(decision);
 					this.add('-waiting', source, decision.pokemon);
@@ -8839,7 +8839,7 @@ exports.BattleMovedex = {
 				pokemon.setItem('');
 			}
 		},
-		onTryHit: function (target, source) {
+		onPrepareHit: function (target, source) {
 			if (!source.volatiles['naturalgift']) return false;
 		},
 		onModifyMove: function (move, pokemon) {
@@ -9852,7 +9852,7 @@ exports.BattleMovedex = {
 		priority: 4,
 		stallingMove: true, // Note: stallingMove is not used anywhere.
 		volatileStatus: 'protect',
-		onTryHit: function (pokemon) {
+		onPrepareHit: function (pokemon) {
 			return !!this.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit: function (pokemon) {
@@ -11935,6 +11935,7 @@ exports.BattleMovedex = {
 			return null;
 		},
 		onTryHit: function (target) {
+			if (target !== this.effectData.source) return false;
 			if (target.hasType('Flying')) {
 				this.add('-immune', target, '[msg]');
 				return null;
@@ -14593,10 +14594,10 @@ exports.BattleMovedex = {
 		name: "Water Pledge",
 		pp: 10,
 		priority: 0,
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			for (var i = 0; i < this.queue.length; i++) {
 				var decision = this.queue[i];
-				if (!decision.pokemon || !decision.move) continue;
+				if (!decision.move || !decision.pokemon || !decision.pokemon.isActive || decision.pokemon.fainted) continue;
 				if (decision.pokemon.side === source.side && decision.move.id in {firepledge:1, grasspledge:1}) {
 					this.prioritizeQueue(decision);
 					this.add('-waiting', source, decision.pokemon);

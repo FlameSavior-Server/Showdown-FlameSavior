@@ -3132,11 +3132,11 @@ var commands = exports.commands = {
 	archer: 'archerclw',
 	archerclw: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://imagehost4.online-image-editor.com/oie_upload/images/1521112p0H3B8I2/152934Mg9ptuyC.gif" width="160">' +
-			'<img src="http://i.imgur.com/sGMZrxt.gif">' +
-			'<img src="http://i.imgur.com/lFkxnAo.gif" width="150"><br />' +
-			'<b>Ace:</b> Bullshit<br />' +
-			' Ancient Words of Wisdom: stfu u stupid inbred.</center>');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/0LstYf5.jpg" width="120">' +
+			'<img src="http://i.imgur.com/xOefMyM.png" width="300">' +
+			'<img src="http://i.imgur.com/JTA2HuM.gif" width="120"><br />' +
+			'<b>Ace:</b> Hippowdon (Big Momma)<br />' +
+			'The South Shall Rise Again!</center>');
 	},
 	
 	flare: function(target, room, user) {

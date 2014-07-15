@@ -265,7 +265,7 @@ var plugins = exports.plugins = {
             	}
     	},
     	
-    /**
+	 /**
 	* The Happy Place: Quote of the Day Plugin
 	* This is a command that allows a room owner to set an inspirational "quote" of the day.
 	* Others may braodcast this at any time to remind the room of such.
@@ -299,5 +299,35 @@ var plugins = exports.plugins = {
 				this.logModCommand(Tools.escapeHTML(user.name) + " has updated the quote of the day to: " + plugins.happy.quote + "");
 			}
         	}
-        }
+        },
+        
+        /***
+         * Game Corner: Color Game Plugin (Beta)
+         * THese commands can only be used in a room with the id "Game Corner"
+         * Credits: panpawn
+         */
+         game: {
+         	color: '',
+         	commands: {
+         		colorgame: function (target, room, user) {
+				if (room.id !== 'gamecorner') return this.sendReply("This command can only be used in Game Corner.");
+     				if (!this.canBroadcast()) return;
+     				if (!target) {
+     					if (!this.can('mute', null, room)) return false;
+     					
+     					var reply = '';
+     					
+     					var random = Math.floor(3 * Math.random()) + 1;
+     					
+     					switch(random) {
+     						case 1: reply = "<b>Black</b>"; break;
+     						case 2: reply = "<b><font color=blue>Blue</b>"; break;
+     						case 3: reply = "<b><font color=orange>Orange</b>"; break;
+     					}
+     					return this.sendReplyBox(reply);
+     					return;
+     				} else return this.sendReply("You need to be a driver or higher to use this command.");
+         		}
+         	}
+         }
 };

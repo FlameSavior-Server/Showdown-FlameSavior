@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	stunfisk: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i629.photobucket.com/albums/uu15/psnmoonlight/stunfisk.gif" width="165">' +
+    			'<img src="http://i.imgur.com/rcKBBEe.png">' +
+    			'<img src="http://media.tumblr.com/tumblr_m6dp60bRXy1r33a1p.gif" width="165"><br />' +
+    			'<b>Ace:</b> Stunfisk<br />' +
+    			'All your base have belong to us.</center>');
+    	},
+	
 	whores: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://static.fjcdn.com/gifs/Vine_596aed_395011.gif" width="130">' +

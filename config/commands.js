@@ -2888,11 +2888,11 @@ var commands = exports.commands = {
 	
 	sayshi: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/8XHueuZ.jpg" width="150">' +
-			'<img src="http://i.imgur.com/QJzMUIV.png?1" width="270">' +
-			'<img src="http://i.imgur.com/bqRqARg.jpg" width="120"><br />' +
-			'<b>Ace:</b> Gliscor (damn you sub stall)<br />' +
-			'Lead us not into Hell. Just tell us where it is we\’ll find it quite easily Mwahhahahahah #Eric4Life.</center>');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/jgilGmU.gif" width="130">' +
+			'<img src="http://i.imgur.com/5a5ag8l.gif" width="300">' +
+			'<img src="http://i.imgur.com/4Nvwiuc.gif" width="120"><br />' +
+			'<b>Ace:</b> Galvantula<br />' +
+			'Lead us not into Hell. Just tell us where it is, we\'ll find it quite easily.</center>');
 	},
 	
 	falls: function(target, room, user) {

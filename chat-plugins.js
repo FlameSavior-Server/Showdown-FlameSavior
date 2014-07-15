@@ -302,31 +302,27 @@ var plugins = exports.plugins = {
         },
         
         /***
-         * Game Corner: Color Game Plugin (Beta)
+         * Game Corner: Would You Rather Plugin (Beta)
          * THese commands can only be used in a room with the id "Game Corner"
          * Credits: panpawn
          */
          game: {
-         	color: '',
          	commands: {
-         		colorgame: function (target, room, user) {
-				if (room.id !== 'gamecorner') return this.sendReply("This command can only be used in Game Corner.");
-     				if (!this.canBroadcast()) return;
-     				if (!target) {
-     					if (!this.can('mute', null, room)) return false;
-     					
-     					var reply = '';
-     					
-     					var random = Math.floor(3 * Math.random()) + 1;
-     					
-     					switch(random) {
-     						case 1: reply = "<b>Black</b>"; break;
-     						case 2: reply = "<b><font color=blue>Blue</b>"; break;
-     						case 3: reply = "<b><font color=orange>Orange</b>"; break;
-     					}
-     					return this.sendReplyBox(reply);
-     					return;
-     				} else return this.sendReply("You need to be a driver or higher to use this command.");
+         		wyr: 'wouldyourather',
+         		wouldyourather: function (target, room, user) {
+         			if (room.id !== 'gamecorner') return this.sendReply("This command can only be used in Game Corner.");
+         			if (!this.can('mute', null, room)) return false;
+         			var wyr = '',
+         			var random = Math.floor(2 * Math.random()) + 1;
+         			switch(random) {
+         				case 1: wyr = "Turn orange or moldy green?"; break;
+         				case 2: wyr = "Drive or be driven?"; break;
+         			}
+         			room.addRaw (
+         				'<div class=\"broadcast-green\"><font size="3"><b>Would you rather...<br />' +
+         				'' + Tools.escapeHTML(wyr) + '<br />' +
+         				'(WYR Asked by: ' + Tools.escapeHTML(user.name) + ''
+         				);
          		}
          	}
          }

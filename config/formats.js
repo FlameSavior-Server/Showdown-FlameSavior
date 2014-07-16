@@ -330,6 +330,26 @@ exports.Formats = [
 		}
 	},
 	{
+		name: "Pikachu Tournamentchu",
+		section: "XY Triples",
+
+		gameType: 'triples',
+		maxForcedLevel: 50,
+		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview VGC', 'Kalos Pokedex'],
+		validateTeam: function (team, format) {
+			for (var i = 0; i < team.length; i++) {
+				if (Tools.getTemplate(team[i]).species === 'Pikachu') return;
+			}
+			return ['Your team must have Pikachu.'];
+		},
+		validateSet: function (set) {
+			var template = this.getTemplate(set.species || set.name);
+			if (!template.evos || template.evos.length === 0) {
+				return [set.species + " is banned as it cannot evolve."];
+			}
+		}
+	},
+	{
 		name: "Triples Challenge Cup",
 		section: "XY Triples",
 
@@ -485,8 +505,10 @@ exports.Formats = [
 		name: "STABmons",
 		section: "Other Metagames",
 
-		ruleset: ['OU'],
-		banlist: ['Porygon-Z', 'Sylveon']
+		ruleset: ['Pokemon', 'Standard', 'Baton Pass Clause', 'Swagger Clause', 'Team Preview'],
+		banlist: ['Arceus', 'Blaziken', 'Deoxys', 'Deoxys-Attack', 'Genesect', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kyogre',
+			'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia', 'Porygon-Z', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Sylveon', 'Kyurem-White',
+			'Xerneas', 'Yveltal', 'Zekrom', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Soul Dew']
 	},
 	{
 		name: "Sky Battles",

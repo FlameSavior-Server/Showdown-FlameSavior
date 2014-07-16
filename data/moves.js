@@ -11820,10 +11820,10 @@ exports.BattleMovedex = {
 				return false;
 			}
 		},
-		onHit: function (target, source) {
+		onHit: function (target, source, move) {
 			var targetAbility = target.ability;
 			var sourceAbility = source.ability;
-			if (!target.setAbility(sourceAbility) || !source.setAbility(targetAbility)) {
+			if (!target.setAbility(sourceAbility, source, move, true) || !source.setAbility(targetAbility, source, move, true)) {
 				target.ability = targetAbility;
 				source.ability = sourceAbility;
 				return false;
@@ -11934,8 +11934,8 @@ exports.BattleMovedex = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		onTryHit: function (target) {
-			if (target !== this.effectData.source) return false;
+		onTryHit: function (target, source) {
+			if (target !== source.volatiles['twoturnmove'].source) return false;
 			if (target.hasType('Flying')) {
 				this.add('-immune', target, '[msg]');
 				return null;

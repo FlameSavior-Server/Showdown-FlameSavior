@@ -321,7 +321,7 @@ var plugins = exports.plugins = {
          			room.addRaw (
          				'<div class=\"broadcast-green\"><font size="3"><b>Would you rather...<br />' +
          				'' + Tools.escapeHTML(wyr) + '<br />' +
-         				'(WYR Asked by: ' + Tools.escapeHTML(user.name) + ''
+         				'(WYR Asked by: '+ Tools.escapeHTML(user.name) 
          				);
          		}
          	}

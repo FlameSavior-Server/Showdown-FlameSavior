@@ -318,7 +318,7 @@ var plugins = exports.plugins = {
          				case 1: wyr = "Turn orange or moldy green?"; break;
          				case 2: wyr = "Drive or be driven?"; break;
          			}
-         			room.addRaw (
+         			room.addRaw(
          				'hi'
          				);
          		}

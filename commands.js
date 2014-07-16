@@ -1301,7 +1301,7 @@ var commands = exports.commands = {
 		}
 		this.privateModCommand("(" + user.name + " has added to the shadow ban user list: " + targets.join(", ") + (reason ? " (" + reason + ")" : "") + ")");
 
-		return this.parse('/' + action + ' ' + this.targetUser.userid + ',' + reason);
+		//return this.parse('/' + action + ' ' + this.targetUser.userid + ',' + reason);
 	},
 
 	unspam: 'unshadowban',

@@ -313,7 +313,7 @@ var plugins = exports.plugins = {
          			if (room.id !== 'gamecorner') return this.sendReply("This command can only be used in Game Corner.");
          			if (!target) {
          				if (!this.can('mute', null, room)) return false;
-         				var wyr = '',
+         				var wyr = '';
          				var random = Math.floor(2 * Math.random()) + 1;
          				switch(random) {
          					case 1: wyr = "Turn orange or moldy green?"; break;

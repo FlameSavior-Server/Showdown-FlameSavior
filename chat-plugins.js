@@ -311,17 +311,17 @@ var plugins = exports.plugins = {
          		wyr: 'wouldyourather',
          		wouldyourather: function (target, room, user) {
          			if (room.id !== 'gamecorner') return this.sendReply("This command can only be used in Game Corner.");
-         			if (!this.can('mute', null, room)) return false;
-         			var wyr = '',
-         			var random = Math.floor(2 * Math.random()) + 1;
-         			switch(random) {
-         				case 1: wyr = "Turn orange or moldy green?"; break;
-         				case 2: wyr = "Drive or be driven?"; break;
+         			if (!target) {
+         				if (!this.can('mute', null, room)) return false;
+         				var wyr = '',
+         				var random = Math.floor(2 * Math.random()) + 1;
+         				switch(random) {
+         					case 1: wyr = "Turn orange or moldy green?"; break;
+         					case 2: wyr = "Drive or be driven?"; break;
+         				}
+         				room.addRaw(wyr);
          			}
-         			room.addRaw(
-         				'hi'
-         				);
          		}
          	}
-         }
+         }	
 };

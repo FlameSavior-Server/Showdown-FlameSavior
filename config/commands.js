@@ -1172,7 +1172,7 @@ var commands = exports.commands = {
                 '<font color="purple"> Romanticism is the expression of man\'s urge to rise above reason and common sense, just as rationalism is the expression of his urge to rise above theology and ion. Riot\'s suck, I love noodles.</font></center>');
 	},
 	
-	hagrus: function(target, room, user) {
+	hag: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/CeYqID8.jpg"><br />' +
                 'Get used to being second nubs</center>');

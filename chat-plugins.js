@@ -319,9 +319,7 @@ var plugins = exports.plugins = {
          				case 2: wyr = "Drive or be driven?"; break;
          			}
          			room.addRaw (
-         				'<div class=\"broadcast-green\"><font size="3"><b>Would you rather...<br />' +
-         				'' + Tools.escapeHTML(wyr) + '<br />' +
-         				'(WYR Asked by: '+ Tools.escapeHTML(user.name) 
+         				'hi'
          				);
          		}
          	}

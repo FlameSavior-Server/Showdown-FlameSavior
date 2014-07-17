@@ -1558,7 +1558,7 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "No in-game effect.",
+		desc: "The Pokémon congratulates you on your special day!",
 		shortDesc: "No in-game effect.",
 		id: "celebrate",
 		name: "Celebrate",
@@ -1887,26 +1887,16 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "The user's type changes to match the original type of one of its four moves besides this move, at random, but not either of its current types. Fails if the user cannot change its type, or if this move would only be able to select one of the user's current types.",
-		shortDesc: "Changes user's type to match a known move.",
+		desc: "The user's type changes to match the original type of the move in its first move slot. Fails if the user cannot change its type, or if this move is one of the user's current types.",
+		shortDesc: "Changes user's type to match its first move.",
 		id: "conversion",
 		name: "Conversion",
 		pp: 30,
 		priority: 0,
 		isSnatchable: true,
 		onHit: function (target) {
-			var possibleTypes = target.moveset.map(function (val){
-				var move = this.getMove(val.id);
-				if (move.id !== 'conversion' && !target.hasType(move.type)) {
-					return move.type;
-				}
-			}, this).compact();
-			if (!possibleTypes.length) {
-				return false;
-			}
-			var type = possibleTypes[this.random(possibleTypes.length)];
-
-			if (!target.setType(type)) return false;
+			var type = this.getMove(target.moveset[0].id).type;
+			if (target.hasType(type) || !target.setType(type)) return false;
 			this.add('-start', target, 'typechange', type);
 		},
 		secondary: false,
@@ -2504,7 +2494,7 @@ exports.BattleMovedex = {
 		priority: 4,
 		stallingMove: true, // Note: stallingMove is not used anywhere.
 		volatileStatus: 'protect',
-		onTryHit: function (pokemon) {
+		onPrepareHit: function (pokemon) {
 			return !!this.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit: function (pokemon) {
@@ -2519,13 +2509,12 @@ exports.BattleMovedex = {
 		accuracy: 95,
 		basePower: 100,
 		category: "Physical",
-		desc: "Deals damage to all adjacent Pokemon with a 50% chance to raise the user's Defense by 1 stage.",
-		shortDesc: "Hits all adjacent Pokemon. 50% chance to boost Def by 1.",
+		desc: "Deals damage to all adjacent foes with a 50% chance to raise the user's Defense by 1 stage.",
+		shortDesc: "Hits all adjacent foes. 50% chance to boost Def by 1.",
 		id: "diamondstorm",
 		name: "Diamond Storm",
 		pp: 5,
 		priority: 0,
-		isUnreleased: true,
 		secondary: {
 			chance: 50,
 			self: {
@@ -2534,7 +2523,7 @@ exports.BattleMovedex = {
 				}
 			}
 		},
-		target: "allAdjacent",
+		target: "allAdjacentFoes",
 		type: "Rock"
 	},
 	"dig": {
@@ -3992,10 +3981,10 @@ exports.BattleMovedex = {
 		name: "Fire Pledge",
 		pp: 10,
 		priority: 0,
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			for (var i = 0; i < this.queue.length; i++) {
 				var decision = this.queue[i];
-				if (!decision.pokemon || !decision.move) continue;
+				if (!decision.move || !decision.pokemon || !decision.pokemon.isActive || decision.pokemon.fainted) continue;
 				if (decision.pokemon.side === source.side && decision.move.id in {grasspledge:1, waterpledge:1}) {
 					this.prioritizeQueue(decision);
 					this.add('-waiting', source, decision.pokemon);
@@ -4319,7 +4308,7 @@ exports.BattleMovedex = {
 				pokemon.setItem('');
 			}
 		},
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			if (!source.volatiles['fling']) return false;
 			var item = this.getItem(source.volatiles['fling'].item);
 			this.add("-enditem", source, item.name, '[from] move: Fling');
@@ -5150,10 +5139,10 @@ exports.BattleMovedex = {
 		name: "Grass Pledge",
 		pp: 10,
 		priority: 0,
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			for (var i = 0; i < this.queue.length; i++) {
 				var decision = this.queue[i];
-				if (!decision.pokemon || !decision.move) continue;
+				if (!decision.move || !decision.pokemon || !decision.pokemon.isActive || decision.pokemon.fainted) continue;
 				if (decision.pokemon.side === source.side && decision.move.id in {waterpledge:1, firepledge:1}) {
 					this.prioritizeQueue(decision);
 					this.add('-waiting', source, decision.pokemon);
@@ -5217,7 +5206,7 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "For five turns, Pokemon on the ground restore 1/16 of their HP each turn. Their Grass-type moves are powered up by 50%.",
+		desc: "For five turns, Pokemon on the ground restore 1/16 of their HP each turn. Their Grass-type moves are powered up by 50%. Damage caused by Earthquake, Bulldoze or Magnitude is halved.",
 		shortDesc: "If on ground, restore HP + Grass moves stronger.",
 		id: "grassyterrain",
 		name: "Grassy Terrain",
@@ -5227,6 +5216,11 @@ exports.BattleMovedex = {
 		effect: {
 			duration: 5,
 			onBasePower: function (basePower, attacker, defender, move) {
+				var weakenedMoves = {'earthquake':1, 'bulldoze':1, 'magnitude':1};
+				if (move.id in weakenedMoves) {
+					this.debug('move weakened by grassy terrain');
+					return this.chainModify(0.5);
+				}
 				if (move.type === 'Grass' && attacker.runImmunity('Ground')) {
 					this.debug('grassy terrain boost');
 					return this.chainModify(1.5);
@@ -5242,7 +5236,7 @@ exports.BattleMovedex = {
 				for (var s in battle.sides) {
 					for (var p in battle.sides[s].active) {
 						if (battle.sides[s].active[p].runImmunity('Ground')) {
-							this.debug('PokÃ©mon is grounded, healing through Grassy Terrain.');
+							this.debug('Pokémon is grounded, healing through Grassy Terrain.');
 							this.heal(battle.sides[s].active[p].maxhp / 16, battle.sides[s].active[p], battle.sides[s].active[p]);
 						}
 					}
@@ -5991,9 +5985,6 @@ exports.BattleMovedex = {
 		priority: 5,
 		isNotProtectable: true,
 		volatileStatus: 'helpinghand',
-		onTryHit: function (target, source) {
-			if (target === source) return false;
-		},
 		effect: {
 			duration: 1,
 			onStart: function (target, source) {
@@ -6319,6 +6310,24 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Normal"
 	},
+	"holdhands": {
+		num: 615,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "Ally Pokémon hold hands. This makes them very happy.",
+		shortDesc: "No in-game effect.",
+		id: "holdhands",
+		name: "Hold Hands",
+		pp: 40,
+		priority: 0,
+		onTryHit: function (target, source) {
+			return null;
+		},
+		secondary: false,
+		target: "adjacentAlly",
+		type: "Normal"
+	},
 	"honeclaws": {
 		num: 468,
 		accuracy: true,
@@ -6519,6 +6528,7 @@ exports.BattleMovedex = {
 		priority: 0,
 		isUnreleased: true,
 		breaksProtect: true,
+		notSubBlocked: true,
 		secondary: false,
 		target: "normal",
 		type: "Psychic"
@@ -7794,7 +7804,7 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "Raises the Defense and Sp. Def stats of ally PokÃ©mon with the Plus or Minus Ability.",
+		desc: "Raises the Defense and Sp. Def stats of ally Pokémon with the Plus or Minus Ability.",
 		shortDesc: "Raises defenses of ally Pokemon with Plus/Minus.",
 		id: "magneticflux",
 		name: "Magnetic Flux",
@@ -8221,7 +8231,7 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "A random move is selected for use, other than After You, Assist, Bestow, Chatter, Copycat, Counter, Covet, Destiny Bond, Detect, Endure, Feint, Focus Punch, Follow Me, Freeze Shock, Helping Hand, Ice Burn, Me First, Metronome, Mimic, Mirror Coat, Mirror Move, Nature Power, Protect, Quash, Quick Guard, Rage Powder, Relic Song, Secret Sword, Sketch, Sleep Talk, Snarl, Snatch, Snore, Struggle, Switcheroo, Techno Blast, Thief, Transform, Trick, V-create, or Wide Guard.",
+		desc: "A random move is selected for use, other than After You, Assist, Belch, Bestow, Celebrate, Chatter, Copycat, Counter, Covet, Crafty Shield, Destiny Bond, Detect, Diamond Storm, Endure, Feint, Focus Punch, Follow Me, Freeze Shock, Happy Hour, Helping Hand, Hold Hands, Hyperspace Hole, Ice Burn, King's Shield, Light of Ruin, Mat Block, Me First, Metronome, Mimic, Mirror Coat, Mirror Move, Nature Power, Protect, Quash, Quick Guard, Rage Powder, Relic Song, Secret Sword, Sketch, Sleep Talk, Snarl, Snatch, Snore, Spiky Shield, Steam Eruption, Struggle, Switcheroo, Techno Blast, Thief, Thousand Arrows, Thousand Waves, Transform, Trick, V-create, or Wide Guard.",
 		shortDesc: "Picks a random move.",
 		id: "metronome",
 		name: "Metronome",
@@ -8234,7 +8244,7 @@ exports.BattleMovedex = {
 				if (i !== move.id) continue;
 				if (move.isNonstandard) continue;
 				var noMetronome = {
-					afteryou:1, assist:1, bestow:1, chatter:1, copycat:1, counter:1, covet:1, destinybond:1, detect:1, endure:1, feint:1, focuspunch:1, followme:1, freezeshock:1, helpinghand:1, iceburn:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, protect:1, quash:1, quickguard:1, ragepowder:1, relicsong:1, secretsword:1, sketch:1, sleeptalk:1, snatch:1, snarl:1, snore:1, struggle:1, switcheroo:1, technoblast:1, thief:1, transform:1, trick:1, vcreate:1, wideguard:1, diamondstorm:1, steameruption:1, hyperspacehole:1, thousandarrows:1, thousandwaves:1
+					afteryou:1, assist:1, belch:1, bestow:1, celebrate:1, chatter:1, copycat:1, counter:1, covet:1, craftyshield:1, destinybond:1, detect:1, diamondstorm:1, endure:1, feint:1, focuspunch:1, followme:1, freezeshock:1, happyhour:1, helpinghand:1, holdhands:1, hyperspacehole:1, iceburn:1, kingsshield:1, lightofruin:1, matblock:1, mefirst:1, metronome:1, mimic:1, mirrorcoat:1, mirrormove:1, naturepower:1, protect:1, quash:1, quickguard:1, ragepowder:1, relicsong:1, secretsword:1, sketch:1, sleeptalk:1, snarl:1, snatch:1, snore:1, spikyshield:1, steameruption:1, struggle:1, switcheroo:1, technoblast:1, thief:1, thousandarrows:1, thousandwaves:1, transform:1, trick:1, vcreate:1, wideguard:1
 				};
 				if (!noMetronome[move.id]) {
 					moves.push(move);
@@ -8829,7 +8839,7 @@ exports.BattleMovedex = {
 				pokemon.setItem('');
 			}
 		},
-		onTryHit: function (target, source) {
+		onPrepareHit: function (target, source) {
 			if (!source.volatiles['naturalgift']) return false;
 		},
 		onModifyMove: function (move, pokemon) {
@@ -9842,7 +9852,7 @@ exports.BattleMovedex = {
 		priority: 4,
 		stallingMove: true, // Note: stallingMove is not used anywhere.
 		volatileStatus: 'protect',
-		onTryHit: function (pokemon) {
+		onPrepareHit: function (pokemon) {
 			return !!this.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit: function (pokemon) {
@@ -11262,6 +11272,7 @@ exports.BattleMovedex = {
 		pp: 15,
 		priority: 0,
 		thawsUser: true,
+		thawsTarget: true,
 		secondary: {
 			chance: 30,
 			status: 'brn'
@@ -11809,10 +11820,10 @@ exports.BattleMovedex = {
 				return false;
 			}
 		},
-		onHit: function (target, source) {
+		onHit: function (target, source, move) {
 			var targetAbility = target.ability;
 			var sourceAbility = source.ability;
-			if (!target.setAbility(sourceAbility) || !source.setAbility(targetAbility)) {
+			if (!target.setAbility(sourceAbility, source, move, true) || !source.setAbility(targetAbility, source, move, true)) {
 				target.ability = targetAbility;
 				source.ability = sourceAbility;
 				return false;
@@ -11923,7 +11934,8 @@ exports.BattleMovedex = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		onTryHit: function (target) {
+		onTryHit: function (target, source) {
+			if (target !== source.volatiles['twoturnmove'].source) return false;
 			if (target.hasType('Flying')) {
 				this.add('-immune', target, '[msg]');
 				return null;
@@ -13135,7 +13147,7 @@ exports.BattleMovedex = {
 		isContact: true,
 		onTryHit: function (target) {
 			var decision = this.willMove(target);
-			if (!decision || decision.choice !== 'move' || (decision.move.category === 'Status' && decision.move.id !== 'mefirst')) {
+			if (!decision || decision.choice !== 'move' || (decision.move.category === 'Status' && decision.move.id !== 'mefirst') || target.volatiles.mustrecharge) {
 				return false;
 			}
 		},
@@ -14582,10 +14594,10 @@ exports.BattleMovedex = {
 		name: "Water Pledge",
 		pp: 10,
 		priority: 0,
-		onTryHit: function (target, source, move) {
+		onPrepareHit: function (target, source, move) {
 			for (var i = 0; i < this.queue.length; i++) {
 				var decision = this.queue[i];
-				if (!decision.pokemon || !decision.move) continue;
+				if (!decision.move || !decision.pokemon || !decision.pokemon.isActive || decision.pokemon.fainted) continue;
 				if (decision.pokemon.side === source.side && decision.move.id in {firepledge:1, grasspledge:1}) {
 					this.prioritizeQueue(decision);
 					this.add('-waiting', source, decision.pokemon);

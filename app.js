@@ -351,9 +351,9 @@ global.CommandParser = require('./command-parser.js');
 
 global.Simulator = require('./simulator.js');
 
-//global.Tournaments = require('./tournaments/frontend.js');
-
 global.trivia = require('./trivia.js');
+
+global.Tournaments = require('./tournaments/middleend.js');
 
 try {
 	global.Dnsbl = require('./dnsbl.js'); 
@@ -430,6 +430,9 @@ fs.readFile('./logs/uptime.txt', function (err, uptime) {
 	}, (1).hour());
 });
 
-global.tour = require('./tour.js').tour();
+//global.tour = require('./tour.js').tour();
 global.hangman = require('./hangman.js').hangman();
+try {
+	global.economy = require('./economy.js');
+} catch (e) {}
 //global.Core = require('./core.js').core;

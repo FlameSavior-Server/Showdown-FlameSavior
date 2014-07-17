@@ -1388,7 +1388,7 @@ exports.BattleFormatsData = {
 		requiredItem: "Mewtwonite Y"
 	},
 	mew: {
-		viableMoves: {"taunt":1,"willowisp":1,"roost":1,"psychic":1,"nastyplot":1,"aurasphere":1,"fireblast":1,"swordsdance":1,"drainpunch":1,"zenheadbutt":1,"batonpass":1,"substitute":1,"toxic":1,"icebeam":1,"thunderbolt":1,"earthquake":1,"stealthrock":1,"suckerpunch":1,"defog":1},
+		viableMoves: {"taunt":1,"willowisp":1,"roost":1,"psychic":1,"nastyplot":1,"aurasphere":1,"fireblast":1,"swordsdance":1,"drainpunch":1,"zenheadbutt":1,"batonpass":1,"substitute":1,"toxic":1,"icebeam":1,"thunderbolt":1,"knockoff":1,"stealthrock":1,"suckerpunch":1,"defog":1},
 		viableDoublesMoves: {"taunt":1,"willowisp":1,"transform":1,"roost":1,"psyshock":1,"nastyplot":1,"aurasphere":1,"fireblast":1,"swordsdance":1,"drainpunch":1,"zenheadbutt":1,"icebeam":1,"thunderbolt":1,"earthquake":1,"suckerpunch":1,"protect":1,"fakeout":1,"helpinghand":1,"tailwind":1},
 		eventPokemon: [
 			{"generation":3,"level":30,"moves":["pound","transform","megapunch","metronome"]},
@@ -1418,7 +1418,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	meganium: {
-		viableMoves: {"reflect":1,"lightscreen":1,"aromatherapy":1,"grasswhistle":1,"leechseed":1,"toxic":1,"gigadrain":1,"synthesis":1,"dragontail":1},
+		viableMoves: {"reflect":1,"lightscreen":1,"aromatherapy":1,"leechseed":1,"toxic":1,"gigadrain":1,"synthesis":1,"dragontail":1},
 		unreleasedHidden: true,
 		tier: "NU"
 	},
@@ -1436,7 +1436,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	typhlosion: {
-		viableMoves: {"eruption":1,"fireblast":1,"flamethrower":1,"hiddenpowergrass":1,"hiddenpowerice":1,"focusblast":1},
+		viableMoves: {"eruption":1,"fireblast":1,"hiddenpowergrass":1,"hiddenpowerice":1,"focusblast":1},
 		eventPokemon: [
 			{"generation":3,"level":70,"moves":["quickattack","flamewheel","swift","flamethrower"]}
 		],
@@ -1457,7 +1457,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	feraligatr: {
-		viableMoves: {"aquajet":1,"waterfall":1,"crunch":1,"icepunch":1,"dragondance":1,"swordsdance":1,"earthquake":1,"superpower":1},
+		viableMoves: {"aquajet":1,"waterfall":1,"crunch":1,"icepunch":1,"dragondance":1,"swordsdance":1,"earthquake":1},
 		unreleasedHidden: true,
 		tier: "NU"
 	},
@@ -1466,7 +1466,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	furret: {
-		viableMoves: {"return":1,"uturn":1,"suckerpunch":1,"trick":1,"icepunch":1,"firepunch":1,"thunderpunch":1,"knockoff":1,"doubleedge":1},
+		viableMoves: {"uturn":1,"suckerpunch":1,"trick":1,"icepunch":1,"firepunch":1,"knockoff":1,"doubleedge":1},
 		tier: "NU"
 	},
 	hoothoot: {
@@ -1477,7 +1477,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	noctowl: {
-		viableMoves: {"roost":1,"whirlwind":1,"airslash":1,"nightshade":1,"toxic":1,"reflect":1,"magiccoat":1},
+		viableMoves: {"roost":1,"whirlwind":1,"airslash":1,"nightshade":1,"toxic":1,"magiccoat":1},
 		tier: "NU"
 	},
 	ledyba: {
@@ -1488,7 +1488,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	ledian: {
-		viableMoves: {"roost":1,"bugbuzz":1,"lightscreen":1,"encore":1,"reflect":1,"knockoff":1,"toxic":1,"batonpass":1},
+		viableMoves: {"roost":1,"lightscreen":1,"encore":1,"reflect":1,"knockoff":1,"toxic":1,"uturn":1},
 		tier: "NU"
 	},
 	spinarak: {
@@ -1499,7 +1499,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	ariados: {
-		viableMoves: {"agility":1,"toxic":1,"xscissor":1,"toxicspikes":1,"poisonjab":1,"batonpass":1,"stickyweb":1},
+		viableMoves: {"toxic":1,"megahorn":1,"toxicspikes":1,"poisonjab":1,"batonpass":1,"stickyweb":1},
 		tier: "NU"
 	},
 	chinchou: {
@@ -1507,7 +1507,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	lanturn: {
-		viableMoves: {"voltswitch":1,"thunderbolt":1,"hiddenpowergrass":1,"hydropump":1,"icebeam":1,"surf":1,"thunderwave":1,"scald":1,"discharge":1,"healbell":1},
+		viableMoves: {"voltswitch":1,"hiddenpowergrass":1,"hydropump":1,"icebeam":1,"thunderwave":1,"scald":1,"discharge":1,"healbell":1},
 		tier: "NU"
 	},
 	togepi: {
@@ -1523,7 +1523,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	togekiss: {
-		viableMoves: {"wish":1,"roost":1,"thunderwave":1,"nastyplot":1,"airslash":1,"aurasphere":1,"batonpass":1,"dazzlinggleam":1},
+		viableMoves: {"roost":1,"thunderwave":1,"nastyplot":1,"airslash":1,"aurasphere":1,"batonpass":1,"dazzlinggleam":1,"fireblast":1},
 		eventPokemon: [
 			{"generation":5,"level":10,"gender":"M","isHidden":true,"moves":["extremespeed","aurasphere","airslash","present"]}
 		],
@@ -1537,7 +1537,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	xatu: {
-		viableMoves: {"thunderwave":1,"toxic":1,"roost":1,"psychic":1,"nightshade":1,"uturn":1,"reflect":1,"lightscreen":1,"wish":1,"calmmind":1},
+		viableMoves: {"thunderwave":1,"toxic":1,"roost":1,"psychic":1,"uturn":1,"reflect":1,"lightscreen":1,"grassknot":1,"heatwave":1},
 		tier: "NU"
 	},
 	mareep: {
@@ -1554,11 +1554,11 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	ampharos: {
-		viableMoves: {"voltswitch":1,"focusblast":1,"hiddenpowerice":1,"hiddenpowergrass":1,"thunderbolt":1,"healbell":1,"dragonpulse":1,"powergem":1},
+		viableMoves: {"voltswitch":1,"focusblast":1,"hiddenpowerice":1,"hiddenpowergrass":1,"thunderbolt":1,"healbell":1,"dragonpulse":1},
 		tier: "UU"
 	},
 	ampharosmega: {
-		viableMoves: {"voltswitch":1,"focusblast":1,"hiddenpowerice":1,"hiddenpowergrass":1,"thunderbolt":1,"healbell":1,"dragonpulse":1,"powergem":1},
+		viableMoves: {"voltswitch":1,"focusblast":1,"hiddenpowerice":1,"hiddenpowergrass":1,"thunderbolt":1,"healbell":1,"dragonpulse":1},
 		requiredItem: "Ampharosite"
 	},
 	azurill: {
@@ -1570,7 +1570,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	azumarill: {
-		viableMoves: {"waterfall":1,"aquajet":1,"playrough":1,"icepunch":1,"superpower":1,"poweruppunch":1,"knockoff":1},
+		viableMoves: {"waterfall":1,"aquajet":1,"playrough":1,"superpower":1,"bellydrum":1,"knockoff":1},
 		tier: "OU"
 	},
 	bonsly: {
@@ -1578,7 +1578,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	sudowoodo: {
-		viableMoves: {"hammerarm":1,"stoneedge":1,"earthquake":1,"suckerpunch":1,"woodhammer":1,"explosion":1,"stealthrock":1},
+		viableMoves: {"stoneedge":1,"earthquake":1,"suckerpunch":1,"woodhammer":1,"explosion":1,"stealthrock":1},
 		tier: "NU"
 	},
 	hoppip: {
@@ -1590,7 +1590,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	jumpluff: {
-		viableMoves: {"encore":1,"sleeppowder":1,"uturn":1,"toxic":1,"leechseed":1,"substitute":1,"gigadrain":1,"synthesis":1},
+		viableMoves: {"encore":1,"sleeppowder":1,"uturn":1,"toxic":1,"leechseed":1,"gigadrain":1,"synthesis":1},
 		eventPokemon: [
 			{"generation":5,"level":27,"gender":"M","isHidden":true,"moves":["falseswipe","sleeppowder","bulletseed","leechseed"]}
 		],
@@ -1604,7 +1604,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	ambipom: {
-		viableMoves: {"fakeout":1,"return":1,"knockoff":1,"uturn":1,"poweruppunch":1,"switcheroo":1,"seedbomb":1,"icepunch":1},
+		viableMoves: {"fakeout":1,"return":1,"knockoff":1,"uturn":1,"switcheroo":1,"seedbomb":1,"icepunch":1,"lowkick":1},
 		tier: "RU"
 	},
 	sunkern: {
@@ -1615,7 +1615,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	sunflora: {
-		viableMoves: {"sunnyday":1,"leafstorm":1,"gigadrain":1,"solarbeam":1,"hiddenpowerfire":1,"earthpower":1,"leechseed":1},
+		viableMoves: {"sunnyday":1,"gigadrain":1,"solarbeam":1,"hiddenpowerfire":1,"earthpower":1},
 		tier: "NU"
 	},
 	yanma: {
@@ -1623,7 +1623,7 @@ exports.BattleFormatsData = {
 		tier: "LC Uber"
 	},
 	yanmega: {
-		viableMoves: {"bugbuzz":1,"airslash":1,"hiddenpowerground":1,"uturn":1,"protect":1,"gigadrain":1,"ancientpower":1},
+		viableMoves: {"bugbuzz":1,"airslash":1,"hiddenpowerground":1,"uturn":1,"protect":1,"gigadrain":1},
 		tier: "RU"
 	},
 	wooper: {
@@ -1631,7 +1631,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	quagsire: {
-		viableMoves: {"recover":1,"earthquake":1,"waterfall":1,"scald":1,"toxic":1,"curse":1,"stoneedge":1,"stockpile":1,"yawn":1,"icepunch":1,"sludgewave":1},
+		viableMoves: {"recover":1,"earthquake":1,"waterfall":1,"scald":1,"toxic":1,"curse":1,"yawn":1,"icepunch":1},
 		tier: "OU"
 	},
 	murkrow: {
@@ -1653,7 +1653,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	mismagius: {
-		viableMoves: {"nastyplot":1,"substitute":1,"calmmind":1,"willowisp":1,"shadowball":1,"thunderbolt":1,"hiddenpowerfighting":1,"healbell":1,"painsplit":1},
+		viableMoves: {"nastyplot":1,"substitute":1,"willowisp":1,"shadowball":1,"thunderbolt":1,"dazzlinggleam":1,"healbell":1,"painsplit":1},
 		tier: "NU"
 	},
 	unown: {
@@ -1675,10 +1675,10 @@ exports.BattleFormatsData = {
 			{"generation":6,"level":10,"gender":"M","isHidden":false,"moves":["counter"],"pokeball":"cherishball"},
 			{"generation":6,"level":15,"gender":"M","isHidden":false,"moves":["counter","mirrorcoat"],"pokeball":"cherishball"}
 		],
-		tier: "BL"
+		tier: "UU"
 	},
 	girafarig: {
-		viableMoves: {"psychic":1,"thunderbolt":1,"calmmind":1,"batonpass":1,"agility":1,"hypervoice":1,"thunderwave":1,"dazzlinggleam":1},
+		viableMoves: {"psychic":1,"thunderbolt":1,"calmmind":1,"batonpass":1,"agility":1,"hypervoice":1},
 		tier: "NU"
 	},
 	pineco: {
@@ -1690,7 +1690,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	forretress: {
-		viableMoves: {"rapidspin":1,"toxicspikes":1,"spikes":1,"bugbite":1,"earthquake":1,"voltswitch":1,"stealthrock":1,"gyroball":1},
+		viableMoves: {"rapidspin":1,"toxicspikes":1,"spikes":1,"voltswitch":1,"stealthrock":1,"gyroball":1},
 		tier: "UU"
 	},
 	dunsparce: {
@@ -1716,30 +1716,30 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	granbull: {
-		viableMoves: {"thunderwave":1,"playrough":1,"crunch":1,"closecombat":1,"healbell":1,"icepunch":1},
+		viableMoves: {"thunderwave":1,"playrough":1,"crunch":1,"earthquake":1,"healbell":1},
 		tier: "NU"
 	},
 	qwilfish: {
-		viableMoves: {"toxicspikes":1,"waterfall":1,"spikes":1,"swordsdance":1,"poisonjab":1,"painsplit":1,"thunderwave":1,"taunt":1,"destinybond":1},
+		viableMoves: {"toxicspikes":1,"waterfall":1,"spikes":1,"painsplit":1,"thunderwave":1,"taunt":1,"destinybond":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","moves":["tackle","poisonsting","harden","minimize"]}
 		],
 		tier: "NU"
 	},
 	shuckle: {
-		viableMoves: {"rollout":1,"acupressure":1,"powersplit":1,"rest":1,"stickyweb":1,"infestation":1},
+		viableMoves: {"toxic":1,"encore":1,"stealthrock":1,"knockoff":1,"stickyweb":1,"infestation":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","abilities":["sturdy"],"moves":["constrict","withdraw","wrap"]},
 			{"generation":3,"level":20,"abilities":["sturdy"],"moves":["substitute","toxic","sludgebomb","encore"]}
 		],
-		tier: "RU"
+		tier: "BL2"
 	},
 	heracross: {
-		viableMoves: {"closecombat":1,"megahorn":1,"stoneedge":1,"swordsdance":1,"facade":1},
+		viableMoves: {"closecombat":1,"megahorn":1,"stoneedge":1,"swordsdance":1,"knockoff":1,"earthquake":1},
 		tier: "UU"
 	},
 	heracrossmega: {
-		viableMoves: {"closecombat":1,"pinmissile":1,"rockblast":1,"swordsdance":1},
+		viableMoves: {"closecombat":1,"pinmissile":1,"rockblast":1,"swordsdance":1,"bulletseed":1,"knockoff":1,"earthquake":1},
 		requiredItem: "Heracronite",
 		tier: "BL"
 	},
@@ -1766,7 +1766,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	ursaring: {
-		viableMoves: {"swordsdance":1,"protect":1,"facade":1,"closecombat":1,"firepunch":1,"crunch":1,"playrough":1},
+		viableMoves: {"swordsdance":1,"facade":1,"closecombat":1,"earthquake":1,"crunch":1},
 		tier: "NU"
 	},
 	slugma: {
@@ -1774,7 +1774,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	magcargo: {
-		viableMoves: {"stockpile":1,"recover":1,"lavaplume":1,"willowisp":1,"toxic":1,"hiddenpowergrass":1,"hiddenpowerrock":1,"stealthrock":1,"shellsmash":1,"fireblast":1,"earthpower":1},
+		viableMoves: {"recover":1,"lavaplume":1,"willowisp":1,"toxic":1,"hiddenpowergrass":1,"hiddenpowerrock":1,"stealthrock":1,"fireblast":1,"earthpower":1},
 		eventPokemon: [
 			{"generation":3,"level":38,"moves":["refresh","heatwave","earthquake","flamethrower"]}
 		],
@@ -1792,7 +1792,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	mamoswine: {
-		viableMoves: {"iceshard":1,"earthquake":1,"endeavor":1,"iciclecrash":1,"stoneedge":1,"superpower":1,"stealthrock":1},
+		viableMoves: {"iceshard":1,"earthquake":1,"endeavor":1,"iciclecrash":1,"stealthrock":1,"superpower":1,"knockoff":1},
 		eventPokemon: [
 			{"generation":5,"level":34,"gender":"M","isHidden":true,"moves":["hail","icefang","takedown","doublehit"]},
 			{"generation":6,"level":50,"shiny":true,"gender":"M","nature":"Adamant","isHidden":true,"moves":["iciclespear","earthquake","iciclecrash","rockslide"]}
@@ -1800,7 +1800,7 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	corsola: {
-		viableMoves: {"recover":1,"toxic":1,"powergem":1,"scald":1,"stealthrock":1,"psychic":1,"earthpower":1},
+		viableMoves: {"recover":1,"toxic":1,"powergem":1,"scald":1,"stealthrock":1,"earthpower":1},
 		eventPokemon: [
 			{"generation":3,"level":5,"moves":["tackle","mudsport"]}
 		],
@@ -1811,14 +1811,14 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	octillery: {
-		viableMoves: {"hydropump":1,"fireblast":1,"icebeam":1,"energyball":1,"rockblast":1,"thunderwave":1},
+		viableMoves: {"hydropump":1,"fireblast":1,"icebeam":1,"energyball":1,"rockblast":1,"waterspout":1},
 		eventPokemon: [
 			{"generation":4,"level":50,"gender":"F","nature":"Serious","abilities":["suctioncups"],"moves":["octazooka","icebeam","signalbeam","hyperbeam"],"pokeball":"cherishball"}
 		],
 		tier: "NU"
 	},
 	delibird: {
-		viableMoves: {"rapidspin":1,"iceshard":1,"icepunch":1,"aerialace":1,"spikes":1},
+		viableMoves: {"rapidspin":1,"iceshard":1,"icepunch":1,"aerialace":1,"spikes":1,"destinybond":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","moves":["present"]}
 		],
@@ -1829,7 +1829,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	mantine: {
-		viableMoves: {"raindance":1,"hydropump":1,"surf":1,"airslash":1,"icebeam":1,"rest":1,"sleeptalk":1,"toxic":1},
+		viableMoves: {"raindance":1,"hydropump":1,"scald":1,"airslash":1,"icebeam":1,"rest":1,"sleeptalk":1,"toxic":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","moves":["tackle","bubble","supersonic"]}
 		],
@@ -1848,11 +1848,11 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	houndoom: {
-		viableMoves: {"nastyplot":1,"pursuit":1,"darkpulse":1,"suckerpunch":1,"fireblast":1,"hiddenpowerfighting":1},
+		viableMoves: {"nastyplot":1,"darkpulse":1,"suckerpunch":1,"fireblast":1,"hiddenpowerfighting":1},
 		tier: "UU"
 	},
 	houndoommega: {
-		viableMoves: {"nastyplot":1,"pursuit":1,"darkpulse":1,"suckerpunch":1,"fireblast":1,"hiddenpowerfighting":1},
+		viableMoves: {"nastyplot":1,"darkpulse":1,"suckerpunch":1,"fireblast":1,"hiddenpowerfighting":1},
 		requiredItem: "Houndoominite"
 	},
 	phanpy: {
@@ -1860,18 +1860,18 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	donphan: {
-		viableMoves: {"stealthrock":1,"rapidspin":1,"iceshard":1,"earthquake":1,"headsmash":1,"seedbomb":1,"superpower":1,"playrough":1},
+		viableMoves: {"stealthrock":1,"rapidspin":1,"iceshard":1,"earthquake":1,"headsmash":1,"playrough":1},
 		tier: "UU"
 	},
 	stantler: {
-		viableMoves: {"return":1,"megahorn":1,"jumpkick":1,"earthquake":1,"thunderwave":1,"suckerpunch":1},
+		viableMoves: {"return":1,"megahorn":1,"jumpkick":1,"earthquake":1,"suckerpunch":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","abilities":["intimidate"],"moves":["tackle","leer"]}
 		],
 		tier: "NU"
 	},
 	smeargle: {
-		viableMoves: {"spore":1,"spikes":1,"stealthrock":1,"uturn":1,"destinybond":1,"whirlwind":1,"stickyweb":1},
+		viableMoves: {"spore":1,"spikes":1,"stealthrock":1,"destinybond":1,"whirlwind":1,"stickyweb":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","abilities":["owntempo"],"moves":["sketch"]},
 			{"generation":5,"level":50,"gender":"F","nature":"Jolly","abilities":["technician"],"moves":["falseswipe","spore","odorsleuth","meanlook"],"pokeball":"cherishball"}
@@ -1879,11 +1879,11 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	miltank: {
-		viableMoves: {"milkdrink":1,"stealthrock":1,"bodyslam":1,"healbell":1,"curse":1,"earthquake":1,"thunderwave":1,"firepunch":1},
+		viableMoves: {"milkdrink":1,"stealthrock":1,"bodyslam":1,"healbell":1,"curse":1,"earthquake":1,"thunderwave":1},
 		tier: "NU"
 	},
 	raikou: {
-		viableMoves: {"thunderbolt":1,"hiddenpowerice":1,"aurasphere":1,"calmmind":1,"substitute":1,"voltswitch":1,"extrasensory":1},
+		viableMoves: {"thunderbolt":1,"hiddenpowerice":1,"aurasphere":1,"calmmind":1,"substitute":1,"voltswitch":1},
 		eventPokemon: [
 			{"generation":3,"level":70,"moves":["quickattack","spark","reflect","crunch"]},
 			{"generation":4,"level":30,"shiny":true,"nature":"Rash","moves":["zapcannon","aurasphere","extremespeed","weatherball"],"pokeball":"cherishball"}
@@ -1892,7 +1892,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	entei: {
-		viableMoves: {"extremespeed":1,"flareblitz":1,"ironhead":1,"flamecharge":1,"stoneedge":1,"calmmind":1,"lavaplume":1,"hiddenpowergrass":1,"substitute":1},
+		viableMoves: {"extremespeed":1,"flareblitz":1,"ironhead":1,"stoneedge":1,"sacredfire":1},
 		eventPokemon: [
 			{"generation":3,"level":70,"moves":["firespin","stomp","flamethrower","swagger"]},
 			{"generation":4,"level":30,"shiny":true,"nature":"Adamant","moves":["flareblitz","howl","extremespeed","crushclaw"],"pokeball":"cherishball"}
@@ -1922,7 +1922,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	tyranitar: {
-		viableMoves: {"crunch":1,"stoneedge":1,"pursuit":1,"superpower":1,"fireblast":1,"icebeam":1,"stealthrock":1,"dragondance":1},
+		viableMoves: {"crunch":1,"stoneedge":1,"pursuit":1,"superpower":1,"fireblast":1,"icebeam":1,"stealthrock":1},
 		eventPokemon: [
 			{"generation":3,"level":70,"moves":["thrash","scaryface","crunch","earthquake"]},
 			{"generation":5,"level":100,"gender":"M","isHidden":false,"moves":["fireblast","icebeam","stoneedge","crunch"],"pokeball":"cherishball"},
@@ -1932,11 +1932,11 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	tyranitarmega: {
-		viableMoves: {"crunch":1,"stoneedge":1,"pursuit":1,"superpower":1,"fireblast":1,"icebeam":1,"stealthrock":1,"dragondance":1},
+		viableMoves: {"crunch":1,"stoneedge":1,"earthquake":1,"icepunch":1,"dragondance":1},
 		requiredItem: "Tyranitarite"
 	},
 	lugia: {
-		viableMoves: {"toxic":1,"aeroblast":1,"roost":1,"substitute":1,"whirlwind":1,"icebeam":1,"psychic":1,"calmmind":1},
+		viableMoves: {"toxic":1,"roost":1,"substitute":1,"whirlwind":1,"icebeam":1,"psychic":1,"calmmind":1},
 		eventPokemon: [
 			{"generation":3,"level":70,"moves":["swift","raindance","hydropump","recover"]},
 			{"generation":3,"level":70,"moves":["recover","hydropump","raindance","swift"]},
@@ -1979,7 +1979,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	sceptile: {
-		viableMoves: {"substitute":1,"leechseed":1,"gigadrain":1,"leafstorm":1,"hiddenpowerice":1,"focusblast":1,"synthesis":1,"hiddenpowerrock":1,"swordsdance":1,"leafblade":1,"earthquake":1},
+		viableMoves: {"substitute":1,"gigadrain":1,"leafstorm":1,"hiddenpowerice":1,"focusblast":1,"hiddenpowerrock":1},
 		eventPokemon: [
 			{"generation":5,"level":50,"isHidden":false,"moves":["leafstorm","dragonpulse","focusblast","rockslide"],"pokeball":"cherishball"}
 		],
@@ -1999,7 +1999,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	blaziken: {
-		viableMoves: {"flareblitz":1,"highjumpkick":1,"protect":1,"swordsdance":1,"substitute":1,"batonpass":1,"stoneedge":1},
+		viableMoves: {"flareblitz":1,"highjumpkick":1,"protect":1,"swordsdance":1,"substitute":1,"batonpass":1,"stoneedge":1,"knockoff":1},
 		eventPokemon: [
 			{"generation":3,"level":70,"moves":["blazekick","slash","mirrormove","skyuppercut"]},
 			{"generation":5,"level":50,"isHidden":false,"moves":["flareblitz","highjumpkick","thunderpunch","stoneedge"],"pokeball":"cherishball"}
@@ -2007,7 +2007,7 @@ exports.BattleFormatsData = {
 		tier: "Uber"
 	},
 	blazikenmega: {
-		viableMoves: {"flareblitz":1,"highjumpkick":1,"protect":1,"swordsdance":1,"substitute":1,"batonpass":1,"stoneedge":1},
+		viableMoves: {"flareblitz":1,"highjumpkick":1,"protect":1,"swordsdance":1,"substitute":1,"batonpass":1,"stoneedge":1,"knockoff":1},
 		requiredItem: "Blazikenite"
 	},
 	mudkip: {
@@ -2023,7 +2023,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	swampert: {
-		viableMoves: {"waterfall":1,"earthquake":1,"icebeam":1,"stealthrock":1,"roar":1,"superpower":1,"yawn":1},
+		viableMoves: {"waterfall":1,"earthquake":1,"icebeam":1,"stealthrock":1,"roar":1,"scald":1},
 		eventPokemon: [
 			{"generation":5,"level":50,"isHidden":false,"moves":["earthquake","icebeam","hydropump","hammerarm"],"pokeball":"cherishball"}
 		],
@@ -2037,7 +2037,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	mightyena: {
-		viableMoves: {"suckerpunch":1,"crunch":1,"icefang":1,"firefang":1,"superfang":1,"irontail":1},
+		viableMoves: {"suckerpunch":1,"crunch":1,"playrough":1,"firefang":1,"taunt":1},
 		tier: "NU"
 	},
 	zigzagoon: {
@@ -2049,7 +2049,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	linoone: {
-		viableMoves: {"bellydrum":1,"extremespeed":1,"seedbomb":1,"substitute":1,"shadowclaw":1,"playrough":1},
+		viableMoves: {"bellydrum":1,"extremespeed":1,"seedbomb":1,"substitute":1,"shadowclaw":1},
 		tier: "NU"
 	},
 	wurmple: {
@@ -2061,7 +2061,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	beautifly: {
-		viableMoves: {"quiverdance":1,"bugbuzz":1,"gigadrain":1,"hiddenpowerfighting":1,"hiddenpowerrock":1,"substitute":1,"psychic":1,"stunspore":1},
+		viableMoves: {"quiverdance":1,"bugbuzz":1,"gigadrain":1,"hiddenpowerground":1,"psychic":1,"substitute":1},
 		tier: "NU"
 	},
 	cascoon: {
@@ -2069,7 +2069,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	dustox: {
-		viableMoves: {"toxic":1,"roost":1,"whirlwind":1,"bugbuzz":1,"protect":1,"sludgebomb":1,"quiverdance":1,"shadowball":1,"energyball":1},
+		viableMoves: {"toxic":1,"roost":1,"whirlwind":1,"bugbuzz":1,"protect":1,"sludgebomb":1,"quiverdance":1,"shadowball":1},
 		tier: "NU"
 	},
 	lotad: {
@@ -2084,7 +2084,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	ludicolo: {
-		viableMoves: {"raindance":1,"hydropump":1,"surf":1,"scald":1,"gigadrain":1,"icebeam":1,"substitute":1,"leechseed":1},
+		viableMoves: {"raindance":1,"hydropump":1,"scald":1,"gigadrain":1,"icebeam":1,"focusblast":1},
 		eventPokemon: [
 			{"generation":5,"level":50,"isHidden":false,"abilities":["swiftswim"],"moves":["fakeout","hydropump","icebeam","gigadrain"],"pokeball":"cherishball"},
 			{"generation":5,"level":30,"gender":"M","nature":"Calm","isHidden":false,"abilities":["swiftswim"],"moves":["scald","gigadrain","icebeam","sunnyday"]}
@@ -2104,7 +2104,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	shiftry: {
-		viableMoves: {"leafstorm":1,"swordsdance":1,"seedbomb":1,"suckerpunch":1,"defog":1,"xscissor":1,"lowsweep":1,"darkpulse":1},
+		viableMoves: {"leafstorm":1,"swordsdance":1,"seedbomb":1,"suckerpunch":1,"defog":1,"lowkick":1},
 		tier: "NU"
 	},
 	taillow: {
@@ -2115,7 +2115,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	swellow: {
-		viableMoves: {"bravebird":1,"facade":1,"quickattack":1,"uturn":1,"protect":1},
+		viableMoves: {"bravebird":1,"facade":1,"quickattack":1,"uturn":1,"endeavor":1},
 		eventPokemon: [
 			{"generation":3,"level":43,"moves":["batonpass","skyattack","agility","facade"]}
 		],
@@ -2126,7 +2126,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	pelipper: {
-		viableMoves: {"scald":1,"icebeam":1,"tailwind":1,"uturn":1,"airslash":1,"hurricane":1,"toxic":1,"roost":1,"defog":1,"knockoff":1},
+		viableMoves: {"scald":1,"uturn":1,"hurricane":1,"toxic":1,"roost":1,"defog":1,"knockoff":1},
 		tier: "NU"
 	},
 	ralts: {
@@ -2143,19 +2143,18 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	gardevoir: {
-		viableMoves: {"psychic":1,"focusblast":1,"shadowball":1,"moonblast":1,"calmmind":1,"willowisp":1,"energyball":1,"thunderbolt":1,"healingwish":1},
+		viableMoves: {"psyshock":1,"focusblast":1,"shadowball":1,"moonblast":1,"calmmind":1,"willowisp":1,"thunderbolt":1,"healingwish":1},
 		eventPokemon: [
 			{"generation":5,"level":50,"isHidden":false,"abilities":["trace"],"moves":["hypnosis","thunderbolt","focusblast","psychic"],"pokeball":"cherishball"}
 		],
 		tier: "OU"
 	},
 	gardevoirmega: {
-		viableMoves: {"psychic":1,"focusblast":1,"shadowball":1,"moonblast":1,"calmmind":1,"willowisp":1,"energyball":1,"thunderbolt":1,"hypervoice":1,"healingwish":1},
-		requiredItem: "Gardevoirite",
-		tier: "BL"
+		viableMoves: {"psyshock":1,"focusblast":1,"shadowball":1,"calmmind":1,"thunderbolt":1,"hypervoice":1,"healingwish":1},
+		requiredItem: "Gardevoirite"
 	},
 	gallade: {
-		viableMoves: {"closecombat":1,"trick":1,"stoneedge":1,"shadowsneak":1,"leafblade":1,"bulkup":1,"drainpunch":1,"icepunch":1,"psychocut":1,"swordsdance":1,"knockoff":1,"thunderwave":1},
+		viableMoves: {"closecombat":1,"trick":1,"stoneedge":1,"shadowsneak":1,"drainpunch":1,"icepunch":1,"zenheadbutt":1,"swordsdance":1,"knockoff":1},
 		tier: "RU"
 	},
 	surskit: {
@@ -2178,7 +2177,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	breloom: {
-		viableMoves: {"spore":1,"substitute":1,"leechseed":1,"focuspunch":1,"machpunch":1,"bulletseed":1,"stoneedge":1,"swordsdance":1,"drainpunch":1},
+		viableMoves: {"spore":1,"substitute":1,"focuspunch":1,"machpunch":1,"bulletseed":1,"rocktomb":1,"swordsdance":1,"drainpunch":1},
 		tier: "OU"
 	},
 	slakoth: {
@@ -2190,7 +2189,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	slaking: {
-		viableMoves: {"return":1,"earthquake":1,"pursuit":1,"firepunch":1,"nightslash":1,"doubleedge":1,"retaliate":1,"gigaimpact":1,"hammerarm":1},
+		viableMoves: {"earthquake":1,"pursuit":1,"nightslash":1,"doubleedge":1,"retaliate":1},
 		eventPokemon: [
 			{"generation":4,"level":50,"gender":"M","nature":"Adamant","moves":["gigaimpact","return","shadowclaw","aerialace"],"pokeball":"cherishball"}
 		],
@@ -2201,11 +2200,11 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	ninjask: {
-		viableMoves: {"batonpass":1,"swordsdance":1,"substitute":1,"protect":1,"xscissor":1,"aerialace":1},
+		viableMoves: {"batonpass":1,"swordsdance":1,"substitute":1,"protect":1,"xscissor":1},
 		tier: "NU"
 	},
 	shedinja: {
-		viableMoves: {"swordsdance":1,"willowisp":1,"xscissor":1,"shadowsneak":1,"suckerpunch":1,"protect":1},
+		viableMoves: {"swordsdance":1,"willowisp":1,"xscissor":1,"shadowsneak":1,"protect":1},
 		eventPokemon: [
 			{"generation":3,"level":50,"moves":["spite","confuseray","shadowball","grudge"]},
 			{"generation":3,"level":20,"moves":["doubleteam","furycutter","screech"]},
@@ -2229,7 +2228,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	exploud: {
-		viableMoves: {"boomburst":1,"overheat":1,"shadowball":1,"icebeam":1,"surf":1,"focusblast":1,"extrasensory":1},
+		viableMoves: {"boomburst":1,"fireblast":1,"icebeam":1,"surf":1,"focusblast":1},
 		eventPokemon: [
 			{"generation":3,"level":100,"moves":["roar","rest","sleeptalk","hypervoice"]},
 			{"generation":3,"level":50,"moves":["stomp","screech","hyperbeam","roar"]}
@@ -2244,7 +2243,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	hariyama: {
-		viableMoves: {"crosschop":1,"bulletpunch":1,"closecombat":1,"icepunch":1,"stoneedge":1,"bulkup":1,"earthquake":1},
+		viableMoves: {"bulletpunch":1,"closecombat":1,"icepunch":1,"stoneedge":1,"bulkup":1,"earthquake":1},
 		tier: "NU"
 	},
 	nosepass: {
@@ -2268,14 +2267,14 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	delcatty: {
-		viableMoves: {"return":1,"doubleedge":1,"suckerpunch":1,"playrough":1,"wildcharge":1,"zenheadbutt":1,"fakeout":1,"thunderwave":1,"wish":1,"healbell":1},
+		viableMoves: {"doubleedge":1,"suckerpunch":1,"playrough":1,"wildcharge":1,"fakeout":1,"thunderwave":1,"wish":1,"healbell":1},
 		eventPokemon: [
 			{"generation":3,"level":18,"abilities":["cutecharm"],"moves":["sweetkiss","secretpower","attract","shockwave"]}
 		],
 		tier: "NU"
 	},
 	sableye: {
-		viableMoves: {"recover":1,"willowisp":1,"taunt":1,"trick":1,"toxic":1,"seismictoss":1,"knockoff":1,"foulplay":1},
+		viableMoves: {"recover":1,"willowisp":1,"taunt":1,"toxic":1,"knockoff":1,"foulplay":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","abilities":["keeneye"],"moves":["leer","scratch","foresight","nightshade"]},
 			{"generation":3,"level":33,"abilities":["keeneye"],"moves":["helpinghand","shadowball","feintattack","recover"]},
@@ -2284,7 +2283,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	mawile: {
-		viableMoves: {"swordsdance":1,"ironhead":1,"firefang":1,"substitute":1,"playrough":1,"suckerpunch":1,"knockoff":1},
+		viableMoves: {"swordsdance":1,"ironhead":1,"firefang":1,"substitute":1,"playrough":1,"suckerpunch":1,"knockoff":1,"focuspunch":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","moves":["astonish","faketears"]},
 			{"generation":3,"level":22,"moves":["sing","falseswipe","vicegrip","irondefense"]},
@@ -2293,7 +2292,7 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	mawilemega: {
-		viableMoves: {"swordsdance":1,"ironhead":1,"firefang":1,"substitute":1,"playrough":1,"suckerpunch":1,"knockoff":1},
+		viableMoves: {"swordsdance":1,"ironhead":1,"firefang":1,"substitute":1,"playrough":1,"suckerpunch":1,"knockoff":1,"focuspunch":1},
 		requiredItem: "Mawilite"
 	},
 	aron: {
@@ -2305,7 +2304,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	aggron: {
-		viableMoves: {"autotomize":1,"headsmash":1,"earthquake":1,"superpower":1,"heavyslam":1,"aquatail":1,"icepunch":1,"stealthrock":1,"thunderwave":1},
+		viableMoves: {"autotomize":1,"headsmash":1,"earthquake":1,"lowkick":1,"heavyslam":1,"aquatail":1,"stealthrock":1},
 		eventPokemon: [
 			{"generation":3,"level":100,"moves":["irontail","protect","metalsound","doubleedge"]},
 			{"generation":3,"level":50,"moves":["takedown","irontail","protect","metalsound"]}
@@ -2313,7 +2312,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	aggronmega: {
-		viableMoves: {"autotomize":1,"headsmash":1,"earthquake":1,"superpower":1,"heavyslam":1,"aquatail":1,"icepunch":1,"stealthrock":1,"thunderwave":1},
+		viableMoves: {"earthquake":1,"heavyslam":1,"icepunch":1,"stealthrock":1,"thunderwave":1,"roar":1},
 		requiredItem: "Aggronite"
 	},
 	meditite: {
@@ -2325,11 +2324,11 @@ exports.BattleFormatsData = {
 		tier: "LC Uber"
 	},
 	medicham: {
-		viableMoves: {"highjumpkick":1,"drainpunch":1,"psychocut":1,"icepunch":1,"thunderpunch":1,"fakeout":1,"bulletpunch":1,"zenheadbutt":1},
+		viableMoves: {"highjumpkick":1,"drainpunch":1,"zenheadbutt":1,"icepunch":1,"bulletpunch":1},
 		tier: "OU"
 	},
 	medichammega: {
-		viableMoves: {"highjumpkick":1,"drainpunch":1,"psychocut":1,"icepunch":1,"thunderpunch":1,"fakeout":1,"bulletpunch":1,"zenheadbutt":1},
+		viableMoves: {"highjumpkick":1,"drainpunch":1,"icepunch":1,"bulletpunch":1,"zenheadbutt":1,"firepunch":1},
 		requiredItem: "Medichamite",
 		tier: "BL"
 	},
@@ -2338,18 +2337,18 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	manectric: {
-		viableMoves: {"voltswitch":1,"thunderbolt":1,"hiddenpowerice":1,"hiddenpowergrass":1,"overheat":1,"flamethrower":1,"signalbeam":1},
+		viableMoves: {"voltswitch":1,"thunderbolt":1,"hiddenpowerice":1,"hiddenpowergrass":1,"overheat":1,"flamethrower":1},
 		eventPokemon: [
 			{"generation":3,"level":44,"moves":["refresh","thunder","raindance","bite"]}
 		],
 		tier: "OU"
 	},
 	manectricmega: {
-		viableMoves: {"voltswitch":1,"thunderbolt":1,"hiddenpowerice":1,"hiddenpowergrass":1,"overheat":1,"flamethrower":1,"signalbeam":1},
+		viableMoves: {"voltswitch":1,"thunderbolt":1,"hiddenpowerice":1,"hiddenpowergrass":1,"overheat":1,"flamethrower":1},
 		requiredItem: "Manectite"
 	},
 	plusle: {
-		viableMoves: {"nastyplot":1,"thunderbolt":1,"substitute":1,"batonpass":1,"hiddenpowerice":1},
+		viableMoves: {"nastyplot":1,"thunderbolt":1,"substitute":1,"batonpass":1,"hiddenpowerice":1,"encore":1},
 		eventPokemon: [
 			{"generation":3,"level":5,"moves":["growl","thunderwave","mudsport"]},
 			{"generation":3,"level":10,"gender":"M","moves":["growl","thunderwave","quickattack"]}
@@ -2365,7 +2364,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	volbeat: {
-		viableMoves: {"tailglow":1,"batonpass":1,"substitute":1,"bugbuzz":1,"thunderwave":1,"encore":1,"tailwind":1,"trick":1,"uturn":1},
+		viableMoves: {"tailglow":1,"batonpass":1,"substitute":1,"bugbuzz":1,"thunderwave":1,"encore":1,"tailwind":1},
 		tier: "NU"
 	},
 	illumise: {
@@ -2385,7 +2384,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	roserade: {
-		viableMoves: {"sludgebomb":1,"gigadrain":1,"sleeppowder":1,"leafstorm":1,"spikes":1,"toxicspikes":1,"rest":1,"synthesis":1,"hiddenpowerfire":1,"extrasensory":1},
+		viableMoves: {"sludgebomb":1,"gigadrain":1,"sleeppowder":1,"leafstorm":1,"spikes":1,"toxicspikes":1,"rest":1,"synthesis":1,"hiddenpowerfire":1},
 		tier: "UU"
 	},
 	gulpin: {
@@ -2396,7 +2395,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	swalot: {
-		viableMoves: {"stockpile":1,"sludgebomb":1,"icebeam":1,"toxic":1,"yawn":1,"encore":1,"painsplit":1,"earthquake":1},
+		viableMoves: {"sludgebomb":1,"icebeam":1,"toxic":1,"yawn":1,"encore":1,"painsplit":1,"earthquake":1},
 		tier: "NU"
 	},
 	carvanha: {
@@ -2415,7 +2414,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	wailord: {
-		viableMoves: {"waterspout":1,"surf":1,"hydropump":1,"icebeam":1,"hiddenpowergrass":1,"hiddenpowerfire":1},
+		viableMoves: {"waterspout":1,"hydropump":1,"icebeam":1,"hiddenpowergrass":1,"hiddenpowerfire":1},
 		eventPokemon: [
 			{"generation":3,"level":100,"moves":["rest","waterspout","amnesia","hydropump"]},
 			{"generation":3,"level":50,"moves":["waterpulse","mist","rest","waterspout"]}
@@ -2430,11 +2429,11 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	camerupt: {
-		viableMoves: {"rockpolish":1,"fireblast":1,"earthpower":1,"stoneedge":1,"lavaplume":1,"stealthrock":1,"earthquake":1,"eruption":1,"hiddenpowergrass":1},
+		viableMoves: {"rockpolish":1,"fireblast":1,"earthpower":1,"lavaplume":1,"stealthrock":1,"eruption":1,"hiddenpowergrass":1,"roar":1},
 		tier: "NU"
 	},
 	torkoal: {
-		viableMoves: {"rapidspin":1,"stealthrock":1,"yawn":1,"lavaplume":1,"earthquake":1,"toxic":1,"willowisp":1,"shellsmash":1,"fireblast":1},
+		viableMoves: {"rapidspin":1,"stealthrock":1,"yawn":1,"lavaplume":1,"earthpower":1,"toxic":1,"willowisp":1,"shellsmash":1,"fireblast":1},
 		tier: "NU"
 	},
 	spoink: {
@@ -2445,11 +2444,11 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	grumpig: {
-		viableMoves: {"calmmind":1,"psychic":1,"psyshock":1,"focusblast":1,"shadowball":1,"thunderwave":1,"trick":1,"healbell":1,"whirlwind":1},
+		viableMoves: {"psychic":1,"psyshock":1,"thunderwave":1,"healbell":1,"whirlwind":1,"toxic":1,"focusblast":1,"reflect":1,"lightscreen":1},
 		tier: "NU"
 	},
 	spinda: {
-		viableMoves: {"doubleedge":1,"wish":1,"protect":1,"return":1,"superpower":1,"suckerpunch":1,"trickroom":1},
+		viableMoves: {"doubleedge":1,"return":1,"superpower":1,"suckerpunch":1,"trickroom":1},
 		eventPokemon: [
 			{"generation":3,"level":5,"moves":["tackle","uproar","sing"]}
 		],
@@ -2467,7 +2466,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	flygon: {
-		viableMoves: {"earthquake":1,"outrage":1,"dragonclaw":1,"uturn":1,"roost":1,"substitute":1,"stoneedge":1,"firepunch":1,"superpower":1,"defog":1},
+		viableMoves: {"earthquake":1,"outrage":1,"dragonclaw":1,"uturn":1,"roost":1,"stoneedge":1,"firepunch":1,"fireblast":1,"defog":1},
 		eventPokemon: [
 			{"generation":3,"level":45,"moves":["sandtomb","crunch","dragonbreath","screech"]},
 			{"generation":4,"level":50,"gender":"M","nature":"Naive","moves":["dracometeor","uturn","earthquake","dragonclaw"],"pokeball":"cherishball"}
@@ -2482,7 +2481,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	cacturne: {
-		viableMoves: {"swordsdance":1,"spikes":1,"suckerpunch":1,"seedbomb":1,"drainpunch":1,"substitute":1,"focuspunch":1},
+		viableMoves: {"swordsdance":1,"spikes":1,"suckerpunch":1,"seedbomb":1,"drainpunch":1,"substitute":1,"focuspunch":1,"destinybond":1},
 		eventPokemon: [
 			{"generation":3,"level":45,"moves":["ingrain","feintattack","spikes","needlearm"]}
 		],
@@ -2497,7 +2496,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	altaria: {
-		viableMoves: {"dragondance":1,"dracometeor":1,"dragonpulse":1,"outrage":1,"dragonclaw":1,"earthquake":1,"roost":1,"fireblast":1,"healbell":1},
+		viableMoves: {"dragondance":1,"dracometeor":1,"outrage":1,"dragonclaw":1,"earthquake":1,"roost":1,"fireblast":1,"healbell":1},
 		eventPokemon: [
 			{"generation":3,"level":45,"moves":["takedown","dragonbreath","dragondance","refresh"]},
 			{"generation":3,"level":36,"moves":["healbell","dragonbreath","solarbeam","aerialace"]},
@@ -2506,7 +2505,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	zangoose: {
-		viableMoves: {"swordsdance":1,"closecombat":1,"nightslash":1,"quickattack":1,"facade":1},
+		viableMoves: {"swordsdance":1,"closecombat":1,"knockoff":1,"quickattack":1,"facade":1},
 		eventPokemon: [
 			{"generation":3,"level":18,"moves":["leer","quickattack","swordsdance","furycutter"]},
 			{"generation":3,"level":10,"gender":"M","moves":["scratch","leer","quickattack","swordsdance"]},
@@ -2515,7 +2514,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	seviper: {
-		viableMoves: {"flamethrower":1,"gigadrain":1,"earthquake":1,"suckerpunch":1,"aquatail":1,"coil":1,"glare":1,"poisonjab":1,"sludgewave":1},
+		viableMoves: {"flamethrower":1,"gigadrain":1,"earthquake":1,"suckerpunch":1,"aquatail":1,"coil":1,"glare":1,"poisonjab":1,"sludgebomb":1},
 		eventPokemon: [
 			{"generation":3,"level":18,"moves":["wrap","lick","bite","poisontail"]},
 			{"generation":3,"level":30,"moves":["poisontail","screech","glare","crunch"]},
@@ -2532,7 +2531,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	solrock: {
-		viableMoves: {"stealthrock":1,"explosion":1,"stoneedge":1,"zenheadbutt":1,"earthquake":1,"batonpass":1,"willowisp":1,"rockpolish":1,"morningsun":1,"trickroom":1},
+		viableMoves: {"stealthrock":1,"explosion":1,"stoneedge":1,"zenheadbutt":1,"willowisp":1,"morningsun":1,"trickroom":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"moves":["tackle","harden","confusion"]},
 			{"generation":3,"level":41,"moves":["batonpass","psychic","sunnyday","cosmicpower"]}
@@ -2558,7 +2557,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	crawdaunt: {
-		viableMoves: {"dragondance":1,"waterfall":1,"crunch":1,"superpower":1,"swordsdance":1,"knockoff":1,"aquajet":1},
+		viableMoves: {"dragondance":1,"crabhammer":1,"crunch":1,"superpower":1,"swordsdance":1,"knockoff":1,"aquajet":1},
 		eventPokemon: [
 			{"generation":3,"level":100,"moves":["taunt","crabhammer","swordsdance","guillotine"]},
 			{"generation":3,"level":50,"moves":["knockoff","taunt","crabhammer","swordsdance"]}
@@ -2573,7 +2572,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	claydol: {
-		viableMoves: {"stealthrock":1,"toxic":1,"psychic":1,"icebeam":1,"earthquake":1,"rapidspin":1,"reflect":1,"lightscreen":1},
+		viableMoves: {"stealthrock":1,"toxic":1,"psychic":1,"icebeam":1,"earthquake":1,"rapidspin":1},
 		tier: "RU"
 	},
 	lileep: {
@@ -2595,7 +2594,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	armaldo: {
-		viableMoves: {"stealthrock":1,"stoneedge":1,"toxic":1,"xscissor":1,"swordsdance":1,"earthquake":1,"superpower":1,"rapidspin":1},
+		viableMoves: {"stealthrock":1,"stoneedge":1,"toxic":1,"xscissor":1,"swordsdance":1,"knockoff":1,"rapidspin":1},
 		tier: "NU"
 	},
 	feebas: {
@@ -2603,7 +2602,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	milotic: {
-		viableMoves: {"recover":1,"scald":1,"toxic":1,"icebeam":1,"dragontail":1,"rest":1,"sleeptalk":1,"hiddenpowergrass":1,"hypnosis":1},
+		viableMoves: {"recover":1,"scald":1,"toxic":1,"icebeam":1,"dragontail":1,"rest":1,"sleeptalk":1,"hiddenpowergrass":1},
 		eventPokemon: [
 			{"generation":3,"level":35,"moves":["waterpulse","twister","recover","raindance"]},
 			{"generation":4,"level":50,"gender":"F","nature":"Bold","moves":["recover","raindance","icebeam","hydropump"],"pokeball":"cherishball"},
@@ -2618,7 +2617,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	kecleon: {
-		viableMoves: {"foulplay":1,"toxic":1,"stealthrock":1,"recover":1,"return":1,"thunderwave":1,"suckerpunch":1,"poweruppunch":1,"shadowsneak":1},
+		viableMoves: {"foulplay":1,"toxic":1,"stealthrock":1,"recover":1,"return":1,"thunderwave":1,"suckerpunch":1,"shadowsneak":1},
 		tier: "NU"
 	},
 	shuppet: {
@@ -2629,7 +2628,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	banette: {
-		viableMoves: {"destinybond":1,"taunt":1,"shadowclaw":1,"suckerpunch":1,"willowisp":1,"shadowsneak":1},
+		viableMoves: {"destinybond":1,"taunt":1,"shadowclaw":1,"suckerpunch":1,"willowisp":1,"shadowsneak":1,"knockoff":1},
 		eventPokemon: [
 			{"generation":3,"level":37,"abilities":["insomnia"],"moves":["helpinghand","feintattack","shadowball","curse"]},
 			{"generation":5,"level":37,"gender":"F","isHidden":true,"moves":["feintattack","hex","shadowball","cottonguard"]}
@@ -2637,7 +2636,7 @@ exports.BattleFormatsData = {
 		tier: "RU"
 	},
 	banettemega: {
-		viableMoves: {"destinybond":1,"taunt":1,"shadowclaw":1,"suckerpunch":1,"willowisp":1,"shadowsneak":1},
+		viableMoves: {"destinybond":1,"taunt":1,"shadowclaw":1,"suckerpunch":1,"willowisp":1,"shadowsneak":1,"knockoff":1},
 		requiredItem: "Banettite"
 	},
 	duskull: {
@@ -2657,7 +2656,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	tropius: {
-		viableMoves: {"leechseed":1,"substitute":1,"airslash":1,"gigadrain":1,"earthquake":1,"hiddenpowerfire":1,"roost":1,"leafstorm":1,"defog":1,"growth":1},
+		viableMoves: {"leechseed":1,"substitute":1,"airslash":1,"gigadrain":1,"earthquake":1,"hiddenpowerfire":1,"roost":1,"defog":1},
 		eventPokemon: [
 			{"generation":4,"level":53,"gender":"F","nature":"Jolly","abilities":["chlorophyll"],"moves":["airslash","synthesis","sunnyday","solarbeam"],"pokeball":"cherishball"}
 		],
@@ -2668,14 +2667,14 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	chimecho: {
-		viableMoves: {"hypnosis":1,"toxic":1,"wish":1,"psychic":1,"thunderwave":1,"recover":1,"calmmind":1,"shadowball":1,"hiddenpowerfighting":1,"healingwish":1,"healbell":1,"taunt":1},
+		viableMoves: {"toxic":1,"psychic":1,"thunderwave":1,"recover":1,"calmmind":1,"shadowball":1,"dazzlinggleam":1,"healingwish":1,"healbell":1,"taunt":1},
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","moves":["wrap","growl","astonish"]}
 		],
 		tier: "NU"
 	},
 	absol: {
-		viableMoves: {"swordsdance":1,"suckerpunch":1,"nightslash":1,"fireblast":1,"superpower":1,"pursuit":1,"megahorn":1,"playrough":1},
+		viableMoves: {"swordsdance":1,"suckerpunch":1,"knockoff":1,"fireblast":1,"superpower":1,"pursuit":1,"playrough":1},
 		eventPokemon: [
 			{"generation":3,"level":5,"abilities":["pressure"],"moves":["scratch","leer","wish"]},
 			{"generation":3,"level":5,"abilities":["pressure"],"moves":["scratch","leer","spite"]},
@@ -2685,7 +2684,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	absolmega: {
-		viableMoves: {"swordsdance":1,"suckerpunch":1,"nightslash":1,"fireblast":1,"superpower":1,"pursuit":1,"megahorn":1,"playrough":1},
+		viableMoves: {"swordsdance":1,"suckerpunch":1,"knockoff":1,"fireblast":1,"superpower":1,"pursuit":1,"playrough":1},
 		requiredItem: "Absolite"
 	},
 	snorunt: {
@@ -2696,11 +2695,11 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	glalie: {
-		viableMoves: {"spikes":1,"icebeam":1,"iceshard":1,"crunch":1,"earthquake":1,"switcheroo":1},
+		viableMoves: {"spikes":1,"icebeam":1,"iceshard":1,"taunt":1,"earthquake":1,"explosion":1},
 		tier: "NU"
 	},
 	froslass: {
-		viableMoves: {"icebeam":1,"spikes":1,"destinybond":1,"shadowball":1,"substitute":1,"taunt":1,"thunderbolt":1,"thunderwave":1,"switcheroo":1},
+		viableMoves: {"icebeam":1,"spikes":1,"destinybond":1,"shadowball":1,"taunt":1,"thunderwave":1},
 		tier: "BL2"
 	},
 	spheal: {
@@ -2734,11 +2733,11 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	relicanth: {
-		viableMoves: {"headsmash":1,"waterfall":1,"earthquake":1,"doubleedge":1,"stealthrock":1,"toxic":1,"zenheadbutt":1},
+		viableMoves: {"headsmash":1,"waterfall":1,"earthquake":1,"doubleedge":1,"stealthrock":1,"toxic":1},
 		tier: "NU"
 	},
 	luvdisc: {
-		viableMoves: {"surf":1,"icebeam":1,"toxic":1,"sweetkiss":1,"protect":1,"bounce":1},
+		viableMoves: {"surf":1,"icebeam":1,"toxic":1,"sweetkiss":1,"protect":1},
 		tier: "NU"
 	},
 	bagon: {
@@ -2776,7 +2775,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	metagross: {
-		viableMoves: {"meteormash":1,"earthquake":1,"agility":1,"stealthrock":1,"zenheadbutt":1,"bulletpunch":1,"trick":1,"thunderpunch":1,"explosion":1},
+		viableMoves: {"meteormash":1,"earthquake":1,"agility":1,"stealthrock":1,"zenheadbutt":1,"bulletpunch":1,"thunderpunch":1,"explosion":1,"icepunch":1},
 		eventPokemon: [
 			{"generation":4,"level":62,"nature":"Brave","moves":["bulletpunch","meteormash","hammerarm","zenheadbutt"],"pokeball":"cherishball"},
 			{"generation":5,"level":50,"isHidden":false,"moves":["meteormash","earthquake","bulletpunch","hammerarm"],"pokeball":"cherishball"},
@@ -2789,7 +2788,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	regirock: {
-		viableMoves: {"stealthrock":1,"thunderwave":1,"stoneedge":1,"earthquake":1,"curse":1,"rest":1,"sleeptalk":1,"rockslide":1,"toxic":1,"hammerarm":1},
+		viableMoves: {"stealthrock":1,"thunderwave":1,"stoneedge":1,"drainpunch":1,"curse":1,"rest":1,"sleeptalk":1,"rockslide":1,"toxic":1},
 		eventPokemon: [
 			{"generation":3,"level":40,"moves":["curse","superpower","ancientpower","hyperbeam"]}
 		],
@@ -2797,7 +2796,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	regice: {
-		viableMoves: {"thunderwave":1,"icebeam":1,"thunderbolt":1,"rest":1,"sleeptalk":1,"focusblast":1},
+		viableMoves: {"thunderwave":1,"icebeam":1,"thunderbolt":1,"rest":1,"sleeptalk":1,"focusblast":1,"rockpolish":1},
 		eventPokemon: [
 			{"generation":3,"level":40,"moves":["curse","superpower","ancientpower","hyperbeam"]}
 		],
@@ -2805,7 +2804,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	registeel: {
-		viableMoves: {"stealthrock":1,"ironhead":1,"curse":1,"rest":1,"thunderwave":1,"toxic":1,"explosion":1},
+		viableMoves: {"stealthrock":1,"ironhead":1,"curse":1,"rest":1,"thunderwave":1,"toxic":1,"seismictoss":1},
 		eventPokemon: [
 			{"generation":3,"level":40,"moves":["curse","superpower","ancientpower","hyperbeam"]}
 		],
@@ -2813,7 +2812,7 @@ exports.BattleFormatsData = {
 		tier: "RU"
 	},
 	latias: {
-		viableMoves: {"dragonpulse":1,"surf":1,"thunderbolt":1,"roost":1,"calmmind":1,"healingwish":1,"defog":1,"psychoshift":1},
+		viableMoves: {"dragonpulse":1,"surf":1,"thunderbolt":1,"roost":1,"calmmind":1,"healingwish":1,"defog":1},
 		eventPokemon: [
 			{"generation":3,"level":50,"gender":"F","moves":["charm","recover","psychic","mistball"]},
 			{"generation":3,"level":70,"gender":"F","moves":["mistball","psychic","recover","charm"]},
@@ -2822,12 +2821,12 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	latiasmega: {
-		viableMoves: {"dragonpulse":1,"surf":1,"thunderbolt":1,"roost":1,"calmmind":1,"healingwish":1,"defog":1,"psychoshift":1},
+		viableMoves: {"dragonpulse":1,"surf":1,"thunderbolt":1,"roost":1,"calmmind":1,"healingwish":1,"defog":1},
 		requiredItem: "Latiasite",
 		tier: "Unreleased"
 	},
 	latios: {
-		viableMoves: {"dracometeor":1,"dragonpulse":1,"surf":1,"thunderbolt":1,"psyshock":1,"roost":1,"trick":1},
+		viableMoves: {"dracometeor":1,"dragonpulse":1,"surf":1,"thunderbolt":1,"psyshock":1,"roost":1,"trick":1,"calmmind":1,"defog":1},
 		eventPokemon: [
 			{"generation":3,"level":50,"gender":"M","moves":["dragondance","recover","psychic","lusterpurge"]},
 			{"generation":3,"level":70,"gender":"M","moves":["lusterpurge","psychic","recover","dragondance"]},
@@ -2836,12 +2835,12 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	latiosmega: {
-		viableMoves: {"dracometeor":1,"dragonpulse":1,"surf":1,"thunderbolt":1,"psyshock":1,"roost":1,"trick":1},
+		viableMoves: {"dracometeor":1,"dragonpulse":1,"surf":1,"thunderbolt":1,"psyshock":1,"roost":1,"calmmind":1,"defog":1},
 		requiredItem: "Latiosite",
 		tier: "Unreleased"
 	},
 	kyogre: {
-		viableMoves: {"waterspout":1,"surf":1,"thunder":1,"icebeam":1,"calmmind":1,"rest":1,"sleeptalk":1},
+		viableMoves: {"waterspout":1,"surf":1,"thunder":1,"icebeam":1,"calmmind":1,"rest":1,"sleeptalk":1,"roar":1},
 		eventPokemon: [
 			{"generation":5,"level":80,"moves":["icebeam","ancientpower","waterspout","thunder"],"pokeball":"cherishball"},
 			{"generation":5,"level":100,"moves":["waterspout","thunder","icebeam","sheercold"],"pokeball":"cherishball"}
@@ -2849,7 +2848,7 @@ exports.BattleFormatsData = {
 		tier: "Uber"
 	},
 	groudon: {
-		viableMoves: {"earthquake":1,"dragontail":1,"stealthrock":1,"stoneedge":1,"swordsdance":1,"rockpolish":1,"thunderwave":1,"lavaplume":1},
+		viableMoves: {"earthquake":1,"roar":1,"stealthrock":1,"stoneedge":1,"swordsdance":1,"rockpolish":1,"thunderwave":1,"dragonclaw":1,"firepunch":1},
 		eventPokemon: [
 			{"generation":5,"level":80,"moves":["earthquake","ancientpower","eruption","solarbeam"],"pokeball":"cherishball"},
 			{"generation":5,"level":100,"moves":["eruption","hammerarm","earthpower","solarbeam"],"pokeball":"cherishball"}
@@ -2857,7 +2856,7 @@ exports.BattleFormatsData = {
 		tier: "Uber"
 	},
 	rayquaza: {
-		viableMoves: {"outrage":1,"vcreate":1,"extremespeed":1,"dragondance":1,"earthquake":1,"dracometeor":1,"dragonclaw":1,"ironhead":1},
+		viableMoves: {"outrage":1,"vcreate":1,"extremespeed":1,"dragondance":1,"earthquake":1,"dracometeor":1,"dragonclaw":1},
 		eventPokemon: [
 			{"generation":5,"level":70,"shiny":true,"moves":["dragonpulse","ancientpower","outrage","dragondance"],"pokeball":"cherishball"},
 			{"generation":5,"level":100,"moves":["extremespeed","hyperbeam","dragonpulse","vcreate"],"pokeball":"cherishball"}
@@ -2865,7 +2864,7 @@ exports.BattleFormatsData = {
 		tier: "Uber"
 	},
 	jirachi: {
-		viableMoves: {"bodyslam":1,"ironhead":1,"firepunch":1,"thunderwave":1,"stealthrock":1,"wish":1,"uturn":1,"calmmind":1,"psychic":1,"thunder":1,"icepunch":1,"flashcannon":1},
+		viableMoves: {"bodyslam":1,"ironhead":1,"firepunch":1,"thunderwave":1,"stealthrock":1,"wish":1,"uturn":1,"calmmind":1,"psychic":1,"thunderbolt":1,"icepunch":1,"trick":1},
 		eventPokemon: [
 			{"generation":3,"level":5,"moves":["wish","confusion","rest"]},
 			{"generation":3,"level":30,"moves":["helpinghand","psychic","refresh","rest"]},
@@ -2879,7 +2878,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	deoxys: {
-		viableMoves: {"psychoboost":1,"superpower":1,"extremespeed":1,"icebeam":1,"thunderbolt":1,"firepunch":1,"spikes":1,"stealthrock":1},
+		viableMoves: {"psychoboost":1,"lowkick":1,"extremespeed":1,"icebeam":1,"thunderbolt":1,"firepunch":1,"spikes":1,"stealthrock":1,"knockoff":1},
 		eventPokemon: [
 			{"generation":3,"level":30,"moves":["snatch","psychic","spikes","knockoff"]},
 			{"generation":3,"level":30,"moves":["superpower","psychic","pursuit","taunt"]},
@@ -2895,7 +2894,7 @@ exports.BattleFormatsData = {
 		tier: "Uber"
 	},
 	deoxysattack: {
-		viableMoves: {"psychoboost":1,"superpower":1,"extremespeed":1,"icebeam":1,"thunderbolt":1,"firepunch":1,"spikes":1,"stealthrock":1},
+		viableMoves: {"psychoboost":1,"superpower":1,"extremespeed":1,"icebeam":1,"thunderbolt":1,"firepunch":1,"spikes":1,"stealthrock":1,"knockoff":1},
 		eventPokemon: [
 			{"generation":3,"level":30,"moves":["snatch","psychic","spikes","knockoff"]},
 			{"generation":3,"level":30,"moves":["superpower","psychic","pursuit","taunt"]},
@@ -2924,10 +2923,10 @@ exports.BattleFormatsData = {
 			{"generation":4,"level":50,"moves":["psychoboost","leer","wrap","nightshade"]},
 			{"generation":5,"level":100,"moves":["nastyplot","darkpulse","recover","psychoboost"],"pokeball":"duskball"}
 		],
-		tier: "OU"
+		tier: "Uber"
 	},
 	deoxysspeed: {
-		viableMoves: {"spikes":1,"stealthrock":1,"superpower":1,"icebeam":1,"psychoboost":1,"taunt":1,"lightscreen":1,"reflect":1,"magiccoat":1,"trick":1,"extremespeed":1},
+		viableMoves: {"spikes":1,"stealthrock":1,"superpower":1,"icebeam":1,"psychoboost":1,"taunt":1,"lightscreen":1,"reflect":1,"magiccoat":1,"knockoff":1},
 		eventPokemon: [
 			{"generation":3,"level":30,"moves":["snatch","psychic","spikes","knockoff"]},
 			{"generation":3,"level":30,"moves":["superpower","psychic","pursuit","taunt"]},
@@ -2940,7 +2939,7 @@ exports.BattleFormatsData = {
 			{"generation":4,"level":50,"moves":["psychoboost","leer","wrap","nightshade"]},
 			{"generation":5,"level":100,"moves":["nastyplot","darkpulse","recover","psychoboost"],"pokeball":"duskball"}
 		],
-		tier: "OU"
+		tier: "Uber"
 	},
 	turtwig: {
 		viableMoves: {"reflect":1,"lightscreen":1,"stealthrock":1,"seedbomb":1,"substitute":1,"leechseed":1,"toxic":1},
@@ -2997,7 +2996,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	empoleon: {
-		viableMoves: {"stealthrock":1,"hydropump":1,"scald":1,"icebeam":1,"hiddenpowerelectric":1,"hiddenpowerfire":1,"roar":1,"grassknot":1,"flashcannon":1,"signalbeam":1,"defog":1},
+		viableMoves: {"stealthrock":1,"hydropump":1,"scald":1,"icebeam":1,"hiddenpowerelectric":1,"roar":1,"grassknot":1,"flashcannon":1,"defog":1,"agility":1},
 		eventPokemon: [
 			{"generation":5,"level":100,"gender":"M","isHidden":false,"moves":["hydropump","icebeam","aquajet","grassknot"],"pokeball":"cherishball"}
 		],
@@ -3015,7 +3014,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	staraptor: {
-		viableMoves: {"bravebird":1,"closecombat":1,"uturn":1,"quickattack":1,"substitute":1,"roost":1,"doubleedge":1},
+		viableMoves: {"bravebird":1,"closecombat":1,"uturn":1,"quickattack":1,"roost":1,"doubleedge":1},
 		tier: "BL"
 	},
 	bidoof: {
@@ -3026,7 +3025,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	bibarel: {
-		viableMoves: {"return":1,"waterfall":1,"curse":1,"quickattack":1,"stealthrock":1,"superfang":1},
+		viableMoves: {"return":1,"waterfall":1,"curse":1,"quickattack":1,"stealthrock":1,"rest":1},
 		tier: "NU"
 	},
 	kricketot: {
@@ -3034,7 +3033,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	kricketune: {
-		viableMoves: {"swordsdance":1,"bugbite":1,"aerialace":1,"brickbreak":1,"toxic":1,"stickyweb":1,"knockoff":1},
+		viableMoves: {"xscissor":1,"endeavor":1,"taunt":1,"toxic":1,"stickyweb":1,"knockoff":1},
 		tier: "NU"
 	},
 	shinx: {
@@ -3046,7 +3045,7 @@ exports.BattleFormatsData = {
 		tier: "NFE"
 	},
 	luxray: {
-		viableMoves: {"wildcharge":1,"icefang":1,"firefang":1,"crunch":1,"superpower":1},
+		viableMoves: {"wildcharge":1,"icefang":1,"voltswitch":1,"crunch":1,"superpower":1,"facade":1},
 		tier: "NU"
 	},
 	cranidos: {
@@ -3057,7 +3056,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	rampardos: {
-		viableMoves: {"headsmash":1,"rockslide":1,"earthquake":1,"zenheadbutt":1,"firepunch":1,"rockpolish":1,"crunch":1},
+		viableMoves: {"headsmash":1,"earthquake":1,"zenheadbutt":1,"rockpolish":1,"crunch":1,"stoneedge":1},
 		tier: "NU"
 	},
 	shieldon: {
@@ -3068,7 +3067,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	bastiodon: {
-		viableMoves: {"stealthrock":1,"metalburst":1,"fireblast":1,"icebeam":1,"protect":1,"toxic":1,"roar":1},
+		viableMoves: {"stealthrock":1,"rockblast":1,"magiccoat":1,"protect":1,"toxic":1,"roar":1},
 		tier: "NU"
 	},
 	burmy: {
@@ -3076,19 +3075,19 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	wormadam: {
-		viableMoves: {"leafstorm":1,"gigadrain":1,"signalbeam":1,"hiddenpowerice":1,"hiddenpowerrock":1,"toxic":1,"psychic":1,"protect":1},
+		viableMoves: {"leafstorm":1,"gigadrain":1,"signalbeam":1,"hiddenpowerice":1,"hiddenpowerrock":1,"toxic":1},
 		tier: "NU"
 	},
 	wormadamsandy: {
-		viableMoves: {"earthquake":1,"toxic":1,"rockblast":1,"protect":1,"stealthrock":1,"bulldoze":1},
+		viableMoves: {"earthquake":1,"toxic":1,"rockblast":1,"protect":1,"stealthrock":1},
 		tier: "NU"
 	},
 	wormadamtrash: {
-		viableMoves: {"stealthrock":1,"toxic":1,"ironhead":1,"protect":1,"swagger":1,"flashcannon":1},
+		viableMoves: {"stealthrock":1,"toxic":1,"gyroball":1,"protect":1},
 		tier: "NU"
 	},
 	mothim: {
-		viableMoves: {"quiverdance":1,"bugbuzz":1,"airslash":1,"gigadrain":1,"roost":1,"shadowball":1,"defog":1},
+		viableMoves: {"quiverdance":1,"bugbuzz":1,"airslash":1,"gigadrain":1,"roost":1},
 		tier: "NU"
 	},
 	combee: {
@@ -3096,11 +3095,11 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	vespiquen: {
-		viableMoves: {"substitute":1,"roost":1,"toxic":1,"attackorder":1,"protect":1,"defendorder":1},
+		viableMoves: {"substitute":1,"roost":1,"toxic":1,"attackorder":1,"defendorder":1},
 		tier: "NU"
 	},
 	pachirisu: {
-		viableMoves: {"lightscreen":1,"thunderwave":1,"superfang":1,"toxic":1,"voltswitch":1,"uturn":1},
+		viableMoves: {"nuzzle":1,"thunderbolt":1,"superfang":1,"toxic":1,"uturn":1},
 		tier: "NU"
 	},
 	buizel: {
@@ -3108,7 +3107,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	floatzel: {
-		viableMoves: {"waterfall":1,"aquajet":1,"switcheroo":1,"brickbreak":1,"bulkup":1,"batonpass":1,"icepunch":1,"crunch":1},
+		viableMoves: {"waterfall":1,"aquajet":1,"switcheroo":1,"bulkup":1,"batonpass":1,"icepunch":1,"crunch":1,"taunt":1},
 		tier: "NU"
 	},
 	cherubi: {
@@ -3124,7 +3123,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	gastrodon: {
-		viableMoves: {"earthpower":1,"icebeam":1,"scald":1,"toxic":1,"recover":1,"clearsmog":1,"stockpile":1},
+		viableMoves: {"earthquake":1,"icebeam":1,"scald":1,"toxic":1,"recover":1},
 		tier: "RU"
 	},
 	drifloon: {
@@ -3132,7 +3131,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	drifblim: {
-		viableMoves: {"shadowball":1,"substitute":1,"calmmind":1,"hypnosis":1,"hiddenpowerfighting":1,"thunderbolt":1,"destinybond":1,"willowisp":1,"stockpile":1,"batonpass":1,"explosion":1},
+		viableMoves: {"shadowball":1,"substitute":1,"calmmind":1,"hiddenpowerfighting":1,"thunderbolt":1,"destinybond":1,"willowisp":1,"batonpass":1},
 		tier: "NU"
 	},
 	buneary: {
@@ -3140,7 +3139,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	lopunny: {
-		viableMoves: {"fakeout":1,"return":1,"switcheroo":1,"thunderpunch":1,"jumpkick":1,"firepunch":1,"icepunch":1,"healingwish":1},
+		viableMoves: {"return":1,"switcheroo":1,"jumpkick":1,"firepunch":1,"icepunch":1,"healingwish":1},
 		tier: "NU"
 	},
 	glameow: {
@@ -3148,7 +3147,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	purugly: {
-		viableMoves: {"fakeout":1,"uturn":1,"suckerpunch":1,"hypnosis":1,"quickattack":1,"return":1},
+		viableMoves: {"fakeout":1,"uturn":1,"suckerpunch":1,"quickattack":1,"return":1,"knockoff":1},
 		tier: "NU"
 	},
 	stunky: {
@@ -3156,7 +3155,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	skuntank: {
-		viableMoves: {"pursuit":1,"suckerpunch":1,"crunch":1,"fireblast":1,"explosion":1,"taunt":1,"poisonjab":1, "playrough":1,"defog":1},
+		viableMoves: {"pursuit":1,"suckerpunch":1,"crunch":1,"fireblast":1,"taunt":1,"poisonjab":1,"playrough":1,"defog":1},
 		tier: "RU"
 	},
 	bronzor: {
@@ -3164,7 +3163,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	bronzong: {
-		viableMoves: {"stealthrock":1,"psychic":1,"earthquake":1,"toxic":1,"hypnosis":1,"reflect":1,"lightscreen":1,"trickroom":1,"explosion":1,"gyroball":1},
+		viableMoves: {"stealthrock":1,"earthquake":1,"toxic":1,"reflect":1,"lightscreen":1,"trickroom":1,"explosion":1,"gyroball":1},
 		tier: "RU"
 	},
 	chatot: {
@@ -3175,7 +3174,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	spiritomb: {
-		viableMoves: {"shadowsneak":1,"suckerpunch":1,"pursuit":1,"willowisp":1,"calmmind":1,"darkpulse":1,"rest":1,"sleeptalk":1},
+		viableMoves: {"shadowsneak":1,"suckerpunch":1,"pursuit":1,"willowisp":1,"calmmind":1,"darkpulse":1,"rest":1,"sleeptalk":1,"foulplay":1,"painsplit":1},
 		eventPokemon: [
 			{"generation":5,"level":61,"gender":"F","nature":"Quiet","isHidden":false,"moves":["darkpulse","psychic","silverwind","embargo"],"pokeball":"cherishball"}
 		],
@@ -3230,7 +3229,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	hippowdon: {
-		viableMoves: {"earthquake":1,"slackoff":1,"whirlwind":1,"stealthrock":1,"protect":1,"toxic":1,"icefang":1,"stoneedge":1,"stockpile":1},
+		viableMoves: {"earthquake":1,"slackoff":1,"whirlwind":1,"stealthrock":1,"toxic":1,"stoneedge":1},
 		tier: "UU"
 	},
 	skorupi: {
@@ -3238,7 +3237,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	drapion: {
-		viableMoves: {"crunch":1,"whirlwind":1,"toxicspikes":1,"pursuit":1,"earthquake":1,"aquatail":1,"swordsdance":1,"poisonjab":1,"knockoff":1},
+		viableMoves: {"whirlwind":1,"toxicspikes":1,"pursuit":1,"earthquake":1,"aquatail":1,"swordsdance":1,"poisonjab":1,"knockoff":1},
 		tier: "RU"
 	},
 	croagunk: {
@@ -3250,11 +3249,11 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	toxicroak: {
-		viableMoves: {"fakeout":1,"suckerpunch":1,"drainpunch":1,"bulkup":1,"substitute":1,"swordsdance":1,"knockoff":1,"icepunch":1,"gunkshot":1},
+		viableMoves: {"suckerpunch":1,"drainpunch":1,"substitute":1,"swordsdance":1,"knockoff":1,"icepunch":1,"gunkshot":1},
 		tier: "UU"
 	},
 	carnivine: {
-		viableMoves: {"swordsdance":1,"powerwhip":1,"return":1,"sleeppowder":1,"substitute":1,"leechseed":1,"knockoff":1,"sludgebomb":1},
+		viableMoves: {"swordsdance":1,"powerwhip":1,"return":1,"sleeppowder":1,"substitute":1,"leechseed":1,"knockoff":1},
 		tier: "NU"
 	},
 	finneon: {
@@ -3262,7 +3261,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	lumineon: {
-		viableMoves: {"surf":1,"uturn":1,"icebeam":1,"hiddenpowerelectric":1,"hiddenpowergrass":1,"raindance":1},
+		viableMoves: {"surf":1,"uturn":1,"icebeam":1,"hiddenpowerelectric":1,"hiddenpowergrass":1,"raindance":1,"defog":1},
 		tier: "NU"
 	},
 	snover: {
@@ -3278,61 +3277,61 @@ exports.BattleFormatsData = {
 		requiredItem: "Abomasite"
 	},
 	rotom: {
-		viableMoves: {"thunderbolt":1,"voltswitch":1,"shadowball":1,"substitute":1,"painsplit":1,"hiddenpowerice":1,"hiddenpowerfighting":1,"willowisp":1,"rest":1,"sleeptalk":1,"trick":1},
+		viableMoves: {"thunderbolt":1,"voltswitch":1,"shadowball":1,"substitute":1,"painsplit":1,"hiddenpowerice":1,"trick":1,"willowisp":1},
 		eventPokemon: [
 			{"generation":5,"level":10,"nature":"Naughty","moves":["uproar","astonish","trick","thundershock"],"pokeball":"cherishball"}
 		],
 		tier: "NU"
 	},
 	rotomheat: {
-		viableMoves: {"overheat":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"hiddenpowerice":1,"willowisp":1,"rest":1,"sleeptalk":1,"trick":1},
+		viableMoves: {"overheat":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"hiddenpowerice":1,"willowisp":1,"trick":1},
 		eventPokemon: [
 			{"generation":5,"level":10,"nature":"Naughty","moves":["uproar","astonish","trick","thundershock"],"pokeball":"cherishball"}
 		],
 		tier: "UU"
 	},
 	rotomwash: {
-		viableMoves: {"hydropump":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"hiddenpowerice":1,"willowisp":1,"trick":1,"signalbeam":1},
+		viableMoves: {"hydropump":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"hiddenpowerice":1,"willowisp":1,"trick":1},
 		eventPokemon: [
 			{"generation":5,"level":10,"nature":"Naughty","moves":["uproar","astonish","trick","thundershock"],"pokeball":"cherishball"}
 		],
 		tier: "OU"
 	},
 	rotomfrost: {
-		viableMoves: {"blizzard":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"hiddenpowerfighting":1,"willowisp":1,"trick":1},
+		viableMoves: {"blizzard":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"willowisp":1,"trick":1},
 		eventPokemon: [
 			{"generation":5,"level":10,"nature":"Naughty","moves":["uproar","astonish","trick","thundershock"],"pokeball":"cherishball"}
 		],
 		tier: "NU"
 	},
 	rotomfan: {
-		viableMoves: {"airslash":1,"thunderbolt":1,"voltswitch":1,"discharge":1,"substitute":1,"painsplit":1,"hiddenpowerfighting":1,"willowisp":1,"rest":1,"sleeptalk":1,"trick":1,"confuseray":1},
+		viableMoves: {"airslash":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"hiddenpowerice":1,"willowisp":1,"trick":1},
 		eventPokemon: [
 			{"generation":5,"level":10,"nature":"Naughty","moves":["uproar","astonish","trick","thundershock"],"pokeball":"cherishball"}
 		],
 		tier: "NU"
 	},
 	rotommow: {
-		viableMoves: {"leafstorm":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"hiddenpowerfire":1,"willowisp":1,"rest":1,"sleeptalk":1,"trick":1},
+		viableMoves: {"leafstorm":1,"thunderbolt":1,"voltswitch":1,"substitute":1,"painsplit":1,"hiddenpowerfire":1,"willowisp":1,"trick":1},
 		eventPokemon: [
 			{"generation":5,"level":10,"nature":"Naughty","moves":["uproar","astonish","trick","thundershock"],"pokeball":"cherishball"}
 		],
 		tier: "RU"
 	},
 	uxie: {
-		viableMoves: {"reflect":1,"lightscreen":1,"uturn":1,"psychic":1,"thunderwave":1,"yawn":1,"healbell":1,"stealthrock":1,"toxic":1,"foulplay":1,"thunderbolt":1},
+		viableMoves: {"uturn":1,"psyshock":1,"yawn":1,"healbell":1,"stealthrock":1,"toxic":1,"thunderbolt":1,"substitute":1,"calmmind":1},
 		tier: "NU"
 	},
 	mesprit: {
-		viableMoves: {"calmmind":1,"psychic":1,"thunderbolt":1,"icebeam":1,"substitute":1,"uturn":1,"trick":1,"stealthrock":1},
+		viableMoves: {"calmmind":1,"psyshock":1,"thunderbolt":1,"icebeam":1,"substitute":1,"uturn":1,"trick":1,"stealthrock":1,"knockoff":1,"zenheadbutt":1},
 		tier: "NU"
 	},
 	azelf: {
-		viableMoves: {"nastyplot":1,"psychic":1,"fireblast":1,"grassknot":1,"thunderbolt":1,"icepunch":1,"uturn":1,"trick":1,"taunt":1,"stealthrock":1,"explosion":1},
+		viableMoves: {"nastyplot":1,"psychic":1,"fireblast":1,"grassknot":1,"thunderbolt":1,"icepunch":1,"knockoff":1,"zenheadbutt":1,"uturn":1,"trick":1,"taunt":1,"stealthrock":1,"explosion":1},
 		tier: "UU"
 	},
 	dialga: {
-		viableMoves: {"stealthrock":1,"dracometeor":1,"dragonpulse":1,"roar":1,"dragontail":1,"thunderbolt":1,"outrage":1,"bulkup":1,"fireblast":1,"aurasphere":1,"rest":1,"sleeptalk":1,"dragonclaw":1},
+		viableMoves: {"stealthrock":1,"dracometeor":1,"dragonpulse":1,"roar":1,"thunderbolt":1,"flashcannon":1,"outrage":1,"fireblast":1,"aurasphere":1},
 		eventPokemon: [
 			{"generation":5,"level":100,"shiny":true,"isHidden":false,"moves":["dragonpulse","dracometeor","aurasphere","roaroftime"],"pokeball":"cherishball"}
 		],
@@ -3348,7 +3347,7 @@ exports.BattleFormatsData = {
 		tier: "Uber"
 	},
 	heatran: {
-		viableMoves: {"substitute":1,"fireblast":1,"lavaplume":1,"willowisp":1,"stealthrock":1,"earthpower":1,"hiddenpowergrass":1,"hiddenpowerice":1,"protect":1,"toxic":1,"roar":1},
+		viableMoves: {"substitute":1,"fireblast":1,"lavaplume":1,"willowisp":1,"stealthrock":1,"earthpower":1,"hiddenpowerice":1,"protect":1,"toxic":1,"roar":1},
 		viableDoublesMoves: {"heatwave":1,"substitute":1,"earthpower":1,"protect":1,"eruption":1,"willowisp":1},
 		eventPokemon: [
 			{"generation":4,"level":50,"nature":"Quiet","moves":["eruption","magmastorm","earthpower","ancientpower"]}
@@ -3357,7 +3356,7 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	regigigas: {
-		viableMoves: {"thunderwave":1,"substitute":1,"return":1,"drainpunch":1,"earthquake":1,"firepunch":1,"toxic":1,"confuseray":1},
+		viableMoves: {"thunderwave":1,"substitute":1,"return":1,"drainpunch":1,"earthquake":1,"confuseray":1},
 		eventPokemon: [
 			{"generation":4,"level":100,"moves":["ironhead","rockslide","icywind","crushgrip"],"pokeball":"cherishball"}
 		],
@@ -3372,12 +3371,12 @@ exports.BattleFormatsData = {
 		tier: "Uber"
 	},
 	giratinaorigin: {
-		viableMoves: {"dracometeor":1,"shadowsneak":1,"dragontail":1,"hiddenpowerfire":1,"willowisp":1,"calmmind":1,"substitute":1,"dragonpulse":1,"shadowball":1,"aurasphere":1,"outrage":1},
+		viableMoves: {"dracometeor":1,"shadowsneak":1,"dragontail":1,"hiddenpowerfire":1,"willowisp":1,"calmmind":1,"substitute":1,"dragonpulse":1,"shadowball":1,"aurasphere":1,"outrage":1,"earthquake":1},
 		requiredItem: "Griseous Orb",
 		tier: "Uber"
 	},
 	cresselia: {
-		viableMoves: {"moonlight":1,"psychic":1,"icebeam":1,"thunderwave":1,"toxic":1,"lunardance":1,"rest":1,"sleeptalk":1,"calmmind":1,"reflect":1,"lightscreen":1},
+		viableMoves: {"moonlight":1,"psychic":1,"icebeam":1,"thunderwave":1,"toxic":1,"lunardance":1,"rest":1,"sleeptalk":1,"calmmind":1},
 		viableDoublesMoves: {"psyshock":1,"icywind":1,"thunderwave":1,"trickroom":1,"moonblast":1,"moonlight":1,"skillswap":1,"reflect":1,"lightscreen":1,"icebeam":1,"protect":1,"helpinghand":1},
 		eventPokemon: [
 			{"generation":5,"level":68,"gender":"F","nature":"Modest","moves":["icebeam","psyshock","energyball","hiddenpower"]}
@@ -3385,14 +3384,14 @@ exports.BattleFormatsData = {
 		tier: "RU"
 	},
 	phione: {
-		viableMoves: {"raindance":1,"scald":1,"uturn":1,"rest":1,"icebeam":1,"surf":1},
+		viableMoves: {"raindance":1,"scald":1,"uturn":1,"rest":1,"icebeam":1},
 		eventPokemon: [
 			{"generation":4,"level":50,"abilities":["hydration"],"moves":["grassknot","raindance","rest","surf"],"pokeball":"cherishball"}
 		],
 		tier: "NU"
 	},
 	manaphy: {
-		viableMoves: {"tailglow":1,"surf":1,"icebeam":1,"grassknot":1},
+		viableMoves: {"tailglow":1,"surf":1,"icebeam":1,"energyball":1,"psychic":1},
 		eventPokemon: [
 			{"generation":4,"level":5,"moves":["tailglow","bubble","watersport"]},
 			{"generation":4,"level":1,"moves":["tailglow","bubble","watersport"]},
@@ -3404,7 +3403,7 @@ exports.BattleFormatsData = {
 		tier: "BL"
 	},
 	darkrai: {
-		viableMoves: {"darkvoid":1,"darkpulse":1,"focusblast":1,"nastyplot":1,"substitute":1,"trick":1},
+		viableMoves: {"darkvoid":1,"darkpulse":1,"focusblast":1,"nastyplot":1,"substitute":1,"trick":1,"sludgebomb":1},
 		viableDoublesMoves: {"darkpulse":1,"focusblast":1,"nastyplot":1,"substitute":1,"snarl":1,"protect":1},
 		eventPokemon: [
 			{"generation":4,"level":50,"moves":["roaroftime","spacialrend","nightmare","hypnosis"],"pokeball":"cherishball"},
@@ -3445,7 +3444,7 @@ exports.BattleFormatsData = {
 		tier: "Uber"
 	},
 	arceusbug: {
-		viableMoves: {"swordsdance":1,"xscissor":1,"stoneedge":1,"recover":1,"calmmind":1,"judgment":1,"icebeam":1,"fireblast":1},
+		viableMoves: {"swordsdance":1,"xscissor":1,"stoneedge":1,"recover":1,"earthquake":1,"ironhead":1},
 		requiredItem: "Insect Plate"
 	},
 	arceusdark: {
@@ -3461,11 +3460,12 @@ exports.BattleFormatsData = {
 		requiredItem: "Zap Plate"
 	},
 	arceusfairy: {
+		viableMoves: {"calmmind":1,"judgment":1,"recover":1,"willowisp":1,"defog":1,"earthpower":1,"thunderbolt":1},
 		requiredItem: "Pixie Plate",
 		gen: 6
 	},
 	arceusfighting: {
-		viableMoves: {"calmmind":1,"judgment":1,"icebeam":1,"darkpulse":1,"recover":1,"toxic":1},
+		viableMoves: {"calmmind":1,"judgment":1,"icebeam":1,"shadowball":1,"recover":1,"toxic":1,"defog":1},
 		requiredItem: "Fist Plate"
 	},
 	arceusfire: {
@@ -3473,15 +3473,15 @@ exports.BattleFormatsData = {
 		requiredItem: "Flame Plate"
 	},
 	arceusflying: {
-		viableMoves: {"calmmind":1,"judgment":1,"refresh":1,"recover":1},
+		viableMoves: {"calmmind":1,"judgment":1,"refresh":1,"recover":1,"substitute":1},
 		requiredItem: "Sky Plate"
 	},
 	arceusghost: {
-		viableMoves: {"calmmind":1,"judgment":1,"focusblast":1,"flamethrower":1,"recover":1,"swordsdance":1,"shadowclaw":1,"brickbreak":1,"willowisp":1,"roar":1},
+		viableMoves: {"calmmind":1,"judgment":1,"focusblast":1,"recover":1,"swordsdance":1,"shadowforce":1,"brickbreak":1,"willowisp":1,"roar":1,"defog":1},
 		requiredItem: "Spooky Plate"
 	},
 	arceusgrass: {
-		viableMoves: {"calmmind":1,"icebeam":1,"judgment":1,"earthpower":1,"recover":1,"stealthrock":1,"thunderwave":1},
+		viableMoves: {"calmmind":1,"icebeam":1,"judgment":1,"earthpower":1,"recover":1,"stealthrock":1,"thunderwave":1,"defog":1},
 		requiredItem: "Meadow Plate"
 	},
 	arceusground: {
@@ -3493,7 +3493,7 @@ exports.BattleFormatsData = {
 		requiredItem: "Icicle Plate"
 	},
 	arceuspoison: {
-		viableMoves: {"calmmind":1,"judgment":1,"sludgebomb":1,"focusblast":1,"fireblast":1,"recover":1,"willowisp":1,"icebeam":1,"stealthrock":1},
+		viableMoves: {"calmmind":1,"judgment":1,"sludgebomb":1,"fireblast":1,"recover":1,"willowisp":1,"defog":1,"stealthrock":1},
 		requiredItem: "Toxic Plate"
 	},
 	arceuspsychic: {
@@ -3501,15 +3501,15 @@ exports.BattleFormatsData = {
 		requiredItem: "Mind Plate"
 	},
 	arceusrock: {
-		viableMoves: {"calmmind":1,"judgment":1,"recover":1,"willowisp":1,"swordsdance":1,"stoneedge":1,"earthquake":1,"refresh":1},
+		viableMoves: {"calmmind":1,"judgment":1,"recover":1,"willowisp":1,"defog":1,"refresh":1},
 		requiredItem: "Stone Plate"
 	},
 	arceussteel: {
-		viableMoves: {"calmmind":1,"judgment":1,"recover":1,"roar":1,"willowisp":1,"swordsdance":1,"ironhead":1},
+		viableMoves: {"calmmind":1,"judgment":1,"recover":1,"roar":1,"willowisp":1,"defog":1},
 		requiredItem: "Iron Plate"
 	},
 	arceuswater: {
-		viableMoves: {"swordsdance":1,"waterfall":1,"extremespeed":1,"dragonclaw":1,"recover":1,"calmmind":1,"judgment":1,"icebeam":1,"fireblast":1},
+		viableMoves: {"recover":1,"calmmind":1,"judgment":1,"icebeam":1,"fireblast":1,"defog":1,"willowisp":1},
 		requiredItem: "Splash Plate"
 	},
 	victini: {
@@ -3599,11 +3599,11 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	purrloin: {
-		viableMoves: {"swagger":1,"thunderwave":1,"substitute":1,"foulplay":1},
+		viableMoves: {"encore":1,"suckerpunch":1,"playrough":1,"uturn":1,"knockoff":1},
 		tier: "LC"
 	},
 	liepard: {
-		viableMoves: {"swagger":1,"thunderwave":1,"substitute":1,"foulplay":1},
+		viableMoves: {"encore":1,"thunderwave":1,"substitute":1,"knockoff":1,"playrough":1,"uturn":1,"suckerpunch":1},
 		eventPokemon: [
 			{"generation":5,"level":20,"gender":"F","nature":"Jolly","isHidden":true,"moves":["fakeout","foulplay","encore","swagger"]}
 		],
@@ -3922,7 +3922,7 @@ exports.BattleFormatsData = {
 	},
 	gothitelle: {
 		viableMoves: {"psychic":1,"thunderbolt":1,"hiddenpowerfighting":1,"shadowball":1,"substitute":1,"calmmind":1,"reflect":1,"lightscreen":1,"trick":1,"psyshock":1,"grassknot":1,"signalbeam":1},
-		tier: "BL"
+		tier: "UU"
 	},
 	solosis: {
 		viableMoves: {"calmmind":1,"recover":1,"psychic":1,"hiddenpowerfighting":1,"shadowball":1,"trickroom":1,"psyshock":1},
@@ -4087,7 +4087,7 @@ exports.BattleFormatsData = {
 		eventPokemon: [
 			{"generation":5,"level":59,"gender":"F","nature":"Naive","isHidden":false,"abilities":["moldbreaker"],"moves":["earthquake","dualchop","xscissor","dragondance"],"pokeball":"cherishball"}
 		],
-		tier: "BL"
+		tier: "UU"
 	},
 	cubchoo: {
 		viableMoves: {"icebeam":1,"surf":1,"hiddenpowergrass":1,"superpower":1},
@@ -4243,7 +4243,7 @@ exports.BattleFormatsData = {
 		eventPokemon: [
 			{"generation":5,"level":70,"gender":"M","isHidden":false,"moves":["hurricane","hammerarm","airslash","hiddenpower"],"pokeball":"cherishball"}
 		],
-		tier: "UU"
+		tier: "BL"
 	},
 	thundurus: {
 		viableMoves: {"thunderwave":1,"nastyplot":1,"thunderbolt":1,"hiddenpowerice":1,"focusblast":1,"grassknot":1,"substitute":1},
@@ -4410,6 +4410,12 @@ exports.BattleFormatsData = {
 	},
 	vivillon: {
 		viableMoves: {"sleeppowder":1,"quiverdance":1,"hurricane":1,"bugbuzz":1,"roost":1},
+		eventPokemon: [
+			// Poké Ball pattern
+			{"generation":6,"level":12,"gender":"M","isHidden":false,"moves":["stunspore","gust","lightscreen","strugglebug"],"pokeball":"cherishball"},
+			// Fancy pattern
+			{"generation":6,"level":12,"isHidden":false,"moves":["gust","lightscreen","strugglebug","holdhands"],"pokeball":"cherishball"}
+		],
 		tier: "NU"
 	},
 	litleo: {
@@ -4499,7 +4505,7 @@ exports.BattleFormatsData = {
 		tier: "NU"
 	},
 	inkay: {
-		viableMoves: {"topsyturvy":1,"switcheroo":1,"superpower":1,"psychocut":1,"flamethrower":1,"rockslide":1,"trickroom":1,"swagger":1,"foulplay":1},
+		viableMoves: {"topsyturvy":1,"switcheroo":1,"superpower":1,"psychocut":1,"flamethrower":1,"rockslide":1,"trickroom":1},
 		eventPokemon: [
 			{"generation":6,"level":10,"isHidden":false,"moves":["happyhour","foulplay","hypnosis","topsyturvy"],"pokeball":"cherishball"}
 		],
@@ -4595,7 +4601,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	klefki: {
-		viableMoves: {"reflect":1,"lightscreen":1,"spikes":1,"torment":1,"substitute":1,"thunderwave":1,"drainingkiss":1,"swagger":1,"foulplay":1,"flashcannon":1,"dazzlinggleam":1},
+		viableMoves: {"reflect":1,"lightscreen":1,"spikes":1,"torment":1,"substitute":1,"thunderwave":1,"drainingkiss":1,"flashcannon":1,"dazzlinggleam":1},
 		tier: "BL"
 	},
 	phantump: {
@@ -4673,8 +4679,12 @@ exports.BattleFormatsData = {
 		tier: "BL"
 	},
 	diancie: {
-		isUnreleased: true,
-		tier: "Unreleased"
+		viableMoves: {"diamondstorm":1,"moonblast":1,"reflect":1,"lightscreen":1,"substitute":1,"calmmind":1,"psychic":1,"stealthrock":1},
+		viableDoublesMoves: {"diamondstorm":1,"moonblast":1,"reflect":1,"lightscreen":1,"safeguard":1,"substitute":1,"calmmind":1,"psychic":1,"dazzlinggleam":1,"protect":1},
+		eventPokemon: [
+			{"generation":6,"level":50,"moves":["diamondstorm","moonblast","reflect","return"],"pokeball":"cherishball"}
+		],
+		tier: "OU"
 	},
 	hoopa: {
 		isUnreleased: true,

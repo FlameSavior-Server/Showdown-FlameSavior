@@ -3804,7 +3804,20 @@ var commands = exports.commands = {
 			this.sendReply("User " + target + " is not locked.");
 		}
 	},
-	
+
+	lockdt: 'lockdetails',
+	lockdetails: function (target, room, user) {
+		if (!this.can('lock')) return false;
+		var targetUser = Users.get(target);
+		if (!targetUser) return this.sendReply("User '" + target + "' does not exist.");
+		if (!targetUser.locked) return this.sendReply("User '" + targetUser.name + "' was not locked from chat.");
+		var canIp = user.can('ip', targetUser);
+		for (var ip in targetUser.ips) {
+			if (Dnsbl.cache[ip]) return this.sendReply("User '" + targetUser.name + "' is locked due to their IP " + (canIp ? "(" + ip + ") " : "") + "being in a DNS-based blacklist" + (canIp ? " (" + Dnsbl.cache[ip] + ")." : "."));
+		}
+		return this.sendReply("User '" + targetUser.name + "' is locked for unknown reasons. Check their modlog?");
+	},
+
 	b: 'ban',
 	ban: function (target, room, user) {
 		if (!target) return this.parse('/help ban');
@@ -4415,15 +4428,17 @@ var commands = exports.commands = {
 			try {
 				CommandParser.uncacheTree('./command-parser.js');
 				CommandParser = require('./command-parser.js');
-				
+
 				CommandParser.uncacheTree('./hangman.js');
-                		hangman = require('./hangman.js').hangman(hangman);
-                		
-                		CommandParser.uncacheTree('./tour.js');
-                		global.tour = require('./tour.js').tour(tour);
-                		
-                		CommandParser.uncacheTree('./core.js'); 
-                		Core = require('./core.js').core;
+                hangman = require('./hangman.js').hangman(hangman);
+                  		
+                CommandParser.uncacheTree('./core.js'); 
+                Core = require('./core.js').core;
+
+				var runningTournaments = Tournaments.tournaments;
+				CommandParser.uncacheTree('./tournaments/middleend.js');
+				Tournaments = require('./tournaments/middleend.js');
+				Tournaments.tournaments = runningTournaments;
 
 				return this.sendReply("Chat commands have been hot-patched.");
 			} catch (e) {
@@ -4434,8 +4449,8 @@ var commands = exports.commands = {
 
 			try {
 				var runningTournaments = Tournaments.tournaments;
-				CommandParser.uncacheTree('./tournaments/frontend.js');
-				Tournaments = require('./tournaments/frontend.js');
+				CommandParser.uncacheTree('./tournaments/middleend.js');
+				Tournaments = require('./tournaments/middleend.js');
 				Tournaments.tournaments = runningTournaments;
 				return this.sendReply("Tournaments have been hot-patched.");
 			} catch (e) {
@@ -4515,7 +4530,13 @@ var commands = exports.commands = {
 		Rooms.global.lockdown = true;
 		for (var id in Rooms.rooms) {
 			if (id !== 'global') Rooms.rooms[id].addRaw("<div class=\"broadcast-red\"><b>The server is restarting soon.</b><br />Please finish your battles quickly. No new battles can be started until the server resets in a few minutes.</div>");
-			if (Rooms.rooms[id].requestKickInactive && !Rooms.rooms[id].battle.ended) Rooms.rooms[id].requestKickInactive(user, true);
+			if (Rooms.rooms[id].requestKickInactive && !Rooms.rooms[id].battle.ended) {
+				Rooms.rooms[id].requestKickInactive(user, true);
+				if (Rooms.rooms[id].modchat !== '+') {
+					Rooms.rooms[id].modchat = '+';
+					Rooms.rooms[id].addRaw("<div class=\"broadcast-red\"><b>Moderated chat was set to +!</b><br />Only users of rank + and higher can talk.</div>");
+				}
+			}
 		}
 
 		this.logEntry(user.name + " used /lockdown");

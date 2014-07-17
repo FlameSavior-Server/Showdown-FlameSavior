@@ -4229,13 +4229,14 @@ var commands = exports.commands = {
 			'I believe in what I think is right, even when what I think is wrong</center>');
 	},
 
+	pedophile: 'hope',
 	hope: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/EYkBb4N.jpg" width="96" height="96">' +
+		this.sendReplyBox('<center><img src="https://i.imgur.com/wA3QG58.gif">' +
 			'<img src="http://i.imgur.com/SlN7Yla.gif">' +
-			'<img src="http://i.imgur.com/mIolDwv.jpg" width="96" height="96"><br />' +
-			'<font color=#00BFFF><b>Ace:</b> Artifail </font><br />' +
-			'You can\'t smoke mushrooms, but imagine a line of shrooms</center>');
+			'<img src="https://i.imgur.com/OkqMkB8.png" width="180"><br />' +
+			'<b>Ace:</b> Lolis<br />' +
+			'I like my women like i like my wine, 12 years old and in the basement</center>');
 	},
 
 	shm: 'swedishmafia',

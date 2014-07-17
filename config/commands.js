@@ -4234,7 +4234,7 @@ var commands = exports.commands = {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://i.imgur.com/wA3QG58.gif">' +
 			'<img src="http://i.imgur.com/SlN7Yla.gif">' +
-			'<img src="https://i.imgur.com/OkqMkB8.png" width="180"><br />' +
+			'<img src="https://i.imgur.com/OkqMkB8.png" width="160"><br />' +
 			'<b>Ace:</b> Lolis<br />' +
 			'I like my women like i like my wine, 12 years old and in the basement</center>');
 	},

@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	tylan: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/scizor-mega.gif">' +
+    			'<img src="http://i.imgur.com/iUvVWk7.gif">' +
+    			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lucario-mega.gif"><br />' +
+    			'<b>Ace:</b> Mega Lucario And Sciz<br />' +
+    			'The Steel Dominators.</center>');
+    	},
+	
 	stunfisk: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i629.photobucket.com/albums/uu15/psnmoonlight/stunfisk.gif" width="165">' +

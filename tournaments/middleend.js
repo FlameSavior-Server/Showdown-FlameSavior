@@ -717,6 +717,7 @@ var Tournament = (function () {
 				this.room.add('|raw|<b><font color=#24678d>'+Tools.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+money+'</font> '+buck+' for winning the tournament!</b>');
 				economy.writeMoney('money', toId(winner), money);
 			} catch (e) {}
+		}
 		delete exports.tournaments[toId(this.room.id)];
 	};
 

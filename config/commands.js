@@ -1104,7 +1104,7 @@ var commands = exports.commands = {
 	
 	saago: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://fc01.deviantart.net/fs26/f/2008/160/3/8/Clear_Image_of_Shaymi_Sky_Form_by_Atsui_Gure.png"><br />' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/v3wWa5Z.jpg"><br />' +
                 'Everything you\'ve ever wanted is on the other side of fear.</center>');
 	},
 	

@@ -4435,6 +4435,9 @@ var commands = exports.commands = {
                 CommandParser.uncacheTree('./core.js'); 
                 Core = require('./core.js').core;
 
+                CommandParser.uncacheTree('./economy.js');
+                economy = require('./economy.js');
+
 				var runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments/middleend.js');
 				Tournaments = require('./tournaments/middleend.js');

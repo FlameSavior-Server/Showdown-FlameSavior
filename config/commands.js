@@ -1852,7 +1852,7 @@ var commands = exports.commands = {
 			"- <font color=\"#39FF14\"><a href=\"https://github.com/panpawn/Pokemon-Showdown\">GitHub</a></font><br />" +
 			"- <font color=\"#BFFF00\"><a href=\"http://goldserver.weebly.com/news.html\">News</a></font><br />" +
 			"- <font color=\"#DA9D01\"><a href=\"http://goldserver.weebly.com/faqs.html\">FAQs</a></font><br />" +
-			"- <font color=\"#12C418\"><a href=\"http://goldserver.weebly.com/discipline-appeals.html\">Discipline Appeals</a></font>"
+			"- <font color=\"#12C418\"><a href=\"http://goldserver.weebly.com/discipline-appeals.html\">Discipline Appeals</a></font>" +
 			"</b></div>"
 			);
 	},

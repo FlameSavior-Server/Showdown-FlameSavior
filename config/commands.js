@@ -1832,8 +1832,8 @@ var commands = exports.commands = {
 			"<center>Like this server and what to keep it going?  If so, you can make a paypal donation to Gold!  You can choose the amount.<br />" +
 			'<hr width="85%">' +
 			"- Donations will help Gold to upgrade the VPS so we can do more and hold more users!<br />" +
-			"- For donations <b>$5 or over</b>, you can get: a custom avatar, a custom trainer card, a custom symbol, and a custom music box!<br />" +
-			"- For donations <b>$10 and over</b>, it will get you: (the above) and VIP status along with a VIP badge!<br />" +
+			"- For donations <b>$5 or over</b>, you can get: 200 bucks, a custom avatar, a custom trainer card, a custom symbol, and a custom music box!<br />" +
+			"- For donations <b>$10 and over</b>, it will get you: (the above), 600 bucks (in addition to the above 200, making 800 total) and VIP status along with a VIP badge!<br />" +
 			"- Refer to the /shop command for a more detailed description of these prizes.  After donating, PM panpawn.<br />" +
 			'<hr width="85%">' +
 			"Click the button below to donate!<br />" +

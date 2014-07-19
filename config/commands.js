@@ -1845,14 +1845,14 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"<div class=\"broadcast-black\">Here are some helpful server related links:<b><br />" +
-			"- <font color=\"#FF0066\"><a href=\"http://goldserver.weebly.com/rules.html\">Rules</a></font><br />" +
-			"- <font color=\"#FF00\"><a href=\"http://w11.zetaboards.com/Goldserverps/index/\">Forums</a></font><br />" +
-			"- <font color=\"#56600FF\"><a href=\"http://goldserver.weebly.com\">Website</a></font><br />" +
-			"- <font color=\"#FFFF\"><a href=\"http://plug.dj/gold-server/\">Plug.dj</a></font><br />" +
-			"- <font color=\"#39FF14\"><a href=\"https://github.com/panpawn/Pokemon-Showdown\">GitHub</a></font><br />" +
-			"- <font color=\"#BFFF00\"><a href=\"http://goldserver.weebly.com/news.html\">News</a></font><br />" +
-			"- <font color=\"#DA9D01\"><a href=\"http://goldserver.weebly.com/faqs.html\">FAQs</a></font><br />" +
-			"- <font color=\"#12C418\"><a href=\"http://goldserver.weebly.com/discipline-appeals.html\">Discipline Appeals</a></font>" +
+			"- <a href=\"http://goldserver.weebly.com/rules.html\"><font color=\"#FF0066\">Rules</a></font><br />" +
+			"- <a href=\"http://w11.zetaboards.com/Goldserverps/index/\"><font color=\"#FF00\">Forums</a></font><br />" +
+			"- <a href=\"http://goldserver.weebly.com\"><font color=\"#56600FF\">Website</a></font><br />" +
+			"- <a href=\"http://plug.dj/gold-server/\"><font color=\"#FFFF\">Plug.dj</a></font><br />" +
+			"- <a href=\"https://github.com/panpawn/Pokemon-Showdown\"><font color=\"#39FF14\">GitHub</a></font><br />" +
+			"- <a href=\"http://goldserver.weebly.com/news.html\"><font color=\"#BFFF00\">News</a></font><br />" +
+			"- <a href=\"http://goldserver.weebly.com/faqs.html\"><font color=\"#DA9D01\">FAQs</a></font><br />" +
+			"- <a href=\"http://goldserver.weebly.com/discipline-appeals.html\"><font color=\"#12C418\">Discipline Appeals</a></font>" +
 			"</b></div>"
 			);
 	},

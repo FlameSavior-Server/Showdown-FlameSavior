@@ -1214,7 +1214,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/l4Jidxb.png"><br />' +
                 '<img src="http://i.imgur.com/KN7i30o.gif" width="400"><br />' +
-                '<img src="http://31.media.tumblr.com/81d0f9f62cf77222b7dc2b61f9bab6e3/tumblr_mo3vrcXpGA1rwqq0uo1_400.gif">' +
+                '<img src="http://31.media.tumblr.com/81d0f9f62cf77222b7dc2b61f9bab6e3/tumblr_mo3vrcXpGA1rwqq0uo1_400.gif"><br />' +
                 'You thought you\'ve seen it all...<br />' +
                 'You would be wrong...<br />' +
                 'Very wrong...</center>');

@@ -1669,7 +1669,7 @@ var commands = exports.commands = {
 			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=BblV6AQsd2s">Swing Life Away</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=BY17Rg0ppKw">Initiation</a><br>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=ZIUGf1yVD7s">Rise Of The Runaways</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=i1imBcVhO0M">20 Dollar Nose Bleed</a><br></center>' +
 			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
 	},

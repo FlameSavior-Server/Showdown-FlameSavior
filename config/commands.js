@@ -1218,7 +1218,7 @@ var commands = exports.commands = {
                 'You thought you\'ve seen it all...<br />' +
                 'You would be wrong...<br />' +
                 'Very wrong...</center>');
-	},1
+	},
 	
 	typhozzz: function(target, room, user) {
 	if (!this.canBroadcast()) return;

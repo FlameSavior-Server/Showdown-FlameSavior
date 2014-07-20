@@ -65,9 +65,9 @@ body {
 }
 
 .chat-log {
-	background: url("http://frostserver.net:8000/images/background2.png") right top no-repeat;
-	font-size:10pt;
-	overflow:auto
+	background: url("http://i.imgur.com/dIfUHsq.png") right top no-repeat;
+	#font-size:10pt;
+	#overflow:auto
 }
 
 .menugroup .button{

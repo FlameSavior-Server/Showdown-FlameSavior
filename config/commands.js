@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	mo: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/EJIaMWR.jpg" width="220">' +
+    			'<img src="http://i.imgur.com/scFn6uM.gif">' +
+    			'<img src="http://i.imgur.com/N2jg8gJ.jpg" height="180"><br />' +
+    			'<b>Ace:</b> Pinky &lt;3<br />' +
+    			'GET A MOON OR DIE!</center>');
+    	},
+	
 	tylan: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/scizor-mega.gif">' +

@@ -1834,14 +1834,20 @@ var commands = exports.commands = {
 			'You jeli, bro?</center>');
 	},
 
+	theneovoid: 'tnv',
 	tnv: function(target, room, user) {
     		if (!this.canBroadcast()) return;
-    		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados.gif">' +
-    			'<img src="http://i.imgur.com/DIRsxib.gif" width="330">' +
-    			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/banette-mega.gif"><br />' +
-    			'<b><font color="#52CC52">Ace:</b> Anything that puts chills down my opponents\'s spine!</font><br />' +
-    			'<font color="white">Git Gud</font><br />' +
-			'<button name="send" value="/transferbucks The Neo Void, 1" target="_blank">Charity isn\'t measured by how much you give, but how little you have and still giving.(Donates A Buck)</button></center>');
+    		this.sendReplyBox('<center><font face="Comic Sans MS" size=15>Sample Text</font><br />' +
+    			'<img src="http://0-media-cdn.foolz.us/ffuuka/board/wsg/image/1384/51/1384517184337.gif" width=250><br />' +
+    			'<b><font face="Comic Sans MS" size=<font color="#52CC52">Ace:</font>' +
+    			'<img src="http://blog.mobileroadie.com/wp-content/uploads/2012/04/CaseStudy_042312_MLG-450x340.jpg" width=50>' +
+    			'<font face="Comic Sans MS" size=3>The Neo Void</b><img src="http://i435.photobucket.com/albums/qq72/L0N6H0RN/mdewTAR.png" width=60"><br />' +
+    			'<b>Quote: </b>"<b>I</b><b>L</b><b>L</b> fucking rek <b>U</b> <b>M</b>8, <b>I</b> swear on me <b>N</b><b>A</b>' +
+    			'n, ill shoo<b>T</b> u wif me qu<b>I</b>ckscope."</center<p><center><img src="https://38.media.tumblr.com/b598' +
+    			'54ce68791dca5ec062e37fe1bb8b/tumblr_n90294cqmS1rsyi8go1_75sq.gif" width=25><button name="send" type="button "' +
+    			' value="/transferbucks The Neo Void, 1" target="_blank">DONATE 2 ME OR IL REPOT U M8. IF U DON HAV MUNNY, GIT' +
+    			' GUD SCRUB</button><img src="https://38.media.tumblr.com/b59854ce68791dca5ec062e37fe1bb8b/tumblr_n90294cqmS1r' +
+    			'syi8go1_75sq.gif" width=25></center>');
     	},
 	
 	klefki: function(target, room, user) {

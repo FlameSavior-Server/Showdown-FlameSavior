@@ -4094,14 +4094,17 @@ var commands = exports.commands = {
 			'Luck.</center>');
 	},
 
-	wrath: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/JYSIIvd.gif" width="120">' +
-			'<img src="http://i.imgur.com/RdY55b0.png" width="290">' +
-			'<img src="http://i.imgur.com/ESsVLu4.gif" width="120"><br />' +
-			'<b>Ace:</b> Edges<br />' +
-			'Appearances rarely share the whole truth.</center>');
-	},
+	psyscorschach: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<img src="http://i.imgur.com/YbY4840.png">' +
+    			'<img src="http://s15.postimg.org/9mcf6lj4n/screenshot_118.png" width="110">' +
+    			'<img src="http://i266.photobucket.com/albums/ii265/sony1270/Scorpion.jpg" width="100">' +
+			'<img src="http://i.imgur.com/VLDEcVs.png" width="100"><br />' +
+    			'<center><b>Ace:</b> Gallade, Heliolisk, Landorus<br />' +
+    			'Scorpion\'s sting would would make a bee of a black mambo<br />' +
+			'Zen will end your life faster than Chicago, Get 6-0\'d By Rors for thinking that ya macho<br />' +
+			'Anybody can get bodybagged by the PsyScorSchach Combo</center>');
+    	},
 
 	salemance: 'elite4salemance',
 	elite4salemance: function(target, room, user) {

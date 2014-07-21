@@ -4101,7 +4101,7 @@ var commands = exports.commands = {
     			'<img src="http://i266.photobucket.com/albums/ii265/sony1270/Scorpion.jpg" width="100">' +
 			'<img src="http://i.imgur.com/VLDEcVs.png" width="100"><br />' +
     			'<center><b>Ace:</b> Gallade, Heliolisk, Landorus<br />' +
-    			'Scorpion\'s sting would would make a bee of a black mambo<br />' +
+    			'Scorpion\'s sting would make a bee of a black mambo<br />' +
 			'Zen will end your life faster than Chicago, Get 6-0\'d By Rors for thinking that ya macho<br />' +
 			'Anybody can get bodybagged by the PsyScorSchach Combo</center>');
     	},

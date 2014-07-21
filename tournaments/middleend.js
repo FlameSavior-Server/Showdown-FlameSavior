@@ -714,12 +714,17 @@ var Tournament = (function () {
 		this.isEnded = true;
 
 		data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
+		var data2 = data;
 		data = data['results'].toString();
 
 		if (data.indexOf(',') >= 0) { 
 			data = data.split(',');
 			winner = data[0];
-			if (data[1]) runnerUp = data[1];
+			// there's probably a better way to do this but I'm lazy
+			if (data2['bracketData']['rootNode']['children']) {
+				if (data2['bracketData']['rootNode']['children'][0]['team'] !== winner) var runnerUp = data2['bracketData']['rootNode']['children'][0]['team'];
+				if (data2['bracketData']['rootNode']['children'][1]['team'] !== winner) var runnerUp = data2['bracketData']['rootNode']['children'][1]['team'];
+			}		
 		} else {
 			winner = data;
 		}
@@ -739,12 +744,12 @@ var Tournament = (function () {
 			economy.writeMoney('money', toId(winner), firstMoney, function(){
 				var newMoney = economy.readMoney('money', toId(winner));
 				economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
-				/*if (runnerUp) {
+				if (runnerUp) {
 					economy.writeMoney('money', toId(runnerUp), secondMoney, function() {
 						var newMoney2 = economy.readMoney('money',toId(runnerUp));
 						economy.logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney2);
 					});
-				}*/
+				}
 			});
 		}
 		frostcommands.addTourWin(winner,this.format);

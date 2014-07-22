@@ -1744,6 +1744,25 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	sae: function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/suicune.gif">' +
+                        '<img src="http://i.imgur.com/CeTVoJg.png">' +
+                        '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lanturn.gif"><br />' +
+                        '<b>Ace:</b> Suicune<br />' +
+                        'Battles are like the waves, you never know which way the tides will turn.</center>');
+        },
+	
+	tygastro: 'tyga',
+	tyga: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/gyarados.gif">' +
+    			'<img src="http://i.imgur.com/CwwYtMD.png">' +
+    			'<img src="http://images6.fanpop.com/image/photos/34000000/Steven-Stone-pokemon-steven-stone-34077948-302-400.jpg" width="120"><br />' +
+    			'<b>Ace:</b> <font color="purple">Gyarados</font><br />' +
+    			'<font color="orange">Fix that attitude around me.</font></center>');
+    	},
+	
 	pix: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://static.tumblr.com/1b17af80ded13382d32e38945bf14ff8/bpdkmvt/h8Vmqbz32/tumblr_static_1212_-_gif_mark_henry_wwe.gif" width="180">' +

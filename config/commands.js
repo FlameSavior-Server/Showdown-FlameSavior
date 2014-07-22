@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	pix: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://static.tumblr.com/1b17af80ded13382d32e38945bf14ff8/bpdkmvt/h8Vmqbz32/tumblr_static_1212_-_gif_mark_henry_wwe.gif" width="180">' +
+    			'<img src="http://i.imgur.com/cAoSjXd.png">' +
+    			'<img src="http://www.somegif.com/gifs/1363711542831138275.GIF" width="180"><br />' +
+    			'<b>Ace:</b> Smash and Pass<br />' +
+    			'Feels Good Man.</center>');
+    	},
+	
 	shag: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://33.media.tumblr.com/cc4b9cafb6acc9a964a544cc220cf969/tumblr_mqn39b5Ev71s6hco9o3_500.gif" width="120">' +

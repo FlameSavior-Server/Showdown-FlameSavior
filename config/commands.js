@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	shag: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://33.media.tumblr.com/cc4b9cafb6acc9a964a544cc220cf969/tumblr_mqn39b5Ev71s6hco9o3_500.gif" width="120">' +
+    			'<img src="http://i.imgur.com/U0Rf51C.png" width="300">' +
+    			'<img src="http://31.media.tumblr.com/tumblr_m2rbujGAHZ1r6e21po1_500.gif" width="120"><br />' +
+    			'<b>Ace:</b> Aggron<br />' +
+    			'Men are like steel. When they lose their temper, they lose their worth.</center>');
+    	},
+	
 	mo: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/EJIaMWR.jpg" width="220">' +
@@ -3796,11 +3805,11 @@ var commands = exports.commands = {
 
 	barida: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://0.media.dorkly.cvcdn.com/24/80/cc1436d5b12b108f59e8e8121e2ce766.gif" width="160">' +
-			'<img src="http://i.imgur.com/wRiZqYo.gif" width="220">' +
-			'<img src="https://38.media.tumblr.com/5a9e5618c32933506b9a66f1f9849232/tumblr_mu895wkM4b1qf1qjho1_500.gif" width="160"><br />' +
-			'<b>Ace:</b> Mega Charizard X<br />' +
-			'If you don\'t like your destiny, don\'t accept it, instead have the courage to change it the way you want it to be.</center>');
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/honchkrow.gif" width="150">' +
+			'<img src="http://i.imgur.com/0bkdErK.png" width="280">' +
+			'<img src="http://31.media.tumblr.com/tumblr_lybvxn6UYi1qgj2rto1_1280.png?.jpg" width="110"><br />' +
+			'<b>Ace:</b> Pimp Lord Honchkrow<br />' +
+			'Life is about challenges, Theres no point in living if there\'s no one strong to play. Its better if i cant win..</center>');
 	},
 
 	epin: 'epinicion',

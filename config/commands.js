@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	firnen: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/hippowdon.gif">' +
+    			'<img src="http://i.imgur.com/72GZ2c0.png">' +
+    			'<img src="http://i.imgur.com/5aeCLV7.png" width="160"><br />' +
+    			'<b>Ace:</b> Hippowdon advertiser sandstorms<br />' +
+    			'The Belgian user of Frost... Beer, chocolate, waffles and french fries is my motto!</center>');
+    	},
+	
 	sae: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/suicune.gif">' +

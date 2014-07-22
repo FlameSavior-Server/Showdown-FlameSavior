@@ -2296,11 +2296,12 @@ var commands = exports.commands = {
 			'I\'m the Apex Predator.</center>');
 	},
 	
-	naoto: function(target, room, user) {
+	esep: 'ese',
+	ese: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i1110.photobucket.com/albums/h460/SweetLynn17/Naoto%20Shirogane/tumblr_msbpyhNegg1rce69vo3_500_zps3af56d46.gif" width="120">' +
-			'<img src="http://i.imgur.com/OjV5Lad.png" width="320">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados-mega.gif" width="100"><br />' +
+		this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20140315020528/rwbyfanon/images/1/14/IbbIJDqMKYtvQZ.gif" width="130">' +
+			'<img src="http://i.imgur.com/R8WHW6t.gif" width="340">' +
+			'<img src="http://24.media.tumblr.com/6366ef75eb549cc676338027a7004937/tumblr_mk3d8giUNw1qg1v6ho3_250.gif" width="70"><br />' +
 			'<b>Ace:</b> Meloetta<br />' +
 			'That\'s what you get for not knowing your place.</center>');
 	},

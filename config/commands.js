@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	kaiserslegacy: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ9VPKmltlIFDmc8hpeIYKOfRw5j1SD1dBafq1U_aamjMcFZfA45A" width="130">' +
+    			'<img src="http://i.imgur.com/pG8f4hz.png">' +
+    			'<img src="http://pldh.net/media/dreamworld/475.png" width="120"><br />' +
+    			'<b>Ace:</b> Logic<br />' +
+    			'What makes a good player is dedication, but what makes a champion is skill.</center>');
+    	},
+	
 	firnen: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/hippowdon.gif">' +

@@ -1744,6 +1744,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	caillou: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://popdose.com/wp-content/uploads/caillou21.jpg" width="120">' +
+    			'<img src="http://i.imgur.com/cxVaXLq.png">' +
+    			'<img src="http://img2.wikia.nocookie.net/__cb20121117102851/caillou/images/1/19/Caillou-xl-pictures-03.jpg" width="140"><br />' +
+    			'<b>Ace:</b> Swag<br />' +
+    			'Swag Swag like Caillou.</center>');
+    	},
+	
 	kaiserslegacy: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ9VPKmltlIFDmc8hpeIYKOfRw5j1SD1dBafq1U_aamjMcFZfA45A" width="130">' +

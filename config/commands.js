@@ -1750,7 +1750,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/wKbQGZn.png" width="180">' +
     			'<img src="http://i.imgur.com/cSYaNBu.jpg" width="180"><br />' +
     			'<b>Ace:</b> Zen Mode Darmanitan | Dark Monotype<br />' +
-    			'"You know I always wanted to be the best<br />' +
+    			'"You know I always wanted to be the best,<br />' +
 			'You know I always wanted to be God."</center>');
     	},
 	

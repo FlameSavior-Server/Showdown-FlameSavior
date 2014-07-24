@@ -2010,8 +2010,8 @@ var commands = exports.commands = {
 				CommandParser.uncacheTree('./hangman.js');
 				hangman = require('./hangman.js').hangman();
 				var runningTournaments = Tournaments.tournaments;
-				CommandParser.uncacheTree('./tournaments/middleend.js');
-				Tournaments = require('./tournaments/middleend.js');
+				CommandParser.uncacheTree('./tournaments');
+				Tournaments = require('./tournaments');
 				Tournaments.tournaments = runningTournaments;
 				return this.sendReply('Chat commands have been hot-patched.');
 			} catch (e) {
@@ -2022,8 +2022,8 @@ var commands = exports.commands = {
 
 			try {
 				var runningTournaments = Tournaments.tournaments;
-				CommandParser.uncacheTree('./tournaments/middleend.js');
-				Tournaments = require('./tournaments/middleend.js');
+				CommandParser.uncacheTree('./tournaments');
+				Tournaments = require('./tournaments');
 				Tournaments.tournaments = runningTournaments;
 				return this.sendReply("Tournaments have been hot-patched.");
 			} catch (e) {

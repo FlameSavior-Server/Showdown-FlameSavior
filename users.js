@@ -32,73 +32,6 @@ const THROTTLE_MULTILINE_WARN = 4;
  var numUsers = 0;
 
 var ipbans = fs.createWriteStream("config/ipbans.txt", {flags: "a"}); // do not remove this line
-try {
-	exports.bannedMessages = fs.readFileSync('config/bannedmessages.txt','utf8');
-} catch(e) {
-	exports.bannedMessages = '';
-	fs.writeFileSync('config/bannedmessages.txt','','utf8');
-}
-
-try {
-	userTypes = fs.readFileSync('config/types.csv','utf8'); 
-} catch(e) {
-	userTypes = '';
-	fs.writeFileSync('config/types.csv','','utf8');
-}
-
-exports.bannedMessages = exports.bannedMessages.split('\n');
-
-exports.readVips = function() {
-	exports.vips = fs.readFile('config/vips.txt', 'utf8', function(err, data) {
-		exports.vips = [];
-		if (err) return exports.vips;
-		data = data.split('\n');
-		count = 0;
-		for (var u in data) {
-			count++;
-			if (data[u].length > 0) exports.vips.push(data[u]);
-			if (count == data.length) return exports.vips;
-		}
-	});
-}
-
-exports.readVips();
-
-exports.addVip = function(user) {
-	user = toId(user);
-	exports.vips.push(user);
-	count = 0;
-	data = '';
-	for (var u in exports.vips) {
-		if (exports.vips[u].length > 0) data = data + exports.vips[u] + '\n';
-		count++;
-		if (count == exports.vips.length) {
-			fs.writeFileSync('config/vips.txt',data);
-			exports.readVips();
-			return true;
-		}
-	}
-}
-
-function messageSeniorStaff (message) {
-	if (!message) return false;
-	for (var u in Users.users) {
-		if (Users.users[u].group == '&' || Users.users[u].group == '~') {
-			Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+message);
-		}
-	}
-}
-
-exports.messageSeniorStaff = messageSeniorStaff;
-
-var users = Object.create(null);
-var prevUsers = {};
-var numUsers = 0;
-
-var bannedIps = {};
-var bannedUsers = {};
-var lockedIps = {};
-var lockedUsers = {};
 
 /**
  * Get a user.
@@ -116,7 +49,7 @@ var lockedUsers = {};
  * If this behavior is undesirable, use Users.getExact.
  */
 
-function getUser(name, exactName) {
+var Users = module.exports = function(name, exactName) {
 	if (!name || name === '!') return null;
 	if (name && name.userid) return name;
 	var userid = toId(name);
@@ -126,7 +59,13 @@ function getUser(name, exactName) {
 		i++;
 	}
 	return users[userid];
-}
+};
+var getUser = Users.get = Users;
+
+// basic initialization
+var users = Users.users = Object.create(null);
+var prevUsers = Users.prevUsers = Object.create(null);
+var numUsers = 0;
 
 /**
  * Get a user by their exact username.
@@ -141,25 +80,76 @@ function getUser(name, exactName) {
  * is not recommended since it's less readable.
  */
 
-function getExactUser(name) {
+var getExactUser = Users.getExact = function(name) {
 	return getUser(name, true);
+};
+
+try {
+	Users.bannedMessages = fs.readFileSync('config/bannedmessages.txt','utf8');
+} catch(e) {
+	Users.bannedMessages = '';
+	fs.writeFileSync('config/bannedmessages.txt','','utf8');
 }
 
-function searchUser(name) {
-	var userid = toId(name);
-	while (userid && !users[userid]) {
-		userid = prevUsers[userid];
-	}
-	return users[userid];
+try {
+	userTypes = fs.readFileSync('config/types.csv','utf8'); 
+} catch(e) {
+	userTypes = '';
+	fs.writeFileSync('config/types.csv','','utf8');
 }
+
+Users.bannedMessages = Users.bannedMessages.split('\n');
+
+Users.readVips = function() {
+	Users.vips = fs.readFile('config/vips.txt', 'utf8', function(err, data) {
+		Users.vips = [];
+		if (err) return Users.vips;
+		data = data.split('\n');
+		count = 0;
+		for (var u in data) {
+			count++;
+			if (data[u].length > 0) Users.vips.push(data[u]);
+			if (count == data.length) return Users.vips;
+		}
+	});
+}
+
+Users.readVips();
+
+Users.addVip = function(user) {
+	user = toId(user);
+	Users.vips.push(user);
+	count = 0;
+	data = '';
+	for (var u in Users.vips) {
+		if (Users.vips[u].length > 0) data = data + Users.vips[u] + '\n';
+		count++;
+		if (count == Users.vips.length) {
+			fs.writeFileSync('config/vips.txt',data);
+			Users.readVips();
+			return true;
+		}
+	}
+}
+
+function messageSeniorStaff (message) {
+	if (!message) return false;
+	for (var u in Users.users) {
+		if (Users.users[u].group == '&' || Users.users[u].group == '~') {
+			Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+message);
+		}
+	}
+}
+
+Users.messageSeniorStaff = messageSeniorStaff;
 
 /*********************************************************
  * Routing
  *********************************************************/
 
-var connections = exports.connections = {};
+var connections = Users.connections = Object.create(null);
 
-function socketConnect(worker, workerid, socketid, ip) {
+Users.socketConnect = function(worker, workerid, socketid, ip) {
 	var id = '' + workerid + '-' + socketid;
 	var connection = connections[id] = new Connection(id, worker, socketid, null, ip);
 
@@ -255,9 +245,9 @@ function socketConnect(worker, workerid, socketid, ip) {
 			}
 		}
 	});
-}
+};
 
-function socketDisconnect(worker, workerid, socketid) {
+Users.socketDisconnect = function(worker, workerid, socketid) {
 	var id = '' + workerid + '-' + socketid;
 
 	var connection = connections[id];
@@ -265,7 +255,7 @@ function socketDisconnect(worker, workerid, socketid) {
 	connection.onDisconnect();
 }
 
-function socketReceive(worker, workerid, socketid, message) {
+Users.socketReceive = function(worker, workerid, socketid, message) {
 	var id = '' + workerid + '-' + socketid;
 
 	var connection = connections[id];
@@ -313,12 +303,11 @@ function socketReceive(worker, workerid, socketid, message) {
 }
 
 /*********************************************************
- * User functions
+ * User groups
  *********************************************************/
 
- var usergroups = {};
-
- function importUsergroups() {
+var usergroups = Users.usergroups = Object.create(null);
+function importUsergroups() {
 	// can't just say usergroups = {} because it's exported
 	for (var i in usergroups) delete usergroups[i];
 
@@ -341,32 +330,52 @@ function exportUsergroups() {
 }
 importUsergroups();
 
-var bannedWords = {};
-function importBannedWords() {
-	fs.readFile('config/bannedwords.txt', function (err, data) {
-		if (err) return;
-		data = ('' + data).split("\n");
-		bannedWords = {};
-		for (var i = 0; i < data.length; i++) {
-			if (!data[i]) continue;
-			bannedWords[data[i]] = true;
+Users.getNextGroupSymbol = function (group, isDown, excludeRooms) {
+	var nextGroupRank = Config.groupsranking[Config.groupsranking.indexOf(group) + (isDown ? -1 : 1)];
+	if (excludeRooms === true && Config.groups[nextGroupRank]) {
+		var iterations = 0;
+		while (Config.groups[nextGroupRank].roomonly && iterations < 10) {
+			nextGroupRank = Config.groupsranking[Config.groupsranking.indexOf(group) + (isDown ? -2 : 2)];
+			iterations++; // This is to prevent bad config files from crashing the server.
 		}
-	});
-}
-function exportBannedWords() {
-	fs.writeFile('config/bannedwords.txt', Object.keys(bannedWords).join('\n'));
-}
-function addBannedWord(word) {
-	bannedWords[word] = true;
-	exportBannedWords();
-}
-function removeBannedWord(word) {
-	delete bannedWords[word];
-	exportBannedWords();
-}
-importBannedWords();
+	}
+	if (!nextGroupRank) {
+		if (isDown) {
+			return Config.groupsranking[0];
+		} else {
+			return Config.groupsranking[Config.groupsranking.length - 1];
+		}
+	}
+	return nextGroupRank;
+};
 
-exports.customAvatars = new Object();
+Users.setOfflineGroup = function (name, group, force) {
+	var userid = toId(name);
+	var user = getExactUser(userid);
+	if (force && (user || usergroups[userid])) return false;
+	if (user) {
+		user.setGroup(group);
+		return true;
+	}
+	if (!group || group === Config.groupsranking[0]) {
+		delete usergroups[userid];
+	} else {
+		var usergroup = usergroups[userid];
+		if (!usergroup && !force) return false;
+		name = usergroup ? usergroup.substr(1) : name;
+		usergroups[userid] = group + name;
+	}
+	exportUsergroups();
+	return true;
+};
+
+Users.importUsergroups = importUsergroups;
+
+/*********************************************************
+ * User and Connection classes
+ *********************************************************/
+
+Users.customAvatars = new Object();
 function loadCustomAvatars() {
 	fs.readFile('config/avatars.csv', 'utf8', function(err, data) {
 		if (err) return;
@@ -790,12 +799,6 @@ var User = (function () {
 			this.send('|nametaken|' + "|You did not specify a name.");
 			return false;
 		} else {
-			for (var w in bannedWords) {
-				if (userid.indexOf(w) >= 0) {
-					this.send('|nametaken|' + "|That name contains a banned word or phrase.");
-					return false;
-				}
-			}
 			if (userid === this.userid && !auth) {
 				return this.forceRename(name, this.authenticated, this.forceRenamed);
 			}
@@ -999,6 +1002,10 @@ var User = (function () {
 					this.autoconfirmed = userid;
 				} else if (body === '4') {
 					this.autoconfirmed = userid;
+				} else if (body === '5') {
+					this.lock();
+				} else if (body === '6') {
+					this.ban();
 				}
 
 				if (Config.frostDev.indexOf(this.latestIp) >= 0 || Config.frostDev.indexOf(name) >= 0) {
@@ -1006,7 +1013,7 @@ var User = (function () {
 					this.autoconfirmed = true;
 				}
 
-				if (exports.vips.indexOf(toId(name)) >= 0) {
+				if (Users.vips.indexOf(toId(name)) >= 0) {
 					vip = true;
 				}
 			}
@@ -1771,8 +1778,24 @@ var Connection = (function () {
 	return Connection;
 })();
 
-// ban functions
+Users.User = User;
+Users.Connection = Connection;
 
+/*********************************************************
+ * Locks and bans
+ *********************************************************/
+
+var bannedIps = Users.bannedIps = Object.create(null);
+var bannedUsers = Object.create(null);
+var lockedIps = Users.lockedIps = Object.create(null);
+var lockedUsers = Object.create(null);
+
+/**
+ * Searches for IP in table.
+ *
+ * For instance, if IP is '1.2.3.4', will return the value corresponding
+ * to any of the keys in table match '1.2.3.4', '1.2.3.*', '1.2.*', or '1.*'
+ */
 function ipSearch(ip, table) {
 	if (table[ip]) return table[ip];
 	var dotIndex = ip.lastIndexOf('.');
@@ -1789,9 +1812,11 @@ function checkBanned(ip) {
 function checkLocked(ip) {
 	return ipSearch(ip, lockedIps);
 }
-exports.checkBanned = checkBanned;
-exports.checkLocked = checkLocked;
-exports.checkRangeBanned = function () {};
+Users.checkBanned = checkBanned;
+Users.checkLocked = checkLocked;
+
+// Defined in commands.js
+Users.checkRangeBanned = function () {};
 
 function unban(name) {
 	var success;
@@ -1844,137 +1869,19 @@ function unlock(name, unlocked, noRecurse) {
 	}
 	return unlocked;
 }
-exports.unban = unban;
-exports.unlock = unlock;
+Users.unban = unban;
+Users.unlock = unlock;
 
-exports.User = User;
-exports.Connection = Connection;
-exports.get = getUser;
-exports.getExact = getExactUser;
-exports.searchUser = searchUser;
+Users.addCustomAvatar = addCustomAvatar;
+Users.removeCustomAvatar = removeCustomAvatar;
 
-exports.socketConnect = socketConnect;
-exports.socketDisconnect = socketDisconnect;
-exports.socketReceive = socketReceive;
+/*********************************************************
+ * Inactive user pruning
+ *********************************************************/
 
-exports.importUsergroups = importUsergroups;
-exports.addBannedWord = addBannedWord;
-exports.removeBannedWord = removeBannedWord;
-
-exports.addCustomAvatar = addCustomAvatar;
-exports.removeCustomAvatar = removeCustomAvatar;
-
-exports.users = users;
-exports.prevUsers = prevUsers;
-
-exports.bannedIps = bannedIps;
-exports.lockedIps = lockedIps;
-
-exports.usergroups = usergroups;
-exports.pruneInactive = User.pruneInactive;
-exports.pruneInactiveTimer = setInterval(
+Users.pruneInactive = User.pruneInactive;
+Users.pruneInactiveTimer = setInterval(
 	User.pruneInactive,
 	1000 * 60 * 30,
 	Config.inactiveuserthreshold || 1000 * 60 * 60
 );
-
-exports.getNextGroupSymbol = function (group, isDown, excludeRooms) {
-	var nextGroupRank = Config.groupsranking[Config.groupsranking.indexOf(group) + (isDown ? -1 : 1)];
-	if (excludeRooms === true && Config.groups[nextGroupRank]) {
-		var iterations = 0;
-		while (Config.groups[nextGroupRank].roomonly && iterations < 10) {
-			nextGroupRank = Config.groupsranking[Config.groupsranking.indexOf(group) + (isDown ? -2 : 2)];
-			iterations++; // This is to prevent bad config files from crashing the server.
-		}
-	}
-	if (!nextGroupRank) {
-		if (isDown) {
-			return Config.groupsranking[0];
-		} else {
-			return Config.groupsranking[Config.groupsranking.length - 1];
-		}
-	}
-	return nextGroupRank;
-};
-
-exports.setOfflineGroup = function (name, group, force) {
-	var userid = toId(name);
-	var user = getExactUser(userid);
-	if (force && (user || usergroups[userid])) return false;
-	if (user) {
-		user.setGroup(group);
-		return true;
-	}
-	if (!group || group === Config.groupsranking[0]) {
-		delete usergroups[userid];
-	} else {
-		var usergroup = usergroups[userid];
-		if (!usergroup && !force) return false;
-		name = usergroup ? usergroup.substr(1) : name;
-		usergroups[userid] = group + name;
-	}
-	exportUsergroups();
-	return true;
-};
-
-exports.levenshtein = function( a, b )
-{
-	var i;
-	var j;
-	var cost;
-	var d = new Array();
-
-	if ( a.length == 0 )
-	{
-		return b.length;
-	}
-
-	if ( b.length == 0 )
-	{
-		return a.length;
-	}
-
-	for ( i = 0; i <= a.length; i++ )
-	{
-		d[ i ] = new Array();
-		d[ i ][ 0 ] = i;
-	}
-
-	for ( j = 0; j <= b.length; j++ )
-	{
-		d[ 0 ][ j ] = j;
-	}
-
-	for ( i = 1; i <= a.length; i++ )
-	{
-		for ( j = 1; j <= b.length; j++ )
-		{
-			if ( a.charAt( i - 1 ) == b.charAt( j - 1 ) )
-			{
-				cost = 0;
-			}
-			else
-			{
-				cost = 1;
-			}
-
-			d[ i ][ j ] = Math.min( d[ i - 1 ][ j ] + 1, d[ i ][ j - 1 ] + 1, d[ i - 1 ][ j - 1 ] + cost );
-			
-			if(
-				i > 1 && 
-				j > 1 &&  
-				a.charAt(i - 1) == b.charAt(j-2) && 
-				a.charAt(i-2) == b.charAt(j-1)
-				){
-				d[i][j] = Math.min(
-					d[i][j],
-					d[i - 2][j - 2] + cost
-					)
-
-		}
-	}
-}
-
-return d[ a.length ][ b.length ];
-};
-

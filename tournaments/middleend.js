@@ -722,16 +722,17 @@ var Tournament = (function () {
 			winner = data[0];
 		} else {
 			winner = data;
-		}
 		
-		// there's probably a better way to do this but I'm lazy
-		if (data2['bracketData']['rootNode']['children']) {
-			if (data2['bracketData']['rootNode']['children'][0]['team'] !== winner) var runnerUp = data2['bracketData']['rootNode']['children'][0]['team'];
-			if (data2['bracketData']['rootNode']['children'][1]['team'] !== winner) var runnerUp = data2['bracketData']['rootNode']['children'][1]['team'];
-		}
 
 		var tourSize = this.generator.users.size;
 		if (this.room.isOfficial && tourSize >= 8) {
+			// there's probably a better way to do this but I'm lazy
+			if (data2['bracketData']['rootNode']) {
+				if (data2['bracketData']['rootNode']['children']) {
+					if (data2['bracketData']['rootNode']['children'][0]['team'] !== winner) var runnerUp = data2['bracketData']['rootNode']['children'][0]['team'];
+					if (data2['bracketData']['rootNode']['children'][1]['team'] !== winner) var runnerUp = data2['bracketData']['rootNode']['children'][1]['team'];
+				}
+			}
 			var firstMoney = Math.round(tourSize/10);
 			var secondMoney = Math.round(firstMoney/2);
 			var firstBuck = 'buck';

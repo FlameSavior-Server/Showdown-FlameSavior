@@ -1744,6 +1744,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	sarkany: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/n5mL3p8.jpg" width="180">' +
+    			'<img src="http://i.imgur.com/wKbQGZn.png" width="180">' +
+    			'<img src="http://i.imgur.com/cSYaNBu.jpg" width="180"><br />' +
+    			'<b>Ace:</b> Zen Mode Darmanitan | Dark Monotype<br />' +
+    			'You know I always wanted to be the best<br />' +
+			'You know I always wanted to be God</center>');
+    	},
+	
 	caillou: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://popdose.com/wp-content/uploads/caillou21.jpg" width="120">' +

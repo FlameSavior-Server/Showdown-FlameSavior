@@ -722,7 +722,7 @@ var Tournament = (function () {
 			winner = data[0];
 		} else {
 			winner = data;
-		
+		}
 
 		var tourSize = this.generator.users.size;
 		if (this.room.isOfficial && tourSize >= 8) {

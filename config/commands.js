@@ -1749,7 +1749,7 @@ var commands = exports.commands = {
 
 	kaisersthotties: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://lotssports.com/wp-content/uploads/2014/04/kate-upton.1-200x300.jpg" height=150>' +
+		this.sendReplyBox('<center><img src="http://www.inofashion.com/wp-content/uploads/coco-good-morning30-photo-21.jpg" height=150>' +
 			'<img src="http://i.imgur.com/WRYenVd.png">' +
 			'<img src="http://www.fuse.tv/image/535e65213729896301000008/560/292/social/ariana-grande-problem-single-cover-homepage.jpg" height=150><br />' +
 			'<b>Ace:</b> V Card<br />' +

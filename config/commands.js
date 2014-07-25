@@ -1747,9 +1747,18 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	certified: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="https://i.imgflip.com/al93i.jpg" width="130">' +
+    		'<img src="http://i.imgur.com/PbKvz9v.gif" width="250">' +
+    		'<img src="http://elitedaily.com/wp-content/uploads/2013/04/BG9mlvuCAAEm7nn.jpeg" width="160"><br />' +
+    		'<b>Ace:</b> Lost Niggas<br />' +
+    		'If you are reading this you are possibly a <b>CERTIFIED</b> Lost Nigga.</center>');
+   	},
+
 	kaisersthotties: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://gossip-juice.com/wp-content/uploads/2010/04/Nicole%20coco_3.jpg" width=150>' +
+		this.sendReplyBox('<center><img src="http://gossip-juice.com/wp-content/uploads/2010/04/Nicole%20coco_3.jpg" height=150>' +
 			'<img src="http://i.imgur.com/WRYenVd.png">' +
 			'<img src="http://www.fuse.tv/image/535e65213729896301000008/560/292/social/ariana-grande-problem-single-cover-homepage.jpg" width=150><br />' +
 			'<b>Ace:</b> V Card<br />' +

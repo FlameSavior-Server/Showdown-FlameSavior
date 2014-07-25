@@ -1747,6 +1747,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	kaisersthotties: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.tempstreet.com/wp-content/uploads/2014/05/kate.jpeg" height=150>' +
+			'<img src="http://i.imgur.com/WRYenVd.png">' +
+			'<img src="http://www.fuse.tv/image/535e65213729896301000008/560/292/social/ariana-grande-problem-single-cover-homepage.jpg" height=150><br />' +
+			'<b>Ace:</b> V Card<br />' +
+			'Kaiser\'s thotties, all around the block.</center>');
+	},
+
 	sarkany: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/n5mL3p8.jpg" width="180">' +

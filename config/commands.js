@@ -1749,7 +1749,7 @@ var commands = exports.commands = {
 
 	certified: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="https://i.imgflip.com/al93i.jpg" width="130">' +
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/5jcHLgB.gif" width="130">' +
     		'<img src="http://i.imgur.com/PbKvz9v.gif" width="250">' +
     		'<img src="http://elitedaily.com/wp-content/uploads/2013/04/BG9mlvuCAAEm7nn.jpeg" width="160"><br />' +
     		'<b>Ace:</b> Lost Niggas<br />' +

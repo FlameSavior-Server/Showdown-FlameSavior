@@ -1747,6 +1747,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	aceking: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/FGXGdYp.png" width="110">' +
+    			'<img src="http://i.imgur.com/TsdglO3.gif" width="330">' +
+    			'<img src="http://i.imgur.com/2O4E2ct.jpg" width="100"><br />' +
+    			'<b>Ace:</b> Tyranitar<br />' +
+    			'I am a King who Fears Nothing and a King who Desires Nothing! I am the One and Only 01AceKing!</center>');
+    	},
+	
 	sarkany: function(target, room, user) {
     		if (!this.canBroadcast()) return;
     		this.sendReplyBox('<center><img src="http://i.imgur.com/n5mL3p8.jpg" width="180">' +

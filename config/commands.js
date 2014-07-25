@@ -1938,7 +1938,7 @@ var commands = exports.commands = {
     			'<img src="http://blog.mobileroadie.com/wp-content/uploads/2012/04/CaseStudy_042312_MLG-450x340.jpg" width="50">' +
     			'<font face="Comic Sans MS" size="3">The Neo Void</b>' +
 			'<img src="http://i435.photobucket.com/albums/qq72/L0N6H0RN/mdewTAR.png" width="60"><br />' +
-    			'<b>Quote: </b>"<b>ILL</b> fucking rek <b>U M</b>8, <b>I</b> swear on me <b>NA</b>n, ill shoo<b>T</b> u wif me qu<b>I</b>ckscope.' +
+    			'<b>Quote: </b>"<b>ILL</b> fucking rek <b>U M</b>8, <b>I</b> swear on me <b>NA</b>n, ill shoo<b>T</b> u wif me qu<b>I</b>ckscope.<br />' +
     			'<img src="https://38.media.tumblr.com/b59854ce68791dca5ec062e37fe1bb8b/tumblr_n90294cqmS1rsyi8go1_75sq.gif" width="25">' +
     			'<button name="send" value="/transferbucks The Neo Void, 1" target="_blank">DONATE 2 ME OR IL REPOT U M8. IF U DON HAV MUNNY, GIT GUD SCRUB</button>' +
     			'<img src="https://38.media.tumblr.com/b59854ce68791dca5ec062e37fe1bb8b/tumblr_n90294cqmS1rsyi8go1_75sq.gif" width="25"></center>');

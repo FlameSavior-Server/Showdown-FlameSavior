@@ -1747,6 +1747,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	turing: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/b0BaTye.jpg">' +
+    		'<img src="http://i.imgur.com/KC3Zqfs.jpg">' +
+    		'<img src="http://i.imgur.com/F3meaJl.jpg"><br />' +
+    		'<b>Ace:</b> Running From Trainer Battles<br />' +
+    		'My Level. Get on it.</center>');
+    },
+
 	certified: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/5jcHLgB.gif" width="130">' +

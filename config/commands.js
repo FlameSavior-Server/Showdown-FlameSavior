@@ -1758,9 +1758,9 @@ var commands = exports.commands = {
 
 	kaisersthotties: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://gossip-juice.com/wp-content/uploads/2010/04/Nicole%20coco_3.jpg" height=150>' +
+		this.sendReplyBox('<center><img src="http://gossip-juice.com/wp-content/uploads/2010/04/Nicole%20coco_3.jpg" height="180" width="150">' +
 			'<img src="http://i.imgur.com/WRYenVd.png">' +
-			'<img src="http://www.fuse.tv/image/535e65213729896301000008/560/292/social/ariana-grande-problem-single-cover-homepage.jpg" width=150><br />' +
+			'<img src="http://www.fuse.tv/image/535e65213729896301000008/560/292/social/ariana-grande-problem-single-cover-homepage.jpg" width="160"><br />' +
 			'<b>Ace:</b> V Card<br />' +
 			'Kaiser\'s thotties, all around the block.</center>');
 	},

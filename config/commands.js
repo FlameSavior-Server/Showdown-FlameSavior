@@ -1746,15 +1746,24 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
-	
+
 	kaisersthotties: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.tempstreet.com/wp-content/uploads/2014/05/kate.jpeg" height=150>' +
+		this.sendReplyBox('<center><img src="http://lotssports.com/wp-content/uploads/2014/04/kate-upton.1-200x300.jpg" height=150>' +
 			'<img src="http://i.imgur.com/WRYenVd.png">' +
 			'<img src="http://www.fuse.tv/image/535e65213729896301000008/560/292/social/ariana-grande-problem-single-cover-homepage.jpg" height=150><br />' +
 			'<b>Ace:</b> V Card<br />' +
 			'Kaiser\'s thotties, all around the block.</center>');
 	},
+
+	aceking: function(target, room, user) {
+    		if (!this.canBroadcast()) return;
+    		this.sendReplyBox('<center><img src="http://i.imgur.com/FGXGdYp.png" width="110">' +
+    			'<img src="http://i.imgur.com/TsdglO3.gif" width="330">' +
+    			'<img src="http://i.imgur.com/2O4E2ct.jpg" width="100"><br />' +
+    			'<b>Ace:</b> Tyranitar<br />' +
+    			'I am a King who Fears Nothing and a King who Desires Nothing! I am the One and Only 01AceKing!</center>');
+    },
 
 	sarkany: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1764,7 +1773,7 @@ var commands = exports.commands = {
     			'<b>Ace:</b> Zen Mode Darmanitan | Dark Monotype<br />' +
     			'"You know I always wanted to be the best<br />' +
 				'You know I always wanted to be God"</center>');
-    	},
+    },
 	
 	caillou: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1773,7 +1782,7 @@ var commands = exports.commands = {
     			'<img src="http://img2.wikia.nocookie.net/__cb20121117102851/caillou/images/1/19/Caillou-xl-pictures-03.jpg" width="140"><br />' +
     			'<b>Ace:</b> Swag<br />' +
     			'Swag Swag like Caillou.</center>');
-    	},
+    },
 	
 	kaiserslegacy: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1782,7 +1791,7 @@ var commands = exports.commands = {
     			'<img src="http://pldh.net/media/dreamworld/475.png" width="120"><br />' +
     			'<b>Ace:</b> Logic<br />' +
     			'What makes a good player is dedication, but what makes a champion is skill.</center>');
-    	},
+    },
 	
 	firnen: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1791,7 +1800,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/5aeCLV7.png" width="160"><br />' +
     			'<b>Ace:</b> Hippowdon advertiser sandstorms<br />' +
     			'The Belgian user of Frost... Beer, chocolate, waffles and french fries is my motto!</center>');
-    	},
+    },
 	
 	sae: function(target, room, user) {
                 if (!this.canBroadcast()) return;
@@ -1800,7 +1809,7 @@ var commands = exports.commands = {
                         '<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lanturn.gif"><br />' +
                         '<b>Ace:</b> Suicune<br />' +
                         'Battles are like the waves, you never know which way the tides will turn.</center>');
-        },
+   	},
 	
 	tygastro: 'tyga',
 	tyga: function(target, room, user) {
@@ -1810,7 +1819,7 @@ var commands = exports.commands = {
     			'<img src="http://images6.fanpop.com/image/photos/34000000/Steven-Stone-pokemon-steven-stone-34077948-302-400.jpg" width="120"><br />' +
     			'<b>Ace:</b> <font color="purple">Gyarados</font><br />' +
     			'<font color="orange">Fix that attitude around me.</font></center>');
-    	},
+    },
 	
 	pix: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1819,7 +1828,7 @@ var commands = exports.commands = {
     			'<img src="http://www.somegif.com/gifs/1363711542831138275.GIF" width="180"><br />' +
     			'<b>Ace:</b> Smash and Pass<br />' +
     			'Feels Good Man.</center>');
-    	},
+    },
 	
 	shag: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1828,7 +1837,7 @@ var commands = exports.commands = {
     			'<img src="http://31.media.tumblr.com/tumblr_m2rbujGAHZ1r6e21po1_500.gif" width="120"><br />' +
     			'<b>Ace:</b> Aggron<br />' +
     			'Men are like steel. When they lose their temper, they lose their worth.</center>');
-    	},
+    },
 	
 	mo: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1837,7 +1846,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/N2jg8gJ.jpg" height="180"><br />' +
     			'<b>Ace:</b> Pinky &lt;3<br />' +
     			'GET A MOON OR DIE!</center>');
-    	},
+    },
 	
 	tylan: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1846,7 +1855,7 @@ var commands = exports.commands = {
     			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lucario-mega.gif"><br />' +
     			'<b>Ace:</b> Mega Lucario And Sciz<br />' +
     			'The Steel Dominators.</center>');
-    	},
+    },
 	
 	stunfisk: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1855,7 +1864,7 @@ var commands = exports.commands = {
     			'<img src="http://media.tumblr.com/tumblr_m6dp60bRXy1r33a1p.gif" width="165"><br />' +
     			'<b>Ace:</b> Stunfisk<br />' +
     			'All your base have belong to us.</center>');
-    	},
+    },
 	
 	whores: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1864,7 +1873,7 @@ var commands = exports.commands = {
     			'<img src="http://24.media.tumblr.com/tumblr_lyb5bfPNdT1qd8t4mo1_500.gif" width="110"><br />' +
     			'<b>Ace:</b> Onix & Cloyster<br />' +
     			'Hoes b4 Bros</center>');
-    	},
+    },
 	
 	vapo: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1873,7 +1882,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/fPaOhi2.jpg" width="100"><br />' +
     			'<b>Ace:</b> Vaporeon<br />' +
     			'<font size=10> <font color=salmon> :^)</center>');
-    	},
+    },
 	
 	cfrios: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1882,7 +1891,7 @@ var commands = exports.commands = {
     			'<button name="send" value="/transferbucks Cfrios13, 1" target="_blank">Muffin Button (Donates A Buck)</button><br />' +
     			'<b>Ace:</b> Muffin<br />' +
     			'Muffin is love, Muffin is life.</center>');
-    	},
+    },
 	
 	ciaran: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1891,7 +1900,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/SFOqjKU.jpg" width="110"><br />' +
     			'<b><font color="red">Ace:</b> Any and all lolis</font><br />' +
     			'It seems that my penis got bit by a snake, mind if I use your mouth as an antidote?</center>');
-    	},
+    },
 	
 	hailz: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1900,7 +1909,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/cw1vy36.jpg" width="160"><br />' +
     			'<b>Ace:</b> Medical Science<br />' +
     			'You want to kiss me, don\'t you? I always want to kiss you</center>');
-    	},
+    },
 	
 	inwhale: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1909,7 +1918,7 @@ var commands = exports.commands = {
     			'<img src="http://play.pokemonshowdown.com/sprites/bwani-shiny/volcarona.gif"><br />' +
     			'<b>Ace:</b> Scizor<br />' +
     			'A pestilence upon you, nerds!</center>');
-    	},
+    },
 	
 	jeli: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1934,7 +1943,7 @@ var commands = exports.commands = {
     			' value="/transferbucks The Neo Void, 1" target="_blank">DONATE 2 ME OR IL REPOT U M8. IF U DON HAV MUNNY, GIT' +
     			' GUD SCRUB</button><img src="https://38.media.tumblr.com/b59854ce68791dca5ec062e37fe1bb8b/tumblr_n90294cqmS1r' +
     			'syi8go1_75sq.gif" width=25></center>');
-    	},
+    },
 	
 	klefki: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1943,7 +1952,7 @@ var commands = exports.commands = {
     			'<img src="http://3.bp.blogspot.com/-eK2RdRCkEVo/UAOHStsSy4I/AAAAAAAAAWU/s0au53XLW3M/s1600/yU7ak.gif" width="120"><br />' +
     			'<b>Ace:</b> Klefki<br />' +
     			'Many have dared to challenge the organization,but few have ever succeed.</center>');
-    	},
+    },
 	
 	illumanise: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1952,7 +1961,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/1S0trTw.jpg" width="120"><br />' +
     			'<b>Ace:</b> Kammi<br />' +
     			'I &lt;3 HB</center>');
-    	},
+    },
 	
 	latios: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1961,7 +1970,7 @@ var commands = exports.commands = {
     			'<img src="http://fc00.deviantart.net/fs46/f/2009/195/8/2/Latios_by_aocom.jpg" width="150"><br />' +
     			'<b>Ace:</b> Latios<br />' +
     			'Act as if it were impossible to fail, then you are sure to succeed.</center>');
-    	},
+    },
 	
 	bariankaiser: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1970,7 +1979,7 @@ var commands = exports.commands = {
     			'<img src="http://img1.wikia.nocookie.net/__cb20130104181204/yugiohzexalencyclopedia/images/0/01/Barian_Emblem.jpg" width="150"><br />' +
     			'<b>Ace:</b> Aegislash<br />' +
     			'My dark side cannot be contained, I\'m the true demon of this game.</center>');
-    	},
+    },
 	
 	castformz: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1979,7 +1988,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/JybM3dn.jpg" width="100"><br />' +
     			'<b>Ace:</b> 1.8 Pounds of hot air<br />' +
     			'"I should buy a tc for no reason" ~Castformz</center>');
-    	},
+    },
 	
 	kittyhope: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1988,7 +1997,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/LjLmSbB.png" width="120"><br />' +
     			'<b>Ace:</b> The Bearers Of Light ~ Hope And Kitty<br />' +
     			'The Light Shines on Everyone and when it Shines on you there is Greatness, Happiness, and Love~</center>');
-    	},
+    },
 	
 	perseus: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -1997,7 +2006,7 @@ var commands = exports.commands = {
     			'<img src="http://i.imgur.com/mbCr8LV.jpg" width="170"><br />' +
     			'<b>Ace:</b> Scizor<br />' +
     			'The first step to wisdom is admitting you know nothing, and that Perseus knows everything.</center>');
-    	},
+    },
 	
 	tchin: function(target, room, user) {
     		if (!this.canBroadcast()) return;
@@ -2006,7 +2015,7 @@ var commands = exports.commands = {
     			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/sableye.gif"><br />' +
     			'<b>Ace:</b> Confuse Hax<br />' +
     			'Sableye is love, Sableye is Life.</center>');
-    	},
+    },
 	
 	swag: 'wontuns',
 	wontuns: function(target, room, user) {

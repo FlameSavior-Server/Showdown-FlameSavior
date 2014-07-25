@@ -477,17 +477,9 @@ exports.Formats = [
 		banlist: ['Huge Power','Pure Power','Sturdy','Sand Stream','Snow Warning','Poison Heal','Wonder Guard','Harvest','Flame Body',
 		'Cursed Body','Pressure','Poison Point','Poison Touch','Magic Bounce','Magic Guard','Iron Barbs','Rough Skin','Fur Coat',
 		'Sitrus Berry','Leftovers','Rocky Helmet','Berry Juice','Black Sludge','Focus Sash','Big Root','Oran Berry','Figy Berry',
-<<<<<<< HEAD
-<<<<<<< HEAD
 		'Mago Berry','Wiki Berry','Mago Berry','Aguav Berry','Iapapa Berry','Enigma Berry','Soul Dew','Bright Powder','Thick Club','Lucky Punch','Stick'],
-=======
 		'Mago Berry','Wiki Berry','Mago Berry','Aguav Berry','Iapapa Berry','Enigma Berry','Soul Dew','Bright Powder','Thick Club',
 		'Lucky Punch','Stick', 'Shell Bell'],
->>>>>>> origin/master
-=======
-		'Mago Berry','Wiki Berry','Mago Berry','Aguav Berry','Iapapa Berry','Enigma Berry','Soul Dew','Bright Powder','Thick Club',
-		'Lucky Punch','Stick', 'Shell Bell'],
->>>>>>> origin/master
 
 		validateTeam: function (team, format) {
 			var template = this.getTemplate(team.species);

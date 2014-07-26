@@ -1747,6 +1747,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	phanturtl: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://4.bp.blogspot.com/-QATUyoHimHk/UXuMrCGh0eI/AAAAAAAALcU/m02mVZNIumY/s1600/shuckle.gif " height=150>' +
+			'<img src="http://i.imgur.com/ioaEcCC.gif">' +
+			'<img src="http://i.imgur.com/Sn9m5vY.jpg" height=150><br />' +
+			'<b>Ace: </b>Team Shuckle<br />' +
+			'<b>Quote: </b>“mmmmmmm…… What? Sorry, Turtl was too busy thinking about Phantom’s Legs…. Legs for daaaaaayzzzz….”</center>');
+	},
+
 	kaisersthotties: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://lotssports.com/wp-content/uploads/2014/04/kate-upton.1-200x300.jpg" height=150>' +

@@ -1756,11 +1756,29 @@ var commands = exports.commands = {
 			'<b>Quote: </b>“mmmmmmm…… What? Sorry, Turtl was too busy thinking about Phantom’s Legs…. Legs for daaaaaayzzzz….”</center>');
 	},
 
+	turing: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/b0BaTye.jpg">' +
+    		'<img src="http://i.imgur.com/KC3Zqfs.jpg">' +
+    		'<img src="http://i.imgur.com/F3meaJl.jpg"><br />' +
+    		'<b>Ace:</b> Running From Trainer Battles<br />' +
+    		'My Level. Get on it.</center>');
+    },
+
+	certified: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/5jcHLgB.gif" width="130">' +
+    		'<img src="http://i.imgur.com/PbKvz9v.gif" width="250">' +
+    		'<img src="http://elitedaily.com/wp-content/uploads/2013/04/BG9mlvuCAAEm7nn.jpeg" width="160"><br />' +
+    		'<b>Ace:</b> Lost Niggas<br />' +
+    		'If you are reading this you are possibly a <b>CERTIFIED</b> Lost Nigga.</center>');
+   	},
+
 	kaisersthotties: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://lotssports.com/wp-content/uploads/2014/04/kate-upton.1-200x300.jpg" height=150>' +
+		this.sendReplyBox('<center><img src="http://gossip-juice.com/wp-content/uploads/2010/04/Nicole%20coco_3.jpg" height="180">' +
 			'<img src="http://i.imgur.com/WRYenVd.png">' +
-			'<img src="http://www.fuse.tv/image/535e65213729896301000008/560/292/social/ariana-grande-problem-single-cover-homepage.jpg" height=150><br />' +
+			'<img src="http://www.fuse.tv/image/535e65213729896301000008/560/292/social/ariana-grande-problem-single-cover-homepage.jpg" width="160"><br />' +
 			'<b>Ace:</b> V Card<br />' +
 			'Kaiser\'s thotties, all around the block.</center>');
 	},
@@ -2381,14 +2399,13 @@ var commands = exports.commands = {
 			'I\'m the Apex Predator.</center>');
 	},
 	
-	esep: 'ese',
-	ese: function(target, room, user) {
+	blake: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20140315020528/rwbyfanon/images/1/14/IbbIJDqMKYtvQZ.gif" width="130">' +
-			'<img src="http://i.imgur.com/R8WHW6t.gif" width="340">' +
+		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/7339b6afdb94b275f142ebae26668b75/tumblr_mlgw28eK1o1rj8nzio1_400.gif" width="130">' +
+			'<img src="http://i.imgur.com/YkCmgpI.gif" width="340">' +
 			'<img src="http://24.media.tumblr.com/6366ef75eb549cc676338027a7004937/tumblr_mk3d8giUNw1qg1v6ho3_250.gif" width="70"><br />' +
-			'<b>Ace:</b> Meloetta<br />' +
-			'That\'s what you get for not knowing your place.</center>');
+			'<b>Ace:</b> Espeon<br />' +
+			'It\'s lovely! Almost as lovely as this book... That I will continue to read... As soon as you leave...</center>');
 	},
 	
 	taiyoinferno: function(target, room, user) {
@@ -2454,13 +2471,13 @@ var commands = exports.commands = {
 			'You...Slowbro?</center>');
 	},
 	
-	brutus: function(target, room, user) {
+	rawk: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/OfUuEL7.png" width="120">' +
-			'<img src="http://i.imgur.com/8FhU113.png">' +
+			'<img src="http://i.imgur.com/EoUCfNO.png" width="300">' +
 			'<img src="http://i.imgur.com/MsqvSoA.png" width="110"><br />' +
-			'<b>Ace:</b> Gardevoir<br />' +
-			'Never give up and never surrender. Remember this and you will go far.</center>');
+			'<b>Ace:</b> Unpredictability<br />' +
+			'Prediction will get you nowhere against the unpredictable.</center>');
 	},
 	
 	orange: function(target, room, user) {

@@ -1747,13 +1747,22 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	worldsstrongestman: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/3YbbvmB.gif" width="120">' +
+    		'<img src="http://i.imgur.com/GZ0cQCI.png" width="300">' +
+    		'<img src="http://i.imgur.com/YzQoBs5.gif" width="120"><br />' +
+    		'<b>Ace:</b> The Worlds Strongest Man<br />' +
+    		'Because I can, and that\'s just what I do.</center>');
+    },
+
 	phanturtl: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://4.bp.blogspot.com/-QATUyoHimHk/UXuMrCGh0eI/AAAAAAAALcU/m02mVZNIumY/s1600/shuckle.gif " height=150>' +
+		this.sendReplyBox('<center><img src="http://4.bp.blogspot.com/-QATUyoHimHk/UXuMrCGh0eI/AAAAAAAALcU/m02mVZNIumY/s1600/shuckle.gif " height=130>' +
 			'<img src="http://i.imgur.com/ioaEcCC.gif">' +
-			'<img src="http://i.imgur.com/Sn9m5vY.jpg" height=150><br />' +
+			'<img src="http://i.imgur.com/Sn9m5vY.jpg" height=130><br />' +
 			'<b>Ace: </b>Team Shuckle<br />' +
-			'<b>Quote: </b>“mmmmmmm…… What? Sorry, Turtl was too busy thinking about Phantom’s Legs…. Legs for daaaaaayzzzz….”</center>');
+			'<b>Quote: </b>“mmmmmmm…… What? Sorry, Turtl was too busy thinking about Phantom\'s Legs…. Legs for daaaaaayzzzz….”</center>');
 	},
 
 	turing: function(target, room, user) {

@@ -3127,6 +3127,8 @@ function getRandMessage(user){
 		break;
 		case 51: message = message + user + ' was killed by Donald'; // bought by REV Czim
 		break;
+		case 52: message = message + user + ' is blasting off again'; // bought by L Chevy 12
+		break;
 		default: message = message + user + ' bought a poisoned Pepsi!';
 	};
 	message = message + ' ~~';

@@ -1759,6 +1759,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	bryden38: 'bryden',
+	bryden: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/onlJKI8.png" height=150>' +
+			'<img src="http://i.imgur.com/c7EjKB8.png" height=150>' +
+			'<img src="http://imgur.com/XZ0841t.png" height=150><br />' +
+			'<b>Ace: </b>Gyarados<br />' +
+			'<b>Quote: </b>Unitato</center>');
+	},
+
 	andy: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/9WOAyGQ.png">' +

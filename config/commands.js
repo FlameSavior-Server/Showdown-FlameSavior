@@ -1438,15 +1438,15 @@ var commands = exports.commands = {
         
 	
 	kjubox: function(target, room, user) {
-        	if (!this.canBroadcast()) return;
-        	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
-                	'<center><h1><font color="black"><u>King Jong-Un\'s Music Box</u></color></h1></center>' +
-                	'<center><b><a href="https://www.youtube.com/watch?v=_cG7ZVBXQII">Kim Jong Style</a><br>' +
+        if (!this.canBroadcast()) return;
+       	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+          	'<center><h1><font color="black"><u>King Jong-Un\'s Music Box</u></color></h1></center>' +
+           	'<center><b><a href="https://www.youtube.com/watch?v=_cG7ZVBXQII">Kim Jong Style</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=7pKrVB5f2W0">Alors on danse</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=oiKj0Z_Xnjc">Papaoutai</a><br>' +
 			'<cetner><b><a href="https://www.youtube.com/watch?v=ublchJYzhao">Te Fete</a><br /></center>' +
-                	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    	},
+           	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+   	},
 	
 	jdbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1471,37 +1471,37 @@ var commands = exports.commands = {
 	},
 
 	hopebox2: function(target, room, user) {
-        	if (!this.canBroadcast()) return;
-        	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
-                	'<center><h1><font color="lightgreen"><u>Hope\'s Music Box</u></color></h1></center>' +
-                	'<center><b><a href="https://www.youtube.com/watch?v=jVJZ5MbJDzU">What I\'m Made Of</a><br>' +
+       	if (!this.canBroadcast()) return;
+       	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+           	'<center><h1><font color="lightgreen"><u>Hope\'s Music Box</u></color></h1></center>' +
+           	'<center><b><a href="https://www.youtube.com/watch?v=jVJZ5MbJDzU">What I\'m Made Of</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=rM85TNMnUkA">Live and Learn</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=uEzXFuYN89k">Open Your Heart</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=75yPcHplI64">Chemical Plant Zone</a><br></center>' +
-                	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    	},
+           	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    },
 	
 	hopebox3: function(target, room, user) {
-        	if (!this.canBroadcast()) return;
-        	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
-                	'<center><h1><font color="red"><u>Hope\'s Kirby Box</u></color></h1></center>' +
-                	'<center><b><a href="https://www.youtube.com/watch?v=40DEipGcoXg">Dirty and Beauty</a><br />' +
+       	if (!this.canBroadcast()) return;
+       	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+           	'<center><h1><font color="red"><u>Hope\'s Kirby Box</u></color></h1></center>' +
+           	'<center><b><a href="https://www.youtube.com/watch?v=40DEipGcoXg">Dirty and Beauty</a><br />' +
 			'<center><b><a href="https://www.youtube.com/watch?v=eTeT6t9sdjc">Magolor\'s Medley</a><br />' +
 			'<center><b><a href="https://www.youtube.com/watch?v=AFZHQZFd1Bw">Zero Two</a><br />' +
 			'<center><b><a href="https://www.youtube.com/watch?v=nNmoqC9ndBg">Drawcia Soul</a><br /></center>' +
-                	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    	},
+           	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    },
 	
 	hopebox4: function(target, room, user) {
-        	if (!this.canBroadcast()) return;
-        	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
-                	'<center><h1><font color="darkorange"><u>Hope\'s Kingdom Hearts Box</u></color></h1></center>' +
-                	'<center><b><a href="https://www.youtube.com/watch?v=LoZabebGiDo">Enter the Darkness</a><br />' +
+       	if (!this.canBroadcast()) return;
+       	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+          	'<center><h1><font color="darkorange"><u>Hope\'s Kingdom Hearts Box</u></color></h1></center>' +
+          	'<center><b><a href="https://www.youtube.com/watch?v=LoZabebGiDo">Enter the Darkness</a><br />' +
 			'<center><b><a href="https://www.youtube.com/watch?v=wTLXGqkD4Zc">Forze Del Male</a><br />' +
 			'<center><b><a href="https://www.youtube.com/watch?v=JyaWwq4CfTk">Lord of the Castle</a><br />' +
 			'<center><b><a href="https://www.youtube.com/watch?v=YtAFN2LFBpQ">L\'Impeto Oscuro</a><br /></center>' +
-                	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    	},
+         	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+    },
 	
 	highbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;

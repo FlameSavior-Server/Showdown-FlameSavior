@@ -1434,17 +1434,7 @@ var commands = exports.commands = {
     /***************************************
 	* Music Boxes                          *
 	***************************************/
-	pandorasbox: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-	     this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
-             '<center><h1><font color="28DC04"><u>Pandora\'s Box</u></color></h1></center>' +
-             '<center><b><a href="https://www.youtube.com/watch?v=sQ-RweA1p7w">Touhou: Kyouko\'s Theme</a><br />' +
-             '<center><b><a href="https://www.youtube.com/watch?v=OyUJnV2R-5g">Night of Nights</a><br />' +
-             '<center><b><a href="https://www.youtube.com/watch?v=HGmn9m0RDAI">Karakuri Pierrot</a><br />' +
-             '<center><b><a href="https://www.youtube.com/watch?v=4skCwu0IlxU">Ren\'ai philosophia</a><br /></center>' +
-             '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
-    },
-                      
+	   
         
 	
 	kjubox: function(target, room, user) {

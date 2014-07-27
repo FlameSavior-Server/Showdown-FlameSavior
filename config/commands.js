@@ -1759,6 +1759,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	mistic: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/50b05948ff5e2ab29b55ed9ab65773d9/tumblr_mvj52q5oiq1rohehco1_500.gif" width="140">' +
+    		'<img src="http://i.imgur.com/5oGuwpW.gif" width="260">' +
+    		'<img src="http://37.media.tumblr.com/5257b2694e59c50927cc3a94048cd62d/tumblr_mgz5haZ5Wk1r23lkoo1_500.gif" width="140"><br />' +
+    		'<b>Ace:</b> Bandito<br />' +
+    		'I Used To Care But I Take A Pill For That Now.</center>');
+    },
+
 	worldsstrongestman: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/3YbbvmB.gif" width="120">' +

@@ -1759,6 +1759,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	brobro: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://26.media.tumblr.com/tumblr_lzmbam385J1qczibyo1_r1_500.gif" width="140">' +
+    		'<img src="http://i.imgur.com/rrnCu7w.png">' +
+    		'<img src="http://24.media.tumblr.com/tumblr_lmfbi3vkev1qd87hlo1_500.gif" width="150"><br />' +
+    		'<b>Ace:</b> Regenerator<br />' +
+    		'DUR DUR DUR.</center>');
+    },
+
 	bryden38: 'bryden',
 	bryden: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -2711,9 +2720,9 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/226.gif">' +
 			'<img src="http://i.imgur.com/JZUTPTk.gif">' +
-			'<img src="http://img.pokemondb.net/sprites/black-white/anim/normal/kyogre.gif"><br />' +
-			'<b>Ace:</b> Kyogre\'s Son<br />' +
-			'Pride makes us artificial and humility makes us real.</center>');
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/alomomola-3.gif"><br />' +
+			'<b>Ace:</b> Kyogre\'s Son &lt; Hannah<br />' +
+			'"If you aren\'t hated on then who the hell are you" ~IFC Yipes</center>');
 	},
 	
 	thunder: function(target, room, user) {

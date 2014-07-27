@@ -1759,6 +1759,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	andy: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/9WOAyGQ.png">' +
+    		'<img src="http://i.imgur.com/zAXHZcu.gif">' +
+    		'<img src="http://i.imgur.com/Ioi3U1N.png" width="140"><br />' +
+    		'<b>Ace:</b> Palkia and Absol<br />' +
+    		'Ready, Steady, GO!</center>');
+    },
+
 	mistic: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/50b05948ff5e2ab29b55ed9ab65773d9/tumblr_mvj52q5oiq1rohehco1_500.gif" width="140">' +

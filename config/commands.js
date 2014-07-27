@@ -2571,12 +2571,11 @@ var commands = exports.commands = {
 	
 	acast: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/sableye.gif">' +
-			'<img src="http://i.imgur.com/C5VZ07a.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gourgeist.gif"><br />' +
-			'<img src="http://i.imgur.com/8MVF1LX.png" height="100"><br />' +
-			'<b>Ace:</b> Chandelure<br />' +
-			'You can\'t succeed if you don\'t try.</center>');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/cUWyfi4.gif">' +
+			'<img src="http://i.imgur.com/ctYX8ai.gif">' +
+			'<img src="http://i.imgur.com/47KZLj4.gif"><br />' +
+			'<b>Ace:</b> Experience<br />' +
+			'<i>Pokémon get stronger through evolution. I get stronger through experience.</i></center>');
 	},
 	
 	amaan: function(target, room, user) {

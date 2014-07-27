@@ -1275,7 +1275,7 @@ var commands = exports.commands = {
 	sand: 'sandshrewed',
 	sandshrewed: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/M5vKJeP.png" width="100%"><br />' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/4kyR3d1.jpg" width="100%"><br />' +
         	'<img src="http://i.imgur.com/lgNPrpK.png"><br />' +
                 'Ace: Gengar<br />' +
                 '<font color=66CCFF>Don\'t need luck, got skill</font></center>');

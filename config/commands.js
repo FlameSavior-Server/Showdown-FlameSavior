@@ -1759,6 +1759,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	jets: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://25.media.tumblr.com/ac8464fb8dbe13d71d2ae6fedc8c8ab7/tumblr_mnjfywfFS01ssbq4vo1_500.gif" width="160">' +
+    		'<img src="http://i.imgur.com/W1nJEDq.png">' +
+    		'<img src="http://i179.photobucket.com/albums/w293/raixal_the_wrath/POKEMON/4100755c.jpg" width="160"><br />' +
+    		'<b>Ace:</b> Scarfpoleon<br />' +
+    		'If you cry because the sun has gone out of your life, your tears will prevent you from seeing the stars.</center>');
+    },
+
 	brobro: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://26.media.tumblr.com/tumblr_lzmbam385J1qczibyo1_r1_500.gif" width="140">' +

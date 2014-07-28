@@ -3108,11 +3108,11 @@ var commands = exports.commands = {
 	
 	falls: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/iW1z5vz.gif" width="150" height="120"><br />' +
-			'<img src="http://i.imgur.com/icfZuiY.gif" width="200" height="70"><br />' +
-			'<img src="http://i.imgur.com/cSf4QD1.gif" width="180"><br />' +
-			'<b>Ace:</b> Logic<br />' +
-			'That really puffled my jiggles.</center>');
+		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/e6327810e958a61388d1ff544cf66742/tumblr_n7lpsrvnQc1rt1sw0o1_400.gif" width="190">' +
+			'<img src="http://i.imgur.com/jEDyYDV.gif">' +
+			'<img src="http://images4.fanpop.com/image/photos/23100000/Raikou-raikou-23156962-512-512.jpg" width="150"><br />' +
+			'<b>Ace:</b> Raikou<br />' +
+			'First thing\'s first, I\'m the realest.</center>');
 	},	
 	
 	logicaldomination: 'crowt',

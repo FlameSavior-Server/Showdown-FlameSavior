@@ -4534,6 +4534,13 @@ var commands = exports.commands = {
 	 * Frost Contest Winner Commands *
 	 *********************************/	
 
+	iamforty: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/oKhQNX2.jpg"><br />' +
+    		'<img src="http://i.imgur.com/dqsqOKZ.gif"><br />' +
+    		'6-0 or 1-0, either way it\'s a win :)</center>');
+    },
+
 	involved: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/3wcET7B.gif" width="200"><br />' +

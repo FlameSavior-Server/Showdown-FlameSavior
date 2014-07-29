@@ -2720,7 +2720,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/spewpa-2.gif" height="150" width="150">' +
 			'<img src="http://i.imgur.com/JsCCQVP.gif">' +
-			'<img src="http://i.imgur.com/K5JLIqD.png" height="106" width="150"><br />' +
+			'<img src="http://i.imgur.com/qA69m9M.png" width="150"><br />' +
 			'<b>Ace:</b> Misspells<br />' +
 			'Why don\'t you go back to kindergarten and learn how to spell.</center>');
 	},

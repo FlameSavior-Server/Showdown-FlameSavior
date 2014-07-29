@@ -1759,6 +1759,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	kamiko: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+			this.sendReplyBox('<center><img src="http://i.imgur.com/fJvcdib.png" height="140">' +
+				'<img src="http://i.imgur.com/ogUeVsJ.gif" width="340">' +
+				'<img src="http://i.imgur.com/lP5oreI.jpg" height="140"><br />' +
+				'<b>Ace: </b>Lesbian Love<br />' +
+				'Let\'s go play Naked Twister</center>');
+		},
+
 	jets: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://25.media.tumblr.com/ac8464fb8dbe13d71d2ae6fedc8c8ab7/tumblr_mnjfywfFS01ssbq4vo1_500.gif" width="160">' +

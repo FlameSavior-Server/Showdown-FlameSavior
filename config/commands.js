@@ -1759,6 +1759,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	link: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/Sgv8N08.gif" width="170">' +
+    		'<img src="http://i.imgur.com/Ni7Q3dS.gif">' +
+    		'<img src="http://i.imgur.com/7QUztES.gif" height="160"><br />' +
+    		'<b>Ace:</b> Chandelure<br />' +
+    		'If at first you don\'t succeed, find out if the loser gets anything.</center>');
+    },
+
 	kamiko: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 			this.sendReplyBox('<center><img src="http://i.imgur.com/fJvcdib.png" height="140">' +

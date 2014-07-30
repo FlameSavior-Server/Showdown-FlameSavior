@@ -3644,13 +3644,13 @@ var commands = exports.commands = {
 			'<b>Catchphrase: </b><a href="http://creatureleague.weebly.com">http://creatureleague.weebly.com</a></center>');
 	},
 	
-	gaius: function(target, room, user) {
+	Blinx: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="https://fireden.net/4chan/images.4chan.org//vg/src/1393631347113.png" width="90">' +
-			'<img src="http://i.imgur.com/xUNUTYB.gif" width="360">' +
-			'<img src="http://24.media.tumblr.com/9b692872d59be26ce63613ec2064661c/tumblr_ms2jfw4X5k1qa2atko1_500.gif" width="90"><br />' +
-			'<b>Ace:</b> Mega Absol<br />' +
-			'Preposterous. I will never falter as long as I have this will to guide the weak..</center>');
+		this.sendReplyBox('<center><img src="http://24.media.tumblr.com/6366ef75eb549cc676338027a7004937/tumblr_mk3d8giUNw1qg1v6ho3_250.gif"width="100"height="100">' +
+			'<img src="http://i.imgur.com/AHs4FS5.png"width="225">' +
+			'<img src="http://fc00.deviantart.net/fs70/f/2013/297/1/7/rwby_nora_valkyrie_gif_by_dustiniz117-d6rmph4.gif"width="150"><br />' +
+			'<b>Ace:</b> Black Heart<br />' +
+			'We\'ll break his legs together.</center>');
 	},
 	
 	apples: function(target, room, user) {

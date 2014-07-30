@@ -1759,6 +1759,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	thimo: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/onwJ0We.png" height="140">' +
+    		'<img src="http://i.imgur.com/ZFsEIwT.gif">' +
+    		'<img src="http://imgur.com/VBMqWQk.png" height="140"><br />' +
+    		'<b>Ace:</b> Arcanine<br />' +
+    		'You\'re a genius if u can stop the Fire Spin.</center>');
+    },
+
 	link: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/Sgv8N08.gif" width="170">' +

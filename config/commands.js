@@ -1759,6 +1759,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	booticky: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://31.media.tumblr.com/tumblr_lyl0124nll1qd87hlo1_500.gif" height="80">' +
+    		'<img src="http://i.imgur.com/RAmL4b9.png" width="310">' +
+    		'<img src="http://play.pokemonshowdown.com/sprites/afd/slowbro.png"><br />' +
+    		'<b>Ace:</b> Lotad and Gallade<br />' +
+    		'Time changes everything except something within us which is always surprised by change.</center>');
+    },
+
 	thimo: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/onwJ0We.png" height="140">' +

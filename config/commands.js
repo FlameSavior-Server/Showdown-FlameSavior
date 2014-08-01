@@ -3684,7 +3684,7 @@ var commands = exports.commands = {
 	championxman : 'xman',
 	xman: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/talonflame-2.gif" width="100">' +
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/victini.gif">' +
 			'<img src="http://i.imgur.com/9bKjjcM.gif" width="350">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/infernape.gif" width="80"><br />' +
 			'<b><font color=black>Ace:</font></b><font color=red> Infernape</font><br />' +

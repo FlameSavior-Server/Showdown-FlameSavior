@@ -3749,11 +3749,23 @@ var commands = exports.commands = {
 	
 	scizorknight: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/212.gif" height="100">' +
-			'<img src="http://i.imgur.com/RlhvAOI.gif">' +
-			'<img src="http://img.pokemondb.net/sprites/black-white/anim/shiny/breloom.gif" height="100"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/zwCcimH.gif">' +
+			'<img src="http://i.imgur.com/S0o6O52.gif">' +
+			'<img src="http://i.imgur.com/zwCcimH.gif"><br />' +
 			'<b>Ace:</b> Scizor<br />' +
-			'<b>Catchphrase:</b> I Love The Way You lose ♥</center>');
+			'<b>~<font color=red>O</font><font color=yellow>n</font><font color=blue>e</font> ' +
+			'<font color=green>g</font><font color=purple>o</font><font color=teal>o</font><font color=orange>d</font> ' +
+			'<font color=red>t</font><font color=aqua>h</font><font color=blue>i</font><font color=green>n</font><font color=purple>g</font> ' +
+			'<font color=orange>a</font><font color=red>b</font><font color=aqua>o</font><font color=blue>u</font><font color=red>t</font> ' +
+			'<font color=teal>m</font><font color=orange>u</font><font color=red>s</font><font color=aqua>i</font><font color=blue>c</font><font color=green>,</font> ' +
+			'<font color=purple>w</font><font color=orange>h</font><font color=teal>e</font><font color=orange>n</font> ' +
+			'<font color=aqua>i</font><font color=blue>t</font> ' +
+			'<font color=red>h</font><font color=blue>i</font><font color=violet>t</font><font color=teal>s</font> ' +
+			'<font color=red>y</font><font color=aqua>o</font><font color=>u</font><font color=purple>,</font> ' +
+			'<font color=green>y</font><font color=purple>o</font><font color=teal>u</font> ' +
+			'<font color=red>f</font><font color=aqua>e</font><font color=red>e</font><font color=green>l</font> ' +
+			'<font color=teal>n</font><font color=orange>o</font> ' +
+			'<font color=red>p</font><font color=green>a</font><font color=black>i</font><font color=aqua>n</font><font color=lime>.</font><font color=black>~</font></b></center>');
 	},
 	
 	jitlittle: function(target, room, user) {
@@ -3761,7 +3773,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://24.media.tumblr.com/8183478ad03360a7c1d02650c53b4b35/tumblr_msfcxcMyuV1qdk3r4o1_500.gif" height="100" width="140">' +
 			'<img src="http://i.imgur.com/Vxjzq2x.gif" height="85" width="250">' +
 			'<img src="http://25.media.tumblr.com/b2af3f147263f1ef10252a31f0796184/tumblr_mkvyqqnhh51snwqgwo1_500.gif" height="100" width="140"><br />' +
-			'<b>Ace:</b> Jirachi<br />' +
+			'<b><font color="black">Ace:</font></b> <font color="red">A</font><font color="black">l</font><font color="red">l</font> <font color="black">O</font><font color="red">f</font> <font color="black">Y</font><font color="red">o</font><font color="black">u</font><br />' +
 			'<b>Cuteness will always prevail over darkness</b></center>');
 	},
 	

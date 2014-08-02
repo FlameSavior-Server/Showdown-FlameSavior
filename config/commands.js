@@ -3753,7 +3753,7 @@ var commands = exports.commands = {
 			'<img src="http://i.imgur.com/S0o6O52.gif">' +
 			'<img src="http://i.imgur.com/zwCcimH.gif"><br />' +
 			'<b><font color="black">Ace:</font></b> <font color="red">A</font><font color="black">l</font><font color="red">l</font> <font color="black">O</font><font color="red">f</font> <font color="black">O</font><font color="red">u</font><br />' +
-			'<b>~<font color=red>O</font><font color=yellow>n</font><font color=blue>e</font> ' +
+			'<b>~<font color=red>O</font><font color=green>n</font><font color=blue>e</font> ' +
 			'<font color=green>g</font><font color=purple>o</font><font color=teal>o</font><font color=orange>d</font> ' +
 			'<font color=red>t</font><font color=aqua>h</font><font color=blue>i</font><font color=green>n</font><font color=purple>g</font> ' +
 			'<font color=orange>a</font><font color=red>b</font><font color=aqua>o</font><font color=blue>u</font><font color=red>t</font> ' +

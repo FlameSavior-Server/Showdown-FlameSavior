@@ -921,49 +921,9 @@ var User = (function () {
 
 				if (Users.customAvatars[userid]) avatar = Users.customAvatars[userid];
 
-				now = new Date();
-				day = now.getUTCDate();
-				month = now.getUTCMonth() + 1;
-				year = now.getUTCFullYear();
-				if (now.getUTCHours() < 10) {
-					hours = '0'+now.getUTCHours();
-				} else {
-					hours = now.getUTCHours();
-				}
-				if (now.getUTCMinutes() < 10) { 
-					minutes = '0'+now.getUTCMinutes();
-				} else {
-					minutes = now.getUTCMinutes();
-				}
-				time = day+'/'+month+'/'+year+' '+hours+':'+minutes
-
-				match = false;
-				try  { 
-					data = fs.readFileSync('logs/lastonline.txt','utf8');
-				} catch (e) {
-					data = '';
-				}
-				row = (''+data).split("\n");
-				line = '';
-				for (var i in row) {
-					parts = row[i].split(",");
-					if (!parts[1]) continue;
-					if (toId(name) == parts[0]) {
-						match = true;
-						line = line + row[i];
-						break;
-					} 
-				}
-				if (parts[1] != time) {
-					if (match === true) {
-						re = new RegExp(line,"g");
-						result = data.replace(re, toId(name)+','+time);
-						fs.writeFileSync('logs/lastonline.txt', result, 'utf8');
-						match = false;
-					} else {
-						fs.appendFile('logs/lastonline.txt',"\n"+toId(name)+','+time);
-					}
-				}
+				try {
+					frostcommands.updateSeen(userid);
+				} catch (e) {}
 
 				if (this.monoType === '') {
 					var rows = userTypes.split('\n');

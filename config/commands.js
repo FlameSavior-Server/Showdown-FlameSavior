@@ -3752,7 +3752,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/zwCcimH.gif">' +
 			'<img src="http://i.imgur.com/S0o6O52.gif">' +
 			'<img src="http://i.imgur.com/zwCcimH.gif"><br />' +
-			'<b>Ace:</b> Scizor<br />' +
+			'<b><font color="black">Ace:</font></b> <font color="red">A</font><font color="black">l</font><font color="red">l</font> <font color="black">O</font><font color="red">f</font> <font color="black">Y</font><font color="red">o</font><font color="black">u</font><br />' +
 			'<b>~<font color=red>O</font><font color=yellow>n</font><font color=blue>e</font> ' +
 			'<font color=green>g</font><font color=purple>o</font><font color=teal>o</font><font color=orange>d</font> ' +
 			'<font color=red>t</font><font color=aqua>h</font><font color=blue>i</font><font color=green>n</font><font color=purple>g</font> ' +
@@ -3773,7 +3773,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://24.media.tumblr.com/8183478ad03360a7c1d02650c53b4b35/tumblr_msfcxcMyuV1qdk3r4o1_500.gif" height="100" width="140">' +
 			'<img src="http://i.imgur.com/Vxjzq2x.gif" height="85" width="250">' +
 			'<img src="http://25.media.tumblr.com/b2af3f147263f1ef10252a31f0796184/tumblr_mkvyqqnhh51snwqgwo1_500.gif" height="100" width="140"><br />' +
-			'<b><font color="black">Ace:</font></b> <font color="red">A</font><font color="black">l</font><font color="red">l</font> <font color="black">O</font><font color="red">f</font> <font color="black">Y</font><font color="red">o</font><font color="black">u</font><br />' +
+			'<b>Ace:</b> Jirachi<br />' +
 			'<b>Cuteness will always prevail over darkness</b></center>');
 	},
 	

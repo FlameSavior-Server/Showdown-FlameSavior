@@ -1777,6 +1777,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	raichu: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/ErxWrec.gif" height="100">' +
+    		'<img src="http://i.imgur.com/SX7CvKg.gif">' +
+    		'<img src="http://i.imgur.com/Wk9xsAR.jpg" width="150"><br />' +
+    		'<b>Ace:</b> Raichu<br />' +
+    		'Its not a party without Raichu.</center>');
+    },
+
 	booticky: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://31.media.tumblr.com/tumblr_lyl0124nll1qd87hlo1_500.gif" height="80">' +

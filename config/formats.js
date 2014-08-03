@@ -56,6 +56,15 @@ exports.Formats = [
 		name: "RU",
 		section: "XY Singles",
 
+		searchShow: false,
+		ruleset: ['UU'],
+		banlist: ['UU', 'BL2']
+	},
+	{
+		name: "RU (suspect test)",
+		section: "XY Singles",
+
+		challengeShow: false,
 		ruleset: ['UU'],
 		banlist: ['UU', 'BL2']
 	},
@@ -371,9 +380,9 @@ exports.Formats = [
 
 		mod: 'gen4',
 		ruleset: ['Pokemon', 'Standard'],
-		banlist: ['Ignore STAB Moves', 'Soul Dew', 'Belly Drum',
-			'Arceus', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kyogre',
-			'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Shaymin-Sky']
+		banlist: ['Ignore STAB Moves', 'BrightPowder', 'Soul Dew', 'Belly Drum',
+			'Arceus', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Garchomp', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kyogre',
+			'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Shaymin-Sky', 'Wobbuffet', 'Wynaut']
 	},
 	{
 		name: "CAP",

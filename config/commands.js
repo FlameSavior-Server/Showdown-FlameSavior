@@ -1700,7 +1700,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=EcLdeNHDylQ">I\'ve Got All This Ringing In My Ears And None On My Fingers</a><br>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=F7mMBSKYUFc">I\'ve Got All This Ringing In My Ears And None On My Fingers</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=Cvnk_DSUq3E">The High Road</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br></center>' +

@@ -651,6 +651,9 @@ var User = (function () {
 		return this.can('promote', {group:sourceGroup}) && this.can('promote', {group:targetGroup});
 	};
 	User.prototype.forceRename = function (name, authenticated, forcible) {
+		try {
+			frostcommands.updateSeen(name);
+		} catch (e) {}
 		// skip the login server
 		var userid = toId(name);
 
@@ -920,10 +923,6 @@ var User = (function () {
 				}
 
 				if (Users.customAvatars[userid]) avatar = Users.customAvatars[userid];
-
-				try {
-					frostcommands.updateSeen(userid);
-				} catch (e) {}
 
 				if (this.monoType === '') {
 					var rows = userTypes.split('\n');
@@ -1356,7 +1355,7 @@ var User = (function () {
 
 		if (room.id == 'global') {
 			try {
-				frostcommands.updateSeen(this.userid);
+				frostcommands.updateSeen(this.name);
 			} catch (e) {}
 		}
 		

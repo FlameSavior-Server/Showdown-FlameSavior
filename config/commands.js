@@ -1777,6 +1777,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	dk: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/9ytPhX3.gif" width="120">' +
+    		'<img src="http://i.imgur.com/UeQliy2.gif">' +
+    		'<img src="http://i.imgur.com/RwpOW91.jpg" width="125"><br />' +
+    		'<b>Ace:</b> Final Gambit and Hax<br />' +
+    		'Forcing ragequits since 05.</center>');
+    },
+
 	goose: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://puu.sh/aDU8T/d65f5c123c.png" height="216" width="300"><br />' +

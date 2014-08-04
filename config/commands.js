@@ -2112,7 +2112,7 @@ var commands = exports.commands = {
 	roxas: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/1029429/axel-roxas-last-goodbye-o.gif" width="150">' +
-    		'<img src="http://i.imgur.com/6rNedsW.png"width="240">' +
+    		'<img src="http://i.imgur.com/6rNedsW.png" width="240">' +
     		'<img src="http://stream1.gifsoup.com/view2/2254189/roxas-vs-sora-gif-1-o.gif" width="150"><br />' +
     		'<b>Ace:</b> X-Blade<br />' +
     		'"You\'re lucky Sora... cause it looks like summer vacation is over."</center>');

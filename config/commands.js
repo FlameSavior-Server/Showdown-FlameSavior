@@ -2370,7 +2370,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/YX5NfOz.jpg" width="120">' +
 			'<img src="http://i.imgur.com/jxIUJZt.png" width="310" height="100">' +
-			'<img src="http://i.imgur.com/BxFA5mt.jpg" width="110"><br />' +
+			'<img src="http://www.hollywoodreporter.com/sites/default/files/imagecache/blog_post_349_width/2013/09/robocop_poster_p_2013.jpg" width="110"><br />' +
 			'<b>Ace:</b> Blue Beast<br />' +
 			'If I Win I Win. I never lose, only learn.</center>');
 	},

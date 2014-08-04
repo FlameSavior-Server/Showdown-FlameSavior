@@ -1782,7 +1782,7 @@ var commands = exports.commands = {
     	this.sendReplyBox('<center><img src="http://puu.sh/aDU8T/d65f5c123c.png" height="216" width="300"><br />' +
     		'<font size="3"> <font color="FF8000"> <b> <i>Goose</font></i><br />' +
     		'<font size="2"> <i> Artist: jd</font></i><br />' +
-    		'I PRESENT TO YOU; THE GOOSIEST GOOSE YOU\'VE EVER LAID EYES ON</b></center>');
+    		'<b>I PRESENT TO YOU; THE GOOSIEST GOOSE YOU\'VE EVER LAID EYES ON</b></center>');
     },
 
 	raichu: function(target, room, user) {

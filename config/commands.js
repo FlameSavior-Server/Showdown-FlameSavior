@@ -2109,13 +2109,13 @@ var commands = exports.commands = {
     		'<img src="https://38.media.tumblr.com/b59854ce68791dca5ec062e37fe1bb8b/tumblr_n90294cqmS1rsyi8go1_75sq.gif" width="25"></center>');
    	},
 	
-	klefki: function(target, room, user) {
+	roxas: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://cdn.pokestache.com/2014/3/11/e3227c8735baac428641698db777a9d3.gif" width="130">' +
-    		'<img src="http://i.imgur.com/3w6c3eD.gif" width="290">' +
-    		'<img src="http://3.bp.blogspot.com/-eK2RdRCkEVo/UAOHStsSy4I/AAAAAAAAAWU/s0au53XLW3M/s1600/yU7ak.gif" width="120"><br />' +
-    		'<b>Ace:</b> Klefki<br />' +
-    		'Many have dared to challenge the organization,but few have ever succeed.</center>');
+    	this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/1029429/axel-roxas-last-goodbye-o.gif"width="150">' +
+    		'<img src="http://i.imgur.com/6rNedsW.png"width="250">' +
+    		'<img sprc="http://stream1.gifsoup.com/view2/2254189/roxas-vs-sora-gif-1-o.gif"width="150"><br />' +
+    		'<b>Ace:</b> X-Blade<br />' +
+    		'<b>Quote:</b>"You\'re lucky Sora...cause it looks like summer vacation is over."</center>');
    	},
 	
 	illumanise: function(target, room, user) {

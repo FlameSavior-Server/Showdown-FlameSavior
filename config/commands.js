@@ -2366,13 +2366,13 @@ var commands = exports.commands = {
 			'Nyanpassu~</center>');
 	},
 	
-	bane: function(target, room, user) {
+	xbane: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/YX5NfOz.jpg" width="120">' +
-			'<img src="http://i.imgur.com/jxIUJZt.png" width="310" height="100">' +
-			'<img src="http://www.hollywoodreporter.com/sites/default/files/imagecache/blog_post_349_width/2013/09/robocop_poster_p_2013.jpg" width="110"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/YX5NfOz.jpg" width="160">' +
+			'<img src="http://i.imgur.com/Me5jPPo.png">' +
+			'<img src="http://www.hollywoodreporter.com/sites/default/files/imagecache/blog_post_349_width/2013/09/robocop_poster_p_2013.jpg" width="130"><br />' +
 			'<b>Ace:</b> Blue Beast<br />' +
-			'If I Win I Win. I never lose, only learn.</center>');
+			'Analyze, Adapt, Assimilate. I am <i>X-Bane.</i></center>');
 	},
 	
 	bosswrath: function(target, room, user) {

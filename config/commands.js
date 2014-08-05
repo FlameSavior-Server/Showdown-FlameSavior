@@ -1122,7 +1122,7 @@ var commands = exports.commands = {
                 'I may be cute, but I could make you fall off a cliff without anyone seeing it.</center>');
 	},
 	
-	stone: function(target, room, user) {
+	st function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="https://i.imgur.com/DPy0OdR.gif" width="500"><br />' +
                 '<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/376.gif"><br />' +
@@ -2750,10 +2750,10 @@ var commands = exports.commands = {
             	try { 
             		return this.sendReplyBox(messages[target]);
             	} catch (e) { 
-            		return this.sendReply('There is no target named /one '+target);
+            		this.sendReply('There is no target named /one '+target);
             	}
             	if (!target) {
-			return this.sendReplyBox('Available commands for /one: ' + Object.keys(messages).join(', '));
+			this.sendReplyBox('Available commands for /one: ' + Object.keys(messages).join(', '));
 		}
         },
 	

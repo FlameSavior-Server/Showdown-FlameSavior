@@ -2746,9 +2746,13 @@ var commands = exports.commands = {
                 	ubers: 'Only use a team of ONE uber pokemon. No sleep, no sash ',
 			inverse: 'https://www.smogon.com/forums/threads/the-inverse-battle-ǝɯɐƃɐʇǝɯ.3492433/ You may use ONE pokemon. No sleep, no sash, no ubers (except mega gengar). ',
             	};
-            	return this.sendReplyBox(messages);
+            	try { 
+            		this.sendReplyBox(messages[target]);
+            	} catch (e) { 
+            		this.sendReply('There is no target named /one '+target);
+            	}
             	if (!target) {
-			return this.sendReplyBox('Available commands for !one: ' + Object.keys(messages).join(', '));
+			return this.sendReplyBox('Available commands for /one: ' + Object.keys(messages).join(', '));
 		}
         },
 	

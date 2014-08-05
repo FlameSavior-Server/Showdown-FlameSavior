@@ -2832,14 +2832,17 @@ var commands = exports.commands = {
 			'Winning battles is about making 2 steps forward for each step backwards.</center>');
 	},
 	
-	lando: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://th08.deviantart.net/fs71/PRE/i/2013/307/f/5/yanek_the_greninja_by_mercurythewerewulff-d6sxzol.jpg" width="100">' +
-			'<img src="http://i.imgur.com/ZjYIE2l.png" width="320">' +
-			'<img src="http://i.imgur.com/lm4bTNK.png" width="120"><br />' +
-			'<b>Ace:</b> Landorus & Greninja<br />' +
-			'If you\'re going through hell, keep going.</center>');
-	},
+	ferrandorosu: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/iYunicf.png" width="400"><br />' +
+    		'<marquee behavior="alternate"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja.gif">' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/jirachi.gif">' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/metagross.gif"></marquee><br />' +
+			'<font color="red"><b>Ace: </b></font><font color="brown">Landorus</font> &amp; <font color="orange">Metagross</font><br />' +
+			'<font color="red">If you\'re going through hell, keep going.</font><br />' +
+			'<font color="orange">Gard you are my bitch, now go make me a sandwich!</font></center>');
+    },
 	
 	kc: function(target, room, user) {
 		if (!this.canBroadcast()) return;

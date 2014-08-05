@@ -2718,7 +2718,6 @@ var commands = exports.commands = {
 	
 	one: function(target, room, user) {
 		if (room.id !== '1v1') return this.sendReply("This command can only be used in 1v1.");                
-		var text = '';
         	var messages = {
                 	onevone: 'Global 1v1 bans are: Focus Sash, Sturdy (if doesnt naturally learn it), Sleep, Imposter/imprison, Parental Bond, and level 100 Pokemon only. You are only allowed to use "3 team preview" in all tiers falling under the "1v1 Elimination" tier. All other tiers must be 1 Pokemon only. No switching',
                 	reg: 'This is regular 1v1, only bans are Sleep, Ubers (except mega gengar), and ditto (imposter/imprison)',
@@ -2747,9 +2746,10 @@ var commands = exports.commands = {
                 	ubers: 'Only use a team of ONE uber pokemon. No sleep, no sash ',
 			inverse: 'https://www.smogon.com/forums/threads/the-inverse-battle-ǝɯɐƃɐʇǝɯ.3492433/ You may use ONE pokemon. No sleep, no sash, no ubers (except mega gengar). ',
             	};
+            	return this.sendReplyBox(messages);
             	if (!target) {
-			return this.sendReplyBox('Available commands for .1v1: ' + Object.keys(messages).join(', ')'');
-		} else return this.sendReplyBox(messages);
+			return this.sendReplyBox('Available commands for !one: ' + Object.keys(messages).join(', '));
+		}
         },
 	
 	color: function(target, room, user) {

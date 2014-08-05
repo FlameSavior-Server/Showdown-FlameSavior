@@ -3129,6 +3129,8 @@ function getRandMessage(user){
 		break;
 		case 52: message = message + user + ' is blasting off again'; // bought by L Chevy 12
 		break;
+		case 53: message = message + user + ' use defog on Bisharp'; // bought by Hope/Fallen Blood
+		break;
 		default: message = message + user + ' bought a poisoned Pepsi!';
 	};
 	message = message + ' ~~';

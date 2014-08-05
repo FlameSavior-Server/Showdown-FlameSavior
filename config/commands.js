@@ -2716,6 +2716,42 @@ var commands = exports.commands = {
 		return this.sendReplyBox('<center><font size="3"><b>Coin Game!</b></font><br>'+results+'');
 	},
 	
+	one: function(target, room, user) {
+			if (room.id !== '1v1') return this.sendReply("This command can only be used in 1v1.");                
+			var text = '';
+            var messages = {
+                onevone: 'Global 1v1 bans are: Focus Sash, Sturdy (if doesnt naturally learn it), Sleep, Imposter/imprison, Parental Bond, and level 100 Pokemon only. You are only allowed to use "3 team preview" in all tiers falling under the "1v1 Elimination" tier. All other tiers must be 1 Pokemon only. No switching',
+                reg: 'This is regular 1v1, only bans are Sleep, Ubers (except mega gengar), and ditto (imposter/imprison)',
+                monogen: 'You may only use pokemon, from the gen decided by the !roll command. No ubers, and no sleep',
+                monotype: 'You may only use Pokemon from the type dictated by the !roll command. Here are the list of types. http://bulbapedia.bulbagarden.net/wiki/Type_chart No ubers, and no sleep',
+                monopoke: 'You may only use the Pokemon decided by the !roll command. No ubers, and no sleep',
+                monoletter: 'You may only use Pokemon starting with the same letter dictated by the !roll command. No ubers, and no sleep.',
+                monocolor: 'You may only use Pokemon sharing the same color dictated by the !pickrandom command.',
+                cap: '1v1 using Create-A-Pokemon! No sleep, no focus sash.',
+                megaevo: 'Only bring one Pokemon. http://pastebin.com/d9pJWpya ',
+                bstbased: 'You may only use Pokemon based off or lower than the BST decided by !roll command. ',
+                metronome: 'Only bring one Pokemon. http://pastebin.com/diff.php?i=QPZBDzKb ',
+                twovtwo: 'You may only use 2 pokemon, banlist include: no sleep, no ubers (mega gengar allowed), only one focus sash, no parental bond. ',
+                ouonevone: 'OU choice- The OU version of CC1v1. You use an OU team, and choose one  Pokemon in battle. Once that Pokemon faints, you forfeit. You must use  the same OU team throughout the tour, but you can change which Pokemon  you select to choose. No ubers, no focus sash, no sleep. ',
+                aaa: 'http://www.smogon.com/forums/threads/almost-any-ability-xy-aaa-xy-other-metagame-of-the-month-may.3495737/ You may only use a team of ONE pokemon, banlist in  this room for this tier are: Sleep, focus sash, Sturdy, Parental Bond,  Huge Power, Pure Power, Imprison, Normalize (on ghosts). ',
+                stabmons: 'http://www.smogon.com/forums/threads/3484106/ You may only use a team of ONE Pokemon. Banlist = Sleep, Focus sash, Huge Power, Pure power, Sturdy, Parental Bond, Ubers. ',
+                abccup: 'http://www.smogon.com/forums/threads/alphabet-cup-other-metagame-of-the-month-march.3498167/ You may only use a team of ONE Pokemon. Banlist = Sleep, Focus sash, Huge Power, Pure power, Sturdy, Parental Bond, Ubers. ',
+                averagemons: 'http://www.smogon.com/forums/threads/averagemons.3495527/ You may only use a team of ONE Pokemon. Banlist = Sleep, Focus sash, Huge Power, Pure power, Sturdy, Parental Bond, Sableye. ',
+                balancedhackmons: 'http://www.smogon.com/forums/threads/3463764/ You may only use a team of ONE Pokemon. Banlist =  Sleep, Focus sash, Huge Power, Pure power, Sturdy, Parental Bond,  Normalize Ghosts.', 
+                retro: 'This is how 1v1 used to be played before 3 team preview. Only bring ONE Pokemon, No sleep, no ubers (except mega gengar), no ditto. ',
+                mediocremons: 'https://www.smogon.com/forums/threads/mediocre-mons-venomoth-banned.3507608/ You many only use a team of ONE Pokemon Banlist = Sleep, Focus sash, Huge Power, Pure power, Sturdy.  ',
+                eeveeonly: 'You may bring up to 3 mons that are eeveelutions. No sleep inducing moves. ',
+                tiershift: 'http://www.smogon.com/forums/threads/tier-shift-xy.3508369/ Tiershift 1v1, you may only bring ONE Pokemon. roombans are slaking, sleep, sash, sturdy, ditto ',
+                lc: 'Only use a team of ONE LC Pokemon. No sleep, no sash. ',
+                lcstarters: 'Only use a team of ONE starter Pokemon in LC form. No sleep, no sash, no pikachu, no eevee. ',
+                ubers: 'Only use a team of ONE uber pokemon. No sleep, no sash ',
+		inverse: 'https://www.smogon.com/forums/threads/the-inverse-battle-ǝɯɐƃɐʇǝɯ.3492433/ You may use ONE pokemon. No sleep, no sash, no ubers (except mega gengar). ',
+            };
+            if (!target) {
+				return this.sendReplyBox("Available commands for .1v1: ' + Object.keys(messages).join(', '));
+			} else return this.sendReplyBox(messages);
+        },
+	
 	color: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (target === 'list' || target === 'help' || target === 'options') {

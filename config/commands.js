@@ -2371,8 +2371,8 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/YX5NfOz.jpg" width="160">' +
 			'<img src="http://i.imgur.com/Me5jPPo.png">' +
 			'<img src="http://www.hollywoodreporter.com/sites/default/files/imagecache/blog_post_349_width/2013/09/robocop_poster_p_2013.jpg" width="130"><br />' +
-			'<b>Ace:</b> Blue Beast<br />' +
-			'Analyze, Adapt, Assimilate. I am <i>X-Bane.</i></center>');
+			'<b>Ace:</b> X-Behemoth<br />' +
+			'Analyze, Adapt, Assimilate. I am <i><b>X-Bane.</b></i></center>');
 	},
 	
 	bosswrath: function(target, room, user) {
@@ -2503,11 +2503,11 @@ var commands = exports.commands = {
 	
 	crashy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/LiQcTfm.gif" width="150">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/0lyplU7.png" height="100">' +
 			'<img src="http://i.imgur.com/1MpUyqF.gif">' +
-			'<img src="http://sprites.pokecheck.org/t/102.gif"><br />' +
+			'<img src="http://i.imgur.com/oO5g9NB.png" height="120"><br />' +
 			'<b>Ace:</b> Shuckle<br />' +
-			'I live in a world a gray and that allows me to do things other just can\'t do.</center>');
+			'"I typed gg but I actually meant fuck you"</center>');
 	},
 	
 	boreas: function(target, room, user) {

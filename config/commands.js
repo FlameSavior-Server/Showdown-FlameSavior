@@ -1122,7 +1122,7 @@ var commands = exports.commands = {
                 'I may be cute, but I could make you fall off a cliff without anyone seeing it.</center>');
 	},
 	
-	st function(target, room, user) {
+	stone: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="https://i.imgur.com/DPy0OdR.gif" width="500"><br />' +
                 '<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/376.gif"><br />' +

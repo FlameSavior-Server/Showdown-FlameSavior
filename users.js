@@ -135,9 +135,8 @@ Users.addVip = function(user) {
 function messageSeniorStaff (message) {
 	if (!message) return false;
 	for (var u in Users.users) {
-		if (Users.users[u].group == '&' || Users.users[u].group == '~') {
-			Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+message);
-		}
+		if (!Users.users[u].connected || !Users.users[u].can('seniorstaff')) continue;
+		Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+message);
 	}
 }
 
@@ -1543,6 +1542,7 @@ var User = (function () {
 		if (!room.isPrivate) {
 			for (var x in Users.bannedMessages) {
 				if (message.toLowerCase().indexOf(Users.bannedMessages[x]) > -1 && Users.bannedMessages[x] != '' && message.substr(0,1) != '/') {
+					if (connection.user.locked) return false;
 					connection.user.lock();
 					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake please contact a staff member.');
 					fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was automatically locked for saying a banned word. ('+Users.bannedMessages[x]+')\n');
@@ -1553,6 +1553,7 @@ var User = (function () {
 		}
 
 		if (toId(message).indexOf('psimus') > -1 && message.toLowerCase().indexOf('frost.psim.us') == -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~frost") == -1 && !this.can('seniorstaff')) {
+			if (connection.user.locked) return false;
 			if (!this.advWarns) this.advWarns = 0;
 			this.advWarns++;
 			if (this.advWarns > 1) {

@@ -1777,6 +1777,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	yahir: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/mF8cwGN.jpg" width="150">' +
+    		'<img src="http://i.imgur.com/RSjZLaF.png">' +
+    		'<img src="http://i.imgur.com/FSdhBGu.jpg" width="140"><br />' +
+    		'<b>Ace:</b> Greninja<br />' +
+    		'"You know how people say nothing can walk on water? Well guess again :3"</center>');
+    },
+
 	dk: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/9ytPhX3.gif" width="120">' +
@@ -2837,7 +2846,7 @@ var commands = exports.commands = {
     	this.sendReplyBox('<center><marquee behavior="slide" direction="down" scrollamount="10" height="100"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
     		'<img src="http://i.imgur.com/I1qLAtu.png" width="310">' +
     		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja.gif"></marquee><br />' +
-    		'<marquee behavior="slide" scrollamount="20" direction="up" height="140"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/hydreigon.gif">' +
+    		'<marquee behavior="slide" scrollamount="20" direction="up" height="180"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/hydreigon.gif">' +
     		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/tyranitar-mega.gif"><br />' +
 			'<font color="red"><b>Ace: </font>My Dark Squadron</b>' +
 			'<center><font color="purple"><b>Master of Nightmare</b></font><br />' +

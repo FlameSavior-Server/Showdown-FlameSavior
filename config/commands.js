@@ -2832,16 +2832,17 @@ var commands = exports.commands = {
 			'Winning battles is about making 2 steps forward for each step backwards.</center>');
 	},
 	
-	ferrandorosu: function(target, room, user) {
+	randorosu: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/iYunicf.png" width="400"><br />' +
-    		'<marquee behavior="alternate"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
-    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja.gif">' +
-    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/jirachi.gif">' +
-    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/metagross.gif"></marquee><br />' +
-			'<font color="red"><b>Ace: </b></font><font color="brown">Landorus</font> &amp; <font color="orange">Metagross</font><br />' +
-			'<font color="red">If you\'re going through hell, keep going.</font><br />' +
-			'<font color="orange">Gard you are my bitch, now go make me a sandwich!</font></center>');
+    	this.sendReplyBox('<center><marquee behavior="slide" direction="down" scrollamount="10" height="100"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
+    		'<img src="http://i.imgur.com/I1qLAtu.png" width="310">' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja.gif"></marquee><br />' +
+    		'<marquee behavior="slide" scrollamount="20" direction="up" height="140"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/hydreigon.gif">' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/tyranitar-mega.gif"><br />' +
+			'<font color="red"><b>Ace: </font>My Dark Squadron</b>' +
+			'<center><font color="purple"><b>Master of Nightmare</b></font><br />' +
+			'<font color="red">"If you\'re going through hell, keep going"</font><br />' +
+			'<button name="send" value="/transferbucks Randorosu Bank, 1" >Feeling Generous? Donate Now! :]</button></center>');
     },
 	
 	kc: function(target, room, user) {

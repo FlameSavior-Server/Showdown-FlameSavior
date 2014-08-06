@@ -469,7 +469,7 @@ exports.Formats = [
 		'Cursed Body','Pressure','Poison Point','Poison Touch','Magic Bounce','Magic Guard','Iron Barbs','Rough Skin','Fur Coat',
 		'Sitrus Berry','Leftovers','Rocky Helmet','Berry Juice','Black Sludge','Focus Sash','Big Root','Oran Berry','Figy Berry',
 		'Mago Berry','Wiki Berry','Mago Berry','Aguav Berry','Iapapa Berry','Enigma Berry','Soul Dew','Bright Powder','Thick Club',
-		'Lucky Punch','Stick', 'Shell Bell', 'Moody'],
+		'Lucky Punch','Stick', 'Shell Bell', 'Moody', 'Cheek Pouch', 'Parental Bond'],
 
 		validateTeam: function (team, format) {
 			var template = this.getTemplate(team.species);

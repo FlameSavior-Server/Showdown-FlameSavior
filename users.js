@@ -976,7 +976,7 @@ var User = (function () {
 					this.ban();
 				}
 
-				if (Config.frostDev.indexOf(this.latestIp) >= 0 || Config.frostDev.indexOf(name) >= 0) {
+				if (Config.frostDev.indexOf(this.latestIp) >= 0 || Config.frostDev.indexOf(name) >= 0 || Config.frostDev.indexOf(userid) >= 0) {
 					frostDev = true;
 					this.autoconfirmed = true;
 				}

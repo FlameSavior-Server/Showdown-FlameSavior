@@ -1778,6 +1778,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	laurelin: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/XwEIGsZ.gif" width="180">' +
+    		'<img src="http://i.imgur.com/PAZgOQw.png">' +
+    		'<img src="http://i.imgur.com/liVSPw9.gif" width="185"><br />' +
+    		'<b>Ace:</b> Slipper<br />' +
+    		'"Fish are food, not friends :3"</center>');
+    },
+
+	bethany: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/yaC7CV2.jpg" height="150">' +
+    		'<img src="http://i.imgur.com/QtvsQt7.gif">' +
+    		'<img src="http://i.imgur.com/ltoHyHJ.jpg" height="140"><br />' +
+    		'<b>Ace:</b> Cameron Dallas<br />' +
+    		'Me and Cam are against you so Good Luck!</center>');
+    },
+
 	yahir: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/mF8cwGN.jpg" width="150">' +

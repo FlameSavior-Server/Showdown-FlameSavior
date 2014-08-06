@@ -193,7 +193,7 @@ var BattlePokemon = (function () {
 		this.baseAbility = toId(set.ability);
 		this.ability = this.baseAbility;
 		this.item = toId(set.item);
-		this.canMegaEvo = (this.battle.getItem(this.item).megaEvolves === this.species);
+		this.canMegaEvo = (this.battle.getItem(this.item).megaEvolves === this.baseTemplate.baseSpecies);
 		this.abilityData = {id: this.ability};
 		this.itemData = {id: this.item};
 		this.speciesData = {id: this.speciesid};
@@ -2008,6 +2008,7 @@ var Battle = (function () {
 					BasePower: 1,
 					Immunity: 1,
 					Accuracy: 1,
+					RedirectTarget: 1,
 					Damage: 1,
 					SubDamage: 1,
 					Heal: 1,
@@ -3277,7 +3278,9 @@ var Battle = (function () {
 			if (!decision.pokemon.isActive) return false;
 			if (decision.pokemon.fainted) return false;
 			this.debug('before turn callback: ' + decision.move.id);
-			decision.move.beforeTurnCallback.call(this, decision.pokemon, this.getTarget(decision));
+			var target = this.getTarget(decision);
+			if (!target) return false;
+			decision.move.beforeTurnCallback.call(this, decision.pokemon, target);
 			break;
 		case 'event':
 			this.runEvent(decision.event, decision.pokemon);
@@ -3608,7 +3611,9 @@ var Battle = (function () {
 				if (!side.active[i] || !side.active[i].switchFlag) {
 					if (choice !== 'pass') choices.splice(i, 0, 'pass');
 					decisions.push({
-						choice: 'pass'
+						choice: 'pass',
+						pokemon: side.active[i],
+						priority: 102
 					});
 					continue;
 				}

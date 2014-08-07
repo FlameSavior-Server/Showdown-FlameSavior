@@ -1543,6 +1543,17 @@ var commands = exports.commands = {
          	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
    	},
 
+	hopebox6: function(target, room, user) {
+       	if (!this.canBroadcast()) return;
+       	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+          	'<center><h1><font color="gold"><u>Hope\'s Music Box</u></color></h1></center>' +
+          	'<center><b><a href="https://www.youtube.com/watch?v=rJxt-WBVYyc">Endless Possibilities</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=ey-oB-qw45c">With Me</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=dc_a2eWp9t4">Reach for the Stars</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=_kTBbTSjZpI">I am all of me</a><br /></center>' +
+           	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+   	},
+
 	highbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

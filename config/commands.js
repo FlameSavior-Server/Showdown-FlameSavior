@@ -1532,6 +1532,17 @@ var commands = exports.commands = {
          	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
 	
+	hopebox5: function(target, room, user) {
+       	if (!this.canBroadcast()) return;
+       	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+          	'<center><h1><font color="gray"><u>Hope\'s Final Boss Box</u></color></h1></center>' +
+           	'<center><b><a href="https://www.youtube.com/watch?v=-cHBCD6c8LA">Zeromus</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=3YNfX1oU2XA">Kefka</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=Si3C1EtGo4c">Trance Kuja</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=ukxB2TqljzQ">Caius Ballad</a><br /></center>' +
+         	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+   	},
+
 	highbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

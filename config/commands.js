@@ -1800,6 +1800,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	frosty: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/EF57HEV.gif">' +
+    		'<img src="http://i.imgur.com/eOxXXjo.gif">' +
+    		'<img src="http://i.imgur.com/a3Zf8MI.gif"><br />' +
+    		'<b>Ace:</b> Kyurem-Black<br />' +
+    		'"Ice is cool and all (Pun Intended) but I\'m supa HAWT in so many ways... So Come at me Brah".</center>');
+    },
+
 	laurelin: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/XwEIGsZ.gif" width="180">' +

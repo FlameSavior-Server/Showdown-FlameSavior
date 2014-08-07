@@ -1800,6 +1800,18 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	receptic: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/j4QpMfl.png">' +
+    		'<button name="send" value="/transferbucks M & R\'s Bank, 1">Donate a Buck for our Love :D</button><br />' +
+    		'<img src="http://i.imgur.com/HLMqigz.gif" width="130">' +
+    		'<img src="http://i.imgur.com/Gls3Tt6.png" width="270">' +
+    		'<img src="http://i.imgur.com/gVTBdwD.gif" width="130"><br />' +
+			'<b>Ace: </b>Our Love<br />' +
+			'Love is like Quicksand<br />' +
+			'The deeper you fall in, the harder it is to get out');
+    },
+
 	frosty: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/EF57HEV.gif">' +

@@ -3020,7 +3020,7 @@ var commands = exports.commands = {
 //poof functions, still not neat
 function getRandMessage(user){
 	user = escapeHTML(user.name);
-	var numMessages = 48; // numMessages will always be the highest case # + 2, as Math.floor(Math.random() * numMessages) returns a range of 0 to numMessages - 1 //increasing this will make the default appear more often
+	var numMessages = 56; // numMessages will always be the highest case # + 2, as Math.floor(Math.random() * numMessages) returns a range of 0 to numMessages - 1 //increasing this will make the default appear more often
 	var message = '~~ ';
 	switch(Math.floor(Math.random()*numMessages)){
 		case 0: message = message + user + ' knocked Cosy\'s tea out of his hand... RIP.';
@@ -3130,6 +3130,8 @@ function getRandMessage(user){
 		case 52: message = message + user + ' is blasting off again'; // bought by L Chevy 12
 		break;
 		case 53: message = message + user + ' use defog on Bisharp'; // bought by Hope/Fallen Blood
+		break;
+		case 54: message = message + user + ' got outsassed by Félicette!'; // bought by Félicette
 		break;
 		default: message = message + user + ' bought a poisoned Pepsi!';
 	};

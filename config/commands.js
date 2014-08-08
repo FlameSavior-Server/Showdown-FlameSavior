@@ -1800,6 +1800,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ventom: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/174454/sokka-and-suki-2-o.gif" height="130">' +
+    		'<img src="http://i.imgur.com/r0Kymre.gif">' +
+    		'<img src="http://38.media.tumblr.com/tumblr_m3ucyt9QXC1r1gjtbo1_500.gif" height="130"><br />' +
+    		'<b>Ace:</b> Our LOVE!<br />' +
+    		'We love and care for each other! We will do anything to make each other as happy as can be! ~phantom+ Venom/crona/sokka</center>');
+    },
+
 	greek: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/oBGI3sP.gif" width="130" height="140">' +

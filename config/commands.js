@@ -1802,9 +1802,9 @@ var commands = exports.commands = {
 
 	greek: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/oBGI3sP.gif" width="130">' +
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/oBGI3sP.gif" width="130" height="140">' +
     		'<img src="http://i.imgur.com/9e5RUk9.png" width="280">' +
-    		'<img src="http://i.imgur.com/CXTVySG.gif" width="130"><br />' +
+    		'<img src="http://i.imgur.com/CXTVySG.gif" width="130" height="140"><br />' +
     		'<b>Ace:</b> Mega Mawile and Heatran<br />' +
     		'Welcome to the shitty restaurant. Today\'s special: Steel</center>');
     },

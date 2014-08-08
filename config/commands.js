@@ -1800,6 +1800,14 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ins: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/jlShiXW.png" width="500"><br />' +
+    		'<img src="http://i.imgur.com/Zd3y6Fu.jpg" height="200"><br />' +
+    		'<b>Ace:</b> Thundurus-Therian<br />' +
+    		'<font color="blue"><b>"The sky is infinite, our lives are not. So live every day as if it were your last!"</b></font></center>');
+    },
+
 	receptic: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/j4QpMfl.png">' +

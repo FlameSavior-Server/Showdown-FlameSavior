@@ -1800,6 +1800,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	farneo: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/rowLuS0.png" width="140">' +
+    		'<img src="http://i.imgur.com/tz2UjZH.png" width="260">' +
+    		'<img src="http://i.imgur.com/kAara1x.jpg" width="140"><br />' +
+    		'<b>Ace:</b> Flygon<br />' +
+    		'Dejavu.</center>');
+    },
+
 	ventom: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/174454/sokka-and-suki-2-o.gif" height="130">' +

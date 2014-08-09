@@ -776,7 +776,7 @@ var commands = {
 		begin: 'start',
 		start: function (tournament, user, params, cmd) {
 			tournament.startTournament(this);
-			this.privateModCommand(user.name+' has started the tournament.');
+			this.privateModCommand('(' + user.name + ' has started the tournament.)');
 		}
 	},
 	moderation: {
@@ -808,8 +808,9 @@ var commands = {
 		},
 		end: 'delete',
 		stop: 'delete',
-		delete: function (tournament) {
+		delete: function (tournament, user, params, cmd) {
 			deleteTournament(tournament.room.title, this);
+			this.privateModCommand("(" + user.name + " has ended the tournament.)");
 		}
 	}
 };

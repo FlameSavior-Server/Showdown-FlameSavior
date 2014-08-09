@@ -774,8 +774,9 @@ var commands = {
 			if (generator) tournament.setGenerator(generator, this);
 		},
 		begin: 'start',
-		start: function (tournament) {
+		start: function (tournament, user, params, cmd) {
 			tournament.startTournament(this);
+			this.privateModCommand(user.name+' has started the tournament.');
 		}
 	},
 	moderation: {

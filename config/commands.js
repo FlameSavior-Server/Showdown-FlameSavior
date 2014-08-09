@@ -2971,7 +2971,7 @@ var commands = exports.commands = {
 	
 	laxus: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/LlMnu7k.gif">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ssSyTaB.gif" width="180">' +
 			'<img src="http://i.imgur.com/EkIMtJ9.gif">' +
 			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/282-mega.gif"><br />' +
 			'<b>Ace:</b> Mega Waifu & Sord<br />' +

@@ -1453,6 +1453,18 @@ var commands = exports.commands = {
     /***************************************
 	* Music Boxes                          *
 	***************************************/
+	
+	farneobox: function(target, room, user) {
+       	if (!this.canBroadcast()) return;
+       	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+           	'<center><h1><font color="blue"><u>FarNeo 2\'s Music Box</u></color></h1></center>' +
+           	'<center><b><a href="https://www.youtube.com/watch?v=btPJPFnesV4">Eye Of The Tiger</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=9jK-NcRmVcw">The Final Countdown</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=vx2u5uUu3DE">It\'s My Life</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=68ugkg9RePc">Blue</a><br /></center>' +
+           	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+   	},
+
 	pandorasbox: function(target, room, user) {
     	if (!this.canBroadcast()) return;
 	    this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
@@ -1464,8 +1476,6 @@ var commands = exports.commands = {
             '<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
                    
-        
-	
 	kjubox: function(target, room, user) {
         if (!this.canBroadcast()) return;
        	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

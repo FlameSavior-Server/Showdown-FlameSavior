@@ -2971,11 +2971,11 @@ var commands = exports.commands = {
 	
 	laxus: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/wailord-2.gif">' +
-			'<img src="http://i.imgur.com/urkd5XP.gif">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/LlMnu7k.gif">' +
+			'<img src="http://i.imgur.com/EkIMtJ9.gif">' +
 			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/282-mega.gif"><br />' +
-			'<b>Ace:</b> Mega Waifu & Fatass<br />' +
-			'Don\'t be surprised if you lose your virginity.</center>');
+			'<b>Ace:</b> Mega Waifu & Sord<br />' +
+			'You lost because sord is sord.</center>');
 	},
 	
 	zer0: 'zero',

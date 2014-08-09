@@ -776,6 +776,7 @@ var commands = {
 		begin: 'start',
 		start: function (tournament) {
 			tournament.startTournament(this);
+			privateModCommand(user.name+' has started the tournament.');
 		}
 	},
 	moderation: {

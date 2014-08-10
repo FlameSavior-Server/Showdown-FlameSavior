@@ -4155,7 +4155,7 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/VlEM9Vb.gif" width="240" height="100"><right>' +
     		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/zapdos.gif"><br />' +
     		'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/ampharos-mega.gif"><br />' +
-    		'<center><blink><font color="yellow"><br><b>Ace: </b>Ampharos <font color="yellow"> <br />' +
+    		'<center><blink><font color="#FF0000"><br><b>Ace: </b>Ampharos <br />' +
     		'<b>Quote: </b>A low possibility means it\'s not zero.</center>');
     },
 

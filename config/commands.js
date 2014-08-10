@@ -1821,6 +1821,17 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	crow: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/198.gif">' +
+    		'<img src="http://i.imgur.com/6Fju81D.png">' +
+    		'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/198.gif"><br />' +
+    		'<img src="http://i.imgur.com/uschk29.png"><br />' +
+    		'<font color="black"><b>Ace: </font>My Powers</b><br />' +
+			'<font color="black"><center>"These eyes see the darkness clearly."</font><br />' +
+			'<center><button name="send" value="/transferbucks Crow\'s Bank, 1" >Donate to Crow!</button>');
+    },
+
 	urri: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/ui6zHcv.png">' +

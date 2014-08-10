@@ -4151,12 +4151,12 @@ var commands = exports.commands = {
 
 	mav: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/m6NrTvP.png">' +
-    		'<img src="http://i.imgur.com/VlEM9Vb.gif" width="250">' +
-    		'<img src="http://i.imgur.com/xUECkec.png" width="100"><br />' +
-			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/ampharos-mega.gif"><br />' +
-    		'<b>Ace:</b> Ampharos<br />' +
-    		'A low possibility means it\'s not zero.</center>');
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/m6NrTvP.png" width="100" height="100">' +
+    		'<img src="http://i.imgur.com/VlEM9Vb.gif" width="240" height="100"><right>' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/zapdos.gif"><br />' +
+    		'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/ampharos-mega.gif"><br />' +
+    		'<center><blink><font color="yellow"><br><b>Ace: </b>Ampharos <font color="yellow"> <br />' +
+    		'<b>Quote: </b>A low possibility means it\'s not zero.</center>');
     },
 
 	vlahd: function(target, room, user) {

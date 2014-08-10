@@ -1821,6 +1821,24 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	urri: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/ui6zHcv.png">' +
+    		'<img src="http://i.imgur.com/VPVLsOQ.png">' +
+    		'<img src="http://i.imgur.com/3ZouoHO.png" height="200"><br />' +
+    		'<b>Ace:</b> Alomomola<br />' +
+    		'Don\'t hate my Azian bros.</center>');
+    },
+
+	swage: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://cdn.makeagif.com/media/8-08-2014/mtIROz.gif" width="130">' +
+    		'<img src="http://i.imgur.com/FpYSDU7.png" width="270">' +
+    		'<img src="http://cdn.makeagif.com/media/8-08-2014/pnwAQy.gif" width="140"><br />' +
+    		'<b>Ace:</b> Swag<br />' +
+    		'Nobody can handle my SWAGE.</center>');
+    },
+
 	farneo: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/rowLuS0.png" width="140">' +

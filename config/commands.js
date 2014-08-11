@@ -1575,7 +1575,7 @@ var commands = exports.commands = {
            	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
 
-	hopebox8: function(target, room, user) {
+	hopebox69: function(target, room, user) {
        	if (!this.canBroadcast()) return;
        	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
            	'<center><h1><font color="darkblue"><u>Hope\'s Chrono Cross Box</u></color></h1></center>' +
@@ -2046,7 +2046,7 @@ var commands = exports.commands = {
 	andy: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/9WOAyGQ.png">' +
-    		'<img src="http://i.imgur.com/zAXHZcu.gif">' +
+    		'<img src="http://i.imgur.com/d9UuYnc.gif" width="250">' +
     		'<img src="http://i.imgur.com/Ioi3U1N.png" width="140"><br />' +
     		'<b>Ace:</b> Palkia and Absol<br />' +
     		'Ready, Steady, GO!</center>');

@@ -1103,6 +1103,12 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
+	supersonic: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20120528125001/sonic/images/f/fc/Hyper_sonic.gif"><br />' +
+                'Gotta go fast much?</center>');
+	},
+	
 	terlor: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/bjVsAsj.png"><br />' +

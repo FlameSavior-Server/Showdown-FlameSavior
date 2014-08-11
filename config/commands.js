@@ -1103,6 +1103,12 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
+	terlor: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/bjVsAsj.png"><br />' +
+                '"I love bad bitches, that\'s my fucking problem. And yeah, I like to fuck, I got a fucking problem" -ASAP Rocky, 2013"</center>');
+	},
+	
 	saago: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/v3wWa5Z.jpg"><br />' +

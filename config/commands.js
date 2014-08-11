@@ -1575,6 +1575,17 @@ var commands = exports.commands = {
            	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
     },
 
+	hopebox8: function(target, room, user) {
+       	if (!this.canBroadcast()) return;
+       	this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+           	'<center><h1><font color="darkblue"><u>Hope\'s Chrono Cross Box</u></color></h1></center>' +
+           	'<center><b><a href="https://www.youtube.com/watch?v=ponx7VYSrh4">The Brink of Death</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=H-IJV93FQZc">Dragon God</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=Hj4FnVABiN8">Scars of Time</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=CuG4Mst-DS8">Gale</a><br /></center>' +
+          	'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
+   	},
+
 	highbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
@@ -1823,9 +1834,9 @@ var commands = exports.commands = {
 
 	puzzle: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/xqtbumC.gif">' +
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/QzVD08J.gif" width="230">' +
     		'<img src="http://i.imgur.com/rFc6m8m.png">' +
-    		'<img src="http://i.imgur.com/qMJkER1.gif"><br />' +
+    		'<img src="http://i.imgur.com/uWwGbNs.gif" width="180"><br />' +
     		'<b>Ace:</b> My Wits<br />' +
     		'A Gentleman Leaves No Puzzle Unsolved.</center>');
     },

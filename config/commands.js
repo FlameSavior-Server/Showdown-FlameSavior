@@ -2927,7 +2927,7 @@ var commands = exports.commands = {
 	kju: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>King Jong-un doesn\'t really like Trainer Cards.<br />' +
-			'<b>Ace:</b> <a href="https://www.youtube.com/watch?v=PHSJCMkUa9Y">Cactus Body Slam</a>');
+			'<b>Ace:</b> <a href="https://www.youtube.com/watch?v=JUgEmezpS_E">KJU IRL</a>');
 	},
 
 	hopgod: function(target, room, user) {

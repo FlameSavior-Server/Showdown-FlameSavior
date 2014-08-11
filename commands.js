@@ -44,7 +44,7 @@ var commands = exports.commands = {
 	},
 
 	/*********************************************************
-	 * Friends                                    
+	 * Friends
 	 *********************************************************/
 
 	friends: function(target, room, user, connection) {
@@ -90,7 +90,7 @@ var commands = exports.commands = {
 				user.send('You have no friends to show.');
 			}
 		},
-	 
+
 	addfriend: function(target, room, user, connection) {
 		if (!user.customClient) {
 			return this.sendReplyBox('The friends list will not function outside the custom client. Click <a href = "http://frost-server.no-ip.org/">here</a> to use it.');
@@ -144,7 +144,7 @@ var commands = exports.commands = {
 		this.sendReply(targetUser.name + ' was added to your friends list.');
 		targetUser.send(user.name + ' has added you to their friends list.');
 	},
-	
+
 	removefriend: function(target, room, user, connection) {
 		if (!user.customClient) {
 			return this.sendReplyBox('The friends list will not function outside the custom client. Click <a href = "http://frost-server.no-ip.org/">here</a> to use it.');
@@ -191,37 +191,37 @@ var commands = exports.commands = {
 	},
 
 	/*********************************************************
-	 * Other Stuff                                    
+	 * Other Stuff
 	 *********************************************************/
 
 	version: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("Server version: <b>" + CommandParser.package.version + "</b>");
 	},
-	
+
 	me: function (target, room, user, connection) {
 		// By default, /me allows a blank message
 		if (target) target = this.canTalk(target);
 		if (!target) return;
 
 		var message = '/me ' + target;
-		
+
 		if (user.isAway) {
 			if (user.name.slice(-7) !== ' - Away') {
-				user.isAway = false; 
+				user.isAway = false;
 				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
 			}
 
 			var newName = user.originalName;
-			
+
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(newName);
 
 			user.forceRename(newName, undefined, true);
-			
+
 			//user will be authenticated
 			user.authenticated = true;
-			
+
 			if (user.isStaff) this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer away');
 
 			user.originalName = '';
@@ -229,7 +229,7 @@ var commands = exports.commands = {
 		}
 		return message;
 	},
-	
+
 	hex: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		if(!target){
@@ -245,73 +245,6 @@ var commands = exports.commands = {
 			this.sendReplyBox('<center><b><font size="5" color="' + target + '">' + target + '</font></b></center>');
 		}else{
 			this.sendReplyBox('Could not find a valid color to match your hex code');
-		}
-	},
-	
-	poof: 'd',
-	d: function(target, room, user){
-		if(room.id !== 'lobby') return false;
-		muted = Object.keys(user.mutedRooms);
-		for (var u in muted) if (muted[u] == 'lobby') return this.sendReply('You can\'t poof while muted');
-		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
-		var etags = '</font></strong>'
-		var targetid = toId(user);
-		if(target){
-			var tar = toId(target);
-			var targetUser = Users.get(tar);
-			if(user.can('poof', targetUser)){
-				if(!targetUser){
-					user.emit('console', 'Cannot find user ' + target + '.', socket);	
-				}else{
-					var escapedName = escapeHTML(targetUser.name);
-					var escapedUser = escapeHTML(user.name);
-					if(poofeh)
-						Rooms.rooms.lobby.addRaw(btags + '~~ '+escapedName+' was vanished into nothingness by ' + escapedUser +'! ~~' + etags);
-						targetUser.disconnectAll();
-						return	this.logModCommand(targetUser.name+ ' was poofed by ' + user.name);
-					}
-				} else {
-					return this.sendReply('/poof target - Access denied.');
-				}
-			}
-		if(poofeh && !user.locked){
-			Rooms.rooms.lobby.addRaw(btags + getRandMessage(user)+ etags);
-			user.disconnectAll();	
-		}else{
-			return this.sendReply('poof is currently disabled.');
-		}
-	},
-
-	poofoff: 'nopoof',
-	nopoof: function(target, room, user){
-		if(!user.can('warn')) return this.sendReply('/nopoof - Access denied.');
-		if(!poofeh) return this.sendReply('poof is currently disabled.');
-		poofeh = false;
-		this.logModCommand(user.name + ' disabled poof.');
-		return this.sendReply('poof is now disabled.');
-	},
-
-	poofon: function(target, room, user){
-		if(!user.can('warn')) return this.sendReply('/poofon - Access denied.');
-		if(poofeh) return this.sendReply('poof is currently enabled.');
-		poofeh = true;
-		this.logModCommand(user.name + ' enabled poof');
-		return this.sendReply('poof is now enabled.');
-	},
-
-	cpoof: function(target, room, user){
-		if(!user.can('broadcast') && !user.vip) return this.sendReply('/cpoof - Access Denied');
-		if (!target) return this.sendReply('/cpoof - Please specify a custom poof message to use.');
-		if (target.length > 100) return this.sendReply('/cpoof - Poof messages can\'t be longer than 100 characters.');
-		if(poofeh) {
-			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
-			var etags = '</font></strong>'
-			escapedTarget = escapeHTML(target);
-			Rooms.rooms.lobby.addRaw(btags + '~~ '+user.name+' '+escapedTarget+'! ~~' + etags);
-			this.logModCommand(user.name + ' used a custom poof message: \n "'+target+'"');
-			user.disconnectAll();	
-		}else{
-			return this.sendReply('Poof is currently disabled.');
 		}
 	},
 
@@ -416,7 +349,7 @@ var commands = exports.commands = {
 		targetUser.lastPM = user.userid;
 		user.lastPM = targetUser.userid;
 	},
-	
+
 	tell: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
@@ -492,7 +425,7 @@ var commands = exports.commands = {
 	},
 
     	makeprivate: 'privateroom',
-    	toggleprivate: 'privateroom',      
+    	toggleprivate: 'privateroom',
 	privateroom: function (target, room, user) {
 		if (!this.can('privateroom', null, room)) return;
 		if (target === 'off') {
@@ -741,7 +674,7 @@ var commands = exports.commands = {
 		room.lockedRoom = true;
 		this.addModCommand(user.name + ' has locked the room.');
 	},
-	
+
 	unlockroom: function(target, room, user) {
 		if (!room.auth) {
 			return this.sendReply("Only unofficial chatrooms can be unlocked.");
@@ -875,20 +808,20 @@ var commands = exports.commands = {
 		var drivers = [];
 		var voices = [];
 
-		room.owners = ''; room.admins = ''; room.leaders = ''; room.mods = ''; room.drivers = ''; room.voices = ''; 
-		for (var u in room.auth) { 
-			if (room.auth[u] == '#') { 
+		room.owners = ''; room.admins = ''; room.leaders = ''; room.mods = ''; room.drivers = ''; room.voices = '';
+		for (var u in room.auth) {
+			if (room.auth[u] == '#') {
 				room.owners = room.owners +u+',';
-			} 
-			if (room.auth[u] == '@') { 
+			}
+			if (room.auth[u] == '@') {
 				room.mods = room.mods +u+',';
-			} 
-			if (room.auth[u] == '%') { 
+			}
+			if (room.auth[u] == '%') {
 				room.drivers = room.drivers +u+',';
-			} 
-			if (room.auth[u] == '+') { 
+			}
+			if (room.auth[u] == '+') {
 				room.voices = room.voices +u+',';
-			} 
+			}
 		}
 
 		if (!room.founder) founder = '';
@@ -914,7 +847,7 @@ var commands = exports.commands = {
 		}
 		if (owners.length > 0) {
 			owners = owners.join(', ');
-		} 
+		}
 		if (mods.length > 0) {
 			mods = mods.join(', ');
 		}
@@ -934,27 +867,27 @@ var commands = exports.commands = {
         var mods = [];
         var drivers = [];
         var voices = [];
-        
-        admins2 = ''; leaders2 = ''; mods2 = ''; drivers2 = ''; voices2 = ''; 
+
+        admins2 = ''; leaders2 = ''; mods2 = ''; drivers2 = ''; voices2 = '';
         stafflist = fs.readFileSync('config/usergroups.csv','utf8');
         stafflist = stafflist.split('\n');
         for (var u in stafflist) {
             line = stafflist[u].split(',');
-			if (line[1] == '~') { 
+			if (line[1] == '~') {
                 admins2 = admins2 +line[0]+',';
-            } 
-            if (line[1] == '&') { 
+            }
+            if (line[1] == '&') {
                 leaders2 = leaders2 +line[0]+',';
             }
-            if (line[1] == '@') { 
+            if (line[1] == '@') {
                 mods2 = mods2 +line[0]+',';
-            } 
-            if (line[1] == '%') { 
+            }
+            if (line[1] == '%') {
                 drivers2 = drivers2 +line[0]+',';
-            } 
-            if (line[1] == '+') { 
+            }
+            if (line[1] == '+') {
                 voices2 = voices2 +line[0]+',';
-             } 
+             }
         }
         admins2 = admins2.split(',');
         leaders2 = leaders2.split(',');
@@ -1007,7 +940,7 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Moderating: Punishments
 	 *********************************************************/
-	
+
 	warn: function (target, room, user) {
 		if (!target) return this.parse('/help warn');
 		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
@@ -1026,7 +959,7 @@ var commands = exports.commands = {
 		}
 		if (!this.can('warn', targetUser, room)) return false;
 		if (targetUser.punished) return this.sendReply(targetUser.name+' has recently been warned, muted, or locked. Please wait a few seconds before warning them.');
-		
+
 		targetUser.warnTimes += 1;
 		targetUser.punished = true;
 		targetUser.punishTimer = setTimeout(function(){
@@ -1126,7 +1059,7 @@ var commands = exports.commands = {
 			return;
 		}
 	},
-	
+
 	hm: 'hourmute',
 	hourmute: function(target, room, user) {
 		if (!target) return this.parse('/help hourmute');
@@ -1355,7 +1288,7 @@ var commands = exports.commands = {
 
 		targetUser.popup(user.name+" has banned you." + (Config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + Config.appealurl) : "") + "\n\n"+target);
 		if (Rooms.rooms.logroom) Rooms.rooms.logroom.addRaw('BAN LOG: ' + user.name + ' has banned ' + targetUser.name + ' from ' + room.id + '.');
-		
+
 		if (cmd === 'murder') {
 			this.addModCommand(""+targetUser.name+" was murdered by "+user.name+"." + (target ? " (" + target + ")" : ""), ' ('+targetUser.latestIp+')');
 		} else if (cmd === 'banana') {
@@ -1436,12 +1369,12 @@ var commands = exports.commands = {
 		delete Users.bannedIps[target];
 		this.addModCommand("" + user.name + " unbanned the " + (target.charAt(target.length - 1) === '*' ? "IP range" : "IP") + ": " + target);
 	},
-	
+
 	flogout: 'forcelogout',
 	forcelogout: function(target, room, user) {
 		if(!user.can('hotpatch')) return;
 		if (!this.canTalk()) return false;
-	
+
 		if (!target) return this.sendReply('/forcelogout [username], [reason] OR /flogout [username], [reason] - You do not have to add a reason');
 
 		target = this.splitTarget(target);
@@ -1454,9 +1387,9 @@ var commands = exports.commands = {
 		if (targetUser.can('hotpatch')) return this.sendReply('You cannot force logout another Admin.');
 
 		this.addModCommand(''+targetUser.name+' was forcibly logged out by '+user.name+'.' + (target ? " (" + target + ")" : ""));
-		
+
 		this.logModCommand(user.name+' forcibly logged out '+targetUser.name);
-		
+
 		targetUser.resetName();
 	},
 
@@ -1604,7 +1537,7 @@ var commands = exports.commands = {
 	spop: 'sendpopup',
 	sendpopup: function(target, room, user) {
 		if (!this.can('popup')) return false;
-		
+
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 
@@ -1613,9 +1546,9 @@ var commands = exports.commands = {
 
 		targetUser.popup(target);
 		this.sendReply(targetUser.name + ' got the message as popup: ' + target);
-		
+
 		targetUser.send(user.name+' sent a popup message to you.');
-		
+
 		this.logModCommand(user.name+' send a popup message to '+targetUser.name);
 	},
 
@@ -1684,7 +1617,7 @@ var commands = exports.commands = {
 		}
 		this.logModCommand(user.name + " globally declared " + target);
 	},
-	
+
 	pgdeclare: function(target, room, user) {
 		if (!target) return this.parse('/help pgdeclare');
 		if (!this.can('pgdeclare')) return;
@@ -1722,7 +1655,7 @@ var commands = exports.commands = {
 		}
 		this.logModCommand(user.name + " globally declared (chat level) " + target);
 	},
-	
+
 	setmotd: 'motd',
 	motd: function (target, room, user) {
 		if (!this.can('declare')) return false;
@@ -1744,7 +1677,7 @@ var commands = exports.commands = {
 		this.logModCommand(user.name+' set the message of the day to: '+message+' for every '+time+' minutes.');
 		return this.sendReply('The message of the day was set to "'+message+'" and it will be displayed every '+time+' minutes.');
 	},
-	
+
 	clearmotd: 'cmotd',
 	cmotd: function (target, room, user) {
 		if (!this.can('declare')) return false;
@@ -1805,12 +1738,12 @@ var commands = exports.commands = {
 		this.sendReplyBox('Thanks for your input. We\'ll review your feedback soon. The complaint you submitted was: ' + target);
 		this.logComplaint(target);
 	},
-	
+
 	complaintslist: 'complaintlist',
 	complaintlist: function(target, room, user, connection) {
 		if (!this.can('complaintlist')) return false;
 		var lines = 0;
-		if (!target.match('[^0-9]')) { 
+		if (!target.match('[^0-9]')) {
 			lines = parseInt(target || 15, 10);
 			if (lines > 100) lines = 100;
 		}
@@ -1941,7 +1874,7 @@ var commands = exports.commands = {
 
 	abc123: function(target, room, user) {
 		user.customClient = true;
-		
+
 		this.sendReplyBox('<center><b>Thank you for using the custom client!</b><br /><br />' +
 		'The custom client allows us to add many custom features, notably the custom theme, battle theme and also friends list.<br />' +
 		'Do note that some logins may not work due to how client runs in addition you do have to export and then import teams from server. Have fun!');
@@ -2037,9 +1970,9 @@ var commands = exports.commands = {
 		}
 		this.sendReply("Your hot-patch command was unrecognized.");
 	},
-	
+
 	deletecode: function(target, room, user) {
-		if (!target) {	
+		if (!target) {
 			return this.sendReply('/deletecode [user] - Deletes the Friend Code of the User.');
 		}
 		if (!this.can('lock')) return false;
@@ -2089,22 +2022,22 @@ var commands = exports.commands = {
 		code.write('\n'+user.name+':'+fc);
 		return this.sendReply("The friend code "+fc+" was submitted.");
 	},
-	
+
 	gc: 'viewcode',
 	viewcode: 'vc',
 	vc: function(target, room, user, connection) {
 		var codes = fs.readFileSync('config/friendcodes.txt','utf8');
 		return user.send('|popup|'+codes);
 	},
-	
-	
+
+
 	eating: 'away',
 	gaming: 'away',
     	sleep: 'away',
 	work: 'away',
     	working: 'away',
     	sleeping: 'away',
-    	busy: 'away',    
+    	busy: 'away',
 	afk: 'away',
 	away: function(target, room, user, connection, cmd) {
 		if (!this.can('away')) return false;
@@ -2154,7 +2087,7 @@ var commands = exports.commands = {
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
-			
+
 			if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + user.originalName +'</font color></b> is now '+t2.toLowerCase()+'. '+ (target ? " (" + escapeHTML(target) + ")" : ""));
 
 			user.isAway = true;
@@ -2171,20 +2104,20 @@ var commands = exports.commands = {
 
 		if (user.isAway) {
 			if (user.name === user.originalName) {
-				user.isAway = false; 
+				user.isAway = false;
 				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
 			}
 
 			var newName = user.originalName;
-			
+
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(newName);
 
 			user.forceRename(newName, undefined, true);
-			
+
 			//user will be authenticated
 			user.authenticated = true;
-			
+
 			if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + newName + '</font color></b> is no longer away.');
 
 			user.originalName = '';
@@ -2195,7 +2128,7 @@ var commands = exports.commands = {
 		}
 
 		user.updateIdentity();
-	}, 
+	},
 
 	getid: 'showuserid',
 	userid: 'showuserid',
@@ -2278,14 +2211,14 @@ var commands = exports.commands = {
 			Users.users[i].send('|pm|~Frost PM|'+Users.users[i].getIdentity()+'|'+target);
 		}
 	},
-	
+
 	pmstaff: 'pmallstaff',
 	pas: 'pmallstaff',
 	pmallstaff: function(target, room, user) {
 		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every staff member online.');
 		if (!this.can('pmall')) return false;
 
-		for (var u in Users.users) { 
+		for (var u in Users.users) {
 			if (Users.users[u].isStaff) {
 				Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target);
 			}
@@ -2415,7 +2348,7 @@ var commands = exports.commands = {
 	restart: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
 		try {
-			var forever = require('forever'); 
+			var forever = require('forever');
 		} catch(e) {
 			return this.sendReply('/restart requires the "forever" module.');
 		}
@@ -2983,141 +2916,6 @@ var commands = exports.commands = {
 	},
 
 };
-
-//poof functions, still not neat
-function getRandMessage(user){
-	user = escapeHTML(user.name);
-	var numMessages = 57; // numMessages will always be the highest case # + 2, as Math.floor(Math.random() * numMessages) returns a range of 0 to numMessages - 1 //increasing this will make the default appear more often
-	var message = '~~ ';
-	switch(Math.floor(Math.random()*numMessages)){
-		case 0: message = message + user + ' knocked Cosy\'s tea out of his hand... RIP.';
-		break;
-		case 1: message = message + user + ' looked at Aura\'s face!';
-		break;
-		case 2: message = message + user + ' used Explosion!';
-		break;
-		case 3: message = message + user + ' was swallowed up by the Earth!';
-		break;
-		case 4: message = message + user + ' was sold in a slave trade to a Chinese man!';
-		break;	
-		case 5: message = message + user + ' was eaten by Lex!';
-		break;
-		case 6: message = message + user + ' was sucker punched by Absol!';
-		break;
-		case 7: message = message + user + ' has left the building.';
-		break;
-		case 8: message = message + user + ' got lost in the woods!';
-		break;
-		case 9: message = message + user + ' left for their lover!';
-		break;
-		case 10: message = message + user + ' couldn\'t handle the coldness of Frost!';
-		break;
-		case 11: message = message + user + ' was hit by Magikarp\'s Revenge!';
-		break;
-		case 12: message = message + user + ' was sucked into a whirlpool!';
-		break;
-		case 13: message = message + user + ' got scared and left the server!';
-		break;
-		case 14: message = message + user + ' went into a cave without a repel!';
-		break;
-		case 15: message = message + user + ' got eaten by a bunch of piranhas!';
-		break;
-		case 16: message = message + user + ' ventured too deep into the forest without an escape rope';
-		break;
-		case 17: message = message + 'A large spider descended from the sky and picked up ' + user + '.';
-		break;
-		case 18: message = message + user + ' was tricked by Fizz!';
-		break;
-		case 19: message = message + user + ' woke up an angry Snorlax!';
-		break;
-		case 20: message = message + user + ' was forced to give jd an oil massage!'; 
-		break;
-		case 21: message = message + user + ' was used as shark bait!';
-		break;
-		case 22: message = message + user + ' peered through the hole on Shedinja\'s back';
-		break;
-		case 23: message = message + user + ' received judgment from the almighty Arceus!';
-		break;
-		case 24: message = message + user + ' used Final Gambit and missed!';
-		break;
-		case 25: message = message + user + ' went into grass without any Pokemon!';
-		break;
-		case 26: message = message + user + ' made a Slowbro angry!';
-		break;
-		case 27: message = message + user + ' took a focus punch from Breloom!';
-		break;
-		case 28: message = message + user + ' got lost in the illusion of reality.';
-		break;
-		case 29: message = message + user + ' ate a bomb!';
-		break;
-		case 30: message = message + 'BrittleWind accidentally spanked ' + user + ' too hard!';
-		break;
-		case 31: message = message + user + ' left for a timeout!';
-		break;
-		case 32: message = message + user + ' fell into a snake pit!'; 
-		break;
-		case 33: message = message + user + ' was swallowed whole by a Wailord!'; // Bought by Selena
-		break;
-		case 34: message = message + user + ' was swallowed whole by a giant wigglytuff!'; // Bought by Lyrical WigglyTuff 
-		break;
-		case 35: message = message + user + ' was fused with Zarif!'; //bought by Infernape/Zarif
-		break;
-		case 36: message = message + user + ' fades into nothingness!'; // bought by Unknown's Remnant
-		break;
-		case 37: message = message + user + ' was swept to sleep by frost janitor'; // bought by frost janitor
-		break;
-		case 38: message = message + user + ' flies into the air and does three backward somersaults in quick succession then belts out in a rhythmic tune UP UP AND AWAY'; // bought by EricSaysHi
-		break;
-		case 39: message = message + user + ' forgot their towel!'; // bought by Alphayocom
-		break;
-		case 40: message = message + user + ' got pimp slapped by jd!'; // bought by Jordan-Moo
-		break;
-		case 41: message = message + user + ' is blasting off again!'; // bought by Noiprocs
-		break;
-		case 42: message = message + user + ' flies back to their comfy nest!'; // bought by Aerodactylol
-		break;
-		case 43: message = message + user + ' tried to eat Piscean!'; // bought by Piscean
-		break;
-		case 44: message = message + user + ' away!'; // bought by CrazyClown94
-		break;
-		case 45: message = message + user + ' disapparated!'; // bought by Jedi Lion Potter
-		break;
-		case 46: message = message + user + ' was hugged by Figgybear!'; // bought by Figgy
-		break;
-		case 47: message = message + user + ' was thrown into the TV world by P4 Ka\'elbasa'; // bought by E4 Kael
-		break;
-		case 48: message = message + user + ' was accidentally killed in a shaving accident'; // bought by DeltaFlame
-		break;
-		case 49: message = message + user + ' faced a Xerneas with geomancy and powerherb'; // bought by FireDudeWind
-		break;
-		case 50: message = message + user + ' drowned in the ocean trying to find SeaNanners'; // bought by SeaNanners
-		break;
-		case 51: message = message + user + ' was killed by Donald'; // bought by REV Czim
-		break;
-		case 52: message = message + user + ' is blasting off again'; // bought by L Chevy 12
-		break;
-		case 53: message = message + user + ' use defog on Bisharp'; // bought by Hope/Fallen Blood
-		break;
-		case 54: message = message + user + ' got outsassed by Félicette!'; // bought by Félicette
-		break;
-		case 55: message = message + user + ' was nuked by King Jong-un'; // Bought by King Jong Un
-		break;
-		default: message = message + user + ' bought a poisoned Pepsi!';
-	};
-	message = message + ' ~~';
-	return message;
-}
-
-//i was going to format this, but wtf
-function MD5(f){function i(b,c){var d,e,f,g,h;f=b&2147483648;g=c&2147483648;d=b&1073741824;e=c&1073741824;h=(b&1073741823)+(c&1073741823);return d&e?h^2147483648^f^g:d|e?h&1073741824?h^3221225472^f^g:h^1073741824^f^g:h^f^g}function j(b,c,d,e,f,g,h){b=i(b,i(i(c&d|~c&e,f),h));return i(b<<g|b>>>32-g,c)}function k(b,c,d,e,f,g,h){b=i(b,i(i(c&e|d&~e,f),h));return i(b<<g|b>>>32-g,c)}function l(b,c,e,d,f,g,h){b=i(b,i(i(c^e^d,f),h));return i(b<<g|b>>>32-g,c)}function m(b,c,e,d,f,g,h){b=i(b,i(i(e^(c|~d),
-f),h));return i(b<<g|b>>>32-g,c)}function n(b){var c="",e="",d;for(d=0;d<=3;d++)e=b>>>d*8&255,e="0"+e.toString(16),c+=e.substr(e.length-2,2);return c}var g=[],o,p,q,r,b,c,d,e,f=function(b){for(var b=b.replace(/\r\n/g,"\n"),c="",e=0;e<b.length;e++){var d=b.charCodeAt(e);d<128?c+=String.fromCharCode(d):(d>127&&d<2048?c+=String.fromCharCode(d>>6|192):(c+=String.fromCharCode(d>>12|224),c+=String.fromCharCode(d>>6&63|128)),c+=String.fromCharCode(d&63|128))}return c}(f),g=function(b){var c,d=b.length;c=
-d+8;for(var e=((c-c%64)/64+1)*16,f=Array(e-1),g=0,h=0;h<d;)c=(h-h%4)/4,g=h%4*8,f[c]|=b.charCodeAt(h)<<g,h++;f[(h-h%4)/4]|=128<<h%4*8;f[e-2]=d<<3;f[e-1]=d>>>29;return f}(f);b=1732584193;c=4023233417;d=2562383102;e=271733878;for(f=0;f<g.length;f+=16)o=b,p=c,q=d,r=e,b=j(b,c,d,e,g[f+0],7,3614090360),e=j(e,b,c,d,g[f+1],12,3905402710),d=j(d,e,b,c,g[f+2],17,606105819),c=j(c,d,e,b,g[f+3],22,3250441966),b=j(b,c,d,e,g[f+4],7,4118548399),e=j(e,b,c,d,g[f+5],12,1200080426),d=j(d,e,b,c,g[f+6],17,2821735955),c=
-j(c,d,e,b,g[f+7],22,4249261313),b=j(b,c,d,e,g[f+8],7,1770035416),e=j(e,b,c,d,g[f+9],12,2336552879),d=j(d,e,b,c,g[f+10],17,4294925233),c=j(c,d,e,b,g[f+11],22,2304563134),b=j(b,c,d,e,g[f+12],7,1804603682),e=j(e,b,c,d,g[f+13],12,4254626195),d=j(d,e,b,c,g[f+14],17,2792965006),c=j(c,d,e,b,g[f+15],22,1236535329),b=k(b,c,d,e,g[f+1],5,4129170786),e=k(e,b,c,d,g[f+6],9,3225465664),d=k(d,e,b,c,g[f+11],14,643717713),c=k(c,d,e,b,g[f+0],20,3921069994),b=k(b,c,d,e,g[f+5],5,3593408605),e=k(e,b,c,d,g[f+10],9,38016083),
-d=k(d,e,b,c,g[f+15],14,3634488961),c=k(c,d,e,b,g[f+4],20,3889429448),b=k(b,c,d,e,g[f+9],5,568446438),e=k(e,b,c,d,g[f+14],9,3275163606),d=k(d,e,b,c,g[f+3],14,4107603335),c=k(c,d,e,b,g[f+8],20,1163531501),b=k(b,c,d,e,g[f+13],5,2850285829),e=k(e,b,c,d,g[f+2],9,4243563512),d=k(d,e,b,c,g[f+7],14,1735328473),c=k(c,d,e,b,g[f+12],20,2368359562),b=l(b,c,d,e,g[f+5],4,4294588738),e=l(e,b,c,d,g[f+8],11,2272392833),d=l(d,e,b,c,g[f+11],16,1839030562),c=l(c,d,e,b,g[f+14],23,4259657740),b=l(b,c,d,e,g[f+1],4,2763975236),
-e=l(e,b,c,d,g[f+4],11,1272893353),d=l(d,e,b,c,g[f+7],16,4139469664),c=l(c,d,e,b,g[f+10],23,3200236656),b=l(b,c,d,e,g[f+13],4,681279174),e=l(e,b,c,d,g[f+0],11,3936430074),d=l(d,e,b,c,g[f+3],16,3572445317),c=l(c,d,e,b,g[f+6],23,76029189),b=l(b,c,d,e,g[f+9],4,3654602809),e=l(e,b,c,d,g[f+12],11,3873151461),d=l(d,e,b,c,g[f+15],16,530742520),c=l(c,d,e,b,g[f+2],23,3299628645),b=m(b,c,d,e,g[f+0],6,4096336452),e=m(e,b,c,d,g[f+7],10,1126891415),d=m(d,e,b,c,g[f+14],15,2878612391),c=m(c,d,e,b,g[f+5],21,4237533241),
-b=m(b,c,d,e,g[f+12],6,1700485571),e=m(e,b,c,d,g[f+3],10,2399980690),d=m(d,e,b,c,g[f+10],15,4293915773),c=m(c,d,e,b,g[f+1],21,2240044497),b=m(b,c,d,e,g[f+8],6,1873313359),e=m(e,b,c,d,g[f+15],10,4264355552),d=m(d,e,b,c,g[f+6],15,2734768916),c=m(c,d,e,b,g[f+13],21,1309151649),b=m(b,c,d,e,g[f+4],6,4149444226),e=m(e,b,c,d,g[f+11],10,3174756917),d=m(d,e,b,c,g[f+2],15,718787259),c=m(c,d,e,b,g[f+9],21,3951481745),b=i(b,o),c=i(c,p),d=i(d,q),e=i(e,r);return(n(b)+n(c)+n(d)+n(e)).toLowerCase()};
-
-
 
 var colorCache = {};
 

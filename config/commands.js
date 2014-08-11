@@ -1821,6 +1821,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	puzzle: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/xqtbumC.gif">' +
+    		'<img src="http://i.imgur.com/rFc6m8m.png">' +
+    		'<img src="http://i.imgur.com/qMJkER1.gif"><br />' +
+    		'<b>Ace:</b> My Wits<br />' +
+    		'A Gentleman Leaves No Puzzle Unsolved.</center>');
+    },
+
 	crow: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/198.gif">' +

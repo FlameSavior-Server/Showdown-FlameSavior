@@ -3396,7 +3396,7 @@ var commands = exports.commands = {
 			'<b>Ace:</b><font color="black"> Flygon </font color><br />' +
 			'<font color="blue">Breasts are more than bouncy bundles of fun. They\'re filled with men\'s hopes and dreams!</font color></center>');
 	},
-</b>
+
 	ticken: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/B0gfhrg.png" width="144" height="100">' +

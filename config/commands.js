@@ -2737,7 +2737,7 @@ var commands = exports.commands = {
 		if(!user.can('ban')) return;
 		if (room.id == 'lobby') {
 			room.addRaw(
-				'<div class="broadcast-black"><b><center><font size="3">Panagrams has started!</font></b><br />' +
+				'<div class="broadcast-black"><b><center><font size="3">Panagrams has started!</font></b>' +
 				'This is Gold\'s version of anagrams, but with buck prizes!  We currently have a random catagory and a Pokemon catagory!<br />' +
 				'<button name="joinRoom" value="panagrams" target="_blank">Play now!</button></center></div>'
 				);

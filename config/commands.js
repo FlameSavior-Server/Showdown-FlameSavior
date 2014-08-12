@@ -3390,13 +3390,13 @@ var commands = exports.commands = {
 
 	tael: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/flygon.gif">' +
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/flygon.gif" width="133" height="106">' +
 			'<img src="https://i.imgur.com/VEXXmGI.gif">' +
-			'<img src="https://i.imgur.com/De5Wc6j.png" width="150"><br />' +
-			'<b>Ace:</b> Flygon<br />' +
-			'Heavenly things are often abstract.</center>');
+			'<img src="http://i.imgur.com/yT6MSXU.png" width="150" height="176"><br />' +
+			'<b>Ace:</b><font color="black"> Flygon </font color><br />' +
+			'<font color="blue">Breasts are more than bouncy bundles of fun. They\'re filled with men\'s hopes and dreams!</font color></center>');
 	},
-
+</b>
 	ticken: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/B0gfhrg.png" width="144" height="100">' +

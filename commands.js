@@ -2455,7 +2455,7 @@ var commands = exports.commands = {
 	cc1v1: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
-			'<button name="send" value="/challenge ponybot, challengecup1vs1" class="blackbutton" title="Challenge Cup 1vs1 Battle!">Click here for a CC1vs1 battle!'
+			'<center><button name="send" value="/challenge ponybot, challengecup1vs1" class="blackbutton" title="Challenge Cup 1vs1 Battle!"><font size="white">Click here for a CC1vs1 battle!'
 			);
 	},
 	

@@ -2452,8 +2452,11 @@ var commands = exports.commands = {
                 return this.parse('[[define '+target+']]');
 	},
 	
-	cc1v1: function(room, user, cmd){
-                return this.parse('/tour challengecup1vs1, 3minutes');	
+	cc1v1: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox(
+			'<button name="send" value="/challenge ponybot, challengecup1vs1" class="blackbutton" title="Challenge Cup 1vs1 Battle!">Click here for a CC1vs1 battle!'
+			);
 	},
 	
 	authlist: 'viewserverauth',

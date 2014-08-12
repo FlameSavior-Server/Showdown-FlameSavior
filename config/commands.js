@@ -2732,6 +2732,17 @@ var commands = exports.commands = {
 		return this.sendReplyBox('<center><font size="3"><b>Coin Game!</b></font><br>'+results+'');
 	},
 	
+	p: 'panagrams',
+	panagrams: function(target, room, user) {
+		if(!user.can('pban')) return;
+		if (room.id !== 'lobby' || room.id !=='panagrams') return this.sendReply("This command can only be used in lobby and panagrams.");
+		room.addRaw(
+			'<div class="broadcast-black"><b><center><font size="3"Panagrams has started!</font></b><br />' +
+			'This is Gold\'s version of anagrams, but with buck prizes!  We currently have a random catagory and a Pokemon catagory!<br />' +
+			'<button name="joinRoom" value="panagrams" target="_blank">Play now!</button></center></div>'
+			);
+	},
+	
 	one: function(target, room, user) {
 		if (room.id !== '1v1') return this.sendReply("This command can only be used in 1v1.");
 		if (!this.canBroadcast()) return;

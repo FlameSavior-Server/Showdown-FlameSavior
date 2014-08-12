@@ -1832,6 +1832,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	thmo: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/eyds52S.gif">' +
+    		'<img src="http://i.imgur.com/uAu5J7C.gif">' +
+    		'<img src="http://i.imgur.com/nfmlXu9.gif"><br />' +
+    		'<b>Ace:</b> The Eternal Floette<br />' +
+    		'My cookies are very tasty, so please buy one! :).<br />' +
+			'<button name="send" value="/transferbucks Thimo, 1">Buy a cookie! (Donates a Buck)</button></center>');
+    },
+
 	puzzle: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/QzVD08J.gif" width="230">' +

@@ -365,7 +365,7 @@ var commands = exports.commands = {
 	hallowme: function(target, room, user){
 		var halloween = false;
 		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
-		if (!halloween) return this.sendReply('It\s not Halloween anymore!');
+		if (!halloween) return this.sendReply('Its not Halloween anymore!');
 		var symbol = '';
 		var symbols = ['☢','☠ ','☣'];
 		var pick = Math.floor(Math.random()*3);
@@ -941,7 +941,7 @@ var commands = exports.commands = {
 			"+ <b>Voice</b> - They can use ! commands like !groups, and talk during moderated chat<br />" +
 			"% <b>Driver</b> - The above, and they can mute. Global % can also lock users and check for alts<br />" +
 			"@ <b>Moderator</b> - The above, and they can ban users<br />" +
-			"&amp; <b>Leader</b> - They can do almost anything, such as create rooms and manage bucks.<br />" +
+			"&amp; <b>Leader</b> - They can do almost anything, such as create rooms and manage bucks<br />" +
 			"# <b>Room Owner</b> - They are leaders of the room and can almost totally control it<br />" +
 			"~ <b>Administrator</b> - They can do anything, like change what this message says"
 		);
@@ -1179,8 +1179,8 @@ var commands = exports.commands = {
 			'- /unmute <em>username</em>: unmute<br />' +
 			'- /announce OR /wall <em>message</em>: make an announcement<br />' +
 			'- /modlog <em>username</em>: search the moderator log of the room<br />' +
-			'- /modnote <em>message</em>: Adds a moderator note that can be read through modlog.<br />' +
-			'- /notes [view] OR /notes [add], [message] OR /notes [delete/del], [number]: views/adds/deletes a note.<br />' +
+			'- /modnote <em>message</em>: Adds a moderator note that can be read through modlog<br />' +
+			'- /notes [view] OR /notes [add], [message] OR /notes [delete/del], [number]: views/adds/deletes a note<br />' +
 			'<br />' +
 			'Room moderators (@) can also use:<br />' +
 			'- /rkick <em>username</em>: kicks the user from the room<br />' +
@@ -1196,17 +1196,17 @@ var commands = exports.commands = {
 			'- /roommod, /roomdriver <em>username</em>: appoint a room moderator/driver<br />' +
 			'- /roomdemod, /roomdedriver <em>username</em>: remove a room moderator/driver<br />' +
 			'- /declare <em>message</em>: make a declaration in the room<br />' +
-			'- /lockroom: locks the room preventing users from joining.<br />' +
-			'- /unlockroom: unlocks the room allowing users to join.<br />' +
-			'- /openleague: sets the league as open to challengers.<br />' +
-			'- /closeleague: sets the league as closed to challengers.<br />' +
-			'- /setwelcomemessage <em>message</em>: sets the message people will see when they join the room. Can contain html and must be bought from the store first.<br />' +
+			'- /lockroom: locks the room preventing users from joining<br />' +
+			'- /unlockroom: unlocks the room allowing users to join<br />' +
+			'- /openleague: sets the league as open to challengers<br />' +
+			'- /closeleague: sets the league as closed to challengers<br />' +
+			'- /setwelcomemessage <em>message</em>: sets the message people will see when they join the room. Can contain html and must be bought from the store first<br />' +
 			'- /modchat <em>[%/@/#]</em>: set modchat level<br />' +
-			'- /toggleglobaldeclares: disables/enables global declares in your room.<br />' +
+			'- /toggleglobaldeclares: disables/enables global declares in your room<br />' +
 			'<br />' +
 			'The room founder can also use:<br />' +
-			'- /roomowner <em>username</em><br />' +
-			'- /roomdeowner <em>username</em><br />' +
+			'- /roomowner <em>username</em>: appoint a room owner<br />' +
+			'- /roomdeowner <em>username</em>: remove a room owner<br />' +
 			'</div>');
 	},
 
@@ -1283,8 +1283,6 @@ var commands = exports.commands = {
 		}
 		this.sendReplyBox(buffer);
 	},
-
-
 
 	banlists: 'tiers',
 	tier: 'tiers',

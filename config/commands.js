@@ -1830,6 +1830,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	dawnmidist: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/xFZjcWt.gif">' +
+    		'<img src="http://i.imgur.com/U6aIk3B.png" width="370">' +
+    		'<img src="http://i.imgur.com/lv7MXaB.gif"><br />' +
+    		'<b>Ace:</b> Kingdra<br />' +
+    		'When the prison doors are opened, the real dragon will fly out.</center>');
+    },
+
 	thmo: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/eyds52S.gif">' +

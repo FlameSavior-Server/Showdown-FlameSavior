@@ -4917,56 +4917,53 @@ var commands = exports.commands = {
 	 **********************************/
 
 	mastersofthecolorhelp: 'motc',
-		motc: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<h2>Masters of the Colors</h2><hr /><br />In this tournament, you will construct a team based on the color of your name. ' +
-			'You are not allowed to <em>choose</em> the color of your name. Follow these steps if you wish to participate:<ol><li>Look at the color ' +
-			'of your name and determine if your name color is: <b>Red, Blue, Green, Pink/Purple, Yellow/Brown</b></li><li>Once you have found out your' +
-			' name color, type that color in the main chat to bring up a list of pokemon with that color. Ex]BrittleWind is Blue so he would type /blue' +
-			' in the main chat, Cosy is Red so he would type /red in the main chat. (If your name color is Yellow/Brown you are allowed to use both yellow ' +
-			'<em>and</em> brown Pokemon. The same goes for Pink/Purple)</li><li>Now using list of pokemon you see on your screen, make a <b>Gen 6 OU</b>' +
-			' team using only the pokemon on the list. Some pokemon on the list won\'t be in the OU category so ignore them. As long as your able to do a' +
-			' Gen 6 OU battle with only your pokemon, your good to go!</li><li>Now all you have to do is wait for the declare to come up telling you that' +
-			' Masters of the Colors has started! If you happen to come accross any trouble during the event, feel free to PM the room owner for your designated' +
-			' room.</li><li><b>IF</b> you do win, your challenge isn\'t over yet! After winning, construct a team using only <b>Black, White, or Gray</b>' +
-			' Pokemon (you may use /black etc. to see the list). You will go against the other winners of Masters of the Colors and the winner will recieve an extra 10 bucks!</ol>');
-		},
-
-	blue: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Blue">here</a>. Shinies are <b>not</b> allowed.');
+	motc: function(target, room, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<h2>Masters of the Colors</h2><hr /><br />In this tournament, you will construct a team based on the color of your name. ' +
+		'You are not allowed to <em>choose</em> the color of your name. Follow these steps if you wish to participate:<ol><li>Look at the color ' +
+		'of your name and determine if your name color is: <b>Red, Blue, Green, Pink/Purple, Yellow/Brown</b></li><li>Once you have found out your' +
+		' name color, type that color in the main chat to bring up a list of pokemon with that color. Ex]BrittleWind is Blue so he would type /blue' +
+		' in the main chat, Cosy is Red so he would type /red in the main chat. (If your name color is Yellow/Brown you are allowed to use both yellow ' +
+		'<em>and</em> brown Pokemon. The same goes for Pink/Purple)</li><li>Now using list of pokemon you see on your screen, make a <b>Gen 6 OU</b>' +
+		' team using only the pokemon on the list. Some pokemon on the list won\'t be in the OU category so ignore them. As long as your able to do a' +
+		' Gen 6 OU battle with only your pokemon, your good to go!</li><li>Now all you have to do is wait for the declare to come up telling you that' +
+		' Masters of the Colors has started! If you happen to come accross any trouble during the event, feel free to PM the room owner for your designated' +
+		' room.</li><li><b>IF</b> you do win, your challenge isn\'t over yet! After winning, construct a team using only <b>Black, White, or Gray</b>' +
+		' Pokemon (you may use /black etc. to see the list). You will go against the other winners of Masters of the Colors and the winner will recieve an extra 10 bucks!</ol>');
 	},
 
-	brown: function(target, room, user) {
+	blue: 'red',
+	brown: 'red',
+	green: 'red',
+	pink: 'red',
+	purple: 'red',
+	yellow: 'red',
+	black: 'red',
+	red: function(target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Brown">here</a>. Shinies are <b>not</b> allowed.');
+		if (this.broadcasting && room.id !== cmd) return false;
+		var output = '|raw|<table class="motc-'+cmd+'" border="3" cellspacing ="0" cellpadding="2"><tr class="motc'+cmd+'-tr">';
+		var count = 0;
+		for (var u in Tools.data.Pokedex) {
+			var pokemon = Tools.getTemplate(u);
+			if (pokemon.color.toLowerCase() !== cmd) continue;
+			if (pokemon.forme == '') output += '<td><img title="'+Tools.escapeHTML(pokemon.name)+'" src="http://play.pokemonshowdown.com/sprites/bw/'+pokemon.id+'.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
+			if (pokemon.forme !== '' && pokemon.id !== 'basculinbluestriped' && pokemon.id !== 'pichuspikyeared') output += '<td><img title="'+Tools.escapeHTML(pokemon.name)+'" src="http://play.pokemonshowdown.com/sprites/bw/'+pokemon.baseSpecies.toLowerCase()+'-'+pokemon.forme.toLowerCase()+'.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
+			if (pokemon.id == 'basculinbluestriped') output += '<td><img title="'+Tools.escapeHTML(pokemon.name)+'" src="http://play.pokemonshowdown.com/sprites/bw/basculin-bluestriped.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
+			if (pokemon.id == 'pichuspikyeared') output += '<td><img title="'+Tools.escapeHTML(pokemon.name)+'" src="http://play.pokemonshowdown.com/sprites/bw/pichu-spikyeared.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
+			count++;
+			if (count > 5) {
+				output += '</tr><tr class="motc-tr">';
+				count = 0;
+			}
+		}
+		while (count < 6) {
+			output += '<td></td><td></td>';
+			count++;
+		}
+		output += '</tr></tbody></table>';
+		this.sendReply(output);
 	},
-
-	green: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Green">here</a>. Shinies are <b>not</b> allowed.');
-	},
-
-	pink: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Pink">here</a>. Shinies are <b>not</b> allowed.');
-	},
-
-	purple: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Purple">here</a>. Shinies are <b>not</b> allowed.');
-	},
-
-	red: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Red">here</a>. Shinies are <b>not</b> allowed.');
-	},
-
-	yellow: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('To check what Pokemon are legal for this color, check <a href="http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color#Yellow">here</a>. Shinies are <i>not</i> allowed.');
-	},
-
 
 	/*********************************************************
 	 * Miscellaneous commands

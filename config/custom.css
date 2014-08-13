@@ -32,7 +32,7 @@ body {
 }
 
 .pm-window.focused h3:hover {
-	background-color:#58bbf6; 
+	background-color:#58bbf6;
 	border-color:#58bbf6;
 }
 
@@ -87,10 +87,169 @@ body {
 	background:#b2d9f0;
 }
 
+/**************************
+* For the colour commands *
+**************************/
 
+.motc-blue {
+	background: #6464FF;
+	border: 3px solid #0B0BA6;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
 
+.motc-blue-tr {
+	background: #94DBEE
+}
 
+.motc-red {
+	background: #E24242;
+	border: 3px solid #A60B0B;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
 
+.motc-red-tr {
+	background: #EC8484;
+}
+
+.motc-yellow {
+	background: #FFD733;
+	border: 3px solid #A68C21;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.motc-yellow-tr {
+	background: #FFFF99;
+}
+
+.motc-green {
+	background: #11BB11;
+	border: 3px solid #0B7A0B;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.motc-green-tr {
+	background: #64D364;
+}
+
+.motc-black {
+	background: #858585;
+	border: 3px solid #2C2C2C;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.motc-black-tr {
+	background: #BBBBBB;
+}
+
+.motc-brown {
+	background: brown;
+	border: 3px solid #704214;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.motc-brown-tr {
+	background: #CC9966;
+}
+
+.motc-purple {
+	background: #A040A0;
+	border: 3px solid #682A68;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.motc-purple-tr {
+	background: #C183C1;
+}
+
+.motc-gray {
+	background: #B8B8D0;
+	border: 3px solid #787887;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.motc-gray-tr {
+	background: #D1D1E0;
+}
+
+.motc-white {
+	background: #E3CED0;
+	border: 3px solid #929292;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.motc-white-tr {
+	background: #FFF;
+}
+
+.motc-pink {
+	background: #EE99AC;
+	border: 3px solid #9B6470;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-o-border-radius: 10px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.motc-pink-tr {
+	background: #F4BDC9;
+}
 
 /************************
 * Happy Holidays!    	*
@@ -114,7 +273,7 @@ body {
 .chat-log-add, .battle-log-add {
     background: url("http://i.imgur.com/g83vifF.png");
 }
-  
+
 .menugroup .button{
 	background: url("http://images2.layoutsparks.com/1/189265/horse-snow-fall-winter.gif")center;
 }
@@ -149,12 +308,12 @@ body {
 .userlist li em.group, .pm-window h3 small  {
    color: #5e5e5e;
 }
-  
+
 .tabbar a.button {
     background: url("http://i.imgur.com/ajzvYbV.png");
 	color: black;
   }
-    
+
 .tabbar a.button:hover {
 	background: url("http://i.imgur.com/WSrAVxz.png");
 	color: black;
@@ -168,7 +327,7 @@ body {
 .tabbar a.button.notifying, .tabbar a.button.notifying:hover {
 	background: url("http://i.imgur.com/CtoyG6B.png");
 }
-    
+
 .maintabbarbottom {
 	background: url("http://i.imgur.com/eTEXz5K.png");
 }
@@ -184,7 +343,7 @@ body {
 .pm-window.focused h3, .pm-window.focused h3:hover {
     background: url("http://i.imgur.com/ajzvYbV.png");
 }
-      
+
 .pm-log-add {
 	background: url("http://i.imgur.com/g83vifF.png");
 }
@@ -298,7 +457,7 @@ background:url("http://i.imgur.com/Ci5DW3i.jpg");
 
 
 .chat-log{*/
-        /*Vanlite chat picture*/					      
+        /*Vanlite chat picture*/
         /*background: url("http://i.imgur.com/2OtugRn.png") right top no-repeat;*/
         /*Cubchoo Background*/
         /*background: url("http://i.imgur.com/FqpmTtq.png") right top no-repeat;
@@ -358,9 +517,9 @@ body {
 }
 
 .chat-log-add{
-        background:#f68d4b 
+        background:#f68d4b
 }
-  
+
 .menugroup .button{
         background:#5a11ff
 }
@@ -375,7 +534,7 @@ body {
 
 .userlist{
         border-left:1px solid #D5DDE4;
-        background:#f68d4b 
+        background:#f68d4b
 }
 
 .userlist li button:hover {

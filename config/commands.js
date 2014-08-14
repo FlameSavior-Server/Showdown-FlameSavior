@@ -160,6 +160,8 @@
  * @license MIT license
  */
 
+var tierspoll = 'randombattle, randommono, cc1v1, 1v1, gen51v1, uu, gen5uu, nu, ru, lc, gen5lc, cap, ou, gen5ou, ou monotype, gen5mono, balanced hackmons, hackmons, ubers, doubles, gen5doubles, triples, challenge cup, perseverance, seasonal, inverse, alphabet cup, ou theorymon, sky battles, stabmons, pu, middle cup';
+
 var commands = exports.commands = {
 
 	ip: 'whois',
@@ -341,28 +343,35 @@ var commands = exports.commands = {
 		return this.sendReplyBox(targets[result].trim());
 	},
 
-	poke: function(target, room, user){
-		if(!target) return this.sendReply('/poke needs a target.');
+	poke: function (target, room, user) {
+		if (!target) return this.sendReply('/poke needs a target.');
 		return this.parse('/me pokes ' + target + '.');
 	},
 
-	slap: function(target, room, user){
-		if(!target) return this.sendReply('/slap needs a target.');
+	slap: function (target, room, user) {
+		if (!target) return this.sendReply('/slap needs a target.');
 		return this.parse('/me slaps ' + target + ' in the face with a slipper!');
 	},
 
 	s: 'spank',
-	spank: function(target, room, user){
-		if(!target) return this.sendReply('/spank needs a target.');
+	spank: function (target, room, user) {
+		if (!target) return this.sendReply('/spank needs a target.');
 		return this.parse('/me spanks ' + target + '!');
 	},
 
 	tierpoll: 'tiervote',
-	tiervote: function(target, room, user){
-		return this.parse('/poll Tournament Tier?, randombattle, randommono, cc1v1, 1v1, gen51v1, uu, gen5uu, nu, ru, lc, gen5lc, cap, ou, gen5ou, ou monotype, gen5mono, balanced hackmons, hackmons, ubers, doubles, gen5doubles, triples, challenge cup, perseverance, seasonal, inverse, alphabet cup, ou theorymon, sky battles, stabmons, pu, middle cup');
+	tiervote: function (target, room, user) {
+		return this.parse('/poll Tournament Tier?, ' + tierspoll);
 	},
 
-	hallowme: function(target, room, user){
+	tierpopt: 'tpo',
+	tpoptions: 'tpo',
+	tpo: function (target, room, user) {
+		if (!this.canBroadcast()) return false;
+		this.sendReplyBox('Current options for tier poll are: "' + tierspoll + '".');
+	},
+
+	hallowme: function (target, room, user) {
 		var halloween = false;
 		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
 		if (!halloween) return this.sendReply('Its not Halloween anymore!');
@@ -372,15 +381,15 @@ var commands = exports.commands = {
 		symbol = symbols[pick];
 		this.sendReply('You have been hallow\'d with a custom symbol!');
 		user.getIdentity = function(){
-			if(this.muted)	return '!' + this.name;
-			if(this.locked) return '‽' + this.name;
+			if (this.muted)	return '!' + this.name;
+			if (this.locked) return '‽' + this.name;
 			return symbol + this.name;
 		};
 		user.updateIdentity();
 		user.hasCustomSymbol = true;
 	},
 
-	resetsymbol: function(target, room, user) {
+	resetsymbol: function (target, room, user) {
 		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');
 		user.getIdentity = function() {
 			if (this.muted) return '!' + this.name;

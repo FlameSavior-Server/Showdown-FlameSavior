@@ -1830,7 +1830,7 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	reck: function(target, room, user) {
-		if (!this,canBroadcast()) return;
+		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://i.imgur.com/dua8WEl.png" width="150">' +
 			'<img src="http://i.imgur.com/msQpOCM.png" width="200">' +
 			'<img src="http://i.imgur.com/f90Z3RI.jpg?1?3249" width="150"><br />' +

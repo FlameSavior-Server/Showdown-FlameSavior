@@ -1782,7 +1782,6 @@ var commands = exports.commands = {
 			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>');
 	},
 
-
 	/***************************************
 	* League Cards                         *
 	***************************************/
@@ -1829,6 +1828,7 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+
 	reck: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://i.imgur.com/dua8WEl.png" width="150">' +
@@ -1836,19 +1836,16 @@ var commands = exports.commands = {
 			'<img src="http://i.imgur.com/f90Z3RI.jpg?1?3249" width="150"><br />' +
 			'<b>Ace: </b>Mega Gardevoir & Bisharp<br>' +
 			'Truth is you don\'t know what\'s going to happen tomorrow. Life is a crazy ride and nothing is guaranteed.</center>');
-
-
-
-    },
+	},
 
 	dawnmidist: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.imgur.com/xFZjcWt.gif">' +
-    		'<img src="http://i.imgur.com/U6aIk3B.png" width="370">' +
-    		'<img src="http://i.imgur.com/lv7MXaB.gif"><br />' +
-    		'<b>Ace:</b> Kingdra<br />' +
-    		'When the prison doors are opened, the real dragon will fly out.</center>');
-    },
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xFZjcWt.gif">' +
+			'<img src="http://i.imgur.com/U6aIk3B.png" width="370">' +
+			'<img src="http://i.imgur.com/lv7MXaB.gif"><br />' +
+			'<b>Ace:</b> Kingdra<br />' +
+			'When the prison doors are opened, the real dragon will fly out.</center>');
+	},
 
 	thmo: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -5627,5 +5624,4 @@ var commands = exports.commands = {
 			this.sendReply("The command '" + target + "' was not found. Try /help for general help");
 		}
 	},
-
 };

@@ -859,7 +859,7 @@ var commands = exports.commands = {
 		if (voices.length > 0) {
 			voices = voices.join(', ');
 		}
-		connection.popup('Founder: '+founder+'\nOwners: '+owners+'\nModerators: '+mods+'\nDrivers: '+drivers+'\nVoices: '+voices);
+		connection.popup('Founder: '+founder+'\n\nOwners: '+owners+'\n\nModerators: '+mods+'\n\nDrivers: '+drivers+'\n\nVoices: '+voices);
 	},
 
 	stafflist: function(target, room, user, connection) {
@@ -926,7 +926,7 @@ var commands = exports.commands = {
 		if (voices.length > 0) {
 			voices = voices.join(', ');
 		}
-		connection.popup('Administrators: '+admins+'\nLeaders: '+leaders+'\nModerators: '+mods+'\nDrivers: '+drivers+'\nVoices: '+voices);
+		connection.popup('Administrators: '+admins+'\n\nLeaders: '+leaders+'\n\nModerators: '+mods+'\n\nDrivers: '+drivers+'\n\nVoices: '+voices);
 	},
 
 	leave: 'part',

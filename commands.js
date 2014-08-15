@@ -2179,10 +2179,8 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
-
+		if (targetUser.frostDev) return this.sendReply('You can\'t view the private rooms of a developer.');
 		this.sendReply('User: '+targetUser.name);
-
-		if (user.group === '&' && targetUser.group === '~') return this.sendReply('You cannot check the rooms (private rooms) of an Admin.');
 
 		var output = 'In rooms: ';
 		var output2 = 'Private Rooms: ';

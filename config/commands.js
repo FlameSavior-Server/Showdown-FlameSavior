@@ -5210,7 +5210,7 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'calc' || target === 'calculator') {
 			matched = true;
 			this.sendReply("/calc - Provides a link to a damage calculator");
-			this.sendReply("!calc - Shows everyneo a link to a damage calculator. Requires: + % @ & ~");
+			this.sendReply("!calc - Shows everyone a link to a damage calculator. Requires: + % @ & ~");
 		}
 		/*if (target === 'all' || target === 'blockchallenges' || target === 'idle') {
 			matched = true;
@@ -5637,7 +5637,7 @@ var commands = exports.commands = {
 			this.sendReply('For details on all commands, use /help all');
 			if (user.vip) {
 				this.sendReply('VIP COMMANDS: /customavatar');
-			}a
+			}
 			if (user.group !== Config.groupsranking[0]) {
 				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /modlog, /forcerename, /alts')
 				this.sendReply('MODERATOR COMMANDS: /ban, /unban, /unbanall, /ip, /redirect, /kick');

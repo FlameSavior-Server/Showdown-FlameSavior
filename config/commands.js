@@ -5085,6 +5085,23 @@ var commands = exports.commands = {
 		this.sendReply('|raw|<img src="' + Tools.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '" height="' + toId(targets[2]) + '" />');
 	},
 
+	pmbox: 'custompm',
+	declarepm: 'custompm',
+	buttonpm: 'custompm',
+	pmbutton: 'custompm',
+	custompm: function (target, room, user) {
+		if (!target) return this.parse('/help custompm');
+		if (!this.can('declare', null, room)) return false;
+		if (!this.canBroadcast()) return;
+
+		targets = target.split(',');
+		if (targets.length != 2) {
+			return this.parse('/help custompm');
+		}
+
+		this.sendReplyBox('<button name="send" value="/pm ' + targets[0] + ', ' + targets[1] + '">');
+	},
+
 	hangmanhelp: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
@@ -5193,7 +5210,7 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'calc' || target === 'calculator') {
 			matched = true;
 			this.sendReply("/calc - Provides a link to a damage calculator");
-			this.sendReply("!calc - Shows everyone a link to a damage calculator. Requires: + % @ & ~");
+			this.sendReply("!calc - Shows everyneo a link to a damage calculator. Requires: + % @ & ~");
 		}
 		/*if (target === 'all' || target === 'blockchallenges' || target === 'idle') {
 			matched = true;
@@ -5489,6 +5506,10 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply("/showimage [url], [width], [height] - Show an image. Requires: & ~");
 		}
+		if (target === '&' || target === 'custompm') {
+			matched = true;
+			this.sendReply("/custompm [target], [message] - Makes a button that PMs the target a message if clicked. Requires: & ~");
+		}
 		if (target === '&' || target === 'declare') {
 			matched = true;
 			this.sendReply("/declare [message] - Anonymously announces a message. Requires: & ~");
@@ -5507,23 +5528,17 @@ var commands = exports.commands = {
 		}
 		if (target === '&' || target === 'takebucks' || target === 'removebucks' || target === 'tb' || target === 'rb') {
 			matched = true;
-			this.sendReply('/takebucks [username],[amount],[reason] - Removes bucks from [username]. Reason is optional. Requires: & ~');
+			this.sendReply('/takebucks [username], [amount], [reason] - Removes amount from username. Reason optional. Requires: & ~');
 		}
 		if (target === '&' || target === 'givebucks' || target === 'gb' || target === 'awardbucks') {
 			matched = true;
-			this.sendReply('/givebucks [username],[amount],[reason] - Gives bucks to [username]. Reason is optional. Requires: & ~');
+			this.sendReply('/givebucks [username], [amount], [reason] - Gives amount to username. Reason is optional. Requires: & ~');
 		}
-		if (target === '&' || target === 'gdeclare' ) {
+		if (target === '&' || target === 'gdeclare' || target === 'gdeclarered' || target === 'gdeclaregreen') {
 			matched = true;
-			this.sendReply('/gdeclare [message] - Anonymously announces a message to all rooms. Requires: & ~');
-		}
-		if (target === '&' || target === 'gdeclarered') {
-			matched = true;
-			this.sendReply('/gdeclarered [message] - Anonymously announces a message to all rooms with a red background. Requires: & ~');
-		}
-		if (target === '&' || target === 'gdeclaregreen') {
-			matched = true;
-			this.sendReply('/gdeclaregreen [message] - Anonymously announces a message to all rooms with a green background. Requires: & ~');
+			if (target === 'gdeclare') this.sendReply('/gdeclare [message] - Anonymously announces a message to all rooms. Requires: & ~');
+			if (target === 'gdeclarered') this.sendReply('/gdeclarered [message] - Anonymously announces a message to all rooms with a red background. Requires: & ~');
+			else if (target === 'gdeclaregreen') this.sendReply('/gdeclaregreen [message] - Anonymously announces a message to all rooms with a green background. Requires: & ~');
 		}
 		if (target === '&' || target === 'chatdeclare' || target === 'cdeclare') {
 			matched = true;
@@ -5622,7 +5637,7 @@ var commands = exports.commands = {
 			this.sendReply('For details on all commands, use /help all');
 			if (user.vip) {
 				this.sendReply('VIP COMMANDS: /customavatar');
-			}
+			}a
 			if (user.group !== Config.groupsranking[0]) {
 				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /modlog, /forcerename, /alts')
 				this.sendReply('MODERATOR COMMANDS: /ban, /unban, /unbanall, /ip, /redirect, /kick');

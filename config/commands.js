@@ -2693,10 +2693,11 @@ var commands = exports.commands = {
 			'Always Aim To Break Their Will.</center>');
 	},
 
+	greeling: 'titan',
 	titan: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://img2.wikia.nocookie.net/__cb20130602145854/fma/images/thumb/8/82/Greedling-profile.png/300px-Greedling-profile.png" width="140">' +
-			'<img src="http://i.imgur.com/MNaCFL9.gif" width="260">' +
+			'<img src="http://i.imgur.com/nw76seS.gif" width="260">' +
 			'<img src="http://i.imgur.com/mWUrtx5.gif" width="140"><br />' +
 			'<b>Ace:</b> Mega-Blastoise<br />' +
 			'Only those who will risk going too far can possibly find out how far one can go.</center>');

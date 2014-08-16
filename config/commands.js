@@ -1837,7 +1837,15 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
-
+	youtubers: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/udBmLSc.jpg" width="150">' +
+			'<img src="http://i.imgur.com/sOz21Ea.gif">' +
+			'<img src="http://i.imgur.com/8H2TKXi.png" width="125" height="100"><br />' +
+			'<b>Ace: </b>Youtubers<br />' +
+			'If Youtubers aren\'t your life you suck!</center>');
+    },
+	
 	reck: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://i.imgur.com/dua8WEl.png" width="150">' +

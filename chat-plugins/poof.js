@@ -1,5 +1,5 @@
 const messages = [
-	"knocked Cosy's tea out of his hand... RIP.",
+	"ventured into Shrek's Swamp.",
 	"looked at Aura's face!",
 	"used Explosion!",
 	"was swallowed up by the Earth!",
@@ -15,7 +15,7 @@ const messages = [
 	"went into a cave without a repel!",
 	"got eaten by a bunch of piranhas!",
 	"ventured too deep into the forest without an escape rope",
-	"was tricked by Fizz!",
+	"got shrekt",
 	"woke up an angry Snorlax!",
 	"was forced to give jd an oil massage!",
 	"was used as shark bait!",

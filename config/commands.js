@@ -1111,7 +1111,8 @@ var commands = exports.commands = {
 	
 	terlor: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/bjVsAsj.png"><br />' +
+        this.sendReplyBox('<center><font color="#1A68A8">Terlor</font><br />' +
+        	'<img src="http://i.imgur.com/bjVsAsj.png"><br />' +
                 '"I love bad bitches, that\'s my fucking problem. And yeah, I like to fuck, I got a fucking problem" -ASAP Rocky, 2013"</center>');
 	},
 	
@@ -1736,7 +1737,7 @@ var commands = exports.commands = {
                 '2. <a href="https://www.youtube.com/watch?v=c-M34ZRM120"><button title=" ADTR - You be Tails, I\'ll be Sonic"> ADTR - You be Tails, I\'ll be Sonic</a></button><br />' +
 		'3. <a href="https://www.youtube.com/watch?v=0B-xRO-vPPo"><button title="Papercut massacre - Lose my life">Papercut massacre - Lose my life</a></button><br />' +
 		'4. <a href="https://www.youtube.com/watch?v=Qg_TRaiWj4o"><button title="The Who - Behind blue eyes">The Who - Behind blue eyes</a></button><br />' +
-		'5. <a href="https://www.youtube.com/watch?v=uqG3v8YEzKo"><button title="Korn - Narcissistic Canibal">Korn - Narcissistic Canibal</a></button><br />' +
+		'5. <a href="https://www.youtube.com/watch?v=0m9QUoW5KnY"><button title="Starbomb - It\'s dangerous to go alone">Starbomb - It\'s dangerous to go alone</a></button><br />' +
 		'6. <a href="https://www.youtube.com/watch?v=Tt10gb8yf88"><button title="12 Stones - Psycho">12 Stones - Psycho</a></button><br />' );
 	},
     	

@@ -51,6 +51,7 @@ const messages = [
 	"is blasting off again", // bought by L Chevy 12
 	"use defog on Bisharp", // bought by Hope/Fallen Blood
 	"got outsassed by Félicette!", // bought by Félicette
+	"got outclassed by Félicette!",
 ];
 
 exports.commands = {

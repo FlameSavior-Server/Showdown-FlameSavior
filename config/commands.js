@@ -3425,11 +3425,11 @@ var commands = exports.commands = {
 
 	tael: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/flygon.gif" width="133" height="106">' +
-			'<img src="https://i.imgur.com/VEXXmGI.gif">' +
-			'<img src="http://i.imgur.com/yT6MSXU.png" width="150" height="176"><br />' +
-			'<b>Ace:</b><font color="black"> Flygon </font color><br />' +
-			'<font color="blue">Breasts are more than bouncy bundles of fun. They\'re filled with men\'s hopes and dreams!</font color></center>');
+		this.sendReplyBox('<center><img src="http://i.imgur.com/sFNNKmw.gif" width="100">' +
+			'<img src="http://i.imgur.com/VEXXmGI.gif" width="200">' +
+			'<img src="http://i.imgur.com/jc9lM8G.gif" width="100"><br />' +
+			'<img src="http://i.imgur.com/quaTcsq.gif"><br />' +
+			'<img src="http://i.imgur.com/yla7jyY.gif"></center>');
 	},
 
 	ticken: function(target, room, user) {

@@ -718,7 +718,7 @@ var Tournament = (function () {
 		var data2 = data;
 		data = data['results'].toString();
 
-		if (data.indexOf(',') >= 0) { 
+		if (data.indexOf(',') >= 0) {
 			data = data.split(',');
 			winner = data[0];
 		} else {
@@ -742,8 +742,8 @@ var Tournament = (function () {
 
 			if (firstMoney > 1) firstBuck = 'bucks';
 			if (secondMoney > 1) secondBuck = 'bucks';
-			this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-			if (runnerUp) this.room.add('|raw|<b><font color=#24678d>'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second!</b>');
+			this.room.add('|raw|<b><font color="'+frostcommands.hashColor(winner)+'">'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
+			if (runnerUp) this.room.add('|raw|<b><font color="'+frostcommands.hashColor(runnerUp)+'">'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second!</b>');
 			economy.writeMoney(toId(winner), firstMoney, function() {
 				economy.readMoney(toId(winner), function(newMoney) {
 					economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
@@ -880,7 +880,7 @@ var commands = {
 			var offlineUsers = new Array();
 			for (var u in users) {
 				targetUser = Users.get(users[u]);
-				if (!targetUser) { 
+				if (!targetUser) {
 					offlineUsers.push(users[u]);
 					continue;
 				} else if (!targetUser.connected) {

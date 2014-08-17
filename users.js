@@ -94,7 +94,7 @@ try {
 }
 
 try {
-	userTypes = fs.readFileSync('config/types.csv','utf8'); 
+	userTypes = fs.readFileSync('config/types.csv','utf8');
 } catch(e) {
 	userTypes = '';
 	fs.writeFileSync('config/types.csv','','utf8');
@@ -1367,7 +1367,7 @@ var User = (function () {
 				frostcommands.updateSeen(this.name);
 			} catch (e) {}
 		}
-		
+
 		for (var i=0; i<this.connections.length; i++) {
 			if (this.connections[i] === connection || !connection) {
 				if (this.connections[i].rooms[room.id]) {
@@ -1555,7 +1555,7 @@ var User = (function () {
 					if (connection.user.locked) return false;
 					connection.user.lock();
 					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake please contact a staff member.');
-					fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was automatically locked for saying a banned word. ('+Users.bannedMessages[x]+')\n');
+					fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was locked from talking by the Server ('+Users.bannedMessages[x]+') ('+connection.ip+')\n');
 					messageSeniorStaff(connection.user.name+' has been automatically locked for sending a message containing a banned word. Room: '+room.id+' Message: ' + message);
 					return false;
 				}
@@ -1568,14 +1568,14 @@ var User = (function () {
 			this.advWarns++;
 			if (this.advWarns > 1) {
 				this.lock();
-				fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was automatically locked for attempting to advertise.\n');
+				fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was locked from talking by the Server. (Advertising) ('+connection.ip+')\n');
 				connection.sendTo(room, '|raw|<strong class="message-throttle-notice">You have been locked for attempting to advertise.');
 				Users.messageSeniorStaff(this.name+' has been locked for attempting to advertise. Room: '+room.id+'. Message: '+message);
 				return false;
 			}
 			Users.messageSeniorStaff(this.name+' has attempted to advertise. Room: '+room.id+'. Message: '+message);
 			connection.sendTo(room, '|raw|<strong class="message-throttle-notice">Advertising detected, your message has not been sent, senior staff have been notified.<br />Further attempts to advertise may result in being locked.</strong>');
-			connection.user.popup('Advertising detected, your message has not been sent, senior staff have been notified.\nFurther attempts to advertise may result in being locked.');				
+			connection.user.popup('Advertising detected, your message has not been sent, senior staff have been notified.\nFurther attempts to advertise may result in being locked.');
 			return false;
 		}
 

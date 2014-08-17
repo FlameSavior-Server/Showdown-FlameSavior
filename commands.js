@@ -194,7 +194,7 @@ var commands = exports.commands = {
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('Ther is no badge named '+target+'.');
 		fs.readFile('config/badges.txt', 'utf8', function(err, data) {
 			if (err) console.log(err);
-			var badges = '';
+			var currentbadges = '';
 			var line = '';
 			var row = (''+data).split('\n');
 			var match = false;
@@ -203,7 +203,7 @@ var commands = exports.commands = {
 				var split = row[i].split(':');
 				if (split[0] == targetUser.userid) {
 					match = true;
-					badges = split[1];
+					currentbadges = split[1];
 					line = row[i];
 				}
 				break;
@@ -211,7 +211,7 @@ var commands = exports.commands = {
 			if (match == true) {
 				if (badges.indexOf(target) > -1) return self.sendReply('The user '+targerUser+' already has the badge '+target+'.');
 				var re = new RegExp(line, 'g');
-				var newdata = data.replace(re, targetUser.userid+':'+badges+','+target);
+				var newdata = data.replace(re, targetUser.userid+':'+currentbadges+','+target);
 				fs.writeFile('config/badges.txt', newdata, function(err, data) {
 					if (err) console.log(err);
 					self.sendReply('You have given the badge '+target+' to the user '+targetUser+'.');

@@ -1838,6 +1838,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 	
+	jyph: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/vPbnacz.gif">' +
+    		'<img src="http://i.imgur.com/m9GCS8r.gif">' +
+    		'<img src="http://i.imgur.com/iMhAVon.png" height="140"><br />' +
+    		'<b>Ace:</b> Scolipede<br />' +
+    		'It\'s more important to master the cards you are holding than to complain about the ones your opponents were dealt.</center>');
+    },
+
 	crthree: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/3ca27ada2b921325d28a15d493380232/tumblr_mxnelanYmB1t4drgdo1_500.gif" width="150">' +

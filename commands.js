@@ -189,7 +189,7 @@ var commands = exports.commands = {
 		if (!target) return this.sendReply('/removebadge [user], [badge] - Removes a badge from a user.');
 		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');
 		var self = this;
-		var type_of_badges = ['admin','dev','vip','artist','mod','leader','champ','concun','twinner','goodra','league'];
+		var type_of_badges = ['admin','dev','vip','artist','mod','leader','champ','creator','concun','twinner','goodra','league'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('The badge '+target+' is not a valid badge.');
 		fs.readFile('config/badges.txt','utf8', function(err, data) {
 			if (err) console.log(err);

@@ -94,6 +94,13 @@ body {
 	color: white;
 }
 
+.button-blue {
+	padding:5px;
+	background-color:#4594c9;
+	border:1px solid #8dcbf0;
+	color: #d8d8d8;
+}
+
 /**************************
 * For the colour commands *
 **************************/

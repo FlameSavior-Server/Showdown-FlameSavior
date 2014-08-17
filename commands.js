@@ -182,6 +182,44 @@ const MAX_REASON_LENGTH = 300;
 
 var commands = exports.commands = {
 	/**** normal stuff ****/
+	removebadge: function(target, room, user) {
+		if (!this.can('declare')) return false;
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!target) return this.sendReply('/removebadge [user], [badge] - Removes a badge from a user.');
+		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');
+		var self = this;
+		var type_of_badges = ['admin','dev','vip','artist','mod','leader','champ','concun','twinner','goodra','league'];
+		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('The badge '+target+' is not a valid badge.');
+		fs.readFile('config/badges.txt','utf8', function(err, data) {
+			if (err) console.log(err);
+			var match = false;
+			var currentbadges = '';
+			var row = (''+data).split('\n');
+			var line = '';
+			for (var i = row.length; i > -1; i--) {
+				if (!row[i]) continue;
+				var split = row[i].split(':');
+				if (split[0] == targetUser.userid) {
+					match = true;
+					currentbadges = split[1];
+					line = row[i];
+				}
+			}
+			if (match == true) {
+				if (currentbadges.indexOf(target) > -1 == false) return self.sendReply(currentbadges);//'The user '+targetUser+' does not have the badge.');
+				var re = new RegExp(line, 'g');
+				currentbadges = currentbadges.replace(target+',','');
+				var newdata = data.replace(re, targetUser.userid+':'+currentbadges);
+				fs.writeFile('config/badges.txt',newdata, 'utf8', function(err, data) {
+					if (err) console.log(err);
+					return self.sendReply('You have removed the badge '+target+' from the user '+targetUser+'.');
+				});
+			} else {
+				return self.sendReply('There is no match for the user '+targetUser+'.');
+			}
+		});
+	},
 	gb: 'givebadge',
 	givebadge: function(target, room, user) {
 		if (!this.can('declare')) return false;
@@ -211,14 +249,14 @@ var commands = exports.commands = {
 			if (match == true) {
 				if (badges.indexOf(target) > -1) return self.sendReply('The user '+targerUser+' already has the badge '+target+'.');
 				var re = new RegExp(line, 'g');
-				var newdata = data.replace(re, targetUser.userid+':'+currentbadges+','+target);
+				var newdata = data.replace(re, targetUser.userid+':'+currentbadges+','+target+',');
 				fs.writeFile('config/badges.txt', newdata, function(err, data) {
 					if (err) console.log(err);
 					self.sendReply('You have given the badge '+target+' to the user '+targetUser+'.');
 					targetUser.send('You have recieved the badge '+target+' from the user '+user.userid+'.');
 				});
 			} else {
-				fs.appendFile('config/badges.txt','\n'+targetUser.userid+':'+target, function(err) {
+				fs.appendFile('config/badges.txt','\n'+targetUser.userid+':'+target+',', function(err) {
 					if (err) console.log(err);
 					self.sendReply('You have given the badge '+target+' to the user '+targetUser+'.');
 					targetUser.send('You have recieved the badge '+target+' from the user '+user.userid+'.');

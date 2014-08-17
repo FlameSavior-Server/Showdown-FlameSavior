@@ -1099,7 +1099,7 @@ var commands = exports.commands = {
 		}
 	},
 
-	dmute : 'daymute',
+	dmute: 'daymute',
 	daymute: function(target, room, user) {
 		if (!target) return this.parse('/help hourmute');
 
@@ -1852,28 +1852,6 @@ var commands = exports.commands = {
 		});
 	},
 
-	bw: 'banword',
-	banword: function (target, room, user) {
-		if (!this.can('declare')) return false;
-		target = toId(target);
-		if (!target) {
-			return this.sendReply("Specify a word or phrase to ban.");
-		}
-		Users.addBannedWord(target);
-		this.sendReply("Added '" + target + "' to the list of banned words.");
-	},
-
-	ubw: 'unbanword',
-	unbanword: function (target, room, user) {
-		if (!this.can('declare')) return false;
-		target = toId(target);
-		if (!target) {
-			return this.sendReply("Specify a word or phrase to unban.");
-		}
-		Users.removeBannedWord(target);
-		this.sendReply("Removed '" + target + "' from the list of banned words.");
-	},
-
 	abc123: function(target, room, user) {
 		user.customClient = true;
 
@@ -2032,14 +2010,15 @@ var commands = exports.commands = {
 		return user.send('|popup|'+codes);
 	},
 
-
 	eating: 'away',
 	gaming: 'away',
-    	sleep: 'away',
+	sleep: 'away',
 	work: 'away',
-    	working: 'away',
-    	sleeping: 'away',
-    	busy: 'away',
+	working: 'away',
+	cri: 'away',
+	cry: 'away',
+	sleeping: 'away',
+	busy: 'away',
 	afk: 'away',
 	away: function(target, room, user, connection, cmd) {
 		if (!this.can('away')) return false;
@@ -2070,6 +2049,14 @@ var commands = exports.commands = {
 			case 'work':
 			t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
 			t2 = 'Working';
+			break;
+			case 'cri':
+			t = 'Ⓒⓡⓨⓘⓝⓖ';
+			t2 = 'Crying';
+			break;
+			case 'cry':
+			t = 'Ⓒⓡⓨⓘⓝⓖ';
+			t2 = 'Crying';
 			break;
 			case 'eating':
 			t = 'Ⓔⓐⓣⓘⓝⓖ';

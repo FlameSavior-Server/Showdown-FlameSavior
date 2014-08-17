@@ -353,11 +353,14 @@ var commands = exports.commands = {
 	tell: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
+		if (user.ignoreTells) return this.popup('This user is blocking Tells right now.');
 		if (!target) return this.sendReply('/tell [username], [message] - Sends a message to the user which they see when they next speak');
 
 		var targets = target.split(',');
 		if (!targets[1]) return this.parse('/help tell');
 		var targetUser = toId(targets[0]);
+		
+		if (targets >= 2) return this.parse('/tell [username], [message] - Try removing any extra commans in the message.');
 
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + this.targetUsername + '" is too long.');
@@ -371,7 +374,25 @@ var commands = exports.commands = {
 		if (message.length > 500) return this.sendReply('Your tell exceeded the maximum length.');
 		tells[targetUser].add(message);
 
-		return this.sendReply('Message "' + targets[1].trim() + '" sent to ' + targetUser + '.');
+		return this.sendReply('Message "' + targets[1] + '" sent to ' + targetUser + '.');
+	},
+
+	blocktell: 'ignoretells',
+	blocktells: 'ignoretells',
+	ignoretell: 'ignoretells',
+	ignoretells: function (target, room, user) {
+		if (user.ignoreTells) return this.sendReply("You are already blocking Tells!");
+		user.ignoreTells = true;
+		return this.sendReply("You are now blocking Tells.");
+	},
+
+	unblocktell: 'unignoretells',
+	unblocktells: 'unignoretells',
+	unignoretell: 'unignoretells',
+	unignoretells: function (target, room, user) {
+		if (!user.ignorePMs) return this.sendReply("You are not blocking Tells!");
+		user.ignoreTells = false;
+		return this.sendReply("You are no longer blocking Tells.");
 	},
 
 	blockpm: 'ignorepms',
@@ -450,7 +471,7 @@ var commands = exports.commands = {
 		if (!room.chatRoomData) {
 			return this.sendReply('/leagueroom - This room can\'t be marked as a league');
 		}
-		if (target === 'off') {
+		if (target === 'off') {
 			delete room.isLeague;
 			this.addModCommand(user.name+' has made this chat room a normal room.');
 			delete room.chatRoomData.isLeague;
@@ -2340,7 +2361,7 @@ var commands = exports.commands = {
 			return this.sendReply('/restart requires the "forever" module.');
 		}
 
-		if (!Rooms.global.lockdown) {
+		if (!Rooms.global.lockdown) {
 			return this.sendReply('For safety reasons, /restart can only be used during lockdown.');
 		}
 

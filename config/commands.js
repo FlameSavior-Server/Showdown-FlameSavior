@@ -1837,15 +1837,6 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
-	
-	lifting: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://i.gyazo.com/b677c1ff0296d3faefe4ff712e1ad9ed.png" height="95">' +
-    		'<img src="http://i.imgur.com/3WSkcnU.png" width="300">' +
-    		'<img src="http://i.gyazo.com/b677c1ff0296d3faefe4ff712e1ad9ed.png" height="95"><br />' +
-    		'<b>Ace:</b> Muscles<br />' +
-    		'Do you even lift?</center>');
-    },
 
 	jyph: function(target, room, user) {
     	if (!this.canBroadcast()) return;

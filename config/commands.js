@@ -1837,6 +1837,16 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	crthree: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/3ca27ada2b921325d28a15d493380232/tumblr_mxnelanYmB1t4drgdo1_500.gif" width="150">' +
+    		'<img src="http://i.imgur.com/bi7CmzJ.png" width="250">' +
+    		'<img src="http://oi33.tinypic.com/14vsayg.jpg" width="140"><br />' +
+    		'<b>Ace:</b> MLG Pro Strats<br />' +
+    		'"From drab to fab, with nothin\' but mustard!"</center>');
+    },
+
 	youtubers: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/udBmLSc.jpg" width="150">' +

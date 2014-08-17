@@ -183,7 +183,7 @@ const MAX_REASON_LENGTH = 300;
 var commands = exports.commands = {
 	/**** normal stuff ****/
 	removebadge: function(target, room, user) {
-		if (!this.can('declare')) return false;
+		if (!this.can('hotpatch')) return false;
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!target) return this.sendReply('/removebadge [user], [badge] - Removes a badge from a user.');
@@ -222,7 +222,7 @@ var commands = exports.commands = {
 	},
 	gb: 'givebadge',
 	givebadge: function(target, room, user) {
-		if (!this.can('declare')) return false;
+		if (!this.can('hotpatch')) return false;
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');

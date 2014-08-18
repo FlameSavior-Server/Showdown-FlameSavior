@@ -359,7 +359,7 @@ var commands = exports.commands = {
 		var targets = target.split(',');
 		if (!targets[1]) return this.parse('/help tell');
 		var targetUser = toId(targets[0]);
-		
+
 		if (targets >= 2) return this.parse('/tell [username], [message] - Try removing any extra commans in the message.');
 
 		if (targetUser.length > 18) {
@@ -736,14 +736,16 @@ var commands = exports.commands = {
  		//if (!room.auth && room.id !== "staff") return this.sendReply('/rkick is designed for rooms with their own auth.');
  		if (!this.can('roommod', null, room)) return false;
  		if (!target) return this.sendReply('/rkick [username] - kicks the user from the room. Requires: @ & ~');
- 		var targetUser = Users.get(target);
- 		if (!targetUser) return this.sendReply('User '+target+' not found.');
+
+ 		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+
+ 		if (!targetUser || !targetUser.connected) return this.sendReply('User '+target+' not found.');
  		if (!Rooms.rooms[room.id].users[targetUser.userid]) return this.sendReply(target+' is not in this room.');
  		if (targetUser.frostDev) return this.sendReply('Frost Developers can\'t be room kicked');
  		targetUser.popup('You have been kicked from room '+ room.title +' by '+user.name+'.');
  		targetUser.leaveRoom(room);
- 		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
- 		this.logModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
+ 		this.addModCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.' + (target ? " (" + target + ")" : ""));
 	},
 
 	roomban: function (target, room, user, connection) {

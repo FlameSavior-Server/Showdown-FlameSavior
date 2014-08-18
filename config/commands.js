@@ -5016,7 +5016,7 @@ var commands = exports.commands = {
 
 	vip: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center>Information regarding what a VIP user is can be found<a href="http://frostserver.net/forums/showthread.php?tid=693">here.</a>');
+    	this.sendReplyBox('<center>Information regarding what a VIP user is can be found <a href="http://frostserver.net/forums/showthread.php?tid=693">here.</a>');
     },
 
 	frostradio : 'radio',

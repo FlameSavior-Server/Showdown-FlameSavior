@@ -4617,16 +4617,16 @@ var commands = exports.commands = {
 	},
 
 	psyscorschach: function(target, room, user) {
-			if (!this.canBroadcast()) return;
-			this.sendReplyBox('<img src="http://i.imgur.com/YbY4840.png">' +
-				'<img src="http://s15.postimg.org/9mcf6lj4n/screenshot_118.png" width="110">' +
-				'<img src="http://i266.photobucket.com/albums/ii265/sony1270/Scorpion.jpg" width="100">' +
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<img src="http://i.imgur.com/YbY4840.png">' +
+			'<img src="http://s15.postimg.org/9mcf6lj4n/screenshot_118.png" width="110">' +
+			'<img src="http://i266.photobucket.com/albums/ii265/sony1270/Scorpion.jpg" width="100">' +
 			'<img src="http://i.imgur.com/VLDEcVs.png" width="100"><br />' +
-				'<center><b>Ace:</b> Gallade, Heliolisk, Landorus<br />' +
-				'Scorpion\'s sting would make a bee of a black mambo<br />' +
+			'<center><b>Ace:</b> Gallade, Heliolisk, Landorus<br />' +
+			'Scorpion\'s sting would make a bee of a black mambo<br />' +
 			'Zen will end your life faster than Chicago, Get 6-0\'d By Rors for thinking that ya macho<br />' +
 			'Anybody can get bodybagged by the PsyScorSchach Combo</center>');
-		},
+	},
 
 	salemance: 'elite4salemance',
 	elite4salemance: function(target, room, user) {
@@ -5014,11 +5014,16 @@ var commands = exports.commands = {
 	 * Miscellaneous commands
 	 *********************************************************/
 
+	vip: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center>Information regarding what a VIP user is can be found<a href="http://frostserver.net/forums/showthread.php?tid=693">here.</a>');
+    },
+
 	frostradio : 'radio',
-		radio: function(target, room, user) {
+	radio: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('Come visit the Frost Plug Radio <a href="http://plug.dj/frost-ps/">here</a>!');
-		},
+	},
 
 	events: 'currentevents',
 	currentevents: function(target, room, user) {

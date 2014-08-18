@@ -3885,7 +3885,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/kyurem-white.gif" width="110">' +
 			'<img src="http://i.imgur.com/MO83uFa.png" width="270">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megay.gif" width="130"><br />' +
-			'<b>Ace:</b> Mega charizard Y and X<br />' +
+			'<b>Ace:</b> Mega charizard Y and Kyurem White<br />' +
 			'Success isn\'t a result of spontaneous combustion. You must set yourself on fire.</center>');
 	},
 
@@ -4968,13 +4968,11 @@ var commands = exports.commands = {
 		'You are not allowed to <em>choose</em> the color of your name. Follow these steps if you wish to participate:<ol><li>Look at the color ' +
 		'of your name and determine if your name color is: <b>Red, Blue, Green, Pink/Purple, Yellow/Brown</b></li><li>Once you have found out your' +
 		' name color, type that color in the main chat to bring up a list of pokemon with that color. Ex]BrittleWind is Blue so he would type /blue' +
-		' in the main chat, Cosy is Red so he would type /red in the main chat. (If your name color is Yellow/Brown you are allowed to use both yellow ' +
+		' in the main chat, jd is Blue so he would type /blue in the main chat. (If your name color is Yellow/Brown you are allowed to use both yellow ' +
 		'<em>and</em> brown Pokemon. The same goes for Pink/Purple)</li><li>Now using list of pokemon you see on your screen, make a <b>Gen 6 OU</b>' +
-		' team using only the pokemon on the list. Some pokemon on the list won\'t be in the OU category so ignore them. As long as your able to do a' +
+		' team using only the pokemon on the list. Some pokemon on the list won\'t be in the OU category so ignore them. As long as you\'re able to do a' +
 		' Gen 6 OU battle with only your pokemon, your good to go!</li><li>Now all you have to do is wait for the declare to come up telling you that' +
-		' Masters of the Colors has started! If you happen to come accross any trouble during the event, feel free to PM the room owner for your designated' +
-		' room.</li><li><b>IF</b> you do win, your challenge isn\'t over yet! After winning, construct a team using only <b>Black, White, or Gray</b>' +
-		' Pokemon (you may use /black etc. to see the list). You will go against the other winners of Masters of the Colors and the winner will recieve an extra 10 bucks!</ol>');
+		' Masters of the Colors has started! If you happen to come accross any trouble during the event, feel free to PM the room owner of your designated room.</li>');
 	},
 
 	blue: 'red',

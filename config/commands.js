@@ -3882,11 +3882,11 @@ var commands = exports.commands = {
 	jak : 'darkjak',
 	darkjak: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megax.gif" width="110">' +
-			'<img src="http://i.imgur.com/GuVQ7sT.gif" width="270">' +
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/kyurem-white.gif" width="110">' +
+			'<img src="http://i.imgur.com/MO83uFa.png" width="270">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megay.gif" width="130"><br />' +
 			'<b>Ace:</b> Mega charizard Y and X<br />' +
-			'Many people say keep calm and relax, I prefer raging on and burning shit.</center>');
+			'Success isn\'t a result of spontaneous combustion. You must set yourself on fire.</center>');
 	},
 
 	brittlewind: function(target, room, user) {

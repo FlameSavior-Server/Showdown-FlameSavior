@@ -1874,7 +1874,7 @@ var commands = exports.commands = {
 			'<b>Ace: </b>Youtubers<br />' +
 			'If Youtubers aren\'t your life you suck!</center>');
     },
-	
+
 	reck: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://i.imgur.com/dua8WEl.png" width="150">' +
@@ -1884,7 +1884,7 @@ var commands = exports.commands = {
 			'Truth is you don\'t know what\'s going to happen tomorrow. Life is a crazy ride and nothing is guaranteed.</center>');
 	},
 
-	dawnmidist: function(target, room, user) {
+	dawnmidst: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/xFZjcWt.gif">' +
 			'<img src="http://i.imgur.com/U6aIk3B.png" width="370">' +

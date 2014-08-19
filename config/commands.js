@@ -1858,6 +1858,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	garde: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gardevoir-mega.gif">' +
+    		'<img src="http://i.imgur.com/VxNCwRt.png" width="320">' +
+    		'<img src="http://fc07.deviantart.net/fs71/i/2013/351/e/9/mega_gardevoir_by_nganlamsong-d6y9ygy.png" height="100"><br />' +
+    		'<b>Ace:</b> Mega Gardevoir<br />' +
+    		'I\'m sexy.</center>');
+    },
+
 	lightning: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/iJ0FAiT.gif">' +

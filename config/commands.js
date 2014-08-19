@@ -1838,14 +1838,13 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
-	kaisersrebirth: function(target, room, user) {
+	lightning: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://img2.findthebest.com/sites/default/files/620/media/images/Aegislash_1150266.jpg" height="140">' +
-    		'<img src="http://i.imgur.com/UdRURlN.png">' +
-    		'<img src="http://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-x-y-version/thumb/9/98/Mega_gardevoir.jpg/228px-Mega_gardevoir.jpg" height="140"><br />' +
-			'<img src="http://img2.wikia.nocookie.net/__cb20110322072422/disney/images/archive/b/b3/20130128013744!Station_Ventus_2.png" height="140"><br />' +
-    		'<b>Ace:</b> Recreation<br />' +
-    		'New ace, new rivals, being the best now is the struggle for survival.</center>');
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/iJ0FAiT.gif">' +
+    		'<img src="http://i.imgur.com/kiEAFGi.png" width="360">' +
+    		'<img src="http://i.imgur.com/TCxGhn4.jpg" height="140"><br />' +
+    		'<b>Ace:</b> Dragonite<br />' +
+    		'My birds are stronger than Bruce Lee.</center>');
     },
 
 	jyph: function(target, room, user) {

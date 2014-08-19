@@ -277,7 +277,8 @@ exports.BattleScripts = {
 			var moveDamage;
 			// There is no need to recursively check the ´sleepUsable´ flag as Sleep Talk can only be used while asleep.
 			var isSleepUsable = move.sleepUsable || this.getMove(move.sourceEffect).sleepUsable;
-			for (var i = 0; i < hits && target.hp && pokemon.hp; i++) {
+			var i;
+			for (i = 0; i < hits && target.hp && pokemon.hp; i++) {
 				if (pokemon.status === 'slp' && !isSleepUsable) break;
 
 				moveDamage = this.moveHit(target, pokemon, move);
@@ -759,10 +760,10 @@ exports.BattleScripts = {
 	},
 	randomSet: function (template, i, noMega) {
 		if (i === undefined) i = 1;
-		var baseTemplate = template = this.getTemplate(template);
+		var baseTemplate = (template = this.getTemplate(template));
 		var name = template.name;
 
-		if (!template.exists || (!template.viableMoves && !template.learnset)) {
+		if (!template.exists || (!template.randomBattleMoves && !template.learnset)) {
 			// GET IT? UNOWN? BECAUSE WE CAN'T TELL WHAT THE POKEMON IS
 			template = this.getTemplate('unown');
 
@@ -777,7 +778,7 @@ exports.BattleScripts = {
 			template = this.getTemplate(template.otherFormes[(template.otherFormes[1]) ? Math.round(Math.random()) : 0]);
 		}
 
-		var moveKeys = Object.keys(template.viableMoves || template.learnset).randomize();
+		var moveKeys = (template.randomBattleMoves || Object.keys(template.learnset)).randomize();
 		var moves = [];
 		var ability = '';
 		var item = '';
@@ -1248,7 +1249,7 @@ exports.BattleScripts = {
 					var type1 = damagingMoves[0].type, type2 = damagingMoves[1].type;
 					var typeCombo = [type1, type2].sort().join('/');
 					var rejectCombo = true;
-					if (!type1 in hasStab && !type2 in hasStab) {
+					if (!(type1 in hasStab) && !(type2 in hasStab)) {
 						if (typeCombo === 'Electric/Ice' || typeCombo === 'Fighting/Ghost' || typeCombo === 'Dark/Fighting') rejectCombo = false;
 					} else {
 						rejectCombo = false;
@@ -1631,7 +1632,7 @@ exports.BattleScripts = {
 		var pokemon = [];
 		for (var i in this.data.FormatsData) {
 			var template = this.getTemplate(i);
-			if (this.data.FormatsData[i].viableMoves && !this.data.FormatsData[i].isNonstandard && !template.evos.length && (template.forme.substr(0,4) !== 'Mega')) {
+			if (this.data.FormatsData[i].randomBattleMoves && !this.data.FormatsData[i].isNonstandard && !template.evos.length && (template.forme.substr(0,4) !== 'Mega')) {
 				keys.push(i);
 			}
 		}
@@ -1690,9 +1691,9 @@ exports.BattleScripts = {
 				if (i === 1) {
 					template = potd;
 					if (template.species === 'Magikarp') {
-						template.viableMoves = {magikarpsrevenge:1, splash:1, bounce:1};
+						template.randomBattleMoves = ['magikarpsrevenge', 'splash', 'bounce'];
 					} else if (template.species === 'Delibird') {
-						template.viableMoves = {present:1, bestow:1};
+						template.randomBattleMoves = ['present', 'bestow'];
 					}
 				} else if (template.species === potd.species) {
 					continue; // No, thanks, I've already got one
@@ -1929,7 +1930,7 @@ exports.BattleScripts = {
 		var pokemon = [];
 		for (var i in this.data.FormatsData) {
 			var template = this.getTemplate(i);
-			if (this.data.FormatsData[i].viableMoves && !this.data.FormatsData[i].isNonstandard && !template.evos.length && (template.forme.substr(0,4) !== 'Mega')) {
+			if (this.data.FormatsData[i].randomBattleMoves && !this.data.FormatsData[i].isNonstandard && !template.evos.length && (template.forme.substr(0,4) !== 'Mega')) {
 				keys.push(i);
 			}
 		}
@@ -1972,14 +1973,9 @@ exports.BattleScripts = {
 
 			// More potd stuff
 			if (potd && potd.name && potd.types) {
-				// The Pokemon of the Day belongs in slot 2
-				if (i === 1) {
+				// The Pokemon of the Day belongs in slot 3
+				if (i === 2) {
 					template = potd;
-					if (template.species === 'Magikarp') {
-						template.viableMoves = {magikarpsrevenge:1, splash:1, bounce:1};
-					} else if (template.species === 'Delibird') {
-						template.viableMoves = {present:1, bestow:1};
-					}
 				} else if (template.species === potd.species) {
 					continue; // No, thanks, I've already got one
 				}
@@ -2023,10 +2019,10 @@ exports.BattleScripts = {
 		return pokemon;
 	},
 	randomDoublesSet: function (template, noMega) {
-		var baseTemplate = template = this.getTemplate(template);
+		var baseTemplate = (template = this.getTemplate(template));
 		var name = template.name;
 
-		if (!template.exists || (!template.viableDoublesMoves && !template.viableMoves && !template.learnset)) {
+		if (!template.exists || (!template.randomDoubleBattleMoves && !template.randomBattleMoves && !template.learnset)) {
 			template = this.getTemplate('unown');
 
 			var stack = 'Template incompatible with random battles: ' + name;
@@ -2040,7 +2036,7 @@ exports.BattleScripts = {
 			template = this.getTemplate(template.otherFormes[(template.otherFormes[1]) ? Math.round(Math.random()) : 0]);
 		}
 
-		var moveKeys = Object.keys(template.viableDoublesMoves || template.viableMoves || template.learnset).randomize();
+		var moveKeys = (template.randomDoubleBattleMoves || template.randomBattleMoves || Object.keys(template.learnset)).randomize();
 		// Make protect viable for everyone
 		// Delete this once all Pokémon have viable doubles sets
 		var hasProtectingMove = false;
@@ -2501,7 +2497,7 @@ exports.BattleScripts = {
 					var type1 = damagingMoves[0].type, type2 = damagingMoves[1].type;
 					var typeCombo = [type1, type2].sort().join('/');
 					var rejectCombo = true;
-					if (!type1 in hasStab && !type2 in hasStab) {
+					if (!(type1 in hasStab) && !(type2 in hasStab)) {
 						if (typeCombo === 'Electric/Ice' || typeCombo === 'Fighting/Ghost' || typeCombo === 'Dark/Fighting') rejectCombo = false;
 					} else {
 						rejectCombo = false;

@@ -34,6 +34,15 @@ var numUsers = 0;
 var fs = require('fs');
 var dns = require('dns');
 
+/* global Users: true */
+var Users = module.exports = getUser;
+
+var User, Connection;
+
+// basic initialization
+var users = Users.users = Object.create(null);
+var prevUsers = Users.prevUsers = Object.create(null);
+var numUsers = 0;
 
 /**
  * Get a user.
@@ -51,7 +60,7 @@ var dns = require('dns');
  * If this behavior is undesirable, use Users.getExact.
  */
 
-var Users = module.exports = function(name, exactName) {
+function getUser(name, exactName) {
 	if (!name || name === '!') return null;
 	if (name && name.userid) return name;
 	var userid = toId(name);
@@ -61,13 +70,8 @@ var Users = module.exports = function(name, exactName) {
 		i++;
 	}
 	return users[userid];
-};
-var getUser = Users.get = Users;
-
-// basic initialization
-var users = Users.users = Object.create(null);
-var prevUsers = Users.prevUsers = Object.create(null);
-var numUsers = 0;
+}
+Users.get = getUser;
 
 /**
  * Get a user by their exact username.
@@ -145,6 +149,97 @@ function messageSeniorStaff (message) {
 Users.messageSeniorStaff = messageSeniorStaff;
 
 /*********************************************************
+ * Locks and bans
+ *********************************************************/
+
+var bannedIps = Users.bannedIps = Object.create(null);
+var bannedUsers = Object.create(null);
+var lockedIps = Users.lockedIps = Object.create(null);
+var lockedUsers = Object.create(null);
+
+/**
+ * Searches for IP in table.
+ *
+ * For instance, if IP is '1.2.3.4', will return the value corresponding
+ * to any of the keys in table match '1.2.3.4', '1.2.3.*', '1.2.*', or '1.*'
+ */
+function ipSearch(ip, table) {
+	if (table[ip]) return table[ip];
+	var dotIndex = ip.lastIndexOf('.');
+	for (var i = 0; i < 4 && dotIndex > 0; i++) {
+		ip = ip.substr(0, dotIndex);
+		if (table[ip + '.*']) return table[ip + '.*'];
+		dotIndex = ip.lastIndexOf('.');
+	}
+	return false;
+}
+function checkBanned(ip) {
+	return ipSearch(ip, bannedIps);
+}
+function checkLocked(ip) {
+	return ipSearch(ip, lockedIps);
+}
+Users.checkBanned = checkBanned;
+Users.checkLocked = checkLocked;
+
+// Defined in commands.js
+Users.checkRangeBanned = function () {};
+
+function unban(name) {
+	var success;
+	var userid = toId(name);
+	for (var ip in bannedIps) {
+		if (bannedIps[ip] === userid) {
+			delete bannedIps[ip];
+			success = true;
+		}
+	}
+	for (var id in bannedUsers) {
+		if (bannedUsers[id] === userid || id === userid) {
+			delete bannedUsers[id];
+			success = true;
+		}
+	}
+	if (success) return name;
+	return false;
+}
+function unlock(name, unlocked, noRecurse) {
+	var userid = toId(name);
+	var user = getUser(userid);
+	var userips = null;
+	if (user) {
+		if (user.userid === userid) name = user.name;
+		if (user.locked) {
+			user.locked = false;
+			user.updateIdentity();
+			unlocked = unlocked || {};
+			unlocked[name] = 1;
+		}
+		if (!noRecurse) userips = user.ips;
+	}
+	for (var ip in lockedIps) {
+		if (userips && (ip in user.ips) && Users.lockedIps[ip] !== userid) {
+			unlocked = unlock(Users.lockedIps[ip], unlocked, true); // avoid infinite recursion
+		}
+		if (Users.lockedIps[ip] === userid) {
+			delete Users.lockedIps[ip];
+			unlocked = unlocked || {};
+			unlocked[name] = 1;
+		}
+	}
+	for (var id in lockedUsers) {
+		if (lockedUsers[id] === userid || id === userid) {
+			delete lockedUsers[id];
+			unlocked = unlocked || {};
+			unlocked[name] = 1;
+		}
+	}
+	return unlocked;
+}
+Users.unban = unban;
+Users.unlock = unlock;
+
+/*********************************************************
  * Routing
  *********************************************************/
 
@@ -166,11 +261,11 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 	if (checkResult) {
 		console.log('CONNECT BLOCKED - IP BANNED: ' + ip + ' (' + checkResult + ')');
 		if (checkResult === '#ipban') {
-			connection.send("|popup|Your IP (" + ip + ") is on our abuse list and is permanently banned. If you are using a proxy, stop.");
+			connection.send("|popup|Your IP (" + ip + ") is not allowed to connect to PS, because it has been used to spam, hack, or otherwise attack our server.||Make sure you are not using any proxies to connect to PS.");
 		} else if (checkResult === '#cflood') {
 			connection.send("|popup|PS is under heavy load and cannot accommodate your connection right now.");
 		} else {
-			connection.send("|popup|Your IP (" + ip + ") used is banned under the username '" + checkResult + "''. Your ban will expire in a few days." + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
+			connection.send("|popup|Your IP (" + ip + ") used is banned under the username '" + checkResult + "'. Your ban will expire in a few days.||" + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
 		}
 		return connection.destroy();
 	}
@@ -221,7 +316,10 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 			switch (isBlocked) {
 				case 'sbl.spamhaus.org':
 				connection.popup('Your IP is known for abuse and has been locked. If you\'re using a proxy, don\'t.');
-				if (connection.user) connection.user.lock(true);
+				if (connection.user && !connection.user.locked) {
+					connection.user.locked = '#dnsbl';
+					connection.user.updateIdentity();
+				}
 				break;
 				case 'rbl.efnetrbl.org':
 				connection.popup('Your IP is listed in rbl.efnetrbl.org and has been automatically banned. For more information, please visit http://rbl.efnetrbl.org/.');
@@ -249,7 +347,10 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 				break;
 				default:
 				connection.popup('Your IP is known for abuse and has been locked. If you\'re using a proxy, don\'t.');
-				if (connection.user) connection.user.lock(true);
+				if (connection.user && !connection.user.locked) {
+					connection.user.locked = '#dnsbl';
+					connection.user.updateIdentity();
+				}
 				break;
 			}
 		}
@@ -262,7 +363,7 @@ Users.socketDisconnect = function(worker, workerid, socketid) {
 	var connection = connections[id];
 	if (!connection) return;
 	connection.onDisconnect();
-}
+};
 
 Users.socketReceive = function(worker, workerid, socketid, message) {
 	var id = '' + workerid + '-' + socketid;
@@ -309,7 +410,7 @@ Users.socketReceive = function(worker, workerid, socketid, message) {
 	for (var i = 0; i < lines.length; i++) {
 		if (user.chat(lines[i], room, connection) === false) break;
 	}
-}
+};
 
 /*********************************************************
  * User groups
@@ -425,7 +526,7 @@ function removeCustomAvatar(userid) {
 }
 
 // User
-var User = (function () {
+User = (function () {
 	function User(connection) {
 		numUsers++;
 		this.mmrCache = {};
@@ -473,7 +574,7 @@ var User = (function () {
 
 		this.mutedRooms = {};
 		this.muteDuration = {};
-		this.locked = !!checkLocked(connection.ip);
+		this.locked = Users.checkLocked(connection.ip);
 		this.prevNames = {};
 		this.battles = {};
 		this.roomCount = {};
@@ -897,7 +998,7 @@ var User = (function () {
 			body = '';
 			this.send('|nametaken|' + name + "|Your assertion is stale. This usually means that the clock on the server computer is incorrect. If this is your server, please set the clock to the correct time.");
 		} else if (body) {
-			//console.log('BODY: "' + body + '"');
+			// console.log('BODY: "' + body + '"');
 
 			if (users[userid] && !users[userid].authenticated && users[userid].connected) {
 				if (auth) {
@@ -908,9 +1009,9 @@ var User = (function () {
 				}
 			}
 
-			if (!this.named) {
-				// console.log('IDENTIFY: ' + name + ' [' + this.name + '] [' + challenge.substr(0, 15) + ']');
-			}
+			// if (!this.named) {
+			// 	console.log('IDENTIFY: ' + name + ' [' + this.name + '] [' + challenge.substr(0, 15) + ']');
+			// }
 
 			var group = Config.groupsranking[0];
 			var staffAccess = false;
@@ -999,7 +1100,9 @@ var User = (function () {
 					if (Object.isEmpty(Object.select(this.ips, user.ips))) {
 						user.mutedRooms = Object.merge(user.mutedRooms, this.mutedRooms);
 						user.muteDuration = Object.merge(user.muteDuration, this.muteDuration);
-						if (this.locked) user.locked = true;
+						if (user.locked === '#dnsbl' && !this.locked) user.locked = false;
+						if (!user.locked && this.locked === '#dnsbl') this.locked = false;
+						if (this.locked) user.locked = this.locked;
 						this.mutedRooms = {};
 						this.muteDuration = {};
 						this.locked = false;
@@ -1224,7 +1327,8 @@ var User = (function () {
 			format: formatid,
 			user: this.userid
 		}, function (data, statusCode, error) {
-			var mmr = 1000, error = (error || true);
+			var mmr = 1000;
+			error = (error || true);
 			if (data) {
 				if (data.errorip) {
 					self.popup("This server's request IP " + data.errorip + " is not a registered server.");
@@ -1255,10 +1359,12 @@ var User = (function () {
 		if (time < 1) time = 1; // mostly to prevent bugs
 		if (time > 90 * 60000) time = 90 * 60000; // limit 90 minutes
 		// recurse only once; the root for-loop already mutes everything with your IP
-		if (!noRecurse) for (var i in users) {
-			if (users[i] === this) continue;
-			if (Object.isEmpty(Object.select(this.ips, users[i].ips))) continue;
-			users[i].mute(roomid, time, force, true);
+		if (!noRecurse) {
+			for (var i in users) {
+				if (users[i] === this) continue;
+				if (Object.isEmpty(Object.select(this.ips, users[i].ips))) continue;
+				users[i].mute(roomid, time, force, true);
+			}
 		}
 
 		var self = this;
@@ -1281,10 +1387,12 @@ var User = (function () {
 	User.prototype.ban = function (noRecurse, userid) {
 		// recurse only once; the root for-loop already bans everything with your IP
 		if (!userid) userid = this.userid;
-		if (!noRecurse) for (var i in users) {
-			if (users[i] === this) continue;
-			if (Object.isEmpty(Object.select(this.ips, users[i].ips))) continue;
-			users[i].ban(true, userid);
+		if (!noRecurse) {
+			for (var i in users) {
+				if (users[i] === this) continue;
+				if (Object.isEmpty(Object.select(this.ips, users[i].ips))) continue;
+				users[i].ban(true, userid);
+			}
 		}
 
 		for (var ip in this.ips) {
@@ -1293,17 +1401,20 @@ var User = (function () {
 		if (this.autoconfirmed) bannedUsers[this.autoconfirmed] = userid;
 		if (this.authenticated) {
 			bannedUsers[this.userid] = userid;
-			this.locked = true; // in case of merging into a recently banned account
+			this.locked = userid; // in case of merging into a recently banned account
 			this.autoconfirmed = '';
 		}
 		this.disconnectAll();
 	};
-	User.prototype.lock = function (noRecurse) {
+	User.prototype.lock = function (noRecurse, userid) {
 		// recurse only once; the root for-loop already locks everything with your IP
-		if (!noRecurse) for (var i in users) {
-			if (users[i] === this) continue;
-			if (Object.isEmpty(Object.select(this.ips, users[i].ips))) continue;
-			users[i].lock(true);
+		if (!userid) userid = this.userid;
+		if (!noRecurse) {
+			for (var i in users) {
+				if (users[i] === this) continue;
+				if (Object.isEmpty(Object.select(this.ips, users[i].ips))) continue;
+				users[i].lock(true, userid);
+			}
 		}
 
 		for (var ip in this.ips) {
@@ -1311,7 +1422,7 @@ var User = (function () {
 		}
 		if (this.autoconfirmed) lockedUsers[this.autoconfirmed] = this.userid;
 		if (this.authenticated) lockedUsers[this.userid] = this.userid;
-		this.locked = true;
+		this.locked = userid;
 		this.autoconfirmed = '';
 		this.updateIdentity();
 	};
@@ -1655,7 +1766,7 @@ var User = (function () {
 	return User;
 })();
 
-var Connection = (function () {
+Connection = (function () {
 	function Connection(id, worker, socketid, user, ip) {
 		this.id = id;
 		this.socketid = socketid;

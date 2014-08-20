@@ -2078,14 +2078,6 @@ var commands = exports.commands = {
 			t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
 			t2 = 'Working';
 			break;
-			case 'cri':
-			t = 'Ⓒⓡⓨⓘⓝⓖ';
-			t2 = 'Crying';
-			break;
-			case 'cry':
-			t = 'Ⓒⓡⓨⓘⓝⓖ';
-			t2 = 'Crying';
-			break;
 			case 'eating':
 			t = 'Ⓔⓐⓣⓘⓝⓖ';
 			t2 = 'Eating';

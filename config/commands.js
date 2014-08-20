@@ -2876,13 +2876,13 @@ var commands = exports.commands = {
 			'H2O means two of me one of you.</center>');
 	},
 
-	gh0st: function(target, room, user) {
+	ghost: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/tkXeuIQ.gif">' +
-			'<img src="http://i.imgur.com/8D11eGK.png">' +
-			'<img src="http://i.imgur.com/yXDk9Px.png" width="100"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/vK3Zkf3.gif" height="140">' +
+			'<img src="http://i.imgur.com/7WjRvDa.png">' +
+			'<img src="http://i.imgur.com/6cJI4DV.gif" height="140"><br />' +
 			'<b>Ace:</b> Lucario<br />' +
-			'You have to fight. If you don\'t fight you can\'t win. — Eren Jaeger.</center>');
+			'Someone who can\'t sacrifice anything, can never change anything. - Armin Arlert</center>');
 	},
 
 	kingslowking: function(target, room, user) {

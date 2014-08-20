@@ -1103,6 +1103,14 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
+	dillon: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/PNy1HEf.gif"><br />' +
+            '<img src="http://media.tumblr.com/tumblr_lz1xhpgIcY1qbnaro.gif" width="270">' +
+            '<img src="http://img4.wikia.nocookie.net/__cb20130826213452/powerlisting/images/3/3a/Shadow_Dragon%27s_Roar.gif" width="270"><br />' +
+            'The loneliest people are the kindest. The saddest people smile the brightest. The most damaged people are the wisest. All because they don\'t wish to see anyone else suffer the way they did.</center>');
+	},
+
 	supersonic: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20120528125001/sonic/images/f/fc/Hyper_sonic.gif"><br />' +

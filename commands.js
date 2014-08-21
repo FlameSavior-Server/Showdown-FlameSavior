@@ -52,44 +52,44 @@ var commands = exports.commands = {
 			return this.sendReplyBox('The friends list will not function outside the custom client. Click <a href = "http://frost-server.no-ip.org/">here</a> to use it.');
 		}
 		var data = fs.readFileSync('config/friends.csv','utf8')
-			var match = false;
-			var friends = '';
-			var row = (''+data).split("\n");
-			for (var i = 0; i < row.length; i++) {
-				if (!row[i]) continue;
-				var parts = row[i].split(",");
-				var userid = toId(parts[0]);
-				if (user.userid == userid) {
+		var match = false;
+		var friends = '';
+		var row = (''+data).split("\n");
+		for (var i = 0; i < row.length; i++) {
+			if (!row[i]) continue;
+			var parts = row[i].split(",");
+			var userid = toId(parts[0]);
+			if (user.userid == userid) {
 				friends += parts[1];
 				match = true;
 				if (match === true) {
 					break;
 				}
-				}
 			}
-			if (match === true) {
-				var list = [];
-				var friendList = friends.split(' ');
-				for (var i = 0; i < friendList.length; i++) {
-					if(Users.get(friendList[i])) {
-						if(Users.get(friendList[i]).connected) {
-							list.push(friendList[i]);
-						}
+		}
+		if (match === true) {
+			var list = [];
+			var friendList = friends.split(' ');
+			for (var i = 0; i < friendList.length; i++) {
+				if(Users.get(friendList[i])) {
+					if(Users.get(friendList[i]).connected) {
+						list.push(friendList[i]);
 					}
 				}
-				if (list[0] === undefined) {
-					return this.sendReply('You have no online friends.');
-				}
-				var buttons = '';
-				for (var i = 0; i < list.length; i++) {
-					buttons = buttons + '<button name = "openUser" value = "' + Users.get(list[i]).userid + '">' + Users.get(list[i]).name + '</button>';
-				}
-				this.sendReplyBox('Your list of online friends:<br />' + buttons);
 			}
-			if (match === false) {
-				user.send('You have no friends to show.');
+			if (list[0] === undefined) {
+				return this.sendReply('You have no online friends.');
 			}
-		},
+			var buttons = '';
+			for (var i = 0; i < list.length; i++) {
+				buttons = buttons + '<button name = "openUser" value = "' + Users.get(list[i]).userid + '">' + Users.get(list[i]).name + '</button>';
+			}
+			this.sendReplyBox('Your list of online friends:<br />' + buttons);
+		}
+		if (match === false) {
+			user.send('You have no friends to show.');
+		}
+	},
 
 	addfriend: function(target, room, user, connection) {
 		if (!user.customClient) {
@@ -222,7 +222,7 @@ var commands = exports.commands = {
 			//user will be authenticated
 			user.authenticated = true;
 
-			if (user.isStaff) this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer away');
+			if (user.isStaff) this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer away.');
 
 			user.originalName = '';
 			user.isAway = false;
@@ -360,7 +360,7 @@ var commands = exports.commands = {
 		if (!targets[1]) return this.parse('/help tell');
 		var targetUser = toId(targets[0]);
 
-		if (targets >= 2) return this.parse('/tell [username], [message] - Try removing any extra commans in the message.');
+		if (targets >= 2) return this.parse('/tell [username], [message] - Try removing any extra commas in the message.');
 
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + this.targetUsername + '" is too long.');
@@ -1406,7 +1406,7 @@ var commands = exports.commands = {
 		if(!user.can('hotpatch')) return;
 		if (!this.canTalk()) return false;
 
-		if (!target) return this.sendReply('/forcelogout [username], [reason] OR /flogout [username], [reason] - You do not have to add a reason');
+		if (!target) return this.sendReply('/forcelogout [username], [reason] OR /flogout [username], [reason] - Reason is optional.');
 
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
@@ -1572,15 +1572,15 @@ var commands = exports.commands = {
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 
-		if (!targetUser) return this.sendReply('/sendpopup [user], [message] - You missed the user');
-		if (!target) return this.sendReply('/sendpopup [user], [message] - You missed the message');
+		if (!targetUser) return this.sendReply('/sendpopup [user], [message] - You missed the user.');
+		if (!target) return this.sendReply('/sendpopup [user], [message] - You missed the message.');
 
 		targetUser.popup(target);
 		this.sendReply(targetUser.name + ' got the message as popup: ' + target);
 
 		targetUser.send(user.name+' sent a popup message to you.');
 
-		this.logModCommand(user.name+' send a popup message to '+targetUser.name);
+		this.logModCommand(user.name+' sent a popup message to '+targetUser.name);
 	},
 
 	image: function(target, room, user) {
@@ -1601,7 +1601,6 @@ var commands = exports.commands = {
 	declaregreen: 'declare',
 	declarered: 'declare',
 	declare: function(target, room, user, connection, cmd) {
-		/*if (user.userid === 'shadowninjask') return false;**/
 		if (!target) return this.parse('/help declare');
 		if (!this.can('declare', null, room)) return false;
 

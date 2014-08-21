@@ -471,7 +471,7 @@ exports.Formats = [
 		validateSet: function (set, format) {
 			var template = this.getTemplate(set.species);
 			var problems = [];
-			var baseStats = 0; 
+			var baseStats = 0;
 			for (var i in template.baseStats) {
 				baseStats += template.baseStats[i];
 			}

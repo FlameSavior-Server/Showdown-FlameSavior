@@ -159,7 +159,7 @@
  *
  * @license MIT license
  */
-var badges = fs.createWriteStream('config/badges.txt',{'flags':'a'});
+var badges = fs.createWriteStream('badges.txt',{'flags':'a'});
 var commands = exports.commands = {
 
 	ip: 'whois',

@@ -315,11 +315,6 @@ var commands = exports.commands = {
         	}
 	},
 
-	fork: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		if (!this.canTalk()) return;
-			this.sendReplyBox('<center><img src="http://i.imgur.com/HrDUGmr.png" width=75 height= 100>');
-	},
 	
 	aotdtest: function (target, room, user) {
         			if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
@@ -1104,6 +1099,11 @@ var commands = exports.commands = {
 	
 	//Trainer Cards.
 	
+	fork: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/HrDUGmr.png" width="75" height="100">');
+	},
+
 	dillon: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/PNy1HEf.gif"><br />' +

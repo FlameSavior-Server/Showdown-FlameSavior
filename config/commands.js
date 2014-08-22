@@ -1262,7 +1262,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
             '<img src="http://i.imgur.com/xzfPeaL.gif">' +
-            '<img src="http://i.imgur.com/qzflcXa.gif"><br />' +
+            '<img src="http://107.161.19.43:8000/avatars/panpawn.gif"><br />' +
             '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
             '<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
    	},

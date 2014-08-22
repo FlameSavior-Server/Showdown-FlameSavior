@@ -1858,6 +1858,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ima: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center>gg<br /><img src="http://i.imgur.com/0j2NKtN.png" height="200">' +
+    		'<img src="http://i.imgur.com/jZM4Yau.gif" width="250">' +
+    		'<img src="http://i.imgur.com/pGTsgtC.png" height="200"><br />' +
+			'<img src="http://i.imgur.com/RlysR4t.gif"><br />' +
+    		'<b>Ace:</b> Tyler<br />' +
+    		'I\'m a fuckin\' walking paradox.</center>');
+    },
+
 	felicette: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/f004d4e770655d1e188f2bbba28cd915/tumblr_n1hkstkhtp1qdlh1io1_400.gif"><br />' +

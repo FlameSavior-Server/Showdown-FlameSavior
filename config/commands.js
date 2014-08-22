@@ -1860,7 +1860,7 @@ var commands = exports.commands = {
 
 	ima: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center>gg<br /><img src="http://i.imgur.com/0j2NKtN.png" height="200">' +
+    	this.sendReplyBox('<center><b><font size="3">gg</b></font><br /><img src="http://i.imgur.com/0j2NKtN.png" height="200">' +
     		'<img src="http://i.imgur.com/jZM4Yau.gif" width="250">' +
     		'<img src="http://i.imgur.com/pGTsgtC.png" height="200"><br />' +
 			'<img src="http://i.imgur.com/RlysR4t.gif"><br />' +

@@ -1860,7 +1860,7 @@ var commands = exports.commands = {
 
 	felicette: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/f004d4e770655d1e188f2bbba28cd915/tumblr_n1hkstkhtp1qdlh1io1_400.gif">' +
+    	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/f004d4e770655d1e188f2bbba28cd915/tumblr_n1hkstkhtp1qdlh1io1_400.gif"><br />' +
     		'<font size="3" color="03A1B0"><b><i>Félicette</font></i></b><br />' +
     		'<b>nyoooooom gotta go fast to get dat jd boo-tay nyoooooooom</b></center>');
     },

@@ -2608,7 +2608,7 @@ var commands = exports.commands = {
 		var self = this;
 		var type_of_badges = ['admin','dev','vip','artist','mod','leader','champ','creator','concun','twinner','goodra','league'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('The badge '+target+' is not a valid badge.');
-		fs.readFile('config/badges.txt','utf8', function(err, data) {
+		fs.readFile('badges.txt','utf8', function(err, data) {
 			if (err) console.log(err);
 			var match = false;
 			var currentbadges = '';
@@ -2628,7 +2628,7 @@ var commands = exports.commands = {
 				var re = new RegExp(line, 'g');
 				currentbadges = currentbadges.replace(target,'');
 				var newdata = data.replace(re, targetUser.userid+':'+currentbadges);
-				fs.writeFile('config/badges.txt',newdata, 'utf8', function(err, data) {
+				fs.writeFile('badges.txt',newdata, 'utf8', function(err, data) {
 					if (err) console.log(err);
 					return self.sendReply('You have removed the badge '+target+' from the user '+targetUser+'.');
 				});
@@ -2646,7 +2646,7 @@ var commands = exports.commands = {
 		var self = this;
 		var type_of_badges = ['admin','dev','vip','mod','artist','leader','champ','creator','comcun','twinner','league'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('Ther is no badge named '+target+'.');
-		fs.readFile('config/badges.txt', 'utf8', function(err, data) {
+		fs.readFile('badges.txt', 'utf8', function(err, data) {
 			if (err) console.log(err);
 			var currentbadges = '';
 			var line = '';
@@ -2665,13 +2665,13 @@ var commands = exports.commands = {
 				if (badges.indexOf(target) > -1) return self.sendReply('The user '+targerUser+' already has the badge '+target+'.');
 				var re = new RegExp(line, 'g');
 				var newdata = data.replace(re, targetUser.userid+':'+currentbadges+target);
-				fs.writeFile('config/badges.txt', newdata, function(err, data) {
+				fs.writeFile('badges.txt', newdata, function(err, data) {
 					if (err) console.log(err);
 					self.sendReply('You have given the badge '+target+' to the user '+targetUser+'.');
 					targetUser.send('You have recieved the badge '+target+' from the user '+user.userid+'.');
 				});
 			} else {
-				fs.appendFile('config/badges.txt','\n'+targetUser.userid+':'+target, function(err) {
+				fs.appendFile('badges.txt','\n'+targetUser.userid+':'+target, function(err) {
 					if (err) console.log(err);
 					self.sendReply('You have given the badge '+target+' to the user '+targetUser+'.');
 					targetUser.send('You have recieved the badge '+target+' from the user '+user.userid+'.');
@@ -2714,7 +2714,7 @@ var commands = exports.commands = {
                 var twinner='<img src="http://www.smogon.com/media/forums/images/badges/spl.png" title="Badge Tournament Winner">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
                 var self = this;
-                fs.readFile('config/badges.txt', 'utf8', function(err, data) {
+                fs.readFile('badges.txt', 'utf8', function(err, data) {
                 	if (err) console.log(err);
                 	var row = (''+data).split('\n');
                 	var match = false;

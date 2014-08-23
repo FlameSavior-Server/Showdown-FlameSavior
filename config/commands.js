@@ -5185,7 +5185,7 @@ var commands = exports.commands = {
 			return this.parse('/help custompm');
 		}
 
-		this.sendReplyBox('<button name="send" value="/pm ' + targets[0] + ', ' + targets[1] + '">');
+		this.sendReplyBox('<button name="send" value="/pm ' + targets[0] + ', ' + targets[1] + '">Custom PM Box</button>');
 	},
 
 	hangmanhelp: function(target, room, user) {

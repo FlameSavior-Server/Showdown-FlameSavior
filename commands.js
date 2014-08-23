@@ -233,18 +233,21 @@ var commands = exports.commands = {
 
 	hex: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		if(!target){
-			this.sendReplyBox('<center><b>Your name\'s hexcode is:<font color="'+hashColor(''+toId(user.name)+'')+'"> '+hashColor(''+toId(user.name)+''));
+		if (!target) {
+			this.sendReplyBox('<center><b>Your name\'s hexcode is: <font color="' + hashColor('' + toId(user.name) + '') + '">' + hashColor('' + toId(user.name) + ''));
 			return;
 		}
-		if(target.indexOf('#') < 0){
+		if (target.indexOf('#') < 0 && !targetUser) {
 			this.sendReplyBox('Please include the \'#\' symbol');
 			return false;
 		}
+		if (targetUser) {
+			this.sendReplyBox('<center><b>' + targetUser.name + '\'s hexcode is: <font color="' + hashColor('' + toId(targetUser.name) + '') + '">' + hashColor('' + toId(targetUser.name) + ''));
+		}
 		var verify = /^#[0-9A-F]{6}$/i;
-		if(verify.test(target)){
+		if (verify.test(target)) {
 			this.sendReplyBox('<center><b><font size="5" color="' + target + '">' + target + '</font></b></center>');
-		}else{
+		} else {
 			this.sendReplyBox('Could not find a valid color to match your hex code');
 		}
 	},
@@ -621,70 +624,70 @@ var commands = exports.commands = {
 	},
 
 	roomdemote: 'roompromote',
-        roompromote: function(target, room, user, connection, cmd) {
-                if (!room.auth) {
-                        this.sendReply("/roompromote - This room isn't designed for per-room moderation");
-                        return this.sendReply("Before setting room mods, you need to set it up with /roomowner");
-                }
-                if (!target) return this.parse('/help roompromote');
+	roompromote: function(target, room, user, connection, cmd) {
+		if (!room.auth) {
+			this.sendReply("/roompromote - This room isn't designed for per-room moderation");
+			return this.sendReply("Before setting room mods, you need to set it up with /roomowner");
+		}
+		if (!target) return this.parse('/help roompromote');
 
-                var target = this.splitTarget(target, true);
-                var targetUser = this.targetUser;
-                var userid = toId(this.targetUsername);
-                var name = targetUser ? targetUser.name : this.targetUsername;
+		var target = this.splitTarget(target, true);
+		var targetUser = this.targetUser;
+		var userid = toId(this.targetUsername);
+		var name = targetUser ? targetUser.name : this.targetUsername;
 
-                var currentGroup = (room.auth[userid] || ' ');
-                if (!targetUser && !room.auth[userid]) {
-                        return this.sendReply("User '"+this.targetUsername+"' is offline and unauthed, and so can't be promoted.");
-                }
+		var currentGroup = (room.auth[userid] || ' ');
+		if (!targetUser && !room.auth[userid]) {
+			return this.sendReply("User '"+this.targetUsername+"' is offline and unauthed, and so can't be promoted.");
+		}
 
-                var nextGroup = target || Users.getNextGroupSymbol(currentGroup, cmd === 'roomdemote', true);
-                if (target === 'deauth') nextGroup = Config.groupsranking[0];
-                if (!Config.groups[nextGroup]) {
-                        return this.sendReply('Group \'' + nextGroup + '\' does not exist.');
-                }
-                if (currentGroup !== ' ' && !user.can('room'+Config.groups[currentGroup].id, null, room)) {
-                        return this.sendReply('/' + cmd + ' - Access denied for promoting from '+Config.groups[currentGroup].name+'.');
-                }
-                if (nextGroup !== ' ' && !user.can('room'+Config.groups[nextGroup].id, null, room)) {
-                        return this.sendReply('/' + cmd + ' - Access denied for promoting to '+Config.groups[nextGroup].name+'.');
-                }
-                if (currentGroup === nextGroup) {
-                        return this.sendReply("User '"+this.targetUsername+"' is already a "+(Config.groups[nextGroup].name || 'regular user')+" in this room.");
-                }
-                if (Config.groups[nextGroup].globalonly) {
-                        return this.sendReply("The rank of "+Config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
-                }
-                targetUserGroup = ' ';
-                if (Users.usergroups[userid]) {
-					targetUserGroup = Users.usergroups[userid].substr(0,1);
-				}
-                if (Config.groups[nextGroup].rank < Config.groups[targetUserGroup].rank && room.isOfficial && Config.groups[nextGroup].rank > 0) return this.sendReply(name+' is a Global '+Config.groups[targetUserGroup].name+' and can not be demoted to a lower room rank.');
+		var nextGroup = target || Users.getNextGroupSymbol(currentGroup, cmd === 'roomdemote', true);
+		if (target === 'deauth') nextGroup = Config.groupsranking[0];
+		if (!Config.groups[nextGroup]) {
+			return this.sendReply('Group \'' + nextGroup + '\' does not exist.');
+		}
+		if (currentGroup !== ' ' && !user.can('room'+Config.groups[currentGroup].id, null, room)) {
+			return this.sendReply('/' + cmd + ' - Access denied for promoting from '+Config.groups[currentGroup].name+'.');
+		}
+		if (nextGroup !== ' ' && !user.can('room'+Config.groups[nextGroup].id, null, room)) {
+			return this.sendReply('/' + cmd + ' - Access denied for promoting to '+Config.groups[nextGroup].name+'.');
+		}
+		if (currentGroup === nextGroup) {
+			return this.sendReply("User '"+this.targetUsername+"' is already a "+(Config.groups[nextGroup].name || 'regular user')+" in this room.");
+		}
+		if (Config.groups[nextGroup].globalonly) {
+			return this.sendReply("The rank of "+Config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
+		}
+		targetUserGroup = ' ';
+		if (Users.usergroups[userid]) {
+			targetUserGroup = Users.usergroups[userid].substr(0,1);
+		}
+		if (Config.groups[nextGroup].rank < Config.groups[targetUserGroup].rank && room.isOfficial && Config.groups[nextGroup].rank > 0) return this.sendReply(name+' is a Global '+Config.groups[targetUserGroup].name+' and can not be demoted to a lower room rank.');
 
-                var isDemotion = (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank);
-                var groupName = (Config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
+		var isDemotion = (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank);
+		var groupName = (Config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
 
-                if (nextGroup === ' ') {
-                        delete room.auth[userid];
-                } else {
-                        room.auth[userid] = nextGroup;
-                }
+		if (nextGroup === ' ') {
+			delete room.auth[userid];
+		} else {
+			room.auth[userid] = nextGroup;
+		}
 
-                if (isDemotion) {
-                        this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
-                        if (targetUser) {
-                                targetUser.popup('You were appointed to Room ' + groupName + ' by ' + user.name + '.');
-                        }
-                } else {
-                        this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
-                }
-                if (targetUser) {
-                        targetUser.updateIdentity();
-                }
-                if (room.chatRoomData) {
-                        Rooms.global.writeChatRoomData();
-                }
-        },
+		if (isDemotion) {
+			this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
+			if (targetUser) {
+				targetUser.popup('You were appointed to Room ' + groupName + ' by ' + user.name + '.');
+			}
+		} else {
+			this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
+		}
+		if (targetUser) {
+			targetUser.updateIdentity();
+		}
+		if (room.chatRoomData) {
+			Rooms.global.writeChatRoomData();
+		}
+	},
 
 	lockroom: function(target, room, user) {
 		if (!room.auth) {

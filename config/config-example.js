@@ -42,7 +42,7 @@ exports.loginserverpublickey = "-----BEGIN RSA PUBLIC KEY-----\n" +
 
 // crashguardemail - if the server has been running for more than an hour
 // and crashes, send an email using these settings, rather than locking down
-// the server. Uncomment this definition if you wan to use this feature;
+// the server. Uncomment this definition if you want to use this feature;
 // otherwise, all crashes will lock down the server.
 /**exports.crashguardemail = {
 	transport: 'SMTP',
@@ -176,7 +176,6 @@ exports.appealurl = '';
 //     - mute: Muting and unmuting.
 //     - receivemutedpms: Receive PMs from muted users.
 //     - forcerename: /fr command.
-//     - forcerenameto: /frt command.
 //     - redirect: /redir command.
 //     - ip: IP checking.
 //     - alts: Alt checking.
@@ -194,7 +193,6 @@ exports.groups = {
 		name: "Administrator",
 		root: true,
 		globalonly: true,
-		gdeclare: true,
 		rank: 7
 	},
 	'&': {
@@ -210,6 +208,7 @@ exports.groups = {
 		potd: true,
 		disableladder: true,
 		globalonly: true,
+		tournamentsmanagement: true,
 		rank: 6
 	},
 	'#': {
@@ -222,6 +221,7 @@ exports.groups = {
 		declare: true,
 		modchatall: true,
 		roomonly: true,
+		tournamentsmanagement: true,
 		rank: 5
 	},
 	'\u2605': {
@@ -245,6 +245,7 @@ exports.groups = {
 		forcerename: true,
 		ip: true,
 		alts: '@u',
+		tournaments: true,
 		rank: 3
 	},
 	'%': {
@@ -263,6 +264,7 @@ exports.groups = {
 		alts: '%u',
 		bypassblocks: 'u%@&~',
 		receiveauthmessages: true,
+		tournamentsmoderation: true,
 		rank: 2
 	},
 	'+': {

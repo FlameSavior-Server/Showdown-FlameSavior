@@ -93,20 +93,12 @@ if (!fs.existsSync('./config/config.js')) {
 global.Config = require('./config/config.js');
 global.config = Config
 
-var watchFile = function () {
-	try {
-		return fs.watchFile.apply(fs, arguments);
-	} catch (e) {
-		console.log('Your version of node does not support `fs.watchFile`');
-	}
-};
-
 if (Config.watchconfig) {
-	watchFile('./config/config.js', function (curr, prev) {
+	fs.watchFile('./config/config.js', function (curr, prev) {
 		if (curr.mtime <= prev.mtime) return;
 		try {
 			delete require.cache[require.resolve('./config/config.js')];
-			Config = require('./config/config.js');
+			global.Config = require('./config/config.js');
 			console.log('Reloaded config/config.js');
 		} catch (e) {}
 	});
@@ -334,11 +326,6 @@ global.string = function (str) {
 
 global.LoginServer = require('./loginserver.js');
 
-watchFile('./config/custom.css', function (curr, prev) {
-	LoginServer.request('invalidatecss', {}, function () {});
-});
-LoginServer.request('invalidatecss', {}, function () {});
-
 global.Users = require('./users.js');
 
 global.Rooms = require('./rooms.js');
@@ -353,10 +340,10 @@ global.Simulator = require('./simulator.js');
 
 global.trivia = require('./trivia.js');
 
-global.Tournaments = require('./tournaments/middleend.js');
+global.Tournaments = require('./tournaments');
 
 try {
-	global.Dnsbl = require('./dnsbl.js'); 
+	global.Dnsbl = require('./dnsbl.js');
 } catch (e) {
 	global.Dnsbl = {query:function (){}};
 }

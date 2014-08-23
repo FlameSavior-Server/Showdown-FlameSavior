@@ -54,7 +54,7 @@ exports.BattleFormats = {
 	},
 	standardubers: {
 		effectType: 'Banlist',
-		ruleset: ['Sleep Clause Mod', 'Species Clause', 'Moody Clause', 'Swagger Clause', 'OHKO Clause', 'Endless Battle Clause', 'HP Percentage Mod'],
+		ruleset: ['Sleep Clause Mod', 'Species Clause', 'Moody Clause', 'OHKO Clause', 'Endless Battle Clause', 'HP Percentage Mod'],
 		banlist: ['Unreleased', 'Illegal', 'Huntail + Shell Smash + Sucker Punch', 'Leavanny + Knock Off + Sticky Web', 'Sylveon + Hyper Voice + Heal Bell + Wish + Baton Pass']
 	},
 	standardgbu: {
@@ -88,7 +88,8 @@ exports.BattleFormats = {
 			'Genesect',
 			'Xerneas',
 			'Yveltal',
-			'Zygarde'
+			'Zygarde',
+			'Diancie'
 		]
 	},
 	standarddoubles: {
@@ -102,6 +103,7 @@ exports.BattleFormats = {
 			var item = this.getItem(set.item);
 			var template = this.getTemplate(set.species);
 			var problems = [];
+			var totalEV = 0;
 
 			if (set.species === set.name) delete set.name;
 			if (template.gen > this.gen) {
@@ -114,12 +116,14 @@ exports.BattleFormats = {
 					problems.push(ability.name + ' does not exist in gen ' + this.gen + '.');
 				}
 			}
-			if (set.moves) for (var i = 0; i < set.moves.length; i++) {
-				var move = this.getMove(set.moves[i]);
-				if (move.gen > this.gen) {
-					problems.push(move.name + ' does not exist in gen ' + this.gen + '.');
-				} else if (!isNonstandard && move.isNonstandard) {
-					problems.push(move.name + ' is not a real move.');
+			if (set.moves) {
+				for (var i = 0; i < set.moves.length; i++) {
+					var move = this.getMove(set.moves[i]);
+					if (move.gen > this.gen) {
+						problems.push(move.name + ' does not exist in gen ' + this.gen + '.');
+					} else if (!isNonstandard && move.isNonstandard) {
+						problems.push(move.name + ' is not a real move.');
+					}
 				}
 			}
 			if (item.gen > this.gen) {
@@ -143,10 +147,25 @@ exports.BattleFormats = {
 					problems.push(item.name + ' is not a real item.');
 				}
 			}
+			for (var k in set.evs) {
+				if (typeof set.evs[k] !== 'number' || set.evs[k] < 0) {
+					set.evs[k] = 0;
+				}
+				totalEV += set.evs[k];
+			}
+			// In gen 6, it is impossible to battle other players with pokemon that break the EV limit
+			if (totalEV > 510 && this.gen >= 6) {
+				problems.push((set.name || set.species) + " has more than 510 total EVs.");
+			}
 
 			// ----------- legality line ------------------------------------------
 			if (!format.banlistTable || !format.banlistTable['illegal']) return problems;
 			// everything after this line only happens if we're doing legality enforcement
+
+			// only in gen 1 and 2 it was legal to max out all EVs
+			if (this.gen >= 3 && totalEV > 510) {
+				problems.push((set.name || set.species) + " has more than 510 total EVs.");
+			}
 
 			// limit one of each move
 			var moves = [];
@@ -473,7 +492,7 @@ exports.BattleFormats = {
 		effectType: 'Rule',
 		name: 'HP Percentage Mod',
 		onStart: function () {
-			this.add('rule', 'HP Percentage Mod: HP is reported as percentages');
+			this.add('rule', 'HP Percentage Mod: HP is shown in percentages');
 			this.reportPercentages = true;
 		}
 	},

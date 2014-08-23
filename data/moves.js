@@ -268,7 +268,7 @@ exports.BattleMovedex = {
 			var newPosition = (pokemon.position === 0 ? pokemon.side.active.length - 1 : 0);
 			if (!pokemon.side.active[newPosition]) return false;
 			if (pokemon.side.active[newPosition].fainted) return false;
-			this.swapPosition(pokemon, newPosition, 'move: Ally Switch');
+			this.swapPosition(pokemon, newPosition, '[from] move: Ally Switch');
 		},
 		secondary: false,
 		target: "self",
@@ -1068,8 +1068,8 @@ exports.BattleMovedex = {
 		pp: 5,
 		priority: 0,
 		isBounceable: true,
-		onHit: function (target) {
-			if (!target.addVolatile('trapped')) {
+		onHit: function (target, source, move) {
+			if (!target.addVolatile('trapped', source, move, 'trapper')) {
 				this.add('-fail', target);
 			}
 		},
@@ -4613,7 +4613,7 @@ exports.BattleMovedex = {
 		onHit: function (target) {
 			if (target.hasType('Grass')) return false;
 			if (!target.addType('Grass')) return false;
-			this.add('-start', target, 'typechange', target.getTypes(true).join('/'), '[from] move: Forest\'s Curse');
+			this.add('-start', target, 'typeadd', 'Grass', '[from] move: Forest\'s Curse');
 		},
 		secondary: false,
 		target: "normal",
@@ -5731,16 +5731,16 @@ exports.BattleMovedex = {
 			},
 			onModifyPokemon: function (pokemon) {
 				var disabledMoves = {healingwish:1, lunardance:1, rest:1, swallow:1, wish:1};
-				var moves = pokemon.moveset;
-				for (var i = 0; i < moves.length; i++) {
-					if (disabledMoves[moves[i].id] || this.getMove(moves[i].id).heal) {
-						pokemon.disabledMoves[moves[i].id] = true;
+				var move;
+				for (var i = 0; i < pokemon.moveset.length; i++) {
+					if (disabledMoves[pokemon.moveset[i].id] || (move = this.getMove(pokemon.moveset[i].id)).heal || move.drain) {
+						pokemon.disabledMoves[pokemon.moveset[i].id] = true;
 					}
 				}
 			},
 			onBeforeMove: function (pokemon, target, move) {
 				var disabledMoves = {healingwish:1, lunardance:1, rest:1, swallow:1, wish:1};
-				if (disabledMoves[move.id] || move.heal) {
+				if (disabledMoves[move.id] || move.heal || move.drain) {
 					this.add('cant', pokemon, 'move: Heal Block', move);
 					return false;
 				}
@@ -7996,8 +7996,8 @@ exports.BattleMovedex = {
 		pp: 5,
 		priority: 0,
 		isBounceable: true,
-		onHit: function (target) {
-			if (!target.addVolatile('trapped')) {
+		onHit: function (target, source, move) {
+			if (!target.addVolatile('trapped', source, move, 'trapper')) {
 				this.add('-fail', target);
 			}
 		},
@@ -8967,7 +8967,6 @@ exports.BattleMovedex = {
 		priority: 0,
 		volatileStatus: 'nightmare',
 		effect: {
-			onResidualOrder: 9,
 			onStart: function (pokemon) {
 				if (pokemon.status !== 'slp') {
 					return false;
@@ -10466,7 +10465,7 @@ exports.BattleMovedex = {
 		onHit: function (pokemon) {
 			if (!pokemon.item && pokemon.lastItem) {
 				pokemon.setItem(pokemon.lastItem);
-				this.add("-item", pokemon, pokemon.item, '[from] move: Recycle');
+				this.add("-item", pokemon, pokemon.getItem(), '[from] move: Recycle');
 			} else return false;
 		},
 		secondary: false,
@@ -11852,13 +11851,13 @@ exports.BattleMovedex = {
 				return;
 			}
 			this.add('-prepare', attacker, move.name, defender);
+			this.boost({def:1}, attacker, attacker, this.getMove('skullbash'));
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				this.add('-anim', attacker, move.name, defender);
 				attacker.removeVolatile(move.id);
 				return;
 			}
 			attacker.addVolatile('twoturnmove', defender);
-			this.boost({def:1}, attacker, attacker, this.getMove('skullbash'));
 			return null;
 		},
 		secondary: false,
@@ -12538,8 +12537,8 @@ exports.BattleMovedex = {
 		pp: 10,
 		priority: 0,
 		isBounceable: true,
-		onHit: function (target) {
-			if (!target.addVolatile('trapped')) {
+		onHit: function (target, source, move) {
+			if (!target.addVolatile('trapped', source, move, 'trapper')) {
 				this.add('-fail', target);
 			}
 		},
@@ -12984,7 +12983,7 @@ exports.BattleMovedex = {
 			}
 		},
 		secondary: false,
-		target: "normal",
+		target: "randomNormal",
 		type: "Normal"
 	},
 	"strugglebug": {
@@ -13752,8 +13751,8 @@ exports.BattleMovedex = {
 		pp: 10,
 		priority: 0,
 		isUnreleased: true,
-		onHit: function (target) {
-			target.addVolatile('trapped');
+		onHit: function (target, source, move) {
+			target.addVolatile('trapped', source, move, 'trapper');
 		},
 		secondary: false,
 		target: "normal",
@@ -14141,7 +14140,7 @@ exports.BattleMovedex = {
 		onHit: function (target) {
 			if (target.hasType('Ghost')) return false;
 			if (!target.addType('Ghost')) return false;
-			this.add('-start', target, 'typechange', target.getTypes(true).join('/'), '[from] move: Trick-or-Treat');
+			this.add('-start', target, 'typeadd', 'Ghost', '[from] move: Trick-or-Treat');
 		},
 		secondary: false,
 		target: "normal",
@@ -14334,16 +14333,14 @@ exports.BattleMovedex = {
 		},
 		effect: {
 			duration: 3,
+			onStart: function (target) {
+				this.add('-start', target, 'Uproar');
+			},
 			onResidual: function (target) {
 				if (target.lastMove === 'struggle') {
 					// don't lock
 					delete target.volatiles['uproar'];
 				}
-			},
-			onStart: function (target) {
-				this.add('-start', target, 'Uproar');
-			},
-			onResidual: function (target) {
 				this.add('-start', target, 'Uproar', '[upkeep]');
 			},
 			onEnd: function (target) {

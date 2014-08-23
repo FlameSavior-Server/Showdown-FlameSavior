@@ -2037,7 +2037,7 @@ var commands = exports.commands = {
 
 	gc: 'viewcode',
 	viewcode: 'vc',
-	vc: function(target, room, user, connection) {
+	vc: function (target, room, user, connection) {
 		var codes = fs.readFileSync('config/friendcodes.txt','utf8');
 		return user.send('|popup|'+codes);
 	},
@@ -2050,7 +2050,7 @@ var commands = exports.commands = {
 	sleeping: 'away',
 	busy: 'away',
 	afk: 'away',
-	away: function(target, room, user, connection, cmd) {
+	away: function (target, room, user, connection, cmd) {
 		if (!this.can('away')) return false;
 		// unicode away message idea by Siiilver
 		var t = 'Ⓐⓦⓐⓨ';
@@ -2118,7 +2118,7 @@ var commands = exports.commands = {
 		user.updateIdentity();
 	},
 
-	back: function(target, room, user, connection) {
+	back: function (target, room, user, connection) {
 		if (!this.can('away')) return false;
 
 		if (user.isAway) {
@@ -2151,7 +2151,7 @@ var commands = exports.commands = {
 
 	getid: 'showuserid',
 	userid: 'showuserid',
-	showuserid: function(target, room, user) {
+	showuserid: function (target, room, user) {
 		if (!target) return this.parse('/help showuserid');
 
 		target = this.splitTarget(target);
@@ -2163,7 +2163,7 @@ var commands = exports.commands = {
 	},
 
 	uui: 'userupdate',
-	userupdate: function(target, room, user) {
+	userupdate: function (target, room, user) {
 		if (!target) return this.sendReply('/userupdate [username] OR /uui [username] - Updates the user identity fixing the users shown group.');
 		if (!this.can('hotpatch')) return false;
 
@@ -2175,32 +2175,32 @@ var commands = exports.commands = {
 		this.sendReply(targetUser + '\'s identity has been updated.');
 	},
 
-	usersofrank: function(target, room, user) {
+	usersofrank: function (target, room, user) {
 		if (!target) return false;
 		var name = '';
 
-		for (var i in Users.users){
-			if (Users.users[i].group === target) {
-				name = name + Users.users[i].name + ', ';
+		var Users = Users.users;
+		for (var i in Users) {
+			if (Users.[i].group === target) {
+				name = name + Users[i].name.join(', ');
 			}
 		}
-		if (!name) return this.sendReply('There are no users of the rank ' + target);
+		if (!name) return this.sendReply('There are no users of the rank ' + target + ' currently online.');
 
-		this.sendReply('Users of rank ' + target);
-		this.sendReply(name);
+		this.sendReplyBox('<b>Users of rank ' + target + ':</b> ' + name);
 	},
 
-	userinrooms: function(target, room, user) {
+	userinrooms: function (target, room, user) {
 		if (!this.can('permaban')) return false;
 		var targetUser = this.targetUserOrSelf(target);
 		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
+			return this.sendReply('User ' + this.targetUsername + ' not found.');
 		}
-		if (targetUser.frostDev) return this.sendReply('You can\'t view the private rooms of a developer.');
-		this.sendReply('User: '+targetUser.name);
+		if (targetUser.frostDev) return this.sendReply('You can\'t view the private rooms of a Developer.');
+		this.sendReply('User: ' + targetUser.name);
 
 		var output = 'In rooms: ';
-		var output2 = 'Private Rooms: ';
+		var output2 = 'Private rooms: ';
 		var first = true;
 
 		for (var i in targetUser.roomCount) {
@@ -2209,13 +2209,14 @@ var commands = exports.commands = {
 			if (!first && Rooms.get(i).isPrivate) output2 += ' | ';
 			first = false;
 			if (Rooms.get(i).isPrivate) {
-				output2 += '<a href="/'+i+'" room="'+i+'">'+i+'</a>';
+				output2 += '<a href="/' + i + '" room="' + i + '">' + i + '</a>';
 			}
 			else if (!Rooms.get(i).isPrivate) {
-				output += '<a href="/'+i+'" room="'+i+'">'+i+'</a>';
+				output += '<a href="/' + i + '" room="' + i + '">' + i + '</a>';
 			}
 		}
-		this.sendReply('|raw|'+output+'<br />'+output2);
+
+		this.sendReplyBox(output + '<br />' + output2);
 	},
 
 	masspm: 'pmall',

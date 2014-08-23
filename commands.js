@@ -49,7 +49,7 @@ var commands = exports.commands = {
 
 	friends: function(target, room, user, connection) {
 		if (!user.customClient) {
-			return this.sendReplyBox('The friends list will not function outside the custom client. Click Click <button name="send" value="/abc123">here</button> to use it.');
+			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
 		}
 
 		var data = fs.readFileSync('config/friends.csv','utf8')
@@ -66,37 +66,38 @@ var commands = exports.commands = {
 				if (match === true) {
 					break;
 				}
-				}
 			}
-			if (match === true) {
-				var list = [];
-				var friendList = friends.split(' ');
-				for (var i = 0; i < friendList.length; i++) {
-					if(Users.get(friendList[i])) {
-						if(Users.get(friendList[i]).connected) {
-							list.push(friendList[i]);
-						}
+		}
+		if (match === true) {
+			var list = [];
+			var friendList = friends.split(' ');
+			for (var i = 0; i < friendList.length; i++) {
+				if (Users.get(friendList[i])) {
+					if (Users.get(friendList[i]).connected) {
+						list.push(friendList[i]);
 					}
 				}
-				if (list[0] === undefined) {
-					return this.sendReply('You have no online friends.');
-				}
-				var buttons = '';
-				for (var i = 0; i < list.length; i++) {
-					buttons = buttons + '<button name = "openUser" value = "' + Users.get(list[i]).userid + '">' + Users.get(list[i]).name + '</button>';
-				}
-				this.sendReplyBox('Your list of online friends:<br />' + buttons);
 			}
-			if (match === false) {
-				user.send('You have no friends to show.');
+			if (list[0] === undefined) {
+				return this.sendReply('You have no online friends.');
 			}
+			var buttons = '';
+			for (var i = 0; i < list.length; i++) {
+				buttons = buttons + '<button name = "openUser" value = "' + Users.get(list[i]).userid + '">' + Users.get(list[i]).name + '</button>';
+			}
+			this.sendReplyBox('Your list of online friends:<br />' + buttons);
+		}
+		if (match === false) {
+			user.send('You have no friends to show.');
+		}
 	},
 
 	addfriend: function(target, room, user, connection) {
 		if (!user.customClient) {
-			return this.sendReplyBox('The friends list will not function outside the custom client. Click Click <button name="send" value="/abc123">here</button> to use it.');
+			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
 		}
-		if(!target) return this.parse('/help addfriend');
+
+		if (!target) return this.parse('/help addfriend');
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) {
@@ -148,9 +149,10 @@ var commands = exports.commands = {
 
 	removefriend: function(target, room, user, connection) {
 		if (!user.customClient) {
-			return this.sendReplyBox('The friends list will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
+			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
 		}
-		if(!target) return this.parse('/help removefriend');
+
+		if (!target) return this.parse('/help removefriend');
 		var noCaps = target.toLowerCase();
 		var idFormat = toId(target);
 		var data = fs.readFileSync('config/friends.csv','utf8')
@@ -186,7 +188,7 @@ var commands = exports.commands = {
 			return this.sendReply('This user doesn\'t appear to be in your friends. Make sure you spelled their username right.');
 		}
 		this.sendReply(idFormat + ' was removed from your friends list.');
-		if(Users.get(target).connected) {
+		if (Users.get(target).connected) {
 			Users.get(target).send(user.name + ' has removed you from their friends list.');
 		}
 	},
@@ -2239,6 +2241,24 @@ var commands = exports.commands = {
 			}
 		}
 	},
+
+	/*friendpm: 'pmfriends',
+	friendspm: 'pmfriends',
+	pmfriend: 'pmfriends',
+	pmfriends: function(target, room, user) {
+		if (!user.customClient) {
+			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
+		}
+
+		if (!target) return this.sendReply('/pmfriends [message] - Sends a PM to all of your friends online.');
+
+		for (var i = 0; i < friendList.length; i++) {
+			if (Users.get(friendList[i])) {
+				if (Users.get(friendList[i]).connected) continue;
+				Users.get(friendList[i]).send('|pm|' + user.group + '' + user.name + '|' + Users.get(friendList[i]).getIdentity() + '|' + target);
+			}
+		}
+	},*/
 
 	savelearnsets: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;

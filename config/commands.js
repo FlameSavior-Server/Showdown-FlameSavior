@@ -5044,6 +5044,7 @@ var commands = exports.commands = {
 		var count = 0;
 		for (var u in Tools.data.Pokedex) {
 			var pokemon = Tools.getTemplate(u);
+			if (pokemon.tier !== 'OU') continue;
 			if (pokemon.color.toLowerCase() !== cmd) continue;
 			if (pokemon.forme == '') output += '<td><img title="'+Tools.escapeHTML(pokemon.name)+'" src="http://play.pokemonshowdown.com/sprites/bw/'+pokemon.id+'.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
 			if (pokemon.forme !== '' && pokemon.id !== 'basculinbluestriped' && pokemon.id !== 'pichuspikyeared') output += '<td><img title="'+Tools.escapeHTML(pokemon.name)+'" src="http://play.pokemonshowdown.com/sprites/bw/'+pokemon.baseSpecies.toLowerCase()+'-'+pokemon.forme.toLowerCase()+'.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';

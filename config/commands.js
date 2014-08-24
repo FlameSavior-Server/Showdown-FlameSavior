@@ -1863,7 +1863,7 @@ var commands = exports.commands = {
     	this.sendReplyBox('<center><img src="https://38.media.tumblr.com/tumblr_mb1dgpivmF1rcwf0xo2_500.gif" height="100" width="100">' +
     		'<img src="http://i.imgur.com/foDX5P5.png">' +
     		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/meloetta.gif"><br />' +
-    		'<b>Ace:</b> Tempesta & SmallBootyHoe<br />' +
+    		'<b>Ace:</b> Tempesta &lt; SmallBootyHoe<br />' +
     		'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>');
     },
 

@@ -1858,6 +1858,14 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	kafka: function(target, room, user) {
+        if (!this.canBroadcast()) return ;
+        return this.sendReplyBox('<center><img src="http://i.imgur.com/bvCvPmd.gif"><br />' +
+        	'<font size="3" color="#00CC33"><b><i>Kafka</i></font></b></font><br />' +
+        	'<b><blink>Ace: Shimmy </blink></b><br />' +
+        	'<b>Now I have a tc on two servers, topkek</b></center>');
+        },
+
 	ima: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><b><font size="3">gg</b></font><br /><img src="http://i.imgur.com/0j2NKtN.png" height="200">' +

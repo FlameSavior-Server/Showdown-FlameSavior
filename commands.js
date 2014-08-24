@@ -2176,18 +2176,18 @@ var commands = exports.commands = {
 	},
 
 	usersofrank: function (target, room, user) {
-		if (!target) return false;
-		var name = '';
+		if (!target || !Config.groups[target]) return false;
+		var names = [];
 
-		var Users = Users.users;
-		for (var i in Users) {
-			if (Users.[i].group === target) {
-				name = name + Users[i].name.join(', ');
+		for (var i in Users.users) {
+			if (!Users.users[i].connected) continue;
+			if (Users.users[i].group === target) {
+				names.push(Users.users[i].name);
 			}
 		}
-		if (!name) return this.sendReply('There are no users of the rank ' + target + ' currently online.');
+		if (names.length < 1) return this.sendReply('There are no users of the rank "' + Tools.escapeHTML(Config.groups[target].name) + '" currently online.');
 
-		this.sendReplyBox('<b>Users of rank ' + target + ':</b> ' + name);
+		user.popup('There is **' + names.length + '** users with the rank "' + Config.groups[target].name+'"\n Those users are: \n'+names.join(','));
 	},
 
 	userinrooms: function (target, room, user) {

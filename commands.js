@@ -4247,7 +4247,6 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Server management commands
 	 *********************************************************/
-
 	hotpatch: function (target, room, user) {
 		if (!target) return this.parse('/help hotpatch');
 		if (!this.can('hotpatch')) return false;
@@ -4259,16 +4258,13 @@ var commands = exports.commands = {
 			try {
 				CommandParser.uncacheTree('./command-parser.js');
 				global.CommandParser = require('./command-parser.js');
-
-				CommandParser.uncacheTree('./hangman.js');
-                hangman = require('./hangman.js').hangman(hangman);
-
-                CommandParser.uncacheTree('./core.js');
-                Core = require('./core.js').core;
-
-                CommandParser.uncacheTree('./economy.js');
-                economy = require('./economy.js');
-
+					
+				CommandParser.uncacheTree('./economy.js');
+                		economy = require('./economy.js');
+                		
+                		CommandParser.uncacheTree('./hangman.js');
+                		hangman = require('./hangman.js').hangman(hangman);
+                		
 				var runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments');
 				global.Tournaments = require('./tournaments');

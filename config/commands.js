@@ -1858,13 +1858,22 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	arifeen: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="https://38.media.tumblr.com/tumblr_mb1dgpivmF1rcwf0xo2_500.gif" height="100" width="100">' +
+    		'<img src="http://i.imgur.com/foDX5P5.png">' +
+    		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/meloetta.gif"><br />' +
+    		'<b>Ace:</b> Tempesta & SmallBootyHoe<br />' +
+    		'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>');
+    },
+
 	kafka: function(target, room, user) {
         if (!this.canBroadcast()) return ;
-        return this.sendReplyBox('<center><img src="http://i.imgur.com/bvCvPmd.gif"><br />' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/bvCvPmd.gif"><br />' +
         	'<font size="3" color="#00CC33"><b><i>Kafka</i></font></b></font><br />' +
         	'<b><blink>Ace: Shimmy </blink></b><br />' +
         	'<b>Now I have a tc on two servers, topkek</b></center>');
-        },
+    },
 
 	ima: function(target, room, user) {
     	if (!this.canBroadcast()) return;

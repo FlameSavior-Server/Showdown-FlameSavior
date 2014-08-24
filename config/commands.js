@@ -2684,7 +2684,7 @@ var commands = exports.commands = {
 			'Analyze, Adapt, Assimilate. I am <i><b>X-Bane.</b></i></center>');
 	},
 
-	bosswrath: function(target, room, user) {
+	wrath: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Juhmirh.gif" width="150">' +
 			'<img src="http://i.imgur.com/uQClQ0R.gif">' +

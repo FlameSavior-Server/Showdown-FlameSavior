@@ -49,7 +49,7 @@ var commands = exports.commands = {
 
 	friends: function(target, room, user, connection) {
 		if (!user.customClient) {
-			return this.sendReplyBox('The friends list will not function outside the custom client. Click Click <button name="send" value="/abc123">here</button> to use it.');
+			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
 		}
 
 		var data = fs.readFileSync('config/friends.csv','utf8')
@@ -66,37 +66,38 @@ var commands = exports.commands = {
 				if (match === true) {
 					break;
 				}
-				}
 			}
-			if (match === true) {
-				var list = [];
-				var friendList = friends.split(' ');
-				for (var i = 0; i < friendList.length; i++) {
-					if(Users.get(friendList[i])) {
-						if(Users.get(friendList[i]).connected) {
-							list.push(friendList[i]);
-						}
+		}
+		if (match === true) {
+			var list = [];
+			var friendList = friends.split(' ');
+			for (var i = 0; i < friendList.length; i++) {
+				if (Users.get(friendList[i])) {
+					if (Users.get(friendList[i]).connected) {
+						list.push(friendList[i]);
 					}
 				}
-				if (list[0] === undefined) {
-					return this.sendReply('You have no online friends.');
-				}
-				var buttons = '';
-				for (var i = 0; i < list.length; i++) {
-					buttons = buttons + '<button name = "openUser" value = "' + Users.get(list[i]).userid + '">' + Users.get(list[i]).name + '</button>';
-				}
-				this.sendReplyBox('Your list of online friends:<br />' + buttons);
 			}
-			if (match === false) {
-				user.send('You have no friends to show.');
+			if (list[0] === undefined) {
+				return this.sendReply('You have no online friends.');
 			}
+			var buttons = '';
+			for (var i = 0; i < list.length; i++) {
+				buttons = buttons + '<button name = "openUser" value = "' + Users.get(list[i]).userid + '">' + Users.get(list[i]).name + '</button>';
+			}
+			this.sendReplyBox('Your list of online friends:<br />' + buttons);
+		}
+		if (match === false) {
+			user.send('You have no friends to show.');
+		}
 	},
 
 	addfriend: function(target, room, user, connection) {
 		if (!user.customClient) {
-			return this.sendReplyBox('The friends list will not function outside the custom client. Click Click <button name="send" value="/abc123">here</button> to use it.');
+			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
 		}
-		if(!target) return this.parse('/help addfriend');
+
+		if (!target) return this.parse('/help addfriend');
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) {
@@ -148,9 +149,10 @@ var commands = exports.commands = {
 
 	removefriend: function(target, room, user, connection) {
 		if (!user.customClient) {
-			return this.sendReplyBox('The friends list will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
+			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
 		}
-		if(!target) return this.parse('/help removefriend');
+
+		if (!target) return this.parse('/help removefriend');
 		var noCaps = target.toLowerCase();
 		var idFormat = toId(target);
 		var data = fs.readFileSync('config/friends.csv','utf8')
@@ -186,7 +188,7 @@ var commands = exports.commands = {
 			return this.sendReply('This user doesn\'t appear to be in your friends. Make sure you spelled their username right.');
 		}
 		this.sendReply(idFormat + ' was removed from your friends list.');
-		if(Users.get(target).connected) {
+		if (Users.get(target).connected) {
 			Users.get(target).send(user.name + ' has removed you from their friends list.');
 		}
 	},
@@ -233,18 +235,21 @@ var commands = exports.commands = {
 
 	hex: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		if(!target){
-			this.sendReplyBox('<center><b>Your name\'s hexcode is:<font color="'+hashColor(''+toId(user.name)+'')+'"> '+hashColor(''+toId(user.name)+''));
+		if (!target) {
+			this.sendReplyBox('<center><b>Your name\'s hexcode is: <font color="' + hashColor('' + toId(user.name) + '') + '">' + hashColor('' + toId(user.name) + ''));
 			return;
 		}
-		if(target.indexOf('#') < 0){
+		if (target.indexOf('#') < 0 && !targetUser) {
 			this.sendReplyBox('Please include the \'#\' symbol');
 			return false;
 		}
+		if (targetUser) {
+			this.sendReplyBox('<center><b>' + targetUser.name + '\'s hexcode is: <font color="' + hashColor('' + toId(targetUser.name) + '') + '">' + hashColor('' + toId(targetUser.name) + ''));
+		}
 		var verify = /^#[0-9A-F]{6}$/i;
-		if(verify.test(target)){
+		if (verify.test(target)) {
 			this.sendReplyBox('<center><b><font size="5" color="' + target + '">' + target + '</font></b></center>');
-		}else{
+		} else {
 			this.sendReplyBox('Could not find a valid color to match your hex code');
 		}
 	},
@@ -621,70 +626,70 @@ var commands = exports.commands = {
 	},
 
 	roomdemote: 'roompromote',
-        roompromote: function(target, room, user, connection, cmd) {
-                if (!room.auth) {
-                        this.sendReply("/roompromote - This room isn't designed for per-room moderation");
-                        return this.sendReply("Before setting room mods, you need to set it up with /roomowner");
-                }
-                if (!target) return this.parse('/help roompromote');
+	roompromote: function(target, room, user, connection, cmd) {
+		if (!room.auth) {
+			this.sendReply("/roompromote - This room isn't designed for per-room moderation");
+			return this.sendReply("Before setting room mods, you need to set it up with /roomowner");
+		}
+		if (!target) return this.parse('/help roompromote');
 
-                var target = this.splitTarget(target, true);
-                var targetUser = this.targetUser;
-                var userid = toId(this.targetUsername);
-                var name = targetUser ? targetUser.name : this.targetUsername;
+		var target = this.splitTarget(target, true);
+		var targetUser = this.targetUser;
+		var userid = toId(this.targetUsername);
+		var name = targetUser ? targetUser.name : this.targetUsername;
 
-                var currentGroup = (room.auth[userid] || ' ');
-                if (!targetUser && !room.auth[userid]) {
-                        return this.sendReply("User '"+this.targetUsername+"' is offline and unauthed, and so can't be promoted.");
-                }
+		var currentGroup = (room.auth[userid] || ' ');
+		if (!targetUser && !room.auth[userid]) {
+			return this.sendReply("User '"+this.targetUsername+"' is offline and unauthed, and so can't be promoted.");
+		}
 
-                var nextGroup = target || Users.getNextGroupSymbol(currentGroup, cmd === 'roomdemote', true);
-                if (target === 'deauth') nextGroup = Config.groupsranking[0];
-                if (!Config.groups[nextGroup]) {
-                        return this.sendReply('Group \'' + nextGroup + '\' does not exist.');
-                }
-                if (currentGroup !== ' ' && !user.can('room'+Config.groups[currentGroup].id, null, room)) {
-                        return this.sendReply('/' + cmd + ' - Access denied for promoting from '+Config.groups[currentGroup].name+'.');
-                }
-                if (nextGroup !== ' ' && !user.can('room'+Config.groups[nextGroup].id, null, room)) {
-                        return this.sendReply('/' + cmd + ' - Access denied for promoting to '+Config.groups[nextGroup].name+'.');
-                }
-                if (currentGroup === nextGroup) {
-                        return this.sendReply("User '"+this.targetUsername+"' is already a "+(Config.groups[nextGroup].name || 'regular user')+" in this room.");
-                }
-                if (Config.groups[nextGroup].globalonly) {
-                        return this.sendReply("The rank of "+Config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
-                }
-                targetUserGroup = ' ';
-                if (Users.usergroups[userid]) {
-					targetUserGroup = Users.usergroups[userid].substr(0,1);
-				}
-                if (Config.groups[nextGroup].rank < Config.groups[targetUserGroup].rank && room.isOfficial && Config.groups[nextGroup].rank > 0) return this.sendReply(name+' is a Global '+Config.groups[targetUserGroup].name+' and can not be demoted to a lower room rank.');
+		var nextGroup = target || Users.getNextGroupSymbol(currentGroup, cmd === 'roomdemote', true);
+		if (target === 'deauth') nextGroup = Config.groupsranking[0];
+		if (!Config.groups[nextGroup]) {
+			return this.sendReply('Group \'' + nextGroup + '\' does not exist.');
+		}
+		if (currentGroup !== ' ' && !user.can('room'+Config.groups[currentGroup].id, null, room)) {
+			return this.sendReply('/' + cmd + ' - Access denied for promoting from '+Config.groups[currentGroup].name+'.');
+		}
+		if (nextGroup !== ' ' && !user.can('room'+Config.groups[nextGroup].id, null, room)) {
+			return this.sendReply('/' + cmd + ' - Access denied for promoting to '+Config.groups[nextGroup].name+'.');
+		}
+		if (currentGroup === nextGroup) {
+			return this.sendReply("User '"+this.targetUsername+"' is already a "+(Config.groups[nextGroup].name || 'regular user')+" in this room.");
+		}
+		if (Config.groups[nextGroup].globalonly) {
+			return this.sendReply("The rank of "+Config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
+		}
+		targetUserGroup = ' ';
+		if (Users.usergroups[userid]) {
+			targetUserGroup = Users.usergroups[userid].substr(0,1);
+		}
+		if (Config.groups[nextGroup].rank < Config.groups[targetUserGroup].rank && room.isOfficial && Config.groups[nextGroup].rank > 0) return this.sendReply(name+' is a Global '+Config.groups[targetUserGroup].name+' and can not be demoted to a lower room rank.');
 
-                var isDemotion = (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank);
-                var groupName = (Config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
+		var isDemotion = (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank);
+		var groupName = (Config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
 
-                if (nextGroup === ' ') {
-                        delete room.auth[userid];
-                } else {
-                        room.auth[userid] = nextGroup;
-                }
+		if (nextGroup === ' ') {
+			delete room.auth[userid];
+		} else {
+			room.auth[userid] = nextGroup;
+		}
 
-                if (isDemotion) {
-                        this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
-                        if (targetUser) {
-                                targetUser.popup('You were appointed to Room ' + groupName + ' by ' + user.name + '.');
-                        }
-                } else {
-                        this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
-                }
-                if (targetUser) {
-                        targetUser.updateIdentity();
-                }
-                if (room.chatRoomData) {
-                        Rooms.global.writeChatRoomData();
-                }
-        },
+		if (isDemotion) {
+			this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
+			if (targetUser) {
+				targetUser.popup('You were appointed to Room ' + groupName + ' by ' + user.name + '.');
+			}
+		} else {
+			this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
+		}
+		if (targetUser) {
+			targetUser.updateIdentity();
+		}
+		if (room.chatRoomData) {
+			Rooms.global.writeChatRoomData();
+		}
+	},
 
 	lockroom: function(target, room, user) {
 		if (!room.auth) {
@@ -2032,7 +2037,7 @@ var commands = exports.commands = {
 
 	gc: 'viewcode',
 	viewcode: 'vc',
-	vc: function(target, room, user, connection) {
+	vc: function (target, room, user, connection) {
 		var codes = fs.readFileSync('config/friendcodes.txt','utf8');
 		return user.send('|popup|'+codes);
 	},
@@ -2045,7 +2050,7 @@ var commands = exports.commands = {
 	sleeping: 'away',
 	busy: 'away',
 	afk: 'away',
-	away: function(target, room, user, connection, cmd) {
+	away: function (target, room, user, connection, cmd) {
 		if (!this.can('away')) return false;
 		// unicode away message idea by Siiilver
 		var t = 'Ⓐⓦⓐⓨ';
@@ -2113,7 +2118,7 @@ var commands = exports.commands = {
 		user.updateIdentity();
 	},
 
-	back: function(target, room, user, connection) {
+	back: function (target, room, user, connection) {
 		if (!this.can('away')) return false;
 
 		if (user.isAway) {
@@ -2146,7 +2151,7 @@ var commands = exports.commands = {
 
 	getid: 'showuserid',
 	userid: 'showuserid',
-	showuserid: function(target, room, user) {
+	showuserid: function (target, room, user) {
 		if (!target) return this.parse('/help showuserid');
 
 		target = this.splitTarget(target);
@@ -2158,7 +2163,7 @@ var commands = exports.commands = {
 	},
 
 	uui: 'userupdate',
-	userupdate: function(target, room, user) {
+	userupdate: function (target, room, user) {
 		if (!target) return this.sendReply('/userupdate [username] OR /uui [username] - Updates the user identity fixing the users shown group.');
 		if (!this.can('hotpatch')) return false;
 
@@ -2170,32 +2175,32 @@ var commands = exports.commands = {
 		this.sendReply(targetUser + '\'s identity has been updated.');
 	},
 
-	usersofrank: function(target, room, user) {
+	usersofrank: function (target, room, user) {
 		if (!target) return false;
 		var name = '';
 
-		for (var i in Users.users){
-			if (Users.users[i].group === target) {
-				name = name + Users.users[i].name + ', ';
+		var Users = Users.users;
+		for (var i in Users) {
+			if (Users.[i].group === target) {
+				name = name + Users[i].name.join(', ');
 			}
 		}
-		if (!name) return this.sendReply('There are no users of the rank ' + target);
+		if (!name) return this.sendReply('There are no users of the rank ' + target + ' currently online.');
 
-		this.sendReply('Users of rank ' + target);
-		this.sendReply(name);
+		this.sendReplyBox('<b>Users of rank ' + target + ':</b> ' + name);
 	},
 
-	userinrooms: function(target, room, user) {
+	userinrooms: function (target, room, user) {
 		if (!this.can('permaban')) return false;
 		var targetUser = this.targetUserOrSelf(target);
 		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
+			return this.sendReply('User ' + this.targetUsername + ' not found.');
 		}
-		if (targetUser.frostDev) return this.sendReply('You can\'t view the private rooms of a developer.');
-		this.sendReply('User: '+targetUser.name);
+		if (targetUser.frostDev) return this.sendReply('You can\'t view the private rooms of a Developer.');
+		this.sendReply('User: ' + targetUser.name);
 
 		var output = 'In rooms: ';
-		var output2 = 'Private Rooms: ';
+		var output2 = 'Private rooms: ';
 		var first = true;
 
 		for (var i in targetUser.roomCount) {
@@ -2204,13 +2209,14 @@ var commands = exports.commands = {
 			if (!first && Rooms.get(i).isPrivate) output2 += ' | ';
 			first = false;
 			if (Rooms.get(i).isPrivate) {
-				output2 += '<a href="/'+i+'" room="'+i+'">'+i+'</a>';
+				output2 += '<a href="/' + i + '" room="' + i + '">' + i + '</a>';
 			}
 			else if (!Rooms.get(i).isPrivate) {
-				output += '<a href="/'+i+'" room="'+i+'">'+i+'</a>';
+				output += '<a href="/' + i + '" room="' + i + '">' + i + '</a>';
 			}
 		}
-		this.sendReply('|raw|'+output+'<br />'+output2);
+
+		this.sendReplyBox(output + '<br />' + output2);
 	},
 
 	masspm: 'pmall',
@@ -2236,6 +2242,24 @@ var commands = exports.commands = {
 			}
 		}
 	},
+
+	/*friendpm: 'pmfriends',
+	friendspm: 'pmfriends',
+	pmfriend: 'pmfriends',
+	pmfriends: function(target, room, user) {
+		if (!user.customClient) {
+			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
+		}
+
+		if (!target) return this.sendReply('/pmfriends [message] - Sends a PM to all of your friends online.');
+
+		for (var i = 0; i < friendList.length; i++) {
+			if (Users.get(friendList[i])) {
+				if (Users.get(friendList[i]).connected) continue;
+				Users.get(friendList[i]).send('|pm|' + user.group + '' + user.name + '|' + Users.get(friendList[i]).getIdentity() + '|' + target);
+			}
+		}
+	},*/
 
 	savelearnsets: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;

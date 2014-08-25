@@ -1858,6 +1858,15 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	runy: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://imgur.com/UKCRMA8.gif" height="100">' +
+    		'<img src="http://i.imgur.com/CbAJ86A.gif" width="320">' +
+    		'<img src="http://imgur.com/y0mp28m.gif" height="120"><br />' +
+    		'<b>Ace:</b> Honchkrow<br />' +
+    		'Do I wanna know, if this feeling flows both ways.</center>');
+    },
+
 	gray: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://38.media.tumblr.com/tumblr_m6qap24Pt61rs7un3o1_500.gif" width="200">' +
@@ -3038,11 +3047,11 @@ var commands = exports.commands = {
 
 	lucy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/hWl4Ltr.jpg"width="80" height="110">' +
-			'<img src="http://i.imgur.com/nSl6dx7.png" width="390">' +
+		this.sendReplyBox('<center><img src="http://img2.wikia.nocookie.net/__cb20100408190407/fairytail/images/archive/b/b8/20111117185218!Lucy_using_her_sexappeal.jpg" height="140">' +
+			'<img src="http://i.imgur.com/S3ibOy9.png" width="350">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/klefki.gif"><br />' +
 			'<b>Ace:</b><blink> Klefki</blink><br />' +
-			'<blink>Just give me a reason, just a little bit\'s enough~.</blink></center>');
+			'<blink>Don\'t you find me... distracting?</blink></center>');
 	},
 
 	emelio: function(target, room, user) {

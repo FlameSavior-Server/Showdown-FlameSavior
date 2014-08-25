@@ -1858,6 +1858,36 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	runy: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://imgur.com/UKCRMA8.gif" height="100">' +
+    		'<img src="http://i.imgur.com/CbAJ86A.gif" width="320">' +
+    		'<img src="http://imgur.com/y0mp28m.gif" height="120"><br />' +
+    		'<b>Ace:</b> Honchkrow<br />' +
+    		'Do I wanna know, if this feeling flows both ways.</center>');
+    },
+
+	gray: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://38.media.tumblr.com/tumblr_m6qap24Pt61rs7un3o1_500.gif" width="200">' +
+    		'<img src="http://i.imgur.com/EyUEr9f.gif">' +
+    		'<img src="http://fc06.deviantart.net/fs70/f/2011/360/a/c/breloom_by_all0412-d4k9tfo.jpg" height="130"><br />' +
+    		'<b>Ace:</b> Breloom<br />' +
+    		'It is not enough that we do our best; sometimes we must do what is required.</center>');
+    },
+
+	colons: 'chakra',
+	chakra: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/4Qb8b0e.gif"><br />' +
+    		'<img src="http://i.imgur.com/fIiqiBh.gif">' +
+    		'<img src="http://i.imgur.com/GfwnBN7.gif">' +
+    		'<img src="http://i.imgur.com/fIiqiBh.gif"><br />' +
+    		'<b>Ace: </b>Sord<br />' +
+			'"hi how r u :s"<br />' +
+			'<button name="send" value="/transferbucks Chakra, 1">Donate if you have swag.</button> </center>');
+    },
+
 	arifeen: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="https://38.media.tumblr.com/tumblr_mb1dgpivmF1rcwf0xo2_500.gif" height="100" width="100">' +
@@ -2684,7 +2714,7 @@ var commands = exports.commands = {
 			'Analyze, Adapt, Assimilate. I am <i><b>X-Bane.</b></i></center>');
 	},
 
-	bosswrath: function(target, room, user) {
+	wrath: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Juhmirh.gif" width="150">' +
 			'<img src="http://i.imgur.com/uQClQ0R.gif">' +
@@ -3017,11 +3047,11 @@ var commands = exports.commands = {
 
 	lucy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/hWl4Ltr.jpg"width="80" height="110">' +
-			'<img src="http://i.imgur.com/nSl6dx7.png" width="390">' +
+		this.sendReplyBox('<center><img src="http://img2.wikia.nocookie.net/__cb20100408190407/fairytail/images/archive/b/b8/20111117185218!Lucy_using_her_sexappeal.jpg" height="140">' +
+			'<img src="http://i.imgur.com/S3ibOy9.png" width="350">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/klefki.gif"><br />' +
 			'<b>Ace:</b><blink> Klefki</blink><br />' +
-			'<blink>Just give me a reason, just a little bit\'s enough~.</blink></center>');
+			'<blink>Don\'t you find me... distracting?</blink></center>');
 	},
 
 	emelio: function(target, room, user) {

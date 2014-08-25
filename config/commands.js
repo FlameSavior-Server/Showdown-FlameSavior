@@ -1858,6 +1858,27 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	gray: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://38.media.tumblr.com/tumblr_m6qap24Pt61rs7un3o1_500.gif" width="200">' +
+    		'<img src="http://i.imgur.com/EyUEr9f.gif">' +
+    		'<img src="http://fc06.deviantart.net/fs70/f/2011/360/a/c/breloom_by_all0412-d4k9tfo.jpg" height="130"><br />' +
+    		'<b>Ace:</b> Breloom<br />' +
+    		'It is not enough that we do our best; sometimes we must do what is required.</center>');
+    },
+
+	colons: 'chakra',
+	chakra: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/4Qb8b0e.gif"><br />' +
+    		'<img src="http://i.imgur.com/fIiqiBh.gif">' +
+    		'<img src="http://i.imgur.com/GfwnBN7.gif">' +
+    		'<img src="http://i.imgur.com/fIiqiBh.gif"><br />' +
+    		'<b>Ace: </b>Sord<br />' +
+			'"hi how r u :s"<br />' +
+			'<button name="send" value="/transferbucks Chakra, 1">Donate if you have swag.</button> </center>');
+    },
+
 	arifeen: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="https://38.media.tumblr.com/tumblr_mb1dgpivmF1rcwf0xo2_500.gif" height="100" width="100">' +

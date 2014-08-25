@@ -485,46 +485,6 @@ Users.importUsergroups = importUsergroups;
  * User and Connection classes
  *********************************************************/
 
-Users.customAvatars = new Object();
-function loadCustomAvatars() {
-	fs.readFile('config/avatars.csv', 'utf8', function(err, data) {
-		if (err) return;
-		var line = data.split('\n');
-		var count = 0;
-		for (var u in line) {
-			count++;
-			if (line[u].length < 1) continue;
-			var column = line[u].split(',');
-			Users.customAvatars[column[0]] = column[1];
-		}
-	});
-}
-loadCustomAvatars();
-
-function exportCustomAvatars() {
-	var output = [];
-	for (var u in Object.keys(Users.customAvatars)) {
-		var userid = Object.keys(Users.customAvatars)[u];
-		var filename = Users.customAvatars[userid];
-		output.push(userid+','+filename);
-	}
-	fs.writeFile('config/avatars.csv', output.join('\n'));
-}
-
-function addCustomAvatar(userid, filename) {
-	if (!userid || !filename) return false;
-	userid = toId(userid);
-	Users.customAvatars[userid] = filename;
-	exportCustomAvatars();
-}
-
-function removeCustomAvatar(userid) {
-	if (!userid) return false;
-	userid = toId(userid);
-	delete Users.customAvatars[userid];
-	exportCustomAvatars();
-}
-
 // User
 User = (function () {
 	function User(connection) {
@@ -1031,8 +991,6 @@ User = (function () {
 				if (Config.customavatars && Config.customavatars[userid]) {
 					avatar = Config.customavatars[userid];
 				}
-
-				if (Users.customAvatars[userid]) avatar = Users.customAvatars[userid];
 
 				if (this.monoType === '') {
 					var rows = userTypes.split('\n');
@@ -1912,9 +1870,6 @@ function unlock(name, unlocked, noRecurse) {
 }
 Users.unban = unban;
 Users.unlock = unlock;
-
-Users.addCustomAvatar = addCustomAvatar;
-Users.removeCustomAvatar = removeCustomAvatar;
 
 /*********************************************************
  * Inactive user pruning

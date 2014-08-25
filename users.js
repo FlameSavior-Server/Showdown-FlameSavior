@@ -394,21 +394,6 @@ Users.importUsergroups = importUsergroups;
  * User and Connection classes
  *********************************************************/
 
-exports.customAvatars = [];
-function loadCustomAvatars() {
-	fs.readFile('config/avatars.csv', 'utf8', function(err, data) {
-		if (err) return;
-		var line = data.split('\n');
-		var count = 0;
-		for (var u in line) {
-			count++;
-			if (line[u].length < 1) continue;
-			Users.customAvatars.push(line[u]);
-		}
-	});
-}
-loadCustomAvatars();
-
 // User
 User = (function () {
 	function User(connection) {
@@ -901,15 +886,6 @@ User = (function () {
 
 				if (Config.customavatars && Config.customavatars[userid]) {
 					avatar = Config.customavatars[userid];
-				}
-
-				for (var u in Users.customAvatars) {
-					var column = Users.customAvatars[u].split(',');
-					if (column[0] != userid || !column[1]) continue;
-					if (column[0] == userid) {
-						avatar = column[1];
-						break;
-					}
 				}
 
 				if (usergroups[userid]) {

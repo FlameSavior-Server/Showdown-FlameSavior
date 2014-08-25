@@ -1858,6 +1858,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	redrikeo: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/pbKumB3.png">' +
+    		'<img src="http://i.imgur.com/UI7iJRh.gif">' +
+    		'<img src="http://i.imgur.com/yQbeCwg.jpg"><br />' +
+			'<img src="http://sprites.pokecheck.org/i/454f.gif"><br />' +
+    		'<b>Ace:</b> Toxicroak &lt; Giratina<br />' +
+    		'"Anyone not willing to die for something isn\'t fit to live at all."</center>');
+    },
+
 	runy: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://imgur.com/UKCRMA8.gif" height="100">' +

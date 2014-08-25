@@ -2704,7 +2704,7 @@ var commands = exports.commands = {
 				}
 			}
 			if (match == true) {
-				if (badges.indexOf(target) > -1) return self.sendReply('The user '+targerUser+' already has the badge '+target+'.');
+				if (currentbadges.indexOf(target) > -1) return self.sendReply('The user '+targerUser+' already has the badge '+target+'.');
 				var re = new RegExp(line, 'g');
 				var newdata = data.replace(re, targetUser.userid+':'+currentbadges+target);
 				fs.writeFile('badges.txt', newdata, function(err, data) {

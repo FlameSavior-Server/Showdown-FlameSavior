@@ -200,6 +200,7 @@ Tournament = (function () {
 				}, this);
 			}
 		}
+		if (!targetUser) return this.room.send('|tournament|updateEnd');
 		this.room.sendUser(targetUser, '|tournament|updateEnd');
 	};
 

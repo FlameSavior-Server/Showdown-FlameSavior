@@ -242,7 +242,9 @@ exports.BattleFormatsData = {
 			{"generation":5,"level":100,"gender":"M","isHidden":true,"moves":["volttackle","quickattack","feint","voltswitch"],"pokeball":"cherishball"},
 			{"generation":5,"level":50,"gender":"M","nature":"Brave","isHidden":false,"moves":["thunderbolt","quickattack","irontail","electroball"],"pokeball":"cherishball"},
 			{"generation":6,"level":10,"isHidden":false,"moves":["celebrate","growl","playnice","quickattack"],"pokeball":"cherishball"},
-			{"generation":6,"level":22,"isHidden":false,"moves":["quickattack","electroball","doubleteam","megakick"],"pokeball":"cherishball"}
+			{"generation":6,"level":22,"isHidden":false,"moves":["quickattack","electroball","doubleteam","megakick"],"pokeball":"cherishball"},
+			{"generation":6,"level":10,"gender":"M","isHidden":false,"moves":["thunderbolt","quickattack","surf","holdhands"],"pokeball":"cherishball"},
+			{"generation":6,"level":10,"gender":"F","isHidden":false,"moves":["thunderbolt","quickattack","heartstamp","holdhands"],"pokeball":"healball"}
 		],
 		tier: "NFE"
 	},
@@ -1122,7 +1124,8 @@ exports.BattleFormatsData = {
 		randomBattleMoves: ["swordsdance","earthquake","xscissor","quickattack","return"],
 		randomDoubleBattleMoves: ["feint","protect","swordsdance","xscissor","earthquake","closecombat","substitute","stoneedge","quickattack","return"],
 		eventPokemon: [
-			{"generation":3,"level":35,"abilities":["hypercutter"],"moves":["helpinghand","guillotine","falseswipe","submission"]}
+			{"generation":3,"level":35,"abilities":["hypercutter"],"moves":["helpinghand","guillotine","falseswipe","submission"]},
+			{"generation":6,"level":50,"gender":"F","nature":"Adamant","isHidden":false,"moves":["xscissor","earthquake","stoneedge","return"],"pokeball":"cherishball"}
 		],
 		tier: "OU"
 	},
@@ -1766,6 +1769,9 @@ exports.BattleFormatsData = {
 	heracross: {
 		randomBattleMoves: ["closecombat","megahorn","stoneedge","swordsdance","knockoff","earthquake"],
 		randomDoubleBattleMoves: ["closecombat","megahorn","stoneedge","swordsdance","knockoff","earthquake","protect"],
+		eventPokemon: [
+			{"generation":6,"level":50,"gender":"F","nature":"Adamant","isHidden":false,"moves":["bulletseed","pinmissile","closecombat","megahorn"],"pokeball":"cherishball"}
+		],
 		tier: "UU"
 	},
 	heracrossmega: {
@@ -2371,7 +2377,8 @@ exports.BattleFormatsData = {
 	mawilemega: {
 		randomBattleMoves: ["swordsdance","ironhead","firefang","substitute","playrough","suckerpunch","knockoff","focuspunch"],
 		randomDoubleBattleMoves: ["swordsdance","ironhead","firefang","substitute","playrough","suckerpunch","knockoff","protect"],
-		requiredItem: "Mawilite"
+		requiredItem: "Mawilite",
+		tier: "Uber"
 	},
 	aron: {
 		randomBattleMoves: ["headsmash","ironhead","earthquake","superpower","stealthrock","endeavor"],
@@ -2782,7 +2789,7 @@ exports.BattleFormatsData = {
 	},
 	chimecho: {
 		randomBattleMoves: ["toxic","psychic","thunderwave","recover","calmmind","shadowball","dazzlinggleam","healingwish","healbell","taunt"],
-		randomDoubleBattleMoves: ["protect","psychic","thunderwave","recover","shadowball","dazzlinggleam","trickroom","hepinghand","taunt"],
+		randomDoubleBattleMoves: ["protect","psychic","thunderwave","recover","shadowball","dazzlinggleam","trickroom","helpinghand","taunt"],
 		eventPokemon: [
 			{"generation":3,"level":10,"gender":"M","moves":["wrap","growl","astonish"]}
 		],
@@ -3379,7 +3386,7 @@ exports.BattleFormatsData = {
 	},
 	lucario: {
 		randomBattleMoves: ["swordsdance","closecombat","crunch","extremespeed","icepunch","bulletpunch","nastyplot","aurasphere","darkpulse","vacuumwave","flashcannon"],
-		randomDoubleBattleMoves: ["follome","closecombat","crunch","extremespeed","icepunch","bulletpunch","feint","aurasphere","darkpulse","vacuumwave","flashcannon","protect"],
+		randomDoubleBattleMoves: ["followme","closecombat","crunch","extremespeed","icepunch","bulletpunch","feint","aurasphere","darkpulse","vacuumwave","flashcannon","protect"],
 		eventPokemon: [
 			{"generation":4,"level":50,"gender":"M","nature":"Modest","abilities":["steadfast"],"moves":["aurasphere","darkpulse","dragonpulse","waterpulse"],"pokeball":"cherishball"},
 			{"generation":4,"level":30,"gender":"M","nature":"Adamant","abilities":["innerfocus"],"moves":["forcepalm","bonerush","sunnyday","blazekick"],"pokeball":"cherishball"},
@@ -3390,7 +3397,7 @@ exports.BattleFormatsData = {
 	},
 	lucariomega: {
 		randomBattleMoves: ["swordsdance","closecombat","crunch","extremespeed","icepunch","bulletpunch","nastyplot","aurasphere","darkpulse","vacuumwave","flashcannon"],
-		randomDoubleBattleMoves: ["follome","closecombat","crunch","extremespeed","icepunch","bulletpunch","feint","aurasphere","darkpulse","vacuumwave","flashcannon","protect"],
+		randomDoubleBattleMoves: ["followme","closecombat","crunch","extremespeed","icepunch","bulletpunch","feint","aurasphere","darkpulse","vacuumwave","flashcannon","protect"],
 		requiredItem: "Lucarionite",
 		tier: "Uber"
 	},
@@ -4802,6 +4809,9 @@ exports.BattleFormatsData = {
 	aegislash: {
 		randomBattleMoves: ["kingsshield","swordsdance","shadowclaw","sacredsword","ironhead","shadowsneak","autotomize","hiddenpowerice","shadowball"],
 		randomDoubleBattleMoves: ["kingsshield","swordsdance","shadowclaw","sacredsword","ironhead","shadowsneak","wideguard","hiddenpowerice","shadowball"],
+		eventPokemon: [
+			{"generation":6,"level":50,"gender":"F","nature":"Quiet","moves":["wideguard","kingsshield","shadowball","flashcannon"],"pokeball":"cherishball"}
+		],
 		tier: "Uber"
 	},
 	spritzee: {

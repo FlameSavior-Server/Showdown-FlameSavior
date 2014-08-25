@@ -3938,29 +3938,7 @@ var commands = exports.commands = {
 		this.add('|unlink|' + targetUser.userid);
 		return this.privateModCommand('|html|(' + user.name + ' has made  <font color="red">' +this.targetUsername+ '</font>\'s prior links unclickable.)');
 	},
-
-	lockroom: function(target, room, user) {
-		if (!room.auth) {
-			c
-		}
-		if (!room.auth[user.userid] === '#' && user.group != '~') {
-			return this.sendReply('/lockroom - Access denied.');
-		}
-		room.lockedRoom = true;
-		this.add(user.name + ' has locked the room.');
-	},
-
-	unlockroom: function(target, room, user) {
-		if (!room.auth) {
-			return this.sendReply("Only unofficial chatrooms can be unlocked.");
-		}
-		if (!room.auth[user.userid] === '#' && user.group != '~') {
-			return this.sendReply('/unlockroom - Access denied.');
-		}
-		room.lockedRoom = false;
-		this.add(user.name + ' has unlocked the room.');
-	},
-
+	
 	demote: 'promote',
 	promote: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help promote');

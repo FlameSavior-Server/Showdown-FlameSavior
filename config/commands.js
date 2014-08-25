@@ -5308,7 +5308,7 @@ var commands = exports.commands = {
 				case 'set':
 					var userid = toId(parts[1]);
 					if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
-					var user = Users.getExact(userid);
+					var targetUser = Users.getExact(userid);
 					var avatar = parts.slice(2).join(',').trim();
 
 					if (!userid) return this.sendReply("You didn't specify a user.");
@@ -5318,7 +5318,7 @@ var commands = exports.commands = {
 					pendingAdds[hash] = {userid: userid, avatar: avatar};
 					parts[1] = hash;
 
-					if (!user) {
+					if (!targetUser) {
 						this.sendReply("Warning: " + userid + " is not online.");
 						this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);
 						return;
@@ -5342,7 +5342,7 @@ var commands = exports.commands = {
 
 						reloadCustomAvatars();
 						this.sendReply(userid + "'s custom avatar has been set.");
-						Users.messageSeniorStaff(parts[1]+' has received a custom avatar from '+user.name);
+						Users.messageSeniorStaff(userid+' has received a custom avatar from '+user.name);
 					}).bind(this));
 					break;
 				case 'rem':

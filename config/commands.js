@@ -1858,6 +1858,14 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	cale: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/Igqnu79.gif"><br />' +
+        	'<font size="3" color="#66CCCC"><b><i>Cale</b></i></font><br />' +
+        	'<b><blink>Ace: Cunnalingus</blink></b><br />' +
+        	'<b>I wonder what it\'s like to be black</b></center>');
+    },
+
 	redrikeo: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/pbKumB3.png">' +

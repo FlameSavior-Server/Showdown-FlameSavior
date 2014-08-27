@@ -2647,7 +2647,7 @@ var commands = exports.commands = {
 		if (!target) return this.sendReply('/removebadge [user], [badge] - Removes a badge from a user.');
 		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');
 		var self = this;
-		var type_of_badges = ['admin','dev','vip','artist','mod','leader','champ','creator','concun','twinner','goodra','league'];
+		var type_of_badges = ['admin','bot','dev','vip','artist','mod','leader','champ','creator','concun','twinner','goodra','league'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('The badge '+target+' is not a valid badge.');
 		fs.readFile('badges.txt','utf8', function(err, data) {
 			if (err) console.log(err);
@@ -2685,7 +2685,7 @@ var commands = exports.commands = {
 		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');
 		if (!target) return this.sendReply('/givebadge [user], [badge] - Gives a badge to a user. Requires: &~');
 		var self = this;
-		var type_of_badges = ['admin','dev','vip','mod','artist','leader','champ','creator','comcun','twinner','league'];
+		var type_of_badges = ['admin','bot','dev','vip','mod','artist','leader','champ','creator','comcun','twinner','league'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('Ther is no badge named '+target+'.');
 		fs.readFile('badges.txt', 'utf8', function(err, data) {
 			if (err) console.log(err);
@@ -2733,7 +2733,8 @@ var commands = exports.commands = {
                 var artist ='<img src="http://www.smogon.com/media/forums/images/badges/ladybug.png" title="Artist">';
                 var twinner='<img src="http://www.smogon.com/media/forums/images/badges/spl.png" title="Badge Tournament Winner">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
- 		return this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+artist+'    '+twinner+'    '+vip+' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
+                var bot ='<img src="http://www.smogon.com/media/forums/images/badges/mind.png" title="Gold Bot Hoster">';
+ 		return this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+artist+'    '+twinner+'    '+vip+'    '+bot+' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
 	},
 	badges: 'badge',
     	badge: function(target, room, user) {
@@ -2754,6 +2755,7 @@ var commands = exports.commands = {
             	var artist ='<img src="http://www.smogon.com/media/forums/images/badges/ladybug.png" title="Artist">';
                 var twinner='<img src="http://www.smogon.com/media/forums/images/badges/spl.png" title="Badge Tournament Winner">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
+                var bot ='<img src="http://www.smogon.com/media/forums/images/badges/mind.png" title="Gold Bot Hoster">';
                 var self = this;
                 fs.readFile('badges.txt', 'utf8', function(err, data) {
                 	if (err) console.log(err);
@@ -2781,6 +2783,7 @@ var commands = exports.commands = {
                 		if (currentbadges.indexOf('artist') > -1) badgelist+=' '+artist;
                 		if (currentbadges.indexOf('twinner') > -1) badgelist+=' '+twinner;
                 		if (currentbadges.indexOf('vip') > -1) badgelist+=' '+vip;
+                		if (currentbadges.indexOf('bot') > -1) badgelist+=' '+bot;
                 		self.sendReplyBox(targetUser.userid+"'s badges: "+badgelist);
                 		room.update();
                 	} else {

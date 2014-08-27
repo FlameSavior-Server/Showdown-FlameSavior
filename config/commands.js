@@ -4993,11 +4993,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<img src="http://frostserver.net:8000/avatars/piiiikachuuu.png"><br />' +
 			'zzzzzzzzzzzzzzzzz');
 	},
-	
-	lilbitch: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://weknowmemes.com/wp-content/uploads/2014/04/fight-me-u-lil-bitch.jpg"></center>');
-	},
+
 
 	/*********************************
 	 * Frost Contest Winner Commands *

@@ -1857,6 +1857,7 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
 
 	cale: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -4994,10 +4995,7 @@ var commands = exports.commands = {
 			'zzzzzzzzzzzzzzzzz');
 	},
 	
-	lilbitch: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://weknowmemes.com/wp-content/uploads/2014/04/fight-me-u-lil-bitch.jpg"></center>');
-	},
+	
 
 	/*********************************
 	 * Frost Contest Winner Commands *

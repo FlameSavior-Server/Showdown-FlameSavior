@@ -2235,11 +2235,11 @@ var commands = exports.commands = {
 
 	mistic: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/2V3irmC.gif" height=100>' +
-			'<img src="http://i.imgur.com/7sSloLc.gif">' +
-			'<img src="http://i.imgur.com/mw27FOJ.gif" height=100><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/haQViF5.gif" width="140>' +
+			'<img src="http://i.imgur.com/LDQS4LO.gif">' +
+			'<img src="http://i.imgur.com/ofVvw0x.gif" width="130><br />' +
 			'<b>Ace:</b> Butters<br />' +
-			'Do You Know What I Am Saying?</center>');
+			'Putting the Laughter back into Manslaughter</center>');
 	},
 
 	worldsstrongestman: function(target, room, user) {

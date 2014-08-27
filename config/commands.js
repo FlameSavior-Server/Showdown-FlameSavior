@@ -2162,10 +2162,9 @@ var commands = exports.commands = {
 	rules: function (target, room, user) {
 		if (!target) {
 			if (!this.canBroadcast()) return;
-			this.sendReplyBox('Please follow the rules:<br />' +
-			(room.rulesLink ? '- <a href="' + sanitize(room.rulesLink) + '">' + sanitize(room.title) + ' room rules</a><br />' : '') +
-			'- <a href="http://goldserver.weebly.com/rules.html">'+(room.rulesLink?'Global rules':'Rules')+'</a><br />' +
-			'</div>');
+			this.sendReplyBox("Please follow the rules:<br />" +
+				(room.rulesLink ? "- <a href=\"" + Tools.escapeHTML(room.rulesLink) + "\">" + Tools.escapeHTML(room.title) + " room rules</a><br />" : "") +
+				"- <a href=\"http://goldserver.weebly.com/rules.html\">" + (room.rulesLink ? "Global rules" : "Rules") + "</a>");
 			return;
 		}
 		if (!this.can('roommod', null, room)) return;

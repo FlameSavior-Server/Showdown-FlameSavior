@@ -1857,7 +1857,16 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
-
+	ferro: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center> <a> <img src = "http://i.imgur.com/IIb5Xtb.png" </a> <br />' +
+			'<a> <img src = "http://i.imgur.com/dKslWgS.png" </a>' +
+			'<a> <img src = "http://i.imgur.com/OQp5diX.png" </a>' +
+			'<a> <img src = "http://i.imgur.com/7knXKo7.png" </a> <br />' +
+			'<b>Aces:</b> Metagross, Breloom, Drapion <br /> ' +
+			'With power like this on my side, how could I possibly fail?</center>');
+	},
+	
 	cale: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/Igqnu79.gif"><br />' +

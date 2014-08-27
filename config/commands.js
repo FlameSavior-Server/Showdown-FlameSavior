@@ -3112,13 +3112,13 @@ var commands = exports.commands = {
 				return this.sendReplyBox(message);
 			}
 
-			if (!this.can('customavatar') && !user.vip) return false;
+			if (!this.can('giveavatar') && !user.vip) return false;
 
 			switch (cmd) {
 				case 'add':
 				case 'set':
 					var userid = toId(parts[1]);
-					if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
+					if (!this.can('giveavatar') && user.vip && userid !== user.userid) return false;
 					var user = Users.getExact(userid);
 					var avatar = parts.slice(2).join(',').trim();
 
@@ -3161,7 +3161,7 @@ var commands = exports.commands = {
 				case 'del':
 				case 'delete':
 					var userid = toId(parts[1]);
-					if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
+					if (!this.can('giveavatar') && user.vip && userid !== user.userid) return false;
 					if (!Config.customavatars[userid]) return this.sendReply(userid + " does not have a custom avatar.");
 
 					if (Config.customavatars[userid].toString().split('.').slice(0, -1).join('.') !== userid)

@@ -2235,9 +2235,9 @@ var commands = exports.commands = {
 
 	mistic: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/haQViF5.gif" width="140>' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/haQViF5.gif" width="140">' +
 			'<img src="http://i.imgur.com/LDQS4LO.gif">' +
-			'<img src="http://i.imgur.com/ofVvw0x.gif" width="130><br />' +
+			'<img src="http://i.imgur.com/ofVvw0x.gif" width="130"><br />' +
 			'<b>Ace:</b> Butters<br />' +
 			'Putting the Laughter back into Manslaughter</center>');
 	},

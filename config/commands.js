@@ -2710,6 +2710,7 @@ var commands = exports.commands = {
 					if (err) console.log(err);
 					self.sendReply('You have given the badge '+target+' to the user '+targetUser+'.');
 					targetUser.send('You have recieved the badge '+target+' from the user '+user.userid+'.');
+					room.addRaw(targetUser+' has recieved the '+target+' badge from '+user.name);
 				});
 			} else {
 				fs.appendFile('badges.txt','\n'+targetUser.userid+':'+target, function(err) {

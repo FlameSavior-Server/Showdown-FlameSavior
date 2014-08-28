@@ -2569,11 +2569,11 @@ var commands = exports.commands = {
 
 	inwhale: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/bwani/scizor-mega.gif">' +
-			'<img src="http://i.imgur.com/34vV7nU.png" width="350">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/bwani-shiny/volcarona.gif"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/gi84nKu.gif" width="140">' +
+			'<img src="http://i.imgur.com/0ZrD8MF.png" width="280">' +
+			'<img src="http://i.imgur.com/wZXtIHd.jpg" width="120"><br />' +
 			'<b>Ace:</b> Scizor<br />' +
-			'A pestilence upon you, nerds!</center>'
+			'Bad things happen to those who think stall is good in mono.</center>'
 		);
 	},
 

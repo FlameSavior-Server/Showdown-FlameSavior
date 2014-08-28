@@ -1391,7 +1391,7 @@ User = (function () {
 				if (this.connections[i].rooms['global']) {
 					this.joinRoom(room, this.connections[i]);
 				}
-				if (!room.active && !room.protect) {
+				if (!room.active && !room.protect && room.type == 'chat') {
 					this.connections[i].sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>')
 				}
 			}
@@ -1406,7 +1406,7 @@ User = (function () {
 				room.onJoinConnection(this, connection);
 			}
 			connection.joinRoom(room);
-			if (!room.active && !room.protect) connection.sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>')
+			if (!room.active && !room.protect && room.type == 'chat') connection.sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>')
 		}
 		return true;
 	};

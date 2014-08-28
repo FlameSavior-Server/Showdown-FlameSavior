@@ -2590,16 +2590,15 @@ var commands = exports.commands = {
 	theneovoid: 'tnv',
 	tnv: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font face="Comic Sans MS" size=15>Sample Text</font><br />' +
-			'<img src="http://i.imgur.com/lx7C4gu.gif" width=250><br /><b><font face="Comic Sans MS" size=' +
-			'<font color="#52CC52">Ace:</font><img src="http://blog.mobileroadie.com/wp-content/uploads/2012/' +
-			'04/CaseStudy_042312_MLG-450x340.jpg" width=50><font face="Comic Sans MS" size=3>The Neo Void</b>' +
-			'<img src="http://i435.photobucket.com/albums/qq72/L0N6H0RN/mdewTAR.png" width=60"><br><b>Quote: ' +
-			'</b>"<b>I</b><b>L</b><b>L</b> fucking rek <b>U</b> <b>M</b>8, <b>I</b> swear on me <b>N</b><b>A' +
-			'</b>n, ill shoo<b>T</b> u wif me qu<b>I</b>ckscope."</center<p><center><img src="http://25.media.' +
-			'tumblr.com/tumblr_mc351hVQPQ1qf021po1_500.gif" width=40><button name="send" type="button " value="' +
-			'/transferbucks The Neo Void, 1" target="_blank">DONATE 2 ME OR IL REPOT U M8. IF U DON HAV MUNNY, ' +
-			'GIT GUD SCRUB</button><img src="http://25.media.tumblr.com/tumblr_mc351hVQPQ1qf021po1_500.gif" width=40></center>'
+		this.sendReplyBox('<center><font face="Comic Sans MS" size="15">Sample Text</font><br />' +
+			'<img src="http://i.imgur.com/lx7C4gu.gif" width="250"><br />' +
+			'<b><font face="Comic Sans MS" color="#52CC52">Ace:</font><img src="http://blog.mobileroadie.com/wp-content/uploads/2012/04/CaseStudy_042312_MLG-450x340.jpg" width="50">' +
+			'<font face="Comic Sans MS" size="3">The Neo Void</b>' +
+			'<img src="http://i435.photobucket.com/albums/qq72/L0N6H0RN/mdewTAR.png" width="60"><br />' +
+			'<b>Quote: </b>"<b>ILL</b> fucking rek <b>U M</b>8, <b>I</b> swear on me <b>NA</b>n, ill shoo<b>T</b> u wif me qu<b>I</b>ckscope.' +
+			'<img src="http://25.media.tumblr.com/tumblr_mc351hVQPQ1qf021po1_500.gif" width="35">' +
+			'<button name="send" value="/transferbucks The Neo Void, 1">DONATE 2 ME OR IL REPOT U M8. IF U DON HAV MUNNY, GIT GUD SCRUB</button>' +
+			'<img src="http://25.media.tumblr.com/tumblr_mc351hVQPQ1qf021po1_500.gif" width="35"></center>'
 		);
 	},
 

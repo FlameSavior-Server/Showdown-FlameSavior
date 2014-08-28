@@ -5165,13 +5165,13 @@ var commands = exports.commands = {
 		);
 	},
 
-	siem: function (target, room, user) {
+	amberle: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/CwhY2Bq.png">' +
-			'<font size="7" color="#01DF01"><i>Siem</i></font></color>' +
-			'<img src="http://i.imgur.com/lePMJe5.png"><br />' +
-			'Ace: Froslass<br />' +
-			'Keep your head up, nothing lasts forever.</center>'
+		this.sendReplyBox('<center><img src="http://th08.deviantart.net/fs71/PRE/i/2011/218/2/0/roserade_by_kokoroe2-d45occl.jpg" width="100">' +
+			'<font size="5" color="#01DF01"><i>Amberle </i></font></color>' +
+			'<img src="http://27.media.tumblr.com/tumblr_lhkd9rlDij1qekruyo1_500.png" width="100" height="100"><br />' +
+			'<b>Ace:</b><font color="green"> Roserade</color><br />' +
+			'We always take from nature. Why not give back?</center>'
 		);
 	},
 

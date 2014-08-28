@@ -1531,7 +1531,8 @@ Rooms.lobby = rooms.lobby;
 
 checkInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
-		if (Rooms.rooms[u].type == 'chat' && Rooms.rooms[u].messageCount < 50) {
+		if (Rooms.rooms[u].type !== 'chat' || Rooms.rooms[u].protect) continue;
+		if (Rooms.rooms[u].messageCount < 50) {
 			Rooms.rooms[u].active = false;
 		}
 	}
@@ -1539,7 +1540,8 @@ checkInactiveRooms = setInterval(function() {
 
 deleteInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
-		if (Rooms.rooms[u].type == 'chat' && !Rooms.rooms[u].active && Rooms.rooms[u].messageCount < 50 && !Rooms.rooms[u].protect) {
+		if (Rooms.rooms[u].type !== 'chat' || room.protect) continue;
+		if (!Rooms.rooms[u].active && Rooms.rooms[u].messageCount < 50) {
 			Rooms.global.deregisterChatRoom(Rooms.rooms[u].id);
 			Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.</b></font>');
 		}

@@ -1139,6 +1139,14 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 
+	shrewed: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/3scS0w5.gif"><br />' +
+                '<img src="http://i.imgur.com/TS5dYjU.gif" width="270" height="160">' +
+                '<img src="http://i.imgur.com/Dp5P3Bu.gif" width="270" height="160"><br />' +
+                'There are stars and planets floating around me. I don\'t think I can handle astronomy right now.</center>');
+	},
+	
 	fork: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/HrDUGmr.png" width="75" height="100">');

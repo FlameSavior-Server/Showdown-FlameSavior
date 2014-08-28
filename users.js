@@ -516,8 +516,6 @@ User = (function () {
 		this.isAway = false;
 		this.originalName = '';
 
-		this.monoType = '';
-
 		var trainersprites = [1, 2, 101, 102, 169, 170, 265, 266];
 		this.avatar = trainersprites[Math.floor(Math.random() * trainersprites.length)];
 
@@ -990,34 +988,6 @@ User = (function () {
 
 				if (Config.customavatars && Config.customavatars[userid]) {
 					avatar = Config.customavatars[userid];
-				}
-
-				if (this.monoType === '') {
-					var rows = userTypes.split('\n');
-					var matched = false;
-					var line = '';
-					var type = '';
-					for (var i = 0; i < rows.length; i++) {
-						if (!rows[i]) continue;
-						var parts = rows[i].split(',');
-						var userName = parts[0];
-						type = parts[1];
-						if (toId(userName) === toId(name)) matched = true;
-					}
-					if (matched) {
-						if (type.indexOf('/') > -1) {
-							var types = type.split('/');
-							types[0] = types[0].trim();
-							types[0] = types[0].charAt(0).toUpperCase() + types[0].slice(1);
-							types[1] = types[1].trim();
-							types[1] = types[1].charAt(0).toUpperCase() + types[1].slice(1);
-							this.monoType = types[0] + ' / ' + types[1];
-						}
-						else {
-							type = type.charAt(0).toUpperCase() + type.slice(1);
-							this.monoType = type;
-						}
-					}
 				}
 
 				if (usergroups[userid]) {

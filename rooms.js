@@ -752,15 +752,15 @@ var BattleRoom = (function () {
 		this.active = false;
 		this.update();
 	};
-	// idx = 0, 1 : player log
-	// idx = 2    : spectator log
-	// idx = 3    : replay log
-	BattleRoom.prototype.getLog = function (idx) {
+	// logNum = 0    : spectator log
+	// logNum = 1, 2 : player log
+	// logNum = 3    : replay log
+	BattleRoom.prototype.getLog = function (logNum) {
 		var log = [];
 		for (var i = 0; i < this.log.length; ++i) {
 			var line = this.log[i];
 			if (line === '|split') {
-				log.push(this.log[i + idx + 1]);
+				log.push(this.log[i + logNum + 1]);
 				i += 4;
 			} else {
 				log.push(line);
@@ -769,43 +769,23 @@ var BattleRoom = (function () {
 		return log;
 	};
 	BattleRoom.prototype.getLogForUser = function (user) {
-		var slot = this.battle.getSlot(user);
-		if (slot < 0) slot = 2;
-		return this.getLog(slot);
+		var logNum = this.battle.getSlot(user) + 1;
+		if (logNum < 0) logNum = 0;
+		return this.getLog(logNum);
 	};
 	BattleRoom.prototype.update = function (excludeUser) {
 		if (this.log.length <= this.lastUpdate) return;
-		var logs = [[], [], []];
-		var updateLines = this.log.slice(this.lastUpdate);
-		for (var i = 0; i < updateLines.length;) {
-			var line = updateLines[i++];
-			if (line === '|split') {
-				logs[0].push(updateLines[i++]); // player 0
-				logs[1].push(updateLines[i++]); // player 1
-				logs[2].push(updateLines[i++]); // spectators
-				i++; // replays
-			} else {
-				logs[0].push(line);
-				logs[1].push(line);
-				logs[2].push(line);
-			}
-		}
-		logs = logs.map(function (log) {
-			return log.join('\n');
-		});
+
+		Sockets.subchannelBroadcast(this.id, '>' + this.id + '\n\n' + this.log.slice(this.lastUpdate).join('\n'));
+
 		this.lastUpdate = this.log.length;
 
+		// empty rooms time out after ten minutes
 		var hasUsers = false;
 		for (var i in this.users) {
-			var user = this.users[i];
 			hasUsers = true;
-			if (user === excludeUser) continue;
-			var slot = this.battle.getSlot(user);
-			if (slot < 0) slot = 2;
-			this.sendUser(user, logs[slot]);
+			break;
 		}
-
-		// empty rooms time out after ten minutes
 		if (!hasUsers) {
 			if (!this.expireTimer) {
 				this.expireTimer = setTimeout(this.tryExpire.bind(this), TIMEOUT_EMPTY_DEALLOCATE);
@@ -914,13 +894,13 @@ var BattleRoom = (function () {
 			} else {
 				// both sides are inactive
 				var inactiveUser0 = this.battle.getPlayer(0);
-				if (ticksLeft[0] % 3 === 0 || ticksLeft[0] <= 4) {
-					this.sendUser(inactiveUser0, '|inactive|' + (inactiveUser0 ? inactiveUser0.name : 'Player 1') + ' has ' + (ticksLeft[0] * 10) + ' seconds left.');
+				if (inactiveUser0 && (ticksLeft[0] % 3 === 0 || ticksLeft[0] <= 4)) {
+					this.sendUser(inactiveUser0, '|inactive|' + inactiveUser0.name + ' has ' + (ticksLeft[0] * 10) + ' seconds left.');
 				}
 
 				var inactiveUser1 = this.battle.getPlayer(1);
-				if (ticksLeft[1] % 3 === 0 || ticksLeft[1] <= 4) {
-					this.sendUser(inactiveUser1, '|inactive|' + (inactiveUser1 ? inactiveUser1.name : 'Player 2') + ' has ' + (ticksLeft[1] * 10) + ' seconds left.');
+				if (inactiveUser1 && (ticksLeft[1] % 3 === 0 || ticksLeft[1] <= 4)) {
+					this.sendUser(inactiveUser1, '|inactive|' + inactiveUser1.name + ' has ' + (ticksLeft[1] * 10) + ' seconds left.');
 				}
 			}
 			this.resetTimer = setTimeout(this.kickInactive.bind(this), 10 * 1000);
@@ -1375,7 +1355,7 @@ var ChatRoom = (function () {
 	ChatRoom.prototype.update = function () {
 		if (this.log.length <= this.lastUpdate) return;
 		var entries = this.log.slice(this.lastUpdate);
-		if (this.reportJoinsQueue) {
+		if (this.reportJoinsQueue && this.reportJoinsQueue.length) {
 			clearTimeout(this.reportJoinsInterval);
 			delete this.reportJoinsInterval;
 			Array.prototype.unshift.apply(entries, this.reportJoinsQueue);
@@ -1407,7 +1387,7 @@ var ChatRoom = (function () {
 		var userList = this.userList ? this.userList : this.getUserList();
 		this.sendUser(connection, '|init|chat\n|title|' + this.title + '\n' + userList + '\n' + this.getLogSlice(-25).join('\n') + this.getIntroMessage());
 		if (global.Tournaments && Tournaments.get(this.id)) {
-			Tournaments.get(this.id).update(user);
+			Tournaments.get(this.id).updateFor(user, connection);
 		}
 	};
 	ChatRoom.prototype.onJoin = function (user, connection, merging) {
@@ -1429,7 +1409,7 @@ var ChatRoom = (function () {
 			this.sendUser(connection, '|init|chat\n|title|' + this.title + '\n' + userList + '\n' + this.getLogSlice(-100).join('\n') + this.getIntroMessage());
 		}
 		if (global.Tournaments && Tournaments.get(this.id)) {
-			Tournaments.get(this.id).update(user);
+			Tournaments.get(this.id).updateFor(user, connection);
 		}
 
 		return user;
@@ -1466,7 +1446,7 @@ var ChatRoom = (function () {
 			this.reportJoin(entry);
 		}
 		if (global.Tournaments && Tournaments.get(this.id)) {
-			Tournaments.get(this.id).update(user);
+			Tournaments.get(this.id).updateFor(user);
 		}
 		return user;
 	};

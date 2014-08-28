@@ -788,7 +788,7 @@ var commands = exports.commands = {
 			}
 		}
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
-		targetUser.leaveRoom(room.id);
+		if (!targetUser.can('bypassall')) targetUser.leaveRoom(room.id);
 	},
 
 	unroomban: 'roomunban',

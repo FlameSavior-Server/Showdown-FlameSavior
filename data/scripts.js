@@ -1559,7 +1559,7 @@ exports.BattleScripts = {
 
 		// PotD stuff
 		var potd = {};
-		if ('Rule:potd' in this.getFormat().banlistTable) {
+		if ('Rule:potd' in this.getBanlistTable(this.getFormat())) {
 			potd = this.getTemplate(Config.potd);
 		}
 
@@ -1858,7 +1858,7 @@ exports.BattleScripts = {
 
 		// PotD stuff
 		var potd = {};
-		if ('Rule:potd' in this.getFormat().banlistTable) {
+		if ('Rule:potd' in this.getBanlistTable(this.getFormat())) {
 			potd = this.getTemplate(Config.potd);
 		}
 

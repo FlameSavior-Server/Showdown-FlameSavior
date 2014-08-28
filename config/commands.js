@@ -1867,6 +1867,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	omniax: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/NJnNzfW.gif" width="140">' +
+    		'<img src="http://i.imgur.com/5IUvNUF.png" width="260">' +
+    		'<img src="http://i.imgur.com/olkQsfD.gif" width="140"><br />' +
+    		'<b>Ace:</b> Deception & Unawareness<br />' +
+    		'I could be tricking you, I could be misleading you, I could be playing with your mind Or I\'m just Unaware of anything at that moment.</center>'
+    	);
+    },
+
 	kb: 'kafkablack',
 	kafka: 'kafkablack',
 	kafkablack: function (target, room, user) {

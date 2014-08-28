@@ -1867,6 +1867,25 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	bidoof: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/uOcV5sw.jpg" width="180"><br />' +
+    		'<img src="http://i.imgur.com/EPR8xrq.png"><br />' +
+    		'<img src="http://i.imgur.com/YxAfT2z.jpg" width="180"><br />' +
+    		'<b>Ace:</b> Bidoofs<br />' +
+    		'<font color=#ff0000>T</font><font color=#fa0d04>h</font><font color=#f51b09>e</font><font color=#f1280d>r</font><font color=#ec3612>e</font> ' +
+			'<font color=#e3501b>a</font><font color=#df5d1f>r</font><font color=#da6924>e</font> ' +
+			'<font color=#d1822d>B</font><font color=#cc8d32>i</font><font color=#c89836>d</font><font color=#c3a33b>o</font><font color=#bfad3f>o</font><font color=#bab744>f</font><font color=#b6c048>s</font><font color=#b1c94d>,</font> ' +
+			'<font color=#a8d956>t</font><font color=#a3df5b>h</font><font color=#9fe65f>e</font><font color=#9aeb64>n</font> ' +
+			'<font color=#91f46d>t</font><font color=#8df871>h</font><font color=#88fa76>e</font><font color=#84fd7a>r</font><font color=#7ffe7f>e</font> ' +
+			'<font color=#76fe88>a</font><font color=#71fd8d>r</font><font color=#6dfc91>e</font> ' +
+			'<font color=#64f79a>T</font><font color=#5ff39f>o</font><font color=#5beea3>p</font> ' +
+			'<font color=#51e3ad>P</font><font color=#4dddb1>e</font><font color=#48d6b6>r</font><font color=#44ceba>c</font><font color=#3fc6bf>e</font><font color=#3bbdc3>n</font><font color=#36b4c8>t</font><font color=#32aacc>a</font><font color=#2d9fd1>g</font><font color=#2894d6>e</font> ' +
+			'<font color=#1f7ddf>B</font><font color=#1b71e3>i</font><font color=#1665e8>d</font><font color=#1258ec>o</font><font color=#0d4bf1>o</font><font color=#093ef5>f</font><font color=#0431fa>s</font><br />' +
+			'<button name="send" value="/transferbucks ERA R2D2, 1"> Donate to the Bidoof Army!</button></center>'
+		);
+    },
+
 	omniax: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/NJnNzfW.gif" width="140">' +

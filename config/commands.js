@@ -1857,13 +1857,25 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
+	
+	kah: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/KH3GVna.gif" height="130">' +
+    		'<img src="http://i.imgur.com/9k24Lr4.gif">' +
+    		'<img src="http://i.imgur.com/tsELV3Q.gif" height="130"><br />' +
+    		'<b>Ace:</b> This fine Gentleman<br />' +
+			'<img src="http://i.imgur.com/1yPTdH8.gif" width="227" height="163"><br />' +
+    		'Kah521 gets naked often.<br />' +
+			'<button name="send" value="/transferbucks Kah521,1"> Donate a buck otherwise I can\'t teach the scrubs to quickscope. </button></center>');
+    },
+
 	ferro: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center> <a> <img src = "http://i.imgur.com/IIb5Xtb.png" </a> <br />' +
-			'<a> <img src = "http://i.imgur.com/dKslWgS.png" </a>' +
-			'<a> <img src = "http://i.imgur.com/OQp5diX.png" </a>' +
-			'<a> <img src = "http://i.imgur.com/7knXKo7.png" </a> <br />' +
-			'<b>Aces:</b> Metagross, Breloom, Drapion <br /> ' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/IIb5Xtb.png"><br />' +
+			'<img src="http://i.imgur.com/dKslWgS.png">' +
+			'<img src="http://i.imgur.com/OQp5diX.png">' +
+			'<img src="http://i.imgur.com/7knXKo7.png"><br />' +
+			'<b>Aces:</b> Metagross, Breloom, Drapion<br /> ' +
 			'With power like this on my side, how could I possibly fail?</center>');
 	},
 	

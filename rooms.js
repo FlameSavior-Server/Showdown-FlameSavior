@@ -1532,11 +1532,9 @@ Rooms.lobby = rooms.lobby;
 checkInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
 		if (Rooms.rooms[u].type !== 'chat' || Rooms.rooms[u].protect) continue;
-		if (Rooms.rooms[u].messageCount < 50) {
-			Rooms.rooms[u].active = false;
-		}
+		if (Rooms.rooms[u].messageCount < 50) Rooms.rooms[u].active = false;
 	}
-}, 1*60*1000);
+}, 60 * 60000);
 
 deleteInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {

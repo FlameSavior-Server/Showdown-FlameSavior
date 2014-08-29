@@ -1748,7 +1748,7 @@ exports.BattleScripts = {
 		var typeComboCount = {};
 		var baseFormes = {};
 		var uberCount = 0;
-		var bannedPokemon = ['Feebas','Magikarp','Caterpie','Weedle','Igglybuff','Sunkern','Wurmple','Burmy','Combee'];
+		var bannedPokemon = ['Feebas','Magikarp','Caterpie','Weedle','Igglybuff','Sunkern','Wurmple','Burmy','Combee', 'Scatterbug'];
 
 		for (var i = 0; i < keys.length && pokemonLeft < 6; i++) {
 			var template = this.getTemplate(keys[i]);

@@ -1487,6 +1487,19 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 
+	swagbox: 'wontunsbox',
+	wontunsbox: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+			'<center><h1><font color="#1A2389"><u>Wontuns\' Music Box</u></color></h1></center>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=qpKjYATr9gQ">Animals</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=gCYcHz2k5x0">Animals</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=tFG_5PBl2K8">Animals</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=gM7Hlg75Mlo">Animals</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+		);
+   	},
+
 	farneobox: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

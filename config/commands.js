@@ -1136,6 +1136,48 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');
 	},
+	
+	whosgotthemoneyz: 'richestuser',
+	richestuser: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+        var data = fs.readFileSync('config/money.csv','utf8');
+        var row = (''+data).split("\n");
+		var userids = {id:[],money:[]};
+		var highest = {id:[],money:[]};
+		var size = 0;
+		var amounts = [];
+        for (var i = row.length; i > -1; i--) {
+            if (!row[i]) continue;
+            var parts = row[i].split(",");
+			userids.id[i] = parts[0];
+			userids.money[i] = Number(parts[1]);
+			size++;
+			if (isNaN(parts[1]) || parts[1] === 'Infinity') userids.money[i] = 0;
+			
+        }
+		for (var i=0; i<5;i++) {
+			var tempHighest = 0;
+			for (var x=0;x<size;x++) {
+				if (userids.money[x] > tempHighest) tempHighest = userids.money[x];
+			}
+			for (var x=0;x<size;x++) {
+				var found = false;
+				if (userids.money[x] === tempHighest && !found) {
+					highest.id[i] = userids.id[x];
+					highest.money[i] = userids.money[x];
+					userids.id[x];
+					userids.money[x] = 0;
+					found = true;
+				}
+			}
+		}
+		return this.sendReplyBox('<b>The richest users are:</b>' + 
+								'<br>' + highest.id[0] + ': ' + highest.money[0] +
+								'<br>' + highest.id[1] + ': ' + highest.money[1] +
+								'<br>' + highest.id[2] + ': ' + highest.money[2] +
+								'<br>' + highest.id[3] + ': ' + highest.money[3] +
+								'<br>' + highest.id[4] + ': ' + highest.money[4]);
+	},
 
 	//Trainer Cards.
 

@@ -1772,29 +1772,31 @@ var commands = exports.commands = {
 			'5. <a href="https://www.youtube.com/watch?v=NwaCMbfHwmQ"><button title="Mega Man X5 - X vs Zero">Mega Man X5 - X vs Zero</a></button><br />');
 	},
 
-   	solstereo: 'skybox',
-   	equitrax: 'skybox',
-	skybox: function(target, room, user) {
+   	solstereo: 'solbox',
+	solbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Sky\'s Sound Track!</b><br />' +
-            '1. <a href="https://www.youtube.com/watch?v=vjVkXlxsO8Q"><button title="Linkin Park - Papercut"> Linkin Park - Papercut</a></button><br />' +
-            '2. <a href="https://www.youtube.com/watch?v=EPpLVdbVXFI"><button title="Avenged Sevenfold - Blinded in Chains">Avenged Sevenfold - Blinded in Chains</a></button><br />' +
-			'3. <a href="https://www.youtube.com/watch?v=Ee_uujKuJMI"><button title="Green Day - American Idiot">Green Day - American Idiot</a></button><br />' +
-			'4. <a href="https://www.youtube.com/watch?v=EqGs36oPpLQ"><button title="Last Dinosaurs - Zoom">Last Dinosaurs - Zoom</a></button><br />' +
-			'5. <a href="https://www.youtube.com/watch?v=cU4GXgaCFTI"><button title="DragonForce - Cry Thunder">DragonForce - Cry Thunder</a></button><br />' +
-			'6. <a href="https://www.youtube.com/watch?v=gEMaQMxw6cY"><button title="Styles of Beyond - Nine Thou (Nightcore)">Styles of Beyond - Nine Thou (Nightcore)</a></button>');
+            '1. <a href="https://www.youtube.com/watch?v=VIop055eJhU"><button title="Touhou 6 - EoSD - U.N. Owen was her?"> Touhou 6 - EoSD - U.N. Owen was her?</a></button><br />' +
+            '2. <a href="https://www.youtube.com/watch?v=BwpLSiplyYc"><button title="Kirby 64: The Crystal Shards - Zero Two">Kirby 64: The Crystal Shards - Zero Two</a></button><br />' +
+			'3. <a href="https://www.youtube.com/watch?v=EqGs36oPpLQ"><button title="Last Dinosaurs - Zoom">Last Dinosaurs - Zoom</a></button><br />' +
+			'4. <a href="https://www.youtube.com/watch?v=71CvlYX1Bqc"><button title="Linkin Park - Across The Line">Linkin Park - Across The Line</a></button><br />' +
+			'5. <a href="https://www.youtube.com/watch?v=c0SrxSMHDmE"><button title="Bullet For My Valentine - Hand of Blood">Bullet For My Valentine - Hand of Blood</a></button><br />' +
+			'6. <a href="https://www.youtube.com/watch?v=aWxBrI0g1kE"><button title="Disturbed - Indestructible">Disturbed - Indestructible</a></button>' +
+			'7. <a href="https://www.youtube.com/watch?v=Fi_GN1pHCVc"><button title="Avenged Sevenfold - Almost Easy">Avenged Sevenfold - Almost Easy</a></button>' +
+			'8. <a href="https://www.youtube.com/watch?v=fgmpWkUcpjo"><button title="Skillet - Not Gonna Die">Skillet - Not Gonna Die</a></button>' +
+			'9. <a href="https://www.youtube.com/watch?v=68YoIg_0Kaw"><button title="Breaking Benjamin - Dance With The Devil (NightCore)">Breaking Benjamin - Dance With The Devil (NightCore)</a></button>');
 	},
 
     vbox: 'jackbox',
 	jackbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>Usernamehere\'s Music Box!</b><br />' +
+        this.sendReplyBox('<b>Jacks\'s Music Box!</b><br />' +
             '1. <a href="https://www.youtube.com/watch?v=m0DMfaCh4aA"><button title="Attack on Titan - DOA">Attack on Titan - DOA</a></button><br />' +
             '2. <a href="https://www.youtube.com/watch?v=c-M34ZRM120"><button title=" ADTR - You be Tails, I\'ll be Sonic"> ADTR - You be Tails, I\'ll be Sonic</a></button><br />' +
 			'3. <a href="https://www.youtube.com/watch?v=0B-xRO-vPPo"><button title="Papercut massacre - Lose my life">Papercut massacre - Lose my life</a></button><br />' +
 			'4. <a href="https://www.youtube.com/watch?v=Qg_TRaiWj4o"><button title="The Who - Behind blue eyes">The Who - Behind blue eyes</a></button><br />' +
 			'5. <a href="https://www.youtube.com/watch?v=0m9QUoW5KnY"><button title="Starbomb - It\'s dangerous to go alone">Starbomb - It\'s dangerous to go alone</a></button><br />' +
-			'6. <a href="https://www.youtube.com/watch?v=Tt10gb8yf88"><button title="12 Stones - Psycho">12 Stones - Psycho</a></button><br />' );
+			'6. <a href="https://www.youtube.com/watch?v=Tt10gb8yf88"><button title="12 Stones - Psycho">12 Stones - Psycho</a></button><br />');
 	},
 
     panbox: function(target, room, user) {

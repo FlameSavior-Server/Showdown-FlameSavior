@@ -1823,9 +1823,9 @@ var commands = exports.commands = {
 			'3. <a href="https://www.youtube.com/watch?v=EqGs36oPpLQ"><button title="Last Dinosaurs - Zoom">Last Dinosaurs - Zoom</a></button><br />' +
 			'4. <a href="https://www.youtube.com/watch?v=71CvlYX1Bqc"><button title="Linkin Park - Across The Line">Linkin Park - Across The Line</a></button><br />' +
 			'5. <a href="https://www.youtube.com/watch?v=c0SrxSMHDmE"><button title="Bullet For My Valentine - Hand of Blood">Bullet For My Valentine - Hand of Blood</a></button><br />' +
-			'6. <a href="https://www.youtube.com/watch?v=aWxBrI0g1kE"><button title="Disturbed - Indestructible">Disturbed - Indestructible</a></button>' +
-			'7. <a href="https://www.youtube.com/watch?v=Fi_GN1pHCVc"><button title="Avenged Sevenfold - Almost Easy">Avenged Sevenfold - Almost Easy</a></button>' +
-			'8. <a href="https://www.youtube.com/watch?v=fgmpWkUcpjo"><button title="Skillet - Not Gonna Die">Skillet - Not Gonna Die</a></button>' +
+			'6. <a href="https://www.youtube.com/watch?v=aWxBrI0g1kE"><button title="Disturbed - Indestructible">Disturbed - Indestructible</a></button><br />' +
+			'7. <a href="https://www.youtube.com/watch?v=Fi_GN1pHCVc"><button title="Avenged Sevenfold - Almost Easy">Avenged Sevenfold - Almost Easy</a></button><br />' +
+			'8. <a href="https://www.youtube.com/watch?v=fgmpWkUcpjo"><button title="Skillet - Not Gonna Die">Skillet - Not Gonna Die</a></button><br />' +
 			'9. <a href="https://www.youtube.com/watch?v=68YoIg_0Kaw"><button title="Breaking Benjamin - Dance With The Devil (NightCore)">Breaking Benjamin - Dance With The Devil (NightCore)</a></button>');
 	},
 

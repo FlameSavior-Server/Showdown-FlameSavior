@@ -160,7 +160,7 @@
  * @license MIT license
  */
 
-var tierspoll = 'randombattle, randommono, cc1v1, 1v1, gen51v1, uu, gen5uu, nu, ru, lc, gen5lc, cap, ou, gen5ou, ou monotype, gen5mono, balanced hackmons, hackmons, ubers, doubles, gen5doubles, triples, challenge cup, perseverance, seasonal, inverse, alphabet cup, ou theorymon, sky battles, stabmons, pu, middle cup';
+var tierspoll = 'randbats, randmono, challenge cup, cc1v1, 1v1, gen51v1, ou, gen5ou, ou monotype, gen5mono, uu, gen5uu, ru, nu, lc, gen5lc, cap, ubers, doubles, gen5doubles, triples, perseverance, seasonal, balanced hackmons, hackmons, inverse, alphabet cup, sky battles, stabmons, pu, middle cup';
 
 var commands = exports.commands = {
 

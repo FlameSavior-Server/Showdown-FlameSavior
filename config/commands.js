@@ -1492,10 +1492,10 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="#1A2389"><u>Wontuns\' Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=qpKjYATr9gQ">Animals</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=gCYcHz2k5x0">Animals</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=tFG_5PBl2K8">Animals</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=gM7Hlg75Mlo">Animals</a><br /></center>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=7BJ3ZXpserc">Animals (Maroon 5)</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=gCYcHz2k5x0">Animals (Martin Garrix)</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=tFG_5PBl2K8">Animals (Muse)</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=gM7Hlg75Mlo">Animals (Neon Trees)</a><br /></center>' +
 			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
 		);
    	},
@@ -1913,7 +1913,7 @@ var commands = exports.commands = {
 	kafka: 'kafkablack',
 	kafkablack: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('<center><img src="http://i.imgur.com/bvCvPmd.gif"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/bvCvPmd.gif"><br />' +
 			'<font size="3" color="#00CC33"><b><i>Kafka</i></font></b></font><br />' +
 			'<b><blink>Ace: Shimmy </blink></b><br />' +
 			'<b>Now I have a tc on two servers, topkek</b></center>'
@@ -1949,10 +1949,6 @@ var commands = exports.commands = {
 		);
 	},
 
-	/***************************************
-	* Trainer Cards                        *
-	***************************************/
-
 	kah: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/KH3GVna.gif" height="130">' +
@@ -1961,7 +1957,8 @@ var commands = exports.commands = {
     		'<b>Ace:</b> This fine Gentleman<br />' +
 			'<img src="http://i.imgur.com/1yPTdH8.gif" width="227" height="163"><br />' +
     		'Kah521 gets naked often.<br />' +
-			'<button name="send" value="/transferbucks Kah521,1"> Donate a buck otherwise I can\'t teach the scrubs to quickscope. </button></center>');
+			'<button name="send" value="/transferbucks Kah521,1"> Donate a buck otherwise I can\'t teach the scrubs to quickscope. </button></center>'
+		);
     },
 
 	ferro: function(target, room, user) {
@@ -1971,7 +1968,8 @@ var commands = exports.commands = {
 			'<img src="http://i.imgur.com/OQp5diX.png">' +
 			'<img src="http://i.imgur.com/7knXKo7.png"><br />' +
 			'<b>Aces:</b> Metagross, Breloom, Drapion<br /> ' +
-			'With power like this on my side, how could I possibly fail?</center>');
+			'With power like this on my side, how could I possibly fail?</center>'
+		);
 	},
 
 	cale: function(target, room, user) {
@@ -1979,7 +1977,8 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://i.imgur.com/Igqnu79.gif"><br />' +
         	'<font size="3" color="#66CCCC"><b><i>Cale</b></i></font><br />' +
         	'<b><blink>Ace: Cunnalingus</blink></b><br />' +
-        	'<b>I wonder what it\'s like to be black</b></center>');
+        	'<b>I wonder what it\'s like to be black</b></center>'
+        );
     },
 
 	redrikeo: function(target, room, user) {
@@ -1989,7 +1988,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/yQbeCwg.jpg"><br />' +
 			'<img src="http://sprites.pokecheck.org/i/454f.gif"><br />' +
     		'<b>Ace:</b> Toxicroak &lt; Giratina<br />' +
-    		'"Anyone not willing to die for something isn\'t fit to live at all."</center>');
+    		'"Anyone not willing to die for something isn\'t fit to live at all."</center>'
+    	);
     },
 
 	runy: function(target, room, user) {
@@ -1998,7 +1998,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/CbAJ86A.gif" width="320">' +
     		'<img src="http://imgur.com/y0mp28m.gif" height="120"><br />' +
     		'<b>Ace:</b> Honchkrow<br />' +
-    		'Do I wanna know, if this feeling flows both ways.</center>');
+    		'Do I wanna know, if this feeling flows both ways.</center>'
+    	);
     },
 
 	gray: function(target, room, user) {
@@ -2007,7 +2008,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/EyUEr9f.gif">' +
     		'<img src="http://fc06.deviantart.net/fs70/f/2011/360/a/c/breloom_by_all0412-d4k9tfo.jpg" height="130"><br />' +
     		'<b>Ace:</b> Breloom<br />' +
-    		'It is not enough that we do our best; sometimes we must do what is required.</center>');
+    		'It is not enough that we do our best; sometimes we must do what is required.</center>'
+    	);
     },
 
 	colons: 'chakra',
@@ -2019,7 +2021,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/fIiqiBh.gif"><br />' +
     		'<b>Ace: </b>Sord<br />' +
 			'"hi how r u :s"<br />' +
-			'<button name="send" value="/transferbucks Chakra, 1">Donate if you have swag.</button> </center>');
+			'<button name="send" value="/transferbucks Chakra, 1">Donate if you have swag.</button> </center>'
+		);
     },
 
 	arifeen: function(target, room, user) {
@@ -2028,7 +2031,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/foDX5P5.png">' +
     		'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/meloetta.gif"><br />' +
     		'<b>Ace:</b> Tempesta &lt; SmallBootyHoe<br />' +
-    		'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>');
+    		'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>'
+    	);
     },
 
 	kafka: function(target, room, user) {
@@ -2036,7 +2040,8 @@ var commands = exports.commands = {
         this.sendReplyBox('<center><img src="http://i.imgur.com/bvCvPmd.gif"><br />' +
         	'<font size="3" color="#00CC33"><b><i>Kafka</i></font></b></font><br />' +
         	'<b><blink>Ace: Shimmy </blink></b><br />' +
-        	'<b>Now I have a tc on two servers, topkek</b></center>');
+        	'<b>Now I have a tc on two servers, topkek</b></center>'
+        );
     },
 
 	ima: function(target, room, user) {
@@ -2046,14 +2051,16 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/pGTsgtC.png" height="200"><br />' +
 			'<img src="http://i.imgur.com/RlysR4t.gif"><br />' +
     		'<b>Ace:</b> Tyler<br />' +
-    		'I\'m a fuckin\' walking paradox.</center>');
+    		'I\'m a fuckin\' walking paradox.</center>'
+    	);
     },
 
 	felicette: function(target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://24.media.tumblr.com/f004d4e770655d1e188f2bbba28cd915/tumblr_n1hkstkhtp1qdlh1io1_400.gif"><br />' +
     		'<font size="3" color="03A1B0"><b><i>Félicette</font></i></b><br />' +
-    		'<b>nyoooooom gotta go fast to get dat jd boo-tay nyoooooooom</b></center>');
+    		'<b>nyoooooom gotta go fast to get dat jd boo-tay nyoooooooom</b></center>'
+    	);
     },
 
 	garde: function(target, room, user) {
@@ -2062,7 +2069,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/VxNCwRt.png" width="320">' +
     		'<img src="http://fc07.deviantart.net/fs71/i/2013/351/e/9/mega_gardevoir_by_nganlamsong-d6y9ygy.png" height="100"><br />' +
     		'<b>Ace:</b> Mega Gardevoir<br />' +
-    		'I\'m sexy.</center>');
+    		'I\'m sexy.</center>'
+    	);
     },
 
 	lightning: function(target, room, user) {
@@ -2071,7 +2079,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/kiEAFGi.png" width="360">' +
     		'<img src="http://i.imgur.com/TCxGhn4.jpg" height="140"><br />' +
     		'<b>Ace:</b> Dragonite<br />' +
-    		'My birds are stronger than Bruce Lee.</center>');
+    		'My birds are stronger than Bruce Lee.</center>'
+    	);
     },
 
 	jyph: function(target, room, user) {
@@ -2080,7 +2089,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/m9GCS8r.gif">' +
     		'<img src="http://i.imgur.com/iMhAVon.png" height="140"><br />' +
     		'<b>Ace:</b> Scolipede<br />' +
-    		'It\'s more important to master the cards you are holding than to complain about the ones your opponents were dealt.</center>');
+    		'It\'s more important to master the cards you are holding than to complain about the ones your opponents were dealt.</center>'
+    	);
     },
 
 	crthree: function(target, room, user) {
@@ -2089,7 +2099,8 @@ var commands = exports.commands = {
     		'<img src="http://i.imgur.com/bi7CmzJ.png" width="250">' +
     		'<img src="http://oi33.tinypic.com/14vsayg.jpg" width="140"><br />' +
     		'<b>Ace:</b> MLG Pro Strats<br />' +
-    		'"From drab to fab, with nothin\' but mustard!"</center>');
+    		'"From drab to fab, with nothin\' but mustard!"</center>'
+    	);
     },
 
 	youtubers: function(target, room, user) {
@@ -5596,7 +5607,7 @@ var commands = exports.commands = {
 	frostradio: 'radio',
 	radio: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('Come visit the Frost Plug Radio <a href="http://plug.dj/frost-ps/">here</a>!'
+		this.sendReplyBox('Come visit the Frost Plug Radio <a href="http://plug.dj/frost-ps/">here</a>!'
 		);
 	},
 

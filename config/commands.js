@@ -1487,6 +1487,18 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 
+	bubblebox: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+			'<center><h1><font color="blueviolet"><u>Bubble\'s Music Box</u></color></h1></center>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=N_Q8sy9PmeA">Moonstruck Blossom</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=jdQrYWfu5hY">Spectrum</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=yx78IVciOmQ">The Light</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=b3_4Q8pyI7A">White Rabbit</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+		);
+	},
+
 	swagbox: 'wontunsbox',
 	wontunsbox: function (target, room, user) {
 		if (!this.canBroadcast()) return;

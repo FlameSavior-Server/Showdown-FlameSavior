@@ -10,6 +10,7 @@
  *
  * @license MIT license
  */
+
 var crypto = require('crypto');
 
 var poofeh = true;
@@ -2669,7 +2670,8 @@ var commands = exports.commands = {
 		room.decision(user, 'choose', 'move ' + target);
 	},
 
-	sw: 'switch',	switch: function (target, room, user) {
+	sw: 'switch',
+	switch: function (target, room, user) {
 		if (!room.decision) return this.sendReply("You can only do this in battle rooms.");
 
 		room.decision(user, 'choose', 'switch ' + parseInt(target, 10));

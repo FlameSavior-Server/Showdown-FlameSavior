@@ -1181,6 +1181,13 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 
+	hrey: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/RSOIh2j.gif"><br />' +
+			'<img src="http://i.imgur.com/EsfjH9A.gif"><br />' +
+			'if we legalize pot, METH and THE MOLLYS will be legalized shortly after #420NO</center>');
+	},
+
 	shrewed: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/3scS0w5.gif"><br />' +
@@ -1820,13 +1827,13 @@ var commands = exports.commands = {
         this.sendReplyBox('<b>Sky\'s Sound Track!</b><br />' +
             '1. <a href="https://www.youtube.com/watch?v=VIop055eJhU"><button title="Touhou 6 - EoSD - U.N. Owen was her?"> Touhou 6 - EoSD - U.N. Owen was her?</a></button><br />' +
             '2. <a href="https://www.youtube.com/watch?v=BwpLSiplyYc"><button title="Kirby 64: The Crystal Shards - Zero Two">Kirby 64: The Crystal Shards - Zero Two</a></button><br />' +
-			'3. <a href="https://www.youtube.com/watch?v=EqGs36oPpLQ"><button title="Last Dinosaurs - Zoom">Last Dinosaurs - Zoom</a></button><br />' +
-			'4. <a href="https://www.youtube.com/watch?v=71CvlYX1Bqc"><button title="Linkin Park - Across The Line">Linkin Park - Across The Line</a></button><br />' +
-			'5. <a href="https://www.youtube.com/watch?v=c0SrxSMHDmE"><button title="Bullet For My Valentine - Hand of Blood">Bullet For My Valentine - Hand of Blood</a></button><br />' +
+			'3. <a href="https://www.youtube.com/watch?v=EzCKrwOme2U"><button title="Muse - Butterflies and Hurricanes">Muse - Butterflies and Hurricanes</a></button><br />' +
+			'4. <a href="https://www.youtube.com/watch?v=EqGs36oPpLQ"><button title="Last Dinosaurs - Zoom">Last Dinosaurs - Zoom</a></button><br />' +
+			'5. <a href="https://www.youtube.com/watch?v=p9Y-r-rs9W8"><button title="Green Day - Welcome to Paradise">Green Day - Welcome to Paradise</a></button><br />' +
 			'6. <a href="https://www.youtube.com/watch?v=aWxBrI0g1kE"><button title="Disturbed - Indestructible">Disturbed - Indestructible</a></button><br />' +
 			'7. <a href="https://www.youtube.com/watch?v=Fi_GN1pHCVc"><button title="Avenged Sevenfold - Almost Easy">Avenged Sevenfold - Almost Easy</a></button><br />' +
-			'8. <a href="https://www.youtube.com/watch?v=fgmpWkUcpjo"><button title="Skillet - Not Gonna Die">Skillet - Not Gonna Die</a></button><br />' +
-			'9. <a href="https://www.youtube.com/watch?v=68YoIg_0Kaw"><button title="Breaking Benjamin - Dance With The Devil (NightCore)">Breaking Benjamin - Dance With The Devil (NightCore)</a></button>');
+			'8. <a href="https://www.youtube.com/watch?v=71CvlYX1Bqc"><button title="Linkin Park - Across The Line">Linkin Park - Across The Line</a></button><br />' +
+			'9. <a href="https://www.youtube.com/watch?v=gMzSpvibN7A"><button title="30 Seconds To Mars - Hurricane (Nightcore)">30 Seconds To Mars - Hurricane (Nightcore)</a></button>');
 	},
 
     vbox: 'jackbox',

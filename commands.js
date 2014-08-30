@@ -10,7 +10,6 @@
  *
  * @license MIT license
  */
-
 var crypto = require('crypto');
 
 var poofeh = true;
@@ -955,7 +954,7 @@ var commands = exports.commands = {
 		if (voices.length > 0) {
 			voices = voices.join(', ');
 		}
-		connection.popup('Administrators: '+admins+'\n\nLeaders: '+leaders+'\n\nModerators: '+mods+'\n\nDrivers: '+drivers+'\n\nVoices: '+voices);
+		connection.popup('**Administrators:** ' + admins + '\n\n**Leaders:** ' + leaders + '\n\n**Moderators:** ' + mods + '\n\n**Drivers:** ' + drivers + '\n\n**Voices:** ' + voices);
 	},
 
 	leave: 'part',
@@ -2185,9 +2184,9 @@ var commands = exports.commands = {
 				names.push(Users.users[i].name);
 			}
 		}
-		if (names.length < 1) return this.sendReply('There are no users of the rank "' + Tools.escapeHTML(Config.groups[target].name) + '" currently online.');
+		if (names.length < 1) return this.sendReply('There are no users of the rank **' + Tools.escapeHTML(Config.groups[target].name) + '** currently online.');
 
-		user.popup('There is **' + names.length + '** users with the rank "' + Config.groups[target].name+'"\n Those users are: \n'+names.join(','));
+		user.popup('There ' + (names.length === 1 ? 'is' : 'are') + ' **' + names.length + '** ' + (names.length === 1 ? 'user' : 'users') + ' with the rank **' + Config.groups[target].name+'** currently online.\n' + names.join(', '));
 	},
 
 	userinrooms: function (target, room, user) {
@@ -2670,8 +2669,7 @@ var commands = exports.commands = {
 		room.decision(user, 'choose', 'move ' + target);
 	},
 
-	sw: 'switch',
-	switch: function (target, room, user) {
+	sw: 'switch',	switch: function (target, room, user) {
 		if (!room.decision) return this.sendReply("You can only do this in battle rooms.");
 
 		room.decision(user, 'choose', 'switch ' + parseInt(target, 10));

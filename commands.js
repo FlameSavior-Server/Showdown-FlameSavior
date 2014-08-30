@@ -842,16 +842,16 @@ var commands = exports.commands = {
 		room.owners = ''; room.admins = ''; room.leaders = ''; room.mods = ''; room.drivers = ''; room.voices = '';
 		for (var u in room.auth) {
 			if (room.auth[u] == '#') {
-				room.owners = room.owners +u+',';
+				room.owners = room.owners + u + ',';
 			}
 			if (room.auth[u] == '@') {
-				room.mods = room.mods +u+',';
+				room.mods = room.mods + u + ',';
 			}
 			if (room.auth[u] == '%') {
-				room.drivers = room.drivers +u+',';
+				room.drivers = room.drivers + u + ',';
 			}
 			if (room.auth[u] == '+') {
-				room.voices = room.voices +u+',';
+				room.voices = room.voices + u + ',';
 			}
 		}
 
@@ -888,10 +888,10 @@ var commands = exports.commands = {
 		if (voices.length > 0) {
 			voices = voices.join(', ');
 		}
-		connection.popup('Founder: '+founder+'\n\nOwners: '+owners+'\n\nModerators: '+mods+'\n\nDrivers: '+drivers+'\n\nVoices: '+voices);
+		connection.popup('**Founder:** ' + founder + '\n\n**Owners:** ' + owners + '\n\n**Moderators:** ' + mods + '\n\n**Drivers:** ' + drivers + '\n\n**Voices:** ' + voices);
 	},
 
-	stafflist: function(target, room, user, connection) {
+	stafflist: function (target, room, user, connection) {
 		var buffer = [];
 		var admins = [];
 		var leaders = [];
@@ -905,19 +905,19 @@ var commands = exports.commands = {
 		for (var u in stafflist) {
 			line = stafflist[u].split(',');
 			if (line[1] == '~') {
-				admins2 = admins2 +line[0]+',';
+				admins2 = admins2 + line[0] + ',';
 			}
 			if (line[1] == '&') {
-				leaders2 = leaders2 +line[0]+',';
+				leaders2 = leaders2 + line[0] + ',';
 			}
 			if (line[1] == '@') {
-				mods2 = mods2 +line[0]+',';
+				mods2 = mods2 + line[0] + ',';
 			}
 			if (line[1] == '%') {
-				drivers2 = drivers2 +line[0]+',';
+				drivers2 = drivers2 + line[0] + ',';
 			}
 			if (line[1] == '+') {
-				voices2 = voices2 +line[0]+',';
+				voices2 = voices2 + line[0] + ',';
 			}
 		}
 		admins2 = admins2.split(',');
@@ -2175,6 +2175,7 @@ var commands = exports.commands = {
 		this.sendReply(targetUser + '\'s identity has been updated.');
 	},
 
+	uor: 'usersofrank',
 	usersofrank: function (target, room, user) {
 		if (!target || !Config.groups[target]) return false;
 		var names = [];
@@ -2185,9 +2186,9 @@ var commands = exports.commands = {
 				names.push(Users.users[i].name);
 			}
 		}
-		if (names.length < 1) return this.sendReply('There are no users of the rank **' + Tools.escapeHTML(Config.groups[target].name) + '** currently online.');
+		if (names.length < 1) return this.sendReplyBox('There are no users of the rank <font color="#24678d"><b>' + Tools.escapeHTML(Config.groups[target].name) + '</b></font> currently online.');
 
-		user.popup('There ' + (names.length === 1 ? 'is' : 'are') + ' **' + names.length + '** ' + (names.length === 1 ? 'user' : 'users') + ' with the rank **' + Config.groups[target].name+'** currently online.\n' + names.join(', '));
+		this.sendReplyBox('There ' + (names.length === 1 ? 'is' : 'are') + ' <font color="#24678d"><b>' + names.length + '</b></font> ' + (names.length === 1 ? 'user' : 'users') + ' with the rank <font color="#24678d"><b>' + Config.groups[target].name+'</b></font> currently online.<br />' + names.join(', '));
 	},
 
 	userinrooms: function (target, room, user) {

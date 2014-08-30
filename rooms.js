@@ -1533,6 +1533,7 @@ checkInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
 		if (Rooms.rooms[u].type !== 'chat' || Rooms.rooms[u].protect) continue;
 		if (Rooms.rooms[u].messageCount < 50) Rooms.rooms[u].active = false;
+		if (Rooms.rooms[u].messageCount > 50) Rooms.rooms[u].active = true;
 	}
 }, 60 * 60000);
 

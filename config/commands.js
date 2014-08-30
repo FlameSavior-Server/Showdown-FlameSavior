@@ -160,7 +160,7 @@
  * @license MIT license
  */
 
-var tierspoll = 'randbats, randmono, randlc, challenge cup, cc1v1, 1v1, gen51v1, ou, gen5ou, ou monotype, gen5mono, uu, gen5uu, ru, nu, lc, gen5lc, cap, ubers, doubles, gen5doubles, triples, perseverance, seasonal, balanced hackmons, hackmons, inverse, alphabet cup, sky battles, stabmons, pu, middle cup';
+var tiersforpoll = 'Randbats, Rand Mono, Rand LC, Challenge Cup, CC1v1, 1v1, [Gen 5] 1v1, OU, [Gen 5] OU, OU Mono, [Gen 5] Mono, UU, [Gen 5] UU, RU, NU, LC, [Gen 5] LC, CAP, Ubers, Doubles, [Gen 5] Doubles, Triples, Perseverance, Seasonal, Balanced Hackmons, Inverse, Sky Battles, STABmons, PU, Middle Cup';
 
 var commands = exports.commands = {
 
@@ -364,14 +364,14 @@ var commands = exports.commands = {
 
 	tierpoll: 'tiervote',
 	tiervote: function (target, room, user) {
-		return this.parse('/poll Tournament Tier?, ' + tierspoll);
+		return this.parse('/poll Tournament Tier?, ' + tiersofpoll.toLowerCase());
 	},
 
 	tierpopt: 'tpo',
 	tpoptions: 'tpo',
 	tpo: function (target, room, user) {
 		if (!this.canBroadcast()) return false;
-		this.sendReplyBox('Current options for tier poll are: "' + tierspoll + '".');
+		this.sendReplyBox('Current options for tier poll are: "' + tiersforpoll + '".');
 	},
 
 	hallowme: function (target, room, user) {

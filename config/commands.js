@@ -364,7 +364,7 @@ var commands = exports.commands = {
 
 	tierpoll: 'tiervote',
 	tiervote: function (target, room, user) {
-		return this.parse('/poll Tournament Tier?, ' + tiersofpoll.toLowerCase());
+		return this.parse('/poll Tournament Tier?, ' + tiersforpoll.toLowerCase());
 	},
 
 	tierpopt: 'tpo',
@@ -2046,7 +2046,7 @@ var commands = exports.commands = {
 			'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>'
 		);
 	},
-	
+
 	lightning: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/iJ0FAiT.gif">' +

@@ -120,12 +120,40 @@ exports.Formats = [
 		}
 	},
 	/*{
-		name: "CAP Volkraken Playtest",
+		name: "CAP 19 Playtest",
 		section: "XY Singles",
 
-		ruleset: ['CAP Pokemon', 'Standard', 'Team Preview'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Tomohawk', 'Necturna', 'Mollux', 'Aurumoth', 'Malaconda', 'Cawmodore', 'Syclant', 'Revenankh', 'Pyroak', 'Fidgit', 'Stratagem', 'Arghonaut', 'Kitsunoh', 'Cyclohm', 'Colossoil', 'Krilowatt', 'Voodoom']
+		ruleset: ['CAP Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
+		banlist: ['Uber', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Soul Dew',
+			'Tomohawk', 'Necturna', 'Mollux', 'Aurumoth', 'Malaconda', 'Cawmodore', 'Volkraken', 'Syclant', 'Revenankh', 'Pyroak', 'Fidgit', 'Stratagem', 'Arghonaut', 'Kitsunoh', 'Cyclohm', 'Colossoil', 'Krilowatt', 'Voodoom'
+		]
 	},*/
+	{
+		name: "Fairy Face-Off",
+		section: "XY Singles",
+
+		onBegin: function () {
+			this.debug('cutting down to 3');
+			this.p1.pokemon = this.p1.pokemon.slice(0, 3);
+			this.p1.pokemonLeft = this.p1.pokemon.length;
+			this.p2.pokemon = this.p2.pokemon.slice(0, 3);
+			this.p2.pokemonLeft = this.p2.pokemon.length;
+		},
+		forcedLevel: 30,
+		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview GBU'],
+		requirePentagon: true,
+		validateTeam: function (team) {
+			var problems = [];
+			if (team.length < 3) problems.push('You must bring at least three Pokémon.');
+			for (var i = 0; i < team.length; i++) {
+				var types = Tools.getTemplate(team[i].species || team[i].name).types || [];
+				if (types.indexOf('Fairy') > -1) continue;
+				problems.push('You must only bring Fairy-type Pokémon.');
+				break;
+			}
+			return problems;
+		}
+	},
 	{
 		name: "Custom Game",
 		section: "XY Singles",
@@ -291,7 +319,6 @@ exports.Formats = [
 		section: "XY Triples",
 
 		gameType: 'triples',
-		searchShow: false,
 		ruleset: ['Pokemon', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Team Preview'],
 		banlist: ['Unreleased', 'Illegal', 'Soul Dew', 'Dark Void',
 			'Mewtwo', 'Lugia', 'Ho-Oh', 'Kyogre', 'Groudon', 'Rayquaza', 'Dialga', 'Palkia', 'Giratina', 'Giratina-Origin',
@@ -307,28 +334,6 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview'],
 		validateTeam: function (team, format) {
 			if (team.length < 6) return ['You must have six Pokémon.'];
-		}
-	},
-	{
-		name: "Pikachu Tournamentchu",
-		section: "XY Triples",
-
-		gameType: 'triples',
-		maxForcedLevel: 30,
-		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview', 'Kalos Pokedex'],
-		requirePentagon: true,
-		banlist: ['Eviolite'],
-		validateTeam: function (team, format) {
-			for (var i = 0; i < team.length; i++) {
-				if (Tools.getTemplate(team[i]).species === 'Pikachu') return;
-			}
-			return ['Your team must have Pikachu.'];
-		},
-		validateSet: function (set) {
-			var template = this.getTemplate(set.species || set.name);
-			if (!template.evos || template.evos.length === 0) {
-				return [set.species + " is banned as it cannot evolve."];
-			}
 		}
 	},
 	{
@@ -649,6 +654,20 @@ exports.Formats = [
 				problems.push((set.name || set.species) + ' is higher than level 100.');
 			}
 			return problems;
+		}
+	},
+	{
+		name: "Mediocremons",
+		section: "Other Metagames",
+
+		searchShow: false,
+		ruleset: ['OU'],
+		banlist: ['Clefable', 'Kingdra', 'Venomoth', 'Abomasite', 'Mawilite', 'Medichamite', 'Huge Power', 'Pure Power'],
+		validateSet: function (set) {
+			var template = this.getTemplate(set.species || set.name);
+			for (var stat in template.baseStats) {
+				if (template.baseStats[stat] >= 100) return [set.species + " has a base stat of 100 or more."];
+			}
 		}
 	},
 	{
@@ -1014,9 +1033,14 @@ exports.Formats = [
 	},
 	{
 		name: "OU Monotype",
-		section: "Monotype",
-		ruleset: ['OU', 'Same Type Clause'],
-		banlist: ['Talonflame']
+		section: "Other Metagames",
+
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause', 'Same Type Clause'],
+		banlist: ['Gengarite', 'Kangaskhanite', 'Lucarionite',
+			'Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh',
+			'Kyogre', 'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Talonflame', 'Xerneas',
+			'Yveltal', 'Zekrom'
+		]
 	},
 	{
 		name: "Ubers Monotype",

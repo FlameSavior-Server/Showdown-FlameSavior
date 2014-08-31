@@ -4069,11 +4069,13 @@ var commands = exports.commands = {
 
 	giegue: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/IKVXSTv.png"> '+
-			'<img src="http://i.imgur.com/YjVNB4q.png">' +
-			'<img src="http://i.imgur.com/ppZSj34.png" height="150"><br />' +
-			'<b>Ace: </b>Malamar<br />' +
-			'Zubats, Zubats everywhere!!!</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/dddDdFw.png" width="100">' +
+			'<img src="http://i.imgur.com/HBxk2Oq.png">' +
+			'<img src="http://i.imgur.com/NH72fdr.png" width="100"><br />' +
+			'<b>Chemical Formula:</b> C3H8<br />' +
+			'<b>Classification:</b> Alkane<br />' +
+			'<b>Boiling Point:</b> -42°C<br />' +
+			'<font size="4" color="#444444">I sell <font color="black"><b>propane</b><font color="#444444"> and <font color="black"> <b>propane </b><font color="#444444">accessories.</center>'
 		);
 	},
 

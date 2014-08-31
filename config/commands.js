@@ -1892,6 +1892,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	snore: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/viqpoOK.png" width="130">' +
+			'<img src="http://i.imgur.com/c9uLhNL.png" width="270">' +
+			'<img src="http://i.imgur.com/M3KpLrt.jpg" width="140"><br />' +
+			'<b>Ace:</b> Fucking with Balto<br />' +
+			'"It only worked cuz i couldn\'t use my para\'s" - Balto.</center>'
+		);
+	},
+
 	bidoof: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/uOcV5sw.jpg" width="180"><br />' +

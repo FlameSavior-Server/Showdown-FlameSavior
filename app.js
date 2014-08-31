@@ -378,27 +378,22 @@ try {
 global.Cidr = require('./cidr.js');
 
 if (Config.crashguard) {
-        // graceful crash - allow current battles to finish before restarting
-        process.on('uncaughtException', (function() {
-                var lastCrash = 0;
-                return function(err) {
-                        var dateNow = Date.now();
-                        var quietCrash = require('./crashlogger.js')(err, 'The main process');
-                        quietCrash = quietCrash || ((dateNow - lastCrash) <= 1000 * 60 * 5)
-                        lastCrash = Date.now();
-                        if (quietCrash) return;
-                        var stack = (""+err.stack).escapeHTML().split("\n").slice(0,2).join("<br />");
-                        if (Rooms.rooms.staff) {
-                                Rooms.rooms.staff.addRaw('<div class="broadcast-red"><b>The server has experienced a crash:</b> '+stack+'<br /></div>');
-                                Rooms.rooms.staff.addRaw('<div class="broadcast-green">The crash has been maintained, and the server will run fine. A restart is advised to prevent any issues.</div>');
-                                for (var u in Users.users) {
-									if (Users.users[u].group == "~" || Users.users[u].group == "&") {
-										Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|The server has experienced a crash, please check the staff room for the error stack.');
-									}
-								}
-                        }
-                };
-        })());
+	// graceful crash - allow current battles to finish before restarting
+	var lastCrash = 0;
+	process.on('uncaughtException', function (err) {
+		var dateNow = Date.now();
+		var quietCrash = require('./crashlogger.js')(err, 'The main process');
+		quietCrash = quietCrash || ((dateNow - lastCrash) <= 1000 * 60 * 5);
+		lastCrash = Date.now();
+		if (quietCrash) return;
+		var stack = ("" + err.stack).escapeHTML().split("\n").slice(0, 2).join("<br />");
+		if (Rooms.lobby) {
+			Rooms.lobby.addRaw('<div class="broadcast-red"><b>THE SERVER HAS CRASHED:</b> ' + stack + '<br />Please restart the server.</div>');
+			Rooms.lobby.addRaw('<div class="broadcast-red">You will not be able to talk in the lobby or start new battles until the server restarts.</div>');
+		}
+		Config.modchat = 'crash';
+		Rooms.global.lockdown = true;
+	});
 }
 
 /*********************************************************

@@ -1892,6 +1892,18 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	dabs: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/BEfkclm.png">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/bidoof.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus-therian.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/porygon2.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/gardevoir-mega.gif"><br />' +
+			'<b>Ace:</b> 12 LvL Win Streak<br />' +
+			'DABS (Dolph Auburn Balto Sabbs) Be Fuckin Bitches All Night Long.</center>'
+		);
+	},
+
 	snore: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/viqpoOK.png" width="130">' +

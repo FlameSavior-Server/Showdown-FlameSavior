@@ -1181,6 +1181,14 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 
+	dildo: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/KpRmFDT.gif"><br />' 
+            '<img src="http://i.imgur.com/4FwBKa4.gif" width="270">' +
+            '<img src="http://i.imgur.com/JG2UXZd.gif" width="270"><br />' +
+            'The doors only open one way. They open inward.</center>');
+	},
+
 	hrey: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/RSOIh2j.gif"><br />' +

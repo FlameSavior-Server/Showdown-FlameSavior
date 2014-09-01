@@ -1840,7 +1840,7 @@ var commands = exports.commands = {
    	solstereo: 'solbox',
 	solbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>Sky\'s Sound Track!</b><br />' +
+        this.sendReplyBox('<b>The Sol Box</b><br />' +
             '1. <a href="https://www.youtube.com/watch?v=VIop055eJhU"><button title="Touhou 6 - EoSD - U.N. Owen was her?"> Touhou 6 - EoSD - U.N. Owen was her?</a></button><br />' +
             '2. <a href="https://www.youtube.com/watch?v=BwpLSiplyYc"><button title="Kirby 64: The Crystal Shards - Zero Two">Kirby 64: The Crystal Shards - Zero Two</a></button><br />' +
 			'3. <a href="https://www.youtube.com/watch?v=EzCKrwOme2U"><button title="Muse - Butterflies and Hurricanes">Muse - Butterflies and Hurricanes</a></button><br />' +

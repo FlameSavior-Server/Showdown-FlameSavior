@@ -1181,6 +1181,14 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 
+	shrew: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src="http://i.imgur.com/0dwzNX7.gif"><br />' +
+			'<img src="http://i.imgur.com/tMGx5fT.gif" width="280" height="200"><br />' +
+			'<img src="http://media.giphy.com/media/BPmdagBjYS6sM/giphy.gif" width="280" height="200"><br />' +
+			'I bet dead people are easier to get along with.</center>');
+	},
+
 	dildo: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/KpRmFDT.gif"><br />' +

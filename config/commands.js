@@ -1217,9 +1217,9 @@ var commands = exports.commands = {
 
 	terlor: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font color="#1A68A8">Terlor</font><br />' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/EEcZ4J2.png" width="350"><br />' +
         	'<img src="http://i.imgur.com/bjVsAsj.png"><br />' +
-            '"I love bad bitches, that\'s my fucking problem. And yeah, I like to fuck, I got a fucking problem" -ASAP Rocky, 2013"</center>');
+            '"I love bad bitches, that\'s my fucking problem. And yeah, I like to fuck, I got a fucking problem" -ASAP Rocky, 2013</center>');
 	},
 
 	saago: function(target, room, user) {

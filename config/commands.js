@@ -1155,7 +1155,7 @@ var commands = exports.commands = {
 			if (isNaN(parts[1]) || parts[1] === 'Infinity') userids.money[i] = 0;
 			
         }
-		for (var i=0; i<5;i++) {
+		for (var i=0; i<10;i++) {
 			var tempHighest = 0;
 			for (var x=0;x<size;x++) {
 				if (userids.money[x] > tempHighest) tempHighest = userids.money[x];
@@ -1172,11 +1172,16 @@ var commands = exports.commands = {
 			}
 		}
 		return this.sendReplyBox('<b>The richest users are:</b>' + 
-								'<br>' + highest.id[0] + ': ' + highest.money[0] +
-								'<br>' + highest.id[1] + ': ' + highest.money[1] +
-								'<br>' + highest.id[2] + ': ' + highest.money[2] +
-								'<br>' + highest.id[3] + ': ' + highest.money[3] +
-								'<br>' + highest.id[4] + ': ' + highest.money[4]);
+								'<br>1. ' + highest.id[0] + ': ' + highest.money[0] +
+								'<br>2. ' + highest.id[1] + ': ' + highest.money[1] +
+								'<br>3. ' + highest.id[2] + ': ' + highest.money[2] +
+								'<br>4. ' + highest.id[3] + ': ' + highest.money[3] +
+								'<br>5. ' + highest.id[4] + ': ' + highest.money[4] +
+								'<br>6. ' + highest.id[5] + ': ' + highest.money[5] +
+								'<br>7. ' + highest.id[6] + ': ' + highest.money[6] +
+								'<br>8. ' + highest.id[7] + ': ' + highest.money[7] +
+								'<br>9. ' + highest.id[8] + ': ' + highest.money[8] +
+								'<br>10. ' + highest.id[9] + ': ' + highest.money[9]);
 	},
 
 	//Trainer Cards.

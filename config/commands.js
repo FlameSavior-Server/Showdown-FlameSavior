@@ -1893,6 +1893,28 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	mushy: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size="5" color="#8E019D">Mushy</font><br />' +
+			'<img src="http://fc08.deviantart.net/fs71/i/2014/197/a/e/pokemon_shaming__imalune_s_sylveon_redo_by_imalune-d7r0ydz.png" height="200">' +
+			'<img src="http://wildcritters.ws/data/dd89ae3139345a955b3f658e0c75c5d4.png" height="200"><br />' +
+			'<b>Ace:</b> <font color="red">Pain</font><br />' +
+			'This world is full of terrible people who will do anything to help themselves regardless of how it affects others. Be glad that there are some who help others regardless of how it affects themselves.</center>'
+		);
+	},
+
+	dabs: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/BEfkclm.png">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/bidoof.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus-therian.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/porygon2.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/gardevoir-mega.gif"><br />' +
+			'<b>Ace:</b> 12 LvL Win Streak<br />' +
+			'DABS (Dolph Auburn Balto Sabbs) Be Fuckin Bitches All Night Long.</center>'
+		);
+	},
+
 	snore: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/viqpoOK.png" width="130">' +

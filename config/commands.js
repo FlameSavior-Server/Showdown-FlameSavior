@@ -1892,6 +1892,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	mushy: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size="5" color="#8E019D">Mushy</font><br />' +
+			'<img src="http://fc08.deviantart.net/fs71/i/2014/197/a/e/pokemon_shaming__imalune_s_sylveon_redo_by_imalune-d7r0ydz.png" height="200">' +
+			'<img src="http://wildcritters.ws/data/dd89ae3139345a955b3f658e0c75c5d4.png" height="200"><br />' +
+			'<b>Ace:</b> <font color="red">Pain</font><br />' +
+			'This world is full of terrible people who will do anything to help themselves regardless of how it affects others. Be glad that there are some who help others regardless of how it affects themselves.</center>'
+		);
+	},
+
 	dabs: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/BEfkclm.png">' +

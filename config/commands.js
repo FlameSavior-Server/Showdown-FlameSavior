@@ -683,6 +683,7 @@ var commands = exports.commands = {
 						if ('lc' in searches[search]) {
 							// some LC legal Pokemon are stored in other tiers (Ferroseed/Murkrow etc)
 							// this checks for LC legality using the going criteria, instead of dex[mon].tier
+							if (!Tools.data.Formats['lc'].banlist) Tools.data.Formats['lc'].banlist = [];
 							var isLC = (dex[mon].evos && dex[mon].evos.length > 0) && !dex[mon].prevo && Tools.data.Formats['lc'].banlist.indexOf(dex[mon].species) === -1;
 							if ((searches[search]['lc'] && !isLC) || (!searches[search]['lc'] && isLC)) {
 								delete dex[mon];
@@ -1891,18 +1892,6 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
-
-	dabs: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/BEfkclm.png">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/bidoof.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/thundurus-therian.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/porygon2.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/gardevoir-mega.gif"><br />' +
-			'<b>Ace:</b> 12 LvL Win Streak<br />' +
-			'DABS (Dolph Auburn Balto Sabbs) Be Fuckin Bitches All Night Long.</center>'
-		);
-	},
 
 	snore: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -4081,13 +4070,11 @@ var commands = exports.commands = {
 
 	giegue: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/dddDdFw.png" width="100">' +
-			'<img src="http://i.imgur.com/HBxk2Oq.png">' +
-			'<img src="http://i.imgur.com/NH72fdr.png" width="100"><br />' +
-			'<b>Chemical Formula:</b> C3H8<br />' +
-			'<b>Classification:</b> Alkane<br />' +
-			'<b>Boiling Point:</b> -42°C<br />' +
-			'<font size="4" color="#444444">I sell <font color="black"><b>propane</b><font color="#444444"> and <font color="black"> <b>propane </b><font color="#444444">accessories.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/IKVXSTv.png"> '+
+			'<img src="http://i.imgur.com/YjVNB4q.png">' +
+			'<img src="http://i.imgur.com/ppZSj34.png" height="150"><br />' +
+			'<b>Ace: </b>Malamar<br />' +
+			'Zubats, Zubats everywhere!!!</center>'
 		);
 	},
 

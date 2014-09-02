@@ -1186,6 +1186,14 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 
+	nollid: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/0dwzNX7.gif"><br />' +
+			'<img src="http://25.media.tumblr.com/f58fe4414fc7e71aa3e97b1da0d06c9b/tumblr_mf3kcgAp2k1r3ifxzo1_500.gif" width="260" height="200">' +
+			'<img src="http://media.tumblr.com/50996a160cc5d34905ff35da5821d323/tumblr_inline_n5jcpzJd4p1suiunx.gif" width="260" height="200"><br />' +
+			'Thumbtacks in my shoes would stick into my feet whenever I tried to walk. It would hurt. I don\'t think I could deal with that really.</center>');
+	},
+
 	shrew: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/0dwzNX7.gif"><br />' +

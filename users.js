@@ -1593,6 +1593,7 @@ User = (function () {
 	 */
 	 User.prototype.chat = function (message, room, connection) {
 	 	var now = new Date().getTime();
+	 	this.lastActive = now;
 
 	 	if (message.substr(0,16) === '/cmd userdetails') {
 			// certain commands are exempt from the queue

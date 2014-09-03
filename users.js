@@ -324,6 +324,7 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 			connection.popup("Your IP is known for abuse and has been locked. If you're using a proxy, don't.");
 			if (connection.user) connection.user.lock(true);
 		}*/
+
 		if (isBlocked) {
 			switch (isBlocked) {
 				case 'sbl.spamhaus.org':
@@ -334,28 +335,34 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 				}
 				break;
 				case 'rbl.efnetrbl.org':
-				connection.popup('Your IP is listed in rbl.efnetrbl.org and has been automatically banned. For more information, please visit http://rbl.efnetrbl.org/.');
-				if (connection.user) connection.user.ban();
+				connection.send("|popup|Your IP is listed in rbl.efnetrbl.org and has been automatically banned. For more information, please visit http://rbl.efnetrbl.org/.");
+				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+				return connection.destroy();
 				break;
 				case 'dnsbl.dronebl.org':
-				connection.popup('Your IP is listed in dnsbl.dronebl.org and has been automatically banned. For more information, please visit http://dronebl.org/lookup?ip='+connection.ip+'.');
-				if (connection.user) connection.user.ban();
+				connection.send("|popup|Your IP is listed in dnsbl.dronebl.org and has been automatically banned. For more information, please visit http://dronebl.org/lookup?ip="+connection.ip+".");
+				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+				return connection.destroy();
 				break;
-				case '8000.156.93.184.192.ip-port.exitlist.torproject.org':
-				connection.popup('Your IP is listed as a TOR exit node and has been automatically banned.');
-				if (connection.user) connection.user.ban();
+				case Config.port+'.'+(Config.ip || '127.0.0.1').split('.').reverse().join('.')+'.ip-port.exitlist.torproject.org':
+				connection.send("|popup|Your IP is listed as a TOR exit node and has been automatically banned.");
+				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+				return connection.destroy();
 				break;
 				case 'http.dnsbl.sorbs.net':
-				connection.popup('Your IP is known for running proxy servers and has been automatically banned.');
-				if (connection.user) connection.user.ban();
+				connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
+				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+				return connection.destroy();
 				break;
 				case 'socks.dnsbl.sorbs.net':
-				connection.popup('Your IP is known for running proxy servers and has been automatically banned.');
-				if (connection.user) connection.user.ban();
+				connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
+				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+				return connection.destroy();
 				break;
 				case 'misc.dnsbl.sorbs.net':
-				connection.popup('Your IP is known for running proxy servers and has been automatically banned.');
-				if (connection.user) connection.user.ban();
+				connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
+				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+				return connection.destroy();
 				break;
 				default:
 				connection.popup('Your IP is known for abuse and has been locked. If you\'re using a proxy, don\'t.');

@@ -12,7 +12,7 @@
  * @license MIT license
  */
 
-const BLOCKLISTS = ['sbl.spamhaus.org', 'rbl.efnetrbl.org', 'dnsbl.dronebl.org', '8000.156.93.184.192.ip-port.exitlist.torproject.org','http.dnsbl.sorbs.net','socks.dnsbl.sorbs.net','misc.dnsbl.sorbs.net'];
+const BLOCKLISTS = ['sbl.spamhaus.org', 'rbl.efnetrbl.org', 'dnsbl.dronebl.org', Config.port+'.'+(Config.ip || '127.0.0.1').split('.').reverse().join('.')+'.ip-port.exitlist.torproject.org','http.dnsbl.sorbs.net','socks.dnsbl.sorbs.net','misc.dnsbl.sorbs.net'];
 
 var dns = require('dns');
 

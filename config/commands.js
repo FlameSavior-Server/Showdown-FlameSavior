@@ -3100,7 +3100,7 @@ var commands = exports.commands = {
 
 	crashy: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/SCVCFXz.jpg" height="100">' +
+		this.sendReplyBox('<center><img src="http://cdn.bulbagarden.net/upload/thumb/7/7b/HeartGold_SoulSilver_Brock.png/203px-HeartGold_SoulSilver_Brock.png" height="120">' +
 			'<img src="http://i.imgur.com/1MpUyqF.gif">' +
 			'<img src="http://media.giphy.com/media/10syfT0KaUdfCU/giphy.gif" height="120"><br />' +
 			'<b>Ace:</b> Snorunt<br />' +

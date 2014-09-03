@@ -244,10 +244,22 @@ Users.unlock = unlock;
  *********************************************************/
 
 var connections = Users.connections = Object.create(null);
+var connectedIps = Users.connectedIps = Object.create(null);
 
 Users.socketConnect = function(worker, workerid, socketid, ip) {
 	var id = '' + workerid + '-' + socketid;
 	var connection = connections[id] = new Connection(id, worker, socketid, null, ip);
+	if (!connectedIps[ip]) {
+		connectedIps[ip] = 1;
+	} else {
+		connectedIps[ip]++;
+	}
+
+	if (!Config.connectionWhitelist) Config.connectionWhitelist = new Object();
+	if (connectedIps[ip] > (Config.maxConnections || Infinity) && !Config.connectionWhitelist[ip] || connectedIps[ip] > Config.connectionWhitelist[ip]) {
+		connection.send("|popup|You may not have more than "+(Config.connectionWhitelist[ip] || Config.maxConnections)+" concurrent connections.");
+		return connection.destroy();
+	}
 
 	if (ResourceMonitor.countConnection(ip)) {
 		connection.destroy();
@@ -1747,6 +1759,8 @@ Connection = (function () {
 	};
 	Connection.prototype.onDisconnect = function () {
 		delete connections[this.id];
+		connectedIps[this.ip]--;
+		if (connectedIps[this.ip] == 0) delete connectedIps[this.ip];
 		if (this.user) this.user.onDisconnect(this);
 	};
 

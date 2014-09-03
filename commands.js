@@ -1885,14 +1885,6 @@ var commands = exports.commands = {
 		});
 	},
 
-	abc123: function(target, room, user) {
-		user.customClient = true;
-
-		this.sendReplyBox('<center><b>Thank you for using the custom client!</b><br /><br />' +
-		'The custom client allows us to add many custom features, notably the custom theme, battle theme and also friends list.<br />' +
-		'Do note that some logins may not work due to how client runs in addition you do have to export and then import teams from server. Have fun!');
-	},
-
 	/*********************************************************
 	 * Server management commands
 	 *********************************************************/

@@ -592,7 +592,7 @@ var commands = exports.commands = {
                 }
                 if (mMatch === true) {
                         var p = 'Gold bucks';
-                        if (money < 2) p = 'Gold buck';
+                        if (money === 1) p = 'Gold buck';
                         total += user.name + ' has ' + money + ' ' + p + '.<br />';
                 }
                 if (mMatch === false) {

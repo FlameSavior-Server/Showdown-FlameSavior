@@ -1186,6 +1186,13 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 
+	jlp: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/cmacyYX.gif" width="300">' +
+			'<img src="http://i.imgur.com/J0B59PM.gif" height="200"><br />' +
+			'<img src="http://i.imgur.com/u5Wd4Uf.gif"></center>');
+	},
+
 	nollid: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/0dwzNX7.gif"><br />' +

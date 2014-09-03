@@ -3090,7 +3090,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/SCVCFXz.jpg" height="100">' +
 			'<img src="http://i.imgur.com/1MpUyqF.gif">' +
-			'http://media.giphy.com/media/10syfT0KaUdfCU/giphy.gif" height="120"><br />' +
+			'<img src="http://media.giphy.com/media/10syfT0KaUdfCU/giphy.gif" height="120"><br />' +
 			'<b>Ace:</b> Snorunt<br />' +
 			'"I typed gg but I actually meant fuck you"</center>'
 		);

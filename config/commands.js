@@ -2696,11 +2696,11 @@ var commands = exports.commands = {
 
 	roxas: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/1029429/axel-roxas-last-goodbye-o.gif" width="150">' +
-			'<img src="http://i.imgur.com/6rNedsW.png" width="240">' +
-			'<img src="http://stream1.gifsoup.com/view2/2254189/roxas-vs-sora-gif-1-o.gif" width="150"><br />' +
+		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/tumblr_mckid5MO731r9ci8go1_500.gif" width="200">' +
+			'<img src="http://i.imgur.com/I9Nwe7C.png">' +
+			'<img src="http://stream1.gifsoup.com/view/178140/kingdom-hearts-ll-axel-o.gif" width="200"><br />' +
 			'<b>Ace:</b> X-Blade<br />' +
-			'"You\'re lucky Sora... cause it looks like summer vacation is over."</center>'
+			'"The name\'s Axel, got it memorized?"</center>'
 		);
 	},
 

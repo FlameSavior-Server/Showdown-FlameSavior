@@ -1905,6 +1905,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	eric: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/8OPY3wW.jpg" height="120">' +
+			'<img src="http://i.imgur.com/fidU25N.png" width="320">' +
+			'<img src="http://i.imgur.com/MI6Bplz.gif"width="140"><br />' +
+			'<b>Ace:</b> Slowbro<br />' +
+			'<font color="#80BFFF">The wordless conversations we share, The shiver in my spine when your hand touches me and how when there\'s only one soda left we share. The smell of your neck and the color of your eyes. How you think I\'m sexy in every size. The way that you laugh so hard you start to cry. I love you Eric.</font></center>'
+		);
+	},
+
 	mushy: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font size="5" color="#8E019D">Mushy</font><br />' +

@@ -27,6 +27,22 @@ const MAX_REASON_LENGTH = 300;
 
 var commands = exports.commands = {
 
+	/*clientusers: function(target, room, user) {
+		if (!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+		var client = [];
+		var total = [];
+		for (var u in Users.users) {
+			if (Users.get(u).connected && Users.get(u).customClient) {
+				client.push(Users.get(u).userid);
+			}
+			if (Users.get(u).connected) {
+				total.push(Users.get(u).userid);
+			}
+		}
+		this.sendReply('Number of users using the custom client: ' + client.length);
+		this.sendReply('Percentage of users using the custom client: ' + ((client.length / total.length)*100) + '%');
+	},*/
+
 	/*********************************************************
 	 * Friends
 	 *********************************************************/

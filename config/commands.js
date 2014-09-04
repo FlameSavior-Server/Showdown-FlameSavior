@@ -1186,6 +1186,14 @@ var commands = exports.commands = {
 
 	//Trainer Cards.
 
+	sand2: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/0dwzNX7.gif"><br />' +
+			'<img src="http://media.giphy.com/media/FvtOorPNV09Og/giphy.gif" width="270" height="200">' +
+			'<img src="http://media.giphy.com/media/O7UKZP7lMuZm8/giphy.gif" width="270" height="200"><br />' +
+			'I don\'t like it, the dark circles under my eyes will come back and I don\'t know how to deal with the dark circles</center>');
+	},
+
 	jlp: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/cmacyYX.gif" width="300">' +

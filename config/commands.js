@@ -1316,9 +1316,9 @@ var commands = exports.commands = {
 
 	tailz: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/UQJceOG.png"><br />' +
+        this.sendReplyBox('<center><img src="http://i.imgur.com/qO72kmo.png"><br />' +
             '<img src="http://37.media.tumblr.com/cc5c32483f12ae8866fda48d084f3861/tumblr_mww5peDTd71qkwzzdo1_400.gif"><br />' +
-            '<i>Its Never Ogre</i>');
+            '<i>Play Time Is Ogre</i>');
 	},
 
 	silver: function(target, room, user) {

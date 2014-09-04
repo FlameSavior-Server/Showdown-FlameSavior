@@ -2694,7 +2694,7 @@ var commands = exports.commands = {
 		);
 	},
 
-	roxas: function (target, room, user) {
+	axel: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/tumblr_mckid5MO731r9ci8go1_500.gif" width="200">' +
 			'<img src="http://i.imgur.com/I9Nwe7C.png">' +

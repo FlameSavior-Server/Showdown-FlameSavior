@@ -1375,10 +1375,11 @@ var commands = exports.commands = {
 	equinox: 'solstice',
 	solstice: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/qwd47aK.png"><br />' +
-            '<img src="http://i.imgur.com/giooJay.png"><br />' +
-            'Is what you\'ve seen too much to take,<br />' +
-            'or are you blind and seeing nothing?</center>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/6WcNxO9.gif">' +
+        	'<img src="http://i.imgur.com/vAsLJda.png"><br />' +
+            '<img src="http://i.imgur.com/FnAsxKa.png"><br />' +
+            'Is what I\'ve done too much to take,<br />' +
+            'Or are you scared of being nothing?</center>');
 	},
 
 	typhozzz: function(target, room, user) {

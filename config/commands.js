@@ -1905,6 +1905,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	syb3r: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/pgRwnFN.png" width="200">' +
+			'<img src="http://i.imgur.com/BftkTzy.jpg" height="160">' +
+			'<img src="http://i.imgur.com/VU7Eh6vh.jpg" width="200"><br />' +
+			'<b>Ace:</b> Scizor<br />' +
+			'You call yourself a challenger but your are far from a challenge.</center>'
+		);
+	},
+
 	eric: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/8OPY3wW.jpg" height="120">' +

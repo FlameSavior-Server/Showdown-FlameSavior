@@ -27,8 +27,8 @@ const MAX_REASON_LENGTH = 300;
 
 var commands = exports.commands = {
 
-	clientusers: function(target, room, user) {
-		if(!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+	/*clientusers: function(target, room, user) {
+		if (!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
 		var client = [];
 		var total = [];
 		for (var u in Users.users) {
@@ -41,17 +41,13 @@ var commands = exports.commands = {
 		}
 		this.sendReply('Number of users using the custom client: ' + client.length);
 		this.sendReply('Percentage of users using the custom client: ' + ((client.length / total.length)*100) + '%');
-	},
+	},*/
 
 	/*********************************************************
 	 * Friends
 	 *********************************************************/
 
 	friends: function(target, room, user, connection) {
-		if (!user.customClient) {
-			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
-		}
-
 		var data = fs.readFileSync('config/friends.csv','utf8')
 		var match = false;
 		var friends = '';
@@ -93,10 +89,6 @@ var commands = exports.commands = {
 	},
 
 	addfriend: function(target, room, user, connection) {
-		if (!user.customClient) {
-			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
-		}
-
 		if (!target) return this.parse('/help addfriend');
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
@@ -148,10 +140,6 @@ var commands = exports.commands = {
 	},
 
 	removefriend: function(target, room, user, connection) {
-		if (!user.customClient) {
-			return this.sendReplyBox('The friends system will not function outside the custom client. Click <button name="send" value="/abc123">here</button> to use it.');
-		}
-
 		if (!target) return this.parse('/help removefriend');
 		var noCaps = target.toLowerCase();
 		var idFormat = toId(target);

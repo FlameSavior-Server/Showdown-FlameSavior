@@ -1905,6 +1905,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	oak: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://sprites.pokecheck.org/t/137.gif">' +
+			'<img src="http://i.imgur.com/f7M1Uzg.png">' +
+			'<img src="http://sprites.pokecheck.org/i/059.gif"><br />' +
+			'<b>Ace:</b> Arcanine<br />' +
+			'I\'m the strongest pokemon trainer in the world!</center>'
+		);
+	},
+
 	syb3r: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/pgRwnFN.png" width="200">' +

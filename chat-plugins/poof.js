@@ -1,6 +1,6 @@
 const messages = [
 	"ventured into Shrek's Swamp.",
-	"looked at Aura's face!",
+	"disrespected the OgreLord!",
 	"used Explosion!",
 	"was swallowed up by the Earth!",
 	"was eaten by Lex!",
@@ -52,6 +52,7 @@ const messages = [
 	"use defog on Bisharp", // bought by Hope/Fallen Blood
 	"got outsassed by Félicette!", // bought by Félicette
 	"got outclassed by Félicette!",
+	"was proclaimed an enemy of the state by King Jong-un!", // bought by KJU
 ];
 
 exports.commands = {

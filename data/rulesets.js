@@ -520,7 +520,7 @@ exports.BattleFormats = {
 				typeTable = typeTable.intersect(template.types);
 				if (!typeTable.length) return ["Your team must share a type."];
 			}
-			if (format.id === 'monotype') {
+			if (format.id === 'monotype' || format.id === 'oumonotype') {
 				// Very complex bans
 				if (typeTable.length > 1) return;
 				switch (typeTable[0]) {
@@ -563,7 +563,7 @@ exports.BattleFormats = {
                 if (item === 'focussash') hasFocusSash++; // If it's an item add 1 to the counter
                 if (hasFocusSash > 1) { // If the counter is more than 1 return the error
                     return ["You are limited to only one Focus Sash by Sash Clause."];
-				}				
+				}
 			}
 		}
 	},
@@ -1557,7 +1557,7 @@ exports.BattleFormats = {
 				NFE: 150,
 				LC: 150
 			};
-			var maxPoints = 2000;			
+			var maxPoints = 2000;
 			var problems = [];
 
 			var points = 0;
@@ -1638,7 +1638,7 @@ exports.BattleFormats = {
 
 				// second type
 				type = template.types[1];
-				if (type) { 
+				if (type) {
 				typeTable[type] = (typeTable[type]||0) + 1;
 				types = types + 1;
 				}

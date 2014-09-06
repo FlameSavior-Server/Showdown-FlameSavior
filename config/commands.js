@@ -3418,6 +3418,7 @@ var commands = exports.commands = {
 	kju: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>King Jong-un doesn\'t really like Trainer Cards.<br />' +
+			'King Jong-un will be online on January 19, 2015.<br />' +
 			'<b>Ace:</b> <a href="https://www.youtube.com/watch?v=JUgEmezpS_E">KJU IRL</a>'
 		);
 	},

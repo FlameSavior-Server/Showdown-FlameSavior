@@ -1905,6 +1905,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	br: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><a href="https://a.tumblr.com/tumblr_mujxyk4g1U1shttnco1.mp3"><img src="http://i.imgur.com/4xVPIZQ.gif"></a><br />' +
+			'<font size="3" color="#17468C"><b><i>BlackRabbit</i></b></font><br />' +
+			'<blink><b>Ace: Tsundere swag</b></blink><br />' +
+			'<b>It\'s not like I like you or anything B-b-b-Baka</b><br />' +
+			'<button name="send" value="/transferbucks Blck Rbbt, 1">Donate 1 Buck for a hug</button></center>'
+		);
+	},
+
 	oak: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://sprites.pokecheck.org/t/137.gif">' +

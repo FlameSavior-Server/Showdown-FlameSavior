@@ -2558,14 +2558,13 @@ var commands = exports.commands = {
 		);
 	},
 
-	tygastro: 'tyga',
-	tyga: function (target, room, user) {
+	zyga: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/gyarados.gif">' +
-			'<img src="http://i.imgur.com/CwwYtMD.png">' +
-			'<img src="http://images6.fanpop.com/image/photos/34000000/Steven-Stone-pokemon-steven-stone-34077948-302-400.jpg" width="120"><br />' +
-			'<b>Ace:</b> <font color="purple">Gyarados</font><br />' +
-			'<font color="orange">Fix that attitude around me.</font></center>'
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/medicham-mega.gif">' +
+			'<img src="http://i.imgur.com/Cp5ExNK.png" height="220">' +
+			'<img src="http://img2.wikia.nocookie.net/__cb20130819223414/degrassi/images/2/26/Tumblr_lu98nsll351qcm0wfo1_500.gif" width="160"><br />' +
+			'<b>Ace:</b> PsyKick<br />' +
+			'<button name="send" value="/transferbucks Zyga, 1">This will break your heart :’( DO IT FOR THE VINE! (Donates 1 Buck)</button></center>'
 		);
 	},
 

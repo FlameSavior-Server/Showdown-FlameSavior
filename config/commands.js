@@ -4054,11 +4054,11 @@ var commands = exports.commands = {
 
 	messiah: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/y08yCwd.png" width="120" height="136">' +
-			'<img src="http://i.imgur.com/xA1Dqgw.png">' +
-			'<img src="http://i.imgur.com/ha756pn.png" width="120" height="136"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/y08yCwd.png" width="90" height="116">' +
+			'<img src="http://i.imgur.com/C8kmr6b.gif">' +
+			'<img src="http://i.imgur.com/ha756pn.png" width="90" height="110"><br />' +
 			'<b>Ace:</b> Kabutops<br />' +
-			'Sit back, relax, and let the undertow drown out your worries forever...</center>'
+			'You must be shapeless, formless, like water. When you pour water in a cup, it becomes the cup. Water can flow peacefully and crash with rage. Be water my friends.</center>'
 		);
 	},
 

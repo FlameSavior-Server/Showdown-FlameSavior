@@ -1905,6 +1905,17 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	seaking: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/GqtxYN2.jpg" height="140">' +
+			'<img src="http://i.imgur.com/ogtm2Co.gif" width="280">' +
+			'<img src="http://i.imgur.com/OKkDOEz.jpg" height="140"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/seaking.gif"><br />' +
+			'<b>Ace:</b> Haxnova<br />' +
+			'Seaking for Love. Seaking for Glory. Seaking for the Meaning of Life. And above all... Seaking for the Pu Tang.</center>'
+		);
+	},
+
 	natalie: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/HLZj7fD.png" width="110">' +

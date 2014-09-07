@@ -4861,7 +4861,6 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/qoZyc5i.gif"><br />' +
 			'<font size="3" color="#8A0808"><b><i>DarknessReigns</i><b></font><br />' +
-			'<img src="SecondImage"><br />' +
 			'<blink><b><font color="#0B0B61">Ace: Sasuke</font></blink></b><br />' +
 			'<b><i>It gets darkest right before dawn.</i></b></center>'
 		);

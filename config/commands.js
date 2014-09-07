@@ -1340,7 +1340,7 @@ var commands = exports.commands = {
 		if (!target || target === 'all') {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/tiers/\">Smogon Tiers</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/tiering-faq.3498332/\">Tiering FAQ</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/tiering-faq.3498332/\">Tiering FAQ</a><br />"; 
 			buffer += "- <a href=\"https://www.smogon.com/xyhub/tiers\">The banlists for each tier</a><br />";
 		}
 		if (target === 'ubers' || target === 'uber') {
@@ -1904,7 +1904,17 @@ var commands = exports.commands = {
 	/***************************************
 	* Trainer Cards                        *
 	***************************************/
-
+   
+    monophy: function (target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	this.sendReplyBox('<center><img src="http://i.imgur.com/wG6SJ7e.gif">' +
+    		'<img src="http://i.imgur.com/uvnYgZH.gif">' +
+    		'<img src="http://i.imgur.com/iURRxsv.gif"><br />' +
+    		'<b>Ace: </b>Cuteness<br />' +
+    		'<b>Quote: </b>Everyone Has An Inner Cute</center>'
+    		);
+    },
+	
 	seaking: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/GqtxYN2.jpg" height="140">' +

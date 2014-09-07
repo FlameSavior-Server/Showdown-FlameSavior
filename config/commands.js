@@ -1905,6 +1905,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	natalie: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/HLZj7fD.png" width="110">' +
+			'<img src="http://i.imgur.com/5J7QUh8.png" width="320">' +
+			'<img src="http://i.imgur.com/kOqpYCT.png" width="110"><br />' +
+			'<b>Ace:</b> Meloetta<br />' +
+			'You\'re like an oreo, I wanna split you apart and eat what\'s in the middle! x3</center>'
+		);
+	},
+
 	br: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><a href="https://a.tumblr.com/tumblr_mujxyk4g1U1shttnco1.mp3"><img src="http://i.imgur.com/4xVPIZQ.gif"></a><br />' +

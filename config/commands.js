@@ -4857,13 +4857,13 @@ var commands = exports.commands = {
 		);
 	},
 
-	darknessreigns: function (target, room, user) {
+	darkness: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src"=http://i.imgur.com/GCIT4Cv.gif" height="90" width="500">' +
-			'<img src="http://th05.deviantart.net/fs70/PRE/i/2013/220/5/a/pokemon___megalucario_by_sa_dui-d6h8tdh.jpg" height="80" width="120">' +
-			'<img src="http://th08.deviantart.net/fs70/PRE/f/2010/169/c/5/Gengar_Wallpaper_by_Phase_One.jpg" height="80" width="120"><br />' +
-			'<b>Ace: </b>The Darkness' +
-			'<b>Catchphrase: </b>When the night falls, The Darkness Reigns</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/qoZyc5i.gif"><br />' +
+			'<font size="3" color="#8A0808"><b><i>DarknessReigns</i><b></font><br />' +
+			'<img src="SecondImage"><br />' +
+			'<blink><b><font color="#0B0B61">Ace: Sasuke</font></blink></b><br />' +
+			'<b><i>It gets darkest right before dawn.</i></b></center>'
 		);
 	},
 

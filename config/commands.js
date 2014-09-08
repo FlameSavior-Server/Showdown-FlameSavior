@@ -1905,7 +1905,17 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
    
-    monophy: function (target, room, user) {
+   party: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/v1nshqN.gif">' +
+			'<img src="http://i.imgur.com/8SSaBwx.gif">' +
+			'<img src="http://i.imgur.com/BEdoYYw.gif"><br />' +
+			'<b>Ace:</b> Alcohol<br />' +
+			'Live it up. Drink it down. Party hard.</center>'
+		);
+	},
+    
+	monophy: function (target, room, user) {
     	if (!this.canBroadcast()) return;
     	this.sendReplyBox('<center><img src="http://i.imgur.com/wG6SJ7e.gif">' +
     		'<img src="http://i.imgur.com/uvnYgZH.gif">' +

@@ -1250,6 +1250,7 @@ var commands = exports.commands = {
 			return this.sendReply("User '" + this.targetUsername + "' not found.");
 		}
 		if (!this.can('shadowban', this.targetUser)) return false;
+		if (!this.targetUser.locked) return this.parse('/lock '+this.targetUsername+(','+reason || ''));
 
 		var targets = ShadowBan.addUser(this.targetUser);
 		if (targets.length === 0) {

@@ -2712,7 +2712,7 @@ var commands = exports.commands = {
 	inwhale: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/gi84nKu.gif" width="140">' +
-			'<img src="http://i.imgur.com/0ZrD8MF.png" width="280">' +
+			'<img src="http://i.imgur.com/HCqEZJK.png" width="280">' +
 			'<img src="http://i.imgur.com/wZXtIHd.jpg" width="120"><br />' +
 			'<b>Ace:</b> Scizor<br />' +
 			'Bad things happen to those who think stall is good in mono.</center>'

@@ -2155,10 +2155,10 @@ var commands = exports.commands = {
 
 	arifeen: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="https://38.media.tumblr.com/tumblr_mb1dgpivmF1rcwf0xo2_500.gif" height="100" width="100">' +
-			'<img src="http://i.imgur.com/foDX5P5.png">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/meloetta.gif"><br />' +
-			'<b>Ace:</b> Tempesta &lt; SmallBootyHoe<br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/NvtCu0P.gif" width="140">' +
+			'<img src="http://i.imgur.com/cFosHyF.png">' +
+			'<img src="http://i.imgur.com/wGXf7XZ.gif" width="150"><br />' +
+			'<b>Ace:</b> Skarmory and Klinklang<br />' +
 			'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>'
 		);
 	},

@@ -83,7 +83,7 @@ var Room = (function () {
 		if (message) {
 			if (ShadowBan.isShadowBanned(user)) {
 				ShadowBan.room.add('|c|' + user.getIdentity() + "|__(To " + this.id + ")__ " + message);
-				room.update();
+				ShadowBan.room.update();
 				connection.sendTo(this, '|chat|' + user.name + '|' + message);
 			} else {
 				this.add('|c|' + user.getIdentity(this.id) + '|' + message);

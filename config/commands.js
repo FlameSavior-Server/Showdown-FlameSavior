@@ -2520,11 +2520,11 @@ var commands = exports.commands = {
 
 	turing: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/b0BaTye.jpg">' +
-			'<img src="http://i.imgur.com/KC3Zqfs.jpg">' +
-			'<img src="http://i.imgur.com/F3meaJl.jpg"><br />' +
-			'<b>Ace:</b> Running From Trainer Battles<br />' +
-			'My Level. Get on it.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/HyYb6cZ.jpg" height="140">' +
+			'<img src="http://i.imgur.com/KC3Zqfs.jpg" width="250">' +
+			'<img src="http://i.imgur.com/NkGjEzy.jpg" height="140"><br />' +
+			'<b>Ace:</b> All the BUGS in TURING<br />' +
+			'If you can read this, you are too old for me.</center>'
 		);
 	},
 

@@ -1905,6 +1905,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
    
+   crash: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xMLHZ8g.gif" width="160">' +
+			'<img src="http://i.imgur.com/SuRa7k3.png">' +
+			'<img src="http://i.imgur.com/PmOPK67.gif" width="160"><br />' +
+			'<b>Ace:</b> Determination<br />' +
+			'It\'s always darkest just before the dawn.</center>'
+		);
+	},
+
    party: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/v1nshqN.gif">' +

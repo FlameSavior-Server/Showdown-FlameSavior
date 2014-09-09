@@ -1905,6 +1905,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
    
+   crash: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xMLHZ8g.gif" width="160">' +
+			'<img src="http://i.imgur.com/SuRa7k3.png">' +
+			'<img src="http://i.imgur.com/PmOPK67.gif" width="160"><br />' +
+			'<b>Ace:</b> Determination<br />' +
+			'It\'s always darkest just before the dawn.</center>'
+		);
+	},
+
    party: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/v1nshqN.gif">' +
@@ -2520,11 +2530,11 @@ var commands = exports.commands = {
 
 	turing: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/b0BaTye.jpg">' +
-			'<img src="http://i.imgur.com/KC3Zqfs.jpg">' +
-			'<img src="http://i.imgur.com/F3meaJl.jpg"><br />' +
-			'<b>Ace:</b> Running From Trainer Battles<br />' +
-			'My Level. Get on it.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/HyYb6cZ.jpg" height="140">' +
+			'<img src="http://i.imgur.com/KC3Zqfs.jpg" width="250">' +
+			'<img src="http://i.imgur.com/NkGjEzy.jpg" height="140"><br />' +
+			'<b>Ace:</b> All the BUGS in TURING<br />' +
+			'If you can read this, you are too old for me.</center>'
 		);
 	},
 

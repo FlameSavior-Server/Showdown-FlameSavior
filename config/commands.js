@@ -1905,6 +1905,14 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
    
+   audinator: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/fVVwwRa.gif"><br />' +
+			'<b>Ace:</b> Well, it sure isn\'t Healer.<br />' +
+			'Free EXP, you say? How nice of you to donate.</center>'
+		);
+	},
+
    crash: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/xMLHZ8g.gif" width="160">' +

@@ -2243,11 +2243,12 @@ var commands = exports.commands = {
 
 	dawnmidst: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/xFZjcWt.gif">' +
-			'<img src="http://i.imgur.com/U6aIk3B.png" width="370">' +
-			'<img src="http://i.imgur.com/lv7MXaB.gif"><br />' +
-			'<b>Ace:</b> Kingdra<br />' +
-			'When the prison doors are opened, the real dragon will fly out.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/wRqljio.gif" height="140">' +
+			'<img src="http://i.imgur.com/UiUIHD5.png" width="250">' +
+			'<img src="http://i.imgur.com/r3j7IvZ.gif" width="160"><br />' +
+			'<img src="http://i.imgur.com/lW3qYP7.gif"><br />' +
+			'<b>Ace:</b> Pidove<br />' +
+			'That painful moment when the roof of your mouth gets stabbed by a dorito.</center>'
 		);
 	},
 

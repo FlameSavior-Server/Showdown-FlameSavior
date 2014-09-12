@@ -26,7 +26,7 @@ function createTournamentGenerator(generator, args, output) {
 	args.unshift(null);
 	return new (Generator.bind.apply(Generator, args))();
 }
-function createTournament(room, format, generator, isRated, args, output) {
+function createTournament(room, format, generator, playerCap, isRated, args, output) {
 	if (room.type !== 'chat') {
 		output.sendReply("Tournaments can only be created in chat rooms.");
 		return;
@@ -50,7 +50,11 @@ function createTournament(room, format, generator, isRated, args, output) {
 		output.sendReply("Valid types: " + Object.keys(TournamentGenerators).join(", "));
 		return;
 	}
-	return (exports.tournaments[room.id] = new Tournament(room, format, createTournamentGenerator(generator, args, output), isRated));
+	if (playerCap && playerCap < 2) {
+		output.sendReply("You cannot have a player cap that is less than 2.");
+		return;
+	}
+	return (exports.tournaments[room.id] = new Tournament(room, format, createTournamentGenerator(generator, args, output), playerCap, isRated));
 }
 function deleteTournament(name, output) {
 	var id = toId(name);
@@ -71,11 +75,12 @@ function getTournament(name, output) {
 }
 
 Tournament = (function () {
-	function Tournament(room, format, generator, isRated) {
+	function Tournament(room, format, generator, playerCap, isRated) {
 		this.room = room;
 		this.format = toId(format);
 		this.generator = generator;
 		this.isRated = isRated;
+		this.playerCap = parseInt(playerCap) || 0;
 
 		this.isBracketInvalidated = true;
 		this.lastBracketUpdate = 0;
@@ -93,10 +98,11 @@ Tournament = (function () {
 
 		this.isEnded = false;
 
-		room.add('|tournament|create|' + this.format + '|' + generator.name);
+		room.add('|tournament|create|' + this.format + '|' + generator.name + '|' + this.playerCap);
 		room.send('|tournament|update|' + JSON.stringify({
 			format: this.format,
 			generator: generator.name,
+			playerCap: this.playerCap,
 			isStarted: false,
 			isJoined: false
 		}));
@@ -227,8 +233,19 @@ Tournament = (function () {
 
 	Tournament.prototype.addUser = function (user, isAllowAlts, output) {
 		if (!this.room.delayJoinedUsers) this.room.delayJoinedUsers = new Array();
+
+		if (!user.named) {
+			output.sendReply('|tournament|error|UserNotNamed');
+			return;
+		}
+
+		var users = this.generator.getUsers();
+		if (this.playerCap && users.length >= this.playerCap) {
+			output.sendReply('|tournament|error|Full');
+			return;
+		}
+
 		if (!isAllowAlts) {
-			var users = this.generator.getUsers();
 			for (var i = 0; i < users.length; i++) {
 				if (users[i].latestIp === user.latestIp) {
 					output.sendReply('|tournament|error|AltUserAlreadyAdded');
@@ -252,10 +269,12 @@ Tournament = (function () {
 		user.sendTo(this.room, '|tournament|update|{"isJoined":true}');
 		this.isBracketInvalidated = true;
 		this.update();
+
 		if (!this.maxUserCount) this.maxUserCount = Infinity;
 		if (this.generator.getUsers().length >= this.maxUserCount) {
 			this.startTournament(this);
 		}
+		if (this.playerCap === (users.length + 1)) this.room.add("The tournament is now full");
 	};
 	Tournament.prototype.removeUser = function (user, output) {
 		if (!this.room.delayJoinedUsers) this.room.delayJoinedUsers = new Array();
@@ -799,7 +818,7 @@ var commands = {
 		getusers: function (tournament) {
 			if (!this.canBroadcast()) return;
 			var users = usersToNames(tournament.generator.getUsers().sort());
-			this.sendReplyBox("<strong>" + users.length + " users are in this tournament:</strong><br />" + users.join(", "));
+			this.sendReplyBox("<strong>" + users.length + " users are in this tournament:</strong><br />" + Tools.escapeHTML(users.join(", ")));
 		},
 		getupdate: function (tournament, user) {
 			tournament.updateFor(user);
@@ -1032,7 +1051,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 			return this.sendReply("Usage: " + cmd + " <format>, <type> [, <comma-separated arguments>]");
 		}
 
-		var tour = createTournament(room, params.shift(), params.shift(), Config.istournamentsrated, params, this);
+		var tour = createTournament(room, params.shift(), params.shift(), params.shift(), Config.istournamentsrated, params, this);
 		if (tour) this.privateModCommand("(" + user.name + " created a tournament in " + tour.format + " format.)");
 	} else {
 		var tournament = getTournament(room.title);

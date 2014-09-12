@@ -1906,6 +1906,26 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+   packifeen: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://imgur.com/SPGfgHT.gif">' +
+			'<img src="http://i.imgur.com/1uvixpS.png">' +
+			'<img src="http://imgur.com/8A51BBT.gif"><br />' +
+			'<b>Ace:</b> Seed Bombs<br />' +
+			'When you squirt them seeds, it\'s super effective!!.</center>'
+		);
+	},
+
+   icicle: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/bjyaBsC.png" width="130">' +
+			'<img src="http://i.imgur.com/NuCU9D3.png" width="250">' +
+			'<img src="http://i.imgur.com/jdzRtNm.gif" width="160"><br />' +
+			'<b>Ace:</b> Snorlax<br />' +
+			'Keep calm and "Snorlax".</center>'
+		);
+	},
+
    audinator: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/fVVwwRa.gif"><br />' +

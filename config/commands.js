@@ -1769,7 +1769,7 @@ var commands = exports.commands = {
 	   this.sendReplyBox('<center>Click <button name="send" value="/'+ target + '" class="blackbutton" title="View musicbox!"><font color="white"><b>here</button></b></font> to view <b>' + target + '!</b></center>');
 	},
 
-    tailzbox: function(target, room, user) {
+	tailzbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b>Tailz\'s Music Box!</b><br />' +
 			'1. <a href="https://www.youtube.com/watch?v=zxof7Lh1u3c"><button>Nano - Savior Of Song</a></button><br />' +
@@ -1781,14 +1781,14 @@ var commands = exports.commands = {
 			'7. <a href="https://www.youtube.com/watch?v=YDJXr-Tzbqw"><button>Sora Amamiya - Skyreach</a></button><br />' +
 			'8. <a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA"><button>Three Days Grace - The High Road</a></button><br />' +
 			'9. <a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg"><button>Crown The Empire - Millenia</a></button><br /></center>' );
-    },
+	},
 
-    terbox: function(target, room, user) {
+	terbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b>Sir Terlor\'s Music Box!</b><br />' +
 			'1. <a href="https://www.youtube.com/watch?v=lL2ZwXj1tXM"><button>Three Days Grace - Never Too Late</a></button><br />' +
 			'2. <a href="https://www.youtube.com/watch?v=JpDPOs-rddM"><button>Sonata Arctica - Mary Lou</a></button><br />' +
-			'3. <a href="https://www.youtube.com/watch?v=IbOd8yf1ElI"><button>Holywod Undead - The Diary</a></button><br />' +
+			'3. <a href="https://www.youtube.com/watch?v=IbOd8yf1ElI"><button>Hollywod Undead - The Diary</a></button><br />' +
 			'4. <a href="https://www.youtube.com/watch?v=JCT5uTdPRgs"><button>Black Sabbath - N.I.B</a></button><br />' +
 			'5. <a href="https://www.youtube.com/watch?v=as7p6VwnR5s"><button>Vexento - Praeclara</a></button><br />' +
 			'6. <a href="https://www.youtube.com/watch?v=2vjPBrBU-TM"><button>Sia - Chandelier</a></button><br />' +

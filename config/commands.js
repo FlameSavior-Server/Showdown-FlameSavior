@@ -1764,7 +1764,7 @@ var commands = exports.commands = {
     			//Music Boxes
     			
     //View Music box command to reduce lobby spam
-    vbm: function (target, room, user) {
+    vmb: function (target, room, user) {
 	   if (!this.canBroadcast()) return;	   
 	   this.sendReplyBox('<center>Click <button name="send" value="/'+ target + '" class="blackbutton" title="View musicbox!"><font color="white"><b>here</button></b></font> to view <b>' + target + '!</b></center>');
 	},

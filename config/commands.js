@@ -1856,7 +1856,7 @@ var commands = exports.commands = {
 			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=zxof7Lh1u3c">Savior Of Song</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Cvnk_DSUq3E">The High Road</a><br>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA">The High Road</a><br>' +
 			'<center><b><a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br></center>' +
 			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
 		);

@@ -1906,6 +1906,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	kirbysuperstar: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="https://33.media.tumblr.com/tumblr_m72u8nq98T1rpnitgo1_400.gif" width="120">' +
+			'<img src="http://i.imgur.com/OsdcCJk.png" width="300">' +
+			'<img src="http://i.imgur.com/d5Uqnok.png" width="120"><br />' +
+			'<b>Ace:</b> Marowak<br />' +
+			'Circa 1996-7.</center>'
+		);
+	},
+
    snowz: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/94bc182a23d367a00d896c2fc95b3024/tumblr_n45zdgfh3T1toqhwfo2_500.gif" width="155">' +

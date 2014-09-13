@@ -1781,6 +1781,7 @@ var commands = exports.commands = {
 			'7. <a href="https://www.youtube.com/watch?v=YDJXr-Tzbqw"><button>Sora Amamiya - Skyreach</a></button><br />' +
 			'8. <a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA"><button>Three Days Grace - The High Road</a></button><br />' +
 			'9. <a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg"><button>Crown The Empire - Millenia</a></button><br /></center>' );
+    },
 
     terbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;

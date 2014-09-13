@@ -1906,6 +1906,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+   snowz: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/94bc182a23d367a00d896c2fc95b3024/tumblr_n45zdgfh3T1toqhwfo2_500.gif" width="155">' +
+			'<img src="http://i.imgur.com/rJHmdiw.gif">' +
+			'<img src="http://38.media.tumblr.com/b3242ad9de3d1ffc0fca326836965669/tumblr_mm4yy7i9mX1sp5yuho1_r1_500.gif" width="155"><br />' +
+			'<b>Ace:</b> Froslass<br />' +
+			'Derp, what a barrelful.</center>'
+		);
+	},
+
    packifeen: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://imgur.com/SPGfgHT.gif">' +

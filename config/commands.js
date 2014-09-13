@@ -1774,13 +1774,13 @@ var commands = exports.commands = {
 		this.sendReplyBox('<b>Tailz\'s Music Box!</b><br />' +
 			'1. <a href="https://www.youtube.com/watch?v=zxof7Lh1u3c"><button>Nano - Savior Of Song</a></button><br />' +
 			'2. <a href="https://www.youtube.com/watch?v=3ZckiELrRLU"><button>Nano - Black Board</a></button><br />' +
-			'3. <a href="https://www.youtube.com/watch?v=P829PgxKxuM"><button>A Day To Remember - If It Means A Lot To You</a></button><br /> '+
+			'3. <a href="https://www.youtube.com/watch?v=P829PgxKxuM"><button>A Day To Remember - If It Means A Lot To You</a></button><br />' +
 			'4. <a href="https://www.youtube.com/watch?v=QgFHL2R8m6s"><button>HollyWood Undead - Lion</a></button><br />' +
 			'5. <a href="https://www.youtube.com/watch?v=fBocMs7EyOg"><button>Nano - Just Be Friends</a></button><br />' +
 			'6. <a href="https://www.youtube.com/watch?v=Om5uXsD-aVo"><button>Rise Against - Satellite</a></button><br />' +
 			'7. <a href="https://www.youtube.com/watch?v=YDJXr-Tzbqw"><button>Sora Amamiya - Skyreach</a></button><br />' +
 			'8. <a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA"><button>Three Days Grace - The High Road</a></button><br />' +
-			'9. <a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg"><button>Crown The Empire - Millenia</a></button><br />' );
+			'9. <a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg"><button>Crown The Empire - Millenia</a></button><br /></center>' );
 
     terbox: function(target, room, user) {
 		if (!this.canBroadcast()) return;

@@ -1906,6 +1906,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	mooseycow: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc04.deviantart.net/fs8/i/2006/164/d/7/MOOSEY_FATE_by_robopigg.jpg" width="120">' +
+			'<img src="http://i.imgur.com/LqKx73E.gif" width="280">' +
+			'<img src="http://fc03.deviantart.net/fs70/f/2013/275/a/9/a90cba1955d73bab3217d18f9f7e8b8f-d6otgn0.png" width="140"><br />' +
+			'<b>Ace:</b> Stantler<br />' +
+			'Time to meet your... MOOSEY FATE.</center>'
+		);
+	},
+
  	kirbysuperstar: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://33.media.tumblr.com/tumblr_m72u8nq98T1rpnitgo1_400.gif" width="120">' +

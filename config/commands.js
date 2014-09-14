@@ -1189,7 +1189,7 @@ var commands = exports.commands = {
 		if (!this.can('pban')) return false;
 		for (var u in Users.users) {
 			if (Users.users[u].group == '~' || Users.users[u].group == '&') {
-				Users.users[u].send('|pm|~Upper Staff PM| '+target+' (PM from '+user.name+')');
+				Users.users[u].send('|pm|~Upper Staff PM|'+Users.users[u].group+Users.users[u].name+'| '+target+' (PM from '+user.name+')');
 			}
 		}
 	},

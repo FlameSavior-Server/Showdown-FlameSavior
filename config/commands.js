@@ -1183,7 +1183,16 @@ var commands = exports.commands = {
 								'<br>9. ' + highest.id[8] + ': ' + highest.money[8] +
 								'<br>10. ' + highest.id[9] + ': ' + highest.money[9]);
 	},
-
+	pus: 'pmupperstaff',
+	pmupperstaff:  function (target, room, user) {
+		if (!target) return this.sendReply('/pmupperstaff [message] - Sends a PM to every upper staff');
+		if (!this.can('pban')) return false;
+		for (var u in Users.users) {
+			if (Users.users[u].group == '~' || Users.users[u].group == '&') {
+				Users.users[u].send('|pm|~Upper Staff PM| '+target+' (PM from '+user.name+')');
+			}
+		}
+	},
 	//Trainer Cards.
 
 	sand2: function(target, room, user) {

@@ -3886,11 +3886,14 @@ var commands = exports.commands = {
 
 	stun: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://37.media.tumblr.com/e890b0bb20d7630e48fad7e067b32a30/tumblr_mtj1fbaHlL1rj4z3ho1_1280.png" height="150"><br />' +
-			'<img src="http://i.imgur.com/aa34uv5.gif" width="450">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/stunfisk.gif"><br />' +
+		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/445-mega.gif">' +
+			'<img src="http://i.imgur.com/aa34uv5.gif" width="300">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/618.gif"><br />' +
 			'<b>Ace:</b> Stunfisk<br />' +
-			'It\'s so evil, it\'s genius!</center>'
+			'It\'s so evil, it\'s genius!<br />' +
+			'<button name="send" value="/transferbucks axsstunfisk, 1">Donate to Stun\'s Gambling Habit!</button>' +
+			'<a href="http://theaxisleague.weebly.com/stun.html"><button>Stun\'s Life Story</button></a>' +
+			'<a href="http://askhelixfossil.com/#2r7xrz"><button>#StunTheWorld</button></a></center>'
 		);
 	},
 

@@ -1272,7 +1272,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/EEcZ4J2.png" width="350"><br />' +
         	'<img src="http://i.imgur.com/bjVsAsj.png"><br />' +
-            '"I love bad bitches, that\'s my fucking problem. And yeah, I like to fuck, I got a fucking problem" -ASAP Rocky, 2013</center>');
+            '"Why problem make when you no problem have you dont want to make."</center>');
 	},
 
 	saago: function(target, room, user) {

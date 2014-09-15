@@ -3886,8 +3886,9 @@ var commands = exports.commands = {
 
 	stun: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/445-mega.gif">' +
-			'<img src="http://i.imgur.com/aa34uv5.gif" width="300">' +
+		this.sendReplyBox('<center><img src="http://fc05.deviantart.net/fs70/f/2013/275/8/2/tumblr_mbjn97cigb1rgisl5o1_5002_by_dummyheart-d6oyej8.gif" height="180"><br />' +
+			'<img src="http://i.imgur.com/aa34uv5.gif" width="400"><br />' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/445-mega.gif">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/618.gif"><br />' +
 			'<b>Ace:</b> Stunfisk<br />' +
 			'It\'s so evil, it\'s genius!<br />' +

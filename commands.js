@@ -2681,6 +2681,14 @@ var commands = exports.commands = {
 	hex: function(target, room, user) {
 		if (!this.canBroadcast()) return;
         	if (!this.canTalk()) return;
+		if (target) {
+		if (toId(target) === 'panpawn') {
+			return this.sendReplyBox('<b><font color="#DA9D01">'+Tools.escapeHTML(target)+'</font></b>.  The hexcode for '+Tools.escapeHTML(target)+'\'s name color is: #DA9D01.');
+			return;
+		}
+		return this.sendReplyBox('<b><font color="'+hashColor(''+toId(target)+'')+'">'+Tools.escapeHTML(target)+'</font></b>.  The hexcode for '+Tools.escapeHTML(target)+'\'s name color is: '+hashColor(''+toId(target)+'')+'.');
+		return;
+		} 
 		if (user.userid === 'panpawn') {
 			return this.sendReplyBox('Hello, <b><font color="#DA9D01">'+user.name+'</b></font>.  Your hexcode for your name color is: #DA9D01.');
         		return;

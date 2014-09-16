@@ -1906,6 +1906,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	zarifeen: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-x.gif">' +
+			'<img src="http://i.imgur.com/IGAn6qH.png" width="170">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-y.gif"><br />' +
+			'<b>Ace:</b> Infernus &lt; Hell\'s Blitz<br />' +
+			'The Finest of BD, One burns the shit while the other gets high!</center>'
+		);
+	},
+
  	mooseycow: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://fc04.deviantart.net/fs8/i/2006/164/d/7/MOOSEY_FATE_by_robopigg.jpg" width="120">' +
@@ -4881,6 +4891,7 @@ var commands = exports.commands = {
 		);
 	},
 
+	noj: 'notorangejuice',
 	notorangejuice: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/2WNeV9p.gif">' +

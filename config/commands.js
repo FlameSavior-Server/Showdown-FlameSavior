@@ -1911,7 +1911,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-x.gif">' +
 			'<img src="http://i.imgur.com/IGAn6qH.png" width="170">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-y.gif"><br />' +
-			'<b>Ace:</b> Infernus &lt; Hell\'s Blitz<br />' +
+			'<b>Ace:</b> Infernus & Hell\'s Blitz<br />' +
 			'The Finest of BD, One burns the shit while the other gets high!</center>'
 		);
 	},

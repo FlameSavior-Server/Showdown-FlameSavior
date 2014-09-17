@@ -1105,7 +1105,7 @@ var commands = exports.commands = {
 		if (target === 'monotype') {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3493087/\">Monotype</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3507565/\">Monotype Viability Rankings</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3517737/\">Monotype Viability Rankings</a><br />";
 		}
 		if (target === 'tiershift' || target === 'ts') {
 			matched = true;
@@ -1314,7 +1314,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'star' || target === 'player') {
 			matched = true;
-			buffer += '<a href="http://www.smogon.com/sim/faq#star">Why is there this star (&starf;) behind my username?</a><br />';
+			buffer += '<a href="http://www.smogon.com/sim/faq#star">Why is there this star (&starf;) in front of my username?</a><br />';
 		}
 		if (target === 'staff') {
 			matched = true;

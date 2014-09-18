@@ -1195,6 +1195,14 @@ var commands = exports.commands = {
 	},
 	//Trainer Cards.
 
+	beno: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs29/f/2008/092/4/c/NOT_MY_MUDKIP_by_joeywaii.jpg" width="250"><br />' +
+			'<img src="http://images.fanpop.com/images/image_uploads/Mudkip-mudkip-marshtomp-and-swampert-432906_461_421.jpg" width="250" height="240""><br />' +
+			'That sad moment when life gave you lemons but you\'re to lazy to make the lemonade.<br />' +
+			'<button name="send" value="/transferbucks elitefourbeno, 5">Donate 5 bucks for a cookie</button></center>');
+	},
+
 	sand2: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/0dwzNX7.gif"><br />' +

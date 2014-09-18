@@ -1890,6 +1890,12 @@ var commands = exports.commands = {
 	* League Cards                         *
 	***************************************/
 
+	am: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/APEuLXD.png" width="500"></center>'
+		);
+	},
+
 	mercilessleague: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/4AEkWrg.png" width="480"><br />' +

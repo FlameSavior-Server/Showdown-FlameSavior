@@ -1816,7 +1816,7 @@ var commands = exports.commands = {
 			'3. <a href="https://www.youtube.com/watch?v=IbOd8yf1ElI"><button>Hollywood Undead - The Diary</a></button><br />' +
 			'4. <a href="https://www.youtube.com/watch?v=JCT5uTdPRgs"><button>Black Sabbath - N.I.B</a></button><br />' +
 			'5. <a href="https://www.youtube.com/watch?v=as7p6VwnR5s"><button>Vexento - Praeclara</a></button><br />' +
-			'6. <a href="https://www.youtube.com/watch?v=2vjPBrBU-TM"><button>Sia - Chandelier</a></button><br />' +
+			'6. <a href="https://www.youtube.com/watch?v=G5zdal1MKf0"><button>Volbeat - Doc Holiday</a></button><br />' +
 			'7. <a href="https://www.youtube.com/watch?v=VRFCMM3bra8"><button>Billy Talent - Viking Death March</a></button></center>' );
 	},
 

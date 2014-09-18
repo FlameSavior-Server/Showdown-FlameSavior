@@ -1777,6 +1777,14 @@ var commands = exports.commands = {
            '<b>Quote:</b> It\'s all shits and giggles until someone giggles and shits.</font><br />' +
            '<img src="https://i.imgur.com/aQc7ny4.gif"></center></div>');
 	},
+	
+	d3adm3owth: function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<center><font color=#0E30AA size=3>d3adm3owth</font><br />' +
+                        '<img src="http://img2.wikia.nocookie.net/__cb20140120230002/pokemon/images/1/1b/OI015.jpg"  width=320 height 240><br />' +
+                        'Ace: Meowth<br />' +
+                        '...in accordance with the dictates of reason.</center>');
+        },
 
     			//***********************Music Boxes***************************
     			

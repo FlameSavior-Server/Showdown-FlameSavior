@@ -4548,12 +4548,14 @@ var commands = exports.commands = {
 	},
 
 	eval: function (target, room, user, connection) {
+		if (!this.canTalk()) return;
 		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/eval - Access denied.");
 		}
 		if (!this.canBroadcast()) return;
 
 		if (!this.broadcasting) this.sendReply('||>> ' + target);
+		Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
 		try {
 			var battle = room.battle;
 			var me = user;

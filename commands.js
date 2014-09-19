@@ -2589,9 +2589,7 @@ var commands = exports.commands = {
 
 		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
-		if (!room.bannedUsers || !room.bannedIps) {
-			return this.sendReply("Room bans are not meant to be used in room " + room.id + ".");
-		}
+		
 		room.bannedUsers[userid] = true;
 		for (var ip in targetUser.ips) {
 			room.bannedIps[ip] = true;

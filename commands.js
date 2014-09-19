@@ -2623,9 +2623,6 @@ var commands = exports.commands = {
 
 		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
-		if (!room.bannedUsers || !room.bannedIps) {
-			return this.sendReply("Room bans are not meant to be used in room " + room.id + ".");
-		}
 		if (room.bannedUsers[userid]) delete room.bannedUsers[userid];
 		for (var ip in targetUser.ips) {
 			if (room.bannedIps[ip]) delete room.bannedIps[ip];

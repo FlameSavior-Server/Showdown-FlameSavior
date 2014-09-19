@@ -3114,11 +3114,11 @@ var commands = exports.commands = {
 
 	phantom: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/rd18bxe.jpg" width="90">' +
-			'<img src="http://i.imgur.com/Aj8pOcC.png" width="350">' +
-			'<img src="http://i.imgur.com/yvRIWI4.jpg" width="100"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/haSN20C.gif" width="140">' +
+			'<img src="http://i.imgur.com/h37RHup.gif" width="260">' +
+			'<img src="http://i.imgur.com/u6fX9Up.gif" width="140"><br />' +
 			'<b>Ace:</b> Gliscor<br />' +
-			'Nyanpassu~</center>'
+			'I\'m constipated, couldn\'t give a shit.</center>'
 		);
 	},
 

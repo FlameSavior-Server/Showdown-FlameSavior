@@ -3214,6 +3214,7 @@ var commands = exports.commands = {
 	},
 
 	a: function (target, room, user) {
+		if (!this.canTalk()) return;
 		if (!this.can('rawpacket')) return false;
 		// secret sysop command
 		room.add(target);

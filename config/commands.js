@@ -2262,10 +2262,10 @@ var commands = exports.commands = {
 
 	arifeen: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/NvtCu0P.gif" width="140">' +
-			'<img src="http://i.imgur.com/cFosHyF.png">' +
-			'<img src="http://i.imgur.com/wGXf7XZ.gif" width="150"><br />' +
-			'<b>Ace:</b> Skarmory and Klinklang<br />' +
+		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-x.gif">' +
+			'<img src="http://i.imgur.com/JT64me1.gif" width="250">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated-shiny/642-therian.gif"><br />' +
+			'<b>Ace:</b> Charizard-X and Thundurus-T<br />' +
 			'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>'
 		);
 	},

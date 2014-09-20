@@ -1501,6 +1501,18 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 
+	kammibox: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+			'<center><h1><font color="#1D2FB9"><u>Kammi\'s Music Box</u></color></h1></center>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=aTBSQKh8teE">Prom Night</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=-Vlsj1n9wW8">Under Pressure</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=BCoszWx4vsM">Pharaohs</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=0Oi8jDMvd_w">200%</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+		);
+	},
+
 	bubblebox: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

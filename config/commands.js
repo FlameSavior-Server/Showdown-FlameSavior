@@ -1892,7 +1892,7 @@ var commands = exports.commands = {
 
 	am: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/xChZqAx.png" width="500"></center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xyXniJW.png" width="500"></center>'
 		);
 	},
 

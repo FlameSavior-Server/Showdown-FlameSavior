@@ -1537,9 +1537,14 @@ var commands = exports.commands = {
 
     mushy: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="3" color="purple">Mushy</font><br />' +
-			'<img src="http://i.imgur.com/yK6aCZH.png"><br />' +
-			'Life often causes us pain, so I try to fill it up with pleasure instead. Do you want a taste? ;)</center>');
+        this.sendReplyBox('<center><font size="3" color=#8E019D>Mushy</font><br />' +
+			'<img src="http://www.wall321.com/thumbnails/detail/20120504/angels%20army%20diablo%20armor%20tyrael%20swords%201920x1080%20wallpaper_www.wall321.com_75.jpg" width=400 height=225><br />' +
+			'"Why do people hope for thing that they know are near impossible?" "Because sometimes, hope is all you have."</center>');
+	},
+	
+	panic: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/sGq1qy9.gif"></center>');
 	},
 
 	furgo: function(target, room, user) {

@@ -2579,9 +2579,7 @@ var commands = exports.commands = {
 	roomban: function (target, room, user, connection) {
 		if (!target) return this.parse('/help roomban');
 		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
-		if(room.id === 'lobby') {
-		return this.sendReply('|html|No! Bad! Do not use this command here!');
-		}
+
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
@@ -2589,24 +2587,28 @@ var commands = exports.commands = {
 
 		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
-		
+		if (!room.bannedUsers || !room.bannedIps) {
+			return this.sendReply("Room bans are not meant to be used in room " + room.id + ".");
+		}
+		if (room.bannedUsers[userid] || room.bannedIps[targetUser.latestIp]) return this.sendReply("User " + targetUser.name + " is already banned from room " + room.id + ".");
 		room.bannedUsers[userid] = true;
 		for (var ip in targetUser.ips) {
 			room.bannedIps[ip] = true;
 		}
-		targetUser.popup(user.name+" has banned you from the room " + room.id + ". To appeal the ban, PM the moderator that banned you or a room owner." + (target ? " (" + target + ")" : ""));
-		this.addModCommand(""+targetUser.name+" was banned from room " + room.id + " by "+user.name+"." + (target ? " (" + target + ")" : ""));
+		targetUser.popup("" + user.name + " has banned you from the room " + room.id + ". To appeal the ban, PM the moderator that banned you or a room owner." + (target ? " (" + target + ")" : ""));
+		this.addModCommand("" + targetUser.name + " was banned from room " + room.id + " by " + user.name + "." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
 		if (alts.length) {
-			this.addModCommand(targetUser.name + "'s alts were also banned from room " + room.id + ": " + alts.join(", "));
+			this.privateModCommand("(" + targetUser.name + "'s alts were also banned from room " + room.id + ": " + alts.join(", ") + ")");
 			for (var i = 0; i < alts.length; ++i) {
 				var altId = toId(alts[i]);
 				this.add('|unlink|' + altId);
 				room.bannedUsers[altId] = true;
+				Users.getExact(altId).leaveRoom(room.id);
 			}
 		}
-		this.add('|unlink|' + targetUser.userid);
-		targetUser.leaveRoom(room.id);
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
+		if (!targetUser.can('bypassall')) targetUser.leaveRoom(room.id);
 	},
 
 	roomunban: function(target, room, user, connection) {

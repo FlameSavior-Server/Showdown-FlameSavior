@@ -1924,6 +1924,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	rex: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/rZbikos.gif" width="140">' +
+			'<img src="http://i.imgur.com/BxFjd9B.png">' +
+			'<img src="http://i.imgur.com/Ujmcsv7.jpg" width="120"><br />' +
+			'<b>Ace:</b> Mega Aggron<br />' +
+			'Cake Mix Was Meant To Fly.</center>'
+		);
+	},
+
  	zarifeen: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-x.gif">' +
@@ -2039,7 +2049,7 @@ var commands = exports.commands = {
 			'<img src="http://i.imgur.com/5J7QUh8.png" width="320">' +
 			'<img src="http://i.imgur.com/kOqpYCT.png" width="110"><br />' +
 			'<b>Ace:</b> Meloetta<br />' +
-			'You\'re like an oreo, I wanna split you apart and eat what\'s in the middle! x3</center>'
+			'We are all healing. Both with our bodies and with our minds. Making more pain means you can never heal. That\'s when we quit.</center>'
 		);
 	},
 

@@ -1539,7 +1539,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><font size="3" color=#8E019D>Mushy</font><br />' +
 			'<img src="http://www.wall321.com/thumbnails/detail/20120504/angels%20army%20diablo%20armor%20tyrael%20swords%201920x1080%20wallpaper_www.wall321.com_75.jpg" width=400 height=225><br />' +
-			'"Why do people hope for thing that they know are near impossible?" "Because sometimes, hope is all you have."</center>');
+			'"Why do people hope for things that they know are near impossible?" "Because sometimes, hope is all you have."</center>');
 	},
 	
 	panic: function(target, room, user) {

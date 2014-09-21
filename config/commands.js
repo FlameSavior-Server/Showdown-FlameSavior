@@ -1924,6 +1924,17 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	bush: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/1e70240e982114e08c4526537743fd17/tumblr_mwft7iuReF1qhq8tso1_500.png" width="140">' +
+			'<img src="http://i.imgur.com/nWkO6EI.png" width="260">' +
+			'<img src="http://makeameme.org/media/created/diggersby-tho-diggersby.jpg" width="140"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/diggersby.gif"><br />' +
+			'<b>Ace:</b> Diggersiy and the D<br />' +
+			'"He wanted help, I provided that. He wanted Dick, I Thrusted that"</center>'
+		);
+	},
+
  	kaisersrivals: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/wgHOuRE.png"><br />' +

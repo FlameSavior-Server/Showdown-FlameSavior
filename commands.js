@@ -535,10 +535,11 @@ var commands = exports.commands = {
  		if (!this.canTalk()) return;
   		//if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
   		if(!target || target.length > 1) return this.sendReply('/customsymbol [symbol] - changes your symbol (usergroup) to the specified symbol. The symbol can only be one character');
+  		
   		var a = target;
-  		var a = target;
-		var bannedSymbols = ['+','$','%','‽','!','@','&','~','#','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0','卐','|'];
-  		if (toId(a.indexOf(bannedSymbols))) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
+		var banned Symbols = ['+','$','%','‽','!','★','@','&','~','#','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','卐','|'];  		if (a.indexOf(bannedSymbols)) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
+  		if (a.indexOf(bannedSymbols)) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
+  		
   		user.getIdentity = function(){
   			if(this.muted)	return '!' + this.name;
   			if(this.locked) return '‽' + this.name;

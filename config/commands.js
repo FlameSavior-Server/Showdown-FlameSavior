@@ -1924,7 +1924,7 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
- 	kaiseersrivals: function (target, room, user) {
+ 	kaisersrivals: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/wgHOuRE.png"><br />' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/medicham.gif">' +

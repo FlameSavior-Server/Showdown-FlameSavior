@@ -1931,7 +1931,7 @@ var commands = exports.commands = {
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/sylveon.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/porygon2.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/honchkrow.gif"><br />' +
-			'<b>Ace:</b> Barida, Dolph, Tgs<br />' +
+			'<b>Ace:</b> Barida, Dolph, Balto, Tgs<br />' +
 			'Old Friends, New rivals, being the best is the struggle for survival.</center>'
 		);
 	},

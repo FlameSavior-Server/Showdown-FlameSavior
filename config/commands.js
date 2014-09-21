@@ -1790,6 +1790,12 @@ var commands = exports.commands = {
                         'Ace: Meowth<br />' +
                         '...in accordance with the dictates of reason.</center>');
         },
+        
+        
+	ashbloodthief: function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<center><font size="5"><font color="#140391">ashbloodthief</font></font></center> <center><img src="http://107.191.104.240:8000/avatars/ashbloodthief.gif" width=100 height=100></center> <center><img src="http://fc04.deviantart.net/fs71/f/2013/259/f/f/mega_lucario_by_henshingeneration-d6mihft.jpg" width=270 height=200></center><br /> <center><font size="3"> Ace: Mega Lucario</font></center> <center><font size="3"> I\'m a being pure as energy! You can\'t stop me!</font></center>');
+	},
 
     			//***********************Music Boxes***************************
     			

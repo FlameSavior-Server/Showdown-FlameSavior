@@ -1924,6 +1924,18 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	kaiseersrivals: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/wgHOuRE.png"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/medicham.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/sylveon.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/porygon2.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/honchkrow.gif"><br />' +
+			'<b>Ace:</b> Barida, Dolph, Tgs<br />' +
+			'Old Friends, New rivals, being the best is the struggle for survival.</center>'
+		);
+	},
+
  	rex: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/rZbikos.gif" width="140">' +

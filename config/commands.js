@@ -1924,6 +1924,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	hazo: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://33.media.tumblr.com/tumblr_m43alzeRyw1r1n5pqo1_500.gif" width="200">' +
+			'<img src="http://i.imgur.com/vwyLQFt.png">' +
+			'<img src="http://fc00.deviantart.net/fs70/i/2012/215/5/e/shadow_triad_by_pokedex_himori-d59qlja.png" width="180"><br />' +
+			'<b>Ace:</b> Shadows<br />' +
+			'"In order for the light to shine so brightly, the darkness must be present"</center>'
+		);
+	},
+
  	fabu: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/sSYAsXR.jpg" width="140">' +

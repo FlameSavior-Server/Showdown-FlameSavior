@@ -989,10 +989,10 @@ var commands = exports.commands = {
 		);
 	},
 
-	staff: function (target, room, user) {
+	/*staff: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("<a href=\"https://www.smogon.com/sim/staff_list\">Pokemon Showdown Staff List</a>");
-	},
+	},*/
 
 	avatars: function (target, room, user) {
 		if (!this.canBroadcast()) return;

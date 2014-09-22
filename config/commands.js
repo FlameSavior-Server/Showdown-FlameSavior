@@ -1939,7 +1939,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/loYpn46.gif" width="150">' +
 			'<img src="http://i.imgur.com/eyDn8Jj.gif">' +
 			'<img src="http://i.imgur.com/D92Vktd.gif" width="140"><br />' +
-			'<b>Ace:</b> <br />' +
+			'<b>Ace:</b> ~n_n~<br />' +
 			'I\'m a new user o_o</center>'
 		);
 	},

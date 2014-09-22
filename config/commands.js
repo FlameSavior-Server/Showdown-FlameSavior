@@ -1924,12 +1924,22 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	fabu: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/sSYAsXR.jpg" width="140">' +
+			'<img src="http://i.imgur.com/6dmwAFo.gif" width="280">' +
+			'<img src="http://images6.fanpop.com/image/photos/37400000/Mega-Altaria-pokemon-37426858-435-500.jpg" height="140"><br />' +
+			'<b>Ace:</b> Mega Ampharos<br />' +
+			'Bitch we\'re fabu.</center>'
+		);
+	},
+
  	vileman: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/loYpn46.gif" width="150">' +
 			'<img src="http://i.imgur.com/eyDn8Jj.gif">' +
 			'<img src="http://i.imgur.com/D92Vktd.gif" width="140"><br />' +
-			'<b>Ace:</b> ¯\_(ツ)_/¯<br />' +
+			'<b>Ace:</b> <br />' +
 			'I\'m a new user o_o</center>'
 		);
 	},

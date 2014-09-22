@@ -3325,7 +3325,7 @@ var commands = exports.commands = {
 
 						reloadCustomAvatars();
 						this.sendReply(userid + "'s custom avatar has been set.");
-						Users.messageSeniorStaff(parts[1]+' has received a custom avatar from '+user.name);
+						Rooms.rooms.staff.add(parts[1]+' has received a custom avatar from '+user.name);
 					}).bind(this));
 					break;
 				case 'rem':

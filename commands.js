@@ -918,71 +918,40 @@ var commands = exports.commands = {
 		connection.popup('**Founder:** ' + founder + '\n\n**Owners:** ' + owners + '\n\n**Moderators:** ' + mods + '\n\n**Drivers:** ' + drivers + '\n\n**Voices:** ' + voices);
 	},
 
+	staff: 'stafflist',
 	stafflist: function (target, room, user, connection) {
-		var buffer = [];
-		var admins = [];
-		var leaders = [];
-		var mods = [];
-		var drivers = [];
-		var voices = [];
+		var groups = [];
+		for (var u in Config.groups) {
+			if (Config.groups[u].roomonly) continue;
+			groups.push(Config.groups[u]);
+		}
 
-		admins2 = ''; leaders2 = ''; mods2 = ''; drivers2 = ''; voices2 = '';
-		stafflist = fs.readFileSync('config/usergroups.csv','utf8');
-		stafflist = stafflist.split('\n');
-		for (var u in stafflist) {
-			line = stafflist[u].split(',');
-			if (line[1] == '~') {
-				admins2 = admins2 + line[0] + ',';
-			}
-			if (line[1] == '&') {
-				leaders2 = leaders2 + line[0] + ',';
-			}
-			if (line[1] == '@') {
-				mods2 = mods2 + line[0] + ',';
-			}
-			if (line[1] == '%') {
-				drivers2 = drivers2 + line[0] + ',';
-			}
-			if (line[1] == '+') {
-				voices2 = voices2 + line[0] + ',';
+		var stafflist = fs.readFileSync('config/usergroups.csv','utf8').split('\n');
+
+		for (var x in stafflist) {
+			var column = stafflist[x].split(',');
+			for (var i in groups) {
+				if (column[1] == Config.groupsranking[groups[i].rank]) {
+					if (!groups[i].users) groups[i].users = [];
+					groups[i].users.push(column[0]);
+					break;
+				}
 			}
 		}
-		admins2 = admins2.split(',');
-		leaders2 = leaders2.split(',');
-		mods2 = mods2.split(',');
-		drivers2 = drivers2.split(',');
-		voices2 = voices2.split(',');
-		for (var u in admins2) {
-			if (admins2[u] != '') admins.push(admins2[u]);
+
+		var output = '';
+		var total = 0;
+
+		for (var d in groups) {
+			if (!groups[d].users) continue;
+			output += '**'+groups[d].name+': ('+groups[d].users.length+')**\n ';
+			output += groups[d].users.join(', ');
+			output += '\n\n';
+			total += groups[d].users.length;
+			delete groups[d].users; // I'm not entirely sure why this line is needed, but names on the list duplicate after each use without it.
 		}
-		for (var u in leaders2) {
-			if (leaders2[u] != '') leaders.push(leaders2[u]);
-		}
-		for (var u in mods2) {
-			if (mods2[u] != '') mods.push(mods2[u]);
-		}
-		for (var u in drivers2) {
-			if (drivers2[u] != '') drivers.push(drivers2[u]);
-		}
-		for (var u in voices2) {
-			if (voices2[u] != '') voices.push(voices2[u]);
-		}
-		if (admins.length > 0) {
-			admins = admins.join(', ');
-		}
-		if (leaders.length > 0) {
-			leaders = leaders.join(', ');
-		}
-		if (mods.length > 0) {
-			mods = mods.join(', ');
-		}
-		if (drivers.length > 0) {
-			drivers = drivers.join(', ');
-		}
-		if (voices.length > 0) {
-			voices = voices.join(', ');
-		}
-		connection.popup('**Administrators:** ' + admins + '\n\n**Leaders:** ' + leaders + '\n\n**Moderators:** ' + mods + '\n\n**Drivers:** ' + drivers + '\n\n**Voices:** ' + voices);
+		output += '**Total:** '+total;
+		return connection.popup(output);
 	},
 
 	leave: 'part',

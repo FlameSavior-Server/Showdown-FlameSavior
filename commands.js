@@ -556,7 +556,7 @@ var commands = exports.commands = {
 		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');
 		user.getIdentity = function() {
 			if (this.muted) return '!' + this.name;
-			if (this.locked) return 'Ã¢â‚¬Â½' + this.name;
+			if (this.locked) return '‽' + this.name;
 			return this.group + this.name;
 		};
 		user.hasCustomSymbol = false;

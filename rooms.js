@@ -595,7 +595,6 @@ var GlobalRoom = (function () {
 		room = Rooms.createBattle(room, format, p1, p2, parent, rated);
 		return room;
 	};
-	GlobalRoom.prototype.removeRoom = function (room) {};
 	GlobalRoom.prototype.chat = function (user, message, connection) {
 		if (rooms.lobby) return rooms.lobby.chat(user, message, connection);
 		message = CommandParser.parse(message, this, user, connection);
@@ -1164,8 +1163,6 @@ var BattleRoom = (function () {
 		}
 		this.users = null;
 
-		rooms.global.removeRoom(this.id);
-
 		// deallocate children and get rid of references to them
 		if (this.battle) {
 			this.battle.destroy();
@@ -1176,6 +1173,10 @@ var BattleRoom = (function () {
 			clearTimeout(this.resetTimer);
 		}
 		this.resetTimer = null;
+		if (this.expireTimer) {
+			clearTimeout(this.expireTimer);
+		}
+		this.expireTimer = null;
 
 		// get rid of some possibly-circular references
 		delete rooms[this.id];

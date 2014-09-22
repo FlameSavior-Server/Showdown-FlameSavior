@@ -1928,7 +1928,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/sSYAsXR.jpg" width="140">' +
 			'<img src="http://i.imgur.com/6dmwAFo.gif" width="280">' +
-			'<img src="http://images6.fanpop.com/image/photos/37400000/Mega-Altaria-pokemon-37426858-435-500.jpg" height="140"><br />' +
+			'<img src="http://i.imgur.com/MoBqA3d.jpg" height="140"><br />' +
 			'<b>Ace:</b> Mega Ampharos<br />' +
 			'Bitch we\'re fabu.</center>'
 		);

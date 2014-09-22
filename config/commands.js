@@ -1924,6 +1924,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	vileman: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/loYpn46.gif" width="150">' +
+			'<img src="http://i.imgur.com/eyDn8Jj.gif">' +
+			'<img src="http://i.imgur.com/D92Vktd.gif" width="140"><br />' +
+			'<b>Ace:</b> ¯\_(ツ)_/¯<br />' +
+			'I\'m a new user o_o</center>'
+		);
+	},
+
  	bush: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/1e70240e982114e08c4526537743fd17/tumblr_mwft7iuReF1qhq8tso1_500.png" width="140">' +

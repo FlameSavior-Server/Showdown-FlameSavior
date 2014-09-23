@@ -1778,9 +1778,9 @@ var commands = exports.commands = {
 	sciz: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<div class="broadcast-blue"><center><font color="#A80000" size ="3"><b>Scizornician</b></font><br />' +
-           '<b>Rank:</b> Driver<br />' +
-           '<b>Quote:</b> It\'s all shits and giggles until someone giggles and shits.</font><br />' +
-           '<img src="https://i.imgur.com/aQc7ny4.gif"></center></div>');
+           '<b>Quote:</b> "It\'s all shits and giggles until someone giggles and shits."</font><br />' +
+           '<b>Quote:</b> "Light travels faster than sound, that\'s why some people appear bright before they speak."</font><br />' +
+           '<img src="http://107.191.104.240:8000/avatars/sciz.gif"></center></div>');
 	},
 	
 	d3adm3owth: function(target, room, user) {

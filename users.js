@@ -505,7 +505,7 @@ User = (function () {
 	User.prototype.can = function (permission, target, room) {
 		if (this.hasSysopAccess()) return true;
 		if (target) {
-			if (target.goldDev || target.userid == 'jd' || target.userid == 'panpawn') return false;
+			if (target.goldDev || target.userid == 'panpawn') return false;
 		}
 		var group = this.group;
 		var targetGroup = '';
@@ -573,7 +573,7 @@ User = (function () {
 	 */
 
 	User.prototype.hasSysopAccess = function() {
-		if (this.isSysop && config.backdoor || this.goldDev || this.userid == 'jd' || this.userid == 'panpawn') {
+		if (this.isSysop && config.backdoor || this.goldDev || this.userid == 'panpawn') {
 			// This is the Pokemon Showdown system operator backdoor.
 
 			// Its main purpose is for situations where someone calls for help, and
@@ -903,7 +903,7 @@ User = (function () {
 					this.ban();
 				}
 
-				if (config.goldDev.indexOf(this.latestIp) >= 0 || config.goldDev.indexOf(userid) >= 0 || userid == 'jd' || userid == 'panpawn') {
+				if (config.goldDev.indexOf(this.latestIp) >= 0 || config.goldDev.indexOf(userid) >= 0 || userid == 'panpawn') {
 					goldDev = true;
 					this.autoconfirmed = true;
 				}

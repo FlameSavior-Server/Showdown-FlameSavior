@@ -1924,6 +1924,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	nido: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/EjSLxRe.gif" width="140">' +
+			'<img src="http://i.imgur.com/Uv2IncX.gif" width="300">' +
+			'<img src="http://i.imgur.com/OjZPrtv.png" height="140"><br />' +
+			'<b>Ace:</b> Dusclops/Aegislash<br />' +
+			'"Never give up, for that is just the place and time that the tide will turn." - Harriet Beecher Stowe</center>'
+		);
+	},
+
  	hazo: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://33.media.tumblr.com/tumblr_m43alzeRyw1r1n5pqo1_500.gif" width="200">' +

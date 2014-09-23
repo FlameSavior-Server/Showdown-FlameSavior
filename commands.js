@@ -944,7 +944,7 @@ var commands = exports.commands = {
 
 		for (var d in groups) {
 			if (!groups[d].users) continue;
-			output += '**'+groups[d].name+': ('+groups[d].users.length+')**\n ';
+			output += '**'+Config.groupsranking[groups[d].rank]+groups[d].name+': ('+groups[d].users.length+')**\n ';
 			output += groups[d].users.join(', ');
 			output += '\n\n';
 			total += groups[d].users.length;

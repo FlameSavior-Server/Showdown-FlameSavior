@@ -1924,6 +1924,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	exhrow: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="https://38.media.tumblr.com/tumblr_m1628igXV31qd87hlo1_500.gif" width="130">' +
+			'<img src="http://i.imgur.com/3mcBIDp.png" width="280">' +
+			'<img src="http://25.media.tumblr.com/3ebc734a554ea9c20f6fba53f56b3a94/tumblr_mevo9bmbyp1raimh9o1_500.gif" width="130"><br />' +
+			'<b>Ace:</b> Plusle and Minun<br />' +
+			'Its only love, if its super effective &lt;3.</center>'
+		);
+	},
+
  	nido: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/EjSLxRe.gif" width="140">' +

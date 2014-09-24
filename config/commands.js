@@ -1924,6 +1924,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	assvest: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/mlYj8ZR.jpg" height="110">' +
+			'<img src="http://i.imgur.com/CnYBExQ.gif" height="85">' +
+			'<img src="http://i.imgur.com/69BCTaK.png" height="110"><br />' +
+			'<b>Ace:</b> Ass Vest Victini<br />' +
+			'<font color="#ff5500">It if has a type and a moveset, slap a vest on that ass!</font></center>'
+		);
+	},
+
  	exhrow: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://38.media.tumblr.com/tumblr_m1628igXV31qd87hlo1_500.gif" width="130">' +

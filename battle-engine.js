@@ -106,6 +106,7 @@ process.on('message', function (message) {
 		var battle = Battles[data[0]];
 		if (battle) {
 			var prevRequest = battle.currentRequest;
+			var prevRequestDetails = battle.currentRequestDetails || '';
 			try {
 				battle.receive(data, more);
 			} catch (err) {
@@ -121,7 +122,7 @@ process.on('message', function (message) {
 				battle.add('html', '<div class="broadcast-red"><b>The battle crashed</b><br />You can keep playing but it might crash again.</div>');
 				var nestedError;
 				try {
-					battle.makeRequest(prevRequest);
+					battle.makeRequest(prevRequest, prevRequestDetails);
 				} catch (e) {
 					nestedError = e;
 				}
@@ -1432,7 +1433,6 @@ Battle = (function () {
 	Battle.prototype.p1 = null;
 	Battle.prototype.p2 = null;
 	Battle.prototype.lastUpdate = 0;
-	Battle.prototype.currentRequest = '';
 	Battle.prototype.weather = '';
 	Battle.prototype.terrain = '';
 	Battle.prototype.ended = false;
@@ -1445,6 +1445,7 @@ Battle = (function () {
 	Battle.prototype.activeTarget = null;
 	Battle.prototype.midTurn = false;
 	Battle.prototype.currentRequest = '';
+	Battle.prototype.currentRequestDetails = '';
 	Battle.prototype.rqid = 0;
 	Battle.prototype.lastMoveLine = 0;
 	Battle.prototype.reportPercentages = false;
@@ -2244,11 +2245,13 @@ Battle = (function () {
 	Battle.prototype.makeRequest = function (type, requestDetails) {
 		if (type) {
 			this.currentRequest = type;
+			this.currentRequestDetails = requestDetails || '';
 			this.rqid++;
 			this.p1.decision = null;
 			this.p2.decision = null;
 		} else {
 			type = this.currentRequest;
+			requestDetails = this.currentRequestDetails;
 		}
 		this.update();
 
@@ -2371,6 +2374,7 @@ Battle = (function () {
 		this.ended = true;
 		this.active = false;
 		this.currentRequest = '';
+		this.currentRequestDetails = '';
 		return true;
 	};
 	Battle.prototype.switchIn = function (pokemon, pos) {
@@ -2801,7 +2805,6 @@ Battle = (function () {
 
 		if (move.ohko) {
 			if (target.level > pokemon.level) {
-				this.add('-failed', target);
 				return false;
 			}
 			return target.maxhp;
@@ -3448,6 +3451,7 @@ Battle = (function () {
 		this.add('');
 		if (this.currentRequest) {
 			this.currentRequest = '';
+			this.currentRequestDetails = '';
 		}
 
 		if (!this.midTurn) {
@@ -3528,6 +3532,7 @@ Battle = (function () {
 		}
 
 		this.currentRequest = '';
+		this.currentRequestDetails = '';
 		this.p1.currentRequest = '';
 		this.p2.currentRequest = '';
 
@@ -3776,7 +3781,7 @@ Battle = (function () {
 			this.log.push('|' + parts.join('|'));
 		} else {
 			this.log.push('|split');
-			var sides = this.sides.concat(null, true);
+			var sides = [null, this.sides[0], this.sides[1], true];
 			for (var i = 0; i < sides.length; ++i) {
 				var line = '';
 				for (var j = 0; j < parts.length; ++j) {
@@ -3919,10 +3924,10 @@ Battle = (function () {
 			var p2 = this.p2;
 			var p1active = p1 ? p1.active[0] : null;
 			var p2active = p2 ? p2.active[0] : null;
-			data[2] = data[2].replace(/\f/g, '\n');
-			this.add('', '>>> ' + data[2]);
+			var target = data.slice(2).join('|').replace(/\f/g, '\n');
+			this.add('', '>>> ' + target);
 			try {
-				this.add('', '<<< ' + eval(data[2]));
+				this.add('', '<<< ' + eval(target));
 			} catch (e) {
 				this.add('', '<<< error: ' + e.message);
 			}

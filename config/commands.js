@@ -1924,6 +1924,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	booty: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/XtuCDxn.jpg" height="160">' +
+			'<img src="http://i.imgur.com/SiXcfp1.gif" width="280">' +
+			'<img src="http://i.imgur.com/TJyhW84.jpg" width="160"><br />' +
+			'<b>Ace:</b> Specs Booty Melo<br />' +
+			'Come here and sit that right up on my face.</center>'
+		);
+	},
+
  	assvest: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/mlYj8ZR.jpg" height="110">' +

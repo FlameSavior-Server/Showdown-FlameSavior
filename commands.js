@@ -2700,7 +2700,7 @@ var commands = exports.commands = {
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 
 		if (user.userid === 'panpawn') {
-		if (!user.isAway) {
+			if (!user.isAway) {
 			user.originalName = user.name;
 			var awayName = user.name + ' - Ⓐⓦⓐⓨ';
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
@@ -2729,6 +2729,7 @@ var commands = exports.commands = {
 		else {
 			return this.sendReply('You are already set as away, type /back if you are now back.');
 		}
+	}
 	},
 
 	sleep: function(target, room, user, connection) {

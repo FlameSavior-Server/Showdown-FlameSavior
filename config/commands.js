@@ -1924,6 +1924,17 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	sceptile: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/sceptile.gif">' +
+			'<img src="http://i.imgur.com/RS3CtCr.gif">' +
+			'<img src="http://i.imgur.com/vZLqTNK.jpg" height="200"><br />' +
+			'<img src="http://i.imgur.com/NVjBuoQ.png"><br />' +
+			'<b>Ace:</b> Shag<br />' +
+			'"Who needs bitches when u can b sceptile?"</center>'
+		);
+	},
+
  	booty: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/XtuCDxn.jpg" height="160">' +

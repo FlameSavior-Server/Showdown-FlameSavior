@@ -571,6 +571,7 @@ var commands = exports.commands = {
         fannypack: 'atm',
         purse: 'atm',
         bag: 'atm',
+        bank: 'atm',
         atm: function(target, room, user, connection, cmd) {
         if (!this.canBroadcast()) return;
         var mMatch = false;

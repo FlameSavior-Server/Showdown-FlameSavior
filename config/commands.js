@@ -1924,6 +1924,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	palp: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/fKB8bPg.png" width="120">' +
+			'<img src="http://i.imgur.com/dbAOWbg.png" width="300">' +
+			'<img src="http://i.imgur.com/sScr0Im.jpg" width="120"><br />' +
+			'<b>Ace:</b> Palpitoad<br />' +
+			'Screw you I\'m a magic gambling unicorn that\'s also an emperor!</center>'
+		);
+	},
+
  	sceptile: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/sceptile.gif">' +
@@ -3378,14 +3388,13 @@ var commands = exports.commands = {
 		);
 	},
 
-	greeling: 'titan',
-	titan: function (target, room, user) {
+	greed: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://img2.wikia.nocookie.net/__cb20130602145854/fma/images/thumb/8/82/Greedling-profile.png/300px-Greedling-profile.png" width="140">' +
-			'<img src="http://i.imgur.com/nw76seS.gif" width="260">' +
+			this.sendReplyBox('<center><img src="http://i.imgur.com/2j67WZG.jpg" width="140">' +
+			'<img src="http://i.imgur.com/oJ5c6JZ.png">' +
 			'<img src="http://i.imgur.com/mWUrtx5.gif" width="140"><br />' +
 			'<b>Ace:</b> Mega-Blastoise<br />' +
-			'Only those who will risk going too far can possibly find out how far one can go.</center>'
+			'I am Greed, the root of all evil.</center>'
 		);
 	},
 

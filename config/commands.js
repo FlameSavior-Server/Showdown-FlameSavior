@@ -1931,7 +1931,7 @@ var commands = exports.commands = {
 			'<img src="http://i.imgur.com/vZLqTNK.jpg" height="200"><br />' +
 			'<img src="http://i.imgur.com/NVjBuoQ.png"><br />' +
 			'<b>Ace:</b> Shag<br />' +
-			'"Who needs bitches when u can b sceptile?"</center>'
+			'<blink><font color="darkgreen">who needs bitches when u can b sceptile?</font></blink></center>'
 		);
 	},
 

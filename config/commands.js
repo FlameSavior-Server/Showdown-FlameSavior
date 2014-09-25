@@ -1501,6 +1501,18 @@ var commands = exports.commands = {
 	* Music Boxes                          *
 	***************************************/
 
+	jetsbox: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
+			'<center><h1><font color="darkgreen"><u>Jet\'s Music Box</u></color></h1></center>' +
+			'<center><b><a href="https://www.youtube.com/watch?v=FWhOZM5WyPA">Gerudo Valley</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=AOPMlIIg_38">Boom Clap</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=2dP-d1NIV5A">Oreo</a><br />' +
+			'<center><b><a href="https://www.youtube.com/watch?v=KA8a5qibUJU">Zelda Violin Duet</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+		);
+	},
+
 	kammibox: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +

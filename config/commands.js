@@ -1936,6 +1936,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	at: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/t7xExOQ.gif" width="140">' +
+			'<img src="http://i.imgur.com/rHufYTF.gif" width="260">' +
+			'<img src="http://i.imgur.com/eZwTO2D.gif" width="140"><br />' +
+			'<font color="red"><blink><b>Tael likes ass and titties.</b></blink></font><br />' +
+			'<a href="https://www.youtube.com/watch?v=6pTMtDgYEq0"><button>( ͝° ͜ʖ͡°)</button></a></center>'
+		);
+	},
+
  	palp: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/fKB8bPg.png" width="120">' +

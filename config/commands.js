@@ -1936,6 +1936,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	rekt: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.viralglobalnews.com/wp-content/uploads/2014/03/Amazing-dodgeball-GIF.gif" width="145">' +
+			'<img src="http://i.imgur.com/fvMh5Bj.gif">' +
+			'<img src="http://i.imgur.com/RmtY4zl.gif" height="100" width="150"><br />' +
+			'<a href="http://replay.pokemonshowdown.com/frost-oumonotype-990161"><button>git gud anytime pls</button></a><br />' +
+			'<blink><font color="red">fukn skrubs</font></blink></center>'
+		);
+	},
+
  	at: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/t7xExOQ.gif" width="140">' +

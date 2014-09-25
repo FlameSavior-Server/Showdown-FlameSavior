@@ -2810,43 +2810,63 @@ var commands = exports.commands = {
 		}
 	},
 
-	busy: function(target, room, user, connection) {
+	
+	back: function(target, room, user, connection) {
 		if (!this.can('broadcast')) return false;
-		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 
 		if (user.userid === 'panpawn') {
-		if (!user.isAway) {
-			user.originalName = user.name;
-			var awayName = user.name + ' - Ⓑⓤⓢⓨ';
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(awayName);
-			user.forceRename(awayName, undefined, true);
 
-			this.add('|raw|<b>-- <font color="#DA9D01">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
-			user.isAway = true;
+		if (user.isAway) {
+			if (user.name === user.originalName) {
+				user.isAway = false;
+				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
+
+			}
+
+			var newName = user.originalName;
+
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(newName);
+			user.forceRename(newName, undefined, true);
+
+			//user will be authenticated
+			user.authenticated = true;
+
+			this.add('|raw|<b>-- <font color="#DA9D01">' + newName + '</font color></b> is no longer away.');
+			user.originalName = '';
+			user.isAway = false;
 		}
 		else {
-			return this.sendReply('You are already set as away, type /back if you are now back.');
-		}
-
-		user.updateIdentity();
-		} else {
-		if (!user.isAway) {
-			user.originalName = user.name;
-			var awayName = user.name + ' - Ⓑⓤⓢⓨ';
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(awayName);
-			user.forceRename(awayName, undefined, true);
-
-			this.add('|raw|<b>-- <font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font color></b> is now busy. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
-			user.isAway = true;
-		}
-		else {
-			return this.sendReply('You are already set as away, type /back if you are now back.');
+			return this.sendReply('You are not set as away.');
 		}
 
 		user.updateIdentity();
 		}
+		if (user.isAway) {
+			if (user.name === user.originalName) {
+				user.isAway = false;
+				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
+
+			}
+
+			var newName = user.originalName;
+
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(newName);
+			user.forceRename(newName, undefined, true);
+
+			//user will be authenticated
+			user.authenticated = true;
+
+			this.add('|raw|<b>-- <font color="'+ hashColor(''+toId(user.name)+'')+'">' + newName + '</font color></b> is no longer away');
+			user.originalName = '';
+			user.isAway = false;
+		}
+		else {
+			return this.sendReply('You are not set as away.');
+		}
+
+		user.updateIdentity();
 	},
 
 	roomalias: function (target, room, user) {

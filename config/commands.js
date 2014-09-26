@@ -1136,7 +1136,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');
 	},
-	
+
 	whosgotthemoneyz: 'richestuser',
 	richestuser: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1153,7 +1153,7 @@ var commands = exports.commands = {
 			userids.money[i] = Number(parts[1]);
 			size++;
 			if (isNaN(parts[1]) || parts[1] === 'Infinity') userids.money[i] = 0;
-			
+
         }
 		for (var i=0; i<10;i++) {
 			var tempHighest = 0;
@@ -1171,7 +1171,7 @@ var commands = exports.commands = {
 				}
 			}
 		}
-		return this.sendReplyBox('<b>The richest users are:</b>' + 
+		return this.sendReplyBox('<b>The richest users are:</b>' +
 								'<br>1. ' + highest.id[0] + ': ' + highest.money[0] +
 								'<br>2. ' + highest.id[1] + ': ' + highest.money[1] +
 								'<br>3. ' + highest.id[2] + ': ' + highest.money[2] +
@@ -1226,6 +1226,11 @@ var commands = exports.commands = {
 			'Thumbtacks in my shoes would stick into my feet whenever I tried to walk. It would hurt. I don\'t think I could deal with that really.</center>');
 	},
 
+	tesarand: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b><center><font color="purple"><font size="6">Tesarand</font></center></b><center><img src="http://www.bonappetit.com/wp-content/uploads/2013/03/james-deen-646.jpg" height="200" width="300"></center><center><b>Ace: Dragonite<br>"It tastes like glitter.... Rad.”</b><br></center>');
+	},
+	
 	shrew: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/0dwzNX7.gif"><br />' +
@@ -1256,7 +1261,7 @@ var commands = exports.commands = {
                 '<img src="http://i.imgur.com/Dp5P3Bu.gif" width="270" height="160"><br />' +
                 'There are stars and planets floating around me. I don\'t think I can handle astronomy right now.</center>');
 	},
-	
+
 	fork: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/HrDUGmr.png" width="75" height="100">');
@@ -1541,7 +1546,7 @@ var commands = exports.commands = {
 			'<img src="http://www.wall321.com/thumbnails/detail/20120504/angels%20army%20diablo%20armor%20tyrael%20swords%201920x1080%20wallpaper_www.wall321.com_75.jpg" width=400 height=225><br />' +
 			'"Why do people hope for things that they know are near impossible?" "Because sometimes, hope is all you have."</center>');
 	},
-	
+
 	panic: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/sGq1qy9.gif"></center>');
@@ -1782,7 +1787,7 @@ var commands = exports.commands = {
            '<b>Quote:</b> "Light travels faster than sound, that\'s why some people appear bright before they speak."</font><br />' +
            '<img src="http://107.191.104.240:8000/avatars/sciz.gif"></center></div>');
 	},
-	
+
 	d3adm3owth: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center><font color=#0E30AA size=3>d3adm3owth</font><br />' +
@@ -1790,18 +1795,18 @@ var commands = exports.commands = {
                         'Ace: Meowth<br />' +
                         '...in accordance with the dictates of reason.</center>');
         },
-        
-        
+
+
 	ashbloodthief: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center><font size="5"><font color="#140391">ashbloodthief</font></font></center> <center><img src="http://107.191.104.240:8000/avatars/ashbloodthief.gif" width=100 height=100></center> <center><img src="http://fc04.deviantart.net/fs71/f/2013/259/f/f/mega_lucario_by_henshingeneration-d6mihft.jpg" width=270 height=200></center><br /> <center><font size="3"> Ace: Mega Lucario</font></center> <center><font size="3"> I\'m a being pure as energy! You can\'t stop me!</font></center>');
 	},
 
     			//***********************Music Boxes***************************
-    			
+
     //View Music box command to reduce lobby spam
     vmb: function (target, room, user) {
-	   if (!this.canBroadcast()) return;	   
+	   if (!this.canBroadcast()) return;
 	   this.sendReplyBox('<center>Click <button name="send" value="/'+ target + '" class="blackbutton" title="View musicbox!"><font color="white"><b>here</button></b></font> to view <b>' + target + '!</b></center>');
 	},
 
@@ -3375,7 +3380,7 @@ var commands = exports.commands = {
 	 * Help commands
 	 *********************************************************/
 
-	
+
 	commands: 'help',
 	h: 'help',
 	'?': 'help',

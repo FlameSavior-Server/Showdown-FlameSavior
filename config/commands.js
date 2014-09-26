@@ -1228,7 +1228,9 @@ var commands = exports.commands = {
 
 	tesarand: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b><center><font color="purple"><font size="6">Tesarand</font></center></b><center><img src="http://www.bonappetit.com/wp-content/uploads/2013/03/james-deen-646.jpg" height="200" width="300"></center><center><b>Ace: Dragonite<br>"It tastes like glitter.... Rad.”</b><br></center>');
+		this.sendReplyBox('<b><center><font color="purple"><font size="6">Tesarand</b></font>' +
+			'<img src="http://www.bonappetit.com/wp-content/uploads/2013/03/james-deen-646.jpg" height="200" width="300">' +
+			'<b>Ace: Dragonite<br>"It tastes like glitter.... Rad.”</b><br></center>');
 	},
 	
 	shrew: function(target, room, user) {

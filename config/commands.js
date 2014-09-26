@@ -2061,7 +2061,7 @@ var commands = exports.commands = {
 	donate: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
-			"<center>Like this server and what to keep it going?  If so, you can make a paypal donation to Gold!  You can choose the amount.<br />" +
+			"<center>Like this server and want to keep it going?  If so, you can make a paypal donation to Gold!  You can choose the amount.<br />" +
 			'<hr width="85%">' +
 			"- Donations will help Gold to upgrade the VPS so we can do more and hold more users!<br />" +
 			"- For donations <b>$5 or over</b>, you can get: 200 bucks, a custom avatar, a custom trainer card, a custom symbol, and a custom music box!<br />" +

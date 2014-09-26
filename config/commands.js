@@ -1936,6 +1936,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	princess: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="https://i.chzbgr.com/maxW500/7960801280/h7ED088ED/" width="120">' +
+			'<img src="http://i.imgur.com/2zVCsoA.gif" width="280">' +
+			'<img src="http://i.imgur.com/p0vMZqf.jpg" width="140"><br />' +
+			'<b>Ace:</b> <img src="http://i.imgur.com/fiTEY6x.gif" width="280"><br />' +
+			'Don\'t F with Princess.</center>'
+		);
+	},
+
  	rekt: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.viralglobalnews.com/wp-content/uploads/2014/03/Amazing-dodgeball-GIF.gif" width="145">' +

@@ -2843,68 +2843,6 @@ var commands = exports.commands = {
 		}
 	},
 
-	roomowner: function (target, room, user) {
-		if (!room.chatRoomData) {
-			return this.sendReply("/roomowner - This room isn't designed for per-room moderation to be added");
-		}
-		target = this.splitTarget(target, true);
-		var targetUser = this.targetUser;
-
-		if (user.userid === 'panpawn') {
-
-		if (user.isAway) {
-			if (user.name === user.originalName) {
-				user.isAway = false;
-				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
-
-			}
-
-			var newName = user.originalName;
-
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(newName);
-			user.forceRename(newName, undefined, true);
-
-			//user will be authenticated
-			user.authenticated = true;
-
-			this.add('|raw|<b>-- <font color="#DA9D01">' + newName + '</font color></b> is no longer away.');
-			user.originalName = '';
-			user.isAway = false;
-		}
-		else {
-			return this.sendReply('You are not set as away.');
-		}
-
-		user.updateIdentity();
-		}
-		if (user.isAway) {
-			if (user.name === user.originalName) {
-				user.isAway = false;
-				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
-
-			}
-
-			var newName = user.originalName;
-
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(newName);
-			user.forceRename(newName, undefined, true);
-
-			//user will be authenticated
-			user.authenticated = true;
-
-			this.add('|raw|<b>-- <font color="'+ hashColor(''+toId(user.name)+'')+'">' + newName + '</font color></b> is no longer away');
-			user.originalName = '';
-			user.isAway = false;
-		}
-		else {
-			return this.sendReply('You are not set as away.');
-		}
-
-		user.updateIdentity();
-	},
-
 	roomauth: function(target, room, user, connection) {
 		if (!room.auth) return this.sendReply("/roomauth - This room isn't designed for per-room moderation and therefore has no auth list.");
 		var buffer = [];

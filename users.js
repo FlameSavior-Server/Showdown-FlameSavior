@@ -426,8 +426,13 @@ Users.socketReceive = function(worker, workerid, socketid, message) {
 			}
 		});
 	}
-	for (var i = 0; i < lines.length; i++) {
-		if (user.chat(lines[i], room, connection) === false) break;
+	try {
+		for (var i = 0; i < lines.length; i++) {
+			if (user.chat(lines[i], room, connection) === false) break;
+		}
+	} catch (e) {
+		console.log("User "+user.name+" crashed with message \""+message.substr(message.indexOf('|')+1, message.length)+"\":\n"+e.stack);
+		connection.popup('Message "'+message.substr(message.indexOf('|')+1, message.length)+'" crashed. \nPlease contact an Administrator.\nError: '+e);
 	}
 };
 

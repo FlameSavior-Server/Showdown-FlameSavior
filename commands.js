@@ -1014,9 +1014,9 @@ var commands = exports.commands = {
 	shop: function(target, room, user) {
 
 		if (!this.canBroadcast()) return;
-		if(room.id === 'lobby') {
-		return this.sendReplyBox('<center>Click <button name="send" value="/shop164" class="blackbutton" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
-		} else
+		if(room.id === 'lobby' && this.broadcasting) {
+		return this.sendReplyBox('<center>Click <button name="send" value="/shop" class="blackbutton" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
+		} else {
 		return this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
 			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
 			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
@@ -1030,26 +1030,11 @@ var commands = exports.commands = {
 			//'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>150</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
+		}
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
-	},
-	shop164: function(target, room, user) {
-	if (!this.canBroadcast()) return;
-	this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
-			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
-			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
-			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
-			'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
-			'<tr><td>Trainer</td><td>Buys <a href="http://pastebin.com/1GBmc4eM">a trainer card</a> which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
-			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>15</td></tr>' +
-			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
-			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>60</td></tr>' +
-			//'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>150</td></tr>' +
-			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
-			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
-		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
-	},
 
+	},
+	
 	lockshop: 'closeshop',
 	closeshop: function(target, room, user) {
 		if (!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');

@@ -2635,6 +2635,15 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('Click <a href="http://goldserver.weebly.com/how-do-i-get-a-rank-on-gold.html">here</a> to find out about Gold\'s ranks and promotion system.');
 	},
+	
+	//Should solve the problem of users not being able to talk in chat
+	unstick: function(target, room, user) {
+		if (!this.can('hotpatch')) return;
+		for (var uid in Users.users) {
+			Users.users[uid].chatQueue = null;
+			Users.users[uid].chatQueueTimeout = null;
+		}
+	},
 
 	/*********************************************************
 	 * Miscellaneous commands
@@ -3202,6 +3211,7 @@ var commands = exports.commands = {
         Rooms.rooms.room.add('|html|<font size="4"><b>New color guessed!</b></font><br><b>Guessed by:</b> '+user.userid+'<br><b>Color:</b> '+target+'');
         this.sendReply('Thanks, your new color guess has been sent.  We\'ll review your color soon and get back to you. ("'+target+'")');
 	},
+	
 
 	pick: 'pickrandom',
 	pickrandom: function (target, room, user) {

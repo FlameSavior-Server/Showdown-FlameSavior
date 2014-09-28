@@ -1936,6 +1936,16 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	artemis: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/qhoIRP4.gif" width="160">' +
+			'<img src="http://i.imgur.com/u0bAFty.gif">' +
+			'<img src="http://i.imgur.com/1RPA6bV.jpg" width="120"><br />' +
+			'<b>Ace:</b> Composite Bow<br />' +
+			'Look at the moon and see my reflection.</center>'
+		);
+	},
+
  	princess: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://i.chzbgr.com/maxW500/7960801280/h7ED088ED/" width="120">' +

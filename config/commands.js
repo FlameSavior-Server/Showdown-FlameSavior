@@ -1936,6 +1936,36 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	cyklone: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/sHCfN3w.gif">' +
+			'<img src="http://i.imgur.com/APnNRPk.png">' +
+			'<img src="http://i.imgur.com/j34q3Ab.gif"><br />' +
+			'<b>Ace:</b> Rayquaza<br />' +
+			'Its one thing to read about dragons...and another to face them.</center>'
+		);
+	},
+
+ 	at2: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/4v4JmJS.gif" width="140">' +
+			'<img src="http://i.imgur.com/eCNNgfT.gif" width="280">' +
+			'<img src="http://i.imgur.com/YopROcK.gif" width="120"><br />' +
+			'<blink><b><font color="red">Tael really likes ass and titties.</blink></b></font><br />' +
+			'<a href="https://www.youtube.com/watch?v=JdOstVSouao"><button>( ͡° ͜ʖ ͡°)</button></a></center>'
+		);
+	},
+
+ 	ridascharizard: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ThuU1hp.gif" width="120" height="100">' +
+			'<img src="http://i.imgur.com/q0SY6kI.png" width="300">' +
+			'<img src="http://i.imgur.com/iFcd6uE.jpg" width="120"><br />' +
+			'<b>Ace:</b> Charizard<br />' +
+			'The Fire/Flying OG is in the Building.</center>'
+		);
+	},
+
  	artemis: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/qhoIRP4.gif" width="160">' +

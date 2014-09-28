@@ -529,18 +529,15 @@ var commands = exports.commands = {
 
 	cs: 'customsymbol',
 	customsymbol: function(target, room, user) {
-		if(!user.canCustomSymbol || hasBadge(user.userid, 'vip') == false) return this.sendReply('You don\'t have the permission to use this command.');
+		if(!user.canCustomSymbol && !hasBadge(user.userid, 'vip')) return this.sendReply('You don\'t have the permission to use this command.');
   		//var free = true;
   		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
  		if (!this.canTalk()) return;
   		//if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
   		if(!target || target.length > 1) return this.sendReply('/customsymbol [symbol] - changes your symbol (usergroup) to the specified symbol. The symbol can only be one character');
   		
-  		var a = target;
-		var bannedSymbols = ['+','$','%','‽','!','★','@','&','~','#','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','卐','|'];
-  		for (var x in bannedSymbols) {
-        		if (a.indexOf(bannedSymbols[x]) > -1) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
-  		}
+		var bannedSymbols = /[ +$%‽!★@&~#卐|A-z0-9]/;
+  		if (target.match(bannedSymbols)) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
   		user.getIdentity = function(){
   			if(this.muted)	return '!' + this.name;
   			if(this.locked) return '‽' + this.name;
@@ -5301,9 +5298,8 @@ function htmlfix(target){
 }
 function hasBadge(user, badge) {
 	var data = fs.readFileSync('badges.txt', 'utf8');
-	var row = (''+data).split('\n');
-	var match = false;
-	var badges;
+	var row = data.split('\n');
+	var badges = '';
 	for (var i = row.length; i > -1; i--) {
 		if (!row[i]) continue;
 		var split = row[i].split(':');

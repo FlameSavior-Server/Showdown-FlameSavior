@@ -529,7 +529,7 @@ var commands = exports.commands = {
 
 	cs: 'customsymbol',
 	customsymbol: function(target, room, user) {
-		if(!user.canCustomSymbol) return this.sendReply('You don\'t have the permission to use this command.');
+		if(!user.canCustomSymbol || hasBadge(user.userid, 'vip') == false) return this.sendReply('You don\'t have the permission to use this command.');
   		//var free = true;
   		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
  		if (!this.canTalk()) return;
@@ -5298,6 +5298,23 @@ function htmlfix(target){
 
 	return target;
 
+}
+function hasBadge(user, badge) {
+	var data = fs.readFileSync('config/badges.txt', 'utf8');
+	var row = (''+data).split('\n');
+	var match = false;
+	var badges;
+	for (var i = row.length; i > -1; i--) {
+		if (!row[i]) continue;
+		var split = row[i].split(':');
+		if (split[0] == toId(user)) {
+			if (split[1].indexOf(badge) > -1) {
+				return true;
+			} else {
+				return false;
+			}
+		};
+	}
 }
 function getAvatar(user) {
         if (!user) return false;

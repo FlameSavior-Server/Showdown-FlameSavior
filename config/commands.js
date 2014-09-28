@@ -402,6 +402,7 @@ var commands = exports.commands = {
 		}
 		this.logModCommand(user.name+' declared '+target);
 	},
+
 	declaregreen: 'declarered',
 	declarered: function(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help declare');
@@ -1092,10 +1093,6 @@ var commands = exports.commands = {
 		}
 
 		this.sendReplyBox("" + atkName + " is " + factor + "x effective against " + defName + ".");
-	},
-
-	afk2: function (target, room, user) {
-		return this.parse("/nick " + user.name + " ⒶⒻⓀ");
 	},
 
 	uptime: (function(){
@@ -2830,23 +2827,6 @@ var commands = exports.commands = {
 	},
 	*/
 
-
-	freebuck: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-	  	if (!this.canTalk()) return;
-	  	this.sendReplyBox('This command has been removed.');
-	  	/*/
-	  	if (room.id !== 'casino') return this.sendReplyBox('This command can only be used in <button name="send" value="/join casino" target="_blank">The Casino</button>.');
-		if (Users.get(''+user.name+'').money === 0) {
-			return this.add('|c|~GoldBucks|.custom /tb '+user.name+',1');		}
-		if (Users.get(''+user.name+'').money >= 1) {
-			return this.sendReply('You can only get a buck if you don\'t have any, ya nub.');
-		}
-		if (Users.get(''+user.name+'').money <= -1) {
-			return this.sendReply('I\'m sorry, I cannot help you if you have negitive bucks. :I');
-		}
-		*/
-	},
 	removebadge: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
 		target = this.splitTarget(target);
@@ -2885,6 +2865,7 @@ var commands = exports.commands = {
 			}
 		});
 	},
+
 	givebadge: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
 		target = this.splitTarget(target);
@@ -2928,6 +2909,7 @@ var commands = exports.commands = {
 			}
 		})
 	},
+
 	badgelist: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 var admin = '<img src="http://www.smogon.com/media/forums/images/badges/sop.png" title="Server Administrator">';
@@ -2942,7 +2924,7 @@ var commands = exports.commands = {
                 var twinner='<img src="http://www.smogon.com/media/forums/images/badges/spl.png" title="Badge Tournament Winner">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
                 var bot ='<img src="http://www.smogon.com/media/forums/images/badges/mind.png" title="Gold Bot Hoster">';
- 		return this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+artist+'    '+twinner+'    '+vip+'    '+bot+' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
+ 				return this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+artist+'    '+twinner+'    '+vip+'    '+bot+' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
 	},
 	badges: 'badge',
     	badge: function(target, room, user) {
@@ -3154,49 +3136,12 @@ var commands = exports.commands = {
 		if (target === 'list' || target === 'help' || target === 'options') {
 		return this.sendReplyBox('The random colors are: <b><font color="red">Red</font>, <font color="blue">Blue</font>, <font color="orange">Orange</font>, <font color="green">Green</font>, <font color="teal">Teal</font>, <font color="brown">Brown</font>, <font color="black">Black</font>, <font color="purple">Purple</font>, <font color="pink">Pink</font>, <font color="gray">Gray</font>, <font color="tan">Tan</font>, <font color="gold">Gold</font>, <font color=#CC0000>R</font><font color=#AE1D00>a</font><font color=#913A00>i</font><font color=#745700>n</font><font color=#577400>b</font><font color=#3A9100>o</font><font color=#1DAE00>w</font>.');
 		}
-		if (target == '') {
-		var random = Math.floor(13 * Math.random()) + 1;
-		var results = '';
-		if (random == 1) {
-		results = '<font color="red">Red</font>';
-		}
-		if (random == 2) {
-		results = '<font color="blue">Blue</font>';
-		}
-		if (random == 3) {
-		results = '<font color="orange">Orange</font>';
-		}
-		if (random == 4) {
-		results = '<font color="green">Green</font>';
-		}
-		if (random == 5) {
-		results = '<font color="teal">Teal</font>';
-		}
-		if (random == 6) {
-		results = '<font color="brown">Brown</font>';
-		}
-		if (random == 7) {
-		results = '<font color="black">Black</font>';
-		}
-		if (random == 8) {
-		results = '<font color="purple">Purple</font>';
-		}
-		if (random == 9) {
-		results = '<font color="pink">Pink</font>';
-		}
-		if (random == 10) {
-		results = '<font color="gray">Gray</font>';
-		}
-		if (random == 11) {
-		results = '<font color="tan">Tan</font>';
-		}
-		if (random == 12) {
-		results = '<font color="gold">Gold</font>';
-		}
-		if (random == 13) {
-		results = '<font color=#CC0000>R</font><font color=#AE1D00>a</font><font color=#913A00>i</font><font color=#745700>n</font><font color=#577400>b</font><font color=#3A9100>o</font><font color=#1DAE00>w</font>';
-		}
-		return this.sendReplyBox('The random color is:<b> '+results+'</b>');
+		var colors = ['Red','Blue','Orange','Green','Teal','Brown','Black','Purple','Pink','Grey','Tan','Gold'];
+		var results = colors[Math.floor(Math.random()*colors.length)];
+		if (results == 'Rainbow') {
+			return this.sendReply('The random color is :<b><font color=#CC0000>R</font><font color=#AE1D00>a</font><font color=#913A00>i</font><font color=#745700>n</font><font color=#577400>b</font><font color=#3A9100>o</font><font color=#1DAE00>w</font></b>');
+		} else {
+			return this.sendReplyBox('The random color is:<b><font color='+results+'>'+results+'</font></b>');
 		}
 	},
 

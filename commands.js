@@ -5300,7 +5300,7 @@ function htmlfix(target){
 
 }
 function hasBadge(user, badge) {
-	var data = fs.readFileSync('config/badges.txt', 'utf8');
+	var data = fs.readFileSync('badges.txt', 'utf8');
 	var row = (''+data).split('\n');
 	var match = false;
 	var badges;

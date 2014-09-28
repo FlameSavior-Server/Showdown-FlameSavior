@@ -1936,6 +1936,17 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+ 	draken: 'drak',
+	drak: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/857stCd.jpg" width="140">' +
+			'<img src="http://i.imgur.com/17fA3q1.gif">' +
+			'<img src="http://i.imgur.com/MNoLzmF.jpg" width="140"><br />' +
+			'<b>Ace:</b> Honchkrow and Overpredictions<br />' +
+			'Someone once told me that to "Be The Best", You Have to "Beat The Best". When In reality, to be the best all you need to do, is what you love. because  someone with a passion will always go the distance.</center>'
+		);
+	},
+
  	cyklone: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/sHCfN3w.gif">' +

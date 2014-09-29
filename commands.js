@@ -854,7 +854,7 @@ var commands = exports.commands = {
 		}
 		if (target[0] === 'custom') {
 			price = 35;
-			if (hasBadge(user.userid, 'vip') || price <= user.money) {
+			if (price <= user.money) {
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .png format. ex: /buy custom, [url to the avatar]');
        				var filename = target[1].split('.');
 				filename = '.'+filename.pop();
@@ -896,7 +896,7 @@ var commands = exports.commands = {
 		*/
 		if (target[0] === 'animated') {
 			price = 45;
-			if (hasBadge(user.userid, 'vip') || price <= user.money) {
+			if (price <= user.money) {
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .gif format. ex: /buy animated, [url to the avatar]');
        				var filename = target[1].split('.');
 				filename = '.'+filename.pop();
@@ -951,7 +951,7 @@ var commands = exports.commands = {
 		}
 		if (target2 === 'fix') {
 			price = 15;
-			if (hasBadge(user.userid, 'vip') || price <= user.money) {
+			if (price <= user.money) {
 				user.money = user.money - price;
 				this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
 				user.canFixItem = true;

@@ -1936,6 +1936,17 @@ var commands = exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	dbb: 'gg',
+	dabicboi: 'gg',
+	gg: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://107.161.19.92:8000/TCs/OBAMA.jpg"><br />' +
+			'<font size=3><i><font color=red><b>Da Bic Boi</b></font></i></font><br />' +
+			'<b><blink>Ace: Bullet Punch</blink></b><br />' +
+			'<b>#hardbody</b>'
+		);
+	},
+
  	draken: 'drak',
 	drak: function (target, room, user) {
 		if (!this.canBroadcast()) return;

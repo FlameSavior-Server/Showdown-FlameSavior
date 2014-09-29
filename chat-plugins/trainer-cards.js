@@ -1,4 +1,23 @@
 exports.commands = {
+	
+	/***************************************
+	* Trainer Cards                         *
+	***************************************/
+
+	genericfly: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/mQIDlCa.gif"><br />' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/642-therian.gif" height="75">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/645-therian.gif" height="70">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-x.gif" height="75">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/145.gif" height="79">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/227.gif" height="46">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/468.gif" height="45"><br />' +
+			'<b>Ace:</b> These things<br />' +
+			'You call it generic, I call it winning.</center>'
+		);
+	},
+
 	dbb: 'gg',
 	dabicboi: 'gg',
 	gg: function(target, room, user) {

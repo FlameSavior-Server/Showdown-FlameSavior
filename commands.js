@@ -854,6 +854,7 @@ var commands = exports.commands = {
 		}
 		if (target[0] === 'custom') {
 			price = 35;
+			if (hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .png format. ex: /buy custom, [url to the avatar]');
        				var filename = target[1].split('.');
@@ -896,6 +897,7 @@ var commands = exports.commands = {
 		*/
 		if (target[0] === 'animated') {
 			price = 45;
+			if (hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .gif format. ex: /buy animated, [url to the avatar]');
        				var filename = target[1].split('.');
@@ -951,6 +953,7 @@ var commands = exports.commands = {
 		}
 		if (target2 === 'fix') {
 			price = 15;
+			if (hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
 				user.money = user.money - price;
 				this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
@@ -994,7 +997,7 @@ var commands = exports.commands = {
 			}
 		}
 		if (match === true) {
-			var re = new RegExp(line,"g");
+			var re = new RegExp(line, "g");
 			fs.readFile('config/money.csv', 'utf8', function (err,data) {
 			if (err) {
 				return console.log(err);
@@ -2683,58 +2686,35 @@ var commands = exports.commands = {
 	afk: function(target, room, user, connection, cmd) {
 		if (!this.can('broadcast')) return false;
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
-
-		if (user.userid === 'panpawn') {
-			if (!user.isAway) {
-			user.originalName = user.name;
-			if (cmd == 'sleep') {
-				var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
-			} else if (cmd == 'busy') {
-				var awayName = user.name + ' - Ⓑⓤⓢⓨ';
-			} else {
-			var awayName = user.name + ' - Ⓐⓦⓐⓨ';
-			}
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(awayName);
-			user.forceRename(awayName, undefined, true);
-
-			this.add('|raw|<b>-- <font color="#DA9D01">' + user.originalName +'</font color></b> is now '+cmd+'. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
-			user.isAway = true;
-		}
-		else {
-			return this.sendReply('You are already set as away, type /back if you are now back.');
-		}
-
-		user.updateIdentity();
-		} else {
 		if (!user.isAway) {
 			user.originalName = user.name;
-			if (cmd == 'sleep') {
-				var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
-			} else if (cmd == 'busy') {
-				var awayName = user.name + ' - Ⓑⓤⓢⓨ';
-			} else {
-			var awayName = user.name + ' - Ⓐⓦⓐⓨ';
+			switch (cmd) {
+				case 'sleep':
+					var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+					break;
+				case 'busy':
+					var awayName = user.name + ' - Ⓑⓤⓢⓨ';
+					break;
+				default:
+					var awayName = user.name + ' - Ⓐⓦⓐⓨ';
 			}
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
-
-			this.add('|raw|<b>-- <font color="'+ hashColor(''+toId(user.originalName)+'')+'">' + user.originalName +'</font></b> is now '+cmd+'. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
+			var color = hashColor(''+toId(user.originalName)+'');
+			if (user.userid == 'panpawn') color = '#DA9D01';
+			this.add('|raw|<b>-- <font color="'+ color+'">' + user.originalName +'</font></b> is now '+cmd+'. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;
 		}
 		else {
 			return this.sendReply('You are already set as away, type /back if you are now back.');
 		}
-	}
 	},
 
 	
 	back: function(target, room, user, connection) {
 		if (!this.can('broadcast')) return false;
 
-		if (user.userid === 'panpawn') {
-
 		if (user.isAway) {
 			if (user.name === user.originalName) {
 				user.isAway = false;
@@ -2750,38 +2730,12 @@ var commands = exports.commands = {
 
 			//user will be authenticated
 			user.authenticated = true;
-
-			this.add('|raw|<b>-- <font color="#DA9D01">' + newName + '</font color></b> is no longer away.');
+			var color = hashColor(''+toId(user.name)+'');
+			if (user.userid == 'panpawn') color = '#DA9D01';
+			this.add('|raw|<b>-- <font color="'+color+'">' + newName + '</font color></b> is no longer away.');
 			user.originalName = '';
 			user.isAway = false;
-		}
-		else {
-			return this.sendReply('You are not set as away.');
-		}
-
-		user.updateIdentity();
-		}
-		if (user.isAway) {
-			if (user.name === user.originalName) {
-				user.isAway = false;
-				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
-
-			}
-
-			var newName = user.originalName;
-
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(newName);
-			user.forceRename(newName, undefined, true);
-
-			//user will be authenticated
-			user.authenticated = true;
-
-			this.add('|raw|<b>-- <font color="'+ hashColor(''+toId(user.name)+'')+'">' + newName + '</font color></b> is no longer away');
-			user.originalName = '';
-			user.isAway = false;
-		}
-		else {
+		} else {
 			return this.sendReply('You are not set as away.');
 		}
 
@@ -3030,11 +2984,6 @@ var commands = exports.commands = {
 		} else {
 			return this.sendReply("Unknown command. Allowable commands are: list, add, remove.");
 		}
-<<<<<<< HEAD
-=======
-		this.add('|unlink|' + this.getLastIdOf(targetUser));
-		if (!targetUser.can('bypassall')) targetUser.leaveRoom(room.id);
->>>>>>> upstream/master
 	},
 */
 	showpic: function(target, room, user) {
@@ -4501,7 +4450,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 
 		if (!this.broadcasting) this.sendReply('||>> ' + target);
-		Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
+		//Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
 		try {
 			var battle = room.battle;
 			var me = user;

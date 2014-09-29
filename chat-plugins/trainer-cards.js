@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	leaguehoppers: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/fjIaiKo.jpg" width="120">' +
+			'<img src="http://i.imgur.com/LpRQ2ES.png" width="240">' +
+			'<img src="http://i.imgur.com/TzCpect.png" width="180"><br />' +
+			'<b>Ace:</b> New Leagues<br />' +
+			'Exhaust, Dawnmidst, Balto, Scorp, M!stic, Pack, Reck, Zyga.</center>'
+		);
+	},
+
 	genericfly: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/mQIDlCa.gif"><br />' +

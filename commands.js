@@ -2692,6 +2692,9 @@ var commands = exports.commands = {
 				case 'sleep':
 					var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
 					break;
+				case 'gaming':
+					var awayName = user.name + ' - ⒼⒶⓂⒾⓃⒼ';
+					break;
 				case 'busy':
 					var awayName = user.name + ' - Ⓑⓤⓢⓨ';
 					break;

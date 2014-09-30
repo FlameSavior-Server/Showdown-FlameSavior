@@ -1,8 +1,18 @@
 exports.commands = {
-	
+
 	/***************************************
 	* Trainer Cards                         *
 	***************************************/
+
+	sky: function(target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/q9nfHqM.gif" height=120>' +
+			'<img src="http://i.imgur.com/89iwI2s.gif ">' +
+			'<img src="http://i.imgur.com/bN8hK2W.jpg " height=120><br />' +
+			'<b>Ace: </b>Infernape<br />' +
+			'<b>Quote: </b>No matter how good you are, you will always have someone you can\'t beat.</center>'
+		);
+	},
 
 	leaguehoppers: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

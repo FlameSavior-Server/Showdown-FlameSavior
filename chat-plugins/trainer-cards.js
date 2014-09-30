@@ -4,11 +4,31 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	why: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://media.giphy.com/media/12KLnAcUamBzXO/giphy.gif" width="140">' +
+			'<img src="http://i.imgur.com/2b4KLr1.gif">' +
+			'<img src="http://i.imgur.com/0tkVoiv.png" width="120"><br />' +
+			'<b>Ace:</b> SLAP!<br />' +
+			'Fuck You, That\'s Why!</center>'
+		);
+	},
+
+	zane: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="https://i.imgflip.com/cj6m3.gif" width="180">' +
+			'<img src="http://i.imgur.com/UTpqYAG.png">' +
+			'<img src="https://i.imgflip.com/cl83y.gif" width="180"><br />' +
+			'<b>Ace:</b> Scolipede<br />' +
+			'BugCatcher4Life.</center>'
+		);
+	},
+
 	sky: function(target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/q9nfHqM.gif" height=120>' +
-			'<img src="http://i.imgur.com/89iwI2s.gif ">' +
-			'<img src="http://i.imgur.com/bN8hK2W.jpg " height=120><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/q9nfHqM.gif" height="120">' +
+			'<img src="http://i.imgur.com/89iwI2s.gif" width="280">' +
+			'<img src="http://i.imgur.com/bN8hK2W.jpg" height="120"><br />' +
 			'<b>Ace: </b>Infernape<br />' +
 			'<b>Quote: </b>No matter how good you are, you will always have someone you can\'t beat.</center>'
 		);

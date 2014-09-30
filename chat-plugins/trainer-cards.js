@@ -4,6 +4,17 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	jak2: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/charizard-megay.gif">' +
+			'<img src="http://i.imgur.com/A6VZrmk.png">' +
+			'<img src="http://sprites.pokecheck.org/i/392.gif"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/victini.gif"><br />' +
+			'<b>Ace:</b> The Squad<br />' +
+			'They the real MVPS.</center>'
+		);
+	},
+
 	blacklist: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/MBbvjym.jpg" width="120">' +

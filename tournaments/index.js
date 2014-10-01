@@ -1044,7 +1044,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 			if (!this.can('tournaments', null, room)) return;
 		} else {
 			if (!user.can('tournamentsmanagement', null, room)) {
-				return this.sendReply("Tournaments are disabled in this room ("+room.id+").");
+				return this.sendReply("Tournaments are disabled in this room (" + room.id + ").");
 			}
 		}
 		if (params.length < 2) {
@@ -1069,7 +1069,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 				if (!this.can('tournaments', null, room)) return;
 			} else {
 				if (!user.can('tournamentsmanagement', null, room)) {
-					return this.sendReply("Tournaments are disabled in this room ("+room.id+").");
+					return this.sendReply("Tournaments are disabled in this room (" + room.id + ").");
 				}
 			}
 			commandHandler = typeof commands.creation[cmd] === 'string' ? commands.creation[commands.creation[cmd]] : commands.creation[cmd];

@@ -15,7 +15,6 @@ var cluster = require('cluster');
 global.Config = require('./config/config');
 
 if (cluster.isMaster) {
-
 	cluster.setupMaster({
 		exec: 'sockets.js'
 	});
@@ -112,7 +111,6 @@ if (cluster.isMaster) {
 	exports.subchannelMove = function (worker, channelid, subchannelid, socketid) {
 		worker.send('.' + channelid + '\n' + subchannelid + '\n' + socketid);
 	};
-
 } else {
 	// is worker
 
@@ -434,6 +432,5 @@ if (cluster.isMaster) {
 		console.log('Worker ' + cluster.worker.id + ' now listening for SSL on port ' + Config.ssl.port);
 	}
 
-	console.log('Test your server at http://'+Config.ip+':' + Config.port);
-
+	console.log('Test your server at http://'+Config.ip+'.psim.us:' + Config.port);
 }

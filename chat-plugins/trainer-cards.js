@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	at3: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/sBejrA3.gif" width="140">' +
+			'<img src="http://i.imgur.com/9uJmmId.gif" width="260">' +
+			'<img src="http://i.imgur.com/uFK9DdV.gif" width="140"><br />' +
+			'<b><font color="red"><blink>Hot damn, Tael really likes ass and titties.</b></font></blink><br />' +
+			'<a href="https://www.youtube.com/watch?v=Xeo6tJgmiX0"><button>ᕕ[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°)̲̅$̲̅]ᕗ</a></button></center>'
+		);
+	},
+
 	whiscash: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://fc03.deviantart.net/fs71/f/2010/268/1/5/sexymon___whiscash_by_wupar-d2zgt7r.png" width="160">' +

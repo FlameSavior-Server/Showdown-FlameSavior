@@ -4,6 +4,41 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	whiscash: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc03.deviantart.net/fs71/f/2010/268/1/5/sexymon___whiscash_by_wupar-d2zgt7r.png" width="160">' +
+			'<img src="http://i.imgur.com/3A2d87e.gif" width="225">' +
+			'<img src="http://i399.photobucket.com/albums/pp78/otaku-dono/Doodles/Whiscash.png" width="160"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/whiscash.gif"><br />' +
+			'<b>Ace:</b> Zer0<br />' +
+			'<a href="http://replay.pokemonshowdown.com/frost-ou-1000181"><button>Proof that Whiscash is God</button></center>'
+		);
+	},
+
+	ut: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/5coxW0H.gif" width="120">' +
+			'<img src="http://i.imgur.com/pAORug1.gif" width="300">' +
+			'<img src="http://i.imgur.com/5coxW0H.gif" width="120"><br />' +
+			'<b>Ace:</b> Totodile<br />' +
+			'When one person stands they might not be noticed, but when Thousands stand they can not be overlooked.</center>'
+		);
+	},
+
+	sea: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.ringoame.notcliche.com/wp-content/uploads/2013/05/White.3GIF.gif" width="250">' +
+			'<img src="http://i.imgur.com/Ddu49hr.gif" width="250">' +
+			'<img src="http://img1.wikia.nocookie.net/__cb20130820181719/rwby/images/8/88/Adammoonsliceanimation.gif" width="250"><br />' +
+			'<img src="http://i.imgur.com/UUNms9c.gif"><br />' +
+			'<img src="http://i947.photobucket.com/albums/ad312/Silver_Eyed_Crow/gallade_zpsfa277f61.gif~original">' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/charizard-megax.gif">' +
+			'<img src="http://i947.photobucket.com/albums/ad312/Silver_Eyed_Crow/gardevoir-mega_zps0aeda6ea.gif~original"><br />' +
+			'The Support of Serena. The Power of Emily. The Protection of Atomsk. WE ARE TEAM SEA!<br />' +
+			'<b>Ace:</b> Charizard X, Gallade, Mega Gardevoir</center>'
+		);
+	},
+
 	jak2: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/charizard-megay.gif">' +

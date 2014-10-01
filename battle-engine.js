@@ -2753,7 +2753,7 @@ Battle = (function () {
 	};
 	Battle.prototype.chainModify = function (numerator, denominator) {
 		var previousMod = Math.floor(this.event.modifier * 4096);
-		if (!numerator) var numerator = 1.0;
+		if (!numerator) numerator = 1.0;
 
 		if (numerator.length) {
 			denominator = numerator[1];

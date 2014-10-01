@@ -1808,9 +1808,6 @@ exports.BattleScripts = {
 			if (tier === 'LC Uber') {
 				uberCount++;
 			}
-
-			if (this.getItem(set.item).megaStone) megaCount++;
-
 		}
 		return pokemon;
 	},

@@ -65,6 +65,8 @@ exports.commands = {
 	customavatar: function (target) {
 		var parts = target.split(',');
 		var cmd = parts[0].trim().toLowerCase();
+		var userid = toId(parts[1]);
+		var user = Users.getExact(userid);
 
 		if (cmd in {'':1, show:1, view:1, display:1}) {
 			var message = "";
@@ -77,10 +79,8 @@ exports.commands = {
 
 		switch (cmd) {
 			case 'set':
-				var userid = toId(parts[1]);
-				if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
-				var user = Users.getExact(userid);
 				var avatar = parts.slice(2).join(',').trim();
+				if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
 
 				if (!userid) return this.sendReply("You didn't specify a user.");
 				if (Config.customAvatars[userid]) return this.sendReply(userid + " already has a custom avatar.");
@@ -121,14 +121,12 @@ exports.commands = {
 				break;
 
 			case 'delete':
-				var userid = toId(parts[1]);
-				if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
 				if (!Config.customAvatars[userid]) return this.sendReply(userid + " does not have a custom avatar.");
 
 				if (Config.customAvatars[userid].toString().split('.').slice(0, -1).join('.') !== userid)
 					return this.sendReply(userid + "'s custom avatar (" + Config.customAvatars[userid] + ") cannot be removed with this script.");
 
-				var user = Users.getExact(userid);
+				if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
 				if (user) user.avatar = 1;
 
 				fs.unlink('./config/avatars/' + Config.customAvatars[userid], function (e) {

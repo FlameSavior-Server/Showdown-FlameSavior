@@ -66,7 +66,8 @@ if (!Object.select) {
 // Make sure Config.js exists, and copy it over from Config-example.js
 // if it doesn't
 
-global.fs = require('graceful-fs');
+var fs = require('fs');
+
 if (!('existsSync' in fs)) {
 	fs.existsSync = require('path').existsSync;
 }
@@ -342,6 +343,8 @@ global.Simulator = require('./simulator.js');
 
 global.Tournaments = require('./tournaments');
 
+global.Tells = {};
+
 try {
 	global.Dnsbl = require('./dnsbl.js');
 } catch (e) {
@@ -409,7 +412,7 @@ fs.readFile('./config/ipbans.txt', function (err, data) {
 
 try {
 	global.hangman = require('./hangman.js').hangman();
-} catch (e) {
+} catch (e) {
 	console.log('Error loading hangman.js: '+e.stack);
 }
 try {
@@ -431,4 +434,3 @@ fs.readFile('./logs/uptime.txt', function (err, uptime) {
 		fs.writeFile('./logs/uptime.txt', global.uptimeRecord.toFixed(0));
 	}, (1).hour());
 });
-

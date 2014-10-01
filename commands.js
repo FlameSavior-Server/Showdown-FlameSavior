@@ -12,178 +12,14 @@
  */
 
 var crypto = require('crypto');
-
-var poofeh = true;
-
+var fs = require('fs');
 var code = fs.createWriteStream('config/friendcodes.txt', {'flags': 'a'});
-
-var isMotd = false;
-
-if (typeof tells === 'undefined') {
-	tells = {};
-}
+var tells = global.Tells;
+var ShadowBan = global.ShadowBan;
 
 const MAX_REASON_LENGTH = 300;
 
 var commands = exports.commands = {
-
-	/*clientusers: function(target, room, user) {
-		if (!user.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
-		var client = [];
-		var total = [];
-		for (var u in Users.users) {
-			if (Users.get(u).connected && Users.get(u).customClient) {
-				client.push(Users.get(u).userid);
-			}
-			if (Users.get(u).connected) {
-				total.push(Users.get(u).userid);
-			}
-		}
-		this.sendReply('Number of users using the custom client: ' + client.length);
-		this.sendReply('Percentage of users using the custom client: ' + ((client.length / total.length)*100) + '%');
-	},*/
-
-	/*********************************************************
-	 * Friends
-	 *********************************************************/
-
-	friends: function(target, room, user, connection) {
-		var data = fs.readFileSync('config/friends.csv','utf8')
-		var match = false;
-		var friends = '';
-		var row = (''+data).split("\n");
-		for (var i = 0; i < row.length; i++) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toId(parts[0]);
-			if (user.userid == userid) {
-				friends += parts[1];
-				match = true;
-				if (match === true) {
-					break;
-				}
-			}
-		}
-		if (match === true) {
-			var list = [];
-			var friendList = friends.split(' ');
-			for (var i = 0; i < friendList.length; i++) {
-				if (Users.get(friendList[i])) {
-					if (Users.get(friendList[i]).connected) {
-						list.push(friendList[i]);
-					}
-				}
-			}
-			if (list[0] === undefined) {
-				return this.sendReply('You have no online friends.');
-			}
-			var buttons = '';
-			for (var i = 0; i < list.length; i++) {
-				buttons = buttons + '<button name = "openUser" value = "' + Users.get(list[i]).userid + '">' + Users.get(list[i]).name + '</button>';
-			}
-			this.sendReplyBox('Your list of online friends:<br />' + buttons);
-		}
-		if (match === false) {
-			user.send('You have no friends to show.');
-		}
-	},
-
-	addfriend: function(target, room, user, connection) {
-		if (!target) return this.parse('/help addfriend');
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		if (targetUser.userid === user.userid) {
-			return this.sendReply('Are you really trying to friend yourself?');
-		}
-		var data = fs.readFileSync('config/friends.csv','utf8')
-		var match = false;
-		var line = '';
-		var row = (''+data).split("\n");
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toId(parts[0]);
-			if (user.userid == userid) {
-				match = true;
-			}
-			if (match === true) {
-				line = line + row[i];
-				var individuals = parts[1].split(" ");
-				for (var i = 0; i < individuals.length; i++) {
-					if (individuals[i] === targetUser.userid) {
-						return connection.send('This user is already in your friends list.');
-					}
-				}
-				break;
-			}
-		}
-		if (match === true) {
-			var re = new RegExp(line,"g");
-			fs.readFile('config/friends.csv', 'utf8', function (err,data) {
-			if (err) {
-				return console.log(err);
-			}
-			var result = data.replace(re, line +' '+targetUser.userid);
-			fs.writeFile('config/friends.csv', result, 'utf8', function (err) {
-				if (err) return console.log(err);
-			});
-			});
-		} else {
-			var log = fs.createWriteStream('config/friends.csv', {'flags': 'a'});
-			log.write("\n"+user.userid+','+targetUser.userid);
-		}
-		this.sendReply(targetUser.name + ' was added to your friends list.');
-		targetUser.send(user.name + ' has added you to their friends list.');
-	},
-
-	removefriend: function(target, room, user, connection) {
-		if (!target) return this.parse('/help removefriend');
-		var noCaps = target.toLowerCase();
-		var idFormat = toId(target);
-		var data = fs.readFileSync('config/friends.csv','utf8')
-		var match = false;
-		var line = '';
-		var row = (''+data).split("\n");
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var parts = row[i].split(",");
-			var userid = toId(parts[0]);
-			if (user.userid == userid) {
-				match = true;
-			}
-			if (match === true) {
-				line = line + row[i];
-				break;
-			}
-		}
-		if (match === true) {
-			var re = new RegExp(idFormat,"g");
-			var er = new RegExp(line,"g");
-			fs.readFile('config/friends.csv', 'utf8', function (err,data) {
-			if (err) {
-				return console.log(err);
-			}
-			var result = line.replace(re, '');
-			var replace = data.replace(er, result);
-			fs.writeFile('config/friends.csv', replace, 'utf8', function (err) {
-				if (err) return console.log(err);
-			});
-			});
-		} else {
-			return this.sendReply('This user doesn\'t appear to be in your friends. Make sure you spelled their username right.');
-		}
-		this.sendReply(idFormat + ' was removed from your friends list.');
-		if (Users.get(target).connected) {
-			Users.get(target).send(user.name + ' has removed you from their friends list.');
-		}
-	},
-
-	/*********************************************************
-	 * Other Stuff
-	 *********************************************************/
 
 	version: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -197,49 +33,7 @@ var commands = exports.commands = {
 
 		var message = '/me ' + target;
 
-		if (user.isAway) {
-			if (user.name.slice(-7) !== ' - Away') {
-				user.isAway = false;
-				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
-			}
-
-			var newName = user.originalName;
-
-			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(newName);
-
-			user.forceRename(newName, undefined, true);
-
-			//user will be authenticated
-			user.authenticated = true;
-
-			if (user.isStaff) this.add('|raw|-- <b><font color="#4F86F7">' + newName + '</font color></b> is no longer away.');
-
-			user.originalName = '';
-			user.isAway = false;
-		}
 		return message;
-	},
-
-	hex: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		if (!target) {
-			this.sendReplyBox('<center><b>Your name\'s hexcode is: <font color="' + hashColor('' + toId(user.name) + '') + '">' + hashColor('' + toId(user.name) + ''));
-			return;
-		}
-		if (target.indexOf('#') < 0 && !targetUser) {
-			this.sendReplyBox('Please include the \'#\' symbol');
-			return false;
-		}
-		if (targetUser) {
-			this.sendReplyBox('<center><b>' + targetUser.name + '\'s hexcode is: <font color="' + hashColor('' + toId(targetUser.name) + '') + '">' + hashColor('' + toId(targetUser.name) + ''));
-		}
-		var verify = /^#[0-9A-F]{6}$/i;
-		if (verify.test(target)) {
-			this.sendReplyBox('<center><b><font size="5" color="' + target + '">' + target + '</font></b></center>');
-		} else {
-			this.sendReplyBox('Could not find a valid color to match your hex code');
-		}
 	},
 
 	mee: function (target, room, user, connection) {
@@ -429,9 +223,8 @@ var commands = exports.commands = {
 		if (!id) return this.parse('/help makechatroom');
 		if (Rooms.rooms[id]) return this.sendReply("The room '" + target + "' already exists.");
 		if (Rooms.global.addChatRoom(target)) {
-			return this.sendReply("The room '"+target+"' was created.");
-			if (Rooms.rooms.logroom) Rooms.rooms.logroom.addRaw('ROOM LOG ' + user.name + ' has made the room ' + target + '.');
 			this.logModCommand('Room '+target+' has been created by '+user.name+'.');
+			return this.sendReply("The room '"+target+"' was created.");
 		}
 		return this.sendReply("An error occurred while trying to create the room '" + target + "'.");
 	},
@@ -571,7 +364,7 @@ var commands = exports.commands = {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomfounder - This room isn't designed for per-room moderation to be added.");
 		}
-		var target = this.splitTarget(target, true);
+		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		if (!targetUser) return this.sendReply("User '"+this.targetUsername+"' is not online.");
 		if (!this.can('makeroom')) return false;
@@ -632,7 +425,7 @@ var commands = exports.commands = {
 		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
 
 		if (!room.founder) return this.sendReply('The room needs a room founder before it can have a room owner.');
-		if (room.founder != user.userid && !this.can('makeroom')) return this.sendReply('/roomowner - Access denied.');
+		if (room.founder !== user.userid && !this.can('makeroom')) return this.sendReply('/roomowner - Access denied.');
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
@@ -656,7 +449,7 @@ var commands = exports.commands = {
 		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
 
 		if (room.auth[userid] !== '#') return this.sendReply("User '"+name+"' is not a room owner.");
-		if (!room.founder || user.userid != room.founder && !this.can('makeroom', null, room)) return false;
+		if (!room.founder || user.userid !== room.founder && !this.can('makeroom', null, room)) return false;
 
 		delete room.auth[userid];
 		this.sendReply("(" + name + " is no longer Room Owner.)");
@@ -674,7 +467,7 @@ var commands = exports.commands = {
 		}
 		if (!target) return this.parse('/help roompromote');
 
-		var target = this.splitTarget(target, true);
+		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var userid = toId(this.targetUsername);
 		var name = targetUser ? targetUser.name : this.targetUsername;
@@ -704,7 +497,7 @@ var commands = exports.commands = {
 		if (currentGroup !== ' ' && !user.can('room' + (Config.groups[currentGroup] ? Config.groups[currentGroup].id : 'voice'), null, room)) {
 			return this.sendReply("/" + cmd + " - Access denied for promoting from " + (Config.groups[currentGroup] ? Config.groups[currentGroup].name : "an undefined group") + ".");
 		}
-		targetUserGroup = ' ';
+		var targetUserGroup = ' ';
 		if (Users.usergroups[userid]) {
 			targetUserGroup = Users.usergroups[userid].substr(0,1);
 		}
@@ -735,22 +528,11 @@ var commands = exports.commands = {
 		}
 	},
 
-	lockroom: function(target, room, user) {
-		if (!room.auth) {
-			return this.sendReply("Only unofficial chatrooms can be locked.");
-		}
-		if (room.auth[user.userid] != '#' && user.group != '~') {
-			return this.sendReply('/lockroom - Access denied.');
-		}
-		room.lockedRoom = true;
-		this.addModCommand(user.name + ' has locked the room.');
-	},
-
 	unlockroom: function(target, room, user) {
 		if (!room.auth) {
 			return this.sendReply("Only unofficial chatrooms can be unlocked.");
 		}
-		if (room.auth[user.userid] != '#' && user.group != '~') {
+		if (room.auth[user.userid] !== '#' && user.group !== '~') {
 			return this.sendReply('/unlockroom - Access denied.');
 		}
 		room.lockedRoom = false;
@@ -882,24 +664,24 @@ var commands = exports.commands = {
 		var mods = [];
 		var drivers = [];
 		var voices = [];
+		var founder = '';
 
 		room.owners = ''; room.admins = ''; room.leaders = ''; room.mods = ''; room.drivers = ''; room.voices = '';
 		for (var u in room.auth) {
-			if (room.auth[u] == '#') {
+			if (room.auth[u] === '#') {
 				room.owners = room.owners + u + ',';
 			}
-			if (room.auth[u] == '@') {
+			if (room.auth[u] === '@') {
 				room.mods = room.mods + u + ',';
 			}
-			if (room.auth[u] == '%') {
+			if (room.auth[u] === '%') {
 				room.drivers = room.drivers + u + ',';
 			}
-			if (room.auth[u] == '+') {
+			if (room.auth[u] === '+') {
 				room.voices = room.voices + u + ',';
 			}
 		}
 
-		if (!room.founder) founder = '';
 		if (room.founder) founder = room.founder;
 
 		room.owners = room.owners.split(',');
@@ -908,17 +690,17 @@ var commands = exports.commands = {
 		room.voices = room.voices.split(',');
 
 		for (var u in room.owners) {
-			if (room.owners[u] != '') owners.push(room.owners[u]);
+			if (room.owners[u] !== '') owners.push(room.owners[u]);
 		}
 
 		for (var u in room.mods) {
-			if (room.mods[u] != '') mods.push(room.mods[u]);
+			if (room.mods[u] !== '') mods.push(room.mods[u]);
 		}
 		for (var u in room.drivers) {
-			if (room.drivers[u] != '') drivers.push(room.drivers[u]);
+			if (room.drivers[u] !== '') drivers.push(room.drivers[u]);
 		}
 		for (var u in room.voices) {
-			if (room.voices[u] != '') voices.push(room.voices[u]);
+			if (room.voices[u] !== '') voices.push(room.voices[u]);
 		}
 		if (owners.length > 0) {
 			owners = owners.join(', ');
@@ -948,7 +730,7 @@ var commands = exports.commands = {
 		for (var x in stafflist) {
 			var column = stafflist[x].split(',');
 			for (var i in groups) {
-				if (column[1] == Config.groupsranking[groups[i].rank]) {
+				if (column[1] === Config.groupsranking[groups[i].rank]) {
 					if (!groups[i].users) groups[i].users = [];
 					groups[i].users.push(column[0]);
 					break;
@@ -1032,6 +814,7 @@ var commands = exports.commands = {
 		this.addModCommand(''+targetUser.name+' was warned by '+user.name+'.' + (target ? " (" + target + ")" : ""));
 		targetUser.send('|c|~|/warn '+target);
 		try {
+			var frostcommands = global.frostcommands;
 			frostcommands.addWarnCount(user.userid);
 		} catch (e) {
 			return;
@@ -1098,6 +881,7 @@ var commands = exports.commands = {
 
 		targetUser.mute(room.id, 7 * 60 * 1000);
 		try {
+			var frostcommands = global.frostcommands;
 			frostcommands.addMuteCount(user.userid);
 		} catch (e) {
 			return;
@@ -1135,6 +919,7 @@ var commands = exports.commands = {
 		targetUser.mute(room.id, 60*60*1000);
 		this.add('|unlink|' + targetUser.userid);
 		try {
+			var frostcommands = global.frostcommands;
 			frostcommands.addMuteCount(user.userid);
 		} catch (e) {
 			return;
@@ -1174,6 +959,7 @@ var commands = exports.commands = {
 
 		targetUser.mute(room.id, 60 * 60 * 1000, true);
 		try {
+			var frostcommands = global.frostcommands;
 			frostcommands.addMuteCount(user.userid);
 		} catch (e) {
 			return;
@@ -1233,6 +1019,7 @@ var commands = exports.commands = {
 
 		targetUser.lock();
 		try {
+			var frostcommands = global.frostcommands;
 			frostcommands.addLockCount(user.userid);
 		} catch (e) {
 			return;
@@ -1361,6 +1148,7 @@ var commands = exports.commands = {
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 		targetUser.ban();
 		try {
+			var frostcommands = global.frostcommands;
 			frostcommands.addBanCount(user.userid);
 		} catch (e) {
 			return;
@@ -1646,7 +1434,7 @@ var commands = exports.commands = {
 		if (!this.can('gdeclare')) return false;
 		var staff = '';
 		staff = 'a ' + Config.groups[user.group].name;
-		if (user.group == '~') staff = 'an Administrator';
+		if (user.group === '~') staff = 'an Administrator';
 		if (user.frostDev) staff = 'a Developer';
 
 		//var roomName = (room.isPrivate)? 'a private room' : room.id;
@@ -1722,39 +1510,6 @@ var commands = exports.commands = {
 		this.logModCommand(user.name + " globally declared (chat level) " + target);
 	},
 
-	setmotd: 'motd',
-	motd: function (target, room, user) {
-		if (!this.can('declare')) return false;
-		return this.sendReply('Command disabled.');
-		if (!target || target.indexOf(',') == -1) {
-			return this.sendReply('The proper syntax for this command is: /motd [message], [interval (minutes)]');
-		}
-		if (isMotd == true) {
-			clearInterval(motd);
-		}
-		targets = target.split(',');
-		message = targets[0];
-		time = Number(targets[1]);
-		if (isNaN(time)) {
-			return this.sendReply('Make sure the time is just the number, and not any words.');
-		}
-		motd = setInterval(function() {Rooms.rooms.lobby.add('|raw|<div class = "infobox"><b>Message of the Day:</b><br />'+message)}, time * 60 * 1000);
-		isMotd = true;
-		this.logModCommand(user.name+' set the message of the day to: '+message+' for every '+time+' minutes.');
-		return this.sendReply('The message of the day was set to "'+message+'" and it will be displayed every '+time+' minutes.');
-	},
-
-	clearmotd: 'cmotd',
-	cmotd: function (target, room, user) {
-		if (!this.can('declare')) return false;
-		if (isMotd == false) {
-			return this.sendReply('There is no motd right now.');
-		}
-		clearInterval(motd);
-		this.logModCommand(user.name+' cleared the message of the day.');
-		return this.sendReply('You cleared the message of the day.');
-	},
-
 	wall: 'announce',
 	announce: function (target, room, user) {
 		if (!target) return this.parse('/help announce');
@@ -1798,8 +1553,8 @@ var commands = exports.commands = {
 	complain: function(target, room, user) {
 		if(!target) return this.parse('/help complaint');
 		if (user.userid === "mentalninja") {
+			user.send('|popup|nice try fucker');
 			user.ban();
-			user.send('|popup|nice try fucker')
 		}
 		this.sendReplyBox('Thanks for your input. We\'ll review your feedback soon. The complaint you submitted was: ' + target);
 		this.logComplaint(target);
@@ -1931,18 +1686,18 @@ var commands = exports.commands = {
 				global.CommandParser = require('./command-parser.js');
 				try {
 					CommandParser.uncacheTree('./frost-commands.js');
-					frostcommands = require('./frost-commands.js');
+					global.frostcommands = require('./frost-commands.js');
 				} catch (e) {
 					this.sendReply('Frost-commands.js could not be hotpatched.');
 				}
 				try {
 					CommandParser.uncacheTree('./economy.js');
-					economy = require('./economy.js');
+					global.economy = require('./economy.js');
 				} catch (e) {
 					this.sendReply('Economy.js could not be hotpatched.');
 				}
 				CommandParser.uncacheTree('./hangman.js');
-				hangman = require('./hangman.js').hangman();
+				global.hangman = require('./hangman.js').hangman();
 				var runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments');
 				global.Tournaments = require('./tournaments');
@@ -2108,7 +1863,7 @@ var commands = exports.commands = {
 			t2 = 'Eating';
 			break;
 			default:
-			t = 'Ⓐⓦⓐⓨ'
+			t = 'Ⓐⓦⓐⓨ';
 			t2 = 'Away';
 			break;
 		}
@@ -2119,7 +1874,7 @@ var commands = exports.commands = {
 			user.originalName = user.name;
 			var awayName = user.name + ' - '+t;
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(awayName);
+			Users.get(awayName).destroy();
 			user.forceRename(awayName, undefined, true);
 
 			if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + user.originalName +'</font color></b> is now '+t2.toLowerCase()+'. '+ (target ? " (" + escapeHTML(target) + ")" : ""));
@@ -2145,7 +1900,7 @@ var commands = exports.commands = {
 			var newName = user.originalName;
 
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
-			delete Users.get(newName);
+			Users.get(newName).destroy();
 
 			user.forceRename(newName, undefined, true);
 
@@ -2413,11 +2168,6 @@ var commands = exports.commands = {
 
 	restart: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
-		try {
-			var forever = require('forever');
-		} catch(e) {
-			return this.sendReply('/restart requires the "forever" module.');
-		}
 
 		if (!Rooms.global.lockdown) {
 			return this.sendReply('For safety reasons, /restart can only be used during lockdown.');
@@ -2426,9 +2176,16 @@ var commands = exports.commands = {
 		if (CommandParser.updateServerLock) {
 			return this.sendReply('Wait for /updateserver to finish before using /restart.');
 		}
-		this.logModCommand(user.name + ' used /restart');
-		Rooms.global.send('|refresh|');
-		forever.restart('app.js');
+
+		try {
+			var forever = require('forever');
+
+			this.logModCommand(user.name + ' used /restart');
+			Rooms.global.send('|refresh|');
+			forever.restart('app.js');
+		} catch(e) {
+			return this.sendReply('/restart requires the "forever" module.');
+		}
 	},
 
 	loadbanlist: function(target, room, user, connection) {
@@ -2980,16 +2737,17 @@ var colorCache = {};
 function hashColor(name) {
 	if (colorCache[name]) return colorCache[name];
 
+	var MD5 = require('MD5');
 	var hash = MD5(name);
 	var H = parseInt(hash.substr(4, 4), 16) % 360;
 	var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
 	var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
 
 	var m1, m2, hue;
-	var r, g, b
+	var r, g, b;
 	S /=100;
 	L /= 100;
-	if (S == 0)
+	if (S === 0)
 	r = g = b = (L * 255).toString(16);
 	else {
 	if (L <= 0.5)
@@ -2998,9 +2756,9 @@ function hashColor(name) {
 	m2 = L + S - L * S;
 	m1 = L * 2 - m2;
 	hue = H / 360;
-	r = HueToRgb(m1, m2, hue + 1/3);
-	g = HueToRgb(m1, m2, hue);
-	b = HueToRgb(m1, m2, hue - 1/3);
+	r = new HueToRgb(m1, m2, hue + 1/3);
+	g = new HueToRgb(m1, m2, hue);
+	b = new HueToRgb(m1, m2, hue - 1/3);
 }
 
 colorCache[name] = '#' + r + g + b;
@@ -3028,9 +2786,9 @@ function HueToRgb(m1, m2, hue) {
 
 function escapeHTML(target) {
 	if (!target) return false;
-	target = target.replace(/&(?!\w+;)/g, '&amp;')
-	target = target.replace(/</g, '&lt;')
-	target = target.replace(/>/g, '&gt;')
+	target = target.replace(/&(?!\w+;)/g, '&amp;');
+	target = target.replace(/</g, '&lt;');
+	target = target.replace(/>/g, '&gt;');
 	target = target.replace(/"/g, '&quot;');
 	return target;
 }
@@ -3041,6 +2799,3 @@ function splint(target) {
 	for (var i = 0; i < cmdArr.length; i++) cmdArr[i] = cmdArr[i].trim();
 	return cmdArr;
 }
-
-//Made by PanPawn
-function MD5(e){function t(e,t){var n,r,i,s,o;i=e&2147483648;s=t&2147483648;n=e&1073741824;r=t&1073741824;o=(e&1073741823)+(t&1073741823);return n&r?o^2147483648^i^s:n|r?o&1073741824?o^3221225472^i^s:o^1073741824^i^s:o^i^s}function n(e,n,r,i,s,o,u){e=t(e,t(t(n&r|~n&i,s),u));return t(e<<o|e>>>32-o,n)}function r(e,n,r,i,s,o,u){e=t(e,t(t(n&i|r&~i,s),u));return t(e<<o|e>>>32-o,n)}function i(e,n,r,i,s,o,u){e=t(e,t(t(n^r^i,s),u));return t(e<<o|e>>>32-o,n)}function s(e,n,r,i,s,o,u){e=t(e,t(t(r^(n|~i),s),u));return t(e<<o|e>>>32-o,n)}function o(e){var t="",n="",r;for(r=0;r<=3;r++)n=e>>>r*8&255,n="0"+n.toString(16),t+=n.substr(n.length-2,2);return t}var u=[],a,f,l,c,h,p,d,v,e=function(e){for(var e=e.replace(/\r\n/g,"\n"),t="",n=0;n<e.length;n++){var r=e.charCodeAt(n);r<128?t+=String.fromCharCode(r):(r>127&&r<2048?t+=String.fromCharCode(r>>6|192):(t+=String.fromCharCode(r>>12|224),t+=String.fromCharCode(r>>6&63|128)),t+=String.fromCharCode(r&63|128))}return t}(e),u=function(e){var t,n=e.length;t=n+8;for(var r=((t-t%64)/64+1)*16,i=Array(r-1),s=0,o=0;o<n;)t=(o-o%4)/4,s=o%4*8,i[t]|=e.charCodeAt(o)<<s,o++;i[(o-o%4)/4]|=128<<o%4*8;i[r-2]=n<<3;i[r-1]=n>>>29;return i}(e);h=1732584193;p=4023233417;d=2562383102;v=271733878;for(e=0;e<u.length;e+=16)a=h,f=p,l=d,c=v,h=n(h,p,d,v,u[e+0],7,3614090360),v=n(v,h,p,d,u[e+1],12,3905402710),d=n(d,v,h,p,u[e+2],17,606105819),p=n(p,d,v,h,u[e+3],22,3250441966),h=n(h,p,d,v,u[e+4],7,4118548399),v=n(v,h,p,d,u[e+5],12,1200080426),d=n(d,v,h,p,u[e+6],17,2821735955),p=n(p,d,v,h,u[e+7],22,4249261313),h=n(h,p,d,v,u[e+8],7,1770035416),v=n(v,h,p,d,u[e+9],12,2336552879),d=n(d,v,h,p,u[e+10],17,4294925233),p=n(p,d,v,h,u[e+11],22,2304563134),h=n(h,p,d,v,u[e+12],7,1804603682),v=n(v,h,p,d,u[e+13],12,4254626195),d=n(d,v,h,p,u[e+14],17,2792965006),p=n(p,d,v,h,u[e+15],22,1236535329),h=r(h,p,d,v,u[e+1],5,4129170786),v=r(v,h,p,d,u[e+6],9,3225465664),d=r(d,v,h,p,u[e+11],14,643717713),p=r(p,d,v,h,u[e+0],20,3921069994),h=r(h,p,d,v,u[e+5],5,3593408605),v=r(v,h,p,d,u[e+10],9,38016083),d=r(d,v,h,p,u[e+15],14,3634488961),p=r(p,d,v,h,u[e+4],20,3889429448),h=r(h,p,d,v,u[e+9],5,568446438),v=r(v,h,p,d,u[e+14],9,3275163606),d=r(d,v,h,p,u[e+3],14,4107603335),p=r(p,d,v,h,u[e+8],20,1163531501),h=r(h,p,d,v,u[e+13],5,2850285829),v=r(v,h,p,d,u[e+2],9,4243563512),d=r(d,v,h,p,u[e+7],14,1735328473),p=r(p,d,v,h,u[e+12],20,2368359562),h=i(h,p,d,v,u[e+5],4,4294588738),v=i(v,h,p,d,u[e+8],11,2272392833),d=i(d,v,h,p,u[e+11],16,1839030562),p=i(p,d,v,h,u[e+14],23,4259657740),h=i(h,p,d,v,u[e+1],4,2763975236),v=i(v,h,p,d,u[e+4],11,1272893353),d=i(d,v,h,p,u[e+7],16,4139469664),p=i(p,d,v,h,u[e+10],23,3200236656),h=i(h,p,d,v,u[e+13],4,681279174),v=i(v,h,p,d,u[e+0],11,3936430074),d=i(d,v,h,p,u[e+3],16,3572445317),p=i(p,d,v,h,u[e+6],23,76029189),h=i(h,p,d,v,u[e+9],4,3654602809),v=i(v,h,p,d,u[e+12],11,3873151461),d=i(d,v,h,p,u[e+15],16,530742520),p=i(p,d,v,h,u[e+2],23,3299628645),h=s(h,p,d,v,u[e+0],6,4096336452),v=s(v,h,p,d,u[e+7],10,1126891415),d=s(d,v,h,p,u[e+14],15,2878612391),p=s(p,d,v,h,u[e+5],21,4237533241),h=s(h,p,d,v,u[e+12],6,1700485571),v=s(v,h,p,d,u[e+3],10,2399980690),d=s(d,v,h,p,u[e+10],15,4293915773),p=s(p,d,v,h,u[e+1],21,2240044497),h=s(h,p,d,v,u[e+8],6,1873313359),v=s(v,h,p,d,u[e+15],10,4264355552),d=s(d,v,h,p,u[e+6],15,2734768916),p=s(p,d,v,h,u[e+13],21,1309151649),h=s(h,p,d,v,u[e+4],6,4149444226),v=s(v,h,p,d,u[e+11],10,3174756917),d=s(d,v,h,p,u[e+2],15,718787259),p=s(p,d,v,h,u[e+9],21,3951481745),h=t(h,a),p=t(p,f),d=t(d,l),v=t(v,c);return(o(h)+o(p)+o(d)+o(v)).toLowerCase()}function hslToRgb(e,t,n){var r,i,s,o,u,a;if(!isFinite(e))e=0;if(!isFinite(t))t=0;if(!isFinite(n))n=0;e/=60;if(e<0)e=6- -e%6;e%=6;t=Math.max(0,Math.min(1,t/100));n=Math.max(0,Math.min(1,n/100));u=(1-Math.abs(2*n-1))*t;a=u*(1-Math.abs(e%2-1));if(e<1){r=u;i=a;s=0}else if(e<2){r=a;i=u;s=0}else if(e<3){r=0;i=u;s=a}else if(e<4){r=0;i=a;s=u}else if(e<5){r=a;i=0;s=u}else{r=u;i=0;s=a}o=n-u/2;r=Math.round((r+o)*255);i=Math.round((i+o)*255);s=Math.round((s+o)*255);return{r:r,g:i,b:s}}function rgbToHex(e,t,n){return toHex(e)+toHex(t)+toHex(n)}function toHex(e){if(e==null)return"00";e=parseInt(e);if(e==0||isNaN(e))return"00";e=Math.max(0,e);e=Math.min(e,255);e=Math.round(e);return"0123456789ABCDEF".charAt((e-e%16)/16)+"0123456789ABCDEF".charAt(e%16)}function hashColor(e){if(colorCache[e])return colorCache[e];var t=MD5(e);var n=parseInt(t.substr(4,4),16)%360;var r=parseInt(t.substr(0,4),16)%50+50;var i=parseInt(t.substr(8,4),16)%20+25;var s,o,u;var a,f,l;r/=100;i/=100;if(r==0)a=f=l=(i*255).toString(16);else{if(i<=.5)o=i*(r+1);else o=i+r-i*r;s=i*2-o;u=n/360;a=HueToRgb(s,o,u+1/3);f=HueToRgb(s,o,u);l=HueToRgb(s,o,u-1/3)}colorCache[e]="#"+a+f+l;return colorCache[e]}function HueToRgb(e,t,n){var r;if(n<0)n+=1;else if(n>1)n-=1;if(6*n<1)r=e+(t-e)*n*6;else if(2*n<1)r=t;else if(3*n<2)r=e+(t-e)*(2/3-n)*6;else r=e;return(255*r).toString(16)}var colorCache={};hashColor=function(e){if(colorCache[e])return colorCache[e];var t=MD5(e);var n=parseInt(t.substr(4,4),16)%360;var r=parseInt(t.substr(0,4),16)%50+50;var i=parseInt(t.substr(8,4),16)%20+25;var s=hslToRgb(n,r,i);colorCache[e]="#"+rgbToHex(s.r,s.g,s.b);return colorCache[e]};var colorCache={}

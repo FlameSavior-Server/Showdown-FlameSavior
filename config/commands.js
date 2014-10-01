@@ -205,73 +205,6 @@ var commands = exports.commands = {
 		if (targetUser.vip) {
 			this.sendReply('|raw|(<font color="#6390F0"><b>VIP</font> User</b>)');
 		}
-		if (targetUser.monoType != '') {
-			var type = targetUser.monoType.toLowerCase();
-			var hex = '';
-			switch (type) {
-				case 'normal':
-				hex = 'A8A77A';
-				break;
-				case 'fire':
-				hex = 'FF0000';
-				break;
-				case 'water':
-				hex = '6390F0';
-				break;
-				case 'electric':
-				hex = 'F7D02C';
-				break;
-				case 'grass':
-				hex = '7AC74C';
-				break;
-				case 'ice':
-				hex = '96D9D6';
-				break;
-				case 'fighting':
-				hex = 'C22E28';
-				break;
-				case 'poison':
-				hex = 'A33EA1';
-				break;
-				case 'ground':
-				hex = 'E2BF65';
-				break;
-				case 'flying':
-				hex = 'A98FF3';
-				break;
-				case 'psychic':
-				hex = 'F95587';
-				break;
-				case 'bug':
-				hex = 'A6B91A';
-				break;
-				case 'rock':
-				hex = 'B6A136';
-				break;
-				case 'ghost':
-				hex = '735797';
-				break;
-				case 'dragon':
-				hex = '6F35FC';
-				break;
-				case 'dark':
-				hex = '705746';
-				break;
-				case 'steel':
-				hex = 'B7B7CE';
-				break;
-				case 'fairy':
-				hex = 'EE99AC';
-				break;
-				default:
-				hex = '000000';
-				break;
-			}
-			this.sendReply('|raw|<b><font color="#'+hex+'">'+targetUser.monoType+'</font></b> type');
-		}
-		if (targetUser.customClient) {
-			this.sendReply('|raw|' + targetUser.name + ' is using the <a href="http://frost-server.no-ip.org"><i>custom client!</i></a>');
-		}
 		if (!targetUser.authenticated) {
 			this.sendReply("(Unregistered)");
 		}
@@ -323,28 +256,6 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Additional Commands
 	 *********************************************************/
-
-	getrandom: 'pickrandom',
-	pickrandom: function (target, room, user) {
-		if (!target) return this.sendReply('/pickrandom [option 1], [option 2], ... - Randomly chooses one of the given options.');
-		if (!this.canBroadcast()) return;
-		var targets;
-		if (target.toLowerCase() === 'type') {
-			var type = [];
-			for (var i in Tools.data.TypeChart) {
-				type.push(i);
-			}
-			var result = Math.floor(Math.random() * type.length);
-			return this.sendReplyBox(type[result].trim());
-		}
-		if (target.indexOf(',') === -1) {
-			targets = target.split(' ');
-		} else {
-			targets = target.split(',');
-		};
-		var result = Math.floor(Math.random() * targets.length);
-		return this.sendReplyBox(targets[result].trim());
-	},
 
 	poke: function (target, room, user) {
 		if (!target) return this.sendReply('/poke needs a target.');
@@ -972,9 +883,9 @@ var commands = exports.commands = {
 			if (uptime > 24*60*60) {
 				var uptimeText = "";
 				var uptimeDays = Math.floor(uptime/(24*60*60));
-				uptimeText = uptimeDays + " " + (uptimeDays == 1 ? "day" : "days");
+				uptimeText = uptimeDays + " " + (uptimeDays === 1 ? "day" : "days");
 				var uptimeHours = Math.floor(uptime/(60*60)) - uptimeDays*24;
-				if (uptimeHours) uptimeText += ", " + uptimeHours + " " + (uptimeHours == 1 ? "hour" : "hours");
+				if (uptimeHours) uptimeText += ", " + uptimeHours + " " + (uptimeHours === 1 ? "hour" : "hours");
 				return uptimeText;
 			} else {
 				return uptime.seconds().duration();
@@ -1557,12 +1468,12 @@ var commands = exports.commands = {
 		var count = 0;
 		for (var u in Tools.data.Pokedex) {
 			var pokemon = Tools.getTemplate(u);
-			if (pokemon.tier == 'Uber' || pokemon.tier == 'Unreleased' || pokemon.tier == 'CAP') continue;
+			if (pokemon.tier === 'Uber' || pokemon.tier === 'Unreleased' || pokemon.tier === 'CAP') continue;
 			if (pokemon.color.toLowerCase() !== cmd) continue;
-			if (pokemon.forme == '') output += '<td><img title="' + Tools.escapeHTML(pokemon.name) + '" src="http://play.pokemonshowdown.com/sprites/bw/'+pokemon.id+'.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
+			if (pokemon.forme === '') output += '<td><img title="' + Tools.escapeHTML(pokemon.name) + '" src="http://play.pokemonshowdown.com/sprites/bw/'+pokemon.id+'.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
 			if (pokemon.forme !== '' && pokemon.id !== 'basculinbluestriped' && pokemon.id !== 'pichuspikyeared') output += '<td><img title="'+Tools.escapeHTML(pokemon.name)+'" src="http://play.pokemonshowdown.com/sprites/bw/'+pokemon.baseSpecies.toLowerCase()+'-'+pokemon.forme.toLowerCase()+'.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
-			if (pokemon.id == 'basculinbluestriped') output += '<td><img title="' + Tools.escapeHTML(pokemon.name) + '" src="http://play.pokemonshowdown.com/sprites/bw/basculin-bluestriped.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
-			if (pokemon.id == 'pichuspikyeared') output += '<td><img title="' + Tools.escapeHTML(pokemon.name) + '" src="http://play.pokemonshowdown.com/sprites/bw/pichu-spikyeared.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
+			if (pokemon.id === 'basculinbluestriped') output += '<td><img title="' + Tools.escapeHTML(pokemon.name) + '" src="http://play.pokemonshowdown.com/sprites/bw/basculin-bluestriped.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
+			if (pokemon.id === 'pichuspikyeared') output += '<td><img title="' + Tools.escapeHTML(pokemon.name) + '" src="http://play.pokemonshowdown.com/sprites/bw/pichu-spikyeared.png" width="40" height="40"></td><td>'+Tools.escapeHTML(pokemon.name)+'</td>';
 			count++;
 			if (count > 5) {
 				output += '</tr><tr class="motc-tr">';
@@ -1685,7 +1596,7 @@ var commands = exports.commands = {
 
 		var targets = target.split(',');
 
-		if (targets.length != 3) {
+		if (targets.length !== 3) {
 			return this.parse('/help showimage');
 		}
 
@@ -1701,8 +1612,8 @@ var commands = exports.commands = {
 		if (!this.can('declare', null, room)) return false;
 		if (!this.canBroadcast()) return;
 
-		targets = target.split(',');
-		if (targets.length != 2) {
+		var targets = target.split(',');
+		if (targets.length !== 2) {
 			return this.parse('/help custompm');
 		}
 
@@ -1934,7 +1845,7 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/stafflist - Shows you the list of staff members.');
 		}
-		if (target === 'all' || target === 'poof' || target == 'd') {
+		if (target === 'all' || target === 'poof' || target === 'd') {
 			matched = true;
 			this.sendReply('/poof OR /d - Disconnects you from the server, leaving a random "poof" message behind.');
 		}
@@ -1973,7 +1884,7 @@ var commands = exports.commands = {
 		// Driver commands
 		if (target === '%' || target === 'unlink') {
 				matched = true;
-				this.sendReply('/unlink [username] - Prevents users from clicking on any links [username] has posted. Requires: % @ & ~')
+				this.sendReply('/unlink [username] - Prevents users from clicking on any links [username] has posted. Requires: % @ & ~');
 		}
 		if (target === '%' || target === 'lock' || target === 'l') {
 			matched = true;
@@ -2097,7 +2008,7 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
 		}
-		if (target === '&' || target === 'unpermaban') {
+		if (target === '&' || target === 'unpermaban') {
 			matched = true;
 			this.sendReply('/unpermaban [IP] - Removes an IP address from the permanent ban list.');
 		}
@@ -2141,7 +2052,7 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/takebucks [username], [amount], [reason] - Removes amount from username. Reason optional. Requires: & ~');
 		}
-		if (target === '&' || target === 'givebucks' || target === 'gb' || target === 'awardbucks') {
+		if (target === '&' || target === 'givebucks' || target === 'gb' || target === 'awardbucks') {
 			matched = true;
 			this.sendReply('/givebucks [username], [amount], [reason] - Gives amount to username. Reason is optional. Requires: & ~');
 		}
@@ -2190,7 +2101,7 @@ var commands = exports.commands = {
 		//Admin commands
 		if (target === '~' || target === 'sendpopup' || target === 'spop') {
 			matched = true;
-			this.sendReply('/sendpopup [username], [message] - Sends a popup to [username] displaying [message].')
+			this.sendReply('/sendpopup [username], [message] - Sends a popup to [username] displaying [message].');
 		}
 		if (target === '~' || target === 'forcerenameto' || target === 'frt') {
 			matched = true;
@@ -2252,7 +2163,7 @@ var commands = exports.commands = {
 				this.sendReply('VIP COMMANDS: /customavatar');
 			}
 			if (user.group !== Config.groupsranking[0]) {
-				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /modlog, /forcerename, /alts')
+				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /modlog, /forcerename, /alts');
 				this.sendReply('MODERATOR COMMANDS: /ban, /unban, /unbanall, /ip, /redirect, /kick');
 				this.sendReply('LEADER COMMANDS: /promote, /demote, /forcewin, /forcetie, /declare, /permaban, /unpermaban, /makechatroom, /leagueroom, /privateroom, /roomfounder');
 				this.sendReply('For details on all moderator commands, use /help @');

@@ -432,5 +432,5 @@ if (cluster.isMaster) {
 		console.log('Worker ' + cluster.worker.id + ' now listening for SSL on port ' + Config.ssl.port);
 	}
 
-	console.log('Test your server at http://'+Config.ip+'.psim.us:' + Config.port);
+	console.log('Test your server at http://'+Config.ip+':' + Config.port);
 }

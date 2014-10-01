@@ -13,7 +13,9 @@ const TIMEOUT_EMPTY_DEALLOCATE = 10 * 60 * 1000;
 const TIMEOUT_INACTIVE_DEALLOCATE = 40 * 60 * 1000;
 const REPORT_USER_STATS_INTERVAL = 1000 * 60 * 10;
 
+var fs = require('fs');
 var complaint = complaint || fs.createWriteStream('logs/complaint.txt', {flags:'a+'});
+var ShadowBan = global.ShadowBan;
 
 /* global Rooms: true */
 var Rooms = module.exports = getRoom;
@@ -222,7 +224,7 @@ var GlobalRoom = (function () {
 		this.users = {};
 		this.userCount = 0; // cache of `Object.size(this.users)`
 		self = this;
-		data = fs.readFile('logs/maxUsers.txt','utf8',function(err, data){
+		var data = fs.readFile('logs/maxUsers.txt','utf8',function(err, data){
 			if (err) {
 				self.maxUsers = 0;
 				self.maxUsersDate = Date();
@@ -1523,17 +1525,20 @@ Rooms.global = rooms.global;
 Rooms.lobby = rooms.lobby;
 Rooms.aliases = aliases;
 
-checkInactiveRooms = setInterval(function() {
+var checkInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
-		if (Rooms.rooms[u].type !== 'chat' || Rooms.rooms[u].protect) continue;
+		if (Rooms.rooms[u].type !== 'chat' || Rooms.rooms[u].protect) {
+			Rooms.rooms[u].active = true;
+			continue;
+		}
 		if (Rooms.rooms[u].messageCount < 50) Rooms.rooms[u].active = false;
 		if (Rooms.rooms[u].messageCount > 50) Rooms.rooms[u].active = true;
 	}
 }, 60 * 60000);
 
-deleteInactiveRooms = setInterval(function() {
+var deleteInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
-		if (Rooms.rooms[u].type !== 'chat' || room.protect) continue;
+		if (Rooms.rooms[u].type !== 'chat' || Rooms.rooms[u].protect) continue;
 		if (!Rooms.rooms[u].active && Rooms.rooms[u].messageCount < 50) {
 			Rooms.global.deregisterChatRoom(Rooms.rooms[u].id);
 			Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.</b></font>');

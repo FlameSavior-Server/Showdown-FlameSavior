@@ -1527,7 +1527,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/zmHW2Kf.gif" width="330">' +
 			'<img src="http://th03.deviantart.net/fs71/PRE/i/2012/348/1/c/venusaur_by_nar447-d5o0dq8.jpg" width="110"><br />' +
 			'<b>Ace:</b> Garchomp & Venusaur<br />' +
-			'Don\’t give up! There\’s no shame in falling down! True shame is to not stand up again!</center>'
+			'Don’t give up! There’s no shame in falling down! True shame is to not stand up again!</center>'
 		);
 	},
 
@@ -2256,8 +2256,8 @@ exports.commands = {
 	mindcrush: function (target, room, user, connection, cmd) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 
-		var name = "http://i.imgur.com/GAIxZwB.gif"
-		if (cmd == 'mindcrush') name = "http://i.imgur.com/o260t0n.png";
+		var name = "http://i.imgur.com/GAIxZwB.gif";
+		if (cmd === 'mindcrush') name = "http://i.imgur.com/o260t0n.png";
 
 		this.sendReplyBox('<center><img src="http://www.sherv.net/cm/emoticons/rage/steamboat-troll-rage-smiley-emoticon.gif" height="110">' +
 			'<img src="' + name + '" width="280">' +
@@ -2377,7 +2377,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/e8k5FnK.png" width="250">' +
 			'<img src="http://i.imgur.com/7CPcZHZ.jpg" width="150"><br />' +
 			'<b>Ace:</b> :D<br />' +
-			'Introduce a little anarchy, upset the established order, and everything becomes chaos, I\’m an agent of chaos.</center>'
+			'Introduce a little anarchy, upset the established order, and everything becomes chaos, I’m an agent of chaos.</center>'
 		);
 	},
 
@@ -4140,7 +4140,7 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://imgur.com/RT7NRWm.png" height="140"><br />' +
 			'<img src="http://imgur.com/vwp9x7c.png" height="100"><br />' +
-			'It\’s impossible to predict where a lightning bolt will land. Some may call it random chance. I call it fate.</center>'
+			'It’s impossible to predict where a lightning bolt will land. Some may call it random chance. I call it fate.</center>'
 		);
 	},
 

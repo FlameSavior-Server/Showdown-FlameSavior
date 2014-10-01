@@ -31,6 +31,7 @@ const MESSAGE_COOLDOWN = 5 * 60 * 1000;
 const MAX_PARSE_RECURSION = 10;
 
 var fs = require('fs');
+var frostcommands = frostcommands;
 
 /*********************************************************
  * Load command files
@@ -388,6 +389,8 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 
 	//tells
 	var alts = user.getAlts();
+	var tells = global.Tells;
+
 	for (var u in alts) {
 		var alt = toId(alts[u]);
 		if (alt in tells) {
@@ -408,14 +411,21 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 
 	if (message) {
         if (user.isAway === true) {
-        	if (user.name === user.originalName) user.isAway = false; connection.sendTo(user, 'Your name has been left unaltered and no longer marked as away.');
+		if (user.name === user.originalName) {
+			user.isAway = false;
+			connection.sendTo(user, 'Your name has been left unaltered and no longer marked as away.');
+		}
 
             user.isAway = false;
             var newName = user.originalName;
 
             user.forceRename(newName, undefined, true);
             user.authenticated = true;
-            connection.sendTo(room, '|raw|-- <b><font color="#088cc7">' + newName + '</font color></b> is no longer away');
+            try {
+            	connection.sendTo(room, "|raw|-- <b><font color=\"" + frostcommands.hashColor(newName) + "\">" + newName + "</font></b> is no longer away.");
+            } catch (e) {
+            	connection.sendTo(room, '|raw|-- <b><font color="#088cc7">' + newName + '</font color></b> is no longer away');
+            }
             user.originalName = '';
         }
     }
@@ -426,7 +436,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 function splitTarget(target, exactName) {
 	var commaIndex = target.indexOf(',');
 	if (commaIndex < 0) {
-		targetUser = Users.get(target, exactName);
+		var targetUser = Users.get(target, exactName);
 		this.targetUser = targetUser;
 		this.targetUsername = targetUser ? targetUser.name : target;
 		return '';

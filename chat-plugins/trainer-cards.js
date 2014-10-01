@@ -190,9 +190,10 @@ exports.commands = {
  	princess: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://i.chzbgr.com/maxW500/7960801280/h7ED088ED/" width="120">' +
-			'<img src="http://i.imgur.com/2zVCsoA.gif" width="280">' +
-			'<img src="http://th01.deviantart.net/fs71/PRE/f/2013/265/d/f/maractus_gijinka_adopt_by_ambercatlucky2-d6ngxs8.jpg" height="140"><br />' +
-			'<b>Ace:</b> <img src="http://i.imgur.com/fiTEY6x.gif" width="280"><br />' +
+			'<img src="http://i.imgur.com/a41GdV5.gif" width="300">' +
+			'<img src="http://fc03.deviantart.net/fs70/f/2009/362/3/9/Blushing_Meme___Gardevoir_by_MidoriEyes.jpg" height="140"><br />' +
+			'<img src="http://i.imgur.com/YkOTR2V.gif" width="150">' +
+			'<img src="http://i.imgur.com/fiTEY6x.gif" width="280"><br />' +
 			'Don\'t F with Princess.</center>'
 		);
 	},

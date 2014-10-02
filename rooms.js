@@ -15,7 +15,7 @@ const REPORT_USER_STATS_INTERVAL = 1000 * 60 * 10;
 
 var fs = require('fs');
 var complaint = complaint || fs.createWriteStream('logs/complaint.txt', {flags:'a+'});
-var ShadowBan = global.ShadowBan;
+//var ShadowBan = global.ShadowBan;
 
 /* global Rooms: true */
 var Rooms = module.exports = getRoom;

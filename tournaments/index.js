@@ -232,8 +232,6 @@ Tournament = (function () {
 	};
 
 	Tournament.prototype.addUser = function (user, isAllowAlts, output) {
-		if (!this.room.delayJoinedUsers) this.room.delayJoinedUsers = new Array();
-
 		if (!user.named) {
 			output.sendReply('|tournament|error|UserNotNamed');
 			return;
@@ -260,12 +258,7 @@ Tournament = (function () {
 			return;
 		}
 
-		//this.room.add('|tournament|join|' + user.name);
-		this.room.delayJoinedUsers.push(frostcommands.escapeHTML(user.name));
-		if (this.room.delayJoinedUsers.length >= 5) {
-			this.room.add('|raw|<b>The following users have joined the tournament: '+this.room.delayJoinedUsers.join(', ')+'.</b>');
-			this.room.delayJoinedUsers = new Array();
-		}
+		this.room.add('|tournament|join|' + user.name);
 		user.sendTo(this.room, '|tournament|update|{"isJoined":true}');
 		this.isBracketInvalidated = true;
 		this.update();
@@ -277,7 +270,6 @@ Tournament = (function () {
 		if (this.playerCap === (users.length + 1)) this.room.add("The tournament is now full");
 	};
 	Tournament.prototype.removeUser = function (user, output) {
-		if (!this.room.delayJoinedUsers) this.room.delayJoinedUsers = new Array();
 		var error = this.generator.removeUser(user);
 		if (typeof error === 'string') {
 			output.sendReply('|tournament|error|' + error);
@@ -285,10 +277,6 @@ Tournament = (function () {
 		}
 
 		this.room.add('|tournament|leave|' + user.name);
-		var index = this.room.delayJoinedUsers.indexOf(user.name);
-		if (index > -1) {
-		    this.room.delayJoinedUsers.splice(index, 1);
-		}
 		user.sendTo(this.room, '|tournament|update|{"isJoined":false}');
 		this.isBracketInvalidated = true;
 		this.update();
@@ -478,12 +466,12 @@ Tournament = (function () {
 				this.generator.setUserBusy(challenge.to, false);
 				this.pendingChallenges.set(challenge.to, null);
 				challenge.to.sendTo(this.room, '|tournament|update|{"challenged":null}');
-				winner = challenge.to;
+				var winner = challenge.to;
 			} else if (challenge.from) {
 				this.generator.setUserBusy(challenge.from, false);
 				this.pendingChallenges.set(challenge.from, null);
 				challenge.from.sendTo(this.room, '|tournament|update|{"challenging":null}');
-				winner = challenge.from;
+				var winner = challenge.from;
 			}
 		}
 
@@ -511,7 +499,10 @@ Tournament = (function () {
 		user.sendTo(this.room, '|tournament|update|{"isJoined":false}');
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
-		frostcommands.addTourLoss(user.userid,this.format);
+		try {
+			var frostcommands = global.frostcommands;
+			frostcommands.addTourLoss(user.userid,this.format);
+		} catch (e) {}
 
 		if (this.generator.isTournamentEnded()) {
 			this.onTournamentEnd();
@@ -683,6 +674,7 @@ Tournament = (function () {
 		var to = Users.get(room.p2);
 
 		var result = 'draw';
+		var loser = '';
 		if (from === winner) {
 			result = 'win';
 			loser = to;
@@ -721,7 +713,10 @@ Tournament = (function () {
 
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
-		frostcommands.addTourLoss(loser.userid,this.format);
+		try {
+			var frostcommands = global.frostcommands;
+			frostcommands.addTourLoss(loser.userid,this.format);
+		} catch (e) {}
 
 		if (this.generator.isTournamentEnded()) {
 			this.onTournamentEnd();
@@ -739,9 +734,10 @@ Tournament = (function () {
 		}));
 		this.isEnded = true;
 
-		data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
+		var data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
 		var data2 = data;
 		data = data['results'].toString();
+		var winner = '';
 
 		if (data.indexOf(',') >= 0) {
 			data = data.split(',');
@@ -751,38 +747,49 @@ Tournament = (function () {
 		}
 
 		var tourSize = this.generator.users.size;
-		if (this.room.isOfficial && tourSize >= 8) {
-			// there's probably a better way to do this but I'm lazy
-			if (data2['bracketData']['rootNode']) {
-				if (data2['bracketData']['rootNode']['children']) {
-					if (data2['bracketData']['rootNode']['children'][0]['team'] !== winner) var runnerUp = data2['bracketData']['rootNode']['children'][0]['team'];
-					if (data2['bracketData']['rootNode']['children'][1]['team'] !== winner) var runnerUp = data2['bracketData']['rootNode']['children'][1]['team'];
-				}
-			}
-			var firstMoney = Math.round(tourSize/10);
-			var secondMoney = Math.round(firstMoney/2);
-			var firstBuck = 'buck';
-			var secondBuck = 'buck';
-			var self = this;
+		try {
+			if (this.room.isOfficial && tourSize >= 8) {
+				var frostcommands = global.frostcommands;
+				var economy = global.economy;
+				var runnerUp = false;
 
-			if (firstMoney > 1) firstBuck = 'bucks';
-			if (secondMoney > 1) secondBuck = 'bucks';
-			this.room.add('|raw|<b><font color="'+frostcommands.hashColor(winner)+'">'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-			if (runnerUp) this.room.add('|raw|<b><font color="'+frostcommands.hashColor(runnerUp)+'">'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second!</b>');
-			economy.writeMoney(toId(winner), firstMoney, function() {
-				economy.readMoney(toId(winner), function(newMoney) {
-					economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
-					if (runnerUp) {
-						economy.writeMoney(toId(runnerUp), secondMoney, function() {
-							var newMoney2 = economy.readMoney(toId(runnerUp), function(newMoney2) {
-								economy.logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney2);
-							});
-						});
+				// there's probably a better way to do this but I'm lazy
+				if (data2['bracketData']['rootNode']) {
+					if (data2['bracketData']['rootNode']['children']) {
+						if (data2['bracketData']['rootNode']['children'][0]['team'] !== winner) runnerUp = data2['bracketData']['rootNode']['children'][0]['team'];
+						if (data2['bracketData']['rootNode']['children'][1]['team'] !== winner) runnerUp = data2['bracketData']['rootNode']['children'][1]['team'];
 					}
+				}
+				var firstMoney = Math.round(tourSize/10);
+				var secondMoney = Math.round(firstMoney/2);
+				var firstBuck = 'buck';
+				var secondBuck = 'buck';
+				var self = this;
+
+				if (firstMoney > 1) firstBuck = 'bucks';
+				if (secondMoney > 1) secondBuck = 'bucks';
+				this.room.add('|raw|<b><font color="'+frostcommands.hashColor(winner)+'">'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
+				if (runnerUp) this.room.add('|raw|<b><font color="'+frostcommands.hashColor(runnerUp)+'">'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second!</b>');
+				economy.writeMoney(toId(winner), firstMoney, function() {
+					economy.readMoney(toId(winner), function(newMoney) {
+						economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
+						if (runnerUp) {
+							economy.writeMoney(toId(runnerUp), secondMoney, function() {
+								var newMoney2 = economy.readMoney(toId(runnerUp), function(newMoney2) {
+									economy.logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney2);
+								});
+							});
+						}
+					});
 				});
-			});
+			}
+		} catch (e) {
+			console.log('Error giving bucks for tournaments: '+e.stack);
 		}
-		frostcommands.addTourWin(winner,this.format);
+		try {
+			var frostcommands = global.frostcommands;
+			frostcommands.addTourWin(winner,this.format);
+		} catch (e) {}
 		delete exports.tournaments[toId(this.room.id)];
 	};
 
@@ -795,12 +802,12 @@ var commands = {
 		in: 'join',
 		join: function (tournament, user) {
 			if (!user[tournament.room.id]) {
-				user[tournament.room.id] = new Object();
+				user[tournament.room.id] = {};
 				user[tournament.room.id].joinTime = Date.now() - 60000;
 			}
-			milliseconds = (Date.now() - user[tournament.room.id].joinTime);
-			seconds = ((milliseconds / 1000) % 60);
-			remainingTime = Math.round(seconds - 60);
+			var milliseconds = (Date.now() - user[tournament.room.id].joinTime);
+			var seconds = ((milliseconds / 1000) % 60);
+			var remainingTime = Math.round(seconds - 60);
 			if ((Date.now() - user[tournament.room.id].joinTime) < 60000) return this.sendReply('You have recently joined the tournament. To prevent joining and leaving flood, you must wait '+(remainingTime - remainingTime * 2)+' seconds before joining again.');
 			tournament.addUser(user, false, this);
 			this.sendReply('You have joined the tournament.');
@@ -904,9 +911,9 @@ var commands = {
 		},
 		remind: function (tournament, user) {
 			var users = tournament.generator.getAvailableMatches().toString().split(',');
-			var offlineUsers = new Array();
+			var offlineUsers = [];
 			for (var u in users) {
-				targetUser = Users.get(users[u]);
+				var targetUser = Users.get(users[u]);
 				if (!targetUser) {
 					offlineUsers.push(users[u]);
 					continue;
@@ -918,7 +925,7 @@ var commands = {
 				}
 			}
 			tournament.room.addRaw('<b>Players have been reminded of their tournament battles by '+user.name+'.</b>');
-			if (offlineUsers.length > 0 && offlineUsers != '') tournament.room.addRaw('<b>The following users are currently offline: '+offlineUsers+'.</b>');
+			if (offlineUsers.length > 0 && offlineUsers !== '') tournament.room.addRaw('<b>The following users are currently offline: '+offlineUsers+'.</b>');
 		},
 		reportwins: 'viewwins',
 		showwins: 'viewwins',
@@ -926,15 +933,15 @@ var commands = {
 		viewwins: function (tournament, user, params, cmd) {
 			if (params.length < 1) return this.sendReply('Usage: ' + cmd + ' [on/off]');
 			if (!params[0]) return this.sendReply('Usage: ' + cmd + ' [on/off]');
-			targetRoom = Rooms.get(tournament.room.id);
-			if (params[0].toLowerCase() == 'on') {
+			var targetRoom = Rooms.get(tournament.room.id);
+			if (params[0].toLowerCase() === 'on') {
 				tournament.room.hideTourWins = false;
 				targetRoom.hideTourWins = false;
 				targetRoom.chatRoomData.hideTourWins = false;
 				Rooms.global.writeChatRoomData();
 				this.privateModCommand('('+user.name+' turned on reportwins.)');
 				return this.sendReply('Tournaments in this room will now announce when battles end.');
-			} else if (params[0].toLowerCase() == 'off') {
+			} else if (params[0].toLowerCase() === 'off') {
 				tournament.room.hideTourWins = true;
 				targetRoom.hideTourWins = true;
 				targetRoom.chatRoomData.hideTourWins = true;
@@ -951,14 +958,14 @@ var commands = {
 		viewbattles: function (tournament, user, params, cmd) {
 			if (params.length < 1) return this.sendReply('Usage: ' + cmd + ' [on/off]');
 			if (!params[0]) return this.sendReply('Usage: ' + cmd + ' [on/off]');
-			targetRoom = Rooms.get(tournament.room.id);
-			if (params[0].toLowerCase() == 'off') {
+			var targetRoom = Rooms.get(tournament.room.id);
+			if (params[0].toLowerCase() === 'off') {
 				tournament.room.hideTourBattles = true;
 				targetRoom.hideTourBattles = true;
 				targetRoom.chatRoomData.hideTourBattles = true;
 				this.privateModCommand('('+user.name+' turned off reportbattles.)');
 				return this.sendReply('Tournaments in this room will no longer announce when battles start.');
-			} else if (params[0].toLowerCase() == 'on') {
+			} else if (params[0].toLowerCase() === 'on') {
 				tournament.room.hideTourBattles = false;
 				targetRoom.hideTourBattles = false;
 				targetRoom.chatRoomData.hideTourBattles = false;
@@ -983,7 +990,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 	if (cmd === '') {
 		if (!this.canBroadcast()) return;
 		var tourList = [];
-		for (var u in Tournaments.tournaments) {
+		for (var u in Tournaments.tournaments) {
 			if (!Tournaments.tournaments[u].isTournamentStarted && !Tournaments.tournaments[u].room.isPrivate) {
 				if (!Tools.data.Formats[Tournaments.tournaments[u].format]) continue;
 				tourList.push('<a class="ilink" href="/'+Tournaments.tournaments[u].room.id+'">'+Tournaments.tournaments[u].room.title+'</a>: '+Tools.data.Formats[Tournaments.tournaments[u].format].name+' '+Tournaments.tournaments[u].generator.name);
@@ -1019,9 +1026,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 		);
 	} else if (cmd === 'on' || cmd === 'enable') {
 		if (!this.can('tournamentsmanagement', null, room)) return;
-		if (room.toursEnabled) {
-			return this.sendReply("Tournaments are already enabled.");
-		}
+		if (room.toursEnabled) return this.sendReply("Tournaments are already enabled.");
 		room.toursEnabled = true;
 		if (room.chatRoomData) {
 			room.chatRoomData.toursEnabled = true;

@@ -91,16 +91,10 @@ try {
 	fs.writeFileSync('config/bannedmessages.txt','','utf8');
 }
 
-try {
-	userTypes = fs.readFileSync('config/types.csv','utf8');
-} catch(e) {
-	userTypes = '';
-	fs.writeFileSync('config/types.csv','','utf8');
-}
-
 Users.bannedMessages = Users.bannedMessages.split('\n');
 
 Users.readVips = function() {
+	var count = 0;
 	Users.vips = fs.readFile('config/vips.txt', 'utf8', function(err, data) {
 		Users.vips = [];
 		if (err) return Users.vips;
@@ -109,28 +103,28 @@ Users.readVips = function() {
 		for (var u in data) {
 			count++;
 			if (data[u].length > 0) Users.vips.push(data[u]);
-			if (count == data.length) return Users.vips;
+			if (count === data.length) return Users.vips;
 		}
 	});
-}
+};
 
 Users.readVips();
 
 Users.addVip = function(user) {
 	user = toId(user);
 	Users.vips.push(user);
-	count = 0;
-	data = '';
+	var count = 0;
+	var data = '';
 	for (var u in Users.vips) {
 		if (Users.vips[u].length > 0) data = data + Users.vips[u] + '\n';
 		count++;
-		if (count == Users.vips.length) {
+		if (count === Users.vips.length) {
 			fs.writeFileSync('config/vips.txt',data);
 			Users.readVips();
 			return true;
 		}
 	}
-}
+};
 
 function messageSeniorStaff (message) {
 	if (!message) return false;
@@ -249,7 +243,7 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 		connectedIps[ip]++;
 	}
 
-	if (!Config.connectionWhitelist) Config.connectionWhitelist = new Object();
+	if (!Config.connectionWhitelist) Config.connectionWhitelist = {};
 	if (connectedIps[ip] > (Config.maxConnections || Infinity) && !Config.connectionWhitelist[ip] || connectedIps[ip] > Config.connectionWhitelist[ip]) {
 		connection.send("|popup|You may not have more than "+(Config.connectionWhitelist[ip] || Config.maxConnections)+" concurrent connections.");
 		return connection.destroy();
@@ -320,7 +314,7 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 		}*/
 
 		if (isBlocked) {
-			switch (isBlocked) {
+			switch (isBlocked) {
 				case 'sbl.spamhaus.org':
 				connection.popup('Your IP is known for abuse and has been locked. If you\'re using a proxy, don\'t.');
 				if (connection.user && !connection.user.locked) {
@@ -329,42 +323,42 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 				}
 				break;
 				case 'rbl.efnetrbl.org':
-				connection.send("|popup|Your IP is listed in rbl.efnetrbl.org and has been automatically banned. For more information, please visit http://rbl.efnetrbl.org/.");
-				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
-				return connection.destroy();
-				break;
+					connection.send("|popup|Your IP is listed in rbl.efnetrbl.org and has been automatically banned. For more information, please visit http://rbl.efnetrbl.org/.");
+					console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+					connection.destroy();
+					break;
 				case 'dnsbl.dronebl.org':
-				connection.send("|popup|Your IP is listed in dnsbl.dronebl.org and has been automatically banned. For more information, please visit http://dronebl.org/lookup?ip="+connection.ip+".");
-				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
-				return connection.destroy();
-				break;
+					connection.send("|popup|Your IP is listed in dnsbl.dronebl.org and has been automatically banned. For more information, please visit http://dronebl.org/lookup?ip="+connection.ip+".");
+					console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+					connection.destroy();
+					break;
 				case Config.port+'.'+(Config.ip || '127.0.0.1').split('.').reverse().join('.')+'.ip-port.exitlist.torproject.org':
-				connection.send("|popup|Your IP is listed as a TOR exit node and has been automatically banned.");
-				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
-				return connection.destroy();
-				break;
+					connection.send("|popup|Your IP is listed as a TOR exit node and has been automatically banned.");
+					console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+					connection.destroy();
+					break;
 				case 'http.dnsbl.sorbs.net':
-				connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
-				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
-				return connection.destroy();
-				break;
+					connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
+					console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+					connection.destroy();
+					break;
 				case 'socks.dnsbl.sorbs.net':
-				connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
-				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
-				return connection.destroy();
-				break;
+					connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
+					console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+					connection.destroy();
+					break;
 				case 'misc.dnsbl.sorbs.net':
-				connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
-				console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
-				return connection.destroy();
-				break;
+					connection.send("|popup|Your IP is known for running proxy servers and has been automatically banned.");
+					console.log('CONNECTION BLOCKED - IP BLACKLISTED: '+connection.ip+' ('+isBlocked+')');
+					connection.destroy();
+					break;
 				default:
-				connection.popup('Your IP is known for abuse and has been locked. If you\'re using a proxy, don\'t.');
-				if (connection.user && !connection.user.locked) {
-					connection.user.locked = '#dnsbl';
-					connection.user.updateIdentity();
-				}
-				break;
+					connection.popup('Your IP is known for abuse and has been locked. If you\'re using a proxy, don\'t.');
+					if (connection.user && !connection.user.locked) {
+						connection.user.locked = '#dnsbl';
+						connection.user.updateIdentity();
+					}
+					break;
 			}
 		}
 	});
@@ -581,7 +575,7 @@ User = (function () {
 		if (this.locked) {
 			return '‽' + this.name;
 		}
-		if (this.group == '~' || this.group == '&') return this.group+this.name;
+		if (this.group === '~' || this.group === '&') return this.group+this.name;
 		if (roomid) {
 			if (this.mutedRooms[roomid]) {
 				return '!' + this.name;
@@ -722,6 +716,7 @@ User = (function () {
 	};
 	User.prototype.forceRename = function (name, authenticated, forcible) {
 		try {
+			var frostcommands = global.frostcommands;
 			frostcommands.updateSeen(name);
 		} catch (e) {}
 
@@ -1372,7 +1367,7 @@ User = (function () {
 			if (room.staffRoom && !this.isStaff) return false;
 
 			if (room.vip && !this.vip && !this.isStaff) return false;
-			if (room.id == 'seniorstaff' && !this.can('seniorstaff')) return false;
+			if (room.id === 'seniorstaff' && !this.can('seniorstaff')) return false;
 
 			if (room.bannedUsers) {
 				if (this.userid in room.bannedUsers || this.autoconfirmed in room.bannedUsers) {
@@ -1392,7 +1387,7 @@ User = (function () {
 				if (this.connections[i].rooms['global']) {
 					this.joinRoom(room, this.connections[i]);
 				}
-				if (!room.active && !room.protect && room.type == 'chat') {
+				if (!room.active && !room.protect && room.type === 'chat') {
 					this.connections[i].sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
 				}
 			}
@@ -1407,7 +1402,7 @@ User = (function () {
 				room.onJoinConnection(this, connection);
 			}
 			connection.joinRoom(room);
-			if (!room.active && !room.protect && room.type == 'chat') connection.sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
+			if (!room.active && !room.protect && room.type === 'chat') connection.sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
 		}
 		return true;
 	};
@@ -1418,8 +1413,9 @@ User = (function () {
 			return false;
 		}
 
-		if (room.id == 'global') {
+		if (room.id === 'global') {
 			try {
+				var frostcommands = global.frostcommands;
 				frostcommands.updateSeen(this.name);
 			} catch (e) {}
 		}
@@ -1600,7 +1596,7 @@ User = (function () {
 
 		if (!room.isPrivate) {
 			for (var x in Users.bannedMessages) {
-				if (message.toLowerCase().indexOf(Users.bannedMessages[x]) > -1 && Users.bannedMessages[x] != '' && message.substr(0,1) != '/') {
+				if (message.toLowerCase().indexOf(Users.bannedMessages[x]) > -1 && Users.bannedMessages[x] !== '' && message.substr(0,1) !== '/') {
 					if (connection.user.locked) return false;
 					connection.user.lock();
 					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake please contact a staff member.');
@@ -1612,7 +1608,7 @@ User = (function () {
 		}
 
 		// There has to be a better way to do this...
-		if (toId(message).indexOf('psimus') > -1 && message.toLowerCase().indexOf('frost.psim.us') == -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~frost") == -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("pokemonshowdown.com/servers/") > -1 && message.toLowerCase().indexOf("pokemonshowdown.com/servers/frost") == -1 && !this.can('seniorstaff')) {
+		if (toId(message).indexOf('psimus') > -1 && message.toLowerCase().indexOf('frost.psim.us') === -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~frost") === -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("pokemonshowdown.com/servers/") > -1 && message.toLowerCase().indexOf("pokemonshowdown.com/servers/frost") === -1 && !this.can('seniorstaff')) {
 			if (connection.user.locked) return false;
 			if (!this.advWarns) this.advWarns = 0;
 			this.advWarns++;
@@ -1730,7 +1726,7 @@ Connection = (function () {
 	Connection.prototype.onDisconnect = function () {
 		delete connections[this.id];
 		connectedIps[this.ip]--;
-		if (connectedIps[this.ip] == 0) delete connectedIps[this.ip];
+		if (connectedIps[this.ip] === 0) delete connectedIps[this.ip];
 		if (this.user) this.user.onDisconnect(this);
 	};
 

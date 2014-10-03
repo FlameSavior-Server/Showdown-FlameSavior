@@ -431,6 +431,34 @@ exports.Formats = [
 		]
 	},
 	{
+		name: "Ability Shift",
+		section: "Other Metagames",
+		mod: 'abilityshift',
+        banlist: ['Illegal', 'Unreleased', 'Illegal', 'Soul Dew',
+'Mewtwo',
+'Lugia',
+'Ho-Oh',
+'Kyogre',
+'Groudon',
+'Rayquaza',
+'Deoxys',
+'Deoxys-Attack',
+'Deoxys-Defense',
+'Deoxys-Speed',
+'Dialga',
+'Palkia',
+'Giratina',
+'Giratina-Origin',
+'Darkrai',
+'Arceus',
+'Reshiram',
+'Zekrom',
+'Kyurem-White',
+'Xerneas',
+'Yveltal', 'Greninja', 'Regigigas', 'Slaking', 'Torkoal'],
+		ruleset: ['Pokemon', 'Swagger Clause', 'Baton Pass Clause', 'Team Preview', 'Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'Endless Battle Clause', 'HP Percentage Mod']
+	},
+	{
 		name: "Almost Any Ability",
 		section: "Other Metagames",
 
@@ -881,6 +909,74 @@ exports.Formats = [
 		searchShow: false,
 		debug: true,
 		ruleset: ['Pokemon', 'HP Percentage Mod']
-	}
+	},
+	
+	//Server exclusive
+	
+        {
+	name: "SlowMons",
+		section: "Server Exclusive",
+		column: 4,
+		ruleset: ['SlowMons Clause', 'OU'],
+		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Aegislash']
+	},
+	{
+	name: "Contrary Zone",
+		section: "Server Exclusive",
+		column: 4,
+		ruleset: ['OU', 'Contrary Zone Clause'],
+		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'V-Create', 'Aegislash','Mawilite'],
+		onBoost: function(boost) {
+	for (var i in boost) {
+				boost[i] *= -1;
+			}
+			}
+	},
+	{
+	name: "Volcanic Fields",
+		section: "Server Exclusive",
+		column: 4,
+		ruleset: ['OU'],
+		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Aegislash', 'Mawilite'],
+			onSwitchIn: function(pokemon) {
+				var side = pokemon.side;
+				if (!pokemon.runImmunity('Ground')) return;
+			 pokemon.trySetStatus('brn');
+			 }
+		},
+		
+	{
+	name: "OU Weather Wars",
+		section: "Server Exclusive",
+		column: 4,
+		mod: 'weatherwars',
+		ruleset: ['OU', 'Evasion Abilities Clause'],
+		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Aegislash','Mawilite'],
+		onStart: function() {
+		this.add('rule', 'Weather Wars: Weather follows generation 5 mechanics');
+		}
+	},
+		{
+	name: "Capture The Flag",
+		section: "Server Exclusive",
+		column: 4,
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause', 'Flag Clause'],
+		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Knock Off', 'Frisk', 'Aegislash', 'Mawilite'],
+		onFaint: function (pokemon) {
+		   var p1 = this.p1.name;
+		   var p2 = this.p2.name;
+		  if (pokemon.side.id === 'p1') {
+		   if (this.p1.pokemon[0].item === 'mail') {
+		   this.add('message', 'The flag holder of team '+p1+' has been defeated!');
+		   pokemon.battle.win('p2');
+		   } 
+		   } else {
+		   if (this.p2.pokemon[0].item === 'mail') {
+		   this.add('message', 'The flag holder of team '+p2+' has been defeated!');
+		   pokemon.battle.win('p1');
+		   }
+		   }
+		}
+		}
 
 ];

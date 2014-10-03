@@ -94,16 +94,13 @@ try {
 Users.bannedMessages = Users.bannedMessages.split('\n');
 
 Users.readVips = function() {
-	var count = 0;
-	Users.vips = fs.readFile('config/vips.txt', 'utf8', function(err, data) {
-		Users.vips = [];
+	fs.readFile('config/vips.txt', 'utf8', function(err, data) {
+		Users.vips = {};
 		if (err) return Users.vips;
 		data = data.split('\n');
-		count = 0;
 		for (var u in data) {
-			count++;
-			if (data[u].length > 0) Users.vips.push(data[u]);
-			if (count === data.length) return Users.vips;
+			if (data[u].length < 1) continue;
+			Users.vips[data[u]] = 1;
 		}
 	});
 };
@@ -112,11 +109,11 @@ Users.readVips();
 
 Users.addVip = function(user) {
 	user = toId(user);
-	Users.vips.push(user);
+	Users.vips[user] = 1;
 	var count = 0;
 	var data = '';
 	for (var u in Users.vips) {
-		if (Users.vips[u].length > 0) data = data + Users.vips[u] + '\n';
+		data += Users.vips[u] + '\n';
 		count++;
 		if (count === Users.vips.length) {
 			fs.writeFileSync('config/vips.txt',data);
@@ -135,6 +132,7 @@ function messageSeniorStaff (message) {
 }
 
 Users.messageSeniorStaff = messageSeniorStaff;
+Users.tells = {};
 
 /*********************************************************
  * Locks and bans
@@ -970,7 +968,6 @@ User = (function () {
 
 			var frostDev = false;
 			var vip = false;
-			var ip = this.latestIp.split('.');
 
 			// user types (body):
 			//   1: unregistered user
@@ -987,6 +984,15 @@ User = (function () {
 					group = usergroups[userid].substr(0, 1);
 				}
 
+				if (Config.frostDev.indexOf(this.latestIp) >= 0 || Config.frostDev.indexOf(userid) >= 0) {
+					frostDev = true;
+					this.autoconfirmed = true;
+				}
+
+				if (Users.vips[userid]) {
+					vip = true;
+				}
+
 				if (body === '3') {
 					isSysop = true;
 					this.autoconfirmed = userid;
@@ -997,16 +1003,6 @@ User = (function () {
 				} else if (body === '6') {
 					this.ban();
 				}
-
-				if (Config.frostDev.indexOf(this.latestIp) >= 0 || Config.frostDev.indexOf(userid) >= 0) {
-					frostDev = true;
-					this.autoconfirmed = true;
-				}
-
-				if (Users.vips.indexOf(toId(name)) >= 0) {
-					vip = true;
-				}
-
 			}
 			if (users[userid] && users[userid] !== this) {
 				// This user already exists; let's merge
@@ -1084,6 +1080,10 @@ User = (function () {
 			this.group = group;
 			this.isStaff = (this.group in {'%':1, '@':1, '&':1, '~':1});
 			this.isSysop = isSysop;
+
+			this.frostDev = frostDev;
+			this.vip = vip;
+
 			if (avatar) this.avatar = avatar;
 			if (this.forceRename(name, authenticated)) {
 				Rooms.global.checkAutojoin(this);

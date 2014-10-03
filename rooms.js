@@ -15,7 +15,6 @@ const REPORT_USER_STATS_INTERVAL = 1000 * 60 * 10;
 
 var fs = require('fs');
 var complaint = complaint || fs.createWriteStream('logs/complaint.txt', {flags:'a+'});
-//var ShadowBan = global.ShadowBan;
 
 /* global Rooms: true */
 var Rooms = module.exports = getRoom;
@@ -85,10 +84,9 @@ var Room = (function () {
 
 		message = CommandParser.parse(message, this, user, connection);
 		if (message) {
-			if (ShadowBan.isShadowBanned(user)) {
-				ShadowBan.room.add('|c|' + user.getIdentity() + "|__(To " + this.id + ")__ " + message);
-				ShadowBan.room.update();
-				connection.sendTo(this, '|chat|' + user.name + '|' + message);
+			if (Users.ShadowBan.checkBanned(user)) {
+				Users.ShadowBan.addMessage(user, "To " + this.id, message);
+				connection.sendTo(this, '|c|' + user.getIdentity(this.id) + '|' + message);
 			} else {
 				this.add('|c|' + user.getIdentity(this.id) + '|' + message);
 				this.messageCount++;

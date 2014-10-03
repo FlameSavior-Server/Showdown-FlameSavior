@@ -389,7 +389,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 
 	//tells
 	var alts = user.getAlts();
-	var tells = global.Tells;
+	var tells = Users.tells;
 
 	for (var u in alts) {
 		var alt = toId(alts[u]);

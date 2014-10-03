@@ -347,8 +347,9 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                 }
                 return true;
             },
-            canBroadcast: function(suppressMessage) {
+           canBroadcast: function(suppressMessage) {
                 if (broadcast) {
+                    user.nome = true;
                     message = this.canTalk(message);
                     if (!message) return false;
                     if (!user.can('broadcast', null, room)) {
@@ -356,7 +357,6 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                         connection.sendTo(room, "To see it for yourself, use: /" + message.substr(1));
                         return false;
                     }
-
                     // broadcast cooldown
                     var normalized = toId(message);
                     if (room.lastBroadcast === normalized &&
@@ -364,7 +364,22 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                         connection.sendTo(room, "You can't broadcast this because it was just broadcast.");
                         return false;
                     }
-                    this.add('|c|' + user.getIdentity(room.id) + '|' + (suppressMessage || message));
+                    var usercolorz = fs.readFileSync('config/usercolors.json');
+                    var color = JSON.parse(usercolorz);
+                    if (!color[user.userid]) {
+                        this.add('|c|' + user.getIdentity(room.id) + '|' + (suppressMessage || message));
+
+                    } else {
+                        var x = (color[user.userid].blink) ? (user.name + ':').blink() : user.name + ':';
+                        var y = (color[user.userid].blink) ? user.getIdentity(room.id).substring(0, 1).blink() : user.getIdentity(room.id).substring(0, 1);
+                        var usercolor = color[user.userid].color;
+                        if (user.getIdentity(room.id).substring(0, 1) !== ' ') {
+                            this.add('|html|<button class="userbutton" name="parseCommand" value="/user ' + user.name + '"><font color = "gray">' + y + '</font><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + (suppressMessage || message));
+                        } else {
+                            room.add('|html|<button class="userbutton" name="parseCommand" value="/user ' + user.name + '"><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + (suppressMessage || message));
+                        }
+                    }
+
                     room.lastBroadcast = normalized;
                     room.lastBroadcastTime = Date.now();
 

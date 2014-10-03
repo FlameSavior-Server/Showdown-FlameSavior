@@ -918,14 +918,18 @@ exports.Formats = [
 		section: "Server Exclusive",
 		column: 4,
 		ruleset: ['SlowMons Clause', 'OU'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Aegislash']
+		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite']
 	},
 	{
 	name: "Contrary Zone",
 		section: "Server Exclusive",
 		column: 4,
 		ruleset: ['OU', 'Contrary Zone Clause'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'V-Create', 'Aegislash','Mawilite'],
+		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'V-Create', 'Mawilite'],
+		onStart: function(target, source) {
+	this.add('rule', 'Contrary Zone: All stat changes are reversed.');
+	this.add('-fieldstart', 'Contrary Zone');
+	}
 		onBoost: function(boost) {
 	for (var i in boost) {
 				boost[i] *= -1;
@@ -937,7 +941,7 @@ exports.Formats = [
 		section: "Server Exclusive",
 		column: 4,
 		ruleset: ['OU'],
-		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Aegislash', 'Mawilite'],
+		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Mawilite'],
 			onSwitchIn: function(pokemon) {
 				var side = pokemon.side;
 				if (!pokemon.runImmunity('Ground')) return;
@@ -951,7 +955,7 @@ exports.Formats = [
 		column: 4,
 		mod: 'weatherwars',
 		ruleset: ['OU', 'Evasion Abilities Clause'],
-		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Aegislash','Mawilite'],
+		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Mawilite'],
 		onStart: function() {
 		this.add('rule', 'Weather Wars: Weather follows generation 5 mechanics');
 		}
@@ -961,7 +965,7 @@ exports.Formats = [
 		section: "Server Exclusive",
 		column: 4,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause', 'Flag Clause'],
-		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Knock Off', 'Frisk', 'Aegislash', 'Mawilite'],
+		banlist: ['Uber', 'Soul Dew', 'Lucarionite', 'Gengarite', 'Swagger', 'Kangakhanite', 'Knock Off', 'Frisk', 'Mawilite'],
 		onFaint: function (pokemon) {
 		   var p1 = this.p1.name;
 		   var p2 = this.p2.name;

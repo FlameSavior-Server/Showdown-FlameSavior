@@ -10,7 +10,7 @@ exports.commands = {
     
     addpoof: function(target, room, user) {
         if (this.can('hotpatch') || user.buypoof) {
-            if (!target) return this.sendReply('/addpoof [message] - Adds a poof message into the list of possible poofs. 
+            if (!target) return this.sendReply('/addpoof [message] - Adds a poof message into the list of possible poofs.'); 
             var poof = JSON.parse(fs.readFileSync('custom/poof.json'));
             for (var i in poof) {
               if (toId(target) == toId(poof[i])) return this.sendReply('That poof message already exists!');

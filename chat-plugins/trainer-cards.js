@@ -1706,9 +1706,9 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://cdn.bulbagarden.net/upload/thumb/7/7b/HeartGold_SoulSilver_Brock.png/203px-HeartGold_SoulSilver_Brock.png" height="120">' +
 			'<img src="http://i.imgur.com/1MpUyqF.gif">' +
-			'<img src="http://media.giphy.com/media/10syfT0KaUdfCU/giphy.gif" height="120"><br />' +
+			'<img src="http://media.giphy.com/media/qjaHPwCgzhfna/giphy.gif" height="120"><br />' +
 			'<b>Ace:</b> Snorunt<br />' +
-			'"I typed gg but I actually meant fuck you"</center>'
+			'"In the ninja world, those who break the rules are scum, that\'s true, but those who abandon their friends are worse than scum."</center>'
 		);
 	},
 

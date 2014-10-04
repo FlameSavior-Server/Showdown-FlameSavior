@@ -2,15 +2,6 @@ exports.commands = {
 //panagrams
 
     panagramhelp: 'panagramrules',
-	  panagramrules: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        return this.sendReplyBox('<u><font size = 2><center>Pangram rules and commands</center></font></u><br />' +
-            '<b>/panagram</b> - Starts a game of Panagram in the room (Panagrams are just anagrams with Pokemon). Illegal and CAP Pokemon won\'t be selected. Must be ranked + or higher to use.<br />' +
-            '<b>/guessp [Pokemon]</b> - Guesses a Pokémon. After guessing incorrectly, you cannot guess again in the same game. There are a total of 3 tries per game. The answer is revealed after all 3 chances are over.<br />' +
-            '<b>/panagramend</b> OR <b>/endpanagram</b> - Ends the current game of Panagram.');
-    },
-    
-    panagramhelp: 'panagramrules',
     panagramrules: function(target, room, user) {
         if (!this.canBroadcast()) return;
         return this.sendReplyBox('<u><font size = 2><center>Pangram rules and commands</center></font></u><br />' +

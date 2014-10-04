@@ -9,8 +9,13 @@ exports.commands = {
     },
     
     addpoof: function(target, room, user) {
+        //There's only one poof message pre-added, so you might wanna add more.
         if (this.can('hotpatch') || user.buypoof) {
-            if (!target) return this.sendReply('/addpoof [message] - Adds a poof message into the list of possible poofs.'); 
+            if (!target) return this.sendReply('/addpoof [message] - Adds a poof message into the list of possible poofs. (No need to include any name at the start, just the message.)'); 
+            target = target.replace(/"/g, '\"');
+            if (toId(target.substring(0,1))) {
+                target = target.substr(0,1).toLowerCase() + target.substr(1);
+            }
             var poof = JSON.parse(fs.readFileSync('custom/poof.json'));
             for (var i in poof) {
               if (toId(target) == toId(poof[i])) return this.sendReply('That poof message already exists!');

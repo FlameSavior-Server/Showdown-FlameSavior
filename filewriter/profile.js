@@ -2,7 +2,7 @@ var fs = require('fs');
 var profile = exports.profile = {
  
     checkDetails: function(name, target) {
-    var userdetails = fs.readFileSync('config/userdetails.json');
+    var userdetails = fs.readFileSync('infofiles/userdetails.json');
     var a = JSON.parse(userdetails);
     if (!a[toId(name)]) {
         if (toId(target) == 'gender') {
@@ -30,12 +30,12 @@ var profile = exports.profile = {
 },
 
 set: function(name, target, target1) {
-    var userdetails = fs.readFileSync('config/userdetails.json');
+    var userdetails = fs.readFileSync('infofiles/userdetails.json');
     var a = JSON.parse(userdetails);
     if (!a[toId(name)]) a[toId(name)] = {};
     a[toId(name)][target] = target1;
     var set = JSON.stringify(a, null, 1);
-    fs.writeFile('config/userdetails.json', set);
+    fs.writeFile('infofiles/userdetails.json', set);
     return;
 }
 	};

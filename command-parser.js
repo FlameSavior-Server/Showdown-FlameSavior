@@ -447,54 +447,7 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                     }
                 }
             },
-
-            lastSeen: function(target) {
-                var lastseen = datestuff.getdate(toId(target));
-                if (lastseen == 'never') return 'never';
-                var part1 = Math.floor(lastseen / 1000);
-                var time1 = Math.floor(lastseen / 1000) + ' ' + this.plural(part1, 'second');
-                if (part1 >= 60) {
-                    var part2 = Math.floor(part1 / 60);
-                    if (part1 % 60 === 0) {
-                        var time1 = part2 + ' ' + this.plural(part2, 'minute');
-                    } else {
-                        var time1 = part2 + ' ' + this.plural(part2, 'minute') + ', ' + (part1 % 60) + ' ' + this.plural(part1 % 60, 'second');
-                    }
-                    if (part2 >= 60) {
-                        var part3 = Math.floor(part2 / 60);
-                        if (part2 % 60 !== 0) {
-                            var time1 = part3 + ' ' + this.plural(part3, 'hour') + ', ' + (part2 % 60) + ' ' + this.plural(part2 % 60, 'minute');
-                        } else {
-                            var time1 = part3 + ' ' + this.plural(part3, 'hour');
-                        }
-                        if (part3 >= 24) {
-                            var part4 = Math.floor(part3 / 24);
-                            if (part3 % 24 !== 0 && (part2 % 60) !== 0) {
-                                var time1 = part4 + ' ' + this.plural(part4, 'day') + ', ' + (part3 % 24) + ' ' + this.plural(part3 % 24, 'hour') + ', ' + (part2 % 60) + ' ' + this.plural(part2 % 60, 'minute');
-                            } else if (part3 % 24 !== 0 && (part2 % 60) === 0) {
-                                var time1 = part4 + ' ' + this.plural(part4, 'day') + ', ' + (part3 % 24) + ' ' + this.plural(part3 % 24, 'hour');
-                            } else if (part3 % 24 === 0 && (part2 % 60) !== 0) {
-                                var time1 = part4 + ' ' + this.plural(part4, 'day') + ', ' + (part2 % 60) + ' ' + this.plural(part2 % 60, 'minute');
-                            } else {
-                                var time1 = part4 + ' ' + this.plural(part4, 'day');
-                            }
-                            if (part4 >= 7) {
-                                var part5 = Math.floor(part4 / 7);
-                                if (part3 % 7 !== 0 && part3 % 24 !== 0) {
-                                    var time1 = part5 + ' ' + this.plural(part5, 'week') + ', ' + (part4 % 7) + ' ' + this.plural(part4 % 7, 'day') + ', ' + (part3 % 24) + ' ' + this.plural(part3 % 24, 'hour');
-                                } else if (part3 % 7 !== 0 && part3 % 24 === 0) {
-                                    var time1 = part5 + ' ' + this.plural(part5, 'week') + ', ' + (part4 % 7) + ' ' + this.plural(part4 % 7, 'day');
-                                } else if (part3 % 7 === 0 && part3 % 24 !== 0) {
-                                    var time1 = part5 + ' ' + this.plural(part5, 'week') + ', ' + (part4 % 7) + ' ' + this.plural(part3 % 24, 'hour');
-                                } else {
-                                    var time1 = part5 + ' ' + this.plural(part5, 'week');
-                                }
-                            }
-                        }
-                    }
-                }
-                return time1;
-            },
+            
             getLastIdOf: function(user) {
                 if (typeof user === 'string') user = Users.get(user);
                 return (user.named ? user.userid : (Object.keys(user.prevNames).last() || user.userid));

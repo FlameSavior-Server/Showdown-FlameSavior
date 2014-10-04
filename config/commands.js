@@ -1160,7 +1160,6 @@ var commands = exports.commands = {
 		this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');
 	},
 
-<<<<<<< HEAD
 	whosgotthemoneyz: 'richestuser',
 	richestuser: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1216,11 +1215,10 @@ var commands = exports.commands = {
 				Users.users[u].send('|pm|~Upper Staff PM|'+Users.users[u].group+Users.users[u].name+'| '+target+' (PM from '+user.name+')');
 			}
 		}
-=======
+	},
 	staff: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("<a href=\"https://www.smogon.com/sim/staff_list\">Pokemon Showdown Staff List</a>");
->>>>>>> upstream/master
 	},
 	//Trainer Cards.
 
@@ -1232,14 +1230,14 @@ var commands = exports.commands = {
 			'<button name="send" value="/transferbucks elitefourbeno, 5">Donate 5 bucks for a cookie</button></center>');
 	},
 
-<<<<<<< HEAD
 	sand2: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/0dwzNX7.gif"><br />' +
 			'<img src="http://media.giphy.com/media/FvtOorPNV09Og/giphy.gif" width="270" height="200">' +
 			'<img src="http://media.giphy.com/media/O7UKZP7lMuZm8/giphy.gif" width="270" height="200"><br />' +
 			'I don\'t like it, the dark circles under my eyes will come back and I don\'t know how to deal with the dark circles</center>');
-=======
+	},
+
 	showtan: function (target, room, user) {
 		if (room.id !== 'showderp') return this.sendReply("The command '/showtan' was unrecognized. To send a message starting with '/showtan', type '//showtan'.");
 		if (!this.can('modchat', null, room)) return;
@@ -1248,7 +1246,6 @@ var commands = exports.commands = {
 		if (!room.users[this.targetUser.userid]) return this.sendReply("Not a showderper");
 		this.targetUser.avatar = '#showtan';
 		room.add("" + user.name + " applied showtan to affected area of " + this.targetUser.name);
->>>>>>> upstream/master
 	},
 
 	jlp: function(target, room, user) {
@@ -1282,14 +1279,14 @@ var commands = exports.commands = {
 			'I bet dead people are easier to get along with.</center>');
 	},
 
-<<<<<<< HEAD
 	dildo: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/KpRmFDT.gif"><br />' +
             '<img src="http://i.imgur.com/4FwBKa4.gif" width="270">' +
             '<img src="http://i.imgur.com/JG2UXZd.gif" width="270"><br />' +
             'The doors only open one way. They open inward.</center>');
-=======
+    },
+
 	cap: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
@@ -1299,7 +1296,6 @@ var commands = exports.commands = {
 			"- <a href=\"https://www.smogon.com/forums/forums/311\">Talk about the metagame here</a><br />" +
 			"- <a href=\"https://www.smogon.com/forums/threads/3512318/#post-5594694\">Sample XY CAP teams</a>"
 		);
->>>>>>> upstream/master
 	},
 
 	hrey: function(target, room, user) {

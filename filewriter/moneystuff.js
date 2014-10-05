@@ -38,4 +38,15 @@ var moneyStuff = exports.moneyStuff = {
         fs.writeFile('infofiles/userdata.json', finished);
         return;
     }
+     transferAmt: function(user1, user2, type, amount) {
+	    var userdata = fs.readFileSync('infofiles/userdata.json');
+        var amt = JSON.parse(userdata);
+		if (!amt[toId(user2)]) amt[toId(user2)] = {};
+		if (!amt[toId(user2)][type]) amt[toId(user2)] = 0; 
+		amt[toId(user1)][type] -= parseInt(amount);
+		amt[toId(user2)][type] += parseInt(amount);
+		var finished = JSON.stringify(amt, null, 1);
+	    fs.writeFile('infofiles/userdata.json', finished);
+		return;
+	}
 };

@@ -4,8 +4,25 @@ exports.commands {
     silver: function (target, user, room) {
         var avatar = getavy('siiilver');
         return cardPrint('<center><h3>Siiilver</h3>'+
-        '<img src = "http://i1171.photobucket.com/albums/r545/Brahak/greninja3_zpsb90166f6.gif">'+avy);
+        '<img src = "http://i1171.photobucket.com/albums/r545/Brahak/greninja3_zpsb90166f6.gif">'+avy+'', '');
     }
+    /*You can even use some of the profile functions, like this one below. Its useful if you're hosting a league server.
+    silver: 'silvy',
+    silv: 'silvy',
+    silvy: function(target, user, room, cmd) {
+        if (!this.canBroadcast()) return;
+        var fav = profile.checkDetails('frntiersilvy', 'ace');
+
+        var l = profile.checkDetails('frntiersilvy', 'quote');
+        
+        var avy = getavy('frntiersilvy');
+
+        return cardPrint('frntiersilvy', '<center><b><font size = 2><u>Fr❄ntier Silvy</u></b></font></center><br/>' +
+            '<i>"' + l + '"</i><br/><br/>' +
+            '<b>Ace:</b> ' + fav + '<br/>' +
+            '<center><img src = "http://i1171.photobucket.com/albums/r545/Brahak/greninja3_zpsb90166f6.gif", width = 126, height = 128>'<img src = "http://play.pokemonshowdown.com/sprites/trainers/159.png">'+avy+'<img src = "http://i1171.photobucket.com/albums/r545/Brahak/cuddles_zps81481cbf.gif"><img src = "http://www.pkparaiso.com/imagenes/xy/sprites/animados/scizor-mega.gif"><br/>',
+            '');
+    },
     /*Now while creating cards, this is where a lotta people go wrong, and end up crashing their servers and ask others how to fix the problem.
     If you see '};' after the last trainer card command, don't add a comma after the '}' which ends the last command. Those are only for commands which have another command after them.*/
 };

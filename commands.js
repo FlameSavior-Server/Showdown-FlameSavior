@@ -23,21 +23,23 @@ var commands = exports.commands = {
 		this.sendReplyBox("Server version: <b>" + CommandParser.package.version + "</b>");
 	},
 
-	me: function (target, room, user, connection) {
-		// By default, /me allows a blank message
-		if (target) target = this.canTalk(target);
-		if (!target) return;
+	 me: function(target, room, user, connection) {
+        // By default, /me allows a blank message
+        user.nome = true;
+        if (target) target = this.canTalk(target);
+        if (!target) return;
 
-		return '/me ' + target;
-	},
+        return '/me ' + target;
+        },
 
-	mee: function (target, room, user, connection) {
-		// By default, /mee allows a blank message
-		if (target) target = this.canTalk(target);
-		if (!target) return;
+        mee: function(target, room, user, connection) {
+        // By default, /mee allows a blank message
+        user.nome = true;
+        if (target) target = this.canTalk(target);
+        if (!target) return;
 
-		return '/mee ' + target;
-	},
+        return '/mee ' + target;
+        },
 
 	avatar: function (target, room, user) {
 		if (!target) return this.parse('/avatars');
@@ -795,6 +797,7 @@ var commands = exports.commands = {
 		} else if (targetUser.autoconfirmed) {
 			this.privateModCommand("(" + targetUser.name + "'s ac account: " + targetUser.autoconfirmed + ")");
 		}
+		datestuff.setdate(targetUser.userid);
 
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 		targetUser.ban();

@@ -4,6 +4,25 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	kouhai: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/UKicqDa.gif" width="180">' +
+			'<img src="http://i.imgur.com/vzcq9nc.gif">' +
+			'<img src="http://i.imgur.com/7Tb7AMC.gif" height="180"><br />' +
+			'<b>Ace:</b> Rikka Takanashi<br />' +
+			'Kawaii in the streets, Kouhai in the sheets.</center>'
+		);
+	},
+
+	cteam: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/LdH47rw.png" height="220"><br />' +
+			'<img src="http://i.imgur.com/PW94gbw.png" height="180"><br />' +
+			'<b>Ace:</b> Sniper and Skill<br />' +
+			'When you need a win, resort to counter teams.</center>'
+		);
+	},
+
 	at3: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/sBejrA3.gif" width="140">' +

@@ -61,7 +61,7 @@ var pendingAdds = {};
 
 exports.commands = {
 	customavatars: 'customavatar',
-	customavatar: function (target) {
+	customavatar: function (target, room, user) {
 		var parts = target.split(',');
 		var cmd = parts[0].trim().toLowerCase();
 
@@ -77,8 +77,9 @@ exports.commands = {
 		switch (cmd) {
 			case 'set':
 				var userid = toId(parts[1]);
-				var user = Users.getExact(userid);
+				var targetUser = Users.getExact(userid);
 				var avatar = parts.slice(2).join(',').trim();
+				if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
 
 				if (!userid) return this.sendReply("You didn't specify a user.");
 				if (Config.customavatars[userid]) return this.sendReply(userid + " already has a custom avatar.");
@@ -87,7 +88,7 @@ exports.commands = {
 				pendingAdds[hash] = {userid: userid, avatar: avatar};
 				parts[1] = hash;
 
-				if (!user) {
+				if (!targetUser) {
 					this.sendReply("Warning: " + userid + " is not online.");
 					this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);
 					return;
@@ -111,22 +112,26 @@ exports.commands = {
 
 					reloadCustomAvatars();
 
-					var user = Users.getExact(userid);
-					if (user) user.avatar = Config.customavatars[userid];
+					var targetUser = Users.getExact(userid);
+					if (targetUser) targetUser.avatar = Config.customavatars[userid];
 
 					this.sendReply(userid + "'s custom avatar has been set.");
+					Users.messageSeniorStaff(userid+' has received a custom avatar from '+user.name);
+					Rooms.rooms.seniorstaff.add(userid+' has received a custom avatar from '+user.name);
+					room.update();
 				}.bind(this));
 				break;
 
 			case 'delete':
 				var userid = toId(parts[1]);
+				if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
 				if (!Config.customavatars[userid]) return this.sendReply(userid + " does not have a custom avatar.");
 
 				if (Config.customavatars[userid].toString().split('.').slice(0, -1).join('.') !== userid)
 					return this.sendReply(userid + "'s custom avatar (" + Config.customavatars[userid] + ") cannot be removed with this script.");
 
-				var user = Users.getExact(userid);
-				if (user) user.avatar = 1;
+				var targetUser = Users.getExact(userid);
+				if (targetUser) targetUser.avatar = 1;
 
 				fs.unlink('./config/avatars/' + Config.customavatars[userid], function (e) {
 					if (e) return this.sendReply(userid + "'s custom avatar (" + Config.customavatars[userid] + ") could not be removed: " + e.toString());

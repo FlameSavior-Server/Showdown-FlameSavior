@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	starlord: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/gLfFTXh.gif" width="140">' +
+			'<img src="http://i.imgur.com/bEMxQKI.png" width="300">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/468.gif"><br />' +
+			'<b>Ace:</b> Togekiss (Morphine)<br />' +
+			'Roses are red....Violets are blue...FUCK YOU WHORE!</center>'
+		);
+	},
+
 	lelouch: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/oj8Maid.gif" width="170">' +

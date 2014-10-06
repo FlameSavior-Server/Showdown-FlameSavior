@@ -111,7 +111,7 @@ exports.commands = {
         room.dice = {};
         room.dice.members = [];
         room.dice.award = parseInt(target);
-        this.add('|html|<div class="infobox" style="border-color:blue"><font color = #007cc9><center><h2>' + user.name + ' has started a dice game for <font color = green>' + room.dice.award + '</font color> Bucks!<br />' +
+        this.add('|html|<div class="infobox"><font color = #007cc9><center><h2>' + user.name + ' has started a dice game for <font color = green>' + room.dice.award + '</font color> Bucks!<br />' +
             '<center><button name="send" value="/play" target="_blank">Click to join!</button>');
     },
 
@@ -145,7 +145,7 @@ exports.commands = {
                     result3 = '' + room.dice.members[1] + ' has won ' + room.dice.award + ' points!';
                 }
             }
-            room.add('|html|<div class="infobox" style="border-color:blue"><b>The dice game has been started!</b><br />' +
+            room.add('|html|<div class="infobox"><b>The dice game has been started!</b><br />' +
                 'Two members have joined the game.<br />' +
                 'Rolling the dice...<br />' +
                 '<b>' + Users.get(room.dice.members[0]).name + '</b> rolled ' + result1 + '!<br />' +

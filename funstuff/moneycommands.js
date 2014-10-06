@@ -179,7 +179,7 @@ exports.commands = {
         } else if (target === 'avatar') {
             if (user.hasavatar === true) return this.sendReply("You've already bought a custom avatar! Type in /customavatar [URL] to request it.");
 	    if (!parseInt(user.avatar)) return this.sendReply('You already have a custom avatar!');
-	    if (fs.readFile('config/requestavy.txt').toString().indexOf('\''+user.userid+'\'') > -1) return this.sendReply('You\'ve already requested a custom avatar! Wait for it to be added.');
+	    if (fs.readFile('infofiles/requestavy.txt').toString().indexOf('\''+user.userid+'\'') > -1) return this.sendReply('You\'ve already requested a custom avatar! Wait for it to be added.');
             var price = 25;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a custom avatar.");
 
@@ -193,7 +193,7 @@ exports.commands = {
         } else if (target === 'animavatar') {
             if (user.hasanimavatar === true) return this.sendReply("You've already bought an animated custom avatar! Type in /customanimavatar [URL] to request it.");
             if (user.avatar.indexOf('.gif') == (user.avatar.length - 4)) return this.sendReply("You already have a custom animated avatar!");
-	    if (fs.readFile('config/requestavy.txt').toString().indexOf('\''+user.userid+'\'') > -1) return this.sendReply('You\'ve already requested a custom avatar! Wait for it to be added.');
+	    if (fs.readFile('infofiles/requestavy.txt').toString().indexOf('\''+user.userid+'\'') > -1) return this.sendReply('You\'ve already requested a custom avatar! Wait for it to be added.');
 	    var price = (!parseInt(user.avatar)) ? 20 : 40;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy an animated avatar.");
 
@@ -215,24 +215,24 @@ exports.commands = {
             user.hasroom = true;
 
         } else if (target === 'card') {
-            var tcs = fs.readFileSync('config/trainercards.txt');
+            var tcs = fs.readFileSync('infofiles/trainercards.txt');
             if (tcs.toString().indexOf(' ' + user.userid) > -1) return this.sendReply("You've already bought a trainer card!");
             var price = 40;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a Trainer Card.");
 
-            fs.appendFile('config/trainercards.txt', '\n ' + user.userid);
+            fs.appendFile('infofiles/trainercards.txt', '\n ' + user.userid);
             room.add(user.name + ' bought a trainer card!');
             Rooms.rooms.staff.add(user.name + ' has bought a trainer card.');
             this.sendReply("You have bought a trainer card. PM an admin to add it.");
             for (var i in Users.users) {
             	if (Users.users[i].can('hotpatch')) Users.users[i].send('|pm| Bot|'+user.name+' has bought a trainer card.')
             }
-            fs.appendfile('config/trainercards.txt', '\''+user.name'\'')
+            fs.appendfile('infofiles/trainercards.txt', '\''+user.name'\'')
 
         } else if (target === 'fix') {
             var nofix = 0;
-            var tcs = fs.readFileSync('config/trainercards.txt').toString();
-            var avatar = fs.readFileSync('config/requestavy.txt').toString();
+            var tcs = fs.readFileSync('infofiles/trainercards.txt').toString();
+            var avatar = fs.readFileSync('infofiles/requestavy.txt').toString();
             if (parseInt(user.avatar)) nofix++;
             if (avatar.indexOf('\'' + user.userid + '\'') === -1) nofix++;
             if (tcs.indexOf('\'' + user.userid + '\'') === -1) nofix++;
@@ -298,12 +298,12 @@ exports.commands = {
         }
         if (target.length !== 6) return this.sendReply('|html|The hex code must be exactly 6 characters long. If you don\'t know what a hex color code is, <a href = "http://www.2createawebsite.com/build/hex-colors.html"><u>This</u></a> should help you choose.');
 
-        var usercolor = fs.readFileSync('config/usercolors.json');
+        var usercolor = fs.readFileSync('infofiles/usercolors.json');
         var color = JSON.parse(usercolor);
         if (!color[user.userid]) color[user.userid] = {};
         color[user.userid].color = target;
         var set = JSON.stringify(color, null, 1);
-        fs.writeFile('config/usercolors.json', set);
+        fs.writeFile('infofiles/usercolors.json', set);
         user.needscolor = false;
         return this.sendReply('|html|Your color has successfully been set as <font color = #' + target + '><b>#' + target);
     },
@@ -315,7 +315,7 @@ exports.commands = {
         if (!target) return this.sendReply("You have to enter in the image URL of the avatar you want. The avatar must be a .GIF image file.");
         if (target.indexOf('.gif') === -1) return this.sendReply("The file format must be .GIF.");
         var avy = "\n '" + user.name + "', " + target;
-        fs.appendFile('config/requestavy.txt', avy);
+        fs.appendFile('infofiles/requestavy.txt', avy);
         this.sendReply("You have successfully requested an animated avatar! Wait for it to be added.");
         for (var i in Users.users) {
           if (Users.users[i].can('hotpatch') {
@@ -333,7 +333,7 @@ exports.commands = {
         if (!target) return this.sendReply("You have to enter in the image URL of the avatar you want. The avatar cannot be a .GIF image file.");
         if (target.lastIndexOf('.gif') == target.length - 4) return this.sendReply("The file format cannot be .GIF.");
         var avy = "\n '" + user.name + "', " + target;
-        fs.appendFile('config/requestavy.txt', '\n' + avy);
+        fs.appendFile('infofiles/requestavy.txt', '\n' + avy);
         this.sendReply("You have successfully requested an avatar! Wait for it to be added.");
         for (var i in Users.users) {
           if (Users.users[i].can('hotpatch') {

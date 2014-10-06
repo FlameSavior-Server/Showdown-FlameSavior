@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	lelouch: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/oj8Maid.gif" width="170">' +
+			'<img src="http://i.imgur.com/KB3O3CW.gif">' +
+			'<img src="http://i.imgur.com/8DTBe6i.gif" width="170"><br />' +
+			'<b>Ace:</b> <font color="#DF7401">Dragonite</font><br />' +
+			'<font color="#5F04B4">Before creation there must be destruction. If my soul stands in the way, then I\'ll toss it aside. Yes, I have no choice but to move forward.</center>'
+		);
+	},
+
 	ubergamer: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/1TLc2jX.jpg" width="140">' +
@@ -4109,7 +4119,7 @@ exports.commands = {
 
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<img src="http://frostserver.net:8000/avatars/piiiikachuuu.png"><br />' +
+		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +
 			'zzzzzzzzzzzzzzzzz'
 		);
 	},

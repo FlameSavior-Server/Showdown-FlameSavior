@@ -367,6 +367,107 @@ exports.commands = {
                         this.add('|html|<b>' + user.name + ' has ended the current roulette.');
                     },
 
+                    pollhelp: 'pollcommands',
+                    pollcommands: function(target, room, user) {
+                        if (!this.canBroadcast()) return;
+                        return this.sendReplyBox('<u><font size = 2><center>Poll commands</center></font></u><br />' +
+                            '<b>/poll [question], [option 1], [option 2], etc.</b> - Starts a poll in the room. Must be ranked + or higher to use.<br />' +
+                            '<b>/vote [option]</b> - Votes on a poll option.<br />' +
+                            '<b>/unvote OR /removevote </b> - Removes your vote for a poll option.<br />' +
+                            '<b>/pollusers </b> - Checks the number of users who are voting.<br />' +
+                            '<b>/pollremind or /pr</b> - Checks the poll options of the poll. Can be broadcasted.<br />' +
+                            '<b>/pollend OR /endpoll</b> - Ends the current poll. Must be ranked + or higher to use.');
+                    },
+
+                    poll: function(target, room, user) {
+                        if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to start a poll.');
+                        if (room.poll) return this.sendReply('There is already a poll going on in this room.');
+                        if (!target) return this.sendReply('/poll [question], [option 1], [option 2], etc. - Starts a poll in the room with the given number of options.');
+                        target = target.split(',');
+                        if (target.length < 3) return this.sendReply('You need to have at least 2 different poll options.');
+                        var options = '';
+                        for (var i = 1; i < target.length; i++) {
+                            if (!target[i].replace(/ /g, '')) return this.sendReply('A poll option cannot be blank.');
+                            options += '<li><button name = "send" value = "/vote ' + target[i] + '">' + target[i] + '</button><br/>';
+                        }
+                        room.poll = {};
+                        room.poll.question = target[0];
+                        room.poll.starter = user.name;
+                        room.poll.users = {};
+                        room.poll.options = {};
+                        for (var i = 1; i < target.length; i++) {
+                            room.poll.options[target[i].toLowerCase().replace(/ /g, '')] = {};
+                            room.poll.options[target[i].toLowerCase().replace(/ /g, '')].name = target[i].trim();
+                            room.poll.options[target[i].toLowerCase().replace(/ /g, '')].count = 0;
+                        }
+                        return this.add('|html|<div class = "infobox"><center><font size = 3><b>' + target[0] + '</b></font></center><br/>' +
+                            '<font color = "gray" size = 2><i><b>Poll started by ' + user.name + '</b></i></font><br/>' +
+                            '<hr>' + options);
+                    },
+
+                    voteoption: 'vote',
+                    vote: function(target, room, user) {
+                        if (!room.poll) return this.sendReply('There is no poll going on in this room.');
+                        target = target.toLowerCase().replace(/ /g, '');
+                        if (Object.keys(room.poll.options).indexOf(target) == -1) return this.sendReply("'" + target + "' is not a valid poll option.");
+                        for (var i in room.poll.users) {
+                            if (Users.get(i).userid == user.userid) return this.sendReply('One of your alts is already voting in this poll.');
+                        }
+                        if (!room.poll.users[user.userid]) {
+                            room.poll.users[user.userid] = room.poll.options[target].name;
+                            room.poll.options[target].count++;
+                            return this.sendReply('You are now voting for \'' + room.poll.options[target].name + '\'');
+                        } else {
+                            if (room.poll.users[user.userid] == room.poll.options[target].name) return this.sendReply("You are already voting for '" + room.poll.options[target].name + "'.");
+                            var oldpoll = room.poll.users[user.userid];
+                            room.poll.users[user.userid] = room.poll.options[target].name;
+                            room.poll.options[target].count++;
+                            room.poll.options[oldpoll].count--;
+                            return this.sendReply('You are now voting for \'' + room.poll.options[target].name + '\' instead of \'' + oldpoll + '\'.');
+                        }
+                    },
+
+
+
+                    pollremind: 'pr',
+                    pr: function(target, room, user) {
+                        if (!room.poll) return this.sendReply('There is no poll going on in this room.');
+                        if (!this.canBroadcast()) return;
+                        var options = '';
+                        for (var i in room.poll.options) {
+                            options += '<li><button name = "send" value = "/vote ' + room.poll.options[i].name + '">' + room.poll.options[i].name + '</button><br/>';
+                        }
+                        if (this.broadcasting) {
+                            this.sendReply('|html|<div class = "infobox"><center><font size = 3><b>' + room.poll.question + '</b></font></center><br/>' +
+                                '<font color = "gray" size = 2><i><b>Poll reminded by ' + user.name + '</b></i></font><br/>' +
+                                '<hr>' + options);
+                        } else {
+                            this.sendReply('|html|<div class = "infobox"><center><font size = 3><b>' + room.poll.question + '</b></font></center><br/>' +
+                                '<font color = "gray" size = 2><i><b>Poll started by ' + room.poll.starter + '</b></i></font><br/>' +
+                                '<hr>' + options);
+                        }
+                    },
+
+
+
+                    endpoll: 'endp',
+                    endp: function(target, room, user) {
+                        if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to end a poll.');
+                        if (Object.keys(room.poll.users).length < 2) {
+                            delete room.poll;
+                            return this.add('|html|<b>The poll has been canceled due to the lack of voters.');
+                        }
+                        var total = '';
+                        for (var i in room.poll.options) {
+                            if (room.poll.options[i].count > 0)
+                                total += '<li>' + room.poll.options[i].name + ' - ' + room.poll.options[i].count + ' (' + Math.round(((room.poll.options[i].count) / Object.keys(room.poll.users).length) * 100) + '%)';
+                        }
+                        this.add('|html|<div class = "infobox"><center><font size = 3><b>Results to \'' + room.poll.question + '\'</b></font></center><br/>' +
+                            '<font color = "gray" size = 2><i><b>Poll ended by ' + user.name + '</b></i></font><br/>' +
+                            '<hr>' + total);
+                        delete room.poll;
+                    },
+
                     //just for the lols
                     dance: function(target, room, user) {
                         if (!this.canBroadcast()) return;

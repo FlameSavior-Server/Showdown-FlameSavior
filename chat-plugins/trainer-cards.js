@@ -248,7 +248,7 @@ exports.commands = {
 
  	princess: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/JmB5ma3.jpg height="200"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/JmB5ma3.jpg" height="200"><br />' +
 			'<img src="http://i.imgur.com/rFGr1a0.gif"><br />' +
 			'<img src="http://i.imgur.com/YkOTR2V.gif" width="150">' +
 			'<img src="http://i.imgur.com/fiTEY6x.gif" width="280"><br />' +

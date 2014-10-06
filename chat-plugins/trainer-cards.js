@@ -4,6 +4,26 @@ exports.commands = {
 	* Trainer Cards                         *
 	***************************************/
 
+	ubergamer: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/1TLc2jX.jpg" width="140">' +
+			'<img src="http://i.imgur.com/3yhEpQh.gif" width="280">' +
+			'<img src="http://i.imgur.com/AdJRPTE.jpg" width="120"><br />' +
+			'<b>Ace:</b> Spider<br />' +
+			'I have walked the lonely road, to reach a skill you can\'t understand.</center>'
+		);
+	},
+
+	chillyace: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://media.giphy.com/media/pnBhtxOJaXFde/giphy.gif" width="140">' +
+			'<img src="http://i.imgur.com/67Xxh4F.png" width="260">' +
+			'<img src="http://i.imgur.com/1exHAwR.gif" width="140"><br />' +
+			'<b>Ace:</b> Mew and Victini<br />' +
+			'Deception and cunning is crucial in battle, but a Megacham sweep doesn\'t hurt either.</center>'
+		);
+	},
+	
 	kouhai: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/UKicqDa.gif" width="180">' +

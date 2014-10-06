@@ -1,8 +1,18 @@
 exports.commands = {
 
 	/***************************************
-	* Trainer Cards                         *
+	* Trainer Cards                        *
 	***************************************/
+
+	ds2: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i349.photobucket.com/albums/q367/theebay707/Starmie.gif" height=100>' +
+			'<img src="http://i.imgur.com/miSt0EJ.png" width=380>' +
+			'<img src="http://24.media.tumblr.com/tumblr_m24qt60wiJ1rrkhrko1_500.gif" height=100><br />' +
+			'<b>Ace: </b>Dancing Starmies<b><br />' +
+			'Quote: </b>*Grabs sword off of her belt* Okay I\'m done now. </center>'
+		);
+	},
 
 	starlord: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
@@ -43,7 +53,7 @@ exports.commands = {
 			'Deception and cunning is crucial in battle, but a Megacham sweep doesn\'t hurt either.</center>'
 		);
 	},
-	
+
 	kouhai: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/UKicqDa.gif" width="180">' +

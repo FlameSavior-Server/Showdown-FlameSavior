@@ -509,6 +509,7 @@ var GlobalRoom = (function () {
 		return user;
 	};
 	GlobalRoom.prototype.onRename = function (user, oldid, joining) {
+		if (user.named && toId(oldid) != toId(user)) datestuff.setdate(user.userid);
 		delete this.users[oldid];
 		this.users[user.userid] = user;
 		return user;

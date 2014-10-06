@@ -1,6 +1,4 @@
 exports.commands = {
-        //panagrams
-
         panagramhelp: 'panagramrules',
         panagramrules: function(target, room, user) {
             if (!this.canBroadcast()) return;

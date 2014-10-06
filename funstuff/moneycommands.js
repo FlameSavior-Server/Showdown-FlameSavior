@@ -152,10 +152,6 @@ exports.commands = {
     buy: function(target, room, user) {
         if (global.shopclosed === true) return this.sendReply("The shop is closed for now. Wait until it re-opens shortly.");
         target = toId(target);
-        var money = fs.readFileSync('config/userdata.json');
-        var a = JSON.parse(money);
-        var notbroke = false;
-
 
         if (target === 'symbol') {
             if (user.hassymbol) return this.sendReply("You've already bought a custom symbol!");
@@ -180,10 +176,9 @@ exports.commands = {
             user.needscolor = true;
 
         } else if (target === 'avatar') {
-            if (user.hasavatar === true) return this.sendReply("You've already have a custom avatar!");
-            var avatars = fs.readFileSync('config/config.js').toString();
-            if (avatars.indexOf(user.userid) > -1) return this.sendReply("You've already bought a custom avatar!");
-            if (user.hasavatar === true) return this.sendReply("You've already bought a custom avatar!");
+            if (user.hasavatar === true) return this.sendReply("You've already bought a custom avatar! Type in /customavatar [URL] to request it.");
+	    if (!parseInt(user.avatar)) return this.sendReply('You already have a custom avatar!');
+	    if (fs.readFile('config/requestavy.txt').toString().indexOf(user.userid) > -1) return this.sendReply('You\'ve already requested a custom avatar! Wait for it to be added.');
             var price = 25;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a custom avatar.");
 
@@ -191,17 +186,15 @@ exports.commands = {
             room.add(user.name + ' bought a custom avatar!');
             Rooms.rooms.staff.add(user.name + ' has bought a custom avatar.');
             this.sendReply("You have bought a custom avatar.");
-            this.sendReply("Type /customavatar [url] to request a custom avatar. The file cannot be in the .GIF format.");
+            this.sendReply("Type in /customavatar [url] to request a custom avatar. The file cannot be in the .GIF format.");
             user.hasavatar = true;
 
         } else if (target === 'animavatar') {
-            if (user.hasanimavatar === true) return this.sendReply("You've already bought an animated custom avatar!");
-            var avatars = fs.readFileSync('config/config.js').toString();
-            if (avatars.indexOf(user.userid) > -1) return this.sendReply("You already have a custom avatar!");
-            if (user.hasanimavatar === true) return this.sendReply("You've already bought an animated custom avatar!");
-            var price = 40;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a symbol.");
-
+            if (user.hasanimavatar === true) return this.sendReply("You've already bought an animated custom avatar! Type in /customanimavatar [URL] to request it.");
+            if (user.avatar.indexOf('.gif') == (user.avatar.length - 4)) return this.sendReply("You already have a custom animated avatar!");
+	    if (fs.readFile('config/requestavy.txt').toString().indexOf(''+user.userid+'') > -1) return this.sendReply('You\'ve already requested a custom avatar! Wait for it to be added.');
+	    var price = (!parseInt(user.avatar)) ? 20 : 40;
+            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy an animated avatar.");
 
             room.add(user.name + ' bought an animated custom avatar!');
             Rooms.rooms.staff.add(user.name + ' has bought an animated custom avatar.');
@@ -233,11 +226,11 @@ exports.commands = {
             this.sendReply("PM an admin to create your room and make you roomowner.");
 
         } else if (target === 'fix') {
-            var avatars = fs.readFileSync('config/config.js').toString();
+            var nofix = 0;
             var tcs = fs.readFileSync('config/trainercards.txt').toString();
-            if (avatars.indexOf("'" + user.userid) === -1) user.nofix++
-                if (tcs.indexOf(' ' + user.userid) === -1) user.nofix++
-                    if (user.nofix >= 1) return this.sendReply("You have bought neither a trainer card nor an avatar. There is no need to buy a fix.");
+            if ()
+            if (tcs.indexOf(' ' + user.userid) === -1) nofix++;
+            if (nofix > 0) return this.sendReply("You have bought neither a trainer card nor an avatar. There is no need to buy a fix.");
             var price = 10;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a fix.");
 

@@ -25,7 +25,6 @@ var commands = exports.commands = {
 
 	 me: function(target, room, user, connection) {
         // By default, /me allows a blank message
-        user.nome = true;
         if (target) target = this.canTalk(target);
         if (!target) return;
 
@@ -34,7 +33,6 @@ var commands = exports.commands = {
 
         mee: function(target, room, user, connection) {
         // By default, /mee allows a blank message
-        user.nome = true;
         if (target) target = this.canTalk(target);
         if (!target) return;
 

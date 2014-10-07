@@ -1419,8 +1419,8 @@ var commands = exports.commands = {
 
 	hag: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/CeYqID8.jpg"><br />' +
-            'Get used to being second nubs</center>');
+        this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs70/f/2014/243/b/f/godzilla_vs_smaug_by_rumper1-d7xeyzt.png" width=500 height=500><br />' +
+            'What my battles are like</center>');
 	},
 
 	wrath: function(target, room, user) {

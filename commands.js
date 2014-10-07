@@ -3445,7 +3445,6 @@ var commands = exports.commands = {
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.lock();
-		return this.parse('/spam '+targetUser.name+'');
 	},
 
 	unlock: function (target, room, user) {
@@ -3460,7 +3459,6 @@ var commands = exports.commands = {
 			this.addModCommand('' + names.join(', ') + ' ' +
 					((names.length > 1) ? 'were' : 'was') +
 					' unlocked by ' + user.name + '.');
-		return this.parse('/unspam '+target+'');
 		} else {
 			this.sendReply("User " + target + " is not locked.");
 		}

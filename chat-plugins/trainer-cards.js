@@ -4,11 +4,21 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	kermit: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://media.giphy.com/media/g50nWTqSaXbby/giphy.gif" width="140">' +
+			'<img src="http://i.imgur.com/Na1E0js.png" width="260">' +
+			'<img src="http://media.giphy.com/media/ssZE9glBcE4s8/giphy.gif" width="140"><br />' +
+			'<b>Ace:</b> Kermit<br />' +
+			'"Whats one more child support payment? I Owe Millions."</center>'
+		);
+	},
+
 	ds2: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i349.photobucket.com/albums/q367/theebay707/Starmie.gif" height=100>' +
-			'<img src="http://i.imgur.com/miSt0EJ.png" width=380>' +
-			'<img src="http://24.media.tumblr.com/tumblr_m24qt60wiJ1rrkhrko1_500.gif" height=100><br />' +
+		this.sendReplyBox('<center><img src="http://i349.photobucket.com/albums/q367/theebay707/Starmie.gif" height="100">' +
+			'<img src="http://i.imgur.com/miSt0EJ.png" width="360">' +
+			'<img src="http://24.media.tumblr.com/tumblr_m24qt60wiJ1rrkhrko1_500.gif" height="100"><br />' +
 			'<b>Ace: </b>Dancing Starmies<b><br />' +
 			'Quote: </b>*Grabs sword off of her belt* Okay I\'m done now. </center>'
 		);

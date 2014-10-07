@@ -1,0 +1,21 @@
+button.userbuttonbattle {
+  border: none;
+  background: none;
+  padding:0;
+  height: -20em;
+  font-family:Verdana,sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+button.userbutton {
+ border: none;
+  background: none;
+  padding:0;
+  height: -20em;
+  font-family:Verdana,sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/*Don't erase any of the codes above, they are necessary for custom colors. Custom colors are really just buttons. The css makes the look like normal text lol.*/

@@ -17,7 +17,7 @@ exports.commands = {
 	ds2: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i349.photobucket.com/albums/q367/theebay707/Starmie.gif" height="100">' +
-			'<img src="http://i.imgur.com/miSt0EJ.png" width="360">' +
+			'<img src="http://i.imgur.com/miSt0EJ.png" width="340">' +
 			'<img src="http://24.media.tumblr.com/tumblr_m24qt60wiJ1rrkhrko1_500.gif" height="100"><br />' +
 			'<b>Ace: </b>Dancing Starmies<b><br />' +
 			'Quote: </b>*Grabs sword off of her belt* Okay I\'m done now. </center>'
@@ -3214,10 +3214,16 @@ exports.commands = {
 	pikabluswag: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/hwiX34o.gif">' +
-			'<img src="http://i.imgur.com/6v22j6r.gif" height="60" width="310">' +
-			'<img src="http://i.imgur.com/QXiZE1a.gif:><br /><br />' +
-			'<b>Ace:</b> Azumarill<br />' +
-			'The important thing is not how long you live. It\'s what you accomplish with your life.</center>'
+			'<img src="http://i.imgur.com/n9wxpUa.gif" width="260">' +
+			'<img src="http://i.imgur.com/JkaxZDc.gif"><br />' +
+			'<b>Ace:</b> <font color="green">Mega Sceptile<br />' +
+			'<img src="http://i.imgur.com/fE61tsz.png">' +
+			'<img src="http://i.imgur.com/iYAo9oX.png">' +
+			'<img src="http://i.imgur.com/VwzUGir.png">' +
+			'<font color="red">Now its Shulk Time!</font>' +
+			'<img src=http://i.imgur.com/J8llk69.png>' +
+			'<img src=http://i.imgur.com/bFKpda0.png>' +
+			'<img src=http://i.imgur.com/NAYSrud.png></center>'
 		);
 	},
 

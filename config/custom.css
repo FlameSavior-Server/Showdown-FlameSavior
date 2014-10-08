@@ -535,11 +535,11 @@ background:#000000
 *halloween theme             *
 *****************************/
 #header{
-        background:url("http://i.imgur.com/F5pMH0a.png");
+	background:url("http://i.imgur.com/F5pMH0a.png");
 }
 
 body {
-        background:url("http://i.imgur.com/J4ALaW9.png");
+	background:url("http://i.imgur.com/J4ALaW9.png");
 }
 
 .mainmenuwrapper {
@@ -552,30 +552,38 @@ body {
 }
 
 .chat-log-add{
-        background:#f68d4b
+	background:#fbb88e;
 }
 
 .menugroup .button{
-        background:#5a11ff
+	background:#5a11ff;
 }
 
 .menugroup .menugroup{
-        text-align:center
+	text-align:center;
 }
 
 .menugroup .button:hover {
-        background:#9f89ff
+	background:#2d00f0;
 }
 
 .userlist{
-        border-left:1px solid #D5DDE4;
-        background:#f68d4b
+	border-left:0px;
+	background:#fbb88e;
 }
 
+.userlist li {
+	border-bottom: 1px solid #7a7877;
+}
+	
 .userlist li button:hover {
-        background:#db671d
+	background:#cabdff;
+}
+
+.userlist li em.group {
+    color: #56007c;
 }
 
 .message-announce {
-        background:#000000
+	background:#000000;
 }

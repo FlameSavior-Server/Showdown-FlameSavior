@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	kaisersrebirth: function(target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://pokecharms.com/data/attachment-files/2014/08/119614_Aegivoir.png" height=120>' +
+			'<img src="http://i.imgur.com/nfwuFPY.png">' +
+			'<img src="http://th03.deviantart.net/fs70/PRE/i/2014/003/8/1/mega_aggron_by_theangryaron-d70p759.png" height=120><br />' +
+			'<b>Ace:</b> Mega Aggron<br />' +
+			'<b>Quote: </b>The new revolution has begun</center>'
+		);
+	}
+
 	slyzix: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/cQYOlsM.gif" width="150">' +

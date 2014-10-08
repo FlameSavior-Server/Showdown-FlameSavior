@@ -1,3 +1,4 @@
+/*
 #header{
 	background-color:#4594c9;
 }
@@ -85,33 +86,7 @@ body {
 .userlist {
 	border-left:1px solid #D5DDE4;
 	background:#b2d9f0;
-}
-
-.button-black {
-	padding:5px;
-	background-color:black;
-	border:1px solid #666;
-	color: white;
-}
-
-.button-blue {
-	padding:5px;
-	background-color:#4594c9;
-	border:1px solid #8dcbf0;
-	color: #d8d8d8;
-}
-
-.button-blue:hover {
-	background:#6db9ec;
-}
-
-.astext {
-    background:none;
-    border:none;
-    margin:0;
-    padding:0;
-    cursor: pointer;
-}
+}*/
 
 /**************************
 * For the colour commands *
@@ -277,10 +252,44 @@ body {
 	background: #F4BDC9;
 }
 
+.button-black {
+	padding:5px;
+	background-color:black;
+	border:1px solid #666;
+	color: white;
+}
+
+.button-blue {
+	padding:5px;
+	background-color:#4594c9;
+	border:1px solid #8dcbf0;
+	color: #d8d8d8;
+}
+
+.button-blue:hover {
+	background:#6db9ec;
+}
+
+.astext {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+}
+
+.button-halloween {
+    padding: 5px;
+    background-color: #000;
+    border: 1px solid #FFA500;
+    color: #FFA500;
+}
+
 /************************
 * Happy Holidays!    	*
 ************************/
-/*#header {
+/*
+#header {
 	background:url("http://i.imgur.com/q9MiuzK.png");
 }
 
@@ -382,8 +391,8 @@ body {
 .challenge {
 	background: url("http://i.imgur.com/CtoyG6B.png");
 	color: black;
-}*/
-
+}
+*/
 /*
 #header{
 	background:url("http://upload.wikimedia.org/wikipedia/commons/d/da/Shades_of_blue.jpg")
@@ -525,7 +534,7 @@ background:#000000
 /*****************************
 *halloween theme             *
 *****************************/
-/*#header{
+#header{
         background:url("http://i.imgur.com/F5pMH0a.png");
 }
 
@@ -569,4 +578,4 @@ body {
 
 .message-announce {
         background:#000000
-} */
+}

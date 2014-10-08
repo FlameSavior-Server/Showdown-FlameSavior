@@ -108,74 +108,6 @@ function canTalk(user, room, connection, message) {
     }
 
     if (typeof message === 'string') {
-
-        var usercolorz = fs.readFileSync('config/usercolors.json');
-        var color = JSON.parse(usercolorz);
-        if (room && color[user.userid]) { //http://replay.pokemonshowdown.com/frost-oumonotype-801791
-            if (user.nome === true) {
-                user.nome = false;
-                return message;
-            } else {
-                var usercolor = color[user.userid].color;
-                var x = (color[user.userid].blink) ? (user.name + ':').blink() : user.name + ':';
-                var y = (color[user.userid].blink) ? user.getIdentity(room.id).substring(0, 1).blink() : user.getIdentity(room.id).substring(0, 1);
-            }
-            var end2 = message.lastIndexOf('__');
-            var end = message.lastIndexOf('**');
-            var end3 = message.lastIndexOf('~~');
-            var format = ['**', '__', '~~'];
-            message = message.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            if (message.indexOf(format[0]) > -1) {
-                message = message.replace('**', '<b>').replace(message[end], '</b>').replace(message[end + 1], '');
-            }
-            if (message.indexOf(format[1]) > -1) {
-                message = message.replace('__', '<i>').replace(message[end2], '</i>').replace(message[end2 + 1], '');
-            }
-            if (message.indexOf(format[2]) > -1) {
-                message = message.replace('~~', '<s>').replace(message[end3], '</s>').replace(message[end3 + 1], '');
-            }
-            var add;
-            if (user.getIdentity().substring(0, 1) !== ' ') {
-                if (room.battle) {
-                    room.add('|html|<button name="parseCommand" class="userbuttonbattle" value="/user ' + user.name + '"><font color = "gray">' + y + '</font><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + message);
-                } else {
-                    add = room.add('|html|<button name="parseCommand" class="userbutton" value="/user ' + user.name + '"><font color = "gray">' + y + '</font><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + message);
-                }
-                return add;
-            } else {
-                if (room.battle) {
-                    add = room.add('|html|<button name="parseCommand" class="userbuttonbattle" value="/user ' + user.name + '"><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + message);
-                } else {
-                    add = room.add('|html|<button name="parseCommand" class="userbutton" value="/user ' + user.name + '"><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + message);
-                }
-                return add;
-            }
-
-        }
-
-        if (room && room.swearfilter === true) {
-            message = message.replace(/fuck/g, 'f***').replace(/shit/g, 's***').replace(/cunt/g, 'c***').replace(/dick/g, 'd***');
-            return message;
-        }
-
-
-
-
-        /*var BadWords = ['cunt','faggot', 'penis', 'vag', 'pen15', 'pen1s', 'cum', 'nigger', 'nigga', 'n1gger', 'n1gga', 'cock', 'dick', 'puta', 'clit', 'asshole', 'pussies', 'pussy', 'porn', 'p0rn', 'pimp', 'd!ck', 'slut', 'whore', 'wh0re', 'piss', 'vulva', 'peehole', 'boob', ' tit ', 'b00b', 't1t', 'semen', 'sperm'];
-	for (var i = 0; i < BadWords.length; i++) {
-	if (message.toLowerCase().indexOf(BadWords[i]) >= 0 && !user.can('broadcast')) {
-	connection.sendTo(room, 'Your message was not sent, as it contains profane language.');
-	return false;
-	}
-	}*/
-        if (message.toLowerCase().indexOf('psim.us') > -1 && !user.can('lock')) {
-            if (message.toLowerCase().indexOf('yggdrasilleague.psim.us') > -1) {
-                return message;
-            } else {
-                connection.sendTo(room, '|html| <font color= "red"><b>Advertising other servers is not allowed. Your message was not sent.');
-                return false;
-            }
-        }
         if (!message) {
             connection.popup("Your message can't be blank.");
             return false;
@@ -347,9 +279,8 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                 }
                 return true;
             },
-           canBroadcast: function(suppressMessage) {
+            canBroadcast: function(suppressMessage) {
                 if (broadcast) {
-                    user.nome = true;
                     message = this.canTalk(message);
                     if (!message) return false;
                     if (!user.can('broadcast', null, room)) {
@@ -374,9 +305,11 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                         var y = (color[user.userid].blink) ? user.getIdentity(room.id).substring(0, 1).blink() : user.getIdentity(room.id).substring(0, 1);
                         var usercolor = color[user.userid].color;
                         if (user.getIdentity(room.id).substring(0, 1) !== ' ') {
-                            this.add('|html|<button class="userbutton" name="parseCommand" value="/user ' + user.name + '"><font color = "gray">' + y + '</font><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + (suppressMessage || message));
+                            if (room.battle) room.add('|html|<button class="userbuttonbattle" name="parseCommand" value="/user ' + user.name + '"><font color = "gray">' + y + '</font><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + (formatMessage(suppressMessage) || formatMessage(message)));
+                            else room.add('|html|<button class="userbutton" name="parseCommand" value="/user ' + user.name + '"><font color = "gray">' + y + '</font><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + (formatMessage(suppressMessage) || formatMessage(message)));
                         } else {
-                            room.add('|html|<button class="userbutton" name="parseCommand" value="/user ' + user.name + '"><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + (suppressMessage || message));
+                            if (room.battle) room.add('|html|<button class="userbutton" name="parseCommand" value="/user ' + user.name + '"><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + (formatMessage(suppressMessage) || formatMessage(message)));
+                            else room.add('|html|<button class="userbutton" name="parseCommand" value="/user ' + user.name + '"><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + (formatMessage(suppressMessage) || formatMessage(message)));
                         }
                     }
 
@@ -414,14 +347,6 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                 this.splitTarget(target, exactName);
                 return this.targetUser;
             },
-            plural: function(target, target1) {
-                if (Math.floor(target) !== 1) {
-                    return target1 = target1 + "s";
-                } else {
-                    return target1;
-                }
-            },
-            
             getLastIdOf: function(user) {
                 if (typeof user === 'string') user = Users.get(user);
                 return (user.named ? user.userid : (Object.keys(user.prevNames).last() || user.userid));
@@ -477,8 +402,37 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
     if (message.charAt(0) === '/' && message.charAt(1) !== '/') {
         return parse(message, room, user, connection, levelsDeep + 1);
     }
+    var usercolorz = fs.readFileSync('config/usercolors.json');
+    var color = JSON.parse(usercolorz);
+    if (room && color[user.userid]) { //http://replay.pokemonshowdown.com/frost-oumonotype-801791
+        var usercolor = color[user.userid].color;
+        var x = (color[user.userid].blink) ? (user.name + ':').blink() : user.name + ':';
+        var y = (color[user.userid].blink) ? user.getIdentity(room.id).substring(0, 1).blink() : user.getIdentity(room.id).substring(0, 1);
 
-    return message;
+        message = formatMessage(message);
+
+        var add;
+        if (message.indexOf('//') === 0) message = message.substring(1);
+        if (user.getIdentity().substring(0, 1) !== ' ') {
+            if (room.battle) {
+                add = room.add('|html|<button name="parseCommand" class="userbuttonbattle" value="/user ' + user.name + '"><font color = "gray">' + y + '</font><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + message);
+            } else {
+                add = room.add('|html|<button name="parseCommand" class="userbutton" value="/user ' + user.name + '"><font color = "gray">' + y + '</font><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + message);
+            }
+            return add;
+        } else {
+            if (room.battle) {
+                add = room.add('|html|<button name="parseCommand" class="userbuttonbattle" value="/user ' + user.name + '"><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + message);
+            } else {
+                add = room.add('|html|<button name="parseCommand" class="userbutton" value="/user ' + user.name + '"><b><font color = #' + usercolor + '>' + x + '</font></b></button> ' + message);
+            }
+            return add;
+        }
+
+    } else {
+
+        return message;
+    }
 };
 
 exports.package = {};
@@ -506,3 +460,17 @@ exports.uncacheTree = function(root) {
         uncache = newuncache;
     } while (uncache.length > 0);
 };
+
+function formatMessage(message) {
+    message = message.replace(/\*\*([^< ]([^<]*?[^< ])?)\*\*/g, '<b>$1</b>').replace(/\_\_([^< ]([^<]*?[^< ])?)\_\_/g, '<i>$1</i>').replace(/\[\[([^< ]([^<`]*?[^< ])?)\]\]/ig, '<a href = http://www.google.com/search?ie=UTF-8&btnI&q=$1>$1</a>');
+
+    message = message.replace(/(https?\:\/\/[a-z0-9-.]+(\:[0-9]+)?(\/([^\s]*[^\s?.,])?)?|[a-z0-9]([a-z0-9-\.]*[a-z0-9])?\.(com|org|net|edu|us)(\:[0-9]+)?((\/([^\s]*[^\s?.,])?)?|\b))/ig, (message.indexOf('http://') > -1 || message.indexOf('https://') > -1) ? '<a href = "$1">$1</a>' : '<a href = "http://$1">$1</a>');
+
+    if (message.indexOf('spoiler:') > -1) {
+        var position = message.indexOf('spoiler:') + 8;
+        if (message.charAt(position) === ':') position++;
+        if (message.charAt(position) === ' ') position++;
+        message = message.substr(0, position) + '<span class = "spoiler">' + message.substr(position) + '</span>';
+    }
+    return message;
+}

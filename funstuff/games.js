@@ -329,7 +329,7 @@ exports.commands = {
                                 var name = (Users.getExact(winners[i])) ? Users.getExact(winners[i]).name : winners[i];
                                 winnerz += '<b>' + name + '</b> who won <b>' + winamount + '</b> bucks<br/>';
                             }
-                            if (rwinners.length == 1) {
+                            if (winners.length == 1) {
                                 this.add('|html|<div class = "infobox"><font size = 2, color = "green"><center><b>The roulette has been spun!</font><br />' +
                                     '<center>The roulette landed on <font color = "' + color + '"><b>' + color + '<b>!</font><br />' +
                                     '<center>The only winner is ' + winnerz);
@@ -404,6 +404,12 @@ exports.commands = {
                             '<font color = "gray" size = 2><i><b>Poll started by ' + user.name + '</b></i></font><br/>' +
                             '<hr>' + options);
                     },
+                    
+                    votes: function(target, room, user) {
+	                if (!room.poll) return this.sendReply('There is no poll going on in this room.');
+	                if (!this.canBroadcast()) return;
+	                this.sendReplyBox('Number of votes: '+Object.keys(room.poll.users).length);
+	            },
 
                     voteoption: 'vote',
                     vote: function(target, room, user) {

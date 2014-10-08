@@ -269,6 +269,7 @@ var connections = Users.connections = Object.create(null);
 var connectedIps = Users.connectedIps = Object.create(null);
 
 Users.shortenHost = function (host) {
+	if (!host) return '';
 	var dotIndex = host.lastIndexOf('.');
 	if (host.substr(-6, 4) === '.co.') dotIndex = host.length - 6;
 	if (dotIndex >= 1) dotIndex = host.lastIndexOf('.', dotIndex - 1);

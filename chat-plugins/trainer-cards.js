@@ -12,7 +12,7 @@ exports.commands = {
 			'<b>Ace:</b> Mega Aggron<br />' +
 			'<b>Quote: </b>The new revolution has begun</center>'
 		);
-	}
+	},
 
 	slyzix: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

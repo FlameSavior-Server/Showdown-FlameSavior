@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	slyzix: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/cQYOlsM.gif" width="150">' +
+			'<img src="http://i.imgur.com/xvZITRL.gif" width="250">' +
+			'<img src="http://stream1.gifsoup.com/view7/3914456/zoroark-using-night-daze-o.gif" width="140"><br />' +
+			'<b>Ace:</b> Drapion and Zoroark<br />' +
+			'Life is a serious battle, and you have to use the tools you\'re given. It\'s more important to master the cards you\'re holding than to complain about the ones your opponents were dealt.</center>'
+		);
+	},
+
 	kermit: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://media.giphy.com/media/g50nWTqSaXbby/giphy.gif" width="140">' +
@@ -16,9 +26,9 @@ exports.commands = {
 
 	ds2: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i349.photobucket.com/albums/q367/theebay707/Starmie.gif" height="100">' +
-			'<img src="http://i.imgur.com/miSt0EJ.png" width="340">' +
-			'<img src="http://24.media.tumblr.com/tumblr_m24qt60wiJ1rrkhrko1_500.gif" height="100"><br />' +
+		this.sendReplyBox('<center><img src="http://i349.photobucket.com/albums/q367/theebay707/Starmie.gif" height="90">' +
+			'<img src="http://i.imgur.com/miSt0EJ.png" width="300">' +
+			'<img src="http://24.media.tumblr.com/tumblr_m24qt60wiJ1rrkhrko1_500.gif" height="90"><br />' +
 			'<b>Ace: </b>Dancing Starmies<b><br />' +
 			'Quote: </b>*Grabs sword off of her belt* Okay I\'m done now. </center>'
 		);

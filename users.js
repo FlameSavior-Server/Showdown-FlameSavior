@@ -142,6 +142,8 @@ var bannedIps = Users.bannedIps = Object.create(null);
 var bannedUsers = Object.create(null);
 var lockedIps = Users.lockedIps = Object.create(null);
 var lockedUsers = Object.create(null);
+var lockedDomains = Users.lockedDomains = Object.create(null);
+var lockedDomainsUsers = Object.create(null);
 
 /**
  * Searches for IP in table.
@@ -222,8 +224,42 @@ function unlock(name, unlocked, noRecurse) {
 	}
 	return unlocked;
 }
+function lockDomain(domain) {
+	if (lockedDomains[domain]) return;
+	lockedDomainsUsers[domain] = {};
+	for (var i in users) {
+		if (!users[i].named || users[i].locked || users[i].group !== Config.groupsranking[0]) continue;
+		var shortHost = Users.shortenHost(users[i].latestHost);
+		if (domain === shortHost) {
+			lockedDomainsUsers[domain][users[i].userid] = 1;
+			users[i].locked = '#range';
+			users[i].send("|popup|Your ISP is temporarily locked from talking in chats, battles, and PMing regular users.");
+			users[i].updateIdentity();
+		}
+	}
+
+	var time = 90 * 60 * 1000;
+	lockedDomains[domain] = setTimeout(function () {
+		unlockDomain(domain);
+	}, time);
+}
+function unlockDomain(domain) {
+	if (!lockedDomains[domain]) return;
+	clearTimeout(lockedDomains[domain]);
+	for (var i in lockedDomainsUsers[domain]) {
+		var user = getUser(i);
+		if (user) {
+			user.locked = false;
+			user.updateIdentity();
+		}
+	}
+	delete lockedDomains[domain];
+	delete lockedDomainsUsers[domain];
+}
 Users.unban = unban;
 Users.unlock = unlock;
+Users.lockDomain = lockDomain;
+Users.unlockDomain = unlockDomain;
 
 /*********************************************************
  * Routing
@@ -231,6 +267,14 @@ Users.unlock = unlock;
 
 var connections = Users.connections = Object.create(null);
 var connectedIps = Users.connectedIps = Object.create(null);
+
+Users.shortenHost = function (host) {
+	var dotIndex = host.lastIndexOf('.');
+	if (host.substr(-6, 4) === '.co.') dotIndex = host.length - 6;
+	if (dotIndex >= 1) dotIndex = host.lastIndexOf('.', dotIndex - 1);
+	var shortHost = (dotIndex >= 1 ? host.substr(dotIndex + 1) : host);
+	return shortHost;
+};
 
 Users.socketConnect = function(worker, workerid, socketid, ip) {
 	var id = '' + workerid + '-' + socketid;
@@ -296,10 +340,19 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 		}
 	});
 
-	dns.reverse(ip, function(err, hosts) {
+	dns.reverse(ip, function (err, hosts) {
 		if (hosts && hosts[0]) {
 			user.latestHost = hosts[0];
 			if (Config.hostfilter) Config.hostfilter(hosts[0], user);
+			if (user.named && !user.locked && user.group === Config.groupsranking[0]) {
+				var shortHost = Users.shortenHost(hosts[0]);
+				if (lockedDomains[shortHost]) {
+					user.send("|popup|Your ISP is temporarily locked from talking in chats, battles, and PMing regular users.");
+					lockedDomainsUsers[shortHost][user.userid] = 1;
+					user.locked = '#range';
+					user.updateIdentity();
+				}
+			}
 		}
 	});
 
@@ -712,12 +765,12 @@ User = (function () {
 	User.prototype.canPromote = function (sourceGroup, targetGroup) {
 		return this.can('promote', {group:sourceGroup}) && this.can('promote', {group:targetGroup});
 	};
+
 	User.prototype.forceRename = function (name, authenticated, forcible) {
 		try {
 			var frostcommands = global.frostcommands;
 			frostcommands.updateSeen(name);
 		} catch (e) {}
-
 		// skip the login server
 		var userid = toId(name);
 
@@ -760,6 +813,15 @@ User = (function () {
 			this.send("|popup|Your username (" + name + ") is locked" + bannedUnder + "'. Your lock will expire in a few days." + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
 			this.lock(true);
 		}
+		if (!this.locked && this.group === Config.groupsranking[0]) {
+			var shortHost = Users.shortenHost(this.latestHost);
+			if (lockedDomains[shortHost]) {
+				this.send("|popup|Your ISP is temporarily locked from talking in chats, battles, and PMing regular users.");
+				lockedDomainsUsers[shortHost][this.userid] = 1;
+				this.locked = '#range';
+				this.updateIdentity();
+			}
+		}
 
 		for (var i = 0; i < this.connections.length; i++) {
 			//console.log('' + name + ' renaming: socket ' + i + ' of ' + this.connections.length);
@@ -773,6 +835,7 @@ User = (function () {
 		}
 		return true;
 	};
+
 	User.prototype.resetName = function () {
 		var name = 'Guest ' + this.guestNum;
 		var userid = toId(name);

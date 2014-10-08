@@ -161,6 +161,11 @@ function canTalk(user, room, connection, message) {
  *     if he's muted, will warn him that he's muted, and
  *     return false.
  */
+
+var complaint = exports.complaint = complaint || fs.createWriteStream('logs/complaint.txt', {flags:'a+'});
+var fs = require('fs');
+var frostcommands = global.frostcommands;
+
 var parse = exports.parse = function (message, room, user, connection, levelsDeep) {
 	var cmd = '', target = '';
 	if (!message || !message.trim().length) return;

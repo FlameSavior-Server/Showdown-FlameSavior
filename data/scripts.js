@@ -1073,7 +1073,7 @@ exports.BattleScripts = {
 				case 'ancientpower':
 					if (hasMove['paleowave']) rejected = true;
 					break;
-				case 'dragonpulse':
+				case 'dragonpulse': case 'spacialrend':
 					if (hasMove['dracometeor']) rejected = true;
 					break;
 				case 'return':
@@ -1127,7 +1127,7 @@ exports.BattleScripts = {
 					if (hasMove['uturn'] || hasMove['voltswitch'] || hasMove['pursuit']) rejected = true;
 					break;
 				case 'fakeout':
-					if (hasMove['trick'] || hasMove['switcheroo']) rejected = true;
+					if (setupType || hasMove['trick'] || hasMove['switcheroo']) rejected = true;
 					break;
 				case 'encore':
 					if (hasMove['rest'] && hasMove['sleeptalk']) rejected = true;
@@ -1366,6 +1366,8 @@ exports.BattleScripts = {
 			item = 'Focus Sash';
 		} else if (template.species === 'Unown') {
 			item = 'Choice Specs';
+		} else if (hasMove['bellydrum']) {
+			item = 'Sitrus Berry';
 		} else if (hasMove['trick'] && hasMove['gyroball'] && (ability === 'Levitate' || hasType['Flying'])) {
 			item = 'Macho Brace';
 		} else if (hasMove['trick'] && hasMove['gyroball']) {
@@ -1463,7 +1465,7 @@ exports.BattleScripts = {
 		} else if ((template.baseStats.hp + 75) * (template.baseStats.def + template.baseStats.spd + 175) > 60000 || template.species === 'Skarmory' || template.species === 'Forretress') {
 			// skarmory and forretress get exceptions for their typing
 			item = 'Leftovers';
-		} else if ((counter.Physical + counter.Special >= 3 || counter.Special >= 3) && setupType && ability !== 'Sturdy') {
+		} else if ((counter.Physical + counter.Special >= 3 || counter.Special >= 3) && setupType && ability !== 'Sturdy' && !hasMove['eruption'] && !hasMove['waterspout']) {
 			item = 'Life Orb';
 		} else if (counter.Physical + counter.Special >= 4 && template.baseStats.def + template.baseStats.spd > 179) {
 			item = 'Assault Vest';
@@ -2037,15 +2039,6 @@ exports.BattleScripts = {
 		}
 
 		var moveKeys = (template.randomDoubleBattleMoves || template.randomBattleMoves || Object.keys(template.learnset)).randomize();
-		// Make protect viable for everyone
-		// Delete this once all Pokémon have viable doubles sets
-		var hasProtectingMove = false;
-		for (var i = 0; i < moveKeys.length && !hasProtectingMove; i++) {
-			if (moveKeys[i] in {'protect':1, 'detect':1, 'kingsshield':1, 'spikyshield':1}) hasProtectingMove = true;
-		}
-		if (!hasProtectingMove) {
-			if (template.learnset && 'protect' in template.learnset) moveKeys.push('protect');
-		}
 		var moves = [];
 		var ability = '';
 		var item = '';
@@ -2257,7 +2250,7 @@ exports.BattleScripts = {
 					if (setupType || (hasMove['rest'] && hasMove['sleeptalk'])) rejected = true;
 					break;
 				case 'trick': case 'switcheroo':
-					if (setupType || (hasMove['rest'] && hasMove['sleeptalk']) || hasMove['trickroom'] || hasMove['reflect'] || hasMove['lightscreen'] || hasMove['batonpass']) rejected = true;
+					if (setupType || (hasMove['rest'] && hasMove['sleeptalk']) || hasMove['trickroom'] || hasMove['reflect'] || hasMove['lightscreen'] || hasMove['batonpass'] || template.isMega) rejected = true;
 					break;
 				case 'dragontail': case 'circlethrow':
 					if (hasMove['agility'] || hasMove['rockpolish']) rejected = true;
@@ -2372,7 +2365,7 @@ exports.BattleScripts = {
 					if (hasMove['uturn'] || hasMove['voltswitch'] || hasMove['pursuit']) rejected = true;
 					break;
 				case 'fakeout':
-					if (hasMove['trick'] || hasMove['switcheroo']) rejected = true;
+					if (hasMove['trick'] || hasMove['switcheroo'] || ability === 'Sheer Force')  rejected = true;
 					break;
 				case 'encore':
 					if (hasMove['rest'] && hasMove['sleeptalk']) rejected = true;
@@ -2656,10 +2649,10 @@ exports.BattleScripts = {
 			item = 'Life Orb';
 		} else if (ability === 'Unburden') {
 			item = 'Red Card';
-			// Give Unburden mons a Normal Gem if they have a Normal-type attacking move
+			// Give Unburden mons a Normal Gem if they have Fake Out
 			for (var m in moves) {
 				var move = this.getMove(moves[m]);
-				if (move.type === 'Normal' && (move.basePower || move.basePowerCallback)) {
+				if (hasMove['fakeout']) {
 					item = 'Normal Gem';
 					break;
 				}
@@ -2684,17 +2677,18 @@ exports.BattleScripts = {
 			}
 		} else if (ability === 'Marvel Scale' && hasMove['psychoshift']) {
 			item = 'Flame Orb';
-		} else if (hasMove['reflect'] || hasMove['lightscreen']) {
-			// less priority than if you'd had both
-			item = 'Light Clay';
 		} else if (counter.Physical >= 4 && !hasMove['fakeout'] && !hasMove['suckerpunch'] && !hasMove['flamecharge'] && !hasMove['rapidspin']) {
-			item = 'Expert Belt';
-		} else if (counter.Special >= 4) {
-			item = 'Expert Belt';
-		} else if (this.getEffectiveness('Ground', template) >= 2 && ability !== 'Levitate' && !hasMove['magnetrise']) {
+			item = 'Life Orb';
+		} else if (counter.Special >= 4 && !hasMove['eruption'] && !hasMove['waterspout']) {
+			item = 'Life Orb';
+		} else if (this.getImmunity('Ground', template) && this.getEffectiveness('Ground', template) >= 1 && ability !== 'Levitate' && !hasMove['magnetrise']) {
 			item = 'Shuca Berry';
-		} else if (this.getEffectiveness('Ice', template) >= 1) {
+		} else if (this.getEffectiveness('Ice', template) >= 2) {
 			item = 'Yache Berry';
+		} else if (this.getEffectiveness('Rock', template) >= 2) {
+			item = 'Charti Berry';
+		} else if (this.getEffectiveness('Fire', template) >= 2) {
+			item = 'Occa Berry';
 		} else if (this.getImmunity('Fighting', template) && this.getEffectiveness('Fighting', template) >= 1) {
 			item = 'Chople Berry';
 		} else if (hasMove['substitute'] || hasMove['detect'] || hasMove['protect'] || ability === 'Moody') {
@@ -2720,8 +2714,6 @@ exports.BattleScripts = {
 		// this is the "REALLY can't think of a good item" cutoff
 		} else if (counter.Physical + counter.Special >= 2 && template.baseStats.hp + template.baseStats.def + template.baseStats.spd > 315) {
 			item = 'Weakness Policy';
-		} else if (this.getImmunity('Ground', template) && this.getEffectiveness('Ground', template) >= 1 && ability !== 'Levitate' && !hasMove['magnetrise']) {
-			item = 'Shuca Berry';
 		} else if (hasType['Poison']) {
 			item = 'Black Sludge';
 		} else if (counter.Status <= 1) {

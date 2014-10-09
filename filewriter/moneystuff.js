@@ -17,7 +17,7 @@ var moneyStuff = exports.moneyStuff = {
         var amt = JSON.parse(userdata);
         if (!amt[toId(name)]) amt[toId(name)] = {};
         if (!amt[toId(name)][target]) {
-            parseInt(amt[toId(name)][target]) = target1;
+            amt[toId(name)][target] = parseInt(target1);
             var finished = JSON.stringify(amt, null, 1);
             fs.writeFile('config/userdata.json', finished);
             return;
@@ -33,7 +33,7 @@ var moneyStuff = exports.moneyStuff = {
         var amt = JSON.parse(userdata);
         if (!amt[toId(name)]) amt[toId(name)] = {};
         if (!amt[toId(name)][target]) amt[toId(name)][target] = 0;
-        parseInt(amt[toId(name)][target]) -= parseInt(target1);
+        amt[toId(name)][target] -= parseInt(target1);
         var finished = JSON.stringify(amt, null, 1);
         fs.writeFile('config/userdata.json', finished);
         return;
@@ -44,8 +44,8 @@ var moneyStuff = exports.moneyStuff = {
         var amt = JSON.parse(userdata);
         if (!amt[toId(user2)]) amt[toId(user2)] = {};
         if (!amt[toId(user2)][type]) amt[toId(user2)] = 0;
-        parseInt(amt[toId(user1)][type]) -= parseInt(amount);
-        parseInt(amt[toId(user2)][type]) += parseInt(amount);
+        amt[toId(user1)][type] -= parseInt(amount);
+        amt[toId(user2)][type] += parseInt(amount);
         var finished = JSON.stringify(amt, null, 1);
         fs.writeFile('config/userdata.json', finished);
         return;

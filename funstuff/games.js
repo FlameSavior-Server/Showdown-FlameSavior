@@ -7,7 +7,8 @@ exports.commands = {
                 '<b>/guessp [Pokemon]</b> - Guesses a Pokémon. After guessing incorrectly, you cannot guess again in the same game. There are a total of 3 tries per game. The answer is revealed after all 3 chances are over.<br />' +
                 '<b>/panagramend</b> OR <b>/endpanagram</b> - Ends the current game of Panagram.');
         },
-
+        
+        panagrams: 'panagram',
         panagram: function(target, room, user) {
             if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to be able to start a game of Panagram in this room.');
             if (room.panagram) return this.sendReply('There is already a game of Panagram going on.');
@@ -91,21 +92,21 @@ exports.commands = {
         dicecommands: function(target, room, user) {
             if (!this.canBroadcast()) return;
             return this.sendReplyBox('<u><font size = 2><center>Dice rules and commands</center></font></u><br />' +
-                '<b>/dice [amount]</b> - Starts a dice game in the room for the specified amount of points. Must be ranked + or higher to use.<br />' +
+                '<b>/dicegame OR /diceon [amount]</b> - Starts a dice game in the room for the specified amount of points. Must be ranked + or higher to use.<br />' +
                 '<b>/play</b> - Joins the game of dice. You must have more or the same number of points the game is for. Winning a game wins you the amount of points the game is for. Losing the game removes that amount from you.<br />' +
                 '<b>/diceend</b> - Ends the current game of dice in the room. You must be ranked + or higher to use this.');
         },
 
-        dice: 'diceon',
-        diceon: function(target, room, user) {
+        dicegame: 'diceon',
+        diceon: function(target, room, user, connection, cmd) {
             if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to be able to start a game of dice.');
             if (room.dice) {
                 return this.sendReply('There is already a dice game going on');
             }
             target = toId(target);
-            if (!target) return this.sendReply('/dice [amount] - Starts a dice game. The specified amount will be the amount of cash betted for.');
+            if (!target) return this.sendReply('/'+cmd+' [amount] - Starts a dice game in the room. The specified amount will be the amount of cash betted for.');
             if (isNaN(target)) return this.sendReply('That isn\'t a number, smartass.');
-            if (target < 1) return this.sendReply('You cannot start a game with anything less than 1 buck.');
+            if (target < 1) return this.sendReply('You cannot start a game of dice with anything less than 1 point!');
             room.dice = {};
             room.dice.members = [];
             room.dice.award = parseInt(target);
@@ -126,22 +127,28 @@ exports.commands = {
             room.dice.members.push(user.userid);
             this.add('|html|<b>' + user.name + ' has joined the game!');
             if (room.dice.members.length == 2) {
+            	var point = (room.dice.award == 1) ? 'point' : 'points';
                 result1 = Math.floor((Math.random() * 6) + 1);
                 result2 = Math.floor((Math.random() * 6) + 1);
                 if (result1 > result2) {
-                    var result3 = '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' points!'
+                    var result3 = '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' '+point+'!';
+                    var losemessage = 'Better luck next time, '+Users.get(room.dice.members[1]).name+'!';
                 } else if (result2 > result1) {
-                    var result3 = '' + Users.get(room.dice.members[1]).name + ' has won ' + room.dice.award + ' points!'
+                    var result3 = '' + Users.get(room.dice.members[1]).name + ' has won ' + room.dice.award + ' '+point+'!';
+                    var losemessage = 'Better luck next time, '+Users.get(room.dice.members[0]).name+'!';
                 } else {
                     var result3;
+                    var losemessage;
                     do {
                         result1 = Math.floor((Math.random() * 6) + 1);
                         result2 = Math.floor((Math.random() * 6) + 1);
                     } while (result1 === result2);
                     if (result1 > result2) {
-                        result3 = '' + room.dice.members[0] + ' has won ' + room.dice.award + ' points!';
+                        result3 = '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' '+point+'!';
+                        losemessage = 'Better luck next time, '+Users.get(room.dice.members[1]).name+'!';
                     } else {
-                        result3 = '' + room.dice.members[1] + ' has won ' + room.dice.award + ' points!';
+                        result3 = '' + Users.get(room.dice.members[1]).name + ' has won ' + room.dice.award + ' '+point+'!';
+                        losemessage = 'Better luck next time, '+Users.get(room.dice.members[0]).name+'!';
                     }
                 }
                 var dice1, dice2;
@@ -188,13 +195,12 @@ exports.commands = {
                 }
 
                 room.add('|html|<div class="infobox"><center><b>The dice game has been started!</b><br />' +
-                    'Two members have joined the game.<br />' +
                     'Rolling the dice...<br />' +
                     '<img src = "' + dice2 + '" align = "left"><img src = "' + dice1 + '" align = "right"><br/>' +
                     '<b>' + Users.get(room.dice.members[0]).name + '</b> rolled ' + result1 + '!<br />' +
                     '<b>' + Users.get(room.dice.members[1]).name + '</b> rolled ' + result2 + '!<br />' +
-                    '<b>' + result3 + '</b><br />');
-                if (result3 === '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' points!') {
+                    '<b>' + result3 + '</b><br />'+losemessage);
+                if (result3 === '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' '+point+'!') {
                     moneyStuff.transferAmt(Users.get(room.dice.members[1]).userid, Users.get(room.dice.members[0]).userid, 'money', room.dice.award);
                 } else {
                     moneyStuff.transferAmt(Users.get(room.dice.members[0]).userid, Users.get(room.dice.members[1]).userid, 'money', room.dice.award);
@@ -225,7 +231,7 @@ exports.commands = {
 
                     roulette: 'roul',
                     roul: function(target, room, user) {
-                        if (!this.can('broadcast', null, room)) return false;
+                        if (!this.can('broadcast', null, room)) return this.sendReply('You need to be ranked + or higher to start a roulette in the room.');
                         if (room.roulette) {
                             return this.sendReply('There is already a roulette going on.');
                         }
@@ -473,65 +479,4 @@ exports.commands = {
                             '<hr>' + total);
                         delete room.poll;
                     },
-
-                    //just for the lols
-                    dance: function(target, room, user) {
-                        if (!this.canBroadcast()) return;
-                        this.sendReply('|html| <marquee behavior="alternate" scrollamount="3"><b><img src=http://i196.photobucket.com/albums/aa279/loganknightphotos/wobbuffet-2.gif>WOBB<img src=http://i196.photobucket.com/albums/aa279/loganknightphotos/wobbuffet-2.gif>WOBB<img src=http://i196.photobucket.com/albums/aa279/loganknightphotos/wobbuffet-2.gif></b></marquee>');
-                    },
-
-                    model: 'sprite',
-                    sprite: function(target, room, user) {
-                        if (!this.canBroadcast()) return;
-                        var targets = target.split(',');
-                        target = targets[0].trim();
-                        target1 = targets[1];
-                        if (!toId(target)) return this.sendReply("/sprite [Pokémon], [shiny/back] - Shows the animated model of the specified Pokémon.");
-                        var clean = target.toLowerCase();
-                        if (target.toLowerCase().indexOf(' ') !== -1) {
-                            target = target.toLowerCase().replace(/ /g, '-');
-                        }
-                        if (target.indexOf('mega') == -1 && toId(target) != 'porygon2') {
-                            if (target.lastIndexOf('-') > -1) {
-                                for (var i = 0; i <= target.lastIndexOf('-'); i++) {
-                                    var a = target.substring(0, target.lastIndexOf('-')).replace(/-/g, ' ');
-                                    break;
-                                }
-                            }
-                        }
-
-                        var correction = a ? Tools.dataSearch(a) : Tools.dataSearch(target);
-                        if (correction && correction.length) {
-                            for (var i = 0; i < correction.length; ++i) {
-                                if (correction[i].id !== target && !i) {
-                                    target = a ? target.replace(a, correction[0].id) : correction[0].name.toLowerCase();
-                                }
-                            }
-                        } else {
-                            return this.sendReply((a || clean) + ' is not a valid Pokémon.');
-                        }
-
-                        if (!target1) {
-                            for (var x = 0; x < 10; x++) {
-                                if (target.indexOf('-' + toId(i) > -1) {
-                                        return this.sendReply('|html|<img src = "http://www.pkparaiso.com/imagenes/xy/sprites/animados/' + target + '.gif">');
-                                    }
-                                }
-                                return this.sendReply('|html|<img src = "http://play.pokemonshowdown.com/sprites/xyani/' + target + '.gif">');
-                            } else {
-                                if (toId(target1) === 'back') {
-                                    return this.sendReply('|html|<img src = "http://play.pokemonshowdown.com/sprites/xyani-back/' + target.toLowerCase().trim().replace(/ /g, '-') + '.gif">');
-                                } else if (toId(target1) === 'shiny') {
-                                    return this.sendReply('|html|<img src = "http://play.pokemonshowdown.com/sprites/xyani-shiny/' + target.toLowerCase().trim().replace(/ /g, '-') + '.gif">');
-                                } else {
-                                    this.sendReply(target1 + ' is not a valid parameter.');
-                                    for (var x = 0; x < 10; x++) {
-                                        if (target.indexOf('-' + toId(x)) > -1) {
-                                            return this.sendReply('|html|<img src = "http://www.pkparaiso.com/imagenes/xy/sprites/animados/' + target + '.gif">');
-                                        }
-                                    }
-                                    return this.sendReply('|html|<img src = "http://play.pokemonshowdown.com/sprites/xyani/' + target + '.gif">');
-                                }
-                            }
-                        }
-                    };
+};

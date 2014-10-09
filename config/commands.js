@@ -1798,12 +1798,12 @@ var commands = exports.commands = {
 	darkhanekawa: 'jackzero',
 	v: 'jackzero',
 	jack: 'jackzero',
-    jackzero: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="4" color="#19496C">Dark Hanekawa<br /></font>' +
-        	'<img src="http://i.imgur.com/8o1NqFq.gif"><br />' +
-        	'Evil deeds are fun~</center>');
-    },
+	jackzero: function(target, room, user) {
+	    if (!this.canBroadcast()) return;
+	    this.sendReplyBox('<center><font size="4" color="#1AACBC"><b>JackZero</b><br/></font>' +
+	           '<img src="http://i.imgur.com/wUqmPZz.gif" height="250"><br/>' +
+	           '<font size="2"><i>I stopped fighting my inner demons. We are on the same side now.</i></font></center>');
+	},
 
 	wd: 'windoge',
 	windoge: function(target, room, user) {

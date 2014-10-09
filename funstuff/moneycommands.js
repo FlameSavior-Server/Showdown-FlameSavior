@@ -4,7 +4,7 @@ exports.commands = {
     givebucks: 'award',
     givepoints: 'award',
     gb: 'award',
-    award: function(target, room, user, cmd) {
+    award: function(target, room, user, connection, cmd) {
         if (!this.can('hotpatch')) return false;
         if (!target) return this.sendReply('The proper syntax is /' + cmd + ' [user], [amount]');
         target = this.splitTarget(target);
@@ -29,9 +29,9 @@ exports.commands = {
     tb: 'remove',
     takebucks: 'remove',
     take: 'remove',
-    remove: function(target, room, user, cmd) {
+    remove: function(target, room, user, connection, cmd) {
         if (!this.can('hotpatch')) return false;
-        if (!target) return this.sendReply('The proper syntax is /remove [user], [amount]');
+        if (!target) return this.sendReply('The proper syntax is /'+cmd+' [user], [amount]');
         target = this.splitTarget(target);
 		    var targetUser = this.targetUser;
 	    	if (!targetUser) return this.sendReply('User '+this.targetUsername+' not found.');
@@ -51,9 +51,9 @@ exports.commands = {
     //If you're not running a league based server, givesymbol and givebadge won't be needed, so you can remove them in that case.
     givebadges: 'gba',
     givebadge: 'gba',
-    gba: function(target, room, user, cmd) {
+    gba: function(target, room, user, connection, cmd) {
         if (!this.can('hotpatch')) return false;
-        if (!target) return this.sendReply('The proper syntax is /gba [user] - gives a user one Gym Badge.');
+        if (!target) return this.sendReply('/'+cmd+' [user] - gives a user one Gym Badge.');
         if (!Users.get(target)) {
             return this.sendReply('User ' + target + ' not found.');
         }
@@ -67,7 +67,7 @@ exports.commands = {
     },
     givesymbols: 'gs',
     givesymbol: 'gs',
-    gs: function(target, room, user, cmd) {
+    gs: function(target, room, user, connection, cmd) {
         if (!this.can('hotpatch')) return false;
         if (!target) return this.sendReply('The proper syntax is /' + cmd + ' [user] - gives a user one Frontier Symbol.');
         if (!Users.get(target)) {
@@ -285,6 +285,8 @@ exports.commands = {
         user.setpotd = false;
         user.alreadysetpotd = true;
     },
+    
+    customcolor: 'usercolor',
     setcolor: 'usercolor',
     usercolor: function(target, room, user) {
         if (!user.needscolor) {

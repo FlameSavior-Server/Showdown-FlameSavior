@@ -2705,6 +2705,7 @@ var commands = exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 			var color = hashColor(''+toId(user.originalName)+'');
+			if (cmd == 'sleep') cmd = 'sleeping';
 			if (user.userid == 'panpawn') color = '#DA9D01';
 			this.add('|raw|<b>-- <font color="'+ color+'">' + user.originalName +'</font></b> is now '+cmd+'. '+ (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			user.isAway = true;

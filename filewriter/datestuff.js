@@ -1,9 +1,9 @@
 var fs = require('fs');
+var last = fs.readFileSync('infofiles/lastseen.json');
+var lastseen = JSON.parse(last);
 var datestuff = exports.datestuff = {
 
     setdate: function(name) {
-        var last = fs.readFileSync('infofiles/lastseen.json');
-        var lastseen = JSON.parse(last);
         lastseen[name] = Date.now();
         var last2 = JSON.stringify(lastseen, null, 1);
         fs.writeFile('infofiles/lastseen.json', last2);
@@ -11,8 +11,6 @@ var datestuff = exports.datestuff = {
     },
 
     setdateall: function() {
-        var last = fs.readFileSync('infofiles/lastseen.json');
-        var lastseen = JSON.parse(last);
         for (var x in Users.users) {
             if (Users.users[x].connected && Users.users[x].named) {
                 lastseen[x] = Date.now();
@@ -24,18 +22,16 @@ var datestuff = exports.datestuff = {
     },
 
     getdate: function(name) {
-        var last = fs.readFileSync('infofiles/lastseen.json');
-        var lastseen = JSON.parse(last);
         if (!lastseen[name]) return 'never';
         var getdate = Date.now() - lastseen[name];
         return getdate;
     },
     
     lastSeen: function(target) {
-                var lastseen = datestuff.getdate(toId(target));
+                var lastseen = getdate(toId(target));
                 if (lastseen == 'never') return 'never';
                 var part1 = Math.floor(lastseen / 1000);
-                var time1 = Math.floor(lastseen / 1000) + ' ' + this.plural(part1, 'second');
+                var time1 = Math.floor(lastseen / 1000) + ' ' + parse.plural(part1, 'second');
                 if (part1 >= 60) {
                     var part2 = Math.floor(part1 / 60);
                     if (part1 % 60 === 0) {

@@ -4,6 +4,37 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	nicknames: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/af2WJgt.gif" width="140">' +
+			'<img src="http://i.imgur.com/bZRu5vk.gif" width="260">' +
+			'<img src="http://cdn.smosh.com/sites/default/files/bloguploads/pokemon-gif-nyan.gif" width="140"><br />' +
+			'<b>Ace:</b> Nicknames<br />' +
+			'The Aura Cat = Kitty Cat :3</center>'
+		);
+	},
+
+	spunk: 'spunky',
+	spunky: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i512.photobucket.com/albums/t324/cherrybloom96/pokemon%20girls/dawncheers.gif" width="140">' +
+			'<img src="http://i.imgur.com/wsnebEu.gif" width="260">' +
+			'<img src="http://th02.deviantart.net/fs70/200H/f/2014/200/7/4/casey_cheerleader_by_thewalrusclown-d7rf76q.png" width="140"><br />' +
+			'<b>Ace:</b> Gavin<br />' +
+			'Who needs Gym Leader if you\'re spunky?!</center>'
+		);
+	},
+
+	knigkt: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/wRwkyWy.png">' +
+			'<img src="http://i.imgur.com/81Kdtjm.jpg">' +
+			'<img src="http://i.imgur.com/AUkiJZ1.jpg"><br />' +
+			'<b>Ace:</b> Little Bish<br />' +
+			'"Exceptional claims demand exceptional evidence."</center>'
+		);
+	},
+
 	kaisersrebirth: function(target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://pokecharms.com/data/attachment-files/2014/08/119614_Aegivoir.png" height=120>' +
@@ -37,7 +68,7 @@ exports.commands = {
 	ds2: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i349.photobucket.com/albums/q367/theebay707/Starmie.gif" height="90">' +
-			'<img src="http://i.imgur.com/miSt0EJ.png" width="300">' +
+			'<img src="http://i.imgur.com/miSt0EJ.png" width="280">' +
 			'<img src="http://24.media.tumblr.com/tumblr_m24qt60wiJ1rrkhrko1_500.gif" height="90"><br />' +
 			'<b>Ace: </b>Dancing Starmies<b><br />' +
 			'Quote: </b>*Grabs sword off of her belt* Okay I\'m done now. </center>'
@@ -159,6 +190,7 @@ exports.commands = {
 		);
 	},
 
+	blacklisted: 'blacklist',
 	blacklist: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/MBbvjym.jpg" width="120">' +

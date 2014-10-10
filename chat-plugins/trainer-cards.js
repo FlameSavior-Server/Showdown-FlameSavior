@@ -4,6 +4,17 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ccisbae: 'ericxcc',
+	ericxcc: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ALW8woz.png" width="140">' +
+			'<img src="http://i.imgur.com/kdl3L4B.png" width="280">' +
+			'<img src="http://i.imgur.com/hmuZ2Q8.png" width="120"><br />' +
+			'<b>Ace:</b> <font color="#66FFCC">Slowbro and Slowking</font><br />' +
+			'<font color="#66FFCC">Bros Before Hoes /me looks at Isawa.</font></center>'
+		);
+	},
+
 	nicknames: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/af2WJgt.gif" width="140">' +
@@ -621,13 +632,14 @@ exports.commands = {
 		);
 	},
 
-	eric: function (target, room, user) {
+	ericsbae: 'pinsir',
+	pinsir: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/8OPY3wW.jpg" height="120">' +
-			'<img src="http://i.imgur.com/fidU25N.png" width="320">' +
-			'<img src="http://i.imgur.com/MI6Bplz.gif"width="140"><br />' +
-			'<b>Ace:</b> Slowbro<br />' +
-			'<font color="#80BFFF">The wordless conversations we share, The shiver in my spine when your hand touches me and how when there\'s only one soda left we share. The smell of your neck and the color of your eyes. How you think I\'m sexy in every size. The way that you laugh so hard you start to cry. I love you Eric.</font></center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/viL3eMc.png" width="120">' +
+			'<img src="http://i.imgur.com/H2MSVq9.png" width="280">' +
+			'<img src="http://i.imgur.com/jyVYmsB.png" width="140"><br />' +
+			'<b>Ace:</b> <font color="#99CC33">EricSaysHi</font><br />' +
+			'<font color="#99CC33">OH YOU DON\'T HAVE A SKARMORY #SHREKT</font></center>'
 		);
 	},
 

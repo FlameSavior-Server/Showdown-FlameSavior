@@ -826,7 +826,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/JT64me1.gif" width="250">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated-shiny/642-therian.gif"><br />' +
 			'<b>Ace:</b> Charizard-X and Thundurus-T<br />' +
-			'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>'
+			'<font face="Comic Sans MS">I\'ll read you faster than the lyrics of Skrillex\'s dubsteps</font></center>'
 		);
 	},
 

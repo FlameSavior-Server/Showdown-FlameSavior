@@ -62,6 +62,7 @@ emoticons: {
         'wyNaut': 'http://i.imgur.com/UO1Wf2j.png',
         'eltonJohn': 'https://www.looktothestars.org/photo/6341-elton-john/tiny_square.jpg',
         'lewD': 'https://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-5614-src-67abf0c04ce28e50-28x28.png',
+        '♥': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-577ade91d46d7edc-24x18.png',
         
         //End custom ones
         

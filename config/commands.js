@@ -3278,7 +3278,7 @@ var commands = exports.commands = {
 	},
 	
 	temotes: function(target, room, user) {
-		if(!user.can('hotpatch')) return;
+		if(!user.can('pban')) return;
 		if (toId(target) === 'off' || toId(target) === 'disable') {
 			Core.settings.emoteStatus = false;
 			room.add(user.name + ' has disabled chat emotes.');

@@ -378,7 +378,9 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 	if (message.charAt(0) === '/' && message.charAt(1) !== '/') {
 		return parse(message, room, user, connection, levelsDeep + 1);
 	}
-
+	
+	if (!Core.processChatData(user, room, connection, message)) return false;
+	
 	return message;
 };
 

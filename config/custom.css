@@ -252,6 +252,13 @@ body {
 	background: #F4BDC9;
 }
 
+.button-green {
+	padding:5px;
+	background-color:green;
+	border:1px solid #25CC4D;
+	color:white
+}
+
 .button-black {
 	padding:5px;
 	background-color:black;
@@ -575,7 +582,7 @@ body {
 .userlist li {
 	border-bottom: 1px solid #7a7877;
 }
-	
+
 .userlist li button:hover {
 	background:#cabdff;
 }

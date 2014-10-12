@@ -379,7 +379,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		return parse(message, room, user, connection, levelsDeep + 1);
 	}
 	
-	if (!Core.processChatData(user, room, connection, message)) return false;
+	//if (!Core.processChatData(user, room, connection, message)) return false;
 	
 	return message;
 };

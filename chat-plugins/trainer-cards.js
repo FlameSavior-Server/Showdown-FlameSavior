@@ -4,6 +4,48 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ccisbae: 'ericxcc',
+	ericxcc: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ALW8woz.png" width="140">' +
+			'<img src="http://i.imgur.com/kdl3L4B.png" width="280">' +
+			'<img src="http://i.imgur.com/hmuZ2Q8.png" width="120"><br />' +
+			'<b>Ace:</b> <font color="#66FFCC">Slowbro and Slowking</font><br />' +
+			'<font color="#66FFCC">Bros Before Hoes /me looks at Isawa.</font></center>'
+		);
+	},
+
+	nicknames: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/af2WJgt.gif" width="140">' +
+			'<img src="http://i.imgur.com/bZRu5vk.gif" width="260">' +
+			'<img src="http://cdn.smosh.com/sites/default/files/bloguploads/pokemon-gif-nyan.gif" width="140"><br />' +
+			'<b>Ace:</b> Nicknames<br />' +
+			'The Aura Cat = Kitty Cat :3</center>'
+		);
+	},
+
+	spunk: 'spunky',
+	spunky: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i512.photobucket.com/albums/t324/cherrybloom96/pokemon%20girls/dawncheers.gif" width="140">' +
+			'<img src="http://i.imgur.com/wsnebEu.gif" width="260">' +
+			'<img src="http://th02.deviantart.net/fs70/200H/f/2014/200/7/4/casey_cheerleader_by_thewalrusclown-d7rf76q.png" width="140"><br />' +
+			'<b>Ace:</b> Gavin<br />' +
+			'Who needs Gym Leader if you\'re spunky?!</center>'
+		);
+	},
+
+	knigkt: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/wRwkyWy.png">' +
+			'<img src="http://i.imgur.com/81Kdtjm.jpg">' +
+			'<img src="http://i.imgur.com/AUkiJZ1.jpg"><br />' +
+			'<b>Ace:</b> Little Bish<br />' +
+			'"Exceptional claims demand exceptional evidence."</center>'
+		);
+	},
+
 	kaisersrebirth: function(target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://pokecharms.com/data/attachment-files/2014/08/119614_Aegivoir.png" height=120>' +
@@ -37,7 +79,7 @@ exports.commands = {
 	ds2: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i349.photobucket.com/albums/q367/theebay707/Starmie.gif" height="90">' +
-			'<img src="http://i.imgur.com/miSt0EJ.png" width="300">' +
+			'<img src="http://i.imgur.com/miSt0EJ.png" width="280">' +
 			'<img src="http://24.media.tumblr.com/tumblr_m24qt60wiJ1rrkhrko1_500.gif" height="90"><br />' +
 			'<b>Ace: </b>Dancing Starmies<b><br />' +
 			'Quote: </b>*Grabs sword off of her belt* Okay I\'m done now. </center>'
@@ -159,6 +201,7 @@ exports.commands = {
 		);
 	},
 
+	blacklisted: 'blacklist',
 	blacklist: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/MBbvjym.jpg" width="120">' +
@@ -589,13 +632,14 @@ exports.commands = {
 		);
 	},
 
-	eric: function (target, room, user) {
+	ericsbae: 'pinsir',
+	pinsir: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/8OPY3wW.jpg" height="120">' +
-			'<img src="http://i.imgur.com/fidU25N.png" width="320">' +
-			'<img src="http://i.imgur.com/MI6Bplz.gif"width="140"><br />' +
-			'<b>Ace:</b> Slowbro<br />' +
-			'<font color="#80BFFF">The wordless conversations we share, The shiver in my spine when your hand touches me and how when there\'s only one soda left we share. The smell of your neck and the color of your eyes. How you think I\'m sexy in every size. The way that you laugh so hard you start to cry. I love you Eric.</font></center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/viL3eMc.png" width="120">' +
+			'<img src="http://i.imgur.com/H2MSVq9.png" width="280">' +
+			'<img src="http://i.imgur.com/jyVYmsB.png" width="140"><br />' +
+			'<b>Ace:</b> <font color="#99CC33">EricSaysHi</font><br />' +
+			'<font color="#99CC33">OH YOU DON\'T HAVE A SKARMORY #SHREKT</font></center>'
 		);
 	},
 
@@ -782,7 +826,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/JT64me1.gif" width="250">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated-shiny/642-therian.gif"><br />' +
 			'<b>Ace:</b> Charizard-X and Thundurus-T<br />' +
-			'<font face="Comic Sans MS">FUCK NIGGAS GET HIGH M8</font></center>'
+			'<font face="Comic Sans MS">I\'ll read you faster than the lyrics of Skrillex\'s dubsteps</font></center>'
 		);
 	},
 

@@ -555,13 +555,22 @@ body {
 
 
 .chat-log{
-	background: url("http://i.imgur.com/dIfUHsq.png") right top no-repeat;
+	background: url("http://i.imgur.com/vcIHH5Y.png") right top no-repeat;
 }
 
-.chat-log-add{
+.chat-log-add, .pm-log-add, .pm-window h3 {
 	background:#fbb88e;
 }
 
+.pm-log{
+	background: url(http://i.imgur.com/Q8vHT0Y.png);
+    border-width: 0;
+}
+
+.pm-window.focused h3, .pm-window.focused h3:hover {
+	background:#fbb88e;
+}
+	
 .menugroup .button{
 	background:#5a11ff;
 }

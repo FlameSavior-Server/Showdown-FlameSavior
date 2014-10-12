@@ -1860,6 +1860,11 @@ var commands = exports.commands = {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center><font size="5"><font color="#140391">ashbloodthief</font></font></center> <center><img src="http://107.191.104.240:8000/avatars/ashbloodthief.gif" width=100 height=100></center> <center><img src="http://fc04.deviantart.net/fs71/f/2013/259/f/f/mega_lucario_by_henshingeneration-d6mihft.jpg" width=270 height=200></center><br /> <center><font size="3"> Ace: Mega Lucario</font></center> <center><font size="3"> I\'m a being pure as energy! You can\'t stop me!</font></center>');
 	},
+	
+	chaotic: function(target, room, user) {
+		if (!this.canBroadCast()) return;
+		this.sendReplayBox("<center><img src=\"http://i.imgur.com/NVEZJG1.png\" title=\"Hosted by imgur.com\" width=\"400\" height=\"100\"> </a><br><img src=\"http://media0.giphy.com/media/DCp4s7Z1FizZe/giphy.gif\" width=\"250\" height=\"250\"><img src=\"http://i269.photobucket.com/albums/jj77/YandereGIFs/Durarara%20GIFs/IzayaScared.gif\" width=\"250\" height=\"250\"> <br><center><b>\"A Caterpie may change into a Butterfree, but the heart that beats inside remains the same.\"</b>");
+	},
 
     			//***********************Music Boxes***************************
 

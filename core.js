@@ -33,6 +33,10 @@ hashColor: function(name) {
 	return colorCache[name];
 },
 
+settings: {
+	emoteStatus: true
+},
+
 emoticons: {
         'Kappa': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-ddc6e3a8732cb50f-25x28.png',
         'PogChamp': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-60aa1af305e32d49-23x30.png',
@@ -101,25 +105,33 @@ emoticons: {
                 match = true;
             }
         }
-        
-        if (!match || message.charAt(0) === '!') return true;
-        message = Tools.escapeHTML(message);
-        message = this.processEmoticons(message);
-        if (user.userid === 'panpawn') {
-        	if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="#DA9D01"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
-		room.add('|raw|<div class="chat"><strong><font color="#DA9D01"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
-        	return false;
-        } 
-        else if (user.userid === 'antto') {
-        	if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="#D18010"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
-		room.add('|raw|<div class="chat"><strong><font color="#D18010"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
-        	return false;
-        } else {
-        	if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="' + hashColor(user.userid)+'"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
-        	room.add('|raw|<div class="chat"><strong><font color="' + hashColor(user.userid)+'"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
-        	return false;
-        }
-    },        
+        if (!Core.settings.emoteStatus) {
+		kitty = message = this.processEmoticons(message);		
+		var message = Tools.escapeHTML(kitty);
+		return (message);
+		return;
+	} else if (Core.settings.emoteStatus = true) {
+        	if (!match || message.charAt(0) === '!') return true;
+        	message = Tools.escapeHTML(message);
+        	message = this.processEmoticons(message);
+        	if (user.userid === 'panpawn') {
+        		if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="#DA9D01"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
+			room.add('|raw|<div class="chat"><strong><font color="#DA9D01"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
+        		return false;
+        	} 
+        	else if (user.userid === 'antto') {
+        		if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="#D18010"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
+			room.add('|raw|<div class="chat"><strong><font color="#D18010"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
+        		return false;
+        	} else {
+        		if (user.hiding) return room.add('|raw|<div class="chat"><strong><font color="' + hashColor(user.userid)+'"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
+        		room.add('|raw|<div class="chat"><strong><font color="' + hashColor(user.userid)+'"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong> <em class="mine">' + message + '</em></div>');
+        		return false;
+        	}
+	}
+},        
+
+	
 };
 function MD5(f) {
     function i(b, c) {

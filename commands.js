@@ -4047,9 +4047,6 @@ var commands = exports.commands = {
 				CommandParser.uncacheTree('./command-parser.js');
 				global.CommandParser = require('./command-parser.js');
 
-				CommandParser.uncacheTree('./economy.js');
-                		economy = require('./economy.js');
-
                 		CommandParser.uncacheTree('./hangman.js');
                 		hangman = require('./hangman.js').hangman(hangman);
 

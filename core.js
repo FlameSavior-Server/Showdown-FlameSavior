@@ -56,6 +56,7 @@ emoticons: {
         'shayMin': 'http://piq.codeus.net/static/media/userpics/piq_181515_25x25.png',
         'kiTTy': 'http://www.smileyarena.com/emoticons/Main/Cats/cat03.jpg',
         'wyNaut': 'http://i.imgur.com/UO1Wf2j.png',
+        'eltonJohn': 'https://www.looktothestars.org/photo/6341-elton-john/tiny_square.jpg',
         
         //End custom ones
         

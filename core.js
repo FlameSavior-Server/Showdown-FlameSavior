@@ -42,8 +42,8 @@ emoticons: {
         'PogChamp': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-60aa1af305e32d49-23x30.png',
         'BloodTrail': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-f124d3a96eff228a-41x28.png',
         'BibleThump': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-f6c13c7fc0a5c93d-36x30.png',
-        'feelsgd': 'http://i.imgur.com/qQswXLN.png',
-        'feelsbd': 'http://i.imgur.com/5LHzn78.png',
+        'feelsgd': 'http://i.imgur.com/s0QXKVx.png?1',
+        'feelsbd': 'http://i.imgur.com/TZvJ1lI.png?1',
         
         //Custom ones
         'Doge': 'http://piq.codeus.net/static/media/userpics/piq_155181_25x25.png',
@@ -89,9 +89,6 @@ emoticons: {
         }
 
         return text.replace(new RegExp(patterns.join('|'), 'g'), function (match) {
-            if (match === 'feelsbd' || match === 'feelsgd') return typeof self.emoticons[match] != 'undefined' ?
-                '<img src="' + self.emoticons[match] + '" title="' + match + '" width="30" height="30"/>' :
-                match;
             return typeof self.emoticons[match] != 'undefined' ?
                 '<img src="' + self.emoticons[match] + '" title="' + match + '"/>' :
                 match;

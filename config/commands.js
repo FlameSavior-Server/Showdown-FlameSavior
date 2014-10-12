@@ -1862,7 +1862,7 @@ var commands = exports.commands = {
 	},
 	
 	chaotic: function(target, room, user) {
-		if (!this.canBroadCast()) return;
+		if (!this.canBroadcast()) return;
 		this.sendReplayBox("<center><img src=\"http://i.imgur.com/NVEZJG1.png\" title=\"Hosted by imgur.com\" width=\"400\" height=\"100\"> </a><br><img src=\"http://media0.giphy.com/media/DCp4s7Z1FizZe/giphy.gif\" width=\"250\" height=\"250\"><img src=\"http://i269.photobucket.com/albums/jj77/YandereGIFs/Durarara%20GIFs/IzayaScared.gif\" width=\"250\" height=\"250\"> <br><center><b>\"A Caterpie may change into a Butterfree, but the heart that beats inside remains the same.\"</b>");
 	},
 

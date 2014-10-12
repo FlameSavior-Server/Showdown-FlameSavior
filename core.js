@@ -61,6 +61,7 @@ emoticons: {
         'kiTTy': 'http://www.smileyarena.com/emoticons/Main/Cats/cat03.jpg',
         'wyNaut': 'http://i.imgur.com/UO1Wf2j.png',
         'eltonJohn': 'https://www.looktothestars.org/photo/6341-elton-john/tiny_square.jpg',
+        'lewD': 'https://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-5614-src-67abf0c04ce28e50-28x28.png',
         
         //End custom ones
         

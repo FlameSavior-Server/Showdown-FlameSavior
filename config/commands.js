@@ -3276,6 +3276,20 @@ var commands = exports.commands = {
 		// secret sysop command
 		room.add(target);
 	},
+	
+	temotes: function(target, room, user) {
+		if(!user.can('hotpatch')) return;
+		if (toId(target) === 'off' || toId(target) === 'disable') {
+			Core.settings.emoteStatus = false;
+			room.add(user.name + ' has disabled chat emotes.');
+			this.logModCommand(user.name + ' has disabled chat emotes.');
+		}
+		if (toId(target) === 'on' || toId(target) === 'enable') {
+			Core.settings.emoteStatus = true;
+			room.add(user.name + ' has enabled chat emotes.');
+			this.logModCommand(user.name + ' has enabled chat emotes.');
+		}
+	},
 
 	emotes: 'emoticon',
 	emoticons: 'emoticon',

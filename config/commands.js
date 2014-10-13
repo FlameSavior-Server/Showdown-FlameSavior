@@ -3277,8 +3277,10 @@ var commands = exports.commands = {
 		room.add(target);
 	},
 	
+	toggleemotes: 'temotes',
 	temotes: function(target, room, user) {
 		if(!user.can('pban')) return;
+		if (!target) return this.sendReply('Valid targets are: "on" and "off".');
 		if (toId(target) === 'off' || toId(target) === 'disable') {
 			Core.settings.emoteStatus = false;
 			room.add(user.name + ' has disabled chat emotes.');

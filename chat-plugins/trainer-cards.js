@@ -4,6 +4,36 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	groan: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/m4tRalV.gif" width="160">' +
+			'<img src="http://i.imgur.com/RhCGRGP.png">' +
+			'<img src="http://i.imgur.com/SiKbveC.gif" width="160"><br />' +
+			'<b>Type:</b> Fire<br />' +
+			'Who u looking at bro? I\'m right there.</center>'
+		);
+	},
+
+	jay: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/BRlbCWc.gif" width="140">' +
+			'<img src="http://i.imgur.com/RuRbKXZ.gif" width="260">' +
+			'<img src="http://i.imgur.com/hcN6GM2.gif" width="140"><br />' +
+			'<b>Ace:</b> The \'Busken<br />' +
+			'Winning is habit. Unfortunately for you, so is losing.</center>'
+		);
+	},
+
+	vulbit: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://24.media.tumblr.com/ee46930284f95431fc451202b6be060d/tumblr_mvhp6ddtU91r1a7mvo1_500.png" height="160">' +
+			'<img src="http://i.imgur.com/2oGPsYQ.png">' +
+			'<img src="http://fc04.deviantart.net/fs71/i/2012/071/b/6/vulpix_and_growlithe_love_by_shinyeeveee-d4sin5z.jpg" width="180"><br />' +
+			'<b>Ace:</b> Ghost pokemon<br />' +
+			'Too spooky 5 you.</center>'
+		);
+	},
+
 	ccisbae: 'ericxcc',
 	ericxcc: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
@@ -14,7 +44,7 @@ exports.commands = {
 			'<font color="#66FFCC">Bros Before Hoes /me looks at Isawa.</font></center>'
 		);
 	},
-
+	
 	nicknames: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/af2WJgt.gif" width="140">' +
@@ -3233,14 +3263,21 @@ exports.commands = {
 		);
 	},
 
-	piers: 'isawa',
-	isawa: function (target, room, user) {
+	weedie: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/hwqR2b8.jpg" width="160" height="140">' +
-			'<img src="http://i.imgur.com/qZvvpNG.png?1" width="220">' +
-			'<img src="http://farm3.static.flickr.com/2755/4122651974_353e4287e8.jpg" width="160" height="130"><br />' +
-			'<b>Ace:</b> Piers Nivans<br />' +
-			'Rub-a-dub-dub, Isawa be in your tub</center>'
+		this.sendReplyBox('<center><img src="http://www.clker.com/cliparts/j/u/p/E/j/x/weed-hi.png" width="130">' +
+			'<img src="http://i.imgur.com/mNVem7G.png" width="280">' +
+			'<img src="http://www.clker.com/cliparts/j/u/p/E/j/x/weed-hi.png" width="130"><br />' +
+			'<img src="http://cloud-4.steampowered.com/ugc/450664152992073222/573584AF204AB10A0CCC4FDF07543C113C2D9D49/" width="100">' +
+			'<b>Ace:</b> Ph.D in Cuban Weedism Consumology' +
+			'<img src="http://cloud-4.steampowered.com/ugc/450664152992073222/573584AF204AB10A0CCC4FDF07543C113C2D9D49/" width="100"><br />' +
+			'<i>What happens in Vegas, stays in Vegas. Haven\'t paid Child Support since 1997.</i><br/>' +
+			'<img src="http://i.imgur.com/Zle9VaC.png">' +
+			'<img src="http://i.imgur.com/Zle9VaC.png">' +
+			'<img src="http://i.imgur.com/Zle9VaC.png">' +
+			'<img src="http://i.imgur.com/Zle9VaC.png">' +
+			'<img src="http://i.imgur.com/Zle9VaC.png">' +
+			'<img src="http://i.imgur.com/Zle9VaC.png"></center>'
 		);
 	},
 

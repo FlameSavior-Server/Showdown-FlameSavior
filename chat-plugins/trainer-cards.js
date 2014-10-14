@@ -166,15 +166,6 @@ exports.commands = {
 		);
 	},
 
-	cteam: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/LdH47rw.png" height="220"><br />' +
-			'<img src="http://i.imgur.com/PW94gbw.png" height="180"><br />' +
-			'<b>Ace:</b> Sniper and Skill<br />' +
-			'When you need a win, resort to counter teams.</center>'
-		);
-	},
-
 	at3: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/sBejrA3.gif" width="140">' +

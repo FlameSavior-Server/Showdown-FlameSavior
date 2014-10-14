@@ -230,13 +230,6 @@ exports.commands = {
             fs.appendfile('infofiles/trainercards.txt', '\''+user.name'\'')
 
         } else if (target === 'fix') {
-            var nofix = 0;
-            var tcs = fs.readFileSync('infofiles/trainercards.txt').toString();
-            var avatar = fs.readFileSync('infofiles/requestavy.txt').toString();
-            if (parseInt(user.avatar)) nofix++;
-            if (avatar.indexOf('\'' + user.userid + '\'') === -1) nofix++;
-            if (tcs.indexOf('\'' + user.userid + '\'') === -1) nofix++;
-            if (nofix > 0) return this.sendReply("You have bought neither a trainer card nor an avatar. There is no need to buy a fix.");
             var price = 10;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a fix.");
 
@@ -312,16 +305,14 @@ exports.commands = {
 
     customanimavatar: function(target, user, room) {
         target = target.trim()
-        if (user.requestedanimavy === true) return this.sendReply("You've already requested an animated avatar, wait for Silver to add it.");
+        if (user.requestedanimavy === true) return this.sendReply("You've already requested an animated avatar, wait for it to be added.");
         if (!user.hasanimavatar) return this.sendReply("You haven't bought an animated custom avatar yet!");
         if (!target) return this.sendReply("You have to enter in the image URL of the avatar you want. The avatar must be a .GIF image file.");
         if (target.indexOf('.gif') === -1) return this.sendReply("The file format must be .GIF.");
-        var avy = "\n '" + user.name + "', " + target;
-        fs.appendFile('infofiles/requestavy.txt', avy);
         this.sendReply("You have successfully requested an animated avatar! Wait for it to be added.");
         for (var i in Users.users) {
           if (Users.users[i].can('hotpatch') {
-            Users.users[i].send('|pm| Bot| '+user.name+' has bought a custom avatar. URL- '+target);
+            Users.users[i].send('|pm| Bot|' + Users.users[i].getIdentity() + '|'+user.name+' has bought a custom avatar. URL- '+target);
           }
         }
         return user.requestedanimavy = true;
@@ -330,16 +321,14 @@ exports.commands = {
 
     customavatar: function(target, room, user) {
         target = target.trim()
-        if (user.requestedavy === true) return this.sendReply("You've already requested a custom avatar, wait for Silver to add it.");
+        if (user.requestedavy === true) return this.sendReply("You've already requested a custom avatar, wait for it to be added.");
         if (!user.hasavatar) return this.sendReply("You haven't bought a custom avatar yet!");
         if (!target) return this.sendReply("You have to enter in the image URL of the avatar you want. The avatar cannot be a .GIF image file.");
         if (target.lastIndexOf('.gif') == target.length - 4) return this.sendReply("The file format cannot be .GIF.");
-        var avy = "\n '" + user.name + "', " + target;
-        fs.appendFile('infofiles/requestavy.txt', '\n' + avy);
         this.sendReply("You have successfully requested an avatar! Wait for it to be added.");
         for (var i in Users.users) {
           if (Users.users[i].can('hotpatch') {
-            Users.users[i].send('|pm| Bot| '+user.name+' has bought a custom avatar. URL- '+target);
+            Users.users[i].send('|pm| Bot|' + Users.users[i].getIdentity() + '|'+user.name+' has bought a custom avatar. URL- '+target);
           }
         }
         user.requestedavy = true;

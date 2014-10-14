@@ -199,9 +199,11 @@ exports.commands = {
                 '<b>' + Users.get(room.dice.members[1]).name + '</b> rolled ' + result2 + '!<br />' +
                 '<b>' + result3 + '</b><br />' + losemessage);
             if (result3 === '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' ' + point + '!') {
-                moneyStuff.transferAmt(Users.get(room.dice.members[1]).userid, Users.get(room.dice.members[0]).userid, 'money', room.dice.award);
+                moneyStuff.giveAmt(Users.get(room.dice.members[0]).userid, 'money', room.dice.award);
+                moneyStuff.removeAmt(Users.get(room.dice.members[1]).userid, 'money', room.dice.award);
             } else {
-                moneyStuff.transferAmt(Users.get(room.dice.members[0]).userid, Users.get(room.dice.members[1]).userid, 'money', room.dice.award);
+                moneyStuff.giveAmt(Users.get(room.dice.members[1]).userid, 'money', room.dice.award);
+                moneyStuff.removeAmt(Users.get(room.dice.members[0]).userid, 'money', room.dice.award);
             }
             delete room.dice;
         }

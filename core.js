@@ -64,7 +64,7 @@ emoticons: {
         'lewD': 'https://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-5614-src-67abf0c04ce28e50-28x28.png',
         '♥': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-577ade91d46d7edc-24x18.png',
         '^this': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-26110-src-f0cb5b62c8a523c2-28x28.png',
-        'shrek': 'http://i.imgur.com/5etZpLj.png',
+        'Shrek': 'http://i.imgur.com/5etZpLj.png',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

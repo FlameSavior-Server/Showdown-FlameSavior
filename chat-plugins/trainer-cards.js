@@ -4,6 +4,41 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	infinity: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://media-cache-ec0.pinimg.com/736x/44/57/01/445701e01a12aba58ef7501ca30b4818.jpg" width="160">' +
+			'<img src="http://i.imgur.com/ZfKV7n5.gif">' +
+			'<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1OaKzkpAtv8lhvZT_2m1tNVLMJe65uDnEQ8_OYcfaFszoDkv_" width="160"><br />' +
+			'<b>Ace:</b> ∞ Infinite ∞<br />' +
+			'∞ Life is a polynomial equation with a leading exponent of positive infinity; so you will never run out of solutions ∞</center>'
+		);
+	},
+
+	psi: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20090113224857/ssb/images/2/27/NessSprite.gif" height="140">' +
+			'<font color="orange" size="6">PSI Master Ness</font>' +
+			'<img src="http://fc08.deviantart.net/fs71/f/2013/341/f/8/psi_rockin_a_by_nintendofan8001-d6x4o5w.gif" width="160"><br />' +
+			'<b>Ace:</b> PSI Rockin Ω<br />' +
+			'Your money will be mine once you buy Earthbound.</center>'
+		);
+	},
+
+	ground: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/efSriei.png"><br />' +
+			'<img src="http://i.imgur.com/FV2Iny8.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/garchomp-mega.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/mamoswine.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/excadrill.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/hippowdon-f.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/gastrodon.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/landorus.png"><br />' +
+			'<b>Ace:</b> Stun, Ticken, and Firnen<br />' +
+			'"If all else fails, please get a life. Now."</center>'
+		);
+	},
+
 	groan: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/m4tRalV.gif" width="160">' +

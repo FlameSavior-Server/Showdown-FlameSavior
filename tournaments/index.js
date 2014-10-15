@@ -756,21 +756,10 @@ Tournament = (function() {
             var runnermoney = (runnerupcash > 1) ? 'points' : 'point';
             this.room.add('|raw|<b>' + Users.get(winner).name + ' has won <font color="green">' + wincash + '</font> ' + winmoney + ' for winning the tournament!</b>');
             if (runnerUp) this.room.add('|raw|<b>' + Users.get(runnerUp).name + ' has won <font color="green">' + runnerupcash + '</font> ' + runnermoney + ' as a runners-up reward!</b>');
-            var userdata = fs.readFileSync('config/userdata.json');
-            var amt = JSON.parse(userdata);
-            if (!amt[toId(winner)]) amt[toId(winner)] = {};
-            if (!amt[toId(winner)].money) amt[toId(winner)].money = 0;
-            if (!amt[toId(winner)].tourwins) amt[toId(winner)].tourwins = 0;
-            amt[toId(winner)].money += wincash;
-            amt[toId(winner)].tourwins += 1;
-            var finished = JSON.stringify(amt, null, 1);
-            fs.writeFile('config/userdata.json', finished);
+            moneyStuff.giveAmt(toId(winner), 'money', wincash);
+            moneyStuff.giveAmt(toId(winner), 'tourwins', 1);
             if (runnerupcash > 0) {
-                if (!amt[toId(runnerUp)]) amt[toId(runnerUp)] = {};
-                if (!amt[toId(runnerUp)].money) amt[toId(runnerUp)].money = 0;
-                amt[toId(runnerUp)].money += runnerupcash;
-                var finished1 = JSON.stringify(amt, null, 1);
-                fs.writeFile('config/userdata.json', finished1);
+                moneyStuff.giveAmt(toId(runnerUp), 'money', runnerupcash);
             }
         }
         this.isEnded = true;

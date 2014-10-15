@@ -604,15 +604,17 @@ exports.uncacheTree = function(root) {
 };
 
 function formatMessage(message) {
-    message = message.replace(/\*\*([^< ]([^<]*?[^< ])?)\*\*/g, '<b>$1</b>').replace(/\_\_([^< ]([^<]*?[^< ])?)\_\_/g, '<i>$1</i>').replace(/\[\[([^< ]([^<`]*?[^< ])?)\]\]/ig, '<a href = http://www.google.com/search?ie=UTF-8&btnI&q=$1>$1</a>');
+    if (typeof message == 'string') {
+        message = message.replace(/\*\*([^< ]([^<]*?[^< ])?)\*\*/g, '<b>$1</b>').replace(/\_\_([^< ]([^<]*?[^< ])?)\_\_/g, '<i>$1</i>').replace(/\[\[([^< ]([^<`]*?[^< ])?)\]\]/ig, '<a href = http://www.google.com/search?ie=UTF-8&btnI&q=$1>$1</a>');
 
-    message = message.replace(/(https?\:\/\/[a-z0-9-.]+(\:[0-9]+)?(\/([^\s]*[^\s?.,])?)?|[a-z0-9]([a-z0-9-\.]*[a-z0-9])?\.(com|org|net|edu|us)(\:[0-9]+)?((\/([^\s]*[^\s?.,])?)?|\b))/ig, (message.indexOf('http://') > -1 || message.indexOf('https://') > -1) ? '<a href = "$1">$1</a>' : '<a href = "http://$1">$1</a>');
+        message = message.replace(/(https?\:\/\/[a-z0-9-.]+(\:[0-9]+)?(\/([^\s]*[^\s?.,])?)?|[a-z0-9]([a-z0-9-\.]*[a-z0-9])?\.(com|org|net|edu|us)(\:[0-9]+)?((\/([^\s]*[^\s?.,])?)?|\b))/ig, (message.indexOf('http://') > -1 || message.indexOf('https://') > -1) ? '<a href = "$1">$1</a>' : '<a href = "http://$1">$1</a>');
 
-    if (message.indexOf('spoiler:') > -1) {
-        var position = message.indexOf('spoiler:') + 8;
-        if (message.charAt(position) === ':') position++;
-        if (message.charAt(position) === ' ') position++;
-        message = message.substr(0, position) + '<span class = "spoiler">' + message.substr(position) + '</span>';
+        if (message.indexOf('spoiler:') > -1) {
+            var position = message.indexOf('spoiler:') + 8;
+            if (message.charAt(position) === ':') position++;
+            if (message.charAt(position) === ' ') position++;
+            message = message.substr(0, position) + '<span class = "spoiler">' + message.substr(position) + '</span>';
+        }
     }
     return message;
 }

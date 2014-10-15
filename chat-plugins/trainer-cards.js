@@ -3309,11 +3309,11 @@ exports.commands = {
 
 	valisawa: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/fKplh4l.png" width="140">' +
-			'<img src="http://i.imgur.com/4PdzHja.png">' +
-			'<img src="http://i.imgur.com/LoI6bZv.jpg" width="120"><br />' +
+		this.sendReplyBox('<center><img src="http://static.comicvine.com/uploads/original/14/142946/3806084-7896083449-chris.jpg" width="150">' +
+			'<img src="http://i.imgur.com/ewy5FBD.png">' +
+			'<img src="http://fc01.deviantart.net/fs70/i/2012/307/1/6/ada_wong_by_val8-d5jj6yj.jpg" width="150"><br />' +
 			'<b>Ace:</b> Britannia Lovin\'<br />' +
-			'You are the Barney to my Robin and I am the Robin to your Barney. Let\'s sex.</center>'
+			'"I may be your AAADDDDAAAAAA, but you will never need to chase me, for I\'ll never run away."</center>'
 		);
 	},
 

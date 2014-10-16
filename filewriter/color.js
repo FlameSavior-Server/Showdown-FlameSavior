@@ -1,0 +1,2 @@
+var color = exports.color = {
+};

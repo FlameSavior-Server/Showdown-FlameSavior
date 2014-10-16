@@ -230,7 +230,7 @@ exports.commands = {
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a fix.");
             var nofix = 0;
             if (!Config.customavatars[user.userid]) nofix++;
-            if (!trainercards.trainercards[user]) nofix++
+            if (!require('./funstuff/trainercards').commands[user]) nofix++;
             if (nofix >= 2) return this.sendReply('You can\'t buy a fix when you neither have a trainer card nor a custom avatar!');
             room.add(user.name + ' bought a trainer card/avatar fix!');
             Rooms.rooms.staff.add(user.name + ' has bought a fix.');

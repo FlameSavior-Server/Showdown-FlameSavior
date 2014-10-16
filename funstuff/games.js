@@ -116,7 +116,7 @@ exports.commands = {
         if (!room.dice) {
             return this.sendReply('There is no dice game going on now');
         }
-        if (moneyStuff.checkAmt(user.userid, 'money') < room.dice.award) {
+        if (money.checkAmt(user.userid, 'money') < room.dice.award) {
             return this.sendReply("You don't have enough money to join this game of dice.");
         }
         for (var i = 0; i < room.dice.members.length; i++) {
@@ -199,11 +199,11 @@ exports.commands = {
                 '<b>' + Users.get(room.dice.members[1]).name + '</b> rolled ' + result2 + '!<br />' +
                 '<b>' + result3 + '</b><br />' + losemessage);
             if (result3 === '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' ' + point + '!') {
-                moneyStuff.giveAmt(Users.get(room.dice.members[0]).userid, 'money', room.dice.award);
-                moneyStuff.removeAmt(Users.get(room.dice.members[1]).userid, 'money', room.dice.award);
+                money.giveAmt(Users.get(room.dice.members[0]).userid, 'money', room.dice.award);
+                money.removeAmt(Users.get(room.dice.members[1]).userid, 'money', room.dice.award);
             } else {
-                moneyStuff.giveAmt(Users.get(room.dice.members[1]).userid, 'money', room.dice.award);
-                moneyStuff.removeAmt(Users.get(room.dice.members[0]).userid, 'money', room.dice.award);
+                money.giveAmt(Users.get(room.dice.members[1]).userid, 'money', room.dice.award);
+                money.removeAmt(Users.get(room.dice.members[0]).userid, 'money', room.dice.award);
             }
             delete room.dice;
         }
@@ -248,7 +248,7 @@ exports.commands = {
         if (!room.roulette) {
             return this.sendReply('There is no roulette going on right now.');
         }
-        if (moneyStuff.checkAmt(user.userid, 'money') < 1) return this.sendReply("You don't have enough money to place bets.");
+        if (money.checkAmt(user.userid, 'money') < 1) return this.sendReply("You don't have enough money to place bets.");
         target = toId(target);
         var targets = ['red', 'blue', 'yellow', 'green', 'black'];
         if (targets.indexOf(target) === -1) {
@@ -272,7 +272,7 @@ exports.commands = {
         room.roulette[user.userid].bets++;
         var bets = (room.roulette[user.userid].bets == 1) ? 'bet' : 'bets';
         this.sendReply('You have placed ' + room.roulette[user.userid].bets + ' ' + bets + ' on ' + target);
-        moneyStuff.removeAmt(user.userid, 'money', 1);
+        money.removeAmt(user.userid, 'money', 1);
     },
 
     db: 'deletebets',
@@ -281,7 +281,7 @@ exports.commands = {
             return this.sendReply('There is no roulette going on right now.');
         }
         if (!room.roulette[user.userid]) return this.sendReply("You haven't placed any bets yet!");
-        moneyStuff.giveAmt(user.userid, 'money', room.roulette[user.userid].bets);
+        money.giveAmt(user.userid, 'money', room.roulette[user.userid].bets);
         delete room.roulette[user.userid];
         return this.sendReply('All your bets in the current roulette have been removed.');
     },
@@ -349,7 +349,7 @@ exports.commands = {
             }
 
             for (var x = 0; x < winners.length; x++) {
-                moneyStuff.giveAmt(toId(winners[x]), 'money', (payout * room.roulette[toId(winners[x])].bets));
+                money.giveAmt(toId(winners[x]), 'money', (payout * room.roulette[toId(winners[x])].bets));
             }
         }
         delete room.roulette;
@@ -361,7 +361,7 @@ exports.commands = {
     endroul: function(target, room, user, connection, cmd) {
         if (!room.roulette) return this.sendReply('There is no roulette going on right now.');
         for (var i in room.roulette) {
-            moneyStuff.giveAmt(toId(i), 'money', room.roulette[i].bets);
+            money.giveAmt(toId(i), 'money', room.roulette[i].bets);
         }
         delete room.roulette;
         this.add('|html|<b>' + user.name + ' has ended the current roulette.');

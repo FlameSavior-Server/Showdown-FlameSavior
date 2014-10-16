@@ -14,12 +14,12 @@ exports.commands = {
         if (isNaN(target)) return this.sendReply("That isn't even a number, smartass.");
         if (target < 1) return this.sendReply('You cannot give ' + targetUser.name + ' anything less than 1 point!');
         if (target1 < 1) return this.sendReply("You can't give " + Users.get(target).name + " anything less than 1 point.");	
-        moneyStuff.giveAmt(targetUser.userid, 'money', target);
-        var total = (x == 1) ? 'point' : 'points';
-        var points = (moneyStuff.checkAmt(targetUser.userid, 'money') == 1) ? 'point' : 'points';
-        targetUser.send('|popup|' + user.name + ' has given you ' + target + ' ' + points + '. You now have ' + moneyStuff.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
-        Rooms.rooms.staff.add(user.name + ' has given ' + targetUser.name + ' ' + target + ' ' + points + '. This user now has ' + moneyStuff.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
-        return this.sendReply(targetUser.name + ' was given ' + target + ' ' + points + '. This user now has ' + moneyStuff.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
+        money.giveAmt(targetUser.userid, 'money', target);
+        var total = (parseInt(target) == 1) ? 'point' : 'points';
+        var points = (money.checkAmt(targetUser.userid, 'money') == 1) ? 'point' : 'points';
+        targetUser.send('|popup|' + user.name + ' has given you ' + target + ' ' + points + '. You now have ' + money.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
+        Rooms.rooms.staff.add(user.name + ' has given ' + targetUser.name + ' ' + target + ' ' + points + '. This user now has ' + money.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
+        return this.sendReply(targetUser.name + ' was given ' + target + ' ' + points + '. This user now has ' + money.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
     },
     
     removebucks: 'remove',
@@ -31,17 +31,15 @@ exports.commands = {
         if (!this.can('hotpatch')) return false;
         if (!target) return this.sendReply('The proper syntax is /'+cmd+' [user], [amount]');
         target = this.splitTarget(target);
-		    var targetUser = this.targetUser;
-	    	if (!targetUser) return this.sendReply('User '+this.targetUsername+' not found.');
-	    	if (!target) return this.sendReply('You need to mention the number of points you want to remove from '+targetUser.name);
-	    	if (isNaN(target)) return this.sendReply("That isn't even a number, smartass.");
-	    	if (moneyStuff.checkAmt(targetUser.userid, money) < target) return this.sendReply('You take away more points than what '+targetUser.name+' has!');
-        var y = moneyStuff.checkAmt(targetUser.userid, 'money');
-        moneyStuff.giveAmt(targetUser.userid, 'money', target);
-        var x = y - parseInt(target); 
-        var total = (x == 1) ? 'point' : 'points';
-	    	var points = (target == 1) ? 'point' : 'points';
-        targetUser.send('|popup|'+user.name+' has taken ' + target + ' '+points+' from you. You now have ' + x + ' '+total+'.');
+        var targetUser = this.targetUser;
+	if (!targetUser) return this.sendReply('User '+this.targetUsername+' not found.');
+	if (!target) return this.sendReply('You need to mention the number of points you want to remove from '+targetUser.name);
+	if (isNaN(target)) return this.sendReply("That isn't even a number, smartass.");
+	if (money.checkAmt(targetUser.userid, money) < target) return this.sendReply('You take away more points than what '+targetUser.name+' has!');
+        money.giveAmt(targetUser.userid, 'money', target);
+        var total = (money.checkAmt(targetUser.userid, 'money') == 1) ? 'point' : 'points';
+	var points = (target == 1) ? 'point' : 'points';
+        targetUser.send('|popup|'+user.name+' has taken ' + target + ' away '+points+' from you. You now have ' + x + ' '+total+'.');
         Rooms.rooms.staff.add(user.name + ' has taken away ' + target + ' ' + points + ' from '+targetUser.name+'. This user now has ' + x + ' '+total+'.');
         return this.sendReply('You have taken away '+target+' '+points+' from '+targetUser.name+'. This user now has ' + x + ' '+total+'.');
     },
@@ -55,10 +53,10 @@ exports.commands = {
         if (!Users.get(target)) {
             return this.sendReply('User ' + target + ' not found.');
         }
-        var y = moneyStuff.checkAmt(target, 'badges');
-        moneyStuff.giveAmt(target, 'badges', 1);
+        var y = money.checkAmt(target, 'badges');
+        money.giveAmt(target, 'badges', 1);
         var x = y + 1;
-		    var badges = (x == 1) ? 'Gym Badge' : 'Gym Badges';
+        var badges = (x == 1) ? 'Gym Badge' : 'Gym Badges';
         Users.get(target).send('|popup|Congratulations! You have won a Gym Badge! You now have ' + x + ' '+badges+'.');
         return this.sendReply(Users.get(target).name + ' was given a gym badge. This user now has ' + x + ' '+badges+'.');
         Rooms.rooms.staff.add(user.name + ' gave ' + Users.get(target).name + ' a Gym Badge. This user now has ' + x + ' '+badges+'.');
@@ -71,8 +69,8 @@ exports.commands = {
         if (!Users.get(target)) {
             return this.sendReply('User ' + target + ' not found.');
         }
-        var y = moneyStuff.checkAmt(target, 'symbols');
-        moneyStuff.giveAmt(target, 'symbols', 1);
+        var y = money.checkAmt(target, 'symbols');
+        money.giveAmt(target, 'symbols', 1);
         var x = y + 1;
 		    var symbols = (x == 1) ? 'Frontier Symbol' : 'Frontier Symbols';
         Users.get(target).send('|popup|Congratulations! You have won a Frontier Symbol! You now have ' + x + ' '+symbols+'.');
@@ -89,9 +87,9 @@ exports.commands = {
     atm: function(target, room, user) {
         if (!this.canBroadcast()) return;
         if (!target) target = user.userid;
-        var badges = moneyStuff.checkAmt(target, 'badges');
-        var money = moneyStuff.checkAmt(target, 'money');
-        var symbols = moneyStuff.checkAmt(target, 'symbols');
+        var badges = money.checkAmt(target, 'badges');
+        var money = money.checkAmt(target, 'money');
+        var symbols = money.checkAmt(target, 'symbols');
         if (badges === 0) badges = 'no';
 
         var p1 = (badges === 1 ? 'Badge' : 'Badges');
@@ -156,7 +154,7 @@ exports.commands = {
             if (user.hassymbol) return this.sendReply("You've already bought a custom symbol!");
             if (user.needssymbol) return this.sendReply("You've already bought a custom symbol!");
             var price = 5;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a symbol.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a symbol.");
 
             room.add(user.name + ' bought a custom symbol!');
             this.sendReply("You have bought a custom symbol. The symbol will wear off once you remain offline for more than an hour, or once the server restarts.");
@@ -165,7 +163,7 @@ exports.commands = {
 
         } else if (target === 'color') {
             var price = 15;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a custom color.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a custom color.");
 
 
             room.add(user.name + ' bought a custom color!');
@@ -178,7 +176,7 @@ exports.commands = {
             if (user.hasavatar === true) return this.sendReply("You've already bought a custom avatar! Type in /customavatar [URL] to request it.");
 	    if (!parseInt(user.avatar)) return this.sendReply('You already have a custom avatar!');
             var price = 25;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a custom avatar.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a custom avatar.");
 
 
             room.add(user.name + ' bought a custom avatar!');
@@ -191,7 +189,7 @@ exports.commands = {
             if (user.hasanimavatar === true) return this.sendReply("You've already bought an animated custom avatar! Type in /customanimavatar [URL] to request it.");
             if (user.avatar.indexOf('.gif') == (user.avatar.length - 4)) return this.sendReply("You already have a custom animated avatar!");
 	    var price = (!parseInt(user.avatar)) ? 20 : 40;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy an animated avatar.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy an animated avatar.");
 
             room.add(user.name + ' bought an animated custom avatar!');
             Rooms.rooms.staff.add(user.name + ' has bought an animated custom avatar.');
@@ -202,7 +200,7 @@ exports.commands = {
         } else if (target === 'room') {
             if (user.hasroom === true) return this.sendReply("You've already bought a chatroom for yourself!");
             var price = 80;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a symbol.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a symbol.");
 
             room.add(user.name + ' bought a chatroom!');
             Rooms.rooms.staff.add(user.name + ' has bought a chatroom.');
@@ -214,7 +212,7 @@ exports.commands = {
             var tcs = fs.readFileSync('infofiles/trainercards.txt');
             if (tcs.toString().indexOf(' ' + user.userid) > -1) return this.sendReply("You've already bought a trainer card!");
             var price = 40;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a Trainer Card.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a Trainer Card.");
 
             fs.appendFile('infofiles/trainercards.txt', '\n ' + user.userid);
             room.add(user.name + ' bought a trainer card!');
@@ -227,7 +225,7 @@ exports.commands = {
 
         } else if (target === 'fix') {
             var price = 10;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a fix.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a fix.");
             var nofix = 0;
             if (!Config.customavatars[user.userid]) nofix++;
             if (!require('./funstuff/trainercards').commands[user]) nofix++;
@@ -239,7 +237,7 @@ exports.commands = {
 
         } else if (target === 'poofmessage') {
             var price = 15;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to add a poof message.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to add a poof message.");
 
             room.add(user.name + ' bought the ability to add a poof message!');
             Rooms.rooms.staff.add(user.name + ' has bought the ability to add a poof message.');
@@ -252,7 +250,7 @@ exports.commands = {
         } else if (target === 'potd') {
             if (Config.potd) return this.sendReply('The Pokémon of the Day has already been set.');
             var price = 5;
-            if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to set the POTD.");
+            if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to set the POTD.");
 
             room.add(user.name + ' bought the ability to set the POTD!');
             Rooms.rooms.staff.add(user.name + ' has bought the ability to set the POTD.');
@@ -262,7 +260,7 @@ exports.commands = {
         } else {
             return this.sendReply("That item isn't in the shop.");
         }
-        moneyStuff.removeAmt(toId(user), "money", parseInt(price));
+        money.removeAmt(toId(user), "money", parseInt(price));
     },
 
     setpotd: function(target, room, user) {

@@ -277,12 +277,14 @@ body {
 	background:#6db9ec;
 }
 
-.astext {
-    background:none;
-    border:none;
-    margin:0;
-    padding:0;
-    cursor: pointer;
+.astext{
+ 	border: none;
+  background: none;
+  padding:0;
+  height: -20em;
+  font-family:Verdana,sans-serif;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .button-halloween {
@@ -570,7 +572,7 @@ body {
 .pm-window.focused h3, .pm-window.focused h3:hover {
 	background:#fbb88e;
 }
-	
+
 .menugroup .button{
 	background:#5a11ff;
 }

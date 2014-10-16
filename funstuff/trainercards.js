@@ -1,4 +1,4 @@
-var trainercards = exports.trainercards = {
+exports.commands = {
     //example trainer card. You don't need to copy the same thing, this trainer card is really plain and simple.
     siiilver: 'silver',
     silver: function (target, user, room) {

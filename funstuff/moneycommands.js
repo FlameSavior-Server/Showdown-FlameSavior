@@ -13,15 +13,13 @@ exports.commands = {
         if (!target) return this.sendReply('You need to mention the number of points you want to give ' + targetUser.name);
         if (isNaN(target)) return this.sendReply("That isn't even a number, smartass.");
         if (target < 1) return this.sendReply('You cannot give ' + targetUser.name + ' anything less than 1 point!');
-        if (target1 < 1) return this.sendReply("You can't give " + Users.get(target).name + " anything less than 1 point.");
-        var y = moneyStuff.checkAmt(targetUser.userid, 'money');
+        if (target1 < 1) return this.sendReply("You can't give " + Users.get(target).name + " anything less than 1 point.");	
         moneyStuff.giveAmt(targetUser.userid, 'money', target);
-        var x = y + parseInt(target);
         var total = (x == 1) ? 'point' : 'points';
-        var points = (target == 1) ? 'point' : 'points';
-        targetUser.send('|popup|' + user.name + ' has given you ' + target + ' ' + points + '. You now have ' + x + ' ' + total + '.');
-        Rooms.rooms.staff.add(user.name + ' has given ' + targetUser.name + ' ' + target + ' ' + points + '. This user now has ' + x + ' ' + total + '.');
-        return this.sendReply(targetUser.name + ' was given ' + target + ' ' + points + '. This user now has ' + x + ' ' + total + '.');
+        var points = (moneyStuff.checkAmt(targetUser.userid, 'money') == 1) ? 'point' : 'points';
+        targetUser.send('|popup|' + user.name + ' has given you ' + target + ' ' + points + '. You now have ' + moneyStuff.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
+        Rooms.rooms.staff.add(user.name + ' has given ' + targetUser.name + ' ' + target + ' ' + points + '. This user now has ' + moneyStuff.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
+        return this.sendReply(targetUser.name + ' was given ' + target + ' ' + points + '. This user now has ' + moneyStuff.checkAmt(targetUser.userid, 'money') + ' ' + total + '.');
     },
     
     removebucks: 'remove',
@@ -179,7 +177,6 @@ exports.commands = {
         } else if (target === 'avatar') {
             if (user.hasavatar === true) return this.sendReply("You've already bought a custom avatar! Type in /customavatar [URL] to request it.");
 	    if (!parseInt(user.avatar)) return this.sendReply('You already have a custom avatar!');
-	    if (fs.readFile('infofiles/requestavy.txt').toString().indexOf('\''+user.userid+'\'') > -1) return this.sendReply('You\'ve already requested a custom avatar! Wait for it to be added.');
             var price = 25;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a custom avatar.");
 
@@ -193,7 +190,6 @@ exports.commands = {
         } else if (target === 'animavatar') {
             if (user.hasanimavatar === true) return this.sendReply("You've already bought an animated custom avatar! Type in /customanimavatar [URL] to request it.");
             if (user.avatar.indexOf('.gif') == (user.avatar.length - 4)) return this.sendReply("You already have a custom animated avatar!");
-	    if (fs.readFile('infofiles/requestavy.txt').toString().indexOf('\''+user.userid+'\'') > -1) return this.sendReply('You\'ve already requested a custom avatar! Wait for it to be added.');
 	    var price = (!parseInt(user.avatar)) ? 20 : 40;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy an animated avatar.");
 
@@ -232,7 +228,10 @@ exports.commands = {
         } else if (target === 'fix') {
             var price = 10;
             if (moneyStuff.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a fix.");
-
+            var nofix = 0;
+            if (!Config.customavatars[user.userid]) nofix++;
+            if (!trainercards.trainercards[user]) nofix++
+            if (nofix >= 2) return this.sendReply('You can\'t buy a fix when you neither have a trainer card nor a custom avatar!');
             room.add(user.name + ' bought a trainer card/avatar fix!');
             Rooms.rooms.staff.add(user.name + ' has bought a fix.');
             this.sendReply("You have bought a fix for your trainer card or avatar.");

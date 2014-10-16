@@ -47,6 +47,10 @@ fs.readdirSync('./chat-plugins').forEach(function(file) {
     if (file.substr(-3) === '.js') Object.merge(commands, require('./chat-plugins/' + file).commands);
 });
 
+fs.readdirSync('./funstuff').forEach(function(file) {
+    if (file.substr(-3) === '.js') Object.merge(commands, require('./funstuff/' + file).commands);
+});
+
 /*********************************************************
  * Parser
  *********************************************************/

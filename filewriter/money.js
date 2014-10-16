@@ -1,7 +1,7 @@
 var fs = require('fs');
 var userdata = fs.readFileSync('config/userdata.json');
 var amt = JSON.parse(userdata);
-var moneyStuff = exports.moneyStuff = {
+var money = exports.money = {
 
     checkAmt: function(name, target) {
         if (!amt[toId(name)]) return 0;

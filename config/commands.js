@@ -3307,14 +3307,18 @@ var commands = exports.commands = {
 	emoticons: 'emoticon',
 	emoticon: function (target, room, user) {
         	if (!this.canBroadcast()) return;
-        	var name = Object.keys(Core.emoticons),
-            	emoticons = [];
-        	var len = name.length;
-        	while (len--) {
-            		emoticons.push((Core.processEmoticons(name[(name.length-1)-len]) + '&nbsp;' + name[(name.length-1)-len]));
-        	}
-        	this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
-    	},
+		if (!Core.settings.emoteStatus) {
+			return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
+		} else {
+			var name = Object.keys(Core.emoticons),
+			emoticons = [];
+			var len = name.length;
+        		while (len--) {
+        			emoticons.push((Core.processEmoticons(name[(name.length-1)-len]) + '&nbsp;' + name[(name.length-1)-len]));
+        		}
+        		this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
+    		}
+	},
 
 	sca: 'customavatar',
 	setcustomavatar: 'customavatar',

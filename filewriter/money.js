@@ -1,5 +1,5 @@
 var fs = require('fs');
-var userdata = fs.readFileSync('config/userdata.json');
+var userdata = fs.readFileSync('infofiles/userdata.json');
 var amt = JSON.parse(userdata);
 var money = exports.money = {
 
@@ -14,13 +14,8 @@ var money = exports.money = {
 
     giveAmt: function(name, target, target1) {
         if (!amt[toId(name)]) amt[toId(name)] = {};
-        if (!amt[toId(name)][target]) {
-            amt[toId(name)][target] = parseInt(amt[toId(name)][target]) + parseInt(target1);
-            var finished = JSON.stringify(amt, null, 1);
-            fs.writeFile('infofiles/userdata.json', finished);
-            return;
-        }
-        amt[toId(name)][target] += parseInt(target1);
+        if (amt[toId(name)][target]) amt[toId(name)][target] = parseInt(amt[toId(name)][target]) + parseInt(target1);
+        else amt[toId(name)][target] = parseInt(target1);
         var finished = JSON.stringify(amt, null, 1);
         fs.writeFile('infofiles/userdata.json', finished);
         return;

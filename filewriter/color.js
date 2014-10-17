@@ -151,8 +151,8 @@ var color = exports.color = {
         return;
     },
 
-    remove: function(name, target) {
-        delete colors[toId(name)][target];
+    remove: function(name) {
+        delete colors[toId(name)];
         return;
     }
 };

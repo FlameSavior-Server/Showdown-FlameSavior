@@ -754,12 +754,12 @@ Tournament = (function() {
             var runnerupcash = Math.floor(wincash / 4);
             var winmoney = (wincash > 1) ? 'points' : 'point';
             var runnermoney = (runnerupcash > 1) ? 'points' : 'point';
-            this.room.add('|raw|<b>' + Users.get(winner).name + ' has won <font color="green">' + wincash + '</font> ' + winmoney + ' for winning the tournament!</b>');
-            if (runnerUp) this.room.add('|raw|<b>' + Users.get(runnerUp).name + ' has won <font color="green">' + runnerupcash + '</font> ' + runnermoney + ' as a runners-up reward!</b>');
-            moneyStuff.giveAmt(toId(winner), 'money', wincash);
-            moneyStuff.giveAmt(toId(winner), 'tourwins', 1);
+            this.room.add('|raw|<b><font color = '+color.get(Users.get(winner).userid)+'>' + Users.get(winner).name + '</font> has won <font color="green">' + wincash + '</font> ' + winmoney + ' for winning the tournament!</b>');
+            if (runnerUp) this.room.add('|raw|<b><font color = '+color.get(Users.get(runnerUp).userid)+'>' + Users.get(runnerUp).name + '</font> has won <font color="green">' + runnerupcash + '</font> ' + runnermoney + ' as a runners-up reward!</b>');
+            money.giveAmt(toId(winner), 'money', wincash);
+            money.giveAmt(toId(winner), 'tourwins', 1);
             if (runnerupcash > 0) {
-                moneyStuff.giveAmt(toId(runnerUp), 'money', runnerupcash);
+                money.giveAmt(toId(runnerUp), 'money', runnerupcash);
             }
         }
         this.isEnded = true;

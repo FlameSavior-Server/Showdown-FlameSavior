@@ -375,7 +375,7 @@ exports.commands = {
             '<b>/vote [option]</b> - Votes on a poll option.<br />' +
             '<b>/unvote OR /removevote </b> - Removes your vote for a poll option.<br />' +
             '<b>/pollusers </b> - Checks the number of users who are voting.<br />' +
-            '<b>/pollremind or /pr</b> - Checks the poll options of the poll. Can be broadcasted.<br />' +
+            '<b>/pollremind or /prm</b> - Checks the poll options of the poll. Can be broadcasted.<br />' +
             '<b>/pollend OR /endpoll</b> - Ends the current poll. Must be ranked + or higher to use.');
     },
 
@@ -414,8 +414,9 @@ exports.commands = {
     voteoption: 'vote',
     vote: function(target, room, user) {
         if (!room.poll) return this.sendReply('There is no poll going on in this room.');
+        var originaltarget = target;
         target = target.toLowerCase().replace(/ /g, '');
-        if (Object.keys(room.poll.options).indexOf(target) == -1) return this.sendReply("'" + target + "' is not a valid poll option.");
+        if (Object.keys(room.poll.options).indexOf(target) == -1) return this.sendReply("'" + originaltarget + "' is not a valid poll option.");
         for (var i in room.poll.users) {
             if (Users.get(i).userid == user.userid) return this.sendReply('One of your alts is already voting in this poll.');
         }
@@ -428,15 +429,15 @@ exports.commands = {
             var oldpoll = room.poll.users[user.userid];
             room.poll.users[user.userid] = room.poll.options[target].name;
             room.poll.options[target].count++;
-            room.poll.options[oldpoll].count--;
+            room.poll.options[oldpoll.toLowerCase().replace(/ /g, '')].count--;
             return this.sendReply('You are now voting for \'' + room.poll.options[target].name + '\' instead of \'' + oldpoll + '\'.');
         }
     },
 
 
 
-    pollremind: 'pr',
-    pr: function(target, room, user) {
+    pollremind: 'prm',
+    prm: function(target, room, user) {
         if (!room.poll) return this.sendReply('There is no poll going on in this room.');
         if (!this.canBroadcast()) return;
         var options = '';

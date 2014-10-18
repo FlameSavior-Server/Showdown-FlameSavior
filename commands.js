@@ -2595,9 +2595,6 @@ var commands = exports.commands = {
 
 	roomunban: function(target, room, user, connection) {
 		if (!target) return this.parse('/help roomunban');
-		if(room.id === 'lobby') {
-		return this.sendReply('|html|No! Bad! Do not use this command here!');
-		}
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;

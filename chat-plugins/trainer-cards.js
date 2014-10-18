@@ -79,7 +79,7 @@ exports.commands = {
 			'<font color="#66FFCC">Bros Before Hoes /me looks at Isawa.</font></center>'
 		);
 	},
-	
+
 	nicknames: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/af2WJgt.gif" width="140">' +
@@ -375,6 +375,7 @@ exports.commands = {
 		);
 	},
 
+	arrow: 'artemis',
  	artemis: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/qhoIRP4.gif" width="160">' +

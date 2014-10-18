@@ -1,6 +1,11 @@
 var fs = require('fs');
 var colors = JSON.parse(fs.readFileSync('infofiles/usercolors.js'));
 var color = exports.color = {
+    
+    has: function(name) {
+        if (colors[toId(name)]) return true;
+        return false;
+    },
 
     get: function(name, target) {
         if (colors[toId(name)]) return '#' + colors[toId(name)];

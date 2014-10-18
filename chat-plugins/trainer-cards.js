@@ -1212,13 +1212,13 @@ exports.commands = {
 		);
 	},
 
-	mistic: function (target, room, user) {
+	mexxi: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/haQViF5.gif" width="140">' +
-			'<img src="http://i.imgur.com/LDQS4LO.gif">' +
-			'<img src="http://i.imgur.com/ofVvw0x.gif" width="130"><br />' +
-			'<b>Ace:</b> Butters<br />' +
-			'Putting the Laughter back into Manslaughter</center>'
+		this.sendReplyBox('<center><img src="http://imagehost4.online-image-editor.com/oie_upload/images/190583XiyU4X6/191126a7FKOoiq.gif">' +
+			'<img src="http://i.imgur.com/HSZ4qKa.gif">' +
+			'<img src="http://imagehost4.online-image-editor.com/oie_upload/images/190599ysbD2xSv/191228SQwnfoQZ.gif"><br />' +
+			'<b>Ace: </b>Mexican Standoffs<br />' +
+			'<b>Quote:</b> I Didn\'t ask to be Mexican, I Got Lucky</center>'
 		);
 	},
 

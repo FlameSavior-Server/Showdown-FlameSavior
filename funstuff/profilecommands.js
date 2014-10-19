@@ -47,12 +47,12 @@ exports.commands = {
         target = toId(target);
         if (!target) return this.sendReply('You need to specify a friend code.');
         if (isNaN(target)) {
-            return this.sendReply('Very funny, now use a real number.');
+            return this.sendReply("That isn't a number, you egg.");
         }
         if (target.length !== 12) {
-            return this.sendReply('That ain\'t a real friendcode, you lazy bum! Check your 3DS!');
+            return this.sendReply('That is not a valid friend code.');
         }
-        this.sendReply('You have successfully registered the friend code ' + target + '!');
+        this.sendReply('Your friend code, ' + target.substring(0, 4) + '-' + target.substring(4, 8) + '-' + target.substring(8, 12) + ' has been successfully registered!');
         profile.set(user.userid, "fc", target);
     },
 
@@ -64,7 +64,7 @@ exports.commands = {
         var code = JSON.parse(userdetails);
         if (!target) {
             if (this.broadcasting) {
-                this.sendReplyBox('Click <button name="send" value = "/fc">here</button> to see the list of 3DS Friend Codes. Type in <b>/rfc [Friend Code]</b> to register yours!');
+                this.sendReplyBox('Click <button name="send" value = "/fc">here</button> to see a list of 3DS Friend Codes. Type in <b>/rfc [Friend Code]</b> to register yours!');
             } else {
                 var total = [];
                 for (var i in code) {
@@ -133,6 +133,7 @@ exports.commands = {
 
     punchline: function(target, room, user) {
         if (!toId(target)) return this.sendReply('You need to specify a punchline.');
+        target = target.trim();
         profile.set(user.userid, "punchline", target);
         this.sendReply('Your punchline has now been changed to - "' + target + '"');
     },

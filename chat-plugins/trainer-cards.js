@@ -2731,6 +2731,7 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/sFNNKmw.gif" width="100">' +
 			'<img src="http://i.imgur.com/VEXXmGI.gif" width="200">' +
 			'<img src="http://i.imgur.com/jc9lM8G.gif" width="100"><br />' +
+			'<img src="http://i.imgur.com/fN1FfUR.gif" width="300"><br />' +
 			'<img src="http://i.imgur.com/quaTcsq.gif"><br />' +
 			'<img src="http://i.imgur.com/yla7jyY.gif"></center>'
 		);

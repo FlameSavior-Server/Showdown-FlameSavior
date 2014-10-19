@@ -5,6 +5,9 @@ npm-debug.log
 filewriter
 funstuff
 infofiles
+sysops.js
+/config/formats.js
+/data/rulesets.js
 
 # boilerplate #
 ###############

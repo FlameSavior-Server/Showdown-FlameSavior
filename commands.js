@@ -4044,6 +4044,9 @@ var commands = exports.commands = {
 
                 		CommandParser.uncacheTree('./hangman.js');
                 		hangman = require('./hangman.js').hangman(hangman);
+                		
+                		CommandParser.uncacheTree('./economy.js');
+				economy = require('./economy.js');
 
 				var runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments');

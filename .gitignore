@@ -9,6 +9,7 @@ sysops.js
 app.js
 users.js
 rooms.js
+command-parser.js
 /config/formats.js
 /data/rulesets.js
 

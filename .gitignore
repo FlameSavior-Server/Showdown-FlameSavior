@@ -6,6 +6,9 @@ filewriter
 funstuff
 infofiles
 sysops.js
+app.js
+users.js
+rooms.js
 /config/formats.js
 /data/rulesets.js
 

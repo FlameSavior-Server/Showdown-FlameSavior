@@ -299,18 +299,6 @@ exports.commands = {
 		);
 	},
 
-	blacklisted: 'blacklist',
-	blacklist: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/MBbvjym.jpg" width="120">' +
-			'<img src="http://i.imgur.com/hu4yLnt.gif" width="240">' +
-			'<img src="http://i.imgur.com/1UlWS7s.png" width="180"><br />' +
-			'<img src="http://i.imgur.com/8tbmo6e.png"><br />' +
-			'<b>Ace:</b> Haxnova<br />' +
-			'IS IT BECAUSE I\'M BLACK?</center>'
-		);
-	},
-
 	why: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://media.giphy.com/media/12KLnAcUamBzXO/giphy.gif" width="140">' +

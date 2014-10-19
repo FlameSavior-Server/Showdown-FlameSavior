@@ -3081,7 +3081,7 @@ var commands = exports.commands = {
 		if (tells[targetUser].length === 8) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
 
 		var date = Date();
-		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + message;
+		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + Tools.escapeHTML(message);
 		tells[targetUser].add(messageToSend);
 
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');

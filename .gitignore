@@ -2,6 +2,9 @@
 /logs/*
 /node_modules
 npm-debug.log
+filewriter
+funstuff
+infofiles
 
 # boilerplate #
 ###############

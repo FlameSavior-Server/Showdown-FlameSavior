@@ -4,6 +4,48 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	squirtlesquad: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/7abbca7812fe3ba9e257d5cbe484a071/tumblr_n91wug2Upv1tqptlzo1_500.gif" width="140">' +
+			'<font size="6"> Squirtle Squad</font>' +
+			'<img src="http://31.media.tumblr.com/61861759d29c0e5572545c1a7e20997c/tumblr_ml5l3rIGX41r8dy8go2_400.gif" width="140"><br />' +
+			'<b>Ace:</b> Squirtle<br />' +
+			'As my nigga Squirtle said, "Don\'t fuck with Squirtle, or Squirlte will fuck with you"</center>'
+		);
+	},
+
+	ninja: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://33.media.tumblr.com/1326727ed825132c71216f43d2024ed6/tumblr_ncxbz8mHtS1u0vdkwo1_500.gif" width="280">' +
+			'<img src="http://24.media.tumblr.com/13e8f0e07254604ba0ec1dba33a0a17a/tumblr_mkuoijueE01r7guhqo1_500.gif" width="250"><br />' +
+			'<b>Ace:</b> Slowking/Slowbro<br /></center>'
+		);
+	},
+
+	xvz: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://24.media.tumblr.com/005c58f92ab536749fd5f81e1da9e055/tumblr_min94qZsev1rmtxh8o1_500.gif" width="200">' +
+			'<img src="http://i.imgur.com/A3bcfZw.png">' +
+			'<img src="http://fc00.deviantart.net/fs71/i/2013/228/7/f/shiny_space_dragon_palkia_by_kodinami-d6icnxr.jpg" height="150"><br />' +
+			'<img src="https://www.planbox.com/blog/uploads/2011/01/roundhouse-kickoff-chuck-norris.jpg" width="160"><br />' +
+			'<b>Ace:</b> Palkia<br />' +
+			'Spacail rend + Roundhouse = DED BITCH.</center>'
+		);
+	},
+
+	trio: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://img4.wikia.nocookie.net/__cb20140225054554/pokemon/images/2/2c/Charizard_MegaX_XY.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/togekiss.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados-mega.gif">' +
+			'<img src="http://i.imgur.com/x9QjioI.gif">' +
+			'<img src="http://i.imgur.com/mqcObg0.gif">' +
+			'<img src="http://i.imgur.com/TYTDCMp.gif"><br />' +
+			'<b>Ace:</b> <font color="blue">Mega Charizard X, Togekiss, Mega Gyarados</font><br />' +
+			'"Flare the power, Ghost the knowledge, and Croven the experience." "Together these are three that broke the limits of the sky"</center>'
+		);
+	},
+
 	infinity: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://media-cache-ec0.pinimg.com/736x/44/57/01/445701e01a12aba58ef7501ca30b4818.jpg" width="160">' +

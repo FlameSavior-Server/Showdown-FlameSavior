@@ -459,6 +459,7 @@ exports.commands = {
 
     endpoll: 'endp',
     endp: function(target, room, user) {
+        if (!room.poll) return this.sendReply('There is no poll going on in this room.')
         if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to end a poll.');
         if (Object.keys(room.poll.users).length < 2) {
             delete room.poll;

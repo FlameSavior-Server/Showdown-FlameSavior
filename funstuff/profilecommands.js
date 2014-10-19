@@ -141,8 +141,7 @@ exports.commands = {
     profile: function(target, room, user, connection) {
         if (!this.canBroadcast()) return;
         if (!target) var target = user.userid;
-        if (!Users.get(target)) return this.sendReply(target + ' not found.');
-        var targetUser = Users.get(target);
+        var targetUser = Users.get(target) || target;
         var avy = 'play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png';
         var moneh = money.checkAmt(toId(target), 'money');
         var l = profile.checkDetails(toId(target), 'location');

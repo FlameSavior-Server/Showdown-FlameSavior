@@ -98,9 +98,7 @@ exports.commands = {
     dicegame: 'diceon',
     diceon: function(target, room, user, connection, cmd) {
         if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to be able to start a game of dice.');
-        if (room.dice) {
-            return this.sendReply('There is already a dice game going on');
-        }
+        if (room.dice) return this.sendReply('There is already a dice game going on');
         target = toId(target);
         if (!target) return this.sendReply('/' + cmd + ' [amount] - Starts a dice game in the room. The specified amount will be the amount of cash betted for.');
         if (isNaN(target)) return this.sendReply('That isn\'t a number, smartass.');
@@ -113,14 +111,11 @@ exports.commands = {
     },
 
     play: function(target, room, user, connection, cmd) {
-        if (!room.dice) {
-            return this.sendReply('There is no dice game going on now');
-        }
-        if (money.checkAmt(user.userid, 'money') < room.dice.award) {
-            return this.sendReply("You don't have enough money to join this game of dice.");
-        }
+        if (!room.dice) return this.sendReply('There is no dice game going on now');
+        if (money.checkAmt(user.userid, 'money') < room.dice.award) return this.sendReply("You don't have enough money to join this game of dice.");
         for (var i = 0; i < room.dice.members.length; i++) {
-            if (Users.get(room.dice.members[i]).userid == user.userid) return this.sendReply("You have already joined this game of dice!");
+            if ((Users.get(room.dice.members[i]) || toId(room.dice.members[i])) == user.userid) 
+            return this.sendReply("You have already joined the game of dice!");
         }
         room.dice.members.push(user.userid);
         this.add('|html|<b>' + user.name + ' has joined the game!');
@@ -418,7 +413,7 @@ exports.commands = {
         target = target.toLowerCase().replace(/ /g, '');
         if (Object.keys(room.poll.options).indexOf(target) == -1) return this.sendReply("'" + originaltarget + "' is not a valid poll option.");
         for (var i in room.poll.users) {
-            if (Users.get(i).userid == user.userid) return this.sendReply('One of your alts is already voting in this poll.');
+            if ((Users.get(i) || i) == user.userid) return this.sendReply('One of your alts are already voting in this poll.');
         }
         if (!room.poll.users[user.userid]) {
             room.poll.users[user.userid] = room.poll.options[target].name;

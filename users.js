@@ -84,15 +84,6 @@ var getExactUser = Users.getExact = function (name) {
 	return getUser(name, true);
 };
 
-try {
-	Users.bannedMessages = fs.readFileSync('config/bannedmessages.txt','utf8');
-} catch(e) {
-	Users.bannedMessages = '';
-	fs.writeFileSync('config/bannedmessages.txt','','utf8');
-}
-
-Users.bannedMessages = Users.bannedMessages.split('\n');
-
 Users.readVips = function() {
 	fs.readFile('config/vips.txt', 'utf8', function(err, data) {
 		Users.vips = {};
@@ -269,7 +260,6 @@ var connections = Users.connections = Object.create(null);
 var connectedIps = Users.connectedIps = Object.create(null);
 
 Users.shortenHost = function (host) {
-	if (!host) return '';
 	var dotIndex = host.lastIndexOf('.');
 	if (host.substr(-6, 4) === '.co.') dotIndex = host.length - 6;
 	if (dotIndex >= 1) dotIndex = host.lastIndexOf('.', dotIndex - 1);
@@ -277,9 +267,10 @@ Users.shortenHost = function (host) {
 	return shortHost;
 };
 
-Users.socketConnect = function(worker, workerid, socketid, ip) {
+Users.socketConnect = function (worker, workerid, socketid, ip) {
 	var id = '' + workerid + '-' + socketid;
 	var connection = connections[id] = new Connection(id, worker, socketid, null, ip);
+
 	if (!connectedIps[ip]) {
 		connectedIps[ip] = 1;
 	} else {
@@ -314,7 +305,7 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 	}
 	// Emergency mode connections logging
 	if (Config.emergency) {
-		fs.appendFile('logs/cons.emergency.log', '[' + ip + ']\n', function (err){
+		fs.appendFile('logs/cons.emergency.log', '[' + ip + ']\n', function (err) {
 			if (err) {
 				console.log('!! Error in emergency conns log !!');
 				throw err;
@@ -360,11 +351,6 @@ Users.socketConnect = function(worker, workerid, socketid, ip) {
 	user.joinRoom('global', connection);
 
 	Dnsbl.query(connection.ip, function (isBlocked) {
-		/*if (isBlocked) {
-			connection.popup("Your IP is known for abuse and has been locked. If you're using a proxy, don't.");
-			if (connection.user) connection.user.lock(true);
-		}*/
-
 		if (isBlocked) {
 			switch (isBlocked) {
 				case 'sbl.spamhaus.org':
@@ -453,7 +439,7 @@ Users.socketReceive = function (worker, workerid, socketid, message) {
 		return;
 	}
 	lines = lines.split('\n');
-	if (lines.length >= THROTTLE_MULTILINE_WARN) {
+	if (lines.length >= THROTTLE_MULTILINE_WARN && !user.frostDev) {
 		connection.popup("You're sending too many lines at once. Try using a paste service like [[Pastebin]].");
 		return;
 	}
@@ -569,6 +555,7 @@ User = (function () {
 
 		if (connection.user) connection.user = this;
 		this.connections = [connection];
+		this.latestHost = '';
 		this.ips = {};
 		this.ips[connection.ip] = 1;
 		// Note: Using the user's latest IP for anything will usually be
@@ -600,6 +587,7 @@ User = (function () {
 	// for the anti-spamming mechanism
 	User.prototype.lastMessage = '';
 	User.prototype.lastMessageTime = 0;
+	User.prototype.lastReportTime = 0;
 
 	User.prototype.blockChallenges = false;
 	User.prototype.ignorePMs = false;
@@ -627,7 +615,6 @@ User = (function () {
 		if (this.locked) {
 			return '‽' + this.name;
 		}
-		if (this.group === '~' || this.group === '&') return this.group+this.name;
 		if (roomid) {
 			if (this.mutedRooms[roomid]) {
 				return '!' + this.name;
@@ -652,12 +639,6 @@ User = (function () {
 			if (target.frostDev) return false;
 			targetGroup = target.group;
 		}
-
-		if (room) {
-			if (this.mutedRooms[room.id]) return false;
-		}
-		if (this.locked) return false;
-
 		var groupData = Config.groups[group];
 		var checkedGroups = {};
 
@@ -766,7 +747,6 @@ User = (function () {
 	User.prototype.canPromote = function (sourceGroup, targetGroup) {
 		return this.can('promote', {group:sourceGroup}) && this.can('promote', {group:targetGroup});
 	};
-
 	User.prototype.forceRename = function (name, authenticated, forcible) {
 		try {
 			var frostcommands = global.frostcommands;
@@ -836,7 +816,6 @@ User = (function () {
 		}
 		return true;
 	};
-
 	User.prototype.resetName = function () {
 		var name = 'Guest ' + this.guestNum;
 		var userid = toId(name);
@@ -1025,14 +1004,13 @@ User = (function () {
 			// 	console.log('IDENTIFY: ' + name + ' [' + this.name + '] [' + challenge.substr(0, 15) + ']');
 			// }
 
+			var frostDev = false;
+			var vip = false;
+
 			var group = Config.groupsranking[0];
 			var isSysop = false;
 			var avatar = 0;
 			var authenticated = false;
-
-			var frostDev = false;
-			var vip = false;
-
 			// user types (body):
 			//   1: unregistered user
 			//   2: registered user
@@ -1429,10 +1407,8 @@ User = (function () {
 		if (!this.can('bypassall')) {
 			// check if user has permission to join
 			if (room.staffRoom && !this.isStaff) return false;
-
 			if (room.vip && !this.vip && !this.isStaff) return false;
 			if (room.id === 'seniorstaff' && !this.can('seniorstaff')) return false;
-
 			if (room.bannedUsers) {
 				if (this.userid in room.bannedUsers || this.autoconfirmed in room.bannedUsers) {
 					return false;
@@ -1451,7 +1427,7 @@ User = (function () {
 				if (this.connections[i].rooms['global']) {
 					this.joinRoom(room, this.connections[i]);
 				}
-				if (!room.active && !room.protect && room.type === 'chat') {
+				if (!room.active && !room.protect && room.type === 'chat' && room.messageCount < 50) {
 					this.connections[i].sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
 				}
 			}
@@ -1466,7 +1442,7 @@ User = (function () {
 				room.onJoinConnection(this, connection);
 			}
 			connection.joinRoom(room);
-			if (!room.active && !room.protect && room.type === 'chat') connection.sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
+			if (!room.active && !room.protect && room.type === 'chat' && room.messageCount < 50) this.connections[i].sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
 		}
 		return true;
 	};
@@ -1630,7 +1606,7 @@ User = (function () {
 			}
 			return false;
 		}
-		Rooms.global.startBattle(this, user, user.challengeTo.format, false, this.team, user.challengeTo.team);
+		Rooms.global.startBattle(this, user, user.challengeTo.format, this.team, user.challengeTo.team, {rated: false});
 		delete this.challengesFrom[user.userid];
 		user.challengeTo = null;
 		this.updateChallenges();
@@ -1648,45 +1624,13 @@ User = (function () {
 	 */
 	User.prototype.chat = function (message, room, connection) {
 		var now = new Date().getTime();
-	 	this.lastActive = now;
 
-		if (message.substr(0, 16) === '/cmd userdetails') {
+		if (message.substr(0, 16) === '/cmd userdetails' || connection.user.frostDev) {
 			// certain commands are exempt from the queue
 			ResourceMonitor.activeIp = connection.ip;
 			room.chat(this, message, connection);
 			ResourceMonitor.activeIp = null;
 			return false; // but end the loop here
-		}
-
-		if (!room.isPrivate) {
-			for (var x in Users.bannedMessages) {
-				if (message.toLowerCase().indexOf(Users.bannedMessages[x]) > -1 && Users.bannedMessages[x] !== '' && message.substr(0,1) !== '/') {
-					if (connection.user.locked) return false;
-					connection.user.lock();
-					connection.user.popup('You have been automatically locked for sending a message containing a banned word. If you feel this was a mistake please contact a staff member.');
-					fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was locked from talking by the Server ('+Users.bannedMessages[x]+') ('+connection.ip+')\n');
-					messageSeniorStaff(connection.user.name+' has been automatically locked for sending a message containing a banned word. Room: '+room.id+' Message: ' + message);
-					return false;
-				}
-			}
-		}
-
-		// There has to be a better way to do this...
-		if (toId(message).indexOf('psimus') > -1 && message.toLowerCase().indexOf('frost.psim.us') === -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~frost") === -1 && !this.can('seniorstaff') || message.toLowerCase().indexOf("pokemonshowdown.com/servers/") > -1 && message.toLowerCase().indexOf("pokemonshowdown.com/servers/frost") === -1 && !this.can('seniorstaff')) {
-			if (connection.user.locked) return false;
-			if (!this.advWarns) this.advWarns = 0;
-			this.advWarns++;
-			if (this.advWarns > 1) {
-				this.lock();
-				fs.appendFile('logs/modlog/modlog_staff.txt','[' + (new Date().toJSON()) + '] (staff) '+this.name+' was locked from talking by the Server. (Advertising) ('+connection.ip+')\n');
-				connection.sendTo(room, '|raw|<strong class="message-throttle-notice">You have been locked for attempting to advertise.');
-				Users.messageSeniorStaff(this.name+' has been locked for attempting to advertise. Room: '+room.id+'. Message: '+message);
-				return false;
-			}
-			Users.messageSeniorStaff(this.name+' has attempted to advertise. Room: '+room.id+'. Message: '+message);
-			connection.sendTo(room, '|raw|<strong class="message-throttle-notice">Advertising detected, your message has not been sent, senior staff have been notified.<br />Further attempts to advertise may result in being locked.</strong>');
-			connection.user.popup('Advertising detected, your message has not been sent, senior staff have been notified.\nFurther attempts to advertise may result in being locked.');
-			return false;
 		}
 
 		if (this.chatQueueTimeout) {

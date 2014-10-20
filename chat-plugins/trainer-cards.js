@@ -4,6 +4,18 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	warlic: function(target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src=http://i.imgur.com/7S2AqQ4.png><br />' +
+			'<b>Ace:</b> Arcadia<br />' +
+			'Come to arcadia: we have dead hours, tiny tours (most of which you\'ll see elsewhere),' +
+			'including gamble tours that never happen, a customizable poll which isn\'t anything spe' +
+			'cial and a much lamer version of autovoice and pokemon news that you could find on sere' +
+			'bii instead and if anyone there doesn\'t want to play me in most tiers pm me because I\'' +
+			'm not good at battling and I also don\'t know how to use commas'
+		);
+	},
+
 	squirtlesquad: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/7abbca7812fe3ba9e257d5cbe484a071/tumblr_n91wug2Upv1tqptlzo1_500.gif" width="140">' +

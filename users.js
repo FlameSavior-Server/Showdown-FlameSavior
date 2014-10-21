@@ -1442,7 +1442,7 @@ User = (function () {
 				room.onJoinConnection(this, connection);
 			}
 			connection.joinRoom(room);
-			if (!room.active && !room.protect && room.type === 'chat' && room.messageCount < 50) this.connections[i].sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
+			if (!room.active && !room.protect && room.type === 'chat' && room.messageCount < 50) connection.sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
 		}
 		return true;
 	};

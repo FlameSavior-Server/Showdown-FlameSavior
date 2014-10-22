@@ -1791,13 +1791,13 @@ exports.commands = {
 		);
 	},
 
-	xbane: function (target, room, user) {
+	bane: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/YX5NfOz.jpg" width="160">' +
 			'<img src="http://i.imgur.com/Me5jPPo.png">' +
-			'<img src="http://www.hollywoodreporter.com/sites/default/files/imagecache/blog_post_349_width/2013/09/robocop_poster_p_2013.jpg" width="130"><br />' +
+			'<img src="http://media1.giphy.com/media/eqe4gAJczdMrK/giphy.gif" width="130" height="130"><br />' +
 			'<b>Ace:</b> X-Behemoth<br />' +
-			'Analyze, Adapt, Assimilate. I am <i><b>X-Bane.</b></i></center>'
+			'Pokemon are like people. You can give them all fancy new gadgets or clothes but, you cant change who or what they are.</center>'
 		);
 	},
 

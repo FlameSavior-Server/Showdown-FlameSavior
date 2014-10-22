@@ -214,14 +214,12 @@ exports.commands = {
             var price = 40;
             if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a Trainer Card.");
 
-            fs.appendFile('infofiles/trainercards.txt', '\n ' + user.userid);
             room.add(user.name + ' bought a trainer card!');
             Rooms.rooms.staff.add(user.name + ' has bought a trainer card.');
             this.sendReply("You have bought a trainer card. PM an admin to add it.");
             for (var i in Users.users) {
             	if (Users.users[i].can('hotpatch')) Users.users[i].send('|pm| Bot|'+user.name+' has bought a trainer card.')
             }
-            fs.appendfile('infofiles/trainercards.txt', '\''+user.name'\'')
 
         } else if (target === 'fix') {
             var price = 10;
@@ -290,12 +288,7 @@ exports.commands = {
         }
         if (target.length !== 6) return this.sendReply('|html|The hex code must be exactly 6 characters long. If you don\'t know what a hex color code is, <a href = "http://www.2createawebsite.com/build/hex-colors.html"><u>This</u></a> should help you choose.');
 
-        var usercolor = fs.readFileSync('infofiles/usercolors.json');
-        var color = JSON.parse(usercolor);
-        if (!color[user.userid]) color[user.userid] = {};
-        color[user.userid].color = target;
-        var set = JSON.stringify(color, null, 1);
-        fs.writeFile('infofiles/usercolors.json', set);
+        color.set(user.userid, target);
         user.needscolor = false;
         return this.sendReply('|html|Your color has successfully been set as <font color = #' + target + '><b>#' + target);
     },

@@ -160,7 +160,7 @@
  * @license MIT license
  */
 
-var tiersforpoll = 'Randbats, Rand Mono, Rand LC, Challenge Cup, CC1v1, 1v1, [Gen 5] 1v1, OU, [Gen 5] OU, OU Mono, [Gen 5] Mono, UU, [Gen 5] UU, RU, NU, LC, [Gen 5] LC, CAP, Ubers, Doubles, [Gen 5] Doubles, Triples, Perseverance, Seasonal, Balanced Hackmons, Inverse, Sky Battles, STABmons, PU, Middle Cup';
+var tiersforpoll = 'Randbats, Rand Mono, Rand LC, Challenge Cup, CC1v1, 1v1, [Gen 5] 1v1, OU, [Gen 5] OU, ORAS OU, OU Mono, [Gen 5] Mono, UU, [Gen 5] UU, RU, NU, LC, [Gen 5] LC, CAP, Ubers, Doubles, [Gen 5] Doubles, Triples, Perseverance, Seasonal, Balanced Hackmons, Inverse, Sky Battles, STABmons, PU, Middle Cup';
 
 var commands = exports.commands = {
 

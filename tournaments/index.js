@@ -138,7 +138,10 @@ Tournament = (function () {
 	Tournament.prototype.forceEnd = function () {
 		if (this.isTournamentStarted) {
 			this.inProgressMatches.forEach(function (match) {
-				if (match) delete match.room.win;
+				if (match) {
+					delete match.room.tour;
+					match.room.addRaw("<div class=\"broadcast-red\"><b>The tournament was forcefully ended.</b><br />You can finish playing, but this battle is no longer considered a tournament battle.</div>");
+				}
 			});
 		}
 		this.isEnded = true;
@@ -230,6 +233,7 @@ Tournament = (function () {
 				} else {
 					this.removeUser(user);
 				}
+				this.room.update();
 			}
 		}, this);
 	};
@@ -482,7 +486,7 @@ Tournament = (function () {
 		if (matchFrom) {
 			this.generator.setUserBusy(matchFrom.to, false);
 			this.inProgressMatches.set(user, null);
-			delete matchFrom.room.win;
+			delete matchFrom.room.tour;
 			matchFrom.room.forfeit(user);
 		}
 
@@ -493,7 +497,7 @@ Tournament = (function () {
 		if (matchTo) {
 			this.generator.setUserBusy(matchTo, false);
 			var matchRoom = this.inProgressMatches.get(matchTo).room;
-			delete matchRoom.win;
+			delete matchRoom.tour;
 			matchRoom.forfeit(user);
 			this.inProgressMatches.set(matchTo, null);
 		}
@@ -553,6 +557,7 @@ Tournament = (function () {
 
 			if (Date.now() > time + this.autoDisqualifyTimeout && this.isAutoDisqualifyWarned.get(user)) {
 				this.disqualifyUser(user);
+				this.room.update();
 			} else if (Date.now() > time + this.autoDisqualifyTimeout - AUTO_DISQUALIFY_WARNING_TIMEOUT && !this.isAutoDisqualifyWarned.get(user)) {
 				var remainingTime = this.autoDisqualifyTimeout - Date.now() + time;
 				if (remainingTime <= 0) {
@@ -660,17 +665,14 @@ Tournament = (function () {
 		user.sendTo(this.room, '|tournament|update|{"challenged":null}');
 
 		this.inProgressMatches.set(challenge.from, {to: user, room: room});
-		if (!this.room.hideTourBattles) this.room.add('|tournament|battlestart|' + challenge.from.name + '|' + user.name + '|' + room.id);
+		if (!this.room.hideTourBattles) {
+			this.room.add('|tournament|battlestart|' + challenge.from.name + '|' + user.name + '|' + room.id);
+			this.room.update();
+		}
 
 		this.isBracketInvalidated = true;
 		this.runAutoDisqualify();
 		this.update();
-
-		var self = this;
-		room.win = function (winner) {
-			self.onBattleWin(this, Users.get(winner));
-			return Object.getPrototypeOf(this).win.call(this, winner);
-		};
 	};
 	Tournament.prototype.onBattleWin = function (room, winner) {
 		var from = Users.get(room.p1);
@@ -698,14 +700,14 @@ Tournament = (function () {
 
 			this.runAutoDisqualify();
 			this.update();
-			return;
+			return this.room.update();
 		}
 
 		var error = this.generator.setMatchResult([from, to], result, room.battle.score);
 		if (error) {
 			// Should never happen
 			this.room.add("Unexpected " + error + " from setMatchResult([" + from.userid + ", " + to.userid + "], " + result + ", " + room.battle.score + ") in onBattleWin(" + room.id + ", " + winner.userid + "). Please report this to an admin.");
-			return;
+			return this.room.update();
 		}
 
 		if (!this.room.hideTourWins) this.room.add('|tournament|battleend|' + from.name + '|' + to.name + '|' + result + '|' + room.battle.score.join(','));
@@ -727,6 +729,7 @@ Tournament = (function () {
 			this.runAutoDisqualify();
 			this.update();
 		}
+		this.room.update();
 	};
 	Tournament.prototype.onTournamentEnd = function () {
 		this.room.add('|tournament|end|' + JSON.stringify({
@@ -794,6 +797,7 @@ Tournament = (function () {
 			frostcommands.addTourWin(winner,this.format);
 		} catch (e) {}
 		delete exports.tournaments[toId(this.room.id)];
+		this.room.update();
 	};
 
 	return Tournament;

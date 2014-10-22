@@ -291,7 +291,7 @@ var commands = exports.commands = {
 
 	modjoin: function (target, room, user) {
 		if (!this.can('privateroom', null, room)) return;
-		if (target === 'off') {
+		if (target === 'off' || target === 'false') {
 			delete room.modjoin;
 			this.addModCommand("" + user.name + " turned off modjoin.");
 			if (room.chatRoomData) {
@@ -299,8 +299,16 @@ var commands = exports.commands = {
 				Rooms.global.writeChatRoomData();
 			}
 		} else {
-			room.modjoin = true;
-			this.addModCommand("" + user.name + " turned on modjoin.");
+			if (target in Config.groups) {
+				room.modjoin = target;
+				this.addModCommand("" + user.name + " set modjoin to " + target + ".");
+			} else if (target === 'on' || target === 'true' || !target) {
+				room.modjoin = true;
+				this.addModCommand("" + user.name + " turned on modjoin.");
+			} else {
+				this.sendReply("Unrecognized modjoin setting.");
+				return false;
+			}
 			if (room.chatRoomData) {
 				room.chatRoomData.modjoin = true;
 				Rooms.global.writeChatRoomData();
@@ -1547,7 +1555,7 @@ var commands = exports.commands = {
 		this.privateModCommand("(" + entry + ")");
 		Rooms.global.cancelSearch(targetUser);
 		targetUser.resetName();
-		targetUser.send("|nametaken||" + user.name + " has forced you to change your name. " + target);
+		targetUser.send("|nametaken||" + user.name + " considers your name inappropriate" + (reason ? ": " + reason : "."));
 	},
 
 	cry: 'complain',

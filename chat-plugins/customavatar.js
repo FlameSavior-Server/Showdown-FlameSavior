@@ -72,7 +72,7 @@ exports.commands = {
 			return this.sendReplyBox(message);
 		}
 
-		if (!this.can('customavatar')) return false;
+		if (!this.can('customavatar') && !user.vip) return false;
 
 		switch (cmd) {
 			case 'set':

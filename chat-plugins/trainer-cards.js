@@ -4,18 +4,46 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
-	warlic: function(target, room, user) {
+	tweakin: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src=http://i.imgur.com/7S2AqQ4.png><br />' +
-			'<b>Ace:</b> Arcadia<br />' +
-			'Come to arcadia: we have dead hours, tiny tours (most of which you\'ll see elsewhere),' +
-			'including gamble tours that never happen, a customizable poll which isn\'t anything spe' +
-			'cial and a much lamer version of autovoice and pokemon news that you could find on sere' +
-			'bii instead and if anyone there doesn\'t want to play me in most tiers pm me because I\'' +
-			'm not good at battling and I also don\'t know how to use commas'
+		this.sendReplyBox('<center><img src="http://images.rapgenius.com/6adb4367869aef3e9fdf438d997ae4be.600x600x1.jpg" width="160">' +
+			'<img src="http://i.imgur.com/jsyZowp.png">' +
+			'<img src="http://i.imgur.com/CuwpIeB.gif" width="140"><br />' +
+			'<b>Ace:</b> Bobby Shmurda<br />' +
+			'Fuck with us and then we tweaking, ho.</center>'
 		);
 	},
 
+	timp: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i434.photobucket.com/albums/qq69/Fire_Luigi/Unbenannt.jpg" height="160">' +
+			'<img src="http://i.imgur.com/AcFm6pD.png" width="450"><br />' +
+			'<b>Ace:</b> Furret<br />' +
+			'D-do you want to have cake in the shower with me?</center>'
+		);
+	},
+
+	raju: 'afd',
+	afd: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="https://img1.etsystatic.com/005/0/6748910/il_fullxfull.406861865_l48j.jpg" width="90">' +
+			'<img src="http://i.imgur.com/4qy7RyE.gif" width="350">' +
+			'<img src="http://artdrum.com/IMAGES/PHOTOSDRUMSINSTRUMENTS/TABLA_DRUMS_COPPER_SAJID_PRO.jpg" width="90"><br />' +
+			'<b>Ace:</b> Eating Samosas<br />' +
+			'Kya hui hain baat.</center>'
+		);
+	},
+
+	rnbs: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc09.deviantart.net/fs5/i/2004/312/0/5/Inflated_Articuno_by_minnagowaseiryuu.jpg" width="160">' +
+			'<img src="http://i.imgur.com/2LTTvcF.png" width="220">' +
+			'<img src="http://i3.kym-cdn.com/photos/images/original/000/711/580/71b.jpg" width="160"><br />' +
+			'<b>Aces:</b> Cigarettes and Alcohol (and DEG)<br />' +
+			'My body has 206 bones-when I\'m with you I have 207.</center>'
+		);
+	},
+	
 	squirtlesquad: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/7abbca7812fe3ba9e257d5cbe484a071/tumblr_n91wug2Upv1tqptlzo1_500.gif" width="140">' +
@@ -255,16 +283,6 @@ exports.commands = {
 		);
 	},
 
-	at3: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/sBejrA3.gif" width="140">' +
-			'<img src="http://i.imgur.com/9uJmmId.gif" width="260">' +
-			'<img src="http://i.imgur.com/uFK9DdV.gif" width="140"><br />' +
-			'<b><font color="red"><blink>Hot damn, Tael really likes ass and titties.</b></font></blink><br />' +
-			'<a href="https://www.youtube.com/watch?v=Xeo6tJgmiX0"><button>ᕕ[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°)̲̅$̲̅]ᕗ</a></button></center>'
-		);
-	},
-
 	whiscash: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://fc03.deviantart.net/fs71/f/2010/268/1/5/sexymon___whiscash_by_wupar-d2zgt7r.png" width="160">' +
@@ -397,16 +415,6 @@ exports.commands = {
 		);
 	},
 
- 	at2: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/4v4JmJS.gif" width="140">' +
-			'<img src="http://i.imgur.com/eCNNgfT.gif" width="280">' +
-			'<img src="http://i.imgur.com/YopROcK.gif" width="120"><br />' +
-			'<blink><b><font color="red">Tael really likes ass and titties.</blink></b></font><br />' +
-			'<a href="https://www.youtube.com/watch?v=JdOstVSouao"><button>( ͡° ͜ʖ ͡°)</button></a></center>'
-		);
-	},
-
  	ridascharizard: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/ThuU1hp.gif" width="120" height="100">' +
@@ -445,16 +453,6 @@ exports.commands = {
 			'<img src="http://i.imgur.com/RmtY4zl.gif" height="100" width="150"><br />' +
 			'<a href="http://replay.pokemonshowdown.com/frost-oumonotype-990161"><button>git gud anytime pls</button></a><br />' +
 			'<blink><font color="red">fukn skrubs</font></blink></center>'
-		);
-	},
-
- 	at: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/t7xExOQ.gif" width="140">' +
-			'<img src="http://i.imgur.com/rHufYTF.gif" width="260">' +
-			'<img src="http://i.imgur.com/eZwTO2D.gif" width="140"><br />' +
-			'<font color="red"><blink><b>Tael likes ass and titties.</b></blink></font><br />' +
-			'<a href="https://www.youtube.com/watch?v=6pTMtDgYEq0"><button>( ͝° ͜ʖ͡°)</button></a></center>'
 		);
 	},
 
@@ -2714,10 +2712,10 @@ exports.commands = {
 		);
 	},
 
-	falls: function (target, room, user) {
+	iggy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/e6327810e958a61388d1ff544cf66742/tumblr_n7lpsrvnQc1rt1sw0o1_400.gif" width="190">' +
-			'<img src="http://i.imgur.com/jEDyYDV.gif">' +
+			'<img src="http://i.imgur.com/NaiL1HX.png">' +
 			'<img src="http://i.imgur.com/RQyArHI.png" width="150"><br />' +
 			'<b>Ace:</b> Raikou<br />' +
 			'First thing\'s first, I\'m the realest.</center>'

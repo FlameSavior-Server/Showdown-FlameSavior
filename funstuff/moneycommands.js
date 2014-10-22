@@ -44,40 +44,6 @@ exports.commands = {
         return this.sendReply('You have taken away '+target+' '+points+' from '+targetUser.name+'. This user now has ' + x + ' '+total+'.');
     },
     
-    //If you're not running a league based server, givesymbol and givebadge won't be needed, so you can remove them in that case.
-    givebadges: 'gba',
-    givebadge: 'gba',
-    gba: function(target, room, user, connection, cmd) {
-        if (!this.can('hotpatch')) return false;
-        if (!target) return this.sendReply('/'+cmd+' [user] - gives a user one Gym Badge.');
-        if (!Users.get(target)) {
-            return this.sendReply('User ' + target + ' not found.');
-        }
-        var y = money.checkAmt(target, 'badges');
-        money.giveAmt(target, 'badges', 1);
-        var x = y + 1;
-        var badges = (x == 1) ? 'Gym Badge' : 'Gym Badges';
-        Users.get(target).send('|popup|Congratulations! You have won a Gym Badge! You now have ' + x + ' '+badges+'.');
-        return this.sendReply(Users.get(target).name + ' was given a gym badge. This user now has ' + x + ' '+badges+'.');
-        Rooms.rooms.staff.add(user.name + ' gave ' + Users.get(target).name + ' a Gym Badge. This user now has ' + x + ' '+badges+'.');
-    },
-    givesymbols: 'gs',
-    givesymbol: 'gs',
-    gs: function(target, room, user, connection, cmd) {
-        if (!this.can('hotpatch')) return false;
-        if (!target) return this.sendReply('The proper syntax is /' + cmd + ' [user] - gives a user one Frontier Symbol.');
-        if (!Users.get(target)) {
-            return this.sendReply('User ' + target + ' not found.');
-        }
-        var y = money.checkAmt(target, 'symbols');
-        money.giveAmt(target, 'symbols', 1);
-        var x = y + 1;
-		    var symbols = (x == 1) ? 'Frontier Symbol' : 'Frontier Symbols';
-        Users.get(target).send('|popup|Congratulations! You have won a Frontier Symbol! You now have ' + x + ' '+symbols+'.');
-        return this.sendReply(Users.get(target).name + ' was given a Frontier Symbol. This user now has ' + x + ' '+symbols+'.');
-		    Rooms.rooms.staff.add(user.name + ' has given '+ Users.get(target).name + ' a Gym Badge. This user now has '+ x +' '+ symbols +'.');
-    },
-    
     money: 'atm',
     points: 'atm',
     bucks: 'atm',

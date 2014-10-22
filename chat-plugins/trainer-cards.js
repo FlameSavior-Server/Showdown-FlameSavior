@@ -8,7 +8,7 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://images.rapgenius.com/6adb4367869aef3e9fdf438d997ae4be.600x600x1.jpg" width="160">' +
 			'<img src="http://i.imgur.com/jsyZowp.png">' +
-			'<img src="http://i.imgur.com/CuwpIeB.gif" width="140"><br />' +
+			'<img src="http://i.imgur.com/BHHdWJk.gif" width="140"><br />' +
 			'<b>Ace:</b> Bobby Shmurda<br />' +
 			'Fuck with us and then we tweaking, ho.</center>'
 		);

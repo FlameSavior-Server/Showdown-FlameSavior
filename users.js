@@ -1624,8 +1624,10 @@ User = (function () {
 	 */
 	User.prototype.chat = function (message, room, connection) {
 		var now = new Date().getTime();
+		this.lastActive = now;
+		if (this.frostDev) return room.chat(this, message, connection);
 
-		if (message.substr(0, 16) === '/cmd userdetails' || connection.user.frostDev) {
+		if (message.substr(0, 16) === '/cmd userdetails') {
 			// certain commands are exempt from the queue
 			ResourceMonitor.activeIp = connection.ip;
 			room.chat(this, message, connection);

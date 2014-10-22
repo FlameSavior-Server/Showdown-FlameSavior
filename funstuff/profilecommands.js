@@ -114,23 +114,6 @@ exports.commands = {
         profile.set(user.userid, "favpoke", String(Tools.data.Pokedex[toId(target)].species));
     },
 
-    //You may not need this one if you aren't running a league server. If that's the case, go ahead and remove it.
-    setquote: 'quote',
-    quote: function(target, room, user) {
-        if (!this.can('lock')) return this.sendReply('You need to be a Gym Leader or higher to be able to set a quote'); //Remove this line if you want to keep this code, but are not running a league server.
-        if (!toId(target)) return this.sendReply('You need to specify your quote.');
-        profile.set(user.userid, "quote", target);
-        this.sendReply('Your quote has now been changed to - "' + target + '"');
-    },
-
-    //the same applies to this as well.
-    setace: 'ace',
-    ace: function(target, room, user) {
-        if (!this.can('lock')) return this.sendReply("You need to be a Gym Leader or higher to be able to set an ace.");
-        this.sendReply('Your ace pokemon has now been set as ' + target + '.');
-        profile.set(user.userid, "ace", target);
-    },
-
     punchline: function(target, room, user) {
         if (!toId(target)) return this.sendReply('You need to specify a punchline.');
         target = target.trim();

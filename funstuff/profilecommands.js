@@ -125,7 +125,7 @@ exports.commands = {
         if (!this.canBroadcast()) return;
         target = toId(target);
         if (!target) target = user.userid;
-        var targetUser = Users.get(target) || target;
+        var targetUser = Users.get(target) ? Users.get(target).userid : target;
         var avy = Users.get(target) ? 'play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png' : 'play.pokemonshowdown.com/sprites/trainers/167.png';
         var moneh = money.checkAmt(targetUser, 'money');
         var punchline = profile.checkDetails(targetUser, 'punchline') == 'Unknown' ? '' : '<b>Punchline</b>: "' + profile.checkDetails(targetUser, 'punchline') + '"<br />';
@@ -157,7 +157,7 @@ exports.commands = {
                     if (content[0]) {
                         content = content[0].split("</em>");
                         if (content[1]) {
-                            var regdate = content[i]
+                            var regdate = content[1];
                         }
                     }
                 } else {

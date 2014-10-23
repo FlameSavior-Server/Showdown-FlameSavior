@@ -13,7 +13,6 @@ exports.commands = {
         if (!target) return this.sendReply('You need to mention the number of points you want to give ' + targetUser.name);
         if (isNaN(target)) return this.sendReply("That isn't even a number, smartass.");
         if (target < 1) return this.sendReply('You cannot give ' + targetUser.name + ' anything less than 1 point!');
-        if (target1 < 1) return this.sendReply("You can't give " + Users.get(target).name + " anything less than 1 point.");	
         money.giveAmt(targetUser.userid, 'money', target);
         var total = (parseInt(target) == 1) ? 'point' : 'points';
         var points = (money.checkAmt(targetUser.userid, 'money') == 1) ? 'point' : 'points';

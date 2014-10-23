@@ -1,5 +1,5 @@
- var fs = require('fs');
-var colors = JSON.parse(fs.readFileSync('infofiles/usercolors.js'));
+var fs = require('fs');
+var colors = JSON.parse(fs.readFileSync('infofiles/usercolors.json'));
 var color = exports.color = {
     
     has: function(name) {

@@ -133,6 +133,7 @@ exports.commands = {
         var g = profile.checkDetails(targetUser, 'gender');
         var fc = profile.checkDetails(targetUser, 'fc') == 'Unknown' ? '' : '<b>3DS Friend Code</b>: ' + profile.checkDetails(targetUser, 'location') + '<br />';
         var fav = profile.checkDetails(targetUser, 'favpoke') == 'Unknown' ? '' : '<b>Favorite Pokémon</b>: ' + profile.checkDetails(targetUser, 'favpoke') + '<br />';
+        var user = Users.get(target) ? Users.get(target).name : target;
         target = target.replace(/\s+/g, '');
         var util = require("util"),
             http = require("http"),
@@ -158,20 +159,24 @@ exports.commands = {
                     if (content[0]) {
                         content = content[0].split("</em>");
                         if (content[1]) {
-                            var regdate = content[1];
-                        }
-                    }
-                } else {
-                    var regdate = 'Unregistered';
-                }
-                var user = Users.get(target) ? Users.get(target).name : target;
-                self.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
+                            self.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
                                 '<hr>' +
                                 '<img src="' + avy + '" alt="" width="80" height="80" align="left"><br />' +
                                 '<b>Money</b>: ' + moneh + '<br />' +
-                                '<b>Registered:</b> ' + regdate + '<br />' +
+                                '<b>Registered:</b> ' + content[1] + '<br />' +
                                 '<b>Gender</b>: ' + g + '<br />' +
                                 punchline + l + fav + fc);
+                        }
+                    }
+                } else {
+                     self.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
+                                '<hr>' +
+                                '<img src="' + avy + '" alt="" width="80" height="80" align="left"><br />' +
+                                '<b>Money</b>: ' + moneh + '<br />' +
+                                '<b>Registered:</b> Unregistered<br />' +
+                                '<b>Gender</b>: ' + g + '<br />' +
+                                punchline + l + fav + fc);
+                }
             });
         });
         req.end();

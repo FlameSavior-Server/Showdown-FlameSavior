@@ -43,7 +43,7 @@ exports.commands = {
         return this.sendReply('You have taken away '+target+' '+points+' from '+targetUser.name+'. This user now has ' + money.checkAmt(targetUser.userid, 'money') + ' '+total+'.');
     },
     
-    money: 'atm',
+    cash: 'atm',
     points: 'atm',
     bucks: 'atm',
     cash: 'atm',
@@ -59,11 +59,11 @@ exports.commands = {
 
         var p1 = (badges === 1 ? 'Gym Badge' : 'Gym Badges');
 
-        if (money === 0) moneh = 'no';
+        if (moneh === 0) moneh = 'no';
 
         var q1 = (money === 1 ? 'Point' : 'Points');
 
-        if (symbols === 0) symbols = 'no'
+        if (symbols === 0) symbols = 'no';
         var s1 = (symbols === 1 ? 'Frontier Symbol' : 'Frontier Symbols');
         if (Users.getExact(target)) {
             var line1 = '<font color = ' + color.get(Users.get(target).userid) + '><b>' + Users.getExact(target).name + '</b></font> has ' + moneh + ' ' + q1 + '.<br/>';

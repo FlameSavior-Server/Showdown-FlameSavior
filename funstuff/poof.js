@@ -1,3 +1,4 @@
+var fs = require('fs');
 exports.commands = {
 
     poof: function(target, room, user) {

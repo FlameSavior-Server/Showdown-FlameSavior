@@ -92,5 +92,20 @@ exports.commands = {
          if (cmd == 'spank') room.add('|raw|' + targetUser.name + ' has been spanked out of the room by ' + user.name + '.');
          else room.add('|raw|' + targetUser.name + ' has been kicked from the room by ' + user.name + '.');
          this.logModCommand(user.name + ' kicked ' + targetUser.name + ' from ' + room.id);
-     }
+     },
+     lastseen: 'seen',
+     seen: function(target, room, user) {
+          if (!this.canBroadcast()) return;
+          if (!target) return this.sendReply('You need to specify a user.');
+          var lastSeen = datestuff.lastSeen(target);
+          if (Users.get(target)) {
+               if (Users.get(target).connected) {
+                    if (!Users.get(target).authenticated) return this.sendReplyBox('<font color = '+color.get(toId(target))+'><b>' + target + '</b></font> was last seen ' + lastSeen + ' ago.');
+                    var lastSeen = this.lastSeen(Users.get(target));
+                    return this.sendReplyBox('<font color = '+color.get(toId(target))+'><b>' + Users.get(target).name + '</b></font> is currently <font color = "green"> online.</font> This user has stayed online for ' + lastSeen);
+               }
+          }
+          if (lastSeen === 'never') return this.sendReplyBox('<font color = '+color.get(toId(target))+'><b>' + target + '</b></font> has <font color = "red"> never </font> been seen online.');
+          return this.sendReplyBox('<font color = '+color.get(toId(target))+'><b>' + target + '</b></font> was last seen ' + lastSeen + ' ago.');
+     },
  };

@@ -177,6 +177,7 @@ exports.commands = {
                                 '<b>Gender</b>: ' + g + '<br />' +
                                 punchline + l + fav + fc);
                 }
+                room.update();
             });
         });
         req.end();

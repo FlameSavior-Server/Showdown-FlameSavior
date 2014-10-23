@@ -283,7 +283,7 @@ exports.commands = {
         if (target.lastIndexOf('.gif') == target.length - 4) return this.sendReply("The file format cannot be .GIF.");
         this.sendReply("You have successfully requested an avatar! Wait for it to be added.");
         for (var i in Users.users) {
-          if (Users.users[i].can('hotpatch') {
+          if (Users.users[i].can('hotpatch')) {
             Users.users[i].send('|pm| Bot|' + Users.users[i].getIdentity() + '|'+user.name+' has bought a custom avatar. URL- '+target);
           }
         }

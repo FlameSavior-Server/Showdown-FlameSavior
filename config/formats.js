@@ -342,6 +342,7 @@ exports.Formats = [
 	{
 		name: "ORAS OU",
 		section: "OM of the Month",
+		column: 2,
 
 		mod: 'oras',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
@@ -353,6 +354,7 @@ exports.Formats = [
 	{
 		name: "Monotype",
 		section: "Other Metagames",
+		column: 2,
 
 		ruleset: ['Pokemon', 'Standard', 'Baton Pass Clause', 'Swagger Clause', 'Same Type Clause', 'Team Preview'],
 		banlist: ['Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh',

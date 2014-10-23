@@ -35,10 +35,10 @@ var datestuff = exports.datestuff = {
                         return target1;
                     }
                 }
-                var lastseen = getdate(toId(target));
+                var lastseen = datestuff.getdate(toId(target));
                 if (lastseen == 'never') return 'never';
                 var part1 = Math.floor(lastseen / 1000);
-                var time1 = Math.floor(lastseen / 1000) + ' ' + parse.plural(part1, 'second');
+                var time1 = Math.floor(lastseen / 1000) + ' ' + plural(part1, 'second');
                 if (part1 >= 60) {
                     var part2 = Math.floor(part1 / 60);
                     if (part1 % 60 === 0) {

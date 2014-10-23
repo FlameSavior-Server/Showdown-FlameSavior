@@ -131,7 +131,7 @@ exports.commands = {
         var punchline = profile.checkDetails(targetUser, 'punchline') == 'Unknown' ? '' : '<b>Punchline</b>: "' + profile.checkDetails(targetUser, 'punchline') + '"<br />';
         var l = profile.checkDetails(targetUser, 'location') == 'Unknown' ? '' : '<b>Location</b>: ' + profile.checkDetails(targetUser, 'location') + '<br />';
         var g = profile.checkDetails(targetUser, 'gender');
-        var fc = profile.checkDetails(targetUser, 'fc') == 'Unknown' ? '' : '<b>3DS Friend Code</b>: ' + profile.checkDetails(targetUser, 'location') + '<br />';
+        var fc = profile.checkDetails(targetUser, 'fc') == 'Unknown' ? '' : '<b>3DS Friend Code</b>: ' + profile.checkDetails(targetUser, 'fc') + '<br />';
         var fav = profile.checkDetails(targetUser, 'favpoke') == 'Unknown' ? '' : '<b>Favorite Pokémon</b>: ' + profile.checkDetails(targetUser, 'favpoke') + '<br />';
         var user = Users.get(target) ? Users.get(target).name : target;
         target = target.replace(/\s+/g, '');

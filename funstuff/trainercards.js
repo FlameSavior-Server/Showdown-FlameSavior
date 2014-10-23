@@ -33,7 +33,6 @@ exports.commands = {
     function getavy(name) {
         if (Users.get(name)) {
             return '<img src = "//play.pokemonshowdown.com/sprites/trainers/' + Users.get(name).avatar + '.png">'
-            }
         } else {
             return '';
         }

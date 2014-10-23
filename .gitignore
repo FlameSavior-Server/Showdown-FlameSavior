@@ -10,8 +10,9 @@ app.js
 users.js
 rooms.js
 command-parser.js
-/config/formats.js
-/data/rulesets.js
+tournaments/index.js
+config/formats.js
+data/rulesets.js
 
 # boilerplate #
 ###############

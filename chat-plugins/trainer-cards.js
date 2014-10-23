@@ -4,6 +4,14 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	daigoro: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://cs620320.vk.me/v620320098/11de2/_0nvYNXCl-w.jpg" width="350"><br />' +
+			'<blink><font size="7">OU MASTER</blink></font><br />' +
+			'<font size="1">gettin pussy since the 80\'s</font></center>'
+		);
+	},
+
 	tweakin: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://images.rapgenius.com/6adb4367869aef3e9fdf438d997ae4be.600x600x1.jpg" width="160">' +

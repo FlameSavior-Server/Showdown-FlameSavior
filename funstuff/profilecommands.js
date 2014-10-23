@@ -127,7 +127,7 @@ exports.commands = {
         if (!target) target = user.userid;
         var targetUser = Users.get(target) || target;
         var avy = Users.get(target) ? 'play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png' : 'play.pokemonshowdown.com/sprites/trainers/167.png';
-        var money = money.checkAmt(targetUser, 'money');
+        var moneh = money.checkAmt(targetUser, 'money');
         var punchline = profile.checkDetails(targetUser, 'punchline') == 'Unknown' ? '' : '<b>Punchline</b>: "' + profile.checkDetails(targetUser, 'punchline') + '"<br />';
         var l = profile.checkDetails(targetUser, 'location') == 'Unknown' ? '' : '<b>Location</b>: ' + profile.checkDetails(targetUser, 'location') + '<br />';
         var g = profile.checkDetails(targetUser, 'gender');
@@ -172,7 +172,7 @@ exports.commands = {
         this.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
                                 '<hr>' +
                                 '<img src="' + avy + '" alt="" width="80" height="80" align="left"><br />' +
-                                '<b>Money</b>: ' + money + '<br />' +
+                                '<b>Money</b>: ' + moneh + '<br />' +
                                 '<b>Registered:</b> ' + regdate + '<br />' +
                                 '<b>Gender</b>: ' + g + '<br />' +
                                 punchline + l + fav + fc);

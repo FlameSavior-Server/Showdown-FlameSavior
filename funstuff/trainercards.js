@@ -1,3 +1,4 @@
+var self = this;
 exports.commands = {
     //example trainer card. You don't need to copy the same thing, this trainer card is really plain and simple.
     siiilver: 'silver',
@@ -44,12 +45,12 @@ exports.commands = {
         var br = '<br/>';
         if (target.lastIndexOf('<br/>') === target.length - 5) br = ''
         if (!Users.get(name)) {
-            return this.sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
+            return self.sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
         } else {
             if (!Users.get(name).connected) {
-                return this.sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
+                return self.sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
             } else {
-                return this.sendReplyBox(target + target1);
+                return self.sendReplyBox(target + target1);
             }
         }
     }

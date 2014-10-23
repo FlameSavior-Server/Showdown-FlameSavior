@@ -81,7 +81,6 @@ function getTournament(name, output) {
     }
 }
 
-<<<<<<< HEAD
 Tournament = (function() {
     function Tournament(room, format, generator, playerCap, isRated) {
         this.room = room;

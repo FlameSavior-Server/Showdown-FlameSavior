@@ -1794,9 +1794,9 @@ exports.commands = {
 	bane: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/YX5NfOz.jpg" width="160">' +
-			'<img src="http://i.imgur.com/Me5jPPo.png">' +
-			'<img src="http://media1.giphy.com/media/eqe4gAJczdMrK/giphy.gif" width="130" height="130"><br />' +
-			'<b>Ace:</b> X-Behemoth<br />' +
+			'<img src="http://i.imgur.com/3Vg7juW.png">' +
+			'<img src="http://media1.giphy.com/media/eqe4gAJczdMrK/giphy.gif" width="220"><br />' +
+			'<b>Ace:</b> Willpower<br />' +
 			'Pokemon are like people. You can give them all fancy new gadgets or clothes but, you cant change who or what they are.</center>'
 		);
 	},

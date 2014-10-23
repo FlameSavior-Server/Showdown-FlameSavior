@@ -542,6 +542,13 @@ exports.BattleScripts = {
 		if (!template.isMega) return false;
 		if (pokemon.baseTemplate.baseSpecies !== template.baseSpecies) return false;
 
+		var foeActive = side.foe.active;
+		for (var i = 0; i < foeActive.length; i++) {
+			if (foeActive[i].volatiles['skydrop'] && foeActive[i].volatiles['skydrop'].source === pokemon) {
+				return false;
+			}
+		}
+
 		// okay, mega evolution is possible
 		pokemon.formeChange(template);
 		pokemon.baseTemplate = template; // mega evolution is permanent :o
@@ -1530,13 +1537,24 @@ exports.BattleScripts = {
 			"Gengar-Mega": 68, "Kangaskhan-Mega": 72, "Lucario-Mega": 72, "Mawile-Mega": 72,
 
 			// Holistic judgment
-			Genesect: 72, Sigilyph: 76, Xerneas: 66
+			Articuno: 86, Genesect: 72, Sigilyph: 76, Xerneas: 66,
+
+			// ORAS
+			"Groudon-Primal": 70, "Kyogre-Primal": 70, "Rayquaza-Mega": 70
 		};
 		var level = levelScale[template.tier] || 90;
 		if (customScale[template.name]) level = customScale[template.name];
 
 		if (template.name === 'Serperior' && ability === 'Contrary') level = 76;
 		if (template.name === 'Magikarp' && hasMove['magikarpsrevenge']) level = 90;
+
+		if (hasMove['bellydrum'] && item === 'Sitrus Berry') {
+			var hp = Math.floor(Math.floor(2 * template.baseStats.hp + ivs.hp + Math.floor(evs.hp / 4) + 100) * level / 100 + 10);
+			if (hp % 2 > 0) {
+				evs.hp -= 4;
+				evs.atk += 4;
+			}
+		}
 
 		return {
 			name: name,

@@ -1522,7 +1522,7 @@ exports.BattleItems = {
 		},
 		onDamage: function (damage, target, source, effect) {
 			if (this.random(10) === 0 && damage >= target.hp && effect && effect.effectType === 'Move') {
-				this.add("-message", target.name + " held on using its Focus Band! (placeholder)");
+				this.add("-activate", target.name, "item: Focus Band");
 				return target.hp - 1;
 			}
 		},
@@ -1669,9 +1669,9 @@ exports.BattleItems = {
 		gen: 5,
 		desc: "Holder's first successful Ghost-type attack will have 1.3x power. Single use."
 	},
-	"glalite": {
-		id: "glalite",
-		name: "Glalite",
+	"glalitite": {
+		id: "glalitite",
+		name: "Glalitite",
 		spritenum: 0,
 		megaStone: "Glalie-Mega",
 		megaEvolves: "Glalie",

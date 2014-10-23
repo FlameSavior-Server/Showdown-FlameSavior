@@ -517,6 +517,27 @@ exports.BattleAbilities = {
 		rating: 2,
 		num: 128
 	},
+	"deltastream": {
+		desc: "When this Pokemon enters the battlefield, the weather becomes strong winds for as long as this Pokemon is on the battlefield",
+		shortDesc: "The weather becomes strong winds until this Pokemon leaves battle.",
+		// TODO: implement strong winds
+		id: "deltastream",
+		name: "Delta Stream",
+		rating: 5,
+		num: 191
+	},
+	"desolateland": {
+		desc: "When this Pokemon enters the battlefield, the weather becomes heavy sun for as long as this Pokemon is on the battlefield.",
+		shortDesc: "The weather becomes heavy sun until this Pokemon leaves battle.",
+		// TODO: implement heavy sun
+		onStart: function (source) {
+			this.setWeather('sunnyday');
+		},
+		id: "desolateland",
+		name: "Desolate Land",
+		rating: 5,
+		num: 190
+	},
 	"download": {
 		desc: "If this Pokemon switches into an opponent with equal Defenses or higher Defense than Special Defense, this Pokemon's Special Attack receives a 50% boost. If this Pokemon switches into an opponent with higher Special Defense than Defense, this Pokemon's Attack receive a 50% boost.",
 		shortDesc: "On switch-in, Attack or Sp. Atk is boosted by 1 based on the foes' weaker Defense.",
@@ -725,14 +746,12 @@ exports.BattleAbilities = {
 			if (this.isWeather('sunnyday')) {
 				if (this.effectData.forme !== 'Sunshine') {
 					this.effectData.forme = 'Sunshine';
-					this.add('-formechange', pokemon, 'Cherrim-Sunshine');
-					this.add('-message', pokemon.name + ' transformed! (placeholder)');
+					this.add('-formechange', pokemon, 'Cherrim-Sunshine', '[msg]');
 				}
 			} else {
 				if (this.effectData.forme) {
 					delete this.effectData.forme;
-					this.add('-formechange', pokemon, 'Cherrim');
-					this.add('-message', pokemon.name + ' transformed! (placeholder)');
+					this.add('-formechange', pokemon, 'Cherrim', '[msg]');
 				}
 			}
 		},
@@ -799,8 +818,7 @@ exports.BattleAbilities = {
 			}
 			if (pokemon.isActive && forme) {
 				pokemon.formeChange(forme);
-				this.add('-formechange', pokemon, forme);
-				this.add('-message', pokemon.name + ' transformed! (placeholder)');
+				this.add('-formechange', pokemon, forme, '[msg]');
 			}
 		},
 		id: "forecast",
@@ -1968,6 +1986,18 @@ exports.BattleAbilities = {
 		name: "Pressure",
 		rating: 1.5,
 		num: 46
+	},
+	"primordialsea": {
+		desc: "When this Pokemon enters the battlefield, the weather becomes heavy rain for as long as this Pokemon is on the battlefield",
+		shortDesc: "The weather becomes heavy rain until this Pokemon leaves battle.",
+		// TODO: implement heavy rain
+		onStart: function (source) {
+			this.setWeather('raindance');
+		},
+		id: "primordialsea",
+		name: "Primordial Sea",
+		rating: 5,
+		num: 189
 	},
 	"protean": {
 		desc: "Right before this Pokemon uses a move, it changes its type to match that move. Hidden Power is interpreted as its Hidden Power type, rather than Normal.",

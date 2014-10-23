@@ -152,7 +152,7 @@ var color = exports.color = {
     set: function(name, hex) {
         colors[toId(name)] = hex;
         var finished = JSON.stringify(colors, null, 1);
-        fs.writeFile('infofiles/userdata.json', finished);
+        fs.writeFile('infofiles/usercolors.json', finished);
         return;
     },
 

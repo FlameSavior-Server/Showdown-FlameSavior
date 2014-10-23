@@ -39,9 +39,9 @@ exports.commands = {
         money.giveAmt(targetUser.userid, 'money', target);
         var total = (money.checkAmt(targetUser.userid, 'money') == 1) ? 'point' : 'points';
 	var points = (target == 1) ? 'point' : 'points';
-        targetUser.send('|popup|'+user.name+' has taken ' + target + ' away '+points+' from you. You now have ' + x + ' '+total+'.');
-        Rooms.rooms.staff.add(user.name + ' has taken away ' + target + ' ' + points + ' from '+targetUser.name+'. This user now has ' + x + ' '+total+'.');
-        return this.sendReply('You have taken away '+target+' '+points+' from '+targetUser.name+'. This user now has ' + x + ' '+total+'.');
+        targetUser.send('|popup|'+user.name+' has taken ' + target + ' away '+points+' from you. You now have ' + money.checkAmt(targetUser.userid, 'money') + ' '+total+'.');
+        Rooms.rooms.staff.add(user.name + ' has taken away ' + target + ' ' + points + ' from '+targetUser.name+'. This user now has ' + money.checkAmt(targetUser.userid, 'money') + ' '+total+'.');
+        return this.sendReply('You have taken away '+target+' '+points+' from '+targetUser.name+'. This user now has ' + money.checkAmt(targetUser.userid, 'money') + ' '+total+'.');
     },
     
     money: 'atm',
@@ -54,30 +54,30 @@ exports.commands = {
         if (!this.canBroadcast()) return;
         if (!target) target = user.userid;
         var badges = money.checkAmt(target, 'badges');
-        var money = money.checkAmt(target, 'money');
+        var moneh = money.checkAmt(target, 'money');
         var symbols = money.checkAmt(target, 'symbols');
         if (badges === 0) badges = 'no';
 
-        var p1 = (badges === 1 ? 'Badge' : 'Badges');
+        var p1 = (badges === 1 ? 'Gym Badge' : 'Gym Badges');
 
-        if (money === 0) money = 'no';
+        if (money === 0) moneh = 'no';
 
         var q1 = (money === 1 ? 'Point' : 'Points');
 
         if (symbols === 0) symbols = 'no'
-        var s1 = (symbols === 1 ? 'Symbol' : 'Symbols');
+        var s1 = (symbols === 1 ? 'Frontier Symbol' : 'Frontier Symbols');
         if (Users.getExact(target)) {
-            var line1 = Users.getExact(target).name + ' has ' + money + ' ' + q1 + '.<br/>';
-            var line2 = Users.getExact(target).name + ' has ' + badges + ' ' + p1 + '.<br/>';
-            var line3 = Users.getExact(target).name + ' has ' + symbols + ' ' + s1 + '.<br/>';
+            var line1 = '<font color = ' + color.get(Users.get(target).userid) + '><b>' + Users.getExact(target).name + '</b></font> has ' + moneh + ' ' + q1 + '.<br/>';
+            var line2 = '<font color = ' + color.get(Users.get(target).userid) + '><b>' + Users.getExact(target).name + '</b></font> has ' + badges + ' ' + p1 + '.<br/>';
+            var line3 = '<font color = ' + color.get(Users.get(target).userid) + '><b>' + Users.getExact(target).name + '</b></font> has ' + symbols + ' ' + s1 + '.<br/>';
         } else {
-            var line1 = target + ' has ' + money + ' ' + q1 + '.<br/>';
-            var line2 = target + ' has ' + badges + ' ' + p1 + '.<br/>';
-            var line3 = target + ' has ' + symbols + ' ' + s1 + '.<br/>';
+            var line1 = '<font color = ' + color.get(toId(target)) + '><b>' + Users.getExact(target).name + '</b></font> has ' + moneh + ' ' + q1 + '.<br/>';
+            var line2 = '<font color = ' + color.get(toId(target)) + '><b>' + Users.getExact(target).name + '</b></font> has ' + badges + ' ' + p1 + '.<br/>';
+            var line3 = '<font color = ' + color.get(toId(target)) + '><b>' + Users.getExact(target).name + '</b></font> has ' + symbols + ' ' + s1 + '.<br/>';
         }
         if (badges === 'no' || !badges) line2 = '';
         if (symbols === 'no' || !symbols) line3 = '';
-        this.sendReplyBox(line1 + line2 + line3 + line4);
+        this.sendReplyBox(line1 + line2 + line3);
     },
   
     closeshop: function(target, room, user) {

@@ -101,7 +101,7 @@ exports.commands = {
           if (Users.get(target)) {
                if (Users.get(target).connected) {
                     if (!Users.get(target).authenticated) return this.sendReplyBox('<font color = '+color.get(toId(target))+'><b>' + target + '</b></font> was last seen ' + lastSeen + ' ago.');
-                    var lastSeen = this.lastSeen(Users.get(target));
+                    var lastSeen = datestuff.lastSeen(Users.get(target));
                     return this.sendReplyBox('<font color = '+color.get(toId(target))+'><b>' + Users.get(target).name + '</b></font> is currently <font color = "green"> online.</font> This user has stayed online for ' + lastSeen);
                }
           }

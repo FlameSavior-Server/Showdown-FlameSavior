@@ -163,18 +163,16 @@ exports.commands = {
                 } else {
                     var regdate = 'Unregistered';
                 }
-                room.update();
-            });
-        });
-        req.end();
-        
-        var user = Users.get(target) ? Users.get(target).name : target;
-        this.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
+                var user = Users.get(target) ? Users.get(target).name : target;
+                this.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
                                 '<hr>' +
                                 '<img src="' + avy + '" alt="" width="80" height="80" align="left"><br />' +
                                 '<b>Money</b>: ' + moneh + '<br />' +
                                 '<b>Registered:</b> ' + regdate + '<br />' +
                                 '<b>Gender</b>: ' + g + '<br />' +
                                 punchline + l + fav + fc);
+            });
+        });
+        req.end();
     }
 };

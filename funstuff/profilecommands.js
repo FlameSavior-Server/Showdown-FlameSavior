@@ -135,7 +135,8 @@ exports.commands = {
         var fav = profile.checkDetails(targetUser, 'favpoke') == 'Unknown' ? '' : '<b>Favorite Pokémon</b>: ' + profile.checkDetails(targetUser, 'favpoke') + '<br />';
         target = target.replace(/\s+/g, '');
         var util = require("util"),
-            http = require("http");
+            http = require("http"),
+            self = this;
 
         var options = {
             host: "www.pokemonshowdown.com",
@@ -164,7 +165,7 @@ exports.commands = {
                     var regdate = 'Unregistered';
                 }
                 var user = Users.get(target) ? Users.get(target).name : target;
-                this.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
+                self.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
                                 '<hr>' +
                                 '<img src="' + avy + '" alt="" width="80" height="80" align="left"><br />' +
                                 '<b>Money</b>: ' + moneh + '<br />' +

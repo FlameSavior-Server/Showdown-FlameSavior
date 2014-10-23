@@ -94,7 +94,7 @@ exports.commands = {
     setlocation: 'location',
     setplace: 'location',
     location: function(target, room, user) {
-        if (!target) return this.sendReply('You need to specify your favorite pokemon (If you want to).')
+        if (!target) return this.sendReply('You need to specify your location.')
         if (target.length < 3) {
             return this.sendReply('That isn\'t a valid location.');
         }
@@ -123,14 +123,16 @@ exports.commands = {
 
     profile: function(target, room, user, connection) {
         if (!this.canBroadcast()) return;
-        if (!target) var target = user.userid;
+        target = toId(target);
+        if (!target) target = user.userid;
         var targetUser = Users.get(target) || target;
-        var avy = 'play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png';
-        var moneh = money.checkAmt(toId(target), 'money');
-        var l = profile.checkDetails(toId(target), 'location');
-        var g = profile.checkDetails(toId(target), 'gender');
-        var fav = profile.checkDetails(toId(target), 'favpoke');
-        var fc = profile.checkDetails(toId(target), 'fc');
+        var avy = Users.get(target) ? 'play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png' : 'play.pokemonshowdown.com/sprites/trainers/167.png';
+        var money = money.checkAmt(targetUser, 'money');
+        var punchline = profile.checkDetails(targetUser, 'punchline') == 'Unknown' ? '' : '<b>Punchline</b>: "' + profile.checkDetails(targetUser, 'punchline') + '"<br />';
+        var l = profile.checkDetails(targetUser, 'location') == 'Unknown' ? '' : '<b>Location</b>: ' + profile.checkDetails(targetUser, 'location') + '<br />';
+        var g = profile.checkDetails(targetUser, 'gender');
+        var fc = profile.checkDetails(targetUser, 'fc') == 'Unknown' ? '' : '<b>3DS Friend Code</b>: ' + profile.checkDetails(targetUser, 'location') + '<br />';
+        var fav = profile.checkDetails(targetUser, 'favpoke') == 'Unknown' ? '' : '<b>Favorite Pokémon</b>: ' + profile.checkDetails(targetUser, 'favpoke') + '<br />';
         target = target.replace(/\s+/g, '');
         var util = require("util"),
             http = require("http");
@@ -142,7 +144,6 @@ exports.commands = {
         };
 
         var content = "";
-        var self = this;
         var req = http.request(options, function(res) {
 
             res.setEncoding("utf8");
@@ -156,31 +157,24 @@ exports.commands = {
                     if (content[0]) {
                         content = content[0].split("</em>");
                         if (content[1]) {
-                            self.sendReplyBox('<font size = 2><center><b><u>' + targetUser.name + '\'s Profile</u></font></b></center>' +
-                                '<hr>' +
-                                '<img src="//' + avy + '" alt="" width="80" height="80" align="left"><br />' +
-                                '<b>Money</b>: ' + moneh + '<br />' +
-                                '<b>Registered:</b> ' + content[1] + '<br />' +
-                                '<b>Gender</b>: ' + g + '<br />' +
-                                '<b>Location</b>: ' + l + '<br />' +
-                                '<b>Favorite Pokémon</b>: ' + fav + '<br />' +
-                                '<b>X/Y Friend Code</b>: ' + fc);
+                            var regdate = content[i]
                         }
                     }
                 } else {
-                    self.sendReplyBox('<font size = 2><center><b><u>' + targetUser.name + '\'s Profile</u></font></b></center>' +
-                        '<hr>' +
-                        '<img src="//' + avy + '" alt="" width="80" height="80" align="left"><br />' +
-                        '<b>Money</b>: ' + moneh + '<br />' +
-                        '<b>Registered:</b> Unregistered<br />' +
-                        '<b>Gender</b>: ' + g + '<br />' +
-                        '<b>Location</b>: ' + l + '<br />' +
-                        '<b>Favorite Pokémon</b>: ' + fav + '<br />' +
-                        '<b>X/Y Friend Code</b>: ' + fc);
+                    var regdate = 'Unregistered';
                 }
                 room.update();
             });
         });
         req.end();
+        
+        var user = Users.get(target) ? Users.get(target).name : target;
+        this.sendReplyBox('<font size = 2><center><b><font color = '+color.get(targetUser)+'>' + user + '\'s</font> Profile</font></b></center>' +
+                                '<hr>' +
+                                '<img src="' + avy + '" alt="" width="80" height="80" align="left"><br />' +
+                                '<b>Money</b>: ' + money + '<br />' +
+                                '<b>Registered:</b> ' + regdate + '<br />' +
+                                '<b>Gender</b>: ' + g + '<br />' +
+                                punchline + l + fav + fc);
     }
 };

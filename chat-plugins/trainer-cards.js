@@ -4,6 +4,8 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	
+
 	daigoro: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://cs620320.vk.me/v620320098/11de2/_0nvYNXCl-w.jpg" width="350"><br />' +
@@ -517,9 +519,9 @@ exports.commands = {
 
  	nido: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/EjSLxRe.gif" width="140">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/bIsjhaN.png">' +
 			'<img src="http://i.imgur.com/Uv2IncX.gif" width="300">' +
-			'<img src="http://i.imgur.com/OjZPrtv.png" height="140"><br />' +
+			'<img src="http://i.imgur.com/W1VmpoJ.gif" width="140"><br />' +
 			'<b>Ace:</b> Dusclops/Aegislash<br />' +
 			'"Never give up, for that is just the place and time that the tide will turn." - Harriet Beecher Stowe</center>'
 		);

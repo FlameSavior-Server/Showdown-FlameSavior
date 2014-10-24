@@ -174,7 +174,6 @@ exports.commands = {
             user.hasroom = true;
 
         } else if (target === 'card') {
-            var tcs = fs.readFileSync('infofiles/trainercards.txt');
             if (tcs.toString().indexOf(' ' + user.userid) > -1) return this.sendReply("You've already bought a trainer card!");
             var price = 40;
             if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a Trainer Card.");

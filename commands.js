@@ -3608,23 +3608,35 @@ var commands = exports.commands = {
 			Rooms.rooms['staff'].isPrivate = true;
 			this.sendReply('The private room \'staff\' was created.');
 		}
-		for(var u in Users.users)
-			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2)
+		for (var u in Users.users) {
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2) {
 				Users.users[u].joinRoom('staff');
+			}
+		}
+
+		for (var u in Users.users) {
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2) {
+				Users.users[u].joinRoom('lobby');
+			}
+		}
+		
 		return this.sendReply('Staff has been gathered.');
 	},
 
 	fjh: 'forcejoinhangmans',
 	forcejoinhangmans: function(target, room, user){
 		if(!user.can('fjh')) return false;
-		if(Rooms.rooms['hangmans'] == undefined){
+		if(Rooms.rooms['hangmans'] == undefined) {
 			Rooms.rooms['hangmans'] = new Rooms.ChatRoom('hangmans', 'hangmans');
 			Rooms.rooms['hangmans'].isPrivate = false;
 			this.sendReply('The private room \'hangmans\' was created.');
 		}
-		for(var u in Users.users)
-			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0)
+		for (var u in Users.users) {
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0) {
 				Users.users[u].joinRoom('hangmans');
+			}
+		}
+		
 		return this.sendReply('People were sent to hangmans, dawg\'.');
 	},
 
@@ -3636,9 +3648,12 @@ var commands = exports.commands = {
 			Rooms.rooms['lobby'].isPrivate = false;
 			this.sendReply('The private room \'lobby\' was created.');
 		}
-		for(var u in Users.users)
-			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0)
+		for (var u in Users.users) {
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0) {
 				Users.users[u].joinRoom('lobby');
+			}
+		}
+		
 		return this.sendReply('Erryone tis\' in the lobby, m8.');
 	},
 
@@ -3685,7 +3700,7 @@ var commands = exports.commands = {
 		user.getIdentity = function (roomid) {
 			if (!roomid) roomid = 'lobby';
 			if (this.locked) {
-				return 'Ã¢â‚¬Â½'+this.name;
+				return '‽'+this.name;
 			}
 			if (this.mutedRooms[roomid]) {
 				return '!'+this.name;

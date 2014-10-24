@@ -30,11 +30,11 @@ exports.commands = {
                         content = content[0].split("</em>");
                         if (content[1]) {
                             regdate = content[1];
-                            data = username + ' was registered on' + regdate + '.';
+                            data = '<font color = '+color.get(toId(username))+'><b>' + username + '</b></font> was registered on' + regdate + '.';
                         }
                     }
                 } else {
-                    data = username + ' is not registered.';
+                    data = '<font color = '+color.get(toId(username))+'><b>' + username + '</b></font> is not registered.';
                 }
                 self.sendReplyBox(data);
             });

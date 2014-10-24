@@ -535,52 +535,48 @@ exports.BattleFormats = {
 	slowmonsclause: {
 	effecttype: 'Rule',
 	onStart: function(target, source) {
-                                this.add('rule', 'SlowMons: Trick Room exists by default.');
-								this.add('-fieldstart', 'move: Trick Room', '[of] '+source);
-								this.add('-message', 'The dimensions were twisted!');
-                                this.getStatCallback = function(stat, statName) {
-					if (statName === 'spe') return -stat;
-					return stat;
-					}
-										}
-										},
+                this.add('rule', 'SlowMons: Trick Room exists by default.');
+		this.add('-fieldstart', 'move: Trick Room', '[of] '+source);
+	        this.add('-message', 'The dimensions were twisted!');
+                this.getStatCallback = function(stat, statName) {
+		        if (statName === 'spe') return -stat;
+				return stat;
+		        }
+		}
+        },
+	
 	flagclause: {
 		effectType: 'Rule',
 		onStart: function () {
 			this.add('rule', 'Capture The Flag: The team which knocks out the opponent\'s flag holder wins.');
 		},
-	validateTeam: function(team, format, item) {
-			var mails = 0;
+	        validateTeam: function(team, format, item) {
+	        	if (!teamHas['Mail']) return ["One Pokémon must holding the item 'Mail', which indicates the flag."];
+		        var mails = 0;
 			for (var i = 0; i < team.length; i++) {
-			if (team[i].item !== 'Mail') continue;
-			if (team[i].item === 'Mail') mails++;
+			        if (team[i].item !== 'Mail') continue;
+			        if (team[i].item === 'Mail') mails++;
 			}
-			if (mails > 1) {
-			return ["Only one pokemon can be holding the item 'Mail', which indicates the flag."];
-			}
-			if (mails < 1) {
-			return ["One Pokemon must holding the item 'Mail', which indicates the flag."];
-			}
-			}
-		},	
+			if (mails > 1) return ["Only one pokemon can be holding the item 'Mail', which indicates the flag."];
+		}
+	},
 		
 		
-		uberclause: {
+	uberclause: {
 		effectType: 'Rule',
 		onStart: function () {
 			this.add('rule', 'Uber Clause: Max one Uber Pokemon per team.');
 		},
-	validateTeam: function(team, format, tier) {
+	        validateTeam: function(team, format, tier) {
 			var uber = 0;
 			for (var i = 0; i < team.length; i++) {
-			if (this.getTemplate(team[i].species).tier !== 'Uber') continue;
-			if (this.getTemplate(team[i].species).tier === 'Uber') uber++;
+			        if (this.getTemplate(team[i].species).tier !== 'Uber') continue;
+			        if (this.getTemplate(team[i].species).tier === 'Uber') uber++;
 			}
-			if (uber > 1) {
-			return ["You have more than one Uber in your team. You may only use one Uber."];
-			}
-			}
-		},
+			if (uber > 1) return ["You have more than one Uber in your team. You may only use one Uber."];
+		}
+	},
+	
 	sametypeclause: {
 		effectType: 'Rule',
 		onStart: function () {

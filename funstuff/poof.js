@@ -4,7 +4,7 @@ exports.commands = {
     poof: function(target, room, user) {
             if (!this.canTalk()) return false;
             if (global.poofoff) return this.sendReply("Poof is currently disabled.");
-            var poof = JSON.parse(fs.readFileSync('custom/poof.json'));
+            var poof = JSON.parse(fs.readFileSync('infofiles/poof.json'));
             this.add('|html|<center><b><font color = "' + randomcolor() + '">~~' + user.name + ' ' + poof[Math.floor(Math.random() * poof.length)] + '~~');
             user.disconnectAll();
     },
@@ -17,12 +17,12 @@ exports.commands = {
             if (toId(target.substring(0,1))) {
                 target = target.substr(0,1).toLowerCase() + target.substr(1);
             }
-            var poof = JSON.parse(fs.readFileSync('custom/poof.json'));
+            var poof = JSON.parse(fs.readFileSync('infofiles/poof.json'));
             for (var i in poof) {
               if (toId(target) == toId(poof[i])) return this.sendReply('That poof message already exists!');
             }
             poof[poof.length] = target;
-            fs.writeFile('config/poof.json', JSON.stringify(poof, null, 1));
+            fs.writeFile('infofiles/poof.json', JSON.stringify(poof, null, 1));
             return this.sendReply('"<user> ' + target + '" has been added to the list of poof messages.');
             user.buypoof = false;
         } else {

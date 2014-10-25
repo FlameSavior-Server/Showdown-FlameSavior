@@ -1,4 +1,3 @@
-var self = this;
 exports.commands = {
     //example trainer card. You don't need to copy the same thing, this trainer card is really plain and simple.
     siiilver: 'silver',
@@ -31,6 +30,15 @@ exports.commands = {
 //here are a couple of functions you'll find really handy.
 
 //this function is used for getting the html code for displaying a user's avatar, as long as the server recognizes them. Otherwise, it won't return anything.
+    function sendReplyBox(data) {
+        data = '|html|<div class = "infobox"> ' + data + '</div>';
+        if (this.broadcasting) {
+            room.add(data, true);
+        } else {
+            connection.sendTo(room, data);
+        }
+    },
+    
     function getavy(name) {
         if (Users.get(name)) {
             return '<img src = "//play.pokemonshowdown.com/sprites/trainers/' + Users.get(name).avatar + '.png">'
@@ -38,19 +46,18 @@ exports.commands = {
             return '';
         }
     }
-
 //If the user is online at the moment, something extra will be added to the card (that is, target1). Otherwise, it'll display how long ago the user was last seen, (if he was seen at all.)
 //If you don't want to use this function, just stick with the normal this.sendReplyBox instead.    
     function cardPrint(name, target, target1) {
         var br = '<br/>';
         if (target.lastIndexOf('<br/>') === target.length - 5) br = ''
         if (!Users.get(name)) {
-            return self.sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
+            return sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
         } else {
             if (!Users.get(name).connected) {
-                return self.sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
+                return sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
             } else {
-                return self.sendReplyBox(target + target1);
+                return sendReplyBox(target + target1);
             }
         }
     }

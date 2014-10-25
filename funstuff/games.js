@@ -98,15 +98,16 @@ exports.commands = {
     dicegame: 'diceon',
     diceon: function(target, room, user, connection, cmd) {
         if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to be able to start a game of dice.');
-        if (room.dice) return this.sendReply('There is already a dice game going on');
+        if (room.dice) return this.sendReply('There is already a game of dice game going on in this room.');
         target = toId(target);
-        if (!target) return this.sendReply('/' + cmd + ' [amount] - Starts a dice game in the room. The specified amount will be the amount of cash betted for.');
-        if (isNaN(target)) return this.sendReply('That isn\'t a number, smartass.');
-        if (target < 1) return this.sendReply('You cannot start a game of dice with anything less than 1 point!');
+        if (!target) return this.sendReply('/' + cmd + ' [amount] - Starts a dice game. The specified amount will be the amount of cash betted for.');
+        if (isNaN(target)) return this.sendReply('That isn\'t a number, you egg.');
+        if (target < 1) return this.sendReply('You cannot start a game of dice for anything less than 1 point.');
         room.dice = {};
         room.dice.members = [];
         room.dice.award = parseInt(target);
-        this.add('|html|<div class="infobox"><font color = #007cc9><center><h2>' + user.name + ' has started a dice game for <font color = green>' + room.dice.award + '</font color> Bucks!<br />' +
+		var point = (target == 1) ? 'point' : 'points';
+        this.add('|html|<div class="infobox"><font color = #007cc9><center><h2>' + user.name + ' has started a game of dice for <font color = green>' + room.dice.award + '</font color> '+point+'!<br />' +
             '<center><button name="send" value="/play" target="_blank">Click to join!</button>');
     },
 
@@ -413,7 +414,7 @@ exports.commands = {
         target = target.toLowerCase().replace(/ /g, '');
         if (Object.keys(room.poll.options).indexOf(target) == -1) return this.sendReply("'" + originaltarget + "' is not a valid poll option.");
         for (var i in room.poll.users) {
-            if ((Users.get(i) || i) == user.userid) return this.sendReply('One of your alts are already voting in this poll.');
+            if (Users.get(i) == user.userid && i != user.userid) return this.sendReply('One of your alts are already voting in this poll.');
         }
         if (!room.poll.users[user.userid]) {
             room.poll.users[user.userid] = room.poll.options[target].name;
@@ -428,9 +429,8 @@ exports.commands = {
             return this.sendReply('You are now voting for \'' + room.poll.options[target].name + '\' instead of \'' + oldpoll + '\'.');
         }
     },
-
-
-
+    
+    pr: 'pollremind',
     pollremind: 'prm',
     prm: function(target, room, user) {
         if (!room.poll) return this.sendReply('There is no poll going on in this room.');
@@ -441,7 +441,7 @@ exports.commands = {
         }
         if (this.broadcasting) {
             this.sendReply('|html|<div class = "infobox"><center><font size = 3><b>' + room.poll.question + '</b></font></center><br/>' +
-                '<font color = "gray" size = 2><i><b>Poll reminded by ' + user.name + '</b></i></font><br/>' +
+                '<font color = "gray" size = 2><i><b>Poll started by ' + room.poll.starter + '</b></i></font><br/>' +
                 '<hr>' + options);
         } else {
             this.sendReply('|html|<div class = "infobox"><center><font size = 3><b>' + room.poll.question + '</b></font></center><br/>' +
@@ -449,8 +449,6 @@ exports.commands = {
                 '<hr>' + options);
         }
     },
-
-
 
     endpoll: 'endp',
     endp: function(target, room, user) {

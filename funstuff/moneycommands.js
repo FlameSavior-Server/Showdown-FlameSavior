@@ -34,8 +34,8 @@ exports.commands = {
 	if (!targetUser) return this.sendReply('User '+this.targetUsername+' not found.');
 	if (!target) return this.sendReply('You need to mention the number of points you want to remove from '+targetUser.name);
 	if (isNaN(target)) return this.sendReply("That isn't even a number, smartass.");
-	if (money.checkAmt(targetUser.userid, money) < target) return this.sendReply('You take away more points than what '+targetUser.name+' has!');
-        money.giveAmt(targetUser.userid, 'money', target);
+	if (money.checkAmt(targetUser.userid, 'money') < target) return this.sendReply('You take away more points than what '+targetUser.name+' has!');
+        money.removeAmt(targetUser.userid, 'money', target);
         var total = (money.checkAmt(targetUser.userid, 'money') == 1) ? 'point' : 'points';
 	var points = (target == 1) ? 'point' : 'points';
         targetUser.send('|popup|'+user.name+' has taken ' + target + ' away '+points+' from you. You now have ' + money.checkAmt(targetUser.userid, 'money') + ' '+total+'.');

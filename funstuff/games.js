@@ -449,7 +449,8 @@ exports.commands = {
                 '<hr>' + options);
         }
     },
-
+    
+    pollend: 'endp',
     endpoll: 'endp',
     endp: function(target, room, user) {
         if (!room.poll) return this.sendReply('There is no poll going on in this room.')

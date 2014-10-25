@@ -37,7 +37,7 @@ exports.commands = {
         } else {
             connection.sendTo(room, data);
         }
-    },
+    }
     
     function getavy(name) {
         if (Users.get(name)) {

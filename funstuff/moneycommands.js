@@ -70,9 +70,9 @@ exports.commands = {
             var line2 = '<font color = ' + color.get(Users.get(target).userid) + '><b>' + Users.getExact(target).name + '</b></font> has ' + badges + ' ' + p1 + '.<br/>';
             var line3 = '<font color = ' + color.get(Users.get(target).userid) + '><b>' + Users.getExact(target).name + '</b></font> has ' + symbols + ' ' + s1 + '.<br/>';
         } else {
-            var line1 = '<font color = ' + color.get(toId(target)) + '><b>' + Users.getExact(target).name + '</b></font> has ' + moneh + ' ' + q1 + '.<br/>';
-            var line2 = '<font color = ' + color.get(toId(target)) + '><b>' + Users.getExact(target).name + '</b></font> has ' + badges + ' ' + p1 + '.<br/>';
-            var line3 = '<font color = ' + color.get(toId(target)) + '><b>' + Users.getExact(target).name + '</b></font> has ' + symbols + ' ' + s1 + '.<br/>';
+            var line1 = '<font color = ' + color.get(toId(target)) + '><b>' + target + '</b></font> has ' + moneh + ' ' + q1 + '.<br/>';
+            var line2 = '<font color = ' + color.get(toId(target)) + '><b>' + target + '</b></font> has ' + badges + ' ' + p1 + '.<br/>';
+            var line3 = '<font color = ' + color.get(toId(target)) + '><b>' + target + '</b></font> has ' + symbols + ' ' + s1 + '.<br/>';
         }
         if (badges === 'no' || !badges) line2 = '';
         if (symbols === 'no' || !symbols) line3 = '';

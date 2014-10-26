@@ -361,6 +361,25 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                                 this.targetUser = targetUser;
                                 this.targetUsername = targetUser ? targetUser.name : target.substr(0, commaIndex);
                                 return target.substr(commaIndex + 1).trim();
+                        },
+                        //the below 2 are meant for trainer cards
+                        getavy: function (name) {
+                                if (Users.get(name)) return '<img src = "//play.pokemonshowdown.com/sprites/trainers/' + Users.get(name).avatar + '.png">'
+                                else return '';
+                        },
+
+                        cardPrint: function (name, target, target1) {
+                                var br = '<br/>';
+                                if (target.lastIndexOf('<br/>') === target.length - 5) br = '';
+                                if (!Users.get(name)) {
+                                        return sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
+                                } else {
+                                        if (!Users.get(name).connected) {
+                                                return sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
+                                        } else {
+                                                return sendReplyBox(target + target1);
+                                        }
+                                }
                         }
                 };
 

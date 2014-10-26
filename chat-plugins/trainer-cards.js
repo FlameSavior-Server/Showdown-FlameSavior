@@ -4,7 +4,37 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
-	
+	alphastars: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc05.deviantart.net/fs70/f/2013/084/d/a/chibi_shonen_heroes_by_timtam13-d5z7h1x.gif" width="250">' +
+			'<img src="http://fc06.deviantart.net/fs71/f/2012/272/3/1/commission__leorich_by_timtam13-d5g83kb.gif" width="250"><br />' +
+			'<b>Ace:</b> Dark matter<br />' +
+			'Professor Stars is an elegant fag who bought vip and didn\'t have enough for a big gulp from the local 7/11 afterwards.<br />' +
+			'<button name="send" value="/transferbucks alpha stars, 1">Donate a buck</button></center>'
+		);
+	},
+
+	wdff: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/sdVHX0L.gif" width="170">' +
+			'<img src="http://i.imgur.com/iCGI5HJ.gif">' +
+			'<img src="http://i.imgur.com/tp6apwP.gif" width="170"><br />' +
+			'<img src="http://i.imgur.com/1nbl5Ju.png"><br />' +
+			'<b>Ace:</b> Fortune, Geotal, Josh, Chatot, Luna, Aaron, JW, Shisui<br />' +
+			'We do it for free.</center>'
+		);
+	},
+
+	megapika: 'freeze',
+	freeze: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://imgur.com/uRumaAr.jpg"><br />' +
+			'<img src="http://i.imgur.com/dBBQkDA.gif">' +
+			'<img src="http://fc01.deviantart.net/fs71/f/2014/087/d/b/dbb08543a0026b67bf7bd6d453f668f6-d77zfp7.png" width="100"><br />' +
+			'<b>Ace:</b> Freeze Haxes<br />' +
+			'If it\'s all orgre, freeze the fuck out of everything.<a href="http://replay.pokemonshowdown.com/monotype-176487928"><button>Click Here</button></a></center>'
+		);
+	},
 
 	daigoro: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
@@ -2190,11 +2220,10 @@ exports.commands = {
 
 	emelio: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/2NpH7pp.jpg?1" width="140">' +
-			'<img src="http://i.imgur.com/8XI7o7S.png">' +
-			'<img src="http://i.imgur.com/kysoJOc.jpg?1" width="140"><br />' +
-			'<b>Ace:</b> Lucario, Zoroark, Infernape and Lugia<br />' +
-			':D</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/3rAWI24.png"><br />' +
+			'<img src="http://fc03.deviantart.net/fs70/f/2013/235/2/3/charizard_rainbow_space_by_apoca7ypse-d6jebsl.gif" width="200"><br />' +
+			'<b>Ace:</b> Hax<br />' +
+			'Burn it down, with syles and flames.</center>'
 		);
 	},
 

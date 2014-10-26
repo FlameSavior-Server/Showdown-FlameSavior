@@ -50,7 +50,7 @@ var cmds = {
 			'<li>/category [description] OR /topic [description] - Allows the person running hangman to changed the topic.</li>' +
 			'<li>/endhangman (/eh) - Ends the game of hangman in the room. Requires: + % @ & ~</li></ul>' +
 			'Have fun, and feel free to PM me if you find any bugs! - panpawn'
-			);
+		);
 	},
 	
 	hang: 'hangman',

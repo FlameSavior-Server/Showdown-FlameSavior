@@ -172,7 +172,6 @@ exports.commands = {
                 target = this.splitTarget(target);
                 var targetUser = this.targetUser;
                 if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
-                console.log(user.name);
                 if (!Rooms.rooms[room.id].users[targetUser.userid]) return this.sendReply(targetUser.name + ' is not in this room.');
                 switch (cmd) {
                         case 'roomkick':

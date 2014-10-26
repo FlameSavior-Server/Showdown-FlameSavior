@@ -468,10 +468,17 @@ exports.uncacheTree = function(root) {
 function formatMessage(message) {
         if (typeof message == 'string') {
                 message = Tools.escapeHTML(message);
-
-                message = message.replace(/\*\*([^< ]([^<]*?[^< ])?)\*\*/g, '<b>$1</b>').replace(/\_\_([^< ]([^<]*?[^< ])?)\_\_/g, '<i>$1</i>').replace(/\[\[([^< ]([^<`]*?[^< ])?)\]\]/ig, '<a href = http://www.google.com/search?ie=UTF-8&btnI&q=$1>$1</a>');
-
-                message = message.replace(/(https?\:\/\/[a-z0-9-.]+(\:[0-9]+)?(\/([^\s]*[^\s?.,])?)?|[a-z0-9]([a-z0-9-\.]*[a-z0-9])?\.(com|org|net|edu|us)(\:[0-9]+)?((\/([^\s]*[^\s?.,])?)?|\b))/ig, (message.indexOf('http://') > -1 || message.indexOf('https://') > -1) ? '<a href = "$1">$1</a>' : '<a href = "http://$1">$1</a>');
+                
+                //formatting
+                message = message.replace(/\*\*([^< ]([^<]*?[^< ])?)\*\*/g, '<b>$1</b>');
+                message = message.replace(/\`\`([^< ](?:[^<`]*?[^< ])?)\`\`/g,'<code>$1</code>');
+                message = message.replace(/\_\_([^< ]([^<]*?[^< ])?)\_\_/g, '<i>$1</i>');
+                message = message.replace(/\[\[([^< ]([^<`]*?[^< ])?)\]\]/ig, '<a href = http://www.google.com/search?ie=UTF-8&btnI&q=$1>$1</a>');
+                message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<s>$1</s>');
+                message = message.replace(/(https?\:\/\/[a-z0-9-.]+(\:[0-9]+)?(\/([^\s]*[^\s?.,])?)?|[a-z0-9]([a-z0-9-\.]*[a-z0-9])?\.(com|org|net|edu|us)(\:[0-9]+)?((\/([^\s]*[^\s?.,])?)?|\b))/ig, function(htmladd) {
+                        htmladd = htmladd.replace(/^([a-z]*[^a-z:])/g, 'http://$1');
+                        return '<a href = "http://$1">$1</a>'
+                });
 
                 if (message.indexOf('spoiler:') > -1) {
                         var position = message.indexOf('spoiler:') + 8;

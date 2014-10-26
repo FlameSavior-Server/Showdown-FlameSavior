@@ -372,12 +372,12 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
                                 var br = '<br/>';
                                 if (target.lastIndexOf('<br/>') === target.length - 5) br = '';
                                 if (!Users.get(name)) {
-                                        return sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
+                                        return this.sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
                                 } else {
                                         if (!Users.get(name).connected) {
-                                                return sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
+                                                return this.sendReplyBox(target + br + '<b>Last seen:</b> ' + datestuff.lastSeen(name) + ' ago');
                                         } else {
-                                                return sendReplyBox(target + target1);
+                                                return this.sendReplyBox(target + target1);
                                         }
                                 }
                         }

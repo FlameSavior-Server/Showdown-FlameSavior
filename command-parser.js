@@ -477,7 +477,7 @@ function formatMessage(message) {
                 message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<s>$1</s>');
                 message = message.replace(/(https?\:\/\/[a-z0-9-.]+(\:[0-9]+)?(\/([^\s]*[^\s?.,])?)?|[a-z0-9]([a-z0-9-\.]*[a-z0-9])?\.(com|org|net|edu|us)(\:[0-9]+)?((\/([^\s]*[^\s?.,])?)?|\b))/ig, function(htmladd) {
                         htmladd = htmladd.replace(/^([a-z]*[^a-z:])/g, 'http://$1');
-                        return '<a href = "http://$1">$1</a>'
+                        return '<a href = "http://$1">$1</a>';
                 });
 
                 if (message.indexOf('spoiler:') > -1) {

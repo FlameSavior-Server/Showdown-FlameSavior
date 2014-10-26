@@ -89,6 +89,19 @@ exports.commands = {
             }
         }
     },
+    
+    gender: 'setgender',
+    sg: 'setgender',
+    setgender: function(target, room, user) {
+        if (!target) return this.sendReply('You need to specify your gender (If you want to).');
+        if (target.length > 15) {
+            return this.sendReply('Your gender is too long. It can only be male or female, remember that.');
+        }
+        if (target.toLowerCase() == 'male' || target.toLowerCase() == 'female' || target.toLowerCase() == 'hidden') {
+            this.sendReply('Your gender has now been set as ' + target.toLowerCase() + '.');
+            profile.set(user.userid, "gender", target.substring(0, 1).toUpperCase() + target.substring(1));
+        } else this.sendReply('You can only register your gender as male or female, or \'hidden\'.');
+    },
 
     place: 'location',
     setlocation: 'location',

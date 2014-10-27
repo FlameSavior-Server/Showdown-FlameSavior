@@ -4,6 +4,55 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	slam: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="https://33.media.tumblr.com/7728685c5ac120c8d86013e599921648/tumblr_ml7bt9wyxk1qzp9weo2_500.gif" width="250">' +
+			'<img src="https://38.media.tumblr.com/4215700953715fc0765b819be3b963ad/tumblr_n3wg8yDzHK1rjenv2o1_500.gif" width="250"><br />' +
+			'<img src="https://38.media.tumblr.com/2471cfaa9566fd4bf9633b3bdceba788/tumblr_mmbr3j64Pk1rs46sqo1_500.gif" width="250">' +
+			'<img src="http://im.ezgif.com/tmp/gif_500x200_8e3a65.gif" width="250"><br />' +
+			'<img src="http://i1365.photobucket.com/albums/r752/LynnHikaru/slam_zpswy3zeajk.gif"><br />' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/froslass.gif">' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/lilligant.gif">' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/heracross.gif">' +
+			'<img src="http://i947.photobucket.com/albums/ad312/Silver_Eyed_Crow/ninetales_zps4b620934.gif"><br />' +
+			'The Leadership that is Snails. The Mooses that is Lily. The Determination that is Ace. The Will that is Missing. WE ARE TEAM SLAM!<br />' +
+			'<b>Ace:</b> Froslass, Lillgant, Heracross and Ninetales</center>'
+		);
+	},
+
+	wander: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/aM44gy0.gif" width="160">' +
+			'<img src="http://i.imgur.com/XAzix4P.gif" width="260">' +
+			'<img src="http://i.imgur.com/UuChYqj.gif" width="120"><br />' +
+			'<b>Ace:</b> Failed Predictions and Scarfs<br />' +
+			'You know better.</center>'
+		);
+	},
+
+	panera: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/6380f3a5fe734d6b9c1bcc418cffd6ce/tumblr_mi734wc4He1qbvovho1_500.gif" height="140">' +
+			'<img src="http://i.imgur.com/KpzOoIO.gif" width="260">' +
+			'<img src="http://s.mlpforums.com/uploads/post_images/img-1775438-1-o9zcf.jpg" width="160"><br />' +
+			'"With a woof and a purr, the rest is a blur!"<br />' +
+			'<b>Ace:</b> Umbreon and Espeon<br />' +
+			'<img Src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/umbreon.gif">' +
+			'<img Src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/espeon.gif"><br />' +
+			'<a href="https://www.youtube.com/watch?v=CRYrHmZhoUo">Theme</a></center>'
+		);
+	},
+
+	getthatwork: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://s3.amazonaws.com/rapgenius/1362717844_tumblr_mazunzLptU1qbmj6no1_500.gif" width="140">' +
+			'<img src="http://i.imgur.com/iU9CN54.png" width="260">' +
+			'<img src="http://i.imgur.com/gdVjfDm.jpg" width="140"><br />' +
+			'<b>Ace:</b> People that step up and get pop<br />' +
+			'Bruh you want the work?</center>'
+		);
+	},
+
 	alphastars: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://fc05.deviantart.net/fs70/f/2013/084/d/a/chibi_shonen_heroes_by_timtam13-d5z7h1x.gif" width="250">' +
@@ -469,10 +518,10 @@ exports.commands = {
  	artemis: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/qhoIRP4.gif" width="160">' +
-			'<img src="http://i.imgur.com/u0bAFty.gif">' +
-			'<img src="http://i.imgur.com/1RPA6bV.jpg" width="120"><br />' +
+			'<img src="http://i.imgur.com/Q3NuTZW.gif" width="260">' +
+			'<img src="http://imageserver.moviepilot.com/arrow-gifs-10-comic-shows-why-keeping-the-arrow-flash-universe-away-from-man-of-steel-universe-isn-t-a-bad-thing.gif" width="120"><br />' +
 			'<b>Ace:</b> Composite Bow<br />' +
-			'Look at the moon and see my reflection.</center>'
+			' You have FAILED this server.</center>'
 		);
 	},
 
@@ -2189,11 +2238,11 @@ exports.commands = {
 
 	acast: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/cUWyfi4.gif">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/tYBnRsN.gif">' +
 			'<img src="http://i.imgur.com/ctYX8ai.gif">' +
-			'<img src="http://i.imgur.com/47KZLj4.gif"><br />' +
+			'<img src="http://i.imgur.com/vVRpMek.gif"><br />' +
 			'<b>Ace:</b> Experience<br />' +
-			'<i>Pokémon get stronger through evolution. I get stronger through experience.</i></center>'
+			'<i>Pokémon and I both get stronger through experience. The difference is that they evolve. I grow up.</i></center>'
 		);
 	},
 

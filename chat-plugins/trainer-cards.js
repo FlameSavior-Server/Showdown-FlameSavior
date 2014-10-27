@@ -6,9 +6,9 @@ exports.commands = {
 
 	slam: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="https://33.media.tumblr.com/7728685c5ac120c8d86013e599921648/tumblr_ml7bt9wyxk1qzp9weo2_500.gif" width="250">' +
-			'<img src="https://38.media.tumblr.com/4215700953715fc0765b819be3b963ad/tumblr_n3wg8yDzHK1rjenv2o1_500.gif" width="250"><br />' +
-			'<img src="https://38.media.tumblr.com/2471cfaa9566fd4bf9633b3bdceba788/tumblr_mmbr3j64Pk1rs46sqo1_500.gif" width="250">' +
+		this.sendReplyBox('<center><img src="https://33.media.tumblr.com/7728685c5ac120c8d86013e599921648/tumblr_ml7bt9wyxk1qzp9weo2_500.gif" width="250" height="100">' +
+			'<img src="https://38.media.tumblr.com/4215700953715fc0765b819be3b963ad/tumblr_n3wg8yDzHK1rjenv2o1_500.gif" width="250" height="100"><br />' +
+			'<img src="https://38.media.tumblr.com/2471cfaa9566fd4bf9633b3bdceba788/tumblr_mmbr3j64Pk1rs46sqo1_500.gif" width="250" height="100">' +
 			'<img src="http://im.ezgif.com/tmp/gif_500x200_8e3a65.gif" width="250"><br />' +
 			'<img src="http://i1365.photobucket.com/albums/r752/LynnHikaru/slam_zpswy3zeajk.gif"><br />' +
 			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/froslass.gif">' +

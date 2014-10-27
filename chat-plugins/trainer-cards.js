@@ -4,6 +4,19 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	msk: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lucario.gif">' +
+			'<img src="http://i.imgur.com/gCapscQ.png">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/masquerain.gif"><br />' +
+			'<marquee direction="down" scrollamount="20" height="70"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/eelektross.gif"></marquee><br />' +
+			'<b><font color="#D7DF01">Ace:</b></font> Bouncing Eelektross<br />' +
+			'<font color="purple">Master of Nightmare</b></font><br />' +
+			'<font color="red">"Winning is a habit. Unfortunately, so is losing."</font><br /> ' +
+			'<button name="send" value="/transferbucks Randorosu Bank, 1">Feeling Rich? Donate some money today!</button></center>'
+		);
+	},
+
 	slam: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://33.media.tumblr.com/7728685c5ac120c8d86013e599921648/tumblr_ml7bt9wyxk1qzp9weo2_500.gif" width="250" height="100">' +
@@ -2298,10 +2311,10 @@ exports.commands = {
 
 	roy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i1148.photobucket.com/albums/o579/catfight09/Katekyo-Hitman-Reborn-image-katekyo-hitman-reborn-36253653-1024-768_zpsc394eb95.jpg" width="160">' +
-			'<img src="http://i.imgur.com/wOPNjVd.gif">' +
-			'<img src="http://i1148.photobucket.com/albums/o579/catfight09/Katekyo-Hitman-Reborn-image-katekyo-hitman-reborn-36253670-1680-1050_zps0e8f54a6.jpg" width="160"><br />' +
-			'<b>Ace:</b> Victini<br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/g6UjJZ0.jpg" height="180">' +
+			'<img src="http://i.imgur.com/f4lVyZA.gif">' +
+			'<img src="http://i.imgur.com/IceEsWu.png" width="200"><br />' +
+			'<b>Ace:</b> Keldeo<br />' +
 			'A boss is someone who puts his life on the line for his subordinates.</center>'
 		);
 	},

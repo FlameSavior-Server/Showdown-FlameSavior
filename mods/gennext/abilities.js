@@ -160,14 +160,12 @@ exports.BattleAbilities = {
 			if (this.isWeather('sunnyday')) {
 				if (pokemon.isActive && pokemon.speciesid === 'cherrim' && this.effectData.forme !== 'Sunshine') {
 					this.effectData.forme = 'Sunshine';
-					this.add('-formechange', pokemon, 'Cherrim-Sunshine');
-					this.add('-message', pokemon.name + ' transformed!');
+					this.add('-formechange', pokemon, 'Cherrim-Sunshine', '[msg]');
 					this.boost({spd:1});
 				}
 			} else if (pokemon.isActive && pokemon.speciesid === 'cherrim' && this.effectData.forme) {
 				delete this.effectData.forme;
-				this.add('-formechange', pokemon, 'Cherrim');
-				this.add('-message', pokemon.name + ' transformed!');
+				this.add('-formechange', pokemon, 'Cherrim', '[msg]');
 			}
 		},
 		effect: {
@@ -235,7 +233,7 @@ exports.BattleAbilities = {
 	"solidrock": {
 		inherit: true,
 		onFoeBasePower: function (basePower, attacker, defender, move) {
-			if (this.getEffectiveness(move.type, defender) > 0) {
+			if (defender.runEffectiveness(move) > 0) {
 				this.add('-message', "The attack was weakened by Solid Rock!");
 				return basePower * 1 / 2;
 			}
@@ -244,7 +242,7 @@ exports.BattleAbilities = {
 	"filter": {
 		inherit: true,
 		onFoeBasePower: function (basePower, attacker, defender, move) {
-			if (this.getEffectiveness(move.type, defender) > 0) {
+			if (defender.runEffectiveness(move) > 0) {
 				this.add('-message', "The attack was weakened by Filter!");
 				return basePower * 1 / 2;
 			}

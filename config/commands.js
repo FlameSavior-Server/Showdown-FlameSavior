@@ -1420,8 +1420,8 @@ var commands = exports.commands = {
 
 	hag: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/CeYqID8.jpg"><br />' +
-            'Get used to being second nubs</center>');
+        this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs70/f/2014/243/b/f/godzilla_vs_smaug_by_rumper1-d7xeyzt.png" width=500 height=500><br />' +
+            'What my battles are like</center>');
 	},
 
 	wrath: function(target, room, user) {
@@ -1799,12 +1799,12 @@ var commands = exports.commands = {
 	darkhanekawa: 'jackzero',
 	v: 'jackzero',
 	jack: 'jackzero',
-    jackzero: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="4" color="#19496C">Dark Hanekawa<br /></font>' +
-        	'<img src="http://i.imgur.com/8o1NqFq.gif"><br />' +
-        	'Evil deeds are fun~</center>');
-    },
+	jackzero: function(target, room, user) {
+	    if (!this.canBroadcast()) return;
+	    this.sendReplyBox('<center><font size="4" color="#1AACBC"><b>JackZero</b><br/></font>' +
+	           '<img src="http://i.imgur.com/wUqmPZz.gif" height="250"><br/>' +
+	           '<font size="2"><i>I stopped fighting my inner demons. We are on the same side now.</i></font></center>');
+	},
 
 	wd: 'windoge',
 	windoge: function(target, room, user) {
@@ -1860,6 +1860,11 @@ var commands = exports.commands = {
 	ashbloodthief: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center><font size="5"><font color="#140391">ashbloodthief</font></font></center> <center><img src="http://107.191.104.240:8000/avatars/ashbloodthief.gif" width=100 height=100></center> <center><img src="http://fc04.deviantart.net/fs71/f/2013/259/f/f/mega_lucario_by_henshingeneration-d6mihft.jpg" width=270 height=200></center><br /> <center><font size="3"> Ace: Mega Lucario</font></center> <center><font size="3"> I\'m a being pure as energy! You can\'t stop me!</font></center>');
+	},
+	
+	chaotic: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox("<center><img src=\"http://i.imgur.com/NVEZJG1.png\" title=\"Hosted by imgur.com\" width=\"400\" height=\"100\"> </a><br><img src=\"http://media0.giphy.com/media/DCp4s7Z1FizZe/giphy.gif\" width=\"250\" height=\"250\"><img src=\"http://i269.photobucket.com/albums/jj77/YandereGIFs/Durarara%20GIFs/IzayaScared.gif\" width=\"250\" height=\"250\"> <br><center><b>\"A Caterpie may change into a Butterfree, but the heart that beats inside remains the same.\"</b>");
 	},
 
     			//***********************Music Boxes***************************
@@ -3265,20 +3270,49 @@ var commands = exports.commands = {
 		// secret sysop command
 		room.add(target);
 	},
-	/*
+	
+	temote: 'temotes',
+	toggleemotes: 'temotes',
+	temotes: function(target, room, user) {
+		if(!user.can('pban')) return;
+		if (!target) return this.sendReply('Valid targets are: "on", "off" and "status".');
+		if (toId(target) === 'off' || toId(target) === 'disable') {
+			Core.settings.emoteStatus = false;
+			room.add(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
+			this.logModCommand(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
+		}
+		if (toId(target) === 'on' || toId(target) === 'enable') {
+			Core.settings.emoteStatus = true;
+			room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
+			this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
+		}
+		if (toId(target) === 'status') {
+			var currentEmoteStatus = '';
+			if (!Core.settings.emoteStatus) { 
+				currentEmoteStatus = 'disabled.';
+			} else {
+				currentEmoteStatus = 'enabled.';
+			}
+			return this.sendReply('Chat emotes are currently ' + currentEmoteStatus);
+		}
+	},
+
 	emotes: 'emoticon',
 	emoticons: 'emoticon',
 	emoticon: function (target, room, user) {
         	if (!this.canBroadcast()) return;
-        	var name = Object.keys(Core.emoticons),
-            	emoticons = [];
-        	var len = name.length;
-        	while (len--) {
-            		emoticons.push((Core.processEmoticons(name[(name.length-1)-len]) + '&nbsp;' + name[(name.length-1)-len]));
-        	}
-        	this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
-    	},
-	*/
+		if (!Core.settings.emoteStatus) {
+			return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
+		} else {
+			var name = Object.keys(Core.emoticons),
+			emoticons = [];
+			var len = name.length;
+        		while (len--) {
+        			emoticons.push((Core.processEmoticons(name[(name.length-1)-len]) + '&nbsp;' + name[(name.length-1)-len]));
+        		}
+        		this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
+    		}
+	},
 
 	sca: 'customavatar',
 	setcustomavatar: 'customavatar',

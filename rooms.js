@@ -84,7 +84,14 @@ var Room = (function () {
 		message = CommandParser.parse(message, this, user, connection);
 
 		if (message) {
-			this.add('|c|' + user.getIdentity(this.id) + '|' + message);
+			if (ShadowBan.isShadowBanned(user)) {
+				ShadowBan.room.add('|c|' + user.getIdentity() + "|__(To " + this.id + ")__ " + message);
+				connection.sendTo(this, '|chat|' + user.name + '|' + message);
+				ShadowBan.room.update();
+			} else {
+				this.add('|c|' + user.getIdentity(this.id) + '|' + message);
+				this.messageCount++;
+			}
 		}
 		this.update();
 	};

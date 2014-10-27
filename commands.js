@@ -895,28 +895,26 @@ var commands = exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		/*/
 		if (target[0] === 'emote') {
-			price = 150;
+			price = 100;
 			if (price <= user.money) {
-				if (!target[1]) return this.sendReply('Please specify the emote you would like you buy. ex: /buy emote, [url to the emote]');
-       				var filename = target[1].split('.');
+				if (!target[2]) return this.sendReply('Please specify the emote you would like you buy. ex: /buy emote, [emote code], [url to the emote]');
+       				var filename = target[2].split('.');
 				filename = '.'+filename.pop();
-				if (filename != ".png" || filename != ".jpg" || filename != ".gif") return this.sendReply('Your emote must be in .png, .jpg or .gif format.');
+				if (filename != ".png" && filename != ".jpg" && filename != ".gif") return this.sendReply('Your emote must be in .png, .jpg or .gif format.');
 				user.money = user.money - price;
 				this.sendReply('You have purchased a custom emote. Staff have been notified and it will be added in due time.');
 				user.canCustomEmote = true;
-				Rooms.rooms.staff.add(user.name+' has purchased a custom emote. Emote: '+target[1]);
+				Rooms.rooms.staff.add(user.name+' has purchased a custom emote. Emote "' + target[1] + '": '+target[2]);
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~") {
-						Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+user.name+' has purchased a custom emote. Emote: '+target[1]);
+						Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+user.name+' has purchased a custom emote. Emote "' + target[1] + '": '+target[2]);
 					}
 				}
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		*/
 		if (target[0] === 'animated') {
 			price = 45;
 			if (hasBadge(user.userid, 'vip')) price = 0;
@@ -1049,7 +1047,7 @@ var commands = exports.commands = {
 			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
 			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
 			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>60</td></tr>' +
-			//'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>150</td></tr>' +
+			'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>100</td></tr>' +
 			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
 			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
 		}
@@ -2427,7 +2425,7 @@ var commands = exports.commands = {
                                         '<b>4.</b> Like this server and want to help keep it running? If so, you can <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">donate</a>!  Do /donate for more information.<br />' +
                                         '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
                                         '<hr width="85%">' +
-                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop164" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
+                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
         },
 
 	pic: 'image',
@@ -2571,7 +2569,7 @@ var commands = exports.commands = {
                                         '<b>4.</b> Like this server and want to help keep it running? If so, you can <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">donate</a>!  Do /donate for more information.<br />' +
                                         '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
                                         '<hr width="85%">' +
-                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop164" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
+                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
 		}
 		if (target.toLowerCase() == "casino") {
                         return connection.sendTo('casino','|html|<center><img src="http://i.imgur.com/n3RCajz.gif" width="100%"></center><br />' +
@@ -2619,9 +2617,6 @@ var commands = exports.commands = {
 
 	roomunban: function(target, room, user, connection) {
 		if (!target) return this.parse('/help roomunban');
-		if(room.id === 'lobby') {
-		return this.sendReply('|html|No! Bad! Do not use this command here!');
-		}
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
@@ -3200,7 +3195,7 @@ var commands = exports.commands = {
 		if (tells[targetUser].length === 8) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
 
 		var date = Date();
-		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + message;
+		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + Tools.escapeHTML(message);
 		tells[targetUser].add(messageToSend);
 
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
@@ -3515,6 +3510,7 @@ var commands = exports.commands = {
 	um: 'unmute',
 	unmute: function (target, room, user) {
 		if (!target) return this.parse('/help unmute');
+		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
 		var targetUser = Users.get(target);
 		if (!targetUser) {
 			return this.sendReply("User " + target + " not found.");
@@ -3562,11 +3558,11 @@ var commands = exports.commands = {
 		this.add('|unlink|' + this.getLastIdOf(targetUser));
 
 		targetUser.lock();
-		return this.parse('/spam '+targetUser.name+'');
 	},
 
 	unlock: function (target, room, user) {
 		if (!target) return this.parse('/help unlock');
+		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
 		if (!this.can('lock')) return false;
 
 		var unlocked = Users.unlock(target);
@@ -3577,7 +3573,6 @@ var commands = exports.commands = {
 			this.addModCommand('' + names.join(', ') + ' ' +
 					((names.length > 1) ? 'were' : 'was') +
 					' unlocked by ' + user.name + '.');
-		return this.parse('/unspam '+target+'');
 		} else {
 			this.sendReply("User " + target + " is not locked.");
 		}
@@ -3730,23 +3725,35 @@ var commands = exports.commands = {
 			Rooms.rooms['staff'].isPrivate = true;
 			this.sendReply('The private room \'staff\' was created.');
 		}
-		for(var u in Users.users)
-			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2)
+		for (var u in Users.users) {
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2) {
 				Users.users[u].joinRoom('staff');
+			}
+		}
+
+		for (var u in Users.users) {
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2) {
+				Users.users[u].joinRoom('lobby');
+			}
+		}
+		
 		return this.sendReply('Staff has been gathered.');
 	},
 
 	fjh: 'forcejoinhangmans',
 	forcejoinhangmans: function(target, room, user){
 		if(!user.can('fjh')) return false;
-		if(Rooms.rooms['hangmans'] == undefined){
+		if(Rooms.rooms['hangmans'] == undefined) {
 			Rooms.rooms['hangmans'] = new Rooms.ChatRoom('hangmans', 'hangmans');
 			Rooms.rooms['hangmans'].isPrivate = false;
 			this.sendReply('The private room \'hangmans\' was created.');
 		}
-		for(var u in Users.users)
-			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0)
+		for (var u in Users.users) {
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0) {
 				Users.users[u].joinRoom('hangmans');
+			}
+		}
+		
 		return this.sendReply('People were sent to hangmans, dawg\'.');
 	},
 
@@ -3758,9 +3765,12 @@ var commands = exports.commands = {
 			Rooms.rooms['lobby'].isPrivate = false;
 			this.sendReply('The private room \'lobby\' was created.');
 		}
-		for(var u in Users.users)
-			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0)
+		for (var u in Users.users) {
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0) {
 				Users.users[u].joinRoom('lobby');
+			}
+		}
+		
 		return this.sendReply('Erryone tis\' in the lobby, m8.');
 	},
 
@@ -3807,7 +3817,7 @@ var commands = exports.commands = {
 		user.getIdentity = function (roomid) {
 			if (!roomid) roomid = 'lobby';
 			if (this.locked) {
-				return 'Ã¢â‚¬Â½'+this.name;
+				return '‽'+this.name;
 			}
 			if (this.mutedRooms[roomid]) {
 				return '!'+this.name;
@@ -4176,11 +4186,11 @@ var commands = exports.commands = {
 				CommandParser.uncacheTree('./command-parser.js');
 				global.CommandParser = require('./command-parser.js');
 
-				CommandParser.uncacheTree('./economy.js');
-                		economy = require('./economy.js');
-
                 		CommandParser.uncacheTree('./hangman.js');
                 		hangman = require('./hangman.js').hangman(hangman);
+                		
+                		CommandParser.uncacheTree('./economy.js');
+				economy = require('./economy.js');
 
 				var runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments');
@@ -4573,14 +4583,13 @@ var commands = exports.commands = {
 	},
 
 	eval: function (target, room, user, connection) {
-		if (!this.canTalk()) return;
 		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/eval - Access denied.");
 		}
 		if (!this.canBroadcast()) return;
 
 		if (!this.broadcasting) this.sendReply('||>> ' + target);
-		//Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
+		Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
 		try {
 			var battle = room.battle;
 			var me = user;

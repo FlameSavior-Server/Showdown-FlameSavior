@@ -456,4 +456,4 @@ global.hangman = require('./hangman.js').hangman();
 try {
 	global.economy = require('./economy.js');
 } catch (e) {}
-//global.Core = require('./core.js').core;
+global.Core = require('./core.js').core;

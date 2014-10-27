@@ -48,6 +48,7 @@ exports.addUser = function (user) {
 	targets = Object.keys(targets).sort();
 	if (targets.length > 0) {
 		room.add("||Added users: " + targets.join(", "));
+		room.update();
 	}
 	return targets;
 };
@@ -66,6 +67,7 @@ exports.removeUser = function (user) {
 	targets = Object.keys(targets).sort();
 	if (targets.length > 0) {
 		room.add("||Removed users: " + targets.join(", "));
+		room.update();
 	}
 	return targets;
 };
@@ -83,6 +85,7 @@ exports.isShadowBanned = function (user) {
 	if (Object.size(addedUsers) > 0) {
 		Rooms.global.writeChatRoomData();
 		room.add("||Alts automatically added: " + Object.keys(addedUsers).sort().join(", "));
+		room.update();
 	}
 
 	return true;

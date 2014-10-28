@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ace: function(target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://29.media.tumblr.com/tumblr_lc7yyaLdAN1qf2zsro1_500.gif" height=100>' +
+			'<img src="http://i1187.photobucket.com/albums/z387/Party-Tonight/GIFS/pokemon-gif-pidgey.gif" height=100>' +
+			'<img src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/10505619_10203970992572205_8680342348059596677_n.jpg" height=100><br />' +
+			'<b>Ace:</b> Shoes and Avatars<br />' +
+			'Like my Shoes, women, and avatars, I don\'t stay with the same for too long</center>'
+		);
+	},
+
 	msk: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lucario.gif">' +
@@ -145,7 +155,7 @@ exports.commands = {
 			'My body has 206 bones-when I\'m with you I have 207.</center>'
 		);
 	},
-	
+
 	squirtlesquad: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/7abbca7812fe3ba9e257d5cbe484a071/tumblr_n91wug2Upv1tqptlzo1_500.gif" width="140">' +

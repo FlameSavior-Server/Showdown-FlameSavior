@@ -65,6 +65,7 @@ emoticons: {
         '♥': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-577ade91d46d7edc-24x18.png',
         '^this': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-26110-src-f0cb5b62c8a523c2-28x28.png',
         'Shrek': 'http://i.imgur.com/5etZpLj.png',
+        'meowTH': 'http://img-cache.cdn.gaiaonline.com/28bb9d720cfcb26306a269225a1ce756/http://i148.photobucket.com/albums/s5/silentsasuke/pokemon%20mini%20icons/meowth.png',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

@@ -55,7 +55,7 @@ emoticons: {
         'sheeT': 'https://lh5.googleusercontent.com/-is1zLiGyM8s/TzOfCuMbApI/AAAAAAAAKSo/r7U1kVWgpJk/s25/toilet.jpg',
         ':X': 'http://freeemoticonsandsmileys.com/emoticons/Icq%20Emoticons/don\'t%20tell%20anyone.png',
         'o_O': 'http://i18.photobucket.com/albums/b137/mcquackers/Emoticons/Emoticon.gif',
-        ':I': 'http://www.pokesun.com/images/smilies/confused.gif',
+        'I:': 'http://www.pokesun.com/images/smilies/confused.gif',
         'paN': 'http://cdn3.volusion.com/heajx.zsvpy/v/vspfiles/photos/options/swiss-induction-fry-pan-255-S.jpg?1393852768',
         'shayMin': 'http://piq.codeus.net/static/media/userpics/piq_181515_25x25.png',
         'kiTTy': 'http://www.smileyarena.com/emoticons/Main/Cats/cat03.jpg',

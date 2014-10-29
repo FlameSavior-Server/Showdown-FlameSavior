@@ -475,7 +475,7 @@ function formatMessage(message) {
                 message = message.replace(/\_\_([^< ]([^<]*?[^< ])?)\_\_/g, '<i>$1</i>');
                 message = message.replace(/\[\[([^< ]([^<`]*?[^< ])?)\]\]/ig, '<a href = http://www.google.com/search?ie=UTF-8&btnI&q=$1>$1</a>');
                 message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<s>$1</s>');
-                message = message.replace(/(https?\:\/\/[a-z0-9-.]+(\:[0-9]+)?(\/([^\s]*[^\s?.,])?)?|[a-z0-9]([a-z0-9-\.]*[a-z0-9])?\.(com|org|net|edu|us)(\:[0-9]+)?((\/([^\s]*[^\s?.,])?)?|\b))/ig, '<a href = "http://$1>$1</a>');
+                message = message.replace(/(https?\:\/\/[a-z0-9-.]+(\:[0-9]+)?(\/([^\s]*[^\s?.,])?)?|[a-z0-9]([a-z0-9-\.]*[a-z0-9])?\.(com|org|net|edu|us)(\:[0-9]+)?((\/([^\s]*[^\s?.,])?)?|\b))/ig, '<a href = "http://$1">$1</a>');
 
                 if (message.indexOf('spoiler:') > -1) {
                         var position = message.indexOf('spoiler:') + 8;

@@ -60,7 +60,7 @@ exports.commands = {
     fcs: 'friendcode',
     friendcode: function(target, room, user, connection, cmd) {
         if (!this.canBroadcast()) return;
-        var userdetails = fs.readFileSync('config/userdetails.json');
+        var userdetails = fs.readFileSync('infofiles/userdetails.json');
         var code = JSON.parse(userdetails);
         if (!target) {
             if (this.broadcasting) {

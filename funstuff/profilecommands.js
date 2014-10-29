@@ -1,3 +1,4 @@
+var fs = require("fs");
 exports.commands = {
 
     regdate: function(target, room, user, connection) {

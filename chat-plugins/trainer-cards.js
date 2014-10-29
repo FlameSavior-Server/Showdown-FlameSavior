@@ -4,6 +4,28 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	gambling: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Qz9ARmv.png" width="450"><br />' +
+			'<img src="http://twgradio.com/wp-content/uploads/2014/01/Gambling.jpg" width="200"><br />' +
+			'<b>Ace:</b> Stupidity<br />' +
+			'"If you got the luck, and loans, your ready to gamble! If you have non of the above, get a different addiction, or idk, a life?"<br />' +
+			'<button name="send" value="/transferbucks Affinity Stufisk, 1">Donate to Gambling!</button>' +
+			'<a href="http://pastebin.com/TP2SV2QR"><button>Stun\'s Gambling services</button></a><br />' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/618.gif"></center>'
+		);
+	},
+
+	squad: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/rGMM2ro.jpg" width="140">' +
+			'<img src="http://i.imgur.com/oZHTErE.jpg" width="260">' +
+			'<img src="http://i.imgur.com/JwtUjdt.gif" width="140"><br />' +
+			'<b>Ace:</b> Traven, Jolts, Fer<br />' +
+			'The strength of the pack is the wolf, but the strength of the wolf is the pack.</center>'
+		);
+	},
+
 	ace: function(target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://29.media.tumblr.com/tumblr_lc7yyaLdAN1qf2zsro1_500.gif" height=100>' +
@@ -2037,9 +2059,9 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 			this.sendReplyBox('<center><img src="http://i.imgur.com/2j67WZG.jpg" width="140">' +
 			'<img src="http://i.imgur.com/oJ5c6JZ.png">' +
-			'<img src="http://i.imgur.com/mWUrtx5.gif" width="140"><br />' +
-			'<b>Ace:</b> Mega-Blastoise<br />' +
-			'I am Greed, the root of all evil.</center>'
+			'<img src="http://i.imgur.com/8VCEwyU.jpg" width="140"><br />' +
+			'<b>Ace:</b> Hydreigon<br />' +
+			'GET REKT</center>'
 		);
 	},
 

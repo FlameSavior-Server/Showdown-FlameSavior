@@ -121,8 +121,8 @@ var commands = exports.commands = {
 		if (targetUser.ignorePMs && !user.can('lock')) {
 			if (!targetUser.can('lock')) {
 				return this.popupReply("This user is blocking Private Messages right now.");
-			} else if (targetUser.can('hotpatch')) {
-				return this.popupReply("This admin is too busy to answer Private Messages right now. Please contact a different staff member.");
+			} else if (targetUser.can('hotpatch') && !user.can('broadcast')) {
+				return this.popupReply("This admin is too busy to answer Private Messages right now. Please use /requesthelp if you require assistance.");
 			}
 		}
 
@@ -138,10 +138,12 @@ var commands = exports.commands = {
 			case 'announce':
 			case 'invite':
 				break;
+			case 'declare':
 			case 'html':
-				if (!user.can('declare')) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text /html - Access denied.");
+				if (!user.can('ban')) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text /html - Access denied.");
+				if (target.indexOf(' ') < 0) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text Usage: /" + targetCmd + " [message]");
 				target = '/html <span class="chat"><small>' + user.getIdentity().substr(0,1) + '</small></span><button class="astext" name="parseCommand" value="/user ' + user.name +
-					'"><font color="' + frostcommands.hashColor(user.userid) + '"><strong>' + Tools.escapeHTML(user.name) + ':</strong></font></button> ' + target.substr(5, target.length).replace(/<img/g, "<img width=242");
+					'"><font color="' + frostcommands.hashColor(user.userid) + '"><strong>' + Tools.escapeHTML(user.name) + ':</strong></font></button> ' + target.substr(target.indexOf(' '), target.length);
 				break;
 			default:
 				return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text The command '/" + targetCmd + "' was unrecognized or unavailable in private messages. To send a message starting with '/" + targetCmd + "', type '//" + targetCmd + "'.");

@@ -138,6 +138,11 @@ var commands = exports.commands = {
 			case 'announce':
 			case 'invite':
 				break;
+			case 'html':
+				if (!user.can('declare')) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text /html - Access denied.");
+				target = '/html <span class="chat"><small>' + user.getIdentity().substr(0,1) + '</small></span><button class="astext" name="parseCommand" value="/user ' + user.name +
+					'"><font color="' + frostcommands.hashColor(user.userid) + '"><strong>' + Tools.escapeHTML(user.name) + ':</strong></font></button> ' + target.substr(5, target.length).replace(/<img/g, "<img width=242");
+				break;
 			default:
 				return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text The command '/" + targetCmd + "' was unrecognized or unavailable in private messages. To send a message starting with '/" + targetCmd + "', type '//" + targetCmd + "'.");
 			}

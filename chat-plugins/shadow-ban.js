@@ -75,7 +75,7 @@ var checkBannedCache = {};
 var checkBanned = exports.checkBanned = function (user) {
 	var userId = toId(user);
 	if (userId in checkBannedCache) return checkBannedCache[userId];
-	console.log("Shadow ban cache miss:", userId);
+	//console.log("Shadow ban cache miss:", userId);
 
 	var targets = Object.keys(getAllAlts(user)).sort();
 	var bannedUsers = Object.keys(room.addedUsers).sort();

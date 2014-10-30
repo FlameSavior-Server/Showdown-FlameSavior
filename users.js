@@ -1006,7 +1006,6 @@ User = (function () {
 
 			var frostDev = false;
 			var vip = false;
-
 			var group = Config.groupsranking[0];
 			var isSysop = false;
 			var avatar = 0;
@@ -1087,7 +1086,6 @@ User = (function () {
 					this.isStaff = false;
 				}
 				this.isSysop = false;
-
 				this.frostDev = false;
 				this.vip = false;
 
@@ -1122,10 +1120,8 @@ User = (function () {
 			this.group = group;
 			this.isStaff = (this.group in {'%':1, '@':1, '&':1, '~':1});
 			this.isSysop = isSysop;
-
 			this.frostDev = frostDev;
 			this.vip = vip;
-
 			if (avatar) this.avatar = avatar;
 			if (this.forceRename(name, authenticated)) {
 				Rooms.global.checkAutojoin(this);
@@ -1207,7 +1203,6 @@ User = (function () {
 				for (var j in connection.rooms) {
 					this.leaveRoom(connection.rooms[j], connection, true);
 				}
-				connection.user = null;
 				--this.ips[connection.ip];
 				this.connections.splice(i, 1);
 				break;
@@ -1223,7 +1218,7 @@ User = (function () {
 				}
 			}
 			this.roomCount = {};
-			if (!this.named && !Object.size(this.prevNames)) {
+			if (!this.named && Object.isEmpty(this.prevNames)) {
 				// user never chose a name (and therefore never talked/battled)
 				// there's no need to keep track of this user, so we can
 				// immediately deallocate
@@ -1243,14 +1238,17 @@ User = (function () {
 		for (var i = 0; i < this.connections.length; i++) {
 			// console.log('DESTROY: ' + this.userid);
 			connection = this.connections[i];
-			connection.user = null;
 			for (var j in connection.rooms) {
 				this.leaveRoom(connection.rooms[j], connection, true);
 			}
 			connection.destroy();
 			--this.ips[connection.ip];
 		}
-		this.connections = [];
+		if (this.connections.length) {
+			// should never happen
+			console.log('!! failed to drop all connections for ' + this.userid);
+			this.connections = [];
+		}
 		for (var i in this.roomCount) {
 			if (this.roomCount[i] > 0) {
 				// should never happen.
@@ -1680,6 +1678,7 @@ User = (function () {
 		}
 	};
 	User.prototype.destroy = function () {
+		this.disconnectAll();
 		// deallocate user
 		for (var roomid in this.mutedRooms) {
 			clearTimeout(this.mutedRooms[roomid]);
@@ -1732,6 +1731,7 @@ Connection = (function () {
 	Connection.prototype.destroy = function () {
 		Sockets.socketDisconnect(this.worker, this.socketid);
 		this.onDisconnect();
+		this.user = null;
 	};
 	Connection.prototype.onDisconnect = function () {
 		delete connections[this.id];

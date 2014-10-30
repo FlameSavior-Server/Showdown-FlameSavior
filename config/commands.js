@@ -1457,11 +1457,11 @@ var commands = exports.commands = {
 	equinox: 'solstice',
 	solstice: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://i.imgur.com/6WcNxO9.gif">' +
-        	'<img src="http://i.imgur.com/vAsLJda.png"><br />' +
-            '<img src="http://i.imgur.com/FnAsxKa.png"><br />' +
-            'Is what I\'ve done too much to take,<br />' +
-            'Or are you scared of being nothing?</center>');
+        this.sendReplyBox('<center><img src="http://i.imgur.com/Tbgfl9Y.gif">' +
+        	'<img src="http://i.imgur.com/5dBIhwe.png"><br />' +
+            '<img src="http://i.imgur.com/6m3XOcg.png"><br />' +
+            'All of us will die at some point.<br />' +
+            'I just don\'t give a damn about it.</center>');
 	},
 
 	typhozzz: function(target, room, user) {

@@ -1,4 +1,4 @@
-/*
+
 #header{
 	background-color:#4594c9;
 }
@@ -86,7 +86,7 @@ body {
 .userlist {
 	border-left:1px solid #D5DDE4;
 	background:#b2d9f0;
-}*/
+}
 
 /**************************
 * For the colour commands *
@@ -440,7 +440,8 @@ body{
 /****************************
 *Thanksgiving Theme (deer)  *
 ****************************/
-/*#header{
+/*
+#header{
 background:url("http://pythoughts.com/wp-content/uploads/2011/01/hrgreenbrown.jpg");
 }
 
@@ -483,7 +484,8 @@ background:#B5823F
 
 .message-announce {
 background:#000000
-}*/
+}
+*/
 /************************************************
 *Vaniluxe theme                                 *
 ************************************************/
@@ -543,6 +545,7 @@ background:#000000
 /*****************************
 *halloween theme             *
 *****************************/
+/*
 #header{
 	background:url("http://i.imgur.com/F5pMH0a.png");
 }
@@ -605,3 +608,4 @@ body {
 .message-announce {
 	background:#000000;
 }
+*/

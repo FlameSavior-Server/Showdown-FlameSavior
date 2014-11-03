@@ -53,6 +53,7 @@ const messages = [
 	"got outsassed by Félicette!", // bought by Félicette
 	"got outclassed by Félicette!",
 	"was proclaimed an enemy of the state by King Jong-un!", // bought by KJU
+	"got haxed by minatokyuubi", // bought by minatokyuubi
 ];
 
 exports.commands = {

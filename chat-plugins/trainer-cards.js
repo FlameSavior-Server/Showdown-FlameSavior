@@ -4,6 +4,48 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	minority: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://2.bp.blogspot.com/-czdsRVMKkXk/U1kpDIEHuwI/AAAAAAAAD_U/Pnf3DQ6KYbA/s1600/funny-animal-gifs-10.gif" width="120">' +
+			'<img src="http://i.imgur.com/1mXD7X1.png" width="300">' +
+			'<img src="http://www.girlmeetsfood.com/wp-content/uploads/2012/04/mexican-cat.jpg" width="120"><br />' +
+			'<b>Ace:</b> Mexicans, Asians, Africans and every religion that\'s not white<br />' +
+			'#GivePriorityToMinorities</center>'
+		);
+	},
+
+	jdsart: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/kRVmu2e.jpg" title=kabuto">' +
+			'<img src="http://i.imgur.com/l6vuvM6.jpg" title="geodude">' +
+			'<img src="http://i.imgur.com/hHzM6XY.jpg" title="ponyta"><br />' +
+			'<b><i>Artist:</b> jd<br />' +
+			'<font size=3> the new leonardo da vinci.</i></font></center>'
+		);
+	},
+
+	reaper: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc08.deviantart.net/fs70/f/2014/142/e/4/shiny_chesnaught_by_syl_veon-d7jdj66.gif">' +
+			'<img src="http://i.imgur.com/NzqqsYR.png" width="280">' +
+			'<img src="http://img4.wikia.nocookie.net/__cb20131203191952/es.pokemon/images/7/7f/Salamence_XY.gif"><br />' +
+			'<b>Ace:</b><font color="blue"> Salamence and Chesnaught<br />' +
+			'The fear of death follows from the fear of life. A man who lives fully is prepared to die at any time.</center>'
+		);
+	},
+
+	genericpsy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/XbV0J3Z.gif"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/slowbro.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/victini.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/meloetta.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mew.gif"><br />' +
+			'<font color="pink"><b>Ace:</font></b> Dolph, CC, Bossman, Psyzen, Video<br />' +
+			'<font color="purple">"We say we aint generic cuz our sets are different, but we just lost ass generic niggas"</b></font></center>'
+		);
+	},
+
 	gambling: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Qz9ARmv.png" width="450"><br />' +

@@ -4,6 +4,38 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	kswiss: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/84J77Yg.gif">' +
+			'<img src="http://i.imgur.com/m5WmB6R.gif">' +
+			'<img src="http://i.imgur.com/BJGr0e6.gif"><br />' +
+			'<b>Ace:</b> Darmanitan<br />' +
+			'When in doubt, just Flare Blitz.</center>'
+		);
+	},
+
+	dragonslayer: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc08.deviantart.net/fs70/f/2011/138/4/0/volcarona_not_impressed_by_doomdrao-d3gmevy.png" width="120">' +
+			'<img src="http://i.imgur.com/ancPV1d.gif" width="300">' +
+			'<img src="http://i.imgur.com/HAQxw3t.png" width="120"><br />' +
+			'<b>Ace:</b> Volcarona the Terrible<br />' +
+			'Bodying dragons since gen 5.</center>'
+		);
+	},
+
+	sandwich: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/r7Ef45i.gif" width="120">' +
+			'<img src="http://i.imgur.com/hCvUDeF.gif" width="300">' +
+			'<img src="http://i.imgur.com/POp36V2.png" width="120"><br />' +
+			'<b>Ace:</b> Quick Claw<br />' +
+			'<blink><font color="red">Y0ung Sandwich has no chill</font></blink><br />' +
+			'<a href="http://replay.pokemonshowdown.com/frost-orasou-1107889"><button>( ͡° ͜ʖ ͡°)</button></a><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/rhyperior.gif"></center>'
+		);
+	},
+
 	minority: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://2.bp.blogspot.com/-czdsRVMKkXk/U1kpDIEHuwI/AAAAAAAAD_U/Pnf3DQ6KYbA/s1600/funny-animal-gifs-10.gif" width="120">' +

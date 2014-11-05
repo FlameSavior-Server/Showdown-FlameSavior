@@ -4,6 +4,23 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	skarmor: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://cdn.pokestache.com/2014/3/21/bc0783231f05b032187d48a4c5c73683.gif" width="160">' +
+			'<img src="http://cdn.pokestache.com/2013/12/30/9796dab47a2ff39de7abd6a93d4eb81d.gif" width="200">' +
+			'<img src="http://cdn.pokestache.com/2014/2/20/8a9e27ad681e2e9807390122e1ed9412.gif" width="180"><br />' +
+			'<b>Ace:</b> Beedrill</center>'
+		);
+	},
+
+	qusawa: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Vjj5cZw.jpg" width="300"><br />' +
+			'<b>Ace:</b> <blink>Overseas Relations</blink><br />' +
+			' It\'s time for a game of cat & mouse, however I will always let you catch me..</center>'
+		);
+	},
+
 	kswiss: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/84J77Yg.gif">' +
@@ -20,7 +37,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/ancPV1d.gif" width="300">' +
 			'<img src="http://i.imgur.com/HAQxw3t.png" width="120"><br />' +
 			'<b>Ace:</b> Volcarona the Terrible<br />' +
-			'Bodying dragons since gen 5.</center>'
+			'Bodying Leon\'s dragons since gen 5.</center>'
 		);
 	},
 
@@ -2909,13 +2926,15 @@ exports.commands = {
 		);
 	},
 
+	ouranos: 'sayshi',
+	godofthesky: 'sayshi',
 	sayshi: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/jgilGmU.gif" width="130">' +
-			'<img src="http://i.imgur.com/5a5ag8l.gif" width="300">' +
-			'<img src="http://i.imgur.com/4Nvwiuc.gif" width="120"><br />' +
-			'<b>Ace:</b> Galvantula<br />' +
-			'Lead us not into Hell. Just tell us where it is, we\'ll find it quite easily.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/yH0xxBV.png" height="150">' +
+			'<img src="http://i.imgur.com/rlqPkGa.png" width="300">' +
+			'<img src="http://i.imgur.com/vF9wKDy.png" width="140"><br />' +
+			'<b>Ace:</b> <font color="#0000FF">Mega Mawile</font><br />' +
+			'<font color="#0000FF">No one is free, even the Gods are chained to the sky.</font></center>'
 		);
 	},
 

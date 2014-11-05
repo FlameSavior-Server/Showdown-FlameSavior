@@ -6,10 +6,12 @@ exports.commands = {
 
 	skarmor: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://cdn.pokestache.com/2014/3/21/bc0783231f05b032187d48a4c5c73683.gif" width="160">' +
-			'<img src="http://cdn.pokestache.com/2013/12/30/9796dab47a2ff39de7abd6a93d4eb81d.gif" width="200">' +
-			'<img src="http://cdn.pokestache.com/2014/2/20/8a9e27ad681e2e9807390122e1ed9412.gif" width="180"><br />' +
-			'<b>Ace:</b> Beedrill</center>'
+		this.sendReplyBox('<img src="http://cdn.pokestache.com/2014/3/21/bc0783231f05b032187d48a4c5c73683.gif" width="160"><br />' +
+			'<center><img src="http://cdn.pokestache.com/2014/2/20/8a9e27ad681e2e9807390122e1ed9412.gif" width="160">' +
+			'<font size="4">Skarmor</font>' +
+			'<img src="http://cdn.pokestache.com/2013/12/30/9796dab47a2ff39de7abd6a93d4eb81d.gif" width="200"><br />' +
+			'<b>Ace:</b> Beedrill<br />' +
+			'"The one who brags about winning always loses"</center>'
 		);
 	},
 

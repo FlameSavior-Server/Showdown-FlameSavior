@@ -4,12 +4,22 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	rush: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/348.gif">' +
+			'<img src="http://pbs.twimg.com/media/BaMKy-RCMAAa1kZ.jpg" width="300">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/127-mega.gif"><br />' +
+			'<b>Ace:</b> Pinsir-Mega<br />' +
+			'The sky is the limit... for those who have a tight imagination.</center>'
+		);
+	},
+
 	skarmor: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://cdn.pokestache.com/2014/3/21/bc0783231f05b032187d48a4c5c73683.gif" width="160"><br />' +
-			'<center><img src="http://cdn.pokestache.com/2014/2/20/8a9e27ad681e2e9807390122e1ed9412.gif" width="130">' +
-			'<img src="http://i.imgur.com/oKOT6FZ.gif" width="280">' +
-			'<img src="http://cdn.pokestache.com/2013/12/30/9796dab47a2ff39de7abd6a93d4eb81d.gif" width="150"><br />' +
+			'<center><img src="http://cdn.pokestache.com/2014/2/20/8a9e27ad681e2e9807390122e1ed9412.gif" width="120">' +
+			'<img src="http://i.imgur.com/oKOT6FZ.gif" width="260">' +
+			'<img src="http://cdn.pokestache.com/2013/12/30/9796dab47a2ff39de7abd6a93d4eb81d.gif" width="130"><br />' +
 			'<b>Ace:</b> Beedrill<br />' +
 			'"The one who brags about winning always loses"</center>'
 		);

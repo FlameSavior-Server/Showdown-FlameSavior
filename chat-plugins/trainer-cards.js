@@ -4,6 +4,15 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ss: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xA26P6y.png"><br />' +
+			'<img src="http://weknowgifs.com/wp-content/uploads/2013/02/fabulous-gif.gif"><br />' +
+			'<b>Ace:</b> Your Mom<br />' +
+			'Save 15% or more on car insurance by switching to Geico.</center>'
+		);
+	},
+
 	rush: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/348.gif">' +

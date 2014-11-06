@@ -139,7 +139,7 @@ exports.commands = {
 
         } else if (target === 'avatar') {
             if (user.hasavatar === true) return this.sendReply("You've already bought a custom avatar! Type in /customavatar [URL] to request it.");
-	    if (!parseInt(user.avatar)) return this.sendReply('You already have a custom avatar!');
+	    if (!Number(user.avatar)) return this.sendReply('You already have a custom avatar!');
             var price = 25;
             if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a custom avatar.");
 
@@ -152,7 +152,7 @@ exports.commands = {
 
         } else if (target === 'animavatar') {
             if (user.hasanimavatar === true) return this.sendReply("You've already bought an animated custom avatar! Type in /customanimavatar [URL] to request it.");
-            if (user.avatar.indexOf('.gif') == (user.avatar.length - 4)) return this.sendReply("You already have a custom animated avatar!");
+            if (user.avatar.toString().indexOf('.gif') == (user.avatar.length - 4)) return this.sendReply("You already have a custom animated avatar!");
 	    var price = (!parseInt(user.avatar)) ? 20 : 40;
             if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy an animated avatar.");
 

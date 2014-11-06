@@ -4,6 +4,17 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	evil: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Nbt5mXh.gif" width="150">' +
+			'<img src="http://i.imgur.com/InVFONu.gif">' +
+			'<img src="http://i.imgur.com/iPMDEYs.gif" width="150"><br />' +
+			'<img src="http://i.imgur.com/YkPX40x.gif"><br />' +
+			'<b>Ace:</b> Keldeo, Master of fighting<br />' +
+			'You mess with me, you mess with the beast. Mess with the beast and your\'re dead. So just give up.</center>'
+		);
+	},
+
 	ss: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/xA26P6y.png"><br />' +

@@ -2466,9 +2466,9 @@ exports.commands = {
 
 	roy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/zjvesHI.png" height="180">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/zjvesHI.png" width="180">' +
 			'<img src="http://i.imgur.com/f4lVyZA.gif">' +
-			'<img src="http://i.imgur.com/rB1AVZ2.jpg" width="200"><br />' +
+			'<img src="http://i.imgur.com/rB1AVZ2.jpg" height="140"><br />' +
 			'<b>Ace:</b> Gallade<br />' +
 			'You sure talk a lot for someone who loses fairly quickly.</center>'
 		);

@@ -598,11 +598,11 @@ exports.commands = {
 
 	zane: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="https://i.imgflip.com/cj6m3.gif" width="180">' +
-			'<img src="http://i.imgur.com/UTpqYAG.png">' +
-			'<img src="https://i.imgflip.com/cl83y.gif" width="180"><br />' +
+		this.sendReplyBox('<center><img src="https://i.imgflip.com/cj6m3.gif" width="200">' +
+			'<img src="http://i.imgur.com/0TGNNtm.gif">' +
+			'<img src="http://i.imgflip.com/ds0jp.jpg" height="160"><br />' +
 			'<b>Ace:</b> Scolipede<br />' +
-			'BugCatcher4Life.</center>'
+			'One Colony, One Goal, Victory.</center>'
 		);
 	},
 
@@ -2466,11 +2466,11 @@ exports.commands = {
 
 	roy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/g6UjJZ0.jpg" height="180">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/zjvesHI.png" height="180">' +
 			'<img src="http://i.imgur.com/f4lVyZA.gif">' +
-			'<img src="http://i.imgur.com/IceEsWu.png" width="200"><br />' +
-			'<b>Ace:</b> Keldeo<br />' +
-			'A boss is someone who puts his life on the line for his subordinates.</center>'
+			'<img src="http://i.imgur.com/rB1AVZ2.jpg" width="200"><br />' +
+			'<b>Ace:</b> Gallade<br />' +
+			'You sure talk a lot for someone who loses fairly quickly.</center>'
 		);
 	},
 

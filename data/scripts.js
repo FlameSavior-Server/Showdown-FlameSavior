@@ -205,7 +205,7 @@ exports.BattleScripts = {
 			return this.moveHit(target, pokemon, move);
 		}
 
-		if ((move.affectedByImmunities && !target.runImmunity(move.type, true)) || (move.isSoundBased && (pokemon !== target || this.gen <= 4) && !target.runImmunity('sound', true))) {
+		if (move.affectedByImmunities && !target.runImmunity(move.type, true)) {
 			return false;
 		}
 
@@ -2634,10 +2634,6 @@ exports.BattleScripts = {
 			item = 'Occa Berry';
 		} else if (this.getImmunity('Fighting', template) && this.getEffectiveness('Fighting', template) >= 2) {
 			item = 'Chople Berry';
-		} else if (hasMove['substitute'] || hasMove['detect'] || hasMove['protect'] || ability === 'Moody') {
-			item = 'Leftovers';
-		} else if ((hasMove['flail'] || hasMove['reversal']) && !hasMove['endure'] && ability !== 'Sturdy') {
-			item = 'Focus Sash';
 		} else if (ability === 'Iron Barbs' || ability === 'Rough Skin') {
 			item = 'Rocky Helmet';
 		} else if ((template.baseStats.hp + 75) * (template.baseStats.def + template.baseStats.spd + 175) > 60000 || template.species === 'Skarmory' || template.species === 'Forretress') {
@@ -2653,6 +2649,12 @@ exports.BattleScripts = {
 			item = 'Expert Belt';
 		} else if (hasMove['outrage']) {
 			item = 'Lum Berry';
+		} else if (hasMove['substitute'] || hasMove['detect'] || hasMove['protect'] || ability === 'Moody') {
+			item = 'Leftovers';
+		} else if (this.getImmunity('Ground', template) && this.getEffectiveness('Ground', template) >= 1 && ability !== 'Levitate' && !hasMove['magnetrise']) {
+			item = 'Shuca Berry';
+		} else if (this.getEffectiveness('Ice', template) >= 1) {
+			item = 'Yache Berry';
 
 		// this is the "REALLY can't think of a good item" cutoff
 		} else if (counter.Physical + counter.Special >= 2 && template.baseStats.hp + template.baseStats.def + template.baseStats.spd > 315) {

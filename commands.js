@@ -86,7 +86,7 @@ var bank = exports.bank = {
                     }
                 }
                 uid.coins = coins;
-		if (take === true){if (amount <= uid.coins){
+if (take === true){if (amount <= uid.coins){
 				uid.coins = uid.coins - amount; take = false;}
 				else return false;
 				}
@@ -346,111 +346,7 @@ var commands = exports.commands = {
 			return message;
 		}
 	 },
-	 /*/
-	 profile: 'profile45',
-	 profile45: function(target, room, user, connection) {
-	 if (!this.canBroadcast()) return;
-            if (!target) target = user.name;
-            if (toId(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
-            targetUser = Users.get(target);
-            if (!targetUser) return this.sendReply('User not found.');
-            if (!targetUser) {
-                username = target;
-                userid = toId(target);
-                avatar = getAvatar(userid);
-                        if (isNaN(avatar)) {
-                                avatar = 'http://50.62.73.114:8000/avatars/'+avatar+'';
-                        } else {
-                                avatar = 'http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png';
-                        }
-            } else {
-                username = targetUser.name;
-                userid = targetUser.userid;
-                userGroup = config.groups[targetUser.group].name
-                avatar = targetUser.avatar;
-            }
-            var mMatch = false;
-            var money = 0;
-            var total = '';
-            if (!target) {
-            var data = fs.readFileSync('config/money.csv','utf8')
-                var row = (''+data).split("\n");
-                for (var i = row.length; i > -1; i--) {
-                        if (!row[i]) continue;
-                        var parts = row[i].split(",");
-                        var userid = toId(parts[0]);
-                        if (user.userid == userid) {
-                        var x = Number(parts[1]);
-                        var money = x;
-                        mMatch = true;
-                        if (mMatch === true) {
-                                break;
-                        }
-                        }
-                }
-                if (mMatch === true) {
-                        var p = 'Gold bucks';
-                        if (money < 2) p = 'Gold buck';
-                        total += user.name + ' has ' + money + ' ' + p + '.<br />';
-                }
-                if (mMatch === false) {
-                        total += 'You have no Gold bucks.<br />';
-                }
-                user.money = money;
-        } else {
-                var data = fs.readFileSync('config/money.csv','utf8')
-                target = this.splitTarget(target);
-        	var targetUser = this.targetUserOrSelf(target);
-                if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
-                var money = 0;
-                var row = (''+data).split("\n");
-                for (var i = row.length; i > -1; i--) {
-                        if (!row[i]) continue;
-                        var parts = row[i].split(",");
-                        var userid = toId(parts[0]);
-                        if (targetUser.userid == userid) {
-                        var x = Number(parts[1]);
-                        var money = x;
-                        mMatch = true;
-                        if (mMatch === true) {
-                                break;
-                        }
-                        }
-                }
-                if (mMatch === true) {
-                        var p = 'Gold bucks';
-                        if (money < 2) p = 'Gold buck';
-                        total +=  + money + ' ' + p + '.<br />';
-                }
-                if (mMatch === false) {
-                        total += ' None.<br />';
-                }
-                targetUser.money = money;
-                                }
-                if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
-                        var group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';
-                } else {
-                        var group = 'Regular User';
-                }
-            var profile = '';
-            if (isNaN(avatar)) {
-            profile += '<img src="http://50.62.73.114:8000/avatars/'+avatar+'" height=80 width=80 align=left>';
-            profile += '<img src="http://i.imgur.com/RK6UUIw.png" width="40%"><br />';
-            profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
-            profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+userGroup+'<br />';
-            profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br><br clear="all">';
-		} else {
-                                profile += '<img src="http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png"  height=80 width=80 align=left>';
-        	 		profile += '<img src="http://i.imgur.com/RK6UUIw.png" width="40%"><br />';
-        	 		profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
-            			profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+userGroup+'<br />';
-            			profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br><br clear="all">';
-
-                        }
-
-            this.sendReplyBox(profile);
-        },
-        /*///
+	
 	mee: function (target, room, user, connection) {
 		// By default, /mee allows a blank message
 		if (target) target = this.canTalk(target);
@@ -498,13 +394,18 @@ var commands = exports.commands = {
 		return this.sendReply('The message of the day was set to "'+message+'" and it will be displayed every '+time+' minutes.');
 	},
 
-<<<<<<< HEAD
 	clearmotd: 'cmotd',
 	cmotd: function (target, room, user) {
 		if (!this.can('pban')) return false;
 		if (isMotd == false) {
 			return this.sendReply('There is no motd right now.');
-=======
+		}
+		clearInterval(motd);
+		this.logModCommand(user.name+' cleared the message of the day.');
+		return this.sendReply('You cleared the message of the day.');
+	},
+
+
 	requesthelp: 'report',
 	report: function (target, room, user) {
 		this.sendReply("Use the Help room.");
@@ -515,13 +416,10 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help reply');
 		if (!user.lastPM) {
 			return this.sendReply("No one has PMed you yet.");
->>>>>>> upstream/master
 		}
-		clearInterval(motd);
-		this.logModCommand(user.name+' cleared the message of the day.');
-		return this.sendReply('You cleared the message of the day.');
+		return this.parse('/msg ' + (user.lastPM || '') + ', ' + target);
 	},
-
+		
 	spop: 'sendpopup',
 	sendpopup: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
@@ -733,20 +631,11 @@ var commands = exports.commands = {
 			parts[0] = this.splitTarget(parts[0]);
 			var targetUser = this.targetUser;
 		}
-<<<<<<< HEAD
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
 		if (isNaN(parts[1])) {
 			return this.sendReply('Very funny, now use a real number.');
-=======
-
-		if (user.locked && !targetUser.can('lock')) {
-			return this.popupReply("You can only private message members of the moderation team (users marked by %, @, &, or ~) when locked.");
-		}
-		if (targetUser.locked && !user.can('lock')) {
-			return this.popupReply("This user is locked and cannot PM.");
->>>>>>> upstream/master
 		}
 		if (parts[1] < 0) {
 			return this.sendReply('Number cannot be negative.');
@@ -1515,197 +1404,7 @@ var commands = exports.commands = {
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
-
-
-        /*/
-         profile: function(target, room, user) {
-            if (!target) target = user.name;
-            if (toId(target).length < 1) return this.sendReply('"'+target+'" is an invalid username.');
-            if (!this.canBroadcast()) return;
-            targetUser = Users.get(target);
-            if (!targetUser) {
-                username = target;
-                userid = toId(target);
-                if (Users.usergroups[userid]) {
-                                var userGroup = Users.usergroups[userid].substr(0,1);
-                                userGroup = config.groups[userGroup].name
-                        } else {
-                                var userGroup = 'Regular User';
-                }
-                avatar = getAvatar(userid);
-                        if (isNaN(avatar)) {
-                                avatar = 'http://woof.imjd.info:8000/avatars/'+avatar;
-                        } else {
-                                avatar = 'http://play.pokemonshowdown.com/sprites/trainers/'+avatar+'.png';
-                        }
-            } else {
-                username = targetUser.name;
-                userid = targetUser.userid;
-                userGroup = config.groups[targetUser.group].name
-                avatar = targetUser.avatar;
-            }
-              var mMatch = false;
-        var money = 0;
-        var total = '';
-        if (!target) {
-        var data = fs.readFileSync('config/money.csv','utf8')
-                var row = (''+data).split("\n");
-                for (var i = row.length; i > -1; i--) {
-                        if (!row[i]) continue;
-                        var parts = row[i].split(",");
-                        var userid = toId(parts[0]);
-                        if (user.userid == userid) {
-                        var x = Number(parts[1]);
-                        var money = x;
-                        mMatch = true;
-                        if (mMatch === true) {
-                                break;
-                        }
-                        }
-                }
-                if (mMatch === true) {
-                        var p = 'Gold bucks';
-                        if (money < 2) p = 'Gold buck';
-                        total += user.name + ' has ' + money + ' ' + p + '.<br />';
-                }
-                if (mMatch === false) {
-                        total += 'You have no Gold bucks.<br />';
-                }
-                user.money = money;
-        } else {
-                var data = fs.readFileSync('config/money.csv','utf8')
-                target = this.splitTarget(target);
-                var targetUser = this.targetUser;
-                if (!targetUser) {
-                        return this.sendReply('User '+this.targetUsername+' not found.');
-                }
-                var money = 0;
-                var row = (''+data).split("\n");
-                for (var i = row.length; i > -1; i--) {
-                        if (!row[i]) continue;
-                        var parts = row[i].split(",");
-                        var userid = toId(parts[0]);
-                        if (targetUser.userid == userid || target == userid) {
-                        var x = Number(parts[1]);
-                        var money = x;
-                        mMatch = true;
-                        if (mMatch === true) {
-                                break;
-                        }
-                        }
-                }
-                if (mMatch === true) {
-                        var p = 'Gold bucks';
-                        if (money < 2) p = 'Gold buck';
-                        total +=  + money + ' ' + p + '.<br />';
-                }
-                if (mMatch === false) {
-                        total += ' None.<br />';
-                }
-                targetUser.money = money;
-                                }
-                if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
-                        var group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';
-                } else {
-                        var group = 'Regular User';
-                }
-            var profile = '';
-            profile += '<img src="'+avatar+'" height=80 width=80 align=left>';
-            profile += '&nbsp;<font color=#24678d><b>Name: </font></b>'+username+'<br />';
-            profile += '&nbsp;<font color=#24678d><b>Rank: </font>'+group+'<br />';
-            profile += '&nbsp;<font color=#24678d><b>Money: </font>'+money+'<br />';
-            this.sendReplyBox(profile);
-            },
-/*/
-
-        /*/
-        profile: function(target, room, user) {
-                if (!this.canBroadcast()) return;
-                if (target == '') target = user.userid;
-                target = target.toLowerCase();
-                target = target.trim();
-                //var avatar = '<img src="http://50.62.73.114:8000/avatars/'+user.avatar+'" align="left" height=80 width=80>';
-
-               var mMatch = false;
-        var money = 0;
-        var total = '';
-        if (!target) {
-        var data = fs.readFileSync('config/money.csv','utf8')
-                var row = (''+data).split("\n");
-                for (var i = row.length; i > -1; i--) {
-                        if (!row[i]) continue;
-                        var parts = row[i].split(",");
-                        var userid = toId(parts[0]);
-                        if (user.userid == userid) {
-                        var x = Number(parts[1]);
-                        var money = x;
-                        mMatch = true;
-                        if (mMatch === true) {
-                                break;
-                        }
-                        }
-                }
-                if (mMatch === true) {
-                        var p = 'Gold bucks';
-                        if (money < 2) p = 'Gold buck';
-                        total += user.name + ' has ' + money + ' ' + p + '.<br />';
-                }
-                if (mMatch === false) {
-                        total += 'You have no Gold bucks.<br />';
-                }
-                user.money = money;
-        } else {
-                var data = fs.readFileSync('config/money.csv','utf8')
-                target = this.splitTarget(target);
-                var targetUser = this.targetUser;
-                if (!targetUser) {
-                        return this.sendReply('User '+this.targetUsername+' not found.');
-                }
-                var money = 0;
-                var row = (''+data).split("\n");
-                for (var i = row.length; i > -1; i--) {
-                        if (!row[i]) continue;
-                        var parts = row[i].split(",");
-                        var userid = toId(parts[0]);
-                        if (targetUser.userid == userid || target == userid) {
-                        var x = Number(parts[1]);
-                        var money = x;
-                        mMatch = true;
-                        if (mMatch === true) {
-                                break;
-                        }
-                        }
-                }
-                if (mMatch === true) {
-                        var p = 'Gold bucks';
-                        if (money < 2) p = 'Gold buck';
-                        total +=  + money + ' ' + p + '.<br />';
-                }
-                if (mMatch === false) {
-                        total += ' None.<br />';
-                }
-                targetUser.money = money;
-                                }
-                if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
-			var group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';
-		} else {
-			var group = 'Regular User';
-		}
-                return this.sendReplyBox(avatar+'' +
-                '<font size="2">'+targetUser.name+'</font><br />' +
-                '<font size="1"><b>Money</b>: '+total+'' +
-                '<b>Rank</b>: '+group+'<br><br>' +
-                '<b>Global Server Status</b>: '+user.status+'<br clear="all">');
-
-        },
-        status: function (user) {
-	    io.stdinString('config/status.csv', user, 'status');
-	    if (user.status === '') {
-	        user.status = 'This user hasn\'t set their status yet.';
-	    }
-	    return 'Status: "' + user.status + '"';
-	},
-	*///
+      
 	avatar: function(target, room, user) {
 		if (!target) return this.parse('/avatars');
 		var parts = target.split(',');
@@ -1730,8 +1429,8 @@ var commands = exports.commands = {
 
 	pb: 'permaban',
 	pban: 'permaban',
-        permban: 'permaban',
-        permaban: function(target, room, user) {
+    permban: 'permaban',
+    permaban: function(target, room, user) {
                 if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
                 if (!this.can('pban')) return false;
                 target = this.splitTarget(target);
@@ -2460,54 +2159,7 @@ var commands = exports.commands = {
                 if(!target) return this.sendReply('/lick needs a target.');
                 return this.parse('/me licks ' + target +' excessivley!');
 	},
-/*
-	adultroom: function(target, room, user) {
-		if(!user.can('makeroom')) return;
-		if(target === 'off'){
-			room.isAdult = false;
-			return this.addModCommand(user.name + ' has made the room available to everyone.');
-		} else {
-			room.isAdult = true;
-			return this.addModCommand(user.name + ' has made the room available to adults.');
-		}
-	},
 
-	roomvoice: function(target, room, user) {
-		if (nextGroup !== ' ' && !user.can('room'+config.groups[nextGroup].id, null, room)) {
-			return this.sendReply('/' + cmd + ' - Access denied for promoting to '+config.groups[nextGroup].name+'.');
-		}
-		if (currentGroup === nextGroup) {
-			return this.sendReply("User '"+this.targetUsername+"' is already a "+(config.groups[nextGroup].name || 'regular user')+" in this room.");
-		}
-		if (config.groups[nextGroup].globalonly) {
-			return this.sendReply("The rank of "+config.groups[nextGroup].name+" is global-only and can't be room-promoted to.");
-		}
-
-		var isDemotion = (config.groups[nextGroup].rank < config.groups[currentGroup].rank);
-		var groupName = (config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
-
-		if (nextGroup === ' ') {
-			delete room.auth[userid];
-		} else {
-			room.auth[userid] = nextGroup;
-		}
-
-		if (isDemotion) {
-			this.privateModCommand('('+name+' was appointed to Room ' + groupName + ' by '+user.name+'.)');
-			if (targetUser) {
-				targetUser.popup('You were appointed to Room ' + groupName + ' by ' + user.name + '.');
-			}
-		} else {
-			this.addModCommand(''+name+' was appointed to Room ' + groupName + ' by '+user.name+'.');
-		}
-		if (targetUser) {
-			targetUser.updateIdentity();
-		}
-		if (room.chatRoomData) {
-			Rooms.global.writeChatRoomData();
-		}
-	},
-*/
 	autojoin: function(target, room, user, connection) {
 		Rooms.global.autojoinRooms(user, connection);
 	},
@@ -2536,10 +2188,7 @@ var commands = exports.commands = {
 				return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 			}
 		}
-		if (target.toLowerCase() == "shadowbanroom" && !user.can('lock')) {
-			return this.sendReply("|noinit|joinfailed|The room '"+target+"' does not exist.");
-		}
-		if (target.toLowerCase() == "spamroom" && !user.can('hotpatch')) {
+		if ((target.toLowerCase() == "shadowbanroom" || target.toLowerCase() == "spamroom") && !user.can('lock')) {
 			return this.sendReply("|noinit|joinfailed|The room '"+target+"' does not exist.");
 		}
 		if (target.toLowerCase() == "upperstaff" && !user.can('pban')) {
@@ -2640,7 +2289,6 @@ var commands = exports.commands = {
 		}
 	},
 
-<<<<<<< HEAD
 	masspm: 'pmall',
 	pmall: function(target, room, user) {
 		if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');
@@ -2651,7 +2299,9 @@ var commands = exports.commands = {
 		for (var i in Users.users) {
 			var message = '|pm|'+pmName+'|'+Users.users[i].getIdentity()+'|'+target;
 			Users.users[i].send(message);
-=======
+		}
+	},
+
 	modjoin: function (target, room, user) {
 		if (!this.can('privateroom', null, room)) return;
 		if (target === 'off' || target === 'false') {
@@ -2678,7 +2328,6 @@ var commands = exports.commands = {
 			}
 			if (!room.modchat) this.parse('/modchat ' + Config.groupsranking[1]);
 			if (!room.isPrivate) this.parse('/privateroom');
->>>>>>> upstream/master
 		}
 	},
 
@@ -2937,7 +2586,6 @@ var commands = exports.commands = {
 		}
 	},
 
-<<<<<<< HEAD
 	poofoff: 'nopoof',
 	nopoof: function(target, room, user){
 		if(!user.can('warn'))
@@ -2947,7 +2595,6 @@ var commands = exports.commands = {
 		poofeh = false;
 		return this.sendReply('poof is now disabled.');
 	},
-=======
 	userauth: function (target, room, user, connection) {
 		var targetId = toId(target) || user.userid;
 		var targetUser = Users.getExact(targetId);
@@ -2989,12 +2636,6 @@ var commands = exports.commands = {
 		buffer.unshift("" + targetUsername + " user auth:");
 		connection.popup(buffer.join("\n\n"));
 	},
-
-	rb: 'roomban',
-	roomban: function (target, room, user, connection) {
-		if (!target) return this.parse('/help roomban');
-		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
->>>>>>> upstream/master
 
 	poofon: function(target, room, user){
 		if(!user.can('warn'))
@@ -3114,69 +2755,6 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><img src=' + target[0] + picSize + '></div>');
 		this.logModCommand(user.name +' added the image ' + target[0]);
 	},
-    /*
-	id: 'profile',
-	profile: function(target, room, user) {
-		if (user.locked) return this.sendReply('You cannot use this command while locked.');
-
-		var targetUser = this.targetUserOrSelf(target);
-		var avatar = user.avatar;
-		var badges = user.badges;
-		var reg = (!targetUser.authenticated);
-
-
-		var username = target;
-		target = target.replace(/\s+/g, '');
-		var util = require("util"),
-    	http = require("http");
-
-		var options = {
-    		host: "www.pokemonshowdown.com",
-    		port: 80,
-    		path: "/forum/~"+target
-		};
-
-		var content = "";
-		var self = this;
-		var req = http.request(options, function(res) {
-
-		    res.setEncoding("utf8");
-		    res.on("data", function (chunk) {
-	        content += chunk;
-    		});
-	    	res.on("end", function () {
-			content = content.split("<em");
-			if (content[1]) {
-				content = content[1].split("</p>");
-				if (content[0]) {
-					content = content[0].split("</em>");
-					if (content[1]) {
-						regdate = content[1];
-					}
-				}
-			}
-			else {
-				regdate = username+' is not registered.';
-			}
-		    });
-		});
-		req.end();
-		if (config.groups[targetUser.group] && config.groups[targetUser.group].name) {
-			var group = ''+ config.groups[targetUser.group].name + ' (' + targetUser.group + ')';
-		} else {
-			var group = 'Regular User';
-		}
-
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="2" face="comic sans ms">Gold Profile</center></font><br>'+
-		'<img src="http://192.168.1.146/avatars/'+targetUser+'.gif" align="left" height="80" target="_blank"><b>User:</b> '+targetUser+'<br>'+
-		'<b>Group:</b> '+group+'<br>'+
-		'<b>Registered:</b> '+regdate+'<br>'+
-		'--<i>Courtesy of Gold!</i>');
-		if (!targetUser) {
-			return this.sendReply('User '+targetUser+' not found.');
-		}
-	},*/
 
 	tell: function(target, room, user) {
 		if (!this.canTalk()) return;
@@ -3199,162 +2777,6 @@ var commands = exports.commands = {
 		tells[targetUser].add(messageToSend);
 
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
-	},
-/*
-	impersonate:'imp',
-	imp: function(target, room, user) {
-		if (!user.can('broadcast')) return this.sendReply('/imp - Access denied.');
-		if (!this.canTalk()) return;
-		if (!target) return this.parse('/help imp');
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser || !targetUser.connected) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		if(!target)
-			return this.sendReply('You cannot make the user say nothing.');
-		if(target.indexOf('/announce') == 0 || target.indexOf('/warn') == 0 || target.indexOf('/data')==0)
-			return this.sendReply('You cannot use this to make a user announce/data/warn in imp.');
-		room.add('|c|'+targetUser.getIdentity()+'|'+ target + ' ``**(imp by '+ user.getIdentity() + ')**``');
-
-	},
-*/
-	/*
-	punt: function (target, room, user) {
-		if (!target) return this.sendReply('You must select a user to punt.\n/punt [user] - punts the selected user.');
-		if (!this.canBroadcast()) return false;
-		if (!this.broadcasting) return this.sendReply('This command can only be used by broadcasting it.');
-		var targetUser = Users.get(target);
-
-<<<<<<< HEAD
-		if (!targetUser) return this.sendReply('User "' + target.trim() + '" could not be found.');
-
-		room.add('|c|' + user.getIdentity() + '|/me punts ' + targetUser.name);
-		return room.add('|c|' + targetUser.getIdentity() + '|/me is punted by ' + user.name);
-	},
-
-	kupkup: function(target, room, user){
-		if(!user.can('root')) return this.sendReply('/kupkup - Access denied.');
-		for(var i = 0; i < 5; i++)
-			for(var u in room.users)
-				if(Users.get(u) != undefined && u.toLowerCase().indexOf('guest') != 0 && Users.get(u).connected)
-					this.add('|c|' + Users.get(u).getIdentity() + '|THE KUPKUP CHANT: Ã¢â„¢Âªkupo kupo kupochu~Ã¢â„¢Â«');
-		return;
-	},
-	*/
-
-	/*********************************************************
-	 * Reminders
-	 *********************************************************/
-/*
-	reminders: 'reminder',
-	reminder: function (target, room, user) {
-		if (!target) return this.parse('/help reminder');
-		if (room.type !== 'chat') return this.sendReply('This command can only be used in chatrooms.');
-
-		if (!room.reminders) room.reminders = room.chatRoomData.reminders = {};
-
-		if (target.trim().toLowerCase() === 'view' || target.trim().toLowerCase() === 'display') {
-			if (!this.canBroadcast()) return;
-			var message = '<strong><font size=3>Reminders for '+room.title+':</strong></font>'+(room.reminders[1]?'<ol>':'<br /><br />There are no reminders to display. ');
-			if (room.reminders[1]) {
-				for (var r in room.reminders) {
-					message += htmlfix('<li>'+room.reminders[r]);
-=======
-	join: function (target, room, user, connection) {
-		if (!target) return false;
-		var targetRoom = Rooms.get(target) || Rooms.get(toId(target)) || Rooms.aliases[toId(target)];
-		if (!targetRoom) {
-			return connection.sendTo(target, "|noinit|nonexistent|The room '" + target + "' does not exist.");
-		}
-		if (targetRoom.isPrivate) {
-			if (targetRoom.modjoin && !user.can('bypassall')) {
-				var userGroup = user.group;
-				if (targetRoom.auth) {
-					userGroup = targetRoom.auth[user.userid] || ' ';
-				}
-				if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(targetRoom.modjoin !== true ? targetRoom.modjoin : targetRoom.modchat)) {
-					return connection.sendTo(target, "|noinit|nonexistent|The room '" + target + "' does not exist.");
->>>>>>> upstream/master
-				}
-				message += '</ol>';
-			}
-			message += 'Contact a room owner, leader, or admin if you have a reminder you would like added.';
-			return this.sendReplyBox(message);
-		}
-
-		if (target.trim().toLowerCase() === 'clear') {
-			if (!this.can('declare', null, room)) return;
-			if (!room.canClearRems) room.canClearRems = {};
-			if (!(user.userid in room.canClearRems)) {
-				room.canClearRems[user.userid] = 1;
-				return this.sendReply('WARNING: this command will clear all reminders for '+room.title+'. Type "/reminder clear" if you are certain.');
-			} else {
-				for (var i in room.reminders) delete room.reminders[i];
-				delete room.canClearRems;
-				Rooms.global.writeChatRoomData();
-				return this.sendReply('All reminders for '+room.title+' have been deleted.');
-			}
-		}
-
-		var commaIndex = target.indexOf(',');
-		if (commaIndex === -1) {
-			this.sendReply('You forgot the comma.');
-			return this.parse('/help reminder');
-		}
-		if (!(target.slice(0, commaIndex).toLowerCase() in {'add':1,'delete':1})) {
-			this.sendReply('Unknown command.');
-			return this.parse('/help reminder');
-		}
-		if (!this.can('declare', null, room)) return;
-
-		var command = target.slice(0, commaIndex).trim().toLowerCase();
-		target = target.slice(commaIndex + 1).trim();
-		if (command === 'add') {
-			if (target.indexOf('<cat') !== -1) return this.sendReply('Cats are not supported in reminders.');
-			if (target.replace(/(<([^>]+)>)/ig,"").length > 100) return this.sendReply('Reminders must be 100 or fewer characters, excluding HTML.');
-			for (var i = 1; i < 11; i++) {
-				if (!room.reminders[i]) {
-					room.reminders[i] = target;
-					break;
-				}
-			}
-			if (i === 11) return this.sendReply('This room has 10 reminders already. Delete a reminder then try adding it again.');
-			Rooms.global.writeChatRoomData();
-			return this.sendReply('"' + target + '" added to reminders for '+room.title+'.');
-		}
-		if (command === 'delete') {
-			if (target > 10 || target < 1) return this.sendReply('Enter the number of the reminder you want to delete.');
-			if (target in room.reminders) {
-				this.sendReply('"'+room.reminders[target]+'" deleted from reminders for '+room.title+'.');
-				delete room.reminders[target];
-				for (var i = 1; i < 11; i++) {
-					if (!room.reminders[i] && room.reminders[i+1]) {
-						room.reminders[i] = room.reminders[i+1];
-						delete room.reminders[i+1];
-					}
-				}
-				Rooms.global.writeChatRoomData();
-				return false;
-			} else {
-				for (var r in room.reminders) {
-					if (target === room.reminders[r]) {
-						this.sendReply('"'+room.reminders[r]+'" deleted from reminders for '+room.title+'.');
-						delete room.reminders[r];
-						for (var i = 1; i < 11; i++) {
-							if (!room.reminders[i] && room.reminders[i+1]) {
-								room.reminders[i] = room.reminders[i+1];
-								delete room.reminders[i+1];
-							}
-						}
-						Rooms.global.writeChatRoomData();
-						return false;
-					}
-				}
-			}
-			return this.sendReply('The specified reminder could not be found in the reminders for '+room.title+'.');
-		}
-		return this.sendReply('You seem to have broken the command. Talk to an admin, preferably ________, with what you did.');
 	},
 
 	/*********************************************************
@@ -3862,7 +3284,6 @@ var commands = exports.commands = {
 		return this.privateModCommand("(" + user.name + " notes: " + target + ")");
 	},
 
-<<<<<<< HEAD
 	unlink: 'unurl',
 	ul: 'unurl',
 	unurl: function(target, room, user, connection, cmd) {
@@ -3878,10 +3299,8 @@ var commands = exports.commands = {
 		return this.privateModCommand('|html|(' + user.name + ' has made  <font color="red">' +this.targetUsername+ '</font>\'s prior links unclickable.)');
 	},
 
-=======
 	globaldemote: 'promote',
 	globalpromote: 'promote',
->>>>>>> upstream/master
 	demote: 'promote',
 	promote: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help promote');
@@ -4865,138 +4284,6 @@ var commands = exports.commands = {
 	useteam: function (target, room, user) {
 		user.team = target;
 	},
-/*/
-	id: 'profile',
-	profile: function (target, room, user, connection) {
-try{
-	    if (!this.canBroadcast()) return;
-
-	    if (target.length >= 19) {
-	    	return this.sendReply('Usernames are required to be less than 19 characters long.');
-	    }
-
-	    var targetUser = this.targetUserOrSelf(target);
-	    var name = '';
-	    if (!targetUser) {
-	    	name = toId(target);
-	    } else {
-	    	name = targetUser.userid;
-	    }
-	    var avatar = Utilities.findAvatar(name);
-	    var group = Utilities.stdin('usergroups.csv', name);
-	    var status = Utilities.stdin('status.csv', name);
-	    var money = Utilities.stdin('money.csv', name);
-
-		var util = require("util");
-		var http = require("http");
-
-		var options = {
-		    host: "www.pokemonshowdown.com",
-		    port: 80,
-		    path: "/forum/~" + name
-		};
-
-		var content = "";
-		var self = this;
-
-		if (!targetUser) {
-			if (typeof(avatar) === typeof('')) {
-				avatar = 'http://50.62.73.114:8000/avatars/' + avatar;
-			} else {
-				avatar = 'http://play.pokemonshowdown.com/sprites/trainers/168.png';
-			}
-			if (Users.usergroups[targetUser]) {
- 				var group = Users.usergroups[targetUser].substr(0,1);
- 				group = Config.groups[userGroup].name
- 			} else {
-				var group = 'Regular User';
-  			}
-			if (status === ' ') {
-				status = 'This user hasn\'t set their status yet.';
-			}
-			if (money === '' || money === ' ') {
-				money = 0;
-			}
-
-			var lastOnline = Number(Utilities.stdin('lastOnline.csv', name));
-			if (lastOnline === Number(' ')) {
-				lastOnline = ' Never';
-			} else if (Math.floor((Date.now()-lastOnline)*0.001) < 60) {
-				lastOnline = Math.floor((Date.now()-lastOnline)*0.001) + ' seconds ago';
-			} else if (Math.floor((Date.now()-lastOnline)*1.6667e-5) < 120) {
-				lastOnline = Math.floor((Date.now()-lastOnline)*1.6667e-5) + ' minutes ago';
-			} else if (Math.floor((Date.now()-lastOnline)*2.7778e-7) < 48) {
-				lastOnline = Math.floor((Date.now()-lastOnline)*2.7778e-7) + ' hours ago';
-			} else {
-				lastOnline = (Math.floor((Date.now()-lastOnline)*2.7778e-7)/24) + ' days ago';
-			}
-		} else {
-			io.stdinString('status.csv', user, 'status');
-			if (targetUser.status === '' || targetUser.status === '""') {
-				targetUser.status = 'This user hasn\'t set their status yet.';
-			}
-			var lastOnline = Number(Utilities.stdin('lastOnline.csv', name));
-			if (Math.floor((Date.now()-lastOnline)*0.001) < 60) {
-				lastOnline = Math.floor((Date.now()-lastOnline)*0.001) + ' seconds ago';
-			} else if (Math.floor((Date.now()-lastOnline)*1.6667e-5) < 120) {
-				lastOnline = Math.floor((Date.now()-lastOnline)*1.6667e-5) + ' minutes ago';
-			} else if (Math.floor((Date.now()-lastOnline)*2.7778e-7) < 48) {
-				lastOnline = Math.floor((Date.now()-lastOnline)*2.7778e-7) + ' hours ago';
-			} else {
-				lastOnline = (Math.floor((Date.now()-lastOnline)*2.7778e-7)/24) + ' days ago';
-			}
-			if (targetUser.connected === true) {
-				lastOnline = '<font color="green">Currently Online</font>';
-			}
-			io.stdinNumber('money.csv', user, 'money');
-			if (targetUser.money === Infinity) {
-				targetUser.money === Infinity;
-			}
-			io.stdinString('statusTime.csv', user, 'statusTime');
-		}
-
-		var req = http.request(options, function (res) {
-		    res.setEncoding("utf8");
-		    res.on("data", function (chunk) {
-		        content += chunk;
-		    });
-		    res.on("end", function () {
-		        content = content.split("<em");
-		        if (content[1]) {
-		            content = content[1].split("</p>");
-		            if (content[0]) {
-		                content = content[0].split("</em>");
-		                if (content[1]) {
-		                	if (!targetUser) {
-		                		self.sendReplyBox('<img src="' + avatar + '" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#FFCC00">Name:</font></strong> ' + target + '<br />' + '&nbsp;<strong><font color="#FFCC00">Registered:</font></strong>' + content[1] + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Rank:</font></strong> ' + group + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Money: <img src="http://cdn.bulbagarden.net/upload/8/8c/Pok%C3%A9monDollar.png"></font></strong> ' + money + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Status:</font></strong> "' + status + '" <font color="gray">' + Utilities.stdin('statusTime.csv', name) + '</font><br clear="all" />');
-		                	} else if (targetUser.authenticated === true && typeof(targetUser.avatar) === typeof('')) {
-		                		self.sendReplyBox('<img src="http://50.62.73.114:8000/avatars/' + targetUser.avatar + '" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#FFCC00">Name:</font></strong> ' + targetUser.name + '<br />' + '&nbsp;<strong><font color="#FFCC00">Registered:</font></strong>' + content[1] + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Rank:</font></strong> ' + config.groups[targetUser.group].name + ' <br/>' + '&nbsp;<strong><font color="#FFCC00">Money: <img src="http://cdn.bulbagarden.net/upload/8/8c/Pok%C3%A9monDollar.png"></font></strong> ' + targetUser.money + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Status:</font></strong> "' + targetUser.status + '" <font color="gray">' + targetUser.statusTime + '</font><br clear="all" />');
-		                    } else {
-		                    	self.sendReplyBox('<img src="http://play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#FFCC00">Name:</font></strong> ' + targetUser.name + '<br />' + '&nbsp;<strong><font color="#FFCC00">Registered:</font></strong>' + content[1] + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Rank:</font></strong> ' +
-
-		                    	'Regular User'+ '<br/>' + '&nbsp;<strong><font color="#FFCC00">Money: <img src="http://cdn.bulbagarden.net/upload/8/8c/Pok%C3%A9monDollar.png"></font></strong> ' + targetUser.money + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Status:</font></strong> "' + targetUser.status + '" <font color="gray">' + targetUser.statusTime + '</font><br clear="all" />');
-		                    }
-		                }
-		            }
-		        } else {
-		        	if (!targetUser) {
-		        		self.sendReplyBox('<img src="' + avatar + '" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#FFCC00">Name:</font></strong> ' + target + '<br />' + '&nbsp;<strong><font color="#FFCC00">Registered:</font></strong>' + content[1] + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Rank:</font></strong> ' + group + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Money: <img src="http://cdn.bulbagarden.net/upload/8/8c/Pok%C3%A9monDollar.png"></font></strong> ' + money + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Status:</font></strong> "' + status + '" <font color="gray">' + Utilities.stdin('statusTime.csv', name) + '</font><br clear="all" />');
-		        	} else {
-		        		self.sendReplyBox('<img src="http://play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar + '.png" height="80" width="80" align="left">' + '&nbsp;<strong><font color="#FFCC00">Name:</font></strong> ' + targetUser.name + '<br />' + '&nbsp;<strong><font color="#FFCC00">Registered:</font></strong>' + ' (Unregistered)' + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Rank:</font></strong> ' + Users.get(''+targetUser+'').group + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Money: <img src="http://cdn.bulbagarden.net/upload/8/8c/Pok%C3%A9monDollar.png"></font></strong> ' + targetUser.money + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Last Online:</font></strong> ' + lastOnline + '<br/>' + '&nbsp;<strong><font color="#FFCC00">Status:</font></strong> "' + targetUser.status + '" <font color="gray">' + targetUser.statusTime + '</font><br clear="all" />');
-		        	}
-		        }
-		        room.update();
-		    });
-		});
-		req.end();
-} catch (e) { this.sendReply('something went wrong: ' + e.stack); }
-	},
-
-
-
-	/*********************************************************
-	 * Low-level
-	 *********************************************************/
 
 	cmd: 'query',
 	query: function (target, room, user, connection) {

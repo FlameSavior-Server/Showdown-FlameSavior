@@ -41,8 +41,8 @@ exports.commands = {
 
 	soma: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Soma</br >' +
-			'<b>Ace:</b> http://prntscr.com/54dgye</center>'
+		this.sendReplyBox('<center>Soma<br />' +
+			'<b>Ace:</b> <a href="http://prntscr.com/54dgye">http://prntscr.com/54dgye</a></center>'
 		);
 	},
 

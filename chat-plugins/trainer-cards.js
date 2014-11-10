@@ -4,6 +4,48 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	starcoa: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/JQcPCrs.png"><br />' +
+			'<img src="https://38.media.tumblr.com/082dfe94d13daa9ddf9523241ec333c3/tumblr_mp0hh8CPTj1s8ouhxo1_500.gif" width="130">' +
+			'<img src="http://i.imgur.com/qFfJ4FU.png" width="300">' +
+			'<img src="http://images5.fanpop.com/image/photos/25900000/Sasuke-and-Naruto-yaoi-25902351-351-500.jpg" height="150"><br />' +
+			'StarWelf: I cant let you do that StarFax<br />' +
+			'Cocoa808: #sasunaru</center>'
+		);
+	},
+
+	wise: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="https://38.media.tumblr.com/874e3add2927d10ea5bac12a0a5c4057/tumblr_mkm5p1W9C71qmqw7po1_r4_400.gif" width="130">' +
+			'<img src="http://i.imgur.com/nkQk0T0.png" width="280">' +
+			'<img src="https://33.media.tumblr.com/d5a259ab3a811b9f768987cd5209080a/tumblr_n2jdxozmNV1rpn9eno1_500.gif" width="130"><br />' +
+			'<font color="blue"><b>Ace:</b> Ice</font><br />' +
+			'Some say the world will end in fire, some say in ice.</center>'
+		);
+	},
+
+	acefalco: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://25.media.tumblr.com/tumblr_lwl1oj1iQ61qa8kbzo1_500.jpg" width="250" height="100">' +
+			'<img src="http://i.imgur.com/XKhJt5R.gif" width="250" height="100">' +
+			'<img src="http://i.imgur.com/ifScGF7.jpg" width="250" height="100"><br />' +
+			'<img src="http://i.imgur.com/8eqn3nd.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/entei.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/raikou.gif">' +
+			'<img crc="http://play.pokemonshowdown.com/sprites/xyani-shiny/suicune.gif"><br />' +
+			'<b>Ace:</b> Raikou<br />' +
+			'I\'m doing a great work and I cannot come down.</center>'
+		);
+	},
+
+	soma: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Soma</br >' +
+			'<b>Ace:</b> http://prntscr.com/54dgye</center>'
+		);
+	},
+
 	evil: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Nbt5mXh.gif" width="150">' +

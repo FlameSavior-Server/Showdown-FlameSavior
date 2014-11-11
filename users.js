@@ -575,6 +575,8 @@ User = (function () {
 		this.challengeTo = null;
 		this.lastChallenge = 0;
 
+		this.loginTime = Date.now();
+
 		// initialize
 		users[this.userid] = this;
 	}
@@ -613,21 +615,21 @@ User = (function () {
 	};
 	User.prototype.getIdentity = function (roomid) {
 		if (this.locked) {
-			return '‽' + this.name;
+			return '‽' + this.name + (this.awayName || '');
 		}
 		if (roomid) {
 			if (this.mutedRooms[roomid]) {
-				return '!' + this.name;
+				return '!' + this.name + (this.awayName || '');
 			}
 			var room = Rooms.rooms[roomid];
 			if (room && room.auth) {
 				if (room.auth[this.userid]) {
-					return room.auth[this.userid] + this.name;
+					return room.auth[this.userid] + this.name + (this.awayName || '');
 				}
-				if (room.isPrivate) return ' ' + this.name;
+				if (room.isPrivate) return ' ' + this.name + (this.awayName || '');
 			}
 		}
-		return this.group + this.name;
+		return (!this.hiding ? this.group : " ") + this.name;
 	};
 	User.prototype.isStaff = false;
 	User.prototype.can = function (permission, target, room) {
@@ -781,6 +783,7 @@ User = (function () {
 		users[userid] = this;
 		this.authenticated = !!authenticated;
 		this.forceRenamed = !!forcible;
+		if (!this.loginTime) this.loginTime = Date.now();
 
 		if (authenticated && userid in bannedUsers) {
 			var bannedUnder = '';
@@ -1010,6 +1013,7 @@ User = (function () {
 			var isSysop = false;
 			var avatar = 0;
 			var authenticated = false;
+			var loginTime = (this.loginTime || Date.now());
 			// user types (body):
 			//   1: unregistered user
 			//   2: registered user
@@ -1097,6 +1101,7 @@ User = (function () {
 
 				user.frostDev = frostDev;
 				user.vip = vip;
+				user.loginTime = loginTime;
 
 				user.authenticated = authenticated;
 
@@ -1734,9 +1739,22 @@ Connection = (function () {
 		this.user = null;
 	};
 	Connection.prototype.onDisconnect = function () {
-		delete connections[this.id];
 		connectedIps[this.ip]--;
-		if (connectedIps[this.ip] === 0) delete connectedIps[this.ip];
+		if (connectedIps[this.ip] === 0) {
+			delete connectedIps[this.ip];
+			var connection = connections[this.id];
+			var user = connection.user;
+			if (user.named) {
+				var onlineTime = (Date.now() - user.loginTime);
+				delete user.loginTime;
+				if (onlineTime >= 30000) {
+					try {
+						frostcommands.logOnlineTime(user.name, onlineTime);
+					} catch (e) {}
+				}
+			}
+		}
+		delete connections[this.id];
 		if (this.user) this.user.onDisconnect(this);
 	};
 

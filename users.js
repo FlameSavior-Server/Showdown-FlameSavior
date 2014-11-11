@@ -1744,7 +1744,7 @@ Connection = (function () {
 			delete connectedIps[this.ip];
 			var connection = connections[this.id];
 			var user = connection.user;
-			if (user.named) {
+			if (user && user.named) {
 				var onlineTime = (Date.now() - user.loginTime);
 				delete user.loginTime;
 				if (onlineTime >= 30000) {

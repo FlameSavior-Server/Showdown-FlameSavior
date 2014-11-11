@@ -4,6 +4,17 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	bam: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><marquee direction="right"><img src="http://3.bp.blogspot.com/-e5J59_wRA-s/TVlDhChyHPI/AAAAAAAABGw/g6KZJzvhU7w/s1600/cropped-line-of-hearts.jpg" width="400"></marquee><br />' +
+			'<img src="https://40.media.tumblr.com/a55c639199b194fca33fbec600a57946/tumblr_n6604tYyqG1s2i16to1_1280.jpg" width="150">' +
+			'<img src="http://i.imgur.com/R6A4aXL.png">' +
+			'<img src="http://31.media.tumblr.com/tumblr_lxm2yaRtZ31qh01r8o1_500.gif" width="180"><br />' +
+			'<font color="pink"><b>Ace:</b> Two is better than one</font><br />' +
+			'<font color="purple">"Hunter: Your love sets my soul on fire. Buffy: Then let the flames burn higher."</font></center>'
+		);
+	},
+
 	starcoa: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/JQcPCrs.png"><br />' +

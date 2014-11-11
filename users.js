@@ -629,7 +629,7 @@ User = (function () {
 				if (room.isPrivate) return ' ' + this.name + (this.awayName || '');
 			}
 		}
-		return (!this.hiding ? this.group : " ") + this.name;
+		return (!this.hiding ? this.group : " ") + this.name + (this.awayName || '');
 	};
 	User.prototype.isStaff = false;
 	User.prototype.can = function (permission, target, room) {

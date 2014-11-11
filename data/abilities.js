@@ -158,7 +158,7 @@ exports.BattleAbilities = {
 			if (!this.isAdjacent(pokemon, this.effectData.target)) return;
 			if (!pokemon.runImmunity('Ground', false)) return;
 			if (!pokemon.hasType('Flying') || pokemon.hasType('ironball') || this.getPseudoWeather('gravity') || pokemon.volatiles['ingrain']) {
-				pokemon.tryTrap();
+				pokemon.tryTrap(true);
 			}
 		},
 		onFoeMaybeTrapPokemon: function (pokemon, source) {
@@ -289,7 +289,7 @@ exports.BattleAbilities = {
 		desc: "Restores HP when this Pokemon consumes a berry.",
 		shortDesc: "Restores HP when this Pokemon consumes a berry.",
 		onEatItem: function (item, pokemon) {
-			this.heal(pokemon.maxhp / 4);
+			this.heal(pokemon.maxhp / 3);
 		},
 		id: "cheekpouch",
 		name: "Cheek Pouch",
@@ -1503,7 +1503,7 @@ exports.BattleAbilities = {
 		shortDesc: "Prevents Steel-type foes from switching out normally.",
 		onFoeModifyPokemon: function (pokemon) {
 			if (pokemon.hasType('Steel') && this.isAdjacent(pokemon, this.effectData.target)) {
-				pokemon.tryTrap();
+				pokemon.tryTrap(true);
 			}
 		},
 		onFoeMaybeTrapPokemon: function (pokemon, source) {
@@ -2250,7 +2250,7 @@ exports.BattleAbilities = {
 		num: 8
 	},
 	"sapsipper": {
-		desc: "This Pokemon is immune to Grass moves. If hit by a Grass move, its Attack is increased by one stage (once for each hit of Bullet Seed). Does not affect Aromatherapy.",
+		desc: "This Pokemon is immune to Grass moves. If hit by a Grass move, its Attack is increased by one stage (once for each hit of Bullet Seed). Does not affect Aromatherapy, but the move will still trigger an Attack increase.",
 		shortDesc: "This Pokemon's Attack is boosted by 1 if hit by any Grass move; Grass immunity.",
 		onTryHit: function (target, source, move) {
 			if (target !== source && move.type === 'Grass') {
@@ -2258,6 +2258,13 @@ exports.BattleAbilities = {
 					this.add('-immune', target, '[msg]');
 				}
 				return null;
+			}
+		},
+		onAllyTryHitSide: function (target, source, move) {
+			if (target.side !== source.side) return;
+
+			if (move.type === 'Grass') {
+				this.boost({atk:1}, this.effectData.target);
 			}
 		},
 		id: "sapsipper",
@@ -2282,7 +2289,7 @@ exports.BattleAbilities = {
 		desc: "This Pokemon's moves have their secondary effect chance doubled. For example, if this Pokemon uses Ice Beam, it will have a 20% chance to freeze its target.",
 		shortDesc: "This Pokemon's moves have their secondary effect chance doubled.",
 		onModifyMove: function (move) {
-			if (move.secondaries) {
+			if (move.secondaries && move.id !== 'secretpower') {
 				this.debug('doubling secondary chance');
 				for (var i = 0; i < move.secondaries.length; i++) {
 					move.secondaries[i].chance *= 2;
@@ -2299,7 +2306,7 @@ exports.BattleAbilities = {
 		shortDesc: "Prevents foes from switching out normally unless they also have this Ability.",
 		onFoeModifyPokemon: function (pokemon) {
 			if (!pokemon.hasAbility('shadowtag') && this.isAdjacent(pokemon, this.effectData.target)) {
-				pokemon.tryTrap();
+				pokemon.tryTrap(true);
 			}
 		},
 		onFoeMaybeTrapPokemon: function (pokemon, source) {

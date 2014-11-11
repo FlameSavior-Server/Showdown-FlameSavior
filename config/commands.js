@@ -1083,10 +1083,6 @@ var commands = exports.commands = {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3494887/\">Middle Cup</a><br />";
 		}
-		if (target === 'mashup') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3518763/\">OM Mashup</a><br />";
-		}
 		if (target === 'skybattle') {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3493601/\">Sky Battle</a><br />";
@@ -1247,6 +1243,10 @@ var commands = exports.commands = {
 		if (target === 'autoconfirmed' || target === 'ac') {
 			matched = true;
 			buffer += "A user is autoconfirmed when they have won at least one rated battle and have been registered for a week or longer.<br />";
+		}
+		if (target === 'customavatar' || target === 'ca') {
+			matched = true;
+			buffer += "<a href=\"https://www.smogon.com/sim/faq#customavatar\">How can I get a custom avatar?</a><br />";
 		}
 		if (!matched) {
 			return this.sendReply("The FAQ entry '" + target + "' was not found. Try /faq for general help.");

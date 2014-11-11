@@ -425,19 +425,19 @@ exports.BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "The user raises the Special Defense stat of itself and ally Pokemon by 1.",
-		shortDesc: "Raises user's and allies' Special Defense by 1.",
+		desc: "Raises an adjacent ally's Special Defense by 1 stage. Fails if there is no ally adjacent to the user.",
+		shortDesc: "Raises an ally's Special Defense by 1.",
 		id: "aromaticmist",
 		name: "Aromatic Mist",
 		pp: 20,
 		priority: 0,
-		onHit: function (pokemon) {
-			for (var p in pokemon.side.active) {
-				this.boost({spd: 1}, pokemon.side.active[p], pokemon.side.active[p], this.getMove("aromaticmist"));
-			}
+		isNotProtectable: true,
+		notSubBlocked: true,
+		boosts: {
+			spd: 1
 		},
 		secondary: false,
-		target: "self",
+		target: "adjacentAlly",
 		type: "Fairy"
 	},
 	"assist": {
@@ -2654,7 +2654,7 @@ exports.BattleMovedex = {
 		priority: 0,
 		isSoundBased: true,
 		secondary: false,
-		target: "normal",
+		target: "allAdjacentFoes",
 		type: "Fairy"
 	},
 	"discharge": {
@@ -4992,6 +4992,7 @@ exports.BattleMovedex = {
 		desc: "The user charges turn one, then sharply raise Special Attack, Special Defense, and Speed the next turn.",
 		shortDesc: "Sharply raises SpAtk, SpDef, and Speed on turn 2.",
 		id: "geomancy",
+		isViable: true,
 		name: "Geomancy",
 		pp: 10,
 		priority: 0,
@@ -5607,7 +5608,7 @@ exports.BattleMovedex = {
 			return null;
 		},
 		secondary: false,
-		target: "self",
+		target: "allySide",
 		type: "Normal"
 	},
 	"harden": {
@@ -6556,6 +6557,14 @@ exports.BattleMovedex = {
 		isUnreleased: true,
 		breaksProtect: true,
 		notSubBlocked: true,
+		onTry: function (pokemon) {
+			/* TODO: Use real forme name
+			if (pokemon.species === 'Hoopa-Forme' && pokemon.baseTemplate.species === pokemon.species) {
+				return;
+			}*/
+			this.add('-fail', pokemon, 'move: Hyperspace Fury');
+			return null;
+		},
 		self: {
 			boosts: {
 				def: -1
@@ -11459,9 +11468,30 @@ exports.BattleMovedex = {
 		name: "Secret Power",
 		pp: 20,
 		priority: 0,
+		onHit: function (target, source, move) {
+			if (this.isTerrain('')) return;
+			move.secondaries = [];
+			if (this.isTerrain('electricterrain')) {
+				move.secondaries.push({
+					chance: 30,
+					status: 'par'
+				});
+			} else if (this.isTerrain('grassyterrain')) {
+				move.secondaries.push({
+					chance: 30,
+					status: 'slp'
+				});
+			} else if (this.isTerrain('mistyterrain')) {
+				move.secondaries.push({
+					chance: 30,
+					boosts: {
+						spa: -1
+					}
+				});
+			}
+		},
 		secondary: {
 			chance: 30,
-			// TODO: Look into the effects on different terrain
 			status: 'par'
 		},
 		target: "normal",
@@ -12825,7 +12855,7 @@ exports.BattleMovedex = {
 				this.add('-sidestart', side, 'move: Stealth Rock');
 			},
 			onSwitchIn: function (pokemon) {
-				var typeMod = this.clampIntRange(this.getEffectiveness('Rock', pokemon), -6, 6);
+				var typeMod = this.clampIntRange(pokemon.runEffectiveness('Rock'), -6, 6);
 				this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 8);
 			}
 		},
@@ -13879,7 +13909,7 @@ exports.BattleMovedex = {
 			target.addVolatile('trapped', source, move, 'trapper');
 		},
 		secondary: false,
-		target: "normal",
+		target: "allAdjacentFoes",
 		type: "Ground"
 	},
 	"thrash": {
@@ -14551,7 +14581,7 @@ exports.BattleMovedex = {
 			return false;
 		},
 		secondary: false,
-		target: "normal",
+		target: "allAdjacentFoes",
 		type: "Poison"
 	},
 	"venoshock": {
@@ -14755,7 +14785,7 @@ exports.BattleMovedex = {
 				this.add('-sideend', targetSide, 'Water Pledge');
 			},
 			onModifyMove: function (move) {
-				if (move.secondaries) {
+				if (move.secondaries && move.id !== 'secretpower') {
 					this.debug('doubling secondary chance');
 					for (var i = 0; i < move.secondaries.length; i++) {
 						move.secondaries[i].chance *= 2;

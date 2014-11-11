@@ -422,7 +422,7 @@ exports.BattleStatuses = {
 		onTryMove: function (target, source, effect) {
 			if (effect.type === 'Fire') {
 				this.debug('Primordial Sea fire suppress');
-				this.add('-fail', source, effect, '[from] Desolate Land');
+				this.add('-fail', source, effect, '[from] Primordial Sea');
 				return null;
 			}
 		},
@@ -617,8 +617,9 @@ exports.BattleStatuses = {
 	deltastream: {
 		effectType: 'Weather',
 		duration: 0,
-		onEffectiveness: function (typeMod, source, target) {
-			if (target === 'Flying' && typeMod > 0) {
+		onEffectiveness: function (typeMod, target, type, move) {
+			if (move && move.id === 'stealthrock') return;
+			if (type === 'Flying' && typeMod > 0) {
 				this.add('-activate', '', 'deltastream');
 				return 0;
 			}

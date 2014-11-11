@@ -44,7 +44,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/8eqn3nd.png"><br />' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/entei.gif">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/raikou.gif">' +
-			'<img crc="http://play.pokemonshowdown.com/sprites/xyani-shiny/suicune.gif"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/suicune.gif"><br />' +
 			'<b>Ace:</b> Raikou<br />' +
 			'I\'m doing a great work and I cannot come down.</center>'
 		);

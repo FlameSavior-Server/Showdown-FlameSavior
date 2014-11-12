@@ -1063,12 +1063,6 @@ User = (function () {
 		this.lastConnected = Date.now();
 	};
 	User.prototype.onDisconnect = function (connection) {
-		//At least from what I've seen, the date setting part here sometimes causes errors, so I'm putting it onto a try-catch statement.
-		try {
-	                if (this.named) datestuff.setdate(this);
-		} catch (err) {
-			console.log(err);
-		}
 		for (var i = 0; i < this.connections.length; i++) {
 			if (this.connections[i] === connection) {
 				// console.log('DISCONNECT: ' + this.userid);
@@ -1106,36 +1100,6 @@ User = (function () {
 		}
 	};
 	User.prototype.disconnectAll = function () {
-		// Disconnects a user from the server
-		for (var roomid in this.mutedRooms) {
-			clearTimeout(this.mutedRooms[roomid]);
-			delete this.mutedRooms[roomid];
-		}
-		if (this.named) datestuff.setdate(this.userid);
-		this.clearChatQueue();
-		var connection = null;
-		this.markInactive();
-		for (var i = 0; i < this.connections.length; i++) {
-			// console.log('DESTROY: ' + this.userid);
-			connection = this.connections[i];
-			connection.user = null;
-			for (var j in connection.rooms) {
-				this.leaveRoom(connection.rooms[j], connection, true);
-			}
-			connection.destroy();
-			--this.ips[connection.ip];
-		}
-		this.connections = [];
-		for (var i in this.roomCount) {
-			if (this.roomCount[i] > 0) {
-				// should never happen.
-				console.log('!! room miscount: ' + i + ' not left');
-				Rooms.get(i, 'lobby').onLeave(this);
-			}
-		}
-		this.roomCount = {};
-	};
-	User.prototype.banDisconnect = function () {
 		// Disconnects a user from the server
 		for (var roomid in this.mutedRooms) {
 			clearTimeout(this.mutedRooms[roomid]);
@@ -1282,7 +1246,7 @@ User = (function () {
 			this.locked = userid; // in case of merging into a recently banned account
 			this.autoconfirmed = '';
 		}
-		this.banDisconnect();
+		this.disconnectAll();
 	};
 	User.prototype.lock = function (noRecurse, userid) {
 		// recurse only once; the root for-loop already locks everything with your IP

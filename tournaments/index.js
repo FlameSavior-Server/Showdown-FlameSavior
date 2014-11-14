@@ -107,7 +107,8 @@ Tournament = (function () {
 			generator: generator.name,
 			playerCap: this.playerCap,
 			isStarted: false,
-			isJoined: false
+			isJoined: false,
+			userCount: this.generator.getUsers().length
 		}));
 		this.update();
 	}
@@ -167,7 +168,8 @@ Tournament = (function () {
 			generator: this.generator.name,
 			isStarted: this.isTournamentStarted,
 			isJoined: isJoined,
-			bracketData: this.bracketCache
+			bracketData: this.bracketCache,
+			userCount: this.generator.getUsers().length
 		}));
 		if (this.isTournamentStarted && isJoined) {
 			connection.sendTo(this.room, '|tournament|update|' + JSON.stringify({
@@ -200,7 +202,7 @@ Tournament = (function () {
 
 				this.bracketCache = this.getBracketData();
 				this.isBracketInvalidated = false;
-				this.room.send('|tournament|update|' + JSON.stringify({bracketData: this.bracketCache}));
+				this.room.send('|tournament|update|' + JSON.stringify({bracketData: this.bracketCache, userCount: this.generator.getUsers().length}));
 			}
 		}
 

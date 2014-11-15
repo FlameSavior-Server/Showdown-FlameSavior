@@ -33,15 +33,6 @@ exports.Formats = [
 		name: "Ubers",
 		section: "XY Singles",
 
-		searchShow: false,
-		ruleset: ['Pokemon', 'Standard Ubers', 'Swagger Clause', 'Team Preview'],
-		banlist: []
-	},
-	{
-		name: "Ubers (suspect test)",
-		section: "XY Singles",
-
-		challengeShow: false,
 		ruleset: ['Pokemon', 'Standard Ubers', 'Swagger Clause', 'Team Preview'],
 		banlist: []
 	},
@@ -336,7 +327,7 @@ exports.Formats = [
 
 		mod: '350cup',
 		ruleset: ['Ubers', 'Evasion Moves Clause'],
-		banlist: ['Darumaka', 'Pawniard', 'Spritzee', 'DeepSeaScale', 'DeepSeaTooth', 'Light Ball', 'Thick Club'],
+		banlist: ['Darumaka', 'Pawniard', 'Smeargle', 'Spritzee', 'DeepSeaScale', 'DeepSeaTooth', 'Light Ball', 'Thick Club'],
 		validateSet: function (set) {
 			var template = Tools.getTemplate(set.species);
 			var item = this.getItem(set.item);
@@ -354,6 +345,19 @@ exports.Formats = [
 		banlist: ['Illegal', 'Uber', 'Floette-Eternal-Flower', 'Hoopa', 'Volcanion', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Soul Dew',
 			'Bug Gem', 'Custap Berry', 'Dark Gem', 'Dragon Gem', 'Electric Gem', 'Fairy Gem', 'Fighting Gem', 'Fire Gem', 'Flying Gem', 'Ghost Gem',
 			'Grass Gem', 'Ground Gem', 'Ice Gem', 'Mail', 'Poison Gem', 'Psychic Gem', 'Rock Gem', 'Steel Gem', 'Water Gem'
+		]
+	},
+	{
+		name: "ORAS Smogon Doubles",
+		section: "OM of the Month",
+
+		mod: 'oras',
+		gameType: 'doubles',
+		ruleset: ['Pokemon', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Abilities Clause', 'Evasion Moves Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Team Preview'],
+		banlist: ['Illegal', 'Floette-Eternal-Flower', 'Hoopa', 'Volcanion', 'Soul Dew', 'Dark Void', 'Bug Gem', 'Custap Berry', 'Dark Gem', 'Dragon Gem',
+			'Electric Gem', 'Fairy Gem', 'Fighting Gem', 'Fire Gem', 'Flying Gem', 'Ghost Gem', 'Grass Gem', 'Ground Gem', 'Ice Gem', 'Mail', 'Poison Gem',
+			'Psychic Gem', 'Rock Gem', 'Steel Gem', 'Water Gem', 'Mewtwo', 'Lugia', 'Ho-Oh', 'Kyogre', 'Groudon', 'Rayquaza', 'Dialga', 'Palkia',
+			'Giratina', 'Giratina-Origin', 'Arceus', 'Reshiram', 'Zekrom', 'Kyurem-White', 'Xerneas', 'Yveltal'
 		]
 	},
 	{
@@ -475,7 +479,7 @@ exports.Formats = [
 				}
 			} else {
 				// Change move type time to time only when the move is not present.
-				if (this.random(100) < 40 && move.target !== 'self') {
+				if (this.random(100) < 35 && move.target !== 'self') {
 					var type = '';
 					switch (move.type.toLowerCase()){
 					case 'rock':
@@ -500,6 +504,9 @@ exports.Formats = [
 						type = 'Bug';
 						break;
 					case 'dragon':
+					case 'poison':
+						type = 'Fairy';
+						break;
 					case 'electric':
 						type = 'Ice';
 						break;
@@ -510,7 +517,6 @@ exports.Formats = [
 						type = 'Electric';
 						break;
 					case 'normal':
-					case 'poison':
 						type = 'Ghost';
 						break;
 					case 'psychic':
@@ -519,15 +525,18 @@ exports.Formats = [
 					case 'steel':
 						type = 'Poison';
 						break;
+					case 'fairy':
+						type = 'Dragon';
+						break;
 					}
 
 					move.type = type;
-					this.add('-message', 'lol trolled I changed yer move type hahaha');
+					this.add('-message', 'LOL trolled I changed yer move type hahaha');
 				}
 			}
 		},
 		onSwitchIn: function (pokemon) {
-			if (this.random(100) < 33) {
+			if (this.random(100) < 25) {
 				this.add('-message', pokemon.name + " drank way too much!");
 				pokemon.addVolatile('confusion');
 				pokemon.statusData.time = 0;

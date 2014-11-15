@@ -125,6 +125,7 @@ function messageSeniorStaff (message) {
 Users.messageSeniorStaff = messageSeniorStaff;
 Users.tells = {};
 
+
 /*********************************************************
  * Locks and bans
  *********************************************************/
@@ -452,13 +453,8 @@ Users.socketReceive = function (worker, workerid, socketid, message) {
 			}
 		});
 	}
-	try {
-		for (var i = 0; i < lines.length; i++) {
-			if (user.chat(lines[i], room, connection) === false) break;
-		}
-	} catch (e) {
-		console.log("User "+user.name+" crashed with message \""+message.substr(message.indexOf('|')+1, message.length)+"\":\n"+e.stack);
-		connection.popup('Message "'+message.substr(message.indexOf('|')+1, message.length)+'" crashed. \nPlease contact an Administrator.\nError: '+e);
+	for (var i = 0; i < lines.length; i++) {
+		if (user.chat(lines[i], room, connection) === false) break;
 	}
 };
 
@@ -783,7 +779,6 @@ User = (function () {
 		users[userid] = this;
 		this.authenticated = !!authenticated;
 		this.forceRenamed = !!forcible;
-		if (!this.loginTime) this.loginTime = Date.now();
 
 		if (authenticated && userid in bannedUsers) {
 			var bannedUnder = '';
@@ -1007,13 +1002,14 @@ User = (function () {
 			// 	console.log('IDENTIFY: ' + name + ' [' + this.name + '] [' + challenge.substr(0, 15) + ']');
 			// }
 
-			var frostDev = false;
-			var vip = false;
 			var group = Config.groupsranking[0];
 			var isSysop = false;
 			var avatar = 0;
 			var authenticated = false;
+			var frostDev = false;
+			var vip = false;
 			var loginTime = (this.loginTime || Date.now());
+
 			// user types (body):
 			//   1: unregistered user
 			//   2: registered user
@@ -1431,7 +1427,7 @@ User = (function () {
 					this.joinRoom(room, this.connections[i]);
 				}
 				if (!room.active && !room.protect && room.type === 'chat' && room.messageCount < 50) {
-					this.connections[i].sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
+					this.connections[i].sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 48 hours it will automatically be deleted.</b></font>');
 				}
 			}
 			return;
@@ -1445,7 +1441,7 @@ User = (function () {
 				room.onJoinConnection(this, connection);
 			}
 			connection.joinRoom(room);
-			if (!room.active && !room.protect && room.type === 'chat' && room.messageCount < 50) connection.sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 72 hours it will automatically be deleted.</b></font>');
+			if (!room.active && !room.protect && room.type === 'chat' && room.messageCount < 50) connection.sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 48 hours it will automatically be deleted.</b></font>');
 		}
 		return true;
 	};
@@ -1499,7 +1495,7 @@ User = (function () {
 		if (!connection) connection = this;
 		if (!type) type = 'challenge';
 
-		if (Rooms.global.lockdown) {
+		if (Rooms.global.lockdown && Rooms.global.lockdown !== 'pre') {
 			var message = "The server is shutting down. Battles cannot be started at this time.";
 			if (Rooms.global.lockdown === 'ddos') {
 				message = "The server is under attack. Battles cannot be started at this time.";
@@ -1683,13 +1679,13 @@ User = (function () {
 		}
 	};
 	User.prototype.destroy = function () {
-		this.disconnectAll();
 		// deallocate user
 		for (var roomid in this.mutedRooms) {
 			clearTimeout(this.mutedRooms[roomid]);
 			delete this.mutedRooms[roomid];
 		}
 		this.clearChatQueue();
+		this.disconnectAll();
 		delete users[this.userid];
 	};
 	User.prototype.toString = function () {
@@ -1777,6 +1773,7 @@ Connection = (function () {
 	return Connection;
 })();
 
+
 Users.User = User;
 Users.Connection = Connection;
 
@@ -1790,3 +1787,4 @@ Users.pruneInactiveTimer = setInterval(
 	1000 * 60 * 30,
 	Config.inactiveuserthreshold || 1000 * 60 * 60
 );
+

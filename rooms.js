@@ -570,7 +570,7 @@ var GlobalRoom = (function () {
 			return;
 		}
 
-		if (this.lockdown) {
+		if (this.lockdown === true) {
 			this.cancelSearch(p1, true);
 			this.cancelSearch(p2, true);
 			p1.popup("The server is shutting down. Battles cannot be started at this time.");
@@ -1567,7 +1567,7 @@ Rooms.aliases = aliases;
 
 var checkInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
-		if (Rooms.rooms[u].type !== 'chat' || Rooms.rooms[u].protect) {
+		if (Rooms.rooms[u].type !== 'chat') {
 			Rooms.rooms[u].active = true;
 			continue;
 		}
@@ -1578,10 +1578,17 @@ var checkInactiveRooms = setInterval(function() {
 
 var deleteInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
-		if (Rooms.rooms[u].type !== 'chat' || Rooms.rooms[u].protect) continue;
-		if (!Rooms.rooms[u].active && Rooms.rooms[u].messageCount < 50) {
+		if (Rooms.rooms[u].type !== 'chat') continue;
+		if (!Rooms.rooms[u].active && !Rooms.rooms[u].protect) {
 			Rooms.global.deregisterChatRoom(Rooms.rooms[u].id);
 			Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.</b></font>');
+			Rooms.rooms[u].update();
+		} else if (!Rooms.rooms[u].active && Rooms.rooms[u].protect) {
+			Rooms.rooms[u].isPrivate = true;
+			Rooms.rooms[u].chatRoomData.isPrivate = true;
+			Rooms.global.writeChatRoomData();
+			Rooms.rooms[u].addRaw("<font color=red><b>This room has been made private due to being inactive.</b></font>");
+			Rooms.rooms[u].update();
 		}
 	}
-}, 4320*60*1000);
+}, 2 * 24 * 60 * 60 * 1000);

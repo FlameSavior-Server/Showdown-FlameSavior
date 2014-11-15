@@ -1341,7 +1341,7 @@ var commands = exports.commands = {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/EEcZ4J2.png" width="350"><br />' +
         	'<img src="http://i.imgur.com/bjVsAsj.png"><br />' +
-            '"Why problem make when you no problem have you dont want to make."</center>');
+            '"Your god was nailed to a cross. My god wields a hammer. <b>Hail Thor</b>"</center>');
 	},
 
 	saago: function(target, room, user) {

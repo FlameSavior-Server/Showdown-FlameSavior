@@ -4,6 +4,69 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	gon: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/WYyTHTe.gif" width="200">' +
+			'<img src="http://i.imgur.com/DJXQjy1.gif"><br />' +
+			'<b>Youngin you\'ve gotta learn how this works, job corp</b><br />' +
+			'<img src="http://media.giphy.com/media/12n7TxQhunrsis/giphy.gif" width="150">' +
+			'<img src="http://www.abload.de/img/untitled-2cyshb.gif" width="150">' +
+			'<img src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10730890_797488766983587_230306011434745639_n.jpg?oh=8abb2bf8554168880b606701ec732d34&oe=551CDD20&__gda__=1423128169_dd234a6dd939be4338da5e6ac0c03225" width="150" height="100">' +
+			'<img src="https://scontent-a-iad.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/10518834_1485022648452780_3459462858199608487_n.jpg?oh=d27683d44bfe14c3f36fe2a85f047d2e&oe=54D2BB21" width="160" height="100"></center>'
+		);
+	},
+
+	lost: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://s15.postimg.org/l4tukyrff/screenshot_157.png" width="170">' +
+			'<img src="http://i.imgur.com/91G3YUB.png" width="220">' +
+			'<img src="http://i.imgur.com/9Y45g5p.jpg" width="150"><br />' +
+			'<img src="http://elitedaily.com/wp-content/uploads/2013/04/BG9mlvuCAAEm7nn.jpeg" width="150">' +
+			'<b>Ace: Google Maps</b>' +
+			'<img src="http://i.imgur.com/RT7NRWm.png" width="160" height="100"></center>'
+		);
+	},
+
+	fairy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/WJaq7LG.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/gardevoir.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/diancie.png"><br />' +
+			'<img src="http://i.imgur.com/WkK2adh.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/mawile-mega.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/clefable.png"><br />' +
+			'<img src="http://i.imgur.com/sNd8S8n.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/togekiss.png"><br />' +
+			'<b>Ace:</b> <font color="#000080">Ashaury</font> & <font color="#8A0707">ArkenCiel</font><br />' +
+			'"Heard you were talking shit. We\'re <font color="#FF69B4">pink</font>, <i>cute</i>, and here to <ins>play rough</ins> with you, <b>bitch</b>.</center>'
+		);
+	},
+
+	trunks: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/979356/dbz-o.gif" width="250" height="160">' +
+			'<img src="http://jump-galaxy.com/wp-content/uploads/2014/09/trunks-as-a-super-sayan-3-o.gif" width="280" height="160"><br />' +
+			'<b>Ace:</b> SuperSaiyan<br />' +
+			'[09:53] %Arc Landorus: Trunks is bae.</center>'
+		);
+	},
+
+	hallie: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/66OWoIl.png" height="200">' +
+			'<img src="http://i.imgur.com/JSodhr9.gif">' +
+			'<img src="http://www.psypokes.com/dex/picdex/xy_animated/front/319.gif"><br />' +
+			'<b>Ace:</b> sharpedo<br />' +
+			'Too sleepy to battle me? then let my water soak your face.</center>'
+		);
+	},
+
+	nypt: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/8Evupvh.png"></center>'
+		);
+	},
+
 	bam: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><marquee direction="right"><img src="http://3.bp.blogspot.com/-e5J59_wRA-s/TVlDhChyHPI/AAAAAAAABGw/g6KZJzvhU7w/s1600/cropped-line-of-hearts.jpg" width="400"></marquee><br />' +
@@ -472,13 +535,12 @@ exports.commands = {
 		);
 	},
 
-	nicknames: function (target, room, user) {
+	night: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/af2WJgt.gif" width="140">' +
-			'<img src="http://i.imgur.com/bZRu5vk.gif" width="260">' +
-			'<img src="http://cdn.smosh.com/sites/default/files/bloguploads/pokemon-gif-nyan.gif" width="140"><br />' +
-			'<b>Ace:</b> Nicknames<br />' +
-			'The Aura Cat = Kitty Cat :3</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/EpPAjTi.png">' +
+			'<img src="http://24.media.tumblr.com/1f1ff7236cd83837a0f740e1f706a19c/tumblr_mndngkphED1sogzd2o1_500.gif" height="300"><br />' +
+			'<b>Ace:</b> Victini<br />' +
+			':( "Its only awkward if you make it akward"</center>'
 		);
 	},
 

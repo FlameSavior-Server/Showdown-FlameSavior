@@ -498,13 +498,17 @@ var commands = exports.commands = {
 		return this.sendReply('The message of the day was set to "'+message+'" and it will be displayed every '+time+' minutes.');
 	},
 
-<<<<<<< HEAD
 	clearmotd: 'cmotd',
 	cmotd: function (target, room, user) {
 		if (!this.can('pban')) return false;
 		if (isMotd == false) {
 			return this.sendReply('There is no motd right now.');
-=======
+		}
+		clearInterval(motd);
+		this.logModCommand(user.name+' cleared the message of the day.');	
+		return this.sendReply('You cleared the message of the day.');
+	},
+
 	requesthelp: 'report',
 	report: function (target, room, user) {
 		this.sendReply("Use the Help room.");
@@ -515,12 +519,9 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help reply');
 		if (!user.lastPM) {
 			return this.sendReply("No one has PMed you yet.");
->>>>>>> upstream/master
 		}
-		clearInterval(motd);
-		this.logModCommand(user.name+' cleared the message of the day.');
-		return this.sendReply('You cleared the message of the day.');
-	},
+		return this.parse('/msg ' + (user.lastPM || '') + ', ' + target);
+		},
 
 	spop: 'sendpopup',
 	sendpopup: function(target, room, user) {
@@ -733,20 +734,12 @@ var commands = exports.commands = {
 			parts[0] = this.splitTarget(parts[0]);
 			var targetUser = this.targetUser;
 		}
-<<<<<<< HEAD
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
 		if (isNaN(parts[1])) {
 			return this.sendReply('Very funny, now use a real number.');
-=======
 
-		if (user.locked && !targetUser.can('lock')) {
-			return this.popupReply("You can only private message members of the moderation team (users marked by %, @, &, or ~) when locked.");
-		}
-		if (targetUser.locked && !user.can('lock')) {
-			return this.popupReply("This user is locked and cannot PM.");
->>>>>>> upstream/master
 		}
 		if (parts[1] < 0) {
 			return this.sendReply('Number cannot be negative.');
@@ -2640,7 +2633,6 @@ var commands = exports.commands = {
 		}
 	},
 
-<<<<<<< HEAD
 	masspm: 'pmall',
 	pmall: function(target, room, user) {
 		if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');
@@ -2651,7 +2643,9 @@ var commands = exports.commands = {
 		for (var i in Users.users) {
 			var message = '|pm|'+pmName+'|'+Users.users[i].getIdentity()+'|'+target;
 			Users.users[i].send(message);
-=======
+		}
+	},
+
 	modjoin: function (target, room, user) {
 		if (!this.can('privateroom', null, room)) return;
 		if (target === 'off' || target === 'false') {
@@ -2678,7 +2672,6 @@ var commands = exports.commands = {
 			}
 			if (!room.modchat) this.parse('/modchat ' + Config.groupsranking[1]);
 			if (!room.isPrivate) this.parse('/privateroom');
->>>>>>> upstream/master
 		}
 	},
 
@@ -2937,7 +2930,6 @@ var commands = exports.commands = {
 		}
 	},
 
-<<<<<<< HEAD
 	poofoff: 'nopoof',
 	nopoof: function(target, room, user){
 		if(!user.can('warn'))
@@ -2947,7 +2939,6 @@ var commands = exports.commands = {
 		poofeh = false;
 		return this.sendReply('poof is now disabled.');
 	},
-=======
 	userauth: function (target, room, user, connection) {
 		var targetId = toId(target) || user.userid;
 		var targetUser = Users.getExact(targetId);
@@ -2990,11 +2981,11 @@ var commands = exports.commands = {
 		connection.popup(buffer.join("\n\n"));
 	},
 
-	rb: 'roomban',
+	/*rb: 'roomban',
 	roomban: function (target, room, user, connection) {
 		if (!target) return this.parse('/help roomban');
 		if (user.locked || user.mutedRooms[room.id]) return this.sendReply("You cannot do this while unable to talk.");
->>>>>>> upstream/master
+	}, */
 
 	poofon: function(target, room, user){
 		if(!user.can('warn'))
@@ -3227,7 +3218,7 @@ var commands = exports.commands = {
 		var targetUser = Users.get(target);
 
 <<<<<<< HEAD
-		if (!targetUser) return this.sendReply('User "' + target.trim() + '" could not be found.');
+			if (!targetUser) return this.sendReply('User "' + target.trim() + '" could not be found.');
 
 		room.add('|c|' + user.getIdentity() + '|/me punts ' + targetUser.name);
 		return room.add('|c|' + targetUser.getIdentity() + '|/me is punted by ' + user.name);
@@ -3862,7 +3853,6 @@ var commands = exports.commands = {
 		return this.privateModCommand("(" + user.name + " notes: " + target + ")");
 	},
 
-<<<<<<< HEAD
 	unlink: 'unurl',
 	ul: 'unurl',
 	unurl: function(target, room, user, connection, cmd) {
@@ -3878,10 +3868,8 @@ var commands = exports.commands = {
 		return this.privateModCommand('|html|(' + user.name + ' has made  <font color="red">' +this.targetUsername+ '</font>\'s prior links unclickable.)');
 	},
 
-=======
 	globaldemote: 'promote',
 	globalpromote: 'promote',
->>>>>>> upstream/master
 	demote: 'promote',
 	promote: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help promote');

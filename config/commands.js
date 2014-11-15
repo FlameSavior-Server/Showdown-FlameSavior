@@ -172,12 +172,8 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply("User " + this.targetUsername + " not found.");
 		}
-<<<<<<< HEAD
-		this.sendReply("User: " + targetUser.name);
-=======
 
 		this.sendReply("|raw|User: " + targetUser.name + (!targetUser.connected ? ' <font color="gray"><em>(offline)</em></font>' : ''));
->>>>>>> upstream/master
 		if (user.can('alts', targetUser)) {
 			var alts = targetUser.getAlts(true);
 			var output = Object.keys(targetUser.prevNames).join(", ");

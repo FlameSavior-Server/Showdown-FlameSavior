@@ -44,4 +44,7 @@ local_settings.py
 .svn
 
 pip-log.txt
-
+*.txt
+shadow-ban.js
+badges.txt
+economy.js

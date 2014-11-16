@@ -265,7 +265,9 @@ var commands = exports.commands = {
 				output += targetUser.prevNames[i];
 			}
 			if (output) this.sendReply('Previous names: '+output);
-=======
+		}
+	},
+
 ip: 'whois',
 rooms: 'whois',
 alt: 'whois',
@@ -275,7 +277,6 @@ whois: function (target, room, user) {
 	if (!targetUser) {
 		return this.sendReply("User " + this.targetUsername + " not found.");
 	}
->>>>>>> 63e3827763e7b7819e0e9e017a4725a6a44fa979
 
 	this.sendReply("|raw|User: " + targetUser.name + (!targetUser.connected ? ' <font color="gray"><em>(offline)</em></font>' : ''));
 	if (user.can('alts', targetUser)) {
@@ -1264,21 +1265,20 @@ staff: function (target, room, user) {
 whosgotthemoneyz: 'richestuser',
 richestuser: function(target, room, user) {
 	if (!this.canBroadcast()) return;
-var data = fs.readFileSync('config/money.csv','utf8');
-var row = (''+data).split("\n");
+	var data = fs.readFileSync('config/money.csv','utf8');
+	var row = (''+data).split("\n");
 	var userids = {id:[],money:[]};
 	var highest = {id:[],money:[]};
 	var size = 0;
 	var amounts = [];
-for (var i = row.length; i > -1; i--) {
-    if (!row[i]) continue;
-    var parts = row[i].split(",");
+	for (var i = row.length; i > -1; i--) {
+	    if (!row[i]) continue;
+	    var parts = row[i].split(",");
 		userids.id[i] = parts[0];
 		userids.money[i] = Number(parts[1]);
 		size++;
 		if (isNaN(parts[1]) || parts[1] === 'Infinity') userids.money[i] = 0;
-
-}
+	}
 	for (var i=0; i<10;i++) {
 		var tempHighest = 0;
 		for (var x=0;x<size;x++) {
@@ -1293,94 +1293,6 @@ for (var i = row.length; i > -1; i--) {
 				userids.money[x] = 0;
 				found = true;
 			}
-		target = toId(target);
-		var buffer = "";
-		var matched = false;
-		if (!target) {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/forums/206/\">Other Metagames Forum</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3505031/\">Other Metagames Index</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3507466/\">Sample teams for entering Other Metagames</a><br />";
-		}
-		if (target === 'smogondoublesuu' || target === 'doublesuu') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3516968/\">Doubles UU</a><br />";
-		}
-		if (target === 'smogontriples' || target === 'triples') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3511522/\">Smogon Triples</a><br />";
-		}
-		if (target === 'omofthemonth' || target === 'omotm' || target === 'month') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3481155/\">OM of the Month</a><br />";
-		}
-		if (target === 'balancedhackmons' || target === 'bh') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3489849/\">Balanced Hackmons</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3515725/\">Balanced Hackmons Suspect Discussion</a><br />";
-		}
-		if (target === '1v1') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3496773/\">1v1</a><br />";
-		}
-		if (target === 'monotype') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3493087/\">Monotype</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3517737/\">Monotype Viability Rankings</a><br />";
-		}
-		if (target === 'tiershift' || target === 'ts') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3508369/\">Tier Shift</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3514386/\">Tier Shift Viability Rankings</a><br />";
-		}
-		if (target === 'pu') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3513882/\">PU</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3517353/\">PU Viability Rankings</a><br />";
-		}
-		if (target === 'inversebattle' || target === 'inverse') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3518146/\">Inverse Battle</a><br />";
-		}
-		if (target === 'almostanyability' || target === 'aaa') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3517022/\">Almost Any Ability</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3508794/\">Almost Any Ability Viability Rankings</a><br />";
-		}
-		if (target === 'stabmons') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3493081/\">STABmons</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3512215/\">STABmons Viability Rankings</a><br />";
-		}
-		if (target === 'lcuu') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3516967/\">LC UU</a><br />";
-		}
-		if (target === '350cup') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3512945/\">350 Cup</a><br />";
-		}
-		if (target === 'averagemons') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3495527/\">Averagemons</a><br />";
-		}
-		if (target === 'classichackmons' || target === 'hackmons') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3521887/\">Classic Hackmons</a><br />";
-		}
-		if (target === 'hiddentype') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3516349/\">Hidden Type</a><br />";
-		}
-		if (target === 'middlecup' || target === 'mc') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3494887/\">Middle Cup</a><br />";
-		}
-		if (target === 'skybattle') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3493601/\">Sky Battle</a><br />";
->>>>>>> main/master
->>>>>>> f9e8f87c5c9ddf275850c436b46a92960ce58245
 		}
 	}
 	return this.sendReplyBox('<b>The richest users are:</b>' +
@@ -2520,14 +2432,6 @@ links: function (target, room, user) {
 	},
 
 
-	tc: 'tourhelp',
-	th: 'tourhelp',
-	tourhelp: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b><font size="4"><font color="green">Tournament Commands List:</font></b><br>' +
-				'<b>/tpoll</b> - Starts a poll asking what tier users want. Requires: +, %, @, &, ~. <br>' +
-=======
-},
 
 mentoring: 'smogintro',
 smogonintro: 'smogintro',
@@ -2756,7 +2660,6 @@ tourhelp: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<b><font size="4"><font color="green">Tournament Commands List:</font></b><br>' +
 			'<b>/tpoll</b> - Starts a poll asking what tier users want. Requires: +, %, @, &, ~. <br>' +
->>>>>>> 63e3827763e7b7819e0e9e017a4725a6a44fa979
 				'<b>/tour [tier], [number of people or xminutes]</b> Requires: +, %, @, &, ~.<br>' +
 				'<b>/endtour</b> - Ends the current tournement. Requires: +, %, @, &, ~.<br>' +
 				'<b>/replace [replacee], [replacement]</b> Requires: +, %, @, &, ~.<br>' +
@@ -2841,11 +2744,10 @@ tourhelp: function(target, room, user) {
 		if (target === 'all' || target === 'league') {
 			matched = true;
 			buffer += 'Welcome to Gold!  So, you\'re interested in making or moving a league here?  If so, read <a href="http://goldserver.weebly.com/making-a-league.html">this</a> and write down your answers on a <a href="http://pastebin.com">Pastebin</a> and PM it to an admin.  Good luck!<br />';
-=======
+		}
 		if (target === 'customavatar' || target === 'ca') {
 			matched = true;
 			buffer += "<a href=\"https://www.smogon.com/sim/faq#customavatar\">How can I get a custom avatar?</a><br />";
->>>>>>> main/master
 		}
 		if (!matched) {
 			return this.sendReply("The FAQ entry '" + target + "' was not found. Try /faq for general help.");

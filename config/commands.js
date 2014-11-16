@@ -3102,7 +3102,7 @@ tourhelp: function(target, room, user) {
 		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');
 		if (!target) return this.sendReply('/givebadge [user], [badge] - Gives a badge to a user. Requires: &~');
 		var self = this;
-		var type_of_badges = ['admin','bot','dev','vip','mod','artist','leader','champ','creator','comcun','twinner','league'];
+		var type_of_badges = ['admin','bot','dev','vip','mod','artist','leader','champ','creator','comcun','twinner','league','fgs'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('Ther is no badge named '+target+'.');
 		fs.readFile('badges.txt', 'utf8', function(err, data) {
 			if (err) console.log(err);
@@ -3141,19 +3141,20 @@ tourhelp: function(target, room, user) {
 
 	badgelist: function(target, room, user) {
                 if (!this.canBroadcast()) return;
+                var fgs = '<img src="http://www.smogon.com/media/forums/images/badges/forummod_alum.png" title="Former Gold Staff">';
                 var admin = '<img src="http://www.smogon.com/media/forums/images/badges/sop.png" title="Server Administrator">';
                 var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Developer">';
                 var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
                 var comcun = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="Community Contributor">';
                 var leader = '<img src="http://www.smogon.com/media/forums/images/badges/aop.png" title="Server Leader">';
                 var mod = '<img src="http://www.smogon.com/media/forums/images/badges/pyramid_king.png" title="Exceptional Staff Member">';
-                var league ='<img src="http://www.smogon.com/media/forums/images/badges/forumsmod.png" title="Successful League Owner">';
+                var league ='<img src="http://www.smogon.com/media/forums/images/badges/forumsmod.png" title="Successful Room Founder">';
                 var champ ='<img src="http://www.smogon.com/media/forums/images/badges/forumadmin_alum.png" title="Goodra League Champion">';
                 var artist ='<img src="http://www.smogon.com/media/forums/images/badges/ladybug.png" title="Artist">';
                 var twinner='<img src="http://www.smogon.com/media/forums/images/badges/spl.png" title="Badge Tournament Winner">';
                 var vip ='<img src="http://www.smogon.com/media/forums/images/badges/zeph.png" title="VIP">';
                 var bot ='<img src="http://www.smogon.com/media/forums/images/badges/mind.png" title="Gold Bot Hoster">';
- 				return this.sendReplyBox('<b>List of Gold Badges</b>:<br>   '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+artist+'    '+twinner+'    '+vip+'    '+bot+' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
+ 				return this.sendReplyBox('<b>List of Gold Badges</b>:<br>'+fgs+'  '+admin+'    '+dev+'  '+creator+'   '+comcun+'    '+mod+'    '+leader+'    '+league+'    '+champ+'    '+artist+'    '+twinner+'    '+vip+'    '+bot+' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
 	},
 	badges: 'badge',
     	badge: function(target, room, user) {

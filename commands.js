@@ -2784,7 +2784,6 @@ var commands = exports.commands = {
 
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
-=======
 /*
 	impersonate:'imp',
 	imp: function(target, room, user) {

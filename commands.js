@@ -4437,7 +4437,6 @@ var commands = exports.commands = {
 		this.sendReply("You are now blocking all incoming challenge requests.");
 	},
 
-	back: 'allowchallenges',
 	allowchallenges: function (target, room, user) {
 		if (!user.blockChallenges) return this.sendReply("You are already available for challenges!");
 		user.blockChallenges = false;

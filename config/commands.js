@@ -2355,39 +2355,6 @@ links: function (target, room, user) {
 		this.sendReplyBox(buffer);
 	},
 
-	/*formats: 'formathelp',
-	formatshelp: 'formathelp',
-	formathelp: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		if (this.broadcasting && (room.id === 'lobby' || room.battle)) return this.sendReply("This command is too spammy to broadcast in lobby/battles");
-		var buf = [];
-		var showAll = (target === 'all');
-		for (var id in Tools.data.Formats) {
-			var format = Tools.data.Formats[id];
-			if (!format) continue;
-			if (format.effectType !== 'Format') continue;
-			if (!format.challengeShow) continue;
-			if (!showAll && !format.searchShow) continue;
-			buf.push({
-				name: format.name,
-				gameType: format.gameType || 'singles',
-				mod: format.mod,
-				searchShow: format.searchShow,
-				desc: format.desc || 'No description.'
-			});
-		}
-		this.sendReplyBox(
-			"Available Formats: (<strong>Bold</strong> formats are on ladder.)<br />" +
-			buf.map(function (data) {
-				var str = "";
-				// Bold = Ladderable.
-				str += (data.searchShow ? "<strong>" + data.name + "</strong>" : data.name) + ": ";
-				str += "(" + (!data.mod || data.mod === 'base' ? "" : data.mod + " ") + data.gameType + " format) ";
-				str += data.desc;
-				return str;
-			}).join("<br />")
-		);
-	},*/
 
 	roomhelp: function (target, room, user) {
 		if (room.id === 'lobby' || room.battle) return this.sendReply("This command is too spammy for lobby/battles.");
@@ -2577,81 +2544,7 @@ othermetas: function (target, room, user) {
 	this.sendReplyBox(buffer);
 },
 
-/*formats: 'formathelp',
-formatshelp: 'formathelp',
-formathelp: function (target, room, user) {
-	if (!this.canBroadcast()) return;
-	if (this.broadcasting && (room.id === 'lobby' || room.battle)) return this.sendReply("This command is too spammy to broadcast in lobby/battles");
-	var buf = [];
-	var showAll = (target === 'all');
-	for (var id in Tools.data.Formats) {
-		var format = Tools.data.Formats[id];
-		if (!format) continue;
-		if (format.effectType !== 'Format') continue;
-		if (!format.challengeShow) continue;
-		if (!showAll && !format.searchShow) continue;
-		buf.push({
-			name: format.name,
-			gameType: format.gameType || 'singles',
-			mod: format.mod,
-			searchShow: format.searchShow,
-			desc: format.desc || 'No description.'
-		});
-	}
-	this.sendReplyBox(
-		"Available Formats: (<strong>Bold</strong> formats are on ladder.)<br />" +
-		buf.map(function (data) {
-			var str = "";
-			// Bold = Ladderable.
-			str += (data.searchShow ? "<strong>" + data.name + "</strong>" : data.name) + ": ";
-			str += "(" + (!data.mod || data.mod === 'base' ? "" : data.mod + " ") + data.gameType + " format) ";
-			str += data.desc;
-			return str;
-		}).join("<br />")
-	);
-},*/
 
-roomhelp: function (target, room, user) {
-	if (room.id === 'lobby' || room.battle) return this.sendReply("This command is too spammy for lobby/battles.");
-	if (!this.canBroadcast()) return;
-	this.sendReplyBox('Room drivers (%) can use:<br />' +
-		'- /warn OR /k <em>username</em>: warn a user and show the Pokemon Showdown rules<br />' +
-		'- /mute OR /m <em>username</em>: 7 minute mute<br />' +
-		'- /hourmute OR /hm <em>username</em>: 60 minute mute<br />' +
-		'- /unmute <em>username</em>: unmute<br />' +
-		'- /announce OR /wall <em>message</em>: make an announcement<br />' +
-		'- /modlog <em>username</em>: search the moderator log of the room<br />' +
-		'<br />' +
-		'Room moderators (@) can also use:<br />' +
-		'- /roomban OR /rb <em>username</em>: bans user from the room<br />' +
-		'- /roomunban <em>username</em>: unbans user from the room<br />' +
-		'- /roomvoice <em>username</em>: appoint a room voice<br />' +
-		'- /roomdevoice <em>username</em>: remove a room voice<br />' +
-		'- /modchat <em>[off/autoconfirmed/+]</em>: set modchat level<br />' +
-		'<br />' +
-		'Room owners (#) can also use:<br />' +
-		'- /roomdesc <em>description</em>: set the room description on the room join page<br />' +
-		'- /rules <em>rules link</em>: set the room rules link seen when using /rules<br />' +
-		'- /roommod, /roomdriver <em>username</em>: appoint a room moderator/driver<br />' +
-		'- /roomdemod, /roomdedriver <em>username</em>: remove a room moderator/driver<br />' +
-		'- /modchat <em>[%/@/#]</em>: set modchat level<br />' +
-		'- /declare <em>message</em>: make a room declaration<br /><br>' +
-		'The room founder can also use:<br />' +
-		'- /roomowner <em>username</em><br />' +
-		'- /roomdeowner <em>username</em><br />' +
-		'</div>');
-},
-
-restarthelp: function (target, room, user) {
-	if (room.id === 'lobby' && !this.can('lockdown')) return false;
-	if (!this.canBroadcast()) return;
-	this.sendReplyBox('The server is restarting. Things to know:<br />' +
-		'- We wait a few minutes before restarting so people can finish up their battles<br />' +
-		'- The restart itself will take a few seconds<br />' +
-		'- Your ladder ranking and teams will not change<br />' +
-		'- We are restarting to update Gold to a newer version' +
-		'</div>');
-},
 
 
 tc: 'tourhelp',

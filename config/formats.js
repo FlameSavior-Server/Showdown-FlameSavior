@@ -360,9 +360,15 @@ exports.Formats = [
 	{
 		name: "Balanced Hackmons",
 		section: "Other Metagames",
+<<<<<<< HEAD
 
 		ruleset: ['Pokemon', 'Ability Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Team Preview', 'HP Percentage Mod'],
 		banlist: ['Arena Trap', 'Huge Power', 'Parental Bond', 'Pure Power', 'Shadow Tag', 'Wonder Guard']
+=======
+		ruleset: ['Pokemon', 'OHKO Clause', 'HP Percentage Mod', 'Ability Clause'],
+		banlist: ['Wonder Guard', 'Shadow Tag', 'Arena Trap', 'Pure Power', 'Huge Power', 'Parental Bond']
+
+>>>>>>> 63e3827763e7b7819e0e9e017a4725a6a44fa979
 	},
 	{
 		name: "1v1",
@@ -458,7 +464,10 @@ exports.Formats = [
 	{
 		name: "LC UU",
 		section: "Other Metagames",
+<<<<<<< HEAD
 
+=======
+>>>>>>> 63e3827763e7b7819e0e9e017a4725a6a44fa979
 		maxLevel: 5,
 		ruleset: ['LC'],
 		banlist: ['Abra', 'Aipom', 'Archen', 'Bellsprout', 'Bunnelby', 'Carvanha', 'Chinchou', 'Corphish', 'Cottonee', 'Cranidos',

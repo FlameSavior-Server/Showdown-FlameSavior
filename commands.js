@@ -3245,6 +3245,7 @@ var commands = exports.commands = {
 
 		if (!room.reminders) room.reminders = room.chatRoomData.reminders = {};
 
+<<<<<<< HEAD
 		if (target.trim().toLowerCase() === 'view' || target.trim().toLowerCase() === 'display') {
 			if (!this.canBroadcast()) return;
 			var message = '<strong><font size=3>Reminders for '+room.title+':</strong></font>'+(room.reminders[1]?'<ol>':'<br /><br />There are no reminders to display. ');
@@ -3252,6 +3253,9 @@ var commands = exports.commands = {
 				for (var r in room.reminders) {
 					message += htmlfix('<li>'+room.reminders[r]);
 =======
+=======
+	joim: 'join',
+>>>>>>> main/master
 	join: function (target, room, user, connection) {
 		if (!target) return false;
 		var targetRoom = Rooms.get(target) || Rooms.get(toId(target)) || Rooms.aliases[toId(target)];
@@ -4289,6 +4293,13 @@ var commands = exports.commands = {
 		this.logEntry(user.name + " used /lockdown");
 	},
 
+	prelockdown: function (target, room, user) {
+		if (!this.can('lockdown')) return false;
+		Rooms.global.lockdown = 'pre';
+		this.sendReply("Tournaments have been disabled in preparation for the server restart.");
+		this.logEntry(user.name + " used /prelockdown");
+	},
+
 	slowlockdown: function (target, room, user) {
 		if (!this.can('lockdown')) return false;
 
@@ -4309,10 +4320,14 @@ var commands = exports.commands = {
 		if (!Rooms.global.lockdown) {
 			return this.sendReply("We're not under lockdown right now.");
 		}
-		Rooms.global.lockdown = false;
-		for (var id in Rooms.rooms) {
-			if (id !== 'global') Rooms.rooms[id].addRaw("<div class=\"broadcast-green\"><b>The server shutdown was canceled.</b></div>");
+		if (Rooms.global.lockdown === true) {
+			for (var id in Rooms.rooms) {
+				if (id !== 'global') Rooms.rooms[id].addRaw("<div class=\"broadcast-green\"><b>The server shutdown was canceled.</b></div>");
+			}
+		} else {
+			this.sendReply("Preparation for the server shutdown was canceled.");
 		}
+		Rooms.global.lockdown = false;
 
 		this.logEntry(user.name + " used /endlockdown");
 	},
@@ -4348,7 +4363,7 @@ var commands = exports.commands = {
 	kill: function (target, room, user) {
 		if (!this.can('lockdown')) return false;
 
-		if (!Rooms.global.lockdown) {
+		if (Rooms.global.lockdown !== true) {
 			return this.sendReply("For safety reasons, /kill can only be used during lockdown.");
 		}
 
@@ -4479,7 +4494,7 @@ var commands = exports.commands = {
 	},
 
 	crashfixed: function (target, room, user) {
-		if (!Rooms.global.lockdown) {
+		if (Rooms.global.lockdown !== true) {
 			return this.sendReply('/crashfixed - There is no active crash.');
 		}
 		if (!this.can('hotpatch')) return false;
@@ -4822,8 +4837,9 @@ var commands = exports.commands = {
 		this.sendReply("You are now blocking all incoming challenge requests.");
 	},
 
-	backchal: 'allowchallenges',
-	allowchallenges: function(target, room, user) {
+	back: 'allowchallenges',
+	allowchallenges: function (target, room, user) {
+		if (!user.blockChallenges) return this.sendReply("You are already available for challenges!");
 		user.blockChallenges = false;
 		this.sendReply("You are available for challenges from now on.");
 	},

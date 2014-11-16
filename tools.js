@@ -181,13 +181,19 @@ module.exports = (function () {
 	Tools.prototype.effectToString = function () {
 		return this.name;
 	};
-	Tools.prototype.getImmunity = function (type, target) {
-		var types = target.getTypes && target.getTypes() || target.types;
-		for (var i = 0; i < types.length; i++) {
-			if (this.data.TypeChart[types[i]] && this.data.TypeChart[types[i]].damageTaken && this.data.TypeChart[types[i]].damageTaken[type] === 3) {
-				return false;
+	Tools.prototype.getImmunity = function (source, target) {
+		// returns false if the target is immune; true otherwise
+		// also checks immunity to some statuses
+		var sourceType = source.type || source;
+		var targetTyping = target.getTypes && target.getTypes() || target.types || target;
+		if (Array.isArray(targetTyping)) {
+			for (var i = 0; i < targetTyping.length; i++) {
+				if (!this.getImmunity(sourceType, targetTyping[i])) return false;
 			}
+			return true;
 		}
+		var typeData = this.data.TypeChart[targetTyping];
+		if (typeData && typeData.damageTaken[sourceType] === 3) return false;
 		return true;
 	};
 	Tools.prototype.getEffectiveness = function (source, target) {
@@ -415,6 +421,9 @@ module.exports = (function () {
 			if (!item.category) item.category = 'Effect';
 			if (!item.effectType) item.effectType = 'Item';
 			if (item.isBerry) item.fling = {basePower: 10};
+			if (item.onPlate) item.fling = {basePower: 90};
+			if (item.onDrive) item.fling = {basePower: 70};
+			if (item.megaStone) item.fling = {basePower: 80};
 			if (!item.gen) {
 				if (item.num >= 577) item.gen = 6;
 				else if (item.num >= 537) item.gen = 5;

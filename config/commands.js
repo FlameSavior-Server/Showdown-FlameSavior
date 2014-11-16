@@ -686,7 +686,12 @@ invite: function (target, room, user) {
 /*********************************************************
  * Informational commands
  *********************************************************/
-
+	randompokemon: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		var symbol = '/';
+		if (this.broadcasting) symbol = '!';
+		return this.parse(symbol + 'dt '+ (Math.floor(Math.random()*721)+1));
+	},
 pstats: 'data',
 stats: 'data',
 dex: 'data',

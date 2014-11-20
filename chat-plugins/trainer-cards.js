@@ -4743,8 +4743,9 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/HbuF0aR.png" width="550"><br />' +
 			'<b>Ace:</b> Victini <br />' +
-			'Owner of Trinity and former head of Biblia. Aggression is an art form. I am simply an artist.<br />' +
-			'<img src="http://img-cache.cdn.gaiaonline.com/1a962e841da3af2acaced68853cd194d/http://i1070.photobucket.com/albums/u485/nitehawkXD/victini.gif"></center>'
+			'Former Owner of Biblia | Forever Frosty<br />' +
+			'<img src="http://img-cache.cdn.gaiaonline.com/1a962e841da3af2acaced68853cd194d/http://i1070.photobucket.com/albums/u485/nitehawkXD/victini.gif"><br />' +
+			'<img src="http://i.imgur.com/wJE6vrw.png"></center>'
 		);
 	},
 

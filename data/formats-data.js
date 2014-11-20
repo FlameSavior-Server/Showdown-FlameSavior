@@ -2429,7 +2429,7 @@ exports.BattleFormatsData = {
 	sableyemega: {
 		randomBattleMoves: ["recover","willowisp","darkpulse","calmmind","shadowball"],
 		randomDoubleBattleMoves: ["fakeout","knockoff","darkpulse","shadowball","willowisp","protect"],
-		requiredItem: "Sableite",
+		requiredItem: "Sablenite",
 		tier: "Unreleased"
 	},
 	mawile: {
@@ -2576,7 +2576,7 @@ exports.BattleFormatsData = {
 	},
 	sharpedomega: {
 		randomBattleMoves: ["protect","icefang","crunch","earthquake","waterfall","zenheadbutt"],
-		requiredItem: "Sharpedite",
+		requiredItem: "Sharpedonite",
 		tier: "Unreleased"
 	},
 	wailmer: {
@@ -2691,7 +2691,7 @@ exports.BattleFormatsData = {
 	altariamega: {
 		randomBattleMoves: ["dragondance","return","outrage","dragonclaw","earthquake","roost","dracometeor","fireblast"],
 		randomDoubleBattleMoves: ["dragondance","return","doubleedge","dragonclaw","earthquake","protect","fireblast"],
-		requiredItem: "Altarite",
+		requiredItem: "Altarianite",
 		tier: "Unreleased"
 	},
 	zangoose: {
@@ -4144,7 +4144,7 @@ exports.BattleFormatsData = {
 	scolipede: {
 		randomBattleMoves: ["spikes","toxicspikes","megahorn","rockslide","earthquake","swordsdance","batonpass","aquatail","superpower"],
 		randomDoubleBattleMoves: ["substitute","protect","megahorn","rockslide","poisonjab","swordsdance","batonpass","aquatail","superpower"],
-		tier: "BL"
+		tier: "UU"
 	},
 	cottonee: {
 		randomBattleMoves: ["encore","taunt","substitute","leechseed","toxic","stunspore"],
@@ -4838,7 +4838,7 @@ exports.BattleFormatsData = {
 	diggersby: {
 		randomBattleMoves: ["earthquake","uturn","return","wildcharge","swordsdance","quickattack","agility"],
 		randomDoubleBattleMoves: ["earthquake","uturn","return","wildcharge","protect","quickattack"],
-		tier: "UU"
+		tier: "BL"
 	},
 	fletchling: {
 		randomBattleMoves: ["roost","swordsdance","uturn","return","overheat","flamecharge","tailwind"],

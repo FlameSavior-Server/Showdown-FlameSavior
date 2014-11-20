@@ -157,10 +157,10 @@ exports.BattleItems = {
 		gen: 6,
 		desc: "Mega-evolves Alakazam."
 	},
-	"altarite": {
-		id: "altarite",
-		name: "Altarite",
-		spritenum: 0,
+	"altarianite": {
+		id: "altarianite",
+		name: "Altarianite",
+		spritenum: 615,
 		megaStone: "Altaria-Mega",
 		megaEvolves: "Altaria",
 		isUnreleased: true,
@@ -168,7 +168,7 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 755,
 		gen: 6,
 		desc: "Mega-evolves Altaria."
 	},
@@ -267,7 +267,7 @@ exports.BattleItems = {
 	"audinite": {
 		id: "audinite",
 		name: "Audinite",
-		spritenum: 0,
+		spritenum: 617,
 		megaStone: "Audino-Mega",
 		megaEvolves: "Audino",
 		isUnreleased: true,
@@ -275,7 +275,7 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 757,
 		gen: 6,
 		desc: "Mega-evolves Audino."
 	},
@@ -318,7 +318,7 @@ exports.BattleItems = {
 	"beedrillite": {
 		id: "beedrillite",
 		name: "Beedrillite",
-		spritenum: 0,
+		spritenum: 628,
 		megaStone: "Beedrill-Mega",
 		megaEvolves: "Beedrill",
 		isUnreleased: true,
@@ -326,7 +326,7 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 770,
 		gen: 6,
 		desc: "Mega-evolves Beedrill."
 	},
@@ -564,7 +564,7 @@ exports.BattleItems = {
 	"cameruptite": {
 		id: "cameruptite",
 		name: "Cameruptite",
-		spritenum: 0,
+		spritenum: 625,
 		megaStone: "Camerupt-Mega",
 		megaEvolves: "Camerupt",
 		isUnreleased: true,
@@ -1032,7 +1032,7 @@ exports.BattleItems = {
 	"diancite": {
 		id: "diancite",
 		name: "Diancite",
-		spritenum: 0,
+		spritenum: 624,
 		megaStone: "Diancie-Mega",
 		megaEvolves: "Diancie",
 		isUnreleased: true,
@@ -1040,7 +1040,7 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 764,
 		gen: 6,
 		desc: "Mega-evolves Diancie."
 	},
@@ -1342,7 +1342,7 @@ exports.BattleItems = {
 		id: "fairygem",
 		name: "Fairy Gem",
 		isUnreleased: true,
-		spritenum: 0,
+		spritenum: 611,
 		isGem: true,
 		onSourceTryPrimaryHit: function (target, source, move) {
 			if (target === source || move.category === 'Status') return;
@@ -1581,7 +1581,7 @@ exports.BattleItems = {
 	"galladite": {
 		id: "galladite",
 		name: "Galladite",
-		spritenum: 0,
+		spritenum: 616,
 		megaStone: "Gallade-Mega",
 		megaEvolves: "Gallade",
 		isUnreleased: true,
@@ -1589,7 +1589,7 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 756,
 		gen: 6,
 		desc: "Mega-evolves Gallade."
 	},
@@ -1678,7 +1678,7 @@ exports.BattleItems = {
 	"glalitite": {
 		id: "glalitite",
 		name: "Glalitite",
-		spritenum: 0,
+		spritenum: 623,
 		megaStone: "Glalie-Mega",
 		megaEvolves: "Glalie",
 		isUnreleased: true,
@@ -2228,7 +2228,7 @@ exports.BattleItems = {
 	"latiasite": {
 		id: "latiasite",
 		name: "Latiasite",
-		spritenum: 0,
+		spritenum: 629,
 		megaStone: "Latias-Mega",
 		megaEvolves: "Latias",
 		isUnreleased: true,
@@ -2243,7 +2243,7 @@ exports.BattleItems = {
 	"latiosite": {
 		id: "latiosite",
 		name: "Latiosite",
-		spritenum: 0,
+		spritenum: 630,
 		megaStone: "Latios-Mega",
 		megaEvolves: "Latios",
 		isUnreleased: true,
@@ -2320,7 +2320,7 @@ exports.BattleItems = {
 			}
 			move.pp += 10;
 			if (move.pp > move.maxpp) move.pp = move.maxpp;
-			this.add("-message", pokemon.name + " restored " + move.move + "'s PP using its Leppa Berry! (placeholder)");
+			this.add('-activate', pokemon, 'item: Leppa Berry', 'move: ' + move.name);
 		},
 		num: 154,
 		gen: 3,
@@ -2420,7 +2420,7 @@ exports.BattleItems = {
 	"lopunnite": {
 		id: "lopunnite",
 		name: "Lopunnite",
-		spritenum: 0,
+		spritenum: 626,
 		megaStone: "Lopunny-Mega",
 		megaEvolves: "Lopunny",
 		isUnreleased: true,
@@ -2428,7 +2428,7 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 768,
 		gen: 6,
 		desc: "Mega-evolves Lopunny."
 	},
@@ -2747,7 +2747,7 @@ exports.BattleItems = {
 	"metagrossite": {
 		id: "metagrossite",
 		name: "Metagrossite",
-		spritenum: 0,
+		spritenum: 618,
 		megaStone: "Metagross-Mega",
 		megaEvolves: "Metagross",
 		isUnreleased: true,
@@ -3247,7 +3247,7 @@ exports.BattleItems = {
 	"pidgeotite": {
 		id: "pidgeotite",
 		name: "Pidgeotite",
-		spritenum: 0,
+		spritenum: 622,
 		megaStone: "Pidgeot-Mega",
 		megaEvolves: "Pidgeot",
 		isUnreleased: true,
@@ -3255,7 +3255,7 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 762,
 		gen: 6,
 		desc: "Mega-evolves Pidgeot."
 	},
@@ -3801,10 +3801,10 @@ exports.BattleItems = {
 		gen: 4,
 		desc: "If holder is hit by a special move, attacker loses 1/8 of its max HP. Single use."
 	},
-	"sableite": {
-		id: "sableite",
-		name: "Sableite",
-		spritenum: 0,
+	"sablenite": {
+		id: "sablenite",
+		name: "Sablenite",
+		spritenum: 614,
 		megaStone: "Sableye-Mega",
 		megaEvolves: "Sableye",
 		isUnreleased: true,
@@ -3862,7 +3862,7 @@ exports.BattleItems = {
 	"salamencite": {
 		id: "salamencite",
 		name: "Salamencite",
-		spritenum: 0,
+		spritenum: 627,
 		megaStone: "Salamence-Mega",
 		megaEvolves: "Salamence",
 		isUnreleased: true,
@@ -3870,14 +3870,14 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 769,
 		gen: 6,
 		desc: "Mega-evolves Salamence."
 	},
 	"sceptilite": {
 		id: "sceptilite",
 		name: "Sceptilite",
-		spritenum: 0,
+		spritenum: 613,
 		megaStone: "Sceptile-Mega",
 		megaEvolves: "Sceptile",
 		isUnreleased: true,
@@ -3951,10 +3951,10 @@ exports.BattleItems = {
 		gen: 2,
 		desc: "Holder's Flying-type attacks have 1.2x power."
 	},
-	"sharpedite": {
-		id: "sharpedite",
-		name: "Sharpedite",
-		spritenum: 0,
+	"sharpedonite": {
+		id: "sharpedonite",
+		name: "Sharpedonite",
+		spritenum: 619,
 		megaStone: "Sharpedo-Mega",
 		megaEvolves: "Sharpedo",
 		isUnreleased: true,
@@ -4125,7 +4125,7 @@ exports.BattleItems = {
 	"slowbronite": {
 		id: "slowbronite",
 		name: "Slowbronite",
-		spritenum: 0,
+		spritenum: 620,
 		megaStone: "Slowbro-Mega",
 		megaEvolves: "Slowbro",
 		isUnreleased: true,
@@ -4133,7 +4133,7 @@ exports.BattleItems = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		num: -6,
+		num: 760,
 		gen: 6,
 		desc: "Mega-evolves Slowbro."
 	},
@@ -4320,7 +4320,7 @@ exports.BattleItems = {
 	"steelixite": {
 		id: "steelixite",
 		name: "Steelixite",
-		spritenum: 0,
+		spritenum: 621,
 		megaStone: "Steelix-Mega",
 		megaEvolves: "Steelix",
 		isUnreleased: true,
@@ -4414,7 +4414,7 @@ exports.BattleItems = {
 	"swampertite": {
 		id: "swampertite",
 		name: "Swampertite",
-		spritenum: 0,
+		spritenum: 612,
 		megaStone: "Swampert-Mega",
 		megaEvolves: "Swampert",
 		isUnreleased: true,

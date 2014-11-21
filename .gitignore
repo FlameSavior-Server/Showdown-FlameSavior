@@ -7,8 +7,6 @@ funstuff
 infofiles
 sysops.js
 app.js
-users.js
-rooms.js
 command-parser.js
 tournaments/index.js
 config/formats.js

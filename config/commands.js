@@ -1328,6 +1328,15 @@ staff: function (target, room, user) {
 	this.sendReplyBox("<a href=\"https://www.smogon.com/sim/staff_list\">Pokemon Showdown Staff List</a>");
 },
 
+		// Trainer Cards //
+
+jonthebastard: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font color="1752A6" size="8">Jon The Bastard</font><br />' +
+			'<img src="http://i.imgur.com/ZatdBIz.jpg" width="500"><br />' +
+			'<font color="1752A6">"Hokey religions and ancient weapons are no match for a good dire wolf at your side</center>');
+	},
+
 beno: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs29/f/2008/092/4/c/NOT_MY_MUDKIP_by_joeywaii.jpg" width="250">' +

@@ -407,7 +407,7 @@ fs.readFile('./config/ipbans.txt', function (err, data) {
 	}
 	Users.checkRangeBanned = Cidr.checker(rangebans);
 });
-global.sysopAccess = require('./sysops.js').sysopAccess();
+global.extras = require('./extras.js').extras();
 global.money = require('./filewriter/money.js').money;
 global.profile = require('./filewriter/profile.js').profile;
 global.datestuff = require('./filewriter/datestuff.js').datestuff;

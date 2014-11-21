@@ -5230,12 +5230,12 @@ exports.commands = {
 	tailzbox: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
-			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=zxof7Lh1u3c">Savior Of Song</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA">The High Road</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></font></h1>' +
+			'<b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br />' +
+			'<b><a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA">The High Road</a><br />' +
+			'<b><a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br />' +
+			'<b><a href="https://www.youtube.com/watch?v=iI_vHoMtsBQ">Toes</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 

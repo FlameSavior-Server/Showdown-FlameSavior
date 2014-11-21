@@ -492,20 +492,6 @@ exports.Formats = [
 			'Gengarite', 'Kangaskhanite', 'Lucarionite'
 		]
 	},
-		{
-		name: "ORAS Monotype",
-		section: "Other Metagames",
-		column: 2,
-		
-                mod: 'oras',
-		ruleset: ['ORAS OU', 'Same Type Clause'],
-		banlist: ['Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh',
-			'Kyogre', 'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Talonflame', 'Xerneas', 'Yveltal', 'Zekrom',
-			'Gengarite', 'Kangaskhanite', 'Lucarionite',  'Floette-Eternal-Flower', 'Hoopa', 'Volcanion', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Soul Dew',
-			'Bug Gem', 'Custap Berry', 'Dark Gem', 'Dragon Gem', 'Electric Gem', 'Fairy Gem', 'Fighting Gem', 'Fire Gem', 'Flying Gem', 'Ghost Gem',
-			'Grass Gem', 'Ground Gem', 'Ice Gem', 'Mail', 'Poison Gem', 'Psychic Gem', 'Rock Gem', 'Steel Gem', 'Water Gem'
-		]
-	},
 	{
 		name: "CAP",
 		section: "Other Metagames",

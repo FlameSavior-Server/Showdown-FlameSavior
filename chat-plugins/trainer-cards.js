@@ -4,6 +4,60 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	zabi: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/zoKkoVe.gif" width="250">' +
+			'<img src="http://i.imgur.com/3ptpVRZ.gif" height="190"><br />' +
+			'<b>Ace:</b> Parasect<br />' +
+			'"My Name is my name therefore i win"</center>'
+		);
+	},
+
+	argus: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/c4cITyw.gif">' +
+			'<img src="http://i.imgur.com/uSswal5.png">' +
+			'<img src="http://i.imgur.com/xNLl2ba.gif"><br />' +
+			'<img src="http://i.imgur.com/pnJ0jZt.png"><br />' +
+			'<font color="#0B173B"><b>Ace:</b> Aegislash<br />' +
+			'"I am prepared to meet my Maker. Whether my Maker is prepared for the great ordeal of meeting me is another matter."</font></center>'
+		);
+	},
+
+	fighting: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/b4DQHoM.gif"><br />' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/392.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/308-mega.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/286.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/701.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/560.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/647.gif"><br />' +
+			'<b>Ace:</b> <font color="#3333FF">Cnorth</font> & <font color="#00FF00">MrSky</font><br />' +
+			'<font color="#B80000">We just punch shit till it dies.</font></center>'
+		);
+	},
+
+	acesoul: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/LMVBHki.jpg" width="140">' +
+			'<img src="http://i.imgur.com/6NHyd05.png" width="280">' +
+			'<img src="http://i.imgur.com/lUDltpf.jpg" width="120"><br />' +
+			'<b>Ace:</b> Need a Pen Sir?<br />' +
+			'<a href="http://i.imgur.com/ZsHrg7r.jpg">Everyone has their own power!</a>.</center>'
+		);
+	},
+
+	hopexufd: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Us7bApN.jpg" height="130">' +
+			'<img src="http://i.imgur.com/xWnRjri.png">' +
+			'<img src="http://i.imgur.com/CCLSmem.jpg" height="130"><br />' +
+			'<b>Ace:</b> Our love<br />' +
+			'"We are the fallen angels sent to destroy the world. Let\'s have sex.".</center>'
+		);
+	},
+
 	gon: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/WYyTHTe.gif" width="200">' +
@@ -4689,8 +4743,9 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/HbuF0aR.png" width="550"><br />' +
 			'<b>Ace:</b> Victini <br />' +
-			'Owner of Trinity and former head of Biblia. Aggression is an art form. I am simply an artist.<br />' +
-			'<img src="http://img-cache.cdn.gaiaonline.com/1a962e841da3af2acaced68853cd194d/http://i1070.photobucket.com/albums/u485/nitehawkXD/victini.gif"></center>'
+			'Former Owner of Biblia | Forever Frosty<br />' +
+			'<img src="http://img-cache.cdn.gaiaonline.com/1a962e841da3af2acaced68853cd194d/http://i1070.photobucket.com/albums/u485/nitehawkXD/victini.gif"><br />' +
+			'<img src="http://i.imgur.com/wJE6vrw.png"></center>'
 		);
 	},
 
@@ -5175,11 +5230,11 @@ exports.commands = {
 	tailzbox: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
-			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
-			'<center><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br />' +
-			'<center><a href="https://www.youtube.com/watch?v=zxof7Lh1u3c">Savior Of Song</a><br />' +
-			'<center><a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA">The High Road</a><br />' +
-			'<center><a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br /></center>' +
+			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></font></h1>' +
+			'<a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br />' +
+			'<a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA">The High Road</a><br />' +
+			'<a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br />' +
+			'<a href="https://www.youtube.com/watch?v=iI_vHoMtsBQ">Toes</a><br /></center>' +
 			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},

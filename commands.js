@@ -1717,8 +1717,6 @@ var commands = exports.commands = {
 				} catch (e) {
 					this.sendReply('Economy.js could not be hotpatched.');
 				}
-				CommandParser.uncacheTree('./hangman.js');
-				global.hangman = require('./hangman.js').hangman();
 				var runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments');
 				global.Tournaments = require('./tournaments');

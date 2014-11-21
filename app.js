@@ -413,11 +413,6 @@ fs.readFile('./config/ipbans.txt', function (err, data) {
 });
 
 try {
-	global.hangman = require('./hangman.js').hangman();
-} catch (e) {
-	console.log('Error loading hangman.js: '+e.stack);
-}
-try {
 	global.frostcommands = require('./frost-commands.js');
 } catch (e) {
 	console.log('Error loading frost-commands.js: '+e.stack);

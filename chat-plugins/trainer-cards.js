@@ -1344,7 +1344,7 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="https://i.imgur.com/dua8WEl.png" width="150">' +
 			'<img src="http://i.imgur.com/msQpOCM.png" width="200">' +
 			'<img src="http://i.imgur.com/f90Z3RI.jpg?1?3249" width="150"><br />' +
-			'<b>Ace: </b>Mega Gardevoir & Bisharp<br>' +
+			'<b>Ace: </b>Mega Gardevoir & Bisharp<br />' +
 			'Truth is you don\'t know what\'s going to happen tomorrow. Life is a crazy ride and nothing is guaranteed.</center>'
 		);
 	},
@@ -2067,7 +2067,7 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view8/4905727/krieg-o.gif" width="145">' +
 			'<img src="http://i.imgur.com/iCYjNaf.png?1?9582" width="245">' +
 			'<img src="http://stream1.gifsoup.com/view5/1963978/torterra-o.gif" width="145"><br />' +
-			'<b>Ace:</b>Krieg<br>' +
+			'<b>Ace:</b>Krieg<br />' +
 			'<b>Quote:</b>"If I silence the Voices then Everything would be a lot less fun."</center>'
 		);
 	},
@@ -2622,11 +2622,11 @@ exports.commands = {
 	unovachampionn: 'ucn',
 	ucn: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src=http://www.court-records.net/rips/bubble-(ani)objection.gif><br>' +
+		this.sendReplyBox('<center><img src=http://www.court-records.net/rips/bubble-(ani)objection.gif><br />' +
 			'<img src=http://www.court-records.net/animation/phoenix-zoom(b).gif width=170>' +
 			'<img src=http://i.imgur.com/6TR2XrL.gif>' +
 			'<img src=http://www.court-records.net/animation/godot-zoom(b).gif width=170>' +
-			'<br><b><font color=black>Ace: </font><font color=red><blink>Objection! </blink><br><font color=darkblue><i>Objection!...that was Objectionable!'
+			'<br /><b><font color=black>Ace: </font><font color=red><blink>Objection! </blink><br /><font color=darkblue><i>Objection!...that was Objectionable!'
 		);
 	},
 
@@ -3828,7 +3828,7 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/BSqLNeB.gif">' +
 			'<font size="6" color="#FA5882"><i>Champion Runzy</i>' +
 			'<img src="http://i.imgur.com/itnjFmx.gif"></font></color><br />' +
-			'Ace: Whimsicott<br>Want some Leech Seed?</center>'
+			'Ace: Whimsicott<br />Want some Leech Seed?</center>'
 		);
 	},
 
@@ -4007,7 +4007,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/VlEM9Vb.gif" width="240" height="100"><right>' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/zapdos.gif"><br />' +
 			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/ampharos-mega.gif"><br />' +
-			'<center><blink><font color="#FF0000"><br><b>Ace: </b>Ampharos <br />' +
+			'<center><blink><font color="#FF0000"><br /><b>Ace: </b>Ampharos <br />' +
 			'<b>Quote: </b>A low possibility means it\'s not zero.</center>'
 		);
 	},
@@ -4803,11 +4803,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="darkgreen"><u>Jet\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=FWhOZM5WyPA">Gerudo Valley</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=AOPMlIIg_38">Boom Clap</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=2dP-d1NIV5A">Oreo</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=KA8a5qibUJU">Zelda Violin Duet</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=FWhOZM5WyPA">Gerudo Valley</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=AOPMlIIg_38">Boom Clap</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=2dP-d1NIV5A">Oreo</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=KA8a5qibUJU">Zelda Violin Duet</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4815,11 +4815,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="#1D2FB9"><u>Kammi\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=aTBSQKh8teE">Prom Night</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=-Vlsj1n9wW8">Under Pressure</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=BCoszWx4vsM">Pharaohs</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=0Oi8jDMvd_w">200%</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=aTBSQKh8teE">Prom Night</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=-Vlsj1n9wW8">Under Pressure</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=BCoszWx4vsM">Pharaohs</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=0Oi8jDMvd_w">200%</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4827,11 +4827,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="blueviolet"><u>Bubble\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=N_Q8sy9PmeA">Moonstruck Blossom</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=jdQrYWfu5hY">Spectrum</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=yx78IVciOmQ">The Light</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=b3_4Q8pyI7A">White Rabbit</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=N_Q8sy9PmeA">Moonstruck Blossom</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=jdQrYWfu5hY">Spectrum</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=yx78IVciOmQ">The Light</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=b3_4Q8pyI7A">White Rabbit</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4840,11 +4840,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="#1A2389"><u>Wontuns\' Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=7BJ3ZXpserc">Animals (Maroon 5)</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=gCYcHz2k5x0">Animals (Martin Garrix)</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=tFG_5PBl2K8">Animals (Muse)</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=gM7Hlg75Mlo">Animals (Neon Trees)</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=7BJ3ZXpserc">Animals (Maroon 5)</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=gCYcHz2k5x0">Animals (Martin Garrix)</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=tFG_5PBl2K8">Animals (Muse)</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=gM7Hlg75Mlo">Animals (Neon Trees)</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4852,11 +4852,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="blue"><u>FarNeo 2\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=btPJPFnesV4">Eye Of The Tiger</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=9jK-NcRmVcw">The Final Countdown</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=vx2u5uUu3DE">It\'s My Life</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=68ugkg9RePc">Blue</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=btPJPFnesV4">Eye Of The Tiger</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=9jK-NcRmVcw">The Final Countdown</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=vx2u5uUu3DE">It\'s My Life</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=68ugkg9RePc">Blue</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4864,11 +4864,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="28DC04"><u>Pandora\'s Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=sQ-RweA1p7w">Touhou: Kyouko\'s Theme</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=OyUJnV2R-5g">Night of Nights</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=HGmn9m0RDAI">Karakuri Pierrot</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=4skCwu0IlxU">Ren\'ai philosophia</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=sQ-RweA1p7w">Touhou: Kyouko\'s Theme</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=OyUJnV2R-5g">Night of Nights</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=HGmn9m0RDAI">Karakuri Pierrot</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=4skCwu0IlxU">Ren\'ai philosophia</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4876,11 +4876,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="black"><u>King Jong-Un\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=_cG7ZVBXQII">Kim Jong Style</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=7pKrVB5f2W0">Alors on danse</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=oiKj0Z_Xnjc">Papaoutai</a><br>' +
-			'<cetner><b><a href="https://www.youtube.com/watch?v=ublchJYzhao">Te Fete</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=_cG7ZVBXQII">Kim Jong Style</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=7pKrVB5f2W0">Alors on danse</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=oiKj0Z_Xnjc">Papaoutai</a><br />' +
+			'<cetner><a href="https://www.youtube.com/watch?v=ublchJYzhao">Te Fete</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4888,11 +4888,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="darkblue"><u>jd\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=e8X3ACToii0">Savior</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=6nQCxwneUwA">Satellite</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=pH20zsVxxV0">State of the Union</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=_DboMAghWcA">Hero Of War</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=e8X3ACToii0">Savior</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=6nQCxwneUwA">Satellite</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=pH20zsVxxV0">State of the Union</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=_DboMAghWcA">Hero Of War</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4900,11 +4900,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="skyblue"><u>Hope\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=zK268TLKCK4">Night of the Hunter</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=zMmQSEaS-w0">The Kill</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=hMAVLXk9QWA">This is War</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=gXF7pUlXDyE">City of Angels</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=zK268TLKCK4">Night of the Hunter</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=zMmQSEaS-w0">The Kill</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=hMAVLXk9QWA">This is War</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=gXF7pUlXDyE">City of Angels</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4912,11 +4912,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="lightgreen"><u>Hope\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=jVJZ5MbJDzU">What I\'m Made Of</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=rM85TNMnUkA">Live and Learn</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=uEzXFuYN89k">Open Your Heart</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=75yPcHplI64">Chemical Plant Zone</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=jVJZ5MbJDzU">What I\'m Made Of</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=rM85TNMnUkA">Live and Learn</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=uEzXFuYN89k">Open Your Heart</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=75yPcHplI64">Chemical Plant Zone</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4924,11 +4924,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="red"><u>Hope\'s Kirby Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=40DEipGcoXg">Dirty and Beauty</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=eTeT6t9sdjc">Magolor\'s Medley</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=AFZHQZFd1Bw">Zero Two</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=nNmoqC9ndBg">Drawcia Soul</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=40DEipGcoXg">Dirty and Beauty</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=eTeT6t9sdjc">Magolor\'s Medley</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=AFZHQZFd1Bw">Zero Two</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=nNmoqC9ndBg">Drawcia Soul</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4936,11 +4936,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="darkorange"><u>Hope\'s Kingdom Hearts Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=LoZabebGiDo">Enter the Darkness</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=wTLXGqkD4Zc">Forze Del Male</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=JyaWwq4CfTk">Lord of the Castle</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=YtAFN2LFBpQ">L\'Impeto Oscuro</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=LoZabebGiDo">Enter the Darkness</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=wTLXGqkD4Zc">Forze Del Male</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=JyaWwq4CfTk">Lord of the Castle</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=YtAFN2LFBpQ">L\'Impeto Oscuro</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4948,11 +4948,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="gray"><u>Hope\'s Final Boss Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=-cHBCD6c8LA">Zeromus</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=3YNfX1oU2XA">Kefka</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Si3C1EtGo4c">Trance Kuja</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=ukxB2TqljzQ">Caius Ballad</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=-cHBCD6c8LA">Zeromus</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=3YNfX1oU2XA">Kefka</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=Si3C1EtGo4c">Trance Kuja</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=ukxB2TqljzQ">Caius Ballad</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4960,11 +4960,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="gold"><u>Hope\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=rJxt-WBVYyc">Endless Possibilities</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=ey-oB-qw45c">With Me</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=dc_a2eWp9t4">Reach for the Stars</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=_kTBbTSjZpI">I am all of me</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=rJxt-WBVYyc">Endless Possibilities</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=ey-oB-qw45c">With Me</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=dc_a2eWp9t4">Reach for the Stars</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=_kTBbTSjZpI">I am all of me</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4972,11 +4972,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="tael"><u>Hope\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=-fDcvxzgCBE">Crisis City Modern</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=yHm2b2jd1Ts">City Escape Classic</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=9nw7usYYTaU">Rooftop Run Classic</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=3OmmxC6FutA">Shadow For True Story</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=-fDcvxzgCBE">Crisis City Modern</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=yHm2b2jd1Ts">City Escape Classic</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=9nw7usYYTaU">Rooftop Run Classic</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=3OmmxC6FutA">Shadow For True Story</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4984,11 +4984,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="darkblue"><u>Hope\'s Chrono Cross Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=ponx7VYSrh4">The Brink of Death</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=H-IJV93FQZc">Dragon God</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Hj4FnVABiN8">Scars of Time</a><br />' +
-			'<center><b><a href="https://www.youtube.com/watch?v=CuG4Mst-DS8">Gale</a><br /></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=ponx7VYSrh4">The Brink of Death</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=H-IJV93FQZc">Dragon God</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=Hj4FnVABiN8">Scars of Time</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=CuG4Mst-DS8">Gale</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -4996,11 +4996,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="red">P</font><font color="orange">r</font><font color="ccd815">i</font><font color="green">n</font><font color="blue">c</font><font color="purple">e</font><font color="red">s</font><font color="orange">s</font><font color="ccd815">H</font><font color="green">i</font><font color="blue">g</font><font color="purple">h</font><font color="red">\'</font><font color="orange">s</font> <font color="ccd815">L</font><font color="green">i</font><font color="blue">f</font><font color="purple">e</font></u></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=A3jzMyYgPQs">Do What U Want</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=pZ12_E5R3qc">Partition</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=O-zpOMYRi0w">Fancy</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=pco91kroVgQ">Applause</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=A3jzMyYgPQs">Do What U Want</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=pZ12_E5R3qc">Partition</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=O-zpOMYRi0w">Fancy</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=pco91kroVgQ">Applause</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5008,11 +5008,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="5CE4FF"><u>Isawa\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=gY16msUgCYM">Universal</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=-J7J_IWUhls">The Only Exception</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=EYW7-hNXZlM">Opening Sonic Boom</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=X9fLbfzCqWw">Ocean Avenue</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=gY16msUgCYM">Universal</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=-J7J_IWUhls">The Only Exception</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=EYW7-hNXZlM">Opening Sonic Boom</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=X9fLbfzCqWw">Ocean Avenue</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5020,11 +5020,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="yellow"><u>Hand Relief\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=EbKvBT9F0Vo">Dream On</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=sxdmw4tJJ1Y">Rock You Like A Hurricane</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=CHUqE5p15C0">Last Child</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=WLE7hcSgxlM">Fade To Black</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=EbKvBT9F0Vo">Dream On</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=sxdmw4tJJ1Y">Rock You Like A Hurricane</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=CHUqE5p15C0">Last Child</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=WLE7hcSgxlM">Fade To Black</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5032,11 +5032,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="blue"><u>Adipravar\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Rm42xAvWdvQ">Lingashtakam</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Z2kBfiItjgs">Pokemon Advanced</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Ly9BBdCcjLE">Ethir Neechal</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=cXIeUJE2YHo">Pokemon Destiny Deoxys</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=Rm42xAvWdvQ">Lingashtakam</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=Z2kBfiItjgs">Pokemon Advanced</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=Ly9BBdCcjLE">Ethir Neechal</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=cXIeUJE2YHo">Pokemon Destiny Deoxys</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5044,11 +5044,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="blue"><u>Kdrew\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=JDcbvWkmOcw">Lost</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=obeXPTAV4wU">Kiss The Devil</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=47MbajGiZBg">Legend Of Thunder Theme song</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Eb3Dr3Vgee0">Chasing Ghosts</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=JDcbvWkmOcw">Lost</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=obeXPTAV4wU">Kiss The Devil</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=47MbajGiZBg">Legend Of Thunder Theme song</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=Eb3Dr3Vgee0">Chasing Ghosts</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5056,11 +5056,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="#00AF33"><u>Figgy\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=0IA3ZvCkRkQ">Hero</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=-LOgMWbDGPA">Eleanor Rigby</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=aynclw6TXeE">The Biology Song</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=0IA3ZvCkRkQ">Hero</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=-LOgMWbDGPA">Eleanor Rigby</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=aynclw6TXeE">The Biology Song</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5068,11 +5068,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="purple"><u>Seth\'s MP3</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=uOEu5ulb9zE">Endless Despair II</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=phz7jf0HUPs">In Da Buns</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=5ckDg2hZPq4">My Pride</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=fY_Nawg1R-4">Skull Man Stage</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=uOEu5ulb9zE">Endless Despair II</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=phz7jf0HUPs">In Da Buns</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=5ckDg2hZPq4">My Pride</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=fY_Nawg1R-4">Skull Man Stage</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5080,11 +5080,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="blue"><u>Thug\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=njJ7NZMH70M">Not Gonna Die</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=fQIfBJVFTWE">Lift</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=oNtcP6EXm3s">This Will Be The Day</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=l0T0orZR5D4">Pokemon Unbeatable</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=njJ7NZMH70M">Not Gonna Die</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=fQIfBJVFTWE">Lift</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=oNtcP6EXm3s">This Will Be The Day</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=l0T0orZR5D4">Pokemon Unbeatable</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5092,11 +5092,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="pink"><u>Lucy\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=OpQFFLBMEPI">Just Give Me A Reason</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=o_v9MY_FMcw">Best Song Ever</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=KRaWnd3LJfs">Payphone</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=OpQFFLBMEPI">Just Give Me A Reason</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=o_v9MY_FMcw">Best Song Ever</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=KRaWnd3LJfs">Payphone</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5104,11 +5104,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="green"><u>Dolph\'s Sexy Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=CS9OO0S5w2k">YMCA</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=l5aZJBLAu1E">It\'s Raining Men</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=btPJPFnesV4">Eye Of The Tiger</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=vq6Q9wu3F6w">Miami Dolphins Fight Song</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=CS9OO0S5w2k">YMCA</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=l5aZJBLAu1E">It\'s Raining Men</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=btPJPFnesV4">Eye Of The Tiger</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=vq6Q9wu3F6w">Miami Dolphins Fight Song</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5116,11 +5116,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="#01DF01"><u>Tael\'s Jukebox</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=zZL_psFiZu4">Stickerbrush Unwind</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=u9zZus_1_ag">Live And Learn</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=THwwagCSqag">Hold Yuh Riddim</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=VT6LFOIofRE">Libera Me From Hell</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=zZL_psFiZu4">Stickerbrush Unwind</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=u9zZus_1_ag">Live And Learn</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=THwwagCSqag">Hold Yuh Riddim</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=VT6LFOIofRE">Libera Me From Hell</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5128,11 +5128,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="purple"><u>Kc\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=hwsXo6fsmso">Ease My Mind</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=EGQhenjZ84w">Babylon</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=RSvuv3k4N8c">Days In The East</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=sX9DgavXiN4">High For This</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=hwsXo6fsmso">Ease My Mind</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=EGQhenjZ84w">Babylon</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=RSvuv3k4N8c">Days In The East</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=sX9DgavXiN4">High For This</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5140,11 +5140,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="blue"><u>Faith\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=YnP92_fZhQY">Moving Forward</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=miFhwa1_fwE">Get Out Alive</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=NBDAE2g4gXo">Last Spell</a><br>' +
-			'<center><b><a href="http://www.youtube.com/watch?v=L_vsutSlyJs">Rebellion</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=YnP92_fZhQY">Moving Forward</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=miFhwa1_fwE">Get Out Alive</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=NBDAE2g4gXo">Last Spell</a><br />' +
+			'<center><a href="http://www.youtube.com/watch?v=L_vsutSlyJs">Rebellion</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5152,11 +5152,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="blue"><u>Primm\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=RbtPXFlZlHg">Talk Dirty</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=518WB1IcjPI">All Of Me</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=KpS-9OcYyqk">Not a Bad Thing</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=ZRf_8YFPe1g">Body Bag</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=RbtPXFlZlHg">Talk Dirty</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=518WB1IcjPI">All Of Me</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=KpS-9OcYyqk">Not a Bad Thing</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=ZRf_8YFPe1g">Body Bag</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5164,11 +5164,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="red"><u>Cosy\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=P2mQaAT51Kw">Operation Ground and Pound</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=XbGs_qK2PQA">Rap God</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=sENM2wA_FTg">It\'s Time</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=moSFlvxnbgk">Let It Go</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=P2mQaAT51Kw">Operation Ground and Pound</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=XbGs_qK2PQA">Rap God</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=sENM2wA_FTg">It\'s Time</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5176,11 +5176,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="maroon"><u>Tailz\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=zxof7Lh1u3c">Savior Of Song</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA">The High Road</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=zxof7Lh1u3c">Savior Of Song</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA">The High Road</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5188,11 +5188,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="red"><u>SaysHi Music Galore</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=0KSOMA3QBU0">Dark Horse</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=XjwZAa2EjKA">Unconditionally</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=1-pUaogoX5o">Waking Up In Vegas</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=CevxZvSJLk8">Roar</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=0KSOMA3QBU0">Dark Horse</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=XjwZAa2EjKA">Unconditionally</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=1-pUaogoX5o">Waking Up In Vegas</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=CevxZvSJLk8">Roar</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 
@@ -5200,11 +5200,11 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">' +
 			'<center><h1><font color="red"><u>Czim\'s Music Box</u></color></h1></center>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=ghb6eDopW8I">Little Talks</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=r8OipmKFDeM">Don\'t Look Back In Anger</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=32GZ3suxRn4">Slow Dancing In A Burning Room</a><br>' +
-			'<center><b><a href="https://www.youtube.com/watch?v=MmZexg8sxyk">Electric Feel</a><br></center>' +
-			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right"><br><br>'
+			'<center><a href="https://www.youtube.com/watch?v=ghb6eDopW8I">Little Talks</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=r8OipmKFDeM">Don\'t Look Back In Anger</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=32GZ3suxRn4">Slow Dancing In A Burning Room</a><br />' +
+			'<center><a href="https://www.youtube.com/watch?v=MmZexg8sxyk">Electric Feel</a><br /></center>' +
+			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},
 

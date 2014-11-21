@@ -1745,6 +1745,7 @@ Connection = (function () {
 				delete user.loginTime;
 				if (onlineTime >= 30000) {
 					try {
+						var frostcommands = require('frost-commands.js');
 						frostcommands.logOnlineTime(user.name, onlineTime);
 					} catch (e) {}
 				}

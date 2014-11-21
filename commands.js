@@ -142,8 +142,11 @@ var commands = exports.commands = {
 			case 'html':
 				if (!user.can('ban')) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text /html - Access denied.");
 				if (target.indexOf(' ') < 0) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text Usage: /" + targetCmd + " [message]");
-				target = '/html <span class="chat"><small>' + user.getIdentity().substr(0,1) + '</small></span><button class="astext" name="parseCommand" value="/user ' + user.name +
-					'"><font color="' + frostcommands.hashColor(user.userid) + '"><strong>' + Tools.escapeHTML(user.name) + ':</strong></font></button> ' + target.substr(target.indexOf(' '), target.length);
+				try {
+					var frostcommands = require('./frost-commands.js');
+					target = '/html <span class="chat"><small>' + user.getIdentity().substr(0,1) + '</small></span><button class="astext" name="parseCommand" value="/user ' + user.name +
+						'"><font color="' + frostcommands.hashColor(user.userid) + '"><strong>' + Tools.escapeHTML(user.name) + ':</strong></font></button> ' + target.substr(target.indexOf(' '), target.length);
+					} catch (e) {}
 				break;
 			default:
 				return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text The command '/" + targetCmd + "' was unrecognized or unavailable in private messages. To send a message starting with '/" + targetCmd + "', type '//" + targetCmd + "'.");

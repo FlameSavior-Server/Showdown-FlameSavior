@@ -3078,7 +3078,7 @@ tourhelp: function(target, room, user) {
 		if (!target) return this.sendReply('/removebadge [user], [badge] - Removes a badge from a user.');
 		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');
 		var self = this;
-		var type_of_badges = ['admin','bot','dev','vip','artist','mod','leader','champ','creator','concun','twinner','goodra','league'];
+		var type_of_badges = ['admin','bot','dev','vip','artist','mod','leader','champ','creator','concun','twinner','goodra','league', 'fgs'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('The badge '+target+' is not a valid badge.');
 		fs.readFile('badges.txt','utf8', function(err, data) {
 			if (err) console.log(err);
@@ -3179,6 +3179,7 @@ tourhelp: function(target, room, user) {
             	var targetUser = this.targetUser;
             	var matched = false;
             	if (!targetUser) return false;
+            	var fgs = '<img src="http://www.smogon.com/media/forums/images/badges/forummod_alum.png" title="Former Gold Staff">';
             	var admin = '<img src="http://www.smogon.com/media/forums/images/badges/sop.png" title="Server Administrator">';
             	var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Developer">';
             	var creator = '<img src="http://www.smogon.com/media/forums/images/badges/dragon.png" title="Server Creator">';
@@ -3207,6 +3208,7 @@ tourhelp: function(target, room, user) {
                 	}
                 	if (match == true) {
                 		var badgelist = '';
+                		if (currentbadges.indexOf('fgs') > -1) badgelist+=' '+fgs;
                 		if (currentbadges.indexOf('admin') > -1) badgelist+=' '+admin;
                 		if (currentbadges.indexOf('dev') > -1) badgelist+=' '+dev;
                 		if (currentbadges.indexOf('creator') > -1) badgelist+=' '+creator;

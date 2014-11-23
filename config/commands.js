@@ -692,6 +692,7 @@ invite: function (target, room, user) {
 		if (this.broadcasting) symbol = '!';
 		return this.parse(symbol + 'dt '+ (Math.floor(Math.random()*721)+1));
 	}, */
+randp: 'data',
 randompokemon: 'data',
 pstats: 'data',
 stats: 'data',
@@ -701,7 +702,7 @@ details: 'data',
 dt: 'data',
 data: function (target, room, user, connection, cmd) {
 	if (!this.canBroadcast()) return;
-	if (cmd === 'randompokemon') target = (Math.floor(Math.random()*721)+1);
+	if (cmd === 'randompokemon' || cmd === 'randp') target = (Math.floor(Math.random()*721)+1);
 	var buffer = '';
 	var targetId = toId(target);
 	if (targetId === '' + parseInt(targetId)) {

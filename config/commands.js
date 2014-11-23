@@ -1505,6 +1505,13 @@ this.sendReplyBox('<center><img src="http://i.imgur.com/X8Qshnz.gif"><br />' +
     'With my bare hands I took back my life, now I\'ll take yours');
 },
 
+buttofthetitantank:
+titantank: function(target, room, user) {
+	if (!this.canBroadcast()) return;
+	return this.sendReplyBox('<center><font size=5><font color="#4D177D"> buttofTheTitanTank </font></font></center>' +
+ '<center><img src=http://i.imgur.com/D0z9KQo.png ></center>'+
+'<right><img src=http://i.imgur.com/2K4ZgVG.jpg width=300 height=210></right> <left> <font size=4><font color="#000000"> Ace: Cuz Sweg</font></left>');
+},
 goal: function(target, room, user) {
 if (!this.canBroadcast()) return;
 this.sendReplyBox('<center><img src="http://cdn.bulbagarden.net/upload/thumb/4/47/181Ampharos.png/250px-181Ampharos.png">' +

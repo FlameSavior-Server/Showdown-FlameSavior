@@ -1505,7 +1505,7 @@ this.sendReplyBox('<center><img src="http://i.imgur.com/X8Qshnz.gif"><br />' +
     'With my bare hands I took back my life, now I\'ll take yours');
 },
 
-buttofthetitantank:
+buttofthetitantank:'titantank',
 titantank: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	return this.sendReplyBox('<center><font size=5><font color="#4D177D"> buttofTheTitanTank </font></font></center>' +

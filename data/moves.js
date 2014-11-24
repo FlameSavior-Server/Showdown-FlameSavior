@@ -2515,6 +2515,7 @@ exports.BattleMovedex = {
 		desc: "Deals damage to all adjacent foes with a 50% chance to raise the user's Defense by 1 stage.",
 		shortDesc: "Hits all adjacent foes. 50% chance to boost Def by 1.",
 		id: "diamondstorm",
+		isViable: true,
 		name: "Diamond Storm",
 		pp: 5,
 		priority: 0,
@@ -2899,10 +2900,10 @@ exports.BattleMovedex = {
 		desc: "Deals damage to one adjacent or non-adjacent target and lowers the user's Defense and Special Defense by 1 stage. Makes contact.",
 		shortDesc: "Lowers the user's Defense and Sp. Def by 1.",
 		id: "dragonascent",
+		isViable: true,
 		name: "Dragon Ascent",
 		pp: 5,
 		priority: 0,
-		isUnreleased: true,
 		isContact: true,
 		self: {
 			boosts: {
@@ -5836,7 +5837,7 @@ exports.BattleMovedex = {
 		priority: 0,
 		isSnatchable: true,
 		onTryHit: function (pokemon, target, move) {
-			if (pokemon.side.pokemonLeft <= 1) {
+			if (!this.canSwitch(pokemon.side)) {
 				delete move.selfdestruct;
 				return false;
 			}
@@ -5845,19 +5846,29 @@ exports.BattleMovedex = {
 		sideCondition: 'healingwish',
 		effect: {
 			duration: 2,
-			onStart: function (side) {
+			onStart: function (side, source) {
 				this.debug('Healing Wish started on ' + side.name);
+				this.effectData.positions = [];
+				for (var i = 0; i < side.active.length; i++) {
+					this.effectData.positions[i] = false;
+				}
+				this.effectData.positions[source.position] = true;
+			},
+			onRestart: function (side, source) {
+				this.effectData.positions[source.position] = true;
 			},
 			onSwitchInPriority: 1,
 			onSwitchIn: function (target) {
-				if (target.position !== this.effectData.sourcePosition) {
+				if (!this.effectData.positions[target.position]) {
 					return;
 				}
 				if (!target.fainted) {
-					var source = this.effectData.source;
-					var damage = target.heal(target.maxhp);
+					target.heal(target.maxhp);
 					target.setStatus('');
 					this.add('-heal', target, target.getHealth, '[from] move: Healing Wish');
+					this.effectData.positions[target.position] = false;
+				}
+				if (!this.effectData.positions.any(true)) {
 					target.side.removeSideCondition('healingwish');
 				}
 			}
@@ -6559,10 +6570,9 @@ exports.BattleMovedex = {
 		breaksProtect: true,
 		notSubBlocked: true,
 		onTry: function (pokemon) {
-			/* TODO: Use real forme name
-			if (pokemon.species === 'Hoopa-Forme' && pokemon.baseTemplate.species === pokemon.species) {
+			if (pokemon.species === 'Hoopa-Unbound' && pokemon.baseTemplate.species === pokemon.species) {
 				return;
-			}*/
+			}
 			if (pokemon.baseTemplate.species === 'Hoopa') {
 				this.add('-fail', pokemon, 'move: Hyperspace Fury', '[forme]');
 				return null;
@@ -7651,7 +7661,7 @@ exports.BattleMovedex = {
 		priority: 0,
 		isSnatchable: true,
 		onTryHit: function (pokemon, target, move) {
-			if (pokemon.side.pokemonLeft <= 1) {
+			if (!this.canSwitch(pokemon.side)) {
 				delete move.selfdestruct;
 				return false;
 			}
@@ -7660,8 +7670,16 @@ exports.BattleMovedex = {
 		sideCondition: 'lunardance',
 		effect: {
 			duration: 2,
-			onStart: function (side) {
+			onStart: function (side, source) {
 				this.debug('Lunar Dance started on ' + side.name);
+				this.effectData.positions = [];
+				for (var i = 0; i < side.active.length; i++) {
+					this.effectData.positions[i] = false;
+				}
+				this.effectData.positions[source.position] = true;
+			},
+			onRestart: function (side, source) {
+				this.effectData.positions[source.position] = true;
 			},
 			onSwitchInPriority: 1,
 			onSwitchIn: function (target) {
@@ -7669,13 +7687,15 @@ exports.BattleMovedex = {
 					return;
 				}
 				if (!target.fainted) {
-					var source = this.effectData.source;
-					var damage = target.heal(target.maxhp);
+					target.heal(target.maxhp);
 					target.setStatus('');
 					for (var m in target.moveset) {
 						target.moveset[m].pp = target.moveset[m].maxpp;
 					}
 					this.add('-heal', target, target.getHealth, '[from] move: Lunar Dance');
+					this.effectData.positions[target.position] = false;
+				}
+				if (!this.effectData.positions.any(true)) {
 					target.side.removeSideCondition('lunardance');
 				}
 			}
@@ -9179,10 +9199,10 @@ exports.BattleMovedex = {
 		desc: "Deals damage to all adjacent foes.",
 		shortDesc: "Deals damage to all adjacent foes.",
 		id: "originpulse",
+		isViable: true,
 		name: "Origin Pulse",
 		pp: 10,
 		priority: 0,
-		isUnreleased: true,
 		isPulseMove: true,
 		target: "allAdjacentFoes",
 		type: "Water"
@@ -9899,10 +9919,10 @@ exports.BattleMovedex = {
 		desc: "Deals damage to all adjacent foes.",
 		shortDesc: "Deals damage to all adjacent foes.",
 		id: "precipiceblades",
+		isViable: true,
 		name: "Precipice Blades",
 		pp: 10,
 		priority: 0,
-		isUnreleased: true,
 		target: "allAdjacentFoes",
 		type: "Ground"
 	},

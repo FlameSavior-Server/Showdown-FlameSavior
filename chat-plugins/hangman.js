@@ -182,7 +182,7 @@ exports.commands = {
 			case 'end':
 				if (!user.can('broadcast', null, room)) return this.sendReply("/hangman end - Access denied.");
 				if (!room.hangman) return this.sendReply("There is no hangman game in this room.");
-				room.add("|raw|<b>Hangman has been ended by " + Tools.escsapeHTML(user.name) + "</b>");
+				room.add("|raw|<b>Hangman has been ended by " + Tools.escapeHTML(user.name) + "</b>");
 				room.update();
 				delete room.hangman;
 				break;

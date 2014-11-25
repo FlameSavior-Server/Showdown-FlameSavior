@@ -1,6 +1,10 @@
+.header .logo {
+display:none;
+}
 
 #header{
-	background-color:#4594c9;
+	background: url(http://i.imgur.com/lA1gRmN.png) no-repeat;
+	background-color:#4594c9
 }
 
 body {

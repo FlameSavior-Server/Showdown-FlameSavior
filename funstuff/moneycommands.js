@@ -174,7 +174,7 @@ exports.commands = {
             user.hasroom = true;
 
         } else if (target === 'card') {
-            if (tcs.toString().indexOf(' ' + user.userid) > -1) return this.sendReply("You've already bought a trainer card!");
+            if (require('./funstuff/trainercards.js').commands[user.userid]) return this.sendReply('You have already bought this item! If you wanted to fix your card, buy a fix instead.')
             var price = 40;
             if (money.checkAmt(user, "money") < price) return this.sendReply("You don't have enough money to buy a Trainer Card.");
 

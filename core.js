@@ -68,6 +68,8 @@ emoticons: {
         'meowTH': 'http://img-cache.cdn.gaiaonline.com/28bb9d720cfcb26306a269225a1ce756/http://i148.photobucket.com/albums/s5/silentsasuke/pokemon%20mini%20icons/meowth.png',
         'ZoiD': 'http://i.imgur.com/HA9fpHE.png',
         'crtAleks': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3222-src-71e4d36197708e4b-28x28.png',
+        'JonBastard': 'http://i.imgur.com/sLxs1gi.jpg',
+        'BeeR': 'http://i.imgur.com/IWxlhcf.png',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

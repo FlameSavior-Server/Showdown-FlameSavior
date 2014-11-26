@@ -166,6 +166,7 @@ exports.BattleAliases = {
 	"landorusincarnation": "Landorus",
 	"pumpkabooaverage": "Pumpkaboo",
 	"gourgeistaverage": "Gourgeist",
+	"sciz": "Scizor",
 
 	// cosmetic formes
 	"gastrodone": "Gastrodon",

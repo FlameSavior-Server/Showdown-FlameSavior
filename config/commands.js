@@ -1997,7 +1997,16 @@ vmb: function (target, room, user) {
    if (!this.canBroadcast()) return;
    this.sendReplyBox('<center>Click <button name="send" value="/'+ target + '" class="blackbutton" title="View musicbox!"><font color="white"><b>here</button></b></font> to view <b>' + target + '!</b></center>');
 },
-
+deadbox: function (target, room, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<b>d3adm3owth☭\’s Music Box</b><br />' +
+		'1. <a href=”https://www.youtube.com/watch?v=c00vciZIE78”><button title=”Sometimes I Fail - deadmau5”>Sometimes I Fail - deadmau</a></button><br />' +
+		'2. <a href=”https://www.youtube.com/watch?v=9-0wDHMzNnQ”><button title=”Silence Bridge - Pokemon Red/Blue”>Silence Bridge - Pokemon Red/Blue</a></button><br />' +
+		'3. <a href=”https://www.youtube.com/watch?v=9T6N5UBeFpk”><button title=”40 Oz. To Freedom - Sublime”>40 Oz. To Freedom - Sublime</a></button><br />' +
+		'4. <a href=”https://www.youtube.com/watch?v=OHsvxfD8_-o”><button title=”Bloody Cape - Deftones”>Bloody Cape - Deftones</a></button><br />' +
+		'5. <a href=”https://www.youtube.com/watch?v=c5fts7bj-so”><button title=”Fuck The Police - N.W.A.”>Fuck The Police - N.W.A.</a></button><br />' +
+		'6. <a href=”https://www.youtube.com/watch?v=5hBC7ovAn6Y”><button title=”Mellow, My Man - The Roots”>Mellow, My Man - The Roots</a></button>');
+}, 
 tailzbox: function(target, room, user) {
 	if (!this.canBroadcast()) return;
 	this.sendReplyBox('<b>Tailz\'s Music Box!</b><br />' +

@@ -70,6 +70,7 @@ emoticons: {
         'crtAleks': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3222-src-71e4d36197708e4b-28x28.png',
         'JonBastard': 'http://i.imgur.com/sLxs1gi.jpg',
         'BeeR': 'http://i.imgur.com/IWxlhcf.png',
+        'LayneStaley': 'http://i.imgur.com/0BHsRjG.png',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

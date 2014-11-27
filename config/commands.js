@@ -525,8 +525,13 @@ declarered: function(target, room, user, connection, cmd) {
 	}
 	this.logModCommand(user.name+' declared '+target);
 },
-
-
+golddeclare: function(target, room, user, connection, cmd) {
+	if (!target) return this.parse('/help declare');
+	if (!this.can('declare', null, room)) return false;
+	if (!this.canTalk()) return;
+	this.add('|raw|<div class="broadcast-gold"><b>'+target+'</b></div>');
+	this.logModCommand(user.name+' declared '+target);
+},
 pdeclare: function(target, room, user, connection, cmd) {
 	if (!target) return this.parse('/help declare');
 	if (!this.can('declare', null, room)) return false;

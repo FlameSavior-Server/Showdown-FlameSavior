@@ -2377,6 +2377,7 @@ var commands = exports.commands = {
 
 	away: 'afk',
 	asleep: 'afk',
+	sleep: 'afk',
 	gaming: 'afk',
 	busy: 'afk',
 	afk: function(target, room, user, connection, cmd) {

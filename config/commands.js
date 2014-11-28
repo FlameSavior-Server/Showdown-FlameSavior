@@ -1466,7 +1466,7 @@ terlor: function(target, room, user) {
 if (!this.canBroadcast()) return;
 this.sendReplyBox('<center><img src="http://i.imgur.com/EEcZ4J2.png" width="350"><br />' +
 	'<img src="http://i.imgur.com/bjVsAsj.png"><br />' +
-    '"Your god was nailed to a cross. My god wields a hammer. <b>Hail Thor</b>"</center>');
+    '"I can\'t tell if I\'m alive and dreaming or dead and remembering..."</center>');
 },
 
 saago: function(target, room, user) {
@@ -1612,12 +1612,12 @@ this.sendReplyBox('<center><img src="http://i.imgur.com/AUTOlch.png"><br />' +
 
 pan: 'panpawn',
 panpawn: function(target, room, user) {
-if (!this.canBroadcast()) return;
-this.sendReplyBox('<center><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
-    '<img src="http://i.imgur.com/xzfPeaL.gif">' +
-    '<img src="http://107.161.19.43:8000/avatars/panpawn.gif"><br />' +
-    '<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
-    '<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('<center><img src="http://i.imgur.com/BYTR6Fj.gif  width="80" height="80">' +
+			'<img src="http://i.imgur.com/xzfPeaL.gif">' +
+			'<img src="http://107.191.104.240:8000/avatars/panpawn.png"><br />' +
+			'<b><font color="#4F86F7">Ace:</font></b> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
+			'<font color="black">"Don\'t touch me when I\'m sleeping."</font></center>');
 },
 
 mrbug: 'bug',
@@ -3472,7 +3472,7 @@ tourhelp: function(target, room, user) {
 
 	htmlbox: function (target, room, user) {
 		if (!target) return this.parse('/help htmlbox');
-		if (!this.can('declare', null, room)) return;
+		if ((!this.can('declare', null, room)) || (!this.can('lock'))) return;
 		if (!this.canHTML(target)) return;
 		if (!this.canBroadcast('!htmlbox')) return;
 

@@ -1992,11 +1992,6 @@ var commands = exports.commands = {
                 return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5]LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, ou oras');
 	},
 
-	hv: 'helpvotes',
-	helpvotes: function(room, user, cmd){
-                return this.parse('/wall Remember to **vote** even if you don\'t want to battle; that way you\'re still voting for what tier battles you want to watch!');
-	},
-
 	hc: function(room, user, cmd){
                 return this.parse('/hotpatch chat');
 	},

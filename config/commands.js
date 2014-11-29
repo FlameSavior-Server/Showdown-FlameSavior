@@ -3104,7 +3104,7 @@ tourhelp: function(target, room, user) {
 		if (!target) return this.sendReply('/removebadge [user], [badge] - Removes a badge from a user.');
 		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');
 		var self = this;
-		var type_of_badges = ['admin','bot','dev','vip','artist','mod','leader','champ','creator','concun','twinner','goodra','league', 'fgs'];
+		var type_of_badges = ['admin','bot','dev','vip','artist','mod','leader','champ','creator','comcun','twinner','goodra','league', 'fgs'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('The badge '+target+' is not a valid badge.');
 		fs.readFile('badges.txt','utf8', function(err, data) {
 			if (err) console.log(err);

@@ -3565,6 +3565,9 @@ var commands = exports.commands = {
                 		CommandParser.uncacheTree('./hangman.js');
                 		hangman = require('./hangman.js').hangman(hangman);
                 		
+                		CommandParser.uncacheTree('./core');
+                		global.Core = require('./core.js').core;
+                		
                 		CommandParser.uncacheTree('./economy.js');
 				economy = require('./economy.js');
 

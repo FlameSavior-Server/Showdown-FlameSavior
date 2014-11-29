@@ -783,6 +783,8 @@ var commands = exports.commands = {
 	},
 
 	staff: 'stafflist',
+	auth: 'stafflist',
+	authlist: 'stafflist',
 	stafflist: function (target, room, user, connection) {
 		var groups = [];
 		for (var u in Config.groups) {

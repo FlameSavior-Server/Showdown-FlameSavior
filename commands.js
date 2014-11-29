@@ -1989,7 +1989,7 @@ var commands = exports.commands = {
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
-                return this.parse('/poll Next Tournament Tier:, other, rubeta, randomdoubles, custom, reg1v1, lc, nu, cap, cc, oumono, ubersmono, randomsmono, uumono, rumono, numono, lcmono, doubles, balhackmons, hackmons, ubers, randombat, ou, cc1v1, uu');
+                return this.parse('/poll Next Tournament Tier:, other, ru, random doubles, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, ou oras');
 	},
 
 	hv: 'helpvotes',

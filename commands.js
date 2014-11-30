@@ -3974,8 +3974,11 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 
 		if (!this.broadcasting) this.sendReply('||>> ' + target);
-	//	Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
 		try {
+			Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
+		} catch (e) {
+			this.sendReply("You need to create a room called \"Administrators\" before using eval.");
+		} try {
 			var battle = room.battle;
 			var me = user;
 			this.sendReply('||<< ' + eval(target));

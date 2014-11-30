@@ -244,6 +244,7 @@ exports.BattleAliases = {
 
 	// moves
 	"bpass": "Baton Pass",
+	"bb": "Brave Bird",
 	"cc": "Close Combat",
 	"cm": "Calm Mind",
 	"dd": "Dragon Dance",

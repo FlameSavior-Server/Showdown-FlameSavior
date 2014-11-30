@@ -4,6 +4,20 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	fronk: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://static.tumblr.com/9d25ca89c0ad4817777303a95e681e71/m5qqsub/wkNnedfv9/tumblr_static_c5yryex76wgsc0ss8g4kcok8w.gif">' +
+			'<img src="http://i.imgur.com/dtZrD0v.gif" width="280">' +
+			'<img src="http://img1.wikia.nocookie.net/__cb20140109163255/es.pokemon/images/5/5f/Bouffalant_XY.gif"><br />' +
+			'<img src="http://i.imgur.com/AlIcXsP.gif"><br />' +
+			'<b>Ace:</b> Magneton<br />' +
+			'Type: Steel<br />' +
+			'I\'m a Chicagoan till Chicago ends.<br />' +
+			'Till we blow like Chicago wind. ~Kanye West<br />' +			
+			'I\'M THE NEWEST MEMBER OF THE ROCKEFELLER TEAM!!! ~Kanye West</center>'
+		);
+	},
+
 	zabi: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/zoKkoVe.gif" width="250">' +

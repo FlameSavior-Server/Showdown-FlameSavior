@@ -3104,7 +3104,7 @@ tourhelp: function(target, room, user) {
 		if (!target) return this.sendReply('/removebadge [user], [badge] - Removes a badge from a user.');
 		if (!targetUser) return this.sendReply('There is no user named '+this.targetUsername+'.');
 		var self = this;
-		var type_of_badges = ['admin','bot','dev','vip','artist','mod','leader','champ','creator','concun','twinner','goodra','league', 'fgs'];
+		var type_of_badges = ['admin','bot','dev','vip','artist','mod','leader','champ','creator','comcun','twinner','goodra','league', 'fgs'];
 		if (type_of_badges.indexOf(target) > -1 == false) return this.sendReply('The badge '+target+' is not a valid badge.');
 		fs.readFile('badges.txt','utf8', function(err, data) {
 			if (err) console.log(err);
@@ -3472,7 +3472,16 @@ tourhelp: function(target, room, user) {
 
 	htmlbox: function (target, room, user) {
 		if (!target) return this.parse('/help htmlbox');
-		if ((!this.can('declare', null, room)) || (!this.can('lock'))) return;
+		if (!this.can('declare', null, room)) return;
+		if (!this.canHTML(target)) return;
+		if (!this.canBroadcast('!htmlbox')) return;
+
+		this.sendReplyBox(target);
+	},
+	
+	shtmlbox: function (target, room, user) {
+		if (!target) return this.parse('/help htmlbox');
+		if (!this.can('lock')) return false;
 		if (!this.canHTML(target)) return;
 		if (!this.canBroadcast('!htmlbox')) return;
 

@@ -922,27 +922,27 @@ var commands = exports.commands = {
 
 //Tis' big command
 	shop: function(target, room, user) {
-
 		if (!this.canBroadcast()) return;
 		if(room.id === 'lobby' && this.broadcasting) {
-		return this.sendReplyBox('<center>Click <button name="send" value="/shop" class="blackbutton" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
+			return this.sendReplyBox('<center>Click <button name="send" value="/shop" class="blackbutton" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
 		} else {
-		return this.sendReplyBox('<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
-			'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
-			'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
-			'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
-			'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
-			'<tr><td>Trainer</td><td>Buys <a href="http://pastebin.com/1GBmc4eM">a trainer card</a> which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
-			'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box (don\'t buy if you have neither)!</td><td>15</td></tr>' +
-			'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin in lobby. This can be used for league advertisement (not server)</td><td>25</td></tr>' +
-			'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-			'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card but with links to your favorite songs! (must be appropriate).</td><td>60</td></tr>' +
-			'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>100</td></tr>' +
-			'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
-			'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>');
+			return this.sendReplyBox(
+				'<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
+				'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
+				'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
+				'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
+				'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
+				'<tr><td>Trainer</td><td>Buys <a href="http://pastebin.com/1GBmc4eM">a trainer card</a> which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
+				'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box or custom emote (don\'t buy if you have neither)!</td><td>15</td></tr>' +
+				'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin or Leader in the lobby. This can be used for room advertisement (not server)</td><td>25</td></tr>' +
+				'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
+				'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).</td><td>60</td></tr>' +
+				'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>100</td></tr>' +
+				'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
+				'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>'
+				);
 		}
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
-
 	},
 	
 	lockshop: 'closeshop',
@@ -1989,12 +1989,7 @@ var commands = exports.commands = {
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd){
-                return this.parse('/poll Next Tournament Tier:, other, rubeta, randomdoubles, custom, reg1v1, lc, nu, cap, cc, oumono, ubersmono, randomsmono, uumono, rumono, numono, lcmono, doubles, balhackmons, hackmons, ubers, randombat, ou, cc1v1, uu');
-	},
-
-	hv: 'helpvotes',
-	helpvotes: function(room, user, cmd){
-                return this.parse('/wall Remember to **vote** even if you don\'t want to battle; that way you\'re still voting for what tier battles you want to watch!');
+                return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5]LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, ou oras');
 	},
 
 	hc: function(room, user, cmd){
@@ -2113,21 +2108,6 @@ var commands = exports.commands = {
                 return user.send('|popup|'+aremind);
 	},
 
-	sremind: 'sreminder',
-	sreminder: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<div class="broadcast-gold" border="5"><center><img src="http://i.imgur.com/DpComSK.png" border="5" title="Welcome to Gold! (Logo by Chaotic)"></center><br />' +
-                                        '<center><b><font size="4">Welcome to Gold!</b></font><br>' +
-                                        '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
-                                        '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
-                                        '<b>2.</b> Do /events for a list of events that we do here!<br>' +
-                                        '<b>3.</b> Advertising another server is an automatic lock by PM or in chat.<br>' +
-                                        '<b>4.</b> Like this server and want to help keep it running? If so, you can <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">donate</a>!  Do /donate for more information.<br />' +
-                                        '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
-                                        '<hr width="85%">' +
-                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
-        },
-
 	pic: 'image',
 	image: function(target, room, user){
 				if(!target) return this.sendReply('/image [url] - Shows an image using /a. Requires ~.');
@@ -2208,18 +2188,6 @@ var commands = exports.commands = {
 			if ((!targetRoom.auth[user.userid]) && (!user.isStaff)) {
 				return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' is currently locked.");
 			}
-		}
-		if (target.toLowerCase() == "lobby") {
-                        return connection.sendTo('lobby','|html|<div class="broadcast-gold" border="5"><center><img src="http://i.imgur.com/DpComSK.png" border="5" title="Welcome to Gold! (Logo by Chaotic)"></center><br />' +
-                                        '<center><b><font size="4">Welcome to Gold!</b></font><br>' +
-                                        '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
-                                        '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
-                                        '<b>2.</b> Do /events for a list of events that we do here!<br>' +
-                                        '<b>3.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
-                                        '<b>4.</b> Like this server and want to help keep it running? If so, you can <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">donate</a>!  Do /donate for more information.<br />' +
-                                        '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
-                                        '<hr width="85%">' +
-                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
 		}
 		if (target.toLowerCase() == "casino") {
                         return connection.sendTo('casino','|html|<center><img src="http://i.imgur.com/n3RCajz.gif" width="100%"></center><br />' +
@@ -3565,6 +3533,9 @@ var commands = exports.commands = {
                 		CommandParser.uncacheTree('./hangman.js');
                 		hangman = require('./hangman.js').hangman(hangman);
                 		
+                		CommandParser.uncacheTree('./core');
+                		global.Core = require('./core.js').core;
+                		
                 		CommandParser.uncacheTree('./economy.js');
 				economy = require('./economy.js');
 
@@ -3976,8 +3947,11 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 
 		if (!this.broadcasting) this.sendReply('||>> ' + target);
-	//	Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
 		try {
+			Rooms.rooms.administrators.add(user.name + ' used eval: '+target);
+		} catch (e) {
+			this.sendReply("You need to create a room called \"Administrators\" before using eval.");
+		} try {
 			var battle = room.battle;
 			var me = user;
 			this.sendReply('||<< ' + eval(target));

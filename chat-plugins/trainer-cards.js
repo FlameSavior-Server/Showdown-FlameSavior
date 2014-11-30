@@ -4,13 +4,25 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
-	vulbit: function (target, room, user) {
+	jak3: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/phantump.gif>' +
-			'<img src=http://i.imgur.com/D9cp43W.gif>' +
-			'<img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados/cubone.gif><br />' +
-			'<b>Ace:</b> Sticks and stones<br />' +
-			'You only want to socialize but i don\'t think we should</center>'
+		this.sendReplyBox('<center><img src="http://fc00.deviantart.net/fs70/f/2013/046/0/4/pokemon_trainer_green_sig_by_zetherman-d5v3ccg.png" width="160">' +
+			'<img src="http://i.imgur.com/r9NTb8v.png" width="300">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/shaymin-sky.gif"><br />' +
+			'<b>Ace:</b> Shaymin-Sky<br />' +
+			'From the dying flames rises new sprouts and a powerful person.</center>'
+		);
+	},
+
+	troll: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ShhOOk3.png" width="130">' +
+			'<img src="http://i.imgur.com/e5yYpAh.gif" width="300">' +
+			'<img src="http://i.imgur.com/H2PuBth.jpg" height="140"><br />' +
+			'<b>Ace:</b> Damn Sneaky Showdown users<br />' +
+			'[12:50:35] %Byobell –︻╦╤─: I got trolled? Fuck you bish......<br />' +
+			'[12:50:36] @Guard Garchomp: Hell yea you did.<br />' +
+			'[12:50:43] @Guard Garchomp: :3</center>'
 		);
 	},
 
@@ -122,10 +134,12 @@ exports.commands = {
 
 	trunks: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/979356/dbz-o.gif" width="250" height="160">' +
-			'<img src="http://jump-galaxy.com/wp-content/uploads/2014/09/trunks-as-a-super-sayan-3-o.gif" width="280" height="160"><br />' +
+		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/979356/dbz-o.gif" width="145">' +
+			'<img src="http://i.imgur.com/1qXNFJe.png" width="270">' +
+			'<img src="http://jump-galaxy.com/wp-content/uploads/2014/09/trunks-as-a-super-sayan-3-o.gif" width="145"><br />' +
 			'<b>Ace:</b> SuperSaiyan<br />' +
-			'[09:53] %Arc Landorus: Trunks is bae.</center>'
+			'[09:53] %Arc Landorus: Trunks is bae.<br />' +
+			'<button name="send" value="/transferbucks Majin Trunks, 1">Donate a buck here! It helps a krillin in need.</button></center>'
 		);
 	},
 
@@ -592,6 +606,7 @@ exports.commands = {
 		);
 	},
 
+	vulbit: 'spooky',
 	spooky: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/phantump.gif">' +

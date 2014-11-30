@@ -568,7 +568,7 @@ exports.commands = {
 		);
 	},
 
-	vulbit: function (target, room, user) {
+	spooky: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/phantump.gif">' +
 			'<img src="http://i.imgur.com/D9cp43W.gif" width="430">' +

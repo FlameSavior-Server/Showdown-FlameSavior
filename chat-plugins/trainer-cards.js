@@ -570,11 +570,11 @@ exports.commands = {
 
 	vulbit: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://24.media.tumblr.com/ee46930284f95431fc451202b6be060d/tumblr_mvhp6ddtU91r1a7mvo1_500.png" height="160">' +
-			'<img src="http://i.imgur.com/2oGPsYQ.png">' +
-			'<img src="http://fc04.deviantart.net/fs71/i/2012/071/b/6/vulpix_and_growlithe_love_by_shinyeeveee-d4sin5z.jpg" width="180"><br />' +
-			'<b>Ace:</b> Ghost pokemon<br />' +
-			'Too spooky 5 you.</center>'
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/phantump.gif">' +
+			'<img src="http://i.imgur.com/D9cp43W.gif" width="430">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/cubone.gif"><br />' +
+			'<b>Ace:</b> Sticks and Stones<br />' +
+			'You only want to socialize but I don\'t think we should.</center>'
 		);
 	},
 
@@ -854,11 +854,11 @@ exports.commands = {
 	arrow: 'artemis',
  	artemis: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/qhoIRP4.gif" width="160">' +
-			'<img src="http://i.imgur.com/Q3NuTZW.gif" width="260">' +
-			'<img src="http://imageserver.moviepilot.com/arrow-gifs-10-comic-shows-why-keeping-the-arrow-flash-universe-away-from-man-of-steel-universe-isn-t-a-bad-thing.gif" width="120"><br />' +
-			'<b>Ace:</b> Composite Bow<br />' +
-			' You have FAILED this server.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/wqNRXZa.gif" width="160">' +
+			'<img src="http://i.imgur.com/OvADtkX.gif">' +
+			'<img src="http://imageserver.moviepilot.com/arrow-gifs-10-comic-shows-why-keeping-the-arrow-flash-universe-away-from-man-of-steel-universe-isn-t-a-bad-thing.gif" width="125"><br />' +
+			'<b>Ace:</b> <font color="green">Composite Bow<br />' +
+			' You have FAILED this server.</font></center>'
 		);
 	},
 

@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	vulbit: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/phantump.gif>' +
+			'<img src=http://i.imgur.com/D9cp43W.gif>' +
+			'<img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados/cubone.gif><br />' +
+			'<b>Ace:</b> Sticks and stones<br />' +
+			'You only want to socialize but i don\'t think we should</center>'
+		);
+	},
+
 	fronk: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://static.tumblr.com/9d25ca89c0ad4817777303a95e681e71/m5qqsub/wkNnedfv9/tumblr_static_c5yryex76wgsc0ss8g4kcok8w.gif">' +

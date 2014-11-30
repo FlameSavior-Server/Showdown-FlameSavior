@@ -134,9 +134,9 @@ exports.commands = {
 
 	trunks: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/979356/dbz-o.gif" width="145">' +
+		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/979356/dbz-o.gif" width="135">' +
 			'<img src="http://i.imgur.com/1qXNFJe.png" width="270">' +
-			'<img src="http://jump-galaxy.com/wp-content/uploads/2014/09/trunks-as-a-super-sayan-3-o.gif" width="145"><br />' +
+			'<img src="http://jump-galaxy.com/wp-content/uploads/2014/09/trunks-as-a-super-sayan-3-o.gif" width="135"><br />' +
 			'<b>Ace:</b> SuperSaiyan<br />' +
 			'[09:53] %Arc Landorus: Trunks is bae.<br />' +
 			'<button name="send" value="/transferbucks Majin Trunks, 1">Donate a buck here! It helps a krillin in need.</button></center>'

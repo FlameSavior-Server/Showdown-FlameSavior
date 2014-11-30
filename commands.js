@@ -2108,21 +2108,6 @@ var commands = exports.commands = {
                 return user.send('|popup|'+aremind);
 	},
 
-	sremind: 'sreminder',
-	sreminder: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<div class="broadcast-gold" border="5"><center><img src="http://i.imgur.com/DpComSK.png" border="5" title="Welcome to Gold! (Logo by Chaotic)"></center><br />' +
-                                        '<center><b><font size="4">Welcome to Gold!</b></font><br>' +
-                                        '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
-                                        '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
-                                        '<b>2.</b> Do /events for a list of events that we do here!<br>' +
-                                        '<b>3.</b> Advertising another server is an automatic lock by PM or in chat.<br>' +
-                                        '<b>4.</b> Like this server and want to help keep it running? If so, you can <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">donate</a>!  Do /donate for more information.<br />' +
-                                        '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
-                                        '<hr width="85%">' +
-                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
-        },
-
 	pic: 'image',
 	image: function(target, room, user){
 				if(!target) return this.sendReply('/image [url] - Shows an image using /a. Requires ~.');
@@ -2203,18 +2188,6 @@ var commands = exports.commands = {
 			if ((!targetRoom.auth[user.userid]) && (!user.isStaff)) {
 				return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' is currently locked.");
 			}
-		}
-		if (target.toLowerCase() == "lobby") {
-                        return connection.sendTo('lobby','|html|<div class="broadcast-gold" border="5"><center><img src="http://i.imgur.com/DpComSK.png" border="5" title="Welcome to Gold! (Logo by Chaotic)"></center><br />' +
-                                        '<center><b><font size="4">Welcome to Gold!</b></font><br>' +
-                                        '-<em>Stay gold, ponyboy~ :^)</em></center><br>' +
-                                        '<b>1.</b> If you should have any questions or concerns while you\'re here, than please feel free to PM a server staff member, a: Driver (%), Moderator (@), Leader (&), or, if it\'s very serious, an Administrator (~).<br>' +
-                                        '<b>2.</b> Do /events for a list of events that we do here!<br>' +
-                                        '<b>3.</b> Advertising another server is an auto lock by PM or in chat.<br>' +
-                                        '<b>4.</b> Like this server and want to help keep it running? If so, you can <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">donate</a>!  Do /donate for more information.<br />' +
-                                        '<b>5.</b> We hope you have fun while you\'re here! If so, then please be sure to tell your friends about us!<br>' +
-                                        '<hr width="85%">' +
-                                        '<center><a href="http://goldserver.weebly.com/rules"><button class="blackbutton" title="Rules"><font color="white"><b>Rules</b></a></button>   |   <a href="http://goldserver.weebly.com/news"><button class="blackbutton" title="News"><font color="white"><b>News</b></a></button>   |   <a href="http://goldserver.weebly.com/"><button class="blackbutton" title="Website"><font color="white"><b>Website</b></a></button>   |   <a href="http://goldserver.weebly.com/faqs"><button class="blackbutton" title="FAQs"><font color="white"><b>FAQs</b></a></button>   |   <a href="http://plug.dj/gold-server/"><button class="blackbutton" title="Plug.dj"><font color="white"><b>Plug.dj</b></a></button>   |   <button name="send" value="/shop" class="blackbutton" title="Shop"><font color="white"><b>Shop</button></div>');
 		}
 		if (target.toLowerCase() == "casino") {
                         return connection.sendTo('casino','|html|<center><img src="http://i.imgur.com/n3RCajz.gif" width="100%"></center><br />' +

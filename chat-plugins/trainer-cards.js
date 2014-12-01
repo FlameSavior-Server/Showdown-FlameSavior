@@ -4,13 +4,58 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
-	vulbit: function (target, room, user) {
+	lilyvix: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/phantump.gif>' +
-			'<img src=http://i.imgur.com/D9cp43W.gif>' +
-			'<img src=http://www.pkparaiso.com/imagenes/xy/sprites/animados/cubone.gif><br />' +
-			'<b>Ace:</b> Sticks and stones<br />' +
-			'You only want to socialize but i don\'t think we should</center>'
+		this.sendReplyBox('<center><b>Lily Vix</b><br />' +
+			'<img src="http://media-cache-ak0.pinimg.com/736x/ff/43/6f/ff436f3a3c2988ce4667b30a92817c11.jpg" img width="241"><br />' +
+			'<b>Ace:</b> Leafeon<br />' +
+			'"The vines of victory will protect me from your evils for they know not the despair of losing."</center>'
+		);
+	},
+
+	kawaii: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/DJGzFzT.png" width="160">' +
+			'<img src="http://i.imgur.com/6Xahr9X.gif">' +
+			'<img src="http://33.media.tumblr.com/74dcea14ef65ab5a52a9229cac7b8228/tumblr_mjysywF8Cj1qc2etlo1_500.jpg" height="160"><br />' +
+			'<img src="http://i.imgur.com/39q80tU.jpg" width="160"><br />' +
+			'<b>Ace:</b> Cuteness<br />' +
+			'We\'re too kawaii for you.</center>'
+		);
+	},
+
+	love: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://puu.sh/daSp3/9d3a5d294a.png" width="120">' +
+			'<img src="http://i.imgur.com/Aw01UV7.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/mawile-mega.png"><br />' +
+			'<b>Ace:</b> Mega Fagwile<br />' +
+			'Quote: "Fuck being on some chill shit, we go 0 to 100 nigga real quick,<br />' +
+			'They be on that rapper pay the bill shit, and I don’t feel that shit not even a little bit.<br />' +
+			'Oh lord, know yourself, know your worth nigga, my actions been louder than my words nigga<br />' +
+			'How you sold out but still so down to earth nigga?" - Drake</center>'
+		);
+	},
+
+	jak3: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc00.deviantart.net/fs70/f/2013/046/0/4/pokemon_trainer_green_sig_by_zetherman-d5v3ccg.png" width="160">' +
+			'<img src="http://i.imgur.com/r9NTb8v.png" width="300">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/shaymin-sky.gif"><br />' +
+			'<b>Ace:</b> Shaymin-Sky<br />' +
+			'From the dying flames rises new sprouts and a powerful person.</center>'
+		);
+	},
+
+	troll: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ShhOOk3.png" width="130">' +
+			'<img src="http://i.imgur.com/e5yYpAh.gif" width="300">' +
+			'<img src="http://i.imgur.com/H2PuBth.jpg" height="140"><br />' +
+			'<b>Ace:</b> Damn Sneaky Showdown users<br />' +
+			'[12:50:35] %Byobell –︻╦╤─: I got trolled? Fuck you bish......<br />' +
+			'[12:50:36] @Guard Garchomp: Hell yea you did.<br />' +
+			'[12:50:43] @Guard Garchomp: :3</center>'
 		);
 	},
 
@@ -122,10 +167,12 @@ exports.commands = {
 
 	trunks: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/979356/dbz-o.gif" width="250" height="160">' +
-			'<img src="http://jump-galaxy.com/wp-content/uploads/2014/09/trunks-as-a-super-sayan-3-o.gif" width="280" height="160"><br />' +
+		this.sendReplyBox('<center><img src="http://stream1.gifsoup.com/view/979356/dbz-o.gif" width="135">' +
+			'<img src="http://i.imgur.com/1qXNFJe.png" width="270">' +
+			'<img src="http://jump-galaxy.com/wp-content/uploads/2014/09/trunks-as-a-super-sayan-3-o.gif" width="135"><br />' +
 			'<b>Ace:</b> SuperSaiyan<br />' +
-			'[09:53] %Arc Landorus: Trunks is bae.</center>'
+			'[09:53] %Arc Landorus: Trunks is bae.<br />' +
+			'<button name="send" value="/transferbucks Majin Trunks, 1">Donate a buck here! It helps a krillin in need.</button></center>'
 		);
 	},
 
@@ -177,7 +224,7 @@ exports.commands = {
 		);
 	},
 
-	acefalco: function (target, room, user) {
+	soldier: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://25.media.tumblr.com/tumblr_lwl1oj1iQ61qa8kbzo1_500.jpg" width="250" height="100">' +
 			'<img src="http://i.imgur.com/XKhJt5R.gif" width="250" height="100">' +
@@ -592,6 +639,7 @@ exports.commands = {
 		);
 	},
 
+	vulbit: 'spooky',
 	spooky: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/phantump.gif">' +
@@ -3378,7 +3426,8 @@ exports.commands = {
 			'<img src="http://i.imgur.com/UQJceOG.png">' +
 			'<img src="http://i.imgur.com/uv1baKZ.png?1" width="180"><br />' +
 			'<b>Ace:</b> Failz<br />' +
-			'I\'m Pretty Shit.</center>'
+			'I\'m Pretty Shit.<br />' +
+			'<a href="https://www.youtube.com/watch?v=tII-duWFrQ0"><button><i>Play times Ogre</i></button></a></center>'
 		);
 	},
 

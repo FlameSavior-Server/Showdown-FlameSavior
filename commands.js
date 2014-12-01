@@ -169,7 +169,7 @@ var commands = exports.commands = {
 	tell: function(target, room, user) {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
-		if (user.ignoreTells) return this.popup('This user is blocking Tells right now.');
+		if (user.ignoreTells) return this.sendReply('This user is blocking Tells right now.');
 		if (!target) return this.sendReply('/tell [username], [message] - Sends a message to the user which they see when they next speak');
 
 		var targets = target.split(',');

@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	lilyvix: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><b>Lily Vix</b><br />' +
+			'<img src="http://media-cache-ak0.pinimg.com/736x/ff/43/6f/ff436f3a3c2988ce4667b30a92817c11.jpg" img width="241"><br />' +
+			'<img src="SecondImage"><br />' +
+			'<b>Ace:</b> Leafeon<br />' +
+			'"The vines of victory will protect me from your evils for they know not the despair of losing."</center>'
+		);
+	},
+
 	kawaii: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/DJGzFzT.png" width="160">' +
@@ -21,7 +31,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/Aw01UV7.png">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/afd/mawile-mega.png"><br />' +
 			'<b>Ace:</b> Mega Fagwile<br />' +
-			'"Fuck being on some cheers shit, we go 0 to 100 nigga real quick,<br />' +
+			'Quote: "Fuck being on some chill shit, we go 0 to 100 nigga real quick,<br />' +
 			'They be on that rapper pay the bill shit, and I don’t feel that shit not even a little bit.<br />' +
 			'Oh lord, know yourself, know your worth nigga, my actions been louder than my words nigga<br />' +
 			'How you sold out but still so down to earth nigga?" - Drake</center>'
@@ -215,7 +225,7 @@ exports.commands = {
 		);
 	},
 
-	acefalco: function (target, room, user) {
+	soldier: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://25.media.tumblr.com/tumblr_lwl1oj1iQ61qa8kbzo1_500.jpg" width="250" height="100">' +
 			'<img src="http://i.imgur.com/XKhJt5R.gif" width="250" height="100">' +

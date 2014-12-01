@@ -8,7 +8,6 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><b>Lily Vix</b><br />' +
 			'<img src="http://media-cache-ak0.pinimg.com/736x/ff/43/6f/ff436f3a3c2988ce4667b30a92817c11.jpg" img width="241"><br />' +
-			'<img src="SecondImage"><br />' +
 			'<b>Ace:</b> Leafeon<br />' +
 			'"The vines of victory will protect me from your evils for they know not the despair of losing."</center>'
 		);

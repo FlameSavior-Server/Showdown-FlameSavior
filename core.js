@@ -72,6 +72,7 @@ emoticons: {
         'BeeR': 'http://i.imgur.com/IWxlhcf.png',
         'LayneStaley': 'http://i.imgur.com/0BHsRjG.png',
         'SaniC': 'http://i.picresize.com/images/2014/11/27/j0fmu.png',
+        'fliP': 'http://i.imgur.com/IRqXlrr.png',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

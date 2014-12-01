@@ -4,6 +4,30 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	kawaii: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/DJGzFzT.png" width="160">' +
+			'<img src="http://i.imgur.com/6Xahr9X.gif">' +
+			'<img src="http://33.media.tumblr.com/74dcea14ef65ab5a52a9229cac7b8228/tumblr_mjysywF8Cj1qc2etlo1_500.jpg" height="160"><br />' +
+			'<img src="http://i.imgur.com/39q80tU.jpg" width="160"><br />' +
+			'<b>Ace:</b> Cuteness<br />' +
+			'We\'re too kawaii for you.</center>'
+		);
+	},
+
+	love: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://puu.sh/daSp3/9d3a5d294a.png" width="120">' +
+			'<img src="http://i.imgur.com/Aw01UV7.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/afd/mawile-mega.png"><br />' +
+			'<b>Ace:</b> Mega Fagwile<br />' +
+			'"Fuck being on some cheers shit, we go 0 to 100 nigga real quick,<br />' +
+			'They be on that rapper pay the bill shit, and I don’t feel that shit not even a little bit.<br />' +
+			'Oh lord, know yourself, know your worth nigga, my actions been louder than my words nigga<br />' +
+			'How you sold out but still so down to earth nigga?" - Drake</center>'
+		);
+	},
+
 	jak3: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://fc00.deviantart.net/fs70/f/2013/046/0/4/pokemon_trainer_green_sig_by_zetherman-d5v3ccg.png" width="160">' +
@@ -3393,7 +3417,8 @@ exports.commands = {
 			'<img src="http://i.imgur.com/UQJceOG.png">' +
 			'<img src="http://i.imgur.com/uv1baKZ.png?1" width="180"><br />' +
 			'<b>Ace:</b> Failz<br />' +
-			'I\'m Pretty Shit.</center>'
+			'I\'m Pretty Shit.<br />' +
+			'<a href="https://www.youtube.com/watch?v=tII-duWFrQ0"><button><i>Play times Ogre</i></button></a></center>'
 		);
 	},
 

@@ -172,25 +172,23 @@ var commands = exports.commands = {
 		if (user.ignoreTells) return this.sendReply('This user is blocking Tells right now.');
 		if (!target) return this.sendReply('/tell [username], [message] - Sends a message to the user which they see when they next speak');
 
-		var targets = target.split(',');
-		if (!targets[1]) return this.parse('/help tell');
-		var targetUser = toId(targets[0]);
-
-		if (targets >= 2) return this.parse('/tell [username], [message] - Try removing any extra commas in the message.');
-
+		if (target.indexOf(',') < 0) return this.sendReply("Usage: /tell [username], [message]");
+		var targetUser = target.substr(0, target.indexOf(','));
+		var message = target.substr(target.indexOf(',')+1, target.length);
+		if (!toId(targetUser) || !message) return this.sendReply("Usage: /tell [username], [message]");
+		if (message.length > 500) return this.sendReply('Your tell exceeded the maximum length.');
 		if (targetUser.length > 18) {
-			return this.sendReply('The name of user "' + this.targetUsername + '" is too long.');
+			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}
 
-		if (!tells[targetUser]) tells[targetUser] = [];
-		if (tells[targetUser].length === 5) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
+		if (!tells[toId(targetUser)]) tells[toId(targetUser)] = [];
+		if (tells[toId(targetUser)].length === 15) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
 
 		var date = Date();
-		var message = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + targets[1].trim();
-		if (message.length > 500) return this.sendReply('Your tell exceeded the maximum length.');
-		tells[targetUser].add(message);
+		var tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + message;
+		tells[toId(targetUser)].add(tellMessage);
 
-		return this.sendReply('Message "' + targets[1] + '" sent to ' + targetUser + '.');
+		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
 
 	blocktell: 'ignoretells',

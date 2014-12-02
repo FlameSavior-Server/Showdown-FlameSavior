@@ -1021,6 +1021,10 @@ var commands = exports.commands = {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3481155/\">OM of the Month</a><br />";
 		}
+		if (target === 'seasonal') {
+			matched = true;
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3491902/\">Seasonal Ladder</a><br />";
+		}
 		if (target === 'balancedhackmons' || target === 'bh') {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3489849/\">Balanced Hackmons</a><br />";
@@ -1194,8 +1198,8 @@ var commands = exports.commands = {
 			return;
 		}
 		if (!this.can('roommod', null, room)) return;
-		if (target.length > 80) {
-			return this.sendReply("Error: Room rules link is too long (must be under 80 characters). You can use a URL shortener to shorten the link.");
+		if (target.length > 100) {
+			return this.sendReply("Error: Room rules link is too long (must be under 100 characters). You can use a URL shortener to shorten the link.");
 		}
 
 		room.rulesLink = target.trim();
@@ -1269,9 +1273,9 @@ var commands = exports.commands = {
 		}
 		if (target === 'overused' || target === 'ou') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3514144/\">np: OU Stage 6</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3521201/\">Metagame Discussion Thread</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/ou/\">OU Banlist</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3515714/\">OU Viability Rankings</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3521602/\">OU Viability Rankings</a><br />";
 		}
 		if (target === 'ubers' || target === 'uber') {
 			matched = true;

@@ -806,7 +806,7 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/5Wo1daG.gif"><br />' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gengar.gif">' +
-			'<img src="http://i.imgur.com/5coxW0H.gif" width="280">' +
+			'<img src="http://i.imgur.com/5coxW0H.gif" width="200">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aegislash-blade.gif"><br />' +
 			'<b>Ace:</b> Ghost Type Totodile<br />' +
 			'I came without fear. I don\'t have any regrets, no matter what happens. This is the duel I wanted, and I will win.</center>'

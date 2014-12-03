@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	serena: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/JvCusyc.jpg" width="130">' +
+			'<img src="http://i.imgur.com/wOrHnUm.gif" width="280">' +
+			'<img src="http://i.imgur.com/r6R8KQt.jpg" width="130"><br />' +
+			'"The Radiance of a Serene tomorrow!"<br />' +
+			'Trademarks: Ralts Family</center>'
+		);
+	},
+
 	lilyvix: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><b>Lily Vix</b><br />' +
@@ -794,11 +804,12 @@ exports.commands = {
 
 	ut: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/5coxW0H.gif" width="120">' +
-			'<img src="http://i.imgur.com/pAORug1.gif" width="300">' +
-			'<img src="http://i.imgur.com/5coxW0H.gif" width="120"><br />' +
-			'<b>Ace:</b> Totodile<br />' +
-			'When one person stands they might not be noticed, but when Thousands stand they can not be overlooked.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/5Wo1daG.gif"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gengar.gif">' +
+			'<img src="http://i.imgur.com/5coxW0H.gif" width="350">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aegislash-blade.gif"><br />' +
+			'<b>Ace:</b> Ghost Type Totodile<br />' +
+			'I came without fear. I don\'t have any regrets, no matter what happens. This is the duel I wanted, and I will win.</center>'
 		);
 	},
 

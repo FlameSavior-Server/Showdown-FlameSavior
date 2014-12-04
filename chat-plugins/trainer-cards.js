@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	beaver: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/qNBtnHr.gif" width="160">' +
+			'<img src="http://i.imgur.com/MtTf3Fy.gif">' +
+			'<img src="http://i.imgur.com/QihtMpE.gif"><br />' +
+			'<b>Ace:</b> Shiny Charizard Y<br />' +
+			'"Respect and trust before all else."</center>'
+		);
+	},
+
 	serena: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/JvCusyc.jpg" width="130">' +

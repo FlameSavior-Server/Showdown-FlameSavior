@@ -4,6 +4,18 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	william: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/040bf97f0c6df9276648b7843b81a7b2/tumblr_mpu2s2rFTS1szx1oxo1_500.gif" width="220"><br />' +
+			'<img src="http://i.imgur.com/QprzF.gif" width="160">' +
+			'<img src="http://i.imgur.com/gV89DkP.png">' +
+			'<img src="http://img.photobucket.com/albums/v475/gray9lives/pokemanz/Bellsprout_by_funymony.gif" width="150"><br />' +
+			'<img src="https://s3.amazonaws.com/giphymedia/media/O9hQ4g4m8lQFG/giphy.gif" width="160"><br />' +
+			'<b>Ace:</b> Chubby Cheeks<br />' +
+			'MOOOOOOOMMMMMMM!!!! WHY CANT YOU FLY???"</center>'
+		);
+	},
+
 	beaver: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/qNBtnHr.gif" width="160">' +

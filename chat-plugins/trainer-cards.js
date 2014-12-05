@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ninjad: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://33.media.tumblr.com/tumblr_m6yfs4N3jp1roew1yo1_500.gif" width="150">' +
+			'<img src="http://i.imgur.com/bp8W11p.png" width="240">' +
+			'<img src="http://4.bp.blogspot.com/-7_d6MnfU8uY/T29Y-RFkPmI/AAAAAAAABsE/8Tjt5i4eLQk/s1600/B4C.gif" width="150"><br />' +
+			'<blink><b>Ace:</b> Murasaki</blink><br />' +
+			'<blink>You can\'t see this...</blink></center>'
+		);
+	},
+
 	wanted: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/lV7VO8D.png" width="150">' +

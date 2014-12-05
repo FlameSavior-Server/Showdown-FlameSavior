@@ -4,6 +4,27 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	wanted: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/lV7VO8D.png" width="150">' +
+			'<img src="http://i.imgur.com/yoB9A7m.png" width="250">' +
+			'<img src="http://i.imgur.com/WAcl3lv.png" width="130"><br />' +
+			'<b>Ace:</b> Lights and jd, Barida x Flare and Chakra<br />' +
+			'<img src="http://i.imgur.com/jl3OAzQ.png"></center>'
+		);
+	},
+
+	op: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/MKzQakz.png"><br />' +
+			'<img src="http://i.imgur.com/2CWiyoF.jpg" width="150">' +
+			'<img src="http://imgur.com/2jmtiSg.jpg" width="200" height="130">' +
+			'<img src="http://imgur.com/QtHYYGk.jpg" width="175"><br />' +
+			'<font color="blue"><b>Ace:</b></font> <font color="purple"><b>Evasive Golduck</b></font><br />' +
+			'<img src="http://i.imgur.com/3EnQFYS.jpg"></center>'
+		);
+	},
+
 	william: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/040bf97f0c6df9276648b7843b81a7b2/tumblr_mpu2s2rFTS1szx1oxo1_500.gif" width="220"><br />' +

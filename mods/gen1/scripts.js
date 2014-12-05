@@ -10,19 +10,23 @@ exports.BattleScripts = {
 			this.add('debug', activity);
 		}
 	},
-	// getStat callback for gen 1 stat dealing
-	getStatCallback: function (stat, statName, pokemon) {
+	/**
+	 * We deal with gen 1 stats using the getStatCallback which is called always that we get a stat.
+	 * We add here a specific unboosted argument to use it with crits, as in gen 1 we need this
+	 * specific callback to deal with screen stats.
+	 */
+	getStatCallback: function (stat, statName, pokemon, unboosted) {
 		// Hard coded Reflect and Light Screen boosts
-		if (pokemon.volatiles['reflect'] && statName === 'def') {
+		if (pokemon.volatiles['reflect'] && statName === 'def' && !unboosted) {
 			this.debug('Reflect doubles Defense');
 			stat *= 2;
 			// Max on reflect is 1024
 			if (stat > 1024) stat = 1024;
 			if (stat < 1) stat = 1;
-		} else if (pokemon.volatiles['lightscreen'] && statName === 'spd') {
+		} else if (pokemon.volatiles['lightscreen'] && statName === 'spd' && !unboosted) {
 			this.debug('Light Screen doubles Special Defense');
 			stat *= 2;
-			// Max on reflect is 1024
+			// Max on light screen is 1024
 			if (stat > 1024) stat = 1024;
 			if (stat < 1) stat = 1;
 		} else {
@@ -96,8 +100,8 @@ exports.BattleScripts = {
 							if (pokemon.moveset[m].id === move.id) usedMovePos = m;
 						}
 						if (usedMovePos > -1 && pokemon.moveset[usedMovePos].pp === 0) {
-							// If we were on the middle of the 0 PP sequence, the PPs get reset
-							pokemon.moveset[usedMovePos].pp = pokemon.moveset[usedMovePos].maxpp;
+							// If we were on the middle of the 0 PP sequence, the PPs get reset to 63.
+							pokemon.moveset[usedMovePos].pp = 63;
 						} else {
 							// Otherwise, plain reduct
 							pokemon.deductPP(move, null, target);

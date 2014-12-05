@@ -31,7 +31,6 @@ const MESSAGE_COOLDOWN = 5 * 60 * 1000;
 const MAX_PARSE_RECURSION = 10;
 
 var fs = require('fs');
-var frostcommands = frostcommands;
 
 /*********************************************************
  * Load command files
@@ -55,8 +54,6 @@ fs.readdirSync('./chat-plugins').forEach(function (file) {
  *********************************************************/
 
 var modlog = exports.modlog = {lobby: fs.createWriteStream('logs/modlog/modlog_lobby.txt', {flags:'a+'}), battle: fs.createWriteStream('logs/modlog/modlog_battle.txt', {flags:'a+'})};
-
-var complaint = exports.complaint = complaint || fs.createWriteStream('logs/complaint.txt', {flags:'a+'});
 
 /**
  * Can this user talk?
@@ -161,11 +158,6 @@ function canTalk(user, room, connection, message) {
  *     if he's muted, will warn him that he's muted, and
  *     return false.
  */
-
-var complaint = exports.complaint = complaint || fs.createWriteStream('logs/complaint.txt', {flags:'a+'});
-var fs = require('fs');
-var frostcommands = global.frostcommands;
-
 var parse = exports.parse = function (message, room, user, connection, levelsDeep) {
 	var cmd = '', target = '';
 	if (!message || !message.trim().length) return;
@@ -244,7 +236,6 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 			},
 			sendModCommand: function (data) {
 				for (var i in room.users) {
-
 					var user = room.users[i];
 					// hardcoded for performance reasons (this is an inner loop)
 					if (user.isStaff || (room.auth && (room.auth[user.userid] || '+') !== '+')) {
@@ -270,7 +261,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 				modlog[room.id].write('[' + (new Date().toJSON()) + '] (' + room.id + ') ' + result + '\n');
 			},
 			logComplaint: function(result) {
-				complaint.write('('+room.id+') '+ user.name + ': ' +result+'\n');
+				fs.appendFile('logs/complaints.txt', '('+room.id+') '+ user.name + ': ' +result+'\n');
 			},
 			can: function (permission, target, room) {
 				if (!user.can(permission, target, room)) {
@@ -283,7 +274,6 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 				if (broadcast) {
 					message = this.canTalk(message);
 					if (!message) return false;
-
 					if (!user.can('broadcast', null, room)) {
 						connection.sendTo(room, "You need to be voiced to broadcast this command's information.");
 						connection.sendTo(room, "To see it for yourself, use: /" + message.substr(1));
@@ -401,7 +391,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 	}
 	message = canTalk(user, room, connection, message);
 	if (!message) return false;
-	if (message.charAt(0) === '/' && message.charAt(1) !== '/' && message.length > 1 && message.charAt(1) !== ' ') {
+	if (message.charAt(0) === '/' && message.charAt(1) !== '/') {
 		return parse(message, room, user, connection, levelsDeep + 1);
 	}
 
@@ -427,134 +417,8 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		delete tells[user.userid];
 	}
 
-	if (message) {
-        if (user.isAway === true) {
-		if (user.name === user.originalName) {
-			user.isAway = false;
-			connection.sendTo(user, 'Your name has been left unaltered and no longer marked as away.');
-		}
-
-            user.isAway = false;
-            var newName = user.originalName;
-
-            user.forceRename(newName, undefined, true);
-            user.authenticated = true;
-            try {
-            	connection.sendTo(room, "|raw|-- <b><font color=\"" + frostcommands.hashColor(newName) + "\">" + newName + "</font></b> is no longer away.");
-            } catch (e) {
-            	connection.sendTo(room, '|raw|-- <b><font color="#088cc7">' + newName + '</font color></b> is no longer away');
-            }
-            user.originalName = '';
-        }
-    }
-
 	return message;
 };
-
-function splitTarget(target, exactName) {
-	var commaIndex = target.indexOf(',');
-	if (commaIndex < 0) {
-		var targetUser = Users.get(target, exactName);
-		this.targetUser = targetUser;
-		this.targetUsername = targetUser ? targetUser.name : target;
-		return '';
-	}
-	var targetUser = Users.get(target.substr(0, commaIndex), exactName);
-	if (!targetUser) {
-		targetUser = null;
-	}
-	this.targetUser = targetUser;
-	this.targetUsername = targetUser ? targetUser.name : target.substr(0, commaIndex);
-	return target.substr(commaIndex + 1).trim();
-}
-
-/**
- * Can this user talk?
- * Shows an error message if not.
- */
-function canTalk(user, room, connection, message) {
-	if (!user.named) {
-		connection.popup("You must choose a name before you can talk.");
-		return false;
-	}
-	if (room && user.locked) {
-		connection.sendTo(room, "You are locked from talking in chat.");
-		return false;
-	}
-	if (room && user.mutedRooms[room.id]) {
-		connection.sendTo(room, "You are muted and cannot talk in this room.");
-		return false;
-	}
-	if (room && room.modchat) {
-		if (room.modchat === 'crash') {
-			if (!user.can('ignorelimits')) {
-				connection.sendTo(room, "Because the server has crashed, you cannot speak in lobby chat.");
-				return false;
-			}
-		} else {
-			var userGroup = user.group;
-			if (room.auth) {
-				if (room.auth[user.userid]) {
-					userGroup = room.auth[user.userid];
-				} else if (room.isPrivate) {
-					userGroup = ' ';
-				}
-			}
-			if (!user.autoconfirmed && (room.auth && room.auth[user.userid] || user.group) === ' ' && room.modchat === 'autoconfirmed') {
-				connection.sendTo(room, "Because moderated chat is set, your account must be at least one week old and you must have won at least one ladder game to speak in this room.");
-				return false;
-			} else if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(room.modchat) && !user.can('seniorstaff')) {
-				var groupName = Config.groups[room.modchat].name;
-				if (!groupName) groupName = room.modchat;
-				connection.sendTo(room, 'Because moderated chat is set, you must be of rank ' + groupName +' or higher to speak in this room.');
-				return false;
-			}
-		}
-	}
-	if (room && !(user.userid in room.users)) {
-		connection.popup("You can't send a message to this room without being in it.");
-		return false;
-	}
-
-	if (typeof message === 'string') {
-		if (!message) {
-			connection.popup("Your message can't be blank.");
-			return false;
-		}
-		if (message.length > MAX_MESSAGE_LENGTH && !user.can('ignorelimits')) {
-			connection.popup("Your message is too long:\n\n" + message);
-			return false;
-		}
-
-		// remove zalgo
-		message = message.replace(/[\u0300-\u036f\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]{3,}/g, '');
-
-		if (room && room.id === 'lobby') {
-			var normalized = message.trim();
-			if ((normalized === user.lastMessage) &&
-					((Date.now() - user.lastMessageTime) < MESSAGE_COOLDOWN)) {
-				connection.popup("You can't send the same message again so soon.");
-				return false;
-			}
-			user.lastMessage = message;
-			user.lastMessageTime = Date.now();
-
-			if (user.group === ' ') {
-				if (message.toLowerCase().indexOf('spoiler:') >= 0 || message.toLowerCase().indexOf('spoilers:') >= 0) {
-					connection.sendTo(room, "Due to spam, spoilers can't be sent to the lobby.");
-					return false;
-				}
-			}
-		}
-
-		if (Config.chatfilter) {
-			return Config.chatfilter(user, room, connection, message);
-		}
-		return message;
-	}
-
-	return true;
-}
 
 exports.package = {};
 fs.readFile('package.json', function (err, data) {

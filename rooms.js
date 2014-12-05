@@ -1583,7 +1583,7 @@ var deleteInactiveRooms = setInterval(function() {
 			Rooms.global.deregisterChatRoom(Rooms.rooms[u].id);
 			Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.</b></font>');
 			Rooms.rooms[u].update();
-		} else if (!Rooms.rooms[u].active && Rooms.rooms[u].protect) {
+		} else if (!Rooms.rooms[u].active && Rooms.rooms[u].protect && !Rooms.rooms[u].isPrivate) {
 			Rooms.rooms[u].isPrivate = true;
 			Rooms.rooms[u].chatRoomData.isPrivate = true;
 			Rooms.global.writeChatRoomData();

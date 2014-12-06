@@ -1123,11 +1123,11 @@ exports.commands = {
  	kaisersrivals: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/wgHOuRE.png"><br />' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/medicham.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/sylveon.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/porygon2.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/honchkrow.gif"><br />' +
-			'<b>Ace:</b> Barida, Dolph, Balto, Tgs<br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lopunny.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/togekiss.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mawile.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/pikachu.gif"><br />' +
+			'<b>Ace: </b>Ashaury, Arkenciel, TheYellowAce and Psychic Zen<br />' +
 			'Old Friends, New rivals, being the best is the struggle for survival.</center>'
 		);
 	},

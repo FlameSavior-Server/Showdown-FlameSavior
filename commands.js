@@ -2321,7 +2321,7 @@ var commands = exports.commands = {
 			return this.sendReply("Error: Room description must not start with the phrase 'talk about'.");
 		}
 		room.desc = target;
-		this.sendReply('The room description is now: ' + target + ');
+		this.sendReply('The room description is now: ' + target + '.');
 		this.privateModCommand("(" + user.name + " changed the roomdesc to \"" + target + "\")");
 		if (room.chatRoomData) {
 			room.chatRoomData.desc = room.desc;

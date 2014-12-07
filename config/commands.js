@@ -1478,7 +1478,7 @@ terlor: function(target, room, user) {
 if (!this.canBroadcast()) return;
 this.sendReplyBox('<center><img src="http://i.imgur.com/EEcZ4J2.png" width="350"><br />' +
 	'<img src="http://i.imgur.com/bjVsAsj.png"><br />' +
-    '"I can\'t tell if I\'m alive and dreaming or dead and remembering..."</center>');
+    '"The inner machinations of my mind are an enigma" - Patrick Star</center>');
 },
 
 saago: function(target, room, user) {

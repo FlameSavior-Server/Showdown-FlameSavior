@@ -4,6 +4,17 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ou: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/RzvU4Nl.png"><br />' +
+			'<img src="http://i.imgur.com/uZg1Gqb.gif" width="170">' +
+			'<img src="http://i.imgur.com/uZg1Gqb.gif" width="170"><br />' +
+			'<b>Ace:</b> This guy?<br />' +
+			'<img src="http://i.imgur.com/OFoB19M.gif" height="140"><br />' +
+			'"A wise man once said... stuffs"</center>'
+		);
+	},
+
 	ninjad: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://33.media.tumblr.com/tumblr_m6yfs4N3jp1roew1yo1_500.gif" width="150">' +
@@ -16,11 +27,11 @@ exports.commands = {
 
 	wanted: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/lV7VO8D.png" width="150">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/420hIc9.png" width="150">' +
 			'<img src="http://i.imgur.com/yoB9A7m.png" width="250">' +
-			'<img src="http://i.imgur.com/WAcl3lv.png" width="130"><br />' +
-			'<b>Ace:</b> Lights and jd, Barida x Flare and Chakra<br />' +
-			'<img src="http://i.imgur.com/jl3OAzQ.png"></center>'
+			'<img src="http://i.imgur.com/jl3OAzQ.png" width="130"><br />' +
+			'<font color="red"><b>Ace:</b> SHZ WHY ARE YOU FUCKING LOST NIGGA</font><br />' +
+			'<img src="http://i.imgur.com/j9e0CC6.png"></center>'
 		);
 	},
 

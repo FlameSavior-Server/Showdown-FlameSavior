@@ -31,7 +31,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/yoB9A7m.png" width="250">' +
 			'<img src="http://i.imgur.com/jl3OAzQ.png" width="130"><br />' +
 			'<font color="red"><b>Ace:</b> SHZ WHY ARE YOU FUCKING LOST NIGGA</font><br />' +
-			'<img src="http://i.imgur.com/j9e0CC6.png"></center>'
+			'<img src="http://i.imgur.com/j9e0CC6.png" width="480"></center>'
 		);
 	},
 

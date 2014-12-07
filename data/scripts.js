@@ -486,8 +486,6 @@ exports.BattleScripts = {
 				if (moveData.onHitSide) hitResult = this.singleEvent('HitSide', moveData, {}, target.side, pokemon, move);
 			} else {
 				if (moveData.onHit) hitResult = this.singleEvent('Hit', moveData, {}, target, pokemon, move);
-				var ability = pokemon.battle.getAbility(pokemon.ability);
-				if (ability.onHit) hitResult = this.singleEvent('Hit', ability, {}, target, pokemon, move);
 				if (!isSelf && !isSecondary) {
 					this.runEvent('Hit', target, pokemon, move);
 				}
@@ -519,7 +517,7 @@ exports.BattleScripts = {
 				}
 			}
 		}
-		if (target && target.hp > 0 && pokemon.hp > 0 && moveData.forceSwitch) {
+		if (target && target.hp > 0 && pokemon.hp > 0 && moveData.forceSwitch && this.canSwitch(target.side)) {
 			hitResult = this.runEvent('DragOut', target, pokemon, move);
 			if (hitResult) {
 				target.forceSwitchFlag = true;
@@ -534,8 +532,7 @@ exports.BattleScripts = {
 	},
 
 	runMegaEvo: function (pokemon) {
-		var side = pokemon.side;
-		if (side.megaEvo) return false;
+		if (!pokemon.canMegaEvo) return false;
 
 		var otherForme;
 		var template;
@@ -551,6 +548,7 @@ exports.BattleScripts = {
 		}
 		if (!template.isMega) return false;
 
+		var side = pokemon.side;
 		var foeActive = side.foe.active;
 		for (var i = 0; i < foeActive.length; i++) {
 			if (foeActive[i].volatiles['skydrop'] && foeActive[i].volatiles['skydrop'].source === pokemon) {
@@ -567,9 +565,7 @@ exports.BattleScripts = {
 		var oldAbility = pokemon.ability;
 		pokemon.setAbility(template.abilities['0']);
 		pokemon.baseAbility = pokemon.ability;
-		this.runEvent('EndAbility', pokemon, oldAbility);
 
-		side.megaEvo = 1;
 		for (var i = 0; i < side.pokemon.length; i++) side.pokemon[i].canMegaEvo = false;
 		return true;
 	},
@@ -1021,7 +1017,7 @@ exports.BattleScripts = {
 				case 'fireblast':
 					if (hasMove['lavaplume']) rejected = true;
 					break;
-				case 'overheat':
+				case 'overheat': case 'flareblitz':
 					if (setupType === 'Special' || hasMove['fireblast']) rejected = true;
 					break;
 				case 'flamecharge':
@@ -1030,14 +1026,17 @@ exports.BattleScripts = {
 				case 'icebeam':
 					if (hasMove['blizzard']) rejected = true;
 					break;
+				case 'naturepower':
+					if (hasMove['hypervoice']) rejected = true;
+					break;
 				case 'surf':
 					if (hasMove['scald'] || hasMove['hydropump']) rejected = true;
 					break;
-				case 'hydropump':
+				case 'hydropump': case 'originpulse':
 					if (hasMove['razorshell'] || hasMove['scald']) rejected = true;
 					break;
 				case 'waterfall':
-					if (hasMove['aquatail']) rejected = true;
+					if (hasMove['aquatail'] || hasMove['scald']) rejected = true;
 					break;
 				case 'shadowforce': case 'phantomforce': case 'shadowsneak':
 					if (hasMove['shadowclaw']) rejected = true;

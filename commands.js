@@ -1629,28 +1629,6 @@ var commands = exports.commands = {
 		}
 	},
 
-	roomdesc: function (target, room, user) {
-		if (!target) {
-			if (!this.canBroadcast()) return;
-			var re = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
-			if (!room.desc) return this.sendReply("This room does not have a description set.");
-			this.sendReplyBox("The room description is: " + room.desc.replace(re, '<a href="$1">$1</a>'));
-			return;
-		}
-		if (!this.can('declare', null, room)) return false;
-		if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
-
-		room.desc = target;
-		this.sendReply("(The room description is now: " + target + ")");
-
-		this.privateModCommand("(" + user.name + " changed the roomdesc to: \"" + target + "\".)");
-
-		if (room.chatRoomData) {
-			room.chatRoomData.desc = room.desc;
-			Rooms.global.writeChatRoomData();
-		}
-	},
-
 	roomintro: function (target, room, user) {
 		if (!target) {
 			if (!this.canBroadcast()) return;
@@ -2313,7 +2291,6 @@ var commands = exports.commands = {
 	userid: 'showuserid',
 	showuserid: function(target, room, user) {
 		if (!target) return this.parse('/help showuserid');
-
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 
@@ -2321,6 +2298,37 @@ var commands = exports.commands = {
 
 		this.sendReply('The ID of the target is: ' + targetUser);
 	},
+
+	roomdesc: function (target, room, user) {
+		if (!target) {
+			if (!this.canBroadcast()) return;
+			var re = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
+			if (!room.desc) return this.sendReply("This room does not have a description set.");
+			this.sendReplyBox("The room description is: " + room.desc.replace(re, '<a href="$1">$1</a>'));
+			return;
+		}
+		if (!this.can('declare')) return false;
+		if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
+		var normalizedTarget = ' ' + target.toLowerCase().replace('[^a-zA-Z0-9]+', ' ').trim() + ' ';
+
+		if (normalizedTarget.indexOf(' welcome ') >= 0) {
+			return this.sendReply("Error: Room description must not contain the word 'welcome'.");
+		}
+		if (normalizedTarget.slice(0, 9) === ' discuss ') {
+			return this.sendReply("Error: Room description must not start with the word 'discuss'.");
+		}
+		if (normalizedTarget.slice(0, 12) === ' talk about ' || normalizedTarget.slice(0, 17) === ' talk here about ') {
+			return this.sendReply("Error: Room description must not start with the phrase 'talk about'.");
+		}
+		room.desc = target;
+		this.sendReply('The room description is now: ' + target + ');
+		this.privateModCommand("(" + user.name + " changed the roomdesc to \"" + target + "\")");
+		if (room.chatRoomData) {
+			room.chatRoomData.desc = room.desc;
+			Rooms.global.writeChatRoomData();
+		}
+	},
+
 
 	gethex: 'hex',
 	hex: function(target, room, user) {
@@ -2586,7 +2594,7 @@ var commands = exports.commands = {
 		if (innerBuffer.length) {
 			buffer.push('Room auth: ' + innerBuffer.join(', '));
 		}
-		if (targetId === user.id || user.can('makeroom')) {
+		if (targetId === user.userid || user.can('makeroom')) {
 			innerBuffer = [];
 			for (var i = 0; i < Rooms.global.chatRooms.length; i++) {
 				var curRoom = Rooms.global.chatRooms[i];
@@ -2922,19 +2930,6 @@ var commands = exports.commands = {
 		} else {
 			this.sendReply("User " + target + " is not locked.");
 		}
-	},
-
-	lockdt: 'lockdetails',
-	lockdetails: function (target, room, user) {
-		if (!this.can('lock')) return false;
-		var targetUser = Users.get(target);
-		if (!targetUser) return this.sendReply("User '" + target + "' does not exist.");
-		if (!targetUser.locked) return this.sendReply("User '" + targetUser.name + "' was not locked from chat.");
-		var canIp = user.can('ip', targetUser);
-		for (var ip in targetUser.ips) {
-			if (Dnsbl.cache[ip]) return this.sendReply("User '" + targetUser.name + "' is locked due to their IP " + (canIp ? "(" + ip + ") " : "") + "being in a DNS-based blacklist" + (canIp ? " (" + Dnsbl.cache[ip] + ")." : "."));
-		}
-		return this.sendReply("User '" + targetUser.name + "' is locked for unknown reasons. Check their modlog?");
 	},
 
 	b: 'ban',

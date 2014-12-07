@@ -33,7 +33,7 @@ exports.Formats = [
 		name: "Ubers",
 		section: "XY Singles",
 
-		ruleset: ['Pokemon', 'Standard Ubers', 'Swagger Clause', 'Team Preview'],
+		ruleset: ['Pokemon', 'Standard Ubers', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Ban Mod'],
 		banlist: []
 	},
 	{
@@ -41,14 +41,16 @@ exports.Formats = [
 		section: "XY Singles",
 
 		ruleset: ['OU'],
-		banlist: ['OU', 'BL', 'Heracronite', 'Gardevoirite', 'Medichamite', 'Metagrossite', 'Salamencite', 'Drizzle', 'Drought', 'Shadow Tag']
+		banlist: ['OU', 'BL', 'Altarianite', 'Diancite', 'Heracronite', 'Gardevoirite', 'Medichamite', 'Metagrossite',
+			'Drizzle', 'Drought', 'Shadow Tag'
+		]
 	},
 	{
 		name: "RU",
 		section: "XY Singles",
 
 		ruleset: ['UU'],
-		banlist: ['UU', 'BL2']
+		banlist: ['UU', 'BL2', 'Galladite']
 	},
 	{
 		name: "NU",
@@ -64,6 +66,13 @@ exports.Formats = [
 		maxLevel: 5,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
 		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar']
+	},
+	{
+		name: "Anything Goes",
+		section: "XY Singles",
+
+		ruleset: ['Pokemon', 'Endless Battle Clause', 'HP Percentage Mod', 'Team Preview'],
+		banlist: ['Unreleased', 'Illegal']
 	},
 	/*{
 		name: "CAP Plasmanta Playtest",
@@ -256,7 +265,9 @@ exports.Formats = [
 		maxForcedLevel: 50,
 		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview VGC', 'Kalos Pokedex'],
 		requirePentagon: true,
-		banlist: [], // The necessary bans are in Standard GBU
+		banlist: ['Soul Dew', 'Red Orb', 'Blue Orb', 'Swampertite', 'Sceptilite', 'Sablenite', 'Altarianite', 'Galladite', 'Audinite', 'Metagrossite',
+			'Sharpedonite', 'Slowbronite', 'Steelixite', 'Pidgeotite', 'Glalitite', 'Diancite', 'Cameruptite', 'Lopunnite', 'Salamencite', 'Beedrillite'
+		],
 		validateTeam: function (team, format) {
 			if (team.length < 4) return ['You must bring at least four Pokémon.'];
 		}
@@ -344,20 +355,18 @@ exports.Formats = [
 	///////////////////////////////////////////////////////////////////
 
 	{
-		name: "350 Cup",
+		name: "Stat Switch",
 		section: "OM of the Month",
 		column: 2,
 
-		mod: '350cup',
-		ruleset: ['Ubers', 'Evasion Moves Clause'],
-		banlist: ['Abra', 'Cranidos', 'Darumaka', 'Gastly', 'Pawniard', 'Smeargle', 'Spritzee', 'DeepSeaScale', 'DeepSeaTooth', 'Light Ball', 'Thick Club'],
-		validateSet: function (set) {
-			var template = Tools.getTemplate(set.species);
-			var item = this.getItem(set.item);
-			if (item.name === 'Eviolite' && Object.values(template.baseStats).sum() <= 350) {
-				return ['Eviolite is banned on Pokémon with 350 or lower BST.'];
-			}
-		}
+		mod: 'statswitch',
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
+		banlist: [
+			'Arceus', 'Azumarill', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Deoxys-Defense', 'Deoxys-Speed',
+			'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia',
+			'Rayquaza', 'Reshiram', 'Xerneas', 'Yveltal', 'Zekrom',
+			'Soul Dew', 'Diancite', 'Gengarite', 'Lucarionite', 'Mawilite', 'Salamencite'
+		]
 	},
 	{
 		name: "[Seasonal] Strikes Back",
@@ -559,8 +568,8 @@ exports.Formats = [
 		section: "Other Metagames",
 		column: 2,
 
-		ruleset: ['CAP Pokemon', 'Standard', 'Baton Pass Clause', 'Swagger Clause', 'Team Preview'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite']
+		ruleset: ['OU'],
+		banlist: ['Allow CAP']
 	},
 	{
 		name: "Challenge Cup",
@@ -632,7 +641,7 @@ exports.Formats = [
 		section: "Other Metagames",
 
 		ruleset: ['NU'],
-		banlist: ['NU', 'Altarianite', 'Beedrillite', 'Lopunnite']
+		banlist: ['NU', 'BL4', 'Altarianite', 'Beedrillite', 'Lopunnite']
 	},
 	{
 		name: "Inverse Battle",
@@ -680,7 +689,7 @@ exports.Formats = [
 		banlist: ['Ignore STAB Moves', 'Arceus', 'Blaziken', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Genesect', 'Giratina', 'Giratina-Origin', 'Groudon',
 			'Ho-Oh', 'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia', 'Porygon-Z', 'Rayquaza', 'Reshiram', 'Shaymin-Sky',
 			'Sylveon', 'Xerneas', 'Yveltal', 'Zekrom',
-			'Altarianite', 'Gengarite', 'Kangaskhanite', "King's Rock", 'Lucarionite', 'Mawilite', 'Razor Claw', 'Salamencite', 'Soul Dew'
+			'Altarianite', 'Gengarite', 'Kangaskhanite', "King's Rock", 'Lopunnite', 'Lucarionite', 'Mawilite', 'Razor Claw', 'Salamencite', 'Soul Dew'
 		]
 	},
 	{
@@ -695,6 +704,22 @@ exports.Formats = [
 			'Scraggy', 'Snubbull', 'Spritzee', 'Staryu', 'Timburr', 'Tirtouga', 'Trubbish', 'Vullaby', 'Vulpix', 'Zigzagoon',
 			'Omanyte'
 		]
+	},
+	{
+		name: "350 Cup",
+		section: "Other Metagames",
+
+		mod: '350cup',
+		searchShow: false,
+		ruleset: ['Ubers', 'Evasion Moves Clause'],
+		banlist: ['Abra', 'Cranidos', 'Darumaka', 'Gastly', 'Pawniard', 'Smeargle', 'Spritzee', 'DeepSeaScale', 'DeepSeaTooth', 'Light Ball', 'Thick Club'],
+		validateSet: function (set) {
+			var template = Tools.getTemplate(set.species);
+			var item = this.getItem(set.item);
+			if (item.name === 'Eviolite' && Object.values(template.baseStats).sum() <= 350) {
+				return ['Eviolite is banned on Pokémon with 350 or lower BST.'];
+			}
+		}
 	},
 	{
 		name: "Averagemons",

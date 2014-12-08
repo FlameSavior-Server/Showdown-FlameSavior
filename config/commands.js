@@ -210,9 +210,6 @@ var commands = exports.commands = {
 		if (targetUser.goldDev) {
 			this.sendReply('(Gold Development Staff)');
 		}
-		if (targetUser.goldVip) {
-			this.sendReply('|html|(<font color="gold">VIP</font> User)');
-		}
 		if (targetUser.isSysop) {
 			this.sendReply("(Pok\xE9mon Showdown System Operator)");
 		}
@@ -224,7 +221,7 @@ var commands = exports.commands = {
 			this.sendReply("IP" + ((ips.length > 1) ? "s" : "") + ": " + ips.join(", ") +
 					(user.group !== ' ' && targetUser.latestHost ? "\nHost: " + targetUser.latestHost : ""));
 		}
-		if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || targetUser.canBadge || targetUser.canPOTD || targetUser.canForcerename || targetUser.canMusicBox || targetUser.canCustomEmote) {
+		if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || /*targetUser.canBadge || targetUser.canPOTD || targetUser.canForcerename ||*/ targetUser.canMusicBox || targetUser.canCustomEmote) {
 			var i = '';
 			if (targetUser.canCustomSymbol) i += ' Custom Symbol';
 			if (targetUser.canCustomAvatar) i += ' Custom Avatar';
@@ -234,10 +231,10 @@ var commands = exports.commands = {
 			if (targetUser.canTrainerCard) i += ' Trainer Card';
 			if (targetUser.canFixItem) i += ' Alter card/avatar/music box';
 			if (targetUser.canDecAdvertise) i += ' Declare Advertise';
-			if (targetUser.canBadge) i += ' VIP Badge / Global Voice';
+			//if (targetUser.canBadge) i += ' VIP Badge / Global Voice';
 			if (targetUser.canMusicBox) i += ' Music Box';
-			if (targetUser.canPOTD) i += ' POTD';
-			if (targetUser.canForcerename) i += ' Forcerename'
+			//if (targetUser.canPOTD) i += ' POTD';
+			//if (targetUser.canForcerename) i += ' Forcerename'
 			this.sendReply('Eligible for: ' + i);
 		}
 		var output = "In rooms: ";
@@ -329,7 +326,7 @@ whois: function (target, room, user) {
 		this.sendReply("IP" + ((ips.length > 1) ? "s" : "") + ": " + ips.join(", ") +
 				(user.group !== ' ' && targetUser.latestHost ? "\nHost: " + targetUser.latestHost : ""));
 	}
-	if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || targetUser.canBadge || targetUser.canPOTD || targetUser.canForcerename || targetUser.canMusicBox || targetUser.canCustomEmote) {
+	if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || /*targetUser.canBadge || targetUser.canPOTD || targetUser.canForcerename ||*/ targetUser.canMusicBox || targetUser.canCustomEmote) {
 		var i = '';
 		if (targetUser.canCustomSymbol) i += ' Custom Symbol';
 		if (targetUser.canCustomAvatar) i += ' Custom Avatar';
@@ -339,10 +336,10 @@ whois: function (target, room, user) {
 		if (targetUser.canTrainerCard) i += ' Trainer Card';
 		if (targetUser.canFixItem) i += ' Alter card/avatar/music box';
 		if (targetUser.canDecAdvertise) i += ' Declare Advertise';
-		if (targetUser.canBadge) i += ' VIP Badge / Global Voice';
+		//if (targetUser.canBadge) i += ' VIP Badge / Global Voice';
 		if (targetUser.canMusicBox) i += ' Music Box';
-		if (targetUser.canPOTD) i += ' POTD';
-		if (targetUser.canForcerename) i += ' Forcerename'
+		//if (targetUser.canPOTD) i += ' POTD';
+		//if (targetUser.canForcerename) i += ' Forcerename'
 		this.sendReply('Eligible for: ' + i);
 	}
 	var output = "In rooms: ";

@@ -4,6 +4,16 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	kris: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/NGYDM45.gif" width="160">' +
+			'<img src="http://i.imgur.com/r40kwkf.gif" width="260">' +
+			'<img src="http://i.imgur.com/5CK9LvN.gif" width="120"><br />' +
+			'<b>Ace:</b> Zero Suit Samus and Greninja<br />' +
+			'"Move fast, hit hard, and don\'t get caught making a mistake."</center>'
+		);
+	},
+
 	ou: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/RzvU4Nl.png"><br />' +
@@ -28,8 +38,7 @@ exports.commands = {
 	wanted: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/420hIc9.png" width="150">' +
-			'<img src="http://i.imgur.com/yoB9A7m.png" width="250">' +
-			'<img src="http://i.imgur.com/jl3OAzQ.png" width="130"><br />' +
+			'<img src="http://i.imgur.com/yoB9A7m.png" width="250"><br />' +
 			'<font color="red"><b>Ace:</b> SHZ WHY ARE YOU FUCKING LOST NIGGA</font><br />' +
 			'<img src="http://i.imgur.com/j9e0CC6.png" width="480"></center>'
 		);

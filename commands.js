@@ -12,131 +12,44 @@
  */
 var fs = require('fs');
 var code = fs.createWriteStream('config/friendcodes.txt',{'flags':'a'});
-var studiouser = fs.createWriteStream('config/studiopermissions.txt',{'flags':'a'});
 var key = '';
 var hint = '';
 var isMotd = false;
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'badge', 'potd', 'musicbox', 'vip', 'emote'];
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'musicbox', 'emote'];
 var closeShop = false;
 var closedShop = 0;
 var bank = exports.bank = {
-			bucks: function(uid, amount, take) {
-			   	var data = fs.readFileSync('config/money.csv','utf8')
-				var match = false;
-				var money = 0;
-				var row = (''+data).split("\n");
-				var line = '';
-				for (var i = row.length; i > -1; i--) {
-					if (!row[i]) continue;
-					var parts = row[i].split(",");
-					var userid = toId(parts[0]);
-					if (uid.userid == userid) {
-						var x = Number(parts[1]);
-						var money = x;
-						match = true;
-						if (match === true) {
-							line = line + row[i];
-							break;
-						}
-					}
-				}
-				uid.money = money;
-				if (take === true){if (amount <= uid.money){
-				uid.money = uid.money - amount; take = false;}
-				else return false;
-				}
-				else {uid.money = uid.money + amount;}
+	bucks: function(uid, amount, take) {
+	   	var data = fs.readFileSync('config/money.csv','utf8')
+		var match = false;
+		var money = 0;
+		var row = (''+data).split("\n");
+		var line = '';
+		for (var i = row.length; i > -1; i--) {
+			if (!row[i]) continue;
+			var parts = row[i].split(",");
+			var userid = toId(parts[0]);
+			if (uid.userid == userid) {
+				var x = Number(parts[1]);
+				var money = x;
+				match = true;
 				if (match === true) {
-					var re = new RegExp(line,"g");
-					fs.readFile('config/money.csv', 'utf8', function (err,data) {
-					if (err) {
-						return console.log(err);
-					}
-					var result = data.replace(re, uid.userid+','+uid.money);
-					fs.writeFile('config/money.csv', result, 'utf8', function (err) {
-						if (err) return console.log(err);
-					});
-					});
-				} else {
-					var log = fs.createWriteStream('config/money.csv', {'flags': 'a'});
-					log.write("\n"+uid.userid+','+uid.money);
-				}
-				return true;
-				},
-
-	    coins: function(uid, amount, take) {
-
-	    var lore = fs.readFileSync('config/coins.csv','utf8')
-                var match = false;
-                var coins = 0;
-                var spag = (''+lore).split("\n");
-                var hetti = '';
-                for (var i = spag.length; i > -1; i--) {
-                    if (!spag[i]) continue;
-                    var parts = spag[i].split(",");
-                    var userid = toId(parts[0]);
-					if (uid.userid == userid) {
-                        var x = Number(parts[1]);
-                        var coins = x;
-                        match = true;
-                        if (match === true) {
-                            hetti = hetti + spag[i];
-                            break;
-                        }
-                    }
-                }
-                uid.coins = coins;
-if (take === true){if (amount <= uid.coins){
-				uid.coins = uid.coins - amount; take = false;}
-				else return false;
-				}
-				else {uid.coins = uid.coins + amount;}
-
-                if (match === true) {
-                    var be = new RegExp(hetti,"g");
-                    fs.readFile('config/coins.csv', 'utf8', function (err,lore) {
-                        if (err) {
-                            return console.log(err);
-                        }
-                        var result = lore.replace(be, uid.userid+','+uid.coins);
-                        fs.writeFile('config/coins.csv', result, 'utf8', function (err) {
-                            if (err) return console.log(err);
-                        });
-                    });
-                } else {
-                    var log = fs.createWriteStream('config/coins.csv', {'flags': 'a'});
-                    log.write("\n"+uid.userid+','+uid.coins);
-                } return true;
-		}
-
-
-	}
-	var economy = exports.economy = {
-		writeMoney: function(uid, amount) {
-			var data = fs.readFileSync('config/money.csv','utf8')
-			var match = false;
-			var money = 0;
-			var row = (''+data).split("\n");
-			var line = '';
-			for (var i = row.length; i > -1; i--) {
-				if (!row[i]) continue;
-				var parts = row[i].split(",");
-				var userid = toId(parts[0]);
-				if (uid.userid == userid) {
-					var x = Number(parts[1]);
-					var money = x;
-					match = true;
-					if (match === true) {
-						line = line + row[i];
-						break;
-					}
+					line = line + row[i];
+					break;
 				}
 			}
-			uid.money = money;
-			uid.money = uid.money + amount;
-			if (match === true) {
-				var re = new RegExp(line,"g");
-				fs.readFile('config/money.csv', 'utf8', function (err,data) {
+		}
+		uid.money = money;
+		if (take === true) {
+			if (amount <= uid.money){
+				uid.money = uid.money - amount; take = false;
+			}
+			else return false;
+		}
+		else {uid.money = uid.money + amount;}
+		if (match === true) {
+			var re = new RegExp(line,"g");
+			fs.readFile('config/money.csv', 'utf8', function (err,data) {
 				if (err) {
 					return console.log(err);
 				}
@@ -144,13 +57,99 @@ if (take === true){if (amount <= uid.coins){
 				fs.writeFile('config/money.csv', result, 'utf8', function (err) {
 					if (err) return console.log(err);
 				});
-				});
-			} else {
-				var log = fs.createWriteStream('config/money.csv', {'flags': 'a'});
-				log.write("\n"+uid.userid+','+uid.money);
+			});
+		} else {
+			var log = fs.createWriteStream('config/money.csv', {'flags': 'a'});
+			log.write("\n"+uid.userid+','+uid.money);
+		}
+		return true;
+	},
+	
+	coins: function(uid, amount, take) {
+		var lore = fs.readFileSync('config/coins.csv','utf8');
+		var match = false;
+		var coins = 0;
+		var spag = (''+lore).split("\n");
+		var hetti = '';
+		for (var i = spag.length; i > -1; i--) {
+			if (!spag[i]) continue;
+			var parts = spag[i].split(",");
+			var userid = toId(parts[0]);
+			if (uid.userid == userid) {
+				var x = Number(parts[1]);
+				var coins = x;
+				match = true;
+				if (match === true) {
+					hetti = hetti + spag[i];
+					break;
+				}
 			}
-		},
+		}
+		uid.coins = coins;
+		if (take === true) {
+			if (amount <= uid.coins){
+				uid.coins = uid.coins - amount; take = false;
+			} else return false;
+		} else {
+			uid.coins = uid.coins + amount;
+		}
+                if (match === true) {
+			var be = new RegExp(hetti,"g");
+			fs.readFile('config/coins.csv', 'utf8', function (err,lore) {
+				if (err) {
+					return console.log(err);
+				}
+				var result = lore.replace(be, uid.userid+','+uid.coins);
+				fs.writeFile('config/coins.csv', result, 'utf8', function (err) {
+					if (err) return console.log(err);
+				});
+			});
+                } else {
+			var log = fs.createWriteStream('config/coins.csv', {'flags': 'a'});
+			log.write("\n"+uid.userid+','+uid.coins);
+		} return true;
 	}
+}
+var economy = exports.economy = {
+	writeMoney: function(uid, amount) {
+		var data = fs.readFileSync('config/money.csv','utf8');
+		var match = false;
+		var money = 0;
+		var row = (''+data).split("\n");
+		var line = '';
+		for (var i = row.length; i > -1; i--) {
+			if (!row[i]) continue;
+			var parts = row[i].split(",");
+			var userid = toId(parts[0]);
+			if (uid.userid == userid) {
+				var x = Number(parts[1]);
+				var money = x;
+				match = true;
+				if (match === true) {
+					line = line + row[i];
+					break;
+				}
+			}
+		}
+		uid.money = money;
+		uid.money = uid.money + amount;
+		if (match === true) {
+			var re = new RegExp(line,"g");
+			fs.readFile('config/money.csv', 'utf8', function (err,data) {
+				if (err) {
+					return console.log(err);
+				}
+				var result = data.replace(re, uid.userid+','+uid.money);
+				fs.writeFile('config/money.csv', result, 'utf8', function (err) {
+					if (err) return console.log(err);
+				});
+			});
+		} else {
+			var log = fs.createWriteStream('config/money.csv', {'flags': 'a'});
+			log.write("\n"+uid.userid+','+uid.money);
+		}
+	},
+}
 var ipbans = fs.createWriteStream('config/ipbans.txt', {'flags': 'a'});
 var avatar = fs.createWriteStream('config/avatars.csv', {'flags': 'a'});
 //spamroom
@@ -176,9 +175,7 @@ var aList = ["kupo","panpaw","corn","stevoduhhero","fallacie","fallacies","imana
 */
 var canTalk;
 var fs = require('fs');
-
 const MAX_REASON_LENGTH = 300;
-
 var commands = exports.commands = {
 	/**** normal stuff ****/
 
@@ -873,7 +870,7 @@ var commands = exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target2 === 'potd') {
+		/*if (target2 === 'potd') {
 			price = 45;
 			if (price <= user.money) {
 				user.money = user.money - price;
@@ -894,7 +891,7 @@ var commands = exports.commands = {
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
-		}
+		}*/
 		if (target2 === 'declare') {
 			price = 25;
 			if (price <= user.money) {
@@ -935,10 +932,10 @@ var commands = exports.commands = {
 				'<tr><td>Trainer</td><td>Buys <a href="http://pastebin.com/1GBmc4eM">a trainer card</a> which shows information through a command such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
 				'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box or custom emote (don\'t buy if you have neither)!</td><td>15</td></tr>' +
 				'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin or Leader in the lobby. This can be used for room advertisement (not server)</td><td>25</td></tr>' +
-				'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
+				//'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
 				'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).</td><td>60</td></tr>' +
 				'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>100</td></tr>' +
-				'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
+				//'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
 				'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>'
 				);
 		}
@@ -1111,7 +1108,7 @@ var commands = exports.commands = {
 					Rooms.rooms.lobby.add(user.name + ' has stolen the ability to alter a current trainer card or avatar from the shop!');
 					targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
 				}
-			}
+			}/*
 			if (theItem === 'potd') {
 				if (targetUser.canPOTD === true) {
 					return this.sendReply('This user has already bought that item from the shop... no need for another.');
@@ -1121,17 +1118,6 @@ var commands = exports.commands = {
 					targetUser.canPOTD = true;
 					Rooms.rooms.lobby.add(user.name + ' has stolen the ability to set POTD from the shop!');
 					targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
-				}
-			}
-			if (theItem === 'badge') {
-				if (targetUser.canBadge === true) {
-					return this.sendReply('This user has already bought that item from the shop... no need for another.');
-				}
-				if (targetUser.canBadge === false) {
-					matched = true;
-					targetUser.canBadge = true;
-					Rooms.rooms.lobby.add(user.name + ' has stolen a badge from the shop!');
-					targetUser.send(user.name + ' has given you the ability to claim a ' + theItem + '!');
 				}
 			}
 			if (theItem === 'vip') {
@@ -1144,7 +1130,7 @@ var commands = exports.commands = {
 					Rooms.rooms.lobby.add(targetUser + ' revieved VIP status from '+user.name+'!');
 					targetUser.send(user.name + ' has given you the ability to claim a ' + theItem + '!');
 				}
-			}
+			}*/
 			if (theItem === 'declare') {
 				if (targetUser.canDecAdvertise === true) {
 					return this.sendReply('This user has already bought that item from the shop... no need for another.');
@@ -1156,11 +1142,9 @@ var commands = exports.commands = {
 					targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
 				}
 			}
-			else
-				if (!matched) return this.sendReply('Maybe that item isn\'t in the shop yet.');
+			else if (!matched) return this.sendReply('Maybe that item isn\'t in the shop yet.');
 		}
-		else
-			return this.sendReply('Shop item could not be found, please check /shop for all items - ' + theItem);
+		else return this.sendReply('Shop item could not be found, please check /shop for all items - ' + theItem);
 	},
 
 	removeitem: function(target, room, user) {
@@ -1174,15 +1158,13 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
-
 		if (target === 'symbol') {
 			if (targetUser.canCustomSymbol) {
 				targetUser.canCustomSymbol = false;
 				this.sendReply(targetUser.name + ' no longer has a custom symbol ready to use.');
 				targetUser.send(user.name + ' has removed the custom symbol from you.');
 			}
-			else
-				return this.sendReply('They do not have a custom symbol for you to remove.');
+			else return this.sendReply('They do not have a custom symbol for you to remove.');
 		}
 		else if (target === 'custom') {
 			if (targetUser.canCustomAvatar) {
@@ -1190,8 +1172,7 @@ var commands = exports.commands = {
 				this.sendReply(targetUser.name + ' no longer has a custom avatar ready to use.');
 				targetUser.send(user.name + ' has removed the custom avatar from you.');
 			}
-			else
-				return this.sendReply('They do not have a custom avatar for you to remove.');
+			else return this.sendReply('They do not have a custom avatar for you to remove.');
 		}
 		else if (target === 'emote') {
 			if (targetUser.canCustomEmote) {
@@ -1199,8 +1180,7 @@ var commands = exports.commands = {
 				this.sendReply(targetUser.name + ' no longer has a custom emote ready to use.');
 				targetUser.send(user.name + ' has removed the custom emote from you.');
 			}
-			else
-				return this.sendReply('They do not have a custom emote for you to remove.');
+			else return this.sendReply('They do not have a custom emote for you to remove.');
 		}
 		else if (target === 'animated') {
 			if (targetUser.canAnimatedAvatar) {
@@ -1208,8 +1188,7 @@ var commands = exports.commands = {
 				this.sendReply(targetUser.name + ' no longer has a animated avatar ready to use.');
 				targetUser.send(user.name + ' has removed the animated avatar from you.');
 			}
-			else
-				return this.sendReply('They do not have an animated avatar for you to remove.');
+			else return this.sendReply('They do not have an animated avatar for you to remove.');
 		}
 		else if (target === 'room') {
 			if (targetUser.canChatRoom) {
@@ -1217,8 +1196,7 @@ var commands = exports.commands = {
 				this.sendReply(targetUser.name + ' no longer has a chat room ready to use.');
 				targetUser.send(user.name + ' has removed the chat room from you.');
 			}
-			else
-				return this.sendReply('They do not have a chat room for you to remove.');
+			else return this.sendReply('They do not have a chat room for you to remove.');
 		}
 		else if (target === 'trainer') {
 			if (targetUser.canTrainerCard) {
@@ -1226,8 +1204,7 @@ var commands = exports.commands = {
 				this.sendReply(targetUser.name + ' no longer has a trainer card ready to use.');
 				targetUser.send(user.name + ' has removed the trainer card from you.');
 			}
-			else
-				return this.sendReply('They do not have a trainer card for you to remove.');
+			else return this.sendReply('They do not have a trainer card for you to remove.');
 		}
 		else if (target === 'musicbox') {
 			if (targetUser.canMusicBox) {
@@ -1235,8 +1212,7 @@ var commands = exports.commands = {
 				this.sendReply(targetUser.name + ' no longer has a music box ready to use.');
 				targetUser.send(user.name + ' has removed the music box from you.');
 			}
-			else
-				return this.sendReply('They do not have a music box for you to remove.');
+			else return this.sendReply('They do not have a music box for you to remove.');
 		}
 		else if (target === 'fix') {
 			if (targetUser.canFixItem) {
@@ -1244,26 +1220,22 @@ var commands = exports.commands = {
 				this.sendReply(targetUser.name + ' no longer has the fix to use.');
 				targetUser.send(user.name + ' has removed the fix from you.');
 			}
-			else
-				return this.sendReply('They do not have a trainer card for you to remove.');
+			else return this.sendReply('They do not have a trainer card for you to remove.');
 		}
 		else if (target === 'forcerename') {
 			if (targetUser.canForcerename) {
 				targetUser.canForcerename = false;
 				this.sendReply(targetUser.name + ' no longer has the forcerename to use.');
 				targetUser.send(user.name + ' has removed forcerename from you.');
-			}
-			else
-				return this.sendReply('They do not have a forcerename for you to remove.');
-		}
+			} else return this.sendReply('They do not have a forcerename for you to remove.');
+		}/*
 		else if (target === 'potd') {
 			if (targetUser.canPOTD) {
 				targetUser.canPOTD = false;
 				this.sendReply(targetUser.name + ' no longer can set POTD.');
 				targetUser.send(user.name + ' has removed the POTD from you.');
 			}
-			else
-				return this.sendReply('They do not have the POTD ability for you to remove.');
+			else return this.sendReply('They do not have the POTD ability for you to remove.');
 		}
 		else if (target === 'badge') {
 			if (targetUser.canBadge) {
@@ -1271,51 +1243,50 @@ var commands = exports.commands = {
 				this.sendReply(targetUser.name + ' no longer has a badge.');
 				targetUser.send(user.name + ' has removed the VIP badge from you.');
 			}
-			else
-				return this.sendReply('They do not have a VIP badge for you to remove.');
-		}
+			else return this.sendReply('They do not have a VIP badge for you to remove.');
+		}*/
 		else if (target === 'declare') {
 			if (targetUser.canDecAdvertise) {
 				targetUser.canDecAdvertise = false;
 				this.sendReply(targetUser.name + ' no longer has a declare ready to use.');
 				targetUser.send(user.name + ' has removed the declare from you.');
 			}
-			else
-				return this.sendReply('They do not have a trainer card for you to remove.');
+			else return this.sendReply('They do not have a trainer card for you to remove.');
 		}
-		else
-			return this.sendReply('That isn\'t a real item you fool!');
+		else return this.sendReply('That isn\'t a real item you fool!');
 	},
 
-	website:function(target, room, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');
-
+	website: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');
 	},
 
-	news:function(target, room, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('Gold\'s news can be found <a href="http://goldserver.weebly.com/news.html">here</a>.');
+	news: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Gold\'s news can be found <a href="http://goldserver.weebly.com/news.html">here</a>.');
+	},
 
+	facebook: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Gold\'s Facebook page can be found <a href="https://www.facebook.com/pages/Gold-Showdown/585196564960185">here</a>.');
 	},
 
 	radio: 'plug',
-	plug:function(target, room, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('Gold\'s Plug.dj can be found <a href="http://plug.dj/gold-server/">here</a>.');
-
+	plug: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Gold\'s Plug.dj can be found <a href="http://plug.dj/gold-server/">here</a>.');
 	},
 
-	ps:function(target, room, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<center>Cick the Poké Ball to enter Pawn\'s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
+	ps: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Cick the Poké Ball to enter Pawn\'s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
 	},
 
 	/*********************************************************
 	* Friend Codes
 	*********************************************************/
 	fch: 'friendcodehelp',
-	friendcodehelp:function(target, room, user) {
+	friendcodehelp: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>Friend Code Help:</b> <br><br />' +
                 '/friendcode (/fc) [friendcode] - Sets your Friend Code.<br />' +
@@ -1381,7 +1352,7 @@ var commands = exports.commands = {
 					if (err) t.sendReply(err);
 					t.sendReply('The Friendcode '+line+' has been deleted.');
 				});
-			}else{
+			} else {
 				t.sendReply('There is no match.');
 			}
 		});
@@ -1430,26 +1401,25 @@ var commands = exports.commands = {
 
 	pb: 'permaban',
 	pban: 'permaban',
-    permban: 'permaban',
-    permaban: function(target, room, user) {
-                if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
-                if (!this.can('pban')) return false;
-                target = this.splitTarget(target);
-                var targetUser = this.targetUser;
-                if (!targetUser) {
-                        return this.sendReply('User '+this.targetUsername+' not found.');
-                }
-                if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
-                        var problem = ' but was already banned';
-                        return this.privateModCommand('('+targetUser.name+' would be banned by '+user.name+problem+'.)');
-                }
-
-                targetUser.popup(user.name+" has permanently banned you.");
-                this.addModCommand(targetUser.name+" was permanently banned by "+user.name+".");
-				this.add('|unlink|' + targetUser.userid);
-                targetUser.ban();
-                ipbans.write('\n'+targetUser.latestIp);
-        },
+	permban: 'permaban',
+	permaban: function(target, room, user) {
+		if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
+		if (!this.can('pban')) return false;
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
+			var problem = ' but was already banned';
+			return this.privateModCommand('('+targetUser.name+' would be banned by '+user.name+problem+'.)');
+		}
+		targetUser.popup(user.name+" has permanently banned you.");
+		this.addModCommand(targetUser.name+" was permanently banned by "+user.name+".");
+		this.add('|unlink|' + targetUser.userid);
+		targetUser.ban();
+		ipbans.write('\n'+targetUser.latestIp);
+	},
 
 	r: 'reply',
 	reply: function(target, room, user) {

@@ -4,6 +4,14 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	faeye: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/NxLsMyp.png" width="450"><br />' +
+			'<b>Ace:</b> Gyarados<br />' +
+			'"They used to laugh when I used splash. Now I laugh at their corpses."</center>'
+		);
+	},
+
 	kris: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/NGYDM45.gif" width="160">' +

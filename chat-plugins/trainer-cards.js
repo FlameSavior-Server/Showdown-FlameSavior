@@ -4,6 +4,31 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	best: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Bmto8QL.png"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aegislash-blade.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/togekiss.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/pikachu.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/manaphy.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mawile-mega.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/metagross.gif"><br />' +
+			'<ins><b>Monotype\'s finest</b></ins><br />' +
+			'<b>PK-Kaiser, Ashaury, TheYellowAce, Booty, ArkenCiel, Dolph</b><br />' +
+			'<b><font color="#E6B800">"We don\'t only fuck bitches, we 6-0 them too."</font></b></center>'
+		);
+	},
+
+	boss: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.grafiksmania.com/glitter/dark/2settembrevn7.gif" width="180">' +
+			'<img src="http://i.imgur.com/s5O2o5a.gif">' +
+			'<img src="http://i.imgur.com/JWk0OMR.jpg" width="180"><br />' +
+			'<b>Ace:</b> Umbreon and Tyranitar<br />' +
+			'You thought I was banned? Sorry to disappoint..</center>'
+		);
+	},
+
 	faeye: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/NxLsMyp.png" width="450"><br />' +
@@ -3241,16 +3266,6 @@ exports.commands = {
 		);
 	},
 
-	mating: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i254.photobucket.com/albums/hh108/naten2006/oie_1944237QcDokLVq_zps0977c0b9.gif">' +
-			'<img src="http://i254.photobucket.com/albums/hh108/naten2006/cooltext1482514275_zps4e7ca2e6.png">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/kecleon.gif"><br />' +
-			'<b>Aces:</b> Uxie and Kecleon<br />' +
-			'<font color=purple>Maten (pronounced Mating): Now and Forever.</font></center>'
-		);
-	},
-
 	crypt: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/B0NESFk.jpg?1" width="150">' +
@@ -4964,15 +4979,6 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://25.media.tumblr.com/855789c7dfd76c65d425bffb0311fc62/tumblr_mid2ub92ad1rg8h5ro1_500.jpg" height="150"><br />' +
 			'<img src="http://i.imgur.com/J6eVqfI.gif"><br />' +
 			'<i>Intelligence without ambition is a weapon without reason. Like using a Dagger, sharpen your senses and strike through your weakness.</i></center>'
-		);
-	},
-
-	couple: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="https://1-media-cdn.foolz.us/ffuuka/board/vp/image/1389/99/1389993289798.png" width="130">' +
-			'<img src="http://i.imgur.com/7vNiKOM.gif">' +
-			'<img src="http://i.imgur.com/lRlU8KQ.gif" width="130"><br />' +
-			'You know it\'s true love when you give each other nicknames such as, Bitch, Slut and Whore.</center>'
 		);
 	},
 

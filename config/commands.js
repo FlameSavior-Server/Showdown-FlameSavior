@@ -1185,7 +1185,7 @@ var commands = exports.commands = {
 			'The room founder can also use:<br />' +
 			'- /roomowner <em>username</em>: appoint a room owner<br />' +
 			'- /roomdeowner <em>username</em>: remove a room owner<br />' +
-			'</div>');
+		);
 	},
 
 	restarthelp: function (target, room, user) {

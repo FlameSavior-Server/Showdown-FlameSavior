@@ -1898,7 +1898,7 @@ var commands = exports.commands = {
 		Rooms.rooms.staff.add('|html|<b>'+targetUser+'</b>\'s room request has been <font color="red">denied</font> by '+user.userid+'.');
 		Rooms.rooms.room.add('|html|<b>'+targetUser+'</b>\'s room request has been <font color="red">denied</font> by '+user.userid+'.');
 
-		targetUser.send('|pm|~Room Request|'+targetUser+'|Hello, "'+targetUser+'".  Sorry, your recent room request has been denied by the staff.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we did\'t see a point for it on the server.  Best of luck.  Regards, Gold Staff.');
+		targetUser.send('|pm|~Room Request|'+targetUser+'|Hello, "'+targetUser+'".  Sorry, your recent room request has been denied by the staff.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we didn\'t see a point for it on the server.  Best of luck.  Regards, Gold Staff.');
 
 
 	},

@@ -4,6 +4,28 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	buffy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/z9SkzH5.gif" width="160">' +
+			'<img src="http://i.imgur.com/zitFTXe.png" width="220">' +
+			'<img src="http://i.imgur.com/YvwFt4e.gif" width="160"><br />' +
+			'<img src="http://i.imgur.com/q8LZML6.gif"><br />' +
+			'<b>Ace:</b> Terrible puns and a stake<br />' +
+			'I\'m the slayer, ask me how!</center>'
+		);
+	},
+
+	erica: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc04.deviantart.net/fs71/f/2013/300/e/e/azami___pokemon_trainer_oc_by_yukidemon-d6s2oby.png" height="200">' +
+			'<img src="http://i.imgur.com/7ku9W8Z.png">' +
+			'<img src="http://i.imgur.com/ySlRhvy.jpg" width="200"><br />' +
+			'<b>Ace:</b> Love, hope, and the will to strive on<br />' +
+			'"This is gratitude from me to you. Just a friendly reminder that you are special."<br />' +
+			'<a href="http://pastebin.com/cTQ2rttv"><button><i>A smile</i></button></a></center>'
+		);
+	},
+
 	best: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Bmto8QL.png"><br />' +

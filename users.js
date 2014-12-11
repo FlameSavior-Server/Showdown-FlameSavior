@@ -1410,12 +1410,12 @@ User = (function () {
 			if (room.id === 'seniorstaff' && !this.can('seniorstaff')) return false;
 			if (room.bannedUsers) {
 				if (this.userid in room.bannedUsers || this.autoconfirmed in room.bannedUsers) {
-					return false;
+					return null;
 				}
 			}
 			if (this.ips && room.bannedIps) {
 				for (var ip in this.ips) {
-					if (ip in room.bannedIps) return false;
+					if (ip in room.bannedIps) return null;
 				}
 			}
 		}
@@ -1430,7 +1430,7 @@ User = (function () {
 					this.connections[i].sendTo(room.id, '|raw|<font color=red><b>This room is currently inactive. If it remains inactive for 48 hours it will automatically be deleted.</b></font>');
 				}
 			}
-			return;
+			return true;
 		}
 		if (!connection.rooms[room.id]) {
 			if (!this.roomCount[room.id]) {

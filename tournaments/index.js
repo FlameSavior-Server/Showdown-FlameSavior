@@ -1031,7 +1031,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 			"/tour getusers: Lists the users in the current tournament.<br />" +
 			"/tour size &lt;size>: Sets the maximum number of players allowed in the tournament.<br />" +
 			"/tour on/off: Enables/disables allowing mods to start tournaments.<br />" +
-			"More detailed help can be found <a href=\"https://gist.github.com/kotarou3/7872574\">here</a>"
+			"More detailed help can be found <a href=\"https://gist.github.com/verbiage/0846a552595349032fbe\">here</a>"
 		);
 	} else if (cmd === 'on' || cmd === 'enable') {
 		if (!this.can('tournamentsmanagement', null, room)) return;

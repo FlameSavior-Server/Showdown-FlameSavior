@@ -94,8 +94,7 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/420hIc9.png" width="150">' +
 			'<img src="http://i.imgur.com/yoB9A7m.png" width="250"><br />' +
-			'<font color="red"><b>Ace:</b> SHZ WHY ARE YOU FUCKING LOST NIGGA</font><br />' +
-			'<img src="http://i.imgur.com/j9e0CC6.png" width="480"></center>'
+			'<font color="red"><b>Ace:</b> SHZ WHY ARE YOU FUCKING LOST NIGGA</font></center>'
 		);
 	},
 

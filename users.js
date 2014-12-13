@@ -1568,6 +1568,7 @@ User = (function () {
 
 		if (message.toLowerCase().indexOf("psim") > -1 && message.toLowerCase().indexOf("gold.psim.us") == -1 && !this.goldDev || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~gold") == -1 && !this.goldDev) {
 			connection.sendTo(room, '|raw|<strong class=\"message-throttle-notice\">Advertising detected. Your message was not sent and staff have been notified.</strong>');
+			connection.sendTo(room, '|popup|**Advertising detected.  Your message was not sent and staff have been notified.**');
 			for (var u in Users.users) {
 				if (Users.users[u].group == '~' || Users.users[u].group == '&' || Users.users[u].group == '@' || Users.users[u].group == '%') {
 					Users.users[u].send('|pm|~Server|'+Users.users[u].group+Users.users[u].name+'|'+connection.user.name+' triggered the advertising filter. Room: '+room.id+' Message: ' + message);

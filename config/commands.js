@@ -2367,6 +2367,11 @@ var commands = exports.commands = {
             '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" title=Donate now!">'
         );
     },
+    
+    vip: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('Information about what a VIP user is can be found <a href="http://goldserver.weebly.com/vip.html">here</a>.');
+    },
 
     links: function(target, room, user) {
         if (!this.canBroadcast()) return;

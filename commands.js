@@ -1276,7 +1276,7 @@ var commands = exports.commands = {
     radio: 'plug',
     plug: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('Gold\'s Plug.dj can be found <a href="https://plug.dj/nightcore-331">here</a>.');
+        this.sendReplyBox('Gold\'s OFFICIAL Plug.dj can be found <a href="https://plug.dj/nightcore-331">here</a>.');
     },
 
     ps: function(target, room, user) {

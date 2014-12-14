@@ -2346,7 +2346,7 @@ var commands = exports.commands = {
     gaming: 'afk',
     busy: 'afk',
     afk: function(target, room, user, connection, cmd) {
-        if (!this.can('broadcast')) return false;
+    	if (!this.canTalk()) return;
         if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
         if (!user.isAway) {
             user.originalName = user.name;
@@ -2379,7 +2379,7 @@ var commands = exports.commands = {
     },
 
     back: function(target, room, user, connection) {
-        if (!this.can('broadcast')) return false;
+    	if (!this.canTalk()) return;
         if (user.isAway) {
             if (user.name === user.originalName) {
                 user.isAway = false;

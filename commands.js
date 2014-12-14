@@ -2366,11 +2366,13 @@ var commands = exports.commands = {
             //delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
             delete Users.get(awayName);
             user.forceRename(awayName, undefined, true);
-            var color = hashColor('' + toId(user.originalName) + '');
-            if (cmd == 'sleep') cmd = 'sleeping';
-            if (user.userid == 'panpawn') color = '#DA9D01';
-            this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + user.originalName + '</font></b></button> is now ' + cmd + '. ' + (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
             user.isAway = true;
+            if (!(!this.can('broadcast'))) {
+            	var color = hashColor('' + toId(user.originalName) + '');
+            	if (cmd == 'sleep') cmd = 'sleeping';
+            	if (user.userid == 'panpawn') color = '#DA9D01';
+            	this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + user.originalName + '</font></b></button> is now ' + cmd + '. ' + (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
+            }
         } else {
             return this.sendReply('You are already set as away, type /back if you are now back.');
         }
@@ -2389,11 +2391,13 @@ var commands = exports.commands = {
             user.forceRename(newName, undefined, true);
             //user will be authenticated
             user.authenticated = true;
-            var color = hashColor('' + toId(user.name) + '');
-            if (user.userid == 'panpawn') color = '#DA9D01';
-            this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + newName + '</font></b></button> is no longer away.');
-            user.originalName = '';
             user.isAway = false;
+            if (!(!this.can('broadcast'))) {
+            	var color = hashColor('' + toId(user.name) + '');
+            	if (user.userid == 'panpawn') color = '#DA9D01';
+            	this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + newName + '</font></b></button> is no longer away.');
+            	user.originalName = '';
+            }
         } else {
             return this.sendReply('You are not set as away.');
         }

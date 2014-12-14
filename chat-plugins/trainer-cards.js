@@ -56,8 +56,8 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani/gliscor.gif">' +
 			'<img src="http://i.imgur.com/UK9uvOs.png" width="360">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gastrodon.gif"><br />' +
-			'<font color="red"><blink><b>Ace:</font> <font color="black">Gliscor</font></b><br />' +
-			'QuoteHere.</center>'
+			'<font color="red"><blink><b>Ace:</blink></b></font> <font color="black"><b><blink>Gliscor</blink></font></b><br />' +
+			'Quotes are for skrubz.</center>'
 		);
 	},
 

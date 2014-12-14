@@ -4,6 +4,63 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	amethyst: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/hAEIECS.png" width="500"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/togekiss.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gengar.gif"><br />' +
+			'<img src="http://i.imgur.com/NFGloEH.png">' +
+			'<img src="http://i.imgur.com/2C2LbCF.png"><br />' +
+			'<img src="http://i.imgur.com/wKnMUCM.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/tyranitar.gif"><br />' +
+			'<img src="http://i.imgur.com/VZJBskC.png">' +
+			'<img src="http://i.imgur.com/YGk1tjh.png"><br />' +
+			'"Tough as Diamond, Cold as February, we rise once more for Justice, beaconing for all to see!"<br />' +
+			'<button name="send" value="/transferbucks Elite F@ur Boss, 1">Donate a buck</buton>' +
+			'<a href="http://theamethystleague.weebly.com/"><button>Our website</a></button>' +
+			'<a href="http://askhelixfossil.com/#j76hyz"><button>Click =o</a></button></center>'
+		);
+	},
+
+	normal: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://imgur.com/IYyhqGA.png"><br />' +
+			'<img src="http://i.imgur.com/IDwJneX.gif">' +
+			'<img src="http://i.imgur.com/RKIFexm.png" width="180">' +
+			'<img src="http://i.imgur.com/fq3ERXZ.png"><br />' +
+			'<img src="http://i.imgur.com/YrFBxTH.gif" width="180">' +
+			'<img src="http://i.imgur.com/D7p7LQy.gif" width="180">' +
+			'<img src="http://i.imgur.com/p81gU0b.gif" width="180"><br />' +
+			'<b>Ace:</b> <font color="limegreen">Lemon,</font> <font color="gold">Bush,</font> <font color="blue">Balto</font><br />' +
+			'"We will stall you out of every fucking move you have."</center>'
+		);
+	},
+
+	battleroyale: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/JNUrVh9.jpg" width="500"></center>'
+		);
+	},
+
+	sexist: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/LG1uawU.png"><br />' +
+			'<img src="http://puu.sh/dtRny/57c6e17c54.png"><br />' +
+			'<b>Ace:</b> <i><font color=#FF00FF>Sexism</i></font><br />' +
+			'I use flawed logic to justify my dislike for certain people.</center>'
+		);
+	},
+
+	kgbeast: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani/gliscor.gif">' +
+			'<img src="http://i.imgur.com/UK9uvOs.png" width="360">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gastrodon.gif"><br />' +
+			'<font color="red"><blink><b>Ace:</font> <font color="black">Gliscor</font></b><br />' +
+			'QuoteHere.</center>'
+		);
+	},
+
 	buffy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/z9SkzH5.gif" width="160">' +

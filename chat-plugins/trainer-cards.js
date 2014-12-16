@@ -4,6 +4,65 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	deception: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/g63V0Xo.jpg" width="350"><br />' +
+			'<img src="http://i.imgur.com/uLz2417.jpg" width="180">' +
+			'<img src="http://i.imgur.com/NKquOs2.jpg" width="180">' +
+			'<img src="http://i.imgur.com/8a0fCMH.jpg" width="180"><br />' +
+			'<b>Ace:</b> Time, Lights, Max and Zeall<br />' +
+			'It\'s not our fault we\'re fucking badasses.</center>'
+		);
+	},
+
+	originals: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/IavKqFc.png"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lucario-mega.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/venusaur.gif"><br />' +
+			'<b>Ace:</b> The Forgotten Best<br />' +
+			'Better then the best, and the real originals.</center>'
+		);
+	},
+
+	bug: 'genericbug',
+	genericbug: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/QSEQnQg.png"><br />' +
+			'<img src="http://i.imgur.com/KuHKgZf.gif">' +
+			'<img src="http://i.imgur.com/BWdqKxw.gif">' +
+			'<img src="http://i.imgur.com/uuL0nZz.gif">' +
+			'<img src="http://i.imgur.com/hXIsyYH.gif">' +
+			'<img src="http://i.imgur.com/uTyyWBd.gif">' +
+			'<img src="http://i.imgur.com/uFHh6Hl.gif"><br />' +
+			'<b>Ace:</b> Chakra, EricSaysHi, Inwhale, Lab8 Moth.<br />' +
+			'I like to ladder :3</center>'
+		);
+	},
+
+	degachu: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/mP4Hia6.png" width="140">' +
+			'<img src="http://i.imgur.com/QLdbYmc.png" width="300">' +
+			'<img src="http://i.imgur.com/BBIX79y.png" width="100"><br />' +
+			'<b>Ace:</b> No Homo Love<br />' +
+			'Were not gays, were just friends with benefits.</center>'
+		);
+	},
+
+	smash: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/6COeLRA.png" width="430"><br />' +
+			'<img src="http://img1.wikia.nocookie.net/__cb20100807001951/animalcrossing/images/d/d8/Metroid_Symbol.png" width="100">' +
+			'<img src="http://i.imgur.com/hUeyAQC.png" width="250">' +
+			'<img src="http://i.imgur.com/Xbl5T37.png" width="100"><br />' +
+			'<img src="http://i.imgur.com/GX6dCM9.png" width="430"><br />' +
+			'<b>Ace:</b> ZSS and Pikachu<br />' +
+			'"We can taste your salt."</center>'
+		);
+	},
+
 	amethyst: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/hAEIECS.png" width="500"><br />' +
@@ -144,14 +203,6 @@ exports.commands = {
 			'<img src="http://4.bp.blogspot.com/-7_d6MnfU8uY/T29Y-RFkPmI/AAAAAAAABsE/8Tjt5i4eLQk/s1600/B4C.gif" width="150"><br />' +
 			'<blink><b>Ace:</b> Murasaki</blink><br />' +
 			'<blink>You can\'t see this...</blink></center>'
-		);
-	},
-
-	wanted: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/420hIc9.png" width="150">' +
-			'<img src="http://i.imgur.com/yoB9A7m.png" width="250"><br />' +
-			'<font color="red"><b>Ace:</b> SHZ WHY ARE YOU FUCKING LOST NIGGA</font></center>'
 		);
 	},
 

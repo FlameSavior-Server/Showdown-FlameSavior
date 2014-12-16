@@ -21,7 +21,7 @@ exports.commands = {
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lucario-mega.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/venusaur.gif"><br />' +
-			'<b>Ace:</b> The Forgotten Best<br />' +
+			'<b>Ace:</b> Ilight, Alice and godchef, the forgotten best<br />' +
 			'Better then the best, and the real originals.</center>'
 		);
 	},

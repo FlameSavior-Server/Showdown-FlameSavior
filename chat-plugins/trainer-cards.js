@@ -9,7 +9,7 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://imgur.com/rqxyCk4.png" width="150">' +
 			'<img src="http://imgur.com/nB0vZ7K.png">' +
 			'<img src="http://imgur.com/qUSrF3H.png" height="130"><br />' +
-			'<b>Ace:</b> Typhlosion br />' +
+			'<b>Ace:</b> Typhlosion<br />' +
 			'Prepare to get smashed!</center>'
 		);
 	},

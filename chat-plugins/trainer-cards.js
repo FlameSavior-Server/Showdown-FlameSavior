@@ -4,6 +4,40 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	trident: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://imgur.com/rqxyCk4.png" width="150">' +
+			'<img src="http://imgur.com/nB0vZ7K.png">' +
+			'<img src="http://imgur.com/qUSrF3H.png" height="130"><br />' +
+			'<b>Ace:</b> Typhlosion br />' +
+			'Prepare to get smashed!</center>'
+		);
+	},
+
+	dark: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size="5">Dark</font><br />' +
+			'<img src="http://fc03.deviantart.net/fs70/f/2010/067/4/6/302___Sableye_by_Winter_Freak.jpg" height ="140">' +
+			'<img src="<img src="http://i.imgur.com/FMRETco.jpg" height ="140">">' +
+			'<img src="http://fc06.deviantart.net/fs71/i/2013/356/f/3/umbreon_chibi_by_apocalypsekitty-d6yxbhr.png" height ="140">' +
+			'<img src="http://fc03.deviantart.net/fs70/i/2011/129/6/2/630___mandibuzz_by_winter_freak-d3fy5jq.jpg" height ="140">' +
+			'<img src="http://fc06.deviantart.net/fs70/i/2012/364/8/3/chibi_tyranitar__by_thirteenorangess-d5pohil.png" height ="140">' +
+			'<img src="http://i.imgur.com/t0fjNWB.jpg" height="140"><br />' +
+			'<b>Ace:</b> Maki, Boss, Sabo, DEG, and P!ka<br />' +
+			'We are the best of the best of stalling you out with our devilish teams!</center>'
+		);
+	},
+
+	dixcalibur: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/0hhnk6N.gif" width="130">' +
+			'<img src="http://i.imgur.com/eULu8OA.gif" width="280">' +
+			'<img src="http://i.imgur.com/oWayVdx.gif" width="130"><br />' +
+			'<b>Ace:</b> Tael<br />' +
+			'<blink><font color="red">Satan can\'t handle dis dick</blink></font></center>'
+		);
+	},
+
 	deception: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/g63V0Xo.jpg" width="350"><br />' +

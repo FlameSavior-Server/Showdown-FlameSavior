@@ -894,7 +894,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	hitmonlee: {
-		randomBattleMoves: ["highjumpkick","suckerpunch","stoneedge","machpunch","rapidspin","knockoff","poisonjab"],
+		randomBattleMoves: ["highjumpkick","suckerpunch","stoneedge","machpunch","rapidspin","knockoff","poisonjab","fakeout"],
 		randomDoubleBattleMoves: ["helpinghand","suckerpunch","stoneedge","machpunch","substitute","fakeout","closecombat","earthquake","blazekick","feint","wideguard","protect"],
 		eventPokemon: [
 			{"generation":3,"level":38,"abilities":["limber"],"moves":["refresh","highjumpkick","mindreader","megakick"]}
@@ -1954,14 +1954,15 @@ exports.BattleFormatsData = {
 	houndoommega: {
 		randomBattleMoves: ["nastyplot","darkpulse","suckerpunch","fireblast","hiddenpowerfighting"],
 		randomDoubleBattleMoves: ["nastyplot","darkpulse","suckerpunch","heatwave","hiddenpowerfighting","protect"],
-		requiredItem: "Houndoominite"
+		requiredItem: "Houndoominite",
+		tier: "BL2"
 	},
 	phanpy: {
 		randomBattleMoves: ["stealthrock","earthquake","iceshard","headsmash","knockoff","seedbomb","superpower","playrough"],
 		tier: "LC"
 	},
 	donphan: {
-		randomBattleMoves: ["stealthrock","rapidspin","iceshard","earthquake","headsmash","playrough"],
+		randomBattleMoves: ["stealthrock","rapidspin","iceshard","earthquake","knockoff","stoneedge","playrough"],
 		randomDoubleBattleMoves: ["stealthrock","seedbomb","iceshard","earthquake","rockslide","playrough","protect"],
 		tier: "UU"
 	},
@@ -2299,7 +2300,7 @@ exports.BattleFormatsData = {
 		randomBattleMoves: ["closecombat","stoneedge","drainpunch","icepunch","zenheadbutt","swordsdance","knockoff"],
 		randomDoubleBattleMoves: ["closecombat","stoneedge","drainpunch","icepunch","zenheadbutt","swordsdance","knockoff","protect"],
 		requiredItem: "Galladite",
-		tier: "BL2"
+		tier: "BL"
 	},
 	surskit: {
 		randomBattleMoves: ["hydropump","signalbeam","hiddenpowerfire","stickyweb","gigadrain","powersplit"],
@@ -3357,7 +3358,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	wormadam: {
-		randomBattleMoves: ["leafstorm","gigadrain","signalbeam","hiddenpowerice","hiddenpowerrock","toxic"],
+		randomBattleMoves: ["leafstorm","gigadrain","signalbeam","hiddenpowerice","hiddenpowerrock","toxic","synthesis"],
 		randomDoubleBattleMoves: ["leafstorm","gigadrain","signalbeam","hiddenpowerice","hiddenpowerrock","stringshot","protect"],
 		tier: "PU"
 	},
@@ -3407,7 +3408,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	cherrim: {
-		randomBattleMoves: ["sunnyday","solarbeam","weatherball","hiddenpowerice"],
+		randomBattleMoves: ["sunnyday","solarbeam","weatherball","hiddenpowerice","energyball","synthesis"],
 		randomDoubleBattleMoves: ["sunnyday","solarbeam","weatherball","hiddenpowerice","protect"],
 		tier: "PU"
 	},
@@ -3441,7 +3442,8 @@ exports.BattleFormatsData = {
 	lopunnymega: {
 		randomBattleMoves: ["return","highjumpkick","poweruppunch","fakeout","icepunch"],
 		randomDoubleBattleMoves: ["return","highjumpkick","protect","fakeout","icepunch","encore"],
-		requiredItem: "Lopunnite"
+		requiredItem: "Lopunnite",
+		tier: "BL"
 	},
 	glameow: {
 		randomBattleMoves: ["fakeout","uturn","suckerpunch","hypnosis","quickattack","return","foulplay"],
@@ -3630,8 +3632,8 @@ exports.BattleFormatsData = {
 		tier: "PU"
 	},
 	rotomfan: {
-		randomBattleMoves: ["airslash","thunderbolt","voltswitch","substitute","painsplit","hiddenpowerice","willowisp","trick"],
-		randomDoubleBattleMoves: ["airslash","thunderbolt","voltswitch","substitute","painsplit","hiddenpowerice","willowisp","trick","electroweb","discharge","protect"],
+		randomBattleMoves: ["airslash","thunderbolt","voltswitch","substitute","painsplit","hiddenpowerice","willowisp"],
+		randomDoubleBattleMoves: ["airslash","thunderbolt","voltswitch","substitute","painsplit","hiddenpowerice","willowisp","electroweb","discharge","protect"],
 		eventPokemon: [
 			{"generation":5,"level":10,"nature":"Naughty","moves":["uproar","astonish","trick","thundershock"],"pokeball":"cherishball"},
 			{"generation":6,"level":10,"nature":"Quirky","moves":["shockwave","astonish","trick","thunderwave"],"pokeball":"cherishball"}

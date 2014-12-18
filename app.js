@@ -431,3 +431,9 @@ fs.readFile('./logs/uptime.txt', function (err, uptime) {
 		fs.writeFile('./logs/uptime.txt', global.uptimeRecord.toFixed(0));
 	}, (1).hour());
 });
+
+/*********************************************************
+ * Start up the REPL server
+ *********************************************************/
+
+require('./repl.js').start('app', function (cmd) { return eval(cmd); });

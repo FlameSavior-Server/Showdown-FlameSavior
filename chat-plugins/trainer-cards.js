@@ -18,7 +18,7 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><font size="5">Dark</font><br />' +
 			'<img src="http://fc03.deviantart.net/fs70/f/2010/067/4/6/302___Sableye_by_Winter_Freak.jpg" height="140">' +
-			'<img src="<img src="http://i.imgur.com/FMRETco.jpg" height="140">' +
+			'<img src="img src="http://i.imgur.com/FMRETco.jpg" height="140">' +
 			'<img src="http://fc06.deviantart.net/fs71/i/2013/356/f/3/umbreon_chibi_by_apocalypsekitty-d6yxbhr.png" height="140">' +
 			'<img src="http://fc03.deviantart.net/fs70/i/2011/129/6/2/630___mandibuzz_by_winter_freak-d3fy5jq.jpg" height="140">' +
 			'<img src="http://fc06.deviantart.net/fs70/i/2012/364/8/3/chibi_tyranitar__by_thirteenorangess-d5pohil.png" height="140">' +

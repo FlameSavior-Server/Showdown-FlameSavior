@@ -16,14 +16,9 @@ exports.commands = {
 
 	dark: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size="5">Dark</font><br />' +
-			'<img src="http://fc03.deviantart.net/fs70/f/2010/067/4/6/302___Sableye_by_Winter_Freak.jpg" height="140">' +
-			'<img src="http://i.imgur.com/FMRETco.jpg" height="140">' +
-			'<img src="http://fc06.deviantart.net/fs71/i/2013/356/f/3/umbreon_chibi_by_apocalypsekitty-d6yxbhr.png" height="140">' +
-			'<img src="http://fc03.deviantart.net/fs70/i/2011/129/6/2/630___mandibuzz_by_winter_freak-d3fy5jq.jpg" height="140">' +
-			'<img src="http://fc06.deviantart.net/fs70/i/2012/364/8/3/chibi_tyranitar__by_thirteenorangess-d5pohil.png" height="140">' +
-			'<img src="http://i.imgur.com/t0fjNWB.jpg" height="140"><br />' +
-			'<b>Ace:</b> Maki, Boss, Sabo, DEG, and P!ka<br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/UGj2Q6Y.png"><br />' +
+			'<img src="http://i.imgur.com/plpaIFY.gif" width="400"><br />' +
+			'<b>Ace:</b> Maki, Boss, Sabo, DEG, P!ka and Zyga<br />' +
 			'We are the best of the best of stalling you out with our devilish teams!</center>'
 		);
 	},
@@ -886,7 +881,7 @@ exports.commands = {
 	ground: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/efSriei.png"><br />' +
-			'<img src="http://i.imgur.com/FV2Iny8.png"><br />' +
+			'<img src="http://i.imgur.com/LhXfF0b.png"><br />' +
 			'<img src="http://play.pokemonshowdown.com/sprites/afd/garchomp-mega.png">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/afd/mamoswine.png">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/afd/excadrill.png"><br />' +
@@ -3088,15 +3083,17 @@ exports.commands = {
 
 	randorosu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><marquee behavior="slide" direction="down" scrollamount="10" height="100"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
-			'<img src="http://i.imgur.com/I1qLAtu.png" width="310">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/greninja.gif"></marquee><br />' +
-			'<marquee behavior="slide" scrollamount="20" direction="up" height="220"><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/hydreigon.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/tyranitar-mega.gif"><br />' +
-			'<font color="red"><b>Ace: </font>My Dark Squadron</b>' +
-			'<center><font color="purple"><b>Master of Nightmare</b></font><br />' +
-			'<font color="red">"If you\'re going through hell, keep going"</font><br />' +
-			'<button name="send" value="/transferbucks Randorosu Bank, 1" >Feeling Generous? Donate Now! :]</button></center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/HSjznIf.png" width="500"><br />' +
+			'<marquee behavior="slide" scrollamount="20" direction="up"><img src="http://play.pokemonshowdown.com/sprites/xyani/mamoswine.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/swampert-mega.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/excadrill.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/garchomp-mega.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/seismitoad.gif"><br />' +
+			'<font color="brown"><b>Ace: My Squadron</b></font></marquee><br />' +
+			'<marquee behavior="scroll" direction="left" scrollamount="10"><b><font color="purple">I\'ll pound you into the <i>GROUND</i> bruh.</b></font></marquee><br />' +
+			'<font color="brown">"One doesn\'t underestimate my toad, my toad underestimates you."</b></font><br />' +
+			'<button name="send" value="/transferbucks Randorosu Bank, 1">Please abolish the struggles. Donate a buck now! :]</button></center>'
 		);
 	},
 

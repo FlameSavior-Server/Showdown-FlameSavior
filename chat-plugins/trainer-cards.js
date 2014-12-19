@@ -3084,7 +3084,7 @@ exports.commands = {
 	randorosu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/HSjznIf.png" width="500"><br />' +
-			'<marquee behavior="slide" scrollamount="20" direction="up"><img src="http://play.pokemonshowdown.com/sprites/xyani/mamoswine.gif">' +
+			'<marquee behavior="slide" scrollamount="20" direction="up" height="220"><img src="http://play.pokemonshowdown.com/sprites/xyani/mamoswine.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/swampert-mega.gif">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/excadrill.gif">' +

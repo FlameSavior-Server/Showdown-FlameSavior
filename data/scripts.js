@@ -1306,6 +1306,8 @@ exports.BattleScripts = {
 				rejectAbility = !counter[toId(ability)];
 			} else if (ability === 'Rock Head' || ability === 'Reckless') {
 				rejectAbility = !counter['recoil'];
+			} else if (ability === 'Sturdy') {
+				rejectAbility = !!counter['recoil'];
 			} else if (ability === 'No Guard' || ability === 'Compoundeyes') {
 				rejectAbility = !counter['inaccurate'];
 			} else if ((ability === 'Sheer Force' || ability === 'Serene Grace')) {
@@ -1450,10 +1452,10 @@ exports.BattleScripts = {
 			item = 'Life Orb';
 		} else if (ability === 'Unburden') {
 			item = 'Red Card';
-			// Give Unburden mons a Normal Gem if they have a Normal-type attacking move (except Explosion)
+			// Give Unburden mons a Normal Gem if they have a Normal-type attacking move (except Explosion or Rapid Spin)
 			for (var m in moves) {
 				var move = this.getMove(moves[m]);
-				if (move.type === 'Normal' && (move.basePower || move.basePowerCallback) && move.id !== 'explosion') {
+				if (move.type === 'Normal' && (move.basePower || move.basePowerCallback) && move.id !== 'explosion' && move.id !== 'rapidspin') {
 					item = 'Normal Gem';
 					break;
 				}
@@ -1525,12 +1527,12 @@ exports.BattleScripts = {
 			item = 'Black Sludge';
 		}
 
-		// 95-86-82-78-74-70
 		var levelScale = {
-			LC: 94,
+			LC: 92,
 			'LC Uber': 92,
 			NFE: 90,
 			PU: 88,
+			BL4: 88,
 			NU: 86,
 			BL3: 84,
 			RU: 82,
@@ -1556,10 +1558,13 @@ exports.BattleScripts = {
 			Dusclops: 84, Porygon2: 82, Chansey: 78,
 
 			// Banned Mega
-			"Kangaskhan-Mega": 72, "Lucario-Mega": 72, "Mawile-Mega": 72,
+			"Kangaskhan-Mega": 72, "Lucario-Mega": 72, "Mawile-Mega": 72, "Rayquaza-Mega": 68, "Salamence-Mega": 72,
+
+			// Not holding mega stone
+			Beedrill: 86, Charizard: 82, Gardevoir: 78, Heracross: 78, Manectric: 78, Medicham: 78, Metagross: 78, Sableye: 78, Venusaur: 78,
 
 			// Holistic judgment
-			Articuno: 86, Genesect: 72, "Gengar-Mega": 68, "Rayquaza-Mega": 68, Sigilyph: 76, Xerneas: 66
+			Articuno: 82, Genesect: 72, "Gengar-Mega": 68, "Rotom-Fan": 88, Sigilyph: 80, Xerneas: 66
 		};
 		var level = levelScale[template.tier] || 90;
 		if (customScale[template.name]) level = customScale[template.name];
@@ -2739,7 +2744,12 @@ exports.BattleScripts = {
 			var pokemon = seasonalPokemonList[i];
 			var template = this.getTemplate(pokemon);
 			var set = this.randomSet(template, i);
-			set.moves[3] = 'Present';
+			// We presserve top priority moves over the rest.
+			if ((toId(set.item) === 'heatrock' && toId(set.moves[3]) === 'sunnyday') || toId(set.moves[3]) === 'geomancy' || (toId(set.moves[3]) === 'rest' && toId(set.item) === 'chestoberry') || (pokemon === 'haxorus' && toId(set.moves[3]) === 'dragondance') || (toId(set.ability) === 'guts' && toId(set.moves[3]) === 'facade')) {
+				set.moves[2] = 'Present';
+			} else {
+				set.moves[3] = 'Present';
+			}
 			if (this.getItem(set.item).megaStone) set.item = 'Life Orb';
 			team.push(set);
 		}

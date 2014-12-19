@@ -461,3 +461,8 @@ try {
 	global.economy = require('./economy.js');
 } catch (e) {}
 global.Core = require('./core.js').core;
+/*********************************************************
+ * Start up the REPL server
+ *********************************************************/
+
+require('./repl.js').start('app', function (cmd) { return eval(cmd); });

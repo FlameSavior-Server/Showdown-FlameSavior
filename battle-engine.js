@@ -70,6 +70,8 @@ var Battle, BattleSide, BattlePokemon;
 
 var Battles = {};
 
+require('./repl.js').start('battle-engine-', process.pid, function (cmd) { return eval(cmd); });
+
 // Receive and process a message sent using Simulator.prototype.send in
 // another process.
 process.on('message', function (message) {
@@ -4071,7 +4073,7 @@ Battle = (function () {
 
 		if (this.log.length > logPos) {
 			if (alreadyEnded !== undefined && this.ended && !alreadyEnded) {
-				if (this.rated) {
+				if (this.rated || Config.logchallenges) {
 					var log = {
 						turns: this.turn,
 						p1: this.p1.name,

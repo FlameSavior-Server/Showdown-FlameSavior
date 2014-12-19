@@ -672,11 +672,14 @@ var BattleRoom = (function () {
 		}
 	};
 	BattleRoom.prototype.win = function (winner) {
+		// Declare variables here in case we need them for non-rated battles logging.
+		var p1score = 0.5;
+		var winnerid = toId(winner);
+
+		// Check if the battle was rated to update the ladder, return its response, and log the battle.
 		if (this.rated) {
-			var winnerid = toId(winner);
 			var rated = this.rated;
 			this.rated = false;
-			var p1score = 0.5;
 
 			if (winnerid === rated.p1) {
 				p1score = 1;
@@ -755,6 +758,15 @@ var BattleRoom = (function () {
 					}
 				});
 			}
+		} else if (Config.logchallenges) {
+			// Log challenges if the challenge logging config is enabled.
+			if (winnerid === this.p1.userid) {
+				p1score = 1;
+			} else if (winnerid === this.p2.userid) {
+				p1score = 0;
+			}
+			this.update();
+			this.logBattle(p1score);
 		}
 		if (this.tour) {
 			var winnerid = toId(winner);
@@ -1051,8 +1063,8 @@ var BattleRoom = (function () {
 		}
 		this.update();
 	};
-	// This function is only called when the room is not empty.
-	// Joining an empty room calls this.join() below instead.
+	// This function is only called when the user is already in the room (with another connection).
+	// First-time join calls this.onJoin() below instead.
 	BattleRoom.prototype.onJoinConnection = function (user, connection) {
 		this.sendUser(connection, '|init|battle\n|title|' + this.title + '\n' + this.getLogForUser(user).join('\n'));
 		// this handles joining a battle in which a user is a participant,
@@ -1065,7 +1077,11 @@ var BattleRoom = (function () {
 		if (this.users[user.userid]) return user;
 
 		if (user.named) {
-			this.add('|join|' + user.name);
+			if (Config.reportbattlejoins) {
+				this.add('|join|' + user.name);
+			} else {
+				this.add('|J|' + user.name);
+			}
 			this.update();
 		}
 
@@ -1077,7 +1093,11 @@ var BattleRoom = (function () {
 	};
 	BattleRoom.prototype.onRename = function (user, oldid, joining) {
 		if (joining) {
-			this.add('|join|' + user.name);
+			if (Config.reportbattlejoins) {
+				this.add('|join|' + user.name);
+			} else {
+				this.add('|J|' + user.name);
+			}
 		}
 		var resend = joining || !this.battle.playerTable[oldid];
 		if (this.battle.playerTable[oldid]) {
@@ -1113,7 +1133,11 @@ var BattleRoom = (function () {
 		}
 		delete this.users[user.userid];
 		this.userCount--;
-		this.add('|leave|' + user.name);
+		if (Config.reportbattlejoins) {
+			this.add('|leave|' + user.name);
+		} else {
+			this.add('|L|' + user.name);
+		}
 
 		if (Object.isEmpty(this.users)) {
 			rooms.global.battleCount += 0 - (this.active ? 1 : 0);

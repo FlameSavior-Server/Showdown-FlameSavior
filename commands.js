@@ -4308,6 +4308,270 @@ var commands = exports.commands = {
         }
         user.rename(targetName, targetToken, targetAuth, connection);
     },
+	autojoin: function (target, room, user, connection) {
+		Rooms.global.autojoinRooms(user, connection);
+	},
+
+	joim: 'join',
+	join: function (target, room, user, connection) {
+		if (!target) return false;
+		var targetRoom = Rooms.search(target);
+		if (!targetRoom) {
+			return connection.sendTo(target, "|noinit|nonexistent|The room '" + target + "' does not exist.");
+		}
+		if (targetRoom.isPrivate) {
+			if (targetRoom.modjoin && !user.can('bypassall')) {
+				var userGroup = user.group;
+				if (targetRoom.auth) {
+					userGroup = targetRoom.auth[user.userid] || ' ';
+				}
+				if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(targetRoom.modjoin !== true ? targetRoom.modjoin : targetRoom.modchat)) {
+					return connection.sendTo(target, "|noinit|nonexistent|The room '" + target + "' does not exist.");
+				}
+			}
+			if (!user.named) {
+				return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '" + target + "'.");
+			}
+		}
+
+		var joinResult = user.joinRoom(targetRoom, connection);
+		if (!joinResult) {
+			if (joinResult === null) {
+				return connection.sendTo(target, "|noinit|joinfailed|You are banned from the room '" + target + "'.");
+			}
+			return connection.sendTo(target, "|noinit|joinfailed|You do not have permission to join '" + target + "'.");
+		}
+	},
+
+	leave: 'part',
+	part: function (target, room, user, connection) {
+		if (room.id === 'global') return false;
+		var targetRoom = Rooms.search(target);
+		if (target && !targetRoom) {
+			return this.sendReply("The room '" + target + "' does not exist.");
+		}
+		user.leaveRoom(targetRoom || room, connection);
+	},
+
+	/*********************************************************
+	 * Moderating: Punishments
+	 *********************************************************/
+
+	kick: 'warn',
+	k: 'warn',
+	warn: function (target, room, user) {
+		if (!target) return this.parse('/help warn');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser || !targetUser.connected) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
+		if (room.isPrivate && room.auth) {
+			return this.sendReply("You can't warn here: This is a privately-owned room not subject to global rules.");
+		}
+		if (!Rooms.rooms[room.id].users[targetUser.userid]) {
+			return this.sendReply("User " + this.targetUsername + " is not in the room " + room.id + ".");
+		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
+		if (!this.can('warn', targetUser, room)) return false;
+
+		this.addModCommand("" + targetUser.name + " was warned by " + user.name + "." + (target ? " (" + target + ")" : ""));
+		targetUser.send('|c|~|/warn ' + target);
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
+	},
+
+	redirect: 'redir',
+	redir: function (target, room, user, connection) {
+		if (!target) return this.parse('/help redirect');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		var targetRoom = Rooms.search(target);
+		if (!targetRoom) {
+			return this.sendReply("The room '" + target + "' does not exist.");
+		}
+		if (!this.can('warn', targetUser, room) || !this.can('warn', targetUser, targetRoom)) return false;
+		if (!targetUser || !targetUser.connected) {
+			return this.sendReply("User " + this.targetUsername + " not found.");
+		}
+		if (Rooms.rooms[targetRoom.id].users[targetUser.userid]) {
+			return this.sendReply("User " + targetUser.name + " is already in the room " + targetRoom.title + "!");
+		}
+		if (!Rooms.rooms[room.id].users[targetUser.userid]) {
+			return this.sendReply("User " + this.targetUsername + " is not in the room " + room.id + ".");
+		}
+		if (targetUser.joinRoom(targetRoom.id) === false) return this.sendReply("User " + targetUser.name + " could not be joined to room " + targetRoom.title + ". They could be banned from the room.");
+		var roomName = (targetRoom.isPrivate)? "a private room" : "room " + targetRoom.title;
+		this.addModCommand("" + targetUser.name + " was redirected to " + roomName + " by " + user.name + ".");
+		targetUser.leaveRoom(room);
+	},
+
+	m: 'mute',
+	mute: function (target, room, user) {
+		if (!target) return this.parse('/help mute');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
+		if (!this.can('mute', targetUser, room)) return false;
+		if (targetUser.mutedRooms[room.id] || targetUser.locked || !targetUser.connected) {
+			var problem = " but was already " + (!targetUser.connected ? "offline" : targetUser.locked ? "locked" : "muted");
+			if (!target) {
+				return this.privateModCommand("(" + targetUser.name + " would be muted by " + user.name + problem + ".)");
+			}
+			return this.addModCommand("" + targetUser.name + " would be muted by " + user.name + problem + "." + (target ? " (" + target + ")" : ""));
+		}
+
+		targetUser.popup("" + user.name + " has muted you for 7 minutes. " + (target ? "\n\nReason: " + target : ""));
+		this.addModCommand("" + targetUser.name + " was muted by " + user.name + " for 7 minutes." + (target ? " (" + target + ")" : ""));
+		var alts = targetUser.getAlts();
+		if (alts.length) this.privateModCommand("(" + targetUser.name + "'s alts were also muted: " + alts.join(", ") + ")");
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
+
+		targetUser.mute(room.id, 7 * 60 * 1000);
+	},
+
+	hm: 'hourmute',
+	hourmute: function (target, room, user) {
+		if (!target) return this.parse('/help hourmute');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
+		if (!this.can('mute', targetUser, room)) return false;
+
+		if (((targetUser.mutedRooms[room.id] && (targetUser.muteDuration[room.id] || 0) >= 50 * 60 * 1000) || targetUser.locked) && !target) {
+			var problem = " but was already " + (!targetUser.connected ? "offline" : targetUser.locked ? "locked" : "muted");
+			return this.privateModCommand("(" + targetUser.name + " would be muted by " + user.name + problem + ".)");
+		}
+
+		targetUser.popup("" + user.name + " has muted you for 60 minutes. " + (target ? "\n\nReason: " + target : ""));
+		this.addModCommand("" + targetUser.name + " was muted by " + user.name + " for 60 minutes." + (target ? " (" + target + ")" : ""));
+		var alts = targetUser.getAlts();
+		if (alts.length) this.privateModCommand("(" + targetUser.name + "'s alts were also muted: " + alts.join(", ") + ")");
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
+
+		targetUser.mute(room.id, 60 * 60 * 1000, true);
+	},
+
+	um: 'unmute',
+	unmute: function (target, room, user) {
+		if (!target) return this.parse('/help unmute');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		var targetUser = Users.get(target);
+		if (!targetUser) return this.sendReply("User '" + target + "' does not exist.");
+		if (!this.can('mute', targetUser, room)) return false;
+
+		if (!targetUser.mutedRooms[room.id]) {
+			return this.sendReply("" + targetUser.name + " is not muted.");
+		}
+
+		this.addModCommand("" + targetUser.name + " was unmuted by " + user.name + ".");
+
+		targetUser.unmute(room.id);
+	},
+
+	l: 'lock',
+	ipmute: 'lock',
+	lock: function (target, room, user) {
+		if (!target) return this.parse('/help lock');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
+		if (!this.can('lock', targetUser)) return false;
+
+		if ((targetUser.locked || Users.checkBanned(targetUser.latestIp)) && !target) {
+			var problem = " but was already " + (targetUser.locked ? "locked" : "banned");
+			return this.privateModCommand("(" + targetUser.name + " would be locked by " + user.name + problem + ".)");
+		}
+
+		targetUser.popup("" + user.name + " has locked you from talking in chats, battles, and PMing regular users." + (target ? "\n\nReason: " + target : "") + "\n\nIf you feel that your lock was unjustified, you can still PM staff members (%, @, &, and ~) to discuss it" + (Config.appealurl ? " or you can appeal:\n" + Config.appealurl : ".") + "\n\nYour lock will expire in a few days.");
+
+		this.addModCommand("" + targetUser.name + " was locked from talking by " + user.name + "." + (target ? " (" + target + ")" : ""));
+		var alts = targetUser.getAlts();
+		var acAccount = (targetUser.autoconfirmed !== targetUser.userid && targetUser.autoconfirmed);
+		if (alts.length) {
+			this.privateModCommand("(" + targetUser.name + "'s " + (acAccount ? " ac account: " + acAccount + ", " : "") + "locked alts: " + alts.join(", ") + ")");
+		} else if (acAccount) {
+			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
+		}
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
+
+		targetUser.lock();
+	},
+
+	unlock: function (target, room, user) {
+		if (!target) return this.parse('/help unlock');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.can('lock')) return false;
+
+		var unlocked = Users.unlock(target);
+
+		if (unlocked) {
+			var names = Object.keys(unlocked);
+			this.addModCommand(names.join(", ") + " " +
+				((names.length > 1) ? "were" : "was") +
+				" unlocked by " + user.name + ".");
+		} else {
+			this.sendReply("User '" + target + "' is not locked.");
+		}
+	},
+
+	b: 'ban',
+	ban: function (target, room, user) {
+		if (!target) return this.parse('/help ban');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
+		if (!this.can('ban', targetUser)) return false;
+
+		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
+			var problem = " but was already banned";
+			return this.privateModCommand("(" + targetUser.name + " would be banned by " + user.name + problem + ".)");
+		}
+
+		targetUser.popup("" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");
+
+		this.addModCommand("" + targetUser.name + " was banned by " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
+		var alts = targetUser.getAlts();
+		var acAccount = (targetUser.autoconfirmed !== targetUser.userid && targetUser.autoconfirmed);
+		if (alts.length) {
+			this.privateModCommand("(" + targetUser.name + "'s " + (acAccount ? " ac account: " + acAccount + ", " : "") + "banned alts: " + alts.join(", ") + ")");
+			for (var i = 0; i < alts.length; ++i) {
+				this.add('|unlink|' + toId(alts[i]));
+			}
+		} else if (acAccount) {
+			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
+		}
+
+		this.add('|unlink|' + this.getLastIdOf(targetUser));
+		targetUser.ban();
+	},
+
+	unban: function (target, room, user) {
+		if (!target) return this.parse('/help unban');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.can('ban')) return false;
 
 };
 

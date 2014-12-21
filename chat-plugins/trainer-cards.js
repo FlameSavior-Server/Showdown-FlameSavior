@@ -4,6 +4,14 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	angels: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/BIVa9Zi.png"><br />' +
+			'<b>Ace:</b> Angels<br />' +
+			'You don\'t have to be an angel, just be someone who can give.</center>'
+		);
+	},
+
 	ccands: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/LvGPzAk.png"><br />' +
@@ -3710,11 +3718,11 @@ exports.commands = {
 
 	akkie: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/17XVxNt.png" height="160" width="180">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/P9GLVBq.png" width="180">' +
 			'<img src="http://i.imgur.com/5AKQ0L3.gif">' +
-			'<img src="http://i.imgur.com/PgXqSU1.png" height="190" width="170""><br />' +
+			'<img src="http://i.imgur.com/NvAO1Pt.png" width="170"><br />' +
 			'<b>Ace:</b> Umbreon<br />' +
-			'Are you prepared to face the infamous dream team knows as the team team?</center>'
+			'I\'m hyper offensive, the fastest and strongest there is. I\'ll also cuss you the fuck out.</center>'
 		);
 	},
 

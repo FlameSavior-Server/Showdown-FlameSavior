@@ -4,6 +4,46 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ccands: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/LvGPzAk.png"><br />' +
+			'<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQdcY-YBNTOc_Hiy_2940GR6PA5GSJmbhuF0y4aG6kSDuCaJxvAQ" height="150" width="200">' +
+			'<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRD0Qoxd-HO10NszOnE9umf_8TNVasq54jkQOnm6-PEW0PYh7Tt" height="150" width="200"><br />' +
+			'<b>Ace:</b> Monotype<br />' +
+			'LMAO U SUCK LOL WHY THE FUCK DID YOU USE D CLAW</center>'
+		);
+	},
+
+	steel: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/4agElMc.png"><br />' +
+			'<img src="http://i.imgur.com/s3CPzQI.png">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/heatran.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/skarmory.gif"><br />' +
+			'<b>Ace:</b> Ilight, PK-Kaiser, Poker<br />' +
+			'Best Type in the game, Steel is it\'s name, With our endless wall\'s, we put all types to shame.</center>'
+		);
+	},
+
+	ice: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://fc06.deviantart.net/fs71/i/2010/260/0/b/ice_cream_pokemon_by_sbg6-d2yy17g.png" width="180">' +
+			'<img src="http://i.imgur.com/wdZOwxH.png">' +
+			'<img src="https://40.media.tumblr.com/35f633386a6b66e827196d238d3c5512/tumblr_mmp5s651oi1s0onzzo1_500.jpg" height="160"><br />' +
+			'<b>Ace:</b> Kaiba, CrazyClown94, Boreas<br />' +
+			'We aren\'t generic, we\'re just good.</center>'
+		);
+	},
+
+	aon: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/69AkUEu.png"><br />' +
+			'<img src="http://i.imgur.com/3GYVURt.png"><br />' +
+			'<b>Ace:</b> Emperor Holly OP<br />' +
+			'Have you come back for more?</center>'
+		);
+	},
+
 	trident: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://imgur.com/rqxyCk4.png" width="150">' +
@@ -1142,16 +1182,17 @@ exports.commands = {
 		);
 	},
 
+	fly: 'genericfly',
 	genericfly: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/mQIDlCa.gif"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/RsZj53S.gif"><br />' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/642-therian.gif" height="75">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/645-therian.gif" height="70">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-x.gif" height="75">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/145.gif" height="79">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/227.gif" height="46">' +
 			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/468.gif" height="45"><br />' +
-			'<b>Ace:</b> These things<br />' +
+			'<b>Ace:</b> Arifeen, Anttya, Barida, Zachariah<br />' +
 			'You call it generic, I call it winning.</center>'
 		);
 	},

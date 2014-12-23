@@ -169,7 +169,7 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/4ovjkIJ.png" width="230">' +
 			'<img src="http://i.imgur.com/IcoSVmK.gif" width="80">' +
 			'<img src="http://i.imgur.com/X4cm7wJ.png" width="230"><br />' +
-			'img src="http://i.imgur.com/vF9wKDy.png" width="200">' +
+			'<img src="http://i.imgur.com/vF9wKDy.png" width="200">' +
 			'<img src="http://i.imgur.com/viL3eMc.png" width="200"><br />' +
 			'<b>Ace:</b> EricSaysHi and Ouranos<br />' +
 			'The most powerful megas in the Mono Metagame, what else do we have to say?</center>'

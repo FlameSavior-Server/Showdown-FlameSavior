@@ -4,6 +4,27 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	friends: 'yujo',
+	yujo: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return false;
+		return this.sendReplyBox('<center><img src="http://i.imgur.com/4cufU2B.gif"><br />' +
+			'<img src="http://i.imgur.com/oEpesIo.png" height=280>' +
+			'<img src="http://i.imgur.com/zZ1foAD.png" height=280><br />' +
+			'<b>Ace: </b>Fap Hand<br />' +
+			'Sir, if you don\'t shake my hand I\'m sending you to the Shadow Realm'
+		);
+	},
+
+	bxb: 'bossrabbit',
+	bossrabbit: function(target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return false;
+        return this.sendReplyBox('<center><img src ="http://i.imgur.com/oL5tSnF.gif"><br />' +
+        	'<font size="3"><b><i><font color="#660066"> Ar GL Rabbit X BossBitch</i><br />' +
+        	'</font><b> <font color="0B0B61">Ace: Two breaths walking</font></blink></b><br />' +
+        	'<b><i>I breath for you and you for me.</i></b></center>'
+        );
+    },
+
 	angels: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/BIVa9Zi.png"><br />' +
@@ -3380,13 +3401,14 @@ exports.commands = {
 		);
 	},
 
+	hermes: 'ghast',
 	ghast: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aegislash.gif">' +
 			'<img src="http://i.imgur.com/Hia14zw.png" width="350">' +
-			'<img src="http://i.imgur.com/h3GJIh4.gif" width="120"><br />' +
-			'<b>Ace:</b> Gengar<br />' +
-			'I am darkness itself. I am your nightmares, your shadows, & everything you fear.</center>'
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/shedinja.gif"><br />' +
+			'<b>Ace:</b> Aegislash<br />' +
+			'I was created by Zeus himself. There is a purpose for my darkness, to show you that there is redemption through Chaos.</center>'
 		);
 	},
 

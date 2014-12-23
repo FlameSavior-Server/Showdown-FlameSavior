@@ -3442,7 +3442,7 @@ exports.commands = {
 	ghast: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aegislash.gif">' +
-			'<img src="http://i.imgur.com/Hia14zw.png" width="350">' +
+			'<img src="http://i.imgur.com/q3XU7j1.png" width="350">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/shedinja.gif"><br />' +
 			'<b>Ace:</b> Aegislash<br />' +
 			'I was created by Zeus himself. There is a purpose for my darkness, to show you that there is redemption through Chaos.</center>'

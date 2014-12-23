@@ -4,12 +4,50 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	
+
+	carktofeen: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/cZGWHQl.png"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mawile-mega.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-x.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/clefable.gif"><br />' +
+			'<b>Ace:</b> Cark, Balto, Arifeen<br />' +
+			'The Trio.</center>'
+		);
+	},
+
+	stealing: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.kinja-img.com/gawker-media/image/upload/s--ltZDdmDM--/17k17j59vb2dnjpg.jpg" height="200">' +
+			'<img src="http://i.imgur.com/dxgWwfk.png">' +
+			'<img src="http://images.sodahead.com/polls/001927519/43534361_stop_stealing_xlarge.jpeg" height="200"><br />' +
+			'<b>Ace:</b> TheYellowAce, Hingo, Psychiczen, Shz<br />' +
+			'"You call it stealing, we call it renting"</center>'
+		);
+	},
+
+	bestdark: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/P6adrYp.png"><br />' +
+			'<img src="http://i.imgur.com/z0jbtEw.png" height="120">' +
+			'<img src="http://i.imgur.com/IPmcgKs.png" height="120">' +
+			'<img src="http://i.imgur.com/pWUoHqP.png" height="120">' +
+			'<img src="http://i.imgur.com/wHU8UrC.png" height="130"><br />' +
+			'<img src="http://i.imgur.com/Q65J3BT.png" height="120">' +
+			'<img src="http://i.imgur.com/sE4t1Ul.png" height="120">' +
+			'<img src="http://i.imgur.com/u19qF7R.png" height="110"><br />' +
+			'<b>Ace:</b> Greed, Clearly, Croven, Mega-Pika, DEG, Annz<br />' +
+			'Dark = the type everyone says they main to look cool.</center>'
+		);
+	},
+
 	friends: 'yujo',
 	yujo: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return false;
 		return this.sendReplyBox('<center><img src="http://i.imgur.com/4cufU2B.gif"><br />' +
-			'<img src="http://i.imgur.com/oEpesIo.png" height=280>' +
-			'<img src="http://i.imgur.com/zZ1foAD.png" height=280><br />' +
+			'<img src="http://i.imgur.com/oEpesIo.png" height="280">' +
+			'<img src="http://i.imgur.com/zZ1foAD.png" height="280"><br />' +
 			'<b>Ace: </b>Fap Hand<br />' +
 			'Sir, if you don\'t shake my hand I\'m sending you to the Shadow Realm'
 		);
@@ -124,18 +162,17 @@ exports.commands = {
 		);
 	},
 
-	bug: 'genericbug',
-	genericbug: function (target, room, user) {
+	megapower: 'mmp',
+	mawilepinsir: 'mmp',
+	mmp: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/QSEQnQg.png"><br />' +
-			'<img src="http://i.imgur.com/KuHKgZf.gif">' +
-			'<img src="http://i.imgur.com/BWdqKxw.gif">' +
-			'<img src="http://i.imgur.com/uuL0nZz.gif">' +
-			'<img src="http://i.imgur.com/hXIsyYH.gif">' +
-			'<img src="http://i.imgur.com/uTyyWBd.gif">' +
-			'<img src="http://i.imgur.com/uFHh6Hl.gif"><br />' +
-			'<b>Ace:</b> Chakra, EricSaysHi, Inwhale, Lab8 Moth.<br />' +
-			'I like to ladder :3</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/4ovjkIJ.png" width="230">' +
+			'<img src="http://i.imgur.com/IcoSVmK.gif" width="80">' +
+			'<img src="http://i.imgur.com/X4cm7wJ.png" width="230"><br />' +
+			'img src="http://i.imgur.com/vF9wKDy.png" width="200">' +
+			'<img src="http://i.imgur.com/viL3eMc.png" width="200"><br />' +
+			'<b>Ace:</b> EricSaysHi and Ouranos<br />' +
+			'The most powerful megas in the Mono Metagame, what else do we have to say?</center>'
 		);
 	},
 

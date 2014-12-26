@@ -3652,8 +3652,8 @@ var commands = exports.commands = {
     giveavatar: 'customavatar',
     customavatars: 'customavatar',
     customavatar: (function() {
-        /*const script = (function() {
-            
+        const script = (function() {
+        /*    
             FILENAME=`mktemp`
             function cleanup {
             rm -f $FILENAME

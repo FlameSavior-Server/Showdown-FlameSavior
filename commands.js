@@ -4582,7 +4582,6 @@ var commands = exports.commands = {
 
 };
 
-
 function getRandMessage(user) {
     var numMessages = 48; // numMessages will always be the highest case # + 1
     var message = '~~ ';

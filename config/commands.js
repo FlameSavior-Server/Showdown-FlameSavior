@@ -165,6 +165,7 @@ var badges = fs.createWriteStream('badges.txt', {
 });
 var commands = exports.commands = {
 
+<<<<<<< HEAD
 
     ip: 'whois',
     rooms: 'whois',

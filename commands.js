@@ -4583,6 +4583,7 @@ var commands = exports.commands = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	version: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -6565,6 +6566,8 @@ var commands = exports.commands = {
 	}
 >>>>>>> upstream/master
 
+=======
+>>>>>>> a0919e59d35324d6c8d94335c677c1efadc48b7a
 function getRandMessage(user) {
     var numMessages = 48; // numMessages will always be the highest case # + 1
     var message = '~~ ';

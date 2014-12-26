@@ -4100,6 +4100,7 @@ var commands = exports.commands = {
             this.sendReply("Help for the command '" + target + "' was not found. Try /help for general help");
         }
     }
+<<<<<<< HEAD
 =======
 	ip: 'whois',
 	rooms: 'whois',
@@ -5741,5 +5742,7 @@ var commands = exports.commands = {
 		}
 	}
 >>>>>>> upstream/master
+=======
+>>>>>>> a0919e59d35324d6c8d94335c677c1efadc48b7a
 
 };

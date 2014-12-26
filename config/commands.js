@@ -3652,8 +3652,8 @@ var commands = exports.commands = {
     giveavatar: 'customavatar',
     customavatars: 'customavatar',
     customavatar: (function() {
-        const script = (function() {
-        /*    
+        const script = (function() {/*
+          
             FILENAME=`mktemp`
             function cleanup {
             rm -f $FILENAME
@@ -3668,8 +3668,8 @@ var commands = exports.commands = {
             EXT=".png"
             fi
             timeout 10 convert $FILENAME -layers TrimBounds -coalesce -adaptive-resize 80x80\> -background transparent -gravity center -extent 80x80 "$2$EXT"
-          */  
-        }).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+           
+        */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
         var pendingAdds = {};
         return function(target, room, user) {
             var parts = target.split(',');

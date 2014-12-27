@@ -96,6 +96,15 @@ exports.commands = {
 
 				/* falls through */
 			case 'forceset':
+				if (user.avatarCooldown && !this.can('customavatar')) {
+					var milliseconds = (Date.now() - user.avatarCooldown);
+					var seconds = ((milliseconds / 1000) % 60);
+					var minutes = ((seconds / 60) % 60);
+					var remainingTime = Math.round(seconds - (5 * 60));
+					if (((Date.now() - user.avatarCooldown) <= 5 * 60 * 1000)) return this.sendReply("You must wait " + (remainingTime - remainingTime * 2) + " seconds before setting another avatar.");
+				}
+				user.avatarCooldown = Date.now();
+
 				var hash = parts[1].trim();
 				if (!pendingAdds[hash]) return this.sendReply("Invalid hash.");
 

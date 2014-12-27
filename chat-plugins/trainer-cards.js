@@ -4,7 +4,75 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
-	
+	genericdark: 'realdark',
+	realdark: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Jn2mPZN.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/mandibuzz.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/greninja.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sableye.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/hydreigon.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/tyranitar.gif"><br />' +
+			'<b>Ace:</b> Dusk, Clearly, Annz, Greed, Dream Eater Gengar, Mega-P!ka, and Glob of Ectoplasm, Laxus<br />' +
+			'The Darkness is going to outspeed, stall and eat you. GG NO RE</center>'
+		);
+	},
+
+	exhaust: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/zqn97hU.gif">' +
+			'<img src="http://i.imgur.com/Wjo3csA.png">' +
+			'<img src="http://i.imgur.com/MwBhch5.gif"><br />' +
+			'<b>Ace:</b> Generic Kaiser Teams<br />' +
+			'Detriments and Relevance.<br />' +
+			'<button name="send" value="/transferbucks exhaust, 1"><font color="blue"><b>Donate 1 Buck to Exhaust!</b></font></button></center>'
+		);
+	},
+
+	irra: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/kyurem-black.gif">' +
+			'<img src="http://i.imgur.com/4gJZpvI.png">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/altaria-mega.gif"><br />' +
+			'<b>Ace:</b> Kyurem-Black and Mega Altaria<br />' +
+			'I\'m Nasty.</center>'
+		);
+	},
+
+	fine: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://thelibrarianerin.files.wordpress.com/2013/03/im-fine.gif" width="160">' +
+			'<img src="http://i.imgur.com/rIIzP1j.gif" width="260">' +
+			'<img src="http://cdn.meme.am/instances/500x/57434232.jpg" width="120"><br />' +
+			'<b>Ace:</b> When shit hits the fan!<br />' +
+			'Its fine.. Its fine.. SHIT ITS NOT FINE. NOT FINE! ABORT!</center>'
+		);
+	},
+
+	fire: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/YmGI3l6.png"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/charizard-megay.gif">' +
+			'<img src="http://sprites.pokecheck.org/i/392.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/rotom-heat.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/talonflame.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/victini.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/torkoal.gif"><br />' +
+			'<b>Ace:</b> Jak, Zenith, Zarif<br />' +
+			'We burn shit.</center>'
+		);
+	},
+
+	feli: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/9CMKPWE.gif">' +
+			'<img src="http://i.imgur.com/LkUUp8f.gif">' +
+			'<img src="http://i.imgur.com/QVeZHWr.png"><br />' +
+			'<b>Ace:</b> Blizzards<br />' +
+			'The only thing I fear is fear itself.</center>'
+		);
+	},
 
 	carktofeen: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
@@ -2681,13 +2749,14 @@ exports.commands = {
 		);
 	},
 
-	wrath: function(target, room, user) {
+	wrath: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/Juhmirh.gif" width="150">' +
-			'<img src="http://i.imgur.com/uQClQ0R.gif">' +
-			'<img src="http://i.imgur.com/LiMJIzg.gif" width="160"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Tr8YwtJ.gif">' +
+			'<img src="http://i.imgur.com/v4Ex1oQ.gif" width="240">' +
+			'<img src="http://i.imgur.com/1rZIv4k.gif"><br />' +
+			'<img src="http://i.imgur.com/UDWCF3R.gif" width="350"><br />' +
 			'<b>Ace:</b> Tyrantrum<br />' +
-			'I can clearly see your weakness with my Ultimate Eye.</center>'
+			'"I am the destroyer of this world. No one can stop me."</center>'
 		);
 	},
 
@@ -4781,10 +4850,12 @@ exports.commands = {
 
 	coolasian: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('Trainer: Cool Asian<br />' +
-			'Ace: Politoed<br />' +
-			'Catchphrase: I\'m feeling the flow. Prepare for battle!<br />' +
-			'<img src="http://pldh.net/media/pokemon/gen5/blackwhite_animated_front/186.gif">'
+		this.sendReplyBox('<center><img src="http://giant.gfycat.com/DeafeningWindingKoi.gif" width="150">' +
+			'<img src="http://i.imgur.com/OOGVc3l.gif">' +
+			'<img src="http://i.imgur.com/k7uWJ21.gif" width="140"><br />' +
+			'<b>Ace:</b> 8]<br />' +
+			'Get up out, watchu doin?<br />' +
+			'<a href="http://youtu.be/2dbR2JZmlWo"><button><font color="blue"><b>Plz kys</b></font></a></button></center>'
 		);
 	},
 

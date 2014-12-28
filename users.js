@@ -1043,7 +1043,10 @@ User = (function () {
 				} else if (body === '4') {
 					this.autoconfirmed = userid;
 				} else if (body === '5') {
-					this.lock(false, userid);
+					if (!Config.disableGlobalLocks) {
+						this.lock(false, userid);
+						this.locked = '#global';
+					}
 				} else if (body === '6') {
 					this.ban(false, userid);
 				}

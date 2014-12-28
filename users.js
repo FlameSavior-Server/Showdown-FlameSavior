@@ -622,6 +622,7 @@ User = (function () {
 				if (room.auth[this.userid]) {
 					return room.auth[this.userid] + this.name + (this.awayName || '');
 				}
+				if (room.autorank) return room.autorank + this.name + (this.awayName || '');
 				if (room.isPrivate) return ' ' + this.name + (this.awayName || '');
 			}
 		}
@@ -651,6 +652,7 @@ User = (function () {
 			} else if (room.isPrivate) {
 				group = ' ';
 			}
+			if (room.autorank && !room.auth[this.userid]) group = room.autorank;
 			groupData = Config.groups[group];
 			if (target) {
 				if (room.auth[target.userid]) {

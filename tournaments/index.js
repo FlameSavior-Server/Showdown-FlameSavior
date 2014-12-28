@@ -313,6 +313,7 @@ Tournament = (function () {
 		}
 
 		if (toId(this.generator.name).substr(5) === 'buyin') {
+			this.room.tournamentPool -= this.room.tournamentBuyin;
 			try {
 				var economy = require('../economy.js');
 				economy.writeMoney(user.userid, this.room.tournamentBuyin);

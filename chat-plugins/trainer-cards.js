@@ -4,6 +4,24 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	funds: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/2991Iam.png" height=250><br />' +
+			'<b>Ace:</b> Nidoqueen<br />' +
+			'Generic Ground = GG</center>'
+		);
+	},
+
+	botany: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/XgfxKnU.gif">' +
+			'<img src="http://i.imgur.com/B664LyM.png">' +
+			'<img src="http://i.imgur.com/qkdAdo7.gif"><br />' +
+			'<b><font color="#458B00">Ace:</font></b> <font color="#458B00">Bulbasaur</font><br />' +
+			'<font color="#458B00">Smart as a Vine Whip</font></center>'
+		);
+	},
+
 	chevy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Oiv4R2S.gif">' +

@@ -816,7 +816,7 @@ Tournament = (function () {
 			} 
 
 			if (toId(this.generator.name).substr(5) === 'buyin') {
-				this.room.tournamentPool = Math.round(this.room.tournamentPool * 0.10);
+				this.room.tournamentPool -= Math.round(this.room.tournamentPool * 0.10);
 				firstMoney = Math.round(this.room.tournamentPool / 1.5);
 				secondMoney = Math.floor(this.room.tournamentPool - firstMoney);
 				firstBuck = 'buck';

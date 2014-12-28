@@ -690,11 +690,14 @@ var BattleRoom = (function () {
 		}
 	};
 	BattleRoom.prototype.win = function (winner) {
-		if (this.rated) {
+		// Declare variables here in case we need them for non-rated battles logging.
+		var p1score = 0.5;
 			var winnerid = toId(winner);
+
+		// Check if the battle was rated to update the ladder, return its response, and log the battle.
+		if (this.rated) {
 			var rated = this.rated;
 			this.rated = false;
-			var p1score = 0.5;
 
 			if (winnerid === rated.p1) {
 				p1score = 1;
@@ -773,6 +776,15 @@ var BattleRoom = (function () {
 					}
 				});
 			}
+		} else if (Config.logchallenges) {
+			// Log challenges if the challenge logging config is enabled.
+			if (winnerid === this.p1.userid) {
+				p1score = 1;
+			} else if (winnerid === this.p2.userid) {
+				p1score = 0;
+			}
+			this.update();
+			this.logBattle(p1score);
 		}
 		if (this.tour) {
 			var winnerid = toId(winner);
@@ -1076,26 +1088,34 @@ var BattleRoom = (function () {
 		// this handles joining a battle in which a user is a participant,
 		// where the user has already identified before attempting to join
 		// the battle
-		this.battle.resendRequest(user);
+		this.battle.resendRequest(connection);
 	};
 	BattleRoom.prototype.onJoin = function (user, connection) {
 		if (!user) return false;
 		if (this.users[user.userid]) return user;
 
-		if (user.named) {
-			this.add('|join|' + user.name);
-			this.update();
-		}
-
 		this.users[user.userid] = user;
 		this.userCount++;
 
 		this.sendUser(connection, '|init|battle\n|title|' + this.title + '\n' + this.getLogForUser(user).join('\n'));
+		if (user.named) {
+			if (Config.reportbattlejoins) {
+			this.add('|join|' + user.name);
+			} else {
+				this.add('|J|' + user.name);
+			}
+			this.update();
+		}
+
 		return user;
 	};
 	BattleRoom.prototype.onRename = function (user, oldid, joining) {
 		if (joining) {
+			if (Config.reportbattlejoins) {
 			this.add('|join|' + user.name);
+			} else {
+				this.add('|J|' + user.name);
+			}
 		}
 		var resend = joining || !this.battle.playerTable[oldid];
 		if (this.battle.playerTable[oldid]) {
@@ -1131,7 +1151,11 @@ var BattleRoom = (function () {
 		}
 		delete this.users[user.userid];
 		this.userCount--;
+		if (Config.reportbattlejoins) {
 		this.add('|leave|' + user.name);
+		} else {
+			this.add('|L|' + user.name);
+		}
 
 		if (Object.isEmpty(this.users)) {
 			rooms.global.battleCount += 0 - (this.active ? 1 : 0);
@@ -1422,20 +1446,19 @@ var ChatRoom = (function () {
 		if (!user) return false; // ???
 		if (this.users[user.userid]) return user;
 
-		if (user.named && Config.reportjoins) {
-			this.add('|j|' + user.getIdentity(this.id));
-			this.update();
-		} else if (user.named) {
-			var entry = '|J|' + user.getIdentity(this.id);
-			this.reportJoin(entry);
-		}
-
 		this.users[user.userid] = user;
 		this.userCount++;
 
 		if (!merging) {
 			var userList = this.userList ? this.userList : this.getUserList();
 			this.sendUser(connection, '|init|chat\n|title|' + this.title + '\n' + userList + '\n' + this.getLogSlice(-100).join('\n') + this.getIntroMessage());
+		}
+		if (user.named && Config.reportjoins) {
+			this.add('|j|' + user.getIdentity(this.id));
+			this.update();
+		} else if (user.named) {
+			var entry = '|J|' + user.getIdentity(this.id);
+			this.reportJoin(entry);
 		}
 		if (global.Tournaments && Tournaments.get(this.id)) {
 			Tournaments.get(this.id).updateFor(user, connection);

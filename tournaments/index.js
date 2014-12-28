@@ -802,8 +802,8 @@ Tournament = (function () {
 				}
 			}
 
-			var firstMoney;
-			var secondMoney;
+			var firstMoney = false;
+			var secondMoney = false;
 			var firstBuck;
 			var secondBuck;
 
@@ -824,22 +824,24 @@ Tournament = (function () {
 
 			var self = this;
 
-			if (firstMoney > 1) firstBuck = 'bucks';
-			if (secondMoney > 1) secondBuck = 'bucks';
-			this.room.add('|raw|<b><font color="'+frostcommands.hashColor(winner)+'">'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
-			if (runnerUp) this.room.add('|raw|<b><font color="'+frostcommands.hashColor(runnerUp)+'">'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second!</b>');
-			economy.writeMoney(toId(winner), firstMoney, function() {
-				economy.readMoney(toId(winner), function(newMoney) {
-					economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
-					if (runnerUp) {
-						economy.writeMoney(toId(runnerUp), secondMoney, function() {
-							var newMoney2 = economy.readMoney(toId(runnerUp), function(newMoney2) {
-								economy.logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney2);
+			if (firstMoney) {
+				if (firstMoney > 1) firstBuck = 'bucks';
+				if (secondMoney > 1) secondBuck = 'bucks';
+				this.room.add('|raw|<b><font color="'+frostcommands.hashColor(winner)+'">'+frostcommands.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+firstMoney+'</font> '+firstBuck+' for winning the tournament!</b>');
+				if (runnerUp) this.room.add('|raw|<b><font color="'+frostcommands.hashColor(runnerUp)+'">'+frostcommands.escapeHTML(runnerUp)+'</font> has also won <font color=#24678d>'+secondMoney+'</font> '+secondBuck+' for coming in second!</b>');
+				economy.writeMoney(toId(winner), firstMoney, function() {
+					economy.readMoney(toId(winner), function(newMoney) {
+						economy.logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
+						if (runnerUp) {
+							economy.writeMoney(toId(runnerUp), secondMoney, function() {
+								var newMoney2 = economy.readMoney(toId(runnerUp), function(newMoney2) {
+									economy.logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney2);
+								});
 							});
-						});
-					}
+						}
+					});
 				});
-			});
+			}
 		} catch (e) {
 			console.log('Error giving bucks for tournaments: '+e.stack);
 		}

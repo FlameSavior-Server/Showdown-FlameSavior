@@ -4,6 +4,30 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	chevy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Oiv4R2S.gif">' +
+			'<img src="http://i.imgur.com/uwBbkNZ.gif">' +
+			'<img src="http://imgur.com/Yiowo2y.png"><br />' +
+			'<font size=3><b>Ace:</b> Gengar and Ganondorf</font><br />' +
+			'<b>Quote:</b> "Embrace the shadows, for if you embrace them, they shall embrace you.<br />' +
+			' With the power of the shadows, you can then bend the darkness of reality to your own liking."'
+		);
+	},
+
+	water: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://209.190.33.194/images/93a/93ae3c776ab994ff3501a059ab4e0f0b2c9deffe.png"><br />' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/230.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/184.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/171.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/226.gif">' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/658.gif">' +
+			'<br /><b>Ace:</b> Messiah, Cark, Sae, Kyo, Booty<br />' +
+			'In one move we make your girl wetter than you ever did</center>'
+		);
+	},
+
 	genericdark: 'realdark',
 	realdark: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

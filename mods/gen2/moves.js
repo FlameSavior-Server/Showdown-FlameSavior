@@ -325,9 +325,29 @@ exports.BattleMovedex = {
 			}
 		}
 	},
+<<<<<<< HEAD
 	waterfall: {
 		inherit: true,
 		secondary: false
+=======
+	triattack: {
+		inherit: true,
+		secondary: {
+			chance: 20,
+			onHit: function (target, source) {
+				if (!target.hasType('Normal')) {
+					var result = this.random(3);
+					if (result === 0) {
+						target.trySetStatus('brn', source);
+					} else if (result === 1) {
+						target.trySetStatus('par', source);
+					} else {
+						target.trySetStatus('frz', source);
+					}
+				}
+			}
+		}
+>>>>>>> upstream/master
 	},
 	whirlwind: {
 		inherit: true,

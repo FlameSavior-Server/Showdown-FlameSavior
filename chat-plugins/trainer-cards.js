@@ -4,6 +4,52 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	pwnselec: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/1RzP5IP.png">' +
+			'<img src="http://www.serebii.net/xy/pokemon/082.png">' +
+			'<img src="http://www.serebii.net/xy/pokemon/479-w.png">' +
+			'<img src="http://www.serebii.net/xy/pokemon/603.png">' +
+			'<img src="http://www.serebii.net/xy/pokemon/523.png">' +
+			'<img src="http://www.serebii.net/xy/pokemon/604.png">' +
+			'<img src="http://www.serebii.net/xy/pokemon/181-m.png"><br />' +
+			'<b>Ace:</b> Ana<br />' +
+			'MC Hammer just got struck twice by greased lightning!</center>'
+		);
+	},
+
+	sexualblue: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ospbGll.gif"><br />' +
+			'<img src="http://i.imgur.com/7zwRrhy.png" width="450"><br />' +
+			'<b>Ace:</b> Sexy mermaid<br />' +
+			'<img src="http://i.imgur.com/hwgE21J.png"></center>'
+		);
+	},
+
+	besttypes: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/4nblRFK.png"><br />' +
+			'<img src="http://i.imgur.com/BNfrv1j.png" width="500"><br />' +
+			'<b>Ace:</b> DEG, Dolph, Ace, Barida, Kaiser, Ashaury/Arkenciel, Crashy, Ticken, BuhBuh, Balto, Tesla, Argus, Ticken, Jak Zer0, Cnorth26, Kaiba, and Booty<br />' +
+			'Us being the best is a regular statistic, just look at the data, seems really realistic.</center>'
+		);
+	},
+
+	poison: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/FXukkIE.png"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoking.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/weezing.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/scolipede.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gengar.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/drapion.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/venusaur-mega.gif"><br />' +
+			'<b>Ace:</b> GodChef, ArcheDeacon, Kekstrumal, Laxuy, Blee<br />' +
+			'Poison is in everything, and no thing is without poison. The dosage makes it either a poison or a remedy.</center>'
+		);
+	},
+
 	funds: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/2991Iam.png" height=250><br />' +

@@ -44,7 +44,7 @@ exports.BattleScripts = {
 			stat = this.battle.clampIntRange(stat, 1, 999);
 
 			// Treat here the items.
-			if ((this.species in {'Cubone':1, 'Marowak':1} && this.item === 'thickclub' && statName === 'atk') || (this.species === 'Pikachu' && this.item === 'lightball' && statName in {'spa':1, 'atk':1})) {
+			if ((this.species in {'Cubone':1, 'Marowak':1} && this.item === 'thickclub' && statName === 'atk') || (this.species === 'Pikachu' && this.item === 'lightball' && statName === 'spa')) {
 				stat *= 2;
 			} else if (this.species === 'Ditto' && this.item === 'metalpowder' && statName in {'def':1, 'spd':1}) {
 				// what. the. fuck. stop playing pokémon
@@ -77,6 +77,8 @@ exports.BattleScripts = {
 			return;
 		}
 		if (!this.runEvent('BeforeMove', pokemon, target, move)) {
+			// Prevent invulnerability from persisting until the turn ends
+			pokemon.removeVolatile('twoturnmove');
 			this.clearActiveMove(true);
 			// This is only run for sleep and fully paralysed.
 			this.runEvent('AfterMoveSelf', pokemon, target, move);
@@ -252,7 +254,7 @@ exports.BattleScripts = {
 				// That means that a move that does not share the type of the target can status it.
 				// This means tri-attack can burn fire-types and freeze ice-types.
 				// Unlike gen 1, though, paralysis works for all unless the target is immune to direct move (ie. ground-types and t-wave).
-				if (!(moveData.secondaries[i].status && moveData.secondaries[i].status in {'brn':1, 'frz':1} && target.hasType(move.type))) {
+				if (!(moveData.secondaries[i].status && moveData.secondaries[i].status in {'brn':1, 'frz':1} && target && target.hasType(move.type))) {
 					var effectChance = Math.floor(moveData.secondaries[i].chance * 255 / 100);
 					if (typeof moveData.secondaries[i].chance === 'undefined' || this.random(256) < effectChance) {
 						this.moveHit(target, pokemon, move, moveData.secondaries[i], true, isSelf);
@@ -464,36 +466,6 @@ exports.BattleScripts = {
 		pokemon.faint(source, effect);
 		this.queue = [];
 	},
-	comparePriority: function (a, b) {
-		a.priority = a.priority || 0;
-		a.subPriority = a.subPriority || 0;
-		a.speed = a.speed || 0;
-		b.priority = b.priority || 0;
-		b.subPriority = b.subPriority || 0;
-		b.speed = b.speed || 0;
-		if ((typeof a.order === 'number' || typeof b.order === 'number') && a.order !== b.order) {
-			if (typeof a.order !== 'number') {
-				return -1;
-			}
-			if (typeof b.order !== 'number') {
-				return 1;
-			}
-			if (b.order - a.order) {
-				return -(b.order - a.order);
-			}
-		}
-		if (b.priority - a.priority) {
-			return b.priority - a.priority;
-		}
-		if (b.speed - a.speed) {
-			if (b.priority === -1 && a.priority === -1) return a.speed - b.speed;
-			return b.speed - a.speed;
-		}
-		if (b.subOrder - a.subOrder) {
-			return -(b.subOrder - a.subOrder);
-		}
-		return Math.random() - 0.5;
-	},
 	getResidualStatuses: function (thing, callbackType) {
 		var statuses = this.getRelevantEffectsInner(thing || this, callbackType || 'residualCallback', null, null, false, true, 'duration');
 		statuses.sort(this.comparePriority);
@@ -588,5 +560,34 @@ exports.BattleScripts = {
 		if (!noSort) {
 			this.queue.sort(this.comparePriority);
 		}
+	},
+	comparePriority: function (a, b) {
+		a.priority = a.priority || 0;
+		a.subPriority = a.subPriority || 0;
+		a.speed = a.speed || 0;
+		b.priority = b.priority || 0;
+		b.subPriority = b.subPriority || 0;
+		b.speed = b.speed || 0;
+		if ((typeof a.order === 'number' || typeof b.order === 'number') && a.order !== b.order) {
+			if (typeof a.order !== 'number') {
+				return -1;
+			}
+			if (typeof b.order !== 'number') {
+				return 1;
+			}
+			if (b.order - a.order) {
+				return -(b.order - a.order);
+			}
+		}
+		if (b.priority - a.priority) {
+			return b.priority - a.priority;
+		}
+		if (b.speed - a.speed) {
+			return b.speed - a.speed;
+		}
+		if (b.subOrder - a.subOrder) {
+			return -(b.subOrder - a.subOrder);
+		}
+		return Math.random() - 0.5;
 	}
 };

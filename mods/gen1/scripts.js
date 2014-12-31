@@ -268,7 +268,7 @@ exports.BattleScripts = {
 			this.add('-notarget');
 			return true;
 		}
-		damage = this.rollMoveHit(target, pokemon, move);
+		damage = this.tryMoveHit(target, pokemon, move);
 
 		// Store 0 damage for last damage if move failed or dealt 0 damage.
 		if (!damage) pokemon.battle.lastDamage = 0;
@@ -285,7 +285,7 @@ exports.BattleScripts = {
 		}
 		return true;
 	},
-	rollMoveHit: function (target, pokemon, move, spreadHit) {
+	tryMoveHit: function (target, pokemon, move, spreadHit) {
 		var boostTable = [1, 4 / 3, 5 / 3, 2, 7 / 3, 8 / 3, 3];
 		var doSelfDestruct = true;
 		var damage = 0;
@@ -556,7 +556,7 @@ exports.BattleScripts = {
 				// In the game, this is checked and if true, the random number generator is not called.
 				// That means that a move that does not share the type of the target can status it.
 				// If a move that was not fire-type would exist on Gen 1, it could burn a Pokémon.
-				if (!(moveData.secondaries[i].status && moveData.secondaries[i].status in {'par':1, 'brn':1, 'frz':1} && target.hasType(move.type))) {
+				if (!(moveData.secondaries[i].status && moveData.secondaries[i].status in {'par':1, 'brn':1, 'frz':1} && target && target.hasType(move.type))) {
 					var effectChance = Math.floor(moveData.secondaries[i].chance * 255 / 100);
 					if (typeof moveData.secondaries[i].chance === 'undefined' || this.random(256) < effectChance) {
 						this.moveHit(target, pokemon, move, moveData.secondaries[i], true, isSelf);

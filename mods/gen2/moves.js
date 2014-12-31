@@ -222,11 +222,7 @@ exports.BattleMovedex = {
 	},
 	selfdestruct: {
 		inherit: true,
-<<<<<<< HEAD
-		priority: -1
-=======
 		basePower: 200
->>>>>>> upstream/master
 	},
 	sleeptalk: {
 		inherit: true,
@@ -333,11 +329,6 @@ exports.BattleMovedex = {
 			}
 		}
 	},
-<<<<<<< HEAD
-	waterfall: {
-		inherit: true,
-		secondary: false
-=======
 	triattack: {
 		inherit: true,
 		secondary: {
@@ -355,7 +346,6 @@ exports.BattleMovedex = {
 				}
 			}
 		}
->>>>>>> upstream/master
 	},
 	whirlwind: {
 		inherit: true,

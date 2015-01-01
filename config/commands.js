@@ -332,7 +332,7 @@ var commands = exports.commands = {
 
 	tierpoll: 'tiervote',
 	tiervote: function (target, room, user) {
-		return this.parse('/poll Tournament Tier?, ' + tiersforpoll.toLowerCase());
+		return this.parse('/poll Tournament Tier?, ' + tiersforpoll);
 	},
 
 	tierpopt: 'tpo',

@@ -2114,9 +2114,9 @@ var commands = exports.commands = {
     terbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Sir Terlor\'s Music Box!</b><br />' +
-            '1. <a href="https://www.youtube.com/watch?v=lL2ZwXj1tXM"><button>Three Days Grace - Never Too Late</a></button><br />' +
+            '1. <a href="https://www.youtube.com/watch?v=usXhiWE2Uc0"><button>Tristam - Till It\'s Over</a></button><br />' +
             '2. <a href="https://www.youtube.com/watch?v=JpDPOs-rddM"><button>Sonata Arctica - Mary Lou</a></button><br />' +
-            '3. <a href="https://www.youtube.com/watch?v=IbOd8yf1ElI"><button>Hollywood Undead - The Diary</a></button><br />' +
+            '3. <a href="https://www.youtube.com/watch?v=DECxluN8OZM"><button>Au5 - Snowblind</a></button><br />' +
             '4. <a href="https://www.youtube.com/watch?v=JCT5uTdPRgs"><button>Black Sabbath - N.I.B</a></button><br />' +
             '5. <a href="https://www.youtube.com/watch?v=as7p6VwnR5s"><button>Vexento - Praeclara</a></button><br />' +
             '6. <a href="https://www.youtube.com/watch?v=G5zdal1MKf0"><button>Volbeat - Doc Holiday</a></button><br />' +

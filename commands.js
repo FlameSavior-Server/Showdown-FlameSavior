@@ -1242,7 +1242,7 @@ var commands = exports.commands = {
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) return this.sendReply('User '+this.targetUser+' not found.');
-		if (!this.can('unlink', targetUser)) return this.sendReply('/unlink - Access denied.');
+		if (!this.can('warn', targetUser, room)) return this.sendReply('/unlink - Access denied.');
 		this.privateModCommand('('+targetUser.name+' had their links unlinked by '+user.name+'. Any links they have posted will now be unclickable.)');
 		this.add('|unlink|'+targetUser.name);
 		for (var u in targetUser.prevNames) {

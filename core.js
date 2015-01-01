@@ -76,6 +76,7 @@ emoticons: {
         'jLp': 'http://www.rockybytes.com/i/4933/happy-potter-and-the-goblet-of-fire.jpg',
         'uwotm8': 'http://i.picresize.com/images/2014/12/01/bDLR1.png',
         'TWiseau': 'http://i.imgur.com/Ehqxqxz.jpg',
+        'AbidE': 'http://i.imgur.com/HzdD5VN.jpg',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

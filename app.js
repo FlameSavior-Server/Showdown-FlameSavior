@@ -407,8 +407,17 @@ fs.readFile('./config/ipbans.txt', function (err, data) {
 	}
 	Users.checkRangeBanned = Cidr.checker(rangebans);
 });
+<<<<<<< HEAD
 global.extras = require('./extras.js').extras();
 global.money = require('./filewriter/money.js').money;
 global.profile = require('./filewriter/profile.js').profile;
 global.datestuff = require('./filewriter/datestuff.js').datestuff;
 global.color = require('./filewriter/color.js').color;
+=======
+
+/*********************************************************
+ * Start up the REPL server
+ *********************************************************/
+
+require('./repl.js').start('app', function (cmd) { return eval(cmd); });
+>>>>>>> upstream/master

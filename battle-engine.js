@@ -70,6 +70,8 @@ var Battle, BattleSide, BattlePokemon;
 
 var Battles = {};
 
+require('./repl.js').start('battle-engine-', process.pid, function (cmd) { return eval(cmd); });
+
 // Receive and process a message sent using Simulator.prototype.send in
 // another process.
 process.on('message', function (message) {
@@ -531,7 +533,7 @@ BattlePokemon = (function () {
 			var moveName = move.move;
 			if (move.id === 'hiddenpower') {
 				moveName = 'Hidden Power ' + this.hpType;
-				if (this.gen < 6) moveName += ' ' + this.hpPower;
+				if (this.battle.gen < 6) moveName += ' ' + this.hpPower;
 			}
 			moves.push({
 				move: moveName,
@@ -1625,7 +1627,7 @@ Battle = (function () {
 		if (sourceEffect === undefined && this.effect) sourceEffect = this.effect;
 		if (source === undefined && this.event && this.event.target) source = this.event.target;
 
-		if (this.weather === status.id) return false;
+		if (this.weather === status.id && this.gen > 2) return false;
 		if (this.weather && !status.id) {
 			var oldstatus = this.getWeather();
 			this.singleEvent('End', oldstatus, this.weatherData, this);
@@ -3498,10 +3500,6 @@ Battle = (function () {
 		}
 
 		if (p1switch || p2switch) {
-			if (this.gen <= 1) {
-				// in gen 1, fainting ends the turn; residuals do not happen
-				this.queue = [];
-			}
 			this.makeRequest('switch');
 			return true;
 		}
@@ -4071,7 +4069,7 @@ Battle = (function () {
 
 		if (this.log.length > logPos) {
 			if (alreadyEnded !== undefined && this.ended && !alreadyEnded) {
-				if (this.rated) {
+				if (this.rated || Config.logchallenges) {
 					var log = {
 						turns: this.turn,
 						p1: this.p1.name,

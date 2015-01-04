@@ -4,6 +4,44 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	grezar: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/b5066e1204cf40607f92c8dbc558bf8a/tumblr_nc84rb3elS1ri0sgmo1_500.gif"  width="200"><br />' +
+			'<img src="http://fc05.deviantart.net/fs39/f/2008/328/1/1/Megaman_Beast_Out_by_ChronoSun9.gif">' +
+			'<img src="http://i.imgur.com/yWR2wkT.png">' +
+			'<img src="http://fc05.deviantart.net/fs39/f/2008/328/1/1/Megaman_Beast_Out_by_ChronoSun9.gif"><br />' +
+			'<b>Ace:</b> <font color="red">Bladed TrickR Shield</font><br />' +
+			'<font color="red">Achtung Baby! It\'s time to rock this place to the ground!</font><br />' +
+			'<img src="http://fc04.deviantart.net/fs70/f/2014/273/8/9/fnaf_markiplier_animated_by_swaggmuffxd-d8134n3.gif" width="200"></center>'
+		);
+	},
+
+	spoopy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ybPEctS.png" width="160">' +
+			'<img src="http://i.imgur.com/ms3H0tH.png">' +
+			'<img src="http://i.imgur.com/kxsf02O.png" width="160"><br />' +
+			'<b>Ace: </b>3spoopy5u<br />' +
+			'Many spoopy. so ghost. much amaze. such teeth</center>'
+		);
+	},
+
+	smartestplayer: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/oSq81Md.png"><br />' +
+			'<img src="http://i.imgur.com/jw0Y7UZ.png"><br />' +
+			'<img src="http://i.imgur.com/1NB0hSi.png"><br />' +
+			'<b>Ace: </b>Intelligence<br />' +
+			'<a href="http://pastebin.com/2LDSExkJ"><b>Click For More Intelligence!</center>'
+		);
+	},
+
+	duane: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://blog.cdn.famigo.com/blog/wp-content/uploads/2013/08/LnhpJI5.gif"></center>'
+		);
+	},
+
 	pwnselec: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/1RzP5IP.png">' +
@@ -967,10 +1005,10 @@ exports.commands = {
 
 	wander: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/aM44gy0.gif" width="160">' +
-			'<img src="http://i.imgur.com/XAzix4P.gif" width="260">' +
-			'<img src="http://i.imgur.com/UuChYqj.gif" width="120"><br />' +
-			'<b>Ace:</b> Failed Predictions and Scarfs<br />' +
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/lapras.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mamoswine.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/walrein.gif"><br />' +
+			'<b>Ace: </b>No Flex Zone, Rasputen, and Guido<br />' +
 			'You know better.</center>'
 		);
 	},

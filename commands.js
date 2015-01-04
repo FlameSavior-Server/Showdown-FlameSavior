@@ -772,18 +772,18 @@ var commands = exports.commands = {
 			if (room.voices[u] !== '') voices.push(room.voices[u]);
 		}
 		if (owners.length > 0) {
-			owners = owners.join(', ');
+			owners = '**Owners:** ' + owners.join(', ');
 		}
 		if (mods.length > 0) {
-			mods = mods.join(', ');
+			mods = '**Moderators:** ' + mods.join(', ');
 		}
 		if (drivers.length > 0) {
-			drivers = drivers.join(', ');
+			drivers = '**Drivers:** ' + drivers.join(', ');
 		}
 		if (voices.length > 0) {
-			voices = voices.join(', ');
+			voices = '**Voices:** ' + voices.join(', ');
 		}
-		connection.popup('**Founder:** ' + founder + '\n\n**Owners:** ' + owners + '\n\n**Moderators:** ' + mods + '\n\n**Drivers:** ' + drivers + '\n\n**Voices:** ' + voices);
+		connection.popup(founder + owners + mods + drivers + voices);
 	},
 
 	staff: 'stafflist',

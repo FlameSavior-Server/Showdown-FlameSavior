@@ -30,7 +30,7 @@ exports.commands = {
 			'<img src="http://25.media.tumblr.com/999093664100d6eba535b67f1ce67d79/tumblr_msxdapHUGf1ssmjh5o1_500.gif" width="180"><br />' +
 			'<b>Ace:</b> <font color="orange">Gambling</font><br />' +
 			'<b>Quote:</b> <font color="orange">That\'s so nectar bruh.</font><Br />' +
-			'<button name="send" value="/transferbucks Mr. Nectar, 1"><b>Donate To Me!</font></button></center>'
+			'<button name="send" value="/transferbucks Mr. Nectar, 1"><b><font color="orange">TDonate To Me!</font></button></center>'
 		);
 	},
 

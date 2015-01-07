@@ -11,7 +11,7 @@ var quote = "";
 exports.commands = {
 	quoteoftheday: 'qotd',
 	qotd: function (target, room, user) {
-		if (room.id !== 'thehappyplace') return this.sendReply("This command can only be used in The Happy Place.");
+		// if (room.id !== 'thehappyplace') return this.sendReply("This command can only be used in The Happy Place.");
 		if (!this.canBroadcast()) return;
 		if (!target) {
 			if (!quote) return this.sendReplyBox("The Quote of the Day has not been set.");

@@ -1,7 +1,7 @@
 .header .logo {
 display:none;
 }
-/*
+
 #header{
 	background: url(http://i.imgur.com/lA1gRmN.png) no-repeat;
 	background-color:#4594c9
@@ -91,7 +91,7 @@ body {
 	border-left:1px solid #D5DDE4;
 	background:#b2d9f0;
 }
-*/
+
 
 /**************************
 * For the colour commands *
@@ -302,7 +302,7 @@ body {
 /************************
 * Happy Holidays!    	*
 ************************/
-
+/*
 #header {
 	background:url("http://i.imgur.com/q9MiuzK.png");
 }
@@ -406,7 +406,7 @@ body {
 	background: url("http://i.imgur.com/CtoyG6B.png");
 	color: black;
 }
-
+*/
 /*
 #header{
 	background:url("http://upload.wikimedia.org/wikipedia/commons/d/da/Shades_of_blue.jpg")

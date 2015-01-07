@@ -4,6 +4,48 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	grass: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ePyo5Zu.png"><br />' +
+			'<img src="http://i.imgur.com/HxS6wfG.gif">' +
+			'<img src="http://i.imgur.com/cSW7CBa.gif">' +
+			'<img src="http://i.imgur.com/kOhfoJC.gif">' +
+			'<img src="http://i.imgur.com/vU83RbY.gif"><br />' +
+			'<img src="http://i.imgur.com/W7PKJqW.gif">' +
+			'<img src="http://i.imgur.com/3fzcEdp.gif">' +
+			'<img src="http://i.imgur.com/uOw2QcT.gif"><br />' +
+			'<font color="#458B00"><b>Ace:</b> Botany, Dell, Dorell, Ticken, Yahir<br />' +
+			'<font color="567E3A">"Don\'t go through life, grow through life"</center>'
+		);
+	},
+
+	nectar: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/OksBAC0.png"><br />' +
+			'<img src="http://25.media.tumblr.com/999093664100d6eba535b67f1ce67d79/tumblr_msxdapHUGf1ssmjh5o1_500.gif" width="180"><br />' +
+			'<font color="orange"><b>Ace:</b> Gambling<br />' +
+			'That\'s so nectar bruh.<Br />' +
+			'<button name="send" value="/transferbucks Mr. Nectar, 1"><b>Donate To Me!</font></button></center>'
+		);
+	},
+
+	dragon: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/llkhuks.gif"><br />' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/kyurem-black.gif" width="90" height="90">' +
+			'<button class="astext" name="parseCommand" value="/user Unity Zero" target="_blank">' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/goodra.gif" width="60" height="85">' +
+			'</button><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/garchomp.gif" width="90" height="90">' +
+			'<button class="astext" name="parseCommand" value="/user AM E4 Zer0">' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/latios.gif" height="90" width="95">' +
+			'</button><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/hydreigon.gif" height="100" width="115">' +
+			'<button class="astext" name="parseCommand" value="/user Imp Irra">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/altaria-mega.gif" width="100" height="90"></button><br />' +
+			'<b>Ace:</b> Zer0, Irra & Zero<br />' +
+			'A victory won through dishonesty means is no victory at all.'
+		);
+	},
+
 	grezar: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/b5066e1204cf40607f92c8dbc558bf8a/tumblr_nc84rb3elS1ri0sgmo1_500.gif"  width="200"><br />' +
@@ -77,13 +119,15 @@ exports.commands = {
 	poison: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/FXukkIE.png"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoqueen.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoking.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/weezing.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/scolipede.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gengar.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/drapion.gif">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/venusaur-mega.gif"><br />' +
-			'<b>Ace:</b> GodChef, ArcheDeacon, Kekstrumal, Laxuy, Blee<br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/venusaur-mega.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/skuntank.gif"><br />' +
+			'<b>Ace:</b> GodChef, ArcheDeacon, StyX, Kekskruemmel<br />' +
 			'Poison is in everything, and no thing is without poison. The dosage makes it either a poison or a remedy.</center>'
 		);
 	},
@@ -185,7 +229,7 @@ exports.commands = {
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/talonflame.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/victini.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/torkoal.gif"><br />' +
-			'<b>Ace:</b> Jak, Zenith, Zarif<br />' +
+			'<b>Ace:</b> Jak, Zenith, Zarif, Boss<br />' +
 			'We burn shit.</center>'
 		);
 	},

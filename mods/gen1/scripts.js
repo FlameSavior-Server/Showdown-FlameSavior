@@ -19,7 +19,7 @@ exports.BattleScripts = {
 	},
 	// BattlePokemon scripts.
 	pokemon: {
-		getStat: function (statName, unboosted, unmodified) {
+		getStat: function (statName, unboosted, unmodified, noscreens) {
 			statName = toId(statName);
 			if (statName === 'hp') return this.maxhp;
 
@@ -56,11 +56,11 @@ exports.BattleScripts = {
 			}
 
 			// Hard coded Reflect and Light Screen boosts
-			if (this.volatiles['reflect'] && statName === 'def' && !unboosted) {
+			if (this.volatiles['reflect'] && statName === 'def' && !unboosted && !noscreens) {
 				this.battle.debug('Reflect doubles Defense');
 				stat *= 2;
 				stat = this.battle.clampIntRange(stat, 1, 1998);
-			} else if (this.volatiles['lightscreen'] && statName === 'spd' && !unboosted) {
+			} else if (this.volatiles['lightscreen'] && statName === 'spd' && !unboosted && !noscreens) {
 				this.battle.debug('Light Screen doubles Special Defense');
 				stat *= 2;
 				stat = this.battle.clampIntRange(stat, 1, 1998);
@@ -186,7 +186,7 @@ exports.BattleScripts = {
 					pokemon.volatiles['partialtrappinglock'].locked = target;
 				} else {
 					if (pokemon.volatiles['partialtrappinglock'].locked !== target && target !== pokemon) {
-						// The target switched, therefor, we must re-roll the duration
+						// The target switched, therefor, we must re-roll the duration, damage, and accuracy.
 						var duration = [2, 2, 2, 3, 3, 3, 4, 5][this.random(8)];
 						pokemon.volatiles['partialtrappinglock'].duration = duration;
 						pokemon.volatiles['partialtrappinglock'].locked = target;
@@ -268,7 +268,7 @@ exports.BattleScripts = {
 			this.add('-notarget');
 			return true;
 		}
-		damage = this.rollMoveHit(target, pokemon, move);
+		damage = this.tryMoveHit(target, pokemon, move);
 
 		// Store 0 damage for last damage if move failed or dealt 0 damage.
 		if (!damage) pokemon.battle.lastDamage = 0;
@@ -285,7 +285,7 @@ exports.BattleScripts = {
 		}
 		return true;
 	},
-	rollMoveHit: function (target, pokemon, move, spreadHit) {
+	tryMoveHit: function (target, pokemon, move, spreadHit) {
 		var boostTable = [1, 4 / 3, 5 / 3, 2, 7 / 3, 8 / 3, 3];
 		var doSelfDestruct = true;
 		var damage = 0;
@@ -294,7 +294,7 @@ exports.BattleScripts = {
 		var accuracy = move.accuracy;
 
 		// Partial trapping moves: true accuracy while it lasts
-		if (move.volatileStatus === 'partiallytrapped' && pokemon.volatiles['partialtrappinglock']) {
+		if (move.volatileStatus === 'partiallytrapped' && pokemon.volatiles['partialtrappinglock'] && target === pokemon.volatiles['partialtrappinglock'].locked) {
 			accuracy = true;
 		}
 
@@ -382,7 +382,12 @@ exports.BattleScripts = {
 			this.faint(pokemon, pokemon, move);
 		}
 
-		if (!damage && damage !== 0) return false;
+		// The move missed.
+		if (!damage && damage !== 0) {
+			// Delete the partial trap lock if necessary.
+			delete pokemon.volatiles['partialtrappinglock'];
+			return false;
+		}
 
 		if (!move.negateSecondary) {
 			this.singleEvent('AfterMoveSecondary', move, null, target, pokemon, move);
@@ -551,13 +556,16 @@ exports.BattleScripts = {
 			this.moveHit(pokemon, pokemon, move, moveData.self, isSecondary, true);
 		}
 		if (moveData.secondaries) {
-			var secondaryRoll;
-			var effectChance;
 			for (var i = 0; i < moveData.secondaries.length; i++) {
-				secondaryRoll = this.random(256);
-				effectChance = Math.floor(moveData.secondaries[i].chance * 255 / 100);
-				if (typeof moveData.secondaries[i].chance === 'undefined' || secondaryRoll < effectChance) {
-					this.moveHit(target, pokemon, move, moveData.secondaries[i], true, isSelf);
+				// We check here whether to negate the probable secondary status if it's para, burn, or freeze.
+				// In the game, this is checked and if true, the random number generator is not called.
+				// That means that a move that does not share the type of the target can status it.
+				// If a move that was not fire-type would exist on Gen 1, it could burn a Pokémon.
+				if (!(moveData.secondaries[i].status && moveData.secondaries[i].status in {'par':1, 'brn':1, 'frz':1} && target && target.hasType(move.type))) {
+					var effectChance = Math.floor(moveData.secondaries[i].chance * 255 / 100);
+					if (typeof moveData.secondaries[i].chance === 'undefined' || this.random(256) < effectChance) {
+						this.moveHit(target, pokemon, move, moveData.secondaries[i], true, isSelf);
+					}
 				}
 			}
 		}
@@ -774,7 +782,7 @@ exports.BattleScripts = {
 		if (damage > 1) {
 			damage *= this.random(217, 256);
 			damage = Math.floor(damage / 255);
-			if (damage > target.hp) damage = target.hp;
+			if (damage > target.hp && !target.volatiles['substitute']) damage = target.hp;
 		}
 
 		// We are done, this is the final damage.
@@ -1200,5 +1208,166 @@ exports.BattleScripts = {
 		}
 
 		return damage;
+	},
+	runDecision: function (decision) {
+		// We have to declare here the vars we are going to use on the switch outside of blocks due to the let hack on the gulpfile.
+		var pokemon, beginCallback, target, i;
+
+		// returns whether or not we ended in a callback
+		switch (decision.choice) {
+		case 'start':
+			// I GIVE UP, WILL WRESTLE WITH EVENT SYSTEM LATER
+			beginCallback = this.getFormat().onBegin;
+			if (beginCallback) beginCallback.call(this);
+
+			this.add('start');
+			for (var pos = 0; pos < this.p1.active.length; pos++) {
+				this.switchIn(this.p1.pokemon[pos], pos);
+			}
+			for (var pos = 0; pos < this.p2.active.length; pos++) {
+				this.switchIn(this.p2.pokemon[pos], pos);
+			}
+			for (var pos = 0; pos < this.p1.pokemon.length; pos++) {
+				pokemon = this.p1.pokemon[pos];
+				this.singleEvent('Start', this.getEffect(pokemon.species), pokemon.speciesData, pokemon);
+			}
+			for (var pos = 0; pos < this.p2.pokemon.length; pos++) {
+				pokemon = this.p2.pokemon[pos];
+				this.singleEvent('Start', this.getEffect(pokemon.species), pokemon.speciesData, pokemon);
+			}
+			this.midTurn = true;
+			break;
+		case 'move':
+			if (!decision.pokemon.isActive) return false;
+			if (decision.pokemon.fainted) return false;
+			this.runMove(decision.move, decision.pokemon, this.getTarget(decision), decision.sourceEffect);
+			break;
+		case 'beforeTurnMove':
+			if (!decision.pokemon.isActive) return false;
+			if (decision.pokemon.fainted) return false;
+			this.debug('before turn callback: ' + decision.move.id);
+			target = this.getTarget(decision);
+			if (!target) return false;
+			decision.move.beforeTurnCallback.call(this, decision.pokemon, target);
+			break;
+		case 'event':
+			this.runEvent(decision.event, decision.pokemon);
+			break;
+		case 'team':
+			i = parseInt(decision.team[0], 10) - 1;
+			if (i >= 6 || i < 0) return;
+
+			if (decision.team[1]) {
+				// validate the choice
+				var len = decision.side.pokemon.length;
+				var newPokemon = [null, null, null, null, null, null].slice(0, len);
+				for (var j = 0; j < len; j++) {
+					var i = parseInt(decision.team[j], 10) - 1;
+					newPokemon[j] = decision.side.pokemon[i];
+				}
+				var reject = false;
+				for (var j = 0; j < len; j++) {
+					if (!newPokemon[j]) reject = true;
+				}
+				if (!reject) {
+					for (var j = 0; j < len; j++) {
+						newPokemon[j].position = j;
+					}
+					decision.side.pokemon = newPokemon;
+					return;
+				}
+			}
+
+			if (i === 0) return;
+			pokemon = decision.side.pokemon[i];
+			if (!pokemon) return;
+			decision.side.pokemon[i] = decision.side.pokemon[0];
+			decision.side.pokemon[0] = pokemon;
+			decision.side.pokemon[i].position = i;
+			decision.side.pokemon[0].position = 0;
+			// we return here because the update event would crash since there are no active pokemon yet
+			return;
+		case 'pass':
+			if (!decision.priority || decision.priority <= 101) return;
+			if (decision.pokemon) {
+				decision.pokemon.switchFlag = false;
+			}
+			break;
+		case 'switch':
+			if (decision.pokemon) {
+				decision.pokemon.beingCalledBack = true;
+				var lastMove = this.getMove(decision.pokemon.lastMove);
+				if (lastMove.selfSwitch !== 'copyvolatile') {
+					this.runEvent('BeforeSwitchOut', decision.pokemon);
+				}
+				if (!this.runEvent('SwitchOut', decision.pokemon)) {
+					break;
+				}
+				this.singleEvent('End', this.getAbility(decision.pokemon.ability), decision.pokemon.abilityData, decision.pokemon);
+			}
+			if (decision.target.isActive) {
+				this.debug('Switch target is already active');
+				break;
+			}
+			this.switchIn(decision.target, decision.pokemon.position);
+			break;
+		case 'runSwitch':
+			this.runEvent('SwitchIn', decision.pokemon);
+			this.runEvent('AfterSwitchInSelf', decision.pokemon);
+			if (!decision.pokemon.hp) break;
+			decision.pokemon.isStarted = true;
+			if (!decision.pokemon.fainted) {
+				this.singleEvent('Start', decision.pokemon.getAbility(), decision.pokemon.abilityData, decision.pokemon);
+				this.singleEvent('Start', decision.pokemon.getItem(), decision.pokemon.itemData, decision.pokemon);
+			}
+			break;
+		case 'beforeTurn':
+			this.eachEvent('BeforeTurn');
+			break;
+		case 'residual':
+			this.add('');
+			this.clearActiveMove(true);
+			this.residualEvent('Residual');
+			break;
+		}
+		this.clearActiveMove();
+
+		// fainting
+		this.faintMessages();
+		if (this.ended) return true;
+
+		// switching (fainted pokemon, etc)
+
+		if (!this.queue.length || this.queue[0].choice in {move:1, residual:1}) {
+			// in gen 3 or earlier, switching in fainted pokemon is done after
+			// every move, rather than only at the end of the turn.
+			this.checkFainted();
+		} else if (decision.choice === 'pass') {
+			this.eachEvent('Update');
+			return false;
+		}
+
+		function hasSwitchFlag(a) { return a ? a.switchFlag : false; }
+		function removeSwitchFlag(a) { if (a) a.switchFlag = false; }
+		var p1switch = this.p1.active.any(hasSwitchFlag);
+		var p2switch = this.p2.active.any(hasSwitchFlag);
+
+		if (p1switch && !this.canSwitch(this.p1)) {
+			this.p1.active.forEach(removeSwitchFlag);
+			p1switch = false;
+		}
+		if (p2switch && !this.canSwitch(this.p2)) {
+			this.p2.active.forEach(removeSwitchFlag);
+			p2switch = false;
+		}
+
+		if (p1switch || p2switch) {
+			this.makeRequest('switch');
+			return true;
+		}
+
+		this.eachEvent('Update');
+
+		return false;
 	}
 };

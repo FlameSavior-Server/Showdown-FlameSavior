@@ -538,7 +538,7 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help dexsearch');
 		var targets = target.split(',');
 		var searches = {};
-		var allTiers = {'uber':1, 'ou':1, 'uu':1, 'lc':1, 'cap':1, 'bl':1, 'bl2':1, 'ru':1, 'bl3':1, 'nu':1, 'pu':1, 'nfe':1};
+		var allTiers = {'uber':1, 'ou':1, 'bl':1, 'uu':1, 'bl2':1, 'ru':1, 'bl3':1, 'nu':1, 'bl4':1, 'pu':1, 'nfe':1, 'lc':1, 'cap':1};
 		var allColours = {'green':1, 'red':1, 'blue':1, 'white':1, 'brown':1, 'yellow':1, 'purple':1, 'pink':1, 'gray':1, 'black':1};
 		var showAll = false;
 		var megaSearch = null;
@@ -1247,6 +1247,7 @@ var commands = exports.commands = {
 			'- /modchat <em>[%/@/#]</em>: set modchat level<br />' +
 			'- /toggleglobaldeclares: disables/enables global declares in your room<br />' +
 			'- /autorank [rank] - Automatically promotes every user to the specified rank when they join the room.<br />' +
+			'- /hiddenroom [on/off] - Makes the room hidden / public.<br />' +
 			'<br />' +
 			'The room founder can also use:<br />' +
 			'- /roomowner <em>username</em>: appoint a room owner<br />' +
@@ -1386,7 +1387,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'smogondoubles' || target === 'doubles') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523833/\">np: Doubles Stage 1</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3525739/\">np: Doubles Stage 1.5</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3498688/\">Doubles Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3522814/\">Doubles Viability Rankings</a><br />";
 		}
@@ -1891,19 +1892,6 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/removefriend [user] - removes the specified user from your friends list. Only works on the custom client.');
 		}
-		if (target === 'join') {
-			matched = true;
-			this.sendReply("/join [roomname] - Attempts to join the room [roomname].");
-		}
-		if (target === 'ignore') {
-			matched = true;
-			this.sendReply("/ignore [user] - Ignores all messages from the user [user].");
-			this.sendReply("Note that staff messages cannot be ignored.");
-		}
-		if (target === 'unignore') {
-			matched = true;
-			this.sendReply("/unignore [user] - Removes user [user] from your ignore list.");
-		}
 		if (target === 'invite') {
 			matched = true;
 			this.sendReply("/invite [username], [roomname] - Invites the player [username] to join the room [roomname].");
@@ -2161,10 +2149,6 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/roomdeowner [username] - Removes [username]\'s status as a room owner. Requires: & ~');
 		}
-		if (target === '&' || target === 'privateroom') {
-			matched = true;
-			this.sendReply('/privateroom [on/off] - Makes or unmakes a room private. Requires: & ~');
-		}
 		if (target === '&' || target === 'roomfounder') {
 			matched = true;
 			this.sendReply('/roomfounder [username] - Sets [username] as the room founder. Requires: & ~');
@@ -2219,9 +2203,20 @@ var commands = exports.commands = {
 			this.sendReply('/takevip OR /remvip OR /removevip [username] - Removes VIP status from [username]. Requires: ~');
 		}
 		// VIP Commands
-		if (target === 'VIP' || target === '/customavatar') {
+		if (target === 'vip' || target === 'customavatar') {
 			matched = true;
 			this.sendReply('/customavatar [image] - Sets the specified image as your avatar. Image must be a GIF or PNG. Requires: VIP');
+		}
+
+		if (target === 'vip' || target === 'changecolor' || target === 'changecolour' || target === 'customcolor' || target === 'customcolour') {
+			matched = true;
+			this.sendReply('/changecolor [name] - Changes your name colour to match the colour of the name specified. Requires: VIP');
+		}
+
+		if (target === 'privateroom' || target === 'hiddenroom') {
+			matched = true;
+			this.sendReply("/privateroom [on/off] - Makes or unmakes a room private. Requires: ~");
+			this.sendReply("/hiddenroom [on/off] - Makes or unmakes a room hidden. Hidden rooms will maintain global ranks of users. Requires: \u2605 ~");
 		}
 
 		// overall
@@ -2235,7 +2230,7 @@ var commands = exports.commands = {
 			this.sendReply('For details on all room commands, use /roomhelp');
 			this.sendReply('For details on all commands, use /help all');
 			if (user.vip) {
-				this.sendReply('VIP COMMANDS: /customavatar');
+				this.sendReply('VIP COMMANDS: /customavatar, /changecolor');
 			}
 			if (user.group !== Config.groupsranking[0]) {
 				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /modlog, /forcerename, /alts');

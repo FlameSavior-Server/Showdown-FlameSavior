@@ -19,9 +19,9 @@ exports.BattleStatuses = {
 		},
 		onSwitchIn: function (pokemon) {
 			pokemon.addVolatile('brnattackdrop');
-			if (pokemon.side.foe.active[0] && pokemon.speed <= pokemon.side.foe.active[0].speed) {
-				this.damage(pokemon.maxhp / 16);
-			}
+		},
+		onAfterSwitchInSelf: function (pokemon) {
+			this.damage(pokemon.maxhp / 16);
 		}
 	},
 	par: {
@@ -93,10 +93,8 @@ exports.BattleStatuses = {
 		onAfterMoveSelf: function (pokemon) {
 			this.damage(pokemon.maxhp / 16);
 		},
-		onSwitchIn: function (pokemon) {
-			if (pokemon.side.foe.active[0] && pokemon.speed <= pokemon.side.foe.active[0].speed) {
-				this.damage(pokemon.maxhp / 16);
-			}
+		onAfterSwitchInSelf: function (pokemon) {
+			this.damage(pokemon.maxhp / 16);
 		}
 	},
 	tox: {
@@ -111,7 +109,7 @@ exports.BattleStatuses = {
 			}
 			this.damage(this.clampIntRange(pokemon.maxhp / 16, 1) * this.effectData.stage);
 		},
-		onSwitchIn: function (pokemon) {
+		onAfterSwitchInSelf: function (pokemon) {
 			this.effectData.stage = 0; // probably unnecessary...
 			pokemon.setStatus('psn');
 			// normal poison damage...
@@ -140,15 +138,16 @@ exports.BattleStatuses = {
 			this.add('-activate', pokemon, 'confusion');
 			if (this.random(256) >= 128) {
 				// We check here to implement the substitute bug since otherwise we need to change directDamage to take target.
+				var damage = Math.floor(Math.floor(((Math.floor(2 * pokemon.level / 5) + 2) * pokemon.getStat('atk') * 40) / pokemon.getStat('def', false, false, true)) / 50) + 2;
 				if (pokemon.volatiles['substitute']) {
 					// If there is Substitute, we check for opposing substitute.
 					if (target.volatiles['substitute']) {
 						// Damage that one instead.
-						this.directDamage(this.getDamage(pokemon, pokemon, 40), target);
+						this.directDamage(damage, target);
 					}
 				} else {
 					// No substitute, direct damage to itself.
-					this.directDamage(this.getDamage(pokemon, pokemon, 40));
+					this.directDamage(damage);
 				}
 				pokemon.removeVolatile('bide');
 				pokemon.removeVolatile('lockedmovee');
@@ -337,36 +336,6 @@ exports.BattleStatuses = {
 	ragemiss: {
 		onModifyMove: function (move) {
 			if (move.id === 'rage') move.accuracy = 1 / 255 * 100;
-		}
-	},
-	diginvulnerable: {
-		onAccuracy: function (accuracy, target, source, move) {
-			if (move.id === 'swift') return true;
-			this.add('-message', 'The foe ' + target.name + ' can\'t be hit underground!');
-			return null;
-		},
-		onDamage: function (damage, target, source, move) {
-			if (!move || move.effectType !== 'Move') return;
-			if (!source) return;
-			if (move.id === 'earthquake') {
-				this.add('-message', 'The foe ' + target.name + ' can\'t be hit underground!');
-				return null;
-			}
-		}
-	},
-	flyinvulnerable: {
-		onAccuracy: function (accuracy, target, source, move) {
-			if (move.id === 'swift') return true;
-			this.add('-message', 'The foe ' + target.name + ' can\'t be hit while flying!');
-			return null;
-		},
-		onDamage: function (damage, target, source, move) {
-			if (!move || move.effectType !== 'Move') return;
-			if (!source || source.side === target.side) return;
-			if (move.id === 'gust' || move.id === 'thunder') {
-				this.add('-message', 'The foe ' + target.name + ' can\'t be hit while flying!');
-				return null;
-			}
 		}
 	}
 };

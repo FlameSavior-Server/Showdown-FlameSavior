@@ -613,7 +613,7 @@ var GlobalRoom = (function () {
 		if (rooms.lobby) return rooms.lobby.chat(user, message, connection);
 		message = CommandParser.parse(message, this, user, connection);
 		if (message) {
-			connection.sendPopup("You can't send messages directly to the server.");
+			connection.popup("You can't send messages directly to the server.");
 		}
 	};
 	return GlobalRoom;
@@ -1607,10 +1607,10 @@ var deleteInactiveRooms = setInterval(function() {
 			Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.</b></font>');
 			Rooms.rooms[u].update();
 		} else if (!Rooms.rooms[u].active && Rooms.rooms[u].protect && !Rooms.rooms[u].isPrivate) {
-			Rooms.rooms[u].isPrivate = true;
-			Rooms.rooms[u].chatRoomData.isPrivate = true;
+			Rooms.rooms[u].isPrivate = 'hidden';
+			Rooms.rooms[u].chatRoomData.isPrivate = 'hidden';
 			Rooms.global.writeChatRoomData();
-			Rooms.rooms[u].addRaw("<font color=red><b>This room has been made private due to being inactive.</b></font>");
+			Rooms.rooms[u].addRaw("<font color=red><b>This room has been made hidden due to being inactive.</b></font>");
 			Rooms.rooms[u].update();
 		}
 	}

@@ -1381,7 +1381,7 @@ var ChatRoom = (function () {
 		var buffer = '';
 		var counter = 0;
 		for (var i in this.users) {
-			if (!this.users[i].named) {
+			if (!this.users[i].named || this.users[i].hidden) {
 				continue;
 			}
 			counter++;
@@ -1453,10 +1453,10 @@ var ChatRoom = (function () {
 			var userList = this.userList ? this.userList : this.getUserList();
 			this.sendUser(connection, '|init|chat\n|title|' + this.title + '\n' + userList + '\n' + this.getLogSlice(-100).join('\n') + this.getIntroMessage());
 		}
-		if (user.named && Config.reportjoins) {
+		if (user.named && Config.reportjoins && !user.hidden) {
 			this.add('|j|' + user.getIdentity(this.id));
 			this.update();
-		} else if (user.named) {
+		} else if (user.named && !user.hidden) {
 			var entry = '|J|' + user.getIdentity(this.id);
 			this.reportJoin(entry);
 		}

@@ -763,6 +763,11 @@ var commands = exports.commands = {
 
 		if (room.founder) founder = '**Founder:** ' + room.founder;
 
+		if (room.autorank === '#') owners = owners + '\nAutorank is set to #.';
+		if (room.autorank === '@') mods = mods + '\nAutorank is set to @.';
+		if (room.autorank === '%') drivers = drivers + '\nAutorank is set to %.';
+		if (room.autorank === '+') voices = voices + '\nAutorank is set to +.';
+
 		room.owners = room.owners.split(',');
 		room.mods = room.mods.split(',');
 		room.drivers = room.drivers.split(',');

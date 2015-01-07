@@ -7,7 +7,7 @@ exports.commands = {
 	carlton: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/kuG1Nqp.gif" height=350></center>');
-	}.
+	},
 
 	grass: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

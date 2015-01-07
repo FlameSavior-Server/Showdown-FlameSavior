@@ -417,34 +417,34 @@ var Trivia = (function () {
 exports.commands = {
 	// trivia game commands
 	trivianew: function (target, room) {
-		if (room.id !== 'trivia' || !this.can('broadcast', null, room) || !target) return false;
+		// if (room.id !== 'trivia' || !this.can('broadcast', null, room) || !target) return false;
 		Trivia.getInstance().startSignups(target, room, this);
 	},
 	triviajoin: function (target, room, user) {
-		if (room.id !== 'trivia') return false;
+		// if (room.id !== 'trivia') return false;
 		Trivia.getInstance().addParticipant(user, this);
 	},
 	triviastart: function (target, room) {
-		if (room.id !== 'trivia' || !this.can('broadcast', null, room)) return false;
+		// if (room.id !== 'trivia' || !this.can('broadcast', null, room)) return false;
 		Trivia.getInstance().startGame(this);
 	},
 	triviakick: function (target, room) {
-		if (room.id !== 'trivia' || !this.can('mute', null, room) || !target) return false;
+		// if (room.id !== 'trivia' || !this.can('mute', null, room) || !target) return false;
 		Trivia.getInstance().kickParticipant(target, this);
 	},
 	ta: function (target, room, user) {
-		if (room.id !== 'trivia' || !target) return false;
+		// if (room.id !== 'trivia' || !target) return false;
 		Trivia.getInstance().answerQuestion(target, user, this);
 	},
 	triviaend: function (target, room, user) {
-		if (room.id !== 'trivia' || !this.can('broadcast', null, room)) return false;
+		// if (room.id !== 'trivia' || !this.can('broadcast', null, room)) return false;
 		Trivia.getInstance().endGame(room, user, this);
 	},
 
 	// question database modifying commands
 	triviasubmit: 'triviaadd',
 	triviaadd: function (target, room, user, connection, cmd) {
-		if (room.id !== 'trivia' && room.id !== 'qstaff' || cmd === 'triviaadd' && !this.can('mute', null, room) || !target) return false;
+		if (/*room.id !== 'trivia' && room.id !== 'qstaff' || */cmd === 'triviaadd' && !this.can('mute', null, room) || !target) return false;
 
 		target = target.split('|');
 		if (target.length !== 3) return this.sendReply('Invalid arguments specified. View /triviahelp qcommands for more information.');
@@ -497,7 +497,7 @@ exports.commands = {
 		}
 	},
 	triviareview: function (target, room) {
-		if (room.id !== 'trivia' && room.id !== 'qstaff' || !this.can('mute', null, room)) return false;
+		if (/*room.id !== 'trivia' && room.id !== 'qstaff' || */!this.can('mute', null, room)) return false;
 
 		var submissions = triviaData.submissions;
 		var submissionsLen = submissions.length;
@@ -519,7 +519,7 @@ exports.commands = {
 	},
 	triviareject: 'triviaaccept',
 	triviaaccept: function (target, room, user, connection, cmd) {
-		if (room.id !== 'trivia' && room.id !== 'qstaff' || !this.can('mute', null, room) || !target) return false;
+		if (/*room.id !== 'trivia' && room.id !== 'qstaff' || */!this.can('mute', null, room) || !target) return false;
 
 		var isAccepting = cmd === 'triviaaccept';
 		var submissions = triviaData.submissions;
@@ -583,7 +583,7 @@ exports.commands = {
 		this.sendReply('"' + target + '" is an invalid argument. View /triviahelp qcommands for more information.');
 	},
 	triviadelete: function (target, room) {
-		if (room.id !== 'trivia' && room.id !== 'qstaff' || !this.can('mute', null, room) || !target) return false;
+		if (/*room.id !== 'trivia' && room.id !== 'qstaff' || */!this.can('mute', null, room) || !target) return false;
 
 		var question = Tools.escapeHTML(target).trim();
 		if (!question) return this.sendReply('"' + target.trim() + '" is not a valid question.');
@@ -600,7 +600,7 @@ exports.commands = {
 	},
 	triviaquestions: 'triviaqs',
 	triviaqs: function (target, room, user) {
-		if (room.id !== 'trivia' && room.id !== 'qstaff' || !this.can('mute', null, room)) return false;
+		if (/*room.id !== 'trivia' && room.id !== 'qstaff' || */!this.can('mute', null, room)) return false;
 		if (!target) return this.sendReply('/triviaqs requires a specified category. View /triviahelp gamehelp for more information.');
 
 		var category = toId(target);
@@ -637,15 +637,15 @@ exports.commands = {
 
 	// informational commands
 	triviastatus: function (target, room, user) {
-		if (room.id !== 'trivia') return false;
+		// if (room.id !== 'trivia') return false;
 		Trivia.getInstance().getStatus(user, this);
 	},
 	triviaplayers: function (target, room) {
-		if (room.id !== 'trivia') return false;
+		// if (room.id !== 'trivia') return false;
 		Trivia.getInstance().getParticipants(this);
 	},
 	triviarank: function (target, room, user) {
-		if (room.id !== 'trivia') return false;
+		// if (room.id !== 'trivia') return false;
 
 		var userid = '';
 		var username = '';
@@ -673,7 +673,7 @@ exports.commands = {
 		                  'Total correct answers: <strong>' + score[2] + '</strong>');
 	},
 	triviahelp: function (target, room) {
-		if (room.id !== 'trivia' && room.id !== 'qstaff' || !this.canBroadcast()) return false;
+		if (/*room.id !== 'trivia' && room.id !== 'qstaff' || */!this.canBroadcast()) return false;
 
 		target = toId(target);
 		switch (target) {

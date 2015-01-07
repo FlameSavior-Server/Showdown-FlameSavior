@@ -761,7 +761,7 @@ var commands = exports.commands = {
 			}
 		}
 
-		if (room.founder) founder = room.founder;
+		if (room.founder) founder = '**Founder:** ' + room.founder;
 
 		room.owners = room.owners.split(',');
 		room.mods = room.mods.split(',');
@@ -793,7 +793,7 @@ var commands = exports.commands = {
 		if (voices.length > 0) {
 			voices = '**Voices:** ' + voices.join(', ');
 		}
-		connection.popup(founder + owners + mods + drivers + voices);
+		connection.popup(founder + '\n\n' + owners + '\n\n' + mods + '\n\n' + drivers + '\n\n' + voices);
 	},
 
 	staff: 'stafflist',

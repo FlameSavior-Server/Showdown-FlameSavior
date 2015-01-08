@@ -1692,25 +1692,6 @@ var commands = exports.commands = {
 		this.sendReplyBox('<button name="send" value="/pm ' + targets[0] + ', ' + targets[1] + '">Custom PM Box</button>');
 	},
 
-	hangmanhelp: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox(
-			'<font size = 2>A brief introduction to </font><font size = 3>Hangman:</font><br />' +
-			'The classic game, the basic idea of hangman is to guess the word that someone is thinking of before the man is "hanged." Players are given 8 guesses before this happens.<br />' +
-			'Games can be started by any of the rank Voice or higher, including Room Voice, Room Mod, and Room Owner.<br />' +
-			'The commands are:<br />' +
-			'<ul><li>/hangman [word], [description] - Starts the game of hangman, with a specified word and a general category. Requires: + % @ & ~</li>' +
-			'<li>/guess [letter] - Guesses a letter.</li>' +
-			'<li>/guessword [word] - Guesses a word.</li>' +
-			'<li>/viewhangman - Shows the current status of hangman. Can be broadcasted.</li>' +
-			'<li>/word - Allows the person running hangman to view the word.</li>' +
-			'<li>/category [description] OR /topic [description] - Allows the person running hangman to changed the topic.</li>' +
-			'<li>/endhangman - Ends the game of hangman in the room. Requires: + % @ & ~</li></ul>' +
-			'Due to some recent changes, hangman can now be played in multiple rooms at once (excluding lobby, it\'s a little spammy).<br />' +
-			'Have fun, and feel free to PM me if you find any bugs! - piiiikachuuu'
-		);
-	},
-
 	/*********************************************************
 	 * Help commands
 	 *********************************************************/

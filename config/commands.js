@@ -299,7 +299,7 @@ var commands = exports.commands = {
 	 		delete room.chatRoomData.autorank;
 	 		Rooms.global.writeChatRoomData();
 	 		for (var u in room.users) Users.users[u].updateIdentity();
-	 		return this.privateModCommand("(" + user.name + " has disabled autorank in this room.");
+	 		return this.privateModCommand("(" + user.name + " has disabled autorank in this room.)");
 	 	}
 	 	if (room.autorank && room.autorank === target) return this.sendReply("Autorank is already set to \"" + target + "\".");
 

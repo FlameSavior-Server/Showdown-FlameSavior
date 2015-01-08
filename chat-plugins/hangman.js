@@ -33,6 +33,7 @@ exports.commands = {
 			case 'start':
 			case 'create':
 				if (!user.can('broadcast', null, room)) return this.sendReply("/hangman create - Access denied.");
+				if (!room.hangmanEnabled) return this.sendReply("Hangman is disabled in this room.");
 				if (!targetSplit || !targetSplit[2]) return this.sendReply("Usage: /hangman [create], [word], [topic]");
 				var word = targetSplit[1];
 				word = word.replace(/[^a-z]+/g, '');

@@ -11,8 +11,9 @@ var hangedMan =
 exports.commands = {
 	hangman: function (target, room, user) {
 		if (!this.canTalk()) return this.sendReply("You are unable to talk in this room.");
+		if (!this.canBroadcast()) return false;
 		if (!target) target = 'view';
-		var cmd = (~target.indexOf(',') ? target.substr(0, target.indexOf(',')) : target).trim();
+		var cmd = (target.indexOf(',') ? target.substr(0, target.indexOf(',')) : target).trim();
 		var targetSplit = target.split(',');
 		for (var u in targetSplit) targetSplit[u] = targetSplit[u].trim();
 
@@ -68,7 +69,7 @@ exports.commands = {
 				);
 				break;
 			case 'topic':
-			case 'changtopic':
+			case 'changetopic':
 				if (!room.hangman) return this.sendReply("There's no game of hangman in this room.");
 				if (user.userid !== room.hangman.hangmaner) return this.sendReply("You can't change the topic if you're not running hangman.");
 				if (!targetSplit || !targetSplit[1]) return this.sendReply("Usage: /hangman [topic], [newtopic]");
@@ -92,7 +93,7 @@ exports.commands = {
 				if (!targetSplit || !targetSplit[1]) return this.sendReply("Usage: /hangman [guess], [letter]");
 				if (targetSplit[1].length > 1) return this.sendReply("Please specify a letter to guess. To guess the word use /hangman [guessword], [word]");
 				var letter = targetSplit[1];
-				if (~room.hangman.guessedLetters.indexOf(letter)) return this.sendReply("Someone has already guessed that letter.");
+				if (room.hangman.guessedLetters.indexOf(letter)) return this.sendReply("Someone has already guessed that letter.");
 				var found = false;
 				room.hangman.guessedLetters.push(letter);
 
@@ -106,8 +107,8 @@ exports.commands = {
 				room.hangman.guesses--;
 
 				if (found) {
-					if (!~room.hangman.guessWord.indexOf('_')) {
-						room.add("|raw|<div class=\"infobox\">Congratulatuions! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: " + room.hangman.word + "</div>");
+					if (!room.hangman.guessWord.indexOf('_')) {
+						room.add("|raw|<div class=\"infobox\">Congratulations! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: " + room.hangman.word + "</div>");
 						room.update();
 						delete room.hangman;
 						return;
@@ -137,7 +138,7 @@ exports.commands = {
 				if (!targetSplit || !targetSplit[1]) return this.sendReply("Usage: /hangman [guessword], [word]");
 				if (targetSplit[1].length !== room.hangman.word.length) return this.sendReply("You can't guess a word that doesn't match the length of the hangman word.");
 				var word = targetSplit[1];
-				if (~room.hangman.guessedWords.indexOf(word.toLowerCase())) return this.sendReply("That word has already been guessed.");
+				if (room.hangman.guessedWords.indexOf(word.toLowerCase())) return this.sendReply("That word has already been guessed.");
 				room.hangman.guessedWords.push(word.toLowerCase());
 				room.hangman.guesses--;
 

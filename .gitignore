@@ -5,12 +5,6 @@ npm-debug.log
 filewriter
 funstuff
 infofiles
-sysops.js
-app.js
-command-parser.js
-tournaments/index.js
-config/formats.js
-data/rulesets.js
 
 # boilerplate #
 ###############

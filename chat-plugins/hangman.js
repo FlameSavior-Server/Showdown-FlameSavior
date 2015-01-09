@@ -18,6 +18,7 @@ exports.commands = {
 
 		switch (cmd) {
 			case 'help':
+				if (!this.canBroadcast()) return false;
 				this.sendReplyBox(
 					"Hangman commands: <br />" +
 					"/hangman create/start, [word], [topic] - Creates a game of hangman.<br />" +
@@ -32,6 +33,7 @@ exports.commands = {
 			case 'start':
 			case 'create':
 				if (!user.can('broadcast', null, room)) return this.sendReply("/hangman create - Access denied.");
+				if (!room.hangmanEnabled) return this.sendReply("Hangman is disabled in this room.");
 				if (!targetSplit || !targetSplit[2]) return this.sendReply("Usage: /hangman [create], [word], [topic]");
 				var word = targetSplit[1];
 				word = word.replace(/[^a-z]+/g, '');
@@ -68,7 +70,7 @@ exports.commands = {
 				);
 				break;
 			case 'topic':
-			case 'changtopic':
+			case 'changetopic':
 				if (!room.hangman) return this.sendReply("There's no game of hangman in this room.");
 				if (user.userid !== room.hangman.hangmaner) return this.sendReply("You can't change the topic if you're not running hangman.");
 				if (!targetSplit || !targetSplit[1]) return this.sendReply("Usage: /hangman [topic], [newtopic]");
@@ -107,7 +109,7 @@ exports.commands = {
 
 				if (found) {
 					if (!~room.hangman.guessWord.indexOf('_')) {
-						room.add("|raw|<div class=\"infobox\">Congratulatuions! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: " + room.hangman.word + "</div>");
+						room.add("|raw|<div class=\"infobox\">Congratulations! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: " + room.hangman.word + "</div>");
 						room.update();
 						delete room.hangman;
 						return;

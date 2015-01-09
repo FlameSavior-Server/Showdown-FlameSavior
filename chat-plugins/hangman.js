@@ -11,7 +11,6 @@ var hangedMan =
 exports.commands = {
 	hangman: function (target, room, user) {
 		if (!this.canTalk()) return this.sendReply("You are unable to talk in this room.");
-		if (!this.canBroadcast()) return false;
 		if (!target) target = 'view';
 		var cmd = (~target.indexOf(',') ? target.substr(0, target.indexOf(',')) : target).trim();
 		var targetSplit = target.split(',');
@@ -19,6 +18,7 @@ exports.commands = {
 
 		switch (cmd) {
 			case 'help':
+				if (!this.canBroadcast()) return false;
 				this.sendReplyBox(
 					"Hangman commands: <br />" +
 					"/hangman create/start, [word], [topic] - Creates a game of hangman.<br />" +

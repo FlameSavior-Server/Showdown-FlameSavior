@@ -15,7 +15,7 @@ exports.commands = {
 
 	taotd: 'toggleaotd',
 	toggleaotd: function (target, room, user) {
-		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+		// if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
 		if (!this.canTalk()) return;
 		if (!this.can('mute', null, room)) return;
 		if (!target) {
@@ -43,7 +43,7 @@ exports.commands = {
 	aotdfaq: 'aotdhelp',
 	aotdhelp: function (target, room) {
 		if (!this.canBroadcast()) return;
-		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+		// if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
 		this.sendReplyBox(
 			"<h3>Artist of the Day:</h3>" +
 			"<p>This is a room activity for The Studio where users nominate artists for the title of 'Artist of the Day'.</p>" +
@@ -63,7 +63,7 @@ exports.commands = {
 
 	nominateartistoftheday: 'naotd',
 	naotd: function (target, room, user) {
-		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+		// if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
 		if (!room.aotdOn) return this.sendReply("The Artist of the Day has already been chosen.");
 		if (!target) return this.sendReply("/naotd [artist] - Nominates an artist for Artist of the Day.");
 		if (target.length > 25) return this.sendReply("This Artist's name is too long; it cannot exceed 25 characters.");
@@ -73,7 +73,7 @@ exports.commands = {
 
 	artistoftheday: 'aotd',
 	aotd: function (target, room, user) {
-		if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
+		// if (room.id !== 'thestudio') return this.sendReply("This command can only be used in The Studio.");
 		if (!target) {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox("The current Artist of the Day is: <b>" + Tools.escapeHTML(room.aotd) + "</b>");

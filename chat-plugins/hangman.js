@@ -56,7 +56,7 @@ exports.commands = {
 				}
 				room.add(
 					"|raw|<div class =\"infobox\"><div class=\"broadcast-green\"><center><font size=2><b>" + Tools.escapeHTML(user.name) +
-					"</b> started a game of hangman! The word has " + word.length + " letters.<br />" + room.hangman.guessWord.join(" ") +
+					"</b> started a game of hangman! The word has <b>" + word.length + "</b> letters.<br />" + room.hangman.guessWord.join(" ") +
 					"<br />Topic: " + Tools.escapeHTML(room.hangman.topic) + "</font></center></div></div>"
 				);
 				room.update();
@@ -109,7 +109,7 @@ exports.commands = {
 
 				if (found) {
 					if (!~room.hangman.guessWord.indexOf('_')) {
-						room.add("|raw|<div class=\"infobox\">Congratulations! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: " + room.hangman.word + "</div>");
+						room.add("|raw|<div class=\"infobox\">Congratulations! <b>" + Tools.escapeHTML(user.name) + "</b> has guessed the word, which was: <b>" + room.hangman.word + "</b></div>");
 						room.update();
 						delete room.hangman;
 						return;
@@ -184,7 +184,7 @@ exports.commands = {
 			case 'end':
 				if (!user.can('broadcast', null, room)) return this.sendReply("/hangman end - Access denied.");
 				if (!room.hangman) return this.sendReply("There is no hangman game in this room.");
-				room.add("|raw|<b>Hangman has been ended by " + Tools.escapeHTML(user.name) + "</b>");
+				room.add("|raw|<b>Hangman has been ended by " + Tools.escapeHTML(user.name) + "</b>.");
 				room.update();
 				delete room.hangman;
 				break;

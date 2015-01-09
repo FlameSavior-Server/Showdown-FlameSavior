@@ -761,12 +761,7 @@ var commands = exports.commands = {
 			}
 		}
 
-		if (room.founder) founder = '**Founder:** ' + room.founder;
-
-		if (room.autorank === '#') owners = owners + '\nAutorank is set to #.';
-		if (room.autorank === '@') mods = mods + '\nAutorank is set to @.';
-		if (room.autorank === '%') drivers = drivers + '\nAutorank is set to %.';
-		if (room.autorank === '+') voices = voices + '\nAutorank is set to +.';
+		if (room.founder) founder = '**Founder:** ' + room.founder + '\n\n';
 
 		room.owners = room.owners.split(',');
 		room.mods = room.mods.split(',');
@@ -787,18 +782,24 @@ var commands = exports.commands = {
 			if (room.voices[u] !== '') voices.push(room.voices[u]);
 		}
 		if (owners.length > 0) {
-			owners = '**Owners:** ' + owners.join(', ');
+			owners = '**Owners:** ' + owners.join(', ') + '\n\n';
 		}
 		if (mods.length > 0) {
-			mods = '**Moderators:** ' + mods.join(', ');
+			mods = '**Moderators:** ' + mods.join(', ') + '\n\n';
 		}
 		if (drivers.length > 0) {
-			drivers = '**Drivers:** ' + drivers.join(', ');
+			drivers = '**Drivers:** ' + drivers.join(', ') + '\n\n';
 		}
 		if (voices.length > 0) {
-			voices = '**Voices:** ' + voices.join(', ');
+			voices = '**Voices:** ' + voices.join(', ') + '\n\n';
 		}
-		connection.popup(founder + '\n\n' + owners + '\n\n' + mods + '\n\n' + drivers + '\n\n' + voices);
+
+		if (room.autorank === '#') owners = owners + 'Autorank is set to #.';
+		if (room.autorank === '@') mods = mods + 'Autorank is set to @.';
+		if (room.autorank === '%') drivers = drivers + 'Autorank is set to %.';
+		if (room.autorank === '+') voices = voices + 'Autorank is set to +.';
+
+		connection.popup(founder + owners + mods + drivers + voices);
 	},
 
 	staff: 'stafflist',

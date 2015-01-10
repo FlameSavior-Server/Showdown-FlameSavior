@@ -488,13 +488,20 @@ exports.commands = {
 		);
 	},
 
+	kgb: 'kgbeast',	
 	kgbeast: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani/gliscor.gif">' +
-			'<img src="http://i.imgur.com/UK9uvOs.png" width="360">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gastrodon.gif"><br />' +
-			'<font color="red"><blink><b>Ace:</blink></b></font> <font color="black"><b><blink>Gliscor</blink></font></b><br />' +
-			'Quotes are for skrubz.</center>'
+		this.sendReplyBox('<center><marquee scrollamount="10" direction="right"><font size="4"><blink>~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</blink></font></marquee><br />' +
+			'<img src="http://i.imgur.com/f5Xa8lE.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/mamoswine.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/gliscor.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gastrodon.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/nidoking.gif"><br />' +
+			'<font color="red"><b>Ace:</b></font> <font color="black"><b>Gliscor</b></font><br />' +
+			'<i>Why? Because, wynaut. :^)</i><br />' +
+			'<button name="send" value="/transferbucks KGBeast, 1"><font color="blue"><b>Donate 1 buck to me!</b></font></button><br />' +
+			'<marquee scrollamount="10" direction="left"><font size="4"><blink>~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</blink></font></marquee></center>'
 		);
 	},
 
@@ -2042,11 +2049,11 @@ exports.commands = {
 
 	arifeen: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://media.pldh.net/pokemon/gen6/xy-animated/006-mega-x.gif">' +
-			'<img src="http://i.imgur.com/JT64me1.gif" width="250">' +
-			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated-shiny/642-therian.gif"><br />' +
-			'<b>Ace:</b> Charizard-X and Thundurus-T<br />' +
-			'<font face="Comic Sans MS">I\'ll read you faster than the lyrics of Skrillex\'s dubsteps</font></center>'
+		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani/charizard-mega-x.gif">' +
+			'<img src="http://i.imgur.com/X3fJccD.png" width="250">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus.gif"><br />' +
+			'<b>Ace:</b> Landorus<br />' +
+			'"Don\'t tell me the sky\'s the limit when there are footprints on the moon."</center>'
 		);
 	},
 

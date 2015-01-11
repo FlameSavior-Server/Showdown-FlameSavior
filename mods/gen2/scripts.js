@@ -103,7 +103,7 @@ exports.BattleScripts = {
 		pokemon.moveUsed(move);
 		this.useMove(move, pokemon, target, sourceEffect);
 		this.runEvent('AfterMove', target, pokemon, move);
-		if (!move.selfSwitch) this.runEvent('AfterMoveSelf', pokemon, target, move);
+		if (!move.selfSwitch && target.hp > 0) this.runEvent('AfterMoveSelf', pokemon, target, move);
 	},
 	moveHit: function (target, pokemon, move, moveData, isSecondary, isSelf) {
 		var damage;
@@ -462,10 +462,6 @@ exports.BattleScripts = {
 		// We are done, this is the final damage
 		return damage;
 	},
-	faint: function (pokemon, source, effect) {
-		pokemon.faint(source, effect);
-		this.queue = [];
-	},
 	getResidualStatuses: function (thing, callbackType) {
 		var statuses = this.getRelevantEffectsInner(thing || this, callbackType || 'residualCallback', null, null, false, true, 'duration');
 		statuses.sort(this.comparePriority);
@@ -702,13 +698,14 @@ exports.BattleScripts = {
 			break;
 		case 'runSwitch':
 			this.runEvent('SwitchIn', decision.pokemon);
-			this.runEvent('AfterSwitchInSelf', decision.pokemon);
+			if (!decision.pokemon.side.faintedThisTurn && decision.pokemon.draggedIn !== this.turn) this.runEvent('AfterSwitchInSelf', decision.pokemon);
 			if (!decision.pokemon.hp) break;
 			decision.pokemon.isStarted = true;
 			if (!decision.pokemon.fainted) {
 				this.singleEvent('Start', decision.pokemon.getAbility(), decision.pokemon.abilityData, decision.pokemon);
 				this.singleEvent('Start', decision.pokemon.getItem(), decision.pokemon.itemData, decision.pokemon);
 			}
+			delete decision.pokemon.draggedIn;
 			break;
 		case 'beforeTurn':
 			this.eachEvent('BeforeTurn');
@@ -773,5 +770,104 @@ exports.BattleScripts = {
 		this.eachEvent('Update');
 
 		return false;
+	},
+	dragIn: function (side, pos) {
+		if (pos >= side.active.length) return false;
+		var pokemon = this.getRandomSwitchable(side);
+		if (!pos) pos = 0;
+		if (!pokemon || pokemon.isActive) return false;
+		this.runEvent('BeforeSwitchIn', pokemon);
+		if (side.active[pos]) {
+			var oldActive = side.active[pos];
+			if (!oldActive.hp) {
+				return false;
+			}
+			if (!this.runEvent('DragOut', oldActive)) {
+				return false;
+			}
+			this.runEvent('SwitchOut', oldActive);
+			this.singleEvent('End', this.getAbility(oldActive.ability), oldActive.abilityData, oldActive);
+			oldActive.isActive = false;
+			oldActive.isStarted = false;
+			oldActive.position = pokemon.position;
+			pokemon.position = pos;
+			side.pokemon[pokemon.position] = pokemon;
+			side.pokemon[oldActive.position] = oldActive;
+			this.cancelMove(oldActive);
+			oldActive.clearVolatile();
+		}
+		side.active[pos] = pokemon;
+		pokemon.isActive = true;
+		pokemon.activeTurns = 0;
+		pokemon.draggedIn = this.turn;
+		for (var m in pokemon.moveset) {
+			pokemon.moveset[m].used = false;
+		}
+		this.add('drag', pokemon, pokemon.getDetails);
+		pokemon.update();
+		this.addQueue({pokemon: pokemon, choice: 'runSwitch'});
+		return true;
+	},
+	damage: function (damage, target, source, effect) {
+		if (this.event) {
+			if (!target) target = this.event.target;
+			if (!source) source = this.event.source;
+			if (!effect) effect = this.effect;
+		}
+		if (!target || !target.hp) return 0;
+		effect = this.getEffect(effect);
+		if (!(damage || damage === 0)) return damage;
+		if (damage !== 0) damage = this.clampIntRange(damage, 1);
+
+		if (effect.id !== 'struggle-recoil') { // Struggle recoil is not affected by effects
+			if (effect.effectType === 'Weather' && !target.runImmunity(effect.id)) {
+				this.debug('weather immunity');
+				return 0;
+			}
+			damage = this.runEvent('Damage', target, source, effect, damage);
+			if (!(damage || damage === 0)) {
+				this.debug('damage event failed');
+				return damage;
+			}
+			if (target.illusion && effect && effect.effectType === 'Move') {
+				this.debug('illusion cleared');
+				target.illusion = null;
+				this.add('replace', target, target.getDetails);
+			}
+		}
+		if (damage !== 0) damage = this.clampIntRange(damage, 1);
+		damage = target.damage(damage, source, effect);
+		if (source) source.lastDamage = damage;
+		var name = effect.fullname;
+		if (name === 'tox') name = 'psn';
+		switch (effect.id) {
+		case 'partiallytrapped':
+			this.add('-damage', target, target.getHealth, '[from] ' + this.effectData.sourceEffect.fullname, '[partiallytrapped]');
+			break;
+		default:
+			if (effect.effectType === 'Move') {
+				this.add('-damage', target, target.getHealth);
+			} else if (source && source !== target) {
+				this.add('-damage', target, target.getHealth, '[from] ' + effect.fullname, '[of] ' + source);
+			} else {
+				this.add('-damage', target, target.getHealth, '[from] ' + name);
+			}
+			break;
+		}
+
+		if (effect.drain && source) {
+			this.heal(Math.ceil(damage * effect.drain[0] / effect.drain[1]), source, target, 'drain');
+		}
+
+		if (target.fainted || target.hp <= 0) {
+			this.debug('instafaint: ' + this.faintQueue.map('target').map('name'));
+			this.faintMessages(true);
+			target.faint();
+			this.queue = [];
+		} else {
+			damage = this.runEvent('AfterDamage', target, source, effect, damage);
+		}
+
+		return damage;
 	}
 };

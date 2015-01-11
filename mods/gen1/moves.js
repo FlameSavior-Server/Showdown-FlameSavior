@@ -204,7 +204,7 @@ exports.BattleMovedex = {
 		damageCallback: function (pokemon, target) {
 			// Counter mechanics on gen 1 might be hard to understand.
 			// It will fail if the last move selected by the opponent has base power 0 or is not Normal or Fighting Type.
-			// If both are true, counter will deal twice the last damage dealt in battle.
+			// If both are true, counter will deal twice the last damage dealt in battle, no matter what was the move.
 			// That means that, if opponent switches, counter will use last counter damage * 2.
 			var lastUsedMove = this.getMove(target.side.lastMove);
 			if (lastUsedMove && lastUsedMove.basePower > 0 && lastUsedMove.type in {'Normal': 1, 'Fighting': 1} && target.battle.lastDamage > 0) {
@@ -444,25 +444,26 @@ exports.BattleMovedex = {
 		effect: {
 			onStart: function (target) {
 				this.add('-start', target, 'move: Leech Seed');
+				if (!target.volatiles['residualdmg']) target.addVolatile('residualdmg');
+				if (!target.volatiles['residualdmg'].counter) target.volatiles['residualdmg'].counter = 0;
+				target.volatiles['residualdmg'].counter++;
 			},
+			onAfterMoveSelfPriority: 1,
 			onAfterMoveSelf: function (pokemon) {
 				var leecher = pokemon.side.foe.active[pokemon.volatiles['leechseed'].sourcePosition];
 				if (!leecher || leecher.fainted || leecher.hp <= 0) {
 					this.debug('Nothing to leech into');
 					return;
 				}
-				// We check if leeched Pokémon has Toxic to increase leeched damage
-				var toLeech;
-				if (pokemon.status === 'tox') {
-					// Stage plus one since leech seed runs before Toxic
-					toLeech = this.clampIntRange(pokemon.maxhp / 16, 1) * (pokemon.statusData.stage + 1);
-				} else {
-					toLeech = this.clampIntRange(pokemon.maxhp / 16, 1);
+				// We check if leeched Pokémon has Toxic to increase leeched damage.
+				var toxicCounter = 1;
+				if (pokemon.volatiles['residualdmg']) {
+					if (pokemon.status === 'tox') pokemon.volatiles['residualdmg'].counter++;
+					toxicCounter = pokemon.volatiles['residualdmg'].counter;
 				}
+				var toLeech = this.clampIntRange(Math.floor(pokemon.maxhp / 16), 1) * toxicCounter;
 				var damage = this.damage(toLeech, pokemon, leecher);
-				if (damage) {
-					this.heal(damage, leecher, pokemon);
-				}
+				if (damage) this.heal(damage, leecher, pokemon);
 			}
 		}
 	},
@@ -683,7 +684,8 @@ exports.BattleMovedex = {
 		shortDesc: "Does nothing.",
 		isViable: false,
 		forceSwitch: false,
-		onTryHit: function () {}
+		onTryHit: function () {},
+		priority: 0
 	},
 	rockslide: {
 		inherit: true,
@@ -695,6 +697,11 @@ exports.BattleMovedex = {
 	rockthrow: {
 		inherit: true,
 		accuracy: 65
+	},
+	sandattack: {
+		inherit: true,
+		affectedByImmunities: false,
+		type: "Normal"
 	},
 	seismictoss: {
 		inherit: true,
@@ -878,7 +885,8 @@ exports.BattleMovedex = {
 		shortDesc: "Does nothing.",
 		isViable: false,
 		forceSwitch: false,
-		onTryHit: function () {}
+		onTryHit: function () {},
+		priority: 0
 	},
 	wingattack: {
 		inherit: true,

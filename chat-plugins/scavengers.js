@@ -37,7 +37,9 @@ exports.commands = {
 		hints = [targets[0].trim(), targets[2].trim(), targets[4].trim()];
 		answers = [toId(targets[1]), toId(targets[3]), toId(targets[5])];
 		var result = (cmd === 'startofficialhunt' ? 'An official' : 'A new') + ' Scavenger Hunt has been started by <em> ' + Tools.escapeHTML(user.name) + '</em>! The first hint is: ' + Tools.escapeHTML(hints[0]);
-		Rooms.rooms.scavengers.addRaw('<div class="broadcast-blue"><strong>' + result + '</strong></div>');
+		room.addRaw(
+			'<div class="broadcast-blue"><strong>' + result + '</strong></div>'
+		);
 	},
 	joinhunt: function (target, room, user) {
 		// if (room.id !== 'scavengers') return this.sendReply('This command can only be used in the Scavengers room.');
@@ -112,9 +114,13 @@ exports.commands = {
 		participants = {};
 		finished = [];
 		if (result) {
-			Rooms.rooms.scavengers.addRaw('<div class="broadcast-blue"><strong>' + result + '</strong></div>');
+			room.addRaw(
+				'<div class="broadcast-blue"><strong>' + result + '</strong></div>'
+			);
 		} else {
-			Rooms.rooms.scavengers.addRaw('<div class="broadcast-blue"><strong>The Scavenger Hunt was reset by <em>' + Tools.escapeHTML(user.name) + '</em>.</strong></div>');
+			room.addRaw(
+				'<div class="broadcast-blue"><strong>The Scavenger Hunt was reset by <em>' + Tools.escapeHTML(user.name) + '</em>.</strong></div>'
+			);
 		}
 		result = null;
 	},

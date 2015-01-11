@@ -20,14 +20,14 @@ exports.commands = {
 			case 'help':
 				if (!this.canBroadcast()) return false;
 				this.sendReplyBox(
-					"Hangman commands: <br />" +
-					"/hangman create/start, [word], [topic] - Creates a game of hangman.<br />" +
-					"/hangman view - Shows the current state of the hangman game.<br />" +
-					"/hangman topic/changetopic, [newtopic] - Changes the topic of the hangman game.<br />" +
-					"/hangman word - View the current word.<br />" +
-					"/hangman guess, [letter] - Guess a letter.<br />" +
-					"/hangman guessword, [word] - Guess the word.<br />" +
-					"/hangman enable/disable - Enables/disables hangman in the current room."
+					"<b>Hangman commands:</b> <br />" +
+					"- /hangman create/start, [word], [topic] - Creates a game of hangman.<br />" +
+					"- /hangman view - Shows the current state of the hangman game.<br />" +
+					"- /hangman topic/changetopic, [newtopic] - Changes the topic of the hangman game.<br />" +
+					"- /hangman word - View the current word.<br />" +
+					"- /hangman guess, [letter] - Guess a letter.<br />" +
+					"- /hangman guessword, [word] - Guess the word.<br />" +
+					"- /hangman enable/disable - Enables/disables hangman in the current room."
 				);
 				break;
 			case 'start':

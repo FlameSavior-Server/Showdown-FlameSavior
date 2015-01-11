@@ -2225,11 +2225,11 @@ exports.commands = {
 
 	frosty: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/EF57HEV.gif">' +
+		this.sendReplyBox('<center><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/articuno.gif">' +
 			'<img src="http://i.imgur.com/eOxXXjo.gif">' +
-			'<img src="http://i.imgur.com/a3Zf8MI.gif"><br />' +
-			'<b>Ace:</b> Kyurem-Black<br />' +
-			'"Ice is cool and all (Pun Intended) but I\'m supa HAWT in so many ways... So Come at me Brah".</center>'
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/kyurem-white.gif"><br />' +
+			'<b>Ace:</b> Kyurem-White<br />' +
+			'"Beware... I bring hax to the battle and I won\'t stop at anything to make sure every last Pokemon you have freezes to death."</center>'
 		);
 	},
 

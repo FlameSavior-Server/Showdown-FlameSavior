@@ -3939,8 +3939,8 @@ exports.commands = {
 	princesshigh: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/tumblr_ltuo9yFLI81r5wm28o1_250.gif">' +
-			'<img src="http://i.imgur.com/0xsg2uK.gif" width="370">' +
-			'<img src="http://31.media.tumblr.com/tumblr_ltuo9yFLI81r5wm28o1_250.gif" ><br />' +
+			'<img src="http://i.imgur.com/0xsg2uK.gif" width="340">' +
+			'<img src="http://31.media.tumblr.com/tumblr_ltuo9yFLI81r5wm28o1_250.gif"><br />' +
 			'<b>Ace:</b> <font color=#d63265><blink>Rekting your soul</blink></font><br />' +
 			'<b><font color=#ff0000">I</font><font color=#ff2300">\'</font><font color=#ff4700">m</font><font color=#ff6a00"> </font>' +
 			'<font color=#ff8e00">a </font><font color=#ffb100">n</font><font color=#ffb100">i</font><font color=#ffd500">g</font>' +
@@ -5452,12 +5452,12 @@ exports.commands = {
 	
 	taco: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><br><img src="http://i.imgur.com/uqHOoGk.png" width="500" height="130"></br><br>' +
-			'<img src="http://i.imgur.com/z2cCuJI.gif" width="200" height="200">' +
-			'<img src="http://i.imgur.com/akCv6a9.gif" width="200" height=200">' +
-			'<img src="http://i.imgur.com/b2zEiGU.gif" width="300" height="180"></br>' +
-			'<br><b>Ace:</b> Aon, Nelson, Holly, Q</br>'+
-			'<br><b>Quote:</b> When the Bisharp SD it\'s GG.</br></center>'
+		this.sendReplyBox('<center><br><img src="http://i.imgur.com/uqHOoGk.png" width="380"><br />' +
+			'<img src="http://i.imgur.com/z2cCuJI.gif" height="160">' +
+			'<img src="http://i.imgur.com/akCv6a9.gif" height="160">' +
+			'<img src="http://i.imgur.com/b2zEiGU.gif" width="250"></br />' +
+			'<b>Ace:</b> Aon, Nelson, Holly, Q</br />'+
+			'<b>Quote:</b> When the Bisharp SD it\'s GG.</center>'
 		);
 	},
 

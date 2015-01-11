@@ -3941,18 +3941,17 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/tumblr_ltuo9yFLI81r5wm28o1_250.gif">' +
 			'<img src="http://i.imgur.com/0xsg2uK.gif" width="370">' +
 			'<img src="http://31.media.tumblr.com/tumblr_ltuo9yFLI81r5wm28o1_250.gif" ><br />' +
-			'<b>Ace:</b> <font color=#d63265><blink>Gardevior</blink></font><br />' +
-			'<b><font color=#ff0000">L</font><font color=#ff2300">i</font><font color=#ff4700">v</font><font color=#ff6a00">e</font>' +
-			'<font color=#ff8e00"> </font><font color=#ffb100">f</font><font color=#ffb100">a</font><font color=#ffd500">s</font>' +
-			'<font color=#ffd500">t</font><font color=#bdff00">,</font><font color=#9aff00"> </font><font color=#76ff00">D</font>' +
-			'<font color=#53ff00">i</font><font color=#2fff00">e</font><font color=#0bff00"> </font><font color=#00ff17">y</font>' +
-			'<font color=#00ff3b">o</font><font color=#00ff5e">u</font><font color=#00ff82">n</font><font color=#00ffa6">g</font>' +
-			'<font color=#00ffc9">,</font><font color=#00ffed"> </font><font color=#00edff">b</font><font color=#00c9ff">a</font>' +
-			'<font color=#00a6ff">d</font><font color=#0082ff"> </font><font color=#005eff">g</font><font color=#003bff">i</font>' +
-			'<font color=#0017ff">r</font><font color=#0b00ff">l</font><font color=#2f00ff">s</font><font color=#5300ff"> </font>' +
-			'<font color=#7600ff">d</font><font color=#9a00ff">o</font><font color=#bd00ff"> </font><font color=#e100ff">i</font>' +
-			'<font color=#ff00f9">t</font><font color=#ff00d5"> </font><font color=#ff00b1">w</font><font color=#ff008e">e</font>' +
-			'<font color=#ff006a">l</font><font color=#ff0047">l</font><font color=#ff0023">.</font></b></center>'
+			'<b>Ace:</b> <font color=#d63265><blink>Rekting your soul</blink></font><br />' +
+			'<b><font color=#ff0000">I</font><font color=#ff2300">\'</font><font color=#ff4700">m</font><font color=#ff6a00"> </font>' +
+			'<font color=#ff8e00">a </font><font color=#ffb100">n</font><font color=#ffb100">i</font><font color=#ffd500">g</font>' +
+			'<font color=#ffd500">h</font><font color=#bdff00">t</font><font color=#9aff00">m</font><font color=#76ff00">a</font>' +
+			'<font color=#53ff00">r</font><font color=#2fff00">e</font><font color=#0bff00">, </font><font color=#00ff17">d</font>' +
+			'<font color=#00ff3b">r</font><font color=#00ff5e">e</font><font color=#00ff82">s</font><font color=#00ffa6">s</font>' +
+			'<font color=#00ffc9">e</font><font color=#00ffed">d</font><font color=#00edff"> </font><font color=#00c9ff">a</font>' +
+			'<font color=#00a6ff">s</font><font color=#0082ff"> </font><font color=#005eff">a</font><font color=#003bff"> </font>' +
+			'<font color=#0017ff">d</font><font color=#0b00ff">a</font><font color=#2f00ff">y</font><font color=#5300ff">d</font>' +
+			'<font color=#7600ff">r</font><font color=#9a00ff">e</font><font color=#bd00ff">a</font><font color=#e100ff">m</font></b><br />' +
+			'<button name="send" value="/transferbucks QueenHigh, 1"><b><font color="pink">Donate To Me!</font></b></button></center>'
 		);
 	},
 
@@ -5448,6 +5447,17 @@ exports.commands = {
 			'Former Owner of Biblia | Forever Frosty<br />' +
 			'<img src="http://img-cache.cdn.gaiaonline.com/1a962e841da3af2acaced68853cd194d/http://i1070.photobucket.com/albums/u485/nitehawkXD/victini.gif"><br />' +
 			'<img src="http://i.imgur.com/wJE6vrw.png"></center>'
+		);
+	},
+	
+	taco: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><br><img src="http://i.imgur.com/uqHOoGk.png" width="500" height="130"></br><br>' +
+			'<img src="http://i.imgur.com/z2cCuJI.gif" width="200" height="200">' +
+			'<img src="http://i.imgur.com/akCv6a9.gif" width="200" height=200">' +
+			'<img src="http://i.imgur.com/b2zEiGU.gif" width="300" height="180"></br>' +
+			'<br><b>Ace:</b> Aon, Nelson, Holly, Q</br>'+
+			'<br><b>Quote:</b> When the Bisharp SD it\'s GG.</br></center>'
 		);
 	},
 

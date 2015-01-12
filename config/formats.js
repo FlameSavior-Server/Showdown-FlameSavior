@@ -77,19 +77,6 @@ exports.Formats = [
 		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar', 'Misdreavus']
 	},
 	{
-		name: "LC UU",
-		section: "XY Singles",
-
-		searchShow: false,
-		maxLevel: 5,
-		ruleset: ['LC'],
-		banlist: ['Abra', 'Aipom', 'Archen', 'Bellsprout', 'Bunnelby', 'Carvanha', 'Chinchou', 'Clamperl', 'Cottonee', 'Cranidos',
-			'Croagunk', 'Diglett', 'Drilbur', 'Dwebble', 'Elekid', 'Ferroseed', 'Fletchling', 'Foongus', 'Gastly', 'Honedge',
-			'Houndour', 'Magnemite', 'Meditite', 'Mienfoo', 'Misdreavus', 'Omanyte', 'Onix', 'Pawniard', 'Ponyta', 'Porygon',
-			'Riolu', 'Scraggy', 'Shellder', 'Slowpoke', 'Snubbull', 'Spritzee', 'Staryu', 'Taillow', 'Timburr', 'Tirtouga',
-			'Trubbish', 'Vullaby', 'Vulpix', 'Zigzagoon']
-	},
-	{
 		name: "Anything Goes",
 		section: "ORAS Singles",
 
@@ -702,19 +689,6 @@ exports.Formats = [
 		]
 	},
 	{
-		name: "LC UU",
-		section: "Other Metagames",
-
-		maxLevel: 5,
-		ruleset: ['LC'],
-		banlist: ['Abra', 'Aipom', 'Archen', 'Bellsprout', 'Bunnelby', 'Carvanha', 'Chinchou', 'Corphish', 'Cottonee', 'Cranidos',
-			'Croagunk', 'Diglett', 'Drilbur', 'Dwebble', 'Ferroseed', 'Fletchling', 'Foongus', 'Gastly', 'Honedge', 'Houndour',
-			'Larvesta', 'Lileep', 'Magnemite', 'Mienfoo', 'Misdreavus', 'Munchlax', 'Onix', 'Pawniard', 'Ponyta', 'Porygon',
-			'Scraggy', 'Snubbull', 'Spritzee', 'Staryu', 'Timburr', 'Tirtouga', 'Trubbish', 'Vullaby', 'Vulpix', 'Zigzagoon',
-			'Omanyte'
-		]
-	},
-	{
 		name: "Tier Shift",
 		section: "Other Metagames",
 
@@ -761,6 +735,19 @@ exports.Formats = [
 		},
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
 		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite', 'Slowbronite', 'Pinsirite', 'Metagrossite', 'Shuckle']
+	},
+	{
+		name: "LC UU",
+		section: "Other Metagames",
+
+		maxLevel: 5,
+		ruleset: ['LC'],
+		banlist: ['Abra', 'Aipom', 'Archen', 'Bellsprout', 'Bunnelby', 'Carvanha', 'Chinchou', 'Corphish', 'Cottonee', 'Cranidos',
+			'Croagunk', 'Diglett', 'Drilbur', 'Dwebble', 'Ferroseed', 'Fletchling', 'Foongus', 'Gastly', 'Honedge', 'Houndour',
+			'Larvesta', 'Lileep', 'Magnemite', 'Mienfoo', 'Misdreavus', 'Munchlax', 'Onix', 'Pawniard', 'Ponyta', 'Porygon',
+			'Scraggy', 'Snubbull', 'Spritzee', 'Staryu', 'Timburr', 'Tirtouga', 'Trubbish', 'Vullaby', 'Vulpix', 'Zigzagoon',
+			'Omanyte'
+		]
 	},
 	{
 		name: "Alphabet Cup",

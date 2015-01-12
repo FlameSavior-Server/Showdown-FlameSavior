@@ -4597,7 +4597,7 @@ function getRandMessage(user) {
             message = message + user.name + ' fell into the void.';
             break;
         case 4:
-            message = message + user.name + ' squished by panpawn\'s large behind!';
+            message = message + user.name + ' was squished by panpawn\'s large behind!';
             break;
         case 5:
             message = message + user.name + ' became panpawn\'s slave!';

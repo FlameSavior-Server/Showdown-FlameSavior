@@ -713,7 +713,7 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	farfetchd: {
-		randomBattleMoves: ["bravebird","swordsdance","return","leafblade","roost","knockoff"],
+		randomBattleMoves: ["bravebird","swordsdance","return","leafblade","roost","nightslash"],
 		randomDoubleBattleMoves: ["bravebird","swordsdance","return","leafblade","protect"],
 		eventPokemon: [
 			{"generation":3,"level":5,"moves":["yawn","wish"]},
@@ -4856,7 +4856,7 @@ exports.BattleFormatsData = {
 		eventPokemon: [
 			{"generation":6,"level":36,"isHidden":true,"moves":["watershuriken","shadowsneak","hydropump","substitute"],"pokeball":"cherishball"}
 		],
-		tier: "OU"
+		tier: "Uber"
 	},
 	bunnelby: {
 		randomBattleMoves: ["agility","earthquake","return","quickattack","uturn","stoneedge","spikes","bounce"],
@@ -5212,18 +5212,20 @@ exports.BattleFormatsData = {
 	},
 	hoopa: {
 		isUnreleased: true,
-		randomBattleMoves: ["calmmind","psychic","shadowball","focusblast","thunderwave","energyball","thunderbolt"],
-		randomDoubleBattleMoves: ["hyperspacehole","shadowball","focusblast","protect","thunderwave","energyball","thunderbolt"],
+		randomBattleMoves: ["nastyplot","psyshock","shadowball","focusblast","trick"],
+		randomDoubleBattleMoves: ["hyperspacehole","shadowball","focusblast","protect","psychic"],
 		tier: "Unreleased"
 	},
 	hoopaunbound: {
 		isUnreleased: true,
-		randomBattleMoves: ["calmmind","psychic","shadowball","focusblast","thunderwave","energyball","thunderbolt"],
-		randomDoubleBattleMoves: ["hyperspacehole","shadowball","focusblast","protect","thunderwave","energyball","thunderbolt"],
+		randomBattleMoves: ["nastyplot","psyshock","darkpulse","focusblast","hyperspacefury","zenheadbutt","icepunch","drainpunch","knockoff","trick"],
+		randomDoubleBattleMoves: ["psychic","darkpulse","focusblast","protect","hyperspacefury","zenheadbutt","icepunch","drainpunch"],
 		tier: "Unreleased"
 	},
 	volcanion: {
 		isUnreleased: true,
+		randomBattleMoves: ["substitute","steameruption","fireblast","sludgewave","hiddenpowerice","earthpower","superpower"],
+		randomDoubleBattleMoves: ["substitute","steameruption","heatwave","sludgewave","rockslide","earthquake","protect"],
 		tier: "Unreleased"
 	},
 	missingno: {

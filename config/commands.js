@@ -277,7 +277,8 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Informational commands
 	 *********************************************************/
-
+	randp: 'data',
+	randompokemon: 'data',
 	pstats: 'data',
 	stats: 'data',
 	dex: 'data',
@@ -286,7 +287,7 @@ var commands = exports.commands = {
 	dt: 'data',
 	data: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
-
+		if (cmd === 'randompokemon' || cmd === 'randp') target = (Math.floor(Math.random() * 721) + 1);
 		var buffer = '';
 		var targetId = toId(target);
 		if (targetId === '' + parseInt(targetId)) {

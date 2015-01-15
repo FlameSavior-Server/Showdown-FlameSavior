@@ -5452,12 +5452,12 @@ exports.commands = {
 	
 	taco: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><br><img src="http://i.imgur.com/uqHOoGk.png" width="380"><br />' +
-			'<img src="http://i.imgur.com/z2cCuJI.gif" height="160">' +
-			'<img src="http://i.imgur.com/akCv6a9.gif" height="160"><br />' +
-			'<img src="http://i.imgur.com/b2zEiGU.gif" width="250"><br />' +
-			'<b>Ace:</b> Aon, Nelson, Holly, Q<br />'+
-			'<b>Quote:</b> When the Bisharp SD it\'s GG.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/uqHOoGk.png" width="400" height="100"><br />' +
+			'<img src="http://i.imgur.com/z2cCuJI.gif" width="120" height="120" >' +
+			'<img src="http://i.imgur.com/akCv6a9.gif" width="120" height="120">' +
+			'<img src="http://i.imgur.com/b2zEiGU.gif" width="200" height="120"><br />' +
+			'<b>Ace:</b> Aon, Nelson, Holly, Rekious, Takeshi<br />'+
+			'<button><a href = "https://soundcloud.com/yungterra/victory">When I Win</a></button></center>'
 		);
 	},
 

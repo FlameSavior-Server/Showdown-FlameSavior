@@ -1152,7 +1152,7 @@ BattlePokemon = (function () {
 	BattlePokemon.getHealth = function (side) {
 		if (!this.hp) return '0 fnt';
 		var hpstring;
-		if ((side === true) || (this.side === side) || this.battle.getFormat().debug) {
+		if ((side === true) || (this.side === side) || this.battle.getFormat().debug || this.battle.reportExactHP) {
 			hpstring = '' + this.hp + '/' + this.maxhp;
 		} else {
 			var ratio = this.hp / this.maxhp;
@@ -1844,7 +1844,7 @@ Battle = (function () {
 	Battle.prototype.eachEvent = function (eventid, effect, relayVar) {
 		var actives = [];
 		if (!effect && this.effect) effect = this.effect;
-		for (var i = 0; i < this.sides.length;i++) {
+		for (var i = 0; i < this.sides.length; i++) {
 			var side = this.sides[i];
 			for (var j = 0; j < side.active.length; j++) {
 				if (side.active[j]) actives.push(side.active[j]);
@@ -2228,7 +2228,7 @@ Battle = (function () {
 				statuses = statuses.concat(this.getRelevantEffectsInner(this, callbackType, null, null, true, false, getAll));
 			}
 			if (bubbleDown) {
-				for (var i = 0;i < thing.active.length;i++) {
+				for (var i = 0; i < thing.active.length; i++) {
 					statuses = statuses.concat(this.getRelevantEffectsInner(thing.active[i], callbackType, null, null, false, true, getAll));
 				}
 			}

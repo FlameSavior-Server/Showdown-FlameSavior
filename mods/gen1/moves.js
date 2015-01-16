@@ -731,7 +731,8 @@ exports.BattleMovedex = {
 	},
 	skyattack: {
 		inherit: true,
-		critRatio: 1
+		critRatio: 1,
+		secondary: {}
 	},
 	softboiled: {
 		inherit: true,
@@ -825,7 +826,6 @@ exports.BattleMovedex = {
 				target.volatiles['substitute'].hp -= damage;
 				source.lastDamage = damage;
 				if (target.volatiles['substitute'].hp <= 0) {
-					this.debug('Substitute broke');
 					target.removeVolatile('substitute');
 					target.subFainted = true;
 				} else {

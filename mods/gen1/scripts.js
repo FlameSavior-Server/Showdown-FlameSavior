@@ -157,7 +157,7 @@ exports.BattleScripts = {
 		pokemon.lastDamage = 0;
 		var lockedMove = this.runEvent('LockMove', pokemon);
 		if (lockedMove === true) lockedMove = false;
-		if (!lockedMove && !pokemon.volatiles['partialtrappinglock']) {
+		if (!lockedMove && (!pokemon.volatiles['partialtrappinglock'] || pokemon.volatiles['partialtrappinglock'].locked !== target)) {
 			pokemon.deductPP(move, null, target);
 			// On gen 1 moves are stored when they are chosen and a PP is deducted.
 			pokemon.side.lastMove = move;
@@ -401,11 +401,6 @@ exports.BattleScripts = {
 			this.runEvent('AfterMoveSecondary', target, pokemon, move);
 		}
 
-		// If we used a partial trapping move, we save the damage to repeat it
-		if (pokemon.volatiles['partialtrappinglock']) {
-			pokemon.volatiles['partialtrappinglock'].damage = damage;
-		}
-
 		return damage;
 	},
 	moveHit: function (target, pokemon, move, moveData, isSecondary, isSelf) {
@@ -421,7 +416,7 @@ exports.BattleScripts = {
 		}
 
 		// We get the sub to the target to see if it existed
-		var targetSub = (target)? target.volatiles['substitute'] : false;
+		var targetSub = (target) ? target.volatiles['substitute'] : false;
 		var targetHadSub = (targetSub !== null && targetSub !== false && (typeof targetSub !== 'undefined'));
 
 		if (target) {
@@ -560,10 +555,18 @@ exports.BattleScripts = {
 			}
 		}
 
+		// Here's where self effects are applied.
 		var doSelf = (targetHadSub && targetHasSub) || !targetHadSub;
-		if (moveData.self && doSelf) {
+		if (moveData.self && (doSelf || moveData.self.volatileStatus === 'partialtrappinglock')) {
 			this.moveHit(pokemon, pokemon, move, moveData.self, isSecondary, true);
 		}
+
+		// Now we can save the partial trapping damage.
+		if (pokemon.volatiles['partialtrappinglock']) {
+			pokemon.volatiles['partialtrappinglock'].damage = pokemon.lastDamage;
+		}
+
+		// Apply move secondaries.
 		if (moveData.secondaries) {
 			for (var i = 0; i < moveData.secondaries.length; i++) {
 				// We check here whether to negate the probable secondary status if it's para, burn, or freeze.
@@ -631,7 +634,7 @@ exports.BattleScripts = {
 		}
 
 		// Let's check if we are in middle of a partial trap sequence to return the previous damage.
-		if (pokemon.volatiles['partialtrappinglock'] && (target !== pokemon) && (target === pokemon.volatiles['partialtrappinglock'].locked)) {
+		if (pokemon.volatiles['partialtrappinglock'] && (target === pokemon.volatiles['partialtrappinglock'].locked)) {
 			return pokemon.volatiles['partialtrappinglock'].damage;
 		}
 
@@ -708,8 +711,8 @@ exports.BattleScripts = {
 		var defender = target;
 		if (move.useTargetOffensive) attacker = target;
 		if (move.useSourceDefensive) defender = pokemon;
-		var atkType = (move.category === 'Physical')? 'atk' : 'spa';
-		var defType = (move.defensiveCategory === 'Physical')? 'def' : 'spd';
+		var atkType = (move.category === 'Physical') ? 'atk' : 'spa';
+		var defType = (move.defensiveCategory === 'Physical') ? 'def' : 'spd';
 		var attack = attacker.getStat(atkType);
 		var defense = defender.getStat(defType);
 
@@ -792,9 +795,10 @@ exports.BattleScripts = {
 			damage *= this.random(217, 256);
 			damage = Math.floor(damage / 255);
 			if (damage > target.hp && !target.volatiles['substitute']) damage = target.hp;
+			if (target.volatiles['substitute'] && damage > target.volatiles['substitute'].hp) damage = target.volatiles['substitute'].hp;
 		}
 
-		// We are done, this is the final damage.
+		// And we are done.
 		return Math.floor(damage);
 	},
 	boost: function (boost, target, source, effect) {
@@ -1098,12 +1102,90 @@ exports.BattleScripts = {
 			} else if (counter['physicalsetup']) {
 				setupType = 'Physical';
 			}
-
-			for (var k = 0; k < moves.length; k++) {
-				var moveid = moves[k];
-				var move = this.getMove(moveid);
-				var rejected = false;
-				var isSetup = false;
+					switch (moveid) {
+					// bad after setup
+					case 'seismictoss': case 'nightshade':
+						if (setupType) rejected = true;
+						break;
+					// bit redundant to have both
+					case 'flamethrower':
+						if (hasMove['fireblast']) rejected = true;
+						break;
+					case 'fireblast':
+						if (hasMove['flamethrower']) rejected = true;
+						break;
+					case 'icebeam':
+						if (hasMove['blizzard']) rejected = true;
+						break;
+					// Hydropump and surf are both valid options, just avoid one with eachother.
+					case 'hydropump':
+						if (hasMove['surf']) rejected = true;
+						break;
+					case 'surf':
+						if (hasMove['hydropump']) rejected = true;
+						break;
+					case 'petaldance': case 'solarbeam':
+						if (hasMove['megadrain'] || hasMove['razorleaf']) rejected = true;
+						break;
+					case 'megadrain':
+						if (hasMove['razorleaf']) rejected = true;
+						break;
+					case 'thunder':
+						if (hasMove['thunderbolt']) rejected = true;
+						break;
+					case 'thunderbolt':
+						if (hasMove['thunder']) rejected = true;
+						break;
+					case 'bonemerang':
+						if (hasMove['earthquake']) rejected = true;
+						break;
+					case 'rest':
+						if (hasMove['recover'] || hasMove['softboiled']) rejected = true;
+						break;
+					case 'softboiled':
+						if (hasMove['recover']) rejected = true;
+						break;
+					case 'sharpen':
+					case 'swordsdance':
+						if (counter['Special'] > counter['Physical'] || hasMove['slash'] || !counter['Physical']) rejected = true;
+						break;
+					case 'doubleedge':
+						if (hasMove['bodyslam']) rejected = true;
+						break;
+					case 'mimic':
+						if (hasMove['mirrormove']) rejected = true;
+						break;
+					case 'superfang':
+						if (hasMove['bodyslam']) rejected = true;
+						break;
+					case 'rockslide':
+						if (hasMove['earthquake'] && hasMove['bodyslam'] && hasMove['hyperbeam']) rejected = true;
+						break;
+					case 'bodyslam':
+						if (hasMove['thunderwave']) rejected = true;
+						break;
+					case 'bubblebeam':
+						if (hasMove['blizzard']) rejected = true;
+						break;
+					case 'screech':
+						if (hasMove['slash']) rejected = true;
+						break;
+					case 'slash':
+						if (setupType === 'Physical') rejected = true;
+						break;
+					case 'megakick':
+						if (hasMove['bodyslam']) rejected = true;
+						break;
+					case 'eggbomb':
+						if (hasMove['hyperbeam']) rejected = true;
+						break;
+					case 'triattack':
+						if (hasMove['doubleedge']) rejected = true;
+						break;
+					case 'growth':
+						if (hasMove['amnesia']) rejected = true;
+						break;
+					} // End of switch for moveid
 
 				switch (moveid) {
 				// bad after setup

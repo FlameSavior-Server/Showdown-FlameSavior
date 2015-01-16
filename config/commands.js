@@ -167,11 +167,13 @@ var commands = exports.commands = {
     rooms: 'whois',
     alt: 'whois',
     alts: 'whois',
-    whois: function(target, room, user) {
+    whoare: 'whois',
+    whois: function (target, room, user, connection, cmd) {
         var targetUser = this.targetUserOrSelf(target, user.group === ' ');
         if (!targetUser) {
             return this.sendReply("User " + this.targetUsername + " not found.");
         }
+
         this.sendReply("|raw|User: " + targetUser.name + (!targetUser.connected ? ' <font color="gray"><em>(offline)</em></font>' : ''));
         if (user.can('alts', targetUser)) {
             var alts = targetUser.getAlts(true);
@@ -189,17 +191,17 @@ var commands = exports.commands = {
             }
             if (targetUser.locked) {
                 switch (targetUser.locked) {
-                    case '#dnsbl':
-                        this.sendReply("Locked: IP is in a DNS-based blacklist. ");
-                        break;
-                    case '#range':
-                        this.sendReply("Locked: host is in a temporary range-lock.");
-                        break;
-                    case '#hostfilter':
-                        this.sendReply("Locked: host is permanently locked for being a proxy.");
-                        break;
-                    default:
-                        this.sendReply("Locked under the username: " + targetUser.locked);
+                case '#dnsbl':
+                    this.sendReply("Locked: IP is in a DNS-based blacklist. ");
+                    break;
+                case '#range':
+                    this.sendReply("Locked: IP or host is in a temporary range-lock.");
+                    break;
+                case '#hostfilter':
+                    this.sendReply("Locked: host is permanently locked for being a proxy.");
+                    break;
+                default:
+                    this.sendReply("Locked under the username: " + targetUser.locked);
                 }
             }
         }
@@ -207,7 +209,7 @@ var commands = exports.commands = {
             this.sendReply("Group: " + Config.groups[targetUser.group].name + " (" + targetUser.group + ")");
         }
         if (targetUser.goldDev) {
-            this.sendReply('(Gold Development Staff)');
+            this.sendReply("(Gold Development Staff)");
         }
         if (targetUser.isSysop) {
             this.sendReply("(Pok\xE9mon Showdown System Operator)");
@@ -215,43 +217,35 @@ var commands = exports.commands = {
         if (!targetUser.authenticated) {
             this.sendReply("(Unregistered)");
         }
-        if (user.can('ip', targetUser) || user === targetUser) {
+        if ((cmd === 'ip' || cmd === 'whoare') && (user.can('ip', targetUser) || user === targetUser)) {
             var ips = Object.keys(targetUser.ips);
             this.sendReply("IP" + ((ips.length > 1) ? "s" : "") + ": " + ips.join(", ") +
-                (user.group !== ' ' && targetUser.latestHost ? "\nHost: " + targetUser.latestHost : ""));
+                    (user.group !== ' ' && targetUser.latestHost ? "\nHost: " + targetUser.latestHost : ""));
         }
-        if (targetUser.canCustomSymbol || targetUser.canCustomAvatar || targetUser.canAnimatedAvatar || targetUser.canChatRoom || targetUser.canTrainerCard || targetUser.canFixItem || targetUser.canDecAdvertise || /*targetUser.canBadge || targetUser.canPOTD || targetUser.canForcerename ||*/ targetUser.canMusicBox || targetUser.canCustomEmote) {
-            var i = '';
-            if (targetUser.canCustomSymbol) i += ' Custom Symbol';
-            if (targetUser.canCustomAvatar) i += ' Custom Avatar';
-            if (targetUser.canCustomEmote) i += ' Custom Emote'
-            if (targetUser.canAnimatedAvatar) i += ' Animated Avatar';
-            if (targetUser.canChatRoom) i += ' Chat Room';
-            if (targetUser.canTrainerCard) i += ' Trainer Card';
-            if (targetUser.canFixItem) i += ' Alter card/avatar/music box';
-            if (targetUser.canDecAdvertise) i += ' Declare Advertise';
-            //if (targetUser.canBadge) i += ' VIP Badge / Global Voice';
-            if (targetUser.canMusicBox) i += ' Music Box';
-            //if (targetUser.canPOTD) i += ' POTD';
-            //if (targetUser.canForcerename) i += ' Forcerename'
-            this.sendReply('Eligible for: ' + i);
-        }
-        var output = "In rooms: ";
+        var publicrooms = "In rooms: ";
+        var hiddenrooms = "In hidden rooms: ";
         var first = true;
+        var hiddencount = 0;
         for (var i in targetUser.roomCount) {
             var targetRoom = Rooms.get(i);
-            if (i === 'global' || targetRoom.isPrivate) continue;
-            if (!first) output += " | ";
-            first = false;
+            if (i === 'global' || targetRoom.isPrivate === true) continue;
 
-            output += (targetRoom.auth && targetRoom.auth[targetUser.userid] ? targetRoom.auth[targetUser.userid] : '') + '<a href="/' + i + '" room="' + i + '">' + i + '</a>';
+            var output = (targetRoom.auth && targetRoom.auth[targetUser.userid] ? targetRoom.auth[targetUser.userid] : '') + '<a href="/' + i + '" room="' + i + '">' + i + '</a>';
+            if (targetRoom.isPrivate) {
+                if (hiddencount > 0) hiddenrooms += " | ";
+                ++hiddencount;
+                hiddenrooms += output;
+            } else {
+                if (!first) publicrooms += " | ";
+                first = false;
+                publicrooms += output;
+            }
         }
-        if (!targetUser.connected || targetUser.isAway) {
-            this.sendReply('|raw|This user is ' + ((!targetUser.connected) ? '<font color = "red">offline</font>.' : '<font color = "orange">away</font>.'));
+        this.sendReply('|raw|' + publicrooms);
+        if (cmd === 'whoare' && user.can('lock') && hiddencount > 0) {
+            this.sendReply('|raw|' + hiddenrooms);
         }
-        this.sendReply('|raw|' + output);
     },
-
     aip: 'inprivaterooms',
     awhois: 'inprivaterooms',
     allrooms: 'inprivaterooms',
@@ -4014,7 +4008,6 @@ var commands = exports.commands = {
             matched = true;
             this.sendReply("/declare [message] - Anonymously announces a message. Requires: & ~");
         }
-
         // admin commands
         if (target === 'chatdeclare' || target === 'cdeclare') {
             matched = true;

@@ -1,5 +1,6 @@
 exports.BattleFormatsData = {
 	bulbasaur: {
+		randomBattleMoves: ["razorleaf","sleeppowder","swordsdance","bodyslam"],
 		tier: "LC"
 	},
 	ivysaur: {
@@ -10,29 +11,35 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	charmander: {
+		randomBattleMoves: ["fireblast","bodyslam","swordsdance","submission","substitute","slash","seismictoss","flamethrower"],
 		tier: "LC"
 	},
 	charmeleon: {
+		randomBattleMoves: ["fireblast","bodyslam","swordsdance","submission","substitute","slash","seismictoss","flamethrower"],
 		tier: "UU"
 	},
 	charizard: {
-		randomBattleMoves: ["fireblast","earthquake","bodyslam","swordsdance","hyperbeam"],
+		randomBattleMoves: ["fireblast","earthquake","bodyslam","swordsdance","hyperbeam","flamethrower"],
 		tier: "UU"
 	},
 	squirtle: {
+		randomBattleMoves: ["surf","blizzard","bodyslam","mimic"],
 		tier: "LC"
 	},
 	wartortle: {
+		randomBattleMoves: ["surf","blizzard","bodyslam","mimic","hydropump","rest"],
 		tier: "UU"
 	},
 	blastoise: {
-		randomBattleMoves: ["surf","blizzard","bodyslam","mimic"],
+		randomBattleMoves: ["surf","blizzard","bodyslam","mimic","hydropump","rest","earthquake","hyperbeam"],
 		tier: "UU"
 	},
 	caterpie: {
+		randomBattleMoves:["stringshot","tackle"],
 		tier: "LC"
 	},
 	metapod: {
+		randomBattleMoves:["stringshot","tackle","harden"],
 		tier: "UU"
 	},
 	butterfree: {
@@ -40,9 +47,11 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	weedle: {
+		randomBattleMoves: ["poisonsting","stringshot"],
 		tier: "LC"
 	},
 	kakuna: {
+		randomBattleMoves: ["poisonsting","stringshot","harden"],
 		tier: "UU"
 	},
 	beedrill: {
@@ -50,16 +59,19 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	pidgey: {
+		randomBattleMoves: ["doubleedge","agility","mimic","mirrormove","skyattack","rest","reflect","sandattack"],
 		tier: "LC"
 	},
 	pidgeotto: {
+		randomBattleMoves: ["doubleedge","agility","mimic","mirrormove","skyattack","rest","reflect"],
 		tier: "UU"
 	},
 	pidgeot: {
-		randomBattleMoves: ["doubleedge","hyperbeam","agility","mimic","mirrormove"],
+		randomBattleMoves: ["doubleedge","hyperbeam","agility","mimic","mirrormove","skyattack","rest","reflect"],
 		tier: "UU"
 	},
 	rattata: {
+		randomBattleMoves: ["superfang","bodyslam","blizzard","bubblebeam","thunderbolt"],
 		tier: "LC"
 	},
 	raticate: {
@@ -67,6 +79,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	spearow: {
+		randomBattleMoves: ["drillpeck","doubleedge","mirrormove","agility"],
 		tier: "LC"
 	},
 	fearow: {
@@ -77,6 +90,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	ekans: {
+		randomBattleMoves: ["wrap","glare","earthquake","bodyslam","rockslide"],
 		tier: "LC"
 	},
 	arbok: {
@@ -84,6 +98,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	pikachu: {
+		randomBattleMoves: ["thunderbolt","thunderwave","surf","bodyslam","agility","thunder"],
 		eventPokemon: [
 			{"generation":1,"level":5,"moves":["surf"]},
 			{"generation":1,"level":5,"moves":["fly"]},
@@ -92,7 +107,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	raichu: {
-		randomBattleMoves: ["thunderbolt","thunderwave","surf","bodyslam"],
+		randomBattleMoves: ["thunderbolt","thunderwave","surf","bodyslam","agility","hyperbeam","thunder"],
 		tier: "UU"
 	},
 	sandshrew: {

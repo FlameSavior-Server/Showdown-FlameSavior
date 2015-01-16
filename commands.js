@@ -1435,61 +1435,82 @@ var commands = exports.commands = {
     pm: 'msg',
     whisper: 'msg',
     w: 'msg',
-    msg: function(target, room, user) {
+    msg: function (target, room, user, connection) {
         if (!target) return this.parse('/help msg');
         target = this.splitTarget(target);
         var targetUser = this.targetUser;
         if (!target) {
-            this.sendReply('You forgot the comma.');
+            this.sendReply("You forgot the comma.");
             return this.parse('/help msg');
         }
         if (!targetUser || !targetUser.connected) {
             if (targetUser && !targetUser.connected) {
-                this.popupReply('User ' + this.targetUsername + ' is offline.');
+                this.popupReply("User " + this.targetUsername + " is offline.");
             } else if (!target) {
-                this.popupReply('User ' + this.targetUsername + ' not found. Did you forget a comma?');
+                this.popupReply("User " + this.targetUsername + " not found. Did you forget a comma?");
             } else {
-                this.popupReply('User ' + this.targetUsername + ' not found. Did you misspell their name?');
+                this.popupReply("User "  + this.targetUsername + " not found. Did you misspell their name?");
             }
             return this.parse('/help msg');
         }
 
-        if (config.pmmodchat) {
+        if (Config.pmmodchat) {
             var userGroup = user.group;
-            if (config.groupsranking.indexOf(userGroup) < config.groupsranking.indexOf(config.pmmodchat)) {
-                var groupName = config.groups[config.pmmodchat].name;
-                if (!groupName) groupName = config.pmmodchat;
-                this.popupReply('Because moderated chat is set, you must be of rank ' + groupName + ' or higher to PM users.');
+            if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(Config.pmmodchat)) {
+                var groupName = Config.groups[Config.pmmodchat].name || Config.pmmodchat;
+                this.popupReply("Because moderated chat is set, you must be of rank " + groupName + " or higher to PM users.");
                 return false;
             }
         }
 
-        if (user.locked && !targetUser.can('lock', user)) {
-            return this.popupReply('You can only private message members of the moderation team (users marked by %, @, &, or ~) when locked.');
+        if (user.locked && !targetUser.can('lock')) {
+            return this.popupReply("You can only private message members of the moderation team (users marked by %, @, &, or ~) when locked.");
         }
-        if (targetUser.locked && !user.can('lock', targetUser)) {
-            return this.popupReply('This user is locked and cannot PM.');
+        if (targetUser.locked && !user.can('lock')) {
+            return this.popupReply("This user is locked and cannot PM.");
         }
         if (targetUser.ignorePMs && !user.can('lock')) {
             if (!targetUser.can('lock')) {
-                return this.popupReply('This user is blocking Private Messages right now.');
-            } else if (targetUser.can('hotpatch')) {
-                return this.popupReply('This admin is too busy to answer Private Messages right now. Please contact a different staff member.');
+                return this.popupReply("This user is blocking Private Messages right now.");
+            } else if (targetUser.can('bypassall')) {
+                return this.popupReply("This admin is too busy to answer Private Messages right now. Please contact a different staff member.");
             }
         }
 
         target = this.canTalk(target, null);
         if (!target) return false;
 
-        var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
-        user.send(message);
-        if (targetUser !== user) {
-            if (ShadowBan.isShadowBanned(user)) {
-                ShadowBan.room.add('|c|' + user.getIdentity() + "|__(Private to " + targetUser.getIdentity() + ")__ " + target);
-            } else {
-                targetUser.send(message);
+        if (target.charAt(0) === '/' && target.charAt(1) !== '/') {
+            // PM command
+            var targetCmdIndex = target.indexOf(' ');
+            var targetCmd = (targetCmdIndex >= 0 ? target.slice(1, targetCmdIndex) : target.slice(1));
+            switch (targetCmd) {
+            case 'me':
+            case 'announce':
+                break;
+            case 'invite':
+                var targetRoomid = toId(target.substr(8));
+                if (targetRoomid === 'global') return false;
+
+                var targetRoom = Rooms.search(targetRoomid);
+                if (!targetRoom) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text The room "' + targetRoomid + '" does not exist.');
+                if (targetRoom.staffRoom && !targetUser.isStaff) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text User "' + this.targetUsername + '" requires global auth to join room "' + targetRoom.id + '".');
+                if (targetRoom.isPrivate && targetRoom.modjoin && targetRoom.auth) {
+                    if (Config.groupsranking.indexOf(targetRoom.auth[targetUser.userid] || ' ') < Config.groupsranking.indexOf(targetRoom.modjoin) || !targetUser.can('bypassall')) {
+                        return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text The room "' + targetRoomid + '" does not exist.');
+                    }
+                }
+
+                target = '/invite ' + targetRoom.id;
+                break;
+            default:
+                return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text The command '/" + targetCmd + "' was unrecognized or unavailable in private messages. To send a message starting with '/" + targetCmd + "', type '//" + targetCmd + "'.");
             }
         }
+
+        var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
+        user.send(message);
+        if (targetUser !== user) targetUser.send(message);
         targetUser.lastPM = user.userid;
         user.lastPM = targetUser.userid;
     },
@@ -1497,42 +1518,39 @@ var commands = exports.commands = {
     blockpm: 'ignorepms',
     blockpms: 'ignorepms',
     ignorepm: 'ignorepms',
-    ignorepms: function(target, room, user) {
-        if (user.ignorePMs) return this.sendReply('You are already blocking Private Messages!');
-        if (user.can('lock') && !user.can('hotpatch')) return this.sendReply('You are not allowed to block Private Messages.');
+    ignorepms: function (target, room, user) {
+        if (user.ignorePMs) return this.sendReply("You are already blocking Private Messages!");
+        if (user.can('lock') && !user.can('bypassall')) return this.sendReply("You are not allowed to block Private Messages.");
         user.ignorePMs = true;
-        return this.sendReply('You are now blocking Private Messages.');
+        return this.sendReply("You are now blocking Private Messages.");
     },
 
     unblockpm: 'unignorepms',
     unblockpms: 'unignorepms',
     unignorepm: 'unignorepms',
-    unignorepms: function(target, room, user) {
-        if (!user.ignorePMs) return this.sendReply('You are not blocking Private Messages!');
+    unignorepms: function (target, room, user) {
+        if (!user.ignorePMs) return this.sendReply("You are not blocking Private Messages!");
         user.ignorePMs = false;
-        return this.sendReply('You are no longer blocking Private Messages.');
+        return this.sendReply("You are no longer blocking Private Messages.");
     },
 
-    makechatroom: function(target, room, user) {
+    makechatroom: function (target, room, user) {
         if (!this.can('makeroom')) return;
         var id = toId(target);
-        if (Rooms.rooms[id]) {
-            return this.sendReply("The room '" + target + "' already exists.");
-        }
+        if (!id) return this.parse('/help makechatroom');
+        if (Rooms.rooms[id]) return this.sendReply("The room '" + target + "' already exists.");
         if (Rooms.global.addChatRoom(target)) {
-            hangman.reset(id);
             return this.sendReply("The room '" + target + "' was created.");
         }
         return this.sendReply("An error occurred while trying to create the room '" + target + "'.");
     },
 
-    dcr: 'deregisterchatroom',
-    deregisterchatroom: function(target, room, user) {
+    deregisterchatroom: function (target, room, user) {
         if (!this.can('makeroom')) return;
         var id = toId(target);
         if (!id) return this.parse('/help deregisterchatroom');
-        var targetRoom = Rooms.get(id);
-        if (!targetRoom) return this.sendReply("The room '" + id + "' doesn't exist.");
+        var targetRoom = Rooms.search(id);
+        if (!targetRoom) return this.sendReply("The room '" + target + "' doesn't exist.");
         target = targetRoom.title || targetRoom.id;
         if (Rooms.global.deregisterChatRoom(id)) {
             this.sendReply("The room '" + target + "' was deregistered.");
@@ -1542,28 +1560,46 @@ var commands = exports.commands = {
         return this.sendReply("The room '" + target + "' isn't registered.");
     },
 
-    privateroom: function(target, room, user) {
-        if (!this.can('privateroom', null, room)) return;
+    hideroom: 'privateroom',
+    hiddenroom: 'privateroom',
+    privateroom: function (target, room, user, connection, cmd) {
+        var setting;
+        switch (cmd) {
+        case 'privateroom':
+            if (!this.can('makeroom')) return;
+            setting = true;
+            break;
+        default:
+            if (!this.can('privateroom', null, room)) return;
+            if (room.isPrivate === true) {
+                if (this.can('makeroom'))
+                    this.sendReply("This room is a secret room. Use /privateroom to toggle instead.");
+                return;
+            }
+            setting = 'hidden';
+            break;
+        }
+
         if (target === 'off') {
             delete room.isPrivate;
-            this.addModCommand(user.name + ' made this room public.');
+            this.addModCommand("" + user.name + " made this room public.");
             if (room.chatRoomData) {
                 delete room.chatRoomData.isPrivate;
                 Rooms.global.writeChatRoomData();
             }
         } else {
-            room.isPrivate = true;
-            this.addModCommand(user.name + ' made this room private.');
+            room.isPrivate = setting;
+            this.addModCommand("" + user.name + " made this room " + (setting === true ? 'secret' : setting) + ".");
             if (room.chatRoomData) {
-                room.chatRoomData.isPrivate = true;
+                room.chatRoomData.isPrivate = setting;
                 Rooms.global.writeChatRoomData();
             }
         }
     },
 
-    modjoin: function(target, room, user) {
+    modjoin: function (target, room, user) {
         if (!this.can('privateroom', null, room)) return;
-        if (target === 'off') {
+        if (target === 'off' || target === 'false') {
             delete room.modjoin;
             this.addModCommand("" + user.name + " turned off modjoin.");
             if (room.chatRoomData) {
@@ -1571,14 +1607,22 @@ var commands = exports.commands = {
                 Rooms.global.writeChatRoomData();
             }
         } else {
-            room.modjoin = true;
-            this.addModCommand("" + user.name + " turned on modjoin.");
+            if ((target === 'on' || target === 'true' || !target) || !user.can('privateroom')) {
+                room.modjoin = true;
+                this.addModCommand("" + user.name + " turned on modjoin.");
+            } else if (target in Config.groups) {
+                room.modjoin = target;
+                this.addModCommand("" + user.name + " set modjoin to " + target + ".");
+            } else {
+                this.sendReply("Unrecognized modjoin setting.");
+                return false;
+            }
             if (room.chatRoomData) {
                 room.chatRoomData.modjoin = true;
                 Rooms.global.writeChatRoomData();
             }
             if (!room.modchat) this.parse('/modchat ' + Config.groupsranking[1]);
-            if (!room.isPrivate) this.parse('/privateroom');
+            if (!room.isPrivate) this.parse('/hiddenroom');
         }
     },
 

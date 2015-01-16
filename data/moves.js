@@ -612,6 +612,7 @@ exports.BattleMovedex = {
 					this.add('-start', pokemon, 'Attract');
 				}
 			},
+			onBeforeMovePriority: 2,
 			onBeforeMove: function (pokemon, target, move) {
 				if (this.effectData.source && !this.effectData.source.isActive && pokemon.volatiles['attract']) {
 					this.debug('Removing Attract volatile on ' + pokemon);
@@ -699,7 +700,7 @@ exports.BattleMovedex = {
 					this.add('-start', pokemon, 'Autotomize');
 				}
 			},
-			onRestart: function (pokemon)		 {
+			onRestart: function (pokemon) {
 				if (pokemon.weightkg !== 0.1) {
 					this.effectData.multiplier++;
 					this.add('-start', pokemon, 'Autotomize');
@@ -2726,6 +2727,7 @@ exports.BattleMovedex = {
 			onEnd: function (pokemon) {
 				this.add('-end', pokemon, 'Disable');
 			},
+			onBeforeMovePriority: 7,
 			onBeforeMove: function (attacker, defender, move) {
 				if (move.id === this.effectData.move) {
 					this.add('cant', attacker, 'Disable', move);
@@ -5529,6 +5531,7 @@ exports.BattleMovedex = {
 				}
 				if (applies) this.add('-activate', pokemon, 'Gravity');
 			},
+			onBeforeMovePriority: 6,
 			onBeforeMove: function (pokemon, target, move) {
 				var disabledMoves = {bounce:1, fly:1, highjumpkick:1, jumpkick:1, magnetrise:1, skydrop:1, splash:1, telekinesis:1};
 				if (disabledMoves[move.id]) {
@@ -5991,6 +5994,7 @@ exports.BattleMovedex = {
 					}
 				}
 			},
+			onBeforeMovePriority: 6,
 			onBeforeMove: function (pokemon, target, move) {
 				var disabledMoves = {healingwish:1, lunardance:1, rest:1, swallow:1, wish:1};
 				if (disabledMoves[move.id] || move.heal || move.drain) {
@@ -7158,6 +7162,7 @@ exports.BattleMovedex = {
 				}
 				pokemon.maybeDisabled = true;
 			},
+			onFoeBeforeMovePriority: 4,
 			onFoeBeforeMove: function (attacker, defender, move) {
 				if (attacker.disabledMoves[move.id]) {
 					this.add('cant', attacker, 'move: Imprison', move);
@@ -8218,7 +8223,7 @@ exports.BattleMovedex = {
 				}
 			}
 			if (!targets.length) return false;
-			for (var i = 0;i < targets.length;i++) this.boost({spd: 1, def: 1}, targets[i], source, 'move: Magnetic Flux');
+			for (var i = 0; i < targets.length; i++) this.boost({spd: 1, def: 1}, targets[i], source, 'move: Magnetic Flux');
 		},
 		secondary: false,
 		target: "allySide",
@@ -12577,7 +12582,7 @@ exports.BattleMovedex = {
 				if (defender !== this.effectData.source) return;
 				defender.trapped = true;
 			},
-			onFoeBeforeMovePriority: 11,
+			onFoeBeforeMovePriority: 12,
 			onFoeBeforeMove: function (attacker, defender, move) {
 				if (attacker === this.effectData.source) {
 					this.debug('Sky drop nullifying.');
@@ -14308,6 +14313,7 @@ exports.BattleMovedex = {
 					}
 				}
 			},
+			onBeforeMovePriority: 5,
 			onBeforeMove: function (attacker, defender, move) {
 				if (move.category === 'Status') {
 					this.add('cant', attacker, 'move: Taunt', move);

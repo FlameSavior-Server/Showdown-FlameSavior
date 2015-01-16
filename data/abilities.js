@@ -933,11 +933,11 @@ exports.BattleAbilities = {
 		num: 119
 	},
 	"furcoat": {
-		desc: "Halves the damage done to this Pokemon by physical attacks.",
-		shortDesc: "Halves physical damage done to this Pokemon.",
-		onModifyAtkPriority: 6,
-		onSourceModifyAtk: function (atk, attacker, defender, move) {
-			return this.chainModify(0.5);
+		desc: "This Pokemon's Defense is doubled.",
+		shortDesc: "This Pokemon's Defense is doubled.",
+		onModifyDefPriority: 6,
+		onModifyDef: function (def) {
+			return this.chainModify(2);
 		},
 		id: "furcoat",
 		name: "Fur Coat",
@@ -2603,7 +2603,7 @@ exports.BattleAbilities = {
 	"stancechange": {
 		desc: "Only affects Aegislash. If this Pokemon uses a Physical or Special move, it changes to Blade forme. If this Pokemon uses King's Shield, it changes to Shield forme.",
 		shortDesc: "The Pokemon changes form depending on how it battles.",
-		onBeforeMovePriority: 10,
+		onBeforeMovePriority: 11,
 		onBeforeMove: function (attacker, defender, move) {
 			if (attacker.template.baseSpecies !== 'Aegislash') return;
 			if (move.category === 'Status' && move.id !== 'kingsshield') return;
@@ -3028,6 +3028,7 @@ exports.BattleAbilities = {
 	"truant": {
 		desc: "After this Pokemon is switched into battle, it skips every other turn.",
 		shortDesc: "This Pokemon skips every other turn instead of using a move.",
+		onBeforeMovePriority: 9,
 		onBeforeMove: function (pokemon, target, move) {
 			if (pokemon.removeVolatile('truant')) {
 				this.add('cant', pokemon, 'ability: Truant', move);
@@ -3035,7 +3036,6 @@ exports.BattleAbilities = {
 			}
 			pokemon.addVolatile('truant');
 		},
-		onBeforeMovePriority: 99,
 		effect: {
 			duration: 2
 		},

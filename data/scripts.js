@@ -1426,7 +1426,7 @@ exports.BattleScripts = {
 			item = 'Sitrus Berry';
 		} else if (template.species === 'Cubone' || template.species === 'Marowak') {
 			item = 'Thick Club';
-		} else if (template.species === 'Pikachu') {
+		} else if (template.baseSpecies === 'Pikachu') {
 			item = 'Light Ball';
 		} else if (template.species === 'Clamperl') {
 			item = 'DeepSeaTooth';
@@ -1626,7 +1626,7 @@ exports.BattleScripts = {
 		var pokemon = [];
 		for (var i in this.data.FormatsData) {
 			var template = this.getTemplate(i);
-			if (this.data.FormatsData[i].randomBattleMoves && !this.data.FormatsData[i].isNonstandard && !template.evos.length && (template.forme.substr(0, 4) !== 'Mega') && template.forme !== 'Primal') {
+			if (this.data.FormatsData[i].randomBattleMoves && !this.data.FormatsData[i].isNonstandard && !(template.tier in {'LC':1, 'LC Uber':1, 'NFE':1}) && (template.forme.substr(0, 4) !== 'Mega') && template.forme !== 'Primal') {
 				keys.push(i);
 			}
 		}
@@ -1642,18 +1642,15 @@ exports.BattleScripts = {
 		var typeComboCount = {};
 		var baseFormes = {};
 		var uberCount = 0;
-		var nuCount = 0;
+		var puCount = 0;
 		var megaCount = 0;
 
 		for (var i = 0; i < keys.length && pokemonLeft < 6; i++) {
 			var template = this.getTemplate(keys[i]);
 			if (!template || !template.name || !template.types) continue;
 			var tier = template.tier;
-			// This tries to limit the amount of Ubers and NUs on one team to promote "fun":
-			// LC Pokemon have a hard limit in place at 2; NFEs/NUs/Ubers are also limited to 2 but have a 20% chance of being added anyway.
-			// LC/NFE/NU Pokemon all share a counter (so having one of each would make the counter 3), while Ubers have a counter of their own.
-			if (tier === 'LC' && nuCount > 1) continue;
-			if ((tier === 'NFE' || tier === 'NU') && nuCount > 1 && Math.random() * 5 > 1) continue;
+			// PUs/Ubers are limited to 2 but have a 20% chance of being added anyway.
+			if (tier === 'PU' && puCount > 1 && Math.random() * 5 > 1) continue;
 			if (tier === 'Uber' && uberCount > 1 && Math.random() * 5 > 1) continue;
 
 			// CAPs have 20% the normal rate
@@ -1666,6 +1663,10 @@ exports.BattleScripts = {
 			if (keys[i].substr(0, 8) === 'genesect' && Math.random() * 5 > 1) continue;
 			// Gourgeist formes have 1/4 the normal rate each (so Gourgeist as a whole has a normal rate)
 			if (keys[i].substr(0, 9) === 'gourgeist' && Math.random() * 4 > 1) continue;
+			// Cosplay Pikachu formes have 20% the normal rate (1/30 the normal rate each)
+			if (keys[i].substr(0, 7) === 'pikachu' && template.species !== 'Pikachu' && Math.random() * 30 > 1) continue;
+			// Regular Pikachu has 80% the normal rate (so Pikachu as a whole has a normal rate)
+			if (template.species === 'Pikachu' && Math.random() * 5 <= 1) continue;
 			// Not available on XY
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
@@ -1733,8 +1734,8 @@ exports.BattleScripts = {
 			// Increment Uber/NU and mega counter
 			if (tier === 'Uber') {
 				uberCount++;
-			} else if (tier === 'NU' || tier === 'NFE' || tier === 'LC') {
-				nuCount++;
+			} else if (tier === 'PU') {
+				puCount++;
 			}
 			if (isMegaSet) megaCount++;
 		}
@@ -1926,7 +1927,7 @@ exports.BattleScripts = {
 		var pokemon = [];
 		for (var i in this.data.FormatsData) {
 			var template = this.getTemplate(i);
-			if (this.data.FormatsData[i].randomBattleMoves && !this.data.FormatsData[i].isNonstandard && !template.evos.length && (template.forme.substr(0, 4) !== 'Mega') && template.forme !== 'Primal') {
+			if (this.data.FormatsData[i].randomBattleMoves && !this.data.FormatsData[i].isNonstandard && !(template.tier in {'LC':1, 'LC Uber':1, 'NFE':1}) && (template.forme.substr(0, 4) !== 'Mega') && template.forme !== 'Primal') {
 				keys.push(i);
 			}
 		}
@@ -1953,6 +1954,12 @@ exports.BattleScripts = {
 			if (keys[i].substr(0, 8) === 'basculin' && Math.random() * 2 > 1) continue;
 			// Genesect formes have 1/5 the normal rate each (so Genesect as a whole has a normal rate)
 			if (keys[i].substr(0, 8) === 'genesect' && Math.random() * 5 > 1) continue;
+			// Gourgeist formes have 1/4 the normal rate each (so Gourgeist as a whole has a normal rate)
+			if (keys[i].substr(0, 9) === 'gourgeist' && Math.random() * 4 > 1) continue;
+			// Cosplay Pikachu formes have 20% the normal rate (1/30 the normal rate each)
+			if (keys[i].substr(0, 7) === 'pikachu' && template.species !== 'Pikachu' && Math.random() * 30 > 1) continue;
+			// Regular Pikachu has 80% the normal rate (so Pikachu as a whole has a normal rate)
+			if (template.species === 'Pikachu' && Math.random() * 5 <= 1) continue;
 			// Not available on XY
 			if (template.species === 'Pichu-Spiky-eared') continue;
 
@@ -2617,7 +2624,7 @@ exports.BattleScripts = {
 			item = 'Sitrus Berry';
 		} else if (template.species === 'Cubone' || template.species === 'Marowak') {
 			item = 'Thick Club';
-		} else if (template.species === 'Pikachu') {
+		} else if (template.baseSpecies === 'Pikachu') {
 			item = 'Light Ball';
 		} else if (template.species === 'Clamperl') {
 			item = 'DeepSeaTooth';
@@ -3034,7 +3041,7 @@ exports.BattleScripts = {
 						break;
 					}
 				}
-				if (!hasOrcKilling) set.moves[3] = (template.baseStats.atk > template.baseStats.spa)? 'closecombat' : 'aurasphere';
+				if (!hasOrcKilling) set.moves[3] = (template.baseStats.atk > template.baseStats.spa) ? 'closecombat' : 'aurasphere';
 				if (p !== 'hoopa') {
 					set.item = 'Eviolite';
 					set.level = 90;
@@ -3181,7 +3188,7 @@ exports.BattleScripts = {
 					}
 				}
 				if (!hasBotKilling) {
-					set.moves[3] = (template.baseStats.atk > template.baseStats.spa)? ['flareblitz', 'closecombat'][this.random(2)] : ['flamethrower', 'aurasphere'][this.random(2)];
+					set.moves[3] = (template.baseStats.atk > template.baseStats.spa) ? ['flareblitz', 'closecombat'][this.random(2)] : ['flamethrower', 'aurasphere'][this.random(2)];
 					set.level += 5;
 				}
 				if (toId(set.ability) === 'unburden') set.ability = 'Reckless';

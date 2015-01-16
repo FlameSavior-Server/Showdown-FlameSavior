@@ -1310,7 +1310,7 @@ exports.BattleScripts = {
 				rejectAbility = !counter['recoil'];
 			} else if (ability === 'Sturdy') {
 				rejectAbility = !!counter['recoil'] && !hasMove['recover'] && !hasMove['roost'];
-			} else if (ability === 'No Guard' || ability === 'Compound Eyes') {
+			} else if (ability === 'No Guard' || ability === 'Compoundeyes') {
 				rejectAbility = !counter['inaccurate'];
 			} else if ((ability === 'Sheer Force' || ability === 'Serene Grace')) {
 				rejectAbility = !counter['sheerforce'];
@@ -1383,6 +1383,7 @@ exports.BattleScripts = {
 			item = template.requiredItem;
 		} else if (template.species === 'Rotom-Fan') {
 			// this is just to amuse myself
+			// do we really have to keep this
 			item = 'Air Balloon';
 		} else if (template.species === 'Delibird') {
 			// to go along with the Christmas Delibird set
@@ -1433,8 +1434,6 @@ exports.BattleScripts = {
 			item = 'Leftovers';
 		} else if (template.species === 'Dusclops') {
 			item = 'Eviolite';
-		} else if (template.species === 'Farfetch\'d') {
-			item = 'Stick';
 		} else if (hasMove['reflect'] && hasMove['lightscreen']) {
 			item = 'Light Clay';
 		} else if (hasMove['shellsmash']) {
@@ -2508,7 +2507,7 @@ exports.BattleScripts = {
 				rejectAbility = !counter[toId(ability)];
 			} else if (ability === 'Rock Head' || ability === 'Reckless') {
 				rejectAbility = !counter['recoil'];
-			} else if (ability === 'No Guard' || ability === 'Compound Eyes') {
+			} else if (ability === 'No Guard' || ability === 'Compoundeyes') {
 				rejectAbility = !counter['inaccurate'];
 			} else if ((ability === 'Sheer Force' || ability === 'Serene Grace')) {
 				rejectAbility = !counter['sheerforce'];
@@ -2628,8 +2627,6 @@ exports.BattleScripts = {
 			item = 'Eviolite';
 		} else if (template.species === 'Scrafty' && counter['Status'] === 0) {
 			item = 'Assault Vest';
-		} else if (template.species === 'Farfetch\'d') {
-			item = 'Stick';
 		} else if (template.species === 'Amoonguss') {
 			item = 'Black Sludge';
 		} else if (hasMove['reflect'] && hasMove['lightscreen']) {

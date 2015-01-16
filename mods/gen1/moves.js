@@ -535,15 +535,13 @@ exports.BattleMovedex = {
 			if (moveslot === -1) return false;
 			var moves = target.moves;
 			moves = moves.randomize();
-			var move = false;
 			for (var i = 0; i < moves.length; i++) {
 				if (!(moves[i] in disallowedMoves)) {
-					move = moves[i];
+					var move = moves[i];
 					break;
 				}
 			}
-			if (!move) return false;
-			move = this.getMove(move);
+			var move = this.getMove(move);
 			source.moveset[moveslot] = {
 				move: move.name,
 				id: move.id,

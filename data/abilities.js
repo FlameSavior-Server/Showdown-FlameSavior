@@ -71,7 +71,7 @@ exports.BattleAbilities = {
 		onModifyMove: function (move, pokemon) {
 			if (move.type === 'Normal' && move.id !== 'hiddenpower') {
 				move.type = 'Flying';
-				if (move.category !== 'Status') pokemon.addVolatile('aerilate');
+				pokemon.addVolatile('aerilate');
 			}
 		},
 		effect: {
@@ -669,13 +669,9 @@ exports.BattleAbilities = {
 		onAfterDamage: function (damage, target, source, move) {
 			if (move && move.isContact && !source.status && source.runImmunity('powder')) {
 				var r = this.random(100);
-				if (r < 11) {
-					source.setStatus('slp', target);
-				} else if (r < 21) {
-					source.setStatus('par', target);
-				} else if (r < 30) {
-					source.setStatus('psn', target);
-				}
+				if (r < 11) source.setStatus('slp', target);
+				else if (r < 21) source.setStatus('par', target);
+				else if (r < 30) source.setStatus('psn', target);
 			}
 		},
 		id: "effectspore",
@@ -1920,7 +1916,7 @@ exports.BattleAbilities = {
 		onModifyMove: function (move, pokemon) {
 			if (move.type === 'Normal' && move.id !== 'hiddenpower') {
 				move.type = 'Fairy';
-				if (move.category !== 'Status') pokemon.addVolatile('pixilate');
+				pokemon.addVolatile('pixilate');
 			}
 		},
 		effect: {
@@ -2143,7 +2139,7 @@ exports.BattleAbilities = {
 		onModifyMove: function (move, pokemon) {
 			if (move.type === 'Normal' && move.id !== 'hiddenpower') {
 				move.type = 'Ice';
-				if (move.category !== 'Status') pokemon.addVolatile('refrigerate');
+				pokemon.addVolatile('refrigerate');
 			}
 		},
 		effect: {

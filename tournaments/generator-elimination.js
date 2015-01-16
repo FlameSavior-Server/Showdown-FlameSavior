@@ -154,10 +154,9 @@ var Elimination = (function () {
 				targetNode = this.tree.nextLayerLeafNodes[n];
 		targetNode.getValue().user = replacementUser;
 	};
-	Elimination.prototype.getUsers = function (remaining) {
+	Elimination.prototype.getUsers = function () {
 		var users = [];
 		this.users.forEach(function (value, key) {
-			if (remaining && (value.isEliminated || value.isDisqualified)) return;
 			users.push(key);
 		});
 		return users;
@@ -391,7 +390,6 @@ var Elimination = (function () {
 
 		var loserData = this.users.get(loser);
 		++loserData.loseCount;
-		if (loserData.loseCount === this.maxSubtrees) loserData.isEliminated = true;
 
 		if (targetNode.getParent()) {
 			var userA = targetNode.getParent().getChildAt(0).getValue().user;

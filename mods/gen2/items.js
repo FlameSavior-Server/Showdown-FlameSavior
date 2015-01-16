@@ -29,22 +29,12 @@ exports.BattleItems = {
 		inherit: true,
 		gen: 2
 	},
-	dragonfang: {
-		inherit: true,
-		onBasePower: function () {},
-		desc: "No competitive use."
-	},
 	dragonscale: {
 		id: "dragonscale",
 		name: "Dragon Scale",
 		num: -3,
-		onBasePower: function (basePower, user, target, move) {
-			if (move.type === 'Dragon') {
-				return basePower * 1.1;
-			}
-		},
 		gen: 2,
-		desc: "Evolves Seadra into Kingdra when traded. Dragon-type attacks have 1.1x power."
+		desc: "Evolves Seadra into Kingdra. Raises power of Dragon-type moves by 10%."
 	},
 	metalpowder: {
 		inherit: true,
@@ -113,11 +103,11 @@ exports.BattleItems = {
 		name: "Polkadot Bow",
 		onBasePower: function (basePower, user, target, move) {
 			if (move.type === 'Normal') {
-				return basePower * 1.1;
+				return basePower * 1.125;
 			}
 		},
 		gen: 2,
-		desc: "Holder's Normal-type attacks have 1.1x power."
+		desc: "Holder's Normal-type attacks have 1.125x power."
 	},
 	rawstberry: {
 		inherit: true,

@@ -196,7 +196,7 @@ var commands = exports.commands = {
 					this.sendReply("Locked: IP is in a DNS-based blacklist. ");
 					break;
 				case '#range':
-					this.sendReply("Locked: host is in a temporary range-lock.");
+					this.sendReply("Locked: IP or host is in a temporary range-lock.");
 					break;
 				case '#hostfilter':
 					this.sendReply("Locked: host is permanently locked for being a proxy.");
@@ -251,18 +251,38 @@ var commands = exports.commands = {
 		}
 	},
 
-	ipsearch: function (target, room, user) {
+	ipsearchall: 'ipsearch',
+	ipsearch: function (target, room, user, connection, cmd) {
 		if (!this.can('rangeban')) return;
-		var atLeastOne = false;
+		var results = [];
 		this.sendReply("Users with IP " + target + ":");
+
+		var isRange;
+		if (target.slice(-1) === '*') {
+			isRange = true;
+			target = target.slice(0, -1);
+		}
+		var isAll = (cmd === 'ipsearchall');
+
+		if (isRange) {
+			for (var userid in Users.users) {
+				var curUser = Users.users[userid];
+				if (curUser.group === '~') continue;
+				if (!curUser.latestIp.startsWith(target)) continue;
+				if (results.push((curUser.connected ? " + " : "-") + " " + curUser.name) > 100 && !isAll) {
+					return this.sendReply("More than 100 users match the specified IP range. Use /ipsearchall to retrieve the full list.");
+				}
+			}
+		} else {
 		for (var userid in Users.users) {
 			var curUser = Users.users[userid];
 			if (curUser.latestIp === target) {
-				this.sendReply((curUser.connected ? " + " : "-") + " " + curUser.name);
-				atLeastOne = true;
+					results.push((curUser.connected ? " + " : "-") + " " + curUser.name);
+				}
 			}
 		}
-		if (!atLeastOne) this.sendReply("No results found.");
+		if (!results.length) return this.sendReply("No results found.");
+		return this.sendReply(results.join('; '));
 	},
 
 	/*********************************************************
@@ -1155,7 +1175,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'averagemons') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3495527/\">Averagemons</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3526481/\">Averagemons</a><br />";
 		}
 		if (target === 'all' || target === 'classichackmons' || target === 'hackmons') {
 			matched = true;
@@ -1392,7 +1412,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'rarelyused' || target === 'ru') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3522572/\">np: RU Stage 5</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3527140/\">np: RU Stage 6</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/ru/\">RU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523627/\">RU Viability Rankings</a><br />";
 		}

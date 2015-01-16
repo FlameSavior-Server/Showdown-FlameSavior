@@ -1152,7 +1152,7 @@ BattlePokemon = (function () {
 	BattlePokemon.getHealth = function (side) {
 		if (!this.hp) return '0 fnt';
 		var hpstring;
-		if ((side === true) || (this.side === side) || this.battle.getFormat().debug) {
+		if ((side === true) || (this.side === side) || this.battle.getFormat().debug || this.battle.reportExactHP) {
 			hpstring = '' + this.hp + '/' + this.maxhp;
 		} else {
 			var ratio = this.hp / this.maxhp;
@@ -3168,8 +3168,8 @@ Battle = (function () {
 			}
 		}
 
-		if (this.gen <= 2) {
-			// in gen 1-2, fainting skips the rest of the turn, including residuals
+		if (this.gen <= 1) {
+			// in gen 1, fainting skips the rest of the turn, including residuals
 			this.queue = [];
 		} else if (this.gen <= 3 && this.gameType === 'singles') {
 			// in gen 3 or earlier, fainting in singles skips to residuals

@@ -20,6 +20,33 @@ exports.commands = {
 		);
 	},
 
+	shz: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://scontent-a.cdninstagram.com/hphotos-xap1/t51.2885-15/10808754_750049291743019_685215986_a.jpg" width="200">' +
+			'<img src="http://i.imgur.com/ax4QdOg.gif">' +
+			'<img src="https://s-media-cache-ak0.pinimg.com/236x/b3/9b/39/b39b3981f4eb205ca66ddebed3702293.jpg height="200"><br />' +
+			'<b>Ace:</b> Jirachi And MLG<br />' +
+			'Any wish can come true if you believe enough that you can make it happen.<br />' +
+			'<button name="send" value="/transferbucks shz, 1"><i>Make a wish. And donate as well.</i></button><br />' +
+			'#!u SHZ #I\'mDone #... #Ily2♥<br />' +
+			'<i>One does not simply obtain greatness. One must struggle and overcome to truly become good.</i></center>'
+		);
+	},
+
+	ungenericfly: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/dd1N0yr.png"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/dragonite.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megay.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/articuno.gif"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gliscor.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aerodactyl.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/gyarados.gif"><br />' +
+			'<b>Ace:</b> SaNeski, Snowz, Croven<br />' +
+			'Don\'t need to use the best, to be the best.</center>'
+		);
+	},
+
 	carlton: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/kuG1Nqp.gif" height=350></center>');
@@ -932,11 +959,13 @@ exports.commands = {
 		);
 	},
 
-	qusawa: function (target, room, user) {
+	isawa: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/Vjj5cZw.jpg" width="300"><br />' +
-			'<b>Ace:</b> <blink>Overseas Relations</blink><br />' +
-			' It\'s time for a game of cat & mouse, however I will always let you catch me..</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/IELB4R4.jpg" width="130">' +
+			'<img src="http://i.imgur.com/Ae2qA0Q.gif" width="280">' +
+			'<img src="http://fc04.deviantart.net/fs71/f/2010/264/8/3/eevee_umbreon_by_aerius_the_aireon-d2z7wsp.png" width="130"><br />' +
+			'<font size="3" color="red"><b>Ace:</b></font> <font color="orange">Chrisawa</font><br />' +
+			'<b><font color="orange">Quote:</font></b> <font color="red">Dancin\' in the Moonlight</font></center>'
 		);
 	},
 

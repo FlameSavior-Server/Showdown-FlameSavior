@@ -160,9 +160,7 @@
  * @license MIT license
  */
 var fs = require('fs');
-var badges = fs.createWriteStream('badges.txt', {
-	'flags': 'a'
-});
+var badges = fs.createWriteStream('badges.txt', {'flags': 'a'});
 var commands = exports.commands = {
 
 	ip: 'whois',
@@ -170,7 +168,7 @@ var commands = exports.commands = {
 	alt: 'whois',
 	alts: 'whois',
 	whoare: 'whois',
-	whois: function(target, room, user, connection, cmd) {
+	whois: function (target, room, user, connection, cmd) {
 		var targetUser = this.targetUserOrSelf(target, user.group === ' ');
 		if (!targetUser) {
 			return this.sendReply("User " + this.targetUsername + " not found.");
@@ -193,17 +191,17 @@ var commands = exports.commands = {
 			}
 			if (targetUser.locked) {
 				switch (targetUser.locked) {
-					case '#dnsbl':
-						this.sendReply("Locked: IP is in a DNS-based blacklist. ");
-						break;
-					case '#range':
-						this.sendReply("Locked: host is in a temporary range-lock.");
-						break;
-					case '#hostfilter':
-						this.sendReply("Locked: host is permanently locked for being a proxy.");
-						break;
-					default:
-						this.sendReply("Locked under the username: " + targetUser.locked);
+				case '#dnsbl':
+					this.sendReply("Locked: IP is in a DNS-based blacklist. ");
+					break;
+				case '#range':
+					this.sendReply("Locked: host is in a temporary range-lock.");
+					break;
+				case '#hostfilter':
+					this.sendReply("Locked: host is permanently locked for being a proxy.");
+					break;
+				default:
+					this.sendReply("Locked under the username: " + targetUser.locked);
 				}
 			}
 		}
@@ -219,7 +217,7 @@ var commands = exports.commands = {
 		if ((cmd === 'ip' || cmd === 'whoare') && (user.can('ip', targetUser) || user === targetUser)) {
 			var ips = Object.keys(targetUser.ips);
 			this.sendReply("IP" + ((ips.length > 1) ? "s" : "") + ": " + ips.join(", ") +
-				(user.group !== ' ' && targetUser.latestHost ? "\nHost: " + targetUser.latestHost : ""));
+					(user.group !== ' ' && targetUser.latestHost ? "\nHost: " + targetUser.latestHost : ""));
 		}
 		var publicrooms = "In rooms: ";
 		var hiddenrooms = "In hidden rooms: ";
@@ -246,7 +244,7 @@ var commands = exports.commands = {
 		}
 	},
 
-	ipsearch: function(target, room, user) {
+	ipsearch: function (target, room, user) {
 		if (!this.can('rangeban')) return;
 		var atLeastOne = false;
 		this.sendReply("Users with IP " + target + ":");
@@ -264,7 +262,7 @@ var commands = exports.commands = {
 	 * Shortcuts
 	 *********************************************************/
 
-	invite: function(target, room, user) {
+	invite: function (target, room, user) {
 		target = this.splitTarget(target);
 		if (!this.targetUser) {
 			return this.sendReply("User " + this.targetUsername + " not found.");
@@ -287,7 +285,7 @@ var commands = exports.commands = {
 	pokedex: 'data',
 	details: 'data',
 	dt: 'data',
-	data: function(target, room, user, connection, cmd) {
+	data: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
 		if (cmd === 'randompokemon' || cmd === 'randp') target = (Math.floor(Math.random() * 721) + 1);
 		var buffer = '';
@@ -312,13 +310,7 @@ var commands = exports.commands = {
 				if (newTargets[i].searchType === 'nature') {
 					buffer += "" + newTargets[i].name + " nature: ";
 					if (newTargets[i].plus) {
-						var statNames = {
-							'atk': "Attack",
-							'def': "Defense",
-							'spa': "Special Attack",
-							'spd': "Special Defense",
-							'spe': "Speed"
-						};
+						var statNames = {'atk': "Attack", 'def': "Defense", 'spa': "Special Attack", 'spd': "Special Defense", 'spe': "Speed"};
 						buffer += "+10% " + statNames[newTargets[i].plus] + ", -10% " + statNames[newTargets[i].minus] + ".";
 					} else {
 						buffer += "No effect.";
@@ -358,7 +350,7 @@ var commands = exports.commands = {
 				if (!pokemon.evos.length) {
 					details["<font color=#585858>Does Not Evolve</font>"] = "";
 				} else {
-					details["Evolution"] = pokemon.evos.map(function(evo) {
+					details["Evolution"] = pokemon.evos.map(function (evo) {
 						evo = Tools.getTemplate(evo);
 						return evo.name + " (" + evo.evoLevel + ")";
 					}).join(", ");
@@ -417,7 +409,7 @@ var commands = exports.commands = {
 				details = {};
 			}
 
-			buffer += '|raw|<font size="1">' + Object.keys(details).map(function(detail) {
+			buffer += '|raw|<font size="1">' + Object.keys(details).map(function (detail) {
 				return '<font color=#585858>' + detail + (details[detail] !== '' ? ':</font> ' + details[detail] : '</font>');
 			}).join("&nbsp;|&ThickSpace;") + '</font>';
 		}
@@ -426,39 +418,14 @@ var commands = exports.commands = {
 
 	ds: 'dexsearch',
 	dsearch: 'dexsearch',
-	dexsearch: function(target, room, user) {
+	dexsearch: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 
 		if (!target) return this.parse('/help dexsearch');
 		var targets = target.split(',');
 		var searches = {};
-		var allTiers = {
-			'uber': 1,
-			'ou': 1,
-			'bl': 1,
-			'uu': 1,
-			'bl2': 1,
-			'ru': 1,
-			'bl3': 1,
-			'nu': 1,
-			'bl4': 1,
-			'pu': 1,
-			'nfe': 1,
-			'lc': 1,
-			'cap': 1
-		};
-		var allColours = {
-			'green': 1,
-			'red': 1,
-			'blue': 1,
-			'white': 1,
-			'brown': 1,
-			'yellow': 1,
-			'purple': 1,
-			'pink': 1,
-			'gray': 1,
-			'black': 1
-		};
+		var allTiers = {'uber':1, 'ou':1, 'bl':1, 'uu':1, 'bl2':1, 'ru':1, 'bl3':1, 'nu':1, 'bl4':1, 'pu':1, 'nfe':1, 'lc':1, 'cap':1};
+		var allColours = {'green':1, 'red':1, 'blue':1, 'white':1, 'brown':1, 'yellow':1, 'purple':1, 'pink':1, 'gray':1, 'black':1};
 		var showAll = false;
 		var megaSearch = null;
 		var recoverySearch = null;
@@ -558,15 +525,7 @@ var commands = exports.commands = {
 			}
 		}
 
-		for (var search in {
-				'moves': 1,
-				'recovery': 1,
-				'types': 1,
-				'ability': 1,
-				'tier': 1,
-				'gen': 1,
-				'color': 1
-			}) {
+		for (var search in {'moves':1, 'recovery':1, 'types':1, 'ability':1, 'tier':1, 'gen':1, 'color':1}) {
 			if (!searches[search]) continue;
 			switch (search) {
 				case 'types':
@@ -575,7 +534,7 @@ var commands = exports.commands = {
 							if (!(searches[search][dex[mon].types[0]]) || !(searches[search][dex[mon].types[1]])) delete dex[mon];
 						} else {
 							if (searches[search][dex[mon].types[0]] === false || searches[search][dex[mon].types[1]] === false || (Object.count(searches[search], true) > 0 &&
-									(!(searches[search][dex[mon].types[0]]) && !(searches[search][dex[mon].types[1]])))) delete dex[mon];
+								(!(searches[search][dex[mon].types[0]]) && !(searches[search][dex[mon].types[1]])))) delete dex[mon];
 						}
 					}
 					break;
@@ -631,11 +590,7 @@ var commands = exports.commands = {
 							while (prevoTemp.prevo && prevoTemp.learnset && !(prevoTemp.learnset[move.id])) {
 								prevoTemp = Tools.getTemplate(prevoTemp.prevo);
 							}
-							var canLearn = (prevoTemp.learnset.sketch && !(move.id in {
-								'chatter': 1,
-								'struggle': 1,
-								'magikarpsrevenge': 1
-							})) || prevoTemp.learnset[move.id];
+							var canLearn = (prevoTemp.learnset.sketch && !(move.id in {'chatter':1, 'struggle':1, 'magikarpsrevenge':1})) || prevoTemp.learnset[move.id];
 							if ((!canLearn && searches[search][i]) || (searches[search][i] === false && canLearn)) delete dex[mon];
 						}
 					}
@@ -665,10 +620,8 @@ var commands = exports.commands = {
 			}
 		}
 
-		var results = Object.keys(dex).map(function(speciesid) {
-			return dex[speciesid].species;
-		});
-		results = results.filter(function(species) {
+		var results = Object.keys(dex).map(function (speciesid) {return dex[speciesid].species;});
+		results = results.filter(function (species) {
 			var template = Tools.getTemplate(species);
 			return !(species !== template.baseSpecies && results.indexOf(template.baseSpecies) > -1);
 		});
@@ -691,23 +644,19 @@ var commands = exports.commands = {
 	learnall: 'learn',
 	learn5: 'learn',
 	g6learn: 'learn',
-	learn: function(target, room, user, connection, cmd) {
+	learn: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help learn');
 
 		if (!this.canBroadcast()) return;
 
-		var lsetData = {
-			set: {}
-		};
+		var lsetData = {set:{}};
 		var targets = target.split(',');
 		var template = Tools.getTemplate(targets[0]);
 		var move = {};
 		var problem;
 		var all = (cmd === 'learnall');
 		if (cmd === 'learn5') lsetData.set.level = 5;
-		if (cmd === 'g6learn') lsetData.format = {
-			noPokebank: true
-		};
+		if (cmd === 'g6learn') lsetData.format = {noPokebank: true};
 
 		if (!template.exists) {
 			return this.sendReply("Pokemon '" + template.id + "' not found.");
@@ -727,11 +676,7 @@ var commands = exports.commands = {
 		}
 		var buffer = template.name + (problem ? " <span class=\"message-learn-cannotlearn\">can't</span> learn " : " <span class=\"message-learn-canlearn\">can</span> learn ") + (targets.length > 2 ? "these moves" : move.name);
 		if (!problem) {
-			var sourceNames = {
-				E: "egg",
-				S: "event",
-				D: "dream world"
-			};
+			var sourceNames = {E:"egg", S:"event", D:"dream world"};
 			if (lsetData.sources || lsetData.sourcesBefore) buffer += " only when obtained from:<ul class=\"message-learn-list\">";
 			if (lsetData.sources) {
 				var sources = lsetData.sources.sort();
@@ -766,7 +711,7 @@ var commands = exports.commands = {
 
 	weak: 'weakness',
 	resist: 'weakness',
-	weakness: function(target, room, user) {
+	weakness: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		var targets = target.split(/[ ,\/]/);
 
@@ -777,14 +722,10 @@ var commands = exports.commands = {
 		if (pokemon.exists) {
 			target = pokemon.species;
 		} else if (type1.exists && type2.exists) {
-			pokemon = {
-				types: [type1.id, type2.id]
-			};
+			pokemon = {types: [type1.id, type2.id]};
 			target = type1.id + "/" + type2.id;
 		} else if (type1.exists) {
-			pokemon = {
-				types: [type1.id]
-			};
+			pokemon = {types: [type1.id]};
 			target = type1.id;
 		} else {
 			return this.sendReplyBox("" + Tools.escapeHTML(target) + " isn't a recognized type or pokemon.");
@@ -793,23 +734,23 @@ var commands = exports.commands = {
 		var weaknesses = [];
 		var resistances = [];
 		var immunities = [];
-		Object.keys(Tools.data.TypeChart).forEach(function(type) {
+		Object.keys(Tools.data.TypeChart).forEach(function (type) {
 			var notImmune = Tools.getImmunity(type, pokemon);
 			if (notImmune) {
 				var typeMod = Tools.getEffectiveness(type, pokemon);
 				switch (typeMod) {
-					case 1:
-						weaknesses.push(type);
-						break;
-					case 2:
-						weaknesses.push("<b>" + type + "</b>");
-						break;
-					case -1:
-						resistances.push(type);
-						break;
-					case -2:
-						resistances.push("<b>" + type + "</b>");
-						break;
+				case 1:
+					weaknesses.push(type);
+					break;
+				case 2:
+					weaknesses.push("<b>" + type + "</b>");
+					break;
+				case -1:
+					resistances.push(type);
+					break;
+				case -2:
+					resistances.push("<b>" + type + "</b>");
+					break;
 				}
 			} else {
 				immunities.push(type);
@@ -827,23 +768,13 @@ var commands = exports.commands = {
 	eff: 'effectiveness',
 	type: 'effectiveness',
 	matchup: 'effectiveness',
-	effectiveness: function(target, room, user) {
+	effectiveness: function (target, room, user) {
 		var targets = target.split(/[,/]/).slice(0, 2);
 		if (targets.length !== 2) return this.sendReply("Attacker and defender must be separated with a comma.");
 
-		var searchMethods = {
-			'getType': 1,
-			'getMove': 1,
-			'getTemplate': 1
-		};
-		var sourceMethods = {
-			'getType': 1,
-			'getMove': 1
-		};
-		var targetMethods = {
-			'getType': 1,
-			'getTemplate': 1
-		};
+		var searchMethods = {'getType':1, 'getMove':1, 'getTemplate':1};
+		var sourceMethods = {'getType':1, 'getMove':1};
+		var targetMethods = {'getType':1, 'getTemplate':1};
 		var source;
 		var defender;
 		var foundData;
@@ -870,9 +801,7 @@ var commands = exports.commands = {
 					defender = foundData;
 					defName = foundData.species + " (not counting abilities)";
 				} else {
-					defender = {
-						types: [foundData.id]
-					};
+					defender = {types: [foundData.id]};
 					defName = foundData.id;
 				}
 				searchMethods = sourceMethods;
@@ -897,7 +826,7 @@ var commands = exports.commands = {
 		this.sendReplyBox("" + atkName + " is " + factor + "x effective against " + defName + ".");
 	},
 
-	uptime: function(target, room, user) {
+	uptime: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		var uptime = process.uptime();
 		var uptimeText;
@@ -912,7 +841,7 @@ var commands = exports.commands = {
 		this.sendReplyBox("Uptime: <b>" + uptimeText + "</b>");
 	},
 
-	groups: function(target, room, user) {
+	groups: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"+ <b>Voice</b> - They can use ! commands like !groups, and talk during moderated chat<br />" +
@@ -925,7 +854,7 @@ var commands = exports.commands = {
 	},
 
 	git: 'opensource',
-	opensource: function(target, room, user) {
+	opensource: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"Pokemon Showdown is open source:<br />" +
@@ -936,17 +865,17 @@ var commands = exports.commands = {
 		);
 	},
 
-	staff: function(target, room, user) {
+	staff: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("<a href=\"https://www.smogon.com/sim/staff_list\">Pokemon Showdown Staff List</a>");
 	},
 
-	avatars: function(target, room, user) {
+	avatars: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('You can <button name="avatars">change your avatar</button> by clicking on it in the <button name="openOptions"><i class="icon-cog"></i> Options</button> menu in the upper right. Custom avatars are only obtainable by staff.');
 	},
 
-	showtan: function(target, room, user) {
+	showtan: function (target, room, user) {
 		if (room.id !== 'showderp') return this.sendReply("The command '/showtan' was unrecognized. To send a message starting with '/showtan', type '//showtan'.");
 		if (!this.can('modchat', null, room)) return;
 		target = this.splitTarget(target);
@@ -956,7 +885,7 @@ var commands = exports.commands = {
 		room.add("" + user.name + " applied showtan to affected area of " + this.targetUser.name);
 	},
 
-	cpgtan: function(target, room, user) {
+	cpgtan: function (target, room, user) {
 		if (room.id !== 'cpg') return this.sendReply("The command '/cpgtan' was unrecognized. To send a message starting with '/cpgtan', type '//cpgtan'.");
 		if (!this.can('modchat', null, room)) return;
 		target = this.splitTarget(target);
@@ -967,7 +896,7 @@ var commands = exports.commands = {
 	},
 
 	introduction: 'intro',
-	intro: function(target, room, user) {
+	intro: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"New to competitive pokemon?<br />" +
@@ -980,7 +909,7 @@ var commands = exports.commands = {
 
 	mentoring: 'smogintro',
 	smogonintro: 'smogintro',
-	smogintro: function(target, room, user) {
+	smogintro: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"Welcome to Smogon's official simulator! Here are some useful links to <a href=\"https://www.smogon.com/mentorship/\">Smogon\'s Mentorship Program</a> to help you get integrated into the community:<br />" +
@@ -992,7 +921,7 @@ var commands = exports.commands = {
 	},
 
 	calculator: 'calc',
-	calc: function(target, room, user) {
+	calc: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"Pokemon Showdown! damage calculator. (Courtesy of Honko)<br />" +
@@ -1000,7 +929,7 @@ var commands = exports.commands = {
 		);
 	},
 
-	cap: function(target, room, user) {
+	cap: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"An introduction to the Create-A-Pokemon project:<br />" +
@@ -1011,7 +940,7 @@ var commands = exports.commands = {
 		);
 	},
 
-	gennext: function(target, room, user) {
+	gennext: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"NEXT (also called Gen-NEXT) is a mod that makes changes to the game:<br />" +
@@ -1023,7 +952,7 @@ var commands = exports.commands = {
 	},
 
 	om: 'othermetas',
-	othermetas: function(target, room, user) {
+	othermetas: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		target = toId(target);
 		var buffer = "";
@@ -1161,7 +1090,7 @@ var commands = exports.commands = {
 		);
 	},*/
 
-	roomhelp: function(target, room, user) {
+	roomhelp: function (target, room, user) {
 		if (room.id === 'lobby' || room.battle) return this.sendReply("This command is too spammy for lobby/battles.");
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
@@ -1196,7 +1125,7 @@ var commands = exports.commands = {
 		);
 	},
 
-	restarthelp: function(target, room, user) {
+	restarthelp: function (target, room, user) {
 		if (room.id === 'lobby' && !this.can('lockdown')) return false;
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
@@ -1209,7 +1138,7 @@ var commands = exports.commands = {
 	},
 
 	rule: 'rules',
-	rules: function(target, room, user) {
+	rules: function (target, room, user) {
 		if (!target) {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox("Please follow the rules:<br />" +
@@ -1231,7 +1160,7 @@ var commands = exports.commands = {
 		}
 	},
 
-	faq: function(target, room, user) {
+	faq: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		target = target.toLowerCase();
 		var buffer = "";
@@ -1281,7 +1210,7 @@ var commands = exports.commands = {
 			matched = true;
 			buffer += "<a href=\"https://www.smogon.com/sim/faq#challenge\">How can I battle a specific user?</a><br />";
 		}
-		if (target === 'all' || target === 'gxe') {
+		if (target === 'all'  || target === 'gxe') {
 			matched = true;
 			buffer += "<a href=\"https://www.smogon.com/sim/faq#gxe\">What does GXE mean?</a><br />";
 		}
@@ -1293,7 +1222,7 @@ var commands = exports.commands = {
 
 	banlists: 'tiers',
 	tier: 'tiers',
-	tiers: function(target, room, user) {
+	tiers: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		target = toId(target);
 		var buffer = "";
@@ -1358,7 +1287,7 @@ var commands = exports.commands = {
 
 	analysis: 'smogdex',
 	strategy: 'smogdex',
-	smogdex: function(target, room, user) {
+	smogdex: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 
 		var targets = target.split(',');
@@ -1372,7 +1301,7 @@ var commands = exports.commands = {
 		var genNumber = 6;
 		// var doublesFormats = {'vgc2012':1, 'vgc2013':1, 'vgc2014':1, 'doubles':1};
 		var doublesFormats = {};
-		var doublesFormat = (!targets[2] && generation in doublesFormats) ? generation : (targets[2] || '').trim().toLowerCase();
+		var doublesFormat = (!targets[2] && generation in doublesFormats)? generation : (targets[2] || '').trim().toLowerCase();
 		var doublesText = '';
 		if (generation === 'xy' || generation === 'xy' || generation === '6' || generation === 'six') {
 			generation = 'xy';
@@ -1396,18 +1325,10 @@ var commands = exports.commands = {
 		}
 		if (doublesFormat !== '') {
 			// Smogon only has doubles formats analysis from gen 5 onwards.
-			if (!(generation in {
-					'bw': 1,
-					'xy': 1
-				}) || !(doublesFormat in doublesFormats)) {
+			if (!(generation in {'bw':1, 'xy':1}) || !(doublesFormat in doublesFormats)) {
 				doublesFormat = '';
 			} else {
-				doublesText = {
-					'vgc2012': "VGC 2012",
-					'vgc2013': "VGC 2013",
-					'vgc2014': "VGC 2014",
-					'doubles': "Doubles"
-				}[doublesFormat];
+				doublesText = {'vgc2012':"VGC 2012", 'vgc2013':"VGC 2013", 'vgc2014':"VGC 2014", 'doubles':"Doubles"}[doublesFormat];
 				doublesFormat = '/' + doublesFormat;
 			}
 		}
@@ -1421,17 +1342,7 @@ var commands = exports.commands = {
 			// if (pokemon.tier === 'CAP') generation = 'cap';
 			if (pokemon.tier === 'CAP') return this.sendReply("CAP is not currently supported by Smogon Strategic Pokedex.");
 
-			var illegalStartNums = {
-				'351': 1,
-				'421': 1,
-				'487': 1,
-				'493': 1,
-				'555': 1,
-				'647': 1,
-				'648': 1,
-				'649': 1,
-				'681': 1
-			};
+			var illegalStartNums = {'351':1, '421':1, '487':1, '493':1, '555':1, '647':1, '648':1, '649':1, '681':1};
 			if (pokemon.isMega || pokemon.num in illegalStartNums) pokemon = Tools.getTemplate(pokemon.baseSpecies);
 			var poke = pokemon.name.toLowerCase().replace(/\ /g, '_').replace(/[^a-z0-9\-\_]+/g, '');
 
@@ -1468,7 +1379,7 @@ var commands = exports.commands = {
 	 * Miscellaneous commands
 	 *********************************************************/
 
-	potd: function(target, room, user) {
+	potd: function (target, room, user) {
 		if (!this.can('potd')) return false;
 
 		Config.potd = target;
@@ -1483,7 +1394,7 @@ var commands = exports.commands = {
 	},
 
 	roll: 'dice',
-	dice: function(target, room, user) {
+	dice: function (target, room, user) {
 		if (!target) return this.parse('/help dice');
 		if (!this.canBroadcast()) return;
 		var d = target.indexOf("d");
@@ -1504,26 +1415,26 @@ var commands = exports.commands = {
 			return this.sendReplyBox("Random number " + num + "x(1 - " + faces + "): " + rolls.join(", ") + "<br />Total: " + total);
 		}
 		if (target && isNaN(target) || target.length > 21) return this.sendReply("The max roll must be a number under 21 digits.");
-		var maxRoll = (target) ? target : 6;
+		var maxRoll = (target)? target : 6;
 		var rand = Math.floor(maxRoll * Math.random()) + 1;
 		return this.sendReplyBox("Random number (1 - " + maxRoll + "): " + rand);
 	},
 
 	pr: 'pickrandom',
 	pick: 'pickrandom',
-	pickrandom: function(target, room, user) {
+	pickrandom: function (target, room, user) {
 		var options = target.split(',');
 		if (options.length < 2) return this.parse('/help pick');
 		if (!this.canBroadcast()) return false;
 		return this.sendReplyBox('<em>We randomly picked:</em> ' + Tools.escapeHTML(options.sample().trim()));
 	},
 
-	register: function() {
+	register: function () {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('You will be prompted to register upon winning a rated battle. Alternatively, there is a register button in the <button name="openOptions"><i class="icon-cog"></i> Options</button> menu in the upper right.');
 	},
 
-	lobbychat: function(target, room, user, connection) {
+	lobbychat: function (target, room, user, connection) {
 		if (!Rooms.lobby) return this.popupReply("This server doesn't have a lobby.");
 		target = toId(target);
 		if (target === 'off') {
@@ -1536,7 +1447,7 @@ var commands = exports.commands = {
 		}
 	},
 
-	showimage: function(target, room, user) {
+	showimage: function (target, room, user) {
 		if (!target) return this.parse('/help showimage');
 		if (!this.can('declare', null, room)) return false;
 		if (!this.canBroadcast()) return;
@@ -1549,7 +1460,7 @@ var commands = exports.commands = {
 		this.sendReply('|raw|<img src="' + Tools.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '" height="' + toId(targets[2]) + '" />');
 	},
 
-	htmlbox: function(target, room, user) {
+	htmlbox: function (target, room, user) {
 		if (!target) return this.parse('/help htmlbox');
 		if (!this.can('declare', null, room)) return;
 		if (!this.canHTML(target)) return;
@@ -1558,152 +1469,149 @@ var commands = exports.commands = {
 		this.sendReplyBox(target);
 	},
 
-	a: function(target, room, user) {
+	a: function (target, room, user) {
 		if (!this.can('rawpacket')) return false;
 		// secret sysop command
 		room.add(target);
 	},
-
-	temote: 'temotes',
-	toggleemotes: 'temotes',
-	temotes: function(target, room, user) {
-		if (!user.can('pban')) return;
-		if (!target) return this.sendReply('Valid targets are: "on", "off" and "status".');
-		if (toId(target) === 'off' || toId(target) === 'disable') {
-			Core.settings.emoteStatus = false;
-			room.add(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
-			this.logModCommand(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
-		}
-		if (toId(target) === 'on' || toId(target) === 'enable') {
-			Core.settings.emoteStatus = true;
-			room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
-			this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
-		}
-		if (toId(target) === 'status') {
-			var currentEmoteStatus = '';
-			if (!Core.settings.emoteStatus) {
-				currentEmoteStatus = 'disabled.';
-			} else {
-				currentEmoteStatus = 'enabled.';
-			}
-			return this.sendReply('Chat emotes are currently ' + currentEmoteStatus);
-		}
-	},
 	
-	emotes: 'emoticon',
-	emoticons: 'emoticon',
-	emoticon: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		if (!Core.settings.emoteStatus) {
-			return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
-		} else {
-			var name = Object.keys(Core.emoticons),
-				emoticons = [];
-			var len = name.length;
-			while (len--) {
-				emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
-			}
-			this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
-		}
-	},
-	sca: 'customavatar',
-	setcustomavatar: 'customavatar',
-	setcustomavi: 'customavatar',
-	giveavatar: 'customavatar',
-	customavatars: 'customavatar',
-	customavatar: (function() {
-		const script = (function() {
-			/*
-			FILENAME=`mktemp`
-			function cleanup {
-			rm -f $FILENAME
-			}
-			trap cleanup EXIT
-			set -xe
-			timeout 10 wget "$1" -nv -O $FILENAME
-			FRAMES=`identify $FILENAME | wc -l`
-			if [ $FRAMES -gt 1 ]; then
-			EXT=".gif"
-			else
-			EXT=".png"
-			fi
-			timeout 10 convert $FILENAME -layers TrimBounds -coalesce -adaptive-resize 80x80\> -background transparent -gravity center -extent 80x80 "$2$EXT"
-			*/
-		}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
-		var pendingAdds = {};
-		return function(target, room, user) {
-			var parts = target.split(',');
-			var cmd = parts[0].trim().toLowerCase();
-			if (cmd in {
-					'': 1,
-					show: 1,
-					view: 1,
-					display: 1
-				}) {
-				var message = "";
-				for (var a in Config.customavatars)
-					message += "<strong>" + Tools.escapeHTML(a) + ":</strong> " + Tools.escapeHTML(Config.customavatars[a]) + "<br />";
-				return this.sendReplyBox(message);
-			}
-			if (!this.can('giveavatar') && !user.vip) return false;
-			switch (cmd) {
-				case 'add':
-				case 'set':
-					var userid = toId(parts[1]);
-					if (!this.can('giveavatar') && user.vip && userid !== user.userid) return false;
-					var user = Users.getExact(userid);
-					var avatar = parts.slice(2).join(',').trim();
-					if (!userid) return this.sendReply("You didn't specify a user.");
-					if (Config.customavatars[userid]) return this.sendReply(userid + " already has a custom avatar.");
-					var hash = require('crypto').createHash('sha512').update(userid + '\u0000' + avatar).digest('hex').slice(0, 8);
-					pendingAdds[hash] = {
-						userid: userid,
-						avatar: avatar
-					};
-					parts[1] = hash;
-					if (!user) {
-						this.sendReply("Warning: " + userid + " is not online.");
-						this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);
-						return;
-					}
-					// Fallthrough
-				case 'forceset':
-					var hash = parts[1].trim();
-					if (!pendingAdds[hash]) return this.sendReply("Invalid hash.");
-					var userid = pendingAdds[hash].userid;
-					var avatar = pendingAdds[hash].avatar;
-					delete pendingAdds[hash];
-					require('child_process').execFile('bash', ['-c', script, '-', avatar, './config/avatars/' + userid], (function(e, out, err) {
-						if (e) {
-							this.sendReply(userid + "'s custom avatar failed to be set. Script output:");
-							(out + err).split('\n').forEach(this.sendReply.bind(this));
-							return;
-						}
-						reloadCustomAvatars();
-						this.sendReply(userid + "'s custom avatar has been set.");
-						Rooms.rooms.staff.add(parts[1] + ' has received a custom avatar from ' + user.name + '.');
-					}).bind(this));
-					break;
-				case 'rem':
-				case 'remove':
-				case 'del':
-				case 'delete':
-					var userid = toId(parts[1]);
-					if (!this.can('giveavatar') && user.vip && userid !== user.userid) return false;
-					if (!Config.customavatars[userid]) return this.sendReply(userid + " does not have a custom avatar.");
-					if (Config.customavatars[userid].toString().split('.').slice(0, -1).join('.') !== userid)
-						return this.sendReply(userid + "'s custom avatar (" + Config.customavatars[userid] + ") cannot be removed with this script.");
-					require('fs').unlink('./config/avatars/' + Config.customavatars[userid], (function(e) {
-						if (e) return this.sendReply(userid + "'s custom avatar (" + Config.customavatars[userid] + ") could not be removed: " + e.toString());
-						delete Config.customavatars[userid];
-						this.sendReply(userid + "'s custom avatar removed successfully");
-					}).bind(this));
-					break;
-				default:
-					return this.sendReply("Invalid command. Valid commands are `/customavatar set, user, avatar` and `/customavatar delete, user`.");
-			}
-		};
-	})(),
+	temote: 'temotes',
+toggleemotes: 'temotes',
+temotes: function(target, room, user) {
+if (!user.can('pban')) return;
+if (!target) return this.sendReply('Valid targets are: "on", "off" and "status".');
+if (toId(target) === 'off' || toId(target) === 'disable') {
+Core.settings.emoteStatus = false;
+room.add(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
+this.logModCommand(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
+}
+if (toId(target) === 'on' || toId(target) === 'enable') {
+Core.settings.emoteStatus = true;
+room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
+this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
+}
+if (toId(target) === 'status') {
+var currentEmoteStatus = '';
+if (!Core.settings.emoteStatus) {
+currentEmoteStatus = 'disabled.';
+} else {
+currentEmoteStatus = 'enabled.';
+}
+return this.sendReply('Chat emotes are currently ' + currentEmoteStatus);
+}
+},
+emotes: 'emoticon',
+emoticons: 'emoticon',
+emoticon: function(target, room, user) {
+if (!this.canBroadcast()) return;
+if (!Core.settings.emoteStatus) {
+return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
+} else {
+var name = Object.keys(Core.emoticons),
+emoticons = [];
+var len = name.length;
+while (len--) {
+emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
+}
+this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
+}
+},
+sca: 'customavatar',
+setcustomavatar: 'customavatar',
+setcustomavi: 'customavatar',
+giveavatar: 'customavatar',
+customavatars: 'customavatar',
+customavatar: (function() {
+const script = (function() {/*
+FILENAME=`mktemp`
+function cleanup {
+rm -f $FILENAME
+}
+trap cleanup EXIT
+set -xe
+timeout 10 wget "$1" -nv -O $FILENAME
+FRAMES=`identify $FILENAME | wc -l`
+if [ $FRAMES -gt 1 ]; then
+EXT=".gif"
+else
+EXT=".png"
+fi
+timeout 10 convert $FILENAME -layers TrimBounds -coalesce -adaptive-resize 80x80\> -background transparent -gravity center -extent 80x80 "$2$EXT"
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+var pendingAdds = {};
+return function(target, room, user) {
+var parts = target.split(',');
+var cmd = parts[0].trim().toLowerCase();
+if (cmd in {
+'': 1,
+show: 1,
+view: 1,
+display: 1
+}) {
+var message = "";
+for (var a in Config.customavatars)
+message += "<strong>" + Tools.escapeHTML(a) + ":</strong> " + Tools.escapeHTML(Config.customavatars[a]) + "<br />";
+return this.sendReplyBox(message);
+}
+if (!this.can('giveavatar') && !user.vip) return false;
+switch (cmd) {
+case 'add':
+case 'set':
+var userid = toId(parts[1]);
+if (!this.can('giveavatar') && user.vip && userid !== user.userid) return false;
+var user = Users.getExact(userid);
+var avatar = parts.slice(2).join(',').trim();
+if (!userid) return this.sendReply("You didn't specify a user.");
+if (Config.customavatars[userid]) return this.sendReply(userid + " already has a custom avatar.");
+var hash = require('crypto').createHash('sha512').update(userid + '\u0000' + avatar).digest('hex').slice(0, 8);
+pendingAdds[hash] = {
+userid: userid,
+avatar: avatar
+};
+parts[1] = hash;
+if (!user) {
+this.sendReply("Warning: " + userid + " is not online.");
+this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);
+return;
+}
+// Fallthrough
+case 'forceset':
+var hash = parts[1].trim();
+if (!pendingAdds[hash]) return this.sendReply("Invalid hash.");
+var userid = pendingAdds[hash].userid;
+var avatar = pendingAdds[hash].avatar;
+delete pendingAdds[hash];
+require('child_process').execFile('bash', ['-c', script, '-', avatar, './config/avatars/' + userid], (function(e, out, err) {
+if (e) {
+this.sendReply(userid + "'s custom avatar failed to be set. Script output:");
+(out + err).split('\n').forEach(this.sendReply.bind(this));
+return;
+}
+reloadCustomAvatars();
+this.sendReply(userid + "'s custom avatar has been set.");
+Rooms.rooms.staff.add(parts[1] + ' has received a custom avatar from ' + user.name + '.');
+}).bind(this));
+break;
+case 'rem':
+case 'remove':
+case 'del':
+case 'delete':
+var userid = toId(parts[1]);
+if (!this.can('giveavatar') && user.vip && userid !== user.userid) return false;
+if (!Config.customavatars[userid]) return this.sendReply(userid + " does not have a custom avatar.");
+if (Config.customavatars[userid].toString().split('.').slice(0, -1).join('.') !== userid)
+return this.sendReply(userid + "'s custom avatar (" + Config.customavatars[userid] + ") cannot be removed with this script.");
+require('fs').unlink('./config/avatars/' + Config.customavatars[userid], (function(e) {
+if (e) return this.sendReply(userid + "'s custom avatar (" + Config.customavatars[userid] + ") could not be removed: " + e.toString());
+delete Config.customavatars[userid];
+this.sendReply(userid + "'s custom avatar removed successfully");
+}).bind(this));
+break;
+default:
+return this.sendReply("Invalid command. Valid commands are `/customavatar set, user, avatar` and `/customavatar delete, user`.");
+}
+};
+})(),
 
 	/*********************************************************
 	 * Help commands
@@ -1712,7 +1620,7 @@ var commands = exports.commands = {
 	commands: 'help',
 	h: 'help',
 	'?': 'help',
-	help: function(target, room, user) {
+	help: function (target, room, user) {
 		target = target.toLowerCase();
 		var matched = false;
 		if (target === 'msg' || target === 'pm' || target === 'whisper' || target === 'w') {

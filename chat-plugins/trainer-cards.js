@@ -4,6 +4,22 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	rock: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://images.cooltext.com/4076092.jpg"><br />'  +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/139.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/142.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/346.gif"><br />' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/248.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/639.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/377.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/464.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/306.gif"><br />' +
+			'<font color="brown"> Ace: ROCKHard & Crashy </font><br />' +
+			'<font color="gold"> Rock & roll, baby</font></center>'
+		);
+	},
+
 	carlton: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/kuG1Nqp.gif" height=350></center>');
@@ -3054,11 +3070,11 @@ exports.commands = {
 
 	greed: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-			this.sendReplyBox('<center><img src="http://i.imgur.com/2j67WZG.jpg" width="140">' +
-			'<img src="http://i.imgur.com/oJ5c6JZ.png">' +
-			'<img src="http://i.imgur.com/8VCEwyU.jpg" width="140"><br />' +
-			'<b>Ace:</b> Hydreigon<br />' +
-			'GET REKT</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/GoX5Jom.gif" height=""width="">' +
+			'<img src="http://i.imgur.com/8Sqiq2y.png" height="150"width="">' +
+			'<img src="http://i.imgur.com/NuelleY.gif"height="150"width=""><br />' +
+			'<b>Ace: </b>Hydreigon<br />' +
+			'Greed is true evil, and evil is darkness</center>'
 		);
 	},
 

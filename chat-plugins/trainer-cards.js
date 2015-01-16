@@ -24,7 +24,7 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://scontent-a.cdninstagram.com/hphotos-xap1/t51.2885-15/10808754_750049291743019_685215986_a.jpg" width="200">' +
 			'<img src="http://i.imgur.com/ax4QdOg.gif">' +
-			'<img src="https://s-media-cache-ak0.pinimg.com/236x/b3/9b/39/b39b3981f4eb205ca66ddebed3702293.jpg height="200"><br />' +
+			'<img src="https://s-media-cache-ak0.pinimg.com/236x/b3/9b/39/b39b3981f4eb205ca66ddebed3702293.jpg" height="200"><br />' +
 			'<b>Ace:</b> Jirachi And MLG<br />' +
 			'Any wish can come true if you believe enough that you can make it happen.<br />' +
 			'<button name="send" value="/transferbucks shz, 1"><i>Make a wish. And donate as well.</i></button><br />' +

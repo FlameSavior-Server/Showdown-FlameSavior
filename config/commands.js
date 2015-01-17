@@ -1264,8 +1264,6 @@ var commands = exports.commands = {
 			'- /roommod, /roomdriver <em>username</em>: appoint a room moderator/driver<br />' +
 			'- /roomdemod, /roomdedriver <em>username</em>: remove a room moderator/driver<br />' +
 			'- /declare <em>message</em>: make a declaration in the room<br />' +
-			'- /lockroom: locks the room preventing users from joining<br />' +
-			'- /unlockroom: unlocks the room allowing users to join<br />' +
 			'- /openleague: sets the league as open to challengers<br />' +
 			'- /closeleague: sets the league as closed to challengers<br />' +
 			'- /setwelcomemessage <em>message</em>: sets the message people will see when they join the room. Can contain html and must be bought from the store first<br />' +

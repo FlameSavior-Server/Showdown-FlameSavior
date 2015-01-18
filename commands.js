@@ -415,14 +415,12 @@ var commands = exports.commands = {
 		var other;
 		if (room.isLeague) {
 			other = ' <font color="blue"><b>league</b></font>';
-		}
-		else if (!room.isLeague) {
+		} else if (!room.isLeague) {
 			other = '';
 		}
 		if (room.isPrivate === true) {
 			return this.sendReplyBox(room.title + ' is currently a <font color="red"><b>secret</b></font>' + other + ' room.');
-		}
-		else if if (!room.isPrivate) {
+		} else if (!room.isPrivate) {
 			return this.sendReplyBox(room.title + ' is currently a <font color="green"><b>public</b></font>' + other + ' room.');
 		}
 	},

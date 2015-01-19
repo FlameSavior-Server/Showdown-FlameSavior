@@ -558,7 +558,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/lY0jwrT.png" alt="NU">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/feraligatr.gif"><br />' +
 			'<font color="red"><b>Ace: </b></font><button class="astext" name="parseCommand" value="/user KGBeast"><font color="purple"><b>KGBeast</b></font></button><br />' +
-			'<font color="black"><b>NU -- The only tier whose fully evolved Pokemon compete with LC\'s baby Pokemon.</b></font><br />' +
+			'<font color="black"><b>NUUUUUUU not this tier!</b></font><br />' +
 			'<blink><b>~ ~ ~</b></blink> <button name="send" value="/tier nu"><font color="gray"><b>The NeverUsed Tier</b></font></button> <blink><b>~ ~ ~</b></blink></center>'
 		);
 	},

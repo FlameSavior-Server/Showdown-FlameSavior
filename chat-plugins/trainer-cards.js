@@ -547,6 +547,20 @@ exports.commands = {
 			'<marquee scrollamount="10" direction="left"><font size="4"><blink>~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</blink></font></marquee></center>'
 		);
 	},
+	
+	nu: 'neverused',
+	neverused: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/AMzf5Aj.png" alt="NeverUsed"><br />' +
+			'<i>Nobody actually has a team for this tier because all the Pokemon in it are never used.</i><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/typhlosion.gif" >' +
+			'<img src="http://i.imgur.com/lY0jwrT.png" alt="NU">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/feraligatr.gif"><br />' +
+			'<font color="red"><b>Ace: </b></font><button class="astext" name="parseCommand" value="/user KGBeast"><font color="purple"><b>KGBeast</b></font></button><br />' +
+			'<font color="black"><b>NU -- The only tier whose fully evolved Pokemon compete with LC\'s baby Pokemon.</b></font><br />' +
+			'<blink><b>~ ~ ~</b></blink> <button name="send" value="/tier nu"><font color="gray"><b>The NeverUsed Tier</b></font></button> <blink><b>~ ~ ~</b></blink></center>'
+		);
+	},
 
 	buffy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

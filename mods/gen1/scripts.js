@@ -1278,7 +1278,7 @@ exports.BattleScripts = {
 				}
 				counter[move.category]++;
 			} // End of for
-		} while (moves.length < 4 && j < moveKeys.length);
+		}
 
 		var levelScale = {
 			LC: 92,

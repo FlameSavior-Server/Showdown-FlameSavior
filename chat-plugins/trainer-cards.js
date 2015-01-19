@@ -538,12 +538,13 @@ exports.commands = {
 			'<img src="http://i.imgur.com/f5Xa8lE.png"><br />' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus.gif">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/mamoswine.gif">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/gliscor.gif">' +
+			'<button class="astext" name="parseCommand" value="/user KGBeast"><img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/gliscor.gif"></button>' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gastrodon.gif">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/nidoking.gif"><br />' +
 			'<font color="red"><b>Ace:</b></font> <font color="black"><b>Gliscor</b></font><br />' +
 			'<i>Why? Because, wynaut. :^)</i><br />' +
 			'<button name="send" value="/transferbucks KGBeast, 1"><font color="blue"><b>Donate 1 buck to me!</b></font></button><br />' +
+			'<button name="send" value="/tier nu"><font color="blue"><b>The NeverUsed Tier</b></font></button><br />' +
 			'<marquee scrollamount="10" direction="left"><font size="4"><blink>~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</blink></font></marquee></center>'
 		);
 	},

@@ -82,7 +82,7 @@ var QuestionGiveAway = (function () {
 			break;
 		case 'answer':
 			var ans = this.sanitizeAnswers(value);
-			if (Object.keys(ans).length <= 0) return output.sendReply("You must specify atleast one answer. Note: answers can be utmost 3 words long, and cannot contain any special characters.");
+			if (Object.keys(ans).length <= 0) return output.sendReply("You must specify at least one answer and must not contain any special characters.");
 
 			this.answers = ans;
 			output.sendReply("The answers have been changed to " + value + ".");
@@ -131,8 +131,7 @@ var QuestionGiveAway = (function () {
 		target.split("/").forEach(function (ans) {
 			ans = ans.replace(/[^a-z0-9 ]+/ig, "").trim();
 			if (!toId(ans)) return;
-			if (ans.split(' ').length > 3) return;
-			ret[toId(ans)] = ans;
+			ret[toId(ans)] = ans.toLowerCase();
 		});
 		return ret;
 	};
@@ -156,7 +155,7 @@ var LotteryGiveAway = (function () {
 			'<b>' + Tools.escapeHTML(giver.name) + '</b> will be giving away a <b>' + Tools.escapeHTML(this.prize) + '</b>!<br/>' +
 			'The lottery drawing will occur in 2 minutes, with ' + this.maxwinners + ' winners!<br/>' +
 			'<button name = "send" value = "/giveaway joinlottery"><font size = 1><b>Join</b></font></button> <button name = "send" value = "/giveaway leavelottery"><font size = 1><b>Leave</b></font></button><br/>' +
-			'<font size = 1><b><u>Note:</u> Please do not join if you don\'t have a 3DS and a copy of Pokémon XY or ORAS';
+			'<font size = 1><b><u>Note:</u> Please do not join if you don\'t have a 3DS and a copy of Pokemon XY or ORAS';
 		this.room.addRaw(this.reminder);
 		this.room.update();
 
@@ -266,7 +265,7 @@ var commands = {
 			question: target[1],
 			answers: QuestionGiveAway.sanitizeAnswers(target[2])
 		};
-		if (Object.keys(options.answers).length <= 0) return this.sendReply("You must specify atleast one answer. Note: answers can be utmost 3 words long, and cannot contain any special characters.");
+		if (Object.keys(options.answers).length <= 0) return this.sendReply("You must specify at least one answer and cannot contain any special characters.");
 
 		giveaways[room.id] = new QuestionGiveAway(user, targetUser, room, options);
 		this.privateModCommand("(" + user.name + " has started a question giveaway.)");
@@ -326,7 +325,7 @@ var commands = {
 			prize: target[0],
 			maxwinners: parseInt(target[1])
 		};
-		if (options.maxwinners > 5 || options.maxwinners < 1) return this.sendReply("The lottery giveaway can have a minimum of 1 and maximum of 5 winners.");
+		if (options.maxwinners > 10 || options.maxwinners < 1) return this.sendReply("The lottery giveaway can have a minimum of 1 and maximum of 10 winners.");
 
 		giveaways[room.id] = new LotteryGiveAway(user, targetUser, room, options);
 		this.privateModCommand("(" + user.name + " has started a lottery giveaway.)");
@@ -357,7 +356,7 @@ var commands = {
 		if (room.id !== 'wifi') return;
 		var giveaway = giveaways[room.id];
 		if (!giveaway) return this.sendReply('There is no giveaway going on at the moment.');
-		if (!this.can('warn', giveaway.host, room) && user.userid !== giveaway.host.userid) return false;
+		if (!this.can('warn', null, room) && user.userid !== giveaway.host.userid) return false;
 
 		giveaway.onEnd(true);
 	},

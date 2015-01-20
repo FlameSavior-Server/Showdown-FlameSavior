@@ -565,15 +565,10 @@ exports.commands = {
 	
 	cgtnathan: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><button class="astext" name="parseCommand" value="/user Champion CGTNathan"><img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/golurk.gif" alt=""></button><br />' +
-			'<img src="http://images.cooltext.com/4080248.png" width="395" height="79" alt="CGTNathan" /><br />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/gengar.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/aegislash.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/chandelure.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/cofagrigus.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sableye.gif" /><br />' +
-			'<font color="red"><b>Ace:</b></font> <font color="purple"><b>Golurk</b></font><br />' +
-			'<font color="black"><b>Experience is the best teacher.</b></font><br /><br />' +
+		this.sendReplyBox('<center><img src="http://images.cooltext.com/4080248.png" width="316" height="60" alt="CGTNathan" /><br />' +
+			'<img src="http://i.imgur.com/p4JDf2g.png" width="500" height="150" /><br />' +
+			'<font color="red"><b>Ace: </b></font><font color="blue"><b>Cofagrigus</b></font><br />' +
+			'<font color="black"></font><b>Quote:</b> "Experience is the best teacher."</font><br />' +
 			'<button name="send" value="/transferbucks championcgtnathan, 1"><font color="purple"><b>Click here to lose a buck!</b></font></button>' +
 			'<button name="send" value="/me wants the Tacos"><font color="purple"><b>The Tacos!</b></font></button></center>'
 		);

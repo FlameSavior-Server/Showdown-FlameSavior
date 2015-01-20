@@ -593,6 +593,15 @@ exports.commands = {
 			'<font color="black"><b>"The puppetmasters of the souls of the afterlife, using you as a puppet in our little game."</b></center>'
 		);
 	},
+	
+	pelican: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src = "http://i.imgur.com/oEWnpVm.gif"><br />' +
+			'<img src = "http://i.imgur.com/be4X8Bi.jpg" height = 500><br />' +
+			'A pelican always wins.<br />' +
+			'<button><a href = "https://www.youtube.com/watch?v=dBFN8zblcCw"><img src = "http://i.imgur.com/ChDpnzc.jpg?1"></a></button></center>'
+		);
+	},
 
 	buffy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

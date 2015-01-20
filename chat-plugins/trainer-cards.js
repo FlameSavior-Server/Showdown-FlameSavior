@@ -569,8 +569,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/p4JDf2g.png" width="500" height="150" /><br />' +
 			'<font color="red"><b>Ace: </b></font><font color="blue"><b>Cofagrigus</b></font><br />' +
 			'<font color="black"></font><b>Quote:</b> "Experience is the best teacher."</font><br />' +
-			'<button name="send" value="/transferbucks championcgtnathan, 1"><font color="purple"><b>Click here to lose a buck!</b></font></button>' +
-			'<button name="send" value="/me wants the Tacos"><font color="purple"><b>The Tacos!</b></font></button></center>'
+			'<button name="send" value="/transferbucks championcgtnathan, 1"><font color="purple"><b>Click here to lose a buck!</b></font></button></center>'
 		);
 	},
 	
@@ -591,10 +590,10 @@ exports.commands = {
 	
 	pelican: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src = "http://i.imgur.com/oEWnpVm.gif"><br />' +
-			'<img src = "http://i.imgur.com/be4X8Bi.jpg" height = 500><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/oEWnpVm.gif"><br />' +
+			'<img src="http://i.imgur.com/be4X8Bi.jpg" height="300"><br />' +
 			'A pelican always wins.<br />' +
-			'<button><a href = "https://www.youtube.com/watch?v=dBFN8zblcCw"><img src = "http://i.imgur.com/ChDpnzc.jpg?1"></a></button></center>'
+			'<button><a href ="https://www.youtube.com/watch?v=dBFN8zblcCw"><img src="http://i.imgur.com/ChDpnzc.jpg"></a></button></center>'
 		);
 	},
 

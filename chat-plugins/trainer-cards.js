@@ -12,7 +12,7 @@ exports.commands = {
                         '<img src="http://i.imgur.com/1UQpugD.gif"><br />' +
                         '<img src="http://i.imgur.com/y9cL7IL.jpg">' +
                         '<img src="http://i.imgur.com/K1wEhyb.gif">' +
-                        '<img src="http://i.imgur.com/j1OUyaI.gif"><br />
+                        '<img src="http://i.imgur.com/j1OUyaI.gif"><br /> +
                         '<b>Ace:</b> Apples, Dawn, Link, Tesla, Dagger<br />' +
                         'Our hax is quite shocking. If only it was electrifying watching you lose.</center>'
                 );

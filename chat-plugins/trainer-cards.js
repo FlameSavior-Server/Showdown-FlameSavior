@@ -4,6 +4,30 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	electric: function(target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Tj7ojPn.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/ampharos-mega.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/rotom-wash.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/eelektross.gif"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/zapdos.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/thundurus.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/electivire.gif"><br/>' +
+			'<b>Ace:</b>Tesla, Fírnen, Apples, Roy<br/>' +
+			'You need to use top types for winning but it\'s okay I\'m just gonna paralyze you with my skill!'
+		);
+	},
+
+	toxi: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/SXFBEku.png" height=130>' +
+			'<img src="http://i.imgur.com/BgTR5nY.png" width=260>' +
+			'<img src="http://i.imgur.com/7TqBaKr.png" width=140><br />' +
+			'Only a spider is safe in her web...</center>'
+		);
+	},
+
 	rock: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://images.cooltext.com/4076092.jpg"><br />'  +

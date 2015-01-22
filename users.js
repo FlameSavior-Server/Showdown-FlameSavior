@@ -312,6 +312,7 @@ Users.socketConnect = function (worker, workerid, socketid, ip) {
 		}
 		return connection.destroy();
 	}
+
 	// Emergency mode connections logging
 	if (Config.emergency) {
 		fs.appendFile('logs/cons.emergency.log', '[' + ip + ']\n', function (err) {
@@ -1158,6 +1159,11 @@ User = (function () {
 		this.renamePending = false;
 	};
 	User.prototype.merge = function (connection) {
+		if (this.lastPoof && Math.floor(((Date.now() - this.lastPoof) / 1000)) <= 300) {
+			var remainingTime = ((((Date.now() - this.lastPoof) / 1000) % 60) - 300);
+			connection.popup("You have recently poofed. To prevent flood, you may not connect for another " + Math.round((remainingTime - remainingTime * 2)) + " seconds.\nYour last poof message was: " + this.lastPoofMessage);
+			connection.destroy();
+		}
 		this.connected = true;
 		this.connections.push(connection);
 		//console.log('' + this.name + ' merging: connection ' + connection.socket.id);

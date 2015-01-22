@@ -4,6 +4,40 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	cteam: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i522.photobucket.com/albums/w348/Richtoon18/Pokemon-Gif.gif" height="200">' +
+			'<img src="http://www.auplod.com/u/dapulo497b5.png">' +
+			'<img src="http://4.bp.blogspot.com/_k6GAFizwbws/TDCq6J-RaII/AAAAAAAAAAM/hQCwTbpo-xQ/s1600/gen1%2Btype%2Bchart.png"height="200"><br />' +
+			'Cteaming, if you do it, you\'re an asshat</center>'
+		);
+	},
+
+	chiefsokka: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img height=72 width=80 src="http://i.imgur.com/Y9p4ThF.gif">' +
+			'<img vspace="40" width=120 src="http://i.imgur.com/Aj5CKen.gif">' +
+			'<img src="http://i.imgur.com/7DdOYtu.gif" height=72 width=80><br />' +
+			'<font size ="1"><b> Ace: </b> My Boomerang.<br />' +
+			'<img src="http://i.imgur.com/Wv3zOsC.gif"><br />' +
+			'<b>Quote:</b> Element bending does not define the warrior. What defines a warrior is his ability to lead and his courage to do anything! </font></center>'
+		);
+	},
+
+	cancerwater: function (targeet, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://img4.hostingpics.net/pics/708493cooltext1884071733.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/swampert.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/greninja.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/azumarill.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/tentacruel.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/alomomola.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/lanturn.gif"><br />' +
+			'<b>Ace:</b>Fírnen<br />' +
+			'You call it cancer? I call it ragequit.'
+		);
+	},
+
 	electric: function (target, room, user) {
                 if (room.id !== 'lobby') if (!this.canBroadcast()) return;
                 this.sendReplyBox('<center><img src="http://i.imgur.com/ax5MY2v.gif"><br />' +
@@ -44,17 +78,17 @@ exports.commands = {
 
 	rock: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://images.cooltext.com/4076092.jpg"><br />'  +
+		this.sendReplyBox('<center><img src="http://blog.flamingtext.com/blog/2015/01/16/flamingtext_com_1421390551_415473756.png"><br />' +
 			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/139.gif">' +
-			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/142.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/142-mega.gif">' +
 			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/346.gif"><br />' +
-			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/248.gif">' +
-			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/639.gif">' +
-			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/377.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/306-mega.gif">' +
 			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/464.gif">' +
-			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/306.gif"><br />' +
-			'<font color="brown"> Ace: ROCKHard & Crashy </font><br />' +
-			'<font color="gold"> Rock & roll, baby</font></center>'
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/719.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/377.gif">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/639.gif"><br />' +
+			'<font color="brown"><b> Ace: </b> ROCKHard & Crashy </font><br />' +
+			'<font color="gold"> Rock & roll, baby </font>'
 		);
 	},
 

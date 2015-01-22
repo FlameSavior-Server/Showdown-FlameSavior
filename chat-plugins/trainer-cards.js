@@ -4,7 +4,21 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
-	electric: function(target, room, user) {
+	electric: function (target, room, user) {
+                if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+                this.sendReplyBox('<center><img src="http://i.imgur.com/ax5MY2v.gif"><br />' +
+                        '<img src="http://i.imgur.com/XFiASmj.gif">' +
+                        '<img src="http://i.imgur.com/M9YhIgj.gif">' +
+                        '<img src="http://i.imgur.com/1UQpugD.gif"><br />' +
+                        '<img src="http://i.imgur.com/y9cL7IL.jpg">' +
+                        '<img src="http://i.imgur.com/K1wEhyb.gif">' +
+                        '<img src="http://i.imgur.com/j1OUyaI.gif"><br />' +
+                        '<b>Ace:</b> Apples, Dawn, Link, Tesla, Dagger<br />' +
+                        'Our hax is quite shocking. If only it was electrifying watching you lose.</center>'
+                );
+        },
+	
+	genericelectric: function(target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Tj7ojPn.png"><br />' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif">' +

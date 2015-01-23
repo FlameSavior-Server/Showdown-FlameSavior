@@ -1133,6 +1133,7 @@ var commands = exports.commands = {
 			this.addModCommand(names.join(", ") + " " +
 				((names.length > 1) ? "were" : "was") +
 				" unlocked by " + user.name + ".");
+			if (Users(target)) delete Users(target).nameLocked;
 		} else {
 			this.sendReply("User '" + target + "' is not locked.");
 		}

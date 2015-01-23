@@ -178,17 +178,15 @@ exports.commands = {
 	dragon: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/llkhuks.gif"><br />' +
-			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/kyurem-black.gif" width="90" height="90">' +
-			'<button class="astext" name="parseCommand" value="/user Unity Zero" target="_blank">' +
-			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/goodra.gif" width="60" height="85">' +
-			'</button><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/garchomp.gif" width="90" height="90">' +
-			'<button class="astext" name="parseCommand" value="/user AM E4 Zer0">' +
-			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/latios.gif" height="90" width="95">' +
-			'</button><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/hydreigon.gif" height="100" width="115">' +
-			'<button class="astext" name="parseCommand" value="/user Imp Irra">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/altaria-mega.gif" width="100" height="90"></button><br />' +
-			'<b>Ace:</b> Zer0, Irra & Zero<br />' +
-			'A victory won through dishonesty means is no victory at all.'
+			'<button class="astext" name="parseCommand" value="/user Unity Zero"><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/dragonite.gif"></button>' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/goodra.gif"></button>' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/garchomp.gif">' +
+			'<button class="astext" name="parseCommand" value="/user AM E4 Zer0"><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/latios.gif"></button>' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/hydreigon.gif">' +
+			'<button class="astext" name="parseCommand" value="/user Imp Irra"><img src="http://play.pokemonshowdown.com/sprites/xyani/altaria-mega.gif"></button>' +
+			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/kyurem-black.gif"><br />' +
+			'<b>Ace:</b> Zer0, Irra, Zero & Leon<br />' +
+			'A victory won through dishonest means is no victory at all.'
 		);
 	},
 

@@ -832,6 +832,7 @@ User = (function () {
 	User.prototype.resetName = function () {
 		var name = 'Guest ' + this.guestNum;
 		var userid = toId(name);
+		var nameLocked = this.nameLocked;
 		if (this.userid === userid) return;
 
 		var i = 0;
@@ -855,6 +856,7 @@ User = (function () {
 		this.group = Config.groupsranking[0];
 		this.isStaff = false;
 		this.isSysop = false;
+		if (nameLocked) this.nameLocked = nameLocked;
 
 		for (var i = 0; i < this.connections.length; i++) {
 			// console.log('' + name + ' renaming: connection ' + i + ' of ' + this.connections.length);
@@ -891,6 +893,10 @@ User = (function () {
 	 * @param connection  The connection asking for the rename
 	 */
 	User.prototype.rename = function (name, token, auth, connection) {
+		if (typeof this.nameLocked !== 'undefined' && this.nameLocked !== toId(name) || this.locked && !~this.locked.indexOf('#') && this.locked !== toId(name)) {
+			this.popup("You're name locked to the name \"" + (this.nameLocked || this.locked) + "\".");
+			return false;
+		}
 		for (var i in this.roomCount) {
 			var room = Rooms.get(i);
 			if (room && room.rated && (this.userid === room.rated.p1 || this.userid === room.rated.p2)) {
@@ -1399,6 +1405,7 @@ User = (function () {
 	User.prototype.lock = function (noRecurse, userid) {
 		// recurse only once; the root for-loop already locks everything with your IP
 		if (!userid) userid = this.userid;
+		this.nameLocked = this.userid;
 		if (!noRecurse) {
 			for (var i in users) {
 				if (users[i] === this) continue;

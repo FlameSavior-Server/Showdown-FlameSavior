@@ -4,6 +4,32 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ericsucks: 'ericisbad',
+	ericisbad: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Kllrqwg.png"><br />' +
+			'<img src="http://i.imgur.com/Ur2MarJ.jpg" height="170">' +
+			'<img src="http://i.imgur.com/UCJyw4E.png" height="170"><br />' +
+			'<b>Ace: </b>Stupidity<br />' +
+			'<img src="http://i.imgur.com/aW1Kjuv.png"></center>'
+		);
+	},
+
+	arvada: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+			this.sendReplyBox('<center><img alt="ArVaDa-" src="http://txt-dynamic.static.1001fonts.net/txt/dHRmLjcyLjAwMDAwMC5RWEpXWVVSaExRLCwuMAAAAAAAAA,,/kingthings-bloone.regular.png" height="150" width="500"><br />' +
+				'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/006-mega-x.gif" width="90" height="70">' +
+				'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/227.gif" width="70" height="60">' +
+				'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/145.gif" width="80" height="75">' +
+				'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/468.gif" width="70" height="60">' +
+				'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/144.gif" width="100" height="105">' +
+				'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/472.gif" width="80" height="65"><br />' +
+				'Ace: BellyZardX<br />' +
+				'Quote: Roost for days or Belly Drum up and <a href="http://pastebin.com/wiBHmJWH">BLAZE!</a><br />' +
+				'Special Thanks to Arken and Kaiser for being awesome and providing bucks!</center>'
+			);
+	},
+
 	cteam: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i522.photobucket.com/albums/w348/Richtoon18/Pokemon-Gif.gif" height="200">' +
@@ -645,18 +671,20 @@ exports.commands = {
 		);
 	},
 	
-	genericghost: function (target, room, user) {
+	trueghost: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/5JBOnRI.png.png" width="395" height="79" alt="Generic Ghost" /><br />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/cofagrigus.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/dusclops.gif" /><br />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/gengar.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/aegislash.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/chandelure.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/golurk.gif" />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sableye.gif" /><br />' +
-			'<font color="red"><b>Ace:</b></font> <font color="purple"><b>CGTNathan and Masquerade (The <u>Real</u> Ghost Meta)</b></font><br />' +
-			'<font color="black"><b>"The puppetmasters of the souls of the afterlife, using you as a puppet in our little game."</b></center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/KS1p792.png" width="395" height="79" alt="True Ghost"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/cofagrigus.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/chandelure.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/dusclops.gif"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/aegislash.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/gengar.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/golurk.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/jellicent.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sableye.gif"><br />' +
+			'<font color="red"><b>Ace:</b></font> <font color="purple"><b>CGTNathan, Masquerade, Ghastt, Naten, Argus, Kammi</b></font><br />' +
+			'<font color="black"><b>"The puppetmasters of the souls of the afterlife, using you as a puppet in our little game."</b><br />' +
+			'<font color="blue"><b>The <u>True</u> Ghost Meta</b></font></center>'
 		);
 	},
 	

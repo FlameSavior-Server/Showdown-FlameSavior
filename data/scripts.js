@@ -425,7 +425,7 @@ exports.BattleScripts = {
 				didSomething = didSomething || hitResult;
 			}
 			if (moveData.heal && !target.fainted) {
-				var d = target.heal(Math.round(target.maxhp * moveData.heal[0] / moveData.heal[1]));
+				var d = target.heal((this.gen < 5 ? Math.floor : Math.round)(target.maxhp * moveData.heal[0] / moveData.heal[1]));
 				if (!d && d !== 0) {
 					this.add('-fail', target);
 					this.debug('heal interrupted');
@@ -629,7 +629,7 @@ exports.BattleScripts = {
 		//unreleased are okay. No CAP for now, but maybe at some later date
 		for (var i = 0; i < 6; i++) {
 			while (true) {
-				var x = Math.floor(Math.random() * 718) + 1;
+				var x = Math.floor(Math.random() * 721) + 1;
 				if (teamdexno.indexOf(x) === -1) {
 					teamdexno.push(x);
 					break;
@@ -771,6 +771,122 @@ exports.BattleScripts = {
 		//console.log(team);
 		return team;
 	},
+	randomHackmonsCCTeam: function (side) {
+		var team = [];
+		var teamdexno = [];
+		var items = Object.keys(this.data.Items).randomize();
+		var abilities = Object.keys(this.data.Abilities).exclude('mountaineer', 'rebound', 'persistent').randomize();
+		var moves = Object.keys(this.data.Movedex).exclude(/hiddenpower./, 'struggle', 'paleowave', 'shadowstrike', 'magikarpsrevenge').randomize();
+
+		// Pick six random unique Pokmeon
+		for (var i = 0; i < 6; i++) {
+			while (true) {
+				var x = Math.floor(Math.random() * 721) + 1;
+				if (teamdexno.indexOf(x) === -1) {
+					teamdexno.push(x);
+					break;
+				}
+			}
+		}
+
+		for (var i = 0; i < 6; i++) {
+			// Choose forme
+			var formes = [];
+			for (var j in this.data.Pokedex) {
+				if (this.data.Pokedex[j].num === teamdexno[i] && this.data.Pokedex[j].species !== 'Pichu-Spiky-eared') {
+					formes.push(this.data.Pokedex[j].species);
+				}
+			}
+			var pokemon = formes.sample();
+			var template = this.getTemplate(pokemon);
+
+			// Random unique item
+			var item = items[0];
+			items.shift();
+			// Genesect forms are a sprite difference based on its Drives
+			if (template.species.substr(0, 9) === 'Genesect-' && item !== toId(template.requiredItem)) pokemon = 'Genesect';
+
+			// Random unique ability
+			var ability = abilities[0];
+			abilities.shift();
+
+			// Random unique moves
+			var m = moves.splice(0, 4);
+
+			// Random EVs
+			var evs = {
+				hp: 0,
+				atk: 0,
+				def: 0,
+				spa: 0,
+				spd: 0,
+				spe: 0
+			};
+			var s = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
+			var evpool = 510;
+			do {
+				var x = s.sample();
+				var y = Math.floor(Math.random() * Math.min(256 - evs[x], evpool + 1));
+				evs[x] += y;
+				evpool -= y;
+			} while (evpool > 0);
+
+			// Random IVs
+			var ivs = {
+				hp: Math.floor(Math.random() * 32),
+				atk: Math.floor(Math.random() * 32),
+				def: Math.floor(Math.random() * 32),
+				spa: Math.floor(Math.random() * 32),
+				spd: Math.floor(Math.random() * 32),
+				spe: Math.floor(Math.random() * 32)
+			};
+
+			// Random nature
+			var nature = ['Adamant', 'Bashful', 'Bold', 'Brave', 'Calm', 'Careful', 'Docile', 'Gentle', 'Hardy', 'Hasty', 'Impish', 'Jolly', 'Lax', 'Lonely', 'Mild', 'Modest', 'Naive', 'Naughty', 'Quiet', 'Quirky', 'Rash', 'Relaxed', 'Sassy', 'Serious', 'Timid'].sample();
+
+			// Level balance
+			var mbstmin = 1307;
+			var stats = template.baseStats;
+			var mbst = (stats['hp'] * 2 + 31 + 21 + 100) + 10;
+			mbst += (stats['atk'] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats['def'] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats['spa'] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats['spd'] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats['spe'] * 2 + 31 + 21 + 100) + 5;
+			var level = Math.floor(100 * mbstmin / mbst);
+			while (level < 100) {
+				mbst = Math.floor((stats['hp'] * 2 + 31 + 21 + 100) * level / 100 + 10);
+				mbst += Math.floor(((stats['atk'] * 2 + 31 + 21 + 100) * level / 100 + 5) * level / 100);
+				mbst += Math.floor((stats['def'] * 2 + 31 + 21 + 100) * level / 100 + 5);
+				mbst += Math.floor(((stats['spa'] * 2 + 31 + 21 + 100) * level / 100 + 5) * level / 100);
+				mbst += Math.floor((stats['spd'] * 2 + 31 + 21 + 100) * level / 100 + 5);
+				mbst += Math.floor((stats['spe'] * 2 + 31 + 21 + 100) * level / 100 + 5);
+				if (mbst >= mbstmin) break;
+				level++;
+			}
+
+			// Random happiness
+			var happiness = Math.floor(Math.random() * 256);
+
+			// Random shininess
+			var shiny = (Math.random() * 1024 <= 1);
+
+			team.push({
+				name: pokemon,
+				item: item,
+				ability: ability,
+				moves: m,
+				evs: evs,
+				ivs: ivs,
+				nature: nature,
+				level: level,
+				happiness: happiness,
+				shiny: shiny
+			});
+		}
+
+		return team;
+	},
 	randomSet: function (template, i, noMega) {
 		if (i === undefined) i = 1;
 		var baseTemplate = (template = this.getTemplate(template));
@@ -872,7 +988,7 @@ exports.BattleScripts = {
 			counter = {
 				Physical: 0, Special: 0, Status: 0, damage: 0,
 				technician: 0, skilllink: 0, contrary: 0, sheerforce: 0, ironfist: 0, adaptability: 0, hustle: 0,
-				blaze: 0, overgrow: 0, swarm: 0, torrent: 0,
+				blaze: 0, overgrow: 0, swarm: 0, torrent: 0, serenegrace: 0,
 				recoil: 0, inaccurate: 0,
 				physicalsetup: 0, specialsetup: 0, mixedsetup: 0
 			};
@@ -922,10 +1038,9 @@ exports.BattleScripts = {
 				}
 				// Moves with secondary effects:
 				if (move.secondary) {
-					if (move.secondary.chance < 50) {
-						counter['sheerforce'] -= 5;
-					} else {
-						counter['sheerforce']++;
+					counter['sheerforce']++;
+					if (move.secondary.chance >= 20) {
+						counter['serenegrace']++;
 					}
 				}
 				// Moves with low accuracy:
@@ -994,13 +1109,10 @@ exports.BattleScripts = {
 				case 'seismictoss': case 'nightshade': case 'superfang': case 'foulplay':
 					if (setupType) rejected = true;
 					break;
-				case 'magiccoat': case 'spikes': case 'defog':
-					if (setupType) rejected = true;
-					break;
 				case 'relicsong':
 					if (setupType) rejected = true;
 					break;
-				case 'pursuit': case 'protect': case 'haze': case 'stealthrock':
+				case 'magiccoat': case 'spikes': case 'defog': case 'pursuit': case 'protect': case 'haze': case 'stealthrock':
 					if (setupType || (hasMove['rest'] && hasMove['sleeptalk'])) rejected = true;
 					break;
 				case 'trick': case 'switcheroo':
@@ -1079,6 +1191,9 @@ exports.BattleScripts = {
 					break;
 				case 'superpower':
 					if (setupType && hasMove['drainpunch']) rejected = true;
+					break;
+				case 'machpunch':
+					if (hasMove['focuspunch']) rejected = true;
 					break;
 				case 'thunderbolt':
 					if (hasMove['discharge'] || hasMove['thunder']) rejected = true;
@@ -1312,8 +1427,10 @@ exports.BattleScripts = {
 				rejectAbility = !!counter['recoil'] && !hasMove['recover'] && !hasMove['roost'];
 			} else if (ability === 'No Guard' || ability === 'Compoundeyes') {
 				rejectAbility = !counter['inaccurate'];
-			} else if ((ability === 'Sheer Force' || ability === 'Serene Grace')) {
+			} else if (ability === 'Sheer Force') {
 				rejectAbility = !counter['sheerforce'];
+			} else if (ability === 'Serene Grace') {
+				rejectAbility = !counter['serenegrace'] && template.species !== 'Blissey' && template.species !== 'Chansey';
 			} else if (ability === 'Simple') {
 				rejectAbility = !setupType && !hasMove['flamecharge'] && !hasMove['stockpile'];
 			} else if (ability === 'Prankster') {
@@ -1503,7 +1620,7 @@ exports.BattleScripts = {
 		} else if ((template.baseStats.hp + 75) * (template.baseStats.def + template.baseStats.spd + 175) > 60000 || template.species === 'Skarmory' || template.species === 'Forretress') {
 			// skarmory and forretress get exceptions for their typing
 			item = 'Leftovers';
-		} else if ((counter.Physical + counter.Special >= 3 || counter.Special >= 3) && setupType && ability !== 'Sturdy' && !hasMove['eruption'] && !hasMove['waterspout']) {
+		} else if ((counter.Physical + counter.Special >= 3 || counter.Special >= 3) && ability !== 'Sturdy' && !hasMove['eruption'] && !hasMove['waterspout']) {
 			item = 'Life Orb';
 		} else if (counter.Physical + counter.Special >= 4 && template.baseStats.def + template.baseStats.spd > 179) {
 			item = 'Assault Vest';
@@ -1649,6 +1766,8 @@ exports.BattleScripts = {
 
 			// CAPs have 20% the normal rate
 			if (tier === 'CAP' && Math.random() * 5 > 1) continue;
+			// Unreleased Pokemon have 20% the normal rate
+			if (tier === 'Unreleased' && Math.random() * 5 > 1) continue;
 			// Arceus formes have 1/18 the normal rate each (so Arceus as a whole has a normal rate)
 			if (keys[i].substr(0, 6) === 'arceus' && Math.random() * 18 > 1) continue;
 			// Basculin formes have 1/2 the normal rate each (so Basculin as a whole has a normal rate)
@@ -1944,6 +2063,8 @@ exports.BattleScripts = {
 			var template = this.getTemplate(keys[i]);
 			if (!template || !template.name || !template.types) continue;
 			var tier = template.tier;
+			// Unreleased Pokemon have 20% the normal rate
+			if (tier === 'Unreleased' && Math.random() * 5 > 1) continue;
 			// Arceus formes have 1/18 the normal rate each (so Arceus as a whole has a normal rate)
 			if (keys[i].substr(0, 6) === 'arceus' && Math.random() * 18 > 1) continue;
 			// Basculin formes have 1/2 the normal rate each (so Basculin as a whole has a normal rate)
@@ -2119,7 +2240,7 @@ exports.BattleScripts = {
 			counter = {
 				Physical: 0, Special: 0, Status: 0, damage: 0,
 				technician: 0, skilllink: 0, contrary: 0, sheerforce: 0, ironfist: 0, adaptability: 0, hustle: 0,
-				blaze: 0, overgrow: 0, swarm: 0, torrent: 0,
+				blaze: 0, overgrow: 0, swarm: 0, torrent: 0, serenegrace: 0,
 				recoil: 0, inaccurate: 0,
 				physicalsetup: 0, specialsetup: 0, mixedsetup: 0
 			};
@@ -2169,10 +2290,9 @@ exports.BattleScripts = {
 				}
 				// Moves with secondary effects:
 				if (move.secondary) {
-					if (move.secondary.chance < 50) {
-						counter['sheerforce'] -= 5;
-					} else {
-						counter['sheerforce']++;
+					counter['sheerforce']++;
+					if (move.secondary.chance >= 20) {
+						counter['serenegrace']++;
 					}
 				}
 				// Moves with low accuracy:
@@ -2514,8 +2634,10 @@ exports.BattleScripts = {
 				rejectAbility = !counter['recoil'];
 			} else if (ability === 'No Guard' || ability === 'Compoundeyes') {
 				rejectAbility = !counter['inaccurate'];
-			} else if ((ability === 'Sheer Force' || ability === 'Serene Grace')) {
+			} else if (ability === 'Sheer Force') {
 				rejectAbility = !counter['sheerforce'];
+			} else if (ability === 'Serene Grace') {
+				rejectAbility = !counter['serenegrace'] && template.species !== 'Blissey' && template.species !== 'Chansey';
 			} else if (ability === 'Simple') {
 				rejectAbility = !setupType && !hasMove['flamecharge'] && !hasMove['stockpile'];
 			} else if (ability === 'Prankster') {

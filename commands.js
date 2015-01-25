@@ -180,11 +180,22 @@ var commands = exports.commands = {
 		user.lastPM = targetUser.userid;
 	},
 
-	tell: function(target, room, user) {
-		if (user.locked) return this.sendReply('You cannot use this command while locked.');
-		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
-		if (user.ignoreTells) return this.sendReply('This user is blocking Tells right now.');
+	tell: function (target, room, user) {
 		if (!target) return this.sendReply('/tell [username], [message] - Sends a message to the user which they see when they next speak');
+
+		if (user.locked) {
+			return this.popupReply('You cannot use this command while locked.');
+		}
+		if (user.forceRenamed) {
+			return this.popupReply('You cannot use this command while under a name that you have been forcerenamed to.');
+		}
+		if (targetUser.ignoreTells && !user.can('lock')) {
+			if (!targetUser.can('lock')) {
+				return this.popupReply("This user is blocking Tells right now.");
+			} else if (targetUser.can('bypassall') && !user.can('broadcast')) {
+				return this.popupReply("This admin is too busy to receive Tells right now. Please use /requesthelp if you require assistance.");
+			}
+		}
 
 		if (target.indexOf(',') < 0) return this.sendReply("Usage: /tell [username], [message]");
 		var targetUser = target.substr(0, target.indexOf(','));
@@ -199,7 +210,8 @@ var commands = exports.commands = {
 		if (tells[toId(targetUser)].length === 15) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
 
 		var date = Date();
-		var tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + message;
+		var toldBy = user.getIdentity();
+		var tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + Tools.escapeHTML(toldBy) + '</b> said: ' + Tools.escapeHTML(message);
 		tells[toId(targetUser)].add(tellMessage);
 
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
@@ -218,7 +230,7 @@ var commands = exports.commands = {
 	unblocktells: 'unignoretells',
 	unignoretell: 'unignoretells',
 	unignoretells: function (target, room, user) {
-		if (!user.ignorePMs) return this.sendReply("You are not blocking Tells!");
+		if (!user.ignoreTells) return this.sendReply("You are not blocking Tells!");
 		user.ignoreTells = false;
 		return this.sendReply("You are no longer blocking Tells.");
 	},

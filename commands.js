@@ -279,15 +279,19 @@ var commands = exports.commands = {
 		switch (cmd) {
 		case 'privateroom':
 			if (!this.can('makeroom')) return;
+			if (room.isOfficial) return this.sendReply('Official rooms can not be secret.');
+			if (room.isPublic) delete room.isPublic;
 			setting = true;
 			break;
 		default:
 			if (!this.can('privateroom', null, room)) return;
+			if (room.isOfficial) return this.sendReply('Official rooms can not be secret.');
 			if (room.isPrivate === true) {
 				if (this.can('makeroom'))
 					this.sendReply("This room is a secret room. Use /privateroom to toggle instead.");
 				return;
 			}
+			if (room.isPublic) delete room.isPublic;
 			setting = 'hidden';
 			break;
 		}
@@ -295,11 +299,14 @@ var commands = exports.commands = {
 		if (target === 'off') {
 			delete room.isPrivate;
 			this.addModCommand("" + user.name + " made this room public.");
+			room.isPublic = true;
 			if (room.chatRoomData) {
 				delete room.chatRoomData.isPrivate;
 				Rooms.global.writeChatRoomData();
 			}
 		} else {
+			if (room.isOfficial) return this.sendReply('Official rooms can not be secret.');
+			if (room.isPublic) delete room.isPublic;
 			room.isPrivate = setting;
 			this.addModCommand("" + user.name + " made this room " + (setting === true ? 'secret' : setting) + ".");
 			if (room.chatRoomData) {
@@ -362,6 +369,9 @@ var commands = exports.commands = {
 		if (!room.chatRoomData) {
 			return this.sendReply("/officialroom - This room can't be made official");
 		}
+		if (!room.isPublic) {
+			return this.sendReply("/officialroom - Secret rooms can't be made official.");
+		}
 		if (target === 'off') {
 			delete room.isOfficial;
 			this.addModCommand("" + user.name + " made this chat room unofficial.");
@@ -412,16 +422,14 @@ var commands = exports.commands = {
 
 	roomstatus: function (target, room, user) {
 		if (!room.chatRoomData) return false;
-		var other;
-		if (room.isLeague) {
-			other = ' <font color="blue"><b>league</b></font>';
-		} else if (!room.isLeague) {
-			other = '';
+		if (!this.canBroadcast()) return false;
+		if (room.isPublic) {
+			return this.sendReplyBox(room.title + ' is a <font color="green"><b>public</b></font>' + other + ' room.');
+		} else if (!room.isPublic) {
+			return this.sendReplyBox(room.title + ' is <font color="red"><b>not</b></font> a public room.');
 		}
-		if (room.isPrivate === true) {
-			return this.sendReplyBox(room.title + ' is currently a <font color="red"><b>secret</b></font>' + other + ' room.');
-		} else if (!room.isPrivate) {
-			return this.sendReplyBox(room.title + ' is currently a <font color="green"><b>public</b></font>' + other + ' room.');
+		if (room.isOfficial) {
+			return this.sendReplyBox(room.title + ' is an <font color="blue"><b>official</b></font> room.');
 		}
 	},
 

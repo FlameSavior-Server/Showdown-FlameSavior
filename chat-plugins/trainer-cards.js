@@ -4,6 +4,44 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ashaury: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/CgBGhh0.gifg"><br />' +
+			'<img src="http://i.imgur.com/ioPfpJ5.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/togekiss.gif"><br />' +
+			'<b>Ace:</b> Morphine<br />' +
+			'We are like fireworks, rising, shining, scattering and finally fading.'
+		);
+	},
+
+	ash: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ms9KNcU.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif">' +
+			'<img src="http://i.imgur.com/TFhpyNP.gif" width=300>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif"><br />' +
+			'<b>Ace: </b>Pumpkin<br />' +
+			'I am <b>Steel </b>. <b>Steel </b> knows no fear. <b>Steel </b> knows no doubt. When I face my enemy, I don\'t hesitate. I\'m a weapon to <u>destroy </u> them.'
+		);
+	},
+
+	kaiserspsychic: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://www.vooks.net/img/2014/07/metagross-646x510.jpg" height="150">' +
+			'<img src="http://imgur.com/MYSeznl.png" width="300">' +
+			'<img src="http://fc07.deviantart.net/fs70/f/2011/258/c/b/profile_picture_by_victori_the_victini-d49y2lr.png" height="150"><br />' +
+			'<b>Ace: </b>Mega Metagross<br />' +
+			'I\'m not telling you what to do, I\'m just telling you what you\'re going to do. There\'s a difference #psychic #outplays</center>'
+		);
+	},
+
 	ericsucks: 'ericisbad',
 	ericisbad: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
@@ -680,7 +718,7 @@ exports.commands = {
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/golurk.gif">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/jellicent.gif">' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sableye.gif"><br />' +
-			'<font color="red"><b>Ace:</b></font> <font color="purple"><b>CGTNathan, Masquerade, Ghastt, Naten, Argus, Kammi</b></font><br />' +
+			'<font color="red"><b>Ace:</b></font> <font color="purple"><b>CGTNathan, Masquerade, Ghast, & Argus</b></font><br />' +
 			'<font color="black"><b>"The puppetmasters of the souls of the afterlife, using you as a puppet in our little game."</b><br />' +
 			'<font color="blue"><b>The <u>True</u> Ghost Meta</b></font></center>'
 		);
@@ -1008,7 +1046,15 @@ exports.commands = {
 
 	nypt: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/8Evupvh.png"></center>'
+		this.sendReplyBox('<center><img src=http://i59.tinypic.com/2i0c1a8.png><br />' +
+			'<img src=http://play.pokemonshowdown.com/sprites/xyani/wigglytuff.gif>' +
+			'<img src=http://play.pokemonshowdown.com/sprites/xyani/wigglytuff.gif>' +
+			'<img src=http://play.pokemonshowdown.com/sprites/xyani/wigglytuff.gif>' +
+			'<img src=http://play.pokemonshowdown.com/sprites/xyani/wigglytuff.gif>' +
+			'<img src=http://play.pokemonshowdown.com/sprites/xyani/wigglytuff.gif>' +
+			'<img src=http://play.pokemonshowdown.com/sprites/xyani/wigglytuff.gif><br />' +
+			'<font color="#ff5cb6">Saira x Nypt 4ever</font><br />' +
+			'<blink>Ace: Dank Memes & Wigglytuff Master Race.</blink>'
 		);
 	},
 
@@ -3553,7 +3599,7 @@ exports.commands = {
 	kju: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>King Jong-un doesn\'t really like Trainer Cards.<br />' +
-			'King Jong-un will be online on January 19, 2015.<br />' +
+			'୧༼ಠ益ಠ╭∩╮༽ FUCK YOU COLLEGE BOARD<br />' +
 			'<b>Ace:</b> <a href="https://www.youtube.com/watch?v=JUgEmezpS_E">KJU IRL</a>'
 		);
 	},
@@ -4021,11 +4067,11 @@ exports.commands = {
 	godofthesky: 'sayshi',
 	sayshi: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/yH0xxBV.png" height="150">' +
-			'<img src="http://i.imgur.com/rlqPkGa.png" width="300">' +
-			'<img src="http://i.imgur.com/vF9wKDy.png" width="140"><br />' +
-			'<b>Ace:</b> <font color="#0000FF">Mega Mawile</font><br />' +
-			'<font color="#0000FF">No one is free, even the Gods are chained to the sky.</font></center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/h7WkH1r.png" height="200">' +
+			'<img src="http://i.imgur.com/enfJjXu.png" width="300">' +
+			'<img src="http://i.imgur.com/ZBBtLaj.png"height="200"><br />' +
+			'<b>Ace: </b>Mega Pinsir<br />' +
+			'People have no tolerance. They think all bugs are bad. It\'s the Modern way. If you don\'t like something, kill it. I like to savor my surroundings, learn from them then eliminate them.</center>'
 		);
 	},
 
@@ -5175,11 +5221,12 @@ exports.commands = {
 
 	electricapples: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/jolteon.gif">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/56z89B3.jpg" height=150>' +
 			'<img src="http://i.imgur.com/usL5WQx.png">' +
 			'<img src="http://i.imgur.com/dCZ6E7k.jpg" width="130"><br />' +
-			'<b>Ace: </a> Jolteon<br />' +
-			'Let\'s play a little game, it\'s called Apples to Apples!'
+			'<img src="http://i.imgur.com/fFMGIEp.jpg" height=150><br />' +
+			'<b>Ace: </a> #BanCharX<br />' +
+			'Don\'t talk trash if you can\'t take it out.'
 		);
 	},
 

@@ -411,8 +411,8 @@ exports.commands = {
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/talonflame.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/victini.gif">' +
 			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/torkoal.gif"><br />' +
-			'<b>Ace:</b> Jak, Zenith, Zarif, Boss<br />' +
-			'We burn shit.</center>'
+			'<b>Ace:</b> Auburn, Jak, Zenith, Zarif<br />' +
+			'Masters of the flame, Generation 5 we been at this game, we knew how to play this game, Boss ain\'t getting this fame.</center>'
 		);
 	},
 
@@ -2948,11 +2948,11 @@ exports.commands = {
 
 	perseus: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/o13YADZ.png" width="120">' +
+		this.sendReplyBox('<center><img src="http://static.planetminecraft.com/files/resource_media/screenshot/1244/iron-targaryen_4005387.jpg" height="120">' +
 			'<img src="http://i.imgur.com/qWgacoN.png">' +
-			'<img src="http://i.imgur.com/mbCr8LV.jpg" width="170"><br />' +
-			'<b>Ace:</b> Scizor<br />' +
-			'The first step to wisdom is admitting you know nothing, and that Perseus knows everything.</center>'
+			'<img src="http://fc05.deviantart.net/fs71/f/2013/261/c/a/volcarona_redux_by_id_zeta-d6mq5w1.png" height="120"><br />' +
+			'<b>Ace:</b> Volcarona<br />' +
+			'Unbowed, unbent, unbroken.</center>'
 		);
 	},
 

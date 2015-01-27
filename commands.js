@@ -208,11 +208,11 @@ var commands = exports.commands = {
 		var date = Date();
 		var tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + Tools.escapeHTML(user.getIdentity()) + '</b> said: ' + Tools.escapeHTML(message);
 		try {
-			tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + require('frost-commands.js').parseMessage(Tools.escapeHTML(user.getIdentity())) + '</b> said: ' + Tools.escapeHTML(message);
+			tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + Tools.escapeHTML(user.getIdentity()) + '</b> said: ' + require('./frost-commands.js').parseMessage(Tools.escapeHTML(message));
 		} catch (e) {}
 		tells[toId(targetUserName)].add(tellMessage);
 
-		return this.sendReply('Message "' + message + '" sent to ' + targetUserName + '.');
+		return this.sendReply('|raw|Message "' + require('./frost-commands.js').parseMessage(Tools.escapeHTML(message)) + '" sent to ' + Tools.escapeHTML(targetUserName) + '.');
 	},
 
 	blocktell: 'ignoretells',

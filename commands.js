@@ -435,12 +435,12 @@ var commands = exports.commands = {
 	roomstatus: function (target, room, user) {
 		if (!room.chatRoomData) return false;
 		if (!this.canBroadcast()) return false;
-		if (room.isPublic) {
-			return this.sendReplyBox(room.title + ' is a <font color="green"><b>public</b></font>' + other + ' room.');
-		} else if (!room.isPublic) {
+		if (room.isPublic && !room.isOfficial) {
+			return this.sendReplyBox(room.title + ' is a <font color="green"><b>public</b></font> room.');
+		} else if (!room.isPublic && !room.isOfficial) {
 			return this.sendReplyBox(room.title + ' is <font color="red"><b>not</b></font> a public room.');
 		}
-		if (room.isOfficial) {
+		if (room.isOfficial && room.isPublic) {
 			return this.sendReplyBox(room.title + ' is an <font color="blue"><b>official</b></font> room.');
 		}
 	},

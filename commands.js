@@ -182,14 +182,14 @@ var commands = exports.commands = {
 
 	tell: function (target, room, user) {
 		if (!target) return this.sendReply('/tell [username], [message] - Sends a message to the user which they see when they next speak');
+		if (user.locked) return this.sendReply('You cannot use this command while locked.');
+		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
 
-		if (user.locked) {
-			return this.popupReply('You cannot use this command while locked.');
-		}
-		if (user.forceRenamed) {
-			return this.popupReply('You cannot use this command while under a name that you have been forcerenamed to.');
-		}
-		if (targetUser.ignoreTells && !user.can('lock')) {
+		if (target.indexOf(',') < 0) return this.sendReply("Usage: /tell [username], [message]");
+		var targetUserName = target.substr(0, target.indexOf(','));
+		var targetUser = Users.get(targetUserName);
+
+		if (targetUser && targetUser.ignoreTells && !user.can('lock')) {
 			if (!targetUser.can('lock')) {
 				return this.popupReply("This user is blocking Tells right now.");
 			} else if (targetUser.can('bypassall') && !user.can('broadcast')) {
@@ -197,24 +197,22 @@ var commands = exports.commands = {
 			}
 		}
 
-		if (target.indexOf(',') < 0) return this.sendReply("Usage: /tell [username], [message]");
-		var targetUser = target.substr(0, target.indexOf(','));
 		var message = target.substr(target.indexOf(',')+1, target.length);
-		if (!toId(targetUser) || !message) return this.sendReply("Usage: /tell [username], [message]");
+		if (!toId(targetUserName) || !message) return this.sendReply("Usage: /tell [username], [message]");
 		if (message.length > 500) return this.sendReply('Your tell exceeded the maximum length.');
-		if (targetUser.length > 18) {
-			return this.sendReply('The name of user "' + targetUser + '" is too long.');
-		}
+		if (toId(targetUserName).length > 18) return this.sendReply('The name of user "' + targetUser + '" is too long.');
 
-		if (!tells[toId(targetUser)]) tells[toId(targetUser)] = [];
-		if (tells[toId(targetUser)].length === 15) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
+		if (!tells[toId(targetUserName)]) tells[toId(targetUserName)] = [];
+		if (tells[toId(targetUserName)].length >= 15) return this.sendReply('User ' + targetUserName + ' has too many tells queued.');
 
 		var date = Date();
-		var toldBy = user.getIdentity();
-		var tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + Tools.escapeHTML(toldBy) + '</b> said: ' + Tools.escapeHTML(message);
-		tells[toId(targetUser)].add(tellMessage);
+		var tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + Tools.escapeHTML(user.getIdentity()) + '</b> said: ' + Tools.escapeHTML(message);
+		try {
+			tellMessage = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + require('frost-commands.js').parseMessage(Tools.escapeHTML(user.getIdentity())) + '</b> said: ' + Tools.escapeHTML(message);
+		} catch (e) {}
+		tells[toId(targetUserName)].add(tellMessage);
 
-		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
+		return this.sendReply('Message "' + message + '" sent to ' + targetUserName + '.');
 	},
 
 	blocktell: 'ignoretells',

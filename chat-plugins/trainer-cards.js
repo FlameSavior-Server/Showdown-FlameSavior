@@ -4,7 +4,7 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
-	arifens: function (target, room, user) {
+	arifrens: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/MGC5vIj.gif"><br />' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif">' +

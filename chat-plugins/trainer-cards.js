@@ -4,6 +4,49 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	arifens: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/MGC5vIj.gif"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/manaphy.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/togekiss.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sharpedo-mega.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gallade-mega.gif"><br />' +
+			'<b>Friends:</b> Booty, Ashaury, All Falls Down, Pk-Kaiser, Mega-P!ka<br />' +
+			'Best Friends I mean how do you think we all got so good?</center>'
+		);
+	},
+
+	monothreaters: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/wUzGL4R.png" width="500"><br />' +
+			'<img src="http://i.imgur.com/FuKJZrt.png" width="200">' +
+			'<img src="http://i.imgur.com/ydbmBmq.png" width="200"><br />' +
+			'<b>Ace:</b> Ticken, EricSaysHi and ArkenCiel<br />' +
+			'You say we are cteamers, you get mad when we 6-0 you but you have to remember, it\'s all in the name of strategy.</center>'
+		);
+	},
+
+	kamkam: 'kam',
+	kam: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://25.media.tumblr.com/b9919a46e10b0615dd6bd6e823994c76/tumblr_methr5KTUl1roi9fwo1_500.gif" width="300"><br />' +
+			'<img src="http://i.imgur.com/gdWSFAn.gif" width="300"><br />' +
+			'<button class="astext" name="parseCommand" value="/user Kammi"><img src="http://i.imgur.com/nYV9evQ.gif"></button><br />' +
+			'<b>Ace:</b> Cuteeee</center>'
+		);
+	},
+
+	void: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i3.kym-cdn.com/photos/images/original/000/714/974/a0b.gif" width="160">' +
+			'<img src="http://i.imgur.com/ckkIapC.gif">' +
+			'<img src="http://31.media.tumblr.com/d5cc49a3c7fd6de53e9ed51a3ca065e2/tumblr_neac04Mdla1rp6doxo2_500.gif" width="180"><br />' +
+			'<b>Ace:</b> Void, Time, Hanzo, and Yatsu<br />' +
+			'If luck isn\'t on your side, kick it\'s ass until it does. Only then can you successfully smack a hoe.</center>'
+		);
+	},
+
 	ashaury: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/CgBGhh0.gifg"><br />' +
@@ -151,21 +194,20 @@ exports.commands = {
 			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/719.gif">' +
 			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/377.gif">' +
 			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/639.gif"><br />' +
-			'<font color="brown"><b> Ace: </b> ROCKHard & Crashy </font><br />' +
-			'<font color="gold"> Rock & roll, baby </font>'
+			'<font size="2" color="tan"><marquee behavior="scroll" scrollamount="10"><b>Ace:</b> ROCKHard, Crashy, Hoot, & Sana</font><br />' +
+			'<font size="2" color="gold"><marquee behavior="scroll" scrollamount="8" direction="right">Rock & roll, baby</font></center>'
 		);
 	},
 
 	shz: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://scontent-a.cdninstagram.com/hphotos-xap1/t51.2885-15/10808754_750049291743019_685215986_a.jpg" width="200">' +
-			'<img src="http://i.imgur.com/ax4QdOg.gif">' +
-			'<img src="https://s-media-cache-ak0.pinimg.com/236x/b3/9b/39/b39b3981f4eb205ca66ddebed3702293.jpg" height="200"><br />' +
-			'<b>Ace:</b> Jirachi And MLG<br />' +
-			'Any wish can come true if you believe enough that you can make it happen.<br />' +
-			'<button name="send" value="/transferbucks shz, 1"><i>Make a wish. And donate as well.</i></button><br />' +
-			'#!u SHZ #I\'mDone #... #Ily2♥<br />' +
-			'<i>One does not simply obtain greatness. One must struggle and overcome to truly become good.</i></center>'
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/jirachi.gif" width="100">' +
+			'<img src="http://i.imgur.com/ZL58ZJP.gif">' +
+			'<img src="http://storeonanimeonline.com/wp-content/uploads/2014/11/584519-nerve_gear.png" width="110"><br />' +
+			'<b>Ace:</b> Jirachi.✧ And MLG.<br />' +
+			'<b>Qoute:</b> Any wish can come true if you believe enough that you can make it happen.<br />' +
+			'<button name="send" value="/transferbucks shz, 1"><i>Make a wish. Donate.</i></button><br />' +
+			'<i>"What\'s the difference between the real world and the virtual one?"</i></center>'
 		);
 	},
 
@@ -1510,11 +1552,10 @@ exports.commands = {
 	vulbit: 'spooky',
 	spooky: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados-shiny/phantump.gif">' +
-			'<img src="http://i.imgur.com/D9cp43W.gif" width="430">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/cubone.gif"><br />' +
-			'<b>Ace:</b> Sticks and Stones<br />' +
-			'You only want to socialize but I don\'t think we should.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/InxH2Xz.png"><br />' +
+			'<img src="http://i.imgur.com/4e7sQD9.gif"><br />' +
+			'<font color="black"><b>Ace:</b> Birth Control</font><br />' +
+			'<b>Whenever, wherever, we\'re meant to be together~</b></center>'
 		);
 	},
 
@@ -2948,9 +2989,9 @@ exports.commands = {
 
 	perseus: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://static.planetminecraft.com/files/resource_media/screenshot/1244/iron-targaryen_4005387.jpg" height="120">' +
+		this.sendReplyBox('<center><img src="http://static.planetminecraft.com/files/resource_media/screenshot/1244/iron-targaryen_4005387.jpg" height="100">' +
 			'<img src="http://i.imgur.com/qWgacoN.png">' +
-			'<img src="http://fc05.deviantart.net/fs71/f/2013/261/c/a/volcarona_redux_by_id_zeta-d6mq5w1.png" height="120"><br />' +
+			'<img src="http://fc05.deviantart.net/fs71/f/2013/261/c/a/volcarona_redux_by_id_zeta-d6mq5w1.png" height="100"><br />' +
 			'<b>Ace:</b> Volcarona<br />' +
 			'Unbowed, unbent, unbroken.</center>'
 		);
@@ -3927,14 +3968,13 @@ exports.commands = {
 		);
 	},
 
-	hermes: 'ghast',
 	ghast: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/aegislash.gif">' +
-			'<img src="http://i.imgur.com/q3XU7j1.png" width="350">' +
-			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/shedinja.gif"><br />' +
+		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/aegislash-blade.gif">' +
+			'<img src="http://i.imgur.com/kL2oTz3.png" width="380">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sableye-mega.gif"><br />' +
 			'<b>Ace:</b> Aegislash<br />' +
-			'I was created by Zeus himself. There is a purpose for my darkness, to show you that there is redemption through Chaos.</center>'
+			'The gods give you strength, the souls of the dead give me mine.</center>'
 		);
 	},
 
@@ -4306,11 +4346,11 @@ exports.commands = {
 
 	kammi: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/fJvcdib.png" height="125" width="76" />' +
-			'<img src="http://i.imgur.com/WhZ1aKc.gif" />' +
-			'<img src="http://i.imgur.com/NUyIu76.png?1" height="125" width="76" /><br /><br />' +
-			'<b>Ace: </b>Stupidity.<br />' +
-			'<b>Quote: </b>What.</center></div>'
+		this.sendReplyBox('<center><button name="send" value="/pokemon Aegislash"><img src="http://i.imgur.com/5oymLdV.png" width="90"></button>' +
+			'<button name="send" value="/kamkam"><img src="http://i.imgur.com/IqVrwir.gif"></button>' +
+			'<button name="send" value="/pokemon Chandelure"><img src="http://fc04.deviantart.net/fs70/f/2012/295/1/4/cloudy_by_rueme-d5inbfn.png" width="90"></button><hr />' +
+			'<b>Ace:</b> Fried Rice<br />' +
+			'What.</center>'
 		);
 	},
 

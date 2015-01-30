@@ -425,7 +425,7 @@ exports.BattleScripts = {
 				didSomething = didSomething || hitResult;
 			}
 			if (moveData.heal && !target.fainted) {
-				var d = target.heal(Math.round(target.maxhp * moveData.heal[0] / moveData.heal[1]));
+				var d = target.heal((this.gen < 5 ? Math.floor : Math.round)(target.maxhp * moveData.heal[0] / moveData.heal[1]));
 				if (!d && d !== 0) {
 					this.add('-fail', target);
 					this.debug('heal interrupted');
@@ -991,7 +991,7 @@ exports.BattleScripts = {
 				Physical: 0, Special: 0, Status: 0, damage: 0,
 				technician: 0, skilllink: 0, contrary: 0, sheerforce: 0, ironfist: 0, adaptability: 0, hustle: 0,
 				blaze: 0, overgrow: 0, swarm: 0, torrent: 0, serenegrace: 0,
-				recoil: 0, inaccurate: 0,
+				recoil: 0, inaccurate: 0, priority: 0,
 				physicalsetup: 0, specialsetup: 0, mixedsetup: 0
 			};
 			setupType = '';
@@ -1047,6 +1047,8 @@ exports.BattleScripts = {
 				}
 				// Moves with low accuracy:
 				if (move.accuracy && move.accuracy !== true && move.accuracy < 90) counter['inaccurate']++;
+				// Moves with non-zero priority:
+				if (move.priority !== 0) counter['priority']++;
 
 				// Moves that change stats:
 				if (ContraryMove[moveid]) counter['contrary']++;
@@ -1156,6 +1158,12 @@ exports.BattleScripts = {
 					break;
 				case 'shadowforce': case 'phantomforce': case 'shadowsneak':
 					if (hasMove['shadowclaw']) rejected = true;
+					break;
+				case 'shadowclaw':
+					if (hasMove['shadowball']) rejected = true;
+					break;
+				case 'ironhead':
+					if (hasMove['flashcannon']) rejected = true;
 					break;
 				case 'airslash': case 'oblivionwing':
 					if (hasMove['hurricane']) rejected = true;
@@ -1305,6 +1313,11 @@ exports.BattleScripts = {
 					if (hasMove['thunderwave'] || hasMove['willowisp'] || hasMove['yawn'] || hasMove['spore'] || hasMove['sleeppowder'] || hasMove['stunspore'] || hasMove['hypnosis']) rejected = true;
 					if (hasMove['rest'] && hasMove['sleeptalk']) rejected = true;
 					break;
+				}
+
+				// Increased/decreased priority moves unneeded with moves that boost only speed
+				if (move.priority !== 0 && (hasMove['rockpolish'] || hasMove['agility'])) {
+					rejected = true;
 				}
 
 				if (move.category === 'Special' && setupType === 'Physical' && !SetupException[move.id]) {
@@ -1605,9 +1618,9 @@ exports.BattleScripts = {
 			// less priority than if you'd had both
 			item = 'Light Clay';
 		} else if (counter.Physical >= 4 && !hasMove['fakeout'] && !hasMove['suckerpunch'] && !hasMove['flamecharge'] && !hasMove['rapidspin']) {
-			item = template.baseStats.spe > 82 && template.baseStats.spe < 109 && Math.random() * 3 > 1 ? 'Choice Scarf' : 'Choice Band';
+			item = template.baseStats.spe > 82 && template.baseStats.spe < 109 && !counter['priority'] && Math.random() * 3 > 1 ? 'Choice Scarf' : 'Choice Band';
 		} else if (counter.Special >= 4) {
-			item = template.baseStats.spe > 82 && template.baseStats.spe < 109 && Math.random() * 3 > 1 ? 'Choice Scarf' : 'Choice Specs';
+			item = template.baseStats.spe > 82 && template.baseStats.spe < 109 && !counter['priority'] && Math.random() * 3 > 1 ? 'Choice Scarf' : 'Choice Specs';
 		} else if (this.getEffectiveness('Ground', template) >= 2 && !hasType['Poison'] && ability !== 'Levitate' && !hasMove['magnetrise']) {
 			item = 'Air Balloon';
 		} else if ((hasMove['eruption'] || hasMove['waterspout']) && !counter['Status']) {
@@ -2605,6 +2618,11 @@ exports.BattleScripts = {
 				case 'toxic':
 					if (hasMove['thunderwave'] || hasMove['willowisp'] || hasMove['scald'] || hasMove['yawn'] || hasMove['spore'] || hasMove['sleeppowder']) rejected = true;
 					break;
+				}
+
+				// Increased/decreased priority moves unneeded with moves that boost only speed
+				if (move.priority !== 0 && (hasMove['rockpolish'] || hasMove['agility'])) {
+					rejected = true;
 				}
 
 				if (move.category === 'Special' && setupType === 'Physical' && !SetupException[move.id]) {

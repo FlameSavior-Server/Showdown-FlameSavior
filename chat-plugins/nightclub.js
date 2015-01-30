@@ -48,13 +48,13 @@ nightclubify = colorify;
 
 exports.commands = {
 	nightclub: function(target, room, user, connection) {
-		if (!this.can('broadcast')) return this.sendReply('You must at least be voice in order to force us all to be disco dancing freakazoids.');
+		if (!this.can('nightclub')) return this.sendReply('You must at least be voice in order to force us all to be disco dancing freakazoids.');
 		if (nightclub[room.id]) return this.sendReply('This room is already engulfed in nightclubness.');
 		nightclub[room.id] = true;
 		room.addRaw('<div class="nightclub"><font size=6>' + nightclubify('LETS GET FITZY!! nightclub mode: ON!!!') + '</font><font size="2"> started by: ' + user.userid + '</font></div>');
 	},
 	dayclub: function(target, room, user, connection) {
-		if (!this.can('broadcast')) return this.sendReply('You must at least be voice in order to force us all to stop dancin\'.');
+		if (!this.can('nightclub')) return this.sendReply('You must at least be voice in order to force us all to stop dancin\'.');
 		if (!nightclub[room.id]) return this.sendReply('This room is already in broad daylight.');
 		delete nightclub[room.id];
 		room.addRaw('<div class="nightclub"><font size=6>' + nightclubify('sizzle down now... nightclub mode: off.') + '</font><font size="2"> ended by: ' + user.userid + '</font></font>');

@@ -5756,7 +5756,7 @@ exports.commands = {
 		);
 	},
 	
-	podgyylos: function (target, room, user) {
+	podgylos: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src = "http://i.imgur.com/asLh3HI.png"><br />' +
 			'<img src = "http://www.smogon.com/dex/media/sprites/xy/breloom.gif" >' +

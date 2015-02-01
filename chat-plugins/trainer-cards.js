@@ -4,6 +4,17 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	jerry: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/bDI4oOF.jpg" width="150">' +
+			'<img src="http://i.imgur.com/xSpChKn.gif" width="250">' +
+			'<img src="http://i.imgur.com/0m9GZlt.png" width="150"><br />' +
+			'<b>Ace:</b> Muh Nigga Jerry<br />' +
+			'I remember when Jerry used to chew through my foot, eat his way up our leg and burrow in our anus.<br />' +
+			'<a href="https://www.youtube.com/watch?v=O7mTJg2qmWs"><button>JERRYYYY</button></a>'
+		);
+	},
+
 	arifrens: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/MGC5vIj.gif"><br />' +

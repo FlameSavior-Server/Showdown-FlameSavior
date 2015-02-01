@@ -33,7 +33,8 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://25.media.tumblr.com/b9919a46e10b0615dd6bd6e823994c76/tumblr_methr5KTUl1roi9fwo1_500.gif" width="300"><br />' +
 			'<img src="http://i.imgur.com/gdWSFAn.gif" width="300"><br />' +
 			'<button class="astext" name="parseCommand" value="/user Kammi"><img src="http://i.imgur.com/nYV9evQ.gif"></button><br />' +
-			'<b>Ace:</b> Cuteeee</center>'
+			'<b>Ace:</b> Cuteeee<br />' +
+			'#blamekammi </center>'
 		);
 	},
 
@@ -4346,9 +4347,9 @@ exports.commands = {
 
 	kammi: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><button name="send" value="/pokemon Aegislash"><img src="http://i.imgur.com/5oymLdV.png" width="90"></button>' +
-			'<button name="send" value="/kamkam"><img src="http://i.imgur.com/IqVrwir.gif"></button>' +
-			'<button name="send" value="/pokemon Chandelure"><img src="http://fc04.deviantart.net/fs70/f/2012/295/1/4/cloudy_by_rueme-d5inbfn.png" width="90"></button><hr />' +
+		this.sendReplyBox('<center><button name="send" class="astext" value="/pokemon Aegislash"><img src="http://i.imgur.com/5oymLdV.png" width="90"></button>' +
+			'<button class="astext" name="send" value="/kamkam"><img src="http://i.imgur.com/IqVrwir.gif"></button>' +
+			'<button name="send" class="astext" value="/pokemon Chandelure"><img src="http://fc04.deviantart.net/fs70/f/2012/295/1/4/cloudy_by_rueme-d5inbfn.png" width="90"></button><hr />' +
 			'<b>Ace:</b> Fried Rice<br />' +
 			'What.</center>'
 		);
@@ -5739,7 +5740,42 @@ exports.commands = {
 			'<button><a href = "https://soundcloud.com/yungterra/victory">When I Win</a></button></center>'
 		);
 	},
+	
+	realniggas: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://images.cooltext.com/4101507.png" width="450" height="138" alt="REAL NIGGAS We are FerRondorosu"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gyarados.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/breloom.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/metagross-mega.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/hydreigon.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/tyranitar.gif"><br />' +
+			'<b>Ace: Ferro-Gyarados and Randorosu-Landorus<br />' +
+			'Randorosu - "If these hoes step to my bros, in the body bag their body goes."<br />' +
+			'<font color="silver">Ferro-"I\'m white, I can\'t think of good lines."</font></b></center>'
+		);
+	},
+	
+	podgyylos: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src = "http://i.imgur.com/asLh3HI.png"><br />' +
+			'<img src = "http://www.smogon.com/dex/media/sprites/xy/breloom.gif" >' +
+			'<img width = 400 src = "http://i.imgur.com/mRkDcKJ.jpg">' +
+			'<img src = "http://www.smogon.com/dex/media/sprites/xy/alomomola.gif" ><br />' +
+			'<b>Ace: Breloomomomomomomomomomomomomomoomola</b></center>'
+		);
+	},
 
+	chu: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/UaroBf8.png"><br />' +
+			'<img src="http://i.imgur.com/xg8vgha.gif" width = 450><br />' +
+			'<b>Ace:</b> Van!shment this World!!<br />' +
+			'<a href="https://www.youtube.com/watch?v=MHX5sdwvEvc"><button>Theme Song</button></a><br />' +
+			'The moment you say a word of parting, you\'ve already parted. So long as you and I are both somewhere in this world, we haven\'t parted. So long as you don\'t say it, you haven\'t parted.</center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

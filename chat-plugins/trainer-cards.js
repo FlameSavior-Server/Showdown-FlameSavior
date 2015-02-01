@@ -3325,11 +3325,12 @@ exports.commands = {
 
 	cam: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/skarmory.gif">' +
-			'<img src="http://i.imgur.com/YQCPBYU.gif">' +
-			'<img src="http://fc02.deviantart.net/fs70/f/2012/192/e/0/cheren_by_otakuron-d56rf8z.png" width="100"><br />' +
-			'<b>Ace:</b> Skarmory<br />' +
-			'Stop Wishing, Start Doing.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/GmN17hr.gif">' +
+			'<img src="http://i.imgur.com/ViqyGwz.gif" width="200">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/toxicroak.gif"><br />' +
+			'<img src="http://media.giphy.com/media/3GbwmqT5OpRQs/giphy.gif" width="400"><br />' +
+			'<b>Ace:</b> Mega-Lopunny<br />' +
+			'It doesn\'t matter how long it takes to achieve your goal as long as you do it.</center>'
 		);
 	},
 

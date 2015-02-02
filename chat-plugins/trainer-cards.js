@@ -5788,6 +5788,14 @@ exports.commands = {
 		);
 	},
 	
+	truestghost: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font color="purple" size="35"><blink>KAMMI</blink></font><br /><br /><br />' +
+			'<marquee behavior="scroll" scrollamount="7">I can\'t hear the haters over my GXE.</marquee><br />' +
+			'<img src="http://i.imgur.com/1fep7c1.png"></center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

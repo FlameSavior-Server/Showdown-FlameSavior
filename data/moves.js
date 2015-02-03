@@ -10673,11 +10673,14 @@ exports.BattleMovedex = {
 					this.cancelMove(sources[i]);
 					// Run through each decision in queue to check if the Pursuit user is supposed to mega evolve this turn.
 					// If it is, then mega evolve before moving.
-					var willMegaEvo = false;
-					for (var j = 0; j < this.queue.length; j++) {
-						if (this.queue[j].pokemon === sources[i] && this.queue[j].choice === 'megaEvo') willMegaEvo = true;
+					if (sources[i].canMegaEvo) {
+						for (var j = 0; j < this.queue.length; j++) {
+							if (this.queue[j].pokemon === sources[i] && this.queue[j].choice === 'megaEvo') {
+								this.runMegaEvo(sources[i]);
+								break;
+							}
+						}
 					}
-					if (willMegaEvo) this.runMegaEvo(sources[i]);
 					this.runMove('pursuit', sources[i], pokemon);
 				}
 			}
@@ -14494,11 +14497,15 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, nonsky: 1},
 		isUnreleased: true,
-		onModifyMovePriority: -5,
 		onModifyMove: function (move) {
 			if (move.type === 'Ground') {
 				move.affectedByImmunities = false;
 			}
+		},
+		onTryHit: function (target) {
+			// only the attack that grounds the target ignores effectiveness
+			if (target.negateImmunity['Ground']) return;
+			target.negateImmunity['Ground'] = 'IgnoreEffectiveness';
 		},
 		volatileStatus: 'smackdown',
 		secondary: false,

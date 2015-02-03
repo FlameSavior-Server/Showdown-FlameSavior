@@ -95,9 +95,6 @@ exports.BattleScripts = {
 			return true;
 		}
 
-		if (!this.singleEvent('Try', move, null, pokemon, target, move)) {
-			return true;
-		}
 		if (!this.runEvent('TryMove', pokemon, target, move)) {
 			return true;
 		}
@@ -192,6 +189,10 @@ exports.BattleScripts = {
 			return false;
 		}
 		this.runEvent('PrepareHit', pokemon, target, move);
+
+		if (!this.singleEvent('Try', move, null, pokemon, target, move)) {
+			return false;
+		}
 
 		if (move.target === 'all' || move.target === 'foeSide' || move.target === 'allySide' || move.target === 'allyTeam') {
 			if (move.target === 'all') {
@@ -532,25 +533,19 @@ exports.BattleScripts = {
 		return damage;
 	},
 
+	canMegaEvo: function (pokemon) {
+		var altForme = pokemon.baseTemplate.otherFormes && this.getTemplate(pokemon.baseTemplate.otherFormes[0]);
+		if (altForme && altForme.isMega && altForme.requiredMove && pokemon.moves.indexOf(toId(altForme.requiredMove)) > -1) return altForme.species;
+		var item = pokemon.getItem();
+		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) return false;
+		return item.megaStone;
+	},
+
 	runMegaEvo: function (pokemon) {
-		if (!pokemon.canMegaEvo) return false;
-
-		var otherForme;
-		var template;
-		var item;
-		if (pokemon.baseTemplate.otherFormes) otherForme = this.getTemplate(pokemon.baseTemplate.otherFormes[0]);
-		if (otherForme && otherForme.isMega && otherForme.requiredMove) {
-			if (pokemon.moves.indexOf(toId(otherForme.requiredMove)) < 0) return false;
-			template = otherForme;
-		} else {
-			item = this.getItem(pokemon.item);
-			if (!item.megaStone) return false;
-			template = this.getTemplate(item.megaStone);
-			if (pokemon.baseTemplate.baseSpecies !== template.baseSpecies) return false;
-		}
-		if (!template.isMega) return false;
-
+		var template = this.getTemplate(pokemon.canMegaEvo);
 		var side = pokemon.side;
+
+		// Pokémon affected by Sky Drop cannot mega evolve. Enforce it here for now.
 		var foeActive = side.foe.active;
 		for (var i = 0; i < foeActive.length; i++) {
 			if (foeActive[i].volatiles['skydrop'] && foeActive[i].volatiles['skydrop'].source === pokemon) {
@@ -558,17 +553,18 @@ exports.BattleScripts = {
 			}
 		}
 
-		// okay, mega evolution is possible
 		pokemon.formeChange(template);
-		pokemon.baseTemplate = template; // mega evolution is permanent :o
+		pokemon.baseTemplate = template; // mega evolution is permanent
 		pokemon.details = template.species + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
 		this.add('detailschange', pokemon, pokemon.details);
-		this.add('-mega', pokemon, template.baseSpecies, item);
-		var oldAbility = pokemon.ability;
+		this.add('-mega', pokemon, template.baseSpecies, template.requiredItem);
 		pokemon.setAbility(template.abilities['0']);
 		pokemon.baseAbility = pokemon.ability;
 
-		for (var i = 0; i < side.pokemon.length; i++) side.pokemon[i].canMegaEvo = false;
+		// Limit one mega evolution
+		for (var i = 0; i < side.pokemon.length; i++) {
+			side.pokemon[i].canMegaEvo = false;
+		}
 		return true;
 	},
 
@@ -594,7 +590,7 @@ exports.BattleScripts = {
 		if (!isValid) selectedAbilities.push(selectedAbility);
 		return isValid;
 	},
-	canMegaEvo: function (template) {
+	hasMegaEvo: function (template) {
 		if (template.otherFormes) {
 			var forme = this.getTemplate(template.otherFormes[0]);
 			if (forme.requiredItem) {
@@ -904,7 +900,7 @@ exports.BattleScripts = {
 		}
 
 		// Decide if the Pokemon can mega evolve early, so viable moves for the mega can be generated
-		if (!noMega && this.canMegaEvo(template)) {
+		if (!noMega && this.hasMegaEvo(template)) {
 			// If there's more than one mega evolution, randomly pick one
 			template = this.getTemplate(template.otherFormes[(template.otherFormes[1]) ? Math.round(Math.random()) : 0]);
 		}
@@ -990,7 +986,7 @@ exports.BattleScripts = {
 			counter = {
 				Physical: 0, Special: 0, Status: 0, damage: 0,
 				technician: 0, skilllink: 0, contrary: 0, sheerforce: 0, ironfist: 0, adaptability: 0, hustle: 0,
-				blaze: 0, overgrow: 0, swarm: 0, torrent: 0, serenegrace: 0,
+				blaze: 0, overgrow: 0, swarm: 0, torrent: 0, serenegrace: 0, ate: 0,
 				recoil: 0, inaccurate: 0, priority: 0,
 				physicalsetup: 0, specialsetup: 0, mixedsetup: 0
 			};
@@ -1032,6 +1028,7 @@ exports.BattleScripts = {
 					if (move.type === 'Grass') counter['overgrow']++;
 					if (move.type === 'Bug') counter['swarm']++;
 					if (move.type === 'Water') counter['torrent']++;
+					if (move.type === 'Normal') counter['ate']++;
 					// Make sure not to count Knock Off, Rapid Spin, etc.
 					if (move.basePower > 20 || move.multihit || move.basePowerCallback) {
 						damagingMoves.push(move);
@@ -1445,15 +1442,15 @@ exports.BattleScripts = {
 			} else if (ability === 'Sheer Force') {
 				rejectAbility = !counter['sheerforce'];
 			} else if (ability === 'Serene Grace') {
-				rejectAbility = !counter['serenegrace'] && template.species !== 'Blissey' && template.species !== 'Chansey';
+				rejectAbility = !counter['serenegrace'] || template.id === 'chansey' || template.id === 'blissey';
 			} else if (ability === 'Simple') {
 				rejectAbility = !setupType && !hasMove['flamecharge'] && !hasMove['stockpile'];
 			} else if (ability === 'Prankster') {
 				rejectAbility = !counter['Status'];
 			} else if (ability === 'Defiant' || ability === 'Moxie') {
 				rejectAbility = !counter['Physical'] && !hasMove['batonpass'];
-			} else if (ability === 'Snow Warning') {
-				rejectAbility = hasMove['naturepower'];
+			} else if (ability === 'Aerilate' || ability === 'Pixilate' || ability === 'Refrigerate') {
+				rejectAbility = !counter['ate'] && !hasMove['naturepower'];
 			// below 2 checks should be modified, when it becomes possible, to check if the team contains rain or sun
 			} else if (ability === 'Swift Swim') {
 				rejectAbility = !hasMove['raindance'];
@@ -2247,7 +2244,7 @@ exports.BattleScripts = {
 		}
 
 		// Decide if the Pokemon can mega evolve early, so viable moves for the mega can be generated
-		if (!noMega && this.canMegaEvo(template)) {
+		if (!noMega && this.hasMegaEvo(template)) {
 			// If there's more than one mega evolution, randomly pick one
 			template = this.getTemplate(template.otherFormes[(template.otherFormes[1]) ? Math.round(Math.random()) : 0]);
 		}
@@ -2333,7 +2330,7 @@ exports.BattleScripts = {
 			counter = {
 				Physical: 0, Special: 0, Status: 0, damage: 0,
 				technician: 0, skilllink: 0, contrary: 0, sheerforce: 0, ironfist: 0, adaptability: 0, hustle: 0,
-				blaze: 0, overgrow: 0, swarm: 0, torrent: 0, serenegrace: 0,
+				blaze: 0, overgrow: 0, swarm: 0, torrent: 0, serenegrace: 0, ate: 0,
 				recoil: 0, inaccurate: 0,
 				physicalsetup: 0, specialsetup: 0, mixedsetup: 0
 			};
@@ -2375,6 +2372,7 @@ exports.BattleScripts = {
 					if (move.type === 'Grass') counter['overgrow']++;
 					if (move.type === 'Bug') counter['swarm']++;
 					if (move.type === 'Water') counter['torrent']++;
+					if (move.type === 'Normal') counter['ate']++;
 					// Make sure not to count Rapid Spin, etc.
 					if (move.basePower > 20 || move.multihit || move.basePowerCallback) {
 						damagingMoves.push(move);
@@ -2524,10 +2522,7 @@ exports.BattleScripts = {
 					if (hasMove['thunderbolt']) rejected = true;
 					break;
 				case 'stoneedge':
-					if (hasMove['rockslide']) rejected = true;
-					break;
-				case 'stoneedge':
-					if (hasMove['headsmash']) rejected = true;
+					if (hasMove['rockslide'] || hasMove['headsmash'] || hasMove['rockblast']) rejected = true;
 					break;
 				case 'bonemerang': case 'earthpower':
 					if (hasMove['earthquake']) rejected = true;
@@ -2559,8 +2554,8 @@ exports.BattleScripts = {
 				case 'hiddenpowerice':
 					if (hasMove['icywind']) rejected = true;
 					break;
-				case 'stone edge':
-					if (hasMove['rockblast']) rejected = true;
+				case 'quickattack':
+					if (hasMove['feint']) rejected = true;
 					break;
 
 				// Status:
@@ -2748,6 +2743,8 @@ exports.BattleScripts = {
 				rejectAbility = template.types.indexOf('Ground') >= 0;
 			} else if (ability === 'Chlorophyll') {
 				rejectAbility = !hasMove['sunnyday'];
+			} else if (ability === 'Aerilate' || ability === 'Pixilate' || ability === 'Refrigerate') {
+				rejectAbility = !counter['ate'] && !hasMove['naturepower'];
 			}
 
 			if (rejectAbility) {

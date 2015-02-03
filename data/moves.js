@@ -3939,10 +3939,11 @@ exports.BattleMovedex = {
 		priority: 3,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		isContact: true,
-		onTryHit: function (target, pokemon) {
+		onTry: function (pokemon, target) {
 			if (pokemon.activeTurns > 1) {
+				this.add('-fail', pokemon);
 				this.add('-hint', "Fake Out only works on your first turn out.");
-				return false;
+				return null;
 			}
 		},
 		secondary: {
@@ -7703,7 +7704,7 @@ exports.BattleMovedex = {
 			},
 			onResidualOrder: 8,
 			onResidual: function (pokemon) {
-				var target = pokemon.side.foe.active[pokemon.volatiles['leechseed'].sourcePosition];
+				var target = this.effectData.source.side.active[pokemon.volatiles['leechseed'].sourcePosition];
 				if (!target || target.fainted || target.hp <= 0) {
 					this.debug('Nothing to leech into');
 					return;
@@ -10651,11 +10652,14 @@ exports.BattleMovedex = {
 					this.cancelMove(sources[i]);
 					// Run through each decision in queue to check if the Pursuit user is supposed to mega evolve this turn.
 					// If it is, then mega evolve before moving.
-					var willMegaEvo = false;
-					for (var j = 0; j < this.queue.length; j++) {
-						if (this.queue[j].pokemon === sources[i] && this.queue[j].choice === 'megaEvo') willMegaEvo = true;
+					if (sources[i].canMegaEvo) {
+						for (var j = 0; j < this.queue.length; j++) {
+							if (this.queue[j].pokemon === sources[i] && this.queue[j].choice === 'megaEvo') {
+								this.runMegaEvo(sources[i]);
+								break;
+							}
+						}
 					}
-					if (willMegaEvo) this.runMegaEvo(sources[i]);
 					this.runMove('pursuit', sources[i], pokemon);
 				}
 			}
@@ -13047,8 +13051,15 @@ exports.BattleMovedex = {
 					target.removeVolatile('spikyshield');
 					return;
 				}
-				if (move && (move.target === 'self' || move.id === 'suckerpunch')) return;
-				this.add('-activate', target, 'move: Protect');
+				if (move && (move.target === 'self' || move.isNotProtectable)) return;
+				this.add('-activate', target, 'Protect');
+				var lockedmove = source.getVolatile('lockedmove');
+				if (lockedmove) {
+					// Outrage counter is reset
+					if (source.volatiles['lockedmove'].duration === 2) {
+						delete source.volatiles['lockedmove'];
+					}
+				}
 				if (move.isContact) {
 					this.damage(source.maxhp / 8, source, target);
 				}
@@ -13829,12 +13840,12 @@ exports.BattleMovedex = {
 		pp: 5,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		isNotProtectable: true,
 		isContact: true,
-		onTryHit: function (target) {
+		onTry: function (source, target) {
 			var decision = this.willMove(target);
 			if (!decision || decision.choice !== 'move' || (decision.move.category === 'Status' && decision.move.id !== 'mefirst') || target.volatiles.mustrecharge) {
-				return false;
+				this.add('-fail', source);
+				return null;
 			}
 		},
 		secondary: false,
@@ -14461,11 +14472,15 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, nonsky: 1},
 		isUnreleased: true,
-		onModifyMovePriority: -5,
 		onModifyMove: function (move) {
 			if (move.type === 'Ground') {
 				move.affectedByImmunities = false;
 			}
+		},
+		onTryHit: function (target) {
+			// only the attack that grounds the target ignores effectiveness
+			if (target.negateImmunity['Ground']) return;
+			target.negateImmunity['Ground'] = 'IgnoreEffectiveness';
 		},
 		volatileStatus: 'smackdown',
 		secondary: false,

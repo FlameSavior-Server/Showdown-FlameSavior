@@ -4,6 +4,27 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ericxwander: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/cDfUDBo.gif" width="120">' +
+			'<img src="http://i.imgur.com/F8R91fa.png" width="280">' +
+			'<img src="http://i.imgur.com/Ot5X2zu.png" width="130"><br />' +
+			'<b>Ace:</b> No Flex Zone and Dick Pinch<br />' +
+			'<img src="http://i.imgur.com/csVEwAx.png" width="300"></center>'
+		);
+	},
+
+	ariska: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/kMgWrcJ.gif"><br />' +
+			'<i>My Fairies, My Chicken Casserole, and me will at least try to wreck you!</i><br />' +
+			'<img src="http://fc09.deviantart.net/fs71/f/2013/224/2/e/megagardevoir_by_icaro382-d6huodc.png" height="110">' +
+			'<img src="http://media.giphy.com/media/5E2P4XVnDiy76/giphy.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gardevoir.gif"><br />' +
+			'<font color="red"><b>Ace:</b></font> <font color="pink"><b>Gardevoir</b></font><br /></center>'
+		);
+	},
+
 	jerry: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/bDI4oOF.jpg" width="150">' +

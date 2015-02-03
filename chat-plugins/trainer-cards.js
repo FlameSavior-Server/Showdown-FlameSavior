@@ -4137,19 +4137,18 @@ exports.commands = {
 			'First thing\'s first, I\'m the realest.</center>'
 		);
 	},
-
-	logicaldomination: 'crowt',
-	pan: 'crowt',
-	panpawn: 'crowt',
-	crowt: function (target, room, user) {
+	
+	tailzhasnowanker: 'panpawn',
+	jdsmellsfunny: 'panpawn',
+	pan: 'panpawn',
+	panpawn: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><div class="infobox"><img src="http://i.imgur.com/BYTR6Fj.gif"  width="80" height="80" align="left">' +
-			'<img src="http://i.imgur.com/czMd1X5.gif" border="6" align="center">' +
-			'<img src="http://50.62.73.114:8000/avatars/crowt.png" align="right"><br clear="all" /></div>' +
-			'<blink><font color="red">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</font></blink><br />' +
-			'<div class="infobox"><b><font color="#4F86F7" size="3">Ace:</font></b> <font color="blue" size="3">G</font><font color="black" size="3">r</font><font color="blue" size="3">e</font><font color="black" size="3">n</font><font color="blue" size="3">i</font><font color="black" size="3">n</font><font color="blue" size="3">j</font><font color="black" size="3">a</font><br />' +
-			'<font color="black">"It takes a great deal of <b>bravery</b> to <b>stand up to</b> our <b>enemies</b>, but just as much to stand up to our <b>friends</b>." - Dumbledore</font></center></div>'
-		);
+		this.sendReplyBox('<table bgcolor="#BC13FE" width="100%"><td><center><img src="http://i.imgur.com/xzfPeaL.gif"><br />' +
+			'<img src="http://i.imgur.com/PqEJXSK.png"><br />' +
+			'<img src="http://frostserver.net:8000/avatars/panpawn.png?dateline=1419293614"> <br />' +
+			'<font color="black"><br />Ace:</font> <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
+			'"Don\'t touch me while I\'m sleeping."</table></center>'
+		);	
 	},
 
 	tael: function (target, room, user) {
@@ -5785,6 +5784,14 @@ exports.commands = {
 			'<b>Ace:</b> Van!shment this World!!<br />' +
 			'<a href="https://www.youtube.com/watch?v=MHX5sdwvEvc"><button>Theme Song</button></a><br />' +
 			'The moment you say a word of parting, you\'ve already parted. So long as you and I are both somewhere in this world, we haven\'t parted. So long as you don\'t say it, you haven\'t parted.</center>'
+		);
+	},
+	
+	truestghost: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font color="purple" size="35"><blink><b>KAMMI</b></blink></font><br /><br /><br />' +
+			'<marquee behavior="scroll" scrollamount="7">I can\'t hear the haters over my GXE.</marquee><br />' +
+			'<img src="http://i.imgur.com/1fep7c1.png"></center>'
 		);
 	},
 	

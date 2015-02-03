@@ -254,14 +254,14 @@ exports.commands = {
             'Catch phrase: Kindness is a virtue that should be expressed by everyone.</center>');
     },
 
-    jdsmellsfunny: 'panpawn',
+    	jdsmellsfunny: 'panpawn',
 	pan: 'panpawn',
 	panpawn: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<table bgcolor="#BC13FE" width="100%"><td><center><img src="http://i.imgur.com/xzfPeaL.gif"><br />' +
 			'<img src="http://i.imgur.com/PqEJXSK.png"><br />' +
 			'<img src="http://frostserver.net:8000/avatars/panpawn.png?dateline=1419293614"> <br />' +
-			'<font color="black"><br />Ace: <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />'
+			'<font color="black"><br />Ace: <font color="red">C<font color="orange">y<font color="red">n<font color="orange">d<font color="red">a<font color="orange">q<font color="red">u<font color="orange">i<font color="red">l</font><br />' +
 			'"Don\'t touch me while I\'m sleeping."</table></center>'
 		);	
 	},

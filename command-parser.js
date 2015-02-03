@@ -438,6 +438,11 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		});
 	}
 	
+	if (nightclub[room.id]) {
+		room.addRaw('<div class="nightclub"><font size="3"><small>' + nightclubify((room.auth ? room.auth[user.userid] : user.group)) + "</small><b>" + nightclubify(Tools.escapeHTML(user.name) + ":") + "</b> " + nightclubify((message)) + '</font></div>');
+		return false;
+	}
+
 	if (!Core.processChatData(user, room, connection, message)) return false;
 	
 	return message;

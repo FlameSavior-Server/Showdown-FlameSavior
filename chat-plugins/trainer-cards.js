@@ -1574,11 +1574,11 @@ exports.commands = {
 
 	jay: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/BRlbCWc.gif" width="140">' +
-			'<img src="http://i.imgur.com/RuRbKXZ.gif" width="260">' +
-			'<img src="http://i.imgur.com/hcN6GM2.gif" width="140"><br />' +
-			'<b>Ace:</b> The \'Busken<br />' +
-			'Winning is habit. Unfortunately for you, so is losing.</center>'
+		this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20141214185814/pokemon/images/0/08/MGallade_ORAS.gif">' +
+			'<img src="http://i.imgur.com/g6u3PtV.png">' +
+			'<img src="http://img2.wikia.nocookie.net/__cb20141028053253/pokemon/images/d/d2/Medicham_Mega_XY_Sprite.gif"><br />' +
+			'<b>Ace: </b>Scissor Hands and Nipple Knees<br />' +
+			'You better square up, because life doesn\'t wait for you to swing.</center>'
 		);
 	},
 

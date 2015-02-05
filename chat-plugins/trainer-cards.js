@@ -4,6 +4,14 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	sexy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/hDFF6jW.png"><br />' +
+			'<b>Ace: </b>Pure Sexyness<br />' +
+			'We shall give water from our well of love to anyone who is thirsty ^_~</center>'
+		);
+	},
+
 	ericxwander: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/cDfUDBo.gif" width="120">' +

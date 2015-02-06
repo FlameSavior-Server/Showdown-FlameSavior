@@ -533,6 +533,19 @@ exports.Formats = [
 		}
 	},
 	{
+		name: "[Seasonal] Valentines Day",
+		section: "OM of the Month",
+
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
+		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite'],
+		validateTeam: function (team, format) {
+			for (var i = 0; i < team.length; i++) {
+				var mon = Tools.getTemplate(team[i].species);
+				if (!mon.color || mon.color !== 'White' && mon.color !== 'Pink' && mon.color !== 'Red') return ['Your Pokemon must be either Pink, Red, or White.'];
+			}
+		},
+	},
+	{
 		name: "FU",
 		section: "Other Metagames",
 		column: 2,
@@ -1155,7 +1168,6 @@ exports.Formats = [
 			'Excadrill', 'Tornadus-Therian', 'Thundurus', 'Reshiram', 'Zekrom', 'Landorus', 'Kyurem-White', 'Genesect', 'Slaking', 'Regigigas'
 		]
 	},
-
 	// Monotype
 	///////////////////////////////////////////////////////////////////
 	{

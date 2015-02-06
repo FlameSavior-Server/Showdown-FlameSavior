@@ -4,6 +4,41 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	pantydroppers: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/JT2XFqn.gif" width="200"height="220">' +
+			'<img src= http://i.imgur.com/TdRy3WR.gif width="250"height="220">' +
+			'<img src= http://i.imgur.com/m9arlf2.gif width="200"height="220">' +
+			'<img src=http://i.imgur.com/TGX8OO3.jpg width="200" height="220"><br /><br />' +
+			'<b>We have virgins, pricks, and idiots, what else could you want?</b><br />' +
+			'<button name="send" value="/transferbucks [Wandering],1">Give some bucks for them exclusive panties.</button><br /><br />' +
+			'<b>Either way someone is losing something.</b><br /><br />' +
+			'<b><a href="http://pastebin.com/sL26QYv6">Words of Wisdom.</a></b></center>'
+		);
+	},
+
+	gamblers: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://imgur.com/LaOdx5L.gif"><br />' +
+			'<font size="3"><b><i><font color="009933">Gamblers</i><br />' +
+			'</font><b><blink><font color="33CC00">Disregard Women, Acquire Currency</font></blink></b><br />' +
+			'<b><i>Alpha Dragonite, Spike, Shag, Pack and KJU</i><br />' +
+			'<button name="send" value="/transferbucks gamblersbank, 1">Donate</button>' +
+			'<button name="send" value="/transferbucks gamblersbank, 1">Donate</button></center>'
+		);
+	},
+
+	laxuy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/dTX7mrD.png"><br />' +
+			'<img src="http://images.sodahead.com/polls/003362055/591353534_228px_Grimsley_answer_17_xlarge.png" alt="Grimsley" height="150" width="125">' +
+			'<img src="http://i.imgur.com/iVe740H.png" alt="Dragon Thing" height="150" width="150"><br />' +
+			'<font color=“orange"><img src="http://i.imgur.com/WSczoAx.png"><br />' +
+			'<b>Ace:</b> Bisharp + Asian-ness</font><br />' +
+			'<font color="white"><b>"Send help."</b></font></center>'
+		);
+	},
+
 	sexy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/hDFF6jW.png"><br />' +
@@ -2369,11 +2404,13 @@ exports.commands = {
 
 	arifeen: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/xyani/charizard-mega-x.gif">' +
-			'<img src="http://i.imgur.com/X3fJccD.png" width="250">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus.gif"><br />' +
-			'<b>Ace:</b> Landorus<br />' +
-			'"Don\'t tell me the sky\'s the limit when there are footprints on the moon."</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/AmEDkZR.png" width="145">' +
+			'<a href="http://i.imgur.com/NfkUysG.png"><img src="http://i.imgur.com/X3fJccD.png" width="230"/></a>' +
+			'<img src="http://i.imgur.com/qizEdWg.gif" width="145"/><br />' +
+			'<img src="http://i.imgur.com/ALqQPAZ.png" height="80"/>' +
+			'<img src="http://i.imgur.com/metUBom.png" height="80"/>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus.gif" height="80"/><br />' +
+			'<img src="http://i.imgur.com/SMEgXvl.png" width="550"/></center>'
 		);
 	},
 

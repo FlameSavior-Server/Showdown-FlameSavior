@@ -1541,7 +1541,7 @@ var commands = exports.commands = {
     },
 
     makechatroom: function (target, room, user) {
-        if (!this.can('makeroom')) return;
+        if (!this.can('pban')) return;
         var id = toId(target);
         if (!id) return this.parse('/help makechatroom');
         if (Rooms.rooms[id]) return this.sendReply("The room '" + target + "' already exists.");
@@ -1552,7 +1552,7 @@ var commands = exports.commands = {
     },
 
     deregisterchatroom: function (target, room, user) {
-        if (!this.can('makeroom')) return;
+        if (!this.can('pban')) return;
         var id = toId(target);
         if (!id) return this.parse('/help deregisterchatroom');
         var targetRoom = Rooms.search(id);
@@ -1572,13 +1572,13 @@ var commands = exports.commands = {
         var setting;
         switch (cmd) {
         case 'privateroom':
-            if (!this.can('makeroom')) return;
+            if (!this.can('pban')) return;
             setting = true;
             break;
         default:
             if (!this.can('privateroom', null, room)) return;
             if (room.isPrivate === true) {
-                if (this.can('makeroom'))
+                if (this.can('pban'))
                     this.sendReply("This room is a secret room. Use /privateroom to toggle instead.");
                 return;
             }

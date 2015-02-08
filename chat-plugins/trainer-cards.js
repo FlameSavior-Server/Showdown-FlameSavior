@@ -5861,6 +5861,35 @@ exports.commands = {
 		);
 	},
 	
+	fergus: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/XUe1BCE.gif">' +
+			'<img src="http://i.imgur.com/KXxXi9y.png">' +
+			'<img src="http://i.imgur.com/HZ7camu.gif"><br />' +
+			'<b>Ace:</b> Swampert-Mega<br />Fun And Chat...what better way to put it?</center>'
+		);
+	},
+	
+	mywaifu: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xYtK0dx.png"><br />' +
+			'<img src="http://i.imgur.com/tJ1g8Sj.png" width = 500><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/togekiss.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/altaria.gif"><br />' +
+			'<b>Ace:</b> <font color=#C23E05>≧◡≦ Morphine</font> & <font color=#09B38C> Ishtaria ≧◡≦</font><br />' +
+			'Our love doesn\'t make the world go \'round, however our love is what makes the ride worthwhile.  ≧◡≦</center>'
+		);
+	},
+	
+	tes: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/DNq6OUf.gif" width=200>' +
+			'<img src="http://i.imgur.com/jxKkHyU.png" width=150>' +
+			'<img src="http://i.imgur.com/F6qPNry.png" width=200><br />' +
+			'<b>Type:</b> Electric<br />"The best luck of all is the luck you make for yourself."</center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

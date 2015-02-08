@@ -2360,19 +2360,10 @@ var commands = exports.commands = {
             this.sendReplyBox("The room description is: " + room.desc.replace(re, '<a href="$1">$1</a>'));
             return;
         }
-        if (!this.can('declare', null, room)) return false;
+        if (!this.can('roommod', null, room)) return false;
         if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
         var normalizedTarget = ' ' + target.toLowerCase().replace('[^a-zA-Z0-9]+', ' ').trim() + ' ';
 
-        if (normalizedTarget.indexOf(' welcome ') >= 0) {
-            return this.sendReply("Error: Room description must not contain the word 'welcome'.");
-        }
-        if (normalizedTarget.slice(0, 9) === ' discuss ') {
-            return this.sendReply("Error: Room description must not start with the word 'discuss'.");
-        }
-        if (normalizedTarget.slice(0, 12) === ' talk about ' || normalizedTarget.slice(0, 17) === ' talk here about ') {
-            return this.sendReply("Error: Room description must not start with the phrase 'talk about'.");
-        }
         room.desc = target;
         this.sendReply('The room description is now: ' + target + '.');
         this.privateModCommand("(" + user.name + " changed the roomdesc to \"" + target + "\")");

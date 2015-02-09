@@ -5890,6 +5890,18 @@ exports.commands = {
 		);
 	},
 	
+	arkenciel: 'arken',
+	arken: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><a href=http://i.imgur.com/9VKNz7V.png?1><img src="http://i.imgur.com/5CXkWyA.gif" title="Ladder peak"></a>' +
+			'<img src=http://i.imgur.com/nmxcMXl.png>' +
+			'<a href=http://monotypeps.weebly.com/uploads/4/1/2/3/41239665/1775339_orig.png><img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif" title="OT: 1st Place"></a>' +
+			'<img src=http://i.imgur.com/PlcKOC5.png><br />' +
+			'<b>Ace:</b> Bisharp<br>"It doesn\'t matter where the war will take place, what its purpose is, or however many will fight.<br />' +
+			'All that matters is that I\'m going to be there and whatever matters shall be mine."</center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

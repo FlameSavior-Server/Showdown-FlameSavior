@@ -5898,7 +5898,8 @@ exports.commands = {
 			'<a href="http://monotypeps.weebly.com/uploads/4/1/2/3/41239665/1775339_orig.png"><img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif" title="OT: 1st Place"></a>' +
 			'<img src="http://i.imgur.com/PlcKOC5.png"><br />' +
 			'<img src="http://i.imgur.com/7d1dqpc.png"><br />' +
-			'<b>Ace:</b> Bisharp<br>"It doesn\'t matter where the war will take place, what its purpose is, or however many will fight.<br />' +
+			'<b>Ace:</b> <font color=#990000>Bisharp</font><br />' +
+			'"It doesn\'t matter where the war will take place, what its purpose is, or however many will fight.<br />' +
 			'All that matters is that I\'m going to be there and whatever matters shall be mine."</center>'
 		);
 	},

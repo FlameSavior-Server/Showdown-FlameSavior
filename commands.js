@@ -1368,7 +1368,7 @@ var commands = exports.commands = {
         var target = this.splitTarget(target, true);
         var targetUser = this.targetUser;
         if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
-        if (!this.can('makeroom')) return false;
+        if (!this.can('pban')) return false;
         if (!room.auth) room.auth = room.chatRoomData.auth = {};
         var name = targetUser.name;
         room.auth[targetUser.userid] = '#';

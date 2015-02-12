@@ -1621,11 +1621,11 @@ exports.commands = {
 
 	jay: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20141214185814/pokemon/images/0/08/MGallade_ORAS.gif">' +
-			'<img src="http://i.imgur.com/g6u3PtV.png">' +
-			'<img src="http://img2.wikia.nocookie.net/__cb20141028053253/pokemon/images/d/d2/Medicham_Mega_XY_Sprite.gif"><br />' +
-			'<b>Ace: </b>Scissor Hands and Nipple Knees<br />' +
-			'You better square up, because life doesn\'t wait for you to swing.</center>'
+		this.sendReplyBox('<center><img src="http://www.pkparaiso.com/imagenes/rubi-omega-zafiro-alfa/sprites/animados/gallade-mega.gif">' +
+			'<img src="http://i.imgur.com/y8AApZL.png">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/medicham-mega.gif"><br />' +
+			'<b>Ace:</b> Scissor Hands and Nipple Knees<br />' +
+			'You better square up, because life doesn\'t wait for you to swing first.</center>'
 		);
 	},
 

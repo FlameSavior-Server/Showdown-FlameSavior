@@ -162,7 +162,6 @@
 var fs = require('fs');
 var badges = fs.createWriteStream('badges.txt', {'flags': 'a'});
 var commands = exports.commands = {
-
     ip: 'whois',
     rooms: 'whois',
     alt: 'whois',

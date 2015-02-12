@@ -5918,6 +5918,16 @@ exports.commands = {
 		);
 	},
 	
+	koummi: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://38.media.tumblr.com/05c661718ede4fee9e46ca829eb34101/tumblr_mvnycfrNfP1rvi1zto2_250.png" width="150">' +
+			'<img src="http://i.imgur.com/jfd136S.png" width="300">' +
+			'<img src="http://fc07.deviantart.net/fs70/f/2013/364/b/e/mamura_daiki_1__by_katita_chan-d701yfd.png" width="150"><br />' +
+			'<b>Ace:</b><font color="#F74545"> Kouhai & Kammi</font><br />' +
+			'<i>"My existence will become your daytime shooting star."</i></center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

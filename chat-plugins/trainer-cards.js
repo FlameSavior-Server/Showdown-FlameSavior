@@ -5934,6 +5934,23 @@ exports.commands = {
 			'"Girl, come be in my future sight"~PAD</center>'
 		);
 	},
+	
+	desiboys: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/XzLhZqR.gif"><br /><br /><br />' +
+			'<button class="astext" name="parseCommand" value="/user Mega-P!ka"><img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user AM Arifeen"><img src="http://play.pokemonshowdown.com/sprites/xyani/charizard-mega-x.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user All Falls Down"><img src="http://play.pokemonshowdown.com/sprites/xyani/sharpedo-mega.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Armored Kaiba"><img src="http://play.pokemonshowdown.com/sprites/xyani/delibird.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Chakra"><img src="http://play.pokemonshowdown.com/sprites/xyani/genesect.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Hingo"><img src="http://play.pokemonshowdown.com/sprites/xyani/ferrothorn.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user croven"><img src="http://play.pokemonshowdown.com/sprites/xyani/togekiss.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user imp greed"><img src="http://play.pokemonshowdown.com/sprites/xyani/hydreigon.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Imp iZarif"><img src="http://play.pokemonshowdown.com/sprites/xyani/infernape.gif"></button><br />' +
+			'<b>Ace:</b> Samosas, Gulab Jamuns, and Ladu<br>We\'re the chutney to your samosas.<br />' +
+			'<a href="https://www.youtube.com/watch?v=lyWHtKq1PcQ" target="_blank"><button target="_blank">Our Jam</button></center>'
+		);
+	},
 		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

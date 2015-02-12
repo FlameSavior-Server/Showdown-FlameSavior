@@ -5928,6 +5928,13 @@ exports.commands = {
 		);
 	},
 	
+	pad: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/8gYYBGY.gif" width="400"><br />' +
+			'"Girl, come be in my future sight"~PAD</center>'
+		);
+	},
+		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

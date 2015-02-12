@@ -81,13 +81,17 @@ exports.commands = {
 
 	arifrens: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/MGC5vIj.gif"><br />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/manaphy.gif">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/togekiss.gif">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sharpedo-mega.gif">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/gallade-mega.gif"><br />' +
-			'<b>Friends:</b> Booty, Ashaury, All Falls Down, Pk-Kaiser, Mega-P!ka<br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Gn1VOl2.png"><br /><br /><br />' +
+			'<button class="astext" name="parseCommand" value="/user Mega-P!ka"><img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user YourKouhai"><img src="http://play.pokemonshowdown.com/sprites/xyani/volcarona.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user All Falls Down"><img src="http://play.pokemonshowdown.com/sprites/xyani/sharpedo-mega.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Kammi"><img src="http://play.pokemonshowdown.com/sprites/xyani/chandelure.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Irraquated"><img src="http://play.pokemonshowdown.com/sprites/xyani/dragonite.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Pk-Kaiser"><img src="http://play.pokemonshowdown.com/sprites/xyani/gallade-mega.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Booty Deluxe"><img src="http://play.pokemonshowdown.com/sprites/xyani/manaphy.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Ashaury"><img src="http://play.pokemonshowdown.com/sprites/xyani/togekiss.gif"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Balto"><img src="http://play.pokemonshowdown.com/sprites/xyani/porygon2.gif"></button><br />' +
+			'<b>Friends:</b> Mega-P!ka, YourKouhai, All Falls Down, Kammi, Irraquated, Pk-Kaiser, Booty, Ashaury, Balto<br />' +
 			'Best Friends I mean how do you think we all got so good?</center>'
 		);
 	},
@@ -5901,6 +5905,16 @@ exports.commands = {
 			'<b>Ace:</b> <font color=#990000>Bisharp</font><br />' +
 			'"It doesn\'t matter where the war will take place, what its purpose is, or however many will fight.<br />' +
 			'All that matters is that I\'m going to be there and whatever matters shall be mine."</center>'
+		);
+	},
+	
+	minimart: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src=http://blogs.evergreen.edu/carculture/files/2014/02/apuflag.gif height="100" width="100" />' +
+			'<img src="http://i.imgur.com/sAvNch6.png" />' +
+			'<img src=http://vignette1.wikia.nocookie.net/simpsons/images/7/70/Kwik-e-mart-741330-1-.jpg/revision/latest?cb=20110502173948 height="100" width="100" /><br />' +
+			'<b>Ace:</b> Arifeen<br />' +
+			'Hello and welcome to the kwik e mart!</center>'
 		);
 	},
 	

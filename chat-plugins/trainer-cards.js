@@ -5951,6 +5951,18 @@ exports.commands = {
 			'<a href="https://www.youtube.com/watch?v=lyWHtKq1PcQ" target="_blank"><button target="_blank">Our Jam</button></center>'
 		);
 	},
+	
+	drago: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img vspace="10" width ="200" src= "http://txt-dynamic.static.1001fonts.net/txt/dHRmLjEwNi4wMDAwMDAuUkhKaFoyOCwuMAAAAA,,/acid-label.regular.png"><br />' +
+			'<img height ="120" width ="180" src = "https://uproxx.files.wordpress.com/2014/11/rip-beth.gif?w=650">' +
+			'<img src = "http://media.giphy.com/media/Hffz095e5MUdG/giphy.gif" height ="120" width ="180"><br />' +
+			'<p><font size ="2" ><b>Ace:</b> My heart.<br /><br />' +
+			'<img src = "https://uproxx.files.wordpress.com/2014/11/car.gif?w=650" height="100"><br /><br />' +
+			'<b> Quote: </b> You may think you are good, but you really aren\'t.<br /><br />' +
+			'<a href="https://www.youtube.com/watch?v=Zf_QxUTueO0"><button>Git gud m9</button></a></center>'
+		);
+	},
 		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

@@ -1873,6 +1873,437 @@ var commands = exports.commands = {
 		} else if (!matched) {
 			this.sendReply("Help for the command '" + target + "' was not found. Try /help for general help");
 		}
-	}
+	},
+	
+		/*********************************************************
+	 * Parukia commands
+	 *********************************************************/
 
+	memes: 'meme',
+	meme: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		target = target.toLowerCase();
+		var matched = false;
+		if (target === ''){
+			matched = true;
+			this.sendReplyBox('<b><font color="purple">List of memes:<br><br>-Aliens<br>-Fragequit<br>-Fuck yeah<br>-Umad<br>-Burnheal<br>-OU Train<br>-Gary Train<br>-If you know what I mean<br>-Doge<br>-Troll<br>-Fail<br>-Wtf<br>-Hawkward<br>-I dont always<br>-So hard<br>-ALL OF THE HOMO<br>-Cool story bro<br>-Udense<br>-Professor Oak<br>-Dodge<br>-You dont say<br>-Cockblocked<br>-Save the Titanic<br>-Ninjask\'d<br>-Fuck this<br>-Slowbro<br>-He has a point<br>-Rekt<br>-Death Stare<br>-What is love<br>-Badass<br>-Onixpected<br>-Wood Hammer<br>-Excuses<br>-Hax<br>-Spheal with it<br>-Hazeel<br>-Trick master is love<br>-7.8<br>-Adelf<br>-Parukia<br>-Fabulous<br>-I regret nothing<br>-Wrong neighborhood<br>-TWSS<br>-HM01<br>-Bitch please<br>-Control your orgasms<br>-Haters gonna hate<br>-Your mom<br>-shrekt<br>-Snickers<br>-Baka<br>-Tits or gtfo<br>-Swiggity<br>-Dat Ass<br>-Once you go<br>-I\'m really feeling it<br>-It\'s a trap<br>-In a row?<br>-Russian Spy<br>-Batgirl<br>-Eels<br>-Oppai<br>-Ara ara<br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b>');
+                }
+		if (target === 'aliens'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgflip.com/26am.jpg" />');
+		}
+		if (target === 'fragequit'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i0.kym-cdn.com/photos/images/original/000/000/578/1234931504682.jpg" height="189" width="317" />');
+		}
+		if (target === 'fuck yeah'){
+			matched = true;
+			this.sendReplyBox('<img src="http://cdn.ebaumsworld.com/mediaFiles/picture/602006/80615085.jpg" height="200" width="200" />');
+		}
+		if (target === 'so hard'){
+			matched = true;
+			this.sendReplyBox('<img src="http://oi57.tinypic.com/io24g4.jpg" />');
+		}
+		if (target === 'umad'){
+			matched = true;
+			this.sendReplyBox('<img src="http://dailysnark.com/wp-content/uploads/2013/11/umad.gif" />');
+		}
+		if (target === 'burnheal'){
+			matched = true;
+			this.sendReplyBox('<img src="http://yoshi348.thedailypos.org/imagefest/yellow/yoshi3/poke157.png" />');
+		}
+		if (target === 'ou train'){
+			matched = true;
+			this.sendReplyBox('<img src="https://i.chzbgr.com/maxW500/7970259968/h1BCECD4B/" height="300" width="400" />');
+		}
+		if (target === 'gary train'){
+			matched = true;
+			this.sendReplyBox('<img src="http://25.media.tumblr.com/79f09b46546f72a8be7643b73760aae7/tumblr_mkziy58ed71s79jjoo1_250.gif" />');
+		}
+		if (target === 'if you know what i mean'){
+			matched = true;
+			this.sendReplyBox('<img src="http://fcdn.mtbr.com/attachments/california-norcal/805709d1370480032-should-strava-abandon-kom-dh-2790387-if-you-know-what-i-mean.png" />');
+		}
+		if (target === 'doge'){
+			matched = true;
+			this.sendReplyBox('<img src="http://0.media.dorkly.cvcdn.com/79/63/33f2d1f368e229c7e09baa64804307b4-a-wild-doge-appeared.jpg" height="242" width="300" />');
+		}
+		if (target === 'troll'){
+			matched = true;
+			this.sendReplyBox('<img src="http://static3.wikia.nocookie.net/__cb20131014231760/legomessageboards/images/c/c2/Troll-face.png" height="200" width="200" />');
+		}
+		if (target === 'fail'){
+			matched = true;
+			this.sendReplyBox('<img src="http://diginomica.com/wp-content/uploads/2013/11/+big-fail2.jpg" height="180" width="320" />');
+		}
+		if (target === 'wtf'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/rcwmZSE.png" />');
+		}
+		if (target === 'professor oak'){
+			matched = true;
+			this.sendReplyBox('<img src="http://fc05.deviantart.net/fs71/f/2012/092/a/b/not_sure_if___meme_8_by_therealfry1-d4urwmg.jpg" />');
+		}
+		if (target === 'hawkward'){
+			matched = true;
+			this.sendReplyBox('<img src="https://i.imgflip.com/e6cip.jpg" height="350" width="330" />');
+		}
+		if (target === 'i dont always'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/H0BPFem.jpg" height="314" width="320" />');
+		}
+		if (target === 'all of the homo'){
+			matched = true;
+			this.sendReplyBox('<img src="http://31.media.tumblr.com/tumblr_lurr17gQZ61r190lwo1_500.gif" height="143" width="250" />');
+		}
+		if (target === 'cool story bro'){
+			matched = true;
+			this.sendReplyBox('<img src="http://www.troll.me/images/creepy-willy-wonka/cool-story-bro-lets-hear-it-one-more-time.jpg" height="275" width="275" />');
+		}
+		if (target === 'udense'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i2.kym-cdn.com/photos/images/newsfeed/000/461/903/3a9.png" height="250" width="340" />');
+		}
+		if (target === 'dodge'){
+			matched = true;
+			this.sendReplyBox('<img src="http://weknowmemes.com/generator/uploads/generated/g1336276473177814171.jpg" height="250" width="256" />');
+		}
+		if (target === 'you dont say'){
+			matched = true;
+			this.sendReplyBox('<img src="http://www.wired.com/images_blogs/gamelife/2014/01/youdontsay.jpg" height="209" width="250" />');
+		}
+		if (target === 'cockblocked'){
+			matched = true;
+			this.sendReplyBox('<img src="http://www.quickmeme.com/img/27/27cf7456b43b14cc55bc557d678445f0048beca248d48779c902fbc1715d2753.jpg" height="300" width="300" />');
+		}
+		if (target === 'save the titanic'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/hl6VKnp.png" />');
+		}
+		if (target === 'ninjask\'d'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/ST7DNnh.png" />');
+		}
+		if (target === 'fuck this'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i3.kym-cdn.com/photos/images/original/000/571/700/c3a.gif" height="150" width="300" />');
+		}
+		if (target === 'slowbro'){
+			matched = true;
+			this.sendReplyBox('<img src="http://static.fjcdn.com/pictures/U_698d9e_2568950.jpg" height="216" width="199" />');
+		}
+		if (target === 'he has a point'){
+			matched = true;
+			this.sendReplyBox('<img src="http://m.memegen.com/56jc1t.jpg" height="192" width="256" />');
+		}
+		if (target === 'rekt'){
+			matched = true;
+			this.sendReplyBox('<img src="http://media.giphy.com/media/10GQalkPJf5Mm4/giphy.gif" height="250" width="300" />');
+		}
+		if (target === 'death stare'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.kinja-img.com/gawker-media/image/upload/s--IL80Wq6b--/spnlcrxx0fwzwtszk2fm.gif" height="169" width="318" />');
+		}
+		if (target === 'what is love'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i3.kym-cdn.com/photos/images/newsfeed/000/460/314/28d.gif" height="192" width="250" />');
+		}
+		if (target === 'badass'){
+			matched = true;
+			this.sendReplyBox('<img src="http://www.memelinks.com/watch-out-we-got-a-badass-over-here.jpg" height="242" width="313" />');
+		}
+		if (target === 'onixpected'){
+			matched = true;
+			this.sendReplyBox('<img src="https://s3.amazonaws.com/colorslive/png/1016349-V7YrNOJxjNbeeSYR.png" height="200" width="300" />');
+		}
+		if (target === 'wood hammer'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/kVOXqph.png" />');
+		}
+		if (target === 'excuses'){
+			matched = true;
+			this.sendReplyBox('<img src="http://cdn.memegenerator.net/instances/400x/37768972.jpg" height="200" width="200" />');
+		}
+		if (target === 'hax'){
+			matched = true;
+			this.sendReplyBox('<img src="http://cdn.memegenerator.net/instances/500x/52485639.jpg" height="188" width="250" />');
+		}
+		if (target === 'spheal with it'){
+			matched = true;
+			this.sendReplyBox('<img src="http://www.majhost.com/gallery/Ultimatetransfan/Reactions/spheal_with_it_2.jpg" />');
+		}
+		if (target === 'hazeel'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/z4lB7eO.gif" />');
+		}
+		if (target === 'trick master is love'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/6YvQuXX.png" width="411" height="204" />');
+		}
+		if (target === '7.8'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/Gi0jjuf.jpg" />');
+		}
+		if (target === 'adelf'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/1fBYWAv.png" width="130" height="218" />');
+		}
+		if (target === 'parukia'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/OjAOrK1.jpg" width="300" height="226" />');
+		}
+		if (target === 'fabulous'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/HsY0KpR.gif" />');
+		}
+		if (target === 'wrong neighborhood'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/aiv8eyj.gif" />');
+		}
+		if (target === 'i regret nothing'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/1brNf9v.gif" />');
+		}
+		if (target === 'twss'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/oEXOucr.jpg" />');
+		}
+		if (target === 'hm01'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/zl7CBuw.jpg" />');
+		}
+		if (target === 'bitch please'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/8hwtxWt.gif" />');
+		}
+		if (target === 'control your orgasms'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/QNO3TcF.gif" />');
+		}
+		if (target === 'haters gonna hate'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/FigQw0C.gif" />');
+		}
+		if (target === 'your mom'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/k5truy3.jpg" />');
+		}
+		if (target === 'shrekt'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/vXffwmY.jpg" />');
+		}
+		if (target === 'snickers'){
+			matched = true;
+			this.sendReplyBox('<img src="http://static.fjcdn.com/pictures/Grab+a+snickers+not+mine_b3375c_4726614.png" />');
+		}
+		if (target === 'baka'){
+			matched = true;
+			this.sendReplyBox('<img src="http://cdn.sakuramagazine.com/wp-content/uploads/2013/12/Baka-manga-34558590-640-512.jpg" width="320" height="256" />');
+		}
+		if (target === 'tits or gtfo'){
+			matched = true;
+			this.sendReplyBox('<img src="http://static.fjcdn.com/pictures/Tits_858516_1361125.jpg" width="250" height="329" />');
+		}
+		if (target === 'swiggity'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/9yZA32s.gif" />');
+		}
+		if (target === 'dat ass'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/2HHLEaV.jpg" />');
+		}
+		if (target === 'once you go'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/tkXIGCU.jpg" />');
+		}
+		if (target === 'i\'m really feeling it'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i1.kym-cdn.com/photos/images/newsfeed/000/824/456/8a4.jpg" height="210" width="320" />');
+		}
+		if (target === 'it\'s a trap'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i0.kym-cdn.com/photos/images/newsfeed/000/692/118/2db.jpg" height="169" width="250" />');
+		}
+		if (target === 'in a row?'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/W5K7Ey1.png" />');
+		}
+		if (target === 'russian spy'){
+			matched = true;
+			this.sendReplyBox('<img src="http://imgdonkey.com/big/VGpQeW5ZTw/bill-nye-the-gangsta-guy.gif" height"341" width="512" />');
+		}
+		if (target === 'batgirl'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/P6jTU8x.png" />');
+                }
+ 
+		if (target === 'eels'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/bztGksG.png" />');
+                }
+		if (target === 'oppai'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/saW5YpF.gif" />');
+                }
+                if (target === 'ara ara'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/oatm29d.jpg" width="420" height="252" />');
+                }
+                if (target === ''){
+			}
+		else if (!matched) {
+
+			this.sendReply(''+target+' is not available or non existent.');
+		}
+	},
+
+	donate: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Donate to Parukia to help us keep our servers online! We need about $350 before March 22nd of 2015.<br><b>If you donate, be sure to let an admin know so we can thank you personally!</b><br><br><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QPKGXD5TUBRVJ&lc=US&item_name=Parukia&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">Donate!</a><br><b>NOTE: You must be logged into a Paypal account to donate. To donate money without having a bank account, credit card or debit card (basically via cash), see this page on <a href="https://www.paypal.com/webapps/mpp/greendot-moneypak">MoneyPaks</a>.</b><br><br>Bitcoin: 15SvTTzqYat9pPyC94kLjV2kirqiAySLxL<br><br>We also accept donations via <a href="http://www.google.com/wallet/">Google Wallet!</a> Send all money to <b>ayyysexyladies@gmail.com</b> to be accepted via Paypal.<br><b>Note:</b> Your Google account must state that you are 18 years or older to donate this way!');
+	},
+	
+	forums: 'forum',
+	forum: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Join Parukia\'s forums and engage in more fun discussions with the community! <br />' +
+			'<a href="http://parukia.net/community/">http://parukia.net/community/</a>');
+	},
+	
+	parukiarules: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<font size="5" color="white"><b>The Parukian Guidelines</b></font><br><font size="3" color="white"><b>We don\'t follow the same rules as main!</b></font><br><br>0.) The most sacred rule on Parukia: All the best admins are born in December!<br>1.) There is no such thing as racism on Parukia.<br>2.) Hazeel is a nut, no matter how many times he denies it.<br>3.) ForexSenpai (Forethe x Oak) and Twin Flames (Blaze x Blade) are Parukia\'s OTPs(One True Pairings)!<br>4.) Playfully trolling one another is how we show we care<br>5.) We\'re all assholes, so if you\'re sensitive to certain issues warn us beforehand (no guarantee we\'ll respect that, though!)<br>6.) raiykid is rice, no exceptions.<br>7.) If you\'re not neutral with Red, you get no sympathy from the rest of us.<br>8.) If you pray to Jin, the hax grace will save you!<br>9.) If you piss off Niku, Oak will give you your last rites.<br>10.) Click all links at your own risk, it\'ll most likely be NSFW (in other words, you won\'t want your mother looking at it).<br>11.) Everything you say can and will be c/p\'d and turned into a dirty joke.<br>12.) Don\'t fuck with Blaze, Parukia\'s official mascot, or raiykid\'s gonna go all Canadian terrorist on your ass(ALALALALA EH?)<br>13.) You cannot go nope.avi to all these rules<br>14.) If you intended to go nope.avi to all these rules before reading #13, GG WP you\'ve just been rekt.<br>15.) Lost Saga cannot be found, please try again later.<br>16.) Accuracy hates you<br>17.) Nick is not poop, contrary to popular belief.<br>18.) GB can kick your ass in Project M. This rule is not up for debate, it is fact.<br>19.) If you stall, you will get haxed. This is undeniable law.<br>20.) Do not mess with a Starfish Nazi and a Mighty Tree!<br>21.) If you are asking y is the rum gone...raiy drank it all.<br>22.) If you have a fight, <b>settle it in smash!</b> If you don\'t have smash, you automatically lose!<br>23.) Paradoxical username user zero infinity is awesome when he\'s drunk!<br>24.) <a href="https://www.youtube.com/watch?v=qGyPuey-1Jw">Drunken Sailor</a> and <a href="https://www.youtube.com/watch?v=izGwDsrQ1eQ">Careless Whisper</a> are Parukia\'s official theme songs!<br>25.) If there\'s any work being done on the forum, 99% of the time it\'s Forethe doing it!<br>26.) If you have a complaint, write a formal business letter to the following address.<br>-Parukia Admins Inc.<br>Professor Oak Jr., Adelf, LostPhantom @ Private Message on Parukia-Server Lane 1001001<br>Open 42 hours a day!<br>27.) Qwilfish is LostPhantom\'s arch nemesis!<br>28.) Everyone on Parukia is Hazeel\'s love interest until proven male. ...And even then, he might still want you!<br>29.) Stay in school. Don\'t do drugs. Don\'t be a Haunter. ');
+
+        },
+        
+        parukiatiers: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Parukia\'s Tiers:<br><a href="http://parukia.net/community/threads/parukian-tier-system.294/">http://parukia.net/community/threads/parukian-tier-system.294/</a><br><br>If you believe something is broken and deserves to be banned/suspected, contact Nickoop@, Kamui Senketsu/Pikachudude, SP Scep or Redace100!');
+	},
+
+        away: function (target, room, user) {
+		user.away = !user.away;
+		user.updateIdentity();
+		this.sendReply("You are " + (user.away ? "now" : "no longer") + " away.");
+	},
+	
+	carelesswhispers: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Parukia\'s Careless Whispers Button:</b><br><a href="http://parukia.net/carelesswhispers.html">http://parukia.net/carelesswhispers.html</a>');
+	},
+	eating: 'away',
+       anime: 'away',
+       smashing: 'away',
+       shower: 'away',
+       forum: 'away',
+       gaming: 'away',
+       sleep: 'away',
+       work: 'away',
+       working: 'away',
+       sleeping: 'away',
+       busy: 'away',
+       afk: 'away',
+       away: function(target, room, user, connection, cmd) {
+            // unicode away message idea by Siiilver
+            var t = 'Ⓐⓦⓐⓨ';
+            var t2 = 'Away';
+            switch (cmd) {
+           case 'busy':
+t = 'Ⓑⓤⓢⓨ';
+t2 = 'Busy';
+break;
+case 'sleeping':
+t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+t2 = 'Sleeping';
+break;
+case 'sleep':
+t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+t2 = 'Sleeping';
+break;
+case 'gaming':
+t = 'Ⓖⓐⓜⓘⓝⓖ';
+t2 = 'Gaming';
+break;
+case 'working':
+t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
+t2 = 'Working';
+break;
+case 'work':
+t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
+t2 = 'Working';
+break;
+case 'eating':
+t = 'Ⓔⓐⓣⓘⓝⓖ';
+t2 = 'Eating';
+break;
+case 'anime':
+t = 'Ⓐⓝⓘⓜⓔ';
+t2 = 'Watching Anime';
+break;
+case 'smashing':
+t = 'Ⓢⓜⓐⓢⓗⓘⓝⓖ';
+t2 = 'Smashing';
+break;
+case 'shower':
+t = 'Ⓢⓗⓞⓦⓔⓡ';
+t2 = 'In the shower';
+break;
+case 'forum':
+t = 'Ⓕⓞⓡⓤⓜ';
+t2 = 'On the forum';
+break;
+default:
+t = 'Ⓐⓦⓐⓨ'
+t2 = 'Away';
+break;
+}
+ 
+if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
+ 
+if (!user.isAway) {
+user.originalName = user.name;
+var awayName = user.name + ' - '+t;
+//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+delete Users.get(awayName);
+user.forceRename(awayName, undefined, true);
+ 
+if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + user.originalName +'</font color></b> is now '+t2.toLowerCase()+'. '+ (target ? " (" + escapeHTML(target) + ")" : ""));
+ 
+user.isAway = true;
+}
+else {
+return this.sendReply('You are already set as a form of away, type /back if you are now back.');
+}
+ 
+user.updateIdentity();
+},
+ 
+back: function(target, room, user, connection) {
+ 
+if (user.isAway) {
+if (user.name === user.originalName) {
+user.isAway = false;
+return this.sendReply('Your name has been left unaltered and no longer marked as away.');
+}
+ 
+var newName = user.originalName;
+ 
+//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+delete Users.get(newName);
+ 
+user.forceRename(newName, undefined, true);
+ 
+//user will be authenticated
+user.authenticated = true;
+ 
+if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + newName + '</font color></b> is no longer away.');
+ 
+user.originalName = '';
+user.isAway = false;
+}
+else {
+return this.sendReply('You are not set as away.');
+}
+ 
+user.updateIdentity();
+},
 };

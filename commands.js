@@ -1690,6 +1690,30 @@ var commands = exports.commands = {
 
 		room.battle.send('eval', target.replace(/\n/g, '\f'));
 	},
+	hide: 'hideauth',
+         hideauth: function(target, room, user) {
+            if (!this.can('hotpatch')) return false;
+            if (target === '~') return this.sendReply("You are already an administrator.");
+            user.getIdentity = function() {
+                    if (this.muted) return '!' + this.name;
+                            if (this.locked) return '‽' + this.name;
+                    return target + this.name;
+            };
+            user.updateIdentity();
+            if (target === '+') return this.sendReply("You are now hiding as a voice.");
+            if (target === '%') return this.sendReply("You are now hiding as a driver.");
+            if (target === '@') return this.sendReply("You are now hiding as a moderator.");
+            if (target === '&') return this.sendReply("You are now hiding as a leader.");
+            },
+
+        
+         show: 'showauth',
+         showauth: function(target, room, user) {
+            if (!this.can('hotpatch')) return false;
+            delete user.getIdentity;
+            user.updateIdentity();
+            this.sendReply("You are now showing your group.");
+         },
 
 	/*********************************************************
 	 * Battle commands

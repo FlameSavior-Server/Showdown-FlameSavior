@@ -5963,6 +5963,30 @@ exports.commands = {
 			'<a href="https://www.youtube.com/watch?v=Zf_QxUTueO0"><button>Git gud m9</button></a></center>'
 		);
 	},
+	
+	bug: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><p><img src="http://i.imgur.com/T5S1Ctc.gif" width=400 height=60></p>' +
+			'<strong><p><img src="http://media.pldh.net/pokemon/gen6/xy-animated/637.gif" alt="volcarona" /> ' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/212.gif" alt="scizor" /> ' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/127-mega.gif" alt="pinsir" /> ' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/596.gif" alt="galvantula" /> ' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/348.gif" alt="armaldo" /> ' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/649.gif" alt="genesect" /> ' +
+			'<p><b>Ace:</b> Inwhale, Syb3r, MaddMatt, EricSayshi, Wyv, Swarm</p>' +
+			'<p>"Bug Movie 3: The Road to Generic"</p></center>'
+		);
+	},
+	
+	one: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/X3fJccD.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/charizard-mega-x.gif"><br />' +
+			'<img src="http://i.gyazo.com/060ffc19e10754aa0df9159540afc1e1.png"><br />' +
+			'<b>Stratagem:</b> Outplaying<br>Destroying you and not giving a fuck requires the same effort<br />' +
+			'#HighestELO</center>'
+		);
+	},
 		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

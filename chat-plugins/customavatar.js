@@ -60,6 +60,7 @@ const script = function () {
 var pendingAdds = {};
 
 exports.commands = {
+	sca: 'customavatar',
 	customavatars: 'customavatar',
 	customavatar: function (target, room, user) {
 		var parts = target.split(',');

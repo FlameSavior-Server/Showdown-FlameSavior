@@ -511,25 +511,6 @@ exports.BattleFormats = {
 			return problems;
 		}
 	},
-	parukianbatonpassclause: {
-		effectType: 'Banlist',
-		name: 'Parukian Baton Pass Clause',
-		onStart: function () {
-			this.add('rule', 'Baton Pass Clause: Limit two Pokémon knowing Baton Pass');
-		},
-		validateTeam: function (team, format) {
-			var problems = [];
-			var BPcount = 0;
-			for (var i = 0; i < team.length; i++) {
-				if (team[i].moves.indexOf('Baton Pass') > -1) BPcount++;
-				if (BPcount > 2) {
-					problems.push("You are limited to two Pokémon with the move Baton Pass by the Baton Pass Clause.");
-					break;
-				}
-			}
-			return problems;
-		}
-	},
 	hppercentagemod: {
 		effectType: 'Rule',
 		name: 'HP Percentage Mod',

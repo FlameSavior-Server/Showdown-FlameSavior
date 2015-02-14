@@ -741,7 +741,7 @@ exports.Formats = [
 		section: "Parukian Tiers",
 		mod: 'parukia',
 
-		ruleset: ['Pokemon', 'Standard Ubers', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Ban Mod',],
+		ruleset: ['Pokemon', 'Standard Ubers', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Ban Mod'],
 		banlist: ['Blue Orb', 'Red Orb']
 	},
 	{
@@ -757,7 +757,7 @@ exports.Formats = [
 		section: "Parukian Tiers",
 		mod: 'parukia',
 
-		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Parukian Baton Pass Clause'],
 		banlist: ['OU', 'Charizardite X', 'Galladite', 'Latiosite', 'Lucarionite', 'Mawilite', 'Metagrossite', 'Sablenite', 'Slowbronite']
 	},
 	{

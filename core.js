@@ -80,6 +80,7 @@ emoticons: {
         'PraiseIt': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-23140-src-4392fbfc603bd454-28x28.png',
         'BruH': 'http://i.imgur.com/L7zPFLJ.png',
         'SrSly': 'http://i.imgur.com/pMJKIDW.png',
+        'LetItGo': 'http://i.picresize.com/images/2015/02/14/rgN5R.jpg',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

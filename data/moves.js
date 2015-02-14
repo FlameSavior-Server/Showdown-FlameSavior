@@ -5776,12 +5776,6 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {},
 		weather: 'hail',
-		onTry: function (target, source) {
-			if (this.isWeather(['desolateland', 'primordialsea', 'deltastream'])) {
-				this.add('-fail', source, 'move: Hail', '[from]: ' + this.effectiveWeather());
-				return null;
-			}
-		},
 		secondary: false,
 		target: "all",
 		type: "Ice"
@@ -10862,12 +10856,6 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {},
 		weather: 'RainDance',
-		onTry: function (target, source) {
-			if (this.isWeather(['desolateland', 'primordialsea', 'deltastream'])) {
-				this.add('-fail', source, 'move: Rain Dance', '[from]: ' + this.effectiveWeather());
-				return null;
-			}
-		},
 		secondary: false,
 		target: "all",
 		type: "Water"
@@ -11841,12 +11829,6 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {},
 		weather: 'Sandstorm',
-		onTry: function (target, source) {
-			if (this.isWeather(['desolateland', 'primordialsea', 'deltastream'])) {
-				this.add('-fail', source, 'move: Sandstorm', '[from]: ' + this.effectiveWeather());
-				return null;
-			}
-		},
 		secondary: false,
 		target: "all",
 		type: "Rock"
@@ -13869,12 +13851,6 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {},
 		weather: 'sunnyday',
-		onTry: function (target, source) {
-			if (this.isWeather(['desolateland', 'primordialsea', 'deltastream'])) {
-				this.add('-fail', source, 'move: Sunny Day', '[from]: ' + this.effectiveWeather());
-				return null;
-			}
-		},
 		secondary: false,
 		target: "all",
 		type: "Fire"

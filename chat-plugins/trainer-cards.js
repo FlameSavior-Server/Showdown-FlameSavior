@@ -5997,6 +5997,15 @@ exports.commands = {
 			'<img src="http://s12.postimg.org/3ruzynnu5/screenshot_225.png"></center>'
 		);
 	},
+	
+	holly: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src = "http://poopoowebsite.weebly.com/uploads/3/7/3/1/37317497/3001943_orig.gif"><br />' +
+			'<img src = "http://i.minus.com/iSheR7zA8cQ1j.gif"><br />' +
+			'<b>Ace:</b> Professor Aon, Mega Ampharos<br />' +
+			'Quote: AND IN THE MORNIN\' I\'M FIRED UP, RA RA RA ETC.</center>'
+		);
+	},
 		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

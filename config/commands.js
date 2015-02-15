@@ -2110,7 +2110,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'spheal with it'){
 			matched = true;
-			this.sendReplyBox('<img src="http://i.imgur.com/fqijYH7.jpg" width="457" height="437" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/fqijYH7.jpg" width="229" height="219" />');
 		}
 		if (target === 'hazeel'){
 			matched = true;

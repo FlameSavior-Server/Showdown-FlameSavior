@@ -1568,7 +1568,7 @@ var commands = exports.commands = {
 			"fell into the void.",
 			"was crushed by Onix!",
 			"became Rowan's slave!",
-			"became ShadowGlaceons's love slave!",
+			"became Broken Hope's love slave!",
 			"has left the building.",
 			"felt Gamebreaker's wrath!",
 			"died of a broken heart.",
@@ -1587,7 +1587,7 @@ var commands = exports.commands = {
 			"peered through the hole on Shedinja's back",
 			"received judgment from the almighty Arceus!",
 			"used Final Gambit and missed!",
-			"pissed off a AI Kuroha!",
+			"pissed off AI Kuroha!",
 			"was frozen by Kyurem-Black!",
 			"was actually a 12 year and was banned for COPPA.",
 			"got lost in the illusion of reality.",
@@ -1602,6 +1602,8 @@ var commands = exports.commands = {
 			"was splashed by a Magikarp!",
 			"said Adelf x Niku!",
 			"tried to take Gasper from Hazeel!"
+			"was impaled by Blade!"
+			"got taken to Dante's rape dungeon!"
 		];
 
 		return function (target, room, user) {
@@ -1964,7 +1966,7 @@ var commands = exports.commands = {
 		var matched = false;
 		if (target === ''){
 			matched = true;
-			this.sendReplyBox('<b><font color="purple">List of memes:<br><br>-Aliens<br>-Fragequit<br>-Fuck yeah<br>-Umad<br>-Burnheal<br>-OU Train<br>-Gary Train<br>-If you know what I mean<br>-Doge<br>-Troll<br>-Fail<br>-Wtf<br>-Hawkward<br>-I dont always<br>-So hard<br>-ALL OF THE HOMO<br>-Cool story bro<br>-Udense<br>-Professor Oak<br>-Dodge<br>-You dont say<br>-Cockblocked<br>-Save the Titanic<br>-Ninjask\'d<br>-Fuck this<br>-Slowbro<br>-He has a point<br>-Rekt<br>-Death Stare<br>-What is love<br>-Badass<br>-Onixpected<br>-Wood Hammer<br>-Excuses<br>-Hax<br>-Spheal with it<br>-Hazeel<br>-Trick master is love<br>-7.8<br>-Adelf<br>-Parukia<br>-Fabulous<br>-I regret nothing<br>-Wrong neighborhood<br>-TWSS<br>-HM01<br>-Bitch please<br>-Control your orgasms<br>-Haters gonna hate<br>-Your mom<br>-shrekt<br>-Snickers<br>-Baka<br>-Tits or gtfo<br>-Swiggity<br>-Dat Ass<br>-Once you go<br>-I\'m really feeling it<br>-It\'s a trap<br>-In a row?<br>-Russian Spy<br>-Batgirl<br>-Eels<br>-Oppai<br>-Ara ara<br>-Reggie<br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b>');
+			this.sendReplyBox('<b><font color="purple">List of memes:<br><br>-Aliens<br>-Fragequit<br>-Fuck yeah<br>-Umad<br>-Burnheal<br>-OU Train<br>-Gary Train<br>-If you know what I mean<br>-Doge<br>-Troll<br>-Fail<br>-Wtf<br>-Hawkward<br>-I dont always<br>-So hard<br>-ALL OF THE HOMO<br>-Cool story bro<br>-Udense<br>-Professor Oak<br>-Dodge<br>-You dont say<br>-Cockblocked<br>-Save the Titanic<br>-Ninjask\'d<br>-Fuck this<br>-Slowbro<br>-He has a point<br>-Rekt<br>-Death Stare<br>-What is love<br>-Badass<br>-Onixpected<br>-Wood Hammer<br>-Excuses<br>-Hax<br>-Spheal with it<br>-Hazeel<br>-Trick master is love<br>-7.8<br>-Adelf<br>-Parukia<br>-Fabulous<br>-I regret nothing<br>-Wrong neighborhood<br>-TWSS<br>-HM01<br>-Bitch please<br>-Control your orgasms<br>-Haters gonna hate<br>-Your mom<br>-shrekt<br>-Snickers<br>-Baka<br>-Tits or gtfo<br>-Swiggity<br>-Dat Ass<br>-Once you go<br>-I\'m really feeling it<br>-It\'s a trap<br>-In a row?<br>-Russian Spy<br>-Batgirl<br>-Eels<br>-Oppai<br>-Ara ara<br>-Reggie<br>-Turnips<br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b>');
                 }
 		if (target === 'aliens'){
 			matched = true;
@@ -2108,7 +2110,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'spheal with it'){
 			matched = true;
-			this.sendReplyBox('<img src="http://www.majhost.com/gallery/Ultimatetransfan/Reactions/spheal_with_it_2.jpg" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/fqijYH7.jpg" width="457" height="437" />');
 		}
 		if (target === 'hazeel'){
 			matched = true;
@@ -2230,6 +2232,10 @@ var commands = exports.commands = {
                 if (target === 'reggie'){
                         matched = true;
                         this.sendReplyBox('<img src="http://i.imgur.com/GAmQpRW.png" />');
+                }
+                if (target === 'turnips'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/90ul0xS.png" />');
                 }
                 if (target === ''){
 			}

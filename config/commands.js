@@ -1964,7 +1964,7 @@ var commands = exports.commands = {
 		var matched = false;
 		if (target === ''){
 			matched = true;
-			this.sendReplyBox('<b><font color="purple">List of memes:<br><br>-Aliens<br>-Fragequit<br>-Fuck yeah<br>-Umad<br>-Burnheal<br>-OU Train<br>-Gary Train<br>-If you know what I mean<br>-Doge<br>-Troll<br>-Fail<br>-Wtf<br>-Hawkward<br>-I dont always<br>-So hard<br>-ALL OF THE HOMO<br>-Cool story bro<br>-Udense<br>-Professor Oak<br>-Dodge<br>-You dont say<br>-Cockblocked<br>-Save the Titanic<br>-Ninjask\'d<br>-Fuck this<br>-Slowbro<br>-He has a point<br>-Rekt<br>-Death Stare<br>-What is love<br>-Badass<br>-Onixpected<br>-Wood Hammer<br>-Excuses<br>-Hax<br>-Spheal with it<br>-Hazeel<br>-Trick master is love<br>-7.8<br>-Adelf<br>-Parukia<br>-Fabulous<br>-I regret nothing<br>-Wrong neighborhood<br>-TWSS<br>-HM01<br>-Bitch please<br>-Control your orgasms<br>-Haters gonna hate<br>-Your mom<br>-shrekt<br>-Snickers<br>-Baka<br>-Tits or gtfo<br>-Swiggity<br>-Dat Ass<br>-Once you go<br>-I\'m really feeling it<br>-It\'s a trap<br>-In a row?<br>-Russian Spy<br>-Batgirl<br>-Eels<br>-Oppai<br>-Ara ara<br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b>');
+			this.sendReplyBox('<b><font color="purple">List of memes:<br><br>-Aliens<br>-Fragequit<br>-Fuck yeah<br>-Umad<br>-Burnheal<br>-OU Train<br>-Gary Train<br>-If you know what I mean<br>-Doge<br>-Troll<br>-Fail<br>-Wtf<br>-Hawkward<br>-I dont always<br>-So hard<br>-ALL OF THE HOMO<br>-Cool story bro<br>-Udense<br>-Professor Oak<br>-Dodge<br>-You dont say<br>-Cockblocked<br>-Save the Titanic<br>-Ninjask\'d<br>-Fuck this<br>-Slowbro<br>-He has a point<br>-Rekt<br>-Death Stare<br>-What is love<br>-Badass<br>-Onixpected<br>-Wood Hammer<br>-Excuses<br>-Hax<br>-Spheal with it<br>-Hazeel<br>-Trick master is love<br>-7.8<br>-Adelf<br>-Parukia<br>-Fabulous<br>-I regret nothing<br>-Wrong neighborhood<br>-TWSS<br>-HM01<br>-Bitch please<br>-Control your orgasms<br>-Haters gonna hate<br>-Your mom<br>-shrekt<br>-Snickers<br>-Baka<br>-Tits or gtfo<br>-Swiggity<br>-Dat Ass<br>-Once you go<br>-I\'m really feeling it<br>-It\'s a trap<br>-In a row?<br>-Russian Spy<br>-Batgirl<br>-Eels<br>-Oppai<br>-Ara ara<br>-Reggie<br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b>');
                 }
 		if (target === 'aliens'){
 			matched = true;
@@ -2226,6 +2226,10 @@ var commands = exports.commands = {
                 if (target === 'ara ara'){
                         matched = true;
                         this.sendReplyBox('<img src="http://i.imgur.com/oatm29d.jpg" width="420" height="252" />');
+                }
+                if (target === 'reggie'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/GAmQpRW.png" />');
                 }
                 if (target === ''){
 			}

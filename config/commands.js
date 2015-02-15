@@ -1601,8 +1601,8 @@ var commands = exports.commands = {
 			"used Run Away!",
 			"was splashed by a Magikarp!",
 			"said Adelf x Niku!",
-			"tried to take Gasper from Hazeel!"
-			"was impaled by Blade!"
+			"tried to take Gasper from Hazeel!",
+			"was impaled by Blade!",
 			"got taken to Dante's rape dungeon!"
 		];
 

@@ -162,7 +162,8 @@ exports.customavatars = {
 	//'userid': 'customavatar.png'
 	'adelf': 'avPHbWa.png',
 	'rebellionphantom': '6ECChqw.png',
-	'frage74': 'cDzy6In.gif'
+	'frage74': 'cDzy6In.gif',
+	'professoroakjr': 'tDRs344.gif'
 };
 
 // appealurl - specify a URL containing information on how users can appeal

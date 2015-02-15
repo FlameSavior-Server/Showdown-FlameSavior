@@ -5987,6 +5987,16 @@ exports.commands = {
 			'#HighestELO</center>'
 		);
 	},
+	
+	boosting: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/UrXL0Qz.png" width="500">' +
+			'<img src="http://i.imgur.com/Vnx2KH5.png" width="175"><br />' +
+			'<b>Ace:</b> Arifeen<br />' +
+			'Remember kids, it\'s not the fact that you cheated, it\'s the fact that you got caught :^)<br />' +
+			'<img src="http://s12.postimg.org/3ruzynnu5/screenshot_225.png"></center>'
+		);
+	},
 		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

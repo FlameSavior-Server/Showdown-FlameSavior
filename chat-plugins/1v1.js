@@ -17,7 +17,7 @@ exports.commands = {
 		if (one === 'nu') reply = "Anything RU or above.";
 		if (one === 'lc') reply = "Anything in LC Ubers, anything that cannot evolve, anything that has a pre-evolution.";
 		if (one === 'ubers') reply = "Nothing but Ditto and Smeargle.";
-		if (one === 'monoletter') reply = "A random letter is picked, only Pokemon starting with this letter can be used.;
+		if (one === 'monoletter') reply = "A random letter is picked, only Pokemon starting with this letter can be used.";
 		if (one === 'monotype') reply = "A random type is picked, only Pokemon of this type can be used.";
 		if (one === 'monocolor') reply = "A random color is picked, only Pokemon of this color can be used. Helpul <a href=" http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color">Link</a>.";
 		if (one === 'monopoke') reply =  "A random Pokemon is picked, and only that pokemon can be used.";

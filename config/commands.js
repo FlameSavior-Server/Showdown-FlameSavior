@@ -2250,8 +2250,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('Donate to Parukia to help us keep our servers online! We need about $350 before March 22nd of 2015.<br><b>If you donate, be sure to let an admin know so we can thank you personally!</b><br><br><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QPKGXD5TUBRVJ&lc=US&item_name=Parukia&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">Donate!</a><br><b>NOTE: You must be logged into a Paypal account to donate. To donate money without having a bank account, credit card or debit card (basically via cash), see this page on <a href="https://www.paypal.com/webapps/mpp/greendot-moneypak">MoneyPaks</a>.</b><br><br>Bitcoin: 15SvTTzqYat9pPyC94kLjV2kirqiAySLxL<br><br>We also accept donations via <a href="http://www.google.com/wallet/">Google Wallet!</a> Send all money to <b>ayyysexyladies@gmail.com</b> to be accepted via Paypal.<br><b>Note:</b> Your Google account must state that you are 18 years or older to donate this way!');
 	},
 	
-	forums: 'forum',
-	forum: function(target, room, user) {
+	parukiaforums: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Join Parukia\'s forums and engage in more fun discussions with the community! <br />' +
 			'<a href="http://parukia.net/community/">http://parukia.net/community/</a>');

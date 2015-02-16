@@ -47,13 +47,14 @@ exports.commands = {
 		);
 	},
 
-	ericxwander: function (target, room, user) {
+	erisawa: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/cDfUDBo.gif" width="120">' +
-			'<img src="http://i.imgur.com/F8R91fa.png" width="280">' +
-			'<img src="http://i.imgur.com/Ot5X2zu.png" width="130"><br />' +
-			'<b>Ace:</b> No Flex Zone and Dick Pinch<br />' +
-			'<img src="http://i.imgur.com/csVEwAx.png" width="300"></center>'
+		this.sendReplyBox('<center><img src=http://i.imgur.com/tS8YxEn.gif height=130 width=250>' +
+			'<img src=http://www.gaijinside.com/wp-content/uploads/2011/04/vlcsnap-2011-03-22-13h50m14s235.png height=130 width=250>' +
+			'<img src=http://i.imgur.com/xb7bC10.gif height=130 width=250><br />' +
+			'<img src=http://i.imgur.com/8hB4vR3.png><br />' +
+			'<font size=4><b><blink><marquee behaviour="alternate" direction="left" scrollamount="20">Ace: Not being American</marquee><b><marquee behaviour="alternate" direction="right" scrollamount="20">' +
+			'<b>Quote: </b>Perfection achieved</marquee></br></blink></font></center>'
 		);
 	},
 
@@ -3702,11 +3703,10 @@ exports.commands = {
 
 	roy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/zjvesHI.png" width="180">' +
-			'<img src="http://i.imgur.com/f4lVyZA.gif">' +
-			'<img src="http://i.imgur.com/rB1AVZ2.jpg" height="140"><br />' +
-			'<b>Ace:</b> Gallade<br />' +
-			'You sure talk a lot for someone who loses fairly quickly.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/JyqHCLy.png">' +
+			'<img src="http://i.imgur.com/Q9IoApg.gif">' +
+			'<img src="http://i.imgur.com/CxgAyfG.jpg?1" height = 200><br />' +
+			'<b>Ace:</b> Ampharos<br />"Moving on doesn\'t mean you forget about things. It just means you have to accept what happened and continue living."</center>'
 		);
 	},
 
@@ -5449,11 +5449,11 @@ exports.commands = {
 
 	wyvern: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<img src="http://media.giphy.com/media/tifCTtoW05XwY/giphy.gif" height="80" width="125">' +
-			'<img src="http://i.imgur.com/C7x8Fxe.gif" height="90" width="300">' +
-			'<img src="http://brony.cscdn.us/pic/photo/2013/07/e00cb1f5fa33b5be7ad9127e7f7c390d_1024.gif" height="80" width="125"><br />' +
-			'<b>Ace:</b> Noivern<br />' +
-			'<b>My armor is like tenfold shields, my teeth are swords, my claws spears, the shock of my tail a thunderbolt, my wings a hurricane, and my breath death!</b></center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/rT72G3U.png" width = 150>' +
+			'<img src="http://i.imgur.com/juhPQbg.png" width = 400>' +
+			'<img src="http://i.imgur.com/VrKS800.png" width = 150><br />' +
+			'<b>Ace: </b>Ungeneric Bug<br />' +
+			'<b>Quote: </b>We are all be in the gutter, but some of us are looking at the stars.</center>'
 		);
 	},
 
@@ -6004,6 +6004,37 @@ exports.commands = {
 			'<img src = "http://i.minus.com/iSheR7zA8cQ1j.gif"><br />' +
 			'<b>Ace:</b> Professor Aon, Mega Ampharos<br />' +
 			'Quote: AND IN THE MORNIN\' I\'M FIRED UP, RA RA RA ETC.</center>'
+		);
+	},
+	
+	minky: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/XmO6WET.png">' +
+			'<img src="http://i.imgur.com/inyaijO.png" width = 300>' +
+			'<img src="http://i.imgur.com/wE8qJNh.png">' +
+			'<p><b>Ace:</b> Link and Mac</p>' +
+			'<p>Quote: “Love differs from one another, but love for us is just being able to talk to each other.”</p>' +
+			'<img src="http://i.imgur.com/SGa0y5u.png" width = 200></center>'
+		);
+	},
+	
+	randorosu: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://images.cooltext.com/4120753.png"><br />' +
+			'<img src="http://images.cooltext.com/4120686.png" width = 100>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/tyranitar.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/hydreigon.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mandibuzz.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/houndoom.gif"><br />' +
+			'<img src="http://images.cooltext.com/4120725.png" width = 150>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus-therian.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/garchomp-mega.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/seismitoad.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif"><br />' +
+			'<font color="brown"><b>Ace: My Squadron</b></font><br />' +
+			'<b><font color="purple">I\'ll pound you into the <i>GROUND</i> bruh.</font></b><br />' +
+			'<font color="brown">"It\'s dark when you\'re 6ft underground."</font><br />' +
+			'<button name="send" value="/transferbucks Randorosu Bank, 1">Please abolish the struggles. Donate a buck now! :]</button></center>'
 		);
 	},
 		

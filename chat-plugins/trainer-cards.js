@@ -5453,7 +5453,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/juhPQbg.png" width = 400>' +
 			'<img src="http://i.imgur.com/VrKS800.png" width = 150><br />' +
 			'<b>Ace: </b>Ungeneric Bug<br />' +
-			'<b>Quote: </b>We are all be in the gutter, but some of us are looking at the stars.</center>'
+			'<b>Quote: </b>We are all in the gutter, but some of us are looking at the stars.</center>'
 		);
 	},
 

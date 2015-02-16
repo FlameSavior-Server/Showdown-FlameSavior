@@ -73,14 +73,14 @@ exports.commands = {
 			return this.sendReplyBox(message);
 		}
 
-		if (!this.can('customavatar') && !user.vip) return false;
+		if (!this.can('pban') && !user.vip) return false;
 
 		switch (cmd) {
 			case 'set':
 				var userid = toId(parts[1]);
 				var targetUser = Users.getExact(userid);
 				var avatar = parts.slice(2).join(',').trim();
-				if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
+				if (!this.can('pban') && user.vip && userid !== user.userid) return false;
 
 				if (!userid) return this.sendReply("You didn't specify a user.");
 				if (Config.customavatars[userid]) return this.sendReply(userid + " already has a custom avatar.");
@@ -97,7 +97,7 @@ exports.commands = {
 
 				/* falls through */
 			case 'forceset':
-				if (user.avatarCooldown && !this.can('customavatar')) {
+				if (user.avatarCooldown && !this.can('pban')) {
 					var milliseconds = (Date.now() - user.avatarCooldown);
 					var seconds = ((milliseconds / 1000) % 60);
 					var minutes = ((seconds / 60) % 60);
@@ -126,15 +126,15 @@ exports.commands = {
 					if (targetUser) targetUser.avatar = Config.customavatars[userid];
 
 					this.sendReply(userid + "'s custom avatar has been set.");
-					Users.messageSeniorStaff(userid+' has received a custom avatar from '+user.name);
-					Rooms.rooms.seniorstaff.add(userid+' has received a custom avatar from '+user.name);
+					//Users.messageSeniorStaff(userid+' has received a custom avatar from '+user.name);
+					Rooms.rooms.staff.add(userid+' has received a custom avatar from '+user.name);
 					room.update();
 				}.bind(this));
 				break;
 
 			case 'delete':
 				var userid = toId(parts[1]);
-				if (!this.can('customavatar') && user.vip && userid !== user.userid) return false;
+				if (!this.can('pban') && user.vip && userid !== user.userid) return false;
 				if (!Config.customavatars[userid]) return this.sendReply(userid + " does not have a custom avatar.");
 
 				if (Config.customavatars[userid].toString().split('.').slice(0, -1).join('.') !== userid)

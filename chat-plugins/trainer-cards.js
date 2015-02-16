@@ -5978,7 +5978,7 @@ exports.commands = {
 		);
 	},
 	
-	one: function (target, room, user) {
+	/*one: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/X3fJccD.png"><br />' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/charizard-mega-x.gif"><br />' +
@@ -5986,7 +5986,7 @@ exports.commands = {
 			'<b>Stratagem:</b> Outplaying<br>Destroying you and not giving a fuck requires the same effort<br />' +
 			'#HighestELO</center>'
 		);
-	},
+	},*/
 	
 	boosting: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

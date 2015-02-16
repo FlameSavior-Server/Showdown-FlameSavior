@@ -33,7 +33,7 @@ exports.commands = {
 		if (one === 'megaevos') reply = "Another Custom Game format, this one allowing only Mega Evolutions to be used (with items other than mega stones). Here is its <a href=\"http://pastebin.com/Q3j0d6He\">banlist</a>.";
 		if (one === 'stabmons') reply = "Pokemon may use any move sharing a type with them in addition to normally learned moves.";
 		if (one === 'aaa') reply = "Pokemon are allowed to have almost any ability, with Ubers banned in addition to everything on the thread <a href=\"http://www.smogon.com/forums/threads/almost-any-ability-xy-aaa-xy-other-metagame-of-the-month-may.3495737/\">here</a>, and sturdy.";
-		if (one === 'alphabetcup') reply = " Abbreviated as \"abc cup,\" this is a 1v1 tour set in the alphabet cup <a href=\"http://www.smogon.com/forums/threads/alphabet-cup-other-metagame-of-the-month-march.3498167/">tier</a>.";
+		if (one === 'alphabetcup') reply = "Abbreviated as \"abc cup,\" this is a 1v1 tour set in the alphabet cup <a href=\"http://www.smogon.com/forums/threads/alphabet-cup-other-metagame-of-the-month-march.3498167/\">tier</a>.";
 		if (one === 'averagemons') reply = "All stats of Pokemon are set to 100! See <a href=\"http://www.smogon.com/forums/threads/averagemons.3495527/\">here</a>. Selection: These formats require you to pick one Poke from a team of six.";
 		if (one === 'selection') reply = "These formats require you to pick one Poke from a team of six.";
 		if (one === 'abilityshift') reply = "Each Pokemon gains the ability that comes next in alphabetical order: <a href=\"http://www.smogon.com/forums/threads/ability-shift.3503100/\">Smogon Reference</a>, <a href=\"http://serebii.net/abilitydex/\">Serebii Reference</a>. No greninja or parental bond.";

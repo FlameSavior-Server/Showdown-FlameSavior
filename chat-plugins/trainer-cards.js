@@ -1275,13 +1275,14 @@ exports.commands = {
 		);
 	},
 
-	isawa: function (target, room, user) {
+	isaac: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/IELB4R4.jpg" width="130">' +
-			'<img src="http://i.imgur.com/Ae2qA0Q.gif" width="280">' +
-			'<img src="http://fc04.deviantart.net/fs71/f/2010/264/8/3/eevee_umbreon_by_aerius_the_aireon-d2z7wsp.png" width="130"><br />' +
-			'<font size="3" color="red"><b>Ace:</b></font> <font color="orange">Chrisawa</font><br />' +
-			'<b><font color="orange">Quote:</font></b> <font color="red">Dancin\' in the Moonlight</font></center>'
+		this.sendReplyBox('<center><img src="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/char_1751.jpg"height="170" width="170"> &nbsp; ' +
+			'<img src=http://mentalfloss.com/sites/default/files/renstimpy_0.jpg height="170" width="250"> &nbsp; ' +
+			'<img src="http://img4.wikia.nocookie.net/__cb20140730083329/creepypasta/images/a/a5/Courage_the_cowardly_dog_meme_by_cartoonanimes4ever-d6x748r.jpg" height="170" width="250"><br />' +
+			'<img src="http://i.imgur.com/ljh2eXw.png"></br><br>' +
+			'<font size=4><b><blink><marquee behaviour="alternate" direction="left" scrollamount="20"><font color="blue">Ace: Accident & Emergency</marquee>' +
+			'<b><font color="orange"><marquee behaviour="alternate" direction="right" scrollamount="20"><b>Quote: </b>We go one inside the other.</marquee></br></blink></font></center>'
 		);
 	},
 
@@ -6038,6 +6039,17 @@ exports.commands = {
 		);
 	},
 		
+	crimson: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img title="☂" src="http://images.cooltext.com/4123207.png" width="373" height="80" alt="Crimson" /><br />' +
+			'<button title="Lemme drain your bucks" class="broadcast-green" name="send" value="/transferbucks crimsontorrent, 1">Give me 1 buck!</button> ' +
+			'<button title="I\'m a thirsty bitch" class="broadcast-green" name="send" value="/transferbucks crimsontorrent, 5">Give me 5 bucks!</button><br />' +
+			'<img title="Grass > All" src="http://i.imgur.com/8UbWFE6.png" height="200" /><br />' +
+			'<font color="red"><b>Ace:</b></font> <font color="#333300"><b>Your health points.</b></font><br />' +
+			'<i>You don\'t eat veggies, veggies eat you! ;3</i></center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

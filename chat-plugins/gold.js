@@ -580,7 +580,7 @@ exports.commands = {
             );
         }
     },
-
+    /*
     one: function(target, room, user) {
         if (room.id !== '1v1') return this.sendReply("This command can only be used in 1v1.");
         if (!this.canBroadcast()) return;
@@ -621,7 +621,7 @@ exports.commands = {
             this.sendReplyBox('Available commands for /one: ' + Object.keys(messages).join(', '));
         }
     },
-
+    */
     color: function(target, room, user) {
         if (!this.canBroadcast()) return;
         if (target === 'list' || target === 'help' || target === 'options') {

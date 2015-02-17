@@ -23,7 +23,7 @@ exports.commands = {
 			if (ot === 'colors') reply = "All starters given will be of the certain color that is decided by the host or picked randomly. One voice or higher will host. One voice or higher will host. Rules are <a href=\"https://docs.google.com/document/d/1VMATySDZCOh5cj5FmgRjOX005pHWtCS3jfS468O-QUc/edit?pli=1\">here</a>.";
 			if (ot === 'seasonal') reply = "These tours follow a monthly basis. One voice or higher will host. All the months themes can be found <a href=\"https://docs.google.com/document/d/1PtC2QsEsyyDJCBvRCdtH2uA1YC1CFBD10nAhsXXA4vk/edit?pli=1\">here</a>.";
 			if (ot === 'metronome') reply = "You may use one pokemon. Rules are <a href=\"http://pastebin.com/XjKvmpWw\">here</a>.";
-			if (!ot || ot === 'help') reply = "For information on how to use this command, go <a href=\"https://raw.githubusercontent.com/jd4565/Pokemon-Showdown/master/chat-plugins/1v1.js\">here</a>.";
+			if (!ot || ot === 'help') reply = "For information on how to use this command, go <a href=\"https://raw.githubusercontent.com/jd4565/Pokemon-Showdown/master/chat-plugins/othertiers.js\">here</a>.";
 			
 			this.sendReplyBox("<b>" + ot + "</b> - " + reply);
 		}

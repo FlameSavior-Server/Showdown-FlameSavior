@@ -11,7 +11,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		var one = toId(target);
 		if (one === 'poll') {
-			me.chat('/poll Which 1v1 Type?, reg, uu, ru, nu, lc, ubers, monoletter, monotype, monocolor, monopoke, monogen, cap, starters, eeveelutions, bst-based, l&e, inverse, metronome, mega evos, stabmons 1v1, aaa 1v1, abc cup, averagemons, abilityshift, balancedhackmons, ou choice, cc1v1, 2v2, other 2v2',room,connection);
+			user.chat('/poll Which 1v1 Type?, reg, uu, ru, nu, lc, ubers, monoletter, monotype, monocolor, monopoke, monogen, cap, starters, eeveelutions, bst-based, l&e, inverse, metronome, mega evos, stabmons 1v1, aaa 1v1, abc cup, averagemons, abilityshift, balancedhackmons, ou choice, cc1v1, 2v2, other 2v2',room,connection);
 		} else {
 			var reply = "";
 			if (one === 'reg' || one === 'regular') reply = "Ubers excluding Lucario-Mega, Kangaskhan-Mega, and Gengar-Mega.";

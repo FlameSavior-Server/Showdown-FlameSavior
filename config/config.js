@@ -163,7 +163,6 @@ exports.customavatars = {
 	'rebellionphantom': '6ECChqw.png',
 	'frage74': 'cDzy6In.gif',
 	'professoroakjr': 'tDRs344.gif',
-	'theauroradjinni': '68OeQpu.png',
 	'corsolascage': 'p0G272x.png',
 	'punnysassop': 'lopunny.gif',
 	'brokenhope': 'P2KBQ1E.png'

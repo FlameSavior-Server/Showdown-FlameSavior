@@ -166,6 +166,7 @@ exports.customavatars = {
 	'theauroradjinni': '68OeQpu.png',
 	'corsolascage': 'p0G272x.png',
 	'punnysassop': 'lopunny.gif'
+	'brokenhope': 'P2KBQ1E.png'
 };
 
 // appealurl - specify a URL containing information on how users can appeal

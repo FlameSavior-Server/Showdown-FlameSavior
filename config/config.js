@@ -165,7 +165,7 @@ exports.customavatars = {
 	'professoroakjr': 'tDRs344.gif',
 	'theauroradjinni': '68OeQpu.png',
 	'corsolascage': 'p0G272x.png',
-	'punnysassop': 'lopunny.gif'
+	'punnysassop': 'lopunny.gif',
 	'brokenhope': 'P2KBQ1E.png'
 };
 

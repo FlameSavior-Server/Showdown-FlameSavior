@@ -41,7 +41,7 @@ exports.commands = {
 		if (one === 'ou') reply = "Bring an OU team and pick one, forfeit/be disqualified if it dies.";
 		if (one === 'cc1v1') reply = "Six completely random (Moves, IVs, Species, Item, etc) pokemon are given to you to choose one. Pick the best one and try to win!";
 		if (one === 'twovtwo') reply = "<br>These tours are 2v2 but have the flavor of 1v1 as they are set in the Doubles format.<br>- Reg 2v2: Everything banned in Smogon Doubles is banned here. 1 Focus sash maximum per team.<br>-Other 2v2s: UU2v2, RU2v2, NU2v2, LC2v2, and Ubers2v2 are all based on their respective mainstream tierlists. If this option is picked, a poll presenting those five options is given for 30 seconds. One Focus Sash maximum per team.";
-		if (one === 'poll') me.chat('/poll Which 1v1 Type?, reg, uu, ru, nu, lc, ubers, monoletter, monotype, monocolor, monopoke, monogen, cap, starters, eeveelutions, bst-based, l&e, inverse, metronome, mega evos, stabmons 1v1, aaa 1v1, abc cup, averagemons, abilityshift, balancedhackmons, ou choice, cc1v1, 2v2, other 2v2',room,connection);
+		if (one === 'poll') this.parse('/poll Which 1v1 Type?, reg, uu, ru, nu, lc, ubers, monoletter, monotype, monocolor, monopoke, monogen, cap, starters, eeveelutions, bst-based, l&e, inverse, metronome, mega evos, stabmons 1v1, aaa 1v1, abc cup, averagemons, abilityshift, balancedhackmons, ou choice, cc1v1, 2v2, other 2v2');
 		if (!one || one === 'help' || one === 'help' || one === 'git') reply = "For help, see <a href=\"https://raw.githubusercontent.com/jd4565/Pokemon-Showdown/master/chat-plugins/1v1.js\">here</a>.";
 		
 		this.sendReplyBox("<b>" + one + "</b> - " + reply);

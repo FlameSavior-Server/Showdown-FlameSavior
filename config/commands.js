@@ -1592,7 +1592,7 @@ var commands = exports.commands = {
 			"was actually a 12 year and was banned for COPPA.",
 			"got lost in the illusion of reality.",
 			"was unfortunate and didn't get a cool message.",
-			"Adelf accidently kicked {{user}} from the server!",
+			"Nickoop@ accidently kicked {{user}} from the server!",
 			"was knocked out cold by Frage!",
 			"died making love to Nosepass!",
 			"was glomped to death by Blaze!",
@@ -1600,7 +1600,7 @@ var commands = exports.commands = {
 			"was hit by a train!",
 			"used Run Away!",
 			"was splashed by a Magikarp!",
-			"said Adelf x Niku!",
+			"said Nick x Niku!",
 			"tried to take Gasper from Hazeel!",
 			"was impaled by Blade!",
 			"got taken to Dante's rape dungeon!"
@@ -1966,7 +1966,7 @@ var commands = exports.commands = {
 		var matched = false;
 		if (target === ''){
 			matched = true;
-			this.sendReplyBox('<b><font color="purple">List of memes:<br><br>-Aliens<br>-Fragequit<br>-Fuck yeah<br>-Umad<br>-Burnheal<br>-OU Train<br>-Gary Train<br>-If you know what I mean<br>-Doge<br>-Troll<br>-Fail<br>-Wtf<br>-Hawkward<br>-I dont always<br>-So hard<br>-ALL OF THE HOMO<br>-Cool story bro<br>-Udense<br>-Professor Oak<br>-Dodge<br>-You dont say<br>-Cockblocked<br>-Save the Titanic<br>-Ninjask\'d<br>-Fuck this<br>-Slowbro<br>-He has a point<br>-Rekt<br>-Death Stare<br>-What is love<br>-Badass<br>-Onixpected<br>-Wood Hammer<br>-Excuses<br>-Hax<br>-Spheal with it<br>-Hazeel<br>-Trick master is love<br>-7.8<br>-Adelf<br>-Parukia<br>-Fabulous<br>-I regret nothing<br>-Wrong neighborhood<br>-TWSS<br>-HM01<br>-Bitch please<br>-Control your orgasms<br>-Haters gonna hate<br>-Your mom<br>-shrekt<br>-Snickers<br>-Baka<br>-Tits or gtfo<br>-Swiggity<br>-Dat Ass<br>-Once you go<br>-I\'m really feeling it<br>-It\'s a trap<br>-In a row?<br>-Russian Spy<br>-Batgirl<br>-Eels<br>-Oppai<br>-Ara ara<br>-Reggie<br>-Turnips<br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b>');
+			this.sendReplyBox('<b><font color="purple">List of memes:<br><br>-Aliens<br>-Fragequit<br>-Fuck yeah<br>-Umad<br>-Burnheal<br>-OU Train<br>-Gary Train<br>-If you know what I mean<br>-Doge<br>-Troll<br>-Fail<br>-Wtf<br>-Hawkward<br>-I dont always<br>-So hard<br>-ALL OF THE HOMO<br>-Cool story bro<br>-Udense<br>-Professor Oak<br>-Dodge<br>-You dont say<br>-Cockblocked<br>-Save the Titanic<br>-Ninjask\'d<br>-Fuck this<br>-Slowbro<br>-He has a point<br>-Rekt<br>-Death Stare<br>-What is love<br>-Badass<br>-Onixpected<br>-Wood Hammer<br>-Excuses<br>-Hax<br>-Spheal with it<br>-Hazeel<br>-Trick master is love<br>-7.8<br>-Parukia<br>-Fabulous<br>-I regret nothing<br>-Wrong neighborhood<br>-TWSS<br>-HM01<br>-Bitch please<br>-Control your orgasms<br>-Haters gonna hate<br>-Your mom<br>-shrekt<br>-Snickers<br>-Baka<br>-Tits or gtfo<br>-Swiggity<br>-Dat Ass<br>-Once you go<br>-I\'m really feeling it<br>-It\'s a trap<br>-In a row?<br>-Russian Spy<br>-Batgirl<br>-Eels<br>-Oppai<br>-Ara ara<br>-Reggie<br>-Turnips<br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b>');
                 }
 		if (target === 'aliens'){
 			matched = true;
@@ -2124,10 +2124,6 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReplyBox('<img src="http://i.imgur.com/Gi0jjuf.jpg" />');
 		}
-		if (target === 'adelf'){
-			matched = true;
-			this.sendReplyBox('<img src="http://i.imgur.com/1fBYWAv.png" width="130" height="218" />');
-		}
 		if (target === 'parukia'){
 			matched = true;
 			this.sendReplyBox('<img src="http://i.imgur.com/OjAOrK1.jpg" width="300" height="226" />');
@@ -2259,7 +2255,7 @@ var commands = exports.commands = {
 	
 	parukiarules: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<font size="5" color="white"><b>The Parukian Guidelines</b></font><br><font size="3" color="white"><b>We don\'t follow the same rules as main!</b></font><br><br>0.) The most sacred rule on Parukia: All the best admins are born in December!<br>1.) There is no such thing as racism on Parukia.<br>2.) Hazeel is a nut, no matter how many times he denies it.<br>3.) ForexSenpai (Forethe x Oak) and Twin Flames (Blaze x Blade) are Parukia\'s OTPs(One True Pairings)!<br>4.) Playfully trolling one another is how we show we care<br>5.) We\'re all assholes, so if you\'re sensitive to certain issues warn us beforehand (no guarantee we\'ll respect that, though!)<br>6.) raiykid is rice, no exceptions.<br>7.) If you\'re not neutral with Red, you get no sympathy from the rest of us.<br>8.) If you pray to Jin, the hax grace will save you!<br>9.) If you piss off Niku, Oak will give you your last rites.<br>10.) Click all links at your own risk, it\'ll most likely be NSFW (in other words, you won\'t want your mother looking at it).<br>11.) Everything you say can and will be c/p\'d and turned into a dirty joke.<br>12.) Don\'t fuck with Blaze, Parukia\'s official mascot, or raiykid\'s gonna go all Canadian terrorist on your ass(ALALALALA EH?)<br>13.) You cannot go nope.avi to all these rules<br>14.) If you intended to go nope.avi to all these rules before reading #13, GG WP you\'ve just been rekt.<br>15.) Lost Saga cannot be found, please try again later.<br>16.) Accuracy hates you<br>17.) Nick is not poop, contrary to popular belief.<br>18.) GB can kick your ass in Project M. This rule is not up for debate, it is fact.<br>19.) If you stall, you will get haxed. This is undeniable law.<br>20.) Do not mess with a Starfish Nazi and a Mighty Tree!<br>21.) If you are asking y is the rum gone...raiy drank it all.<br>22.) If you have a fight, <b>settle it in smash!</b> If you don\'t have smash, you automatically lose!<br>23.) Paradoxical username user zero infinity is awesome when he\'s drunk!<br>24.) <a href="https://www.youtube.com/watch?v=qGyPuey-1Jw">Drunken Sailor</a> and <a href="https://www.youtube.com/watch?v=izGwDsrQ1eQ">Careless Whisper</a> are Parukia\'s official theme songs!<br>25.) If there\'s any work being done on the forum, 99% of the time it\'s Forethe doing it!<br>26.) If you have a complaint, write a formal business letter to the following address.<br>-Parukia Admins Inc.<br>Professor Oak Jr., Adelf, LostPhantom @ Private Message on Parukia-Server Lane 1001001<br>Open 42 hours a day!<br>27.) Qwilfish is LostPhantom\'s arch nemesis!<br>28.) Everyone on Parukia is Hazeel\'s love interest until proven male. ...And even then, he might still want you!<br>29.) Stay in school. Don\'t do drugs. Don\'t be a Haunter. ');
+		this.sendReplyBox('<font size="5" color="white"><b>The Parukian Guidelines</b></font><br><font size="3" color="white"><b>We don\'t follow the same rules as main!</b></font><br><br>0.) The most sacred rule on Parukia: All the best admins are born in December!<br>1.) There is no such thing as racism on Parukia.<br>2.) Hazeel is a nut, no matter how many times he denies it.<br>3.) ForexSenpai (Forethe x Oak) and Twin Flames (Blaze x Blade) are Parukia\'s OTPs(One True Pairings)!<br>4.) Playfully trolling one another is how we show we care<br>5.) We\'re all assholes, so if you\'re sensitive to certain issues warn us beforehand (no guarantee we\'ll respect that, though!)<br>6.) raiykid is rice, no exceptions.<br>7.) If you\'re not neutral with Red, you get no sympathy from the rest of us.<br>8.) If you pray to Jin, the hax grace will save you!<br>9.) If you piss off Niku, Oak will give you your last rites.<br>10.) Click all links at your own risk, it\'ll most likely be NSFW (in other words, you won\'t want your mother looking at it).<br>11.) Everything you say can and will be c/p\'d and turned into a dirty joke.<br>12.) Don\'t fuck with Blaze, Parukia\'s official mascot, or raiykid\'s gonna go all Canadian terrorist on your ass(ALALALALA EH?)<br>13.) You cannot go nope.avi to all these rules<br>14.) If you intended to go nope.avi to all these rules before reading #13, GG WP you\'ve just been rekt.<br>15.) Lost Saga cannot be found, please try again later.<br>16.) Accuracy hates you<br>17.) Nick is not poop, contrary to popular belief.<br>18.) GB can kick your ass in Project M. This rule is not up for debate, it is fact.<br>19.) If you stall, you will get haxed. This is undeniable law.<br>20.) Do not mess with a Starfish Nazi and a Mighty Tree!<br>21.) If you are asking y is the rum gone...raiy drank it all.<br>22.) If you have a fight, <b>settle it in smash!</b> If you don\'t have smash, you automatically lose!<br>23.) Paradoxical username user zero infinity is awesome when he\'s drunk!<br>24.) <a href="https://www.youtube.com/watch?v=qGyPuey-1Jw">Drunken Sailor</a> and <a href="https://www.youtube.com/watch?v=izGwDsrQ1eQ">Careless Whisper</a> are Parukia\'s official theme songs!<br>25.) If there\'s any work being done on the forum, 99% of the time it\'s Forethe doing it!<br>26.) If you have a complaint, write a formal business letter to the following address.<br>-Parukia Admins Inc.<br>Professor Oak Jr., Nickoop@, LostPhantom @ Private Message on Parukia-Server Lane 1001001<br>Open 42 hours a day!<br>27.) Qwilfish is LostPhantom\'s arch nemesis!<br>28.) Everyone on Parukia is Hazeel\'s love interest until proven male. ...And even then, he might still want you!<br>29.) Stay in school. Don\'t do drugs. Don\'t be a Haunter. ');
 
         },
         

@@ -6050,6 +6050,20 @@ exports.commands = {
 		);
 	},
 	
+	truesterghost: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/67o5c30.png"/><br />' +
+			'<img src="http://i.imgur.com/9oA0SlZ.png"/><br />' +
+			'<marquee behavior="alternate" scrollamount="12"><font color="purple" size="4"/><b>Help we need more Ubers!!!</b></font></marquee>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/aegislash.gif"/>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/giratina.gif"/>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sableye-mega.gif"/><br />' +
+			'<b><font color="red">Aces:</font><font color="purple"> All the special kids who run this god forsaken type.</font></b><br />' +
+			'<b><i>"Bitch you think you can run ghost? I\'ll fucking rek you 6-0. Oh shit you won? Lmao nice cteam faggot, who the fuck uses <a href="http://i.imgur.com/WkC6fqr.png"><button class="astext"><b><i>shadow ball aegi.</i></b></button></a>"</i></b><br />' +
+			'<font color="blue"><b>The <a href="http://en.wikipedia.org/wiki/Autism_spectrum"><button class="astext"><font color="blue"><b><u>True</u></b></font></button></a> Ghost Meta is mentally impaired</b></font></center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

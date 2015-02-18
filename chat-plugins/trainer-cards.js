@@ -5989,16 +5989,6 @@ exports.commands = {
 		);
 	},*/
 	
-	boosting: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/UrXL0Qz.png" width="500">' +
-			'<img src="http://i.imgur.com/Vnx2KH5.png" width="175"><br />' +
-			'<b>Ace:</b> Arifeen<br />' +
-			'Remember kids, it\'s not the fact that you cheated, it\'s the fact that you got caught :^)<br />' +
-			'<img src="http://s12.postimg.org/3ruzynnu5/screenshot_225.png"></center>'
-		);
-	},
-	
 	holly: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src = "http://poopoowebsite.weebly.com/uploads/3/7/3/1/37317497/3001943_orig.gif"><br />' +
@@ -6061,6 +6051,26 @@ exports.commands = {
 			'<b><font color="red">Aces:</font><font color="purple"> All the special kids who run this god forsaken type.</font></b><br />' +
 			'<b><i>"Bitch you think you can run ghost? I\'ll fucking rek you 6-0. Oh shit you won? Lmao nice cteam faggot, who the fuck uses <a href="http://i.imgur.com/WkC6fqr.png"><button class="astext"><b><i>shadow ball aegi.</i></b></button></a>"</i></b><br />' +
 			'<font color="blue"><b>The <a href="http://en.wikipedia.org/wiki/Autism_spectrum"><button class="astext"><font color="blue"><b><u>True</u></b></font></button></a> Ghost Meta is mentally impaired</b></font></center>'
+		);
+	},
+	
+	cole: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src = "http://i.imgur.com/09nNpoF.gif" width = 200>' +
+			'<img src = "http://i.imgur.com/dxOjO7V.gif">' +
+			'<img src = "http://i.imgur.com/NeFp5mR.gif" width = 200><br /><br />' +
+			'<b>Ace: </b>Card games on motorcycles<br />' +
+			'Quote: Don\'t be like Amano Yukiteru and cry, be like Yuuki Rito and get bitches for no reason. Only you can decide where life will take you.</center>'
+		);
+	},
+	
+	datash: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/1dsPJlo.png"><br />' +
+			'<img src="http://i.imgur.com/vQ15cZV.jpg" height = 300><br><b>Ace:</b><br />' +
+			'<img src="http://i.imgur.com/aO397us.png"><br />' +
+			'<a href="https://www.youtube.com/watch?v=tIGqzWzg21w"><button>The Jam ;] </button></a><br />' +
+			'I´d rather trust and regret, than doubt and regret.</center>'
 		);
 	},
 	

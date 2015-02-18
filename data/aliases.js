@@ -238,6 +238,7 @@ exports.BattleAliases = {
 	"gar": "Gengar",
 	"garde": "Gardevoir",
 	"hippo": "Hippowdon",
+	"kupochu": "Pikachu",
 	"kyub": "Kyurem-Black",
 	"kyuw": "Kyurem-White",
 	"lando": "Landorus",

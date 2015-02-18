@@ -6069,8 +6069,8 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://i.imgur.com/1dsPJlo.png"><br />' +
 			'<img src="http://i.imgur.com/vQ15cZV.jpg" height = 300><br><b>Ace:</b><br />' +
 			'<img src="http://i.imgur.com/aO397us.png"><br />' +
-			'<a href="https://www.youtube.com/watch?v=tIGqzWzg21w"><button>The Jam ;] </button></a><br />' +
-			'I´d rather trust and regret, than doubt and regret.</center>'
+			'<a href="https://www.youtube.com/watch?v=cMWWBigvbkY"><button>The Jam ;] </button></a><br />' +
+			'<b>Wiggle, wiggle, wiggle~</b></center>'
 		);
 	},
 	

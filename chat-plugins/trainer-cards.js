@@ -47,13 +47,14 @@ exports.commands = {
 		);
 	},
 
-	ericxwander: function (target, room, user) {
+	erisawa: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/cDfUDBo.gif" width="120">' +
-			'<img src="http://i.imgur.com/F8R91fa.png" width="280">' +
-			'<img src="http://i.imgur.com/Ot5X2zu.png" width="130"><br />' +
-			'<b>Ace:</b> No Flex Zone and Dick Pinch<br />' +
-			'<img src="http://i.imgur.com/csVEwAx.png" width="300"></center>'
+		this.sendReplyBox('<center><img src=http://i.imgur.com/tS8YxEn.gif height=130 width=250>' +
+			'<img src=http://www.gaijinside.com/wp-content/uploads/2011/04/vlcsnap-2011-03-22-13h50m14s235.png height=130 width=250>' +
+			'<img src=http://i.imgur.com/xb7bC10.gif height=130 width=250><br />' +
+			'<img src=http://i.imgur.com/8hB4vR3.png><br />' +
+			'<font size=4><b><blink><marquee behaviour="alternate" direction="left" scrollamount="20">Ace: Not being American</marquee><b><marquee behaviour="alternate" direction="right" scrollamount="20">' +
+			'<b>Quote: </b>Perfection achieved</marquee></br></blink></font></center>'
 		);
 	},
 
@@ -1274,13 +1275,14 @@ exports.commands = {
 		);
 	},
 
-	isawa: function (target, room, user) {
+	isaac: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/IELB4R4.jpg" width="130">' +
-			'<img src="http://i.imgur.com/Ae2qA0Q.gif" width="280">' +
-			'<img src="http://fc04.deviantart.net/fs71/f/2010/264/8/3/eevee_umbreon_by_aerius_the_aireon-d2z7wsp.png" width="130"><br />' +
-			'<font size="3" color="red"><b>Ace:</b></font> <font color="orange">Chrisawa</font><br />' +
-			'<b><font color="orange">Quote:</font></b> <font color="red">Dancin\' in the Moonlight</font></center>'
+		this.sendReplyBox('<center><img src="http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/char_1751.jpg"height="170" width="170"> &nbsp; ' +
+			'<img src=http://mentalfloss.com/sites/default/files/renstimpy_0.jpg height="170" width="250"> &nbsp; ' +
+			'<img src="http://img4.wikia.nocookie.net/__cb20140730083329/creepypasta/images/a/a5/Courage_the_cowardly_dog_meme_by_cartoonanimes4ever-d6x748r.jpg" height="170" width="250"><br />' +
+			'<img src="http://i.imgur.com/ljh2eXw.png"></br><br>' +
+			'<font size=4><b><blink><marquee behaviour="alternate" direction="left" scrollamount="20"><font color="blue">Ace: Accident & Emergency</marquee>' +
+			'<b><font color="orange"><marquee behaviour="alternate" direction="right" scrollamount="20"><b>Quote: </b>We go one inside the other.</marquee></br></blink></font></center>'
 		);
 	},
 
@@ -3702,11 +3704,10 @@ exports.commands = {
 
 	roy: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/zjvesHI.png" width="180">' +
-			'<img src="http://i.imgur.com/f4lVyZA.gif">' +
-			'<img src="http://i.imgur.com/rB1AVZ2.jpg" height="140"><br />' +
-			'<b>Ace:</b> Gallade<br />' +
-			'You sure talk a lot for someone who loses fairly quickly.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/JyqHCLy.png">' +
+			'<img src="http://i.imgur.com/Q9IoApg.gif">' +
+			'<img src="http://i.imgur.com/CxgAyfG.jpg?1" height = 200><br />' +
+			'<b>Ace:</b> Ampharos<br />"Moving on doesn\'t mean you forget about things. It just means you have to accept what happened and continue living."</center>'
 		);
 	},
 
@@ -5449,11 +5450,11 @@ exports.commands = {
 
 	wyvern: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<img src="http://media.giphy.com/media/tifCTtoW05XwY/giphy.gif" height="80" width="125">' +
-			'<img src="http://i.imgur.com/C7x8Fxe.gif" height="90" width="300">' +
-			'<img src="http://brony.cscdn.us/pic/photo/2013/07/e00cb1f5fa33b5be7ad9127e7f7c390d_1024.gif" height="80" width="125"><br />' +
-			'<b>Ace:</b> Noivern<br />' +
-			'<b>My armor is like tenfold shields, my teeth are swords, my claws spears, the shock of my tail a thunderbolt, my wings a hurricane, and my breath death!</b></center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/rT72G3U.png" width = 150>' +
+			'<img src="http://i.imgur.com/juhPQbg.png" width = 400>' +
+			'<img src="http://i.imgur.com/VrKS800.png" width = 150><br />' +
+			'<b>Ace: </b>Ungeneric Bug<br />' +
+			'<b>Quote: </b>We are all in the gutter, but some of us are looking at the stars.</center>'
 		);
 	},
 
@@ -5963,7 +5964,116 @@ exports.commands = {
 			'<a href="https://www.youtube.com/watch?v=Zf_QxUTueO0"><button>Git gud m9</button></a></center>'
 		);
 	},
+	
+	bug: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><p><img src="http://i.imgur.com/T5S1Ctc.gif" width=400 height=60></p>' +
+			'<strong><p><img src="http://media.pldh.net/pokemon/gen6/xy-animated/637.gif" alt="volcarona" /> ' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/212.gif" alt="scizor" /> ' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/127-mega.gif" alt="pinsir" /> ' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/596.gif" alt="galvantula" /> ' +
+			'<img src="http://media.pldh.net/pokemon/gen6/xy-animated/348.gif" alt="armaldo" /> ' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated-shiny/649.gif" alt="genesect" /> ' +
+			'<p><b>Ace:</b> Inwhale, Syb3r, MaddMatt, EricSayshi, Wyv, Swarm</p>' +
+			'<p>"Bug Movie 3: The Road to Generic"</p></center>'
+		);
+	},
+	
+	/*one: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/X3fJccD.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/charizard-mega-x.gif"><br />' +
+			'<img src="http://i.gyazo.com/060ffc19e10754aa0df9159540afc1e1.png"><br />' +
+			'<b>Stratagem:</b> Outplaying<br>Destroying you and not giving a fuck requires the same effort<br />' +
+			'#HighestELO</center>'
+		);
+	},*/
+	
+	holly: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src = "http://poopoowebsite.weebly.com/uploads/3/7/3/1/37317497/3001943_orig.gif"><br />' +
+			'<img src = "http://i.minus.com/iSheR7zA8cQ1j.gif"><br />' +
+			'<b>Ace:</b> Professor Aon, Mega Ampharos<br />' +
+			'Quote: AND IN THE MORNIN\' I\'M FIRED UP, RA RA RA ETC.</center>'
+		);
+	},
+	
+	minky: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/XmO6WET.png">' +
+			'<img src="http://i.imgur.com/inyaijO.png" width = 300>' +
+			'<img src="http://i.imgur.com/wE8qJNh.png">' +
+			'<p><b>Ace:</b> Link and Mac</p>' +
+			'<p>Quote: “Love differs from one another, but love for us is just being able to talk to each other.”</p>' +
+			'<img src="http://i.imgur.com/SGa0y5u.png" width = 200></center>'
+		);
+	},
+	
+	randorosu: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://images.cooltext.com/4120753.png"><br />' +
+			'<img src="http://images.cooltext.com/4120686.png" width = 100>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/tyranitar.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/hydreigon.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/mandibuzz.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/houndoom.gif"><br />' +
+			'<img src="http://images.cooltext.com/4120725.png" width = 150>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus-therian.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/garchomp-mega.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/seismitoad.gif">' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif"><br />' +
+			'<font color="brown"><b>Ace: My Squadron</b></font><br />' +
+			'<b><font color="purple">I\'ll pound you into the <i>GROUND</i> bruh.</font></b><br />' +
+			'<font color="brown">"It\'s dark when you\'re 6ft underground."</font><br />' +
+			'<button name="send" value="/transferbucks Randorosu Bank, 1">Please abolish the struggles. Donate a buck now! :]</button></center>'
+		);
+	},
 		
+	crimson: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img title="☂" src="http://images.cooltext.com/4123207.png" width="373" height="80" alt="Crimson" /><br />' +
+			'<button title="Lemme drain your bucks" class="broadcast-green" name="send" value="/transferbucks crimsontorrent, 1">Give me 1 buck!</button> ' +
+			'<button title="I\'m a thirsty bitch" class="broadcast-green" name="send" value="/transferbucks crimsontorrent, 5">Give me 5 bucks!</button><br />' +
+			'<img title="Grass > All" src="http://i.imgur.com/8UbWFE6.png" height="200" /><br />' +
+			'<font color="red"><b>Ace:</b></font> <font color="#333300"><b>Your health points.</b></font><br />' +
+			'<i>You don\'t eat veggies, veggies eat you! ;3</i></center>'
+		);
+	},
+	
+	truesterghost: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/67o5c30.png"/><br />' +
+			'<img src="http://i.imgur.com/9oA0SlZ.png"/><br />' +
+			'<marquee behavior="alternate" scrollamount="12"><font color="purple" size="4"/><b>Help we need more Ubers!!!</b></font></marquee>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/aegislash.gif"/>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/giratina.gif"/>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/sableye-mega.gif"/><br />' +
+			'<b><font color="red">Aces:</font><font color="purple"> All the special kids who run this god forsaken type.</font></b><br />' +
+			'<b><i>"Bitch you think you can run ghost? I\'ll fucking rek you 6-0. Oh shit you won? Lmao nice cteam faggot, who the fuck uses <a href="http://i.imgur.com/WkC6fqr.png"><button class="astext"><b><i>shadow ball aegi.</i></b></button></a>"</i></b><br />' +
+			'<font color="blue"><b>The <a href="http://en.wikipedia.org/wiki/Autism_spectrum"><button class="astext"><font color="blue"><b><u>True</u></b></font></button></a> Ghost Meta is mentally impaired</b></font></center>'
+		);
+	},
+	
+	cole: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src = "http://i.imgur.com/09nNpoF.gif" width = 200>' +
+			'<img src = "http://i.imgur.com/dxOjO7V.gif">' +
+			'<img src = "http://i.imgur.com/NeFp5mR.gif" width = 200><br /><br />' +
+			'<b>Ace: </b>Card games on motorcycles<br />' +
+			'Quote: Don\'t be like Amano Yukiteru and cry, be like Yuuki Rito and get bitches for no reason. Only you can decide where life will take you.</center>'
+		);
+	},
+	
+	datash: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/1dsPJlo.png"><br />' +
+			'<img src="http://i.imgur.com/vQ15cZV.jpg" height = 300><br><b>Ace:</b><br />' +
+			'<img src="http://i.imgur.com/aO397us.png"><br />' +
+			'<a href="https://www.youtube.com/watch?v=cMWWBigvbkY"><button>The Jam ;] </button></a><br />' +
+			'<b>Wiggle, wiggle, wiggle~</b></center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

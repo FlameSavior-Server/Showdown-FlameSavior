@@ -3010,7 +3010,7 @@ var commands = exports.commands = {
 
         targetUser.popup(user.name + " has sniped you with their ban rifle." + (config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + config.appealurl) : "") + "\n\n" + target);
 
-        this.addModCommand("" + targetUser.name + " taken out by " + user.name + "." + (target ? " (" + target + ")" : ""), ' (' + targetUser.latestIp + ')');
+        this.addModCommand("" + targetUser.name + " was taken out by " + user.name + "." + (target ? " (" + target + ")" : ""), ' (' + targetUser.latestIp + ')');
         var alts = targetUser.getAlts();
         if (alts.length) {
             this.addModCommand("" + targetUser.name + "'s alts were also hit: " + alts.join(", "));

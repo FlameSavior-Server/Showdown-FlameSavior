@@ -2798,6 +2798,7 @@ var commands = exports.commands = {
 				return false;
 			}
 			var roomList = {};
+			var privateRooms = {};
 			for (var i in targetUser.roomCount) {
 				if (i === 'global') continue;
 				var targetRoom = Rooms.get(i);
@@ -2810,12 +2811,56 @@ var commands = exports.commands = {
 				}
 				roomList[i] = roomData;
 			}
-			if (!targetUser.roomCount['global']) roomList = false;
+			if (user.can('ban', targetUser)) {
+				for (var u in targetUser.roomCount) {
+					if (u === 'global' || !Rooms(u).isPrivate) continue;
+					privateRooms[u] = u;
+				}
+			}
+			if (!targetUser.roomCount['global']) {
+				roomList = false;
+				privateRooms = false;
+			}
 			var userdetails = {
 				userid: targetUser.userid,
 				avatar: targetUser.avatar,
-				rooms: roomList
+				rooms: roomList,
+				privateRooms: privateRooms,
+				vip: targetUser.vip,
 			};
+			if (user.can('ip', targetUser)) {
+				var ips = Object.keys(targetUser.ips);
+				if (ips.length === 1) {
+					userdetails.ip = ips[0];
+				} else {
+					userdetails.ips = ips;
+				}
+			}
+
+			var geo = geoip.lookup(targetUser.latestIp);
+			if (geo && geo.country) {
+				userdetails.country = geo.country.toLowerCase();
+			}
+
+			if (!targetUser.lastActive) targetUser.lastActive = Date.now();
+			var seconds = Math.floor(((Date.now() - targetUser.lastActive) / 1000));
+			var minutes = Math.floor((seconds / 60));
+			var hours = Math.floor((minutes / 60));
+
+			var secondsWord = (((seconds % 60) > 1 || (seconds % 60) == 0) ? 'seconds' : 'second');
+			var minutesWord = (((minutes % 60) > 1 || (minutes % 60) == 0) ? 'minutes' : 'minute');
+			var hoursWord = ((hours > 1 || hours == 0) ? 'hours' : 'hour');
+
+			if (minutes < 1) {
+				userdetails.awayMessage = (targetUser.awayName ? '<font color="orange"><em>Away for:</em> </font>' : "<em>Idle for:</em> ") + seconds + ' ' + secondsWord;
+			}
+			if (minutes > 0 && minutes < 60) {
+				userdetails.awayMessage = (targetUser.awayName ? '<font color="orange"><em>Away for:</em> </font>' : "<em>Idle for:</em> ") + minutes + ' ' + minutesWord + ', ' + (seconds % 60) +  ' ' + secondsWord;
+			}
+			if (hours > 0) {
+				userdetails.awayMessage = (targetUser.awayName ? '<font color="orange"><em>Away for:</em> </font>' : "<em>Idle for:</em> ") + hours + ' ' + hoursWord + ', ' + (minutes % 60) + ' ' + minutesWord;
+			}
+
 			connection.send('|queryresponse|userdetails|' + JSON.stringify(userdetails));
 		} else if (cmd === 'roomlist') {
 			if (!trustable) return false;

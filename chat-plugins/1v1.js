@@ -26,7 +26,7 @@ exports.commands = {
 				case 'nu': reply += 			"Anything RU or above."; break;
 				case 'lc': reply += 			"Bring a team of ONE pokemon. These pokemon should be level 5. Banlist is Sleep Inducing moves excluding rest, Focus Sash."; break; 
 				case 'ubers': reply += 			"Nothing but Ditto and Smeargle."; break;
-				case 'monoletter': reply += 		"A random letter is picked, only Pokemon starting with this letter can be used. Banlist is Sleep inducing moves excluding rest, Focus Sash.";
+				case 'monoletter': reply += 		"A random letter is picked, only Pokemon starting with this letter can be used. Banlist is Sleep inducing moves excluding rest, Focus Sash."; break;
 				case 'monotype': reply += 		"A random type is picked, only Pokemon of this type can be used. Banlist is Sleep inducing moves excluding rest, Focus Sash."; break;
 				case 'monocolor': reply +=		"A random color is picked, only Pokemon of this color can be used. Banlist is Sleep inducing moves excluding rest, Focus Sash. Helpul <a href=\"http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_color\">Link</a>."; break;
 				case 'monopoke': reply +=  		"A random Pokemon is picked, and only that pokemon can be used. Banlist is Sleep inducing moves excluding rest, Focus Sash."; break;
@@ -39,11 +39,11 @@ exports.commands = {
 				case 'inverse': reply += 		"1v1 Tour set in the Inverse Gamemode. Not-Very-Effective is not Super Effective and vice-versa. Banlist is Ambipom, Sleep Inducing moves, Focus Sash."; break;
 				case 'metronome': reply +=		"Only the move metronome is allowed in this tour, but on any Pokemon with a BST of 600 or less. Here is the <a href=\"http://pastebin.com/fe2Xtg4L\">banlist</a>."; break;
 				case 'megaevos': reply += 		"Custom Game format, this one allowing only Mega Evolutions to be used (with items other than mega stones). Here is its <a href=\"http://pastebin.com/d9pJWpya\">banlist</a>."; break;
-				case 'stabmons': reply += 		"Bring a team of ONE pokemon. Pokemon may use any move sharing a type with them in addition to normally learned moves.";
+				case 'stabmons': reply += 		"Bring a team of ONE pokemon. Pokemon may use any move sharing a type with them in addition to normally learned moves."; break;
 				case 'alphabetcup': reply += 		"Bring a team of ONE pokemon. Abbreviated as \"abc cup,\" this is a 1v1 tour set in the alphabet cup <a href=\"http://www.smogon.com/forums/threads/alphabet-cup-other-metagame-of-the-month-march.3498167/\">tier</a>."; break;
 				case 'averagemons': reply += 		"Bring a team of ONE pokemon. All stats of Pokemon are set to 100! See <a href=\"http://www.smogon.com/forums/threads/averagemons.3495527/\">here</a>."; break;
 				case 'balancedhackmons':
-				case 'bhacks': reply +=			"Straight up balanced hackmons 1v1. Almost anything goes. <a href=\"http://www.smogon.com/smog/issue21/hackmons\">Reference</a>. Selection: These tours require you to pick one Pokemon from a team of six.";
+				case 'bhacks': reply +=			"Straight up balanced hackmons 1v1. Almost anything goes. <a href=\"http://www.smogon.com/smog/issue21/hackmons\">Reference</a>. Selection: These tours require you to pick one Pokemon from a team of six."; break;
 				case 'ou': reply += 			"Bring an OU team and pick one, forfeit/be disqualified if it dies."; break;
 				case 'cc1v1': reply += 			"Six completely random (Moves, IVs, Species, Item, etc) pokemon are given to you to choose one. Pick the best one and try to win!"; break;
 				case 'twovtwo': reply += 		"<br />" +

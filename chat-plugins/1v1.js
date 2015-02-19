@@ -12,7 +12,7 @@ exports.commands = {
 		var one = toId(target);
 		var reply = "";
 		if (!one || one === 'help' || one === 'help' || one === 'git') return this.sendReplyBox("For help, see <a href=\"https://raw.githubusercontent.com/jd4565/Pokemon-Showdown/master/chat-plugins/1v1.js\">here</a>.");
-		if (one === 'poll') return user.chat('/poll Which 1v1 Type?, reg, uu, ru, nu, lc, ubers, monoletter, monotype, monocolor, monopoke, monogen, cap, starters, eeveelutions, bst-based, l&e, inverse, metronome, mega evos, stabmons 1v1, aaa 1v1, abc cup, averagemons, abilityshift, balancedhackmons, ou choice, cc1v1, 2v2, other 2v2',room,connection);
+		if (one === 'poll') return user.chat('/poll Next 1v1 Tour?, reg, cc1v1, inverse, mono gen, monoletter, monotype, monocolor, cap, eevee only, mega evos, bst based, metronome, lc starters, ubers, lc, 2v2, monopoke, ou choice, almost any ability 1v1, stabmons 1v1, abc cup, averagemons 1v1, balanced hackmons 1v1, tier shift 1v1, mediocremons 1v1, retro1v1',room,connection);
 
 		switch (one) {
 			case 'regular':

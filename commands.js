@@ -1028,119 +1028,128 @@ var commands = exports.commands = {
                 theItem = inShop[i];
             }
         }
-        if (isItem === true) {
-            if (theItem === 'symbol') {
-                if (targetUser.canCustomSymbol === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canCustomSymbol === false) {
-                    matched = true;
-                    this.sendReply(targetUser.name + ' can now use /customsymbol to get a custom symbol.');
-                    targetUser.canCustomSymbol = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen custom symbol from the shop!');
-                    targetUser.send(user.name + ' has given you ' + theItem + '! Use /customsymbol [symbol] to add the symbol!');
-                }
+        if (isItem) {
+            switch (theItem) {
+                case 'symbol':
+            
+                    if (targetUser.canCustomSymbol === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canCustomSymbol === false) {
+                        matched = true;
+                        this.sendReply(targetUser.name + ' can now use /customsymbol to get a custom symbol.');
+                        targetUser.canCustomSymbol = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen custom symbol from the shop!');
+                        targetUser.send(user.name + ' has given you ' + theItem + '! Use /customsymbol [symbol] to add the symbol!');
+                    }
+                    break;
+                case 'custom':
+          
+                    if (targetUser.canCustomAvatar === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canCustomAvatar === false) {
+                        matched = true;
+                        targetUser.canCustomAvatar = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen a custom avatar from the shop!');
+                        targetUser.send(user.name + ' has given you ' + theItem + '!');
+                    }
+                    break;
+                case 'emote':
+                    if (targetUser.canCustomEmote === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canCustomEmote === false) {
+                        matched = true;
+                        targetUser.canCustomEmote = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen a custom emote from the shop!');
+                        targetUser.send(user.name + ' has given you ' + theItem + '!');
+                    }
+                    break;
+                case 'animated':
+                    if (targetUser.canAnimated === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canCustomAvatar === false) {
+                        matched = true;
+                        targetUser.canCustomAvatar = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen a custom avatar from the shop!');
+                        targetUser.send(user.name + ' has given you ' + theItem + '!');
+                    }
+                    break;
+                case 'room':
+                    if (targetUser.canChatRoom === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canChatRoom === false) {
+                        matched = true;
+                        targetUser.canChatRoom = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen a chat room from the shop!');
+                        targetUser.send(user.name + ' has given you ' + theItem + '!');
+                    }
+                    break;
+                case 'trainer':
+                    if (targetUser.canTrainerCard === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canTrainerCard === false) {
+                        matched = true;
+                        targetUser.canTrainerCard = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen a trainer card from the shop!');
+                        targetUser.send(user.name + ' has given you ' + theItem + '!');
+                    }
+                    break;
+                case 'musicbox':
+                    if (targetUser.canMusicBox === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canMusicBox === false) {
+                        matched = true;
+                        targetUser.canMusicBox = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen a music box from the shop!');
+                        targetUser.send(user.name + ' has given you ' + theItem + '!');
+                    }
+                    break;
+                case 'forcerename':
+                case 'fr':
+                    if (targetUser.canForcerename === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canForcerename === false) {
+                        matched = true;
+                        targetUser.canForcerename = true;
+                        Rooms.rooms.lobby.add(user.name + ' has a forcerename from the shop!');
+                        targetUser.send(user.name + ' has given you ' + theItem + '!');
+                    }
+                    break;
+                case 'fix':
+                    if (targetUser.canFixItem === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canFixItem === false) {
+                        matched = true;
+                        targetUser.canFixItem = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen the ability to alter a current trainer card or avatar from the shop!');
+                        targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
+                    }
+                    break;
+                case 'declare':
+                    if (targetUser.canDecAdvertise === true) {
+                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
+                    }
+                    if (targetUser.canDecAdvertise === false) {
+                        matched = true;
+                        targetUser.canDecAdvertise = true;
+                        Rooms.rooms.lobby.add(user.name + ' has stolen the ability to get a declare from the shop!');
+                        targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
+                    }
+                    break;
+                default:
+                    return this.sendReply('Maybe that item isn\'t in the shop yet.');
             }
-            if (theItem === 'custom') {
-                if (targetUser.canCustomAvatar === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canCustomAvatar === false) {
-                    matched = true;
-                    targetUser.canCustomAvatar = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen a custom avatar from the shop!');
-                    targetUser.send(user.name + ' has given you ' + theItem + '!');
-                }
-            }
-            if (theItem === 'emote') {
-                if (targetUser.canCustomEmote === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canCustomEmote === false) {
-                    matched = true;
-                    targetUser.canCustomEmote = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen a custom emote from the shop!');
-                    targetUser.send(user.name + ' has given you ' + theItem + '!');
-                }
-            }
-            if (theItem === 'animated') {
-                if (targetUser.canAnimated === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canCustomAvatar === false) {
-                    matched = true;
-                    targetUser.canCustomAvatar = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen a custom avatar from the shop!');
-                    targetUser.send(user.name + ' has given you ' + theItem + '!');
-                }
-            }
-            if (theItem === 'room') {
-                if (targetUser.canChatRoom === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canChatRoom === false) {
-                    matched = true;
-                    targetUser.canChatRoom = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen a chat room from the shop!');
-                    targetUser.send(user.name + ' has given you ' + theItem + '!');
-                }
-            }
-            if (theItem === 'trainer') {
-                if (targetUser.canTrainerCard === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canTrainerCard === false) {
-                    matched = true;
-                    targetUser.canTrainerCard = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen a trainer card from the shop!');
-                    targetUser.send(user.name + ' has given you ' + theItem + '!');
-                }
-            }
-            if (theItem === 'musicbox') {
-                if (targetUser.canMusicBox === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canMusicBox === false) {
-                    matched = true;
-                    targetUser.canMusicBox = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen a music box from the shop!');
-                    targetUser.send(user.name + ' has given you ' + theItem + '!');
-                }
-            }
-            if (theItem === 'forcerename') {
-                if (targetUser.canForcerename === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canForcerename === false) {
-                    matched = true;
-                    targetUser.canForcerename = true;
-                    Rooms.rooms.lobby.add(user.name + ' has a forcerename from the shop!');
-                    targetUser.send(user.name + ' has given you ' + theItem + '!');
-                }
-            }
-            if (theItem === 'fix') {
-                if (targetUser.canFixItem === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canFixItem === false) {
-                    matched = true;
-                    targetUser.canFixItem = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen the ability to alter a current trainer card or avatar from the shop!');
-                    targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
-                }
-            }
-            if (theItem === 'declare') {
-                if (targetUser.canDecAdvertise === true) {
-                    return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                }
-                if (targetUser.canDecAdvertise === false) {
-                    matched = true;
-                    targetUser.canDecAdvertise = true;
-                    Rooms.rooms.lobby.add(user.name + ' has stolen the ability to get a declare from the shop!');
-                    targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
-                }
-            } else if (!matched) return this.sendReply('Maybe that item isn\'t in the shop yet.');
-        } else return this.sendReply('Shop item could not be found, please check /shop for all items - ' + theItem);
+        } else {
+            return this.sendReply('Shop item could not be found, please check /shop for all items - ' + theItem);
+        }
     },
 
     removeitem: function(target, room, user) {

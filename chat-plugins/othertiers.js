@@ -12,7 +12,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		var ot = toId(target);
 		if (ot === 'poll') {
-			user.chat('/poll Next type of Tour?, Inverse battle, Little Cup, Ubers, Smogon Doubles, Balanced Hackmons, RU, NU, UU, PU, Hackmons, Catch&amp;Evolve, random doubles battle, Skybattles,Random Triples Battle,Random Monotype,Challenge Cup, Doubles Challenge Cup,Random LC,Metronome,Triples Challenge Cup, Seasonal,Anything Goes,Gen 1 Randbat,Hackmons Challenge Cup',room,connection);
+			user.chat('/poll Next type of Tour?, Inverse battle, Little Cup, Ubers, Smogon Doubles, Balanced Hackmons, RU, NU, UU, PU, Hackmons, Catch and Evolve, random doubles battle, Skybattles,Random Triples Battle,Random Monotype,Challenge Cup, Doubles Challenge Cup,Random LC,Metronome,Triples Challenge Cup, Seasonal,Anything Goes,Gen 1 Randbat,Hackmons Challenge Cup',room,connection);
 		} else {
 			var reply = "";
 			if (ot === 'reg') reply = "Your typical, normal C&E. Nothing special, move along. One voice or higher will host. Rules can be found <a href=\"https://docs.google.com/document/d/1VMATySDZCOh5cj5FmgRjOX005pHWtCS3jfS468O-QUc/edit?pli=1\">here</a>.";

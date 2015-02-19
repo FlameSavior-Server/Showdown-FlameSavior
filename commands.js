@@ -1129,29 +1129,6 @@ var commands = exports.commands = {
                     targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
                 }
             }
-            /*
-                        if (theItem === 'potd') {
-                            if (targetUser.canPOTD === true) {
-                                return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                            }
-                            if (targetUser.canPOTD === false) {
-                                matched = true;
-                                targetUser.canPOTD = true;
-                                Rooms.rooms.lobby.add(user.name + ' has stolen the ability to set POTD from the shop!');
-                                targetUser.send(user.name + ' has given you the ability to set ' + theItem + '!');
-                            }
-                        }
-                        if (theItem === 'vip') {
-                            if (targetUser.canVIP === true) {
-                                return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                            }
-                            if (targetUser.canVIP === false) {
-                                matched = true;
-                                targetUser.canVIP = true;
-                                Rooms.rooms.lobby.add(targetUser + ' revieved VIP status from '+user.name+'!');
-                                targetUser.send(user.name + ' has given you the ability to claim a ' + theItem + '!');
-                            }
-                        }*/
             if (theItem === 'declare') {
                 if (targetUser.canDecAdvertise === true) {
                     return this.sendReply('This user has already bought that item from the shop... no need for another.');
@@ -1177,85 +1154,101 @@ var commands = exports.commands = {
         if (!targetUser) {
             return this.sendReply('User ' + this.targetUsername + ' not found.');
         }
-        if (target === 'symbol') {
-            if (targetUser.canCustomSymbol) {
-                targetUser.canCustomSymbol = false;
-                this.sendReply(targetUser.name + ' no longer has a custom symbol ready to use.');
-                targetUser.send(user.name + ' has removed the custom symbol from you.');
-            } else return this.sendReply('They do not have a custom symbol for you to remove.');
-        } else if (target === 'custom') {
-            if (targetUser.canCustomAvatar) {
-                targetUser.canCustomAvatar = false;
-                this.sendReply(targetUser.name + ' no longer has a custom avatar ready to use.');
-                targetUser.send(user.name + ' has removed the custom avatar from you.');
-            } else return this.sendReply('They do not have a custom avatar for you to remove.');
-        } else if (target === 'emote') {
-            if (targetUser.canCustomEmote) {
-                targetUser.canCustomEmote = false;
-                this.sendReply(targetUser.name + ' no longer has a custom emote ready to use.');
-                targetUser.send(user.name + ' has removed the custom emote from you.');
-            } else return this.sendReply('They do not have a custom emote for you to remove.');
-        } else if (target === 'animated') {
-            if (targetUser.canAnimatedAvatar) {
-                targetUser.canAnimatedAvatar = false;
-                this.sendReply(targetUser.name + ' no longer has a animated avatar ready to use.');
-                targetUser.send(user.name + ' has removed the animated avatar from you.');
-            } else return this.sendReply('They do not have an animated avatar for you to remove.');
-        } else if (target === 'room') {
-            if (targetUser.canChatRoom) {
-                targetUser.canChatRoom = false;
-                this.sendReply(targetUser.name + ' no longer has a chat room ready to use.');
-                targetUser.send(user.name + ' has removed the chat room from you.');
-            } else return this.sendReply('They do not have a chat room for you to remove.');
-        } else if (target === 'trainer') {
-            if (targetUser.canTrainerCard) {
-                targetUser.canTrainerCard = false;
-                this.sendReply(targetUser.name + ' no longer has a trainer card ready to use.');
-                targetUser.send(user.name + ' has removed the trainer card from you.');
-            } else return this.sendReply('They do not have a trainer card for you to remove.');
-        } else if (target === 'musicbox') {
-            if (targetUser.canMusicBox) {
-                targetUser.canMusicBox = false;
-                this.sendReply(targetUser.name + ' no longer has a music box ready to use.');
-                targetUser.send(user.name + ' has removed the music box from you.');
-            } else return this.sendReply('They do not have a music box for you to remove.');
-        } else if (target === 'fix') {
-            if (targetUser.canFixItem) {
-                targetUser.canFixItem = false;
-                this.sendReply(targetUser.name + ' no longer has the fix to use.');
-                targetUser.send(user.name + ' has removed the fix from you.');
-            } else return this.sendReply('They do not have a trainer card for you to remove.');
-        } else if (target === 'forcerename') {
-            if (targetUser.canForcerename) {
-                targetUser.canForcerename = false;
-                this.sendReply(targetUser.name + ' no longer has the forcerename to use.');
-                targetUser.send(user.name + ' has removed forcerename from you.');
-            } else return this.sendReply('They do not have a forcerename for you to remove.');
-        }
-        /*
-                else if (target === 'potd') {
-                    if (targetUser.canPOTD) {
-                        targetUser.canPOTD = false;
-                        this.sendReply(targetUser.name + ' no longer can set POTD.');
-                        targetUser.send(user.name + ' has removed the POTD from you.');
-                    }
-                    else return this.sendReply('They do not have the POTD ability for you to remove.');
+        switch (target) {
+            case 'symbol':
+                if (targetUser.canCustomSymbol) {
+                    targetUser.canCustomSymbol = false;
+                    this.sendReply(targetUser.name + ' no longer has a custom symbol ready to use.');
+                    targetUser.send(user.name + ' has removed the custom symbol from you.');
+                } else {
+                    return this.sendReply('They do not have a custom symbol for you to remove.');
+                } 
+                break;
+            case 'custom':
+                if (targetUser.canCustomAvatar) {
+                    targetUser.canCustomAvatar = false;
+                    this.sendReply(targetUser.name + ' no longer has a custom avatar ready to use.');
+                    targetUser.send(user.name + ' has removed the custom avatar from you.');
+                } else {
+                    return this.sendReply('They do not have a custom avatar for you to remove.');
                 }
-                else if (target === 'badge') {
-                    if (targetUser.canBadge) {
-                        targetUser.canBadge = false;
-                        this.sendReply(targetUser.name + ' no longer has a badge.');
-                        targetUser.send(user.name + ' has removed the VIP badge from you.');
-                    }
-                    else return this.sendReply('They do not have a VIP badge for you to remove.');
-                }*/
-        else if (target === 'declare') {
-            if (targetUser.canDecAdvertise) {
-                targetUser.canDecAdvertise = false;
-                this.sendReply(targetUser.name + ' no longer has a declare ready to use.');
-                targetUser.send(user.name + ' has removed the declare from you.');
-            } else return this.sendReply('They do not have a trainer card for you to remove.');
-        } else return this.sendReply('That isn\'t a real item you fool!');
+                break;
+            case 'emote':
+                if (targetUser.canCustomEmote) {
+                    targetUser.canCustomEmote = false;
+                    this.sendReply(targetUser.name + ' no longer has a custom emote ready to use.');
+                    targetUser.send(user.name + ' has removed the custom emote from you.');
+                } else {
+                    return this.sendReply('They do not have a custom emote for you to remove.');
+                } 
+                break;
+            case 'animated':
+                if (targetUser.canAnimatedAvatar) {
+                    targetUser.canAnimatedAvatar = false;
+                    this.sendReply(targetUser.name + ' no longer has a animated avatar ready to use.');
+                    targetUser.send(user.name + ' has removed the animated avatar from you.');
+                } else {
+                    return this.sendReply('They do not have an animated avatar for you to remove.');
+                }
+                break;
+            case 'room':
+                if (targetUser.canChatRoom) {
+                    targetUser.canChatRoom = false;
+                    this.sendReply(targetUser.name + ' no longer has a chat room ready to use.');
+                    targetUser.send(user.name + ' has removed the chat room from you.');
+                } else {
+                    return this.sendReply('They do not have a chat room for you to remove.');
+                }
+                break;
+            case 'trainer':
+                if (targetUser.canTrainerCard) {
+                    targetUser.canTrainerCard = false;
+                    this.sendReply(targetUser.name + ' no longer has a trainer card ready to use.');
+                    targetUser.send(user.name + ' has removed the trainer card from you.');
+                } else {
+                    return this.sendReply('They do not have a trainer card for you to remove.');
+                }
+                break;
+            case 'musicbox':
+                if (targetUser.canMusicBox) {
+                    targetUser.canMusicBox = false;
+                    this.sendReply(targetUser.name + ' no longer has a music box ready to use.');
+                    targetUser.send(user.name + ' has removed the music box from you.');
+                } else {
+                    return this.sendReply('They do not have a music box for you to remove.');
+                }
+                break;
+            case 'fix':
+                if (targetUser.canFixItem) {
+                    targetUser.canFixItem = false;
+                    this.sendReply(targetUser.name + ' no longer has the fix to use.');
+                    targetUser.send(user.name + ' has removed the fix from you.');
+                } else {
+                    return this.sendReply('They do not have a trainer card for you to remove.');
+                }
+                break;
+            case 'forcerename':
+            case 'fr':
+                if (targetUser.canForcerename) {
+                    targetUser.canForcerename = false;
+                    this.sendReply(targetUser.name + ' no longer has the forcerename to use.');
+                    targetUser.send(user.name + ' has removed forcerename from you.');
+                } else {
+                    return this.sendReply('They do not have a forcerename for you to remove.');
+                }
+                break;
+            case 'declare':
+                if (targetUser.canDecAdvertise) {
+                    targetUser.canDecAdvertise = false;
+                    this.sendReply(targetUser.name + ' no longer has a declare ready to use.');
+                    targetUser.send(user.name + ' has removed the declare from you.');
+                } else {
+                    return this.sendReply('They do not have a trainer card for you to remove.');
+                }
+                break;
+            default:
+                return this.sendReply('That isn\'t a real item you fool!');
+        }
     },
 
     website: function(target, room, user) {
@@ -3553,82 +3546,84 @@ var commands = exports.commands = {
 
         this.logEntry(user.name + " used /hotpatch " + target);
 
-        if (target === 'chat' || target === 'commands') {
+        switch (target) {
+            case 'chat':
+            case 'commands':
+                try {
+                    CommandParser.uncacheTree('./command-parser.js');
+                    global.CommandParser = require('./command-parser.js');
 
-            try {
-                CommandParser.uncacheTree('./command-parser.js');
-                global.CommandParser = require('./command-parser.js');
+                    CommandParser.uncacheTree('./hangman.js');
+                    hangman = require('./hangman.js').hangman(hangman);
 
-                CommandParser.uncacheTree('./hangman.js');
-                hangman = require('./hangman.js').hangman(hangman);
+                    CommandParser.uncacheTree('./core');
+                    global.Core = require('./core.js').core;
 
-                CommandParser.uncacheTree('./core');
-                global.Core = require('./core.js').core;
+                    CommandParser.uncacheTree('./economy.js');
+                    economy = require('./economy.js');
 
-                CommandParser.uncacheTree('./economy.js');
-                economy = require('./economy.js');
+                    var runningTournaments = Tournaments.tournaments;
+                    CommandParser.uncacheTree('./tournaments');
+                    global.Tournaments = require('./tournaments');
+                    Tournaments.tournaments = runningTournaments;
 
-                var runningTournaments = Tournaments.tournaments;
-                CommandParser.uncacheTree('./tournaments');
-                global.Tournaments = require('./tournaments');
-                Tournaments.tournaments = runningTournaments;
-
-                return this.sendReply("Chat commands have been hot-patched.");
-            } catch (e) {
-                return this.sendReply("Something failed while trying to hotpatch chat: \n" + e.stack);
-            }
-
-        } else if (target === 'tournaments') {
-
-            try {
-                var runningTournaments = Tournaments.tournaments;
-                CommandParser.uncacheTree('./tournaments');
-                global.Tournaments = require('./tournaments');
-                Tournaments.tournaments = runningTournaments;
-                return this.sendReply("Tournaments have been hot-patched.");
-            } catch (e) {
-                return this.sendReply("Something failed while trying to hotpatch tournaments: \n" + e.stack);
-            }
-
-        } else if (target === 'battles') {
-
-            Simulator.SimulatorProcess.respawn();
-            return this.sendReply("Battles have been hotpatched. Any battles started after now will use the new code; however, in-progress battles will continue to use the old code.");
-
-        } else if (target === 'formats') {
-            try {
-                // uncache the tools.js dependency tree
-                CommandParser.uncacheTree('./tools.js');
-                // reload tools.js
-                global.Tools = require('./tools.js'); // note: this will lock up the server for a few seconds
-                // rebuild the formats list
-                Rooms.global.formatListText = Rooms.global.getFormatListText();
-                // respawn validator processes
-                TeamValidator.ValidatorProcess.respawn();
-                // respawn simulator processes
+                    return this.sendReply("Chat commands have been hot-patched.");
+                } catch (e) {
+                    return this.sendReply("Something failed while trying to hotpatch chat: \n" + e.stack);
+                }
+                break;
+            case 'tournaments':
+                try {
+                    var runningTournaments = Tournaments.tournaments;
+                    CommandParser.uncacheTree('./tournaments');
+                    global.Tournaments = require('./tournaments');
+                    Tournaments.tournaments = runningTournaments;
+                    return this.sendReply("Tournaments have been hot-patched.");
+                } catch (e) {
+                    return this.sendReply("Something failed while trying to hotpatch tournaments: \n" + e.stack);
+                }
+                break;
+            case 'battles':
                 Simulator.SimulatorProcess.respawn();
-                // broadcast the new formats list to clients
-                Rooms.global.send(Rooms.global.formatListText);
+                return this.sendReply("Battles have been hotpatched. Any battles started after now will use the new code; however, in-progress battles will continue to use the old code.");
 
-                return this.sendReply("Formats have been hotpatched.");
-            } catch (e) {
-                return this.sendReply("Something failed while trying to hotpatch formats: \n" + e.stack);
-            }
+            case 'formats':
+                try {
+                    // uncache the tools.js dependency tree
+                    CommandParser.uncacheTree('./tools.js');
+                    // reload tools.js
+                    global.Tools = require('./tools.js'); // note: this will lock up the server for a few seconds
+                    // rebuild the formats list
+                    Rooms.global.formatListText = Rooms.global.getFormatListText();
+                    // respawn validator processes
+                    TeamValidator.ValidatorProcess.respawn();
+                    // respawn simulator processes
+                    Simulator.SimulatorProcess.respawn();
+                    // broadcast the new formats list to clients
+                    Rooms.global.send(Rooms.global.formatListText);
 
-        } else if (target === 'learnsets') {
-            try {
-                // uncache the tools.js dependency tree
-                CommandParser.uncacheTree('./tools.js');
-                // reload tools.js
-                global.Tools = require('./tools.js'); // note: this will lock up the server for a few seconds
+                    return this.sendReply("Formats have been hotpatched.");
+                } catch (e) {
+                    return this.sendReply("Something failed while trying to hotpatch formats: \n" + e.stack);
+                }
+                break;
+            case 'learnsets':
+                try {
+                    // uncache the tools.js dependency tree
+                    CommandParser.uncacheTree('./tools.js');
+                    // reload tools.js
+                    global.Tools = require('./tools.js'); // note: this will lock up the server for a few seconds
 
-                return this.sendReply("Learnsets have been hotpatched.");
-            } catch (e) {
-                return this.sendReply("Something failed while trying to hotpatch learnsets: \n" + e.stack);
-            }
+                    return this.sendReply("Learnsets have been hotpatched.");
+                } catch (e) {
+                    return this.sendReply("Something failed while trying to hotpatch learnsets: \n" + e.stack);
+                }
+                break;
+            default:
+                return this.sendReply("Your hot-patch command was unrecognized.");
 
         }
-        this.sendReply("Your hot-patch command was unrecognized.");
+        
     },
 
     savelearnsets: function(target, room, user) {

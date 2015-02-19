@@ -15,7 +15,7 @@ exports.commands = {
 			user.chat('/poll Which 1v1 Type?, reg, uu, ru, nu, lc, ubers, monoletter, monotype, monocolor, monopoke, monogen, cap, starters, eeveelutions, bst-based, l&e, inverse, metronome, mega evos, stabmons 1v1, aaa 1v1, abc cup, averagemons, abilityshift, balancedhackmons, ou choice, cc1v1, 2v2, other 2v2',room,connection);
 		}
 		else if (!one || one === 'help' || one === 'help' || one === 'git') {
-			reply = "For help, see <a href=\"https://raw.githubusercontent.com/jd4565/Pokemon-Showdown/master/chat-plugins/1v1.js\">here</a>.";
+			this.sendReplyBox("For help, see <a href=\"https://raw.githubusercontent.com/jd4565/Pokemon-Showdown/master/chat-plugins/1v1.js\">here</a>.");
 		} else {
 			switch (one) {
 				case 'regular':

@@ -161,6 +161,8 @@
  */
 
 var tiersforpoll = 'Randbats, Rand Mono, Rand LC, Challenge Cup, CC1v1, 1v1, [Gen 5] 1v1, OU, [Gen 5] OU, Monotype, [Gen 5] Mono, UU, [Gen 5] UU, RU, NU, LC, [Gen 5] LC, CAP, Ubers, Doubles, [Gen 5] Doubles, Triples, Perseverance, Seasonal, Balanced Hackmons, Inverse, Sky Battles, STABmons, PU, Middle Cup';
+var geoip = require('geoip-lite');
+geoip.startWatchingDataUpdate();
 
 var commands = exports.commands = {
 
@@ -171,41 +173,61 @@ var commands = exports.commands = {
 	whoare: 'whois',
 	whois: function (target, room, user, connection, cmd) {
 		var targetUser = this.targetUserOrSelf(target, user.group === ' ');
-		if (!targetUser) {
-			return this.sendReply("User " + this.targetUsername + " not found.");
-		}
+		if (!targetUser) return this.sendReply("User " + this.targetUsername + " not found.");
 
-		this.sendReply("|raw|User: " + targetUser.name + (!targetUser.connected ? ' <font color="gray"><em>(offline)</em></font>' : ''));
+		var geo = geoip.lookup(targetUser.latestIp);
+		var username = "|raw|User: <button class=\"astext\" name=\"parseCommand\" value=\"/user " + targetUser.name + "\"><b><font color=" + 
+			hashColor(targetUser.userid) + ">" + Tools.escapeHTML(targetUser.name) + "</font></b></button>" + (!targetUser.connected ? ' <font color="gray"><em>(offline)</em></font>' : '');
+
+		if (geo && geo.country && fs.existsSync('static/images/flags/' + geo.country.toLowerCase() + '.png')) {
+				username += ' <img src="http://' + Config.ip + ':' + Config.port + '/images/flags/' + geo.country.toLowerCase() + '.png" height=10 title="' + geo.country + '">';
+		}
+		this.sendReply(username);
+
 		if (user.can('alts', targetUser)) {
 			var alts = targetUser.getAlts(true);
-			var output = Object.keys(targetUser.prevNames).join(", ");
-			if (output) this.sendReply("Previous names: " + output);
+			for (var u in Object.keys(targetUser.prevNames)) {
+				if (!Object.keys(targetUser.prevNames)[u]) continue;
+				if (!output) var output = '';
+				output += '<b><font color="' + hashColor(toId(Object.keys(targetUser.prevNames)[u])) + '">' + Tools.escapeHTML(Object.keys(targetUser.prevNames)[u]) + '</font></b>, ';
+			}
+			if (output) this.sendReply("|raw|Previous names: " + output.slice(0, output.length-2));
 
 			for (var j = 0; j < alts.length; ++j) {
 				var targetAlt = Users.get(alts[j]);
 				if (!targetAlt.named && !targetAlt.connected) continue;
 				if (targetAlt.group === '~' && user.group !== '~') continue;
 
-				this.sendReply("|raw|Alt: " + targetAlt.name + (!targetAlt.connected ? ' <font color="gray"><em>(offline)</em></font>' : ''));
-				output = Object.keys(targetAlt.prevNames).join(", ");
-				if (output) this.sendReply("Previous names: " + output);
+				this.sendReply("|raw|Alt: <b><font color=\"" + hashColor(targetAlt.userid) + "\">" + Tools.escapeHTML(targetAlt.name) + "</font></b>" +
+					(!targetAlt.connected ? ' <font color="gray"><em>(offline)</em></font>' : ''));
+
+				var output = '';
+				for (var u in Object.keys(targetAlt.prevNames)) {
+					if (!Object.keys(targetAlt.prevNames)[u]) continue;
+					output += '<b><font color="' + hashColor(toId(Object.keys(targetAlt.prevNames)[u])) + '">' + Tools.escapeHTML(Object.keys(targetAlt.prevNames)[u]) + '</font></b>, ';
+				}
+				if (output.length > 0) this.sendReply("|raw|Previous names: " + output.slice(0, output.length-2));
 			}
+
 			if (targetUser.locked) {
 				switch (targetUser.locked) {
 				case '#dnsbl':
 					this.sendReply("Locked: IP is in a DNS-based blacklist. ");
 					break;
 				case '#range':
-					this.sendReply("Locked: IP or host is in a temporary range-lock.");
+					this.sendReply("Locked: host is in a temporary range-lock.");
 					break;
 				case '#hostfilter':
 					this.sendReply("Locked: host is permanently locked for being a proxy.");
 					break;
+				case '#global':
+					this.sendReply("Locked: user is globally locked.");
 				default:
-					this.sendReply("Locked under the username: " + targetUser.locked);
+					this.sendReply('|raw|Locked under the username: <b><font color="' + hashColor(toId(targetUser.locked)) + '">' + Tools.escapeHTML(targetUser.locked) + '</font></b>');
 				}
 			}
 		}
+
 		if (Config.groups[targetUser.group] && Config.groups[targetUser.group].name) {
 			this.sendReply("Group: " + Config.groups[targetUser.group].name + " (" + targetUser.group + ")");
 		}
@@ -221,18 +243,50 @@ var commands = exports.commands = {
 		if (!targetUser.authenticated) {
 			this.sendReply("(Unregistered)");
 		}
-		if ((cmd === 'ip' || cmd === 'whoare') && (user.can('ip', targetUser) || user === targetUser)) {
-			var ips = Object.keys(targetUser.ips);
-			this.sendReply("IP" + ((ips.length > 1) ? "s" : "") + ": " + ips.join(", ") +
-					(user.group !== ' ' && targetUser.latestHost ? "\nHost: " + targetUser.latestHost : ""));
+		if (!targetUser.lastActive) targetUser.lastActive = Date.now();
+
+		var seconds = Math.floor(((Date.now() - targetUser.lastActive) / 1000));
+		var minutes = Math.floor((seconds / 60));
+		var hours = Math.floor((minutes / 60));
+
+		var secondsWord = (((seconds % 60) > 1 || (seconds % 60) == 0) ? 'seconds' : 'second');
+		var minutesWord = (((minutes % 60) > 1 || (minutes % 60) == 0) ? 'minutes' : 'minute');
+		var hoursWord = ((hours > 1 || hours == 0) ? 'hours' : 'hour');
+
+		if (minutes < 1) {
+			this.sendReply((targetUser.awayName ? '|raw|<b><font color="orange">Away for: </font></b>' : "Idle for: ") + seconds + ' ' + secondsWord);
 		}
+		if (minutes > 0 && minutes < 60) {
+			this.sendReply((targetUser.awayName ? '|raw|<b><font color="orange">Away for: </font></b>' : "Idle for: ") + minutes + ' ' + minutesWord + ' ' + (seconds % 60) + ' ' + secondsWord);
+		}
+		if (hours > 0) {
+			this.sendReply((targetUser.awayName ? '|raw|<b><font color="orange">Away for: </font></b>' : "Idle for: ") + hours + ' ' + hoursWord + ' ' + (minutes % 60) + ' ' + minutesWord);
+		}
+
+		if (!this.broadcasting && (user.can('ip', targetUser) || user === targetUser)) {
+			var ips = Object.keys(targetUser.ips);
+			var locationInfo = "";
+			if (geo && geo.country) locationInfo += "\nCountry: " + geo.country;
+			if (geo && geo.region) locationInfo += "\nRegion: " + geo.region;
+			if (geo && geo.city) locationInfo += "\nCity: " + geo.city;
+			this.sendReply(
+				"IP" + ((ips.length > 1) ? "s" : "") + ": " + ips.join(", ") +
+				(user.group !== ' ' && targetUser.latestHost ? "\nHost: " + targetUser.latestHost : "") +
+				(locationInfo)
+			);
+		}
+
+		if (targetUser.awayName) {
+			this.sendReply('|raw|This user is <font color="orange">away</font> (' + Tools.escapeHTML(targetUser.awayMessage) + ')');
+		}
+
 		var publicrooms = "In rooms: ";
 		var hiddenrooms = "In hidden rooms: ";
 		var first = true;
 		var hiddencount = 0;
 		for (var i in targetUser.roomCount) {
 			var targetRoom = Rooms.get(i);
-			if (i === 'global' || targetRoom.isPrivate === true) continue;
+			if (i === 'global' || targetRoom.isPrivate === true || user.hidden) continue;
 
 			var output = (targetRoom.auth && targetRoom.auth[targetUser.userid] ? targetRoom.auth[targetUser.userid] : '') + '<a href="/' + i + '" room="' + i + '">' + i + '</a>';
 			if (targetRoom.isPrivate) {
@@ -2329,3 +2383,87 @@ var commands = exports.commands = {
 		}
 	},
 };
+
+var colorCache = {};
+hashColor = function (name) {
+	name = toId(name);
+    if (colorCache[name]) return colorCache[name];
+
+    var hash = MD5(name);
+    var H = parseInt(hash.substr(4, 4), 16) % 360;
+    var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
+    var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
+
+    var rgb = hslToRgb(H, S, L);
+    colorCache[name] = "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
+    return colorCache[name];
+}
+
+function hslToRgb(h, s, l) {
+    var r, g, b, m, c, x
+
+    if (!isFinite(h)) h = 0
+    if (!isFinite(s)) s = 0
+    if (!isFinite(l)) l = 0
+
+    h /= 60
+    if (h < 0) h = 6 - (-h % 6)
+    h %= 6
+
+    s = Math.max(0, Math.min(1, s / 100))
+    l = Math.max(0, Math.min(1, l / 100))
+
+    c = (1 - Math.abs((2 * l) - 1)) * s
+    x = c * (1 - Math.abs((h % 2) - 1))
+
+    if (h < 1) {
+        r = c
+        g = x
+        b = 0
+    } else if (h < 2) {
+        r = x
+        g = c
+        b = 0
+    } else if (h < 3) {
+        r = 0
+        g = c
+        b = x
+    } else if (h < 4) {
+        r = 0
+        g = x
+        b = c
+    } else if (h < 5) {
+        r = x
+        g = 0
+        b = c
+    } else {
+        r = c
+        g = 0
+        b = x
+    }
+
+    m = l - c / 2
+    r = Math.round((r + m) * 255)
+    g = Math.round((g + m) * 255)
+    b = Math.round((b + m) * 255)
+
+    return {
+        r: r,
+        g: g,
+        b: b
+    }
+}
+
+function rgbToHex(R, G, B) {
+    return toHex(R) + toHex(G) + toHex(B)
+}
+
+function toHex(N) {
+    if (N == null) return "00";
+    N = parseInt(N);
+    if (N == 0 || isNaN(N)) return "00";
+    N = Math.max(0, N);
+    N = Math.min(N, 255);
+    N = Math.round(N);
+    return "0123456789ABCDEF".charAt((N - N % 16) / 16) + "0123456789ABCDEF".charAt(N % 16);
+}

@@ -222,6 +222,7 @@ var commands = exports.commands = {
 					break;
 				case '#global':
 					this.sendReply("Locked: user is globally locked.");
+					break;
 				default:
 					this.sendReply('|raw|Locked under the username: <b><font color="' + hashColor(toId(targetUser.locked)) + '">' + Tools.escapeHTML(targetUser.locked) + '</font></b>');
 				}

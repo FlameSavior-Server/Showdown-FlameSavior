@@ -2410,12 +2410,13 @@ exports.commands = {
 
 	arifeen: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/AmEDkZR.png" width="145">' +
-			'<a href="http://i.imgur.com/NfkUysG.png"><img src="http://i.imgur.com/X3fJccD.png" width="230"/></a>' +
-			'<img src="http://i.imgur.com/qizEdWg.gif" width="145"/><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Qu8qsoJ.png" width="100">' +
+			'<a href="http://i.imgur.com/NfkUysG.png">' +
+			'<img src="http://i.imgur.com/X3fJccD.png" width="320"/></a>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/rayquaza-mega.gif" width="100"/><br />' +
 			'<img src="http://i.imgur.com/ALqQPAZ.png" height="80"/>' +
 			'<img src="http://i.imgur.com/metUBom.png" height="80"/>' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus.gif" height="80"/><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus-therian.gif" height="80"/><br />' +
 			'<img src="http://i.imgur.com/SMEgXvl.png" width="550"/></center>'
 		);
 	},

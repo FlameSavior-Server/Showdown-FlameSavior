@@ -9,11 +9,10 @@ exports.commands = {
 	frostmag: function (target, room, user, connection) {
 		if (room.id !== 'coldfront') return false;
 		if (!this.canTalk()) return;
-		var mag = target;
 		var mag_name = "Cold Front";
 		var allowed_set_usernames = ['flicette','panpawn']; //users who are allowed to change the newest issue link
-		var mag1 = toId(mag.slice(0, mag.indexOf(', ')));
-		var mag2 = mag.slice(mag.indexOf(', ') + 1).trim();
+		var mag1 = toId(target.slice(0, target.indexOf(', ')));
+		var mag2 = target.slice(target.indexOf(', ') + 1).trim();
 		var link_to_newest_issue = Rooms.rooms.lobby.chatRoomData.frostMagLink;
 		if (mag1 === 'set') {
 			if (allowed_set_usernames.indexOf(toId(user.name)) === -1 || !user.group === '~') return false;

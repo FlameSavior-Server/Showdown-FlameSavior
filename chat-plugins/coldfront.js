@@ -22,7 +22,7 @@ exports.commands = {
 			this.logModCommand(user.name + " has set the link of the newest issue of the " + mag_name + " to be: " + link_to_newest_issue);
 		} else {
 			if (!this.canBroadcast()) return;
-			this.sendReplyBox(
+			return this.sendReplyBox(
 					"<center><b>" + mag_name + "</b><br /> " +
 					"- A link to the site of the " + mag_name + " can be found <a href=\"\">here</a>.<br />" +
 					"- For information on how to become a contrubutor, go <a href=\"\">here</a>.<br />" +

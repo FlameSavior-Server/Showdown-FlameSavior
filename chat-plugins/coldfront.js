@@ -20,7 +20,7 @@ exports.commands = {
 			Rooms.rooms.lobby.chatRoomData.frostMagLink = mag2;
 			Rooms.global.writeChatRoomData();
 			this.sendReply("The link to the newest issue has been set to: " + mag2);
-			this.logModCommand(user.name + " has set the link of the newest issue of the " + mag_name + " to be: " + link_to_newest_issue);
+			this.logModCommand(user.name + " has set the link of the newest issue of the " + mag_name + " to be: " + mag2);
 		} else {
 			if (!this.canBroadcast()) return;
 			this.sendReplyBox(

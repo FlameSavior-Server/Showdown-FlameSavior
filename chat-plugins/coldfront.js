@@ -20,13 +20,14 @@ exports.commands = {
 			link_to_newest_issue = mag2;
 			this.sendReply("The link to the newest issue has been set to: " + link_to_newest_issue);
 			this.logModCommand(user.name + " has set the link of the newest issue of the " + mag_name + " to be: " + link_to_newest_issue);
-		}
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox(
-				"<center><b>" + mag_name + "</b><br /> " +
+		} else {
+			if (!this.canBroadcast()) return;
+			this.sendReplyBox(
+				"<center><b>" + mag_name + "</b></center><br /> " +
 				"- A link to the site of the " + mag_name + " can be found <a href=\"\">here</a>.<br />" +
 				"- For information on how to become a contrubutor, go <a href=\"\">here</a>.<br />" +
 				"- A link to our newest issue can be found <a href=\"" + link_to_newest_issue + "\">here</a>."
-		);
-	}	
+			);
+		}	
+	}
 };

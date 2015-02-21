@@ -11,12 +11,12 @@ exports.commands = {
 		if (!this.canTalk()) return;
 		var mag = target;
 		var mag_name = "Cold Front";
-		var allowed_set_usernames = ['flicette','panpawn'];
+		var allowed_set_usernames = ['flicette','panpawn']; //users who are allowed to change the newest issue link
 		var mag1 = toId(mag.slice(0, mag.indexOf(', ')));
 		var mag2 = mag.slice(mag.indexOf(', ') + 1).trim();
 		var link_to_newest_issue = Rooms.rooms.lobby.chatRoomData.frostMagLink;
 		if (mag1 === 'set') {
-			if (allowed_set_usernames.indexOf(toId(user.name)) === -1) return false;
+			if (allowed_set_usernames.indexOf(toId(user.name)) === -1 || !user.group === '~') return false;
 			Rooms.rooms.lobby.chatRoomData.frostMagLink = mag2;
 			Rooms.global.writeChatRoomData();
 			this.sendReply("The link to the newest issue has been set to: " + mag2);

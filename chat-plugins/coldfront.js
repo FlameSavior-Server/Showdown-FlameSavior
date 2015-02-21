@@ -5,12 +5,10 @@
 */
 
 exports.commands = {
-
 	coldfront: 'frostmag',
 	frostmag: function (target, room, user, connection) {
 		if (room.id !== 'coldfront') return false;
 		if (!this.canTalk()) return;
-		if (!this.canBroadcast()) return;
 		var mag = target;
 		var mag_name = "Cold Front";
 		var allowed_set_usernames = ['flicette','panpawn'];
@@ -23,6 +21,7 @@ exports.commands = {
 			this.sendReply("The link to the newest issue has been set to: " + link_to_newest_issue);
 			this.logModCommand(user.name + " has set the link of the newest issue of the " + mag_name + " to be: " + link_to_newest_issue);
 		} else {
+			if (!this.canBroadcast()) return;
 			this.sendReplyBox(
 					"<center><b>" + mag_name + "</b><br /> " +
 					"- A link to the site of the " + mag_name + " can be found <a href=\"\">here</a>.<br />" +

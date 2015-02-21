@@ -17,7 +17,7 @@ exports.commands = {
 		var mag2 = mag.slice(mag.indexOf(', ') + 1).trim();
 		if (mag1 === 'set') {
 			if (allowed_set_usernames.indexOf(toId(user.name)) === -1) return false;
-			link_to_newest_issue = mag2;
+			Rooms.rooms.lobby.chatRoomData.frostMagLink = mag2;
 			Rooms.global.writeChatRoomData();
 			this.sendReply("The link to the newest issue has been set to: " + link_to_newest_issue);
 			this.logModCommand(user.name + " has set the link of the newest issue of the " + mag_name + " to be: " + link_to_newest_issue);

@@ -4,7 +4,7 @@
 * by: panpawn
 */
 
-var link_to_newest_issue = Rooms.rooms.lobby.frostMagLink;
+var link_to_newest_issue = Rooms.rooms.lobby.chatRoomData.frostMagLink;
 exports.commands = {
 	coldfront: 'frostmag',
 	frostmag: function (target, room, user, connection) {

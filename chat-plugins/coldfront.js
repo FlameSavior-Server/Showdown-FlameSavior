@@ -13,7 +13,7 @@ exports.commands = {
 		var mag_name = "Cold Front";
 		var allowed_set_usernames = ['flicette','panpawn'];
 		var mag1 = toId(mag.slice(0, mag.indexOf(', ')));
-		var mag2 = mag.slice(commaIndex + 1).trim();
+		var mag2 = mag.slice(mag.indexOf(', ') + 1).trim();
 		var link_to_newest_issue = Rooms.rooms.lobby.frostMagLink;
 		if (mag1 === 'set') {
 			if (allowed_set_usernames.indexOf(toId(user.name)) === -1) return false;

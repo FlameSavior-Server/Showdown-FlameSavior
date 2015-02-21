@@ -6075,6 +6075,18 @@ exports.commands = {
 		);
 	},
 	
+	kargus: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/eEYkT1f.gif"/>' +
+			'<img src="http://i.imgur.com/IoH1kAj.png"/>' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/chandelure.gif"/>' +
+			'<img src="http://i.imgur.com/cnSikRR.png" width="400"/><br />' +
+			'<img src="http://i.imgur.com/10Kozv7.png"/><br />' +
+			'<font size="3"><b>Aces: <font color="blue">Kammi</font> & <font color="purple"/>Argus</font></b></font><br />' +
+			'<i>"We can\'t hear the shippers over our GXE."</i></center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

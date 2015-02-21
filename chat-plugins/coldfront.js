@@ -4,7 +4,6 @@
 * by: panpawn
 */
 
-var link_to_newest_issue = Rooms.rooms.lobby.chatRoomData.frostMagLink;
 exports.commands = {
 	coldfront: 'frostmag',
 	frostmag: function (target, room, user, connection) {
@@ -15,6 +14,7 @@ exports.commands = {
 		var allowed_set_usernames = ['flicette','panpawn'];
 		var mag1 = toId(mag.slice(0, mag.indexOf(', ')));
 		var mag2 = mag.slice(mag.indexOf(', ') + 1).trim();
+		var link_to_newest_issue = Rooms.rooms.lobby.chatRoomData.frostMagLink;
 		if (mag1 === 'set') {
 			if (allowed_set_usernames.indexOf(toId(user.name)) === -1) return false;
 			Rooms.rooms.lobby.chatRoomData.frostMagLink = mag2;

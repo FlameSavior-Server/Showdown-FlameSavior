@@ -82,6 +82,7 @@ emoticons: {
         'SrSly': 'http://i.imgur.com/pMJKIDW.png',
         'LetItGo': 'http://i.picresize.com/images/2015/02/14/rgN5R.jpg',
         'JollyRoger': 'http://i.picresize.com/images/2015/02/18/0AXMQ.jpg',
+        'HerB': 'http://i.imgur.com/IC2BAxw.png',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

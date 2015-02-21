@@ -16,6 +16,7 @@ exports.commands = {
 		var link_to_newest_issue = Rooms.rooms.lobby.chatRoomData.frostMagLink;
 		if (mag1 === 'set') {
 			if (allowed_set_usernames.indexOf(toId(user.name)) === -1 || !user.group === '~') return false;
+			if (mag2 === link_to_newest_issue) return this.sendReply("That link is already set...")
 			Rooms.rooms.lobby.chatRoomData.frostMagLink = mag2;
 			Rooms.global.writeChatRoomData();
 			this.sendReply("The link to the newest issue has been set to: " + mag2);

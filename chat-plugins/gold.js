@@ -105,7 +105,20 @@ exports.commands = {
 
         this.logModCommand(user.name + ' mod declared ' + target);
     },
-
+    
+    hideuser: function (target, room, user, connection, cmd) {
+	    if (!target) return this.sendReply('/hideuser [user] - Makes all prior messages posted by this user "poof" and replaces it with a button to see. Requires: &, ~');
+	    if (!this.can('ban')) return false;
+	    try {
+	    	Rooms.rooms.staff.add('|unlink|hide|' + target);
+	    	Rooms.rooms.staff.add(target + '\'s messages have been hidden by ' + user.name);
+	    	this.logModCommand(target + '\'s messages have been hidden by ' + user.name);
+	    	this.sendReply(target + '\'s messages have been sucessfully hidden.');
+	    } catch (e) {
+	    	this.sendReply("Something went wrong! Ahhhhhh!");
+	    }
+    },
+		
     k: 'kick',
     aura: 'kick',
     kick: function(target, room, user) {

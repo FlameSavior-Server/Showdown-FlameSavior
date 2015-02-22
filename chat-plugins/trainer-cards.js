@@ -4,6 +4,91 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	bargod: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/zJbzQwi.png" width="300"><br />' +
+			'<img src="http://i.imgur.com/JOXv6Qv.jpg" height="150" width="250"><br />' +
+			'<b>Ace: <em>Bars / Don Demarco!</em></b><br />' +
+			'<b><em>Quote: <em>"I got socks on nigga, seeing defeat is not an option." ~ Rorschach</em></b></center>'
+		);
+	},
+
+	kim: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/V5SsEXH.gif" width=180" height="60"><br />' +
+			'<hr width="300"><br />' +
+			'<img src="http://i.imgur.com/35stwX5.jpg" width=350"><br />' +
+			'<hr width="300"><br />' +
+			'<b><i>Quote: </b>"Beauty is not whats on the outside but whats on the inside."</i><br />' +
+			'<b><i>Ace:</b> Beauty and Love ♡♥</i><br/>' +
+			'<button title="♡" name="send" value="/transferbucks Oracle Kim, 1"><font color="#FF66CC"><b><i>Click here to help me</i></b></font></button></center>'
+		);
+	},
+
+	selena: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/9mzRRUd.png"><br />' +
+			'<img src="http://i.imgur.com/Vwd263E.png"><br />' +
+			'<b>Ace:</b> Wits, the Muterifle, and Hax<br />' +
+			'"Say hello to my fren, the muterifle. It has a tendency to go off at the slightest touch. I hope your reflexes are good."</center>'
+		);
+	},
+
+	shuckle: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<table bgcolor="#000000"width="100%"><td><center><img src="http://i.imgur.com/pkeZ83c.png" height="100"><br />' +
+			'<img src="http://scontent-b.cdninstagram.com/hphotos-xpa1/t51.2885-15/s306x306/e15/928870_1533985586873536_1784250709_n.jpg" height="100">' +
+			'<img src="http://pldh.net/media/pokemon/gen6/xy-animated/213.gif" height="100">' +
+			'<img src="http://fc01.deviantart.net/fs70/i/2010/213/8/b/shuckle_by_Emerald_Eyes_Phoenix.png" height="100"><br />' +
+			'<button class="motc-red" name="send" value=/transferbucks King Shuckleton, 1"><font color="ffff00" size="2">Donate to the Shuckle Empire</font></button></center>'
+		);
+	},
+
+	paul: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/I1RsQJl.jpg"><br />' +
+			'<img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/slowbro-3.gif"><br />' +
+			'[22:42] #E4 kΩ\'el-senpai: If I can\'t hit you, I\'ll kiss you.<br />' +
+			'Ace: Slowbro</center>'
+		);
+	},
+
+	steamy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/KMyReYh.png"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/chandelure.gif">' +
+			'<img src="http://images5.fanpop.com/image/photos/31900000/Akise-and-Yukki-akise-aru-31938274-500-354.png" width="250">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/milotic.gif"><br />' +
+			'<b>Ace:</b> Chandelure & Milotic<br />' +
+			'Is it steamy in here, or is it just us? ;)</center>'
+		);
+	},
+
+	fila: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/wF2ymUX.png"><br />' +
+			'<img src="http://i.imgur.com/GuzByaV.png"><br />' +
+			'<img src="http://i.imgur.com/rjjqBA4.gif" width="300"><br />' +
+			'<b>Ace:</b> No Lube, No Mercy<br />' +
+			'Jessica Alba, I\'d take a Rhydon her<3</center>'
+		);
+	},
+
+	pets: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.picresize.com/images/2015/02/19/Mr9J.png" height="150">' +
+			'<img src="http://i.imgur.com/JoBzJ1K.gif">' +
+			'<img src="http://animeyume.com/spheal.jpg" width="200"><br />' +
+			'<font size="4"><a href="https://31.media.tumblr.com/tumblr_m8onw5p38n1qfh25io1_500.gif">Piscean</a></font>' +
+			'<font size="4"> and <a href="http://googlegif.com/wp-content/uploads/2012/10/JBulc.gif">Jets</a></font><br />' +
+			'Our friendship in a nutshell<br />' +
+			'<img src="http://media.tumblr.com/6a3dd1e184ca817c182f0a9aacd09c48/tumblr_inline_mxijkcikn71sohk3w.gif" width="200"><br />' +
+			'<i>Friendship isn\'t about who came first or who you have known the longest, it\'s about who came and never left</i><br />' +
+			'<b>Also, if you a h8r then </b>' +
+			'<img src="https://collegecandy.files.wordpress.com/2013/11/bye-b.gif" width="150"></center>'
+		);
+	},
+
 	pantydroppers: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/JT2XFqn.gif" width="200"height="220">' +
@@ -2395,16 +2480,13 @@ exports.commands = {
 		);
 	},
 
-	colons: 'chakra',
 	chakra: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/4Qb8b0e.gif"><br />' +
-			'<img src="http://i.imgur.com/fIiqiBh.gif">' +
-			'<img src="http://i.imgur.com/GfwnBN7.gif">' +
-			'<img src="http://i.imgur.com/fIiqiBh.gif"><br />' +
-			'<b>Ace: </b>Sord<br />' +
-			'"hi how r u :s"<br />' +
-			'<button name="send" value="/transferbucks Chakra, 1">Donate if you have swag.</button> </center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/V1OWco0.png"><br />' +
+			'<img src="http://i.imgur.com/WSczoAx.png"><br />' +
+			'<font face="futura" color="green"><b>Ace: Mew</b></font><br />' +
+			'<font face="futura" color="orange" size="3"><b>El Psy Congroo</b></font><br />' +
+			'<button class="motc-red" name="send" value="/transferbucks chakra, 1">Donate!</button></center>'
 		);
 	},
 
@@ -2589,11 +2671,11 @@ exports.commands = {
 
 	frosty: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://pkparaiso.com/imagenes/xy/sprites/animados/articuno.gif">' +
-			'<img src="http://i.imgur.com/eOxXXjo.gif">' +
-			'<img src="http://pkparaiso.com/imagenes/xy/sprites/animados/kyurem-white.gif"><br />' +
-			'<b>Ace:</b> Kyurem-White<br />' +
-			'"Beware... I bring hax to the battle and I won\'t stop at anything to make sure every last Pokemon you have freezes to death."</center>'
+		this.sendReplyBox('<center><img src="http://media2.giphy.com/media/rh9SyOeHuZCdG/200.gif" width="150">' +
+			'<img src="http://i.imgur.com/9wi9fBp.gif">' +
+			'<img src="http://media1.giphy.com/media/vfGiPqpC127Ti/200.gif" width="150"><br />' +
+			'<font color="darkblue"><b>Ace:</b> MY POWAS!!!<br />' +
+			'<b>"Let me poke you with an Icicle ;)"</font></center>'
 		);
 	},
 
@@ -3419,11 +3501,10 @@ exports.commands = {
 
 	greed: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/GoX5Jom.gif" height=""width="">' +
-			'<img src="http://i.imgur.com/8Sqiq2y.png" height="150"width="">' +
-			'<img src="http://i.imgur.com/NuelleY.gif"height="150"width=""><br />' +
-			'<b>Ace: </b>Hydreigon<br />' +
-			'Greed is true evil, and evil is darkness</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/jcXFE0k.png"><br />' +
+			'<img src="http://i.imgur.com/UpcxYcw.png" width="500"><br />' +
+			'<b>Ace:</b> Hydreigon<br />' +
+			'Greed is true evil, and evil is darkness.</center>'
 		);
 	},
 

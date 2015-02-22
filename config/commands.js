@@ -1603,7 +1603,14 @@ var commands = exports.commands = {
 			"said Nick x Niku!",
 			"tried to take Gasper from Hazeel!",
 			"was impaled by Blade!",
-			"got taken to Dante's rape dungeon!"
+			"got taken to Dante's rape dungeon!",
+			"took a Wood Hammer to the face!",
+			"sucked 37 dicks... in a row!",
+			"got trapped in Corsola's Cage!",
+			"was secretly Lonk from Pennsylvania!",
+			"was mistaken for a girl by Hazeel!",
+			"tried to genderbend, but failed!",
+			"insulted eels in front of Nick!"
 		];
 
 		return function (target, room, user) {

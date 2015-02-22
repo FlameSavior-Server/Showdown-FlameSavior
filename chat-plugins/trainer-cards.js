@@ -6081,7 +6081,7 @@ exports.commands = {
 			'<img src="http://i.imgur.com/IoH1kAj.png"/>' +
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani/chandelure.gif"/>' +
 			'<img src="http://i.imgur.com/cnSikRR.png" width="400"/><br />' +
-			'<img src="http://i.imgur.com/10Kozv7.png"/><br />' +
+			'<img src="http://i.imgur.com/UiUyJUm.png"/><br />' +
 			'<font size="3"><b>Aces: <font color="blue">Kammi</font> & <font color="purple"/>Argus</font></b></font><br />' +
 			'<i>"We can\'t hear the shippers over our GXE."</i></center>'
 		);

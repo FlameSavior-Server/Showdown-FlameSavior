@@ -1420,7 +1420,7 @@ var commands = exports.commands = {
         }
         targetUser.popup(user.name + " has permanently banned you.");
         this.addModCommand(targetUser.name + " was permanently banned by " + user.name + ".");
-        this.add('|unlink|' + targetUser.userid);
+        this.add('|unlink|hide|' + targetUser.userid);
         targetUser.ban();
         ipbans.write('\n' + targetUser.latestIp);
     },
@@ -2953,7 +2953,7 @@ var commands = exports.commands = {
             this.privateModCommand("(" + targetUser.name + "'s ac account: " + targetUser.autoconfirmed + ")");
         }
 
-        this.add('|unlink|' + this.getLastIdOf(targetUser));
+        this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
         targetUser.ban();
     },
 
@@ -2983,7 +2983,7 @@ var commands = exports.commands = {
         if (alts.length) {
             this.addModCommand("" + targetUser.name + "'s alts were also hit: " + alts.join(", "));
             for (var i = 0; i < alts.length; ++i) {
-                this.add('|unlink|' + toId(alts[i]));
+                this.add('|unlink|hide|' + toId(alts[i]));
             }
         }
 
@@ -3021,7 +3021,7 @@ var commands = exports.commands = {
             }
         }
 
-        this.add('|unlink|' + targetUser.userid);
+        this.add('|unlink|hide|' + targetUser.userid);
         targetUser.ban();
     },
 
@@ -4547,7 +4547,7 @@ var commands = exports.commands = {
         } else if (acAccount) {
             this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
         }
-        this.add('|unlink|' + this.getLastIdOf(targetUser));
+        this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
 
         targetUser.lock();
     },

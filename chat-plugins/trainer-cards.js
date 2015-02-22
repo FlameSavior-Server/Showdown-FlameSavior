@@ -84,7 +84,7 @@ exports.commands = {
 			'Our friendship in a nutshell<br />' +
 			'<img src="http://media.tumblr.com/6a3dd1e184ca817c182f0a9aacd09c48/tumblr_inline_mxijkcikn71sohk3w.gif" width="200"><br />' +
 			'<i>Friendship isn\'t about who came first or who you have known the longest, it\'s about who came and never left</i><br />' +
-			'<b>Also, if you a h8r then </b>' +
+			'<b>Also, if you a h8r then</b><br />' +
 			'<img src="https://collegecandy.files.wordpress.com/2013/11/bye-b.gif" width="150"></center>'
 		);
 	},

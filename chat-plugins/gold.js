@@ -107,7 +107,7 @@ exports.commands = {
     },
     
     hideuser: function (target, room, user, connection, cmd) {
-	    if (!target) return this.sendReply('/hideuser [user] - Makes all prior messages posted by this user "poof" and replaces it with a button to see. Requires: &, ~');
+	    if (!target) return this.sendReply('/hideuser [user] - Makes all prior messages posted by this user "poof" and replaces it with a button to see. Requires: @, &, ~');
 	    if (!this.can('ban')) return false;
 	    try {
 	    	Rooms.rooms.staff.add('|unlink|hide|' + target);

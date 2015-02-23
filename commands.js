@@ -650,7 +650,7 @@ var commands = exports.commands = {
  	roomkick: function(target, room, user){
  		//if (!room.auth && room.id !== "staff") return this.sendReply('/rkick is designed for rooms with their own auth.');
  		if (!this.can('roommod', null, room)) return false;
- 		if (!this.canTalk()) return;
+ 		if (!this.canTalk()) return false;
  		if (!target) return this.sendReply('/rkick [username] - kicks the user from the room. Requires: @ & ~');
 
  		target = this.splitTarget(target);

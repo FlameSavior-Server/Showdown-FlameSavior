@@ -6168,6 +6168,16 @@ exports.commands = {
 		);
 	},
 	
+	arley: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/naftCZ3.png"><br />' +
+			'<img src="http://i.imgur.com/IilSJlD.gif" width = 300><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/xyani/swanna.gif"><br />' +
+			'<b>Ace:</b> Big Booty Bird<br />' +
+			'"No scrub will get any love from me, sitting on their broke asses thinking they are better then me."</center>'
+		);
+	},
+	
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

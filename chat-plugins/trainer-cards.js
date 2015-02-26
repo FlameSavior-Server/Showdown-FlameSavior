@@ -6178,6 +6178,25 @@ exports.commands = {
 		);
 	},
 	
+	asians: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/fg8kKr3.png" height="150"><br />' +
+			'<button class="astext" name="parseCommand" value="/user hax for days"><img src="http://play.pokemonshowdown.com/sprites/xyani/latios.gif" title="Azian"></button>' +
+			'<button class="astext" name="parseCommand" value="/user AM Argus"><img src="http://play.pokemonshowdown.com/sprites/xyani/aegislash.gif" title="Argus"></button>' +
+			'<button class="astext" name="parseCommand" value="/user YourKouhai"><img src="http://play.pokemonshowdown.com/sprites/xyani/sharpedo-mega.gif" title="YourKouhai"></button>' +
+			'<button class="astext" name="parseCommand" value="/user TheYellowAce"><img src="http://play.pokemonshowdown.com/sprites/xyani/pikachu.gif" title="TheYellowAce"></button>' +
+			'<button class="astext" name="parseCommand" value="/user Kammi"><img src="http://play.pokemonshowdown.com/sprites/xyani/chandelure.gif" title="Kammi"></button><br />' +
+			'<button class="astext" name="parseCommand" value="/user III Arken"><img src="http://play.pokemonshowdown.com/sprites/xyani/mawile-mega.gif" title="ArkenCiel"></button>' +
+			'<img src="http://www.jiwoochun.com/WP-ShapeShifter/html-bonus/html/library/img/prettyPhoto/dark_rounded/spacer.gif" width="8"><button class="astext" name="parseCommand" value="/user AM Zenith"><img src="http://play.pokemonshowdown.com/sprites/xyani/torkoal.gif" title="Zenith"></button>' +
+			'<button class="astext" name="parseCommand" value="/user AL Laxuy"><img src="http://play.pokemonshowdown.com/sprites/xyani/bisharp.gif" title="Laxuy"></button>' +
+			'<button class="astext" name="parseCommand" value="/user AM Ticken"><img src="http://play.pokemonshowdown.com/sprites/xyani/celebi.gif" title="Ticken"></button>' +
+			'<button class="astext" name="parseCommand" value="/user AM Maskun"><img src="http://play.pokemonshowdown.com/sprites/xyani/heatran.gif" title="Maskun"></button><hr />' +
+			'<b>Aces:</b> ArkenCiel, Argus, Laxuy, Maskun, YourKouhai, TheYellowAce<br />' +
+			'<b>Halfway There:</b> Kammi, Ticken, Zenith, Azian<br /><br />' +
+			'<a href="https://www.youtube.com/watch?v=rpYtEeiWUW8"><button><b><font color="red">Hail Tong Hua</font></b></button></a></center>'
+		);
+	},
+		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<img src="http://i.imgur.com/8FOUnHg.png"><br />' +

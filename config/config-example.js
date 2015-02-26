@@ -45,12 +45,10 @@ exports.loginserverpublickey = "-----BEGIN RSA PUBLIC KEY-----\n" +
 // the server. Uncomment this definition if you want to use this feature;
 // otherwise, all crashes will lock down the server.
 /**exports.crashguardemail = {
-	transport: 'SMTP',
 	options: {
 		host: 'mail.example.com',
 		port: 465,
-		secureConnection: true,
-		maxConnections: 1,
+		secure: true,
 		auth: {
 			user: 'example@domain.com',
 			pass: 'password'

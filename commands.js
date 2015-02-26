@@ -1031,7 +1031,7 @@ var commands = exports.commands = {
         if (isItem) {
             switch (theItem) {
                 case 'symbol':
-            
+
                     if (targetUser.canCustomSymbol === true) {
                         return this.sendReply('This user has already bought that item from the shop... no need for another.');
                     }
@@ -1044,7 +1044,7 @@ var commands = exports.commands = {
                     }
                     break;
                 case 'custom':
-          
+
                     if (targetUser.canCustomAvatar === true) {
                         return this.sendReply('This user has already bought that item from the shop... no need for another.');
                     }
@@ -1171,7 +1171,7 @@ var commands = exports.commands = {
                     targetUser.send(user.name + ' has removed the custom symbol from you.');
                 } else {
                     return this.sendReply('They do not have a custom symbol for you to remove.');
-                } 
+                }
                 break;
             case 'custom':
                 if (targetUser.canCustomAvatar) {
@@ -1189,7 +1189,7 @@ var commands = exports.commands = {
                     targetUser.send(user.name + ' has removed the custom emote from you.');
                 } else {
                     return this.sendReply('They do not have a custom emote for you to remove.');
-                } 
+                }
                 break;
             case 'animated':
                 if (targetUser.canAnimatedAvatar) {
@@ -2011,77 +2011,51 @@ var commands = exports.commands = {
             '<center><button name="send" value="/challenge ponybot, challengecup1vs1" class="blackbutton" title="Challenge Cup 1vs1 Battle!"><font size="white">Click here for a CC1vs1 battle!'
         );
     },
+    authlist: function(target, room, user, connection) {
+        fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
+             var staff = {
+            "admins": [],
+            "leaders": [],
+            "mods": [],
+            "drivers": [],
+            "voices": []
+        };
+            var row = (''+data).split('\n');
+            for (var i = row.length; i > -1; i--) {
+                if (!row[i]) continue;
+                var rank = row[i].split(',')[1].replace("\r",'');
+                var person = row[i].split(',')[0];
+                switch (rank) {
+                    case '~':
+                        staff['admins'].push(person);
+                        console.log('admin is '+person);
+                        break;
+                    case '&':
+                        staff['leaders'].push(person);
+                        break;
+                    case '@':
+                        staff['mods'].push(person);
+                        break;
+                    case '%':
+                        staff['drivers'].push(person);
+                        break;
+                    case '+':
+                        staff['voices'].push(person);
+                        break;
+                    default:
+                        continue;
+                }
 
-    authlist: 'viewserverauth',
-    viewserverauth: function(target, room, user, connection) {
-        var buffer = [];
-        var admins = [];
-        var leaders = [];
-        var mods = [];
-        var drivers = [];
-        var voices = [];
+            }
+            console.log(staff['admins']);
+            connection.popup('Staff List \n\n**Administrators**:\n'+ staff['admins'].join(', ') +
+                             '\n**Leaders**:\n' + staff['leaders'].join(', ') +
+                             '\n**Moderators**:\n' + staff['mods'].join(', ') +
+                             '\n**Drivers**:\n' + staff['drivers'].join(', ') +
+                             '\n**Voices**:\n' + staff['voices'].join(', ')
+                );
 
-        admins2 = '';
-        leaders2 = '';
-        mods2 = '';
-        drivers2 = '';
-        voices2 = '';
-        stafflist = fs.readFileSync('config/usergroups.csv', 'utf8');
-        stafflist = stafflist.split('\n');
-        for (var u in stafflist) {
-            line = stafflist[u].split(',');
-            if (line[1] == '~') {
-                admins2 = admins2 + line[0] + ',';
-            }
-            if (line[1] == '&') {
-                leaders2 = leaders2 + line[0] + ',';
-            }
-            if (line[1] == '@') {
-                mods2 = mods2 + line[0] + ',';
-            }
-            if (line[1] == '%') {
-                drivers2 = drivers2 + line[0] + ',';
-            }
-            if (line[1] == '+') {
-                voices2 = voices2 + line[0] + ',';
-            }
-        }
-        admins2 = admins2.split(',');
-        leaders2 = leaders2.split(',');
-        mods2 = mods2.split(',');
-        drivers2 = drivers2.split(',');
-        voices2 = voices2.split(',');
-        for (var u in admins2) {
-            if (admins2[u] != '') admins.push(admins2[u]);
-        }
-        for (var u in leaders2) {
-            if (leaders2[u] != '') leaders.push(leaders2[u]);
-        }
-        for (var u in mods2) {
-            if (mods2[u] != '') mods.push(mods2[u]);
-        }
-        for (var u in drivers2) {
-            if (drivers2[u] != '') drivers.push(drivers2[u]);
-        }
-        for (var u in voices2) {
-            if (voices2[u] != '') voices.push(voices2[u]);
-        }
-        if (admins.length > 0) {
-            admins = admins.join(', ');
-        }
-        if (leaders.length > 0) {
-            leaders = leaders.join(', ');
-        }
-        if (mods.length > 0) {
-            mods = mods.join(', ');
-        }
-        if (drivers.length > 0) {
-            drivers = drivers.join(', ');
-        }
-        if (voices.length > 0) {
-            voices = voices.join(', ');
-        }
-        connection.popup('Gold Staff list \n\n**Administrators**: \n' + admins + '\n**Leaders**: \n' + leaders + '\n**Moderators**: \n' + mods + '\n**Drivers**: \n' + drivers + '\n**Voices**: \n' + voices);
+        })
     },
 
     css: function(target, room, user, connection) {
@@ -2990,7 +2964,7 @@ var commands = exports.commands = {
         this.add('|unlink|' + targetUser.userid);
         targetUser.ban();
     },
-    
+
     tban: 'bs',
     bs: function(target, room, user) {
         if (!target) return this.parse('/help ban');
@@ -3632,7 +3606,7 @@ var commands = exports.commands = {
                 return this.sendReply("Your hot-patch command was unrecognized.");
 
         }
-        
+
     },
 
     savelearnsets: function(target, room, user) {

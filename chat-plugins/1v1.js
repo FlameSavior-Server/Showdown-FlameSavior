@@ -6,7 +6,7 @@
 
 exports.commands = {
 	one: function(target, room, user, connection) {
-		if (room.id !== '1v1') return this.sendReply("Hey u bish, get in 1v1 to use this command,,,");
+		if (room.id !== '1v1') return this.sendReply("This command can only be used in the '1v1' room.");
 		if (!this.canTalk()) return;
 		if (!this.canBroadcast()) return;
 		var one = toId(target);

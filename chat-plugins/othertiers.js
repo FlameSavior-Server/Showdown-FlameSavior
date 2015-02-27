@@ -25,6 +25,7 @@ exports.commands = {
 			case 'colors': reply += 	"All starters given will be of the certain color that is decided by the host or picked randomly. One voice or higher will host. One voice or higher will host. Rules are <a href=\"https://docs.google.com/document/d/1VMATySDZCOh5cj5FmgRjOX005pHWtCS3jfS468O-QUc/edit?pli=1\">here</a>."; break;
 			case 'seasonal': reply += 	"These tours follow a monthly basis. One voice or higher will host. All the months themes can be found <a href=\"https://docs.google.com/document/d/1PtC2QsEsyyDJCBvRCdtH2uA1YC1CFBD10nAhsXXA4vk/edit?pli=1\">here</a>."; break;
 			case 'metronome': reply += 	"You may use one pokemon. Rules are <a href=\"http://pastebin.com/XjKvmpWw\">here</a>."; break;
+			case 'battlespot': reply +=	"A 3 on 3 with 6 pokemon team preview. Banlist + Rules can be found <a href=\"http://pastebin.com/m7RX164n\">here</a>."; break;
 		}
 		this.sendReplyBox("<b>" + ot + "</b> - " + reply);
 	}

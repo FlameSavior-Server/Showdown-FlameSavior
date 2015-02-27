@@ -6,12 +6,12 @@
 
 exports.commands = {
 	one: function (target, room, user, connection) {
-		if (room.id !== '1v1') return this.sendReply("Hey u bish, get in 1v1 to use this command,,,");
+		if (room.id !== '1v1') return this.sendReply("This command can only be used in the '1v1' room.");
 		if (!this.canTalk()) return;
 		if (!this.canBroadcast()) return;
 		var one = toId(target);
 		var reply = "";
-		if (!one || one === 'help' || one === 'git') return this.sendReplyBox("For help, see <a href=\"https://raw.githubusercontent.com/jd4565/Pokemon-Showdown/master/chat-plugins/1v1.js\">here</a>.");
+		if (!one || one === 'help' || one === 'git') return this.sendReplyBox("For help, see <a href=\"https://github.com/jd4565/Pokemon-Showdown/blob/master/chat-plugins/1v1.js\">here</a>.");
 		if (one === 'poll') return user.chat('/poll Next 1v1 Tour?, reg, cc1v1, inverse, mono gen, monoletter, monotype, monocolor, cap, eevee only, mega evos, bst based, metronome, lc starters, ubers, lc, 2v2, monopoke, ou choice, almost any ability 1v1, stabmons 1v1, abc cup, averagemons 1v1, balanced hackmons 1v1, tier shift 1v1, mediocremons 1v1, retro1v1',room,connection);
 		switch (one) {
 			case 'regular':

@@ -12,7 +12,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		var ot = toId(target);
 		var reply = "";
-		if (ot === 'poll') return user.chat('/poll Next type of Tour?, Inverse battle, Little Cup, Ubers, Smogon Doubles, Balanced Hackmons, RU, NU, UU, PU, Hackmons, Catch and Evolve, random doubles battle, Skybattles,Random Triples Battle,Random Monotype,Challenge Cup, Doubles Challenge Cup,Random LC,Metronome,Triples Challenge Cup, Seasonal,Anything Goes,Gen 1 Randbat,Hackmons Challenge Cup',room,connection);
+		if (ot === 'poll') return user.chat('/poll Next type of Tour?, Inverse battle, Little Cup, Ubers, Smogon Doubles, Balanced Hackmons, RU, NU, UU, PU, Hackmons, Catch and Evolve, random doubles battle, Skybattles,Random Triples Battle,Random Monotype,Challenge Cup, Doubles Challenge Cup,Random LC,Metronome,Triples Challenge Cup, Seasonal,Anything Goes,Gen 1 Randbat,Hackmons Challenge Cup,battle spot',room,connection);
 		if (!ot || ot === 'help' || ot === 'git') return this.sendReplyBox("For information on how to use this command, go <a href=\"https://raw.githubusercontent.com/jd4565/Pokemon-Showdown/master/chat-plugins/othertiers.js\">here</a>.");
 		
 		switch (ot) {
@@ -25,6 +25,7 @@ exports.commands = {
 			case 'colors': reply += 	"All starters given will be of the certain color that is decided by the host or picked randomly. One voice or higher will host. One voice or higher will host. Rules are <a href=\"https://docs.google.com/document/d/1VMATySDZCOh5cj5FmgRjOX005pHWtCS3jfS468O-QUc/edit?pli=1\">here</a>."; break;
 			case 'seasonal': reply += 	"These tours follow a monthly basis. One voice or higher will host. All the months themes can be found <a href=\"https://docs.google.com/document/d/1PtC2QsEsyyDJCBvRCdtH2uA1YC1CFBD10nAhsXXA4vk/edit?pli=1\">here</a>."; break;
 			case 'metronome': reply += 	"You may use one pokemon. Rules are <a href=\"http://pastebin.com/XjKvmpWw\">here</a>."; break;
+			case 'battlespot': reply +=	"A 3 on 3 with 6 pokemon team preview. Banlist + Rules can be found <a href=\"http://pastebin.com/m7RX164n\">here</a>."; break;
 		}
 		this.sendReplyBox("<b>" + ot + "</b> - " + reply);
 	}

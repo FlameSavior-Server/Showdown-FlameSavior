@@ -1612,7 +1612,8 @@ var commands = exports.commands = {
 			"tried to genderbend, but failed!",
 			"insulted eels in front of Nick!",
 			"poof'd in front of Frage!",
-			"was secretly Petch from Texas!"
+			"was secretly Petch from Texas!",
+			"was finished!",
 		];
 
 		return function (target, room, user) {

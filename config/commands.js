@@ -1613,7 +1613,9 @@ var commands = exports.commands = {
 			"insulted eels in front of Nick!",
 			"poof'd in front of Frage!",
 			"was secretly Petch from Texas!",
+			"was finished!",
 			"got turnip'd by Gamebreaker!"
+			
 		];
 
 		return function (target, room, user) {

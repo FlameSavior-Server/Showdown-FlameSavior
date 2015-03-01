@@ -287,6 +287,7 @@ var commands = exports.commands = {
      * Shortcuts
      *********************************************************/
 
+	inv: 'invite',
     invite: function (target, room, user) {
         target = this.splitTarget(target);
         if (!this.targetUser) {
@@ -744,6 +745,7 @@ var commands = exports.commands = {
         this.sendReplyBox(buffer);
     },
 
+	weaknesses: 'weakness',
     weak: 'weakness',
     resist: 'weakness',
     weakness: function (target, room, user) {
@@ -1025,7 +1027,7 @@ var commands = exports.commands = {
         if (target === 'all' || target === 'omofthemonth' || target === 'omotm' || target === 'month') {
             matched = true;
             buffer += "- <a href=\"https://www.smogon.com/forums/threads/3481155/\">Other Metagame of the Month</a><br />";
-            buffer += "- <a href=\"https://www.smogon.com/forums/threads/3521887/\">Current OMotM: Classic Hackmons</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3516349/\">Current OMotM: Hidden Type</a><br />";
         }
         if (target === 'all' || target === 'seasonal') {
             matched = true;
@@ -1298,13 +1300,13 @@ var commands = exports.commands = {
         }
         if (target === 'all' || target === 'underused' || target === 'uu') {
             matched = true;
-            buffer += "- <a href=\"https://www.smogon.com/forums/threads/3528903/\">np: UU Stage 2</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3530610/\">np: UU Stage 2.1</a><br />";
             buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/uu/\">UU Banlist</a><br />";
             buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523649/\">UU Viability Rankings</a><br />";
         }
         if (target === 'all' || target === 'rarelyused' || target === 'ru') {
             matched = true;
-            buffer += "- <a href=\"https://www.smogon.com/forums/threads/3527140/\">np: RU Stage 6</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3529590/\">np: RU Stage 7</a><br />";
             buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/ru/\">RU Banlist</a><br />";
             buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523627/\">RU Viability Rankings</a><br />";
         }

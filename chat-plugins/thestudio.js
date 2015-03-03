@@ -57,7 +57,7 @@ exports.commands = {
 					"<li>/endaotd - Will turn off the use of /naotd, ending AOTD (requires %, @, #)</li>" +
 				'</ul>' +
 			'</p>' +
-			"<p>More information on <a href=\"http://goldserver.weebly.com/golden-radio-tower.html\">Artist of the Day</a> and <a href=\"http://thepsstudioroom.weebly.com/commands.html\">these commands</a>.</p>"
+			"<p>More information on <a href=\"http://w11.zetaboards.com/Goldserverps/topic/10877418/1/?x=0#post8301865\">Artist of the Day</a> and <a href=\"http://thepsstudioroom.weebly.com/commands.html\">these commands</a>.</p>"
 		);
 	},
 
@@ -87,7 +87,7 @@ exports.commands = {
 			'<div class="broadcast-green">' +
 				"<h3>The Artist of the Day is now <font color=\"black\">" + Tools.escapeHTML(target) + "</font></h3>" +
 				"<p>(Set by " + Tools.escapeHTML(user.name) + ".)</p>" +
-				"<p>This Artist will be posted on our <a href=\"http://goldserver.weebly.com/golden-radio-tower.html\">Artist of the Day page</a>.</p>" +
+				"<p>This Artist will be posted on our <a href=\"http://w11.zetaboards.com/Goldserverps/topic/10877418/1/?x=0#post8301865\">Artist of the Day page</a>.</p>" +
 			'</div>'
 		);
 		room.aotdOn = false;

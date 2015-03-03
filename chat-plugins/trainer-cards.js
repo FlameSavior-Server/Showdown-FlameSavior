@@ -6196,6 +6196,75 @@ exports.commands = {
 			'<a href="https://www.youtube.com/watch?v=rpYtEeiWUW8"><button><b><font color="red">Hail Tong Hua</font></b></button></a></center>'
 		);
 	},
+
+	shitbirds: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/qZlTMw1.gif" width="75">' +
+			'<img src="http://upload.wikimedia.org/wikipedia/commons/d/d5/Blank_-_Spacer.png" width="5">' +
+			'<img src="http://i.imgur.com/36hRr21.png"><img src="http://i.imgur.com/aQrbzWN.gif" width="75"><br>' +
+			'<img src="http://i.imgur.com/AgvWMX9.png" width="230">' +
+			'<img src="http://upload.wikimedia.org/wikipedia/commons/d/d5/Blank_-_Spacer.png" width="25">' +
+			'<img src="http://i.imgur.com/5NF1NCM.png" width="230"><br>' +
+			'<b>Aces:</b> <a href="http://replay.pokemonshowdown.com/frost-oumonotype-1045746"><button><b><font color="green">Azian<b></font></button></a> & <a href="http://replay.pokemonshowdown.com/monotype-205622739"><button><b><font color="#00BFFF">Erica07</b></font></a></button><br>' +
+			'“Our birds aren\'t called shit because they\'re bad. That\'s just the condition you\'re in when they\'re done with you."</center>'
+		);
+	},
+	
+	geotal: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://funsubstance.com/uploads/gif/76/76651.gif" width="180">' +
+			'<img src="http://i.imgur.com/c6CHF2F.png" width="350">' +
+			'<img src="https://38.media.tumblr.com/tumblr_m4et69VTkn1qd87hlo1_500.gif" width="180"><br>' +
+			'<img src="http://i.gyazo.com/c8d1319df19493a677f3d01d61dd7b72.png" width="400"><br>' +
+			'<b>Ace: </b>Exaggerated arrogance and a poor disposition.<br>' +
+			'You can deny it all you want, it won\'t make me any less of a Lord.</center>'
+		);
+	},
+		
+	aj: 'geek',	
+	geek: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/ckgvHQj.gif">' +
+			'<img src="http://i.imgur.com/8s2VP0F.gif">' +
+			'<img src="http://i.imgur.com/UiYsLFX.gif"><br>' +
+			'<b>Ace: </b>Flaming Hot Cheeto<br>' +
+			'You couldn\'t handle me even if I came with instructions.</center>'
+		);
+	},
+	
+	missing: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/6loT2yO.png"><br />' +
+			'<img src="http://static.giantbomb.com/uploads/original/1/14898/1422829-arcanine.jpg"  width="250" height="100">' +
+			'<img src="http://fc07.deviantart.net/fs71/f/2013/275/5/b/mega_charizard_y_by_haychel-d6kzoji.jpg" width="250" height="100"><br />' +
+			'<img src="http://fc01.deviantart.net/fs71/f/2013/318/a/e/shiny_ninetails_by_silverkiwi78-d6uaelx.jpg" width="250 height="100"><br />' +
+			'<b>Ace:</b> Ninetales<br />' +
+			'Everything\'s so much prettier when its on fire</center>'
+		);
+	},
+	
+	catfish: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font size=7 color=black><blink>Catfishes</font><br />' +
+			'<img height=150 width=150 src=http://cdn.bulbagarden.net/upload/thumb/6/60/340Whiscash.png/250px-340Whiscash.png>' +
+			'<img height=150 width=150 src= http://www.animalcorner.co.uk/marine/fish/graphics/catfish.jpg><br />' +
+			'<font size=4 color=black><b>Aces:</b> Kevin, Brandon, Shauna, Kim, and GirlProdigyx aka the fufu ass niggas </font><br />' +
+			'<font size=5 color=black><b>Quote:</b> These are the type of nigga\'s to fake their gender to get what they want.</center>'
+		);
+	},
+	
+	chrono: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://images.cooltext.com/4141268.png" width="267" height="82" alt="Chrono" /><br/>' +
+			'<img title="#GetRexas" src="http://play.pokemonshowdown.com/sprites/xyani/scrafty.gif" />' +
+			'<img title="#MLPProdigy" src="http://play.pokemonshowdown.com/sprites/xyani/keldeo.gif" />' +
+			'<img title="#2ndFav2015" src="http://play.pokemonshowdown.com/sprites/xyani/volbeat.gif" /><br/>' +
+			'<font color="red"><b>Ace:</b></font> <font color="midnightblue"><b>Keldeo</b></font><br/>' +
+			'<i><b>Quote:</b> "This is only my test team!"</i><br/><br/>' +
+			'<img src="http://i.imgur.com/vhDGI5W.gif" /><br/>' +
+			'<i>#allhailkingledian</i></center>'
+		);
+	},
 		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

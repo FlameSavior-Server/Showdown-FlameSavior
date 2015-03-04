@@ -4,6 +4,24 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	stall: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/dqqjcox.png" height=200>' +
+			'<img src="http://ares.cooltext.com/images/759/759e56434cd899baeebc8cc7ffd6f4f9b9b4ec34.gif">' +
+			'<img src="http://i.imgur.com/wYApKrL.png" height=200><br />' +
+			'<b>Ace: </b>Maskun, Rosalina and Luma, Roseybear, Crazyclown94, TheYellowAce<br />' +
+			'<b>Quote: </b>It\'s time to give you cancer from this stall!</center>'
+		);
+	},
+
+	truelove: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/kWJGRyS.png"><br />' +
+			'<b>Ace:<b/> <s>Soulmates</s> Lobsters &lt;3<br />' +
+			'It\'s always been you...</center>'
+		);
+	},
+
 	bargod: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/zJbzQwi.png" width="300"><br />' +

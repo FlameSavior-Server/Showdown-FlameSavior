@@ -451,6 +451,7 @@ var commands = exports.commands = {
 	 * Shortcuts
 	 *********************************************************/
 
+	inv: 'invite',
 	invite: function (target, room, user) {
 		target = this.splitTarget(target);
 		if (!this.targetUser) {
@@ -912,6 +913,7 @@ var commands = exports.commands = {
 		this.sendReplyBox(buffer);
 	},
 
+	weaknesses: 'weakness',
 	weak: 'weakness',
 	resist: 'weakness',
 	weakness: function (target, room, user) {
@@ -1199,7 +1201,7 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'omofthemonth' || target === 'omotm' || target === 'month') {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3481155/\">Other Metagame of the Month</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3521887/\">Current OMotM: Classic Hackmons</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3516349/\">Current OMotM: Hidden Type</a><br />";
 		}
 		if (target === 'all' || target === 'seasonal') {
 			matched = true;

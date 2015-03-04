@@ -26,16 +26,8 @@ exports.Formats = [
 		name: "OU",
 		section: "ORAS Singles",
 
-		searchShow: false,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
 		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite']
-	},
-	{
-		name: "OU (suspect test)",
-		section: "ORAS Singles",
-
-		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
-		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Metagrossite', 'Salamencite']
 	},
 	{
 		name: "Ubers",
@@ -69,15 +61,6 @@ exports.Formats = [
 		name: "RU",
 		section: "ORAS Singles",
 
-		searchShow: false,
-		ruleset: ['UU'],
-		banlist: ['UU', 'BL2', 'Galladite', 'Houndoominite', 'Pidgeotite']
-	},
-	{
-		name: "RU (suspect test)",
-		section: "ORAS Singles",
-
-		challengeShow: false,
 		ruleset: ['UU'],
 		banlist: ['UU', 'BL2', 'Galladite', 'Houndoominite', 'Pidgeotite']
 	},
@@ -85,17 +68,8 @@ exports.Formats = [
 		name: "NU",
 		section: "ORAS Singles",
 
-		searchShow: false,
 		ruleset: ['RU'],
-		banlist: ['RU', 'BL3', 'Glalitite']
-	},
-	{
-		name: "NU (suspect test)",
-		section: "ORAS Singles",
-
-		challengeShow: false,
-		ruleset: ['RU'],
-		banlist: ['RU', 'BL3', 'Glalitite']
+		banlist: ['RU', 'BL3', 'Glalitite', 'Steelixite']
 	},
 	{
 		name: "LC",
@@ -380,44 +354,12 @@ exports.Formats = [
 	///////////////////////////////////////////////////////////////////
 
 	{
-		name: "Classic Hackmons",
+		name: "Hidden Type",
 		section: "OM of the Month",
 		column: 2,
 
-		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
-		validateSet: function (set) {
-			var template = this.getTemplate(set.species);
-			var item = this.getItem(set.item);
-			var problems = [];
-
-			if (set.species === set.name) delete set.name;
-			if (template.isNonstandard) {
-				problems.push(set.species + ' is not a real Pokemon.');
-			}
-			if (item.isNonstandard) {
-				problems.push(item.name + ' is not a real item.');
-			}
-			var ability = {};
-			if (set.ability) ability = this.getAbility(set.ability);
-			if (ability.isNonstandard) {
-				problems.push(ability.name + ' is not a real ability.');
-			}
-			if (set.moves) {
-				for (var i = 0; i < set.moves.length; i++) {
-					var move = this.getMove(set.moves[i]);
-					if (move.isNonstandard) {
-						problems.push(move.name + ' is not a real move.');
-					}
-				}
-				if (set.moves.length > 4) {
-					problems.push((set.name || set.species) + ' has more than four moves.');
-				}
-			}
-			if (set.level && set.level > 100) {
-				problems.push((set.name || set.species) + ' is higher than level 100.');
-			}
-			return problems;
-		}
+		mod: 'hiddentype',
+		ruleset: ['OU']
 	},
 	{
 		// Get it? They're Han Chinese!
@@ -822,12 +764,44 @@ exports.Formats = [
 		]
 	},
 	{
-		name: "Hidden Type",
+		name: "Classic Hackmons",
 		section: "Other Metagames",
 
 		searchShow: false,
-		mod: 'hiddentype',
-		ruleset: ['OU']
+		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
+		validateSet: function (set) {
+			var template = this.getTemplate(set.species);
+			var item = this.getItem(set.item);
+			var problems = [];
+
+			if (set.species === set.name) delete set.name;
+			if (template.isNonstandard) {
+				problems.push(set.species + ' is not a real Pokemon.');
+			}
+			if (item.isNonstandard) {
+				problems.push(item.name + ' is not a real item.');
+			}
+			var ability = {};
+			if (set.ability) ability = this.getAbility(set.ability);
+			if (ability.isNonstandard) {
+				problems.push(ability.name + ' is not a real ability.');
+			}
+			if (set.moves) {
+				for (var i = 0; i < set.moves.length; i++) {
+					var move = this.getMove(set.moves[i]);
+					if (move.isNonstandard) {
+						problems.push(move.name + ' is not a real move.');
+					}
+				}
+				if (set.moves.length > 4) {
+					problems.push((set.name || set.species) + ' has more than four moves.');
+				}
+			}
+			if (set.level && set.level > 100) {
+				problems.push((set.name || set.species) + ' is higher than level 100.');
+			}
+			return problems;
+		}
 	},
 	{
 		name: "Middle Cup",

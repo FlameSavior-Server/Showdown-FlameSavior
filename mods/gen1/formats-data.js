@@ -12,15 +12,15 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	charmander: {
-		randomBattleMoves: ["fireblast","bodyslam","swordsdance","submission","substitute","slash","seismictoss","flamethrower"],
+		randomBattleMoves: ["fireblast","bodyslam","swordsdance","submission","substitute","slash","seismictoss"],
 		tier: "LC"
 	},
 	charmeleon: {
-		randomBattleMoves: ["fireblast","bodyslam","swordsdance","submission","substitute","slash","seismictoss","flamethrower"],
+		randomBattleMoves: ["fireblast","bodyslam","swordsdance","submission","substitute","slash","seismictoss"],
 		tier: "UU"
 	},
 	charizard: {
-		randomBattleMoves: ["fireblast","earthquake","bodyslam","swordsdance","hyperbeam","flamethrower"],
+		randomBattleMoves: ["fireblast","earthquake","bodyslam","swordsdance","hyperbeam"],
 		tier: "UU"
 	},
 	squirtle: {
@@ -162,11 +162,11 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	vulpix: {
-		randomBattleMoves: ["bodyslam","confuseray","fireblast","flamethrower","reflect","toxic"],
+		randomBattleMoves: ["bodyslam","confuseray","fireblast","reflect","toxic"],
 		tier: "LC"
 	},
 	ninetales: {
-		randomBattleMoves: ["fireblast","bodyslam","confuseray","doubleedge","flamethrower","hyperbeam","reflect","toxic"],
+		randomBattleMoves: ["fireblast","bodyslam","confuseray","doubleedge","hyperbeam","reflect","toxic"],
 		tier: "UU"
 	},
 	jigglypuff: {
@@ -186,7 +186,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	oddish: {
-		randomBattleMoves: ["sleeppowder","swordsdance","doubleedge","megadrain","poisonpowder","toxic"],
+		randomBattleMoves: ["sleeppowder","swordsdance","doubleedge","megadrain","toxic"],
 		tier: "LC"
 	},
 	gloom: {
@@ -559,7 +559,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	magmar: {
-		randomBattleMoves: ["confuseray","fireblast","flamethrower","bodyslam","hyperbeam","mimic"],
+		randomBattleMoves: ["confuseray","fireblast","bodyslam","hyperbeam","mimic"],
 		tier: "UU"
 	},
 	pinsir: {
@@ -648,7 +648,8 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	moltres: {
-		randomBattleMoves: ["agility","fireblast","hyperbeam","reflect","skyattack","substitute","toxic"],
+		randomBattleMoves: ["agility","hyperbeam","reflect","skyattack","substitute","toxic"],
+		essentialMove: "fireblast",
 		tier: "UU"
 	},
 	dratini: {

@@ -4,6 +4,61 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	realice: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/fKmj4cm.png"><br />' +
+			'<img src="http://i3.minus.com/jZxg1yeG4FTTz.png" width="300">' +
+			'<img src="http://i6.minus.com/jbjBgqLNaOVtXa.png"><br />' +
+			'<b>Ace:</b> Whining about not having an uber anymore.<br />' +
+			'"Being the best of the ice type users is like being the top of a special needs class. It doesn\'t really matter." -Colonel rage</center>'
+		);
+	},
+
+	bushlegacy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/MlWTJf8.png"><br />' +
+			'<img src="http://i.imgur.com/sU3kvDa.png" height="180">' +
+			'<img src="http://i.imgur.com/fFJVVaA.png" width="220"><br />' +
+			'<b>Ace:</b> BushTush, Bush, Lebrons Toe<br />' +
+			'#GottaGetTheDub, #BushLegacy, #LockingNiggasSince99, #TheNewBoost, #ModJoin, #GottaBreak1500, #BaltosTeamOnDeck</center>'
+		);
+	},
+
+	jlp: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><font color="green">Jedi</font>' +
+			'<font color="blue">Lion</font>' +
+			'<font color="red">Potter</font><br />' +
+			'<img src="http://s3-ec.buzzfed.com/static/enhanced/webdr06/2013/5/3/14/anigif_enhanced-buzz-7634-1367606596-3.gif" width="210">' +
+			'<img src="http://i.perezhilton.com/wp-content/uploads/2014/07/woman-bent-on-suing-michigan-zoo-after-lion-mishap.gif" height="140">' +
+			'<img src="http://cdn.teen.com/wp-content/uploads/2013/07/tumblr_mqs6l2GxS41syeot2o1_500.gif" width="200"><br />' +
+			'<button name="send" value="/u Luke">Luke</button>' +
+			'<button name="send" value="/u Harry">Harry</button>' +
+			'<button name="send" value="/u Potter">Potter</button></center>'
+		);
+	},
+
+	fl: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/1V38qR3.png" width="300"><br />' +
+			'<img src="http://i.imgur.com/MgJkRhr.gif" width="250" height="193">' +
+			'<img src="http://th09.deviantart.net/fs70/PRE/i/2012/026/0/6/original_surf_on_feraligatr_by_ninja_jamal-d4nnjds.jpg" width="250"><br />' +
+			'<b><i>Ace:</i></b> Swag, Love, and a muthafuckin Feraligatr<br />' +
+			'"You cant cteam my team I have a Feraligatr."<br />' +
+			'<button title="Hue :J" name="send" value="/transferbucks Feraligatrlover, 1"><font color="blue"><b><i>Donate to me :s</b></font></button></center>'
+		);
+	},
+
+	date: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/QjYDIuO.gif" width="130">' +
+			'<img src="http://i.imgur.com/dxOjO7V.gif" width="280">' +
+			'<img src="http://i.imgur.com/ynQhGEL.gif" width="130"><br />' +
+			'<b>Ace:</b> Kurumi, because she\'s bae. #NoOffenseOrigami<br />' +
+			'ERANDE DATE A LIVE</center>'
+		);
+	},
+
 	bargod: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/zJbzQwi.png" width="300"><br />' +

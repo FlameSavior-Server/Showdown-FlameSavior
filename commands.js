@@ -1416,7 +1416,7 @@ var commands = exports.commands = {
         }
         if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
             var problem = ' but was already banned';
-            return this.privateModCommand('(' + targetUser.name + ' would be banned by ' + user.name + problem + '.)');
+            return this.privateModCommand('(' + targetUser.name + ' would be banned by ' + user.name + problem + '.) (' + targetUser.latestIp + ')');
         }
         targetUser.popup(user.name + " has permanently banned you.");
         this.addModCommand(targetUser.name + " was permanently banned by " + user.name + ".");
@@ -2013,13 +2013,13 @@ var commands = exports.commands = {
     },
     authlist: function(target, room, user, connection) {
         fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
-             var staff = {
-            "admins": [],
-            "leaders": [],
-            "mods": [],
-            "drivers": [],
-            "voices": []
-        };
+            var staff = {
+                "admins": [],
+                "leaders": [],
+                "mods": [],
+                "drivers": [],
+                "voices": []
+            };
             var row = (''+data).split('\n');
             for (var i = row.length; i > -1; i--) {
                 if (!row[i]) continue;
@@ -2028,33 +2028,29 @@ var commands = exports.commands = {
                 switch (rank) {
                     case '~':
                         staff['admins'].push(person);
-                        console.log('admin is '+person);
-                        break;
+                    break;
                     case '&':
                         staff['leaders'].push(person);
-                        break;
+                    break;
                     case '@':
                         staff['mods'].push(person);
-                        break;
+                    break;
                     case '%':
                         staff['drivers'].push(person);
-                        break;
+                    break;
                     case '+':
                         staff['voices'].push(person);
-                        break;
+                    break;
                     default:
                         continue;
                 }
-
             }
-            console.log(staff['admins']);
-            connection.popup('Staff List \n\n**Administrators**:\n'+ staff['admins'].join(', ') +
+            connection.popup('Staff List \n\n**Administrator**:\n'+ staff['admins'].join(', ') +
                              '\n**Leaders**:\n' + staff['leaders'].join(', ') +
                              '\n**Moderators**:\n' + staff['mods'].join(', ') +
                              '\n**Drivers**:\n' + staff['drivers'].join(', ') +
                              '\n**Voices**:\n' + staff['voices'].join(', ')
-                );
-
+            );
         })
     },
 

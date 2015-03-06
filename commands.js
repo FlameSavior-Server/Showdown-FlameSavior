@@ -635,6 +635,7 @@ var commands = exports.commands = {
 			return;
 		}
 		if (!this.can('roommod', null, room)) return false;
+		if (!this.canTalk()) return false;
 		if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
 
 		room.desc = target;

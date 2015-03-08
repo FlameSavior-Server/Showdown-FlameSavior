@@ -6339,16 +6339,6 @@ exports.commands = {
 			'<i>#allhailkingledian</i></center>'
 		);
 	},
-	
-	chigga: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img height= 250 width= 150 src = "http://i.imgur.com/wVBXLBO.png">' +
-			'<img height= 250 width= 150 src = "http://i.imgur.com/tbXchAi.png">' +
-			'<img height= 250 width= 150 src = "http://i.imgur.com/ACP8Bgj.png"><br />' +
-			'<b>No Peace No Friend<br />' +
-			'Aces: piiiikachuuu, Irrelevant BrittleWind, Kammi, Snowz</center>'
-		);
-	},
 		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

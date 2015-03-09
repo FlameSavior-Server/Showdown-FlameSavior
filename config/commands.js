@@ -1835,23 +1835,6 @@ var commands = exports.commands = {
 		this.sendReply('|raw|<img src="' + Tools.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '" height="' + toId(targets[2]) + '" />');
 	},
 
-	pmbox: 'custompm',
-	declarepm: 'custompm',
-	buttonpm: 'custompm',
-	pmbutton: 'custompm',
-	custompm: function (target, room, user) {
-		if (!target) return this.parse('/help custompm');
-		if (!this.can('declare', null, room)) return false;
-		if (!this.canBroadcast()) return;
-
-		var targets = target.split(',');
-		if (targets.length !== 2) {
-			return this.parse('/help custompm');
-		}
-
-		this.sendReplyBox('<button name="send" value="/pm ' + targets[0] + ', ' + targets[1] + '">Custom PM Box</button>');
-	},
-
 	/*********************************************************
 	 * Help commands
 	 *********************************************************/

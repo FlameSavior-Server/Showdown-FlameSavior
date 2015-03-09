@@ -6345,7 +6345,7 @@ exports.commands = {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/x52p4Fh.gif" height="140">' +
 			'<img src="http://i.imgur.com/Xh4eocr.gif" height="80">' +
-			'<img src="http://i.imgur.com/x9Lvc6w.gif height="140"><br />' +
+			'<img src="http://i.imgur.com/x9Lvc6w.gif" height="140"><br />' +
 			'<font color="red"><b>Ace:</b> <i>Jewels and Drugs</i></font><br />' +
 			'<font color="black">Why should I be sitting here crying over some nigga who don\'t want me when I can be mouth harassing a hamburger?</font></center>'
 		);

@@ -33,7 +33,7 @@ exports.commands = {
 	panty: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/xO5BivS.gif" width="100">' +
-			'<img src="http://i.imgur.com/1rHY3WD.jpg" width="300">' +
+			'<img src="http://i.imgur.com/U4jrnvw.png" width="300">' +
 			'<img src="http://i.imgur.com/dCMp3Bd.gif" width="100"><br />' +
 			'<img src="http://i.imgur.com/HlRdIUS.jpg" width="400"><br />' +
 			'O wicked spirit born of a lost soul in limbo; receive judgment from the garb of the Holy Virgin; cleansed of worldly impurities; return to Heaven and Earth. Repent!</center>'
@@ -6861,7 +6861,7 @@ exports.commands = {
 			'<a href="https://www.youtube.com/watch?v=21YJcWdiNfI">If It Means A Lot To You</a><br />' +
 			'<a href="https://www.youtube.com/watch?v=Ypl0gPtk0tA">The High Road</a><br />' +
 			'<a href="https://www.youtube.com/watch?v=xZ2yP7iUDeg">Millenia</a><br />' +
-			'<a href="https://www.youtube.com/watch?v=iI_vHoMtsBQ">Toes</a><br /></center>' +
+			'<a href="https://www.youtube.com/watch?v=TkV5709EG5M">Drown</a><br /></center>' +
 			'<img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="left"><img src="http://i.imgur.com/Df5hZ9S.png" width="30" height="30" align="right">'
 		);
 	},

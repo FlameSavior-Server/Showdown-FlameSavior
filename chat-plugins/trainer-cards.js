@@ -4,6 +4,51 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	ebola: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/dKvYAjJ.gif" width="450"><br />' +
+			'<img src="http://th07.deviantart.net/fs71/200H/i/2013/277/1/c/alomomola_by_kiwifingers-d6p8ijx.png" width="200"><br />' +
+			'<img src="http://play.pokemonshowdown.com/sprites/bwani/alomomola.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/bwani/azumarill.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/bwani/quagsire.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/bwani/keldeo.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/bwani/lanturn.gif">' +
+			'<img src="http://play.pokemonshowdown.com/sprites/bwani/empoleon.gif"><br />' +
+			'<b>Ace:</b> CrazyClown94<br />' +
+			'Ebola is good!</center>'
+		);
+	},
+
+	england: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://data1.whicdn.com/images/63072513/original.jpg" width="210">' +
+			'<img src="http://i.telegraph.co.uk/multimedia/archive/01937/queen_1937091c.jpg" width="210"><br />' +
+			'<img src="http://media.tumblr.com/tumblr_m84ypf1hqr1qb9fuc.gif" width="300">' +
+			'<img src="http://i.telegraph.co.uk/multimedia/archive/02077/queen_2077091b.jpg" height="120"><br />' +
+			'<font face="TimesNewRoman" size="3" color="red"><b>Ace:</b> Mr Bean and all the other newbies</font><br />' +
+			'<font color="blue"><i>Kiss my royal ass and get the fuck out you pleb.</i></center>'
+		);
+	},
+
+	panty: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/xO5BivS.gif" width="100">' +
+			'<img src="http://i.imgur.com/1rHY3WD.jpg" width="300">' +
+			'<img src="http://i.imgur.com/dCMp3Bd.gif" width="100"><br />' +
+			'<img src="http://i.imgur.com/HlRdIUS.jpg" width="400"><br />' +
+			'O wicked spirit born of a lost soul in limbo; receive judgment from the garb of the Holy Virgin; cleansed of worldly impurities; return to Heaven and Earth. Repent!</center>'
+		);
+	},
+
+	eternalchampions: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Y9jWkXb.png" width="450"><br />' +
+			'<img src="http://i.imgur.com/lqjeizw.png" width="350"><br />' +
+			'<b>Ace:</b> Kaiba, CrazyClown94, Kaiser, Crashy, and Tesla<br />' +
+			'Throw us to the wolves and we will return leading the pack.</center>'
+		);
+	},
+
 	realice: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/fKmj4cm.png"><br />' +
@@ -52,7 +97,7 @@ exports.commands = {
 	date: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/QjYDIuO.gif" width="130">' +
-			'<img src="http://i.imgur.com/dxOjO7V.gif" width="280">' +
+			'<img src="http://i.imgur.com/gZUKeQS.png" width="280">' +
 			'<img src="http://i.imgur.com/ynQhGEL.gif" width="130"><br />' +
 			'<b>Ace:</b> Kurumi, because she\'s bae. #NoOffenseOrigami<br />' +
 			'ERANDE DATE A LIVE</center>'
@@ -6212,9 +6257,9 @@ exports.commands = {
 	
 	cole: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src = "http://i.imgur.com/09nNpoF.gif" width = 200>' +
-			'<img src = "http://i.imgur.com/dxOjO7V.gif">' +
-			'<img src = "http://i.imgur.com/NeFp5mR.gif" width = 200><br /><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/09nNpoF.gif" width="200">' +
+			'<img src="http://i.imgur.com/dxOjO7V.gif">' +
+			'<img src="http://i.imgur.com/NeFp5mR.gif" width="200"><br /><br />' +
 			'<b>Ace: </b>Card games on motorcycles<br />' +
 			'Quote: Don\'t be like Amano Yukiteru and cry, be like Yuuki Rito and get bitches for no reason. Only you can decide where life will take you.</center>'
 		);
@@ -6298,11 +6343,11 @@ exports.commands = {
 	aj: 'geek',	
 	geek: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/ckgvHQj.gif">' +
-			'<img src="http://i.imgur.com/8s2VP0F.gif">' +
-			'<img src="http://i.imgur.com/UiYsLFX.gif"><br>' +
-			'<b>Ace: </b>Flaming Hot Cheeto<br>' +
-			'You couldn\'t handle me even if I came with instructions.</center>'
+		this.sendReplyBox('<center><img src="http://i.imgur.com/x52p4Fh.gif" height="140">' +
+			'<img src="http://i.imgur.com/Xh4eocr.gif" height="80">' +
+			'<img src="http://i.imgur.com/x9Lvc6w.gif height="140"><br />' +
+			'<font color="red"><b>Ace:</b> <i>Jewels and Drugs</i></font><br />' +
+			'<font color="black">Why should I be sitting here crying over some nigga who don\'t want me when I can be mouth harassing a hamburger?</font></center>'
 		);
 	},
 	
@@ -6319,11 +6364,11 @@ exports.commands = {
 	
 	catfish: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><font size=7 color=black><blink>Catfishes</font><br />' +
-			'<img height=150 width=150 src=http://cdn.bulbagarden.net/upload/thumb/6/60/340Whiscash.png/250px-340Whiscash.png>' +
-			'<img height=150 width=150 src= http://www.animalcorner.co.uk/marine/fish/graphics/catfish.jpg><br />' +
-			'<font size=4 color=black><b>Aces:</b> Kevin, Brandon, Shauna, Kim, and GirlProdigyx aka the fufu ass niggas </font><br />' +
-			'<font size=5 color=black><b>Quote:</b> These are the type of nigga\'s to fake their gender to get what they want.</center>'
+		this.sendReplyBox('<center><font size="7"><blink>Catfishes</font><br />' +
+			'<img src="http://cdn.bulbagarden.net/upload/thumb/6/60/340Whiscash.png/250px-340Whiscash.png" width="150">' +
+			'<img src="http://www.animalcorner.co.uk/marine/fish/graphics/catfish.jpg" width="150"><br />' +
+			'<font size="3"><b>Aces:</b> Kevin, Brandon, Shauna, Kim, and GirlProdigyx aka the fufu ass niggas</font><br />' +
+			'<font size="3"><b>Quote: These are trustworthy non catfish ass users! SIKE! These are the type of nigga\'s to fake their gender to get what they want.</center>'
 		);
 	},
 	

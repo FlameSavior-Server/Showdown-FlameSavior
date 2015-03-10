@@ -576,7 +576,8 @@ User = (function () {
 		this.battles = {};
 		this.roomCount = {};
 
-		// challenges
+		// searches and challenges
+		this.searching = 0;
 		this.challengesFrom = {};
 		this.challengeTo = null;
 		this.lastChallenge = 0;
@@ -782,6 +783,8 @@ User = (function () {
 
 			// also MMR is different for each userid
 			this.mmrCache = {};
+
+			Rooms.global.cancelSearch(this);
 		}
 
 		if (authenticated && userid in bannedUsers) {
@@ -1119,6 +1122,7 @@ User = (function () {
 				user.isSysop = isSysop;
 				user.forceRenamed = false;
 				if (avatar) user.avatar = avatar;
+				if (user.ignorePMs && user.can('lock') && !user.can('bypassall')) user.ignorePMs = false;
 
 				user.frostDev = frostDev;
 				user.vip = vip;
@@ -1149,6 +1153,7 @@ User = (function () {
 			this.frostDev = frostDev;
 			this.vip = vip;
 			if (avatar) this.avatar = avatar;
+			if (this.ignorePMs && this.can('lock') && !this.can('bypassall')) this.ignorePMs = false;
 			if (this.forceRename(name, authenticated)) {
 				Rooms.global.checkAutojoin(this);
 				return true;

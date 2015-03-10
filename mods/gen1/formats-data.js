@@ -154,7 +154,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	clefairy: {
-		randomBattleMoves: ["bodyslam","thunderwave","thunderbolt","counter","sing","thunder","metronome"],
+		randomBattleMoves: ["blizzard","bodyslam","thunderwave","thunderbolt","counter","sing","thunder","metronome"],
 		tier: "LC"
 	},
 	clefable: {
@@ -321,7 +321,7 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	tentacool: {
-		randomBattleMoves: ["swordsdance","blizzard","hydropump","surf"],
+		randomBattleMoves: ["swordsdance","doubleedge","blizzard","hydropump","mimic","barrier"],
 		tier: "LC"
 	},
 	tentacruel: {
@@ -508,8 +508,7 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	tangela: {
-		randomBattleMoves: ["hyperbeam","stunspore","megadrain","growth","swordsdance","bodyslam"],
-		essentialMove: "sleeppowder",
+		randomBattleMoves: ["sleeppowder","hyperbeam","stunspore","megadrain","growth","swordsdance","bodyslam"],
 		tier: "UU"
 	},
 	kangaskhan: {
@@ -535,7 +534,7 @@ exports.BattleFormatsData = {
 	staryu: {
 		randomBattleMoves: ["blizzard","thunderbolt","thunderwave","surf"],
 		essentialMove: "recover",
-		tier: "UU"
+		tier: "LC"
 	},
 	starmie: {
 		randomBattleMoves: ["blizzard","thunderbolt","thunderwave","surf"],

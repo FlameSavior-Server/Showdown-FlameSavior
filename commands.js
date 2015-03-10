@@ -125,6 +125,9 @@ var commands = exports.commands = {
 				return this.popupReply("This admin is too busy to answer Private Messages right now. Please use /requesthelp if you require assistance.");
 			}
 		}
+		if (user.ignorePMs && user.ignorePMs !== targetUser.group && !targetUser.can('lock')) {
+			return this.popupReply("You are blocking private messages right now.");
+		}
 
 		target = this.canTalk(target, null);
 		if (!target) return false;
@@ -235,7 +238,8 @@ var commands = exports.commands = {
 	blockpm: 'ignorepms',
 	blockpms: 'ignorepms',
 	ignorepm: 'ignorepms',
-	ignorepms: function (target, room, user) {
+	ignorepms: function (target, room, user, connection, cmd) {
+		if (cmd === 'away' || cmd === 'idle') this.parse('/blockchallenges');
 		if (user.ignorePMs === (target || true)) return this.sendReply("You are already blocking private messages!");
 		if (user.can('lock') && !user.can('bypassall')) return this.sendReply("You are not allowed to block private messages.");
 		user.ignorePMs = true;
@@ -250,7 +254,8 @@ var commands = exports.commands = {
 	unblockpm: 'unignorepms',
 	unblockpms: 'unignorepms',
 	unignorepm: 'unignorepms',
-	unignorepms: function (target, room, user) {
+	unignorepms: function (target, room, user, connection, cmd) {
+		if (cmd === 'back') this.parse('/unblockchallenges');
 		if (!user.ignorePMs) return this.sendReply("You are not blocking private messages!");
 		user.ignorePMs = false;
 		return this.sendReply("You are no longer blocking private messages.");
@@ -1640,10 +1645,10 @@ var commands = exports.commands = {
 		var targetUser, reason;
 		if (commaIndex !== -1) {
 			reason = target.substr(commaIndex + 1).trim();
-			target = target.substr(0, commaIndex);
+			target = target.substr(0, commaIndex).trim();
 		}
 		targetUser = Users.get(target);
-		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' not found.");
+		if (!targetUser) return this.sendReply("User '" + target + "' not found.");
 		if (!this.can('forcerename', targetUser)) return false;
 
 		if (targetUser.userid !== toId(target)) {
@@ -2598,17 +2603,7 @@ var commands = exports.commands = {
 	addplayer: function (target, room, user) {
 		if (!target) return this.parse('/help addplayer');
 
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-
-		if (!targetUser) {
-			return this.sendReply("User " + this.targetUsername + " not found.");
-		}
-
-		if (!room.joinBattle) return this.sendReply("You can only do this in battle rooms.");
-		if (!this.can('roomvoice', this.targetUser, room)) return;
-
-		room.auth[targetUser.userid] = '\u2605';
+		return this.parse('/roomplayer ' + target);
 	},
 
 	joinbattle: function (target, room, user) {

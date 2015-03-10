@@ -1066,6 +1066,8 @@ var commands = exports.commands = {
 		);
 	},
 
+	repo: 'opensource',
+	repository: 'opensource',
 	git: 'opensource',
 	opensource: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1152,6 +1154,7 @@ var commands = exports.commands = {
 		);
 	},
 
+	capintro: 'cap',
 	cap: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
@@ -1928,7 +1931,7 @@ var commands = exports.commands = {
 		}
 		/*if (target === 'all' || target === 'blockchallenges' || target === 'idle') {
 			matched = true;
-			this.sendReply("/away - Blocks challenges so no one can challenge you. Deactivate it with /back.");
+			this.sendReply("/away - Blocks challenges and private messages so no one can challenge you nor PM you. Deactivate it with /back. You can also use /ignorepms and /blockchallenges.");
 		}
 		if (target === 'all' || target === 'allowchallenges') {
 			matched = true;

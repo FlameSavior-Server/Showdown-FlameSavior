@@ -10,9 +10,10 @@ function checkAllAlts(user, list) {
 		if (prevName === user.userid) continue;
 		if (prevName in list) return 'previous name ' + prevName;
 	}
-	var alts = user.getAlts().map(toId);
-	for (var i = 0; i < alts.length; i++) {
-		if (alts[i] in list) return 'alt ' + alts[i];
+	var ip = user.latestIp;
+	for (var id in list) {
+		var matchUser = Users.get(id);
+		if (matchUser.latestIp === ip) return 'alt ' + matchUser.name;
 	}
 	return false;
 }
@@ -354,8 +355,10 @@ var commands = {
 		spawnGiveaway('lottery', user, targetUser, room, options);
 		this.privateModCommand("(" + user.name + " has started a lottery giveaway.)");
 	},
+	leavelotto: 'join',
 	leavelottery: 'join',
 	leave: 'join',
+	joinlotto: 'join',
 	joinlottery: 'join',
 	join: function (target, room, user, conn, cmd) {
 		if (room.id !== 'wifi') return this.sendReply("This command can only be used in the Wi-Fi room.");
@@ -365,10 +368,12 @@ var commands = {
 		switch (cmd) {
 		case 'joinlottery':
 		case 'join':
+		case 'joinlotto':
 			giveaway.addUser(user, this);
 			break;
 		case 'leavelottery':
 		case 'leave':
+		case 'leavelotto':
 			giveaway.removeUser(user, this);
 			break;
 		}

@@ -4,6 +4,35 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	sao: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/BC4sBU3.png" width="350"><br />' +
+			'<i><b>I will always be yours. I will live for you, in this world and the real one.</b></i><br />' +
+			'<img src="http://i.imgur.com/yDpuMns.gif" width="200" height="100">' +
+			'<img src="http://i.imgur.com/EnbGKpa.gif" width="200" height="100"><br />' +
+			'<img src="http://i.imgur.com/fFE8k65.jpg" width="350"><br />' +
+			'<a href="https://www.youtube.com/watch?v=EpvqdVWxWt8"><button title="What started it all"><font color="#993366"><b><i>SAO Crossing Fields OP</i></b></font></button><br />' +
+			'<a href="https://www.youtube.com/watch?v=I-EXI1kIlv8&list=PLOZKbRDBzLTdXqpB_fIV8VC2w-ztm3Al8"><button title="OST1 remember the feels"><font color="#993366"><b><i>Sword Art Online OST1</i></b></font></button>' +
+			'<a href="https://www.youtube.com/watch?v=xWGPGnbyOqo&list=PL9J2NRMMPCeRLkDxe03tkbNCODtNrhG6z"><button title="OST2 remember the feels"><font color="#993366"><b><i>Sword Art Online OST2</i></b></font></button></center>'
+		);
+	},
+
+	tressiah : function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/EvSSlci.jpg" width="150">' +
+			'<img src="http://i.imgur.com/pkyCe6K.gif" width="260">' +
+			'<img src="http://i.imgur.com/Eo0ThUV.png" width="130"><br />' +
+			'<b>Ace:</b> Long ass McThundastick<br />' +
+			'If you listen past the chat cancer, you can hear your girl\'s panties drop.</center>'
+		);
+	},
+
+	lol: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/OYFZFQT.png" width="400"></center>'
+		);
+	},
+
 	ebola: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/dKvYAjJ.gif" width="450"><br />' +

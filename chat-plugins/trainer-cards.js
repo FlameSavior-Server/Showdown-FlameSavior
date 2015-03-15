@@ -4,6 +4,47 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	sarge: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><button class="astext" name="parseCommand" value="/user Sergeant Dolanoric"><img src="http://fc03.deviantart.net/fs70/f/2015/018/9/b/sergeant_dolanoric_and_raikou_sprite_by_dolanoric-d8ehm08.gif" width="100"></button>' +
+			'<img src="http://i.imgur.com/fEplIFe.png" width="320">' +
+			'<button class="astext" name="parseCommand" value="/user Sergeant Dolanoric"><img src="http://fc03.deviantart.net/fs70/f/2015/018/9/b/sergeant_dolanoric_and_raikou_sprite_by_dolanoric-d8ehm08.gif" width="100"></button><br />' +
+			'<b>We salute thee, Sarge!</b><br />' +
+			'<img src="http://media.giphy.com/media/2t9sDPrlvFpdK/giphy.gif" width="150" height="100">' +
+			'<img src="http://vignette1.wikia.nocookie.net/yogscast/images/8/8d/Salute.gif" width="150" height="100">' +
+			'<img src="http://media3.giphy.com/media/1lk1IcVgqPLkA/giphy.gif" width="100" height="100"><br />' +
+			'<img src="http://img1.wikia.nocookie.net/__cb20140520103034/neo-bros/images/7/7d/Chuck_Norris_salute.gif" width="150" height="100">' +
+			'<img src="http://static.tumblr.com/z5svivy/8QBm7iyk0/wink-salute.gif" width="150" height="100"><br />' +
+			'<b>Ace:</b> Raikou (<i>Capitán Nixon</i>)<br />' +
+			'<i><b>When in doubt, electrocute it out!</b></i><br />' +
+			'<a href="https://www.youtube.com/watch?v=AWigCggVv2Y"><button><font color="#2C75FF"><b>Activate Brain Taser</b></font></button></a></center>'
+		);
+	},
+
+	monkeys: 'fingermonkeys',
+	fingermonkeys: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/Ktp1Nyd.gif" height="100">' +
+			'<img src="http://i.imgur.com/RvIpBh6.png" height="100">' +
+			'<img src="http://i.imgur.com/mUf8cye.gif" height="100">' +
+			'<img src="http://i.imgur.com/KEBsRj9.png" height="100">' +
+			'<img src="http://i.imgur.com/Ktp1Nyd.gif" height="100"><br />' +
+			'<img src="http://cdn.shopify.com/s/files/1/0185/5092/products/persons-0106_medium.png" height="100"><br />' +
+			'<img src="http://i.imgur.com/BjBfYeU.png" height="70"><br />' +
+			'<img src="http://i.imgur.com/aHcG6zW.png" height="35"></center>'
+		);
+	},
+
+	sexykecleons: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/EW5CyzW.gif" width="450"><br />' +
+			'<img src="http://i.imgur.com/dr17KqT.jpg" height="200">' +
+			'<img src="http://i.imgur.com/ueDv0Ui.jpg" width="200"><br />' +
+			'<b>Ace:</b> Being extremely hot ;)<br />' +
+			'There\'s nothing wrong with being attracted to something you can\'t have, it only makes it more desirable~</center>'
+		);
+	},
+
 	sao: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/BC4sBU3.png" width="350"><br />' +
@@ -19,9 +60,10 @@ exports.commands = {
 
 	tressiah : function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/EvSSlci.jpg" width="150">' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/3uDjBEm.gif" width="200"><br />' +
+			'<img src="http://i.imgur.com/Eo0ThUV.png" width="140">' +
 			'<img src="http://i.imgur.com/pkyCe6K.gif" width="260">' +
-			'<img src="http://i.imgur.com/Eo0ThUV.png" width="130"><br />' +
+			'<img src="http://i.imgur.com/Eo0ThUV.png" width="140"><br />' +
 			'<b>Ace:</b> Long ass McThundastick<br />' +
 			'If you listen past the chat cancer, you can hear your girl\'s panties drop.</center>'
 		);
@@ -1034,7 +1076,6 @@ exports.commands = {
 			'<font color="red"><b>Ace:</b></font> <font color="black"><b>Gliscor</b></font><br />' +
 			'<i>Why? Because, wynaut. :^)</i><br />' +
 			'<button name="send" value="/transferbucks KGBeast, 1"><font color="blue"><b>Donate 1 buck to me!</b></font></button>' +
-			'<button name="send" value="/nu"><font color="blue"><b>The NeverUsed Tier</b></font></button><br />' +
 			'<marquee scrollamount="10" direction="left"><font size="4"><blink>~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</blink></font></marquee></center>'
 		);
 	},
@@ -6161,7 +6202,8 @@ exports.commands = {
 	
 	pad: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/8gYYBGY.gif" width="400"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/8gYYBGY.gif" width="200"><br />' +
+			'<img src="http://i.imgur.com/OJ91a18.gif" width="200"><br />' +
 			'"Girl, come be in my future sight"~PAD</center>'
 		);
 	},

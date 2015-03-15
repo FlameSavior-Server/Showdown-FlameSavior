@@ -192,6 +192,7 @@ var canTalk;
 var fs = require('fs');
 const MAX_REASON_LENGTH = 300;
 var commands = exports.commands = {
+
     /**** normal stuff ****/
 
     random: 'pickrandom',

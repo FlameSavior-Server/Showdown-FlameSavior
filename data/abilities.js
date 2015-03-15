@@ -303,7 +303,7 @@ exports.BattleAbilities = {
 		},
 		id: "chlorophyll",
 		name: "Chlorophyll",
-		rating: 2,
+		rating: 2.5,
 		num: 34
 	},
 	"clearbody": {
@@ -1120,7 +1120,7 @@ exports.BattleAbilities = {
 		},
 		id: "icebody",
 		name: "Ice Body",
-		rating: 2,
+		rating: 1.5,
 		num: 115
 	},
 	"illuminate": {
@@ -1670,7 +1670,6 @@ exports.BattleAbilities = {
 				if (oldAbility) {
 					this.add('-endability', source, oldAbility, '[from] Mummy');
 					this.add('-ability', source, 'Mummy', '[from] Mummy');
-					this.runEvent('EndAbility', source, oldAbility, 'mummy');
 				}
 			}
 		},
@@ -2213,7 +2212,7 @@ exports.BattleAbilities = {
 		},
 		id: "sandrush",
 		name: "Sand Rush",
-		rating: 2,
+		rating: 2.5,
 		num: 146
 	},
 	"sandstream": {
@@ -2741,7 +2740,7 @@ exports.BattleAbilities = {
 		},
 		id: "swiftswim",
 		name: "Swift Swim",
-		rating: 2,
+		rating: 2.5,
 		num: 33
 	},
 	"symbiosis": {

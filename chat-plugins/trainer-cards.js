@@ -6202,8 +6202,8 @@ exports.commands = {
 	
 	pad: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/8gYYBGY.gif" width="200"><br />' +
-			'<img src="http://i.imgur.com/OJ91a18.gif" width="200"><br />' +
+		this.sendReplyBox('<center><img src="http://i.imgur.com/8gYYBGY.gif" width="250">' +
+			'<img src="http://i.imgur.com/OJ91a18.gif" width="250"><br />' +
 			'"Girl, come be in my future sight"~PAD</center>'
 		);
 	},

@@ -910,7 +910,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	hitmonlee: {
-		randomBattleMoves: ["highjumpkick","knockoff","stoneedge","rapidspin","machpunch","suckerpunch","poisonjab","fakeout"],
+		randomBattleMoves: ["highjumpkick","knockoff","stoneedge","rapidspin","machpunch","poisonjab","fakeout"],
 		randomDoubleBattleMoves: ["knockoff","rockslide","machpunch","fakeout","highjumpkick","earthquake","blazekick","wideguard","protect"],
 		eventPokemon: [
 			{"generation":3,"level":38,"abilities":["limber"],"moves":["refresh","highjumpkick","mindreader","megakick"]}
@@ -1059,7 +1059,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	seaking: {
-		randomBattleMoves: ["waterfall","scald","megahorn","knockoff","icebeam"],
+		randomBattleMoves: ["waterfall","megahorn","knockoff","drillrun","scald","icebeam"],
 		randomDoubleBattleMoves: ["waterfall","surf","megahorn","knockoff","drillrun","icebeam","icywind","protect"],
 		tier: "PU"
 	},
@@ -1422,11 +1422,11 @@ exports.BattleFormatsData = {
 		tier: "BL2"
 	},
 	dratini: {
-		randomBattleMoves: ["dragondance","outrage","waterfall","fireblast","extremespeed","dracometeor","substitute","aquatail"],
+		randomBattleMoves: ["dragondance","outrage","waterfall","fireblast","extremespeed","dracometeor","substitute"],
 		tier: "LC"
 	},
 	dragonair: {
-		randomBattleMoves: ["dragondance","outrage","waterfall","fireblast","extremespeed","dracometeor","substitute","aquatail"],
+		randomBattleMoves: ["dragondance","outrage","waterfall","fireblast","extremespeed","dracometeor","substitute"],
 		tier: "NFE"
 	},
 	dragonite: {
@@ -3604,7 +3604,7 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	lumineon: {
-		randomBattleMoves: ["waterfall","scald","uturn","icebeam","toxic"],
+		randomBattleMoves: ["scald","waterfall","icebeam","uturn","toxic","defog"],
 		randomDoubleBattleMoves: ["surf","uturn","icebeam","toxic","raindance","tailwind","protect"],
 		tier: "PU"
 	},
@@ -4779,8 +4779,8 @@ exports.BattleFormatsData = {
 	},
 	keldeoresolute: {},
 	meloetta: {
-		randomBattleMoves: ["relicsong","closecombat","knockoff","uturn","calmmind","psyshock","hypervoice","shadowball"],
-		randomDoubleBattleMoves: ["relicsong","closecombat","calmmind","psyshock","thunderbolt","hypervoice","uturn","protect"],
+		randomBattleMoves: ["uturn","calmmind","psyshock","hypervoice","shadowball","focusblast"],
+		randomDoubleBattleMoves: ["calmmind","psyshock","thunderbolt","hypervoice","shadowball","focusblast","protect"],
 		eventPokemon: [
 			{"generation":5,"level":15,"moves":["quickattack","confusion","round"],"pokeball":"cherishball"},
 			{"generation":5,"level":50,"moves":["round","teeterdance","psychic","closecombat"],"pokeball":"cherishball"}
@@ -4788,6 +4788,10 @@ exports.BattleFormatsData = {
 		dreamWorldPokeball: 'cherishball',
 		unobtainableShiny: true,
 		tier: "RU"
+	},
+	meloettapirouette: {
+		randomBattleMoves: ["relicsong","closecombat","knockoff","return"],
+		randomDoubleBattleMoves: ["relicsong","closecombat","knockoff","return","protect"]
 	},
 	genesect: {
 		randomBattleMoves: ["uturn","bugbuzz","icebeam","flamethrower","thunderbolt","ironhead","shiftgear","extremespeed","blazekick"],

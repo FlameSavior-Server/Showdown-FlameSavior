@@ -1075,7 +1075,6 @@ exports.commands = {
 			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/nidoking.gif"><br />' +
 			'<font color="red"><b>Ace:</b></font> <font color="black"><b>Gliscor</b></font><br />' +
 			'<i>Why? Because, wynaut. :^)</i><br />' +
-			'<button name="send" value="/transferbucks KGBeast, 1"><font color="blue"><b>Donate 1 buck to me!</b></font></button>' +
 			'<marquee scrollamount="10" direction="left"><font size="4"><blink>~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</blink></font></marquee></center>'
 		);
 	},

@@ -4,6 +4,29 @@ exports.commands = {
 	* Trainer Cards                        *
 	***************************************/
 
+	crashferno: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/oEhQeB9.gif">' +
+			'<img src="http://i.imgur.com/AsvrHsw.png" width="400">' +
+			'<img src="http://i.imgur.com/del6Wti.gif"><br />' +
+			'<img src="http://i.imgur.com/ACWkAaa.png"><br />' +
+			'<b>Ace:</b> Crashy and Inferno<br />' +
+			'Kys.</center>'
+		);
+	},
+
+	ashy: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/2XBIXOF.png"><br />' +
+			'<img src="http://i.imgur.com/spUCRBX.gif" width="300"><br />' +
+			'<b>Ace:</b> Haruhi Suzumiya<br />' +
+			'<a href="https://www.youtube.com/watch?v=lVYV-5TeYfg"><button>I Believe</button></a>' +
+			'<a href="https://www.youtube.com/watch?v=WWB01IuMvzA"><button>God Knows</button></a>' +
+			'<a href="https://www.youtube.com/watch?v=c5G5bD2Do-k"><button>The Dance</button></a><br />' +
+			'<b>Dreams start by believing.</b></center>'
+		);
+	},
+
 	sarge: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><button class="astext" name="parseCommand" value="/user Sergeant Dolanoric"><img src="http://fc03.deviantart.net/fs70/f/2015/018/9/b/sergeant_dolanoric_and_raikou_sprite_by_dolanoric-d8ehm08.gif" width="100"></button>' +

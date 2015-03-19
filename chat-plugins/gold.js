@@ -258,7 +258,7 @@ exports.commands = {
 
     forums: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        return this.sendReplyBox('Gold Forums can be found <a href="http://w11.zetaboards.com/Goldserverps/index/">here</a>.');
+        return this.sendReplyBox('Gold Forums can be found <a href="http://198.27.117.206/forums/">here</a>.');
     },
     regdate: function(target, room, user, connection) {
         if (!this.canBroadcast()) return;

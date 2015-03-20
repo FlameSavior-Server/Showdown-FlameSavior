@@ -2825,7 +2825,8 @@ var commands = exports.commands = {
     um: 'unmute',
     unmute: function(target, room, user) {
         if (!target) return this.parse('/help unmute');
-        if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+        if ((user.locked) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+        if (user.isStaff) return;
         var targetUser = Users.get(target);
         if (!targetUser) {
             return this.sendReply("User " + target + " not found.");

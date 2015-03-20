@@ -388,6 +388,14 @@ var commands = exports.commands = {
 	 	}
 	 	return this.sendReply("Group \"" + target + "\" not found.");
 	 },
+	
+	roomlink: 'room',
+	viewroom: 'room',
+	room: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		var msg = "A link to this room can be found here: <a href=\"http://frostserver.net/" + room.id + "\">http://frostserver.net/" + room.id + "</a>";
+		this.sendReplyBox(msg);
+	},
 
 	poke: function (target, room, user) {
 		if (!target) return this.sendReply('/poke needs a target.');

@@ -165,7 +165,10 @@ exports.customavatars = {
 	'professoroakjr': 'tDRs344.gif',
 	'corsolascage': 'p0G272x.png',
 	'punnysassop': 'lopunny.gif',
-	'brokenhope': 'P2KBQ1E.png'
+	'brokenhope': 'PZcXRlM.gif',
+	'foolizanagi': 'XP3LnpD.png',
+	'blazetheblade': 'huTL8kQ.png',
+	'gamebraker': 'PQ_Zen_Render.png'
 };
 
 // appealurl - specify a URL containing information on how users can appeal

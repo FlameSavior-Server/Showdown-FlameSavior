@@ -1580,7 +1580,7 @@ User = (function () {
 			}
 		}
 
-		if (message.toLowerCase().indexOf("psim") > -1 && message.toLowerCase().indexOf("gold.psim.us") == -1 && !this.goldDev || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~gold") == -1 && !this.goldDev) {
+		if (message.toLowerCase().indexOf("psim") > -1 && message.toLowerCase().indexOf("gold.psim.us") == -1  && message.toLowerCase().indexOf("smogtour.psim.us") == -1 && !this.goldDev || message.toLowerCase().indexOf("play.pokemonshowdown.com/~~") > -1 && message.toLowerCase().indexOf("play.pokemonshowdown.com/~~gold") == -1 && !this.goldDev) {
 			connection.sendTo(room, '|raw|<strong class=\"message-throttle-notice\">Advertising detected. Your message was not sent and staff have been notified.</strong>');
 			connection.sendTo(room, '|popup|**Advertising detected.  Your message was not sent and staff have been notified.**');
 			for (var u in Users.users) {
@@ -1590,7 +1590,6 @@ User = (function () {
 			}
 			return false;
 		}
-
 		if (this.chatQueueTimeout) {
 			if (!this.chatQueue) this.chatQueue = []; // this should never happen
 			if (this.chatQueue.length >= THROTTLE_BUFFER_LIMIT - 1) {

@@ -286,7 +286,7 @@ var commands = exports.commands = {
     dk: 'dropkick',
     dropkick: function(target, room, user) {
         if (!target) return this.sendReply('/dropkick needs a target.');
-        return this.parse('/me dropkicks ' + target + ' across the PokÃƒÂ©mon Stadium!');
+        return this.parse('/me dropkicks ' + target + ' across the Pokemon Stadium!');
     },
 
     fart: function(target, room, user) {

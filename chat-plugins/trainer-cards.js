@@ -6477,6 +6477,17 @@ exports.commands = {
 			'<i>#allhailkingledian</i></center>'
 		);
 	},
+	
+	goodbye: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="https://s-media-cache-ak0.pinimg.com/736x/6d/b6/e0/6db6e08bc3dc1b132cb411b5ba29c806.jpg" width="125">' +
+			'<img src="http://i.imgur.com/yDgiwqK.gif" width="400">' +
+			'<img src="http://i287.photobucket.com/albums/ll126/Uchiha_Killer_2008/Gijinka%20Pokemon/Lotad.jpg" width="125"><br />' +
+			'<b>Aces:</b> <font color="#0040FF">Kamkam</font> & <font color="#31B404">Ticktick</font><br />' +
+			'Finally making a TC after both of us are gone, haha, good one!<br /><br />' +
+			'<a href="https://www.youtube.com/watch?v=ag_IRe6AuG8"><button class="motc-blue"><b>See ya later, friend.</b></button></a></center>'
+		);
+	},
 		
 	piiiikachuuu: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;

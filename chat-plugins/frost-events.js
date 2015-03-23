@@ -12,11 +12,11 @@ exports.commands = {
 		 var type = toId(target.slice(0, target.indexOf(',')));
 		 var time = target.slice(target.indexOf(',') + 1).trim();
 		 if (!(type || time)) return this.sendReply("Usage: /monothreat [type], [number of minutes until it starts]");
-		 var declare_html = "<table bgcolor="#CBFFFA" width="100%"><td><center><h1>Frost Monothread is starting soon!</center></h1><br />" +
+		 var declare_html = "<table bgcolor=\"#CBFFFA\" width=\"100%\"><td><center><h1>Frost Monothread is starting soon!</center></h1><br />" +
 							"- The type is " + type +"!<br />" +
 							"- It starts in " + time + "minutes!<br />" +
-							"<button name="send" value="/join monotype">Click here to join!</button><br />" +
-							"<i><font color="gray">(Declared by " + user.name + ")";
+							"<button name=\"send\" value=\"/join monotype\">Click here to join!</button><br />" +
+							"<i><font color=\"gray\">(Declared by " + user.name + ")";
 		 for (var id in Rooms.rooms) {
 			if (id !== 'global')
 			if (Rooms.rooms[id].type !== 'battle') Rooms.rooms[id].addRaw(declare_html);

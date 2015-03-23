@@ -9,7 +9,7 @@
 exports.commands = {
 	monothreat: function(target, room, user, connection) {
 		 if (!this.can('lock')) return false;
-		 var type = toId(arg.slice(0, target.indexOf(',')));
+		 var type = toId(target.slice(0, target.indexOf(',')));
 		 var time = target.slice(target.indexOf(',') + 1).trim();
 		 if (!(type || time)) return this.sendReply("Usage: /monothreat [type], [number of minutes until it starts]");
 		 var declare_html = "<table bgcolor="#CBFFFA" width="100%"><td><center><h1>Frost Monothread is starting soon!</center></h1><br />" +

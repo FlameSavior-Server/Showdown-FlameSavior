@@ -495,6 +495,54 @@ function exportUsergroups() {
 }
 importUsergroups();
 
+function cacheGroupData() {
+	if (Config.groups) {
+		// Support for old config groups format.
+		// Should be removed soon.
+		console.log(
+			"You are using a deprecated version of user group specification in config.\n" +
+			"Support for this will be removed soon.\n" +
+			"Please ensure that you update your config.js to the new format (see config-example.js, line 220)\n"
+		);
+	} else {
+		Config.groups = Object.create(null);
+		Config.groupsranking = [];
+	}
+	var groups = Config.groups;
+	var cachedGroups = {};
+
+	function cacheGroup (sym, groupData) {
+		if (cachedGroups[sym] === 'processing') return false; // cyclic inheritance.
+
+		if (cachedGroups[sym] !== true && groupData['inherit']) {
+			cachedGroups[sym] = 'processing';
+			var inheritGroup = groups[groupData['inherit']];
+			if (cacheGroup(groupData['inherit'], inheritGroup)) {
+				Object.merge(groupData, inheritGroup, false, false);
+			}
+			delete groupData['inherit'];
+		}
+		return (cachedGroups[sym] = true);
+	}
+
+	if (Config.grouplist) { // Using new groups format.
+		var grouplist = Config.grouplist;
+		var numGroups = grouplist.length;
+		for (var i = 0; i < numGroups; i++) {
+			var groupData = grouplist[i];
+			groupData.rank = numGroups - i - 1;
+			groups[groupData.symbol] = groupData;
+			Config.groupsranking.unshift(groupData.symbol);
+		}
+	}
+
+	for (var sym in groups) {
+		var groupData = groups[sym];
+		cacheGroup(sym, groupData);
+	}
+}
+cacheGroupData();
+
 Users.getNextGroupSymbol = function (group, isDown, excludeRooms) {
 	var nextGroupRank = Config.groupsranking[Config.groupsranking.indexOf(group) + (isDown ? -1 : 1)];
 	if (excludeRooms === true && Config.groups[nextGroupRank]) {
@@ -535,6 +583,7 @@ Users.setOfflineGroup = function (name, group, force) {
 };
 
 Users.importUsergroups = importUsergroups;
+Users.cacheGroupData = cacheGroupData;
 
 /*********************************************************
  * User and Connection classes
@@ -649,9 +698,7 @@ User = (function () {
 			targetGroup = target.group;
 		}
 		var groupData = Config.groups[group];
-		var checkedGroups = {};
 
-		// does not inherit
 		if (groupData && groupData['root']) {
 			return true;
 		}
@@ -675,11 +722,6 @@ User = (function () {
 
 		if (typeof target === 'string') targetGroup = target;
 
-		while (groupData) {
-			// Cycle checker
-			if (checkedGroups[group]) return false;
-			checkedGroups[group] = true;
-
 			if (groupData[permission]) {
 				var jurisdiction = groupData[permission];
 				if (!target) {
@@ -700,10 +742,6 @@ User = (function () {
 				if (jurisdiction.indexOf('u') >= 0 && Config.groupsranking.indexOf(group) > Config.groupsranking.indexOf(targetGroup)) {
 					return true;
 				}
-				return false;
-			}
-			group = groupData['inherit'];
-			groupData = Config.groups[group];
 		}
 		return false;
 	};
@@ -1184,6 +1222,12 @@ User = (function () {
 		for (var i in connection.rooms) {
 			var room = connection.rooms[i];
 			if (!this.roomCount[i]) {
+				if (room.bannedUsers && this.userid in room.bannedUsers) {
+					room.bannedIps[connection.ip] = room.bannedUsers[this.userid];
+					connection.sendTo(room.id, '|deinit');
+					connection.leaveRoom(room);
+					continue;
+				}
 				room.onJoin(this, connection, true);
 				this.roomCount[i] = 0;
 			}
@@ -1440,17 +1484,10 @@ User = (function () {
 			if (room.staffRoom && !this.isStaff) return false;
 			if (room.vip && !this.vip && !this.isStaff) return false;
 			if (room.id === 'seniorstaff' && !this.can('seniorstaff')) return false;
-			if (room.bannedUsers) {
-				if (this.userid in room.bannedUsers || this.autoconfirmed in room.bannedUsers) {
+			if (room.checkBanned && !room.checkBanned(this)) {
 					return null;
 				}
 			}
-			if (this.ips && room.bannedIps) {
-				for (var ip in this.ips) {
-					if (ip in room.bannedIps) return null;
-				}
-			}
-		}
 		if (!connection) {
 			for (var i = 0; i < this.connections.length;i++) {
 				// only join full clients, not pop-out single-room

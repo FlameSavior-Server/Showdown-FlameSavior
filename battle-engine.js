@@ -353,8 +353,6 @@ BattlePokemon = (function () {
 		return this.details + '|' + this.getHealth(side);
 	};
 	BattlePokemon.prototype.update = function (init) {
-		// reset for Light Metal etc
-		this.weightkg = this.template.weightkg;
 		// reset for diabled moves
 		this.disabledMoves = {};
 		this.negateImmunity = {};
@@ -461,6 +459,12 @@ BattlePokemon = (function () {
 			stat = this.battle.getStatCallback(stat, statName, this, unboosted);
 		}
 		return stat;
+	};
+	BattlePokemon.prototype.getWeight = function () {
+		var weight = this.template.weightkg;
+		weight = this.battle.runEvent('ModifyWeight', this, null, null, weight);
+		if (weight < 0.1) weight = 0.1;
+		return weight;
 	};
 	BattlePokemon.prototype.getMoveData = function (move) {
 		move = this.battle.getMove(move);
@@ -1470,6 +1474,7 @@ BattleSide = (function () {
 				decisions.push({
 					choice: 'switch',
 					pokemon: this.active[canSwitchOut[i]],
+					target: this.pokemon[canSwitchIn[i]],
 					priority: 101
 				});
 			}
@@ -2186,6 +2191,7 @@ Battle = (function () {
 					ModifyAtk: 1, ModifyDef: 1, ModifySpA: 1, ModifySpD: 1, ModifySpe: 1,
 					ModifyBoost: 1,
 					ModifyDamage: 1,
+					ModifyWeight: 1,
 					TryHit: 1,
 					TryHitSide: 1,
 					TrySecondaryHit: 1,
@@ -2314,6 +2320,11 @@ Battle = (function () {
 			}
 			if (foeCallbackType) {
 				statuses = statuses.concat(this.getRelevantEffectsInner(thing.foe, foeCallbackType, null, null, false, false, getAll));
+				if (foeCallbackType.substr(0, 5) === 'onFoe') {
+					var eventName = foeCallbackType.substr(5);
+					statuses = statuses.concat(this.getRelevantEffectsInner(thing.foe, 'onAny' + eventName, null, null, false, false, getAll));
+					statuses = statuses.concat(this.getRelevantEffectsInner(thing, 'onAny' + eventName, null, null, false, false, getAll));
+				}
 			}
 			if (bubbleUp) {
 				statuses = statuses.concat(this.getRelevantEffectsInner(this, callbackType, null, null, true, false, getAll));
@@ -2683,7 +2694,7 @@ Battle = (function () {
 		this.add('turn', this.turn);
 
 		if (this.gameType === 'triples' && this.sides.map('pokemonLeft').count(1) === this.sides.length) {
-			// If only 2 pokemon are left in triples, they must touch each other.
+			// If both sides have one Pokemon left in triples and they are not adjacent, they are both moved to the center.
 			var center = false;
 			for (var i = 0; i < this.sides.length; i++) {
 				for (var j = 0; j < this.sides[i].active.length; j++) {
@@ -2962,7 +2973,8 @@ Battle = (function () {
 		if (typeof move === 'number') move = {
 			basePower: move,
 			type: '???',
-			category: 'Physical'
+			category: 'Physical',
+			flags: {}
 		};
 
 		if (move.affectedByImmunities) {
@@ -3096,7 +3108,11 @@ Battle = (function () {
 
 		// randomizer
 		// this is not a modifier
+		if (this.gen <= 5) {
 		baseDamage = Math.floor(baseDamage * (100 - this.random(16)) / 100);
+		} else {
+			baseDamage = Math.floor(baseDamage * (85 + this.random(16)) / 100);
+		}
 
 		// STAB
 		if (move.hasSTAB || type !== '???' && pokemon.hasType(type)) {
@@ -3553,6 +3569,7 @@ Battle = (function () {
 			break;
 		case 'runSwitch':
 			this.runEvent('SwitchIn', decision.pokemon);
+			if (this.gen === 1 && !decision.pokemon.side.faintedThisTurn) this.runEvent('AfterSwitchInSelf', decision.pokemon);
 			if (!decision.pokemon.hp) break;
 			decision.pokemon.isStarted = true;
 			if (!decision.pokemon.fainted) {

@@ -273,7 +273,7 @@ exports.BattleAbilities = {
 	"bulletproof": {
 		shortDesc: "This Pokemon is immune to bullet moves.",
 		onTryHit: function (pokemon, target, move) {
-			if (move.flags && move.flags['bullet']) {
+			if (move.flags['bullet']) {
 				this.add('-immune', pokemon, '[msg]', '[from] Bulletproof');
 				return null;
 			}
@@ -641,7 +641,7 @@ exports.BattleAbilities = {
 		shortDesc: "This Pokemon's sleep counter drops by 2 instead of 1.",
 		id: "earlybird",
 		name: "Early Bird",
-		isHalfSleep: true,
+		// Implemented in statuses.js
 		rating: 2.5,
 		num: 48
 	},
@@ -734,6 +734,9 @@ exports.BattleAbilities = {
 				}
 				return null;
 			}
+		},
+		onEnd: function (pokemon) {
+			pokemon.removeVolatile('flashfire');
 		},
 		effect: {
 			noCopy: true, // doesn't get copied by Baton Pass
@@ -1037,8 +1040,8 @@ exports.BattleAbilities = {
 	},
 	"heavymetal": {
 		shortDesc: "This Pokemon's weight is doubled.",
-		onModifyPokemon: function (pokemon) {
-			pokemon.weightkg *= 2;
+		onModifyWeight: function (weight) {
+			return weight * 2;
 		},
 		id: "heavymetal",
 		name: "Heavy Metal",
@@ -1258,7 +1261,7 @@ exports.BattleAbilities = {
 		shortDesc: "This Pokemon's punch-based attacks have 1.2x power. Sucker Punch is not boosted.",
 		onBasePowerPriority: 8,
 		onBasePower: function (basePower, attacker, defender, move) {
-			if (move.isPunchAttack) {
+			if (move.flags['punch']) {
 				this.debug('Iron Fist boost');
 				return this.chainModify(1.2);
 			}
@@ -1342,8 +1345,8 @@ exports.BattleAbilities = {
 	},
 	"lightmetal": {
 		shortDesc: "This Pokemon's weight is halved.",
-		onModifyPokemon: function (pokemon) {
-			pokemon.weightkg /= 2;
+		onModifyWeight: function (weight) {
+			return weight / 2;
 		},
 		id: "lightmetal",
 		name: "Light Metal",
@@ -1528,7 +1531,7 @@ exports.BattleAbilities = {
 		shortDesc: "This Pokemon's pulse moves have 1.5x power. Heal Pulse heals 3/4 target's max HP.",
 		onBasePowerPriority: 8,
 		onBasePower: function (basePower, attacker, defender, move) {
-			if (move.flags && move.flags['pulse']) {
+			if (move.flags['pulse']) {
 				return this.chainModify(1.5);
 			}
 		},
@@ -2509,7 +2512,7 @@ exports.BattleAbilities = {
 	"soundproof": {
 		shortDesc: "This Pokemon is immune to sound-based moves, including Heal Bell.",
 		onTryHit: function (target, source, move) {
-			if (target !== source && move.isSoundBased) {
+			if (target !== source && move.flags['sound']) {
 				this.add('-immune', target, '[msg]');
 				return null;
 			}
@@ -2644,7 +2647,7 @@ exports.BattleAbilities = {
 		shortDesc: "This Pokemon's bite-based attacks have 1.5x power. Bug Bite is not boosted.",
 		onBasePowerPriority: 8,
 		onBasePower: function (basePower, attacker, defender, move) {
-			if (move.flags && move.flags['bite']) {
+			if (move.flags['bite']) {
 				return this.chainModify(1.5);
 			}
 		},
@@ -3016,12 +3019,11 @@ exports.BattleAbilities = {
 		onTakeItem: function (item, pokemon) {
 			pokemon.addVolatile('unburden');
 		},
+		onEnd: function (pokemon) {
+			pokemon.removeVolatile('unburden');
+		},
 		effect: {
 			onModifySpe: function (speMod, pokemon) {
-				if (pokemon.ignore['Ability'] === true || pokemon.ability !== 'unburden') {
-					pokemon.removeVolatile('unburden');
-					return;
-				}
 				if (!pokemon.item) {
 					return this.chain(speMod, 2);
 				}

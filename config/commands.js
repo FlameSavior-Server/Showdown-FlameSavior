@@ -39,6 +39,26 @@
  * return anything or return something falsy, the user won't say
  * anything.
  *
+ * A command can also be an object, in which case is treated like
+ * a namespace:
+ *
+ *   game: {
+ *     play: function (target, room, user) {
+ *       user.isPlaying = true;
+ *       this.sendReply("Playing.");
+ *     },
+ *     stop: function (target, room, user) {
+ *       user.isPlaying = false;
+ *       this.sendReply("Stopped.");
+ *     }
+ *   }
+ *
+ * These commands can be called by '/game play' and '/game stop'.
+ * Namespaces help organise commands, and nest them under
+ * one main command.
+ * Note: Multiple namespaces can be nested, but the final (innermost)
+ *       command must be a function.
+ *
  * Commands have access to the following functions:
  *
  * this.sendReply(message)
@@ -123,12 +143,18 @@
  *     target = this.canTalk(target);
  *     if (!target) return false;
  *
- * this.parse(message)
+ * this.parse(message, inNamespace)
  *   Runs the message as if the user had typed it in.
  *
  *   Mostly useful for giving help messages, like for commands that
  *   require a target:
  *     if (!target) return this.parse('/help msg');
+ *
+ *   If `inNamespace` is true, then the message is parsed in that
+ *   corresponding namespace:
+ *     // command msg is in namespace test. (ie. /test msg)
+ *     this.parse('/help', true); // is parsed as if the user said
+ *                                // '/test help'
  *
  *   After 10 levels of recursion (calling this.parse from a command
  *   called by this.parse from a command called by this.parse etc)
@@ -917,6 +943,7 @@ var commands = exports.commands = {
 	weak: 'weakness',
 	resist: 'weakness',
 	weakness: function (target, room, user) {
+		if (!target) return this.parse('/help weakness');
 		if (!this.canBroadcast()) return;
 		var targets = target.split(/[ ,\/]/);
 
@@ -1229,8 +1256,8 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'tiershift' || target === 'ts') {
 			matched = true;
-			if (target !== 'all') buffer += "Pokémon below OU get all their stats boosted. BL/UU get +5, BL2/RU get +10, and BL3/NU or lower get +15.<br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3508369/\">Tier Shift</a><br />";
+			if (target !== 'all') buffer += "Pokémon below OU/BL get all their stats boosted. UU/BL2 get +5, RU/BL3 get +10, and NU or lower get +15.<br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3532973/\">Tier Shift</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3514386/\">Tier Shift Viability Rankings</a><br />";
 		}
 		if (target === 'all' || target === 'pu') {
@@ -1278,6 +1305,10 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'middlecup' || target === 'mc') {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3524287/\">Middle Cup</a><br />";
+		}
+		if (target === 'all' || target === 'outheorymon' || target === 'theorymon') {
+			matched = true;
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3532902/\">OU Theorymon</a><br />";
 		}
 		if (!matched) {
 			return this.sendReply("The Other Metas entry '" + target + "' was not found. Try /othermetas or /om for general help.");
@@ -1496,7 +1527,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'rarelyused' || target === 'ru') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3529590/\">np: RU Stage 7</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3533095/\">np: RU Stage 8</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/ru/\">RU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523627/\">RU Viability Rankings</a><br />";
 		}
@@ -1931,7 +1962,7 @@ var commands = exports.commands = {
 		}
 		/*if (target === 'all' || target === 'blockchallenges' || target === 'idle') {
 			matched = true;
-			this.sendReply("/away - Blocks challenges and private messages so no one can challenge you nor PM you. Deactivate it with /back. You can also use /ignorepms and /blockchallenges.");
+			this.sendReply("/away - Blocks challenges and private messages separately. Different from /blockpms in that it will still block challenges if you're staff. Unblock them with /back.");
 		}
 		if (target === 'all' || target === 'allowchallenges') {
 			matched = true;

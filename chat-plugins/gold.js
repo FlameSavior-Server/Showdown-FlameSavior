@@ -589,7 +589,7 @@ exports.commands = {
             room.addRaw(
                 '<div class="broadcast-black"><b><center><font size="3">Panagrams has started!</font></b>' +
                 '<center>This is Gold\'s version of anagrams, but with buck prizes!  We currently have a random category and a Pokemon category!<br />' +
-                '<button name="joinRoom" value="panagrams" target="_blank">Play now!</button></center></div>'
+                '<button name="joinRoom" value="gamechamber" target="_blank">Play now!</button></center></div>'
             );
         } else {
             room.addRaw(

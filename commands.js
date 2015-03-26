@@ -17,7 +17,7 @@ var code = fs.createWriteStream('config/friendcodes.txt', {
 var key = '';
 var hint = '';
 var isMotd = false;
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'musicbox', 'emote'];
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'musicbox', 'emote', 'color'];
 var closeShop = false;
 var closedShop = 0;
 var bank = exports.bank = {
@@ -807,6 +807,24 @@ var commands = exports.commands = {
                 return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
             }
         }
+        if (target[0] === 'color') {
+            price = 350;
+            if (price <= user.money) {
+                if (!target[2]) return this.sendReply('Please specify the name of the alt you want your main account (the one you are on now) to have the color of.  Do so with /buy color, [alt name].');
+                
+                user.money = user.money - price;
+                this.sendReply('You have purchased a custom color. Staff have been notified and it will be added in due time.');
+                user.canCustomColor = true;
+                Rooms.rooms.staff.add(user.name + ' has purchased a custom color. Color: ' + target[2]);
+                for (var u in Users.users) {
+                    if (Users.users[u].group == "~") {
+                        Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom color. Color: ' + target[2]);
+                    }
+                }
+            } else {
+                return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
+            }
+        }
         if (target[0] === 'emote') {
             price = 100;
             if (price <= user.money) {
@@ -960,6 +978,7 @@ var commands = exports.commands = {
                 //'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
                 '<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).</td><td>60</td></tr>' +
                 '<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>100</td></tr>' +
+                '<tr><td>Color</td><td>This gives your username a custom color on our <a href="http://goldservers.info">custom client</a>.</td><td>350</td></tr>' +
                 //'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
                 '</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>'
             );

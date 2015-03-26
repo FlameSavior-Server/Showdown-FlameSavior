@@ -24,7 +24,7 @@ exports.commands = {
             for (var id in Rooms.rooms) {
                 if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-green"><b><font size=1><i>Global declare from ' + roomName + '<br /></i></font size>' + target + '</b></div>');
             }
-        }
+        }f
         this.logEntry(user.name + ' used /gdeclare');
 
     },
@@ -258,7 +258,11 @@ exports.commands = {
 
     forums: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        return this.sendReplyBox('Gold Forums can be found <a href="http://198.27.117.206/forums/">here</a>.');
+        return this.sendReplyBox('Gold Forums can be found <a href="http://goldservers.info/forums">here</a>.');
+    },
+    client: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        return this.sendReplyBox('Gold custom client can be found <a href="http://goldservers.info">here</a>.');
     },
     regdate: function(target, room, user, connection) {
         if (!this.canBroadcast()) return;

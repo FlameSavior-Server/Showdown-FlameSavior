@@ -1698,7 +1698,7 @@ var commands = exports.commands = {
 	},
 	hide: 'hideauth',
          hideauth: function(target, room, user) {
-            if (!this.can('hotpatch')) return false;
+            if (!this.can('forcetie')) return false;
             if (target === '~') return this.sendReply("You are already an administrator.");
             user.getIdentity = function() {
                     if (this.muted) return '!' + this.name;
@@ -1715,7 +1715,7 @@ var commands = exports.commands = {
         
          show: 'showauth',
          showauth: function(target, room, user) {
-            if (!this.can('hotpatch')) return false;
+            if (!this.can('forcetie')) return false;
             delete user.getIdentity;
             user.updateIdentity();
             this.sendReply("You are now showing your group.");

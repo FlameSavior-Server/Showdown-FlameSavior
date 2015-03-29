@@ -262,7 +262,11 @@ exports.commands = {
     },
     client: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        return this.sendReplyBox('Gold custom client can be found <a href="http://goldservers.info">here</a>.');
+        return this.sendReplyBox('Gold\'s custom client can be found <a href="http://goldservers.info">here</a>.');
+    },
+    customcolors: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	return this.sendReplyBox('Information about our custom client colors can be found <a href="http://goldservers.info/forums/showthread.php?tid=17">here</a>.');
     },
     regdate: function(target, room, user, connection) {
         if (!this.canBroadcast()) return;

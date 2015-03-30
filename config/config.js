@@ -160,6 +160,9 @@ exports.herokuhack = false;
 // displayed in the client.
 exports.customavatars = {
 	//'userid': 'customavatar.png'
+	'professoroakjr': 'tDRs344.gif',
+	'foolizanagi': 'oUwYklr.png',
+	'nickoop': 'p0G272x.png'
 };
 
 // appealurl - specify a URL containing information on how users can appeal

@@ -2294,6 +2294,11 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b>Parukia\'s Careless Whispers Button:</b><br><a href="http://parukia.net/carelesswhispers.html">http://parukia.net/carelesswhispers.html</a>');
 	},
+	
+	smashhype: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b><a href="https://www.youtube.com/watch?v=ei3-Qo9wHH4&feature=youtu.be">C\'Mon and Ride The Smash Hype Train!</a></b>');
+	},
 	eating: 'away',
        anime: 'away',
        smashing: 'away',

@@ -163,7 +163,11 @@ exports.customavatars = {
 	'professoroakjr': 'tDRs344.gif',
 	'foolizanagi': 'oUwYklr.png',
 	'nickoop': 'p0G272x.png',
-	'theusd': 'PI3Qugb.gif'
+	'theusd': 'PI3Qugb.gif',
+	'blazethesamurai': 'robin__f__icon_by_milkteafairy-d7u748a.gif',
+	'pixelblock': 'Klonoa_avatar_2_by_OxAmy.gif',
+	'frage': 'HVJw86I.png',
+	'scepunny': 'tumblr_inline_nf4x0xRLUN1rbvq7c.gif'
 };
 
 // appealurl - specify a URL containing information on how users can appeal

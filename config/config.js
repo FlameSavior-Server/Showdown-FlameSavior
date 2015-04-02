@@ -167,7 +167,8 @@ exports.customavatars = {
 	'blazethesamurai': 'robin__f__icon_by_milkteafairy-d7u748a.gif',
 	'pixelblock': 'Klonoa_avatar_2_by_OxAmy.gif',
 	'frage': 'HVJw86I.png',
-	'scepunny': 'tumblr_inline_nf4x0xRLUN1rbvq7c.gif'
+	'scepunny': 'tumblr_inline_nf4x0xRLUN1rbvq7c.gif',
+	'gamebraker': 'PQ_Zen_Render.png'
 };
 
 // appealurl - specify a URL containing information on how users can appeal

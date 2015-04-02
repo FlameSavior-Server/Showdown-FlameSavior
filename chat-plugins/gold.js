@@ -588,7 +588,7 @@ exports.commands = {
 
     p: 'panagrams',
     panagrams: function(target, room, user) {
-        if (!user.can('ban')) return;
+        if (!this.canBroadcast()) return;
         if (room.id == 'lobby') {
             room.addRaw(
                 '<div class="broadcast-black"><b><center><font size="3">Panagrams has started!</font></b>' +

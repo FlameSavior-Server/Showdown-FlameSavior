@@ -165,7 +165,7 @@ exports.customavatars = {
 	'nickoop': 'p0G272x.png',
 	'theusd': 'PI3Qugb.gif',
 	'blazethesamurai': 'robin__f__icon_by_milkteafairy-d7u748a.gif',
-	'pixelblock': 'Klonoa_avatar_2_by_OxAmy.gif',
+	'pixelblock': 'oQVpdtI.gif',
 	'frage': 'HVJw86I.png',
 	'scepunny': 'tumblr_inline_nf4x0xRLUN1rbvq7c.gif',
 	'gamebraker': 'PQ_Zen_Render.png'

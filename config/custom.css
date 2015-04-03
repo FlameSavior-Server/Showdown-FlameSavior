@@ -271,3 +271,53 @@ div.mainmenufooter a:visited {
     background-color: rgba(85, 153, 85, .8);
     border: 1px solid #003300;
 }
+
+/*Roomintro CSS ~start*/
+
+.intro-bg-img {
+  background: url("http://i.imgur.com/DCXleJI.jpg?3") no-repeat;
+  width: 70%;
+  border: 2px solid #303030;
+}
+
+.btn-intro {
+  background: url("http://i.imgur.com/MLIpfu2.jpg?1");
+  border: 2px solid #303030;
+  width: 90px;
+  height: 30px;
+  font-size: 11pt;
+  opacity: 0.8;
+}
+
+.btn-intro:hover {
+  background: #68C9F4;
+  border: 1px solid #303030;
+}
+
+.btn-link {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 9pt;
+  color: #028CEE;
+  padding: 0px;
+}
+
+.btn-link:hover {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 9pt;
+  color: #1270B7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.intro-text {
+  text-shadow: 1px 1px 1px #A9F5F2;
+}
+
+.hr-intro {
+  width: 60%;
+  border: 1px solid #303030;
+}
+
+/*Roomintro CSS ~end*/

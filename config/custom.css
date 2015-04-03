@@ -5,7 +5,8 @@ body {
 }
 #header {
     font-family: Verdana, Helvetica, Arial, sans-serif;
-    background: url("http://i.imgur.com/kWY9I5O.png");
+    background: url("http://i.imgur.com/kWY9I5O.png") no-repeat;
+    background-color: #6EAEDA;
 }
 .ps-room.ps-room-light.scrollable {
     font-family: helvetica, arial, sans-serif;

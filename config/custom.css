@@ -276,7 +276,7 @@ div.mainmenufooter a:visited {
 /*Roomintro CSS ~start*/
 
 .intro-bg-img {
-  background: url("http://i.imgur.com/DCXleJI.jpg?3") no-repeat;
+  background: url("http://i.imgur.com/DCXleJI.jpg?3");
   width: 70%;
   border: 2px solid #303030;
 }

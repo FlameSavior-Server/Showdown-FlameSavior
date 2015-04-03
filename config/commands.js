@@ -1978,11 +1978,11 @@ var commands = exports.commands = {
 		var matched = false;
 		if (target === ''){
 			matched = true;
-			this.sendReplyBox('<b><font color="purple">List of memes:<br><br>-Aliens<br>-Fragequit<br>-Fuck yeah<br>-Umad<br>-Burnheal<br>-OU Train<br>-Gary Train<br>-If you know what I mean<br>-Doge<br>-Troll<br>-Fail<br>-Wtf<br>-Hawkward<br>-I dont always<br>-So hard<br>-ALL OF THE HOMO<br>-Cool story bro<br>-Udense<br>-Professor Oak<br>-Dodge<br>-You dont say<br>-Cockblocked<br>-Save the Titanic<br>-Ninjask\'d<br>-Fuck this<br>-Slowbro<br>-He has a point<br>-Rekt<br>-Death Stare<br>-What is love<br>-Badass<br>-Onixpected<br>-Wood Hammer<br>-Excuses<br>-Hax<br>-Spheal with it<br>-Hazeel<br>-Trick master is love<br>-7.8<br>-Parukia<br>-Fabulous<br>-I regret nothing<br>-Wrong neighborhood<br>-TWSS<br>-HM01<br>-Bitch please<br>-Control your orgasms<br>-Haters gonna hate<br>-Your mom<br>-shrekt<br>-Snickers<br>-Baka<br>-Tits or gtfo<br>-Swiggity<br>-Dat Ass<br>-Once you go<br>-I\'m really feeling it<br>-It\'s a trap<br>-In a row?<br>-Russian Spy<br>-Batgirl<br>-Eels<br>-Oppai<br>-Ara ara<br>-Reggie<br>-Yandere<br>-Turnips<br>-I made this for you<br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b>');
+			this.sendReplyBox('<center><b><font color="purple"><a href="http://pastebin.com/9ADzqbzA">List of memes!</a><br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b></center>');
                 }
 		if (target === 'aliens'){
 			matched = true;
-			this.sendReplyBox('<img src="http://i.imgflip.com/26am.jpg" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/7puX3D3.jpg" />');
 		}
 		if (target === 'fragequit'){
 			matched = true;
@@ -2102,7 +2102,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'badass'){
 			matched = true;
-			this.sendReplyBox('<img src="http://www.memelinks.com/watch-out-we-got-a-badass-over-here.jpg" height="242" width="313" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/Ai78NEt.png" />');
 		}
 		if (target === 'onixpected'){
 			matched = true;
@@ -2120,6 +2120,11 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReplyBox('<img src="http://cdn.memegenerator.net/instances/500x/52485639.jpg" height="188" width="250" />');
 		}
+		if (target === 'hazogonal'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/3oYGPku.png" />');
+		}
+
 		if (target === 'spheal with it'){
 			matched = true;
 			this.sendReplyBox('<img src="http://i.imgur.com/fqijYH7.jpg" width="229" height="219" />');
@@ -2154,7 +2159,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'twss'){
 			matched = true;
-			this.sendReplyBox('<img src="http://i.imgur.com/oEXOucr.jpg" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/cRoo7mt.jpg" />');
 		}
 		if (target === 'hm01'){
 			matched = true;
@@ -2174,7 +2179,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'your mom'){
 			matched = true;
-			this.sendReplyBox('<img src="http://i.imgur.com/k5truy3.jpg" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/gBsEdHr.jpg" />');
 		}
 		if (target === 'shrekt'){
 			matched = true;
@@ -2198,11 +2203,11 @@ var commands = exports.commands = {
 		}
 		if (target === 'dat ass'){
 			matched = true;
-			this.sendReplyBox('<img src="http://i.imgur.com/2HHLEaV.jpg" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/owuyFAB.png" />');
 		}
 		if (target === 'once you go'){
 			matched = true;
-			this.sendReplyBox('<img src="http://i.imgur.com/tkXIGCU.jpg" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/R0Unfd9.jpg" />');
 		}
 		if (target === 'i\'m really feeling it'){
 			matched = true;
@@ -2212,7 +2217,7 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReplyBox('<img src="http://i0.kym-cdn.com/photos/images/newsfeed/000/692/118/2db.jpg" height="169" width="250" />');
 		}
-		if (target === 'in a row?'){
+		if (target === 'in a row'){
 			matched = true;
 			this.sendReplyBox('<img src="http://i.imgur.com/W5K7Ey1.png" />');
 		}
@@ -2235,7 +2240,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'ara ara'){
                         matched = true;
-                        this.sendReplyBox('<img src="http://i.imgur.com/oatm29d.jpg" width="420" height="252" />');
+                        this.sendReplyBox('<img src="http://i.imgur.com/K5Q01kW.png" />');
                 }
                 if (target === 'reggie'){
                         matched = true;

@@ -1807,8 +1807,8 @@ var commands = exports.commands = {
         var name = targetUser ? targetUser.name : this.targetUsername;
 
         if (!userid) {
-            if (target && config.groups[target]) {
-                var groupid = config.groups[target].id;
+            if (target && Config.groups[target]) {
+                var groupid = Config.groups[target].id;
                 return this.sendReply("/room" + groupid + " [username] - Promote a user to " + groupid + " in this room only");
             }
             return this.parse("/help roompromote");
@@ -1819,28 +1819,28 @@ var commands = exports.commands = {
         }
 
         var nextGroup = target || Users.getNextGroupSymbol(currentGroup, cmd === 'roomdemote', true);
-        if (target === 'deauth') nextGroup = config.groupsranking[0];
-        if (!config.groups[nextGroup]) {
+        if (target === 'deauth') nextGroup = Config.groupsranking[0];
+        if (!Config.groups[nextGroup]) {
             return this.sendReply('Group \'' + nextGroup + '\' does not exist.');
         }
-        if (config.groups[nextGroup].globalonly) {
-            return this.sendReply('Group \'room' + config.groups[nextGroup].id + '\' does not exist as a room rank.');
+        if (Config.groups[nextGroup].globalonly) {
+            return this.sendReply('Group \'room' + Config.groups[nextGroup].id + '\' does not exist as a room rank.');
         }
-        if (currentGroup !== ' ' && !user.can('room' + config.groups[currentGroup].id, null, room)) {
-            return this.sendReply('/' + cmd + ' - Access denied for promoting from ' + config.groups[currentGroup].name + '.');
+        if (currentGroup !== ' ' && !user.can('room' + Config.groups[currentGroup].id, null, room)) {
+            return this.sendReply('/' + cmd + ' - Access denied for promoting from ' + Config.groups[currentGroup].name + '.');
         }
-        if (nextGroup !== ' ' && !user.can('room' + config.groups[nextGroup].id, null, room)) {
-            return this.sendReply('/' + cmd + ' - Access denied for promoting to ' + config.groups[nextGroup].name + '.');
+        if (nextGroup !== ' ' && !user.can('room' + Config.groups[nextGroup].id, null, room)) {
+            return this.sendReply('/' + cmd + ' - Access denied for promoting to ' + Config.groups[nextGroup].name + '.');
         }
         if (currentGroup === nextGroup) {
-            return this.sendReply("User '" + this.targetUsername + "' is already a " + (config.groups[nextGroup].name || 'regular user') + " in this room.");
+            return this.sendReply("User '" + this.targetUsername + "' is already a " + (Config.groups[nextGroup].name || 'regular user') + " in this room.");
         }
-        if (config.groups[nextGroup].globalonly) {
-            return this.sendReply("The rank of " + config.groups[nextGroup].name + " is global-only and can't be room-promoted to.");
+        if (Config.groups[nextGroup].globalonly) {
+            return this.sendReply("The rank of " + Config.groups[nextGroup].name + " is global-only and can't be room-promoted to.");
         }
 
-        var isDemotion = (config.groups[nextGroup].rank < config.groups[currentGroup].rank);
-        var groupName = (config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
+        var isDemotion = (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank);
+        var groupName = (Config.groups[nextGroup].name || nextGroup || '').trim() || 'a regular user';
 
         if (nextGroup === ' ') {
             delete room.auth[userid];
@@ -2159,7 +2159,7 @@ var commands = exports.commands = {
                 if (targetRoom.auth) {
                     userGroup = targetRoom.auth[user.userid] || ' ';
                 }
-                if (config.groupsranking.indexOf(userGroup) < config.groupsranking.indexOf(targetRoom.modchat)) {
+                if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(targetRoom.modchat)) {
                     return connection.sendTo(target, "|noinit|nonexistent|The room '" + target + "' does not exist.");
                 }
             }
@@ -2967,7 +2967,7 @@ var commands = exports.commands = {
             return this.privateModCommand('(' + targetUser.name + ' would be banned by ' + user.name + problem + '.)');
         }
 
-        targetUser.popup(user.name + " has has hit you with their ban hammer." + (config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + config.appealurl) : "") + "\n\n" + target);
+        targetUser.popup(user.name + " has has hit you with their ban hammer." + (Config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + Config.appealurl) : "") + "\n\n" + target);
 
         this.addModCommand("" + targetUser.name + " was hit by " + user.name + "\'s ban hammer." + (target ? " (" + target + ")" : ""), ' (' + targetUser.latestIp + ')');
         var alts = targetUser.getAlts();
@@ -3001,7 +3001,7 @@ var commands = exports.commands = {
             return this.privateModCommand('(' + targetUser.name + ' would be banned by ' + user.name + problem + '.)');
         }
 
-        targetUser.popup(user.name + " has sniped you with their ban rifle." + (config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + config.appealurl) : "") + "\n\n" + target);
+        targetUser.popup(user.name + " has sniped you with their ban rifle." + (Config.appealurl ? ("  If you feel that your banning was unjustified you can appeal the ban:\n" + Config.appealurl) : "") + "\n\n" + target);
 
         this.addModCommand("" + targetUser.name + " was taken out by " + user.name + "." + (target ? " (" + target + ")" : ""), ' (' + targetUser.latestIp + ')');
         var alts = targetUser.getAlts();
@@ -3092,13 +3092,13 @@ var commands = exports.commands = {
             this.sendReply('The private room \'staff\' was created.');
         }
         for (var u in Users.users) {
-            if (Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2) {
+            if (Users.users[u].connected && Config.groupsranking.indexOf(Users.users[u].group) >= 2) {
                 Users.users[u].joinRoom('staff');
             }
         }
 
         for (var u in Users.users) {
-            if (Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2) {
+            if (Users.users[u].connected && Config.groupsranking.indexOf(Users.users[u].group) >= 2) {
                 Users.users[u].joinRoom('lobby');
             }
         }
@@ -3115,7 +3115,7 @@ var commands = exports.commands = {
             this.sendReply('The private room \'hangmans\' was created.');
         }
         for (var u in Users.users) {
-            if (Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0) {
+            if (Users.users[u].connected && Config.groupsranking.indexOf(Users.users[u].group) >= 0) {
                 Users.users[u].joinRoom('hangmans');
             }
         }
@@ -3132,7 +3132,7 @@ var commands = exports.commands = {
             this.sendReply('The private room \'lobby\' was created.');
         }
         for (var u in Users.users) {
-            if (Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 0) {
+            if (Users.users[u].connected && Config.groupsranking.indexOf(Users.users[u].group) >= 0) {
                 Users.users[u].joinRoom('lobby');
             }
         }
@@ -3159,8 +3159,8 @@ var commands = exports.commands = {
         var tar = ' ';
         if (target) {
             target = target.trim();
-            if (config.groupsranking.indexOf(target) > -1 && target != '#') {
-                if (config.groupsranking.indexOf(target) <= config.groupsranking.indexOf(user.group)) {
+            if (Config.groupsranking.indexOf(target) > -1 && target != '#') {
+                if (Config.groupsranking.indexOf(target) <= Config.groupsranking.indexOf(user.group)) {
                     tar = target;
                 } else {
                     this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');

@@ -480,12 +480,16 @@ exports.BattleMovedex = {
 		name: "Light Screen",
 		pp: 30,
 		priority: 0,
-		isSnatchable: true,
 		secondary: false,
 		volatileStatus: 'lightscreen',
 		onTryHit: function (pokemon) {
 			if (pokemon.volatiles['lightscreen']) {
 				return false;
+			}
+		},
+		effect: {
+			onStart: function (pokemon) {
+				this.add('-start', pokemon, 'Light Screen');
 			}
 		},
 		target: "self",
@@ -560,11 +564,12 @@ exports.BattleMovedex = {
 	},
 	mirrormove: {
 		inherit: true,
-		onTryHit: function (target) {
-			var noMirrorMove = {mirrormove: 1, struggle: 1};
-			if (!target.lastMove || noMirrorMove[target.lastMove]) {
+		onHit: function (pokemon) {
+			var foe = pokemon.side.foe.active[0];
+			if (!foe || !foe.lastMove || foe.lastMove === 'mirrormove') {
 				return false;
 			}
+			this.useMove(foe.lastMove, pokemon);
 		}
 	},
 	nightshade: {
@@ -655,11 +660,15 @@ exports.BattleMovedex = {
 		name: "Reflect",
 		pp: 20,
 		priority: 0,
-		isSnatchable: true,
 		volatileStatus: 'reflect',
 		onTryHit: function (pokemon) {
 			if (pokemon.volatiles['reflect']) {
 				return false;
+			}
+		},
+		effect: {
+			onStart: function (pokemon) {
+				this.add('-start', pokemon, 'Reflect');
 			}
 		},
 		secondary: false,
@@ -781,7 +790,6 @@ exports.BattleMovedex = {
 		name: "Substitute",
 		pp: 10,
 		priority: 0,
-		isSnatchable: true,
 		volatileStatus: 'Substitute',
 		onTryHit: function (target) {
 			if (target.volatiles['substitute']) {

@@ -58,6 +58,7 @@ function runNpm(command) {
 
 var isLegacyEngine = !global.Map;
 
+var fs = require('fs');
 try {
 	require('sugar');
 	if (isLegacyEngine) require('es6-shim');
@@ -68,50 +69,21 @@ if (isLegacyEngine && !new Map().set()) {
 	runNpm('update --production');
 }
 
-// Make sure config.js exists, and copy it over from config-example.js
-// if it doesn't
-
-var fs = require('fs');
-
-// Synchronously, since it's needed before we can start the server
-if (!fs.existsSync('./config/config.js')) {
-	console.log("config.js doesn't exist - creating one with default settings...");
-	fs.writeFileSync('./config/config.js',
-		fs.readFileSync('./config/config-example.js')
-	);
-}
-
 /*********************************************************
  * Load configuration
  *********************************************************/
 
-global.Config = require('./config/config.js');
-global.config = Config
+try {
+	global.Config = require('./config/config.js');
+} catch (err) {
+	if (err.code !== 'MODULE_NOT_FOUND') throw err;
 
-global.reloadCustomAvatars = function () {
-	var path = require('path');
-	var newcustomavatars = {};
-	fs.readdirSync('./config/avatars').forEach(function (file) {
-		var ext = path.extname(file);
-		if (ext !== '.png' && ext !== '.gif')
-			return;
-
-		var user = toId(path.basename(file, ext));
-		newcustomavatars[user] = file;
-		delete Config.customavatars[user];
-	});
-
-	// Make sure the manually entered avatars exist
-	for (var a in Config.customavatars)
-		if (typeof Config.customavatars[a] === 'number')
-			newcustomavatars[a] = Config.customavatars[a];
-		else
-			fs.exists('./config/avatars/' + Config.customavatars[a], (function (user, file, isExists) {
-				if (isExists)
-					Config.customavatars[user] = file;
-			}).bind(null, a, Config.customavatars[a]));
-
-	Config.customavatars = newcustomavatars;
+	// Copy it over synchronously from config-example.js since it's needed before we can start the server
+	console.log("config.js doesn't exist - creating one with default settings...");
+	fs.writeFileSync('./config/config.js',
+		fs.readFileSync('./config/config-example.js')
+	);
+	global.Config = require('./config/config.js');
 }
 
 if (Config.watchconfig) {
@@ -120,7 +92,7 @@ if (Config.watchconfig) {
 		try {
 			delete require.cache[require.resolve('./config/config.js')];
 			global.Config = require('./config/config.js');
-			reloadCustomAvatars();
+			if (global.Users) Users.cacheGroupData();
 			console.log('Reloaded config/config.js');
 		} catch (e) {}
 	});
@@ -137,8 +109,7 @@ Config.port = cloudenv.get('PORT', Config.port);
 
 if (require.main === module && process.argv[2] && parseInt(process.argv[2])) {
 	Config.port = parseInt(process.argv[2]);
-} else if (global.overridePort) {
-	Config.port = global.overridePort;
+	Config.ssl = null;
 }
 
 global.ResourceMonitor = {
@@ -449,7 +420,6 @@ fs.readFile('./config/ipbans.txt', function (err, data) {
 	Users.checkRangeBanned = Cidr.checker(rangebans);
 });
 
-reloadCustomAvatars();
 
 // uptime recording
 fs.readFile('./logs/uptime.txt', function (err, uptime) {

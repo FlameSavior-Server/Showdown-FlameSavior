@@ -284,13 +284,13 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	kadabra: {
-		randomBattleMoves: ["psychic","thunderwave","reflect","seismictoss"],
-		essentialMove: "recover",
+		randomBattleMoves: ["recover","thunderwave","reflect","seismictoss"],
+		essentialMove: "psychic",
 		tier: "UU"
 	},
 	alakazam: {
-		randomBattleMoves: ["psychic","thunderwave","reflect","seismictoss"],
-		essentialMove: "recover",
+		randomBattleMoves: ["recover","thunderwave","reflect","seismictoss"],
+		essentialMove: "psychic",
 		tier: "OU"
 	},
 	machop: {
@@ -424,7 +424,7 @@ exports.BattleFormatsData = {
 		tier: "OU"
 	},
 	onix: {
-		randomBattleMoves: ["earthquake","explosion","rockslide","harden","toxic"],
+		randomBattleMoves: ["earthquake","explosion","rockslide","toxic"],
 		tier: "UU"
 	},
 	drowzee: {
@@ -437,11 +437,11 @@ exports.BattleFormatsData = {
 		tier: "UU"
 	},
 	krabby: {
-		randomBattleMoves: ["bodyslam","crabhammer","leer","swordsdance","blizzard"],
+		randomBattleMoves: ["bodyslam","crabhammer","swordsdance","blizzard"],
 		tier: "LC"
 	},
 	kingler: {
-		randomBattleMoves: ["bodyslam","hyperbeam","blizzard","swordsdance"],
+		randomBattleMoves: ["bodyslam","hyperbeam","swordsdance","blizzard"],
 		essentialMove: "crabhammer",
 		tier: "UU"
 	},

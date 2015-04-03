@@ -1486,8 +1486,8 @@ exports.BattleItems = {
 		fling: {
 			basePower: 30
 		},
-		onModifyPokemon: function (pokemon) {
-			pokemon.weightkg /= 2;
+		onModifyWeight: function (weight) {
+			return weight / 2;
 		},
 		num: 539,
 		gen: 5,
@@ -2309,7 +2309,7 @@ exports.BattleItems = {
 			}
 			move.pp += 10;
 			if (move.pp > move.maxpp) move.pp = move.maxpp;
-			this.add('-activate', pokemon, 'item: Leppa Berry', 'move: ' + move.name);
+			this.add('-activate', pokemon, 'item: Leppa Berry', move.id);
 		},
 		num: 154,
 		gen: 3,
@@ -3807,7 +3807,7 @@ exports.BattleItems = {
 			if (type === 'sandstorm' || type === 'hail' || type === 'powder') return false;
 		},
 		onTryHit: function (pokemon, source, move) {
-			if (move.flags && move.flags['powder']) {
+			if (move.flags['powder']) {
 				this.add('-activate', pokemon, 'Safety Goggles', move.name);
 				return null;
 			}

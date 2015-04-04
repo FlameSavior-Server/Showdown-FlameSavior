@@ -367,3 +367,22 @@ div.mainmenufooter a:visited {
     color: #464646;
 }
 /*Teambuilder CSS ~end*/
+
+
+.btn-nofill {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #C1DAFF;
+    text-shadow: 1px 1px 1px #414D5E;
+    font-weight: bold;
+    font-family: helvetica, arial, sans-serif;
+    padding: 0px 20px 0px 20px;
+}
+
+.btn-nofill:hover {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #96BDF7;
+    text-shadow: 1px 1px 1px #414D5E;
+    cursor: pointer;
+}

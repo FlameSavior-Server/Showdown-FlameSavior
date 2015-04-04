@@ -171,7 +171,7 @@ a.button.notifying.closable:hover {
 }
 .ps-room.ps-room-opaque {
     background: rgba(240, 240, 240, 0.8);
-    color: #FFF;
+    color: #000;
 }
 div.trainer > strong {
     color: #323841;

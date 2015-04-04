@@ -2258,6 +2258,10 @@ var commands = exports.commands = {
                         matched = true;
                         this.sendReplyBox('<img src="http://i.imgur.com/EoITea4.gifg" />');
                 }
+                if (target === 'waluigi time'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/AauQT6w.png" width="300" height="300" />');
+                }
                 if (target === ''){
 			}
 		else if (!matched) {

@@ -710,6 +710,11 @@ user.updateIdentity();
         if (!this.can('broadcast', null, room)) return;
         this.parse('/poll Tournament tier?, ' + Object.keys(Tools.data.Formats).filter(function (f) { return Tools.data.Formats[f].effectType === 'Format'; }).join(", "));
     },
+    
+    doublespoll: function (target, room, user) {
+        if (!this.can('broadcast', null, room)) return;
+        this.parse('/poll Tournament tier?, Random Doubles Battle, Smogon Doubles, Smogon Doubles Ubers, Smogon Doubles UU, VGC 2015, Smogon Doubles[Gen5]');
+    },
 
     endpoll: function (target, room, user) {
         if (!this.can('broadcast', null, room)) return;

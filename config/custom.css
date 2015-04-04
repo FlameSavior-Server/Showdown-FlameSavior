@@ -206,6 +206,23 @@ button.select.teamselect.preselected:hover {
 .infobox {
     background: rgba(102, 136, 170, .075);
 }
+
+.ps-popup {
+    background: url("http://i.imgur.com/jxOe6XC.png");
+}
+
+.popupmenu h3 {
+    color: #474747;
+}
+  
+.popupmenu button {
+    color: #292929;
+}
+  
+.popupmenu button:hover {
+    background: rgba(233, 233, 233, 0.7);
+}
+
 span.message-pm {
     color: #00A0A0;
 }

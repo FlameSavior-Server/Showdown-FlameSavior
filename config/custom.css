@@ -34,14 +34,9 @@ body {
     background-color: #E9F3F3;
     opacity: 1;
 }
-.chat-log-add.hasuserlist {
-    background: #BBB;
-    /*background-color: -moz-linear-gradient(#E8FAFF, #AFAFAF);
-    background: -webkit-linear-gradient(#E6E6E6, #AFAFAF);
-    background: -o-linear-gradient(#E6E6E6, #AFAFAF);
-    background: -moz-linear-gradient(#E6E6E6, #AFAFAF);
-    background: linear-gradient(#E6E6E6, #AFAFAF);
-    border-top: 1px solid #575757;*/
+.chat-log-add {
+    background:url("http://i.imgur.com/2dyqgwD.png");
+    border-top: 1px solid #575757;
 }
 .pm-log-add {
     background: #CFCFCF;
@@ -129,7 +124,7 @@ button.astext:hover {
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 .maintabbarbottom {
-    background-color: #CCC;
+    background-color: rgb(190,190,190);
     border-top: 1px solid #575757;
     border-right: 0px solid #000000;
     border-bottom: 1px solid #575757;
@@ -140,13 +135,7 @@ button.astext:hover {
     text-shadow: none;
     font: 11px Verdana, Helvetica, Arial, sans-serif;
     color: #000;
-    background-color: #CCC;
-    /*background-color: -moz-linear-gradient(#DADADA, #BEBEBE);
-    background: -webkit-linear-gradient(#DADADA, #BEBEBE);
-    background: -o-linear-gradient(#DADADA, #BEBEBE);
-    background: -moz-linear-gradient(#DADADA, #BEBEBE);
-    background: linear-gradient(#DADADA, #BEBEBE);*/
-    
+    background:url("http://i.imgur.com/SRdPIN3.png");
     border: 1px solid #575757;
 }
 .tabbar a.button {
@@ -156,17 +145,18 @@ button.astext:hover {
     background-color: #F2F2F2;
     border: 1px solid #575757;
     text-shadow: none;
+    z-index:1;
 }
-.tabbar a.button:hover {
-    text-shadow: none;
-    font: 11px Verdana, Helvetica, Arial, sans-serif;
-    color: #000;
-    background-color: #EBEBEB;
+a.button.notifying.closable, .tabbar a.button.notifying {
+    background: url("http://i.imgur.com/tehpryL.png");
     border: 1px solid #575757;
-    text-shadow: none;
 }
-a.button.notifying.closable,
-a.button.notifying.closable:hover {
+a.button.notifying.closable:hover, .tabbar a.button.notifying:hover {
+    background: url("http://i.imgur.com/MkX5drf.png");
+    border: 1px solid #575757;
+}
+a.button.notifying.closable:active, .tabbar a.button.notifying:active {
+    background: url("http://i.imgur.com/MkX5drf.png?1");
     border: 1px solid #575757;
 }
 .ps-room.ps-room-opaque {
@@ -398,3 +388,35 @@ div.mainmenufooter a:visited {
 .minimizebutton:hover {
     color: #ECBA6F;  
 }
+
+/*Fake gradient ~start*/
+
+.battle-log-add {
+    background:url("http://i.imgur.com/2dyqgwD.png");
+    border-top: 1px solid #575757;   
+    border-left: 1px solid #575757;  
+}
+
+.battle-log {
+    border-left: 1px solid #575757;  
+}
+
+.battle {
+    border-bottom: 1px solid #575757;   
+}
+
+.tournament-bracket.tournament-bracket-overflowing {
+    background: url("http://i.imgur.com/WCEwpwL.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+
+.battle-log h2 {
+    background: #808080;
+    color: #FFF;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+/*Fake gradient ~end*/

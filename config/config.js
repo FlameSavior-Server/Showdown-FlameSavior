@@ -168,7 +168,8 @@ exports.customavatars = {
 	'pixelblock': 'oQVpdtI.gif',
 	'frage': 'HVJw86I.png',
 	'scepunny': 'tumblr_inline_nf4x0xRLUN1rbvq7c.gif',
-	'gamebraker': 'PQ_Zen_Render.png'
+	'gamebraker': 'PQ_Zen_Render.png',
+	'dirtyklefki': '9Feergd.png'
 };
 
 // appealurl - specify a URL containing information on how users can appeal

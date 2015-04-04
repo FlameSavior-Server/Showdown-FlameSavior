@@ -3,29 +3,36 @@ body {
     background: url("http://i.imgur.com/3KZfhGD.jpg");
     background-repeat: x-repeat;
 }
+
 #header {
     font-family: Verdana, Helvetica, Arial, sans-serif;
     background: url("http://i.imgur.com/kWY9I5O.png") no-repeat;
     background-color: #6EAEDA;
 }
+
 .ps-room.ps-room-light.scrollable {
     font-family: helvetica, arial, sans-serif;
     background: rgba(230, 240, 255, 0.7);
     border-right: 1px solid #575757;
 }
+
 .pad {
     border-right: 1px solid #575757;
 }
+
 .mainmenuwrapper {
     border-right: 1px solid #575757;
 }
+
 .battle-log {
     background: url("http://i.imgur.com/OALLyrg.png") repeat;
 }
+
 .pm-log {
     background: url("http://i.imgur.com/jxOe6XC.png") repeat;
     border: 1px solid #575757;
 }
+
 .chat-log.hasuserlist {
     background: url("http://i.imgur.com/0MqPfER.png");
     background-repeat: no-repeat;
@@ -34,10 +41,12 @@ body {
     background-color: #E9F3F3;
     opacity: 1;
 }
+
 .chat-log-add {
     background:url("http://i.imgur.com/2dyqgwD.png");
     border-top: 1px solid #575757;
 }
+
 .pm-log-add {
     background: #CFCFCF;
     border-top: 0px solid #575757;
@@ -45,24 +54,30 @@ body {
     border-bottom: 1px solid #575757;
     border-left: 1px solid #575757;
 }
+
 .ps-overlay {
     background: rgba(230, 240, 255, 0.5)
 }
+
 .button.button {
     text-shadow: none;
 }
+
 .logo {
     opacity: 0;
 }
+
 .battleform label {
     background: url("http://i.imgur.com/yFWeHx0.png") no-repeat scroll left center transparent;
     padding: 4px;
     opacity: 0.9;
     color: #FFF;
 }
+
 .menugroup {
     background: rgba(0, 0, 0, 0);
 }
+
 .menugroup .button {
     background: none repeat scroll 0% 0% #474747;
     color: #FFFFFF;
@@ -70,15 +85,18 @@ body {
     border-color: #212121;
     width: 230px;
 }
+
 .menugroup .button:hover {
     background: none repeat scroll 0% 0% #505050;
     color: #FFFFFF;
     box-shadow: 0px 1px 0px 0px #5F5F5F inset, 0px 2px 3px rgba(0, 0, 0, 0.2);
     border-color: #212121;
 }
+
 div.roomlist {
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
+
 .roomlist a.ilink {
     font-family: Verdana, Helvetica, Arial, sans-serif;
     border: 1px solid #2E2E2E;
@@ -86,12 +104,14 @@ div.roomlist {
     background: #EEEEEE;
     text-shadow: 1px 1px #EAEAEA;
 }
+
 .roomlist a.ilink:hover {
     font-family: Verdana, Helvetica, Arial, sans-serif;
     border: 1px solid #2E2E2E;
     color: #001433;
     background: #DFDFDF;
 }
+
 .pm-window.focused h3,
 .pm-window.focused h3:hover {
     border: 1px solid #212121;
@@ -99,30 +119,35 @@ div.roomlist {
     background: rgba(0, 0, 0, 0.8);
     font-family: verdana, helvetica, arial, sans-serif;
 }
+
 .pm-window h3 {
     border: 1px solid #212121;
     color: #FFF;
     background: rgba(0, 0, 0, 0.7);
     font-family: verdana, helvetica, arial, sans-serif;
 }
+
 .pm-window h3:hover {
     border: 1px solid #212121;
     color: #FFF;
     background: rgba(0, 0, 0, 0.8);
     font-family: verdana, helvetica, arial, sans-serif;
 }
+
 button.astext {
     background-color: transparent;
     border: 0;
     padding: 0;
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
+
 button.astext:hover {
     background-color: transparent;
     border: 0;
     padding: 0;
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
+
 .maintabbarbottom {
     background-color: rgb(190,190,190);
     border-top: 1px solid #575757;
@@ -130,6 +155,7 @@ button.astext:hover {
     border-bottom: 1px solid #575757;
     border-left: 0px solid #000000;
 }
+
 .tabbar a.button.cur,
 .tabbar a.button.cur:hover {
     text-shadow: none;
@@ -138,6 +164,7 @@ button.astext:hover {
     background:url("http://i.imgur.com/SRdPIN3.png");
     border: 1px solid #575757;
 }
+
 .tabbar a.button {
     text-shadow: none;
     font: 11px Verdana, Helvetica, Arial, sans-serif;
@@ -147,14 +174,17 @@ button.astext:hover {
     text-shadow: none;
     z-index:1;
 }
+
 a.button.notifying.closable, .tabbar a.button.notifying {
     background: url("http://i.imgur.com/tehpryL.png");
     border: 1px solid #575757;
 }
+
 a.button.notifying.closable:hover, .tabbar a.button.notifying:hover {
     background: url("http://i.imgur.com/MkX5drf.png");
     border: 1px solid #575757;
 }
+
 a.button.notifying.closable:active, .tabbar a.button.notifying:active {
     background: url("http://i.imgur.com/MkX5drf.png?1");
     border: 1px solid #575757;
@@ -162,7 +192,9 @@ a.button.notifying.closable:active, .tabbar a.button.notifying:active {
 .ps-room.ps-room-opaque {
     background: rgba(240, 240, 240, 0.8);
     color: #000;
+    border-right: 1px solid #575757;
 }
+
 div.trainer > strong {
     color: #323841;
 }
@@ -171,28 +203,36 @@ div.trainer > strong {
     color: #FFF;
     border: 1px solid #000000;
 }
+
 .userlist li button {
     text-shadow: none;
 }
+
 ul.userlist {
     border-right: 1px solid #575757;
 }
+
 span.username {
     text-shadow: 1px 1px #CFCFCF;
 }
+
 div.pm-log > div {
     border-right: 0px solid #000000;
 }
+
 .icon-user {
     display: none;
 }
+
 button.select.formatselect:hover,
 button.select.teamselect:hover {
     background: #E3E3E3;
 }
+
 button.select.teamselect.preselected:hover {
     opacity: 0.85;
 }
+
 .infobox {
     background: rgba(102, 136, 170, .075);
 }
@@ -216,48 +256,46 @@ button.select.teamselect.preselected:hover {
 span.message-pm {
     color: #00A0A0;
 }
+
 div.chat small {
     color: #001F2E;
     text-shadow: 1px 1px #D4D4D5;
 }
-div.tournament-bracket.tournament-bracket-overflowing {
-    background: url("http://i.imgur.com/WCEwpwL.png");
-    background-repeat: no-repeat, repeat;
-    background-position: center, center;
-    opacity: 1;
-}
+
 p > em {
     color: #000000;
 }
+
 .highlighted {
     background: #B3D3E8;
 }
+
 div.ps-popup.tournament-popout-bracket > div.tournament-bracket-tree {
     background: url("http://i.imgur.com/jxOe6XC.png");
     background-size: auto auto;
     background-repeat: repeat;
     background-position: top;
 }
+
 div.tournament-tools.active {
     background: #DDD;
-    /*background: -webkit-linear-gradient(#DDDDDD, #AFAFAF);
-    background: -o-linear-gradient(#DDDDDD, #AFAFAF);
-    background: -moz-linear-gradient(#DDDDDD, #AFAFAF);
-    background: linear-gradient(#DDDDDD, #AFAFAF);*/
-    
     border-top: 1px solid #575757;
     border-bottom: 1px solid #575757;
     box-shadow: none;
 }
+
 div.notice > div.infobox > strong > font {
     color: #007AA3;
 }
+
 div.notice > div.infobox > font {
     color: #00B2B2;
 }
+
 div.notice > b > font {
     color: #007AA3;
 }
+
 div.mainmenufooter a:link,
 div.mainmenufooter a:hover,
 div.mainmenufooter a:visited {
@@ -418,5 +456,4 @@ div.mainmenufooter a:visited {
     border-top: 1px solid #000000;
     border-bottom: 1px solid #000000;
 }
-
 /*Fake gradient ~end*/

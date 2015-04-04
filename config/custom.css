@@ -386,3 +386,15 @@ div.mainmenufooter a:visited {
     text-shadow: 1px 1px 1px #414D5E;
     cursor: pointer;
 }
+
+.closebutton, .minimizebutton {
+    color: #7A7A7C;
+}
+    
+.closebutton:hover {
+    color: #E97979;  
+}
+
+.minimizebutton:hover {
+    color: #ECBA6F;  
+}

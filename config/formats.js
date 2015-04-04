@@ -3797,11 +3797,31 @@ exports.Formats = [
 		]
 	},
 	{
+		name: "Duotype",
+		section: "Other Metagames",
+		column: 2,
+
+		ruleset: ['Pokemon', 'Standard', 'Baton Pass Clause', 'Swagger Clause', 'Duo Type Clause', 'Team Preview'],
+		banlist: ['Aegislash', 'Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Genesect', 'Giratina',
+			'Giratina-O', 'Groudon', 'Ho-Oh', 'Kyogre', 'Kyurem-White', 'Lugia','Mewtwo','Palkia','Rayquaza','Reshiram',
+			'Shaymin-Sky','Talonflame','Xerneas','Yveltal','Zekrom','Damp Rock','Gengarite','Kangaskanite','Lucarionite',
+			'Mawilite','Salamencite','Slowbronite','Soul Dew','Double Team','Minimize','Swagger'
+		]
+	},
+	{
 		name: "Random Monotype",
 		section: "Other Metagames",
+		column: 2,
 
 		team: 'randommonotype',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod']
+	},
+	{
+		name: "Ubers Monotype",
+		section: "Other Metagames",
+
+		ruleset: ['Pokemon', 'Standard Ubers', 'Same Type Clause'],
+		banlist: []
 	},
 	{
 		name: "Random LC",

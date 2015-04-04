@@ -2260,7 +2260,7 @@ var commands = exports.commands = {
                 }
                 if (target === 'waluigi time'){
                         matched = true;
-                        this.sendReplyBox('<img src="http://i.imgur.com/AauQT6w.png" width="300" height="300" />');
+                        this.sendReplyBox('<img src="http://i.imgur.com/Ijzs6bw.png" width="300" height="300" />');
                 }
                 if (target === ''){
 			}

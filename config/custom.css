@@ -536,3 +536,100 @@ div.mainmenufooter a:visited {
     border-bottom: 1px solid #000000;
 }
 /*Fake gradient ~end*/
+
+/*******************
+* Coloured Buttons *
+*******************/
+
+.redbutton {
+background-color: #CC0000;
+border: 2px solid #8F0000;
+color: #FF8989;
+}
+
+.redbutton:hover {
+background-color: #800000;
+}
+
+.bluebutton {
+background-color: #335CD6;
+border: 2px solid #0033CC;
+color: #99AEEA;
+}
+
+.bluebutton:hover {
+background-color: #005C99;
+}
+
+.greenbutton {
+background-color: #00CC00;
+border: 2px solid #009933;
+color: #668566;
+}
+
+.greenbutton:hover {
+background-color: #5CB75C;
+}
+.yellowbutton {
+background-color: #E6E65C;
+border: 2px solid #A1A140;
+color: #FFFF99;
+}
+
+.yellowbutton:hover {
+background-color: #C9C94D;
+}
+.brownbutton {
+background-color: #A34719;
+border: 2px solid #622B0F;
+color: #D17519;
+}
+
+.brownbutton:hover {
+background-color: #993300;
+}
+.graybutton {
+background-color: #828282;
+border: 2px solid #4D4D4D;
+color: #CCCCCC;
+}
+
+.graybutton:hover {
+background-color: #707070;
+}
+.whitebutton {
+background-color: #DBDBDB;
+border: 2px solid #888888;
+color: #FFFFFF;
+}
+
+.whitebutton:hover {
+background-color: #BFBFBF;
+}
+.blackbutton {
+background-color: #474747;
+border: 2px solid #000000;
+color: #A3A3A3;
+}
+
+.blackbutton:hover {
+background-color: #191919;
+}
+.pinkbutton {
+background-color: #FF5CD6;
+border: 2px solid #FF3399;
+color: #FF9DE6;
+}
+
+.pinkbutton:hover {
+background-color: #D163AC;
+}
+.purplebutton {
+background-color: #BD5CBD;
+border: 2px solid #990099;
+color: #D79DD7;
+}
+
+.purplebutton:hover {
+background-color: #AD33AD;
+}

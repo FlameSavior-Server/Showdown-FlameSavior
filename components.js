@@ -720,6 +720,7 @@ user.updateIdentity();
     	if (!this.can('broadcast', null, room)) return;
     	this.parse('/poll Tournament Tier?, Random Battles, Metronome, Duotype, Monotype, Seasonal, Ubers, OU, UU, RU, NU, LC, VGC, Random Triples, Random Doubles, Random Monotype, Random LC, Ubers Mono, CC1vs1, CC, 1v1');
     },
+    
     easytour: 'etour',
     etour: function (target, room, user) {
     	if (!this.can('broadcast', null, room)) return;

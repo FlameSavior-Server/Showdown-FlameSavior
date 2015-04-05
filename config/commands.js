@@ -2368,7 +2368,7 @@ t2 = 'In the shower';
 break;
 case 'drunk':
 t = 'Ⓓⓡⓤⓝⓚ';
-t2 = 'In the shower';
+t2 = 'drunk';
 break;
 case 'forum':
 t = 'Ⓕⓞⓡⓤⓜ';

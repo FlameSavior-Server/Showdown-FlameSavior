@@ -233,7 +233,7 @@ exports.grouplist = [
 		globalonly: true
 	},
 	{
-		symbol: '∆',
+		symbol: '&',
 		id: "leader",
 		name: "Leader",
 		inherit: '@',

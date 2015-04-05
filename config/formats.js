@@ -70,6 +70,15 @@ exports.Formats = [
 		name: "NU",
 		section: "ORAS Singles",
 
+		searchShow: false,
+		ruleset: ['RU'],
+		banlist: ['RU', 'BL3', 'Glalitite', 'Steelixite']
+	},
+	{
+		name: "NU (suspect test)",
+		section: "ORAS Singles",
+
+		challengeShow: false,
 		ruleset: ['RU'],
 		banlist: ['RU', 'BL3', 'Glalitite', 'Steelixite']
 	},
@@ -294,7 +303,7 @@ exports.Formats = [
 				var abilityMap = Object.create(null);
 				for (var speciesid in Tools.data.Pokedex) {
 					var pokemon = Tools.data.Pokedex[speciesid];
-					if (pokemon.num < 1) continue;
+					if (pokemon.num < 1 || pokemon.num > 719) continue;
 					for (var key in pokemon.abilities) {
 						var abilityId = toId(pokemon.abilities[key]);
 						if (abilityMap[abilityId]) {
@@ -1019,9 +1028,6 @@ exports.Formats = [
 			if (name === 'antar') {
 				this.add("c|~Antar|It's my time in the sun.");
 			}
-			if (name === 'irraquated') {
-				this.add("c|~Irraquated|:L I didn't want to be here...");
-			}
 			if (name === 'chaos') {
 				this.add("c|~chaos|I always win");
 			}
@@ -1139,7 +1145,7 @@ exports.Formats = [
 				this.add('c|@asgdf|' + sentences[0]);
 			}
 			if (name === 'barton') {
-				this.add('c|@barton|free passion');
+				this.add('c|@Barton|free passion');
 			}
 			if (name === 'bean') {
 				sentences = ["Everybody wants to be a cat", "if you KO me i'll ban u on PS", "just simply outplay the coin-toss"].randomize();
@@ -1637,9 +1643,6 @@ exports.Formats = [
 			// Admins.
 			if (name === 'antar') {
 				this.add('c|~Antar|Should\'ve been an Umbreon.');
-			}
-			if (name === 'irraquated') {
-				this.add('c|~Irraquated|#BlameNine :[');
 			}
 			if (name === 'chaos') {
 				if (name === toId(pokemon.name)) this.add('c|~chaos|//forcewin chaos');
@@ -2245,13 +2248,6 @@ exports.Formats = [
 				};
 				move.self = {boosts: {atk:6}};
 			}
-			if (move.id === 'bellydrum' && name === 'irraquated') {
-				move.name = 'Break Server';
-				move.onHit = function (target, pokemon) {
-					this.add("raw|<div class="broadcast-red"><b>Pokemon Showdown crashed!</b><br />Don\'t worry, we\'re working on fixing it.</div>");
-				};
-				move.self = {boosts: {atk:6}};
-			}
 			if (move.id === 'milkdrink' && name === 'joim') {
 				move.name = 'Red Bull Drink';
 				move.boosts = {spa:1, spe:1, accuracy:1, evasion:-1};
@@ -2347,7 +2343,7 @@ exports.Formats = [
 			// Leader signature moves.
 			if (move.id === 'geomancy' && name === 'hollywood') {
 				move.name = 'Meme Mime';
-				move.isTwoTurnMove = false;
+				move.flags = {};
 				move.onTry = function () {};
 				move.boosts = {atk:1, def:1, spa:1, spd:1, spe:1, accuracy:1};
 				move.onTryHit = function (target, source, move) {
@@ -2362,7 +2358,6 @@ exports.Formats = [
 				move.type = 'Flying';
 				move.category = 'Special';
 				move.basePower = 80;
-				move.notSubBlocked = true;
 				move.onTryHit = function (target, source, move) {
 					this.attrLastMove('[still]');
 					this.add('-anim', source, "Boomburst", target);
@@ -2617,7 +2612,6 @@ exports.Formats = [
 					move.name = 'Study';
 					move.priority = 1;
 					move.flags = {protect:1};
-					move.notSubBlocked = true;
 					move.onTryHit = function (target, source) {
 						if (source.lastAttackType === 'None') {
 							this.add('-hint', "Study only works when preceded by an attacking move.");
@@ -2778,7 +2772,7 @@ exports.Formats = [
 			}
 			if (move.id === 'transform' && name === 'kupo') {
 				move.name = 'Kupo Nuts';
-				move.notSubBlocked = true;
+				move.flags = {};
 				move.priority = 2;
 				move.onHit = function (pokemon, user) {
 					var template = pokemon.template;
@@ -2836,7 +2830,6 @@ exports.Formats = [
 				move.name = 'Shadow Storm';
 				move.type = 'Shadow';
 				move.accuracy = true;
-				move.ignoreScreens = true;
 				move.ignoreDefensive = true;
 				move.defensiveCategory = 'Physical';
 				move.basePowerCallback = function (pokemon, target) {
@@ -3239,7 +3232,6 @@ exports.Formats = [
 				move.affectedByImmunities = false;
 				move.ignoreDefensive = true;
 				move.ignoreEvasion = true;
-				move.ignoreScreens = true;
 			}
 			if (move.id === 'detect' && name === 'zebraiken') {
 				move.name = 'bzzt';
@@ -3808,42 +3800,6 @@ exports.Formats = [
 			'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Talonflame', 'Xerneas', 'Yveltal', 'Zekrom',
 			'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite', 'Shaymin-Sky', 'Slowbronite', 'Soul Dew'
 		]
-	},
-	{
-		name: "Duotype",
-		section: "Other Metagames",
-		column: 2,
-
-		ruleset: ['Pokemon', 'Standard', 'Baton Pass Clause', 'Swagger Clause', 'Duo Type Clause', 'Team Preview'],
-		banlist: ['Aegislash', 'Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Genesect', 'Giratina',
-			'Giratina-O', 'Groudon', 'Ho-Oh', 'Kyogre', 'Kyurem-White', 'Lugia','Mewtwo','Palkia','Rayquaza','Reshiram',
-			'Shaymin-Sky','Talonflame','Xerneas','Yveltal','Zekrom','Damp Rock','Gengarite','Kangaskanite','Lucarionite',
-			'Mawilite','Salamencite','Slowbronite','Soul Dew','Double Team','Minimize','Swagger'
-		]
-	},
-	{
-		name: "Random Monotype",
-		section: "Other Metagames",
-		column: 2,
-
-		team: 'randommonotype',
-		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod']
-	},
-	{
-		name: "Ubers Monotype",
-		section: "Other Metagames",
-
-		ruleset: ['Pokemon', 'Standard Ubers', 'Same Type Clause'],
-		banlist: []
-	},
-	{
-		name: "Random LC",
-		section: "Other Metagames",
-
-		maxLevel: 5,
-		team: 'randomlc',
-		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod'],
-		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar', 'Misdreavus']
 	},
 	{
 		name: "Tier Shift",

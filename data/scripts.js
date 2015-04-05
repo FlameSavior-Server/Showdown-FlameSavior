@@ -3220,9 +3220,9 @@ exports.BattleScripts = {
 			},
 			'~Irraquated': {
 				species: 'Dialga', ability: 'Adaptability', item: 'Adamant Orb', gender: 'M',
-				moves: ['blueflare', ['dragonpulse', 'solarbeam', 'flashcanon'][this.random(3)], 'sunnyday'],
+				moves: ['explosion', 'flashcanon', 'milkdrink', 'dragonpulse'],
 				baseSignatureMove: 'bellydrum', signatureMove: "Break Server",
-				evs: {hp:4, spa:252, spe:252}, nature: 'Timid'
+				evs: {hp:252, def:252, spd:4}, nature: 'Adamant'
 			},
 			'~chaos': {
 				species: 'Bouffalant', ability: 'Fur Coat', item: 'Red Card', gender: 'M',

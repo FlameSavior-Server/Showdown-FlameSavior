@@ -129,7 +129,7 @@ exports.Formats = [
 	},
 	{
 		name: "Metronome",
-		section: 'Other Metagames',
+		section: "Other Metagames",
 
 		ruleset: ['Team Preview 1v1'],
 		banlist: ['Huge Power', 'Pure Power', 'Sturdy', 'Sand Stream', 'Snow Warning', 'Poison Heal', 'Wonder Guard', 'Harvest', 'Flame Body',
@@ -139,8 +139,7 @@ exports.Formats = [
 			'Lucky Punch', 'Stick', 'Shell Bell', 'Moody', 'Cheek Pouch', 'Parental Bond', 'Imposter', 'Effect Spore', 'Static', 'Aftermath',
 			'Assault Vest','Shell Bell', 'Lax Incense', 'Oran Berry', 'Aerodactylite', 'Aggronite', 'Ampharosite', 'Blastiosite', 'Blazikenite',
 			'Charizardite X', 'Charizardite Y', 'Garchompite', 'Gardevoirite', 'Gyaradosite', 'Latiasite', 'Latiosite', 'Lucarionite',
-			'Tyranitarite', 'Venusaurite'
-		],
+			'Tyranitarite', 'Venusaurite'],
 		validateTeam: function (team, format) {
 			var template = this.getTemplate(team.species);
 			var problems = [];

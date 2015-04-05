@@ -1052,6 +1052,9 @@ exports.Formats = [
 			if (name === 'antar') {
 				this.add("c|~Antar|It's my time in the sun.");
 			}
+			if (name === 'irraquated') {
+				this.add("c|~Irraquated|:L I didn't want to be here...");
+			}
 			if (name === 'chaos') {
 				this.add("c|~chaos|I always win");
 			}
@@ -1668,6 +1671,9 @@ exports.Formats = [
 			if (name === 'antar') {
 				this.add('c|~Antar|Should\'ve been an Umbreon.');
 			}
+			if (name === 'irraquated') {
+				this.add('c|~Irraquated|#BlameNine :[);
+			}
 			if (name === 'chaos') {
 				if (name === toId(pokemon.name)) this.add('c|~chaos|//forcewin chaos');
 				if (this.random(1000) === 420) {
@@ -2269,6 +2275,13 @@ exports.Formats = [
 				move.name = 'Lockdown';
 				move.onHit = function (target, pokemon) {
 					this.add("raw|<div class=\"broadcast-red\"><b>The server is restarting soon.</b><br />Please finish your battles quickly. No new battles can be started until the server resets in a few minutes.</div>");
+				};
+				move.self = {boosts: {atk:6}};
+			}
+			if (move.id === 'bellydrum' && name === 'irraquated') {
+				move.name = 'Break Server';
+				move.onHit = function (target, pokemon) {
+					this.add("raw|<div class="broadcast-red"><b>Pokemon Showdown crashed!</b><br />Don\'t worry, we\'re working on fixing it.</div>");
 				};
 				move.self = {boosts: {atk:6}};
 			}

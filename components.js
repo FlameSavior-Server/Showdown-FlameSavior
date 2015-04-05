@@ -885,6 +885,19 @@ user.updateIdentity();
             return user.send('|popup|Something bad happen:\n\n ' + e.stack);
         }
     },
+    
+	pmstaff: 'pmallstaff',
+	pas: 'pmallstaff',
+	pmallstaff: function(target, room, user) {
+		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every staff member online.');
+		if (!this.can('pmall')) return false;
+
+		for (var u in Users.users) {
+			if (Users.users[u].isStaff) {
+				Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target);
+			}
+		}
+	},
 
 /*	    dicerules: 'dicecommands',
         dicehelp: 'dicecommands',

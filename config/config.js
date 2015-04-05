@@ -226,7 +226,7 @@ exports.replsocketmode = 0600;
 //     - tournamentsmanagement: enable/disable tournaments.
 exports.grouplist = [
 	{
-		symbol: '~',
+		symbol: '☭',
 		id: "admin",
 		name: "Administrator",
 		root: true,
@@ -249,7 +249,7 @@ exports.grouplist = [
 		tournamentsmanagement: true
 	},
 	{
-		symbol: '☭',
+		symbol: '#',
 		id: "owner",
 		name: "Room Owner",
 		inherit: '@',

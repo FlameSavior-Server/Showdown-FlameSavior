@@ -2318,6 +2318,7 @@ var commands = exports.commands = {
        work: 'away',
        working: 'away',
        sleeping: 'away',
+       drunk: 'away',
        busy: 'away',
        afk: 'away',
        away: function(target, room, user, connection, cmd) {
@@ -2363,6 +2364,10 @@ t2 = 'Smashing';
 break;
 case 'shower':
 t = 'Ⓢⓗⓞⓦⓔⓡ';
+t2 = 'In the shower';
+break;
+case 'drunk':
+t = 'Ⓓⓡⓤⓝⓚ';
 t2 = 'In the shower';
 break;
 case 'forum':

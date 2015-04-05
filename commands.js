@@ -196,6 +196,7 @@ var commands = exports.commands = {
 		this.parse('/blockpms ' + target);
 	},
 
+	unaway: 'back',
 	back: function () {
 		this.parse('/unblockpms');
 		this.parse('/unblockchallenges');
@@ -261,11 +262,6 @@ var commands = exports.commands = {
 			if (room.chatRoomData) {
 				delete room.chatRoomData.isPrivate;
 				Rooms.global.writeChatRoomData();
-			}
-			if (room.type === 'chat') {
-				if (Rooms.global.chatRooms.indexOf(room) < 0) {
-					Rooms.global.chatRooms.push(room);
-				}
 			}
 		} else {
 			room.isPrivate = setting;
@@ -634,9 +630,9 @@ var commands = exports.commands = {
 		}
 		if (targetId === user.userid || user.can('makeroom')) {
 			innerBuffer = [];
-			for (var id in Rooms.rooms) {
-				var curRoom = Rooms.rooms[id];
-				if (!curRoom.auth || !curRoom.isPrivate) continue;
+			for (var i = 0; i < Rooms.global.chatRooms.length; i++) {
+				var curRoom = Rooms.global.chatRooms[i];
+				if (!curRoom.auth) continue;
 				var auth = curRoom.auth[targetId];
 				if (!auth) continue;
 				innerBuffer.push(auth + curRoom.id);
@@ -1041,6 +1037,7 @@ var commands = exports.commands = {
 		this.addModCommand("" + user.name + " temporarily locked the range " + range + ".");
 	},
 
+	unrangelock: 'rangeunlock',
 	rangeunlock: function (target, room, user) {
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!target) return this.sendReply("Please specify a range to unlock.");

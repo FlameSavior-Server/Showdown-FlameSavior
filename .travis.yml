@@ -5,3 +5,7 @@ node_js:
 cache:
   directories:
     - node_modules
+<<<<<<< HEAD
+=======
+    - gulp-cache
+>>>>>>> 1a6e62ef7bd53de2d37db890aa23cf79fd5300a3

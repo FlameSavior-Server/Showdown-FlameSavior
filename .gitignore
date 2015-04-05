@@ -1,5 +1,6 @@
 /logs/*
 /node_modules
+/gulp-cache
 npm-debug.log
 config/avatars/
 config/about.csv

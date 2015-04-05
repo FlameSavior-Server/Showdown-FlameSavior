@@ -473,6 +473,24 @@ div.mainmenufooter a:visited {
     text-shadow: 1px 1px 1px #7896B8;
 }
 
+button[name="back"], button[name="import"], button[name="saveImport"], button[name="edit"], button[name="delete"], button[name="new"], button[name="backup"], button[name="newTop"] {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #78C8EB;
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+}
+    
+button[name="back"]:hover, button[name="import"]:hover, button[name="saveImport"]:hover, button[name="edit"]:hover, button[name="delete"]:hover, button[name="new"]:hover, button[name="backup"]:hover, button[name="newTop"]:hover {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #5BC3F0;
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+}
+    
+button[name="edit"], button[name="newTop"] {
+    margin-bottom: 1px;
+}
+
 /*Teambuilder CSS ~end*/
 
 

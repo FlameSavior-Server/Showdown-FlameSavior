@@ -724,7 +724,7 @@ user.updateIdentity();
     easytour: 'etour',
     etour: function (target, room, user) {
     	if (!this.can('broadcast', null, room)) return;
-    	this.parse('/tour new ' + target + ', eliminaton');
+    	this.parse('/tour new ' + target + ', elimination');
     },
 
     endpoll: function (target, room, user) {

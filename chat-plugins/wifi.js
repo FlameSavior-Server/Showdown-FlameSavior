@@ -278,14 +278,9 @@ var commands = {
 	showanswer: 'viewanswer',
 	viewanswer: function (target, room, user) {
 		if (room.id !== 'wifi') return false;
-<<<<<<< HEAD
-		if (!giveaway) return this.sendReply('There is no giveaway going on at the moment.');
-		if (giveaway.type !== 'question') return this.sendReply('This is not a question giveaway.');
-=======
 		var giveaway = giveaways[room.id];
 		if (!giveaway) return this.sendReply("There is no giveaway going on at the moment.");
 		if (giveaway.type !== 'question') return this.sendReply("This is not a question giveaway.");
->>>>>>> 1a6e62ef7bd53de2d37db890aa23cf79fd5300a3
 		if (user.userid !== giveaway.host.userid && user.userid !== giveaway.giver.userid) return;
 
 		var answers = [];

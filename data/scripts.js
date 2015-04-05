@@ -3221,7 +3221,7 @@ exports.BattleScripts = {
 			'~Irraquated': {
 				species: 'Dialga', ability: 'Adaptability', item: 'Adamant Orb', gender: 'M',
 				moves: ['blueflare', ['dragonpulse', 'solarbeam', 'flashcanon'][this.random(3)], 'sunnyday'],
-				baseSignatureMove: 'belly drum', signatureMove: "Break Server",
+				baseSignatureMove: 'bellydrum', signatureMove: "Break Server",
 				evs: {hp:4, spa:252, spe:252}, nature: 'Timid'
 			},
 			'~chaos': {

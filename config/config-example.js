@@ -249,7 +249,7 @@ exports.grouplist = [
 		tournamentsmanagement: true
 	},
 	{
-		symbol: '☭',
+		symbol: '=',
 		id: "owner",
 		name: "Room Owner",
 		inherit: '@',

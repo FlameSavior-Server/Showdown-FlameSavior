@@ -715,6 +715,11 @@ user.updateIdentity();
         if (!this.can('broadcast', null, room)) return;
         this.parse('/poll Tournament tier?, Random Doubles Battle, Smogon Doubles, Smogon Doubles Ubers, Smogon Doubles UU, VGC 2015, Smogon Doubles[Gen5]');
     },
+    
+    lobbypoll: function (target, room, user) {
+    	if (!this.can('broadcast', null, room)) return;
+    	this.parse('/poll Tournament Tier?, Random Battles, Metronome, Duotype, Monotype, Seasonal, Ubers, OU, UU, RU, NU, LC, VGC, Random Triples, Random Doubles, Random Monotype, Random LC, Ubers Mono, CC1vs1, CC, 1v1');
+    },
 
     endpoll: function (target, room, user) {
         if (!this.can('broadcast', null, room)) return;

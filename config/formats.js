@@ -1639,7 +1639,7 @@ exports.Formats = [
 				this.add('c|~Antar|Should\'ve been an Umbreon.');
 			}
 			if (name === 'irraquated') {
-				this.add('c|~Irraquated|#BlameNine :[);
+				this.add('c|~Irraquated|#BlameNine :[');
 			}
 			if (name === 'chaos') {
 				if (name === toId(pokemon.name)) this.add('c|~chaos|//forcewin chaos');

@@ -222,11 +222,10 @@ var Trivia = (function () {
 		scoreData.correctAnswers++;
 		if (this.mode === 'timer') {
 			var points = 5 - ~~((Date.now() - this.askedAt) / (3 * 1000));
-<<<<<<< HEAD
+
 			if (points > 0 && points < 6) {
-=======
+
 			if ([1, 2, 3, 4, 5].indexOf(points) > -1) {
->>>>>>> 1a6e62ef7bd53de2d37db890aa23cf79fd5300a3
 				scoreData.score += points;
 				scoreData.points = points;
 			}

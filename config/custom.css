@@ -338,62 +338,141 @@ div.mainmenufooter a:visited {
 }
 
 /*Teambuilder CSS ~start*/
-.setchart {
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #212121;
-}
-  
-.setchart label {
-    color: #FFF;
-    text-shadow: 1px 1px 1px #202020;
-}
-  
-.setchart-nickname {
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #212121;
-}
-  
-.setchart-nickname label {
-    color: #FFF;
-    text-shadow: 1px 1px #202020;
-}
-  
-.setmenu button:hover {
-    border: 1px solid #212121;
-    background: rgba(0, 0, 0, 0.7);
-    color: #FFF;
-}
-  
+
 .teambuilder-results h3, .teambuilder-results .utilichart h3 {
-    border: 1px solid #212121;
-    background: rgba(0, 0, 0, 0.7);
-    color: #FFF;
-    text-shadow: 1px 1px #202020;
+    background: rgba(190, 236, 249, 0.9);
+    color: #212121;
+    border: 1px solid #78C8EB;
+    text-shadow: 1px 1px 1px #7896B8;
 }
-  
-.teambar button, .teambar button:disabled, .teambar button:disabled:hover, .teambar button:disabled:active {
-    background: rgba(0, 0, 0, 0.7);
-    color: #FFF;
-    text-shadow: 1px 1px #202020;
+    
+.setchart-nickname {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #78C8EB;
 }
-  
-.teambar button:hover {
-    background: rgba(0, 0, 0, 0.8);
-    color: #FFF;
-    text-shadow: 1px 1px #202020;
+    
+.setchart-nickname label, .setchart label {
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
 }
-  
+    
+.setchart {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #78C8EB;
+}
+    
+.setdetails, .setstats {
+    border: 1px solid #78C8EB;
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+    background: #EFFBFF;
+}
+    
+.setdetails:hover, .setstats:hover {
+    border: 1px solid #5BC3F0;
+}
+    
+.setstats:focus, .setdetails:focus {
+    border: 2px solid #86D6F9;
+}
+    
+.setstats .statrow-head em {
+    color: #303030;
+    text-shadow: 1px 1px 1px #7896B8;
+}
+    
+.setchart input:focus, .setchart-nickname input:focus, .statform input.inputform:focus, .textbox:focus {
+    outline: 0px none;
+    border: 1px solid #78C8EB;
+    box-shadow: 0px 1px 2px #86D6F9 inset, 0px 0px 5px #86D6F9;
+    background: none repeat scroll 0% 0% #FFF;
+}
+    
+.setchart input, .setchart-nickname input, .statform input.inputform, .textbox {
+    border: 1px solid #78C8EB;
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+    background: #EFFBFF;
+}
+    
+.setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover, .textbox:hover {
+    border: 1px solid #5BC3F0;
+}
+    
+.teambuilder-results .result a:hover, .teambuilder-results .firstresult a {
+    background: #BEECF9;
+    border: 1px solid #78C8EB;
+}
+    
+.teambuilder-results .firstresult a:hover {
+    background: #BEECF9;
+    border: 1px solid #5BC3F0;
+}
+    
+.setmenu button {
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+}
+    
+.setmenu button:hover {
+    background: #BEECF9;
+    border: 1px solid #78C8EB;
+    border-bottom: none;
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+}
+    
 .utilichart .labelcol em, .utilichart .widelabelcol em, .utilichart .pplabelcol em, .utilichart .statcol em, .utilichart .bstcol em {
-    color: #6F6F6F;
+    color: #606060;
 }
-  
-.utilichart .itemdesccol, .utilichart .abilitydesccol, .utilichart .movedesccol {
-    color: #464646;
+    
+.utilichart .movedesccol, .utilichart .itemdesccol, .utilichart .abilitydesccol {
+    color: #505050;
 }
-  
+    
 .utilichart .numcol {
-    color: #464646;
+    color: #404040;
 }
+    
+.utilichart b {
+    color: #5BB0E6;
+}
+    
+.teambar button, .teambar button:disabled, .teambar button:disabled:hover {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #78C8EB;
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+}
+    
+.teambar button:hover {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #5BC3F0;
+}
+    
+.teamchartbox {
+    border-top: 1px solid #78C8EB;
+}
+    
+.teamchart li.format-select select {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #78C8EB;
+}
+    
+.majorbutton {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #78C8EB;
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+}
+    
+.majorbutton:hover {
+    background: rgba(190, 236, 249, 0.9);
+    border: 1px solid #5BC3F0;
+    color: #212121;
+    text-shadow: 1px 1px 1px #7896B8;
+}
+
 /*Teambuilder CSS ~end*/
 
 

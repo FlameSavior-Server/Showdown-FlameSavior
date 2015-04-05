@@ -112,7 +112,7 @@ var core = exports.core = {
 
             if (online === true) {
                 if (user.connected === true) {
-                    return '<br>&nbsp;<strong><font color="' + this.color + '">Last Seen:</font></strong>&nbsp;<font color="green">Current Online</font>';
+                    return '<br>&nbsp;<strong><font color="' + this.color + '">Last Seen:</font></strong>&nbsp;<font color="green">Currently Online</font>';
                 }
                 lastSeen = Number(Core.stdin('lastSeen', user.userid));
             } else {
@@ -193,7 +193,7 @@ var core = exports.core = {
 
         display: function (args, info, option) {
             if (args === 'about') return '<br>&nbsp;<strong><font color="' + this.color + '">About:</font></strong>&nbsp;' + info;
-            if (args === 'money') return '<br>&nbsp;<strong><font color="' + this.color + '">Money:</font></strong>&nbsp;' + info;
+            if (args === 'money') return '<br>&nbsp;<strong><font color="' + this.color + '">Halos:</font></strong>&nbsp;' + info;
             if (args === 'elo') return '<br>&nbsp;<strong><font color="' + this.color + '">Tournament Elo:</font></strong>&nbsp;' + info + option;
         },
 

@@ -1302,7 +1302,7 @@ exports.BattleScripts = {
 				case 'judgment':
 					if (hasStab) rejected = true;
 					break;
-				case 'return':
+				case 'return': case 'rockclimb':
 					if (hasMove['bodyslam'] || hasMove['doubleedge']) rejected = true;
 					break;
 				case 'weatherball':
@@ -1615,6 +1615,10 @@ exports.BattleScripts = {
 			} else if (template.id === 'unfezant') {
 				ability = 'Super Luck';
 			}
+		}
+
+		if (hasMove['rockclimb'] && ability !== 'Sheer Force') {
+			moves[moves.indexOf('rockclimb')] = 'doubleedge';
 		}
 
 		if (hasMove['gyroball']) {

@@ -324,7 +324,7 @@ user.updateIdentity();
         }
     },
 
-/*    transferbuck: 'transfermoney',
+    transferbuck: 'transfermoney',
     transferbucks: 'transfermoney',
     transfermoney: function (target, room, user) {
         if (!target) return this.parse('/help transfermoney');
@@ -361,7 +361,7 @@ user.updateIdentity();
 
         this.sendReply('You have successfully transferred ' + transferMoney + ' ' + b + ' to ' + targetUser.name + '. You now have ' + userMoney + ' bucks.');
         targetUser.send(user.name + ' has transferred ' + transferMoney + ' ' + b + ' to you. You now have ' + targetMoney + ' bucks.');
-    },*/
+    },
 
     tell: function (target, room, user) {
         if (!target) return;

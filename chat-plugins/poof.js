@@ -54,6 +54,7 @@ const messages = [
 	"got outclassed by Singlex!",
 	"was proclaimed an enemy of the state by King Jong-un!", // bought by KJU
 	"got haxed by minatokyuubi", // bought by minatokyuubi
+	"Snuggled with Serperior and they fell asleep together", // bought by sexyperior
 ];
 
 exports.commands = {

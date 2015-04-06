@@ -156,6 +156,21 @@ button.astext:hover {
     border-left: 0px solid #000000;
 }
 
+a.button.notifying.closable, .tabbar a.button.notifying {
+    background: url("http://i.imgur.com/tehpryL.png");
+    border: 1px solid #575757;
+}
+
+a.button.notifying.closable:hover, .tabbar a.button.notifying:hover {
+    background: url("http://i.imgur.com/MkX5drf.png");
+    border: 1px solid #575757;
+}
+
+a.button.notifying.closable:active, .tabbar a.button.notifying:active {
+    background: url("http://i.imgur.com/MkX5drf.png?1");
+    border: 1px solid #575757;
+}
+
 .tabbar a.button.cur,
 .tabbar a.button.cur:hover {
     text-shadow: none;
@@ -175,20 +190,6 @@ button.astext:hover {
     z-index:1;
 }
 
-a.button.notifying.closable, .tabbar a.button.notifying {
-    background: url("http://i.imgur.com/tehpryL.png");
-    border: 1px solid #575757;
-}
-
-a.button.notifying.closable:hover, .tabbar a.button.notifying:hover {
-    background: url("http://i.imgur.com/MkX5drf.png");
-    border: 1px solid #575757;
-}
-
-a.button.notifying.closable:active, .tabbar a.button.notifying:active {
-    background: url("http://i.imgur.com/MkX5drf.png?1");
-    border: 1px solid #575757;
-}
 .ps-room.ps-room-opaque {
     background: rgba(240, 240, 240, 0.8);
     color: #000;

@@ -566,23 +566,24 @@ User = (function () {
 	User.prototype.popup = function (message) {
 		this.send('|popup|' + message.replace(/\n/g, '||'));
 	};
-	User.prototype.getIdentity = function (roomid) {
+		User.prototype.getIdentity = function (roomid) {
 		if (this.locked) {
-			return '‽' + this.name;
+			return '‽' + this.name + (this.awayName || '');
 		}
 		if (roomid) {
 			if (this.mutedRooms[roomid]) {
-				return '!' + this.name;
+				return '!' + this.name + (this.awayName || '');
 			}
 			var room = Rooms.rooms[roomid];
 			if (room && room.auth) {
 				if (room.auth[this.userid]) {
-					return room.auth[this.userid] + this.name;
+					return room.auth[this.userid] + this.name + (this.awayName || '');
 				}
-				if (room.isPrivate === true) return ' ' + this.name;
+				if (room.autorank) return room.autorank + this.name + (this.awayName || '');
+				if (room.isPrivate === true) return ' ' + this.name + (this.awayName || '');
 			}
 		}
-		return this.group + this.name;
+		return (!this.hiding ? this.group : " ") + this.name + (this.awayName || '');
 	};
 	User.prototype.isStaff = false;
 	User.prototype.can = function (permission, target, room) {

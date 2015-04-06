@@ -4453,7 +4453,6 @@ exports.commands = {
 		);
 	},
 
-	cc: 'crazyclown94',
 	crazyclown94: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://play.pokemonshowdown.com/sprites/bwani-shiny/medicham.gif">' +

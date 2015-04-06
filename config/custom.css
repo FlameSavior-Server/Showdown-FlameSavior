@@ -341,15 +341,15 @@ div.mainmenufooter a:visited {
 /*Teambuilder CSS ~start*/
 
 .teambuilder-results h3, .teambuilder-results .utilichart h3 {
-    background: rgba(190, 236, 249, 0.9);
+    background: rgba(166, 230, 249, 0.9);
     color: #212121;
-    border: 1px solid #78C8EB;
+    border: 1px solid #4DBCEC;
     text-shadow: 1px 1px 1px #7896B8;
 }
     
 .setchart-nickname {
-    background: rgba(190, 236, 249, 0.9);
-    border: 1px solid #78C8EB;
+    background: rgba(166, 230, 249, 0.9);
+    border: 1px solid #4DBCEC;
 }
     
 .setchart-nickname label, .setchart label {
@@ -358,12 +358,12 @@ div.mainmenufooter a:visited {
 }
     
 .setchart {
-    background: rgba(190, 236, 249, 0.9);
-    border: 1px solid #78C8EB;
+    background: rgba(166, 230, 249, 0.9);
+    border: 1px solid #4DBCEC;
 }
     
 .setdetails, .setstats {
-    border: 1px solid #78C8EB;
+    border: 1px solid #4DBCEC;
     color: #212121;
     text-shadow: 1px 1px 1px #7896B8;
     background: #EFFBFF;
@@ -384,13 +384,13 @@ div.mainmenufooter a:visited {
     
 .setchart input:focus, .setchart-nickname input:focus, .statform input.inputform:focus, .textbox:focus {
     outline: 0px none;
-    border: 1px solid #78C8EB;
+    border: 1px solid #4DBCEC;
     box-shadow: 0px 1px 2px #86D6F9 inset, 0px 0px 5px #86D6F9;
     background: none repeat scroll 0% 0% #FFF;
 }
     
 .setchart input, .setchart-nickname input, .statform input.inputform, .textbox {
-    border: 1px solid #78C8EB;
+    border: 1px solid #4DBCEC;
     color: #212121;
     text-shadow: 1px 1px 1px #7896B8;
     background: #EFFBFF;
@@ -401,12 +401,12 @@ div.mainmenufooter a:visited {
 }
     
 .teambuilder-results .result a:hover, .teambuilder-results .firstresult a {
-    background: #BEECF9;
-    border: 1px solid #78C8EB;
+    background: #A0E6F9;
+    border: 1px solid #4DBCEC;
 }
     
 .teambuilder-results .firstresult a:hover {
-    background: #BEECF9;
+    background: #A0E6F9;
     border: 1px solid #5BC3F0;
 }
     
@@ -416,8 +416,8 @@ div.mainmenufooter a:visited {
 }
     
 .setmenu button:hover {
-    background: #BEECF9;
-    border: 1px solid #78C8EB;
+    background: #A0E6F9;
+    border: 1px solid #4DBCEC;
     border-bottom: none;
     color: #212121;
     text-shadow: 1px 1px 1px #7896B8;
@@ -440,40 +440,39 @@ div.mainmenufooter a:visited {
 }
     
 .teambar button, .teambar button:disabled, .teambar button:disabled:hover {
-    background: rgba(190, 236, 249, 0.9);
-    border: 1px solid #78C8EB;
+    background: rgba(166, 230, 249, 0.9);
+    border: 1px solid #4DBCEC;
     color: #212121;
     text-shadow: 1px 1px 1px #7896B8;
 }
     
 .teambar button:hover {
-    background: rgba(190, 236, 249, 0.9);
+    background: rgba(166, 230, 249, 0.9);
     border: 1px solid #5BC3F0;
 }
     
 .teamchartbox {
-    border-top: 1px solid #78C8EB;
+    border-top: 1px solid #4DBCEC;
 }
     
-.teamchart li.format-select select {
-    background: rgba(190, 236, 249, 0.9);
-    border: 1px solid #78C8EB;
+.teamchart li.format-select select, select[name="nature"] {
+    background: rgba(166, 230, 249, 0.9);
+    border: 1px solid #4DBCEC;
 }
     
 .majorbutton {
-    background: rgba(190, 236, 249, 0.9);
-    border: 1px solid #78C8EB;
+    background: rgba(166, 230, 249, 0.9);
+    border: 1px solid #4DBCEC;
     color: #212121;
     text-shadow: 1px 1px 1px #7896B8;
 }
     
 .majorbutton:hover {
-    background: rgba(190, 236, 249, 0.9);
+    background: rgba(166, 230, 249, 0.9);
     border: 1px solid #5BC3F0;
     color: #212121;
     text-shadow: 1px 1px 1px #7896B8;
 }
-
 /*Teambuilder CSS ~end*/
 
 

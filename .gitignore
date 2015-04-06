@@ -11,6 +11,7 @@ config/money.csv
 config/tourWins.csv
 config/usergroups.csv
 config/control-panel.csv
+config/lastSeen.csv
 badges.txt
 
 # boilerplate #

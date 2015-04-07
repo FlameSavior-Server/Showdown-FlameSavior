@@ -4,7 +4,7 @@ var badges = fs.createWriteStream('badges.txt', {'flags': 'a'});
 exports.commands = {
 	gdeclarered: 'gdeclare',
 	gdeclaregreen: 'gdeclare',
-	gdeclare: function(target, room, user, connection, cmd) {
+	gdeclare: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help gdeclare');
 		if (!this.can('lockdown')) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
@@ -18,7 +18,7 @@ exports.commands = {
 	},
 
 	declaregreen: 'declarered',
-	declarered: function(target, room, user, connection, cmd) {
+	declarered: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help declare');
 		if (!this.can('declare', null, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
@@ -27,20 +27,20 @@ exports.commands = {
 		this.logModCommand(user.name + ' declared ' + target);
 	},
 
-	pdeclare: function(target, room, user, connection, cmd) {
+	pdeclare: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help declare');
 		if (!this.can('declare', null, room)) return false;
-		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.')false;
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
 
 		this.add('|raw|<div class="broadcast-purple"><b>' + target + '</b></div>');
 		this.logModCommand(user.name + ' declared ' + target);
-	},	
+	},
 
 	sd: 'declaremod',
 	staffdeclare: 'declaremod',
 	modmsg: 'declaremod',
 	moddeclare: 'declaremod',
-	declaremod: function(target, room, user) {
+	declaremod: function (target, room, user) {
 		if (!target) return this.sendReply('/declaremod [message] - Also /moddeclare and /modmsg');
 		if (!this.can('declare', null, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
@@ -51,7 +51,7 @@ exports.commands = {
 
 	rk: 'kick',
 	roomkick: 'kick',
-	kick: function(target, room, user) {
+	kick: function (target, room, user) {
 		if (!target) return this.sendReply('/help kick');
 		if (!this.can('mute', targetUser, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
@@ -66,7 +66,7 @@ exports.commands = {
 	},
 
 	dm: 'daymute',
-	daymute: function(target, room, user) {
+	daymute: function (target, room, user) {
 		if (!target) return this.parse('/help daymute');
 		if (!this.can('mute', targetUser, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
@@ -87,20 +87,20 @@ exports.commands = {
 
 		targetUser.mute(room.id, 24 * 60 * 60 * 1000, true);
 	},
-	
+
 	flogout: 'forcelogout',
-	forcelogout: function(target, room, user) {
+	forcelogout: function (target, room, user) {
 		if (!target) return this.sendReply('/forcelogout [username], [reason] OR /flogout [username], [reason] - Reason is optional.');
 		if (!user.can('hotpatch')) return;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
 
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
-		if (!targetUser) return this.sendReply('User '+this.targetUsername+' not found.');
+		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
 		if (targetUser.can('hotpatch')) return this.sendReply('You cannot force logout another Admin.');
 
-		this.addModCommand(''+targetUser.name+' was forcibly logged out by '+user.name+'.' + (target ? " (" + target + ")" : ""));
-		this.logModCommand(user.name+' forcibly logged out '+targetUser.name);
+		this.addModCommand('' + targetUser.name + ' was forcibly logged out by ' + user.name + '.' + (target ? " (" + target + ")" : ""));
+		this.logModCommand(user.name + ' forcibly logged out ' + targetUser.name);
 		targetUser.resetName();
 	}
 };

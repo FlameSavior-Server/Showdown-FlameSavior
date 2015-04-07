@@ -1580,6 +1580,7 @@ var commands = exports.commands = {
 			"peered through the hole on Shedinja's back",
 			"received judgment from the almighty Arceus!",
 			"used Final Gambit and missed!",
+			"{{user}} killed them. {{user}} killed them all.",
 			"pissed off AI Kuroha!",
 			"was actually a 12 year and was banned for COPPA.",
 			"got lost in the illusion of reality.",

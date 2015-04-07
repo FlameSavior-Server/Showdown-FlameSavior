@@ -268,6 +268,11 @@ Tournament = (function () {
 		user.sendTo(this.room, '|tournament|update|{"isJoined":true}');
 		this.isBracketInvalidated = true;
 		this.update();
+
+		if (!this.maxUserCount) this.maxUserCount = Infinity;
+		if (this.generator.getUsers().length >= this.maxUserCount) {
+			this.startTournament(this);
+		}
 		if (this.playerCap === (users.length + 1)) this.room.add("The tournament is now full.");
 	};
 	Tournament.prototype.removeUser = function (user, output) {
@@ -856,6 +861,14 @@ var commands = {
 		},
 		runautodq: function (tournament) {
 			tournament.runAutoDisqualify(this);
+		},
+		size: function(tournament, user, params, cmd) {
+			if (params.length < 1) return this.sendReply("Usage: " + cmd + " <size>");
+			if (isNaN(params[0])) return this.sendReply("Please enter a number no less than 3.");
+			if (params[0] < 3) return this.sendReply("You may not limit a tournament to less than 3 players.");
+			if (tournament.generator.getUsers().length > params[0]) return this.sendReply("You can't set the player limit lower than the number of players in the tournament!");
+			tournament.maxUserCount = params[0];
+			return this.addModCommand(user.name + ' set the tournament player limit to '+params[0]+'.');
 		},
 		remind: function (tournament, user) {
 			var users = tournament.generator.getAvailableMatches().toString().split(',');

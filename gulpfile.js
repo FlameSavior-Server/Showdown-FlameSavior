@@ -41,11 +41,7 @@ function lint (jsHintOptions, jscsOptions) {
 		});
 	}
 	return lazypipe()
-<<<<<<< HEAD
-		.pipe(jshint.bind(jshint, jsHintOptions, {timeout: 450000}))
-=======
 		.pipe(cachedJsHint)
->>>>>>> 1a6e62ef7bd53de2d37db890aa23cf79fd5300a3
 		.pipe(jscs.bind(jscs, jscsOptions))();
 }
 

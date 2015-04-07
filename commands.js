@@ -404,63 +404,60 @@ var commands = exports.commands = {
 		room.chatRoomData.aliases.push(alias);
 		Rooms.aliases[alias] = room;
 		Rooms.global.writeChatRoomData();
-		
 	},
-	
-    hide: 'hideauth',
-    hideauth: function(target, room, user) {
-        if (!user.can('hideauth'))
-            return this.sendReply('/hideauth - access denied.');
 
-        var tar = ' ';
-        if (target) {
-            target = target.trim();
-            if (config.groupsranking.indexOf(target) > -1 && target != '#') {
-                if (config.groupsranking.indexOf(target) <= config.groupsranking.indexOf(user.group)) {
-                    tar = target;
-                } else {
-                    this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');
-                }
-            } else {
-                this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
-            }
-        }
+	hide: 'hideauth',
+	hideauth: function (target, room, user) {
+		if (!user.can('hideauth'))
+			return this.sendReply('/hideauth - access denied.');
 
-        user.getIdentity = function(roomid) {
-            if (!roomid) roomid = 'lobby';
-            if (this.locked) {
-                return '‽' + this.name;
-            }
-            if (this.mutedRooms[roomid]) {
-                return '!' + this.name;
-            }
-            var room = Rooms.rooms[roomid];
-            if (room.auth) {
-                if (room.auth[this.userid]) {
-                    return tar + this.name;
-                }
-                if (this.group !== ' ') return '+' + this.name;
-                return ' ' + this.name;
-            }
-            return tar + this.name;
-        };
-        user.updateIdentity();
-        this.sendReply('You are now hiding your auth symbol as \'' + tar + '\'.');
-        return this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');
-    },
+		var tar = ' ';
+		if (target) {
+			target = target.trim();
+			if (config.groupsranking.indexOf(target) > -1 && target != '#') {
+				if (config.groupsranking.indexOf(target) <= config.groupsranking.indexOf(user.group)) {
+					tar = target;
+				} else {
+					this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');
+				}
+			} else {
+				this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
+			}
+		}
 
-    show: 'showauth',
-    showauth: function(target, room, user) {
-        if (!user.can('hideauth'))
-            return this.sendReply('/showauth - access denied.');
+		user.getIdentity = function (roomid) {
+			if (!roomid) roomid = 'lobby';
+			if (this.locked) {
+				return '‽' + this.name;
+			}
+			if (this.mutedRooms[roomid]) {
+				return '!' + this.name;
+			}
+			var room = Rooms.rooms[roomid];
+			if (room.auth) {
+				if (room.auth[this.userid]) {
+					return tar + this.name;
+				}
+				if (this.group !== ' ') return '+' + this.name;
+				return ' ' + this.name;
+			}
+			return tar + this.name;
+		};
+		user.updateIdentity();
+		this.sendReply('You are now hiding your auth symbol as \'' + tar + '\'.');
+		return this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');
+	},
 
-        delete user.getIdentity;
-        user.updateIdentity();
-        this.sendReply('You have now revealed your auth symbol.');
-        return this.logModCommand(user.name + ' has revealed their auth symbol.');
-        this.sendReply('Your symbol has been reset.');
+	show: 'showauth',
+	showauth: function (target, room, user) {
+		if (!user.can('hideauth'))
+			return this.sendReply('/showauth - access denied.');
 
-    },
+		delete user.getIdentity;
+		user.updateIdentity();
+		this.sendReply('You have now revealed your auth symbol.');
+		return this.logModCommand(user.name + ' has revealed their auth symbol.');
+	},
 
 	removeroomalias: function (target, room, user) {
 		if (!room.chatRoomData) return this.sendReply("This room isn't designed for aliases.");
@@ -581,32 +578,32 @@ var commands = exports.commands = {
 		if (targetUser) targetUser.updateIdentity(room.id);
 		if (room.chatRoomData) Rooms.global.writeChatRoomData();
 	},
-	
-    masspm: 'pmall',
-    pmall: function (target, room, user) {
-        if (!this.can('pmall')) return;
-        if (!target) return this.parse('/help pmall');
 
-        var pmName = '~Server PM [Do not reply]';
+	masspm: 'pmall',
+	pmall: function (target, room, user) {
+		if (!this.can('pmall')) return;
+		if (!target) return this.parse('/help pmall');
 
-        for (var i in Users.users) {
-            var message = '|pm|' + pmName + '|' + Users.users[i].getIdentity() + '|' + target;
-            Users.users[i].send(message);
-        }
-    },
+		var pmName = '~Server PM [Do not reply]';
 
-    rmall: function (target, room, user) {
-        if(!this.can('declare')) return;
-        if (!target) return this.parse('/help rmall');
+		for (var i in Users.users) {
+			var message = '|pm|' + pmName + '|' + Users.users[i].getIdentity() + '|' + target;
+			Users.users[i].send(message);
+		}
+	},
 
-        var pmName = '~Server PM [Do not reply]';
+	rmall: function (target, room, user) {
+		if (!this.can('declare')) return;
+		if (!target) return this.parse('/help rmall');
 
-        for (var i in room.users) {
-            var message = '|pm|' + pmName + '|' + room.users[i].getIdentity() + '|' + target;
-            room.users[i].send(message);
-        }
-    },
-    
+		var pmName = '~Server PM [Do not reply]';
+
+		for (var i in room.users) {
+			var message = '|pm|' + pmName + '|' + room.users[i].getIdentity() + '|' + target;
+			room.users[i].send(message);
+		}
+	},
+
 	userauth: function (target, room, user, connection) {
 		var targetId = toId(target) || user.userid;
 		var targetUser = Users.getExact(targetId);
@@ -1218,26 +1215,26 @@ var commands = exports.commands = {
 		}
 		this.logModCommand(user.name + " globally declared " + target);
 	},
-	
-		roomfounder: function (target, room, user) {
+
+	roomfounder: function (target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomfounder - This room isn't designed for per-room moderation to be added.");
 		}
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
-		if (!targetUser) return this.sendReply("User '"+this.targetUsername+"' is not online.");
+		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
 		if (!this.can('makeroom')) return false;
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 		var name = targetUser.name;
 		room.auth[targetUser.userid] = '#';
 		room.founder = targetUser.userid;
-		this.addModCommand(''+name+' was appointed to Room Founder by '+user.name+'.');
+		this.addModCommand('' + name + ' was appointed to Room Founder by ' + user.name + '.');
 		room.onUpdateIdentity(targetUser);
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
-	
-		roomowner: function (target, room, user) {
+
+	roomowner: function (target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomowner - This room isn't designed for per-room moderation to be added");
 		}
@@ -1257,9 +1254,8 @@ var commands = exports.commands = {
 		this.addModCommand("" + name + " was appointed Room Owner by " + user.name + ".");
 		room.onUpdateIdentity(targetUser);
 		Rooms.global.writeChatRoomData();
-		
 	},
-	
+
 	roomdeowner: 'deroomowner',
 	deroomowner: function (target, room, user) {
 		if (!room.auth) {
@@ -1271,7 +1267,7 @@ var commands = exports.commands = {
 		var userid = toId(name);
 		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
 
-		if (room.auth[userid] !== '#') return this.sendReply("User '"+name+"' is not a room owner.");
+		if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
 		if (!room.founder || user.userid !== room.founder && !this.can('makeroom', null, room)) return false;
 
 		delete room.auth[userid];
@@ -1304,7 +1300,7 @@ var commands = exports.commands = {
 
 		return '/announce ' + target;
 	},
-		roomauth: function (target, room, user, connection) {
+	roomauth: function (target, room, user, connection) {
 		if (!room.auth) return this.sendReply("/roomauth - This room isn't designed for per-room moderation and therefore has no auth list.");
 		var buffer = [];
 		var owners = [];
@@ -1374,7 +1370,7 @@ var commands = exports.commands = {
 	auth: 'stafflist',
 	authlist: 'stafflist',
 	stafflist: function (target, room, user, connection) {
-		var stafflist = fs.readFileSync('config/usergroups.csv','utf8').split('\n');
+		var stafflist = fs.readFileSync('config/usergroups.csv', 'utf8').split('\n');
 
 		for (var x in stafflist) {
 			var column = stafflist[x].split(',');
@@ -1742,7 +1738,7 @@ var commands = exports.commands = {
 			this.logModCommand(user.name + ' used /restart');
 			Rooms.global.send('|refresh|');
 			forever.restart('app.js');
-		} catch(e) {
+		} catch (e) {
 			return this.sendReply('/restart requires the "forever" module.');
 		}
 	},

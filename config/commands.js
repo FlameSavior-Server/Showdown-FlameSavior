@@ -1570,7 +1570,7 @@ var commands = exports.commands = {
 			"got scared and left the server!",
 			"was forced to give Zarel an oil massage!",
 			"took an aero to the knee... and then one to the face.",
-			"killed them. {{user}} killed them all.",
+			"{{user}} killed them. {{user}} killed them all.",
 			"got lost in the illusion of reality.",
 			"was unfortunate and didn't get a cool message.",
 			"was knocked out cold by Frage!",

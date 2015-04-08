@@ -39,26 +39,6 @@
  * return anything or return something falsy, the user won't say
  * anything.
  *
- * A command can also be an object, in which case is treated like
- * a namespace:
- *
- *   game: {
- *     play: function (target, room, user) {
- *       user.isPlaying = true;
- *       this.sendReply("Playing.");
- *     },
- *     stop: function (target, room, user) {
- *       user.isPlaying = false;
- *       this.sendReply("Stopped.");
- *     }
- *   }
- *
- * These commands can be called by '/game play' and '/game stop'.
- * Namespaces help organise commands, and nest them under
- * one main command.
- * Note: Multiple namespaces can be nested, but the final (innermost)
- *       command must be a function.
- *
  * Commands have access to the following functions:
  *
  * this.sendReply(message)
@@ -143,18 +123,12 @@
  *     target = this.canTalk(target);
  *     if (!target) return false;
  *
- * this.parse(message, inNamespace)
+ * this.parse(message)
  *   Runs the message as if the user had typed it in.
  *
  *   Mostly useful for giving help messages, like for commands that
  *   require a target:
  *     if (!target) return this.parse('/help msg');
- *
- *   If `inNamespace` is true, then the message is parsed in that
- *   corresponding namespace:
- *     // command msg is in namespace test. (ie. /test msg)
- *     this.parse('/help', true); // is parsed as if the user said
- *                                // '/test help'
  *
  *   After 10 levels of recursion (calling this.parse from a command
  *   called by this.parse from a command called by this.parse etc)
@@ -236,7 +210,7 @@ var commands = exports.commands = {
 		if (targetUser.isSysop) {
 			this.sendReply("(Pok\xE9mon Showdown System Operator)");
 		}
-		if (!targetUser.registered) {
+		if (!targetUser.authenticated) {
 			this.sendReply("(Unregistered)");
 		}
 		if ((cmd === 'ip' || cmd === 'whoare') && (user.can('ip', targetUser) || user === targetUser)) {
@@ -307,7 +281,6 @@ var commands = exports.commands = {
 	 * Shortcuts
 	 *********************************************************/
 
-	inv: 'invite',
 	invite: function (target, room, user) {
 		target = this.splitTarget(target);
 		if (!this.targetUser) {
@@ -411,8 +384,8 @@ var commands = exports.commands = {
 				if (move.flags['sound']) details["<font color=black>&#10003; Sound</font>"] = "";
 				if (move.flags['bullet']) details["<font color=black>&#10003; Bullet</font>"] = "";
 				if (move.flags['pulse']) details["<font color=black>&#10003; Pulse</font>"] = "";
-				if (!move.flags['protect'] && !/(ally|self)/i.test(move.target)) details["<font color=black>&#10003; Bypasses Protect</font>"] = "";
-				if (move.flags['authentic']) details["<font color=black>&#10003; Bypasses Substitutes</font>"] = "";
+				if (move.flags['protect']) details["<font color=black>&#10003; Blocked by Protect</font>"] = "";
+				if (move.flags['authentic']) details["<font color=black>&#10003; Ignores substitutes</font>"] = "";
 				if (move.flags['defrost']) details["<font color=black>&#10003; Thaws user</font>"] = "";
 				if (move.flags['bite']) details["<font color=black>&#10003; Bite</font>"] = "";
 				if (move.flags['punch']) details["<font color=black>&#10003; Punch</font>"] = "";
@@ -507,7 +480,6 @@ var commands = exports.commands = {
 				continue;
 			}
 
-			if (target.substr(0, 3) === 'gen' && Number.isInteger(parseFloat(target.substr(3)))) target = target.substr(3).trim();
 			var targetInt = parseInt(target);
 			if (0 < targetInt && targetInt < 7) {
 				if (!searches['gen']) searches['gen'] = {};
@@ -571,7 +543,7 @@ var commands = exports.commands = {
 			}
 		}
 
-		for (var search in {'gen':1, 'tier':1, 'color':1, 'types':1, 'ability':1, 'moves':1, 'recovery':1}) {
+		for (var search in {'moves':1, 'recovery':1, 'types':1, 'ability':1, 'tier':1, 'gen':1, 'color':1}) {
 			if (!searches[search]) continue;
 			switch (search) {
 				case 'types':
@@ -686,326 +658,6 @@ var commands = exports.commands = {
 		return this.sendReplyBox(resultsStr);
 	},
 
-	ms: 'movesearch',
-	msearch: 'movesearch',
-	movesearch: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-
-		if (!target) return this.parse('/help movesearch');
-		var targets = target.split(',');
-		var searches = {};
-		var allCategories = {'physical':1, 'special':1, 'status':1};
-		var allProperties = {'basePower':1, 'accuracy':1, 'priority':1, 'pp':1};
-		var allFlags = {'bite':1, 'bullet':1, 'contact':1, 'defrost':1, 'powder':1, 'pulse':1, 'punch':1, 'secondary':1, 'snatch':1, 'sound':1};
-		var allStatus = {'psn':1, 'tox':1, 'brn':1, 'par':1, 'frz':1, 'slp':1};
-		var allVolatileStatus = {'flinch':1, 'confusion':1, 'partiallytrapped':1};
-		var allBoosts = {'hp':1, 'atk':1, 'def':1, 'spa':1, 'spd':1, 'spe':1, 'accuracy':1, 'evasion':1};
-		var showAll = false;
-		var output = 10;
-
-		for (var i in targets) {
-			var isNotSearch = false;
-			target = targets[i].toLowerCase().trim();
-			if (target.charAt(0) === '!') {
-				isNotSearch = true;
-				target = target.slice(1);
-			}
-
-			if (target.indexOf(' type') > -1) {
-				target = target.charAt(0).toUpperCase() + target.slice(1, target.indexOf(' type'));
-				if (!(target in Tools.data.TypeChart)) return this.sendReplyBox("Type '" + Tools.escapeHTML(target) + "' not found.");
-				if (!searches['type']) searches['type'] = {};
-				if ((searches['type'][target] && isNotSearch) || (searches['type'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a type.');
-				searches['type'][target] = !isNotSearch;
-				continue;
-			}
-
-			if (target in allCategories) {
-				target = target.charAt(0).toUpperCase() + target.substr(1);
-				if (!searches['category']) searches['category'] = {};
-				if ((searches['category'][target] && isNotSearch) || (searches['category'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a category.');
-				searches['category'][target] = !isNotSearch;
-				continue;
-			}
-
-			if (target in allFlags) {
-				if (!searches['flags']) searches['flags'] = {};
-				if ((searches['flags'][target] && isNotSearch) || (searches['flags'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include \'' + target + '\'.');
-				searches['flags'][target] = !isNotSearch;
-				continue;
-			}
-
-			if (target === 'all') {
-				if (this.broadcasting) {
-					return this.sendReplyBox("A search with the parameter 'all' cannot be broadcast.");
-				}
-				showAll = true;
-				continue;
-			}
-
-			if (target === 'recovery') {
-				if (!searches['recovery']) {
-					searches['recovery'] = !isNotSearch;
-				} else if ((searches['recovery'] && isNotSearch) || (searches['recovery'] === false && !isNotSearch)) {
-					return this.sendReplyBox('A search cannot both exclude and include recovery moves.');
-				}
-				continue;
-			}
-
-			var inequality = target.search(/>|</);
-			if (inequality > -1) {
-				if (isNotSearch) return this.sendReplyBox("You cannot use the negation symbol '!' in quality ranges.");
-				inequality = target.charAt(inequality);
-				var targetParts = target.replace(/\s/g, '').split(inequality);
-				var numSide, propSide, direction;
-				if (!isNaN(targetParts[0])) {
-					numSide = 0;
-					propSide = 1;
-					direction = (inequality === '>' ? 'less' : 'greater');
-				} else if (!isNaN(targetParts[1])) {
-					numSide = 1;
-					propSide = 0;
-					direction = (inequality === '<' ? 'less' : 'greater');
-				} else {
-					return this.sendReplyBox("No value given to compare with '" + Tools.escapeHTML(target) + "'.");
-				}
-				var prop = targetParts[propSide];
-				switch (toId(targetParts[propSide])) {
-					case 'basepower': prop = 'basePower'; break;
-					case 'bp': prop = 'basePower'; break;
-					case 'acc': prop = 'accuracy'; break;
-				}
-				if (!(prop in allProperties)) return this.sendReplyBox("'" + Tools.escapeHTML(target) + "' did not contain a valid property.");
-				if (!searches['property']) searches['property'] = {};
-				if (!searches['property'][prop]) searches['property'][prop] = {};
-				if (searches['property'][prop][direction]) {
-					return this.sendReplyBox("Invalid property range for " + prop + ".");
-				} else {
-					searches['property'][prop][direction] = {};
-					searches['property'][prop][direction].qty = targetParts[numSide];
-				}
-				continue;
-			}
-
-			if (target.substr(0, 8) === 'priority') {
-				var sign = '';
-				var priorityLevel;
-				target = target.substr(8).trim();
-				if (target === "+") {
-					sign = 'greater';
-				} else if (target === "-") {
-					sign = 'less';
-				} else if (target === '' + parseInt(target)) {
-					priorityLevel = parseInt(target);
-					if (priorityLevel > 5 || priorityLevel < -7) return this.sendReplyBox("Priority moves only exist between levels -7 and 5.");
-				} else {
-					return this.sendReplyBox("Priority type '" + target + "' not recognized.");
-				}
-				if (!searches['property']) searches['property'] = {};
-				if (searches['property']['priority']) {
-					return this.sendReplyBox("Priority cannot be set with both shorthand and inequality range.");
-				} else {
-					searches['property']['priority'] = {};
-					if (priorityLevel) {
-						searches['property']['priority']['less'] = {};
-						searches['property']['priority']['greater'] = {};
-						searches['property']['priority']['less'].qty = priorityLevel;
-						searches['property']['priority']['greater'].qty = priorityLevel;
-					} else {
-						searches['property']['priority'][sign] = {};
-						searches['property']['priority'][sign].qty = (sign === 'less' ? -1 : 1);
-					}
-				}
-				continue;
-			}
-
-			if (target.substr(0, 7) === 'boosts ') {
-				switch (target.substr(7)) {
-					case 'attack': target = 'atk'; break;
-					case 'defense': target = 'def'; break;
-					case 'specialattack': target = 'spa'; break;
-					case 'spatk': target = 'spa'; break;
-					case 'specialdefense': target = 'spd'; break;
-					case 'spdef': target = 'spd'; break;
-					case 'speed': target = 'spe'; break;
-					case 'acc': target = 'accuracy'; break;
-					case 'evasiveness': target = 'evasion'; break;
-					default: target = target.substr(7);
-				}
-				if (!(target in allBoosts)) return this.sendReplyBox("'" + Tools.escapeHTML(target.substr(7)) + "' is not a recognized stat.");
-				if (!searches['boost']) searches['boost'] = {};
-				if ((searches['boost'][target] && isNotSearch) || (searches['boost'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a stat boost.');
-				searches['boost'][target] = !isNotSearch;
-				continue;
-			}
-
-			var oldTarget = target;
-			if (target.charAt(target.length - 1) === 's') target = target.substr(0, target.length - 1);
-			switch (target) {
-				case 'toxic': target = 'tox'; break;
-				case 'poison': target = 'psn'; break;
-				case 'burn': target = 'brn'; break;
-				case 'paralyze': target = 'par'; break;
-				case 'freeze': target = 'frz'; break;
-				case 'sleep': target = 'slp'; break;
-				case 'confuse': target = 'confusion'; break;
-				case 'trap': target = 'partiallytrapped'; break;
-				case 'flinche': target = 'flinch'; break;
-			}
-
-			if (target in allStatus) {
-				if (!searches['status']) searches['status'] = {};
-				if ((searches['status'][target] && isNotSearch) || (searches['status'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a status.');
-				searches['status'][target] = !isNotSearch;
-				continue;
-			}
-
-			if (target in allVolatileStatus) {
-				if (!searches['volatileStatus']) searches['volatileStatus'] = {};
-				if ((searches['volatileStatus'][target] && isNotSearch) || (searches['volatileStatus'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a volitile status.');
-				searches['volatileStatus'][target] = !isNotSearch;
-				continue;
-			}
-
-			return this.sendReplyBox("'" + Tools.escapeHTML(oldTarget) + "' could not be found in any of the search categories.");
-		}
-
-		if (showAll && Object.size(searches) === 0) return this.sendReplyBox("No search parameters other than 'all' were found. Try '/help movesearch' for more information on this command.");
-
-		var dex = {};
-		for (var move in Tools.data.Movedex) {
-			dex[move] = Tools.getMove(move);
-		}
-		delete dex.magikarpsrevenge;
-
-		for (var search in searches) {
-			switch (search) {
-				case 'type':
-				case 'category':
-					for (var move in dex) {
-						if (searches[search][String(dex[move][search])] === false) {
-							delete dex[move];
-						} else if (Object.count(searches[search], true) > 0 && !searches[search][String(dex[move][search])]) delete dex[move];
-					}
-					break;
-
-				case 'flags':
-					for (var flag in searches[search]) {
-						for (var move in dex) {
-							if (flag !== 'secondary') {
-								if ((!dex[move].flags[flag] && searches[search][flag]) || (dex[move].flags[flag] && !searches[search][flag])) delete dex[move];
-							} else {
-								if (searches[search][flag]) {
-									if (!dex[move].secondary && !dex[move].secondaries) delete dex[move];
-								} else {
-									if (dex[move].secondary && dex[move].secondaries) delete dex[move];
-								}
-							}
-						}
-					}
-					break;
-
-				case 'recovery':
-					for (var move in dex) {
-						var hasRecovery = (dex[move].drain || dex[move].flags.heal);
-						if ((!hasRecovery && searches[search]) || (hasRecovery && !searches[search])) delete dex[move];
-					}
-					break;
-
-				case 'property':
-					for (var prop in searches[search]) {
-						for (var move in dex) {
-							for (var ineq in searches[search][prop]) {
-								if (ineq === "less") {
-									if (dex[move][prop] === true) {
-										delete dex[move];
-										break;
-									}
-									if (dex[move][prop] > searches[search][prop][ineq].qty) {
-										delete dex[move];
-										break;
-									}
-								} else {
-									if (dex[move][prop] === true) {
-										if (dex[move].category === "Status") {
-											delete dex[move];
-											break;
-										}
-									}
-									if (dex[move][prop] < searches[search][prop][ineq].qty) {
-										delete dex[move];
-										break;
-									}
-								}
-							}
-						}
-					}
-					break;
-
-				case 'boost':
-					for (var boost in searches[search]) {
-						for (var move in dex) {
-							if (dex[move].boosts) {
-								if ((dex[move].boosts[boost] > 0 && searches[search][boost]) ||
-									(dex[move].boosts[boost] < 1 && !searches[search][boost])) continue;
-							} else if (dex[move].secondary && dex[move].secondary.self && dex[move].secondary.self.boosts) {
-								if ((dex[move].secondary.self.boosts[boost] > 0 && searches[search][boost]) ||
-									(dex[move].secondary.self.boosts[boost] < 1 && !searches[search][boost])) continue;
-							}
-							delete dex[move];
-						}
-					}
-					break;
-
-				case 'status':
-				case 'volatileStatus':
-					for (var searchStatus in searches[search]) {
-						for (var move in dex) {
-							if (dex[move][search] !== searchStatus) {
-								if (!dex[move].secondaries) {
-									if (!dex[move].secondary) {
-										if (searches[search][searchStatus]) delete dex[move];
-									} else {
-										if ((dex[move].secondary[search] !== searchStatus && searches[search][searchStatus]) ||
-											(dex[move].secondary[search] === searchStatus && !searches[search][searchStatus])) delete dex[move];
-									}
-								} else {
-									var hasSecondary = false;
-									for (var i = 0; i < dex[move].secondaries.length; i++) {
-										if (dex[move].secondaries[i][search] === searchStatus) hasSecondary = true;
-									}
-									if ((!hasSecondary && searches[search][searchStatus]) || (hasSecondary && !searches[search][searchStatus])) delete dex[move];
-								}
-							} else {
-								if (!searches[search][searchStatus]) delete dex[move];
-							}
-						}
-					}
-					break;
-
-				default:
-					return this.sendReplyBox("Something broke! PM SolarisFox here or on the Smogon forums with the command you tried.");
-			}
-		}
-		var results = [];
-		var resultsStr = "";
-		for (var move in dex) {
-			results.push(dex[move].name);
-		}
-		if (results.length > 0) {
-			if (showAll || results.length <= output) {
-				results.sort();
-				resultsStr = results.join(", ");
-			} else {
-				results.randomize();
-				resultsStr = results.slice(0, 10).join(", ") + ", and " + string(results.length - output) + " more. Redo the search with 'all' as a search parameter to show all results.";
-			}
-		} else {
-			resultsStr = "No moves found.";
-		}
-		return this.sendReplyBox(resultsStr);
-	},
-
 	learnset: 'learn',
 	learnall: 'learn',
 	learn5: 'learn',
@@ -1088,11 +740,9 @@ var commands = exports.commands = {
 		this.sendReplyBox(buffer);
 	},
 
-	weaknesses: 'weakness',
 	weak: 'weakness',
 	resist: 'weakness',
 	weakness: function (target, room, user) {
-		if (!target) return this.parse('/help weakness');
 		if (!this.canBroadcast()) return;
 		var targets = target.split(/[ ,\/]/);
 
@@ -1234,8 +884,6 @@ var commands = exports.commands = {
 		);
 	},
 
-	repo: 'opensource',
-	repository: 'opensource',
 	git: 'opensource',
 	opensource: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1322,7 +970,6 @@ var commands = exports.commands = {
 		);
 	},
 
-	capintro: 'cap',
 	cap: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
@@ -1372,7 +1019,7 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'omofthemonth' || target === 'omotm' || target === 'month') {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3481155/\">Other Metagame of the Month</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3529252/\">Current OMotM: Inheritance</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3521887/\">Current OMotM: Classic Hackmons</a><br />";
 		}
 		if (target === 'all' || target === 'seasonal') {
 			matched = true;
@@ -1397,8 +1044,8 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'tiershift' || target === 'ts') {
 			matched = true;
-			if (target !== 'all') buffer += "Pokémon below OU/BL get all their stats boosted. UU/BL2 get +5, RU/BL3 get +10, and NU or lower get +15.<br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3532973/\">Tier Shift</a><br />";
+			if (target !== 'all') buffer += "Pokémon below OU get all their stats boosted. BL/UU get +5, BL2/RU get +10, and BL3/NU or lower get +15.<br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3508369/\">Tier Shift</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3514386/\">Tier Shift Viability Rankings</a><br />";
 		}
 		if (target === 'all' || target === 'pu') {
@@ -1447,9 +1094,9 @@ var commands = exports.commands = {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3524287/\">Middle Cup</a><br />";
 		}
-		if (target === 'all' || target === 'outheorymon' || target === 'theorymon') {
+		if (target === 'all' || target === 'skybattle') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3532902/\">OU Theorymon</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3493601/\">Sky Battle</a><br />";
 		}
 		if (!matched) {
 			return this.sendReply("The Other Metas entry '" + target + "' was not found. Try /othermetas or /om for general help.");
@@ -1652,19 +1299,19 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'underused' || target === 'uu') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3530610/\">np: UU Stage 2.1</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3528903/\">np: UU Stage 2</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/uu/\">UU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523649/\">UU Viability Rankings</a><br />";
 		}
 		if (target === 'all' || target === 'rarelyused' || target === 'ru') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3533095/\">np: RU Stage 8</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3527140/\">np: RU Stage 6</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/ru/\">RU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523627/\">RU Viability Rankings</a><br />";
 		}
 		if (target === 'all' || target === 'neverused' || target === 'nu') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3534671/\">np: NU Stage 5</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3528871/\">np: NU Stage 4</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/nu/\">NU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523692/\">NU Viability Rankings</a><br />";
 		}
@@ -1897,17 +1544,11 @@ var commands = exports.commands = {
 		this.sendReply('|raw|<img src="' + Tools.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '" height="' + toId(targets[2]) + '" />');
 	},
 
-	htmlbox: function (target, room, user, connection, cmd, message) {
+	htmlbox: function (target, room, user) {
 		if (!target) return this.parse('/help htmlbox');
+		if (!this.can('declare', null, room)) return;
 		if (!this.canHTML(target)) return;
-
-		if (room.id === 'development') {
-			if (!this.can('announce', null, room)) return;
-			if (message.charAt(0) === '!') this.broadcasting = true;
-		} else {
-			if (!this.can('declare', null, room)) return;
-			if (!this.canBroadcast('!htmlbox')) return;
-		}
+		if (!this.canBroadcast('!htmlbox')) return;
 
 		this.sendReplyBox(target);
 	},
@@ -1916,9 +1557,95 @@ var commands = exports.commands = {
 		if (!this.can('rawpacket')) return false;
 		// secret sysop command
 		room.add(target);
-
 	},
-	
+		d: 'poof',
+	cpoof: 'poof',
+	poof: (function () {
+		var messages = [
+			"visited James's bedroom and never returned!",
+			"was crushed by Onix!",
+			"became Rowan's slave!",
+			"became Broken Hope's love slave!",
+			"felt Gamebreaker's wrath!",
+			"died of a broken heart.",
+			"was hit by Magikarp's Revenge!",
+			"got scared and left the server!",
+			"got eaten by a bunch of piranhas!",
+			"is blasting off again!",
+			"A large spider descended from the sky and picked up {{user}}.",
+			"was Volt Tackled by Pikachu!",
+			"got their sausage smoked by Heatran!",
+			"was forced to give Zarel an oil massage!",
+			"took an arrow to the knee... and then one to the face.",
+			"peered through the hole on Shedinja's back",
+			"received judgment from the almighty Arceus!",
+			"used Final Gambit and missed!",
+			"{{user}} killed them. {{user}} killed them all.",
+			"pissed off AI Kuroha!",
+			"was actually a 12 year and was banned for COPPA.",
+			"got lost in the illusion of reality.",
+			"was unfortunate and didn't get a cool message.",
+			"Nickoop@ accidently kicked {{user}} from the server!",
+			"was knocked out cold by Frage!",
+			"died making love to Nosepass!",
+			"was glomped to death by Blaze!",
+			"tried to take Soph's bagels!",
+			"played Pokemon Green!",
+			"insulted Suicune in front of Hope!",
+			"was hit by a wrecking ball!",
+			"was hit by a train!",
+			"was splashed by a Magikarp!",
+			"said Nick x Niku!",
+			"tried to take Gasper from Hazeel!",
+			"was impaled by Blade!",
+			"got taken to Dante's rape dungeon!",
+			"took a Wood Hammer to the face!",
+			"sucked 37 dicks... in a row!",
+			"got trapped in Corsola's Cage!",
+			"was secretly Lonk from Pennsylvania!",
+			"was mistaken for a girl by Hazeel!",
+			"tried to genderbend, but failed!",
+			"insulted eels in front of Nick!",
+			"poof'd in front of Frage!",
+			"was secretly Petch from Texas!",
+			"was finished!",
+			"got turnip'd by Gamebreaker!"
+			
+		];
+
+		return function (target, room, user) {
+			if (Config.poofOff) return this.sendReply("Poof is currently disabled.");
+			if (target && !this.can('broadcast')) return false;
+			if (room.id !== 'lobby') return false;
+			var message = target || messages[Math.floor(Math.random() * messages.length)];
+			if (message.indexOf('{{user}}') < 0)
+				message = '{{user}} ' + message;
+			message = message.replace(/{{user}}/g, user.name);
+			if (!this.canTalk(message)) return false;
+
+			var colour = '#' + [1, 1, 1].map(function () {
+				var part = Math.floor(Math.random() * 0xaa);
+				return (part < 0x10 ? '0' : '') + part.toString(16);
+			}).join('');
+
+			room.addRaw('<center><strong><font color="' + colour + '">~~ ' + Tools.escapeHTML(message) + ' ~~</font></strong></center>');
+			user.disconnectAll();
+		};
+	})(),
+
+	poofoff: 'nopoof',
+	nopoof: function () {
+		if (!this.can('poofoff')) return false;
+		Config.poofOff = true;
+		return this.sendReply("Poof is now disabled.");
+	},
+
+	poofon: function () {
+		if (!this.can('poofoff')) return false;
+		Config.poofOff = false;
+		return this.sendReply("Poof is now enabled.");
+	},
+
 	/*********************************************************
 	 * Help commands
 	 *********************************************************/
@@ -2001,29 +1728,13 @@ var commands = exports.commands = {
 			this.sendReply("/calc - Provides a link to a damage calculator");
 			this.sendReply("!calc - Shows everyone a link to a damage calculator. Requires: + % @ & ~");
 		}
-		if (target === 'away' || target === 'idle') {
+		if (target === 'blockchallenges' || target === 'away' || target === 'idle') {
 			matched = true;
-			this.sendReply("/away - Blocks challenges and private messages. Unblock them with /back.");
+			this.sendReply("/away - Blocks challenges so no one can challenge you. Deactivate it with /back.");
 		}
-		if (target === 'blockchallenges') {
+		if (target === 'allowchallenges' || target === 'back') {
 			matched = true;
-			this.sendReply("/blockchallenges - Blocks challenges so no one can challenge you. Unblock them with /unblockchallenges.");
-		}
-		if (target === 'blockpms' || target === 'ignorepms') {
-			matched = true;
-			this.sendReply("/blockpms - Blocks private messages. Unblock them with /unignorepms.");
-		}
-		if (target === 'back') {
-			matched = true;
-			this.sendReply("/back - Unblocks challenges and/or private messages, if either are blocked.");
-		}
-		if (target === 'unblockchallenges' || target === 'allowchallenges') {
-			matched = true;
-			this.sendReply("/unblockchallenges - Unblocks challenges so you can be challenged again. Block them with /blockchallenges.");
-		}
-		if (target === 'unblockpms' || target === 'unignorepms') {
-			matched = true;
-			this.sendReply("/unblockpms - Unblocks private messages. Block them with /blockpms.");
+			this.sendReply("/back - Unlocks challenges so you can be challenged again. Deactivate it with /away.");
 		}
 		if (target === 'faq') {
 			matched = true;
@@ -2032,15 +1743,8 @@ var commands = exports.commands = {
 		}
 		if (target === 'effectiveness' || target === 'matchup' || target === 'eff' || target === 'type') {
 			matched = true;
-			this.sendReply("/effectiveness [attack], [defender] - Provides the effectiveness of a move or type on another type or a Pokémon.");
-			this.sendReply("!effectiveness [attack], [defender] - Shows everyone the effectiveness of a move or type on another type or a Pokémon.");
-		}
-		if (target === 'weakness' || target === 'weaknesses' || target === 'weak' || target === 'resist') {
-			matched = true;
-			this.sendReply("/weakness [pokemon] - Provides a Pokemon's resistances, weaknesses, and immunities, ignoring abilities.");
-			this.sendReply("/weakness [type 1]/[type 2] - Provides a type or type combination's resistances, weaknesses, and immunities, ignoring abilities.");
-			this.sendReply("!weakness [pokemon] - Shows everyone a Pokemon's resistances, weaknesses, and immunities, ignoring abilities. Requires: + % @ & ~");
-			this.sendReply("!weakness [type 1]/[type 2] - Shows everyone a type or type combination's resistances, weaknesses, and immunities, ignoring abilities. Requires: + % @ & ~");
+			this.sendReply("/effectiveness OR /matchup OR /eff OR /type [attack], [defender] - Provides the effectiveness of a move or type on another type or a Pokémon.");
+			this.sendReply("!effectiveness OR !matchup OR !eff OR !type [attack], [defender] - Shows everyone the effectiveness of a move or type on another type or a Pokémon.");
 		}
 		if (target === 'dexsearch' || target === 'dsearch' || target === 'ds') {
 			matched = true;
@@ -2051,16 +1755,6 @@ var commands = exports.commands = {
 			this.sendReply("Types must be followed by ' type', e.g., 'dragon type'.");
 			this.sendReply("Parameters can be excluded through the use of '!', e.g., '!water type' excludes all water types.");
 			this.sendReply("The parameter 'mega' can be added to search for Mega Evolutions only, and the parameters 'FE' or 'NFE' can be added to search fully or not-fully evolved Pokemon only.");
-			this.sendReply("The order of the parameters does not matter.");
-		}
-		if (target === 'movesearch' || target === 'msearch' || target === 'ms') {
-			matched = true;
-			this.sendReply("/movesearch [parameter], [parameter], [parameter], ... - Searches for moves that fulfill the selected criteria.");
-			this.sendReply("Search categories are: type, category, flag, status inflicted, type boosted, and numeric range for base power, pp, and accuracy.");
-			this.sendReply("Types must be followed by ' type', e.g., 'dragon type'.");
-			this.sendReply("Stat boosts must be preceded with 'boosts ', e.g., 'boosts attack' searches for moves that boost the attack stat.");
-			this.sendReply("Inequality ranges use the characters '>' and '<' though they behave as '≥' and '≤', e.g., 'bp > 100' searches for all moves equal to and greater than 100 base power.");
-			this.sendReply("Parameters can be excluded through the use of '!', e.g., !water type' excludes all water type moves.");
 			this.sendReply("The order of the parameters does not matter.");
 		}
 		if (target === 'dice' || target === 'roll') {
@@ -2075,10 +1769,6 @@ var commands = exports.commands = {
 		if (target === 'invite') {
 			matched = true;
 			this.sendReply("/invite [username], [roomname] - Invites the player [username] to join the room [roomname].");
-		}
-		if (target === 'addplayer') {
-			matched = true;
-			this.sendReply("/addplayer [username] - Allow the specified user to join the battle as a player.");
 		}
 
 		// driver commands
@@ -2259,7 +1949,7 @@ var commands = exports.commands = {
 		}
 		if (!target) {
 			this.sendReply("COMMANDS: /nick, /avatar, /rating, /whois, /msg, /reply, /ignore, /away, /back, /timestamps, /highlight");
-			this.sendReply("INFORMATIONAL COMMANDS: /data, /dexsearch, /movesearch, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /calc (replace / with ! to broadcast. Broadcasting requires: + % @ & ~)");
+			this.sendReply("INFORMATIONAL COMMANDS: /data, /dexsearch, /groups, /opensource, /avatars, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /calc (replace / with ! to broadcast. Broadcasting requires: + % @ & ~)");
 			if (user.group !== Config.groupsranking[0]) {
 				this.sendReply("DRIVER COMMANDS: /warn, /mute, /unmute, /alts, /forcerename, /modlog, /lock, /unlock, /announce, /redirect");
 				this.sendReply("MODERATOR COMMANDS: /ban, /unban, /ip");
@@ -2270,6 +1960,468 @@ var commands = exports.commands = {
 		} else if (!matched) {
 			this.sendReply("Help for the command '" + target + "' was not found. Try /help for general help");
 		}
-	}
+	},
+	
+		/*********************************************************
+	 * Parukia commands
+	 *********************************************************/
 
+	memes: 'meme',
+	meme: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		target = target.toLowerCase();
+		var matched = false;
+		if (target === ''){
+			matched = true;
+			this.sendReplyBox('<center><b><font color="purple"><a href="http://pastebin.com/9ADzqbzA">List of memes!</a><br>Is there a meme missing that you want added? Message a & or ~ and we will consider adding it!</font></b></center>');
+                }
+		if (target === 'aliens'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/7puX3D3.jpg" />');
+		}
+		if (target === 'fragequit'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i0.kym-cdn.com/photos/images/original/000/000/578/1234931504682.jpg" height="189" width="317" />');
+		}
+		if (target === 'fuck yeah'){
+			matched = true;
+			this.sendReplyBox('<img src="http://cdn.ebaumsworld.com/mediaFiles/picture/602006/80615085.jpg" height="200" width="200" />');
+		}
+		if (target === 'so hard'){
+			matched = true;
+			this.sendReplyBox('<img src="http://oi57.tinypic.com/io24g4.jpg" />');
+		}
+		if (target === 'umad'){
+			matched = true;
+			this.sendReplyBox('<img src="http://dailysnark.com/wp-content/uploads/2013/11/umad.gif" />');
+		}
+		if (target === 'burnheal'){
+			matched = true;
+			this.sendReplyBox('<img src="http://yoshi348.thedailypos.org/imagefest/yellow/yoshi3/poke157.png" />');
+		}
+		if (target === 'ou train'){
+			matched = true;
+			this.sendReplyBox('<img src="https://i.chzbgr.com/maxW500/7970259968/h1BCECD4B/" height="300" width="400" />');
+		}
+		if (target === 'gary train'){
+			matched = true;
+			this.sendReplyBox('<img src="http://25.media.tumblr.com/79f09b46546f72a8be7643b73760aae7/tumblr_mkziy58ed71s79jjoo1_250.gif" />');
+		}
+		if (target === 'if you know what i mean'){
+			matched = true;
+			this.sendReplyBox('<img src="http://fcdn.mtbr.com/attachments/california-norcal/805709d1370480032-should-strava-abandon-kom-dh-2790387-if-you-know-what-i-mean.png" />');
+		}
+		if (target === 'doge'){
+			matched = true;
+			this.sendReplyBox('<img src="http://0.media.dorkly.cvcdn.com/79/63/33f2d1f368e229c7e09baa64804307b4-a-wild-doge-appeared.jpg" height="242" width="300" />');
+		}
+		if (target === 'troll'){
+			matched = true;
+			this.sendReplyBox('<img src="http://static3.wikia.nocookie.net/__cb20131014231760/legomessageboards/images/c/c2/Troll-face.png" height="200" width="200" />');
+		}
+		if (target === 'fail'){
+			matched = true;
+			this.sendReplyBox('<img src="http://diginomica.com/wp-content/uploads/2013/11/+big-fail2.jpg" height="180" width="320" />');
+		}
+		if (target === 'wtf'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/rcwmZSE.png" />');
+		}
+		if (target === 'professor oak'){
+			matched = true;
+			this.sendReplyBox('<img src="http://fc05.deviantart.net/fs71/f/2012/092/a/b/not_sure_if___meme_8_by_therealfry1-d4urwmg.jpg" />');
+		}
+		if (target === 'hawkward'){
+			matched = true;
+			this.sendReplyBox('<img src="https://i.imgflip.com/e6cip.jpg" height="350" width="330" />');
+		}
+		if (target === 'i dont always'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/H0BPFem.jpg" height="314" width="320" />');
+		}
+		if (target === 'all of the homo'){
+			matched = true;
+			this.sendReplyBox('<img src="http://31.media.tumblr.com/tumblr_lurr17gQZ61r190lwo1_500.gif" height="143" width="250" />');
+		}
+		if (target === 'cool story bro'){
+			matched = true;
+			this.sendReplyBox('<img src="http://www.troll.me/images/creepy-willy-wonka/cool-story-bro-lets-hear-it-one-more-time.jpg" height="275" width="275" />');
+		}
+		if (target === 'udense'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i2.kym-cdn.com/photos/images/newsfeed/000/461/903/3a9.png" height="250" width="340" />');
+		}
+		if (target === 'dodge'){
+			matched = true;
+			this.sendReplyBox('<img src="http://weknowmemes.com/generator/uploads/generated/g1336276473177814171.jpg" height="250" width="256" />');
+		}
+		if (target === 'you dont say'){
+			matched = true;
+			this.sendReplyBox('<img src="http://www.wired.com/images_blogs/gamelife/2014/01/youdontsay.jpg" height="209" width="250" />');
+		}
+		if (target === 'cockblocked'){
+			matched = true;
+			this.sendReplyBox('<img src="http://www.quickmeme.com/img/27/27cf7456b43b14cc55bc557d678445f0048beca248d48779c902fbc1715d2753.jpg" height="300" width="300" />');
+		}
+		if (target === 'save the titanic'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/hl6VKnp.png" />');
+		}
+		if (target === 'ninjask\'d'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/ST7DNnh.png" />');
+		}
+		if (target === 'fuck this'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i3.kym-cdn.com/photos/images/original/000/571/700/c3a.gif" height="150" width="300" />');
+		}
+		if (target === 'slowbro'){
+			matched = true;
+			this.sendReplyBox('<img src="http://static.fjcdn.com/pictures/U_698d9e_2568950.jpg" height="216" width="199" />');
+		}
+		if (target === 'he has a point'){
+			matched = true;
+			this.sendReplyBox('<img src="http://m.memegen.com/56jc1t.jpg" height="192" width="256" />');
+		}
+		if (target === 'rekt'){
+			matched = true;
+			this.sendReplyBox('<img src="http://media.giphy.com/media/10GQalkPJf5Mm4/giphy.gif" height="250" width="300" />');
+		}
+		if (target === 'death stare'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.kinja-img.com/gawker-media/image/upload/s--IL80Wq6b--/spnlcrxx0fwzwtszk2fm.gif" height="169" width="318" />');
+		}
+		if (target === 'what is love'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i3.kym-cdn.com/photos/images/newsfeed/000/460/314/28d.gif" height="192" width="250" />');
+		}
+		if (target === 'badass'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/Ai78NEt.png" />');
+		}
+		if (target === 'onixpected'){
+			matched = true;
+			this.sendReplyBox('<img src="https://s3.amazonaws.com/colorslive/png/1016349-V7YrNOJxjNbeeSYR.png" height="200" width="300" />');
+		}
+		if (target === 'wood hammer'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/kVOXqph.png" />');
+		}
+		if (target === 'excuses'){
+			matched = true;
+			this.sendReplyBox('<img src="http://cdn.memegenerator.net/instances/400x/37768972.jpg" height="200" width="200" />');
+		}
+		if (target === 'hax'){
+			matched = true;
+			this.sendReplyBox('<img src="http://cdn.memegenerator.net/instances/500x/52485639.jpg" height="188" width="250" />');
+		}
+		if (target === 'hazogonal'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/3oYGPku.png" />');
+		}
+
+		if (target === 'spheal with it'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/fqijYH7.jpg" width="229" height="219" />');
+		}
+		if (target === 'hazeel'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/z4lB7eO.gif" />');
+		}
+		if (target === 'trick master is love'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/6YvQuXX.png" width="411" height="204" />');
+		}
+		if (target === '7.8'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/Gi0jjuf.jpg" />');
+		}
+		if (target === 'parukia'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/OjAOrK1.jpg" width="300" height="226" />');
+		}
+		if (target === 'fabulous'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/HsY0KpR.gif" />');
+		}
+		if (target === 'wrong neighborhood'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/aiv8eyj.gif" />');
+		}
+		if (target === 'i regret nothing'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/1brNf9v.gif" />');
+		}
+		if (target === 'twss'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/cRoo7mt.jpg" />');
+		}
+		if (target === 'hm01'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/zl7CBuw.jpg" />');
+		}
+		if (target === 'bitch please'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/8hwtxWt.gif" />');
+		}
+		if (target === 'control your orgasms'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/QNO3TcF.gif" />');
+		}
+		if (target === 'haters gonna hate'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/FigQw0C.gif" />');
+		}
+		if (target === 'your mom'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/gBsEdHr.jpg" />');
+		}
+		if (target === 'shrekt'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/vXffwmY.jpg" />');
+		}
+		if (target === 'snickers'){
+			matched = true;
+			this.sendReplyBox('<img src="http://static.fjcdn.com/pictures/Grab+a+snickers+not+mine_b3375c_4726614.png" />');
+		}
+		if (target === 'baka'){
+			matched = true;
+			this.sendReplyBox('<img src="http://cdn.sakuramagazine.com/wp-content/uploads/2013/12/Baka-manga-34558590-640-512.jpg" width="320" height="256" />');
+		}
+		if (target === 'tits or gtfo'){
+			matched = true;
+			this.sendReplyBox('<img src="http://static.fjcdn.com/pictures/Tits_858516_1361125.jpg" width="250" height="329" />');
+		}
+		if (target === 'swiggity'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/9yZA32s.gif" />');
+		}
+		if (target === 'dat ass'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/owuyFAB.png" />');
+		}
+		if (target === 'once you go'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/R0Unfd9.jpg" />');
+		}
+		if (target === 'i\'m really feeling it'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i1.kym-cdn.com/photos/images/newsfeed/000/824/456/8a4.jpg" height="210" width="320" />');
+		}
+		if (target === 'it\'s a trap'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i0.kym-cdn.com/photos/images/newsfeed/000/692/118/2db.jpg" height="169" width="250" />');
+		}
+		if (target === 'in a row'){
+			matched = true;
+			this.sendReplyBox('<img src="http://i.imgur.com/W5K7Ey1.png" />');
+		}
+		if (target === 'russian spy'){
+			matched = true;
+			this.sendReplyBox('<img src="http://imgdonkey.com/big/VGpQeW5ZTw/bill-nye-the-gangsta-guy.gif" height"341" width="512" />');
+		}
+		if (target === 'batgirl'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/P6jTU8x.png" />');
+                }
+ 
+		if (target === 'eels'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/bztGksG.png" />');
+                }
+		if (target === 'oppai'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/saW5YpF.gif" />');
+                }
+                if (target === 'ara ara'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/K5Q01kW.png" />');
+                }
+                if (target === 'reggie'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/GAmQpRW.png" />');
+                }
+                if (target === 'turnips'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/90ul0xS.png" />');
+                }
+                if (target === 'yandere'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/jVLJATk.jpg" width="375" height="300" />');
+                }
+                if (target === 'i made this for you'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/EoITea4.gifg" />');
+                }
+                if (target === 'waluigi time'){
+                        matched = true;
+                        this.sendReplyBox('<img src="http://i.imgur.com/Ijzs6bw.png" width="300" height="300" />');
+                }
+                if (target === ''){
+			}
+		else if (!matched) {
+
+			this.sendReply(''+target+' is not available or non existent.');
+		}
+	},
+
+	donate: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Donate to Parukia to help us keep our servers online! We need about $350 before March 22nd of 2015.<br><b>If you donate, be sure to let an admin know so we can thank you personally!</b><br><br><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QPKGXD5TUBRVJ&lc=US&item_name=Parukia&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">Donate!</a><br><b>NOTE: You must be logged into a Paypal account to donate. To donate money without having a bank account, credit card or debit card (basically via cash), see this page on <a href="https://www.paypal.com/webapps/mpp/greendot-moneypak">MoneyPaks</a>.</b><br><br>Bitcoin: 15SvTTzqYat9pPyC94kLjV2kirqiAySLxL<br><br>We also accept donations via <a href="http://www.google.com/wallet/">Google Wallet!</a> Send all money to <b>ayyysexyladies@gmail.com</b> to be accepted via Paypal.<br><b>Note:</b> Your Google account must state that you are 18 years or older to donate this way!');
+	},
+	
+	parukiaforum: 'parukiaforums',
+	parukiaforums: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Join Parukia\'s forums and engage in more fun discussions with the community! <br />' +
+			'<a href="http://parukia.net/community/">http://parukia.net/community/</a>');
+	},
+	
+	parukiarules: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<font size="5" color="white"><b>The Parukian Guidelines</b></font><br><font size="3" color="white"><b>We don\'t follow the same rules as main!</b></font><br><br>0.) The most sacred rule on Parukia: All the best admins are born in December!<br>1.) There is no such thing as racism on Parukia.<br>2.) Hazeel is a nut, no matter how many times he denies it.<br>3.) ForexSenpai (Forethe x Oak) and Twin Flames (Blaze x Blade) are Parukia\'s OTPs(One True Pairings)!<br>4.) Playfully trolling one another is how we show we care<br>5.) We\'re all assholes, so if you\'re sensitive to certain issues warn us beforehand (no guarantee we\'ll respect that, though!)<br>6.) raiykid is rice, no exceptions.<br>7.) If you\'re not neutral with Red, you get no sympathy from the rest of us.<br>8.) If you pray to Jin, the hax grace will save you!<br>9.) If you piss off Niku, Oak will give you your last rites.<br>10.) Click all links at your own risk, it\'ll most likely be NSFW (in other words, you won\'t want your mother looking at it).<br>11.) Everything you say can and will be c/p\'d and turned into a dirty joke.<br>12.) Don\'t fuck with Blaze, Parukia\'s official mascot, or raiykid\'s gonna go all Canadian terrorist on your ass(ALALALALA EH?)<br>13.) You cannot go nope.avi to all these rules<br>14.) If you intended to go nope.avi to all these rules before reading #13, GG WP you\'ve just been rekt.<br>15.) Lost Saga cannot be found, please try again later.<br>16.) Accuracy hates you<br>17.) Nick is not poop, contrary to popular belief.<br>18.) GB can kick your ass in Project M. This rule is not up for debate, it is fact.<br>19.) If you stall, you will get haxed. This is undeniable law.<br>20.) Do not mess with a Starfish Nazi and a Mighty Tree!<br>21.) If you are asking y is the rum gone...raiy drank it all.<br>22.) If you have a fight, <b>settle it in smash!</b> If you don\'t have smash, you automatically lose!<br>23.) Paradoxical username user zero infinity is awesome when he\'s drunk!<br>24.) <a href="https://www.youtube.com/watch?v=qGyPuey-1Jw">Drunken Sailor</a> and <a href="https://www.youtube.com/watch?v=izGwDsrQ1eQ">Careless Whisper</a> are Parukia\'s official theme songs!<br>25.) If there\'s any work being done on the forum, 99% of the time it\'s Forethe doing it!<br>26.) If you have a complaint, write a formal business letter to the following address.<br>-Parukia Admins Inc.<br>Professor Oak Jr., Nickoop@, LostPhantom @ Private Message on Parukia-Server Lane 1001001<br>Open 42 hours a day!<br>27.) Qwilfish is LostPhantom\'s arch nemesis!<br>28.) Everyone on Parukia is Hazeel\'s love interest until proven male. ...And even then, he might still want you!<br>29.) Stay in school. Don\'t do drugs. Don\'t be a Haunter. ');
+
+        },
+        
+        parukiatiers: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Parukia\'s Tiers:<br><a href="http://parukia.net/community/threads/parukian-tier-system.294/">http://parukia.net/community/threads/parukian-tier-system.294/</a><br><br>If you believe something is broken and deserves to be banned/suspected, contact Nickoop@, Kamui Senketsu/Pikachudude, SP Scep or Redace100!');
+	},
+
+        away: function (target, room, user) {
+		user.away = !user.away;
+		user.updateIdentity();
+		this.sendReply("You are " + (user.away ? "now" : "no longer") + " away.");
+	},
+	
+	carelesswhispers: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Parukia\'s Careless Whispers Button:</b><br><a href="http://parukia.net/carelesswhispers.html">http://parukia.net/carelesswhispers.html</a>');
+	},
+	
+	smashhype: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b><a href="https://www.youtube.com/watch?v=ei3-Qo9wHH4&feature=youtu.be">C\'Mon and Ride The Smash Hype Train!</a></b>');
+	},
+	eating: 'away',
+       anime: 'away',
+       smashing: 'away',
+       shower: 'away',
+       forum: 'away',
+       gaming: 'away',
+       sleep: 'away',
+       work: 'away',
+       working: 'away',
+       sleeping: 'away',
+       drunk: 'away',
+       busy: 'away',
+       afk: 'away',
+       away: function(target, room, user, connection, cmd) {
+            // unicode away message idea by Siiilver
+            var t = 'Ⓐⓦⓐⓨ';
+            var t2 = 'Away';
+            switch (cmd) {
+           case 'busy':
+t = 'Ⓑⓤⓢⓨ';
+t2 = 'Busy';
+break;
+case 'sleeping':
+t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+t2 = 'Sleeping';
+break;
+case 'sleep':
+t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+t2 = 'Sleeping';
+break;
+case 'gaming':
+t = 'Ⓖⓐⓜⓘⓝⓖ';
+t2 = 'Gaming';
+break;
+case 'working':
+t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
+t2 = 'Working';
+break;
+case 'work':
+t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
+t2 = 'Working';
+break;
+case 'eating':
+t = 'Ⓔⓐⓣⓘⓝⓖ';
+t2 = 'Eating';
+break;
+case 'anime':
+t = 'Ⓐⓝⓘⓜⓔ';
+t2 = 'Watching Anime';
+break;
+case 'smashing':
+t = 'Ⓢⓜⓐⓢⓗⓘⓝⓖ';
+t2 = 'Smashing';
+break;
+case 'shower':
+t = 'Ⓢⓗⓞⓦⓔⓡ';
+t2 = 'In the shower';
+break;
+case 'drunk':
+t = 'Ⓓⓡⓤⓝⓚ';
+t2 = 'drunk';
+break;
+case 'forum':
+t = 'Ⓕⓞⓡⓤⓜ';
+t2 = 'On the forum';
+break;
+default:
+t = 'Ⓐⓦⓐⓨ'
+t2 = 'Away';
+break;
+}
+ 
+if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
+ 
+if (!user.isAway) {
+user.originalName = user.name;
+var awayName = user.name + ' - '+t;
+//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+delete Users.get(awayName);
+user.forceRename(awayName, undefined, true);
+ 
+if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + user.originalName +'</font color></b> is now '+t2.toLowerCase()+'. '+ (target ? " (" + escapeHTML(target) + ")" : ""));
+ 
+user.isAway = true;
+}
+else {
+return this.sendReply('You are already set as a form of away, type /back if you are now back.');
+}
+ 
+user.updateIdentity();
+},
+ 
+back: function(target, room, user, connection) {
+ 
+if (user.isAway) {
+if (user.name === user.originalName) {
+user.isAway = false;
+return this.sendReply('Your name has been left unaltered and no longer marked as away.');
+}
+ 
+var newName = user.originalName;
+ 
+//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+delete Users.get(newName);
+ 
+user.forceRename(newName, undefined, true);
+ 
+//user will be authenticated
+user.authenticated = true;
+ 
+if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + newName + '</font color></b> is no longer away.');
+ 
+user.originalName = '';
+user.isAway = false;
+}
+else {
+return this.sendReply('You are not set as away.');
+}
+ 
+user.updateIdentity();
+},
 };

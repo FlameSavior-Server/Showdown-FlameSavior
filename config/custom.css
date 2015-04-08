@@ -426,39 +426,6 @@ div.mainmenufooter a:visited {
   color: #FFB5B5;
 }
 
-.broadcast-red button {
-  border: 1px solid #985555;
-  background: #C36C6C;
-  color: #FFD7D7;
-  margin-bottom: 3px;
-}
-
-.broadcast-red button:hover {
-  background: #D57575;
-}
-
-.broadcast-green button {
-  border: 1px solid #375735;
-  background: #4A7648;
-  color: #BEFFB9;
-  margin-bottom: 3px;
-}
-
-.broadcast-green button:hover {
-  background: #578A54;
-}
-
-.broadcast-blue button {
-  border: 1px solid #414D5E;
-  background: #566477;
-  color: #C1DAFF;
-  margin-bottom: 3px;
-}
-
-.broadcast-blue button:hover {
-  background: #677992;
-}
-
 /*********************
 * Broadcast CSS ~end *
 *********************/

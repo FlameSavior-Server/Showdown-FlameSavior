@@ -251,6 +251,7 @@ exports.BattleAliases = {
 	"cress": "Cresselia",
 	"dnite": "Dragonite",
 	"don": "Groudon",
+	"red": "Infernape",
 	"dogars": "Koffing",
 	"ekiller": "Arceus",
 	"esca": "Escavalier",

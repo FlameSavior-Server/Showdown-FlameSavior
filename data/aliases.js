@@ -340,6 +340,7 @@ exports.BattleAliases = {
 	"sazandora": "Hydreigon",
 	"chirachiino": "Cinccino",
 	"kyuremu": "Kyurem",
+	"parukia": "Palkia",
 	"jarooda": "Serperior",
 	"zoroaaku": "Zoroark",
 	"shinboraa": "Sigilyph",

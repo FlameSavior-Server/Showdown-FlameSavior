@@ -217,7 +217,7 @@ var commands = exports.commands = {
 		if (Rooms.rooms[id]) return this.sendReply("The room '" + target + "' already exists.");
 		if (Rooms.global.addChatRoom(target)) {
 			return this.sendReply("The room '" + target + "' was created.");
-			Core.poll.reset(id);
+			Poll.reset(id);
 
 		}
 		return this.sendReply("An error occurred while trying to create the room '" + target + "'.");

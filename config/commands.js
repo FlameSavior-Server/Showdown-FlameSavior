@@ -1958,7 +1958,7 @@ var commands = exports.commands = {
 		return this.sendReply("Poof is now enabled.");
 	},
 
-	},
+	}
 
 	/*********************************************************
 	 * Help commands

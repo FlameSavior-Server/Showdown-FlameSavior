@@ -7036,6 +7036,18 @@ exports.commands = {
 		);
 	},
 
+	superbowl: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src=http://i.imgur.com/ey2WJOs.jpg width="100" height ="100"><img src=http://i.imgur.com/opf5JVk.png width="400" height="100"><img src=http://i.imgur.com/qCZcFkg.png width="200" height="200"><center><b>Ace:</b> New England Patriots</center><center><b>Quote:</b> Damn nigga you going to give me a spoon some and cheerios with that Bowl.'
+		);
+	},
+
+	neski: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/QOiWLKG.png" height=96 width=248><br /><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/landorus.gif" height=93 width=84><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/charizard-megay.gif" height=166 width=201 ><img src="http://www.pkparaiso.com/imagenes/xy/sprites/animados/dragonite.gif"height=98 width=85 ><br><center><u><b>Ace:</b> "Flying Master Race"</u><br><font size="1"><font color="black"><i>I took an interest in the creatures of the skies... I studied them, learned their ways, and now i\'m  fascinated with the monsters they\'ve turned out to be.<i/>'
+		);
+	},
+	
 	/***************************************
 	* League Cards						 *
 	***************************************/

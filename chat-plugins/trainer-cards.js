@@ -7048,6 +7048,11 @@ exports.commands = {
 		);
 	},
 	
+		voidcancer: function (target, room, user) {
+		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center><table><tbody><tr><td width="100"><div align="right"><font class="icon-spin">[00:31:26] +Void Kіng: she wanted to experiment</font></div></td><td width="330"><center><img src="http://i.imgur.com/kcDoitV.png" width="330" height="58" /></center></td><td width="100"><div align="left"><font class="icon-spin">[21:29:21] %Void Chrono: Warning: May cause cancer</font></div></td></tr></tbody></table><br/><font color="#000000"><b>Aces: </b></font>Percy, Gugle, Nyxe<br/><br/><table><tbody><tr><td><center><img src="http://i.imgur.com/eXYHD9O.gif" width="192" height="192" /></center></td><td><center><i>#CancerFreeForNever</i></center></td><td><center><img src="http://i.imgur.com/eXYHD9O.gif" width="192" height="192" /></center></td></tr></tbody></table></center>'
+		);
+	},
 	/***************************************
 	* League Cards						 *
 	***************************************/

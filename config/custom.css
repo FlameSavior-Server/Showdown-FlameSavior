@@ -45,7 +45,7 @@ a.ilink {
 .header {
     position: relative;
     height: 50px;
-    background: url("http://www.plumjam.com/poultry/images/animations/chickWalking.gif");
+    background: url("http://www.pictures88.com/p/stars/stars_004.gif");
 }
 
 .maintabbarbottom {
@@ -193,14 +193,12 @@ a.ilink {
     border-radius: 20px;
     text-align: center;
     background: #854BBF;
-    background-image: url("http://sl.glitter-graphics.net/pub/988/988902q0nc275lrl.gif");
 }
 
 .formatselect:hover {
     color: #FFF;
     border-radius: 20px;
     background: #FF24BD;
-        background-image: url("http://sl.glitter-graphics.net/pub/988/988902q0nc275lrl.gif");
 }
 
 .select.teamselect {
@@ -245,25 +243,15 @@ a.ilink {
 
 .menugroup button.big:hover {
     width: 230px;
-    padding: 6px 7px;
+    color: #FFF;
     border-radius: 20px;
-    font-size: 13pt;
-    background-color: #FF24BD;
+    background: #FF24BD;
 }
 
 .menugroup .button:hover {
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-    display: inline-block;
-    padding: 5px 7px 3px;
-    width: 200px;
-    outline: medium none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0px -1px 0px #7A00F5;
     color: #FFF;
-    border: 1px solid #3D668E;
-    background-color: #FF24BD;
+    border-radius: 20px;
+    background: #FF24BD;
 }
 
 .menugroup {
@@ -887,5 +875,9 @@ body {
 #intro-table {
     border-radius: 20px;
     border: 3px solid #FFF;
+}
+
+ul.userlist {
+    background-image: url("http://www.netanimations.net/Animated-gif-stars-twinkling-in-night-sky.gif");
 }
 

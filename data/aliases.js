@@ -279,7 +279,7 @@ exports.BattleAliases = {
 	"poryz": "Porygon-Z",
 	"rank": "Reuniclus",
 	"smogon": "Koffing",
-	"scep": "Sceptile",
+	"scep": "Yveltal",
 	"skarm": "Skarmory",
 	"talon": "Talonflame",
 	"terra": "Terrakion",

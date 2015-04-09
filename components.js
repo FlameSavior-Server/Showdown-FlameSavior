@@ -44,6 +44,17 @@ function parseStatus(text, encoding) {
 	return text;
 }
 
+try {
+	var regdateCache = JSON.parse(fs.readFileSync('config/regdatecache.json', 'utf8'));
+} catch (e) {
+	var regdateCache = {};
+}
+
+function cacheRegdate (user, date) {
+	regdateCache[toId(user)] = date;
+	fs.writeFile('config/regdatecache.json', JSON.stringify(regdateCache));
+}
+
 var components = exports.components = {
 	/*********************************************************
 	 * General Commands
@@ -146,21 +157,25 @@ var components = exports.components = {
 		this.sendReplyBox('<strong><u>Ways to earn money:</u></strong><br /><br /><ul><li>Win tournaments in offcial rooms<u></u></li><li>Play dice games in the Casino.</li></ul>');
 	},
 	
-	regdate: function (target, room, user, connection) {
+	regdate: function(target, room, user, connection) {
 		if (!this.canBroadcast()) return;
-		if (!target || target == "." || target == "," || target == "'") return this.parse('/help regdate');
+		if (!target) target = user.name;
 		var username = target;
-		target = target.replace(/\s+/g, '');
+		var userid = toId(target);
+		username = Tools.escapeHTML(username);
+		if (userid == '') return this.sendReplyBox(username+' is not a valid username.');
+		if (regdateCache[userid]) return this.sendReplyBox(username + " was registered on " + regdateCache[userid]);
 
 		var options = {
 			host: "www.pokemonshowdown.com",
 			port: 80,
-			path: "/forum/~" + target
+			path: "/forum/~"+userid
 		};
 
 		var content = "";
 		var self = this;
-		var req = http.request(options, function (res) {
+		var req = http.request(options, function(res) {
+
 			res.setEncoding("utf8");
 			res.on("data", function (chunk) {
 				content += chunk;
@@ -172,12 +187,14 @@ var components = exports.components = {
 					if (content[0]) {
 						content = content[0].split("</em>");
 						if (content[1]) {
-							regdate = content[1];
-							data = username + ' was registered on' + regdate + '.';
+							regdate = content[1].trim();
+							data = username+' was registered on '+regdate+'.';
+							cacheRegdate(userid, regdate);
 						}
 					}
-				} else {
-					data = username + ' is not registered.';
+				}
+				else {
+					data = username+' is not registered.';
 				}
 				self.sendReplyBox(data);
 				room.update();

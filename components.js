@@ -835,6 +835,11 @@ var components = exports.components = {
 		if (!this.can('broadcast', null, room)) return;
 		this.parse('/poll Tournament tier?, Random Doubles Battle, Smogon Doubles, Smogon Doubles Ubers, Smogon Doubles UU, VGC 2015, Smogon Doubles[Gen5]');
 	},
+	
+	"1v1poll": function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return;
+		this.parse('/poll Next 1v1 Tour?, regular, cc1v1, inverse, mono gen, monoletter, monotype, monocolor, cap, eevee only, mega evos, bst based, lc starters, ubers, lc, 2v2, monopoke, almost any ability 1v1, stabmons 1v1, averagemons 1v1, balanced hackmons 1v1, tier shift 1v1, retro1v1, buff based 1v1, 350 cup 1v1');
+	},
 
 	lobbypoll: function (target, room, user) {
 		if (!this.can('broadcast', null, room)) return;

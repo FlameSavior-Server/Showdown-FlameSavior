@@ -352,26 +352,6 @@ div.mainmenufooter a:visited {
   text-align: center;
 }
 
-.broadcast-purple a {
-  color: #E5D7E1;
-}
-
-.broadcast-purple a:hover {
-  color: #EFE8ED;
-}
-
-.broadcast-purple button {
-  margin-bottom: 3px;
-  background: #A57999;
-  border: 1px solid #8E6884;
-  color: #E5D7E1;
-  text-shadow: 1px 1px 1px #8E6884;
-}
-
-.broadcast-purple button:hover {
-  background: #8E6984;
-}
-
 .broadcast-grey {
   border: 1px solid #000;
   background: #474747;
@@ -380,50 +360,6 @@ div.mainmenufooter a:visited {
   text-align: center;
   color: #CACACA;
   text-shadow: 1px 1px 1px #000;
-}
-
-.broadcast-grey a {
-  color: #CACACA;
-}
-
-.broadcast-grey a:hover {
-  color: #FFF;
-}
-
-.broadcast-grey button {
-  border: 1px solid #000;
-  background: #333333;
-  color: #CACACA;
-  margin-bottom: 3px;
-}
-
-
-.broadcast-grey button:hover {
-  color: #FFF;
-}
-
-.broadcast-green a {
-  color: #BEFFB9;
-}
-
-.broadcast-green a:hover {
-  color: #8EFF86;
-}
-
-.broadcast-blue a {
-  color: #C1DAFF;
-}
-
-.broadcast-blue a:hover {
-  color: #91BDFF;
-}
-
-.broadcast-red a {
-  color: #FFD7D7;
-}
-
-.broadcast-red a:hover {
-  color: #FFB5B5;
 }
 
 /*********************
@@ -642,19 +578,19 @@ div.mainmenufooter a:visited {
 *******************/
 
 .green-btn {
-  background: #66AB69;
-  border: 1px solid #497A4C;
-  color: #D7FFD8;
-  text-shadow: 2px 2px 1px #497A4C;
+  background: #4A7648;
+  border: 1px solid #375735;
+  color: #BEFFB9;
+  text-shadow: 2px 2px 1px #375735;
   padding: 2px 2px 2px 2px;
   font-family: helvetica, arial, sans-serif;
 }
 
 .green-btn:hover {
-  background: #59925D;
-  border: 1px solid #497A4C;
-  color: #D7FFD8;
-  text-shadow: 1px 1px 1px #497A4C;
+  background: #578A54;
+  border: 1px solid #375735;
+  color: #BEFFB9;
+  text-shadow: 1px 1px 1px #375735;
   padding: 2px 2px 2px 2px;
   font-family: helvetica, arial, sans-serif;
 }

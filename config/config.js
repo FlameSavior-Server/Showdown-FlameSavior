@@ -158,7 +158,7 @@ exports.herokuhack = false;
 // displayed in the client.
 exports.customavatars = {
 	//'userid': 'customavatar.png'
-	'mewsshoes':'AuroraAvatarKakuja.gif'
+	'mewsshoes':'2900trwk.gif'
 };
 
 // Tournament announcements

@@ -93,6 +93,12 @@ body {
     border-color: #212121;
 }
 
+.menugroup .button.disabled, .menugroup .button.disabled:hover, .menugroup .button.disabled:active {
+    background: none repeat scroll 0% 0% #505050;
+    color: #DBDBDB;
+    border-color: #212121;
+}
+
 div.roomlist {
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
@@ -507,7 +513,33 @@ div.mainmenufooter a:visited {
 * Teambuilder CSS ~end *
 ***********************/
 
+/*********************
+* Custom backgrounds *
+*********************/
 
+.checkered-div {
+  background: url("http://i.imgur.com/Q8vHT0Y.png");
+}
+
+.checkered-dark-div {
+  background: url("http://i.imgur.com/rFSFXGg.png");
+}
+
+.beehive-div {
+  background: url("http://i.imgur.com/jxOe6XC.png");
+}
+
+.striped-div {
+  background: url("http://i.imgur.com/w19OJXc.png");
+}
+
+.hydrocity-div {
+  background: url("http://i.imgur.com/HpuGMXg.jpg?1");
+}
+
+/**************************
+* Custom backgrounds ~end *
+**************************/
 .btn-nofill {
     background: rgba(0, 0, 0, 0);
     border: none;
@@ -830,10 +862,6 @@ div.mainmenufooter a:visited {
 /**************************
 * Hydrocity Roomintro CSS *
 **************************/
-
-.hydrocity-div {
-  background: url("http://i.imgur.com/HpuGMXg.jpg?1");
-}
 
 .hydro-txt {
   color: #4DAFF0;

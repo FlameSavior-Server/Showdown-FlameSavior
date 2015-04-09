@@ -214,13 +214,13 @@ Validator = (function () {
 		}
 		switch (format.gameType) {
 			case 'doubles':
-				if (team.length < 2) return ["Your Doubles team needs at least 2 pokemon."];
+				if (team.length < 2) return ["Your Doubles team needs at least 2 pokemon, you fag."];
 				break;
 			case 'triples':
-				if (team.length < 3) return ["Your Triples team needs at least 3 pokemon."];
+				if (team.length < 3) return ["Your Triples team needs at least 3 pokemon, dumbass."];
 				break;
 			case 'rotation':
-				if (team.length < 3) return ["Your Rotation team needs at least 3 pokemon."];
+				if (team.length < 3) return ["Your Rotation team needs at least 3 pokemon, idiot."];
 				break;
 			default:
 				if (team.length < 1) return ["Your team has no pokemon."];
@@ -374,7 +374,7 @@ Validator = (function () {
 				set.ability = 'None';
 			} else if (!banlistTable['ignoreillegalabilities']) {
 				if (!ability.name) {
-					problems.push(name + " needs to have an ability.");
+					problems.push(name + " needs to have an ability, fag.");
 				} else if (ability.name !== template.abilities['0'] &&
 					ability.name !== template.abilities['1'] &&
 					ability.name !== template.abilities['H']) {
@@ -384,7 +384,7 @@ Validator = (function () {
 					isHidden = true;
 
 					if (template.unreleasedHidden && banlistTable['illegal']) {
-						problems.push(name + "'s hidden ability is unreleased.");
+						problems.push(name + "'s hidden ability is unreleased, fag.");
 					} else if (tools.gen === 5 && set.level < 10 && (template.maleOnlyHidden || template.gender === 'N')) {
 						problems.push(name + " must be at least level 10 with its hidden ability.");
 					}
@@ -420,7 +420,7 @@ Validator = (function () {
 				}
 
 				if (banlistTable['Unreleased']) {
-					if (move.isUnreleased) problems.push(name + "'s move " + set.moves[i] + " is unreleased.");
+					if (move.isUnreleased) problems.push(name + "'s move " + set.moves[i] + " is unreleased, you fucking derp.");
 				}
 
 				if (banlistTable['illegal']) {
@@ -429,14 +429,14 @@ Validator = (function () {
 						var problemString = name + " can't learn " + move.name;
 						if (problem.type === 'incompatible') {
 							if (isHidden) {
-								problemString = problemString.concat(" because it's incompatible with its ability or another move.");
+								problemString = problemString.concat(" because it's incompatible with its ability or another move, you fucking derp.");
 							} else {
-								problemString = problemString.concat(" because it's incompatible with another move.");
+								problemString = problemString.concat(" because it's incompatible with another move, faggot.");
 							}
 						} else if (problem.type === 'oversketched') {
 							problemString = problemString.concat(" because it can only sketch " + problem.maxSketches + " move" + (problem.maxSketches > 1 ? "s" : "") + ".");
 						} else if (problem.type === 'pokebank') {
-							problemString = problemString.concat(" because it's only obtainable from a previous generation.");
+							problemString = problemString.concat(" because it's only obtainable from a previous generation, bitch.");
 						} else {
 							problemString = problemString.concat(".");
 						}
@@ -456,23 +456,23 @@ Validator = (function () {
 					if (eventTemplate.eventPokemon) eventData = eventTemplate.eventPokemon[parseInt(splitSource[0], 10)];
 					if (eventData) {
 						if (eventData.nature && eventData.nature !== set.nature) {
-							problems.push(name + " must have a " + eventData.nature + " nature because it has a move only available from a specific event.");
+							problems.push(name + " must have a " + eventData.nature + " nature because it has a move only available from a specific event, faggot.");
 						}
 						if (eventData.shiny) {
 							set.shiny = true;
 						}
 						if (eventData.generation < 5) eventData.isHidden = false;
 						if (eventData.isHidden !== undefined && eventData.isHidden !== isHidden) {
-							problems.push(name + (isHidden ? " can't have" : " must have") + " its hidden ability because it has a move only available from a specific event.");
+							problems.push(name + (isHidden ? " can't have" : " must have") + " its hidden ability because it has a move only available from a specific event, idiot.");
 						}
 						if (tools.gen <= 5 && eventData.abilities && eventData.abilities.indexOf(ability.id) < 0) {
-							problems.push(name + " must have " + eventData.abilities.join(" or ") + " because it has a move only available from a specific event.");
+							problems.push(name + " must have " + eventData.abilities.join(" or ") + " because it has a move only available from a specific event, dumbass.");
 						}
 						if (eventData.gender) {
 							set.gender = eventData.gender;
 						}
 						if (eventData.level && set.level < eventData.level) {
-							problems.push(name + " must be at least level " + eventData.level + " because it has a move only available from a specific event.");
+							problems.push(name + " must be at least level " + eventData.level + " because it has a move only available from a specific event, you fuck.");
 						}
 					}
 					isHidden = false;
@@ -510,7 +510,7 @@ Validator = (function () {
 		}
 		setHas[toId(template.tier)] = true;
 		if (banlistTable[template.tier]) {
-			problems.push(name + " is in " + template.tier + ", which is banned.");
+			problems.push(name + " is in " + template.tier + ", which is banned, you derp.");
 		}
 
 		if (teamHas) {

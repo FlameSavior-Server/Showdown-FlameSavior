@@ -659,7 +659,7 @@ var components = exports.components = {
 	},
 
 	customsymbol: function (target, room, user) {
-		if (!user.canCustomSymbol) return this.sendReply('You need to buy this item from the shop to use.');
+		if (!user.canCustomSymbol && !user.can('vip')) return this.sendReply('You need to buy this item from the shop to use.');
 		if (!target || target.length > 1) return this.parse('/help customsymbol');
 		if (target.match(/[A-Za-z\d]+/g) || 'â€½!+%@\u2605&~#'.indexOf(target) >= 0) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
 		user.getIdentity = function (roomid) {

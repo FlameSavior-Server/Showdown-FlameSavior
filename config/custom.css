@@ -202,7 +202,7 @@ a.ilink {
 }
 
 .select.teamselect {
-background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 30px;
     width: 240px;
     padding: 1px 20px;
@@ -211,7 +211,7 @@ background-color: rgba(0, 0, 0, 0.2);
 }
 
 .select.teamselect:hover {
-background-color: rgba(199, 0, 165, 0.5);
+    background-color: rgba(199, 0, 165, 0.5);
     border-radius: 30px;
     width: 240px;
     padding: 1px 20px;
@@ -220,24 +220,23 @@ background-color: rgba(199, 0, 165, 0.5);
 }
 
 .menugroup button.big {
-    width: 230px;
+    color: #FF24BD;
     font-size: 12pt;
-    background-color: #854bbf;
+    border-radius: 20px;
+    text-align: center;
+    background: #854BBF;
+    width: 230px;   
 }
 
 .menugroup .button {
-    box-sizing: border-box;
+    color: #FF24BD;
     font-size: 10pt;
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-    display: inline-block;
-    width: 200px;
-    outline: medium none;
-    cursor: pointer;
     text-align: center;
-    text-decoration: none;
+    background: #854BBF;
+    width: 200px;
+    height: 30px;
     text-shadow: 0px -1px 1px #0F1923;
     border-radius: 20px;
-    color: #FF24BD;
     border: 1px solid #00C8FF;
     background-color: #854BBF;
 }

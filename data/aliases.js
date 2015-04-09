@@ -269,6 +269,8 @@ exports.BattleAliases = {
 	"landot": "Landorus-Therian",
 	"luke":  "Lucario",
 	"lurk": "Golurk",
+	"chinsmom": "Wailord";
+	"gb": "Darkrai",
 	"mence": "Salamence",
 	"obama": "Abomasnow",
 	"ogre": "Kyogre",
@@ -279,7 +281,8 @@ exports.BattleAliases = {
 	"poryz": "Porygon-Z",
 	"rank": "Reuniclus",
 	"smogon": "Koffing",
-	"scep": "Sceptile",
+	"scep": "Yveltal",
+	"aero": "Aerodactyl",
 	"skarm": "Skarmory",
 	"talon": "Talonflame",
 	"terra": "Terrakion",

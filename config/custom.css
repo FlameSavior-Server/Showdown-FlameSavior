@@ -312,33 +312,32 @@ body {
 .mainmenufooter a:hover {
     color: #FF49DB;
 }
-
 .pm-window h3 {
-    background: none repeat scroll 0% 0% rgba(43, 43, 43, 0.8);
-    color: #FF24BD;
+    background-color: #FF9EFD;
+    color: #FF45C4;
     margin: 0px;
     padding: 2px 5px;
     font-size: 11pt;
-    border: 1px solid #FF24BD;
+    border: 1px solid #FF45C4;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     cursor: pointer;
 }
 
 .pm-window h3:hover {
-    background: #2B2B2B;
-    color: #FF25D4;
+    background: #FF45C4;
+    color: #C90080;
     margin: 0px;
     padding: 2px 5px;
     font-size: 11pt;
-    border: 1px solid #AAA;
+    border: 1px solid #C90080;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     cursor: pointer;
 }
 
 .pm-window h3:focus {
-    background: #2B2B2B;
+    background: #C90080;
     color: #FF25D4;
     margin: 0px;
     padding: 2px 5px;
@@ -357,10 +356,10 @@ body {
 }
 
 .pm-log-add:hover {
-    border: 1px solid #AAA;
+    border: 1px solid #C90080;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    background: #2B2B2B;
+    background: #FF45C4;
 }
 
 .pm-window h3 small {

@@ -45,7 +45,7 @@ a.ilink {
 .header {
     position: relative;
     height: 50px;
-    background: url("https://s-media-cache-ak0.pinimg.com/originals/20/63/4b/20634beaedf47ec6a0a79d003604f6f2.jpg");
+    background: url("http://www.plumjam.com/poultry/images/animations/chickWalking.gif");
 }
 
 .maintabbarbottom {
@@ -157,7 +157,7 @@ a.ilink {
     border: 0px none;
     border-radius: 2px;
     background: none repeat scroll 0% 0% transparent;
-    color: #FFF;
+    color: #FF24BD;
     width: 204px;
     height: 19px;
     text-align: left;
@@ -173,10 +173,10 @@ a.ilink {
     padding: 0px 4px;
     border: 0px none;
     border-radius: 2px;
-    background: #2B2B2B;
-    color: #FFF;
+    background: #DEA8FF;
+    color: #0078F0;
     width: 204px;
-    height: 19px;
+    height: 22px;
     text-align: left;
     box-sizing: border-box;
 }
@@ -184,27 +184,29 @@ a.ilink {
 .popupmenu h3 {
     margin: 5px 0px 0px -2px;
     padding: 1px 0px;
-    font-size: 8pt;
-    color: #FF25D4;
+    font-size: 9pt;
+    color: #FF24BD;
 }
 
 .formatselect {
-    color: #FFF;
-    background: #2B2B2B;
+    color: #FF24BD;
+    font-size: 13pt;
+    text-align: center;
+    background: #854BBF;
 }
 
 .formatselect:hover {
     color: #FFF;
-    background: #3C3C3C;
+    background: #FF24BD;
 }
 
 .select.teamselect {
     background: none repeat scroll 0% 0% rgba(193, 193, 193, 0.65);
-    color: #FFF;
+    color: #FF24BD;
 }
 
 .select.teamselect:hover {
-    background: #3F3F3F;
+    background: #FF24BD;
     color: #FFF;
 }
 
@@ -229,16 +231,16 @@ a.ilink {
     text-shadow: 0px -1px 0px #0F1923;
     border-radius: 5px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(255, 255, 255, 0.8) inset;
-    color: #FFF;
-    border: 1px solid #3D668E;
-    background: -moz-linear-gradient(center top , #474747, #2B2B2B) repeat scroll 0% 0% transparent;
+    color: #FF24BD;
+    border: 1px solid #00C8FF;
+    background-color: #854BBF;
 }
 
 .menugroup button.big:hover {
     width: 230px;
     padding: 6px 7px;
     font-size: 13pt;
-    background: -moz-linear-gradient(center top , #4D4D4D, #333333) repeat scroll 0% 0% transparent;
+    background-color: #FF24BD;
 }
 
 .menugroup .button:hover {
@@ -252,12 +254,12 @@ a.ilink {
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    text-shadow: 0px -1px 0px #0F1923;
+    text-shadow: 0px -1px 0px #7A00F5;
     border-radius: 5px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(255, 255, 255, 0.8) inset;
     color: #FFF;
     border: 1px solid #3D668E;
-    background: -moz-linear-gradient(center top , #4D4D4D, #333333) repeat scroll 0% 0% transparent;
+    background-color: #FF24BD;
 }
 
 .menugroup {
@@ -267,7 +269,7 @@ a.ilink {
     max-width: 400px;
     border-radius: 20px;
     background: none repeat scroll 0% 0% rgba(20, 20, 20, 0.34);
-    color: #FFF;
+    color: #FF24BD;
     text-shadow: 0px 1px 0px #000;
 }
 
@@ -278,7 +280,7 @@ a.ilink {
     left: 0px;
     bottom: 0px;
     width: 145px;
-    border-right: 1px solid #AAA;
+    border-right: 1px solid #FF24BD;
     background: url("http://i.imgur.com/138IlUi.jpg?1");
     overflow: auto;
 }
@@ -288,11 +290,11 @@ a.ilink {
 }
 
 .userlist li {
-    border-bottom: 1px solid #303030;
+    border-bottom: 1px solid #854BBF;
 }
 
 .userlist li button:hover {
-    background: #616161;
+    background: #854BBF;
 }
 
 .chat-log {
@@ -303,11 +305,11 @@ a.ilink {
 }
 
 .chat-log-add {
-    background: #2B2B2B;
+    background: #FF24BD;
 }
 
 body {
-    background: url("http://i.imgur.com/AvJdo8k.png") no-repeat;
+    background: url("http://i.imgur.com/XgEBot1.jpg") no-repeat;
     background-color: #000;
 }
 
@@ -321,11 +323,11 @@ body {
 
 .pm-window h3 {
     background: none repeat scroll 0% 0% rgba(43, 43, 43, 0.8);
-    color: #FD59DC;
+    color: #FF24BD;
     margin: 0px;
     padding: 2px 5px;
     font-size: 11pt;
-    border: 1px solid #AAA;
+    border: 1px solid #FF24BD;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     cursor: pointer;

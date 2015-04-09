@@ -526,6 +526,42 @@ div.mainmenufooter a:visited {
     cursor: pointer;
 }
 
+.btn-nofill-red {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #FFD7D7;
+    text-shadow: 1px 1px 1px #985555;
+    font-weight: bold;
+    font-family: helvetica, arial, sans-serif;
+    padding: 0px 20px 0px 20px;
+}
+
+.btn-nofill-red:hover {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #FFB7B7;
+    text-shadow: 1px 1px 1px #985555;
+    cursor: pointer;
+}
+
+.btn-nofill-green {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #BEFFB9;
+    text-shadow: 1px 1px 1px #375735;
+    font-weight: bold;
+    font-family: helvetica, arial, sans-serif;
+    padding: 0px 20px 0px 20px;
+}
+
+.btn-nofill-green:hover {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #A0FF9A;
+    text-shadow: 1px 1px 1px #375735;
+    cursor: pointer;
+}
+
 .closebutton, .minimizebutton {
     color: #7A7A7C;
 }

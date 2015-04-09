@@ -193,12 +193,14 @@ a.ilink {
     border-radius: 20px;
     text-align: center;
     background: #854BBF;
+    background-image: url("http://sl.glitter-graphics.net/pub/988/988902q0nc275lrl.gif");
 }
 
 .formatselect:hover {
     color: #FFF;
     border-radius: 20px;
     background: #FF24BD;
+        background-image: url("http://sl.glitter-graphics.net/pub/988/988902q0nc275lrl.gif");
 }
 
 .select.teamselect {
@@ -225,7 +227,7 @@ a.ilink {
     border-radius: 20px;
     text-align: center;
     background: #854BBF;
-    width: 230px;   
+    width: 230px;
 }
 
 .menugroup .button {

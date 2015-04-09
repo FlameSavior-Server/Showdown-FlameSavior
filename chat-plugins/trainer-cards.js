@@ -4,6 +4,29 @@
 
 exports.commands = {
 
+	sos: function (target, room, user) {
+                if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+                this.sendReplyBox('<center><img src="http://i.imgur.com/eaLyuNN.png"><br />' +
+                	'<img src="http://i.imgur.com/pMacVqv.png"> <br />' +
+                	'<button class="astext" name="parseCommand" value="/user CrazyClown94" target="_blank">' +
+                	'<img src="http://play.pokemonshowdown.com/sprites/xyani/gardevoir-mega.gif"></button>' +
+                	'<button class="astext" name="parseCommand" value="/user Zukushiku" target="_blank">' +
+                	'<img src="http://play.pokemonshowdown.com/sprites/xyani/beedrill-mega.gif"></button>' +
+                	'<button class="astext" name="parseCommand" value="/user Sabella" target="_blank">' +
+                	'<img src="http://play.pokemonshowdown.com/sprites/xyani/manaphy.gif"></button>' +
+                	'<button class="astext" name="parseCommand" value="/user Ashaury" target="_blank">' +
+                	'<img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif"></button>' +
+                	'<button class="astext" name="parseCommand" value="/user Mega Ridley" target="_blank">' +
+                	'<img src="http://play.pokemonshowdown.com/sprites/xyani/dragonite.gif"></button>' +
+                	'<button class="astext" name="parseCommand" value="/user Arifeen" target="_blank">' +
+                	'<img src="http://play.pokemonshowdown.com/sprites/xyani/landorus-therian.gif"></button>' +
+                	'<button class="astext" name="parseCommand" value="/user Pk-Kaiser" target="_blank">' +
+                	'<img src="http://play.pokemonshowdown.com/sprites/xyani/gallade-mega.gif"></button><br />' +
+                	'<b>Members:</b> CrazyClown94, Zukushiku, Sabella, Ashaury, Mega Ridley, Arifeen, Pk-Kaiser<br />' +
+                	'"<b>S</b>preading Excitement all <b>O</b>ver the World with A<b>s</b>haury Brigade.'
+                );
+        },
+
 	ungenericground: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="https://i.imgur.com/44K4iYZ.gif" width=575><br />' +
@@ -7075,8 +7098,3 @@ exports.commands = {
 		);
 	}
 };
-sos: function (target, room, user) {
-                if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-                this.sendReplyBox('</div><center><img src="http://i.imgur.com/eaLyuNN.png"><br><img src="http://i.imgur.com/pMacVqv.png"> <br><button class="astext" name="parseCommand" value="/user CrazyClown94" target="_blank"><img src="http://play.pokemonshowdown.com/sprites/xyani/gardevoir-mega.gif"></button><button class="astext" name="parseCommand" value="/user Zukushiku" target="_blank"><img src="http://play.pokemonshowdown.com/sprites/xyani/beedrill-mega.gif"></button><button class="astext" name="parseCommand" value="/user Sabella" target="_blank"><img src="http://play.pokemonshowdown.com/sprites/xyani/manaphy.gif"></button><button class="astext" name="parseCommand" value="/user Ashaury" target="_blank"><img src="http://play.pokemonshowdown.com/sprites/xyani/magnezone.gif"></button><button class="astext" name="parseCommand" value="/user Mega Ridley" target="_blank"><img src="http://play.pokemonshowdown.com/sprites/xyani/dragonite.gif"></button><button class="astext" name="parseCommand" value="/user Arifeen" target="_blank"><img src="http://play.pokemonshowdown.com/sprites/xyani/landorus-therian.gif"></button><button class="astext" name="parseCommand" value="/user Pk-Kaiser" target="_blank"><img src="http://play.pokemonshowdown.com/sprites/xyani/gallade-mega.gif"></button><br><b>Members:</b> CrazyClown94, Zukushiku, Sabella, Ashaury, Mega Ridley, Arifeen, Pk-Kaiser<br>"<b>S</b>preading Excitement all <b>O</b>ver the World with A<b>s</b>haury Brigade.'
-                );
-        },

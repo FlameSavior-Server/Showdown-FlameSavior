@@ -191,6 +191,7 @@ a.ilink {
 .formatselect {
     color: #FF24BD;
     font-size: 13pt;
+    border-radius: 20px;
     text-align: center;
     background: #854BBF;
 }
@@ -202,11 +203,19 @@ a.ilink {
 
 .select.teamselect {
     background: none repeat scroll 0% 0% rgba(193, 193, 193, 0.65);
+    border-radius: 30px;
+    width: 240px;
+    padding: 1px 20px;
+    text-align: center;
     color: #FF24BD;
 }
 
 .select.teamselect:hover {
     background: #FF24BD;
+    border-radius: 30px;
+    width: 240px;
+    padding: 1px 20px;
+    text-align: center;
     color: #FFF;
 }
 
@@ -214,7 +223,7 @@ a.ilink {
     width: 230px;
     padding: 6px 7px;
     font-size: 12pt;
-    background: -moz-linear-gradient(center top , #474747, #2B2B2B) repeat scroll 0% 0% transparent;
+    background-color: #854bbf;
 }
 
 .menugroup .button {
@@ -228,9 +237,8 @@ a.ilink {
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    text-shadow: 0px -1px 0px #0F1923;
-    border-radius: 5px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(255, 255, 255, 0.8) inset;
+    text-shadow: 0px -1px 1px #0F1923;
+    border-radius: 20px;
     color: #FF24BD;
     border: 1px solid #00C8FF;
     background-color: #854BBF;
@@ -239,6 +247,7 @@ a.ilink {
 .menugroup button.big:hover {
     width: 230px;
     padding: 6px 7px;
+    border-radius: 20px;
     font-size: 13pt;
     background-color: #FF24BD;
 }
@@ -255,8 +264,6 @@ a.ilink {
     text-align: center;
     text-decoration: none;
     text-shadow: 0px -1px 0px #7A00F5;
-    border-radius: 5px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(255, 255, 255, 0.8) inset;
     color: #FFF;
     border: 1px solid #3D668E;
     background-color: #FF24BD;
@@ -268,7 +275,7 @@ a.ilink {
     margin: 0px 27px 30px;
     max-width: 400px;
     border-radius: 20px;
-    background: none repeat scroll 0% 0% rgba(20, 20, 20, 0.34);
+background-color: rgba(141, 44, 255, 0.3);
     color: #FF24BD;
     text-shadow: 0px 1px 0px #000;
 }

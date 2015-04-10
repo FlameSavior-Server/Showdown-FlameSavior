@@ -538,6 +538,14 @@ div.mainmenufooter a:visited {
   background: url("http://i.imgur.com/w19OJXc.png");
 }
 
+.striped-grey-div {
+  background: url("http://lemelle.us/images/background-pattern.png");
+}
+
+.blocks-div {
+  background: url("http://withlove.lk/catalog/view/theme/anycartblack/image/pattern/mainbg13.png");
+}
+
 .blocks-dark-div {
   background: url("http://10feettall.co.uk/wp-content/themes/puzzles2/images/bg/pattern_5.png");
   color: #FFF;

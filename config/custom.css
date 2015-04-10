@@ -808,48 +808,48 @@ body {
 .battle-log .chat strong {
     color: #40576A;
 }
-
 .backdrop {
-    width: 700px;
+    background: url("http://i.imgur.com/ce7Hb.png") no-repeat scroll left top transparent;
     height: 500px;
+    left: -50px;
+    opacity: 0.6;
     position: absolute;
     top: -90px;
-    left: -50px;
-    background: url("http://i.imgur.com/ce7Hb.png") no-repeat scroll left top transparent;
-    opacity: 0.6;
-}
-
-.sunweather, .sunnydayweather {
-    background: url(http://i.imgur.com/Acqm3wY.png) no-repeat scroll left top;
-}
-
-.rainweather, .raindanceweather {
-    background: url(http://i.imgur.com/6oeWUQ3.png) no-repeat scroll left top;
-}
-
-.hailweather {
-    background: url(http://i.imgur.com/T2mCkYF.png) no-repeat scroll left top;
-}
-
-.sandstormweather {
-    background: url(http://i.imgur.com/loxBPOI.png) no-repeat scroll left top;
-}
-
-.pseudoweather {
-    background: url(http://i.imgur.com/diinudq.png) no-repeat scroll left top;
-}
-
-.desolatelandweather {
-    background: url(http://i.imgur.com/ZERrDjt.png) no-repeat scroll left top;
-}
-
-.primordialseaweather {
-    background: url(http://i.imgur.com/D6p3zZQ.png) no-repeat scroll left top;
+    width: 700px;
 }
 
 .deltastreamweather {
-    background: url(http://i.imgur.com/11qewQj.png) no-repeat scroll left top;
+    background: url("http://img-cache.cdn.gaiaonline.com/865246556a01fa9fc099116b51ccc95a/http://img.photobucket.com/albums/v475/gray9lives/pokemanz/1284650773059.gif   ");
 }
+
+.desolatelandweather {
+    background: url("http://i.imgur.com/ssSHHxu.gif");
+}
+
+.hailweather {
+    background: url("http://imgur.com/YiRTsvq.gif");
+}
+
+.primordialseaweather {
+    background: url("http://i.imgur.com/3ScmX2g.gif") no-repeat scroll left top;
+}
+
+.pseudoweather {
+    background: url("http://i.imgur.com/DJNiks5.gif");
+}
+
+.rainweather, .raindanceweather {
+    background: url("https://38.media.tumblr.com/tumblr_me65bsyWgF1rg3ywto1_500.gif");
+}
+
+.sandstormweather {
+    background: url("https://33.media.tumblr.com/89e5feeda1d40e9d71f50086a3756acd/tumblr_nf3onkSVEy1u1nuzeo1_500.gif");
+}
+
+.sunweather, .sunnydayweather {
+    background: url("http://fc09.deviantart.net/fs31/f/2008/198/8/1/Rotating_Dancefloor_Animation_by_Dragonfly113.gif");
+}
+
 
 .Lobby-Button:hover {
     color: #FFF;

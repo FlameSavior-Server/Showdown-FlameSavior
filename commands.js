@@ -1210,7 +1210,7 @@ var commands = exports.commands = {
 	gdeclare: 'globaldeclare',
 	globaldeclare: function (target, room, user) {
 		if (!target) return this.parse('/help globaldeclare');
-		if (!this.can('gdeclare')) return false;
+		if (!this.can('declare')) return false;
 
 		for (var id in Rooms.rooms) {
 			if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b>' + target + '</b></div>');

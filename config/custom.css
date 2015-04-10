@@ -521,6 +521,10 @@ div.mainmenufooter a:visited {
   background: url("http://i.imgur.com/Q8vHT0Y.png");
 }
 
+.checkered-grey-div {
+  background: url("http://www.pandasoup.com/resource/images/backgroundPattern1.png");
+}
+
 .checkered-dark-div {
   background: url("http://i.imgur.com/rFSFXGg.png");
   color: #FFF;

@@ -2289,6 +2289,7 @@ this.sendReplyBox('<font size="5" color="white"><b>The Parukian Guidelines</b></
        working: 'away',
        sleeping: 'away',
        drunk: 'away',
+       skype: 'away',
        busy: 'away',
        afk: 'away',
        away: function(target, room, user, connection, cmd) {
@@ -2315,6 +2316,10 @@ break;
 case 'working':
 t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
 t2 = 'Working';
+break;
+case 'skype':
+t = 'Ⓢⓚⓨⓟⓔ';
+t2 = 'on Skype';
 break;
 case 'work':
 t = 'Ⓦⓞⓡⓚⓘⓝⓖ';

@@ -523,6 +523,7 @@ div.mainmenufooter a:visited {
 
 .checkered-dark-div {
   background: url("http://i.imgur.com/rFSFXGg.png");
+  color: #FFF;
 }
 
 .beehive-div {
@@ -535,6 +536,7 @@ div.mainmenufooter a:visited {
 
 .blocks-dark-div {
   background: url("http://10feettall.co.uk/wp-content/themes/puzzles2/images/bg/pattern_5.png");
+  color: #FFF;
 }
 
 .hydrocity-div {
@@ -544,6 +546,7 @@ div.mainmenufooter a:visited {
 /**************************
 * Custom backgrounds ~end *
 **************************/
+
 .btn-nofill {
     background: rgba(0, 0, 0, 0);
     border: none;

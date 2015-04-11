@@ -40,15 +40,16 @@ settings: {
 emoticons: {
         'Kappa': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-ddc6e3a8732cb50f-25x28.png',
         'PogChamp': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-60aa1af305e32d49-23x30.png',
-        'BloodTrail': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-f124d3a96eff228a-41x28.png',
+	'BloodTrail': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-f124d3a96eff228a-41x28.png',
         'BibleThump': 'http://static-cdn.jtvnw.net/jtv_user_pictures/chansub-global-emoticon-f6c13c7fc0a5c93d-36x30.png',
-        'feelsgd': 'http://i.imgur.com/s0QXKVx.png?1',
+	'feelsgd': 'http://i.imgur.com/s0QXKVx.png?1',
         'feelsbd': 'http://i.imgur.com/TZvJ1lI.png?1',
         
         //Custom ones
-        'Whaaale': 'http://i.imgur.com/awFIfj1.gif',
-        'snaiL': 'http://fc01.deviantart.net/fs70/f/2010/314/4/5/snail_by_brave_bom-d32lj5x.gif',
-        'FrY': 'http://fc06.deviantart.net/fs13/f/2007/096/c/d/iseewhatyoudidthere_by_fadedfutures.gif',
+	'Doge': 'http://piq.codeus.net/static/media/userpics/piq_155181_25x25.png',
+	'Whaaale': 'http://i.imgur.com/awFIfj1.gif',
+	'snaiL': 'http://fc01.deviantart.net/fs70/f/2010/314/4/5/snail_by_brave_bom-d32lj5x.gif',
+	'FrY': 'http://fc06.deviantart.net/fs13/f/2007/096/c/d/iseewhatyoudidthere_by_fadedfutures.gif',
         'Moogle': 'http://i1083.photobucket.com/albums/j387/Nishi9261/Memoteangry.png',
         'Starrr': 'http://pizzarecipes101.com/image/bookmarks/bookmark.gif',
         'sheeT': 'https://lh5.googleusercontent.com/-is1zLiGyM8s/TzOfCuMbApI/AAAAAAAAKSo/r7U1kVWgpJk/s25/toilet.jpg',

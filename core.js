@@ -46,7 +46,6 @@ emoticons: {
         'feelsbd': 'http://i.imgur.com/TZvJ1lI.png?1',
         
         //Custom ones
-        'Doge': 'http://piq.codeus.net/static/media/userpics/piq_155181_25x25.png',
         'Whaaale': 'http://i.imgur.com/awFIfj1.gif',
         'snaiL': 'http://fc01.deviantart.net/fs70/f/2010/314/4/5/snail_by_brave_bom-d32lj5x.gif',
         'FrY': 'http://fc06.deviantart.net/fs13/f/2007/096/c/d/iseewhatyoudidthere_by_fadedfutures.gif',

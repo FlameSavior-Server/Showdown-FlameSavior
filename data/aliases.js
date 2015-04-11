@@ -242,6 +242,7 @@ exports.BattleAliases = {
 	"espy": "Espeon",
 	"frage": "Goomy",
 	"oak": "Kabutops",
+	"iza": "Umbreon",
 	"hope": "Mewtwo",
 	"nc": "Suicune",
 	"eimp": "Metapod",

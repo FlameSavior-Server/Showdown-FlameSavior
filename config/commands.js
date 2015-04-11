@@ -1568,6 +1568,7 @@ var commands = exports.commands = {
 			"felt Gamebreaker's wrath!",
 			"died of a broken heart.",
 			"got scared and left the server!",
+			"insulted Gallade in front of Phil!",
 			"was forced to give Zarel an oil massage!",
 			"took an aero to the knee... and then one to the face.",
 			"{{user}} killed them. {{user}} killed them all.",

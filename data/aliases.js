@@ -272,6 +272,7 @@ exports.BattleAliases = {
 	"landoi": "Landorus",
 	"landot": "Landorus-Therian",
 	"luke":  "Lucario",
+	"blade": "Blaziken",
 	"lurk": "Golurk",
 	"mence": "Salamence",
 	"obama": "Abomasnow",

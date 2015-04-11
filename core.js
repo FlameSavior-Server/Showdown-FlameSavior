@@ -13,6 +13,11 @@
 var fs = require("fs");
 var path = require("path");
 
+var sqlite3 = require('sqlite3');
+if (!db) var db = new sqlite3.Database('config/users.db', function() {
+        db.run("CREATE TABLE if not exists users (userid TEXT, name TEXT, bucks INTEGER)");
+});
+
 var core = exports.core = {
 
 	stdin: function (file, name) {
@@ -158,7 +163,11 @@ var core = exports.core = {
 		},
 
 		money: function (user) {
-			return Core.stdin('money', user);
+        	        userid = toId(userid);
+        		db.all("SELECT * FROM users WHERE userid=$userid", {$userid: userid}, function(err,rows) {
+          		if (err) return console.log(err);
+        		callback((rows[0] ? rows[0].bucks : 0));
+        });
 		},
 
 		tournamentElo: function (user) {

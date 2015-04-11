@@ -216,7 +216,7 @@ var components = exports.components = {
 		});
 		req.end();
 	},
-
+/*
 	atm: 'profile',
 	wallet: 'profile',
 	profile: function (target, room, user, connection, cmd) {
@@ -256,7 +256,9 @@ var components = exports.components = {
 		if (about === 0) {
 			return this.sendReplyBox(Core.profile.avatar(true, targetUser, targetUser.avatar) + Core.profile.name(true, targetUser) + Core.profile.group(true, targetUser) + Core.profile.lastSeen(true, targetUser) + Core.profile.display('money', money) + Core.profile.display('elo', elo, Core.profile.rank(targetUser.userid)) + '<br clear="all">');
 		}
-		return this.sendReplyBox(Core.profile.avatar(true, targetUser, targetUser.avatar) + Core.profile.name(true, targetUser) + Core.profile.group(true, targetUser) + Core.profile.display('about', about) + Core.profile.lastSeen(true, targetUser) + Core.profile.display('money', money) + Core.profile.display('elo', elo, Core.profile.rank(targetUser.userid)) + '<br clear="all">');	},
+		return this.sendReplyBox(Core.profile.avatar(true, targetUser, targetUser.avatar) + Core.profile.name(true, targetUser) + Core.profile.group(true, targetUser) + Core.profile.display('about', about) + Core.profile.lastSeen(true, targetUser) + Core.profile.display('money', money) + Core.profile.display('elo', elo, Core.profile.rank(targetUser.userid)) + '<br clear="all">');	
+		
+	}, */
 
 	setabout: 'about',
 	about: function (target, room, user) {
@@ -496,7 +498,7 @@ var components = exports.components = {
 	 * Economy and Casino Commands
 	 * The commands which control Nimbus' currency system, Halos.
 	 *********************************************************/
-	 
+	/* 
 	shop: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReply('|raw|' + Core.shop(true));
@@ -712,7 +714,7 @@ var components = exports.components = {
 
 		this.sendReply('You have successfully transferred ' + transferMoney + ' ' + b + ' to ' + targetUser.name + '. You now have ' + userMoney + ' bucks.');
 		targetUser.send(user.name + ' has transferred ' + transferMoney + ' ' + b + ' to you. You now have ' + targetMoney + ' bucks.');
-	},
+	}, */
 
 	customsymbol: function (target, room, user) {
 		if (!user.canCustomSymbol && !user.can('vip')) return this.sendReply('You need to buy this item from the shop to use.');
@@ -766,7 +768,7 @@ var components = exports.components = {
 		this.sendReply('Your symbol has been reset.');
 	},
 
-
+/*
 	givebuck: 'givemoney',
 	givebucks: 'givemoney',
 	givemoney: function (target, room, user) {
@@ -827,7 +829,7 @@ var components = exports.components = {
 
 		this.sendReply(targetUser.name + ' has losted ' + takeMoney + ' ' + b + '. This user now has ' + total + ' bucks.');
 		targetUser.send(user.name + ' has taken ' + takeMoney + ' ' + b + ' from you. You now have ' + total + ' bucks.');
-	},
+	},*/
 
 	/*********************************************************
 	 * Poll and Poll-related Commands

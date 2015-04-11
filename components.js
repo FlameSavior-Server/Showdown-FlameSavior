@@ -216,7 +216,7 @@ var components = exports.components = {
 		});
 		req.end();
 	},
-/*
+
 	atm: 'profile',
 	wallet: 'profile',
 	profile: function (target, room, user, connection, cmd) {
@@ -258,7 +258,7 @@ var components = exports.components = {
 		}
 		return this.sendReplyBox(Core.profile.avatar(true, targetUser, targetUser.avatar) + Core.profile.name(true, targetUser) + Core.profile.group(true, targetUser) + Core.profile.display('about', about) + Core.profile.lastSeen(true, targetUser) + Core.profile.display('money', money) + Core.profile.display('elo', elo, Core.profile.rank(targetUser.userid)) + '<br clear="all">');	
 		
-	}, */
+	}, 
 
 	setabout: 'about',
 	about: function (target, room, user) {

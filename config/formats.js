@@ -3808,6 +3808,15 @@ exports.Formats = [
 		]
 	},
 	{
+		name: "Random LC",
+		section: "Other Metagames",
+
+		maxLevel: 5,
+		team: 'randomlc',
+		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod'],
+		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar', 'Misdreavus']
+	},
+	{
 		name: "Tier Shift",
 		section: "Other Metagames",
 

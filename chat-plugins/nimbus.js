@@ -6,7 +6,7 @@ exports.commands = {
 	gdeclaregreen: 'gdeclare',
 	gdeclare: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help gdeclare');
-		if (!this.can('lockdown')) return false;
+		if (!this.can('declare')) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
 
 		var roomName = (room.isPrivate) ? 'a private room' : room.id;

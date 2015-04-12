@@ -701,74 +701,67 @@ Tournament = (function () {
 		}
 		this.room.update();
 	};
-	Tournament.prototype.onTournamentEnd = function () {
-		this.room.add('|tournament|end|' + JSON.stringify({
-			results: this.generator.getResults().map(usersToNames),
-			format: this.format,
-			generator: this.generator.name,
-			bracketData: this.getBracketData()
-		}));
+      Tournament.prototype.onTournamentEnd = function () {
+                this.room.add('|tournament|end|' + JSON.stringify({
+                        results: this.generator.getResults().map(usersToNames),
+                        format: this.format,
+                        generator: this.generator.name,
+                        bracketData: this.getBracketData()
+                }));
 
-		var data = {
-			results: this.generator.getResults().map(usersToNames),
-			bracketData: this.getBracketData()
-		}, runnerUp = false, winner;
-		data = data['results'].toString();
+                var data = {
+                        results: this.generator.getResults().map(usersToNames),
+                        bracketData: this.getBracketData()
+                }, runnerUp = false, winner;
+                data = data['results'].toString();
 
-		if (data.indexOf(',') >= 0) {
-			data = data.split(',');
-			winner = data[0];
-			if (data[1]) runnerUp = data[1];
-		} else {
-			winner = data;
-		}
+                if (data.indexOf(',') >= 0) {
+                        data = data.split(',');
+                        winner = data[0];
+                        if (data[1]) runnerUp = data[1];
+             	} else {
+                        winner = data;
+                }
 
-		var tourSize = this.generator.users.size;
-		if (this.room.isOfficial && tourSize >= Core.tournaments.tourSize) {
-			var firstMoney = Math.round(tourSize / Core.tournaments.amountEarn),
-			secondMoney = Math.round(firstMoney / 2),
-			firstBuck = 'buck',
-			secondBuck = 'buck';
-			if (firstMoney > 1) firstBuck = 'bucks';
-			if (secondMoney > 1) secondBuck = 'bucks';
+                var tourSize = this.generator.users.size;
+                if (this.room.isOfficial && tourSize >= Core.tournaments.tourSize) {
+                        var firstMoney = Math.round(tourSize / Core.tournaments.amountEarn),
+                        secondMoney = Math.round(firstMoney / 2),
+                        firstBuck = 'buck',
+                        secondBuck = 'buck';
+                        if (firstMoney > 1) firstBuck = 'bucks';
+                        if (secondMoney > 1) secondBuck = 'bucks';
 
-			// annouces the winner/runnerUp
-			this.room.add('|raw|<strong><font color=' + Core.profile.color + '>' + Tools.escapeHTML(winner) + '</font> has also won <font color=' + Core.profile.color + '>' + firstMoney + '</font> ' + firstBuck + ' for winning the tournament!</strong>');
-			if (runnerUp) this.room.add('|raw|<strong><font color=' + Core.profile.color + '>' + Tools.escapeHTML(runnerUp) + '</font> has also won <font color=' + Core.profile.color + '>' + secondMoney + '</font> ' + secondBuck + ' for winning the tournament!</strong>');
+                        var wid = toId(winner), // winner's userid
+                                rid = toId(runnerUp); // runnerUp's userid
 
-			var wid = toId(winner), // winner's userid
-				rid = toId(runnerUp); // runnerUp's userid
+                        var self = this;
 
-			// file i/o
-			var winnerMoney = Number(Core.stdin('money', wid));
-			var tourWin = Number(Core.stdin('tourWins', wid));
-			Core.stdout('money', wid, (winnerMoney + firstMoney), function () {
-				var winnerElo = Number(Core.stdin('elo', wid));
-				if (winnerElo === 0) winnerElo = 1000;
-				if (runnerUp) {
-					var runnerUpMoney = Number(Core.stdin('money', rid)),
-						runnerUpElo = Number(Core.stdin('elo', rid));
-					if (runnerUpElo === 0) runnerUpElo = 1000;
-					Core.stdout('money', rid, (runnerUpMoney + secondMoney), function () {
-						Core.stdout('tourWins', wid, (tourWin + 1), function () {
-							Core.stdout('elo', wid, (winnerElo + Core.tournaments.winningElo), function () {
-								Core.stdout('elo', rid, (runnerUpElo + Core.tournaments.runnerUpElo));
-							});
-						});
-					});
-				} else {
-					Core.stdout('tourWins', wid, (tourWin + 1), function () {
-						Core.stdout('elo', wid, (winnerElo + Core.tournaments.winningElo));
-					});
-				}
-			});
-		}
-		this.isEnded = true;
-		delete exports.tournaments[toId(this.room.id)];
-	};
+                        // file i/o
+                    	if (firstMoney) {
+                                this.room.add('|raw|<strong><font color=' + Core.profile.color + '>' + Tools.escapeHTML(winner) + '</font> has also won <font color=' + Core.profile.color + '>' + firstMoney + '</font> ' + firstBuck + ' for winning the tournament!</strong>');
+                        if (runnerUp) this.room.add('|raw|<strong><font color=' + Core.profile.color + '>' + Tools.escapeHTML(runnerUp) + '</font> has also won <font color=' + Core.profile.color + '>' + secondMoney + '</font> ' + secondBuck + ' for coming in second!</strong>');
+                                writeMoney(toId(wid), firstMoney, function() {
+                                        readMoney(toId(wid), function(newMoney) {
+                                                logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
+                                                if (runnerUp) {
+                                                          writeMoney(toId(rid), secondMoney, function() {
+                                                                var newMoney2 = readMoney(toId(rid), function(newMoney2) {
+                                                                        logTransaction(runnerUp+' has won '+secondMoney+' '+secondBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney2);
+                                                                });
+                                                        });
+                                                }
+                                        });
+                                });
+                        }
+                }
+                this.isEnded = true;
+                delete exports.tournaments[toId(this.room.id)];
+        };
 
-	return Tournament;
+        return Tournament;
 })();
+
 
 var commands = {
 	basic: {

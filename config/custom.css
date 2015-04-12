@@ -449,21 +449,21 @@ div.mainmenufooter a:visited {
     text-shadow: 1px 1px 1px #7896B8;
 }
     
-.setchart input:focus, .setchart-nickname input:focus, .statform input.inputform:focus, .textbox:focus {
+.setchart input:focus, .setchart-nickname input:focus, .statform input.inputform:focus {
     outline: 0px none;
     border: 1px solid #4DBCEC;
     box-shadow: 0px 1px 2px #86D6F9 inset, 0px 0px 5px #86D6F9;
     background: none repeat scroll 0% 0% #FFF;
 }
     
-.setchart input, .setchart-nickname input, .statform input.inputform, .textbox {
+.setchart input, .setchart-nickname input, .statform input.inputform {
     border: 1px solid #4DBCEC;
     color: #212121;
     text-shadow: 1px 1px 1px #7896B8;
     background: #EFFBFF;
 }
     
-.setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover, .textbox:hover {
+.setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover {
     border: 1px solid #5BC3F0;
 }
     

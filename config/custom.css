@@ -277,6 +277,10 @@ p > em {
     background: #B3D3E8;
 }
 
+/*****************
+* Tournament CSS *
+*****************/
+
 div.ps-popup.tournament-popout-bracket > div.tournament-bracket-tree {
     background: url("http://i.imgur.com/jxOe6XC.png");
     background-size: auto auto;
@@ -289,6 +293,33 @@ div.tournament-tools.active {
     border-top: 1px solid #575757;
     border-bottom: 1px solid #575757;
     box-shadow: none;
+}
+
+.tournament-title, .tournament-status, .tournament-toggle {
+    background: url("http://i.imgur.com/SRdPIN3.png") repeat scroll 0% 0% transparent;
+    color: #000;
+}
+    
+.tournament-status {
+    border-right: none;
+    font-size: 70%;
+}
+    
+.tournament-toggle {
+    border-left: none;
+    font-size: 70%;
+}
+    
+.tournament-bracket {
+    border-top: 1px solid #575757;
+}
+
+/**********************
+* Tournament CSS ~end *
+**********************/
+    
+.challenge {
+    border-bottom: none;
 }
 
 div.notice > div.infobox > strong > font {

@@ -49,10 +49,9 @@ body {
 
 .pm-log-add {
     background: #CFCFCF;
-    border-top: 0px solid #575757;
-    border-right: 1px solid #575757;
-    border-bottom: 1px solid #575757;
-    border-left: 1px solid #575757;
+    border: 1px solid #575757;
+    border-top: none;
+    background: url("http://i.imgur.com/SRdPIN3.png");
 }
 
 .ps-overlay {

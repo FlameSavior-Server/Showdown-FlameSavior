@@ -1611,7 +1611,8 @@ var commands = exports.commands = {
 			"was finished!",
 			"fell to Prussia's Wrath Diease!",
 			"was beheaded by Mario!",
-			"was meteor smashed!",
+			"was meteor smashed by Little Mac!",
+			"fell to the HOO HAH!",
 			"got turnip'd by Gamebreaker!"
 			
 		];

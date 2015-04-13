@@ -2392,6 +2392,7 @@ var commands = exports.commands = {
     sleep: 'afk',
     gaming: 'afk',
     busy: 'afk',
+    eat: 'afk',
     afk: function(target, room, user, connection, cmd) {
         if (!this.canTalk()) return;
         if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
@@ -2407,6 +2408,8 @@ var commands = exports.commands = {
                 case 'busy':
                     var awayName = user.name + ' - Ⓑⓤⓢⓨ';
                     break;
+                case 'eat':
+                    var awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ';
                 default:
                     var awayName = user.name + ' - Ⓐⓦⓐⓨ';
             }

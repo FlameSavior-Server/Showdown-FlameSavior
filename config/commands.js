@@ -1609,6 +1609,9 @@ var commands = exports.commands = {
 			"poof'd in front of Frage!",
 			"was secretly Petch from Texas!",
 			"was finished!",
+			"fell to Prussia's Wrath Diease!",
+			"was beheaded by Mario!",
+			"was meteor smashed!",
 			"got turnip'd by Gamebreaker!"
 			
 		];

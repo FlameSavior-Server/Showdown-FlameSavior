@@ -2307,20 +2307,21 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b><a href="https://www.youtube.com/watch?v=ei3-Qo9wHH4&feature=youtu.be">C\'Mon and Ride The Smash Hype Train!</a></b>');
 	},
-	eating: 'away',
-       anime: 'away',
-       smashing: 'away',
-       shower: 'away',
-       forum: 'away',
-       gaming: 'away',
-       sleep: 'away',
-       work: 'away',
-       working: 'away',
-       sleeping: 'away',
-       drunk: 'away',
-       busy: 'away',
-       afk: 'away',
-       away: function(target, room, user, connection, cmd) {
+	eating: 'afk',
+       anime: 'afk',
+       smashing: 'afk',
+       shower: 'afk',
+       forum: 'afk',
+       gaming: 'afk',
+       sleep: 'afk',
+       work: 'afk',
+       working: 'afk',
+       sleeping: 'afk',
+       drunk: 'afk',
+       busy: 'afk',
+       drunk: 'afk',
+       afk: 'afk',
+       afk: function(target, room, user, connection, cmd) {
             // unicode away message idea by Siiilver
             var t = 'Ⓐⓦⓐⓨ';
             var t2 = 'Away';
@@ -2393,13 +2394,13 @@ if (user.isStaff) this.add('|raw|-- <b><font color="#088cc7">' + user.originalNa
 user.isAway = true;
 }
 else {
-return this.sendReply('You are already set as a form of away, type /back if you are now back.');
+return this.sendReply('You are already set as a form of away, type /unafk if you are now back.');
 }
  
 user.updateIdentity();
 },
  
-back: function(target, room, user, connection) {
+unafk: function(target, room, user, connection) {
  
 if (user.isAway) {
 if (user.name === user.originalName) {

@@ -149,7 +149,7 @@ exports.Formats = [
 		ruleset: ['PotD', 'Pokemon', 'HP Percentage Mod', 'Cancel Mod']
 	},
 	{
-		name: "Smogon Doubles",
+		name: "Doubles OU",
 		section: "ORAS Doubles",
 
 		gameType: 'doubles',
@@ -159,7 +159,7 @@ exports.Formats = [
 		]
 	},
 	{
-		name: "Smogon Doubles Ubers",
+		name: "Doubles Ubers",
 		section: "ORAS Doubles",
 
 		gameType: 'doubles',
@@ -167,11 +167,11 @@ exports.Formats = [
 		banlist: ['Unreleased', 'Illegal', 'Dark Void']
 	},
 	{
-		name: "Smogon Doubles UU",
+		name: "Doubles UU",
 		section: "ORAS Doubles",
 
 		gameType: 'doubles',
-		ruleset: ['Smogon Doubles'],
+		ruleset: ['Doubles OU'],
 		banlist: ['Aegislash', 'Amoonguss', 'Azumarill', 'Bisharp', 'Breloom', 'Chandelure', 'Charizard', 'Conkeldurr',
 		'Cresselia', 'Deoxys-Attack', 'Diancie', 'Dragonite', 'Excadrill', 'Ferrothorn', 'Garchomp', 'Gardevoir',
 		'Gengar', 'Greninja', 'Gyarados', 'Heatran', 'Hitmontop', 'Hydreigon', 'Kangaskhan', 'Keldeo',
@@ -295,7 +295,7 @@ exports.Formats = [
 		banlist: ['Unreleased', 'Arceus', 'Archeops', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Deoxys-Speed', 'Dialga', 'Giratina', 'Giratina-Origin',
 			'Groudon', 'Ho-Oh', 'Keldeo', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza',
 			'Regigigas', 'Reshiram', 'Shaymin-Sky', 'Shedinja', 'Slaking', 'Xerneas', 'Yveltal', 'Zekrom',
-			'Blazikenite', 'Gengarite', 'Kangaskhanite', 'Mawilite', 'Salamencite', 'Soul Dew'
+			'Blazikenite', 'Gengarite', 'Kangaskhanite', 'Mawilite', 'Salamencite', 'Soul Dew', 'Assist'
 		],
 		validateSet: (function () {
 			var pokemonWithAbility;
@@ -487,15 +487,8 @@ exports.Formats = [
 
 					if (ability.name === template.abilities['H']) {
 						isHidden = true;
-
 						if (template.unreleasedHidden && banlistTable['illegal']) {
 							problems.push(name + "'s hidden ability is unreleased.");
-						} else if (this.gen === 5 && set.level < 10 && (template.maleOnlyHidden || template.gender === 'N')) {
-							problems.push(name + " must be at least level 10 with its hidden ability.");
-						}
-						if (template.maleOnlyHidden) {
-							set.gender = 'M';
-							lsetData.sources = ['5D'];
 						}
 					}
 
@@ -540,9 +533,6 @@ exports.Formats = [
 								if (eventData.isHidden !== undefined && eventData.isHidden !== isHidden) {
 									problems.push(name + (isHidden ? " can't have" : " must have") + " its hidden ability because it has a move only available from a specific event.");
 								}
-								if (this.gen <= 5 && eventData.abilities && eventData.abilities.indexOf(ability.id) < 0) {
-									problems.push(name + " must have " + eventData.abilities.join(" or ") + " because it has a move only available from a specific event.");
-								}
 								if (eventData.gender) {
 									set.gender = eventData.gender;
 								}
@@ -567,15 +557,6 @@ exports.Formats = [
 							if (!compatibleSource) {
 								problems.push(name + " has moves incompatible with its hidden ability.");
 							}
-						}
-					}
-					if (!lsetData.sources && lsetData.sourcesBefore <= 3 && this.getAbility(set.ability).gen === 4 && !template.prevo && this.gen <= 5) {
-						problems.push(name + " has a gen 4 ability and isn't evolved - it can't use anything from gen 3.");
-					}
-					if (!lsetData.sources && lsetData.sourcesBefore >= 3 && (isHidden || this.gen <= 5) && template.gen <= lsetData.sourcesBefore) {
-						var oldAbilities = this.mod('gen' + lsetData.sourcesBefore).getTemplate(template.species).abilities;
-						if (ability.name !== oldAbilities['0'] && ability.name !== oldAbilities['1'] && !oldAbilities['H']) {
-							problems.push(name + " has moves incompatible with its ability.");
 						}
 					}
 
@@ -648,7 +629,6 @@ exports.Formats = [
 
 			var sources = [];
 			var sourcesBefore = 0;
-			var noFutureGen = this.gen >= 3 ? true : !!(format.banlistTable && format.banlistTable['tradeback']);
 
 			do {
 				alreadyChecked[template.speciesid] = true;
@@ -665,15 +645,14 @@ exports.Formats = [
 
 						for (var i = 0, len = lset.length; i < len; i++) {
 							var learned = lset[i];
-							if (noFutureGen && parseInt(learned.charAt(0), 10) > this.gen) continue;
 							if (learned.charAt(0) !== '6' && isHidden && !this.mod('gen' + learned.charAt(0)).getTemplate(template.species).abilities['H']) {
 								incompatibleHidden = true;
 								continue;
 							}
 							if (!template.isNonstandard) {
-								if (this.gen >= 4 && learned.charAt(0) <= 3 && move in {'cut':1, 'fly':1, 'surf':1, 'strength':1, 'flash':1, 'rocksmash':1, 'waterfall':1, 'dive':1}) continue;
-								if (this.gen >= 5 && learned.charAt(0) <= 4 && move in {'cut':1, 'fly':1, 'surf':1, 'strength':1, 'rocksmash':1, 'waterfall':1, 'rockclimb':1}) continue;
-								if (this.gen >= 5 && move in {'defog':1, 'whirlpool':1} && learned.charAt(0) <= 4) blockedHM = true;
+								if (learned.charAt(0) <= 3 && move in {'cut':1, 'fly':1, 'surf':1, 'strength':1, 'flash':1, 'rocksmash':1, 'waterfall':1, 'dive':1}) continue;
+								if (learned.charAt(0) <= 4 && move in {'cut':1, 'fly':1, 'surf':1, 'strength':1, 'rocksmash':1, 'waterfall':1, 'rockclimb':1}) continue;
+								if (move in {'defog':1, 'whirlpool':1} && learned.charAt(0) <= 4) blockedHM = true;
 							}
 							if (learned.substr(0, 2) in {'4L':1, '5L':1, '6L':1}) {
 								if (level >= parseInt(learned.substr(2), 10)) {
@@ -716,10 +695,8 @@ exports.Formats = [
 										}
 									}
 									if (!atLeastOne) sources.push(learned + template.id);
-									if (!noFutureGen) sourcesBefore = Math.max(sourcesBefore, parseInt(learned.charAt(0), 10));
 								} else if (learned.charAt(1) === 'S') {
 									sources.push(learned + ' ' + template.id);
-									if (!noFutureGen) sourcesBefore = Math.max(sourcesBefore, parseInt(learned.charAt(0), 10));
 								} else {
 									var minLevel = (template.evoLevel && template.evoLevel > 10) ? template.evoLevel : 10;
 									if (set.level < minLevel) continue;
@@ -734,7 +711,6 @@ exports.Formats = [
 				} else if (template.prevo) {
 					template = this.getTemplate(template.prevo);
 					if (template.gen > Math.max(2, this.gen)) template = null;
-					if (template && !template.abilities['H']) isHidden = false;
 				} else if (template.baseSpecies !== template.species && template.baseSpecies !== 'Kyurem' && template.baseSpecies !== 'Pikachu') {
 					template = this.getTemplate(template.baseSpecies);
 				} else {
@@ -1255,9 +1231,6 @@ exports.Formats = [
 			if (name === 'hydroimpact') {
 				this.add('c|@HYDRO IMPACT|Think about the name first and then the Pokemon. Look beyond the "simple" detail.');
 			}
-			if (name === 'imanalt') {
-				this.add('c|@imanalt|muh bulk');
-			}
 			if (name === 'innovamania') {
 				sentences = ['Don\'t take this seriously', 'These Black Glasses sure look cool', 'Ready for some fun?( ͡° ͜ʖ ͡°)', '( ͡° ͜ʖ ͡°'];
 				this.add('c|@innovamania|' + sentences[this.random(4)]);
@@ -1446,10 +1419,13 @@ exports.Formats = [
 				}
 			}
 			if (name === 'birkal') {
-				this.add('c|%birkal|caw');
+				this.add('c|%Birkal|caw');
 			}
 			if (name === 'bloobblob') {
 				this.add('c|%bloobblob|Contract?');
+			}
+			if (name === 'charlescarmichael') {
+				this.add('c|%Charles Carmichael|If Taylor Swift were in a Fast and Furious movie, it’d be called Taylor Drift.');
 			}
 			if (name === 'crestfall') {
 				sentences = ['On wings of night.', 'Let us hunt those who have fallen to darkness.'];
@@ -1472,7 +1448,10 @@ exports.Formats = [
 				this.add('c|%Majorbling|' + sentences[this.random(3)]);
 			}
 			if (name === 'raseri') {
-				this.add('c|%Raseri|ban prinplup');
+				this.add('c|%raseri|ban prinplup');
+			}
+			if (name === 'quotecs') {
+				this.add('c|%QuoteCS|Yeah, I know what you mean, but unfortunately I lack good answers to those because of my incredibly dry personality.');
 			}
 			if (name === 'trinitrotoluene') {
 				this.add('c|%trinitrotoluene|pls no hax');
@@ -1575,6 +1554,9 @@ exports.Formats = [
 			}
 			if (name === 'diatom') {
 				this.add('-message', pokemon.side.foe.name + ' was banned by Diatom. (you should be thankful you are banned and not permabanned)');
+			}
+			if (name === 'imanalt') {
+				this.add('c|+imanalt|muh bulk');
 			}
 			if (name === 'mattl') {
 				this.add('c|+MattL|The annoyance I will cause is not well-defined.');
@@ -1833,9 +1815,6 @@ exports.Formats = [
 			if (name === 'hydroimpact') {
 				this.add('c|@HYDRO IMPACT|Well done, you\'ve gone beyond your limits and have gained my trust. Now go and write your own destiny, don\'t let fate write it for you.');
 			}
-			if (name === 'imanalt') {
-				this.add('c|@imanalt|bshax imo');
-			}
 			if (name === 'innovamania') {
 				sentences = ['Did you rage quit?', 'How\'d you lose with this set?', 'Pm Nani Man to complain about this set ( ͡° ͜ʖ ͡°)'];
 				this.add('c|@innovamania|' + sentences[this.random(3)]);
@@ -2004,10 +1983,13 @@ exports.Formats = [
 				}
 			}
 			if (name === 'birkal') {
-				this.add('c|%birkal|//birkal');
+				this.add('c|%Birkal|//birkal');
 			}
 			if (name === 'bloobblob') {
 				this.add('c|%bloobblob|I won\'t die! Even if I\'m killed!');
+			}
+			if (name === 'charlescarmichael') {
+				this.add('c|%Charles Carmichael|The Grandmaster of Puns will be back for revenge!');
 			}
 			if (name === 'crestfall') {
 				this.add('c|%Crestfall|Vayne [All Chat]: Outplayed me gg no re');
@@ -2025,7 +2007,10 @@ exports.Formats = [
 				this.add('c|%Majorbling|There is literally no way to make this pokemon good...(ゞ๑T  ˳̫T\'๑) ');
 			}
 			if (name === 'raseri') {
-				this.add('c|%Raseri|banned');
+				this.add('c|%raseri|banned');
+			}
+			if (name === 'quotecs') {
+				this.add('c|%QuoteCS|#StillIrrelevant');
 			}
 			if (name === 'trinitrotoluene') {
 				this.add('c|%trinitrotoluene|why hax @_@');
@@ -2055,6 +2040,9 @@ exports.Formats = [
 			}
 			if (name === 'diatom' && !pokemon.hasBeenThanked) {
 				this.add('c|★' + pokemon.side.foe.name + '|Thanks Diatom...');
+			}
+			if (name === 'imanalt') {
+				this.add('c|+imanalt|bshax imo');
 			}
 			if (name === 'mattl') {
 				this.add('c|+MattL|Finish him! You used "Finals week!" Fatality!');
@@ -2721,12 +2709,6 @@ exports.Formats = [
 					this.directDamage(source.maxhp * 0.35, source, source);
 				};
 			}
-			if (move.id === 'naturepower' && name === 'imanalt') {
-				move.name = 'FREE GENV BH';
-				move.onHit = function (target, source) {
-					this.useMove('earthquake', source, target);
-				};
-			}
 			if (move.id === 'splash' && name === 'innovamania') {
 				move.name = 'Rage Quit';
 				delete move.onTryHit;
@@ -3009,6 +2991,13 @@ exports.Formats = [
 					}
 				};
 			}
+			if (move.id === 'headcharge' && name === 'rekeri') {
+				move.name = 'Land Before Time';
+				move.basePower = 125;
+				move.type = 'Rock';
+				move.accuracy = 90;
+				move.secondaries = [{chance:10, volatileStatus:'flinch'}];
+			}
 			if (move.id === 'stockpile' && name === 'relados') {
 				move.name = 'Loyalty';
 				move.type = 'Fire';
@@ -3206,6 +3195,26 @@ exports.Formats = [
 					this.add('-anim', source, "Close Combat", target);
 				};
 			}
+			if (move.id === 'rockthrow' && name === 'timbuktu') {
+				move.name = 'Geoblast';
+				move.type = 'Fire';	// Not the other way round or STAB would be lost.
+				move.category = 'Special';
+				move.accuracy = true;
+				move.basePowerCallback = function (source, target) {
+					return (40 * Math.pow(2, source.timesGeoblastUsed));
+				};
+				move.onEffectiveness = function (typeMod, type, move) {
+					return typeMod + this.getEffectiveness('Rock', type);
+				};
+				move.onTryHit = function (target, source) {
+					this.attrLastMove('[still]');
+					this.add('-anim', source, "Fire Blast", source);
+					this.add('-anim', source, "Power Gem", target);
+				};
+				move.onHit = function (target, source) {
+					source.timesGeoblastUsed++;
+				};
+			}
 			if (move.id === 'naturepower' && name === 'trickster') {
 				move.name = 'Cometstorm';
 				move.category = 'Special';
@@ -3360,6 +3369,12 @@ exports.Formats = [
 					this.add('-anim', source, "Tail Slap", target);
 				};
 			}
+			if (move.id === 'swagger' && name === 'charlescarmichael') {
+				move.name = 'Bad Pun';
+				move.onHit = function (pokemon) {
+					pokemon.addVolatile('taunt');
+				};
+			}
 			if (move.id === 'protect' && name === 'crestfall') {
 				move.name = 'Final Hour';
 				move.onTryHit = function (pokemon) {
@@ -3435,7 +3450,7 @@ exports.Formats = [
 				move.basePower = 90;
 				move.critRatio = 2;
 			}
-			if (name === 'majorbling' && move.id === 'bulletpunch') {
+			if (move.id === 'bulletpunch' && name === 'majorbling') {
 				move.name = 'Focus Laser';
 				move.type = 'Electric';
 				move.category = 'Status';
@@ -3467,31 +3482,12 @@ exports.Formats = [
 				delete move.secondaries;
 				move.status = 'brn';
 			}
-			if (move.id === 'headcharge' && name === 'rekeri') {
-				move.name = 'Land Before Time';
-				move.basePower = 125;
-				move.type = 'Rock';
-				move.accuracy = 90;
-				move.secondaries = [{chance:10, volatileStatus:'flinch'}];
-			}
-			if (move.id === 'rockthrow' && name === 'timbuktu') {
-				move.name = 'Geoblast';
-				move.type = 'Fire';	// Not the other way round or STAB would be lost.
-				move.category = 'Special';
-				move.accuracy = true;
-				move.basePowerCallback = function (source, target) {
-					return (40 * Math.pow(2, source.timesGeoblastUsed));
-				};
-				move.onEffectiveness = function (typeMod, type, move) {
-					return typeMod + this.getEffectiveness('Rock', type);
-				};
+			if (move.id === 'spikes' && name === 'quotecs') {
+				move.name = 'Diversify';
+				move.self = {boosts: {atk:1, spd:1}};
 				move.onTryHit = function (target, source) {
 					this.attrLastMove('[still]');
-					this.add('-anim', source, "Fire Blast", source);
-					this.add('-anim', source, "Power Gem", target);
-				};
-				move.onHit = function (target, source) {
-					source.timesGeoblastUsed++;
+					this.add('-anim', source, "Eruption", source);
 				};
 			}
 			if (move.id === 'explosion' && name === 'trinitrotoluene') {
@@ -3665,6 +3661,12 @@ exports.Formats = [
 					};
 				}
 			}
+			if (move.id === 'naturepower' && name === 'imanalt') {
+				move.name = 'FREE GENV BH';
+				move.onHit = function (target, source) {
+					this.useMove('earthquake', source, target);
+				};
+			}
 			if (move.id === 'growl' && name === 'limi') {
 				move.name = 'Resilience';
 				move.onTryHit = function (target, source) {
@@ -3808,15 +3810,6 @@ exports.Formats = [
 		]
 	},
 	{
-		name: "Random LC",
-		section: "Other Metagames",
-
-		maxLevel: 5,
-		team: 'randomlc',
-		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod'],
-		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar', 'Misdreavus']
-	},
-	{
 		name: "Tier Shift",
 		section: "Other Metagames",
 
@@ -3894,56 +3887,6 @@ exports.Formats = [
 			'Munchlax', 'Onix', 'Pancham', 'Pawniard', 'Ponyta', 'Porygon', 'Pumpkaboo-Super', 'Scraggy', 'Slowpoke', 'Snivy',
 			'Snubbull', 'Spritzee', 'Staryu', 'Surskit', 'Timburr', 'Tirtouga', 'Vullaby', 'Vulpix', 'Zigzagoon', 'Shell Smash'
 		]
-	},
-	{
-		name: "Metronome",
-		section: 'Other Metagames',
-
-		ruleset: ['Team Preview 1v1'],
-		banlist: ['Huge Power', 'Pure Power', 'Sturdy', 'Sand Stream', 'Snow Warning', 'Poison Heal', 'Wonder Guard', 'Harvest', 'Flame Body',
-			'Cursed Body', 'Pressure', 'Poison Point', 'Poison Touch', 'Magic Bounce', 'Magic Guard', 'Iron Barbs', 'Rough Skin', 'Fur Coat',
-			'Sitrus Berry', 'Leftovers', 'Rocky Helmet', 'Berry Juice', 'Black Sludge', 'Focus Sash', 'Big Root', 'Oran Berry', 'Figy Berry',
-			'Mago Berry', 'Wiki Berry', 'Mago Berry', 'Aguav Berry', 'Iapapa Berry', 'Enigma Berry', 'Soul Dew', 'BrightPowder', 'Thick Club',
-			'Lucky Punch', 'Stick', 'Shell Bell', 'Moody', 'Cheek Pouch', 'Parental Bond', 'Imposter', 'Effect Spore', 'Static', 'Aftermath',
-			'Assault Vest','Shell Bell', 'Lax Incense', 'Oran Berry', 'Aerodactylite', 'Aggronite', 'Ampharosite', 'Blastiosite', 'Blazikenite',
-			'Charizardite X', 'Charizardite Y', 'Garchompite', 'Gardevoirite', 'Gyaradosite', 'Latiasite', 'Latiosite', 'Lucarionite',
-			'Tyranitarite', 'Venusaurite', 'Heracronite'
-		],
-		validateTeam: function (team, format) {
-			var template = this.getTemplate(team.species);
-			var problems = [];
-			if (team.length > 1) problems.push('You may only bring one Pokémon.');
-			if (team[0].level && team[0].level > 100) problems.push((team[0].name || team[0].species) + ' is higher than level 100.');
-			if (team[0].level && team[0].level < 100) problems.push((team[0].name || team[0].species) + ' is lower than level 100.');
-			return problems;
-		},
-		validateSet: function (set, format) {
-			var template = this.getTemplate(set.species);
-			var problems = [];
-			var baseStats = 0;
-			for (var i in template.baseStats) {
-				baseStats += template.baseStats[i];
-			}
-			if (baseStats > 600) problems.push('You are limited to Pokémon with a BST of 600 or lower by BST Clause.');
-			set.moves = ['metronome'];
-			return problems;
-		},
-	},
-	{
-		name: "350 Cup",
-		section: "Other Metagames",
-
-		mod: '350cup',
-		searchShow: false,
-		ruleset: ['Ubers', 'Evasion Moves Clause'],
-		banlist: ['Abra', 'Cranidos', 'Darumaka', 'Gastly', 'Pawniard', 'Smeargle', 'Spritzee', 'DeepSeaScale', 'DeepSeaTooth', 'Light Ball', 'Thick Club'],
-		validateSet: function (set) {
-			var template = Tools.getTemplate(set.species);
-			var item = this.getItem(set.item);
-			if (item.name === 'Eviolite' && Object.values(template.baseStats).sum() <= 350) {
-				return ['Eviolite is banned on Pokémon with 350 or lower BST.'];
-			}
-		}
 	},
 	{
 		name: "Averagemons",
@@ -4047,21 +3990,6 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'Same Type Clause', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod']
 	},
 	{
-		name: "Ubers Monotype",
-		section: "Monotype",
-
-		ruleset: ['Pokemon', 'Standard Ubers', 'Same Type Clause'],
-		banlist: []
-	},
-	{
-		name: "LC Monotype",
-		section: "Monotype",
-
-		maxLevel: 5,
-		ruleset: ['Pokemon', 'Standard', 'Little Cup', 'Same Type Clause'],
-		banlist: ['Dragon Rage', 'Sonic Boom', 'Swagger', 'LC Uber', 'Gligar']
-	},
-	{
 		name: "Hackmons Challenge Cup",
 		section: "Other Metagames",
 
@@ -4160,7 +4088,7 @@ exports.Formats = [
 	///////////////////////////////////////////////////////////////////
 
 	{
-		name: "[Gen 5] Smogon Doubles",
+		name: "[Gen 5] Doubles OU",
 		section: 'BW2 Doubles',
 		column: 3,
 

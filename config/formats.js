@@ -733,63 +733,63 @@ exports.Formats = [
 		ruleset: ['OU']
 	},
 	
-	// Parukian Tiers
+	// Kakuja Tiers
 	///////////////////////////////////////////////////////////////////
 	
 	{
-		name: "Parukia Ubers",
-		section: "Parukian Tiers",
-		mod: 'parukia',
+		name: "Kakuja Ubers",
+		section: "Kakuja Tiers",
+		mod: 'kakuja',
 
 		ruleset: ['Pokemon', 'Standard Ubers', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Ban Mod',],
 		banlist: ['Blue Orb', 'Red Orb']
 	},
 	{
-		name: "Parukia OU",
-		section: "Parukian Tiers",
-		mod: 'parukia',
+		name: "Kakuja OU",
+		section: "Kakuja Tiers",
+		mod: 'kakuja',
 
-		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Parukian Baton Pass Clause'],
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Kakuja Baton Pass Clause'],
 		banlist: ['Uber', 'Soul Dew', 'Blazikenite', 'Gengarite', 'Kangaskhanite', 'Mewtwonite X',  'Mewtwonite Y', 'Salamencite', 'Darkrai + Dark Void', 'Blaziken + Baton Pass']
 	},
 	{
-		name: "Parukia MU",
-		section: "Parukian Tiers",
-		mod: 'parukia',
+		name: "Kakuja MU",
+		section: "Kakuja Tiers",
+		mod: 'kakuja',
 
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
 		banlist: ['OU', 'Charizardite X', 'Galladite', 'Latiosite', 'Lucarionite', 'Mawilite', 'Metagrossite', 'Sablenite', 'Slowbronite']
 	},
 	{
-		name: "Parukia UU",
-		section: "Parukian Tiers",
-		mod: 'parukia',
+		name: "Kakuja UU",
+		section: "Kakuja Tiers",
+		mod: 'kakuja',
 
-		ruleset: ['Parukia MU'],
+		ruleset: ['Kakuja MU'],
 		banlist: ['MU','Drizzle', 'Drought', 'Shadow Tag', 'Alakazite', 'Altarianite', 'Charizardite Y', 'Diancite', 'Garchompite', 'Gardevoirite', 'Gyaradosite', 'Heracronite', 'Latiasite', 'Lopunnite', 'Medichamite', 'Pinsirite', 'Scizorite', 'Tyranitarite', 'Venusaurite']
 	},
 	{
-		name: "Parukia RU",
-		section: "Parukian Tiers",
-		mod: 'parukia',
+		name: "Kakuja RU",
+		section: "Kakuja Tiers",
+		mod: 'kakuja',
 
-		ruleset: ['Parukia UU'],
+		ruleset: ['Kakuja UU'],
 		banlist: ['UU', 'Absolite', 'Aerodactylite', 'Aggronite', 'Ampharosite', 'Beedrillite', 'Blastoisinite', 'Houndoominite', 'Manectite', 'Pidgeotite', 'Sceptilite', 'Sharpedonite', 'Swampertite']
 	},
 	{
-		name: "Parukia BU",
-		section: "Parukian Tiers",
-		mod: 'parukia',
+		name: "Kakuja BU",
+		section: "Kakuja Tiers",
+		mod: 'kakuja',
 
-		ruleset: ['Parukia RU'],
+		ruleset: ['Kakuja RU'],
 		banlist: ['RU', 'Abomasite', 'Banettite', 'Glalitite', 'Steelixite']
 	},	
 	{
-		name: "Parukia NU",
-		section: "Parukian Tiers",
-		mod: 'parukia',
+		name: "Kakuja NU",
+		section: "Kakuja Tiers",
+		mod: 'kakuja',
 
-		ruleset: ['Parukia BU'],
+		ruleset: ['Kakuja BU'],
 		banlist: ['BU', 'Audinite', 'Cameruptite']
 	},	
 	

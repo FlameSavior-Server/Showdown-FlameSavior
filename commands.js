@@ -2410,6 +2410,7 @@ var commands = exports.commands = {
                     break;
                 case 'eat':
                     var awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ';
+                    break;
                 default:
                     var awayName = user.name + ' - Ⓐⓦⓐⓨ';
             }

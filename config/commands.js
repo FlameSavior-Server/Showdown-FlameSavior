@@ -2355,7 +2355,7 @@ case 'sleeping':
 t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
 t2 = 'Sleeping';
 break;
-case 'fap':
+case 'fapping':
 t = 'Ⓕⓐⓟⓟⓘⓝⓖ';
 t2 = 'Fapping';
 break;

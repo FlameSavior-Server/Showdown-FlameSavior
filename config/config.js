@@ -160,7 +160,9 @@ exports.customavatars = {
 	//'userid': 'customavatar.png'
 	'mewsshoes': 'PI3Qugb.gif',
 	'sempiternus': '6GPEX9Vt.jpeg',
-	'brkenhpe': 'PI3Qugb.gif'
+	'brkenhpe': 'h3Tlks2o.png',
+	'brokenhope': 'PI3Qugb.gif',
+	'nightcloud': 'we22ofkl.png'
 };
 
 // Tournament announcements

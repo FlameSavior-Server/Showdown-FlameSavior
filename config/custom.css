@@ -1,3 +1,7 @@
+/**************
+* General CSS *
+**************/
+
 body {
     color: #FFFFFF;
     background: url("http://i.imgur.com/3KZfhGD.jpg");
@@ -10,6 +14,119 @@ body {
     background-color: #6EAEDA;
 }
 
+.logo {
+    opacity: 0;
+}
+
+.ps-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Tabbar Part */
+.maintabbarbottom {
+    background-color: rgb(190,190,190);
+    border-top: 1px solid #575757;
+    border-right: 0px solid #000000;
+    border-bottom: 1px solid #575757;
+    border-left: 0px solid #000000;
+}
+    
+.tabbar a.button.notifying {
+    background: url("http://i.imgur.com/tehpryL.png");
+    border: 1px solid #575757;
+}
+    
+.tabbar a.button.notifying:hover {
+    background: url("http://i.imgur.com/MkX5drf.png");
+    border: 1px solid #575757;
+}
+
+.tabbar a.button.cur, .tabbar a.button.cur:hover {
+    text-shadow: none;
+    font: 11px Verdana, Helvetica, Arial, sans-serif;
+    color: #000;
+    background:url("http://i.imgur.com/SRdPIN3.png");
+    border: 1px solid #575757;
+}
+
+.tabbar a.button {
+    text-shadow: none;
+    font: 11px Verdana, Helvetica, Arial, sans-serif;
+    color: #000;
+    background-color: #F2F2F2;
+    border: 1px solid #575757;
+    text-shadow: none;
+    z-index:1;
+}
+/* Tabbar Part ~end */
+
+/* Popup Part */
+.ps-popup {
+    background: url("http://i.imgur.com/jxOe6XC.png");
+}
+
+.popupmenu h3 {
+    color: #474747;
+}
+  
+.popupmenu button {
+    color: #292929;
+}
+  
+.popupmenu button:hover {
+    background: rgba(233, 233, 233, 0.7);
+}
+    
+.credits h2 {
+    color: #474747;
+}
+    
+a.subtle {
+    color: #474747;
+}
+    
+a.subtle:hover {
+    color: #000;
+}
+    
+.credits ul li p {
+    color: #474747;
+}
+/* Popup Part ~end */
+
+.username {
+    text-shadow: 1px 1px #CFCFCF;
+}
+
+.icon-user {
+    display: none;
+}
+
+p > em {
+    color: #000;
+}
+
+.closebutton, .minimizebutton {
+    color: #7A7A7C;
+}
+    
+.closebutton:hover {
+    color: #E97979;  
+}
+
+.minimizebutton:hover {
+    color: #ECBA6F;  
+}
+
+/*******************
+* General CSS ~end *
+*******************/
+
+
+/***********
+* Room CSS *
+***********/
+
 .ps-room.ps-room-light.scrollable {
     font-family: helvetica, arial, sans-serif;
     background: rgba(230, 240, 255, 0.7);
@@ -20,17 +137,42 @@ body {
     border-right: 1px solid #575757;
 }
 
-.mainmenuwrapper {
+.roomlist {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+.roomlist a.ilink {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    border: 1px solid #2E2E2E;
+    color: #001433;
+    background: #EEEEEE;
+}
+
+.roomlist a.ilink:hover {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    border: 1px solid #2E2E2E;
+    color: #001433;
+    background: #DFDFDF;
+}
+
+.userlist li button {
+    text-shadow: none;
+}
+
+.userlist {
     border-right: 1px solid #575757;
 }
 
-.battle-log {
-    background: url("http://i.imgur.com/OALLyrg.png") repeat;
+.infobox {
+    background: rgba(102, 136, 170, .075);
 }
 
-.pm-log {
-    background: url("http://i.imgur.com/jxOe6XC.png") repeat;
-    border: 1px solid #575757;
+.message-pm {
+    color: #00A0A0;
+}
+
+.highlighted {
+    background: #B3D3E8;
 }
 
 .chat-log.hasuserlist {
@@ -47,6 +189,46 @@ body {
     border-top: 1px solid #575757;
 }
 
+.chat small {
+    color: #001F2E;
+    text-shadow: 1px 1px #D4D4D5;
+}
+
+.notice > .infobox > strong > font {
+    color: #007AA3;
+}
+
+.notice > .infobox > font {
+    color: #00B2B2;
+}
+
+.notice > b > font {
+    color: #007AA3;
+}
+    
+.ladder th {
+    background: url("http://i.imgur.com/SRdPIN3.png");
+}
+
+/****************
+* Room CSS ~end *
+****************/
+
+
+/***************
+* MainMenu CSS *
+***************/
+
+/* PM Part */
+.pm-log {
+    background: url("http://i.imgur.com/jxOe6XC.png") repeat;
+    border: 1px solid #575757;
+}
+
+.pm-log > div {
+    border-right: 0px solid #000000;
+}
+
 .pm-log-add {
     background: #CFCFCF;
     border: 1px solid #575757;
@@ -54,18 +236,33 @@ body {
     background: url("http://i.imgur.com/SRdPIN3.png");
 }
 
-.ps-overlay {
-    background: rgba(230, 240, 255, 0.5)
+.pm-window.focused h3, .pm-window.focused h3:hover {
+    border: 1px solid #212121;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.8);
+    font-family: verdana, helvetica, arial, sans-serif;
 }
 
-.button.button {
-    text-shadow: none;
+.pm-window h3 {
+    border: 1px solid #212121;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.7);
+    font-family: verdana, helvetica, arial, sans-serif;
 }
 
-.logo {
-    opacity: 0;
+.pm-window h3:hover {
+    border: 1px solid #212121;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.8);
+    font-family: verdana, helvetica, arial, sans-serif;
 }
 
+.challenge {
+    border-bottom: none;
+}
+/* PM Part ~end */
+
+/* Menu Group Part */
 .battleform label {
     background: url("http://i.imgur.com/yFWeHx0.png") no-repeat scroll left center transparent;
     padding: 4px;
@@ -98,196 +295,75 @@ body {
     border-color: #212121;
 }
 
-div.roomlist {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-}
-
-.roomlist a.ilink {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    border: 1px solid #2E2E2E;
-    color: #001433;
-    background: #EEEEEE;
-    text-shadow: 1px 1px #EAEAEA;
-}
-
-.roomlist a.ilink:hover {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    border: 1px solid #2E2E2E;
-    color: #001433;
-    background: #DFDFDF;
-}
-
-.pm-window.focused h3,
-.pm-window.focused h3:hover {
-    border: 1px solid #212121;
-    color: #FFF;
-    background: rgba(0, 0, 0, 0.8);
-    font-family: verdana, helvetica, arial, sans-serif;
-}
-
-.pm-window h3 {
-    border: 1px solid #212121;
-    color: #FFF;
-    background: rgba(0, 0, 0, 0.7);
-    font-family: verdana, helvetica, arial, sans-serif;
-}
-
-.pm-window h3:hover {
-    border: 1px solid #212121;
-    color: #FFF;
-    background: rgba(0, 0, 0, 0.8);
-    font-family: verdana, helvetica, arial, sans-serif;
-}
-
-button.astext {
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-}
-
-button.astext:hover {
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-}
-
-.maintabbarbottom {
-    background-color: rgb(190,190,190);
-    border-top: 1px solid #575757;
-    border-right: 0px solid #000000;
-    border-bottom: 1px solid #575757;
-    border-left: 0px solid #000000;
-}
-
-a.button.notifying.closable, .tabbar a.button.notifying {
-    background: url("http://i.imgur.com/tehpryL.png");
-    border: 1px solid #575757;
-}
-
-a.button.notifying.closable:hover, .tabbar a.button.notifying:hover {
-    background: url("http://i.imgur.com/MkX5drf.png");
-    border: 1px solid #575757;
-}
-
-a.button.notifying.closable:active, .tabbar a.button.notifying:active {
-    background: url("http://i.imgur.com/MkX5drf.png?1");
-    border: 1px solid #575757;
-}
-
-.tabbar a.button.cur,
-.tabbar a.button.cur:hover {
-    text-shadow: none;
-    font: 11px Verdana, Helvetica, Arial, sans-serif;
-    color: #000;
-    background:url("http://i.imgur.com/SRdPIN3.png");
-    border: 1px solid #575757;
-}
-
-.tabbar a.button {
-    text-shadow: none;
-    font: 11px Verdana, Helvetica, Arial, sans-serif;
-    color: #000;
-    background-color: #F2F2F2;
-    border: 1px solid #575757;
-    text-shadow: none;
-    z-index:1;
-}
-
-.ps-room.ps-room-opaque {
-    background: rgba(240, 240, 240, 0.8);
-    color: #000;
-    border-right: 1px solid #575757;
-}
-
-div.trainer > strong {
-    color: #323841;
-}
-.battle-log h2 {
-    background: #808080;
-    color: #FFF;
-    border: 1px solid #000000;
-}
-
-.userlist li button {
-    text-shadow: none;
-}
-
-ul.userlist {
-    border-right: 1px solid #575757;
-}
-
-span.username {
-    text-shadow: 1px 1px #CFCFCF;
-}
-
-div.pm-log > div {
-    border-right: 0px solid #000000;
-}
-
-.icon-user {
-    display: none;
-}
-
-button.select.formatselect:hover,
-button.select.teamselect:hover {
+.select {
     background: #E3E3E3;
 }
 
-button.select.teamselect.preselected:hover {
-    opacity: 0.85;
+.select.preselected, .select.preselected:disabled, .select.preselected:hover, .select.preselected:disabled:hover, .select:disabled, .select:disabled:hover {
+    opacity: 0.95;
+}
+/* Menu Group Part ~end */
+
+.mainmenufooter a:link, .mainmenufooter a:visited {
+    color: #C0C6C9;
+    text-decoration: none;
+    font-weight: bold;
+}
+    
+.mainmenufooter a:hover {
+    color: #FFF;
 }
 
-.infobox {
-    background: rgba(102, 136, 170, .075);
+/********************
+* MainMenu CSS ~end *
+********************/
+
+
+
+/*************
+* Battle CSS *
+*************/
+
+.battle-log-add {
+    background:url("http://i.imgur.com/2dyqgwD.png");
+    border-top: 1px solid #575757;   
+    border-left: 1px solid #575757;  
 }
 
-.ps-popup {
-    background: url("http://i.imgur.com/jxOe6XC.png");
+.battle-log {
+    border-left: 1px solid #575757;  
 }
 
-.popupmenu h3 {
-    color: #474747;
-}
-  
-.popupmenu button {
-    color: #292929;
-}
-  
-.popupmenu button:hover {
-    background: rgba(233, 233, 233, 0.7);
+.battle {
+    border-bottom: 1px solid #575757;   
+    background: url("http://i.imgur.com/OALLyrg.png") repeat;
 }
 
-span.message-pm {
-    color: #00A0A0;
+.battle-log h2 {
+    background: #808080;
+    color: #FFF;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
 }
 
-div.chat small {
-    color: #001F2E;
-    text-shadow: 1px 1px #D4D4D5;
-}
+/******************
+* Battle CSS ~end *
+******************/
 
-p > em {
-    color: #000000;
-}
 
-.highlighted {
-    background: #B3D3E8;
-}
 
 /*****************
 * Tournament CSS *
 *****************/
 
-div.ps-popup.tournament-popout-bracket > div.tournament-bracket-tree {
+.ps-popup.tournament-popout-bracket > div.tournament-bracket-tree {
     background: url("http://i.imgur.com/jxOe6XC.png");
     background-size: auto auto;
     background-repeat: repeat;
     background-position: top;
 }
 
-div.tournament-tools.active {
+.tournament-tools.active {
     background: #DDD;
     border-top: 1px solid #575757;
     border-bottom: 1px solid #575757;
@@ -313,36 +389,19 @@ div.tournament-tools.active {
     border-top: 1px solid #575757;
 }
 
+.tournament-bracket.tournament-bracket-overflowing {
+    background: url("http://i.imgur.com/WCEwpwL.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+
+
 /**********************
 * Tournament CSS ~end *
 **********************/
-    
-.challenge {
-    border-bottom: none;
-}
 
-div.notice > div.infobox > strong > font {
-    color: #007AA3;
-}
 
-div.notice > div.infobox > font {
-    color: #00B2B2;
-}
-
-div.notice > b > font {
-    color: #007AA3;
-}
-
-div.mainmenufooter a:link,
-div.mainmenufooter a:hover,
-div.mainmenufooter a:visited {
-    color: #C0C6C9;
-    text-decoration: none;
-}
-
-.ps-overlay {
-    background: rgba(0, 0, 0, 0.3);
-}
 
 /***********************
 * Broadcast CSS ~start *
@@ -402,146 +461,94 @@ div.mainmenufooter a:visited {
 * Broadcast CSS ~end *
 *********************/
 
+
+
 /*************************
 * Teambuilder CSS ~start *
 *************************/
+    
+.teamchartbox {
+    border-top: 1px solid #2E2E2E;
+}
 
-.teambuilder-results h3, .teambuilder-results .utilichart h3 {
-    background: rgba(166, 230, 249, 0.9);
-    color: #212121;
-    border: 1px solid #4DBCEC;
-    text-shadow: 1px 1px 1px #7896B8;
-}
-    
-.setchart-nickname {
-    background: rgba(166, 230, 249, 0.9);
-    border: 1px solid #4DBCEC;
-}
-    
-.setchart-nickname label, .setchart label {
-    color: #212121;
-    text-shadow: 1px 1px 1px #7896B8;
-}
-    
 .setchart {
-    background: rgba(166, 230, 249, 0.9);
-    border: 1px solid #4DBCEC;
+    border: 1px solid #2E2E2E;
+    background: #DFDFDF;
 }
     
-.setdetails, .setstats {
-    border: 1px solid #4DBCEC;
-    color: #212121;
-    text-shadow: 1px 1px 1px #7896B8;
-    background: #EFFBFF;
+.setchart-nickname {    
+    border: 1px solid #2E2E2E;    
+    background: #DFDFDF;
 }
     
-.setdetails:hover, .setstats:hover {
-    border: 1px solid #5BC3F0;
+.setchart label, .setchart-nickname label {
+    text-shadow: 1px 1px #EAEAEA;
+    color: #001433;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
 }
     
-.setstats:focus, .setdetails:focus {
-    border: 2px solid #86D6F9;
+.teambuilder-results h3, .teambuilder-results .utilichart h3 {
+    background: url("http://i.imgur.com/SRdPIN3.png");
+    border: 1px solid #2E2E2E;
+    text-shadow: 1px 1px #EAEAEA;
+    color: #001433;
 }
     
-.setstats .statrow-head em {
-    color: #303030;
-    text-shadow: 1px 1px 1px #7896B8;
+.teambuilder-results .firstresult a {
+    background: url("http://i.imgur.com/SRdPIN3.png");
+    border: 1px solid #505151;
 }
     
-.setchart input:focus, .setchart-nickname input:focus, .statform input.inputform:focus {
-    outline: 0px none;
-    border: 1px solid #4DBCEC;
-    box-shadow: 0px 1px 2px #86D6F9 inset, 0px 0px 5px #86D6F9;
-    background: none repeat scroll 0% 0% #FFF;
-}
-    
-.setchart input, .setchart-nickname input, .statform input.inputform {
-    border: 1px solid #4DBCEC;
-    color: #212121;
-    text-shadow: 1px 1px 1px #7896B8;
-    background: #EFFBFF;
-}
-    
-.setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover {
-    border: 1px solid #5BC3F0;
-}
-    
-.teambuilder-results .result a:hover, .teambuilder-results .firstresult a {
-    background: #A0E6F9;
-    border: 1px solid #4DBCEC;
-}
-    
-.teambuilder-results .firstresult a:hover {
-    background: #A0E6F9;
-    border: 1px solid #5BC3F0;
-}
-    
-.setmenu button {
-    color: #212121;
-    text-shadow: 1px 1px 1px #7896B8;
-}
-    
-.setmenu button:hover {
-    background: #A0E6F9;
-    border: 1px solid #4DBCEC;
-    border-bottom: none;
-    color: #212121;
-    text-shadow: 1px 1px 1px #7896B8;
-}
-    
-.utilichart .labelcol em, .utilichart .widelabelcol em, .utilichart .pplabelcol em, .utilichart .statcol em, .utilichart .bstcol em {
-    color: #606060;
-}
-    
-.utilichart .movedesccol, .utilichart .itemdesccol, .utilichart .abilitydesccol {
-    color: #505050;
-}
-    
-.utilichart .numcol {
-    color: #404040;
-}
-    
-.utilichart b {
-    color: #5BB0E6;
+.teambuilder-results .result a:hover, .teambuilder-results .firstresult a:hover {
+    background: url("http://i.imgur.com/SRdPIN3.png");
+    border: 1px solid #2E2E2E;
 }
     
 .teambar button, .teambar button:disabled, .teambar button:disabled:hover {
-    background: rgba(166, 230, 249, 0.9);
-    border: 1px solid #4DBCEC;
-    color: #212121;
-    text-shadow: 1px 1px 1px #7896B8;
+    background: url("http://i.imgur.com/EGKEycv.png?1");
+    border: 1px solid #2E2E2E;
 }
     
 .teambar button:hover {
-    background: rgba(166, 230, 249, 0.9);
-    border: 1px solid #5BC3F0;
+    background: #EEEEEE;
+    border: 1px solid #2E2E2E;
 }
     
-.teamchartbox {
-    border-top: 1px solid #4DBCEC;
+.utilichart .itemdesccol, .utilichart .movedesccol, .utilichart .labelcol em, .utilichart .widelabelcol em, .utilichart .pplabelcol em, .utilichart .statcol em, .utilichart .bstcol em, .utilichart .abilitydesccol, .utilichart .numcol {
+    color: #5B5B5B;
 }
     
-.teamchart li.format-select select, select[name="nature"] {
-    background: rgba(166, 230, 249, 0.9);
-    border: 1px solid #4DBCEC;
+.utilichart b {
+    color: #3B98C0;
+}
+    
+.setmenu button {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    padding: 3px 6px;
+}
+    
+.setmenu button:hover {
+    background: url("http://i.imgur.com/SRdPIN3.png");
+    border: 1px solid #2E2E2E;
 }
     
 .majorbutton {
-    background: rgba(166, 230, 249, 0.9);
-    border: 1px solid #4DBCEC;
-    color: #212121;
-    text-shadow: 1px 1px 1px #7896B8;
+    background: url("http://i.imgur.com/SRdPIN3.png");
+    border: 1px solid #2E2E2E;
+    text-shadow: 1px 1px #EAEAEA;
+    color: #001433;
 }
     
 .majorbutton:hover {
-    background: rgba(166, 230, 249, 0.9);
-    border: 1px solid #5BC3F0;
-    color: #212121;
-    text-shadow: 1px 1px 1px #7896B8;
+    background: #EEEEEE;
+    border: 1px solid #2E2E2E;
 }
+
 /***********************
 * Teambuilder CSS ~end *
 ***********************/
+
+
 
 /*********************
 * Custom backgrounds *
@@ -589,6 +596,13 @@ div.mainmenufooter a:visited {
 * Custom backgrounds ~end *
 **************************/
 
+
+
+/*****************
+* Custom Buttons *
+*****************/
+
+/* nofill buttons */
 .btn-nofill {
     background: rgba(0, 0, 0, 0);
     border: none;
@@ -642,58 +656,9 @@ div.mainmenufooter a:visited {
     text-shadow: 1px 1px 1px #375735;
     cursor: pointer;
 }
+/* nofill buttons ~end*/
 
-.closebutton, .minimizebutton {
-    color: #7A7A7C;
-}
-    
-.closebutton:hover {
-    color: #E97979;  
-}
-
-.minimizebutton:hover {
-    color: #ECBA6F;  
-}
-
-/***********************
-* Fake gradient ~start *
-***********************/
-
-.battle-log-add {
-    background:url("http://i.imgur.com/2dyqgwD.png");
-    border-top: 1px solid #575757;   
-    border-left: 1px solid #575757;  
-}
-
-.battle-log {
-    border-left: 1px solid #575757;  
-}
-
-.battle {
-    border-bottom: 1px solid #575757;   
-}
-
-.tournament-bracket.tournament-bracket-overflowing {
-    background: url("http://i.imgur.com/WCEwpwL.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 1;
-}
-
-.battle-log h2 {
-    background: #808080;
-    color: #FFF;
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
-}
-/*********************
-* Fake gradient ~end *
-*********************/
-
-/*******************
-* Coloured Buttons *
-*******************/
-
+/* Colored Buttons */
 .green-btn {
   background: #4A7648;
   border: 1px solid #375735;
@@ -855,11 +820,9 @@ div.mainmenufooter a:visited {
   padding: 2px 2px 2px 2px;
   font-family: helvetica, arial, sans-serif;
 }
+/* Colored Buttons ~end */
 
-/***********************
-* Social Media buttons *
-***********************/
-
+/* Social Media buttons */
 .button-donate2, .button-donate2:hover  {
     cursor: pointer;
     width:120px;
@@ -907,10 +870,17 @@ div.mainmenufooter a:visited {
     background: url("http://i.imgur.com/rtym81q.png?1") no-repeat;
     border:none;
 }
+/* Social Media buttons ~end */
 
-/**************************
-* Hydrocity Roomintro CSS *
-**************************/
+/**********************
+* Custom Buttons ~end *
+**********************/
+
+
+
+/****************
+* Roomintro CSS *
+****************/
 
 .hydro-txt {
   color: #4DAFF0;
@@ -919,6 +889,6 @@ div.mainmenufooter a:visited {
   text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000;
 }
 
-/*******************************
-* Hydrocity Roomintro CSS ~end *
-*******************************/
+/*********************
+* Roomintro CSS ~end *
+*********************/

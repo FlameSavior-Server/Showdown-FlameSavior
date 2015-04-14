@@ -1333,8 +1333,8 @@ exports.BattleFormatsData = {
 		tier: "LC"
 	},
 	porygon2: {
-		randomBattleMoves: ["triattack","icebeam","recover","toxic","thunderwave","thunderbolt","shadowball","trickroom"],
-		randomDoubleBattleMoves: ["triattack","icebeam","discharge","shadowball","trickroom","protect","recover"],
+		randomBattleMoves: ["triattack","icebeam","recover","toxic","thunderwave","thunderbolt"],
+		randomDoubleBattleMoves: ["triattack","icebeam","discharge","shadowball","protect","recover"],
 		tier: "UU"
 	},
 	porygonz: {
@@ -2979,7 +2979,7 @@ exports.BattleFormatsData = {
 	},
 	huntail: {
 		randomBattleMoves: ["shellsmash","waterfall","icebeam","batonpass","suckerpunch"],
-		randomDoubleBattleMoves: ["shellsmash","return","hydropump","batonpass","suckerpunch","protect"],
+		randomDoubleBattleMoves: ["shellsmash","waterfall","icefang","batonpass","suckerpunch","protect"],
 		tier: "PU"
 	},
 	gorebyss: {
@@ -3922,7 +3922,7 @@ exports.BattleFormatsData = {
 	},
 	servine: {
 		randomBattleMoves: ["leafstorm","hiddenpowerfire","substitute","leechseed","hiddenpowerice","gigadrain"],
-		tier: "NFE"
+		tier: "PU"
 	},
 	serperior: {
 		randomBattleMoves: ["leafstorm","dragonpulse","hiddenpowerfire","substitute","leechseed","glare"],
@@ -4680,7 +4680,7 @@ exports.BattleFormatsData = {
 	},
 	cobalion: {
 		randomBattleMoves: ["closecombat","ironhead","swordsdance","substitute","stoneedge","voltswitch","hiddenpowerice","taunt","stealthrock"],
-		randomDoubleBattleMoves: ["closecombat","ironhead","swordsdance","substitute","stoneedge","voltswitch","hiddenpowerice","thunderwave","protect","helpinghand"],
+		randomDoubleBattleMoves: ["closecombat","ironhead","swordsdance","substitute","stoneedge","thunderwave","protect"],
 		tier: "RU"
 	},
 	terrakion: {
@@ -4690,7 +4690,7 @@ exports.BattleFormatsData = {
 	},
 	virizion: {
 		randomBattleMoves: ["swordsdance","closecombat","leafblade","stoneedge","calmmind","focusblast","gigadrain","hiddenpowerice","substitute"],
-		randomDoubleBattleMoves: ["taunt","closecombat","focusblast","hiddenpowerice","stoneedge","leafblade","gigadrain","substitute","synthesis","protect","helpinghand"],
+		randomDoubleBattleMoves: ["taunt","closecombat","stoneedge","leafblade","swordsdance","synthesis","protect"],
 		tier: "RU"
 	},
 	tornadus: {

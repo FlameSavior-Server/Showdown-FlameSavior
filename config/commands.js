@@ -2340,6 +2340,7 @@ this.sendReplyBox('<font size="5" color="white"><b>The Parukian Guidelines</b></
        drunk: 'away',
        skype: 'away',
        busy: 'away',
+       fapping: 'away',
        afk: 'away',
        away: function(target, room, user, connection, cmd) {
             // unicode away message idea by Siiilver
@@ -2353,6 +2354,10 @@ break;
 case 'sleeping':
 t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
 t2 = 'Sleeping';
+break;
+case 'fapping':
+t = 'Ⓕⓐⓟⓟⓘⓝⓖ';
+t2 = 'Fapping';
 break;
 case 'sleep':
 t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';

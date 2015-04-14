@@ -659,14 +659,14 @@ exports.BattleMovedex = {
 	"aurorabeam": {
 		num: 62,
 		accuracy: 100,
-		basePower: 65,
+		basePower: 90,
 		category: "Special",
 		desc: "Has a 10% chance to lower the target's Attack by 1 stage.",
 		shortDesc: "10% chance to lower the foe's Attack by 1.",
 		id: "aurorabeam",
 		name: "Aurora Beam",
 		pp: 20,
-		priority: 0,
+		priority: 1,
 		flags: {protect: 1, mirror: 1},
 		secondary: {
 			chance: 10,

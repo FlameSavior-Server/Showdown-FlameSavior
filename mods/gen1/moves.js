@@ -105,7 +105,7 @@ exports.BattleMovedex = {
 	},
 	bind: {
 		inherit: true,
-		affectedByImmunities: false,
+		ignoreImmunity: true,
 		volatileStatus: 'partiallytrapped',
 		self: {
 			volatileStatus: 'partialtrappinglock'
@@ -199,7 +199,7 @@ exports.BattleMovedex = {
 	},
 	counter: {
 		inherit: true,
-		affectedByImmunities: false,
+		ignoreImmunity: true,
 		willCrit: false,
 		damageCallback: function (pokemon, target) {
 			// Counter mechanics on gen 1 might be hard to understand.
@@ -368,7 +368,7 @@ exports.BattleMovedex = {
 	},
 	glare: {
 		inherit: true,
-		affectedByImmunities: false
+		ignoreImmunity: true
 	},
 	growth: {
 		inherit: true,
@@ -574,7 +574,7 @@ exports.BattleMovedex = {
 	},
 	nightshade: {
 		inherit: true,
-		affectedByImmunities: false,
+		ignoreImmunity: true,
 		basePower: 1
 	},
 	poisonsting: {
@@ -713,12 +713,12 @@ exports.BattleMovedex = {
 	},
 	sandattack: {
 		inherit: true,
-		affectedByImmunities: false,
+		ignoreImmunity: true,
 		type: "Normal"
 	},
 	seismictoss: {
 		inherit: true,
-		affectedByImmunities: false,
+		ignoreImmunity: true,
 		basePower: 1
 	},
 	selfdestruct: {
@@ -759,25 +759,10 @@ exports.BattleMovedex = {
 		}
 	},
 	struggle: {
-		num: 165,
-		accuracy: 100,
-		basePower: 50,
-		category: "Physical",
-		desc: "Deals typeless damage to one adjacent foe at random. If this move was successful, the user loses 1/2 of the damage dealt, rounded half up; the Ability Rock Head does not prevent this. This move can only be used if none of the user's known moves can be selected. Makes contact.",
-		shortDesc: "User loses half of the damage dealt as recoil.",
-		id: "struggle",
-		name: "Struggle",
-		pp: 1,
-		noPPBoosts: true,
-		priority: 0,
-		flags: {contact: 1, protect: 1},
-		beforeMoveCallback: function (pokemon) {
+		inherit: true,
+		onModifyMove: function (move, pokemon) {
 			this.add('-activate', pokemon, 'move: Struggle');
-		},
-		recoil: [1, 2],
-		secondary: false,
-		target: "normal",
-		type: "Normal"
+		}
 	},
 	substitute: {
 		num: 164,
@@ -867,7 +852,7 @@ exports.BattleMovedex = {
 	},
 	superfang: {
 		inherit: true,
-		affectedByImmunities: false,
+		ignoreImmunity: true,
 		basePower: 1
 	},
 	thunder: {
@@ -908,7 +893,7 @@ exports.BattleMovedex = {
 	wrap: {
 		inherit: true,
 		accuracy: 85,
-		affectedByImmunities: false,
+		ignoreImmunity: true,
 		volatileStatus: 'partiallytrapped',
 		self: {
 			volatileStatus: 'partialtrappinglock'

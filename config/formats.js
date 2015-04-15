@@ -155,7 +155,8 @@ exports.Formats = [
 		gameType: 'doubles',
 		ruleset: ['Pokemon', 'Standard Doubles', 'Team Preview'],
 		banlist: ['Arceus', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo',
-			'Palkia', 'Rayquaza', 'Reshiram', 'Xerneas', 'Yveltal', 'Zekrom', 'Salamencite', 'Soul Dew', 'Dark Void'
+			'Palkia', 'Rayquaza', 'Reshiram', 'Xerneas', 'Yveltal', 'Zekrom', 'Salamencite', 'Soul Dew', 'Dark Void',
+			'Gravity ++ Grass Whistle', 'Gravity ++ Hypnosis', 'Gravity ++ Lovely Kiss', 'Gravity ++ Sing', 'Gravity ++ Sleep Powder', 'Gravity ++ Spore'
 		]
 	},
 	{
@@ -323,7 +324,7 @@ exports.Formats = [
 				'Sableye':1, 'Smeargle':1
 			};
 			var restrictedAbilities = {
-				'Huge Power':1, 'Imposter':1, 'Parental Bond':1, 'Pure Power':1, 'Shadow Tag':1, 'Wonder Guard':1
+				'Arena Trap':1, 'Huge Power':1, 'Imposter':1, 'Parental Bond':1, 'Pure Power':1, 'Shadow Tag':1, 'Wonder Guard':1
 			};
 			return function (set, teamHas) {
 				var format = this.getFormat('inheritance');
@@ -1434,6 +1435,9 @@ exports.Formats = [
 			if (name === 'feliburn') {
 				this.add('c|%Feliburn|Come on!');
 			}
+			if (name === 'galbia') {
+				this.add('c|%galbia|prepare for my beautiful display of pure italian skill');
+			}
 			if (name === 'jellicent') {
 				this.add('c|%Jellicent|~(^.^)~');
 			}
@@ -1997,6 +2001,9 @@ exports.Formats = [
 			if (name === 'feliburn') {
 				this.add('c|%Feliburn|' + ['BHUWUUU!', 'I like shorts! They\'re comfy and easy to wear!'][this.random(2)]);
 			}
+			if (name === 'galbia') {
+				this.add('c|%galbia|' + ['azz e mo', 'rip luck :('][this.random(2)]);
+			}
 			if (name === 'jellicent') {
 				this.add('c|%Jellicent|X_X');
 			}
@@ -2111,6 +2118,16 @@ exports.Formats = [
 							pokemon.disableMove(moves[i].id, false);
 							moves[i].disabled = true;
 						}
+					}
+				}
+			}
+			// Enforce taunt disabling custom moves.
+			if (pokemon.volatiles['taunt']) {
+				var moves = pokemon.moveset;
+				for (var i = 0; i < moves.length; i++) {
+					if (this.getMove(moves[i].id).category === 'Status' && !moves[i].disabled) {
+						pokemon.disableMove(moves[i].id, false);
+						moves[i].disabled = true;
 					}
 				}
 			}
@@ -2309,7 +2326,7 @@ exports.Formats = [
 				move.category = 'Special';
 				move.type = 'Psychic';
 				move.negateSecondary = true;
-				move.affectedByImmunities = false;
+				move.ignoreImmunity = true;
 				delete move.secondaries;
 				move.onTryHit = function (target, pokemon) {
 					this.attrLastMove('[still]');
@@ -2459,7 +2476,7 @@ exports.Formats = [
 			}
 			if (move.id === 'triattack' && name === 'ascriptmaster') {
 				move.name = 'Spectrum Beam';
-				move.affectedByImmunities = false;
+				move.ignoreImmunity = true;
 				move.basePower = 8;
 				move.critRatio = 1;
 				move.accuracy = 95;
@@ -2516,7 +2533,7 @@ exports.Formats = [
 				move.onHit = function (pokemon) {
 					pokemon.addVolatile('confusion');
 				};
-				move.affectedByImmunities = false;
+				move.ignoreImmunity = true;
 				move.type = 'Dark';
 			}
 			if (move.id === 'bugbuzz' && name === 'beowulf') {
@@ -2685,9 +2702,7 @@ exports.Formats = [
 					this.attrLastMove('[still]');
 					this.add('-anim', source, "Giga Drain", target);
 				};
-				if (move.type === 'Ground') {
-					move.affectedByImmunities = false;
-				}
+				move.ignoreImmunity = {'Ground': true};
 			}
 			if (move.id === 'partingshot' && name === 'hippopotas') {
 				move.name = 'Hazard Pass';
@@ -3244,7 +3259,7 @@ exports.Formats = [
 					target.ignore['Ability'] = true;
 				};
 				move.accuracy = true;
-				move.affectedByImmunities = false;
+				move.ignoreImmunity = true;
 				move.ignoreDefensive = true;
 				move.ignoreEvasion = true;
 			}
@@ -3419,6 +3434,22 @@ exports.Formats = [
 						this.add('c|%Feliburn|Show me your moves!');
 					};
 				}
+			}
+			if (move.id === 'highjumpkick' && name === 'galbia') {
+				move.name = 'Kibitz';
+				move.basePower = 110;
+				move.accuracy = 100;
+				delete move.onMoveFail;
+				move.onHit = function (target, source) {
+					var result = this.random(100);
+					var chance = source.hasAbility('serenegrace') ? 60 : 30;
+					var triggerFlinch = result < chance;
+					if (this.willMove(target) && result < chance) {
+						target.addVolatile('flinch');
+					} else if (target.hp !== 0 && !target.newlySwitched) {
+						this.damage(source.maxhp / 3, source, source, 'Kibitz');
+					}
+				};
 			}
 			if (move.id === 'psychup' && name === 'hugendugen') {
 				move.name = 'Policy Decision';
@@ -3804,9 +3835,9 @@ exports.Formats = [
 		section: "Other Metagames",
 
 		ruleset: ['Pokemon', 'Standard', 'Baton Pass Clause', 'Swagger Clause', 'Same Type Clause', 'Team Preview'],
-		banlist: ['Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh',
+		banlist: ['Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Dialga', 'Giratina', 'Giratina-Origin', 'Greninja', 'Groudon', 'Ho-Oh',
 			'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Talonflame', 'Xerneas', 'Yveltal', 'Zekrom',
-			'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite', 'Shaymin-Sky', 'Slowbronite', 'Soul Dew'
+			'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Metagrossite', 'Salamencite', 'Shaymin-Sky', 'Slowbronite', 'Soul Dew'
 		]
 	},
 	{
@@ -3895,9 +3926,9 @@ exports.Formats = [
 		mod: 'averagemons',
 		searchShow: false,
 		ruleset: ['Pokemon', 'Standard', 'Baton Pass Clause', 'Evasion Abilities Clause', 'Swagger Clause', 'Team Preview'],
-		banlist: ['Gothita', 'Gothorita', 'Gothitelle', 'Sableye', 'Shedinja', 'Smeargle',
+		banlist: ['Sableye', 'Shedinja', 'Smeargle',
 			'DeepSeaScale', 'DeepSeaTooth', 'Eviolite', 'Gengarite', 'Kangaskhanite', 'Light Ball', 'Mawilite', 'Medichamite', 'Soul Dew', 'Thick Club',
-			'Huge Power', 'Pure Power'
+			'Arena Trap', 'Huge Power', 'Pure Power', 'Shadow Tag'
 		]
 	},
 	{

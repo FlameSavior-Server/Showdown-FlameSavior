@@ -162,6 +162,7 @@ exports.customavatars = {
 	'sempiternus': '6GPEX9Vt.jpeg',
 	'brkenhpe': 'PI3Qugb.gif',
 	'brokenhope': 'PI3Qugb.gif',
+	'awomanscorned': 't2Ljm3.png',
 	'nightcloud': 'we22ofkl.png'
 };
 

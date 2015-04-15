@@ -7096,7 +7096,7 @@ exports.commands = {
 			'Click <a href="http://mercilessleague.weebly.com/">here</a> to see our website<br />' +
 			'Click <a href="https://docs.google.com/document/d/1OTP9JDz2Q6z6oFnvy2-jRH5o9XdFwZaJBU-ndRWpgIM/edit"> here </a>for rules and registering'
 		);
-	}
+	},
 	
         bruh: function (target, room, user) {
                 if (room.id !== 'lobby') if (!this.canBroadcast()) return;

@@ -163,7 +163,7 @@ exports.customavatars = {
 	'professoroakjr': 'tDRs344.gif',
 	'foolizanagi': 'oUwYklr.png',
 	'nickoop': 'p0G272x.png',
-	'theusd': 'PI3Qugb.gif',
+	'brokenhope': 'PI3Qugb.gif',
 	'blazethesamurai': 'robin__f__icon_by_milkteafairy-d7u748a.gif',
 	'pixelblock': 'oQVpdtI.gif',
 	'frage': 'HVJw86I.png',

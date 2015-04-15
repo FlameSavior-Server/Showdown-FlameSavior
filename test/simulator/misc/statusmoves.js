@@ -31,5 +31,32 @@ describe('Most status moves', function () {
 		battle.choose('p2', 'switch 5');
 		assert.strictEqual(battle.p2.active[0].boosts['accuracy'], -1);
 	});
+
+	it('should not ignore type immunities', function () {
+		battle = BattleEngine.Battle.construct();
+		battle.join('p1', 'Guest 1', 1, [{species: "Smeargle", ability: 'compoundeyes', item: 'widelens', moves: ['thunderwave', 'willowisp', 'poisongas', 'toxic']}]);
+		battle.join('p2', 'Guest 2', 1, [
+			{species: "Landorus", ability: 'sandforce', moves: ['bulkup']},
+			{species: "Zapdos", ability: 'pressure', moves: ['charge']},
+			{species: "Heatran", ability: 'flashfire', moves: ['sleeptalk']},
+			{species: "Muk", ability: 'stickyhold', moves: ['sleeptalk']}
+		]);
+		battle.commitDecisions();
+		battle.choose('p1', 'move 1');
+		battle.choose('p2', 'move 1');
+		assert.strictEqual(battle.p2.active[0].status, '');
+		battle.choose('p1', 'move 1');
+		battle.choose('p2', 'switch 2');
+		assert.strictEqual(battle.p2.active[0].status, '');
+		battle.choose('p1', 'move 2');
+		battle.choose('p2', 'switch 3');
+		assert.strictEqual(battle.p2.active[0].status, '');
+		battle.choose('p1', 'move 3');
+		battle.choose('p2', 'switch 4');
+		assert.strictEqual(battle.p2.active[0].status, '');
+		battle.choose('p1', 'move 4');
+		battle.choose('p2', 'move 1');
+		assert.strictEqual(battle.p2.active[0].status, '');
+	});
 });
 

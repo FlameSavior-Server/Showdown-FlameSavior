@@ -1255,6 +1255,7 @@ User = (function () {
 	};
 	User.prototype.doWithMMR = function (formatid, callback) {
 		var self = this;
+		var userid = this.userid;
 		formatid = toId(formatid);
 
 		// this should relieve login server strain
@@ -1266,7 +1267,7 @@ User = (function () {
 		}
 		LoginServer.request('mmr', {
 			format: formatid,
-			user: this.userid
+			user: userid
 		}, function (data, statusCode, error) {
 			var mmr = 1000;
 			error = (error || true);
@@ -1276,7 +1277,7 @@ User = (function () {
 					return;
 				}
 				mmr = parseInt(data, 10);
-				if (!isNaN(mmr)) {
+				if (!isNaN(mmr) && self.userid === userid) {
 					error = false;
 					self.mmrCache[formatid] = mmr;
 				} else {

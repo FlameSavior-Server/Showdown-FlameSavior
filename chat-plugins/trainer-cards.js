@@ -7097,4 +7097,10 @@ exports.commands = {
 			'Click <a href="https://docs.google.com/document/d/1OTP9JDz2Q6z6oFnvy2-jRH5o9XdFwZaJBU-ndRWpgIM/edit"> here </a>for rules and registering'
 		);
 	}
+	
+        bruh: function (target, room, user) {
+                if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+                this.sendReplyBox('<center><img src=http://new2.fjcdn.com/thumbnails/comments/Quot+seriously+bruh+you+need+to+get+some+more+of+that+_c4b5f34ad5e7a69ad9113f170f1ca22d.gif><img src=https://media2.giphy.com/media/NrqabhEpXWsGA/200_s.gif><br>"Bruh!"<br><button name="send" value="/transferbucks Void Pa, 1">Donate for more bruhs</button><br><img src="http://stream1.gifsoup.com/view4/20140711/5068463/bruh-o.gif"</center>'
+                );
+        },
 };

@@ -866,3 +866,80 @@ div.mainmenufooter a:visited {
 /*******************************
 * Hydrocity Roomintro CSS ~end *
 *******************************/
+
+/************************
+* Lobby Roomintro (New) *
+************************/
+
+.btn-nofill-nimbus {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #4AA9A5;
+    text-shadow: 1px 1px 1px #FFF;
+    font-weight: bold;
+    font-family: helvetica, arial, sans-serif;
+    padding: 0px 20px 7px 20px;
+}
+
+.btn-nofill-nimbus:hover {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #FFF;
+    text-shadow: 1px 1px 1px #4AA9A5;
+    text-shadow: none;
+    cursor: pointer;
+}
+
+.txt-nimbus {
+    color: #4AA9A5;
+    font-family: helvetica, arial, sans-serif;
+    text-shadow: -1px -1px 20px #FFF;
+    font-size: 12px;
+}
+
+.nimbus-banner {
+    background: url("http://i.imgur.com/fTd9ev4.png?3") no-repeat;
+    width: 500px;
+    height: 62px;
+}
+
+.nimbus-intro-hr {
+    border-bottom: 1px solid #8AADFF;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    width: 50%;
+}
+
+.nimbus-banner-top {
+    background: url("http://i.imgur.com/45U4S2W.png?2") no-repeat;
+    height: 17px;
+    width: 500px;
+}
+
+.nimbus-banner-bottom {
+    background: url("http://i.imgur.com/iuqCkf6.png?2") no-repeat;
+    height: 17px;
+    width: 500px;
+}
+
+.btn-textlike {
+    color: #4AA9A5;
+    font-family: helvetica, arial, sans-serif;
+    text-shadow: -1px -1px 20px #FFF;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    padding: 0px 0px 0px 0px;
+}
+
+.btn-textlike:hover {
+    cursor: pointer;
+    color: #367A78;
+    text-decoration: underline;
+}
+
+
+/***************************
+* Roomintro CSS (New) ~end *
+***************************/

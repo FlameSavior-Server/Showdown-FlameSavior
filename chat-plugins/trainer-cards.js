@@ -6138,17 +6138,7 @@ exports.commands = {
 			'One for all and all for one</center>'
 		);
 	},
-
-	twizzy: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/SGcRSab.png">' +
-			'<img src="http://i.imgur.com/dkwp4cu.gif">' +
-			'<img src="http://i.imgur.com/E04MrCc.png"><br />' +
-			'<font color="red"><blink>Ace: Keldeo-Resolute</blink></font><br />' +
-			'Have you ever feel scared and there is nothing you can do about it? Challenge me and i will show you what fear is!</center>'
-		);
-	},
-
+	
 	ag: 'arcainiagaming',
 	arcainiagaming: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
@@ -7076,6 +7066,47 @@ exports.commands = {
 		this.sendReplyBox('<center><table><tbody><tr><td width="100"><div align="right"><font class="icon-spin">[00:31:26] +Void Kіng: she wanted to experiment</font></div></td><td width="330"><center><img src="http://i.imgur.com/kcDoitV.png" width="330" height="58" /></center></td><td width="100"><div align="left"><font class="icon-spin">[21:29:21] %Void Chrono: Warning: May cause cancer</font></div></td></tr></tbody></table><br/><font color="#000000"><b>Aces: </b></font>Percy, Gugle, Nyxe<br/><br/><table><tbody><tr><td><center><img src="http://i.imgur.com/eXYHD9O.gif" width="192" height="192" /></center></td><td><center><i>#CancerFreeForNever</i></center></td><td><center><img src="http://i.imgur.com/eXYHD9O.gif" width="192" height="192" /></center></td></tr></tbody></table></center>'
 		);
 	},
+	    chimechoo: function (target, room, user) {
+        if(room.id !== 'lobby') if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><table><center><td><center><img src="http://fc07.deviantart.net/fs71/f/2011/361/2/7/chimecho_by_0ptimistic_pessimist-d4ke3hm.png"; width="105" height="220"></center></td><td><center><img src="http://i795.photobucket.com/albums/yy237/h3luckynoob/riolu.gif"; width="150 height="150"></center><br><center><img src="http://i1279.photobucket.com/albums/y523/textcraft/Apr%202015%20-%202/887afa8e0cc66f27e51492871002a43ba9c48455da39a3ee5e6b4b0d3255bfef95601890afd80709da39a3ee5e6b4b0d3255bfef95601890afd8070943da_zpsaoc3e4lc.png~original"; width="300" height="100"></center></td><td><center><img src="http://fc04.deviantart.net/fs71/f/2012/192/1/6/anri_sonohara_render_by_motohara27-d56stgs.png"; width="100" height="200"></center></td></table></center><center><table><td><center><b>Ace:</b> Computer Trolling&nbsp;&nbsp;</center><p><center><font color="#F74582"<i>I prefer those mysterious Psychic Types&nbsp;</i></center></font></td></table></center>')
+        );
+    },
+	    bruh: function (target, room, user) {
+        if (room.id !== 'lobby') if (!this.canBroadcast()) return;
+        this.sendReplyBox('<center><img src=http://new2.fjcdn.com/thumbnails/comments/Quot+seriously+bruh+you+need+to+get+some+more+of+that+_c4b5f34ad5e7a69ad9113f170f1ca22d.gif><img src=https://media2.giphy.com/media/NrqabhEpXWsGA/200_s.gif><br>"Bruh!"<br><button name="send" value="/transferbucks Void Pa, 1">Donate for more bruhs</button><br><img src="http://stream1.gifsoup.com/view4/20140711/5068463/bruh-o.gif"</center>'
+        );
+    },
+		tatsumi: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('</div><center><img src="http://i.imgur.com/1j8Q3zS.jpg" height="160" width="220"><img src="http://r70.cooltext.com/rendered/cooltext116708665930794.gif" height="120" width="200"><img src="http://i.imgur.com/i9UH1ga.jpg" height="160" width="170"><br></br><br><b>Ace:</b> Electivire</br><br><b>Quote:</b> "You can\'t predict where lightning will strike but you sure as hell can run when you hear the thunder clap."</br></center>'
+		);
+	},
+		chompstits: 'hoes',
+		hoes: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/3Z47krW.png" width="500"><br /><img src="http://i.imgur.com/RTR5no7.png" width="600"><img src="http://i.imgur.com/T71xint.jpg" width="200"><br /><b>Ace: </b> Eric`s Tits and Chomp<br><b>Quote: </b> You say we are the sluts, the bottom feeders of society, when in reality we are just like all the other people on this planet. HI ROY</center>'
+		);
+	},
+		syber: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src=http://i.imgur.com/zDaQHL0.jpg?1><img src=http://i.imgur.com/L6Kisea.png?1><img src=http://i.imgur.com/YQzqptk.gif?1><br><b>Ace: </b>Scizor<br><b>Quote: </b>You call yourself a challenger but you are far from a challenge.</center>'
+		);
+	},
+		jube: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://209.190.33.194/images/8b3/8b3d86954a6ac241f76cc08d9fc70bb821159ee5.png"><center><img src="http://images1.fanpop.com/images/image_uploads/CUTE-hamsters-1140511_450_466.jpg" height="300"><img src="http://cute-n-tiny.com/wp-content/uploads/2009/07/birthdayhamster-400x428.jpg" height="300"><br><b>Ace:</b> ExampleYT, yunG Sensory, Jube<br>Quote: "Jube is a cute ass hampster." - yunG Sensory 2015</center>'
+		);
+	},
+		glack: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center target="_blank"><img src="http://oi58.tinypic.com/jsgeb6.jpg" target="_blank" height="200" width="500"><br target="_blank"><b target="_blank"><br target="_blank"><b target="_blank"></b><font size="2">Ace:</b> Your Mother<br target="_blank">:^)</font></center>'
+		);
+	},
+		twizzy: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://ts4.mm.bing.net/th?id=JN.dUc%2bKofTA9wJImNveCHjcQ&pid=15.1";;; width="200" height="129"><img src="http://i.imgur.com/wabywhL.png" width="300"><img src="http://ts2.mm.bing.net/th?id=JN.KcC4S2NxXO3JIHZwRWW0Sw&pid=15.1" width="200"><br /><font color="red"><blink>Ace: Excadrill</blink></font><br />"There\'s no time like Wrecking time"</center>'
+		);
+	},
 	/***************************************
 	* League Cards						 *
 	***************************************/
@@ -7097,10 +7128,4 @@ exports.commands = {
 			'Click <a href="https://docs.google.com/document/d/1OTP9JDz2Q6z6oFnvy2-jRH5o9XdFwZaJBU-ndRWpgIM/edit"> here </a>for rules and registering'
 		);
 	},
-	
-        bruh: function (target, room, user) {
-                if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-                this.sendReplyBox('<center><img src=http://new2.fjcdn.com/thumbnails/comments/Quot+seriously+bruh+you+need+to+get+some+more+of+that+_c4b5f34ad5e7a69ad9113f170f1ca22d.gif><img src=https://media2.giphy.com/media/NrqabhEpXWsGA/200_s.gif><br>"Bruh!"<br><button name="send" value="/transferbucks Void Pa, 1">Donate for more bruhs</button><br><img src="http://stream1.gifsoup.com/view4/20140711/5068463/bruh-o.gif"</center>'
-                );
-        },
 };

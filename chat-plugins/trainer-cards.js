@@ -7107,6 +7107,36 @@ exports.commands = {
 		this.sendReplyBox('<center><img src="http://ts4.mm.bing.net/th?id=JN.dUc%2bKofTA9wJImNveCHjcQ&pid=15.1";;; width="200" height="129"><img src="http://i.imgur.com/wabywhL.png" width="300"><img src="http://ts2.mm.bing.net/th?id=JN.KcC4S2NxXO3JIHZwRWW0Sw&pid=15.1" width="200"><br /><font color="red"><blink>Ace: Excadrill</blink></font><br />"There\'s no time like Wrecking time"</center>'
 		);
 	},
+		creampuff: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://i.imgur.com/9L9Kw5X.png" width="400"></center>'
+		);
+	},
+		beaver: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<img src="http://i.imgur.com/Wxz1MkW.gif"><img src="http://i.imgur.com/ynqPWTq.gif"><img src="http://i.imgur.com/mgdAoeE.gif"><br /><b>Ace:</b> Squad 2<br />"Respect and trust before all else."<br><button name="send" value="/transferbucks Affinity Beaver, 1" target="_blank">Donate to me</button></center>'
+		);
+	},
+		ericxwalker: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<div class="infobox"><center><img src="http://i.imgur.com/V97KOpV.png"><center><img src="http://i.imgur.com/rfLFi4R.gif";height=350 width=350><br /><b><br/><b><marquee>My Little Pony? HELL NAW IT\'S MY LITTLE BRONY!<marquee><br /></center>'
+		);
+	},
+		scorp: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src=https://i.imgur.com/wTJkrP0.png><br><img src=http://www.pokestadium.com/sprites/xy/salamence.gif><img src=http://www.pokestadium.com/sprites/xy/garchomp.gif><img src=http://www.pokestadium.com/sprites/xy/altaria.gif><img src=http://www.pokestadium.com/sprites/xy/dragonite.gif><br><img src=http://www.pokestadium.com/sprites/xy/shiny/kyurem-black.gif><img src=http://www.pokestadium.com/sprites/xy/latias.gif><img src=http://www.pokestadium.com/sprites/xy/zekrom.gif><br><b>Ace:</b> Scorp Unleashed<br> "In a battle some people bring swords or guns, I bring Dragons."</center>'
+		);
+	},
+		orion: function (target, room, user) {
+		if (room.id !== 'lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center><table><tbody><tr><td width="120"><div align="right"><img src="http://play.pokemonshowdown.com/sprites/xyani/heatran.gif"; /></div></td><td><center><img src="http://i.imgur.com/ZHQ9Sp8.png"; width="226" height="80" /></center></td><td width="120"><div align="left"><img src="http://play.pokemonshowdown.com/sprites/xyani/excadrill.gif"; /></div></td></tr><tr><td width="120"><div align="right"><img src="http://41.media.tumblr.com/ccce3d74040da2dd4faa05bf450892b5/tumblr_mid0ri90Xu1qha9kio1_400.png" height="65"></div></td><td><center><img src="http://cdn.bulbagarden.net/upload/thumb/7/7a/Steven_Adventures.png/270px-Steven_Adventures.png" height="150"; /></center></td><td width="120"><div align="left"><img src="http://41.media.tumblr.com/ccce3d74040da2dd4faa05bf450892b5/tumblr_mid0ri90Xu1qha9kio1_400.png" height="65"></div></td></tr></tbody></table><center><img src="http://play.pokemonshowdown.com/sprites/xyani/skarmory.gif"; /></center><img src="http://i.imgur.com/vaaeqh3.png"; width="320" height="40" /><br/><font color="#000000"><font color="#660000"><b><i>In this world, I am the hunter. Are you prepared to become my prey?</i></b></font><br/><br/><font color="#990000"><b>Ace:</b></font>&nbsp;<font color="#666666"><b>Skarmory</b></font></center>'
+		);
+	},
+		fakeniggas: function (target, room, user) {
+		if (room.id !=='lobby') if (this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src=http://i.imgur.com/rPkM6zq.png><br><img src="http://i.imgur.com/J0BKgrn.png" height=300 width=250><img src="http://i.imgur.com/0coE6bP.jpeg" height=300 width=250><br><font color=pink size=4>Aces: Dell, ScorpionZ, Barida</strong></font><br><a href="http://pastebin.com/5v5y8zNW" target="_blank"><button class="motc-red" target="_blank"><font face="Verdana" color="#ff69b4" size="4" target="_blank">SMH</font></button></a></center>'
+		);
+	},
 	/***************************************
 	* League Cards						 *
 	***************************************/

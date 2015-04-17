@@ -2213,7 +2213,7 @@ var commands = exports.commands = {
         var targetUser = this.targetUser;
         var name = this.targetUsername;
         var userid = toId(name);
-
+        if (Users(this.targetUsername).group === '&' || Users(this.targetUsername).group === '~') return this.sendReply("Upper staff cannot be roombanned you nub, git gud.");
         if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
         if (!this.can('ban', targetUser, room)) return false;
         if (!room.bannedUsers || !room.bannedIps) {

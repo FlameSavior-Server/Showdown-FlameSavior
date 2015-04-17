@@ -183,7 +183,7 @@ var components = exports.components = {
 		var options = {
 			host: "www.pokemonshowdown.com",
 			port: 80,
-			path: "/forum/~"+userid
+			path: "/users/"+userid
 		};
 
 		var content = "";

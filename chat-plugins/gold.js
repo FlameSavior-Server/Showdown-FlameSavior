@@ -280,15 +280,14 @@ exports.commands = {
         request('http://pokemonshowdown.com/users/~' + target, function (error, response, content) {
             if (!(!error && response.statusCode == 200)) return;
             content = content + '';
-            self.sendReply(content);
             content = content.split("<em");
             if (content[1]) {
                 content = content[1].split("</p>");
                 if (content[0]) {
                     content = content[0].split("</em>");
                     if (content[1]) {
-                        regdate = content[1];
-                        data = Tools.escapeHTML(username) + ' was registered on' + regdate + '.';
+                        regdate = content[1].replace('<small/>', '.');
+                        data = Tools.escapeHTML(username) + ' was registered on' + regdate;
                     }
                 }
             } else {

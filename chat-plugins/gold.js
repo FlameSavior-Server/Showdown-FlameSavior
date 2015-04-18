@@ -274,11 +274,11 @@ exports.commands = {
         if (!target || target == "." || target == "," || target == "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
         var username = target;
         target = target.replace(/\s+/g, '');
-        var require = require("request");
+        var request = require("request");
 	var self = this;
 				
         request('http://pokemonshowdown.com/users/~' + target, function (error, response, content) {
-            /*if (!(!error && response.statusCode == 200)) return;
+            if (!(!error && response.statusCode == 200)) return;
             content = content + '';
             self.sendReply(content);
             content = content.split("<em");
@@ -294,7 +294,7 @@ exports.commands = {
             } else {
                 data = Tools.escapeHTML(username) + ' is not registered.';
             }
-            self.sendReplyBox(Tools.escapeHTML(data));*/
+            self.sendReplyBox(Tools.escapeHTML(data));
         });
     },
 

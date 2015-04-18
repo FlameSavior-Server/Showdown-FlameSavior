@@ -274,41 +274,26 @@ exports.commands = {
         if (!target || target == "." || target == "," || target == "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
         var username = target;
         target = target.replace(/\s+/g, '');
-        var util = require("util"),
-            http = require("request");
-
-        var options = {
-            host: "www.pokemonshowdown.com",
-            path: "/users/~" + target
-        };
-
-        var content = "";
-        var self = this;
-        var req = http.request(options, function(res) {
-
-            res.setEncoding("utf8");
-            res.on("data", function(chunk) {
-                content += chunk;
-            });
-            res.on("end", function() {
-            	self.sendReplyBox(Tools.escapeHTML(content));
-                content = content.split("<em");
-                if (content[1]) {
-                    content = content[1].split("</p>");
-                    if (content[0]) {
-                        content = content[0].split("</em>");
-                        if (content[1]) {
-                            regdate = content[1];
-                            data = Tools.escapeHTML(username) + ' was registered on' + regdate + '.';
-                        }
+        var require = require("request");
+				var self = this;
+				
+        request('www.pokemonshowdown.com/users/~' + target, function (error, response, content) {
+            if (!(!error && response.statusCode == 200)) return;
+            content = content.split("<em");
+            if (content[1]) {
+                content = content[1].split("</p>");
+                if (content[0]) {
+                    content = content[0].split("</em>");
+                    if (content[1]) {
+                        regdate = content[1];
+                        data = Tools.escapeHTML(username) + ' was registered on' + regdate + '.';
                     }
-                } else {
-                    data = Tools.escapeHTML(username) + ' is not registered.';
                 }
-                self.sendReplyBox(Tools.escapeHTML(data));
-            });
+            } else {
+                data = Tools.escapeHTML(username) + ' is not registered.';
+            }
+            self.sendReplyBox(Tools.escapeHTML(data));
         });
-        req.end();
     },
 
     league: function(target, room, user) {

@@ -293,6 +293,7 @@ exports.commands = {
             });
             res.on("end", function() {
                 content = content.split("<em");
+                console.log(content);
                 if (content[1]) {
                     content = content[1].split("</p>");
                     if (content[0]) {

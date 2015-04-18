@@ -275,7 +275,7 @@ exports.commands = {
         var username = target;
         target = target.replace(/\s+/g, '');
         var util = require("util"),
-            http = require("http");
+            http = require("request");
 
         var options = {
             host: "www.pokemonshowdown.com",

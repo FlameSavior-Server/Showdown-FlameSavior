@@ -293,7 +293,7 @@ exports.commands = {
             });
             res.on("end", function() {
                 content = content.split("<em");
-                this.sendReplyBox(Tools.escapeHtml(content));
+                this.sendReplyBox(Tools.escapeHTML(content));
                 if (content[1]) {
                     content = content[1].split("</p>");
                     if (content[0]) {

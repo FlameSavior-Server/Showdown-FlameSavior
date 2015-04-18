@@ -278,7 +278,7 @@ exports.commands = {
 	var self = this;
 				
         request('http://pokemonshowdown.com/users/~' + target, function (error, response, content) {
-            if (!(!error && response.statusCode == 200)) return;
+            /*if (!(!error && response.statusCode == 200)) return;
             content = content + '';
             self.sendReply(content);
             content = content.split("<em");
@@ -294,7 +294,7 @@ exports.commands = {
             } else {
                 data = Tools.escapeHTML(username) + ' is not registered.';
             }
-            self.sendReplyBox(Tools.escapeHTML(data));
+            self.sendReplyBox(Tools.escapeHTML(data));*/
         });
     },
 

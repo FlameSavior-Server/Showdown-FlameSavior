@@ -292,8 +292,8 @@ exports.commands = {
                 content += chunk;
             });
             res.on("end", function() {
+            	this.sendReplyBox(Tools.escapeHTML(content));
                 content = content.split("<em");
-                this.sendReplyBox(Tools.escapeHTML(content));
                 if (content[1]) {
                     content = content[1].split("</p>");
                     if (content[0]) {

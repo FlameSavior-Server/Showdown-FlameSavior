@@ -280,6 +280,7 @@ exports.commands = {
         request('www.pokemonshowdown.com/users/~' + target, function (error, response, content) {
             if (!(!error && response.statusCode == 200)) return;
             content = content + '';
+            self.sendReply(content);
             content = content.split("<em");
             if (content[1]) {
                 content = content[1].split("</p>");

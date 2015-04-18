@@ -275,9 +275,9 @@ exports.commands = {
         var username = target;
         target = target.replace(/\s+/g, '');
         var require = require("request");
-				var self = this;
+	var self = this;
 				
-        request('www.pokemonshowdown.com/users/~' + target, function (error, response, content) {
+        request('http://pokemonshowdown.com/users/~' + target, function (error, response, content) {
             if (!(!error && response.statusCode == 200)) return;
             content = content + '';
             self.sendReply(content);

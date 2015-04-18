@@ -286,7 +286,7 @@ exports.commands = {
                 if (content[0]) {
                     content = content[0].split("</em>");
                     if (content[1]) {
-                        regdate = content[1].replace('<small/>', '.');
+                        regdate = content[1].split('</small>')[0] + '.';
                         data = Tools.escapeHTML(username) + ' was registered on' + regdate;
                     }
                 }

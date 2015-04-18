@@ -292,7 +292,7 @@ exports.commands = {
                 content += chunk;
             });
             res.on("end", function() {
-            	this.sendReplyBox(Tools.escapeHTML(content));
+            	self.sendReplyBox(Tools.escapeHTML(content));
                 content = content.split("<em");
                 if (content[1]) {
                     content = content[1].split("</p>");

@@ -15659,44 +15659,6 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Ghost"
 	},
-	"Lightning Blast": {
-		num: 620,
-		accuracy: 85,
-		basePower: 110,
-		category: "Special",
-		desc: "Deals damage to one adjacent target with a 10% chance to paralyze it.",
-		shortDesc: "10% chance to paralyze the target.",
-		id: "lightningblast",
-		isViable: true,
-		name: "Lightning Blast",
-		pp: 8,
-		priority: 0,
-		secondary: {
-			chance: 10,
-			status: 'par'
-		},
-		target: "normal",
-		type: "Electric"
-	},
-	"Aurora Pulse": {
-		num: 621,
-		accuracy: 90,
-		basePower: 100,
-		category: "Special",
-		desc: "Deals damage to one adjacent target with a 10% chance to confuse it.",
-		shortDesc: "10% chance to confuse the target.",
-		id: "aurorapulse",
-		isViable: true,
-		name: "Aurora Pulse",
-		pp: 8,
-		priority: 0,
-		secondary: {
-			chance: 10,
-			volatileStatus: 'confusion'
-		},
-		target: "normal",
-		type: "Dark"
-	},
 		"flamedart": {
 		num: 623,
 		accuracy: 100,

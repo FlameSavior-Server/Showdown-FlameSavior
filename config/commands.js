@@ -2004,6 +2004,10 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReplyBox('<img src="http://i.imgur.com/7puX3D3.jpg" />');
 		}
+		if (target === 'salt'){
+			matched = true;
+			this.sendReplyBox('<http://i.imgur.com/Y5bbFq1.jpg" />');
+		}
 		if (target === 'fragequit'){
 			matched = true;
 			this.sendReplyBox('<img src="http://i0.kym-cdn.com/photos/images/original/000/000/578/1234931504682.jpg" height="189" width="317" />');

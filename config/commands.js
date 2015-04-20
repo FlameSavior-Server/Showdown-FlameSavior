@@ -2006,7 +2006,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'salt'){
 			matched = true;
-			this.sendReplyBox('<http://i.imgur.com/Y5bbFq1.jpg" />');
+			this.sendReplyBox('<img src="http://i.imgur.com/Y5bbFq1.jpg" />');
 		}
 		if (target === 'fragequit'){
 			matched = true;

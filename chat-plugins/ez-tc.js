@@ -36,7 +36,7 @@ exports.commands = {
 				var commandName = toId(parts[1]);
 				if (CommandParser.commands[commandName]) return this.sendReply("/trainercards - The command \"" + commandName + "\" already exists.");
 				var html = parts.splice(2, parts.length).join(',');
-				trainerCards[commandName] = new Function('target', 'room', 'user', "if (!room.disableTrainerCards) if (!this.canBroadcast()) return; this.sendReplyBox('" + html + "');");
+				trainerCards[commandName] = new Function('target', 'room', 'user', "if (!room.disableTrainerCards) if (!this.canBroadcast()) return; this.sendReplyBox('" + html.replace(/'/g, "\\'") + "');");
 				saveTrainerCards();
 				this.sendReply("The trainer card \"" + commandName + "\" has been added.");
 				this.logModCommand(user.name + " added the trainer card " + commandName);

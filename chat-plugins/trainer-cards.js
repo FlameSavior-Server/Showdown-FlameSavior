@@ -1,3 +1,7 @@
+/*
+* FOR ALL NEW TRAINER-CARDS USE THE /TC COMMAND ON THE SERVER
+*/
+
 exports.commands = {
     jonthebastard: function(target, room, user) {
         if (!this.canBroadcast()) return;

@@ -40,6 +40,9 @@ exports.commands = {
 				saveTrainerCards();
 				this.sendReply("The trainer card \"" + commandName + "\" has been added.");
 				this.logModCommand(user.name + " added the trainer card " + commandName);
+				try {
+					Rooms.rooms.staff.add(user.name + " added the trainer card " + commandName);
+				} catch (e) {};
 				break;
 
 			case 'rem':
@@ -55,6 +58,9 @@ exports.commands = {
 				saveTrainerCards();
 				this.sendReply("The trainer card \"" + commandName + "\" has been removed.");
 				this.logModCommand(user.name + " removed the trainer card " + commandName);
+				try {
+					Rooms.rooms.staff.add(user.name + " removed the trainer card " + commandName);
+				} catch (e) {};
 				break;
 
 			case 'list':

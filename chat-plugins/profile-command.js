@@ -2,6 +2,7 @@
  * by: jd 
  * modified by: panpawn
  */
+var serverIp = '127.0.0.1';
 
 exports.commands = {
 	profile: function(target, room, user) {

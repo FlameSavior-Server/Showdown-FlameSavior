@@ -6,7 +6,7 @@ var serverIp = '127.0.0.1';
 
  
 function readMoney(userid, callback) {
-	if (!callback) return false;
+	//if (!callback) return false;
 	userid = toId(userid);
 	try {
 		bucks = Users.users.userid.money;

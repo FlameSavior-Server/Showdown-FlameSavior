@@ -4,19 +4,6 @@
  */
 var serverIp = '127.0.0.1';
 
- 
-function readMoney(userid, callback) {
-	//if (!callback) return false;
-	userid = toId(userid);
-	if (!Users.users.userid.money) {
-		bucks = 0;
-	} else {
-		bucks = Users.users.userid.money;
-		//callback((rows[0] ? rows[0].bucks : 0));
-	}		
-};
- 
-
 exports.commands = {
 	profile: function(target, room, user) {
 		if (!target) target = user.name;
@@ -44,7 +31,7 @@ exports.commands = {
 		}
  
 		var self = this;
-		readMoney(userid, function(bucks) {
+		economy.readMoney(userid, function(bucks) {
 			var options = {
 				host: "pokemonshowdown.com",
 				port: 80,

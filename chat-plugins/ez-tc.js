@@ -31,7 +31,7 @@ exports.commands = {
 
 		switch (parts[0]) {
 			case 'add':
-				if (!this.can('trainercard')) return false;
+				if (!this.can('pban')) return false;
 				if (!parts[2]) return this.sendReply("Usage: /trainercard add, [command name], [html]");
 				var commandName = toId(parts[1]);
 				if (CommandParser.commands[commandName]) return this.sendReply("/trainercards - The command \"" + commandName + "\" already exists.");
@@ -46,7 +46,7 @@ exports.commands = {
 			case 'del':
 			case 'delete':
 			case 'remove':
-				if (!this.can('trainercard')) return false;
+				if (!this.can('pban')) return false;
 				if (!parts[1]) return this.sendReply("Usage: /trainercard remove, [command name]");
 				var commandName = toId(parts[1]);
 				if (!trainerCards[commandName]) return this.sendReply("/trainercards - The command \"" + commandName + "\" does not exist, or was added manually.");

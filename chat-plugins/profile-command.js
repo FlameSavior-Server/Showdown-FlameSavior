@@ -8,10 +8,8 @@ var serverIp = '127.0.0.1';
 function readMoney(userid, callback) {
 	//if (!callback) return false;
 	userid = toId(userid);
-	try {
-		bucks = Users.users.userid.money;
-		//callback((rows[0] ? rows[0].bucks : 0));
-	} catch (e) {};
+	bucks = Users.users.userid.money;
+	//callback((rows[0] ? rows[0].bucks : 0));
 };
  
 

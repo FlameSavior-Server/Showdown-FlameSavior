@@ -84,6 +84,7 @@ emoticons: {
         'JollyRoger': 'http://i.picresize.com/images/2015/02/18/0AXMQ.jpg',
         'HerB': 'http://i.imgur.com/IC2BAxw.png',
         'badaSS': 'http://i.imgur.com/6Evl1pL.jpg',
+        'cHild': 'http://i.imgur.com/irQ3x6G.png',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

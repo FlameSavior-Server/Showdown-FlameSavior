@@ -68,7 +68,7 @@ global.Tools = require('./tools.js');
 
 var Battle, BattleSide, BattlePokemon;
 
-var Battles = {};
+var Battles = Object.create(null);
 
 require('./repl.js').start('battle-engine-', process.pid, function (cmd) { return eval(cmd); });
 
@@ -102,7 +102,16 @@ process.on('message', function (message) {
 			}
 		}
 	} else if (data[1] === 'dealloc') {
-		if (Battles[data[0]]) Battles[data[0]].destroy();
+		if (Battles[data[0]] && Battles[data[0]].destroy) {
+			Battles[data[0]].destroy();
+		} else {
+			var stack = '\n\n' +
+					'Additional information:\n' +
+					'message = ' + message;
+			var fakeErr = {stack: stack};
+
+			require('./crashlogger.js')(fakeErr, 'A battle');
+		}
 		delete Battles[data[0]];
 	} else {
 		var battle = Battles[data[0]];
@@ -179,7 +188,7 @@ BattlePokemon = (function () {
 		this.moveset = [];
 		this.baseMoveset = [];
 
-		this.level = this.battle.clampIntRange(set.forcedLevel || set.level || 100, 1, 1000);
+		this.level = this.battle.clampIntRange(set.forcedLevel || set.level || 100, 1, 9999);
 
 		var genders = {M:'M', F:'F'};
 		this.gender = this.template.gender || genders[set.gender] || (Math.random() * 2 < 1 ? 'M' : 'F');
@@ -710,7 +719,6 @@ BattlePokemon = (function () {
 		this.hpType = (this.battle.gen >= 5 ? this.hpType : pokemon.hpType);
 		this.hpPower = (this.battle.gen >= 5 ? this.hpPower : pokemon.hpPower);
 		for (var i = 0; i < pokemon.moveset.length; i++) {
-			var move = this.battle.getMove(this.set.moves[i]);
 			var moveData = pokemon.moveset[i];
 			var moveName = moveData.move;
 			if (moveData.id === 'hiddenpower') {
@@ -719,8 +727,8 @@ BattlePokemon = (function () {
 			this.moveset.push({
 				move: moveName,
 				id: moveData.id,
-				pp: move.noPPBoosts ? moveData.maxpp : 5,
-				maxpp: this.battle.gen >= 5 ? (move.noPPBoosts ? moveData.maxpp : 5) : (this.battle.gen <= 2 ? move.pp : moveData.maxpp),
+				pp: moveData.maxpp === 1 ? 1 : 5,
+				maxpp: this.battle.gen >= 5 ? (moveData.maxpp === 1 ? 1 : 5) : moveData.maxpp,
 				target: moveData.target,
 				disabled: false
 			});
@@ -2888,6 +2896,8 @@ Battle = (function () {
 			this.heal(Math.ceil(damage * effect.drain[0] / effect.drain[1]), source, target, 'drain');
 		}
 
+		if (!effect.flags) effect.flags = {};
+
 		if (instafaint && !target.hp) {
 			this.debug('instafaint: ' + this.faintQueue.map('target').map('name'));
 			this.faintMessages(true);
@@ -3011,7 +3021,7 @@ Battle = (function () {
 			flags: {}
 		};
 
-		if (move.affectedByImmunities) {
+		if (!move.ignoreImmunity || (move.ignoreImmunity !== true && !move.ignoreImmunity[move.type])) {
 			if (!target.runImmunity(move.type, !suppressMessages)) {
 				return false;
 			}
@@ -3155,34 +3165,45 @@ Battle = (function () {
 			baseDamage = this.modify(baseDamage, move.stab || 1.5);
 		}
 		// types
-		var totalTypeMod = 0;
+		move.typeMod = 0;
 
 		if (target.negateImmunity[move.type] !== 'IgnoreEffectiveness' || this.getImmunity(move.type, target)) {
-			totalTypeMod = target.runEffectiveness(move);
+			move.typeMod = target.runEffectiveness(move);
 		}
 
-		totalTypeMod = this.clampIntRange(totalTypeMod, -6, 6);
-		if (totalTypeMod > 0) {
+		move.typeMod = this.clampIntRange(move.typeMod, -6, 6);
+		if (move.typeMod > 0) {
 			if (!suppressMessages) this.add('-supereffective', target);
 
-			for (var i = 0; i < totalTypeMod; i++) {
+			for (var i = 0; i < move.typeMod; i++) {
 				baseDamage *= 2;
 			}
 		}
-		if (totalTypeMod < 0) {
+		if (move.typeMod < 0) {
 			if (!suppressMessages) this.add('-resisted', target);
 
-			for (var i = 0; i > totalTypeMod; i--) {
+			for (var i = 0; i > move.typeMod; i--) {
 				baseDamage = Math.floor(baseDamage / 2);
 			}
 		}
 
-		if (basePower && !Math.floor(baseDamage)) {
-			return 1;
+		if (pokemon.status === 'brn' && basePower && move.category === 'Physical' && !pokemon.hasAbility('guts')) {
+			if (this.gen < 6 || move.id !== 'facade') {
+				baseDamage = this.modify(baseDamage, 0.5);
+			}
+		}
+
+		// Generation 5 sets damage to 1 before the final damage modifiers only
+		if (this.gen === 5 && basePower && !Math.floor(baseDamage)) {
+			baseDamage = 1;
 		}
 
 		// Final modifier. Modifiers that modify damage after min damage check, such as Life Orb.
 		baseDamage = this.runEvent('ModifyDamage', pokemon, target, move, baseDamage);
+
+		if (this.gen !== 5 && basePower && !Math.floor(baseDamage)) {
+			return 1;
+		}
 
 		return Math.floor(baseDamage);
 	};
@@ -4044,7 +4065,7 @@ Battle = (function () {
 				var moves = pokemon.getMoves();
 				if (!moves.length || moves[0].id === 'struggle') {
 					// override decision and use Struggle if there are no other valid moves
-					side.send('-activate', pokemon, 'move: Struggle');
+					if (this.gen <= 4) side.send('-activate', pokemon, 'move: Struggle');
 					moveid = 'struggle';
 				} else {
 					// at least a move is valid (other than Struggle)

@@ -1239,7 +1239,7 @@ var commands = exports.commands = {
             Rooms.global.writeChatRoomData();
         }
     },
-    
+
    faq: function(target, room, user) {
         if (!this.canBroadcast()) return;
         target = target.toLowerCase();

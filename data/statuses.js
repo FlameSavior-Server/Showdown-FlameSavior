@@ -8,11 +8,7 @@ exports.BattleStatuses = {
 			}
 			this.add('-status', target, 'brn');
 		},
-		onBasePower: function (basePower, attacker, defender, move) {
-			if (move && move.category === 'Physical' && attacker && !attacker.hasAbility('guts') && move.id !== 'facade') {
-				return this.chainModify(0.5); // This should really take place directly in the damage function but it's here for now
-			}
-		},
+		// Damage reduction is handled directly in the battle-engine.js damage function
 		onResidualOrder: 9,
 		onResidual: function (pokemon) {
 			this.damage(pokemon.maxhp / 8);
@@ -78,12 +74,19 @@ exports.BattleStatuses = {
 		},
 		onBeforeMovePriority: 10,
 		onBeforeMove: function (pokemon, target, move) {
-			if (move.thawsUser || this.random(5) === 0) {
+			if (move.flags['defrost']) return;
+			if (this.random(5) === 0) {
 				pokemon.cureStatus();
 				return;
 			}
 			this.add('cant', pokemon, 'frz');
 			return false;
+		},
+		onModifyMove: function (move, pokemon) {
+			if (move.flags['defrost']) {
+				this.add('-curestatus', pokemon, 'frz', '[from] move: ' + move);
+				pokemon.setStatus('');
+			}
 		},
 		onHit: function (target, source, move) {
 			if (move.thawsTarget || move.type === 'Fire' && move.category !== 'Status') {
@@ -313,8 +316,8 @@ exports.BattleStatuses = {
 				target.removeVolatile('Protect');
 				target.removeVolatile('Endure');
 
-				if (typeof posData.moveData.affectedByImmunities === 'undefined') {
-					posData.moveData.affectedByImmunities = true;
+				if (posData.moveData.ignoreImmunity === undefined) {
+					posData.moveData.ignoreImmunity = false;
 				}
 
 				if (target.hasAbility('wonderguard') && this.gen > 5) {

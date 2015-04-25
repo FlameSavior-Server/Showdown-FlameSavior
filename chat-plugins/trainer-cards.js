@@ -679,13 +679,13 @@ exports.commands = {
     terbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Sir Terlor\'s Music Box!</b><br />' +
-            '1. <a href="https://www.youtube.com/watch?v=usXhiWE2Uc0"><button>Tristam - Till It\'s Over</a></button><br />' +
-            '2. <a href="https://www.youtube.com/watch?v=JpDPOs-rddM"><button>Sonata Arctica - Mary Lou</a></button><br />' +
-            '3. <a href="https://www.youtube.com/watch?v=DECxluN8OZM"><button>Au5 - Snowblind</a></button><br />' +
-            '4. <a href="https://www.youtube.com/watch?v=JCT5uTdPRgs"><button>Black Sabbath - N.I.B</a></button><br />' +
-            '5. <a href="https://www.youtube.com/watch?v=as7p6VwnR5s"><button>Vexento - Praeclara</a></button><br />' +
-            '6. <a href="https://www.youtube.com/watch?v=G5zdal1MKf0"><button>Volbeat - Doc Holiday</a></button><br />' +
-            '7. <a href="https://www.youtube.com/watch?v=VRFCMM3bra8"><button>Billy Talent - Viking Death March</a></button></center>');
+            '1. <a href="https://www.youtube.com/watch?v=kKdVeWeYDT8"><button>Spag Heddy - Pink Koeks\'s Over</a></button><br />' +
+            '2. <a href="https://www.youtube.com/watch?v=FSI5O6sp9go"><button>Spag Heddy - Sine Time</a></button><br />' +
+            '3. <a href="https://www.youtube.com/watch?v=ttxwkkuGq-4"><button>Azedia - Calm Down</a></button><br />' +
+            '4. <a href="https://www.youtube.com/watch?v=7qDGTVbOyO8"><button>Razihel - Seeking of the Truth</a></button><br />' +
+            '5. <a href="https://www.youtube.com/watch?v=pSvn0rp0kz0"><button>Rogue - Adventure Time</a></button><br />' +
+            '6. <a href="https://www.youtube.com/watch?v=FtveSk1N7Uo"><button>Hellberg - The Girl</a></button><br />' +
+            '7. <a href="https://www.youtube.com/watch?v=cj73hUrwM1s"><button>Tristam - Truth</a></button></center>');
     },
 
     silrbox: function(target, room, user) {

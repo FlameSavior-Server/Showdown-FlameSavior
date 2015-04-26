@@ -85,6 +85,7 @@ emoticons: {
         'HerB': 'http://i.imgur.com/IC2BAxw.png',
         'badaSS': 'http://i.imgur.com/6Evl1pL.jpg',
         'cHild': 'http://i.imgur.com/irQ3x6G.png',
+        'feelspink': 'http://i.imgur.com/RhMeAme.gif',
         //End custom ones
         
         'crtNova': 'http://static-cdn.jtvnw.net/jtv_user_pictures/emoticon-3227-src-77d12eca2603dde0-28x28.png',

@@ -609,14 +609,6 @@ exports.commands = {
             '<img src="http://i.imgur.com/pYUt8Hf.gif"><br>The god of dance.</center>');
     },
 
-    gara: 'garazan',
-    nub: 'garazan',
-    garazan: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><font size="6" face="comic sans ms"><font color="red">G<font color="orange">a<font color="yellow">r<font color="tan">a<font color="violet">z<font color="purple">a<font color="blue">n</font><br />' +
-            '<img src="http://www.quickmeme.com/img/3b/3b2ef0437a963f22d89b81bf7a8ef9d46f8770414ec98f3d25db4badbbe5f19c.jpg" width="150" height="150"></center>');
-    },
-
     scizornician: 'sciz',
     sciz: function(target, room, user) {
         if (!this.canBroadcast()) return;

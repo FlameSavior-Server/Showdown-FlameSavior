@@ -22,14 +22,14 @@ var artistOfTheDay = {
 	removedNominators: []
 };
 
-var theStudio = Rooms.get('goldenradiotower');
+var theStudio = Rooms.get('goldenrodradiotower');
 if (theStudio && !theStudio.plugin) {
 	theStudio.plugin = artistOfTheDay;
 }
 
 var commands = {
 	start: function (target, room, user) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
 		if (artistOfTheDay.pendingNominations) return this.sendReply('Nominations for the Artist of the Day are already in progress.');
 
 		var nominations = artistOfTheDay.nominations;
@@ -50,7 +50,7 @@ var commands = {
 	},
 
 	end: function (target, room, user) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
 		if (!artistOfTheDay.pendingNominations) return this.sendReply('Nominations for the Artist of the Day are not in progress.');
 		if (!artistOfTheDay.nominations.size) return this.sendReply('No nominations have been submitted yet.');
 
@@ -67,7 +67,7 @@ var commands = {
 	},
 
 	prenom: function (target, room, user) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData || !target) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target) return false;
 		if (artistOfTheDay.pendingNominations) return this.sendReply('Nominations for the Artist of the Day are in progress.');
 		if (!room.chatRoomData.prenominations) room.chatRoomData.prenominations = [];
 
@@ -101,7 +101,7 @@ var commands = {
 	},
 
 	nom: function (target, room, user) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData || !target) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target) return false;
 		if (!artistOfTheDay.pendingNominations) return this.sendReply('Nominations for the Artist of the Day are not in progress.');
 
 		var removedNominators = artistOfTheDay.removedNominators;
@@ -129,7 +129,7 @@ var commands = {
 	},
 
 	viewnoms: function (target, room, user) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData) return false;
 
 		var buffer = '';
 		if (!artistOfTheDay.pendingNominations) {
@@ -163,7 +163,7 @@ var commands = {
 	},
 
 	removenom: function (target, room, user) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData || !target || !this.can('mute', null, room)) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target || !this.can('mute', null, room)) return false;
 		if (!artistOfTheDay.pendingNominations) return this.sendReply('Nominations for the Artist of the Day are not in progress.');
 		if (!artistOfTheDay.nominations.size) return this.sendReply('No nominations have been submitted yet.');
 
@@ -184,7 +184,7 @@ var commands = {
 	},
 
 	set: function (target, room, user) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
 		if (!toId(target)) return this.sendReply('No valid artist was specified.');
 		if (artistOfTheDay.pendingNominations) return this.sendReply('The Artist of the Day cannot be set while nominations are in progress.');
 
@@ -194,12 +194,12 @@ var commands = {
 	},
 
 	'': function (target, room) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
 		this.sendReplyBox('The Artist of the Day ' + (room.chatRoomData.artistOfTheDay ? 'is ' + room.chatRoomData.artistOfTheDay + '.' : 'has not been set yet.'));
 	},
 
 	help: function (target, room) {
-		if (room.id !== 'goldenradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
 		this.sendReplyBox('The Studio: Artist of the Day plugin commands:<br />' +
 		                  '- /aotd - View the Artist of the Day.<br />' +
 				  '- /aotd start - Start nominations for the Artist of the Day. Requires: % @ # & ~<br />' +

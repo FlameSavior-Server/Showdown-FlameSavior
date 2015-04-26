@@ -3,6 +3,7 @@
 * This is a daily activity where users get to nominate an artist to be Artist of the day, and it's randomly selected
 * Only works in a room with the id "thestudio"
 */
+var nominees = [];
 
 exports.commands = {
 	startaotd: function () {
@@ -68,7 +69,16 @@ exports.commands = {
 		if (!target) return this.sendReply("/naotd [artist] - Nominates an artist for Artist of the Day.");
 		if (target.length > 25) return this.sendReply("This Artist's name is too long; it cannot exceed 25 characters.");
 		if (!this.canTalk()) return;
+		nominees.push(Tools.escapeHTML(target));
 		room.addRaw(Tools.escapeHTML(user.name) + "'s nomination for Artist of the Day is: <strong><em>" + Tools.escapeHTML(target) + "</em></strong>");
+	},
+	
+	pickaotd: function(target, room, user) {
+		if (room.id != 'goldenrodradiotower') return false;
+		if (!room.aotdOn) return false;
+		if (nominees.length < 0) return false;
+		if (!this.can('mute', null, room)) return;
+		return this.sendReplyBox(nominees[Math.floor(Math.random()*nominees.length)+1]);
 	},
 
 	artistoftheday: 'aotd',

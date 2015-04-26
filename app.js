@@ -430,4 +430,4 @@ global.Components = require('./components.js');
 
 global.Poll = require('./core.js').core.poll();
 
-global.Spamroom = require('./spamroom.js');
+//global.Spamroom = require('./spamroom.js');

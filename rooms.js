@@ -84,12 +84,12 @@ var Room = (function () {
 		message = CommandParser.parse(message, this, user, connection);
 
 		if (message) {
-			if (Spamroom.isSpamroomed(user)) {
+			/*if (Spamroom.isSpamroomed(user)) {
 				Spamroom.room.add('|c|' + user.getIdentity() + "|__(To " + this.id + ")__ " + message);
 				connection.sendTo(this, '|c|' + user.getIdentity(this.id) + '|' + message);
-			} else {
+			} else {*/
 				this.add('|c|' + user.getIdentity(this.id) + '|' + message);
-			}
+			//}
 		}
 		this.update();
 	};

@@ -301,6 +301,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 			},
 			canBroadcast: function (suppressMessage) {
 				if (broadcast) {
+					if (room.id === 'otherlobby') return false;
 					var message = this.canTalk(originalMessage);
 					if (!message) return false;
 					if (!user.can('broadcast', null, room)) {

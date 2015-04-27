@@ -416,7 +416,7 @@ var commands = exports.commands = {
 		var tar = ' ';
 		if (target) {
 			target = target.trim();
-			if (config.groupsranking.indexOf(target) > -1 && target != '#') {
+			if (Config.groupsranking.indexOf(target) > -1 && target != '#') {
 				if (config.groupsranking.indexOf(target) <= config.groupsranking.indexOf(user.group)) {
 					tar = target;
 				} else {

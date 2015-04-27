@@ -821,6 +821,7 @@ var components = exports.components = {
 	 *********************************************************/
  
 	vote: function (target, room, user) {
+		if (!Poll[room.id]) Poll.reset(room.id);
 		if (!Poll[room.id].question) return this.sendReply('There is no poll currently going on in this room.');
 		if (!this.canTalk()) return;
 		if (!target) return this.parse('/help vote');
@@ -831,7 +832,7 @@ var components = exports.components = {
 
 		return this.sendReply('You are now voting for ' + target + '.');
 	},
-		moneylog: function (target, room, user) {
+	moneylog: function (target, room, user) {
 		if (!this.can('bucks')) return false;
 		if (!target) return this.sendReply("Usage: /moneylog [number] to view the last x lines OR /moneylog [text] to search for text.");
 		if (isNaN(Number(target))) var word = true;
@@ -864,6 +865,7 @@ var components = exports.components = {
 
 	pr: 'pollremind',
 	pollremind: function (target, room, user) {
+		if (!Poll[room.id]) Poll.reset(room.id);
 		if (!Poll[room.id].question) return this.sendReply('There is no poll currently going on in this room.');
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(Poll[room.id].display);
@@ -871,6 +873,7 @@ var components = exports.components = {
 	
 	poll: function (target, room, user) {
 		if (!this.can('broadcast', null, room)) return;
+		if (!Poll[room.id]) Poll.reset(room.id);
 		if (Poll[room.id].question) return this.sendReply('There is currently a poll going on already.');
 		if (!this.canTalk()) return;
 
@@ -917,6 +920,7 @@ var components = exports.components = {
 
 	endpoll: function (target, room, user) {
 		if (!this.can('broadcast', null, room)) return;
+		if (!Poll[room.id]) Poll.reset(room.id);
 		if (!Poll[room.id].question) return this.sendReply('There is no poll to end in this room.');
 
 		var votes = Object.keys(Poll[room.id].options).length;

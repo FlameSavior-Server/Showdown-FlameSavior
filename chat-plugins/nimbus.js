@@ -12,7 +12,11 @@ exports.commands = {
 		var roomName = (room.isPrivate) ? 'a private room' : room.id;
 		var colour = cmd.substr(8) || 'blue';
 		for (var id in Rooms.rooms) {
-			if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-' + colour + '"><b><font size=1><i>Global declare from ' + roomName + '<br /></i></font size>' + target + '</b></div>');
+			var tarRoom = Rooms.rooms[id];
+			if (tarRoom.id !== 'global') {
+				tarRoom.addRaw('<div class="broadcast-' + colour + '"><b><font size=1><i>Global declare from ' + roomName + '<br /></i></font size>' + target + '</b></div>');
+				tarRoom.update();
+			}
 		}
 		this.logModCommand(user.name + ' globally declared ' + target);
 	},
@@ -23,7 +27,8 @@ exports.commands = {
 		if (!this.can('declare', null, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
 
-		this.add('|raw|<div class="broadcast-' + cmd.substr(7) + '"><b>' + target + '</b></div>');
+		room.addRaw('<div class="broadcast-' + cmd.substr(7) + '"><b>' + target + '</b></div>');
+		room.update();
 		this.logModCommand(user.name + ' declared ' + target);
 	},
 
@@ -32,7 +37,8 @@ exports.commands = {
 		if (!this.can('declare', null, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
 
-		this.add('|raw|<div class="broadcast-purple"><b>' + target + '</b></div>');
+		room.addRaw('<div class="broadcast-purple"><b>' + target + '</b></div>');
+		room.update();
 		this.logModCommand(user.name + ' declared ' + target);
 	},
 
@@ -46,6 +52,7 @@ exports.commands = {
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
 
 		this.privateModCommand('|raw|<div class="broadcast-red"><b><font size=1><i>Private Auth (Driver +) declare from ' + user.name + '<br /></i></font size>' + target + '</b></div>');
+		room.update();
 		this.logModCommand(user.name + ' mod declared ' + target);
 	},
 
@@ -53,12 +60,12 @@ exports.commands = {
 	roomkick: 'kick',
 	kick: function (target, room, user) {
 		if (!target) return this.sendReply('/help kick');
-		if (!this.can('mute', targetUser, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply('You cannot do this while unable to talk.');
 
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser || !targetUser.connected) return this.sendReply('User "' + this.targetUsername + '" not found.');
+		if (!this.can('mute', targetUser, room)) return false;
 
 		this.addModCommand(targetUser.name + ' was kicked from the room by ' + user.name + '.');
 		targetUser.popup('You were kicked from ' + room.id + ' by ' + user.name + '.');

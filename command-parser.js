@@ -7,9 +7,9 @@
  *
  * Individual commands are put in:
  *   commands.js - "core" commands that shouldn't be modified
- *   config/commands.js - other commands that can be safely modified
+ *   chat-plugins/ - other commands that can be safely modified
  *
- * The command API is (mostly) documented in config/commands.js
+ * The command API is (mostly) documented in chat-plugins/COMMANDS.md
  *
  * @license MIT license
  */
@@ -37,11 +37,6 @@ var fs = require('fs');
  *********************************************************/
 
 var commands = exports.commands = require('./commands.js').commands;
-
-var customCommands = require('./config/commands.js');
-if (customCommands && customCommands.commands) {
-	Object.merge(commands, customCommands.commands);
-}
 
 // Install plug-in commands
 
@@ -344,6 +339,10 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 						return false;
 					}
 				}
+				if (/>here</i.test(html) || /click here/i.test(html)) {
+					this.sendReply('Do not use "click here"');
+					return false;
+				}
 				return true;
 			},
 			targetUserOrSelf: function (target, exactName) {
@@ -384,7 +383,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 					'Additional information:\n' +
 					'user = ' + user.name + '\n' +
 					'room = ' + room.id + '\n' +
-					'message = ' + message;
+					'message = ' + originalMessage;
 			var fakeErr = {stack: stack};
 
 			if (!require('./crashlogger.js')(fakeErr, 'A chat command')) {

@@ -8159,7 +8159,7 @@ exports.BattleMovedex = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, authentic: 1},
-		onHit: function (target, pokemon) {
+		onTryHit: function (target, pokemon) {
 			var decision = this.willMove(target);
 			if (decision) {
 				var noMeFirst = {
@@ -8169,7 +8169,7 @@ exports.BattleMovedex = {
 				if (move.category !== 'Status' && !noMeFirst[move]) {
 					pokemon.addVolatile('mefirst');
 					this.useMove(move, pokemon, target);
-					return;
+					return null;
 				}
 			}
 			return false;
@@ -8660,13 +8660,12 @@ exports.BattleMovedex = {
 		pp: 20,
 		priority: 0,
 		flags: {},
-		onTryHit: function (target) {
+		onTryHit: function (target, pokemon) {
 			if (!target.lastMove || !this.getMove(target.lastMove).flags['mirror']) {
 				return false;
 			}
-		},
-		onHit: function (target, source) {
-			this.useMove(target.lastMove, source, target);
+			this.useMove(target.lastMove, pokemon, target);
+			return null;
 		},
 		secondary: false,
 		target: "normal",
@@ -13446,7 +13445,8 @@ exports.BattleMovedex = {
 					return;
 				}
 				var damage = this.getDamage(source, target, move);
-				if (!damage) {
+				if (!damage && damage !== 0) {
+					this.add('-activate', target, 'Substitute', '[block] ' + move.name);
 					return null;
 				}
 				damage = this.runEvent('SubDamage', target, source, move, damage);

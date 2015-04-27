@@ -26,8 +26,20 @@ exports.Formats = [
 		name: "OU",
 		section: "ORAS Singles",
 
+		searchShow: false,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
 		banlist: ['Uber', 'Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite']
+	},
+	{
+		name: "OU (suspect test)",
+		section: "ORAS Singles",
+
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
+		banlist: ['Soul Dew', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite',
+			'Arceus', 'Blaziken', 'Darkrai', 'Deoxys', 'Deoxys-Attack', 'Deoxys-Defense', 'Deoxys-Speed', 'Dialga',
+			'Genesect', 'Giratina', 'Giratina-Origin', 'Greninja', 'Groudon', 'Ho-Oh', 'Kyogre', 'Kyurem-White',
+			'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom'
+		]
 	},
 	{
 		name: "OU (no Mega)",
@@ -70,17 +82,8 @@ exports.Formats = [
 		name: "NU",
 		section: "ORAS Singles",
 
-		searchShow: false,
 		ruleset: ['RU'],
-		banlist: ['RU', 'BL3', 'Glalitite', 'Steelixite']
-	},
-	{
-		name: "NU (suspect test)",
-		section: "ORAS Singles",
-
-		challengeShow: false,
-		ruleset: ['RU'],
-		banlist: ['RU', 'BL3', 'Glalitite', 'Steelixite']
+		banlist: ['RU', 'BL3', 'Cameruptite', 'Glalitite', 'Steelixite']
 	},
 	{
 		name: "LC",
@@ -1100,14 +1103,14 @@ exports.Formats = [
 			if (name === 'sweep') {
 				this.add('c|&Sweep|xD');
 			}
-			if (name === 'vacate') {
-				this.add('c|&Vacate|sticky situation');
-			}
 			if (name === 'verbatim') {
 				this.add('c|&verbatim|All in');
 			}
 
 			// Mods.
+			if (name === 'acedia') {
+				this.add('c|@Acedia|Time for a true display of skill ( ͡° ͜ʖ ͡°)');
+			}
 			if (name === 'am') {
 				this.add('c|@AM|Lucky and Bad');
 			}
@@ -1120,6 +1123,17 @@ exports.Formats = [
 			if (name === 'asgdf') {
 				sentences = ["Steel waters run deep, they say!", "I will insteell fear in your heart!", "Man the harpuns!"].randomize();
 				this.add('c|@asgdf|' + sentences[0]);
+			}
+			if (name === 'audiosurfer') {
+				pokemon.phraseIndex = this.random(3);
+				if (pokemon.phraseIndex === 2) {
+					var singers = ['Waxahatchee', 'Speedy Ortiz', 'Sufjan Stevens', 'Kendrick Lamar'];
+					this.add('c|@Audiosurfer|Have you heard the new ' + singers[this.random(4)] + ' song?');
+				} else if (pokemon.phraseIndex === 1) {
+					this.add('c|@Audiosurfer|If you were worth playing you wouldn\'t be on the ladder.');
+				} else {
+					this.add('c|@Audiosurfer| Just came back from surfing. Don\'t believe me? Here\'s a pic: http://fc02.deviantart.net/fs70/i/2011/352/d/3/surf_all_the_oceans_by_dawn_shade-d4jga6b.png');
+				}
 			}
 			if (name === 'barton') {
 				this.add('c|@barton|free passion');
@@ -1406,9 +1420,6 @@ exports.Formats = [
 			}
 
 			// Drivers.
-			if (name === 'acedia') {
-				this.add('c|%Acedia|Time for a true display of skill ( ͡° ͜ʖ ͡°)');
-			}
 			if (name === 'aelita') {
 				this.add('c|%Aelita|Transfer: Aelita. Scanner: Aelita. Virtualization!');
 			}
@@ -1425,17 +1436,6 @@ exports.Formats = [
 			}
 			if (name === 'astyanax') {
 				this.add('c|%Astyanax|:^) Top kek');
-			}
-			if (name === 'audiosurfer') {
-				pokemon.phraseIndex = this.random(3);
-				if (pokemon.phraseIndex === 2) {
-					var singers = ['Waxahatchee', 'Speedy Ortiz', 'Sufjan Stevens', 'Kendrick Lamar'];
-					this.add('c|%Audiosurfer|Have you heard the new ' + singers[this.random(4)] + ' song?');
-				} else if (pokemon.phraseIndex === 1) {
-					this.add('c|%Audiosurfer|If you were worth playing you wouldn\'t be on the ladder.');
-				} else {
-					this.add('c|%Audiosurfer| Just came back from surfing. Don\'t believe me? Here\'s a pic: http://fc02.deviantart.net/fs70/i/2011/352/d/3/surf_all_the_oceans_by_dawn_shade-d4jga6b.png');
-				}
 			}
 			if (name === 'birkal') {
 				this.add('c|%Birkal|caw');
@@ -1456,11 +1456,14 @@ exports.Formats = [
 			if (name === 'galbia') {
 				this.add('c|%galbia|prepare for my beautiful display of pure italian skill');
 			}
+			if (name === 'hugendugen') {
+				this.add('c|%Hugendugen|4-1-0 let\'s go for it');
+			}
 			if (name === 'jellicent') {
 				this.add('c|%Jellicent|~(^.^)~');
 			}
-			if (name === 'hugendugen') {
-				this.add("c|%Hugendugen|4-1-0 let's go for it");
+			if (name === 'kayo') {
+				this.add('c|%Kayo|The One and Only Obese Phantom Enthusiast');
 			}
 			if (name === 'ljdarkrai') {
 				this.add('c|%LJDarkrai|Azideias');
@@ -1478,6 +1481,9 @@ exports.Formats = [
 			if (name === 'uselesstrainer') {
 				sentences = ['huehuehuehue', 'PIZA', 'SPAGUETI', 'RAVIOLI RAVIOLI GIVE ME THE FORMUOLI', 'get ready for PUN-ishment'];
 				this.add('c|%useless trainer|' + sentences[this.random(5)]);
+			}
+			if (name === 'vacate') {
+				this.add('c|%Vacate|sticky situation');
 			}
 
 			// Voices.
@@ -1558,9 +1564,6 @@ exports.Formats = [
 			}
 			if (name === 'diatom') {
 				this.add('-message', pokemon.side.foe.name + ' was banned by Diatom. (you should be thankful you are banned and not permabanned)');
-			}
-			if (name === 'imanalt') {
-				this.add('c|+imanalt|muh bulk');
 			}
 			if (name === 'mattl') {
 				this.add('c|+MattL|The annoyance I will cause is not well-defined.');
@@ -1683,14 +1686,14 @@ exports.Formats = [
 			if (name === 'sweep') {
 				this.add('c|&Sweep|xD');
 			}
-			if (name === 'vacate') {
-				this.add('c|&Vacate|dam it');
-			}
 			if (name === 'verbatim') {
 				this.add('c|&verbatim|Crash and Burn');
 			}
 
 			// Mods.
+			if (name === 'acedia') {
+				this.add('c|@Acedia|My dad smoked his whole life. One day my mom told him "If you want to see your children graduate, you have to stop". 3 years later he died of lung cancer. My mom told me "Dont smoke; dont put your family through this". At 24, I have never touched a cigarette. I must say, I feel a sense of regret, because watching you play Pokemon gave me cancer anyway ( ͝° ͜ʖ͡°)');
+			}
 			if (name === 'am') {
 				this.add('c|@AM|RIP');
 			}
@@ -1702,6 +1705,15 @@ exports.Formats = [
 			}
 			if (name === 'asgdf') {
 				this.add('c|@asgdf|' + ['Looks like I spoke too hasteely', 'You only won because I couldn\'t think of a penguin pun!'][this.random(2)]);
+			}
+			if (name === 'audiosurfer') {
+				if (pokemon.phraseIndex === 2) {
+					this.add('c|@Audiosurfer|No? Well you should check it out.');
+				} else if (pokemon.phraseIndex === 1) {
+					this.add('c|@Audiosurfer|You should consider Battling 101 friend.');
+				} else {
+					this.add('c|@Audiosurfer|Back to catching waves.');
+				}
 			}
 			if (name === 'barton') {
 				this.add('c|@barton|' + ['ok', 'haha?'][this.random(2)]);
@@ -1969,9 +1981,6 @@ exports.Formats = [
 			}
 
 			// Drivers.
-			if (name === 'acedia') {
-				this.add('c|%Acedia|My dad smoked his whole life. One day my mom told him "If you want to see your children graduate, you have to stop". 3 years later he died of lung cancer. My mom told me "Dont smoke; dont put your family through this". At 24, I have never touched a cigarette. I must say, I feel a sense of regret, because watching you play Pokemon gave me cancer anyway ( ͝° ͜ʖ͡°)');
-			}
 			if (name === 'aelita') {
 				sentences = ['Oh no, the Scyphozoa\'s here!', 'Devirtualized...', 'Stones. Aelita Stones. Like the rock group. I\'m Odd\'s cousin from Canada.'];
 				this.add('c|%Aelita|' + sentences[this.random(3)]);
@@ -1990,15 +1999,6 @@ exports.Formats = [
 			}
 			if (name === 'astyanax') {
 				this.add('c|%Astyanax|:^( Bottom kek');
-			}
-			if (name === 'audiosurfer') {
-				if (pokemon.phraseIndex === 2) {
-					this.add('c|%Audiosurfer|No? Well you should check it out.');
-				} else if (pokemon.phraseIndex === 1) {
-					this.add('c|%Audiosurfer|You should consider Battling 101 friend.');
-				} else {
-					this.add('c|%Audiosurfer|Back to catching waves.');
-				}
 			}
 			if (name === 'birkal') {
 				this.add('c|%Birkal|//birkal');
@@ -2021,6 +2021,9 @@ exports.Formats = [
 			if (name === 'jellicent') {
 				this.add('c|%Jellicent|X_X');
 			}
+			if (name === 'kayo') {
+				this.add('c|%Kayo|Fat ShOoOoOoSty!');
+			}
 			if (name === 'ljdarkrai') {
 				this.add('c|%LJDarkrai|:<');
 			}
@@ -2037,6 +2040,9 @@ exports.Formats = [
 				sentences = ['MATTERED', 'CAIO', 'ima repr0t', 'one day i\'ll turn into a beautiful butterfly'];
 				this.add('c|%useless trainer|' + sentences[this.random(4)]);
 			}
+			if (name === 'vacate') {
+				this.add('c|%Vacate|dam it');
+			}
 
 			// Ex-staff or honorary voice.
 			if (name === 'bmelts') {
@@ -2047,9 +2053,6 @@ exports.Formats = [
 			}
 			if (name === 'diatom' && !pokemon.hasBeenThanked) {
 				this.add('c|★' + pokemon.side.foe.name + '|Thanks Diatom...');
-			}
-			if (name === 'imanalt') {
-				this.add('c|+imanalt|bshax imo');
 			}
 			if (name === 'mattl') {
 				this.add('c|+MattL|Finish him! You used "Finals week!" Fatality!');
@@ -2462,6 +2465,18 @@ exports.Formats = [
 			}
 
 			// Mod signature moves.
+			if (move.id === 'worryseed' && name === 'acedia') {
+				move.name = 'Procrastination';
+				move.onHit = function (pokemon, source) {
+					var oldAbility = pokemon.setAbility('slowstart');
+					if (oldAbility) {
+						this.add('-ability', pokemon, 'Slow Start', '[from] move: Procrastination');
+						if (this.random(100) < 10) source.faint();
+						return;
+					}
+					return false;
+				};
+			}
 			if (move.id === 'pursuit' && name === 'am') {
 				move.name = 'Predator';
 				move.basePowerCallback = function (pokemon, target) {
@@ -2517,6 +2532,23 @@ exports.Formats = [
 					if (this.random(100) < 70) {
 						this.boost({spa:-1, spd:-1}, pokemon, pokemon, move.sourceEffect);
 					}
+				};
+			}
+			if (move.id === 'detect' && name === 'audiosurfer') {
+				move.name = 'Audioshield';
+				move.secondary = {chance: 50, self: {boosts: {accuracy:-1}}};
+				move.onTryHit = function (target) {
+					this.add('-anim', target, "Boomburst", target);
+					return !!this.willAct() && this.runEvent('StallMove', target);
+				};
+				move.onHit = function (pokemon) {
+					var foe = pokemon.side.foe.active[0];
+					if (foe.ability !== 'soundproof') {
+						this.add('-message', 'The Audioshield is making a deafening noise!');
+						this.damage(foe.maxhp / 12, foe, pokemon);
+						if (this.random(2) === 1) this.boost({atk:-1, spa:-1}, foe, foe, 'noise damage');
+					}
+					pokemon.addVolatile('stall');
 				};
 			}
 			if (move.id === 'bulkup' && name === 'barton') {
@@ -2903,10 +2935,6 @@ exports.Formats = [
 					this.add('-anim', source, "Flamethrower", target);
 				};
 			}
-			if (move.id === 'toxic' && name === 'mattl') {
-				move.name = 'Topology';
-				move.self = {status: 'tox'};
-			}
 			if (move.id === 'spikes' && name === 'morfent') {
 				move.name = 'Used Needles';
 				move.self = {boosts: {evasion: -1}};
@@ -3082,20 +3110,6 @@ exports.Formats = [
 			}
 			if (move.id === 'healingwish' && name === 'shamethat') {
 				move.name = 'Extreme Compromise';
-			}
-			if (move.id === 'detect' && name === 'shaymin') {
-				move.name = 'Flower Garden';
-				move.type = 'Grass';
-				move.self = {boosts: {def:1, spa:1, spd:1}};
-				move.onTryHit = function (target, source) {
-					if (source.volatiles['flowergarden']) return false;
-					this.attrLastMove('[still]');
-					this.add('-anim', source, "Amnesia", source);
-				};
-				move.onHit = function (target, source) {
-					source.addVolatile('stall');
-					source.addVolatile('flowergarden');
-				};
 			}
 			if (move.id === 'judgment' && name === 'shrang') {
 				move.name = 'Pixilate';
@@ -3282,8 +3296,6 @@ exports.Formats = [
 				move.multihit = [2, 5];
 				move.onTryHit = function (target, source) {
 					if (!source.isActive) return null;
-				};
-				move.onModifyMove = function (source) {
 					if (this.random(777) !== 42) return;
 					var opponent = pokemon.side.foe.active[0];
 					opponent.setStatus('brn');
@@ -3336,18 +3348,6 @@ exports.Formats = [
 			}
 
 			// Driver signature moves.
-			if (move.id === 'worryseed' && name === 'acedia') {
-				move.name = 'Procrastination';
-				move.onHit = function (pokemon, source) {
-					var oldAbility = pokemon.setAbility('slowstart');
-					if (oldAbility) {
-						this.add('-ability', pokemon, 'Slow Start', '[from] move: Procrastination');
-						if (this.random(100) < 10) source.faint();
-						return;
-					}
-					return false;
-				};
-			}
 			if (move.id === 'thunder' && name === 'aelita') {
 				move.name = 'Energy Field';
 				move.accuracy = 100;
@@ -3411,23 +3411,6 @@ exports.Formats = [
 					this.boost(boosts, source, source);
 				};
 			}
-			if (move.id === 'detect' && name === 'audiosurfer') {
-				move.name = 'Audioshield';
-				move.secondary = {chance: 50, self: {boosts: {accuracy:-1}}};
-				move.onTryHit = function (target) {
-					this.add('-anim', target, "Boomburst", target);
-					return !!this.willAct() && this.runEvent('StallMove', target);
-				};
-				move.onHit = function (pokemon) {
-					var foe = pokemon.side.foe.active[0];
-					if (foe.ability !== 'soundproof') {
-						this.add('-message', 'The Audioshield is making a deafening noise!');
-						this.damage(foe.maxhp / 12, foe, pokemon);
-						if (this.random(2) === 1) this.boost({atk:-1, spa:-1}, foe, foe, 'noise damage');
-					}
-					pokemon.addVolatile('stall');
-				};
-			}
 			if (move.id === 'spikecannon' && name === 'bloobblob') {
 				// I fear that having two moves with id 'bulletseed' would mess with PP.
 				move.name = 'Lava Whip';
@@ -3435,6 +3418,20 @@ exports.Formats = [
 				move.onTryHit = function (target, source) {
 					this.attrLastMove('[still]');
 					this.add('-anim', source, "Tail Slap", target);
+				};
+			}
+			if (move.id === 'hypervoice' && name === 'bumbadadabum') {
+				move.name = 'Open Source Software';
+				move.type = 'Electric';
+				move.basePower = 110;
+				move.accuracy = 95;
+				move.secondaries = [{chance:20, self:{boosts:{spa:-1}}, volatileStatus:'disable'}];
+				move.onTryHit = function (target, source) {
+					this.attrLastMove('[still]');
+					this.add('-anim', source, "Dark Void", target);
+				};
+				move.onHit = function () {
+					this.add('c|%Bumbadadabum|I\'d just like to interject for a moment. What you\'re referring to as Linux, is in fact, GNU/Linux, or as I\'ve recently taken to calling it, GNU plus Linux. Linux is not an operating system unto itself, but rather another free component of a fully functioning GNU system made useful by the GNU corelibs, shell utilities and vital system components comprising a full OS as defined by POSIX.');
 				};
 			}
 			if (move.id === 'swagger' && name === 'charlescarmichael') {
@@ -3496,7 +3493,7 @@ exports.Formats = [
 				move.onHit = function (target, source) {
 					var result = this.random(100);
 					var chance = source.hasAbility('serenegrace') ? 60 : 30;
-					var triggerFlinch = result < chance;
+					// If the result is less than 60 or 30, then Kibitz will flinch the target.
 					if (this.willMove(target) && result < chance) {
 						target.addVolatile('flinch');
 					} else if (target.hp !== 0 && !target.newlySwitched) {
@@ -3526,6 +3523,28 @@ exports.Formats = [
 				move.onTryHit = function (target, source) {
 					this.attrLastMove('[still]');
 					this.add('-anim', source, "Teeter Dance", target);
+				};
+			}
+			if (move.id === 'vinewhip' && name === 'kayo') {
+				move.name = 'Beard of Zeus Bomb';
+				move.type = 'Steel';
+				move.basePower = 90;
+				move.secondaries = [{
+					chance:50,
+					self:{boosts:{atk:1, spd:1}},
+					onHit: function (target, source) {
+						if (target.gender === 'F') {
+							target.addVolatile('attract');
+						} else if (target.gender === 'M') {
+							target.addVolatile('confusion');
+						} else {
+							target.trySetStatus('brn');
+						}
+					}
+				}];
+				move.onTryHit = function (target, source, move) {
+					this.attrLastMove('[still]');
+					this.add('-anim', source, "Leaf Storm", target);
 				};
 			}
 			if (move.id === 'blazekick' && name === 'ljdarkrai') {
@@ -3688,15 +3707,9 @@ exports.Formats = [
 				if (move.id === 'psywave') {
 					move.accuracy = 80;
 					move.onMoveFail = function () {
-						this.add('c|@Diatom|you should be thankful my psywave doesn\'t always hit');
+						this.add('c|+Diatom|you should be thankful my psywave doesn\'t always hit');
 					};
 				}
-			}
-			if (move.id === 'naturepower' && name === 'imanalt') {
-				move.name = 'FREE GENV BH';
-				move.onHit = function (target, source) {
-					this.useMove('earthquake', source, target);
-				};
 			}
 			if (move.id === 'growl' && name === 'limi') {
 				move.name = 'Resilience';
@@ -3710,6 +3723,10 @@ exports.Formats = [
 					source.addVolatile('resilience');
 					source.addVolatile('aquaring');
 				};
+			}
+			if (move.id === 'toxic' && name === 'mattl') {
+				move.name = 'Topology';
+				move.self = {status: 'tox'};
 			}
 			if (move.id === 'swagger' && name === 'mikel') {
 				move.accuracy = true;
@@ -3742,6 +3759,20 @@ exports.Formats = [
 					if (pokemon.trySetStatus('tox')) {
 						this.add('-message', '+Redew lost at SPL and got badly poisoned due to excessive trolling!');
 					}
+				};
+			}
+			if (move.id === 'detect' && name === 'shaymin') {
+				move.name = 'Flower Garden';
+				move.type = 'Grass';
+				move.self = {boosts: {def:1, spa:1, spd:1}};
+				move.onTryHit = function (target, source) {
+					if (source.volatiles['flowergarden']) return false;
+					this.attrLastMove('[still]');
+					this.add('-anim', source, "Amnesia", source);
+				};
+				move.onHit = function (target, source) {
+					source.addVolatile('stall');
+					source.addVolatile('flowergarden');
 				};
 			}
 			if (move.id === 'energyball' && name === 'somalia') {

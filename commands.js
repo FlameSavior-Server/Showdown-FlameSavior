@@ -416,8 +416,8 @@ var commands = exports.commands = {
 		var tar = ' ';
 		if (target) {
 			target = target.trim();
-			if (config.groupsranking.indexOf(target) > -1 && target != '#') {
-				if (config.groupsranking.indexOf(target) <= config.groupsranking.indexOf(user.group)) {
+			if (Config.groupsranking.indexOf(target) > -1 && target != '#') {
+				if (Config.groupsranking.indexOf(target) <= Config.groupsranking.indexOf(user.group)) {
 					tar = target;
 				} else {
 					this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');

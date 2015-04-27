@@ -1355,7 +1355,6 @@ var commands = exports.commands = {
 
 		return '/announce ' + target;
 	},
-<<<<<<< HEAD
 	roomauth: function (target, room, user, connection) {
 		if (!room.auth) return this.sendReply("/roomauth - This room isn't designed for per-room moderation and therefore has no auth list.");
 		var buffer = [];
@@ -1456,9 +1455,7 @@ var commands = exports.commands = {
 		if (total < 1) output = "There's no staff list on this server.";
 		return connection.popup(output);
 	},
-=======
 	announcehelp: ["/announce OR /wall [message] - Makes an announcement. Requires: % @ & ~"],
->>>>>>> afb35491763180ee8b527821eb1abc16070913f5
 
 	fr: 'forcerename',
 	forcerename: function (target, room, user) {

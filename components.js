@@ -172,49 +172,32 @@ var components = exports.components = {
 	},
 	
 	regdate: function(target, room, user, connection) {
-		if (!this.canBroadcast()) return;
-		if (!target) target = user.name;
+	        if (!this.canBroadcast()) return;
+		if (!target || target == "0") return this.sendReply('Lol, you can\'t do that, you nub.');
+		if (!target || target == "." || target == "," || target == "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
 		var username = target;
-		var userid = toId(target);
-		username = Tools.escapeHTML(username);
-		if (userid == '') return this.sendReplyBox(username+' is not a valid username.');
-		if (regdateCache[userid]) return this.sendReplyBox(username + " was registered on " + regdateCache[userid]);
-
-		var options = {
-			host: "www.pokemonshowdown.com",
-			port: 80,
-			path: "/users/"+userid
-		};
-
-		var content = "";
+		target = target.replace(/\s+/g, '');
+		var request = require("request");
 		var self = this;
-		var req = http.request(options, function(res) {
 
-			res.setEncoding("utf8");
-			res.on("data", function (chunk) {
-				content += chunk;
-			});
-			res.on("end", function () {
-				content = content.split("<em");
-				if (content[1]) {
-					content = content[1].split("</p>");
-					if (content[0]) {
-						content = content[0].split("</em>");
-						if (content[1]) {
-							regdate = content[1].trim();
-							data = username+' was registered on '+regdate+'.';
-							cacheRegdate(userid, regdate);
-						}
+		request('http://pokemonshowdown.com/users/~' + target, function (error, response, content) {
+			if (!(!error && response.statusCode == 200)) return;
+			content = content + '';
+			content = content.split("<em");
+			if (content[1]) {
+				content = content[1].split("</p>");
+				if (content[0]) {
+					content = content[0].split("</em>");
+					if (content[1]) {
+						regdate = content[1].split('</small>')[0] + '.';
+						data = Tools.escapeHTML(username) + ' was registered on' + regdate;
 					}
 				}
-				else {
-					data = username+' is not registered.';
-				}
-				self.sendReplyBox(data);
-				room.update();
-			});
+			} else {
+				data = Tools.escapeHTML(username) + ' is not registered.';
+			}
+			self.sendReplyBox(Tools.escapeHTML(data));
 		});
-		req.end();
 	},
 
 /*	atm: 'profile',

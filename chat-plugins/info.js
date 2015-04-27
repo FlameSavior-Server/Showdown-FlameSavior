@@ -92,7 +92,6 @@ var commands = exports.commands = {
 			this.sendReply('|raw|' + hiddenrooms);
 		}
 	},
-<<<<<<< HEAD:config/commands.js
 	 /********************************************************
 	 * Additional Commands.
 	 *********************************************************/
@@ -141,7 +140,6 @@ var commands = exports.commands = {
 	 	return this.sendReply("Group \"" + target + "\" not found.");
 	 },
 	 /*********************************************************
-=======
 	whoishelp: ["/whois - Get details on yourself: alts, group, IP address, and rooms.",
 		"/whois [username] - Get details on a username: alts (Requires: % @ & ~), group, IP address (Requires: @ & ~), and rooms."],
 
@@ -180,7 +178,6 @@ var commands = exports.commands = {
 	},
 
 	/*********************************************************
->>>>>>> afb35491763180ee8b527821eb1abc16070913f5:chat-plugins/info.js
 	 * Shortcuts
 	 *********************************************************/
 	 

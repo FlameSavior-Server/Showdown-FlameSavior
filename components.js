@@ -702,12 +702,14 @@ var components = exports.components = {
 	customsymbol: function (target, room, user) {
 		if (!user.canCustomSymbol && !user.can('vip')) return this.sendReply('You need to buy this item from the shop to use.');
 		if (!target || target.length > 1) return this.parse('/help customsymbol');
-		if (target.match(/[A-Za-z\d]+/g) || 'â€½!+%@\u2605\u2606&~#'.indexOf(target) >= 0) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
+		//if (target.match(/[A-Za-z\d]+/g) || 'â€½!+%@\u2605\u2606&~#'.indexOf(target) >= 0) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
+		var bannedSymbols = /[ +<>$%‽!★@&~#卐|A-z0-9]/;
+		if (target.match(bannedSymbols)) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
 		user.getIdentity = function (roomid) {
 			if (!roomid) roomid = 'lobby';
 			var name = this.name + (this.away ? " - \u0410\u051d\u0430\u0443" : "");
 			if (this.locked) {
-				return 'â€½' + name;
+				return '‽' + name;
 			}
 			if (this.mutedRooms[roomid]) {
 				return '!' + name;

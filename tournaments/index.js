@@ -743,7 +743,12 @@ Tournament = (function () {
                         if (runnerUp) this.room.add('|raw|<strong><font color=' + Core.profile.color + '>' + Tools.escapeHTML(runnerUp) + '</font> has also won <font color=' + Core.profile.color + '>' + secondMoney + '</font> ' + secondBuck + ' for coming in second!</strong>');
                                 writeMoney(toId(wid), firstMoney, function() {
                                         readMoney(toId(wid), function(newMoney) {
-                                                logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
+                                        	try {
+                                                //logTransaction(winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney);
+                                                	fs.appendFile('logs/transactions.log','['+new Date().toUTCString()+'] '+winner+' has won '+firstMoney+' '+firstBuck+' from a tournament in '+self.room.title+'. They now have '+newMoney+'\n');
+                                        	} catch (e) {
+                                        		console.log('line 748 crashed');
+                                        	}
                                                 if (runnerUp) {
                                                           writeMoney(toId(rid), secondMoney, function() {
                                                                 var newMoney2 = readMoney(toId(rid), function(newMoney2) {

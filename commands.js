@@ -2085,4 +2085,4 @@ function clearall() {
   Object.merge(CommandParser.commands, commands);
 }
 module.exports = exports['default'];
-};
+}

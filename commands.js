@@ -2052,7 +2052,7 @@ var commands = exports.commands = {
 
 Object.defineProperty(exports, '__esModule', {
   value: true
-);
+;
 exports['default'] = clearall;
 
 function clearall() {

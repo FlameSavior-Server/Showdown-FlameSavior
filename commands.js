@@ -2045,4 +2045,6 @@ var commands = exports.commands = {
 			}
 		}
 		user.rename(targetName, targetToken, targetAuth, connection);
-	},
+	}
+
+};

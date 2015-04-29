@@ -1611,7 +1611,6 @@ var commands = exports.commands = {
 			"got turnip'd by Gamebreaker!",
 			"pissed off Hope!",
 			"became Hope's love slave!",
-			"shipped Broaken Hope!",
 			"felt Gamebreaker's wrath!",
 			"died of a broken heart.",
 			"got scared and left the server!",

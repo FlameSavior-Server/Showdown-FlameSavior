@@ -2490,5 +2490,5 @@ user.updateIdentity();
 		delete user.getIdentity;
 		user.updateIdentity();
 		return this.sendReply("You are now showing your authority!");
-	}
+	},
 };

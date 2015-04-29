@@ -1160,7 +1160,7 @@ var commands = exports.commands = {
 			"<br />" +
 			"Room owners (#) can also use:<br />" +
 			"- /roomintro <em>intro</em>: sets the room introduction that will be displayed for all users joining the room<br />" +
-			"- /rules <em>rules link</em>: set the room rules link seen when using /rules<br />" +
+			"- /rules <em>rules link</em>: set the room rules link seen when using /<br />" +
 			"- /roommod, /roomdriver <em>username</em>: appoint a room moderator/driver<br />" +
 			"- /roomdemod, /roomdedriver <em>username</em>: remove a room moderator/driver<br />" +
 			"- /modchat <em>[%/@/#]</em>: set modchat level<br />" +
@@ -2238,42 +2238,10 @@ var commands = exports.commands = {
 		}
 	},
 
-	donate: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Donate to Parukia to help us keep our servers online! We need about $350 before March 22nd of 2015.<br><b>If you donate, be sure to let an admin know so we can thank you personally!</b><br><br><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QPKGXD5TUBRVJ&lc=US&item_name=Parukia&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">Donate!</a><br><b>NOTE: You must be logged into a Paypal account to donate. To donate money without having a bank account, credit card or debit card (basically via cash), see this page on <a href="https://www.paypal.com/webapps/mpp/greendot-moneypak">MoneyPaks</a>.</b><br><br>Bitcoin: 15SvTTzqYat9pPyC94kLjV2kirqiAySLxL<br><br>We also accept donations via <a href="http://www.google.com/wallet/">Google Wallet!</a> Send all money to <b>ayyysexyladies@gmail.com</b> to be accepted via Paypal.<br><b>Note:</b> Your Google account must state that you are 18 years or older to donate this way!');
-	},
-	
-	parukiaforum: 'parukiaforums',
-	parukiaforums: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Join Parukia\'s forums and engage in more fun discussions with the community! <br />' +
-			'<a href="http://parukia.net/community/">http://parukia.net/community/</a>');
-	},
-	
-	parukiarules: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-this.sendReplyBox('<font size="5" color="white"><b>The Parukian Guidelines</b></font><br><font size="3" color="white"><b>We don\'t follow the same rules as main!</b></font><br><br>0.) The most sacred rule on Parukia: All the best admins are born in December!<br>1.) There is no such thing as racism on Parukia.<br>2.) Hazeel is a nut, no matter how many times he denies it.<br>3.) ForexSenpai (Forethe x Oak) and Twin Flames (Blaze x Blade) are Parukia\'s OTPs(One True Pairings)!<br>4.) Playfully trolling one another is how we show we care<br>5.) We\'re all assholes, so if you\'re sensitive to certain issues warn us beforehand (no guarantee we\'ll respect that, though!)<br>6.) raiykid is rice, no exceptions.<br>7.) If you\'re not neutral with Red, you get no sympathy from the rest of us.<br>8.) If you pray to Jin, the hax grace will save you!<br>9.) If you piss off Niku, Oak will give you your last rites.<br>10.) Click all links at your own risk, it\'ll most likely be NSFW (in other words, you won\'t want your mother looking at it).<br>11.) Everything you say can and will be c/p\'d and turned into a dirty joke.<br>12.) Don\'t fuck with Blaze, Parukia\'s official mascot, or raiykid\'s gonna go all Canadian terrorist on your ass(ALALALALA EH?)<br>13.) You cannot go nope.avi to all these rules<br>14.) If you intended to go nope.avi to all these rules before reading #13, GG WP you\'ve just been rekt.<br>15.) Lost Saga cannot be found, please try again later.<br>16.) Accuracy hates you<br>17.) Nick is not poop, contrary to popular belief.<br>18.) GB can kick your ass in Project M. This rule is not up for debate, it is fact.<br>19.) If you stall, you will get haxed. This is undeniable law.<br>20.) Do not mess with a Starfish Nazi and a Mighty Tree!<br>21.) If you are asking y is the rum gone...raiy drank it all.<br>22.) If you have a fight, <b>settle it in smash!</b> If you don\'t have smash, you automatically lose!<br>23.) Paradoxical username user zero infinity is awesome when he\'s drunk!<br>24.) <a href="https://www.youtube.com/watch?v=qGyPuey-1Jw">Drunken Sailor</a> and <a href="https://www.youtube.com/watch?v=izGwDsrQ1eQ">Careless Whisper</a> are Parukia\'s official theme songs!<br>25.) If there\'s any work being done on the forum, 99% of the time it\'s Forethe doing it!<br>26.) If you have a complaint, write a formal business letter to the following address.<br>-Parukia Admins Inc.<br>Professor Oak Jr., Nickoop@, LostPhantom @ Private Message on Parukia-Server Lane 1001001<br>Open 42 hours a day!<br>27.) Qwilfish is LostPhantom\'s arch nemesis!<br>28.) Everyone on Parukia is Hazeel\'s love interest until proven male. ...And even then, he might still want you!<br>29.) Stay in school. Don\'t do drugs. Don\'t be a Haunter. ');
-        },
-        
-        parukiatiers: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Parukia\'s Tiers:<br><a href="http://parukia.net/community/threads/parukian-tier-system.294/">http://parukia.net/community/threads/parukian-tier-system.294/</a><br><br>If you believe something is broken and deserves to be banned/suspected, contact Nickoop@, Kamui Senketsu/Pikachudude, SP Scep or Redace100!');
-	},
-
         away: function (target, room, user) {
 		user.away = !user.away;
 		user.updateIdentity();
 		this.sendReply("You are " + (user.away ? "now" : "no longer") + " away.");
-	},
-	
-	carelesswhispers: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Parukia\'s Careless Whispers Button:</b><br><a href="http://parukia.net/carelesswhispers.html">http://parukia.net/carelesswhispers.html</a>');
-	},
-	
-	smashhype: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b><a href="https://www.youtube.com/watch?v=ei3-Qo9wHH4&feature=youtu.be">C\'Mon and Ride The Smash Hype Train!</a></b>');
 	},
 	eating: 'away',
        anime: 'away',
@@ -2296,63 +2264,51 @@ this.sendReplyBox('<font size="5" color="white"><b>The Parukian Guidelines</b></
             var t2 = 'Away';
             switch (cmd) {
            case 'busy':
-t = 'â’·â“¤â“¢â“¨';
+t = 'Ⓑⓤⓢⓨ';
 t2 = 'Busy';
 break;
 case 'sleeping':
-t = 'â“ˆâ“›â“”â“”â“Ÿâ“˜â“â“–';
+t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
 t2 = 'Sleeping';
 break;
 case 'fapping':
-t = 'â’»â“â“Ÿâ“Ÿâ“˜â“â“–';
+t = 'Ⓕⓐⓟⓟⓘⓝⓖ';
 t2 = 'Fapping';
 break;
 case 'sleep':
-t = 'â“ˆâ“›â“”â“”â“Ÿâ“˜â“â“–';
+t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';';
 t2 = 'Sleeping';
 break;
 case 'gaming':
-t = 'â’¼â“â“œâ“˜â“â“–';
+t = 'Ⓖⓐⓜⓘⓝⓖ';
 t2 = 'Gaming';
 break;
 case 'working':
-t = 'â“Œâ“žâ“¡â“šâ“˜â“â“–';
+t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
 t2 = 'Working';
 break;
 case 'skype':
-t = 'â“ˆâ“šâ“¨â“Ÿâ“”';
+t = 'Ⓢⓚⓨⓟⓔ';
 t2 = 'on Skype';
 break;
 case 'work':
-t = 'â“Œâ“žâ“¡â“šâ“˜â“â“–';
+t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
 t2 = 'Working';
 break;
 case 'eating':
-t = 'â’ºâ“â“£â“˜â“â“–';
+t = 'Ⓔⓐⓣⓘⓝⓖ';
 t2 = 'Eating';
 break;
 case 'anime':
-t = 'â’¶â“â“˜â“œâ“”';
+t = 'Ⓐⓝⓘⓜⓔ';
 t2 = 'Watching Anime';
 break;
-case 'smashing':
-t = 'â“ˆâ“œâ“â“¢â“—â“˜â“â“–';
-t2 = 'Smashing';
-break;
 case 'shower':
-t = 'â“ˆâ“—â“žâ“¦â“”â“¡';
+t = 'Ⓢⓗⓞⓦⓔⓡⓘⓝⓖ';
 t2 = 'In the shower';
 break;
-case 'drunk':
-t = 'â’¹â“¡â“¤â“â“š';
-t2 = 'drunk';
-break;
-case 'forum':
-t = 'â’»â“žâ“¡â“¤â“œ';
-t2 = 'On the forum';
-break;
 default:
-t = 'â’¶â“¦â“â“¨'
+t = 'ⒶⓌⓐⓨ'
 t2 = 'Away';
 break;
 }

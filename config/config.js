@@ -162,7 +162,6 @@ exports.customavatars = {
 	'sempiternus': '6GPEX9Vt.jpeg',
 	'srperor': 'kev.png',
 	'brokenhope': 'PI3Qugb.gif',
-	'hayleysworld': 'Hayley.png',
 	'nightcloud': 'we22ofkl.png'
 };
 
@@ -230,16 +229,16 @@ exports.replsocketmode = 0600;
 //     - tournaments: creating tournaments (/tour new, settype etc.)
 //     - tournamentsmoderation: /tour dq, autodq, end etc.
 //     - tournamentsmanagement: enable/disable tournaments.
-exports.groupsranking = [' ', '+', '%', '@', '\u2605', '#', '&', '~'];
-exports.groups = {
-	'~': {
+exports.grouplist = [
+	{
+		symbol: '~',
 		id: "admin",
 		name: "Administrator",
 		root: true,
-		globalonly: true,
-		rank: 7
+		globalonly: true
 	},
-	'&': {
+	{
+		symbol: '&',
 		id: "leader",
 		name: "Leader",
 		inherit: '@',
@@ -252,10 +251,10 @@ exports.groups = {
 		potd: true,
 		disableladder: true,
 		globalonly: true,
-		tournamentsmanagement: true,
-		rank: 6
+		tournamentsmanagement: true
 	},
-	'#': {
+	{
+		symbol: 'â˜­',
 		id: "owner",
 		name: "Room Owner",
 		inherit: '@',
@@ -265,20 +264,22 @@ exports.groups = {
 		declare: true,
 		modchatall: true,
 		roomonly: true,
-		tournamentsmanagement: true,
-		rank: 5
+		tournamentsmanagement: true
 	},
-	'\u2605': {
+	{
+		symbol: '\u2605',
 		id: "player",
 		name: "Player",
 		inherit: '+',
 		roomvoice: true,
+		roomplayer: true,
 		modchat: true,
 		roomonly: true,
 		privateroom: true,
-		rank: 4
+		joinbattle: true
 	},
-	'@': {
+	{
+		symbol: '@',
 		id: "mod",
 		name: "Moderator",
 		inherit: '%',
@@ -289,10 +290,10 @@ exports.groups = {
 		forcerename: true,
 		ip: true,
 		alts: '@u',
-		tournaments: true,
-		rank: 3
+		tournaments: true
 	},
-	'%': {
+	{
+		symbol: '%',
 		id: "driver",
 		name: "Driver",
 		inherit: '+',
@@ -310,19 +311,18 @@ exports.groups = {
 		receiveauthmessages: true,
 		tournamentsmoderation: true,
 		jeopardy: true,
-		rank: 2
+		joinbattle: true
 	},
-	'+': {
+	{
+		symbol: '+',
 		id: "voice",
 		name: "Voice",
 		inherit: ' ',
-		broadcast: true,
-		joinbattle: true,
-		rank: 1
+		broadcast: true
 	},
-	' ': {
+	{
+		symbol: ' ',
 		ip: 's',
-		alts: 's',
-		rank: 0
+		alts: 's'
 	}
-};
+];

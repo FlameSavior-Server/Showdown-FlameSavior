@@ -4,7 +4,7 @@
  */
 var serverIp = '127.0.0.1';
 
-exports.commands = {
+exports.commands = { }/*
 	profile: function(target, room, user) {
 		if (!target) target = user.name;
 		if (toId(target).length > 19) return this.sendReply("Usernames may not be more than 19 characters long.");
@@ -166,3 +166,4 @@ N = Math.min(N, 255);
 N = Math.round(N);
 return "0123456789ABCDEF".charAt((N - N % 16) / 16) + "0123456789ABCDEF".charAt(N % 16);
 };
+*/

@@ -653,7 +653,7 @@ var commands = exports.commands = {
 				resultsStr = results.slice(0, 10).join(", ") + ", and " + string(results.length - output) + " more. Redo the search with 'all' as a search parameter to show all results.";
 			}
 		} else {
-			resultsStr = "No PokÃ©mon found.";
+			resultsStr = "No PokÃƒÂ©mon found.";
 		}
 		return this.sendReplyBox(resultsStr);
 	},
@@ -941,8 +941,8 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"New to competitive pokemon?<br />" +
-			"- <a href=\"https://www.smogon.com/sim/ps_guide\">Beginner's Guide to PokÃ©mon Showdown</a><br />" +
-			"- <a href=\"https://www.smogon.com/dp/articles/intro_comp_pokemon\">An introduction to competitive PokÃ©mon</a><br />" +
+			"- <a href=\"https://www.smogon.com/sim/ps_guide\">Beginner's Guide to PokÃƒÂ©mon Showdown</a><br />" +
+			"- <a href=\"https://www.smogon.com/dp/articles/intro_comp_pokemon\">An introduction to competitive PokÃƒÂ©mon</a><br />" +
 			"- <a href=\"https://www.smogon.com/bw/articles/bw_tiers\">What do 'OU', 'UU', etc mean?</a><br />" +
 			"- <a href=\"https://www.smogon.com/xyhub/tiers\">What are the rules for each format? What is 'Sleep Clause'?</a>"
 		);
@@ -1033,18 +1033,18 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === '1v1') {
 			matched = true;
-			if (target !== 'all') buffer += "Bring three PokÃ©mon to Team Preview and choose one to battle.<br />";
+			if (target !== 'all') buffer += "Bring three PokÃƒÂ©mon to Team Preview and choose one to battle.<br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3496773/\">1v1</a><br />";
 		}
 		if (target === 'all' || target === 'monotype') {
 			matched = true;
-			if (target !== 'all') buffer += "All PokÃ©mon on a team must share a type.<br />";
+			if (target !== 'all') buffer += "All PokÃƒÂ©mon on a team must share a type.<br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3493087/\">Monotype</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3517737/\">Monotype Viability Rankings</a><br />";
 		}
 		if (target === 'all' || target === 'tiershift' || target === 'ts') {
 			matched = true;
-			if (target !== 'all') buffer += "PokÃ©mon below OU get all their stats boosted. BL/UU get +5, BL2/RU get +10, and BL3/NU or lower get +15.<br />";
+			if (target !== 'all') buffer += "PokÃƒÂ©mon below OU get all their stats boosted. BL/UU get +5, BL2/RU get +10, and BL3/NU or lower get +15.<br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3508369/\">Tier Shift</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3514386/\">Tier Shift Viability Rankings</a><br />";
 		}
@@ -1060,13 +1060,13 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'almostanyability' || target === 'aaa') {
 			matched = true;
-			if (target !== 'all') buffer += "PokÃ©mon can use any ability, barring the few that are banned.<br />";
+			if (target !== 'all') buffer += "PokÃƒÂ©mon can use any ability, barring the few that are banned.<br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3528058/\">Almost Any Ability</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3517258/\">Almost Any Ability Viability Rankings</a><br />";
 		}
 		if (target === 'all' || target === 'stabmons') {
 			matched = true;
-			if (target !== 'all') buffer += "PokÃ©mon can use any move of their typing, in addition to the moves they can normally learn.<br />";
+			if (target !== 'all') buffer += "PokÃƒÂ©mon can use any move of their typing, in addition to the moves they can normally learn.<br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3493081/\">STABmons</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3512215/\">STABmons Viability Rankings</a><br />";
 		}
@@ -1181,7 +1181,7 @@ var commands = exports.commands = {
 			"- We wait a few minutes before restarting so people can finish up their battles<br />" +
 			"- The restart itself will take around 0.6 seconds<br />" +
 			"- Your ladder ranking and teams will not change<br />" +
-			"- We are restarting to update PokÃ©mon Showdown to a newer version"
+			"- We are restarting to update PokÃƒÂ©mon Showdown to a newer version"
 		);
 	},
 
@@ -1712,8 +1712,8 @@ var commands = exports.commands = {
 		}
 		if (target === 'effectiveness' || target === 'matchup' || target === 'eff' || target === 'type') {
 			matched = true;
-			this.sendReply("/effectiveness OR /matchup OR /eff OR /type [attack], [defender] - Provides the effectiveness of a move or type on another type or a PokÃ©mon.");
-			this.sendReply("!effectiveness OR !matchup OR !eff OR !type [attack], [defender] - Shows everyone the effectiveness of a move or type on another type or a PokÃ©mon.");
+			this.sendReply("/effectiveness OR /matchup OR /eff OR /type [attack], [defender] - Provides the effectiveness of a move or type on another type or a PokÃƒÂ©mon.");
+			this.sendReply("!effectiveness OR !matchup OR !eff OR !type [attack], [defender] - Shows everyone the effectiveness of a move or type on another type or a PokÃƒÂ©mon.");
 		}
 		if (target === 'dexsearch' || target === 'dsearch' || target === 'ds') {
 			matched = true;
@@ -2260,55 +2260,55 @@ var commands = exports.commands = {
        afk: 'away',
        away: function(target, room, user, connection, cmd) {
             // unicode away message idea by Siiilver
-            var t = 'â’¶â“¦â“â“¨';
+            var t = 'Ã¢â€™Â¶Ã¢â€œÂ¦Ã¢â€œÂÃ¢â€œÂ¨';
             var t2 = 'Away';
             switch (cmd) {
            case 'busy':
-t = 'Ⓑⓤⓢⓨ';
+t = 'â’·â“¤â“¢â“¨';
 t2 = 'Busy';
 break;
 case 'sleeping':
-t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+t = 'â“ˆâ“›â“”â“”â“Ÿâ“˜â“â“–';
 t2 = 'Sleeping';
 break;
 case 'fapping':
-t = 'Ⓕⓐⓟⓟⓘⓝⓖ';
+t = 'â’»â“â“Ÿâ“Ÿâ“˜â“â“–';
 t2 = 'Fapping';
 break;
 case 'sleep':
-t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+t = 'â“ˆâ“›â“”â“”â“Ÿâ“˜â“â“–';
 t2 = 'Sleeping';
 break;
 case 'gaming':
-t = 'Ⓖⓐⓜⓘⓝⓖ';
+t = 'â’¼â“â“œâ“˜â“â“–';
 t2 = 'Gaming';
 break;
 case 'working':
-t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
+t = 'â“Œâ“žâ“¡â“šâ“˜â“â“–';
 t2 = 'Working';
 break;
 case 'skype':
-t = 'Ⓢⓚⓨⓟⓔ';
+t = 'â“ˆâ“šâ“¨â“Ÿâ“”';
 t2 = 'on Skype';
 break;
 case 'work':
-t = 'Ⓦⓞⓡⓚⓘⓝⓖ';
+t = 'â“Œâ“žâ“¡â“šâ“˜â“â“–';
 t2 = 'Working';
 break;
 case 'eating':
-t = 'Ⓔⓐⓣⓘⓝⓖ';
+t = 'â’ºâ“â“£â“˜â“â“–';
 t2 = 'Eating';
 break;
 case 'anime':
-t = 'Ⓐⓝⓘⓜⓔ';
+t = 'â’¶â“â“˜â“œâ“”';
 t2 = 'Watching Anime';
 break;
 case 'shower':
-t = 'Ⓢⓗⓞⓦⓔⓡⓘⓝⓖ';
+t = 'â“ˆâ“—â“žâ“¦â“”â“¡â“˜â“â“–';
 t2 = 'In the shower';
 break;
 default:
-t = 'ⒶⓌⓐⓨ'
+t = 'â’¶â“Œâ“â“¨'
 t2 = 'Away';
 break;
 }
@@ -2362,5 +2362,4 @@ return this.sendReply('You are not set as away.');
  
 user.updateIdentity();
 	},
-
 };

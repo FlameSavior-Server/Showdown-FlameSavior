@@ -2276,7 +2276,7 @@ t = 'Ⓕⓐⓟⓟⓘⓝⓖ';
 t2 = 'Fapping';
 break;
 case 'sleep':
-t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';';
+t = 'Ⓢⓛⓔⓔⓟⓘⓝⓖ';
 t2 = 'Sleeping';
 break;
 case 'gaming':

@@ -1,6 +1,7 @@
 var fs = require('fs');
 
 exports.commands = {
+	stafflist: 'authlist',
 	authlist: function(target, room, user, connection) {
 		fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
 			var staff = {

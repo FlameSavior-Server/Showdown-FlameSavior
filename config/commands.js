@@ -2463,7 +2463,6 @@ return this.sendReply('You are not set as away.');
 user.updateIdentity();
 	},
 },
-exports.commands = {
 	hide: 'hideauth',
 	hideauth: function (target, room, user) {
 		if (!this.can('hideauth')) return false;

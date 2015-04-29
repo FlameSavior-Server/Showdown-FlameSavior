@@ -238,7 +238,7 @@ exports.grouplist = [
 		globalonly: true
 	},
 	{
-		symbol: '&',
+		symbol: '\u27C1',
 		id: "leader",
 		name: "Leader",
 		inherit: '@',
@@ -254,7 +254,7 @@ exports.grouplist = [
 		tournamentsmanagement: true
 	},
 	{
-		symbol: 'â˜­',
+		symbol: '\u262D',
 		id: "owner",
 		name: "Room Owner",
 		inherit: '@',

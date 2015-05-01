@@ -1495,10 +1495,8 @@ var commands = exports.commands = {
 		this.targetUser.avatar = '#cpgtan';
 		room.add("" + user.name + " applied cpgtan to affected area of " + this.targetUser.name);
 	},
-=======
 	avatarshelp: ["/avatars - Explains how to change avatars.",
 		"!avatars - Show everyone that information. Requires: + % @ & ~"],
->>>>>>> afb35491763180ee8b527821eb1abc16070913f5:chat-plugins/info.js
 
 	introduction: 'intro',
 	intro: function (target, room, user) {

@@ -1613,6 +1613,7 @@ var commands = exports.commands = {
 			"was beheaded by Mario!",
 			"was meteor smashed by Little Mac!",
 			"fell to the HOO HAH!",
+			"tried to fly away like dis dove, but crash landed and died!",
 			"got turnip'd by Gamebreaker!"
 			
 		];

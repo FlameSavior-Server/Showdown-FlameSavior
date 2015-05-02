@@ -249,9 +249,14 @@ exports.BattleScripts = {
 			}
 		}
 		if (move.ohko) { // bypasses accuracy modifiers
-			if (!target.volatiles['bounce'] && !target.volatiles['dig'] && !target.volatiles['dive'] && !target.volatiles['fly'] && !target.volatiles['shadowforce'] && !target.volatiles['skydrop']) {
+			if (!target.volatiles['bounce'] && !target.volatiles['dig'] && !target.volatiles['dive'] && !target.volatiles['fly'] && !target.volatiles['phantomforce'] && !target.volatiles['shadowforce'] && !target.volatiles['skydrop']) {
 				accuracy = 30;
-				if (pokemon.level > target.level) accuracy += (pokemon.level - target.level);
+				if (pokemon.level >= target.level) {
+					accuracy += (pokemon.level - target.level);
+				} else {
+					this.add('-immune', target, '[ohko]');
+					return false;
+				}
 			}
 		}
 		if (move.alwaysHit) {
@@ -314,6 +319,8 @@ exports.BattleScripts = {
 		}
 
 		if (target && pokemon !== target) target.gotAttacked(move, damage, pokemon);
+
+		if (move.ohko) this.add('-ohko');
 
 		if (!damage && damage !== 0) return damage;
 
@@ -1736,9 +1743,9 @@ exports.BattleScripts = {
 		// Medium priority
 		} else if (ability === 'Guts') {
 			item = hasMove['drainpunch'] ? 'Flame Orb' : 'Toxic Orb';
-		} else if (counter.Physical >= 4 && !hasMove['fakeout'] && !hasMove['flamecharge'] && !hasMove['rapidspin'] && !hasMove['suckerpunch']) {
+		} else if (counter.Physical >= 4 && ability !== 'Speed Boost' && !hasMove['fakeout'] && !hasMove['flamecharge'] && !hasMove['rapidspin'] && !hasMove['suckerpunch']) {
 			item = template.baseStats.spe > 82 && template.baseStats.spe < 109 && !counter['priority'] && this.random(3) ? 'Choice Scarf' : 'Choice Band';
-		} else if (counter.Special >= 4 && !hasMove['acidspray'] && !hasMove['chargebeam'] && !hasMove['fierydance']) {
+		} else if (counter.Special >= 4 && ability !== 'Speed Boost' && !hasMove['acidspray'] && !hasMove['chargebeam'] && !hasMove['fierydance']) {
 			item = template.baseStats.spe > 82 && template.baseStats.spe < 109 && !counter['priority'] && this.random(3) ? 'Choice Scarf' : 'Choice Specs';
 		} else if (hasMove['eruption'] || hasMove['waterspout']) {
 			item = counter.Status <= 1 ? 'Expert Belt' : 'Leftovers';
@@ -3878,18 +3885,5 @@ exports.BattleScripts = {
 		}
 
 		return team;
-	},
-	randomFinalDestinationTeam: function (side) {
-		return [{species: 'Xerneas', name: 'Fox', ability: 'Fairy Aura', item: '', evs: {hp:4, atk:252, spd:252}, nature: 'Brave', moves: ['Outrage']}];
-	},
-	randomMrBonesWildRideTeam: function (mySides) {
-		return [
-			{species: 'Slowbro', name: 'Funbro #1', ability: 'Harvest', item: 'Leppa Berry', evs: {hp:252, def:128, spd:128}, nature: 'Bold', moves: ['healpulse', 'slackoff', 'recycle', 'block']},
-			{species: 'Slowbro', name: 'Funbro #2', ability: 'Harvest', item: 'Leppa Berry', evs: {hp:252, def:128, spd:128}, nature: 'Bold', moves: ['healpulse', 'slackoff', 'recycle', 'block']},
-			{species: 'Slowbro', name: 'Funbro #3', ability: 'Harvest', item: 'Leppa Berry', evs: {hp:252, def:128, spd:128}, nature: 'Bold', moves: ['healpulse', 'slackoff', 'recycle', 'block']},
-			{species: 'Slowbro', name: 'Funbro #4', ability: 'Harvest', item: 'Leppa Berry', evs: {hp:252, def:128, spd:128}, nature: 'Bold', moves: ['healpulse', 'slackoff', 'recycle', 'block']},
-			{species: 'Slowbro', name: 'Funbro #5', ability: 'Harvest', item: 'Leppa Berry', evs: {hp:252, def:128, spd:128}, nature: 'Bold', moves: ['healpulse', 'slackoff', 'recycle', 'block']},
-			{species: 'Slowbro', name: 'Funbro #6', ability: 'Harvest', item: 'Leppa Berry', evs: {hp:252, def:128, spd:128}, nature: 'Bold', moves: ['healpulse', 'slackoff', 'recycle', 'block']}
-		];
 	}
 };

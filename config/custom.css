@@ -1,945 +1,977 @@
 body {
-    color: #FFFFFF;
-    background: url("http://i.imgur.com/3KZfhGD.jpg");
-    background-repeat: x-repeat;
-}
+      color: #FFFFFF;
+      background: url("http://i.imgur.com/3KZfhGD.jpg");
+      background-repeat: x-repeat;
+  }
 
-#header {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    background: url("http://i.imgur.com/kWY9I5O.png") no-repeat;
-    background-color: #6EAEDA;
-}
+  #header {
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+      background: url("http://i.imgur.com/kWY9I5O.png") no-repeat;
+      background-color: #6EAEDA;
+  }
 
-.ps-room.ps-room-light.scrollable {
-    font-family: helvetica, arial, sans-serif;
-    background: rgba(230, 240, 255, 0.7);
-    border-right: 1px solid #575757;
-}
+  .ps-room.ps-room-light.scrollable {
+      font-family: helvetica, arial, sans-serif;
+      background: rgba(230, 240, 255, 0.7);
+      border-right: 1px solid #575757;
+  }
 
-.pad {
-    border-right: 1px solid #575757;
-}
+  .pad {
+      border-right: 1px solid #575757;
+  }
 
-.mainmenuwrapper {
-    border-right: 1px solid #575757;
-}
+  .mainmenuwrapper {
+      border-right: 1px solid #575757;
+  }
 
-.battle-log {
-    background: url("http://i.imgur.com/OALLyrg.png") repeat;
-}
+  .battle-log {
+      background: url("http://i.imgur.com/OALLyrg.png") repeat;
+  }
 
-.pm-log {
-    background: url("http://i.imgur.com/jxOe6XC.png") repeat;
-    border: 1px solid #575757;
-}
+  .pm-log {
+      background: url("http://i.imgur.com/jxOe6XC.png") repeat;
+      border: 1px solid #575757;
+  }
 
-.chat-log.hasuserlist {
-    background: url("http://i.imgur.com/0MqPfER.png");
-    background-repeat: no-repeat;
-    background-size: auto auto;
-    background-position: top right;
-    background-color: #E9F3F3;
-    opacity: 1;
-}
+  .chat-log.hasuserlist {
+      background: url("http://i.imgur.com/0MqPfER.png");
+      background-repeat: no-repeat;
+      background-size: auto auto;
+      background-position: top right;
+      background-color: #E9F3F3;
+      opacity: 1;
+  }
 
-.chat-log-add {
-    background:url("http://i.imgur.com/2dyqgwD.png");
-    border-top: 1px solid #575757;
-}
+  .chat-log-add {
+      background:url("http://i.imgur.com/2dyqgwD.png");
+      border-top: 1px solid #575757;
+  }
 
-.pm-log-add {
-    background: #CFCFCF;
-    border: 1px solid #575757;
-    border-top: none;
-    background: url("http://i.imgur.com/SRdPIN3.png");
-}
+  .pm-log-add {
+      background: #CFCFCF;
+      border: 1px solid #575757;
+      border-top: none;
+      background: url("http://i.imgur.com/SRdPIN3.png");
+  }
 
-.ps-overlay {
-    background: rgba(230, 240, 255, 0.5)
-}
+  .ps-overlay {
+      background: rgba(230, 240, 255, 0.5)
+  }
 
-.button.button {
-    text-shadow: none;
-}
+  .button.button {
+      text-shadow: none;
+  }
 
-.logo {
-    opacity: 0;
-}
+  .logo {
+      opacity: 0;
+  }
 
-.battleform label {
-    background: url("http://i.imgur.com/yFWeHx0.png") no-repeat scroll left center transparent;
-    padding: 4px;
-    opacity: 0.9;
-    color: #FFF;
-}
+  .battleform label {
+      background: url("http://i.imgur.com/yFWeHx0.png") no-repeat scroll left center transparent;
+      padding: 4px;
+      opacity: 0.9;
+      color: #FFF;
+  }
 
-.menugroup {
-    background: rgba(0, 0, 0, 0);
-}
+  .menugroup {
+      background: rgba(0, 0, 0, 0);
+  }
 
-.menugroup .button {
-    background: none repeat scroll 0% 0% #474747;
-    color: #FFFFFF;
-    box-shadow: 0px 1px 0px 0px #5C5C5C inset, 0px 2px 3px rgba(0, 0, 0, 0.2);
-    border-color: #212121;
-    width: 230px;
-}
+  .menugroup .button {
+      background: none repeat scroll 0% 0% #474747;
+      color: #FFFFFF;
+      box-shadow: 0px 1px 0px 0px #5C5C5C inset, 0px 2px 3px rgba(0, 0, 0, 0.2);
+      border-color: #212121;
+      width: 230px;
+  }
 
-.menugroup .button:hover {
-    background: none repeat scroll 0% 0% #505050;
-    color: #FFFFFF;
-    box-shadow: 0px 1px 0px 0px #5F5F5F inset, 0px 2px 3px rgba(0, 0, 0, 0.2);
-    border-color: #212121;
-}
+  .menugroup .button:hover {
+      background: none repeat scroll 0% 0% #505050;
+      color: #FFFFFF;
+      box-shadow: 0px 1px 0px 0px #5F5F5F inset, 0px 2px 3px rgba(0, 0, 0, 0.2);
+      border-color: #212121;
+  }
 
-.menugroup .button.disabled, .menugroup .button.disabled:hover, .menugroup .button.disabled:active {
-    background: none repeat scroll 0% 0% #505050;
-    color: #DBDBDB;
-    border-color: #212121;
-}
+  .menugroup .button.disabled, .menugroup .button.disabled:hover, .menugroup .button.disabled:active {
+      background: none repeat scroll 0% 0% #505050;
+      color: #DBDBDB;
+      border-color: #212121;
+  }
 
-div.roomlist {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-}
+  div.roomlist {
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+  }
 
-.roomlist a.ilink {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    border: 1px solid #2E2E2E;
-    color: #001433;
-    background: #EEEEEE;
-    text-shadow: 1px 1px #EAEAEA;
-}
+  .roomlist a.ilink {
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+      border: 1px solid #2E2E2E;
+      color: #001433;
+      background: #EEEEEE;
+      text-shadow: 1px 1px #EAEAEA;
+  }
 
-.roomlist a.ilink:hover {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    border: 1px solid #2E2E2E;
-    color: #001433;
-    background: #DFDFDF;
-}
+  .roomlist a.ilink:hover {
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+      border: 1px solid #2E2E2E;
+      color: #001433;
+      background: #DFDFDF;
+  }
 
-.pm-window.focused h3,
-.pm-window.focused h3:hover {
-    border: 1px solid #212121;
-    color: #FFF;
-    background: rgba(0, 0, 0, 0.8);
-    font-family: verdana, helvetica, arial, sans-serif;
-}
+  .pm-window.focused h3,
+  .pm-window.focused h3:hover {
+      border: 1px solid #212121;
+      color: #FFF;
+      background: rgba(0, 0, 0, 0.8);
+      font-family: verdana, helvetica, arial, sans-serif;
+  }
 
-.pm-window h3 {
-    border: 1px solid #212121;
-    color: #FFF;
-    background: rgba(0, 0, 0, 0.7);
-    font-family: verdana, helvetica, arial, sans-serif;
-}
+  .pm-window h3 {
+      border: 1px solid #212121;
+      color: #FFF;
+      background: rgba(0, 0, 0, 0.7);
+      font-family: verdana, helvetica, arial, sans-serif;
+  }
 
-.pm-window h3:hover {
-    border: 1px solid #212121;
-    color: #FFF;
-    background: rgba(0, 0, 0, 0.8);
-    font-family: verdana, helvetica, arial, sans-serif;
-}
+  .pm-window h3:hover {
+      border: 1px solid #212121;
+      color: #FFF;
+      background: rgba(0, 0, 0, 0.8);
+      font-family: verdana, helvetica, arial, sans-serif;
+  }
 
-button.astext {
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-}
+  button.astext {
+      background-color: transparent;
+      border: 0;
+      padding: 0;
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+  }
 
-button.astext:hover {
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-}
+  button.astext:hover {
+      background-color: transparent;
+      border: 0;
+      padding: 0;
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+  }
 
-.maintabbarbottom {
-    background-color: rgb(190,190,190);
-    border-top: 1px solid #575757;
-    border-right: 0px solid #000000;
-    border-bottom: 1px solid #575757;
-    border-left: 0px solid #000000;
-}
+  .maintabbarbottom {
+      background-color: rgb(190,190,190);
+      border-top: 1px solid #575757;
+      border-right: 0px solid #000000;
+      border-bottom: 1px solid #575757;
+      border-left: 0px solid #000000;
+  }
 
-a.button.notifying.closable, .tabbar a.button.notifying {
-    background: url("http://i.imgur.com/tehpryL.png");
-    border: 1px solid #575757;
-}
+  a.button.notifying.closable, .tabbar a.button.notifying {
+      background: url("http://i.imgur.com/tehpryL.png");
+      border: 1px solid #575757;
+  }
 
-a.button.notifying.closable:hover, .tabbar a.button.notifying:hover {
-    background: url("http://i.imgur.com/MkX5drf.png");
-    border: 1px solid #575757;
-}
+  a.button.notifying.closable:hover, .tabbar a.button.notifying:hover {
+      background: url("http://i.imgur.com/MkX5drf.png");
+      border: 1px solid #575757;
+  }
 
-a.button.notifying.closable:active, .tabbar a.button.notifying:active {
-    background: url("http://i.imgur.com/MkX5drf.png?1");
-    border: 1px solid #575757;
-}
+  a.button.notifying.closable:active, .tabbar a.button.notifying:active {
+      background: url("http://i.imgur.com/MkX5drf.png?1");
+      border: 1px solid #575757;
+  }
 
-.tabbar a.button.cur,
-.tabbar a.button.cur:hover {
-    text-shadow: none;
-    font: 11px Verdana, Helvetica, Arial, sans-serif;
-    color: #000;
-    background:url("http://i.imgur.com/SRdPIN3.png");
-    border: 1px solid #575757;
-}
+  .tabbar a.button.cur,
+  .tabbar a.button.cur:hover {
+      text-shadow: none;
+      font: 11px Verdana, Helvetica, Arial, sans-serif;
+      color: #000;
+      background:url("http://i.imgur.com/SRdPIN3.png");
+      border: 1px solid #575757;
+  }
 
-.tabbar a.button {
-    text-shadow: none;
-    font: 11px Verdana, Helvetica, Arial, sans-serif;
-    color: #000;
-    background-color: #F2F2F2;
-    border: 1px solid #575757;
-    text-shadow: none;
-    z-index:1;
-}
+  .tabbar a.button {
+      text-shadow: none;
+      font: 11px Verdana, Helvetica, Arial, sans-serif;
+      color: #000;
+      background-color: #F2F2F2;
+      border: 1px solid #575757;
+      text-shadow: none;
+      z-index:1;
+  }
 
-.ps-room.ps-room-opaque {
-    background: rgba(240, 240, 240, 0.8);
-    color: #000;
-    border-right: 1px solid #575757;
-}
+  .ps-room.ps-room-opaque {
+      background: rgba(240, 240, 240, 0.8);
+      color: #000;
+      border-right: 1px solid #575757;
+  }
 
-div.trainer > strong {
-    color: #323841;
-}
-.battle-log h2 {
-    background: #808080;
-    color: #FFF;
-    border: 1px solid #000000;
-}
+  div.trainer > strong {
+      color: #323841;
+  }
+  .battle-log h2 {
+      background: #808080;
+      color: #FFF;
+      border: 1px solid #000000;
+  }
 
-.userlist li button {
-    text-shadow: none;
-}
+  .userlist li button {
+      text-shadow: none;
+  }
 
-ul.userlist {
-    border-right: 1px solid #575757;
-}
+  ul.userlist {
+      border-right: 1px solid #575757;
+  }
 
-span.username {
-    text-shadow: 1px 1px #CFCFCF;
-}
+  span.username {
+      text-shadow: 1px 1px #CFCFCF;
+  }
 
-div.pm-log > div {
-    border-right: 0px solid #000000;
-}
+  div.pm-log > div {
+      border-right: 0px solid #000000;
+  }
 
-.icon-user {
-    display: none;
-}
+  .icon-user {
+      display: none;
+  }
 
-button.select.formatselect:hover,
-button.select.teamselect:hover {
-    background: #E3E3E3;
-}
+  button.select.formatselect:hover,
+  button.select.teamselect:hover {
+      background: #E3E3E3;
+  }
 
-button.select.teamselect.preselected:hover {
-    opacity: 0.85;
-}
+  button.select.teamselect.preselected:hover {
+      opacity: 0.85;
+  }
 
-.infobox {
-    background: rgba(102, 136, 170, .075);
-}
+  .infobox {
+      background: rgba(102, 136, 170, .075);
+  }
 
-.ps-popup {
-    background: url("http://i.imgur.com/jxOe6XC.png");
-}
+  .ps-popup {
+      background: url("http://i.imgur.com/jxOe6XC.png");
+  }
 
-.popupmenu h3 {
-    color: #474747;
-}
+  .popupmenu h3 {
+      color: #474747;
+  }
+
+  .popupmenu button {
+      color: #292929;
+  }
+
+  .popupmenu button:hover {
+      background: rgba(233, 233, 233, 0.7);
+  }
+
+  span.message-pm {
+      color: #00A0A0;
+  }
+
+  div.chat small {
+      color: #001F2E;
+      text-shadow: 1px 1px #D4D4D5;
+  }
+
+  p > em {
+      color: #000000;
+  }
+
+  .highlighted {
+      background: #B3D3E8;
+  }
+
+  /*****************
+  * Tournament CSS *
+  *****************/
+
+  div.ps-popup.tournament-popout-bracket > div.tournament-bracket-tree {
+      background: url("http://i.imgur.com/jxOe6XC.png");
+      background-size: auto auto;
+      background-repeat: repeat;
+      background-position: top;
+  }
+
+  div.tournament-tools.active {
+      background: #DDD;
+      border-top: 1px solid #575757;
+      border-bottom: 1px solid #575757;
+      box-shadow: none;
+  }
+
+  .tournament-title, .tournament-status, .tournament-toggle {
+      background: url("http://i.imgur.com/SRdPIN3.png") repeat scroll 0% 0% transparent;
+      color: #000;
+  }
+
+  .tournament-status {
+      border-right: none;
+      font-size: 70%;
+  }
+
+  .tournament-toggle {
+      border-left: none;
+      font-size: 70%;
+  }
+
+  .tournament-bracket {
+      border-top: 1px solid #575757;
+  }
   
-.popupmenu button {
-    color: #292929;
-}
+  .tournament-bracket-tree-node-loss > rect {
+    fill: rgba(229, 149, 149, 0.5);
+    stroke: #985555;
+  }
   
-.popupmenu button:hover {
-    background: rgba(233, 233, 233, 0.7);
-}
+  .tournament-bracket-tree-node-win > rect {
+    fill: rgba(152, 229, 149, 0.5);
+    stroke: #578A54;
+  }
+  
+  .tournament-bracket-tree-node-match-team-loss {
+    fill: #888;
+  }
+  
+  .tournament-bracket-tree-node > text > a {
+    fill: #258184;
+    font-style: italic;
+  }
+  
+  .tournament-bracket-tree-node > text > a:hover {
+    fill: #258184;
+  }
 
-span.message-pm {
-    color: #00A0A0;
-}
+  /**********************
+  * Tournament CSS ~end *
+  **********************/
 
-div.chat small {
-    color: #001F2E;
-    text-shadow: 1px 1px #D4D4D5;
-}
+  .challenge {
+      border-bottom: none;
+  }
 
-p > em {
-    color: #000000;
-}
+  div.notice > div.infobox > strong > font {
+      color: #007AA3;
+  }
 
-.highlighted {
-    background: #B3D3E8;
-}
+  div.notice > div.infobox > font {
+      color: #00B2B2;
+  }
 
-/*****************
-* Tournament CSS *
-*****************/
+  div.notice > b > font {
+      color: #007AA3;
+  }
 
-div.ps-popup.tournament-popout-bracket > div.tournament-bracket-tree {
-    background: url("http://i.imgur.com/jxOe6XC.png");
-    background-size: auto auto;
-    background-repeat: repeat;
-    background-position: top;
-}
+  div.mainmenufooter a:link,
+  div.mainmenufooter a:hover,
+  div.mainmenufooter a:visited {
+      color: #C0C6C9;
+      text-decoration: none;
+  }
 
-div.tournament-tools.active {
-    background: #DDD;
-    border-top: 1px solid #575757;
-    border-bottom: 1px solid #575757;
-    box-shadow: none;
-}
+  .ps-overlay {
+      background: rgba(0, 0, 0, 0.3);
+  }
 
-.tournament-title, .tournament-status, .tournament-toggle {
-    background: url("http://i.imgur.com/SRdPIN3.png") repeat scroll 0% 0% transparent;
-    color: #000;
-}
-    
-.tournament-status {
-    border-right: none;
-    font-size: 70%;
-}
-    
-.tournament-toggle {
-    border-left: none;
-    font-size: 70%;
-}
-    
-.tournament-bracket {
-    border-top: 1px solid #575757;
-}
+  /***********************
+  * Broadcast CSS ~start *
+  ***********************/
 
-/**********************
-* Tournament CSS ~end *
-**********************/
-    
-.challenge {
-    border-bottom: none;
-}
+  .broadcast-red {
+      background: #D57575;
+      border: 1px solid #985555;
+      color: #FFD7D7;
+      padding: 5px 1px 3px 8px;
+      text-shadow: 1px 1px 1px #985555;
+      font-family: helvetica, arial, sans-serif;
+      text-align: center;
+  }
 
-div.notice > div.infobox > strong > font {
-    color: #007AA3;
-}
+  .broadcast-green {
+      background: #578A54;
+      border: 1px solid #375735;
+      padding: 5px 1px 3px 8px;
+      color: #BEFFB9;
+      text-shadow: 1px 1px 1px #375735;
+      font-family: helvetica, arial, sans-serif;
+      text-align: center;
+  }
 
-div.notice > div.infobox > font {
-    color: #00B2B2;
-}
+  .broadcast-blue {
+      background: #677992;
+      border: 1px solid #414D5E;
+      padding: 5px 1px 3px 8px;
+      color: #C1DAFF;
+      text-shadow: 1px 1px 1px #414D5E;
+      font-family: helvetica, arial, sans-serif;
+      text-align: center;
+  }
 
-div.notice > b > font {
-    color: #007AA3;
-}
-
-div.mainmenufooter a:link,
-div.mainmenufooter a:hover,
-div.mainmenufooter a:visited {
-    color: #C0C6C9;
-    text-decoration: none;
-}
-
-.ps-overlay {
-    background: rgba(0, 0, 0, 0.3);
-}
-
-/***********************
-* Broadcast CSS ~start *
-***********************/
-
-.broadcast-red {
-    background: #D57575;
-    border: 1px solid #985555;
-    color: #FFD7D7;
+  .broadcast-purple {
+    background: #B380A6;
+    border: 1px solid #8E6884;
+    color: #E5D7E1;
+    text-shadow: 1px 1px 1px #8E6884;
     padding: 5px 1px 3px 8px;
-    text-shadow: 1px 1px 1px #985555;
     font-family: helvetica, arial, sans-serif;
     text-align: center;
-}
+  }
 
-.broadcast-green {
+  .broadcast-grey {
+    border: 1px solid #000;
+    background: #474747;
+    padding: 5px 1px 3px 8px;
+    font-family: helvetica, arial, sans-serif;
+    text-align: center;
+    color: #CACACA;
+    text-shadow: 1px 1px 1px #000;
+  }
+
+  /*********************
+  * Broadcast CSS ~end *
+  *********************/
+
+  /*************************
+  * Teambuilder CSS ~start *
+  *************************/
+
+  .teamchartbox {
+      border-top: 1px solid #2E2E2E;
+  }
+
+  .setchart {
+      border: 1px solid #2E2E2E;
+      background: #DFDFDF;
+  }
+
+  .setchart-nickname {    
+      border: 1px solid #2E2E2E;    
+      background: #DFDFDF;
+  }
+
+  .setchart label, .setchart-nickname label {
+      text-shadow: 1px 1px #EAEAEA;
+      color: #001433;
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+  }
+
+  .teambuilder-results h3, .teambuilder-results .utilichart h3 {
+      background: url("http://i.imgur.com/SRdPIN3.png");
+      border: 1px solid #2E2E2E;
+      text-shadow: 1px 1px #EAEAEA;
+      color: #001433;
+  }
+
+  .teambuilder-results .firstresult a {
+      background: url("http://i.imgur.com/SRdPIN3.png");
+      border: 1px solid #505151;
+  }
+
+  .teambuilder-results .result a:hover, .teambuilder-results .firstresult a:hover {
+      background: url("http://i.imgur.com/SRdPIN3.png");
+      border: 1px solid #2E2E2E;
+  }
+
+  .teambar button, .teambar button:disabled, .teambar button:disabled:hover {
+      background: url("http://i.imgur.com/EGKEycv.png?1");
+      border: 1px solid #2E2E2E;
+  }
+
+  .teambar button:hover {
+      background: #EEEEEE;
+      border: 1px solid #2E2E2E;
+  }
+
+  .utilichart .itemdesccol, .utilichart .movedesccol, .utilichart .labelcol em, .utilichart .widelabelcol em, .utilichart .pplabelcol em, .utilichart .statcol em, .utilichart .bstcol em, .utilichart .abilitydesccol, .utilichart .numcol {
+      color: #5B5B5B;
+  }
+
+  .utilichart b {
+      color: #3B98C0;
+  }
+
+  .setmenu button {
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+      padding: 3px 6px;
+  }
+
+  .setmenu button:hover {
+      background: url("http://i.imgur.com/SRdPIN3.png");
+      border: 1px solid #2E2E2E;
+  }
+
+  .majorbutton {
+      background: url("http://i.imgur.com/SRdPIN3.png");
+      border: 1px solid #2E2E2E;
+      text-shadow: 1px 1px #EAEAEA;
+      color: #001433;
+  }
+
+  .majorbutton:hover {
+      background: #EEEEEE;
+      border: 1px solid #2E2E2E;
+  }
+
+  /***********************
+  * Teambuilder CSS ~end *
+  ***********************/
+
+  /*********************
+  * Custom backgrounds *
+  *********************/
+
+  .checkered-div {
+    background: url("http://i.imgur.com/Q8vHT0Y.png");
+  }
+
+  .checkered-grey-div {
+    background: url("http://www.pandasoup.com/resource/images/backgroundPattern1.png");
+  }
+
+  .checkered-dark-div {
+    background: url("http://i.imgur.com/rFSFXGg.png");
+    color: #FFF;
+  }
+
+  .beehive-div {
+    background: url("http://i.imgur.com/jxOe6XC.png");
+  }
+
+  .striped-div {
+    background: url("http://i.imgur.com/w19OJXc.png");
+  }
+
+  .striped-grey-div {
+    background: url("http://lemelle.us/images/background-pattern.png");
+  }
+
+  .blocks-div {
+    background: url("http://withlove.lk/catalog/view/theme/anycartblack/image/pattern/mainbg13.png");
+  }
+
+  .blocks-dark-div {
+    background: url("http://10feettall.co.uk/wp-content/themes/puzzles2/images/bg/pattern_5.png");
+    color: #FFF;
+  }
+
+  .hydrocity-div {
+    background: url("http://i.imgur.com/HpuGMXg.jpg?1");
+  }
+
+  /**************************
+  * Custom backgrounds ~end *
+  **************************/
+
+  .btn-nofill {
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      color: #C1DAFF;
+      text-shadow: 1px 1px 1px #414D5E;
+      font-weight: bold;
+      font-family: helvetica, arial, sans-serif;
+      padding: 0px 20px 0px 20px;
+  }
+
+  .btn-nofill:hover {
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      color: #96BDF7;
+      text-shadow: 1px 1px 1px #414D5E;
+      cursor: pointer;
+  }
+
+  .btn-nofill-red {
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      color: #FFD7D7;
+      text-shadow: 1px 1px 1px #985555;
+      font-weight: bold;
+      font-family: helvetica, arial, sans-serif;
+      padding: 0px 20px 0px 20px;
+  }
+
+  .btn-nofill-red:hover {
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      color: #FFB7B7;
+      text-shadow: 1px 1px 1px #985555;
+      cursor: pointer;
+  }
+
+  .btn-nofill-green {
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      color: #BEFFB9;
+      text-shadow: 1px 1px 1px #375735;
+      font-weight: bold;
+      font-family: helvetica, arial, sans-serif;
+      padding: 0px 20px 0px 20px;
+  }
+
+  .btn-nofill-green:hover {
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      color: #A0FF9A;
+      text-shadow: 1px 1px 1px #375735;
+      cursor: pointer;
+  }
+
+  .closebutton, .minimizebutton {
+      color: #7A7A7C;
+  }
+
+  .closebutton:hover {
+      color: #E97979;  
+  }
+
+  .minimizebutton:hover {
+      color: #ECBA6F;  
+  }
+
+  /***********************
+  * Fake gradient ~start *
+  ***********************/
+
+  .battle-log-add {
+      background:url("http://i.imgur.com/2dyqgwD.png");
+      border-top: 1px solid #575757;   
+      border-left: 1px solid #575757;  
+  }
+
+  .battle-log {
+      border-left: 1px solid #575757;  
+  }
+
+  .battle {
+      border-bottom: 1px solid #575757;   
+  }
+
+  .tournament-bracket.tournament-bracket-overflowing {
+      background: url("http://i.imgur.com/WCEwpwL.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 1;
+  }
+
+  .battle-log h2 {
+      background: #808080;
+      color: #FFF;
+      border-top: 1px solid #000000;
+      border-bottom: 1px solid #000000;
+  }
+  /*********************
+  * Fake gradient ~end *
+  *********************/
+
+  /*******************
+  * Coloured Buttons *
+  *******************/
+
+  .green-btn {
+    background: #4A7648;
+    border: 1px solid #375735;
+    color: #BEFFB9;
+    text-shadow: 2px 2px 1px #375735;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .green-btn:hover {
     background: #578A54;
     border: 1px solid #375735;
-    padding: 5px 1px 3px 8px;
     color: #BEFFB9;
     text-shadow: 1px 1px 1px #375735;
+    padding: 2px 2px 2px 2px;
     font-family: helvetica, arial, sans-serif;
-    text-align: center;
-}
+  }
 
-.broadcast-blue {
-    background: #677992;
-    border: 1px solid #414D5E;
-    padding: 5px 1px 3px 8px;
-    color: #C1DAFF;
-    text-shadow: 1px 1px 1px #414D5E;
+  .blue-btn {
+    background: #6CABB5;
+    border: 1px solid #588B92;
+    color: #D1FAFF;
+    text-shadow: 2px 2px 1px #588B92;
+    padding: 2px 2px 2px 2px;
     font-family: helvetica, arial, sans-serif;
-    text-align: center;
-}
+  }
 
-.broadcast-purple {
-  background: #B380A6;
-  border: 1px solid #8E6884;
-  color: #E5D7E1;
-  text-shadow: 1px 1px 1px #8E6884;
-  padding: 5px 1px 3px 8px;
-  font-family: helvetica, arial, sans-serif;
-  text-align: center;
-}
-
-.broadcast-grey {
-  border: 1px solid #000;
-  background: #474747;
-  padding: 5px 1px 3px 8px;
-  font-family: helvetica, arial, sans-serif;
-  text-align: center;
-  color: #CACACA;
-  text-shadow: 1px 1px 1px #000;
-}
-
-/*********************
-* Broadcast CSS ~end *
-*********************/
-
-/*************************
-* Teambuilder CSS ~start *
-*************************/
-
-.teamchartbox {
-    border-top: 1px solid #2E2E2E;
-}
-
-.setchart {
-    border: 1px solid #2E2E2E;
-    background: #DFDFDF;
-}
-    
-.setchart-nickname {    
-    border: 1px solid #2E2E2E;    
-    background: #DFDFDF;
-}
-    
-.setchart label, .setchart-nickname label {
-    text-shadow: 1px 1px #EAEAEA;
-    color: #001433;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-}
-    
-.teambuilder-results h3, .teambuilder-results .utilichart h3 {
-    background: url("http://i.imgur.com/SRdPIN3.png");
-    border: 1px solid #2E2E2E;
-    text-shadow: 1px 1px #EAEAEA;
-    color: #001433;
-}
-    
-.teambuilder-results .firstresult a {
-    background: url("http://i.imgur.com/SRdPIN3.png");
-    border: 1px solid #505151;
-}
-    
-.teambuilder-results .result a:hover, .teambuilder-results .firstresult a:hover {
-    background: url("http://i.imgur.com/SRdPIN3.png");
-    border: 1px solid #2E2E2E;
-}
-    
-.teambar button, .teambar button:disabled, .teambar button:disabled:hover {
-    background: url("http://i.imgur.com/EGKEycv.png?1");
-    border: 1px solid #2E2E2E;
-}
-    
-.teambar button:hover {
-    background: #EEEEEE;
-    border: 1px solid #2E2E2E;
-}
-    
-.utilichart .itemdesccol, .utilichart .movedesccol, .utilichart .labelcol em, .utilichart .widelabelcol em, .utilichart .pplabelcol em, .utilichart .statcol em, .utilichart .bstcol em, .utilichart .abilitydesccol, .utilichart .numcol {
-    color: #5B5B5B;
-}
-    
-.utilichart b {
-    color: #3B98C0;
-}
-    
-.setmenu button {
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    padding: 3px 6px;
-}
-    
-.setmenu button:hover {
-    background: url("http://i.imgur.com/SRdPIN3.png");
-    border: 1px solid #2E2E2E;
-}
-    
-.majorbutton {
-    background: url("http://i.imgur.com/SRdPIN3.png");
-    border: 1px solid #2E2E2E;
-    text-shadow: 1px 1px #EAEAEA;
-    color: #001433;
-}
-    
-.majorbutton:hover {
-    background: #EEEEEE;
-    border: 1px solid #2E2E2E;
-}
-
-/***********************
-* Teambuilder CSS ~end *
-***********************/
-
-/*********************
-* Custom backgrounds *
-*********************/
-
-.checkered-div {
-  background: url("http://i.imgur.com/Q8vHT0Y.png");
-}
-
-.checkered-grey-div {
-  background: url("http://www.pandasoup.com/resource/images/backgroundPattern1.png");
-}
-
-.checkered-dark-div {
-  background: url("http://i.imgur.com/rFSFXGg.png");
-  color: #FFF;
-}
-
-.beehive-div {
-  background: url("http://i.imgur.com/jxOe6XC.png");
-}
-
-.striped-div {
-  background: url("http://i.imgur.com/w19OJXc.png");
-}
-
-.striped-grey-div {
-  background: url("http://lemelle.us/images/background-pattern.png");
-}
-
-.blocks-div {
-  background: url("http://withlove.lk/catalog/view/theme/anycartblack/image/pattern/mainbg13.png");
-}
-
-.blocks-dark-div {
-  background: url("http://10feettall.co.uk/wp-content/themes/puzzles2/images/bg/pattern_5.png");
-  color: #FFF;
-}
-
-.hydrocity-div {
-  background: url("http://i.imgur.com/HpuGMXg.jpg?1");
-}
-
-/**************************
-* Custom backgrounds ~end *
-**************************/
-
-.btn-nofill {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    color: #C1DAFF;
-    text-shadow: 1px 1px 1px #414D5E;
-    font-weight: bold;
+  .blue-btn:hover {
+    background: #60979F;
+    border: 1px solid #588B92;
+    color: #D1FAFF;
+    text-shadow: 1px 1px 1px #588B92;
+    padding: 2px 2px 2px 2px;
     font-family: helvetica, arial, sans-serif;
-    padding: 0px 20px 0px 20px;
-}
+  }
 
-.btn-nofill:hover {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    color: #96BDF7;
-    text-shadow: 1px 1px 1px #414D5E;
-    cursor: pointer;
-}
-
-.btn-nofill-red {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    color: #FFD7D7;
-    text-shadow: 1px 1px 1px #985555;
-    font-weight: bold;
+  .red-btn {
+    background: #C67171;
+    border: 1px solid #A55E5E;
+    color: #FFD8D8;
+    text-shadow: 2px 2px 1px #A55E5E;
+    padding: 2px 2px 2px 2px;
     font-family: helvetica, arial, sans-serif;
-    padding: 0px 20px 0px 20px;
-}
+  }
 
-.btn-nofill-red:hover {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    color: #FFB7B7;
-    text-shadow: 1px 1px 1px #985555;
-    cursor: pointer;
-}
-
-.btn-nofill-green {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    color: #BEFFB9;
-    text-shadow: 1px 1px 1px #375735;
-    font-weight: bold;
+  .red-btn:hover {
+    background: #B36868;
+    border: 1px solid #A55E5E;
+    color: #FFD8D8;
+    text-shadow: 1px 1px 1px #A55E5E;
+    padding: 2px 2px 2px 2px;
     font-family: helvetica, arial, sans-serif;
-    padding: 0px 20px 0px 20px;
-}
+  }
 
-.btn-nofill-green:hover {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    color: #A0FF9A;
-    text-shadow: 1px 1px 1px #375735;
-    cursor: pointer;
-}
-
-.closebutton, .minimizebutton {
-    color: #7A7A7C;
-}
-    
-.closebutton:hover {
-    color: #E97979;  
-}
-
-.minimizebutton:hover {
-    color: #ECBA6F;  
-}
-
-/***********************
-* Fake gradient ~start *
-***********************/
-
-.battle-log-add {
-    background:url("http://i.imgur.com/2dyqgwD.png");
-    border-top: 1px solid #575757;   
-    border-left: 1px solid #575757;  
-}
-
-.battle-log {
-    border-left: 1px solid #575757;  
-}
-
-.battle {
-    border-bottom: 1px solid #575757;   
-}
-
-.tournament-bracket.tournament-bracket-overflowing {
-    background: url("http://i.imgur.com/WCEwpwL.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 1;
-}
-
-.battle-log h2 {
-    background: #808080;
+  .black-btn {
+    background: #202020;
+    border: 1px solid #000;
     color: #FFF;
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
-}
-/*********************
-* Fake gradient ~end *
-*********************/
-
-/*******************
-* Coloured Buttons *
-*******************/
-
-.green-btn {
-  background: #4A7648;
-  border: 1px solid #375735;
-  color: #BEFFB9;
-  text-shadow: 2px 2px 1px #375735;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.green-btn:hover {
-  background: #578A54;
-  border: 1px solid #375735;
-  color: #BEFFB9;
-  text-shadow: 1px 1px 1px #375735;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.blue-btn {
-  background: #6CABB5;
-  border: 1px solid #588B92;
-  color: #D1FAFF;
-  text-shadow: 2px 2px 1px #588B92;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.blue-btn:hover {
-  background: #60979F;
-  border: 1px solid #588B92;
-  color: #D1FAFF;
-  text-shadow: 1px 1px 1px #588B92;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.red-btn {
-  background: #C67171;
-  border: 1px solid #A55E5E;
-  color: #FFD8D8;
-  text-shadow: 2px 2px 1px #A55E5E;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.red-btn:hover {
-  background: #B36868;
-  border: 1px solid #A55E5E;
-  color: #FFD8D8;
-  text-shadow: 1px 1px 1px #A55E5E;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.black-btn {
-  background: #202020;
-  border: 1px solid #000;
-  color: #FFF;
-  text-shadow: 2px 2px 1px #000;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.black-btn:hover {
-  background: #151515;
-  border: 1px solid #000;
-  color: #FFF;
-  text-shadow: 1px 1px 1px #000;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.yellow-btn {
-  background: #B3B740;
-  border: 1px solid #8B8D50;
-  color: #FFFFDA;
-  text-shadow: 2px 2px 1px #8B8D50;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.yellow-btn:hover {
-  background: #A1A53B;
-  border: 1px solid #8B8D50;
-  color: #FFFFDA;
-  text-shadow: 1px 1px 1px #8B8D50;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.brown-btn {
-  background: #875840;
-  border: 1px solid #6F4734;
-  color: #C3A799;
-  text-shadow: 2px 2px 1px #6F4734;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.brown-btn:hover {
-  background: #704834;
-  border: 1px solid #6F4734;
-  color: #C3A799;
-  text-shadow: 1px 1px 1px #6F4734;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.white-btn {
-  background: #FFF;
-  border: 1px solid #C3C3C3;
-  color: #737373;
-  text-shadow: 2px 2px 1px #C3C3C3;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.white-btn:hover {
-  background: #EBEBEB;
-  border: 1px solid #C3C3C3;
-  color: #737373;
-  text-shadow: 1px 1px 1px #C3C3C3;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.pink-btn {
-  background: #BD608B;
-  border: 1px solid #91496B;
-  color: #FFDCED;
-  text-shadow: 2px 2px 1px #91496B;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.pink-btn:hover {
-  background: #A6557B;
-  border: 1px solid #91496B;
-  color: #FFDCED;
-  text-shadow: 1px 1px 1px #91496B;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.purple-btn {
-  background: #A487A9;
-  border: 1px solid #86708A;
-  color: #E8DBEB;
-  text-shadow: 2px 2px 1px #86708A;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.purple-btn:hover {
-  background: #8E7492;
-  border: 1px solid #86708A;
-  color: #E8DBEB;
-  text-shadow: 1px 1px 1px #86708A;
-  padding: 2px 2px 2px 2px;
-  font-family: helvetica, arial, sans-serif;
-}
-
-/***********************
-* Social Media buttons *
-***********************/
-
-.button-donate2, .button-donate2:hover  {
-    cursor: pointer;
-    width:120px;
-    height:35px;
-    background: url("http://i.imgur.com/QnNfm4Q.png?1") no-repeat;
-    border:none;
-}
-
-.button-twitter, .button-twitter:hover {
-    background:url("http://i.imgur.com/QblOH3T.png?1") no-repeat;
-    width:110px;
-    height:33px;
-    border: 1px solid #FFF;
-    cursor: pointer;
-}
-
-.button-facebook, .button-facebook:hover {
-    width:40px;
-    height:40px;
-    background: url("http://i.imgur.com/PGNlkDd.jpg?1") no-repeat;
-    cursor: pointer;
-    border: none;
-}
-
-.button-tumblr, .button-tumblr:hover {
-    cursor: pointer;
-    width:100px;
-    height:26px;
-    background: url("http://i.imgur.com/fWItQOG.png?1") no-repeat;
-    border:none;
-}
-
-.button-tumblr-black, .button-tumblr-black:hover {
-    cursor: pointer;
-    width:60px;
-    height:60px;
-    background: url("http://i.imgur.com/NHt8VVq.jpg?1") no-repeat;
-    border:none;
-}
-
-.button-googleplus, .button-googleplus:hover {
-    cursor: pointer;
-    width:70px;
-    height:70px;
-    background: url("http://i.imgur.com/rtym81q.png?1") no-repeat;
-    border:none;
-}
-
-/**************************
-* Hydrocity Roomintro CSS *
-**************************/
-
-.hydro-txt {
-  color: #4DAFF0;
-  font-weight: bold;
-  font-size: 13pt;
-  text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000;
-}
-
-/*******************************
-* Hydrocity Roomintro CSS ~end *
-*******************************/
-
-/************************
-* Lobby Roomintro (New) *
-************************/
-
-.btn-nofill-nimbus {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    color: #4AA9A5;
-    text-shadow: 1px 1px 1px #FFF;
-    font-weight: bold;
+    text-shadow: 2px 2px 1px #000;
+    padding: 2px 2px 2px 2px;
     font-family: helvetica, arial, sans-serif;
-    padding: 0px 20px 7px 20px;
-}
+  }
 
-.btn-nofill-nimbus:hover {
-    background: rgba(0, 0, 0, 0);
-    border: none;
+  .black-btn:hover {
+    background: #151515;
+    border: 1px solid #000;
     color: #FFF;
-    text-shadow: 1px 1px 1px #4AA9A5;
-    text-shadow: none;
-    cursor: pointer;
-}
-
-.txt-nimbus {
-    color: #4AA9A5;
+    text-shadow: 1px 1px 1px #000;
+    padding: 2px 2px 2px 2px;
     font-family: helvetica, arial, sans-serif;
-    text-shadow: -1px -1px 20px #FFF;
-    font-size: 12px;
-}
+  }
 
-.nimbus-banner {
-    background: url("http://i.imgur.com/fTd9ev4.png?3") no-repeat;
-    width: 500px;
-    height: 62px;
-}
-
-.nimbus-intro-hr {
-    border-bottom: 1px solid #8AADFF;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    width: 50%;
-}
-
-.nimbus-banner-top {
-    background: url("http://i.imgur.com/45U4S2W.png?2") no-repeat;
-    height: 17px;
-    width: 500px;
-}
-
-.nimbus-banner-bottom {
-    background: url("http://i.imgur.com/iuqCkf6.png?2") no-repeat;
-    height: 17px;
-    width: 500px;
-}
-
-.btn-textlike {
-    color: #4AA9A5;
+  .yellow-btn {
+    background: #B3B740;
+    border: 1px solid #8B8D50;
+    color: #FFFFDA;
+    text-shadow: 2px 2px 1px #8B8D50;
+    padding: 2px 2px 2px 2px;
     font-family: helvetica, arial, sans-serif;
-    text-shadow: -1px -1px 20px #FFF;
-    font-size: 12px;
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    padding: 0px 0px 0px 0px;
-}
+  }
 
-.btn-textlike:hover {
-    cursor: pointer;
-    color: #367A78;
-    text-decoration: underline;
-}
+  .yellow-btn:hover {
+    background: #A1A53B;
+    border: 1px solid #8B8D50;
+    color: #FFFFDA;
+    text-shadow: 1px 1px 1px #8B8D50;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .brown-btn {
+    background: #875840;
+    border: 1px solid #6F4734;
+    color: #C3A799;
+    text-shadow: 2px 2px 1px #6F4734;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .brown-btn:hover {
+    background: #704834;
+    border: 1px solid #6F4734;
+    color: #C3A799;
+    text-shadow: 1px 1px 1px #6F4734;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .white-btn {
+    background: #FFF;
+    border: 1px solid #C3C3C3;
+    color: #737373;
+    text-shadow: 2px 2px 1px #C3C3C3;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .white-btn:hover {
+    background: #EBEBEB;
+    border: 1px solid #C3C3C3;
+    color: #737373;
+    text-shadow: 1px 1px 1px #C3C3C3;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .pink-btn {
+    background: #BD608B;
+    border: 1px solid #91496B;
+    color: #FFDCED;
+    text-shadow: 2px 2px 1px #91496B;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .pink-btn:hover {
+    background: #A6557B;
+    border: 1px solid #91496B;
+    color: #FFDCED;
+    text-shadow: 1px 1px 1px #91496B;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .purple-btn {
+    background: #A487A9;
+    border: 1px solid #86708A;
+    color: #E8DBEB;
+    text-shadow: 2px 2px 1px #86708A;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  .purple-btn:hover {
+    background: #8E7492;
+    border: 1px solid #86708A;
+    color: #E8DBEB;
+    text-shadow: 1px 1px 1px #86708A;
+    padding: 2px 2px 2px 2px;
+    font-family: helvetica, arial, sans-serif;
+  }
+
+  /***********************
+  * Social Media buttons *
+  ***********************/
+
+  .button-donate2, .button-donate2:hover  {
+      cursor: pointer;
+      width:120px;
+      height:35px;
+      background: url("http://i.imgur.com/QnNfm4Q.png?1") no-repeat;
+      border:none;
+  }
+
+  .button-twitter, .button-twitter:hover {
+      background:url("http://i.imgur.com/QblOH3T.png?1") no-repeat;
+      width:110px;
+      height:33px;
+      border: 1px solid #FFF;
+      cursor: pointer;
+  }
+
+  .button-facebook, .button-facebook:hover {
+      width:40px;
+      height:40px;
+      background: url("http://i.imgur.com/PGNlkDd.jpg?1") no-repeat;
+      cursor: pointer;
+      border: none;
+  }
+
+  .button-tumblr, .button-tumblr:hover {
+      cursor: pointer;
+      width:100px;
+      height:26px;
+      background: url("http://i.imgur.com/fWItQOG.png?1") no-repeat;
+      border:none;
+  }
+
+  .button-tumblr-black, .button-tumblr-black:hover {
+      cursor: pointer;
+      width:60px;
+      height:60px;
+      background: url("http://i.imgur.com/NHt8VVq.jpg?1") no-repeat;
+      border:none;
+  }
+
+  .button-googleplus, .button-googleplus:hover {
+      cursor: pointer;
+      width:70px;
+      height:70px;
+      background: url("http://i.imgur.com/rtym81q.png?1") no-repeat;
+      border:none;
+  }
+
+  /**************************
+  * Hydrocity Roomintro CSS *
+  **************************/
+
+  .hydro-txt {
+    color: #4DAFF0;
+    font-weight: bold;
+    font-size: 13pt;
+    text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000;
+  }
+
+  /*******************************
+  * Hydrocity Roomintro CSS ~end *
+  *******************************/
+
+  /************************
+  * Lobby Roomintro (New) *
+  ************************/
+
+  .btn-nofill-nimbus {
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      color: #4AA9A5;
+      text-shadow: 1px 1px 1px #FFF;
+      font-weight: bold;
+      font-family: helvetica, arial, sans-serif;
+      padding: 0px 20px 7px 20px;
+  }
+
+  .btn-nofill-nimbus:hover {
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      color: #FFF;
+      text-shadow: 1px 1px 1px #4AA9A5;
+      text-shadow: none;
+      cursor: pointer;
+  }
+
+  .txt-nimbus {
+      color: #4AA9A5;
+      font-family: helvetica, arial, sans-serif;
+      text-shadow: -1px -1px 20px #FFF;
+      font-size: 12px;
+  }
+
+  .nimbus-banner {
+      background: url("http://i.imgur.com/fTd9ev4.png?3") no-repeat;
+      width: 500px;
+      height: 62px;
+  }
+
+  .nimbus-intro-hr {
+      border-bottom: 1px solid #8AADFF;
+      border-right: none;
+      border-left: none;
+      border-top: none;
+      width: 50%;
+  }
+
+  .nimbus-banner-top {
+      background: url("http://i.imgur.com/45U4S2W.png?2") no-repeat;
+      height: 17px;
+      width: 500px;
+  }
+
+  .nimbus-banner-bottom {
+      background: url("http://i.imgur.com/iuqCkf6.png?2") no-repeat;
+      height: 17px;
+      width: 500px;
+  }
+
+  .btn-textlike {
+      color: #4AA9A5;
+      font-family: helvetica, arial, sans-serif;
+      text-shadow: -1px -1px 20px #FFF;
+      font-size: 12px;
+      background: rgba(0, 0, 0, 0);
+      border: none;
+      padding: 0px 0px 0px 0px;
+  }
+
+  .btn-textlike:hover {
+      cursor: pointer;
+      color: #367A78;
+      text-decoration: underline;
+  }
 
 
-/***************************
-* Roomintro CSS (New) ~end *
-***************************/
+  /***************************
+  * Roomintro CSS (New) ~end *
+  ***************************/
+  
+  .message .result {
+    background: url("http://i.imgur.com/UBniNhc.png?4");
+    border: 1px solid #575757;
+  }
+  
+  .ps-popup b {
+    font-style: italic;
+  }

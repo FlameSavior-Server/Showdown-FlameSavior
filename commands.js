@@ -1264,7 +1264,7 @@ var commands = exports.commands = {
 		if (!this.can('declare')) return false;
 
 		for (var id in Rooms.rooms) {
-			if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b>' + target + '</b></div>');
+			if (id !== 'global') user.name.addRaw('<div class="broadcast-blue"><b>' + target + '</b></div>');
 		}
 		this.logModCommand(user.name + " globally declared " + target);
 	},

@@ -1,4 +1,5 @@
-
+@-moz-document domain("play.pokemonshowdown.com") {
+  
 /*GENERAL*/
 button {
   background: #212121;
@@ -58,13 +59,7 @@ a.ilink {
     bottom: -6px;
     height: 6px;
     background: none repeat scroll 0% 0% #FF25D4;
-    border-width: 1px 1px 1px 0px;
-    border-style: solid solid solid none;
-    border-color: #AAA #AAA #AAA -moz-use-text-color;
-    -moz-border-top-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
+    border: 1px solid #000;
     border-image: none;
     margin: -1px 0px 0px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
@@ -73,8 +68,7 @@ a.ilink {
     
 .tabbar a.button.cur, .tabbar a.button.cur:hover {
     color: #000;
-    background: none repeat scroll 0% 0% #FF25D4;
-    background: -moz-linear-gradient(center top , #FF61E0, #FF25D4) repeat scroll 0% 0% transparent;
+    background: url("http://i.imgur.com/ZyQ2aCW.png?2");
     box-shadow: none;
     border-color: #AAA #AAA -moz-use-text-color;
     border-bottom: 0px none;
@@ -82,11 +76,23 @@ a.ilink {
     padding-top: 3px;
     padding-bottom: 5px;
     top: 0px;
+    text-shadow: none;
+    border: 1px solid #000;
 }
   
-.tabbar a.button {
-  background: -moz-linear-gradient(center top , #D7D7D7, #AEAEAE) repeat scroll 0% 0% transparent;
+.tabbar a.button, .tabbar a.button:hover {
+  border: 1px solid #000;
+    color: #FFF;
 }
+    
+    .tabbar a.button {
+        background: #252525;
+        text-shadow: 1px 1px #000;
+    }
+    
+    .tabbar a.button:hover {
+        background: #353535;
+    }
   
 .chat.highlighted { 
     background:#2B2B2B;
@@ -113,7 +119,7 @@ a.ilink {
     border-radius: 4px;
     text-decoration: none;
     color: #FFF;
-    text-shadow: 0px -1px 0px #FFF;
+    text-shadow: 0px -1px 0px #000;
     box-shadow: 1px 1px 1px #D5D5D5;
     cursor: pointer;
     font-size: 10pt;
@@ -129,7 +135,7 @@ a.ilink {
     border-radius: 4px;
     text-decoration: none;
     color: #FFF;
-    text-shadow: 0px -1px 0px #FFF;
+    text-shadow: 0px -1px 0px #000;
     box-shadow: 1px 1px 1px #D5D5D5;
     cursor: pointer;
     font-size: 10pt;
@@ -196,22 +202,34 @@ a.ilink {
 .formatselect {
     color:#FFF;
     background:#2B2B2B;
+    border: 1px solid #000;
 }
 
 .formatselect:hover {
     color:#FFF;
     background:#3C3C3C;
+    border: 1px solid #000;
 }
   
   
 .select.teamselect {
     background: none repeat scroll 0% 0% rgba(193, 193, 193, 0.65);
   color:#FFF;
+    border: 1px solid #000;
 }
   
 .select.teamselect:hover {
     background:#3F3F3F;
   color:#FFF;
+    border: 1px solid #000;
+}
+    
+.select:disabled, .select:disabled:hover {
+    border-color: #999;
+    background: none repeat scroll 0% 0% rgba(220, 220, 220, 0.65);
+    color: #555;
+    box-shadow: none;
+    text-shadow: none;
 }
   
 .menugroup button.big {
@@ -236,7 +254,7 @@ a.ilink {
     border-radius: 5px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(255, 255, 255, 0.8) inset;
     color: #FFF;
-    border: 1px solid #3D668E;
+    border: 1px solid #000;
     background: -moz-linear-gradient(center top , #474747, #2B2B2B) repeat scroll 0% 0% transparent;
 }
   
@@ -262,7 +280,7 @@ a.ilink {
     border-radius: 5px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(255, 255, 255, 0.8) inset;
     color: #FFF;
-    border: 1px solid #3D668E;
+    border: 1px solid #000;
     background: -moz-linear-gradient(center top , #4D4D4D, #333333) repeat scroll 0% 0% transparent;
 }
   
@@ -298,7 +316,13 @@ a.ilink {
 }
   
 .userlist li button:hover {
-    background:#616161;;
+    background:#000;
+}
+    
+.challenge {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #FF61E0;
+  color: #FF61E0;   
 }
   
 .chat-log {
@@ -325,54 +349,19 @@ body {
     color: #FF49DB;
 }
   
-.pm-window h3 {
-    background: none repeat scroll 0% 0% rgba(43, 43, 43, 0.8);
-    color: #FD59DC;
-    margin: 0px;
-    padding: 2px 5px;
-    font-size: 11pt;
-    border: 1px solid #AAA;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    cursor: pointer;
-}
-  
-  .pm-window h3:hover {
+.pm-window h3, .pm-window h3:hover, .pm-window.focused h3, .pm-window.focused h3:hover {
     background:#2B2B2B;
     color: #FF25D4;
     margin: 0px;
     padding: 2px 5px;
     font-size: 11pt;
-    border: 1px solid #AAA;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     cursor: pointer;
+    border-color: #000;
 }
   
-    .pm-window h3:focus {
-    background:#2B2B2B;
-    color: #FF25D4;
-    margin: 0px;
-    padding: 2px 5px;
-    font-size: 11pt;
-    border: 1px solid #AAA;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    cursor: pointer;
-}
-  
-.pm-log-add {
-    border: 1px solid #AAA;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+.pm-log-add, .pm-window.focused .pm-log-add {
+    border-color: #000;
     background: none repeat scroll 0% 0% rgba(43, 43, 43, 0.85);
-}
-  
-.pm-log-add:hover {
-    border: 1px solid #AAA;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background: #2B2B2B;
 }
   
 .pm-window h3 small {
@@ -381,23 +370,12 @@ body {
     vertical-align: 1px;
 }
   
-.pm-log {
+.pm-log, .pm-window.focused .pm-log {
     min-height: 100px;
     max-height: 300px;
     background: none repeat scroll 0% 0% rgba(242, 247, 250, 0.925);
     color: #000;
-    word-wrap: break-word;
-    border-right: 1px solid #AAA;
-    border-left: 1px solid #AAA;
-    -moz-border-top-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    border-image: none;
-    border-width: 0px 1px;
-    border-style: italic;
-    border-color: -moz-use-text-color #AAA;
-    overflow: auto;
+    border-color: #000;
 }
   
 .message-pm {
@@ -423,260 +401,85 @@ body {
   
 /*TEAMBUILDER*/
   
-.teamchart li.format-select select, .teamchart li.format-select option {
-    font: 12pt Verdana,sans-serif;
-   background:#DEDEDE;
+.setmenu button:hover {
+    background: #202020;
+    border: 1px solid #000;
 }
-  
-  .utilichart .pokemonnamecol {
-    padding-top: 5px;
-    height: 23px;
-    width: 127px;
-    color: #FFF;
-    font-size: 10pt;
-}
-  
-  .utilichart .abilitycol {
-    padding-top: 7px;
-    height: 21px;
-    font-size: 8pt;
-    width: 90px;
-    color:#FFF;
-}
-  
-  .utilichart .twoabilitycol {
-    padding-top: 0px;
-    height: 28px;
-    font-size: 8pt;
-    width: 90px;
-    color:#FFF;
-}
-  
-.utilichart .col {
-    float: left;
-    padding-top: 6px;
-    height: 22px;
-    font-size: 9pt;
+    
+.setchart input, .setchart-nickname input, .statform input.inputform, .textbox, .setstats, .setdetails {
+    background: #202020;
+    border: 1px solid #000;
     color: #FFF;
 }
-  
-.utilichart, .utilichart li {
-    list-style-type: none;
-    word-wrap: normal;
+    
+.setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover, .textbox:hover, .setstats:hover, .setdetails:hover {
+    border: 1px solid #000;
+    background: #202020;
 }
-  
-
-  
-.setchart {
-    border: 1px solid #999;
-    background: -moz-linear-gradient(center top , #5B5B5B 10%, #212121 55%) repeat scroll 0% 0% #212121;
-    border-radius: 5px;
-    padding: 2px 0px 0px 3px;
-    height: 127px;
-    width: 626px;
-    margin-top: 8px;
-    box-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6) inset;
-  color:#000;
+    
+.setchart input:focus, .setchart-nickname input:focus, .statform input.inputform:focus, .textbox:focus, .setstats:focus, .setdetails:focus {
+    border: 1px solid #000;
+    background: #101010;
 }
-  
-.teambar button:disabled, .teambar button:disabled:active {
-    color: #FFF;
-    background: none repeat scroll 0% 0% #212121;
-    border-color: #AAA;
-    opacity: 0.8;
-    cursor: default;
-}
-  
-.teambar button:disabled:hover {
-    color: #FFF;
-    background:#212121;
-    border-color: #AAA;
-  opacity:1;
-}
-  
-.teambuilder-results .result a {
-    cursor: pointer;
-    font-size:7pt;
-}
-  
+    
 .setchart label, .setchart-nickname label {
-    display: block;
-    font-size: 8pt;
-    font-weight: bold;
-    color: #000;
-    padding-left: 2px;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
-}
-  
-  .teambuilder-results h3, .teambuilder-results .utilichart h3 {
-    background: none repeat scroll 0% 0% #212121;
-    margin: 6px 0px;
-    padding: 2px 5px;
-    font-family: Verdana,sans-serif;
-    font-size: 9pt;
-    text-align: left;
-    border-width: 1px 0px;
-    border-style: solid none;
-    border-color: #AAA -moz-use-text-color;
-    -moz-border-top-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    border-image: none;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
-    box-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6) inset, 0px 2px 2px rgba(0, 0, 0, 0.15);
-}
-  
-.teambuilder-results .result a {
-    cursor: pointer;
-}
-  
-.teambuilder-results:hover .result a {
-  border-style: #A8A8A8;
-    cursor: pointer;
-  background:#000;
-}
-  
-.utilichart .movedesccol {
-    width: 284px;
-    font-size:7pt;
-}
-  
-  .teambar button {
-    display: block;
-    background: none repeat scroll 0% 0% #212121;
     color: #FFF;
-    border: 1px solid #AAA;
-    padding: 0px;
-    margin: -1px 2px 0px 0px;
-    height: 42px;
-    float: left;
-    width: 88px;
-    cursor: pointer;
-    white-space: pre;
-    font-size: 8pt;
-    font-family: Verdana,Arial,sans-serif;
-    opacity:.8;
+    text-shadow: 1px 1px #000;
 }
     
-.utilichart .pplabelcol {
-   font-size:7pt
-       width:25px;
+.setchart, .setchart-nickname {
+    background: #303030;
+    border: 1px solid #000;
 }
     
-.utilichart .widelabelcol {
-    text-align: center;
-    width: 50px;
-    font-size:7pt 
-}
-    
-    .utilichart .labelcol {
-    text-align: center;
-    width: 30px;
-    margin-left: -2px;
-        font-size:7pt
-}
-    
-.utilichart .twoabilitycol {
-    padding-top: 0px;
-    height: 28px;
-    font-size: 7pt;
-    width: 90px;
-}
-    
-    .utilichart .statcol, .utilichart .bstcol, .utilichart .labelcol, .utilichart .widelabelcol, .utilichart .pplabelcol {
-    padding-top: 0px;
-    height: 28px;
-    width: 24px;
-    text-align: right;
-    font-size: 7pt;
-}
-    
-  
-.teambar button:hover {
-         color: #FFF;
-    background:#212121;
-    border-color: #AAA;
-  opacity:1;
+ .teambuilder-results h3, .teambuilder-results .utilichart h3 {
+     color: #FFF;
+     text-shadow: 1px 1px #000;
+     background: #303030;
+     border: 1px solid #000;
  }
-  
-.setdetails, .setstats, .setdetails:hover, .setstats:hover {
-    display: block;
-    box-sizing: border-box;
-    border: 1px solid #AAA;
-    border-radius: 3px;
-    padding: 1px;
-    margin: 2px 2px 1px 1px;
-    font-size: 7pt;
-    cursor: pointer;
-    box-shadow: 0px 1px 2px #CCC inset, 1px 1px 0px rgba(255, 255, 255, 0.6);
-    background: none repeat scroll 0% 0% #222222;
-    color: #FFF;
-}
-  
-  
-.setchart input:focus, .setchart-nickname input:focus, .statform input.inputform:focus {
-    outline: 0px none;
-    border: 1px solid #000;
-    box-shadow: 0px 1px 2px #000 inset, 0px 0px 5px #000;
-    background: none repeat scroll 0% 0% #222222;
-    color:#000;
-}
-  
-.setchart input, .setchart-nickname input, .statform input.inputform {
-    outline: 0px none;
-    background: none repeat scroll 0% 0% #222222;
-  color:#FFF;
-}
-  
-.setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover {
-    outline: 0px none;
-    background: none repeat scroll 0% 0% #2F2F2F;
-  color:#000;
-}
-  
-.setdetails:focus, .setstats:focus {
-    border: 2px solid #464646;
-    margin: 1px 1px 0px 0px;
-    outline: 0px none;
-}
-  
-.setchart-nickname label {
-    display: block;
-    font-size: 8pt;
-    font-weight: bold;
-    color: #555;
-    padding-left: 2px;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
-}
-
-.jslider .jslider-pointer:hover {
     
+.utilichart .movenamecol, .utilichart .pokemonnamecol, .utilichart .namecol {
+    color: #FFF;
+    font-style: italic;
 }
-  
-.jslider {
-    display: block;
-    width: 100%;
-    height: 1em;
-    position: relative;
-    top: 0.6em;
-    font-family: Arial,sans-serif;
-}
-  
+    
 .jslider .jslider-value {
-    font-size: 9px;
-    white-space: nowrap;
-    line-height: 12px;
-  color:#000;
+    background: #202020;
 }
-  
-.setchart input:focus, .setchart-nickname input:focus, .statform input.inputform:focus, .textbox:focus {
-    outline: 0px none;
-    border: 1px solid #000;
-    box-shadow: 0px 1px 2px #000 inset, 0px 0px 5px #FFF;
-    background: none repeat scroll 0% 0% #DEDEDE;
+    
+.teambuilder-results .result a:hover, .teambuilder-results .firstresult a {
+    background: #151515;
+    border: 1px solid #FF25D4;
 }
-
+    
+.utilichart b {
+   color: #FF25D4;
+}
+    
+    .utilichart .itemdesccol, .utilichart .abilitydesccol, .utilichart .movedesccol {
+        color: #ACACAC;
+    }
+    
+     .utilichart .labelcol, .utilichart .widelabelcol, .utilichart .pplabelcol {
+        color: #777;
+    }
+    
+    .teamchartbox {
+        border-top: 1px solid #FF25D4;
+    }
+    
+    .teambar button {
+        border-color: #FF25D4;
+        background: #151515;
+        color: #FF25D4;
+    }
+    
+    .teambar button:disabled, .teambar button:disabled:hover {
+        border-color: #FF25D4;
+        background: #151515;
+        color: #FF25D4;
+    }
 
 
 /*BATTLE*/
@@ -908,4 +711,11 @@ border-radius: 7px
 #intro-table {
   border-radius: 20px;
   border: 3px solid #FFF;
+}
+    
+    button {
+        text-shadow: 1px 1px #000;
+        border: 1px solid #FF25D4;
+    }
+
 }

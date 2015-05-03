@@ -506,6 +506,33 @@ body {
       background: #EEEEEE;
       border: 1px solid #2E2E2E;
   }
+  
+  .teambuilder-clipboard-container {
+      border-color: #000;
+      background: rgba(0, 0, 0, 0.3);
+  }
+    
+  .teambuilder-clipboard-data, .teambuilder-clipboard-data:hover {
+      background: url("http://i.imgur.com/rx1b4nh.png?1");
+      border-color: #212121;
+  }
+    
+  .teambuilder-clipboard-data .section {
+      border-right-color: #212121;
+  }
+    
+  .teambuilder-clipboard-button-right {
+      border: 1px solid #212121;
+      background: url("http://i.imgur.com/c49QfNw.png?1");
+  }
+    
+  .teambuilder-clipboard-button-right:hover {
+      background: #D4D4D4;
+  }
+    
+  .teambuilder-clipboard-title {
+      color: #000;
+  }
 
   /***********************
   * Teambuilder CSS ~end *

@@ -533,6 +533,16 @@ body {
   .teambuilder-clipboard-title {
       color: #000;
   }
+  
+  .setchart input, .setchart-nickname input, .statform input.inputform, .setdetails, .setstats {
+      border-color: #212121;
+      background: #F3F3F3;
+  }
+    
+  .setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover, .setdetails:hover, .setstats:hover {
+      border-color: #212121;
+      background: #FFF;
+  }
 
   /***********************
   * Teambuilder CSS ~end *

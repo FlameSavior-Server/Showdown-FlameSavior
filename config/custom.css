@@ -101,6 +101,10 @@ body {
   .roomlist {
       font-family: Verdana, Helvetica, Arial, sans-serif;
   }
+  
+  .roomlist h2 {
+      font-style: italic;
+  }
 
   .roomlist a.ilink {
       border: 1px solid #2E2E2E;

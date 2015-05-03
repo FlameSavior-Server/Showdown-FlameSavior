@@ -112,7 +112,7 @@ body {
   .roomlist a.ilink:hover {
       border: 1px solid #2E2E2E;
       color: #001433;
-      background: #DFDFDF;
+      background: #DFDFDF url("http://i.imgur.com/DUjmLQz.png?1") center right no-repeat;
   }
 
   .pm-window.focused h3,

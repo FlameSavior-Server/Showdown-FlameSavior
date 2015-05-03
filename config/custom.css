@@ -975,3 +975,20 @@ body {
   .ps-popup b {
     font-style: italic;
   }
+  
+  .credits h2 {
+    color: #212121;
+    text-decoration: underline;
+  }
+    
+  a.subtle, .credits ul li p {
+    color: #212121;
+  }
+    
+  a.subtle:hover, .credits ul {
+    color: #000;
+  }
+    
+  .credits li small {
+    font-style: italic;
+  }

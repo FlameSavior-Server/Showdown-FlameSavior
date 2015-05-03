@@ -98,12 +98,11 @@ body {
       border-color: #212121;
   }
 
-  div.roomlist {
+  .roomlist {
       font-family: Verdana, Helvetica, Arial, sans-serif;
   }
 
   .roomlist a.ilink {
-      font-family: Verdana, Helvetica, Arial, sans-serif;
       border: 1px solid #2E2E2E;
       color: #001433;
       background: #EEEEEE;
@@ -111,7 +110,6 @@ body {
   }
 
   .roomlist a.ilink:hover {
-      font-family: Verdana, Helvetica, Arial, sans-serif;
       border: 1px solid #2E2E2E;
       color: #001433;
       background: #DFDFDF;
@@ -356,11 +354,14 @@ body {
       color: #007AA3;
   }
 
-  div.mainmenufooter a:link,
-  div.mainmenufooter a:hover,
-  div.mainmenufooter a:visited {
+  .mainmenufooter a,
+  .mainmenufooter a:visited {
       color: #C0C6C9;
-      text-decoration: none;
+      text-decoration: underline;
+  }
+  
+  .mainmenufooter a:hover {
+      color: #C0C6C9;
   }
 
   .ps-overlay {

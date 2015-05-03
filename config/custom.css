@@ -98,12 +98,15 @@ body {
       border-color: #212121;
   }
 
-  div.roomlist {
+  .roomlist {
       font-family: Verdana, Helvetica, Arial, sans-serif;
+  }
+  
+  .roomlist h2 {
+      font-style: italic;
   }
 
   .roomlist a.ilink {
-      font-family: Verdana, Helvetica, Arial, sans-serif;
       border: 1px solid #2E2E2E;
       color: #001433;
       background: #EEEEEE;
@@ -111,10 +114,9 @@ body {
   }
 
   .roomlist a.ilink:hover {
-      font-family: Verdana, Helvetica, Arial, sans-serif;
       border: 1px solid #2E2E2E;
       color: #001433;
-      background: #DFDFDF;
+      background: #DFDFDF url("http://i.imgur.com/DUjmLQz.png?1") center right no-repeat;
   }
 
   .pm-window.focused h3,
@@ -356,11 +358,14 @@ body {
       color: #007AA3;
   }
 
-  div.mainmenufooter a:link,
-  div.mainmenufooter a:hover,
-  div.mainmenufooter a:visited {
+  .mainmenufooter a,
+  .mainmenufooter a:visited {
       color: #C0C6C9;
-      text-decoration: none;
+      text-decoration: underline;
+  }
+  
+  .mainmenufooter a:hover {
+      color: #C0C6C9;
   }
 
   .ps-overlay {
@@ -451,7 +456,7 @@ body {
 
   .teambuilder-results h3, .teambuilder-results .utilichart h3 {
       background: url("http://i.imgur.com/SRdPIN3.png");
-      border: 1px solid #2E2E2E;
+      border-color: #2E2E2E;
       text-shadow: 1px 1px #EAEAEA;
       color: #001433;
   }
@@ -504,6 +509,47 @@ body {
   .majorbutton:hover {
       background: #EEEEEE;
       border: 1px solid #2E2E2E;
+  }
+  
+  .teambuilder-clipboard-container {
+      border-color: #000;
+      background: rgba(0, 0, 0, 0.3);
+  }
+    
+  .teambuilder-clipboard-data, .teambuilder-clipboard-data:hover {
+      background: url("http://i.imgur.com/rx1b4nh.png?1");
+      border-color: #212121;
+  }
+    
+  .teambuilder-clipboard-data .section {
+      border-right-color: #212121;
+  }
+    
+  .teambuilder-clipboard-button-right {
+      border: 1px solid #212121;
+      background: url("http://i.imgur.com/c49QfNw.png?1");
+  }
+    
+  .teambuilder-clipboard-button-right:hover {
+      background: #D4D4D4;
+  }
+    
+  .teambuilder-clipboard-title {
+      color: #000;
+  }
+  
+  .setchart input, .setchart-nickname input, .statform input.inputform, .setdetails, .setstats {
+      border-color: #2E2E2E;
+      background: #F3F3F3;
+  }
+    
+  .setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover, .setdetails:hover, .setstats:hover {
+      border-color: #2E2E2E;
+      background: #FFF;
+  }
+  
+  .utilichart .typecol img {
+      opacity: 0.85;
   }
 
   /***********************
@@ -973,5 +1019,22 @@ body {
   }
   
   .ps-popup b {
+    font-style: italic;
+  }
+  
+  .credits h2 {
+    color: #212121;
+    text-decoration: underline;
+  }
+    
+  a.subtle, .credits ul li p {
+    color: #212121;
+  }
+    
+  a.subtle:hover, .credits ul {
+    color: #000;
+  }
+    
+  .credits li small {
     font-style: italic;
   }

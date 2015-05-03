@@ -452,7 +452,7 @@ body {
 
   .teambuilder-results h3, .teambuilder-results .utilichart h3 {
       background: url("http://i.imgur.com/SRdPIN3.png");
-      border: 1px solid #2E2E2E;
+      border-color: #2E2E2E;
       text-shadow: 1px 1px #EAEAEA;
       color: #001433;
   }
@@ -535,13 +535,17 @@ body {
   }
   
   .setchart input, .setchart-nickname input, .statform input.inputform, .setdetails, .setstats {
-      border-color: #212121;
+      border-color: #2E2E2E;
       background: #F3F3F3;
   }
     
   .setchart input:hover, .setchart-nickname input:hover, .statform input.inputform:hover, .setdetails:hover, .setstats:hover {
-      border-color: #212121;
+      border-color: #2E2E2E;
       background: #FFF;
+  }
+  
+  .utilichart .typecol img {
+      opacity: 0.85;
   }
 
   /***********************

@@ -225,7 +225,7 @@ exports.Formats = [
 		}
 	},
 	{
-		name: "Random Battle",
+		name: "Battle Factory",
 		section: "Other Metagames",
 		maxForcedLevel: 100,
 		requirePentagon: true,

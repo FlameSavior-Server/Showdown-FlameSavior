@@ -1813,9 +1813,13 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply("/mute OR /m [username], [reason] - Mutes a user with reason for 7 minutes. Requires: % @ & ~");
 		}
-		if (target === 'hourmute' || target === 'hm') {
+		if (target === 'hourmute' || target === 'dm') {
 			matched = true;
 			this.sendReply("/hourmute OR /hm [username], [reason] - Mutes a user with reason for an hour. Requires: % @ & ~");
+		}
+		if (target === 'daymute' || target === 'dm') {
+			matched = true;
+			this.sendReply("/daymute OR /dm [username], [reason] - Mutes a user with reason for 24 hours. Requires: % @ & ~");
 		}
 		if (target === 'unmute' || target === 'um') {
 			matched = true;

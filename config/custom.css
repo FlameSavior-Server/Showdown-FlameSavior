@@ -475,10 +475,38 @@ body {
         color: #FF25D4;
     }
     
+    .teambar button:hover {
+        border-color: #FF25D4;
+        background: #252525;
+    }
+    
     .teambar button:disabled, .teambar button:disabled:hover {
         border-color: #FF25D4;
         background: #151515;
         color: #FF25D4;
+    }
+    
+    .teambuilder-clipboard-data, .teambuilder-clipboard-data:hover {
+        border-color: #FFF;
+        background: #151515;
+        color: #FFF;
+    }
+    
+    .teambuilder-clipboard-data .section {
+        border-right: 1px solid #FFF;
+    }
+    
+    .teambuilder-clipboard-container {
+        border-color: #FF25D4;
+    }
+    
+    .utilichart .illegalcol em {
+        border: 1px solid #FF25D4;
+        color: #FF25D4;
+    }
+    
+    .utilichart .typecol img {
+       opacity: 0.75;
     }
 
 

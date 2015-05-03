@@ -1813,7 +1813,7 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply("/mute OR /m [username], [reason] - Mutes a user with reason for 7 minutes. Requires: % @ & ~");
 		}
-		if (target === 'hourmute' || target === 'dm') {
+		if (target === 'hourmute' || target === 'hm') {
 			matched = true;
 			this.sendReply("/hourmute OR /hm [username], [reason] - Mutes a user with reason for an hour. Requires: % @ & ~");
 		}

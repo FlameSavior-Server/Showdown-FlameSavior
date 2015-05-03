@@ -225,6 +225,14 @@ exports.Formats = [
 		}
 	},
 	{
+		name: "Random Battle",
+		section: "Other Metagames",
+		maxForcedLevel: 100,
+		requirePentagon: true,
+		team: 'random',
+		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'Cancel Mod', 'Team Preview VGC', 'Standard GBU']
+	},
+	{
 		name: "Doubles Challenge Cup",
 		section: "ORAS Doubles",
 

@@ -173,7 +173,7 @@ var components = exports.components = {
 	
 	regdate: function(target, room, user, connection) {
 	        if (!this.canBroadcast()) return;
-		if (!target || target == "0") return this.sendReply('Lol, you can\'t do that, you nub.');
+		if (!target || target == "0") return this.sendReply('/regdate - Please specify a username.'');
 		if (!target || target == "." || target == "," || target == "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
 		var username = target;
 		target = target.replace(/\s+/g, '');

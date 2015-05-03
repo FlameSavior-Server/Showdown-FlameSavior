@@ -226,7 +226,9 @@ exports.Formats = [
 	},
 	{
 		name: "Battle Factory",
-		section: "Other Metagames",
+		section: "Other Metagames",		
+		team: 'random',
+		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'Cancel Mod', 'Team Preview VGC', 'Standard GBU'],
 		maxForcedLevel: 100,
 		requirePentagon: true,
 		validateTeam: function (team, format) {
@@ -238,10 +240,7 @@ exports.Formats = [
 			this.p1.pokemonLeft = this.p1.pokemon.length;
 			this.p2.pokemon = this.p2.pokemon.slice(0, 4);
 			this.p2.pokemonLeft = this.p2.pokemon.length;
-		
-		
-		team: 'random',
-		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'Cancel Mod', 'Team Preview VGC', 'Standard GBU']
+		}
 	},
 	{
 		name: "Doubles Challenge Cup",

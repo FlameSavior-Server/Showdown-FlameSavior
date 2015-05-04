@@ -3385,7 +3385,7 @@ exports.Formats = [
 	},
 	{
 		name: "Monotype Random Battle",
-		section: "Other Metagames",
+		section: "Monotype",
 
 		team: 'randomMonotype',
 		ruleset: ['Pokemon', 'Same Type Clause', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod']

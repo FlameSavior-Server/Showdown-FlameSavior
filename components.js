@@ -909,7 +909,7 @@ var components = exports.components = {
 
 	lobbypoll: function (target, room, user) {
 		if (!this.can('broadcast', null, room)) return;
-		this.parse('/poll Tournament Tier?, Random Battles, Metronome, Duotype, Monotype, Seasonal, Ubers, OU, UU, RU, NU, LC, VGC, Random Triples, Random Doubles, Random Monotype, Random LC, Ubers Mono, CC1vs1, CC, 1v1');
+		this.parse('/poll Tournament Tier?, Random Battles, Battle Factory, Metronome, Duotype, Monotype, Seasonal, Ubers, OU, UU, RU, NU, LC, VGC, Random Triples, Random Doubles, Random Monotype, Random LC, Ubers Mono, CC1vs1, CC, 1v1');
 	},
 
 	easytour: 'etour',

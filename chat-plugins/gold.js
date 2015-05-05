@@ -3,6 +3,60 @@ var fs = require('fs');
 var badges = fs.createWriteStream('badges.txt', {'flags': 'a'});
 
 exports.commands = {
+	pollremind: 'pr',
+	pr: function(target, room, user) {
+		var separacion = "&nbsp;&nbsp;";
+		if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
+		if (!this.canBroadcast()) return;
+		this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');
+	},
+	tpolltest: 'tierpoll',
+    	tpoll: 'tierpoll',
+	tierpoll: function(room, user, cmd) {
+        	return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5] LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes');
+	},
+	
+	 survey: 'poll',
+    poll: function(target, room, user) {
+        if (!user.can('broadcast',null,room)) return this.sendReply('You do not have enough authority to use this command.');
+        if (!this.canTalk()) return this.sendReply('You currently can not speak in this room.');
+        if (room.question) return this.sendReply('There is currently a poll going on already.');
+        if (!target) return false;
+        if (target.length > 500) return this.sendReply('Polls can not be this long.');
+        var separacion = "&nbsp;&nbsp;";
+        var answers = splint(target);
+        var formats = [];
+        for (var u in Tools.data.Formats) {
+            if (Tools.data.Formats[u].name && Tools.data.Formats[u].challengeShow && Tools.data.Formats[u].mod != 'gen4' && Tools.data.Formats[u].mod != 'gen3' && Tools.data.Formats[u].mod != 'gen3' && Tools.data.Formats[u].mod != 'gen2' && Tools.data.Formats[u].mod != 'gen1') formats.push(Tools.data.Formats[u].name);
+        }
+        formats = 'Tournament,'+formats.join(',');
+        if (answers[0] == 'tournament' ||  answers[0] == 'tour') answers = splint(formats);
+        if (answers.length < 3) return this.sendReply('Correct syntax for this command is /poll question, option, option...');
+        var question = answers[0];
+        question = Tools.escapeHTML(question);
+        answers.splice(0, 1);
+        var answers = answers.join(',').toLowerCase().split(',');
+        room.question = question;
+        room.answerList = answers;
+        room.usergroup = Config.groupsranking.indexOf(user.group);
+        var output = '';
+        for (var u in room.answerList) {
+            if (!room.answerList[u] || room.answerList[u].length < 1) continue;
+            output += '<button name="send" value="/vote '+room.answerList[u]+'">'+Tools.escapeHTML(room.answerList[u])+'</button>&nbsp;';
+        }
+        room.addRaw('<div class="infobox"><h2>' + room.question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by '+user.name+'</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
+    },
+
+    vote: function(target, room, user) {
+        var ips = JSON.stringify(user.ips);
+        if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
+        if (!target) return this.parse('/help vote');
+        if (room.answerList.indexOf(target.toLowerCase()) == -1) return this.sendReply('\'' + target + '\' is not an option for the current poll.');
+        if (!room.answers) room.answers = new Object();
+        room.answers[ips] = target.toLowerCase();
+        return this.sendReply('You are now voting for ' + target + '.');
+    },
+
 
     away: 'afk',
     asleep: 'afk',

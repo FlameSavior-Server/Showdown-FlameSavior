@@ -89,28 +89,6 @@ var commands = exports.commands = {
 		if (targetUser.vip) {
 			this.sendReply('|raw|(<font color="#6390F0"><b>VIP</font> User</b>)');
 		}
-		if (!targetUser.authenticated) {
-			this.sendReply("(Unregistered)");
-		}
-		if (!targetUser.lastActive) targetUser.lastActive = Date.now();
-
-		var seconds = Math.floor(((Date.now() - targetUser.lastActive) / 1000));
-		var minutes = Math.floor((seconds / 60));
-		var hours = Math.floor((minutes / 60));
-
-		var secondsWord = (((seconds % 60) > 1 || (seconds % 60) == 0) ? 'seconds' : 'second');
-		var minutesWord = (((minutes % 60) > 1 || (minutes % 60) == 0) ? 'minutes' : 'minute');
-		var hoursWord = ((hours > 1 || hours == 0) ? 'hours' : 'hour');
-
-		if (minutes < 1) {
-			this.sendReply((targetUser.awayName ? '|raw|<b><font color="orange">Away for: </font></b>' : "Idle for: ") + seconds + ' ' + secondsWord);
-		}
-		if (minutes > 0 && minutes < 60) {
-			this.sendReply((targetUser.awayName ? '|raw|<b><font color="orange">Away for: </font></b>' : "Idle for: ") + minutes + ' ' + minutesWord + ' ' + (seconds % 60) + ' ' + secondsWord);
-		}
-		if (hours > 0) {
-			this.sendReply((targetUser.awayName ? '|raw|<b><font color="orange">Away for: </font></b>' : "Idle for: ") + hours + ' ' + hoursWord + ' ' + (minutes % 60) + ' ' + minutesWord);
-		}
 
 		if (!this.broadcasting && (user.can('ip', targetUser) || user === targetUser)) {
 			var ips = Object.keys(targetUser.ips);

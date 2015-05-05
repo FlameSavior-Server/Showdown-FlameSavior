@@ -3346,7 +3346,7 @@ exports.Formats = [
 		banlist: []
 	},
 	{
-		name: "Monotype",
+		name: "OU Monotype (Regular)",
 		section: "Monotype",
 
 		ruleset: ['Pokemon', 'Standard', 'Baton Pass Clause', 'Swagger Clause', 'Same Type Clause', 'Team Preview'],
@@ -3652,7 +3652,7 @@ exports.Formats = [
 		banlist: ['Uber']
 	},
 	{
-		name: "Battle Factory",
+		name: "Battle Factory (Work-In-Progress)",
 		section: "Other Metagames",		
 		team: 'random',
 		ruleset: ['PotD', 'Pokemon', 'Sleep Clause Mod', 'Cancel Mod', 'Team Preview VGC', 'Standard GBU'],

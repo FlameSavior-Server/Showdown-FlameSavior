@@ -86,7 +86,7 @@ var commands = exports.commands = {
 		if (targetUser.isSysop) {
 			this.sendReply("(Pok\xE9mon Showdown System Operator)");
 		}
-		if (targetThis.vip) {
+		if (targetUser.vip) {
 			this.sendReply('|raw|(<font color="#6390F0"><b>VIP</font> User</b>)');
 		}
 

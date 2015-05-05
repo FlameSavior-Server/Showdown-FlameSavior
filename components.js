@@ -911,6 +911,11 @@ var components = exports.components = {
 		if (!this.can('broadcast', null, room)) return;
 		this.parse('/poll Tournament Tier?, Random Battles, Battle Factory, Metronome, Duotype, Monotype, Seasonal, Ubers, OU, UU, RU, NU, LC, VGC, Random Triples, Random Doubles, Random Monotype, Random LC, Ubers Mono, CC1vs1, CC, 1v1');
 	},
+	
+	ompoll: function (target, room, user) {
+		if (!this.can('broadcast', null, room)) return;
+		this.parse('/poll Tournament Tier?, Inheritance, SeasonalSuperStaffBros, CAP, Challengecup, Challengecup1-vs-1, BalancedHackmons, 1v1, Monotype, TierShift, PU, InverseBattle, AlmostAnyAbility, STABmons, LCUU, RandomBattle, RandomDoublesBattle');
+	},
 
 	easytour: 'etour',
 	etour: function (target, room, user) {

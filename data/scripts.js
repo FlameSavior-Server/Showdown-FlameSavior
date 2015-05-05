@@ -173,7 +173,7 @@ exports.BattleScripts = {
 			this.faint(pokemon, pokemon, move);
 		}
 
-		if (!move.negateSecondary && !pokemon.hasAbility('sheerforce')) {
+		if (!move.negateSecondary && !(pokemon.hasAbility('sheerforce') && pokemon.volatiles['sheerforce'])) {
 			this.singleEvent('AfterMoveSecondarySelf', move, null, pokemon, target, move);
 			this.runEvent('AfterMoveSecondarySelf', pokemon, target, move);
 		}
@@ -324,7 +324,7 @@ exports.BattleScripts = {
 
 		if (!damage && damage !== 0) return damage;
 
-		if (target && !move.negateSecondary && !pokemon.hasAbility('sheerforce')) {
+		if (target && !move.negateSecondary && !(pokemon.hasAbility('sheerforce') && pokemon.volatiles['sheerforce'])) {
 			this.singleEvent('AfterMoveSecondary', move, null, target, pokemon, move);
 			this.runEvent('AfterMoveSecondary', target, pokemon, move);
 		}
@@ -3083,6 +3083,7 @@ exports.BattleScripts = {
 			baseFormes[template.baseSpecies] = 1;
 		}
 		return pokemon;
+<<<<<<< HEAD
 	},
 	randomLCTeam: function (side) {
 		var keys = [];
@@ -3885,5 +3886,7 @@ exports.BattleScripts = {
 		}
 
 		return team;
+=======
+>>>>>>> 383af9eea171700c618f88e20a72b14ce4b4a5d1
 	}
 };

@@ -1286,16 +1286,21 @@ var cmds = {
                  	output += '<button name="send" value="/vote '+tour[room.id].answerList[u]+'">'+tour[room.id].answerList[u]+'</button>&nbsp;';
                  }
                  this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />'+ separacion + " &bull; " + output + '</div>');
-         }
-	/*/
+         },
+	
 	pollremind: 'pr',
 	pr: function(target, room, user) {
 		var separacion = "&nbsp;&nbsp;";
 		if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
 		if (!this.canBroadcast()) return;
 		this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');
+	},
+	tpolltest: 'tierpoll',
+    	tpoll: 'tierpoll',
+	tierpoll: function(room, user, cmd) {
+        	return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5] LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes');
 	}
-	*/
+    },
 };
 
 for (var i in cmds) CommandParser.commands[i] = cmds[i];

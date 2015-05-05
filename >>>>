@@ -3494,7 +3494,7 @@ var commands = exports.commands = {
             var fileList = fs.readdirSync('logs/modlog');
             for (var i = 0; i < fileList.length; ++i) {
                 filename += path.normalize(__dirname + '/' + logPath + fileList[i]) + ' ';
-            }
+							    }
         } else {
             if (!this.can('modlog', null, Rooms.get(roomId))) return;
             roomNames = "the room " + roomId;

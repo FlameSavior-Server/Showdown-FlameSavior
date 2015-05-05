@@ -3083,7 +3083,6 @@ exports.BattleScripts = {
 			baseFormes[template.baseSpecies] = 1;
 		}
 		return pokemon;
-<<<<<<< HEAD
 	},
 	randomLCTeam: function (side) {
 		var keys = [];
@@ -3886,7 +3885,5 @@ exports.BattleScripts = {
 		}
 
 		return team;
-=======
->>>>>>> 383af9eea171700c618f88e20a72b14ce4b4a5d1
 	}
 };

@@ -9,6 +9,7 @@
  *
  * @license MIT license
  */
+var fs = require("fs"),
 var geoip = require('geoip-lite');
 geoip.startWatchingDataUpdate();
 

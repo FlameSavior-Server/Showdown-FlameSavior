@@ -4814,7 +4814,7 @@ var commands = exports.commands = {
 	},
 	unignorepmshelp: ["/unblockpms - Unblocks private messages. Block them with /blockpms."],
 
-	idle: 'away',
+	/*idle: 'away',
 	away: function (target, room, user) {
 		this.parse('/blockchallenges');
 		this.parse('/blockpms ' + target);
@@ -4827,7 +4827,7 @@ var commands = exports.commands = {
 		this.parse('/unblockchallenges');
 	},
 	backhelp: ["/back - Unblocks challenges and/or private messages, if either are blocked."],
-
+	*/
 	makechatroom: function (target, room, user) {
 		if (!this.can('makeroom')) return;
 

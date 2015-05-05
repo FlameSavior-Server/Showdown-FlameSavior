@@ -3,6 +3,71 @@ var fs = require('fs');
 var badges = fs.createWriteStream('badges.txt', {'flags': 'a'});
 
 exports.commands = {
+
+    away: 'afk',
+    asleep: 'afk',
+    sleep: 'afk',
+    gaming: 'afk',
+    busy: 'afk',
+    afk: function(target, room, user, connection, cmd) {
+        if (!this.canTalk()) return;
+        if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
+        if (!user.isAway) {
+            user.originalName = user.name;
+            switch (cmd) {
+                case 'sleep':
+                    var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+                    break;
+                case 'gaming':
+                    var awayName = user.name + ' - ⒼⒶⓂⒾⓃⒼ';
+                    break;
+                case 'busy':
+                    var awayName = user.name + ' - Ⓑⓤⓢⓨ';
+                    break;
+                default:
+                    var awayName = user.name + ' - Ⓐⓦⓐⓨ';
+            }
+            //delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+            delete Users.get(awayName);
+            user.forceRename(awayName, undefined, true);
+            user.isAway = true;
+            if (!(!this.can('broadcast'))) {
+                var color = hashColor('' + toId(user.originalName) + '');
+                if (cmd == 'sleep') cmd = 'sleeping';
+                if (user.userid == 'panpawn') color = '#DA9D01';
+                this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + user.originalName + '</font></b></button> is now ' + cmd + '. ' + (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
+            }
+        } else {
+            return this.sendReply('You are already set as away, type /back if you are now back.');
+        }
+    },
+
+    back: function(target, room, user, connection) {
+        if (!this.canTalk()) return;
+        if (user.isAway) {
+            if (user.name === user.originalName) {
+                user.isAway = false;
+                return this.sendReply('Your name has been left unaltered and no longer marked as away.');
+            }
+            var newName = user.originalName;
+            //delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+            delete Users.get(newName);
+            user.forceRename(newName, undefined, true);
+            //user will be authenticated
+            user.authenticated = true;
+            user.isAway = false;
+            if (!(!this.can('broadcast'))) {
+                var color = hashColor('' + toId(user.name) + '');
+                if (user.userid == 'panpawn') color = '#DA9D01';
+                this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + newName + '</font></b></button> is no longer away.');
+                user.originalName = '';
+            }
+        } else {
+            return this.sendReply('You are not set as away.');
+        }
+        user.updateIdentity();
+    },
+    
     gdeclarered: 'gdeclare',
     gdeclaregreen: 'gdeclare',
     gdeclare: function(target, room, user, connection, cmd) {

@@ -216,7 +216,7 @@ var GlobalRoom = (function () {
 				continue;
 			}
 			var id = toId(this.chatRoomData[i].title);
-			if (!Config.quietconsole) console.log("NEW CHATROOM: " + id);
+			console.log("NEW CHATROOM: " + id);
 			var room = Rooms.createChatRoom(id, this.chatRoomData[i].title, this.chatRoomData[i]);
 			if (room.aliases) {
 				for (var a = 0; a < room.aliases.length; a++) {
@@ -1633,7 +1633,7 @@ Rooms.createChatRoom = function (roomid, title, data) {
 	return room;
 };
 
-if (!Config.quietconsole) console.log("NEW GLOBAL: global");
+console.log("NEW GLOBAL: global");
 rooms.global = new GlobalRoom('global');
 
 Rooms.Room = Room;

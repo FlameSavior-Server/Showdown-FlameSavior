@@ -59,6 +59,7 @@ exports.commands = {
         uor: 'usersofrank',
         usersofrank: function(target, room, user) {
                 if (!target || !Config.groups[target]) return false;
+                if (!this.canBroadcast()) return;
                 var names = [];
                 for (var i in Users.users) {
                         if (!Users.users[i].connected) continue;
@@ -67,7 +68,7 @@ exports.commands = {
                         }
                 }
                 if (names.length < 1) return this.sendReplyBox('There are no users of the rank <font color="#24678d"><b>' + Tools.escapeHTML(Config.groups[target].name) + '</b></font> currently online.');
-                this.sendReplyBox('There ' + (names.length === 1 ? 'is' : 'are') + ' <font color="#24678d"><b>' + names.length + '</b></font> ' + (names.length === 1 ? 'user' : 'users') + ' with the rank <font color="#24678d"><b>' + Config.groups[target].name + '</b></font> currently online.<br />' + names.join(', '));
+                return this.sendReplyBox('There ' + (names.length === 1 ? 'is' : 'are') + ' <font color="#24678d"><b>' + names.length + '</b></font> ' + (names.length === 1 ? 'user' : 'users') + ' with the rank <font color="#24678d"><b>' + Config.groups[target].name + '</b></font> currently online.<br />' + names.join(', '));
         },
         away: 'afk',
         asleep: 'afk',

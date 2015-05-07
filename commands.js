@@ -4577,8 +4577,8 @@ var commands = exports.commands = {
 		this.sendReplyBox("Server version: <b>" + CommandParser.package.version + "</b>");
 	},
 	
-	goldauthlist: 'gat',
-	gat: function(target, room, user, connection) {
+	goldauthlist: 'gal',
+	gal: function(target, room, user, connection) {
         fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
             var staff = {
                 "admins": [],

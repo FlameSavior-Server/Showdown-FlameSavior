@@ -914,7 +914,7 @@ var components = exports.components = {
 	
 	ompoll: function (target, room, user) {
 		if (!this.can('broadcast', null, room)) return;
-		this.parse('/poll Tournament Tier?, Inheritance, [Seasonal]You are (not) prepared, CAP, Challengecup, Challengecup1-vs-1, BalancedHackmons, 1v1, Monotype, TierShift, PU, InverseBattle, AlmostAnyAbility, STABmons, LCUU, RandomBattle, RandomDoublesBattle');
+		this.parse('/poll Tournament Tier?, Inheritance, Seasonal, CAP, Challengecup, Challengecup1-vs-1, BalancedHackmons, 1v1, Monotype, TierShift, PU, InverseBattle, AlmostAnyAbility, STABmons, LCUU, RandomBattle, RandomDoublesBattle');
 	},
 
 	easytour: 'etour',

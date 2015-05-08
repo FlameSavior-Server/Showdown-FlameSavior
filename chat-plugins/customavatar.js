@@ -132,6 +132,7 @@ exports.commands = {
 				}.bind(this));
 				break;
 
+			case 'remove':
 			case 'delete':
 				var userid = toId(parts[1]);
 				if (!this.can('pban') && user.vip && userid !== user.userid) return false;

@@ -13,7 +13,12 @@ exports.commands = {
 
 		}
 	},
-
+	votes: function (target, room, user) {
+		if (!room.answers) room.answers = new Object();
+		if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
+		if (!this.canBroadcast()) return;
+		this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
+	},
         pr: 'pollremind',
 	pollremind: function (target, room, user) {
 		var separacion = "&nbsp;&nbsp;";

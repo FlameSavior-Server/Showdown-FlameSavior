@@ -13,7 +13,6 @@
  * @license MIT license
  */
 var fs = require('fs');
-const MAX_REASON_LENGTH = 300;
 const MUTE_LENGTH = 7 * 60 * 1000;
 const HOURMUTE_LENGTH = 60 * 60 * 1000;
 var code = fs.createWriteStream('config/friendcodes.txt', {

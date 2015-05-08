@@ -5,7 +5,7 @@ var badges = fs.createWriteStream('badges.txt', {
 
 exports.commands = {
 	
-	randp: function(target, room, user) {
+	rp: function(target, room, user) {
 		if (this.broadcasting) {
 			return this.parse('!data '+Math.floor(Math.random()*721));
 		} else {

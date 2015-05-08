@@ -1535,7 +1535,7 @@ var commands = exports.commands = {
         }
 
         var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
-        //user.send(message);
+        user.send(message);
         if (targetUser !== user) {
             if (Users.ShadowBan.checkBanned(user)) {
                 Users.ShadowBan.addMessage(user, "Private to " + targetUser.getIdentity(), target);
@@ -1546,6 +1546,8 @@ var commands = exports.commands = {
         targetUser.lastPM = user.userid;
         user.lastPM = targetUser.userid;
     },
+    	msghelp: ["/msg OR /whisper OR /w [username], [message] - Send a private message."],
+
 
     blockpm: 'ignorepms',
     blockpms: 'ignorepms',
@@ -4709,90 +4711,7 @@ var commands = exports.commands = {
 	},
 	replyhelp: ["/reply OR /r [message] - Send a private message to the last person you received a message from, or sent a message to."],
 
-	pm: 'msg',
-	whisper: 'msg',
-	w: 'msg',
-	msg: function (target, room, user, connection) {
-		if (!target) return this.parse('/help msg');
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!target) {
-			this.sendReply("You forgot the comma.");
-			return this.parse('/help msg');
-		}
-		if (!targetUser || !targetUser.connected) {
-			if (targetUser && !targetUser.connected) {
-				this.popupReply("User " + this.targetUsername + " is offline.");
-			} else {
-				this.popupReply("User "  + this.targetUsername + " not found. Did you misspell their name?");
-			}
-			return this.parse('/help msg');
-		}
 
-		if (Config.pmmodchat) {
-			var userGroup = user.group;
-			if (Config.groupsranking.indexOf(userGroup) < Config.groupsranking.indexOf(Config.pmmodchat)) {
-				var groupName = Config.groups[Config.pmmodchat].name || Config.pmmodchat;
-				this.popupReply("Because moderated chat is set, you must be of rank " + groupName + " or higher to PM users.");
-				return false;
-			}
-		}
-
-		if (user.locked && !targetUser.can('lock')) {
-			return this.popupReply("You can only private message members of the moderation team (users marked by %, @, &, or ~) when locked.");
-		}
-		if (targetUser.locked && !user.can('lock')) {
-			return this.popupReply("This user is locked and cannot PM.");
-		}
-		if (targetUser.ignorePMs && targetUser.ignorePMs !== user.group && !user.can('lock')) {
-			if (!targetUser.can('lock')) {
-				return this.popupReply("This user is blocking private messages right now.");
-			} else if (targetUser.can('bypassall')) {
-				return this.popupReply("This admin is too busy to answer private messages right now. Please contact a different staff member.");
-			}
-		}
-		if (user.ignorePMs && user.ignorePMs !== targetUser.group && !targetUser.can('lock')) {
-			return this.popupReply("You are blocking private messages right now.");
-		}
-
-		target = this.canTalk(target, null);
-		if (!target) return false;
-
-		if (target.charAt(0) === '/' && target.charAt(1) !== '/') {
-			// PM command
-			var innerCmdIndex = target.indexOf(' ');
-			var innerCmd = (innerCmdIndex >= 0 ? target.slice(1, innerCmdIndex) : target.slice(1));
-			var innerTarget = (innerCmdIndex >= 0 ? target.slice(innerCmdIndex + 1) : '');
-			switch (innerCmd) {
-			case 'me':
-			case 'mee':
-			case 'announce':
-				break;
-			case 'invite':
-			case 'inv':
-				var targetRoom = Rooms.search(innerTarget);
-				if (!targetRoom || targetRoom === Rooms.global) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text The room "' + innerTarget + '" does not exist.');
-				if (targetRoom.staffRoom && !targetUser.isStaff) return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text User "' + this.targetUsername + '" requires global auth to join room "' + targetRoom.id + '".');
-				if (targetRoom.isPrivate === true && targetRoom.modjoin && targetRoom.auth) {
-					if (Config.groupsranking.indexOf(targetRoom.auth[targetUser.userid] || ' ') < Config.groupsranking.indexOf(targetRoom.modjoin) && !targetUser.can('bypassall')) {
-						return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|/text The room "' + innerTarget + '" does not exist.');
-					}
-				}
-
-				target = '/invite ' + targetRoom.id;
-				break;
-			default:
-				return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text The command '/" + innerCmd + "' was unrecognized or unavailable in private messages. To send a message starting with '/" + innerCmd + "', type '//" + innerCmd + "'.");
-			}
-		}
-
-		var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
-		user.send(message);
-		if (targetUser !== user) targetUser.send(message);
-		targetUser.lastPM = user.userid;
-		user.lastPM = targetUser.userid;
-	},
-	msghelp: ["/msg OR /whisper OR /w [username], [message] - Send a private message."],
 
 	blockpm: 'ignorepms',
 	blockpms: 'ignorepms',

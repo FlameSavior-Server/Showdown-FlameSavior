@@ -13,6 +13,9 @@
  * @license MIT license
  */
 var fs = require('fs');
+const MAX_REASON_LENGTH = 300;
+const MUTE_LENGTH = 7 * 60 * 1000;
+const HOURMUTE_LENGTH = 60 * 60 * 1000;
 var code = fs.createWriteStream('config/friendcodes.txt', {
     'flags': 'a'
 });
@@ -5425,14 +5428,6 @@ var commands = exports.commands = {
 
 		targetUser.mute(room.id, muteDuration, true);
 	},
-	mutehelp: ["/mute OR /m [username], [reason] - Mutes a user with reason for 7 minutes. Requires: % @ & ~"],
-
-	hm: 'hourmute',
-	hourmute: function () {
-		CommandParser.commands.mute.apply(this, arguments);
-	},
-	hourmutehelp: ["/hourmute OR /hm [username], [reason] - Mutes a user with reason for an hour. Requires: % @ & ~"],
-
 	um: 'unmute',
 	unmute: function (target, room, user) {
 		if (!target) return this.parse('/help unmute');
@@ -5449,7 +5444,6 @@ var commands = exports.commands = {
 
 		targetUser.unmute(room.id);
 	},
-	unmutehelp: ["/unmute [username] - Removes mute from user. Requires: % @ & ~"],
 
 	l: 'lock',
 	ipmute: 'lock',

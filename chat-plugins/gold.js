@@ -62,6 +62,37 @@ exports.commands = {
                 room.answers[ips] = target.toLowerCase();
                 return this.sendReply('You are now voting for ' + target + '.');
         },
+        ep: 'endpoll',
+	endpoll: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!room.question) return this.sendReply('There is no poll to end in this room.');
+		if (!room.answers) room.answers = new Object();
+		var votes = Object.keys(room.answers).length;
+		if (votes == 0) {
+			room.question = undefined;
+			room.answerList = new Array();
+			room.answers = new Object();
+			return room.addRaw("<h3>The poll was canceled because of lack of voters.</h3>");
+		}
+		var options = new Object();
+		var obj = Rooms.get(room);
+		for (var i in obj.answerList) options[obj.answerList[i]] = 0;
+		for (var i in obj.answers) options[obj.answers[i]]++;
+		var sortable = new Array();
+		for (var i in options) sortable.push([i, options[i]]);
+		sortable.sort(function(a, b) {return a[1] - b[1]});
+		var html = "";
+		for (var i = sortable.length - 1; i > -1; i--) {
+			var option = sortable[i][0];
+			var value = sortable[i][1];
+			if (value > 0) html += "&bull; " + Tools.escapeHTML(option) + " - " + Math.floor(value / votes * 100) + "% (" + value + ")<br />";
+		}
+		room.addRaw('<div class="infobox"><h2>Results to "' + Tools.escapeHTML(obj.question) + '"<br /><i><font size=1 color = "#939393">Poll ended by ' + Tools.escapeHTML(user.name) + '</font></i></h2><hr />' + html + '</div>'); 
+		room.question = undefined;
+		room.answerList = new Array();
+		room.answers = new Object();
+	},
         uor: 'usersofrank',
         usersofrank: function(target, room, user) {
                 if (!target || !Config.groups[target]) return false;

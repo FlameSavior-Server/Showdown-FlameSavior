@@ -1535,7 +1535,7 @@ var commands = exports.commands = {
         }
 
         var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
-        user.send(message);
+        //user.send(message);
         if (targetUser !== user) {
             if (Users.ShadowBan.checkBanned(user)) {
                 Users.ShadowBan.addMessage(user, "Private to " + targetUser.getIdentity(), target);

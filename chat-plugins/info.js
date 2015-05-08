@@ -3575,7 +3575,7 @@ var commands = exports.commands = {
 	dicehelp: ["/dice [max number] - Randomly picks a number between 1 and the number you choose.",
 		"/dice [number of dice]d[number of sides] - Simulates rolling a number of dice, e.g., /dice 2d4 simulates rolling two 4-sided dice."],
 
-	pr: 'pickrandom',
+	//pr: 'pickrandom',
 	pick: 'pickrandom',
 	pickrandom: function (target, room, user) {
 		var options = target.split(',');

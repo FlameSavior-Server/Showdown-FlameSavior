@@ -1355,7 +1355,6 @@ var commands = exports.commands = {
         return this.sendReplyBox("Random number (1 - " + maxRoll + "): " + rand);
     },
 
-    pr: 'pickrandom',
     pick: 'pickrandom',
     pickrandom: function (target, room, user) {
         var options = target.split(',');
@@ -1870,7 +1869,6 @@ var commands = exports.commands = {
 	pokedex: 'data',
 	data: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
-
 		var buffer = '';
 		var targetId = toId(target);
 		if (!targetId) return this.parse('/help data');
@@ -1884,6 +1882,8 @@ var commands = exports.commands = {
 				}
 			}
 		}
+		if (cmd == 'randp') target = Math.floor(Math.random()*721);
+
 		var newTargets = Tools.dataSearch(target);
 		var showDetails = (cmd === 'dt' || cmd === 'details');
 		if (newTargets && newTargets.length) {

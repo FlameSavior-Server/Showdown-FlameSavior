@@ -5,13 +5,19 @@ var badges = fs.createWriteStream('badges.txt', {
 
 exports.commands = {
 
-        pollremind: 'pr',
-        pr: function(target, room, user) {
-                var separacion = "&nbsp;&nbsp;";
-                if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
-                if (!this.canBroadcast()) return;
-                this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');
-        },
+        pr: 'pollremind',
+	pollremind: function (target, room, user) {
+		var separacion = "&nbsp;&nbsp;";
+		if (!room.question) return this.sendReply('There is currently no poll going on.');
+		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.canBroadcast()) return;
+		var output = '';
+		for (var u in room.answerList) {
+			if (!room.answerList[u] || room.answerList[u].length < 1) continue;
+			output += '<button name="send" value="/vote '+room.answerList[u]+'">'+Tools.escapeHTML(room.answerList[u])+'</button>&nbsp;';
+		}
+		this.sendReply('|raw|<div class="infobox"><h2>' + Tools.escapeHTML(room.question) + separacion + '<font font size=1 color = "#939393"><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + output + '</div>');
+	},
         tpolltest: 'tierpoll',
         tpoll: 'tierpoll',
         tierpoll: function(room, user, cmd) {

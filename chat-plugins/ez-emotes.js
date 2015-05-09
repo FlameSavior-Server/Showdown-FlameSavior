@@ -3,7 +3,7 @@
  * it easier for people to actually 
  * emotes without having to manaully
  * add them every time
- * By: panpawn
+ * By: panpawn (inspired by jd's ez-tc plugin)
  */
  
  var fs = require('fs');

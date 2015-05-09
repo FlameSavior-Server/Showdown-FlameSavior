@@ -26,6 +26,7 @@ function saveEmotes() {
 }
 
 exports.commands = {
+	ec: 'ezemote',
 	ezemote: function (target, room, user) {
 		if (!target) target = 'help';
 		var parts = target.split(',');
@@ -59,6 +60,14 @@ exports.commands = {
 					this.logModCommand("The emote " + emoteName + " was removed by " + user.name);
 					Rooms.rooms.staff.add("The emote " + emoteName + " was removed by " + user.name);
 					break;
+				case 'list':
+					if (!this.canBroadcast()) return;
+					var output = "<b>There's a total of " + Object.size(emotes) + " emotes added with this command:</b><br />";
+					for (var e in emotes) {
+						output += e + "<br />";
+					}
+					this.sendReplyBox(output);
+					break;
 				case 'help':
 				default:
 					if (!this.canBroadcast()) return;
@@ -66,6 +75,7 @@ exports.commands = {
 						"EZ-Emote Commands:<br />" +
 						"/ezemote add, [emote], [link] - Adds an emote.<br />" +
 						"/ezemote remove, [emote] - Removes an emote.<br />" +
+						"/ezemote list - Shows the emotes that were added with this command.<br />" +
 						"/ezemote help - Shows this help command.<br />"
 					);
 			}

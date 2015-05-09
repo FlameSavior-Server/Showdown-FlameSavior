@@ -32,10 +32,10 @@ exports.commands = {
 	ezemote: function (target, room, user) {
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
-		if (!parts[0] && (toId(cmd) === 'emote' || toId(cmd) === 'emotes')) {
-			parts[0] = 'view';
+		if (!target && (cmd === 'emote' || cmd === 'emotes')) {
+			target = 'view';
 		} else {
-			parts[0] = 'help';	
+			target = 'help';
 		}
 		try {
 			switch (parts[0]) {

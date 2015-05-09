@@ -28,48 +28,45 @@ exports.commands = {
 		if (!target) target = 'help';
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
-		
-		switch (parts[0]) {
-			case 'add':
-				if (!this.can('pban')) return false;
-				if (!parts[2]) return this.sendReply("Usage: /ezemote add, [emote], [link]");
-				var emoteName = parts[1];
-				if (Core.emoticons[emoteName]) return this.sendReplyBox("ERROR: the emote: " + emoteName + " already exists.");
-				var link = parts.splice(2, parts.length).join(',');
-				emotes[emoteName] = Core.emoticons[emoteName] = link;
-				saveEmotes();
-				this.sendReply("The emote " + emoteName + " has been added.");
-				this.logModCommand(user.name + " added the emote " + emoteName);
-				try {
+		try {
+			switch (parts[0]) {
+				case 'add':
+					if (!this.can('pban')) return false;
+					if (!parts[2]) return this.sendReply("Usage: /ezemote add, [emote], [link]");
+					var emoteName = parts[1];
+					if (Core.emoticons[emoteName]) return this.sendReplyBox("ERROR: the emote: " + emoteName + " already exists.");
+					var link = parts.splice(2, parts.length).join(',');
+					emotes[emoteName] = Core.emoticons[emoteName] = link;
+					saveEmotes();
+					this.sendReply("The emote " + emoteName + " has been added.");
+					this.logModCommand(user.name + " added the emote " + emoteName);
 					Rooms.rooms.staff.add(user.name + " added the emote " + emoteName);
-				} catch (e) {};
-				break;
-			case 'rem':
-			case 'remove':
-			case 'del':
-			case 'delete':
-				if (!this.can('pban')) return false;
-				if (!parts[1]) return this.sendReplyBox('/ezemote remove, [emote]');
-				var emoteName = parts[1];
-				if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR: the emote " + emoteName + " does not exist.");
-				Core.emoticons[emoteName] = undefined;
-				delete Core.emoticons[emoteName];
-				saveEmotes();
-				this.sendReply("The emote " + emoteName + " was removed.");
-				this.logModCommand("The emote " + emoteName + " was removed by " + user.name);
-				try {
+					break;
+				case 'rem':
+				case 'remove':
+				case 'del':
+				case 'delete':
+					if (!this.can('pban')) return false;
+					if (!parts[1]) return this.sendReplyBox('/ezemote remove, [emote]');
+					var emoteName = parts[1];
+					if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR: the emote " + emoteName + " does not exist.");
+					Core.emoticons[emoteName] = undefined;
+					delete Core.emoticons[emoteName];
+					saveEmotes();
+					this.sendReply("The emote " + emoteName + " was removed.");
+					this.logModCommand("The emote " + emoteName + " was removed by " + user.name);
 					Rooms.rooms.staff.add("The emote " + emoteName + " was removed by " + user.name);
-				} catch (e) {};
-				break;
-			case 'help':
-			default:
-				if (!this.canBroadcast()) return;
-				this.sendReplyBox(
-					"EZ-Emote Commands:<br />" +
-					"/ezemote add, [emote], [link] - Adds an emote.<br />" +
-					"/ezemote remove, [emote] - Removes an emote.<br />" +
-					"/ezemote help - Shows this help command.<br />"
-				);
-		}
+					break;
+				case 'help':
+				default:
+					if (!this.canBroadcast()) return;
+					this.sendReplyBox(
+						"EZ-Emote Commands:<br />" +
+						"/ezemote add, [emote], [link] - Adds an emote.<br />" +
+						"/ezemote remove, [emote] - Removes an emote.<br />" +
+						"/ezemote help - Shows this help command.<br />"
+					);
+			}
+		} catch (e) {};
 	}
 };

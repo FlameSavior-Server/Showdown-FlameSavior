@@ -19,8 +19,10 @@
 setTimeout(function(){loadEmotes();},1000);
 
 function saveEmotes() {
-	fs.writeFileSync('config/emotes.json',serialize.serialize(emotes));
-	Object.merge(Core.emoticons, emotes);
+	try {
+		fs.writeFileSync('config/emotes.json',serialize.serialize(emotes));
+		Object.merge(Core.emoticons, emotes);
+	} catch (e) {};
 }
 
 exports.commands = {

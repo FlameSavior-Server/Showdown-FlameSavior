@@ -36,7 +36,7 @@ exports.commands = {
 		try {
 			switch (parts[0]) {
 				case 'add':
-					if (!this.can('pban')) return this.sendReply("Access denied.")
+					if (!this.can('ban')) return this.sendReply("Access denied.")
 					if (!parts[2]) return this.sendReply("Usage: /ezemote add, [emote], [link]");
 					var emoteName = parts[1];
 					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
@@ -51,7 +51,7 @@ exports.commands = {
 				case 'remove':
 				case 'del':
 				case 'delete':
-					if (!this.can('pban')) return this.sendReply("Access denied.");
+					if (!this.can('ban')) return this.sendReply("Access denied.");
 					if (!parts[1]) return this.sendReplyBox('/ezemote remove, [emote]');
 					var emoteName = parts[1];
 					if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR - the emote: " + emoteName + " does not exist.");
@@ -64,6 +64,7 @@ exports.commands = {
 					break;
 				case 'list':
 					if (!this.canBroadcast()) return;
+					if (this.broadcasting) return this.sendReply("ERROR: This command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					var output = "<b>There's a total of " + Object.size(emotes) + " emotes added with this command:</b><br />";
 					for (var e in emotes) {
 						output += e + "<br />";
@@ -121,8 +122,8 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					this.sendReplyBox(
 						"EZ-Emote Commands:<br />" +
-						"/ezemote add, [emote], [link] - Adds an emote. Requires &, ~.<br />" +
-						"/ezemote remove, [emote] - Removes an emote. Requires &, ~.<br />" +
+						"/ezemote add, [emote], [link] - Adds an emote. Requires @, &, ~.<br />" +
+						"/ezemote remove, [emote] - Removes an emote. Requires @, &, ~.<br />" +
 						"/ezemote status - Views the status of emotes.  Requires &, ~.<br />" +
 						"/ezemote status, [on / off] - Enables or disables the status of emotes. Requires &, ~.<br />" +
 						"/ezemote list - Shows the emotes that were added with this command.<br />" +

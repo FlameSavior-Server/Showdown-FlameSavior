@@ -1,16 +1,14 @@
 /* EZ-Emote plugin
- * These are commands that make 
- * it easier for people to actually 
- * emotes without having to manaully
- * add them every time
+ * These are commands that make it easier for people to actually 
+ * add / remove emotes without having to manaully do so every time
  * By: panpawn (inspired by jd's ez-tc plugin)
  */
  
- var fs = require('fs');
- var serialize = require('node-serialize');
- var emotes = {};
- 
- function loadEmotes() {
+var fs = require('fs');
+var serialize = require('node-serialize');
+var emotes = {};
+
+function loadEmotes() {
 	try {
 		emotes = serialize.unserialize(fs.readFileSync('config/emotes.json', 'utf8'));
 		Object.merge(Core.emoticons, emotes);
@@ -26,6 +24,7 @@ function saveEmotes() {
 }
 
 exports.commands = {
+	emotes: 'ezemote',
 	temotes: 'ezemote',
 	temote: 'ezemote',
 	emote: 'ezemote',

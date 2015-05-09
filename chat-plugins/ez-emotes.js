@@ -30,15 +30,13 @@ exports.commands = {
 	emote: 'ezemote',
 	ec: 'ezemote',
 	ezemote: function (target, room, user) {
-		if (!target) {
-			if (toId(cmd) === 'emote' && !target) {
-				target = 'view';
-			} else {
-				target = 'help';	
-			}
-		}
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
+		if (!parts[0] && (toId(cmd) === 'emote' || toId(cmd) === 'emotes') {
+			parts[0] = 'view';
+		} else {
+			parts[0] = 'help';	
+		}
 		try {
 			switch (parts[0]) {
 				case 'add':

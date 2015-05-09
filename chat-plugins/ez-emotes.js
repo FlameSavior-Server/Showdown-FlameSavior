@@ -52,6 +52,7 @@ exports.commands = {
 				if (!parts[1]) return this.sendReplyBox('/ezemote remove, [emote]');
 				var emoteName = parts[1];
 				if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR: the emote " + emoteName + " does not exist.");
+				Core.emoticons[emoteName] = undefined;
 				delete Core.emoticons[emoteName];
 				saveEmotes();
 				this.sendReply("The emote " + emoteName + " was removed.");

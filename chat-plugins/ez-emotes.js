@@ -37,7 +37,7 @@ exports.commands = {
 					if (!this.can('pban')) return false;
 					if (!parts[2]) return this.sendReply("Usage: /ezemote add, [emote], [link]");
 					var emoteName = parts[1];
-					if (Core.emoticons[emoteName]) return this.sendReplyBox("ERROR: the emote: " + emoteName + " already exists.");
+					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
 					emotes[emoteName] = Core.emoticons[emoteName] = link;
 					saveEmotes();
@@ -52,7 +52,7 @@ exports.commands = {
 					if (!this.can('pban')) return false;
 					if (!parts[1]) return this.sendReplyBox('/ezemote remove, [emote]');
 					var emoteName = parts[1];
-					if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR: the emote " + emoteName + " does not exist.");
+					if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR - the emote: " + emoteName + " does not exist.");
 					delete Core.emoticons[emoteName];
 					delete emotes[emoteName];
 					saveEmotes();

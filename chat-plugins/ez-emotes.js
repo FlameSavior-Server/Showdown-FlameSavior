@@ -26,6 +26,9 @@ function saveEmotes() {
 }
 
 exports.commands = {
+	temotes: 'ezemote',
+	temote: 'ezemote',
+	emote: 'ezemote',
 	ec: 'ezemote',
 	ezemote: function (target, room, user) {
 		if (!target) target = 'help';
@@ -68,6 +71,52 @@ exports.commands = {
 					}
 					this.sendReplyBox(output);
 					break;
+				case 'view':
+					if (!this.canBroadcast()) return;
+					if (!Core.settings.emoteStatus) {
+						return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
+					} else {
+						var name = Object.keys(Core.emoticons),
+						emoticons = [];
+						var len = name.length;
+						while (len--) {
+							emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
+						}
+						this.sendReplyBox('<b><u>List of emoticons ' + Object.size(emotes) + ':</b></u> <br/><br/>' + emoticons.join(' ').toString());
+					}
+					break;
+				case 'status':
+					if (!this.can('pban')) return this.sendReply("Access denied.");
+					if (!parts[1]) {
+						var currentEmoteStatus = '';
+						if (!Core.settings.emoteStatus) {
+							currentEmoteStatus = 'disabled.';
+						} else {
+							currentEmoteStatus = 'enabled.';
+						}
+						return this.sendReply('Chat emotes are currently ' + currentEmoteStatus);
+					} else {
+						switch (toId(parts[1])) {
+							case 'on':
+							case 'enable':
+								if (!this.can('pban')) return this.sendReply("Access denied.");
+								Core.settings.emoteStatus = true;
+								room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
+								this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
+								break;
+							case 'off':
+							case 'disable':
+								if (!this.can('pban')) return this.sendReply("Access denied.");
+								Core.settings.emoteStatus = false;
+								room.add(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
+								this.logModCommand(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
+								break;
+							default:
+								if (!this.can('pban')) return this.sendReply("Access denied.");
+								this.sendReply("Usage: /ezemote status - views the current emote status OR /ezemote status, [off / on] - Turns emotes on / off.  Requires &, ~.");
+						}
+					}
+					break;
 				case 'help':
 				default:
 					if (!this.canBroadcast()) return;
@@ -75,7 +124,10 @@ exports.commands = {
 						"EZ-Emote Commands:<br />" +
 						"/ezemote add, [emote], [link] - Adds an emote. Requires &, ~.<br />" +
 						"/ezemote remove, [emote] - Removes an emote. Requires &, ~.<br />" +
+						"/ezemote status - Views the status of emotes.  Requires &, ~.<br />" +
+						"/ezemote status, [on / off] - Enables or disables the status of emotes. Requires &, ~.<br />" +
 						"/ezemote list - Shows the emotes that were added with this command.<br />" +
+						"/ezemote view - Shows all of the current emotes with their respected image.<br />" +
 						"/ezemote help - Shows this help command.<br />"
 					);
 			}

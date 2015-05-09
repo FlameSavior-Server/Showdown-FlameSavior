@@ -25,7 +25,7 @@ function saveEmotes() {
 
 exports.commands = {
 	ezemote: function (target, room, user) {
-		if (!target) target = 'help')
+		if (!target) target = 'help';
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
 		

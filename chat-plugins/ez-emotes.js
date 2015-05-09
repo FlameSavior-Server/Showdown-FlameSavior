@@ -34,7 +34,7 @@ exports.commands = {
 		try {
 			switch (parts[0]) {
 				case 'add':
-					if (!this.can('pban')) return false;
+					if (!this.can('pban')) return this.sendReply("Access denied.")
 					if (!parts[2]) return this.sendReply("Usage: /ezemote add, [emote], [link]");
 					var emoteName = parts[1];
 					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
@@ -49,7 +49,7 @@ exports.commands = {
 				case 'remove':
 				case 'del':
 				case 'delete':
-					if (!this.can('pban')) return false;
+					if (!this.can('pban')) return this.sendReply("Access denied.");
 					if (!parts[1]) return this.sendReplyBox('/ezemote remove, [emote]');
 					var emoteName = parts[1];
 					if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR - the emote: " + emoteName + " does not exist.");
@@ -73,8 +73,8 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					this.sendReplyBox(
 						"EZ-Emote Commands:<br />" +
-						"/ezemote add, [emote], [link] - Adds an emote.<br />" +
-						"/ezemote remove, [emote] - Removes an emote.<br />" +
+						"/ezemote add, [emote], [link] - Adds an emote. Requires &, ~.<br />" +
+						"/ezemote remove, [emote] - Removes an emote. Requires &, ~.<br />" +
 						"/ezemote list - Shows the emotes that were added with this command.<br />" +
 						"/ezemote help - Shows this help command.<br />"
 					);

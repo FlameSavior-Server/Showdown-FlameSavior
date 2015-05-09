@@ -31,7 +31,7 @@ exports.commands = {
 	ec: 'ezemote',
 	ezemote: function (target, room, user) {
 		if (!target) {
-			if (toId(cmd === 'emote' && !target) {
+			if (toId(cmd) === 'emote' && !target) {
 				target = 'view';
 			} else {
 				target = 'help';	

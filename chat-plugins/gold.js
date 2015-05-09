@@ -813,7 +813,7 @@ exports.commands = {
                 if (!this.canTalk()) return;
                 Rooms.rooms.room.add('|html|<font size="4"><b>New color guessed!</b></font><br><b>Guessed by:</b> ' + user.userid + '<br><b>Color:</b> ' + target + '');
                 this.sendReply('Thanks, your new color guess has been sent.  We\'ll review your color soon and get back to you. ("' + target + '")');
-        },
+        },/*
         temote: 'temotes',
         toggleemotes: 'temotes',
         temotes: function(target, room, user) {
@@ -854,7 +854,7 @@ exports.commands = {
                         }
                         this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
                 }
-        },
+        },*/
 
         /*****************
          * Money commands *

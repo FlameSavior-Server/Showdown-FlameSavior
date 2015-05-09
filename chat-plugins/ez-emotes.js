@@ -82,7 +82,7 @@ exports.commands = {
 						while (len--) {
 							emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
 						}
-						this.sendReplyBox('<b><u>List of emoticons ' + Object.size(emotes) + ':</b></u> <br/><br/>' + emoticons.join(' ').toString());
+						this.sendReplyBox('<b><u>List of emoticons (' + Object.size(emotes) + '):</b></u> <br/><br/>' + emoticons.join(' ').toString());
 					}
 					break;
 				case 'status':

@@ -52,7 +52,7 @@ exports.commands = {
 				case 'del':
 				case 'delete':
 					if (!this.can('ban')) return this.sendReply("Access denied.");
-					if (!parts[1]) return this.sendReplyBox('/ezemote remove, [emote]');
+					if (!parts[1]) return this.sendReplyBox("/ezemote remove, [emote]");
 					var emoteName = parts[1];
 					if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR - the emote: " + emoteName + " does not exist.");
 					delete Core.emoticons[emoteName];
@@ -82,24 +82,25 @@ exports.commands = {
 						while (len--) {
 							emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
 						}
-						this.sendReplyBox('<b><u>List of emoticons (' + Object.size(emotes) + '):</b></u> <br/><br/>' + emoticons.join(' ').toString());
+						this.sendReplyBox("<b><u>List of emoticons (" + Object.size(emotes) + "):</b></u> <br/><br/>" + emoticons.join(' ').toString());
 					}
 					break;
 				case 'object':
 					if (!this.canBroadcast()) return;
 					if (this.broadcasting) return this.sendReply("ERROR: This command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					this.sendReplyBox(fs.readFileSync('config/emotes.json','utf8'));
+					this.sendReplyBox("Core.emoticons = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
 				case 'status':
 					if (!this.can('pban')) return this.sendReply("Access denied.");
 					if (!parts[1]) {
-						var currentEmoteStatus = '';
-						if (!Core.settings.emoteStatus) {
-							currentEmoteStatus = 'disabled.';
-						} else {
-							currentEmoteStatus = 'enabled.';
+						switch (Core.settings.emoteStatus) {
+							case true:
+								this.sendReply("Chat emotes are currently enabled.");
+								break;
+							case false:
+								this.sendReply("Chat emotes are currently disabled.");
+								break;
 						}
-						return this.sendReply('Chat emotes are currently ' + currentEmoteStatus);
 					} else {
 						switch (toId(parts[1])) {
 							case 'on':
@@ -113,8 +114,8 @@ exports.commands = {
 							case 'disable':
 								if (!this.can('pban')) return this.sendReply("Access denied.");
 								Core.settings.emoteStatus = false;
-								room.add(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
-								this.logModCommand(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
+								room.add(Tools.escapeHTML(user.name) + " has disabled chat emotes.");
+								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emotes.");
 								break;
 							default:
 								if (!this.can('pban')) return this.sendReply("Access denied.");
@@ -129,7 +130,7 @@ exports.commands = {
 						"EZ-Emote Commands:<br />" +
 						"/ezemote add, [emote], [link] - Adds an emote. Requires @, &, ~.<br />" +
 						"/ezemote remove, [emote] - Removes an emote. Requires @, &, ~.<br />" +
-						"/ezemote status - Views the status of emotes.  Requires &, ~.<br />" +
+						"/ezemote status - Views the current status of emotes.  Requires &, ~.<br />" +
 						"/ezemote status, [on / off] - Enables or disables the status of emotes. Requires &, ~.<br />" +
 						"/ezemote list - Shows the emotes that were added with this command.<br />" +
 						"/ezemote view - Shows all of the current emotes with their respected image.<br />" +

@@ -34,10 +34,10 @@ exports.commands = {
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
 		try {
-			switch (parts[0]) {
+			switch (toId(parts[0])) {
 				case 'add':
 					if (!this.can('ban')) return this.sendReply("Access denied.")
-					if (!parts[2]) return this.sendReply("Usage: /ezemote add, [emote], [link]");
+					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /ezemote add, [emote], [link]");
 					var emoteName = parts[1];
 					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
@@ -85,6 +85,11 @@ exports.commands = {
 						this.sendReplyBox('<b><u>List of emoticons (' + Object.size(emotes) + '):</b></u> <br/><br/>' + emoticons.join(' ').toString());
 					}
 					break;
+				case 'object':
+					if (!this.canBroadcast()) return;
+					if (this.broadcasting) return this.sendReply("ERROR: This command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					this.sendReplyBox(fs.readFileSync('config/emotes.json','utf8'));
+					break;
 				case 'status':
 					if (!this.can('pban')) return this.sendReply("Access denied.");
 					if (!parts[1]) {
@@ -128,9 +133,12 @@ exports.commands = {
 						"/ezemote status, [on / off] - Enables or disables the status of emotes. Requires &, ~.<br />" +
 						"/ezemote list - Shows the emotes that were added with this command.<br />" +
 						"/ezemote view - Shows all of the current emotes with their respected image.<br />" +
+						"/ezemote object - Shows the object of Core.emoticons.<br />" +
 						"/ezemote help - Shows this help command.<br />"
 					);
 			}
-		} catch (e) {};
+		} catch (e) {
+			console.log("ERROR!  The EZ-Emote script has crashed!");
+		};
 	}
 };

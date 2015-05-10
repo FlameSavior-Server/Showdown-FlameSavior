@@ -41,6 +41,7 @@ exports.commands = {
 					var emoteName = parts[1];
 					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
+					if (link != ".gif" && link != ".png" || link != ".jpg") return this.sendReply("ERROR: the emote you are trying to add must be a gif, png, or jpg.");
 					emotes[emoteName] = Core.emoticons[emoteName] = link;
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " has been added.");
@@ -64,7 +65,7 @@ exports.commands = {
 					break;
 				case 'list':
 					if (!this.canBroadcast()) return;
-					if (this.broadcasting) return this.sendReply("ERROR: This command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					var output = "<b>There's a total of " + Object.size(emotes) + " emotes added with this command:</b><br />";
 					for (var e in emotes) {
 						output += e + "<br />";
@@ -87,7 +88,7 @@ exports.commands = {
 					break;
 				case 'object':
 					if (!this.canBroadcast()) return;
-					if (this.broadcasting) return this.sendReply("ERROR: This command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					this.sendReplyBox("Core.emoticons = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
 				case 'status':

@@ -139,6 +139,6 @@ exports.commands = {
 			}
 		} catch (e) {
 			console.log("ERROR!  The EZ-Emote script has crashed!");
-		};
+		}
 	}
 };

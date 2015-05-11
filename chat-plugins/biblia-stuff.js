@@ -40,7 +40,7 @@ exports.commands = {
 					if (!this.can('roommod')) return this.sendReply("Only room owners and up can give a " + leagueName + " rank!");
 					var targetUser = toId(parts[1]);
 					if (Core.biblia[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
-					if (!toId(parts[2]).match(leagueRanksToHave)) return this.sendReplyBox("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
+					if (!(toId(parts[2]).match(leagueRanksToHave))) return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
 					leagueRanks[targetUser] = Core.biblia[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
 					saveLeague();
 					this.sendReply(targetUser + " was given the league rank of " + parts[2]);

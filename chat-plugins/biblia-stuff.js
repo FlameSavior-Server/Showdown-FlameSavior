@@ -64,7 +64,7 @@ exports.commands = {
 				case 'show':
 					if (!this.canBroadcast()) return;
 					var rank = Core.biblia[toId(parts[1])];
-					if (!rank) return this.sendReply("User " + rank + " does not have a " + leagueName + " rank.");
+					if (!rank) return this.sendReply("User " + parts[1] + " does not have a " + leagueName + " rank.");
 					var img = "";
 					switch (rank) {
 						case 'e4':

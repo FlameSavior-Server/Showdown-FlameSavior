@@ -1,7 +1,7 @@
 /**
  * The Studio: Artist of the Day plugin
  * This is a daily activity where users nominate the featured artist for the day, which is selected randomly once voting has ended.
- * Only works in a room with the id 'thestudio'
+ * Only works in a room with the id 'goldenrodradiotower'
  */
 
 function toArrayOfArrays(map) {
@@ -22,14 +22,14 @@ var artistOfTheDay = {
 	removedNominators: []
 };
 
-var theStudio = Rooms.get('thestudio');
-if (theStudio && !theStudio.plugin) {
-	theStudio.plugin = artistOfTheDay;
+var goldenrodradiotower = Rooms.get('goldenrodradiotower');
+if (goldenrodradiotower && !goldenrodradiotower.plugin) {
+	goldenrodradiotower.plugin = artistOfTheDay;
 }
 
 var commands = {
 	start: function (target, room, user) {
-		if (room.id !== 'thestudio' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are already in progress.");
 
@@ -54,7 +54,7 @@ var commands = {
 	starthelp: ["/aotd start - Start nominations for the Artist of the Day. Requires: % @ # & ~"],
 
 	end: function (target, room, user) {
-		if (room.id !== 'thestudio' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 		if (!artistOfTheDay.nominations.size) return this.sendReply("No nominations have been submitted yet.");
@@ -75,7 +75,7 @@ var commands = {
 	endhelp: ["/aotd end - End nominations for the Artist of the Day and set it to a randomly selected artist. Requires: % @ # & ~"],
 
 	prenom: function (target, room, user) {
-		if (room.id !== 'thestudio' || !room.chatRoomData || !target) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are in progress.");
 		if (!room.chatRoomData.prenominations) room.chatRoomData.prenominations = [];
@@ -114,7 +114,7 @@ var commands = {
 	prenomhelp: ["/aotd prenom [artist] - Nominate an artist for the Artist of the Day between nomination periods."],
 
 	nom: function (target, room, user) {
-		if (room.id !== 'thestudio' || !room.chatRoomData || !target) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 
@@ -144,7 +144,7 @@ var commands = {
 	nomhelp: ["/aotd nom [artist] - Nominate an artist for the Artist of the Day."],
 
 	viewnoms: function (target, room, user) {
-		if (room.id !== 'thestudio' || !room.chatRoomData) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData) return false;
 
 		var buffer = "";
 		if (!artistOfTheDay.pendingNominations) {
@@ -187,7 +187,7 @@ var commands = {
 	viewnomshelp: ["/aotd viewnoms - View the current nominations for the Artist of the Day. Requires: % @ # & ~"],
 
 	removenom: function (target, room, user) {
-		if (room.id !== 'thestudio' || !room.chatRoomData || !target || !this.can('mute', null, room)) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target || !this.can('mute', null, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 		if (!artistOfTheDay.nominations.size) return this.sendReply("No nominations have been submitted yet.");
@@ -210,7 +210,7 @@ var commands = {
 	removenomhelp: ["/aotd removenom [username] - Remove a user\'s nomination for the Artist of the Day and prevent them from voting again until the next round. Requires: % @ # & ~"],
 
 	set: function (target, room, user) {
-		if (room.id !== 'thestudio' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!toId(target)) return this.sendReply("No valid artist was specified.");
 		if (artistOfTheDay.pendingNominations) return this.sendReply("The Artist of the Day cannot be set while nominations are in progress.");
@@ -222,12 +222,12 @@ var commands = {
 	sethelp: ["/aotd set [artist] - Set the Artist of the Day. Requires: % @ # & ~"],
 
 	'': function (target, room) {
-		if (room.id !== 'thestudio' || !room.chatRoomData || !this.canBroadcast()) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
 		this.sendReplyBox("The Artist of the Day " + (room.chatRoomData.artistOfTheDay ? "is " + room.chatRoomData.artistOfTheDay + "." : "has not been set yet."));
 	},
 
 	help: function (target, room) {
-		if (room.id !== 'thestudio' || !room.chatRoomData || !this.canBroadcast()) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
 		this.sendReply("Use /help aotd to view help for all commands, or /help aotd [command] for help on a specific command.");
 	}
 };

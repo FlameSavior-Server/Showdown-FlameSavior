@@ -1,4 +1,8 @@
 var fs = require('fs');
+var closeShop = false;
+var ipbans = fs.createWriteStream('config/ipbans.txt', {
+    'flags': 'a'
+});
 var badges = fs.createWriteStream('badges.txt', {
     'flags': 'a'
 });
@@ -24,6 +28,28 @@ exports.commands = {
             return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
         }
         return this.parse('/eval for(var u in Users.users) Users.users[u].' + target + '()');
+    },
+    
+    pb: 'permaban',
+    pban: 'permaban',
+    permban: 'permaban',
+    permaban: function(target, room, user) {
+        if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
+        if (!this.can('pban')) return false;
+        target = this.splitTarget(target);
+        var targetUser = this.targetUser;
+        if (!targetUser) {
+            return this.sendReply('User ' + this.targetUsername + ' not found.');
+        }
+        if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
+            var problem = ' but was already banned';
+            return this.privateModCommand('(' + targetUser.name + ' would be banned by ' + user.name + problem + '.) (' + targetUser.latestIp + ')');
+        }
+        targetUser.popup(user.name + " has permanently banned you.");
+        this.addModCommand(targetUser.name + " was permanently banned by " + user.name + ".");
+        this.add('|unlink|hide|' + targetUser.userid);
+        targetUser.ban();
+        ipbans.write('\n' + targetUser.latestIp);
     },
 
     nc: function(room, user, cmd) {

@@ -10,7 +10,7 @@ var serialize = require('node-serialize');
 var leagueRanks = {};
 var leagueFactions = {};
 var leagueName = "Biblia";
-var leagueRanksToHave = ["e4", "champ", "gl", "purgatory"];
+var leagueRanksToHave = ["e4", "champ", "gl", "purgatory", "prof"];
 var leagueFactionsToHave = ["hell", "heaven"];
 
 function loadFaction() {
@@ -56,7 +56,7 @@ exports.commands = {
 					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can give a " + leagueName + " rank!");
 					var targetUser = toId(parts[1]);
 					if (Core.biblia[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
-					if (toId(parts[2]) !== 'e4' && toId(parts[2]) !== 'champ' && toId(parts[2]) !== 'gl' && toId(parts[2]) !== 'purgatory') return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
+					if (toId(parts[2]) !== 'e4' && toId(parts[2]) !== 'prof' && toId(parts[2]) !== 'champ' && toId(parts[2]) !== 'gl' && toId(parts[2]) !== 'purgatory') return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
 					leagueRanks[targetUser] = Core.biblia[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
 					saveLeague();
 					this.sendReply(targetUser + " was given the league rank of " + parts[2]);
@@ -71,6 +71,9 @@ exports.commands = {
 							break;
 						case 'gl':
 							rankLEBEL = "Gym Leader";
+							break;
+						case 'prof':
+							rankLEBEL = "Professor";
 							break;
 						case 'purgatory':
 							rankLEBEL = "Purgatory";
@@ -152,6 +155,10 @@ exports.commands = {
 						case 'purgatory':
 							rankLabel = "Purgatory";
 							img = '<img src="http://www.smogon.com/media/forums/images/badges/tc.png" title="' + rankLabel + '">';
+							break;
+						case 'prof':
+							rankLabel = "Professor"
+							img = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="' + rankLabel + '">";
 							break;
 						default:
 							img = '';

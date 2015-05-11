@@ -1,5 +1,9 @@
 var fs = require('fs');
 var closeShop = false;
+var closedShop = 0;
+var crypto = require('crypto');
+var poofeh = true;
+var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'musicbox', 'emote', 'color'];
 var ipbans = fs.createWriteStream('config/ipbans.txt', {
     'flags': 'a'
 });

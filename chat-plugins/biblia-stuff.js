@@ -82,7 +82,7 @@ exports.commands = {
 						default:
 							img = '';
 					}
-					return this.sendReplyBox("Rank: " + rank.substring(0,1).toUpperCase() + "<br />" + img);
+					return this.sendReplyBox("Rank: " + rank.substring(0,1).toUpperCase() + rank.substring(1,rank.length) + "<br />" + img);
 					break;
 				case 'help':
 				default:

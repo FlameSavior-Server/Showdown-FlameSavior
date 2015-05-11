@@ -1378,7 +1378,7 @@ exports.commands = {
             economy.writeMoney('money', targetUser, transferMoney);
             fs.appendFile('logs/transactions.log', '\n' + Date() + ': ' + user.name + ' has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '. ' + user.name + ' now has ' + user.money + ' ' + p + ' and ' + targetUser.name + ' now has ' + targetUser.money + ' ' + p + '.');
         }, 3000);
-        this.sendReply('You have successfully transferred ' + transferMoney + ' to ' + targetUser.name + '. You now have ' + user.money + ' ' + p + '.');
+        this.sendReply('You have successfully transferred ' + transferMoney + ' to ' + targetUser.name + '. You now have ' + user.money-transferMoney + ' ' + p + '.');
         targetUser.popup(user.name + ' has transferred ' + transferMoney + ' ' + p + ' to you.');
         this.logModCommand('(' + user.name + '  has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '.)');
     },
@@ -1645,16 +1645,7 @@ exports.commands = {
             }
         }
         if (match === true) {
-            var re = new RegExp(line, "g");
-            fs.readFile('config/money.csv', 'utf8', function(err, data) {
-                if (err) {
-                    return console.log(err);
-                }
-                var result = data.replace(re, user.userid + ',' + user.money);
-                fs.writeFile('config/money.csv', result, 'utf8', function(err) {
-                    if (err) return console.log(err);
-                });
-            });
+           economy.writeMoney('money', user, -price)
         }
     },
 

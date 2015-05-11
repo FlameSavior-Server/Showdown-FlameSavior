@@ -37,7 +37,10 @@ settings: {
 	emoteStatus: true
 },
 
+//biblia objects
 biblia: {
+},
+bibliafaction: {
 },
 
 emoticons: {

@@ -104,6 +104,7 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					var rank = Core.biblia[toId(parts[1])];
 					if (!rank) return this.sendReply("User " + parts[1] + " does not have a " + leagueName + " rank.");
+					if (!Core.bibliafaction[toId(parts[1])]) return this.sendReply("User " + parts[1] + "does not have a " + leagueName + " faction.");
 					var img = "";
 					var rankLabel = "";
 					var fuckingFaction = Core.bibliafaction[toId(parts[1])];

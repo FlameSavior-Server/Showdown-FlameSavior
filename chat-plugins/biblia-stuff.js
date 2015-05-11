@@ -56,7 +56,7 @@ exports.commands = {
 					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can give a " + leagueName + " rank!");
 					var targetUser = toId(parts[1]);
 					if (Core.biblia[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
-					if (toId(parts[2]) !== leagueRanksToHave) return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
+					if (toId(parts[2]) !== 'e4' || toId(parts[2]) !== 'champ' || toId(parts[2]) !== 'gl' || toId(parts[2]) !== 'purgatory') return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
 					leagueRanks[targetUser] = Core.biblia[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
 					saveLeague();
 					this.sendReply(targetUser + " was given the league rank of " + parts[2]);
@@ -70,7 +70,7 @@ exports.commands = {
 					if (!Core.biblia[targetUser]) return this.sendReply("ERROR!  The user " + targetUser + " does not have an existing rank to remove!");
 					delete Core.biblia[targetUser];
 					delete leagueRanks[targetUser];
-					saveEmotes();
+					saveLeague();
 					this.sendReply(targetUser + "'s league rank was removed.");
 					this.logModCommand(targetUser + "'s league rank was removed by " + user.name);
 					room.add(targetUser + "'s league rank was removed by " + user.name);
@@ -80,7 +80,7 @@ exports.commands = {
 					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can give a " + leagueName + " faction!");
 					var targetUser = toId(parts[1]);
 					if (Core.bibliafaction[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
-					if (toId(parts[2]).indexOf(leagueFactionsToHave) > -1) return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueFactionsToHave + ")");
+					if (toId(parts[2]) !== 'hell' || toId(parts[2]) == 'heaven') return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueFactionsToHave + ")");
 					leagueFactions[targetUser] = Core.bibliafaction[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
 					saveFaction();
 					this.sendReply(targetUser + " was given the league faction of " + parts[2]);

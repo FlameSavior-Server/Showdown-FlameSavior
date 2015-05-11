@@ -61,7 +61,22 @@ exports.commands = {
 					saveLeague();
 					this.sendReply(targetUser + " was given the league rank of " + parts[2]);
 					this.logModCommand(targetUser + " was given the league rank of " + parts[2]);
-					room.add(targetUser + " was given the league rank of " + parts[2] + " by " + user.name);
+					var rankLEBEL = "";
+					switch (toId(parts[2])) {
+						case 'e4':
+							rankLEBEL = "Elite Four";
+							break;
+						case 'champ':
+							rankLEBEL = "Champion";
+							break;
+						case 'gl':
+							rankLEBEL = "Gym Leader";
+							break;
+						case 'purgatory':
+							rankLEBEL = "Purgatory";
+							break;
+					}
+					room.add(targetUser + " was given the league rank of " + rankLEBEL + " by " + user.name);
 					break;
 				case 'takerank':
 					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can take a " + leagueName + " rank!");

@@ -167,7 +167,7 @@ exports.commands = {
 					return this.sendReplyBox(
 						"<b>User</b>: " + parts[1] + "<br />" +
 						"<b>League Faction</b>: " + fuckingFaction.substring(0,1).toUpperCase() + fuckingFaction.substring(1,fuckingFaction.length) + "<br />" +
-						"<b>League Rank</b>: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + img
+						"<b>League Rank</b>: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + " " + img
 					); 
 					break;
 				case 'help':

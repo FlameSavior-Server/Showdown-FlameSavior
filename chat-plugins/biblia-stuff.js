@@ -108,7 +108,7 @@ exports.commands = {
 				case 'factionobject':
 					if (!this.canBroadcast()) return;
 					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					return this.sendReplyBox("Core.bibliafaction = " + fs.readFileSync('config/biblia-league-faction.json', 'utf8'));
+					return this.sendReplyBox("Core.bibliafaction = " + fs.readFileSync('config/biblia-league-factions.json', 'utf8'));
 					break;
 				case 'view':
 				case 'show':

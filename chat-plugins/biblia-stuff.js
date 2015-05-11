@@ -53,7 +53,7 @@ exports.commands = {
 			switch (toId(parts[0])) {
 				case 'giverank':
 					if (!parts[1] || !parts[2]) return this.sendReply("ERROR!  Usage: /biblia giverank, [user], [rank] - Gives a user a league rank.");
-					if (!this.can('roommod')) return this.sendReply("Only room owners and up can give a " + leagueName + " rank!");
+					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can give a " + leagueName + " rank!");
 					var targetUser = toId(parts[1]);
 					if (Core.biblia[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
 					if (toId(parts[2]).indexOf(leagueRanksToHave) > -1) return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
@@ -64,7 +64,7 @@ exports.commands = {
 					room.add(targetUser + " was given the league rank of " + parts[2] + " by " + user.name);
 					break;
 				case 'takerank':
-					if (!this.can('roommod')) return this.sendReply("Only room owners and up can take a " + leagueName + " rank!");
+					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can take a " + leagueName + " rank!");
 					if (!parts[1]) return this.sendReply("Usage: /biblia takerank, [user] - Removes a users rank.");
 					var targetUser = toId(parts[1]);
 					if (!Core.biblia[targetUser]) return this.sendReply("ERROR!  The user " + targetUser + " does not have an existing rank to remove!");
@@ -77,7 +77,7 @@ exports.commands = {
 					break;
 				case 'givefaction':
 					if (!parts[1] || !parts[2]) return this.sendReply("ERROR!  Usage: /biblia givefaction, [user], [faction] - Gives a user a league faction.");
-					if (!this.can('roommod')) return this.sendReply("Only room owners and up can give a " + leagueName + " faction!");
+					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can give a " + leagueName + " faction!");
 					var targetUser = toId(parts[1]);
 					if (Core.bibliafaction[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
 					if (toId(parts[2]).indexOf(leagueFactionsToHave) > -1) return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueFactionsToHave + ")");
@@ -88,7 +88,7 @@ exports.commands = {
 					room.add(targetUser + " was given the league rank of " + parts[2] + " by " + user.name + ".");
 					break;
 				case 'takefaction':
-					if (!this.can('roommod')) return this.sendReply("Only room owners and up can take a " + leagueName + " faction!");
+					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can take a " + leagueName + " faction!");
 					if (!parts[1]) return this.sendReply("Usage: /biblia takefaction, [user] - Removes a users faction.");
 					var targetUser = toId(parts[1]);
 					if (!Core.bibliafaction[targetUser]) return this.sendReply("ERROR!  The user " + targetUser + " does not have an existing faction to remove!");

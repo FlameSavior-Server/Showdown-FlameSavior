@@ -178,7 +178,7 @@ exports.commands = {
 						"/biblia giverank, [user], [rank] - Gives someone a league rank. Requires # and up.<br />" +
 						"/biblia takerank, [user] - Removes that user's league rank.  Requires # and up.<br />" +
 						"/biblia givefaction, [user], [faction] - Gives a user a league faction. Requires # and up.<br />" +
-						"/biblia takefaction, [user], [faction] - Removes that user's league faction. Requires # and up.<br />" +
+						"/biblia takefaction, [user] - Removes that user's league faction. Requires # and up.<br />" +
 						"/biblia show, [user] - Shows that user's league rank and faction according to the biblia script."
 					);
 			}

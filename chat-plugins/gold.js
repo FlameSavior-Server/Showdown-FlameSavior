@@ -1372,10 +1372,10 @@ exports.commands = {
         if (transferMoney === 1) {
             p = 'Buck';
         }
-        economy.writeMoney(user, -transferMoney);
+        economy.writeMoney('money',user, -transferMoney);
         //set time delay because of node asynchronous so it will update both users' money instead of either updating one or the other
         setTimeout(function() {
-            economy.writeMoney(targetUser, transferMoney);
+            economy.writeMoney('money', targetUser, transferMoney);
             fs.appendFile('logs/transactions.log', '\n' + Date() + ': ' + user.name + ' has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '. ' + user.name + ' now has ' + user.money + ' ' + p + ' and ' + targetUser.name + ' now has ' + targetUser.money + ' ' + p + '.');
         }, 3000);
         this.sendReply('You have successfully transferred ' + transferMoney + ' to ' + targetUser.name + '. You now have ' + user.money + ' ' + p + '.');
@@ -1633,28 +1633,6 @@ exports.commands = {
                 return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
             }
         }
-        /*if (target2 === 'potd') {
-            price = 45;
-            if (price <= user.money) {
-                user.money = user.money - price;
-                this.sendReply('You have purchased the ability to pick a POTD! PM a leader or up to claim this prize.');
-                user.canPOTD = true;
-                this.add(user.name + ' has purchased the ability to set the POTD!');
-            } else {
-                return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
-            }
-        }
-        if (target2 === 'badge'|| target2 === 'vip') {
-            price = 1500;
-            if (price <= user.money) {
-                user.money = user.money - price;
-                this.sendReply('You have purchased a VIP badge.  Screen shoot this as evedience for an admin.');
-                user.canBadge = true;
-                this.add(user.name + ' has purchased the ability to claim a VIP badge!');
-            } else {
-                return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
-            }
-        }*/
         if (target2 === 'declare') {
             price = 25;
             if (price <= user.money) {

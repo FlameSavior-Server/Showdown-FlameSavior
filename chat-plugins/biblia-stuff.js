@@ -1,6 +1,6 @@
 /* Biblia League plugin
  * A fun script that holds all
- * of the league ranks in a JSON
+ * of the league ranks in a JSON (now 2 JSON files)
  * file to be accessed at our leisure
  * By: panpawn
  */

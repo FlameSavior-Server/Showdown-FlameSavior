@@ -8,8 +8,25 @@
 var fs = require('fs');
 var serialize = require('node-serialize');
 var leagueRanks = {};
+var leagueFactions = {};
 var leagueName = "Biblia";
 var leagueRanksToHave = ["e4", "champ", "gl", "purgatory"];
+var leagueFactionsToHave = ["hell", "heaven"];
+
+function loadFaction() {
+	try {
+		leagueFactions = serialize.unserialize(fs.readFileSync('config/biblia-league-factions.json', 'utf8'));
+		Object.merge(Core.bibliafaction, leagueFactions);
+	} catch (e) {};
+}
+setTimeout(function(){loadFaction();},1000);
+
+function saveFaction() {
+	try {
+		fs.writeFileSync('config/biblia-league-factions.json',serialize.serialize(leagueFactions));
+		Object.merge(Core.bibliafaction, leagueFactions);
+	} catch (e) {};
+}
 
 function loadLeague() {
 	try {
@@ -34,9 +51,8 @@ exports.commands = {
 		for (var u in parts) parts[u] = parts[u].trim();
 		try {
 			switch (toId(parts[0])) {
-				case 'give':
 				case 'giverank':
-					if (!parts[1] || !parts[2]) return this.sendReply("ERROR!  Usage: /biblia give, [user], [rank] - Gives a user a league rank.");
+					if (!parts[1] || !parts[2]) return this.sendReply("ERROR!  Usage: /biblia giverank, [user], [rank] - Gives a user a league rank.");
 					if (!this.can('roommod')) return this.sendReply("Only room owners and up can give a " + leagueName + " rank!");
 					var targetUser = toId(parts[1]);
 					if (Core.biblia[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
@@ -47,10 +63,9 @@ exports.commands = {
 					this.logModCommand(targetUser + " was given the league rank of " + parts[2]);
 					room.add(targetUser + " was given the league rank of " + parts[2] + " by " + user.name);
 					break;
-				case 'take':
 				case 'takerank':
 					if (!this.can('roommod')) return this.sendReply("Only room owners and up can take a " + leagueName + " rank!");
-					if (!parts[1]) return this.sendReply("Usage: /biblia take, [user] - Removes a users rank.");
+					if (!parts[1]) return this.sendReply("Usage: /biblia takerank, [user] - Removes a users rank.");
 					var targetUser = toId(parts[1]);
 					if (!Core.biblia[targetUser]) return this.sendReply("ERROR!  The user " + targetUser + " does not have an existing rank to remove!");
 					delete Core.biblia[targetUser];
@@ -60,6 +75,30 @@ exports.commands = {
 					this.logModCommand(targetUser + "'s league rank was removed by " + user.name);
 					room.add(targetUser + "'s league rank was removed by " + user.name);
 					break;
+				case 'givefaction':
+					if (!parts[1] || !parts[2]) return this.sendReply("ERROR!  Usage: /biblia givefaction, [user], [faction] - Gives a user a league faction.");
+					if (!this.can('roommod')) return this.sendReply("Only room owners and up can give a " + leagueName + " faction!");
+					var targetUser = toId(parts[1]);
+					if (Core.bibliafaction[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
+					if (toId(parts[2]).indexOf(leagueFactionsToHave) > -1) return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueFactionsToHave + ")");
+					leagueFactions[targetUser] = Core.bibliafaction[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
+					saveFaction();
+					this.sendReply(targetUser + " was given the league faction of " + parts[2]);
+					this.logModCommand(targetUser + " was given the league rank of " + parts[2]);
+					room.add(targetUser + " was given the league rank of " + parts[2] + " by " + user.name + ".");
+					break;
+				case 'takefaction':
+					if (!this.can('roommod')) return this.sendReply("Only room owners and up can take a " + leagueName + " faction!");
+					if (!parts[1]) return this.sendReply("Usage: /biblia takefaction, [user] - Removes a users faction.");
+					var targetUser = toId(parts[1]);
+					if (!Core.bibliafaction[targetUser]) return this.sendReply("ERROR!  The user " + targetUser + " does not have an existing faction to remove!");
+					delete Core.bibliafaction[targetUser];
+					delete leagueFactions[targetUser];
+					saveFaction();
+					this.sendReply(targetUser + "'s league faction was removed.");
+					this.logModCommand(targetUser + "'s league faction was removed by " + user.name);
+					room.add(targetUser + "'s league faction was removed by " + user.name + ".");
+					break;
 				case 'view':
 				case 'show':
 					if (!this.canBroadcast()) return;
@@ -67,6 +106,8 @@ exports.commands = {
 					if (!rank) return this.sendReply("User " + parts[1] + " does not have a " + leagueName + " rank.");
 					var img = "";
 					var rankLabel = "";
+					var fuckingFaction = Core.bibliafaction[toId(parts[1])];
+					if (!fuckingFaction) fuckingFaction = "None.";
 					switch (rank) {
 						case 'e4':
 							rankLabel = "Elite Four";
@@ -89,24 +130,20 @@ exports.commands = {
 					}
 					return this.sendReplyBox(
 						"<b>User</b>: " + parts[1] + "<br />" +
-						"<b>League Rank</b>: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + "<br />" + //this line is just to show off
-						img
+						"<b>League Faction</b>: " + fuckingFaction + "<br />" +
+						"<b>League Rank</b>: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + img
 					); 
-					break;
-				case 'object':
-					//development command
-					if (!this.canBroadcast()) return;
-					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					return this.sendReplyBox("Core.biblia = " + fs.readFileSync('config/biblia-league-ranks.json', 'utf8'));
 					break;
 				case 'help':
 				default:
 					if (!this.canBroadcast()) return;
 					return this.sendReplyBox(
 						"Biblia commands: <br />" +
-						"/biblia give, [user], [rank] - Gives someone a league rank. Requires # and up.<br />" +
-						"/biblia remove, [user] - Removes that user's league rank.  Requires # and up.<br />" +
-						"/biblia show, [user] - Shows that user's league rank according to the biblia script."
+						"/biblia giverank, [user], [rank] - Gives someone a league rank. Requires # and up.<br />" +
+						"/biblia takerank, [user] - Removes that user's league rank.  Requires # and up.<br />" +
+						"/biblia givefaction, [user], [faction] - Gives a user a league faction. Requires # and up.<br />" +
+						"/biblia takefaction, [user], [faction] - Removes that user's league faction. Requires # and up.<br />" +
+						"/biblia show, [user] - Shows that user's league rank and faction according to the biblia script."
 					);
 			}
 		} catch (e) {

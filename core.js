@@ -37,6 +37,9 @@ settings: {
 	emoteStatus: true
 },
 
+biblia: {
+},
+
 emoticons: {
 	//FOR ALL FUTURE EMOTES, PLEASE ADD THEM VIA THE EZ-EMOTE SCRIPT
 	/*

@@ -87,7 +87,11 @@ exports.commands = {
 						default:
 							img = '';
 					}
-					return this.sendReplyBox("Rank: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + "<br />" + img); //this line is just to show off
+					return this.sendReplyBox(
+						"<b>User</b>: " + parts[1] + "<br />" +
+						"<b>League Rank</b>: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + "<br />" + //this line is just to show off
+						img
+					); 
 					break;
 				case 'object':
 					//development command

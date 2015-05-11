@@ -41,7 +41,7 @@ exports.commands = {
 					var emoteName = parts[1];
 					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
-					if (link != ".gif" || link != ".png" || link != ".jpg") return this.sendReply("ERROR: the emote you are trying to add must be a gif, png, or jpg.");
+					//if (link != ".gif" || link != ".png" || link != ".jpg") return this.sendReply("ERROR: the emote you are trying to add must be a gif, png, or jpg.");
 					emotes[emoteName] = Core.emoticons[emoteName] = link;
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " has been added.");

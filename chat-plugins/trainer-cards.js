@@ -6,8 +6,8 @@ exports.commands = {
     jonthebastard: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><font color="1752A6" size="8">Jon The Bastard</font><br />' +
-            '<img src="http://i.imgur.com/ZatdBIz.jpg" width="500"><br />' +
-            '<font color="1752A6">"Hokey religions and ancient weapons are no match for a good dire wolf at your side</center>');
+            '<img src="http://i.imgur.com/LHKlie8.jpg" width="500"><br />' +
+            '<font color="1752A6">"They call me Snow cause Im one cold motherfucker</center>');
     },
 
     beno: function(target, room, user) {
@@ -671,7 +671,7 @@ exports.commands = {
     terbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Terlor\'s Music Box!</b><br />' +
-            '1. <a href="https://www.youtube.com/watch?v=kKdVeWeYDT8"><button>Spag Heddy - Pink Koeks\'s Over</a></button><br />' +
+            '1. <a href="https://www.youtube.com/watch?v=kKdVeWeYDT8"><button>Spag Heddy - Pink Koeks</a></button><br />' +
             '2. <a href="https://www.youtube.com/watch?v=FSI5O6sp9go"><button>Spag Heddy - Sine Time</a></button><br />' +
             '3. <a href="https://www.youtube.com/watch?v=qJYLTCfhMGw"><button>Icy Lust - Sapphire</a></button><br />' +
             '4. <a href="https://www.youtube.com/watch?v=7qDGTVbOyO8"><button>Razihel - Seeking of the Truth</a></button><br />' +

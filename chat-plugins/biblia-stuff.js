@@ -158,7 +158,7 @@ exports.commands = {
 							break;
 						case 'prof':
 							rankLabel = "Professor"
-							img = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title="' + rankLabel + '">";
+							img = '<img src="http://www.smogon.com/media/forums/images/badges/cc.png" title=" title="' + rankLabel + '">";
 							break;
 						default:
 							img = '';

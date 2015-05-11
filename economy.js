@@ -74,27 +74,7 @@ exports.writeMoney = writeMoney;
 
 var cmds = {
 
-    gamble: function(target, room, user) {
-	if (!this.canBroadcast()) return;
-	if (!target) return this.sendReply('/gamble [amount] - Gambles the amount chosen. If you win, you win the amount * 2, else, you lose the amount.');
-	var amount = readMoney(user.userid);
-	if (target < 1) return this.sendReply("You cannot gamble less than 1.");
-	if (target == 0 || target % 1 != 0) return this.sendReply('You can\'t gamble 0 or decimal bucks.');
-	if (target > amount) return this.sendReply('You can\'t gamble more than you have.');
-	if (isNaN(target)) return this.sendReply('Use a real number.');
-	if (room.id != 'gamechamber') return this.sendReply('The command can only be used in the room "gamechamber".');
-	var roll = Math.floor(Math.random()*6)+1;
-	var computerroll = Math.floor(Math.random()*6)+1;
-	if (roll > computerroll) {
-		writeMoney('money',user, Number(target));
-		return this.sendReply('You won the gamble!');
-	} else if (roll == computerroll) {
-		return this.sendReply('Tie.');
-	} else if (computerroll > roll) {
-		writeMoney('money',user, Number(target*-1));
-		return this.sendReply('Sorry, you lost the gamble.');
-	}
-    },
+
    survey: 'poll',
     poll: function(target, room, user) {
         if (!user.can('broadcast',null,room)) return this.sendReply('You do not have enough authority to use this command.');
@@ -125,7 +105,7 @@ var cmds = {
         }
         room.addRaw('<div class="infobox"><h2>' + room.question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by '+user.name+'</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
     },
-    
+
     vote: function(target, room, user) {
         var ips = JSON.stringify(user.ips);
         if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
@@ -135,14 +115,14 @@ var cmds = {
         room.answers[ips] = target.toLowerCase();
         return this.sendReply('You are now voting for ' + target + '.');
     },
-    
+
     votes: function(target, room, user) {
         if (!room.answers) room.answers = new Object();
         if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
         if (!this.canBroadcast()) return;
         this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
     },
-    
+
     endsurvey: 'endpoll',
     ep: 'endpoll',
     endpoll: function(target, room, user) {
@@ -155,7 +135,7 @@ var cmds = {
             room.question = undefined;
             room.answerList = new Array();
             room.answers = new Object();
-            return room.addRaw("<h3>The poll was canceled because of lack of voters.</h3>");            
+            return room.addRaw("<h3>The poll was canceled because of lack of voters.</h3>");
         }
         var options = new Object();
         var obj = Rooms.get(room);
@@ -174,7 +154,7 @@ var cmds = {
         room.answerList = new Array();
         room.answers = new Object();
     },
-    
+
     pollremind: 'pr',
     pr: function(target, room, user) {
         var separacion = "&nbsp;&nbsp;";
@@ -188,27 +168,27 @@ var cmds = {
         }
         this.sendReply('|raw|<div class="infobox"><h2>' + room.question + separacion + '<font font size=1 color = "#939393"><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + output + '</div>');
     },
-    
+
     disqualify: 'dq',
     dq: function(target, room, user, connection, cmd) {
         if (!target) return this.sendReply('Usage: /'+cmd+' [user]');
         this.parse('/tour disqualify '+target);
     },
-    
+
     remind: function(target, room, user) {
         this.parse('/tour remind');
     },
-    
+
     endtour: function(target, room, user) {
         this.parse('/tour delete');
     },
-    
+
     jt: 'j',
     jointour: 'j',
     j: function(target, room, user) {
         this.parse('/tour join');
     },
-    
+
     lt: 'l',
     leavetour: 'l',
     l: function(target, room, user) {

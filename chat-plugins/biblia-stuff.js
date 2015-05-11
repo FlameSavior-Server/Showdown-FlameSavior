@@ -128,6 +128,7 @@ exports.commands = {
 				case 'view':
 				case 'show':
 					if (!this.canBroadcast()) return;
+					if (!parts[1]) parts[1] = user.name;
 					var rank = Core.biblia[toId(parts[1])];
 					if (!rank) return this.sendReply("User " + parts[1] + " does not have a " + leagueName + " rank.");
 					if (!Core.bibliafaction[toId(parts[1])]) return this.sendReply("User " + parts[1] + "does not have a " + leagueName + " faction.");

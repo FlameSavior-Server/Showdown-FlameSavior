@@ -99,6 +99,17 @@ exports.commands = {
 					this.logModCommand(targetUser + "'s league faction was removed by " + user.name);
 					room.add(targetUser + "'s league faction was removed by " + user.name + ".");
 					break;
+				//Development commands
+				case 'rankobject':
+					if (!this.canBroadcast()) return;
+					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					return this.sendReplyBox("Core.biblia = " + fs.readFileSync('config/biblia-league-ranks.json', 'utf8'));
+					break;
+				case 'factionobject':
+					if (!this.canBroadcast()) return;
+					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					return this.sendReplyBox("Core.bibliafaction = " + fs.readFileSync('config/biblia-league-faction.json', 'utf8'));
+					break;
 				case 'view':
 				case 'show':
 					if (!this.canBroadcast()) return;

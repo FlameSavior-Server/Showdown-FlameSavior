@@ -66,23 +66,28 @@ exports.commands = {
 					var rank = Core.biblia[toId(parts[1])];
 					if (!rank) return this.sendReply("User " + parts[1] + " does not have a " + leagueName + " rank.");
 					var img = "";
+					var rankLabel = "";
 					switch (rank) {
 						case 'e4':
-							img = '<img src="http://www.smogon.com/media/forums/images/badges/vgc.png" title="Elite Four">';
-							braek;
+							rankLabel = "Elite Four";
+							img = '<img src="http://www.smogon.com/media/forums/images/badges/vgc.png" title="' + rankLabel + '">';
+							break;
 						case 'champ':
-							img = '<img src="http://www.smogon.com/media/forums/images/badges/tr.png" title="Champion">';
+							rankLabel = "Champion";
+							img = '<img src="http://www.smogon.com/media/forums/images/badges/tr.png" title="' + rankLabel + '">';
 							break;
 						case 'gl':
-							img = '<img src="http://www.smogon.com/media/forums/images/badges/tour.png" title="Gym Leader">';
+							rankLabel = "Gym Leader";
+							img = '<img src="http://www.smogon.com/media/forums/images/badges/tour.png" title="' + rankLabel + '">';
 							break;
 						case 'purgatory':
-							img = '<img src="http://www.smogon.com/media/forums/images/badges/tc.png" title="Purgatory">';
+							rankLabel = "Purgatory";
+							img = '<img src="http://www.smogon.com/media/forums/images/badges/tc.png" title="' + rankLabel + '">';
 							break;
 						default:
 							img = '';
 					}
-					return this.sendReplyBox("Rank: " + rank.substring(0,1).toUpperCase() + rank.substring(1,rank.length) + "<br />" + img);
+					return this.sendReplyBox("Rank: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + "<br />" + img); //this line is just to show off
 					break;
 				case 'object':
 					//development command

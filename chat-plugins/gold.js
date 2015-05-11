@@ -1484,7 +1484,7 @@ exports.commands = {
             if (price <= user.money) {
                 match = true;
                 user.money = user.money - price;
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -5);
                 this.sendReply('You have purchased a custom symbol. You will have this until you log off for more than an hour.');
                 this.sendReply('Use /customsymbol [symbol] to change your symbol now!');
                 user.canCustomSymbol = true;
@@ -1501,7 +1501,7 @@ exports.commands = {
                 if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .png format. ex: /buy custom, [url to the avatar]');
                 var filename = target[1].split('.');
                 filename = '.' + filename.pop();
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -35);
                 if (filename != ".png") return this.sendReply('Your avatar must be in .png format.');
                 user.money = user.money - price;
                 this.sendReply('You have purchased a custom avatar. Staff have been notified and it will be added in due time.');
@@ -1524,7 +1524,7 @@ exports.commands = {
                 user.money = user.money - price;
                 this.sendReply('You have purchased a custom color. Staff have been notified and it will be added in due time.');
                 user.canCustomColor = true;
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -350);
                 Rooms.rooms.staff.add(user.name + ' has purchased a custom color. Color: ' + target[2]);
                 for (var u in Users.users) {
                     if (Users.users[u].group == "~") {
@@ -1546,7 +1546,7 @@ exports.commands = {
                 user.money = user.money - price;
                 this.sendReply('You have purchased a custom emote. Staff have been notified and it will be added in due time.');
                 user.canCustomEmote = true;
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -100);
                 Rooms.rooms.staff.add(user.name + ' has purchased a custom emote. Emote "' + target[1] + '": ' + target[2]);
                 for (var u in Users.users) {
                     if (Users.users[u].group == "~") {
@@ -1569,7 +1569,7 @@ exports.commands = {
                 user.money = user.money - price;
                 this.sendReply('You have purchased a custom animated avatar. Staff have been notified and it will be added in due time.');
                 user.canAnimatedAvatar = true;
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -45);
                 Rooms.rooms.staff.add(user.name + ' has purchased a custom animated avatar. Image: ' + target[1]);
                 for (var u in Users.users) {
                     if (Users.users[u].group == "~" || Users.users[u].group == "&") {
@@ -1587,7 +1587,7 @@ exports.commands = {
                 user.money = user.money - price;
                 this.sendReply('You have purchased a chat room. You need to message an Admin so that the room can be made.');
                 user.canChatRoom = true;
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -100);
                 this.add(user.name + ' has purchased a chat room!');
             } else {
                 return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
@@ -1601,7 +1601,7 @@ exports.commands = {
                 this.sendReply('You have purchased a trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
                 user.canTrainerCard = true;
                 this.add(user.name + ' has purchased a trainer card!');
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -60);
                 Rooms.rooms.tailz.add(user.name + ' has purchased a trainer card!');
             } else {
                 return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
@@ -1615,7 +1615,7 @@ exports.commands = {
                 this.sendReply('You have purchased a music box. You need to message an Admin capable of adding this (Panpawn / papew).');
                 user.canMusicBox = true;
                 this.add(user.name + ' has purchased a music box!');
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -60);
                 Rooms.rooms.tailz.add(user.name + ' has purchased a music box!');
             } else {
                 return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
@@ -1629,7 +1629,7 @@ exports.commands = {
                 user.money = user.money - price;
                 this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
                 user.canFixItem = true;
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -15);
                 this.add(user.name + ' has purchased the ability to set alter their card or avatar or music box!');
             } else {
                 return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
@@ -1642,7 +1642,7 @@ exports.commands = {
                 user.money = user.money - price;
                 this.sendReply('You have purchased the ability to declare (from Admin). To do this message an Admin (~) with the message you want to send. Keep it sensible!');
                 user.canDecAdvertise = true;
-                economy.writeMoney('money', user, -price);
+                economy.writeMoney('money', user, -25);
                 this.add(user.name + ' has purchased the ability to declare from an Admin!');
             } else {
                 return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');

@@ -133,8 +133,8 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					if (!parts[1]) parts[1] = user.name;
 					var rank = Core.biblia[toId(parts[1])];
-					if (!rank) return this.sendReply("User " + parts[1] + " does not have a " + leagueName + " rank.");
-					if (!Core.bibliafaction[toId(parts[1])]) return this.sendReply("User " + parts[1] + "does not have a " + leagueName + " faction.");
+					if (!rank) rank = "None.";
+					if (!Core.bibliafaction[toId(parts[1])]) fuckingFaction = "None.";
 					var img = "";
 					var rankLabel = "";
 					var fuckingFaction = Core.bibliafaction[toId(parts[1])];
@@ -162,6 +162,7 @@ exports.commands = {
 							break;
 						default:
 							img = '';
+							rankLabel = "None."
 					}
 					return this.sendReplyBox(
 						"<b>User</b>: " + parts[1] + "<br />" +

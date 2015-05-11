@@ -79,7 +79,7 @@ exports.commands = {
 							rankLEBEL = "Purgatory";
 							break;
 					}
-					room.add(targetUser + " was given the league rank of " + rankLEBEL + " by " + user.name);
+					room.add(targetUser + " was given the league rank of " + rankLEBEL + " by " + user.name + ".");
 					break;
 				case 'takerank':
 					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can take a " + leagueName + " rank!");

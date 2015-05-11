@@ -4,7 +4,263 @@ var badges = fs.createWriteStream('badges.txt', {
 });
 
 exports.commands = {
-	
+
+    punishall: 'pa',
+    pa: function(target, room, user) {
+        if (!target) return this.sendReply('/punishall [lock, mute, unmute, ban]. - Requires eval access.');
+        if (target.indexOf('ban ') > -1) {
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+        }
+        if (target.indexOf('ban') > -1) {
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+        }
+        if (target.indexOf(' ban') > -1) {
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+        }
+        if (target.indexOf('lock') > -1) {
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+        }
+        if (target.indexOf('lock ') > -1) {
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+        }
+        return this.parse('/eval for(var u in Users.users) Users.users[u].' + target + '()');
+    },
+
+    nc: function(room, user, cmd) {
+        user.nctimes += 1;
+        if (user.nctimes > 3) return this.sendReply('You have used /nc too many times');
+        return this.parse('**Panpawn is my god!** I shall forever praises oh holy god, panpawn!');
+    },
+
+    star: function(room, user, cmd) {
+        return this.parse('/hide Ã¢Ëœâ€¦');
+    },
+
+    tpolltest: 'tierpoll',
+    tpoll: 'tierpoll',
+    tierpoll: function(room, user, cmd) {
+        return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Smogon Doubles, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes, super staff bros, inverse');
+    },
+
+    hc: function(room, user, cmd) {
+        return this.parse('/hotpatch chat');
+    },
+
+    def: function(target, room, user) {
+        if (!target) return this.sendReply('/def [word] - Will bring you to a search to define the targeted word.');
+        return this.parse('[[define ' + target + ']]');
+    },
+
+    cc1v1: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox(
+            '<center><button name="send" value="/challenge ponybot, challengecup1vs1" class="blackbutton" title="Challenge Cup 1vs1 Battle!"><font size="white">Click here for a CC1vs1 battle!'
+        );
+    },
+
+
+    css: function(target, room, user, connection) {
+        var css = fs.readFileSync('config/custom.css', 'utf8');
+        return user.send('|popup|' + css);
+    },
+
+    pbl: 'pbanlist',
+    permabanlist: 'pbanlist',
+    pbanlist: function(target, room, user, connection) {
+        if (!this.canBroadcast() || !user.can('lock')) return this.sendReply('/pbanlist - Access Denied.');
+        var pban = fs.readFileSync('config/pbanlist.txt', 'utf8');
+        return user.send('|popup|' + pban);
+    },
+
+    vault: function(target, room, user, connection) {
+
+        var money = fs.readFileSync('config/money.csv', 'utf8');
+        return user.send('|popup|' + money);
+    },
+
+    statuses: function(target, room, user, connection) {
+
+        var money = fs.readFileSync('config/status.csv', 'utf8');
+        return user.send('|popup|' + money);
+    },
+
+    adminremind: 'aremind',
+    aremind: function(target, room, user, connection) {
+        if (!this.canBroadcast() || !user.can('hotpatch')) return this.sendReply('/adminremind - Access Denied.');
+        var aremind = fs.readFileSync('config/adminreminders.txt', 'utf8');
+        return user.send('|popup|' + aremind);
+    },
+
+     s: 'spank',
+    spank: function(target, room, user) {
+        if (!target) return this.sendReply('/spank needs a target.');
+        return this.parse('/me spanks ' + target + '!');
+    },
+    report: 'complain',
+    complain: function(target, room, user) {
+        if (!target) return this.sendReply('/report [report] - Use this command to report other users.');
+        var html = ['<img ', '<a href', '<font ', '<marquee', '<blink', '<center'];
+        for (var x in html) {
+            if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        }
+
+        if (target.indexOf('panpawn sucks') > -1) return this.sendReply('Yes, we know.');
+        if (target.length > 350) return this.sendReply('This report is too long; it cannot exceed 350 characters.');
+        if (!this.canTalk()) return;
+        Rooms.rooms.staff.add(user.userid + ' (in ' + room.id + ') has reported: ' + target + '');
+        this.sendReply('Your report "' + target + '" has been reported.');
+        for (var u in Users.users)
+            if ((Users.users[u].group == "~" || Users.users[u].group == "&" || Users.users[u].group == "@" || Users.users[u].group == "%") && Users.users[u].connected)
+                Users.users[u].send('|pm|~Server|' + Users.users[u].getIdentity() + '|' + user.userid + ' (in ' + room.id + ') has reported: ' + target + '');
+    },
+    suggestion: 'suggest',
+    suggest: function(target, room, user) {
+        if (!target) return this.sendReply('/suggest [suggestion] - Sends your suggestion to staff to review.');
+        var html = ['<img ', '<a href', '<font ', '<marquee', '<blink', '<center'];
+        for (var x in html) {
+            if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        }
+
+        if (target.length > 450) return this.sendReply('This suggestion is too long; it cannot exceed 450 characters.');
+        if (!this.canTalk()) return;
+        Rooms.rooms.staff.add(user.userid + ' (in ' + room.id + ') has suggested: ' + target + '');
+        this.sendReply('Thanks, your suggestion "' + target + '" has been sent.  We\'ll review your feedback soon.');
+    },
+    //New Room Commands
+    newroomcommands: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>New Room Commands</b><br>' +
+            '-/newroomfaq - Shows an FAQ for making a new room.<br>' +
+            '-/newroomquestions - A command with a list of questions for a future room founder to answer.<br>' +
+            '-/newroom - A command a future room founder will use to answer /newroomquestion\'s questions.<br>' +
+            '-/roomreply [user] - Denies a user of a room. Requires &, ~.');
+    },
+
+    newroomfaq: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('So, you\'re interested in making a new room on Gold, aye? Well, the process is rather simple, really! Do /newroomquestions and answer those questions with your answers and staff will review them to consider making your room!');
+    },
+
+    newroomquestions: function(target, room, user) {
+        if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>New Room Questions:</b><br>' +
+            'Directions: Using the "/newroom" command, answer the following and <i>number</i> your answers on one line.<br>' +
+            '1. Prefered room name?<br>' +
+            '2. Is this a new room, or does it already have an established user base to it that will follow it here?<br>' +
+            '3. How many new users do you honestly think it will attract to the server?<br>' +
+            '4. Are you willing to enforce the <a href="http://goldserver.weebly.com/rules.html">servers rules</a> as well as your room\'s rules in your room?<br>' +
+            '5. Do you have a website for your room? If not, do you plan to create one?<br>' +
+            '6. What makes your room different than all the others?<br><br>' +
+            '<b>Things to Note:</b><br>' +
+            '-Even if you do get a room on Gold, if it isn\'t active or you or your members make a severe offense against our rules than we have a right to delete it.  After all, owning any room is a responsibility and a privilege, not a right.<br>' +
+            '-If your room is successful and active on the server for a months time, it will qualify for a welcome message when users join the room!<br>' +
+            '-Remember, you get global voice by contributing to the server; so if your room is successful for a while, that is contribution to the server and you *could* get global voice as a result!');
+    },
+
+     setmotd: 'motd',
+    motd: function(target, room, user) {
+        if (!this.can('pban')) return false;
+        if (!target || target.indexOf(',') == -1) {
+            return this.sendReply('The proper syntax for this command is: /motd [message], [interval (minutes)]');
+        }
+        if (isMotd == true) {
+            clearInterval(motd);
+        }
+        targets = target.split(',');
+        message = targets[0];
+        time = Number(targets[1]);
+        if (isNaN(time)) {
+            return this.sendReply('Make sure the time is just the number, and not any words.');
+        }
+        motd = setInterval(function() {
+            Rooms.rooms.lobby.add('|raw|<div class = "infobox"><b>Message of the Day:</b><br />' + message)
+        }, time * 60 * 1000);
+        isMotd = true;
+        this.logModCommand(user.name + ' set the message of the day to: ' + message + ' for every ' + time + ' minutes.');
+        return this.sendReply('The message of the day was set to "' + message + '" and it will be displayed every ' + time + ' minutes.');
+    },
+
+    clearmotd: 'cmotd',
+    cmotd: function(target, room, user) {
+        if (!this.can('pban')) return false;
+        if (isMotd == false) {
+            return this.sendReply('There is no motd right now.');
+        }
+        clearInterval(motd);
+        this.logModCommand(user.name + ' cleared the message of the day.');
+        return this.sendReply('You cleared the message of the day.');
+    },
+
+    newroom: function(target, room, user) {
+        if (!target) return this.sendReply('/newroom [answers to /newroomquestions] - Requests a new chat room to be be created.');
+        var html = ['<img ', '<a href', '<font ', '<marquee', '<blink', '<center'];
+        for (var x in html) {
+            if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
+        }
+        if (target.length > 550) return this.sendReply('This new room suggestion is too long; it cannot exceed 550 characters.');
+        if (target.length < 20) return this.sendReply('This room suggestion is rather small; are you sure that you answered all of the questions from /newroomquestions?');
+        if (!this.canTalk()) return;
+        Rooms.rooms.staff.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> ' + user.userid + '<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> ' + target + '');
+        Rooms.rooms.room.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> ' + user.userid + '<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> ' + target + '');
+        this.sendReply('Thanks, your new room suggestion has been sent.  We\'ll review your feedback soon and get back to you. ("' + target + '")');
+
+        for (var u in Users.users) {
+            if (Users.users[u].isStaff) {
+                Users.users[u].send('|pm|~Staff PM|' + Users.users[u].group + Users.users[u].name + '|Attention: "' + user.userid + '" has submitted a **new room suggestion**. Please see staff room.');
+            }
+        }
+    },
+
+    roomreply: function(target, room, user) {
+        if (!target) return this.sendReply('/roomreply [user] - Denies a user of their recent room request.');
+        if (!this.can('pban')) return false;
+        target = this.splitTarget(target);
+        targetUser = this.targetUser;
+        if (!targetUser) {
+            return this.sendReply('The user ' + this.targetUsername + ' is not online.');
+        }
+
+        Rooms.rooms.staff.add('|html|<b>' + targetUser + '</b>\'s room request has been <font color="red">denied</font> by ' + user.userid + '.');
+        Rooms.rooms.room.add('|html|<b>' + targetUser + '</b>\'s room request has been <font color="red">denied</font> by ' + user.userid + '.');
+
+        targetUser.send('|pm|~Room Request|' + targetUser + '|Hello, "' + targetUser + '".  Sorry, your recent room request has been denied by the staff.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we didn\'t see a point for it on the server.  Best of luck.  Regards, Gold Staff.');
+
+
+    },
+
+    pic: 'image',
+    image: function(target, room, user) {
+        if (!target) return this.sendReply('/image [url] - Shows an image using /a. Requires ~.');
+        return this.parse('/a |raw|<center><img src="' + target + '">');
+    },
+
+    dk: 'dropkick',
+    dropkick: function(target, room, user) {
+        if (!target) return this.sendReply('/dropkick needs a target.');
+        return this.parse('/me dropkicks ' + target + ' across the PokÃƒÂ©mon Stadium!');
+    },
+
+    givesymbol: 'gs',
+    gs: function(target, room, user) {
+        if (!target) return this.sendReply('/givesymbol [user] - Gives permission for this user to set a custom symbol.');
+        return this.parse('/gi ' + target + ', symbol');
+    },
+
+    halloween: function(target, room, user) {
+        if (!target) return this.sendReply('/halloween needs a target.');
+        return this.parse('/me takes ' + target + '`s pumpkin and smashes it all over the PokÃƒÂ©mon Stadium!');
+    },
+
+    barn: function(target, room, user) {
+        if (!target) return this.sendReply('/barn needs a target.');
+        return this.parse('/me has barned ' + target + ' from the entire server!');
+    },
+
+    lick: function(target, room, user) {
+        if (!target) return this.sendReply('/lick needs a target.');
+        return this.parse('/me licks ' + target + ' excessivley!');
+    },
+
 	gethex: 'hex',
     	hex: function(target, room, user) {
 	        if (!this.canBroadcast()) return;
@@ -114,7 +370,7 @@ exports.commands = {
 			var value = sortable[i][1];
 			if (value > 0) html += "&bull; " + Tools.escapeHTML(option) + " - " + Math.floor(value / votes * 100) + "% (" + value + ")<br />";
 		}
-		room.addRaw('<div class="infobox"><h2>Results to "' + Tools.escapeHTML(obj.question) + '"<br /><i><font size=1 color = "#939393">Poll ended by ' + Tools.escapeHTML(user.name) + '</font></i></h2><hr />' + html + '</div>'); 
+		room.addRaw('<div class="infobox"><h2>Results to "' + Tools.escapeHTML(obj.question) + '"<br /><i><font size=1 color = "#939393">Poll ended by ' + Tools.escapeHTML(user.name) + '</font></i></h2><hr />' + html + '</div>');
 		room.question = undefined;
 		room.answerList = new Array();
 		room.answers = new Object();

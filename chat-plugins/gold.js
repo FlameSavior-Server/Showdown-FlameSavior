@@ -2367,6 +2367,77 @@ function MD5(f) {
         b = m(b, c, d, e, g[f + 12], 6, 1700485571), e = m(e, b, c, d, g[f + 3], 10, 2399980690), d = m(d, e, b, c, g[f + 10], 15, 4293915773), c = m(c, d, e, b, g[f + 1], 21, 2240044497), b = m(b, c, d, e, g[f + 8], 6, 1873313359), e = m(e, b, c, d, g[f + 15], 10, 4264355552), d = m(d, e, b, c, g[f + 6], 15, 2734768916), c = m(c, d, e, b, g[f + 13], 21, 1309151649), b = m(b, c, d, e, g[f + 4], 6, 4149444226), e = m(e, b, c, d, g[f + 11], 10, 3174756917), d = m(d, e, b, c, g[f + 2], 15, 718787259), c = m(c, d, e, b, g[f + 9], 21, 3951481745), b = i(b, o), c = i(c, p), d = i(d, q), e = i(e, r);
     return (n(b) + n(c) + n(d) + n(e)).toLowerCase();
 }
+function splint(target) {
+    //splittyDiddles
+    var cmdArr =  target.split(",");
+    for (var i = 0; i < cmdArr.length; i++) cmdArr[i] = cmdArr[i].trim();
+        return cmdArr;
+}
+
+function readMoney(user) {
+    try {
+        var data = fs.readFileSync('config/money.csv', 'utf8');
+    } catch (e) {
+        return 0;
+    }
+    var rows = data.split("\n");
+    var matched = false;
+    for (var i = 0; i < rows.length; i++) {
+        if (!rows[i]) continue;
+        var parts = rows[i].split(",");
+        var userid = toId(parts[0]);
+        if (user === userid) {
+            var matched = true;
+            var amount = Number(parts[1]);
+            break;
+        }
+    }
+    if (matched === true) {
+        return amount;
+    } else {
+        return 0;
+    }
+}
+exports.readMoney = readMoney;
+
+function writeMoney (filename, user, amount, callback) {
+    if (!filename || !user ||  !amount) return false;
+    fs.readFile('config/'+filename+'.csv', 'utf8', function (err, data) {
+        if (err) return false;
+        if (!data || data == '') return console.log('DEBUG: ('+Date()+') '+filename+'.csv appears to be empty...');
+        var row = data.split('\n');
+        var matched = false;
+        var line = '';
+        var userMoney = 0;
+        for (var i = 0; i < row.length; i++) {
+            if (!row[i]) continue;
+            var parts = row[i].split(',');
+            var userid = toId(parts[0]);
+            if (toId(user) == userid) {
+                matched = true;
+                userMoney = Number(parts[1]);
+                line = row[i];
+                break;
+            }
+        }
+        userMoney += amount;
+        if (matched == true) {
+            var re = new RegExp(line, "g");
+            var result = data.replace(re, toId(user)+','+userMoney);
+            fs.writeFile('config/'+filename+'.csv', result, 'utf8', function (err) {
+                if (err) return false;
+                if (callback) callback(true);
+                return;
+            });
+        } else {
+            fs.appendFile('config/'+filename+'.csv', '\n'+toId(user)+','+userMoney);
+            if (callback) callback(true);
+            return;
+        }
+    });
+}
+exports.writeMoney = writeMoney;
+
 var colorCache = {};
 hashColor = function(name) {
     if (colorCache[name]) return colorCache[name];

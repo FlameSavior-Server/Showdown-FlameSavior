@@ -84,6 +84,12 @@ exports.commands = {
 					}
 					return this.sendReplyBox("Rank: " + rank.substring(0,1).toUpperCase() + rank.substring(1,rank.length) + "<br />" + img);
 					break;
+				case 'object':
+					//development command
+					if (!this.canBroadcast()) return;
+					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					return this.sendReplyBox("Core.biblia = " + fs.readFileSync('config/biblia-league-ranks.json', 'utf8'));
+					break;
 				case 'help':
 				default:
 					if (!this.canBroadcast()) return;

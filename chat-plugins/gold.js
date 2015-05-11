@@ -1645,7 +1645,7 @@ exports.commands = {
             }
         }
         if (match === true) {
-           economy.writeMoney('money', user, -price)
+           economy.writeMoney('money', user, -price);
         }
     },
 

@@ -1474,29 +1474,16 @@ exports.commands = {
         target = target.split(', ');
         var avatar = '';
         var data = fs.readFileSync('config/money.csv', 'utf8')
-        var match = false;
-        var money = 0;
-        var line = '';
-        var row = ('' + data).split("\n");
-        for (var i = row.length; i > -1; i--) {
-            if (!row[i]) continue;
-            var parts = row[i].split(",");
-            var userid = toId(parts[0]);
-            if (user.userid == userid) {
-                var x = Number(parts[1]);
-                var money = x;
-                match = true;
-                if (match === true) {
-                    line = line + row[i];
-                    break;
-                }
-            }
-        }
+        
+        var money = readMoney(user.userid);
+        var match;
+        
         user.money = money;
         var price = 0;
         if (target2 === 'symbol') {
             price = 5;
             if (price <= user.money) {
+                match = true;
                 user.money = user.money - price;
                 this.sendReply('You have purchased a custom symbol. You will have this until you log off for more than an hour.');
                 this.sendReply('Use /customsymbol [symbol] to change your symbol now!');
@@ -1510,6 +1497,7 @@ exports.commands = {
             price = 35;
             if (hasBadge(user.userid, 'vip')) price = 0;
             if (price <= user.money) {
+                match = true;
                 if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .png format. ex: /buy custom, [url to the avatar]');
                 var filename = target[1].split('.');
                 filename = '.' + filename.pop();
@@ -1531,7 +1519,7 @@ exports.commands = {
             price = 350;
             if (price <= user.money) {
                 if (!target[2]) return this.sendReply('Please specify the name of the alt you want your main account (the one you are on now) to have the color of.  Do so with /buy color, [alt name].');
-
+                match = true;
                 user.money = user.money - price;
                 this.sendReply('You have purchased a custom color. Staff have been notified and it will be added in due time.');
                 user.canCustomColor = true;
@@ -1548,6 +1536,7 @@ exports.commands = {
         if (target[0] === 'emote') {
             price = 100;
             if (price <= user.money) {
+                match = true;
                 if (!target[2]) return this.sendReply('Please specify the emote you would like you buy. ex: /buy emote, [emote code], [url to the emote]');
                 var filename = target[2].split('.');
                 filename = '.' + filename.pop();
@@ -1569,6 +1558,7 @@ exports.commands = {
             price = 45;
             if (hasBadge(user.userid, 'vip')) price = 0;
             if (price <= user.money) {
+                match = true;
                 if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .gif format. ex: /buy animated, [url to the avatar]');
                 var filename = target[1].split('.');
                 filename = '.' + filename.pop();
@@ -1589,6 +1579,7 @@ exports.commands = {
         if (target[0] === 'room') {
             price = 100;
             if (price <= user.money) {
+                match = true;
                 user.money = user.money - price;
                 this.sendReply('You have purchased a chat room. You need to message an Admin so that the room can be made.');
                 user.canChatRoom = true;
@@ -1600,6 +1591,7 @@ exports.commands = {
         if (target2 === 'trainer') {
             price = 60;
             if (price <= user.money) {
+                match = true;
                 user.money = user.money - price;
                 this.sendReply('You have purchased a trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
                 user.canTrainerCard = true;
@@ -1612,6 +1604,7 @@ exports.commands = {
         if (target2 === 'musicbox') {
             price = 60;
             if (price <= user.money) {
+                match = true;
                 user.money = user.money - price;
                 this.sendReply('You have purchased a music box. You need to message an Admin capable of adding this (Panpawn / papew).');
                 user.canMusicBox = true;
@@ -1625,6 +1618,7 @@ exports.commands = {
             price = 15;
             if (hasBadge(user.userid, 'vip')) price = 0;
             if (price <= user.money) {
+                match = true;
                 user.money = user.money - price;
                 this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
                 user.canFixItem = true;
@@ -1636,6 +1630,7 @@ exports.commands = {
         if (target2 === 'declare') {
             price = 25;
             if (price <= user.money) {
+                match = true;
                 user.money = user.money - price;
                 this.sendReply('You have purchased the ability to declare (from Admin). To do this message an Admin (~) with the message you want to send. Keep it sensible!');
                 user.canDecAdvertise = true;

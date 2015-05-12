@@ -102,8 +102,8 @@ exports.commands = {
 					leagueFactions[targetUser] = Core.bibliafaction[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
 					saveFaction();
 					this.sendReply(targetUser + " was given the league faction of " + parts[2]);
-					this.logModCommand(targetUser + " was given the league rank of " + parts[2]);
-					room.add(targetUser + " was given the league rank of " + parts[2] + " by " + user.name + ".");
+					this.logModCommand(targetUser + " was given the league faction of " + parts[2]);
+					room.add(targetUser + " was given the league faction of " + parts[2] + " by " + user.name + ".");
 					break;
 				case 'takefaction':
 					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can take a " + leagueName + " faction!");

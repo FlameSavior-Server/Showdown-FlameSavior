@@ -484,10 +484,12 @@ exports.commands = {
         return this.sendReplyBox('There ' + (names.length === 1 ? 'is' : 'are') + ' <font color="#24678d"><b>' + names.length + '</b></font> ' + (names.length === 1 ? 'user' : 'users') + ' with the rank <font color="#24678d"><b>' + Config.groups[target].name + '</b></font> currently online.<br />' + names.join(', '));
     },
     away: 'afk',
-    asleep: 'afk',
-    sleep: 'afk',
-    gaming: 'afk',
     busy: 'afk',
+    sleep: 'afk',
+    asleep: 'afk',
+    eating: 'afk',
+    gaming: 'afk',
+    sleeping: 'afk',
     afk: function(target, room, user, connection, cmd) {
         if (!this.canTalk()) return;
         if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');

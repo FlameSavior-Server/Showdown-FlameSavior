@@ -7,11 +7,36 @@ var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare
 var ipbans = fs.createWriteStream('config/ipbans.txt', {
     'flags': 'a'
 });
+if (typeof tells === 'undefined') {
+    tells = {};
+}
 var badges = fs.createWriteStream('badges.txt', {
     'flags': 'a'
 });
 
 exports.commands = {
+    tell: function(target, room, user) {
+        if (!this.canTalk()) return;
+        if (!target) return this.parse('/help tell');
+        var commaIndex = target.indexOf(',');
+        if (commaIndex < 0) return this.sendReply('You forgot the comma.');
+        var targetUser = toId(target.slice(0, commaIndex));
+        var message = target.slice(commaIndex + 1).trim();
+        if (message.replace(/(<([^>]+)>)/ig, "").length > 600) return this.sendReply('tells must be 600 or fewer characters, excluding HTML.');
+        message = htmlfix(message);
+        if (targetUser.length > 18) {
+            return this.sendReply('The name of user "' + targetUser + '" is too long.');
+        }
+
+        if (!tells[targetUser]) tells[targetUser] = [];
+        if (tells[targetUser].length === 8) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
+
+        var date = Date();
+        var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + Tools.escapeHTML(message);
+        tells[targetUser].add(messageToSend);
+
+        return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
+    },
 
     punishall: 'pa',
     pa: function(target, room, user) {

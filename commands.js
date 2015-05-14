@@ -291,7 +291,7 @@ var commands = exports.commands = {
     backhelp: ["/back - Unblocks challenges and/or private messages, if either are blocked."],
 
     makechatroom: function(target, room, user) {
-        if (!this.can('makeroom')) return;
+        if (!this.can('pban')) return;
 
         // `,` is a delimiter used by a lot of /commands
         // `|` and `[` are delimiters used by the protocol
@@ -311,7 +311,7 @@ var commands = exports.commands = {
     makechatroomhelp: ["/makechatroom [roomname] - Creates a new room named [roomname]. Requires: ~"],
 
     deregisterchatroom: function(target, room, user) {
-        if (!this.can('makeroom')) return;
+        if (!this.can('pban')) return;
         var id = toId(target);
         if (!id) return this.parse('/help deregisterchatroom');
         var targetRoom = Rooms.search(id);

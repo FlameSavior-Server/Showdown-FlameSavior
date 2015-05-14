@@ -129,15 +129,15 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					this.sendReplyBox(
 						"<table bgcolor=\"#ADD8E6\" width=\"100%\"><td>" +
-						"<b><center>EZ-Emote Commands:</center></b><br />" +
-						"/ezemote add, [emote], [link] - Adds an emote. Requires @, &, ~.<br />" +
-						"/ezemote remove, [emote] - Removes an emote. Requires @, &, ~.<br />" +
-						"/ezemote status - Views the current status of emotes.  Requires &, ~.<br />" +
-						"/ezemote status, [on / off] - Enables or disables the status of emotes. Requires &, ~.<br />" +
-						"/ezemote list - Shows the emotes that were added with this command.<br />" +
-						"/ezemote view - Shows all of the current emotes with their respected image.<br />" +
-						"/ezemote object - Shows the object of Core.emoticons. (Mostly for development usage)<br />" +
-						"/ezemote help - Shows this help command.<br />" +
+							"<b><center>EZ-Emote Commands:</center></b><br />" +
+							"/ezemote <code>add, [emote], [link]</code> - Adds an emote. Requires @, &, ~.<br />" +
+							"/ezemote <code>remove, [emote]</code> - Removes an emote. Requires @, &, ~.<br />" +
+							"/ezemote <code>status</code> - Views the current status of emotes.  Requires &, ~.<br />" +
+							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of emotes. Requires &, ~.<br />" +
+							"/ezemote <code>list</code> - Shows the emotes that were added with this command.<br />" +
+							"/ezemote <code>view</code> - Shows all of the current emotes with their respected image.<br />" +
+							"/ezemote <code>object</code> - Shows the object of Core.emoticons. (Mostly for development usage)<br />" +
+							"/ezemote <code>help</code> - Shows this help command.<br />" +
 						"</table></td>"
 					);
 			}

@@ -679,6 +679,8 @@ exports.commands = {
                 case 'busy':
                     var awayName = user.name + ' - Ⓑⓤⓢⓨ';
                     break;
+                case 'eating':
+                    var awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ'
                 default:
                     var awayName = user.name + ' - Ⓐⓦⓐⓨ';
             }
@@ -688,7 +690,8 @@ exports.commands = {
             user.isAway = true;
             if (!(!this.can('broadcast'))) {
                 var color = hashColor('' + toId(user.originalName) + '');
-                if (cmd == 'sleep') cmd = 'sleeping';
+                if (cmd === 'sleep') cmd = 'sleeping';
+                if (cmd === 'eat') cmd = 'eating';
                 if (user.userid == 'panpawn') color = '#DA9D01';
                 this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + user.originalName + '</font></b></button> is now ' + cmd + '. ' + (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
             }

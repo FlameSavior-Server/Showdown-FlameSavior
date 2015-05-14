@@ -680,7 +680,8 @@ exports.commands = {
                     var awayName = user.name + ' - Ⓑⓤⓢⓨ';
                     break;
                 case 'eating':
-                    var awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ'
+                    var awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ';
+                    break;
                 default:
                     var awayName = user.name + ' - Ⓐⓦⓐⓨ';
             }

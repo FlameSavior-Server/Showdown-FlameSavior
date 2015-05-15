@@ -62,8 +62,7 @@ exports.commands = {
 
     hide: 'hideauth',
     hideauth: function(target, room, user) {
-        if (!user.can('hideauth'))
-            return this.sendReply('/hideauth - access denied.');
+        if (!user.can('warn')) return this.sendReply('/hideauth - access denied.');
 
         var tar = ' ';
         if (target) {
@@ -104,8 +103,7 @@ exports.commands = {
 
     show: 'showauth',
     showauth: function(target, room, user) {
-        if (!user.can('hideauth'))
-            return this.sendReply('/showauth - access denied.');
+        if (!user.can('warn')) return this.sendReply('/showauth - access denied.');
 
         delete user.getIdentity;
         user.updateIdentity();

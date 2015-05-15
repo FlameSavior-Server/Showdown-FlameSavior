@@ -1525,6 +1525,7 @@ exports.commands = {
             if (parts[0].toLowerCase() === user.name.toLowerCase()) {
                 return this.sendReply('You can\'t transfer Bucks to yourself.');
             }
+            user.money = readMoney(user.userid);
             parts[0] = this.splitTarget(parts[0]);
             var targetUser = this.targetUser;
         }

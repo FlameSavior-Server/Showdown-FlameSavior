@@ -15,6 +15,23 @@ var badges = fs.createWriteStream('badges.txt', {
 });
 
 exports.commands = {
+    roomfounder: function(target, room, user) {
+        if (!room.chatRoomData) {
+            return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");
+        }
+        var target = this.splitTarget(target, true);
+        var targetUser = this.targetUser;
+        if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
+        if (!this.can('pban')) return false;
+        if (!room.auth) room.auth = room.chatRoomData.auth = {};
+        var name = targetUser.name;
+        room.auth[targetUser.userid] = '#';
+        room.founder = targetUser.userid;
+        this.addModCommand('' + name + ' was appointed to Room Founder by ' + user.name + '.');
+        room.onUpdateIdentity(targetUser);
+        room.chatRoomData.founder = room.founder;
+        Rooms.global.writeChatRoomData();
+    },
     restart: function(target, room, user) {
         if (!this.can('lockdown')) return false;
         try {

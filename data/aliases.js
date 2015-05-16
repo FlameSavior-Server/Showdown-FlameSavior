@@ -269,14 +269,11 @@ exports.BattleAliases = {
 	"garde": "Gardevoir",
 	"hera": "Heracross",
 	"hippo": "Hippowdon",
-<<<<<<< HEAD
 	"kupochu": "Pikachu",
-=======
 	"honch": "Honchkrow",
 	"keld": "Keldeo",
 	"klef": "Klefki",
 	"kou": "Raikou",
->>>>>>> upstream/master
 	"kyub": "Kyurem-Black",
 	"kyuw": "Kyurem-White",
 	"lando": "Landorus",

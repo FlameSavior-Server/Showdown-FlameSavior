@@ -32,6 +32,28 @@ exports.commands = {
         room.chatRoomData.founder = room.founder;
         Rooms.global.writeChatRoomData();
     },
+    pas: 'pmallstaff',
+    pmallstaff: function(target, room, user) {
+        if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every user in a room.');
+        if (!this.can('pban')) return false;
+        for (var u in Users.users) {
+            if (Users.users[u].isStaff) {
+                Users.users[u].send('|pm|~Staff PM|' + Users.users[u].group + Users.users[u].name + '|' + target + ' (by: ' + user.name + ')');
+            }
+        }
+    },
+    masspm: 'pmall',
+    pmall: function(target, room, user) {
+        if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');
+        if (!this.can('pban')) return false;
+
+        var pmName = '~Gold Server [Do not reply]';
+
+        for (var i in Users.users) {
+            var message = '|pm|' + pmName + '|' + Users.users[i].getIdentity() + '|' + target;
+            Users.users[i].send(message);
+        }
+    },
     restart: function(target, room, user) {
         if (!this.can('lockdown')) return false;
         try {

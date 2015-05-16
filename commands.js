@@ -494,27 +494,28 @@ var commands = exports.commands = {
 	},
 	roomownerhelp: ["/roomowner [username] - Appoints [username] as a room owner. Removes official status. Requires: ~"],
 
-	roomdeowner: 'deroomowner',
-	deroomowner: function (target, room, user) {
-		if (!room.auth) {
-			return this.sendReply("/roomdeowner - This room isn't designed for per-room moderation");
-		}
-		target = this.splitTarget(target, true);
-		var targetUser = this.targetUser;
-		var name = this.targetUsername;
-		var userid = toId(name);
-		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
+    roomdeowner: 'deroomowner',
+    deroomowner: function(target, room, user) {
+        if (!room.auth) {
+            return this.sendReply("/roomdeowner - This room isn't designed for per-room moderation");
+        }
+        target = this.splitTarget(target, true);
+        var targetUser = this.targetUser;
+        var name = this.targetUsername;
+        var userid = toId(name);
+        if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
 
-		if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
-		if (!this.can('makeroom', null, room)) return false;
+        if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
+        if (!room.founder || user.userid != room.founder && !this.can('makeroom')) return false;
 
-		delete room.auth[userid];
-		this.sendReply("(" + name + " is no longer Room Owner.)");
-		if (targetUser) targetUser.updateIdentity();
-		if (room.chatRoomData) {
-			Rooms.global.writeChatRoomData();
-		}
-	},
+
+        delete room.auth[userid];
+        this.sendReply('(' + name + ' is no longer Room Owner.)');
+        if (targetUser) targetUser.updateIdentity();
+        if (room.chatRoomData) {
+            Rooms.global.writeChatRoomData();
+        }
+    },
 	deroomownerhelp: ["/roomdeowner [username] - Removes [username]'s status as a room owner. Requires: ~"],
 
 	roomdemote: 'roompromote',

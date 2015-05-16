@@ -481,7 +481,7 @@ var commands = exports.commands = {
 
 		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
 
-		if (!this.can('makeroom', targetUser, room)) return false;
+		if (!this.can('declare', targetUser, room)) return false;
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 

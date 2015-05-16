@@ -1035,6 +1035,7 @@ exports.commands = {
                 data = Tools.escapeHTML(username) + ' is not registered.';
             }
             self.sendReplyBox(Tools.escapeHTML(data));
+            room.update();
         });
     },
     league: function(target, room, user) {

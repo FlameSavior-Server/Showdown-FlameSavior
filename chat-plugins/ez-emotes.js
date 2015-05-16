@@ -55,7 +55,7 @@ exports.commands = {
 					if (!this.can('ban')) return this.sendReply("Access denied.");
 					if (!parts[1]) return this.sendReplyBox("/ezemote remove, [emote]");
 					var emoteName = parts[1];
-					if (!Core.emoticons[emoteName]) return this.sendReplyBox("ERROR - the emote: " + emoteName + " does not exist.");
+					if (!Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " does not exist.");
 					delete Core.emoticons[emoteName];
 					delete emotes[emoteName];
 					saveEmotes();

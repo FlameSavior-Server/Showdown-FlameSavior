@@ -167,6 +167,7 @@ var commands = exports.commands = {
 		if (user.ignorePMs && user.ignorePMs !== targetUser.group && !targetUser.can('lock')) {
 			return this.popupReply("You are blocking private messages right now.");
 		}
+		
 
 		target = this.canTalk(target, null);
 		if (!target) return false;
@@ -195,13 +196,21 @@ var commands = exports.commands = {
 				target = '/invite ' + targetRoom.id;
 				break;
 			default:
+			
 				return connection.send('|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + "|/text The command '/" + innerCmd + "' was unrecognized or unavailable in private messages. To send a message starting with '/" + innerCmd + "', type '//" + innerCmd + "'.");
 			}
 		}
 
 		var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
 		user.send(message);
-		if (targetUser !== user) targetUser.send(message);
+		if (targetUser !== user) {
+			if (ShadowBan.isShadowBanned(user)) {
+				ShadowBan.room.add('|c|' + user.getIdentity() + "|__(Private to " + targetUser.getIdentity() + ")__ " + target);
+			} else {
+				targetUser.send(message);
+			}
+		}
+		
 		targetUser.lastPM = user.userid;
 		user.lastPM = targetUser.userid;
 	},

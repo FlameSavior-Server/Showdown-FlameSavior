@@ -95,7 +95,7 @@ exports.commands = {
 				case 'status':
 					if (!this.can('pban')) return this.sendReply("Access denied.");
 					if (!parts[1]) {
-						switch (Core.settings.emoteStatus) {
+						switch (room.emoteStatus) {
 							case true:
 								this.sendReply("Chat emotes are currently enabled.");
 								break;
@@ -108,14 +108,18 @@ exports.commands = {
 							case 'on':
 							case 'enable':
 								if (!this.can('pban')) return this.sendReply("Access denied.");
-								Core.settings.emoteStatus = true;
+								room.emoteStatus = true;
+								room.chatRoomData.emoteStatus = room.emoteStatus;
+								Rooms.global.writeChatRoomData();
 								room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
 								this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
 								break;
 							case 'off':
 							case 'disable':
 								if (!this.can('pban')) return this.sendReply("Access denied.");
-								Core.settings.emoteStatus = false;
+								room.emoteStatus = false;
+								room.chatRoomData.emoteStatus = room.emoteStatus;
+								Rooms.global.writeChatRoomData();
 								room.add(Tools.escapeHTML(user.name) + " has disabled chat emotes.");
 								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emotes.");
 								break;

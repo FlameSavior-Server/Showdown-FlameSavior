@@ -129,8 +129,8 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					this.sendReplyBox(
 						"<table bgcolor=\"#ADD8E6\" width=\"100%\"><td>" +
-							"<b><center>EZ-Emote Commands:</b><br />" +
-							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/ez-emotes.js\">panpawn</a></font></i></center><br />" +
+							"<center><b>EZ-Emote Commands:</b><br />" +
+							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/ez-emotes.js\">panpawn</a>)</font></i></center><br />" +
 							"/ezemote <code>add, [emote], [link]</code> - Adds an emote. Requires @, &, ~.<br />" +
 							"/ezemote <code>remove, [emote]</code> - Removes an emote. Requires @, &, ~.<br />" +
 							"/ezemote <code>status</code> - Views the current status of emotes.  Requires &, ~.<br />" +

@@ -75,7 +75,7 @@ exports.commands = {
 				case 'view':
 					if (!this.canBroadcast()) return;
 					//if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					if (!Core.settings.emoteStatus) {
+					if (!room.emoteStatus) {
 						return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
 					} else {
 						var name = Object.keys(Core.emoticons),
@@ -93,7 +93,7 @@ exports.commands = {
 					this.sendReplyBox("Core.emoticons = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
 				case 'status':
-					if (!this.can('pban')) return this.sendReply("Access denied.");
+					if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
 					if (!parts[1]) {
 						switch (room.emoteStatus) {
 							case true:

@@ -93,7 +93,7 @@ exports.commands = {
 					this.sendReplyBox("CoreTWO.emoticons = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
 				case 'status':
-					if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
+					if (!this.canBroadcast()) return;
 					if (!parts[1]) {
 						switch (room.emoteStatus) {
 							case true:
@@ -139,7 +139,7 @@ exports.commands = {
 							"/ezemote <code>add, [emote], [link]</code> - Adds an emote. Requires @, &, ~.<br />" +
 							"/ezemote <code>remove, [emote]</code> - Removes an emote. Requires @, &, ~.<br />" +
 							"/ezemote <code>status</code> - Views the current status of emotes.  Requires #, &, ~.<br />" +
-							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of emotes. Requires #, &, ~.<br />" +
+							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of emotes.<br />" +
 							"/ezemote <code>list</code> - Shows the emotes that were added with this command.<br />" +
 							"/ezemote <code>view</code> - Shows all of the current emotes with their respected image.<br />" +
 							"/ezemote <code>object</code> - Shows the object of CoreTWO.emoticons. (Mostly for development usage)<br />" +

@@ -135,7 +135,7 @@ emoticons: {
                 match = true;
             }
         }
-        if (!Core.settings.emoteStatus) {
+        if (!room.emoteStatus) {
 		kitty = message = this.processEmoticons(message);		
 		var message = Tools.escapeHTML(kitty);
 		return (message);

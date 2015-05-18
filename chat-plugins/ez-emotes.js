@@ -97,34 +97,34 @@ exports.commands = {
 					if (!parts[1]) {
 						switch (room.emoteStatus) {
 							case true:
-								this.sendReply("Chat emotes are currently enabled.");
+								this.sendReply("Chat emotes are currently enabled in this room.");
 								break;
 							case false:
-								this.sendReply("Chat emotes are currently disabled.");
+								this.sendReply("Chat emotes are currently disabled in this room.");
 								break;
 						}
 					} else {
 						switch (toId(parts[1])) {
 							case 'on':
 							case 'enable':
-								if (!this.can('pban')) return this.sendReply("Access denied.");
+								if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
 								room.emoteStatus = true;
 								room.chatRoomData.emoteStatus = room.emoteStatus;
 								Rooms.global.writeChatRoomData();
-								room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
-								this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
+								room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes in this room.');
+								this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes in this room.');
 								break;
 							case 'off':
 							case 'disable':
-								if (!this.can('pban')) return this.sendReply("Access denied.");
+								if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
 								room.emoteStatus = false;
 								room.chatRoomData.emoteStatus = room.emoteStatus;
 								Rooms.global.writeChatRoomData();
-								room.add(Tools.escapeHTML(user.name) + " has disabled chat emotes.");
-								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emotes.");
+								room.add(Tools.escapeHTML(user.name) + " has disabled chat emotes in this room.");
+								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emotes in this room.");
 								break;
 							default:
-								if (!this.can('pban')) return this.sendReply("Access denied.");
+								iif (!this.can('declare', null, room)) return this.sendReply("Access denied.");
 								this.sendReply("Usage: /ezemote status - views the current emote status OR /ezemote status, [off / on] - Turns emotes on / off.  Requires &, ~.");
 						}
 					}
@@ -138,8 +138,8 @@ exports.commands = {
 							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/ez-emotes.js\">panpawn</a>)</font></i></center><br />" +
 							"/ezemote <code>add, [emote], [link]</code> - Adds an emote. Requires @, &, ~.<br />" +
 							"/ezemote <code>remove, [emote]</code> - Removes an emote. Requires @, &, ~.<br />" +
-							"/ezemote <code>status</code> - Views the current status of emotes.  Requires &, ~.<br />" +
-							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of emotes. Requires &, ~.<br />" +
+							"/ezemote <code>status</code> - Views the current status of emotes.  Requires #, &, ~.<br />" +
+							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of emotes. Requires #, &, ~.<br />" +
 							"/ezemote <code>list</code> - Shows the emotes that were added with this command.<br />" +
 							"/ezemote <code>view</code> - Shows all of the current emotes with their respected image.<br />" +
 							"/ezemote <code>object</code> - Shows the object of Core.emoticons. (Mostly for development usage)<br />" +

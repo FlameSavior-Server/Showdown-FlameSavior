@@ -74,6 +74,7 @@ exports.commands = {
 					break;
 				case 'view':
 					if (!this.canBroadcast()) return;
+					//if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					if (!Core.settings.emoteStatus) {
 						return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
 					} else {

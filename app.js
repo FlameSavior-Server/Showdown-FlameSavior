@@ -426,6 +426,10 @@ require('./repl.js').start('app', function (cmd) { return eval(cmd); });
 
 global.Core = require('./core.js').core;
 
+try {
+	global.CoreTWO = require('./CoreTWO.js').core;
+} catch (e) {};
+
 global.Components = require('./components.js');
 
 global.Poll = require('./core.js').core.poll();

@@ -462,6 +462,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 			}
 		});
 	}
+	if (!CoreTWO.processChatData(user, room, connection, message)) return false;
 
 	return message;
 };

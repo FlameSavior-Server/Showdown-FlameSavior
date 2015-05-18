@@ -124,7 +124,7 @@ exports.commands = {
 								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emotes in this room.");
 								break;
 							default:
-								iif (!this.can('declare', null, room)) return this.sendReply("Access denied.");
+								if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
 								this.sendReply("Usage: /ezemote status - views the current emote status OR /ezemote status, [off / on] - Turns emotes on / off.  Requires &, ~.");
 						}
 					}

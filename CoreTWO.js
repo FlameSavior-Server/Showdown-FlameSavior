@@ -130,7 +130,7 @@ emoticons: {
 		var message = Tools.escapeHTML(kitty);
 		return (message);
 		return;
-	} else if (Core.settings.emoteStatus = true) {
+	} else if (room.emoteStatus = true) {
         	if (!match || message.charAt(0) === '!') return true;
         	message = Tools.escapeHTML(message);
         	message = this.processEmoticons(message);

@@ -40,7 +40,7 @@ exports.commands = {
 		var text = "";
 		var ms = Date.now() - seenDate[userid];
 		do {
-			let divisors = disvisors.pop();
+			let divisor = divisors.pop();
 			let unit = uptime % divisor;
 			buffer.push(unit > 1 ? unit + ' ' + units.pop() + 's' : unit + ' ' + units.pop());
 			text = ~~(ms / divisor);

@@ -36,8 +36,7 @@ exports.commands = {
 			if (Users(target) && Users(target).connected) return this.sendReplyBox(Tools.escapeHTML(target) + " is currently <font color=\"green\">online</green>.");
 			if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
 			var date = new Date(seenData[userid]);
-			var text = "";
-			text = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a")
+			var text = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a")
 			this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + " EST.");
 		} catch (e) {
 			return this.sendReply("Something failed: \n" + e.stack);

@@ -37,7 +37,7 @@ exports.commands = {
 		var date = new Date(seenData[userid]);
 		var text = "";
 		var ms = Date.now() - seenData[userid];
-		text = moment(ms).fromNow();
-		this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + " ago.");
+		text = moment(ms, "YYYYMMDD").fromNow();
+		this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + ".");
 	}
 };

@@ -30,14 +30,21 @@ var day = 60
 exports.commands = {
 	seen: function (target, room, user) {
 		try {
-			if (!this.canBroadcast()) return;
-			var userid = toId(target);
-			if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
-			if (Users(target) && Users(target).connected) return this.sendReplyBox(Tools.escapeHTML(target) + " is currently <font color=\"green\">online</green>.");
-			if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
-			var date = new Date(seenData[userid]);
-			var text = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a")
-			this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + " EST.");
+			switch (target) {
+				case 'obj':
+					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					this.sendReplyBox("There have been " + Object.size(seenData) + " user names recorded in this database.");
+					break;
+				default:
+					if (!this.canBroadcast()) return;
+					var userid = toId(target);
+					if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
+					if (Users(target) && Users(target).connected) return this.sendReplyBox(Tools.escapeHTML(target) + " is currently <font color=\"green\">online</green>.");
+					if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
+					var date = new Date(seenData[userid]);
+					var text = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a")
+					this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + " EST.");
+			}
 		} catch (e) {
 			return this.sendReply("Something failed: \n" + e.stack);
 		}

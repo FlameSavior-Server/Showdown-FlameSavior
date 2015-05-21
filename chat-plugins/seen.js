@@ -26,7 +26,6 @@ function updateSeen(userid) {
 }
 global.updateSeen = updateSeen;
 
-var day = 60 
 exports.commands = {
 	seen: function (target, room, user) {
 		try {

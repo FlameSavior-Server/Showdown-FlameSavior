@@ -25,10 +25,10 @@ function updateSeen(userid) {
 	saveData();
 }
 global.updateSeen = updateSeen;
-var userNameColor = Core.hashColor(toId(target)); 
 exports.commands = {
 	seen: function (target, room, user) {
 		try {
+			var userNameColor = Core.hashColor(toId(target)); 
 			switch (target) {
 				case 'obj':
 					if (!this.canBroadcast()) return;

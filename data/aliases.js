@@ -279,7 +279,7 @@ exports.BattleAliases = {
 	"lando": "Landorus",
 	"landoi": "Landorus",
 	"landot": "Landorus-Therian",
-	"lights": "Minum",
+	"lights": "Minun",
 	"luke":  "Lucario",
 	"lurk": "Golurk",
 	"mamo": "Mamoswine",

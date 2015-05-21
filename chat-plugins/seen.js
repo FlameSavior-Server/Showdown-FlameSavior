@@ -43,8 +43,7 @@ exports.commands = {
 					var date = new Date(seenData[userid]);
 					var userLastSeen = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a");
 					var userLastSeenLabel = userLastSeen.substr(-2).toUpperCase(); //AM or PM
-					var userlastSeenMinutes = userLastSeen.substring(0, userLastSeen.length - 2);
-					this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + userLastSeenMinutes + userLastSeenLabel + " EST.");
+					this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + userLastSeen.substring(0, userLastSeen.length - 2) + userLastSeenLabel + " EST.");
 			}
 		} catch (e) {
 			return this.sendReply("Something failed: \n" + e.stack);

@@ -15,30 +15,6 @@ var badges = fs.createWriteStream('badges.txt', {
 });
 
 exports.commands = {
-	reload: function(target, room, user) {
-                if (!this.can('hotpatch')) return false;
-                try {
-                        CommandParser.uncacheTree('./command-parser.js');
-                        global.CommandParser = require('./command-parser.js');
-
-                        CommandParser.uncacheTree('./hangman.js');
-                        hangman = require('./hangman.js').hangman(hangman);
-
-                        CommandParser.uncacheTree('./core');
-                        global.Core = require('./core.js').core;
-
-                        CommandParser.uncacheTree('./economy.js');
-                        economy = require('./economy.js');
-
-                        var runningTournaments = Tournaments.tournaments;
-                        CommandParser.uncacheTree('./tournaments');
-                        global.Tournaments = require('./tournaments');
-                        Tournaments.tournaments = runningTournaments;
-                } catch (e) {
-                        return this.sendReply("Something failed while trying to hotpatch chat: \n" + e.stack);
-                }
-                return this.sendReply("The server has reloaded hot-patch based commands.");
-	},
 	goldroomauth: "gra",
 	gra: function(target, room, user, connection) {
 		if (!room.auth) return this.sendReply("/goldroomauth - This room isn't designed for per-room moderation and therefore has no auth list.");

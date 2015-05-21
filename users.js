@@ -728,6 +728,9 @@ User = (function () {
 		return this.can('promote', {group:sourceGroup}) && this.can('promote', {group:targetGroup});
 	};
 	User.prototype.forceRename = function (name, registered) {
+		try {
+			updateSeen(name);
+		} catch (e) {}
 		// skip the login server
 		var userid = toId(name);
 
@@ -1489,6 +1492,10 @@ User = (function () {
 		room = Rooms.get(room);
 		if (room.id === 'global' && !force) {
 			// you can't leave the global room except while disconnecting
+			try {
+				updateSeen(name);
+			} catch (e) {}
+
 			return false;
 		}
 		for (var i = 0; i < this.connections.length; i++) {

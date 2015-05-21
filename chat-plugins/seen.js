@@ -44,7 +44,7 @@ exports.commands = {
 			var unit = uptime % divisor;
 			buffer.push(unit > 1 ? unit + ' ' + units.pop() + 's' : unit + ' ' + units.pop());
 			text = ~~(ms / divisor);
-		} white (ms);
+		}
 		switch (buffer.length) {
 			case 5:
 				text += buffer[3] + ', ';

@@ -3,6 +3,7 @@
  */
 
 var fs = require('fs');
+var moment = require('moment');
 
 var seenData = {};
 function loadData() {
@@ -34,32 +35,9 @@ exports.commands = {
 		if (Users(target) && Users(target).connected) return this.sendReplyBox(Tools.escapeHTML(target) + " is currently <font color=\"green\">online</green>.");
 		if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
 		var date = new Date(seenData[userid]);
-		var divisors = [52, 7, 24, 60, 60];
-		var units = ['week', 'day', 'hour', 'minute', 'second'];
-		var buffer = [];
 		var text = "";
 		var ms = Date.now() - seenDate[userid];
-		do {
-			var divisor = divisors.pop();
-			var unit = uptime % divisor;
-			buffer.push(unit > 1 ? unit + ' ' + units.pop() + 's' : unit + ' ' + units.pop());
-			text = ~~(ms / divisor);
-		}
-		switch (buffer.length) {
-			case 5:
-				text += buffer[3] + ', ';
-			case 4:
-				text += buffer[3] + ', ';
-			case 3:
-				text += buffer[2] + ', ' + buffer[1] + ', and ' + buffer[0];
-				break;
-			case 2:
-				text += buffer[1] + ' and ' + buffer[0];
-				break;
-			case 1:
-				text += buffer[0];
-				break;
-		}
+		text = moment(ms).fromNow();
 	}
 	this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + " ago.");
 	}

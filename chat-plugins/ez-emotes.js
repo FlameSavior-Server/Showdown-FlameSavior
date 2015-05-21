@@ -30,7 +30,7 @@ exports.commands = {
 	emote: 'ezemote',
 	ec: 'ezemote',
 	ezemote: function (target, room, user) {
-		if (!target) target = 'help';
+		if (!target) target = "help";
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
 		try {
@@ -41,7 +41,8 @@ exports.commands = {
 					var emoteName = parts[1];
 					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
-					//if (link != ".gif" || link != ".png" || link != ".jpg") return this.sendReply("ERROR: the emote you are trying to add must be a gif, png, or jpg.");
+					var fileTypes = [".gif",".png",".jpg"];
+					if (link.indexOf(fileTypes) >= 0) return this.sendReply("ERROR: the emote you are trying to add must be a gif, png, or jpg.");
 					emotes[emoteName] = Core.emoticons[emoteName] = link;
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " has been added.");
@@ -93,7 +94,7 @@ exports.commands = {
 					this.sendReplyBox("Core.emoticons = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
 				case 'status':
-					if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
+					if (!this.canBroadcast()) return;
 					if (!parts[1]) {
 						switch (room.emoteStatus) {
 							case true:
@@ -124,8 +125,7 @@ exports.commands = {
 								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emotes in this room.");
 								break;
 							default:
-								if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
-								this.sendReply("Usage: /ezemote status - views the current emote status OR /ezemote status, [off / on] - Turns emotes on / off.  Requires &, ~.");
+								this.sendReply("Usage: /ezemote status, [on / off] - Enables or disables the current emote status.  Requires #, &, ~.");
 						}
 					}
 					break;
@@ -138,13 +138,13 @@ exports.commands = {
 							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/ez-emotes.js\">panpawn</a>)</font></i></center><br />" +
 							"/ezemote <code>add, [emote], [link]</code> - Adds an emote. Requires @, &, ~.<br />" +
 							"/ezemote <code>remove, [emote]</code> - Removes an emote. Requires @, &, ~.<br />" +
-							"/ezemote <code>status</code> - Views the current status of emotes.  Requires #, &, ~.<br />" +
 							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of emotes. Requires #, &, ~.<br />" +
-							"/ezemote <code>list</code> - Shows the emotes that were added with this command.<br />" +
+							"/ezemote <code>status</code> - Views the current status of emotes.<br />" +
+							"/ezemote <code>list</code> - Shows the emotes that were added with this command in a list form.<br />" +
 							"/ezemote <code>view</code> - Shows all of the current emotes with their respected image.<br />" +
 							"/ezemote <code>object</code> - Shows the object of Core.emoticons. (Mostly for development usage)<br />" +
 							"/ezemote <code>help</code> - Shows this help command.<br />" +
-						"</table></td>"
+						"</td></table>"
 					);
 			}
 		} catch (e) {

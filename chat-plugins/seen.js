@@ -40,8 +40,8 @@ exports.commands = {
 		var text = "";
 		var ms = Date.now() - seenDate[userid];
 		do {
-			let divisor = divisors.pop();
-			let unit = uptime % divisor;
+			var divisor = divisors.pop();
+			var unit = uptime % divisor;
 			buffer.push(unit > 1 ? unit + ' ' + units.pop() + 's' : unit + ' ' + units.pop());
 			text = ~~(ms / divisor);
 		} white (ms);

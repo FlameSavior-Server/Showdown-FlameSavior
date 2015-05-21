@@ -25,7 +25,7 @@ function updateSeen(userid) {
 	saveData();
 }
 global.updateSeen = updateSeen;
-
+var userNameColor = Core.hashColor(toId(target)); 
 exports.commands = {
 	seen: function (target, room, user) {
 		try {
@@ -38,12 +38,12 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					var userid = toId(target);
 					if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
-					if (Users(target) && Users(target).connected) return this.sendReplyBox(Tools.escapeHTML(target) + " is currently <font color=\"green\">online</green>.");
-					if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
+					if (Users(target) && Users(target).connected) return this.sendReplyBox('<b><font color="' + userNameColor + '">' + target + '</font></b> is currently <font color="green">online</green>.');
+					if (!seenData[userid]) return this.sendReplyBox('<b><font color="' + userNameColor + '">' + target + "</font></b> has <font color=\"red\">never</font> been seen online.");
 					var date = new Date(seenData[userid]);
 					var userLastSeen = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a");
 					var userLastSeenLabel = userLastSeen.substr(-2).toUpperCase(); //AM or PM
-					this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + userLastSeen.substring(0, userLastSeen.length - 2) + userLastSeenLabel + " EST.");
+					this.sendReplyBox('The user <b><font color="' + userNameColor + '">' + target + '</font></b> was last seen online ' + userLastSeen.substring(0, userLastSeen.length - 2) + userLastSeenLabel + ' EST.');
 			}
 		} catch (e) {
 			return this.sendReply("Something failed: \n" + e.stack);

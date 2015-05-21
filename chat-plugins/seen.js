@@ -42,7 +42,7 @@ exports.commands = {
 					if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
 					var date = new Date(seenData[userid]);
 					var userLastSeen = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a");
-					var userLastSeenLabel = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a").substr(-2).toUpperCase();
+					var userLastSeenLabel = userLastSeen.substr(-2).toUpperCase(); //AM or PM
 					var userlastSeenMinutes = userLastSeen.substring(0, userLastSeen.length - 2);
 					this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + userLastSeenMinutes + userLastSeenLabel + " EST.");
 			}

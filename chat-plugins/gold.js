@@ -15,6 +15,78 @@ var badges = fs.createWriteStream('badges.txt', {
 });
 
 exports.commands = {
+    goldroomauth: "gra",
+    gra: function(target, room, user, connection) {
+        if (!room.auth) return this.sendReply("/goldroomauth - This room isn't designed for per-room moderation and therefore has no auth list.");
+        var buffer = [];
+        var owners = [];
+        var admins = [];
+        var leaders = [];
+        var mods = [];
+        var drivers = [];
+        var voices = [];
+
+        room.owners = '';
+        room.admins = '';
+        room.leaders = '';
+        room.mods = '';
+        room.drivers = '';
+        room.voices = '';
+        for (var u in room.auth) {
+            if (room.auth[u] == '#') {
+                room.owners = room.owners + u + ',';
+            }
+            if (room.auth[u] == '~') {
+                room.admins = room.admins + u + ',';
+            }
+            if (room.auth[u] == '&') {
+                room.leaders = room.leaders + u + ',';
+            }
+            if (room.auth[u] == '@') {
+                room.mods = room.mods + u + ',';
+            }
+            if (room.auth[u] == '%') {
+                room.drivers = room.drivers + u + ',';
+            }
+            if (room.auth[u] == '+') {
+                room.voices = room.voices + u + ',';
+            }
+        }
+
+        if (!room.founder) founder = '';
+        if (room.founder) founder = room.founder;
+
+        room.owners = room.owners.split(',');
+        room.mods = room.mods.split(',');
+        room.drivers = room.drivers.split(',');
+        room.voices = room.voices.split(',');
+
+        for (var u in room.owners) {
+            if (room.owners[u] != '') owners.push(room.owners[u]);
+        }
+        for (var u in room.mods) {
+            if (room.mods[u] != '') mods.push(room.mods[u]);
+        }
+        for (var u in room.drivers) {
+            if (room.drivers[u] != '') drivers.push(room.drivers[u]);
+        }
+        for (var u in room.voices) {
+            if (room.voices[u] != '') voices.push(room.voices[u]);
+        }
+        if (owners.length > 0) {
+            owners = owners.join(', ');
+        }
+        if (mods.length > 0) {
+            mods = mods.join(', ');
+        }
+        if (drivers.length > 0) {
+            drivers = drivers.join(', ');
+        }
+        if (voices.length > 0) {
+            voices = voices.join(', ');
+        }
+        connection.popup('Room Auth in "' + room.id + '"\n\n**Founder**: \n' + founder + '\n**Owner(s)**: \n' + owners + '\n**Moderator(s)**: \n' + mods + '\n**Driver(s)**: \n' + drivers + '\n**Voice(s)**: \n' + voices);
+    },
     roomfounder: function(target, room, user) {
         if (!room.chatRoomData) {
             return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");

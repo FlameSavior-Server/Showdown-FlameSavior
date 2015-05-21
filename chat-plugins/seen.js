@@ -36,7 +36,7 @@ exports.commands = {
 		if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
 		var date = new Date(seenData[userid]);
 		var text = "";
-		var ms = Date.now() - seenDate[userid];
+		var ms = Date.now() - seenData[userid];
 		text = moment(ms).fromNow();
 		this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + " ago.");
 	}

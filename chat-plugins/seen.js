@@ -31,7 +31,7 @@ exports.commands = {
 		try {
 			switch (target) {
 				case 'obj':
-					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					if (!this.canBroadcast()) return;
 					this.sendReplyBox("There have been " + Object.size(seenData) + " user names recorded in this database.");
 					break;
 				default:

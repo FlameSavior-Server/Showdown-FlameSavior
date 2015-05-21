@@ -29,15 +29,19 @@ global.updateSeen = updateSeen;
 var day = 60 
 exports.commands = {
 	seen: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		var userid = toId(target);
-		if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
-		if (Users(target) && Users(target).connected) return this.sendReplyBox(Tools.escapeHTML(target) + " is currently <font color=\"green\">online</green>.");
-		if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
-		var date = new Date(seenData[userid]);
-		var text = "";
-		var ms = Date.now() - seenData[userid];
-		text = moment(ms, Date.now()).fromNow();
-		this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + ".");
+		try {
+			if (!this.canBroadcast()) return;
+			var userid = toId(target);
+			if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
+			if (Users(target) && Users(target).connected) return this.sendReplyBox(Tools.escapeHTML(target) + " is currently <font color=\"green\">online</green>.");
+			if (!seenData[userid]) return this.sendReplyBox(Tools.escapeHTML(target) + " has <font color=\"red\">never</font> been seen online.");
+			var date = new Date(seenData[userid]);
+			var text = "";
+			var ms = Date.now() - seenData[userid];
+			text = moment(ms, Date.now()).fromNow();
+			this.sendReplyBox("The user " + Tools.escapeHTML(target) + " was last seen online " + text + ".");
+		} catch (e) {
+			return this.sendReply("Something failed: \n" + e.stack);
+		}
 	}
 };

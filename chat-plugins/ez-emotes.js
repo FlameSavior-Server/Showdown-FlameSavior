@@ -47,7 +47,7 @@ exports.commands = {
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " has been added.");
 					this.logModCommand(user.name + " added the emote " + emoteName);
-					Rooms.rooms.staff.add(user.name + " added the emote " + emoteName);
+					Rooms.rooms.staff.add(Tools.escapeHTML(user.name) + " added the emote " + emoteName);
 					break;
 				case 'rem':
 				case 'remove':
@@ -62,7 +62,7 @@ exports.commands = {
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " was removed.");
 					this.logModCommand("The emote " + emoteName + " was removed by " + user.name);
-					Rooms.rooms.staff.add("The emote " + emoteName + " was removed by " + user.name);
+					Rooms.rooms.staff.add("The emote " + emoteName + " was removed by " + Tools.escapeHTML(user.name));
 					break;
 				case 'list':
 					if (!this.canBroadcast()) return;

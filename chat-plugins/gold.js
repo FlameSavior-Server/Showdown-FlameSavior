@@ -310,15 +310,14 @@ exports.commands = {
         if (!target) return this.sendReply('/def [word] - Will bring you to a search to define the targeted word.');
         return this.parse('[[define ' + target + ']]');
     },
-
+    /*
     cc1v1: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox(
             '<center><button name="send" value="/challenge ponybot, challengecup1vs1" class="blackbutton" title="Challenge Cup 1vs1 Battle!"><font size="white">Click here for a CC1vs1 battle!'
         );
     },
-
-
+    */
     css: function(target, room, user, connection) {
         var css = fs.readFileSync('config/custom.css', 'utf8');
         return user.send('|popup|' + css);
@@ -625,7 +624,7 @@ exports.commands = {
     tpolltest: 'tierpoll',
     tpoll: 'tierpoll',
     tierpoll: function(room, user, cmd) {
-        return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5] LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes');
+        return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5] LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, bc1v1, uu, anything goes');
     },
     survey: 'poll',
     poll: function(target, room, user) {

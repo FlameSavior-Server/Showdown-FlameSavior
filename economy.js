@@ -73,8 +73,7 @@ exports.writeMoney = writeMoney;
 
 
 var cmds = {
-
-
+/*
    survey: 'poll',
     poll: function(target, room, user) {
         if (!user.can('broadcast',null,room)) return this.sendReply('You do not have enough authority to use this command.');
@@ -168,7 +167,7 @@ var cmds = {
         }
         this.sendReply('|raw|<div class="infobox"><h2>' + room.question + separacion + '<font font size=1 color = "#939393"><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + output + '</div>');
     },
-
+*/
     disqualify: 'dq',
     dq: function(target, room, user, connection, cmd) {
         if (!target) return this.sendReply('Usage: /'+cmd+' [user]');

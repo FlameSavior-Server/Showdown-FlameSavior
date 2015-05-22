@@ -3,6 +3,9 @@ var path = require("path");
 var core = exports.core = {
 	//biblia objects
 	biblia: {},
+	settings: {
+		emoteStatus: true
+	},
 	bibliafaction: {},
 	emoticons: {},
 	processEmoticons: function(text) {

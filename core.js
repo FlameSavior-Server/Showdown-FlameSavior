@@ -75,7 +75,7 @@ var core = exports.core = {
 				return false;
 			}
 		}
-	},
+	}
 };
 
 function MD5(f) {

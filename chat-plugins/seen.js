@@ -38,7 +38,7 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					var userid = toId(target);
 					if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
-					if (Users(target) && Users(target).connected) return this.sendReplyBox('<b><font color="' + userNameColor + '">' + target + '</font></b> is currently <font color="green">online</green>.');
+					if (Users(target) && Users(target).connected) return this.sendReplyBox('<b><font color="' + userNameColor + '">' + target + '</font></b> is currently <font color="green">online</font>.');
 					if (!seenData[userid]) return this.sendReplyBox('<b><font color="' + userNameColor + '">' + target + "</font></b> has <font color=\"red\">never</font> been seen online.");
 					var date = new Date(seenData[userid]);
 					var userLastSeen = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a");

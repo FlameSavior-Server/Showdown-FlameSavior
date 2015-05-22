@@ -120,7 +120,6 @@ var core = exports.core = {
 		N = Math.round(N);
 		return "0123456789ABCDEF".charAt((N - N % 16) / 16) + "0123456789ABCDEF".charAt(N % 16);
 	}
-	var colorCache = {};
 
 	function hashColor(name) {
 		if (colorCache[name]) return colorCache[name];

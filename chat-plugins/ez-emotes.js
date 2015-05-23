@@ -12,7 +12,7 @@ function loadEmotes() {
 	try {
 		emotes = serialize.unserialize(fs.readFileSync('config/emotes.json', 'utf8'));
 		Object.merge(Core.emoticons, emotes);
-	} catch (e) {};
+	} catch (e) {}
 }
 setTimeout(function(){loadEmotes();},1000);
 
@@ -20,7 +20,7 @@ function saveEmotes() {
 	try {
 		fs.writeFileSync('config/emotes.json',serialize.serialize(emotes));
 		Object.merge(Core.emoticons, emotes);
-	} catch (e) {};
+	} catch (e) {}
 }
 
 exports.commands = {
@@ -36,7 +36,7 @@ exports.commands = {
 		try {
 			switch (toId(parts[0])) {
 				case 'add':
-					if (!this.can('ban')) return this.sendReply("Access denied.")
+					if (!this.can('ban')) return this.sendReply("Access denied.");
 					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /ezemote add, [emote], [link]");
 					var emoteName = parts[1];
 					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");

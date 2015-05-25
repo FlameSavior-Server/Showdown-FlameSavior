@@ -21,7 +21,7 @@ Object.merge(Gold, {
 					return colorCache[name];
 			}
 		} catch (e) {
-			return this.sendReply("Something with has color broke: \n" + e.stack);
+			return this.sendReply("Something with hashColor broke: \n" + e.stack);
 		}
 	}
 });

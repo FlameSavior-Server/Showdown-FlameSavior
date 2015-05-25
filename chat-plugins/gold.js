@@ -104,6 +104,33 @@ exports.commands = {
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
+	goldroomintro: function (target, room, user) {
+		if (!target) {
+			if (!this.canBroadcast()) return;
+			if (!room.introMessage) return this.sendReply("This room does not have an introduction set.");
+			this.sendReply('|raw|<div class="infobox infobox-limited">' + room.introMessage + '</div>');
+			if (!this.broadcasting && user.can('declare', null, room)) {
+				this.sendReply('Source:');
+				this.sendReplyBox('<code>' + Tools.escapeHTML(room.introMessage) + '</code>');
+			}
+			return;
+		}
+		if (!this.can('declare', null, room)) return false;
+		if (!/</.test(target)) {
+			// not HTML, do some simple URL linking
+			var re = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
+			target = target.replace(re, '<a href="$1">$1</a>');
+		}
+		if (!target.trim()) target = '';
+		room.introMessage = target;
+		this.sendReply("(The room introduction has been changed to:)");
+		this.sendReply('|raw|<div class="infobox infobox-limited">' + target + '</div>');
+		this.privateModCommand("(" + user.name + " changed the roomintro.)");
+		if (room.chatRoomData) {
+			room.chatRoomData.introMessage = room.introMessage;
+			Rooms.global.writeChatRoomData();
+		}
+	},
 	pas: 'pmallstaff',
 	pmallstaff: function(target, room, user) {
 		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every user in a room.');

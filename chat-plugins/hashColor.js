@@ -12,10 +12,16 @@ Object.merge(Gold, {
 		var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
 		var rgb = hslToRgb(H, S, L);
 		colorCache[name] = "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
-		if (toId(name) === 'panpawn') {
-			return colorCache[name] = '#DA9D01';
-		} else {
-			return colorCache[name];
+		try {
+			switch (toId(name)) {
+				case 'panpawn':
+					return colorCache[name] = '#DA9D01';
+					break;
+				default:
+					return colorCache[name];
+			}
+		} catch (e) {
+			return this.sendReply("Something with has color broke: \n" + e.stack);
 		}
 	}
 });

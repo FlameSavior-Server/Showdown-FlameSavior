@@ -70,7 +70,7 @@ var emotes = {};
 function loadEmotes() {
 	try {
 		emotes = serialize.unserialize(fs.readFileSync('config/emotes.json', 'utf8'));
-		Object.merge(Nimbus.emoticons.emoticons, emotes);
+		Object.merge(Core.emoticons, emotes);
 	} catch (e) {}
 }
 setTimeout(function(){loadEmotes();},1000);
@@ -78,7 +78,7 @@ setTimeout(function(){loadEmotes();},1000);
 function saveEmotes() {
 	try {
 		fs.writeFileSync('config/emotes.json',serialize.serialize(emotes));
-		Object.merge(Nimbus.emoticons.emoticons, emotes);
+		Object.merge(Core.emoticons, emotes);
 	} catch (e) {}
 }
 
@@ -99,11 +99,11 @@ exports.commands = {
 					if (!this.can('modifyemotes')) return this.sendReply("Access denied.");
 					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /ezemote add, [emote], [link]");
 					var emoteName = parts[1];
-					if (Nimbus.emoticons.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
+					if (Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
 					var fileTypes = [".gif",".png",".jpg"];
 					if (fileTypes.indexOf(link.substr(-4)) < 0) return this.sendReply("ERROR: the emote you are trying to add must be a gif, png, or jpg.");
-					emotes[emoteName] = Nimbus.emoticons.emoticons[emoteName] = link;
+					emotes[emoteName] = Core.emoticons[emoteName] = link;
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " has been added.");
 					this.logModCommand(user.name + " added the emote " + emoteName);
@@ -117,8 +117,8 @@ exports.commands = {
 					if (!this.can('modifyemotes')) return this.sendReply("Access denied.");
 					if (!parts[1]) return this.sendReplyBox("/ezemote remove, [emote]");
 					var emoteName = parts[1];
-					if (!Nimbus.emoticons.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " does not exist.");
-					delete Nimbus.emoticons.emoticons[emoteName];
+					if (!Core.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " does not exist.");
+					delete Core.emoticons[emoteName];
 					delete emotes[emoteName];
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " was removed.");
@@ -141,11 +141,11 @@ exports.commands = {
 					if (!room.emoteStatus) {
 						return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
 					} else {
-						var name = Object.keys(Nimbus.emoticons.emoticons);
+						var name = Object.keys(Core.emoticons);
 						emoticons = [];
 						var len = name.length;
 						while (len--) {
-							emoticons.push((Nimbus.emoticons.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
+							emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
 						}
 						this.sendReplyBox("<b><u>List of emoticons (" + Object.size(emotes) + "):</b></u> <br/><br/>" + emoticons.join(' ').toString());
 					}

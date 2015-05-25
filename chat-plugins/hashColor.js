@@ -19,7 +19,7 @@ Object.merge(Gold, {
 			return colorCache[name];
 		}
     }
-};
+}
 
 function hslToRgb(h, s, l) {
     var r, g, b, m, c, x;

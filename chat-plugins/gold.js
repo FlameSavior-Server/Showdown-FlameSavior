@@ -384,16 +384,6 @@ exports.commands = {
 		ipbans.write('\n' + targetUser.latestIp);
 	},
 
-	nc: function(room, user, cmd) {
-		user.nctimes += 1;
-		if (user.nctimes > 3) return this.sendReply('You have used /nc too many times');
-		return this.parse('**Panpawn is my god!** I shall forever praises oh holy god, panpawn!');
-	},
-
-	star: function(room, user, cmd) {
-		return this.parse('/hide Ã¢Ëœâ€¦');
-	},
-
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd) {
@@ -404,10 +394,6 @@ exports.commands = {
 		return this.parse('/hotpatch chat');
 	},
 
-	def: function(target, room, user) {
-		if (!target) return this.sendReply('/def [word] - Will bring you to a search to define the targeted word.');
-		return this.parse('[[define ' + target + ']]');
-	},
 	/*
 	cc1v1: function(target, room, user) {
 	    if (!this.canBroadcast()) return;
@@ -439,13 +425,6 @@ exports.commands = {
 
 		var money = fs.readFileSync('config/status.csv', 'utf8');
 		return user.send('|popup|' + money);
-	},
-
-	adminremind: 'aremind',
-	aremind: function(target, room, user, connection) {
-		if (!this.canBroadcast() || !user.can('hotpatch')) return this.sendReply('/adminremind - Access Denied.');
-		var aremind = fs.readFileSync('config/adminreminders.txt', 'utf8');
-		return user.send('|popup|' + aremind);
 	},
 
 	s: 'spank',
@@ -574,7 +553,6 @@ exports.commands = {
 		if (!target) return this.sendReply('/pet needs a target.');
 		return this.parse('/me pets ' + target + ' lavishly.');
 	},
-
 
 	setmotd: 'motd',
 	motd: function(target, room, user) {
@@ -834,7 +812,6 @@ exports.commands = {
 				var color = Gold.hashColor('' + toId(user.originalName) + '');
 				if (cmd === 'sleep') cmd = 'sleeping';
 				if (cmd === 'eat') cmd = 'eating';
-				if (user.userid == 'panpawn') color = '#DA9D01';
 				this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + user.originalName + '</font></b></button> is now ' + cmd + '. ' + (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			}
 		} else {
@@ -857,7 +834,6 @@ exports.commands = {
 			user.isAway = false;
 			if (!(!this.can('broadcast'))) {
 				var color = Gold.hashColor('' + toId(user.name) + '');
-				if (user.userid == 'panpawn') color = '#DA9D01';
 				this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + newName + '</font></b></button> is no longer away.');
 				user.originalName = '';
 			}
@@ -966,7 +942,7 @@ exports.commands = {
 	},
 	hideuser: function(target, room, user, connection, cmd) {
 		if (!target) return this.sendReply('/hideuser [user] - Makes all prior messages posted by this user "poof" and replaces it with a button to see. Requires: @, &, ~');
-		if (!this.can('ban')) return false;
+		if (!this.can('hotpatch')) return false;
 		try {
 			this.add('|unlink|hide|' + target);
 			Rooms.rooms.staff.add(target + '\'s messages have been hidden by ' + user.name);

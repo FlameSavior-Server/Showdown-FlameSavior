@@ -74,8 +74,9 @@ var core = exports.core = {
 				room.add('|raw|<div class="chat"><button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><strong><font color="#1F9837"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong></button> <em class="mine">' + message + '</em></div>');
 				return false;
 			} else {
-				if (user.hiding) return room.add('|raw|<div class="chat"><button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><strong><font color="' + hashColor(user.userid) + '"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong></button> <em class="mine">' + message + '</em></div>');
-				room.add('|raw|<div class="chat"><button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><strong><font color="' + hashColor(user.userid) + '"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong></button> <em class="mine">' + message + '</em></div>');
+				room.addRaw(user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
+				user.name + '">' + '<b><font color="' + hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
+				room.update();
 				return false;
 			}
 		}

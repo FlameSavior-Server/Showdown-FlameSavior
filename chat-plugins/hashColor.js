@@ -1,4 +1,5 @@
 if (typeof Gold === 'undefined') global.Gold = {};
+var MD5 = require('MD5');
 var colorCache = {};
 
 Object.merge(Gold, {

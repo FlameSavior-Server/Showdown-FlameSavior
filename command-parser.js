@@ -469,8 +469,10 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		return false;
 	}
 
-	if (!Core.processChatData(user, room, connection, message)) return false;
-	
+	try {
+		if (!Gold.emoticons.processChatData(user, room, connection, message)) return false;
+	} catch (e) {}
+
 	return message;
 };
 

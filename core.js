@@ -25,11 +25,8 @@ var core = exports.core = {
 			b = HueToRgb(m1, m2, hue - 1 / 3);
 		}
 		colorCache[name] = '#' + r + g + b;
-		if (toId(name) === 'panpawn') {
-			return colorCache[name] === '#DA9D01';
-		} else {
-			return colorCache[name];
-		}
+		colorCache["panpawn"] = '#DA9D01';
+		return colorCache[name];
 	},
 	settings: {
 		emoteStatus: true

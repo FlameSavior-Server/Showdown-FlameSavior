@@ -433,11 +433,11 @@ fs.readFile('./logs/uptime.txt', function (err, uptime) {
 });
 
 //global.tour = require('./tour.js').tour();
-global.hangman = require('./hangman.js').hangman();
+
 try {
+	global.hangman = require('./hangman.js').hangman();
 	global.economy = require('./economy.js');
 } catch (e) {}
-global.Core = require('./core.js').core;
 /*********************************************************
  * Start up the REPL server
  *********************************************************/

@@ -26,7 +26,7 @@ var core = exports.core = {
 		}
 		colorCache[name] = '#' + r + g + b;
 		if (toId(name) === 'panpawn') {
-			colorCache[name] === '#DA9D01';
+			return colorCache[name] === '#DA9D01';
 		} else {
 			return colorCache[name];
 		}

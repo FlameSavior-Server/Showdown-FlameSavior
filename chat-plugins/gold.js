@@ -832,7 +832,7 @@ exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			user.isAway = true;
 			if (!(!this.can('broadcast'))) {
-				var color = hashColor('' + toId(user.originalName) + '');
+				var color = Gold.hashColor('' + toId(user.originalName) + '');
 				if (cmd === 'sleep') cmd = 'sleeping';
 				if (cmd === 'eat') cmd = 'eating';
 				if (user.userid == 'panpawn') color = '#DA9D01';
@@ -857,7 +857,7 @@ exports.commands = {
 			user.authenticated = true;
 			user.isAway = false;
 			if (!(!this.can('broadcast'))) {
-				var color = hashColor('' + toId(user.name) + '');
+				var color = Gold.hashColor('' + toId(user.name) + '');
 				if (user.userid == 'panpawn') color = '#DA9D01';
 				this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + newName + '</font></b></button> is no longer away.');
 				user.originalName = '';
@@ -2330,46 +2330,6 @@ exports.commands = {
 		var codes = fs.readFileSync('config/friendcodes.txt', 'utf8');
 		return user.send('|popup|' + codes);
 	},
-	poof: 'd',
-	d: function(target, room, user) {
-		if (room.id !== 'lobby') return false;
-		var btags = '<strong><font color=' + hashColor(Math.random().toString()) + '" >';
-		var etags = '</font></strong>'
-		var targetid = toId(user);
-		if (!user.muted && target) {
-			var tar = toId(target);
-			var targetUser = Users.get(tar);
-			if (user.can('poof', targetUser)) {
-
-				if (!targetUser) {
-					user.emit('console', 'Cannot find user ' + target + '.', socket);
-				} else {
-					if (poofeh)
-						Rooms.rooms.lobby.addRaw(btags + '~~ ' + targetUser.name + ' was slaughtered by ' + user.name + '! ~~' + etags);
-					targetUser.disconnectAll();
-					return this.logModCommand(targetUser.name + ' was poofed by ' + user.name);
-				}
-			} else {
-				return this.sendReply('/poof target - Access denied.');
-			}
-		}
-		if (poofeh && !user.muted && !user.locked) {
-			Rooms.rooms.lobby.addRaw(btags + getRandMessage(user) + etags);
-			user.disconnectAll();
-		} else {
-			return this.sendReply('poof is currently disabled.');
-		}
-	},
-
-	poofoff: 'nopoof',
-	nopoof: function(target, room, user) {
-		if (!user.can('warn'))
-			return this.sendReply('/nopoof - Access denied.');
-		if (!poofeh)
-			return this.sendReply('poof is currently disabled.');
-		poofeh = false;
-		return this.sendReply('poof is now disabled.');
-	},
 	userauth: function(target, room, user, connection) {
 		var targetId = toId(target) || user.userid;
 		var targetUser = Users.getExact(targetId);
@@ -2411,33 +2371,6 @@ exports.commands = {
 		buffer.unshift("" + targetUsername + " user auth:");
 		connection.popup(buffer.join("\n\n"));
 	},
-	poofon: function(target, room, user) {
-		if (!user.can('warn'))
-			return this.sendReply('/poofon - Access denied.');
-		if (poofeh)
-			return this.sendReply('poof is currently enabled.');
-		poofeh = true;
-		return this.sendReply('poof is now enabled.');
-	},
-
-	cpoof: function(target, room, user) {
-		if (!user.can('broadcast'))
-			return this.sendReply('/cpoof - Access Denied');
-
-		if (poofeh) {
-			if (target.indexOf('<img') != -1)
-				return this.sendReply('Images are no longer supported in cpoof.');
-			target = htmlfix(target);
-			var btags = '<strong><font color="' + hashColor(Math.random().toString()) + '" >';
-			var etags = '</font></strong>'
-			Rooms.rooms.lobby.addRaw(btags + '~~ ' + user.name + ' ' + target + '! ~~' + etags);
-			this.logModCommand(user.name + ' used a custom poof message: \n "' + target + '"');
-			user.disconnectAll();
-		} else {
-			return this.sendReply('Poof is currently disabled.');
-		}
-	},
-
 	showpic: function(target, room, user) {
 		if (!target) return this.sendReply('/showpic [url], [size] - Adds a picture to the room. Size of 100 is the width of the room (100%).');
 
@@ -2522,49 +2455,6 @@ exports.commands = {
 		Rooms.rooms.room.add('|html|<font size="4"><b>New color guessed!</b></font><br><b>Guessed by:</b> ' + user.userid + '<br><b>Color:</b> ' + target + '');
 		this.sendReply('Thanks, your new color guess has been sent.  We\'ll review your color soon and get back to you. ("' + target + '")');
 	},
-	/*
-	        temote: 'temotes',
-	        toggleemotes: 'temotes',
-	        temotes: function(target, room, user) {
-	                if (!user.can('pban')) return;
-	                if (!target) return this.sendReply('Valid targets are: "on", "off" and "status".');
-	                if (toId(target) === 'off' || toId(target) === 'disable') {
-	                        Core.settings.emoteStatus = false;
-	                        room.add(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
-	                        this.logModCommand(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
-	                }
-	                if (toId(target) === 'on' || toId(target) === 'enable') {
-	                        Core.settings.emoteStatus = true;
-	                        room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
-	                        this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
-	                }
-	                if (toId(target) === 'status') {
-	                        var currentEmoteStatus = '';
-	                        if (!Core.settings.emoteStatus) {
-	                                currentEmoteStatus = 'disabled.';
-	                        } else {
-	                                currentEmoteStatus = 'enabled.';
-	                        }
-	                        return this.sendReply('Chat emotes are currently ' + currentEmoteStatus);
-	                }
-	        },
-	        emotes: 'emoticon',
-	        emoticons: 'emoticon',
-	        emoticon: function(target, room, user) {
-	                if (!this.canBroadcast()) return;
-	                if (!Core.settings.emoteStatus) {
-	                        return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
-	                } else {
-	                        var name = Object.keys(Core.emoticons),
-	                                emoticons = [];
-	                        var len = name.length;
-	                        while (len--) {
-	                                emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
-	                        }
-	                        this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
-	                }
-	        },*/
-
 	/*****************
 	 * Money commands *
 	 *****************/
@@ -2763,247 +2653,6 @@ function writeMoney(filename, user, amount, callback) {
 }
 exports.writeMoney = writeMoney;
 
-var colorCache = {};
-hashColor = function(name) {
-	if (colorCache[name]) return colorCache[name];
-
-	var hash = MD5(name);
-	var H = parseInt(hash.substr(4, 4), 16) % 360;
-	var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
-	var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
-
-	var rgb = hslToRgb(H, S, L);
-	colorCache[name] = "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
-	return colorCache[name];
-}
-
-function hslToRgb(h, s, l) {
-	var r, g, b, m, c, x
-
-	if (!isFinite(h)) h = 0
-	if (!isFinite(s)) s = 0
-	if (!isFinite(l)) l = 0
-
-	h /= 60
-	if (h < 0) h = 6 - (-h % 6)
-	h %= 6
-
-	s = Math.max(0, Math.min(1, s / 100))
-	l = Math.max(0, Math.min(1, l / 100))
-
-	c = (1 - Math.abs((2 * l) - 1)) * s
-	x = c * (1 - Math.abs((h % 2) - 1))
-
-	if (h < 1) {
-		r = c
-		g = x
-		b = 0
-	} else if (h < 2) {
-		r = x
-		g = c
-		b = 0
-	} else if (h < 3) {
-		r = 0
-		g = c
-		b = x
-	} else if (h < 4) {
-		r = 0
-		g = x
-		b = c
-	} else if (h < 5) {
-		r = x
-		g = 0
-		b = c
-	} else {
-		r = c
-		g = 0
-		b = x
-	}
-
-	m = l - c / 2
-	r = Math.round((r + m) * 255)
-	g = Math.round((g + m) * 255)
-	b = Math.round((b + m) * 255)
-
-	return {
-		r: r,
-		g: g,
-		b: b
-	}
-}
-
-function rgbToHex(R, G, B) {
-	return toHex(R) + toHex(G) + toHex(B)
-}
-
-function toHex(N) {
-	if (N == null) return "00";
-	N = parseInt(N);
-	if (N == 0 || isNaN(N)) return "00";
-	N = Math.max(0, N);
-	N = Math.min(N, 255);
-	N = Math.round(N);
-	return "0123456789ABCDEF".charAt((N - N % 16) / 16) + "0123456789ABCDEF".charAt(N % 16);
-}
-
-var colorCache = {};
-
-function hashColor(name) {
-	if (colorCache[name]) return colorCache[name];
-
-	var hash = MD5(name);
-	var H = parseInt(hash.substr(4, 4), 16) % 360;
-	var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
-	var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
-
-	var m1, m2, hue;
-	var r, g, b
-	S /= 100;
-	L /= 100;
-	if (S == 0)
-		r = g = b = (L * 255).toString(16);
-	else {
-		if (L <= 0.5)
-			m2 = L * (S + 1);
-		else
-			m2 = L + S - L * S;
-		m1 = L * 2 - m2;
-		hue = H / 360;
-		r = HueToRgb(m1, m2, hue + 1 / 3);
-		g = HueToRgb(m1, m2, hue);
-		b = HueToRgb(m1, m2, hue - 1 / 3);
-	}
-
-
-	colorCache[name] = '#' + r + g + b;
-	return colorCache[name];
-}
-
-function getRandMessage(user) {
-	var numMessages = 48; // numMessages will always be the highest case # + 1
-	var message = '~~ ';
-	switch (Math.floor(Math.random() * numMessages)) {
-		case 0:
-			message = message + user.name + ' has vanished into nothingness!';
-			break;
-		case 1:
-			message = message + user.name + ' visited kupo\'s bedroom and never returned!';
-			break;
-		case 2:
-			message = message + user.name + ' used Explosion!';
-			break;
-		case 3:
-			message = message + user.name + ' fell into the void.';
-			break;
-		case 4:
-			message = message + user.name + ' was squished by panpawn\'s large behind!';
-			break;
-		case 5:
-			message = message + user.name + ' became panpawn\'s slave!';
-			break;
-		case 6:
-			message = message + user.name + ' became panpawn\'s love slave!';
-			break;
-		case 7:
-			message = message + user.name + ' has left the building.';
-			break;
-		case 8:
-			message = message + user.name + ' felt Thundurus\'s wrath!';
-			break;
-		case 9:
-			message = message + user.name + ' died of a broken heart.';
-			break;
-		case 10:
-			message = message + user.name + ' got lost in a maze!';
-			break;
-		case 11:
-			message = message + user.name + ' was hit by Magikarp\'s Revenge!';
-			break;
-		case 12:
-			message = message + user.name + ' was sucked into a whirlpool!';
-			break;
-		case 13:
-			message = message + user.name + ' got scared and left the server!';
-			break;
-		case 14:
-			message = message + user.name + ' fell off a cliff!';
-			break;
-		case 15:
-			message = message + user.name + ' got eaten by a bunch of piranhas!';
-			break;
-		case 16:
-			message = message + user.name + ' is blasting off again!';
-			break;
-		case 17:
-			message = message + 'A large spider descended from the sky and picked up ' + user.name + '.';
-			break;
-		case 18:
-			message = message + user.name + ' tried to touch jd!';
-			break;
-		case 19:
-			message = message + user.name + ' got their sausage smoked by Charmanderp!';
-			break;
-		case 20:
-			message = message + user.name + ' was forced to give panpawn an oil massage!';
-			break;
-		case 21:
-			message = message + user.name + ' took an arrow to the knee... and then one to the face.';
-			break;
-		case 22:
-			message = message + user.name + ' peered through the hole on Shedinja\'s back';
-			break;
-		case 23:
-			message = message + user.name + ' recieved judgment from the almighty Arceus!';
-			break;
-		case 24:
-			message = message + user.name + ' used Final Gambit and missed!';
-			break;
-		case 25:
-			message = message + user.name + ' pissed off a Gyarados!';
-			break;
-		case 26:
-			message = message + user.name + ' screamed "BSHAX IMO"!';
-			break;
-		case 27:
-			message = message + user.name + ' was actually a 12 year and was banned for COPPA.';
-			break;
-		case 28:
-			message = message + user.name + ' got lost in the illusion of reality.';
-			break;
-		case 29:
-			message = message + user.name + ' was unfortunate and didn\'t get a cool message.';
-			break;
-		case 30:
-			message = message + 'Zarel accidently kicked ' + user.name + ' from the server!';
-			break;
-		case 31:
-			message = message + user.name + ' was knocked out cold by Paw!';
-			break;
-		case 32:
-			message = message + user.name + ' died making love to an Excadrill!';
-			break;
-		case 33:
-			message = message + user.name + ' was shoved in a Blendtec Blender with Chimp!';
-			break;
-		case 34:
-			message = message + user.name + ' was BLEGHED on by LightBlue!';
-			break;
-		case 35:
-			message = message + user.name + ' was bitten by a rabid Wolfie!';
-			break;
-		case 36:
-			message = message + user.name + ' was kicked from server! (lel clause)';
-			break;
-		default:
-			message = message + user.name + ' had to go urinate!';
-	};
-	message = message + ' ~~';
-	return message;
-}
-
-//here you go panpan
-//~stevoduhpedo
-
 function hasBadge(user, badge) {
 	var data = fs.readFileSync('badges.txt', 'utf8');
 	var row = data.split('\n');
@@ -3050,26 +2699,6 @@ function getAvatar(user) {
 
 	return avatar;
 }
-
-function HueToRgb(m1, m2, hue) {
-	var v;
-	if (hue < 0)
-		hue += 1;
-	else if (hue > 1)
-		hue -= 1;
-
-	if (6 * hue < 1)
-		v = m1 + (m2 - m1) * hue * 6;
-	else if (2 * hue < 1)
-		v = m2;
-	else if (3 * hue < 2)
-		v = m1 + (m2 - m1) * (2 / 3 - hue) * 6;
-	else
-		v = m1;
-
-	return (255 * v).toString(16);
-}
-
 function htmlfix(target) {
 	var fixings = ['<3', ':>', ':<'];
 	for (var u in fixings) {

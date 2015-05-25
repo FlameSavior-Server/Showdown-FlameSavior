@@ -1,32 +1,21 @@
 var fs = require("fs");
 var path = require("path");
 var core = exports.core = {
-	hashColor: function(name) {
+	hashColor: function (name) {
+		name = toId(name);
 		if (colorCache[name]) return colorCache[name];
 		var hash = MD5(name);
 		var H = parseInt(hash.substr(4, 4), 16) % 360;
 		var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
 		var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
-		var m1, m2, hue;
-		var r, g, b
-		S /= 100;
-		L /= 100;
-		if (S == 0)
-			r = g = b = (L * 255).toString(16);
-		else {
-			if (L <= 0.5)
-				m2 = L * (S + 1);
-			else
-				m2 = L + S - L * S;
-			m1 = L * 2 - m2;
-			hue = H / 360;
-			r = HueToRgb(m1, m2, hue + 1 / 3);
-			g = HueToRgb(m1, m2, hue);
-			b = HueToRgb(m1, m2, hue - 1 / 3);
+
+		var rgb = hslToRgb(H, S, L);
+		colorCache[name] = "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
+		if (toId(name) === 'panpawn') {
+			return colorCache[name] = '#DA9D01';
+		} else {
+			return colorCache[name];
 		}
-		colorCache[name] = '#' + r + g + b;
-		colorCache["panpawn"] = '#DA9D01';
-		return colorCache[name];
 	},
 	settings: {
 		emoteStatus: true

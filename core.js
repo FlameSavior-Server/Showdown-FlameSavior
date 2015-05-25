@@ -25,6 +25,7 @@ var core = exports.core = {
 			b = HueToRgb(m1, m2, hue - 1 / 3);
 		}
 		colorCache[name] = '#' + r + g + b;
+		if (toId(name) === 'panpawn') colorCache[name] === '#DA9D01';
 		return colorCache[name];
 	},
 	settings: {
@@ -65,20 +66,15 @@ var core = exports.core = {
 			if (!match || message.charAt(0) === '!') return true;
 			message = Tools.escapeHTML(message);
 			message = this.processEmoticons(message);
-			if (user.userid === 'panpawn') {
-				if (user.hiding) return room.add('|raw|<div class="chat"><button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><strong><font color="#DA9D01"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong></button> <em class="mine">' + message + '</em></div>');
-				room.add('|raw|<div class="chat"><button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><strong><font color="#DA9D01"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong></button> <em class="mine">' + message + '</em></div>');
-				return false;
-			} else if (user.userid === 'shaymin') {
-				if (user.hiding) return room.add('|raw|<div class="chat"><button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><strong><font color="#1F9837"><small></small><span class="username" data-name="' + user.name + '">' + user.name + '</span>:</font></strong></button> <em class="mine">' + message + '</em></div>');
-				room.add('|raw|<div class="chat"><button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><strong><font color="#1F9837"><small>' + user.group + '</small><span class="username" data-name="' + user.group + user.name + '">' + user.name + '</span>:</font></strong></button> <em class="mine">' + message + '</em></div>');
-				return false;
-			} else {
-				room.addRaw(user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
+			if (user.hiding) {
+						room.addRaw(' <button class="astext" name="parseCommand" value="/user ' +
 				user.name + '">' + '<b><font color="' + hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
 				room.update();
-				return false;
 			}
+			room.addRaw(user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
+				user.name + '">' + '<b><font color="' + hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
+			room.update();
+			return false;
 		}
 	}
 };

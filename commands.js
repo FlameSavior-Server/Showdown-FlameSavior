@@ -490,7 +490,7 @@ var commands = exports.commands = {
 
 		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
 
-		if (!this.can('declare', targetUser, room)) return false;
+		if (room.founder != user.userid && !this.can('pban')) return this.sendReply('/roomowner - Access denied.');
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
@@ -514,8 +514,8 @@ var commands = exports.commands = {
         var userid = toId(name);
         if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
 
-        if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
-        if (!room.founder || user.userid != room.founder && !this.can('makeroom')) return false;
+	if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
+	if (!room.founder || user.userid != room.founder && !this.can('makeroom')) return false;
 
 
         delete room.auth[userid];

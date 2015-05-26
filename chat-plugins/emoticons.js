@@ -45,7 +45,7 @@ Gold.emoticons = {
 			message = Tools.escapeHTML(message);
 			message = this.processEmoticons(message);
 			if (user.hiding) {
-						room.addRaw(' <button class="astext" name="parseCommand" value="/user ' +
+				room.addRaw(' <button class="astext" name="parseCommand" value="/user ' +
 				user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
 				room.update();
 			}

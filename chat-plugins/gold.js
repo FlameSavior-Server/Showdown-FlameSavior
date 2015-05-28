@@ -856,6 +856,11 @@ exports.commands = {
 				case 'eating':
 					var awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ';
 					break;
+				case 'sleep':
+				case 'asleep':
+				case 'sleeping':
+					var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+					break;
 				default:
 					var awayName = user.name + ' - Ⓐⓦⓐⓨ';
 			}

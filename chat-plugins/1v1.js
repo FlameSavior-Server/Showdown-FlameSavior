@@ -1,6 +1,5 @@
-/**
+/*
  * 1v1 Plugin
- * because jd is a shit fucker
  * by: panpawn
  */
 

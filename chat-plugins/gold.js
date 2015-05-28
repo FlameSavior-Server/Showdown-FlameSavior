@@ -1,3 +1,9 @@
+/* gold.js plugin
+ * This file contains various
+ * different custom commands
+ * and scripts for the Gold server
+ */
+
 var fs = require('fs');
 var closeShop = false;
 var closedShop = 0;

@@ -1,3 +1,8 @@
+/* Poof chat-plugin
+ * A script that handles the poof command
+ * by: kota
+ */
+
 const messages = [
 	"ventured into Shrek's Swamp.",
 	"disrespected the OgreLord!",

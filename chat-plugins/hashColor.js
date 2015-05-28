@@ -1,3 +1,8 @@
+/* Pokemon Showdown hashColor function
+ * This gives the color of a username
+ * based on the userid.
+*/
+
 if (typeof Gold === 'undefined') global.Gold = {};
 var MD5 = require('MD5');
 var colorCache = {};

@@ -35,22 +35,17 @@ exports.commands = {
 					this.sendReplyBox("There have been " + Object.size(seenData) + " user names recorded in this database.");
 					break;
 				default:
-				switch (target.length <= 16) {
-					case true:
-						if (!this.canBroadcast()) return;
-						var userid = toId(target);
-						if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
-						if (Users(target) && Users(target).connected) return this.sendReplyBox('<button class="astext" name="parseCommand" value="/user ' + target + '" target="_blank"><b><font color="' + userNameColor + '">' + target + '</b></font></button> is currently <font color="green">online</font>.');
-						if (!seenData[userid]) return this.sendReplyBox('<button class="astext" name="parseCommand" value="/user ' + target + '" target="_blank"><b><font color="' + userNameColor + '">' + target + "</b></font></button> has <font color=\"red\">never</font> been seen online.");
-						var date = new Date(seenData[userid]);
-						var userLastSeen = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a");
-						var userLastSeenLabel = userLastSeen.substr(-2).toUpperCase(); //AM or PM
-						this.sendReplyBox('The user <button class="astext" name="parseCommand" value="/user ' + target + '" target="_blank"><b><font color="' + userNameColor + '">' + target + '</b></font></button> was last seen online on ' + userLastSeen.substring(0, userLastSeen.length - 2) + userLastSeenLabel + ' EST.');
-						break;
-					case false:
-						return this.sendReply("Usernames cannot be over 16 characters.");
-						break;
-				}
+					if (!this.canBroadcast()) return;
+					var userid = toId(target);
+					if (target.length >=16) return this.sendReply("Usernames cannot be over 16 characters.");
+					if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
+					if (Users(target) && Users(target).connected) return this.sendReplyBox('<button class="astext" name="parseCommand" value="/user ' + target + '" target="_blank"><b><font color="' + userNameColor + '">' + target + '</b></font></button> is currently <font color="green">online</font>.');
+					if (!seenData[userid]) return this.sendReplyBox('<button class="astext" name="parseCommand" value="/user ' + target + '" target="_blank"><b><font color="' + userNameColor + '">' + target + "</b></font></button> has <font color=\"red\">never</font> been seen online.");
+					var date = new Date(seenData[userid]);
+					var userLastSeen = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a");
+					var userLastSeenLabel = userLastSeen.substr(-2).toUpperCase(); //AM or PM
+					this.sendReplyBox('The user <button class="astext" name="parseCommand" value="/user ' + target + '" target="_blank"><b><font color="' + userNameColor + '">' + target + '</b></font></button> was last seen online on ' + userLastSeen.substring(0, userLastSeen.length - 2) + userLastSeenLabel + ' EST.');
+					break;
 			}
 		} catch (e) {
 			return this.sendReply("Something failed: \n" + e.stack);

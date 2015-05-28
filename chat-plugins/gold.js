@@ -103,7 +103,7 @@ exports.commands = {
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
-		roomleader: function(target, room, user) {
+	roomleader: function(target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomleader - This room is't designed for per-room moderation to be added.");
 		}
@@ -120,7 +120,7 @@ exports.commands = {
 		//room.chatRoomData.leaders = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
-	deroomleader: function (target, room, user) {
+	goldderoomleader: function (target, room, user) {
 		if (!room.auth) {
 			return this.sendReply("/roomdeowner - This room isn't designed for per-room moderation");
 		}

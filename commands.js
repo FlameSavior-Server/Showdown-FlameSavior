@@ -46,7 +46,7 @@ var commands = exports.commands = {
 			var rank = Users.usergroups[u].charAt(0);
 			if (rank === ' ' || rank === '+') continue;
 			// In case the usergroups.csv file is not proper, we check for the server ranks.
-			if (ranks.indexOf(rank) > -1) {
+			if (ranks.indexOf(rank) >= 0) {
 				var name = Users.usergroups[u].substr(1);
 				if (!rankLists[rank]) rankLists[rank] = [];
 				if (name) rankLists[rank].push(name);
@@ -261,7 +261,7 @@ var commands = exports.commands = {
 		// `,` is a delimiter used by a lot of /commands
 		// `|` and `[` are delimiters used by the protocol
 		// `-` has special meaning in roomids
-		if (target.indexOf(',') >= 0 || target.indexOf('|') >= 0 || target.indexOf('[') >= 0 || target.indexOf('-') >= 0) {
+		if (target.includes(',') || target.includes('|') || target.includes('[') || target.includes('-')) {
 			return this.sendReply("Room titles can't contain any of: ,|[-");
 		}
 
@@ -390,7 +390,7 @@ var commands = exports.commands = {
 		if (target.length > 80) return this.sendReply("Error: Room description is too long (must be at most 80 characters).");
 		var normalizedTarget = ' ' + target.toLowerCase().replace('[^a-zA-Z0-9]+', ' ').trim() + ' ';
 
-		if (normalizedTarget.indexOf(' welcome ') >= 0) {
+		if (normalizedTarget.includes(' welcome ')) {
 			return this.sendReply("Error: Room description must not contain the word 'welcome'.");
 		}
 		if (normalizedTarget.slice(0, 9) === ' discuss ') {
@@ -545,7 +545,7 @@ var commands = exports.commands = {
 			return this.sendReply("User '" + name + "' is offline and unauthed, and so can't be promoted.");
 		}
 
-		var currentGroup = ((room.auth && room.auth[userid]) || ' ')[0];
+		var currentGroup = ((room.auth && room.auth[userid]) || (room.isPrivate !== true && targetUser.group) || ' ');
 		var nextGroup = target || Users.getNextGroupSymbol(currentGroup, cmd === 'roomdemote', true);
 		if (target === 'deauth') nextGroup = Config.groupsranking[0];
 		if (!Config.groups[nextGroup]) {
@@ -561,10 +561,10 @@ var commands = exports.commands = {
 			return this.sendReply("User '" + name + "' is already a " + groupName + " in this room.");
 		}
 		if (currentGroup !== ' ' && !user.can('room' + (Config.groups[currentGroup] ? Config.groups[currentGroup].id : 'voice'), null, room)) {
-			return this.sendReply("/" + cmd + " - Access denied for promoting from " + (Config.groups[currentGroup] ? Config.groups[currentGroup].name : "an undefined group") + ".");
+			return this.sendReply("/" + cmd + " - Access denied for promoting/demoting from " + (Config.groups[currentGroup] ? Config.groups[currentGroup].name : "an undefined group") + ".");
 		}
 		if (nextGroup !== ' ' && !user.can('room' + Config.groups[nextGroup].id, null, room)) {
-			return this.sendReply("/" + cmd + " - Access denied for promoting to " + Config.groups[nextGroup].name + ".");
+			return this.sendReply("/" + cmd + " - Access denied for promoting/demoting to " + Config.groups[nextGroup].name + ".");
 		}
 
 		if (nextGroup === ' ') {
@@ -876,9 +876,10 @@ var commands = exports.commands = {
 	},
 	unmutehelp: ["/unmute [username] - Removes mute from user. Requires: % @ & ~"],
 
+	forcelock: 'lock',
 	l: 'lock',
 	ipmute: 'lock',
-	lock: function (target, room, user) {
+	lock: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help lock');
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 
@@ -896,8 +897,14 @@ var commands = exports.commands = {
 		}
 
 		if (targetUser.confirmed) {
-			var from = targetUser.deconfirm();
-			ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was locked by " + user.name + " and demoted from " + from.join(", ") + ".");
+			if (cmd === 'forcelock') {
+				var from = targetUser.deconfirm();
+				ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was locked by " + user.name + " and demoted from " + from.join(", ") + ".");
+			} else {
+				return this.sendReply("" + targetUser.name + " is a confirmed user. If you are sure you would like to lock them use /forcelock.");
+			}
+		} else if (cmd === 'forcelock') {
+			return this.sendReply("Use /lock; " + targetUser.name + " is not a confirmed user.");
 		}
 
 		targetUser.popup("" + user.name + " has locked you from talking in chats, battles, and PMing regular users." + (target ? "\n\nReason: " + target : "") + "\n\nIf you feel that your lock was unjustified, you can still PM staff members (%, @, &, and ~) to discuss it" + (Config.appealurl ? " or you can appeal:\n" + Config.appealurl : ".") + "\n\nYour lock will expire in a few days.");
@@ -934,8 +941,9 @@ var commands = exports.commands = {
 	},
 	unlockhelp: ["/unlock [username] - Unlocks the user. Requires: % @ & ~"],
 
+	forceban: 'ban',
 	b: 'ban',
-	ban: function (target, room, user) {
+	ban: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help ban');
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 
@@ -953,8 +961,14 @@ var commands = exports.commands = {
 		}
 
 		if (targetUser.confirmed) {
-			var from = targetUser.deconfirm();
-			ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
+			if (cmd === 'forceban') {
+				var from = targetUser.deconfirm();
+				ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
+			} else {
+				return this.sendReply("" + targetUser.name + " is a confirmed user. If you are sure you would like to ban them use /forceban.");
+			}
+		} else if (cmd === 'forceban') {
+			return this.sendReply("Use /ban; " + targetUser.name + " is not a confirmed user.");
 		}
 
 		targetUser.popup("" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");
@@ -1268,7 +1282,7 @@ var commands = exports.commands = {
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		var commaIndex = target.indexOf(',');
 		var targetUser, reason;
-		if (commaIndex !== -1) {
+		if (commaIndex >= 0) {
 			reason = target.substr(commaIndex + 1).trim();
 			target = target.substr(0, commaIndex).trim();
 		}
@@ -1298,7 +1312,7 @@ var commands = exports.commands = {
 		var isWin = process.platform === 'win32';
 		var logPath = 'logs/modlog/';
 
-		if (target.indexOf(',') > -1) {
+		if (target.includes(',')) {
 			var targets = target.split(',');
 			target = targets[1].trim();
 			roomId = toId(targets[0]) || room.id;
@@ -1608,7 +1622,7 @@ var commands = exports.commands = {
 			for (var i = 0; i < data.length; ++i) {
 				var line = data[i].split('#')[0].trim();
 				if (!line) continue;
-				if (line.indexOf('/') >= 0) {
+				if (line.includes('/')) {
 					rangebans.push(line);
 				} else if (line && !Users.bannedIps[line]) {
 					Users.bannedIps[line] = '#ipban';

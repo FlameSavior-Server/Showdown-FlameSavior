@@ -843,23 +843,24 @@ exports.commands = {
 		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
 		if (!user.isAway) {
 			user.originalName = user.name;
+			var awayName;
 			switch (cmd) {
 				case 'gaming':
-					var awayName = user.name + ' - ⒼⒶⓂⒺ';
+					awayName = user.name + ' - ⒼⒶⓂⒺ';
 					break;
 				case 'busy':
-					var awayName = user.name + ' - Ⓑⓤⓢⓨ';
+					awayName = user.name + ' - Ⓑⓤⓢⓨ';
 					break;
 				case 'eating':
-					var awayName = user.name + ' - Ⓔⓐⓣ';
+					awayName = user.name + ' - Ⓔⓐⓣ';
 					break;
 				case 'sleep':
 				case 'asleep':
 				case 'sleeping':
-					var awayName = user.name + ' - Ⓢⓛⓔⓔⓟ';
+					awayName = user.name + ' - Ⓢⓛⓔⓔⓟ';
 					break;
 				default:
-					var awayName = user.name + ' - Ⓐⓦⓐⓨ';
+					awayName = user.name + ' - Ⓐⓦⓐⓨ';
 			}
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);

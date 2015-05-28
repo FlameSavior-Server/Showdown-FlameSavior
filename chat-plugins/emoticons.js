@@ -1,7 +1,7 @@
 /* Emoticons Plugin
  * This is a chat-plugin for Emoticons
  * You will need a line in parser to actually 
- * parse this so that it works.
+ * parse this so that it works. (See command-parser.js)
  * Credits: panpawn, jd  
  */
 

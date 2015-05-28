@@ -12,25 +12,25 @@ var serialize = require('node-serialize');
 if (typeof Gold === 'undefined') global.Gold = {};
 
 Gold.emoticons = {
-	emoticons: {}, //much object such wow :^)
+	chatEmotes: {}, //much object such wow :^)
 	processEmoticons: function(text) {
 		var patterns = [],
 			metachars = /[[\]{}()*+?.\\|^$\-,&#\s]/g,
 			self = this;
-		for (var i in this.emoticons) {
-			if (this.emoticons.hasOwnProperty(i)) {
+		for (var i in this.chatEmotes) {
+			if (this.chatEmotes.hasOwnProperty(i)) {
 				patterns.push('(' + i.replace(metachars, "\\$&") + ')');
 			}
 		}
 		return text.replace(new RegExp(patterns.join('|'), 'g'), function(match) {
-			return typeof self.emoticons[match] != 'undefined' ?
-				'<img src="' + self.emoticons[match] + '" title="' + match + '"/>' :
+			return typeof self.chatEmotes[match] != 'undefined' ?
+				'<img src="' + self.chatEmotes[match] + '" title="' + match + '"/>' :
 				match;
 		});
 	},
 	processChatData: function(user, room, connection, message) {
 		var match = false;
-		for (var i in this.emoticons) {
+		for (var i in this.chatEmotes) {
 			if (message.indexOf(i) >= 0) {
 				match = true;
 			}
@@ -68,7 +68,7 @@ var emotes = {};
 function loadEmotes() {
 	try {
 		emotes = serialize.unserialize(fs.readFileSync('config/emotes.json', 'utf8'));
-		Object.merge(Gold.emoticons.emoticons, emotes);
+		Object.merge(Gold.emoticons.chatEmotes, emotes);
 	} catch (e) {}
 }
 setTimeout(function(){loadEmotes();},1000);
@@ -76,7 +76,7 @@ setTimeout(function(){loadEmotes();},1000);
 function saveEmotes() {
 	try {
 		fs.writeFileSync('config/emotes.json',serialize.serialize(emotes));
-		Object.merge(Gold.emoticons.emoticons, emotes);
+		Object.merge(Gold.emoticons.chatEmotes, emotes);
 	} catch (e) {}
 }
 
@@ -97,11 +97,11 @@ exports.commands = {
 					if (!this.can('ban')) return this.sendReply("Access denied.");
 					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /ezemote add, [emote], [link]");
 					var emoteName = parts[1];
-					if (Gold.emoticons.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
+					if (Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
 					var fileTypes = [".gif",".png",".jpg"];
 					if (fileTypes.indexOf(link.substr(-4)) < 0) return this.sendReply("ERROR: the emote you are trying to add must be a gif, png, or jpg.");
-					emotes[emoteName] = Gold.emoticons.emoticons[emoteName] = link;
+					emotes[emoteName] = Gold.emoticons.chatEmotes[emoteName] = link;
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " has been added.");
 					this.logModCommand(user.name + " added the emote " + emoteName);
@@ -115,8 +115,8 @@ exports.commands = {
 					if (!this.can('ban')) return this.sendReply("Access denied.");
 					if (!parts[1]) return this.sendReplyBox("/ezemote remove, [emote]");
 					var emoteName = parts[1];
-					if (!Gold.emoticons.emoticons[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " does not exist.");
-					delete Gold.emoticons.emoticons[emoteName];
+					if (!Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " does not exist.");
+					delete Gold.emoticons.chatEmotes[emoteName];
 					delete emotes[emoteName];
 					saveEmotes();
 					this.sendReply("The emote " + emoteName + " was removed.");
@@ -136,22 +136,18 @@ exports.commands = {
 				case 'view':
 					if (!this.canBroadcast()) return;
 					//if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					if (!room.emoteStatus) {
-						return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
-					} else {
-						var name = Object.keys(Gold.emoticons.emoticons);
-						emoticons = [];
-						var len = name.length;
-						while (len--) {
-							emoticons.push((Gold.emoticons.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
-						}
-						this.sendReplyBox("<b><u>List of emoticons (" + Object.size(emotes) + "):</b></u> <br/><br/>" + emoticons.join(' ').toString());
+					var name = Object.keys(Gold.emoticons.emoticons);
+					emoticons = [];
+					var len = name.length;
+					while (len--) {
+						emoticons.push((Gold.emoticons.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
 					}
+					this.sendReplyBox("<b><u>List of emoticons (" + Object.size(emotes) + "):</b></u> <br/><br/>" + emoticons.join(' ').toString());
 					break;
 				case 'object':
 					if (!this.canBroadcast()) return;
 					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					this.sendReplyBox("Gold.emoticons.emoticons = " + fs.readFileSync('config/emotes.json','utf8'));
+					this.sendReplyBox("Gold.emoticons.chatEmotes = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
 				case 'status':
 					if (!this.canBroadcast()) return;
@@ -204,7 +200,7 @@ exports.commands = {
 							"/ezemote <code>status</code> - Views the current status of emotes.<br />" +
 							"/ezemote <code>list</code> - Shows the emotes that were added with this command in a list form.<br />" +
 							"/ezemote <code>view</code> - Shows all of the current emotes with their respected image.<br />" +
-							"/ezemote <code>object</code> - Shows the object of Emoticons.emoticons. (Mostly for development usage)<br />" +
+							"/ezemote <code>object</code> - Shows the object of Gold.emoticons.chatEmotes. (Mostly for development usage)<br />" +
 							"/ezemote <code>help</code> - Shows this help command.<br />" +
 						"</td></table>"
 					);

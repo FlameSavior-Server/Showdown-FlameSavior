@@ -151,7 +151,7 @@ exports.commands = {
 				case 'object':
 					if (!this.canBroadcast()) return;
 					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					this.sendReplyBox(" ok = " + fs.readFileSync('config/emotes.json','utf8'));
+					this.sendReplyBox("Gold.emoticons.emoticons = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
 				case 'status':
 					if (!this.canBroadcast()) return;

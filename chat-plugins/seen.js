@@ -26,6 +26,8 @@ function updateSeen(userid) {
 }
 global.updateSeen = updateSeen;
 exports.commands = {
+
+	lastseen: 'seen',
 	seen: function (target, room, user) {
 		try {
 			var userNameColor = Gold.hashColor(toId(target)); 

@@ -107,6 +107,8 @@ exports.commands = {
 		if (toId(target) !== room.id) return this.sendReply("ERROR: you must be in said room in question, and you must also use the room as the target.");
 		try {
 			delete room.auth;
+			delete room.chatRoomData.auth;
+			Rooms.global.writeChatRoomData();
 			for (var i in Users.users) {
 				Users(i).updateIdentity(room.id);
 			}

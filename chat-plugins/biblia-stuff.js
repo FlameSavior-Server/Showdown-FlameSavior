@@ -9,14 +9,17 @@ var fs = require('fs');
 var serialize = require('node-serialize');
 var leagueRanks = {};
 var leagueFactions = {};
+var leagueType = {};
 var leagueName = "Biblia";
 var leagueRanksToHave = ["e4", "champ", "gl", "purgatory", "prof"];
 var leagueFactionsToHave = ["hell", "heaven", "earth", "space"];
+var ptypesToHave = ['fire','water','grass','bug','ground','rock','steel','fighting','flying','dragon','fairy','poison','dark','psychic','electric','normal','ice','ghost','ou','all'];
 
 if (typeof Gold === 'undefined') global.Gold = {};
 Gold.biblia = {
 	bibliafaction: {},
-	biblia: {}
+	biblia: {},
+	type: {}
 };
 
 function loadFaction() {
@@ -33,6 +36,23 @@ function saveFaction() {
 		Object.merge(Gold.biblia.bibliafaction, leagueFactions);
 	} catch (e) {};
 }
+
+
+function loadType() {
+	try {
+		leagueType = serialize.unserialize(fs.readFileSync('config/biblia-league-types.json', 'utf8'));
+		Object.merge(Gold.biblia.type, leagueType);
+	} catch (e) {};
+}
+setTimeout(function(){loadType();},1000);
+
+function saveType() {
+	try {
+		fs.writeFileSync('config/biblia-league-types.json',serialize.serialize(leagueType));
+		Object.merge(Gold.biblia.type, leagueType);
+	} catch (e) {};
+}
+
 
 function loadLeague() {
 	try {
@@ -62,7 +82,7 @@ exports.commands = {
 					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can give a " + leagueName + " rank!");
 					var targetUser = toId(parts[1]);
 					if (Gold.biblia.biblia[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
-					if (toId(parts[2]) !== 'e4' && toId(parts[2]) !== 'prof' && toId(parts[2]) !== 'champ' && toId(parts[2]) !== 'gl' && toId(parts[2]) !== 'purgatory') return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
+					if (toId(parts[2]).indexOf(leagueRanksToHave) < 0) return this.sendReply("Ahhhh!  You didn't enter a valid league rank! (" + leagueRanksToHave + ")");
 					leagueRanks[targetUser] = Gold.biblia.biblia[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
 					saveLeague();
 					this.sendReply(targetUser + " was given the league rank of " + parts[2]);
@@ -103,8 +123,8 @@ exports.commands = {
 					if (!parts[1] || !parts[2]) return this.sendReply("ERROR!  Usage: /biblia givefaction, [user], [faction] - Gives a user a league faction.");
 					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can give a " + leagueName + " faction!");
 					var targetUser = toId(parts[1]);
-					if (Gpld.biblia.bibliafaction[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league faction!");
-					if (toId(parts[2]) !== 'hell' || toId(parts[2]) == 'heaven') return this.sendReply("Ahhhh!  You didn't enter a valid league faction! (" + leagueFactionsToHave + ")");
+					if (Gold.biblia.bibliafaction[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league faction!");
+					if (toId(parts[2]) !== 'hell' || toId(parts[2]) !== 'heaven' || toId(parts[2]) !== 'earth' || toId(parts[2]) !== 'space') return this.sendReply("Ahhhh!  You didn't enter a valid league faction! (" + leagueFactionsToHave + ")");
 					leagueFactions[targetUser] = Gold.biblia.bibliafaction[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
 					saveFaction();
 					this.sendReply(targetUser + " was given the league faction of " + parts[2]);
@@ -122,6 +142,32 @@ exports.commands = {
 					this.sendReply(targetUser + "'s league faction was removed.");
 					this.logModCommand(targetUser + "'s league faction was removed by " + user.name);
 					room.add(targetUser + "'s league faction was removed by " + user.name + ".");
+					break;
+				case 'givetype':
+					if (!parts[1] || !parts[2]) return this.sendReply("ERROR!  Usage: /biblia givetype, [user], [type] - Gives a user a league type.");
+					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can give a " + leagueName + " rank!");
+					var targetUser = toId(parts[1]);
+					if (Gold.biblia.type[targetUser]) return this.sendReply("ERROR! The user " + targetUser + " already has a league rank!");
+					var a = parts.splice(2, parts.length).join(',');
+					if (ptypesToHave.split(",").indexOf(a)) return this.sendReply("Ahhhh!  You didn't enter a valid league type! (" + ptypesToHave + ")");
+					leagueType[targetUser] = Gold.biblia.type[targetUser] = toId(parts[2]); //shouldn't have to take the id here, this is for safety precautions
+					saveType();
+					this.sendReply(targetUser + " was given the league type of " + parts[2]);
+					this.logModCommand(targetUser + " was given the league type of " + parts[2]);
+					room.add(targetUser + " was given the league type of " + parts[2] + " by " + user.name + ".");
+					break;
+					break;
+				case 'taketype':
+					if (!this.can('declare', null, room)) return this.sendReply("Only room owners and up can take a " + leagueName + " type!");
+					if (!parts[1]) return this.sendReply("Usage: /biblia taketype, [user] - Removes a users type.");
+					var targetUser = toId(parts[1]);
+					if (!Gold.biblia.type[targetUser]) return this.sendReply("ERROR!  The user " + targetUser + " does not have an existing faction to remove!");
+					delete Gold.biblia.type[targetUser];
+					delete leagueType[targetUser];
+					saveType();
+					this.sendReply(targetUser + "'s league type was removed.");
+					this.logModCommand(targetUser + "'s league type was removed by " + user.name);
+					room.add(targetUser + "'s league type was removed by " + user.name + ".");
 					break;
 				//Development commands
 				case 'rankobject':
@@ -146,6 +192,8 @@ exports.commands = {
 					var rankLabel = "";
 					var fuckingFaction = Gold.biblia.bibliafaction[toId(parts[1])];
 					if (!fuckingFaction) fuckingFaction = "None.";
+					var type = Gold.biblia.type[toId(parts[1])];
+					if (!type) type = "None.";
 					switch (rank) {
 						case 'e4':
 							rankLabel = "Elite Four";
@@ -173,8 +221,9 @@ exports.commands = {
 					}
 					return this.sendReplyBox(
 						"<b>User: <font color=\"" + Gold.hashColor(toId(parts[1])) + "\">" + parts[1] + "</font></b><br />" +
-						"<b>League Faction</b>: " + fuckingFaction.substring(0,1).toUpperCase() + fuckingFaction.substring(1,fuckingFaction.length) + "<br />" +
-						"<b>League Rank</b>: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + " " + img
+						"<b>League Faction</b>: " + leagueFaction.substring(0,1).toUpperCase() + leagueFaction.substring(1,leagueFaction.length) + "<br />" +
+						"<b>League Rank</b>: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + " " + img + "<br />" +
+						"<b>Type:</b> " + leagueType.substring(0,1).toUpperCase() + leagueType.substring(1,leagueType.length) + " " + "<br />"
 					); 
 					break;
 				case 'help':
@@ -186,6 +235,8 @@ exports.commands = {
 						"/biblia takerank, [user] - Removes that user's league rank.  Requires # and up.<br />" +
 						"/biblia givefaction, [user], [faction] - Gives a user a league faction. Requires # and up.<br />" +
 						"/biblia takefaction, [user] - Removes that user's league faction. Requires # and up.<br />" +
+						"/biblia givetype, [user], [type] - Sets the type the user specializes in within the league. Requires # and up.<br />" +
+						"/biblia taketype, [user] - Removes that user's league type. Requires # and up.<br />" +
 						"/biblia profile, [user] - Shows that user's league rank and faction according to the biblia script."
 					);
 			}

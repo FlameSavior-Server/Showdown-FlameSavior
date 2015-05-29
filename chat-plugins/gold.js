@@ -110,7 +110,7 @@ exports.commands = {
 			for (var i in Users.users) {
 				Users(i).updateIdentity(room.id);
 			}
-			this.addModCommand("All room authority (minus room founder) have been erased by " + user.name + ".");
+			this.addModCommand("All room authority have been erased by " + user.name + ".");
 		} catch (e) {
 			console.log("deleteroomauth broke\n" + e.stack);
 		}

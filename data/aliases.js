@@ -311,6 +311,7 @@ exports.BattleAliases = {
 	"zam": "Alakazam",
 	"zard": "Charizard",
 	"ohmagod":"Plasmanta",
+	"weed": "Cherubi",
 
 	// moves
 	"bpass": "Baton Pass",

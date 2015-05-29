@@ -2501,16 +2501,6 @@ exports.commands = {
 		});
 	},
 
-	website: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');
-	},
-
-	news: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Gold\'s news can be found <a href="http://goldserver.weebly.com/news.html">here</a>.');
-	},
-
 	facebook: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Gold\'s Facebook page can be found <a href="https://www.facebook.com/pages/Gold-Showdown/585196564960185">here</a>.');

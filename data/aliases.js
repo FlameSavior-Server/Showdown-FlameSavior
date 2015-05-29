@@ -318,6 +318,7 @@ exports.BattleAliases = {
 	"bp": "Baton Pass",
 	"cc": "Close Combat",
 	"cm": "Calm Mind",
+	"darude": "Sandstorm",
 	"dd": "Dragon Dance",
 	"eq": "Earthquake",
 	"espeed": "ExtremeSpeed",

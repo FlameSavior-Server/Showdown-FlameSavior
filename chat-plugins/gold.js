@@ -101,6 +101,15 @@ exports.commands = {
 		connection.popup('Room Auth in "' + room.title + '"\n\n**Founder**:\n' + founder + '\n**Owner(s)**:\n' + owners + '\n**Leaders(s)**:\n' + leaders + '\n**Moderator(s)**:\n' + mods + '\n**Driver(s)**: \n' + drivers + '\n**Voice(s)**: \n' + voices);
 	},
 
+	deleteroomauth: function(target, room, user) {
+		if (!this.can('hotpatch')) return false;
+		delete room.auth;
+		for (var i in Users.users) {
+			Users(i).updateIdentity(room.id);
+		}
+		this.addModCommand("All room authority have been erased by " + user.name + ".");
+	},
+
 	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");

@@ -102,14 +102,18 @@ exports.commands = {
 	},
 
 	deleteroomauth: function(target, room, user) {
-		if (!this.can('hotpatch')) return false;
+		if (!this.can('pban')) return false;
 		if (!target) return this.sendReply("Usage: /deleteroomauth (roomname).");
-		if (toId(target) !== room.id) return this.sendReply("You must enter in the room name, and you must also be in said room.");
-		delete room.auth;
-		for (var i in Users.users) {
-			Users(i).updateIdentity(room.id);
+		if (toId(target) !== room.id) return this.sendReply("You must be in the room name, and you must also be in said room.");
+		try {
+			delete room.auth;
+			for (var i in Users.users) {
+				Users(i).updateIdentity(room.id);
+			}
+			this.addModCommand("All room authority (minus room founder) have been erased by " + user.name + ".");
+		} catch (e) {
+			console.log("deleteroomauth broke\n" + e.stack);
 		}
-		this.addModCommand("All room authority have been erased by " + user.name + ".");
 	},
 
 	roomfounder: function(target, room, user) {

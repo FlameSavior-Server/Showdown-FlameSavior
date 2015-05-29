@@ -103,6 +103,8 @@ exports.commands = {
 
 	deleteroomauth: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
+		if (!target) return this.sendReply("Usage: /deleteroomauth (roomname).");
+		if (toId(target) !== room.id) return this.sendReply("You must enter in the room name, and you must also be in said room.");
 		delete room.auth;
 		for (var i in Users.users) {
 			Users(i).updateIdentity(room.id);

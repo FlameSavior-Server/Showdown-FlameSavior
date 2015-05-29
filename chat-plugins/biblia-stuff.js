@@ -223,7 +223,7 @@ exports.commands = {
 						"<b>User: <font color=\"" + Gold.hashColor(toId(parts[1])) + "\">" + parts[1] + "</font></b><br />" +
 						"<b>League Faction</b>: " + leagueFaction.substring(0,1).toUpperCase() + leagueFaction.substring(1,leagueFaction.length) + "<br />" +
 						"<b>League Rank</b>: " + rankLabel.substring(0,1).toUpperCase() + rankLabel.substring(1,rankLabel.length) + " " + img + "<br />" +
-						"<b>Type:</b> " + leagueType.substring(0,1).toUpperCase() + leagueType.substring(1,leagueType.length) + " " + "<br />"
+						"<b>Type:</b> " + leagueType.substring(0,1).toUpperCase() + leagueType.substring(1,leagueType.length) + "<br />"
 					); 
 					break;
 				case 'help':

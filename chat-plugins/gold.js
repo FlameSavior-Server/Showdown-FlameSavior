@@ -104,7 +104,7 @@ exports.commands = {
 	deleteroomauth: function(target, room, user) {
 		if (!this.can('pban')) return false;
 		if (!target) return this.sendReply("Usage: /deleteroomauth (roomname).");
-		if (toId(target) !== room.id) return this.sendReply("You must be in the room name, and you must also be in said room.");
+		if (toId(target) !== room.id) return this.sendReply("ERROR: you must be in said room in question, and you must also use the room as the target.");
 		try {
 			delete room.auth;
 			for (var i in Users.users) {

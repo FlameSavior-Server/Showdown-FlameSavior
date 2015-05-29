@@ -350,7 +350,7 @@ exports.commands = {
 		var targetUser = toId(target.slice(0, commaIndex));
 		var message = target.slice(commaIndex + 1).trim();
 		if (message.replace(/(<([^>]+)>)/ig, "").length > 600) return this.sendReply('tells must be 600 or fewer characters, excluding HTML.');
-		message = htmlfix(message);
+		message = Tools.escapeHTML(message);
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}
@@ -2781,12 +2781,4 @@ function getAvatar(user) {
 	}
 
 	return avatar;
-}
-function htmlfix(target) {
-	var fixings = ['<3', ':>', ':<'];
-	for (var u in fixings) {
-		while (target.indexOf(fixings[u]) != -1)
-			target = target.substring(0, target.indexOf(fixings[u])) + '< ' + target.substring(target.indexOf(fixings[u]) + 1);
-	}
-	return target;
 }

@@ -66,6 +66,7 @@ exports.commands = {
 		room.mods = room.mods.split(',');
 		room.drivers = room.drivers.split(',');
 		room.voices = room.voices.split(',');
+		room.leaders = room.leaders.split(',');
 
 		for (var u in room.owners) {
 			if (room.owners[u] != '') owners.push(room.owners[u]);
@@ -79,11 +80,17 @@ exports.commands = {
 		for (var u in room.voices) {
 			if (room.voices[u] != '') voices.push(room.voices[u]);
 		}
+		for (var u in room.leaders) {
+			if (room.leaders[u] != '') leaders.push(room.leaders[u]);
+		}
 		if (owners.length > 0) {
 			owners = owners.join(', ');
 		}
 		if (mods.length > 0) {
 			mods = mods.join(', ');
+		}
+		if (leaders.length > 0) {
+			leaders = leaders.join(', ');
 		}
 		if (drivers.length > 0) {
 			drivers = drivers.join(', ');
@@ -91,7 +98,7 @@ exports.commands = {
 		if (voices.length > 0) {
 			voices = voices.join(', ');
 		}
-		connection.popup('Room Auth in "' + room.id + '"\n\n**Founder**: \n' + founder + '\n**Owner(s)**: \n' + owners + '\n**Moderator(s)**: \n' + mods + '\n**Driver(s)**: \n' + drivers + '\n**Voice(s)**: \n' + voices);
+		connection.popup('Room Auth in "' + room.title + '"\n\n**Founder**:\n' + founder + '\n**Owner(s)**:\n' + owners + '\n**Leaders(s)**:\n' + leaders + '\n**Moderator(s)**:\n' + mods + '\n**Driver(s)**: \n' + drivers + '\n**Voice(s)**: \n' + voices);
 	},
 
 	roomfounder: function(target, room, user) {

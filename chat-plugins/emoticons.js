@@ -136,7 +136,7 @@ exports.commands = {
 				case 'view':
 					if (!this.canBroadcast()) return;
 					//if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					var name = Object.keys(Gold.emoticons.emoticons);
+					var name = Object.keys(Gold.emoticons.chatEmotes);
 					emoticons = [];
 					var len = name.length;
 					while (len--) {

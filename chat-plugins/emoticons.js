@@ -206,7 +206,11 @@ exports.commands = {
 					);
 			}
 		} catch (e) {
-			console.log("ERROR!  The EZ-Emote script has crashed!\n" + e.stack);
+			try {
+				Rooms.rooms.development.add(e.stack);
+			} catch (e) {
+				console.log("ERROR!  The EZ-Emote script has crashed!\n" + e.stack);
+			}
 		}
 	}
 };

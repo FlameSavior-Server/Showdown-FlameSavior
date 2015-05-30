@@ -57,13 +57,14 @@ exports.commands = {
                              '\n**Drivers**:\n' + staff['drivers'].join(', ') +
                              '\n**Voices**:\n' + staff['voices'].join(', ')
             );
-        })
+        });
     },
+
     roomfounder:  function (target, room, user) {
         if (!room.chatRoomData) {
             return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");
         }
-        var target = this.splitTarget(target, true);
+        target = this.splitTarget(target, true);
         var targetUser = this.targetUser;
         if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
         if (!this.can('pban')) return false;
@@ -206,19 +207,19 @@ exports.commands = {
     pa: function(target, room, user) {
         if (!target) return this.sendReply('/punishall [lock, mute, unmute, ban]. - Requires eval access.');
         if (target.indexOf('ban ') > -1) {
-            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
         }
         if (target.indexOf('ban') > -1) {
-            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
         }
         if (target.indexOf(' ban') > -1) {
-            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
         }
         if (target.indexOf('lock') > -1) {
-            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
         }
         if (target.indexOf('lock ') > -1) {
-            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.')
+            return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
         }
         return this.parse('/eval for(var u in Users.users) Users.users[u].' + target + '()');
     },

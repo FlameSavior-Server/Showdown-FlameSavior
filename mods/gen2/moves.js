@@ -262,7 +262,7 @@ exports.BattleMovedex = {
 		onHit: function (pokemon) {
 			var noMirror = {metronome: 1, mimic: 1, mirrormove: 1, sketch: 1, sleeptalk: 1, transform: 1};
 			var foe = pokemon.side.foe.active[0];
-			if (!foe || !foe.lastMove || (!pokemon.activeTurns && !foe.moveThisTurn) || noMirror[foe.lastMove] || pokemon.moves.indexOf(foe.lastMove) !== -1) {
+			if (!foe || !foe.lastMove || (!pokemon.activeTurns && !foe.moveThisTurn) || noMirror[foe.lastMove] || pokemon.moves.indexOf(foe.lastMove) >= 0) {
 				return false;
 			}
 			this.useMove(foe.lastMove, pokemon);
@@ -290,6 +290,18 @@ exports.BattleMovedex = {
 			} else {
 				this.heal(pokemon.maxhp / 2);
 			}
+		}
+	},
+	outrage: {
+		inherit: true,
+		onMoveFail: function (target, source, move) {
+			source.addVolatile('lockedmove');
+		}
+	},
+	petaldance: {
+		inherit: true,
+		onMoveFail: function (target, source, move) {
+			source.addVolatile('lockedmove');
 		}
 	},
 	psywave: {
@@ -393,6 +405,14 @@ exports.BattleMovedex = {
 			this.useMove(move, pokemon);
 		}
 	},
+	solarbeam: {
+		inherit: true,
+		onBasePower: function (basePower, pokemon, target) {
+			if (this.isWeather('raindance')) {
+				return this.chainModify(0.5);
+			}
+		}
+	},
 	spikes: {
 		inherit: true,
 		effect: {
@@ -491,6 +511,12 @@ exports.BattleMovedex = {
 			} else {
 				this.heal(pokemon.maxhp / 2);
 			}
+		}
+	},
+	thrash: {
+		inherit: true,
+		onMoveFail: function (target, source, move) {
+			source.addVolatile('lockedmove');
 		}
 	},
 	triattack: {

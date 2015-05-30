@@ -1,3 +1,4 @@
+/*
 exports.commands = {
 	bigtalk: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;
@@ -14,3 +15,4 @@ exports.commands = {
 		}
 	}
 };
+*/

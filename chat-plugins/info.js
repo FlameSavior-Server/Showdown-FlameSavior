@@ -1873,7 +1873,158 @@ var commands = exports.commands = {
 	 * Data Search Tools
 	 *********************************************************/
 
-	
+	pstats: 'data',
+	stats: 'data',
+	dex: 'data',
+	pokedex: 'data',
+	data: function (target, room, user, connection, cmd) {
+		if (!this.canBroadcast()) return;
+
+		var buffer = '';
+		var targetId = toId(target);
+		if (!targetId) return this.parse('/help data');
+		if (targetId === '' + parseInt(targetId)) {
+			for (var p in Tools.data.Pokedex) {
+				var pokemon = Tools.getTemplate(p);
+				if (pokemon.num === parseInt(target)) {
+					target = pokemon.species;
+					targetId = pokemon.id;
+					break;
+				}
+			}
+		}
+		var newTargets = Tools.dataSearch(target);
+		var showDetails = (cmd === 'dt' || cmd === 'details');
+		if (newTargets && newTargets.length) {
+			for (var i = 0; i < newTargets.length; ++i) {
+				if (newTargets[i].id !== targetId && !Tools.data.Aliases[targetId] && !i) {
+					buffer = "No Pokemon, item, move, ability or nature named '" + target + "' was found. Showing the data of '" + newTargets[0].name + "' instead.\n";
+				}
+				if (newTargets[i].searchType === 'nature') {
+					buffer += "" + newTargets[i].name + " nature: ";
+					if (newTargets[i].plus) {
+						var statNames = {'atk': "Attack", 'def': "Defense", 'spa': "Special Attack", 'spd': "Special Defense", 'spe': "Speed"};
+						buffer += "+10% " + statNames[newTargets[i].plus] + ", -10% " + statNames[newTargets[i].minus] + ".";
+					} else {
+						buffer += "No effect.";
+					}
+					return this.sendReply(buffer);
+				} else {
+					buffer += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
+				}
+			}
+		} else {
+			return this.sendReply("No Pokemon, item, move, ability or nature named '" + target + "' was found. (Check your spelling?)");
+		}
+
+		if (showDetails) {
+			var details;
+			var isSnatch = false;
+			var isMirrorMove = false;
+			if (newTargets[0].searchType === 'pokemon') {
+				var pokemon = Tools.getTemplate(newTargets[0].name);
+				var weighthit = 20;
+				if (pokemon.weightkg >= 200) {
+					weighthit = 120;
+				} else if (pokemon.weightkg >= 100) {
+					weighthit = 100;
+				} else if (pokemon.weightkg >= 50) {
+					weighthit = 80;
+				} else if (pokemon.weightkg >= 25) {
+					weighthit = 60;
+				} else if (pokemon.weightkg >= 10) {
+					weighthit = 40;
+				}
+				details = {
+					"Dex#": pokemon.num,
+					"Gen": pokemon.gen,
+					"Height": pokemon.heightm + " m",
+					"Weight": pokemon.weightkg + " kg <em>(" + weighthit + " BP)</em>",
+					"Dex Colour": pokemon.color,
+					"Egg Group(s)": pokemon.eggGroups.join(", ")
+				};
+				if (!pokemon.evos.length) {
+					details["<font color=#585858>Does Not Evolve</font>"] = "";
+				} else {
+					details["Evolution"] = pokemon.evos.map(function (evo) {
+						evo = Tools.getTemplate(evo);
+						return evo.name + " (" + evo.evoLevel + ")";
+					}).join(", ");
+				}
+			} else if (newTargets[0].searchType === 'move') {
+				var move = Tools.getMove(newTargets[0].name);
+				details = {
+					"Priority": move.priority,
+					"Gen": move.gen
+				};
+
+				if (move.secondary || move.secondaries) details["<font color=black>&#10003; Secondary effect</font>"] = "";
+				if (move.flags['contact']) details["<font color=black>&#10003; Contact</font>"] = "";
+				if (move.flags['sound']) details["<font color=black>&#10003; Sound</font>"] = "";
+				if (move.flags['bullet']) details["<font color=black>&#10003; Bullet</font>"] = "";
+				if (move.flags['pulse']) details["<font color=black>&#10003; Pulse</font>"] = "";
+				if (!move.flags['protect'] && !/(ally|self)/i.test(move.target)) details["<font color=black>&#10003; Bypasses Protect</font>"] = "";
+				if (move.flags['authentic']) details["<font color=black>&#10003; Bypasses Substitutes</font>"] = "";
+				if (move.flags['defrost']) details["<font color=black>&#10003; Thaws user</font>"] = "";
+				if (move.flags['bite']) details["<font color=black>&#10003; Bite</font>"] = "";
+				if (move.flags['punch']) details["<font color=black>&#10003; Punch</font>"] = "";
+				if (move.flags['powder']) details["<font color=black>&#10003; Powder</font>"] = "";
+				if (move.flags['reflectable']) details["<font color=black>&#10003; Bounceable</font>"] = "";
+				if (move.flags['gravity']) details["<font color=black>&#10007; Suppressed by Gravity</font>"] = "";
+
+				if (move.id === 'snatch') isSnatch = true;
+				if (move.id === 'mirrormove') isMirrorMove = true;
+
+				details["Target"] = {
+					'normal': "One Adjacent Pokemon",
+					'self': "User",
+					'adjacentAlly': "One Ally",
+					'adjacentAllyOrSelf': "User or Ally",
+					'adjacentFoe': "One Adjacent Opposing Pokemon",
+					'allAdjacentFoes': "All Adjacent Opponents",
+					'foeSide': "Opposing Side",
+					'allySide': "User's Side",
+					'allyTeam': "User's Side",
+					'allAdjacent': "All Adjacent Pokemon",
+					'any': "Any Pokemon",
+					'all': "All Pokemon"
+				}[move.target] || "Unknown";
+			} else if (newTargets[0].searchType === 'item') {
+				var item = Tools.getItem(newTargets[0].name);
+				details = {
+					"Gen": item.gen
+				};
+
+				if (item.fling) {
+					details["Fling Base Power"] = item.fling.basePower;
+					if (item.fling.status) details["Fling Effect"] = item.fling.status;
+					if (item.fling.volatileStatus) details["Fling Effect"] = item.fling.volatileStatus;
+					if (item.isBerry) details["Fling Effect"] = "Activates the Berry's effect on the target.";
+					if (item.id === 'whiteherb') details["Fling Effect"] = "Restores the target's negative stat stages to 0.";
+					if (item.id === 'mentalherb') details["Fling Effect"] = "Removes the effects of Attract, Disable, Encore, Heal Block, Taunt, and Torment from the target.";
+				} else {
+					details["Fling"] = "This item cannot be used with Fling.";
+				}
+				if (item.naturalGift) {
+					details["Natural Gift Type"] = item.naturalGift.type;
+					details["Natural Gift Base Power"] = item.naturalGift.basePower;
+				}
+			} else {
+				details = {};
+			}
+
+			buffer += '|raw|<font size="1">' + Object.keys(details).map(function (detail) {
+				return '<font color=#585858>' + detail + (details[detail] !== '' ? ':</font> ' + details[detail] : '</font>');
+			}).join("&nbsp;|&ThickSpace;") + '</font>';
+
+			if (isSnatch) buffer += '&nbsp;|&ThickSpace;<a href="http://pokemonshowdown.com/dex/moves/snatch"><font size="1">Snatchable Moves</font></a>';
+			if (isMirrorMove) buffer += '&nbsp;|&ThickSpace;<a href="http://pokemonshowdown.com/dex/moves/mirrormove"><font size="1">Mirrorable Moves</font></a>';
+		}
+		this.sendReply(buffer);
+	},
+	datahelp: ["/data [pokemon/item/move/ability] - Get details on this pokemon/item/move/ability/nature.",
+		"!data [pokemon/item/move/ability] - Show everyone these details. Requires: + % @ & ~"],
+
 	dt: 'details',
 	details: function () {
 		CommandParser.commands.data.apply(this, arguments);
@@ -1970,8 +2121,9 @@ var commands = exports.commands = {
 				continue;
 			}
 
-			if (target.indexOf(' type') > -1) {
-				target = target.charAt(0).toUpperCase() + target.substring(1, target.indexOf(' type'));
+			var typeIndex = target.indexOf(' type');
+			if (typeIndex >= 0) {
+				target = target.charAt(0).toUpperCase() + target.substring(1, typeIndex);
 				if (target in Tools.data.TypeChart) {
 					if (!searches['types']) searches['types'] = {};
 					if (Object.count(searches['types'], true) === 2 && !isNotSearch) return this.sendReplyBox("Specify a maximum of two types.");
@@ -1982,7 +2134,7 @@ var commands = exports.commands = {
 			}
 
 			var inequality = target.search(/>|<|=/);
-			if (inequality > -1) {
+			if (inequality >= 0) {
 				if (isNotSearch) return this.sendReplyBox("You cannot use the negation symbol '!' in stat ranges.");
 				inequality = target.charAt(inequality);
 				var targetParts = target.replace(/\s/g, '').split(inequality);
@@ -2067,7 +2219,7 @@ var commands = exports.commands = {
 						if ('lc' in searches[search]) {
 							// some LC legal Pokemon are stored in other tiers (Ferroseed/Murkrow etc)
 							// this checks for LC legality using the going criteria, instead of dex[mon].tier
-							var isLC = (dex[mon].evos && dex[mon].evos.length > 0) && !dex[mon].prevo && dex[mon].tier !== "LC Uber" && Tools.data.Formats['lc'].banlist.indexOf(dex[mon].species) === -1;
+							var isLC = (dex[mon].evos && dex[mon].evos.length > 0) && !dex[mon].prevo && dex[mon].tier !== "LC Uber" && Tools.data.Formats['lc'].banlist.indexOf(dex[mon].species) < 0;
 							if ((searches[search]['lc'] && !isLC) || (!searches[search]['lc'] && isLC)) {
 								delete dex[mon];
 								continue;
@@ -2121,7 +2273,7 @@ var commands = exports.commands = {
 					for (var mon in dex) {
 						if (!dex[mon].learnset) continue;
 						for (var move in searches[search]) {
-							var canLearn = (dex[mon].learnset.sketch && ['chatter', 'struggle', 'magikarpsrevenge'].indexOf(move) === -1) || dex[mon].learnset[move];
+							var canLearn = (dex[mon].learnset.sketch && ['chatter', 'struggle', 'magikarpsrevenge'].indexOf(move) < 0) || dex[mon].learnset[move];
 							if ((!canLearn && searches[search][move]) || (searches[search][move] === false && canLearn)) {
 								delete dex[mon];
 								break;
@@ -2187,7 +2339,7 @@ var commands = exports.commands = {
 
 		var results = [];
 		for (var mon in dex) {
-			if (dex[mon].baseSpecies && results.indexOf(dex[mon].baseSpecies) > -1) continue;
+			if (dex[mon].baseSpecies && results.indexOf(dex[mon].baseSpecies) >= 0) continue;
 			results.push(dex[mon].species);
 		}
 
@@ -2241,8 +2393,9 @@ var commands = exports.commands = {
 				target = target.substr(1);
 			}
 
-			if (target.indexOf(' type') > -1) {
-				target = target.charAt(0).toUpperCase() + target.substring(1, target.indexOf(' type'));
+			var typeIndex = target.indexOf(' type');
+			if (typeIndex >= 0) {
+				target = target.charAt(0).toUpperCase() + target.substring(1, typeIndex);
 				if (!(target in Tools.data.TypeChart)) return this.sendReplyBox("Type '" + Tools.escapeHTML(target) + "' not found.");
 				if (!searches['type']) searches['type'] = {};
 				if ((searches['type'][target] && isNotSearch) || (searches['type'][target] === false && !isNotSearch)) return this.sendReplyBox('A search cannot both exclude and include a type.');
@@ -2296,7 +2449,7 @@ var commands = exports.commands = {
 			}
 
 			var inequality = target.search(/>|<|=/);
-			if (inequality > -1) {
+			if (inequality >= 0) {
 				if (isNotSearch) return this.sendReplyBox("You cannot use the negation symbol '!' in quality ranges.");
 				inequality = target.charAt(inequality);
 				var targetParts = target.replace(/\s/g, '').split(inequality);
@@ -2582,7 +2735,7 @@ var commands = exports.commands = {
 		var template = Tools.getTemplate(targets[0]);
 		var move = {};
 		var problem;
-		var format = {rby:'gen1ou', gsc:'gen2ou', adv:'gen3oubeta', dpp:'gen4ou', bw2:'gen5ou'}[cmd.substring(0, 3)];
+		var format = {rby:'gen1ou', gsc:'gen2ou', adv:'gen3ou', dpp:'gen4ou', bw2:'gen5ou'}[cmd.substring(0, 3)];
 		var all = (cmd === 'learnall');
 		if (cmd === 'learn5') lsetData.set.level = 5;
 		if (cmd === 'g6learn') lsetData.format = {noPokebank: true};
@@ -3132,12 +3285,13 @@ var commands = exports.commands = {
 			matched = true;
 			if (target !== 'all') buffer += "Battle with an inverted type chart.<br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3518146/\">Inverse Battle</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3526371/\">Inverse Battle Viability Ranking</a><br />";
 		}
 		if (target === 'all' || target === 'almostanyability' || target === 'aaa') {
 			matched = true;
 			if (target !== 'all') buffer += "Pokémon can use any ability, barring the few that are banned.<br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3528058/\">Almost Any Ability</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3517258/\">Almost Any Ability Viability Ranking</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3538917/\">Almost Any Ability Viability Ranking</a><br />";
 		}
 		if (target === 'all' || target === 'stabmons') {
 			matched = true;
@@ -3152,10 +3306,6 @@ var commands = exports.commands = {
 		if (target === 'all' || target === 'averagemons') {
 			matched = true;
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3526481/\">Averagemons</a><br />";
-		}
-		if (target === 'all' || target === 'classichackmons' || target === 'hackmons' || target === 'ch') {
-			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3521887/\">Classic Hackmons</a><br />";
 		}
 		if (target === 'all' || target === 'hiddentype' || target === 'ht') {
 			matched = true;
@@ -3375,13 +3525,13 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'underused' || target === 'uu') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3537422/\">np: UU Stage 3</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3538856/\">np: UU Stage 3.1</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/uu/\">UU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523649/\">UU Viability Ranking</a><br />";
 		}
 		if (target === 'all' || target === 'rarelyused' || target === 'ru') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3537443/\">np: RU Stage 9</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3538971/\">np: RU Stage 10</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/ru/\">RU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3538036/\">RU Viability Ranking</a><br />";
 		}
@@ -3399,7 +3549,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'doublesou' || target === 'doubles' || target === 'smogondoubles') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3525739/\">np: Doubles OU Stage 1.5</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3538960/\">np: Doubles OU Stage 2</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3498688/\">Doubles OU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3522814/\">Doubles OU Viability Ranking</a><br />";
 		}
@@ -3558,32 +3708,94 @@ var commands = exports.commands = {
 
 	roll: 'dice',
 	dice: function (target, room, user) {
-		if (!target) return this.parse('/help dice');
+		if (!target || target.match(/[^d\d\s\-\+HL]/i)) return this.parse('/help dice');
 		if (!this.canBroadcast()) return;
-		var d = target.indexOf("d");
-		if (d >= 0) {
-			var num = parseInt(target.substring(0, d));
-			var faces;
-			if (target.length > d) faces = parseInt(target.substring(d + 1));
-			if (isNaN(num)) num = 1;
-			if (isNaN(faces)) return this.sendReply("The number of faces must be a valid integer.");
-			if (faces < 1 || faces > 1000) return this.sendReply("The number of faces must be between 1 and 1000");
-			if (num < 1 || num > 20) return this.sendReply("The number of dice must be between 1 and 20");
-			var rolls = [];
-			var total = 0;
-			for (var i = 0; i < num; ++i) {
-				rolls[i] = (Math.floor(faces * Math.random()) + 1);
-				total += rolls[i];
-			}
-			return this.sendReplyBox("Random number " + num + "x(1 - " + faces + "): " + rolls.join(", ") + "<br />Total: " + total);
+
+		// ~30 is widely regarded as the sample size required for sum to be a Gaussian distribution.
+		// This also sets a computation time constraint for safety.
+		var maxDice = 40;
+
+		var diceQuantity = 1;
+		var diceDataStart = target.indexOf('d');
+		if (diceDataStart >= 0) {
+			diceQuantity = Number(target.slice(0, diceDataStart));
+			target = target.slice(diceDataStart + 1);
+			if (!Number.isInteger(diceQuantity) || diceQuantity <= 0 || diceQuantity > maxDice) return this.sendReply("The amount of dice rolled should be a natural number up to " + maxDice + ".");
 		}
-		if (target && isNaN(target) || target.length > 21) return this.sendReply("The max roll must be a number under 21 digits.");
-		var maxRoll = (target) ? target : 6;
-		var rand = Math.floor(maxRoll * Math.random()) + 1;
-		return this.sendReplyBox("Random number (1 - " + maxRoll + "): " + rand);
+		var offset = 0;
+		var removeOutlier = 0;
+
+		var modifierData = target.match(/[\-\+]/);
+		if (modifierData) {
+			switch (target.slice(modifierData.index).trim().toLowerCase()) {
+			case '-l':
+				removeOutlier = -1;
+				break;
+			case '-h':
+				removeOutlier = +1;
+				break;
+			default:
+				offset = Number(target.slice(modifierData.index));
+				if (isNaN(offset)) return this.parse('/help dice');
+				if (!Number.isSafeInteger(offset)) return this.sendReply("The specified offset must be an integer up to " + Number.MAX_SAFE_INTEGER + ".");
+			}
+			if (removeOutlier && diceQuantity <= 1) return this.sendReply("More than one dice should be rolled before removing outliers.");
+			target = target.slice(0, modifierData.index);
+		}
+
+		var diceFaces = 6;
+		if (target.length) {
+			diceFaces = Number(target);
+			if (!Number.isSafeInteger(diceFaces) || diceFaces <= 0) {
+				return this.sendReply("Rolled dice must have a natural amount of faces up to " + Number.MAX_SAFE_INTEGER + ".");
+			}
+		}
+
+		if (diceQuantity > 1) {
+			// Make sure that we can deal with high rolls
+			if (!Number.isSafeInteger(offset < 0 ? diceQuantity * diceFaces : diceQuantity * diceFaces + offset)) {
+				return this.sendReply("The maximum sum of rolled dice must be lower or equal than " + Number.MAX_SAFE_INTEGER + ".");
+			}
+		}
+
+		var maxRoll = 0;
+		var minRoll = Number.MAX_SAFE_INTEGER;
+
+		var trackRolls = diceQuantity * (('' + diceFaces).length + 1) <= 60;
+		var rolls = [];
+		var rollSum = 0;
+
+		for (var i = 0; i < diceQuantity; ++i) {
+			var curRoll = Math.floor(Math.random() * diceFaces) + 1;
+			rollSum += curRoll;
+			if (curRoll > maxRoll) maxRoll = curRoll;
+			if (curRoll < minRoll) minRoll = curRoll;
+			if (trackRolls) rolls.push(curRoll);
+		}
+
+		// Apply modifiers
+
+		if (removeOutlier > 0) {
+			rollSum -= maxRoll;
+		} else if (removeOutlier < 0) {
+			rollSum -= minRoll;
+		}
+		if (offset) rollSum += offset;
+
+		// Reply with relevant information
+
+		var offsetFragment = "";
+		if (offset) offsetFragment += (offset > 0 ? "+" + offset : offset);
+
+		if (diceQuantity === 1) return this.sendReplyBox("Roll (1 - " + diceFaces + ")" + offsetFragment + ": " + rollSum);
+
+		var sumFragment = "<br />Sum" + offsetFragment + (removeOutlier ? " except " + (removeOutlier > 0 ? "highest" : "lowest") : "");
+		return this.sendReplyBox("" + diceQuantity + " rolls (1 - " + diceFaces + ")" + (trackRolls ? ": " + rolls.join(", ") : "") + sumFragment + ": " + rollSum);
 	},
 	dicehelp: ["/dice [max number] - Randomly picks a number between 1 and the number you choose.",
-		"/dice [number of dice]d[number of sides] - Simulates rolling a number of dice, e.g., /dice 2d4 simulates rolling two 4-sided dice."],
+		"/dice [number of dice]d[number of sides] - Simulates rolling a number of dice, e.g., /dice 2d4 simulates rolling two 4-sided dice.",
+		"/dice [number of dice]d[number of sides][+/-][offset] - Simulates rolling a number of dice and adding an offset to the sum, e.g., /dice 2d6+10: two standard dice are rolled; the result lies between 12 and 22.",
+		"/dice [number of dice]d[number of sides]-[H/L] - Simulates rolling a number of dice with removal of extreme values, e.g., /dice 3d8-L: rolls three 8-sided dice; the result ignores the lowest value."],
 
 	//pr: 'pickrandom',
 	pick: 'pickrandom',

@@ -261,7 +261,7 @@ Users.socketConnect = function (worker, workerid, socketid, ip) {
 		} else if (checkResult === '#cflood') {
 			connection.send("|popup|PS is under heavy load and cannot accommodate your connection right now.");
 		} else {
-			connection.send("|popup|Your IP (" + ip + ") used is banned under the username '" + checkResult + "'. Your ban will expire in a few days.||" + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
+			connection.send("|popup|Your IP (" + ip + ") used was banned while using the username '" + checkResult + "'. Your ban will expire in a few days.||" + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
 		}
 		return connection.destroy();
 	}
@@ -728,6 +728,9 @@ User = (function () {
 		return this.can('promote', {group:sourceGroup}) && this.can('promote', {group:targetGroup});
 	};
 	User.prototype.forceRename = function (name, registered) {
+		try {
+			updateSeen(name);
+		} catch (e) {}
 		// skip the login server
 		var userid = toId(name);
 
@@ -759,14 +762,14 @@ User = (function () {
 
 		if (registered && userid in bannedUsers) {
 			var bannedUnder = '';
-			if (bannedUsers[userid] !== userid) bannedUnder = ' under the username ' + bannedUsers[userid];
+			if (bannedUsers[userid] !== userid) bannedUnder = ' because of rule-breaking by your alt account ' + bannedUsers[userid];
 			this.send("|popup|Your username (" + name + ") is banned" + bannedUnder + "'. Your ban will expire in a few days." + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
 			this.ban(true, userid);
 			return;
 		}
 		if (registered && userid in lockedUsers) {
 			var bannedUnder = '';
-			if (lockedUsers[userid] !== userid) bannedUnder = ' under the username ' + lockedUsers[userid];
+			if (lockedUsers[userid] !== userid) bannedUnder = ' because of rule-breaking by your alt account ' + lockedUsers[userid];
 			this.send("|popup|Your username (" + name + ") is locked" + bannedUnder + "'. Your lock will expire in a few days." + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
 			this.lock(true, userid);
 		}
@@ -941,7 +944,7 @@ User = (function () {
 							Config.tokenhosts.push(address);
 							console.log('Added ' + address + ' to valid tokenhosts');
 						});
-					} else if (Config.tokenhosts.indexOf(host) === -1) {
+					} else if (Config.tokenhosts.indexOf(host) < 0) {
 						invalidHost = true;
 					}
 				}
@@ -1223,6 +1226,7 @@ User = (function () {
 		var removed = [];
 		if (usergroups[userid]) {
 			removed.push(usergroups[userid].charAt(0));
+			delete usergroups[userid];
 			exportUsergroups();
 		}
 		for (var i = 0; i < Rooms.global.chatRooms.length; i++) {
@@ -1444,8 +1448,8 @@ User = (function () {
 		for (var ip in this.ips) {
 			lockedIps[ip] = userid;
 		}
-		if (this.autoconfirmed) lockedUsers[this.autoconfirmed] = this.userid;
-		if (this.registered) lockedUsers[this.userid] = this.userid;
+		if (this.autoconfirmed) lockedUsers[this.autoconfirmed] = userid;
+		if (this.registered) lockedUsers[this.userid] = userid;
 		this.locked = userid;
 		this.autoconfirmed = '';
 		this.updateIdentity();
@@ -1489,6 +1493,10 @@ User = (function () {
 		room = Rooms.get(room);
 		if (room.id === 'global' && !force) {
 			// you can't leave the global room except while disconnecting
+			try {
+				updateSeen(name);
+			} catch (e) {}
+
 			return false;
 		}
 		for (var i = 0; i < this.connections.length; i++) {

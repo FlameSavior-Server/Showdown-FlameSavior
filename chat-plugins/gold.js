@@ -59,6 +59,23 @@ exports.commands = {
             );
         })
     },
+    roomfounder:  function (target, room, user) {
+        if (!room.chatRoomData) {
+            return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");
+        }
+        var target = this.splitTarget(target, true);
+        var targetUser = this.targetUser;
+        if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
+        if (!this.can('pban')) return false;
+        if (!room.auth) room.auth = room.chatRoomData.auth = {};
+        var name = targetUser.name;
+        room.auth[targetUser.userid] = '#';
+        room.founder = targetUser.userid;
+        this.addModCommand('' + name + ' was appointed to Room Founder by ' + user.name + '.');
+        room.onUpdateIdentity(targetUser);
+        room.chatRoomData.founder = room.founder;
+        Rooms.global.writeChatRoomData();
+    },
 
     hide: 'hideauth',
     hideauth: function(target, room, user) {
@@ -298,6 +315,7 @@ exports.commands = {
         if (!target) return this.sendReply('/spank needs a target.');
         return this.parse('/me spanks ' + target + '!');
     },
+
     report: 'complain',
     complain: function(target, room, user) {
         if (!target) return this.sendReply('/report [report] - Use this command to report other users.');
@@ -315,6 +333,7 @@ exports.commands = {
             if ((Users.users[u].group == "~" || Users.users[u].group == "&" || Users.users[u].group == "@" || Users.users[u].group == "%") && Users.users[u].connected)
                 Users.users[u].send('|pm|~Server|' + Users.users[u].getIdentity() + '|' + user.userid + ' (in ' + room.id + ') has reported: ' + target + '');
     },
+    
     suggestion: 'suggest',
     suggest: function(target, room, user) {
         if (!target) return this.sendReply('/suggest [suggestion] - Sends your suggestion to staff to review.');
@@ -419,7 +438,6 @@ exports.commands = {
         if (!target) return this.sendReply('/pet needs a target.');
         return this.parse('/me pets ' + target + ' lavishly.');
     },
-
 
     setmotd: 'motd',
     motd: function(target, room, user) {
@@ -545,12 +563,14 @@ exports.commands = {
             return;
         }
     },
+
     votes: function(target, room, user) {
         if (!room.answers) room.answers = new Object();
         if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
         if (!this.canBroadcast()) return;
         this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
     },
+
     pr: 'pollremind',
     pollremind: function(target, room, user) {
         var separacion = "&nbsp;&nbsp;";
@@ -564,11 +584,13 @@ exports.commands = {
         }
         this.sendReply('|raw|<div class="infobox"><h2>' + Tools.escapeHTML(room.question) + separacion + '<font font size=1 color = "#939393"><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + output + '</div>');
     },
+
     tpolltest: 'tierpoll',
     tpoll: 'tierpoll',
     tierpoll: function(room, user, cmd) {
         return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5] LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes');
     },
+    
     survey: 'poll',
     poll: function(target, room, user) {
         if (!user.can('broadcast', null, room)) return this.sendReply('You do not have enough authority to use this command.');
@@ -599,6 +621,7 @@ exports.commands = {
         }
         room.addRaw('<div class="infobox"><h2>' + room.question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by ' + user.name + '</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
     },
+
     vote: function(target, room, user) {
         var ips = JSON.stringify(user.ips);
         if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
@@ -608,6 +631,7 @@ exports.commands = {
         room.answers[ips] = target.toLowerCase();
         return this.sendReply('You are now voting for ' + target + '.');
     },
+
     ep: 'endpoll',
     endpoll: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -641,6 +665,7 @@ exports.commands = {
         room.answerList = new Array();
         room.answers = new Object();
     },
+
     uor: 'usersofrank',
     usersofrank: function(target, room, user) {
         if (!target || !Config.groups[target]) return false;
@@ -655,6 +680,7 @@ exports.commands = {
         if (names.length < 1) return this.sendReplyBox('There are no users of the rank <font color="#24678d"><b>' + Tools.escapeHTML(Config.groups[target].name) + '</b></font> currently online.');
         return this.sendReplyBox('There ' + (names.length === 1 ? 'is' : 'are') + ' <font color="#24678d"><b>' + names.length + '</b></font> ' + (names.length === 1 ? 'user' : 'users') + ' with the rank <font color="#24678d"><b>' + Config.groups[target].name + '</b></font> currently online.<br />' + names.join(', '));
     },
+
     away: 'afk',
     busy: 'afk',
     sleep: 'afk',
@@ -698,6 +724,7 @@ exports.commands = {
             return this.sendReply('You are already set as away, type /back if you are now back.');
         }
     },
+
     back: function(target, room, user, connection) {
         if (!this.canTalk()) return;
         if (user.isAway) {
@@ -723,6 +750,7 @@ exports.commands = {
         }
         user.updateIdentity();
     },
+
     gdeclarered: 'gdeclare',
     gdeclaregreen: 'gdeclare',
     gdeclare: function(target, room, user, connection, cmd) {
@@ -749,6 +777,7 @@ exports.commands = {
         this.logEntry(user.name + ' used /gdeclare');
 
     },
+
     gdeclarered: 'gdeclare',
     gdeclaregreen: 'gdeclare',
     gdeclare: function(target, room, user, connection, cmd) {
@@ -773,6 +802,7 @@ exports.commands = {
         }
         this.logModCommand(user.name + ' globally declared ' + target);
     },
+
     declaregreen: 'declarered',
     declarered: function(target, room, user, connection, cmd) {
         if (!target) return this.parse('/help declare');
@@ -787,6 +817,7 @@ exports.commands = {
         }
         this.logModCommand(user.name + ' declared ' + target);
     },
+
     golddeclare: function(target, room, user, connection, cmd) {
         if (!target) return this.parse('/help declare');
         if (!this.can('declare', null, room)) return false;
@@ -794,6 +825,7 @@ exports.commands = {
         this.add('|raw|<div class="broadcast-gold"><b>' + target + '</b></div>');
         this.logModCommand(user.name + ' declared ' + target);
     },
+
     pdeclare: function(target, room, user, connection, cmd) {
         if (!target) return this.parse('/help declare');
         if (!this.can('declare', null, room)) return false;
@@ -807,6 +839,7 @@ exports.commands = {
         }
         this.logModCommand(user.name + ' declared ' + target);
     },
+
     sd: 'declaremod',
     staffdeclare: 'declaremod',
     modmsg: 'declaremod',
@@ -821,6 +854,7 @@ exports.commands = {
 
         this.logModCommand(user.name + ' mod declared ' + target);
     },
+
     hideuser: function(target, room, user, connection, cmd) {
         if (!target) return this.sendReply('/hideuser [user] - Makes all prior messages posted by this user "poof" and replaces it with a button to see. Requires: @, &, ~');
         if (!this.can('ban')) return false;
@@ -833,6 +867,7 @@ exports.commands = {
             this.sendReply("Something went wrong! Ahhhhhh!");
         }
     },
+
     k: 'kick',
     aura: 'kick',
     kick: function(target, room, user) {
@@ -855,6 +890,7 @@ exports.commands = {
 
         targetUser.leaveRoom(room.id);
     },
+
     dm: 'daymute',
     daymute: function(target, room, user) {
         if (!target) return this.parse('/help daymute');
@@ -879,6 +915,7 @@ exports.commands = {
 
         targetUser.mute(room.id, 24 * 60 * 60 * 1000, true);
     },
+
     flogout: 'forcelogout',
     forcelogout: function(target, room, user) {
         if (!user.can('hotpatch')) return;
@@ -899,10 +936,12 @@ exports.commands = {
 
         targetUser.resetName();
     },
+
     goldstaff: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');
     },
+
     pus: 'pmupperstaff',
     pmupperstaff: function(target, room, user) {
         if (!target) return this.sendReply('/pmupperstaff [message] - Sends a PM to every upper staff');
@@ -913,6 +952,7 @@ exports.commands = {
             }
         }
     },
+
     events: 'activities',
     activities: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -927,6 +967,7 @@ exports.commands = {
             '★ <b>Plug.dj</b> - Come listen to music with us! Click <a href="http://plug.dj/gold-server/">here</a> to start!<br>' +
             '<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
     },
+
     support: 'donate',
     donate: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -942,10 +983,12 @@ exports.commands = {
             '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" title=Donate now!">'
         );
     },
+
     vip: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('Information about what a VIP user is can be found <a href="http://goldserver.weebly.com/vip.html">here</a>.');
     },
+
     links: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox(
@@ -961,18 +1004,22 @@ exports.commands = {
             "</b></div>"
         );
     },
+
     forums: function(target, room, user) {
         if (!this.canBroadcast()) return;
         return this.sendReplyBox('Gold Forums can be found <a href="http://goldservers.info/forums">here</a>.');
     },
+
     client: function(target, room, user) {
         if (!this.canBroadcast()) return;
         return this.sendReplyBox('Gold\'s custom client can be found <a href="http://goldservers.info">here</a>.');
     },
+
     customcolors: function(target, room, user) {
         if (!this.canBroadcast()) return;
         return this.sendReplyBox('Information about our custom client colors can be found <a href="http://goldservers.info/forums/showthread.php?tid=17">here</a>.');
     },
+
     regdate: function(target, room, user, connection) {
         if (!this.canBroadcast()) return;
         if (!target || target == "0") return this.sendReply('Lol, you can\'t do that, you nub.');
@@ -1001,10 +1048,12 @@ exports.commands = {
             self.sendReplyBox(Tools.escapeHTML(data));
         });
     },
+
     league: function(target, room, user) {
         if (!this.canBroadcast()) return;
         return this.sendReplyBox('<button name="joinRoom" value="thebiblialeague" target="_blank">The Biblia League</button> is the official league of Gold!');
     },
+
     stafffaq: function(target, room, user) {
         if (!this.canBroadcast()) return;
         return this.sendReplyBox('Click <a href="http://goldserver.weebly.com/how-do-i-get-a-rank-on-gold.html">here</a> to find out about Gold\'s ranks and promotion system.');
@@ -1017,6 +1066,7 @@ exports.commands = {
             Users.users[uid].chatQueueTimeout = null;
         }
     },
+
     removebadge: function(target, room, user) {
         if (!this.can('hotpatch')) return false;
         target = this.splitTarget(target);
@@ -1055,6 +1105,7 @@ exports.commands = {
             }
         });
     },
+
     givebadge: function(target, room, user) {
         if (!this.can('hotpatch')) return false;
         target = this.splitTarget(target);
@@ -1098,6 +1149,7 @@ exports.commands = {
             }
         })
     },
+
     badgelist: function(target, room, user) {
         if (!this.canBroadcast()) return;
         var fgs = '<img src="http://www.smogon.com/media/forums/images/badges/forummod_alum.png" title="Former Gold Staff">';
@@ -1115,6 +1167,7 @@ exports.commands = {
         var bot = '<img src="http://www.smogon.com/media/forums/images/badges/mind.png" title="Gold Bot Hoster">';
         return this.sendReplyBox('<b>List of Gold Badges</b>:<br>' + fgs + '  ' + admin + '    ' + dev + '  ' + creator + '   ' + comcun + '    ' + mod + '    ' + leader + '    ' + league + '    ' + champ + '    ' + artist + '    ' + twinner + '    ' + vip + '    ' + bot + ' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
     },
+
     badges: 'badge',
     badge: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -1173,6 +1226,7 @@ exports.commands = {
             }
         });
     },
+
     helixfossil: 'm8b',
     helix: 'm8b',
     magic8ball: 'm8b',
@@ -1243,10 +1297,12 @@ exports.commands = {
         }
         return this.sendReplyBox('' + results + '');
     },
+
     hue: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://reactiongifs.me/wp-content/uploads/2013/08/ducks-laughing.gif">');
     },
+
     coins: 'coingame',
     coin: 'coingame',
     coingame: function(target, room, user) {
@@ -1261,6 +1317,7 @@ exports.commands = {
         }
         return this.sendReplyBox('<center><font size="3"><b>Coin Game!</b></font><br>' + results + '');
     },
+
     p: 'panagrams',
     panagrams: function(target, room, user) {
         if (!this.canBroadcast()) return;
@@ -1331,6 +1388,7 @@ exports.commands = {
             return this.sendReplyBox('The random color is:<b><font color=' + results + '>' + results + '</font></b>');
         }
     },
+
     cs: 'customsymbol',
     customsymbol: function(target, room, user) {
         if (!user.canCustomSymbol && !hasBadge(user.userid, 'vip')) return this.sendReply('You don\'t have the permission to use this command.');
@@ -1561,6 +1619,7 @@ exports.commands = {
         targetUser.popup(user.name + ' has transferred ' + transferMoney + ' ' + p + ' to you.');
         this.logModCommand('(' + user.name + '  has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '.)');
     },
+
     gamble: function(target, room, user) {
         if (!this.canBroadcast()) return;
         if (!target) return this.sendReply('/gamble [amount] - Gambles the amount chosen. If you win, you win the amount * 2, else, you lose the amount.');
@@ -2012,18 +2071,6 @@ exports.commands = {
                         targetUser.send(user.name + ' has given you ' + theItem + '!');
                     }
                     break;
-                case 'forcerename':
-                case 'fr':
-                    if (targetUser.canForcerename === true) {
-                        return this.sendReply('This user has already bought that item from the shop... no need for another.');
-                    }
-                    if (targetUser.canForcerename === false) {
-                        matched = true;
-                        targetUser.canForcerename = true;
-                        Rooms.rooms.lobby.add(user.name + ' has a forcerename from the shop!');
-                        targetUser.send(user.name + ' has given you ' + theItem + '!');
-                    }
-                    break;
                 case 'fix':
                     if (targetUser.canFixItem === true) {
                         return this.sendReply('This user has already bought that item from the shop... no need for another.');
@@ -2172,6 +2219,7 @@ exports.commands = {
                 return this.sendReply('That isn\'t a real item you fool!');
         }
     },
+
     friendcodehelp: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<b>Friend Code Help:</b> <br><br />' +
@@ -2209,46 +2257,7 @@ exports.commands = {
         var codes = fs.readFileSync('config/friendcodes.txt', 'utf8');
         return user.send('|popup|' + codes);
     },
-    poof: 'd',
-    d: function(target, room, user) {
-        if (room.id !== 'lobby') return false;
-        var btags = '<strong><font color=' + hashColor(Math.random().toString()) + '" >';
-        var etags = '</font></strong>'
-        var targetid = toId(user);
-        if (!user.muted && target) {
-            var tar = toId(target);
-            var targetUser = Users.get(tar);
-            if (user.can('poof', targetUser)) {
 
-                if (!targetUser) {
-                    user.emit('console', 'Cannot find user ' + target + '.', socket);
-                } else {
-                    if (poofeh)
-                        Rooms.rooms.lobby.addRaw(btags + '~~ ' + targetUser.name + ' was slaughtered by ' + user.name + '! ~~' + etags);
-                    targetUser.disconnectAll();
-                    return this.logModCommand(targetUser.name + ' was poofed by ' + user.name);
-                }
-            } else {
-                return this.sendReply('/poof target - Access denied.');
-            }
-        }
-        if (poofeh && !user.muted && !user.locked) {
-            Rooms.rooms.lobby.addRaw(btags + getRandMessage(user) + etags);
-            user.disconnectAll();
-        } else {
-            return this.sendReply('poof is currently disabled.');
-        }
-    },
-
-    poofoff: 'nopoof',
-    nopoof: function(target, room, user) {
-        if (!user.can('warn'))
-            return this.sendReply('/nopoof - Access denied.');
-        if (!poofeh)
-            return this.sendReply('poof is currently disabled.');
-        poofeh = false;
-        return this.sendReply('poof is now disabled.');
-    },
     userauth: function(target, room, user, connection) {
         var targetId = toId(target) || user.userid;
         var targetUser = Users.getExact(targetId);
@@ -2289,32 +2298,6 @@ exports.commands = {
 
         buffer.unshift("" + targetUsername + " user auth:");
         connection.popup(buffer.join("\n\n"));
-    },
-    poofon: function(target, room, user) {
-        if (!user.can('warn'))
-            return this.sendReply('/poofon - Access denied.');
-        if (poofeh)
-            return this.sendReply('poof is currently enabled.');
-        poofeh = true;
-        return this.sendReply('poof is now enabled.');
-    },
-
-    cpoof: function(target, room, user) {
-        if (!user.can('broadcast'))
-            return this.sendReply('/cpoof - Access Denied');
-
-        if (poofeh) {
-            if (target.indexOf('<img') != -1)
-                return this.sendReply('Images are no longer supported in cpoof.');
-            target = htmlfix(target);
-            var btags = '<strong><font color="' + hashColor(Math.random().toString()) + '" >';
-            var etags = '</font></strong>'
-            Rooms.rooms.lobby.addRaw(btags + '~~ ' + user.name + ' ' + target + '! ~~' + etags);
-            this.logModCommand(user.name + ' used a custom poof message: \n "' + target + '"');
-            user.disconnectAll();
-        } else {
-            return this.sendReply('Poof is currently disabled.');
-        }
     },
 
     showpic: function(target, room, user) {
@@ -2401,48 +2384,6 @@ exports.commands = {
         Rooms.rooms.room.add('|html|<font size="4"><b>New color guessed!</b></font><br><b>Guessed by:</b> ' + user.userid + '<br><b>Color:</b> ' + target + '');
         this.sendReply('Thanks, your new color guess has been sent.  We\'ll review your color soon and get back to you. ("' + target + '")');
     },
-    /*
-            temote: 'temotes',
-            toggleemotes: 'temotes',
-            temotes: function(target, room, user) {
-                    if (!user.can('pban')) return;
-                    if (!target) return this.sendReply('Valid targets are: "on", "off" and "status".');
-                    if (toId(target) === 'off' || toId(target) === 'disable') {
-                            Core.settings.emoteStatus = false;
-                            room.add(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
-                            this.logModCommand(Tools.escapeHTML(user.name) + ' has disabled chat emotes.');
-                    }
-                    if (toId(target) === 'on' || toId(target) === 'enable') {
-                            Core.settings.emoteStatus = true;
-                            room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
-                            this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes.');
-                    }
-                    if (toId(target) === 'status') {
-                            var currentEmoteStatus = '';
-                            if (!Core.settings.emoteStatus) {
-                                    currentEmoteStatus = 'disabled.';
-                            } else {
-                                    currentEmoteStatus = 'enabled.';
-                            }
-                            return this.sendReply('Chat emotes are currently ' + currentEmoteStatus);
-                    }
-            },
-            emotes: 'emoticon',
-            emoticons: 'emoticon',
-            emoticon: function(target, room, user) {
-                    if (!this.canBroadcast()) return;
-                    if (!Core.settings.emoteStatus) {
-                            return this.sendReplyBox("<b><font color=red>Sorry, chat emotes have been disabled. :(</b></font>");
-                    } else {
-                            var name = Object.keys(Core.emoticons),
-                                    emoticons = [];
-                            var len = name.length;
-                            while (len--) {
-                                    emoticons.push((Core.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
-                            }
-                            this.sendReplyBox('<b><u>List of emoticons:</b></u> <br/><br/>' + emoticons.join(' ').toString());
-                    }
-            },*/
 
     /*****************
      * Money commands *

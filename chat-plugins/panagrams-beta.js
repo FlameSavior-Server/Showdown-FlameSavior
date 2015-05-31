@@ -1,3 +1,10 @@
+/* Panagrams chat-plugin
+ * Created by SilverTactic and panpawn
+ * This is a plugin that uses the anagrams 
+ * format that is dedicated to Pokemon
+ * names.  Winners recieve one buck a peice.
+ */
+
 var session = 0;
 
 exports.commands = {
@@ -52,7 +59,8 @@ exports.commands = {
 		while (panagram == poke) {
 			panagram = mixer(poke);
 		}
-		this.add('|html|<div class = "broadcast-gold"><center><b>A game of Panagram has been started!</b> (' + session + ' remaining)<br/>' + 'The scrambled Pokémon is <b>' + panagram + '</b><br/>' + '<font size = 1>Type in <b>/gp [Pokémon]</b> to guess the Pokémon!');
+		this.add('|html|<b><font color=' + Gold.hashColor(toId(user.name)) + '>' + Tools.escapeHTML(user.name) + '</font> has started a session of Panagrams!</b>');
+		this.add('|html|<div class = "broadcast-gold"><center><b>A game of Panagram has been started!</b> (' + session + ' remaining)<br/>' + 'The scrambled Pokémon is: <b>' + panagram + '</b><br/>' + '<font size = 1>Type in <b>/gp [Pokémon]</b> to guess the Pokémon!');
 		room.panagram.guessed = [];
 		room.panagram.chances = 2;
 		room.panagram.answer = toId(poke);
@@ -70,7 +78,7 @@ exports.commands = {
 		//if (Tools.data.Pokedex[toId(target)].baseSpecies) target = toId(Tools.data.Pokedex[toId(target)].baseSpecies);
 		if (room.panagram.guessed.indexOf(toId(target)) > -1) return this.sendReply("That has already been guessed!");
 		if (room.panagram.answer == toId(target)) {
-			this.add('|html|<b><font color=' + Gold.hashColor(toId(user.name)) + '>' + Tools.escapeHTML(user.name) + '</b> guessed <b>' + Tools.data.Pokedex[toId(target)].species + '</b>, which was the correct answer! Congratulations!  They have also won 1 buck!');
+			this.add('|html|<b><font color=' + Gold.hashColor(toId(user.name)) + '>' + Tools.escapeHTML(user.name) + '</b> guessed <b>' + Tools.data.Pokedex[toId(target)].species + '</b>, which was the correct answer!  They have also won 1 buck!');
 			economy.writeMoney('money', toId(user.name), +1);
 			delete room.panagram;
 			if (session > 1) {
@@ -103,7 +111,7 @@ exports.commands = {
 				while (panagram == poke) {
 					panagram = mixer(poke);
 				}
-				this.add('|html|<div class = "broadcast-gold"><center><b>A game of Panagram has been started!</b> (' + session + ' remaining)<br/>' + 'The scrambled Pokémon is <b>' + panagram + '</b><br/>' + '<font size = 1>Type in <b>/gp [Pokémon]</b> to guess the Pokémon!');
+				this.add('|html|<div class = "broadcast-gold"><center><b>A game of Panagram has been started!</b> (' + session + ' remaining)<br/>' + 'The scrambled Pokémon is: <b>' + panagram + '</b><br/>' + '<font size = 1>Type in <b>/gp [Pokémon]</b> to guess the Pokémon!');
 				room.panagram = {};
 				room.panagram.guessed = [];
 				room.panagram.chances = 2;
@@ -121,7 +129,7 @@ exports.commands = {
 		if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to be able to end a game of Panagram in this room.');
 		if (!room.panagram) return this.sendReply('There is no Panagram game going on in this room.');
 		if (!this.canTalk()) return;
-		this.add("|html|<b>The game of Panagram has been ended by " + Tools.escapeHTML(user.name) + ".</b>");
+		this.add("|html|<b>The game of Panagram has been ended by <font color=" + Gold.hashColor(toId(user.name)) + ">" + Tools.escapeHTML(user.name) + "</font>.</b>");
 		delete room.panagram;
 	},
 	ph: 'panagramhint',
@@ -129,7 +137,7 @@ exports.commands = {
 		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!this.canBroadcast()) return;
 		if (!room.panagram) return this.sendReply('There is no Panagram game going on in this room.');
-		var hint = "The Pokemon is <b>" + room.panagram.answer.length + "</b> characters long.  The first letter is <b>" + room.panagram.answer.substring(0, 1).toUpperCase() + "</b>.";
+		var hint = "Panagram hint: the Pokemon is <b>" + room.panagram.answer.length + "</b> characters long.  The first letter is <b>" + room.panagram.answer.substring(0, 1).toUpperCase() + "</b>.";
 		this.sendReplyBox(hint);
 	}
 };

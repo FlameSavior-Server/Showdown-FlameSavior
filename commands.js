@@ -2040,7 +2040,7 @@ var commands = exports.commands = {
 				return false;
 			}
 		}
-		user.prepBattle(target, 'challenge', connection, function (result) {
+		user.prepBattle(Tools.getFormat(target).id, 'challenge', connection, function (result) {
 			if (result) user.makeChallenge(targetUser, target);
 		});
 	},
@@ -2079,7 +2079,7 @@ var commands = exports.commands = {
 			this.popupReply(target + " cancelled their challenge before you could accept it.");
 			return false;
 		}
-		user.prepBattle(format, 'challenge', connection, function (result) {
+		user.prepBattle(Tools.getFormat(format).id, 'challenge', connection, function (result) {
 			if (result) user.acceptChallengeFrom(userid);
 		});
 	},

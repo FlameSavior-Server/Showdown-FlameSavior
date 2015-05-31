@@ -1,0 +1,150 @@
+.nightclub {
+    background: #000;
+    margin: -3px;
+}
+.header {
+    background: url("http://i.imgur.com/fJwCDif.png";
+    ) no-repeat;
+    background-color: #DA9D01
+}
+.mainmenuwrapper {
+    color: #d3af37;
+    font-size: 11pt;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    background: #d3af37 url("http://i.imgur.com/zfTYJBJ.png";
+    ) no-repeat scroll right top fixed;
+}
+.chat-log {
+    font-size: 10pt;
+    background: url("http://i.imgur.com/GE8hAlX.png";
+    ) no-repeat scroll left bottom;
+    color: #000;
+    overflow: auto
+}
+}
+.astext {
+    border: none;
+    background: none;
+    padding: 0;
+    height: -20em;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+}
+.header .logo {
+    display: none;
+}
+.chat-log-add {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 36px;
+    padding: 3px 4px 0 4px;
+    border-top: 1px solid #D5DDE4;
+}
+.chat small {
+    font-weight: normal;
+    font-size: 8pt;
+    color: #000000;
+}
+.blackbutton {
+    padding: 5px;
+    background-color: #000000;
+    border: 1px solid #666;
+    color: #000;
+    text-decoration: none;
+}
+.userlist,
+.userlist li {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: left
+}
+.message-announce {
+    background: #FFCC00;
+    color: black;
+    padding: 1px 4px 2px;
+}
+.backdrop {
+    background-image: url("http://i.imgur.com/yrjk5CU.png";
+    ) !important;
+}
+.broadcast-purple {
+    background-color: #8904B1;
+    color: white;
+    padding: 2px 4px;
+}
+.broadcast-black {
+    background-color: #000000 color: white;
+    padding: 2px 4px;
+}
+.broadcast-gold {
+    background-color: #FFCC00;
+    color: black;
+    padding: 2px 4px;
+}
+.broadcast-gold a {
+    color: black;
+}
+.userlist {
+    border-left: 1px solid #D5DDE4;
+    background: #e5f2f2 url("http://i.imgur.com/KARB461.jpg";
+    );
+}
+.userlist li {
+    border-bottom: 1px solid #a066aa;
+    height: 19px;
+    font: 10pt Verdana, sans-serif;
+    white-space: nowrap
+}
+.userlist li em.group {
+    font-style: normal;
+    font-size: 8pt;
+    color: #000000;
+    display: block;
+    float: left;
+    text-align: center;
+    padding: 1px 0 0 1px;
+    width: 14px
+}
+.userlist li button {
+    display: block;
+    height: auto;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    white-space: nowrap;
+    font: 10pt Verdana, sans-serif;
+    text-align: left
+}
+.userlist li button:hover {
+    background: #cce5e5
+}
+.userlist li button:active {
+    background: #62A9FA
+}
+.userlist li.cur {} .userlist li.cur button,
+.userlist li.cur button:hover {
+    background: #62A9FA;
+    margin: 0 0 0 -1px
+}
+.userbar {
+    border: 1px solid #b6b6b6;
+    padding: 5px;
+    background: #EBEBEB;
+    margin-top: -5px
+}
+.ps-room {
+    background: #d4cfff
+}
+.menugroup .button {
+    background: #00A5DF;
+}
+.menugroup .button:hover {
+    background: #cccc00
+}

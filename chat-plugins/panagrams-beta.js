@@ -28,6 +28,11 @@ exports.commands = {
 		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!this.canTalk()) return;
 		if (!target) return this.sendReply("Usage: /panagram [number of games]");
+		var pmName = '~Panagram Notification';
+		for (var i in Users.users) {
+			var message = '|pm|' + pmName + '|' + Users.users[i].getIdentity() + '|A session of **Panagrams** in "' + room.title + '" has commenced for ' + target + ' games!';
+			Users.users[i].send(message);
+		}
 		if (isNaN(target)) return this.sendReply("Target must be a number.");
 		room.panagram = {};
 		session = Number(target);

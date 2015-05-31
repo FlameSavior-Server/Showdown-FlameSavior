@@ -15,6 +15,25 @@ var badges = fs.createWriteStream('badges.txt', {
 });
 
 exports.commands = {
+    restart: function(target, room, user) {
+		if (!this.can('lockdown')) return false;
+		try {
+			var forever = require('forever');
+		} catch (e) {
+			return this.sendReply('/restart requires the "forever" module.');
+		}
+
+		if (!Rooms.global.lockdown) {
+			return this.sendReply('For safety reasons, /restart can only be used during lockdown.');
+		}
+
+		if (CommandParser.updateServerLock) {
+			return this.sendReply('Wait for /updateserver to finish before using /restart.');
+		}
+		this.logModCommand(user.name + ' used /restart');
+		Rooms.global.send('|refresh|');
+		forever.restart('app.js');
+	},
 
     goldroomauth: "gra",
 	gra: function(target, room, user, connection) {
@@ -1100,6 +1119,30 @@ exports.commands = {
         if (!this.canBroadcast()) return;
         return this.sendReplyBox('Information about our custom client colors can be found <a href="http://goldservers.info/forums/showthread.php?tid=17">here</a>.');
     },
+    
+    pas: 'pmallstaff',
+	pmallstaff: function(target, room, user) {
+		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every user in a room.');
+		if (!this.can('pban')) return false;
+		for (var u in Users.users) {
+			if (Users.users[u].isStaff) {
+				Users.users[u].send('|pm|~Staff PM|' + Users.users[u].group + Users.users[u].name + '|' + target + ' (by: ' + user.name + ')');
+			}
+		}
+	},
+
+	masspm: 'pmall',
+	pmall: function(target, room, user) {
+		if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');
+		if (!this.can('pban')) return false;
+
+		var pmName = '~Gold Server [Do not reply]';
+
+		for (var i in Users.users) {
+			var message = '|pm|' + pmName + '|' + Users.users[i].getIdentity() + '|' + target;
+			Users.users[i].send(message);
+		}
+	},
 
     regdate: function(target, room, user, connection) {
         if (!this.canBroadcast()) return;

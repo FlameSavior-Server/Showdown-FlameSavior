@@ -736,7 +736,7 @@ exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			user.isAway = true;
 			if (!(!this.can('broadcast'))) {
-				var color = hashColor('' + toId(user.originalName) + '');
+				var color = Gold.hashColor('' + toId(user.originalName) + '');
 				if (cmd === 'sleep') cmd = 'sleeping';
 				if (cmd === 'eat') cmd = 'eating';
 				if (user.userid == 'panpawn') color = '#DA9D01';
@@ -761,7 +761,7 @@ exports.commands = {
 			user.authenticated = true;
 			user.isAway = false;
 			if (!(!this.can('broadcast'))) {
-				var color = hashColor('' + toId(user.name) + '');
+				var color = Gold.hashColor('' + toId(user.name) + '');
 				if (user.userid == 'panpawn') color = '#DA9D01';
 				this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + newName + '</font></b></button> is no longer away.');
 				user.originalName = '';

@@ -716,20 +716,22 @@ exports.commands = {
 		if (!user.isAway) {
 			user.originalName = user.name;
 			switch (cmd) {
+			    case 'asleep':
+                case 'sleepting':
 				case 'sleep':
-					var awayName = user.name + ' - Ⓢⓛⓔⓔⓟⓘⓝⓖ';
+					awayName = user.name + ' - Ⓢⓛⓔⓔⓟ';
 					break;
 				case 'gaming':
-					var awayName = user.name + ' - ⒼⒶⓂⒾⓃⒼ';
+					awayName = user.name + ' - ⒼⒶⓂⒾⓃⒼ';
 					break;
 				case 'busy':
-					var awayName = user.name + ' - Ⓑⓤⓢⓨ';
+					awayName = user.name + ' - Ⓑⓤⓢⓨ';
 					break;
 				case 'eating':
-					var awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ';
+					awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ';
 					break;
 				default:
-					var awayName = user.name + ' - Ⓐⓦⓐⓨ';
+					awayName = user.name + ' - Ⓐⓦⓐⓨ';
 			}
 			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
 			delete Users.get(awayName);
@@ -739,7 +741,6 @@ exports.commands = {
 				var color = Gold.hashColor('' + toId(user.originalName) + '');
 				if (cmd === 'sleep') cmd = 'sleeping';
 				if (cmd === 'eat') cmd = 'eating';
-				if (user.userid == 'panpawn') color = '#DA9D01';
 				this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + user.originalName + '</font></b></button> is now ' + cmd + '. ' + (target ? " (" + Tools.escapeHTML(target) + ")" : ""));
 			}
 		} else {
@@ -762,7 +763,6 @@ exports.commands = {
 			user.isAway = false;
 			if (!(!this.can('broadcast'))) {
 				var color = Gold.hashColor('' + toId(user.name) + '');
-				if (user.userid == 'panpawn') color = '#DA9D01';
 				this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + newName + '</font></b></button> is no longer away.');
 				user.originalName = '';
 			}

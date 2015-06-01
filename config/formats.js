@@ -625,6 +625,19 @@ exports.Formats = [
 		banlist: ['Chansey', 'Frogadier', 'Eviolite']
 	},
 	{
+		name: "Gold Battle",
+		section: "Other Metagames",
+		
+		validateSet: function(set) {
+			var template = this.getTemplate(set.species || set.name);
+			if (template.color !== 'Yellow') {
+				return [set.species + " is not a yellow / gold Pokémon."];
+			}
+		},
+
+		ruleset: ['Team Preview', 'Sleep Clause Mod', 'Pokemon', 'Standard'],
+	},
+	{
 		name: "OU Theorymon",
 		section: "Other Metagames",
 

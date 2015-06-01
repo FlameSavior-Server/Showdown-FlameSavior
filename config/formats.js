@@ -634,7 +634,7 @@ exports.Formats = [
 			if (set.shiny) return [set.species + " is not allowed to be shiny... This is called Gold Battle, duh."];
 		},
 
-		ruleset: ['Team Preview', 'Sleep Clause Mod', 'Pokemon', 'Standard'],
+		ruleset: ['Team Preview', 'Sleep Clause Mod', 'Pokemon', 'Standard']
 	},
 	{
 		name: "OU Theorymon",

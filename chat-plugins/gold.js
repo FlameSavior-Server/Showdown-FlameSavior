@@ -357,7 +357,7 @@ exports.commands = {
     tpolltest: 'tierpoll',
     tpoll: 'tierpoll',
     tierpoll: function(room, user, cmd) {
-        return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Smogon Doubles, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes, super staff bros, inverse');
+        return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Smogon Doubles, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes, super staff bros, inverse, Gold Battle');
     },
 
     hc: function(room, user, cmd) {

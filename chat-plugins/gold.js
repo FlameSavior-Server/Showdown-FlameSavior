@@ -165,53 +165,6 @@ exports.commands = {
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
-	hide: 'hideauth',
-	hideauth: function(target, room, user) {
-		if (!user.can('warn')) return this.sendReply('/hideauth - access denied.');
-		var tar = ' ';
-		if (target) {
-			target = target.trim();
-			if (Config.groupsranking.indexOf(target) > -1 && target != '#') {
-				if (Config.groupsranking.indexOf(target) <= Config.groupsranking.indexOf(user.group)) {
-					tar = target;
-				} else {
-					this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');
-				}
-			} else {
-				this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
-			}
-		}
-		user.getIdentity = function(roomid) {
-			if (!roomid) roomid = 'lobby';
-			if (this.locked) {
-				return '‽' + this.name;
-			}
-			if (this.mutedRooms[roomid]) {
-				return '!' + this.name;
-			}
-			var room = Rooms.rooms[roomid];
-			if (room.auth) {
-				if (room.auth[this.userid]) {
-					return tar + this.name;
-				}
-				if (this.group !== ' ') return '+' + this.name;
-				return ' ' + this.name;
-			}
-			return tar + this.name;
-		};
-		user.updateIdentity();
-		this.sendReply('You are now hiding your auth symbol as \'' + tar + '\'.');
-		return this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');
-	},
-	show: 'showauth',
-	showauth: function(target, room, user) {
-		if (!user.can('warn')) return this.sendReply('/showauth - access denied.');
-		delete user.getIdentity;
-		user.updateIdentity();
-		this.sendReply('You have now revealed your auth symbol.');
-		return this.logModCommand(user.name + ' has revealed their auth symbol.');
-		this.sendReply('Your symbol has been reset.');
-	},
 	tell: function(target, room, user) {
 		if (!this.canTalk()) return;
 		if (!target) return this.parse('/help tell');
@@ -233,7 +186,7 @@ exports.commands = {
 	},
 	hide: 'hideauth',
 	hideauth: function(target, room, user) {
-		if (!user.can('hideauth')) return this.sendReply('/hideauth - access denied.');
+		if (!user.can('lock')) return this.sendReply('/hideauth - access denied.');
 		var tar = ' ';
 		if (target) {
 			target = target.trim();
@@ -271,7 +224,7 @@ exports.commands = {
 	},
 	show: 'showauth',
 	showauth: function(target, room, user) {
-		if (!user.can('hideauth')) return this.sendReply('/showauth - access denied.');
+		if (!user.can('lock')) return this.sendReply('/showauth - access denied.');
 		delete user.getIdentity;
 		user.updateIdentity();
 		this.sendReply('You have now revealed your auth symbol.');
@@ -360,21 +313,12 @@ exports.commands = {
 		var money = fs.readFileSync('config/money.csv', 'utf8');
 		return user.send('|popup|' + money);
 	},
-	statuses: function(target, room, user, connection) {
-		var money = fs.readFileSync('config/status.csv', 'utf8');
-		return user.send('|popup|' + money);
-	},
-	adminremind: 'aremind',
-	aremind: function(target, room, user, connection) {
-		if (!this.canBroadcast() || !user.can('hotpatch')) return this.sendReply('/adminremind - Access Denied.');
-		var aremind = fs.readFileSync('config/adminreminders.txt', 'utf8');
-		return user.send('|popup|' + aremind);
-	},
 	s: 'spank',
 	spank: function(target, room, user) {
 		if (!target) return this.sendReply('/spank needs a target.');
 		return this.parse('/me spanks ' + target + '!');
 	},
+	bitch: 'complain',
 	report: 'complain',
 	complain: function(target, room, user) {
 		if (!target) return this.sendReply('/report [report] - Use this command to report other users.');
@@ -577,21 +521,8 @@ exports.commands = {
 	hex: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (!this.canTalk()) return;
-		if (target) {
-			if (toId(target) === 'panpawn') {
-				return this.sendReplyBox('<b><font color="#DA9D01">' + Tools.escapeHTML(target) + '</font></b>.  The hexcode for ' + Tools.escapeHTML(target) + '\'s name color is: #DA9D01.');
-				return;
-			}
-			return this.sendReplyBox('<b><font color="' + hashColor('' + toId(target) + '') + '">' + Tools.escapeHTML(target) + '</font></b>.  The hexcode for ' + Tools.escapeHTML(target) + '\'s name color is: ' + hashColor('' + toId(target) + '') + '.');
-			return;
-		}
-		if (user.userid === 'panpawn') {
-			return this.sendReplyBox('Hello, <b><font color="#DA9D01">' + user.name + '</b></font>.  Your hexcode for your name color is: #DA9D01.');
-			return;
-		} else {
-			return this.sendReplyBox('Hello, <b><font color="' + hashColor('' + toId(user.name) + '') + '">' + user.name + '</font></b>.  Your hexcode for your name color is: ' + hashColor('' + toId(user.name) + '') + '.');
-			return;
-		}
+		if (!target) target = toId(user.name);
+		return this.sendReplyBox('<b><font color="' + Gold.hashColor('' + toId(target) + '') + '">' + target + '</font></b>.  The hexcode for this name color is: ' + Gold.hashColor('' + toId(target) + '') + '.');
 	},
 	votes: function(target, room, user) {
 		if (!room.answers) room.answers = new Object();
@@ -615,7 +546,7 @@ exports.commands = {
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd) {
-		return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5] LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes');
+		return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, [Gen 5] OU, [Gen 5] Ubers, [Gen 5] UU, [Gen 5] RU, [Gen 5] NU, [Gen 5] LC, [Gen 5] Smogon Doubles, [Gen 4] OU, [Gen 4] Ubers, [Gen 4] UU, [Gen 4] LC, random doubles, random triples, custom, reg1v1, lc, nu, cap, cc, oumono, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes, gold battle');
 	},
 	survey: 'poll',
 	poll: function(target, room, user) {

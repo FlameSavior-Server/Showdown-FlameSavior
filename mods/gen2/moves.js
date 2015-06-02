@@ -207,7 +207,9 @@ exports.BattleMovedex = {
 		inherit: true,
 		accuracy: 90,
 		basePower: 50,
-		basePowerCallback: undefined,
+		basePowerCallback: function () {
+			return 50;
+		},
 		secondary: {
 			chance: 30,
 			volatileStatus: 'flinch'

@@ -673,13 +673,13 @@ var commands = exports.commands = {
 	roomban: function (target, room, user, connection) {
 		if (!target) return this.parse('/help roomban');
 		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
-		if (Users(target).getIdentity(room.id).substr(0,1) === '#') return this.sendReply("Room owners and founders cannot be roombanned.");
 
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
 
+		if (this.targetUser === room.founder && !user.can('pban')) return this.sendReply("Room founders cannot be banned.");
 		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
 		if (!room.bannedUsers || !room.bannedIps) {

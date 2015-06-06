@@ -882,11 +882,7 @@ exports.BattleMovedex = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1},
-		onTryHit: function (target, pokemon) {
-			if (!pokemon.ateBerry) {
-				return false;
-			}
-		},
+		// Move disabling implemented in Battle#nextTurn in battle-engine.js
 		secondary: false,
 		target: "normal",
 		type: "Poison"
@@ -8791,7 +8787,7 @@ exports.BattleMovedex = {
 				return false;
 			},
 			onBasePower: function (basePower, attacker, defender, move) {
-				if (move.type === 'Dragon' && defender.isGrounded()) {
+				if (move.type === 'Dragon' && defender.isGrounded() && !defender.isSemiInvulnerable()) {
 					this.debug('misty terrain weaken');
 					return this.chainModify(0.5);
 				}
@@ -9387,6 +9383,11 @@ exports.BattleMovedex = {
 		self: {
 			volatileStatus: 'lockedmove'
 		},
+		onAfterMove: function (pokemon) {
+			if (pokemon.volatiles['lockedmove'] && pokemon.volatiles['lockedmove'].duration === 1) {
+				pokemon.removeVolatile('lockedmove');
+			}
+		},
 		secondary: false,
 		target: "randomNormal",
 		type: "Dragon"
@@ -9619,6 +9620,11 @@ exports.BattleMovedex = {
 		flags: {contact: 1, protect: 1, mirror: 1},
 		self: {
 			volatileStatus: 'lockedmove'
+		},
+		onAfterMove: function (pokemon) {
+			if (pokemon.volatiles['lockedmove'] && pokemon.volatiles['lockedmove'].duration === 1) {
+				pokemon.removeVolatile('lockedmove');
+			}
 		},
 		secondary: false,
 		target: "randomNormal",
@@ -12559,6 +12565,7 @@ exports.BattleMovedex = {
 				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
 					applies = true;
 					this.cancelMove(pokemon);
+					pokemon.removeVolatile('twoturnmove');
 				}
 				if (pokemon.volatiles['magnetrise']) {
 					applies = true;
@@ -14166,6 +14173,11 @@ exports.BattleMovedex = {
 		flags: {contact: 1, protect: 1, mirror: 1},
 		self: {
 			volatileStatus: 'lockedmove'
+		},
+		onAfterMove: function (pokemon) {
+			if (pokemon.volatiles['lockedmove'] && pokemon.volatiles['lockedmove'].duration === 1) {
+				pokemon.removeVolatile('lockedmove');
+			}
 		},
 		secondary: false,
 		target: "randomNormal",

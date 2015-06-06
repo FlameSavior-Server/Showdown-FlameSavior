@@ -3309,6 +3309,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'averagemons') {
 			matched = true;
+			if (target !== 'all') buffer += "Every Pokémon has a stat spread of 100/100/100/100/100/100.<br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3526481/\">Averagemons</a><br />";
 		}
 		if (target === 'all' || target === 'hiddentype' || target === 'ht') {
@@ -3553,6 +3554,33 @@ var commands = exports.commands = {
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3498688/\">Doubles OU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3522814/\">Doubles OU Viability Ranking</a><br />";
 		}
+		if (target === 'all' || target === 'bw' || target === 'gen5') {
+			matched = true;
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3509218/#post-5522693\">BW Resources</a><br />";
+		}
+		if (target === 'all' || target === 'dpp' || target === 'gen4') {
+			matched = true;
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3509218/#post-5522692\">DPP Resources</a><br />";
+		}
+		if (target === 'all' || target === 'adv' || target === 'gen3') {
+			matched = true;
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3509218/#post-5522690\">ADV Resources</a><br />";
+		}
+		if (target === 'all' || target === 'gsc' || target === 'gen2') {
+			matched = true;
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3509218/#post-5522689\">GSC Resources</a><br />";
+		}
+		if (target === 'all' || target === 'rby' || target === 'gen1') {
+			matched = true;
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3509218/#post-5522688\">RBY Resources</a><br />";
+		}
+		if (target === 'vgc2015' || target === 'vgc' || target === 'vgc15') {
+			matched = true;
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3524352/\">VGC 2015 Rules</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3530547/\">VGC 2015 Viability Ranking</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3500650/\">VGC Learning Resources</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3526666/\">Sample Teams for VGC 2015</a><br />";
+		}
 		if (!matched) {
 			return this.sendReply("The Tiers entry '" + target + "' was not found. Try /tiers for general help.");
 		}
@@ -3671,38 +3699,6 @@ var commands = exports.commands = {
 		} else {
 			if (Rooms.lobby) Rooms.lobby.addRaw("<div class=\"broadcast-blue\"><b>The Pokemon of the Day was removed!</b><br />No pokemon will be guaranteed in random battles.</div>");
 			this.logModCommand("The Pokemon of the Day was removed by " + user.name + ".");
-		}
-	},
-
-	spammode: function (target, room, user) {
-		if (!this.can('ban')) return false;
-
-		// NOTE: by default, spammode does nothing; it's up to you to set stricter filters
-		// in config for chatfilter/hostfilter. Put this above the spammode filters:
-		/*
-		if (!Config.spammode) return;
-		if (Config.spammode < Date.now()) {
-			delete Config.spammode;
-			return;
-		}
-		*/
-
-		if (target === 'off' || target === 'false') {
-			if (Config.spammode) {
-				delete Config.spammode;
-				this.privateModCommand("(" + user.name + " turned spammode OFF.)");
-			} else {
-				this.sendReply("Spammode is already off.");
-			}
-		} else if (!target || target === 'on' || target === 'true') {
-			if (Config.spammode) {
-				this.privateModCommand("(" + user.name + " renewed spammode for half an hour.)");
-			} else {
-				this.privateModCommand("(" + user.name + " turned spammode ON for half an hour.)");
-			}
-			Config.spammode = Date.now() + 30 * 60 * 1000;
-		} else {
-			this.sendReply("Unrecognized spammode setting.");
 		}
 	},
 

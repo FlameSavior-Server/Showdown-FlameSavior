@@ -2317,7 +2317,7 @@ exports.BattleFormatsData = {
 	gallade: {
 		randomBattleMoves: ["bulkup","drainpunch","icepunch","shadowsneak","closecombat","zenheadbutt","knockoff","trick"],
 		randomDoubleBattleMoves: ["closecombat","trick","stoneedge","shadowsneak","drainpunch","icepunch","zenheadbutt","knockoff","trickroom","protect","helpinghand","healpulse"],
-		tier: "RU"
+		tier: "NU"
 	},
 	gallademega: {
 		randomBattleMoves: ["swordsdance","closecombat","drainpunch","knockoff","zenheadbutt","substitute"],
@@ -4750,7 +4750,7 @@ exports.BattleFormatsData = {
 		randomBattleMoves: ["calmmind","rockpolish","earthpower","focusblast","psychic","sludgewave","stealthrock","knockoff"],
 		randomDoubleBattleMoves: ["earthpower","focusblast","rockpolish","hiddenpowerice","psychic","sludgebomb","protect"],
 		dreamWorldPokeball: 'dreamball',
-		tier: "OU"
+		tier: "Uber"
 	},
 	landorustherian: {
 		randomBattleMoves: ["swordsdance","rockpolish","earthquake","stoneedge","uturn","superpower","stealthrock"],
@@ -5300,6 +5300,11 @@ exports.BattleFormatsData = {
 	},
 	plasmanta: {
 		randomBattleMoves: ["sludgebomb","thunderbolt","substitute","hiddenpowerice","psyshock","dazzlinggleam","flashcannon"],
+		isNonstandard: true,
+		tier: "CAP"
+	},
+	naviathan: {
+		randomBattleMoves: ["dragondance","waterfall","ironhead","iciclecrash"],
 		isNonstandard: true,
 		tier: "CAP"
 	},

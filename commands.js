@@ -255,7 +255,7 @@ var commands = exports.commands = {
 	},
 	backhelp: ["/back - Unblocks challenges and/or private messages, if either are blocked."],
 
-	makechatroom: function (target, room, user) {
+	makechatroom: function (target, room, user, connection, cmd) {
 		if (!this.can('makeroom')) return;
 
 		// `,` is a delimiter used by a lot of /commands

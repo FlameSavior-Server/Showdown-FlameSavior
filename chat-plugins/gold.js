@@ -1,4 +1,5 @@
 var fs = require('fs');
+var request = require('request');
 var closeShop = false;
 var closedShop = 0;
 var crypto = require('crypto');
@@ -288,10 +289,6 @@ exports.commands = {
 	hc: function(room, user, cmd) {
 		return this.parse('/hotpatch chat');
 	},
-	def: function(target, room, user) {
-		if (!target) return this.sendReply('/def [word] - Will bring you to a search to define the targeted word.');
-		return this.parse('[[define ' + target + ']]');
-	},
 	cc1v1: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
@@ -308,6 +305,38 @@ exports.commands = {
 		if (!this.canBroadcast() || !user.can('lock')) return this.sendReply('/pbanlist - Access Denied.');
 		var pban = fs.readFileSync('config/pbanlist.txt', 'utf8');
 		return user.send('|popup|' + pban);
+	},
+	def: 'define',
+	define: function(target, room, user) {
+		if (!target) return this.sendReply('Usage: /define <word>');
+		target = toId(target);
+		if (target > 50) return this.sendReply('/define <word> - word can not be longer than 50 characters.');
+		if (!this.canBroadcast()) return;
+		var options = {
+		    url: 'http://api.wordnik.com:80/v4/word.json/'+target+'/definitions?limit=3&sourceDictionaries=all' +
+		    '&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
+		};
+		var self = this;
+		function callback(error, response, body) {
+		    if (!error && response.statusCode == 200) {
+		        var page = JSON.parse(body);
+		        var output = '<font color=#24678d><b>Definitions for ' + target + ':</b></font><br />';
+		        if (!page[0]) {
+		        	self.sendReplyBox('No results for <b>"' + target + '"</b>.');
+		        	return room.update();
+		        } else {
+		        	var count = 1;
+		        	for (var u in page) {
+		        		if (count > 3) break;
+		        		output += '(<b>'+count+'</b>) ' + Tools.escapeHTML(page[u]['text']) + '<br />';
+		        		count++;
+		        	}
+		        	self.sendReplyBox(output);
+		        	return room.update();
+		        }
+		    }
+		}
+		request(options, callback);
 	},
 	vault: function(target, room, user, connection) {
 		var money = fs.readFileSync('config/money.csv', 'utf8');

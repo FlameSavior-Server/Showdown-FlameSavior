@@ -2892,7 +2892,7 @@ Battle = (function () {
 				this.debug('damage event failed');
 				return damage;
 			}
-			if (target.illusion && effect && effect.effectType === 'Move') {
+			if (target.illusion && effect && effect.effectType === 'Move' && effect.id !== 'confused') {
 				this.debug('illusion cleared');
 				target.illusion = null;
 				this.add('replace', target, target.getDetails);
@@ -2909,6 +2909,9 @@ Battle = (function () {
 			break;
 		case 'powder':
 			this.add('-damage', target, target.getHealth, '[silent]');
+			break;
+		case 'confused':
+			this.add('-damage', target, target.getHealth, '[from] confusion');
 			break;
 		default:
 			if (effect.effectType === 'Move') {

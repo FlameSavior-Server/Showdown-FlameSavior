@@ -2,6 +2,8 @@
  * by jd and panpawn
  */
 
+if (typeof Gold === 'undefined') global.Gold = {};
+
 var fs = require('fs');
 var moment = require('moment');
 
@@ -24,7 +26,10 @@ function updateSeen(userid) {
 	seenData[toId(userid)] = Date.now();
 	saveData();
 }
+
 global.updateSeen = updateSeen;
+Gold.seenData = seenData;
+
 exports.commands = {
 	lastseen: 'seen',
 	seen: function (target, room, user) {

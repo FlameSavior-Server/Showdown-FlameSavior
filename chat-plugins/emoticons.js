@@ -12,11 +12,11 @@ var serialize = require('node-serialize');
 if (typeof Gold === 'undefined') global.Gold = {};
 
 Gold.emoticons = {
-	chatEmotes: {}, //much object such wow :^)
+	chatEmotes: {},
 	processEmoticons: function(text) {
 		var patterns = [],
-			metachars = /[[\]{}()*+?.\\|^$\-,&#\s]/g,
-			self = this;
+		metachars = /[[\]{}()*+?.\\|^$\-,&#\s]/g,
+		self = this;
 		for (var i in this.chatEmotes) {
 			if (this.chatEmotes.hasOwnProperty(i)) {
 				patterns.push('(' + i.replace(metachars, "\\$&") + ')');
@@ -57,11 +57,7 @@ Gold.emoticons = {
 	}
 };
 
-/* EZ-Emote Commands plugin
- * These are commands that make it easier for people to actually 
- * add / remove emotes without having to manaully do so every time
- * By: panpawn (inspired by jd's ez-tc plugin)
- */
+//commands
 
 var emotes = {};
 

@@ -18,8 +18,10 @@ exports.commands = {
 		
 	alert: function(target, room, user) {
 		if (!this.can('declare')) return false;
+		if (!target) return this.parse('/help alert');
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
+		if (!targetUser || !targetUser.connected) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
 		targetUser.popup(target);
 	},
 	alerthelp: ['/alert user, message: Sends a popup to a user. Requires &~'],

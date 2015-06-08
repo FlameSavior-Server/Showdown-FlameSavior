@@ -788,6 +788,7 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		targetUser.popup(target);
 	},
+	alerthelp: ['/alert user, message: Sends a popup to a user. Requires &~']
 
 	/*********************************************************
 	 * Moderating: Punishments

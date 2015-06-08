@@ -90,6 +90,11 @@ exports.commands = {
 				this.privateModCommand("(" + user.name + " has enabled broadcasting trainer cards in this room.)");
 				break;
 
+			case 'reload':
+				if (!this.can('pban')) return false;
+				loadTrainerCards();
+				break;
+
 			case 'info':
 			case 'help':
 			default:

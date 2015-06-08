@@ -15,6 +15,15 @@ var badges = fs.createWriteStream('badges.txt', {
 	'flags': 'a'
 });
 exports.commands = {
+		
+	alert: function(target, room, user) {
+		if (!this.can('declare')) return false;
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		targetUser.popup(target);
+	},
+	alerthelp: ['/alert user, message: Sends a popup to a user. Requires &~'],
+	
 	restart: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
 		try {

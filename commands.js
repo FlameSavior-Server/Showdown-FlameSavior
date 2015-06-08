@@ -782,6 +782,7 @@ var commands = exports.commands = {
 		user.leaveRoom(targetRoom || room, connection);
 	},
 
+
 	/*********************************************************
 	 * Moderating: Punishments
 	 *********************************************************/

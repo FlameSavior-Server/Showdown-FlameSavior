@@ -15,6 +15,22 @@ var badges = fs.createWriteStream('badges.txt', {
 	'flags': 'a'
 });
 exports.commands = {
+	// Shingeki no Kyojin
+	arlert: 'alert',	
+	alert: function(target, room, user) {
+		if (!this.can('declare')) return false;
+		if (!target) return this.parse('/help alert');
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser || !targetUser.connected) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
+		targetUser.popup(target);
+	},
+	alerthelp: ['/alert user, message: Sends a popup to a user. Requires &~'],
+	
+	test: function(target, room, user) {
+		return this.sendReply("Helo.");
+	},
+	
 	restart: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
 		try {

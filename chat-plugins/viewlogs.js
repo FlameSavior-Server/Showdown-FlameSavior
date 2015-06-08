@@ -42,7 +42,8 @@ exports.commands = {
 			var newDate = new Date();
 			data = data.split('\n');
 			var newFile = ['<html>',
-			'<head><link rel="stylesheet" type="text/css" href="http://goldservers.info/style/client.css"><link rel="stylesheet" type="text/css" href="http://goldservers.info/js/style.css"></head>',
+			'<head><link rel="stylesheet" type="text/css" href="http://goldservers.info/style/client.css"><link rel="stylesheet" type="text/css" href="http://goldservers.info/js/style.css">' +
+			'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head>',
 			'<div class="header"><img class="logo" src="http://i.imgur.com/fJwCDif.png" height="45" alt="Gold!"><center><font color=red>Room: ' + Tools.escapeHTML(targetRoom) +
 			' Date: ' + Tools.escapeHTML(date) + '</font><br />' ,
 			'<font color=red>Logs obtained ' + newDate.toUTCString() + ' by ' + Tools.escapeHTML(user.name) + '</font></center><div class="maintabbarbottom"></div></div>',

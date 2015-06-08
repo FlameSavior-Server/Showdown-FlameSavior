@@ -1368,7 +1368,7 @@ exports.commands = {
 	},
 	cs: 'customsymbol',
 	customsymbol: function(target, room, user) {
-		if (!user.canCustomSymbol && !hasBadge(user.userid, 'vip')) return this.sendReply('You don\'t have the permission to use this command.');
+		if (!user.canCustomSymbol && !Gold.hasBadge(user.userid, 'vip')) return this.sendReply('You don\'t have the permission to use this command.');
 		//var free = true;
 		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
 		if (!this.canTalk()) return;
@@ -1699,7 +1699,7 @@ exports.commands = {
 		}
 		if (target[0] === 'custom') {
 			price = 35;
-			if (hasBadge(user.userid, 'vip')) price = 0;
+			if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
 				match = true;
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .png format. ex: /buy custom, [url to the avatar]');
@@ -1776,7 +1776,7 @@ exports.commands = {
 		}
 		if (target[0] === 'animated') {
 			price = 45;
-			if (hasBadge(user.userid, 'vip')) price = 0;
+			if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
 				match = true;
 				if (!target[1]) return this.sendReply('Please specify the avatar you would like you buy. It has a maximum size of 80x80 and must be in .gif format. ex: /buy animated, [url to the avatar]');
@@ -1840,7 +1840,7 @@ exports.commands = {
 		}
 		if (target2 === 'fix') {
 			price = 15;
-			if (hasBadge(user.userid, 'vip')) price = 0;
+			if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
 				match = true;
 				user.money = user.money - price;

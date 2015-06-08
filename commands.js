@@ -781,6 +781,13 @@ var commands = exports.commands = {
 		}
 		user.leaveRoom(targetRoom || room, connection);
 	},
+	
+	alert: function(target, room, user) {
+		if (!this.can('declare')) return false;
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		targetUser.popup(target);
+	},
 
 	/*********************************************************
 	 * Moderating: Punishments

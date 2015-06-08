@@ -6,27 +6,23 @@ var http = require('http');
 
 exports.commands = {
 	profile: function(target, room, user) {
-		console.log('boop');
 		if (!target) target = user.name;
 		if (toId(target).length > 19) return this.sendReply("Usernames may not be more than 19 characters long.");
 		if (toId(target).length < 1) return this.sendReply(target + " is not a valid username.");
 		if (!this.canBroadcast()) return;
 		
 		var targetUser = Users.get(target);
-		console.log('boop2');
 		
 		if (!targetUser) {
 			var username = target;
 			var userid = toId(target);
 			var online = false;
 			var avatar = (Config.customavatars[userid] ? "http://" + serverIp + ":" + Config.port + "/avatars/" + Config.customavatars[userid] : "http://play.pokemonshowdown.com/sprites/trainers/167.png");
-			console.log('boop3');
 		} else {
 			var username = targetUser.name;
 			var userid = targetUser.userid;
 			var online = targetUser.connected;
 			var avatar = (isNaN(targetUser.avatar) ? "http://" + serverIp + ":" + Config.port + "/avatars/" + targetUser.avatar : "http://play.pokemonshowdown.com/sprites/trainers/" + targetUser.avatar + ".png");
-			console.log('boop4');
 		}
 
     	if (Users.usergroups[userid]) {
@@ -35,11 +31,9 @@ exports.commands = {
 		} else {
 			var userGroup = 'Regular User';
 		}
-		console.log('boop5');
 
 		var self = this;
 		var bucks = economy.readMoney(userid)
-			console.log('boop6');
 			var options = {
 				host: "pokemonshowdown.com",
 				port: 80,
@@ -48,7 +42,6 @@ exports.commands = {
 
 			var content = "";
 			var req = http.request(options, function(res) {
-				console.log('boop7');
 
 				res.setEncoding("utf8");
 				res.on("data", function (chunk) {
@@ -62,7 +55,6 @@ exports.commands = {
 							content = content[0].split("</em>");
 							if (content[1]) {
 								regdate = content[1].trim();
-								console.log('boop8');
 								showProfile();
 							}
 						}
@@ -76,7 +68,6 @@ exports.commands = {
 			req.end();
 
 			function showProfile() {
-				console.log('boop10');
 				var seenOutput = '';
 				if (!Gold.seenData[userid]) seenOutput = "Never";
 				var date = new Date(Gold.seenData[userid]);
@@ -120,5 +111,5 @@ exports.commands = {
 				self.sendReplyBox(profile);
 				room.update();
 			}
-	},
+	}
 };

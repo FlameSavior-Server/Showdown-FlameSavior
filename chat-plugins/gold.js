@@ -1384,6 +1384,7 @@ exports.commands = {
 		user.updateIdentity();
 		user.canCustomSymbol = false;
 		user.hasCustomSymbol = true;
+		return this.sendReply("Your symbol has been set.");
 	},
 	rs: 'resetsymbol',
 	resetsymbol: function(target, room, user) {

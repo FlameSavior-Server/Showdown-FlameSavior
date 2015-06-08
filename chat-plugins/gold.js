@@ -15,7 +15,8 @@ var badges = fs.createWriteStream('badges.txt', {
 	'flags': 'a'
 });
 exports.commands = {
-		
+	// Shingeki no Kyojin
+	arlert: 'alert',	
 	alert: function(target, room, user) {
 		if (!this.can('declare')) return false;
 		if (!target) return this.parse('/help alert');

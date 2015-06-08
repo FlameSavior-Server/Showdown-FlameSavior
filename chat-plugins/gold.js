@@ -24,6 +24,10 @@ exports.commands = {
 	},
 	alerthelp: ['/alert user, message: Sends a popup to a user. Requires &~'],
 	
+	test: function(target, room, user) {
+		return this.sendReply("Helo.");
+	},
+	
 	restart: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
 		try {

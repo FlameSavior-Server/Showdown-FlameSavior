@@ -781,14 +781,7 @@ var commands = exports.commands = {
 		}
 		user.leaveRoom(targetRoom || room, connection);
 	},
-	
-	alert: function(target, room, user) {
-		if (!this.can('declare')) return false;
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		targetUser.popup(target);
-	},
-	alerthelp: ['/alert user, message: Sends a popup to a user. Requires &~']
+
 
 	/*********************************************************
 	 * Moderating: Punishments

@@ -92,6 +92,7 @@ exports.commands = {
 
 			case 'reload':
 				if (!this.can('pban')) return false;
+				return this.sendReply("Trainer cards have been reloaded.");
 				loadTrainerCards();
 				break;
 
@@ -106,6 +107,7 @@ exports.commands = {
 					"/trainercard list - Shows a list of all trainer cards added with this command.<br />" +
 					"/trainercard off - Disables broadcasting trainer cards in the current room.<br />" +
 					"/trainercard on - Enables broadcasting trainer cards in the current room.<br />" +
+					"/trainercard reload - Reloads trainer cards if they break (shouldn't happen).<br />" +
 					"/trainercard help - Shows this help command.<br />" +
 					"<a href=\"https://gist.github.com/jd4564/399934fce2e9a5ae29ad\">EZ-TC Plugin by jd</a>"
 				);

@@ -71,6 +71,25 @@ function writeMoney(filename, user, amount, callback) {
 }
 exports.writeMoney = writeMoney;
 
+function readMoneyAsync (user, callback) {
+	fs.readFile('config/money.csv', 'utf8', function (err, data) {
+		var rows = data.split("\n");
+		var matched = false;
+		for (var i = 0; i < rows.length; i++) {
+			if (!rows[i]) continue;
+			var parts = rows[i].split(",");
+			var userid = toId(parts[0]);
+			if (user === userid) {
+				var matched = true;
+				var amount = Number(parts[1]);
+				break;
+			}
+		}
+		callback((matched ? amount : 0));
+	});
+}
+exports.readMoneyAsync = readMoneyAsync;
+
 var cmds = {
 	disqualify: 'dq',
 	dq: function(target, room, user, connection, cmd) {

@@ -15,7 +15,7 @@ exports.commands = {
 	dicestart: 'startdice',
 	startdice: function(target, room, user) {
 	 	if (!this.canTalk()) return this.sendReply("You can not start dice games while unable to speak.");
-	 	if (!user.can('broadcast',null,room)) return this.sendReply('/startdice - Access denied.');
+	 	//if (!user.can('broadcast',null,room)) return this.sendReply('/startdice - Access denied.');
 	 	if (!target) return this.sendReply('Usage: /startdice <bet>');
 	 	if (isNaN(Number(target))) return this.sendReply('/startdice - <bet> must be a number greater than 0');
 	 	target = Math.round(Number(target));
@@ -123,7 +123,7 @@ exports.commands = {
 						}
 						var betMoney = room.dice.bet;
 	 					if (firstNumber > secondNumber) {
-	 						output += '<font color=#24678d><b>' + Tools.escapeHTML(firstName) + '</b></font> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '.<br />'
+	 						output += '<font color=#24678d><b>' + Tools.escapeHTML(firstName) + '</b></font> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />'
 	 						output += 'Better luck next time ' + Tools.escapeHTML(secondName) + '!';
 	 						economy.writeMoney('money', Users.get(firstName).userid, betMoney, function() {
 	 							economy.writeMoney('money', Users.get(secondName).userid,-betMoney,function() {

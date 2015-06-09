@@ -142,7 +142,7 @@ exports.commands = {
 	 						delete room.dice.startTime;
 	 					}
 	 					if (secondNumber > firstNumber) {
-	 						output += '<font color=#24678d><b>' + Tools.escapeHTML(secondName) + '</b></font> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '.<br />';
+	 						output += '<font color=#24678d><b>' + Tools.escapeHTML(secondName) + '</b></font> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />';
 	 						output += 'Better luck next time ' + Tools.escapeHTML(firstName) + '!';
 	 						economy.writeMoney('money', Users.get(secondName).userid, betMoney, function() {
 	 							economy.writeMoney('money', Users.get(firstName).userid,-betMoney,function() {

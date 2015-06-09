@@ -3,7 +3,7 @@
 */
 
 exports.commands = {
-	dicehelp: function(target, room, user) {
+	gambledicehelp: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			'Dice game commands: <br />' + 

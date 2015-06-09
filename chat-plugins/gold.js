@@ -1595,7 +1595,7 @@ exports.commands = {
 	},
 	gamble: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		return this.sendReply("Command outdated.  See /dicehelp for the new gambling system.");
+		return this.sendReply("Command outdated.  See /gambledicehelp for the new gambling system.");
 		/*
 		if (!target) return this.sendReply('/gamble [amount] - Gambles the amount chosen. If you win, you win the amount * 2, else, you lose the amount.');
 		var amount = readMoney(user.userid);

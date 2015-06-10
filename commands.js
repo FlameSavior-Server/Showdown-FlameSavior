@@ -683,7 +683,7 @@ var commands = exports.commands = {
 		var name = this.targetUsername;
 		var userid = toId(name);
 
-		if (this.targetUser === room.founder && !user.can('pban')) return this.sendReply("Room founders cannot be banned.");
+		if (this.targetUser === room.founder || room.auth[this.targetUser] === '#' && !user.can('pban')) return this.sendReply("Room founders / owners cannot be banned.");
 		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
 		if (!this.can('ban', targetUser, room)) return false;
 		if (!room.bannedUsers || !room.bannedIps) {

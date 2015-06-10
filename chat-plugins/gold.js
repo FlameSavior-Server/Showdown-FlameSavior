@@ -563,7 +563,7 @@ exports.commands = {
 	},
 	lick: function(target, room, user) {
 		if (!target) return this.sendReply('/lick needs a target.');
-		return this.parse('/me licks ' + target + ' excessivley!');
+		return this.parse('/me licks ' + target + ' excessively!');
 	},
 	gethex: 'hex',
 	hex: function(target, room, user) {

@@ -926,24 +926,18 @@ exports.commands = {
 			'★ <b>Plug.dj</b> - Come listen to music with us! Click <a href="http://plug.dj/gold-server/">here</a> to start!<br>' +
 			'<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
 	},
+	vip: 'donate',
 	support: 'donate',
 	donate: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox(
-			"<center>Like this server and want to keep it going?  If so, you can make a paypal donation to Gold!  You can choose the amount.<br />" +
-			'<hr width="85%">' +
-			"- Donations will help Gold to upgrade the VPS so we can do more and hold more users!<br />" +
-			"- For donations <b>$5 or over</b>, you can get: 200 bucks, a custom avatar, a custom trainer card, a custom symbol, and a custom music box!<br />" +
-			"- For donations <b>$10 and over</b>, it will get you: (the above), 600 bucks (in addition to the above 200, making 800 total) and VIP status along with a VIP badge!<br />" +
-			"- Refer to the /shop command for a more detailed description of these prizes.  After donating, PM panpawn.<br />" +
-			'<hr width="85%">' +
-			"Click the button below to donate!<br />" +
-			'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FBZBA7MJNMG7J&lc=US&item_name=Gold%20Server&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" title=Donate now!">'
-		);
-	},
-	vip: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Information about what a VIP user is can be found <a href="http://goldserver.weebly.com/vip.html">here</a>.');
+		switch (cmd) {
+			case 'vip':
+				msg = 'Information about what a VIP user is can be found <a href="http://goldservers.info/forums/showthread.php?tid=76">here</a>.';
+				break;
+			default:
+				msg = 'For information on donating and VIP status, go <a href = "http://goldservers.info/forums/showthread.php?tid=76"here</a>.';
+		}
+		this.sendReplyBox(msg);
 	},
 	links: function(target, room, user) {
 		if (!this.canBroadcast()) return;

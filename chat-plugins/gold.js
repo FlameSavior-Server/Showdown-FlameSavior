@@ -939,6 +939,10 @@ exports.commands = {
 		}
 		this.sendReplyBox(msg);
 	},
+	dev: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox("Interested in developing for this server?  Go <a href=\"http://goldservers.info/forums/showthread.php?tid=77\">here</a>.");
+	},
 	links: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(

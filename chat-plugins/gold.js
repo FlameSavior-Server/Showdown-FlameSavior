@@ -928,14 +928,14 @@ exports.commands = {
 	},
 	vip: 'donate',
 	support: 'donate',
-	donate: function(target, room, user) {
+	donate: function(target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
 		switch (cmd) {
 			case 'vip':
 				msg = 'Information about what a VIP user is can be found <a href="http://goldservers.info/forums/showthread.php?tid=76">here</a>.';
 				break;
 			default:
-				msg = 'For information on donating and VIP status, go <a href = "http://goldservers.info/forums/showthread.php?tid=76"here</a>.';
+				msg = 'For information on donating and VIP status, go <a href = "http://goldservers.info/forums/showthread.php?tid=76">here</a>.';
 		}
 		this.sendReplyBox(msg);
 	},

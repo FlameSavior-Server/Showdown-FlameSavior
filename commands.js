@@ -38,6 +38,8 @@ var commands = exports.commands = {
 	},
 
 	auth: 'authority',
+	stafflist: 'authority',
+	globalauth: 'authority',
 	authlist: 'authority',
 	authority: function (target, room, user, connection) {
 		var rankLists = {};
@@ -242,6 +244,7 @@ var commands = exports.commands = {
 	unignorepmshelp: ["/unblockpms - Unblocks private messages. Block them with /blockpms."],
 
 	idle: 'away',
+	afk: 'away',
 	away: function (target, room, user) {
 		this.parse('/blockchallenges');
 		this.parse('/blockpms ' + target);
@@ -249,6 +252,7 @@ var commands = exports.commands = {
 	awayhelp: ["/away - Blocks challenges and private messages. Unblock them with /back."],
 
 	unaway: 'back',
+	unafk: 'back',
 	back: function () {
 		this.parse('/unblockpms');
 		this.parse('/unblockchallenges');
@@ -2220,7 +2224,7 @@ var commands = exports.commands = {
 			this.sendReply("/help OR /h OR /? - Gives you help.");
 		} else if (!target) {
 			this.sendReply("COMMANDS: /nick, /avatar, /rating, /whois, /msg, /reply, /ignore, /away, /back, /timestamps, /highlight");
-			this.sendReply("INFORMATIONAL COMMANDS: /data, /dexsearch, /movesearch, /groups, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /calc (replace / with ! to broadcast. Broadcasting requires: + % @ & ~)");
+			this.sendReply("INFORMATIONAL COMMANDS: /data, /dexsearch, /movesearch, /groups, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /calc (replace / with ! to broadcast. Broadcasting requires: + % @ # & ~)");
 			if (user.group !== Config.groupsranking[0]) {
 				this.sendReply("DRIVER COMMANDS: /warn, /mute, /unmute, /alts, /forcerename, /modlog, /lock, /unlock, /announce, /redirect");
 				this.sendReply("MODERATOR COMMANDS: /ban, /unban, /ip");

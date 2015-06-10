@@ -134,8 +134,7 @@ exports.BattleScripts = {
 						pokemon.volatiles['partialtrappinglock'].locked = target;
 						// Duration reset thus partially trapped at 2 always.
 						target.volatiles['partiallytrapped'].duration = 2;
-						// We deduct an additional PP that was not deducted earlier.
-						// Also get the move position for the PP change.
+						// We get the move position for the PP change.
 						var usedMovePos = -1;
 						for (var m in pokemon.moveset) {
 							if (pokemon.moveset[m].id === move.id) usedMovePos = m;
@@ -143,9 +142,6 @@ exports.BattleScripts = {
 						if (usedMovePos > -1 && pokemon.moveset[usedMovePos].pp === 0) {
 							// If we were on the middle of the 0 PP sequence, the PPs get reset to 63.
 							pokemon.moveset[usedMovePos].pp = 63;
-						} else {
-							// Otherwise, plain reduct.
-							pokemon.deductPP(move, null, target);
 						}
 					}
 				}
@@ -1078,7 +1074,7 @@ exports.BattleScripts = {
 			// If you have a shitmon, you're covered in OUs and Ubers if possible
 			var tier = template.tier;
 			if (tier === 'LC' && (nuCount > 1 || hasShitmon)) continue;
-			if ((tier === 'NFE' || tier === 'UU') && (hasShitmon || (nuCount > 2 && this.random(1)))) continue;
+			if ((tier === 'NFE' || tier === 'UU' || tier === 'NU') && (hasShitmon || (nuCount > 2 && this.random(1)))) continue;
 			// Unless you have one of the worst mons, in that case we allow luck to give you both Mew and Mewtwo.
 			if (tier === 'Uber' && uberCount >= 1 && !hasShitmon) continue;
 
@@ -1124,7 +1120,7 @@ exports.BattleScripts = {
 			// Increment type bias counters.
 			if (tier === 'Uber') {
 				uberCount++;
-			} else if (tier === 'UU' || tier === 'NFE' || tier === 'LC') {
+			} else if (tier === 'UU' || tier === 'NU' || tier === 'NFE' || tier === 'LC') {
 				nuCount++;
 			}
 
@@ -1317,6 +1313,7 @@ exports.BattleScripts = {
 		var levelScale = {
 			LC: 96,
 			NFE: 90,
+			NU: 90,
 			UU: 85,
 			OU: 79,
 			Uber: 74

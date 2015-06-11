@@ -1,3 +1,4 @@
+const MAX_REASON_LENGTH = 300;
 var fs = require('fs');
 var request = require('request');
 var closeShop = false;
@@ -2395,14 +2396,8 @@ exports.commands = {
 			return this.privateModCommand("(" + targetUser.name + " would be banned by " + user.name + problem + ".)");
 		}
 		if (targetUser.confirmed) {
-			if (cmd === 'forceban') {
-				var from = targetUser.deconfirm();
-				ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
-			} else {
-				return this.sendReply("" + targetUser.name + " is a confirmed user. If you are sure you would like to ban them use /forceban.");
-			}
-		} else if (cmd === 'forceban') {
-			return this.sendReply("Use /ban; " + targetUser.name + " is not a confirmed user.");
+			var from = targetUser.deconfirm();
+			ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
 		}
 		targetUser.popup("" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");
 		this.addModCommand("" + targetUser.name + " took a headshot from " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");

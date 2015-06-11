@@ -1,3 +1,4 @@
+const MAX_REASON_LENGTH = 300;
 var fs = require('fs');
 var request = require('request');
 var closeShop = false;

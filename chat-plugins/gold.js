@@ -386,15 +386,9 @@ exports.commands = {
 	},
 	suggestion: 'suggest',
 	suggest: function(target, room, user) {
-		if (!target) return this.sendReply('/suggest [suggestion] - Sends your suggestion to staff to review.');
-		var html = ['<img ', '<a href', '<font ', '<marquee', '<blink', '<center'];
-		for (var x in html) {
-			if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
-		}
-		if (target.length > 450) return this.sendReply('This suggestion is too long; it cannot exceed 450 characters.');
-		if (!this.canTalk()) return;
-		Rooms.rooms.staff.add(user.userid + ' (in ' + room.id + ') has suggested: ' + target + '');
-		this.sendReply('Thanks, your suggestion "' + target + '" has been sent.  We\'ll review your feedback soon.');
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox("Interested in suggesting for this server?  Go <a href=\"http://goldservers.info/forums/showthread.php?tid=78\">here</a>.");
+
 	},
 	//New Room Commands
 	newroomcommands: function(target, room, user) {

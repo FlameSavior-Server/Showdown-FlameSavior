@@ -387,7 +387,7 @@ exports.commands = {
 	suggestion: 'suggest',
 	suggest: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox("Interested in suggesting for this server?  Go <a href=\"http://goldservers.info/forums/showthread.php?tid=78\">here</a>.");
+		this.sendReplyBox("Have a suggestion for this server? Go here : <a href=\"http://goldservers.info/forums/showthread.php?tid=78\">here</a>.");
 
 	},
 	//New Room Commands

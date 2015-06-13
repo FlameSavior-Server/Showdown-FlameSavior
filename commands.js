@@ -242,15 +242,14 @@ var commands = exports.commands = {
 		return this.sendReply("You are no longer blocking private messages.");
 	},
 	unignorepmshelp: ["/unblockpms - Unblocks private messages. Block them with /blockpms."],
-
+	/*
 	idle: 'away',
-	afk: 'away',
 	away: function (target, room, user) {
 		this.parse('/blockchallenges');
 		this.parse('/blockpms ' + target);
 	},
 	awayhelp: ["/away - Blocks challenges and private messages. Unblock them with /back."],
-
+	*/
 	unaway: 'back',
 	unafk: 'back',
 	back: function () {

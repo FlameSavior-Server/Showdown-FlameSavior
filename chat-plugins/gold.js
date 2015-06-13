@@ -1473,23 +1473,17 @@ exports.commands = {
 	givebucks: function(target, room, user) {
 		if (!user.can('pban')) return this.sendReply('You do not have enough authority to do this.');
 		if (!target) return this.parse('/help givebucks');
-		var jaja = ['tailz,', 'Tailz,'];
-		if (target.indexOf(jaja) > -1) {
-			return this.parse('I like big butts!! O3O');
-		}
 		if (target.indexOf(',') != -1) {
 			var parts = target.split(',');
 			parts[0] = this.splitTarget(parts[0]);
 			var targetUser = this.targetUser;
-			if (!targetUser) {
-				return this.sendReply('User ' + this.targetUsername + ' not found.');
-			}
-			if (isNaN(parts[1])) {
-				return this.sendReply('Very funny, now use a real number.');
-			}
+			if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
+			if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
+			if (parts[1] < 1) return this.sendReply("You cannot give less than a buck.");
+			if (parts[1] > 1000) return this.sendReply("You cannot give more than 1,000 bucks at a time.");
 			var cleanedUp = parts[1].trim();
 			var giveMoney = Number(cleanedUp);
-			var data = fs.readFileSync('config/money.csv', 'utf8')
+			var data = fs.readFileSync('config/money.csv', 'utf8');
 			var match = false;
 			var money = 0;
 			var line = '';
@@ -1621,15 +1615,13 @@ exports.commands = {
 			var parts = target.split(',');
 			parts[0] = this.splitTarget(parts[0]);
 			var targetUser = this.targetUser;
-			if (!targetUser) {
-				return this.sendReply('User ' + this.targetUsername + ' not found.');
-			}
-			if (isNaN(parts[1])) {
-				return this.sendReply('Very funny, now use a real number.');
-			}
+			if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
+			if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
+			if (parts[1] < 1) return this.sendReply("You cannot take less than a buck.");
+			if (parts [1] > 1000) return this.sendReply("You cannot take more than 1,000 bucks at a time.");
 			var cleanedUp = parts[1].trim();
 			var takeMoney = Number(cleanedUp);
-			var data = fs.readFileSync('config/money.csv', 'utf8')
+			var data = fs.readFileSync('config/money.csv', 'utf8');
 			var match = false;
 			var money = 0;
 			var line = '';

@@ -1687,6 +1687,7 @@ exports.commands = {
 				this.sendReply('Use /customsymbol [symbol] to change your symbol now!');
 				user.canCustomSymbol = true;
 				this.add(user.name + ' has purchased a custom symbol!');
+				logTransaction(user.name + ' has purchased a custom symbol!');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}

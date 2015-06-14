@@ -1851,10 +1851,10 @@ exports.commands = {
 			if (price <= user.money) {
 				match = true;
 				user.money = user.money - price;
-				this.sendReply('You have purchased the ability to declare (from Admin). To do this message an Admin (~) with the message you want to send. Keep it sensible!');
+				this.sendReply('You have purchased the ability to declare (from Admin or leader). To do this message an Admin (~) or a Leader (&) with the message you want to send. Keep it sensible!');
 				user.canDecAdvertise = true;
 				economy.writeMoney('money', user, -25);
-				this.add(user.name + ' has purchased the ability to declare from an Admin!');
+				this.add(user.name + ' has purchased the ability to declare from an Admin or a leader!');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}

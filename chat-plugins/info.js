@@ -2023,7 +2023,7 @@ var commands = exports.commands = {
 		this.sendReply(buffer);
 	},
 	datahelp: ["/data [pokemon/item/move/ability] - Get details on this pokemon/item/move/ability/nature.",
-		"!data [pokemon/item/move/ability] - Show everyone these details. Requires: + % @ & ~"],
+		"!data [pokemon/item/move/ability] - Show everyone these details. Requires: + % @ # & ~"],
 
 	dt: 'details',
 	details: function () {
@@ -2143,30 +2143,30 @@ var commands = exports.commands = {
 					numSide = 0;
 					statSide = 1;
 					switch (inequality) {
-						case '>': direction = 'less'; break;
-						case '<': direction = 'greater'; break;
-						case '=': direction = 'equal'; break;
+					case '>': direction = 'less'; break;
+					case '<': direction = 'greater'; break;
+					case '=': direction = 'equal'; break;
 					}
 				} else if (!isNaN(targetParts[1])) {
 					numSide = 1;
 					statSide = 0;
 					switch (inequality) {
-						case '<': direction = 'less'; break;
-						case '>': direction = 'greater'; break;
-						case '=': direction = 'equal'; break;
+					case '<': direction = 'less'; break;
+					case '>': direction = 'greater'; break;
+					case '=': direction = 'equal'; break;
 					}
 				} else {
 					return this.sendReplyBox("No value given to compare with '" + Tools.escapeHTML(target) + "'.");
 				}
 				var stat = targetParts[statSide];
 				switch (toId(targetParts[statSide])) {
-					case 'attack': stat = 'atk'; break;
-					case 'defense': stat = 'def'; break;
-					case 'specialattack': stat = 'spa'; break;
-					case 'spatk': stat = 'spa'; break;
-					case 'specialdefense': stat = 'spd'; break;
-					case 'spdef': stat = 'spd'; break;
-					case 'speed': stat = 'spe'; break;
+				case 'attack': stat = 'atk'; break;
+				case 'defense': stat = 'def'; break;
+				case 'specialattack': stat = 'spa'; break;
+				case 'spatk': stat = 'spa'; break;
+				case 'specialdefense': stat = 'spd'; break;
+				case 'spdef': stat = 'spd'; break;
+				case 'speed': stat = 'spe'; break;
 				}
 				if (!(stat in allStats)) return this.sendReplyBox("'" + Tools.escapeHTML(target) + "' did not contain a valid stat.");
 				if (!searches['stats']) searches['stats'] = {};
@@ -2203,137 +2203,139 @@ var commands = exports.commands = {
 			var search = categories[cat];
 			if (!searches[search]) continue;
 			switch (search) {
-				case 'types':
-					for (var mon in dex) {
-						if (Object.count(searches[search], true) === 2) {
-							if (!(searches[search][dex[mon].types[0]]) || !(searches[search][dex[mon].types[1]])) delete dex[mon];
-						} else {
-							if (searches[search][dex[mon].types[0]] === false || searches[search][dex[mon].types[1]] === false || (Object.count(searches[search], true) > 0 &&
-								(!(searches[search][dex[mon].types[0]]) && !(searches[search][dex[mon].types[1]])))) delete dex[mon];
+			case 'types':
+				for (var mon in dex) {
+					if (Object.count(searches[search], true) === 2) {
+						if (!(searches[search][dex[mon].types[0]]) || !(searches[search][dex[mon].types[1]])) delete dex[mon];
+					} else {
+						if (searches[search][dex[mon].types[0]] === false || searches[search][dex[mon].types[1]] === false || (Object.count(searches[search], true) > 0 &&
+							(!(searches[search][dex[mon].types[0]]) && !(searches[search][dex[mon].types[1]])))) delete dex[mon];
+					}
+				}
+				break;
+
+			case 'tier':
+				for (var mon in dex) {
+					if ('lc' in searches[search]) {
+						// some LC legal Pokemon are stored in other tiers (Ferroseed/Murkrow etc)
+						// this checks for LC legality using the going criteria, instead of dex[mon].tier
+						var isLC = (dex[mon].evos && dex[mon].evos.length > 0) && !dex[mon].prevo && dex[mon].tier !== "LC Uber" && Tools.data.Formats['lc'].banlist.indexOf(dex[mon].species) < 0;
+						if ((searches[search]['lc'] && !isLC) || (!searches[search]['lc'] && isLC)) {
+							delete dex[mon];
+							continue;
 						}
 					}
-					break;
+					if (searches[search][String(dex[mon][search]).toLowerCase()] === false ||
+						Object.count(searches[search], true) > 0 && !searches[search][String(dex[mon][search]).toLowerCase()]) {
+						delete dex[mon];
+					}
+				}
+				break;
 
-				case 'tier':
+			case 'gen':
+			case 'color':
+				for (var mon in dex) {
+					if (searches[search][String(dex[mon][search]).toLowerCase()] === false ||
+						Object.count(searches[search], true) > 0 && !searches[search][String(dex[mon][search]).toLowerCase()]) {
+						delete dex[mon];
+					}
+				}
+				break;
+
+			case 'ability':
+				for (var mon in dex) {
+					for (var ability in searches[search]) {
+						var needsAbility = searches[search][ability];
+						var hasAbility = Object.count(dex[mon].abilities, ability) > 0;
+						if (hasAbility !== needsAbility) {
+							delete dex[mon];
+							break;
+						}
+					}
+				}
+				break;
+
+			case 'compileLearnsets':
+				for (var mon in dex) {
+					var template = dex[mon];
+					if (!template.learnset) template = Tools.getTemplate(template.baseSpecies);
+					if (!template.learnset) continue;
+					var fullLearnset = template.learnset;
+					while (template.prevo) {
+						template = Tools.getTemplate(template.prevo);
+						for (var move in template.learnset) {
+							if (!fullLearnset[move]) fullLearnset[move] = template.learnset[move];
+						}
+					}
+					dex[mon].learnset = fullLearnset;
+				}
+				break;
+
+			case 'moves':
+				for (var mon in dex) {
+					if (!dex[mon].learnset) continue;
+					for (var move in searches[search]) {
+						var canLearn = (dex[mon].learnset.sketch && ['chatter', 'struggle', 'magikarpsrevenge'].indexOf(move) < 0) || dex[mon].learnset[move];
+						if ((!canLearn && searches[search][move]) || (searches[search][move] === false && canLearn)) {
+							delete dex[mon];
+							break;
+						}
+					}
+				}
+				break;
+
+			case 'recovery':
+				for (var mon in dex) {
+					if (!dex[mon].learnset) continue;
+					var recoveryMoves = ["recover", "roost", "moonlight", "morningsun", "synthesis", "milkdrink", "slackoff", "softboiled", "wish", "healorder"];
+					var canLearn = false;
+					for (var i = 0; i < recoveryMoves.length; i++) {
+						canLearn = (dex[mon].learnset.sketch) || dex[mon].learnset[recoveryMoves[i]];
+						if (canLearn) break;
+					}
+					if ((!canLearn && searches[search]) || (searches[search] === false && canLearn)) delete dex[mon];
+				}
+				break;
+
+			case 'priority':
+				var priorityMoves = [];
+				for (var move in Tools.data.Movedex) {
+					var moveData = Tools.getMove(move);
+					if (moveData.category === "Status") continue;
+					if (moveData.priority > 0) priorityMoves.push(move);
+				}
+				for (var mon in dex) {
+					if (!dex[mon].learnset) continue;
+					var canLearn = false;
+					for (var i = 0; i < priorityMoves.length; i++) {
+						canLearn = (dex[mon].learnset.sketch) || dex[mon].learnset[priorityMoves[i]];
+						if (canLearn) break;
+					}
+					if ((!canLearn && searches[search]) || (searches[search] === false && canLearn)) delete dex[mon];
+				}
+				break;
+
+			case 'stats':
+				for (var stat in searches[search]) {
 					for (var mon in dex) {
-						if ('lc' in searches[search]) {
-							// some LC legal Pokemon are stored in other tiers (Ferroseed/Murkrow etc)
-							// this checks for LC legality using the going criteria, instead of dex[mon].tier
-							var isLC = (dex[mon].evos && dex[mon].evos.length > 0) && !dex[mon].prevo && dex[mon].tier !== "LC Uber" && Tools.data.Formats['lc'].banlist.indexOf(dex[mon].species) < 0;
-							if ((searches[search]['lc'] && !isLC) || (!searches[search]['lc'] && isLC)) {
+						if (typeof searches[search][stat].less === 'number') {
+							if (dex[mon].baseStats[stat] > searches[search][stat].less) {
 								delete dex[mon];
 								continue;
 							}
 						}
-						if (searches[search][String(dex[mon][search]).toLowerCase()] === false) {
-							delete dex[mon];
-						} else if (Object.count(searches[search], true) > 0 && !searches[search][String(dex[mon][search]).toLowerCase()]) delete dex[mon];
-					}
-					break;
-
-				case 'gen':
-				case 'color':
-					for (var mon in dex) {
-						if (searches[search][String(dex[mon][search]).toLowerCase()] === false) {
-							delete dex[mon];
-						} else if (Object.count(searches[search], true) > 0 && !searches[search][String(dex[mon][search]).toLowerCase()]) delete dex[mon];
-					}
-					break;
-
-				case 'ability':
-					for (var mon in dex) {
-						for (var ability in searches[search]) {
-							var needsAbility = searches[search][ability];
-							var hasAbility = Object.count(dex[mon].abilities, ability) > 0;
-							if (hasAbility !== needsAbility) {
+						if (typeof searches[search][stat].greater === 'number') {
+							if (dex[mon].baseStats[stat] < searches[search][stat].greater) {
 								delete dex[mon];
-								break;
+								continue;
 							}
 						}
 					}
-					break;
+				}
+				break;
 
-				case 'compileLearnsets':
-					for (var mon in dex) {
-						var template = dex[mon];
-						if (!template.learnset) template = Tools.getTemplate(template.baseSpecies);
-						if (!template.learnset) continue;
-						var fullLearnset = template.learnset;
-						while (template.prevo) {
-							template = Tools.getTemplate(template.prevo);
-							for (var move in template.learnset) {
-								if (!fullLearnset[move]) fullLearnset[move] = template.learnset[move];
-							}
-						}
-						dex[mon].learnset = fullLearnset;
-					}
-					break;
-
-				case 'moves':
-					for (var mon in dex) {
-						if (!dex[mon].learnset) continue;
-						for (var move in searches[search]) {
-							var canLearn = (dex[mon].learnset.sketch && ['chatter', 'struggle', 'magikarpsrevenge'].indexOf(move) < 0) || dex[mon].learnset[move];
-							if ((!canLearn && searches[search][move]) || (searches[search][move] === false && canLearn)) {
-								delete dex[mon];
-								break;
-							}
-						}
-					}
-					break;
-
-				case 'recovery':
-					for (var mon in dex) {
-						if (!dex[mon].learnset) continue;
-						var recoveryMoves = ["recover", "roost", "moonlight", "morningsun", "synthesis", "milkdrink", "slackoff", "softboiled", "wish", "healorder"];
-						var canLearn = false;
-						for (var i = 0; i < recoveryMoves.length; i++) {
-							canLearn = (dex[mon].learnset.sketch) || dex[mon].learnset[recoveryMoves[i]];
-							if (canLearn) break;
-						}
-						if ((!canLearn && searches[search]) || (searches[search] === false && canLearn)) delete dex[mon];
-					}
-					break;
-
-				case 'priority':
-					var priorityMoves = [];
-					for (var move in Tools.data.Movedex) {
-						var moveData = Tools.getMove(move);
-						if (moveData.category === "Status") continue;
-						if (moveData.priority > 0) priorityMoves.push(move);
-					}
-					for (var mon in dex) {
-						if (!dex[mon].learnset) continue;
-						var canLearn = false;
-						for (var i = 0; i < priorityMoves.length; i++) {
-							canLearn = (dex[mon].learnset.sketch) || dex[mon].learnset[priorityMoves[i]];
-							if (canLearn) break;
-						}
-						if ((!canLearn && searches[search]) || (searches[search] === false && canLearn)) delete dex[mon];
-					}
-					break;
-
-				case 'stats':
-					for (var stat in searches[search]) {
-						for (var mon in dex) {
-							if (typeof searches[search][stat].less === 'number') {
-								if (dex[mon].baseStats[stat] > searches[search][stat].less) {
-									delete dex[mon];
-									continue;
-								}
-							}
-							if (typeof searches[search][stat].greater === 'number') {
-								if (dex[mon].baseStats[stat] < searches[search][stat].greater) {
-									delete dex[mon];
-									continue;
-								}
-							}
-						}
-					}
-					break;
-
-				default:
-					return this.sendReplyBox("Something broke! PM SolarisFox here or on the Smogon forums with the command you tried.");
+			default:
+				return this.sendReplyBox("Something broke! PM SolarisFox here or on the Smogon forums with the command you tried.");
 			}
 		}
 
@@ -2363,7 +2365,7 @@ var commands = exports.commands = {
 		"Types must be followed by ' type', e.g., 'dragon type'.",
 		"Inequality ranges use the characters '>' and '<' though they behave as '≥' and '≤', e.g., 'speed > 100' searches for all Pokemon equal to and greater than 100 speed.",
 		"Parameters can be excluded through the use of '!', e.g., '!water type' excludes all water types.",
-		"The parameter 'mega' can be added to search for Mega Evolutions only, and the parameters 'FE' or 'NFE' can be added to search fully or not-fully evolved Pokemon only.",
+		"The parameter 'mega' can be added to search for Mega Evolutions only, and the parameter 'NFE' can be added to search not-fully evolved Pokemon only.",
 		"The order of the parameters does not matter."],
 
 	ms: 'movesearch',
@@ -2458,26 +2460,26 @@ var commands = exports.commands = {
 					numSide = 0;
 					propSide = 1;
 					switch (inequality) {
-						case '>': direction = 'less'; break;
-						case '<': direction = 'greater'; break;
-						case '=': direction = 'equal'; break;
+					case '>': direction = 'less'; break;
+					case '<': direction = 'greater'; break;
+					case '=': direction = 'equal'; break;
 					}
 				} else if (!isNaN(targetParts[1])) {
 					numSide = 1;
 					propSide = 0;
 					switch (inequality) {
-						case '<': direction = 'less'; break;
-						case '>': direction = 'greater'; break;
-						case '=': direction = 'equal'; break;
+					case '<': direction = 'less'; break;
+					case '>': direction = 'greater'; break;
+					case '=': direction = 'equal'; break;
 					}
 				} else {
 					return this.sendReplyBox("No value given to compare with '" + Tools.escapeHTML(target) + "'.");
 				}
 				var prop = targetParts[propSide];
 				switch (toId(targetParts[propSide])) {
-					case 'basepower': prop = 'basePower'; break;
-					case 'bp': prop = 'basePower'; break;
-					case 'acc': prop = 'accuracy'; break;
+				case 'basepower': prop = 'basePower'; break;
+				case 'bp': prop = 'basePower'; break;
+				case 'acc': prop = 'accuracy'; break;
 				}
 				if (!(prop in allProperties)) return this.sendReplyBox("'" + Tools.escapeHTML(target) + "' did not contain a valid property.");
 				if (!searches['property']) searches['property'] = {};
@@ -2519,16 +2521,16 @@ var commands = exports.commands = {
 
 			if (target.substr(0, 7) === 'boosts ') {
 				switch (target.substr(7)) {
-					case 'attack': target = 'atk'; break;
-					case 'defense': target = 'def'; break;
-					case 'specialattack': target = 'spa'; break;
-					case 'spatk': target = 'spa'; break;
-					case 'specialdefense': target = 'spd'; break;
-					case 'spdef': target = 'spd'; break;
-					case 'speed': target = 'spe'; break;
-					case 'acc': target = 'accuracy'; break;
-					case 'evasiveness': target = 'evasion'; break;
-					default: target = target.substr(7);
+				case 'attack': target = 'atk'; break;
+				case 'defense': target = 'def'; break;
+				case 'specialattack': target = 'spa'; break;
+				case 'spatk': target = 'spa'; break;
+				case 'specialdefense': target = 'spd'; break;
+				case 'spdef': target = 'spd'; break;
+				case 'speed': target = 'spe'; break;
+				case 'acc': target = 'accuracy'; break;
+				case 'evasiveness': target = 'evasion'; break;
+				default: target = target.substr(7);
 				}
 				if (!(target in allBoosts)) return this.sendReplyBox("'" + Tools.escapeHTML(target.substr(7)) + "' is not a recognized stat.");
 				if (!searches['boost']) searches['boost'] = {};
@@ -2540,15 +2542,15 @@ var commands = exports.commands = {
 			var oldTarget = target;
 			if (target.charAt(target.length - 1) === 's') target = target.substr(0, target.length - 1);
 			switch (target) {
-				case 'toxic': target = 'tox'; break;
-				case 'poison': target = 'psn'; break;
-				case 'burn': target = 'brn'; break;
-				case 'paralyze': target = 'par'; break;
-				case 'freeze': target = 'frz'; break;
-				case 'sleep': target = 'slp'; break;
-				case 'confuse': target = 'confusion'; break;
-				case 'trap': target = 'partiallytrapped'; break;
-				case 'flinche': target = 'flinch'; break;
+			case 'toxic': target = 'tox'; break;
+			case 'poison': target = 'psn'; break;
+			case 'burn': target = 'brn'; break;
+			case 'paralyze': target = 'par'; break;
+			case 'freeze': target = 'frz'; break;
+			case 'sleep': target = 'slp'; break;
+			case 'confuse': target = 'confusion'; break;
+			case 'trap': target = 'partiallytrapped'; break;
+			case 'flinche': target = 'flinch'; break;
 			}
 
 			if (target in allStatus) {
@@ -2584,108 +2586,109 @@ var commands = exports.commands = {
 
 		for (var search in searches) {
 			switch (search) {
-				case 'type':
-				case 'category':
-					for (var move in dex) {
-						if (searches[search][String(dex[move][search])] === false) {
-							delete dex[move];
-						} else if (Object.count(searches[search], true) > 0 && !searches[search][String(dex[move][search])]) delete dex[move];
+			case 'type':
+			case 'category':
+				for (var move in dex) {
+					if (searches[search][String(dex[move][search])] === false ||
+						Object.count(searches[search], true) > 0 && !searches[search][String(dex[move][search])]) {
+						delete dex[move];
 					}
-					break;
+				}
+				break;
 
-				case 'flags':
-					for (var flag in searches[search]) {
-						for (var move in dex) {
-							if (flag !== 'secondary') {
-								if ((!dex[move].flags[flag] && searches[search][flag]) || (dex[move].flags[flag] && !searches[search][flag])) delete dex[move];
+			case 'flags':
+				for (var flag in searches[search]) {
+					for (var move in dex) {
+						if (flag !== 'secondary') {
+							if ((!dex[move].flags[flag] && searches[search][flag]) || (dex[move].flags[flag] && !searches[search][flag])) delete dex[move];
+						} else {
+							if (searches[search][flag]) {
+								if (!dex[move].secondary && !dex[move].secondaries) delete dex[move];
 							} else {
-								if (searches[search][flag]) {
-									if (!dex[move].secondary && !dex[move].secondaries) delete dex[move];
-								} else {
-									if (dex[move].secondary && dex[move].secondaries) delete dex[move];
-								}
+								if (dex[move].secondary && dex[move].secondaries) delete dex[move];
 							}
 						}
 					}
-					break;
+				}
+				break;
 
-				case 'recovery':
+			case 'recovery':
+				for (var move in dex) {
+					var hasRecovery = (dex[move].drain || dex[move].flags.heal);
+					if ((!hasRecovery && searches[search]) || (hasRecovery && !searches[search])) delete dex[move];
+				}
+				break;
+
+			case 'property':
+				for (var prop in searches[search]) {
 					for (var move in dex) {
-						var hasRecovery = (dex[move].drain || dex[move].flags.heal);
-						if ((!hasRecovery && searches[search]) || (hasRecovery && !searches[search])) delete dex[move];
-					}
-					break;
-
-				case 'property':
-					for (var prop in searches[search]) {
-						for (var move in dex) {
-							if (typeof searches[search][prop].less === "number") {
-								if (dex[move][prop] === true) {
-									delete dex[move];
-									continue;
-								}
-								if (dex[move][prop] > searches[search][prop].less) {
-									delete dex[move];
-									continue;
-								}
+						if (typeof searches[search][prop].less === "number") {
+							if (dex[move][prop] === true) {
+								delete dex[move];
+								continue;
 							}
-							if (typeof searches[search][prop].greater === "number") {
-								if (dex[move][prop] === true) {
-									if (dex[move].category === "Status") delete dex[move];
-									continue;
-								}
-								if (dex[move][prop] < searches[search][prop].greater) {
-									delete dex[move];
-									continue;
-								}
+							if (dex[move][prop] > searches[search][prop].less) {
+								delete dex[move];
+								continue;
+							}
+						}
+						if (typeof searches[search][prop].greater === "number") {
+							if (dex[move][prop] === true) {
+								if (dex[move].category === "Status") delete dex[move];
+								continue;
+							}
+							if (dex[move][prop] < searches[search][prop].greater) {
+								delete dex[move];
+								continue;
 							}
 						}
 					}
-					break;
+				}
+				break;
 
-				case 'boost':
-					for (var boost in searches[search]) {
-						for (var move in dex) {
-							if (dex[move].boosts) {
-								if ((dex[move].boosts[boost] > 0 && searches[search][boost]) ||
-									(dex[move].boosts[boost] < 1 && !searches[search][boost])) continue;
-							} else if (dex[move].secondary && dex[move].secondary.self && dex[move].secondary.self.boosts) {
-								if ((dex[move].secondary.self.boosts[boost] > 0 && searches[search][boost]) ||
-									(dex[move].secondary.self.boosts[boost] < 1 && !searches[search][boost])) continue;
-							}
-							delete dex[move];
+			case 'boost':
+				for (var boost in searches[search]) {
+					for (var move in dex) {
+						if (dex[move].boosts) {
+							if ((dex[move].boosts[boost] > 0 && searches[search][boost]) ||
+								(dex[move].boosts[boost] < 1 && !searches[search][boost])) continue;
+						} else if (dex[move].secondary && dex[move].secondary.self && dex[move].secondary.self.boosts) {
+							if ((dex[move].secondary.self.boosts[boost] > 0 && searches[search][boost]) ||
+								(dex[move].secondary.self.boosts[boost] < 1 && !searches[search][boost])) continue;
 						}
+						delete dex[move];
 					}
-					break;
+				}
+				break;
 
-				case 'status':
-				case 'volatileStatus':
-					for (var searchStatus in searches[search]) {
-						for (var move in dex) {
-							if (dex[move][search] !== searchStatus) {
-								if (!dex[move].secondaries) {
-									if (!dex[move].secondary) {
-										if (searches[search][searchStatus]) delete dex[move];
-									} else {
-										if ((dex[move].secondary[search] !== searchStatus && searches[search][searchStatus]) ||
-											(dex[move].secondary[search] === searchStatus && !searches[search][searchStatus])) delete dex[move];
-									}
+			case 'status':
+			case 'volatileStatus':
+				for (var searchStatus in searches[search]) {
+					for (var move in dex) {
+						if (dex[move][search] !== searchStatus) {
+							if (!dex[move].secondaries) {
+								if (!dex[move].secondary) {
+									if (searches[search][searchStatus]) delete dex[move];
 								} else {
-									var hasSecondary = false;
-									for (var i = 0; i < dex[move].secondaries.length; i++) {
-										if (dex[move].secondaries[i][search] === searchStatus) hasSecondary = true;
-									}
-									if ((!hasSecondary && searches[search][searchStatus]) || (hasSecondary && !searches[search][searchStatus])) delete dex[move];
+									if ((dex[move].secondary[search] !== searchStatus && searches[search][searchStatus]) ||
+										(dex[move].secondary[search] === searchStatus && !searches[search][searchStatus])) delete dex[move];
 								}
 							} else {
-								if (!searches[search][searchStatus]) delete dex[move];
+								var hasSecondary = false;
+								for (var i = 0; i < dex[move].secondaries.length; i++) {
+									if (dex[move].secondaries[i][search] === searchStatus) hasSecondary = true;
+								}
+								if ((!hasSecondary && searches[search][searchStatus]) || (hasSecondary && !searches[search][searchStatus])) delete dex[move];
 							}
+						} else {
+							if (!searches[search][searchStatus]) delete dex[move];
 						}
 					}
-					break;
+				}
+				break;
 
-				default:
-					return this.sendReplyBox("Something broke! PM SolarisFox here or on the Smogon forums with the command you tried.");
+			default:
+				return this.sendReplyBox("Something broke! PM SolarisFox here or on the Smogon forums with the command you tried.");
 			}
 		}
 
@@ -2798,7 +2801,7 @@ var commands = exports.commands = {
 		this.sendReplyBox(buffer);
 	},
 	learnhelp: ["/learn [pokemon], [move, move, ...] - Displays how a Pok\u00e9mon can learn the given moves, if it can at all.",
-		"!learn [pokemon], [move, move, ...] - Show everyone that information. Requires: + % @ & ~"],
+		"!learn [pokemon], [move, move, ...] - Show everyone that information. Requires: + % @ # & ~"],
 
 	weaknesses: 'weakness',
 	weak: 'weakness',
@@ -2860,8 +2863,8 @@ var commands = exports.commands = {
 	},
 	weaknesshelp: ["/weakness [pokemon] - Provides a Pok\u00e9mon's resistances, weaknesses, and immunities, ignoring abilities.",
 		"/weakness [type 1]/[type 2] - Provides a type or type combination's resistances, weaknesses, and immunities, ignoring abilities.",
-		"!weakness [pokemon] - Shows everyone a Pok\u00e9mon's resistances, weaknesses, and immunities, ignoring abilities. Requires: + % @ & ~",
-		"!weakness [type 1]/[type 2] - Shows everyone a type or type combination's resistances, weaknesses, and immunities, ignoring abilities. Requires: + % @ & ~"],
+		"!weakness [pokemon] - Shows everyone a Pok\u00e9mon's resistances, weaknesses, and immunities, ignoring abilities. Requires: + % @ # & ~",
+		"!weakness [type 1]/[type 2] - Shows everyone a type or type combination's resistances, weaknesses, and immunities, ignoring abilities. Requires: + % @ # & ~"],
 
 	eff: 'effectiveness',
 	type: 'effectiveness',
@@ -2993,22 +2996,22 @@ var commands = exports.commands = {
 
 			for (var type in bestCoverage) {
 				switch (bestCoverage[type]) {
-					case 0:
-						immune.push(type);
-						break;
-					case 0.25:
-					case 0.5:
-						resists.push(type);
-						break;
-					case 1:
-						neutral.push(type);
-						break;
-					case 2:
-					case 4:
-						superEff.push(type);
-						break;
-					default:
-						throw new Error("/coverage effectiveness of " + bestCoverage[type] + " from parameters: " + target);
+				case 0:
+					immune.push(type);
+					break;
+				case 0.25:
+				case 0.5:
+					resists.push(type);
+					break;
+				case 1:
+					neutral.push(type);
+					break;
+				case 2:
+				case 4:
+					superEff.push(type);
+					break;
+				default:
+					throw new Error("/coverage effectiveness of " + bestCoverage[type] + " from parameters: " + target);
 				}
 			}
 			buffer.push('Coverage for ' + sources.join(' + ') + ':');
@@ -3060,22 +3063,22 @@ var commands = exports.commands = {
 						}
 					}
 					switch (bestEff) {
-						case 0:
-							cell += 'bgcolor=#666666 title="' + typing + '"><font color=#000000>' + bestEff + '</font>';
-							break;
-						case 0.25:
-						case 0.5:
-							cell += 'bgcolor=#AA5544 title="' + typing + '"><font color=#660000>' + bestEff + '</font>';
-							break;
-						case 1:
-							cell += 'bgcolor=#6688AA title="' + typing + '"><font color=#000066>' + bestEff + '</font>';
-							break;
-						case 2:
-						case 4:
-							cell += 'bgcolor=#559955 title="' + typing + '"><font color=#003300>' + bestEff + '</font>';
-							break;
-						default:
-							throw new Error("/coverage effectiveness of " + bestEff + " from parameters: " + target);
+					case 0:
+						cell += 'bgcolor=#666666 title="' + typing + '"><font color=#000000>' + bestEff + '</font>';
+						break;
+					case 0.25:
+					case 0.5:
+						cell += 'bgcolor=#AA5544 title="' + typing + '"><font color=#660000>' + bestEff + '</font>';
+						break;
+					case 1:
+						cell += 'bgcolor=#6688AA title="' + typing + '"><font color=#000066>' + bestEff + '</font>';
+						break;
+					case 2:
+					case 4:
+						cell += 'bgcolor=#559955 title="' + typing + '"><font color=#003300>' + bestEff + '</font>';
+						break;
+					default:
+						throw new Error("/coverage effectiveness of " + bestEff + " from parameters: " + target);
 					}
 					cell += '</th>';
 					buffer += cell;
@@ -3120,8 +3123,8 @@ var commands = exports.commands = {
 			"~ <b>Administrator</b> - They can do anything, like change what this message says"
 		);
 	},
-	groupshelp: ["/groups - Explains what the + % @ & next to people's names mean.",
-		"!groups - Show everyone that information. Requires: + % @ & ~"],
+	groupshelp: ["/groups - Explains what the + % @ # & next to people's names mean.",
+		"!groups - Show everyone that information. Requires: + % @ # & ~"],
 
 	repo: 'opensource',
 	repository: 'opensource',
@@ -3137,7 +3140,7 @@ var commands = exports.commands = {
 		);
 	},
 	opensourcehelp: ["/opensource - Links to PS's source code repository.",
-		"!opensource - Show everyone that information. Requires: + % @ & ~"],
+		"!opensource - Show everyone that information. Requires: + % @ # & ~"],
 
 	staff: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -3149,7 +3152,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('You can <button name="avatars">change your avatar</button> by clicking on it in the <button name="openOptions"><i class="icon-cog"></i> Options</button> menu in the upper right. Custom avatars are only obtainable by staff.');
 	},
 	avatarshelp: ["/avatars - Explains how to change avatars.",
-		"!avatars - Show everyone that information. Requires: + % @ & ~"],
+		"!avatars - Show everyone that information. Requires: + % @ # & ~"],
 
 	introduction: 'intro',
 	intro: function (target, room, user) {
@@ -3163,7 +3166,7 @@ var commands = exports.commands = {
 		);
 	},
 	introhelp: ["/intro - Provides an introduction to competitive pokemon.",
-		"!intro - Show everyone that information. Requires: + % @ & ~"],
+		"!intro - Show everyone that information. Requires: + % @ # & ~"],
 
 	mentoring: 'smogintro',
 	smogonintro: 'smogintro',
@@ -3187,7 +3190,7 @@ var commands = exports.commands = {
 		);
 	},
 	calchelp: ["/calc - Provides a link to a damage calculator",
-		"!calc - Shows everyone a link to a damage calculator. Requires: + % @ & ~"],
+		"!calc - Shows everyone a link to a damage calculator. Requires: + % @ # & ~"],
 
 	capintro: 'cap',
 	cap: function (target, room, user) {
@@ -3201,7 +3204,7 @@ var commands = exports.commands = {
 		);
 	},
 	caphelp: ["/cap - Provides an introduction to the Create-A-Pok&eacute;mon project.",
-		"!cap - Show everyone that information. Requires: + % @ & ~"],
+		"!cap - Show everyone that information. Requires: + % @ # & ~"],
 
 	gennext: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -3328,7 +3331,7 @@ var commands = exports.commands = {
 		this.sendReplyBox(buffer);
 	},
 	othermetashelp: ["/om - Provides links to information on the Other Metagames.",
-		"!om - Show everyone that information. Requires: + % @ & ~"],
+		"!om - Show everyone that information. Requires: + % @ # & ~"],
 
 	/*formats: 'formathelp',
 	formatshelp: 'formathelp',
@@ -3494,7 +3497,7 @@ var commands = exports.commands = {
 		this.sendReplyBox(buffer);
 	},
 	faqhelp: ["/faq [theme] - Provides a link to the FAQ. Add deviation, doubles, randomcap, restart, or staff for a link to these questions. Add all for all of them.",
-		"!faq [theme] - Shows everyone a link to the FAQ. Add deviation, doubles, randomcap, restart, or staff for a link to these questions. Add all for all of them. Requires: + % @ & ~"],
+		"!faq [theme] - Shows everyone a link to the FAQ. Add deviation, doubles, randomcap, restart, or staff for a link to these questions. Add all for all of them. Requires: + % @ # & ~"],
 
 	banlists: 'tiers',
 	tier: 'tiers',
@@ -3678,7 +3681,7 @@ var commands = exports.commands = {
 		}
 	},
 	smogdexhelp: ["/analysis [pokemon], [generation] - Links to the Smogon University analysis for this Pok\u00e9mon in the given generation.",
-		"!analysis [pokemon], [generation] - Shows everyone this link. Requires: + % @ & ~"],
+		"!analysis [pokemon], [generation] - Shows everyone this link. Requires: + % @ # & ~"],
 
 	register: function () {
 		if (!this.canBroadcast()) return;
@@ -3977,4 +3980,6 @@ var commands = exports.commands = {
 			this.sendReply(buffer);
 		}
 	},
+	seasonaldatahelp: ["/seasonaldata [pokemon/item/move/ability] - Get details on this pokemon/item/move/ability/nature for the current seasonal.",
+		"!seasonaldata [pokemon/item/move/ability] - Show everyone these details. Requires: + % @ # & ~"]
 };

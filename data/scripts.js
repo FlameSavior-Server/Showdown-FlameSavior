@@ -757,8 +757,7 @@ exports.BattleScripts = {
 				mbst += Math.floor((stats["spd"] * 2 + 31 + 21 + 100) * level / 100 + 5);
 				mbst += Math.floor((stats["spe"] * 2 + 31 + 21 + 100) * level / 100 + 5);
 
-				if (mbst >= mbstmin)
-					break;
+				if (mbst >= mbstmin) break;
 				level++;
 			}
 
@@ -1343,6 +1342,9 @@ exports.BattleScripts = {
 				case 'psychic':
 					if (hasMove['psyshock'] || hasMove['storedpower']) rejected = true;
 					break;
+				case 'zenheadbutt':
+					if (hasMove['psyshock'] && counter.setupType !== 'Physical') rejected = true;
+					break;
 				case 'headsmash':
 					if (hasMove['stoneedge']) rejected = true;
 					break;
@@ -1406,7 +1408,7 @@ exports.BattleScripts = {
 				}
 
 				// This move doesn't satisfy our setup requirements:
-				if (counter.setupType && counter.setupType !== 'Mixed' && move.category !== counter.setupType && counter[counter.setupType] < 2) {
+				if (counter.setupType && counter.setupType !== 'Mixed' && move.category !== counter.setupType && counter[counter.setupType] < 2 && !hasMove['batonpass']) {
 					// Mono-attacking with setup and RestTalk is allowed
 					if (!isSetup && moveid !== 'rest' && moveid !== 'sleeptalk') rejected = true;
 				}

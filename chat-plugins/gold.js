@@ -2403,7 +2403,31 @@ exports.commands = {
 		this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
 		targetUser.ban();
 	},
-
+	moneylog: function (target, room, user) {
+		if (!this.can('bucks')) return false;
+		if (!target) return this.sendReply("Usage: /moneylog [number] to view the last x lines OR /moneylog [text] to search for text.");
+		if (isNaN(Number(target))) var word = true;
+		var lines = fs.readFileSync('logs/transactions.log', 'utf8').split('\n').reverse();
+		var output = '';
+		var count = 0;
+		var regex = new RegExp(target.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "gi");
+ 
+		if (word) {
+			output += 'Displaying last 50 lines containing "' + target + '":\n';
+			for (var line in lines) {
+				if (count >= 50) break;
+				if (!~lines[line].search(regex)) continue;
+				output += lines[line] + '\n';
+				count++;
+			}
+		} else {
+			if (target > 100) target = 100;
+			output = lines.slice(0, (lines.length > target ? target : lines.length));
+			output.unshift("Displaying the last " + (lines.length > target ? target : lines.length) + " lines:");
+			output = output.join('\n');
+		}
+		user.popup(output);
+	},
 };
 
 function splint(target) {
@@ -2476,6 +2500,7 @@ function writeMoney(filename, user, amount, callback) {
 	});
 }
 exports.writeMoney = writeMoney;
+
 //here you go panpan
 //~stevoduhpedo
 Object.merge(Gold, {
@@ -2496,6 +2521,11 @@ Object.merge(Gold, {
 		}
 	}
 });
+
+function logTransaction (message) {
+	if (!message) return false;
+	fs.appendFile('logs/transactions.log','['+new Date().toUTCString()+'] '+message+'\n');
+}
 
 function getAvatar(user) {
 	if (!user) return false;

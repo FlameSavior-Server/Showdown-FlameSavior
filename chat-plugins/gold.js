@@ -1705,6 +1705,7 @@ exports.commands = {
 				this.sendReply('You have purchased a custom avatar. Staff have been notified and it will be added in due time.');
 				user.canCustomAvatar = true;
 				Rooms.rooms.staff.add(user.name + ' has purchased a custom avatar. Image: ' + target[1]);
+				logTransaction(user.name + ' has purchased a custom avatar. Image: ' + target[1]);
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~" || Users.users[u].group == "&") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom avatar. Image: ' + target[1]);
@@ -1724,6 +1725,7 @@ exports.commands = {
 				user.canCustomColor = true;
 				economy.writeMoney('money', user, -350);
 				Rooms.rooms.staff.add(user.name + ' has purchased a custom color. Color: ' + target[2]);
+				logTransaction(user.name + ' has purchased a custom color. Color: ' + target[2]);
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom color. Color: ' + target[2]);
@@ -1742,6 +1744,7 @@ exports.commands = {
 				user.canCustomBattleSong = true;
 				economy.writeMoney('money', user, -250);
 				Rooms.rooms.staff.add(user.name + ' has purchased a custom battle song.');
+				logTransaction(user.name + ' has purchased a custom battle song.');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
@@ -1759,6 +1762,7 @@ exports.commands = {
 				user.canCustomEmote = true;
 				economy.writeMoney('money', user, -100);
 				Rooms.rooms.staff.add(user.name + ' has purchased a custom emote. Emote "' + target[1] + '": ' + target[2]);
+				logTransaction(user.name + ' has purchased a custom emote. Emote "' + target[1] + '": ' + target[2]);
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom emote. Emote "' + target[1] + '": ' + target[2]);
@@ -1782,6 +1786,7 @@ exports.commands = {
 				user.canAnimatedAvatar = true;
 				economy.writeMoney('money', user, -45);
 				Rooms.rooms.staff.add(user.name + ' has purchased a custom animated avatar. Image: ' + target[1]);
+				logTransaction(user.name + ' has purchased a custom animated avatar. Image: ' + target[1]);
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~" || Users.users[u].group == "&") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom animated avatar. Image: ' + target[1]);
@@ -1800,6 +1805,7 @@ exports.commands = {
 				user.canChatRoom = true;
 				economy.writeMoney('money', user, -100);
 				this.add(user.name + ' has purchased a chat room!');
+				logTransaction(user.name + ' has purchased a chat room!');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
@@ -1812,6 +1818,7 @@ exports.commands = {
 				this.sendReply('You have purchased a trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
 				user.canTrainerCard = true;
 				this.add(user.name + ' has purchased a trainer card!');
+				logTransaction(user.name + ' has purchased a trainer card!');
 				economy.writeMoney('money', user, -60);
 				Rooms.rooms.tailz.add(user.name + ' has purchased a trainer card!');
 			} else {
@@ -1827,7 +1834,8 @@ exports.commands = {
 				user.canMusicBox = true;
 				this.add(user.name + ' has purchased a music box!');
 				economy.writeMoney('money', user, -60);
-				Rooms.rooms.tailz.add(user.name + ' has purchased a music box!');
+				Rooms.rooms.staff.add(user.name + ' has purchased a music box!');
+				logTransaction(user.name + ' has purchased a music box!');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
@@ -1842,6 +1850,7 @@ exports.commands = {
 				user.canFixItem = true;
 				economy.writeMoney('money', user, -15);
 				this.add(user.name + ' has purchased the ability to set alter their card or avatar or music box!');
+				logTransaction(user.name + ' has purchased the ability to set alter their card or avatar or music box!');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
@@ -1855,6 +1864,7 @@ exports.commands = {
 				user.canDecAdvertise = true;
 				economy.writeMoney('money', user, -25);
 				this.add(user.name + ' has purchased the ability to declare from an Admin or a leader!');
+				logTransaction(user.name + ' has purchased the ability to declare from an Admin or a leader!');
 			} else {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}

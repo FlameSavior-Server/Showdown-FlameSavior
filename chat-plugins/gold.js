@@ -836,7 +836,7 @@ exports.commands = {
 	},
 	hideuser: function(target, room, user, connection, cmd) {
 		if (!target) return this.sendReply('/hideuser [user] - Makes all prior messages posted by this user "poof" and replaces it with a button to see. Requires: @, &, ~');
-		if (!this.can('ban')) return false;
+		if (!this.can('hotpatch')) return false;
 		try {
 			this.add('|unlink|hide|' + target);
 			Rooms.rooms.staff.add(target + '\'s messages have been hidden by ' + user.name);

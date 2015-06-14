@@ -2414,7 +2414,7 @@ exports.commands = {
 		targetUser.ban();
 	},
 	moneylog: function (target, room, user) {
-		if (!this.can('bucks')) return false;
+		if (!this.can('hotpatch')) return false;
 		if (!target) return this.sendReply("Usage: /moneylog [number] to view the last x lines OR /moneylog [text] to search for text.");
 		if (isNaN(Number(target))) var word = true;
 		var lines = fs.readFileSync('logs/transactions.log', 'utf8').split('\n').reverse();

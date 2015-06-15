@@ -1477,6 +1477,7 @@ exports.commands = {
 			var parts = target.split(',');
 			parts[0] = this.splitTarget(parts[0]);
 			var targetUser = this.targetUser;
+			if (toId(user.name) === toId(targetUser) && !user.can('hotpatch')) return this.sendReply("Only admins can do this action you are trying to perform.");
 			if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
 			if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
 			if (parts[1] < 1) return this.sendReply("You cannot give less than a buck.");
@@ -1611,6 +1612,7 @@ exports.commands = {
 			var parts = target.split(',');
 			parts[0] = this.splitTarget(parts[0]);
 			var targetUser = this.targetUser;
+			if (toId(user.name) === toId(targetUser) && !user.can('hotpatch')) return this.sendReply("Only admins can do this action you are trying to perform.");
 			if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
 			if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
 			if (parts[1] < 1) return this.sendReply("You cannot take less than a buck.");

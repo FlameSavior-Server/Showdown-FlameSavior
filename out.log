@@ -1,0 +1,574 @@
+[21:03:24] Using gulpfile ~/workspace/gulpfile.js
+[21:03:24] Starting 'fastlint'...
+
+/home/ubuntu/workspace/app.js
+  line 108  col 22  'cloudenv' is not defined.
+  line 109  col 15  'cloudenv' is not defined.
+
+  ⚠  2 warnings
+
+
+/home/ubuntu/workspace/command-parser.js
+  line 462  col 17   'tells' is not defined.
+  line 463  col 17   'tells' is not defined.
+  line 464  col 24   'tells' is not defined.
+  line 469  col 9    'nightclub' is not defined.
+  line 470  col 71   'nightclubify' is not defined.
+  line 470  col 169  'nightclubify' is not defined.
+  line 470  col 229  'nightclubify' is not defined.
+  line 475  col 14   'Gold' is not defined.
+
+  ⚠  8 warnings
+
+
+/home/ubuntu/workspace/commands.js
+  line 22   col 23  Expected '===' and instead saw '=='.
+  line 23   col 26  The object literal notation {} is preferable.
+  line 501  col 28  Expected '!==' and instead saw '!='.
+  line 526  col 40  Expected '!==' and instead saw '!='.
+  line 23   col 5   'spamroom' is not defined.
+
+  ⚠  5 warnings
+
+
+/home/ubuntu/workspace/economy.js
+  line 40  col 29  Expected '===' and instead saw '=='.
+  line 49  col 30  Expected '===' and instead saw '=='.
+  line 57  col 23  Expected '===' and instead saw '=='.
+  line 16  col 16  'data' is not defined.
+  line 29  col 16  'amount' is not defined.
+
+  ⚠  5 warnings
+
+
+/home/ubuntu/workspace/hangman.js
+  line 6    col 20   Expected '!==' and instead saw '!='.
+  line 6    col 34   Let declaration not directly within block.
+  line 7    col 10   Let declaration not directly within block.
+  line 7    col 34   The object literal notation {} is preferable.
+  line 14   col 37   The array literal notation [] is preferable.
+  line 15   col 37   The array literal notation [] is preferable.
+  line 16   col 40   The array literal notation [] is preferable.
+  line 17   col 42   The array literal notation [] is preferable.
+  line 18   col 40   The array literal notation [] is preferable.
+  line 19   col 42   The array literal notation [] is preferable.
+  line 20   col 34   The array literal notation [] is preferable.
+  line 21   col 40   The array literal notation [] is preferable.
+  line 29   col 35   Expected '===' and instead saw '=='.
+  line 30   col 36   The object literal notation {} is preferable.
+  line 59   col 22   Expected '===' and instead saw '=='.
+  line 64   col 22   Expected '===' and instead saw '=='.
+  line 82   col 115  Missing semicolon.
+  line 84   col 43   Expected '!==' and instead saw '!='.
+  line 87   col 124  Expected '!==' and instead saw '!='.
+  line 118  col 27   Expected '!==' and instead saw '!='.
+  line 154  col 36   The array literal notation [] is preferable.
+  line 176  col 35   Missing semicolon.
+  line 202  col 35   Missing semicolon.
+  line 204  col 65   Expected '!==' and instead saw '!='.
+  line 205  col 80   Missing semicolon.
+  line 210  col 39   Missing semicolon.
+  line 11   col 13   'hangman' is not defined.
+  line 26   col 9    'hangman' is not defined.
+  line 29   col 47   'hangman' is not defined.
+  line 30   col 13   'hangman' is not defined.
+  line 31   col 13   'hangman' is not defined.
+  line 34   col 12   'hangman' is not defined.
+  line 61   col 13   'hangman' is not defined.
+  line 61   col 55   'hangman' is not defined.
+  line 70   col 13   'hangman' is not defined.
+  line 76   col 13   'hangman' is not defined.
+  line 90   col 13   'hangman' is not defined.
+  line 91   col 13   'hangman' is not defined.
+  line 93   col 13   'hangman' is not defined.
+  line 94   col 13   'hangman' is not defined.
+  line 96   col 17   'hangman' is not defined.
+  line 97   col 17   'hangman' is not defined.
+  line 98   col 17   'hangman' is not defined.
+  line 100  col 220  'hangman' is not defined.
+  line 100  col 279  'hangman' is not defined.
+  line 107  col 13   'hangman' is not defined.
+  line 110  col 119  'hangman' is not defined.
+  line 110  col 178  'hangman' is not defined.
+  line 110  col 229  'hangman' is not defined.
+  line 115  col 13   'hangman' is not defined.
+  line 115  col 13   Too many errors. (49% scanned).
+
+  ✖  3 errors
+  ⚠  48 warnings
+
+
+/home/ubuntu/workspace/tour.js
+  line 6    col 18   Expected '!==' and instead saw '!='.
+  line 6    col 32   Let declaration not directly within block.
+  line 6    col 51   Let declaration not directly within block.
+  line 6    col 72   The object literal notation {} is preferable.
+  line 8    col 25   The array literal notation [] is preferable.
+  line 18   col 21   Function declarations should not be placed in blocks. Use a function expression or move the statement to the top of the outer function.
+  line 23   col 123  Expected '===' and instead saw '=='.
+  line 25   col 36   Expected '===' and instead saw '=='.
+  line 25   col 56   Expected '===' and instead saw '=='.
+  line 25   col 75   Expected '===' and instead saw '=='.
+  line 32   col 50   Expected '===' and instead saw '=='.
+  line 49   col 35   The array literal notation [] is preferable.
+  line 50   col 35   The array literal notation [] is preferable.
+  line 51   col 34   The array literal notation [] is preferable.
+  line 52   col 33   The array literal notation [] is preferable.
+  line 53   col 35   The array literal notation [] is preferable.
+  line 54   col 32   The array literal notation [] is preferable.
+  line 55   col 41   The array literal notation [] is preferable.
+  line 56   col 36   The object literal notation {} is preferable.
+  line 57   col 40   The array literal notation [] is preferable.
+  line 58   col 41   The array literal notation [] is preferable.
+  line 60   col 38   The array literal notation [] is preferable.
+  line 61   col 36   The object literal notation {} is preferable.
+  line 68   col 21   Expected '!==' and instead saw '!='.
+  line 85   col 31   Expected '!==' and instead saw '!='.
+  line 106  col 42   Expected '===' and instead saw '=='.
+  line 113  col 42   Expected '===' and instead saw '=='.
+  line 120  col 46   Expected '===' and instead saw '=='.
+  line 128  col 46   Expected '===' and instead saw '=='.
+  line 137  col 50   Expected '===' and instead saw '=='.
+  line 156  col 34   Expected '===' and instead saw '=='.
+  line 173  col 31   Expected '===' and instead saw '=='.
+  line 177  col 38   Expected '===' and instead saw '=='.
+  line 188  col 33   Expected '===' and instead saw '=='.
+  line 192  col 33   Expected '!==' and instead saw '!='.
+  line 192  col 59   Expected '!==' and instead saw '!='.
+  line 198  col 25   Expected '===' and instead saw '=='.
+  line 213  col 46   Expected '===' and instead saw '=='.
+  line 226  col 34   Expected '===' and instead saw '=='.
+  line 228  col 30   Expected '===' and instead saw '=='.
+  line 239  col 37   Missing semicolon.
+  line 246  col 42   The array literal notation [] is preferable.
+  line 254  col 26   Expected '!==' and instead saw '!='.
+  line 264  col 24   'i' is already defined.
+  line 287  col 40   The array literal notation [] is preferable.
+  line 288  col 41   The array literal notation [] is preferable.
+  line 289  col 42   The array literal notation [] is preferable.
+  line 291  col 28   Expected '===' and instead saw '=='.
+  line 354  col 70   Missing semicolon.
+  line 363  col 52   Expected '===' and instead saw '=='.
+  line 363  col 52   Too many errors. (22% scanned).
+
+  ✖  3 errors
+  ⚠  48 warnings
+
+
+/home/ubuntu/workspace/trivia.js
+  line 2   col 18  Expected '!==' and instead saw '!='.
+  line 2   col 32  Let declaration not directly within block.
+  line 2   col 53  Let declaration not directly within block.
+  line 2   col 76  The object literal notation {} is preferable.
+  line 7   col 21  The array literal notation [] is preferable.
+  line 12  col 14  Missing semicolon.
+  line 18  col 31  Expected '!==' and instead saw '!='.
+  line 19  col 68  Missing semicolon.
+  line 22  col 78  Missing semicolon.
+  line 25  col 24  'target' is already defined.
+  line 26  col 31  Expected '!==' and instead saw '!='.
+  line 27  col 68  Missing semicolon.
+  line 30  col 90  Missing semicolon.
+  line 34  col 30  Missing semicolon.
+  line 42  col 55  Expected '===' and instead saw '=='.
+  line 43  col 86  Missing semicolon.
+  line 51  col 61  Missing semicolon.
+  line 52  col 74  Missing semicolon.
+  line 59  col 55  Expected '===' and instead saw '=='.
+  line 60  col 79  Missing semicolon.
+  line 65  col 61  Missing semicolon.
+  line 78  col 32  Expected '!==' and instead saw '!='.
+  line 79  col 68  Missing semicolon.
+  line 82  col 56  Expected '===' and instead saw '=='.
+  line 85  col 63  Missing semicolon.
+  line 10  col 22  'trivia' is not defined.
+  line 12  col 8   'trivia' is not defined.
+  line 18  col 17  'trivia' is not defined.
+  line 22  col 62  'trivia' is not defined.
+  line 26  col 17  'trivia' is not defined.
+  line 29  col 20  'trivia' is not defined.
+  line 31  col 17  'trivia' is not defined.
+  line 42  col 41  'trivia' is not defined.
+  line 49  col 13  'trivia' is not defined.
+  line 50  col 25  'trivia' is not defined.
+  line 51  col 25  'trivia' is not defined.
+  line 59  col 41  'trivia' is not defined.
+  line 63  col 25  'trivia' is not defined.
+  line 64  col 25  'trivia' is not defined.
+  line 65  col 25  'trivia' is not defined.
+  line 70  col 18  'trivia' is not defined.
+  line 74  col 54  'trivia' is not defined.
+  line 78  col 18  'trivia' is not defined.
+  line 82  col 42  'trivia' is not defined.
+  line 83  col 17  'trivia' is not defined.
+  line 84  col 21  'trivia' is not defined.
+
+  ✖  2 errors
+  ⚠  44 warnings
+
+
+/home/ubuntu/workspace/users.js
+  line 608   col 51   Expected '===' and instead saw '=='.
+  line 665   col 78   Expected '===' and instead saw '=='.
+  line 1010  col 115  Expected '===' and instead saw '=='.
+  line 1658  col 96   Expected '!==' and instead saw '!='.
+  line 1658  col 125  Expected '!==' and instead saw '!='.
+  line 1663  col 52   Expected '===' and instead saw '=='.
+  line 1663  col 83   Expected '===' and instead saw '=='.
+  line 1663  col 114  Expected '===' and instead saw '=='.
+  line 1672  col 107  Expected '===' and instead saw '=='.
+  line 1672  col 167  Expected '===' and instead saw '=='.
+  line 1672  col 327  Expected '===' and instead saw '=='.
+  line 1676  col 44   Expected '===' and instead saw '=='.
+  line 1676  col 75   Expected '===' and instead saw '=='.
+  line 1676  col 106  Expected '===' and instead saw '=='.
+  line 1676  col 137  Expected '===' and instead saw '=='.
+  line 713   col 13   'updateSeen' is not defined.
+  line 1478  col 17   'updateSeen' is not defined.
+  line 1478  col 28   'name' is not defined.
+  line 1741  col 9    'usertkts' is not defined.
+
+  ⚠  19 warnings
+
+
+/home/ubuntu/workspace/tournaments/index.js
+  line 748  col 28  Expected '===' and instead saw '=='.
+  line 749  col 28  Expected '===' and instead saw '=='.
+  line 750  col 28  Expected '===' and instead saw '=='.
+  line 734  col 9   'data' is not defined.
+  line 735  col 9   'data' is not defined.
+  line 735  col 16  'data' is not defined.
+  line 737  col 13  'data' is not defined.
+  line 738  col 13  'data' is not defined.
+  line 738  col 20  'data' is not defined.
+  line 739  col 13  'winner' is not defined.
+  line 739  col 22  'data' is not defined.
+  line 740  col 17  'data' is not defined.
+  line 740  col 26  'runnerUp' is not defined.
+  line 740  col 37  'data' is not defined.
+  line 742  col 13  'winner' is not defined.
+  line 742  col 22  'data' is not defined.
+  line 758  col 79  'winner' is not defined.
+  line 759  col 17  'economy' is not defined.
+  line 759  col 50  'winner' is not defined.
+
+  ⚠  19 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/aotd.js
+  line 3  col 23  Expected '!==' and instead saw '!='.
+
+  ⚠  1 warning
+
+
+/home/ubuntu/workspace/chat-plugins/biblia-stuff.js
+  line 29   col 19   Unnecessary semicolon.
+  line 37   col 19   Unnecessary semicolon.
+  line 45   col 19   Unnecessary semicolon.
+  line 53   col 19   Unnecessary semicolon.
+  line 61   col 19   Unnecessary semicolon.
+  line 69   col 19   Unnecessary semicolon.
+  line 159  col 21   Unreachable 'break' after 'break'.
+  line 177  col 21   Unreachable 'break' after 'return'.
+  line 182  col 21   Unreachable 'break' after 'return'.
+  line 193  col 40   'fuckingFaction' was used before it was defined.
+  line 215  col 52   Missing semicolon.
+  line 220  col 48   Missing semicolon.
+  line 228  col 21   Unreachable 'break' after 'return'.
+  line 229  col 28   Expected a 'break' statement before 'default'.
+  line 19   col 1    'Gold' is not defined.
+  line 28   col 22   'Gold' is not defined.
+  line 36   col 22   'Gold' is not defined.
+  line 44   col 22   'Gold' is not defined.
+  line 52   col 22   'Gold' is not defined.
+  line 60   col 22   'Gold' is not defined.
+  line 68   col 22   'Gold' is not defined.
+  line 84   col 25   'Gold' is not defined.
+  line 86   col 47   'Gold' is not defined.
+  line 114  col 26   'Gold' is not defined.
+  line 115  col 28   'Gold' is not defined.
+  line 126  col 25   'Gold' is not defined.
+  line 128  col 50   'Gold' is not defined.
+  line 138  col 26   'Gold' is not defined.
+  line 139  col 28   'Gold' is not defined.
+  line 150  col 25   'Gold' is not defined.
+  line 153  col 46   'Gold' is not defined.
+  line 164  col 26   'Gold' is not defined.
+  line 165  col 28   'Gold' is not defined.
+  line 188  col 32   'Gold' is not defined.
+  line 190  col 26   'Gold' is not defined.
+  line 190  col 69   'fuckingFaction' is not defined.
+  line 193  col 42   'Gold' is not defined.
+  line 195  col 32   'Gold' is not defined.
+  line 223  col 53   'Gold' is not defined.
+  line 224  col 53   'leagueFaction' is not defined.
+  line 224  col 98   'leagueFaction' is not defined.
+  line 224  col 124  'leagueFaction' is not defined.
+
+  ⚠  42 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/emoticons.js
+  line 26   col 52   Expected '!==' and instead saw '!='.
+  line 40   col 25   'message' is already defined.
+  line 42   col 13   Unreachable 'return' after 'return'.
+  line 186  col 28   Expected a 'break' statement before 'default'.
+  line 14   col 1    'Gold' is not defined.
+  line 39   col 13   'kitty' is not defined.
+  line 40   col 44   'kitty' is not defined.
+  line 49   col 57   'Gold' is not defined.
+  line 53   col 57   'Gold' is not defined.
+  line 67   col 22   'Gold' is not defined.
+  line 75   col 22   'Gold' is not defined.
+  line 96   col 25   'Gold' is not defined.
+  line 100  col 41   'Gold' is not defined.
+  line 114  col 26   'Gold' is not defined.
+  line 115  col 28   'Gold' is not defined.
+  line 135  col 44   'Gold' is not defined.
+  line 136  col 21   'emoticons' is not defined.
+  line 139  col 25   'emoticons' is not defined.
+  line 139  col 41   'Gold' is not defined.
+  line 141  col 117  'emoticons' is not defined.
+
+  ⚠  20 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/ez-tc.js
+  line 14   col 19  Unnecessary semicolon.
+  line 45   col 31  Unnecessary semicolon.
+  line 63   col 31  Unnecessary semicolon.
+  line 96   col 17  Unreachable 'loadTrainerCards' after 'return'.
+  line 100  col 24  Expected a 'break' statement before 'default'.
+
+  ⚠  5 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/gold.js
+  line 52   col 32   Expected '===' and instead saw '=='.
+  line 55   col 32   Expected '===' and instead saw '=='.
+  line 58   col 32   Expected '===' and instead saw '=='.
+  line 61   col 32   Expected '===' and instead saw '=='.
+  line 64   col 32   Expected '===' and instead saw '=='.
+  line 67   col 32   Expected '===' and instead saw '=='.
+  line 79   col 34   Expected '!==' and instead saw '!='.
+  line 82   col 32   Expected '!==' and instead saw '!='.
+  line 85   col 35   Expected '!==' and instead saw '!='.
+  line 88   col 34   Expected '!==' and instead saw '!='.
+  line 91   col 35   Expected '!==' and instead saw '!='.
+  line 195  col 71   Expected '!==' and instead saw '!='.
+  line 234  col 9    Unreachable 'this' after 'return'.
+  line 322  col 49   Expected '===' and instead saw '=='.
+  line 365  col 41   Expected '===' and instead saw '=='.
+  line 365  col 72   Expected '===' and instead saw '=='.
+  line 365  col 103  Expected '===' and instead saw '=='.
+  line 365  col 134  Expected '===' and instead saw '=='.
+  line 464  col 46   Expected '===' and instead saw '=='.
+  line 467  col 22   Expected '===' and instead saw '=='.
+  line 477  col 108  Missing semicolon.
+  line 486  col 22   Expected '===' and instead saw '=='.
+  line 528  col 7    Duplicate key 'dk'.
+  line 529  col 13   Duplicate key 'dropkick'.
+  line 558  col 53   The object literal notation {} is preferable.
+  line 576  col 14   Duplicate key 'tpolltest'.
+  line 577  col 10   Duplicate key 'tpoll'.
+  line 578  col 13   Duplicate key 'tierpoll'.
+  line 592  col 114  Expected '!==' and instead saw '!='.
+  line 592  col 153  Expected '!==' and instead saw '!='.
+  line 592  col 192  Expected '!==' and instead saw '!='.
+  line 592  col 231  Expected '!==' and instead saw '!='.
+  line 592  col 270  Expected '!==' and instead saw '!='.
+  line 595  col 26   Expected '===' and instead saw '=='.
+  line 595  col 56   Expected '===' and instead saw '=='.
+  line 615  col 61   Expected '===' and instead saw '=='.
+  line 616  col 53   The object literal notation {} is preferable.
+  line 625  col 53   The object literal notation {} is preferable.
+  line 627  col 21   Expected '===' and instead saw '=='.
+  line 629  col 40   The array literal notation [] is preferable.
+  line 630  col 38   The object literal notation {} is preferable.
+  line 633  col 33   The object literal notation {} is preferable.
+  line 637  col 33   The array literal notation [] is preferable.
+  line 640  col 31   Missing semicolon.
+  line 650  col 36   The array literal notation [] is preferable.
+  line 651  col 34   The object literal notation {} is preferable.
+  line 698  col 39   Variables should not be deleted.
+  line 720  col 38   Variables should not be deleted.
+  line 755  col 9    Expected an assignment or function call and instead saw an expression.
+  line 755  col 10   Missing semicolon.
+  line 755  col 10   Too many errors. (30% scanned).
+
+  ✖  1 error
+  ⚠  50 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/hashColor.js
+  line 23  col 46  Did you mean to return a conditional instead of an assignment?
+  line 24  col 21  Unreachable 'break' after 'return'.
+  line 87  col 13  Expected '===' and instead saw '=='.
+  line 89  col 13  Expected '===' and instead saw '=='.
+  line 10  col 14  'Gold' is not defined.
+
+  ⚠  5 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/info.js
+  line 721   col 63  Expected '===' and instead saw '=='.
+  line 723   col 90  Expected '===' and instead saw '=='.
+  line 1727  col 7   Duplicate key 'ip'.
+  line 1728  col 10  Duplicate key 'rooms'.
+  line 1729  col 8   Duplicate key 'alt'.
+  line 1730  col 9   Duplicate key 'alts'.
+  line 1731  col 11  Duplicate key 'whoare'.
+  line 1732  col 10  Duplicate key 'whois'.
+  line 1810  col 16  Duplicate key 'ipsearchall'.
+  line 1812  col 13  Duplicate key 'ipsearch'.
+  line 1858  col 8   Duplicate key 'inv'.
+  line 1859  col 11  Duplicate key 'invite'.
+  line 1876  col 11  Duplicate key 'pstats'.
+  line 1877  col 10  Duplicate key 'stats'.
+  line 1878  col 8   Duplicate key 'dex'.
+  line 1879  col 12  Duplicate key 'pokedex'.
+  line 1880  col 9   Duplicate key 'data'.
+  line 2028  col 7   Duplicate key 'dt'.
+  line 2029  col 12  Duplicate key 'details'.
+  line 2035  col 7   Duplicate key 'ds'.
+  line 2036  col 12  Duplicate key 'dsearch'.
+  line 2037  col 14  Duplicate key 'dexsearch'.
+  line 2719  col 13  Duplicate key 'learnset'.
+  line 2720  col 13  Duplicate key 'learnall'.
+  line 2721  col 11  Duplicate key 'learn5'.
+  line 2722  col 12  Duplicate key 'g6learn'.
+  line 2723  col 13  Duplicate key 'rbylearn'.
+  line 2724  col 13  Duplicate key 'gsclearn'.
+  line 2725  col 13  Duplicate key 'advlearn'.
+  line 2726  col 13  Duplicate key 'dpplearn'.
+  line 2727  col 13  Duplicate key 'bw2learn'.
+  line 2728  col 10  Duplicate key 'learn'.
+  line 2803  col 15  Duplicate key 'weaknesses'.
+  line 2804  col 9   Duplicate key 'weak'.
+  line 2805  col 11  Duplicate key 'resist'.
+  line 2806  col 13  Duplicate key 'weakness'.
+  line 2866  col 8   Duplicate key 'eff'.
+  line 2867  col 9   Duplicate key 'type'.
+  line 2868  col 12  Duplicate key 'matchup'.
+  line 2869  col 18  Duplicate key 'effectiveness'.
+  line 3097  col 11  Duplicate key 'uptime'.
+  line 3112  col 11  Duplicate key 'groups'.
+  line 3128  col 8   Duplicate key 'git'.
+  line 3129  col 15  Duplicate key 'opensource'.
+  line 3142  col 10  Duplicate key 'staff'.
+  line 3147  col 12  Duplicate key 'avatars'.
+  line 3154  col 17  Duplicate key 'introduction'.
+  line 3155  col 10  Duplicate key 'intro'.
+  line 3168  col 14  Duplicate key 'mentoring'.
+  line 3169  col 16  Duplicate key 'smogonintro'.
+  line 3169  col 16  Too many errors. (79% scanned).
+
+  ✖  1 error
+  ⚠  50 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/nightclub.js
+  line 1   col 782  Missing semicolon.
+  line 2   col 23   The object literal notation {} is preferable.
+  line 11  col 28   Expected '===' and instead saw '=='.
+  line 11  col 55   Expected '!==' and instead saw '!='.
+  line 15  col 28   Expected '===' and instead saw '=='.
+  line 15  col 56   Expected '===' and instead saw '=='.
+  line 20  col 50   Expected '===' and instead saw '=='.
+  line 30  col 32   Expected '===' and instead saw '=='.
+  line 43  col 28   Expected '===' and instead saw '=='.
+  line 62  col 2    Missing semicolon.
+  line 1   col 1    'urlify' is not defined.
+  line 2   col 1    'nightclub' is not defined.
+  line 41  col 10   'i' is not defined.
+  line 41  col 17   'i' is not defined.
+  line 41  col 34   'i' is not defined.
+  line 43  col 23   'i' is not defined.
+  line 43  col 111  'i' is not defined.
+  line 47  col 1    'nightclubify' is not defined.
+  line 52  col 13   'nightclub' is not defined.
+  line 53  col 9    'nightclub' is not defined.
+  line 54  col 62   'nightclubify' is not defined.
+  line 58  col 14   'nightclub' is not defined.
+  line 59  col 16   'nightclub' is not defined.
+  line 60  col 62   'nightclubify' is not defined.
+
+  ⚠  24 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/panagrams-beta.js
+  line 66   col 27  Expected '===' and instead saw '=='.
+  line 87   col 36  Expected '===' and instead saw '=='.
+  line 115  col 18  Missing semicolon.
+  line 118  col 35  Expected '===' and instead saw '=='.
+  line 69   col 44  'Gold' is not defined.
+  line 88   col 48  'Gold' is not defined.
+  line 89   col 13  'economy' is not defined.
+  line 128  col 48  'Gold' is not defined.
+  line 139  col 83  'Gold' is not defined.
+
+  ⚠  9 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/profile.js
+  line 36   col 46   Missing semicolon.
+  line 81   col 80   Expected '===' and instead saw '=='.
+  line 82   col 80   Expected '===' and instead saw '=='.
+  line 83   col 60   Expected '===' and instead saw '=='.
+  line 28   col 30   'userid' is not defined.
+  line 29   col 46   'userid' is not defined.
+  line 36   col 21   'economy' is not defined.
+  line 36   col 39   'userid' is not defined.
+  line 40   col 35   'userid' is not defined.
+  line 57   col 33   'regdate' is not defined.
+  line 63   col 25   'regdate' is not defined.
+  line 72   col 22   'Gold' is not defined.
+  line 72   col 36   'userid' is not defined.
+  line 73   col 37   'Gold' is not defined.
+  line 73   col 51   'userid' is not defined.
+  line 74   col 21   'Gold' is not defined.
+  line 74   col 35   'userid' is not defined.
+  line 76   col 61   'Gold' is not defined.
+  line 76   col 75   'userid' is not defined.
+  line 102  col 43   'avatar' is not defined.
+  line 103  col 91   'Gold' is not defined.
+  line 103  col 111  'username' is not defined.
+  line 103  col 148  'username' is not defined.
+  line 104  col 85   'regdate' is not defined.
+  line 105  col 22   'Gold' is not defined.
+  line 105  col 36   'userid' is not defined.
+  line 105  col 113  'userGroup' is not defined.
+  line 106  col 21   'Gold' is not defined.
+  line 106  col 35   'userid' is not defined.
+  line 106  col 112  'userGroup' is not defined.
+  line 108  col 21   'online' is not defined.
+  line 109  col 22   'online' is not defined.
+
+  ⚠  32 warnings
+
+
+/home/ubuntu/workspace/chat-plugins/seen.js
+  line 31  col 1   'Gold' is not defined.
+  line 37  col 33  'Gold' is not defined.
+
+  ⚠  2 warnings
+
+
+/home/ubuntu/workspace/config/profile.js
+  line 11  col 46   'Utilities' is not defined.
+  line 15  col 46   'Utilities' is not defined.
+  line 19  col 16   'Utilities' is not defined.
+  line 23  col 9    'io' is not defined.
+  line 31  col 9    'io' is not defined.
+  line 37  col 9    'io' is not defined.
+  line 42  col 9    'io' is not defined.
+  line 50  col 9    'io' is not defined.
+  line 65  col 9    'io' is not defined.
+  line 85  col 26   'sanitize' is not defined.
+  line 86  col 9    'io' is not defined.
+  line 89  col 143  'Utilities' is not defined.
+  line 90  col 9    'io' is not defined.
+  line 94  col 51   'Utilities' is not defined.
+
+  ⚠  14 warnings
+

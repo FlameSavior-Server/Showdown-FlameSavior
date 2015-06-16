@@ -15,6 +15,7 @@ exports.BattleAliases = {
 	"createapokemon": "CAP",
 	"cc1v1": "Challenge Cup 1v1",
 	"bh": "Balanced Hackmons",
+	"hc": "Hackmons Cup",
 	"aaa": "Almost Any Ability",
 	"monorandom": "Monotype Random Battle",
 
@@ -267,6 +268,7 @@ exports.BattleAliases = {
 	"forry": "Forretress",
 	"gar": "Gengar",
 	"garde": "Gardevoir",
+	"gatr": "Feraligatr",
 	"hera": "Heracross",
 	"hippo": "Hippowdon",
 	"kupochu": "Pikachu",

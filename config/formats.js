@@ -136,8 +136,8 @@ exports.Formats = [
 			this.p2.pokemon = this.p2.pokemon.slice(0, 3);
 			this.p2.pokemonLeft = this.p2.pokemon.length;
 		},
-		onModifyPokemon: function (pokemon) {
-			pokemon.negateImmunity['Type'] = true;
+		onNegateImmunity: function (pokemon, type) {
+			if (type in this.data.TypeChart && this.runEvent('Immunity', pokemon, null, null, type)) return false;
 		},
 		onEffectiveness: function (typeMod, target, type, move) {
 			// The effectiveness of Freeze Dry on Water isn't reverted
@@ -355,7 +355,7 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Baton Pass Clause', 'Swagger Clause', 'Team Preview'],
 		banlist: ['Sableye + Prankster', 'Shedinja', 'Smeargle', 'Venomoth',
 			'DeepSeaScale', 'DeepSeaTooth', 'Eviolite', 'Gengarite', 'Kangaskhanite', 'Light Ball', 'Mawilite', 'Medichamite', 'Soul Dew', 'Thick Club',
-			'Arena Trap', 'Huge Power', 'Pure Power', 'Shadow Tag'
+			'Arena Trap', 'Huge Power', 'Pure Power', 'Shadow Tag', 'Chatter'
 		]
 	},
 	{
@@ -500,8 +500,8 @@ exports.Formats = [
 			'Ho-Oh', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Serperior',
 			'Shaymin-Sky', 'Snorlax', 'Xerneas', 'Yveltal', 'Zekrom', 'Gengarite', 'Kangaskhanite', 'Salamencite', 'Soul Dew'
 		],
-		onModifyPokemon: function (pokemon) {
-			pokemon.negateImmunity['Type'] = true;
+		onNegateImmunity: function (pokemon, type) {
+			if (type in this.data.TypeChart && this.runEvent('Immunity', pokemon, null, null, type)) return false;
 		},
 		onEffectiveness: function (typeMod, target, type, move) {
 			// The effectiveness of Freeze Dry on Water isn't reverted
@@ -900,6 +900,15 @@ exports.Formats = [
 		mod: 'gen1',
 		ruleset: ['Pokemon', 'Standard'],
 		banlist: ['Uber']
+	},
+	{
+		name: "[Gen 1] Ubers",
+		section: "Past Generations",
+
+		mod: 'gen1',
+		searchShow: false,
+		ruleset: ['Pokemon', 'Standard'],
+		banlist: []
 	},
 	{
 		name: "[Gen 1] OU (tradeback)",

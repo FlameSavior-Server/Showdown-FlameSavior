@@ -577,7 +577,7 @@ exports.commands = {
 	pollremind: function(target, room, user) {
 		var separacion = "&nbsp;&nbsp;";
 		if (!room.question) return this.sendReply('There is currently no poll going on.');
-		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if ((user.locked) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!this.canBroadcast()) return;
 		var output = '';
 		for (var u in room.answerList) {
@@ -633,7 +633,7 @@ exports.commands = {
 	ep: 'endpoll',
 	endpoll: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if ((user.locked) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!room.question) return this.sendReply('There is no poll to end in this room.');
 		if (!room.answers) room.answers = new Object();
 		var votes = Object.keys(room.answers).length;
@@ -2382,7 +2382,7 @@ exports.commands = {
 	snipe: function (target, room, user, connection, cmd) {
 		if (toId(user.name) !== 'tesarand' && !this.can('ban', targetUser)) return false;		
 		if (!target) return this.parse('/help ban');
-		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if ((user.locked) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");

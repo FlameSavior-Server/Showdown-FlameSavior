@@ -42,7 +42,7 @@ exports.commands = {
 	poof: function (target, room, user) {
 		if (Config.poofOff) return this.sendReply("Poof is currently disabled.");
 		if (target && !this.can('broadcast')) return false;
-		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (room.id !== 'lobby') return false;
 		var message = target || messages[Math.floor(Math.random() * messages.length)];
 		if (message.indexOf('{{user}}') < 0)

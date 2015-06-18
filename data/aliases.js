@@ -309,6 +309,7 @@ exports.BattleAliases = {
 	"sui": "Suicune",
 	"talon": "Talonflame",
 	"terra": "Terrakion",
+	"tho": "Diggersby",
 	"tran": "Heatran",
 	"ttar": "Tyranitar",
 	"venu": "Venusaur",

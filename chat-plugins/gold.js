@@ -289,7 +289,7 @@ exports.commands = {
 		}
 		targetUser.popup(user.name + " has permanently banned you.");
 		this.addModCommand(targetUser.name + " was permanently banned by " + user.name + ".");
-		this.add('|unlink|hide|' + targetUser.userid);
+		this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
 		targetUser.ban();
 		ipbans.write('\n' + targetUser.latestIp);
 	},

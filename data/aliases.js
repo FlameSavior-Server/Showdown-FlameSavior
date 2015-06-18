@@ -319,6 +319,7 @@ exports.BattleAliases = {
 	"weed": "Cherubi",
 
 	// moves
+	"bb": "Brave Bird",
 	"bpass": "Baton Pass",
 	"bb": "Brave Bird",
 	"bp": "Baton Pass",

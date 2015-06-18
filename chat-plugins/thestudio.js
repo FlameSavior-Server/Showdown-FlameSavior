@@ -30,6 +30,7 @@ if (goldenrodradiotower && !goldenrodradiotower.plugin) {
 var commands = {
 	start: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (!room.chatRoomData || !this.can('mute', null, room)) return false;
 		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are already in progress.");
 
@@ -55,6 +56,7 @@ var commands = {
 
 	end: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (!room.chatRoomData || !this.can('mute', null, room)) return false;
 		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 		if (!artistOfTheDay.nominations.size) return this.sendReply("No nominations have been submitted yet.");
@@ -76,6 +78,7 @@ var commands = {
 
 	prenom: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target) return false;
+		if (!room.chatRoomData || !target) return false;
 		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are in progress.");
 		if (!room.chatRoomData.prenominations) room.chatRoomData.prenominations = [];
@@ -115,6 +118,7 @@ var commands = {
 
 	nom: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target) return false;
+		if (!room.chatRoomData || !target) return false;
 		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 
@@ -145,6 +149,7 @@ var commands = {
 
 	viewnoms: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData) return false;
+		if (!room.chatRoomData) return false;
 
 		var buffer = "";
 		if (!artistOfTheDay.pendingNominations) {
@@ -188,6 +193,7 @@ var commands = {
 
 	removenom: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target || !this.can('mute', null, room)) return false;
+		if (!room.chatRoomData || !target || !this.can('mute', null, room)) return false;
 		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 		if (!artistOfTheDay.nominations.size) return this.sendReply("No nominations have been submitted yet.");
@@ -211,6 +217,7 @@ var commands = {
 
 	set: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
+		if (!room.chatRoomData || !this.can('mute', null, room)) return false;
 		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!toId(target)) return this.sendReply("No valid artist was specified.");
 		if (artistOfTheDay.pendingNominations) return this.sendReply("The Artist of the Day cannot be set while nominations are in progress.");
@@ -223,11 +230,13 @@ var commands = {
 
 	'': function (target, room) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
+		if (!room.chatRoomData || !this.canBroadcast()) return false;
 		this.sendReplyBox("The Artist of the Day " + (room.chatRoomData.artistOfTheDay ? "is " + room.chatRoomData.artistOfTheDay + "." : "has not been set yet."));
 	},
 
 	help: function (target, room) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
+		if (!room.chatRoomData || !this.canBroadcast()) return false;
 		this.sendReply("Use /help aotd to view help for all commands, or /help aotd [command] for help on a specific command.");
 	}
 };

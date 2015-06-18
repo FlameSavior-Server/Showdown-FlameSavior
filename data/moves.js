@@ -904,8 +904,8 @@ exports.BattleMovedex = {
 				return false;
 			}
 			this.directDamage(target.maxhp / 2);
-			target.setBoost({atk: 6});
-			this.add('-setboost', target, 'atk', '6', '[from] move: Belly Drum');
+			this.boost({atk: 12}, target);
+			this.add('-setboost', target, 'atk', target.boosts['atk'], '[from] move: Belly Drum');
 		},
 		secondary: false,
 		target: "self",
@@ -7357,9 +7357,8 @@ exports.BattleMovedex = {
 			}
 		},
 		onAfterHit: function (target, source) {
-			if (target.hasAbility('stickyhold')) return;
 			if (source.hp) {
-				var item = target.takeItem();
+				var item = target.takeItem(source);
 				if (item) {
 					this.add('-enditem', target, item.name, '[from] move: Knock Off', '[of] ' + source);
 				}

@@ -330,6 +330,7 @@ exports.BattleFormats = {
 		}
 	},
 	teampreviewvgc: {
+		effectType: 'Rule',
 		onStartPriority: -10,
 		onStart: function () {
 			this.add('clearpoke');
@@ -345,6 +346,7 @@ exports.BattleFormats = {
 		}
 	},
 	teampreview1v1: {
+		effectType: 'Rule',
 		onStartPriority: -10,
 		onStart: function () {
 			this.add('clearpoke');
@@ -360,6 +362,7 @@ exports.BattleFormats = {
 		}
 	},
 	teampreview: {
+		effectType: 'Rule',
 		onStartPriority: -10,
 		onStart: function () {
 			this.add('clearpoke');
@@ -375,6 +378,7 @@ exports.BattleFormats = {
 		}
 	},
 	teampreviewgbu: {
+		effectType: 'Rule',
 		onStartPriority: -10,
 		onStart: function () {
 			this.add('clearpoke');

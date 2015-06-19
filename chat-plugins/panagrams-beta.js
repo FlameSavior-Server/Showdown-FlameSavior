@@ -31,7 +31,7 @@ exports.commands = {
 		if (target < 0) return this.sendReply("Number cannot be negitive.");
 		if (String(target).indexOf('.') >= 0) return this.sendReply("Number must be an integer.");
 		if (!target) return this.sendReply("Usage: /panagram [number of games]");
-		var msg = "<div class=\"broadcast-gold\">A session of <b>Panagrams</b> in <button name=\"joinRoom\" value=" + room.id +">" + room.title + "</button> has commenced for " + target + " games!</div>";
+		var msg = "<div class=\"broadcast-gold\"><center>A session of <b>Panagrams</b> in <button name=\"joinRoom\" value=" + room.id +">" + room.title + "</button> has commenced for " + target + " games!</center></div>";
 		try {
 			Rooms.rooms.lobby.add('|raw|' + msg);
 			room.update();

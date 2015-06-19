@@ -934,7 +934,6 @@ var commands = exports.commands = {
 	},
 	unlockhelp: ["/unlock [username] - Unlocks the user. Requires: % @ & ~"],
 
-	forceban: 'ban',
 	b: 'ban',
 	ban: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help ban');
@@ -953,14 +952,8 @@ var commands = exports.commands = {
 		}
 
 		if (targetUser.confirmed) {
-			if (cmd === 'forceban') {
-				var from = targetUser.deconfirm();
-				ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
-			} else {
-				return this.sendReply("" + targetUser.name + " is a confirmed user. If you are sure you would like to ban them use /forceban.");
-			}
-		} else if (cmd === 'forceban') {
-			return this.sendReply("Use /ban; " + targetUser.name + " is not a confirmed user.");
+			var from = targetUser.deconfirm();
+			ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
 		}
 
 		targetUser.popup("" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");

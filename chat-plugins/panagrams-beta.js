@@ -31,11 +31,11 @@ exports.commands = {
 		if (target < 0) return this.sendReply("Number cannot be negitive.");
 		if (String(target).indexOf('.') >= 0) return this.sendReply("Number must be an integer.");
 		if (!target) return this.sendReply("Usage: /panagram [number of games]");
-		var pmName = '~Panagram Notification';
-		for (var i in Users.users) {
-			var message = '|pm|' + pmName + '|' + Users.users[i].getIdentity() + '|A session of **Panagrams** in "' + room.title + '" has commenced for ' + target + ' games!';
-			Users.users[i].send(message);
-		}
+		var msg = "<div class=\"broadcast-gold\">A session of <b>Panagrams</b> in <button name=\"joinRoom\" value=" + room.id +">" + room.title + "</button> has commenced for " + target + " games!</div>";
+		try {
+			Rooms.rooms.lobby.add('|raw|' + msg);
+			room.update();
+		} catch (e) {}
 		room.panagram = {};
 		session = Number(target);
 		var pokedex = [];

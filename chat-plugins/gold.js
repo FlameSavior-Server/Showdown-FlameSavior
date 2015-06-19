@@ -221,24 +221,24 @@ exports.commands = {
 				this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
 			}
 		}
-		user.getIdentity = function(roomid) {
-			if (!roomid) roomid = 'lobby';
-			if (this.locked) {
-				return '‽' + this.name;
-			}
-			if (this.mutedRooms[roomid]) {
+		user.getIdentity = function (roomid) {
+		if (this.locked) {
+			return '‽' + this.name;
+		}
+		if (roomid) {
+			var room = Rooms.rooms[roomid];
+			if (room.isMuted(this)) {
 				return '!' + this.name;
 			}
-			var room = Rooms.rooms[roomid];
-			if (room.auth) {
+			if (room && room.auth) {
 				if (room.auth[this.userid]) {
-					return tar + this.name;
+					return room.auth[this.userid] + this.name;
 				}
-				if (this.group !== ' ') return '+' + this.name;
-				return ' ' + this.name;
+				if (room.isPrivate === true) return ' ' + this.name;
 			}
-			return tar + this.name;
-		};
+		}
+		return tar + this.name;
+	}
 		user.updateIdentity();
 		this.sendReply('You are now hiding your auth symbol as \'' + tar + '\'.');
 		return this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');

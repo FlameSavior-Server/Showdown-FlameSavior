@@ -497,6 +497,7 @@ var commands = exports.commands = {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomowner - This room isn't designed for per-room moderation to be added");
 		}
+		if (!target) return this.parse('/help roomowner');
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 
@@ -515,7 +516,7 @@ var commands = exports.commands = {
 	},
 	roomownerhelp: ["/roomowner [username] - Appoints [username] as a room owner. Removes official status. Requires: ~"],
 
-    roomdeowner: 'deroomowner',
+	roomdeowner: 'deroomowner',
     deroomowner: function(target, room, user) {
         if (!room.auth) {
             return this.sendReply("/roomdeowner - This room isn't designed for per-room moderation");
@@ -526,8 +527,8 @@ var commands = exports.commands = {
         var userid = toId(name);
         if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
 
-	if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
-	if (!room.founder || user.userid != room.founder && !this.can('makeroom')) return false;
+		if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
+		if (!room.founder || user.userid != room.founder && !this.can('makeroom')) return false;
 
 
         delete room.auth[userid];
@@ -2187,8 +2188,8 @@ var commands = exports.commands = {
 			this.sendReply("COMMANDS: /nick, /avatar, /rating, /whois, /msg, /reply, /ignore, /away, /back, /timestamps, /highlight");
 			this.sendReply("INFORMATIONAL COMMANDS: /data, /dexsearch, /movesearch, /groups, /faq, /rules, /intro, /tiers, /othermetas, /learn, /analysis, /calc (replace / with ! to broadcast. Broadcasting requires: + % @ # & ~)");
 			if (user.group !== Config.groupsranking[0]) {
-				this.sendReply("DRIVER COMMANDS: /warn, /mute, /unmute, /alts, /forcerename, /modlog, /lock, /unlock, /announce, /redirect");
-				this.sendReply("MODERATOR COMMANDS: /ban, /unban, /ip");
+				this.sendReply("DRIVER COMMANDS: /warn, /mute, /hourmute, /unmute, /alts, /forcerename, /modlog, /modnote, /lock, /unlock, /announce, /redirect");
+				this.sendReply("MODERATOR COMMANDS: /ban, /unban, /ip, /modchat");
 				this.sendReply("LEADER COMMANDS: /declare, /forcetie, /forcewin, /promote, /demote, /banip, /unbanall");
 			}
 			this.sendReply("For an overview of room commands, use /roomhelp");

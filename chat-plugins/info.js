@@ -1808,7 +1808,9 @@ var commands = exports.commands = {
 		"/whois [username] - Get details on a username: alts (Requires: % @ & ~), group, IP address (Requires: @ & ~), and rooms."],
 
 	host: function (target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help host');
 		if (!this.can('rangeban')) return;
+		if (!/[0-9.]+/.test(target)) return this.sendReply('You must pass a valid IPv4 IP to /host.');
 		var self = this;
 		Dnsbl.reverse(target, function (err, hosts) {
 			self.sendReply('IP ' + target + ': ' + (hosts ? hosts[0] : 'NULL'));
@@ -2932,7 +2934,10 @@ var commands = exports.commands = {
 			factor = Math.pow(2, totalTypeMod);
 		}
 
-		this.sendReplyBox("" + atkName + " is " + factor + "x effective against " + defName + ".");
+		var hasThousandArrows = source.id === 'thousandarrows' && defender.types.indexOf('Flying') >= 0;
+		var additionalInfo = hasThousandArrows ? "<br>However, Thousand Arrows will be 1x effective on the first hit." : "";
+
+		this.sendReplyBox("" + atkName + " is " + factor + "x effective against " + defName + "." + additionalInfo);
 	},
 	effectivenesshelp: ["/effectiveness [attack], [defender] - Provides the effectiveness of a move or type on another type or a Pok\u00e9mon.",
 		"!effectiveness [attack], [defender] - Shows everyone the effectiveness of a move or type on another type or a Pok\u00e9mon."],
@@ -2947,6 +2952,8 @@ var commands = exports.commands = {
 
 		var dispTable = false;
 		var bestCoverage = {};
+		var hasThousandArrows = false;
+
 		for (var type in Tools.data.TypeChart) {
 			// This command uses -5 to designate immunity
 			bestCoverage[type] = -5;
@@ -2973,6 +2980,7 @@ var commands = exports.commands = {
 			move = Tools.getMove(move);
 			if (move.exists) {
 				if (!move.basePower && !move.basePowerCallback) continue;
+				if (move.id === 'thousandarrows') hasThousandArrows = true;
 				sources.push(move);
 				for (var type in bestCoverage) {
 					if (!Tools.getImmunity(move.type, type) && !move.ignoreImmunity) continue;
@@ -3096,6 +3104,10 @@ var commands = exports.commands = {
 				}
 			}
 			buffer += '</table></div>';
+
+			if (hasThousandArrows) {
+				buffer += "<br><b>Thousand Arrows has neutral type effectiveness on Flying-type Pokemon if not already smacked down.";
+			}
 
 			this.sendReplyBox('Coverage for ' + sources.join(' + ') + ':<br>' + buffer);
 		}
@@ -3258,8 +3270,9 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'omofthemonth' || target === 'omotm' || target === 'month') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3481155/\">Other Metagame of the Month</a><br />";
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3524254/\">Current OMotM: Linked</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3541792/\">Other Metagame of the Month</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3524254/\">Linked</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3526481/\">Averagemons</a><br />";
 		}
 		if (target === 'all' || target === 'seasonal') {
 			matched = true;
@@ -3488,7 +3501,7 @@ var commands = exports.commands = {
 			matched = true;
 			buffer += "<a href=\"https://www.smogon.com/sim/faq#customavatar\">How can I get a custom avatar?</a><br />";
 		}
-		if (target === 'all' || target === 'pm') {
+		if (target === 'all' || target === 'pm' || target === 'msg' || target === 'w') {
 			matched = true;
 			buffer += "<a href=\"https://www.smogon.com/sim/faq#pm\">How can I send a user a private message?</a><br />";
 		}

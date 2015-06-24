@@ -539,7 +539,6 @@ var commands = exports.commands = {
             Rooms.global.writeChatRoomData();
         }
     },
-<<<<<<< HEAD
 	roomdeowner: 'deroomowner',
 	deroomowner: function (target, room, user) {
 		if (!room.auth) {
@@ -562,8 +561,6 @@ var commands = exports.commands = {
 			Rooms.global.writeChatRoomData();
 		}
 	},
-=======
->>>>>>> 82aa7e01c429e84df3a0dd8fcaad6e909c502812
 	deroomownerhelp: ["/roomdeowner [username] - Removes [username]'s status as a room owner. Requires: ~"],
 
 	roomdemote: 'roompromote',

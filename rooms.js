@@ -545,7 +545,7 @@ var GlobalRoom = (function () {
 		var self = this;
 		user.doWithMMR(formatid, function (mmr, error) {
 			if (error) {
-				user.popup("Connection to ladder server failed with error: " + error + "; please try again later");
+				user.popup("Connection to ladder server failed with error: " + error.message + "; please try again later");
 				return;
 			}
 			newSearch.rating = mmr;
@@ -755,8 +755,8 @@ var GlobalRoom = (function () {
 		if (this.lockdown === true) {
 			this.cancelSearch(p1, true);
 			this.cancelSearch(p2, true);
-			p1.popup("The server is shutting down. Battles cannot be started at this time.");
-			p2.popup("The server is shutting down. Battles cannot be started at this time.");
+			p1.popup("The server is restarting. Battles will be available again in a few minutes.");
+			p2.popup("The server is restarting. Battles will be available again in a few minutes.");
 			return;
 		}
 
@@ -914,7 +914,7 @@ var BattleRoom = (function () {
 						return;
 					}
 					if (!data) {
-						self.addRaw('Ladder (probably) updated, but score could not be retrieved (' + error + ').');
+						self.addRaw('Ladder (probably) updated, but score could not be retrieved (' + error.message + ').');
 						// log the battle anyway
 						if (!Tools.getFormat(self.format).noLog) {
 							self.logBattle(p1score);

@@ -235,8 +235,10 @@ Users.unlockRange = unlockRange;
 var connections = Users.connections = Object.create(null);
 
 Users.shortenHost = function (host) {
+	if (host.slice(-7) === '-nohost') return host;
 	var dotLoc = host.lastIndexOf('.');
-	if (host.substr(dotLoc) === '.uk') dotLoc = host.lastIndexOf('.', dotLoc - 1);
+	var tld = host.substr(dotLoc);
+	if (tld === '.uk' || tld === '.au' || tld === '.br') dotLoc = host.lastIndexOf('.', dotLoc - 1);
 	dotLoc = host.lastIndexOf('.', dotLoc - 1);
 	return host.substr(dotLoc + 1);
 };
@@ -1080,6 +1082,7 @@ User = (function () {
 				if (this.named) user.prevNames[this.userid] = this.name;
 				this.destroy();
 				Rooms.global.checkAutojoin(user);
+				if (Config.loginfilter) Config.loginfilter(user);
 				return true;
 			}
 
@@ -1092,8 +1095,9 @@ User = (function () {
 			this.isSysop = isSysop;
 			if (avatar) this.avatar = avatar;
 			if (this.forceRename(name, registered)) {
-				Rooms.global.checkAutojoin(this);
 				if (this.ignorePMs && this.can('lock') && !this.can('bypassall')) this.ignorePMs = false;
+				Rooms.global.checkAutojoin(this);
+				if (Config.loginfilter) Config.loginfilter(this);
 				return true;
 			}
 			return false;
@@ -1325,22 +1329,15 @@ User = (function () {
 			format: formatid,
 			user: userid
 		}, function (data, statusCode, error) {
-			var mmr = 1000;
-			error = (error || true);
-			if (data) {
-				if (data.errorip) {
-					self.popup("This server's request IP " + data.errorip + " is not a registered server.");
-					return;
-				}
-				mmr = parseInt(data, 10);
-				if (!isNaN(mmr) && self.userid === userid) {
-					error = false;
-					self.mmrCache[formatid] = mmr;
-				} else {
-					mmr = 1000;
-				}
-			}
-			callback(mmr, error);
+			if (!data) return callback(1000, error || new Error("No data received"));
+			if (data.errorip) return self.popup("This server's request IP " + data.errorip + " is not a registered server.");
+
+			var mmr = parseInt(data, 10);
+			if (isNaN(mmr)) return callback(1000, error || new Error("Invalid rating"));
+			if (self.userid !== userid) return callback(1000, new Error("Expired rating"));
+
+			self.mmrCache[formatid] = mmr;
+			callback(mmr, null);
 		});
 	};
 	User.prototype.cacheMMR = function (formatid, mmr) {
@@ -1531,7 +1528,7 @@ User = (function () {
 		if (!type) type = 'challenge';
 
 		if (Rooms.global.lockdown && Rooms.global.lockdown !== 'pre') {
-			var message = "The server is shutting down. Battles cannot be started at this time.";
+			var message = "The server is restarting. Battles will be available again in a few minutes.";
 			if (Rooms.global.lockdown === 'ddos') {
 				message = "The server is under attack. Battles cannot be started at this time.";
 			}

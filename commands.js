@@ -517,6 +517,7 @@ var commands = exports.commands = {
 	roomownerhelp: ["/roomowner [username] - Appoints [username] as a room owner. Removes official status. Requires: ~"],
 
     roomdeowner: 'deroomowner',
+	roomdeowner: 'deroomowner',
     deroomowner: function(target, room, user) {
         if (!room.auth) {
             return this.sendReply("/roomdeowner - This room isn't designed for per-room moderation");
@@ -527,8 +528,8 @@ var commands = exports.commands = {
         var userid = toId(name);
         if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
 
-	if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
-	if (!room.founder || user.userid != room.founder && !this.can('makeroom')) return false;
+		if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
+		if (!room.founder || user.userid != room.founder && !this.can('makeroom')) return false;
 
 
         delete room.auth[userid];
@@ -538,6 +539,7 @@ var commands = exports.commands = {
             Rooms.global.writeChatRoomData();
         }
     },
+<<<<<<< HEAD
 	roomdeowner: 'deroomowner',
 	deroomowner: function (target, room, user) {
 		if (!room.auth) {
@@ -560,6 +562,8 @@ var commands = exports.commands = {
 			Rooms.global.writeChatRoomData();
 		}
 	},
+=======
+>>>>>>> 82aa7e01c429e84df3a0dd8fcaad6e909c502812
 	deroomownerhelp: ["/roomdeowner [username] - Removes [username]'s status as a room owner. Requires: ~"],
 
 	roomdemote: 'roompromote',

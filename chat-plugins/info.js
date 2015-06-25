@@ -1447,20 +1447,16 @@ var commands = exports.commands = {
 			"- Language: JavaScript (Node.js)<br />" +
 			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown/commits/master\">What's new?</a><br />" +
 			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown\">Server source code</a><br />" +
-			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown-Client\">Client source code</a>"
+			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown-Client\">Client source code</a>" +
+			"- <a href"\"https://github.com/piiiikachuuu/Pokemon-Showdown\">Luster server source code</a>"
 		);
 	},
 	opensourcehelp: ["/opensource - Links to PS's source code repository.",
 		"!opensource - Show everyone that information. Requires: + % @ # & ~"],
 
-	staff: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox("<a href=\"https://www.smogon.com/sim/staff_list\">Pok&eacute;mon Showdown Staff List</a>");
-	},
-
 	forums: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox("<a href=\"http://www.smogon.com/forums/forums/pok%C3%A9mon-showdown.209\">Pok&eacute;mon Showdown Forums</a>");
+		this.sendReplyBox("<a href=\"http://luster.no-ip.org/forum/index.php\">Luster Forums</a>");
 	},
 
 	avatars: function (target, room, user) {

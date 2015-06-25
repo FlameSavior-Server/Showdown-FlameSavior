@@ -1447,8 +1447,8 @@ var commands = exports.commands = {
 			"- Language: JavaScript (Node.js)<br />" +
 			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown/commits/master\">What's new?</a><br />" +
 			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown\">Server source code</a><br />" +
-			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown-Client\">Client source code</a>" +
-			"- <a href"\"https://github.com/piiiikachuuu/Pokemon-Showdown\">Luster server source code</a>"
+			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown-Client\">Client source code</a><br />" +
+			"- <a href=\"https://github.com/piiiikachuuu/Pokemon-Showdown\">Luster server source code</a>"
 		);
 	},
 	opensourcehelp: ["/opensource - Links to PS's source code repository.",

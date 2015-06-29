@@ -35,24 +35,38 @@ Gold.emoticons = {
 				match = true;
 			}
 		}
-		if (!room.emoteStatus) {
-			kitty = message = this.processEmoticons(message);
-			var message = Tools.escapeHTML(kitty);
-			return (message);
-			return;
-		} else if (room.emoteStatus) {
-			if (!match || message.charAt(0) === '!') return true;
-			message = Tools.escapeHTML(message);
-			message = this.processEmoticons(message);
-			if (user.hiding) {
-				room.addRaw(' <button class="astext" name="parseCommand" value="/user ' +
-				user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
+		switch (Users.ShadowBan.checkBanned(user) && match) {
+			case true:
+				message = Tools.escapeHTML(message);
+				message = this.processEmoticons(message);
+				user.send('|html|' + 
+					user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
+					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>'
+				);
 				room.update();
-			}
-			room.addRaw(user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
-				user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
-			room.update();
-			return false;
+				Users.ShadowBan.addMessage(user, room, message);
+				break;
+			case false:
+				if (!room.emoteStatus) {
+					kitty = message = this.processEmoticons(message);
+					var message = Tools.escapeHTML(kitty);
+					return (message);
+					return;
+				} else if (room.emoteStatus) {
+					if (!match || message.charAt(0) === '!') return true;
+					message = Tools.escapeHTML(message);
+					message = this.processEmoticons(message);
+					if (user.hiding) {
+						room.addRaw(' <button class="astext" name="parseCommand" value="/user ' +
+						user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
+						room.update();
+					}
+					room.addRaw(user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
+					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
+					room.update();
+					return false;
+				}
+				break;
 		}
 	}
 };

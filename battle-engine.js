@@ -513,10 +513,10 @@ BattlePokemon = (function () {
 		return null;
 	};
 	BattlePokemon.prototype.ignoringAbility = function () {
-		return !!this.volatiles['gastroacid'];
+		return !!((this.battle.gen >= 5 && !this.isActive) || this.volatiles['gastroacid']);
 	};
 	BattlePokemon.prototype.ignoringItem = function () {
-		return !!(this.hasAbility('klutz') || this.volatiles['embargo'] || this.battle.pseudoWeather['magicroom']);
+		return !!((this.battle.gen >= 5 && !this.isActive) || this.hasAbility('klutz') || this.volatiles['embargo'] || this.battle.pseudoWeather['magicroom']);
 	};
 	BattlePokemon.prototype.deductPP = function (move, amount, source) {
 		move = this.battle.getMove(move);
@@ -1113,7 +1113,6 @@ BattlePokemon = (function () {
 		return this.battle.getAbility(this.ability);
 	};
 	BattlePokemon.prototype.hasAbility = function (ability) {
-		if (!this.isActive && this.battle.gen >= 5) return false;
 		if (this.ignoringAbility()) return false;
 		var ownAbility = this.ability;
 		if (!Array.isArray(ability)) {
@@ -2058,7 +2057,7 @@ Battle = (function () {
 			// it's changed; call it off
 			return relayVar;
 		}
-		if (eventid !== 'Start' && effect.effectType === 'Item' && (target instanceof BattlePokemon) && target.ignoringItem()) {
+		if (eventid !== 'Start' && eventid !== 'TakeItem' && effect.effectType === 'Item' && (target instanceof BattlePokemon) && target.ignoringItem()) {
 			this.debug(eventid + ' handler suppressed by Embargo, Klutz or Magic Room');
 			return relayVar;
 		}
@@ -2244,7 +2243,6 @@ Battle = (function () {
 					Accuracy: 1,
 					RedirectTarget: 1,
 					Heal: 1,
-					TakeItem: 1,
 					SetStatus: 1,
 					CriticalHit: 1,
 					ModifyPokemon: 1,
@@ -2269,7 +2267,7 @@ Battle = (function () {
 					continue;
 				}
 			}
-			if (eventid !== 'Start' && status.effectType === 'Item' && (thing instanceof BattlePokemon) && thing.ignoringItem()) {
+			if (eventid !== 'Start' && eventid !== 'TakeItem' && status.effectType === 'Item' && (thing instanceof BattlePokemon) && thing.ignoringItem()) {
 				if (eventid !== 'ModifyPokemon' && eventid !== 'Update') {
 					this.debug(eventid + ' handler suppressed by Embargo, Klutz or Magic Room');
 				}
@@ -2705,6 +2703,7 @@ Battle = (function () {
 				pokemon.copyVolatileFrom(oldActive);
 			}
 		}
+		pokemon.isActive = true;
 		this.runEvent('BeforeSwitchIn', pokemon);
 		if (side.active[pos]) {
 			var oldActive = side.active[pos];
@@ -2719,7 +2718,6 @@ Battle = (function () {
 			oldActive.clearVolatile();
 		}
 		side.active[pos] = pokemon;
-		pokemon.isActive = true;
 		pokemon.activeTurns = 0;
 		for (var m in pokemon.moveset) {
 			pokemon.moveset[m].used = false;
@@ -3500,9 +3498,9 @@ Battle = (function () {
 				var priorities = {
 					'beforeTurn': 100,
 					'beforeTurnMove': 99,
-					'switch': 6,
-					'runSwitch': 6.1,
-					'megaEvo': 5.9,
+					'switch': 7,
+					'runSwitch': 7.1,
+					'megaEvo': 6.9,
 					'residual': -100,
 					'team': 102,
 					'start': 101

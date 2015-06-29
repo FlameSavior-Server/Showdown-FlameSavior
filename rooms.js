@@ -85,7 +85,7 @@ var Room = (function () {
 
 		message = CommandParser.parse(message, this, user, connection);
 
-		if (message) {
+		if (message && message !== true) {
 			if (Users.ShadowBan.checkBanned(user)) {
 				Users.ShadowBan.addMessage(user, "To " + this.id, message);
 				connection.sendTo(this, '|c|' + user.getIdentity(this.id) + '|' + message);
@@ -794,7 +794,7 @@ var GlobalRoom = (function () {
 	GlobalRoom.prototype.chat = function (user, message, connection) {
 		if (rooms.lobby) return rooms.lobby.chat(user, message, connection);
 		message = CommandParser.parse(message, this, user, connection);
-		if (message) {
+		if (message && message !== true) {
 			connection.popup("You can't send messages directly to the server.");
 		}
 	};

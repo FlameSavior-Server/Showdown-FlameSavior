@@ -2040,14 +2040,14 @@ var commands = exports.commands = {
 	dt: 'details',
 	details: function (target) {
 		if (!target) return this.parse('/help details');
-		CommandParser.commands.data.apply(this, arguments);
+		this.run('data');
 	},
 	detailshelp: ["/details [pokemon] - Get additional details on this pokemon/item/move/ability/nature.",
 		"!details [pokemon] - Show everyone these details. Requires: + % @ # & ~"],
 
 	ds: 'dexsearch',
 	dsearch: 'dexsearch',
-	dexsearch: function (target, room, user) {
+	dexsearch: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
 
 		if (!target) return this.parse('/help dexsearch');
@@ -2059,6 +2059,7 @@ var commands = exports.commands = {
 		var showAll = false;
 		var megaSearch = null;
 		var output = 10;
+		var randomOutput = 0;
 		var categories = ['gen', 'tier', 'color', 'types', 'ability', 'stats', 'compileLearnsets', 'moves', 'recovery', 'priority'];
 
 		for (var i = 0; i < targets.length; i++) {
@@ -2104,6 +2105,11 @@ var commands = exports.commands = {
 			if (target === 'all') {
 				if (this.broadcasting) return this.sendReplyBox("A search with the parameter 'all' cannot be broadcast.");
 				showAll = true;
+				continue;
+			}
+
+			if (target.substr(0, 6) === 'random' && cmd === 'randpoke') {
+				randomOutput = parseInt(target.substr(6));
 				continue;
 			}
 
@@ -2348,7 +2354,7 @@ var commands = exports.commands = {
 				break;
 
 			default:
-				return this.sendReplyBox("Something broke! PM SolarisFox here or on the Smogon forums with the command you tried.");
+				throw new Error("/dexsearch search category '" + search + "' was unrecognised.");
 			}
 		}
 
@@ -2356,6 +2362,10 @@ var commands = exports.commands = {
 		for (var mon in dex) {
 			if (dex[mon].baseSpecies && results.indexOf(dex[mon].baseSpecies) >= 0) continue;
 			results.push(dex[mon].species);
+		}
+
+		if (randomOutput && randomOutput < results.length) {
+			results = results.randomize().slice(0, randomOutput);
 		}
 
 		var resultsStr = "";
@@ -2380,6 +2390,32 @@ var commands = exports.commands = {
 		"Parameters can be excluded through the use of '!', e.g., '!water type' excludes all water types.",
 		"The parameter 'mega' can be added to search for Mega Evolutions only, and the parameter 'NFE' can be added to search not-fully evolved Pokemon only.",
 		"The order of the parameters does not matter."],
+
+	rollpokemon: 'randompokemon',
+	randpoke: 'randompokemon',
+	randompokemon: function (target, room, user, connection, cmd) {
+		var targets = target.split(",");
+		var targetsBuffer = [];
+		var qty;
+		for (var i = 0; i < targets.length; i++) {
+			if (!targets[i]) continue;
+			var num = Number(targets[i]);
+			if (Number.isInteger(num)) {
+				if (qty) return this.sendReply("Only specify the number of Pokemon once.");
+				qty = num;
+				if (qty < 1 || 15 < qty) return this.sendReply("Number of random Pokemon must be between 1 and 15.");
+				targetsBuffer.push("random" + qty);
+			} else {
+				targetsBuffer.push(targets[i]);
+			}
+		}
+		if (!qty) targetsBuffer.push("random1");
+
+		CommandParser.commands.dexsearch.call(this, targetsBuffer.join(","), room, user, connection, "randpoke");
+	},
+	randompokemonhelp: ["/randompokemon - Generates random Pokemon based on given search conditions.",
+		"/randompokemon uses the same parameters as /dexsearch (see '/help ds').",
+		"Adding a number as a parameter returns that many random Pokemon, e.g., '/randpoke 6' returns 6 random Pokemon."],
 
 	ms: 'movesearch',
 	msearch: 'movesearch',
@@ -2701,7 +2737,7 @@ var commands = exports.commands = {
 				break;
 
 			default:
-				return this.sendReplyBox("Something broke! PM SolarisFox here or on the Smogon forums with the command you tried.");
+				throw new Error("/movesearch search category '" + search + "' was unrecognised.");
 			}
 		}
 
@@ -2924,7 +2960,7 @@ var commands = exports.commands = {
 		var factor = 0;
 		if (Tools.getImmunity(source, defender) || source.ignoreImmunity && (source.ignoreImmunity === true || source.ignoreImmunity[source.type])) {
 			var totalTypeMod = 0;
-			if (source.effectType !== 'Move' || source.category === 'Status' || source.basePower || source.basePowerCallback) {
+			if (source.effectType !== 'Move' || source.category !== 'Status' && (source.basePower || source.basePowerCallback)) {
 				for (var i = 0; i < defender.types.length; i++) {
 					var baseMod = Tools.getEffectiveness(source, defender.types[i]);
 					var moveMod = source.onEffectiveness && source.onEffectiveness.call(Tools, baseMod, defender.types[i], source);
@@ -3564,7 +3600,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'all' || target === 'neverused' || target === 'nu') {
 			matched = true;
-			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3537418/\">np: NU Stage 6</a><br />";
+			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3542109/\">np: NU Stage 7</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/dex/xy/tags/nu/\">NU Banlist</a><br />";
 			buffer += "- <a href=\"https://www.smogon.com/forums/threads/3523692/\">NU Viability Ranking</a><br />";
 		}

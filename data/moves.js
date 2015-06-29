@@ -7358,7 +7358,7 @@ exports.BattleMovedex = {
 		},
 		onAfterHit: function (target, source) {
 			if (source.hp) {
-				var item = target.takeItem(source);
+				var item = target.takeItem();
 				if (item) {
 					this.add('-enditem', target, item.name, '[from] move: Knock Off', '[of] ' + source);
 				}
@@ -12107,6 +12107,7 @@ exports.BattleMovedex = {
 		onHit: function (pokemon) {
 			var oldAbility = pokemon.setAbility('simple');
 			if (oldAbility) {
+				this.add('-endability', pokemon, oldAbility, '[from] move: Simple Beam');
 				this.add('-ability', pokemon, 'Simple', '[from] move: Simple Beam');
 				return;
 			}
@@ -12310,8 +12311,9 @@ exports.BattleMovedex = {
 		},
 		effect: {
 			duration: 2,
-			onDragOut: false,
-			onSourceDragOut: false,
+			onAnyDragOut: function (pokemon) {
+				if (pokemon === this.effectData.target || pokemon === this.effectData.source) return false;
+			},
 			onFoeModifyPokemon: function (defender) {
 				if (defender !== this.effectData.source) return;
 				defender.trapped = true;
@@ -15523,6 +15525,7 @@ exports.BattleMovedex = {
 		onHit: function (pokemon) {
 			var oldAbility = pokemon.setAbility('insomnia');
 			if (oldAbility) {
+				this.add('-endability', pokemon, oldAbility, '[from] move: Worry Seed');
 				this.add('-ability', pokemon, 'Insomnia', '[from] move: Worry Seed');
 				if (pokemon.status === 'slp') {
 					pokemon.cureStatus();

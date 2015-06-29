@@ -880,7 +880,7 @@ var commands = exports.commands = {
 	hm: 'hourmute',
 	hourmute: function (target) {
 		if (!target) return this.parse('/help hourmute');
-		CommandParser.commands.mute.apply(this, arguments);
+		this.run('mute');
 	},
 	hourmutehelp: ["/hourmute OR /hm [username], [reason] - Mutes a user with reason for an hour. Requires: % @ # & ~"],
 
@@ -925,7 +925,7 @@ var commands = exports.commands = {
 			ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was locked by " + user.name + " and demoted from " + from.join(", ") + ".");
 		}
 
-		targetUser.popup("" + user.name + " has locked you from talking in chats, battles, and PMing regular users." + (target ? "\n\nReason: " + target : "") + "\n\nIf you feel that your lock was unjustified, you can still PM staff members (%, @, &, and ~) to discuss it" + (Config.appealurl ? " or you can appeal:\n" + Config.appealurl : ".") + "\n\nYour lock will expire in a few days.");
+		targetUser.popup("|modal|" + user.name + " has locked you from talking in chats, battles, and PMing regular users." + (target ? "\n\nReason: " + target : "") + "\n\nIf you feel that your lock was unjustified, you can still PM staff members (%, @, &, and ~) to discuss it" + (Config.appealurl ? " or you can appeal:\n" + Config.appealurl : ".") + "\n\nYour lock will expire in a few days.");
 
 		this.addModCommand("" + targetUser.name + " was locked from talking by " + user.name + "." + (target ? " (" + target + ")" : ""));
 		var alts = targetUser.getAlts();
@@ -935,9 +935,12 @@ var commands = exports.commands = {
 		} else if (acAccount) {
 			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
 		}
-		this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
+		var userid = this.getLastIdOf(targetUser);
+		this.add('|unlink|hide|' + userid);
 
-		targetUser.lock();
+		this.globalModlog("LOCK", targetUser, " by " + user.name + (target ? ": " + target : ""));
+		targetUser.lock(false, userid);
+		return true;
 	},
 	lockhelp: ["/lock OR /l [username], [reason] - Locks the user from talking in all chats. Requires: % @ & ~"],
 
@@ -949,9 +952,9 @@ var commands = exports.commands = {
 
 		if (unlocked) {
 			var names = Object.keys(unlocked);
-			this.addModCommand(names.join(", ") + " " +
-				((names.length > 1) ? "were" : "was") +
+			this.addModCommand(names.join(", ") + " " + ((names.length > 1) ? "were" : "was") +
 				" unlocked by " + user.name + ".");
+			this.globalModlog("UNLOCK", target, " by " + user.name);
 		} else {
 			this.sendReply("User '" + target + "' is not locked.");
 		}
@@ -980,7 +983,7 @@ var commands = exports.commands = {
 			ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
 		}
 
-		targetUser.popup("" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");
+		targetUser.popup("|modal|" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");
 
 		this.addModCommand("" + targetUser.name + " was banned by " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
 		var alts = targetUser.getAlts();
@@ -1000,8 +1003,11 @@ var commands = exports.commands = {
 			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
 		}
 
-		this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
-		targetUser.ban();
+		var userid = this.getLastIdOf(targetUser);
+		this.add('|unlink|hide|' + userid);
+		targetUser.ban(false, userid);
+		this.globalModlog("BAN", targetUser, " by " + user.name + (target ? ": " + target : ""));
+		return true;
 	},
 	banhelp: ["/ban OR /b [username], [reason] - Kick user from all rooms and ban user's IP address with reason. Requires: @ & ~"],
 
@@ -1013,6 +1019,7 @@ var commands = exports.commands = {
 
 		if (name) {
 			this.addModCommand("" + name + " was unbanned by " + user.name + ".");
+			this.globalModlog("UNBAN", name, " by " + user.name);
 		} else {
 			this.sendReply("User '" + target + "' is not banned.");
 		}
@@ -1149,7 +1156,7 @@ var commands = exports.commands = {
 	globaldemote: 'demote',
 	demote: function (target) {
 		if (!target) return this.parse('/help demote');
-		CommandParser.commands.promote.apply(this, arguments);
+		this.run('promote');
 	},
 	demotehelp: ["/demote [username], [group] - Demotes the user to the specified group. Requires: & ~"],
 
@@ -1297,25 +1304,23 @@ var commands = exports.commands = {
 	forcerename: function (target, room, user) {
 		if (!target) return this.parse('/help forcerename');
 
-		var commaIndex = target.indexOf(',');
-		var targetUser, reason;
-		if (commaIndex >= 0) {
-			reason = target.substr(commaIndex + 1).trim();
-			target = target.substr(0, commaIndex).trim();
+		var reason = this.splitTarget(target, true);
+		var targetUser = this.targetUser;
+		if (!targetUser) {
+			this.splitTarget(target);
+			if (this.targetUser) {
+				return this.sendReply("User has already changed their name to '" + this.targetUser.name + "'.");
+			}
+			return this.sendReply("User '" + target + "' not found.");
 		}
-		targetUser = Users.get(target);
-		if (!targetUser) return this.sendReply("User '" + target + "' not found.");
 		if (!this.can('forcerename', targetUser)) return false;
-
-		if (targetUser.userid !== toId(target)) {
-			return this.sendReply("User '" + target + "' had already changed its name to '" + targetUser.name + "'.");
-		}
 
 		var entry = targetUser.name + " was forced to choose a new name by " + user.name + (reason ? ": " + reason : "");
 		this.privateModCommand("(" + entry + ")");
 		Rooms.global.cancelSearch(targetUser);
 		targetUser.resetName();
 		targetUser.send("|nametaken||" + user.name + " considers your name inappropriate" + (reason ? ": " + reason : "."));
+		return true;
 	},
 	forcerenamehelp: ["/forcerename OR /fr [username], [reason] - Forcibly change a user's name and shows them the [reason]. Requires: % @ & ~"],
 
@@ -1323,7 +1328,7 @@ var commands = exports.commands = {
 		var lines = 0;
 		// Specific case for modlog command. Room can be indicated with a comma, lines go after the comma.
 		// Otherwise, the text is defaulted to text search in current room's modlog.
-		var roomId = room.id;
+		var roomId = (room.id === 'staff' ? 'global' : room.id);
 		var hideIps = !user.can('ban');
 		var path = require('path');
 		var isWin = process.platform === 'win32';
@@ -1390,13 +1395,13 @@ var commands = exports.commands = {
 				if (!stdout) {
 					connection.popup("The modlog is empty. (Weird.)");
 				} else {
-					connection.popup("Displaying the last " + lines + " lines of the Moderator Log of " + roomNames + ":\n\n" + stdout);
+					connection.popup("|wide|The last " + lines + " lines of the Moderator Log of " + roomNames + ":\n\n" + stdout);
 				}
 			} else {
 				if (!stdout) {
 					connection.popup("No moderator actions containing '" + target + "' were found on " + roomNames + ".");
 				} else {
-					connection.popup("Displaying the last " + grepLimit + " logged actions containing '" + target + "' on " + roomNames + ":\n\n" + stdout);
+					connection.popup("|wide|The last " + grepLimit + " logged actions containing '" + target + "' on " + roomNames + ":\n\n" + stdout);
 				}
 			}
 		});
@@ -2179,19 +2184,19 @@ var commands = exports.commands = {
 	trn: function (target, room, user, connection) {
 		var commaIndex = target.indexOf(',');
 		var targetName = target;
-		var targetAuth = false;
+		var targetRegistered = false;
 		var targetToken = '';
 		if (commaIndex >= 0) {
 			targetName = target.substr(0, commaIndex);
 			target = target.substr(commaIndex + 1);
 			commaIndex = target.indexOf(',');
-			targetAuth = target;
+			targetRegistered = target;
 			if (commaIndex >= 0) {
-				targetAuth = !!parseInt(target.substr(0, commaIndex), 10);
+				targetRegistered = !!parseInt(target.substr(0, commaIndex), 10);
 				targetToken = target.substr(commaIndex + 1);
 			}
 		}
-		user.rename(targetName, targetToken, targetAuth, connection);
+		user.rename(targetName, targetToken, targetRegistered, connection);
 	},
 
 	a: function (target, room, user) {

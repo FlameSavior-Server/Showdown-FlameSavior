@@ -345,7 +345,7 @@ exports.BattleItems = {
 		},
 		num: 183,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"berryjuice": {
 		id: "berryjuice",
@@ -513,7 +513,7 @@ exports.BattleItems = {
 		},
 		num: 165,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"brightpowder": {
 		id: "brightpowder",
@@ -915,7 +915,7 @@ exports.BattleItems = {
 		},
 		num: 175,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"coverfossil": {
 		id: "coverfossil",
@@ -1176,7 +1176,7 @@ exports.BattleItems = {
 		},
 		num: 182,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"duskball": {
 		id: "duskball",
@@ -1730,7 +1730,7 @@ exports.BattleItems = {
 		},
 		num: 173,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"gripclaw": {
 		id: "gripclaw",
@@ -1902,7 +1902,7 @@ exports.BattleItems = {
 		},
 		num: 172,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"houndoominite": {
 		id: "houndoominite",
@@ -2156,7 +2156,7 @@ exports.BattleItems = {
 		},
 		num: 170,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"kangaskhanite": {
 		id: "kangaskhanite",
@@ -2608,14 +2608,15 @@ exports.BattleItems = {
 		},
 		num: 176,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"mail": {
 		id: "mail",
 		name: "Mail",
 		spritenum: 403,
 		onTakeItem: function (item, source) {
-			if (!this.activeMove || this.activeMove.id !== 'knockoff') return false;
+			if (!this.activeMove) return false;
+			if (this.activeMove.id !== 'knockoff' && this.activeMove.id !== 'thief' && this.activeMove.id !== 'covet') return false;
 		},
 		isUnreleased: true,
 		gen: 2,
@@ -2725,6 +2726,9 @@ exports.BattleItems = {
 					if (pokemon.volatiles[conditions[i]]) {
 						for (var j = 0; j < conditions.length; j++) {
 							pokemon.removeVolatile(conditions[j]);
+							if (conditions[j] === 'attract') {
+								this.add('-end', pokemon, 'move: Attract', '[from] item: Mental Herb');
+							}
 						}
 						return;
 					}
@@ -2738,6 +2742,9 @@ exports.BattleItems = {
 					if (!pokemon.useItem()) return;
 					for (var j = 0; j < conditions.length; j++) {
 						pokemon.removeVolatile(conditions[j]);
+						if (conditions[j] === 'attract') {
+							this.add('-end', pokemon, 'move: Attract', '[from] item: Mental Herb');
+						}
 					}
 					return;
 				}
@@ -2979,7 +2986,7 @@ exports.BattleItems = {
 		},
 		num: 166,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"nestball": {
 		id: "nestball",
@@ -3025,7 +3032,7 @@ exports.BattleItems = {
 		},
 		num: 178,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"normalgem": {
 		id: "normalgem",
@@ -3130,7 +3137,7 @@ exports.BattleItems = {
 		},
 		num: 180,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"parkball": {
 		id: "parkball",
@@ -3274,7 +3281,7 @@ exports.BattleItems = {
 		},
 		num: 168,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"pinsirite": {
 		id: "pinsirite",
@@ -3378,7 +3385,7 @@ exports.BattleItems = {
 		},
 		num: 169,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"powerherb": {
 		id: "powerherb",
@@ -3435,7 +3442,7 @@ exports.BattleItems = {
 		},
 		num: 171,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"quickball": {
 		id: "quickball",
@@ -3489,7 +3496,7 @@ exports.BattleItems = {
 		},
 		num: 177,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"rarebone": {
 		id: "rarebone",
@@ -3500,7 +3507,7 @@ exports.BattleItems = {
 		},
 		num: 106,
 		gen: 4,
-		desc: "No competitive use."
+		desc: "No competitive use other than when used with Fling."
 	},
 	"rawstberry": {
 		id: "rawstberry",
@@ -3574,7 +3581,7 @@ exports.BattleItems = {
 		},
 		num: 164,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"redcard": {
 		id: "redcard",
@@ -4225,7 +4232,7 @@ exports.BattleItems = {
 		},
 		num: 179,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"splashplate": {
 		id: "splashplate",
@@ -4427,7 +4434,7 @@ exports.BattleItems = {
 		},
 		num: 174,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"tangaberry": {
 		id: "tangaberry",
@@ -4619,7 +4626,7 @@ exports.BattleItems = {
 		},
 		num: 181,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"waveincense": {
 		id: "waveincense",
@@ -4665,7 +4672,7 @@ exports.BattleItems = {
 		},
 		num: 167,
 		gen: 3,
-		desc: "No competitive use."
+		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck."
 	},
 	"whiteherb": {
 		id: "whiteherb",

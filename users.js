@@ -39,6 +39,16 @@ var users = Users.users = Object.create(null);
 var prevUsers = Users.prevUsers = Object.create(null);
 var numUsers = 0;
 
+var ipbans = fs.createWriteStream("config/ipbans.txt", {flags: "a"}); // do not remove this line
+
+try {
+	exports.bannedMessages = fs.readFileSync('config/bannedmessages.txt','utf8');
+} catch(e) {
+	exports.bannedMessages = '';
+	fs.writeFileSync('config/bannedmessages.txt','','utf8');
+}
+exports.bannedMessages = exports.bannedMessages.split('\n');
+
 /**
  * Get a user.
  *
@@ -539,9 +549,9 @@ User = (function () {
 		// initialize
 		users[this.userid] = this;
 	}
-	
+
 	User.prototype.staffAccess = false;
-	User.prototype.goldDev = false; 
+	User.prototype.goldDev = false;
 	User.prototype.isSysop = false;
 
 	// for the anti-spamming mechanism
@@ -1437,6 +1447,10 @@ User = (function () {
 		room = Rooms.get(room);
 		if (room.id === 'global' && !force) {
 			// you can't leave the global room except while disconnecting
+			try {
+				updateSeen(name);
+			} catch (e) {}
+
 			return false;
 		}
 		for (var i = 0; i < this.connections.length; i++) {

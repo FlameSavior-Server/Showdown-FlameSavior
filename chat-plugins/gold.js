@@ -410,7 +410,7 @@ exports.commands = {
 			'1. Prefered room name?<br>' +
 			'2. Is this a new room, or does it already have an established user base to it that will follow it here?<br>' +
 			'3. How many new users do you honestly think it will attract to the server?<br>' +
-			'4. Are you willing to enforce the <a href="http://goldserver.weebly.com/rules.html">servers rules</a> as well as your room\'s rules in your room?<br>' +
+			'4. Are you willing to enforce the <a href="http://goldservers.info/forums/showthread.php?tid=61">servers rules</a> as well as your room\'s rules in your room?<br>' +
 			'5. Do you have a website for your room? If not, do you plan to create one?<br>' +
 			'6. What makes your room different than all the others?<br><br>' +
 			'<b>Things to Note:</b><br>' +
@@ -924,8 +924,8 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
 			"<div class=\"broadcast-black\">Here are some helpful server related links:<b><br />" +
-			"- <a href=\"http://goldserver.weebly.com/rules.html\"><font color=\"#FF0066\">Rules</a></font><br />" +
-			"- <a href=\"http://w11.zetaboards.com/Goldserverps/index/\"><font color=\"#FF00\">Forums</a></font><br />" +
+			"- <a href=\"http://goldservers.info/forums/showthread.php?tid=61\"><font color=\"#FF0066\">Rules</a></font><br />" +
+			"- <a href=\"http://goldservers.info/forums/index.php/\"><font color=\"#FF00\">Forums</a></font><br />" +
 			"- <a href=\"http://goldserver.weebly.com\"><font color=\"#56600FF\">Website</a></font><br />" +
 			"- <a href=\"http://plug.dj/gold-server/\"><font color=\"#FFFF\">Plug.dj</a></font><br />" +
 			"- <a href=\"https://github.com/panpawn/Pokemon-Showdown\"><font color=\"#39FF14\">GitHub</a></font><br />" +

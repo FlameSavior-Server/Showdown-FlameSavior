@@ -511,6 +511,7 @@ exports.commands = {
 		this.logModCommand(user.name + ' cleared the message of the day.');
 		return this.sendReply('You cleared the message of the day.');
 	},
+	/*
 	newroom: function(target, room, user) {
 		if (!target) return this.sendReply('/newroom [answers to /newroomquestions] - Requests a new chat room to be be created.');
 		var html = ['<img ', '<a href', '<font ', '<marquee', '<blink', '<center'];
@@ -541,6 +542,7 @@ exports.commands = {
 		Rooms.rooms.room.add('|html|<b>' + targetUser + '</b>\'s room request has been <font color="red">denied</font> by ' + user.userid + '.');
 		targetUser.send('|pm|~Room Request|' + targetUser + '|Hello, "' + targetUser + '".  Sorry, your recent room request has been denied by the staff.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we didn\'t see a point for it on the server.  Best of luck.  Regards, Gold Staff.');
 	},
+	*/
 	pic: 'image',
 	image: function(target, room, user) {
 		if (!target) return this.sendReply('/image [url] - Shows an image using /a. Requires ~.');

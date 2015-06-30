@@ -391,6 +391,7 @@ exports.commands = {
 
 	},
 	//New Room Commands
+	/*
 	newroomcommands: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b>New Room Commands</b><br>' +
@@ -417,6 +418,13 @@ exports.commands = {
 			'-Even if you do get a room on Gold, if it isn\'t active or you or your members make a severe offense against our rules than we have a right to delete it.  After all, owning any room is a responsibility and a privilege, not a right.<br>' +
 			'-If your room is successful and active on the server for a months time, it will qualify for a welcome message when users join the room!<br>' +
 			'-Remember, you get global voice by contributing to the server; so if your room is successful for a while, that is contribution to the server and you *could* get global voice as a result!');
+	},
+	*/
+	newroomcommands: 'newroomquestions',
+	newroomfaq: 'newroomquestions',
+	newroomquestions: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('For our NEW room request system, fill out our application found <a href="http://goo.gl/forms/YHZVb6BvTb">here</a>.');
 	},
 	punt: function(target, room, user) {
 		if (!target) return this.sendReply('/punt needs a target.');

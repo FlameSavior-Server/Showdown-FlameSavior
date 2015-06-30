@@ -420,6 +420,7 @@ exports.commands = {
 			'-Remember, you get global voice by contributing to the server; so if your room is successful for a while, that is contribution to the server and you *could* get global voice as a result!');
 	},
 	*/
+	newroom: 'newroomquestions',
 	newroomcommands: 'newroomquestions',
 	newroomfaq: 'newroomquestions',
 	newroomquestions: function(target, room, user) {

@@ -11,7 +11,7 @@ exports.commands = {
 	panagramhelp: 'panagramrules',
 	panagramrules: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		if (room.id !== 'gamechamber' || room.id !== 'testing') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
+		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		return this.sendReplyBox(
 		    '<center><b><font size = 2><center>Pangram rules and commands</font></b>' +
 		    '<i><font color=gray>(By SilverTactic and panpawn)</font></i></center><br />' +
@@ -25,7 +25,7 @@ exports.commands = {
 	panagram: function(target, room, user) {
 		if (!this.can('roommod', null, room)) return this.sendReply('You must be ranked + or higher to be able to start a game of Panagram in this room.');
 		if (room.panagram) return this.sendReply('There is already a game of Panagram going on.');
-		if (room.id !== 'gamechamber' || room.id !== 'testing') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
+		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!this.canTalk()) return;
 		if (isNaN(target)) return this.sendReply("Target must be a number.");
 		if (target < 0) return this.sendReply("Number cannot be negitive.");
@@ -75,7 +75,7 @@ exports.commands = {
 	gp: 'guessp',
 	guesspoke: 'guessp',
 	guessp: function(target, room, user, cmd) {
-		if (room.id !== 'gamechamber' || room.id !== 'testing') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
+		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!room.panagram) return this.sendReply('There is no game of Panagram going on in this room.');
 		if (!this.canTalk()) return;
 		//if (room.panagram[user.userid]) return this.sendReply("You've already guessed once!");
@@ -132,7 +132,7 @@ exports.commands = {
 	},
 	panagramend: 'endpanagram',
 	endpanagram: function(target, room, user) {
-		if (room.id !== 'gamechamber' || room.id !== 'testing') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
+		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!this.can('broadcast', null, room)) return this.sendReply('You must be ranked + or higher to be able to end a game of Panagram in this room.');
 		if (!room.panagram) return this.sendReply('There is no Panagram game going on in this room.');
 		if (!this.canTalk()) return;
@@ -141,7 +141,7 @@ exports.commands = {
 	},
 	ph: 'panagramhint',
 	panagramhint: function(target, room, user) {
-		if (room.id !== 'gamechamber' || room.id !== 'testing') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
+		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!this.canBroadcast()) return;
 		if (!room.panagram) return this.sendReply('There is no Panagram game going on in this room.');
 		var hint = "Panagram hint: the Pokemon is <b>" + room.panagram.answer.length + "</b> characters long.  The first letter is <b>" + room.panagram.answer.substring(0, 1).toUpperCase() + "</b>.";

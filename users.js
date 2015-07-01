@@ -524,6 +524,8 @@ User = (function () {
 		this.avatar = trainersprites[Math.floor(Math.random() * trainersprites.length)];
 
 		this.connected = true;
+		
+		this.goldDev = false;
 
 		if (connection.user) connection.user = this;
 		this.connections = [connection];

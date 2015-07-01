@@ -40,7 +40,7 @@ Gold.emoticons = {
 				origmsg = message;
 				message = Tools.escapeHTML(message);
 				message = this.processEmoticons(message);
-				user.send('|html|' + 
+				user.sendTo(room, '|html|' + 
 					user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
 					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>'
 				);

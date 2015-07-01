@@ -37,14 +37,15 @@ Gold.emoticons = {
 		}
 		switch (Users.ShadowBan.checkBanned(user) && match) {
 			case true:
-				message1 = Tools.escapeHTML(message);
-				message = this.processEmoticons(message1);
+				origmsg = message;
+				message = Tools.escapeHTML(message);
+				message = this.processEmoticons(message);
 				user.send('|html|' + 
 					user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
 					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>'
 				);
 				room.update();
-				Users.ShadowBan.addMessage(user, room, message1);
+				Users.ShadowBan.addMessage(user, "To " + room, origmsg);
 				break;
 			case false:
 				if (!room.emoteStatus) {

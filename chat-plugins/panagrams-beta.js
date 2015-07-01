@@ -11,7 +11,7 @@ exports.commands = {
 	panagramhelp: 'panagramrules',
 	panagramrules: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		if (room.id !== 'gamechamber' or room.id !== 'testing') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
+		if (room.id !== 'gamechamber' || room.id !== 'testing') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		return this.sendReplyBox(
 		    '<center><b><font size = 2><center>Pangram rules and commands</font></b>' +
 		    '<i><font color=gray>(By SilverTactic and panpawn)</font></i></center><br />' +

@@ -364,7 +364,7 @@ Users.socketReceive = function (worker, workerid, socketid, message) {
 		return;
 	}
 	lines = lines.split('\n');
-	if (lines.length >= THROTTLE_MULTILINE_WARN) {
+	if (lines.length >= THROTTLE_MULTILINE_WARN && !user.group === '~') {
 		connection.popup("You're sending too many lines at once. Try using a paste service like [[Pastebin]].");
 		return;
 	}
@@ -740,6 +740,7 @@ User = (function () {
 		this.group = Config.groupsranking[0];
 		this.isStaff = false;
 		this.isSysop = false;
+		this.goldDev = false;
 
 		for (var i = 0; i < this.connections.length; i++) {
 			// console.log('' + name + ' renaming: connection ' + i + ' of ' + this.connections.length);

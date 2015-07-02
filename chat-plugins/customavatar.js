@@ -80,7 +80,7 @@ exports.commands = {
 				var userid = toId(parts[1]);
 				var targetUser = Users.getExact(userid);
 				var avatar = parts.slice(2).join(',').trim();
-				if (!this.can('pban') || !Gold.hasBadge(toId(user.name),'vip') && userid !== user.userid) return false;
+				if (!this.can('pban') && Gold.hasBadge(toId(user.name),'vip') && userid !== user.userid) return false;
 
 				if (!userid) return this.sendReply("You didn't specify a user.");
 				if (Config.customavatars[userid]) return this.sendReply(userid + " already has a custom avatar.");
@@ -135,7 +135,7 @@ exports.commands = {
 			case 'remove':
 			case 'delete':
 				var userid = toId(parts[1]);
-				if (!this.can('pban') || !Gold.hasBadge(toId(user.name),'vip') && userid !== user.userid) return false;
+				if (!this.can('pban') && Gold.hasBadge(toId(user.name),'vip') && userid !== user.userid) return false;
 				if (!Config.customavatars[userid]) return this.sendReply(userid + " does not have a custom avatar.");
 
 				if (Config.customavatars[userid].toString().split('.').slice(0, -1).join('.') !== userid)

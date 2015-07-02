@@ -5386,7 +5386,7 @@ exports.BattleMovedex = {
 			onStart: function () {
 				this.add('-fieldstart', 'move: Gravity');
 			},
-			onAccuracy: function (accuracy) {
+			onModifyAccuracy: function (accuracy) {
 				if (typeof accuracy !== 'number') return;
 				return accuracy * 5 / 3;
 			},
@@ -10472,6 +10472,7 @@ exports.BattleMovedex = {
 			if (target.side.active.length < 2) return false; // fails in singles
 			var decision = this.willMove(target);
 			if (decision) {
+				decision.priority = -7.1;
 				this.cancelMove(target);
 				for (var i = this.queue.length - 1; i >= 0; i--) {
 					if (this.queue[i].choice === 'residual') {

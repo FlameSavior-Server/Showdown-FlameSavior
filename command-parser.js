@@ -41,8 +41,8 @@ var path = require('path');
  * Load command files
  *********************************************************/
 
-var commands = exports.commands = require('./commands.js').commands;
-var baseCommands = exports.baseCommands = Object.clone(commands);
+var baseCommands = exports.baseCommands = require('./commands.js').commands;
+var commands = exports.commands = Object.clone(baseCommands);
 
 // Install plug-in commands
 
@@ -144,7 +144,7 @@ function canTalk(user, room, connection, message, targetUser) {
 		}
 
 		if (Config.chatfilter) {
-			return Config.chatfilter(message, user, room, connection, targetUser);
+			return Config.chatfilter.call(this, message, user, room, connection, targetUser);
 		}
 		return message;
 	}
@@ -159,7 +159,6 @@ var Context = exports.Context = (function () {
 
 		this.target = options.target || '';
 		this.message = options.message || '';
-		this.originalMessage = options.originalMessage || '';
 
 		this.levelsDeep = options.levelsDeep || 0;
 		this.namespaces = options.namespaces || null;
@@ -177,6 +176,13 @@ var Context = exports.Context = (function () {
 			this.room.add(data);
 		} else {
 			this.connection.sendTo(this.room, data);
+		}
+	};
+	Context.prototype.errorReply = function (message) {
+		if (this.pmTarget) {
+			this.connection.send('|pm|' + this.user.getIdentity() + '|' + (this.pmTarget.getIdentity ? this.pmTarget.getIdentity() : ' ' + this.pmTarget) + '|/error ' + message);
+		} else {
+			this.connection.sendTo(this.room, '|html|<div class="message-error">' + Tools.escapeHTML(message) + '</div>');
 		}
 	};
 	Context.prototype.sendReplyBox = function (html) {
@@ -233,18 +239,18 @@ var Context = exports.Context = (function () {
 	};
 	Context.prototype.can = function (permission, target, room) {
 		if (!this.user.can(permission, target, room)) {
-			this.sendReply(this.cmdToken + this.namespaces.concat(this.cmd).join(" ") + " - Access denied.");
+			this.errorReply(this.cmdToken + this.namespaces.concat(this.cmd).join(" ") + " - Access denied.");
 			return false;
 		}
 		return true;
 	};
 	Context.prototype.canBroadcast = function (suppressMessage) {
 		if (this.cmdToken === BROADCAST_TOKEN) {
-			var message = this.canTalk(this.originalMessage);
+			var message = this.canTalk(this.message);
 			if (!message) return false;
 			if (!this.user.can('broadcast', null, this.room)) {
-				this.connection.sendTo(this.room, "You need to be voiced to broadcast this command's information.");
-				this.connection.sendTo(this.room, "To see it for yourself, use: /" + message.substr(1));
+				this.errorReply("You need to be voiced to broadcast this command's information.");
+				this.errorReply("To see it for yourself, use: /" + message.substr(1));
 				return false;
 			}
 
@@ -252,7 +258,7 @@ var Context = exports.Context = (function () {
 			var normalized = message.toLowerCase().replace(/[^a-z0-9\s!,]/g, '');
 			if (this.room.lastBroadcast === normalized &&
 					this.room.lastBroadcastTime >= Date.now() - BROADCAST_COOLDOWN) {
-				this.connection.sendTo(this.room, "You can't broadcast this because it was just broadcast.");
+				this.errorReply("You can't broadcast this because it was just broadcast.");
 				return false;
 			}
 			this.add('|c|' + this.user.getIdentity(this.room.id) + '|' + (suppressMessage || message));
@@ -291,7 +297,7 @@ var Context = exports.Context = (function () {
 					'Additional information:\n' +
 					'user = ' + this.user.name + '\n' +
 					'room = ' + this.room.id + '\n' +
-					'message = ' + this.originalMessage;
+					'message = ' + this.message;
 			var fakeErr = {stack: stack};
 
 			if (!require('./crashlogger.js')(fakeErr, 'A chat command')) {
@@ -307,7 +313,7 @@ var Context = exports.Context = (function () {
 	};
 	Context.prototype.canTalk = function (message, relevantRoom, targetUser) {
 		var innerRoom = (relevantRoom !== undefined) ? relevantRoom : this.room;
-		return canTalk(this.user, innerRoom, this.connection, message, targetUser);
+		return canTalk.call(this, this.user, innerRoom, this.connection, message, targetUser);
 	};
 	Context.prototype.canHTML = function (html) {
 		html = '' + (html || '');
@@ -315,12 +321,12 @@ var Context = exports.Context = (function () {
 		if (!images) return true;
 		for (var i = 0; i < images.length; i++) {
 			if (!/width=([0-9]+|"[0-9]+")/i.test(images[i]) || !/height=([0-9]+|"[0-9]+")/i.test(images[i])) {
-				this.sendReply('All images must have a width and height attribute');
+				this.errorReply('All images must have a width and height attribute');
 				return false;
 			}
 		}
 		if (/>here.?</i.test(html) || /click here/i.test(html)) {
-			this.sendReply('Do not use "click here"');
+			this.errorReply('Do not use "click here"');
 			return false;
 		}
 
@@ -332,11 +338,11 @@ var Context = exports.Context = (function () {
 				var tag = tags[i];
 				if (tag.charAt(1) === '/') {
 					if (!stack.length) {
-						this.sendReply("Extraneous </" + tag.substr(2) + "> without an opening tag.");
+						this.errorReply("Extraneous </" + tag.substr(2) + "> without an opening tag.");
 						return false;
 					}
 					if (tag.substr(2) !== stack.pop()) {
-						this.sendReply("Missing </" + tag.substr(2) + "> or it's in the wrong place.");
+						this.errorReply("Missing </" + tag.substr(2) + "> or it's in the wrong place.");
 						return false;
 					}
 				} else {
@@ -344,7 +350,7 @@ var Context = exports.Context = (function () {
 				}
 			}
 			if (stack.length) {
-				this.sendReply("Missing </" + stack.pop() + ">.");
+				this.errorReply("Missing </" + stack.pop() + ">.");
 				return false;
 			}
 		}
@@ -439,7 +445,6 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 
 	var namespaces = [];
 	var currentCommands = commands;
-	var originalMessage = message;
 	var commandHandler;
 
 	do {
@@ -451,19 +456,15 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		if (commandHandler && typeof commandHandler === 'object') {
 			namespaces.push(cmd);
 
-			var newCmd = target;
-			var newTarget = '';
 			var spaceIndex = target.indexOf(' ');
 			if (spaceIndex > 0) {
-				newCmd = target.substr(0, spaceIndex);
-				newTarget = target.substr(spaceIndex + 1);
+				cmd = target.substr(0, spaceIndex).toLowerCase();
+				target = target.substr(spaceIndex + 1);
+			} else {
+				cmd = target.toLowerCase();
+				target = '';
 			}
-			newCmd = newCmd.toLowerCase();
-			var newMessage = message.replace(cmd + (target ? ' ' : ''), '');
 
-			cmd = newCmd;
-			target = newTarget;
-			message = newMessage;
 			currentCommands = commandHandler;
 		}
 	} while (commandHandler && typeof commandHandler === 'object');
@@ -475,13 +476,12 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 	}
 	var fullCmd = namespaces.concat(cmd).join(' ');
 
-	if (commandHandler) {
-		var context = new Context({
-			target: target, room: room, user: user, connection: connection, cmd: cmd, message: message,
-			namespaces: namespaces, originalMessage: originalMessage,
-			cmdToken: cmdToken, levelsDeep: levelsDeep
-		});
+	var context = new Context({
+		target: target, room: room, user: user, connection: connection, cmd: cmd, message: message,
+		namespaces: namespaces, cmdToken: cmdToken, levelsDeep: levelsDeep
+	});
 
+	if (commandHandler) {
 		return context.run(commandHandler);
 	} else {
 		// Check for mod/demod/admin/deadmin/etc depending on the group ids
@@ -501,9 +501,12 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		if (cmdToken && fullCmd) {
 			// To guard against command typos, we now emit an error message
 			if (cmdToken === BROADCAST_TOKEN) {
-				return connection.sendTo(room.id, "The command '" + cmdToken + fullCmd + "' was unrecognized.");
+				if (/[a-z0-9]/.test(cmd.charAt(0))) {
+					return context.errorReply("The command '" + cmdToken + fullCmd + "' was unrecognized.");
+				}
+			} else {
+				return context.errorReply("The command '" + cmdToken + fullCmd + "' was unrecognized. To send a message starting with '" + cmdToken + fullCmd + "', type '" + cmdToken.repeat(2) + fullCmd + "'.");
 			}
-			return connection.sendTo(room.id, "The command '" + cmdToken + fullCmd + "' was unrecognized. To send a message starting with '" + cmdToken + fullCmd + "', type '" + cmdToken.repeat(2) + fullCmd + "'.");
 		}
 	}
 
@@ -534,7 +537,7 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		if (!Gold.emoticons.processChatData(user, room, connection, message)) return false;
 	} catch (e) {}
 
-	return message;
+	return message || false;
 };
 
 exports.package = {};
@@ -545,15 +548,12 @@ fs.readFile(path.resolve(__dirname, 'package.json'), function (err, data) {
 
 exports.uncacheTree = function (root) {
 	var uncache = [require.resolve(root)];
-	function getFilename(module) {
-		return module.filename;
-	}
 	do {
 		var newuncache = [];
 		for (var i = 0; i < uncache.length; ++i) {
 			if (require.cache[uncache[i]]) {
 				newuncache.push.apply(newuncache,
-					require.cache[uncache[i]].children.map(getFilename)
+					require.cache[uncache[i]].children.map('id')
 				);
 				delete require.cache[uncache[i]];
 			}

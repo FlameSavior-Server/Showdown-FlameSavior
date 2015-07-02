@@ -73,7 +73,7 @@ exports.commands = {
 			return this.sendReplyBox(message);
 		}
 
-		if (!this.can('pban') && !user.vip) return false;
+		if (!this.can('pban') && !Gold.hasBadge(toId(user.name),'vip')) return false;
 
 		switch (cmd) {
 			case 'set':

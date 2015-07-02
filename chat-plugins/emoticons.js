@@ -48,12 +48,12 @@ Gold.emoticons = {
 				Users.ShadowBan.addMessage(user, "To " + room, origmsg);
 				break;
 			case false:
-				if (!room.emoteStatus) {
+				if (!room.emoteStatus && room.type === 'chat' || !room.type === 'battle') {
 					kitty = message = this.processEmoticons(message);
 					var message = Tools.escapeHTML(kitty);
 					return (message);
 					return;
-				} else if (room.emoteStatus) {
+				} else if (room.emoteStatus || room.type === 'battle') {
 					if (!match || message.charAt(0) === '!') return true;
 					message = Tools.escapeHTML(message);
 					message = this.processEmoticons(message);
@@ -176,25 +176,27 @@ exports.commands = {
 							case 'on':
 							case 'enable':
 								if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
-								if (room.emoteStatus) return this.sendReply("Um, emotes are already enabled in this room.");
+								if (room.type === 'battle') return this.sendReply("Chat emoticons are already enabled in battle rooms by default and cannot be turned off.");
+								if (room.emoteStatus) return this.sendReply("Chat emoticons are already enabled in this room.");
 								room.emoteStatus = true;
 								room.chatRoomData.emoteStatus = room.emoteStatus;
 								Rooms.global.writeChatRoomData();
-								room.add(Tools.escapeHTML(user.name) + ' has enabled chat emotes in this room.');
-								this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emotes in this room.');
+								room.add(Tools.escapeHTML(user.name) + ' has enabled chat emoticons in this room.');
+								this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emoticons in this room.');
 								break;
 							case 'off':
 							case 'disable':
 								if (!this.can('declare', null, room)) return this.sendReply("Access denied.");
-								if (!room.emoteStatus) return this.sendReply("Um, emotes are already disabled in this room.");
+								if (room.type === 'battle') return this.sendReply("Chat emoticons are already enabled in battle rooms by default and cannot be turned off.");
+								if (!room.emoteStatus) return this.sendReply("Chat emoticons are already disabled in this room.");
 								room.emoteStatus = false;
 								room.chatRoomData.emoteStatus = room.emoteStatus;
 								Rooms.global.writeChatRoomData();
-								room.add(Tools.escapeHTML(user.name) + " has disabled chat emotes in this room.");
-								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emotes in this room.");
+								room.add(Tools.escapeHTML(user.name) + " has disabled chat emoticons in this room.");
+								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emoticons in this room.");
 								break;
 							default:
-								this.sendReply("Usage: /ezemote status, [on / off] - Enables or disables the current emote status.  Requires #, &, ~.");
+								this.sendReply("Usage: /ezemote status, [on / off] - Enables or disables the current chat emoticon status.  Requires #, &, ~.");
 						}
 					}
 					break;
@@ -203,14 +205,14 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					this.sendReplyBox(
 						"<table bgcolor=\"#ADD8E6\" width=\"100%\"><td>" +
-							"<center><b>EZ-Emote Commands:</b><br />" +
+							"<center><b>EZ-Emoticon Commands:</b><br />" +
 							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/ez-emotes.js\">panpawn</a>)</font></i></center><br />" +
-							"/ezemote <code>add, [emote], [link]</code> - Adds an emote. Requires @, &, ~.<br />" +
-							"/ezemote <code>remove, [emote]</code> - Removes an emote. Requires @, &, ~.<br />" +
-							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of emotes. Requires #, &, ~.<br />" +
-							"/ezemote <code>status</code> - Views the current status of emotes.<br />" +
-							"/ezemote <code>list</code> - Shows the emotes that were added with this command in a list form.<br />" +
-							"/ezemote <code>view</code> - Shows all of the current emotes with their respected image.<br />" +
+							"/ezemote <code>add, [emote], [link]</code> - Adds a chat emoticon. Requires @, &, ~.<br />" +
+							"/ezemote <code>remove, [emote]</code> - Removes a chat emoticon. Requires @, &, ~.<br />" +
+							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of chat emoticons in the respected room. Requires #, &, ~.<br />" +
+							"/ezemote <code>status</code> - Views the current status of chat emoticons.<br />" +
+							"/ezemote <code>list</code> - Shows the chat emoticons in a list form.<br />" +
+							"/ezemote <code>view</code> - Shows all of the current chat emoticons with the respected image.<br />" +
 							"/ezemote <code>object</code> - Shows the object of Gold.emoticons.chatEmotes. (Mostly for development usage)<br />" +
 							"/ezemote <code>help</code> - Shows this help command.<br />" +
 						"</td></table>"

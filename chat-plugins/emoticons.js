@@ -183,6 +183,7 @@ exports.commands = {
 								Rooms.global.writeChatRoomData();
 								//room.add(Tools.escapeHTML(user.name) + ' has enabled chat emoticons in this room.');
 								this.add("|raw|<div class=\"broadcast-blue\"><b>Chat Emoticons have been enabled!</b><br />Everyone in this room may use chat emoticons.");
+								room.update();
 								this.privateModCommand("(" + user.name + " has enabled chat emoticons in this room)");
 								break;
 							case 'off':
@@ -195,6 +196,7 @@ exports.commands = {
 								Rooms.global.writeChatRoomData();
 								//room.add(Tools.escapeHTML(user.name) + " has disabled chat emoticons in this room.");
 								this.add("|raw|<div class=\"broadcast-red\"><b>Chat Emoticons have been disabled!</b><br />No one in this room may use chat emoticons.");
+								room.update();
 								this.privateModCommand("(" + user.name + " has disabled chat emoticons in this room)");
 								break;
 							default:

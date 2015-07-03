@@ -130,15 +130,15 @@ exports.commands = {
 					delete Gold.emoticons.chatEmotes[emoteName];
 					delete emotes[emoteName];
 					saveEmotes();
-					this.sendReply("The emote " + emoteName + " was removed.");
-					this.logModCommand("The emote " + emoteName + " was removed by " + user.name);
-					Rooms.rooms.staff.add("The emote " + emoteName + " was removed by " + Tools.escapeHTML(user.name));
+					this.sendReply("The emoticon " + emoteName + " was removed.");
+					this.logModCommand("The emoticon " + emoteName + " was removed by " + user.name);
+					Rooms.rooms.staff.add("The emoticon " + emoteName + " was removed by " + Tools.escapeHTML(user.name));
 					room.update();
 					break;
 				case 'list':
 					if (!this.canBroadcast()) return;
 					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
-					var output = "<b>There's a total of " + Object.size(emotes) + " emotes added with this command:</b><br />";
+					var output = "<b>There's a total of " + Object.size(emotes) + " emoticons added with this command:</b><br />";
 					for (var e in emotes) {
 						output += e + "<br />";
 					}
@@ -165,10 +165,10 @@ exports.commands = {
 					if (!parts[1]) {
 						switch (room.emoteStatus) {
 							case true:
-								this.sendReply("Chat emotes are currently enabled in this room.");
+								this.sendReply("Chat emoticons are currently enabled in this room.");
 								break;
 							case false:
-								this.sendReply("Chat emotes are currently disabled in this room.");
+								this.sendReply("Chat emoticons are currently disabled in this room.");
 								break;
 						}
 					} else {

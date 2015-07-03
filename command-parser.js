@@ -517,13 +517,13 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		return parse(message, room, user, connection, levelsDeep + 1);
 	}
 	
-	if (user.registered && global.tells) {
+	if (user.registered && global.Gold.tells) {
 		var alts = user.getAlts();
 		alts.push(user.name);
 		alts.map(toId).forEach(function (user) {
-			if (tells[user]) {
-				tells[user].forEach(connection.sendTo.bind(connection, room));
-				delete tells[user];
+			if (Gold.tells[user]) {
+				Gold.tells[user].forEach(connection.sendTo.bind(connection, room));
+				delete Gold.tells[user];
 			}
 		});
 	}

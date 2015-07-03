@@ -4,14 +4,12 @@ var request = require('request');
 var closeShop = false;
 var closedShop = 0;
 if (typeof Gold === 'undefined') global.Gold = {};
+if (typeof Gold.tells === 'undefined') global.Gold.tells = {};
 var crypto = require('crypto');
 var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'musicbox', 'emote', 'color'];
 var ipbans = fs.createWriteStream('config/ipbans.txt', {
 	'flags': 'a'
 });
-if (typeof tells === 'undefined') {
-	tells = {};
-}
 var badges = fs.createWriteStream('badges.txt', {
 	'flags': 'a'
 });
@@ -198,11 +196,11 @@ exports.commands = {
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}
-		if (!tells[targetUser]) tells[targetUser] = [];
-		if (tells[targetUser].length === 8) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
+		if (!Gold.tells[targetUser]) Gold.tells[targetUser] = [];
+		if (Gold.tells[targetUser].length === 8) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
 		var date = Date();
 		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + Tools.escapeHTML(message);
-		tells[targetUser].add(messageToSend);
+		Gold.tells[targetUser].add(messageToSend);
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
 	hide: 'hideauth',

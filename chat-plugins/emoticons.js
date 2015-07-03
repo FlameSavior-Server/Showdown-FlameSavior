@@ -8,6 +8,7 @@
 var fs = require('fs');
 var path = require('path');
 var serialize = require('node-serialize');
+var emotes = {};
 
 if (typeof Gold === 'undefined') global.Gold = {};
 
@@ -72,9 +73,8 @@ Gold.emoticons = {
 	}
 };
 
-//commands
 
-var emotes = {};
+//commands
 
 function loadEmotes() {
 	try {
@@ -181,8 +181,9 @@ exports.commands = {
 								room.emoteStatus = true;
 								room.chatRoomData.emoteStatus = room.emoteStatus;
 								Rooms.global.writeChatRoomData();
-								room.add(Tools.escapeHTML(user.name) + ' has enabled chat emoticons in this room.');
-								this.logModCommand(Tools.escapeHTML(user.name) + ' has enabled chat emoticons in this room.');
+								//room.add(Tools.escapeHTML(user.name) + ' has enabled chat emoticons in this room.');
+								this.add("|raw|<div class=\"broadcast-blue\"><b>Chat Emoticons have been enabled!</b><br />Everyone in this room may use chat emoticons.");
+								this.privateModCommand("(" + user.name + " has enabled chat emoticons in this room)");
 								break;
 							case 'off':
 							case 'disable':
@@ -192,8 +193,9 @@ exports.commands = {
 								room.emoteStatus = false;
 								room.chatRoomData.emoteStatus = room.emoteStatus;
 								Rooms.global.writeChatRoomData();
-								room.add(Tools.escapeHTML(user.name) + " has disabled chat emoticons in this room.");
-								this.logModCommand(Tools.escapeHTML(user.name) + " has disabled chat emoticons in this room.");
+								//room.add(Tools.escapeHTML(user.name) + " has disabled chat emoticons in this room.");
+								this.add("|raw|<div class=\"broadcast-red\"><b>Chat Emoticons have been disabled!</b><br />No one in this room may use chat emoticons.");
+								this.privateModCommand("(" + user.name + " has disabled chat emoticons in this room)");
 								break;
 							default:
 								this.sendReply("Usage: /ezemote status, [on / off] - Enables or disables the current chat emoticon status.  Requires #, &, ~.");

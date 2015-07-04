@@ -56,7 +56,7 @@ exports.BattleScripts = {
 			this.add('message', template.baseSpecies + " has Mega Evolved into Mega " + template.baseSpecies + "!");
 			this.add('-start', pokemon, template.originalMega, '[silent]');
 			if (originalTemplate.types.length !== pokemon.template.types.length || originalTemplate.types[1] !== pokemon.template.types[1]) {
-				this.add('-start', pokemon, 'typechange', pokemon.template.types.join('/')/*, '[silent]'*/);
+				this.add('-start', pokemon, 'typechange', pokemon.template.types.join('/'), '[silent]');
 			}
 		}
 
@@ -74,7 +74,7 @@ exports.BattleScripts = {
 		var baseStats = template.baseStats;
 		template.baseStats = {};
 		for (var statName in baseStats) template.baseStats[statName] = baseStats[statName] + deltas.baseStats[statName];
-		template.weightkg += deltas.weightkg;
+		template.weightkg = Math.max(0.1, template.weightkg + deltas.weightkg);
 		template.originalMega = deltas.originalMega;
 		template.requiredItem = deltas.requiredItem;
 		if (deltas.isMega) template.isMega = true;

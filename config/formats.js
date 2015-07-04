@@ -348,14 +348,14 @@ exports.Formats = [
 
 		mod: 'mixandmega',
 		ruleset: ['Ubers'],
-		banlist: ['Shadow Tag'],
+		banlist: ['Gengarite', 'Shadow Tag'],
 		validateTeam: function (team, format) {
 			var itemTable = {};
 			for (var i = 0; i < team.length; i++) {
 				var item = this.getItem(team[i].item);
 				if (!item) continue;
 				if (itemTable[item] && item.megaStone) return ["You are limited to one of each Mega Stone.", "(You have more than one " + this.getItem(item).name + ")"];
-				if (itemTable[item] && (item.id === "redorb" || item.name === "blueorb")) return ["You are limited to one of each Primal Orb.", "(You have more than one " + this.getItem(item).name + ")"];
+				if (itemTable[item] && (item.id === 'redorb' || item.id === 'blueorb')) return ["You are limited to one of each Primal Orb.", "(You have more than one " + this.getItem(item).name + ")"];
 				itemTable[item] = true;
 			}
 		},
@@ -363,54 +363,39 @@ exports.Formats = [
 			var template = this.getTemplate(set.species || set.name);
 			var item = this.getItem(set.item);
 			if (!item.megaEvolves && item.id !== 'blueorb' && item.id !== 'redorb') return;
-			if (template.baseSpecies === item.megaEvolves || item.id === 'blueorb' && template.baseSpecies === 'Kyogre' || item.id === 'redorb' && template.baseSpecies === 'Groudon') return;
+			if (template.baseSpecies === item.megaEvolves || (item.id === 'redorb' && template.baseSpecies === 'Groudon') || (item.id === 'blueorb' && template.baseSpecies === 'Kyogre')) return;
 			if (template.evos.length) return ["" + template.species + " is not allowed to hold " + item.name + " because it's not fully evolved."];
 			if (template.tier === 'Uber') return ["" + template.species + " is not allowed to hold " + item.name + " because it's in the Uber tier."];
 			if (template.species === 'Shuckle' && ['abomasite', 'aggronite', 'audinite', 'cameruptite', 'charizarditex', 'charizarditey', 'galladite', 'gyaradosite', 'heracronite', 'houndoominite', 'latiasite', 'mewtwonitey', 'sablenite', 'salamencite', 'scizorite', 'sharpedonite', 'slowbronite', 'steelixite', 'tyranitarite', 'venusaurite'].indexOf(item.id) >= 0) {
 				return ["" + template.species + " is not allowed to hold " + item.name + "."];
 			}
-			if (template.species === 'Kyurem-Black' || template.species === 'Slaking' || template.species === 'Cresselia') {
-				return ["" + template.species + " is not allowed to hold any mega stone."];
+			if (template.species === 'Cresselia' || template.species === 'Kyurem-Black' || template.species === 'Slaking' || template.species === 'Regigigas') {
+				return ["" + template.species + " is not allowed to hold a Mega Stone."];
 			}
-			if (item.id === 'kangaskhanite' || item.id === 'beedrillite') {
+			if (item.id === 'beedrillite' || item.id === 'kangaskhanite') {
 				return ["" + item.name + " can only allowed be held by " + item.megaEvolves + "."];
 			}
 			switch (item.id) {
-			case 'medichamite': case 'mawilite':
-				if (template.species === 'Mawile' || template.species === 'Medicham') break;
-				var abilities = Object.values(template.abilities);
-				if (abilities.indexOf('Huge Power') < 0 && abilities.indexOf('Pure Power') < 0) return ["" + template.species + " is not allowed to hold " + item.name + "."];
-				break;
-			case 'gengarite':
-				if (Object.values(template.abilities).indexOf('Shadow Tag') < 0) return ["" + template.species + " is not allowed to hold " + item.name + "."];
-				break;
 			case 'blazikenite':
-				if (Object.values(template.abilities).indexOf('Speed Boost') < 0) return ["" + template.species + " is not allowed to hold " + item.name + "."];
+				if (set.ability !== 'Speed Boost') return ["" + template.species + " is not allowed to hold " + item.name + "."];
+				break;
+			case 'mawilite': case 'medichamite':
+				if (set.ability !== 'Huge Power' && set.ability !== 'Pure Power') return ["" + template.species + " is not allowed to hold " + item.name + "."];
 				break;
 			case 'slowbronite':
-				if (template.species === 'Steelix' || template.species === 'Regirock') return ["" + template.species + " is not allowed to hold " + item.name + "."];
+				if (template.species === 'Regirock' || template.species === 'Steelix') return ["" + template.species + " is not allowed to hold " + item.name + "."];
 				break;
-			case 'ampharosite': case 'heracronite': case 'garchompite':
-				if (template.baseStats.spe <= 10) return ["" + template.species + " does not have enough Speed to hold " + item.name + "."];
-				break;
-			case 'cameruptite':
-				if (template.baseStats.spe <= 20) return ["" + template.species + " does not have enough Speed to hold " + item.name + "."];
-				break;
-			case 'abomasite': case 'sablenite':
-				if (template.baseStats.spe <= 30) return ["" + template.species + " does not have enough Speed to hold " + item.name + "."];
-				break;
-			case 'beedrillite':
-				if (template.baseStats.spa <= 30) return ["" + template.species + " does not have enough Sp. Atk. to hold " + item.name + "."];
+			case 'mewtwonitey':
+				if (template.baseStats.def <= 20) return ["" + template.species + " does not have enough Defense to hold " + item.name + "."];
 				break;
 			case 'diancite':
 				if (template.baseStats.def <= 40 || template.baseStats.spd <= 40) return ["" + template.species + " does not have enough Def. or Sp. Def. to hold " + item.name + "."];
 				break;
-			case 'lopunnite':
-				if (template.weightkg <= 5) return ["" + template.species + "'s weight is too low to hold " + item.name + "."];
+			case 'ampharosite': case 'garchompite': case 'heracronite':
+				if (template.baseStats.spe <= 10) return ["" + template.species + " does not have enough Speed to hold " + item.name + "."];
 				break;
-			case 'mewtwonitey':
-				if (template.weightkg <= 89) return ["" + template.species + "'s weight is too low to hold " + item.name + "."];
-				if (template.baseStats.def <= 20) return ["" + template.species + " does not have enough Defense to hold " + item.name + "."];
+			case 'abomasite': case 'sablenite':
+				if (template.baseStats.spe <= 30) return ["" + template.species + " does not have enough Speed to hold " + item.name + "."];
 				break;
 			}
 		},
@@ -441,7 +426,7 @@ exports.Formats = [
 						this.add('-formechange', pokemon, originalTemplate.species, template.requiredItem);
 						this.add('-start', pokemon, template.originalMega, '[silent]');
 						if (originalTemplate.types.length !== pokemon.template.types.length || originalTemplate.types[1] !== pokemon.template.types[1]) {
-							this.add('-start', pokemon, 'typechange', pokemon.template.types.join('/')/*, '[silent]'*/);
+							this.add('-start', pokemon, 'typechange', pokemon.template.types.join('/'), '[silent]');
 						}
 					}
 					this.add('message', pokemon.name + "'s " + pokemon.getItem().name + " activated!");
@@ -450,13 +435,18 @@ exports.Formats = [
 					pokemon.baseAbility = pokemon.ability;
 					pokemon.canMegaEvo = false;
 				}
-			} else if (pokemon.template.originalMega && pokemon.originalSpecies !== pokemon.template.originalMega) {
+			} else if (pokemon.template.originalMega && pokemon.originalSpecies !== this.getTemplate(pokemon.template.originalMega).baseSpecies) {
 				// Place volatiles on the Pokémon to show its mega-evolved condition
 				this.add('-start', pokemon, pokemon.template.originalMega, '[silent]');
 				var originalTemplate = this.getTemplate(pokemon.originalSpecies);
 				if (originalTemplate.types.length !== pokemon.template.types.length || originalTemplate.types[1] !== pokemon.template.types[1]) {
-					this.add('-start', pokemon, 'typechange', pokemon.template.types.join('/')/*, '[silent]'*/);
+					this.add('-start', pokemon, 'typechange', pokemon.template.types.join('/'), '[silent]');
 				}
+			}
+		},
+		onSwitchOut: function (pokemon) {
+			if (pokemon.template.originalMega && pokemon.originalSpecies !== this.getTemplate(pokemon.template.originalMega).baseSpecies) {
+				this.add('-end', pokemon, pokemon.template.originalMega, '[silent]');
 			}
 		}
 	},

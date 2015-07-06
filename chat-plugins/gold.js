@@ -213,10 +213,10 @@ exports.commands = {
 				if (Config.groupsranking.indexOf(target) <= Config.groupsranking.indexOf(user.group)) {
 					tar = target;
 				} else {
-					this.sendReply("The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.");
+					this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');
 				}
 			} else {
-				this.sendReply("You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.");
+				this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
 			}
 		}
 		user.getIdentity = function (roomid) {
@@ -239,7 +239,7 @@ exports.commands = {
 	}
 		user.updateIdentity();
 		this.sendReply('You are now hiding your auth symbol as \'' + tar + '\'.');
-		return this.logModCommand(user.name + " is hiding auth symbol as \'" + tar + "\'");
+		return this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');
 	},
 	show: 'showauth',
 	showauth: function(target, room, user) {

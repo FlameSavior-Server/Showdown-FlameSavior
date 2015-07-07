@@ -1870,7 +1870,7 @@ exports.commands = {
 				'<tr><td>Declare</td><td>You get the ability to get two declares from an Admin or Leader in the lobby. This can be used for room advertisement (not server)</td><td>25</td></tr>' +
 				//'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
 				'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).</td><td>60</td></tr>' +
-				'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 25x25 and must be appropriate.</td><td>100</td></tr>' +
+				'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 30x30 and must be appropriate.</td><td>100</td></tr>' +
 				'<tr><td>Color</td><td>This gives your username a custom color on our <a href="http://goldservers.info">custom client</a>.</td><td>350</td></tr>' +
 				'<tr><td>Custom Battle Song</td><td>This allows you to have a custom battle theme song (on the custom client) to play when you battle.</td><td>250</td></tr>' +
 				//'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +

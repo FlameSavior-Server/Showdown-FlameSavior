@@ -10,6 +10,8 @@
  * @license MIT license
  */
 
+const RESULTS_MAX_LENGTH = 10;
+
 var commands = exports.commands = {
 
     ip: 'whois',
@@ -2047,7 +2049,7 @@ var commands = exports.commands = {
 
 	ds: 'dexsearch',
 	dsearch: 'dexsearch',
-	dexsearch: function (target, room, user, connection, cmd) {
+	dexsearch: function (target, room, user, connection, cmd, message) {
 		if (!this.canBroadcast()) return;
 
 		if (!target) return this.parse('/help dexsearch');
@@ -2058,7 +2060,6 @@ var commands = exports.commands = {
 		var allStats = {'hp':1, 'atk':1, 'def':1, 'spa':1, 'spd':1, 'spe':1};
 		var showAll = false;
 		var megaSearch = null;
-		var output = 10;
 		var randomOutput = 0;
 		var categories = ['gen', 'tier', 'color', 'types', 'ability', 'stats', 'compileLearnsets', 'moves', 'recovery', 'priority'];
 
@@ -2368,16 +2369,16 @@ var commands = exports.commands = {
 			results = results.randomize().slice(0, randomOutput);
 		}
 
-		var resultsStr = "";
+		var resultsStr = this.broadcasting ? "" : ("<font color=#999999>" + message + ":</font><br>");
 		if (results.length > 0) {
-			if (showAll || results.length <= output + 5) {
+			if (showAll || results.length <= RESULTS_MAX_LENGTH + 5) {
 				results.sort();
-				resultsStr = results.join(", ");
+				resultsStr += results.join(", ");
 			} else {
-				resultsStr = results.slice(0, output).join(", ") + ", and " + string(results.length - output) + " more. <font color=#999999>Redo the search with 'all' as a search parameter to show all results.</font>";
+				resultsStr += results.slice(0, RESULTS_MAX_LENGTH).join(", ") + ", and " + (results.length - RESULTS_MAX_LENGTH) + " more. <font color=#999999>Redo the search with 'all' as a search parameter to show all results.</font>";
 			}
 		} else {
-			resultsStr = "No Pok&eacute;mon found.";
+			resultsStr += "No Pok&eacute;mon found.";
 		}
 		return this.sendReplyBox(resultsStr);
 	},
@@ -2393,7 +2394,7 @@ var commands = exports.commands = {
 
 	rollpokemon: 'randompokemon',
 	randpoke: 'randompokemon',
-	randompokemon: function (target, room, user, connection, cmd) {
+	randompokemon: function (target, room, user, connection, cmd, message) {
 		var targets = target.split(",");
 		var targetsBuffer = [];
 		var qty;
@@ -2411,7 +2412,7 @@ var commands = exports.commands = {
 		}
 		if (!qty) targetsBuffer.push("random1");
 
-		CommandParser.commands.dexsearch.call(this, targetsBuffer.join(","), room, user, connection, "randpoke");
+		CommandParser.commands.dexsearch.call(this, targetsBuffer.join(","), room, user, connection, "randpoke", message);
 	},
 	randompokemonhelp: ["/randompokemon - Generates random Pokemon based on given search conditions.",
 		"/randompokemon uses the same parameters as /dexsearch (see '/help ds').",
@@ -2419,7 +2420,7 @@ var commands = exports.commands = {
 
 	ms: 'movesearch',
 	msearch: 'movesearch',
-	movesearch: function (target, room, user) {
+	movesearch: function (target, room, user, connection, cmd, message) {
 		if (!this.canBroadcast()) return;
 
 		if (!target) return this.parse('/help movesearch');
@@ -2432,7 +2433,6 @@ var commands = exports.commands = {
 		var allVolatileStatus = {'flinch':1, 'confusion':1, 'partiallytrapped':1};
 		var allBoosts = {'hp':1, 'atk':1, 'def':1, 'spa':1, 'spd':1, 'spe':1, 'accuracy':1, 'evasion':1};
 		var showAll = false;
-		var output = 10;
 		var lsetData = {};
 		var targetMon = '';
 
@@ -2746,16 +2746,21 @@ var commands = exports.commands = {
 			results.push(dex[move].name);
 		}
 
-		var resultsStr = targetMon ? ("<font color=#999999>Matching moves found in learnset for</font> " + targetMon + ":<br>") : "";
+		var resultsStr = "";
+		if (targetMon) {
+			resultsStr += "<font color=#999999>Matching moves found in learnset for</font> " + targetMon + ":<br>";
+		} else {
+			resultsStr += this.broadcasting ? "" : ("<font color=#999999>" + message + ":</font><br>");
+		}
 		if (results.length > 0) {
-			if (showAll || results.length <= output + 5) {
+			if (showAll || results.length <= RESULTS_MAX_LENGTH + 5) {
 				results.sort();
 				resultsStr += results.join(", ");
 			} else {
-				resultsStr += results.slice(0, output).join(", ") + ", and " + string(results.length - output) + " more. <font color=#999999>Redo the search with 'all' as a search parameter to show all results.</font>";
+				resultsStr += results.slice(0, RESULTS_MAX_LENGTH).join(", ") + ", and " + (results.length - RESULTS_MAX_LENGTH) + " more. <font color=#999999>Redo the search with 'all' as a search parameter to show all results.</font>";
 			}
 		} else {
-			resultsStr = "No moves found.";
+			resultsStr += "No moves found.";
 		}
 		return this.sendReplyBox(resultsStr);
 	},
@@ -2767,6 +2772,232 @@ var commands = exports.commands = {
 		"Parameters can be excluded through the use of '!', e.g., !water type' excludes all water type moves.",
 		"If a Pok\u00e9mon is included as a parameter, moves will be searched from it's movepool.",
 		"The order of the parameters does not matter."],
+
+	itemsearch: function (target, room, user, connection, cmd, message) {
+		if (!target) return this.parse('/help itemsearch');
+		if (!this.canBroadcast()) return;
+
+		var showAll = false;
+
+		target = target.trim();
+		if (target.substr(target.length - 5) === ', all' || target.substr(target.length - 4) === ',all') {
+			showAll = true;
+			target = target.substr(0, target.length - 5);
+		}
+
+		target = target.toLowerCase().replace('-', ' ').replace(/[^a-z0-9.\s\/]/g, '');
+		var rawSearch = target.split(' ');
+		var searchedWords = [];
+		var foundItems = [];
+
+		//refine searched words
+		for (var i = 0; i < rawSearch.length; i++) {
+			var newWord = rawSearch[i].trim();
+			if (isNaN(newWord)) newWord = newWord.replace('.', '');
+			switch (newWord) {
+			// words that don't really help identify item removed to speed up search
+			case 'a':
+			case 'an':
+			case 'is':
+			case 'it':
+			case 'its':
+			case 'the':
+			case 'that':
+			case 'which':
+			case 'user':
+			case 'holder':
+			case 'holders':
+				newWord = '';
+				break;
+			// replace variations of common words with standardized versions
+			case 'opponent': newWord = 'attacker'; break;
+			case 'flung': newWord = 'fling'; break;
+			case 'heal': case 'heals':
+			case 'recovers': newWord = 'restores'; break;
+			case 'boost':
+			case 'boosts': newWord = 'raises'; break;
+			case 'weakens': newWord = 'halves'; break;
+			case 'more': newWord = 'increases'; break;
+			case 'super':
+				if (rawSearch[i + 1] === 'effective') {
+					newWord = 'supereffective';
+					rawSearch.splice(i + 1, 1);
+				}
+				break;
+			case 'special': newWord = 'sp'; break;
+			case 'spa':
+				newWord = 'sp';
+				rawSearch.splice(i, 0, 'atk');
+				break;
+			case 'atk':
+			case 'attack':
+				if (rawSearch[i - 1] === 'sp') {
+					newWord = 'atk';
+				} else {
+					newWord = 'attack';
+				}
+				break;
+			case 'spd':
+				newWord = 'sp';
+				rawSearch.splice(i, 0, 'def');
+				break;
+			case 'def':
+			case 'defense':
+				if (rawSearch[i - 1] === 'sp') {
+					newWord = 'def';
+				} else {
+					newWord = 'defense';
+				}
+				break;
+			case 'burns': newWord = 'burn'; break;
+			case 'poisons': newWord = 'poison'; break;
+			default:
+				if (/x[\d\.]+/.test(newWord)) {
+					newWord = newWord.substr(1) + 'x';
+				}
+			}
+			if (!newWord || searchedWords.indexOf(newWord) >= 0) continue;
+			searchedWords.push(newWord);
+		}
+
+		if (searchedWords.length === 0) return this.sendReplyBox("No distinguishing words were used. Try a more specific search.");
+
+		if (searchedWords.indexOf('fling') >= 0) {
+			var basePower = 0;
+			var effect;
+
+			for (var k = 0; k < searchedWords.length; k++) {
+				var wordEff = "";
+				switch (searchedWords[k]) {
+				case 'burn': case 'burns':
+				case 'brn': wordEff = 'brn'; break;
+				case 'paralyze': case 'paralyzes':
+				case 'par': wordEff = 'par'; break;
+				case 'poison': case 'poisons':
+				case 'psn': wordEff = 'psn'; break;
+				case 'toxic':
+				case 'tox': wordEff = 'tox'; break;
+				case 'flinches':
+				case 'flinch': wordEff = 'flinch'; break;
+				case 'badly': wordEff = 'tox'; break;
+				}
+				if (wordEff && effect) {
+					if (!(wordEff === 'psn' && effect === 'tox')) return this.sendReplyBox("Only specify fling effect once.");
+				} else if (wordEff) {
+					effect = wordEff;
+				} else {
+					if (searchedWords[k].substr(searchedWords[k].length - 2) === 'bp' && searchedWords[k].length > 2) searchedWords[k] = searchedWords[k].substr(0, searchedWords[k].length - 2);
+					if (Number.isInteger(Number(searchedWords[k]))) {
+						if (basePower) return this.sendReplyBox("Only specify a number for base power once.");
+						basePower = parseInt(searchedWords[k]);
+					}
+				}
+			}
+
+			for (var n in Tools.data.Items) {
+				var item = Tools.getItem(n);
+				if (!item.fling) continue;
+
+				if (basePower && effect) {
+					if (item.fling.basePower === basePower &&
+					(item.fling.status === effect || item.fling.volatileStatus === effect)) foundItems.push(item.name);
+				} else if (basePower) {
+					if (item.fling.basePower === basePower) foundItems.push(item.name);
+				} else {
+					if (item.fling.status === effect || item.fling.volatileStatus === effect) foundItems.push(item.name);
+				}
+			}
+			if (foundItems.length === 0) return this.sendReplyBox('No items inflict ' + basePower + 'bp damage when used with Fling.');
+		} else if (target.search(/natural ?gift/i) >= 0) {
+			var basePower = 0;
+			var type = "";
+
+			for (var k = 0; k < searchedWords.length; k++) {
+				searchedWords[k] = searchedWords[k].capitalize();
+				if (searchedWords[k] in Tools.data.TypeChart) {
+					if (type) return this.sendReplyBox("Only specify natural gift type once.");
+					type = searchedWords[k];
+				} else {
+					if (searchedWords[k].substr(searchedWords[k].length - 2) === 'bp' && searchedWords[k].length > 2) searchedWords[k] = searchedWords[k].substr(0, searchedWords[k].length - 2);
+					if (Number.isInteger(Number(searchedWords[k]))) {
+						if (basePower) return this.sendReplyBox("Only specify a number for base power once.");
+						basePower = parseInt(searchedWords[k]);
+					}
+				}
+			}
+
+			for (var n in Tools.data.Items) {
+				var item = Tools.getItem(n);
+				if (!item.isBerry) continue;
+
+				if (basePower && type) {
+					if (item.naturalGift.basePower === basePower && item.naturalGift.type === type) foundItems.push(item.name);
+				} else if (basePower) {
+					if (item.naturalGift.basePower === basePower) foundItems.push(item.name);
+				} else {
+					if (item.naturalGift.type === type) foundItems.push(item.name);
+				}
+			}
+			if (foundItems.length === 0) return this.sendReplyBox('No berries inflict ' + basePower + 'bp damage when used with Natural Gift.');
+		} else {
+			var bestMatched = 0;
+			for (var n in Tools.data.Items) {
+				var item = Tools.getItem(n);
+				var matched = 0;
+				// splits words in the description into a toId()-esk format except retaining / and . in numbers
+				var descWords = item.desc;
+				// add more general quantifier words to descriptions
+				if (/[1-9\.]+x/.test(descWords)) descWords += ' increases';
+				if (item.isBerry) descWords += ' berry';
+				descWords = descWords.replace(/super[\-\s]effective/g, 'supereffective');
+				descWords = descWords.toLowerCase().replace('-', ' ').replace(/[^a-z0-9\s\/]/g, '').replace(/(\D)\./, function (p0, p1) { return p1; }).split(' ');
+
+				for (var k = 0; k < searchedWords.length; k++) {
+					if (descWords.indexOf(searchedWords[k]) >= 0) matched++;
+				}
+
+				if (matched >= bestMatched && matched >= (searchedWords.length * 3 / 5)) foundItems.push(item.name);
+				if (matched > bestMatched) bestMatched = matched;
+			}
+
+			// iterate over found items again to make sure they all are the best match
+			for (var l = 0; l < foundItems.length; l++) {
+				var item = Tools.getItem(foundItems[l]);
+				var matched = 0;
+				var descWords = item.desc;
+				if (/[1-9\.]+x/.test(descWords)) descWords += ' increases';
+				if (item.isBerry) descWords += ' berry';
+				descWords = descWords.replace(/super[\-\s]effective/g, 'supereffective');
+				descWords = descWords.toLowerCase().replace('-', ' ').replace(/[^a-z0-9\s\/]/g, '').replace(/(\D)\./, function (p0, p1) { return p1; }).split(' ');
+
+				for (var k = 0; k < searchedWords.length; k++) {
+					if (descWords.indexOf(searchedWords[k]) >= 0) matched++;
+				}
+
+				if (matched !== bestMatched) {
+					foundItems.splice(l, 1);
+					l--;
+				}
+			}
+		}
+
+		var resultsStr = this.broadcasting ? "" : ("<font color=#999999>" + message + ":</font><br>");
+		if (foundItems.length > 0) {
+			if (showAll || foundItems.length <= RESULTS_MAX_LENGTH + 5) {
+				foundItems.sort();
+				resultsStr += foundItems.join(", ");
+			} else {
+				resultsStr += foundItems.slice(0, RESULTS_MAX_LENGTH).join(", ") + ", and " + (foundItems.length - RESULTS_MAX_LENGTH) + " more. <font color=#999999>Redo the search with ', all' at the end to show all results.</font>";
+			}
+		} else {
+			resultsStr += "No items found. Try a more general search";
+		}
+		return this.sendReplyBox(resultsStr);
+	},
+	itemsearchhelp: ["/itemsearch [move description] - finds items that match the given key words.",
+	"Command accepts natural language. (tip: fewer words tend to work better)",
+	"Searches with \"fling\" in them will find items with the specified Fling behavior.",
+	"Searches with \"natural gift\" in them will find items with the specified Natural Gift behavior."],
 
 	learnset: 'learn',
 	learnall: 'learn',

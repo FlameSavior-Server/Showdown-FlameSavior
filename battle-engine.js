@@ -44,28 +44,8 @@ global.toId = function (text) {
 		text = text.userid;
 	}
 
-	return string(text).toLowerCase().replace(/[^a-z0-9]+/g, '');
-};
-
-/**
- * Validates a username or Pokemon nickname
- */
-global.toName = function (name) {
-	name = string(name);
-	name = name.replace(/[\|\s\[\]\,]+/g, ' ').trim();
-	if (name.length > 18) name = name.substr(0, 18).trim();
-	return name;
-};
-
-/**
- * Safely ensures the passed variable is a string
- * Simply doing '' + str can crash if str.toString crashes or isn't a function
- * If we're expecting a string and being given anything that isn't a string
- * or a number, it's safe to assume it's an error, and return ''
- */
-global.string = function (str) {
-	if (typeof str === 'string' || typeof str === 'number') return '' + str;
-	return '';
+	if (typeof text !== 'string' && typeof text !== 'number') return '';
+	return ('' + text).toLowerCase().replace(/[^a-z0-9]+/g, '');
 };
 
 global.Tools = require('./tools.js');
@@ -1814,7 +1794,7 @@ Battle = (function () {
 		if (this.event) {
 			if (!target) target = this.event.target;
 		}
-		if (!this.runEvent('TryWeather', target)) return '';
+		if (this.suppressingWeather()) return '';
 		return this.weather;
 	};
 	Battle.prototype.isWeather = function (weather, target) {
@@ -1923,6 +1903,18 @@ Battle = (function () {
 	};
 	Battle.prototype.suppressingAttackEvents = function () {
 		return (this.activePokemon && this.activePokemon.isActive && !this.activePokemon.ignoringAbility() && this.activePokemon.getAbility().stopAttackEvents);
+	};
+	Battle.prototype.suppressingWeather = function () {
+		var pokemon;
+		for (var i = 0; i < this.sides.length; i++) {
+			for (var j = 0; j < this.sides[i].active.length; j++) {
+				pokemon = this.sides[i].active[j];
+				if (pokemon && !pokemon.ignoringAbility() && pokemon.getAbility().suppressWeather) {
+					return true;
+				}
+			}
+		}
+		return false;
 	};
 	Battle.prototype.setActiveMove = function (move, pokemon, target) {
 		if (!move) move = null;
@@ -2065,7 +2057,7 @@ Battle = (function () {
 			this.debug(eventid + ' handler suppressed by Gastro Acid');
 			return relayVar;
 		}
-		if (effect.effectType === 'Weather' && eventid !== 'TryWeather' && !this.runEvent('TryWeather', target)) {
+		if (effect.effectType === 'Weather' && eventid !== 'TryWeather' && this.suppressingWeather()) {
 			this.debug(eventid + ' handler suppressed by Air Lock');
 			return relayVar;
 		}
@@ -2278,7 +2270,7 @@ Battle = (function () {
 				}
 				continue;
 			}
-			if ((status.effectType === 'Weather' || eventid === 'Weather') && eventid !== 'TryWeather' && !this.runEvent('TryWeather', target)) {
+			if ((status.effectType === 'Weather' || eventid === 'Weather') && eventid !== 'TryWeather' && this.suppressingWeather()) {
 				this.debug(eventid + ' handler suppressed by Air Lock');
 				continue;
 			}
@@ -2724,7 +2716,7 @@ Battle = (function () {
 		}
 		this.add('switch', pokemon, pokemon.getDetails);
 		pokemon.update();
-		this.prioritizeQueue({pokemon: pokemon, choice: 'runSwitch'});
+		this.insertQueue({pokemon: pokemon, choice: 'runSwitch'});
 	};
 	Battle.prototype.canSwitch = function (side) {
 		var canSwitchIn = [];
@@ -2793,7 +2785,7 @@ Battle = (function () {
 				this.singleEvent('Start', pokemon.getItem(), pokemon.itemData, pokemon);
 			}
 		} else {
-			this.prioritizeQueue({pokemon: pokemon, choice: 'runSwitch'});
+			this.insertQueue({pokemon: pokemon, choice: 'runSwitch'});
 		}
 		return true;
 	};
@@ -3483,14 +3475,8 @@ Battle = (function () {
 		}
 		return false;
 	};
-	Battle.prototype.addQueue = function (decision, noSort, side) {
+	Battle.prototype.resolvePriority = function (decision, side) {
 		if (decision) {
-			if (Array.isArray(decision)) {
-				for (var i = 0; i < decision.length; i++) {
-					this.addQueue(decision[i], noSort);
-				}
-				return;
-			}
 			if (!decision.side && side) decision.side = side;
 			if (!decision.side && decision.pokemon) decision.side = decision.pokemon.side;
 			if (!decision.choice && decision.move) decision.choice = 'move';
@@ -3546,11 +3532,44 @@ Battle = (function () {
 				// if there's no actives, switches happen before activations
 				decision.priority = 6.2;
 			}
+		}
+	};
+	Battle.prototype.addQueue = function (decision, noSort, side) {
+		if (decision) {
+			if (Array.isArray(decision)) {
+				for (var i = 0; i < decision.length; i++) {
+					this.addQueue(decision[i], noSort);
+				}
+				return;
+			}
+			this.resolvePriority(decision, side);
 
 			this.queue.push(decision);
 		}
 		if (!noSort) {
 			this.queue.sort(Battle.comparePriority);
+		}
+	};
+	Battle.prototype.insertQueue = function (decision, side) {
+		// WARNING: Do not use this function if the queue is not already sorted!
+		if (decision) {
+			if (Array.isArray(decision)) {
+				for (var i = 0; i < decision.length; i++) {
+					this.insertQueue(decision[i], side);
+				}
+				return;
+			}
+			this.resolvePriority(decision, side);
+
+			for (var i = 0; i <= this.queue.length; i++) {
+				if (i === this.queue.length) {
+					this.queue.push(decision);
+					break;
+				} else if (Battle.comparePriority(decision, this.queue[i]) < 0) {
+					this.queue.splice(i, 0, decision);
+					break;
+				}
+			}
 		}
 	};
 	Battle.prototype.prioritizeQueue = function (decision, source, sourceEffect) {

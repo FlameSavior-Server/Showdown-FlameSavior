@@ -37,13 +37,13 @@ exports.commands = {
 		try {
 			var forever = require('forever');
 		} catch (e) {
-			return this.sendReply('/restart requires the "forever" module.');
+			return this.sendReply("/restart requires the "forever" module.");
 		}
 		if (!Rooms.global.lockdown) {
-			return this.sendReply('For safety reasons, /restart can only be used during lockdown.');
+			return this.sendReply("For safety reasons, /restart can only be used during lockdown.");
 		}
 		if (CommandParser.updateServerLock) {
-			return this.sendReply('Wait for /updateserver to finish before using /restart.');
+			return this.sendReply("Wait for /updateserver to finish before using /restart.");
 		}
 		this.logModCommand(user.name + ' used /restart');
 		Rooms.global.send('|refresh|');
@@ -179,33 +179,33 @@ exports.commands = {
 		var name = targetUser.name;
 		room.auth[targetUser.userid] = '#';
 		room.founder = targetUser.userid;
-		this.addModCommand('' + name + ' was appointed to Room Founder by ' + user.name + '.');
+		this.addModCommand(name + " was appointed to Room Founder by " + user.name + ".");
 		room.onUpdateIdentity(targetUser);
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
 	tell: function(target, room, user) {
 		if (!this.canTalk()) return;
-		if (!target) return this.parse('/help tell');
+		if (!target) return this.parse("/help tell");
 		var commaIndex = target.indexOf(',');
-		if (commaIndex < 0) return this.sendReply('You forgot the comma.');
+		if (commaIndex < 0) return this.sendReply("You forgot the comma.");
 		var targetUser = toId(target.slice(0, commaIndex));
 		var message = target.slice(commaIndex + 1).trim();
-		if (message.replace(/(<([^>]+)>)/ig, "").length > 600) return this.sendReply('tells must be 600 or fewer characters, excluding HTML.');
+		if (message.replace(/(<([^>]+)>)/ig, "").length > 600) return this.sendReply("Tells must be 600 or fewer characters, excluding HTML.");
 		message = htmlfix(message);
 		if (targetUser.length > 18) {
 			return this.sendReply('The name of user "' + targetUser + '" is too long.');
 		}
 		if (!Gold.tells[targetUser]) Gold.tells[targetUser] = [];
-		if (Gold.tells[targetUser].length === 8) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
+		if (Gold.tells[targetUser].length === 8) return this.sendReply("User " + targetUser + " has too many tells queued.");
 		var date = Date();
-		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + Tools.escapeHTML(message);
+		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + " - <b>" + user.getIdentity() + "</b> said: " + Tools.escapeHTML(message);
 		Gold.tells[targetUser].add(messageToSend);
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
 	hide: 'hideauth',
 	hideauth: function(target, room, user) {
-		if (!user.can('lock')) return this.sendReply('/hideauth - access denied.');
+		if (!user.can('lock')) return this.sendReply("/hideauth - access denied.");
 		var tar = ' ';
 		if (target) {
 			target = target.trim();
@@ -243,30 +243,30 @@ exports.commands = {
 	},
 	show: 'showauth',
 	showauth: function(target, room, user) {
-		if (!user.can('lock')) return this.sendReply('/showauth - access denied.');
+		if (!user.can('lock')) return this.sendReply("/showauth - access denied.");
 		delete user.getIdentity;
 		user.updateIdentity();
-		this.sendReply('You have now revealed your auth symbol.');
-		return this.logModCommand(user.name + ' has revealed their auth symbol.');
-		this.sendReply('Your symbol has been reset.');
+		this.sendReply("You have now revealed your auth symbol.");
+		return this.logModCommand(user.name + " has revealed their auth symbol.");
+		this.sendReply("Your symbol has been reset.");
 	},
 	punishall: 'pa',
 	pa: function(target, room, user) {
-		if (!target) return this.sendReply('/punishall [lock, mute, unmute, ban]. - Requires eval access.');
+		if (!target) return this.sendReply("/punishall [lock, mute, unmute, ban]. - Requires eval access.");
 		if (target.indexOf('ban ') > -1) {
-			return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
+			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
 		}
 		if (target.indexOf('ban') > -1) {
-			return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
+			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
 		}
 		if (target.indexOf(' ban') > -1) {
-			return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
+			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
 		}
 		if (target.indexOf('lock') > -1) {
-			return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
+			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
 		}
 		if (target.indexOf('lock ') > -1) {
-			return this.sendReply('Wow.  Congrats, you actually have some balls, kupo.');
+			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
 		}
 		return this.parse('/eval for(var u in Users.users) Users.users[u].' + target + '()');
 	},
@@ -282,8 +282,8 @@ exports.commands = {
 			return this.sendReply('User ' + this.targetUsername + ' not found.');
 		}
 		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
-			var problem = ' but was already banned';
-			return this.privateModCommand('(' + targetUser.name + ' would be banned by ' + user.name + problem + '.) (' + targetUser.latestIp + ')');
+			var problem = " but was already banned";
+			return this.privateModCommand('(' + targetUser.name + " would be banned by " + user.name + problem + '.) (' + targetUser.latestIp + ')');
 		}
 		targetUser.popup(user.name + " has permanently banned you.");
 		this.addModCommand(targetUser.name + " was permanently banned by " + user.name + ".");
@@ -293,8 +293,8 @@ exports.commands = {
 	},
 	nc: function(room, user, cmd) {
 		user.nctimes += 1;
-		if (user.nctimes > 3) return this.sendReply('You have used /nc too many times');
-		return this.parse('**Panpawn is my god!** I shall forever praises oh holy god, panpawn!');
+		if (user.nctimes > 3) return this.sendReply("You have used /nc too many times");
+		return this.parse("**Panpawn is my god!** I shall forever praises oh holy god, panpawn!");
 	},
 	star: function(room, user, cmd) {
 		return this.parse('/hide Ã¢Ëœâ€¦');

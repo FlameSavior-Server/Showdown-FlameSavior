@@ -70,6 +70,21 @@ Gold.emoticons = {
 				}
 				break;
 		}
+	},
+	processPMsParsing: function (message) {
+		emoteRegex = [];
+		for (var emote in this.chatEmotes) {
+			emoteRegex.push(emote);
+		}
+		emoteRegex = new RegExp('(' + emoteRegex.join('|') + ')', 'gi');
+		self = this;
+		if (emoteRegex.test(message)) {
+			message = message.replace(emoteRegex, function (match) {
+				return '<img src=' + self.chatEmotes[match] + '>';
+			});
+			return message;
+		}
+		return false;
 	}
 };
 

@@ -24,10 +24,13 @@ Gold.emoticons = {
 			}
 		}
 		return text.replace(new RegExp(patterns.join('|'), 'g'), function(match) {
-			return typeof self.chatEmotes[match] != 'undefined' ?
-				'<img src="' + self.chatEmotes[match] + '" title="' + match + '"/>' :
-				match;
+			if (match) {
+				return typeof self.chatEmotes[match] != 'undefined' ?
+					'<img src="' + self.chatEmotes[match] + '" title="' + match + '"/>' :
+					match;
+			}
 		});
+		return false;
 	},
 	processChatData: function(user, room, connection, message) {
 		var match = false;
@@ -71,21 +74,23 @@ Gold.emoticons = {
 				break;
 		}
 	},
+	/*
 	processPMsParsing: function (message) {
-		emoteRegex = [];
-		for (var emote in this.chatEmotes) {
+		var emoteRegex = [];
+		var chatEmotes = this.chatEmotes;
+		for (var emote in chatEmotes) {
 			emoteRegex.push(emote);
 		}
 		emoteRegex = new RegExp('(' + emoteRegex.join('|') + ')', 'g');
-		self = this;
 		if (emoteRegex.test(message)) {
 			message = message.replace(emoteRegex, function (match) {
-				return '<img src=' + self.chatEmotes[match] + ' title=' + match + '>';
+				return '<img src=' + chatEmotes[match] + ' title=' + match + '>';
 			});
 			return message;
 		}
 		return false;
 	}
+	*/
 };
 
 

@@ -37,7 +37,7 @@ exports.commands = {
 		try {
 			var forever = require('forever');
 		} catch (e) {
-			return this.sendReply("/restart requires the "forever" module.");
+			return this.sendReply("/restart requires the \"forever\" module.");
 		}
 		if (!Rooms.global.lockdown) {
 			return this.sendReply("For safety reasons, /restart can only be used during lockdown.");

@@ -76,7 +76,7 @@ Gold.emoticons = {
 		for (var emote in this.chatEmotes) {
 			emoteRegex.push(emote);
 		}
-		emoteRegex = new RegExp('(' + emoteRegex.join('|') + ')', 'gi');
+		emoteRegex = new RegExp('(' + emoteRegex.join('|') + ')', 'g');
 		self = this;
 		if (emoteRegex.test(message)) {
 			message = message.replace(emoteRegex, function (match) {

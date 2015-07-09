@@ -209,7 +209,7 @@ var commands = exports.commands = {
 		if (Gold.emoticons.processPMsParsing(target)) {
 			var sender = user.getIdentity(this.id).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' + user.name + '">' +
 			'<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ';
-			var msg = Gold.emoticons.processPMsParsing(target);
+			var msg = Gold.emoticons.processPMsParsing(Tools.escapeHTML(target));
 			var oldtarg = target;
 			target = '/html ' + sender + msg;
 			var processing = true;

@@ -80,7 +80,7 @@ Gold.emoticons = {
 		self = this;
 		if (emoteRegex.test(message)) {
 			message = message.replace(emoteRegex, function (match) {
-				return '<img src=' + self.chatEmotes[match] + '>';
+				return '<img src=' + self.chatEmotes[match] + ' title=' + match + '>';
 			});
 			return message;
 		}

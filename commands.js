@@ -105,7 +105,6 @@ var commands = exports.commands = {
 	logout: function (target, room, user) {
 		user.resetName();
 	},
-
 	requesthelp: 'report',
 	report: function (target, room, user) {
 		if (room.id === 'help') {
@@ -206,12 +205,23 @@ var commands = exports.commands = {
 				return this.errorReply("The command '/" + innerCmd + "' was unrecognized or unavailable in private messages. To send a message starting with '/" + innerCmd + "', type '//" + innerCmd + "'.");
 			}
 		}
-
+		if (Gold.emoticons.processPMsParsing(target)) {
+			var sender = user.getIdentity(this.id).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' + user.name + '">' +
+			'<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ';
+			var msg = Gold.emoticons.processPMsParsing(Tools.escapeHTML(target));
+			var oldtarg = target;
+			target = '/html ' + sender + msg;
+			var processing = true;
+		}
 		var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
 		user.send(message);
 		if (targetUser !== user) {
 			if (Users.ShadowBan.checkBanned(user)) {
-				Users.ShadowBan.addMessage(user, "Private to " + targetUser.getIdentity(), target);
+				if (processing) {
+					Users.ShadowBan.addMessage(user, "Private to " +  targetUser.getIdentity(), oldtarg);
+				} else {
+					Users.ShadowBan.addMessage(user, "Private to " +  targetUser.getIdentity(), target);
+				}
 			} else {
 				targetUser.send(message);
 			}

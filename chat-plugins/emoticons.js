@@ -14,7 +14,6 @@ if (typeof Gold === 'undefined') global.Gold = {};
 
 Gold.emoticons = {
 	chatEmotes: {},
-	
 	processEmoticons: function(text) {
 		var patterns = [],
 		metachars = /[[\]{}()*+?.\\|^$\-,&#\s]/g,
@@ -72,23 +71,21 @@ Gold.emoticons = {
 				break;
 		}
 	},
-	/*
 	processPMsParsing: function (message) {
-		var emoteRegex = [];
-		var chatEmotes = this.chatEmotes;
-		for (var emote in chatEmotes) {
+		emoteRegex = [];
+		for (var emote in this.chatEmotes) {
 			emoteRegex.push(emote);
 		}
 		emoteRegex = new RegExp('(' + emoteRegex.join('|') + ')', 'g');
+		self = this;
 		if (emoteRegex.test(message)) {
 			message = message.replace(emoteRegex, function (match) {
-				return '<img src=' + chatEmotes[match] + ' title=' + match + '>';
+				return '<img src=' + self.chatEmotes[match] + ' title=' + match + '>';
 			});
 			return message;
 		}
 		return false;
 	}
-	*/
 };
 
 

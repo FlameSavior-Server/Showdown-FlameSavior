@@ -78,15 +78,6 @@ exports.Formats = [
 		name: "NU",
 		section: "ORAS Singles",
 
-		searchShow: false,
-		ruleset: ['RU'],
-		banlist: ['RU', 'BL3', 'Cameruptite', 'Glalitite', 'Steelixite']
-	},
-	{
-		name: "NU (suspect test)",
-		section: "ORAS Singles",
-
-		challengeShow: false,
 		ruleset: ['RU'],
 		banlist: ['RU', 'BL3', 'Cameruptite', 'Glalitite', 'Steelixite']
 	},
@@ -105,7 +96,7 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
 		banlist: ['Unreleased', 'Illegal']
 	},
-	{
+	/*{
 		name: "CAP Naviathan Playtest",
 		section: "ORAS Singles",
 
@@ -117,7 +108,7 @@ exports.Formats = [
 			'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom',
 			'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite', 'Soul Dew'
 		]
-	},
+	},*/
 	{
 		name: "Battle Spot Singles",
 		section: "ORAS Singles",
@@ -485,7 +476,6 @@ exports.Formats = [
 		section: "Other Metagames",
 		column: 2,
 
-		searchShow: false,
 		ruleset: ['OU'],
 		banlist: ['Allow CAP']
 	},

@@ -127,7 +127,7 @@ exports.commands = {
 					if (Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
 					var fileTypes = [".gif",".png",".jpg"];
-					if (fileTypes.indexOf(link.substr(-4)) < 0) return this.sendReply("ERROR: the emoticon you are trying to add must be a gif, png, or jpg.");
+					if (!~fileTypes.indexOf(link.substr(-4))) return this.sendReply("ERROR: the emoticon you are trying to add must be a gif, png, or jpg.");
 					emotes[emoteName] = Gold.emoticons.chatEmotes[emoteName] = link;
 					saveEmotes();
 					this.sendReply("The emoticon " + emoteName + " has been added.");

@@ -296,6 +296,21 @@ exports.commands = {
 		if (user.nctimes > 3) return this.sendReply("You have used /nc too many times");
 		return this.parse("**Panpawn is my god!** I shall forever praises oh holy god, panpawn!");
 	},
+	ggd: 'goldglobaldeclare',
+	goldglobaldeclare: function(target, room, user, connection) {
+		if (!this.can('hotpatch')) return false;
+		if (!target) return false;
+		var sender = "<b>" + user.group + '</b><button class="astext" name="parseCommand" value="/user ' + user.name + '"><b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ';
+		if (Gold.emoticons.processPMsParsing(target)) target = Gold.emoticons.processPMsParsing(Tools.escapeHTML(target));
+		for (var id in Rooms.rooms) {
+			if (id !== 'global') Rooms.rooms[id].addRaw(
+				"<div class=\"broadcast-blue\">" +
+					"<b>Global Declare:</b><br />" +
+					sender + "<b>" + target + "</b>"
+			);
+		}
+		this.logModCommand(user.name + " globally declared " + target);
+	},
 	star: function(room, user, cmd) {
 		return this.parse('/hide Ã¢Ëœâ€¦');
 	},

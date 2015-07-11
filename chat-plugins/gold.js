@@ -306,7 +306,7 @@ exports.commands = {
 			if (id !== 'global') Rooms.rooms[id].addRaw(
 				"<div class=\"broadcast-blue\">" +
 					"<b>Global Declare:</b><br />" +
-					sender + "<b>" + target + "</b>" +
+					sender + target +
 				"</div>"
 			);
 		}

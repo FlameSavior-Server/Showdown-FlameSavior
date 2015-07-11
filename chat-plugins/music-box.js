@@ -38,4 +38,4 @@ function parse (link) {
                 }
             });
         });
-};
+}

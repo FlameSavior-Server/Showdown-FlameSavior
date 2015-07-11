@@ -121,17 +121,17 @@ exports.commands = {
 			switch (toId(parts[0])) {
 				case 'add':
 					if (!this.can('ban')) return this.sendReply("Access denied.");
-					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /ezemote add, [emote], [link]");
+					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /ezemote add, [emoticon], [link]");
 					var emoteName = parts[1];
-					if (Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " already exists.");
+					if (Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
 					var fileTypes = [".gif",".png",".jpg"];
-					if (fileTypes.indexOf(link.substr(-4)) < 0) return this.sendReply("ERROR: the emote you are trying to add must be a gif, png, or jpg.");
+					if (fileTypes.indexOf(link.substr(-4)) < 0) return this.sendReply("ERROR: the emoticon you are trying to add must be a gif, png, or jpg.");
 					emotes[emoteName] = Gold.emoticons.chatEmotes[emoteName] = link;
 					saveEmotes();
-					this.sendReply("The emote " + emoteName + " has been added.");
-					this.logModCommand(user.name + " added the emote " + emoteName);
-					Rooms.rooms.staff.add(Tools.escapeHTML(user.name) + " added the emote " + emoteName);
+					this.sendReply("The emoticon " + emoteName + " has been added.");
+					this.logModCommand(user.name + " added the emopticon " + emoteName);
+					Rooms.rooms.staff.add(Tools.escapeHTML(user.name) + " added the emoticon " + emoteName);
 					room.update();
 					break;
 				case 'rem':
@@ -139,9 +139,9 @@ exports.commands = {
 				case 'del':
 				case 'delete':
 					if (!this.can('ban')) return this.sendReply("Access denied.");
-					if (!parts[1]) return this.sendReplyBox("/ezemote remove, [emote]");
+					if (!parts[1]) return this.sendReplyBox("/ezemote remove, [emoticon]");
 					var emoteName = parts[1];
-					if (!Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emote: " + emoteName + " does not exist.");
+					if (!Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " does not exist.");
 					delete Gold.emoticons.chatEmotes[emoteName];
 					delete emotes[emoteName];
 					saveEmotes();

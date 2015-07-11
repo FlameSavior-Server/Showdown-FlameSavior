@@ -373,7 +373,6 @@ exports.commands = {
 		for (var x in html) {
 			if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
 		}
-		if (target.indexOf('panpawn sucks') > -1) return this.sendReply('Yes, we know.');
 		if (target.length > 350) return this.sendReply('This report is too long; it cannot exceed 350 characters.');
 		if (!this.canTalk()) return;
 		Rooms.rooms.staff.add(user.userid + ' (in ' + room.id + ') has reported: ' + target + '');
@@ -1798,7 +1797,7 @@ exports.commands = {
 			if (price <= user.money) {
 				match = true;
 				user.money = user.money - price;
-				this.sendReply('You have purchased a trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
+				this.sendReply('You have purchased a trainer card. You need to message an Administrator or Leader capable of adding this.');
 				user.canTrainerCard = true;
 				this.add(user.name + ' has purchased a trainer card!');
 				logTransaction(user.name + ' has purchased a trainer card!');
@@ -1813,7 +1812,7 @@ exports.commands = {
 			if (price <= user.money) {
 				match = true;
 				user.money = user.money - price;
-				this.sendReply('You have purchased a music box. You need to message an Admin capable of adding this (Panpawn / papew).');
+				this.sendReply('You have purchased a music box. You need to message an Administrator or Leader capable of adding this.');
 				user.canMusicBox = true;
 				this.add(user.name + ' has purchased a music box!');
 				economy.writeMoney('money', user, -60);
@@ -1829,7 +1828,7 @@ exports.commands = {
 			if (price <= user.money) {
 				match = true;
 				user.money = user.money - price;
-				this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Admin capable of adding this (Panpawn / papew).');
+				this.sendReply('You have purchased the ability to alter your avatar or trainer card. You need to message an Administrator or Leader capable of adding this.');
 				user.canFixItem = true;
 				economy.writeMoney('money', user, -15);
 				this.add(user.name + ' has purchased the ability to set alter their card or avatar or music box!');
@@ -2292,10 +2291,6 @@ exports.commands = {
 	plug: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Gold\'s OFFICIAL Plug.dj can be found <a href="https://plug.dj/nightcore-331">here</a>.');
-	},
-	ps: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Cick the Poké Ball to enter Pawn\'s Trading Shoppe! <a href="http://panpawnshop.weebly.com/">    <img src="http://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG" width="20" height="20">');
 	},
 	guesscolor: function(target, room, user) {
 		if (!target) return this.sendReply('/guesscolor [color] - Guesses a random color.');

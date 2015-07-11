@@ -306,7 +306,8 @@ exports.commands = {
 			if (id !== 'global') Rooms.rooms[id].addRaw(
 				"<div class=\"broadcast-blue\">" +
 					"<b>Global Declare:</b><br />" +
-					sender + "<b>" + target + "</b>"
+					sender + "<b>" + target + "</b>" +
+				"</div>"
 			);
 		}
 		this.logModCommand(user.name + " globally declared " + target);

@@ -304,7 +304,7 @@ exports.commands = {
 		if (Gold.emoticons.processPMsParsing(target)) target = Gold.emoticons.processPMsParsing(Tools.escapeHTML(target));
 		for (var id in Rooms.rooms) {
 			if (id !== 'global') Rooms.rooms[id].addRaw(
-				"<div class=\"broadcast-blue\">" +
+				"<div class=\"broadcast-gold\">" +
 					"<b>Global Declare:</b><br />" +
 					sender + target +
 				"</div>"
@@ -596,6 +596,13 @@ exports.commands = {
 		if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
 		if (!this.canBroadcast()) return;
 		this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
+	},
+	rsi: 'roomshowimage',
+	roomshowimage: function(target, room, user) {
+		if (!target) return this.sendReply("git gud");
+		var parts = target.split(',');
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox("<img src=" + parts[0] + " width=" + parts[1] + " height=" + parts[1]);
 	},
 	pr: 'pollremind',
 	pollremind: function(target, room, user) {

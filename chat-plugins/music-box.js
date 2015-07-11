@@ -31,7 +31,7 @@ function parse (link) {
                 if (!err && res.statusCode == 200) {
                     var $ = cheerio.load(body);
                     var title = $("title").text();
-                    var str = '<a href="' + link + '"><button title="' + title + '">' + title + '</a></button><br />'; //parse it now
+                    var str = '<a href="' + link + '"><button title="' + title + '">' + title + '</button></a><br />'; //parse it now
                     resolve(str);
                 } else {
                     reject(str);

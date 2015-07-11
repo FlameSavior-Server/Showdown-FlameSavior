@@ -123,6 +123,7 @@ exports.commands = {
 					if (!this.can('ban')) return this.sendReply("Access denied.");
 					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /ezemote add, [emoticon], [link]");
 					var emoteName = parts[1];
+					if (~toId(emoteName).indexOf("fukya")) return this.sendReply("This emoticon cannot be added to the server.");
 					if (Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
 					var fileTypes = [".gif",".png",".jpg"];

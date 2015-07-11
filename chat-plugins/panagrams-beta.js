@@ -75,6 +75,7 @@ exports.commands = {
 	gp: 'guessp',
 	guesspoke: 'guessp',
 	guessp: function(target, room, user, cmd) {
+		if (toId(user.name) === 'jdbot') return false;
 		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!room.panagram) return this.sendReply('There is no game of Panagram going on in this room.');
 		if (!this.canTalk()) return;

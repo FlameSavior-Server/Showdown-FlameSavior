@@ -5,19 +5,19 @@
 
 var fs = require('fs');
 var serialize = require('node-serialize');
-if (typeof Gold === 'undefined') global.Gold = {};
+var trainerCards = {};
 
 function loadTrainerCards() {
 	try {
-		Gold.trainerCards = serialize.unserialize(fs.readFileSync('config/trainercards.json', 'utf8'));
-		Object.merge(CommandParser.commands, Gold.trainerCards);
+		trainerCards = serialize.unserialize(fs.readFileSync('config/trainercards.json', 'utf8'));
+		Object.merge(CommandParser.commands, trainerCards);
 	} catch (e) {};
 }
 setTimeout(function(){loadTrainerCards();},1000);
 
 function saveTrainerCards() {
-	fs.writeFileSync('config/trainercards.json', serialize.serialize(Gold.trainerCards));
-	Object.merge(CommandParser.commands, Gold.trainerCards);
+	fs.writeFileSync('config/trainercards.json', serialize.serialize(trainerCards));
+	Object.merge(CommandParser.commands, trainerCards);
 }
 
 exports.commands = {
@@ -36,13 +36,13 @@ exports.commands = {
 				var commandName = toId(parts[1]);
 				if (CommandParser.commands[commandName]) return this.sendReply("/trainercards - The command \"" + commandName + "\" already exists.");
 				var html = parts.splice(2, parts.length).join(',');
-				Gold.trainerCards[commandName] = new Function('target', 'room', 'user', "if (!room.disableTrainerCards) if (!this.canBroadcast()) return; this.sendReplyBox('" + html.replace(/'/g, "\\'") + "');");
+				trainerCards[commandName] = new Function('target', 'room', 'user', "if (!room.disableTrainerCards) if (!this.canBroadcast()) return; this.sendReplyBox('" + html.replace(/'/g, "\\'") + "');");
 				saveTrainerCards();
 				this.sendReply("The trainer card \"" + commandName + "\" has been added.");
 				this.logModCommand(user.name + " added the trainer card " + commandName);
 				try {
 					Rooms.rooms.staff.add(user.name + " added the trainer card " + commandName);
-				} catch (e) {}
+				} catch (e) {};
 				break;
 
 			case 'rem':
@@ -52,21 +52,21 @@ exports.commands = {
 				if (!this.can('pban')) return false;
 				if (!parts[1]) return this.sendReply("Usage: /trainercard remove, [command name]");
 				var commandName = toId(parts[1]);
-				if (!Gold.trainerCards[commandName]) return this.sendReply("/trainercards - The command \"" + commandName + "\" does not exist, or was added manually.");
+				if (!trainerCards[commandName]) return this.sendReply("/trainercards - The command \"" + commandName + "\" does not exist, or was added manually.");
 				delete CommandParser.commands[commandName];
-				delete Gold.trainerCards[commandName];
+				delete trainerCards[commandName];
 				saveTrainerCards();
 				this.sendReply("The trainer card \"" + commandName + "\" has been removed.");
 				this.logModCommand(user.name + " removed the trainer card " + commandName);
 				try {
 					Rooms.rooms.staff.add(user.name + " removed the trainer card " + commandName);
-				} catch (e) {}
+				} catch (e) {};
 				break;
 
 			case 'list':
 				if (!this.can('trainercard')) return false;
-				var output = "<b>There's a total of " + Object.size(Gold.trainerCards) + " trainer cards added with this command:</b><br />";
-				for (var tc in Gold.trainerCards) {
+				var output = "<b>There's a total of " + Object.size(trainerCards) + " trainer cards added with this command:</b><br />";
+				for (var tc in trainerCards) {
 					output += tc + "<br />";
 				}
 				this.sendReplyBox(output);
@@ -92,12 +92,8 @@ exports.commands = {
 
 			case 'reload':
 				if (!this.can('pban')) return false;
-				try {
-					loadTrainerCards();
-					return this.sendReply("Trainer cards have been reloaded.");
-				} catch (e) {
-					return this.sendReply("Something went wrong when attempting to reload Trainer Cards: \n" + e.stack);
-				}
+				return this.sendReply("Trainer cards have been reloaded.");
+				loadTrainerCards();
 				break;
 
 			case 'info':

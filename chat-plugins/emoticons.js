@@ -131,8 +131,8 @@ exports.commands = {
 					emotes[emoteName] = Gold.emoticons.chatEmotes[emoteName] = link;
 					saveEmotes();
 					this.sendReply("The emoticon " + emoteName + " has been added.");
-					this.logModCommand(user.name + " added the emopticon " + emoteName);
-					Rooms.rooms.staff.add(Tools.escapeHTML(user.name) + " added the emoticon " + emoteName);
+					this.logModCommand(user.name + " added the emoticon " + emoteName + ".");
+					Rooms.rooms.staff.add("The emoticon " + emoteName + " was added by " + Tools.escapeHTML(user.name) + ".");
 					room.update();
 					break;
 				case 'rem':
@@ -141,14 +141,14 @@ exports.commands = {
 				case 'delete':
 					if (!this.can('ban')) return this.sendReply("Access denied.");
 					if (!parts[1]) return this.sendReplyBox("/ezemote remove, [emoticon]");
-					var emoteName = parts[1];
+					emoteName = parts[1];
 					if (!Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " does not exist.");
 					delete Gold.emoticons.chatEmotes[emoteName];
 					delete emotes[emoteName];
 					saveEmotes();
 					this.sendReply("The emoticon " + emoteName + " was removed.");
-					this.logModCommand("The emoticon " + emoteName + " was removed by " + user.name);
-					Rooms.rooms.staff.add("The emoticon " + emoteName + " was removed by " + Tools.escapeHTML(user.name));
+					this.logModCommand("The emoticon " + emoteName + " was removed by " + user.name + ".");
+					Rooms.rooms.staff.add("The emoticon " + emoteName + " was removed by " + Tools.escapeHTML(user.name) + ".");
 					room.update();
 					break;
 				case 'list':

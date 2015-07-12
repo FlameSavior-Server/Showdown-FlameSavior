@@ -92,8 +92,12 @@ exports.commands = {
 
 			case 'reload':
 				if (!this.can('pban')) return false;
-				return this.sendReply("Trainer cards have been reloaded.");
-				loadTrainerCards();
+				try {
+					loadTrainerCards();
+					return this.sendReply("Trainer cards have been reloaded.");
+				} catch (e) {
+					return this.sendReply("Something went wrong when attempting to reload Trainer Cards: \n" + e.stack);
+				}
 				break;
 
 			case 'info':

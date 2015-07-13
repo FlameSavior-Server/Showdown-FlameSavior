@@ -340,38 +340,6 @@ exports.commands = {
 		var pban = fs.readFileSync('config/pbanlist.txt', 'utf8');
 		return user.send('|popup|' + pban);
 	},
-	def: 'define',
-	define: function(target, room, user) {
-		if (!target) return this.sendReply('Usage: /define <word>');
-		target = toId(target);
-		if (target > 50) return this.sendReply('/define <word> - word can not be longer than 50 characters.');
-		if (!this.canBroadcast()) return;
-		var options = {
-		    url: 'http://api.wordnik.com:80/v4/word.json/'+target+'/definitions?limit=3&sourceDictionaries=all' +
-		    '&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
-		};
-		var self = this;
-		function callback(error, response, body) {
-		    if (!error && response.statusCode == 200) {
-		        var page = JSON.parse(body);
-		        var output = '<font color=#24678d><b>Definitions for ' + target + ':</b></font><br />';
-		        if (!page[0]) {
-		        	self.sendReplyBox('No results for <b>"' + target + '"</b>.');
-		        	return room.update();
-		        } else {
-		        	var count = 1;
-		        	for (var u in page) {
-		        		if (count > 3) break;
-		        		output += '(<b>'+count+'</b>) ' + Tools.escapeHTML(page[u]['text']) + '<br />';
-		        		count++;
-		        	}
-		        	self.sendReplyBox(output);
-		        	return room.update();
-		        }
-		    }
-		}
-		request(options, callback);
-	},
 	vault: function(target, room, user, connection) {
 		var money = fs.readFileSync('config/money.csv', 'utf8');
 		return user.send('|popup|' + money);
@@ -584,18 +552,82 @@ exports.commands = {
 		if (!target) return this.sendReply('/lick needs a target.');
 		return this.parse('/me licks ' + target + ' excessively!');
 	},
+		def: 'define',
+	define: function(target, room, user) {
+		if (!target) return this.sendReply('Usage: /define <word>');
+		target = toId(target);
+		if (target > 50) return this.sendReply('/define <word> - word can not be longer than 50 characters.');
+		if (!this.canBroadcast()) return;
+		var options = {
+		    url: 'http://api.wordnik.com:80/v4/word.json/'+target+'/definitions?limit=3&sourceDictionaries=all' +
+		    '&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
+		};
+		var self = this;
+		function callback(error, response, body) {
+		    if (!error && response.statusCode == 200) {
+		        var page = JSON.parse(body);
+		        var output = '<font color=#24678d><b>Definitions for ' + target + ':</b></font><br />';
+		        if (!page[0]) {
+		        	self.sendReplyBox('No results for <b>"' + target + '"</b>.');
+		        	return room.update();
+		        } else {
+		        	var count = 1;
+		        	for (var u in page) {
+		        		if (count > 3) break;
+		        		output += '(<b>'+count+'</b>) ' + Tools.escapeHTML(page[u]['text']) + '<br />';
+		        		count++;
+		        	}
+		        	self.sendReplyBox(output);
+		        	return room.update();
+		        }
+		    }
+		}
+		request(options, callback);
+	},
+	u: 'urbandefine',
+    ud: 'urbandefine',
+    urbandefine: function(target, room, user) {
+    	if (!this.canBroadcast()) return;
+    	if (!target) return this.parse('/help urbandefine')
+    	if (target > 50) return this.sendReply('Phrase can not be longer than 50 characters.');
+    	var self = this;
+    	var options = {
+    		url: 'http://www.urbandictionary.com/iphone/search/define',
+    		term: target,
+    		headers: {
+    			'Referer': 'http://m.urbandictionary.com'
+    		},
+    		qs: {
+    			'term': target
+    		}
+    	};
+    	function callback(error, response, body) {
+    		if (!error && response.statusCode == 200) {
+    			var page = JSON.parse(body);
+    			var definitions = page['list'];
+    			if (page['result_type'] == 'no_results') {
+    				self.sendReplyBox('No results for <b>"' + Tools.escapeHTML(target) + '"</b>.');
+    				return room.update();
+    			} else {
+    				if (!definitions[0]['word'] || !definitions[0]['definition']) {
+    					self.sendReplyBox('No results for <b>"' + Tools.escapeHTML(target) + '"</b>.');
+    					return room.update();
+    				}
+    				var output = '<b>' + Tools.escapeHTML(definitions[0]['word']) + ':</b> ' + Tools.escapeHTML(definitions[0]['definition']).replace(/\r\n/g, '<br />').replace(/\n/g, ' ');
+    				if (output.length > 400) output = output.slice(0, 400) + '...';
+    				self.sendReplyBox(output);
+    				return room.update();
+    			}
+    		}
+    	}
+    	request(options, callback);
+    },
 	gethex: 'hex',
 	hex: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (!this.canTalk()) return;
 		if (!target) target = toId(user.name);
 		return this.sendReplyBox('<b><font color="' + Gold.hashColor('' + toId(target) + '') + '">' + target + '</font></b>.  The hexcode for this name color is: ' + Gold.hashColor('' + toId(target) + '') + '.');
-	},
-	votes: function(target, room, user) {
-		if (!room.answers) room.answers = new Object();
-		if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
-		if (!this.canBroadcast()) return;
-		this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
 	},
 	rsi: 'roomshowimage',
 	roomshowimage: function(target, room, user) {
@@ -617,6 +649,12 @@ exports.commands = {
 			output += '<button name="send" value="/vote ' + room.answerList[u] + '">' + Tools.escapeHTML(room.answerList[u]) + '</button>&nbsp;';
 		}
 		this.sendReply('|raw|<div class="infobox"><h2>' + Tools.escapeHTML(room.question) + separacion + '<font font size=1 color = "#939393"><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + output + '</div>');
+	},
+	votes: function(target, room, user) {
+		if (!room.answers) room.answers = new Object();
+		if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
+		if (!this.canBroadcast()) return;
+		this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
 	},
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
@@ -642,7 +680,7 @@ exports.commands = {
 		var question = answers[0];
 		question = Tools.escapeHTML(question);
 		answers.splice(0, 1);
-		var answers = answers.join(',').toLowerCase().split(',');
+		answers = answers.join(',').toLowerCase().split(',');
 		room.question = question;
 		room.answerList = answers;
 		room.usergroup = Config.groupsranking.indexOf(user.group);
@@ -682,7 +720,7 @@ exports.commands = {
 		var sortable = new Array();
 		for (var i in options) sortable.push([i, options[i]]);
 		sortable.sort(function(a, b) {
-			return a[1] - b[1]
+			return a[1] - b[1];
 		});
 		var html = "";
 		for (var i = sortable.length - 1; i > -1; i--) {

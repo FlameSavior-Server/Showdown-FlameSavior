@@ -588,7 +588,7 @@ exports.commands = {
     ud: 'urbandefine',
     urbandefine: function(target, room, user) {
     	if (!this.canBroadcast()) return;
-    	if (!target) return this.parse('/help urbandefine')
+    	if (!target) return this.parse('/help urbandefine');
     	if (target > 50) return this.sendReply('Phrase can not be longer than 50 characters.');
     	var self = this;
     	var options = {

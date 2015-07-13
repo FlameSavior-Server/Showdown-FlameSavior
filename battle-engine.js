@@ -44,28 +44,8 @@ global.toId = function (text) {
 		text = text.userid;
 	}
 
-	return string(text).toLowerCase().replace(/[^a-z0-9]+/g, '');
-};
-
-/**
- * Validates a username or Pokemon nickname
- */
-global.toName = function (name) {
-	name = string(name);
-	name = name.replace(/[\|\s\[\]\,]+/g, ' ').trim();
-	if (name.length > 18) name = name.substr(0, 18).trim();
-	return name;
-};
-
-/**
- * Safely ensures the passed variable is a string
- * Simply doing '' + str can crash if str.toString crashes or isn't a function
- * If we're expecting a string and being given anything that isn't a string
- * or a number, it's safe to assume it's an error, and return ''
- */
-global.string = function (str) {
-	if (typeof str === 'string' || typeof str === 'number') return '' + str;
-	return '';
+	if (typeof text !== 'string' && typeof text !== 'number') return '';
+	return ('' + text).toLowerCase().replace(/[^a-z0-9]+/g, '');
 };
 
 global.Tools = require('./tools.js');
@@ -513,10 +493,10 @@ BattlePokemon = (function () {
 		return null;
 	};
 	BattlePokemon.prototype.ignoringAbility = function () {
-		return !!this.volatiles['gastroacid'];
+		return !!((this.battle.gen >= 5 && !this.isActive) || this.volatiles['gastroacid']);
 	};
 	BattlePokemon.prototype.ignoringItem = function () {
-		return !!(this.hasAbility('klutz') || this.volatiles['embargo'] || this.battle.pseudoWeather['magicroom']);
+		return !!((this.battle.gen >= 5 && !this.isActive) || this.hasAbility('klutz') || this.volatiles['embargo'] || this.battle.pseudoWeather['magicroom']);
 	};
 	BattlePokemon.prototype.deductPP = function (move, amount, source) {
 		move = this.battle.getMove(move);
@@ -795,7 +775,14 @@ BattlePokemon = (function () {
 			evasion: 0
 		};
 
-		this.moveset = this.baseMoveset.slice();
+		if (this.battle.gen === 1 && this.baseMoves.indexOf('mimic') >= 0 && !this.transformed) {
+			var moveslot = this.baseMoves.indexOf('mimic');
+			var mimicPP = this.moveset[moveslot] ? this.moveset[moveslot].pp : 16;
+			this.moveset = this.baseMoveset.slice();
+			this.moveset[moveslot].pp = mimicPP;
+		} else {
+			this.moveset = this.baseMoveset.slice();
+		}
 		this.moves = this.moveset.map(function (move) {
 			return toId(move.move);
 		});
@@ -1113,7 +1100,6 @@ BattlePokemon = (function () {
 		return this.battle.getAbility(this.ability);
 	};
 	BattlePokemon.prototype.hasAbility = function (ability) {
-		if (!this.isActive && this.battle.gen >= 5) return false;
 		if (this.ignoringAbility()) return false;
 		var ownAbility = this.ability;
 		if (!Array.isArray(ability)) {
@@ -1594,9 +1580,8 @@ Battle = (function () {
 					proto[i] = Battle.prototype[i];
 				}
 				var battle = Object.create(proto);
-				var ret = Object.create(battle);
-				tools.install(ret);
-				return (battleProtoCache[formatarg] = ret);
+				tools.install(battle);
+				return (battleProtoCache[formatarg] = battle);
 			})());
 			Battle.prototype.init.call(battle, roomid, formatarg, rated);
 			return battle;
@@ -1815,7 +1800,7 @@ Battle = (function () {
 		if (this.event) {
 			if (!target) target = this.event.target;
 		}
-		if (!this.runEvent('TryWeather', target)) return '';
+		if (this.suppressingWeather()) return '';
 		return this.weather;
 	};
 	Battle.prototype.isWeather = function (weather, target) {
@@ -1924,6 +1909,18 @@ Battle = (function () {
 	};
 	Battle.prototype.suppressingAttackEvents = function () {
 		return (this.activePokemon && this.activePokemon.isActive && !this.activePokemon.ignoringAbility() && this.activePokemon.getAbility().stopAttackEvents);
+	};
+	Battle.prototype.suppressingWeather = function () {
+		var pokemon;
+		for (var i = 0; i < this.sides.length; i++) {
+			for (var j = 0; j < this.sides[i].active.length; j++) {
+				pokemon = this.sides[i].active[j];
+				if (pokemon && !pokemon.ignoringAbility() && pokemon.getAbility().suppressWeather) {
+					return true;
+				}
+			}
+		}
+		return false;
 	};
 	Battle.prototype.setActiveMove = function (move, pokemon, target) {
 		if (!move) move = null;
@@ -2058,7 +2055,7 @@ Battle = (function () {
 			// it's changed; call it off
 			return relayVar;
 		}
-		if (eventid !== 'Start' && effect.effectType === 'Item' && (target instanceof BattlePokemon) && target.ignoringItem()) {
+		if (eventid !== 'Start' && eventid !== 'TakeItem' && effect.effectType === 'Item' && (target instanceof BattlePokemon) && target.ignoringItem()) {
 			this.debug(eventid + ' handler suppressed by Embargo, Klutz or Magic Room');
 			return relayVar;
 		}
@@ -2066,7 +2063,7 @@ Battle = (function () {
 			this.debug(eventid + ' handler suppressed by Gastro Acid');
 			return relayVar;
 		}
-		if (effect.effectType === 'Weather' && eventid !== 'TryWeather' && !this.runEvent('TryWeather', target)) {
+		if (effect.effectType === 'Weather' && eventid !== 'TryWeather' && this.suppressingWeather()) {
 			this.debug(eventid + ' handler suppressed by Air Lock');
 			return relayVar;
 		}
@@ -2244,7 +2241,6 @@ Battle = (function () {
 					Accuracy: 1,
 					RedirectTarget: 1,
 					Heal: 1,
-					TakeItem: 1,
 					SetStatus: 1,
 					CriticalHit: 1,
 					ModifyPokemon: 1,
@@ -2269,7 +2265,7 @@ Battle = (function () {
 					continue;
 				}
 			}
-			if (eventid !== 'Start' && status.effectType === 'Item' && (thing instanceof BattlePokemon) && thing.ignoringItem()) {
+			if (eventid !== 'Start' && eventid !== 'TakeItem' && status.effectType === 'Item' && (thing instanceof BattlePokemon) && thing.ignoringItem()) {
 				if (eventid !== 'ModifyPokemon' && eventid !== 'Update') {
 					this.debug(eventid + ' handler suppressed by Embargo, Klutz or Magic Room');
 				}
@@ -2280,7 +2276,7 @@ Battle = (function () {
 				}
 				continue;
 			}
-			if ((status.effectType === 'Weather' || eventid === 'Weather') && eventid !== 'TryWeather' && !this.runEvent('TryWeather', target)) {
+			if ((status.effectType === 'Weather' || eventid === 'Weather') && eventid !== 'TryWeather' && this.suppressingWeather()) {
 				this.debug(eventid + ' handler suppressed by Air Lock');
 				continue;
 			}
@@ -2705,6 +2701,7 @@ Battle = (function () {
 				pokemon.copyVolatileFrom(oldActive);
 			}
 		}
+		pokemon.isActive = true;
 		this.runEvent('BeforeSwitchIn', pokemon);
 		if (side.active[pos]) {
 			var oldActive = side.active[pos];
@@ -2719,14 +2716,13 @@ Battle = (function () {
 			oldActive.clearVolatile();
 		}
 		side.active[pos] = pokemon;
-		pokemon.isActive = true;
 		pokemon.activeTurns = 0;
 		for (var m in pokemon.moveset) {
 			pokemon.moveset[m].used = false;
 		}
 		this.add('switch', pokemon, pokemon.getDetails);
 		pokemon.update();
-		this.addQueue({pokemon: pokemon, choice: 'runSwitch'});
+		this.insertQueue({pokemon: pokemon, choice: 'runSwitch'});
 	};
 	Battle.prototype.canSwitch = function (side) {
 		var canSwitchIn = [];
@@ -2795,7 +2791,7 @@ Battle = (function () {
 				this.singleEvent('Start', pokemon.getItem(), pokemon.itemData, pokemon);
 			}
 		} else {
-			this.addQueue({pokemon: pokemon, choice: 'runSwitch'});
+			this.insertQueue({pokemon: pokemon, choice: 'runSwitch'});
 		}
 		return true;
 	};
@@ -2908,7 +2904,7 @@ Battle = (function () {
 
 		this.residualEvent('TeamPreview');
 
-		this.addQueue({choice:'start'});
+		this.addQueue({choice: 'start'});
 		this.midTurn = true;
 		if (!this.currentRequest) this.go();
 	};
@@ -3485,24 +3481,17 @@ Battle = (function () {
 		}
 		return false;
 	};
-	Battle.prototype.addQueue = function (decision, noSort, side) {
+	Battle.prototype.resolvePriority = function (decision) {
 		if (decision) {
-			if (Array.isArray(decision)) {
-				for (var i = 0; i < decision.length; i++) {
-					this.addQueue(decision[i], noSort);
-				}
-				return;
-			}
-			if (!decision.side && side) decision.side = side;
 			if (!decision.side && decision.pokemon) decision.side = decision.pokemon.side;
 			if (!decision.choice && decision.move) decision.choice = 'move';
 			if (!decision.priority) {
 				var priorities = {
 					'beforeTurn': 100,
 					'beforeTurnMove': 99,
-					'switch': 6,
-					'runSwitch': 6.1,
-					'megaEvo': 5.9,
+					'switch': 7,
+					'runSwitch': 7.1,
+					'megaEvo': 6.9,
 					'residual': -100,
 					'team': 102,
 					'start': 101
@@ -3513,7 +3502,7 @@ Battle = (function () {
 			}
 			if (decision.choice === 'move') {
 				if (this.getMove(decision.move).beforeTurnCallback) {
-					this.addQueue({choice: 'beforeTurnMove', pokemon: decision.pokemon, move: decision.move, targetLoc: decision.targetLoc}, true);
+					this.addQueue({choice: 'beforeTurnMove', pokemon: decision.pokemon, move: decision.move, targetLoc: decision.targetLoc});
 				}
 			} else if (decision.choice === 'switch') {
 				if (decision.pokemon.switchFlag && decision.pokemon.switchFlag !== true) {
@@ -3548,11 +3537,39 @@ Battle = (function () {
 				// if there's no actives, switches happen before activations
 				decision.priority = 6.2;
 			}
-
-			this.queue.push(decision);
 		}
-		if (!noSort) {
-			this.queue.sort(Battle.comparePriority);
+	};
+	Battle.prototype.addQueue = function (decision) {
+		if (Array.isArray(decision)) {
+			for (var i = 0; i < decision.length; i++) {
+				this.addQueue(decision[i]);
+			}
+			return;
+		}
+
+		this.resolvePriority(decision);
+		this.queue.push(decision);
+	};
+	Battle.prototype.sortQueue = function () {
+		this.queue.sort(Battle.comparePriority);
+	};
+	Battle.prototype.insertQueue = function (decision) {
+		if (Array.isArray(decision)) {
+			for (var i = 0; i < decision.length; i++) {
+				this.insertQueue(decision[i]);
+			}
+			return;
+		}
+
+		this.resolvePriority(decision);
+		for (var i = 0; i <= this.queue.length; i++) {
+			if (i === this.queue.length) {
+				this.queue.push(decision);
+				break;
+			} else if (Battle.comparePriority(decision, this.queue[i]) < 0) {
+				this.queue.splice(i, 0, decision);
+				break;
+			}
 		}
 	};
 	Battle.prototype.prioritizeQueue = function (decision, source, sourceEffect) {
@@ -3608,7 +3625,7 @@ Battle = (function () {
 	Battle.prototype.willSwitch = function (pokemon) {
 		for (var i = 0; i < this.queue.length; i++) {
 			if (this.queue[i].choice === 'switch' && this.queue[i].pokemon === pokemon) {
-				return true;
+				return this.queue[i];
 			}
 		}
 		return false;
@@ -3807,11 +3824,10 @@ Battle = (function () {
 		}
 
 		if (!this.midTurn) {
-			this.queue.push({choice:'residual', priority: -100});
-			this.queue.push({choice:'beforeTurn', priority: 100});
+			this.queue.push({choice: 'residual', priority: -100});
+			this.queue.unshift({choice: 'beforeTurn', priority: 100});
 			this.midTurn = true;
 		}
-		this.addQueue(null);
 
 		while (this.queue.length) {
 			var decision = this.queue.shift();
@@ -3830,18 +3846,16 @@ Battle = (function () {
 		this.queue = [];
 	};
 	/**
-	 * Changes a pokemon's decision.
+	 * Changes a pokemon's decision, and inserts its new decision
+	 * in priority order.
 	 *
-	 * The un-modded game should not use this function for anything,
-	 * since it rerolls speed ties (which messes up RNG state).
-	 *
-	 * You probably want the OverrideDecision event (which doesn't
+	 * You'd normally want the OverrideDecision event (which doesn't
 	 * change priority order).
 	 */
 	Battle.prototype.changeDecision = function (pokemon, decision) {
 		this.cancelDecision(pokemon);
 		if (!decision.pokemon) decision.pokemon = pokemon;
-		this.addQueue(decision);
+		this.insertQueue(decision);
 	};
 	/**
 	 * Takes a choice string passed from the client. Starts the next
@@ -3881,12 +3895,16 @@ Battle = (function () {
 		}
 	};
 	Battle.prototype.commitDecisions = function () {
+		var oldQueue = this.queue;
+		this.queue = [];
 		if (this.p1.decision !== true) {
-			this.addQueue(this.p1.resolveDecision(), true, this.p1);
+			this.addQueue(this.p1.resolveDecision());
 		}
 		if (this.p2.decision !== true) {
-			this.addQueue(this.p2.resolveDecision(), true, this.p2);
+			this.addQueue(this.p2.resolveDecision());
 		}
+		this.sortQueue();
+		Array.prototype.push.apply(this.queue, oldQueue);
 
 		this.currentRequest = '';
 		this.currentRequestDetails = '';

@@ -97,6 +97,8 @@ exports.commands = {
 	},
 
 	atm: 'wallet',
+	purse: 'wallet',
+	fannypack: 'wallet',
 	wallet: function (target, room, user) {
 		if (!target) target = user.name;
 		if (!this.canBroadcast()) return;

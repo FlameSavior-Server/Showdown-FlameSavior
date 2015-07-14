@@ -195,6 +195,11 @@ var commands = exports.commands = {
 			}
 		}
 
+		var emoticons = parseEmoticons(user.getIdentity(room.id), target);
+		if (emoticons) {
+		    target = "/html " + emoticons;
+		}
+
 		var message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
 		user.send(message);
 		if (targetUser !== user) targetUser.send(message);

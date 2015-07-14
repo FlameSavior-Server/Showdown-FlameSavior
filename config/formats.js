@@ -251,6 +251,25 @@ exports.Formats = [
 		}
 	},
 	{
+		name: "Doubles Almost Any Ability",
+		section: "Other Metagames",
+                
+		gameType: 'doubles',
+		ruleset: ['Pokemon', 'Standard', 'Ability Clause','Swagger Clause', 'Team Preview',],
+		banlist: ['Ignore Illegal Abilities', 'Arceus', 'Archeops','Mewtwo', 'Lugia', 'Ho-Oh', 'Kyogre', 'Groudon', 'Rayquaza', 'Dialga', 'Palkia', 'Giratina', 'Giratina-O', 'Reshiram', 'Zekrom', 'Kyurem-White', 'Xerneas', 'Yvetal', 'Salamencite', 'Soul Dew', 'Kyurem-Black', 'Regigigas', 'Shedinja', 'Slaking', 'Smeargle'],
+		validateSet: function (set) {
+			var bannedAbilities = {'Arena Trap': 1, 'Contrary': 1, 'Fur Coat': 1, 'Huge Power': 1, 'Imposter': 1, 'Parental Bond': 1, 'Protean': 1, 'Pure Power': 1, 'Shadow Tag': 1, 'Simple':1, 'Speed Boost': 1, 'Wonder Guard': 1};
+			if (set.ability in bannedAbilities) {
+				var template = this.getTemplate(set.species || set.name);
+				var legalAbility = false;
+				for (var i in template.abilities) {
+					if (set.ability === template.abilities[i]) legalAbility = true;
+				}
+				if (!legalAbility) return ['The ability ' + set.ability + ' is banned on Pok\u00e9mon that do not naturally have it.'];
+			}
+		}
+	},
+	{
 		name: "Doubles Hackmons Cup",
 		section: "ORAS Doubles",
 

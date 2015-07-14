@@ -479,17 +479,35 @@ var commands = exports.commands = {
 		}
 	},
 
+
+	roomfounder: function (target, room, user) {
+		if (!room.chatRoomData) {
+			return this.sendReply("/roomfounder - This room isn't designed for per-room moderation to be added.");
+		}
+		target = this.splitTarget(target, true);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
+		if (!this.can('makeroom')) return false;
+		if (!room.auth) room.auth = room.chatRoomData.auth = {};
+		room.auth[targetUser.userid] = '#';
+		room.founder = targetUser.userid;
+		this.addModCommand(targetUser.name + ' was appointed to Room Founder by ' + user.name + '.');
+		room.onUpdateIdentity(targetUser);
+		room.chatRoomData.founder = room.founder;
+		Rooms.global.writeChatRoomData();
+	},
+
 	roomowner: function (target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomowner - This room isn't designed for per-room moderation to be added");
 		}
-		if (!target) return this.parse('/help roomowner');
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 
 		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
 
-		if (!this.can('makeroom', targetUser, room)) return false;
+		if (!room.founder) return this.sendReply('The room needs a room founder before it can have a room owner.');
+		if (room.founder !== user.userid && !this.can('makeroom')) return this.sendReply('/roomowner - Access denied.');
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
@@ -507,15 +525,14 @@ var commands = exports.commands = {
 		if (!room.auth) {
 			return this.sendReply("/roomdeowner - This room isn't designed for per-room moderation");
 		}
-		if (!target) return this.parse('/help roomdeowner');
 		target = this.splitTarget(target, true);
 		var targetUser = this.targetUser;
 		var name = this.targetUsername;
 		var userid = toId(name);
 		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
 
-		if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
-		if (!this.can('makeroom', null, room)) return false;
+		if (room.auth[userid] !== '#') return this.sendReply("User '"+name+"' is not a room owner.");
+		if (!room.founder || user.userid !== room.founder && !this.can('makeroom', null, room)) return false;
 
 		delete room.auth[userid];
 		this.sendReply("(" + name + " is no longer Room Owner.)");
@@ -610,6 +627,7 @@ var commands = exports.commands = {
 		}
 
 		var buffer = [];
+		if (room.founder) buffer.push('Room Founder:\n' + room.founder);
 		Object.keys(rankLists).sort(function (a, b) {
 			return (Config.groups[b] || {rank:0}).rank - (Config.groups[a] || {rank:0}).rank;
 		}).forEach(function (r) {

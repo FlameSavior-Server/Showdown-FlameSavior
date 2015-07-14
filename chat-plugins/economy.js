@@ -6,8 +6,8 @@ var db = new sqlite3.Database('config/users.db', function() {
 var fs = require('fs');
 var http = require('http');
 var MD5 = require('MD5');
-var shopTitle = 'Shop';
-var serverIp = '127.0.0.1';
+var shopTitle = 'Luster Shop';
+var serverIp = '167.114.152.79';
 
 var prices = {
 	"customsymbol": 5,

@@ -120,7 +120,7 @@ exports.commands = {
 		try {
 			switch (toId(parts[0])) {
 				case 'add':
-					if (!this.can('ban')) return this.sendReply("Access denied.");
+					if (!this.can('hotpatch')) return this.sendReply("Access denied.");
 					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /ezemote add, [emoticon], [link]");
 					var emoteName = parts[1];
 					if (Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " already exists.");
@@ -138,7 +138,7 @@ exports.commands = {
 				case 'remove':
 				case 'del':
 				case 'delete':
-					if (!this.can('ban')) return this.sendReply("Access denied.");
+					if (!this.can('hotpatch')) return this.sendReply("Access denied.");
 					if (!parts[1]) return this.sendReplyBox("/ezemote remove, [emoticon]");
 					emoteName = parts[1];
 					if (!Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " does not exist.");
@@ -226,8 +226,8 @@ exports.commands = {
 						"<table bgcolor=\"#ADD8E6\" width=\"100%\"><td>" +
 							"<center><b>EZ-Emoticon Commands:</b><br />" +
 							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/ez-emotes.js\">panpawn</a>)</font></i></center><br />" +
-							"/ezemote <code>add, [emote], [link]</code> - Adds a chat emoticon. Requires @, &, ~.<br />" +
-							"/ezemote <code>remove, [emote]</code> - Removes a chat emoticon. Requires @, &, ~.<br />" +
+							"/ezemote <code>add, [emote], [link]</code> - Adds a chat emoticon. Requires ~.<br />" +
+							"/ezemote <code>remove, [emote]</code> - Removes a chat emoticon. Requires ~.<br />" +
 							"/ezemote <code>status, [on / off]</code> - Enables or disables the status of chat emoticons in the respected room. Requires #, &, ~.<br />" +
 							"/ezemote <code>status</code> - Views the current status of chat emoticons.<br />" +
 							"/ezemote <code>list</code> - Shows the chat emoticons in a list form.<br />" +

@@ -600,10 +600,12 @@ exports.Formats = [
 		section: "Other Metagames",
                 
 		gameType: 'doubles',
-		ruleset: ['Pokemon', 'Standard', 'Ability Clause','Swagger Clause', 'Team Preview',],
-		banlist: ['Ignore Illegal Abilities', 'Arceus', 'Archeops','Mewtwo', 'Lugia', 'Ho-Oh', 'Kyogre', 'Groudon', 'Rayquaza', 'Dialga', 'Palkia', 'Giratina', 'Giratina-O', 'Reshiram', 'Zekrom', 'Kyurem-White', 'Xerneas', 'Yvetal', 'Salamencite', 'Soul Dew', 'Kyurem-Black', 'Regigigas', 'Shedinja', 'Slaking', 'Smeargle'],
+		ruleset: ['Pokemon', 'Standard', 'Ability Clause', 'Team Preview',],
+		banlist: ['Ignore Illegal Abilities',
+			'Arceus', 'Archeops','Mewtwo', 'Lugia', 'Ho-Oh', 'Kyogre', 'Groudon', 'Rayquaza', 'Dialga', 'Palkia', 'Giratina', 'Giratina-O', 'Reshiram', 'Zekrom', 'Kyurem-White', 'Kyurem-Black', 'Xerneas', 'Yvetal', 'Soul Dew', 'Kyurem-Black', 'Regigigas', 'Shedinja', 'Slaking', 'Smeargle'
+		],
 		validateSet: function (set) {
-			var bannedAbilities = {'Arena Trap': 1, 'Contrary': 1, 'Fur Coat': 1, 'Huge Power': 1, 'Imposter': 1, 'Parental Bond': 1, 'Protean': 1, 'Pure Power': 1, 'Shadow Tag': 1, 'Simple':1, 'Speed Boost': 1, 'Wonder Guard': 1};
+			var bannedAbilities = {'Anger Point': 1, 'Arena Trap': 1, 'Contrary': 1, 'Fur Coat': 1, 'Huge Power': 1, 'Imposter': 1, 'Justified': 1, 'Moody': 1, 'Normalize': 1, 'Parental Bond': 1, 'Protean': 1, 'Pure Power': 1, 'Shadow Tag': 1, 'Serene Grace': 1, 'Simple':1, 'Speed Boost': 1, 'Truant': 1, 'Wonder Guard': 1};
 			if (set.ability in bannedAbilities) {
 				var template = this.getTemplate(set.species || set.name);
 				var legalAbility = false;

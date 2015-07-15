@@ -20,7 +20,7 @@ Adding this plugin to your server is fairly simple.
     }
 */
  
-/*var fs = require('fs');
+var fs = require('fs');
 var emoticons = {'feelsbd': 'http://i.imgur.com/TZvJ1lI.png'};
 var emoteRegex = new RegExp('feelsbd', 'g');
  
@@ -219,4 +219,4 @@ function toHex(N) {
     N = Math.min(N, 255);
     N = Math.round(N);
     return "0123456789ABCDEF".charAt((N - N % 16) / 16) + "0123456789ABCDEF".charAt(N % 16);
-}*/
+}

@@ -88,10 +88,10 @@ var Room = (function () {
 		message = CommandParser.parse(message, this, user, connection);
 
 		if (message && message !== true) {
-			/*var emoticons = parseEmoticons(user.getIdentity(this.roomid), message);
-			if (emoticons && !room.disableEmoticons) {
+			var emoticons = parseEmoticons(user.getIdentity(this.roomid), message);
+			if (emoticons && !this.disableEmoticons) {
 			    this.addRaw(emoticons);
-			} else {*/
+			} else {
 			    this.add('|c|' + user.getIdentity(this.id) + '|' + message);
 			}
 		}

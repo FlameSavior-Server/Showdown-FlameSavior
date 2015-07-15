@@ -46,7 +46,7 @@ function saveEmoticons () {
 }
  
 function parseEmoticons (user, message) {
-    var html = user.charAt(0) + '<button class="astext" name="parseCommand" value="/user ' + toId(user) + '">' + '<b><font color="' + hashColor(toId(user)) + '">' + Tools.escapeHTML(user.substr(1)) + ':</font></b></button> ';
+    var html = user.charAt(0) + '<button class="emote-chat" name="parseCommand" value="/user ' + toId(user) + '">' + '<b><font color="' + hashColor(toId(user)) + '">' + Tools.escapeHTML(user.substr(1)) + ':</font></b></button> ';
 	if (emoteRegex.test(message)) {
 			message = Tools.escapeHTML(message).replace(emoteRegex, function (match) {
 			return '<img src=' + emoticons[match] + '>';

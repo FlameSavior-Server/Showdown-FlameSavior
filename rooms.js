@@ -89,7 +89,7 @@ var Room = (function () {
 
 		if (message && message !== true) {
 			var emoticons = parseEmoticons(user.getIdentity(this.roomid), message);
-			if (emoticons && !this.disableEmoticons) {
+			if (emoticons && this.disableEmoticons) {
 			    this.addRaw(emoticons);
 			} else {
 			    this.add('|c|' + user.getIdentity(this.id) + '|' + message);

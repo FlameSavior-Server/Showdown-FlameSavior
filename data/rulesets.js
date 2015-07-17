@@ -89,7 +89,8 @@ exports.BattleFormats = {
 			'Xerneas',
 			'Yveltal',
 			'Zygarde',
-			'Diancie'
+			'Diancie',
+			'Hoopa', 'Hoopa-Unbound'
 		]
 	},
 	standarddoubles: {
@@ -487,7 +488,7 @@ exports.BattleFormats = {
 			for (var i = 0; i < team.length; i++) {
 				var ability = toId(team[i].ability);
 				if (ability === 'refrigerate' || ability === 'pixilate' || ability === 'aerilate') {
-					if (ateAbility) return ["You have more than one of Aerilate/Refrigerate/Pixilate, which is banned by -ate Clause."];
+					if (ateAbility) return [team[i].name + " has more than one of Aerilate/Refrigerate/Pixilate, which is banned by -ate Clause."];
 					ateAbility = true;
 				}
 			}
@@ -528,7 +529,12 @@ exports.BattleFormats = {
 	endlessbattleclause: {
 		effectType: 'Banlist',
 		name: 'Endless Battle Clause',
-		banlist: ['Leppa Berry + Recycle', 'Harvest + Leppa Berry', 'Shadow Tag + Leppa Berry + Trick'],
+		banlist: ['Leppa Berry + Recycle', 'Harvest + Leppa Berry', 'Leppa Berry + Trick', 'Leppa Berry + Switcheroo', 'Leppa Berry + Bestow'],
+		validateSet: function (set, format, setHas) {
+			if (format.gameType === 'singles' && 'healpulse' in setHas) {
+				return [set.name + " has Heal Pulse, which is banned in Singles by Endless Battle Clause."];
+			}
+		},
 		onStart: function () {
 			this.add('rule', 'Endless Battle Clause: Forcing endless battles is banned');
 		}
@@ -562,7 +568,7 @@ exports.BattleFormats = {
 					BPcount++;
 				}
 				if (BPcount > 1) {
-					return ["You are limited to one Pokémon with the move Baton Pass by the Baton Pass Clause."];
+					return [team[i].name + " has Baton Pass, but you are limited to one Baton Pass user by Baton Pass Clause."];
 				}
 			}
 		},
@@ -609,7 +615,7 @@ exports.BattleFormats = {
 			}
 			if (!nonSpeedBoosted) return;
 
-			return ["You can't boost both Speed and a different stat on the same set because of Baton Pass Clause."];
+			return [set.name + " can Baton Pass both Speed and a different stat, which is banned by Baton Pass Clause."];
 		}
 	},
 	hppercentagemod: {

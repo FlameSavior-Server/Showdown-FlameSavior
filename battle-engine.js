@@ -2063,7 +2063,7 @@ Battle = (function () {
 			this.debug(eventid + ' handler suppressed by Gastro Acid');
 			return relayVar;
 		}
-		if (effect.effectType === 'Weather' && eventid !== 'TryWeather' && this.suppressingWeather()) {
+		if (effect.effectType === 'Weather' && eventid !== 'Start' && eventid !== 'Residual' && eventid !== 'End' && this.suppressingWeather()) {
 			this.debug(eventid + ' handler suppressed by Air Lock');
 			return relayVar;
 		}
@@ -2250,6 +2250,7 @@ Battle = (function () {
 					ModifyWeight: 1,
 					TryHit: 1,
 					TryHitSide: 1,
+					TryMove: 1,
 					TrySecondaryHit: 1,
 					Hit: 1,
 					Boost: 1,
@@ -2276,7 +2277,7 @@ Battle = (function () {
 				}
 				continue;
 			}
-			if ((status.effectType === 'Weather' || eventid === 'Weather') && eventid !== 'TryWeather' && this.suppressingWeather()) {
+			if ((status.effectType === 'Weather' || eventid === 'Weather') && eventid !== 'Residual' && eventid !== 'End' && this.suppressingWeather()) {
 				this.debug(eventid + ' handler suppressed by Air Lock');
 				continue;
 			}
@@ -3485,7 +3486,7 @@ Battle = (function () {
 		if (decision) {
 			if (!decision.side && decision.pokemon) decision.side = decision.pokemon.side;
 			if (!decision.choice && decision.move) decision.choice = 'move';
-			if (!decision.priority) {
+			if (!decision.priority && decision.priority !== 0) {
 				var priorities = {
 					'beforeTurn': 100,
 					'beforeTurnMove': 99,
@@ -3496,7 +3497,7 @@ Battle = (function () {
 					'team': 102,
 					'start': 101
 				};
-				if (priorities[decision.choice]) {
+				if (decision.choice in priorities) {
 					decision.priority = priorities[decision.choice];
 				}
 			}

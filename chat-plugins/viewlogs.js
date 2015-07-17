@@ -29,7 +29,8 @@ exports.commands = {
 		for (var u in targetSplit) targetSplit[u] = targetSplit[u].trim();
 		var targetRoom = targetSplit[0];
 		if (toId(targetRoom) === 'staff' && !user.can('warn')) return this.sendReply("/viewlogs - Access denied.");
-		if (toId(targetRoom) === 'seniorstaff' && !user.can('hotpatch')) return this.sendReply("/viewlogs - Access denied.");
+		if (toId(targetRoom) === 'administrators' && !user.can('hotpatch')) return this.sendReply("/viewlogs - Access denied.");
+		if (toId(targetRoom) === 'upperstaff' && !user.can('pban')) return this.sendReply("/viewlogs - Access denied.");
 		if (Rooms(targetRoom) && Rooms(targetRoom).isPrivate && !user.can('warn', null, Rooms(targetRoom))) return this.sendReply("/viewlogs - Access denied.");
 		var date = targetSplit[1];
 		var splitDate = date.split('-');

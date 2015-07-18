@@ -2057,7 +2057,7 @@ var commands = exports.commands = {
 		var searches = {};
 		var allTiers = {'uber':1, 'ou':1, 'bl':1, 'uu':1, 'bl2':1, 'ru':1, 'bl3':1, 'nu':1, 'bl4':1, 'pu':1, 'nfe':1, 'lc uber':1, 'lc':1, 'cap':1};
 		var allColours = {'green':1, 'red':1, 'blue':1, 'white':1, 'brown':1, 'yellow':1, 'purple':1, 'pink':1, 'gray':1, 'black':1};
-		var allStats = {'hp':1, 'atk':1, 'def':1, 'spa':1, 'spd':1, 'spe':1};
+		var allStats = {'hp':1, 'atk':1, 'def':1, 'spa':1, 'spd':1, 'spe':1, 'bst':1};
 		var showAll = false;
 		var megaSearch = null;
 		var randomOutput = 0;
@@ -2338,14 +2338,22 @@ var commands = exports.commands = {
 			case 'stats':
 				for (var stat in searches[search]) {
 					for (var mon in dex) {
+						var monStat = 0;
+						if (stat === 'bst') {
+							for (var monStats in dex[mon].baseStats) {
+								monStat += dex[mon].baseStats[monStats];
+							}
+						} else {
+							monStat = dex[mon].baseStats[stat];
+						}
 						if (typeof searches[search][stat].less === 'number') {
-							if (dex[mon].baseStats[stat] > searches[search][stat].less) {
+							if (monStat > searches[search][stat].less) {
 								delete dex[mon];
 								continue;
 							}
 						}
 						if (typeof searches[search][stat].greater === 'number') {
-							if (dex[mon].baseStats[stat] < searches[search][stat].greater) {
+							if (monStat < searches[search][stat].greater) {
 								delete dex[mon];
 								continue;
 							}
@@ -3250,10 +3258,14 @@ var commands = exports.commands = {
 				if (move.id === 'thousandarrows') hasThousandArrows = true;
 				sources.push(move);
 				for (var type in bestCoverage) {
-					if (!Tools.getImmunity(move.type, type) && !move.ignoreImmunity) continue;
-					var baseMod = Tools.getEffectiveness(move, type);
-					var moveMod = move.onEffectiveness && move.onEffectiveness.call(Tools, baseMod, type, move);
-					eff = typeof moveMod === 'number' ? moveMod : baseMod;
+					if (move.id === "struggle") {
+						eff = 0;
+					} else {
+						if (!Tools.getImmunity(move.type, type) && !move.ignoreImmunity) continue;
+						var baseMod = Tools.getEffectiveness(move, type);
+						var moveMod = move.onEffectiveness && move.onEffectiveness.call(Tools, baseMod, type, move);
+						eff = typeof moveMod === 'number' ? moveMod : baseMod;
+					}
 					if (eff > bestCoverage[type]) bestCoverage[type] = eff;
 				}
 				continue;
@@ -3910,19 +3922,17 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 
 		var targets = target.split(',');
-		if (toId(targets[0]) === 'previews') return this.sendReplyBox("<a href=\"https://www.smogon.com/forums/threads/sixth-generation-pokemon-analyses-index.3494918/\">Generation 6 Analyses Index</a>, brought to you by <a href=\"https://www.smogon.com\">Smogon University</a>");
 		var pokemon = Tools.getTemplate(targets[0]);
 		var item = Tools.getItem(targets[0]);
 		var move = Tools.getMove(targets[0]);
 		var ability = Tools.getAbility(targets[0]);
+		var format = Tools.getFormat(targets[0]);
 		var atLeastOne = false;
 		var generation = (targets[1] || 'xy').trim().toLowerCase();
 		var genNumber = 6;
-		// var doublesFormats = {'vgc2012':1, 'vgc2013':1, 'vgc2014':1, 'doubles':1};
-		var doublesFormats = {};
-		var doublesFormat = (!targets[2] && generation in doublesFormats) ? generation : (targets[2] || '').trim().toLowerCase();
-		var doublesText = '';
-		if (generation === 'xy' || generation === 'xy' || generation === '6' || generation === 'six') {
+		var extraFormat = Tools.getFormat(targets[2]);
+
+		if (generation === 'xy' || generation === 'oras' || generation === '6' || generation === 'six') {
 			generation = 'xy';
 		} else if (generation === 'bw' || generation === 'bw2' || generation === '5' || generation === 'five') {
 			generation = 'bw';
@@ -3942,15 +3952,6 @@ var commands = exports.commands = {
 		} else {
 			generation = 'xy';
 		}
-		if (doublesFormat !== '') {
-			// Smogon only has doubles formats analysis from gen 5 onwards.
-			if (!(generation in {'bw':1, 'xy':1}) || !(doublesFormat in doublesFormats)) {
-				doublesFormat = '';
-			} else {
-				doublesText = {'vgc2012':"VGC 2012", 'vgc2013':"VGC 2013", 'vgc2014':"VGC 2014", 'doubles':"Doubles"}[doublesFormat];
-				doublesFormat = '/' + doublesFormat;
-			}
-		}
 
 		// Pokemon
 		if (pokemon.exists) {
@@ -3963,9 +3964,19 @@ var commands = exports.commands = {
 
 			var illegalStartNums = {'351':1, '421':1, '487':1, '555':1, '647':1, '648':1, '649':1, '681':1};
 			if (pokemon.isMega || pokemon.num in illegalStartNums) pokemon = Tools.getTemplate(pokemon.baseSpecies);
-			var poke = pokemon.name.toLowerCase().replace(/\ /g, '_').replace(/[^a-z0-9\-\_]+/g, '');
+			var poke = pokemon.name.toLowerCase().replace(' ', '_').replace(/[^a-z0-9\-\_]+/g, '');
 
-			this.sendReplyBox("<a href=\"https://www.smogon.com/dex/" + generation + "/pokemon/" + poke + doublesFormat + "\">" + generation.toUpperCase() + " " + doublesText + " " + pokemon.name + " analysis</a>, brought to you by <a href=\"https://www.smogon.com\">Smogon University</a>");
+			var formatName = extraFormat.name;
+			var formatId = formatName.toLowerCase().replace(' ', '_').replace(/[^a-z0-9\-\_]+/g, '');
+			if (formatId === 'doubles_ou') {
+				formatId = 'doubles';
+			} else if (formatId.includes('vgc')) {
+				formatId = 'vgc' + formatId.slice(-2);
+				formatName = 'VGC20' + formatId.slice(-2);
+			} else if (extraFormat.effectType !== 'Format') {
+				formatName = formatId = '';
+			}
+			this.sendReplyBox("<a href=\"https://www.smogon.com/dex/" + generation + "/pokemon/" + poke + (formatId ? '/' + formatId : '') + "\">" + generation.toUpperCase() + " " + Tools.escapeHTML(formatName) + " " + pokemon.name + " analysis</a>, brought to you by <a href=\"https://www.smogon.com\">Smogon University</a>");
 		}
 
 		// Item
@@ -3989,8 +4000,26 @@ var commands = exports.commands = {
 			this.sendReplyBox("<a href=\"https://www.smogon.com/dex/" + generation + "/moves/" + moveName + "\">" + generation.toUpperCase() + " " + move.name + " move analysis</a>, brought to you by <a href=\"https://www.smogon.com\">Smogon University</a>");
 		}
 
+		// Format
+		if (format.id) {
+			var formatName = format.name;
+			var formatId = formatName.toLowerCase().replace(' ', '_').replace(/[^a-z0-9\-\_]+/g, '');
+			if (formatId === 'doubles_ou') {
+				formatId = 'doubles';
+			} else if (formatId.includes('vgc')) {
+				formatId = 'vgc' + formatId.slice(-2);
+				formatName = 'VGC20' + formatId.slice(-2);
+			} else if (format.effectType !== 'Format') {
+				formatName = formatId = '';
+			}
+			if (formatName) {
+				atLeastOne = true;
+				this.sendReplyBox("<a href=\"https://www.smogon.com/dex/" + generation + "/formats/" + formatId + "\">" + generation.toUpperCase() + " " + Tools.escapeHTML(formatName) + " format analysis</a>, brought to you by <a href=\"https://www.smogon.com\">Smogon University</a>");
+			}
+		}
+
 		if (!atLeastOne) {
-			return this.sendReplyBox("Pok&eacute;mon, item, move, or ability not found for generation " + generation.toUpperCase() + ".");
+			return this.sendReplyBox("Pok&eacute;mon, item, move, ability, or format not found for generation " + generation.toUpperCase() + ".");
 		}
 	},
 	smogdexhelp: ["/analysis [pokemon], [generation] - Links to the Smogon University analysis for this Pok\u00e9mon in the given generation.",
@@ -4031,7 +4060,7 @@ var commands = exports.commands = {
 		var diceQuantity = 1;
 		var diceDataStart = target.indexOf('d');
 		if (diceDataStart >= 0) {
-			diceQuantity = Number(target.slice(0, diceDataStart));
+			if (diceDataStart) diceQuantity = Number(target.slice(0, diceDataStart));
 			target = target.slice(diceDataStart + 1);
 			if (!Number.isInteger(diceQuantity) || diceQuantity <= 0 || diceQuantity > maxDice) return this.sendReply("The amount of dice rolled should be a natural number up to " + maxDice + ".");
 		}

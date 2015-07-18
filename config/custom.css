@@ -32,7 +32,7 @@
     cursor: pointer;
 }
 .header .logo {
-    display: none;
+    display: none !important; 
 }
 .chat-log-add {
     position: absolute;

@@ -510,6 +510,25 @@ exports.Formats = [
 		banlist: ['Groudon-Primal', 'Kyogre-Primal', 'Arena Trap', 'Huge Power', 'Parental Bond', 'Pure Power', 'Shadow Tag', 'Wonder Guard', 'Assist', 'Chatter']
 	},
 	{
+		name: "Doubles Balanced Hackmons",
+		section: "Other Metagames",
+                
+		gameType: 'doubles',
+		ruleset: ['Pokemon', 'Ability Clause', 'Sleep Clause Mod', 'OHKO Clause', 'Evasion Moves Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Team Preview',],
+		banlist: ['Primal Groudon', 'Primal Kyogre'],
+		validateSet: function (set) {
+			var bannedAbilities = {'Arena Trap': 1, 'Huge Power': 1, 'Parental Bond': 1, 'Pure Power': 1, 'Shadow Tag': 1, 'Wonder Guard': 1};
+			if (set.ability in bannedAbilities) {
+				var template = this.getTemplate(set.species || set.name);
+				var legalAbility = false;
+				for (var i in template.abilities) {
+					if (set.ability === template.abilities[i]) legalAbility = true;
+				}
+				if (!legalAbility) return ['The ability ' + set.ability + ' is banned on Pok\u00e9mon that do not naturally have it.'];
+			}
+		}
+	},
+	{
 		name: "1v1",
 		section: 'Other Metagames',
 

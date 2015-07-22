@@ -1218,13 +1218,16 @@ exports.BattleAbilities = {
 		shortDesc: "On switch-in, this Pokemon lowers the Attack of adjacent opponents by 1 stage.",
 		onStart: function (pokemon) {
 			var foeactive = pokemon.side.foe.active;
+			var activated = false;
 			for (var i = 0; i < foeactive.length; i++) {
 				if (!foeactive[i] || !this.isAdjacent(foeactive[i], pokemon)) continue;
+				if (!activated) {
+					this.add('-ability', pokemon, 'Intimidate');
+					activated = true;
+				}
 				if (foeactive[i].volatiles['substitute']) {
-					// does it give a message?
 					this.add('-activate', foeactive[i], 'Substitute', 'ability: Intimidate', '[of] ' + pokemon);
 				} else {
-					this.add('-ability', pokemon, 'Intimidate', '[of] ' + foeactive[i]);
 					this.boost({atk: -1}, foeactive[i], pokemon);
 				}
 			}
@@ -2932,6 +2935,7 @@ exports.BattleAbilities = {
 		onBeforeMove: function (pokemon, target, move) {
 			if (pokemon.removeVolatile('truant')) {
 				this.add('cant', pokemon, 'ability: Truant', move);
+				pokemon.isStaleHP++;
 				return false;
 			}
 			pokemon.addVolatile('truant');

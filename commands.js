@@ -22,6 +22,34 @@ const HOURMUTE_LENGTH = 60 * 60 * 1000;
 
 var commands = exports.commands = {
 
+	regdate: function(target, room, user, connection) {
+		if (!this.canBroadcast()) return;
+		if (!target || target === "0") target = toId(user.userid);
+		if (!target || target === "." || target === "," || target === "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
+		var username = toId(target);
+		target = target.replace(/\s+/g, '');
+		var request = require("request");
+		var self = this;
+		request('http://pokemonshowdown.com/users/~' + target, function(error, response, content) {
+			if (!(!error && response.statusCode == 200)) return;
+			content = content + '';
+			content = content.split("<em");
+			if (content[1]) {
+				content = content[1].split("</p>");
+				if (content[0]) {
+					content = content[0].split("</em>");
+					if (content[1]) {
+						regdate = content[1].split('</small>')[0] + '.';
+						data = Tools.escapeHTML(username) + ' was registered on' + regdate;
+					}
+				}
+			} else {
+				data = Tools.escapeHTML(username) + ' is not registered.';
+			}
+			self.sendReplyBox(Tools.escapeHTML(data));
+		});
+	},
+	
 	version: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("Server version: <b>" + CommandParser.package.version + "</b>");
@@ -236,21 +264,71 @@ var commands = exports.commands = {
 	},
 	unignorepmshelp: ["/unblockpms - Unblocks private messages. Block them with /blockpms."],
 
-	idle: 'away',
-	afk: 'away',
-	away: function (target, room, user) {
-		this.parse('/blockchallenges');
-		this.parse('/blockpms ' + target);
+	away: 'afk',
+	busy: 'afk',
+	sleep: 'afk',
+	asleep: 'afk',
+	eating: 'afk',
+	gaming: 'afk',
+	sleeping: 'afk',
+	afk: function(target, room, user, connection, cmd) {
+		if (!this.canTalk()) return;
+		if (user.name.length > 18) return this.sendReply('Your username exceeds the length limit.');
+		if (!user.isAway) {
+			user.originalName = user.name;
+			switch (cmd) {
+			    case 'asleep':
+                case 'sleepting':
+				case 'sleep':
+					awayName = user.name + ' - Ⓢⓛⓔⓔⓟ';
+					break;
+				case 'gaming':
+					awayName = user.name + ' - ⒼⒶⓂⒾⓃⒼ';
+					break;
+				case 'busy':
+					awayName = user.name + ' - Ⓑⓤⓢⓨ';
+					break;
+				case 'eating':
+					awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ';
+					break;
+				case 'afk':
+					awayName = user.name + ' - ⒶⒻⓀ';
+					break;
+				default:
+					awayName = user.name + ' - Ⓐⓦⓐⓨ';
+			}
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(awayName);
+			user.forceRename(awayName, undefined, true);
+			user.isAway = true;
+			this.parse('/blockchallenges');
+			this.parse('/blockpms ' + target);
+		} else {
+			return this.sendReply('You are already set as away, type /back if you are now back.');
+		}
 	},
-	awayhelp: ["/away - Blocks challenges and private messages. Unblock them with /back."],
-
-	unaway: 'back',
-	unafk: 'back',
-	back: function () {
-		this.parse('/unblockpms');
-		this.parse('/unblockchallenges');
+	
+	back: function(target, room, user, connection) {
+		if (!this.canTalk()) return;
+		if (user.isAway) {
+			if (user.name === user.originalName) {
+				user.isAway = false;
+				return this.sendReply('Your name has been left unaltered and no longer marked as away.');
+			}
+			var newName = user.originalName;
+			//delete the user object with the new name in case it exists - if it does it can cause issues with forceRename
+			delete Users.get(newName);
+			user.forceRename(newName, undefined, true);
+			//user will be authenticated
+			user.authenticated = true;
+			user.isAway = false;
+			this.parse('/unblockpms');
+			this.parse('/unblockchallenges');
+		} else {
+			return this.sendReply('You are not set as away.');
+		}
+		user.updateIdentity();
 	},
-	backhelp: ["/back - Unblocks challenges and/or private messages, if either are blocked."],
 
 	makeprivatechatroom: 'makechatroom',
 	makechatroom: function (target, room, user, connection, cmd) {
@@ -785,9 +863,22 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Moderating: Punishments
 	 *********************************************************/
-
-	kick: 'warn',
-	k: 'warn',
+	k: 'kick',
+	kick: function(target, room, user) {
+		if (!this.can('lock')) return false;
+		if (!target) return this.sendReply('/help kick');
+		if (!this.canTalk()) return false;
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser || !targetUser.connected) {
+			return this.sendReply('User ' + this.targetUsername + ' not found.');
+		}
+		if (!this.can('lock', targetUser, room)) return false;
+		this.addModCommand(targetUser.name + ' was kicked from the room by ' + user.name + '.');
+		targetUser.popup('You were kicked from ' + room.id + ' by ' + user.name + '.');
+		targetUser.leaveRoom(room.id);
+	},
+		
 	warn: function (target, room, user) {
 		if (!target) return this.parse('/help warn');
 		if (room.isMuted(user) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
@@ -1024,6 +1115,62 @@ var commands = exports.commands = {
 		return true;
 	},
 	banhelp: ["/ban OR /b [username], [reason] - Kick user from all rooms and ban user's IP address with reason. Requires: @ & ~"],
+
+	snipe: function (target, room, user, connection, cmd) {
+		if (toId(user.name) !== 'tesarand' && !this.can('ban', targetUser)) return false;		
+		if (!target) return this.parse('/help ban');
+		if ((user.locked) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
+		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
+			var problem = " but was already banned";
+			return this.privateModCommand("(" + targetUser.name + " would be banned by " + user.name + problem + ".)");
+		}
+		if (targetUser.confirmed) {
+			var from = targetUser.deconfirm();
+			ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
+		}
+		targetUser.popup("" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");
+		this.addModCommand("" + targetUser.name + " took a headshot from " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
+		var alts = targetUser.getAlts();
+		var acAccount = (targetUser.autoconfirmed !== targetUser.userid && targetUser.autoconfirmed);
+		if (alts.length) {
+			this.privateModCommand("(" + targetUser.name + "'s " + (acAccount ? " ac account: " + acAccount + ", " : "") + "banned alts: " + alts.join(", ") + ")");
+			for (var i = 0; i < alts.length; ++i) {
+				this.add('|unlink|' + toId(alts[i]));
+			}
+		} else if (acAccount) {
+			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
+		}
+		this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
+		targetUser.ban();
+	},
+	
+	pb: 'permaban',
+	pban: 'permaban',
+	permban: 'permaban',
+	permaban: function(target, room, user) {
+		if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
+		if (!this.can('pban')) return false;
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('User ' + this.targetUsername + ' not found.');
+		}
+		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
+			var problem = " but was already banned";
+			return this.privateModCommand('(' + targetUser.name + " would be banned by " + user.name + problem + '.) (' + targetUser.latestIp + ')');
+		}
+		targetUser.popup(user.name + " has permanently banned you.");
+		this.addModCommand(targetUser.name + " was permanently banned by " + user.name + ".");
+		this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
+		targetUser.ban();
+		ipbans.write('\n' + targetUser.latestIp);
+	},
 
 	unban: function (target, room, user) {
 		if (!target) return this.parse('/help unban');
@@ -1437,6 +1584,55 @@ var commands = exports.commands = {
 	modloghelp: ["/modlog [roomid|all], [n] - Roomid defaults to current room.",
 		"If n is a number or omitted, display the last n lines of the moderator log. Defaults to 15.",
 		"If n is not a number, search the moderator log for 'n' on room's log [roomid]. If you set [all] as [roomid], searches for 'n' on all rooms's logs. Requires: % @ # & ~"],
+	
+	hide: 'hideauth',
+	hideauth: function(target, room, user) {
+		if (!user.can('lock')) return this.sendReply("/hideauth - access denied.");
+		var tar = ' ';
+		if (target) {
+			target = target.trim();
+			if (Config.groupsranking.indexOf(target) > -1 && target != '#') {
+				if (Config.groupsranking.indexOf(target) <= Config.groupsranking.indexOf(user.group)) {
+					tar = target;
+				} else {
+					this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');
+				}
+			} else {
+				this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
+			}
+		}
+		user.getIdentity = function (roomid) {
+		if (this.locked) {
+			return '‽' + this.name;
+		}
+		if (roomid) {
+			var room = Rooms.rooms[roomid];
+			if (room.isMuted(this)) {
+				return '!' + this.name;
+			}
+			if (room && room.auth) {
+				if (room.auth[this.userid]) {
+					return room.auth[this.userid] + this.name;
+				}
+				if (room.isPrivate === true) return ' ' + this.name;
+			}
+		}
+		return tar + this.name;
+	}
+		user.updateIdentity();
+		this.sendReply('You are now hiding your auth symbol as \'' + tar + '\'.');
+		return this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');
+	},
+	
+	show: 'showauth',
+	showauth: function(target, room, user) {
+		if (!user.can('lock')) return this.sendReply("/showauth - access denied.");
+		delete user.getIdentity;
+		user.updateIdentity();
+		this.sendReply("You have now revealed your auth symbol.");
+		return this.logModCommand(user.name + " has revealed their auth symbol.");
+		this.sendReply("Your symbol has been reset.");
+	},
 
 	/*********************************************************
 	 * Server management commands

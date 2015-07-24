@@ -95,7 +95,20 @@ exports.BattleScripts = {
 		if (target === false) {
 			this.attrLastMove('[notarget]');
 			this.add('-notarget');
+			if (move.target === 'normal') pokemon.isStaleCon = 0;
 			return true;
+		}
+
+		var targets = pokemon.getMoveTargets(move, target);
+		var extraPP = 0;
+		for (var i = 0; i < targets.length; i++) {
+			var ppDrop = this.singleEvent('DeductPP', targets[i].getAbility(), targets[i].abilityData, targets[i], pokemon, move);
+			if (ppDrop !== true) {
+				extraPP += ppDrop || 0;
+			}
+		}
+		if (extraPP > 0) {
+			pokemon.deductPP(move, extraPP);
 		}
 
 		if (!this.runEvent('TryMove', pokemon, target, move)) {
@@ -111,22 +124,6 @@ exports.BattleScripts = {
 			damage = this.tryMoveHit(target, pokemon, move);
 			if (damage || damage === 0 || damage === undefined) moveResult = true;
 		} else if (move.target === 'allAdjacent' || move.target === 'allAdjacentFoes') {
-			var targets = [];
-			if (move.target === 'allAdjacent') {
-				var allyActive = pokemon.side.active;
-				for (var i = 0; i < allyActive.length; i++) {
-					if (allyActive[i] && Math.abs(i - pokemon.position) <= 1 && i !== pokemon.position && !allyActive[i].fainted) {
-						targets.push(allyActive[i]);
-					}
-				}
-			}
-			var foeActive = pokemon.side.foe.active;
-			var foePosition = foeActive.length - pokemon.position - 1;
-			for (var i = 0; i < foeActive.length; i++) {
-				if (foeActive[i] && Math.abs(i - foePosition) <= 1 && !foeActive[i].fainted) {
-					targets.push(foeActive[i]);
-				}
-			}
 			if (move.selfdestruct) {
 				this.faint(pokemon, pokemon, move);
 			}
@@ -144,10 +141,7 @@ exports.BattleScripts = {
 			}
 			if (!pokemon.hp) pokemon.faint();
 		} else {
-			if (target.fainted && target.side !== pokemon.side) {
-				// if a targeted foe faints, the move is retargeted
-				target = this.resolveTarget(pokemon, move);
-			}
+			target = targets[0];
 			var lacksTarget = target.fainted;
 			if (!lacksTarget) {
 				if (move.target === 'adjacentFoe' || move.target === 'adjacentAlly' || move.target === 'normal' || move.target === 'randomNormal') {
@@ -157,10 +151,8 @@ exports.BattleScripts = {
 			if (lacksTarget) {
 				this.attrLastMove('[notarget]');
 				this.add('-notarget');
+				if (move.target === 'normal') pokemon.isStaleCon = 0;
 				return true;
-			}
-			if (target.side.active.length > 1) {
-				target = this.runEvent('RedirectTarget', pokemon, pokemon, move, target);
 			}
 			damage = this.tryMoveHit(target, pokemon, move);
 			if (damage || damage === 0 || damage === undefined) moveResult = true;
@@ -1253,6 +1245,9 @@ exports.BattleScripts = {
 				case 'dragonpulse': case 'spacialrend':
 					if (hasMove['dracometeor']) rejected = true;
 					break;
+				case 'outrage':
+					if (hasMove['dracometeor'] && counter.damagingMoves.length < 3) rejected = true;
+					break;
 				case 'thunder':
 					if (hasMove['thunderbolt'] && !hasMove['raindance']) rejected = true;
 					break;
@@ -1368,21 +1363,12 @@ exports.BattleScripts = {
 					break;
 
 				// Status:
-				case 'raindance': case 'sunnyday':
+				case 'raindance':
 					if ((hasMove['rest'] && hasMove['sleeptalk']) || counter.Physical + counter.Special < 2) rejected = true;
 					break;
-				case 'rest':
-					if (!hasMove['sleeptalk'] && movePool.indexOf('sleeptalk') >= 0) rejected = true;
-					if (hasMove['moonlight'] || hasMove['painsplit'] || hasMove['recover'] || hasMove['synthesis']) rejected = true;
-					break;
-				case 'roar':
-					if (hasMove['dragontail']) rejected = true;
-					break;
-				case 'roost': case 'softboiled': case 'synthesis':
-					if (hasMove['wish']) rejected = true;
-					break;
-				case 'substitute':
-					if (hasMove['dracometeor'] || (hasMove['leafstorm'] && !hasAbility['Contrary']) || hasMove['pursuit'] || hasMove['taunt'] || hasMove['uturn'] || hasMove['voltswitch']) rejected = true;
+				case 'sunnyday':
+					if (!hasAbility['Chlorophyll'] && !hasAbility['Flower Gift'] && !hasAbility['Forecast'] && !hasMove['solarbeam']) rejected = true;
+					if ((hasMove['rest'] && hasMove['sleeptalk']) || counter.Physical + counter.Special < 2) rejected = true;
 					break;
 				case 'stunspore': case 'thunderwave':
 					if (counter.setupType || !!counter['speedsetup']) rejected = true;
@@ -1395,6 +1381,19 @@ exports.BattleScripts = {
 					break;
 				case 'willowisp':
 					if (hasMove['lavaplume'] || hasMove['sacredfire'] || hasMove['scald'] || hasMove['spore']) rejected = true;
+					break;
+				case 'rest':
+					if (!hasMove['sleeptalk'] && movePool.indexOf('sleeptalk') >= 0) rejected = true;
+					if (hasMove['moonlight'] || hasMove['painsplit'] || hasMove['recover'] || hasMove['synthesis']) rejected = true;
+					break;
+				case 'roost': case 'softboiled': case 'synthesis':
+					if (hasMove['wish']) rejected = true;
+					break;
+				case 'roar':
+					if (hasMove['dragontail']) rejected = true;
+					break;
+				case 'substitute':
+					if (hasMove['dracometeor'] || (hasMove['leafstorm'] && !hasAbility['Contrary']) || hasMove['pursuit'] || hasMove['taunt'] || hasMove['uturn'] || hasMove['voltswitch']) rejected = true;
 					break;
 				}
 
@@ -1626,6 +1625,8 @@ exports.BattleScripts = {
 			} else if (template.id === 'combee') {
 				// Combee always gets Hustle but its only physical move is Endeavor, which loses accuracy
 				ability = 'Honey Gather';
+			} else if (template.id === 'lilligant' && hasMove['petaldance']) {
+				ability = 'Own Tempo';
 			} else if (template.id === 'lopunny' && hasMove['switcheroo'] && this.random(3)) {
 				ability = 'Klutz';
 			} else if (template.id === 'mawilemega') {

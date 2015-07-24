@@ -53,7 +53,8 @@ exports.BattleFormats = {
 			'Xerneas',
 			'Yveltal',
 			'Zygarde',
-			'Diancie'
+			'Diancie',
+			'Hoopa', 'Hoopa-Unbound'
 		]
 	},
 	standarddoubles: {
@@ -451,7 +452,7 @@ exports.BattleFormats = {
 			for (var i = 0; i < team.length; i++) {
 				var ability = toId(team[i].ability);
 				if (ability === 'refrigerate' || ability === 'pixilate' || ability === 'aerilate') {
-					if (ateAbility) return ["You have more than one of Aerilate/Refrigerate/Pixilate, which is banned by -ate Clause."];
+					if (ateAbility) return [team[i].name + " has more than one of Aerilate/Refrigerate/Pixilate, which is banned by -ate Clause."];
 					ateAbility = true;
 				}
 			}
@@ -492,7 +493,30 @@ exports.BattleFormats = {
 	endlessbattleclause: {
 		effectType: 'Banlist',
 		name: 'Endless Battle Clause',
-		banlist: ['Leppa Berry + Recycle', 'Harvest + Leppa Berry', 'Shadow Tag + Leppa Berry + Trick'],
+		// implemented in battle-engine.js
+
+		// A Pokémon has a confinement counter, which starts at 0:
+		// +1 confinement whenever:
+		// - it has no available moves other than Struggle
+		// - it was forced to switch by a stale opponent before it could do its
+		//   action for the turn
+		// - it intentionally switched out the turn after it switched in against
+		//   a stale Pokémon
+		// - it shifts in Triples against a stale Pokémon
+		// - it has gone 5 turns without losing PP (mimiced/transformed moves
+		//   count only if no foe is stale)
+		// confinement reset to 0 whenever:
+		// - it uses PP while not Transformed/Impostered
+		// - if it has at least 2 confinement, and begins a turn without losing
+		//   at least 1% of its max HP from the last time its confinement counter
+		//   was 0 - user also becomes half-stale if not already half-stale, or
+		//   stale if already half-stale
+
+		// A Pokémon is also considered stale if:
+		// - it has gained a Leppa berry through any means besides starting
+		//   with one
+		// - OR it has eaten a Leppa berry it isn't holding
+
 		onStart: function () {
 			this.add('rule', 'Endless Battle Clause: Forcing endless battles is banned');
 		}
@@ -526,7 +550,7 @@ exports.BattleFormats = {
 					BPcount++;
 				}
 				if (BPcount > 1) {
-					return ["You are limited to one Pokémon with the move Baton Pass by the Baton Pass Clause."];
+					return [team[i].name + " has Baton Pass, but you are limited to one Baton Pass user by Baton Pass Clause."];
 				}
 			}
 		},
@@ -573,7 +597,7 @@ exports.BattleFormats = {
 			}
 			if (!nonSpeedBoosted) return;
 
-			return ["You can't boost both Speed and a different stat on the same set because of Baton Pass Clause."];
+			return [set.name + " can Baton Pass both Speed and a different stat, which is banned by Baton Pass Clause."];
 		}
 	},
 	hppercentagemod: {
@@ -663,6 +687,9 @@ exports.BattleFormats = {
 				switch (typeTable[0]) {
 				case 'Flying':
 					if (teamHas['zapdos']) return ["Zapdos is banned from Flying monotype teams."];
+					break;
+				case 'Ground':
+					if (teamHas['smoothrock']) return ["Smooth Rock is banned from Ground monotype teams."];
 					break;
 				case 'Psychic':
 					if (teamHas['galladite']) return ["Galladite is banned from Psychic monotype teams."];

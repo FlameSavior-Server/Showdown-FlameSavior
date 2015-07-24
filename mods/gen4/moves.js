@@ -375,7 +375,6 @@ exports.BattleMovedex = {
 			if (target.hp > pokemon.hp) {
 				return target.hp - pokemon.hp;
 			}
-			this.add('-fail', pokemon);
 			return false;
 		}
 	},
@@ -774,7 +773,8 @@ exports.BattleMovedex = {
 				pp: 5,
 				maxpp: move.pp * 8 / 5,
 				disabled: false,
-				used: false
+				used: false,
+				virtual: true
 			};
 			source.moves[moveslot] = toId(move.name);
 			this.add('-activate', source, 'move: Mimic', move.name);

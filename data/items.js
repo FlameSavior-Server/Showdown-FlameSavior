@@ -2327,6 +2327,10 @@ exports.BattleItems = {
 			move.pp += 10;
 			if (move.pp > move.maxpp) move.pp = move.maxpp;
 			this.add('-activate', pokemon, 'item: Leppa Berry', move.move);
+			if (pokemon.item === 'leppaberry') {
+				pokemon.isStale = 2;
+				pokemon.isStaleSource = 'useleppa';
+			}
 		},
 		num: 154,
 		gen: 3,
@@ -2794,7 +2798,7 @@ exports.BattleItems = {
 		spritenum: 287,
 		onModifyDefPriority: 2,
 		onModifyDef: function (def, pokemon) {
-			if (pokemon.template.species === 'Ditto') {
+			if (pokemon.template.species === 'Ditto' && !pokemon.transformed) {
 				return this.chainModify(2);
 			}
 		},
@@ -3480,7 +3484,7 @@ exports.BattleItems = {
 			basePower: 10
 		},
 		onModifySpe: function (speMod, pokemon) {
-			if (pokemon.template.species === 'Ditto') {
+			if (pokemon.template.species === 'Ditto' && !pokemon.transformed) {
 				return this.chain(speMod, 2);
 			}
 		},

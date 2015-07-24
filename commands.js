@@ -302,7 +302,6 @@ var commands = exports.commands = {
 			user.forceRename(awayName, undefined, true);
 			user.isAway = true;
 			this.parse('/blockchallenges');
-			this.parse('/blockpms ' + target);
 		} else {
 			return this.sendReply('You are already set as away, type /back if you are now back.');
 		}
@@ -322,7 +321,6 @@ var commands = exports.commands = {
 			//user will be authenticated
 			user.authenticated = true;
 			user.isAway = false;
-			this.parse('/unblockpms');
 			this.parse('/unblockchallenges');
 		} else {
 			return this.sendReply('You are not set as away.');

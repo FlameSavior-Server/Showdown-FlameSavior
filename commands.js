@@ -50,6 +50,35 @@ var commands = exports.commands = {
 		});
 	},
 	
+    tell: function (target, room, user, connection) {
+        if (!target) return this.sendReply('/tell [username], [message] - Send a message to an offline user that will be received when they log in.');
+        target = this.splitTarget(target);
+        var targetUser = this.targetUser;
+        if (!target) {
+            this.sendReply("You forgot the comma.");
+            return this.sendReply('/tell [username], [message] - Send a message to an offline user that will be received when they log in.');
+        }
+
+        if (targetUser && targetUser.connected) {
+            return this.parse('/pm ' + this.targetUsername + ', ' + target);
+        }
+
+        if (user.locked || user.muted) return this.popupReply("You may not send offline messages when locked.");
+        if (target.length > 255) return this.popupReply("Your message is too long to be sent as an offline message (>255 characters).");
+
+        var userid = toId(this.targetUsername);
+        if (userid.length > 18) return this.popupReply("\"" + this.targetUsername + "\" is not a legal username.");
+
+        var sendSuccess = Tells.addTell(user, userid, target);
+        if (!sendSuccess) {
+            if (sendSuccess === false) return this.popupReply("User " + this.targetUsername + " has too many offline messages queued.");
+            else return this.popupReply("You have too many outgoing offline messages queued. Please wait until some have been received or have expired.");
+        }
+        return connection.send('|pm|' + user.getIdentity() + '|' +
+            (targetUser ? targetUser.getIdentity() : ' ' + this.targetUsername) +
+            "|/text This user is currently offline. Your message will be delivered when they are next online.");
+    },
+	
 	version: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("Server version: <b>" + CommandParser.package.version + "</b>");

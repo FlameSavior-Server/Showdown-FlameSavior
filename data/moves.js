@@ -634,7 +634,6 @@ exports.BattleMovedex = {
 				this.add('-activate', pokemon, 'Attract', '[of] ' + this.effectData.source);
 				if (this.random(2) === 0) {
 					this.add('cant', pokemon, 'Attract');
-					pokemon.isStaleHP++;
 					return false;
 				}
 			},
@@ -2340,7 +2339,7 @@ exports.BattleMovedex = {
 			if (!source.hasType('Ghost')) {
 				delete move.volatileStatus;
 				delete move.onHit;
-				move.self = {boosts: {atk:1, def:1, spe:-1}};
+				move.self = {boosts: {spe:-1, atk:1, def:1}};
 			} else if (move.volatileStatus && target.volatiles.curse) {
 				return false;
 			}
@@ -4446,7 +4445,6 @@ exports.BattleMovedex = {
 				if (item.isBerry && item.id !== 'enigmaberry') {
 					move.onHit = function (foe) {
 						this.singleEvent('Eat', item, null, foe, null, null);
-						if (item.id === 'leppaberry') foe.isStale = true;
 						foe.ateBerry = true;
 					};
 				} else if (item.fling.effect) {
@@ -5292,8 +5290,8 @@ exports.BattleMovedex = {
 			onEnd: function (targetSide) {
 				this.add('-sideend', targetSide, 'Grass Pledge');
 			},
-			onModifySpe: function (speMod, pokemon) {
-				return this.chain(speMod, 0.25);
+			onModifySpe: function (spe, pokemon) {
+				return this.chainModify(0.25);
 			}
 		},
 		secondary: false,
@@ -8524,7 +8522,8 @@ exports.BattleMovedex = {
 				maxpp: move.pp,
 				target: move.target,
 				disabled: false,
-				used: false
+				used: false,
+				virtual: true
 			};
 			source.moves[moveslot] = toId(move.name);
 			this.add('-start', source, 'Mimic', move.name);
@@ -11704,7 +11703,7 @@ exports.BattleMovedex = {
 		basePower: 70,
 		category: "Physical",
 		desc: "Has a 30% chance to cause a secondary effect on the target based on the battle terrain. Causes paralysis on the regular Wi-Fi terrain, causes paralysis during Electric Terrain, lowers Special Attack by 1 stage during Misty Terrain, and causes sleep during Grassy Terrain. The secondary effect chance is not affected by the Ability Serene Grace.",
-		shortDesc: "Effect varies with terrain. (30% accuracy lower 1.)",
+		shortDesc: "Effect varies with terrain. (30% paralysis chance)",
 		id: "secretpower",
 		name: "Secret Power",
 		pp: 20,
@@ -11998,11 +11997,11 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {snatch: 1},
 		boosts: {
+			def: -1,
+			spd: -1,
 			atk: 2,
 			spa: 2,
-			spe: 2,
-			def: -1,
-			spd: -1
+			spe: 2
 		},
 		secondary: false,
 		target: "self",
@@ -13044,7 +13043,7 @@ exports.BattleMovedex = {
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
 		onHit: function (target) {
 			if (target.deductPP(target.lastMove, 4)) {
-				this.add("-activate", target, 'move: Spite', target.lastMove, 4);
+				this.add("-activate", target, 'move: Spite', this.getMove(target.lastMove).name, 4);
 				return;
 			}
 			return false;
@@ -13381,7 +13380,6 @@ exports.BattleMovedex = {
 		onModifyMove: function (move, pokemon, target) {
 			move.type = '???';
 			this.add('-activate', pokemon, 'move: Struggle');
-			if (pokemon.isStale && target.activeTurns === 0) target.isNearlyStale = true;
 		},
 		self: {
 			onHit: function (source) {
@@ -13946,8 +13944,8 @@ exports.BattleMovedex = {
 			onStart: function (side) {
 				this.add('-sidestart', side, 'move: Tailwind');
 			},
-			onModifySpe: function (speMod, pokemon) {
-				return this.chain(speMod, 2);
+			onModifySpe: function (spe, pokemon) {
+				return this.chainModify(2);
 			},
 			onResidualOrder: 21,
 			onResidualSubOrder: 4,
@@ -14837,9 +14835,9 @@ exports.BattleMovedex = {
 		flags: {contact: 1, protect: 1, mirror: 1},
 		self: {
 			boosts: {
+				spe: -1,
 				def: -1,
-				spd: -1,
-				spe: -1
+				spd: -1
 			}
 		},
 		secondary: false,

@@ -157,7 +157,8 @@ exports.BattleFormatsData = {
 	pidgeotmega: {
 		randomBattleMoves: ["roost","heatwave","uturn","hurricane","defog"],
 		randomDoubleBattleMoves: ["tailwind","heatwave","uturn","hurricane","protect"],
-		requiredItem: "Pidgeotite"
+		requiredItem: "Pidgeotite",
+		tier: "BL"
 	},
 	rattata: {
 		randomBattleMoves: ["facade","flamewheel","suckerpunch","uturn","wildcharge","thunderwave","crunch","revenge"],
@@ -5265,11 +5266,13 @@ exports.BattleFormatsData = {
 		eventPokemon: [
 			{"generation":6,"level":50,"moves":["hyperspacehole","nastyplot","psychic","astonish"],"pokeball":"cherishball"}
 		],
+		unobtainableShiny: true,
 		tier: "OU"
 	},
 	hoopaunbound: {
 		randomBattleMoves: ["nastyplot","psyshock","darkpulse","focusblast","hyperspacefury","zenheadbutt","icepunch","drainpunch","knockoff","trick"],
 		randomDoubleBattleMoves: ["psychic","darkpulse","focusblast","protect","hyperspacefury","zenheadbutt","icepunch","drainpunch"],
+		unobtainableShiny: true,
 		tier: "OU"
 	},
 	volcanion: {

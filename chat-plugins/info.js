@@ -444,30 +444,36 @@ var commands = exports.commands = {
 			var inequality = target.search(/>|<|=/);
 			if (inequality >= 0) {
 				if (isNotSearch) return this.sendReplyBox("You cannot use the negation symbol '!' in stat ranges.");
-				inequality = target.charAt(inequality);
+				if (target.charAt(inequality + 1) === '=') {
+					inequality = target.substr(inequality, 2);
+				} else {
+					inequality = target.charAt(inequality);
+				}
+				var inequalityOffset = (inequality.charAt(1) === '=' ? 0 : -1);
 				var targetParts = target.replace(/\s/g, '').split(inequality);
-				var numSide, statSide, direction;
+				var num, stat, direction;
 				if (!isNaN(targetParts[0])) {
-					numSide = 0;
-					statSide = 1;
-					switch (inequality) {
-					case '>': direction = 'less'; break;
-					case '<': direction = 'greater'; break;
+					// e.g. 100 < spe
+					num = parseFloat(targetParts[0]);
+					stat = targetParts[1];
+					switch (inequality.charAt(0)) {
+					case '>': direction = 'less'; num += inequalityOffset; break;
+					case '<': direction = 'greater'; num -= inequalityOffset; break;
 					case '=': direction = 'equal'; break;
 					}
 				} else if (!isNaN(targetParts[1])) {
-					numSide = 1;
-					statSide = 0;
-					switch (inequality) {
-					case '<': direction = 'less'; break;
-					case '>': direction = 'greater'; break;
+					// e.g. spe > 100
+					num = parseFloat(targetParts[1]);
+					stat = targetParts[0];
+					switch (inequality.charAt(0)) {
+					case '<': direction = 'less'; num += inequalityOffset; break;
+					case '>': direction = 'greater'; num -= inequalityOffset; break;
 					case '=': direction = 'equal'; break;
 					}
 				} else {
 					return this.sendReplyBox("No value given to compare with '" + Tools.escapeHTML(target) + "'.");
 				}
-				var stat = targetParts[statSide];
-				switch (toId(targetParts[statSide])) {
+				switch (toId(stat)) {
 				case 'attack': stat = 'atk'; break;
 				case 'defense': stat = 'def'; break;
 				case 'specialattack': stat = 'spa'; break;
@@ -481,12 +487,12 @@ var commands = exports.commands = {
 				if (direction === 'equal') {
 					if (searches['stats'][stat]) return this.sendReplyBox("Invalid stat range for " + stat + ".");
 					searches['stats'][stat] = {};
-					searches['stats'][stat]['less'] = parseFloat(targetParts[numSide]);
-					searches['stats'][stat]['greater'] = parseFloat(targetParts[numSide]);
+					searches['stats'][stat]['less'] = num;
+					searches['stats'][stat]['greater'] = num;
 				} else {
 					if (!searches['stats'][stat]) searches['stats'][stat] = {};
 					if (searches['stats'][stat][direction]) return this.sendReplyBox("Invalid stat range for " + stat + ".");
-					searches['stats'][stat][direction] = parseFloat(targetParts[numSide]);
+					searches['stats'][stat][direction] = num;
 				}
 				continue;
 			}
@@ -609,7 +615,7 @@ var commands = exports.commands = {
 				var priorityMoves = [];
 				for (var move in Tools.data.Movedex) {
 					var moveData = Tools.getMove(move);
-					if (moveData.category === "Status") continue;
+					if (moveData.category === "Status" || moveData.id === "bide") continue;
 					if (moveData.priority > 0) priorityMoves.push(move);
 				}
 				for (var mon in dex) {
@@ -666,13 +672,15 @@ var commands = exports.commands = {
 		}
 
 		var resultsStr = this.broadcasting ? "" : ("<font color=#999999>" + message + ":</font><br>");
-		if (results.length > 0) {
+		if (results.length > 1) {
 			if (showAll || results.length <= RESULTS_MAX_LENGTH + 5) {
 				results.sort();
 				resultsStr += results.join(", ");
 			} else {
 				resultsStr += results.slice(0, RESULTS_MAX_LENGTH).join(", ") + ", and " + (results.length - RESULTS_MAX_LENGTH) + " more. <font color=#999999>Redo the search with 'all' as a search parameter to show all results.</font>";
 			}
+		} else if (results.length === 1) {
+			return CommandParser.commands.data.call(this, results[0], room, user, connection, 'dt');
 		} else {
 			resultsStr += "No Pok&eacute;mon found.";
 		}
@@ -1879,7 +1887,7 @@ var commands = exports.commands = {
 	formats: 'formathelp',
 	tiershelp: 'formathelp',
 	formatshelp: 'formathelp',
-	formathelp: function (target, room, user) {
+	formathelp: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
 		if (!target) {
 			return this.sendReplyBox(
@@ -1897,7 +1905,7 @@ var commands = exports.commands = {
 		var format = Tools.getFormat(targetId);
 		if (format.effectType === 'Format') formatList = [targetId];
 		if (!formatList) {
-			if (this.broadcasting && (room.id === 'lobby' || room.battle)) return this.sendReply("This command is too spammy to broadcast in lobby/battles");
+			if (this.broadcasting && (cmd !== 'om' && cmd !== 'othermetas')) return this.sendReply("'" + target + "' is not a format. This command's search mode is too spammy to broadcast.");
 			formatList = Object.keys(Tools.data.Formats).filter(function (formatid) {return Tools.data.Formats[formatid].effectType === 'Format';});
 		}
 
@@ -1929,11 +1937,11 @@ var commands = exports.commands = {
 		for (var sectionId in sections) {
 			if (exactMatch && sectionId !== exactMatch) continue;
 			buf.push("<h3>" + Tools.escapeHTML(sections[sectionId].name) + "</h3>");
-			buf.push("<table style=\"border:1px solid gray; border-collapse:collapse\" cellspacing=\"0\" cellpadding=\"5\"><thead><th style=\"border:1px solid gray\" >Name</th><th style=\"border:1px solid gray\" >Mode</th><th style=\"border:1px solid gray\" >Description</th></thead><tbody>");
+			buf.push("<table class=\"scrollable\" style=\"display:inline-block; max-height:200px; border:1px solid gray; border-collapse:collapse\" cellspacing=\"0\" cellpadding=\"5\"><thead><th style=\"border:1px solid gray\" >Name</th><th style=\"border:1px solid gray\" >Description</th></thead><tbody>");
 			for (var i = 0; i < sections[sectionId].formats.length; i++) {
 				var format = Tools.getFormat(sections[sectionId].formats[i]);
 				var mod = format.mod && format.mod !== 'base' ? " - " + Tools.escapeHTML(format.mod === format.id ? format.name : format.mod).capitalize() : "";
-				buf.push("<tr><td style=\"border:1px solid gray\">" + Tools.escapeHTML(format.name) + "</td><td style=\"border:1px solid gray\" align=\"center\">" + (format.gameType || "singles").capitalize() + mod + "</td><td style=\"border: 1px solid gray; margin-left:10px\">" + (format.desc ? format.desc.join("<br />") : "&mdash;") + "</td></tr>");
+				buf.push("<tr><td style=\"border:1px solid gray\">" + Tools.escapeHTML(format.name) + "</td><td style=\"border: 1px solid gray; margin-left:10px\">" + (format.desc ? format.desc.join("<br />") : "&mdash;") + "</td></tr>");
 			}
 			buf.push("</tbody></table>");
 		}

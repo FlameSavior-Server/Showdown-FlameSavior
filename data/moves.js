@@ -624,13 +624,14 @@ exports.BattleMovedex = {
 					this.add('-start', pokemon, 'Attract');
 				}
 			},
-			onBeforeMovePriority: 2,
-			onBeforeMove: function (pokemon, target, move) {
+			onUpdate: function (pokemon) {
 				if (this.effectData.source && !this.effectData.source.isActive && pokemon.volatiles['attract']) {
 					this.debug('Removing Attract volatile on ' + pokemon);
 					pokemon.removeVolatile('attract');
-					return;
 				}
+			},
+			onBeforeMovePriority: 2,
+			onBeforeMove: function (pokemon, target, move) {
 				this.add('-activate', pokemon, 'Attract', '[of] ' + this.effectData.source);
 				if (this.random(2) === 0) {
 					this.add('cant', pokemon, 'Attract');
@@ -5290,8 +5291,8 @@ exports.BattleMovedex = {
 			onEnd: function (targetSide) {
 				this.add('-sideend', targetSide, 'Grass Pledge');
 			},
-			onModifySpe: function (speMod, pokemon) {
-				return this.chain(speMod, 0.25);
+			onModifySpe: function (spe, pokemon) {
+				return this.chainModify(0.25);
 			}
 		},
 		secondary: false,
@@ -6777,7 +6778,7 @@ exports.BattleMovedex = {
 			var bp = 30;
 			var bpTable = [30, 60, 120, 240, 480];
 			if (pokemon.volatiles.iceball && pokemon.volatiles.iceball.hitCount) {
-				bp = (bpTable[pokemon.volatiles.iceball.hitCount] || 480);
+				bp = (bpTable[pokemon.volatiles.iceball.hitCount] || 30);
 			}
 			pokemon.addVolatile('iceball');
 			if (pokemon.volatiles.defensecurl) {
@@ -8037,7 +8038,7 @@ exports.BattleMovedex = {
 				}
 			}
 			if (!targets.length) return false;
-			for (var i = 0; i < targets.length; i++) this.boost({spd: 1, def: 1}, targets[i], source, 'move: Magnetic Flux');
+			for (var i = 0; i < targets.length; i++) this.boost({def: 1, spd: 1}, targets[i], source, 'move: Magnetic Flux');
 		},
 		secondary: false,
 		target: "allySide",
@@ -11302,7 +11303,7 @@ exports.BattleMovedex = {
 			var bp = 30;
 			var bpTable = [30, 60, 120, 240, 480];
 			if (pokemon.volatiles.rollout && pokemon.volatiles.rollout.hitCount) {
-				bp = (bpTable[pokemon.volatiles.rollout.hitCount] || 480);
+				bp = (bpTable[pokemon.volatiles.rollout.hitCount] || 30);
 			}
 			pokemon.addVolatile('rollout');
 			if (pokemon.volatiles.defensecurl) {
@@ -12021,8 +12022,8 @@ exports.BattleMovedex = {
 		priority: 0,
 		flags: {snatch: 1},
 		boosts: {
-			atk: 1,
-			spe: 2
+			spe: 2,
+			atk: 1
 		},
 		secondary: false,
 		target: "self",
@@ -13944,8 +13945,8 @@ exports.BattleMovedex = {
 			onStart: function (side) {
 				this.add('-sidestart', side, 'move: Tailwind');
 			},
-			onModifySpe: function (speMod, pokemon) {
-				return this.chain(speMod, 2);
+			onModifySpe: function (spe, pokemon) {
+				return this.chainModify(2);
 			},
 			onResidualOrder: 21,
 			onResidualSubOrder: 4,

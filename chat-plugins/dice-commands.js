@@ -15,7 +15,7 @@ exports.commands = {
 	dicestart: 'startdice',
 	startdice: function(target, room, user) {
 	 	if (!this.canTalk()) return this.sendReply("You can not start dice games while unable to speak.");
-	 	if (room.id == 'lobby') return this.sendReply("Dice games cannot be started in this room. Try Game Chamber.");
+	 	if (room.id !== 'gamechamber' && !user.can('pban')) return this.sendReply("Dice games should only be started in \"Game Chamber\".");
 	 	//if (!user.can('broadcast',null,room)) return this.sendReply('/startdice - Access denied.');
 	 	if (!target) return this.sendReply('Usage: /startdice <bet>');
 	 	if (isNaN(Number(target))) return this.sendReply('/startdice - <bet> must be a number greater than 0');

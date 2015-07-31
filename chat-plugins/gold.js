@@ -532,6 +532,7 @@ exports.commands = {
 		if (!target) return this.sendReply('/lick needs a target.');
 		return this.parse('/me licks ' + target + ' excessively!');
 	},
+	/*
 	renameroom: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
 		target = target.split(',');
@@ -554,6 +555,7 @@ exports.commands = {
 
 		Rooms.rooms.toId(target[0]).destroy(); //Lastly, delete the old room
 	},
+	*/
 	def: 'define',
 	define: function(target, room, user) {
 		if (!target) return this.sendReply('Usage: /define <word>');

@@ -29,7 +29,7 @@ Gold.emoticons = {
 		});
 	},
 	checkEmoteModchat: function(user, room, connection) {
-		var rank = user.getIdentity(room).substr(0,1);
+		var rank = (user.getIdentity(room).substr(0,1) === user.group ? user.getIdentity(room).substr(0,1) : user.group);
 		switch (room.emoteModChat) {
 			case undefined:
 			case false:
@@ -82,8 +82,6 @@ Gold.emoticons = {
 					return false;
 				}
 				break;
-			default:
-				return true;
 		}
 		return false;
 	},
@@ -239,7 +237,7 @@ exports.commands = {
 						case 'set':
 							if (!this.can('ban', null, room)) return this.sendReply("Access denied.");
 							if (!parts[2]) return this.sendReply("Usage: /emote modchat, set, [rank] - Sets modchat for emoticons in the respected room.");
-							if (!Config.groups[parts[2]] && toId(parts[2]) !== 'autoconfirmed' && toId(parts[2]) !== 'ac') return this.sendReply("ERROR: " + parts[2] + " is not a defined group in Config.");
+							if (!Config.groups[parts[2]] && toId(parts[2]) !== 'autoconfirmed' && toId(parts[2]) !== 'ac' || parts[2] === '★') return this.sendReply("ERROR: " + parts[2] + " is not a defined group in Config or is not yet optimized for moderated emoticon chat at this time.");
 							if (room.emoteModChat === parts[2]) return this.sendReply("Emoticon modchat is already enabled in this room for the rank you're trying to set it to.");
 							room.emoteModChat = parts[2];
 							room.chatRoomData.emoteModChat = room.emoteModChat;

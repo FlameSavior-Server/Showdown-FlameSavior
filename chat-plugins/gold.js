@@ -220,26 +220,26 @@ exports.commands = {
 			}
 		}
 		user.getIdentity = function (roomid) {
-		if (this.locked) {
-			return '‽' + this.name;
-		}
-		if (roomid) {
-			var room = Rooms.rooms[roomid];
-			if (room.isMuted(this)) {
-				return '!' + this.name;
+			if (this.locked) {
+				return '‽' + this.name;
 			}
-			if (room && room.auth) {
-				if (room.auth[this.userid]) {
-					return room.auth[this.userid] + this.name;
+			if (roomid) {
+				var room = Rooms.rooms[roomid];
+				if (room.isMuted(this)) {
+					return '!' + this.name;
 				}
-				if (room.isPrivate === true) return ' ' + this.name;
+				if (room && room.auth) {
+					if (room.auth[this.userid]) {
+						return room.auth[this.userid] + this.name;
+					}
+					if (room.isPrivate === true) return ' ' + this.name;
+				}
 			}
+			return tar + this.name;
 		}
-		return tar + this.name;
-	}
 		user.updateIdentity();
 		this.sendReply('You are now hiding your auth symbol as \'' + tar + '\'.');
-		return this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');
+		this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');
 	},
 	show: 'showauth',
 	showauth: function(target, room, user) {
@@ -249,26 +249,6 @@ exports.commands = {
 		this.sendReply("You have now revealed your auth symbol.");
 		return this.logModCommand(user.name + " has revealed their auth symbol.");
 		this.sendReply("Your symbol has been reset.");
-	},
-	punishall: 'pa',
-	pa: function(target, room, user) {
-		if (!target) return this.sendReply("/punishall [lock, mute, unmute, ban]. - Requires eval access.");
-		if (target.indexOf('ban ') > -1) {
-			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
-		}
-		if (target.indexOf('ban') > -1) {
-			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
-		}
-		if (target.indexOf(' ban') > -1) {
-			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
-		}
-		if (target.indexOf('lock') > -1) {
-			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
-		}
-		if (target.indexOf('lock ') > -1) {
-			return this.sendReply("Wow.  Congrats, you actually have some balls, kupo.");
-		}
-		return this.parse('/eval for(var u in Users.users) Users.users[u].' + target + '()');
 	},
 	pb: 'permaban',
 	pban: 'permaban',
@@ -552,7 +532,29 @@ exports.commands = {
 		if (!target) return this.sendReply('/lick needs a target.');
 		return this.parse('/me licks ' + target + ' excessively!');
 	},
-		def: 'define',
+	renameroom: function(target, room, user) {
+		if (!this.can('hotpatch')) return false;
+		target = target.split(',');
+		if (!target[0] || !target[1]) return this.sendReply("Usage: /renameroom [current room.id], [new room.title]");
+		if (toId(target[0]) !== room.id) return this.sendReply("That is not the current id of this room.");
+		if (Rooms.rooms[toId(target[1])]) return this.sendReply("That room you are trying to rename this one to already exists.");
+
+		var room_auth = JSON.stringify(Rooms.rooms.toId(target[0]).auth);
+		var emoticon_status = Rooms.rooms.toId(target[0]).emoteStatus;
+
+		Rooms.global.addChatRoom(target[1]);
+		Rooms.rooms.toId(target[1]).auth = room_auth;
+		Rooms.rooms.toId(target[1]).emoteStatus = emoticon_status;
+		Rooms.global.writeChatRoomData();
+
+		for (var i in room.users) { 
+			Users(i).joinRoom(toId(target[1])); 
+			//Users(i).updateIdentity();
+		}
+
+		Rooms.rooms.toId(target[0]).destroy(); //Lastly, delete the old room
+	},
+	def: 'define',
 	define: function(target, room, user) {
 		if (!target) return this.sendReply('Usage: /define <word>');
 		target = toId(target);

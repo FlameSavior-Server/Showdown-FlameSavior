@@ -245,7 +245,7 @@ exports.commands = {
 							this.add("|raw|<div class=\"broadcast-red\"><b>Chat Emoticons Moderated Chat has been set!</b><br />To use emoticons in this room, you must be of rank <b>" + parts[2] + "</b> or higher.");
 							room.update();
 							this.privateModCommand("(" + user.name + " has set emoticon moderated chat for rank " + parts[2] + " and up.)");
-						break;
+							break;
 						case 'off':
 						case 'disable':
 							if (!this.can('ban', null, room)) return this.sendReply("Access denied.");
@@ -256,14 +256,14 @@ exports.commands = {
 							this.add("|raw|<div class=\"broadcast-blue\"><b>Chat Emoticons Moderated Chat has been disabled!</b><br />Everyone in this room may use chat emoticons.");
 							room.update();
 							this.privateModCommand("(" + user.name + " has enabled chat emoticons for everyone in this room.)");
-						break;
+							break;
 						default:
 						case 'status':
 							var status = (room.emoteModChat === undefined || !room.emoteModChat ? false : room.emoteModChat); 
 							return this.sendReply("Emoticon moderated chat is currently set to: " + status);
-						break;
+							break;
 					}
-				break;
+					break;
 				case 'help':
 				default:
 					if (!this.canBroadcast()) return;

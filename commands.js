@@ -266,11 +266,7 @@ var commands = exports.commands = {
 		
 		if (targetUser !== user) {
 			if (Users.ShadowBan.checkBanned(user)) {
-				if (processing) {
-					Users.ShadowBan.addMessage(user, "Private to " +  targetUser.getIdentity(), oldtarg);
-				} else {
 					Users.ShadowBan.addMessage(user, "Private to " +  targetUser.getIdentity(), target);
-				}
 			} else {
 				targetUser.send(message);
 			}
@@ -1290,7 +1286,23 @@ var commands = exports.commands = {
 		Users.unlockRange(range);
 		this.addModCommand("" + user.name + " unlocked the range " + range + ".");
 	},
-
+	
+	viewbanlist: 'viewbans',
+	viewbans: function (target, room, user) {
+		if (!this.can('ban')) return false;
+		
+		var bannedUsers = Users.bannedUsers;
+		var lockedUsers = Users.lockedUsers;
+		var rangelockedUsers = Users.rangeLockedUsers;
+		
+		bannedUsers = JSON.stringify(bannedUsers);
+		lockedUsers = JSON.stringify(lockedUsers);
+		rangelockedUsers = JSON.stringify(rangelockedUsers);
+		
+		var text = "Banned Users:\n" + bannedUsers + "\nLocked Users:\n" + lockedUsers + "\nRangelocked Users:\n" + rangelockedUsers;
+		user.popup(text);
+	},
+	
 	/*********************************************************
 	 * Moderating: Other
 	 *********************************************************/

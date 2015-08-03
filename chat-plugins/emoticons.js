@@ -8,6 +8,7 @@
 var fs = require('fs');
 var serialize = require('node-serialize');
 var emotes = {};
+var style = "background:none;border:0;padding:0 5px 0 0;font-family:Verdana,Helvetica,Arial,sans-serif;font-size:9pt;cursor:pointer";
 
 if (typeof Gold === 'undefined') global.Gold = {};
 
@@ -98,7 +99,7 @@ Gold.emoticons = {
 				message = Tools.escapeHTML(message);
 				message = this.processEmoticons(message);
 				user.sendTo(room, '|html|' + 
-					user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
+					user.getIdentity(room).substr(0,1) + '<button style="' + style + '" name="parseCommand" value="/user ' +
 					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>'
 				);
 				room.update();
@@ -115,11 +116,11 @@ Gold.emoticons = {
 					message = Tools.escapeHTML(message);
 					message = this.processEmoticons(message);
 					if (user.hiding) {
-						room.addRaw(' <button class="astext" name="parseCommand" value="/user ' +
+						room.addRaw(' <button style="' + style + '" name="parseCommand" value="/user ' +
 						user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
 						room.update();
 					}
-					room.addRaw(user.getIdentity(room).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' +
+					room.addRaw(user.getIdentity(room).substr(0,1) + '<button style="' + style + '" name="parseCommand" value="/user ' +
 					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
 					room.update();
 					return false;

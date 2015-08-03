@@ -209,7 +209,8 @@ var commands = exports.commands = {
 			}
 		}
 		if (Gold.emoticons.processPMsParsing(target)) {
-			var sender = user.getIdentity(this.id).substr(0,1) + '<button class="astext" name="parseCommand" value="/user ' + user.name + '">' +
+			var style = "background:none;border:0;padding:0 5px 0 0;font-family:Verdana,Helvetica,Arial,sans-serif;font-size:9pt;cursor:pointer";
+			var sender = user.getIdentity(this.id).substr(0,1) + '<button style="' + style + '" name="parseCommand" value="/user ' + user.name + '">' +
 			'<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ';
 			var msg = Gold.emoticons.processPMsParsing(Tools.escapeHTML(target));
 			var oldtarg = target;
@@ -287,6 +288,7 @@ var commands = exports.commands = {
 
 		var id = toId(target);
 		if (!id) return this.parse('/help makechatroom');
+		if (Rooms.get(id) || Rooms.aliases[id]) return this.sendReply("The room you are trying to make is currently set as an alias for an existing room. (" + Rooms.aliases[id].title + ")");
 		if (Rooms.rooms[id]) return this.sendReply("The room '" + target + "' already exists.");
 		if (Rooms.global.addChatRoom(target)) {
 			if (cmd === 'makeprivatechatroom') {

@@ -276,7 +276,6 @@ var commands = exports.commands = {
 			}
 		}
 
-		if (targetUser !== user) targetUser.send(message);
 		targetUser.lastPM = user.userid;
 		user.lastPM = targetUser.userid;
 	},

@@ -106,7 +106,7 @@ Gold.emoticons = {
 				Users.ShadowBan.addMessage(user, "To " + room, origmsg);
 				break;
 			case false:
-				if (!this.checkEmoteModchat(Users(user), room, connection) && room.type === 'chat' || !room.type === 'battle') {
+				if (!this.checkEmoteModchat(Users(user), room, connection) && room.type === 'chat' || room.type !== 'battle') {
 					kitty = message = this.processEmoticons(message);
 					var message = Tools.escapeHTML(kitty);
 					return (message);
@@ -237,6 +237,7 @@ exports.commands = {
 					switch (parts[1]) {
 						case 'set':
 							if (!this.can('ban', null, room)) return this.sendReply("Access denied.");
+							if (room.type === 'battle') return this.sendReply("Emoticon moderated chat is not optimized for Battle rooms.  For that reason, emoticons are enabled in Battle rooms by default.");
 							if (!parts[2]) return this.sendReply("Usage: /emote modchat, set, [rank] - Sets modchat for emoticons in the respected room.");
 							if (!Config.groups[parts[2]] && toId(parts[2]) !== 'autoconfirmed' && toId(parts[2]) !== 'ac' || parts[2] === '★') return this.sendReply("ERROR: " + parts[2] + " is not a defined group in Config or is not yet optimized for moderated emoticon chat at this time.");
 							if (room.emoteModChat === parts[2]) return this.sendReply("Emoticon modchat is already enabled in this room for the rank you're trying to set it to.");

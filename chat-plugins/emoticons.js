@@ -2,7 +2,13 @@
  * This is a chat-plugin for Emoticons
  * You will need a line in parser to actually 
  * parse this so that it works. (See command-parser.js)
- * Credits: panpawn, jd  
+ * Credits: panpawn
+ *
+ * Features:
+ * - Emoticon Moderated chat (for chat and battle rooms)
+ * - Command based adding and removing of emoticons
+ * - Saves the emote moderated chat status in each chat room on restart
+ * - Checks if a user is shadowbanned and reacts accordingly
  */
 
 var fs = require('fs');
@@ -40,6 +46,13 @@ Gold.emoticons = {
 			case 'autoconfirmed':
 				rank = (user.autoconfirmed ? true : false);
 				return rank;
+				break;
+			case '★':
+				if (rank === '★' || rank === '+' || rank === '%' || rank === '@' || rank === '&' || rank === '#' || rank === '~') {
+					return true;
+				} else {
+					return false;
+				}
 				break;
 			case '+':
 				if (rank === '+' || rank === '%' || rank === '@' || rank === '&' || rank === '#' || rank === '~') {
@@ -106,12 +119,12 @@ Gold.emoticons = {
 				Users.ShadowBan.addMessage(user, "To " + room, origmsg);
 				break;
 			case false:
-				if (!this.checkEmoteModchat(Users(user), room, connection) && room.type === 'chat' || room.type !== 'battle') {
+				if (!this.checkEmoteModchat(Users(user), room, connection)) {
 					kitty = message = this.processEmoticons(message);
 					var message = Tools.escapeHTML(kitty);
 					return (message);
 					return;
-				} else if (this.checkEmoteModchat(Users(user), room, connection) || room.type === 'battle') {
+				} else if (this.checkEmoteModchat(Users(user), room, connection)) {
 					if (!match || message.charAt(0) === '!') return true;
 					message = Tools.escapeHTML(message);
 					message = this.processEmoticons(message);
@@ -236,24 +249,23 @@ exports.commands = {
 					if (!parts[1]) parts[1] = "status";
 					switch (parts[1]) {
 						case 'set':
-							if (!this.can('ban', null, room)) return this.sendReply("Access denied.");
-							if (room.type === 'battle') return this.sendReply("Emoticon moderated chat is not optimized for Battle rooms.  For that reason, emoticons are enabled in Battle rooms by default.");
+							if (room.type === 'chat' && !this.can('ban', null, room) || room.type === 'battle' && !this.can('privateroom', null, room)) return this.sendReply("Access denied.");
 							if (!parts[2]) return this.sendReply("Usage: /emote modchat, set, [rank] - Sets modchat for emoticons in the respected room.");
 							if (!Config.groups[parts[2]] && toId(parts[2]) !== 'autoconfirmed' && toId(parts[2]) !== 'ac' || parts[2] === '★') return this.sendReply("ERROR: " + parts[2] + " is not a defined group in Config or is not yet optimized for moderated emoticon chat at this time.");
 							if (room.emoteModChat === parts[2]) return this.sendReply("Emoticon modchat is already enabled in this room for the rank you're trying to set it to.");
 							room.emoteModChat = parts[2];
-							room.chatRoomData.emoteModChat = room.emoteModChat;
+							if (room.type === 'chat') room.chatRoomData.emoteModChat = room.emoteModChat;
 							Rooms.global.writeChatRoomData();
-							this.add("|raw|<div class=\"broadcast-red\"><b>Chat Emoticons Moderated Chat has been set!</b><br />To use emoticons in this room, you must be of rank <b>" + parts[2] + "</b> or higher.");
+							room.add("|raw|<div class=\"broadcast-red\"><b>Chat Emoticons Moderated Chat has been set!</b><br />To use emoticons in this room, you must be of rank <b>" + parts[2] + "</b> or higher.");
 							room.update();
 							this.privateModCommand("(" + user.name + " has set emoticon moderated chat for rank " + parts[2] + " and up.)");
 							break;
 						case 'off':
 						case 'disable':
-							if (!this.can('ban', null, room)) return this.sendReply("Access denied.");
+							if (room.type === 'chat' && !this.can('ban', null, room) || room.type === 'battle' && !this.can('privateroom', null, room)) return this.sendReply("Access denied.");
 							if (!room.emoteModChat) return this.sendReply("Emoticon modchat is already disabled in this room.");
 							room.emoteModChat = false;
-							room.chatRoomData.emoteModChat = room.emoteModChat;
+							if (room.type === 'chat') room.chatRoomData.emoteModChat = room.emoteModChat;
 							Rooms.global.writeChatRoomData();
 							this.add("|raw|<div class=\"broadcast-blue\"><b>Chat Emoticons Moderated Chat has been disabled!</b><br />Everyone in this room may use chat emoticons.");
 							room.update();
@@ -286,11 +298,7 @@ exports.commands = {
 					);
 			}
 		} catch (e) {
-			try {
-				Rooms.rooms.development.add(e.stack);
-			} catch (e) {
-				console.log("ERROR!  The EZ-Emote script has crashed!\n" + e.stack);
-			}
+			console.log("ERROR!  The EZ-Emote script has crashed!\n" + e.stack);
 		}
 	}
 };

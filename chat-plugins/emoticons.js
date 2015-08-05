@@ -256,7 +256,7 @@ exports.commands = {
 							room.emoteModChat = parts[2];
 							if (room.type === 'chat') room.chatRoomData.emoteModChat = room.emoteModChat;
 							Rooms.global.writeChatRoomData();
-							room.add("|raw|<div class=\"broadcast-red\"><b>Chat Emoticons Moderated Chat has been set!</b><br />To use emoticons in this room, you must be of rank <b>" + parts[2] + "</b> or higher.");
+							this.add("|raw|<div class=\"broadcast-red\"><b>Chat Emoticons Moderated Chat has been set!</b><br />To use emoticons in this room, you must be of rank <b>" + parts[2] + "</b> or higher.");
 							room.update();
 							this.privateModCommand("(" + user.name + " has set emoticon moderated chat for rank " + parts[2] + " and up.)");
 							break;

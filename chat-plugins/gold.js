@@ -635,7 +635,7 @@ exports.commands = {
 	},
 	rsi: 'roomshowimage',
 	roomshowimage: function(target, room, user) {
-		if (!this.can('roomban')) return false;
+		if (!this.can('ban', null, room)) return false;
 		if (!target) return this.sendReply("git gud");
 		var parts = target.split(',');
 		if (!this.canBroadcast()) return;

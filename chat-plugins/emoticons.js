@@ -93,7 +93,7 @@ exports.commands = {
             case 'enable':
             case 'disable':
             case 'off':
-				if (!this.can('ban')) return;
+				if (!this.can('ban', null, room)) return;
                 var status = ((parts[0] === 'enable' || parts[0] === 'on') ? true : false);
                 if (room.disableEmoticons === status) return this.sendReply("Emoticons are already " + (status ? "enabled" : "disabled") + " in this room.");
                 room.disableEmoticons = status;

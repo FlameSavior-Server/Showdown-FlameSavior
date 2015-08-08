@@ -104,6 +104,7 @@ exports.Formats = [
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3490462/\">LC Banlist</a>",
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3496013/\">LC Viability Ranking</a>"
 		],
+		section: "ORAS Singles",
 
 		maxLevel: 5,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
@@ -591,6 +592,7 @@ exports.Formats = [
 				}
 			}
 		},
+		onEffectivenessPriority: -5,
 		onEffectiveness: function (typeMod, target, type, move) {
 			if (move.id !== 'swift') return;
 			// Only calculate color effectiveness once

@@ -534,13 +534,13 @@ exports.commands = {
 	 	}
 	 	user.getIdentity = function (roomid) {
 			if (!roomid) roomid = 'lobby';
+			var room = Rooms.rooms[roomid];
 			if (this.locked) {
 				return 'â€½'+this.name;
 			}
-			if (this.mutedRooms[roomid]) {
+			if (room.isMuted(user)) {
 				return '!'+this.name;
 			}
-			var room = Rooms.rooms[roomid];
 			if (!room) return target + this.name;
 			if (room.auth) {
 				if (room.auth[this.userid]) {

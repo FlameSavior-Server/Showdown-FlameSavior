@@ -706,7 +706,7 @@ exports.commands = {
 	},
 	ep: 'endpoll',
 	endpoll: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!user.can('broadcast', null, room)) return this.sendReply('You do not have enough authority to use this command.');
 		if ((user.locked) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!room.question) return this.sendReply('There is no poll to end in this room.');
 		if (!room.answers) room.answers = new Object();

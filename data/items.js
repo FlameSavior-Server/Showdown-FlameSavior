@@ -132,7 +132,7 @@ exports.BattleItems = {
 		},
 		onAfterDamage: function (damage, target, source, effect) {
 			this.debug('effect: ' + effect.id);
-			if (effect.effectType === 'Move') {
+			if (effect.effectType === 'Move' && effect.id !== 'confused') {
 				this.add('-enditem', target, 'Air Balloon');
 				target.item = '';
 				this.itemData = {id: '', target: this};
@@ -141,7 +141,7 @@ exports.BattleItems = {
 		},
 		onAfterSubDamage: function (damage, target, source, effect) {
 			this.debug('effect: ' + effect.id);
-			if (effect.effectType === 'Move') {
+			if (effect.effectType === 'Move' && effect.id !== 'confused') {
 				this.add('-enditem', target, 'Air Balloon');
 				target.setItem('');
 			}
@@ -2327,10 +2327,19 @@ exports.BattleItems = {
 			move.pp += 10;
 			if (move.pp > move.maxpp) move.pp = move.maxpp;
 			this.add('-activate', pokemon, 'item: Leppa Berry', move.move);
-			if (pokemon.item === 'leppaberry') {
-				pokemon.isStale = 2;
-				pokemon.isStaleSource = 'useleppa';
+			if (pokemon.item !== 'leppaberry') {
+				var foeActive = pokemon.side.foe.active;
+				var foeIsStale = false;
+				for (var i = 0; i < 1; i++) {
+					if (foeActive.isStale >= 2) {
+						foeIsStale = true;
+						break;
+					}
+				}
+				if (!foeIsStale) return;
 			}
+			pokemon.isStale = 2;
+			pokemon.isStaleSource = 'useleppa';
 		},
 		num: 154,
 		gen: 3,

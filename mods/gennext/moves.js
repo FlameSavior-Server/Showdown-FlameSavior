@@ -189,10 +189,6 @@ exports.BattleMovedex = {
 			onTryHitPriority: 3,
 			onTryHit: function (target, source, move) {
 				if (target.volatiles.substitute || !move.flags['protect']) return;
-				if (move.breaksProtect) {
-					target.removeVolatile('Protect');
-					return;
-				}
 				this.add('-activate', target, 'Protect');
 				var lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
@@ -215,10 +211,6 @@ exports.BattleMovedex = {
 			onTryHitPriority: 3,
 			onTryHit: function (target, source, move) {
 				if (target.volatiles.substitute || !move.flags['protect'] || move.category === 'Status') return;
-				if (move.breaksProtect) {
-					target.removeVolatile('kingsshield');
-					return;
-				}
 				this.add('-activate', target, 'Protect');
 				var lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
@@ -243,11 +235,7 @@ exports.BattleMovedex = {
 			},
 			onTryHitPriority: 3,
 			onTryHit: function (target, source, move) {
-				if (target.volatiles.substitute) return;
-				if (move.breaksProtect) {
-					target.removeVolatile('spikyshield');
-					return;
-				}
+				if (target.volatiles.substitute || !move.flags['protect']) return;
 				if (move && (move.target === 'self' || move.id === 'suckerpunch')) return;
 				this.add('-activate', target, 'move: Protect');
 				if (move.flags['contact']) {
@@ -306,6 +294,7 @@ exports.BattleMovedex = {
 				this.heal(pokemon.maxhp / 2);
 			}
 		},
+		flags: {charge: 1, mirror: 1},
 		breaksProtect: true
 	},
 	razorwind: {
@@ -321,6 +310,7 @@ exports.BattleMovedex = {
 			chance: 100,
 			volatileStatus: 'confusion'
 		},
+		flags: {charge: 1, mirror: 1},
 		breaksProtect: true
 	},
 	skullbash: {
@@ -346,6 +336,7 @@ exports.BattleMovedex = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
+		flags: {contact: 1, charge: 1, mirror: 1},
 		breaksProtect: true
 	},
 	skyattack: {
@@ -363,6 +354,7 @@ exports.BattleMovedex = {
 				def: -1
 			}
 		},
+		flags: {charge: 1, mirror: 1, distance: 1},
 		breaksProtect: true
 	},
 	freezeshock: {
@@ -378,6 +370,7 @@ exports.BattleMovedex = {
 			chance: 100,
 			status: 'par'
 		},
+		flags: {charge: 1, mirror: 1},
 		breaksProtect: true
 	},
 	iceburn: {
@@ -393,6 +386,7 @@ exports.BattleMovedex = {
 			chance: 100,
 			status: 'brn'
 		},
+		flags: {charge: 1, mirror: 1},
 		breaksProtect: true
 	},
 	bounce: {
@@ -408,6 +402,7 @@ exports.BattleMovedex = {
 			chance: 30,
 			status: 'par'
 		},
+		flags: {contact: 1, charge: 1, mirror: 1, gravity: 1, distance: 1},
 		breaksProtect: true
 	},
 	fly: {
@@ -425,6 +420,7 @@ exports.BattleMovedex = {
 				def: -1
 			}
 		},
+		flags: {contact: 1, charge: 1, mirror: 1, gravity: 1, distance: 1},
 		breaksProtect: true
 	},
 	dig: {
@@ -442,6 +438,7 @@ exports.BattleMovedex = {
 				def: -1
 			}
 		},
+		flags: {contact: 1, charge: 1, mirror: 1, nonsky: 1},
 		breaksProtect: true
 	},
 	dive: {
@@ -459,6 +456,7 @@ exports.BattleMovedex = {
 				def: -1
 			}
 		},
+		flags: {contact: 1, charge: 1, mirror: 1, nonsky: 1},
 		breaksProtect: true
 	},
 	phantomforce: {
@@ -504,6 +502,7 @@ exports.BattleMovedex = {
 				def: -1
 			}
 		},
+		flags: {contact: 1, charge: 1, mirror: 1, gravity: 1, distance: 1},
 		breaksProtect: true
 	},
 	hyperbeam: {

@@ -1,7 +1,7 @@
 exports.commands = {
 	declareaotd: function(target, room, user) {
 		if (room.id != 'lobby') return this.sendReply("The command must be used in Lobby.");
-		if (!this.canBroadcast()) return false;
+		if (!user.can('broadcast', null, room)) return this.sendReply('You do not have enough authority to use this command.');
 		if (!this.canTalk()) return false;
 		this.add(
 			'|raw|<div class="broadcast-blue"><b>AOTD has begun in GoldenrodRadioTower! ' +

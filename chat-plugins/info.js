@@ -3973,7 +3973,7 @@ var commands = exports.commands = {
 		if (nature.exists) {
 			atLeastOne = true;
 			var link = baseLink + 'natures/' + nature.name.toLowerCase();
-			this.sendReplyBox("<a href=\"" + nature + "\">" + nature.name + " nature description</a> by Veekun");
+			this.sendReplyBox("<a href=\"" + link + "\">" + nature.name + " nature description</a> by Veekun");
 		}
 
 		if (!atLeastOne) {

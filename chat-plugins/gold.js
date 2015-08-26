@@ -1,6 +1,7 @@
 const MAX_REASON_LENGTH = 300;
 var fs = require('fs');
 var request = require('request');
+var moment = require('moment');
 var closeShop = false;
 var closedShop = 0;
 if (typeof Gold === 'undefined') global.Gold = {};
@@ -198,8 +199,9 @@ exports.commands = {
 		}
 		if (!Gold.tells[targetUser]) Gold.tells[targetUser] = [];
 		if (Gold.tells[targetUser].length === 8) return this.sendReply("User " + targetUser + " has too many tells queued.");
-		var date = Date();
-		var messageToSend = '|raw|' + date.slice(0, date.indexOf('GMT') - 1) + " - <b>" + user.getIdentity() + "</b> said: " + Tools.escapeHTML(message);
+		var date = moment().format('MMMM Do YYYY, h:mm a');
+		var datelbl = date.substr(-2).toUpperCase(); //AM or PM
+		var messageToSend = '|raw|<u>' + date.substring(0, date.length - 2) + datelbl + "</u><br/ > <b>" + user.group + "<font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</b> said: " + Tools.escapeHTML(message);
 		Gold.tells[targetUser].add(messageToSend);
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},

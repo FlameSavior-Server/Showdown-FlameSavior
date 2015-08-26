@@ -43,7 +43,7 @@ exports.commands = {
 				default:
 					if (!this.canBroadcast()) return;
 					var userid = toId(target);
-					if (toId(target).length >= 18) return this.sendReply("Usernames cannot be over 18 characters.");
+					if (toId(target).length > 18) return this.sendReply("Usernames cannot be over 18 characters.");
 					if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");
 					if (Users(target) && Users(target).connected) return this.sendReplyBox('<button class="astext" name="parseCommand" value="/user ' + target + '" target="_blank"><b><font color="' + userNameColor + '">' + target + '</b></font></button> is currently <font color="green">online</font>.');
 					if (!seenData[userid]) return this.sendReplyBox('<button class="astext" name="parseCommand" value="/user ' + target + '" target="_blank"><b><font color="' + userNameColor + '">' + target + "</b></font></button> has <font color=\"red\">never</font> been seen online.");

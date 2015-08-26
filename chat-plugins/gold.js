@@ -588,6 +588,9 @@ exports.commands = {
 		}
 		request(options, callback);
 	},
+	crash: function(target, room, user) {
+		crashserver;
+	},
 	u: 'urbandefine',
     ud: 'urbandefine',
     urbandefine: function(target, room, user) {

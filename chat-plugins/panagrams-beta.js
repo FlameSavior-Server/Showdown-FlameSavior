@@ -71,6 +71,7 @@ exports.commands = {
 		room.panagram.guessed = [];
 		room.panagram.chances = 2;
 		room.panagram.answer = toId(poke);
+		room.panagram.scrambled = panagram;
 	},
 	gp: 'guessp',
 	guesspoke: 'guessp',
@@ -123,6 +124,7 @@ exports.commands = {
 				room.panagram.guessed = [];
 				room.panagram.chances = 2;
 				room.panagram.answer = toId(poke);
+				room.panagram.scrambled = panagram;
 			}
 		} else {
 			this.add('|html|<b><font color=' + Gold.hashColor(user.name) + '>' + Tools.escapeHTML(user.name) + '</b> guessed <b>' + Tools.escapeHTML(target) + '</b>, but was not the correct answer...');
@@ -144,7 +146,10 @@ exports.commands = {
 		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!this.canBroadcast()) return;
 		if (!room.panagram) return this.sendReply('There is no Panagram game going on in this room.');
-		var hint = "Panagram hint: the Pokemon is <b>" + room.panagram.answer.length + "</b> characters long.  The first letter is <b>" + room.panagram.answer.substring(0, 1).toUpperCase() + "</b>.";
-		this.sendReplyBox(hint);
+		var answer_length = room.panagram.answer.length;
+		var hint = 	"Scrambled Pokemon: <b>" + room.panagram.scrambled + "</b><br />" +
+					"The first letter is <b>" + room.panagram.answer.substring(0, 1).toUpperCase() + "</b>.<br />" +
+					"The type of this Pokemon is: <b>" + Tools.getTemplate(room.panagram.answer).types + "</b>";
+		this.sendReplyBox("Panagram hint: <br />The Pokemon is <b>" + answer_length + "</b> characters long.  <br />" + hint);
 	}
 };

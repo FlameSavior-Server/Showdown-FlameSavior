@@ -2,6 +2,7 @@
  * This is a chat-plugin for Emoticons
  * You will need a line in parser to actually 
  * parse this so that it works. (See command-parser.js)
+ * Also, you will need a few lines for the PM command to make it work in PMs.
  * Credits: panpawn
  *
  * Features:
@@ -283,8 +284,8 @@ exports.commands = {
 					if (!this.canBroadcast()) return;
 					this.sendReplyBox(
 						"<table bgcolor=\"#ADD8E6\" width=\"100%\"><td>" +
-							"<center><b>EZ-Emoticon Commands:</b><br />" +
-							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/ez-emotes.js\">panpawn</a>)</font></i></center><br />" +
+							"<center><b>Emoticon Commands:</b><br />" +
+							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/emoticons.js\">panpawn</a>)</font></i></center><br />" +
 							"/emote <code>add, [emote], [link]</code> - Adds a chat emoticon. Requires ~.<br />" +
 							"/emote <code>remove, [emote]</code> - Removes a chat emoticon. Requires ~.<br />" +
 							"/emote <code>modchat, set, [rank symbol / disable]</code> - Sets moderated chat for chat emoticons in the respected room to the respected rank. Requires @, #, &, ~.<br />" +
@@ -298,7 +299,7 @@ exports.commands = {
 					);
 			}
 		} catch (e) {
-			console.log("ERROR!  The EZ-Emote script has crashed!\n" + e.stack);
+			console.log("ERROR!  The Emoticon script has crashed!\n" + e.stack);
 		}
 	}
 };

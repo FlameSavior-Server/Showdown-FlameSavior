@@ -5,7 +5,8 @@ const MAX_REASON_LENGTH = 300;
 
 var TournamentGenerators = {
 	roundrobin: require('./generator-round-robin.js').RoundRobin,
-	elimination: require('./generator-elimination.js').Elimination
+	elimination: require('./generator-elimination.js').Elimination,
+	buyin: require('./generator-elimination.js').Elimination
 };
 
 var Tournament;
@@ -54,6 +55,14 @@ function createTournament(room, format, generator, playerCap, isRated, args, out
 		output.sendReply("You cannot have a player cap that is less than 2.");
 		return;
 	}
+
+	if (toId(generator) === 'buyin') {
+		if (args.length < 2) {
+			args[1] = 1;
+		}
+		room.tournamentBuyin = parseInt(args[0]);
+		room.tournamentPool = 0;
+	}
 	return (exports.tournaments[room.id] = new Tournament(room, format, createTournamentGenerator(generator, args, output), playerCap, isRated));
 }
 function deleteTournament(name, output) {
@@ -63,6 +72,20 @@ function deleteTournament(name, output) {
 		output.sendReply(name + " doesn't exist.");
 		return false;
 	}
+	if (toId(tournament.generator.name).substr(5) === 'buyin') {
+		try {
+			var economy = require('../economy.js');
+			var amount = tournament.room.tournamentBuyin;
+			var users = usersToNames(tournament.generator.getUsers().sort());
+			var refundBucks = setInterval(function() {
+				if (!users[0]) return clearInterval(refundBucks);
+				writeMoney(users[0], amount);
+				users.splice(0,1);
+			}, 200);
+		} catch (e) {}
+	}
+	delete tournament.room.tournamentBuyin;
+	delete tournament.room.tournamentPool;
 	tournament.forceEnd(output);
 	delete exports.tournaments[id];
 	return true;
@@ -100,6 +123,11 @@ Tournament = (function () {
 		this.pendingChallenges = null;
 
 		this.isEnded = false;
+
+
+		if (room.tournamentBuyin) {
+			generator.name = (room.tournamentBuyin + ' Buck Buy in');
+		}
 
 		room.add('|tournament|create|' + this.format + '|' + generator.name + '|' + this.playerCap);
 		room.send('|tournament|update|' + JSON.stringify({
@@ -279,6 +307,11 @@ Tournament = (function () {
 		if (typeof error === 'string') {
 			output.sendReply('|tournament|error|' + error);
 			return;
+		}
+
+		if (toId(this.generator.name).substr(5) === 'buyin') {
+			this.room.tournamentPool -= this.room.tournamentBuyin;
+			writeMoney(user.userid, this.room.tournamentBuyin);
 		}
 
 		this.room.add('|tournament|leave|' + user.name);
@@ -730,7 +763,80 @@ Tournament = (function () {
 			bracketData: this.getBracketData()
 		}));
 		this.isEnded = true;
+
+		var data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
+		var data2 = data;
+		data = data['results'].toString();
+		var winner = '';
+
+		if (data.indexOf(',') >= 0) {
+			data = data.split(',');
+			winner = data[0];
+		} else {
+			winner = data;
+		}
+
+		var tourSize = this.generator.users.size;
+		try { // this code is a bigger mess than I remember... I should clean it up some day.
+			var runnerUp = false;
+
+			// there's probably a better way to do this but I'm lazy
+			if (data2['bracketData']['rootNode']) {
+				if (data2['bracketData']['rootNode']['children']) {
+					if (data2['bracketData']['rootNode']['children'][0]['team'] !== winner) runnerUp = data2['bracketData']['rootNode']['children'][0]['team'];
+					if (data2['bracketData']['rootNode']['children'][1]['team'] !== winner) runnerUp = data2['bracketData']['rootNode']['children'][1]['team'];
+				}
+			}
+
+			var firstMoney = false;
+			var secondMoney = false;
+
+			if (this.room.isOfficial && tourSize >= 8) {
+				firstMoney = Math.round(tourSize/10);
+				secondMoney = Math.round(firstMoney/2);
+			} 
+
+			if (toId(this.generator.name).substr(5) === 'buyin') {
+				this.room.tournamentPool -= Math.round(this.room.tournamentPool * 0.10);
+				firstMoney = Math.round(this.room.tournamentPool / 1.5);
+				secondMoney = Math.floor(this.room.tournamentPool - firstMoney);				
+			}
+
+			var self = this;
+
+			if (firstMoney) {
+				this.room.add(
+					'|raw|<b><font color="' + hashColor(winner) + '">' + Tools.escapeHTML(winner) +
+					'</font> has also won <font color=#24678d>' + firstMoney + '</font> ' + 
+					((firstMoney === 1) ? 'buck' : 'bucks') + ' for winning the tournament!</b>'
+				);
+
+				if (runnerUp) {
+					this.room.add(
+						'|raw|<b><font color="' + hashColor(runnerUp) + '">' + Tools.escapeHTML(runnerUp) + 
+						'</font> has also won <font color=#24678d>' + secondMoney + '</font> ' + 
+						((secondMoney === 1) ? 'buck' : 'bucks') + ' for coming in second!</b>'
+					);
+				}
+				writeMoney(toId(winner), firstMoney, function() {
+					readMoney(toId(winner), function(newMoney) {
+						logTransaction(winner + ' has won ' + firstMoney + ' ' + ((firstMoney === 1) ? 'buck' : ' bucks') + ' from a tournament in ' + self.room.title + '. They now have ' + newMoney);
+						if (runnerUp) {
+							writeMoney(toId(runnerUp), secondMoney, function() {
+								readMoney(toId(runnerUp), function(newMoney2) {
+									logTransaction(runnerUp + ' has won ' + secondMoney + ' ' + ((secondMoney === 1) ? 'buck' : 'bucks') + ' from a tournament in ' + self.room.title + '. They now have ' + newMoney2);
+								});
+							});
+						}
+					});
+				});
+			}
+		} catch (e) {
+			console.log('Error giving bucks for tournaments: ' + e.stack);
+		}
+
 		delete exports.tournaments[toId(this.room.id)];
+		this.room.update();
 	};
 
 	return Tournament;
@@ -741,7 +847,33 @@ var commands = {
 		j: 'join',
 		in: 'join',
 		join: function (tournament, user) {
+			if (usersToNames(tournament.generator.getUsers().sort()).indexOf(user.name) > -1) return this.sendReply("You're already in the tournament.");
+			if (!user[tournament.room.id]) {
+				user[tournament.room.id] = {};
+				user[tournament.room.id].joinTime = Date.now() - 60000;
+			}
+			var milliseconds = (Date.now() - user[tournament.room.id].joinTime);
+			var seconds = ((milliseconds / 1000) % 60);
+			var remainingTime = Math.round(seconds - 60);
+			if ((Date.now() - user[tournament.room.id].joinTime) < 60000) {
+				return this.sendReply('You have recently joined the tournament. To prevent joining and leaving flood, you must wait ' + (remainingTime - remainingTime * 2) + ' seconds before joining again.');
+			}
+			if (toId(tournament.generator.name).substr(toId(tournament.generator.name).length - 5, toId(tournament.generator.name).length) === 'buyin') {
+				var self = this;
+				readMoney(user.userid, function(amount) {
+					if (amount < tournament.room.tournamentBuyin) return self.sendReply("You need " + (tournament.room.tournamentBuyin - amount) + " more bucks to join this tournament.");
+					writeMoney(user.userid, tournament.room.tournamentBuyin * -1, function(){
+						tournament.addUser(user, false, self);
+						tournament.room.tournamentPool += tournament.room.tournamentBuyin;
+						self.sendReply('You have joined the tournament.');
+						user[tournament.room.id].joinTime = Date.now();
+					});
+				});
+				return;
+			}
 			tournament.addUser(user, false, this);
+			this.sendReply('You have joined the tournament.');
+			user[tournament.room.id].joinTime = Date.now();
 		},
 		l: 'leave',
 		out: 'leave',

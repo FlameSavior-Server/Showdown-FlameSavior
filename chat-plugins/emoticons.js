@@ -106,12 +106,10 @@ Gold.emoticons = {
 		var parsed_message = this.processEmoticons(message);
 		for (var i in this.chatEmotes) {
 			if (~message.indexOf(i)) {
-				if (~parsed_message.indexOf('<img')) {
-					if ((parsed_message.match(/<img/g) || []).length <= this.maxChatEmotes) {
-						match = true;
-					} else {
-						match = false;
-					}
+				if ((parsed_message.match(/<img/g) || []).length <= this.maxChatEmotes) {
+					match = true;
+				} else {
+					match = false;
 				}
 			}
 		}

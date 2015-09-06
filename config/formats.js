@@ -700,6 +700,41 @@ exports.Formats = [
 		ruleset: ['OU'],
 		banlist: ['Allow CAP']
 	},
+    {
+        name: "[Gen 5] CAP",
+        section: "Other Metagames",
+
+        mod: 'gen5',
+        searchShow: false,
+        ruleset: ['[Gen 5] OU'],
+        banlist: ['Allow CAP', 'Cawmodore', 'Volkraken', 'Plasmanta', 'Naviathan']
+    },
+    {
+        name: "[Gen 4] CAP",
+        section: "Other Metagames",
+
+        mod: 'gen4',
+        searchShow: false,
+        ruleset: ['[Gen 4] OU'],
+        banlist: ['Allow CAP', 'Tomohawk', 'Necturna', 'Mollux', 'Aurumoth', 'Malaconda', 'Cawmodore', 'Volkraken', 'Plasmanta', 'Naviathan']
+    },
+    {
+        name: "CAP Doubles",
+        section: "Other Metagames",
+
+        gameType: 'doubles',
+        searchShow: false,
+        ruleset: ['Doubles OU'],
+        banlist: ['Allow CAP']
+    },
+    {
+        name: "CAP Monotype",
+        section: "Other Metagames",
+
+        searchShow: false,
+        ruleset: ['Monotype'],
+        banlist: ['Allow CAP']
+    },
 	{
 		name: "Battle Factory",
 		section: "Other Metagames",

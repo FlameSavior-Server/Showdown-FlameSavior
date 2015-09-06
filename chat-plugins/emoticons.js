@@ -135,8 +135,12 @@ Gold.emoticons = {
 					if (!match || message.charAt(0) === '!') return true;
 					message = Tools.escapeHTML(message);
 					message = this.processEmoticons(message);
+
+					//PS formatting
 					message = message.replace(/\_\_([^< ](?:[^<]*?[^< ])?)\_\_(?![^<]*?<\/a)/g, '<i>$1</i>'); //italics
 					message = message.replace(/\*\*([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>'); //bold
+					message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<strike>$1</strike>'); //strike through
+
 					if (user.hiding) {
 						room.addRaw(' <button style="' + style + '" name="parseCommand" value="/user ' +
 						user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');

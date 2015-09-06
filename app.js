@@ -326,6 +326,8 @@ Rooms.global.formatListText = Rooms.global.getFormatListText();
 delete process.send; // in case we're a child process
 global.Verifier = require('./verifier.js');
 
+global.sqlite3 = require('sqlite3'); // sqlite3 doesn't like to be hotpatched so we load it here instead of economy.js
+
 global.CommandParser = require('./command-parser.js');
 
 global.Simulator = require('./simulator.js');

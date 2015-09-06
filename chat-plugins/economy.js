@@ -1,4 +1,4 @@
-var sqlite3 = require('sqlite3');
+//var sqlite3 = require('sqlite3'); // sqlite3 doesn't like to be hotpatched so we load it as a global in app.js instead
 var db = new sqlite3.Database('config/users.db', function() {
 	db.run("CREATE TABLE if not exists users (userid TEXT, name TEXT, bucks INTEGER)");
 });

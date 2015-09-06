@@ -1466,21 +1466,20 @@ var commands = exports.commands = {
 
 		if (!this.canTalk()) return;
 
-		this.add('|raw|<div class="broadcast-blue"><b>' + Tools.escapeHTML(target) + '</b></div>');
+		this.add('|raw|<div class="broadcast-blue"><b>' + target + '</b></div>');
 		this.logModCommand(user.name + " declared " + target);
 	},
 	declarehelp: ["/declare [message] - Anonymously announces a message. Requires: # & ~"],
 
-	htmldeclare: function (target, room, user) {
-		if (!target) return this.parse('/help htmldeclare');
-		if (!this.can('gdeclare', null, room)) return false;
+	pdeclare: function (target, room, user) {
+		if (!target) return this.parse('/help declare');
+		if (!this.can('pdeclare')) return false;
 
 		if (!this.canTalk()) return;
 
-		this.add('|raw|<div class="broadcast-blue"><b>' + target + '</b></div>');
-		this.logModCommand(user.name + " declared " + target);
+		this.add('|raw|' + target);
+		this.logModCommand(user.name + " plain declared " + target);
 	},
-	htmldeclarehelp: ["/htmldeclare [message] - Anonymously announces a message using safe HTML. Requires: ~"],
 
 	gdeclare: 'globaldeclare',
 	globaldeclare: function (target, room, user) {

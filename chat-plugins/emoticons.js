@@ -10,6 +10,8 @@
  * - Command based adding and removing of emoticons
  * - Saves the emote moderated chat status in each chat room on restart
  * - Checks if a user is shadowbanned and reacts accordingly
+ * - Checks the number of chat emoticons in one message and won't parse if it is more than Gold.emoticons.maxChatEmotes
+ * - Now parses for PS formats such as bold, italics, and strikethrough
  */
 
 var fs = require('fs');
@@ -139,7 +141,7 @@ Gold.emoticons = {
 					//PS formatting
 					message = message.replace(/\_\_([^< ](?:[^<]*?[^< ])?)\_\_(?![^<]*?<\/a)/g, '<i>$1</i>'); //italics
 					message = message.replace(/\*\*([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>'); //bold
-					message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<strike>$1</strike>'); //strike through
+					message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<strike>$1</strike>'); //strikethrough
 
 					if (user.hiding) {
 						room.addRaw(' <button style="' + style + '" name="parseCommand" value="/user ' +

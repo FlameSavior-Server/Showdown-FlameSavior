@@ -20,6 +20,7 @@ var style = "background:none;border:0;padding:0 5px 0 0;font-family:Verdana,Helv
 if (typeof Gold === 'undefined') global.Gold = {};
 
 Gold.emoticons = {
+	maxChatEmotes: 5, //the maximum number of emoticons in one chat message that gets parsed
 	chatEmotes: {},
 	processEmoticons: function(text) {
 		var patterns = [],
@@ -102,9 +103,16 @@ Gold.emoticons = {
 	},
 	processChatData: function(user, room, connection, message) {
 		var match = false;
+		var parsed_message = this.processEmoticons(message);
 		for (var i in this.chatEmotes) {
-			if (message.indexOf(i) >= 0) {
-				match = true;
+			if (~message.indexOf(i)) {
+				if (~parsed_message.indexOf('<img')) {
+					if ((parsed_message.match(/<img/g) || []).length <= this.maxChatEmotes) {
+						match = true;
+					} else {
+						match = false;
+					}
+				}
 			}
 		}
 		switch (Users.ShadowBan.checkBanned(user) && match) {

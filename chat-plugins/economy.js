@@ -15,11 +15,11 @@ var prices = {
 	"fix": 10,
 	"declare": 15,
 	"poof": 20,
-	"customavatar": 25,
-	"animatedavatar": 35,
-	"infobox": 40,
+	"customavatar": 0,
+	"animatedavatar": 0,
+	"infobox": 0,
 	"leagueshop": 55,
-	"chatroom": 70,
+	"chatroom": 100,
 };
 
 function readMoney(userid, callback) {
@@ -66,6 +66,8 @@ function messageSeniorStaff (message) {
 	for (var u in Users.users) {
 		if (!Users.users[u].connected || !Users.users[u].can('declare')) continue;
 		Users.users[u].send('|pm|~Server|'+Users.users[u].getIdentity()+'|'+message);
+		Rooms('staff').addRaw('<font color="red"><b>SHOP:</b></font> ' + Tools.escapeHTML(message));
+		Rooms('staff').update();
 	}
 }
 

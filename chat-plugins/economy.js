@@ -300,7 +300,7 @@ exports.commands = {
 	 	});
 	},
 
-	shop: function(target, room, user) {
+	/*shop: function(target, room, user) {
 	 	if (!this.canBroadcast()) return;
 	 	this.sendReplyBox('<center><h4><b><u>' + shopTitle + '</u></b></h4><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Item</th><th>Description</th><th>Price</th></tr>' +
 	 		'<tr><td>Custom Symbol</td><td>Buys a custom symbol to go in front of your name. (Temporary until restart)</td><td>5</td></tr>' +
@@ -315,7 +315,7 @@ exports.commands = {
 	 		'<tr><td>Chat Room</td><td>Buys a chatroom for you to own (comes with a free welcome message)</td><td>70</td></tr>' +
 	 		'</table><br />To buy an item from the shop, use /buy [item]. <br />Use /currencyhelp to view money-based commands.<br />All sales final, no refunds will be provided.</center>'
 	 	);
-	},
+	},*/
 
 	roomshop: 'leagueshop',
 	leagueshop: function(target, room, user) {

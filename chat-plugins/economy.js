@@ -12,13 +12,13 @@ var serverIp = '167.114.152.79';
 var prices = {
 	"customsymbol": 5,
 	"leagueroom": 5,
-	"fix": 10,
+	"fix": 0,
 	"declare": 15,
-	"poof": 20,
+	"poof": Infinity,
 	"customavatar": 0,
 	"animatedavatar": 0,
 	"infobox": 0,
-	"leagueshop": 55,
+	"leagueshop": Infinity,
 	"chatroom": 100,
 };
 
@@ -279,7 +279,7 @@ exports.commands = {
 					matched = true;
 					break;
 				case 'leagueshop':
-					if (userMoney < prices[itemid]) return self.sendReply("You need " + (prices[itemid] - userMoney) + " more bucks to purchase a fix.");
+					if (userMoney < prices[itemid]) return self.sendReply("You need " + (prices[itemid] - userMoney) + " more bucks to purchase a league shop.");
 					if (!targetSplit[1]) return self.sendReply("Please specify the room you would like to buy a league shop for with /buy leagueshop, room.");
 					if (!Rooms(toId(targetSplit[1]))) return self.sendReply("That room doesn't exist.");
 	 				var targetRoom = Rooms(targetSplit[1]);

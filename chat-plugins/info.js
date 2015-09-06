@@ -11,6 +11,19 @@
  */
 
 const RESULTS_MAX_LENGTH = 10;
+var http = require('http');
+var fs = require('fs');
+var urbanCache = {};
+try {
+	urbanCache = JSON.parse(fs.readFileSync('config/udcache.json', 'utf8'));
+} catch (e) {}
+
+function cacheUrbanWord (word, definition) {
+	if (word.toString().length < 1) return;
+	word = word.toLowerCase().replace(/ /g, '');
+	urbanCache[word] = {"definition": definition, "time": Date.now()};
+	fs.writeFile('config/urbancache.json', JSON.stringify(urbanCache));
+}
 
 var commands = exports.commands = {
 
@@ -2424,7 +2437,77 @@ var commands = exports.commands = {
 
 		this.sendReplyBox(target);
 	},
-	htmlboxhelp: ["/htmlbox [message] - Displays a message, parsing HTML code contained. Requires: ~ # with global authority"]
+	htmlboxhelp: ["/htmlbox [message] - Displays a message, parsing HTML code contained. Requires: ~ # with global authority"],
+
+	urand: 'ud',
+	udrand: 'ud',
+	u: 'ud',
+	ud: function(target, room, user, connection, cmd) {
+		var random = false;
+		if (!target) {
+			target = '';
+			random = true;
+		}
+		if (target.toString().length > 50) return this.sendReply('/ud - <phrase> can not be longer than 50 characters.');
+		if (!this.canBroadcast()) return;
+
+		var options;
+		if (!random) {
+			options = {
+			    host: 'api.urbandictionary.com',
+			    port: 80,
+			    path: '/v0/define?term=' + encodeURIComponent(target)
+			};
+		} else {
+			options = {
+			    host: 'api.urbandictionary.com',
+			    port: 80,
+			    path: '/v0/random',
+			};
+		}
+
+		var milliseconds = ((44640 * 60) * 1000);
+
+		if (urbanCache[target.toLowerCase().replace(/ /g, '')] && Math.round(Math.abs((urbanCache[target.toLowerCase().replace(/ /g, '')].time - Date.now())/(24*60*60*1000))) < 31) {
+			return this.sendReplyBox("<b>" + Tools.escapeHTML(target) + ":</b> " + urbanCache[target.toLowerCase().replace(/ /g, '')].definition.substr(0,400));
+		}
+
+		var self = this;
+
+		var req = http.get(options, function(res) {
+			res.setEncoding('utf8');
+			if (res.statusCode !== 200) {
+				self.sendReplyBox('No results for <b>"' + Tools.escapeHTML(target) + '"</b>.');
+				return room.update();
+			}
+			var data = '';
+
+			res.on('data', function (chunk) {
+				console.log('BODY: ' + chunk);
+				data += chunk;
+			});
+
+			res.on('end', function () {
+				var page = JSON.parse(data);
+				if (page['result_type'] === 'no_results') {
+		        	self.sendReplyBox('No results for <b>"' + Tools.escapeHTML(target) + '"</b>.');
+		        	return room.update();
+		        }
+
+				var definitions = page['list'];
+				var output = '<b>' + Tools.escapeHTML(definitions[0]['word']) + ':</b> ' + Tools.escapeHTML(definitions[0]['definition']).replace(/\r\n/g, '<br />').replace(/\n/g, ' ');
+				if (output.length > 400) output = output.slice(0,400) + '...';
+				cacheUrbanWord(definitions[0]['word'], Tools.escapeHTML(definitions[0]['definition']).replace(/\r\n/g, '<br />').replace(/\n/g, ' '));
+				self.sendReplyBox(output);
+				return room.update();
+			});
+		});
+
+		req.on('error', function(e) {
+			console.log('/u error: ' + e.message);
+		});
+		req.end();
+	},
 };
 
 process.nextTick(function () {

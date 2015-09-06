@@ -95,9 +95,9 @@ exports.commands = {
             case 'off':
 				if (!this.can('ban', null, room)) return;
                 var status = ((parts[0] === 'enable' || parts[0] === 'on') ? true : false);
-                if (room.disableEmoticons === status) return this.sendReply("Emoticons are already " + (status ? "enabled" : "disabled") + " in this room.");
-                room.disableEmoticons = status;
-                room.chatRoomData.disableEmoticons = status;
+                if (room.emoteStatus === status) return this.sendReply("Emoticons are already " + (status ? "enabled" : "disabled") + " in this room.");
+                room.emoteStatus = status;
+                room.chatRoomData.emoteStatus = status;
                 Rooms.global.writeChatRoomData();
                 this.privateModCommand('(' + user.name + ' ' + (status ? ' enabled ' : ' disabled ') + 'emoticons in this room.)');
                 break;
@@ -110,6 +110,11 @@ exports.commands = {
                 this.sendReplyBox(reply);
                 break;
  
+            case 'status':
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox("Emoticons are currently " + (room.emoteStatus ? "<font color=\"green\"><b>enabled</b></font>" : "<font color=\"red\"><b>disabled</b></font>") + " in this room.");
+                break;
+
             default:
             case 'help':
                 if (!this.canBroadcast()) return;
@@ -120,6 +125,7 @@ exports.commands = {
                     "/emoticon del/delete/remove/rem, [name] - Removes an emoticon.<br />" +
                     "/emoticon enable/on/disable/off - Enables or disables emoticons in the current room.<br />" +
                     "/emoticon view/list - Displays the list of emoticons.<br />" +
+                    "/emoticon status - Displays the status of emoticons in the current room.<br />" +
                     "/emoticon help - Displays this help command.<br />" +
                     "<a href=\"https://gist.github.com/jd4564/ef66ecc47c58b3bb06ec\">Emoticon Plugin by: jd</a>"
                 );

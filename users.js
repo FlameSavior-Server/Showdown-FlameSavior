@@ -935,6 +935,7 @@ User = (function () {
 	User.prototype.forceRename = function (name, registered) {
 		// skip the login server
 		var userid = toId(name);
+		updateSeen(userid);
 
 		if (users[userid] && users[userid] !== this) {
 			return false;
@@ -1193,6 +1194,9 @@ User = (function () {
 		}
 	};
 	User.prototype.onDisconnect = function (connection) {
+		if (this.named) {
+			updateSeen(this.userid);
+		}
 		for (var i = 0; i < this.connections.length; i++) {
 			if (this.connections[i] === connection) {
 				// console.log('DISCONNECT: ' + this.userid);

@@ -10,8 +10,10 @@
  * - Command based adding and removing of emoticons
  * - Saves the emote moderated chat status in each chat room on restart
  * - Checks if a user is shadowbanned and reacts accordingly
+ * - Does not require server-side CSS (custom.css) elements for usernames
  * - Checks the number of chat emoticons in one message and won't parse if it is more than Gold.emoticons.maxChatEmotes
  * - Now parses for PS formats such as bold, italics, and strikethrough
+ * - PMs emoticons
  */
 
 var fs = require('fs');
@@ -242,7 +244,7 @@ exports.commands = {
 					for (var e in emotes) {
 						output += e + "<br />";
 					}
-					this.sendReplyBox(output);
+					this.sendReplyBox("<div class=\"infobox-limited\" target=\"_blank\">" + output + "</div>");
 					break;
 				case 'view':
 					if (!this.canBroadcast()) return;
@@ -253,7 +255,7 @@ exports.commands = {
 					while (len--) {
 						emoticons.push((Gold.emoticons.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
 					}
-					this.sendReplyBox("<b><u>List of emoticons (" + Object.size(emotes) + "):</b></u> <br/><br/>" + emoticons.join(' ').toString());
+					this.sendReplyBox("<div class=\"infobox-limited\" target=\"_blank\"><b><u>List of emoticons (" + Object.size(emotes) + "):</b></u> <br/><br/>" + emoticons.join(' ').toString() + "</div>");
 					break;
 				case 'object':
 					if (!this.canBroadcast()) return;

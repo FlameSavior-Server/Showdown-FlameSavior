@@ -2543,6 +2543,11 @@ var commands = exports.commands = {
 		});
 		req.end();
 	},
+
+	forum: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox("Our forums can be found <a href=\"http://luster.no-ip.org/forum\">here</a>.");
+	},
 };
 
 process.nextTick(function () {

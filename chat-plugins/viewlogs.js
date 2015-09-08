@@ -27,7 +27,7 @@ exports.commands = {
 		if (!targetSplit[1]) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] -Provides you with a temporary link to view the target rooms chat logs.");
 		for (var u in targetSplit) targetSplit[u] = targetSplit[u].trim();
 		var targetRoom = targetSplit[0];
-		if (!user.can('lock') || Rooms.rooms.toId(targetRoom).auth[toId(user.name)] !== '#') return this.sendReply('/viewlogs - Access denied.');
+		if (!user.can('lock') || !user.can('declare', null, toId(targetRoom))) return this.sendReply('/viewlogs - Access denied.');
 		if (toId(targetRoom) === 'staff' && !user.can('warn')) return this.sendReply("/viewlogs - Access denied.");
 		if (toId(targetRoom) === 'administrators' && !user.can('hotpatch')) return this.sendReply("/viewlogs - Access denied.");
 		if (toId(targetRoom) === 'upperstaff' && !user.can('pban')) return this.sendReply("/viewlogs - Access denied.");

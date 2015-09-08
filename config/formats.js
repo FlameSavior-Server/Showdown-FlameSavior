@@ -958,7 +958,7 @@ exports.Formats = [
 		name: "Gold Battle",
 		section: "Other Metagames",
 		
-		validateSet: function(set) {
+		onValidateSet: function(set) {
 			var template = this.getTemplate(set.species || set.name);
 			if (template.color !== 'Yellow') return [set.species + " is not a yellow / gold Pokémon."];
 			if (set.shiny) return [set.species + " is not allowed to be shiny... This is called Gold Battle, duh."];

@@ -100,13 +100,13 @@ exports.commands = {
 					
 				var profile = '';
 				profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
-				profile += '&nbsp;<font color=#24678d><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
-				profile += '&nbsp;<font color=#24678d><b>Registered: </font></b>' + regdate + '<br />';
-				if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=#24678d><b>Rank: </font></b>' + userGroup + '<br />';
-				if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=#24568d><b>Rank: </font></b>' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';
-				if (bucks) profile += '&nbsp;<font color=#24678d><b>Bucks: </font></b>' + bucks + '<br />';
-				if (online) profile += '&nbsp;<font color=#24678d><b>Last Online: </font></b><font color=green>Currently Online</font><br />';
-				if (!online) profile += '&nbsp;<font color=#24678d><b>Last Online: </font></b>' + seenOutput + '<br />';
+				profile += '&nbsp;<font color=#00868B><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
+				profile += '&nbsp;<font color=#00868B><b>Registered: </font></b>' + regdate + '<br />';
+				if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=#00868B><b>Rank: </font></b>' + userGroup + '<br />';
+				if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=#00868B><b>Rank: </font></b>' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';
+				if (bucks) profile += '&nbsp;<font color=#00868B><b>Bucks: </font></b>' + bucks + '<br />';
+				if (online) profile += '&nbsp;<font color=#00868B><b>Last Online: </font></b><font color=green>Currently Online</font><br />';
+				if (!online) profile += '&nbsp;<font color=#00868B><b>Last Online: </font></b>' + seenOutput + '<br />';
 				profile += '<br clear="all">';
 				self.sendReplyBox(profile);
 				room.update();

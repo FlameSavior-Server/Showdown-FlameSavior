@@ -176,6 +176,6 @@ exports.commands = {
 		if ((Date.now() - room.dice.startTime) < 60000 && !user.can('broadcast', null, room)) return this.sendReply('Regular users may not end a dice game within the first minute of it starting.');
 		room.dice = {};
 		room.dice.status = 0;
-		return room.addRaw('<b>' + Tools.escapeHTML(user.name) + ' ended the dice game.');
+		return this.add('|raw|<b>' + Tools.escapeHTML(user.name) + ' ended the dice game.');
 	},
 };

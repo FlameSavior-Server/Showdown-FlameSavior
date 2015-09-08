@@ -695,7 +695,7 @@ exports.commands = {
 			if (!room.answerList[u] || room.answerList[u].length < 1) continue;
 			output += '<button name="send" value="/vote ' + room.answerList[u] + '">' + Tools.escapeHTML(room.answerList[u]) + '</button>&nbsp;';
 		}
-		room.addRaw('<div class="infobox"><h2>' + room.question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by ' + user.name + '</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
+		this.add('|raw|<div class="infobox"><h2>' + room.question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by ' + user.name + '</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
 	},
 	vote: function(target, room, user) {
 		var ips = JSON.stringify(user.ips);
@@ -717,7 +717,7 @@ exports.commands = {
 			room.question = undefined;
 			room.answerList = new Array();
 			room.answers = new Object();
-			return room.addRaw("<h3>The poll was canceled because of lack of voters.</h3>");
+			return this.add("|raw|<h3>The poll was canceled because of lack of voters.</h3>");
 		}
 		var options = new Object();
 		var obj = Rooms.get(room);
@@ -734,7 +734,7 @@ exports.commands = {
 			var value = sortable[i][1];
 			if (value > 0) html += "&bull; " + Tools.escapeHTML(option) + " - " + Math.floor(value / votes * 100) + "% (" + value + ")<br />";
 		}
-		room.addRaw('<div class="infobox"><h2>Results to "' + Tools.escapeHTML(obj.question) + '"<br /><i><font size=1 color = "#939393">Poll ended by ' + Tools.escapeHTML(user.name) + '</font></i></h2><hr />' + html + '</div>');
+		this.add('|raw|<div class="infobox"><h2>Results to "' + Tools.escapeHTML(obj.question) + '"<br /><i><font size=1 color = "#939393">Poll ended by ' + Tools.escapeHTML(user.name) + '</font></i></h2><hr />' + html + '</div>');
 		room.question = undefined;
 		room.answerList = new Array();
 		room.answers = new Object();

@@ -786,16 +786,17 @@ exports.commands = {
     solstereo: 'solbox',
     solbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>The Sol Box</b><br />' +
-            '1. <a href="https://www.youtube.com/watch?v=VIop055eJhU"><button title="Touhou 6 - EoSD - U.N. Owen was her?"> Touhou 6 - EoSD - U.N. Owen was her?</a></button><br />' +
-            '2. <a href="https://www.youtube.com/watch?v=BwpLSiplyYc"><button title="Kirby 64: The Crystal Shards - Zero Two">Kirby 64: The Crystal Shards - Zero Two</a></button><br />' +
-            '3. <a href="https://www.youtube.com/watch?v=EzCKrwOme2U"><button title="Muse - Butterflies and Hurricanes">Muse - Butterflies and Hurricanes</a></button><br />' +
-            '4. <a href="https://www.youtube.com/watch?v=EqGs36oPpLQ"><button title="Last Dinosaurs - Zoom">Last Dinosaurs - Zoom</a></button><br />' +
-            '5. <a href="https://www.youtube.com/watch?v=p9Y-r-rs9W8"><button title="Green Day - Welcome to Paradise">Green Day - Welcome to Paradise</a></button><br />' +
-            '6. <a href="https://www.youtube.com/watch?v=aWxBrI0g1kE"><button title="Disturbed - Indestructible">Disturbed - Indestructible</a></button><br />' +
-            '7. <a href="https://www.youtube.com/watch?v=Fi_GN1pHCVc"><button title="Avenged Sevenfold - Almost Easy">Avenged Sevenfold - Almost Easy</a></button><br />' +
-            '8. <a href="https://www.youtube.com/watch?v=71CvlYX1Bqc"><button title="Linkin Park - Across The Line">Linkin Park - Across The Line</a></button><br />' +
-            '9. <a href="https://www.youtube.com/watch?v=gMzSpvibN7A"><button title="30 Seconds To Mars - Hurricane (Nightcore)">30 Seconds To Mars - Hurricane (Nightcore)</a></button>');
+        this.sendReplyBox('<b>Equinox Audio Archive</b><br />' +
+            '01. <a href="https://www.youtube.com/watch?v=EN2YMIqzMOU"><button title="Touhou 15 ~ Legacy of Lunatic Kingdom - Pierrot of the Star-Spangled Banner">Touhou 15 ~ Legacy of Lunatic Kingdom - Pierrot of the Star-Spangled Banner</a></button><br />' +
+            '02. <a href="https://www.youtube.com/watch?v=RfR7TtYqrqg"><button title="Cutting Crew, cover by Throw the Fight - (I Just) Died in Your Arms">Cutting Crew, cover by Throw the Fight - (I Just) Died in Your Arms</a></button><br />' +
+            '03. <a href="https://www.youtube.com/watch?v=gOgpdp3lP8M"><button title="Panic! at the Disco - The Ballad of Mona Lisa">Panic! at the Disco - The Ballad of Mona Lisa</a></button><br />' +
+            '04. <a href="https://www.youtube.com/watch?v=bx7l7X7qy2g"><button title="A Day to Remember - If It Means a Lot to You">A Day to Remember - If It Means a Lot to You</a></button><br />' +
+            '05. <a href="https://www.youtube.com/watch?v=m2yfmkfuuY4"><button title="Thousand Foot Krutch - Take It out on Me">Thousand Foot Krutch - Take It out on Me</a></button><br />' +
+            '06. <a href="https://www.youtube.com/watch?v=0LNVOreafhk"><button title="The Red Jumpsuit Apparatus - Face Down">The Red Jumpsuit Apparatus - Face Down</a></button><br />' +
+            '07. <a href="https://www.youtube.com/watch?v=rDbVY3gCJgg"><button title="All Time Low - A Love like War">All Time Low - A Love like War</a></button><br />' +
+            '08. <a href="https://www.youtube.com/watch?v=YpJAmlnBxoA"><button title="Halestorm - I Miss the Misery">Halestorm - I Miss the Misery</a></button><br />' +
+            '09. <a href="https://www.youtube.com/watch?v=20jZvql6EwI"><button title="Our Last Night - Sunrise">Our Last Night - Sunrise</a></button><br />' +
+            '10. <a href="https://www.youtube.com/watch?v=cJpeNf9LRnE"><button title="RED - Let It Burn">RED - Let It Burn</a></button>');
     },
 
     vbox: 'jackbox',

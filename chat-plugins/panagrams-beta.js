@@ -23,7 +23,7 @@ exports.commands = {
 	},
 	panagrams: 'panagram',
 	panagram: function(target, room, user) {
-		if (!this.can('roommod', null, room)) return this.sendReply('You must be ranked @ or higher to be able to start a game of Panagram in this room.');
+		if (!this.can('mute', null, room)) return this.sendReply('You must be ranked @ or higher to be able to start a game of Panagram in this room.');
 		if (room.panagram) return this.sendReply('There is already a game of Panagram going on.');
 		if (room.id !== 'gamechamber') return this.sendReply("This command can only be used in the 'Game Chamber' room.");
 		if (!this.canTalk()) return;

@@ -762,6 +762,7 @@ User = (function () {
 		}
 	};
 	User.prototype.filterName = function (name) {
+		name = name.substr(0, 30);
 		if (Config.namefilter) {
 			name = Config.namefilter(name, this);
 		}
@@ -1388,7 +1389,7 @@ User = (function () {
 			}
 		}
 
-		if (toId(Rooms.aliases[roomid]) === room.id) {
+		if (Rooms.aliases[roomid] === room.id) {
 			connection.send(">" + roomid + "\n|deinit");
 		}
 

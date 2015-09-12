@@ -294,8 +294,26 @@ exports.commands = {
 		}
 		this.logModCommand(user.name + " globally declared " + target);
 	},
-	star: function(room, user, cmd) {
-		return this.parse('/hide Ã¢Ëœâ€¦');
+	clearall: 'clearroom',
+	clearroom: function (target, room, user) {
+		if (!this.can('hotpatch')) return false;
+		if (room.battle) return this.sendReply("You cannot clearall in battle rooms.");
+
+		var len = room.log.length;
+		var users = [];
+		while (len--) {
+			room.log[len] = '';
+		}
+		for (var u in room.users) {
+			users.push(u);
+			Users.get(u).leaveRoom(room, Users.get(u).connections[0]);
+		}
+		len = users.length;
+		setTimeout(function () {
+			while (len--) {
+				Users.get(users[len]).joinRoom(room, Users.get(users[len]).connections[0]);
+			}
+		}, 1000);
 	},
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',

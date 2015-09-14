@@ -35,81 +35,79 @@ exports.commands = {
 
 		var self = this;
 		var bucks = economy.readMoney(userid)
-			var options = {
-				host: "pokemonshowdown.com",
-				port: 80,
-				path: "/users/" + userid
-			};
+		var options = {
+			host: "pokemonshowdown.com",
+			port: 80,
+			path: "/users/" + userid
+		};
 
-			var content = "";
-			var req = http.request(options, function(res) {
+		var content = "";
+		var req = http.request(options, function(res) {
 
-				res.setEncoding("utf8");
-				res.on("data", function (chunk) {
-					content += chunk;
-				});
-				res.on("end", function () {
-					content = content.split("<em");
-					if (content[1]) {
-						content = content[1].split("</p>");
-						if (content[0]) {
-							content = content[0].split("</em>");
-							if (content[1]) {
-								regdate = content[1].trim();
-								showProfile();
-							}
-						}
-					} else {
-						regdate = '(Unregistered)';
-						showProfile();
-					}
-				});
+			res.setEncoding("utf8");
+			res.on("data", function (chunk) {
+				content += chunk;
 			});
-			req.end();
-
-			function showProfile() {
-				var seenOutput = '';
-				if (!Gold.seenData[userid]) seenOutput = "Never";
-				var date = new Date(Gold.seenData[userid]);
-				if (Gold.seenData[userid]) {
-					seenOutput = date.toUTCString() + " ";
-					var seconds = Math.floor(((Date.now() - Gold.seenData[userid]) / 1000));
-					var minutes = Math.floor((seconds / 60));
-					var hours = Math.floor((minutes / 60));
-					var days = Math.floor((hours / 24));
-
-					var secondsWord = (((seconds % 60) > 1 || (seconds % 60) == 0) ? 'seconds' : 'second');
-					var minutesWord = (((minutes % 60) > 1 || (minutes % 60) == 0) ? 'minutes' : 'minute');
-					var hoursWord = ((hours > 1 || hours == 0) ? 'hours' : 'hour');
-					var daysWord = ((days === 1) ? 'day' : 'days');
-
-					if (minutes < 1) {
-						seenOutput += " (" + seconds + " " + secondsWord + " ago)";
+			res.on("end", function () {
+				content = content.split("<em");
+				if (content[1]) {
+					content = content[1].split("</p>");
+					if (content[0]) {
+						content = content[0].split("</em>");
+						if (content[1]) {
+							regdate = content[1].trim();
+							showProfile();
+						}
 					}
-					if (minutes > 0 && minutes < 60) {
-						seenOutput += " (" + minutes + " " + minutesWord + " ago)";
-					}
-					if (hours > 0 && days < 1) {
-						seenOutput += " (" + hours + " " + hoursWord + " " + (minutes % 60) + " " + minutesWord + " ago)";
-					}
-					if (days > 0) {
-						seenOutput += " (" + days + " " + daysWord + " ago)";
-					}
-		
+				} else {
+					regdate = '(Unregistered)';
+					showProfile();
 				}
-					
-				var profile = '';
-				profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
-				profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
-				profile += '&nbsp;<font color=' + formatHex + '><b>Registered: </font></b>' + regdate + '<br />';
-				if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + '<br />';
-				if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';
-				if (bucks) profile += '&nbsp;<font color=' + formatHex + '><b>Bucks: </font></b>' + bucks + '<br />';
-				if (online) profile += '&nbsp;<font color=' + formatHex + '><b>Last Online: </font></b><font color=green>Currently Online</font><br />';
-				if (!online) profile += '&nbsp;<font color=' + formatHex + '><b>Last Online: </font></b>' + seenOutput + '<br />';
-				profile += '<br clear="all">';
-				self.sendReplyBox(profile);
-				room.update();
+			});
+		});
+		req.end();
+
+		function showProfile() {
+			var seenOutput = '';
+			if (!Gold.seenData[userid]) seenOutput = "Never";
+			var date = new Date(Gold.seenData[userid]);
+			if (Gold.seenData[userid]) {
+				seenOutput = date.toUTCString() + " ";
+				var seconds = Math.floor(((Date.now() - Gold.seenData[userid]) / 1000));
+				var minutes = Math.floor((seconds / 60));
+				var hours = Math.floor((minutes / 60));
+				var days = Math.floor((hours / 24));
+				var secondsWord = (((seconds % 60) > 1 || (seconds % 60) == 0) ? 'seconds' : 'second');
+				var minutesWord = (((minutes % 60) > 1 || (minutes % 60) == 0) ? 'minutes' : 'minute');
+				var hoursWord = ((hours > 1 || hours == 0) ? 'hours' : 'hour');
+				var daysWord = ((days === 1) ? 'day' : 'days');
+
+				if (minutes < 1) {
+					seenOutput += " (" + seconds + " " + secondsWord + " ago)";
+				}
+				if (minutes > 0 && minutes < 60) {
+					seenOutput += " (" + minutes + " " + minutesWord + " ago)";
+				}
+				if (hours > 0 && days < 1) {
+					seenOutput += " (" + hours + " " + hoursWord + " " + (minutes % 60) + " " + minutesWord + " ago)";
+				}
+				if (days > 0) {
+					seenOutput += " (" + days + " " + daysWord + " ago)";
+				}
 			}
+					
+			var profile = '';
+			profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
+			profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
+			profile += '&nbsp;<font color=' + formatHex + '><b>Registered: </font></b>' + regdate + '<br />';
+			if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + '<br />';
+			if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';
+			if (bucks) profile += '&nbsp;<font color=' + formatHex + '><b>Bucks: </font></b>' + bucks + '<br />';
+			if (online) profile += '&nbsp;<font color=' + formatHex + '><b>Last Online: </font></b><font color=green>Currently Online</font><br />';
+			if (!online) profile += '&nbsp;<font color=' + formatHex + '><b>Last Online: </font></b>' + seenOutput + '<br />';
+			profile += '<br clear="all">';
+			self.sendReplyBox(profile);
+			room.update();
+		}
 	}
 };

@@ -64,19 +64,12 @@ exports.commands = {
                 if (!this.can('hotpatch')) return this.errorReply("Access denied.");
                 if (!Gold.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 var winner = Gold.lottery.players[Math.floor(Math.random() * Gold.lottery.players.length)];
-                if (!winner) {
-                    Rooms.get('gamechamber').add('|raw|<h2>The game of loto has been canceled due to a lack of players.</h2>');
-                    economy.writeMoney('money', toId(user.name), Gold.lottery.pot);
-                    Gold.lottery.pot = 0;
-                    Gold.lottery.players = [];
-                    Gold.lottery.gameActive = false;
-                } else {
-                    Rooms.get("gamechamber").add('|raw|<b><font color="' + Gold.hashColor(toId(winner)) + '> ' + winner + "</font> has won the game of lottery for " + Gold.lottery.pot + " bucks!</b>");
-                    economy.writeMoney('money', toId(user.name), Gold.lottery.pot);
-                    Gold.lottery.pot = 0;
-                    Gold.lottery.players = [];
-                    Gold.lottery.gameActive = false;
-                }
+                //if (!winner) Rooms.get('gamechamber').add('|raw|<h2>The game of loto has been canceled due to a lack of players.</h2>');
+                Rooms.get("gamechamber").add("|raw|<b>" + winner + "</b> has won the game of lottery for " + Gold.lottery.pot + " bucks!</b>");
+                economy.writeMoney('money', toId(user.name), Gold.lottery.pot);
+                Gold.lottery.pot = 0;
+                Gold.lottery.players = [];
+                Gold.lottery.gameActive = false;
                 break;
             case 'tickets':
                 if (!this.canBroadcast()) return;

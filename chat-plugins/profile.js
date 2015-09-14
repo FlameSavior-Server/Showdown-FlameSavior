@@ -3,7 +3,7 @@
  */
 var serverIp = '167.114.155.242';
 var http = require('http');
-var formatHex = '#ffab23'; //hex code for the formatting of the command
+var formatHex = '#ff8c00'; //hex code for the formatting of the command
 
 exports.commands = {
 	profile: function(target, room, user) {
@@ -60,7 +60,6 @@ exports.commands = {
 							}
 						}
 					} else {
-						console.log('boop9');
 						regdate = '(Unregistered)';
 						showProfile();
 					}

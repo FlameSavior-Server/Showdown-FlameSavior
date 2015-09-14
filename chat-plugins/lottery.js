@@ -66,7 +66,7 @@ exports.commands = {
                 var winner = Gold.lottery.players[Math.floor(Math.random() * Gold.lottery.players.length)];
                 //if (!winner) Rooms.get('gamechamber').add('|raw|<h2>The game of loto has been canceled due to a lack of players.</h2>');
                 Rooms.get("gamechamber").add("|raw|<b>" + winner + "</b> has won the game of lottery for " + Gold.lottery.pot + " bucks!</b>");
-                economy.writeMoney('money', toId(user.name), Gold.lottery.pot);
+                economy.writeMoney('money', toId(winner), Gold.lottery.pot);
                 Gold.lottery.pot = 0;
                 Gold.lottery.players = [];
                 Gold.lottery.gameActive = false;

@@ -41,7 +41,7 @@ exports.commands = {
                 break;
             case 'new':
             case 'create':
-                if (!this.can('roomban', null, room)) return this.errorReply("Access denied.");
+                if (!this.can('ban', null, room)) return this.errorReply("Access denied.");
                 if (Gold.lottery.gameActive) return this.errorReply("There is a game of Lottery already currently running.");
                 if (!parts[1]) return this.errorReply("Usage: /lottery create, [ticket cost]");
                 if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
@@ -70,7 +70,7 @@ exports.commands = {
                 }
                 break;
             case 'end':
-                if (!this.can('roomban', null, room)) return this.errorReply("Access denied.");
+                if (!this.can('ban', null, room)) return this.errorReply("Access denied.");
                 if (!Gold.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 var winner = Gold.lottery.players[Math.floor(Math.random() * Gold.lottery.players.length)];
                 //TO:DO - Game cancelled lack of players

@@ -41,7 +41,7 @@ exports.commands = {
                 break;
             case 'new':
             case 'create':
-                if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+                if (!this.can('roomban', null, room)) return this.errorReply("Access denied.");
                 if (Gold.lottery.gameActive) return this.errorReply("There is a game of Lottery already currently running.");
                 if (!parts[1]) return this.errorReply("Usage: /lottery create, [ticket cost]");
                 if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
@@ -52,7 +52,7 @@ exports.commands = {
                     "<i><font color=gray>(Started by: " + Tools.escapeHTML(user.name) + ")</font></i><br />" +
                     "A game of lottery has been started!  Cost to join is <b>" + Gold.lottery.ticketPrice + "</b> Gold bucks.<br />" +
                     "To buy a ticket, do <code>/lotto join</code>. (Max tickets per user: " + Gold.lottery.maxTicketsPerUser + ")</center></div>";
-                if (parts[2] === 'pmall') {
+                if (parts[2] === 'pmall' && this.can('hotpatch')) {
                     var loto_notification =
                         "<center><font size=5 color=red><b>Lottery Game!</b></font><br />" +
                         "A game of Lottery has started in <button name=\"send\" value=\"/join gamechamber\">Game Chamber</button>!<br />" +
@@ -67,14 +67,13 @@ exports.commands = {
                 } else {
                     Rooms.get('gamechamber').add('|raw|' + room_notification);
                 }
-                //this.sendReply("You have started a lottery game for " + Gold.lottery.ticketPrice + " bucks.");
                 break;
             case 'end':
-                if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+                if (!this.can('roomban', null, room)) return this.errorReply("Access denied.");
                 if (!Gold.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 var winner = Gold.lottery.players[Math.floor(Math.random() * Gold.lottery.players.length)];
-                //if (Gold.lottery.players.length = 0) return this.add('|raw|<h2>The game of lotto has been canceled due to a lack of players.</h2>');
-                Rooms.get("gamechamber").add("|raw|<b>" + winner + "</b> has won the game of lottery for " + Gold.lottery.pot + " bucks!</b>");
+                //TO:DO - Game cancelled lack of players
+                Rooms.get("gamechamber").add('|raw|<b><font size="4" color="' + Gold.hashColor(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + Gold.lottery.pot + '</b> bucks!</font>');
                 economy.writeMoney('money', toId(winner), Gold.lottery.pot);
                 Gold.lottery.pot = 0;
                 Gold.lottery.players = [];
@@ -86,6 +85,9 @@ exports.commands = {
                 if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
                 Gold.lottery.maxTicketsPerUser = parts[1];
                 this.add('|raw|<b><font size="4" color="' + Gold.hashColor(toId(user.name)) + '">' + Tools.escapeHTML(user.name) + '</font><font size="4"> has changed the lottery ticket cap to: ' + Gold.lottery.maxTicketsPerUser + '.</font></b>');
+                break;
+            case 'limit':
+                return this.sendReply("The current cap of lottery tickets per user is: " + Gold.lottery.maxTicketsPerUser);
                 break;
             case 'tickets':
                 if (!this.canBroadcast()) return;
@@ -102,10 +104,10 @@ exports.commands = {
                 this.sendReplyBox(
                     "<center><b>Lottery Commands</b><br />" +
                     "<i><font color=gray>(By: panpawn)</font></i></center><br />" +
-                    "<code>/lotto create, [ticket price]</code> - Starts a game of lotto with the respected ticket price. (Requires ~)<br />" +
+                    "<code>/lotto create, [ticket price]</code> - Starts a game of lotto with the respected ticket price. (Requires @, #, &, ~)<br />" +
                     "<code>/lotto create, [ticket price], pmall</code> - Starts a game of lotto with the respected ticket price AND notifies everyone. (Requires ~)<br />" +
                     "<code>/lotto join</code> OR <code>/loto buy</code> - Buys 1 ticket for the current game of loto (no cap set as of now).<br />" +
-                    "<code>/lotto end</code> - Picks a winner of the lotto.  (Requires ~)<br />" +
+                    "<code>/lotto end</code> - Picks a winner of the lotto.  (Requires @, #, &, ~)<br />" +
                     "<code>/lotto setlimit, [ticketcap]</code> - Sets the cap of tickets per user.  (Requires ~)<br />" +
                     "<code>/lotto pot</code> - Shows the current pot of the game of lotto.<br />" +
                     "<code>/lotto tickets</code> - Shows all of the current tickets in the current game of lotto."

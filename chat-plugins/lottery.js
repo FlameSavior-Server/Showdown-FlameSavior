@@ -8,7 +8,7 @@ Gold.lottery = {
     ticketPrice: 1, //default ticket price of lottery ticket
     pot: 0,
     gameActive: false,
-    maxTicketsPerUser: 10,
+    maxTicketsPerUser: 10, //defualt max ticket cap for users to buy in the lottery
     players: [],
     updatePot: function(amount) {
         this.pot = (this.pot + (amount*2));
@@ -52,7 +52,8 @@ exports.commands = {
                     "<i><font color=gray>(Started by: " + Tools.escapeHTML(user.name) + ")</font></i><br />" +
                     "A game of lottery has been started!  Cost to join is <b>" + Gold.lottery.ticketPrice + "</b> Gold bucks.<br />" +
                     "To buy a ticket, do <code>/lotto join</code>. (Max tickets per user: " + Gold.lottery.maxTicketsPerUser + ")</center></div>";
-                if (parts[2] === 'pmall' && this.can('hotpatch')) {
+                if (parts[2] === 'pmall') {
+                    if (!this.can('hotpatch')) return this.errorReply("Access denied.");
                     var loto_notification =
                         "<center><font size=5 color=red><b>Lottery Game!</b></font><br />" +
                         "A game of Lottery has started in <button name=\"send\" value=\"/join gamechamber\">Game Chamber</button>!<br />" +

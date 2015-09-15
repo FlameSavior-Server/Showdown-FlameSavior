@@ -9,6 +9,7 @@ Gold.lottery = {
     pot: 0,
     gameActive: false,
     maxTicketsPerUser: 10, //defualt max ticket cap for users to buy in the lottery
+    maxTicketPrice: 20, //Max ticket price
     players: [],
     updatePot: function(amount) {
         this.pot = (this.pot + (amount*2));
@@ -45,6 +46,7 @@ exports.commands = {
                 if (Gold.lottery.gameActive) return this.errorReply("There is a game of Lottery already currently running.");
                 if (!parts[1]) return this.errorReply("Usage: /lottery create, [ticket cost]");
                 if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
+                if (parts[1] > Gold.lottery.maxTicketPrice) return this.errorReply("Lottery tickets cannot cost more than " + Gold.lottery.maxTicketPrice + " bucks.");
                 Gold.lottery.ticketPrice = parts[1];
                 Gold.lottery.gameActive = true;
                 var room_notification = 

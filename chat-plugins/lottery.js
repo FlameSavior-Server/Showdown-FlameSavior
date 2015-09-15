@@ -14,6 +14,11 @@ Gold.lottery = {
     updatePot: function(amount) {
         this.pot = (this.pot + (amount*2));
     },
+    resetGame: function() {
+        this.pot = 0;
+        this.players = [];
+        this.gameActive = false;
+    }
 };
 
 exports.commands = {
@@ -75,12 +80,14 @@ exports.commands = {
                 if (!this.can('ban', null, room)) return this.errorReply("Access denied.");
                 if (!Gold.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 var winner = Gold.lottery.players[Math.floor(Math.random() * Gold.lottery.players.length)];
-                //TO:DO - Game cancelled lack of players
-                Rooms.get("gamechamber").add('|raw|<b><font size="4" color="' + Gold.hashColor(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + Gold.lottery.pot + '</b> bucks!</font>');
-                economy.writeMoney('money', toId(winner), Gold.lottery.pot);
-                Gold.lottery.pot = 0;
-                Gold.lottery.players = [];
-                Gold.lottery.gameActive = false;
+                if (!Gold.lottery.pot == 0) {
+                    economy.writeMoney('money', toId(winner), Gold.lottery.pot);
+                    Rooms.get("gamechamber").add('|raw|<b><font size="4" color="' + Gold.hashColor(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + Gold.lottery.pot + '</b> bucks!</font>');
+                    Gold.lottery.resetGame();
+                } else if (Gold.lottery.pot === 0) {
+                    this.add('|raw|<b><font size="4">This game has been cancelled due to a lack of players by ' + Tools.escapeHTML(toId(user.name)) + '.');
+                    Gold.lottery.resetGame();
+                }
                 break;
             case 'setlimit':
                 if (!this.can('hotpatch')) return this.errorReply("Access denied.");

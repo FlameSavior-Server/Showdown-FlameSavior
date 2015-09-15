@@ -51,10 +51,10 @@ exports.commands = {
                     "<div class=\"broadcast-gold\"><center><b><font size=4 color=red>Lottery Game!</font></b><br />" +
                     "<i><font color=gray>(Started by: " + Tools.escapeHTML(user.name) + ")</font></i><br />" +
                     "A game of lottery has been started!  Cost to join is <b>" + Gold.lottery.ticketPrice + "</b> Gold bucks.<br />" +
-                    "To buy a ticket, do <code>/lotto join</code>.</center></div>";
+                    "To buy a ticket, do <code>/lotto join</code>. (Max tickets per user: " + Gold.lottery.maxTicketsPerUser + ")</center></div>";
                 if (parts[2] === 'pmall') {
                     var loto_notification =
-                        "<center><font size=4 color=red><b>Lottery Game!</b></font><br />" +
+                        "<center><font size=5 color=red><b>Lottery Game!</b></font><br />" +
                         "A game of Lottery has started in <button name=\"send\" value=\"/join gamechamber\">Game Chamber</button>!<br />" +
                         "The ticket cost to join is <b> " + Gold.lottery.ticketPrice + "</b> Gold Bucks.  For every ticket bought, the server automatically matches that price towards the pot.<br />" +
                         "(For more information, hop in the room and do /lotto or ask for help!)</center>";
@@ -80,6 +80,13 @@ exports.commands = {
                 Gold.lottery.players = [];
                 Gold.lottery.gameActive = false;
                 break;
+            case 'setlimit':
+                if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+                if (!parts[1]) return this.errorReply("Usage: /lotto setlimit, [limit of tickets per user].");
+                if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
+                Gold.lottery.maxTicketsPerUser = parts[1];
+                this.add('|raw|<font size="6" color="' + Gold.hashColor(toId(user.name)) + '><b>' + Tools.escapeHTML(user.name) + ' has changed the lottery ticket cap to: <b>' + Gold.lottery.maxTicketsPerUser + '</b>.');
+                break;
             case 'tickets':
                 if (!this.canBroadcast()) return;
                 if (!Gold.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
@@ -99,6 +106,7 @@ exports.commands = {
                     "<code>/lotto create, [ticket price], pmall</code> - Starts a game of lotto with the respected ticket price AND notifies everyone. (Requires ~)<br />" +
                     "<code>/lotto join</code> OR <code>/loto buy</code> - Buys 1 ticket for the current game of loto (no cap set as of now).<br />" +
                     "<code>/lotto end</code> - Picks a winner of the lotto.  (Requires ~)<br />" +
+                    "<code>/lotto setlimit, [ticketcap]</code> - Sets the cap of tickets per user.  (Requires ~)<br />" +
                     "<code>/lotto pot</code> - Shows the current pot of the game of lotto.<br />" +
                     "<code>/lotto tickets</code> - Shows all of the current tickets in the current game of lotto."
                 );

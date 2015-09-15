@@ -90,7 +90,7 @@ exports.commands = {
             case 'tickets':
                 if (!this.canBroadcast()) return;
                 if (!Gold.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
-                return this.sendReplyBox("<b>Current tickets:</b><br /> " + Gold.lottery.players);
+                return this.sendReplyBox("<b>Current tickets: (" + Gold.lottery.players.length + ")</b><br /> " + Gold.lottery.players);
                 break;
             case 'pot':
                 if (!this.canBroadcast()) return;

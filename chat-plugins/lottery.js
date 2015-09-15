@@ -28,11 +28,16 @@ exports.commands = {
             case 'join':
                 if (!Gold.lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
                 if (economy.readMoney(toId(user.name)) < Gold.lottery.ticketPrice) return this.errorReply("You do not have enough bucks to partake in this game of Lottery.  Sorry.");
-                //if (Gold.lottery.maxTicketsPerUser > (Gold.lottery.players.match(toId(user.name)g).length)) return this.errorReply("You cannot get more than " + Gold.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
+                if (Gold.lottery.maxTicketsPerUser > user.loto) return this.errorReply("You cannot get more than " + Gold.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
                 economy.writeMoney('money', toId(user.name), -Gold.lottery.ticketPrice);
                 Gold.lottery.updatePot(Gold.lottery.ticketPrice);
                 Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</font></b> has bought a lottery ticket.");
                 Gold.lottery.players.push(toId(user.name));
+                if (!user.loto) {
+                    user.loto = 1;
+                } else {
+                    user.loto + 1;
+                }
                 break;
             case 'new':
             case 'create':

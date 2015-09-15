@@ -85,7 +85,7 @@ exports.commands = {
                 if (!parts[1]) return this.errorReply("Usage: /lotto setlimit, [limit of tickets per user].");
                 if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
                 Gold.lottery.maxTicketsPerUser = parts[1];
-                this.add('|raw|<font size="6" color="' + Gold.hashColor(toId(user.name)) + '><b>' + Tools.escapeHTML(user.name) + ' has changed the lottery ticket cap to: <b>' + Gold.lottery.maxTicketsPerUser + '</b>.');
+                this.add('|raw|<b><font size="4" color="' + Gold.hashColor(toId(user.name)) + '">' + Tools.escapeHTML(user.name) + '</font><font size="4"> has changed the lottery ticket cap to: ' + Gold.lottery.maxTicketsPerUser + '.</font></b>');
                 break;
             case 'tickets':
                 if (!this.canBroadcast()) return;

@@ -80,10 +80,17 @@ exports.commands = {
                 if (!this.can('ban', null, room)) return this.errorReply("Access denied.");
                 if (!Gold.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 var winner = Gold.lottery.players[Math.floor(Math.random() * Gold.lottery.players.length)];
+                var jackpot = Math.floor(2 * Math.random()) + 1;
                 if (!Gold.lottery.pot == 0) {
-                    economy.writeMoney('money', toId(winner), Gold.lottery.pot);
-                    Rooms.get("gamechamber").add('|raw|<b><font size="4" color="' + Gold.hashColor(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + Gold.lottery.pot + '</b> bucks!</font>');
-                    Gold.lottery.resetGame();
+                    if (jackpot == 2) {
+                        Rooms.get("gamechamber").add('|raw|<b><font size="7" color="green"><blink>JACKPOT!</blink></font></b>');
+                        Rooms.get("gamechamber").add('|raw|<b><font size="4" color="' + Gold.hashColor(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + (Gold.lottery.pot * 2) + '</b> bucks!</font>');
+                         economy.writeMoney('money', toId(winner), Gold.lottery.pot*2);
+                    } else {
+                        economy.writeMoney('money', toId(winner), Gold.lottery.pot);
+                        Rooms.get("gamechamber").add('|raw|<b><font size="4" color="' + Gold.hashColor(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + Gold.lottery.pot + '</b> bucks!</font>');
+                        Gold.lottery.resetGame();
+                    }
                 } else if (Gold.lottery.pot === 0) {
                     this.add('|raw|<b><font size="4">This game has been cancelled due to a lack of players by ' + Tools.escapeHTML(toId(user.name)) + '.');
                     Gold.lottery.resetGame();

@@ -408,6 +408,12 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('For our NEW room request system, fill out our application found <a href="http://goo.gl/forms/YHZVb6BvTb">here</a>.');
 	},
+	newroom2: function(target, room, user) {
+		user.popup('|html|<script>this.add("hi")')
+		function test1() {
+			console.log('functions work?');
+		}
+	},
 	punt: function(target, room, user) {
 		if (!target) return this.sendReply('/punt needs a target.');
 		return this.parse('/me punts ' + target + ' to the moon!');
@@ -1803,20 +1809,6 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target[0] === 'battlesong' || target[0] == 'custombattlesong' || target[0] === 'cbs') {
-			price = 250;
-			if (price <= user.money) {
-				match = true;
-				user.money -= price;
-				this.sendReply("You have purchased the ability to have a custom battle song. Please find the song in .mp3 format (On Google, 'intitle index of mp3 SONG_NAME'). Staff has been notified.");
-				user.canCustomBattleSong = true;
-				economy.writeMoney('money', user, -250);
-				Rooms.rooms.staff.add(user.name + ' has purchased a custom battle song.');
-				logTransaction(user.name + ' has purchased a custom battle song.');
-			} else {
-				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
-			}
-		}
 		if (target[0] === 'emote') {
 			price = 100;
 			if (price <= user.money) {
@@ -1957,7 +1949,7 @@ exports.commands = {
 				'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).</td><td>60</td></tr>' +
 				'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 30x30 and must be appropriate.</td><td>100</td></tr>' +
 				'<tr><td>Color</td><td>This gives your username a custom color on our <a href="http://goldservers.info">custom client</a>.</td><td>350</td></tr>' +
-				'<tr><td>Custom Battle Song</td><td>This allows you to have a custom battle theme song (on the custom client) to play when you battle.</td><td>250</td></tr>' +
+				//'<tr><td>Custom Battle Song</td><td>This allows you to have a custom battle theme song (on the custom client) to play when you battle.</td><td>250</td></tr>' +
 				//'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
 				'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>'
 			);
@@ -2145,7 +2137,7 @@ exports.commands = {
 					return this.sendReply('They do not have a custom symbol for you to remove.');
 				}
 				break;
-			case 'custombattlesong':
+			/*case 'custombattlesong':
 			case 'battlesong':
 			case 'cbs':
 				if (targetUser.canCustomBattleSong) {
@@ -2155,7 +2147,7 @@ exports.commands = {
 				} else {
 					return this.sendReply("They do not have a custom battle song for you to remove.");
 				}
-				break;
+				break;*/
 			case 'custom':
 				if (targetUser.canCustomAvatar) {
 					targetUser.canCustomAvatar = false;

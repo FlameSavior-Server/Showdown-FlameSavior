@@ -26,9 +26,9 @@ exports.commands = {
     lotto: 'lottery',
     lottery: function(target, room, user) {
     	var parts = target.split(',');
-		for (var u in parts) parts[u] = parts[u].trim();
-		if (room.id !== 'gamechamber') return this.errorReply("You must be in Game Chamber to use this command.");
-		if (!Rooms.get('gamechamber')) return this.errorReply("You must have the room \"Game Chamber\" in order to use this script.");
+	for (var u in parts) parts[u] = parts[u].trim();
+	if (room.id !== 'gamechamber') return this.errorReply("You must be in Game Chamber to use this command.");
+	if (!Rooms.get('gamechamber')) return this.errorReply("You must have the room \"Game Chamber\" in order to use this script.");
         switch (toId(parts[0])) {
             case 'buy':
             case 'join':

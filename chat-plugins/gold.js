@@ -1651,7 +1651,7 @@ exports.commands = {
 			writeMoney('money', targetUser, transferMoney);
 			fs.appendFile('logs/transactions.log', '\n' + Date() + ': ' + user.name + ' has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '. ' + user.name + ' now has ' + user.money + ' ' + p + ' and ' + targetUser.name + ' now has ' + targetUser.money + ' ' + p + '.');
 		}, 3000);
-		this.sendReply('You have successfully transferred ' + transferMoney + ' to ' + targetUser.name + '. You now have ' + user.money - transferMoney + ' ' + p + '.');
+		this.sendReply("You have transfered " + transferMoney + " " + p + " to " + targetUser + ".");
 		targetUser.popup(user.name + ' has transferred ' + transferMoney + ' ' + p + ' to you.');
 		this.logModCommand('(' + user.name + '  has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '.)');
 	},

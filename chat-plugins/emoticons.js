@@ -208,13 +208,13 @@ exports.commands = {
 		try {
 			switch (toId(parts[0])) {
 				case 'add':
-					if (!this.can('hotpatch')) return this.sendReply("Access denied.");
-					if (!(parts[2] || parts[3])) return this.sendReply("Usage: /emote add, [emoticon], [link]");
+					if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+					if (!(parts[2] || parts[3])) return this.errorReply("Usage: /emote add, [emoticon], [link]");
 					var emoteName = parts[1];
-					if (Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " already exists.");
+					if (Gold.emoticons.chatEmotes[emoteName]) return this.errorReply("ERROR - the emoticon: " + emoteName + " already exists.");
 					var link = parts.splice(2, parts.length).join(',');
 					var fileTypes = [".gif",".png",".jpg"];
-					if (!~fileTypes.indexOf(link.substr(-4))) return this.sendReply("ERROR: the emoticon you are trying to add must be a gif, png, or jpg.");
+					if (!~fileTypes.indexOf(link.substr(-4))) return this.errorReply("ERROR: the emoticon you are trying to add must be a gif, png, or jpg.");
 					emotes[emoteName] = Gold.emoticons.chatEmotes[emoteName] = link;
 					saveEmotes();
 					this.sendReply("The emoticon " + emoteName + " has been added.");
@@ -226,10 +226,10 @@ exports.commands = {
 				case 'remove':
 				case 'del':
 				case 'delete':
-					if (!this.can('hotpatch')) return this.sendReply("Access denied.");
-					if (!parts[1]) return this.sendReplyBox("/emote remove, [emoticon]");
+					if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+					if (!parts[1]) return this.errorReply("/emote remove, [emoticon]");
 					emoteName = parts[1];
-					if (!Gold.emoticons.chatEmotes[emoteName]) return this.sendReply("ERROR - the emoticon: " + emoteName + " does not exist.");
+					if (!Gold.emoticons.chatEmotes[emoteName]) return this.errorReply("ERROR - the emoticon: " + emoteName + " does not exist.");
 					delete Gold.emoticons.chatEmotes[emoteName];
 					delete emotes[emoteName];
 					saveEmotes();
@@ -240,7 +240,7 @@ exports.commands = {
 					break;
 				case 'list':
 					if (!this.canBroadcast()) return;
-					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					var output = "<b>There's a total of " + Object.size(emotes) + " emoticons added with this command:</b><br />";
 					for (var e in emotes) {
 						output += e + "<br />";
@@ -249,7 +249,7 @@ exports.commands = {
 					break;
 				case 'view':
 					if (!this.canBroadcast()) return;
-					//if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					//if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					var name = Object.keys(Gold.emoticons.chatEmotes);
 					emoticons = [];
 					var len = name.length;
@@ -260,17 +260,17 @@ exports.commands = {
 					break;
 				case 'object':
 					if (!this.canBroadcast()) return;
-					if (this.broadcasting) return this.sendReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
+					if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					this.sendReplyBox("Gold.emoticons.chatEmotes = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
 				case 'modchat':
 					if (!parts[1]) parts[1] = "status";
 					switch (parts[1]) {
 						case 'set':
-							if (room.type === 'chat' && !this.can('ban', null, room) || room.type === 'battle' && !this.can('privateroom', null, room)) return this.sendReply("Access denied.");
-							if (!parts[2]) return this.sendReply("Usage: /emote modchat, set, [rank] - Sets modchat for emoticons in the respected room.");
-							if (!Config.groups[parts[2]] && toId(parts[2]) !== 'autoconfirmed' && toId(parts[2]) !== 'ac' || parts[2] === '★') return this.sendReply("ERROR: " + parts[2] + " is not a defined group in Config or is not yet optimized for moderated emoticon chat at this time.");
-							if (room.emoteModChat === parts[2]) return this.sendReply("Emoticon modchat is already enabled in this room for the rank you're trying to set it to.");
+							if (room.type === 'chat' && !this.can('ban', null, room) || room.type === 'battle' && !this.can('privateroom', null, room)) return this.errorReply("Access denied.");
+							if (!parts[2]) return this.errorReply("Usage: /emote modchat, set, [rank] - Sets modchat for emoticons in the respected room.");
+							if (!Config.groups[parts[2]] && toId(parts[2]) !== 'autoconfirmed' && toId(parts[2]) !== 'ac' || parts[2] === '★') return this.errorReply("ERROR: " + parts[2] + " is not a defined group in Config or is not yet optimized for moderated emoticon chat at this time.");
+							if (room.emoteModChat === parts[2]) return this.errorReply("Emoticon modchat is already enabled in this room for the rank you're trying to set it to.");
 							room.emoteModChat = parts[2];
 							if (room.type === 'chat') room.chatRoomData.emoteModChat = room.emoteModChat;
 							Rooms.global.writeChatRoomData();
@@ -280,8 +280,8 @@ exports.commands = {
 							break;
 						case 'off':
 						case 'disable':
-							if (room.type === 'chat' && !this.can('ban', null, room) || room.type === 'battle' && !this.can('privateroom', null, room)) return this.sendReply("Access denied.");
-							if (!room.emoteModChat) return this.sendReply("Emoticon modchat is already disabled in this room.");
+							if (room.type === 'chat' && !this.can('ban', null, room) || room.type === 'battle' && !this.can('privateroom', null, room)) return this.errorReply("Access denied.");
+							if (!room.emoteModChat) return this.errorReply("Emoticon modchat is already disabled in this room.");
 							room.emoteModChat = false;
 							if (room.type === 'chat') room.chatRoomData.emoteModChat = room.emoteModChat;
 							Rooms.global.writeChatRoomData();

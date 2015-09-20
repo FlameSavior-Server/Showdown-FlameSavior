@@ -69,11 +69,9 @@ exports.commands = {
 		});
 		req.end();
 		function getFlag (user) {
-			user = Users(toId(user));
-			if (!user) return false;
-			if (user) {
-				var ip = user.latestIp;
-				var geo = geoip.lookup(ip);
+			if (!Users(user)) return false;
+			if (Users(user)) {
+				var geo = geoip.lookup(Users(user).latestIp);
 				if (!geo) {
 					return false;
 				} else {

@@ -4,6 +4,8 @@
 var serverIp = '167.114.155.242';
 var http = require('http');
 var formatHex = '#ff8c00'; //hex code for the formatting of the command
+var geoip = require('geoip-lite');
+geoip.startWatchingDataUpdate();
 
 exports.commands = {
 	profile: function(target, room, user) {
@@ -66,7 +68,19 @@ exports.commands = {
 			});
 		});
 		req.end();
-
+		function getFlag (user) {
+			user = Users(toId(user));
+			if (!user) return false;
+			if (user) {
+				var ip = user.latestIp;
+				var geo = geoip.lookup(ip);
+				if (!geo) {
+					return false;
+				} else {
+					return ' <img src="https://github.com/kevogod/cachechu/blob/master/flags/' + geo.country.toLowerCase() + '.png?raw=true" height=10 title="' + geo.country + '">';
+				}
+			}
+		}
 		function showProfile() {
 			var seenOutput = '';
 			if (!Gold.seenData[userid]) seenOutput = "Never";
@@ -98,7 +112,8 @@ exports.commands = {
 					
 			var profile = '';
 			profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
-			profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
+			if (!getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
+			if (getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b>' + getFlag(toId(user)) + '<br />';
 			profile += '&nbsp;<font color=' + formatHex + '><b>Registered: </font></b>' + regdate + '<br />';
 			if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + '<br />';
 			if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';

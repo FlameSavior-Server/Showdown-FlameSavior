@@ -141,6 +141,10 @@ var addMessage = exports.addMessage = function (user, tag, message) {
 	room.add('|c|' + user.getIdentity() + '|__(' + tag + ')__ ' + message);
 	room.update();
 };
+var addEmoticonMessage = exports.addEmoticonMessage = function (user, message) {
+	room.add(message);
+	room.update();
+};
 
 exports.commands = {
 	spam: 'shadowban',
@@ -185,7 +189,7 @@ exports.commands = {
 	
 	sbanlist: function (target, room, user) {
 		if (!target && !this.can('lock')) return this.sendReply("The command '/sbanlist' was unrecognized.  To send a message starting with '/sbanlist', type '//sbanlist'.");
-		if ((user.locked || user.mutedRooms[room.id]) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!this.can('lock')) return false;
 		
 		Users.get(toId(user.name)).send('|popup| Here is a list of sbanned users: \n' + JSON.stringify(Rooms.rooms.shadowbanroom.chatRoomData, null, 2));

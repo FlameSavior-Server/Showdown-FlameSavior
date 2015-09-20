@@ -4,7 +4,7 @@
 var serverIp = '167.114.155.242';
 var http = require('http');
 var formatHex = '#ff8c00'; //hex code for the formatting of the command
-var geoip = require('geoip-lite');
+var geoip = require('geoip-ultralight');
 geoip.startWatchingDataUpdate();
 
 exports.commands = {
@@ -71,11 +71,11 @@ exports.commands = {
 		function getFlag (flagee) {
 			if (!Users(flagee)) return false;
 			if (Users(flagee)) {
-				var geo = geoip.lookup(Users(flagee).latestIp);
+				var geo = geoip.lookupCountry(Users(flagee).latestIp);
 				if (!geo) {
 					return false;
 				} else {
-					return ' <img src="https://github.com/kevogod/cachechu/blob/master/flags/' + geo.country.toLowerCase() + '.png?raw=true" height=10 title="' + geo.country + '">';
+					return ' <img src="https://github.com/kevogod/cachechu/blob/master/flags/' + geo.toLowerCase() + '.png?raw=true" height=10 title="' + geo + '">';
 				}
 			}
 		}

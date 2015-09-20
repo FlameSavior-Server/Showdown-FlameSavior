@@ -1496,11 +1496,11 @@ User = (function () {
 			setImmediate(callback.bind(null, false));
 			return;
 		}
-		if (ResourceMonitor.countPrepBattle(connection.ip || connection.latestIp, this.name)) {
+		/*if (ResourceMonitor.countPrepBattle(connection.ip || connection.latestIp, this.name)) {
 			connection.popup("Due to high load, you are limited to 6 battles every 3 minutes.");
 			setImmediate(callback.bind(null, false));
 			return;
-		}
+		}*/
 
 		var format = Tools.getFormat(formatid);
 		if (!format['' + type + 'Show']) {

@@ -423,9 +423,8 @@ var commands = exports.commands = {
 	roomdesc: function (target, room, user) {
 		if (!target) {
 			if (!this.canBroadcast()) return;
-			var re = /(https?:\/\/(([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?))/g;
 			if (!room.desc) return this.sendReply("This room does not have a description set.");
-			this.sendReplyBox("The room description is: " + room.desc.replace(re, '<a href="$1">$1</a>'));
+			this.sendReplyBox("The room description is: " + Tools.escapeHTML(room.desc));
 			return;
 		}
 		if (!this.can('declare', null, room)) return false;
@@ -871,6 +870,9 @@ var commands = exports.commands = {
 			return this.sendReply("User " + this.targetUsername + " not found.");
 		}
 		if (targetRoom.id === "global") return this.sendReply("Users cannot be redirected to the global room.");
+		if (targetRoom.isPrivate) {
+			return this.errorReply("Do not redirect users to private rooms. Use /invite if you must, but honestly, the room probably wants to be kept private.");
+		}
 		if (Rooms.rooms[targetRoom.id].users[targetUser.userid]) {
 			return this.sendReply("User " + targetUser.name + " is already in the room " + targetRoom.title + "!");
 		}
@@ -878,8 +880,7 @@ var commands = exports.commands = {
 			return this.sendReply("User " + this.targetUsername + " is not in the room " + room.id + ".");
 		}
 		if (targetUser.joinRoom(targetRoom.id) === false) return this.sendReply("User " + targetUser.name + " could not be joined to room " + targetRoom.title + ". They could be banned from the room.");
-		var roomName = (targetRoom.isPrivate) ? "a private room" : "room " + targetRoom.title;
-		this.addModCommand("" + targetUser.name + " was redirected to " + roomName + " by " + user.name + ".");
+		this.addModCommand("" + targetUser.name + " was redirected to room " + targetRoom.title + " by " + user.name + ".");
 		targetUser.leaveRoom(room);
 	},
 	redirhelp: ["/redirect OR /redir [username], [roomname] - Attempts to redirect the user [username] to the room [roomname]. Requires: % @ & ~"],
@@ -2222,6 +2223,26 @@ var commands = exports.commands = {
 		user.team = target;
 	},
 
+	vtm: function (target, room, user, connection) {
+		if (ResourceMonitor.countPrepBattle(connection.ip, user.name)) {
+			connection.popup("Due to high load, you are limited to 6 team validations every 3 minutes.");
+			return;
+		}
+		var format = Tools.getFormat(target);
+		if (format.effectType !== 'Format') format = Tools.getFormat('Anything Goes');
+		if (format.effectType !== 'Format') {
+			connection.popup("Please provide a valid format.");
+			return;
+		}
+		TeamValidator.validateTeam(format.id, user.team, function (success, details) {
+			if (success) {
+				connection.popup("Your team is valid for " + format.name + ".");
+			} else {
+				connection.popup("Your team was rejected for the following reasons:\n\n- " + details.replace(/\n/g, '\n- '));
+			}
+		});
+	},
+
 	/*********************************************************
 	 * Low-level
 	 *********************************************************/
@@ -2278,6 +2299,15 @@ var commands = exports.commands = {
 			connection.send('|queryresponse|rooms|' + JSON.stringify(
 				Rooms.global.getRooms(user)
 			));
+		} else if (cmd === 'laddertop') {
+			if (!trustable) return false;
+			Ladders(target).getTop().then(function (result) {
+				connection.send('|queryresponse|laddertop|' + JSON.stringify(result));
+			});
+		} else {
+			// default to sending undefined
+			if (!trustable) return false;
+			connection.send('|queryresponse|' + cmd + '|undefined');
 		}
 	},
 

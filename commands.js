@@ -535,7 +535,7 @@ var commands = exports.commands = {
 
 		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
 
-		if (room.founder != user.userid && !this.can('pban')) return this.sendReply('/roomowner - Access denied.');
+		if (room.founder !== user.userid && !this.can('pban')) return this.sendReply('/roomowner - Access denied.');
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 

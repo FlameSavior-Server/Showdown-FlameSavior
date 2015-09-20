@@ -2,6 +2,7 @@
   "name": "Pokemon-Showdown",
   "version": "0.10.1",
   "dependencies": {
+    "geoip-ultralight": "^0.1.1",
     "sockjs": "0.3.15",
     "sugar": "1.4.1"
   },

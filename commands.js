@@ -581,9 +581,8 @@ var commands = exports.commands = {
 		var name = this.targetUsername;
 		var userid = toId(name);
 		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
-
 		if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
-		if (!this.can('makeroom')) return false;
+		if (room.founder !== user.userid && !this.can('pban')) return this.sendReply('/deroomowner - Access denied.');
 
 		delete room.auth[userid];
 		this.sendReply("(" + name + " is no longer Room Owner.)");

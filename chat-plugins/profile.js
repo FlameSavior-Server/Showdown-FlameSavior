@@ -68,10 +68,10 @@ exports.commands = {
 			});
 		});
 		req.end();
-		function getFlag (user) {
-			if (!Users(user)) return false;
-			if (Users(user)) {
-				var geo = geoip.lookup(Users(user).latestIp);
+		function getFlag (flagee) {
+			if (!Users(flagee)) return false;
+			if (Users(flagee)) {
+				var geo = geoip.lookup(Users(flagee).latestIp);
 				if (!geo) {
 					return false;
 				} else {
@@ -111,7 +111,7 @@ exports.commands = {
 			var profile = '';
 			profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
 			if (!getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
-			if (getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b>' + getFlag(toId(user)) + '<br />';
+			if (getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b>' + getFlag(toId(username)) + '<br />';
 			profile += '&nbsp;<font color=' + formatHex + '><b>Registered: </font></b>' + regdate + '<br />';
 			if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + '<br />';
 			if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';

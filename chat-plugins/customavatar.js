@@ -95,7 +95,14 @@ exports.commands = {
 					this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);
 					return;
 				}
-
+				break;
+			case 'reload':
+				if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+				reloadCustomAvatars();
+				for (var u in Users.users) { 
+					if (Config.customavatars[u]) Users.users[u].avatar = Config.customavatars[u];
+				}
+				break;
 				/* falls through */
 			case 'forceset':
 				if (user.avatarCooldown && !this.can('pban')) {

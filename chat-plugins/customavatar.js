@@ -26,6 +26,7 @@ function reloadCustomAvatars() {
 	Config.customavatars = newCustomAvatars;
 }
 reloadCustomAvatars();
+global.Gold.reloadCustomAvatars = reloadCustomAvatars;
 
 if (Config.watchConfig) {
 	fs.watchFile('./config/config.js', function (curr, prev) {

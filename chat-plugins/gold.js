@@ -365,12 +365,7 @@ exports.commands = {
 			if ((Users.users[u].group == "~" || Users.users[u].group == "&" || Users.users[u].group == "@" || Users.users[u].group == "%") && Users.users[u].connected)
 				Users.users[u].send('|pm|~Server|' + Users.users[u].getIdentity() + '|' + user.userid + ' (in ' + room.id + ') has reported: ' + target + '');
 	},
-	suggestion: 'suggest',
-	suggest: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox("Have a suggestion for this server? Go <a href=\"http://goldservers.info/forums/showthread.php?tid=78\">here</a>.");
 
-	},
 	//New Room Commands
 	/*
 	newroomcommands: function(target, room, user) {
@@ -1003,23 +998,7 @@ exports.commands = {
 			'★ <b>Plug.dj</b> - Come listen to music with us! Click <a href="http://plug.dj/gold-server/">here</a> to start!<br>' +
 			'<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
 	},
-	vip: 'donate',
-	support: 'donate',
-	donate: function(target, room, user, connection, cmd) {
-		if (!this.canBroadcast()) return;
-		switch (cmd) {
-			case 'vip':
-				msg = 'Information about what a VIP user is can be found <a href="http://goldservers.info/forums/showthread.php?tid=76">here</a>.';
-				break;
-			default:
-				msg = 'For information on donating and VIP status, go <a href = "http://goldservers.info/forums/showthread.php?tid=76">here</a>.';
-		}
-		this.sendReplyBox(msg);
-	},
-	dev: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox("Interested in developing for this server?  Go <a href=\"http://goldservers.info/forums/showthread.php?tid=77\">here</a>.");
-	},
+
 	links: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
@@ -1043,10 +1022,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('Gold\'s custom client can be found <a href="http://goldservers.info">here</a>.');
 	},
-	customcolors: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('Information about our custom client colors can be found <a href="http://goldservers.info/forums/showthread.php?tid=17">here</a>.');
-	},
+
 	pas: 'pmallstaff',
 	pmallstaff: function(target, room, user) {
 		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every user in a room.');
@@ -1605,10 +1581,7 @@ exports.commands = {
 			return this.parse('/help givebucks');
 		}
 	},
-	getbucks: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox("Want to know how to get bucks?  Go <a href=\"http://goldservers.info/forums/showthread.php?tid=82\">here</a>.");
-	},
+
 	tb: 'transferbucks',
 	transferbucks: function(target, room, user) {
 		if (!target) return this.sendReply('|raw|Correct Syntax: /transferbucks <i>user</i>, <i>amount</i>');
@@ -1938,7 +1911,7 @@ exports.commands = {
 		} else {
 			return this.sendReplyBox(
 				'<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Command</th><th>Description</th><th>Cost</th></tr>' +
-				'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
+				'<tr><td><button name="parseCommand" value="/buy symbol">Symbol</button></td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
 				'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
 				'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
 				'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
@@ -1951,7 +1924,7 @@ exports.commands = {
 				'<tr><td>Color</td><td>This gives your username a custom color on our <a href="http://goldservers.info">custom client</a>.</td><td>350</td></tr>' +
 				//'<tr><td>Custom Battle Song</td><td>This allows you to have a custom battle theme song (on the custom client) to play when you battle.</td><td>250</td></tr>' +
 				//'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
-				'</table><br />To buy an item from the shop, use /buy [command].<br>Do /getbucks to learn more about how to obtain bucks. </center>'
+				'</table><br />To buy an item from the shop, use click the respected item button.<br>Do /getbucks to learn more about how to obtain bucks. </center>'
 			);
 		}
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');
@@ -2353,14 +2326,7 @@ exports.commands = {
 			}
 		});
 	},
-	website: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Gold\'s website can be found <a href="http://goldserver.weebly.com/">here</a>.');
-	},
-	news: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Gold\'s news can be found <a href="http://goldserver.weebly.com/news.html">here</a>.');
-	},
+
 	facebook: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Gold\'s Facebook page can be found <a href="https://www.facebook.com/pages/Gold-Showdown/585196564960185">here</a>.');

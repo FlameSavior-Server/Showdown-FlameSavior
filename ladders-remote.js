@@ -19,7 +19,7 @@ function Ladder(formatid) {
 }
 
 Ladder.prototype.getTop = function () {
-	return Promise.resolve(undefined);
+	return Promise.resolve(null);
 };
 
 Ladder.prototype.getRating = function (userid) {
@@ -100,10 +100,6 @@ Ladder.prototype.updateRating = function (p1name, p2name, p1score, room) {
 			} catch (e) {
 				room.addRaw('There was an error calculating rating changes.');
 				room.update();
-			}
-
-			if (!Tools.getFormat(formatid).noLog) {
-				room.logBattle(p1score, p1rating, p2rating);
 			}
 
 			if (!Tools.getFormat(formatid).noLog) {

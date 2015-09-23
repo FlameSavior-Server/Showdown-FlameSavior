@@ -200,6 +200,14 @@ var commands = exports.commands = {
 						return this.errorReply('The room "' + innerTarget + '" does not exist.');
 					}
 				}
+				if (targetRoom.modjoin) {
+					if (targetRoom.auth && (targetRoom.isPrivate === true || targetUser.group === ' ') && !(targetUser.userid in targetRoom.auth)) {
+						this.parse('/roomvoice ' + targetUser.name, false, targetRoom);
+						if (!(targetUser.userid in targetRoom.auth)) {
+							return;
+						}
+					}
+				}
 
 				target = '/invite ' + targetRoom.id;
 				break;
@@ -313,6 +321,58 @@ var commands = exports.commands = {
 		return this.sendReply("An error occurred while trying to create the room '" + target + "'.");
 	},
 	makechatroomhelp: ["/makechatroom [roomname] - Creates a new room named [roomname]. Requires: ~"],
+
+	makegroupchat: function (target, room, user, connection, cmd) {
+		// First and foremost, check Resource Monitor's rate limit
+		if (ResourceMonitor.countGroupChat(connection.ip)) {
+			connection.popup("Due to high load, you are limited to creating 4 group chats every hour.");
+			return;
+		}
+
+		var targets = target.split(',');
+
+		// Title defaults to a random 8-digit number.
+		var title = targets[0] || ('' + Math.floor(Math.random() * 100000000));
+		// `,` is a delimiter used by a lot of /commands
+		// `|` and `[` are delimiters used by the protocol
+		// `-` has special meaning in roomids
+		if (title.includes(',') || title.includes('|') || title.includes('[') || title.includes('-')) {
+			return this.sendReply("Room titles can't contain any of: ,|[-");
+		}
+
+		// Even though they're different namespaces, to cut down on confusion, you
+		// can't share names with registered chatrooms.
+		if (Rooms.search(toId(title))) return this.sendReply("The room '" + title + "' already exists.");
+		// Room IDs for groupchats are groupchat-TITLEID
+		var roomid = "groupchat-" + toId(title);
+		// Titles must be unique.
+		if (Rooms.search(roomid)) return this.sendReply("A group chat named '" + title + "' already exists.");
+		// Tab title is prefixed with '[G]' to distinguish groupchats from
+		// registered chatrooms
+		title = '[G] ' + title;
+
+		// Privacy settings, default to private.
+		var privacy = toId(targets[1]) || 'private';
+		var privacySettings = {private: true, hidden: 'hidden', public: false};
+		if (!(privacy in privacySettings)) privacy = 'private';
+
+		var targetRoom = Rooms.createChatRoom(roomid, title, {
+			isPersonal: true,
+			isPrivate: privacySettings[privacy],
+			modjoin: true,
+			modchat: '+',
+			auth: {}
+		});
+		if (targetRoom) {
+			// The creator is RO.
+			targetRoom.auth[user.userid] = '#';
+			// Join after creating room. No other response is given.
+			user.joinRoom(targetRoom.id);
+			return;
+		}
+		return this.sendReply("An unknown error occurred while trying to create the room '" + title + "'.");
+	},
+	makegroupchathelp: ["/makegroupchat [roomname], [private|hidden|public] - Creates a group chat named [roomname]. Leave off privacy to default to private. Invite-only by default."],
 
 	deregisterchatroom: function (target, room, user) {
 		if (!this.can('makeroom')) return;
@@ -496,6 +556,7 @@ var commands = exports.commands = {
 		var alias = toId(target);
 		if (!alias.length) return this.sendReply("Only alphanumeric characters are valid in an alias.");
 		if (Rooms.get(alias) || Rooms.aliases[alias]) return this.sendReply("You cannot set an alias to an existing room or alias.");
+		if (room.isPersonal) return this.sendReply("Personal rooms can't have aliases.");
 
 		Rooms.aliases[alias] = room.id;
 		this.privateModCommand("(" + user.name + " added the room alias '" + target + "'.)");
@@ -626,7 +687,7 @@ var commands = exports.commands = {
 			return this.sendReply("Group '" + nextGroup + "' does not exist.");
 		}
 
-		if (Config.groups[nextGroup].globalonly) {
+		if (Config.groups[nextGroup].globalonly || (Config.groups[nextGroup].battleonly && !room.battle)) {
 			return this.sendReply("Group 'room" + Config.groups[nextGroup].id + "' does not exist as a room rank.");
 		}
 
@@ -669,7 +730,8 @@ var commands = exports.commands = {
 	roomauth: function (target, room, user, connection) {
 		var targetRoom = room;
 		if (target) targetRoom = Rooms.search(target);
-		if (!targetRoom || (targetRoom !== room && targetRoom.modjoin && !user.can('bypassall'))) return this.sendReply("The room '" + target + "' does not exist.");
+		var unavailableRoom = targetRoom && (targetRoom !== room && (targetRoom.modjoin || targetRoom.staffRoom) && !user.can('makeroom'));
+		if (!targetRoom || unavailableRoom) return this.sendReply("The room '" + target + "' does not exist.");
 		if (!targetRoom.auth) return this.sendReply("/roomauth - The room '" + (targetRoom.title ? targetRoom.title : target) + "' isn't designed for per-room moderation and therefore has no auth list.");
 
 		var rankLists = {};
@@ -714,11 +776,26 @@ var commands = exports.commands = {
 		if (innerBuffer.length) {
 			buffer.push('Room auth: ' + innerBuffer.join(', '));
 		}
+		if (targetId === user.userid || user.can('alts')) {
+			innerBuffer = [];
+			for (var i = 0; i < Rooms.global.chatRooms.length; i++) {
+				var curRoom = Rooms.global.chatRooms[i];
+				if (!curRoom.auth || !curRoom.isPrivate) continue;
+				if (curRoom.isPrivate === true) continue;
+				var auth = curRoom.auth[targetId];
+				if (!auth) continue;
+				innerBuffer.push(auth + curRoom.id);
+			}
+			if (innerBuffer.length) {
+				buffer.push('Hidden room auth: ' + innerBuffer.join(', '));
+			}
+		}
 		if (targetId === user.userid || user.can('makeroom')) {
 			innerBuffer = [];
 			for (var i = 0; i < Rooms.global.chatRooms.length; i++) {
 				var curRoom = Rooms.global.chatRooms[i];
 				if (!curRoom.auth || !curRoom.isPrivate) continue;
+				if (curRoom.isPrivate !== true) continue;
 				var auth = curRoom.auth[targetId];
 				if (!auth) continue;
 				innerBuffer.push(auth + curRoom.id);
@@ -747,6 +824,9 @@ var commands = exports.commands = {
 
 		if (this.targetUser === room.founder || room.auth[this.targetUser] === '#' && !user.can('pban')) return this.sendReply("Room founders / owners cannot be banned.");
 		if (!userid || !targetUser) return this.sendReply("User '" + name + "' does not exist.");
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
 		if (!this.can('ban', targetUser, room)) return false;
 		if (!room.bannedUsers || !room.bannedIps) {
 			return this.sendReply("Room bans are not meant to be used in room " + room.id + ".");
@@ -2303,9 +2383,9 @@ var commands = exports.commands = {
 				connection.send('|queryresponse|laddertop|' + JSON.stringify(result));
 			});
 		} else {
-			// default to sending undefined
+			// default to sending null
 			if (!trustable) return false;
-			connection.send('|queryresponse|' + cmd + '|undefined');
+			connection.send('|queryresponse|' + cmd + '|null');
 		}
 	},
 

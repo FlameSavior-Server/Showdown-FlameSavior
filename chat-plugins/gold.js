@@ -15,23 +15,6 @@ var badges = fs.createWriteStream('badges.txt', {
 	'flags': 'a'
 });
 exports.commands = {
-	// Shingeki no Kyojin
-	arlert: 'alert',	
-	alert: function(target, room, user) {
-		if (!this.can('declare')) return false;
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!target || !targetUser) return this.sendReply("/alert user, message: Sends a popup to a user. Requires &~");
-		if (!targetUser || !targetUser.connected) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
-		msg = Tools.escapeHTML(user.name) + " has sent you an alert (" + new Date().toUTCString() + "): " + target;
-		if (target.length > 500) return this.sendReply("ERROR - alert is too long.");
-		if (!targetUser.connected) return this.sendReply(targetUser + " not found.  Check spelling?");
-		targetUser.popup(msg);
-	},
-	
-	test: function(target, room, user) {
-		return this.sendReply("Helo.");
-	},
 	
 	restart: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
@@ -273,27 +256,6 @@ exports.commands = {
 		targetUser.ban();
 		ipbans.write('\n' + targetUser.latestIp);
 	},
-	nc: function(room, user, cmd) {
-		user.nctimes += 1;
-		if (user.nctimes > 3) return this.sendReply("You have used /nc too many times");
-		return this.parse("**Panpawn is my god!** I shall forever praises oh holy god, panpawn!");
-	},
-	ggd: 'goldglobaldeclare',
-	goldglobaldeclare: function(target, room, user, connection) {
-		if (!this.can('hotpatch')) return false;
-		if (!target) return false;
-		var sender = "<b>" + user.group + '</b><button class="astext" name="parseCommand" value="/user ' + user.name + '"><b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ';
-		if (Gold.emoticons.processPMsParsing(target)) target = Gold.emoticons.processPMsParsing(Tools.escapeHTML(target));
-		for (var id in Rooms.rooms) {
-			if (id !== 'global') Rooms.rooms[id].addRaw(
-				"<div class=\"broadcast-gold\">" +
-					"<b>Global Declare:</b><br />" +
-					sender + target +
-				"</div>"
-			);
-		}
-		this.logModCommand(user.name + " globally declared " + target);
-	},
 	clearall: 'clearroom',
 	clearroom: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;
@@ -430,34 +392,6 @@ exports.commands = {
 		if (!target) return this.sendReply('/poke needs a target.');
 		return this.parse('/me pokes ' + target + '.');
 	},
-	namelock: 'nl',
-	nl: function(target, room, user) {
-		if (!this.can('ban')) return false;
-		target = this.splitTarget(target);
-		targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('/namelock - Lock a user into a username.');
-		}
-		if (targetUser.namelock === true) {
-			return this.sendReply("The user " + targetUser + " is already namelocked.");
-		}
-		targetUser.namelock = true;
-		return this.sendReply("The user " + targetUser + " is now namelocked.");
-	},
-	unnamelock: 'unl',
-	unl: function(target, room, user) {
-		if (!this.can('ban')) return false;
-		target = this.splitTarget(target);
-		targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('/unnamelock - Unlock a user from a username.');
-		}
-		if (targetUser.namelock === false) {
-			return this.sendReply("The user " + targetUser + " is already un-namelocked.");
-		}
-		targetUser.namelock = false;
-		return this.sendReply("The user " + targetUser + " is now un-namelocked.");
-	},
 	pet: function(target, room, user) {
 		if (!target) return this.sendReply('/pet needs a target.');
 		return this.parse('/me pets ' + target + ' lavishly.');
@@ -553,30 +487,6 @@ exports.commands = {
 		if (!target) return this.sendReply('/lick needs a target.');
 		return this.parse('/me licks ' + target + ' excessively!');
 	},
-	/*
-	renameroom: function(target, room, user) {
-		if (!this.can('hotpatch')) return false;
-		target = target.split(',');
-		if (!target[0] || !target[1]) return this.sendReply("Usage: /renameroom [current room.id], [new room.title]");
-		if (toId(target[0]) !== room.id) return this.sendReply("That is not the current id of this room.");
-		if (Rooms.rooms[toId(target[1])]) return this.sendReply("That room you are trying to rename this one to already exists.");
-
-		var room_auth = JSON.stringify(Rooms.rooms.toId(target[0]).auth);
-		var emoticon_status = Rooms.rooms.toId(target[0]).emoteStatus;
-
-		Rooms.global.addChatRoom(target[1]);
-		Rooms.rooms.toId(target[1]).auth = room_auth;
-		Rooms.rooms.toId(target[1]).emoteStatus = emoticon_status;
-		Rooms.global.writeChatRoomData();
-
-		for (var i in room.users) { 
-			Users(i).joinRoom(toId(target[1])); 
-			//Users(i).updateIdentity();
-		}
-
-		Rooms.rooms.toId(target[0]).destroy(); //Lastly, delete the old room
-	},
-	*/
 	def: 'define',
 	define: function(target, room, user) {
 		if (!target) return this.sendReply('Usage: /define <word>');

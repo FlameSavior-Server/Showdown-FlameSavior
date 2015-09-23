@@ -344,7 +344,7 @@ var commands = exports.commands = {
 		if (Rooms.search(roomid)) return this.sendReply("A group chat named '" + title + "' already exists.");
 		// Tab title is prefixed with '[G]' to distinguish groupchats from
 		// registered chatrooms
-		title = '[G] ' + title;
+		title = title;
 
 		if (ResourceMonitor.countGroupChat(connection.ip)) {
 			connection.popup("Due to high load, you are limited to creating 4 group chats every hour.");
@@ -356,10 +356,23 @@ var commands = exports.commands = {
 		var privacySettings = {private: true, hidden: 'hidden', public: false};
 		if (!(privacy in privacySettings)) privacy = 'private';
 
-		var targetRoom = Rooms.createChatRoom(roomid, title, {
+		var groupChatLink = '<code>&lt;&lt;' + roomid + '>></code>';
+		var groupChatURL = '';
+		if (Config.serverid) {
+			groupChatURL = 'http://' + (Config.serverid === 'showdown' ? 'psim.us' : Config.serverid + '.psim.us') + '/' + roomid;
+			groupChatLink = '<a href="' + groupChatURL + '">' + groupChatLink + '</a>';
+		}
+		var titleHTML = '';
+		if (/^[0-9]+$/.test(title)) {
+			titleHTML = groupChatLink;
+		} else {
+			titleHTML = Tools.escapeHTML(title) + ' <small style="font-weight:normal;font-size:9pt">' + groupChatLink + '</small>';
+		}
+		var targetRoom = Rooms.createChatRoom(roomid, '[G] ' + title, {
 			isPersonal: true,
 			isPrivate: privacySettings[privacy],
-			auth: {}
+			auth: {},
+			introMessage: '<h2 style="margin-top:0">' + titleHTML + '</h2><p>There are several ways to invite people:<br />- in this chat: <code>/invite USERNAME</code><br />- anywhere in PS: link to <code>&lt;&lt;' + roomid + '>></code>' + (groupChatURL ? '<br />- outside of PS: link to <a href="' + groupChatURL + '">' + groupChatURL + '</a>' : '') + '</p><p>This room will expire after 40 minutes of inactivity or when the server is restarted.</p><p style="margin-bottom:0"><button name="send" value="/roomhelp">Room management</button>'
 		});
 		if (targetRoom) {
 			// The creator is RO.
@@ -938,7 +951,7 @@ var commands = exports.commands = {
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		var targetRoom = Rooms.search(target);
-		if (!targetRoom) {
+		if (!targetRoom || targetRoom.modjoin) {
 			return this.sendReply("The room '" + target + "' does not exist.");
 		}
 		if (!this.can('warn', targetUser, room) || !this.can('warn', targetUser, targetRoom)) return false;

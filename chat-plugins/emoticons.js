@@ -268,6 +268,7 @@ exports.commands = {
 					switch (parts[1]) {
 						case 'set':
 							if (room.type === 'chat' && !this.can('ban', null, room) || room.type === 'battle' && !this.can('privateroom', null, room)) return this.errorReply("Access denied.");
+							if (room.isPersonal) return this.errorReply("You cannot set emoticon moderated chat in personal rooms.");
 							if (!parts[2]) return this.errorReply("Usage: /emote modchat, set, [rank] - Sets modchat for emoticons in the respected room.");
 							if (!Config.groups[parts[2]] && toId(parts[2]) !== 'autoconfirmed' && toId(parts[2]) !== 'ac' || parts[2] === '★') return this.errorReply("ERROR: " + parts[2] + " is not a defined group in Config or is not yet optimized for moderated emoticon chat at this time.");
 							if (room.emoteModChat === parts[2]) return this.errorReply("Emoticon modchat is already enabled in this room for the rank you're trying to set it to.");
@@ -281,6 +282,7 @@ exports.commands = {
 						case 'off':
 						case 'disable':
 							if (room.type === 'chat' && !this.can('ban', null, room) || room.type === 'battle' && !this.can('privateroom', null, room)) return this.errorReply("Access denied.");
+							if (room.isPersonal) return this.errorReply("Emoticon moderated chat is enabled in personal rooms by default and cannot be changed.");
 							if (!room.emoteModChat) return this.errorReply("Emoticon modchat is already disabled in this room.");
 							room.emoteModChat = false;
 							if (room.type === 'chat') room.chatRoomData.emoteModChat = room.emoteModChat;

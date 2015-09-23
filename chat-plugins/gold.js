@@ -7,7 +7,7 @@ var closedShop = 0;
 if (typeof Gold === 'undefined') global.Gold = {};
 if (typeof Gold.tells === 'undefined') global.Gold.tells = {};
 var crypto = require('crypto');
-var inShop = ['symbol', 'custom', 'animated', 'room', 'trainer', 'fix', 'declare', 'musicbox', 'emote', 'color'];
+var inShop = ['symbol', 'custom', 'animated', 'trainer', 'fix', 'declare', 'musicbox', 'emote', 'color'];
 var ipbans = fs.createWriteStream('config/ipbans.txt', {
 	'flags': 'a'
 });
@@ -1739,6 +1739,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
+		/*
 		if (target[0] === 'room') {
 			price = 100;
 			if (price <= user.money) {
@@ -1753,6 +1754,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
+		*/
 		if (target2 === 'trainer') {
 			price = 60;
 			if (price <= user.money) {
@@ -1824,7 +1826,7 @@ exports.commands = {
 				'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
 				'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
 				'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
-				'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
+				//'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
 				'<tr><td>Trainer</td><td>Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
 				'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box or custom emote (don\'t buy if you have neither)!</td><td>15</td></tr>' +
 				'<tr><td>Declare</td><td>You get the ability to get one declare from an Admin or Leader in the lobby. This can be used for room advertisement (not server)</td><td>25</td></tr>' +

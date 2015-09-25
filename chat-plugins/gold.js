@@ -1648,7 +1648,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target[0] === 'custom') {
+		if (target[0] === 'custom' || target[0] === 'avatar') {
 			price = 35;
 			if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {

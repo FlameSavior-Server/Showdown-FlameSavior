@@ -1657,7 +1657,7 @@ exports.commands = {
 				var filename = target[1].split('.');
 				filename = '.' + filename.pop();
 				economy.writeMoney('money', user, -35);
-				if (filename != ".png") return this.sendReply('Your avatar must be in .png format.');
+				if (filename !== ".png" && filename !== '.jpg') return this.sendReply('Your avatar must be in .png OR .jpg format.');
 				user.money = user.money - price;
 				this.sendReply('You have purchased a custom avatar. Staff have been notified and it will be added in due time.');
 				user.canCustomAvatar = true;

@@ -24,7 +24,7 @@ var style = "background:none;border:0;padding:0 5px 0 0;font-family:Verdana,Helv
 if (typeof Gold === 'undefined') global.Gold = {};
 
 Gold.emoticons = {
-	maxChatEmotes: 5, //the maximum number of emoticons in one chat message that gets parsed
+	maxChatEmotes: 4, //the maximum number of emoticons in one chat message that gets parsed
 	adminBypassMaxChatEmotes: true, //can administrators use as many emoticons as they wish?
 	chatEmotes: {},
 	processEmoticons: function(text) {

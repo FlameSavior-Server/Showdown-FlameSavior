@@ -104,7 +104,7 @@ exports.commands = {
             case 'tickets':
                 if (!this.canBroadcast()) return;
                 if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
-                return this.sendReplyBox("<b>Current tickets: (" + room.lottery.players.length + ")</b><br /> " + room.lottery.players);
+                return this.sendReplyBox("<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\"><b>Current tickets: (" + room.lottery.players.length + ")</b><br /> " + room.lottery.players + "</div>");
                 break;
             case 'odds':
                 if (!this.canBroadcast()) return;

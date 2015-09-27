@@ -106,6 +106,18 @@ exports.commands = {
                 if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 return this.sendReplyBox("<b>Current tickets: (" + room.lottery.players.length + ")</b><br /> " + room.lottery.players);
                 break;
+            case 'odds':
+                if (!this.canBroadcast()) return;
+                if (!parts[1]) parts[1] = user.name;
+                if (room.lottery.players.length > 1) {
+                    var filteredPlayerArray = room.lottery.players.filter(function(username) {
+                        return username === toId(parts[1])
+                    });
+                    var chance = Math.round((filteredPlayerArray.length / room.lottery.players.length) * 100);
+                }
+                if (!chance) return this.sendReplyBox("This user is not in the current game of lottery.  Check spelling?");
+                return this.sendReplyBox("<b><font color=" + Gold.hashColor(toId(parts[1])) + ">" + Tools.escapeHTML(parts[1]) + "</font></b> has a " + chance + "% chance of winning the game of lottery right now.");
+                break;
             case 'status':
                 if (!this.canBroadcast()) return;
                 if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
@@ -148,6 +160,7 @@ exports.commands = {
                     "<code>/lotto pot</code> - Shows the current pot of the game of lotto.<br />" +
                     "<code>/lotto uptime</code> - Shows how long ago the game of lottery was started.<br />" +
                     "<code>/lotto status</code> - Shows the current status of lottery.<br />" +
+                    "<code>/lotto odds, [user]</code> - Shows the odds of [user] winning the lottery.<br />" +
                     "<code>/lotto tickets</code> - Shows all of the current tickets in the current game of lotto."
                 );
         }

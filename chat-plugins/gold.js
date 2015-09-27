@@ -1538,6 +1538,11 @@ exports.commands = {
 		targetUser.popup(user.name + ' has transferred ' + transferMoney + ' ' + p + ' to you.');
 		this.logModCommand('(' + user.name + '  has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '.)');
 	},
+	crashlogs: function (target, room, user) {
+		if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+		var crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');
+		user.send('|popup|' + crashes);
+	},
 	gamble: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReply("Command outdated.  See /gambledicehelp for the new gambling system.");

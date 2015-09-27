@@ -33,7 +33,7 @@ exports.commands = {
                 break;
             case 'new':
             case 'create':
-                if (!this.can('ban', null, room)) return this.errorReply("Access denied.");
+                if (!this.can('ban', null, room)) return false;
                 if (room.lottery.gameActive) return this.errorReply("There is a game of Lottery already currently running.");
                 if (!parts[1]) return this.errorReply("Usage: /lottery create, [ticket cost]");
                 room.lottery.maxTicketsPerUser = 10; //default max tickets per user
@@ -53,7 +53,7 @@ exports.commands = {
                     "A game of lottery has been started!  Cost to join is <b>" + room.lottery.ticketPrice + "</b> Gold bucks.<br />" +
                     "To buy a ticket, do <code>/lotto join</code>. (Max tickets per user: " + room.lottery.maxTicketsPerUser + ")</center></div>";
                 if (parts[2] === 'pmall') {
-                    if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+                    if (!this.can('hotpatch')) return false;
                     var loto_notification =
                         "<center><font size=5 color=red><b>Lottery Game!</b></font><br />" +
                         "A game of Lottery has started in <button name=\"send\" value=\"/join gamechamber\">Game Chamber</button>!<br />" +
@@ -70,7 +70,7 @@ exports.commands = {
                 }
                 break;
             case 'end':
-                if (!this.can('ban', null, room)) return this.errorReply("Access denied.");
+                if (!this.can('ban', null, room)) return false;
                 if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 var winner = room.lottery.players[Math.floor(Math.random() * room.lottery.players.length)];
                 var jackpot = Math.floor(100 * Math.random()) + 1;
@@ -91,7 +91,7 @@ exports.commands = {
                 this.privateModCommand("(" + Tools.escapeHTML(user.name) + " has ended the game of lottery.)");
                 break;
             case 'setlimit':
-                if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+                if (!this.can('hotpatch')) return false;
                 if (!room.lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
                 if (!parts[1]) return this.errorReply("Usage: /lotto setlimit, [limit of tickets per user].");
                 if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
@@ -144,7 +144,7 @@ exports.commands = {
                 return this.sendReplyBox("The current lottery pot is worth: <b>" + room.lottery.pot + "</b> bucks.");
                 break;
             case 'obj':
-                if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+                if (!this.can('hotpatch')) return false;
                 return this.sendReplyBox(JSON.stringify(room.lottery));
                 break;
             default:

@@ -103,6 +103,18 @@ exports.commands = {
                 if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 return this.sendReplyBox("<b>Current tickets: (" + room.lottery.players.length + ")</b><br /> " + room.lottery.players);
                 break;
+            case 'status':
+                if (!this.canBroadcast()) return;
+                if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
+                return this.sendReplyBox(
+                    "<u>Lottery Game Status:</u><br />" +
+                    "Pot: <b>" + room.lottery.pot + " Gold bucks</b><br />" +
+                    "Game started: <b>" + moment(room.lottery.startTime).fromNow() + "</b><br />" +
+                    "Max tickets per user: <b>" + room.lottery.maxTicketsPerUser + "</b><br />" +
+                    "<b>Tickets bought (" + room.lottery.players.length + "):</b><br />" +
+                    room.lottery.players
+                );
+                break;
             case 'uptime':
                 if (!this.canBroadcast()) return;
                 if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
@@ -129,6 +141,7 @@ exports.commands = {
                     "<code>/lotto setlimit, [ticketcap]</code> - Sets the cap of tickets per user.  (Requires ~)<br />" +
                     "<code>/lotto pot</code> - Shows the current pot of the game of lotto.<br />" +
                     "<code>/lotto uptime</code> - Shows how long ago the game of lottery was started.<br />" +
+                    "<code>/lotto status</code> - Shows the current status of lottery.<br />" +
                     "<code>/lotto tickets</code> - Shows all of the current tickets in the current game of lotto."
                 );
         }

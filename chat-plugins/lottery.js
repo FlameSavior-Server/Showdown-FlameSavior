@@ -19,9 +19,9 @@ exports.commands = {
             case 'join':
                 if (!room.lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
                 if (economy.readMoney(toId(user.name)) < room.lottery.ticketPrice) return this.errorReply("You do not have enough bucks to partake in this game of Lottery.  Sorry.");
-                if (room.lottery.players.length > 1) {
-                    var filteredPlayerArray = room.lottery.players.filter(function(username) {
-                        return username === toId(user.name);
+                if (room.lottery.playerIPS.length > 1) {
+                    var filteredPlayerArray = room.lottery.playerIPS.filter(function(ip) {
+                        return ip === user.latestIp;
                     });
                     if (filteredPlayerArray.length >= room.lottery.maxTicketsPerUser)  return this.errorReply("You cannot get more than " + room.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
                 }
@@ -29,6 +29,7 @@ exports.commands = {
                 room.lottery.pot = room.lottery.pot + (room.lottery.ticketPrice * 2);
                 Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</font></b> has bought a lottery ticket.");
                 room.lottery.players.push(toId(user.name));
+                room.lottery.playerIPS.push(user.latestIp);
                 break;
             case 'new':
             case 'create':
@@ -44,6 +45,7 @@ exports.commands = {
                 room.lottery.gameActive = true;
                 room.lottery.pot = 0;
                 room.lottery.players = [];
+                room.lottery.playerIPS = [];
                 var room_notification = 
                     "<div class=\"broadcast-gold\"><center><b><font size=4 color=red>Lottery Game!</font></b><br />" +
                     "<i><font color=gray>(Started by: " + Tools.escapeHTML(user.name) + ")</font></i><br />" +

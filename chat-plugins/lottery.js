@@ -110,6 +110,7 @@ exports.commands = {
                     "<div class=\"infobox-limited\" target=\"_blank\">" +
                     "<u>Lottery Game Status:</u><br />" +
                     "Pot: <b>" + room.lottery.pot + " Gold bucks</b><br />" +
+                    "Ticket price: <b>" + room.lottery.ticketPrice + " Gold bucks</b><br />" +
                     "Game started: <b>" + moment(room.lottery.startTime).fromNow() + "</b><br />" +
                     "Max tickets per user: <b>" + room.lottery.maxTicketsPerUser + "</b><br />" +
                     "<b>Tickets bought (" + room.lottery.players.length + "):</b><br />" +

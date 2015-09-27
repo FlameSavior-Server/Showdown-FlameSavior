@@ -107,7 +107,7 @@ exports.commands = {
                 if (!this.canBroadcast()) return;
                 if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 return this.sendReplyBox(
-                    "<div class=\"infobox-limited\" target=\"_blank\">" +
+                    "<div style=\"max-height: 110px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">" +
                     "<u>Lottery Game Status:</u><br />" +
                     "Pot: <b>" + room.lottery.pot + " Gold bucks</b><br />" +
                     "Ticket price: <b>" + room.lottery.ticketPrice + " Gold bucks</b><br />" +

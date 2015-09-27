@@ -115,7 +115,7 @@ exports.commands = {
                     });
                     var chance = ((filteredPlayerArray.length / room.lottery.players.length) * 100).toFixed(1);
                 }
-                if (!chance) return this.sendReplyBox("This user is not in the current game of lottery.  Check spelling?");
+                if (chance == 0) return this.sendReplyBox("This user is not in the current game of lottery.  Check spelling?");
                 return this.sendReplyBox("<b><font color=" + Gold.hashColor(toId(parts[1])) + ">" + Tools.escapeHTML(parts[1]) + "</font></b> has a " + chance + "% chance of winning the game of lottery right now.");
                 break;
             case 'status':

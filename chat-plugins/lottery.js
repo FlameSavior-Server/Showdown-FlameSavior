@@ -46,6 +46,7 @@ exports.commands = {
                 room.lottery.pot = 0;
                 room.lottery.players = [];
                 room.lottery.playerIPS = [];
+                room.lottery.createdBy = user.name;
                 var room_notification = 
                     "<div class=\"broadcast-gold\"><center><b><font size=4 color=red>Lottery Game!</font></b><br />" +
                     "<i><font color=gray>(Started by: " + Tools.escapeHTML(user.name) + ")</font></i><br />" +
@@ -109,8 +110,9 @@ exports.commands = {
                 if (!this.canBroadcast()) return;
                 if (!room.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 return this.sendReplyBox(
-                    "<div style=\"max-height: 110px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">" +
+                    "<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">" +
                     "<u>Lottery Game Status:</u><br />" +
+                    "Game started by: <b><font color=" + Gold.hashColor(toId(room.lottery.createdBy)) + ">" + Tools.escapeHTML(room.lottery.createdBy) + "</font></b><br />" +
                     "Pot: <b>" + room.lottery.pot + " Gold bucks</b><br />" +
                     "Ticket price: <b>" + room.lottery.ticketPrice + " Gold bucks</b><br />" +
                     "Game started: <b>" + moment(room.lottery.startTime).fromNow() + "</b><br />" +

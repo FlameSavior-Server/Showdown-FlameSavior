@@ -2401,7 +2401,7 @@ var commands = exports.commands = {
 			results = results.randomize().slice(0, randomOutput);
 		}
 
-		var resultsStr = this.broadcasting ? "" : ("<font color=#999999>" + message + ":</font><br>");
+		var resultsStr = this.broadcasting ? "" : ("<font color=#999999>" + Tools.escapeHTML(message) + ":</font><br>");
 		if (results.length > 1) {
 			if (showAll || results.length <= RESULTS_MAX_LENGTH + 5) {
 				results.sort();
@@ -2785,7 +2785,7 @@ var commands = exports.commands = {
 		if (targetMon) {
 			resultsStr += "<font color=#999999>Matching moves found in learnset for</font> " + targetMon + ":<br>";
 		} else {
-			resultsStr += this.broadcasting ? "" : ("<font color=#999999>" + message + ":</font><br>");
+			resultsStr += this.broadcasting ? "" : ("<font color=#999999>" + Tools.escapeHTML(message) + ":</font><br>");
 		}
 		if (results.length > 0) {
 			if (showAll || results.length <= RESULTS_MAX_LENGTH + 5) {
@@ -3017,7 +3017,7 @@ var commands = exports.commands = {
 			}
 		}
 
-		var resultsStr = this.broadcasting ? "" : ("<font color=#999999>" + message + ":</font><br>");
+		var resultsStr = this.broadcasting ? "" : ("<font color=#999999>" + Tools.escapeHTML(message) + ":</font><br>");
 		if (foundItems.length > 0) {
 			if (showAll || foundItems.length <= RESULTS_MAX_LENGTH + 5) {
 				foundItems.sort();

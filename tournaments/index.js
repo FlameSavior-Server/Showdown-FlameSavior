@@ -764,11 +764,11 @@ Tournament = (function () {
 
 			if (money > 1) buck = 'bucks';
 			try {
-				this.room.add('|raw|<b><font color=#24678d>'+Tools.escapeHTML(winner)+'</font> has also won <font color=#24678d>'+money+'</font> '+buck+' for winning the tournament!</b>');
+				this.room.add('|raw|<b><font color=' + Gold.hashColor(toId(winner)) + '>' + Tools.escapeHTML(winner) + '</font> has won <font color=#24678d>'+money+'</font> '+buck+' for winning the tournament!</b>');
 				economy.writeMoney('money', toId(winner), money);
 			} catch (e) {}
 		}
-		delete exports.tournaments[toId(this.room.id)];
+		delete exports.tournaments[this.room.id];
 	};
 
 	return Tournament;

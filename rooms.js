@@ -180,7 +180,7 @@ var Room = (function () {
 
 		var timeUntilExpire = this.muteQueue[0].time - Date.now();
 		if (timeUntilExpire <= 0) {
-			this.unmute(this.muteQueue[0].userid, true);
+			this.unmute(this.muteQueue[0].userid, "Your mute in '" + this.title + "' has expired.");
 			//runMuteTimer() is called again in unmute() so this function instance should be closed
 			return;
 		}
@@ -246,7 +246,7 @@ var Room = (function () {
 		user.updateIdentity(this.id);
 		return userid;
 	};
-	Room.prototype.unmute = function (userid, sendPopup) {
+	Room.prototype.unmute = function (userid, notifyText) {
 		var successUserid = false;
 		var user = Users(userid);
 		if (!user) {
@@ -275,9 +275,9 @@ var Room = (function () {
 			}
 		}
 
-		if (user.connected && successUserid) {
+		if (successUserid && user in this.users) {
 			user.updateIdentity(this.id);
-			if (sendPopup) user.popup("Your mute in " + this.title + " has expired.");
+			if (notifyText) user.popup(notifyText);
 		}
 		return successUserid;
 	};

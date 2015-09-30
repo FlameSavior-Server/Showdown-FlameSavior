@@ -1676,10 +1676,12 @@ exports.commands = {
 				user.canCustomAvatar = true;
 				Rooms.rooms.staff.add(user.name + ' has purchased a custom avatar. Image: ' + target[1]);
 				logTransaction(user.name + ' has purchased a custom avatar. Image: ' + target[1]);
+				var output = "";
+				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~" || Users.users[u].group == "&") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom avatar. Image: ' + target[1]);
-						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + target[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button></center>');
+						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + target[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>');
 					}
 				}
 			} else {
@@ -1744,10 +1746,12 @@ exports.commands = {
 				economy.writeMoney('money', user, -45);
 				Rooms.rooms.staff.add(user.name + ' has purchased a custom animated avatar. Image: ' + target[1]);
 				logTransaction(user.name + ' has purchased a custom animated avatar. Image: ' + target[1]);
+				var output = "";
+				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~" || Users.users[u].group == "&") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom animated avatar. Image: ' + target[1]);
-						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + target[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button></center>');
+						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + target[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button>' + output + '</center>');
 					}
 				}
 			} else {

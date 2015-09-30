@@ -1679,6 +1679,7 @@ exports.commands = {
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~" || Users.users[u].group == "&") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom avatar. Image: ' + target[1]);
+						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + target[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button></center>');
 					}
 				}
 			} else {
@@ -1746,6 +1747,7 @@ exports.commands = {
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~" || Users.users[u].group == "&") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom animated avatar. Image: ' + target[1]);
+						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + target[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button></center>');
 					}
 				}
 			} else {

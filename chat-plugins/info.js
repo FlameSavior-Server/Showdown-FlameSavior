@@ -3626,21 +3626,6 @@ var commands = exports.commands = {
 	 * Informational commands
 	 *********************************************************/
 
-	uptime: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		var uptime = process.uptime();
-		var uptimeText;
-		if (uptime > 24 * 60 * 60) {
-			var uptimeDays = Math.floor(uptime / (24 * 60 * 60));
-			uptimeText = uptimeDays + " " + (uptimeDays === 1 ? "day" : "days");
-			var uptimeHours = Math.floor(uptime / (60 * 60)) - uptimeDays * 24;
-			if (uptimeHours) uptimeText += ", " + uptimeHours + " " + (uptimeHours === 1 ? "hour" : "hours");
-		} else {
-			uptimeText = uptime.seconds().duration();
-		}
-		this.sendReplyBox("Uptime: <b>" + uptimeText + "</b>");
-	},
-
 	groups: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(

@@ -715,25 +715,27 @@ var commands = exports.commands = {
         this.sendReplyBox("" + atkName + " is " + factor + "x effective against " + defName + ".");
     },
 
-    uptime: (function() {
-        function formatUptime(uptime) {
-            if (uptime > 24 * 60 * 60) {
-                var uptimeText = "";
-                var uptimeDays = Math.floor(uptime / (24 * 60 * 60));
-                uptimeText = uptimeDays + " " + (uptimeDays == 1 ? "day" : "days");
-                var uptimeHours = Math.floor(uptime / (60 * 60)) - uptimeDays * 24;
-                if (uptimeHours) uptimeText += ", " + uptimeHours + " " + (uptimeHours == 1 ? "hour" : "hours");
-                return uptimeText;
-            } else {
-                return uptime.seconds().duration();
-            }
-        }
-        return function(target, room, user) {
-            if (!this.canBroadcast()) return;
-            var uptime = process.uptime();
-            this.sendReplyBox("Uptime: <b>" + formatUptime(uptime) + "</b>" + (global.uptimeRecord ? "<br /><font color=\"green\">Record: <b>" + formatUptime(global.uptimeRecord) + "</b></font>" : ""));
-        };
-    })(),
+	uptime: (function () {
+		function formatUptime(uptime) {
+			if (uptime > 24 * 60 * 60) {
+				var uptimeText = "";
+				var uptimeDays = Math.floor(uptime / (24 * 60 * 60));
+				uptimeText = uptimeDays + " " + (uptimeDays === 1 ? "day" : "days");
+				var uptimeHours = Math.floor(uptime / (60 * 60)) - uptimeDays * 24;
+				if (uptimeHours) uptimeText += ", " + uptimeHours + " " + (uptimeHours === 1 ? "hour" : "hours");
+				return uptimeText;
+			} else {
+				return uptime.seconds().duration();
+			}
+		}
+
+		return function (target, room, user) {
+			if (!this.canBroadcast()) return;
+			var uptime = process.uptime();
+			this.sendReplyBox("Uptime: <b>" + formatUptime(uptime) + "</b>" +
+				(global.uptimeRecord ? "<br /><font color=\"green\">Record: <b>" + formatUptime(global.uptimeRecord) + "</b></font>" : ""));
+		};
+	})(),
 
     groups: function (target, room, user) {
         if (!this.canBroadcast()) return;

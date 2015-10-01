@@ -664,7 +664,7 @@ var GlobalRoom = (function () {
 			title: title
 		};
 		var room = Rooms.createChatRoom(id, title, chatRoomData);
-		// Only add room to chatRoomData if it is not a personal room, those aren't saved.
+		this.chatRoomData.push(chatRoomData);
 		this.chatRooms.push(room);
 		this.writeChatRoomData();
 		return true;
@@ -1710,6 +1710,9 @@ var ChatRoom = (function () {
 				delete aliases[this.aliases[i]];
 			}
 		}
+
+		// remove active mute timer if any
+		if (this.muteTimer) clearTimeout(this.muteTimer);
 
 		// get rid of some possibly-circular references
 		delete rooms[this.id];

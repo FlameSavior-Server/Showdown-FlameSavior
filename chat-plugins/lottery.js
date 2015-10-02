@@ -191,7 +191,7 @@ exports.commands = {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox(
                     "<center><b>Lottery Commands</b><br />" +
-                    "<i><font color=gray>(By: panpawn)</font></i></center><br />" +
+                    "<i><font color=gray>(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/lottery.js\" class=\"subtle\">panpawn</a>)</font></i></center><br />" +
                     "<code>/lotto create, [ticket price]</code> - Starts a game of lotto with the respected ticket price. (Requires @, #, &, ~)<br />" +
                     "<code>/lotto create, [ticket price], pmall</code> - Starts a game of lotto with the respected ticket price AND notifies everyone. (Requires ~)<br />" +
                     "<code>/lotto join</code> OR <code>/loto buy</code> - Buys 1 ticket for the current game of loto (no cap set as of now).<br />" +

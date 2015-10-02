@@ -917,25 +917,6 @@ exports.commands = {
 			'<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
 	},
 
-	links: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox(
-			"<div class=\"broadcast-black\">Here are some helpful server related links:<b><br />" +
-			"- <a href=\"http://goldservers.info/forums/showthread.php?tid=61\"><font color=\"#FF0066\">Rules</a></font><br />" +
-			"- <a href=\"http://goldservers.info/forums/index.php/\"><font color=\"#FF00\">Forums</a></font><br />" +
-			"- <a href=\"http://goldserver.weebly.com\"><font color=\"#56600FF\">Website</a></font><br />" +
-			"- <a href=\"http://plug.dj/gold-server/\"><font color=\"#FFFF\">Plug.dj</a></font><br />" +
-			"- <a href=\"https://github.com/panpawn/Pokemon-Showdown\"><font color=\"#39FF14\">GitHub</a></font><br />" +
-			"- <a href=\"http://goldserver.weebly.com/news.html\"><font color=\"#BFFF00\">News</a></font><br />" +
-			"- <a href=\"http://goldserver.weebly.com/faqs.html\"><font color=\"#DA9D01\">FAQs</a></font><br />" +
-			"- <a href=\"http://goldserver.weebly.com/discipline-appeals.html\"><font color=\"#12C418\">Discipline Appeals</a></font>" +
-			"</b></div>"
-		);
-	},
-	forums: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		return this.sendReplyBox('Gold Forums can be found <a href="http://goldservers.info/forums">here</a>.');
-	},
 	client: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('Gold\'s custom client can be found <a href="http://goldservers.info">here</a>.');

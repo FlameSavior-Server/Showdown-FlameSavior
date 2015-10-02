@@ -129,6 +129,7 @@ exports.commands = {
                 break;
             case 'odds':
                 if (!this.canBroadcast()) return;
+                if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 if (!parts[1]) parts[1] = user.name;
                 if (lottery.players.length > 1) {
                     var filteredPlayerArray = lottery.players.filter(function(username) {

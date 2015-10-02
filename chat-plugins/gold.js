@@ -1038,6 +1038,14 @@ exports.commands = {
 			}
 		});
 	},
+	givevip: function(target, room, user) {
+		if (!target) return this.errorReply("Usage: /givevip [user]");
+		this.parse('/givebadge ' + target + ', vip');
+	},
+	takevip: function(target, room, user) {
+		if (!target) return this.errorReply("Usage: /takevip [user]");
+		this.parse('/removebadge ' + target + ', vip')
+	},
 	givebadge: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
 		target = this.splitTarget(target);

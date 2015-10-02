@@ -89,6 +89,7 @@ exports.commands = {
 				pendingAdds[hash] = {userid: userid, avatar: avatar};
 				parts[1] = hash;
 
+				Users.get(userid).popup('|modal| You have received a custom avatar from ' + tools.escapeHTML(user.name) + '.');
 				if (!targetUser) {
 					this.sendReply("Warning: " + userid + " is not online.");
 					this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);

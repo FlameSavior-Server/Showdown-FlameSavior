@@ -1381,14 +1381,14 @@ exports.commands = {
 		function output(target) {
 			var bucks = economy.readMoney(target);
 			var label = (bucks == 1 ? ' Gold buck' : ' Gold bucks');
-			var output = "<b>Gold Wallet~</b><br />";
+			var output = "<u>Gold Wallet:</u><br />";
 			target = Tools.escapeHTML(target);
 			switch (bucks) {
 				case 0:
-					output += "<font color=\"" + Gold.hashColor(target) + "\">" + originalName + "</font> does not have any Gold bucks.";
+					output += "<b><font color=\"" + Gold.hashColor(target) + "\">" + originalName + "</font></b> does not have any Gold bucks.";
 					break;
 				default:
-					output += "<font color=\"" + Gold.hashColor(target) + "\">" + originalName + "</font> has " + bucks + label + ".";
+					output += "<b><font color=\"" + Gold.hashColor(target) + "\">" + originalName + "</font></b> has " + bucks + label + ".";
 			}
 			return output;
 		}

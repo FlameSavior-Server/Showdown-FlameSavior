@@ -207,6 +207,7 @@ exports.commands = {
 
 		try {
 			switch (toId(parts[0])) {
+
 				case 'add':
 					if (!this.can('hotpatch')) return this.errorReply("Access denied.");
 					if (!(parts[2] || parts[3])) return this.errorReply("Usage: /emote add, [emoticon], [link]");
@@ -222,6 +223,7 @@ exports.commands = {
 					Rooms.rooms.staff.add("The emoticon " + emoteName + " was added by " + Tools.escapeHTML(user.name) + ".");
 					room.update();
 					break;
+
 				case 'rem':
 				case 'remove':
 				case 'del':
@@ -238,6 +240,7 @@ exports.commands = {
 					Rooms.rooms.staff.add("The emoticon " + emoteName + " was removed by " + Tools.escapeHTML(user.name) + ".");
 					room.update();
 					break;
+
 				case 'list':
 					if (!this.canBroadcast()) return;
 					if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
@@ -247,6 +250,7 @@ exports.commands = {
 					}
 					this.sendReplyBox("<div class=\"infobox-limited\" target=\"_blank\">" + output + "</div>");
 					break;
+
 				case 'view':
 					if (!this.canBroadcast()) return;
 					//if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
@@ -258,11 +262,13 @@ exports.commands = {
 					}
 					this.sendReplyBox("<div class=\"infobox-limited\" target=\"_blank\"><b><u>List of emoticons (" + Object.size(emotes) + "):</b></u> <br/><br/>" + emoticons.join(' ').toString() + "</div>");
 					break;
+
 				case 'object':
 					if (!this.canBroadcast()) return;
 					if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					this.sendReplyBox("Gold.emoticons.chatEmotes = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
+
 				case 'modchat':
 					if (!parts[1]) parts[1] = "status";
 					switch (parts[1]) {
@@ -298,6 +304,7 @@ exports.commands = {
 							break;
 					}
 					break;
+
 				case 'help':
 				default:
 					if (!this.canBroadcast()) return;

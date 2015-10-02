@@ -29,6 +29,7 @@ exports.commands = {
 	if (room.id !== 'gamechamber') return this.errorReply("You must be in Game Chamber to use this command.");
 	if (!Rooms.get('gamechamber')) return this.errorReply("You must have the room \"Game Chamber\" in order to use this script.");
         switch (toId(parts[0])) {
+
             case 'buy':
             case 'join':
                 if (!lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
@@ -46,6 +47,7 @@ exports.commands = {
                 lottery.playerIPS.push(user.latestIp);
                 saveLottery();
                 break;
+
             case 'new':
             case 'create':
                 if (!this.can('ban', null, room)) return false;
@@ -85,6 +87,7 @@ exports.commands = {
                 }
                 saveLottery();
                 break;
+
             case 'end':
                 if (!this.can('ban', null, room)) return false;
                 if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
@@ -110,6 +113,7 @@ exports.commands = {
                 }
                 this.privateModCommand("(" + Tools.escapeHTML(user.name) + " has ended the game of lottery.)");
                 break;
+
             case 'setlimit':
                 if (!this.can('hotpatch')) return false;
                 if (!lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
@@ -119,14 +123,17 @@ exports.commands = {
                 saveLottery();
                 this.add('|raw|<b><font size="4" color="' + Gold.hashColor(toId(user.name)) + '">' + Tools.escapeHTML(user.name) + '</font><font size="4"> has changed the lottery ticket cap to: ' + lottery.maxTicketsPerUser + '.</font></b>');
                 break;
+
             case 'limit':
                 return this.sendReply("The current cap of lottery tickets per user is: " + lottery.maxTicketsPerUser);
                 break;
+
             case 'tickets':
                 if (!this.canBroadcast()) return;
                 if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 return this.sendReplyBox("<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\"><b>Current tickets: (" + lottery.players.length + ")</b><br /> " + lottery.players + "</div>");
                 break;
+
             case 'odds':
                 if (!this.canBroadcast()) return;
                 if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
@@ -140,10 +147,12 @@ exports.commands = {
                 if (chance == 0) return this.sendReplyBox("User '" + Tools.escapeHTML(parts[1]) + "' is not in the current game of lottery.  Check spelling?");
                 return this.sendReplyBox("<b><font color=" + Gold.hashColor(toId(parts[1])) + ">" + Tools.escapeHTML(parts[1]) + "</font></b> has a " + chance + "% chance of winning the game of lottery right now.");
                 break;
+
             case 'reload':
                 loadLottery();
                 this.sendReply("You have reloaded the lottery database.");
                 break;
+
             case 'status':
                 if (!this.canBroadcast()) return;
                 if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
@@ -159,20 +168,24 @@ exports.commands = {
                     lottery.players + "</div>"
                 );
                 break;
+
             case 'uptime':
                 if (!this.canBroadcast()) return;
                 if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 return this.sendReplyBox("Lottery Game Uptime: <b>" + moment(lottery.startTime).fromNow() + "</b>");
                 break;
+
             case 'pot':
                 if (!this.canBroadcast()) return;
                 if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
                 return this.sendReplyBox("The current lottery pot is worth: <b>" + lottery.pot + "</b> bucks.");
                 break;
+
             case 'obj':
                 if (!this.can('hotpatch')) return false;
                 return this.sendReplyBox(JSON.stringify(lottery)); //not sure if this needs to stringify
                 break;
+
             default:
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox(

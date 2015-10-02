@@ -1,5 +1,6 @@
 /* Lottery Plug-in
  * A chat plug-in for a lottery system for PS
+ * This also gives out various bucks n_n
  * by: panpawn
  */
 

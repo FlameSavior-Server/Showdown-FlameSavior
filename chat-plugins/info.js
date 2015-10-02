@@ -1398,15 +1398,6 @@ var commands = exports.commands = {
         this.sendReply('|raw|<img src="' + Tools.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '" height="' + toId(targets[2]) + '" />');
     },
 
-    htmlbox: function (target, room, user) {
-        if (!target) return this.parse('/help htmlbox');
-        if (!this.can('announce', null, room) || !this.can('lock')) return;
-        if (!this.canHTML(target)) return;
-        if (!this.canBroadcast('!htmlbox')) return;
-
-        this.sendReplyBox(target);
-    },
-
     a: function (target, room, user) {
         if (!this.can('rawpacket')) return false;
         // secret sysop command
@@ -4320,7 +4311,7 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help htmlbox');
 		if (!this.canHTML(target)) return;
 
-		if (user.userid === 'github') {
+		if (user.userid === 'ponybot') {
 			if (!this.can('announce', null, room)) return;
 			if (message.charAt(0) === '!') this.broadcasting = true;
 		} else {

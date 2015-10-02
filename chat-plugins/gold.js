@@ -1376,6 +1376,7 @@ exports.commands = {
 	atm: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (!target) target = user.name;
+		var originalName = target;
 		target = toId(target);
 		function output(target) {
 			var bucks = economy.readMoney(target);
@@ -1384,10 +1385,10 @@ exports.commands = {
 			target = Tools.escapeHTML(target);
 			switch (bucks) {
 				case 0:
-					output += target + " does not have any Gold bucks.";
+					output += "<font color=\"" + Gold.hashColor(target) + "\">" + originalName + "</font> does not have any Gold bucks.";
 					break;
 				default:
-					output += target + " has " + bucks + label + ".";
+					output += "<font color=\"" + Gold.hashColor(target) + "\">" + originalName + "</font> has " + bucks + label + ".";
 			}
 			return output;
 		}

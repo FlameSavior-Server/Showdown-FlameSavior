@@ -1603,7 +1603,7 @@ exports.commands = {
 		var money = readMoney(user.userid);
 		user.money = money;
 		var price = 0;
-		if (target2 === 'symbol') {
+		if (toId(target2) === 'symbol') {
 			price = 5;
 			if (price <= user.money) {
 				match = true;
@@ -1618,7 +1618,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target[0] === 'custom' || target[0] === 'avatar') {
+		if (toId(target[0]) === 'custom' || toId(target[0]) === 'avatar') {
 			price = 35;
 			if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
@@ -1645,7 +1645,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target[0] === 'color') {
+		if (toId(target[0]) === 'color') {
 			price = 350;
 			if (price <= user.money) {
 				if (!target[2]) return this.sendReply('Please specify the name of the alt you want your main account (the one you are on now) to have the color of.  Do so with /buy color, [alt name].');
@@ -1665,7 +1665,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target[0] === 'emote') {
+		if (toId(target[0]) === 'emote') {
 			price = 100;
 			if (price <= user.money) {
 				match = true;
@@ -1688,7 +1688,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target[0] === 'animated') {
+		if (toId(target[0]) === 'animated') {
 			price = 45;
 			if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
@@ -1731,7 +1731,7 @@ exports.commands = {
 			}
 		}
 		*/
-		if (target2 === 'trainer') {
+		if (toId(target2) === 'trainer' || toId(target2) === 'trainercard') {
 			price = 60;
 			if (price <= user.money) {
 				match = true;
@@ -1746,7 +1746,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target2 === 'musicbox') {
+		if (toId(target2) === 'musicbox') {
 			price = 60;
 			if (price <= user.money) {
 				match = true;
@@ -1761,7 +1761,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target2 === 'fix') {
+		if (toId(target2) === 'fix') {
 			price = 15;
 			if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 			if (price <= user.money) {
@@ -1776,7 +1776,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (target2 === 'declare') {
+		if (toId(target2) === 'declare') {
 			price = 25;
 			if (price <= user.money) {
 				match = true;

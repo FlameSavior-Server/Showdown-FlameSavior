@@ -1378,7 +1378,7 @@ exports.commands = {
 		if (!target) target = user.name;
 		var originalName = target;
 		target = toId(target);
-		function output(target) {
+		function atm(target) {
 			var bucks = economy.readMoney(target);
 			var label = (bucks == 1 ? ' Gold buck' : ' Gold bucks');
 			var output = "<u>Gold Wallet:</u><br />";
@@ -1392,7 +1392,7 @@ exports.commands = {
 			}
 			return output;
 		}
-		return this.sendReplyBox(output(target));
+		return this.sendReplyBox(atm(target));
 	},
 	awardbucks: 'givebucks',
 	gb: 'givebucks',

@@ -619,7 +619,7 @@ exports.commands = {
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd) {
-		return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, lc, random doubles, random triples, random monotype, 1v1, lc, nu, cap, bc, monotype, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes, gold battle');
+		return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, random doubles, random triples, random monotype, 1v1, lc, nu, cap, bc, monotype, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes, gold battle');
 	},
 	survey: 'poll',
 	poll: function(target, room, user) {

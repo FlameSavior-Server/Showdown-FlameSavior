@@ -94,8 +94,8 @@ exports.commands = {
 					this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);
 					return;
 				}
-				Users.get(userid).popup('|modal||html|<font color="red"><strong>ATTENTION!</strong></font><br /> You have received a custom avatar from <b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + '</font></b>: <img src="'+avatar+'" width="80" height="80">');
-				/* falls through */
+				
+			/* falls through */
 			case 'forceset':
 				if (user.avatarCooldown && !this.can('pban')) {
 					var milliseconds = (Date.now() - user.avatarCooldown);
@@ -128,6 +128,7 @@ exports.commands = {
 					this.sendReply(userid + "'s custom avatar has been set.");
 					//Users.messageSeniorStaff(userid+' has received a custom avatar from '+user.name);
 					Rooms.rooms.staff.add(userid+' has received a custom avatar from '+user.name);
+					Users.get(userid).popup('|modal||html|<font color="red"><strong>ATTENTION!</strong></font><br /> You have received a custom avatar from <b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + '</font></b>: <img src="'+avatar+'" width="80" height="80">');
 					room.update();
 				}.bind(this));
 				break;

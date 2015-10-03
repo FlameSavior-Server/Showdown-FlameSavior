@@ -1671,6 +1671,7 @@ exports.commands = {
 				for (var u in Users.users) {
 					if (Users.users[u].group == "~") {
 						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + user.name + ' has purchased a custom emote. Emote "' + target[1] + '": ' + target[2]);
+						Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html <center><img src="' + target[2] + '" title="' + target[1] + '"><br /><button name="send" value="/emote add, ' + target[1] + ', ' + target[2] + '" target="_blank" title="Click to add the emoticon above.">Click2Add</button></center>');
 					}
 				}
 			} else {

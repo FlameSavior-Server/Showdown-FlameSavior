@@ -893,11 +893,11 @@ var commands = {
 					offlineUsers.push(targetUser.userid);
 					continue;
 				} else {
-					targetUser.popup('You have a tournament battle in the room "' + tournament.room.title + '". If you do not start soon, you may be disqualified.');
+					targetUser.popup('|modal|You have a tournament battle in the room "' + tournament.room.title + '". If you do not start soon, you may be disqualified.');
 				}
 			}
 			tournament.room.addRaw('<b>Players have been reminded of their tournament battles by ' + user.name + '.</b>');
-			if (offlineUsers.length !== 0) tournament.room.addRaw('<b>The following users are currently offline: ' + offlineUsers + '.</b>');
+			if (offlineUsers.length > 0 && offlineUsers !== '') tournament.room.addRaw('<b>The following users are currently offline: ' + offlineUsers + '.</b>');
 		},
 		runautodq: function (tournament) {
 			tournament.runAutoDisqualify(this);

@@ -34,19 +34,42 @@ exports.commands = {
             case 'buy':
             case 'join':
                 if (!lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
-                if (economy.readMoney(toId(user.name)) < lottery.ticketPrice) return this.errorReply("You do not have enough bucks to partake in this game of Lottery.  Sorry.");
-                if (lottery.playerIPS.length > 1) {
-                    var filteredPlayerArray = lottery.playerIPS.filter(function(ip) {
-                        return ip === user.latestIp;
-                    });
-                    if (filteredPlayerArray.length >= lottery.maxTicketsPerUser)  return this.errorReply("You cannot get more than " + lottery.maxTicketsPerUser + " tickets for this game of lotto.");
+                if (parts[1]) {
+                    if (isNaN(Number(parts[1]))) return this.errorReply("The amount of tickets you buy must be a number.");
+                    if (~String(parts[1]).indexOf('.')) return this.errorReply("Cannot contain a decimal.");
+                    if (Number(parts[1]) < 1) return this.errorReply("Cannot be less than 1.");
+                    var bought = parts[1];
+                    if (bought > lottery.maxTicketsPerUser) return this.errorReply("You cannot get this many lottery tickets.");
+                    if (bought * lottery.ticketPrice > economy.readMoney(user.userid)) return this.errorReply("Sorry, you do not have enough bucks to buy that many tickets.");
+                    if (lottery.playerIPS.length > 1) {
+                        var filteredPlayerArray = lottery.playerIPS.filter(function(ip) {
+                            return ip === user.latestIp;
+                        });
+                        if (Number(Object.keys(filteredPlayerArray).length) + Number(bought) > lottery.maxTicketsPerUser) return this.errorReply("You cannot get more than " + lottery.maxTicketsPerUser + " tickets for this game of lotto.");
+                    }
+                    economy.writeMoney('money', toId(user.name), -bought*lottery.ticketPrice);
+                    lottery.pot = lottery.pot + (lottery.ticketPrice * bought * 2);
+                    Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</font></b> has bought " + bought + " lottery tickets.");
+                    for (var x=bought; x>0; x--) {
+                        lottery.players.push(toId(user.name));
+                        lottery.playerIPS.push(user.latestIp);
+                    }
+                    saveLottery();
+                } else {
+                    if (economy.readMoney(toId(user.name)) < lottery.ticketPrice) return this.errorReply("You do not have enough bucks to partake in this game of Lottery.  Sorry.");
+                    if (lottery.playerIPS.length > 1) {
+                        var filteredPlayerArray = lottery.playerIPS.filter(function(ip) {
+                            return ip === user.latestIp;
+                        });
+                        if (filteredPlayerArray.length >= lottery.maxTicketsPerUser)  return this.errorReply("You cannot get more than " + lottery.maxTicketsPerUser + " tickets for this game of lotto.");
+                    }
+                    economy.writeMoney('money', toId(user.name), -lottery.ticketPrice);
+                    lottery.pot = lottery.pot + (lottery.ticketPrice * 2);
+                    Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</font></b> has bought a lottery ticket.");
+                    lottery.players.push(toId(user.name));
+                    lottery.playerIPS.push(user.latestIp);
+                    saveLottery();
                 }
-                economy.writeMoney('money', toId(user.name), -lottery.ticketPrice);
-                lottery.pot = lottery.pot + (lottery.ticketPrice * 2);
-                Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</font></b> has bought a lottery ticket.");
-                lottery.players.push(toId(user.name));
-                lottery.playerIPS.push(user.latestIp);
-                saveLottery();
                 break;
 
             case 'new':

@@ -89,13 +89,12 @@ exports.commands = {
 				pendingAdds[hash] = {userid: userid, avatar: avatar};
 				parts[1] = hash;
 
-				Users.get(userid).popup('|modal| You have received a custom avatar from ' + tools.escapeHTML(user.name) + '.');
 				if (!targetUser) {
 					this.sendReply("Warning: " + userid + " is not online.");
 					this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);
 					return;
 				}
-
+				Users.get(userid).popup('|modal||html|<font color="red"><strong>ATTENTION!</strong></font><br /> You have received a custom avatar from ' + tools.escapeHTML(user.name) + ': <img src="'+parts[2]+'" width="80" height="80">');
 				/* falls through */
 			case 'forceset':
 				if (user.avatarCooldown && !this.can('pban')) {

@@ -1448,8 +1448,9 @@ exports.commands = {
 		var parts = target.split(',');
 
 		//checks
+		if (!parts[0] || !parts[1]) return this.errorReply("Usage: /transferbucks [user], [amount]");
 		if (Number(parts[1]) < 1) return this.errorReply("Cannot be less than 1.");
-		if (isNaN(Number(parts[1]))) return this.errorReply("The amount of tickets you buy must be a number.");
+		if (isNaN(Number(parts[1]))) return this.errorReply("The amount you transfer must be a number.");
         if (~String(parts[1]).indexOf('.')) return this.errorReply("Cannot contain a decimal.");
         var bucks = toId(parts[1]);
 		if (economy.readMoney(user.userid) < bucks) return this.errorReply("You cannot transfer more than you have.");

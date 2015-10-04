@@ -712,6 +712,7 @@ exports.commands = {
 	sleep: 'afk',
 	asleep: 'afk',
 	eating: 'afk',
+	eat: 'afk',
 	gaming: 'afk',
 	sleeping: 'afk',
 	afk: function(target, room, user, connection, cmd) {
@@ -731,6 +732,7 @@ exports.commands = {
 				case 'busy':
 					awayName = user.name + ' - Ⓑⓤⓢⓨ';
 					break;
+				case 'eat':
 				case 'eating':
 					awayName = user.name + ' - Ⓔⓐⓣⓘⓝⓖ';
 					break;
@@ -744,7 +746,7 @@ exports.commands = {
 			delete Users.get(awayName);
 			user.forceRename(awayName, undefined, true);
 			user.isAway = true;
-			if (!(!this.can('broadcast'))) {
+			if (this.can('broadcast')) {
 				var color = Gold.hashColor('' + toId(user.originalName) + '');
 				if (cmd === 'sleep') cmd = 'sleeping';
 				if (cmd === 'eat') cmd = 'eating';
@@ -768,7 +770,7 @@ exports.commands = {
 			//user will be authenticated
 			user.authenticated = true;
 			user.isAway = false;
-			if (!(!this.can('broadcast'))) {
+			if (this.can('broadcast')) {
 				var color = Gold.hashColor('' + toId(user.name) + '');
 				this.add('|raw|<b>--</b> <button class="astext" name="parseCommand" value="/user ' + user.name + '" target="_blank"><b><font color="' + color + '">' + newName + '</font></b></button> is no longer away.');
 				user.originalName = '';

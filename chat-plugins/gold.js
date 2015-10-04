@@ -1466,7 +1466,7 @@ exports.commands = {
 		//send return messages
 		var lbl = (bucks == 1 ? ' Gold buck' : ' Gold bucks');
 		this.sendReply("You have transfered " + bucks + lbl + " to " + parts[0] + ".");
-		if (Users(toId(parts[1]))) Users(toId(parts[1])).popup("|modal|" + user.name + " has transfered " + bucks + lbl + " to you.");
+		if (Users(toId(parts[0]))) Users(toId(parts[0])).popup("|modal|" + user.name + " has transfered " + bucks + lbl + " to you.");
 	},
 
 	crashlogs: function (target, room, user) {

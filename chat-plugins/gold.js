@@ -1459,7 +1459,9 @@ exports.commands = {
 
 		//finally, transfer the bucks
 		economy.writeMoney('money', user.userid, -bucks);
-		economy.writeMoney('money', toId(parts[0]), +bucks);
+		setTimeout(function() {
+			economy.writeMoney('money', toId(parts[0]), +bucks);
+		}, 3000);
 
 		//log the transaction
 		logTransaction(user.name + " has transfered " + bucks + lbl + " to " + parts[1]);

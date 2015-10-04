@@ -1612,7 +1612,7 @@ exports.commands = {
 				return this.sendReply('You do not have enough bucks for this. You need ' + (price - user.money) + ' more bucks to buy ' + target + '.');
 			}
 		}
-		if (toId(target[0]) === 'color') {
+		if (target[0] === 'color') {
 			price = 350;
 			if (price <= user.money) {
 				if (!target[2]) return this.sendReply('Please specify the name of the alt you want your main account (the one you are on now) to have the color of.  Do so with /buy color, [alt name].');

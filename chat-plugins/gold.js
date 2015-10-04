@@ -1327,6 +1327,7 @@ exports.commands = {
 		if (!this.canTalk()) return;
 		//if (!free) return this.sendReply('Sorry, we\'re not currently giving away FREE custom symbols at the moment.');
 		if (!target || target.length > 1) return this.sendReply('/customsymbol [symbol] - changes your symbol (usergroup) to the specified symbol. The symbol can only be one character');
+		if (~target.indexOf('\u202e')) return this.sendReply("nono riperino");
 		var bannedSymbols = /[ +<>$%‽!★@&~#卐|A-z0-9]/;
 		if (target.match(bannedSymbols)) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
 		user.getIdentity = function() {

@@ -1442,7 +1442,7 @@ exports.commands = {
 			return this.parse('/help givebucks');
 		}
 	},
-/*
+
 	tb: 'transferbucks',
 	transferbucks: function(target, room, user) {
 		var parts = target.split(',');
@@ -1452,12 +1452,13 @@ exports.commands = {
 		if (Number(parts[1]) < 1) return this.errorReply("Cannot be less than 1.");
 		if (isNaN(Number(parts[1]))) return this.errorReply("The amount you transfer must be a number.");
         if (~String(parts[1]).indexOf('.')) return this.errorReply("Cannot contain a decimal.");
+        if (toId(parts[0]) == user.userid) return this.errorReply("You cannot transfer bucks to yourself.");
         var bucks = toId(parts[1]);
 		if (economy.readMoney(user.userid) < bucks) return this.errorReply("You cannot transfer more than you have.");
 
 		//finally, transfer the bucks
 		economy.writeMoney('money', user.userid, -bucks);
-		economy.writeMoney('money', toId(parts[0]), bucks);
+		economy.writeMoney('money', toId(parts[0]), +bucks);
 
 		//log the transaction
 		logTransaction(user.name + " has transfered " + bucks + lbl + " to " + parts[1]);
@@ -1467,7 +1468,7 @@ exports.commands = {
 		this.sendReply("You have transfered " + bucks + lbl + " to " + parts[0] + ".");
 		if (Users(toId(parts[1]))) Users(toId(parts[1])).popup("|modal|" + user.name + " has transfered " + bucks + lbl + " to you.");
 	},
-*/
+
 	crashlogs: function (target, room, user) {
 		if (!this.can('hotpatch')) return this.errorReply("Access denied.");
 		var crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');

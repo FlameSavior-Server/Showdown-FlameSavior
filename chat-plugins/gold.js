@@ -1442,7 +1442,7 @@ exports.commands = {
 			return this.parse('/help givebucks');
 		}
 	},
-
+/*
 	tb: 'transferbucks',
 	transferbucks: function(target, room, user) {
 		var parts = target.split(',');
@@ -1467,6 +1467,7 @@ exports.commands = {
 		this.sendReply("You have transfered " + bucks + lbl + " to " + parts[0] + ".");
 		if (Users(toId(parts[1]))) Users(toId(parts[1])).popup("|modal|" + user.name + " has transfered " + bucks + lbl + " to you.");
 	},
+*/
 	crashlogs: function (target, room, user) {
 		if (!this.can('hotpatch')) return this.errorReply("Access denied.");
 		var crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');

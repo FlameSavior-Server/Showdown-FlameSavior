@@ -1445,49 +1445,26 @@ exports.commands = {
 
 	tb: 'transferbucks',
 	transferbucks: function(target, room, user) {
-		if (!target) return this.sendReply('|raw|Correct Syntax: /transferbucks <i>user</i>, <i>amount</i>');
-		if (target.indexOf(',') >= 0) {
-			var parts = target.split(',');
-			if (parts[0].toLowerCase() === user.name.toLowerCase()) {
-				return this.sendReply('You can\'t transfer Bucks to yourself.');
-			}
-			user.money = readMoney(user.userid);
-			parts[0] = this.splitTarget(parts[0]);
-			var targetUser = this.targetUser;
-		}
-		if (!targetUser) {
-			return this.sendReply('User ' + this.targetUsername + ' not found.');
-		}
-		if (isNaN(parts[1])) {
-			return this.sendReply('Very funny, now use a real number.');
-		}
-		if (parts[1] < 0) {
-			return this.sendReply('Number cannot be negative.');
-		}
-		if (parts[1] == 0) {
-			return this.sendReply('No! You cannot transfer 0 bucks, you fool!');
-		}
-		if (String(parts[1]).indexOf('.') >= 0) {
-			return this.sendReply('You cannot transfer numbers with decimals.');
-		}
-		if (parts[1] > user.money) {
-			return this.sendReply('You cannot transfer more money than what you have.');
-		}
-		var p = 'Bucks';
-		var cleanedUp = parts[1].trim();
-		var transferMoney = Number(cleanedUp);
-		if (transferMoney === 1) {
-			p = 'Buck';
-		}
-		writeMoney('money', user, -transferMoney);
-		//set time delay because of node asynchronous so it will update both users' money instead of either updating one or the other
-		setTimeout(function() {
-			writeMoney('money', targetUser, transferMoney);
-			fs.appendFile('logs/transactions.log', '\n' + Date() + ': ' + user.name + ' has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '. ' + user.name + ' now has ' + user.money + ' ' + p + ' and ' + targetUser.name + ' now has ' + targetUser.money + ' ' + p + '.');
-		}, 3000);
-		this.sendReply("You have transfered " + transferMoney + " " + p + " to " + targetUser + ".");
-		targetUser.popup(user.name + ' has transferred ' + transferMoney + ' ' + p + ' to you.');
-		this.logModCommand('(' + user.name + '  has transferred ' + transferMoney + ' ' + p + ' to ' + targetUser.name + '.)');
+		var parts = target.split(',');
+
+		//checks
+		if (Number(parts[1]) < 1) return this.errorReply("Cannot be less than 1.");
+		if (isNaN(Number(parts[1]))) return this.errorReply("The amount of tickets you buy must be a number.");
+        if (~String(parts[1]).indexOf('.')) return this.errorReply("Cannot contain a decimal.");
+        var bucks = toId(parts[1]);
+		if (economy.readMoney(user.userid) < bucks) return this.errorReply("You cannot transfer more than you have.");
+
+		//finally, transfer the bucks
+		economy.writeMoney('money', user.userid, -bucks);
+		economy.writeMoney('money', toId(parts[0]), bucks);
+
+		//log the transaction
+		logTransaction(user.name + " has transfered " + bucks + lbl + " to " + parts[1]);
+
+		//send return messages
+		var lbl = (bucks == 1 ? ' Gold buck' : ' Gold bucks');
+		this.sendReply("You have transfered " + bucks + lbl + " to " + parts[0] + ".");
+		if (Users(toId(parts[1]))) Users(toId(parts[1])).popup("|modal|" + user.name + " has transfered " + bucks + lbl + " to you.");
 	},
 	crashlogs: function (target, room, user) {
 		if (!this.can('hotpatch')) return this.errorReply("Access denied.");

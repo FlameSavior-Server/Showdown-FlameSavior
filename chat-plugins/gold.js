@@ -1636,7 +1636,7 @@ exports.commands = {
 				var emoteFilepaths = ['.png', '.jpg', '.gif'];
 				if (!~emoteFilepaths.indexOf(parts[2].substr(-4))) return this.errorReply("Emoticons must be in one of the following formats: PNG, JPG, or GIF.");
 				processPurchase(price, parts[0], 'Emote: ' + parts[1] + ' Link: ' + parts[2]);
-				alertStaff(user.name + " has purchased a custom emote. Emote \"" + parts[1] + "\": " + parts[2], true);
+				alertStaff(user.name + " has purchased a custom emote. Emote \"" + parts[1].trim() + "\": " + parts[2], true);
 				alertStaff('/html <center><img title=' + parts[1] + ' src=' + parts[2] + '><br /><button name="send" value="/emote add, ' + parts[1] + ', ' + parts[2] + '" target="_blank" title="Click to add the emoticon above.">Click2Add</button></center>', false);
 				this.sendReply("You have bought a custom emoticon from the shop.  The staff have been notified and will add it ASAP.");
 				break;

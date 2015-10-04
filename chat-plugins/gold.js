@@ -2079,40 +2079,7 @@ exports.commands = {
 			'<br>9. ' + highest.id[8] + ': ' + highest.money[8] +
 			'<br>10. ' + highest.id[9] + ': ' + highest.money[9]);
 	},
-	
-	snipe: function (target, room, user, connection, cmd) {
-		if (toId(user.name) !== 'tesarand' && !this.can('ban', targetUser)) return false;		
-		if (!target) return this.parse('/help ban');
-		if ((user.locked) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
-		if (target.length > MAX_REASON_LENGTH) {
-			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
-		}
-		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
-			var problem = " but was already banned";
-			return this.privateModCommand("(" + targetUser.name + " would be banned by " + user.name + problem + ".)");
-		}
-		if (targetUser.confirmed) {
-			var from = targetUser.deconfirm();
-			ResourceMonitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
-		}
-		targetUser.popup("" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");
-		this.addModCommand("" + targetUser.name + " took a headshot from " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
-		var alts = targetUser.getAlts();
-		var acAccount = (targetUser.autoconfirmed !== targetUser.userid && targetUser.autoconfirmed);
-		if (alts.length) {
-			this.privateModCommand("(" + targetUser.name + "'s " + (acAccount ? " ac account: " + acAccount + ", " : "") + "banned alts: " + alts.join(", ") + ")");
-			for (var i = 0; i < alts.length; ++i) {
-				this.add('|unlink|' + toId(alts[i]));
-			}
-		} else if (acAccount) {
-			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
-		}
-		this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
-		targetUser.ban();
-	},
+
 	moneylog: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;
 		if (!target) return this.sendReply("Usage: /moneylog [number] to view the last x lines OR /moneylog [text] to search for text.");

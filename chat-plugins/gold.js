@@ -1401,7 +1401,7 @@ exports.commands = {
 
 		//send replies
 		var lbl = (amount == 1 ? ' Gold buck' : ' Gold bucks');
-		logTransaction(user.name + " has given " + amount + lbl + " to " + giveName);
+		logTransaction(user.name + " has given " + amount + lbl + " to " + giveName + ".");
 		this.sendReply("You have given " + amount + lbl + " to " + giveName + ".");
 		if (Users(toId(giveName))) Users(toId(giveName)).popup("|modal|" + user.name + " has given you " + amount + lbl + ".");
 	},
@@ -1458,7 +1458,7 @@ exports.commands = {
 
 		//send replies
 		var lbl = (amount == 1 ? ' Gold buck' : ' Gold bucks');
-		logTransaction(user.name + " has removed " + amount + lbl + " from " + removeName);
+		logTransaction(user.name + " has removed " + amount + lbl + " from " + removeName + ".");
 		this.sendReply("You have removed " + amount + lbl + " from " + removeName + ".");
 		if (Users(toId(removeName))) Users(toId(removeName)).popup("|modal|" + user.name + " has removed " + amount + lbl + " from you.");
 	},

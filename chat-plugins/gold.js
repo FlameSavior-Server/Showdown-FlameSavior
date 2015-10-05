@@ -2175,8 +2175,6 @@ function writeMoney(filename, user, amount, callback) {
 }
 exports.writeMoney = writeMoney;
 
-//here you go panpan
-//~stevoduhpedo
 Object.merge(Gold, {
 	hasBadge: function(user, badge) {
 		var data = fs.readFileSync('badges.txt', 'utf8');

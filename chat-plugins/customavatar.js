@@ -152,6 +152,7 @@ exports.commands = {
 					this.sendReply(userid + "'s custom avatar removed successfully");
 				}.bind(this));
 				break;
+
 				case 'reload':
 					if (!this.can('hotpatch')) return this.errorReply("Access denied.");
 					reloadCustomAvatars();

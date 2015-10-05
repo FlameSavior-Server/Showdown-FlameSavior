@@ -45,8 +45,7 @@ exports.commands = {
 		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (room.id !== 'lobby') return false;
 		var message = target || messages[Math.floor(Math.random() * messages.length)];
-		if (message.indexOf('{{user}}') < 0)
-			message = '{{user}} ' + message;
+		if (message.indexOf('{{user}}') < 0) message = '{{user}} ' + message;
 		message = message.replace(/{{user}}/g, user.name);
 		if (!this.canTalk(message)) return false;
 

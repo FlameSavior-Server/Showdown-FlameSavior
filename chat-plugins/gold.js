@@ -7,7 +7,6 @@ var closedShop = 0;
 if (typeof Gold === 'undefined') global.Gold = {};
 if (typeof Gold.tells === 'undefined') global.Gold.tells = {};
 var crypto = require('crypto');
-var inShop = ['symbol', 'custom', 'animated', 'trainer', 'fix', 'declare', 'musicbox', 'emote', 'color'];
 var ipbans = fs.createWriteStream('config/ipbans.txt', {
 	'flags': 'a'
 });
@@ -1358,12 +1357,18 @@ exports.commands = {
 		if (Users(toId(removeName))) Users(toId(removeName)).popup("|modal|" + user.name + " has removed " + amount + lbl + " from you.");
 	},
 	buy: function(target, room, user) {
-		if (!target) return this.errorReply('You need to pick an item! Type /buy [item] to buy something.');
-		if (closeShop) return this.errorReply('The shop is currently closed and will open shortly.');
+		if (!target) return this.errorReply("You need to pick an item! Type /buy [item] to buy something.");
+		if (closeShop) return this.errorReply("The shop is currently closed and will open shortly.");
 
 		var parts = target.split(',');
 		var output = '';
 
+		function link(link) {
+			return '<a href="' + link + '" target="_blank">' + link + '</a>';
+		}
+		function nameColor(name) {
+			return '<b><font color="' + Gold.hashColor(toId(name)) + '">' + name + '</font></b>';
+		}
 		function moneyCheck(price) {
 			if (economy.readMoney(user.userid) < price) return false;
 			if (economy.readMoney(user.userid) >= price) return true;
@@ -1371,7 +1376,7 @@ exports.commands = {
 		function alertStaff(message, staffRoom) {
 			for (var u in Users.users) {
 				if (Users.users[u].group == "~" || Users.users[u].group == "&") {
-					Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|' + message);
+					Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html ' + message);
 				}
 			}
 			if (staffRoom) {
@@ -1394,8 +1399,8 @@ exports.commands = {
 				price = 5;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
-				this.sendReply('You have purchased a custom symbol. You will have this until you log off for more than an hour.');
-				this.sendReply('Use /customsymbol [symbol] to change your symbol now!');
+				this.sendReply("You have purchased a custom symbol. You will have this until you log off for more than an hour.");
+				this.sendReply("Use /customsymbol [symbol] to change your symbol now!");
 				user.canCustomSymbol = true;
 				break;
 
@@ -1407,11 +1412,11 @@ exports.commands = {
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy avatar, [link to avatar].  Must be a PNG or JPG.");
 				var filepaths = ['.png', '.jpg'];
-				if (!~filepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a regular custom avatar must be either a PNG or JPG.");
+				if (!~filepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a regular custom avatar must be either a PNG or JPG. (If it is a valid file type, it will end in one of these)");
 				processPurchase(price, parts[0],'Image: ' + parts[1]);
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
-				alertStaff(user.name + ' has purchased a custom avatar. Image: ' + parts[1], true);
-				alertStaff('/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
+				alertStaff(nameColor(user.name) + ' has purchased a custom avatar. Image: ' + link(parts[1]), true);
+				alertStaff('<center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
 				this.sendReply("You have bought a custom avatar from the shop.  The staff have been notified to set it ASAP.");
 				break;
 
@@ -1421,7 +1426,8 @@ exports.commands = {
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy color, [hex code OR name of an alt you want the color of]");
 				processPurchase(price, parts[0], parts[1]);
-				alertStaff(user.name + ' has purchased a custom color. Color: ' + parts[1], true);
+				alertStaff(nameColor(user.name) + ' has purchased a custom color. Color: ' + parts[1], true);
+				this.sendReply("You have purchased a custom color: " + parts[1] + " from the shop.  Please screen capture this in case the staff do not get this message.");
 				break;
 
 			case 'emote':
@@ -1432,8 +1438,8 @@ exports.commands = {
 				var emoteFilepaths = ['.png', '.jpg', '.gif'];
 				if (!~emoteFilepaths.indexOf(parts[2].substr(-4))) return this.errorReply("Emoticons must be in one of the following formats: PNG, JPG, or GIF.");
 				processPurchase(price, parts[0], 'Emote: ' + parts[1] + ' Link: ' + parts[2]);
-				alertStaff(user.name + " has purchased a custom emote. Emote \"" + parts[1].trim() + "\": " + parts[2], true);
-				alertStaff('/html <center><img title=' + parts[1] + ' src=' + parts[2] + '><br /><button name="send" value="/emote add, ' + parts[1] + ', ' + parts[2] + '" target="_blank" title="Click to add the emoticon above.">Click2Add</button></center>', false);
+				alertStaff(nameColor(user.name) + " has purchased a custom emote. Emote \"" + parts[1].trim() + "\": " + link(parts[2]), true);
+				alertStaff('<center><img title=' + parts[1] + ' src=' + parts[2] + '><br /><button name="send" value="/emote add, ' + parts[1] + ', ' + parts[2] + '" target="_blank" title="Click to add the emoticon above.">Click2Add</button></center>', false);
 				this.sendReply("You have bought a custom emoticon from the shop.  The staff have been notified and will add it ASAP.");
 				break;
 
@@ -1442,11 +1448,11 @@ exports.commands = {
 				if (Gold.hasBadge(user.userid, 'vip')) return this.errorReply("You are a VIP user - you do not need to buy animated avatars from the shop.  Use /customavatar to change your avatar.");
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy animated, [link to avatar].  Must be a GIF.");
-				if (parts[1].split('.').pop() !== 'gif') return this.errorReply("Your animated avatar must be a GIF.");
+				if (parts[1].split('.').pop() !== 'gif') return this.errorReply("Your animated avatar must be a GIF. (If it's a GIF, the link will end in .gif)");
 				processPurchase(price, parts[0],'Image: ' + parts[1]);
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
-				alertStaff(user.name + ' has purchased a custom animated avatar. Image: ' + parts[1], true);
-				alertStaff('/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
+				alertStaff(nameColor(user.name) + ' has purchased a custom animated avatar. Image: ' + link(parts[1]), true);
+				alertStaff('<center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
 				this.sendReply("You have purchased a custom animated avatar.  The staff have been notified and will add it ASAP.");
 				break;
 
@@ -1455,7 +1461,7 @@ exports.commands = {
 				price = 60;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0], '');
-				alertStaff(user.name + ' has purchased a trainer card.', true);
+				alertStaff(nameColor(user.name) + ' has purchased a trainer card.', true);
 				this.sendReply("|html|You have purchased a trainer card.  Please use <a href=http://goldservers.info/site/trainercard.html>this</a> to make your trainer card and then PM a leader or administrator the HTML with the command name you want it to have.");
 				break;
 
@@ -1464,7 +1470,7 @@ exports.commands = {
 				price = 60;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0], '');
-				alertStaff(user.name + ' has purchased a music box.', true);
+				alertStaff(nameColor(user.name) + ' has purchased a music box.', true);
 				this.sendReply("You have purchased a music box.  Please start thinking about 6 or less songs you want on it.  Create a pastebin of the links of the YouTube songs and send them to a leader or administrator.");
 				break;
 
@@ -1473,7 +1479,7 @@ exports.commands = {
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				processPurchase(price, parts[0], '');
-				alertStaff(user.name + ' has purchased a fix from the shop.', true);
+				alertStaff(nameColor(user.name) + ' has purchased a fix from the shop.', true);
 				user.canFixItem = true;
 				this.sendReply("You have purchased a fix from the shop.  You can use this to alter your trainer card, music box, or custom chat emoticon.  PM a leader or administrator to proceed.");
 				break;
@@ -1482,8 +1488,7 @@ exports.commands = {
 				price = 25;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0], '');
-				alertStaff(user.name + ' has purchased the ability to declare from the shop.', true);
-				user.canDecAdvertise = true;
+				alertStaff(nameColor(user.name) + ' has purchased the ability to declare from the shop.', true);
 				this.sendReply("You have purchased a declare from the shop.  PM a leader or administrator to proceed.");
 				break;
 

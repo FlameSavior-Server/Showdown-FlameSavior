@@ -28,6 +28,7 @@ exports.commands = {
 		var theme = '';
 
 		switch (target) {
+
 			case 'pokemon':
 				theme = 'Pokemon';
 				var pokemon = Tools.dataSearch(Object.keys(Tools.data.Pokedex).sample().trim())[0];
@@ -37,11 +38,20 @@ exports.commands = {
 					room.anagram.word = pokemon.name;
 				}
 				break;
+
 			case 'info':
 			case 'credits':
 				this.sendReplyBox("Anagram plugin by <a href=\"https://gist.github.com/jd4564/194c045bec24e137de92\">jd</a>");
 				delete room.anagram;
 				break;
+
+			case 'end':
+				if (!user.can('broadcast', null, room)) return this.sendReply('/endanagram - Access denied.');
+				if (!room.anagram) return this.sendReply('There is no anagram running in here.');
+				delete room.anagram;
+				room.add('|raw|<div class="infobox">The anagram game was ended by <b>' + Tools.escapeHTML(user.name) + '</b></div>');
+				break;
+
 			default:
 			case 'normal':
 				theme = 'Normal';
@@ -66,12 +76,5 @@ exports.commands = {
 		this.update();
 		};
 		return this.add('|raw|<div class="infobox">' + Tools.escapeHTML(user.name) + ' has started an anagram. Letters: <b>' + room.anagram.scrambledWord + '</b> Theme: <b>' + theme + '</b></div>');
-	},
-
-	endanagram: function(target, room, user) {
-		if (!user.can('broadcast', null, room)) return this.sendReply('/endanagram - Access denied.');
-		if (!room.anagram) return this.sendReply('There is no anagram running in here.');
-		delete room.anagram;
-		room.add('|raw|<div class="infobox">The anagram game was ended by <b>' + Tools.escapeHTML(user.name) + '</b></div>');
-	},
+	}
 };

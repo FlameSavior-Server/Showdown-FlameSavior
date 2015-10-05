@@ -57,7 +57,7 @@ exports.commands = {
 	 		if (room.dice.player1 === user.userid) return room.dice.status = 1;
 	 		if (room.dice.player1 !== user.userid) {
 	 			room.dice.player2 = user.userid;
-	 			if (!Users.get(room.dice.player1).userid) {
+	 			if (!Users(room.dice.player1) || !Users(room.dice.player1).userid) {
 	 				room.addRaw("<b>Player 1 seems to be missing... game ending.</b>");
 	 				delete room.dice.player1;
 	 				delete room.dice.player2;
@@ -66,7 +66,7 @@ exports.commands = {
 	 				room.update();
 	 				return false;
 	 			}
-	 			if (!Users.get(room.dice.player2).userid) {
+	 			if (!Users(room.dice.player2) || !Users(room.dice.player2).userid) {
 	 				room.addRaw("<b>Player 2 seems to be missing... game ending.</b>");
 	 				delete room.dice.player1;
 	 				delete room.dice.player2;

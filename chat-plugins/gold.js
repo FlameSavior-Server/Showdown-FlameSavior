@@ -1477,30 +1477,6 @@ exports.commands = {
 		var crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');
 		user.send('|popup|' + crashes);
 	},
-	gamble: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		return this.sendReply("Command outdated.  See /gambledicehelp for the new gambling system.");
-		/*
-		if (!target) return this.sendReply('/gamble [amount] - Gambles the amount chosen. If you win, you win the amount * 2, else, you lose the amount.');
-		var amount = readMoney(user.userid);
-		if (target < 1) return this.sendReply("You cannot gamble less than 1.");
-		if (target == 0 || target % 1 != 0) return this.sendReply('You can\'t gamble 0 or decimal bucks.');
-		if (target > amount) return this.sendReply('You can\'t gamble more than you have.');
-		if (isNaN(target)) return this.sendReply('Use a real number.');
-		if (room.id != 'gamechamber') return this.sendReply('The command can only be used in the room "gamechamber".');
-		var roll = Math.floor(Math.random() * 6) + 1;
-		var computerroll = Math.floor(Math.random() * 6) + 1;
-		if (roll > computerroll) {
-			writeMoney('money', user, Number(target));
-			return this.sendReply('You won the gamble!');
-		} else if (roll == computerroll) {
-			return this.sendReply('Tie.');
-		} else if (computerroll > roll) {
-			writeMoney('money', user, Number(target * -1));
-			return this.sendReply('Sorry, you lost the gamble.');
-		}
-		*/
-	},
 	takebucks: 'removebucks',
 	removebucks: function(target, room, user) {
 		if (!user.can('pban')) return this.errorReply("You do not have enough authority to do this.");

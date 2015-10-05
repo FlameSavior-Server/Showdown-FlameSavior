@@ -2078,7 +2078,6 @@ exports.commands = {
 			'<br>9. ' + highest.id[8] + ': ' + highest.money[8] +
 			'<br>10. ' + highest.id[9] + ': ' + highest.money[9]);
 	},
-
 	moneylog: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;
 		if (!target) return this.sendReply("Usage: /moneylog [number] to view the last x lines OR /moneylog [text] to search for text.");

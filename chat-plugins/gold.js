@@ -1384,64 +1384,26 @@ exports.commands = {
 	awardbucks: 'givebucks',
 	gb: 'givebucks',
 	givebucks: function(target, room, user) {
-		if (!user.can('pban')) return this.sendReply('You do not have enough authority to do this.');
-		if (!target) return this.parse('/help givebucks');
-		if (target.indexOf(',') != -1) {
-			var parts = target.split(',');
-			parts[0] = this.splitTarget(parts[0]);
-			var targetUser = this.targetUser;
-			if (toId(user.name) === toId(targetUser) && !user.can('hotpatch')) return this.sendReply("Only admins can do this action you are trying to perform.");
-			if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
-			if (isNaN(parts[1])) return this.sendReply('Very funny, now use a real number.');
-			if (parts[1] < 1) return this.sendReply("You cannot give less than a buck.");
-			if (parts[1] > 1000) return this.sendReply("You cannot give more than 1,000 bucks at a time.");
-			var cleanedUp = parts[1].trim();
-			var giveMoney = Number(cleanedUp);
-			var data = fs.readFileSync('config/money.csv', 'utf8');
-			var match = false;
-			var money = 0;
-			var line = '';
-			var row = ('' + data).split("\n");
-			for (var i = row.length; i > -1; i--) {
-				if (!row[i]) continue;
-				var parts = row[i].split(",");
-				var userid = toId(parts[0]);
-				if (targetUser.userid == userid) {
-					var x = Number(parts[1]);
-					var money = x;
-					match = true;
-					if (match === true) {
-						line = line + row[i];
-						break;
-					}
-				}
-			}
-			targetUser.money = money;
-			targetUser.money += giveMoney;
-			if (match === true) {
-				var re = new RegExp(line, "g");
-				fs.readFile('config/money.csv', 'utf8', function(err, data) {
-					if (err) {
-						return console.log(err);
-					}
-					var result = data.replace(re, targetUser.userid + ',' + targetUser.money);
-					fs.writeFile('config/money.csv', result, 'utf8', function(err) {
-						if (err) return console.log(err);
-					});
-				});
-			} else {
-				var log = fs.createWriteStream('config/money.csv', {
-					'flags': 'a'
-				});
-				log.write("\n" + targetUser.userid + ',' + targetUser.money);
-			}
-			var p = 'bucks';
-			if (giveMoney < 2) p = 'buck';
-			this.sendReply(targetUser.name + ' was given ' + giveMoney + ' ' + p + '. This user now has ' + targetUser.money + ' bucks.');
-			targetUser.send(user.name + ' has given you ' + giveMoney + ' ' + p + '.');
-		} else {
-			return this.parse('/help givebucks');
-		}
+		if (!user.can('pban')) return this.errorReply("You do not have enough authority to do this.");
+		var parts = target.split(',');
+		var giveName = parts[0];
+		var amount = toId(parts[1]);
+
+		//checks
+		if (!giveName || !amount) return this.errorReply("Usage: /givebucks [user], [amount]");
+		if (Number(amount) < 1) return this.errorReply("Cannot be less than 1.");
+		if (isNaN(Number(amount))) return this.errorReply("The amount you give must be a number.");
+        if (~String(amount).indexOf('.')) return this.errorReply("Cannot contain a decimal.");
+        if (amount > 1000) return this.errorReply("You cannot give more than 1,000 bucks at once.");
+
+		//give the bucks
+		economy.writeMoney('money', toId(giveName),+amount);
+
+		//send replies
+		var lbl = (amount == 1 ? ' Gold buck' : ' Gold bucks');
+		logTransaction(user.name + " has given " + amount + lbl + " to " + giveName);
+		this.sendReply("You have given " + amount + lbl + " to " + giveName + ".");
+		if (Users(toId(giveName))) Users(toId(giveName)).popup("|modal|" + user.name + " has given you " + amount + lbl + ".");
 	},
 
 	tb: 'transferbucks',

@@ -1697,11 +1697,6 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Gold\'s Facebook page can be found <a href="https://www.facebook.com/pages/Gold-Showdown/585196564960185">here</a>.');
 	},
-	radio: 'plug',
-	plug: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Gold\'s OFFICIAL Plug.dj can be found <a href="https://plug.dj/nightcore-331">here</a>.');
-	},
 	guesscolor: function(target, room, user) {
 		if (!target) return this.sendReply('/guesscolor [color] - Guesses a random color.');
 		var html = ['<img ', '<a href', '<font ', '<marquee', '<blink', '<center'];

@@ -3865,6 +3865,7 @@ var commands = exports.commands = {
 			"- /roomvoice <em>username</em>: appoint a room voice<br />" +
 			"- /roomdevoice <em>username</em>: remove a room voice<br />" +
 			"- /modchat <em>[off/autoconfirmed/+]</em>: set modchat level<br />" +
+			"- /staffintro <em>intro</em>: sets the staff introduction that will be displayed for all staff joining the room<br />" +
 			"<br />" +
 			"Room owners (#) can also use:<br />" +
 			"- /roomintro <em>intro</em>: sets the room introduction that will be displayed for all users joining the room<br />" +
@@ -4297,6 +4298,10 @@ var commands = exports.commands = {
 		if (!target) return this.parse('/help showimage');
 		if (!this.can('declare', null, room)) return false;
 		if (!this.canBroadcast()) return;
+		if (this.room.isPersonal && !this.user.can('announce')) {
+			this.errorReply("Images are not allowed in personal rooms.");
+			return false;
+		}
 
 		var targets = target.split(',');
 		if (targets.length !== 3) {

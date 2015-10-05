@@ -1447,7 +1447,7 @@ exports.commands = {
 				processPurchase(price, parts[0],'Image: ' + parts[1]);
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
 				alertStaff(user.name + ' has purchased a custom avatar. Image: ' + parts[1], true);
-				alertStaff('/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', true);
+				alertStaff('/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
 				this.sendReply("You have bought a custom avatar from the shop.  The staff have been notified to set it ASAP.");
 				break;
 
@@ -1478,11 +1478,11 @@ exports.commands = {
 				if (Gold.hasBadge(user.userid, 'vip')) return this.errorReply("You are a VIP user - you do not need to buy animated avatars from the shop.  Use /customavatar to change your avatar.");
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy animated, [link to avatar].  Must be a GIF.");
-				if (parts[1].split('.').pop() !== '.gif') return this.errorReply("Your animated avatar must be a GIF.");
+				if (parts[1].split('.').pop() !== 'gif') return this.errorReply("Your animated avatar must be a GIF.");
 				processPurchase(price, parts[0],'Image: ' + parts[1]);
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
 				alertStaff(user.name + ' has purchased a custom animated avatar. Image: ' + parts[1], true);
-				alertStaff('/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', true);
+				alertStaff('/html <center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
 				this.sendReply("You have purchased a custom animated avatar.  The staff have been notified and will add it ASAP.");
 				break;
 

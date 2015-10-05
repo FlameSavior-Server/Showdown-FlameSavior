@@ -422,8 +422,10 @@ exports.commands = {
 	},
 	givesymbol: 'gs',
 	gs: function(target, room, user) {
-		if (!target) return this.sendReply('/givesymbol [user] - Gives permission for this user to set a custom symbol.');
-		return this.parse('/gi ' + target + ', symbol');
+		if (!target) return this.errorReply('/givesymbol [user] - Gives permission for this user to set a custom symbol.');
+		if (!Users(target)) return this.errorReply("Target user not found.  Check spelling?");
+		Users(target).canCustomSymbol = true;
+		Users(target).popup('|modal|' + user.name + ' have given you a FREE custom symbol.  Use /customsymbol to set your symbol.');
 	},
 	halloween: function(target, room, user) {
 		if (!target) return this.sendReply('/halloween needs a target.');

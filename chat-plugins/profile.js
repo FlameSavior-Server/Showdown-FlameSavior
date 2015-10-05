@@ -3,7 +3,7 @@
  */
 var serverIp = '167.114.155.242';
 var http = require('http');
-var formatHex = '#ff8c00'; //hex code for the formatting of the command
+var formatHex = '#000000'; //hex code for the formatting of the command
 var geoip = require('geoip-ultralight');
 geoip.startWatchingDataUpdate();
 

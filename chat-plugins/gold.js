@@ -1511,7 +1511,7 @@ exports.commands = {
 				processPurchase(price, parts[0], '');
 				alertStaff(user.name + ' has purchased a fix from the shop.', true);
 				user.canFixItem = true;
-				this.sendReply("You have purchased a fix from the shop.  PM a leader or administrator to proceed.");
+				this.sendReply("You have purchased a fix from the shop.  You can use this to alter your trainer card, music box, or custom chat emoticon.  PM a leader or administrator to proceed.");
 				break;
 
 			case 'declare':
@@ -1540,7 +1540,7 @@ exports.commands = {
 				'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
 				//'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
 				'<tr><td>Trainer</td><td>Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
-				'<tr><td>Fix</td><td>Buys the ability to alter your current custom avatar or trainer card or music box or custom emote (don\'t buy if you have neither)!</td><td>15</td></tr>' +
+				'<tr><td>Fix</td><td>Buys the ability to alter your trainer card, music box or custom emote (don\'t buy if you have neither)! (NOTE: No longer fixes avatars; those have to be rebought!)</td><td>15</td></tr>' +
 				'<tr><td>Declare</td><td>You get the ability to get one declare from an Admin or Leader in the lobby. This can be used for room advertisement (not server)</td><td>25</td></tr>' +
 				//'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
 				'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).</td><td>60</td></tr>' +

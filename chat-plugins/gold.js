@@ -1567,7 +1567,6 @@ exports.commands = {
 		if (closeShop) return this.errorReply('The shop is currently closed and will open shortly.');
 
 		var parts = target.split(',');
-		//var price = 0;
 		var output = '';
 
 		function moneyCheck(price) {

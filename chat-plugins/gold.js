@@ -800,7 +800,6 @@ exports.commands = {
 			'★ <b>Plug.dj</b> - Come listen to music with us! Click <a href="http://plug.dj/gold-server/">here</a> to start!<br>' +
 			'<i>--PM staff (%, @, &, ~) any questions you might have!</i>');
 	},
-
 	client: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('Gold\'s custom client can be found <a href="http://goldservers.info">here</a>.');

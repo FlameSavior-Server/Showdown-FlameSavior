@@ -310,12 +310,6 @@ exports.commands = {
 	hc: function(room, user, cmd) {
 		return this.parse('/hotpatch chat');
 	},
-	cc1v1: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox(
-			'<center><button name="send" value="/challenge ponybot, challengecup1vs1" class="blackbutton" title="Challenge Cup 1vs1 Battle!"><font size="white">Click here for a CC1vs1 battle!'
-		);
-	},
 	css: function(target, room, user, connection) {
 		var css = fs.readFileSync('config/custom.css', 'utf8');
 		return user.send('|popup|' + css);

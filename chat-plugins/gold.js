@@ -909,7 +909,7 @@ exports.commands = {
 	},
 	takevip: function(target, room, user) {
 		if (!target) return this.errorReply("Usage: /takevip [user]");
-		this.parse('/removebadge ' + target + ', vip')
+		this.parse('/removebadge ' + target + ', vip');
 	},
 	givebadge: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;

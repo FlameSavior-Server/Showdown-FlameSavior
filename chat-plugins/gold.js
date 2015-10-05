@@ -2004,7 +2004,6 @@ exports.commands = {
 			}
 		});
 	},
-
 	facebook: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Gold\'s Facebook page can be found <a href="https://www.facebook.com/pages/Gold-Showdown/585196564960185">here</a>.');

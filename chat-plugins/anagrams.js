@@ -49,7 +49,7 @@ exports.commands = {
 				if (!user.can('broadcast', null, room)) return this.sendReply('/endanagram - Access denied.');
 				if (!room.anagram) return this.sendReply('There is no anagram running in here.');
 				delete room.anagram;
-				room.add('|raw|<div class="infobox">The anagram game was ended by <b>' + Tools.escapeHTML(user.name) + '</b></div>');
+				this.add('|raw|<div class="infobox">The anagram game was ended by <b>' + Tools.escapeHTML(user.name) + '</b></div>');
 				break;
 
 			default:

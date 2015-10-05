@@ -352,49 +352,12 @@ exports.commands = {
 			if ((Users.users[u].group == "~" || Users.users[u].group == "&" || Users.users[u].group == "@" || Users.users[u].group == "%") && Users.users[u].connected)
 				Users.users[u].send('|pm|~Server|' + Users.users[u].getIdentity() + '|' + user.userid + ' (in ' + room.id + ') has reported: ' + target + '');
 	},
-
-	//New Room Commands
-	/*
-	newroomcommands: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>New Room Commands</b><br>' +
-			'-/newroomfaq - Shows an FAQ for making a new room.<br>' +
-			'-/newroomquestions - A command with a list of questions for a future room founder to answer.<br>' +
-			'-/newroom - A command a future room founder will use to answer /newroomquestion\'s questions.<br>' +
-			'-/roomreply [user] - Denies a user of a room. Requires &, ~.');
-	},
-	newroomfaq: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('So, you\'re interested in making a new room on Gold, aye? Well, the process is rather simple, really! Do /newroomquestions and answer those questions with your answers and staff will review them to consider making your room!');
-	},
-	newroomquestions: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>New Room Questions:</b><br>' +
-			'Directions: Using the "/newroom" command, answer the following and <i>number</i> your answers on one line.<br>' +
-			'1. Prefered room name?<br>' +
-			'2. Is this a new room, or does it already have an established user base to it that will follow it here?<br>' +
-			'3. How many new users do you honestly think it will attract to the server?<br>' +
-			'4. Are you willing to enforce the <a href="http://goldservers.info/forums/showthread.php?tid=61">servers rules</a> as well as your room\'s rules in your room?<br>' +
-			'5. Do you have a website for your room? If not, do you plan to create one?<br>' +
-			'6. What makes your room different than all the others?<br><br>' +
-			'<b>Things to Note:</b><br>' +
-			'-Even if you do get a room on Gold, if it isn\'t active or you or your members make a severe offense against our rules than we have a right to delete it.  After all, owning any room is a responsibility and a privilege, not a right.<br>' +
-			'-If your room is successful and active on the server for a months time, it will qualify for a welcome message when users join the room!<br>' +
-			'-Remember, you get global voice by contributing to the server; so if your room is successful for a while, that is contribution to the server and you *could* get global voice as a result!');
-	},
-	*/
 	newroom: 'newroomquestions',
 	newroomcommands: 'newroomquestions',
 	newroomfaq: 'newroomquestions',
 	newroomquestions: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('For our NEW room request system, fill out our application found <a href="http://goo.gl/forms/YHZVb6BvTb">here</a>.');
-	},
-	newroom2: function(target, room, user) {
-		user.popup('|html|<script>this.add("hi")')
-		function test1() {
-			console.log('functions work?');
-		}
 	},
 	punt: function(target, room, user) {
 		if (!target) return this.sendReply('/punt needs a target.');
@@ -453,38 +416,6 @@ exports.commands = {
 		this.logModCommand(user.name + ' cleared the message of the day.');
 		return this.sendReply('You cleared the message of the day.');
 	},
-	/*
-	newroom: function(target, room, user) {
-		if (!target) return this.sendReply('/newroom [answers to /newroomquestions] - Requests a new chat room to be be created.');
-		var html = ['<img ', '<a href', '<font ', '<marquee', '<blink', '<center'];
-		for (var x in html) {
-			if (target.indexOf(html[x]) > -1) return this.sendReply('HTML is not supported in this command.');
-		}
-		if (target.length > 550) return this.sendReply('This new room suggestion is too long; it cannot exceed 550 characters.');
-		if (target.length < 20) return this.sendReply('This room suggestion is rather small; are you sure that you answered all of the questions from /newroomquestions?');
-		if (!this.canTalk()) return;
-		Rooms.rooms.staff.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> ' + user.userid + '<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> ' + target + '');
-		Rooms.rooms.room.add('|html|<font size="4"><b>New Room Suggestion Submitted!</b></font><br><b>Suggested by:</b> ' + user.userid + '<br><b>Suggestion</b> <i>(see /newroomquestions)</i>:<br> ' + target + '');
-		this.sendReply('Thanks, your new room suggestion has been sent.  We\'ll review your feedback soon and get back to you. ("' + target + '")');
-		for (var u in Users.users) {
-			if (Users.users[u].isStaff) {
-				Users.users[u].send('|pm|~Staff PM|' + Users.users[u].group + Users.users[u].name + '|Attention: "' + user.userid + '" has submitted a **new room suggestion**. Please see staff room.');
-			}
-		}
-	},
-	roomreply: function(target, room, user) {
-		if (!target) return this.sendReply('/roomreply [user] - Denies a user of their recent room request.');
-		if (!this.can('pban')) return false;
-		target = this.splitTarget(target);
-		targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('The user ' + this.targetUsername + ' is not online.');
-		}
-		Rooms.rooms.staff.add('|html|<b>' + targetUser + '</b>\'s room request has been <font color="red">denied</font> by ' + user.userid + '.');
-		Rooms.rooms.room.add('|html|<b>' + targetUser + '</b>\'s room request has been <font color="red">denied</font> by ' + user.userid + '.');
-		targetUser.send('|pm|~Room Request|' + targetUser + '|Hello, "' + targetUser + '".  Sorry, your recent room request has been denied by the staff.  However, you may submit another application to request a new room at any time. The reason why your room was denied was because we didn\'t see a point for it on the server.  Best of luck.  Regards, Gold Staff.');
-	},
-	*/
 	pic: 'image',
 	image: function(target, room, user) {
 		if (!target) return this.sendReply('/image [url] - Shows an image using /a. Requires ~.');

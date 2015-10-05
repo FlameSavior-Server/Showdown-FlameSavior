@@ -15,7 +15,7 @@ var badges = fs.createWriteStream('badges.txt', {
 	'flags': 'a'
 });
 exports.commands = {
-	
+
 	restart: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
 		try {

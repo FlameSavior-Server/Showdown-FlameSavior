@@ -43,7 +43,7 @@ Gold.emoticons = {
 		});
 	},
 	checkEmoteModchat: function(user, room, connection) {
-		var rank = (user.getIdentity(room).substr(0,1) === user.group ? user.getIdentity(room).substr(0,1) : user.group);
+		var rank = (user.getIdentity(room).substr(0,1) === user.group ? user.group : user.getIdentity(room).substr(0,1));
 		switch (room.emoteModChat) {
 			case undefined:
 			case false:

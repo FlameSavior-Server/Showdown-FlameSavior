@@ -2,7 +2,9 @@
 #lobby-userlist-user-panpawn, #staff-userlist-user-panpawn, #development-userlist-user-panpawn {
     background: #FFEB99 url("http://i.imgur.com/sWEmDLc.gif") right no-repeat;
 }
-
+#lobby-userlist-user-barandis, #gamechamber-userlist-user-barandis, #smashbros-userlist-user-barandis {
+    background: #FFEB99 url("http://i.imgur.com/OKPo5f3.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

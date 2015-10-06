@@ -35,7 +35,7 @@ exports.commands = {
 				//'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
 				'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).</td><td>60</td></tr>' +
 				'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 30x30 and must be appropriate.</td><td>100</td></tr>' +
-				'<tr><td>Color</td><td>This gives your username a custom color on our <a href="http://goldservers.info">custom client</a>.</td><td>350</td></tr>' +
+				'<tr><td>Color</td><td>This gives your username a custom color on our <a href="http://goldservers.info">custom client</a>.</td><td>500</td></tr>' +
 				//'<tr><td>Custom Battle Song</td><td>This allows you to have a custom battle theme song (on the custom client) to play when you battle.</td><td>250</td></tr>' +
 				//'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
 				'</table><br />To buy an item from the shop, do /buy [item].<br>Do /getbucks to learn more about how to obtain bucks. </center>'
@@ -189,7 +189,7 @@ exports.commands = {
 
 			case 'color':
 			case 'customcolor':
-				price = 350;
+				price = 500;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy color, [hex code OR name of an alt you want the color of]");
 				processPurchase(price, parts[0], parts[1]);

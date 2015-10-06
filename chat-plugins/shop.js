@@ -21,24 +21,25 @@ exports.commands = {
     	shop: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (room.id === 'lobby' && this.broadcasting) {
-			return this.sendReplyBox('<center>Click <button name="send" value="/shop" class="blackbutton" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
+			return this.sendReplyBox('<center>Click <button name="send" value="/shop" style="background-color: black; font-color: white;" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
 		} else {
+			var top = '<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Item</th><th>Description</th><th>Cost</th></tr>';
+			var bottom = '</table><br />To buy an item from the shop, do /buy [item].<br>Do /getbucks to learn more about how to obtain bucks. </center>';
+			function table(item, desc, price) {
+				return '<tr><td>' + item + '</td><td>' + desc + '</td><td>' + price + '</tr>';
+			}
 			return this.sendReplyBox(
-				'<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Item</th><th>Description</th><th>Cost</th></tr>' +
-				'<tr><td>Symbol</td><td>Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)</td><td>5</td></tr>' +
-				'<tr><td>Custom</td><td>Buys a custom avatar to be applied to your name (you supply)</td><td>35</td></tr>' +
-				'<tr><td>Animated</td><td>Buys an animated avatar to be applied to your name (you supply)</td><td>45</td></tr>' +
-				//'<tr><td>Room</td><td>Buys a chatroom for you to own (within reason, can be refused)</td><td>100</td></tr>' +
-				'<tr><td>Trainer</td><td>Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: third image costs 10 bucks extra, ask for more details)</td><td>60</td></tr>' +
-				'<tr><td>Fix</td><td>Buys the ability to alter your trainer card, music box or custom emote (don\'t buy if you have neither)! (NOTE: No longer fixes avatars; those have to be rebought!)</td><td>15</td></tr>' +
-				'<tr><td>Declare</td><td>You get the ability to get one declare from an Admin or Leader in the lobby. This can be used for room advertisement (not server)</td><td>25</td></tr>' +
-				//'<tr><td>POTD</td><td>Buys the ability to set The Pokemon of the Day!  This Pokemon will be guaranteed to show up in random battles. </td><td>45</td></tr>' +
-				'<tr><td>Musicbox</td><td><a href="http://pastebin.com/bDG185jQ">Music Box!</a>  It\'s a command that\'s similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).</td><td>60</td></tr>' +
-				'<tr><td>Emote</td><td>This buys you a custom chat emote, such as "Kappa", for example.  The size of this must be 30x30 and must be appropriate.</td><td>100</td></tr>' +
-				'<tr><td>Color</td><td>This gives your username a custom color on our <a href="http://goldservers.info">custom client</a>.</td><td>500</td></tr>' +
-				//'<tr><td>Custom Battle Song</td><td>This allows you to have a custom battle theme song (on the custom client) to play when you battle.</td><td>250</td></tr>' +
-				//'<tr><td>Badge</td><td>You get a VIP badge and VIP status AND strongly recommended for global voice!  A VIP can change their avatar by PM\'ing a leader at any time (they get one for FREE as well) in addition to a FREE trainer card.</td><td>1,500</td></tr>' +
-				'</table><br />To buy an item from the shop, do /buy [item].<br>Do /getbucks to learn more about how to obtain bucks. </center>'
+				top +
+				table("Symbol", "Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)", 5) +
+				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
+				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
+				table("Trainer", "Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: fourth image costs 10 bucks extra, ask for more details)", 60) +
+				table("Fix", "Buys the ability to alter your trainer card, music box or custom emote (don't buy if you have neither)! (NOTE: No longer fixes avatars; those have to be rebought!)", 15) +
+				table("Declare", "You get the ability to get one declare from an Admin or Leader in the lobby. This can be used for room advertisement (not server)", 25) +
+				table("Musicbox", "It's a command that's similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).", 60) +
+				table("Emote", "This buys you a custom chat emote, such as \"Kappa\", for example. The size of this must be 30x30 and must be appropriate.", 100) +
+				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 500) +
+				bottom
 			);
 		}
 		if (closeShop) return this.sendReply('|raw|<center><h3><b>The shop is currently closed and will open shortly.</b></h3></center>');

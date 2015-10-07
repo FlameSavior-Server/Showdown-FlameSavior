@@ -21,6 +21,9 @@
 #gamechamber-userlist-user-jd, #roleplaying-userlist-user-jd, #parukia-userlist-user-jd {
 	background: #FFEB99 url("http://i.imgur.com/LRGPIWx.png") right no-repeat;
 }
+#lobby-userlist-user-paralyzation, #goldenrodradiotower-userlist-user-paralyzation, #gamechamber-userlist-user-paralyzation {
+    background: #FFEB99 url("http://i.imgur.com/jiyeIgF.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

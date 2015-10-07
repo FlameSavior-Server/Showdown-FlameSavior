@@ -377,6 +377,17 @@ exports.commands = {
 		if (!target) return this.sendReply('/pet needs a target.');
 		return this.parse('/me pets ' + target + ' lavishly.');
 	},
+	mt: 'mktour',
+	mktour: function(target, room, user) {
+		if (!target) return this.errorReply("Usage: /mktour [tier] - creates a tournament in single elimination.");
+		target = toId(target);
+		var t = target;
+		if (t === 'rb') t = 'randombattle';
+		if (t === 'cc1v1' || t === 'cc1vs1') t = 'challengecup1v1';
+		if (t === 'randmono' || t === 'randommonotype') t = 'monotyperandombattle';
+		if (t === 'mono') t === 'monotype';
+		this.parse('/tour create ' + t + ', elimination');
+	},
 	pic: 'image',
 	image: function(target, room, user) {
 		if (!target) return this.sendReply('/image [url] - Shows an image using /a. Requires ~.');
@@ -484,6 +495,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("<img src=" + parts[0] + " width=" + parts[1] + " height=" + parts[1]);
 	},
+	/*
 	pr: 'pollremind',
 	pollremind: function(target, room, user) {
 		var separacion = "&nbsp;&nbsp;";
@@ -502,12 +514,13 @@ exports.commands = {
 		if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
 		if (!this.canBroadcast()) return;
 		this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
-	},
+	},*/
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd) {
-		return this.parse('/poll Next Tournament Tier:, other, ru, tier shift, random doubles, random triples, random monotype, 1v1, lc, nu, cap, bc, monotype, doubles, balanced hackmons, hackmons, ubers, random battle, ou, cc1v1, uu, anything goes, gold battle');
+		return this.parse('/poll new Next tournament tier?, OU, UU, Challenge Cup 1vs1, Random Battle, Ubers, Monotype, Random Doubles, Random Triples');
 	},
+	/*
 	survey: 'poll',
 	poll: function(target, room, user) {
 		if (!user.can('broadcast', null, room)) return this.sendReply('You do not have enough authority to use this command.');
@@ -580,6 +593,7 @@ exports.commands = {
 		room.answerList = new Array();
 		room.answers = new Object();
 	},
+	*/
 	uor: 'usersofrank',
 	usersofrank: function(target, room, user) {
 		if (!target || !Config.groups[target]) return false;

@@ -6,7 +6,7 @@
 * By bumbadadabum with (a lot of) help from Zarel.
 */
 
-var permission = 'announce';
+var permission = 'broadcast';
 
 var Poll = (function () {
 	function Poll(room, question, options) {
@@ -42,7 +42,7 @@ var Poll = (function () {
 	Poll.prototype.generateVotes = function () {
 		var output = '<div class="infobox" style="text-align:center"><p style="font-weight:bold;font-size:14pt">' + Tools.escapeHTML(this.question) + '</p>';
 		this.options.forEach(function (option, number) {
-			output += '<button value="/poll vote ' + number + '" name="send">' + number + '. ' + Tools.escapeHTML(option.name) + '</button><br/>';
+			output += '<button value="/poll vote ' + number + '" name="send">' + number + '. ' + Tools.escapeHTML(option.name) + '</button>' + ((Number(number) % 5) === 0 ? '<br />' : '');
 		});
 		output += '</div>';
 
@@ -125,12 +125,13 @@ exports.commands = {
 				options.push(params[i]);
 			}
 
-			if (options.length > 8) {
-				return this.errorReply("Too many options for poll (maximum is 8).");
+			if (options.length > 10) {
+				return this.errorReply("Too many options for poll (maximum is 10).");
 			}
 
 			room.poll = new Poll(room, params[0], options);
 			room.poll.display(user, true);
+			this.privateModCommand("(" + user.name + " has created a poll.)");
 		},
 
 		vote: function (target, room, user) {
@@ -151,6 +152,7 @@ exports.commands = {
 
 			room.poll.end();
 			delete room.poll;
+			this.privateModCommand("(" + user.name + " has ended a poll.)");
 		},
 
 		'': function (target, room, user) {

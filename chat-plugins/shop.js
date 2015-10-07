@@ -16,6 +16,19 @@ function logTransaction (message) {
 	if (!message) return false;
 	fs.appendFile('logs/transactions.log','['+new Date().toUTCString()+'] '+message+'\n');
 }
+/*
+Gold.shop = [
+	["Sybmol", "Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)", 5],
+	["Custom", "Buys a custom avatar to be applied to your name (you supply)", 35],
+	["Animated", "Buys an animated avatar to be applied to your name (you supply)", 45],
+	["Trainer", "Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: fourth image costs 10 bucks extra, ask for more details)", 60],
+	["Fix", "Buys the ability to alter your trainer card, music box or custom emote (don't buy if you have neither)! (NOTE: No longer fixes avatars; those have to be rebought!)", 15],
+	["Declare", "You get the ability to get one declare from an Admin or Leader in the lobby. This can be used for room advertisement (not server)", 25],
+	["Musicbox", "It's a command that's similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).", 70]
+	["Emote", "This buys you a custom chat emote, such as \"Kappa\", for example. The size of this must be 30x30 and must be appropriate.", 200],
+	["Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 500]
+];
+*/
 
 exports.commands = {
     	shop: function(target, room, user) {

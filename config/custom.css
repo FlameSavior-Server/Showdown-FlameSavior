@@ -17,6 +17,10 @@
 #lobby-userlist-user-wyzz, #staff-userlist-user-wyzz, #french-userlist-user-wyzz {
     background: #FFEB99 url("http://i.imgur.com/TCH5YgB.png") right no-repeat;
 }
+#lobby-userlist-user-jd, #goldenrodradiotower-userlist-user-jd, #development-userlist-user-jd,
+#gamechamber-userlist-user-jd, #roleplaying-userlist-user-jd, #parukia-userlist-user-jd {
+	background: #FFEB99 url("http://i.imgur.com/LRGPIWx.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

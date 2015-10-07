@@ -8,6 +8,9 @@
 #lobby-userlist-user-cyllage, #gamechamber-userlist-user-cyllage, #staff-userlist-user-cyllage {
     background: #FFEB99 url("http://i.imgur.com/OAQaQfY.png") right no-repeat;
 }
+#lobby-userlist-user-jayswift, #gamechamber-userlist-user-jayswift, #goldenrodradiotower-userlist-user-jayswift {
+    background: #FFEB99 url("http://i.imgur.com/1PABv5e.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

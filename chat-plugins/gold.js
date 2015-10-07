@@ -518,7 +518,7 @@ exports.commands = {
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd) {
-		return this.parse('/poll new Next tournament tier?, OU, UU, Challenge Cup 1vs1, Random Battle, Ubers, Monotype, Random Doubles, Random Triples');
+		return this.parse('/poll new Next tournament tier?, OU, UU, Challenge Cup 1vs1, Random Battle, Ubers, Monotype');
 	},
 	/*
 	survey: 'poll',

@@ -24,6 +24,10 @@
 #lobby-userlist-user-paralyzation, #goldenrodradiotower-userlist-user-paralyzation, #gamechamber-userlist-user-paralyzation {
     background: #FFEB99 url("http://i.imgur.com/jiyeIgF.png") right no-repeat;
 }
+#lobby-userlist-user-kittyjlp, #goldenrodradiotower-userlist-user-kittyjlp, #gamechamber-userlist-user-kittyjlp,
+#hogwarts-userlist-user-kittyjlp {
+    background: #FFEB99 url("http://i.imgur.com/WteLkRz.gif") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

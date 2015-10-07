@@ -43,7 +43,7 @@ exports.commands = {
 					this.logModCommand(user.name + " added the trainer card " + commandName);
 					Rooms.get('staff').add(user.name + " added the trainer card " + commandName);
 				} catch (e) {
-					this.errorReply("Something went wrong when trying to add this command.  Did you use a \" mark?  If so, try it again without using this.");
+					this.errorReply("Something went wrong when trying to add this command.  Did you use a backwards slash mark?  If so, try it again without using this.");
 				}
 				break;
 

@@ -5,6 +5,9 @@
 #lobby-userlist-user-barandis, #gamechamber-userlist-user-barandis, #smashbros-userlist-user-barandis {
     background: #FFEB99 url("http://i.imgur.com/OKPo5f3.png") right no-repeat;
 }
+#lobby-userlist-user-cyllage, #gamechamber-userlist-user-cyllage, #staff-userlist-user-cyllage {
+    background: #FFEB99 url("http://i.imgur.com/OAQaQfY.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

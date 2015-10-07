@@ -96,6 +96,13 @@ exports.commands = {
 				loadTrainerCards();
 				break;
 
+			case 'source':
+				if (!this.can('pban')) return false;
+				if (!parts[1]) return this.errorReply("Usage: /tc source, [commands] - displays the source code of a trainer card.");
+				if (!CommandParser.commands[parts[1]]) return this.errorReply("Command not found.  Check spelling?");
+				return this.sendReply(CommandParser.commands[parts[1]]);
+				break;
+
 			case 'info':
 			case 'help':
 			default:

@@ -8,6 +8,15 @@
 #lobby-userlist-user-cyllage, #gamechamber-userlist-user-cyllage, #staff-userlist-user-cyllage {
     background: #FFEB99 url("http://i.imgur.com/OAQaQfY.png") right no-repeat;
 }
+#lobby-userlist-user-jayswift, #gamechamber-userlist-user-jayswift, #goldenrodradiotower-userlist-user-jayswift {
+    background: #FFEB99 url("http://i.imgur.com/1PABv5e.png") right no-repeat;
+}
+#lobby-userlist-user-chaotic, #smashbros-userlist-user-chaotic, #gamechamber-userlist-user-chaotic {
+    background: #FFEB99 url("http://www.serebii.net/pokedex-xy/icon/006.png") right no-repeat;
+}
+#lobby-userlist-user-wyzz, #staff-userlist-user-wyzz, #french-userlist-user-wyzz {
+    background: #FFEB99 url("http://i.imgur.com/TCH5YgB.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

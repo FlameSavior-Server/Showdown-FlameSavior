@@ -34,6 +34,9 @@
 #lobby-userlist-user-frage, #parukia-userlist-user-frage, #gamechamber-userlist-user-frage {
     background: #FFEB99 url("http://i.imgur.com/LCzgJiH.png") right no-repeat;
 }
+#lobby-userlist-user-starrywindy, #gamechamber-userlist-user-starrywindy, #silvshangout-userlist-user-starrywindy {
+    background: #FFEB99 url("http://sprites.pokecheck.org/icon/494.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

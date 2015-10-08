@@ -55,7 +55,7 @@ var Poll = (function () {
 
 		var i = iter.next();
 		while (!i.done) {
-			output += '<span style="font-weight:bold;padding:2px">' + i.value[0] + '. ' + Tools.escapeHTML(i.value[1].name) + '</span><br/><span style="font-size:8pt;padding:0px">' + i.value[1].votes + ' votes (' + Math.round((i.value[1].votes * 100) / this.totalVotes) + '% of total).</span><br/>';
+			output += '<span style="font-weight:bold;padding:2px">' + i.value[0] + '. ' + Tools.escapeHTML(i.value[1].name) + '</span><br/><span style="font-size:8pt;padding:0px">' + i.value[1].votes + ' votes' + (this.totalVotes ? '(' + Math.round((i.value[1].votes * 100) / this.totalVotes) + '% of total)' : '') + '.</span><br/>';
 			i = iter.next();
 		}
 		output += '</div>';
@@ -131,8 +131,10 @@ exports.commands = {
 
 			room.poll = new Poll(room, params[0], options);
 			room.poll.display(user, true);
-			this.privateModCommand("(" + user.name + " has created a poll.)");
+
+			return this.privateModCommand("(A poll was started by " + user.name + ".)");
 		},
+		newhelp: ["/poll new [name] | [options] - Starts a new poll. Requires: % @ # & ~"],
 
 		vote: function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
@@ -145,6 +147,7 @@ exports.commands = {
 
 			room.poll.vote(user, parsed);
 		},
+		votehelp: ["/poll vote [number] - Votes for option [number] in the poll. This can also be done by clicking the option in the poll itself."],
 
 		end: function (target, room, user) {
 			if (!this.can(permission, null, room)) return false;
@@ -152,8 +155,10 @@ exports.commands = {
 
 			room.poll.end();
 			delete room.poll;
-			this.privateModCommand("(" + user.name + " has ended a poll.)");
+
+			return this.privateModCommand("(The poll was ended by " + user.name + ".)");
 		},
+		endhelp: ["/poll end - Ends the poll and displays the results in chat. Requires: % @ # & ~"],
 
 		'': function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");

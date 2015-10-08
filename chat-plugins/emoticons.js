@@ -220,8 +220,8 @@ exports.commands = {
 					saveEmotes();
 					this.sendReply("The emoticon " + emoteName + " has been added.");
 					this.logModCommand(user.name + " added the emoticon: " + emoteName);
-					Rooms.rooms.staff.add("The emoticon " + emoteName + " was added by " + Tools.escapeHTML(user.name) + ".");
-					room.update();
+					Rooms.get('staff').add("The emoticon " + emoteName + " was added by " + Tools.escapeHTML(user.name) + ".");
+					Rooms.get('staff').update();
 					break;
 
 				case 'rem':
@@ -237,8 +237,8 @@ exports.commands = {
 					saveEmotes();
 					this.sendReply("The emoticon " + emoteName + " has been removed.");
 					this.logModCommand(user.name + " removed the emoticon: " + emoteName);
-					Rooms.rooms.staff.add("The emoticon " + emoteName + " was removed by " + Tools.escapeHTML(user.name) + ".");
-					room.update();
+					Rooms.get('staff').add("The emoticon " + emoteName + " was removed by " + Tools.escapeHTML(user.name) + ".");
+					Rooms.get('staff').update();
 					break;
 
 				case 'list':

@@ -6,7 +6,7 @@
  * COMMANDS: /shop, /buy, /transferbucks, /givebucks, 
  * /takebucks, /atm, /richestuser, /moneylog, /givesymbol, 
  * /customsymbol, /resetsymbol
- * Credits: panpawn, chalenged
+ * Credits: panpawn, chalenged, jd
  */
 
 var fs = require('fs');
@@ -48,10 +48,11 @@ exports.commands = {
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
 				table("Trainer", "Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: fourth image costs 10 bucks extra, ask for more details)", 60) +
 				table("Fix", "Buys the ability to alter your trainer card, music box or custom emote (don't buy if you have neither)! (NOTE: No longer fixes avatars; those have to be rebought!)", 15) +
-				table("Declare", "You get the ability to get one declare from an Admin or Leader in the lobby. This can be used for room advertisement (not server)", 25) +
+				table("Declare", "You get the ability to get one declare from an Admin or Leader in the lobby. This can only be used for room advertisement for a room on Gold.", 25) +
 				table("Musicbox", "It's a command that's similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).", 60) +
 				table("Emote", "This buys you a custom chat emote, such as \"Kappa\", for example. The size of this must be 30x30 and must be appropriate.", 100) +
-				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 500) +
+				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 800) +
+				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1500) +
 				bottom
 			);
 		}
@@ -271,6 +272,31 @@ exports.commands = {
 				processPurchase(price, parts[0], '');
 				alertStaff(nameColor(user.name) + ' has purchased the ability to declare from the shop.', true);
 				this.sendReply("You have purchased a declare from the shop.  PM a leader or administrator to proceed.");
+				break;
+
+			case 'userlisticon':
+			case 'icon':
+				price = 1500;
+				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
+				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
+				if (!parts[4]) return this.errorReply("Usage: /buy icon, [32x32 icon image], [room1], [room2], [room3]");
+				var filepaths = ['.png', '.jpg', '.gif'];
+				if (!~filepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a custom userlist icon must be a PNG, JPG, or GIF.");
+				var room1 = (Rooms(toId(parts[2])) ? toId(parts[2]) : false);
+				var room2 = (Rooms(toId(parts[3])) ? toId(parts[3]) : false);
+				var room3 = (Rooms(toId(parts[4])) ? toId(parts[4]) : false);
+				if (!room1 || !room2 || !room3) return this.errorReply("Sorry, at least one of the rooms you requested to have the icon in does not exist.  Please check spelling and try again.");
+				processPurchase(price, parts[0], 'Image: ' + parts[1] + ' Rooms: ' + room1 + ', ' + room2 + ', ' + room3);
+				alertStaff(nameColor(user.name) + ' has purched a custom userlist icon. (See staff room for CSS)', true);
+				Rooms.get('staff').add('|raw|' +
+					nameColor(user.name) + ' has purchaed a custom userlist icon.  CSS: <br />' +
+					'<div style="border-style: solid; border-width: 3px; background-color: white;">' +
+					'#' + room1 + '-userlist-user-' + user.userid + ', #' + room2 + '-userlist-user-' + user.userid + ', #' + room3 + '-userlist-user-' + user.userid + ' {<br />' +
+					'background: #FFEB99 url("' + parts[1].replace(' ', '') + '") right no-repeat;<br />' +
+					'}</div'
+				);
+				Rooms.get('staff').update();
+				this.sendReply("You have purchased a custom userlist icon.  The staff have been notified and this will be added ASAP.");
 				break;
 
 			default:

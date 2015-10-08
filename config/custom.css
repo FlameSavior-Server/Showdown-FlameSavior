@@ -40,6 +40,9 @@
 #lobby-userlist-user-noibatofnight, #gamechamber-userlist-user-noibatofnight, #thehappyplace-userlist-user-noibatofnight {
     background: #FFEB99 url("http://pokedream.com/pokedex/images/mini/701.png") right no-repeat;
 }
+#lobby-userlist-user-e4mudkips, #gamechamber-userlist-user-e4mudkips, #goldenrodradiotower-userlist-user-e4mudkips {
+    background: #FFEB99 url("http://i.imgur.com/4GZA5Bh.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

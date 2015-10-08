@@ -495,7 +495,6 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("<img src=" + parts[0] + " width=" + parts[1] + " height=" + parts[1]);
 	},
-	/*
 	pr: 'pollremind',
 	pollremind: function(target, room, user) {
 		var separacion = "&nbsp;&nbsp;";
@@ -514,13 +513,12 @@ exports.commands = {
 		if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
 		if (!this.canBroadcast()) return;
 		this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
-	},*/
+	},
 	tpolltest: 'tierpoll',
 	tpoll: 'tierpoll',
 	tierpoll: function(room, user, cmd) {
 		return this.parse('/poll new Next tournament tier?, OU, UU, Challenge Cup 1vs1, Random Battle, Ubers, Monotype');
 	},
-	/*
 	survey: 'poll',
 	poll: function(target, room, user) {
 		if (!user.can('broadcast', null, room)) return this.sendReply('You do not have enough authority to use this command.');
@@ -593,7 +591,6 @@ exports.commands = {
 		room.answerList = new Array();
 		room.answers = new Object();
 	},
-	*/
 	uor: 'usersofrank',
 	usersofrank: function(target, room, user) {
 		if (!target || !Config.groups[target]) return false;

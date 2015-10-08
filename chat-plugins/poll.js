@@ -6,6 +6,7 @@
 * By bumbadadabum with (a lot of) help from Zarel.
 */
 
+/*
 var permission = 'broadcast';
 
 var Poll = (function () {
@@ -168,3 +169,4 @@ exports.commands = {
 		}
 	}
 };
+*/

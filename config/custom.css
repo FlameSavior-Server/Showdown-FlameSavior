@@ -37,6 +37,9 @@
 #lobby-userlist-user-starrywindy, #gamechamber-userlist-user-starrywindy, #silvshangout-userlist-user-starrywindy {
     background: #FFEB99 url("http://sprites.pokecheck.org/icon/494.png") right no-repeat;
 }
+#lobby-userlist-user-noibatofnight, #gamechamber-userlist-user-noibatofnight, #thehappyplace-userlist-user-noibatofnight {
+    background: #FFEB99 url("http://pokedream.com/pokedex/images/mini/701.png") right no-repeat;
+}
 .nightclub {
     background: #000;
     margin: -3px;

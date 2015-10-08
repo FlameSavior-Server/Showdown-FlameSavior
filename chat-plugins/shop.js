@@ -311,7 +311,7 @@ exports.commands = {
 		if (Number(parts[1]) < 1) return this.errorReply("Cannot be less than 1.");
 		if (isNaN(Number(parts[1]))) return this.errorReply("The amount you transfer must be a number.");
         if (~String(parts[1]).indexOf('.')) return this.errorReply("Cannot contain a decimal.");
-        if (toId(parts[0]) == user.userid) return this.errorReply("You cannot transfer bucks to yourself.");
+        //if (toId(parts[0]) == user.userid) return this.errorReply("You cannot transfer bucks to yourself.");
         var bucks = toId(parts[1]);
 		if (economy.readMoney(user.userid) < bucks) return this.errorReply("You cannot transfer more than you have.");
 
@@ -327,7 +327,10 @@ exports.commands = {
 
 		//send return messages
 		this.sendReply("You have transfered " + bucks + lbl + " to " + parts[0] + ".");
-		if (Users(toId(parts[0]))) Users(toId(parts[0])).popup("|modal|" + user.name + " has transfered " + bucks + lbl + " to you.");
+		if (Users(toId(parts[0]))) {
+			Users(toId(parts[0])).popup("|modal|" + user.name + " has transfered " + bucks + lbl + " to you.");
+			Users(toId(parts[0])).sendTo(room, "|raw|<b>" + Tools.escapeHTML(user.name) + " has transfered " + bucks + lbl + " to you.</b>");
+		}
 	},
 	wallet: 'atm',
 	satchel: 'atm',

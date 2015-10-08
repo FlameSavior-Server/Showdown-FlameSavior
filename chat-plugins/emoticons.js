@@ -209,7 +209,7 @@ exports.commands = {
 			switch (toId(parts[0])) {
 
 				case 'add':
-					if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+					if (!this.can('pban')) return this.errorReply("Access denied.");
 					if (!(parts[2] || parts[3])) return this.errorReply("Usage: /emote add, [emoticon], [link]");
 					var emoteName = parts[1];
 					if (Gold.emoticons.chatEmotes[emoteName]) return this.errorReply("ERROR - the emoticon: " + emoteName + " already exists.");
@@ -228,7 +228,7 @@ exports.commands = {
 				case 'remove':
 				case 'del':
 				case 'delete':
-					if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+					if (!this.can('pban')) return this.errorReply("Access denied.");
 					if (!parts[1]) return this.errorReply("/emote remove, [emoticon]");
 					emoteName = parts[1];
 					if (!Gold.emoticons.chatEmotes[emoteName]) return this.errorReply("ERROR - the emoticon: " + emoteName + " does not exist.");

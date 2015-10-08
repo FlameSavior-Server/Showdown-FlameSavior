@@ -289,10 +289,9 @@ exports.commands = {
 				processPurchase(price, parts[0], 'Image: ' + parts[1] + ' Rooms: ' + room1 + ', ' + room2 + ', ' + room3);
 				alertStaff(nameColor(user.name) + ' has purched a custom userlist icon. (See staff room for CSS)', true);
 				Rooms.get('staff').add('|raw|' +
-					nameColor(user.name) + ' has purchaed a custom userlist icon.  CSS: <br />' +
 					'<div style="border-style: solid; border-width: 3px; background-color: white;">' +
 					'#' + room1 + '-userlist-user-' + user.userid + ', #' + room2 + '-userlist-user-' + user.userid + ', #' + room3 + '-userlist-user-' + user.userid + ' {<br />' +
-					'background: #FFEB99 url("' + parts[1].replace(' ', '') + '") right no-repeat;<br />' +
+					'&nbsp;&nbsp;&nbsp;&nbsp;background: #FFEB99 url("' + parts[1].replace(' ', '') + '") right no-repeat;<br />' +
 					'}</div'
 				);
 				Rooms.get('staff').update();

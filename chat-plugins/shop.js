@@ -49,7 +49,7 @@ exports.commands = {
 				table("Trainer", "Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: fourth image costs 10 bucks extra, ask for more details)", 60) +
 				table("Fix", "Buys the ability to alter your trainer card, music box or custom emote (don't buy if you have neither)! (NOTE: No longer fixes avatars; those have to be rebought!)", 15) +
 				table("Declare", "You get the ability to get one declare from an Admin or Leader in the lobby. This can only be used for room advertisement for a room on Gold.", 25) +
-				table("Musicbox", "It's a command that's similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).", 60) +
+				table("Musicbox", "It's a command that's similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).", 70) +
 				table("Emote", "This buys you a custom chat emote, such as \"Kappa\", for example. The size of this must be 30x30 and must be appropriate.", 100) +
 				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 800) +
 				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1500) +
@@ -249,7 +249,7 @@ exports.commands = {
 
 			case 'mb':
 			case 'musicbox':
-				price = 60;
+				price = 70;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0], '');
 				alertStaff(nameColor(user.name) + ' has purchased a music box.', true);

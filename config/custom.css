@@ -40,6 +40,9 @@
 #lobby-userlist-user-noibatofnight, #gamechamber-userlist-user-noibatofnight, #thehappyplace-userlist-user-noibatofnight {
     background: #FFEB99 url("http://pokedream.com/pokedex/images/mini/701.png") right no-repeat;
 }
+.backdrop {
+    background-image: url("http://goldservers.info/about/backdrop.png");
+}
 .nightclub {
     background: #000;
     margin: -3px;
@@ -113,10 +116,6 @@
     background: #FFCC00;
     color: black;
     padding: 1px 4px 2px;
-}
-.backdrop {
-    background-image: url("http://goldservers.info/about/backdrop.png";
-    ) !important;
 }
 .broadcast-purple {
     background-color: #8904B1;

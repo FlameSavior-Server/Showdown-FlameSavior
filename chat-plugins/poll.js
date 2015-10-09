@@ -212,6 +212,13 @@ exports.commands = {
 			"/poll end - Ends a poll and displays the results. Requires: + % @ # & ~"
 		)
 	},
+	votes: function(target, room, user) {
+		if (!room.poll) return this.errorReply("There is no poll running in this room.");
+		if (!this.canBroadcast()) return;
+		var votes = room.poll.totalVotes;
+		var lbl = (votes > 1 ? ' VOTES' : ' VOTE');
+		return this.sendReplyBox("TOTAL VOTES: " + votes + lbl);
+	},
 	ep: 'endpoll',
 	endpoll: function(target, room, user) {
 		this.parse('/poll end');

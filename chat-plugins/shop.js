@@ -199,7 +199,7 @@ exports.commands = {
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
 				alertStaff(nameColor(user.name) + ' has purchased a custom avatar. Image: ' + link(parts[1].replace(' ', ''), 'desired avatar'), true);
 				alertStaff('<center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
-				this.sendReply("You have bought a custom avatar from the shop.  The staff have been notified to set it ASAP.");
+				this.sendReply("You have bought a custom avatar from the shop.  The staff have been notified and will set it ASAP.");
 				break;
 
 			case 'color':

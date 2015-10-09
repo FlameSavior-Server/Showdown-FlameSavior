@@ -197,7 +197,7 @@ exports.commands = {
 				if (!~filepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a regular custom avatar must be either a PNG or JPG. (If it is a valid file type, it will end in one of these)");
 				processPurchase(price, parts[0],'Image: ' + parts[1]);
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
-				alertStaff(nameColor(user.name) + ' has purchased a custom avatar. Image: ' + link(parts[1], 'desired avatar'), true);
+				alertStaff(nameColor(user.name) + ' has purchased a custom avatar. Image: ' + link(parts[1].replace(' ', ''), 'desired avatar'), true);
 				alertStaff('<center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
 				this.sendReply("You have bought a custom avatar from the shop.  The staff have been notified to set it ASAP.");
 				break;
@@ -233,7 +233,7 @@ exports.commands = {
 				if (parts[1].split('.').pop() !== 'gif') return this.errorReply("Your animated avatar must be a GIF. (If it's a GIF, the link will end in .gif)");
 				processPurchase(price, parts[0],'Image: ' + parts[1]);
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
-				alertStaff(nameColor(user.name) + ' has purchased a custom animated avatar. Image: ' + link(parts[1], 'desired avatar'), true);
+				alertStaff(nameColor(user.name) + ' has purchased a custom animated avatar. Image: ' + link(parts[1].replace(' ', ''), 'desired avatar'), true);
 				alertStaff('<center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
 				this.sendReply("You have purchased a custom animated avatar.  The staff have been notified and will add it ASAP.");
 				break;

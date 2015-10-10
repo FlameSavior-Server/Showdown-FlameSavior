@@ -323,7 +323,7 @@ exports.commands = {
 
 		//log the transaction
 		var lbl = (bucks == 1 ? ' Gold buck' : ' Gold bucks');
-		logTransaction(user.name + " has transfered " + bucks + lbl + " to " + parts[1]);
+		logTransaction(user.name + " has transfered " + bucks + lbl + " to " + parts[0]);
 
 		//send return messages
 		this.sendReply("You have transfered " + bucks + lbl + " to " + parts[0] + ".");

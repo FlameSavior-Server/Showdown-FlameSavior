@@ -225,6 +225,6 @@ exports.commands = {
 	},
 	tpoll: function(target, room, user) {
 		var tiers = ['Anything Goes', 'Challenge Cup 1v1', 'Gold Battle', 'Monotype', 'OU', 'Random Battle', 'Random Monotype Battle', 'Tier Shift', 'UU'];
-		this.parse('/poll new Next tournament tier?, ' + tiers);
+		this.parse('/poll new Next tournament tier?, ' + tiers.sort());
 	}
 };

@@ -42,7 +42,7 @@ var Poll = (function () {
 	Poll.prototype.generateVotes = function () {
 		var output = '<div class="infobox"><p style="margin: 2px 0 5px 0"><span style="border:1px solid #6A6;color:#484;border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> Poll</span> <strong style="font-size:11pt">' + Tools.escapeHTML(this.question) + '</strong></p>';
 		this.options.forEach(function (option, number) {
-			output += '<div style="margin-top: 3px"><button value="/poll vote ' + number + '" name="send">' + number + '. <strong>' + Tools.escapeHTML(option.name) + '</strong></button></div>';
+			output += '<div style="margin-top: 3px"><button value="/poll vote ' + number + '" name="send" title="Vote for: ' + Tools.escapeHTML(option.name) + '">' + number + '. <strong>' + Tools.escapeHTML(option.name) + '</strong></button></div>';
 		});
 		output += '</div>';
 
@@ -51,7 +51,7 @@ var Poll = (function () {
 
 	Poll.prototype.generateResults = function (ended) {
 		var icon = '<span style="border:1px solid #' + (ended ? '777;color:#555' : '6A6;color:#484') + ';border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> ' + (ended ? "Poll ended" : "Poll") + '</span>';
-		var output = '<div class="infobox"><p style="margin: 2px 0 5px 0">' + icon + ' <strong style="font-size:11pt">' + Tools.escapeHTML(this.question) + '</strong></p>';
+		output += '<div style="margin-top: 3px"><span>' + i.value[0] + '. <strong>' + Tools.escapeHTML(i.value[1].name) + '</strong></span> <small style="font-size:8pt;padding-left:6px"> | ' + percentage + '% (' + i.value[1].votes + ' votes)</small><br /><span style="background:' + colors[c % 3] + ';padding-right:' + (percentage * 3) + 'px"></span></div>';
 		var iter = this.options.entries();
 
 		var i = iter.next();

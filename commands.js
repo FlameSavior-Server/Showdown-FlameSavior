@@ -838,8 +838,8 @@ var commands = exports.commands = {
 			connection.popup("The room '" + targetRoom.title + "' has no auth.");
 			return;
 		}
-		var roomfounder = (targetRoom.founder ? "Room Founder:\n" + targetRoom.founder : '');
-		if (roomfounder.length >= 1) buffer.unshift(roomfounder);
+		var roomfounder = (targetRoom.founder ? "Room Founder:\n" + targetRoom.founder : false);
+		if (roomfounder) buffer.unshift(roomfounder);
 		if (targetRoom !== room) buffer.unshift("" + targetRoom.title + " room auth:");
 		connection.popup(buffer.join("\n\n"));
 	},

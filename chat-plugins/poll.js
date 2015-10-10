@@ -210,7 +210,7 @@ exports.commands = {
 			"/poll timer [minutes] - Sets the poll to automatically end after [minutes]. Requires: + % @ # & ~<br />" +
 			"/poll display - Displays the poll<br />" +
 			"/poll end - Ends a poll and displays the results. Requires: + % @ # & ~"
-		)
+		);
 	},
 	votes: function(target, room, user) {
 		if (!room.poll) return this.errorReply("There is no poll running in this room.");
@@ -224,7 +224,7 @@ exports.commands = {
 		this.parse('/poll end');
 	},
 	tpoll: function(target, room, user) {
-		var tiers = ['Random Battle', 'OU', 'UU', 'Monotype', 'Challenge Cup 1v1', 'Random Monotype Battle', 'Anything Goes', 'Gold Battle'];
+		var tiers = ['Anything Goes', 'Challenge Cup 1v1', 'Gold Battle', 'Monotype', 'OU', 'Random Battle', 'Random Monotype Battle', 'Tier Shift', 'UU'];
 		this.parse('/poll new Next tournament tier?, ' + tiers);
 	}
 };

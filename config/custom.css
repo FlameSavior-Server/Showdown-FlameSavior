@@ -47,7 +47,7 @@
     background: #FFEB99 url("http://i.imgur.com/HV1oDbP.gif") right no-repeat;
 }
 .backdrop {
-    background-image: url("http://goldservers.info/about/backdrop.png");
+    background-image: url("http://goldservers.info/about/backdrop.png") !important;
 }
 .nightclub {
     background: #000;

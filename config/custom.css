@@ -178,9 +178,6 @@
     font: 10pt Verdana, sans-serif;
     text-align: left
 }
-.userlist li button:hover {
-    background: #cce5e5
-}
 .userlist li button:active {
     background: #62A9FA
 }

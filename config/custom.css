@@ -121,9 +121,6 @@
     padding: 0;
     text-align: left
 }
-.userlist li button:hover {
-	background: rgba(255, 235, 153, 0.4);
-}
 .message-announce {
     background: #FFCC00;
     color: black;
@@ -200,4 +197,7 @@
 }
 .menugroup .button:hover {
     background: #cccc00
+}
+.userlist li button:hover {
+	background: rgba(255, 235, 153, 0.4);
 }

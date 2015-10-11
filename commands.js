@@ -329,7 +329,7 @@ var commands = exports.commands = {
 		if (!user.autoconfirmed) {
 			return this.errorReply("You must be autoconfirmed to make a groupchat.");
 		}
-		if (!this.can('makegroupchat')) return false;
+		//if (!this.can('makegroupchat')) return false;
 		if (target.length > 64) return this.errorReply("Title must be under 32 characters long.");
 		var targets = target.split(',', 2);
 

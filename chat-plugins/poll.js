@@ -1,9 +1,6 @@
 /*
 * Poll chat plugin
-* This plugin allows roomauth (default: driver and above) to run a poll in a room.
-* Every room can have one poll, and every user can vote. The results are displayed for
-* users that have voted, and are updated in real time. The poll can be closed with /endpoll.
-* By bumbadadabum with (a lot of) help from Zarel.
+* By bumbadadabum and Zarel.
 */
 
 var permission = 'broadcast';
@@ -123,10 +120,7 @@ exports.commands = {
 			if (!this.can(permission, null, room)) return false;
 			if (room.poll) return this.errorReply("There is already a poll in progress in this room.");
 
-			if (params.length < 3) {
-				return this.errorReply("Not enough arguments for /poll new.");
-			}
-
+			if (params.length < 3) return this.errorReply("Not enough arguments for /poll new.");
 			var options = [];
 
 			for (var i = 1; i < params.length; i++) {
@@ -154,13 +148,29 @@ exports.commands = {
 
 			room.poll.vote(user, parsed);
 		},
-		votehelp: ["/poll vote [number] - Votes for option [number] in the poll. This can also be done by clicking the option in the poll itself."],
+		votehelp: ["/poll vote [number] - Votes for option [number]."],
+
+		timer: function (target, room, user) {
+			if (!this.can(permission, null, room)) return false;
+			if (!room.poll) return this.errorReply("There is no poll running in this room.");
+
+			var timeout = parseFloat(target);
+			if (isNaN(timeout)) return this.errorReply("No time given.");
+			if (room.poll.timeout) clearTimeout(room.poll.timeout);
+			room.poll.timeout = setTimeout((function () {
+				room.poll.end();
+				delete room.poll;
+			}), (timeout * 60000));
+			return this.privateModCommand("(The timeout was set to " + timeout + " minutes by " + user.name + ".)");
+		},
+		timerhelp: ["/poll timer [minutes] - Sets the poll to automatically end after [minutes] minutes. Requires: % @ # & ~"],
 
 		close: 'end',
 		stop: 'end',
 		end: function (target, room, user) {
 			if (!this.can(permission, null, room)) return false;
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
+			if (room.poll.timeout) clearTimeout(room.poll.timeout);
 
 			room.poll.end();
 			delete room.poll;
@@ -185,6 +195,15 @@ exports.commands = {
 
 		pr: 'display',
 		pollremind: 'display',
+		display: function (target, room, user) {
+			if (!room.poll) return this.errorReply("There is no poll running in this room.");
+			if (!this.canBroadcast()) return;
+			room.update();
+
+			room.poll.display(user, this.broadcasting);
+		},
+		displayhelp: ["/poll display - Displays the poll"],
+
 		display: function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
 			if (!this.canBroadcast()) return;

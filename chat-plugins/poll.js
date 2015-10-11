@@ -195,8 +195,7 @@ exports.commands = {
 		displayhelp: ["/poll display - Displays the poll"],
 
 		'': function (target, room, user) {
-			this.parse('/help poll new');
-			this.parse('/help poll end');
+			this.parse('/pollhelp');
 		},
 	},
 	pollhelp: function(target, room, user) {
@@ -206,7 +205,7 @@ exports.commands = {
 			"The poll status is displayed to the users and updated in real time.<br />" +
 			"Accepts the following commands:<br />" +
 			"/poll create [question], [option1], [option2], [...] - Creates a poll. Requires: + % @ # & ~<br />" +
-			"/poll vote [number] - Votes for option [number].<br />" +
+			"/poll vote [number] - Votes for option [number] (or click the button).<br />" +
 			"/poll timer [minutes] - Sets the poll to automatically end after [minutes]. Requires: + % @ # & ~<br />" +
 			"/poll display - Displays the poll<br />" +
 			"/poll end - Ends a poll and displays the results. Requires: + % @ # & ~"

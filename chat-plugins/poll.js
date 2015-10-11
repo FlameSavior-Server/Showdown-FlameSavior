@@ -222,6 +222,14 @@ exports.commands = {
 	endpoll: function(target, room, user) {
 		this.parse('/poll end');
 	},
+	pr: 'pollremind',
+	pollremind: function(target, room, user) {
+		if (!room.poll) return this.errorReply("There is no poll running in this room.");
+		if (!this.canBroadcast()) return;
+		room.update();
+
+		room.poll.display(user, this.broadcasting);	
+	},
 	tierpoll: 'tpoll',
 	tpoll: function(target, room, user) {
 		var tiers = ['Anything Goes', 'Challenge Cup 1v1', 'Monotype', 'OU', 'Random Battle', 'Random Monotype Battle', 'Tier Shift', 'UU'];

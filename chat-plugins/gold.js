@@ -988,10 +988,6 @@ exports.commands = {
 		}
 		return this.sendReplyBox('' + results + '');
 	},
-	hue: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center><img src="http://reactiongifs.me/wp-content/uploads/2013/08/ducks-laughing.gif">');
-	},
 	coins: 'coingame',
 	coin: 'coingame',
 	coingame: function(target, room, user) {

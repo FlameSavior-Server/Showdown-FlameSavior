@@ -46,6 +46,9 @@
 #lobby-userlist-user-ihizi, #roleplaying-userlist-user-ihizi, #development-userlist-user-ihizi {
     background: #FFEB99 url("http://i.imgur.com/HV1oDbP.gif") right no-repeat;
 }
+#lobby-userlist-user-yungzeno, #gamechamber-userlist-user-yungzeno, #parukia-userlist-user-yungzeno {
+    background: #FFEB99 url("http://i.imgur.com/epfF0iL.jpg") right no-repeat;
+}
 .backdrop {
     background-image: url("http://goldservers.info/about/backdrop.png");
 }

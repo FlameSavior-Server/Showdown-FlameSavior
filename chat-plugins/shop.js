@@ -208,6 +208,7 @@ exports.commands = {
 				price = 500;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy color, [hex code OR name of an alt you want the color of]");
+				if (parts[1].length > 20) return this.errorReply("This is not a valid color, try again.");
 				processPurchase(price, parts[0], parts[1]);
 				alertStaff(nameColor(user.name) + ' has purchased a custom color. Color: ' + parts[1], true);
 				this.sendReply("You have purchased a custom color: " + parts[1] + " from the shop.  Please screen capture this in case the staff do not get this message.");

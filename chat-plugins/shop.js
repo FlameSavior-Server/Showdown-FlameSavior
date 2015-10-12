@@ -179,6 +179,7 @@ exports.commands = {
 
 			case 'symbol':
 				price = 5;
+				if (Gold.hasBadge(user.userid, 'vip')) return this.errorReply("You are a VIP user - you do not need to buy custom symbols from the shop.  Use /customsymbol to change your symbol.");
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
 				this.sendReply("You have purchased a custom symbol. You will have this until you log off for more than an hour.");
@@ -268,6 +269,7 @@ exports.commands = {
 
 			case 'declare':
 				price = 25;
+				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0], '');
 				alertStaff(nameColor(user.name) + ' has purchased the ability to declare from the shop.', true);

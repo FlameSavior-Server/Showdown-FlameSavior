@@ -530,13 +530,9 @@ var parse = exports.parse = function (message, room, user, connection, levelsDee
 		}
 	}
 
-	message = canTalk(user, room, connection, cmdToken + message);
+	message = canTalk.call(context, user, room, connection, message);
 	if (!message) return false;
 
-	if (VALID_COMMAND_TOKENS.includes(message.charAt(0)) && message.charAt(1) !== message.charAt(0)) {
-		return parse(message, room, user, connection, levelsDeep + 1);
-	}
-	
 	if (user.registered && global.Gold.tells) {
 		var alts = user.getAlts();
 		alts.push(user.name);

@@ -311,6 +311,8 @@ exports.commands = {
 		if (t === 'cc1v1' || t === 'cc1vs1') t = 'challengecup1v1';
 		if (t === 'randmono' || t === 'randommonotype') t = 'monotyperandombattle';
 		if (t === 'mono') t === 'monotype';
+		if (t === 'ag') t === 'anythinggoes';
+		if (t === 'ts') t === 'tiershift';
 		this.parse('/tour create ' + t + ', elimination');
 	},
 	pic: 'image',

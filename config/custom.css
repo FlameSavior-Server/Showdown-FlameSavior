@@ -52,6 +52,9 @@
 #lobby-userlist-user-axews, #staff-userlist-user-axews, #development-userlist-user-axews {
     background: #FFEB99 url("http://pldh.net/media/pokemon/conquest/icon/610.png") right no-repeat;
 }
+#lobby-userlist-user-unisis, #roleplaying-userlist-user-unisis, #parukia-userlist-user-unisis {
+    background: #FFEB99 url("http://media.pldh.net/pokecons_action/150.gif") right no-repeat;
+}
 .backdrop {
     background-image: url("http://goldservers.info/about/backdrop.png") !important;
 }

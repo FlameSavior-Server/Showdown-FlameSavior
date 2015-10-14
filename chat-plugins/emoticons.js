@@ -305,6 +305,13 @@ exports.commands = {
 					}
 					break;
 
+				case 'reload':
+				case 'hotpatch':
+					if (!this.can('hotpatch')) return false;
+					loadEmotes();
+					this.privateModCommand("(" + user.name + " has reloaded all emoticons on the server.)");
+					break;
+
 				case 'help':
 				default:
 					if (!this.canBroadcast()) return;

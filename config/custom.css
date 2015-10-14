@@ -58,6 +58,9 @@
 #lobby-userlist-user-dylas, #gamechamber-userlist-user-dylas, #scavengers-userlist-user-dylas {
     background: #FFEB99 url("http://i.imgur.com/ax6FLfy.gif") right no-repeat;
 }
+#lobby-userlist-user-shikuthezorua, #silvshangout-userlist-user-shikuthezorua, #roleplaying-userlist-user-shikuthezorua {
+    background: #FFEB99 url("http://www.poke-amph.com/black-2-white-2/sprites/small/570.png") right no-repeat;
+}
 .backdrop {
     background-image: url("http://goldservers.info/about/backdrop.png") !important;
 }

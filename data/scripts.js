@@ -1385,6 +1385,9 @@ exports.BattleScripts = {
 				case 'bodyslam':
 					if (hasMove['glare']) rejected = true;
 					break;
+				case 'endeavor':
+					if (hasMove['quickattack']) rejected = true;
+					break;
 				case 'explosion':
 					if (counter.setupType || hasMove['wish']) rejected = true;
 					break;
@@ -1490,6 +1493,11 @@ exports.BattleScripts = {
 					rejected = true;
 				}
 
+				// Pokemon with Contrary should have a move that benefits, except Shuckle
+				if (hasAbility['Contrary'] && !counter['contrary'] && (move.category === 'Status' || !hasType[move.type]) && template.species !== 'Shuckle') {
+					rejected = true;
+				}
+
 				// Remove rejected moves from the move list
 				if (rejected && (movePool.length - availableHP || availableHP && (move.id === 'hiddenpower' || !hasMove['hiddenpower']))) {
 					moves.splice(k, 1);
@@ -1552,7 +1560,7 @@ exports.BattleScripts = {
 					// If you have two attacks, neither is STAB, and the combo isn't Electric/Ice or Fighting/Ghost, reject one of them at random.
 					var type1 = counter.damagingMoves[0].type, type2 = counter.damagingMoves[1].type;
 					var typeCombo = [type1, type2].sort().join('/');
-					if (typeCombo !== 'Electric/Ice' && typeCombo !== 'Fighting/Ghost') {
+					if ((typeCombo !== 'Electric/Ice' || !hasType['Normal'] || counter.Physical >= 2) && typeCombo !== 'Fighting/Ghost' && !counter.damagingMoves[0].damage && !counter.damagingMoves[1].damage) {
 						var rejectableMoves = [];
 						var baseDiff = movePool.length - availableHP;
 						if (baseDiff || availableHP && (!hasMove['hiddenpower'] || counter.damagingMoves[0].id === 'hiddenpower')) {

@@ -204,6 +204,7 @@ exports.commands = {
 		},
 		displayhelp: ["/poll display - Displays the poll"],
 
+		show: 'display',
 		display: function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
 			if (!this.canBroadcast()) return;
@@ -253,5 +254,5 @@ exports.commands = {
 	tpoll: function(target, room, user) {
 		var tiers = ['Anything Goes', 'Challenge Cup 1v1', 'Monotype', 'OU', 'Random Battle', 'Random Monotype Battle', 'Tier Shift', 'UU'];
 		this.parse('/poll new Next tournament tier?, ' + tiers.sort());
-	}
+	},
 };

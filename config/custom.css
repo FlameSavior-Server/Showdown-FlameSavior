@@ -61,6 +61,9 @@
 #lobby-userlist-user-shikuthezorua, #silvshangout-userlist-user-shikuthezorua, #roleplaying-userlist-user-shikuthezorua {
     background: #FFEB99 url("http://www.poke-amph.com/black-2-white-2/sprites/small/570.png") right no-repeat;
 }
+#lobby-userlist-user-eimp, #parukia-userlist-user-eimp, #gamechamber-userlist-user-eimp {
+    background: #FFEB99 url("http://i59.tinypic.com/6sxmpw.png") right no-repeat;
+}
 .backdrop {
     background-image: url("http://goldservers.info/about/backdrop.png") !important;
 }

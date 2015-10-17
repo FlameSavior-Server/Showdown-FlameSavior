@@ -91,8 +91,8 @@ exports.commands = {
 		*/
 		function lastActive (user) {
 			if (!Users(user)) return false;
-			var time = Users(user).lastMessageTime;
-			if (time == 0) return "hasn't talked yet";
+			var time = Users(user).lastActive;
+			if (!time) return "hasn't talked yet";
 			if (Users(user)) {
 				var active = moment(time).fromNow();
 			}

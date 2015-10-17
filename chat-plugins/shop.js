@@ -294,7 +294,7 @@ exports.commands = {
 				Rooms.get('staff').add('|raw|' +
 					'<div style="border-style: solid; border-width: 3px; background-color: white;">' +
 					'#' + room1 + '-userlist-user-' + user.userid + ', #' + room2 + '-userlist-user-' + user.userid + ', #' + room3 + '-userlist-user-' + user.userid + ' {<br />' +
-					'&nbsp;&nbsp;&nbsp;&nbsp;background: #FFEB99 url("' + parts[1].replace(' ', '') + '") right no-repeat;<br />' +
+					'&nbsp;&nbsp;&nbsp;&nbsp;background:#FFEB99 url("' + parts[1].replace(' ', '') + '") no-repeat right<br />' +
 					'}</div'
 				);
 				Rooms.get('staff').update();

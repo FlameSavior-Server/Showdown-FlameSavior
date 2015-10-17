@@ -5,6 +5,7 @@ var serverIp = '167.114.155.242';
 var http = require('http');
 var formatHex = '#000000'; //hex code for the formatting of the command
 var geoip = require('geoip-ultralight');
+var moment = require('moment');
 geoip.startWatchingDataUpdate();
 
 exports.commands = {
@@ -79,6 +80,24 @@ exports.commands = {
 				}
 			}
 		}
+		/*
+		function getStatus (user) {
+			if (!Users(user)) return false;
+			if (Users(user)) {
+				var status = Users(users).status;
+			}
+			return status;
+		}
+		*/
+		function lastActive (user) {
+			if (!Users(user)) return false;
+			var time = Users(user).lastMessageTime;
+			if (time == 0) return "notalk";
+			if (Users(user)) {
+				var active = moment(time).fromNow();
+			}
+			return active;
+		}
 		function showProfile() {
 			var seenOutput = '';
 			if (!Gold.seenData[userid]) seenOutput = "Never";
@@ -110,17 +129,34 @@ exports.commands = {
 					
 			var profile = '';
 			profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
-			if (!getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
-			if (getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name: </font><b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b>' + getFlag(toId(username)) + '<br />';
-			profile += '&nbsp;<font color=' + formatHex + '><b>Registered: </font></b>' + regdate + '<br />';
-			if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + '<br />';
-			if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank: </font></b>' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';
+			if (!getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name:</b></font> <b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b><br />';
+			if (getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name:</b></font> <b><font color="' + Gold.hashColor(toId(username)) + '">' + Tools.escapeHTML(username) + '</font></b>' + getFlag(toId(username)) + '<br />';
+			profile += '&nbsp;<font color=' + formatHex + '><b>Registered:</b></font> ' + regdate + '<br />';
+			if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank:</b></font> ' + userGroup + '<br />';
+			if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank:</b></font> ' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';
 			if (bucks) profile += '&nbsp;<font color=' + formatHex + '><b>Bucks: </font></b>' + bucks + '<br />';
-			if (online) profile += '&nbsp;<font color=' + formatHex + '><b>Last Online: </font></b><font color=green>Currently Online</font><br />';
+			if (online && (lastActive(toId(username)) && lastActive(toId(username)) !== 'notalk')) profile += '&nbsp;<font color=' + formatHex + '><b>Last Active:</b></font> ' + lastActive(toId(username)) + '<br />';
+			if (online && lastActive(toId(username)) === 'notalk') profile += '&nbsp;<font color=' + formatHex + '><b>Last Online:</b></font> <font color=green>Currently Online</font><br />';
 			if (!online) profile += '&nbsp;<font color=' + formatHex + '><b>Last Online: </font></b>' + seenOutput + '<br />';
 			profile += '<br clear="all">';
 			self.sendReplyBox(profile);
 			room.update();
 		}
+	},
+	/*
+	status: function(target, room, user) {
+		if (!this.canTalk()) return;
+		var status = Tools.escapeHTML(target);
+		if (status.length > 75) return this.errorReply("Your status cannot be longer than 75 characters.");
+		user.status = status;
+		this.logModCommand(user.name + ' set their status to: ' + status);
+	},
+	clearstatus: function(target, room, user) {
+		if (!this.can('pban')) return false;
+		if (!Users(target)) return this.errorReply("User '" + target + "' not found.  Check spelling?");
+		if (!Users(target).status) return this.errorReply("Users '" + target + "' does not have a status currently set to clear.");
+		Users(target).status = false;
+		this.logModCommand(user.name + ' has reset ' + target + '\'s status.');
 	}
+	*/
 };

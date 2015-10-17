@@ -315,14 +315,14 @@ exports.commands = {
 			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
 			if (_room.type === 'chat') {
 				if (_room.isOfficial) {
-					official.push(('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a>'));
+					official.push(('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')'));
 					continue;
 				}
 				if (_room.isPrivate) {
-					privateRoom.push(('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a>'));
+					privateRoom.push(('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')'));
 					continue;
 				}
-				nonOfficial.push(('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a>'));
+				nonOfficial.push(('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')'));
 			}
 		}
 		this.sendReplyBox(official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' '));

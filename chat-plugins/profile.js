@@ -92,7 +92,7 @@ exports.commands = {
 		function lastActive (user) {
 			if (!Users(user)) return false;
 			var time = Users(user).lastMessageTime;
-			if (time == 0) return "notalk";
+			if (time == 0) return "hasn't talked yet";
 			if (Users(user)) {
 				var active = moment(time).fromNow();
 			}
@@ -135,8 +135,7 @@ exports.commands = {
 			if (!Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank:</b></font> ' + userGroup + '<br />';
 			if (Gold.hasBadge(userid,'vip')) profile += '&nbsp;<font color=' + formatHex + '><b>Rank:</b></font> ' + userGroup + ' (<font color=#6390F0><b>VIP User</b></font>)<br />';
 			if (bucks) profile += '&nbsp;<font color=' + formatHex + '><b>Bucks: </font></b>' + bucks + '<br />';
-			if (online && lastActive(toId(username)) !== 'notalk') profile += '&nbsp;<font color=' + formatHex + '><b>Last Active:</b></font> ' + lastActive(toId(username)) + '<br />';
-			if (online && lastActive(toId(username)) === 'notalk') profile += '&nbsp;<font color=' + formatHex + '><b>Last Online:</b></font> <font color=green>Currently Online</font><br />';
+			if (online && lastActive(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Last Active:</b></font> ' + lastActive(toId(username)) + '<br />';
 			if (!online) profile += '&nbsp;<font color=' + formatHex + '><b>Last Online: </font></b>' + seenOutput + '<br />';
 			profile += '<br clear="all">';
 			self.sendReplyBox(profile);

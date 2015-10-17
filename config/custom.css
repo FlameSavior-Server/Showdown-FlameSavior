@@ -135,10 +135,6 @@ body {
 .broadcast-gold a {
 	color:#000
 }
-.userlist {
-	background: rgb(218, 157, .6);
-	color: black;
-}
 .userlist li {
 	border-bottom:1px solid #a066aa;
 	height:19px;

@@ -113,8 +113,8 @@ exports.commands = {
     terlor: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/EEcZ4J2.png" width="350"><br />' +
-            '<img src="http://i.imgur.com/bjVsAsj.png"><br />' +
-            '"Honor is in the heart, not the name." - Yasuo</center>');
+            '<img src="http://i.imgur.com/FKBw7Ri.gif"><br />' +
+            'Honor is in the heart, not the name.</center>');
     },
 
     saago: function(target, room, user) {

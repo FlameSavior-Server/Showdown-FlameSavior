@@ -68,10 +68,10 @@
 
 /* CSS Style */
 body {
-	background:url("http://i.imgur.com/e08bWZc.jpg")
+	background:url("http://i.imgur.com/e08bWZc.jpg") !important
 }
 .backdrop {
-	background-image:url("http://goldservers.info/about/backdrop.png")!important
+	background-image:url("http://goldservers.info/about/backdrop.png") !important
 }
 .nightclub {
 	background:#000;

@@ -646,7 +646,7 @@ exports.commands = {
     },
     deadbox: function(target, room, user) {
         if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>d3adm3owth☭\’s Music Box</b><br />' 
+        this.sendReplyBox('<b>d3adm3owth☭\’s Music Box</b><br />' +
             '1. <a href="https://www.youtube.com/watch?v=c00vciZIE78"><button title="Sometimes I Fail - deadmau5">Sometimes I Fail - deadmau</a></button><br />' +
             '2. <a href="https://www.youtube.com/watch?v=9-0wDHMzNnQ"><button title="Silence Bridge - Pokemon Red/Blue">Silence Bridge - Pokemon Red/Blue</a></button><br />' +
             '3. <a href="https://www.youtube.com/watch?v=9T6N5UBeFpk"><button title="40 Oz. To Freedom - Sublime">40 Oz. To Freedom - Sublime</a></button><br />' +

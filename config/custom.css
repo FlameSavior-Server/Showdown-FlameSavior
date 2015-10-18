@@ -65,6 +65,9 @@
 #lobby-userlist-user-slappingpichu,#gamechamber-userlist-user-slappingpichu,#roleplaying-userlist-user-slappingpichu {
 	background:url("http://38.media.tumblr.com/391e1a987eeeb8b5c9752d0eddd18481/tumblr_inline_mqrxr8Aj9m1qz4rgp.gif") no-repeat right
 }
+#lobby-userlist-user-corsolascage, #parukia-userlist-user-corsolascage, #gamechamber-userlist-user-corsolascage {
+    background:#FFEB99 url("http://media.pldh.net/pokexycons/015-mega.png") no-repeat right
+}
 /* CSS Style */
 body {
 	background:url("http://goldservers.info/about/serverbg.jpg") !important;

@@ -179,13 +179,6 @@ exports.commands = {
             '<i>Play Time Is Ogre</i>');
     },
 
-    silver: function(target, room, user) {
-        if (!this.canBroadcast()) return;
-        this.sendReplyBox('<center><img src="http://img3.wikia.nocookie.net/__cb20091211143347/sonic/images/thumb/5/5d/Super_silver_final.png/150px-Super_silver_final.png"><br />' +
-            '<img src="http://img1.wikia.nocookie.net/__cb20111024112339/sonic/images/thumb/3/34/Sonic_Channel_-_Silver_The_Hedgehog_2011.png/120px-Sonic_Channel_-_Silver_The_Hedgehog_2011.png"><br />' +
-            'Ace: Its no use!<br />');
-    },
-
     gene: function(target, room, user) {
         if (!this.canBroadcast()) return;
         this.sendReplyBox('<center><img src="http://i.imgur.com/NO1PFB2.png"><br />' +

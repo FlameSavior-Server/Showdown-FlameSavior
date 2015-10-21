@@ -210,6 +210,7 @@ exports.commands = {
 		targetUser.ban();
 		ipbans.write('\n' + targetUser.latestIp);
 	},
+	/*
 	clearall: 'clearroom',
 	clearroom: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;
@@ -231,6 +232,7 @@ exports.commands = {
 			}
 		}, 1000);
 	},
+	*/
 	hc: function(room, user, cmd) {
 		return this.parse('/hotpatch chat');
 	},

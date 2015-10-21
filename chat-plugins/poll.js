@@ -255,4 +255,8 @@ exports.commands = {
 		var tiers = ['Anything Goes', 'Challenge Cup 1v1', 'Monotype', 'OU', 'Random Battle', 'Random Monotype Battle', 'Tier Shift', 'UU'];
 		this.parse('/poll new Next tournament tier?, ' + tiers.sort());
 	},
+	vote: function(target, room, user) {
+		if (!target) return this.errorReply("Usage: /vote [poll option number] - votes for the [option] in the current poll.");
+		this.parse('/poll vote ' + target);
+	}
 };

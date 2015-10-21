@@ -29,7 +29,7 @@ var Poll = (function () {
 			return user.sendTo(this.room, "You have already voted for this poll.");
 		} else {
 			this.voters.add(user.latestIp);
-			if (this.room.id === 'lobby') {
+			if (this.room.id === 'lobby' && user.named) {
 				economy.writeMoney('money', user.userid, +1);
 				user.sendTo(this.room, "Thank you for voting for this Lobby poll.  You have received 1 buck as a result!");
 			}

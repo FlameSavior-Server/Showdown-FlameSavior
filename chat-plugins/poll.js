@@ -118,6 +118,7 @@ exports.commands = {
 	poll: {
 		create: 'new',
 		new: function (target, room, user) {
+			if (room.type === 'battle') return false;
 			if (target.length > 1024) return this.errorReply("Poll too long.");
 			var params = target.split(target.includes('|') ? '|' : ',').map(function (param) { return param.trim(); });
 

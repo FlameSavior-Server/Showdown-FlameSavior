@@ -32,6 +32,7 @@ exports.commands = {
 		if (!user.isAway && user.name.length > 19) return this.sendReply("Your username is too long for any kind of use of this command.");
 
 		target = target ? target.replace(/[^a-zA-Z0-9]/g, '') : 'AWAY';
+		if (target.length < 1) return this.errorReply("The away message cannot be this short.");
 		var newName = user.name;
 		var status = parseStatus(target, true);
 		var statusLen = status.length;

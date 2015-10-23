@@ -39,7 +39,7 @@ exports.commands = {
 			var top = '<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Item</th><th>Description</th><th>Cost</th></tr>';
 			var bottom = '</table><br />To buy an item from the shop, do /buy [item].<br>Do /getbucks to learn more about how to obtain bucks. </center>';
 			function table(item, desc, price) {
-				return '<tr><td>' + item + '</td><td>' + desc + '</td><td>' + price + '</tr>';
+				return '<tr><td>' + item + '</td><td>' + desc + '</td><td>' + price + '</td></tr>';
 			}
 			return this.sendReplyBox(
 				top +

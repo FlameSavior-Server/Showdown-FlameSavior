@@ -196,7 +196,7 @@ exports.commands = {
 				if (!parts[1]) return this.errorReply("Usage: /buy avatar, [link to avatar].  Must be a PNG or JPG.");
 				var filepaths = ['.png', '.jpg'];
 				if (!~filepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a regular custom avatar must be either a PNG or JPG. (If it is a valid file type, it will end in one of these)");
-				processPurchase(price, parts[0],'Image: ' + parts[1]);
+				processPurchase(price, parts[0], 'Image: ' + parts[1]);
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
 				alertStaff(nameColor(user.name) + ' has purchased a custom avatar. Image: ' + link(parts[1].replace(' ', ''), 'desired avatar'), true);
 				alertStaff('<center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
@@ -233,7 +233,7 @@ exports.commands = {
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy animated, [link to avatar].  Must be a GIF.");
 				if (parts[1].split('.').pop() !== 'gif') return this.errorReply("Your animated avatar must be a GIF. (If it's a GIF, the link will end in .gif)");
-				processPurchase(price, parts[0],'Image: ' + parts[1]);
+				processPurchase(price, parts[0], 'Image: ' + parts[1]);
 				if (Config.customavatars[user.userid]) output = ' | <button name="send" value="/sca delete, ' + user.userid + '" target="_blank" title="Click this to remove current avatar.">Click2Remove</button>';
 				alertStaff(nameColor(user.name) + ' has purchased a custom animated avatar. Image: ' + link(parts[1].replace(' ', ''), 'desired avatar'), true);
 				alertStaff('<center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
@@ -244,7 +244,7 @@ exports.commands = {
 			case 'trainercard':
 				price = 60;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
-				processPurchase(price, parts[0], '');
+				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased a trainer card.', true);
 				this.sendReply("|html|You have purchased a trainer card.  Please use <a href=http://goldservers.info/site/trainercard.html>this</a> to make your trainer card and then PM a leader or administrator the HTML with the command name you want it to have.");
 				break;
@@ -253,7 +253,7 @@ exports.commands = {
 			case 'musicbox':
 				price = 70;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
-				processPurchase(price, parts[0], '');
+				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased a music box.', true);
 				this.sendReply("You have purchased a music box.  Please start thinking about 6 or less songs you want on it.  Create a pastebin of the links of the YouTube songs and send them to a leader or administrator.");
 				break;
@@ -262,7 +262,7 @@ exports.commands = {
 				price = 15;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
-				processPurchase(price, parts[0], '');
+				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased a fix from the shop.', true);
 				user.canFixItem = true;
 				this.sendReply("You have purchased a fix from the shop.  You can use this to alter your trainer card, music box, or custom chat emoticon.  PM a leader or administrator to proceed.");
@@ -272,7 +272,7 @@ exports.commands = {
 				price = 25;
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
-				processPurchase(price, parts[0], '');
+				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased the ability to declare from the shop.', true);
 				this.sendReply("You have purchased a declare from the shop.  PM a leader or administrator to proceed.");
 				break;

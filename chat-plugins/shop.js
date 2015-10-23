@@ -331,8 +331,8 @@ exports.commands = {
 		//send return messages
 		this.sendReply("You have transfered " + bucks + lbl + " to " + parts[0] + ".");
 		if (Users(toId(parts[0]))) {
-			Users(toId(parts[0])).popup("|modal|" + user.name + " has transfered " + bucks + lbl + " to you.");
-			Users(toId(parts[0])).sendTo(room, "|raw|<b>" + Tools.escapeHTML(user.name) + " has transfered " + bucks + lbl + " to you.</b>");
+			Users(toId(parts[0])).popup("|modal|" + user.name + " has transferred " + bucks + lbl + " to you.");
+			Users(toId(parts[0])).sendTo(room, "|raw|<b>" + Tools.escapeHTML(user.name) + " has transferred " + bucks + lbl + " to you.</b>");
 		}
 	},
 	wallet: 'atm',

@@ -68,6 +68,9 @@
 #lobby-userlist-user-corsolascage, #parukia-userlist-user-corsolascage, #gamechamber-userlist-user-corsolascage {
     background:url("http://media.pldh.net/pokexycons/015-mega.png") no-repeat right
 }
+#lobby-userlist-user-deusexiroze, #gamechamber-userlist-user-deusexiroze, #thehappyplace-userlist-user-deusexiroze {
+    background:url("http://i.imgur.com/X35CLBI.gif") no-repeat right
+}
 /* CSS Style */
 body {
 	background:url("http://goldservers.info/about/serverbg.jpg") !important;

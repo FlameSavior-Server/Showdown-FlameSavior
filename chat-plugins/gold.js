@@ -97,7 +97,7 @@ exports.commands = {
 						continue;
 				}
 			}
-			connection.popup('Staff List \n\n**Administrator**:\n' + staff['admins'].join(', ') +
+			connection.popup('Staff List \n\n**Administrators**:\n' + staff['admins'].join(', ') +
 				'\n**Leaders**:\n' + staff['leaders'].join(', ') +
 				'\n**Moderators**:\n' + staff['mods'].join(', ') +
 				'\n**Drivers**:\n' + staff['drivers'].join(', ') +

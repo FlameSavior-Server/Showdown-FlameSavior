@@ -62,6 +62,10 @@ exports.commands = {
 
 		room.mute(targetUser, muteDuration, false);
 	},
+	globalauth: 'gal',
+	stafflist: 'gal',
+	authlist: 'gal',
+	auth: 'gal',
 	goldauthlist: 'gal',
 	gal: function(target, room, user, connection) {
 		fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
@@ -77,33 +81,61 @@ exports.commands = {
 				if (!row[i]) continue;
 				var rank = row[i].split(',')[1].replace("\r", '');
 				var person = row[i].split(',')[0];
+				function nameColor (name) {
+					return '<font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(name) + '</font>';
+				}
 				switch (rank) {
 					case '~':
-						staff['admins'].push(person);
+						staff['admins'].push(nameColor(person));
 						break;
 					case '&':
-						staff['leaders'].push(person);
+						staff['leaders'].push(nameColor(person));
 						break;
 					case '@':
-						staff['mods'].push(person);
+						staff['mods'].push(nameColor(person));
 						break;
 					case '%':
-						staff['drivers'].push(person);
+						staff['drivers'].push(nameColor(person));
 						break;
 					case '+':
-						staff['voices'].push(person);
+						staff['voices'].push(nameColor(person));
 						break;
 					default:
 						continue;
 				}
 			}
-			connection.popup('Staff List \n\n**Administrators**:\n' + staff['admins'].join(', ') +
-				'\n**Leaders**:\n' + staff['leaders'].join(', ') +
-				'\n**Moderators**:\n' + staff['mods'].join(', ') +
-				'\n**Drivers**:\n' + staff['drivers'].join(', ') +
-				'\n**Voices**:\n' + staff['voices'].join(', ')
+			connection.popup('|html|' +
+				'<h3>Gold Authority List</h3>' +
+				'<b><u>Administrators (~)</b></u>:<br />' + staff['admins'].join(', ') +
+				'<br /><b>Leaders (&)</b></u>:<br />' + staff['leaders'].join(', ') +
+				'<br /><b><u>Moderators (@)</b></u>:<br />' + staff['mods'].join(', ') +
+				'<br /><b><u>Drivers (%)</b></u>:<br />' + staff['drivers'].join(', ') +
+				'<br /><b><u>Voices (+)</b></u>:<br />' + staff['voices'].join(', ')
 			);
 		});
+	},
+	testauth: function (target, room, user, connection) {
+		var rankLists = {};
+		var ranks = Object.keys(Config.groups);
+		for (var u in Users.usergroups) {
+			var rank = Users.usergroups[u].charAt(0);
+			// In case the usergroups.csv file is not proper, we check for the server ranks.
+			if (ranks.indexOf(rank) > -1) {
+				var name = Users.usergroups[u].substr(1);
+				if (!rankLists[rank]) rankLists[rank] = [];
+				if (name) rankLists[rank].push(((Users.getExact(name) && Users.getExact(name).connected) ? '**' + name + '**' : name));
+			}
+		}
+
+		var buffer = [];
+		Object.keys(rankLists).sort(function (a, b) {
+			return (Config.groups[b] || {rank: 0}).rank - (Config.groups[a] || {rank: 0}).rank;
+		}).forEach(function (r) {
+			buffer.push((Config.groups[r] ? r + Config.groups[r].name + "s (" + rankLists[r].length + ")" : r) + ":\n" + rankLists[r].sort().join(", "));
+		});
+
+		if (!buffer.length) buffer = "This server has no auth.";
+		connection.popup(buffer.join("\n\n"));
 	},
 	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {

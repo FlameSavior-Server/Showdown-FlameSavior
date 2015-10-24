@@ -37,6 +37,7 @@ var commands = exports.commands = {
 		this.sendReplyBox("Server version: <b>" + CommandParser.package.version + "</b>");
 	},
 
+	/*
 	auth: 'authority',
 	stafflist: 'authority',
 	globalauth: 'authority',
@@ -65,6 +66,7 @@ var commands = exports.commands = {
 		if (!buffer.length) buffer = "This server has no global authority.";
 		connection.popup(buffer.join("\n\n"));
 	},
+	*/
 
 	me: function (target, room, user, connection) {
 		// By default, /me allows a blank message

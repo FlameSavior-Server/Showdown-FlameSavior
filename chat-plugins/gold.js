@@ -106,11 +106,11 @@ exports.commands = {
 			}
 			connection.popup('|html|' +
 				'<h3>Gold Authority List</h3>' +
-				'<b><u>Administrators (~)</b></u>:<br />' + staff['admins'].join(', ') +
-				'<br /><b>Leaders (&)</b></u>:<br />' + staff['leaders'].join(', ') +
-				'<br /><b><u>Moderators (@)</b></u>:<br />' + staff['mods'].join(', ') +
-				'<br /><b><u>Drivers (%)</b></u>:<br />' + staff['drivers'].join(', ') +
-				'<br /><b><u>Voices (+)</b></u>:<br />' + staff['voices'].join(', ')
+				'<b><u>Administrators (~)</u></b>:<br />' + staff['admins'].join(', ') +
+				'<br /><b><u>Leaders (&)</u></b>:<br />' + staff['leaders'].join(', ') +
+				'<br /><b><u>Moderators (@)</u></b>:<br />' + staff['mods'].join(', ') +
+				'<br /><b><u>Drivers (%)</u></b>:<br />' + staff['drivers'].join(', ') +
+				'<br /><b><u>Voices (+)</u></b>:<br />' + staff['voices'].join(', ')
 			);
 		});
 	},

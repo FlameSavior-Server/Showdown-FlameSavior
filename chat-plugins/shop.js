@@ -36,21 +36,24 @@ exports.commands = {
 		if (room.id === 'lobby' && this.broadcasting) {
 			return this.sendReplyBox('<center>Click <button name="send" value="/shop" style="background-color: black; font-color: white;" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
 		} else {
-			var top = '<center><h3><b><u>Gold Bucks Shop</u></b></h3><table border="1" cellspacing ="0" cellpadding="3"><tr><th>Item</th><th>Description</th><th>Cost</th></tr>';
-			var bottom = '</table><br />To buy an item from the shop, do /buy [item].<br>Do /getbucks to learn more about how to obtain bucks. </center>';
+			var buttonStyle = 'border-radius: 5px; background: linear-gradient(-30deg, #fff493, #e8d95a, #fff493); color: black; text-shadow: 0px 0px 5px #d6b600; border-bottom: 2px solid #635b00; border-right: 2px solid #968900;';
+			var topStyle = 'background: linear-gradient(10deg, #FFF8B5, #eadf7c, #FFF8B5); color: black; border: 1px solid #635b00; padding: 2px; border-radius: 5px;';
+			var descStyle = 'border-radius: 5px; border: 1px solid #635b00; background: #fff8b5; color: black;';
+			var top = '<center><h3><b><u>Gold Bucks Shop</u></b></h3><table style="' + topStyle + '" border="1" cellspacing ="2" cellpadding="3"><tr><th>Item</th><th>Description</th><th>Cost</th></tr>';
+			var bottom = '</table><br />To buy an item from the shop, click the respective button for said item.<br>Do /getbucks to learn more about how to obtain bucks. </center>';
 			function table(item, desc, price) {
-				return '<tr><td>' + item + '</td><td>' + desc + '</td><td>' + price + '</td></tr>';
+				return '<tr><td style="' + descStyle + '"><button style="' + buttonStyle + '" name="send" value="/buy ' + item + '">' + item + '</button></td><td style="' + descStyle + '">' + desc + '</td><td style="' + descStyle + '">' + price + '</td></tr>';
 			}
-			return this.sendReplyBox(
+			return this.sendReply('|raw|' +
 				top +
-				table("Symbol", "Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)", 5) +
+				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", 5) +
 				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
-				table("Trainer", "Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: fourth image costs 10 bucks extra, ask for more details)", 60) +
-				table("Fix", "Buys the ability to alter your trainer card, music box or custom emote (don't buy if you have neither)! (NOTE: No longer fixes avatars; those have to be rebought!)", 15) +
-				table("Declare", "You get the ability to get one declare from an Admin or Leader in the lobby. This can only be used for room advertisement for a room on Gold.", 25) +
-				table("Musicbox", "It's a command that's similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).", 70) +
-				table("Emote", "This buys you a custom chat emote, such as \"Kappa\", for example. The size of this must be 30x30 and must be appropriate.", 200) +
+				table("Trainer", "Gives you a custom command - you provide the HTML and command name", 60) +
+				table("Fix", "Ability to modify a trainer card, music box, or custom emoticon.", 15) +
+				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 25) +
+				table("Musicbox", "A command that lists / links 6 of your favorite songs", 70) +
+				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 200) +
 				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 800) +
 				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1500) +
 				bottom
@@ -144,6 +147,7 @@ exports.commands = {
 
 		var parts = target.split(',');
 		var output = '';
+		var price;
 
 		function link(link, formatted) {
 			return '<a href="' + link + '" target="_blank">' + formatted + '</a>';
@@ -174,7 +178,7 @@ exports.commands = {
 				logTransaction(user.name + ' has purchased a(n) ' + item + '. ' + desc);
 			}
 		}
-		var price;
+
 		switch (toId(parts[0])) {
 
 			case 'symbol':

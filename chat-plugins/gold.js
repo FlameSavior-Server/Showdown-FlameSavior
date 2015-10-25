@@ -332,12 +332,16 @@ exports.commands = {
 	},
 	roomlist: function (target, room, user) {
 		if(!this.can('hotpatch')) return;
-	
+		var totalUsers = 0; 
+		for (var u in Users.users) {
+			if (!Users.users[u].connected) continue; totalUsers++;
+		}
 		var rooms = Object.keys(Rooms.rooms),
 		len = rooms.length,
-		official = ['<b><font color="#1a5e00" size="2">Official chat rooms:</font></b><br>'],
-		nonOfficial = ['<hr><b><font color="#000b5e" size="2">Public chat rooms:</font></b><br>'],
-		privateRoom = ['<hr><b><font color="#5e0019" size="2">Private chat rooms:</font></b><br>'];
+		header = ['<b><font color="#DA9D01" size="2">Total users connected: ' + totalUsers + '</font></b><br />'],
+		official = ['<b><font color="#1a5e00" size="2">Official chat rooms:</font></b><br />'],
+		nonOfficial = ['<hr><b><font color="#000b5e" size="2">Public chat rooms:</font></b><br />'],
+		privateRoom = ['<hr><b><font color="#5e0019" size="2">Private chat rooms:</font></b><br />'];
 	 
 		while (len--) {
 			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
@@ -353,7 +357,7 @@ exports.commands = {
 				nonOfficial.push(('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')'));
 			}
 		}
-		this.sendReplyBox(official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' '));
+		this.sendReplyBox(header + official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' '));
     },
 	mt: 'mktour',
 	mktour: function(target, room, user) {

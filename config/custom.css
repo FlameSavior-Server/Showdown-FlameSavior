@@ -74,7 +74,9 @@
 #lobby-userlist-user-siiilver, #gamechamber-userlist-user-siiilver, #silvshangout-userlist-user-siiilver {
     background:url("http://i.imgur.com/CfRQNTj.png") no-repeat right
 }
-/* CSS Style */
+/* Regular CSS Style */
+
+/*
 body {
 	background:url("http://goldservers.info/about/serverbg.jpg") !important;
 }
@@ -180,4 +182,73 @@ body {
 }
 .userlist li button:hover {
 	background:rgba(255,235,153,0.4)
+}
+*/
+
+/* Halloween CSS */
+
+.header{
+	background:url("http://i.imgur.com/F5pMH0a.png");
+}
+
+body {
+	background:url("http://i.imgur.com/J4ALaW9.png") !important;
+}
+
+.backdrop {
+	background-image:url("http://goldservers.info/about/backdrop.png") !important
+}
+
+.mainmenuwrapper {
+	background: url("http://i.imgur.com/iHubd1y.png") right bottom no-repeat;
+}
+
+.chat-log{
+	background: url("http://i.imgur.com/vcIHH5Y.png") right top no-repeat;
+}
+
+.chat-log-add, .pm-log-add, .pm-window h3 {
+	background:#fbb88e;
+}
+
+.pm-log{
+	background: url(http://i.imgur.com/Q8vHT0Y.png);
+    border-width: 0;
+}
+
+.pm-window.focused h3, .pm-window.focused h3:hover {
+	background:#fbb88e;
+}
+
+.menugroup .button{
+	background:#5a11ff;
+}
+
+.menugroup .menugroup{
+	text-align:center;
+}
+
+.menugroup .button:hover {
+	background:#2d00f0;
+}
+
+.userlist{
+	border-left:0px;
+	background:#fbb88e;
+}
+
+.userlist li {
+	border-bottom: 1px solid #7a7877;
+}
+
+.userlist li button:hover {
+	background:#cabdff;
+}
+
+.userlist li em.group {
+    color: #56007c;
+}
+
+.message-announce {
+	background:#000000;
 }

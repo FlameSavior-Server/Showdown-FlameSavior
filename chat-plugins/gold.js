@@ -82,7 +82,11 @@ exports.commands = {
 				var rank = row[i].split(',')[1].replace("\r", '');
 				var person = row[i].split(',')[0];
 				function nameColor (name) {
-					return '<font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(name) + '</font>';
+					if (Users(name)) {
+						return '<b><i><font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(name) + '</font></i></b>';
+					} else {
+						return '<font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(name) + '</font>';
+					}
 				}
 				switch (rank) {
 					case '~':
@@ -110,7 +114,8 @@ exports.commands = {
 				'<br /><b><u>Leaders (&)</u></b>:<br />' + staff['leaders'].join(', ') +
 				'<br /><b><u>Moderators (@)</u></b>:<br />' + staff['mods'].join(', ') +
 				'<br /><b><u>Drivers (%)</u></b>:<br />' + staff['drivers'].join(', ') +
-				'<br /><b><u>Voices (+)</u></b>:<br />' + staff['voices'].join(', ')
+				'<br /><b><u>Voices (+)</u></b>:<br />' + staff['voices'].join(', ') +
+				'<br /><br />(Bold / italic = currently online)'
 			);
 		});
 	},

@@ -203,7 +203,8 @@ body {
  *********************************/ 
 /*
 .header {
-	background:url("http://i.imgur.com/q9MiuzK.png");
+	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
+	background-color:#32CD32;
 }
 body {
 	background:url("http://img10.deviantart.net/7dc9/i/2014/327/e/b/day_7___christmas_cyndaquil_by_xyrten-d87fqjb.jpg") !important;
@@ -279,7 +280,8 @@ body {
  * Halloween CSS *
  ****************/
 .header {
-	background:url("http://i.imgur.com/F5pMH0a.png");
+	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
+	background-color:#551a8b;
 }
 body {
 	background:url("http://i.imgur.com/J4ALaW9.png") !important;

@@ -339,6 +339,9 @@ body {
 body {
 	background:url("http://i.imgur.com/J4ALaW9.png")!important
 }
+.chat-log{
+	background: url("http://i.imgur.com/PrJl4qq.png") right top no-repeat;
+}
 .mainmenuwrapper {
 	background:url("http://fc01.deviantart.net/fs70/f/2010/327/e/8/happy_thanksgiving_by_keijimatsu-d33hjzy.png") !important;
 }

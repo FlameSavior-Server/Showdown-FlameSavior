@@ -82,7 +82,7 @@ exports.commands = {
 				var rank = row[i].split(',')[1].replace("\r", '');
 				var person = row[i].split(',')[0];
 				function nameColor (name) {
-					if (Users(name).connected) {
+					if (Users(name) && Users(name).connected) {
 						return '<b><i><font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(name) + '</font></i></b>';
 					} else {
 						return '<font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(name) + '</font>';

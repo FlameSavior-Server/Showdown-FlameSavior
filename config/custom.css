@@ -263,8 +263,18 @@ body {
 	outline: 1px solid red;
 }
 
-.userlist li em.group, .pm-window h3 small  {
+.pm-window h3 small  {
    color: #5e5e5e;
+}
+.userlist li em.group {
+	font-style:normal;
+	font-size:8pt;
+	color:#000;
+	display:block;
+	float:left;
+	text-align:center;
+	padding:1px 0 0 1px;
+	width:14px
 }
 
 .tabbar a.button {
@@ -412,7 +422,14 @@ body {
 }
 
 .userlist li em.group {
-    color: #56007c;
+	font-style:normal;
+	font-size:8pt;
+	color:#000;
+	display:block;
+	float:left;
+	text-align:center;
+	padding:1px 0 0 1px;
+	width:14px
 }
 
 .message-announce {

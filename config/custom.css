@@ -199,6 +199,29 @@ body {
 	background: url("http://i.imgur.com/TXI7WGS.png") right top no-repeat;
 }
 
+.userbar {
+	border:1px solid #000;
+	padding:5px;
+	background:#fff;
+	margin-top:-5px
+}
+
+.broadcast-purple {
+	background-color:#8904B1;
+	color:#fff;
+	padding:2px 4px
+}
+
+.broadcast-black {
+	padding:2px 4px
+}
+
+.broadcast-gold {
+	background-color:#FC0;
+	color:#000;
+	padding:2px 4px
+}
+
 .infobox {
 	border:1px solid #000;
 	padding:2px 4px;
@@ -300,12 +323,35 @@ body {
 	background:url("http://i.imgur.com/F5pMH0a.png");
 }
 
+.broadcast-purple {
+	background-color:#8904B1;
+	color:#fff;
+	padding:2px 4px
+}
+
+.broadcast-black {
+	padding:2px 4px
+}
+
+.broadcast-gold {
+	background-color:#FC0;
+	color:#000;
+	padding:2px 4px
+}
+
 body {
 	background:url("http://i.imgur.com/J4ALaW9.png") !important;
 }
 
 .backdrop {
 	background-image:url("http://goldservers.info/about/backdrop.png") !important
+}
+
+.userbar {
+	border:1px solid #000;
+	padding:5px;
+	background:#fff;
+	margin-top:-5px
 }
 
 .nightclub {

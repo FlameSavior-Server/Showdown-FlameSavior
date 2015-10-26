@@ -199,6 +199,10 @@ body {
 	background: url("http://i.imgur.com/TXI7WGS.png") right top no-repeat;
 }
 
+.header .logo {
+	display:none!important
+}
+
 .userbar {
 	border:1px solid #000;
 	padding:5px;
@@ -333,6 +337,10 @@ body {
 	background:url("http://i.imgur.com/F5pMH0a.png");
 }
 
+.header .logo {
+	display:none!important
+}
+
 .broadcast-purple {
 	background-color:#8904B1;
 	color:#fff;
@@ -451,6 +459,10 @@ body {
 	padding:5px;
 	background:#fff;
 	margin-top:-5px
+}
+
+.header .logo {
+	display:none!important
 }
 
 .backdrop {

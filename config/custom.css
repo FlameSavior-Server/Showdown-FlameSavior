@@ -77,12 +77,10 @@
 #lobby-userlist-user-kupo, #gamechamber-userlist-user-kupo, #staff-userlist-user-kupo {
     background:url("http://i.imgur.com/BAU7VBi.png") no-repeat right
 }
-/* Regular CSS Style */
+/*************************************
+ * CONSTANT CSS (DO NOT COMMENT OUT) *
+ *************************************/
 
-/*
-body {
-	background:url("http://goldservers.info/about/serverbg.jpg") !important;
-}
 .backdrop {
 	background-image:url("http://goldservers.info/about/backdrop.png") !important
 }
@@ -95,10 +93,6 @@ body {
 	padding:2px 4px;
 	background-color:#fff
 }
-.header {
-	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
-	background-color:#DA9D01
-}
 .astext {
 	border:none;
 	background:none;
@@ -106,32 +100,12 @@ body {
 	font-family:Verdana,sans-serif;
 	font-size:12px
 }
-.header .logo {
-	display:none!important
-}
-.chat small {
-	font-weight:400;
-	font-size:8pt;
-	color:#000
-}
 .blackbutton {
 	padding:5px;
 	background-color:#000;
 	border:1px solid #666;
 	color:#000;
 	text-decoration:none
-}
-.userlist,.userlist li {
-	display:block;
-	list-style-type:none;
-	margin:0;
-	padding:0;
-	text-align:left
-}
-.message-announce {
-	background:#FC0;
-	color:#000;
-	padding:1px 4px 2px
 }
 .broadcast-purple {
 	background-color:#8904B1;
@@ -149,11 +123,14 @@ body {
 .broadcast-gold a {
 	color:#000
 }
-.userlist li {
-	border-bottom:1px solid #a066aa;
-	height:19px;
-	font:10pt Verdana,sans-serif;
-	white-space:nowrap
+.userbar {
+	border:1px solid #000;
+	padding:5px;
+	background:#fff;
+	margin-top:-5px
+}
+.userlist li button:hover {
+	background:rgba(255,235,153,0.4)
 }
 .userlist li em.group {
 	font-style:normal;
@@ -164,6 +141,47 @@ body {
 	text-align:center;
 	padding:1px 0 0 1px;
 	width:14px
+}
+.header .logo {
+	display:none!important
+}
+
+
+
+/*********************
+ * Regular CSS Style *
+ ********************/
+
+/*
+body {
+	background:url("http://goldservers.info/about/serverbg.jpg") !important;
+}
+.header {
+	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
+	background-color:#DA9D01
+}
+.chat small {
+	font-weight:400;
+	font-size:8pt;
+	color:#000
+}
+.userlist,.userlist li {
+	display:block;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	text-align:left
+}
+.message-announce {
+	background:#FC0;
+	color:#000;
+	padding:1px 4px 2px
+}
+.userlist li {
+	border-bottom:1px solid #a066aa;
+	height:19px;
+	font:10pt Verdana,sans-serif;
+	white-space:nowrap
 }
 .userlist li button {
 	display:block;
@@ -177,354 +195,164 @@ body {
 	font:10pt Verdana,sans-serif;
 	text-align:left
 }
-.userbar {
-	border:1px solid #000;
-	padding:5px;
-	background:#fff;
-	margin-top:-5px
-}
-.userlist li button:hover {
-	background:rgba(255,235,153,0.4)
-}
 */
 
-/* Holiday (really Christmas) CSS */
+
+/**********************************
+ * Holiday (really Christmas) CSS *
+ *********************************/ 
 /*
-#header {
+.header {
 	background:url("http://i.imgur.com/q9MiuzK.png");
 }
-
 body {
 	background:url("http://img10.deviantart.net/7dc9/i/2014/327/e/b/day_7___christmas_cyndaquil_by_xyrten-d87fqjb.jpg") !important;
 }
-
 .chat-log{
 	background: url("http://i.imgur.com/TXI7WGS.png") right top no-repeat;
 }
-
 .header .logo {
 	display:none!important
 }
-
-.userbar {
-	border:1px solid #000;
-	padding:5px;
-	background:#fff;
-	margin-top:-5px
-}
-
-.broadcast-purple {
-	background-color:#8904B1;
-	color:#fff;
-	padding:2px 4px
-}
-
-.broadcast-black {
-	padding:2px 4px
-}
-
-.broadcast-gold {
-	background-color:#FC0;
-	color:#000;
-	padding:2px 4px
-}
-
-.infobox {
-	border:1px solid #000;
-	padding:2px 4px;
-	background-color:#fff
-}
-
-.nightclub {
-	background:#000;
-	margin:-3px
-}
-
-.backdrop {
-	background-image:url("http://goldservers.info/about/backdrop.png") !important
-}
-
 .chat-log-add, .battle-log-add {
     background: url("http://i.imgur.com/g83vifF.png");
 }
-
 .menugroup {
   background: url("http://i.imgur.com/vEduIJq.png");
 }
-
 .menugroup .menugroup{
 	text-align: center;
 }
-
 .userlist{
 	border-left:1px solid #D5DDE4;
 	background: #86f586;
 }
-
-.userlist li button:hover {
-	background:rgba(255,235,153,0.4)
-}
-
 .message-announce {
 	background:#47cb39;
 	outline: 1px solid red;
 }
-
 .pm-window h3 small  {
    color: #5e5e5e;
 }
-.userlist li em.group {
-	font-style:normal;
-	font-size:8pt;
-	color:#000;
-	display:block;
-	float:left;
-	text-align:center;
-	padding:1px 0 0 1px;
-	width:14px
-}
-
 .tabbar a.button {
     background: url("http://i.imgur.com/ajzvYbV.png");
 	color: black;
-  }
-
+}
 .tabbar a.button:hover {
 	background: url("http://i.imgur.com/WSrAVxz.png");
 	color: black;
 }
-
 .tabbar a.button.cur, .tabbar a.button.cur:hover {
 	background: url("http://i.imgur.com/g83vifF.png");
 	color: black;
 }
-
 .tabbar a.button.notifying, .tabbar a.button.notifying:hover {
 	background: url("http://i.imgur.com/CtoyG6B.png");
 }
-
 .maintabbarbottom {
 	background: url("http://i.imgur.com/eTEXz5K.png");
 }
-
 .closebutton:hover {
 	color: black;
 }
-
 .pm-window h3 {
     background: url("http://i.imgur.com/g83vifF.png");
 }
-
 .pm-window.focused h3, .pm-window.focused h3:hover {
     background: url("http://i.imgur.com/ajzvYbV.png");
 }
-
 .pm-log-add {
 	background: url("http://i.imgur.com/g83vifF.png");
 }
-
 .pad, .ps-popup, .pm-log, .ps-room.ps-room-opaque {
     background: url("http://i.imgur.com/Q8vHT0Y.png");
     overflow: auto;
 }
-
 .challenge {
 	background: url("http://i.imgur.com/CtoyG6B.png");
 	color: black;
 }
 */
 
-/* Halloween CSS */
 
-.header{
+/***************** 
+ * Halloween CSS *
+ ****************/
+.header {
 	background:url("http://i.imgur.com/F5pMH0a.png");
 }
-
-.header .logo {
-	display:none!important
-}
-
-.broadcast-purple {
-	background-color:#8904B1;
-	color:#fff;
-	padding:2px 4px
-}
-
-.broadcast-black {
-	padding:2px 4px
-}
-
-.broadcast-gold {
-	background-color:#FC0;
-	color:#000;
-	padding:2px 4px
-}
-
 body {
 	background:url("http://i.imgur.com/J4ALaW9.png") !important;
 }
-
-.backdrop {
-	background-image:url("http://goldservers.info/about/backdrop.png") !important
-}
-
-.userbar {
-	border:1px solid #000;
-	padding:5px;
-	background:#fff;
-	margin-top:-5px
-}
-
-.nightclub {
-	background:#000;
-	margin:-3px
-}
-
-.infobox {
-	border:1px solid #000;
-	padding:2px 4px;
-	background-color:#fff
-}
-
 .mainmenuwrapper {
 	background: url("http://i.imgur.com/iHubd1y.png") right bottom no-repeat;
 }
-
 .chat-log{
 	background: url("http://i.imgur.com/vcIHH5Y.png") right top no-repeat;
 }
-
 .chat-log-add, .pm-log-add, .pm-window h3 {
 	background:#fbb88e;
 }
-
 .pm-log{
 	background: url(http://i.imgur.com/Q8vHT0Y.png);
     border-width: 0;
 }
-
 .pm-window.focused h3, .pm-window.focused h3:hover {
 	background:#fbb88e;
 }
-
 .menugroup .button{
 	background:#5a11ff;
 }
-
 .menugroup .menugroup{
 	text-align:center;
 }
-
 .menugroup .button:hover {
 	background:#2d00f0;
 }
-
 .userlist{
 	border-left:0px;
 	background:#fbb88e;
 }
-
 .userlist li {
 	border-bottom: 1px solid #7a7877;
 }
-
-.userlist li button:hover {
-	background:rgba(255,235,153,0.4)
-}
-
-.userlist li em.group {
-	font-style:normal;
-	font-size:8pt;
-	color:#000;
-	display:block;
-	float:left;
-	text-align:center;
-	padding:1px 0 0 1px;
-	width:14px
-}
-
 .message-announce {
 	background:#000000;
 }
 
-/* Thanksgiving CSS */
+
+
+/********************
+ * Thanksgiving CSS *
+ *******************/
 /*
 .header {
 	background:#663300;
 }
-
 body {
 	background:url("http://i.imgur.com/J4ALaW9.png")!important
 }
-
-.userbar {
-	border:1px solid #000;
-	padding:5px;
-	background:#fff;
-	margin-top:-5px
-}
-
-.header .logo {
-	display:none!important
-}
-
-.backdrop {
-	background-image:url("http://goldservers.info/about/backdrop.png")!important
-}
-
-.infobox {
-	border:1px solid #000;
-	padding:2px 4px;
-	background-color:#fff
-}
-
 .mainmenuwrapper {
 	background:url("http://fc01.deviantart.net/fs70/f/2010/327/e/8/happy_thanksgiving_by_keijimatsu-d33hjzy.png") !important;
 }
-
-.broadcast-purple {
-	background-color:#8904B1;
-	color:#fff;
-	padding:2px 4px
-}
-
-.broadcast-black {
-	padding:2px 4px
-}
-
-.broadcast-gold {
-	background-color:#FC0;
-	color:#000;
-	padding:2px 4px
-}
-
 .menugroup {
 	background:url("https://img0.etsystatic.com/034/0/5573864/il_340x270.614801018_732b.jpg");
 	color:black
 }
-
 .chat-log-add,.pm-log-add,.pm-window h3 {
 	background:#CC9900
 }
-
 .pm-log {
 	background:url("http://i.imgur.com/Q8vHT0Y.png");
 	border-width:0
 }
-
 .pm-window.focused h3,.pm-window.focused h3:hover {
 	background:#fbb88e
 }
-
-.userlist li button:hover {
-	background:rgba(255,235,153,0.4)
-}
-
 .userlist{
 	border-left:1px solid #785936;
 	background:#FF9900 
 }
-
 .message-announce {
 	background:#CC6600
 }

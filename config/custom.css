@@ -327,7 +327,8 @@ body {
  *******************/
 /*
 .header {
-	background:#663300;
+	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
+	background-color:#663300;
 }
 body {
 	background:url("http://i.imgur.com/J4ALaW9.png")!important

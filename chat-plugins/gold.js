@@ -578,18 +578,6 @@ exports.commands = {
 		this.privateModCommand('|raw|<div class="broadcast-red"><b><font size=1><i>Private Auth (Driver +) declare from ' + user.name + '<br /></i></font size>' + target + '</b></div>');
 		this.logModCommand(user.name + ' mod declared ' + target);
 	},
-	hideuser: function(target, room, user, connection, cmd) {
-		if (!target) return this.sendReply('/hideuser [user] - Makes all prior messages posted by this user "poof" and replaces it with a button to see. Requires: @, &, ~');
-		if (!this.can('hotpatch')) return false;
-		try {
-			this.add('|unlink|hide|' + target);
-			Rooms.rooms.staff.add(target + '\'s messages have been hidden by ' + user.name);
-			this.logModCommand(target + '\'s messages have been hidden by ' + user.name);
-			this.sendReply(target + '\'s messages have been sucessfully hidden.');
-		} catch (e) {
-			this.sendReply("Something went wrong! Ahhhhhh!");
-		}
-	},
 	k: 'kick',
 	kick: function(target, room, user) {
 		if (!this.can('lock')) return false;

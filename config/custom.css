@@ -418,3 +418,82 @@ body {
 .message-announce {
 	background:#000000;
 }
+
+/* Thanksgiving CSS */
+/*
+.header {
+	background:#663300;
+}
+
+body {
+	background:url("http://i.imgur.com/J4ALaW9.png")!important
+}
+
+.userbar {
+	border:1px solid #000;
+	padding:5px;
+	background:#fff;
+	margin-top:-5px
+}
+
+.backdrop {
+	background-image:url("http://goldservers.info/about/backdrop.png")!important
+}
+
+.infobox {
+	border:1px solid #000;
+	padding:2px 4px;
+	background-color:#fff
+}
+
+.mainmenuwrapper {
+	background:url("http://fc01.deviantart.net/fs70/f/2010/327/e/8/happy_thanksgiving_by_keijimatsu-d33hjzy.png") !important;
+}
+
+.broadcast-purple {
+	background-color:#8904B1;
+	color:#fff;
+	padding:2px 4px
+}
+
+.broadcast-black {
+	padding:2px 4px
+}
+
+.broadcast-gold {
+	background-color:#FC0;
+	color:#000;
+	padding:2px 4px
+}
+
+.menugroup {
+	background:url("https://img0.etsystatic.com/034/0/5573864/il_340x270.614801018_732b.jpg");
+	color:black
+}
+
+.chat-log-add,.pm-log-add,.pm-window h3 {
+	background:#CC9900
+}
+
+.pm-log {
+	background:url("http://i.imgur.com/Q8vHT0Y.png");
+	border-width:0
+}
+
+.pm-window.focused h3,.pm-window.focused h3:hover {
+	background:#fbb88e
+}
+
+.userlist li button:hover {
+	background:rgba(255,235,153,0.4)
+}
+
+.userlist{
+	border-left:1px solid #785936;
+	background:#FF9900 
+}
+
+.message-announce {
+	background:#CC6600
+}
+*/

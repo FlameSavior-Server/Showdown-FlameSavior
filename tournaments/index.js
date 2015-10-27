@@ -97,6 +97,8 @@ Tournament = (function () {
 		this.availableMatchesCache = null;
 
 		this.pendingChallenges = null;
+		this.autoDisqualifyTimeout = Infinity;
+		this.autoDisqualifyTimer = null;
 
 		this.isEnded = false;
 
@@ -137,6 +139,7 @@ Tournament = (function () {
 
 	Tournament.prototype.forceEnd = function () {
 		if (this.isTournamentStarted) {
+			if (this.autoDisqualifyTimer) clearTimeout(this.autoDisqualifyTimer);
 			this.inProgressMatches.forEach(function (match) {
 				if (match) {
 					delete match.room.tour;
@@ -365,6 +368,7 @@ Tournament = (function () {
 			return false;
 		}
 
+		if (this.generator.generateBracket) this.generator.generateBracket();
 		this.generator.freezeBracket();
 
 		this.availableMatches = new Map();
@@ -383,7 +387,6 @@ Tournament = (function () {
 		}, this);
 
 		this.isTournamentStarted = true;
-		this.autoDisqualifyTimeout = Infinity;
 		if (this.autoStartTimeout) clearTimeout(this.autoStartTimeout);
 		this.isBracketInvalidated = true;
 		this.room.add('|tournament|start');
@@ -521,10 +524,6 @@ Tournament = (function () {
 	};
 
 	Tournament.prototype.setAutoDisqualifyTimeout = function (timeout, output) {
-		if (!this.isTournamentStarted) {
-			output.sendReply('|tournament|error|NotStarted');
-			return false;
-		}
 		if (timeout < AUTO_DISQUALIFY_WARNING_TIMEOUT || isNaN(timeout)) {
 			output.sendReply('|tournament|error|InvalidAutoDisqualifyTimeout');
 			return false;
@@ -537,7 +536,7 @@ Tournament = (function () {
 			this.room.add('|tournament|autodq|on|' + this.autoDisqualifyTimeout);
 		}
 
-		this.runAutoDisqualify();
+		if (this.isTournamentStarted) this.runAutoDisqualify();
 		return true;
 	};
 	Tournament.prototype.runAutoDisqualify = function (output) {
@@ -545,6 +544,7 @@ Tournament = (function () {
 			output.sendReply('|tournament|error|NotStarted');
 			return false;
 		}
+		if (this.autoDisqualifyTimer) clearTimeout(this.autoDisqualifyTimer);
 		this.lastActionTimes.forEach(function (time, user) {
 			var availableMatches = false;
 			if (this.availableMatches.get(user).size) availableMatches = true;
@@ -569,6 +569,7 @@ Tournament = (function () {
 				this.isAutoDisqualifyWarned.set(user, false);
 			}
 		}, this);
+		if (this.autoDisqualifyTimeout !== Infinity && !this.isEnded) this.autoDisqualifyTimer = setTimeout(this.runAutoDisqualify.bind(this), this.autoDisqualifyTimeout);
 	};
 
 	Tournament.prototype.challenge = function (from, to, output) {
@@ -753,21 +754,15 @@ Tournament = (function () {
 
 		var tourSize = this.generator.users.size;
 		if (this.room.isOfficial && tourSize >= 3) {
-			var money = 1;
-			if (tourSize == 4) money = 2;
-			if (tourSize == 5) money = 3;
-			if (tourSize == 6) money = 4;
-			if (tourSize >= 7 && tourSize < 15) money = 5;
-			if (tourSize > 14) money = 6;
-			var buck = 'buck';
-			var self = this;
+			var money = (tourSize < 50 ? tourSize : 50);
+			var buck = "bucks";
 
-			if (money > 1) buck = 'bucks';
 			try {
 				this.room.add('|raw|<b><font color=' + Gold.hashColor(toId(winner)) + '>' + Tools.escapeHTML(winner) + '</font> has won <font color=#24678d>'+money+'</font> '+buck+' for winning the tournament!</b>');
 				economy.writeMoney('money', toId(winner), money);
 			} catch (e) {}
 		}
+		if (this.autoDisqualifyTimer) clearTimeout(this.autoDisqualifyTimer);
 		delete exports.tournaments[this.room.id];
 	};
 

@@ -155,6 +155,19 @@
 	color:#000
 }
 
+.userlist li button {
+	display:block;
+	height:auto;
+	background:transparent;
+	border:0;
+	padding:0;
+	margin:0;
+	width:100%;
+	white-space:nowrap;
+	font:10pt Verdana,sans-serif;
+	text-align:left
+}
+
 
 
 /*********************
@@ -186,18 +199,6 @@ body {
 	height:19px;
 	font:10pt Verdana,sans-serif;
 	white-space:nowrap
-}
-.userlist li button {
-	display:block;
-	height:auto;
-	background:transparent;
-	border:0;
-	padding:0;
-	margin:0;
-	width:100%;
-	white-space:nowrap;
-	font:10pt Verdana,sans-serif;
-	text-align:left
 }
 */
 

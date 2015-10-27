@@ -545,8 +545,8 @@ exports.commands = {
 		if (!this.can('pban')) return false;
 		if (room.id !== 'lobby') return this.errorReply("This command can only be used in the Lobby by leaders and up.");
 		if (!this.canTalk()) return;
-		var parts = target.split(',');
-		if (!parts[1]) return this.errorReply("Usage: /advdeclare [advertisement], [room]");
+		var parts = target.split('|');
+		if (!parts[1]) return this.errorReply("Usage: /advdeclare [advertisement]| [room]");
 		var adRoom = (Rooms(toId(parts[1])) ? toId(parts[1]) : false);
 		if (!adRoom) return this.errorReply("That room does not exist.  Check spelling?");
 		var adv = (

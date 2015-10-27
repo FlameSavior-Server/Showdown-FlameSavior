@@ -148,13 +148,11 @@
 .header .logo {
 	display:none!important
 }
-
 .chat small {
 	font-weight:400;
 	font-size:8pt;
 	color:#000
 }
-
 .userlist li button {
 	display:block;
 	height:auto;

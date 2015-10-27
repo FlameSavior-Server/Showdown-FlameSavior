@@ -146,4 +146,4 @@ exports.commands = {
 		if (skipCmd) room.add('|html|The current session of panagram has been ended by ' + user.name + '. The answer was <b>' + pGames[room.id].answer.species + '</b>.');
 		pGames[room.id].end(!skipCmd);
 	}
-}
+};

@@ -82,7 +82,7 @@ exports.commands = {
 				var rank = row[i].split(',')[1].replace("\r", '');
 				var person = row[i].split(',')[0];
 				function nameColor (name) {
-					if (Users.getExact(name)) {
+					if (Users.getExact(name) && Users(name).connected) {
 						return '<b><i><font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(Users.getExact(name).name) + '</font></i></b>';
 					} else {
 						return '<font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(name) + '</font>';
@@ -118,29 +118,6 @@ exports.commands = {
 				'<br /><br />(Bold / italic = currently online)'
 			);
 		});
-	},
-	testauth: function (target, room, user, connection) {
-		var rankLists = {};
-		var ranks = Object.keys(Config.groups);
-		for (var u in Users.usergroups) {
-			var rank = Users.usergroups[u].charAt(0);
-			// In case the usergroups.csv file is not proper, we check for the server ranks.
-			if (ranks.indexOf(rank) > -1) {
-				var name = Users.usergroups[u].substr(1);
-				if (!rankLists[rank]) rankLists[rank] = [];
-				if (name) rankLists[rank].push(((Users.getExact(name) && Users.getExact(name).connected) ? '**' + name + '**' : name));
-			}
-		}
-
-		var buffer = [];
-		Object.keys(rankLists).sort(function (a, b) {
-			return (Config.groups[b] || {rank: 0}).rank - (Config.groups[a] || {rank: 0}).rank;
-		}).forEach(function (r) {
-			buffer.push((Config.groups[r] ? r + Config.groups[r].name + "s (" + rankLists[r].length + ")" : r) + ":\n" + rankLists[r].sort().join(", "));
-		});
-
-		if (!buffer.length) buffer = "This server has no auth.";
-		connection.popup(buffer.join("\n\n"));
 	},
 	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {

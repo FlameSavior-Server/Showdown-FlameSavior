@@ -913,7 +913,7 @@ var commands = exports.commands = {
 		var name = this.targetUsername;
 		var userid = toId(name);
 
-		if (this.targetUser === room.founder || room.auth[this.targetUser] === '#' && !user.can('pban')) return this.sendReply("Room founders / owners cannot be banned.");
+		if (this.targetUser.can('pban')) return this.errorReply("Global upper staff cannot be room banned.");
 		if (!userid || !targetUser) return this.errorReply("User '" + name + "' does not exist.");
 
 		if (target.length > MAX_REASON_LENGTH) {

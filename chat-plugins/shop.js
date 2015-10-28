@@ -34,11 +34,11 @@ exports.commands = {
 			return this.sendReply('|raw|' +
 				top +
 				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", 5) +
+				table("Fix", "Ability to modify a trainer card, music box, or custom emoticon.", 30) +
 				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
-				table("Trainer", "Gives you a custom command - you provide the HTML and command name", 100) +
-				table("Fix", "Ability to modify a trainer card, music box, or custom emoticon.", 30) +
 				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 70) +
+				table("Trainer", "Gives you a custom command - you provide the HTML and command name", 100) +
 				table("Musicbox", "A command that lists / links 6 of your favorite songs", 115) +
 				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 500) +
 				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 1000) +

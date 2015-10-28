@@ -16,19 +16,6 @@ function logTransaction (message) {
 	if (!message) return false;
 	fs.appendFile('logs/transactions.log','['+new Date().toUTCString()+'] '+message+'\n');
 }
-/*
-Gold.shop = [
-	["Sybmol", "Buys a custom symbol to go infront of name and puts you at top of userlist (temporary until restart)", 5],
-	["Custom", "Buys a custom avatar to be applied to your name (you supply)", 35],
-	["Animated", "Buys an animated avatar to be applied to your name (you supply)", 45],
-	["Trainer", "Buys a trainer card which shows information through a command (just make all the HTML for it in one pastebin and send that to a leader or administrator) such as /panpawn (note: fourth image costs 10 bucks extra, ask for more details)", 60],
-	["Fix", "Buys the ability to alter your trainer card, music box or custom emote (don't buy if you have neither)! (NOTE: No longer fixes avatars; those have to be rebought!)", 15],
-	["Declare", "You get the ability to get one declare from an Admin or Leader in the lobby. This can be used for room advertisement (not server)", 25],
-	["Musicbox", "It's a command that's similar to a trainer card, but with links to your favorite songs! You can have up to 6 songs per music box. (must be appropriate).", 70]
-	["Emote", "This buys you a custom chat emote, such as \"Kappa\", for example. The size of this must be 30x30 and must be appropriate.", 200],
-	["Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 500]
-];
-*/
 
 exports.commands = {
     	shop: function(target, room, user) {
@@ -49,12 +36,12 @@ exports.commands = {
 				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", 5) +
 				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
-				table("Trainer", "Gives you a custom command - you provide the HTML and command name", 60) +
-				table("Fix", "Ability to modify a trainer card, music box, or custom emoticon.", 15) +
-				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 25) +
-				table("Musicbox", "A command that lists / links 6 of your favorite songs", 70) +
-				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 200) +
-				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 800) +
+				table("Trainer", "Gives you a custom command - you provide the HTML and command name", 100) +
+				table("Fix", "Ability to modify a trainer card, music box, or custom emoticon.", 30) +
+				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 70) +
+				table("Musicbox", "A command that lists / links 6 of your favorite songs", 115) +
+				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 500) +
+				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 1000) +
 				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1500) +
 				bottom
 			);
@@ -209,7 +196,7 @@ exports.commands = {
 
 			case 'color':
 			case 'customcolor':
-				price = 500;
+				price = 1000;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy color, [hex code OR name of an alt you want the color of]");
 				if (parts[1].length > 20) return this.errorReply("This is not a valid color, try again.");
@@ -220,7 +207,7 @@ exports.commands = {
 
 			case 'emote':
 			case 'emoticon':
-				price = 200;
+				price = 500;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1] || !parts[2]) return this.errorReply("Usage: /buy emote, [emote code], [image for the emote]");
 				var emoteFilepaths = ['.png', '.jpg', '.gif'];
@@ -246,7 +233,7 @@ exports.commands = {
 
 			case 'trainer':
 			case 'trainercard':
-				price = 60;
+				price = 100;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased a trainer card.', true);
@@ -255,7 +242,7 @@ exports.commands = {
 
 			case 'mb':
 			case 'musicbox':
-				price = 70;
+				price = 115;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased a music box.', true);
@@ -263,17 +250,18 @@ exports.commands = {
 				break;
 
 			case 'fix':
-				price = 15;
-				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
+				price = 30;
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
+				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased a fix from the shop.', true);
 				user.canFixItem = true;
 				this.sendReply("You have purchased a fix from the shop.  You can use this to alter your trainer card, music box, or custom chat emoticon.  PM a leader or administrator to proceed.");
 				break;
 
+			case 'ad':
 			case 'declare':
-				price = 25;
+				price = 70;
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);

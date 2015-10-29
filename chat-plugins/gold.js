@@ -344,7 +344,7 @@ exports.commands = {
 			}
 			nonOfficial.push('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')');
 		}
-		this.sendReplyBox(header + official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' ') + groupChats.join(' '));
+		this.sendReplyBox(header + official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' ') + (groupChats.length > 1 ? groupChats.join(' ') : ''));
     },
 	mt: 'mktour',
 	mktour: function(target, room, user) {

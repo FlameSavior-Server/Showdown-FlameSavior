@@ -325,7 +325,7 @@ exports.commands = {
 		nonOfficial = ['<hr><b><font color="#000b5e" size="2">Public chat rooms:</font></b><br />'],
 		privateRoom = ['<hr><b><font color="#8BA41E" size="2">Private chat rooms:</font></b><br />'],
 		groupChats = ['<hr><b><font color="#740B53" size="2">Group Chats:</font></b><br />'],
-		battleRooms = ['<hr><b><font color="#8BA41E" size="2">Battle Rooms:</font></b><br />'];
+		battleRooms = ['<hr><b><font color="#0191C6" size="2">Battle Rooms:</font></b><br />'];
 	 
 		while (len--) {
 			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];

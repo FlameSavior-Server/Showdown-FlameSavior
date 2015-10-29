@@ -161,7 +161,7 @@ exports.commands = {
 			if (!desc) desc = '';
 			if (economy.readMoney(user.userid) < price) return false; //this should never happen
 			if (economy.readMoney(user.userid) >= price) {
-				economy.writeMoney('money',user.userid,-price);
+				economy.writeMoney('money', user.userid, -price);
 				logTransaction(user.name + ' has purchased a(n) ' + item + '. ' + desc);
 			}
 		}
@@ -275,8 +275,8 @@ exports.commands = {
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[4]) return this.errorReply("Usage: /buy icon, [32x32 icon image], [room1], [room2], [room3]");
-				var filepaths = ['.png', '.jpg', '.gif'];
-				if (!~filepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a custom userlist icon must be a PNG, JPG, or GIF.");
+				var iconFilepaths = ['.png', '.jpg', '.gif'];
+				if (!~iconFilepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a custom userlist icon must be a PNG, JPG, or GIF.");
 				var room1 = (Rooms(toId(parts[2])) ? toId(parts[2]) : false);
 				var room2 = (Rooms(toId(parts[3])) ? toId(parts[3]) : false);
 				var room3 = (Rooms(toId(parts[4])) ? toId(parts[4]) : false);

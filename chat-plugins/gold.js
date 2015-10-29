@@ -330,7 +330,7 @@ exports.commands = {
 		while (len--) {
 			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
 			if (_room.type === 'battle') {
-				battleRooms.push('<a href="/ ' + _room.id + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')');
+				battleRooms.push('<a href="/' + _room.id + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')');
 			}
 			if (_room.type === 'chat') {
 				if (_room.isPersonal) {

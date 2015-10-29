@@ -328,7 +328,7 @@ exports.commands = {
 	 
 		while (len--) {
 			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
-			if (_room.type === 'chat' || !_room.isPersonal) {
+			if (_room.type === 'chat') {
 				if (_room.isPersonal) {
 					groupChats.push('<a href="/' + _room.id + '" class="ilink">' + _room.id + '</a> (' + _room.userCount + ')');
 					continue;

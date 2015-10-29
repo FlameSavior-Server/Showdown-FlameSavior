@@ -323,11 +323,15 @@ exports.commands = {
 		header = ['<b><font color="#DA9D01" size="2">Total users connected: ' + totalUsers + '</font></b><br />'],
 		official = ['<b><font color="#1a5e00" size="2">Official chat rooms:</font></b><br />'],
 		nonOfficial = ['<hr><b><font color="#000b5e" size="2">Public chat rooms:</font></b><br />'],
-		privateRoom = ['<hr><b><font color="#5e0019" size="2">Private chat rooms:</font></b><br />'],
-		groupChats = ['<hr><b><font color="#740B53" size="2">Group Chats:</font></b><br />'];
+		privateRoom = ['<hr><b><font color="#8BA41E" size="2">Private chat rooms:</font></b><br />'],
+		groupChats = ['<hr><b><font color="#740B53" size="2">Group Chats:</font></b><br />'],
+		battleRooms = ['<hr><b><font color="#8BA41E" size="2">Battle Rooms:</font></b><br />'];
 	 
 		while (len--) {
 			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
+			if (_room.type === 'battle') {
+				battleRooms.push('<a href="/ ' + _room.id + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')');
+			}
 			if (_room.type === 'chat') {
 				if (_room.isPersonal) {
 					groupChats.push('<a href="/' + _room.id + '" class="ilink">' + _room.id + '</a> (' + _room.userCount + ')');
@@ -344,7 +348,7 @@ exports.commands = {
 			}
 			nonOfficial.push('<a href="/' + toId(_room.title) + '" class="ilink">' + _room.title + '</a> (' + _room.userCount + ')');
 		}
-		this.sendReplyBox(header + official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' ') + (groupChats.length > 1 ? groupChats.join(' ') : ''));
+		this.sendReplyBox(header + official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' ') + (groupChats.length > 1 ? groupChats.join(' ') : '') + (battleRooms.length > 1 ? battleRooms.join(' ') : ''));
     },
 	mt: 'mktour',
 	mktour: function(target, room, user) {

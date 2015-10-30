@@ -1230,6 +1230,9 @@ User = (function () {
 		}
 	};
 	User.prototype.onDisconnect = function (connection) {
+		try {
+			updateSeen(this.userid);
+		} catch (e) { }
 		for (var i = 0; i < this.connections.length; i++) {
 			if (this.connections[i] === connection) {
 				// console.log('DISCONNECT: ' + this.userid);
@@ -1450,7 +1453,7 @@ User = (function () {
 		if (room.id === 'global' && !force) {
 			// you can't leave the global room except while disconnecting
 			try {
-				updateSeen(name);
+				updateSeen(this.userid);
 			} catch (e) {}
 
 			return false;

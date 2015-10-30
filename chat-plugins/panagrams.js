@@ -71,12 +71,9 @@ var Panagram = (function () {
 	Panagram.prototype.end = function (forced) {
 		if (forced) this.room.add('|html|The game of panagram has been forcibly ended. The answer was <b>' + this.answer.species + '</b>.');
 		if (this.sessions > 1 && !forced) {
-			setTimeout(function () {
-				pGames[this.room.id] = new Panagram(this.room, this.sessions - 1);
-				this.room.update();
-			}.bind(this), 500); //half a second
-		}
-		else {
+			pGames[this.room.id] = new Panagram(this.room, this.sessions - 1);
+			this.room.update();
+		} else {
 			this.room.chat = Rooms.Room.prototype.chat;
 			delete pGames[this.room.id];
 		}
@@ -106,7 +103,6 @@ exports.commands = {
 		if (!this.can('ban', null, room)) return this.errorReply("You must be ranked @ or higher to start a game of panagram in this room.");
 		if (room.id !== 'gamechamber') return this.sendReply('|html|You can only start a game of Panagram in the <button name = "send" value = "/join gamechamber">Game Chamber</button>');
 		if (!target || isNaN(target)) return this.errorReply("Usage: /panagram [number of sessions]");
-		if (target < 1) return this.errorReply("You cannot set the number of sessions to anything less than 1.");
 		if (target < 150) return this.errorReply("The minimum number of sessions you can have at a time is 150.");
 		if (~target.indexOf('.')) return this.errorReply("The number of sessions cannot be a decimal value.");
 

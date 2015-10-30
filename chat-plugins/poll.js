@@ -238,7 +238,7 @@ exports.commands = {
 				room.poll.end();
 				delete room.poll;
 			}), (timeout * 60000));
-			return this.privateModCommand("(The timeout was set to " + timeout + " minutes by " + user.name + ".)");
+			return this.privateModCommand("(The poll timeout was set to " + timeout + " minutes by " + user.name + ".)");
 		},
 		timerhelp: ["/poll timer [minutes] - Sets the poll to automatically end after [minutes] minutes. Requires: % @ # & ~"],
 

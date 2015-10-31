@@ -15,13 +15,6 @@ function loadReports() {
 loadReports();
 
 function saveReports() {
-	for (var u in Object.keys(Reports)) {
-		var currentReport = Reports[Object.keys(Reports)[u]];
-		var seconds = Math.floor(((Date.now() - currentReport.reportTime) / 1000));
-		var minutes = Math.floor((seconds / 60));
-		var hours = Math.floor((minutes / 60));
-		if (hours > 12) delete Reports[currentReport];
-	}
 	fs.writeFile('config/reports.json', JSON.stringify(Reports));
 }
 

@@ -34,6 +34,8 @@ function pmUpperStaff(message) {
 }
 
 exports.commands = {
+    complain: 'requesthelp',
+    bitch: 'requesthelp',
 	report: 'requesthelp',
 	requesthelp: function (target, room, user) {
 		if (user.can('pban')) return this.parse('/reports ' + (target || ''));

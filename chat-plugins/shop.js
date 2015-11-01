@@ -457,6 +457,7 @@ exports.commands = {
 		user.hasCustomSymbol = true;
 		return this.sendReply("Your symbol has been set.");
 	},
+	/*
 	halloween: function(target, room, user) {
 		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
 		if (!this.canTalk()) return;
@@ -471,6 +472,7 @@ exports.commands = {
 		user.hasCustomSymbol = true;
 		return this.sendReply("Happy Halloween! ☠");
 	},
+	*/
 	rs: 'resetsymbol',
 	resetsymbol: function(target, room, user) {
 		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');

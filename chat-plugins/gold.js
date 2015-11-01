@@ -193,15 +193,16 @@ exports.commands = {
 		user.updateIdentity();
 		this.sendReply('You are now hiding your auth symbol as \'' + tar + '\'.');
 		this.logModCommand(user.name + ' is hiding auth symbol as \'' + tar + '\'');
+		user.isHiding = true;
 	},
 	show: 'showauth',
 	showauth: function(target, room, user) {
 		if (!user.can('lock')) return this.sendReply("/showauth - access denied.");
 		delete user.getIdentity;
 		user.updateIdentity();
+		user.isHiding = false;
 		this.sendReply("You have now revealed your auth symbol.");
 		return this.logModCommand(user.name + " has revealed their auth symbol.");
-		this.sendReply("Your symbol has been reset.");
 	},
 	pb: 'permaban',
 	pban: 'permaban',

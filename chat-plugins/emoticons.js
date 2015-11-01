@@ -43,7 +43,8 @@ Gold.emoticons = {
 				match;
 		});
 	},
-	checkEmoteModchat: function(user, room, connection) {
+	checkEmoteModchat: function(user, room) {
+		user = Users(user);
 		var rank = (user.getIdentity(room).substr(0,1) === user.group ? user.group : user.getIdentity(room).substr(0,1));
 		switch (room.emoteModChat) {
 			case undefined:
@@ -132,12 +133,12 @@ Gold.emoticons = {
 				Users.ShadowBan.addMessage(user, "To " + room, origmsg);
 				break;
 			case false:
-				if (!this.checkEmoteModchat(Users(user), room, connection)) {
+				if (!this.checkEmoteModchat(user, room)) {
 					kitty = message = this.processEmoticons(message);
 					var message = Tools.escapeHTML(kitty);
 					return (message);
 					return;
-				} else if (this.checkEmoteModchat(Users(user), room, connection)) {
+				} else if (this.checkEmoteModchat(user, room)) {
 					if (!match || message.charAt(0) === '!') return true;
 					message = Tools.escapeHTML(message);
 					message = this.processEmoticons(message);

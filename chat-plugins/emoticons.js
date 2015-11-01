@@ -6,12 +6,13 @@
  * Credits: panpawn
  *
  * Features:
- * - Emoticon Moderated chat (for chat and battle rooms)
+ * - Emoticon Moderated chat based on rank (for chat rooms)
  * - Command based adding and removing of emoticons
  * - Saves the emote moderated chat status in each chat room on restart
  * - Checks if a user is shadowbanned and reacts accordingly
- * - Does not require server-side CSS (custom.css) elements for usernames
+ * - Does not require server-side CSS (./config/custom.css) elements for usernames
  * - Checks the number of chat emoticons in one message and won't parse if it is more than Gold.emoticons.maxChatEmotes
+ * - Administrators can toggle how many emoticons users can do in their messages with a command
  * - Now parses for PS formats such as bold, italics, and strikethrough
  * - PMs emoticons
  */

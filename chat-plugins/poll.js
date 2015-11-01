@@ -64,7 +64,8 @@ var Poll = (function () {
 
 	Poll.prototype.generateResults = function (ended) {
 		var icon = '<span style="border:1px solid #' + (ended ? '777;color:#555' : '6A6;color:#484') + ';border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> ' + (ended ? "Poll ended" : "Poll") + '</span>';
-		var output = '<div class="infobox"><p style="margin: 2px 0 5px 0">' + icon + ' <strong style="font-size:11pt">' + Tools.escapeHTML(this.question) + '</strong></p>';
+		var totalVotes = '<p align="left">[Total Votes: ' + this.totalVotes + ']</p>';
+		var output = '<div class="infobox"><p style="margin: 2px 0 5px 0">' + icon + ' <strong style="font-size:11pt">' + Tools.escapeHTML(this.question) + '</strong></p>' + totalVotes;
 		var iter = this.options.entries();
 
 		var i = iter.next();

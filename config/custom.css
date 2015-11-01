@@ -284,6 +284,7 @@ body {
 /***************** 
  * Halloween CSS *
  ****************/
+ /*
 .header {
 	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
 	background-color:#551a8b;
@@ -326,13 +327,13 @@ body {
 .message-announce {
 	background:#000000;
 }
-
+*/
 
 
 /********************
  * Thanksgiving CSS *
  *******************/
-/*
+
 .header {
 	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
 	background-color:#663300;
@@ -341,7 +342,7 @@ body {
 	background:url("http://i.imgur.com/J4ALaW9.png")!important
 }
 .chat-log{
-	background: url("http://i.imgur.com/PrJl4qq.png") right top no-repeat;
+	background: url("http://i.imgur.com/BvPRMgh.png") right top no-repeat;
 }
 .mainmenuwrapper {
 	background:url("http://fc01.deviantart.net/fs70/f/2010/327/e/8/happy_thanksgiving_by_keijimatsu-d33hjzy.png") !important;
@@ -367,7 +368,7 @@ body {
 .message-announce {
 	background:#CC6600
 }
-*/
+
 
 
 /*************************

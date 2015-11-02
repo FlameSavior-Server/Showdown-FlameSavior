@@ -56,55 +56,19 @@ Gold.emoticons = {
 				rank = (user.autoconfirmed ? true : false);
 				return rank;
 				break;
-			case '★':
-				if (rank === '★' || rank === '+' || rank === '%' || rank === '@' || rank === '&' || rank === '#' || rank === '~') {
-					return true;
-				} else {
-					return false;
+			default:
+				// i = rank number of the user
+				// u = rank number of modchat
+				groups = Config.groupsranking.length;
+				while (groups--) {
+					if (rank === Config.groupsranking[groups]) {
+						var i = Number(groups);
+					}
+					if (room.emoteModChat === Config.groupsranking[groups]) {
+						var u = Number(groups);
+					}
 				}
-				break;
-			case '+':
-				if (rank === '+' || rank === '%' || rank === '@' || rank === '&' || rank === '#' || rank === '~') {
-					return true;
-				} else {
-					return false;
-				}
-				break;
-			case '%':
-				if (rank === '%' || rank === '@' || rank === '&' || rank === '#' || rank === '~') {
-					return true;
-				} else {
-					return false;
-				}
-				break;
-			case '@':
-				if (rank === '@' || rank === '&' || rank === '#' || rank === '~') {
-					return true;
-				} else {
-					return false;
-				}
-				break;
-			case '&':
-				if (rank === '&' || rank === '#' || rank === '~') {
-					return true;
-				} else {
-					return false;
-				}
-				break;
-			case '#':
-				if (rank === '#' || rank === '~') {
-					return true;
-				} else {
-					return false;
-				}
-				break;
-			case '~':
-				if (rank === '~') {
-					return true;
-				} else {
-					return false;
-				}
-				break;
+				if (i >= u) return true;
 		}
 		return false;
 	},

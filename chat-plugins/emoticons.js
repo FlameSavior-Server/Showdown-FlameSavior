@@ -44,8 +44,7 @@ Gold.emoticons = {
 		});
 	},
 	checkEmoteModchat: function(user, room) {
-		// is a staff hiding auth, use their global rank... if they aren't hiding authority and their room rank matches global, use global, otherwise use room rank
-		var rank = (user.isHiding ? user.group : (user.getIdentity(room).substr(0,1) === user.group ? user.group : user.getIdentity(room).substr(0,1)));
+		var rank = (user.group !== ' ' ? user.group : (room.auth ? room.auth[user.userid] : user.group));
 		switch (room.emoteModChat) {
 			case undefined:
 			case false:
@@ -53,8 +52,7 @@ Gold.emoticons = {
 				break;
 			case 'ac':
 			case 'autoconfirmed':
-				rank = (user.autoconfirmed ? true : false);
-				return rank;
+				return (user.autoconfirmed ? true : false);
 				break;
 			default:
 				groups = Config.groupsranking.length;

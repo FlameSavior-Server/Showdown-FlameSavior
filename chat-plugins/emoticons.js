@@ -1,11 +1,11 @@
 /* Emoticons Plugin
- * This is a chat-plugin for Emoticons
- * You will need a line in parser to actually 
- * parse this so that it works. (See command-parser.js)
- * Also, you will need a few lines for the PM command to make it work in PMs.
+ * This is a chat-plugin for an Emoticons system on PS
+ * You will need a line in parser to actually  parse 
+ * this so that it works.  Also, you will need need to 
+ * add a few lines to the PM command.
  * Credits: panpawn
  *
- * Features:
+ * Current Features:
  * - Emoticon Moderated chat based on rank (for chat rooms)
  * - Command based adding and removing of emoticons
  * - Saves the emote moderated chat status in each chat room on restart
@@ -57,15 +57,13 @@ Gold.emoticons = {
 				return rank;
 				break;
 			default:
-				// i = rank number of the user
-				// u = rank number of modchat
 				groups = Config.groupsranking.length;
 				while (groups--) {
 					if (rank === Config.groupsranking[groups]) {
-						var i = Number(groups);
+						var i = Number(groups); // rank # of the user
 					}
 					if (room.emoteModChat === Config.groupsranking[groups]) {
-						var u = Number(groups);
+						var u = Number(groups); // rank # of emoticon modchat
 					}
 				}
 				if (i >= u) return true;
@@ -143,7 +141,7 @@ Gold.emoticons = {
 };
 
 
-//commands
+// commands
 
 function loadEmotes() {
 	try {
@@ -219,7 +217,6 @@ exports.commands = {
 
 				case 'view':
 					if (!this.canBroadcast()) return;
-					//if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					var name = Object.keys(Gold.emoticons.chatEmotes);
 					emoticons = [];
 					var len = name.length;

@@ -154,14 +154,15 @@ exports.commands = {
 				}.bind(this));
 				break;
 
-				case 'reload':
-					if (!this.can('hotpatch')) return this.errorReply("Access denied.");
-					reloadCustomAvatars();
-					for (var u in Users.users) { 
-						if (Config.customavatars[u]) Users.users[u].avatar = Config.customavatars[u];
-					}
-					this.sendReply("Avatars have been reloaded.");
-					break;
+			case 'reload':
+				if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+				reloadCustomAvatars();
+				for (var u in Users.users) { 
+					if (Config.customavatars[u]) Users.users[u].avatar = Config.customavatars[u];
+				}
+				this.sendReply("Avatars have been reloaded.");
+				break;
+
 			default:
 				return this.sendReply("Invalid command. Valid commands are `/customavatar set, user, avatar` and `/customavatar delete, user`.");
 		}

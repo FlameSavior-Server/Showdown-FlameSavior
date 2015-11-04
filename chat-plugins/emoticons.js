@@ -307,5 +307,9 @@ exports.commands = {
 		} catch (e) {
 			console.log("ERROR!  The Emoticon script has crashed!\n" + e.stack);
 		}
+	},
+	emoticonlist: 'emotelist',
+	emotelist: function(target, room, user) {
+		return this.errorReply("Try /emote view instead.");
 	}
 };

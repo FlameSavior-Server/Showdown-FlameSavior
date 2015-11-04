@@ -3,33 +3,152 @@
  * based on the userid.
 */
 
-if (typeof Gold === 'undefined') global.Gold = {};
 var MD5 = require('MD5');
 var colorCache = {};
 
-Object.merge(Gold, {
-	hashColor: function(name) {
-		name = toId(name);
-		if (colorCache[name]) return colorCache[name];
-		var hash = MD5(name);
-		var H = parseInt(hash.substr(4, 4), 16) % 360;
-		var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
-		var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
-		var rgb = hslToRgb(H, S, L);
-		colorCache[name] = "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
-		try {
-			switch (toId(name)) {
-				case 'panpawn':
-					return colorCache[name] = '#DA9D01';
-					break;
-				default:
-					return colorCache[name];
-			}
-		} catch (e) {
-			return this.sendReply("Something with hashColor broke: \n" + e.stack);
-		}
-	}
-});
+// hashColor function
+
+function hashColor(name) {
+	name = toId(name);
+	if (mainCustomColors[name]) name = mainCustomColors[name];
+	if (colorCache[name]) return colorCache[name];
+	var hash = MD5(name);
+	var H = parseInt(hash.substr(4, 4), 16) % 360;
+	var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
+	var L = Math.floor(parseInt(hash.substr(8, 4), 16) % 20 / 2 + 30);
+	var rgb = hslToRgb(H, S, L);
+	colorCache[name] = "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
+	return colorCache[name];
+}
+Gold.hashColor = hashColor;
+
+// Mains custom username colors
+var mainCustomColors = {
+	'theimmortal': 'taco',
+	'bmelts': 'testmelts',
+	'zarel': 'aeo',
+	'zarell': 'aeo',
+	'greatsage': 'test454',
+	'snowflakes': 'snowflake',
+	'jumpluff': 'zacchaeus',
+	'zacchaeus': 'jumpluff',
+	'kraw': 'kraw1',
+	'growlithe': 'steamroll',
+	'snowflakes': 'endedinariot',
+	'doomvendingmachine': 'theimmortal',
+	'mikel': 'mikkel',
+	'arcticblast': 'rsem',
+	'mjb': 'thefourthchaser',
+	'thefourthchaser': 'mjb',
+	'tfc': 'mjb',
+	'mikedecishere': 'mikedec3boobs',
+	'heartsonfire': 'haatsuonfaiyaa',
+	'royalty': 'wonder9',
+	// 'osiris': 'yamraiha',
+	'limi': 'azure2',
+	'haunter': 'cathy',
+	'ginganinja': 'piratesandninjas',
+	'aurora': 'c6n6fek',
+	'jdarden': 'danielcross',
+	'solace': 'amorlan',
+	'dcae': 'galvatron',
+	'queenofrandoms': 'hahaqor',
+	'jelandee': 'thejelandee',
+	'diatom': 'dledledlewhooop',
+	'waterbomb': 'wb0',
+	'texascloverleaf': 'aggronsmash',
+	'treecko': 'treecko56',
+	'treecko37': 'treecko56',
+	'violatic': 'violatic92',
+	'exeggutor': 'ironmanatee',
+	'ironmanatee': 'exeggutor',
+	// 'shamethat': 'aaa10',
+	'skylight': 'aerithass',
+	// 'prem': 'premisapieceofshit',
+	'goddessbriyella': 'jolteonxvii', // third color change
+	'nekonay': 'catbot20',
+	'coronis': 'kowonis',
+	'vaxter': 'anvaxter',
+	'mattl': 'mattl34',
+	'shaymin': 'test33',
+	// 'orphic': 'dmt6922',
+	'kayo': 'endedinariot',
+	'tgmd': 'greatmightydoom',
+	'vacate': 'vaat111111111',
+	'bean': 'dragonbean',
+	'yunan': 'osiris13',
+	'politoed': 'brosb4hoohs',
+	'scotteh': 'nsyncluvr67',
+	'bumbadadabum': 'puckerluvr69',
+	'yuihirasawa': 'weeabookiller',
+	'monohearted': 'nighthearted',
+	'prem': 'erinanakiri', // second color change
+	'clefairy': 'fuckes',
+	'morfent': 'aaaa',
+	'crobat': 'supergaycrobat4',
+	'beowulf': '298789z7z',
+	'flippy': 'flippo',
+	'raoulsteve247': 'raoulbuildingpc',
+	'thedeceiver': 'colourtest011',
+	'darnell': 'ggggggg',
+	'shamethat': 'qpwkfklkjpskllj', // second color change
+	'aipom': 'wdsddsdadas',
+	'alter': 'spakling',
+	'biggie': 'aoedoedad',
+	'osiris': 'osiris12', // second color change
+	'azumarill': 'azumarill69',
+	'redew': 'redeww',
+	'sapphire': 'masquerains',
+	'calyxium': 'calyxium142',
+	'kiracookie': 'kracookie',
+	'blitzamirin': 'hikaruhitachii',
+	'skitty': 'shckieei',
+	'sweep': 'jgjjfgdfg', // second color change
+	'panpawn': 'crowt',
+	'val': 'pleasegivemecolorr',
+	'valentine': 'pleasegivemecolorr',
+	'briayan': 'haxorusxi',
+	'xzern': 'mintycolors',
+	'shgeldz': 'cactusl00ver',
+	'abra': 'lunchawaits',
+	'maomiraen': 'aaaaaa',
+	'trickster': 'sunako',
+	'articuno': 'bluekitteh177',
+	// 'antemortem': 'abc11092345678',
+	'scene': 'aspire',
+	'barton': 'hollywood15',
+	// 'psych': 'epicwome',
+	'zodiax': 'coldeann',
+	'ninetynine': 'blackkkk',
+	'kasumi': 'scooter4000',
+	'xylen': 'bloodyrevengebr',
+	'aelita': 'y34co3',
+	'fx': 'cm48ubpq',
+	'horyzhnz': 'superguy69',
+	'quarkz': 'quarkz345',
+	'fleurdyleurse': 'calvaryfishes',
+	'trinitrotoluene': '4qpr7pc5mb',
+	'rekeri': 'qgadlu6g',
+	'austin': 'jkjkjkjkjkgdl',
+	'jinofthegale': 'cainvelasquez',
+	'waterbomb': 'naninan',
+	'starbloom': 'taigaaisaka',
+	'macle': 'flogged',
+	'ashiemore': 'poncp',
+	'charles': 'charlescarmichael',
+	'sigilyph': 'ek6',
+	'spy': 'spydreigon',
+	'kinguu': 'dodmen',
+	'dodmen': 'kinguu',
+	'halite': 'cjilkposqknolssss',
+	'magnemite': 'dsfsdffs',
+	'ace': 'sigilyph143',
+	'leftiez': 'xxxxnbbhiojll',
+	'grim': 'grimoiregod',
+	'strength': '0v0tqpnu',
+	'iplaytennislol': 'nsyncluvr67',
+	'cathy': '' //{color: '#ff5cb6'}
+};
 
 function hslToRgb(h, s, l) {
 	var r, g, b, m, c, x;

@@ -49,7 +49,7 @@ exports.commands = {
                     }
                     economy.writeMoney('money', toId(user.name), -bought*lottery.ticketPrice);
                     lottery.pot = lottery.pot + (lottery.ticketPrice * bought * 2);
-                    Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</font></b> has bought " + bought + " lottery tickets.");
+                    Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(user.name) + ">" + user.name + "</font></b> has bought " + bought + " lottery tickets.");
                     for (var x=bought; x>0; x--) {
                         lottery.players.push(toId(user.name));
                         lottery.playerIPS.push(user.latestIp);
@@ -65,7 +65,7 @@ exports.commands = {
                     }
                     economy.writeMoney('money', toId(user.name), -lottery.ticketPrice);
                     lottery.pot = lottery.pot + (lottery.ticketPrice * 2);
-                    Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</font></b> has bought a lottery ticket.");
+                    Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(user.name) + ">" + user.name + "</font></b> has bought a lottery ticket.");
                     lottery.players.push(toId(user.name));
                     lottery.playerIPS.push(user.latestIp);
                     saveLottery();
@@ -146,7 +146,7 @@ exports.commands = {
                 if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
                 lottery.maxTicketsPerUser = parts[1];
                 saveLottery();
-                this.add('|raw|<b><font size="4" color="' + Gold.hashColor(toId(user.name)) + '">' + Tools.escapeHTML(user.name) + '</font><font size="4"> has changed the lottery ticket cap to: ' + lottery.maxTicketsPerUser + '.</font></b>');
+                this.add('|raw|<b><font size="4" color="' + Gold.hashColor(user.name) + '">' + Tools.escapeHTML(user.name) + '</font><font size="4"> has changed the lottery ticket cap to: ' + lottery.maxTicketsPerUser + '.</font></b>');
                 break;
 
             case 'limit':
@@ -170,7 +170,7 @@ exports.commands = {
                     var chance = ((filteredPlayerArray.length / lottery.players.length) * 100).toFixed(1);
                 }
                 if (chance == 0) return this.sendReplyBox("User '" + Tools.escapeHTML(parts[1]) + "' is not in the current game of lottery.  Check spelling?");
-                return this.sendReplyBox("<b><font color=" + Gold.hashColor(toId(parts[1])) + ">" + Tools.escapeHTML(parts[1]) + "</font></b> has a " + chance + "% chance of winning the game of lottery right now.");
+                return this.sendReplyBox("<b><font color=" + Gold.hashColor(parts[1]) + ">" + Tools.escapeHTML(parts[1]) + "</font></b> has a " + chance + "% chance of winning the game of lottery right now.");
                 break;
 
             case 'reload':
@@ -184,7 +184,7 @@ exports.commands = {
                 return this.sendReplyBox(
                     "<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">" +
                     "<u>Lottery Game Status:</u><br />" +
-                    "Game started by: <b><font color=" + Gold.hashColor(toId(lottery.createdBy)) + ">" + Tools.escapeHTML(lottery.createdBy) + "</font></b><br />" +
+                    "Game started by: <b><font color=" + Gold.hashColor(lottery.createdBy) + ">" + Tools.escapeHTML(lottery.createdBy) + "</font></b><br />" +
                     "Pot: <b>" + lottery.pot + " Gold bucks</b><br />" +
                     "Ticket price: <b>" + lottery.ticketPrice + " Gold bucks</b><br />" +
                     "Game started: <b>" + moment(lottery.startTime).fromNow() + "</b><br />" +

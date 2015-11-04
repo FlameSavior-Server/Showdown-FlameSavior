@@ -34,7 +34,7 @@ exports.commands = {
 	lastseen: 'seen',
 	seen: function (target, room, user) {
 		try {
-			var userNameColor = Gold.hashColor(toId(target)); 
+			var userNameColor = Gold.hashColor(target); 
 			switch (target) {
 				case 'obj':
 					if (!this.canBroadcast()) return;

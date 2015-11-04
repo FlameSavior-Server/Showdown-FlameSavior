@@ -83,9 +83,9 @@ exports.commands = {
 				var person = row[i].split(',')[0];
 				function nameColor (name) {
 					if (Users.getExact(name) && Users(name).connected) {
-						return '<b><i><font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(Users.getExact(name).name) + '</font></i></b>';
+						return '<b><i><font color="' + Gold.hashColor(name) + '">' + Tools.escapeHTML(Users.getExact(name).name) + '</font></i></b>';
 					} else {
-						return '<font color="' + Gold.hashColor(toId(name)) + '">' + Tools.escapeHTML(name) + '</font>';
+						return '<font color="' + Gold.hashColor(name) + '">' + Tools.escapeHTML(name) + '</font>';
 					}
 				}
 				switch (rank) {
@@ -152,7 +152,7 @@ exports.commands = {
 		if (Gold.tells[targetUser].length === 8) return this.sendReply("User " + targetUser + " has too many tells queued.");
 		var date = moment().format('MMMM Do YYYY, h:mm a');
 		var datelbl = date.substr(-2).toUpperCase(); //AM or PM
-		var messageToSend = '|raw|<u>' + date.substring(0, date.length - 2) + datelbl + "</u><br/ > <b>" + user.group + "<font color=" + Gold.hashColor(toId(user.name)) + ">" + user.name + "</b> said: " + Tools.escapeHTML(message);
+		var messageToSend = '|raw|<u>' + date.substring(0, date.length - 2) + datelbl + "</u><br/ > <b>" + user.group + "<font color=" + Gold.hashColor(user.name) + ">" + user.name + "</b> said: " + Tools.escapeHTML(message);
 		Gold.tells[targetUser].add(messageToSend);
 		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
 	},
@@ -451,7 +451,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		if (!this.canTalk()) return;
 		if (!target) target = toId(user.name);
-		return this.sendReplyBox('<b><font color="' + Gold.hashColor('' + toId(target) + '') + '">' + target + '</font></b>.  The hexcode for this name color is: ' + Gold.hashColor('' + toId(target) + '') + '.');
+		return this.sendReplyBox('<b><font color="' + Gold.hashColor(target) + '">' + target + '</font></b>.  The hexcode for this name color is: ' + Gold.hashColor(target) + '.');
 	},
 	rsi: 'roomshowimage',
 	roomshowimage: function(target, room, user) {
@@ -461,7 +461,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("<img src=" + parts[0] + " width=" + parts[1] + " height=" + parts[1]);
 	},
-	
+
 	uor: 'usersofrank',
 	usersofrank: function(target, room, user) {
 		if (!target || !Config.groups[target]) return false;

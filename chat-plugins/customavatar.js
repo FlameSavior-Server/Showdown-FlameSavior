@@ -160,7 +160,7 @@ exports.commands = {
 				for (var u in Users.users) { 
 					if (Config.customavatars[u]) Users.users[u].avatar = Config.customavatars[u];
 				}
-				this.sendReply("Avatars have been reloaded.");
+				this.privateModCommand("(" + user.name + " has reloaded all custom avatars.)");
 				break;
 
 			default:

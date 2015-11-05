@@ -169,6 +169,20 @@
 	font:10pt Verdana,sans-serif;
 	text-align:left
 }
+.menugroup .select, .menugroup .button {
+    background: gold !important;
+	border-color: black !important;
+	color: black !important;
+	text-shadow: none !important;
+}
+.menugroup .select:hover, .menugroup .button:hover {
+    background: #FF8C00 !important;
+	font-style: italic !important;
+}
+.label {
+	text-shadow: none !important;
+	font-style: italic;
+}
 
 
 

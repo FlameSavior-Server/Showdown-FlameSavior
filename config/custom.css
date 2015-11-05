@@ -107,11 +107,13 @@
 	font-size:12px
 }
 .blackbutton {
-	padding:5px;
+	padding:4px;
 	background-color:#000;
-	border:1px solid #666;
-	color:#000;
-	text-decoration:none
+	border:1.5px solid #666;
+	color:white;
+}
+.blackbutton:hover {
+	background-color:#424242;
 }
 .broadcast-purple {
 	background-color:#8904B1;

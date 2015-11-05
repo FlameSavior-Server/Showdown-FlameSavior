@@ -109,7 +109,7 @@
 .blackbutton {
 	padding:4px;
 	background-color:#000;
-	border:1.5px solid #666;
+	border:1px solid #666;
 	color:white;
 }
 .blackbutton:hover {

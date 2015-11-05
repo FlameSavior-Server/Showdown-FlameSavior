@@ -156,140 +156,155 @@ var commands = exports.commands = {
      * Informational commands
      *********************************************************/
 
-    randp: 'data',
-    randompokemon: 'data',
     pstats: 'data',
-    stats: 'data',
-    dex: 'data',
-    pokedex: 'data',
-    details: 'data',
-    dt: 'data',
-    data: function(target, room, user, connection, cmd) {
-        if (!this.canBroadcast()) return;
-        if (cmd === 'randompokemon' || cmd === 'randp') target = (Math.floor(Math.random() * 721) + 1);
-        var buffer = '';
-        var targetId = toId(target);
-        if (targetId === '' + parseInt(targetId)) {
-            for (var p in Tools.data.Pokedex) {
-                var pokemon = Tools.getTemplate(p);
-                if (pokemon.num === parseInt(target)) {
-                    target = pokemon.species;
-                    targetId = pokemon.id;
-                    break;
-                }
-            }
-        }
-        var newTargets = Tools.dataSearch(target);
-        var showDetails = (cmd === 'dt' || cmd === 'details');
-        if (newTargets && newTargets.length) {
-            for (var i = 0; i < newTargets.length; ++i) {
-                if (newTargets[i].id !== targetId && !Tools.data.Aliases[targetId] && !i) {
-                    buffer = "No Pokemon, item, move, ability or nature named '" + target + "' was found. Showing the data of '" + newTargets[0].name + "' instead.\n";
-                }
-                if (newTargets[i].searchType === 'nature') {
-                    buffer += "" + newTargets[i].name + " nature: ";
-                    if (newTargets[i].plus) {
-                        var statNames = {
-                            'atk': "Attack",
-                            'def': "Defense",
-                            'spa': "Special Attack",
-                            'spd': "Special Defense",
-                            'spe': "Speed"
-                        };
-                        buffer += "+10% " + statNames[newTargets[i].plus] + ", -10% " + statNames[newTargets[i].minus] + ".";
-                    } else {
-                        buffer += "No effect.";
-                    }
-                    return this.sendReply(buffer);
-                } else {
-                    buffer += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
-                }
-            }
-        } else {
-            return this.sendReply("No Pokemon, item, move, ability or nature named '" + target + "' was found. (Check your spelling?)");
-        }
+	stats: 'data',
+	dex: 'data',
+	pokedex: 'data',
+	data: function (target, room, user, connection, cmd) {
+		if (!this.canBroadcast()) return;
 
-        if (showDetails) {
-            var details;
-            if (newTargets[0].searchType === 'pokemon') {
-                var pokemon = Tools.getTemplate(newTargets[0].name);
-                var weighthit = 20;
-                if (pokemon.weightkg >= 200) {
-                    weighthit = 120;
-                } else if (pokemon.weightkg >= 100) {
-                    weighthit = 100;
-                } else if (pokemon.weightkg >= 50) {
-                    weighthit = 80;
-                } else if (pokemon.weightkg >= 25) {
-                    weighthit = 60;
-                } else if (pokemon.weightkg >= 10) {
-                    weighthit = 40;
-                }
-                details = {
-                    "Dex#": pokemon.num,
-                    "Height": pokemon.heightm + " m",
-                    "Weight": pokemon.weightkg + " kg <em>(" + weighthit + " BP)</em>",
-                    "Dex Colour": pokemon.color,
-                    "Egg Group(s)": pokemon.eggGroups.join(", ")
-                };
-                if (!pokemon.evos.length) {
+		var buffer = '';
+		var targetId = toId(target);
+		if (!targetId) return this.parse('/help data');
+		if (targetId === '' + parseInt(targetId)) {
+			for (var p in Tools.data.Pokedex) {
+				var pokemon = Tools.getTemplate(p);
+				if (pokemon.num === parseInt(target)) {
+					target = pokemon.species;
+					targetId = pokemon.id;
+					break;
+				}
+			}
+		}
+		var newTargets = Tools.dataSearch(target);
+		var showDetails = (cmd === 'dt' || cmd === 'details');
+		if (newTargets && newTargets.length) {
+			for (var i = 0; i < newTargets.length; ++i) {
+				if (newTargets[i].id !== targetId && !Tools.data.Aliases[targetId] && !i) {
+					buffer = "No Pok\u00e9mon, item, move, ability or nature named '" + target + "' was found. Showing the data of '" + newTargets[0].name + "' instead.\n";
+				}
+				if (newTargets[i].searchType === 'nature') {
+					buffer += "" + newTargets[i].name + " nature: ";
+					if (newTargets[i].plus) {
+						var statNames = {'atk': "Attack", 'def': "Defense", 'spa': "Special Attack", 'spd': "Special Defense", 'spe': "Speed"};
+						buffer += "+10% " + statNames[newTargets[i].plus] + ", -10% " + statNames[newTargets[i].minus] + ".";
+					} else {
+						buffer += "No effect.";
+					}
+					return this.sendReply(buffer);
+				} else {
+					buffer += '|c|~|/data-' + newTargets[i].searchType + ' ' + newTargets[i].name + '\n';
+				}
+			}
+		} else {
+			return this.errorReply("No Pok\u00e9mon, item, move, ability or nature named '" + target + "' was found. (Check your spelling?)");
+		}
 
-                    details["<font color=#585858>Does Not Evolve</font>"] = ""; // this line exists on main
-                } else {
-                    details["Evolution"] = pokemon.evos.map(function(evo) {
-                        evo = Tools.getTemplate(evo);
-                        return evo.name + " (" + evo.evoLevel + ")";
-                    }).join(", ");
-                }
-            } else if (newTargets[0].searchType === 'move') {
-                var move = Tools.getMove(newTargets[0].name);
-                details = {
-                    "Priority": move.priority
-                };
+		if (showDetails) {
+			var details;
+			var isSnatch = false;
+			var isMirrorMove = false;
+			if (newTargets[0].searchType === 'pokemon') {
+				var pokemon = Tools.getTemplate(newTargets[0].name);
+				var weighthit = 20;
+				if (pokemon.weightkg >= 200) {
+					weighthit = 120;
+				} else if (pokemon.weightkg >= 100) {
+					weighthit = 100;
+				} else if (pokemon.weightkg >= 50) {
+					weighthit = 80;
+				} else if (pokemon.weightkg >= 25) {
+					weighthit = 60;
+				} else if (pokemon.weightkg >= 10) {
+					weighthit = 40;
+				}
+				details = {
+					"Dex#": pokemon.num,
+					"Gen": pokemon.gen,
+					"Height": pokemon.heightm + " m",
+					"Weight": pokemon.weightkg + " kg <em>(" + weighthit + " BP)</em>",
+					"Dex Colour": pokemon.color,
+					"Egg Group(s)": pokemon.eggGroups.join(", ")
+				};
+				if (!pokemon.evos.length) {
+					details["<font color=#585858>Does Not Evolve</font>"] = "";
+				} else {
+					details["Evolution"] = pokemon.evos.map(function (evo) {
+						evo = Tools.getTemplate(evo);
+						return evo.name + " (" + evo.evoLevel + ")";
+					}).join(", ");
+				}
+			} else if (newTargets[0].searchType === 'move') {
+				var move = Tools.getMove(newTargets[0].name);
+				details = {
+					"Priority": move.priority,
+					"Gen": move.gen
+				};
 
-                if (move.secondary || move.secondaries) details["<font color=black>&#10003; Secondary Effect</font>"] = "";
-                if (move.isContact) details["<font color=black>&#10003; Contact</font>"] = "";
-                if (move.isSoundBased) details["<font color=black>&#10003; Sound</font>"] = "";
-                if (move.isBullet) details["<font color=black>&#10003; Bullet</font>"] = "";
-                if (move.isPulseMove) details["<font color=black>&#10003; Pulse</font>"] = "";
+				if (move.secondary || move.secondaries) details["<font color=black>&#10003; Secondary effect</font>"] = "";
+				if (move.flags['contact']) details["<font color=black>&#10003; Contact</font>"] = "";
+				if (move.flags['sound']) details["<font color=black>&#10003; Sound</font>"] = "";
+				if (move.flags['bullet']) details["<font color=black>&#10003; Bullet</font>"] = "";
+				if (move.flags['pulse']) details["<font color=black>&#10003; Pulse</font>"] = "";
+				if (!move.flags['protect'] && !/(ally|self)/i.test(move.target)) details["<font color=black>&#10003; Bypasses Protect</font>"] = "";
+				if (move.flags['authentic']) details["<font color=black>&#10003; Bypasses Substitutes</font>"] = "";
+				if (move.flags['defrost']) details["<font color=black>&#10003; Thaws user</font>"] = "";
+				if (move.flags['bite']) details["<font color=black>&#10003; Bite</font>"] = "";
+				if (move.flags['punch']) details["<font color=black>&#10003; Punch</font>"] = "";
+				if (move.flags['powder']) details["<font color=black>&#10003; Powder</font>"] = "";
+				if (move.flags['reflectable']) details["<font color=black>&#10003; Bounceable</font>"] = "";
+				if (move.flags['gravity']) details["<font color=black>&#10007; Suppressed by Gravity</font>"] = "";
 
-                details["Target"] = {
-                    'normal': "Adjacent Pokemon",
-                    'self': "Self",
-                    'adjacentAlly': "Single Ally",
-                    'allAdjacentFoes': "Adjacent Foes",
-                    'foeSide': "All Foes",
-                    'allySide': "All Allies",
-                    'allAdjacent': "All Adjacent Pokemon",
-                    'any': "Any Pokemon",
-                    'all': "All Pokemon"
-                }[move.target] || "Unknown";
-            } else if (newTargets[0].searchType === 'item') {
-                var item = Tools.getItem(newTargets[0].name);
-                details = {};
-                if (item.fling) {
-                    details["Fling Base Power"] = item.fling.basePower;
-                    if (item.fling.status) details["Fling Effect"] = item.fling.status;
-                    if (item.fling.volatileStatus) details["Fling Effect"] = item.fling.volatileStatus;
-                    if (item.isBerry) details["Fling Effect"] = "Activates effect of berry on target.";
-                    if (item.id === 'whiteherb') details["Fling Effect"] = "Removes all negative stat levels on the target.";
-                    if (item.id === 'mentalherb') details["Fling Effect"] = "Removes the effects of infatuation, Taunt, Encore, Torment, Disable, and Cursed Body on the target.";
-                }
-                if (!item.fling) details["Fling"] = "This item cannot be used with Fling";
-                if (item.naturalGift) {
-                    details["Natural Gift Type"] = item.naturalGift.type;
-                    details["Natural Gift BP"] = item.naturalGift.basePower;
-                }
-            } else {
-                details = {};
-            }
+				if (move.id === 'snatch') isSnatch = true;
+				if (move.id === 'mirrormove') isMirrorMove = true;
 
-            buffer += '|raw|<font size="1">' + Object.keys(details).map(function(detail) {
-                return '<font color=#585858>' + detail + (details[detail] !== '' ? ':</font> ' + details[detail] : '</font>');
-            }).join("&nbsp;|&ThickSpace;") + '</font>';
-        }
-        this.sendReply(buffer);
-    },
+				details["Target"] = {
+					'normal': "One Adjacent Pok\u00e9mon",
+					'self': "User",
+					'adjacentAlly': "One Ally",
+					'adjacentAllyOrSelf': "User or Ally",
+					'adjacentFoe': "One Adjacent Opposing Pok\u00e9mon",
+					'allAdjacentFoes': "All Adjacent Opponents",
+					'foeSide': "Opposing Side",
+					'allySide': "User's Side",
+					'allyTeam': "User's Side",
+					'allAdjacent': "All Adjacent Pok\u00e9mon",
+					'any': "Any Pok\u00e9mon",
+					'all': "All Pok\u00e9mon"
+				}[move.target] || "Unknown";
+			} else if (newTargets[0].searchType === 'item') {
+				var item = Tools.getItem(newTargets[0].name);
+				details = {
+					"Gen": item.gen
+				};
+
+				if (item.fling) {
+					details["Fling Base Power"] = item.fling.basePower;
+					if (item.fling.status) details["Fling Effect"] = item.fling.status;
+					if (item.fling.volatileStatus) details["Fling Effect"] = item.fling.volatileStatus;
+					if (item.isBerry) details["Fling Effect"] = "Activates the Berry's effect on the target.";
+					if (item.id === 'whiteherb') details["Fling Effect"] = "Restores the target's negative stat stages to 0.";
+					if (item.id === 'mentalherb') details["Fling Effect"] = "Removes the effects of Attract, Disable, Encore, Heal Block, Taunt, and Torment from the target.";
+				} else {
+					details["Fling"] = "This item cannot be used with Fling.";
+				}
+				if (item.naturalGift) {
+					details["Natural Gift Type"] = item.naturalGift.type;
+					details["Natural Gift Base Power"] = item.naturalGift.basePower;
+				}
+			} else {
+				details = {};
+			}
+
+			buffer += '|raw|<font size="1">' + Object.keys(details).map(function (detail) {
+				return '<font color=#585858>' + detail + (details[detail] !== '' ? ':</font> ' + details[detail] : '</font>');
+			}).join("&nbsp;|&ThickSpace;") + '</font>';
+
+			if (isSnatch) buffer += '&nbsp;|&ThickSpace;<a href="https://pokemonshowdown.com/dex/moves/snatch"><font size="1">Snatchable Moves</font></a>';
+			if (isMirrorMove) buffer += '&nbsp;|&ThickSpace;<a href="https://pokemonshowdown.com/dex/moves/mirrormove"><font size="1">Mirrorable Moves</font></a>';
+		}
+		this.sendReply(buffer);
+	},
 
     ds: 'dexsearch',
     dsearch: 'dexsearch',

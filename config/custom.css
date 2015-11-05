@@ -190,7 +190,6 @@
  * Regular CSS Style *
  ********************/
 
-/*
 body {
 	background:url("http://goldservers.info/about/serverbg.jpg") !important;
 }
@@ -216,7 +215,7 @@ body {
 	font:10pt Verdana,sans-serif;
 	white-space:nowrap
 }
-*/
+
 
 
 /**********************************
@@ -349,7 +348,7 @@ body {
 /********************
  * Thanksgiving CSS *
  *******************/
-
+/*
 .header {
 	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
 	background-color:#663300;
@@ -384,6 +383,7 @@ body {
 .message-announce {
 	background:#CC6600
 }
+*/
 
 
 

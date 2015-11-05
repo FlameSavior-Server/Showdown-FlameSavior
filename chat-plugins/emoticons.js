@@ -56,14 +56,8 @@ Gold.emoticons = {
 				break;
 			default:
 				groups = Config.groupsranking.length;
-				while (groups--) {
-					if (rank === Config.groupsranking[groups]) {
-						var i = Number(groups); // rank # of the user
-					}
-					if (room.emoteModChat === Config.groupsranking[groups]) {
-						var u = Number(groups); // rank # of emoticon modchat
-					}
-				}
+				var i = Config.groupsranking.indexOf(rank); // rank # of user
+				var u = Config.groupsranking.indexOf(room.emoteModChat); // rank # of emote modchat
 				if (i >= u) return true;
 		}
 		return false;

@@ -55,9 +55,9 @@ Gold.emoticons = {
 				return (user.autoconfirmed ? true : false);
 				break;
 			default:
-				groups = Config.groupsranking.length;
-				var i = Config.groupsranking.indexOf(rank); // rank # of user
-				var u = Config.groupsranking.indexOf(room.emoteModChat); // rank # of emote modchat
+				groups = Config.groupsranking;
+				var i = groups.indexOf(rank); // rank # of user
+				var u = groups.indexOf(room.emoteModChat); // rank # of emote modchat
 				if (i >= u) return true;
 		}
 		return false;

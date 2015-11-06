@@ -34,11 +34,12 @@ exports.commands = {
 			return this.sendReply('|raw|' +
 				top +
 				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", 5) +
+				table("Room", "Buys a public unofficial chat room - will be deleted if inactive.", 25) +
 				table("Fix", "Ability to modify a trainer card, music box, or custom emoticon.", 30) +
 				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
 				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 70) +
-				table("Trainer", "Gives you a custom command - you provide the HTML and command name", 100) +
+				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", 100) +
 				table("Musicbox", "A command that lists / links 6 of your favorite songs", 115) +
 				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 500) +
 				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 1000) +
@@ -229,6 +230,18 @@ exports.commands = {
 				alertStaff(nameColor(user.name) + ' has purchased a custom animated avatar. Image: ' + link(parts[1].replace(' ', ''), 'desired avatar'), true);
 				alertStaff('<center><button name="send" value="/sca set, ' + toId(user.name) + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom avatar.">Click2Set</button> ' + output + '</center>', false);
 				this.sendReply("You have purchased a custom animated avatar.  The staff have been notified and will add it ASAP.");
+				break;
+
+			case 'room':
+			case 'chatroom':
+				price = 25;
+				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
+				if (!parts[1]) return this.errorReply("Usage: /buy room, [room name]");
+				var bannedRoomNames = [',', '|', '[', '-'];
+				if (~bannedRoomNames.indexOf(parts[1])) return this.errorReply("This room name is not valid, try again.");
+				processPurchase(price, parts[0], 'Room name: ' + parts[1]);
+				alertStaff(nameColor(user.name) + ' has purchased a chat room.  Room name: ' + parts[1], true);
+				this.sendReply("You have purchased a room.  The staff have been notified and it will be created shortly as long as it meets our basic rules.");
 				break;
 
 			case 'trainer':

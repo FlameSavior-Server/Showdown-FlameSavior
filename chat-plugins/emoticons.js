@@ -110,6 +110,7 @@ Gold.emoticons = {
 					room.addRaw(user.getIdentity(room).substr(0,1) + '<button style="' + style + '" name="parseCommand" value="/user ' +
 					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
 					room.update();
+					room.messageCount++;
 					return false;
 				}
 				break;

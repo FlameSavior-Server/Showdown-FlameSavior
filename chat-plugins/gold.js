@@ -121,14 +121,20 @@ exports.commands = {
 	},
 	protectroom: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
-		if (!target) return this.errorReply("Usage: /protectroom [roomid] - protects a public unofficial room from being automatically deleted for inactivity.");
-		target = toId(target);
-		if (room.isPrivate || room.type !== 'chat' || room.isOfficial) return this.errorReply("This room does not need to be protected.");
-		if (target !== room.id) return this.errorReply("You must be in the room you are trying to protect when using this command for redundancy reasons.");
-		room.protect = true;
-		room.chatRoomData.protect = room.protect;
-		Rooms.global.writeChatRoomData();
-		this.privateModCommand("(" + user.name + " has protected this room from being automatically deleted.)");
+		if (room.type !== 'chat' || room.isOfficial) return this.errorReply("This room does not need to be protected.");
+		if (target === 'off') {
+			if (!room.protect) return this.errorReply("This room is already unprotected.");
+			room.protect = false;
+			room.chatRoomData.protect = room.protect;
+			Rooms.global.writeChatRoomData();
+			this.privateModCommand("(" + user.name + " has unprotected this room from being automatically deleted.)");
+		} else {
+			if (room.protect) return this.errorReply("This room is already protected.");
+			room.protect = true;
+			room.chatRoomData.protect = room.protect;
+			Rooms.global.writeChatRoomData();
+			this.privateModCommand("(" + user.name + " has protected this room from being automatically deleted.)");
+		}
 	},
 	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {

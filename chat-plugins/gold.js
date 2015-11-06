@@ -120,13 +120,15 @@ exports.commands = {
 		});
 	},
 	protectroom: function(target, room, user) {
-		if (!target) return this.errorReply("Usage: /protectroom [roomid] - protects a publuc unofficial room from being automatically deleted for inactivity.");
+		if (!this.can('hotpatch')) return false;
+		if (!target) return this.errorReply("Usage: /protectroom [roomid] - protects a public unofficial room from being automatically deleted for inactivity.");
 		target = toId(target);
+		if (room.isPrivate || room.type !== 'chat' || room.isOfficial) return this.errorReply("This room does not need to be protected.");
 		if (target !== room.id) return this.errorReply("You must be in the room you are trying to protect when using this command for redundancy reasons.");
 		room.protect = true;
 		room.chatRoomData.protect = room.protect;
 		Rooms.global.writeChatRoomData();
-		this.privateModCommand(user.name + " has protected this room from being automatically deleted.");
+		this.privateModCommand("(" + user.name + " has protected this room from being automatically deleted.)");
 	},
 	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {

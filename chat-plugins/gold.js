@@ -120,7 +120,7 @@ exports.commands = {
 		});
 	},
 	protectroom: function(target, room, user) {
-		if (!this.can('hotpatch')) return false;
+		if (!this.can('pban')) return false;
 		if (room.type !== 'chat' || room.isOfficial) return this.errorReply("This room does not need to be protected.");
 		if (target === 'off') {
 			if (!room.protect) return this.errorReply("This room is already unprotected.");

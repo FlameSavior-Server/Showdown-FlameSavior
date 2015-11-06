@@ -119,6 +119,15 @@ exports.commands = {
 			);
 		});
 	},
+	protectroom: function(target, room, user) {
+		if (!target) return this.errorReply("Usage: /protectroom [roomid] - protects a publuc unofficial room from being automatically deleted for inactivity.");
+		target = toId(target);
+		if (target !== room.id) return this.errorReply("You must be in the room you are trying to protect when using this command for redundancy reasons.");
+		room.protect = true;
+		room.chatRoomData.protect = room.protect;
+		Rooms.global.writeChatRoomData();
+		this.privateModCommand(user.name + " has protected this room from being automatically deleted.");
+	},
 	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");

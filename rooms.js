@@ -1790,7 +1790,6 @@ var checkInactiveRooms = setInterval(function() {
 
 var deleteInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
-		if (Rooms.rooms[u].type !== 'chat') continue;
 		if (Rooms.rooms[u].type === 'chat') {
 			if (!Rooms.rooms[u].active && !Rooms.rooms[u].protect && !Rooms.rooms[u].isOfficial && !Rooms.rooms[u].isPrivate && !Rooms.rooms[u].isPersonal) {
 				Rooms.global.deregisterChatRoom(Rooms.rooms[u].id);

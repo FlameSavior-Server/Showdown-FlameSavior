@@ -1786,7 +1786,7 @@ var checkInactiveRooms = setInterval(function() {
 			if (Rooms.rooms[u].messageCount > 40) Rooms.rooms[u].active = true;
 		}
 	}
-}, 1000);//60 * 60000); // every hour
+}, 60 * 60000); // every hour
 
 var deleteInactiveRooms = setInterval(function() {
 	for (var u in Rooms.rooms) {
@@ -1800,4 +1800,4 @@ var deleteInactiveRooms = setInterval(function() {
 			}
 		}
 	}
-}, 1000);//2 * 24 * 60 * 60 * 1000); // 48 hours
+}, 2 * 24 * 60 * 60 * 1000); // 48 hours

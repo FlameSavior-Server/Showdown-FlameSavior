@@ -1794,7 +1794,7 @@ var deleteInactiveRooms = setInterval(function() {
 		if (Rooms.rooms[u].type === 'chat') {
 			if (!Rooms.rooms[u].active && !Rooms.rooms[u].protect && !Rooms.rooms[u].isOfficial && !Rooms.rooms[u].isPrivate && !Rooms.rooms[u].isPersonal) {
 				Rooms.global.deregisterChatRoom(Rooms.rooms[u].id);
-				Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.  It will be remoted upon the next server restart.</b></font>');
+				Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.  It will be removed upon the next server restart.</b></font>');
 				if (Rooms.rooms[u].id !== 'global') Rooms.rooms[u].update();
 				Rooms.rooms[u].modchat = '~';
 			}

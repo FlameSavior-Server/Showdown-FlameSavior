@@ -7,11 +7,16 @@
  * @license MIT license
  */
 
-let Ladders = Ladders.get = module.exports = getLadder;
+'use strict';
+
+let Ladders = module.exports = getLadder;
 
 function getLadder(formatid) {
 	return new Ladder(formatid);
 }
+
+Ladders.get = Ladders;
+Ladders.formatsListPrefix = '';
 
 function Ladder(formatid) {
 	this.formatid = toId(formatid);

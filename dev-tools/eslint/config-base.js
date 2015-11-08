@@ -1,3 +1,5 @@
+'use strict';
+
 const os = require('os');
 
 module.exports = {
@@ -91,7 +93,7 @@ module.exports = {
 		"vars-on-top": 0,
 		"wrap-iife": [2, "inside"],
 		"yoda": 0,
-		"strict": 0,
+		"strict": [2, "global"],
 		"init-declarations": 0,
 		"no-delete-var": 2,
 		"no-label-var": 2,
@@ -123,7 +125,7 @@ module.exports = {
 		"linebreak-style": os.EOL === '\n' ? [2, "unix"] : 0,
 		"lines-around-comment": 0,
 		"max-nested-callbacks": 0,
-		"new-cap": 2,
+		"new-cap": [2, {"newIsCap": true, "capIsNew": false}],
 		"new-parens": 2,
 		"newline-after-var": 0,
 		"no-array-constructor": 2,

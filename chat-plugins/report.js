@@ -21,7 +21,7 @@ function saveReports() {
 function pmUpperStaff(message) {
     for (var u in Users.users) {
         if (Users.users[u].group === '~' || Users.users[u].group === '&') {
-            Users.users[u].send('|pm|~Report Notification|' + Users.users[u].group + Users.users[u].name + '| ' + message);
+            Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '| ' + message);
         }
     }
 }

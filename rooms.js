@@ -1796,6 +1796,8 @@ var deleteInactiveRooms = setInterval(function() {
 				Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.  It will be removed upon the next server restart.</b></font>');
 				if (Rooms.rooms[u].id !== 'global') Rooms.rooms[u].update();
 				Rooms.rooms[u].modchat = '~';
+				Rooms('staff').add("|raw|<font color=red><b>" + Rooms.rooms[u].title + " has been automatically deleted from the server due to inactivity.</b></font>");
+				Rooms('staff').update();
 			}
 		}
 	}

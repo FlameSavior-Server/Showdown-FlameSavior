@@ -2607,7 +2607,7 @@ var commands = exports.commands = {
 
 	ms: 'movesearch',
 	msearch: 'movesearch',
-	movesearch: function(target, room, user, connection, cmd, message) {
+	movesearch: function (target, room, user, connection, cmd, message) {
 		if (!this.canBroadcast()) return;
 
 		if (!target) return this.parse('/help movesearch');
@@ -2697,44 +2697,26 @@ var commands = exports.commands = {
 					numSide = 0;
 					propSide = 1;
 					switch (inequality) {
-						case '>':
-							direction = 'less';
-							break;
-						case '<':
-							direction = 'greater';
-							break;
-						case '=':
-							direction = 'equal';
-							break;
+					case '>': direction = 'less'; break;
+					case '<': direction = 'greater'; break;
+					case '=': direction = 'equal'; break;
 					}
 				} else if (!isNaN(targetParts[1])) {
 					numSide = 1;
 					propSide = 0;
 					switch (inequality) {
-						case '<':
-							direction = 'less';
-							break;
-						case '>':
-							direction = 'greater';
-							break;
-						case '=':
-							direction = 'equal';
-							break;
+					case '<': direction = 'less'; break;
+					case '>': direction = 'greater'; break;
+					case '=': direction = 'equal'; break;
 					}
 				} else {
 					return this.sendReplyBox("No value given to compare with '" + Tools.escapeHTML(target) + "'.");
 				}
 				let prop = targetParts[propSide];
 				switch (toId(targetParts[propSide])) {
-					case 'basepower':
-						prop = 'basePower';
-						break;
-					case 'bp':
-						prop = 'basePower';
-						break;
-					case 'acc':
-						prop = 'accuracy';
-						break;
+				case 'basepower': prop = 'basePower'; break;
+				case 'bp': prop = 'basePower'; break;
+				case 'acc': prop = 'accuracy'; break;
 				}
 				if (!(prop in allProperties)) return this.sendReplyBox("'" + Tools.escapeHTML(target) + "' did not contain a valid property.");
 				if (!searches['property']) searches['property'] = {};
@@ -2776,35 +2758,16 @@ var commands = exports.commands = {
 
 			if (target.substr(0, 7) === 'boosts ') {
 				switch (target.substr(7)) {
-					case 'attack':
-						target = 'atk';
-						break;
-					case 'defense':
-						target = 'def';
-						break;
-					case 'specialattack':
-						target = 'spa';
-						break;
-					case 'spatk':
-						target = 'spa';
-						break;
-					case 'specialdefense':
-						target = 'spd';
-						break;
-					case 'spdef':
-						target = 'spd';
-						break;
-					case 'speed':
-						target = 'spe';
-						break;
-					case 'acc':
-						target = 'accuracy';
-						break;
-					case 'evasiveness':
-						target = 'evasion';
-						break;
-					default:
-						target = target.substr(7);
+				case 'attack': target = 'atk'; break;
+				case 'defense': target = 'def'; break;
+				case 'specialattack': target = 'spa'; break;
+				case 'spatk': target = 'spa'; break;
+				case 'specialdefense': target = 'spd'; break;
+				case 'spdef': target = 'spd'; break;
+				case 'speed': target = 'spe'; break;
+				case 'acc': target = 'accuracy'; break;
+				case 'evasiveness': target = 'evasion'; break;
+				default: target = target.substr(7);
 				}
 				if (!(target in allBoosts)) return this.sendReplyBox("'" + Tools.escapeHTML(target.substr(7)) + "' is not a recognized stat.");
 				if (!searches['boost']) searches['boost'] = {};
@@ -2816,33 +2779,15 @@ var commands = exports.commands = {
 			let oldTarget = target;
 			if (target.charAt(target.length - 1) === 's') target = target.substr(0, target.length - 1);
 			switch (target) {
-				case 'toxic':
-					target = 'tox';
-					break;
-				case 'poison':
-					target = 'psn';
-					break;
-				case 'burn':
-					target = 'brn';
-					break;
-				case 'paralyze':
-					target = 'par';
-					break;
-				case 'freeze':
-					target = 'frz';
-					break;
-				case 'sleep':
-					target = 'slp';
-					break;
-				case 'confuse':
-					target = 'confusion';
-					break;
-				case 'trap':
-					target = 'partiallytrapped';
-					break;
-				case 'flinche':
-					target = 'flinch';
-					break;
+			case 'toxic': target = 'tox'; break;
+			case 'poison': target = 'psn'; break;
+			case 'burn': target = 'brn'; break;
+			case 'paralyze': target = 'par'; break;
+			case 'freeze': target = 'frz'; break;
+			case 'sleep': target = 'slp'; break;
+			case 'confuse': target = 'confusion'; break;
+			case 'trap': target = 'partiallytrapped'; break;
+			case 'flinche': target = 'flinch'; break;
 			}
 
 			if (target in allStatus) {
@@ -2885,7 +2830,8 @@ var commands = exports.commands = {
 						Object.count(searches[search], true) > 0 && !searches[search][String(dex[move][search])]) {
 						delete dex[move];
 					}
-					break;
+				}
+				break;
 
 			case 'flags':
 				for (let flag in searches[search]) {
@@ -2896,11 +2842,7 @@ var commands = exports.commands = {
 							if (searches[search][flag]) {
 								if (!dex[move].secondary && !dex[move].secondaries) delete dex[move];
 							} else {
-								if (searches[search][flag]) {
-									if (!dex[move].secondary && !dex[move].secondaries) delete dex[move];
-								} else {
-									if (dex[move].secondary && dex[move].secondaries) delete dex[move];
-								}
+								if (dex[move].secondary && dex[move].secondaries) delete dex[move];
 							}
 						}
 					}
@@ -2932,19 +2874,14 @@ var commands = exports.commands = {
 								if (dex[move].category === "Status") delete dex[move];
 								continue;
 							}
-							if (typeof searches[search][prop].greater === "number") {
-								if (dex[move][prop] === true) {
-									if (dex[move].category === "Status") delete dex[move];
-									continue;
-								}
-								if (dex[move][prop] < searches[search][prop].greater) {
-									delete dex[move];
-									continue;
-								}
+							if (dex[move][prop] < searches[search][prop].greater) {
+								delete dex[move];
+								continue;
 							}
 						}
 					}
-					break;
+				}
+				break;
 
 			case 'boost':
 				for (let boost in searches[search]) {
@@ -2956,8 +2893,10 @@ var commands = exports.commands = {
 							if ((dex[move].secondary.self.boosts[boost] > 0 && searches[search][boost]) ||
 								(dex[move].secondary.self.boosts[boost] < 1 && !searches[search][boost])) continue;
 						}
+						delete dex[move];
 					}
-					break;
+				}
+				break;
 
 			case 'status':
 			case 'volatileStatus':
@@ -2968,11 +2907,8 @@ var commands = exports.commands = {
 								if (!dex[move].secondary) {
 									if (searches[search][searchStatus]) delete dex[move];
 								} else {
-									var hasSecondary = false;
-									for (var i = 0; i < dex[move].secondaries.length; i++) {
-										if (dex[move].secondaries[i][search] === searchStatus) hasSecondary = true;
-									}
-									if ((!hasSecondary && searches[search][searchStatus]) || (hasSecondary && !searches[search][searchStatus])) delete dex[move];
+									if ((dex[move].secondary[search] !== searchStatus && searches[search][searchStatus]) ||
+										(dex[move].secondary[search] === searchStatus && !searches[search][searchStatus])) delete dex[move];
 								}
 							} else {
 								let hasSecondary = false;
@@ -2981,12 +2917,15 @@ var commands = exports.commands = {
 								}
 								if ((!hasSecondary && searches[search][searchStatus]) || (hasSecondary && !searches[search][searchStatus])) delete dex[move];
 							}
+						} else {
+							if (!searches[search][searchStatus]) delete dex[move];
 						}
 					}
-					break;
+				}
+				break;
 
-				default:
-					throw new Error("/movesearch search category '" + search + "' was unrecognised.");
+			default:
+				throw new Error("/movesearch search category '" + search + "' was unrecognised.");
 			}
 		}
 

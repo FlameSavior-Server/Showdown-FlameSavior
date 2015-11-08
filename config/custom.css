@@ -176,8 +176,12 @@
 	text-shadow: none !important;
 }
 .menugroup .select:hover, .menugroup .button:hover {
-    background: #FF8C00 !important;
+	background: #FF8C00 !important;
 	font-style: italic !important;
+}
+.menugroup {
+	border: 1px solid #C68E01;
+	background: rgba(255, 203, 98, .4);
 }
 .label {
 	text-shadow: none !important;

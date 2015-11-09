@@ -746,13 +746,15 @@ Tournament = (function () {
 		}));
 		this.isEnded = true;
 
-		data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
+		var data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
 		data = data['results'].toString();
+
+		var winner = '';
 
 		if (data.indexOf(',') >= 0) {
 			data = data.split(',');
 			winner = data[0];
-			if (data[1]) runnerUp = data[1];
+			//if (data[1]) runnerUp = data[1];
 		} else {
 			winner = data;
 		}

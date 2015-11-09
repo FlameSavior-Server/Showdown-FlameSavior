@@ -762,10 +762,9 @@ Tournament = (function () {
 		var tourSize = this.generator.users.size;
 		if (this.room.isOfficial && tourSize >= 3) {
 			var money = (tourSize < 50 ? tourSize : 50);
-			var buck = "bucks";
 
 			try {
-				this.room.add('|raw|<b><font color=' + Gold.hashColor(toId(winner)) + '>' + Tools.escapeHTML(winner) + '</font> has won <font color=#24678d>'+money+'</font> '+buck+' for winning the tournament!</b>');
+				this.room.add('|raw|<b><font color=' + Gold.hashColor(toId(winner)) + '>' + Tools.escapeHTML(winner) + '</font> has won <font color=#24678d>' + money + '</font> bucks for winning the tournament!</b>');
 				economy.writeMoney('money', toId(winner), money);
 			} catch (e) {}
 		}

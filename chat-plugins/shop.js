@@ -460,9 +460,16 @@ exports.commands = {
 		if (~target.indexOf('\u202e')) return this.sendReply("nono riperino");
 		var bannedSymbols = /[ +<>$%‽!★@&~#卐|A-z0-9]/;
 		if (target.match(bannedSymbols)) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
-		user.getIdentity = function() {
-			if (this.muted) return '!' + this.name;
+		user.getIdentity = function(roomid) {
 			if (this.locked) return '‽' + this.name;
+			if (roomid) {
+				var room = Rooms.rooms[roomid];
+				if (room.isMuted(this)) return '!' + this.name;
+				if (room && room.auth) {
+					if (room.auth[this.userid]) return room.auth[this.userid] + this.name;
+					if (room.isPrivate === true) return ' ' + this.name;
+				}
+			}
 			return target + this.name;
 		};
 		user.updateIdentity();

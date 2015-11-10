@@ -213,6 +213,7 @@ exports.commands = {
 				if (!parts[1] || !parts[2]) return this.errorReply("Usage: /buy emote, [emote code], [image for the emote]");
 				var emoteFilepaths = ['.png', '.jpg', '.gif'];
 				if (!~emoteFilepaths.indexOf(parts[2].substr(-4))) return this.errorReply("Emoticons must be in one of the following formats: PNG, JPG, or GIF.");
+				if (Gold.emoticons.chatEmotes[parts[1].remove(' ')]) return this.errorReply("An emoticon with this trigger word already exists on this server.");
 				processPurchase(price, parts[0], 'Emote: ' + parts[1] + ' Link: ' + parts[2]);
 				alertStaff(nameColor(user.name) + " has purchased a custom emote. Emote \"" + parts[1].trim() + "\": " + link(parts[2].replace(' ', ''), 'desired emote'), true);
 				alertStaff('<center><img title=' + parts[1] + ' src=' + parts[2] + '><br /><button name="send" value="/emote add, ' + parts[1] + ', ' + parts[2] + '" target="_blank" title="Click to add the emoticon above.">Click2Add</button></center>', false);

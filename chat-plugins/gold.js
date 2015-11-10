@@ -306,7 +306,7 @@ exports.commands = {
 	dk: 'dropkick',
 	dropkick: function(target, room, user) {
 		if (!target) return this.sendReply('/dropkick needs a target.');
-		return this.parse('/me dropkicks ' + target + ' across the Pokemon Stadium!');
+		return this.parse('/me dropkicks ' + target + ' across the Pok\u00E9mon Stadium!');
 	},
 	fart: function(target, room, user) {
 		if (!target) return this.sendReply('/fart needs a target.');
@@ -379,11 +379,11 @@ exports.commands = {
 	dk: 'dropkick',
 	dropkick: function(target, room, user) {
 		if (!target) return this.sendReply('/dropkick needs a target.');
-		return this.parse('/me dropkicks ' + target + ' across the PokÃƒÂ©mon Stadium!');
+		return this.parse('/me dropkicks ' + target + ' across the Pok\u00E9mon Stadium!');
 	},
 	halloween: function(target, room, user) {
 		if (!target) return this.sendReply('/halloween needs a target.');
-		return this.parse('/me takes ' + target + '`s pumpkin and smashes it all over the PokÃƒÂ©mon Stadium!');
+		return this.parse('/me takes ' + target + '`s pumpkin and smashes it all over the Pok\u00E9mon Stadium!');
 	},
 	barn: function(target, room, user) {
 		if (!target) return this.sendReply('/barn needs a target.');

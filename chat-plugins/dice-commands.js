@@ -21,7 +21,7 @@ exports.commands = {
 	 	if (isNaN(Number(target))) return this.sendReply('/startdice - <bet> must be a number greater than 0');
 	 	target = Math.round(Number(target));
 	 	if (target < 1) return this.sendReply('/startdice - You can not bet less than one buck.');
-	 	if (target > 500) return this.sendReply('/startdice - You can\'t bet more than 500 bucks.');
+	 	if (target > 1000) return this.sendReply('/startdice - You can\'t bet more than 1,000 bucks.');
 	 	var self = this;
 
 	 	economy.readMoneyAsync(user.userid, function(userMoney) {

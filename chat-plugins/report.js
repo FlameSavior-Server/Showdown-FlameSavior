@@ -132,5 +132,5 @@ exports.commands = {
 			default:
 				this.sendReply("/reports " + target + " - Command not found.");
 		}
-	},
+	}
 };

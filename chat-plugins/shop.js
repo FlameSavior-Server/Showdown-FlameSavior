@@ -35,7 +35,7 @@ exports.commands = {
 				top +
 				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", 5) +
 				table("Room", "Buys a public unofficial chat room - will be deleted if inactive.", 25) +
-				table("Fix", "Ability to modify a trainer card, music box, or custom emoticon.", 30) +
+				table("Fix", "Ability to modify a custom avatar, trainer card, music box, or custom emoticon.", 30) +
 				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
 				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 70) +

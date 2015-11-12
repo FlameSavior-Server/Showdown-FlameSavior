@@ -429,7 +429,7 @@ exports.commands = {
 		} else {
 			// registered chatrooms show up on the room list and so require
 			// higher permissions to modify privacy settings
-			if (!this.can('makeroom')) return;
+			if (!this.can('pban')) return;
 		}
 		let setting;
 		switch (cmd) {

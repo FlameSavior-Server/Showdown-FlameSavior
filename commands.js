@@ -307,6 +307,9 @@ exports.commands = {
 				}
 				return this.sendReply("The private chat room '" + target + "' was created.");
 			} else {
+				let defaultIntro = '<h2 style="margin-top:0">' + target + ' <a href="/' + toId(target) + '"><code>&lt;&lt;' + toId(target) + '>></code></a></h2>(DEFAULT ROOMINTRO)<br />- To set a customized roomintro, use /roomintro <code>HTML</code>.<br />- Don\'t know HTML very well? Click <a href="http://www.smogon.com/forums/threads/html-jazz-b.3510885/">here</a> for a breif HTML guide.<br />- Reminder that this room must maintain 40 messages / 48 hours to be considered "active" to not be automatically deleted.<br />- For any <i>general</i> questions on room management, please do not hesitate to contact a global staff member.<br />- <button name="send" value="/roomhelp">Room management commands</button>';
+				Rooms.search(target).introMessage = Rooms.search(target).chatRoomData.introMessage = defaultIntro;
+				Rooms.global.writeChatRoomData();
 				if (Rooms.get('staff')) {
 					Rooms.get('staff').add('|raw|<div class="broadcast-green">Public chat room created: <b>' + Tools.escapeHTML(target) + '</b></div>').update();
 				}

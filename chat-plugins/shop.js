@@ -41,9 +41,9 @@ exports.commands = {
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
 				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", 100) +
 				table("Musicbox", "A command that lists / links 6 of your favorite songs", 115) +
-				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 500) +
-				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 1000) +
-				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1500) +
+				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 400) +
+				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 700) +
+				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1000) +
 				bottom
 			);
 		}
@@ -197,7 +197,7 @@ exports.commands = {
 
 			case 'color':
 			case 'customcolor':
-				price = 1000;
+				price = 700;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy color, [hex code OR name of an alt you want the color of]");
 				if (parts[1].length > 20) return this.errorReply("This is not a valid color, try again.");
@@ -208,7 +208,7 @@ exports.commands = {
 
 			case 'emote':
 			case 'emoticon':
-				price = 500;
+				price = 400;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1] || !parts[2]) return this.errorReply("Usage: /buy emote, [emote code], [image for the emote]");
 				var emoteFilepaths = ['.png', '.jpg', '.gif'];
@@ -285,7 +285,7 @@ exports.commands = {
 
 			case 'userlisticon':
 			case 'icon':
-				price = 1500;
+				price = 1000;
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[4]) return this.errorReply("Usage: /buy icon, [32x32 icon image], [room1], [room2], [room3]");

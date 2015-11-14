@@ -89,6 +89,9 @@
 #lobby-userlist-user-nick152, #gamechamber-userlist-user-nick152, #abtslair-userlist-user-nick152 {
     background:url("http://i.imgur.com/yTDXa5q.gif") no-repeat right
 }
+#lobby-userlist-user-frage, #parukia-userlist-user-frage, #thezangviperleague-userlist-user-frage {
+    background:url("http://i.imgur.com/9Thp2JO.gif") no-repeat right
+}
 /*************************************
  * CONSTANT CSS (DO NOT COMMENT OUT) *
  *************************************/

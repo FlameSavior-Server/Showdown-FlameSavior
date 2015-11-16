@@ -81,7 +81,11 @@ exports.commands = {
 
     //different pre-set away commands
 	afk: function (target, room, user) {
-		this.parse('/away AFK');
+		if (!target) {
+			this.parse('/away AFK');
+		} else {
+			this.parse('/away ' + target);
+		}
 	},
 	busy: function (target, room, user) {
 		this.parse('/away BUSY');

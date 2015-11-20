@@ -194,9 +194,7 @@ exports.BattleMovedex = {
 		inherit: true,
 		effect: {
 			duration: 5,
-			onModifySpD: function (spd) {
-				return spd * 2;
-			},
+			// Sp. Def boost applied directly in stat calculation
 			onStart: function (side) {
 				this.add('-sidestart', side, 'move: Light Screen');
 			},
@@ -358,9 +356,7 @@ exports.BattleMovedex = {
 		inherit: true,
 		effect: {
 			duration: 5,
-			onModifyDef: function (def) {
-				return def * 2;
-			},
+			// Defense boost applied directly in stat calculation
 			onStart: function (side) {
 				this.add('-sidestart', side, 'Reflect');
 			},
@@ -431,18 +427,14 @@ exports.BattleMovedex = {
 			let move = '';
 			if (moves.length) move = moves[this.random(moves.length)];
 			if (!move) return false;
-			move.isSleepTalk = true;
 			this.useMove(move, pokemon);
 		},
 		noSketch: true
 	},
 	solarbeam: {
 		inherit: true,
-		onBasePower: function (basePower, pokemon, target) {
-			if (this.isWeather('raindance')) {
-				return this.chainModify(0.5);
-			}
-		}
+		// Rain weakening done directly in the damage formula
+		onBasePower: function () {}
 	},
 	spikes: {
 		inherit: true,

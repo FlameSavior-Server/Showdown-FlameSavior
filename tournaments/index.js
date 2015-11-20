@@ -245,6 +245,19 @@ Tournament = (function () {
 		}, this);
 	};
 
+	Tournament.prototype.removeBannedUser = function (user) {
+		if (this.generator.getUsers().indexOf(user) > -1) {
+			if (this.isTournamentStarted) {
+				if (!this.disqualifiedUsers.get(user)) {
+					this.disqualifyUser(user, user, null);
+				}
+			} else {
+				this.removeUser(user);
+			}
+			this.room.update();
+		}
+	};
+
 	Tournament.prototype.addUser = function (user, isAllowAlts, output) {
 		if (!user.named) {
 			output.sendReply('|tournament|error|UserNotNamed');
@@ -308,7 +321,7 @@ Tournament = (function () {
 		let data = this.generator.getBracketData();
 		if (data.type === 'tree') {
 			if (!data.rootNode) {
-				data.users = usersToNames(this.generator.getUsers()).sort();
+				data.users = usersToNames(this.generator.getUsers().sort());
 				return data;
 			}
 			let queue = [data.rootNode];
@@ -494,7 +507,7 @@ Tournament = (function () {
 
 		this.room.add('|tournament|disqualify|' + user.name);
 		user.sendTo(this.room, '|tournament|update|{"isJoined":false}');
-		user.popup("|modal|You have been disqualified from the tournament in " + this.room.title + (reason ? ":\n\n" + reason : "."));
+		if (reason !== null) user.popup("|modal|You have been disqualified from the tournament in " + this.room.title + (reason ? ":\n\n" + reason : "."));
 		this.isBracketInvalidated = true;
 		this.isAvailableMatchesInvalidated = true;
 
@@ -979,7 +992,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 			this.privateModCommand("(" + user.name + " created a tournament in " + tour.format + " format.)");
 			if (Config.tourannouncements && Config.tourannouncements.indexOf(room.id) >= 0) {
 				let tourRoom = Rooms.search(Config.tourroom || 'tournaments');
-				if (tourRoom) tourRoom.addRaw('<div class="infobox"><a href="/' + room.id + '" class="ilink"><b>' + Tools.getFormat(tour.format).name + '</b> tournament created in <b>' + room.title + '</b>.</a></div>');
+				if (tourRoom) tourRoom.addRaw('<div class="infobox"><a href="/' + room.id + '" class="ilink"><strong>' + Tools.escapeHTML(Tools.getFormat(tour.format).name) + '</strong> tournament created in <strong>' + Tools.escapeHTML(room.title) + '</strong>.</a></div>');
 			}
 		}
 	} else {

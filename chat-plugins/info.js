@@ -2207,6 +2207,7 @@ var commands = exports.commands = {
 		let validParameter = function (cat, param, isNotSearch) {
 			for (let h = 0; h < searches.length; h++) {
 				let group = searches[h];
+				if (group[cat] === undefined) continue;
 				if (group[cat][param] === undefined) continue;
 				if (group[cat][param] === isNotSearch) {
 					self.sendReplyBox("A search cannot both include and exclude '" + param + "'.");
@@ -2963,7 +2964,8 @@ var commands = exports.commands = {
 		"The order of the parameters does not matter."
 	],
 
-	itemsearch: function(target, room, user, connection, cmd, message) {
+	isearch: 'itemsearch',
+	itemsearch: function (target, room, user, connection, cmd, message) {
 		if (!target) return this.parse('/help itemsearch');
 		if (!this.canBroadcast()) return;
 
@@ -2985,92 +2987,69 @@ var commands = exports.commands = {
 			let newWord = rawSearch[i].trim();
 			if (isNaN(newWord)) newWord = newWord.replace('.', '');
 			switch (newWord) {
-				// words that don't really help identify item removed to speed up search
-				case 'a':
-				case 'an':
-				case 'is':
-				case 'it':
-				case 'its':
-				case 'the':
-				case 'that':
-				case 'which':
-				case 'user':
-				case 'holder':
-				case 'holders':
-					newWord = '';
-					break;
-					// replace variations of common words with standardized versions
-				case 'opponent':
-					newWord = 'attacker';
-					break;
-				case 'flung':
-					newWord = 'fling';
-					break;
-				case 'heal':
-				case 'heals':
-				case 'recovers':
-					newWord = 'restores';
-					break;
-				case 'boost':
-				case 'boosts':
-					newWord = 'raises';
-					break;
-				case 'weakens':
-					newWord = 'halves';
-					break;
-				case 'more':
-					newWord = 'increases';
-					break;
-				case 'super':
-					if (rawSearch[i + 1] === 'effective') {
-						newWord = 'supereffective';
-						rawSearch.splice(i + 1, 1);
-					}
-					break;
-				case 'special':
-					newWord = 'sp';
-					break;
-				case 'spa':
-					newWord = 'sp';
-					rawSearch.splice(i, 0, 'atk');
-					break;
-				case 'atk':
-				case 'attack':
-					if (rawSearch[i - 1] === 'sp') {
-						newWord = 'atk';
-					} else {
-						newWord = 'attack';
-					}
-					break;
-				case 'spd':
-					newWord = 'sp';
-					rawSearch.splice(i, 0, 'def');
-					break;
-				case 'def':
-				case 'defense':
-					if (rawSearch[i - 1] === 'sp') {
-						newWord = 'def';
-					} else {
-						newWord = 'defense';
-					}
-					break;
-				case 'burns':
-					newWord = 'burn';
-					break;
-				case 'poisons':
-					newWord = 'poison';
-					break;
-				default:
-					if (/x[\d\.]+/.test(newWord)) {
-						newWord = newWord.substr(1) + 'x';
-					}
+			// words that don't really help identify item removed to speed up search
+			case 'a':
+			case 'an':
+			case 'is':
+			case 'it':
+			case 'its':
+			case 'the':
+			case 'that':
+			case 'which':
+			case 'user':
+			case 'holder':
+			case 'holders':
+				newWord = '';
+				break;
+			// replace variations of common words with standardized versions
+			case 'opponent': newWord = 'attacker'; break;
+			case 'flung': newWord = 'fling'; break;
+			case 'heal': case 'heals':
+			case 'recovers': newWord = 'restores'; break;
+			case 'boost':
+			case 'boosts': newWord = 'raises'; break;
+			case 'weakens': newWord = 'halves'; break;
+			case 'more': newWord = 'increases'; break;
+			case 'super':
+				if (rawSearch[i + 1] === 'effective') {
+					newWord = 'supereffective';
+				}
+				break;
+			case 'special': newWord = 'sp'; break;
+			case 'spa':
+				newWord = 'sp';
+				break;
+			case 'atk':
+			case 'attack':
+				if (rawSearch[i - 1] === 'sp') {
+					newWord = 'atk';
+				} else {
+					newWord = 'attack';
+				}
+				break;
+			case 'spd':
+				newWord = 'sp';
+				break;
+			case 'def':
+			case 'defense':
+				if (rawSearch[i - 1] === 'sp') {
+					newWord = 'def';
+				} else {
+					newWord = 'defense';
+				}
+				break;
+			case 'burns': newWord = 'burn'; break;
+			case 'poisons': newWord = 'poison'; break;
+			default:
+				if (/x[\d\.]+/.test(newWord)) {
+					newWord = newWord.substr(1) + 'x';
+				}
 			}
 			if (!newWord || searchedWords.indexOf(newWord) >= 0) continue;
 			searchedWords.push(newWord);
 		}
 
 		if (searchedWords.length === 0) return this.sendReplyBox("No distinguishing words were used. Try a more specific search.");
-
 		if (searchedWords.indexOf('fling') >= 0) {
 			let basePower = 0;
 			let effect;

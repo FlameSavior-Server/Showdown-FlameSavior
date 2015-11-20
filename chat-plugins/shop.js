@@ -258,9 +258,11 @@ exports.commands = {
 			case 'musicbox':
 				price = 115;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
+				if (!Gold.createMusicBox(user)) return this.sendReply('You already have a music box! There\'s no need to buy another.');
 				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased a music box.', true);
-				this.sendReply("You have purchased a music box.  Please start thinking about 6 or less songs you want on it.  Create a pastebin of the links of the YouTube songs and send them to a leader or administrator.");
+				this.parse('/' + toId(parts[0]) + ' help');
+				this.sendReply("You have purchased a music box. You may have a maximum of 6 songs in it.");
 				break;
 
 			case 'fix':

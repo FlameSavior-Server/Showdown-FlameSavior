@@ -51,20 +51,19 @@ exports.commands = {
 			switch (toId(command)) {
 				case 'help': 
 					if (!this.canBroadcast()) return;
-					this.sendReplyBox('<b>Music Box Commands :3</b><br><br>' +
+					this.sendReplyBox('<b>Music Box Commands:</b><br><br><ul>' +
 						'<li>/' + cmd + ' <em>User</em> - View\'s a user\'s music box.<br>' +
 						'<li>/' + cmd + ' add <em>Youtube link</em> - Adds a song into your music box.<br>' +
 						'<li>/' + cmd + ' remove <em>Youtube link/Song title/Song list number</em> - Removes a song from your music box.<br>' +
 						'<li>/' + cmd + ' removeall - Removes all songs from your music box.<br>' +
 						'<li>/' + cmd + ' css <em>CSS code</em> - Edits the CSS of your music box\'s buttons.<br>' +
-						'<li>/' + cmd + ' delete <em>User</em> - Deletes a user\'s music box. Requires ~.'
+						'<li>/' + cmd + ' delete <em>User</em> - Deletes a user\'s music box. Requires ~.</ul>'
 					);
 					break;
 
 				case 'add':
 					if (!target || !target.trim()) return this.parse('/' + cmd + ' help');
-					validate(target)
-					.then(function (song) {
+					validate(target).then(function (song) {
 						if (typeof musicboxes[user.userid] !== 'object') return this.errorReply("You do not own a music box. Buy one from the shop.");
 						var box = musicboxes[user.userid];
 						if (box.songs.length > box.max) return this.sendReply("You currently have " + box.max + " songs in your music box. Each additional song costs 5 bucks.");
@@ -73,23 +72,22 @@ exports.commands = {
 						box.songs.push(song);
 						this.sendReply('|html|The song "<b>' + song.title + '</b>" has been successfully added to your music box.');
 						fs.writeFileSync(FILE, JSON.stringify(musicboxes, null, 1));
-					}.bind(this))
-					.catch (function (err) {
+					}.bind(this)).catch (function (err) {
 						this.errorReply(Tools.escapeHTML(err));
 					}.bind(this));
 					break;
 
 				case 'remove':
-					if (!musicboxes[user.userid].songs.length) return this.sendReply('You don\'t have any songs in your music box.');
-					if (!target || !target.trim()) return this.parse('/' + cmd + ' help');
+					if (!musicboxes[user.userid].songs.length) return this.errorReply('You don\'t have any songs in your music box.');
+					if (!target || !target.trim()) return this.parse("/" + cmd + " help");
 					var box = musicboxes[user.userid];
 					target = target.trim();
 
 					var match;
 					if (!isNaN(target)) {
 						target = Number(target);
-						if (target < 1) return this.sendReply('A song number cannot be less than 1.');
-						if (target > box.songs.length) return this.sendReply('You can\'t delete song number ' + target + ', since that\'s more than the number of songs you have (' + box.songs.length + ').');
+						if (target < 1) return this.errorReply('A song number cannot be less than 1.');
+						if (target > box.songs.length) return this.errorReply('You can\'t delete song number ' + target + ', since that\'s more than the number of songs you have (' + box.songs.length + ').');
 						match = box.songs[target - 1];
 						box.songs.splice(target - 1, 1);
 						fs.writeFileSync(FILE, JSON.stringify(musicboxes, null, 1));
@@ -110,8 +108,8 @@ exports.commands = {
 					var box = musicboxes[user.userid];
 					if (!target || !target.trim()) {
 						if (!this.canBroadcast()) return;
-						if (toId(box.css)) return this.sendReplyBox('Your music box css: <code>' + box.css + '</code>');
-						return this.sendReplyBox('You haven\'t set button css for your music box yet.');
+						if (toId(box.css)) return this.sendReplyBox("Your music box css: <code>" + box.css + "</code>");
+						return this.sendReplyBox("You haven't set button css for your music box yet.");
 					}
 					if (toId(target) in {'remove':1, 'delete':1, 'none':1, 'hidden':1}) delete box.css;
 					else box.css = target.replace(/^["']/, '').replace(/["']$/, '');
@@ -121,43 +119,43 @@ exports.commands = {
 					break;
 
 				case 'removeall':
-					if (!musicboxes[user.userid].songs.length) return this.sendReply('You don\'t have any songs in your music box.');
+					if (!musicboxes[user.userid].songs.length) return this.sendReply("You don't have any songs in your music box.");
 					if (!user.confirm) {
 						user.confirm = true;
-						return this.sendReply('WARNING: You are about to remove all of the songs in your music box. Use this command again if you\'re sure you want to do this.');
+						return this.sendReply("WARNING: You are about to remove all of the songs in your music box. Use this command again if you're sure you want to do this.");
 					}
 					delete user.confirm;
 					musicboxes[user.userid].songs = [];
 					fs.writeFileSync(FILE, JSON.stringify(musicboxes, null, 1));
-					return this.sendReply('You have successfully removed all songs in your music box.');
+					return this.sendReply("You have successfully removed all songs in your music box.");
 					break;
 
 				case 'delete':
 					if (!this.can('pban')) return false;
 					var targetUser = Users.getExact(target) ? Users.getExact(target).name : target;
 					var box = musicboxes[toId(targetUser)];
-					if (!box) return this.sendReply(targetUser + ' doesn\'t have a music box...');
+					if (!box) return this.sendReply(targetUser + " doesn't have a music box...");
 
-					delete box;
+					delete musicboxes[toId(targetUser)];
 					fs.writeFileSync(FILE, JSON.stringify(musicboxes, null, 1));
-					return this.sendReply('You have successfully deleted ' + targetUser + '\'s music box.');
+					return this.sendReply("You have successfully deleted " + targetUser + "'s music box.");
 					break;
 			}
 		} else {
 			if (!this.canBroadcast()) return;
-			if (target.length > 18) return this.sendReply('The username "' + target + '" is too long.');
+			if (target.length > 18) return this.sendReply("The username \"" + target + "\" is too long.");
 			var targetUser;
 			if (!toId(target)) targetUser = user.name;
 			else targetUser = Users.getExact(target) ? Users.getExact(target).name : target;
 			var box = musicboxes[toId(targetUser)];
-			if (!box) return this.sendReplyBox(targetUser + ' doesn\'t have a music box...');
-			if (!box.songs.length) return this.sendReplyBox(targetUser + '\'s music box is empty...');
+			if (!box) return this.sendReplyBox(targetUser + " doesn't have a music box...");
+			if (!box.songs.length) return this.sendReplyBox(targetUser + "'s music box is empty...");
 
 			var total = [];
 			box.songs.forEach(function (song) {
 				total.push('<a href = "' + song.link + '"><button style = "margin: 1px; ' + (box.css || '') + '">' + song.title + '</button></a>');
 			});
-			this.sendReplyBox(targetUser + '\'s music box:<br> ' + total.join('<br>'));
+			this.sendReplyBox(targetUser + "'s music box:<br> " + total.join('<br>'));
 		}
 	}
 }

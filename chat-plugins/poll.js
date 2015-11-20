@@ -5,8 +5,8 @@
 
 'use strict';
 
-const permission = 'broadcast';
-const blackbutton = 'padding:2px; background-color:#000; border:1px solid #666; color:white';
+let permission = 'broadcast';
+let blackbutton = 'padding:2px; background-color:#000; border:1px solid #666; color:white';
 
 let Poll = (function () {
 	function Poll(room, question, options) {
@@ -17,8 +17,7 @@ let Poll = (function () {
 		}
 		this.room = room;
 		this.question = question;
-		this.voters = {};
-		this.voterIps = {};
+		this.voters = new Set();
 		this.totalVotes = 0;
 		this.timeout = null;
 		this.timeoutMins = 0;
@@ -30,10 +29,7 @@ let Poll = (function () {
 	}
 
 	Poll.prototype.vote = function (user, option) {
-		let ip = user.latestIp;
-		let userid = user.userid;
-
-		if (userid in this.voters || ip in this.voterIps) {
+		if (this.voters.has(user.latestIp)) {
 			return user.sendTo(this.room, "You have already voted for this poll.");
 		} else {
 			this.voters.add(user.latestIp);
@@ -43,8 +39,6 @@ let Poll = (function () {
 			}
 		}
 
-		this.voters[userid] = option;
-		this.voterIps[ip] = option;
 		this.options.get(option).votes++;
 		this.totalVotes++;
 
@@ -52,14 +46,10 @@ let Poll = (function () {
 	};
 
 	Poll.prototype.blankvote = function (user, option) {
-		let ip = user.latestIp;
-		let userid = user.userid;
-
-		if (userid in this.voters || ip in this.voterIps) {
+		if (this.voters.has(user.latestIp)) {
 			return user.sendTo(this.room, "You're already looking at the results.");
 		} else {
-			this.voters[userid] = 0;
-			this.voterIps[ip] = 0;
+			this.voters.add(user.latestIp);
 		}
 
 		this.update();
@@ -75,7 +65,7 @@ let Poll = (function () {
 		return output;
 	};
 
-	Poll.prototype.generateResults = function (ended, option) {
+	Poll.prototype.generateResults = function (ended) {
 		let icon = '<span style="border:1px solid #' + (ended ? '777;color:#555' : '6A6;color:#484') + ';border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> ' + (ended ? "Poll ended" : "Poll") + '</span>';
 		let totalVotes = '<p align="left">[Total Votes: ' + this.totalVotes + ']</p>';
 		let output = '<div class="infobox"><p style="margin: 2px 0 5px 0">' + icon + ' <strong style="font-size:11pt">' + Tools.escapeHTML(this.question) + '</strong></p>' + totalVotes;
@@ -96,31 +86,20 @@ let Poll = (function () {
 	};
 
 	Poll.prototype.update = function () {
-		let results = [];
-
-		for (let i = 0; i <= this.options.size; i++) {
-			results.push(this.generateResults(false, i));
-		}
+		let results = this.generateResults();
 
 		// Update the poll results for everyone that has voted
 		for (let i in this.room.users) {
 			let user = this.room.users[i];
-			if (user.userid in this.voters) {
-				user.sendTo(this.room, '|uhtmlchange|poll' + this.room.pollNumber + '|' + results[this.voters[user.userid]]);
-			} else if (user.latestIp in this.voterIps) {
-				user.sendTo(this.room, '|uhtmlchange|poll' + this.room.pollNumber + '|' + results[this.voterIps[user.latestIp]]);
+			if (this.voters.has(user.latestIp)) {
+				user.sendTo(this.room, '|uhtmlchange|poll' + this.room.pollNumber + '|' + results);
 			}
 		}
 	};
 
 	Poll.prototype.display = function (user, broadcast) {
 		let votes = this.generateVotes();
-
-		let results = [];
-
-		for (let i = 0; i <= this.options.size; i++) {
-			results.push(this.generateResults(false, i));
-		}
+		let results = this.generateResults();
 
 		let target = {};
 
@@ -132,10 +111,8 @@ let Poll = (function () {
 
 		for (let i in target) {
 			let thisUser = target[i];
-			if (thisUser.userid in this.voters) {
-				thisUser.sendTo(this.room, '|uhtml|poll' + this.room.pollNumber + '|' + results[this.voters[thisUser.userid]]);
-			} else if (thisUser.latestIp in this.voterIps) {
-				thisUser.sendTo(this.room, '|uhtml|poll' + this.room.pollNumber + '|' + results[this.voterIps[thisUser.latestIp]]);
+			if (this.voters.has(thisUser.latestIp)) {
+				thisUser.sendTo(this.room, '|uhtml|poll' + this.room.pollNumber + '|' + results);
 			} else {
 				thisUser.sendTo(this.room, '|uhtml|poll' + this.room.pollNumber + '|' + votes);
 			}

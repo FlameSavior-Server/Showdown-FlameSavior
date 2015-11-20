@@ -36,11 +36,11 @@ exports.commands = {
 				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", 5) +
 				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 20) +
 				table("Room", "Buys a public unofficial chat room - will be deleted if inactive.", 25) +
-				table("Fix", "Ability to modify a custom avatar, trainer card, music box, or custom emoticon.", 30) +
+				table("Fix", "Ability to modify a custom avatar, trainer card, userlist icon, or custom emoticon.", 30) +
 				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
+				table("Musicbox", "A command that lists / links up to 6 of your favorite songs", 80) +
 				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", 100) +
-				table("Musicbox", "A command that lists / links 6 of your favorite songs", 115) +
 				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 400) +
 				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 700) +
 				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1000) +
@@ -256,7 +256,7 @@ exports.commands = {
 
 			case 'mb':
 			case 'musicbox':
-				price = 115;
+				price = 80;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!Gold.createMusicBox(user)) return this.errorReply("You already have a music box! There's no need to buy another.");
 				processPurchase(price, parts[0]);

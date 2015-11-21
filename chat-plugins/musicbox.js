@@ -14,7 +14,6 @@ var musicboxes = Gold.musicboxes;
 Gold.createMusicBox = function (user) {
 	if (typeof musicboxes[user.userid] === 'object') return;
 	var box = musicboxes[user.userid] = {};
-	box.max = 6;
 	box.songs = [];
 	fs.writeFileSync(FILE, JSON.stringify(musicboxes, null, 1));
 	return true;
@@ -66,7 +65,7 @@ exports.commands = {
 					validate(target).then(function (song) {
 						if (typeof musicboxes[user.userid] !== 'object') return this.errorReply("You do not own a music box. Buy one from the shop.");
 						var box = musicboxes[user.userid];
-						if (box.songs.length > box.max) return this.sendReply("You currently have " + box.max + " songs in your music box. Each additional song costs 5 bucks.");
+						if (box.songs.length >= 8) return this.sendReply("You currently have 8 songs in your music box. You can't add any more.");
 						if (~box.songs.map(function (data) { return data.link }).indexOf(song.link)) return this.sendReply('|html|You already have the song "<b>' + song.title + '</b>" in your music box.');
 
 						box.songs.push(song);

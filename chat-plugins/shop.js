@@ -39,7 +39,7 @@ exports.commands = {
 				table("Fix", "Ability to modify a custom avatar, trainer card, userlist icon, or custom emoticon.", 30) +
 				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
-				table("Musicbox", "A command that lists / links up to 6 of your favorite songs", 80) +
+				table("Musicbox", "A command that lists / links up to 8 of your favorite songs", 80) +
 				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", 100) +
 				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 400) +
 				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 700) +

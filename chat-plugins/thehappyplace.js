@@ -35,3 +35,5 @@ exports.commands = {
 		this.logModCommand(Tools.escapeHTML(user.name) + " has updated the quote of the day to: " + quote);
 	}
 };
+
+// testing

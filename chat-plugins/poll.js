@@ -73,7 +73,7 @@ let Poll = (function () {
 
 		let i = iter.next();
 		let c = 0;
-		let colors = ['#FF99', '#56600FF', '#88B'];
+		let colors = ['#8df', '#89d', '#80sd'];
 		while (!i.done) {
 			let percentage = Math.round((i.value[1].votes * 100) / (this.totalVotes || 1));
 			output += '<div style="margin-top: 3px"><span>' + i.value[0] + '. <strong>' + Tools.escapeHTML(i.value[1].name) + '</strong></span> <small style="font-size:8pt;padding-left:6px"> | ' + percentage + '% (' + i.value[1].votes + ' vote' + (i.value[1].votes === 1 ? '' : 's') + ')</small><br /><span style="background:' + colors[c % 3] + ';padding-right:' + (percentage * 3) + 'px"></span></div>';

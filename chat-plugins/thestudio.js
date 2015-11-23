@@ -8,7 +8,7 @@ exports.commands = {
 	startaotd: function () {
 		return this.parse('/toggleaotd on');
 	},
-
+// ANOTHER TEST YAY
 	endaotd: function () {
 		return this.parse('/toggleaotd off');
 	},

@@ -7,7 +7,7 @@
 */
 
 var quote = "";
-
+// MORE TESTS YAY
 exports.commands = {
 	quoteoftheday: 'qotd',
 	qotd: function (target, room, user) {

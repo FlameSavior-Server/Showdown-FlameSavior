@@ -253,6 +253,10 @@ exports.commands = {
 			return this.sendReply("Hangman has been enabled for this room.");
 		},
 
+		help: function (target, room, user) {
+			this.parse('/hangmanhelp');
+		},
+
 		'': function (target, room, user) {
 			if (!room.game || room.game.gameType !== 'hangman') return this.errorReply("There is no game of hangman running in this room.");
 			if (!this.canBroadcast()) return;
@@ -273,6 +277,7 @@ exports.commands = {
 				"/hangman end - Ends the game of hangman before the man is hanged or word is guessed. Requires: % @ # & ~"].join("<br />")
 		);
 	},
+	gw: 'guess',
 	g: 'guess',
 	guess: function (target, room, user) {
 		return this.parse('/hangman guess ' + target);

@@ -800,41 +800,6 @@ exports.commands = {
 		var bot = '<img src="http://www.smogon.com/media/forums/images/badges/mind.png" title="Gold Bot Hoster">';
 		return this.sendReplyBox('<b>List of Gold Badges</b>:<br>' + fgs + '  ' + admin + '    ' + dev + '  ' + creator + '   ' + comcun + '    ' + mod + '    ' + leader + '    ' + league + '    ' + champ + '    ' + artist + '    ' + twinner + '    ' + vip + '    ' + bot + ' <br>--Hover over them to see the meaning of each.<br>--Get a badge and get a FREE custom avatar!<br>--Click <a href="http://goldserver.weebly.com/badges.html">here</a> to find out more about how to get a badge.');
 	},
-	goldroomleader: function(target, room, user) {
-		if (!room.chatRoomData) {
-			return this.sendReply("/roomleader - This room is't designed for per-room moderation to be added.");
-		}
-		var target = this.splitTarget(target, true);
-		var targetUser = this.targetUser;
-		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
-		if (!room.founder || user.userid != room.founder && !this.can('hotpatch')) return false;
-		if (!room.auth) room.auth = room.chatRoomData.auth = {};
-		var name = targetUser.name;
-		room.auth[targetUser.userid] = '&';
-		//room.founder = targetUser.userid;
-		this.addModCommand('' + name + ' was appointed to Room Leader by ' + user.name + '.');
-		room.onUpdateIdentity(targetUser);
-		//room.chatRoomData.leaders = room.founder;
-		Rooms.global.writeChatRoomData();
-	},
-	goldderoomleader: function(target, room, user) {
-		if (!room.auth) {
-			return this.sendReply("/roomdeowner - This room isn't designed for per-room moderation");
-		}
-		target = this.splitTarget(target, true);
-		var targetUser = this.targetUser;
-		var name = this.targetUsername;
-		var userid = toId(name);
-		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
-		if (room.auth[userid] !== '&') return this.sendReply("User '" + name + "' is not a room leader.");
-		if (!room.founder || user.userid != room.founder && !this.can('hotpatch')) return false;
-		delete room.auth[userid];
-		this.sendReply('(' + name + ' is no longer Room Leader.)');
-		if (targetUser) targetUser.updateIdentity();
-		if (room.chatRoomData) {
-			Rooms.global.writeChatRoomData();
-		}
-	},
 	badges: 'badge',
 	badge: function(target, room, user) {
 		if (!this.canBroadcast()) return;

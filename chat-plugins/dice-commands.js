@@ -14,44 +14,44 @@ exports.commands = {
 	},
 	dicestart: 'startdice',
 	startdice: function(target, room, user) {
-	 	if (!this.canTalk()) return this.sendReply("You can not start dice games while unable to speak.");
+	 	if (!this.canTalk()) return this.errorReply("You can not start dice games while unable to speak.");
 	 	if (room.id !== 'gamechamber' && !user.can('pban')) return this.sendReply("Dice games should only be started in \"Game Chamber\".");
-	 	//if (!user.can('broadcast',null,room)) return this.sendReply('/startdice - Access denied.');
-	 	if (!target) return this.sendReply('Usage: /startdice <bet>');
-	 	if (isNaN(Number(target))) return this.sendReply('/startdice - <bet> must be a number greater than 0');
+	 	//if (!user.can('broadcast',null,room)) return this.errorReply('/startdice - Access denied.');
+	 	if (!target) return this.errorReply('Usage: /startdice <bet>');
+	 	if (isNaN(Number(target))) return this.errorReply('/startdice - <bet> must be a number greater than 0');
 	 	target = Math.round(Number(target));
-	 	if (target < 1) return this.sendReply('/startdice - You can not bet less than one buck.');
-	 	if (target > 1000) return this.sendReply('/startdice - You can\'t bet more than 1,000 bucks.');
+	 	if (target < 1) return this.errorReply('/startdice - You can not bet less than one buck.');
+	 	if (target > 1000) return this.errorReply('/startdice - You can\'t bet more than 1,000 bucks.');
 	 	var self = this;
 
 	 	economy.readMoneyAsync(user.userid, function(userMoney) {
 	 		if (!room.dice) room.dice = {};
 	 		if (!room.dice.status) room.dice.status = 0;
-	 		if (room.dice.status > 0) return self.sendReply('/startdice - There is already a game started in here!');
+	 		if (room.dice.status > 0) return self.errorReply('/startdice - There is already a game started in here!');
 	 		room.dice.status = 1;
 	 		room.dice.bet = target;
 	 		room.dice.startTime = Date.now();
-	 		room.addRaw('<div class="infobox"><h2><center><font color=#24678d>' + Tools.escapeHTML(user.name) + ' has started a dice game for </font><font color=red>' + target + 
+	 		room.addRaw('<div class="infobox"><h2><center><font color="' + Gold.hashColor(user.name) + '">' + Tools.escapeHTML(user.name) + '</font> <font color=#24678d>has started a dice game for </font><font color=red>' + target + 
 	 			' </font><font color=#24678d>' + ((target === 1) ? " buck." : " bucks.") + '</font><br /> <button name="send" value="/joindice">Click to join.</button></center></h2></div>');
 	 		room.update();
 	 	});
 	},
 
 	joindice: function(target, room, user) {
-		if (!this.canTalk()) return this.sendReply("You may not join dice games while unable to speak.");
-	 	if (!room.dice) return this.sendReply('There is no dice game in it\'s signup phase in this room.');
-	 	if (room.dice.status !== 1) return this.sendReply('There is no dice game in it\'s signup phase in this room.');
+		if (!this.canTalk()) return this.errorReply("You may not join dice games while unable to speak.");
+	 	if (!room.dice) return this.errorReply('There is no dice game in it\'s signup phase in this room.');
+	 	if (room.dice.status !== 1) return this.errorReply('There is no dice game in it\'s signup phase in this room.');
 	 	var self = this;
 	 	room.dice.status = 2;
 	 	economy.readMoneyAsync(user.userid, function(userMoney) {
 	 		if (userMoney < room.dice.bet) {
-	 			self.sendReply('You don\'t have enough bucks to join this game.');
+	 			self.errorReply('You don\'t have enough bucks to join this game.');
 	 			return room.dice.status = 1;
 	 		}
 	 		if (!room.dice.player1) {
 	 			room.dice.player1 = user.userid;
 	 			room.dice.status = 1;
-	 			room.addRaw('<b>' + Tools.escapeHTML(user.name) + ' has joined the dice game.</b>');
+	 			room.addRaw('<b><font color="' + Gold.hashColor(user.name) + '">' + Tools.escapeHTML(user.name) + '</font> has joined the dice game.</b>');
 	 			return room.update();
 	 		}
 	 		if (room.dice.player1 === user.userid) return room.dice.status = 1;
@@ -85,7 +85,7 @@ exports.commands = {
 	 				room.update();
 	 				return false;
 	 			}
-	 			room.addRaw('<b>' + Tools.escapeHTML(user.name) + ' has joined the dice game.</b>');
+	 			room.addRaw('<b><font color="' + Gold.hashColor(user.name) + '">' + Tools.escapeHTML(user.name) + '</font> has joined the dice game.</b>');
 	 			room.update();
 	 			var firstNumber = Math.floor(6 * Math.random()) + 1;
 	 			var secondNumber = Math.floor(6 * Math.random()) + 1;
@@ -99,7 +99,7 @@ exports.commands = {
 	 						delete room.dice.player2;
 	 						delete room.dice.bet;
 	 						delete room.dice.startTime;
-	 						room.addRaw('<b>' + Tools.escapeHTML(firstName) + ' no longer has enough bucks to play, game ending.');
+	 						room.addRaw('<b><font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font> no longer has enough bucks to play, game ending.');
 	 						return room.update();
 	 					}
 	 					if (secondMoney < room.dice.bet) {
@@ -108,7 +108,7 @@ exports.commands = {
 	 						delete room.dice.player2;
 	 						delete room.dice.bet;
 	 						delete room.dice.startTime;
-	 						room.addRaw('<b>' + Tools.escapeHTML(secondName) + ' no longer has enough bucks to play, game ending.');
+	 						room.addRaw('<b><font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + ' no longer has enough bucks to play, game ending.');
 	 						return room.update();
 	 					}
 	 					var output = '<div class="infobox">Game has two players, starting now.<br />';
@@ -124,8 +124,8 @@ exports.commands = {
 						}
 						var betMoney = room.dice.bet;
 	 					if (firstNumber > secondNumber) {
-	 						output += '<font color=#24678d><b>' + Tools.escapeHTML(firstName) + '</b></font> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />'
-	 						output += 'Better luck next time ' + Tools.escapeHTML(secondName) + '!';
+	 						output += '<b><font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font></b> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />'
+	 						output += 'Better luck next time, <font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + '</font>!';
 	 						economy.writeMoney('money', Users.get(firstName).userid, betMoney, function() {
 	 							economy.writeMoney('money', Users.get(secondName).userid,-betMoney,function() {
 	 								economy.readMoneyAsync(Users.get(firstName).userid, function(firstMoney){
@@ -143,8 +143,8 @@ exports.commands = {
 	 						delete room.dice.startTime;
 	 					}
 	 					if (secondNumber > firstNumber) {
-	 						output += '<font color=#24678d><b>' + Tools.escapeHTML(secondName) + '</b></font> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />';
-	 						output += 'Better luck next time ' + Tools.escapeHTML(firstName) + '!';
+	 						output += '<b><font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + '</font></b> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />';
+	 						output += 'Better luck next time <font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font>!';
 	 						economy.writeMoney('money', Users.get(secondName).userid, betMoney, function() {
 	 							economy.writeMoney('money', Users.get(firstName).userid,-betMoney,function() {
 	 								economy.readMoneyAsync(Users.get(firstName).userid, function(firstMoney){
@@ -170,12 +170,12 @@ exports.commands = {
 		});
 	},
 	enddice: function (target, room, user) {
-		if (!this.canTalk()) return this.sendReply("You may not end dice games while unable to speak.");
-		if (!room.dice) return this.sendReply('/enddice - There is no dice game in this room.');
-		if (room.dice.status === 0) return this.sendReply('/enddice - There is no dice game in this room.');
-		if ((Date.now() - room.dice.startTime) < 60000 && !user.can('broadcast', null, room)) return this.sendReply('Regular users may not end a dice game within the first minute of it starting.');
+		if (!this.canTalk()) return this.errorReply("You may not end dice games while unable to speak.");
+		if (!room.dice) return this.errorReply('/enddice - There is no dice game in this room.');
+		if (room.dice.status === 0) return this.errorReply('/enddice - There is no dice game in this room.');
+		if ((Date.now() - room.dice.startTime) < 60000 && !user.can('broadcast', null, room)) return this.errorReply('Regular users may not end a dice game within the first minute of it starting.');
 		room.dice = {};
 		room.dice.status = 0;
-		return this.add('|raw|<b>' + Tools.escapeHTML(user.name) + ' ended the dice game.');
+		return this.add('|raw|<b><font color="' + Gold.hashColor(user.name) +'">' + Tools.escapeHTML(user.name) + '</font> ended the dice game.');
 	},
 };

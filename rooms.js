@@ -905,6 +905,7 @@ let BattleRoom = (function () {
 
 	BattleRoom.prototype.resetTimer = null;
 	BattleRoom.prototype.resetUser = '';
+	BattleRoom.prototype.modchatUser = '';
 	BattleRoom.prototype.expireTimer = null;
 	BattleRoom.prototype.active = false;
 
@@ -1252,6 +1253,17 @@ let BattleRoom = (function () {
 		}
 
 		return false;
+	};
+	BattleRoom.prototype.requestModchat = function (user) {
+		if (user === null) {
+			this.modchatUser = '';
+			return;
+		} else if (user.can('modchat') || !this.modchatUser || this.modchatUser === user.userid) {
+			this.modchatUser = user.userid;
+			return;
+		} else {
+			return "Only the user who set modchat and global staff can change modchat levels in battle rooms";
+		}
 	};
 	BattleRoom.prototype.decision = function (user, choice, data) {
 		this.battle.sendFor(user, choice, data);

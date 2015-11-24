@@ -31,7 +31,7 @@ var commands = {
 	start: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
 		if (!room.chatRoomData || !this.can('mute', null, room)) return false;
-		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 		if (artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are already in progress.");
 
 		var nominations = artistOfTheDay.nominations;
@@ -57,7 +57,7 @@ var commands = {
 	end: function (target, room, user) {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.can('mute', null, room)) return false;
 		if (!room.chatRoomData || !this.can('mute', null, room)) return false;
-		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 		if (!artistOfTheDay.nominations.size) return this.sendReply("No nominations have been submitted yet.");
 
@@ -80,7 +80,7 @@ var commands = {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target) return false;
 		if (!target) this.parse('/help aotd prenom');
 		if (!room.chatRoomData || !target) return false;
-		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 		if (artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are in progress.");
 		if (!room.chatRoomData.prenominations) room.chatRoomData.prenominations = [];
 
@@ -121,7 +121,7 @@ var commands = {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target) return false;
 		if (!target) this.parse('/help aotd nom');
 		if (!room.chatRoomData || !target) return false;
-		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 
 		var removedNominators = artistOfTheDay.removedNominators;
@@ -197,7 +197,7 @@ var commands = {
 		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !target || !this.can('mute', null, room)) return false;
 		if (!target) this.parse('/help aotd removenom');
 		if (!room.chatRoomData || !target || !this.can('mute', null, room)) return false;
-		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 		if (!artistOfTheDay.pendingNominations) return this.sendReply("Nominations for the Artist of the Day are not in progress.");
 		if (!artistOfTheDay.nominations.size) return this.sendReply("No nominations have been submitted yet.");
 
@@ -243,7 +243,7 @@ var commands = {
 				"\"" + room.chatRoomData.artistQuoteOfTheDay + "\""
 			);
 		}
-		if (!this.can('declare', null, room)) return false;
+		if (!this.can('ban', null, room)) return false;
 		if (target === 'off' || target === 'disable' || target === 'reset') {
 			if (!room.chatRoomData.artistQuoteOfTheDay) return this.sendReply("The Artist Quote of the Day has already been reset.");
 			delete room.chatRoomData.artistQuoteOfTheDay;

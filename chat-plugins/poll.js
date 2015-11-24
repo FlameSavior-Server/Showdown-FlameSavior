@@ -154,6 +154,7 @@ exports.commands = {
 			let params = target.split(target.includes('|') ? '|' : ',').map(function (param) { return param.trim(); });
 
 			if (!this.can(permission, null, room)) return false;
+			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 			if (room.poll) return this.errorReply("There is already a poll in progress in this room.");
 
 			if (params.length < 3) return this.errorReply("Not enough arguments for /poll new.");
@@ -237,6 +238,7 @@ exports.commands = {
 		stop: 'end',
 		end: function (target, room, user) {
 			if (!this.can(permission, null, room)) return false;
+			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
 			if (room.poll.timeout) clearTimeout(room.poll.timeout);
 

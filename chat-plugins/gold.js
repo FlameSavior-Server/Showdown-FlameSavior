@@ -1024,7 +1024,7 @@ exports.commands = {
 		if (codes.toLowerCase().indexOf(user.name) > -1) {
 			return this.sendReply("Your friend code is already here.");
 		}
-		code.write('\n' + user.name + ': ' + fc);
+		fs.writeFileSync('config/friendcodes.txt', codes + '\n' + user.name + ': ' + fc);
 		return this.sendReply("Your Friend Code: " + fc + " has been set.");
 	},
 	viewcode: 'gc',

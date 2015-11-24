@@ -16,7 +16,7 @@ exports.commands = {
     hang: 'hangman',
 	hangman: function (target, room, user) {
 		if (!this.canTalk()) return this.sendReply("You are unable to talk in this room.");
-		if (!target) target = 'view';
+		if (!target) target = (room.hangman ? 'view' : 'help');
 		var cmd = (~target.indexOf(',') ? target.substr(0, target.indexOf(',')) : target).trim();
 		var targetSplit = target.split(',');
 		for (var u in targetSplit) targetSplit[u] = targetSplit[u].trim();

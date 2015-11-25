@@ -34,6 +34,7 @@ exports.commands = {
             case 'buy':
             case 'join':
                 if (!lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
+                if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
                 if (parts[1]) {
                     if (isNaN(Number(parts[1]))) return this.errorReply("The amount of tickets you buy must be a number.");
                     if (~String(parts[1]).indexOf('.')) return this.errorReply("Cannot contain a decimal.");
@@ -76,6 +77,7 @@ exports.commands = {
             case 'create':
                 if (!this.can('ban', null, room)) return false;
                 if (lottery.gameActive) return this.errorReply("There is a game of Lottery already currently running.");
+                if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
                 if (!parts[1]) return this.errorReply("Usage: /lottery create, [ticket cost]");
                 lottery.maxTicketsPerUser = 25; //default max tickets per user
                 lottery.maxTicketPrice = 20;
@@ -115,6 +117,7 @@ exports.commands = {
             case 'end':
                 if (!this.can('ban', null, room)) return false;
                 if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
+                if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
                 var winner = lottery.players[Math.floor(Math.random() * lottery.players.length)];
                 var jackpot = Math.floor(100 * Math.random()) + 1;
                 if (!lottery.pot == 0) {

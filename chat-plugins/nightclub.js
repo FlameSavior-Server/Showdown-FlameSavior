@@ -23,7 +23,7 @@ function colorify (message) {
 }
 
 function formatHTML (message) {
-	var escapes = ['&lt;', '&gt;', '&gt;', '&quot;', '&apos;', '&#x2f;'];
+	var escapes = ['&amp;', '&lt;', '&gt;', '&gt;', '&quot;', '&apos;', '&#x2f;'];
 	if (!message) return '';
 	var total = '';
 	for (var i = 0; i < message.length; i++) {

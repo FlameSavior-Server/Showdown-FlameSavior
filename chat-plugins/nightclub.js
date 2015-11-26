@@ -120,22 +120,22 @@ var cmds = {
 		this.parse('/nightclub on');
 	},
 	on: function (target, room, user) {
-		if (!this.can('mute', room, null)) return this.sendReply('You must be ranked % or higher to toggle this room\'s nightclub mode.');
+		if (!this.can('declare', null, room)) return this.sendReply('You must be ranked % or higher to toggle this room\'s nightclub mode.');
 		if (nightclubs[room.id]) return this.sendReply('This room\'s already in nightclub mode!');
 
 		nightclubs[room.id] = true;
 		room.add('<center><b><span style = "font-size: 40px; text-shadow: 0px 0px 5px, 0px 0px 10px, 0px 0px 15px;">' + colorify('LET\'S GET FITZY! NIGHTCLUB MODE: ON!') + '</span></b></center>');
 	},
 	off: function (target, room, user) {
-		if (!this.can('mute', room, null)) return this.sendReply('You must be ranked % or higher to toggle this room\'s nightclub mode.');
+		if (!this.can('declare', null, room)) return this.sendReply('You must be ranked % or higher to toggle this room\'s nightclub mode.');
 		if (!nightclubs[room.id]) return this.sendReply('This room isn\'t in nightclub mode yet...');
 
 		room.add('<center><b><span style = "font-size: 40px; text-shadow: 0px 0px 5px, 0px 0px 10px, 0px 0px 15px;">' + colorify('Sizzle down now... Nightclub mode: OFF!') + '</span></b></center>');
 		delete nightclubs[room.id];
 	}
-}
+};
 exports.commands = {
 	nc: 'nightclub',
 	nightclub: cmds,
 	dayclub: cmds.off
-}
+};

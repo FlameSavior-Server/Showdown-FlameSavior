@@ -15,6 +15,10 @@
  * - Administrators can toggle how many emoticons users can do in their messages with a command
  * - Now parses for PS formats such as bold, italics, and strikethrough
  * - PMs emoticons
+ *
+ * TODO:
+ * - Links parsing in emoticon messages?
+ * - Limit to number of PMs emoticons in one message...?
  */
 
 var fs = require('fs');

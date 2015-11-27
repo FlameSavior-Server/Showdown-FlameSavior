@@ -4563,7 +4563,7 @@ var commands = exports.commands = {
 		if (!this.canHTML(target)) return;
 
 		if (user.userid === 'ponybot') {
-			if (!this.can('announce', null, room)) return;
+			if (!this.can('broadcast', null, room)) return;
 			if (message.charAt(0) === '!') this.broadcasting = true;
 		} else {
 			if (!this.can('declare', null, room)) return;

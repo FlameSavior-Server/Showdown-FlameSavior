@@ -23,22 +23,25 @@ let Hangman = (function () {
 		this.incorrectGuesses = 0;
 
 		this.guesses = [];
+		this.letterGuesses = [];
+		this.lastGuesser = '';
 		this.wordSoFar = [];
 
 		for (let i = 0; i < word.length; i++) {
-			if (word[i] === ' ') {
-				this.wordSoFar.push('&nbsp;');
-			} else {
+			if (/[a-zA-Z]/.test(word[i])) {
 				this.wordSoFar.push('_');
+			} else {
+				this.wordSoFar.push(word[i]);
 			}
 		}
 	}
 
-	Hangman.prototype.guessLetter = function (letter) {
-		let lowercase = letter.toLowerCase();
-		if (this.word.toLowerCase().indexOf(lowercase) > -1) {
+	Hangman.prototype.guessLetter = function (letter, guesser) {
+		letter = letter.toUpperCase();
+		if (this.guesses.indexOf(letter) >= 0) return false;
+		if (this.word.toUpperCase().indexOf(letter) > -1) {
 			for (let i = 0; i < this.word.length; i++) {
-				if (this.word[i].toLowerCase() === lowercase) {
+				if (this.word[i].toUpperCase() === letter) {
 					this.wordSoFar[i] = this.word[i];
 				}
 			}
@@ -46,34 +49,45 @@ let Hangman = (function () {
 			if (this.wordSoFar.indexOf('_') < 0) {
 				this.incorrectGuesses = -1;
 				this.guesses.push(letter);
+				this.letterGuesses.push(letter + '1');
+				this.lastGuesser = guesser;
 				this.finish();
-				return;
+				return true;
 			}
+			this.letterGuesses.push(letter + '1');
 		} else {
 			this.incorrectGuesses++;
+			this.letterGuesses.push(letter + '0');
 		}
 
 		this.guesses.push(letter);
+		this.lastGuesser = guesser;
 		this.update();
+		return true;
 	};
 
-	Hangman.prototype.guessWord = function (word) {
-		let ourWord = this.word.toLowerCase().replace(/ /g, '');
-		let guessedWord = word.toLowerCase().replace(/ /g, '');
+	Hangman.prototype.guessWord = function (word, guesser) {
+		let ourWord = toId(this.word);
+		let guessedWord = toId(word);
 		if (ourWord === guessedWord) {
-			for (let i = 0; i < this.word.length; i++) {
-				if (!(this.word[i] === ' ')) {
+			for (let i = 0; i < this.wordSoFar.length; i++) {
+				if (this.wordSoFar[i] === '_') {
 					this.wordSoFar[i] = this.word[i];
 				}
 			}
 			this.incorrectGuesses = -1;
 			this.guesses.push(word);
+			this.lastGuesser = guesser;
 			this.finish();
+			return true;
 		} else if (ourWord.length === guessedWord.length) {
 			this.incorrectGuesses++;
 			this.guesses.push(word);
+			this.lastGuesser = guesser;
 			this.update();
+			return true;
 		}
+		return false;
 	};
 
 	Hangman.prototype.hangingMan = function () {
@@ -107,25 +121,40 @@ let Hangman = (function () {
 		}
 
 		let output = '<div class="broadcast-' + (result === 1 ? 'red' : (result === 2 ? 'green' : 'blue')) + '">';
-		output += '<p style="text-align:center;font-weight:bold;font-size:14pt;margin:5px 0">' + (result === 1 ? 'Too bad! The man has been hanged.' : (result === 2 ? 'The word has been guessed. Congratulations!' : 'Hangman')) + '</p>';
-		output += '<table><tr><td style="text-align:center;">' + this.hangingMan() + '</td><td style="text-align:center;width:100%;">';
+		output += '<p style="text-align:left;font-weight:bold;font-size:10pt;margin:5px 0 0 15px">' + (result === 1 ? 'Too bad! The mon has been hanged.' : (result === 2 ? 'The word has been guessed. Congratulations!' : 'Hangman')) + '</p>';
+		output += '<table><tr><td style="text-align:center;">' + this.hangingMan() + '</td><td style="text-align:center;width:100%;word-wrap:break-word">';
 
 		let wordString = '';
 		if (result === 1) {
 			for (let i = 0; i < this.wordSoFar.length; i++) {
+				if (i) wordString += '<small>&nbsp;</small>';
 				if (this.wordSoFar[i] === '_') {
-					wordString += '<font color="#7af87a">' + this.word[i] + '</font> ';
+					wordString += '<font color="#7af87a">' + this.word[i] + '</font>';
 				} else {
-					wordString += this.wordSoFar[i] + ' ';
+					wordString += this.wordSoFar[i];
 				}
 			}
 		} else {
-			wordString = this.wordSoFar.join(' ');
+			wordString = this.wordSoFar.join('<small>&nbsp;</small>');
 		}
 
-		output += '<p style="font-weight:bold;">' + wordString + '</p>';
-		if (this.hint) output += '<strong>Hint:</strong> ' + Tools.escapeHTML(this.hint) + '<br/>';
-		if (this.guesses) output += '<strong>Guesses so far:</strong> ' + Tools.escapeHTML(this.guesses.join(', ')) + '<br/>';
+		if (this.hint) output += '<div>(Hint: ' + Tools.escapeHTML(this.hint) + ')</div>';
+		output += '<p style="font-weight:bold;font-size:12pt">' + wordString + '</p>';
+		if (this.guesses.length) {
+			if (this.letterGuesses.length) {
+				output += 'Letters: ' + this.letterGuesses.map(function (g) {
+					return '<strong' + (g[1] === '1' ? '' : ' style="color: #DBA"') + '>' + Tools.escapeHTML(g[0]) + '</strong>';
+				}).join(', ');
+			}
+			if (result === 2) {
+				output += '<br />Winner: ' + Tools.escapeHTML(this.lastGuesser);
+			} else if (this.guesses[this.guesses.length - 1].length === 1) {
+				// last guess was a letter
+				output += ' <small>&ndash; ' + Tools.escapeHTML(this.lastGuesser) + '</small>';
+			} else {
+				output += '<br />Guessed: ' + this.guesses[this.guesses.length - 1] + ' <small>&ndash; ' + Tools.escapeHTML(this.lastGuesser) + '</small>';
+			}
+		}
 
 		output += '</td></tr></table></div>';
 
@@ -176,9 +205,11 @@ exports.commands = {
 			if (room.game) return this.errorReply("There is already a game in progress in this room.");
 
 			if (!params) return this.errorReply("No word entered.");
-			let word = params[0].replace(/[^A-Za-z ]/g, '');
+			let word = params[0].replace(/[^A-Za-z '-]/g, '');
 			if (word.replace(/ /g, '').length < 1) return this.errorReply("Enter a valid word");
-			if (word.length > 30) return this.errorReply("Word too long.");
+			if (word.length > 30) return this.errorReply("Phrase must be less than 30 characters.");
+			if (word.split(' ').some(function (w) { return w.length > 20; })) return this.errorReply("Each word in the phrase must be less than 20 characters.");
+			if (!/[a-zA-Z]/.test(word)) return this.errorReply("Word must contain at least one letter.");
 
 			let hint;
 			if (params.length > 1) {
@@ -205,12 +236,16 @@ exports.commands = {
 
 			if (room.game.guesses.indexOf(parsed) > -1) return this.errorReply("Your guess has already been guessed.");
 
-			room.send(user.name + " guessed " + parsed + '!');
-
 			if (target.length > 1) {
-				room.game.guessWord(parsed);
+				if (!room.game.guessWord(parsed, user.name)) {
+					this.errorReply("Invalid guess");
+				} else {
+					room.send(user.name + " guessed \"" + parsed + "\"!");
+				}
 			} else {
-				room.game.guessLetter(parsed);
+				if (!room.game.guessLetter(parsed, user.name)) {
+					this.errorReply("Invalid guess");
+				}
 			}
 		},
 		guesshelp: ["/hangman guess [letter] - Makes a guess for the letter entered.",
@@ -257,12 +292,16 @@ exports.commands = {
 			this.parse('/hangmanhelp');
 		},
 
-		'': function (target, room, user) {
+		display: function (target, room, user) {
 			if (!room.game || room.game.gameType !== 'hangman') return this.errorReply("There is no game of hangman running in this room.");
 			if (!this.canBroadcast()) return;
 			room.update();
 
 			room.game.display(user, this.broadcasting);
+		},
+
+		'': function (target, room, user) {
+			return this.parse('/help hangman');
 		}
 	},
 
@@ -273,12 +312,12 @@ exports.commands = {
 				"/hangman create [word], [hint] - Makes a new hangman game. Requires: % @ # & ~",
 				"/hangman guess [letter] - Makes a guess for the letter entered.",
 				"/hangman guess [word] - Same as a letter, but guesses an entire word.",
-				"/hangman - Displays the game.",
-				"/hangman end - Ends the game of hangman before the man is hanged or word is guessed. Requires: % @ # & ~"].join("<br />")
+				"/hangman display - Displays the game.",
+				"/hangman end - Ends the game of hangman before the man is hanged or word is guessed. Requires: % @ # & ~",
+				"/hangman [enable/disable] - Enables or disables hangman from being started in a room. Requires: # & ~"].join('<br /');
 		);
 	},
-	gw: 'guess',
-	g: 'guess',
+
 	guess: function (target, room, user) {
 		return this.parse('/hangman guess ' + target);
 	},

@@ -184,7 +184,7 @@ var commands = {
 		});
 
 		buffer += "Current nominations (" + nominations.length + "):";
-		for (let i = 0; i < nominations.length; i++) {
+		for (var i = 0; i < nominations.length; i++) {
 			buffer += "<br />" +
 				"- " + Tools.escapeHTML(nominations[i][0]) + " (submitted by " + Tools.escapeHTML(nominations[i][1].name) + ")";
 		}

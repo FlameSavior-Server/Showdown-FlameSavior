@@ -322,9 +322,9 @@ exports.commands = {
 		return this.parse('/me pets ' + target + ' lavishly.');
 	},
 	utube: function(target, room, user) {
-		if (user.userid !== 'panpawn') return false;
+		if (user.userid !== 'ponybot') return false;
 		if (!target) return this.errorReply("Needs a target.");
-		this.add('|raw|' + target);
+		room.addRaw(target);
 	},
 	roomlist: function (target, room, user) {
 		if(!this.can('pban')) return;

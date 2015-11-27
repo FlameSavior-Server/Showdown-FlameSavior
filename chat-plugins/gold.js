@@ -321,6 +321,11 @@ exports.commands = {
 		if (!target) return this.sendReply('/pet needs a target.');
 		return this.parse('/me pets ' + target + ' lavishly.');
 	},
+	utube: function(target, room, user) {
+		if (user.userid !== 'panpawn') return false;
+		if (!target) return this.errorReply("Needs a target.");
+		this.add('|raw|' + target);
+	},
 	roomlist: function (target, room, user) {
 		if(!this.can('pban')) return;
 		var totalUsers = 0; 

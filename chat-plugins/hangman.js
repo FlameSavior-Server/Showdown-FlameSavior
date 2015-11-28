@@ -289,7 +289,7 @@ exports.commands = {
 		},
 
 		help: function (target, room, user) {
-			this.parse('/hangmanhelp');
+			this.parse('/help hangman');
 		},
 
 		display: function (target, room, user) {
@@ -304,19 +304,14 @@ exports.commands = {
 			return this.parse('/help hangman');
 		}
 	},
-
-	hangmanhelp: function (target, room, user) {
-		this.sendReplyBox(
-				["/hangman allows users to play the popular game hangman in PS rooms.",
+	hangmanhelp: ["/hangman allows users to play the popular game hangman in PS rooms.",
 				"Accepts the following commands:",
 				"/hangman create [word], [hint] - Makes a new hangman game. Requires: % @ # & ~",
 				"/hangman guess [letter] - Makes a guess for the letter entered.",
 				"/hangman guess [word] - Same as a letter, but guesses an entire word.",
 				"/hangman display - Displays the game.",
 				"/hangman end - Ends the game of hangman before the man is hanged or word is guessed. Requires: % @ # & ~",
-				"/hangman [enable/disable] - Enables or disables hangman from being started in a room. Requires: # & ~"].join('<br /')
-		);
-	},
+				"/hangman [enable/disable] - Enables or disables hangman from being started in a room. Requires: # & ~"],
 
 	guess: function (target, room, user) {
 		return this.parse('/hangman guess ' + target);

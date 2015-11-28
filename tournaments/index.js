@@ -980,7 +980,7 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 	} else if (cmd === 'help') {
 		return this.parse('/help tournament');
 	} else if (cmd === 'on' || cmd === 'enable') {
-		if (!this.can('tournamentsmanagement', null, room)) return;
+		if (!this.can('declare', null, room)) return;
 		if (room.toursEnabled) {
 			return this.sendReply("Tournaments are already enabled.");
 		}

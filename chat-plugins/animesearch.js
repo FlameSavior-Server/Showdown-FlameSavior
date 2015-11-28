@@ -85,7 +85,7 @@ exports.commands = {
 	anime: function (target, room, user, connection, cmd) {
 		if (!this.canBroadcast()) return;
 		if (room.id !== 'animeandmanga') return this.errorReply("This command can only be used in the room \"Anime and Manga\"");
-		if (!target || !target.trim()) return this.sendReply('/anime [query] - Searches for an anime based on the given search query.');
+		if (!target || !target.trim()) return this.errorReply("/anime [query] - Searches for an anime based on the given search query.");
 
 		search(target.trim()).then(function (response) {
 			this.sendReplyBox(response);

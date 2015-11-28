@@ -123,6 +123,7 @@ var cmds = {
 		if (!this.can('declare', null, room)) return this.sendReply('You must be ranked % or higher to toggle this room\'s nightclub mode.');
 		if (nightclubs[room.id]) return this.sendReply('This room\'s already in nightclub mode!');
 
+		this.privateModCommand("(" + user.name + " has turned nightclub mode on in this room.)");
 		nightclubs[room.id] = true;
 		room.add('<center><b><span style = "font-size: 40px; text-shadow: 0px 0px 5px, 0px 0px 10px, 0px 0px 15px;">' + colorify('LET\'S GET FITZY! NIGHTCLUB MODE: ON!') + '</span></b></center>');
 	},
@@ -130,6 +131,7 @@ var cmds = {
 		if (!this.can('declare', null, room)) return this.sendReply('You must be ranked % or higher to toggle this room\'s nightclub mode.');
 		if (!nightclubs[room.id]) return this.sendReply('This room isn\'t in nightclub mode yet...');
 
+		this.privateModCommand("(" + user.name + " has turned nightclub mode off in this room.)");
 		room.add('<center><b><span style = "font-size: 40px; text-shadow: 0px 0px 5px, 0px 0px 10px, 0px 0px 15px;">' + colorify('Sizzle down now... Nightclub mode: OFF!') + '</span></b></center>');
 		delete nightclubs[room.id];
 	}

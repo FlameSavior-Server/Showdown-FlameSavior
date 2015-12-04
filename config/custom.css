@@ -202,7 +202,7 @@
 /*********************
  * Regular CSS Style *
  ********************/
-
+/*
 body {
 	background:url("http://goldservers.info/about/serverbg.jpg") !important;
 }
@@ -228,13 +228,13 @@ body {
 	font:10pt Verdana,sans-serif;
 	white-space:nowrap
 }
-
+*/
 
 
 /**********************************
  * Holiday (really Christmas) CSS *
  *********************************/ 
-/*
+
 .header {
 	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
 	background-color:#32CD32;
@@ -306,7 +306,7 @@ body {
 	background: url("http://i.imgur.com/CtoyG6B.png");
 	color: black;
 }
-*/
+
 
 
 /***************** 

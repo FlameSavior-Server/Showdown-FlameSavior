@@ -80,7 +80,7 @@ exports.commands = {
 		if (!target) return this.parse('/avatars');
 		let parts = target.split(',');
 		let avatar = parseInt(parts[0], 10);
-		if (parts[0] === '#bw2elesa') {
+		if (parts[0] === '#bw2elesa' || parts[0] === '#teamrocket') {
 			avatar = parts[0];
 		}
 		if (typeof avatar === 'number' && (!avatar || avatar > 294 || avatar < 1)) {
@@ -1509,19 +1509,21 @@ exports.commands = {
 		case 'player':
 			target = '\u2605';
 			/* falls through */
-		default:
+		default: {
 			if (!Config.groups[target]) {
 				return this.parse('/help modchat');
 			}
 			if (Config.groupsranking.indexOf(target) > 1 && !user.can('modchatall', null, room)) {
 				return this.errorReply("/modchat - Access denied for setting higher than " + Config.groupsranking[1] + ".");
 			}
-			if (Config.groupsranking.indexOf(target) > Math.max(1, Config.groupsranking.indexOf(room.auth[user.userid])) && !user.can('makeroom')) {
+			let roomGroup = (room.auth && room.isPrivate === true ? ' ' : user.group);
+			if (user.userid in room.auth) roomGroup = room.auth[user.userid];
+			if (Config.groupsranking.indexOf(target) > Math.max(1, Config.groupsranking.indexOf(roomGroup)) && !user.can('makeroom')) {
 				return this.errorReply("/modchat - Access denied for setting higher than " + Config.groupsranking[1] + ".");
 			}
 			room.modchat = target;
 			break;
-		}
+		}}
 		if (currentModchat === room.modchat) {
 			return this.errorReply("Modchat is already set to " + currentModchat + ".");
 		}
@@ -1766,6 +1768,7 @@ exports.commands = {
 		this.logEntry(user.name + " used /hotpatch " + target);
 
 		if (target === 'chat' || target === 'commands') {
+			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			try {
 				CommandParser.uncacheTree('./command-parser.js');
 				delete require.cache[require.resolve('./commands.js')];
@@ -1782,6 +1785,7 @@ exports.commands = {
 				return this.errorReply("Something failed while trying to hotpatch chat: \n" + e.stack);
 			}
 		} else if (target === 'tournaments') {
+			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			try {
 				let runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments');
@@ -1792,9 +1796,11 @@ exports.commands = {
 				return this.errorReply("Something failed while trying to hotpatch tournaments: \n" + e.stack);
 			}
 		} else if (target === 'battles') {
+			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			Simulator.SimulatorProcess.respawn();
 			return this.sendReply("Battles have been hotpatched. Any battles started after now will use the new code; however, in-progress battles will continue to use the old code.");
 		} else if (target === 'formats') {
+			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			try {
 				let toolsLoaded = !!Tools.isLoaded;
 				// uncache the tools.js dependency tree
@@ -1815,6 +1821,7 @@ exports.commands = {
 				return this.errorReply("Something failed while trying to hotpatch formats: \n" + e.stack);
 			}
 		} else if (target === 'learnsets') {
+			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			try {
 				let toolsLoaded = !!Tools.isLoaded;
 				// uncache the tools.js dependency tree
@@ -1826,6 +1833,12 @@ exports.commands = {
 			} catch (e) {
 				return this.errorReply("Something failed while trying to hotpatch learnsets: \n" + e.stack);
 			}
+		} else if (target.startsWith('disable')) {
+			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch is already disabled.");
+			let reason = target.split(', ')[1];
+			if (!reason) return this.errorReply("Usage: /hotpatch disable, [reason]");
+			Monitor.hotpatchLock = reason;
+			return this.sendReply("You have disabled hotpatch until the next server restart.");
 		}
 		this.errorReply("Your hot-patch command was unrecognized.");
 	},
@@ -1833,7 +1846,8 @@ exports.commands = {
 		"Hot-patching has greater memory requirements than restarting.",
 		"/hotpatch chat - reload commands.js and the chat-plugins",
 		"/hotpatch battles - spawn new simulator processes",
-		"/hotpatch formats - reload the tools.js tree, rebuild and rebroad the formats list, and also spawn new simulator processes"],
+		"/hotpatch formats - reload the tools.js tree, rebuild and rebroad the formats list, and also spawn new simulator processes",
+		"/hotpatch disable, [reason] - disables the use of hotpatch until the next server restart"],
 
 	savelearnsets: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;
@@ -2153,8 +2167,8 @@ exports.commands = {
 		if (cmd.charAt(cmd.length - 1) === ',') cmd = cmd.slice(0, -1);
 		let targets = target.split(',');
 		function getPlayer(input) {
-			if (room.battle.playerids[0] === toId(input)) return 'p1';
-			if (room.battle.playerids[1] === toId(input)) return 'p2';
+			let player = room.battle.players[toId(input)];
+			if (player) return player.slot;
 			if (input.includes('1')) return 'p1';
 			if (input.includes('2')) return 'p2';
 			return 'p3';
@@ -2241,12 +2255,12 @@ exports.commands = {
 		}
 		let data = room.getLog(logidx).join("\n");
 		let datahash = crypto.createHash('md5').update(data.replace(/[^(\x20-\x7F)]+/g, '')).digest('hex');
-		let players = room.battle.lastPlayers.map(Users.getExact);
+		let players = room.battle.playerNames;
 		LoginServer.request('prepreplay', {
 			id: room.id.substr(7),
 			loghash: datahash,
-			p1: players[0] ? players[0].name : room.battle.lastPlayers[0],
-			p2: players[1] ? players[1].name : room.battle.lastPlayers[1],
+			p1: players[0],
+			p2: players[1],
 			format: room.format
 		}, function (success) {
 			if (success && success.errorip) {
@@ -2329,6 +2343,7 @@ exports.commands = {
 
 	kickbattle: function (target, room, user) {
 		if (!room.leaveBattle) return this.errorReply("You can only do this in battle rooms.");
+		if (room.battle.tour || room.battle.rated) return this.errorReply("You can only do this in unrated non-tour battles.");
 
 		target = this.splitTarget(target);
 		let targetUser = this.targetUser;
@@ -2558,12 +2573,12 @@ exports.commands = {
 				if (i === 'global') continue;
 				let targetRoom = Rooms.get(i);
 				if (!targetRoom) continue; // shouldn't happen
-				if (targetRoom.isPrivate && (!targetRoom.battle || targetRoom.battle.lastPlayers.indexOf(user.userid) < 0)) continue;
+				if (targetRoom.isPrivate && (!targetRoom.game || !targetRoom.game.players[user])) continue;
 				let roomData = {};
 				if (targetRoom.battle) {
 					let battle = targetRoom.battle;
-					roomData.p1 = battle.p1 ? ' ' + battle.p1 : '';
-					roomData.p2 = battle.p2 ? ' ' + battle.p2 : '';
+					roomData.p1 = battle.p1 ? ' ' + battle.p1.name : '';
+					roomData.p2 = battle.p2 ? ' ' + battle.p2.name : '';
 				}
 				roomList[i] = roomData;
 			}
@@ -2586,7 +2601,7 @@ exports.commands = {
 			));
 		} else if (cmd === 'laddertop') {
 			if (!trustable) return false;
-			Ladders.get(target).getTop().then(function (result) {
+			Ladders(target).getTop().then(function (result) {
 				connection.send('|queryresponse|laddertop|' + JSON.stringify(result));
 			});
 		} else {

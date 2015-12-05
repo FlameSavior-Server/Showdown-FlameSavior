@@ -35,7 +35,7 @@ var Panagram = (function () {
 			this.mixed = mix(toId(this.answer.species));
 		} while (this.mixed === toId(this.answer.species));
 
-		this.room.add('|html|<div class = "broadcast-gold"><center>A game of Panagram was started! Scrambled Pokemon: <b>' + this.mixed + '</b>. (Remaining Sessions: ' + this.sessions + ')<br>' +
+		this.room.add('|html|<div class = "broadcast-gold"><center>A game of Panagram was started! Scrambled Pokemon: <b>' + this.mixed + '</b><br /> (Remaining Sessions: ' + this.sessions + ')<br />' +
 			'<small>Enter your answer into the chat to guess!</small></center>'
 		);
 		this.guessed = {};

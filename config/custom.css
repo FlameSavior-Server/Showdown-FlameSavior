@@ -306,6 +306,9 @@ body {
 	background: url("http://i.imgur.com/CtoyG6B.png");
 	color: black;
 }
+.closebutton, .minimizebutton {
+	color: brown;
+}
 
 
 

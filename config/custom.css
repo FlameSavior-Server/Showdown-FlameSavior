@@ -291,6 +291,7 @@ body {
 }
 .pm-window h3 {
     background: url("http://i.imgur.com/g83vifF.png");
+    color: black;
 }
 .pm-window.focused h3, .pm-window.focused h3:hover {
     background: url("http://i.imgur.com/ajzvYbV.png");

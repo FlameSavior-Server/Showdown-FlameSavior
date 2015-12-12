@@ -99,9 +99,8 @@ var cmds = {
 	endtour: function(target, room, user) {
 		this.parse('/tour delete');
 	},
-	jt: 'j',
-	jointour: 'j',
-	j: function(target, room, user) {
+	jt: 'jointour',
+	jointour: function(target, room, user) {
 		this.parse('/tour join');
 	},
 	lt: 'l',

@@ -29,7 +29,7 @@ var mainCustomColors = {
 	'zarel': 'aeo',
 	'zarell': 'aeo',
 	'greatsage': 'test454',
-	'snowflakes': 'snowflake',
+	// 'snowflakes': 'snowflake',
 	'jumpluff': 'zacchaeus',
 	'zacchaeus': 'jumpluff',
 	'kraw': 'kraw1',
@@ -55,7 +55,7 @@ var mainCustomColors = {
 	'queenofrandoms': 'hahaqor',
 	'jelandee': 'thejelandee',
 	'diatom': 'dledledlewhooop',
-	'waterbomb': 'wb0',
+	// 'waterbomb': 'wb0',
 	'texascloverleaf': 'aggronsmash',
 	'treecko': 'treecko56',
 	'treecko37': 'treecko56',
@@ -147,6 +147,7 @@ var mainCustomColors = {
 	'grim': 'grimoiregod',
 	'strength': '0v0tqpnu',
 	'iplaytennislol': 'nsyncluvr67',
+	'snow': 'ekqi2oxb',
 	'cathy': '' //{color: '#ff5cb6'}
 };
 

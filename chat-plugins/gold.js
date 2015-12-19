@@ -641,7 +641,7 @@ exports.commands = {
 	pmall: function(target, room, user) {
 		if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');
 		if (!this.can('pban')) return false;
-		Gold.pmAll(target)
+		Gold.pmAll(target);
 	},
 	regdate: function(target, room, user, connection) {
 		if (!this.canBroadcast()) return;
@@ -1346,27 +1346,24 @@ function htmlfix(target) {
 
 Gold.pmAll = function(message, pmName) {
 	pmName = (pmName ? pmName : '~Gold Server [Do not reply]');
-	for (var user of Users.users) {
-		user = user[1];
-		user.send('|pm|' + pmName + '|' + user.getIdentity() + '|' + message);
-	}
-}
+	Users.users.forEach(function (curUser) {
+		curUser.send('|pm|' + pmName + '|' + curUser.getIdentity() + '|' + message);	
+	});
+};
 Gold.pmStaff = function(message, from) {
 	from = (from ? ' (PM from ' + from + ')' : '');
-	for (var user of Users.users) {
-		user = user[1];
-		if (user.isStaff) {
-			user.send('|pm|~Staff PM|' + user.getIdentity() + '|' + message + from);
+	Users.users.forEach(function (curUser) {
+		if (curUser.isStaff) {
+			curUser.send('|pm|~Staff PM|' + curUser.getIdentity() + '|' + message + from);
 		}
-	}
-}
+	});
+};
 Gold.pmUpperStaff = function(message, pmName, from) {
 	pmName = (pmName ? pmName : '~Upper Staff PM');
 	from = (from ? ' (PM from ' + from + ')' : '');
-	for (var user of Users.users) {
-		user = user[1];
-		if (user.group === '~' || user.group === '&') {
-			user.send('|pm|' + pmName + '|' + user.getIdentity() + '|' + message + from);
+	Users.users.forEach(function (curUser) {
+		if (curUser.group === '~' || curUser.group === '&') {
+			curUser.send('|pm|' + pmName + '|' + curUser.getIdentity() + '|' + message + from);
 		}
-	}
-}
+	});
+};

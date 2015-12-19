@@ -157,9 +157,9 @@ exports.commands = {
 			case 'reload':
 				if (!this.can('hotpatch')) return this.errorReply("Access denied.");
 				reloadCustomAvatars();
-				for (var user of Users.users) {
-					user = user[1];
-					if (Config.customavatars[user]) Users(user).avatar = Config.customavatars[user];
+				for (var leUsers of Users.users) {
+					leUsers = leUsers[1];
+					if (Config.customavatars[leUsers]) Users(leUsers).avatar = Config.customavatars[leUsers];
 				}
 				this.privateModCommand("(" + user.name + " has reloaded all custom avatars.)");
 				break;

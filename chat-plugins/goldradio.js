@@ -3,6 +3,7 @@
  * This is a daily activity where users nominate the featured artist for the day, which is selected randomly once voting has ended.
  * Only works in a room with the id 'goldenrodradiotower'
  */
+'use strict';
 
 function toArrayOfArrays(map) {
 	var ret = [];
@@ -166,8 +167,8 @@ var commands = {
 				return 0;
 			});
 
-			buffer += "Current prenominations:";
-			for (var i = 0; i < prenominations.length; i++) {
+			buffer += "Current prenominations: (" + prenominations.length + ")";
+			for (let i = 0; i < prenominations.length; i++) {
 				buffer += "<br />" +
 					"- " + Tools.escapeHTML(prenominations[i][1]) + " (submitted by " + Tools.escapeHTML(prenominations[i][0].name) + ")";
 			}
@@ -182,6 +183,7 @@ var commands = {
 			if (a[1] < b[1]) return -1;
 			return 0;
 		});
+		nominations = nominations.sort();
 
 		buffer += "Current nominations (" + nominations.length + "):";
 		for (var i = 0; i < nominations.length; i++) {

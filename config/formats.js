@@ -85,7 +85,7 @@ exports.Formats = [
 		banlist: ['RU', 'BL3']
 	},
 	{
-		name: "PU",
+		name: "PU (suspect test)",
 		desc: [
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3557849/\">np: PU Stage 5</a>",
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3528743/\">PU Viability Ranking</a>"
@@ -232,6 +232,8 @@ exports.Formats = [
 	{
 		name: "VGC 2016",
 		desc: [
+			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3558332/\">VGC 2016 Rules</a>",
+			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3558929/\">VGC 2016 Viability Ranking</a>",
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3500650/\">VGC Learning Resources</a>"
 		],
 		section: "ORAS Doubles",
@@ -262,7 +264,6 @@ exports.Formats = [
 		desc: [
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3524352/\">VGC 2015 Rules</a>",
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3530547/\">VGC 2015 Viability Ranking</a>",
-			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3500650/\">VGC Learning Resources</a>",
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3526666/\">Sample Teams for VGC 2015</a>"
 		],
 		section: "ORAS Doubles",
@@ -360,29 +361,6 @@ exports.Formats = [
 		},
 		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview'],
 		requirePentagon: true
-	},
-	{
-		name: "Festive Feud",
-		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3556178/\">Festive Feud</a>"],
-		section: "ORAS Triples",
-
-		gameType: 'triples',
-		maxForcedLevel: 50,
-		teamLength: {
-			validate: [6, 6]
-		},
-		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview'],
-		requirePentagon: true,
-		onValidateTeam: function (team) {
-			const problems = [];
-			for (let i = 0; i < team.length; i++) {
-				let template = this.getTemplate(team[i].species);
-				if (template.color !== 'Red' && template.color !== 'Green' && template.color !== 'White') {
-					problems.push(template.species);
-				}
-			}
-			if (problems.length) return ["Only red, green and white Pok\u00E9mon are permitted.", "(You have " + problems.join(', ') + ")"];
-		}
 	},
 	{
 		name: "Triples Hackmons Cup",
@@ -653,7 +631,7 @@ exports.Formats = [
 		section: "Other Metagames",
 
 		ruleset: ['OU'],
-		banlist: ['Ignore STAB Moves']
+		banlist: ['Ignore STAB Moves', 'Metagrossite']
 	},
 	{
 		name: "LC UU",
@@ -868,6 +846,16 @@ exports.Formats = [
 		},
 		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview'],
 		banlist: ['Dark Void', 'Sky Drop']
+	},
+	{
+		name: "[Gen 5] Random Battle",
+		section: "BW2 Singles",
+
+		mod: 'gen5',
+		searchShow: false,
+		challengeShow: false,
+		team: 'random',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod']
 	},
 	{
 		name: "[Gen 5] Custom Game",

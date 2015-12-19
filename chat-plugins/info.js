@@ -844,8 +844,6 @@ var commands = exports.commands = {
 		);
 	},
 
-	repo: 'opensource',
-	repository: 'opensource',
 	git: 'opensource',
 	opensource: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -854,9 +852,6 @@ var commands = exports.commands = {
 			'- <a href="https://github.com/Zarel/Pokemon-Showdown-Client" target="_blank">Client Source Code</a><br />' +
 			'- <a href="https://github.com/panpawn/Pokemon-Showdown">Gold Source Code</a>');
 	},
-	opensourcehelp: ["/opensource - Links to PS's source code repository.",
-		"!opensource - Show everyone that information. Requires: + % @ # & ~"
-	],
 
 	staff: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -3520,6 +3515,23 @@ var commands = exports.commands = {
 	},
 	groupshelp: ["/groups - Explains what the + % @ # & next to people's names mean.",
 		"!groups - Shows everyone that information. Requires: + % @ # & ~"
+	],
+
+	repo: 'opensource',
+	repository: 'opensource',
+	git: 'opensource',
+	opensource: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox(
+			"Pok&eacute;mon Showdown is open source:<br />" +
+			"- Language: JavaScript (Node.js or io.js)<br />" +
+			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown/commits/master\">What's new?</a><br />" +
+			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown\">Server source code</a><br />" +
+			"- <a href=\"https://github.com/Zarel/Pokemon-Showdown-Client\">Client source code</a>"
+		);
+	},
+	opensourcehelp: ["/opensource - Links to PS's source code repository.",
+		"!opensource - Show everyone that information. Requires: + % @ # & ~"
 	],
 
 	staff: function(target, room, user) {

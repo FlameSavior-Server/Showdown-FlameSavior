@@ -148,11 +148,7 @@ exports.commands = {
 			if (economy.readMoney(user.userid) >= price) return true;
 		}
 		function alertStaff(message, staffRoom) {
-			for (var u in Users.users) {
-				if (Users.users[u].group == "~" || Users.users[u].group == "&") {
-					Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '|/html ' + message);
-				}
-			}
+			Gold.pmUpperStaff('/html ' + message, '~Server', false);
 			if (staffRoom) {
 				Rooms.get('staff').add('|raw|<b>' + message + '</b>');
 				Rooms.get('staff').update();

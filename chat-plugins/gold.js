@@ -334,8 +334,11 @@ exports.commands = {
 	roomlist: function (target, room, user) {
 		if(!this.can('pban')) return;
 		var totalUsers = 0; 
-		for (var u in Users.users) {
-			if (!Users.users[u].connected) continue; totalUsers++;
+		for (var u of Users.users) {
+			u = u[1];
+			if (Users(u).connected) {
+				totalUsers++;
+			}
 		}
 		var rooms = Object.keys(Rooms.rooms),
 		len = rooms.length,
@@ -489,16 +492,18 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("<img src=" + parts[0] + " width=" + parts[1] + " height=" + parts[1]);
 	},
-
+	admins: function (target, room, user) {
+		this.parse('/usersofrank ~');
+	},
 	uor: 'usersofrank',
 	usersofrank: function(target, room, user) {
 		if (!target || !Config.groups[target]) return false;
 		if (!this.canBroadcast()) return;
 		var names = [];
-		for (var i in Users.users) {
-			if (!Users.users[i].connected) continue;
-			if (Users.users[i].group === target) {
-				names.push(Users.users[i].name);
+		for (var users of Users.users) {
+			users = users[1];
+			if (Users(users).group === target) {
+				names.push(Users(users).name);
 			}
 		}
 		if (names.length < 1) return this.sendReplyBox('There are no users of the rank <font color="#24678d"><b>' + Tools.escapeHTML(Config.groups[target].name) + '</b></font> currently online.');
@@ -620,36 +625,23 @@ exports.commands = {
 	pmupperstaff: function(target, room, user) {
 		if (!target) return this.sendReply('/pmupperstaff [message] - Sends a PM to every upper staff');
 		if (!this.can('pban')) return false;
-		for (var u in Users.users) {
-			if (Users.users[u].group == '~' || Users.users[u].group == '&') {
-				Users.users[u].send('|pm|~Upper Staff PM|' + Users.users[u].group + Users.users[u].name + '| ' + target + ' (PM from ' + user.name + ')');
-			}
-		}
+		Gold.pmUpperStaff(target, false, user.name);
 	},
 	client: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('Gold\'s custom client can be found <a href="http://goldservers.info">here</a>.');
 	},
-
 	pas: 'pmallstaff',
 	pmallstaff: function(target, room, user) {
 		if (!target) return this.sendReply('/pmallstaff [message] - Sends a PM to every user in a room.');
 		if (!this.can('pban')) return false;
-		for (var u in Users.users) {
-			if (Users.users[u].isStaff) {
-				Users.users[u].send('|pm|~Staff PM|' + Users.users[u].group + Users.users[u].name + '|' + target + ' (by: ' + user.name + ')');
-			}
-		}
+		Gold.pmStaff(target, user.name);
 	},
 	masspm: 'pmall',
 	pmall: function(target, room, user) {
 		if (!target) return this.parse('/pmall [message] - Sends a PM to every user in a room.');
 		if (!this.can('pban')) return false;
-		var pmName = '~Gold Server [Do not reply]';
-		for (var i in Users.users) {
-			var message = '|pm|' + pmName + '|' + Users.users[i].getIdentity() + '|' + target;
-			Users.users[i].send(message);
-		}
+		Gold.pmAll(target)
 	},
 	regdate: function(target, room, user, connection) {
 		if (!this.canBroadcast()) return;
@@ -681,14 +673,6 @@ exports.commands = {
 	stafffaq: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox('Click <a href="http://goldserver.weebly.com/how-do-i-get-a-rank-on-gold.html">here</a> to find out about Gold\'s ranks and promotion system.');
-	},
-	//Should solve the problem of users not being able to talk in chat
-	unstick: function(target, room, user) {
-		if (!this.can('hotpatch')) return;
-		for (var uid in Users.users) {
-			Users.users[uid].chatQueue = null;
-			Users.users[uid].chatQueueTimeout = null;
-		}
 	},
 	removebadge: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
@@ -1358,4 +1342,31 @@ function htmlfix(target) {
             target = target.substring(0, target.indexOf(fixings[u])) + '< ' + target.substring(target.indexOf(fixings[u]) + 1);
     }
     return target;
+}
+
+Gold.pmAll = function(message, pmName) {
+	pmName = (pmName ? pmName : '~Gold Server [Do not reply]');
+	for (var user of Users.users) {
+		user = user[1];
+		user.send('|pm|' + pmName + '|' + user.getIdentity() + '|' + message);
+	}
+}
+Gold.pmStaff = function(message, from) {
+	from = (from ? ' (PM from ' + from + ')' : '');
+	for (var user of Users.users) {
+		user = user[1];
+		if (user.isStaff) {
+			user.send('|pm|~Staff PM|' + user.getIdentity() + '|' + message + from);
+		}
+	}
+}
+Gold.pmUpperStaff = function(message, pmName, from) {
+	pmName = (pmName ? pmName : '~Upper Staff PM');
+	from = (from ? ' (PM from ' + from + ')' : '');
+	for (var user of Users.users) {
+		user = user[1];
+		if (user.group === '~' || user.group === '&') {
+			user.send('|pm|' + pmName + '|' + user.getIdentity() + '|' + message + from);
+		}
+	}
 }

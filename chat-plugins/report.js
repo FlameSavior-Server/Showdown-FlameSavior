@@ -19,11 +19,7 @@ function saveReports() {
 }
 
 function pmUpperStaff(message) {
-    for (var u in Users.users) {
-        if (Users.users[u].group === '~' || Users.users[u].group === '&') {
-            Users.users[u].send('|pm|~Server|' + Users.users[u].group + Users.users[u].name + '| ' + message);
-        }
-    }
+    Gold.pmUpperStaff(message, '~Server');
 }
 
 exports.commands = {

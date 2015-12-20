@@ -621,6 +621,12 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');
 	},
+	userid: function(target, room, user) {
+		if (!target) return this.parse('/help userid');
+		if (!this.canBroadcast()) return;
+		return this.sendReplyBox(Tools.escapeHTML(target) + " ID: <b>" + Tools.escapeHTML(toId(target)) + "</b>");
+	},
+	useridhelp: ["/userid [user] - shows the user's ID (removes unicode from name basically)"],
 	pus: 'pmupperstaff',
 	pmupperstaff: function(target, room, user) {
 		if (!target) return this.sendReply('/pmupperstaff [message] - Sends a PM to every upper staff');

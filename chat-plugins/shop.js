@@ -12,6 +12,7 @@
 var fs = require('fs');
 var closeShop = false;
 var closedShop = 0;
+var moment = require('moment');
 function logTransaction (message) {
 	if (!message) return false;
 	fs.appendFile('logs/transactions.log','['+new Date().toUTCString()+'] '+message+'\n');
@@ -493,6 +494,21 @@ exports.commands = {
 		return this.sendReply("Happy Halloween! ☠");
 	},
 	*/
+	xmas: 'christmas',
+	christmas: function(target, room, user) {
+		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
+		if (!this.canTalk()) return;
+		var symbols = '⛄';
+		user.getIdentity = function() {
+			if (this.muted) return '!' + this.name;
+			if (this.locked) return '‽' + this.name;
+			return symbols + this.name;
+		};
+		user.updateIdentity();
+		user.canCustomSymbol = false;
+		user.hasCustomSymbol = true;
+		return this.sendReply("Merry Christmas, and Happy Holidays! " + symbols);
+	},
 	rs: 'resetsymbol',
 	resetsymbol: function(target, room, user) {
 		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');

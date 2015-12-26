@@ -493,7 +493,6 @@ exports.commands = {
 		user.hasCustomSymbol = true;
 		return this.sendReply("Happy Halloween! ☠");
 	},
-	*/
 	xmas: 'christmas',
 	christmas: function(target, room, user) {
 		if (user.hasCustomSymbol) return this.sendReply('You currently have a custom symbol, use /resetsymbol if you would like to use this command again.');
@@ -507,8 +506,10 @@ exports.commands = {
 		user.updateIdentity();
 		user.canCustomSymbol = false;
 		user.hasCustomSymbol = true;
+		user.lastCustomSymbol = 
 		return this.sendReply("Merry Christmas, and Happy Holidays! " + symbols);
 	},
+	*/
 	rs: 'resetsymbol',
 	resetsymbol: function(target, room, user) {
 		if (!user.hasCustomSymbol) return this.sendReply('You don\'t have a custom symbol!');

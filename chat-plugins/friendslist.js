@@ -116,7 +116,9 @@ exports.commands = {
 	friend: 'friendslist',
 	friendlist: 'friendslist',
 	friendslist: function (target, room, user) {
-		target = target.split(', ');
+		target = target.split(',');
+		for (var u in target) target[u] = target[u].trim();
+
 		if (!Friends[user.userid]) {
 			Friends[user.userid] = [];
 			updateFriends();
@@ -125,6 +127,7 @@ exports.commands = {
 			NotifySetting[user.userid] = false;
 			updateSettings();
 		}
+
 		switch (target[0]) {
 			case 'add':
 				var newFriend = toId(target[1]);
@@ -137,6 +140,7 @@ exports.commands = {
 				updateFriends();
 				return this.sendReply("|raw|You have added <b><font color=" + Gold.hashColor(newFriend) + ">" + Tools.escapeHTML(getName(target[1])) + "</font></b> to your friends list.");
 				break;
+
 			case 'delete':
 			case 'remove':
 				var removee = toId(target[1]);
@@ -146,6 +150,7 @@ exports.commands = {
 				updateFriends();
 				return this.sendReply("|raw|You have <font color=red>unfriended</font> <font color=" + Gold.hashColor(removee) + "><b>" + Tools.escapeHTML(getName(removee)) + "</b></font> from your friends list.");
 				break;
+
 			case 'deleteall':
 			case 'removeall':
 				if (!Friends[user.userid] || Friends[user.userid].lenth < 1) return this.errorReply("You do not have any friends added to your friendslist yet.");
@@ -153,20 +158,24 @@ exports.commands = {
 				updateFriends();
 				return this.sendReply("You have cleared your friendslist.");
 				break;
+
 			case 'toggle':
 			case 'notify':
 				var notify = NotifySetting[user.userid] = !NotifySetting[user.userid];
 				updateSettings();
 				return this.sendReply("You are now " + (notify ? ' being notified ' : ' not being notified ') + "of friends joining the server.");
 				break;
+
 			case 'help':
 				this.parse('/help friendslist');
 				break;
+
 			// command used with GUI
 			case 'getadded':
 				if (!target[1]) return false;
 				return this.sendReplyBox(getAdded(target[1]));
 				break;
+
 			default:
 				if (!this.canBroadcast()) return;
 				if (!target[0]) {

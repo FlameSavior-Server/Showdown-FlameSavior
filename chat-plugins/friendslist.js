@@ -134,7 +134,7 @@ exports.commands = {
 				if (~Friends[user.userid].indexOf(newFriend)) return this.errorReply("You are already friends with this person!");
 				Friends[user.userid].push(newFriend);
 				updateFriends();
-				return this.sendReply("|raw|You have added <b><font color=" + Gold.hashColor(newFriend) + ">" + Tools.escapeHTML(target[1]) + "</font></b> to your friends list.");
+				return this.sendReply("|raw|You have added <b><font color=" + Gold.hashColor(newFriend) + ">" + Tools.escapeHTML(getName(target[1])) + "</font></b> to your friends list.");
 				break;
 			case 'delete':
 			case 'remove':
@@ -143,7 +143,7 @@ exports.commands = {
 				if (!~Friends[user.userid].indexOf(removee)) return this.errorReply("You are not currently friends with this user.  Check spelling?");
 				Friends[user.userid].remove(removee);
 				updateFriends();
-				return this.sendReply("|raw|You have <font color=red>unfriended</font> <font color=" + Gold.hashColor(removee) + ">" + Tools.escapeHTML(removee) + "</font> from your friends list.");
+				return this.sendReply("|raw|You have <font color=red>unfriended</font> <font color=" + Gold.hashColor(removee) + "><b>" + Tools.escapeHTML(getName(removee)) + "</b></font> from your friends list.");
 				break;
 			case 'deleteall':
 			case 'removeall':

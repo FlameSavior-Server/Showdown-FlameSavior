@@ -114,6 +114,9 @@ exports.commands = {
 				updateFriends();
 				return this.sendReply("You have cleared your friendslist.");
 				break;
+			case 'help':
+				this.parse('/help friendslist');
+				break;
 			// command used with GUI
 			case 'getadded':
 				if (!target[1]) return false;

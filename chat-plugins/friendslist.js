@@ -33,7 +33,7 @@ function formatList(user, by) {
 	}
 	var reply = "<b><u>Friends:</u></b><br />";
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
-		reply += "<tr><td><u>Friend</u></td><td><u>Last Online</u></td><td><u>Bucks:</u></td></tr>";
+		reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
 	Friends[user].forEach(function(frens) {
 		function lastSeen(frens) {
 			if (Users(frens) && Users.getExact(frens) && Users(frens).connected) return "<font color=green>Currently Online</font>";

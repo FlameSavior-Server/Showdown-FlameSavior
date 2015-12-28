@@ -21,10 +21,15 @@ function getName(user) {
 function loadFriendsList() {
 	try {
 		Friends = JSON.parse(fs.readFileSync(friendsFilepath));
+	} catch (e) {
+		Rooms('staff').add("FRIENDS LIST failed to be loaded.").update();
+		//Friends = {};
+	}
+	try {
 		NotifySetting = JSON.parse(fs.readFileSync(settingsFilepath));
 	} catch (e) {
-		NotifySetting = {};
-		Friends = {};
+		Rooms('staff').add("FRIENDS SETTINGS failed to be loaded.").update();
+		//NotifySetting = {};
 	}
 }
 loadFriendsList();
@@ -112,9 +117,14 @@ exports.commands = {
 	friendlist: 'friendslist',
 	friendslist: function (target, room, user) {
 		target = target.split(', ');
-		if (!Friends[user.userid]) Friends[user.userid] = [];
-		if (!NotifySetting[user.userid]) NotifySetting[user.userid] = false;
-
+		if (!Friends[user.userid]) {
+			Friends[user.userid] = [];
+			updateFriends();
+		}
+		if (!NotifySetting[user.userid]) {
+			NotifySetting[user.userid] = false;
+			updateSettings();
+		}
 		switch (target[0]) {
 			case 'add':
 				var newFriend = toId(target[1]);

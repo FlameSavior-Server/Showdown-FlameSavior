@@ -41,7 +41,8 @@ function getFriendsNumber(user) {
 function getAdded(user) {
 	var list = Object.keys(Friends);
 	var output = [];
-	var reply = "The following users have added <b><font color=" + Gold.hashColor(user) + ">" + user + "</font></b> as a friend:<br />";
+	var label = (getFriendsNumber(user) > 1 ? 'users have' : 'user has');
+	var reply = "The following " + label + " added <b><font color=" + Gold.hashColor(user) + ">" + getName(user) + "</font></b> as a friend:<br />";
 	list.forEach(function(kek) {
 		Friends[kek].forEach(function(kek2) {
 			if (user === kek2) {

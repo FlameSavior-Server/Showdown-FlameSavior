@@ -22,9 +22,37 @@ loadFriendsList();
 function updateFriends() {
 	fs.writeFile(filepath, JSON.stringify(Friends));
 }
+
+function getFriendsNumber(user) {
+	var list = Object.keys(Friends);
+	var number = 0;
+	list.forEach(function(kek) {
+		Friends[kek].forEach(function(kek2) {
+			if (kek2 === user) number ++;
+		});
+	});
+	return number;
+}
+
+function getAdded(user) {
+	var list = Object.keys(Friends);
+	var output = [];
+	var reply = "The following users have added <b><font color=" + Gold.hashColor(user) + ">" + user + "</font></b> as a friend:<br />";
+	list.forEach(function(kek) {
+		Friends[kek].forEach(function(kek2) {
+			if (user === kek2) {
+				kek = "<font color=" + Gold.hashColor(kek) + ">" + kek + "</font>";
+				output.push(kek);
+			}
+		});
+	});
+	reply = reply += output;
+	return reply;
+}
+
 function formatList(user, by) {
 	if (!Friends[user]) Friends[user] = [];
-	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends:</u></b><br />";
+	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends of </u><font color=" + Gold.hashColor(user) + "><u>" + user + "</u></font>:</b><br />";
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
 		reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
 	Friends[user].forEach(function(frens) {
@@ -36,7 +64,11 @@ function formatList(user, by) {
 		}
 		reply += "<tr><td><b><font color=" + Gold.hashColor(frens) + ">" + (Users.getExact(frens) && Users(frens).connected ? Users.getExact(frens).name : frens) + "</font></b></td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";
 	});
-	reply += "</div></table>";
+	reply += "</table>";
+	var number = getFriendsNumber(user);
+	var label = (number > 1 ? ' users have' : ' user has');
+	reply += (number > 0 ? "<button name=\"send\" value=\"/friendslist getadded, " + user + "\">" + number + label + " added <font color=" + Gold.hashColor(user) + ">" + user + "</font> as a friend." :  "");
+	reply += "</div>";
 	return reply;
 }
 
@@ -77,6 +109,11 @@ exports.commands = {
 				Friends[user.userid] = [];
 				updateFriends();
 				return this.sendReply("You have cleared your friendslist.");
+				break;
+			// command used with GUI
+			case 'getadded':
+				if (!target[1]) return false;
+				return this.sendReplyBox(getAdded(target[1]));
 				break;
 			default:
 				if (!this.canBroadcast()) return;

@@ -55,6 +55,7 @@ exports.commands = {
 			case 'add':
 				var newFriend = toId(target[1]);
 				if (user.userid === newFriend) return this.errorReply("You cannot add yourself to your friendslist...");
+				if (newFriend.length > 18) return this.errorReply("Usernames are not this long...");
 				if (~Friends[user.userid].indexOf(newFriend)) return this.errorReply("You are already friends with this person!");
 				Friends[user.userid].push(newFriend);
 				updateFriends();

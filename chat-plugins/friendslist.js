@@ -190,7 +190,7 @@ exports.commands = {
 					"/friendslist removeall - Clears your friendslist.",
 					"/friendslist - Displays your friendslist.",
 					"/friendslist [user] - Displays [user]'s friendslist.",
-					"/friendslist notify - Toggles being notified of not when a friend comes online (disabled by default)."],
+					"/friendslist notify - Toggles being notified or not when a friend comes online (disabled by default)."],
 };
 
 Gold.friends = Friends;

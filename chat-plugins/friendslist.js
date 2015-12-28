@@ -56,7 +56,7 @@ function getAdded(user) {
 
 function formatList(user, by) {
 	if (!Friends[user]) Friends[user] = [];
-	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends of </u><font color=" + Gold.hashColor(user) + "><u>" + getName(user) + "</u></font>(" + Friends[user].length + "):</b><br />";
+	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends of </u><font color=" + Gold.hashColor(user) + "><u>" + getName(user) + "</u></font> (" + Friends[user].length + "):</b><br />";
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
 		reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
 	Friends[user].forEach(function(frens) {

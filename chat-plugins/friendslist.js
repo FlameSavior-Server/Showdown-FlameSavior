@@ -177,7 +177,6 @@ exports.commands = {
 				} else {
 					target[0] = toId(target[0]);
 					if (!Friends[target[0]] || Friends[target[0]].length < 1) {
-						this.parse('/help friendslist');
 						return this.errorReply("This user does not have any friends added to their friendslist yet.");
 					}
 					return this.sendReplyBox(formatList(target[0], user.userid));

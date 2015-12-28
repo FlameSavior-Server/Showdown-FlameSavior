@@ -3828,7 +3828,7 @@ exports.BattleMovedex = {
 			onStart: function (target) {
 				this.add('-activate', target, 'move: Fairy Lock');
 			},
-			onModifyPokemon: function (pokemon) {
+			onTrapPokemon: function (pokemon) {
 				pokemon.tryTrap();
 			}
 		},
@@ -4015,6 +4015,7 @@ exports.BattleMovedex = {
 		desc: "Deals damage to the target equal to the user's current HP. If this move is successful, the user faints.",
 		shortDesc: "Does damage equal to the user's HP. User faints.",
 		id: "finalgambit",
+		isViable: true,
 		name: "Final Gambit",
 		pp: 5,
 		priority: 0,
@@ -5649,6 +5650,7 @@ exports.BattleMovedex = {
 		desc: "Power is equal to (25 * target's current Speed / user's current Speed), rounded down, + 1, but not more than 150.",
 		shortDesc: "More power the slower the user than the target.",
 		id: "gyroball",
+		isViable: true,
 		name: "Gyro Ball",
 		pp: 5,
 		priority: 0,
@@ -6165,6 +6167,7 @@ exports.BattleMovedex = {
 		desc: "Power doubles if the target has a major status condition.",
 		shortDesc: "Power doubles if the target has a status ailment.",
 		id: "hex",
+		isViable: true,
 		name: "Hex",
 		pp: 10,
 		priority: 0,
@@ -6244,6 +6247,7 @@ exports.BattleMovedex = {
 		desc: "",
 		shortDesc: "",
 		id: "hiddenpower",
+		isViable: true,
 		name: "Hidden Power Electric",
 		pp: 15,
 		priority: 0,
@@ -6259,6 +6263,7 @@ exports.BattleMovedex = {
 		desc: "",
 		shortDesc: "",
 		id: "hiddenpower",
+		isViable: true,
 		name: "Hidden Power Fighting",
 		pp: 15,
 		priority: 0,
@@ -6320,6 +6325,7 @@ exports.BattleMovedex = {
 		desc: "",
 		shortDesc: "",
 		id: "hiddenpower",
+		isViable: true,
 		name: "Hidden Power Grass",
 		pp: 15,
 		priority: 0,
@@ -7107,7 +7113,7 @@ exports.BattleMovedex = {
 			onResidual: function (pokemon) {
 				this.heal(pokemon.maxhp / 16);
 			},
-			onModifyPokemon: function (pokemon) {
+			onTrapPokemon: function (pokemon) {
 				pokemon.tryTrap();
 			},
 			onNegateImmunity: function (pokemon, type) {
@@ -10498,6 +10504,7 @@ exports.BattleMovedex = {
 		desc: "No additional effect.",
 		shortDesc: "Usually goes first.",
 		id: "quickattack",
+		isViable: true,
 		name: "Quick Attack",
 		pp: 30,
 		priority: 1,
@@ -12320,7 +12327,8 @@ exports.BattleMovedex = {
 			onAnyDragOut: function (pokemon) {
 				if (pokemon === this.effectData.target || pokemon === this.effectData.source) return false;
 			},
-			onFoeModifyPokemon: function (defender) {
+			onFoeTrapPokemonPriority: -15,
+			onFoeTrapPokemon: function (defender) {
 				if (defender !== this.effectData.source) return;
 				defender.trapped = true;
 			},
@@ -12476,6 +12484,7 @@ exports.BattleMovedex = {
 		desc: "One of the user's known moves, besides this move, is selected for use at random. Fails if the user is not asleep. The selected move does not have PP deducted from it, and can currently have 0 PP. This move cannot select Assist, Belch, Bide, Chatter, Copycat, Focus Punch, Hold Hands, Me First, Metronome, Mimic, Mirror Move, Nature Power, Sketch, Sleep Talk, Struggle, Uproar, or any two-turn move.",
 		shortDesc: "User must be asleep. Uses another known move.",
 		id: "sleeptalk",
+		isViable: true,
 		name: "Sleep Talk",
 		pp: 10,
 		priority: 0,

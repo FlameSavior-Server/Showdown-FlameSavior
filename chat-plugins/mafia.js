@@ -8,7 +8,7 @@ let MafiaData = require('./mafia-data.js');
 const permission = 'ban';
 
 const deadImage = '<img width="75" height="75" src="//play.pokemonshowdown.com/fx/mafia-dead.png" />';
-const meetingMsg = {town: 'The town has lynched a subject!', mafia: 'The mafia strikes again!'};
+const meetingMsg = {town: 'The town has lynched a suspect!', mafia: 'The mafia strikes again!'};
 
 class MafiaPlayer extends Rooms.RoomGamePlayer {
 	constructor(user, game) {
@@ -33,10 +33,17 @@ class MafiaPlayer extends Rooms.RoomGamePlayer {
 		this.game.executionOrder.push(this);
 	}
 
-	kill(message) {
+	kill(flavorText) {
 		if (this.invincible) return;
 
-		this.game.announcementWindow(deadImage, message + '<br/>' + Tools.escapeHTML(this.name + ', the ' + this.class.name) + ' lies dead on the ground.');
+		let message = flavorText + '<br/>' + Tools.escapeHTML(this.name + ', the ' + this.class.name) + ' lies dead on the ground.';
+
+		if (this.allowWills && this.will) {
+			message += '<br/>' + Tools.escapeHTML(this.name) + '\'s will: ' + Tools.escapeHTML(this.will);
+		}
+
+		this.game.announcementWindow(deadImage, message);
+		this.game.playerCount--;
 		delete this.game.players[this.userid];
 		this.destroy();
 	}
@@ -49,6 +56,7 @@ class MafiaPlayer extends Rooms.RoomGamePlayer {
 		} else {
 			this.game.announcementWindow(deadImage, Tools.escapeHTML(this.name + ', the ' + this.class.name) + ' was eliminated from the game.');
 		}
+		this.game.playerCount--;
 		delete this.game.players[this.userid];
 		this.destroy();
 	}
@@ -67,12 +75,19 @@ class MafiaPlayer extends Rooms.RoomGamePlayer {
 		for (let i in this.validTargets) {
 			output += '<button value="/mafia target ' + this.validTargets[i].userid + '" name="send">' + Tools.escapeHTML(this.validTargets[i].name) + '</button>';
 		}
+		output += '<button value="/mafia target nobody" name="send">Nobody</button>';
 
 		this.sendRoom('|uhtml|mafia' + this.game.room.gameNumber + 'target' + this.game.gamestate + this.game.day + '|' + this.game.mafiaWindow(image, output));
 	}
 
 	updateTarget(image) {
-		this.sendRoom('|uhtmlchange|mafia' + this.game.room.gameNumber + 'target' + this.game.gamestate + this.game.day + '|' + this.game.mafiaWindow(image, 'Targeting ' + Tools.escapeHTML(this.target.name) + '!'));
+		let header = '|uhtmlchange|mafia' + this.game.room.gameNumber + 'target' + this.game.gamestate + this.game.day + '|';
+
+		if (this.target) {
+			this.sendRoom(header + this.game.mafiaWindow(image, 'Targeting ' + Tools.escapeHTML(this.target.name) + '!'));
+		} else {
+			this.sendRoom(header + this.game.mafiaWindow(image, 'You chose to not target anybody.'));
+		}
 	}
 
 	voteWindow(image, content) {
@@ -81,6 +96,7 @@ class MafiaPlayer extends Rooms.RoomGamePlayer {
 		for (let i in this.validVotes) {
 			output += '<button value="/mafia vote ' + this.validVotes[i].userid + '" name="send">' + Tools.escapeHTML(this.validVotes[i].name) + '</button>';
 		}
+		output += '<button value="/mafia vote abstain" name="send">Abstain</button>';
 
 		this.sendRoom('|uhtml|mafia' + this.game.room.gameNumber + 'vote' + this.game.gamestate + this.game.day + '|' + this.game.mafiaWindow(image, output));
 	}
@@ -104,9 +120,13 @@ class MafiaPlayer extends Rooms.RoomGamePlayer {
 			return this.sendRoom("You're not selecting a target right now.");
 		}
 
-		if (target in this.validTargets) {
+		if (target in this.validTargets || target === 'nobody') {
 			this.targeting = false;
-			this.target = target;
+			if (target === 'nobody') {
+				this.toExecute = null;
+			} else {
+				this.target = this.game.players[target];
+			}
 			delete this.validTargets;
 
 			this.updateTarget(this.class.image);
@@ -128,11 +148,13 @@ class MafiaPlayer extends Rooms.RoomGamePlayer {
 			return;
 		}
 
-		if (target in this.validVotes) {
-			if (this.currentVote[target]) {
-				this.currentVote[target]++;
-			} else {
-				this.currentVote[target] = 1;
+		if (target in this.validVotes || target === 'abstain') {
+			if (target !== 'abstain') {
+				if (this.game.currentVote[target]) {
+					this.game.currentVote[target].push(this.name);
+				} else {
+					this.game.currentVote[target] = [this.name];
+				}
 			}
 
 			this.voting = false;
@@ -153,7 +175,7 @@ class MafiaPlayer extends Rooms.RoomGamePlayer {
 }
 
 class Mafia extends Rooms.RoomGame {
-	constructor(room, max, roles) {
+	constructor(room, max, roles, allowWills, anonVotes) {
 		super(room);
 
 		if (room.gameNumber) {
@@ -162,7 +184,7 @@ class Mafia extends Rooms.RoomGame {
 			room.gameNumber = 1;
 		}
 
-		this.gameid = 'hangman';
+		this.gameid = 'mafia';
 		this.title = 'Mafia';
 		this.allowRenames = false;
 		this.playerCap = max;
@@ -172,8 +194,45 @@ class Mafia extends Rooms.RoomGame {
 		this.day = 1;
 		this.gamestate = 'pregame';
 		this.timer = null;
+		this.allowWills = allowWills;
+		this.anonVotes = anonVotes;
+
+		this.roleString = this.roles.reduce((function (prev, cur, index, array) {
+			if (index === array.length - 1) {
+				return prev + MafiaData.MafiaClasses[cur].name;
+			} else {
+				return prev + MafiaData.MafiaClasses[cur].name + ', ';
+			}
+		}), '');
 
 		this.room.send('|uhtml|mafia' + this.room.gameNumber + 'pregame|' + this.pregameWindow(false));
+	}
+
+	onRename(user, oldUserid, isJoining) {
+		if (!(oldUserid in this.players)) return;
+
+		if (oldUserid !== user.userid) {
+			if (this.gamestate === 'pregame') {
+				this.players[user.userid] = this.players[oldUserid];
+				this.players[user.userid].userid = user.userid;
+				this.players[user.userid].name = user.name;
+				delete this.players[oldUserid];
+			} else {
+				this.player.eliminate(oldUserid);
+				user.sendTo(this.room, "Don't change your name during a mafia game.");
+			}
+		} else {
+			this.players[user.userid].name = user.name;
+		}
+
+		this.updatePregame();
+	}
+
+	onLeave(user) {
+		if (this.gamestate === 'pregame' && user.userid in this.players) {
+			delete this.players[user.userid];
+			this.updatePregame();
+		}
 	}
 
 	makePlayer(user) {
@@ -193,21 +252,27 @@ class Mafia extends Rooms.RoomGame {
 	}
 
 	pregameWindow(joined) {
-		let output = '<div class="broadcast-blue"><h2>A game of mafia has been made!</h2><p>Participants: </p>';
 		let temp = Object.values(this.players);
+		let output = '<div class="broadcast-blue"><center><h2>A game of mafia has been made!</h2><p>Participants (' + (this.playerCap - temp.length) + ' needed): </p>';
 		for (let i = 0; i < temp.length; i++) {
 			output += Tools.escapeHTML(temp[i].name);
 			if (i < temp.length - 1) {
 				output += ', ';
 			}
 		}
+
+		output += '<br/><strong>Roles:</strong> ' + this.roleString + '<br/>';
+
+		if (this.allowWills) output += 'Wills are allowed. ';
+		if (this.anonVotes) output += 'Votes are anonymous. ';
+
 		if (joined) {
 			output += '<br/><button value="/mafia leave" name="send">Leave</button>';
 		} else {
 			output += '<br/><button value="/mafia join" name="send">Join</button>';
 		}
 
-		return output;
+		return output + '</center></div>';
 	}
 
 	updatePregame() {
@@ -227,7 +292,7 @@ class Mafia extends Rooms.RoomGame {
 	// Simple window, used for announcements and the likes.
 	mafiaWindow(image, content) {
 		let output = '<div class="broadcast-blue">';
-		output += '<h3>Day ' + this.day + '</h3>';
+		output += '<h3>' + ((this.gamestate === 'day' || this.gamestate === 'lynch') ? 'Day ' : 'Night ') + this.day + '</h3>';
 		output += '<table><tr><td style="text-align:center;">' + image + '</td><td style="text-align:center;width:100%;">';
 		output += content;
 		output += '</td></tr></table></div>';
@@ -242,12 +307,21 @@ class Mafia extends Rooms.RoomGame {
 	updateVotes() {
 		let text = '';
 		for (let i in this.currentVote) {
-			text += Tools.escapeHTML(this.players[i].name) + ': ' + this.currentVote[i] + ' votes.<br/>';
+			text += Tools.escapeHTML(this.players[i].name) + ': ';
+			if (this.anonVotes) {
+				text += this.currentVote[i] + ' votes.';
+			} else {
+				text += this.currentVote[i].join(',');
+			}
+			text += '<br/>';
 		}
-		for (let i = 0; i < this.players.length; i++) {
+
+		if (!text) text = 'No votes yet.';
+
+		for (let i in this.players) {
 			let player = this.players[i];
-			if (player.voting) {
-				player.getUser().sendTo(this.room, '|uhtmlchange|mafia' + this.room.gameNumber + 'target' + this.gamestate + this.day + '|' + this.mafiaWindow('', text));
+			if (this.voters.indexOf(player) > -1) {
+				player.sendRoom('|uhtmlchange|mafia' + this.room.gameNumber + 'vote' + this.gamestate + this.day + '|' + this.mafiaWindow(player.class.image, text));
 			}
 		}
 	}
@@ -256,9 +330,9 @@ class Mafia extends Rooms.RoomGame {
 		let max = 0;
 		let toKill = null;
 		for (let i in this.currentVote) {
-			if (this.currentVote[i] > max) {
+			if (this.currentVote[i].length > max) {
 				toKill = i;
-			} else if (this.currentVote[i] === max) {
+			} else if (this.currentVote[i].length === max) {
 				toKill = null;
 			}
 		}
@@ -284,7 +358,8 @@ class Mafia extends Rooms.RoomGame {
 			}
 		}
 
-		this.gameEvent('initial', 'atStart', 1);
+		this.gamestate = 'initial';
+		this.gameEvent('atStart', 1);
 	}
 
 	end(image, content) {
@@ -306,11 +381,15 @@ class Mafia extends Rooms.RoomGame {
 	}
 
 	progress() {
+		for (let i in this.players) {
+			if (this.players[i].targeting || this.players[i].voting) {
+				this.players[i].eliminate();
+			}
+		}
+
 		for (let i = 0; i < this.executionOrder.length; i++) {
 			let player = this.executionOrder[i];
-			if (player.targeting || player.voting) {
-				player.eliminate();
-			} else if (player.toExecute) {
+			if (player.toExecute) {
 				if (player.roleBlocked) {
 					player.roleBlocked = false;
 					player.toExecute = null;
@@ -362,6 +441,9 @@ class Mafia extends Rooms.RoomGame {
 		if (mafiaCount > this.playerCount - mafiaCount) {
 			this.end(MafiaData.MafiaClasses.mafia.image, 'The mafia is victorious, how awful!');
 			return;
+		} else if (!mafiaCount && (townCount === this.playerCount)) {
+			this.end(MafiaData.MafiaClasses.villager.image, 'The town has driven the mafia out succesfully!');
+			return;
 		} else if (this.playerCount === 1) {
 			for (let i in this.players) {
 				if (this.players[i].class.side === 'solo') {
@@ -369,9 +451,6 @@ class Mafia extends Rooms.RoomGame {
 					return;
 				}
 			}
-		} else if (!mafiaCount && (townCount === this.playerCount)) {
-			this.end(MafiaData.MafiaClasses.villager.image, 'The town has driven the mafia out succesfully!');
-			return;
 		}
 
 		if (this.timer) {
@@ -381,20 +460,24 @@ class Mafia extends Rooms.RoomGame {
 
 		switch (this.gamestate) {
 		case 'initial':
-			this.gameEvent('night', 'onNight', 2);
+			this.gamestate = 'night';
 			this.mafiaMeeting();
+			this.gameEvent('onNight', 2);
 			break;
 		case 'night':
-			this.gameEvent('day', 'onDay', 0.5);
+			this.gamestate = 'day';
+			this.gameEvent('onDay', 0.5);
 			break;
 		case 'day':
-			this.gameEvent('lynch', 'onLynch', 2);
+			this.gamestate = 'lynch';
 			this.townMeeting();
+			this.gameEvent('onLynch', 2);
 			break;
 		case 'lynch':
 			this.day++;
-			this.gameEvent('night', 'onNight', 2);
+			this.gamestate = 'night';
 			this.mafiaMeeting();
+			this.gameEvent('onNight', 2);
 		}
 	}
 
@@ -412,8 +495,8 @@ class Mafia extends Rooms.RoomGame {
 	mafiaMeeting() {
 		this.meeting = 'mafia';
 		this.currentVote = {};
+		this.voters = [];
 		let noMafia = {};
-		let mafia = [];
 
 		for (let i in this.players) {
 			let player = this.players[i];
@@ -421,49 +504,46 @@ class Mafia extends Rooms.RoomGame {
 			if (player.class.side !== 'mafia') {
 				noMafia[i] = player;
 			} else {
-				mafia.push(player);
+				this.voters.push(player);
 			}
 		}
 
-		for (let i = 0; i < mafia.length; i++) {
-			mafia[i].voting = true;
-			mafia[i].validVotes = noMafia;
+		for (let i = 0; i < this.voters.length; i++) {
+			this.voters[i].voting = true;
+			this.voters[i].validVotes = noMafia;
 
 			let flavorText = '';
-			if (mafia.length === 1) {
+			if (this.voters.length === 1) {
 				flavorText += 'As the only live member of the mafia, you have to be careful. Not careful enough to stop killing, though.';
-			} else if (mafia.length === 2) {
-				flavorText += 'You sit down with the only other member of the mafia, ' + (i === 0 ? Tools.escapeHTML(mafia[1].name) : Tools.escapeHTML(mafia[0].name)) + '.';
+			} else if (this.voters.length === 2) {
+				flavorText += 'You sit down with the only other member of the mafia, ' + (i === 0 ? Tools.escapeHTML(this.voters[1].name) : Tools.escapeHTML(this.voters[0].name)) + '.';
 			} else {
 				flavorText += 'You sit down with the other members of the mafia, ';
-				for (let j = 0; i < mafia.length; i++) {
+				for (let j = 0; i < this.voters.length; i++) {
 					if (i !== j) {
-						if (j === (mafia.length - 1) || (j < i && j === (mafia.length - 2))) {
+						if (j === (this.voters.length - 1) || (j < i && j === (this.voters.length - 2))) {
 							flavorText += ' and ';
 						} else {
 							flavorText += ', ';
 						}
-						flavorText += Tools.escapeHTML(mafia[i].name);
+						flavorText += Tools.escapeHTML(this.voters[i].name);
 					}
 				}
 			}
 
-			mafia[i].voteWindow(mafia[i].class.image, flavorText);
+			this.voters[i].voteWindow(this.voters[i].class.image, flavorText);
 		}
 	}
 
 	townMeeting() {
-		this.meeting = 'mafia';
+		this.meeting = 'town';
 		this.currentVote = {};
+		this.voters = [];
 
 		for (let i in this.players) {
 			let player = this.players[i];
+			this.voters.push(player);
 
-			if (this.currentVote[player.userid]) {
-				this.currentVote[player.userid]++;
-			} else {
-				this.currentVote[player.userid] = 1;
-			}
 			player.voting = true;
 			player.validVotes = this.players;
 
@@ -471,9 +551,7 @@ class Mafia extends Rooms.RoomGame {
 		}
 	}
 
-	gameEvent(gamestate, event, timer) {
-		this.gamestate = gamestate;
-
+	gameEvent(event, timer) {
 		this.executionOrder = [];
 
 		for (let i in this.players) {
@@ -487,7 +565,11 @@ class Mafia extends Rooms.RoomGame {
 			return (b.class[event].priority - a.class[event].priority);
 		});
 
-		this.setTimer(timer);
+		if (this.executionOrder.length || this.currentVote) {
+			this.setTimer(timer);
+		} else {
+			this.setTimer(0.25);
+		}
 	}
 }
 
@@ -551,13 +633,84 @@ exports.commands = {
 			room.game.displayPregame();
 		},
 
+		will: function (target, room, user) {
+			if (!room.game || room.game.gameid !== 'mafia') return this.errorReply("There is no game of mafia running in this room.");
+			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+
+			if (target.toLowerCase() === 'on' || target.toLowerCase() === 'enable') {
+				if (!this.can(permission, null, room)) return false;
+				if (room.game.gamestate !== 'pregame') return this.errorReply("The game has started already.");
+
+				if (room.game.allowWills) {
+					this.errorReply("Wills are already enabled.");
+				} else {
+					room.game.allowWills = true;
+					room.game.updatePregame();
+				}
+			} else if (target.toLowerCase() === 'off' || target.toLowerCase() === 'disable') {
+				if (!this.can(permission, null, room)) return false;
+				if (room.game.gamestate !== 'pregame') return this.errorReply("The game has started already.");
+
+				if (!room.game.allowWills) {
+					this.errorReply("Wills are already disabled.");
+				} else {
+					room.game.allowWills = false;
+					room.game.updatePregame();
+				}
+			} else if (room.game.allowWills) {
+				if (!(user.userid in room.game.players)) return this.errorReply("You're not in the game.");
+				if (room.game.gamestate !== 'pregame') return this.errorReply("You can't do that before the game has started.");
+				if (target.length > 200) return this.errorReply("Will too long.");
+
+				let will = room.game.players[user.userid].will;
+
+				if (!target.length) {
+					if (will) {
+						return this.sendReply("Your will is: " + Tools.escapeHTML(will));
+					} else {
+						return this.sendReply("You don't have a will set.");
+					}
+				}
+
+				room.game.players[user.userid].will = target;
+				this.sendReply("Will set to: " + Tools.escapeHTML(target));
+			} else {
+				this.errorReply("Wills are not allowed in this game.");
+			}
+		},
+
+		anonvotes: function (target, room, user) {
+			if (!room.game || room.game.gameid !== 'mafia') return this.errorReply("There is no game of mafia running in this room.");
+			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
+			if (!this.can(permission, null, room)) return false;
+			if (room.game.gamestate !== 'pregame') return this.errorReply("The game has started already.");
+
+			if (target === 'on' || target === 'enable') {
+				if (room.game.anonVotes) {
+					this.errorReply("Anonymous votes are already enabled.");
+				} else {
+					room.game.anonVotes = true;
+					room.game.updatePregame();
+				}
+			} else if (target === 'off' || target === 'disable') {
+				if (!room.game.anonVotes) {
+					this.errorReply("Anonymous votes are already disabled.");
+				} else {
+					room.game.anonVotes = false;
+					room.game.updatePregame();
+				}
+			}
+		},
+
 		target: function (target, room, user) {
 			if (!room.game || room.game.gameid !== 'mafia') return this.errorReply("There is no game of mafia running in this room.");
 			if (room.game.gamestate === 'pregame') return this.errorReply("The game hasn't started yet.");
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 
-			if (user.userid in room.game.players && toId(target) in room.game.players) {
-				room.game.players[user.userid].onReceiveTarget(room.game.players[toId(target)]);
+			let sanitized = toId(target);
+
+			if (user.userid in room.game.players && (sanitized in room.game.players || sanitized === 'nobody')) {
+				room.game.players[user.userid].onReceiveTarget(sanitized);
 			}
 		},
 
@@ -566,8 +719,10 @@ exports.commands = {
 			if (!room.game.gamestate === 'pregame') return this.errorReply("The game hasn't started yet.");
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 
-			if (user.userid in room.game.players && toId(target) in room.game.players) {
-				room.game.players[user.userid].onReceiveVote(room.game.players[toId(target)]);
+			let sanitized = toId(target);
+
+			if (user.userid in room.game.players && (sanitized in room.game.players || sanitized === 'abstain')) {
+				room.game.players[user.userid].onReceiveVote(sanitized);
 			}
 		},
 

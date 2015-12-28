@@ -45,7 +45,7 @@ function getAdded(user) {
 	list.forEach(function(kek) {
 		Friends[kek].forEach(function(kek2) {
 			if (user === kek2) {
-				kek = "<font color=" + Gold.hashColor(kek) + ">" + getName(kek) + "</font>";
+				kek = " <font color=" + Gold.hashColor(kek) + ">" + getName(kek) + "</font>";
 				output.push(kek);
 			}
 		});

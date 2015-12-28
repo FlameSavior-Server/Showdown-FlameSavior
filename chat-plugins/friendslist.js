@@ -151,11 +151,19 @@ exports.commands = {
 				return this.sendReply("|raw|You have <font color=red>unfriended</font> <font color=" + Gold.hashColor(removee) + "><b>" + Tools.escapeHTML(getName(removee)) + "</b></font> from your friends list.");
 				break;
 
+			case 'clear':
 			case 'deleteall':
 			case 'removeall':
 				if (!Friends[user.userid] || Friends[user.userid].lenth < 1) return this.errorReply("You do not have any friends added to your friendslist yet.");
+				if (user.lastCommand !== '/friendslist removeall') {
+					user.lastCommand = '/friendslist removeall';
+					this.errorReply("This command will clear your friendslist entirely.");
+					this.errorReply("Do the command again to confirm that you want to clear your friendslist.");
+					return;
+				}
 				Friends[user.userid] = [];
 				updateFriends();
+				user.lastCommand = '';
 				return this.sendReply("You have cleared your friendslist.");
 				break;
 

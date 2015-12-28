@@ -54,6 +54,7 @@ exports.commands = {
 		switch (target[0]) {
 			case 'add':
 				var newFriend = toId(target[1]);
+				if (!newFriend) return this.errorReply("Usage: /friendslist add, [user] - Adds a user to your friendslist.");
 				if (user.userid === newFriend) return this.errorReply("You cannot add yourself to your friendslist...");
 				if (newFriend.length > 18) return this.errorReply("Usernames are not this long...");
 				if (~Friends[user.userid].indexOf(newFriend)) return this.errorReply("You are already friends with this person!");
@@ -64,10 +65,18 @@ exports.commands = {
 			case 'delete':
 			case 'remove':
 				var removee = toId(target[1]);
+				if (!removee) return this.errorReply("Usage: /friendslist remove, [user] - Removes a user from your friendslist.");
 				if (!~Friends[user.userid].indexOf(removee)) return this.errorReply("You are not currently friends with this user.  Check spelling?");
 				Friends[user.userid].remove(removee);
 				updateFriends();
 				return this.sendReply("|raw|You have <font color=red>unfriended</font> <font color=" + Gold.hashColor(removee) + ">" + Tools.escapeHTML(removee) + "</font> from your friends list.");
+				break;
+			case 'deleteall':
+			case 'removeall':
+				if (!Friends[user.userid] || Friends[user.userid].lenth < 1) return this.errorReply("You do not have any friends added to your friendslist yet.");
+				Friends[user.userid] = [];
+				updateFriends();
+				return this.sendReply("You have cleared your friendslist.");
 				break;
 			default:
 				if (!this.canBroadcast()) return;
@@ -85,6 +94,7 @@ exports.commands = {
 	friendslisthelp: ["Gold's friendslist allows users to add friends to their friendslists. The commands include...",
 					"/friendslist add, [user] - Adds a user to your friendslist.",
 					"/friendslist remove, [user] - Removes a user from your friendslist.",
+					"/friendslist removeall - Clears your friendslist.",
 					"/friendslist - Displays your friendslist.",
 					"/friendslist [user] - Displays [user]'s friendslist."],
 };

@@ -132,6 +132,7 @@ exports.commands = {
 				if (user.userid === newFriend) return this.errorReply("You cannot add yourself to your friendslist...");
 				if (newFriend.length > 18) return this.errorReply("Usernames are not this long...");
 				if (~Friends[user.userid].indexOf(newFriend)) return this.errorReply("You are already friends with this person!");
+				if (Friends[user.userid].length > 100) return this.errorReply("You cannot have over 100 friends added to your friendslist, unfortunately.");
 				Friends[user.userid].push(newFriend);
 				updateFriends();
 				return this.sendReply("|raw|You have added <b><font color=" + Gold.hashColor(newFriend) + ">" + Tools.escapeHTML(getName(target[1])) + "</font></b> to your friends list.");

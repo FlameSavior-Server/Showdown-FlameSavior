@@ -31,7 +31,7 @@ function formatList(user, by) {
 			return "This user does not have any friends added to their friendslist.";
 		}
 	}
-	var reply = "<b><u>Friends:</u></b><br />";
+	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends:</u></b><br />";
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
 		reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
 	Friends[user].forEach(function(frens) {
@@ -43,6 +43,7 @@ function formatList(user, by) {
 		}
 		reply += "<tr><td><b><font color=" + Gold.hashColor(frens) + ">" + (Users.getExact(frens) && Users(frens).connected ? Users.getExact(frens).name : frens) + "</font></b></td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";
 	});
+	reply += "</div></table>";
 	return reply;
 }
 
@@ -60,10 +61,11 @@ exports.commands = {
 		switch (target[0]) {
 			case 'add':
 				var newFriend = toId(target[1]);
+				if (user.userid === newFriend) return this.errorReply("You cannot add yourself to your friendslist...");
 				if (~Friends[user.userid].indexOf(newFriend)) return this.errorReply("You are already friends with this person!");
 				Friends[user.userid].push(newFriend);
 				updateFriends();
-				return this.sendReply("|raw|You have added <b><font color=" + Gold.hashColor(newFriend) + ">" + target[1] + "</font></b> to your friends list.");
+				return this.sendReply("|raw|You have added <b><font color=" + Gold.hashColor(newFriend) + ">" + Tools.escapeHTML(target[1]) + "</font></b> to your friends list.");
 				break;
 			case 'delete':
 			case 'remove':
@@ -71,15 +73,14 @@ exports.commands = {
 				if (!~Friends[user.userid].indexOf(removee)) return this.errorReply("You are not currently friends with this user.  Check spelling?");
 				Friends[user.userid].remove(removee);
 				updateFriends();
-				return this.sendReply("|raw|You have <font color=red>unfriended</font> <font color=" + Gold.hashColor(removee) + ">" + removee + "</font> from your friends list.");
+				return this.sendReply("|raw|You have <font color=red>unfriended</font> <font color=" + Gold.hashColor(removee) + ">" + Tools.escapeHTML(removee) + "</font> from your friends list.");
 				break;
 			default:
-			case 'list':
 				if (!this.canBroadcast()) return;
-				if (!target[1]) {
+				if (!target[0]) {
 					return this.sendReplyBox(formatList(user.userid, user.userid));
 				} else {
-					return this.sendReplyBox(formatList(target[1]), user.userid);
+					return this.sendReplyBox(formatList(target[0], user.userid));
 				}
 				break;
 		}

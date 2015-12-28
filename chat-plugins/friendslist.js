@@ -7,8 +7,12 @@
 
 var fs = require('fs');
 var moment = require('moment');
+
 var Friends = {};
-var filepath = 'config/friends.json';
+var friendsFilepath = 'config/friends.json';
+
+var NotifySetting = {};
+var settingsFilepath = 'config/friendssettings.json';
 
 function getName(user) {
 	return (Users.getExact(user) && Users(user).connected ? Users.getExact(user).name : user)
@@ -16,15 +20,22 @@ function getName(user) {
 
 function loadFriendsList() {
 	try {
-		Friends = JSON.parse(fs.readFileSync(filepath));
+		Friends = JSON.parse(fs.readFileSync(friendsFilepath));
+		NotifySetting = JSON.parse(fs.readFileSync(settingsFilepath));
 	} catch (e) {
+		NotifySetting = {};
 		Friends = {};
 	}
 }
 loadFriendsList();
 
 function updateFriends() {
-	fs.writeFile(filepath, JSON.stringify(Friends));
+	fs.writeFile(friendsFilepath, JSON.stringify(Friends));
+}
+Gold.updateFrens = updateFriends;
+
+function updateSettings() {
+	fs.writeFile(settingsFilepath, JSON.stringify(NotifySetting));
 }
 
 function getFriendsNumber(user) {
@@ -55,6 +66,22 @@ function getAdded(user) {
 	return reply;
 }
 
+function friendsNotify(user) {
+	var list = Object.keys(Friends);
+	list.forEach(function(kek) {
+		Friends[kek].forEach(function(kek2) {
+			if (~kek2.indexOf(user)) {
+				if (Users(kek) && Users(kek).connected && Users.getExact(kek)) {
+					if (NotifySetting[kek]) {
+						return Users(kek).send('|pm|~Friendslist|' + Users(kek).getIdentity() + '|/html <b><font color="' + Gold.hashColor(user) + '">' + getName(user) + '</font> has come <font color=green>online</font>!');
+					}
+				}
+			}
+		});
+	});
+}
+Gold.friendsNotify = friendsNotify;
+
 function formatList(user, by) {
 	if (!Friends[user]) Friends[user] = [];
 	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends of </u><font color=" + Gold.hashColor(user) + "><u>" + getName(user) + "</u></font> (" + Friends[user].length + "):</b><br />";
@@ -84,10 +111,9 @@ exports.commands = {
 	friendlist: 'friendslist',
 	friendslist: function (target, room, user) {
 		target = target.split(', ');
-		if (!Friends[user.userid]) {
-			Friends[user.userid] = [];
-			this.parse('/help friendslist');
-		}
+		if (!Friends[user.userid]) Friends[user.userid] = [];
+		if (!NotifySetting[user.userid]) NotifySetting[user.userid] = false;
+
 		switch (target[0]) {
 			case 'add':
 				var newFriend = toId(target[1]);
@@ -115,6 +141,12 @@ exports.commands = {
 				updateFriends();
 				return this.sendReply("You have cleared your friendslist.");
 				break;
+			case 'toggle':
+			case 'notify':
+				var notify = NotifySetting[user.userid] = !NotifySetting[user.userid];
+				updateSettings();
+				return this.sendReply("You are now " + (notify ? ' being notified ' : ' not being notified ') + "of friends joining the server.");
+				break;
 			case 'help':
 				this.parse('/help friendslist');
 				break;
@@ -126,14 +158,19 @@ exports.commands = {
 			default:
 				if (!this.canBroadcast()) return;
 				if (!target[0]) {
-					if (!Friends[user.userid] || Friends[user.userid].length < 1) return this.errorReply("You do not have any friends added to your friendslist yet.");
+					if (!Friends[user.userid] || Friends[user.userid].length < 1) {
+						this.parse('/help friendslist');
+						return this.errorReply("You do not have any friends added to your friendslist yet.");
+					}
 					return this.sendReplyBox(formatList(user.userid, user.userid));
 				} else {
 					target[0] = toId(target[0]);
-					if (!Friends[target[0]] || Friends[target[0]].length < 1) return this.errorReply("This user does not have any friends added to their friendslist yet.");
+					if (!Friends[target[0]] || Friends[target[0]].length < 1) {
+						this.parse('/help friendslist');
+						return this.errorReply("This user does not have any friends added to their friendslist yet.");
+					}
 					return this.sendReplyBox(formatList(target[0], user.userid));
 				}
-				break;
 		}
 	},
 	friendslisthelp: ["Gold's friendslist allows users to add friends to their friendslists. The commands include...",
@@ -141,7 +178,9 @@ exports.commands = {
 					"/friendslist remove, [user] - Removes a user from your friendslist.",
 					"/friendslist removeall - Clears your friendslist.",
 					"/friendslist - Displays your friendslist.",
-					"/friendslist [user] - Displays [user]'s friendslist."],
+					"/friendslist [user] - Displays [user]'s friendslist.",
+					"/friendslist notify - Toggles being notified of not when a friend comes online (disabled by default)."],
 };
 
 Gold.friends = Friends;
+Gold.friendsSettings = NotifySetting;

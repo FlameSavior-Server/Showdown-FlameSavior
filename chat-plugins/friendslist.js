@@ -24,13 +24,6 @@ function updateFriends() {
 }
 function formatList(user, by) {
 	if (!Friends[user]) Friends[user] = [];
-	if (Friends[user].length < 1) {
-		if (user === by) {
-			return "You do not have any friends added to your friendslist.";
-		} else {
-			return "This user does not have any friends added to their friendslist.";
-		}
-	}
 	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends:</u></b><br />";
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
 		reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
@@ -78,8 +71,11 @@ exports.commands = {
 			default:
 				if (!this.canBroadcast()) return;
 				if (!target[0]) {
+					if (!Friends[user.userid] || Friends[user.userid].length < 1) return this.errorReply("You do not have any friends added to your friendslist yet.");
 					return this.sendReplyBox(formatList(user.userid, user.userid));
 				} else {
+					target[0] = toId(target[0]);
+					if (!Friends[target[0]] || Friends[target[0]].length < 1) return this.errorReply("This user does not have any friends added to their friendslist yet.");
 					return this.sendReplyBox(formatList(target[0], user.userid));
 				}
 				break;
@@ -91,3 +87,5 @@ exports.commands = {
 					"/friendslist - Displays your friendslist.",
 					"/friendslist [user] - Displays [user]'s friendslist."],
 };
+
+Gold.friends = Friends;

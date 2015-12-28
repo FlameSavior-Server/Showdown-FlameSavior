@@ -32,7 +32,7 @@ function getFriendsNumber(user) {
 	var number = 0;
 	list.forEach(function(kek) {
 		Friends[kek].forEach(function(kek2) {
-			if (kek2 === user) number ++;
+			if (kek2 === user) number++;
 		});
 	});
 	return number;

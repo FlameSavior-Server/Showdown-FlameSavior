@@ -33,7 +33,7 @@ function formatList(user, by) {
 	}
 	var reply = "<b><u>Friends:</u></b><br />";
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
-		reply += "<tr><td><u>Friend</u></td><td><u>Last Online</u></td></tr>";
+		reply += "<tr><td><u>Friend</u></td><td><u>Last Online</u></td><td><u>Bucks:</u></td></tr>";
 	Friends[user].forEach(function(frens) {
 		function lastSeen(frens) {
 			if (Users(frens) && Users.getExact(frens) && Users(frens).connected) return "<font color=green>Currently Online</font>";
@@ -41,7 +41,7 @@ function formatList(user, by) {
 			var userLastSeen = moment(Gold.seenData[frens]).format("MMMM Do YYYY, h:mm:ss a");
 			return userLastSeen;
 		}
-		reply += "<tr><td><b><font color=" + Gold.hashColor(frens) + ">" + (Users.getExact(frens) && Users(frens).connected ? Users.getExact(frens).name : frens) + "</font></b></td><td>" + lastSeen(frens) + "</td></tr>";
+		reply += "<tr><td><b><font color=" + Gold.hashColor(frens) + ">" + (Users.getExact(frens) && Users(frens).connected ? Users.getExact(frens).name : frens) + "</font></b></td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";
 	});
 	return reply;
 }
@@ -63,7 +63,7 @@ exports.commands = {
 				if (~Friends[user.userid].indexOf(newFriend)) return this.errorReply("You are already friends with this person!");
 				Friends[user.userid].push(newFriend);
 				updateFriends();
-				return this.sendReply("|raw|You have added <b><font color=" + Gold.hashColor(newFriend) + ">" + newFriend + "</font></b> to your friends list.");
+				return this.sendReply("|raw|You have added <b><font color=" + Gold.hashColor(newFriend) + ">" + target[1] + "</font></b> to your friends list.");
 				break;
 			case 'delete':
 			case 'remove':

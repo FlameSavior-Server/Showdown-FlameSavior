@@ -10,6 +10,10 @@ var moment = require('moment');
 var Friends = {};
 var filepath = 'config/friends.json';
 
+function getName(user) {
+	return (Users.getExact(user) && Users(user).connected ? Users.getExact(user).name : user)
+}
+
 function loadFriendsList() {
 	try {
 		Friends = JSON.parse(fs.readFileSync(filepath));
@@ -41,7 +45,7 @@ function getAdded(user) {
 	list.forEach(function(kek) {
 		Friends[kek].forEach(function(kek2) {
 			if (user === kek2) {
-				kek = "<font color=" + Gold.hashColor(kek) + ">" + kek + "</font>";
+				kek = "<font color=" + Gold.hashColor(kek) + ">" + getName(kek) + "</font>";
 				output.push(kek);
 			}
 		});
@@ -52,7 +56,7 @@ function getAdded(user) {
 
 function formatList(user, by) {
 	if (!Friends[user]) Friends[user] = [];
-	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends of </u><font color=" + Gold.hashColor(user) + "><u>" + user + "</u></font>:</b><br />";
+	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friends of </u><font color=" + Gold.hashColor(user) + "><u>" + getName(user) + "</u></font>:</b><br />";
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
 		reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
 	Friends[user].forEach(function(frens) {
@@ -62,12 +66,12 @@ function formatList(user, by) {
 			var userLastSeen = moment(Gold.seenData[frens]).format("MMMM Do YYYY, h:mm:ss a");
 			return userLastSeen;
 		}
-		reply += "<tr><td><b><font color=" + Gold.hashColor(frens) + ">" + (Users.getExact(frens) && Users(frens).connected ? Users.getExact(frens).name : frens) + "</font></b></td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";
+		reply += "<tr><td><b><font color=" + Gold.hashColor(frens) + ">" + getName(frens) + "</font></b></td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";
 	});
 	reply += "</table>";
 	var number = getFriendsNumber(user);
 	var label = (number > 1 ? ' users have' : ' user has');
-	reply += (number > 0 ? "<button name=\"send\" value=\"/friendslist getadded, " + user + "\">" + number + label + " added <font color=" + Gold.hashColor(user) + ">" + user + "</font> as a friend." :  "");
+	reply += (number > 0 ? "<button name=\"send\" value=\"/friendslist getadded, " + user + "\">" + number + label + " added <font color=" + Gold.hashColor(user) + ">" + getName(user) + "</font> as a friend." :  "");
 	reply += "</div>";
 	return reply;
 }

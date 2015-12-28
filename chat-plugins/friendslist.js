@@ -97,7 +97,7 @@ function formatList(user, by) {
 		function lastSeen(frens) {
 			if (Users(frens) && Users.getExact(frens) && Users(frens).connected) return "<font color=green>Currently Online</font>";
 			if (!Gold.seenData[frens]) return "<font color=red>Never seen on this server</font>";
-			var userLastSeen = moment(Gold.seenData[frens]).format("MMMM Do YYYY, h:mm:ss a");
+			var userLastSeen = moment(Gold.seenData[frens]).fromNow();
 			return userLastSeen;
 		}
 		reply += "<tr><td><b><font color=" + Gold.hashColor(frens) + ">" + getName(frens) + "</font></b></td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";

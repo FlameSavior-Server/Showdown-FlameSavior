@@ -64,13 +64,11 @@ function getAdded(user) {
 			if (user === kek2) {
 				kek = " <button name=\"send\" value=\"/friendslist " + kek + "\"><font color=" + Gold.hashColor(kek) + ">" + getName(kek) + "</font></button>";
 				output.push(kek);
-			} else {
-				output += "No one has added this user to their friendslist yet.";
 			}
 		});
 	});
-	reply = reply += output;
-	return reply;
+	if (output.length < 1) output.push("NO one has added this user to their friendslist yet.");
+	return reply += output;
 }
 
 function friendsNotify(user) {

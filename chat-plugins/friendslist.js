@@ -67,7 +67,7 @@ function getAdded(user) {
 			}
 		});
 	});
-	if (output.length < 1) output.push("NO one has added this user to their friendslist yet.");
+	if (output.length < 1) output.push("No one has added this user to their friendslist yet.");
 	return reply += output;
 }
 

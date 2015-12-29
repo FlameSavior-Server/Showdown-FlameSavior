@@ -64,6 +64,8 @@ function getAdded(user) {
 			if (user === kek2) {
 				kek = " <button name=\"send\" value=\"/friendslist " + kek + "\"><font color=" + Gold.hashColor(kek) + ">" + getName(kek) + "</font></button>";
 				output.push(kek);
+			} else {
+				output += "No one has added this user to their friendslist yet.";
 			}
 		});
 	});
@@ -180,6 +182,7 @@ exports.commands = {
 
 			// command used with GUI
 			case 'getadded':
+			case 'added':
 				if (!target[1]) return false;
 				return this.sendReplyBox(getAdded(toId(target[1])));
 				break;
@@ -207,6 +210,7 @@ exports.commands = {
 					"/friendslist removeall - Clears your friendslist.",
 					"/friendslist - Displays your friendslist.",
 					"/friendslist [user] - Displays [user]'s friendslist.",
+					"/friendslist added, [user] - Shows whose added a user as a friend to their friendslist.",
 					"/friendslist notify - Toggles being notified or not when a friend comes online (disabled by default)."],
 };
 

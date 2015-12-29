@@ -11,7 +11,9 @@ function loadTrainerCards() {
 	try {
 		trainerCards = serialize.unserialize(fs.readFileSync('config/trainercards.json', 'utf8'));
 		Object.merge(CommandParser.commands, trainerCards);
-	} catch (e) {};
+	} catch (e) {
+		Rooms('staff').add("TRAINER CARDS failed to be loaded.").update();
+	}
 }
 setTimeout(function(){loadTrainerCards();},1000);
 

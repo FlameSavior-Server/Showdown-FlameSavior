@@ -8,33 +8,15 @@
 var fs = require('fs');
 var moment = require('moment');
 
-var Friends = {};
 var friendsFilepath = 'config/friends.json';
-
-var NotifySetting = {};
 var settingsFilepath = 'config/friendssettings.json';
+
+var Friends = require('../' + friendsFilepath);
+var NotifySetting = require('../' +  settingsFilepath);
 
 function getName(user) {
 	return (Users.getExact(user) && Users(user).connected ? Users.getExact(user).name : user)
 }
-
-function loadFriendsList() {
-	try {
-		Friends = JSON.parse(fs.readFileSync(friendsFilepath));
-	} catch (e) {
-		Rooms('staff').add("FRIENDS LIST failed to be loaded.").update();
-		//Friends = {};
-	}
-	setTimeout(function() {
-		try {
-			NotifySetting = JSON.parse(fs.readFileSync(settingsFilepath));
-		} catch (e) {
-			Rooms('staff').add("FRIENDS SETTINGS failed to be loaded.").update();
-			//NotifySetting = {};
-		}
-	}, 3000);
-}
-loadFriendsList();
 
 function updateFriends() {
 	fs.writeFile(friendsFilepath, JSON.stringify(Friends));
@@ -57,10 +39,12 @@ function getFriendsNumber(user) {
 }
 
 function getAdded(user) {
+	var originalName = user;
+	user = toId(user);
 	var list = Object.keys(Friends);
 	var output = [];
 	var label = (getFriendsNumber(user) > 1 ? 'users have' : 'user has');
-	var reply = "The following " + label + " added <b><font color=" + Gold.hashColor(user) + ">" + getName(user) + "</font></b> as a friend:<br />";
+	var reply = "The following " + label + " added <b><font color=" + Gold.hashColor(user) + ">" + getName(originalName) + "</font></b> as a friend:<br />";
 	list.forEach(function(kek) {
 		Friends[kek].forEach(function(kek2) {
 			if (user === kek2) {
@@ -184,7 +168,7 @@ exports.commands = {
 			case 'getadded':
 			case 'added':
 				if (!target[1]) return false;
-				return this.sendReplyBox(getAdded(toId(target[1])));
+				return this.sendReplyBox(getAdded(target[1]));
 				break;
 
 			default:

@@ -155,8 +155,14 @@ exports.commands = {
 
 			case 'toggle':
 			case 'notify':
-				var notify = !(NotifySetting[user.userid]);
-				updateSettings();
+				if (NotifySetting[user.userid]) {
+					NotifySetting[user.userid] = false;
+					updateSettings();
+				} else {
+					NotifySetting[user.userid] = true;
+					updateSettings();
+				}
+				var notify = NotifySetting[user.userid];
 				return this.sendReply("You are now " + (notify ? ' being notified ' : ' not being notified ') + "of friends joining the server.");
 				break;
 

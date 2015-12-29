@@ -181,7 +181,7 @@ exports.commands = {
 			// command used with GUI
 			case 'getadded':
 				if (!target[1]) return false;
-				return this.sendReplyBox(getAdded(target[1]));
+				return this.sendReplyBox(getAdded(toId(target[1])));
 				break;
 
 			default:

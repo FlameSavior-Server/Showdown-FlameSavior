@@ -44,7 +44,8 @@ function getAdded(user) {
 	var list = Object.keys(Friends);
 	var output = [];
 	var label = (getFriendsNumber(user) > 1 ? 'users have' : 'user has');
-	var reply = "The following " + label + " added <b><font color=" + Gold.hashColor(user) + ">" + getName(originalName) + "</font></b> as a friend:<br />";
+	var reply = "<div style=\"max-height: 150px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">";
+	reply += "The following " + label + " added <b><font color=" + Gold.hashColor(user) + ">" + getName(originalName) + "</font></b> as a friend:<br />";
 	list.forEach(function(kek) {
 		Friends[kek].forEach(function(kek2) {
 			if (user === kek2) {
@@ -75,7 +76,7 @@ Gold.friendsNotify = friendsNotify;
 
 function formatList(user, by) {
 	if (!Friends[user]) Friends[user] = [];
-	var reply = "<div class=\"infobox-limited\" target=\"_blank\"><b><u>Friendslist of </u><font color=" + Gold.hashColor(user) + "><u>" + getName(user) + "</u></font> (" + Friends[user].length + "):</b><br />";
+	var reply = "<div style=\"max-height: 150px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\"><b><u>Friendslist of </u><font color=" + Gold.hashColor(user) + "><u>" + getName(user) + "</u></font> (" + Friends[user].length + "):</b><br />";
 		reply += (NotifySetting[user] ? "(<i>does</i> get notified when friends come online)" : "(<i>does NOT</i> get notified when friends come online)");
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
 		reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";

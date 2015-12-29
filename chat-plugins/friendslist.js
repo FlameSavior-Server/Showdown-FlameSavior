@@ -25,12 +25,14 @@ function loadFriendsList() {
 		Rooms('staff').add("FRIENDS LIST failed to be loaded.").update();
 		//Friends = {};
 	}
-	try {
-		NotifySetting = JSON.parse(fs.readFileSync(settingsFilepath));
-	} catch (e) {
-		Rooms('staff').add("FRIENDS SETTINGS failed to be loaded.").update();
-		//NotifySetting = {};
-	}
+	setTimeout(function() {
+		try {
+			NotifySetting = JSON.parse(fs.readFileSync(settingsFilepath));
+		} catch (e) {
+			Rooms('staff').add("FRIENDS SETTINGS failed to be loaded.").update();
+			//NotifySetting = {};
+		}
+	}, 3000);
 }
 loadFriendsList();
 

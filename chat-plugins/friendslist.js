@@ -78,7 +78,7 @@ function friendsNotify(user) {
 			if (~kek2.indexOf(user)) {
 				if (Users(kek) && Users(kek).connected && Users.getExact(kek)) {
 					if (NotifySetting[kek]) {
-						return Users(kek).send('|pm|~Friendslist Notifications|' + Users(kek).getIdentity() + '|/html <b><font color="' + Gold.hashColor(user) + '">' + getName(user) + '</font> has come <font color=green>online</font>!');
+						return Users(kek).send('|pm|~Friendslist Notifications|' + Users(kek).getIdentity() + '|/html <b><font color="' + Gold.hashColor(user) + '">' + getName(user) + '</font></b> has come <font color=green>online</font>!');
 					}
 				}
 			}
@@ -105,7 +105,7 @@ function formatList(user, by) {
 	reply += "</table>";
 	var number = getFriendsNumber(user);
 	var label = (number > 1 ? ' users have' : ' user has');
-	reply += (number > 0 ? "<button name=\"send\" value=\"/friendslist getadded, " + user + "\">" + number + label + " added <font color=" + Gold.hashColor(user) + ">" + getName(user) + "</font> as a friend." :  "");
+	reply += (number > 0 ? "<button title=\"See who added " + user + " as a friend.\" name=\"send\" value=\"/friendslist getadded, " + user + "\">" + number + label + " added <font color=" + Gold.hashColor(user) + ">" + getName(user) + "</font> as a friend." :  "");
 	reply += "</div>";
 	return reply;
 }

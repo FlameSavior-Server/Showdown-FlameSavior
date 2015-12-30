@@ -681,7 +681,7 @@ exports.commands = {
 		return this.sendReplyBox('Click <a href="http://goldserver.weebly.com/how-do-i-get-a-rank-on-gold.html">here</a> to find out about Gold\'s ranks and promotion system.');
 	},
 	removebadge: function(target, room, user) {
-		if (!this.can('hotpatch')) return false;
+		if (!this.can('pban')) return false;
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!target) return this.sendReply('/removebadge [user], [badge] - Removes a badge from a user.');
@@ -727,7 +727,7 @@ exports.commands = {
 		this.parse('/removebadge ' + target + ', vip');
 	},
 	givebadge: function(target, room, user) {
-		if (!this.can('hotpatch')) return false;
+		if (!this.can('pban')) return false;
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) return this.sendReply('There is no user named ' + this.targetUsername + '.');

@@ -14,8 +14,13 @@ var settingsFilepath = 'config/friendssettings.json';
 var Friends = require('../' + friendsFilepath);
 var NotifySetting = require('../' +  settingsFilepath);
 
-function getName(user) {
-	return (Users.getExact(user) && Users(user).connected ? Users.getExact(user).name : user)
+function getName(user, color, bold) {
+	var name = (Users.getExact(user) && Users(user).connected ? Users.getExact(user).name : user);
+	var color = '<font color="' + Gold.hashColor(user) + '">' + name + '</font>';
+	var boldName = '<b>' + color + '</b>';
+	if (user && !color && !bold) return name;
+	if (user && color && !bold) return color;
+	if (user && color && bold) return boldName;
 }
 
 function updateFriends() {
@@ -45,11 +50,11 @@ function getAdded(user) {
 	var output = [];
 	var label = (getFriendsNumber(user) > 1 ? 'users have' : 'user has');
 	var reply = "<div style=\"max-height: 150px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">";
-	reply += "The following " + label + " added <b><font color=" + Gold.hashColor(user) + ">" + getName(originalName) + "</font></b> as a friend:<br />";
+	reply += "The following " + label + " added " + getName(originalName, true, true) + " as a friend:<br />";
 	list.forEach(function(kek) {
 		Friends[kek].forEach(function(kek2) {
 			if (user === kek2) {
-				kek = " <button name=\"send\" value=\"/friendslist " + kek + "\"><font color=" + Gold.hashColor(kek) + ">" + getName(kek) + "</font></button>";
+				kek = " <button name=\"send\" value=\"/friendslist " + kek + "\">" + getName(kek, true, false) + "</button>";
 				output.push(kek);
 			}
 		});
@@ -76,7 +81,7 @@ Gold.friendsNotify = friendsNotify;
 
 function formatList(user, by) {
 	if (!Friends[user]) Friends[user] = [];
-	var reply = "<div style=\"max-height: 150px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\"><b><u>Friendslist of </u><font color=" + Gold.hashColor(user) + "><u>" + getName(user) + "</u></font> (" + Friends[user].length + "):</b><br />";
+	var reply = "<div style=\"max-height: 150px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\"><b><u>Friendslist of </u><u>" + getName(user, true, true) + "</u> (" + Friends[user].length + "):</b><br />";
 		reply += (NotifySetting[user] ? "(<i>does</i> get notified when friends come online)" : "(<i>does NOT</i> get notified when friends come online)");
 		reply += '<table border="1" cellspacing ="0" cellpadding="3">';
 		reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
@@ -87,12 +92,12 @@ function formatList(user, by) {
 			var userLastSeen = moment(Gold.seenData[frens]).fromNow();
 			return userLastSeen;
 		}
-		reply += "<tr><td><b><font color=" + Gold.hashColor(frens) + ">" + getName(frens) + "</font></b></td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";
+		reply += "<tr><td>" + getName(frens, true, true) + "</td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";
 	});
 	reply += "</table>";
 	var number = getFriendsNumber(user);
 	var label = (number > 1 ? ' users have' : ' user has');
-	reply += (number > 0 ? "<button title=\"See who added " + user + " as a friend.\" name=\"send\" value=\"/friendslist getadded, " + user + "\">" + number + label + " added <font color=" + Gold.hashColor(user) + ">" + getName(user) + "</font> as a friend." :  "");
+	reply += (number > 0 ? "<button title=\"See who added " + user + " as a friend.\" name=\"send\" value=\"/friendslist getadded, " + user + "\">" + number + label + " added " + getName(user, false, false) + " as a friend.</button>" :  "");
 	reply += "</div>";
 	return reply;
 }

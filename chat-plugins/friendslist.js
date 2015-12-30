@@ -16,7 +16,7 @@ var NotifySetting = require('../' +  settingsFilepath);
 
 function getName(user, color, bold) {
 	var name = (Users.getExact(user) && Users(user).connected ? Users.getExact(user).name : user);
-	var color = '<font color="' + Gold.hashColor(user) + '">' + name + '</font>';
+	var color = '<font color="' + Gold.hashColor(user) + '">' + Tools.escapeHTML(name) + '</font>';
 	var boldName = '<b>' + color + '</b>';
 	if (user && !color && !bold) return name;
 	if (user && color && !bold) return color;

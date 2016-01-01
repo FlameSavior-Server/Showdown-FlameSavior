@@ -780,7 +780,6 @@ let GlobalRoom = (function () {
 	GlobalRoom.prototype.onRename = function (user, oldid, joining) {
 		delete this.users[oldid];
 		this.users[user.userid] = user;
-		Gold.friendsNotify(user);
 		return user;
 	};
 	GlobalRoom.prototype.onUpdateIdentity = function () {};

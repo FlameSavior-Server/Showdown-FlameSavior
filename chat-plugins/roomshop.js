@@ -29,7 +29,7 @@ function getRoomShop (room) {
 	    '<table border="1" cellspacing ="0" cellpadding="3">' +
 	    '<tr><th>Item</th><th>Description</th><th>Price</th></tr>';
 	for (var i in RoomShop[room.id]) {
-	    var item =  RoomShop[room.id][i];
+	    var item = RoomShop[room.id][i];
 	    var name = item[0], desc = item[1], price = item[2];
 		output += '<tr><td><button name="send" value="/roomshop buy, ' + name + '">' + name + '</button></td><td>' + desc + '</td><td>' + price + '</td></tr>';
 	}

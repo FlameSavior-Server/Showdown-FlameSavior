@@ -76,6 +76,9 @@ exports.commands = {
 				room.add("|raw|<b><u>Room Shop</u>: " + getName(user.name) + "</b> has bought a(n) <u>" + Tools.escapeHTML(item) + "</u> from the room shop for " + price + " buck" + (price > 1 ? "s" : "") + ".").update();
 				this.privateModCommand("(" + user.name + " has bought a(n) " + item + " from the room shop.)");
 				break;
+			case 'help':
+				this.parse('/help roomshop');
+				break;
 			default:
 				if (!RoomShop[room.id] || Object.keys(RoomShop[room.id]).length < 1) return this.errorReply("This room does not have any items in it's room shop at this time.");
 				if (!this.canBroadcast()) return;

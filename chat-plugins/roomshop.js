@@ -53,7 +53,7 @@ exports.commands = {
 				if (desc.length > 200) return this.errorReply("Item descriptions cannot exceed 200 characters.");
 				if (isNaN(Number(price)) || price < 1 || ~price.indexOf('.') || price > 250) return this.errorReply("The price must be a positive integer.");
 				if (!item || !desc || !price) return this.errorReply("Usage: /roomshop add, [item], [description], [price] - Adds an item to the roomshop.");
-				RS[toId(item)] = [item, desc, price];
+				RS[toId(item)] = [item, desc, Number(price)];
 				saveShop();
 				return this.sendReply("You have successfully added the item '" + item + "' to your room shop.");
 				break;
@@ -69,14 +69,15 @@ exports.commands = {
 			case 'buy':
 				var item = toId(target[1]), price = RS[item][2];
 				if (!item) return this.errorReply("Usage: /roomshop buy, [item] - Buys an item from the room's room shop.");
-				if (!RS[item]) return this.errorReply("This item is not in the room shop.  Check spelling?");
-				if (economy.readMoney(user.userid) < price) return this.errorReply("You do not have enough bucks to do buy this item at this time.");
+				if (!RS[item]) return this.errorReply("This item is not in the room shop. Check spelling?");
+				item = RS[item][0];
+				if (economy.readMoney(user.userid) < price) return this.errorReply("You do not have enough bucks to do buy " + item + ". You need " + (price - economy.readMoney(user.userid)) + " more bucks to buy this item.");
 				this.parse('/tb ' + room.founder + ', ' + price);
 				room.add("|raw|<b><u>Room Shop</u>: " + getName(user.name) + "</b> has bought a(n) <u>" + Tools.escapeHTML(item) + "</u> from the room shop for " + price + " buck" + (price > 1 ? "s" : "") + ".").update();
 				this.privateModCommand("(" + user.name + " has bought a(n) " + item + " from the room shop.)");
 				break;
 			default:
-				if (RoomShop[room.id] && Object.keys(RoomShop[room.id] || !RoomShop[room.id]).length < 1) return this.errorReply("This room does not have any items in it's room shop at this time.");
+				if (!RoomShop[room.id] || Object.keys(RoomShop[room.id]).length < 1) return this.errorReply("This room does not have any items in it's room shop at this time.");
 				if (!this.canBroadcast()) return;
 				return this.sendReplyBox(getRoomShop(room));
 		}

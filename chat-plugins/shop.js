@@ -280,7 +280,7 @@ exports.commands = {
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased the ability to declare from the shop.', true);
-				this.sendReply("You have purchased an advertisement declare from the shop.  Please prepare an advertisement for your room and then PM a leader or administrator to proceed.");
+				this.sendReply("You have purchased an advertisement declare from the shop.  Please prepare an advertisement for your room; a leader or administrator will soon be PMing you to proceed.");
 				break;
 
 			case 'userlisticon':

@@ -8,7 +8,7 @@ const nameMap = {
 	'3': "Triple",
 	'4': "Quadruple",
 	'5': "Quintuple",
-	'6': "Sextuple"
+	'6': "Sextuple",
 	// Feel free to add more
 };
 
@@ -86,7 +86,7 @@ let Elimination = (function () {
 				this.tree = {
 					tree: new TreeNode(null, {user: user}),
 					currentLayerLeafNodes: [],
-					nextLayerLeafNodes: []
+					nextLayerLeafNodes: [],
 				};
 				this.tree.currentLayerLeafNodes.push(this.tree.tree);
 				return;
@@ -168,7 +168,7 @@ let Elimination = (function () {
 			let newTree = {
 				tree: new TreeNode(null, {fromNode: matchesByDepth[0][0]}),
 				currentLayerLeafNodes: [],
-				nextLayerLeafNodes: []
+				nextLayerLeafNodes: [],
 			};
 			newTree.currentLayerLeafNodes.push(newTree.tree);
 

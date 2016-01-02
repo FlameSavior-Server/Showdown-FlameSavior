@@ -1756,7 +1756,7 @@ var commands = exports.commands = {
 					"Height": pokemon.heightm + " m",
 					"Weight": pokemon.weightkg + " kg <em>(" + weighthit + " BP)</em>",
 					"Dex Colour": pokemon.color,
-					"Egg Group(s)": pokemon.eggGroups.join(", ")
+					"Egg Group(s)": pokemon.eggGroups.join(", "),
 				};
 				if (!pokemon.evos.length) {
 					details["<font color=#585858>Does Not Evolve</font>"] = "";
@@ -1770,7 +1770,7 @@ var commands = exports.commands = {
 				let move = Tools.getMove(newTargets[0].name);
 				details = {
 					"Priority": move.priority,
-					"Gen": move.gen
+					"Gen": move.gen,
 				};
 
 				if (move.secondary || move.secondaries) details["<font color=black>&#10003; Secondary effect</font>"] = "";
@@ -1802,12 +1802,12 @@ var commands = exports.commands = {
 					'allyTeam': "User's Side",
 					'allAdjacent': "All Adjacent Pok\u00e9mon",
 					'any': "Any Pok\u00e9mon",
-					'all': "All Pok\u00e9mon"
+					'all': "All Pok\u00e9mon",
 				}[move.target] || "Unknown";
 			} else if (newTargets[0].searchType === 'item') {
 				let item = Tools.getItem(newTargets[0].name);
 				details = {
-					"Gen": item.gen
+					"Gen": item.gen,
 				};
 
 				if (item.fling) {
@@ -4222,7 +4222,7 @@ var commands = exports.commands = {
 
 		this.sendReplyBox(target);
 	},
-	htmlboxhelp: ["/htmlbox [message] - Displays a message, parsing HTML code contained. Requires: ~ # with global authority"]
+	htmlboxhelp: ["/htmlbox [message] - Displays a message, parsing HTML code contained. Requires: ~ # with global authority"],
 };
 
 process.nextTick(function() {

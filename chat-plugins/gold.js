@@ -502,7 +502,7 @@ exports.commands = {
 		var names = [];
 		for (var users of Users.users) {
 			users = users[1];
-			if (Users(users).group === target) {
+			if (Users(users).group === target && Users(users).connected) {
 				names.push(Users(users).name);
 			}
 		}

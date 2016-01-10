@@ -487,17 +487,18 @@ exports.commands = {
 	rsi: 'roomshowimage',
 	roomshowimage: function(target, room, user) {
 		if (!this.can('ban', null, room)) return false;
-		if (!target) return this.sendReply("git gud");
+		if (!target) return this.parse('/help roomshowimage');
 		var parts = target.split(',');
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox("<img src=" + parts[0] + " width=" + parts[1] + " height=" + parts[1]);
 	},
+	roomshowimagehelp: ["!rsi [image], [width], [height] - Broadcasts an image to the room"],
 	admins: function (target, room, user) {
 		this.parse('/usersofrank ~');
 	},
 	uor: 'usersofrank',
 	usersofrank: function(target, room, user) {
-		if (!target || !Config.groups[target]) return false;
+		if (!target || !Config.groups[target]) return this.parse('/help usersofrank');
 		if (!this.canBroadcast()) return;
 		var names = [];
 		for (var users of Users.users) {
@@ -509,41 +510,7 @@ exports.commands = {
 		if (names.length < 1) return this.sendReplyBox('There are no users of the rank <font color="#24678d"><b>' + Tools.escapeHTML(Config.groups[target].name) + '</b></font> currently online.');
 		return this.sendReplyBox('There ' + (names.length === 1 ? 'is' : 'are') + ' <font color="#24678d"><b>' + names.length + '</b></font> ' + (names.length === 1 ? 'user' : 'users') + ' with the rank <font color="#24678d"><b>' + Config.groups[target].name + '</b></font> currently online.<br />' + names.join(', '));
 	},
-	gdeclarered: 'gdeclare',
-	gdeclaregreen: 'gdeclare',
-	gdeclare: function(target, room, user, connection, cmd) {
-		if (!target) return this.parse('/help gdeclare');
-		if (!this.can('lockdown')) return false;
-		var roomName = (room.isPrivate) ? 'a private room' : room.id;
-		if (cmd === 'gdeclare') {
-			for (var id in Rooms.rooms) {
-				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-blue"><b><font size=1><i>Global declare from ' + roomName + '<br /></i></font size>' + target + '</b></div>');
-			}
-		}
-		if (cmd === 'gdeclarered') {
-			for (var id in Rooms.rooms) {
-				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-red"><b><font size=1><i>Global declare from ' + roomName + '<br /></i></font size>' + target + '</b></div>');
-			}
-		} else if (cmd === 'gdeclaregreen') {
-			for (var id in Rooms.rooms) {
-				if (id !== 'global') Rooms.rooms[id].addRaw('<div class="broadcast-green"><b><font size=1><i>Global declare from ' + roomName + '<br /></i></font size>' + target + '</b></div>');
-			}
-		}
-		f
-		this.logEntry(user.name + ' used /gdeclare');
-	},
-	declaregreen: 'declarered',
-	declarered: function(target, room, user, connection, cmd) {
-		if (!target) return this.parse('/help declare');
-		if (!this.can('declare', null, room)) return false;
-		if (!this.canTalk()) return;
-		if (cmd === 'declarered') {
-			this.add('|raw|<div class="broadcast-red"><b>' + target + '</b></div>');
-		} else if (cmd === 'declaregreen') {
-			this.add('|raw|<div class="broadcast-green"><b>' + target + '</b></div>');
-		}
-		this.logModCommand(user.name + ' declared ' + target);
-	},
+	usersofrankhelp: ["/usersofrank [rank symbol] - Displays all ranked users with that rank currently online."],
 	golddeclare: function(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help declare');
 		if (!this.can('declare', null, room)) return false;
@@ -556,7 +523,7 @@ exports.commands = {
 		if (room.id !== 'lobby') return this.errorReply("This command can only be used in the Lobby by leaders and up.");
 		if (!this.canTalk()) return;
 		var parts = target.split('|');
-		if (!parts[1]) return this.errorReply("Usage: /advdeclare [advertisement]| [room]");
+		if (!parts[1]) return this.parse('/help advdeclare');
 		var adRoom = (Rooms(toId(parts[1])) ? toId(parts[1]) : false);
 		if (!adRoom) return this.errorReply("That room does not exist.  Check spelling?");
 		var adv = (
@@ -566,6 +533,7 @@ exports.commands = {
 		this.add('|raw|<div class="broadcast-blue"><b>' + adv + '</b></div>');
 		this.logModCommand(user.name + ' declared ' + adv);
 	},
+	advdeclarehelp: ["Usage: /advdeclare [advertisement]| [room]"],
 	pdeclare: function(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help declare');
 		if (!this.can('declare', null, room)) return false;
@@ -603,6 +571,7 @@ exports.commands = {
 		targetUser.popup('You were kicked from ' + room.id + ' by ' + user.name + '.');
 		targetUser.leaveRoom(room.id);
 	},
+	kickhelp: ["Usage: /kick [user] - kicks a user from the room"],
 	flogout: 'forcelogout',
 	forcelogout: function(target, room, user) {
 		if (!user.can('hotpatch')) return;

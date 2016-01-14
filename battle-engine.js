@@ -197,14 +197,17 @@ BattlePokemon = (function () {
 			for (let i = 0; i < this.set.moves.length; i++) {
 				let move = this.battle.getMove(this.set.moves[i]);
 				if (!move.id) continue;
-				if (move.id === 'hiddenpower') {
-					if (!this.set.ivs || Object.values(this.set.ivs).every(31)) {
-						if (this.battle.gen && this.battle.gen === 2) {
-							this.set.ivs = this.battle.getType(move.type).HPdvs;
-							for (let i in this.set.ivs) {
-								this.set.ivs[i] *= 2;
+				if (move.id === 'hiddenpower' && move.type !== 'Normal') {
+					if (this.battle.gen && this.battle.gen <= 2) {
+						if (!this.set.ivs || Math.min.apply(Math, Object.values(this.set.ivs)) >= 30) {
+							let HPdvs = this.battle.getType(move.type).HPdvs;
+							this.set.ivs = {hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30};
+							for (let i in HPdvs) {
+								this.set.ivs[i] = HPdvs[i] * 2;
 							}
-						} else {
+						}
+					} else {
+						if (!this.set.ivs || Object.values(this.set.ivs).every(31)) {
 							this.set.ivs = this.battle.getType(move.type).HPivs;
 						}
 					}
@@ -215,7 +218,7 @@ BattlePokemon = (function () {
 					id: move.id,
 					pp: (move.noPPBoosts ? move.pp : move.pp * 8 / 5),
 					maxpp: (move.noPPBoosts ? move.pp : move.pp * 8 / 5),
-					target: (move.nonGhostTarget && !this.hasType('Ghost') ? move.nonGhostTarget : move.target),
+					target: move.target,
 					disabled: false,
 					used: false,
 				});
@@ -332,6 +335,7 @@ BattlePokemon = (function () {
 	BattlePokemon.prototype.hpType = 'Dark';
 	BattlePokemon.prototype.hpPower = 60;
 	BattlePokemon.prototype.speed = 0;
+	BattlePokemon.prototype.abilityOrder = 0;
 
 	BattlePokemon.prototype.toString = function () {
 		let fullname = this.fullname;
@@ -512,7 +516,7 @@ BattlePokemon = (function () {
 				target = this.battle.resolveTarget(this, move);
 			}
 			if (target.side.active.length > 1) {
-				target = this.battle.runEvent('RedirectTarget', this, this, move, target);
+				target = this.battle.priorityEvent('RedirectTarget', this, this, move, target);
 			}
 			targets = [target];
 
@@ -612,12 +616,18 @@ BattlePokemon = (function () {
 				moveName = 'Hidden Power ' + this.hpType;
 				if (this.battle.gen < 6) moveName += ' ' + this.hpPower;
 			}
+			let target = move.target;
+			if (move.id === 'curse') {
+				if (!this.hasType('Ghost')) {
+					target = this.battle.getMove('curse').nonGhostTarget || move.target;
+				}
+			}
 			moves.push({
 				move: moveName,
 				id: move.id,
 				pp: move.pp,
 				maxpp: move.maxpp,
-				target: move.target,
+				target: target,
 				disabled: move.disabled,
 			});
 		}
@@ -651,6 +661,8 @@ BattlePokemon = (function () {
 		} else {
 			if (this.trapped) data.trapped = true;
 		}
+
+		if (this.canMegaEvo && !lockedMove) data.canMegaEvo = true;
 
 		return data;
 	};
@@ -1149,6 +1161,7 @@ BattlePokemon = (function () {
 		if (ability.id && this.battle.gen > 3) {
 			this.battle.singleEvent('Start', ability, this.abilityData, this, source, effect);
 		}
+		this.abilityOrder = this.battle.abilityOrder++;
 		return oldAbility;
 	};
 	BattlePokemon.prototype.getAbility = function () {
@@ -1441,7 +1454,6 @@ BattleSide = (function () {
 				baseAbility: pokemon.baseAbility,
 				item: pokemon.item,
 				pokeball: pokemon.pokeball,
-				canMegaEvo: !!pokemon.canMegaEvo,
 			});
 		}
 		return data;
@@ -1718,6 +1730,8 @@ Battle = (function () {
 	Battle.prototype.reportPercentages = false;
 	Battle.prototype.supportCancel = false;
 	Battle.prototype.events = null;
+
+	Battle.prototype.abilityOrder = 0;
 
 	Battle.prototype.toString = function () {
 		return 'Battle: ' + this.format;
@@ -2030,8 +2044,8 @@ Battle = (function () {
 		}
 	};
 
-	// bubbles up
-	Battle.comparePriority = function (a, b) { // intentionally not in Battle.prototype
+	// intentionally not in Battle.prototype
+	Battle.comparePriority = function (a, b) {
 		a.priority = a.priority || 0;
 		a.subPriority = a.subPriority || 0;
 		a.speed = a.speed || 0;
@@ -2059,6 +2073,23 @@ Battle = (function () {
 			return -(b.subOrder - a.subOrder);
 		}
 		return Math.random() - 0.5;
+	};
+	// also not in Battle.prototype
+	Battle.compareRedirectOrder = function (a, b) {
+		a.priority = a.priority || 0;
+		a.speed = a.speed || 0;
+		b.priority = b.priority || 0;
+		b.speed = b.speed || 0;
+		if (b.priority - a.priority) {
+			return b.priority - a.priority;
+		}
+		if (b.speed - a.speed) {
+			return b.speed - a.speed;
+		}
+		if (b.thing.abilityOrder - a.thing.abilityOrder) {
+			return -(b.thing.abilityOrder - a.thing.abilityOrder);
+		}
+		return 0;
 	};
 	Battle.prototype.getResidualStatuses = function (thing, callbackType) {
 		let statuses = this.getRelevantEffectsInner(thing || this, callbackType || 'residualCallback', null, null, false, true, 'duration');
@@ -2267,7 +2298,7 @@ Battle = (function () {
 	 *   variables that are passed as arguments to the event handler, but
 	 *   they're useful for functions called by the event handler.
 	 */
-	Battle.prototype.runEvent = function (eventid, target, source, effect, relayVar, onEffect) {
+	Battle.prototype.runEvent = function (eventid, target, source, effect, relayVar, onEffect, fastExit) {
 		if (this.eventDepth >= 8) {
 			// oh fuck
 			this.add('message', 'STACK LIMIT EXCEEDED');
@@ -2278,6 +2309,11 @@ Battle = (function () {
 		}
 		if (!target) target = this;
 		let statuses = this.getRelevantEffects(target, 'on' + eventid, 'onSource' + eventid, source);
+		if (fastExit) {
+			statuses.sort(Battle.compareRedirectOrder);
+		} else {
+			statuses.sort(Battle.comparePriority);
+		}
 		let hasRelayVar = true;
 		effect = this.getEffect(effect);
 		let args = [target, source, effect];
@@ -2370,7 +2406,7 @@ Battle = (function () {
 
 			if (returnVal !== undefined) {
 				relayVar = returnVal;
-				if (!relayVar) break;
+				if (!relayVar || fastExit) break;
 				if (hasRelayVar) {
 					args[0] = relayVar;
 				}
@@ -2385,6 +2421,13 @@ Battle = (function () {
 		this.event = parentEvent;
 
 		return relayVar;
+	};
+	/**
+	 * priorityEvent works just like runEvent, except it exits and returns
+	 * on the first non-undefined value instead of only on null/false.
+	 */
+	Battle.prototype.priorityEvent = function (eventid, target, source, effect, relayVar, onEffect) {
+		return this.runEvent(eventid, target, source, effect, relayVar, onEffect, true);
 	};
 	Battle.prototype.resolveLastPriority = function (statuses, callbackType) {
 		let order = false;
@@ -2408,7 +2451,6 @@ Battle = (function () {
 	// bubbles up to parents
 	Battle.prototype.getRelevantEffects = function (thing, callbackType, foeCallbackType, foeThing) {
 		let statuses = this.getRelevantEffectsInner(thing, callbackType, foeCallbackType, foeThing, true, false);
-		statuses.sort(Battle.comparePriority);
 		//if (statuses[0]) this.debug('match ' + callbackType + ': ' + statuses[0].status.id);
 		return statuses;
 	};
@@ -3998,7 +4040,7 @@ Battle = (function () {
 					// in gen 2-4, the switch still happens
 					decision.priority = -101;
 					this.queue.unshift(decision);
-					this.debug('Pursuit target fainted');
+					this.add('-hint', 'Pursuit target fainted, switch continues in gen 2-4');
 					break;
 				}
 				// in gen 5+, the switch is cancelled
@@ -4006,7 +4048,7 @@ Battle = (function () {
 				break;
 			}
 			if (decision.target.isActive) {
-				this.debug('Switch target is already active');
+				this.add('-hint', 'Switch failed; switch target is already active');
 				break;
 			}
 			if (decision.choice === 'switch' && decision.pokemon.activeTurns === 1) {
@@ -4019,6 +4061,11 @@ Battle = (function () {
 					}
 				}
 			}
+
+			if (decision.choice === 'switch' && decision.pokemon.status && this.data.Abilities.naturalcure) {
+				this.singleEvent('CheckShow', this.data.Abilities.naturalcure, null, decision.pokemon);
+			}
+
 			this.switchIn(decision.target, decision.pokemon.position);
 			break;
 		case 'runSwitch':
@@ -4028,6 +4075,7 @@ Battle = (function () {
 			decision.pokemon.isStarted = true;
 			if (!decision.pokemon.fainted) {
 				this.singleEvent('Start', decision.pokemon.getAbility(), decision.pokemon.abilityData, decision.pokemon);
+				decision.pokemon.abilityOrder = this.abilityOrder++;
 				this.singleEvent('Start', decision.pokemon.getItem(), decision.pokemon.itemData, decision.pokemon);
 			}
 			delete decision.pokemon.draggedIn;
@@ -4176,7 +4224,7 @@ Battle = (function () {
 		if (!side.currentRequest) return;
 
 		// Make sure the decision is for the right request.
-		if ((rqid !== undefined) && (parseInt(rqid, 10) !== this.rqid)) {
+		if ((rqid !== undefined) && (parseInt(rqid) !== this.rqid)) {
 			return;
 		}
 
@@ -4344,7 +4392,7 @@ Battle = (function () {
 				let slotMap = dataArr.slice(); // Inverse of `dataArr` (slotMap[dataArr[x]] === x)
 
 				for (let j = 0; j < data.length; j++) {
-					let slot = parseInt(data.charAt(j), 10) - 1;
+					let slot = parseInt(data.charAt(j)) - 1;
 					if (slotMap[slot] < j) return false;
 					if (isNaN(slot) || slot < 0 || slot >= pokemonLength) return false;
 
@@ -4369,7 +4417,7 @@ Battle = (function () {
 			case 'switch':
 				if (i > side.active.length || i > side.pokemon.length) continue;
 
-				data = parseInt(data, 10) - 1;
+				data = parseInt(data) - 1;
 				if (data < 0) data = 0;
 				if (data > side.pokemon.length - 1) data = side.pokemon.length - 1;
 
@@ -4459,7 +4507,7 @@ Battle = (function () {
 				let requestMoves = pokemon.getRequestData().moves;
 				if (data.search(/^[0-9]+$/) >= 0) {
 					// parse a one-based move index
-					let moveIndex = parseInt(data, 10) - 1;
+					let moveIndex = parseInt(data) - 1;
 					if (!requestMoves[moveIndex]) {
 						this.debug("Can't use an unexpected move");
 						return false;

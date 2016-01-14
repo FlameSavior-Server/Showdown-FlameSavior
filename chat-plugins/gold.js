@@ -115,7 +115,7 @@ exports.commands = {
 				'<br /><b><u>Moderators (@)</u></b>:<br />' + staff['mods'].join(', ') +
 				'<br /><b><u>Drivers (%)</u></b>:<br />' + staff['drivers'].join(', ') +
 				'<br /><b><u>Voices (+)</u></b>:<br />' + staff['voices'].join(', ') +
-				'<br /><br />(Bold / italic = currently online)'
+				'<br /><br />(<b>Bold</b> / <i>italic</i> = currently online)'
 			);
 		});
 	},

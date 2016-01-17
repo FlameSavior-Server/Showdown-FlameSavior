@@ -1486,6 +1486,24 @@ exports.commands = {
 	},
 	promotehelp: ["/promote [username], [group] - Promotes the user to the specified group. Requires: & ~"],
 
+	confirmuser: function (target) {
+		if (!target) return this.parse('/help confirmuser');
+		if (!this.can('promote')) return;
+
+		target = this.splitTarget(target, true);
+		let targetUser = this.targetUser;
+		let userid = toId(this.targetUsername);
+		let name = targetUser ? targetUser.name : this.targetUsername;
+
+		if (!userid) return this.parse('/help confirmuser');
+		if (!targetUser) return this.errorReply("User '" + name + "' is not online.");
+
+		if (targetUser.confirmed) return this.errorReply("User '" + name + "' is already confirmed.");
+
+		targetUser.setGroup(' ', true);
+	},
+	confirmuserhelp: ["/confirmuser [username] - Confirms the user (makes them immune to locks). Requires: & ~"],
+
 	globaldemote: 'demote',
 	demote: function (target) {
 		if (!target) return this.parse('/help demote');
@@ -2277,12 +2295,51 @@ exports.commands = {
 	 *********************************************************/
 
 	forfeit: function (target, room, user) {
-		if (!room.battle) {
-			return this.errorReply("There's nothing to forfeit here.");
+		if (!room.game) return this.errorReply("This room doesn't have an active game.");
+		if (!room.game.forfeit) {
+			return this.errorReply("This kind of game can't be forfeited.");
 		}
-		if (!room.forfeit(user)) {
-			return this.errorReply("You can't forfeit this battle.");
+		if (!room.game.forfeit(user)) {
+			return this.errorReply("Forfeit failed.");
 		}
+	},
+
+	choose: function (target, room, user) {
+		if (!room.game) return this.errorReply("This room doesn't have an active game.");
+		if (!room.game.choose) return this.errorReply("This game doesn't support /choose");
+
+		room.game.choose(user, target);
+	},
+
+	mv: 'move',
+	attack: 'move',
+	move: function (target, room, user) {
+		if (!room.game) return this.errorReply("This room doesn't have an active game.");
+		if (!room.game.choose) return this.errorReply("This game doesn't support /choose");
+
+		room.game.choose(user, 'move ' + target);
+	},
+
+	sw: 'switch',
+	switch: function (target, room, user) {
+		if (!room.game) return this.errorReply("This room doesn't have an active game.");
+		if (!room.game.choose) return this.errorReply("This game doesn't support /choose");
+
+		room.game.choose(user, 'switch ' + parseInt(target));
+	},
+
+	team: function (target, room, user) {
+		if (!room.game) return this.errorReply("This room doesn't have an active game.");
+		if (!room.game.choose) return this.errorReply("This game doesn't support /choose");
+
+		room.game.choose(user, 'team ' + target);
+	},
+
+	undo: function (target, room, user) {
+		if (!room.game) return this.errorReply("This room doesn't have an active game.");
+		if (!room.game.undo) return this.errorReply("This game doesn't support /undo");
+
+		room.game.undo(user, target);
 	},
 
 	savereplay: function (target, room, user, connection) {
@@ -2312,39 +2369,6 @@ exports.commands = {
 				id: room.id.substr(7),
 			}));
 		});
-	},
-
-	mv: 'move',
-	attack: 'move',
-	move: function (target, room, user) {
-		if (!room.decision) return this.errorReply("You can only do this in battle rooms.");
-
-		room.decision(user, 'choose', 'move ' + target);
-	},
-
-	sw: 'switch',
-	switch: function (target, room, user) {
-		if (!room.decision) return this.errorReply("You can only do this in battle rooms.");
-
-		room.decision(user, 'choose', 'switch ' + parseInt(target));
-	},
-
-	choose: function (target, room, user) {
-		if (!room.decision) return this.errorReply("You can only do this in battle rooms.");
-
-		room.decision(user, 'choose', target);
-	},
-
-	undo: function (target, room, user) {
-		if (!room.decision) return this.errorReply("You can only do this in battle rooms.");
-
-		room.decision(user, 'undo', target);
-	},
-
-	team: function (target, room, user) {
-		if (!room.decision) return this.errorReply("You can only do this in battle rooms.");
-
-		room.decision(user, 'choose', 'team ' + target);
 	},
 
 	addplayer: function (target, room, user) {

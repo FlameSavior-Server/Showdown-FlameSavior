@@ -152,7 +152,7 @@ exports.commands = {
 		room.onUpdateIdentity(targetUser);
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
-		room.active = true; // fairly give new rooms activity a chance
+		room.protect = true; // fairly give new rooms activity a chance
 	},
 	tell: function(target, room, user) {
 		if (!this.canTalk()) return;

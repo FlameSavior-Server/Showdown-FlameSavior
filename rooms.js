@@ -1052,34 +1052,6 @@ let BattleRoom = (function () {
 		if (p2active && !p1active) return 0;
 		return this.battle.inactiveSide;
 	};
-	BattleRoom.prototype.forfeit = function (user, message, side) {
-		if (!this.battle || this.battle.ended || !this.battle.started) return false;
-
-		if (!message) message = ' forfeited.';
-
-		if (side === undefined) {
-			if (user in this.game.players) side = this.game.players[user].slotNum;
-		}
-		if (side === undefined) return false;
-
-		let ids = ['p1', 'p2'];
-		let otherids = ['p2', 'p1'];
-
-		let name = 'Player ' + (side + 1);
-		if (user) {
-			name = user.name;
-		} else if (this.rated) {
-			name = this.rated[ids[side]];
-		}
-
-		this.add('|-message|' + name + message);
-		this.battle.endType = 'forfeit';
-		this.battle.send('win', otherids[side]);
-		rooms.global.battleCount += (this.battle.active ? 1 : 0) - (this.active ? 1 : 0);
-		this.active = this.battle.active;
-		this.update();
-		return true;
-	};
 	BattleRoom.prototype.sendPlayer = function (num, message) {
 		let player = this.getPlayer(num);
 		if (!player) return false;
@@ -1142,7 +1114,7 @@ let BattleRoom = (function () {
 			}
 		}
 
-		this.forfeit(this.getPlayer(inactiveSide), ' lost due to inactivity.', inactiveSide);
+		this.battle.forfeit(this.getPlayer(inactiveSide), ' lost due to inactivity.', inactiveSide);
 		this.resetUser = '';
 	};
 	BattleRoom.prototype.requestKickInactive = function (user, force) {
@@ -1274,14 +1246,6 @@ let BattleRoom = (function () {
 		} else {
 			return "Only the user who set modchat and global staff can change modchat levels in battle rooms";
 		}
-	};
-	BattleRoom.prototype.decision = function (user, choice, data) {
-		this.battle.sendFor(user, choice, data);
-		if (this.active !== this.battle.active) {
-			rooms.global.battleCount += (this.battle.active ? 1 : 0) - (this.active ? 1 : 0);
-			this.active = this.battle.active;
-		}
-		this.update();
 	};
 	BattleRoom.prototype.onConnect = function (user, connection) {
 		this.sendUser(connection, '|init|battle\n|title|' + this.title + '\n' + this.getLogForUser(user).join('\n'));
@@ -1446,6 +1410,16 @@ let ChatRoom = (function () {
 			this.userList = this.getUserList();
 			this.reportJoinsQueue = [];
 		}
+
+		this.deleteInactive = setTimeout(function () {
+			if (!this.protect && !this.isOfficial && !this.isPrivate && !this.isPersonal && !this.isStaff && this.messageCount < 40) {
+				Rooms.global.deregisterChatRoom(this.id);
+				this.addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.  It will be removed upon the next server restart.</b></font>');
+				if (this.id !== 'global') this.update();
+				this.modchat = '~';
+				Rooms('staff').add("|raw|<font color=red><b>" + this.title + " has been automatically deleted from the server due to inactivity.</b></font>").update();
+			}
+		}.bind(this), 45 * 1000);//2 * 24 * 60 * 60 * 1000); //48 hours
 	}
 	ChatRoom.prototype = Object.create(Room.prototype);
 	ChatRoom.prototype.type = 'chat';
@@ -1756,26 +1730,3 @@ Rooms.aliases = aliases;
 
 Rooms.RoomGame = require('./room-game.js').RoomGame;
 Rooms.RoomGamePlayer = require('./room-game.js').RoomGamePlayer;
-
-var checkInactiveRooms = setInterval(function() {
-	for (var u in Rooms.rooms) {
-		if (!Rooms.rooms[u].active && Room.rooms[u].type === 'chat') {
-			if (Rooms.rooms[u].messageCount < 40) Rooms.rooms[u].active = false;
-			if (Rooms.rooms[u].messageCount > 40) Rooms.rooms[u].active = true;
-		}
-	}
-}, 60 * 60000); // every hour
-
-var deleteInactiveRooms = setInterval(function() {
-	for (var u in Rooms.rooms) {
-		if (Rooms.rooms[u].type === 'chat') {
-			if (!Rooms.rooms[u].active && !Rooms.rooms[u].protect && !Rooms.rooms[u].isOfficial && !Rooms.rooms[u].isPrivate && !Rooms.rooms[u].isPersonal) {
-				Rooms.global.deregisterChatRoom(Rooms.rooms[u].id);
-				Rooms.rooms[u].addRaw('<font color=red><b>This room has been automatically deleted due to inactivity.  It will be removed upon the next server restart.</b></font>');
-				if (Rooms.rooms[u].id !== 'global') Rooms.rooms[u].update();
-				Rooms.rooms[u].modchat = '~';
-				Rooms('staff').add("|raw|<font color=red><b>" + Rooms.rooms[u].title + " has been automatically deleted from the server due to inactivity.</b></font>").update();
-			}
-		}
-	}
-}, 2 * 24 * 60 * 60 * 1000); // 48 hours

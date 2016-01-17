@@ -972,8 +972,6 @@ let BattleRoom = (function () {
 			let tour = this.tour.tour;
 			tour.onBattleWin(this, winner);
 		}
-		rooms.global.battleCount += 0 - (this.active ? 1 : 0);
-		this.active = false;
 		this.update();
 	};
 	// logNum = 0    : spectator log
@@ -1264,8 +1262,6 @@ let BattleRoom = (function () {
 
 		if (this.game && this.game.onJoin) {
 			this.game.onJoin(user, connection);
-			rooms.global.battleCount += (this.battle.active ? 1 : 0) - (this.active ? 1 : 0);
-			this.active = this.battle.active;
 		}
 		return user;
 	};
@@ -1292,8 +1288,6 @@ let BattleRoom = (function () {
 
 		if (this.game && this.game.onLeave) {
 			this.game.onLeave(user);
-			rooms.global.battleCount += (this.battle.active ? 1 : 0) - (this.active ? 1 : 0);
-			this.active = this.battle.active;
 		}
 		this.update();
 		this.kickInactiveUpdate();
@@ -1309,9 +1303,7 @@ let BattleRoom = (function () {
 			return false;
 		}
 		this.auth[user.userid] = '\u2605';
-		rooms.global.battleCount += (this.battle.active ? 1 : 0) - (this.active ? 1 : 0);
-		this.active = this.battle.active;
-		if (this.active) {
+		if (this.game.active) {
 			this.title = "" + this.battle.p1.name + " vs. " + this.battle.p2.name;
 			this.send('|title|' + this.title);
 		}
@@ -1329,8 +1321,6 @@ let BattleRoom = (function () {
 			return false;
 		}
 		this.auth[user.userid] = '+';
-		rooms.global.battleCount += (this.battle.active ? 1 : 0) - (this.active ? 1 : 0);
-		this.active = this.battle.active;
 		this.update();
 		this.kickInactiveUpdate();
 		return true;
@@ -1356,7 +1346,6 @@ let BattleRoom = (function () {
 		this.battle = null;
 		this.game = null;
 
-		rooms.global.battleCount += 0 - (this.active ? 1 : 0);
 		this.active = false;
 
 		if (this.resetTimer) {

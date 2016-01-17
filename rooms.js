@@ -1408,7 +1408,7 @@ let ChatRoom = (function () {
 				this.modchat = '~';
 				Rooms('staff').add("|raw|<font color=red><b>" + this.title + " has been automatically deleted from the server due to inactivity.</b></font>").update();
 			}
-		}.bind(this), 45 * 1000);//2 * 24 * 60 * 60 * 1000); //48 hours
+		}.bind(this), 2 * 24 * 60 * 60 * 1000); //48 hours
 	}
 	ChatRoom.prototype = Object.create(Room.prototype);
 	ChatRoom.prototype.type = 'chat';

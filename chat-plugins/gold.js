@@ -136,10 +136,6 @@ exports.commands = {
 			this.privateModCommand("(" + user.name + " has protected this room from being automatically deleted.)");
 		}
 	},
-	roomobj: function(target, room, user) {
-		if (!this.can('hotpatch')) return false;
-		return this.sendReply('{"title":"' + room.title.replace('"', '\"') + '","auth":' + JSON.stringify(room.auth) + ',"introMessage":"' + room.introMessage.replace('"', '\"') + '","founder":"' + room.founder + '","desc":"' + room.desc.replace('"', '\"') + '"},')
-	},
 	roomfounder: function(target, room, user) {
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomfounder - This room is't designed for per-room moderation to be added.");

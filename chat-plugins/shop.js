@@ -30,16 +30,16 @@ exports.commands = {
 			var top = '<center><h3><b><u>Gold Bucks Shop</u></b></h3><table style="' + topStyle + '" border="1" cellspacing ="2" cellpadding="3"><tr><th>Item</th><th>Description</th><th>Cost</th></tr>';
 			var bottom = '</table><br />To buy an item from the shop, click the respective button for said item.<br>Do /getbucks to learn more about how to obtain bucks. </center>';
 			function table(item, desc, price) {
-				return '<tr><td style="' + descStyle + '"><button title="Click this button to buy a(n) ' + item + ' from the shop" style="' + buttonStyle + '" name="send" value="/buy ' + item + '">' + item + '</button></td><td style="' + descStyle + '">' + desc + '</td><td style="' + descStyle + '">' + price + '</td></tr>';
+				return '<tr><td style="' + descStyle + '"><button title="Click this button to buy a(n) ' + item + ' from the shop." style="' + buttonStyle + '" name="send" value="/buy ' + item + '">' + item + '</button></td><td style="' + descStyle + '">' + desc + '</td><td style="' + descStyle + '">' + price + '</td></tr>';
 			}
 			return this.sendReply('|raw|' +
 				top +
 				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", 5) +
 				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 20) +
-				table("Room", "Buys a public unofficial chat room - will be deleted if inactive.", 25) +
 				table("Fix", "Ability to modify a custom avatar, trainer card, userlist icon, or custom emoticon.", 30) +
 				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
 				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
+				table("Room", "Buys a public unofficial chat room - will be deleted if inactive. Must have a valid purpose; staff can reject making these.", 75) +
 				table("Musicbox", "A command that lists / links up to 8 of your favorite songs", 80) +
 				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", 100) +
 				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 400) +
@@ -232,7 +232,7 @@ exports.commands = {
 
 			case 'room':
 			case 'chatroom':
-				price = 25;
+				price = 75;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy room, [room name]");
 				var bannedRoomNames = [',', '|', '[', '-'];

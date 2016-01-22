@@ -208,7 +208,7 @@
 }
 /* panpawn is special */
 .chat.chatmessage-panpawn strong {
-	color:#FFFFFF !important;
+	color:red !important;
 }
 *[id*='-userlist-user-panpawn'] button strong em {
 	color: red !important;

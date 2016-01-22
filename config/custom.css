@@ -227,9 +227,9 @@
 	color:#fff;
 }
 .dark .infobox {
-	color: #fff;
-	background-color: unset;
-	border-color: #fff;
+	color: #fff !important;
+	background-color: unset !important;
+	border-color: #fff !important;
 }
 
 

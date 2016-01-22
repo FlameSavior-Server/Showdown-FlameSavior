@@ -11,7 +11,7 @@ var colorCache = {};
 function hashColor(name) {
 	name = toId(name);
 	if (mainCustomColors[name]) name = mainCustomColors[name];
-	if (name === 'panpawn') return '#FF9933';
+	if (goldCustomColors[name]) return '#' + goldCustomColors[name];
 	if (colorCache[name]) return colorCache[name];
 	var hash = MD5(name);
 	var H = parseInt(hash.substr(4, 4), 16) % 360;
@@ -22,6 +22,11 @@ function hashColor(name) {
 	return colorCache[name];
 }
 Gold.hashColor = hashColor;
+
+var goldCustomColors = {
+	// userid: hex
+	'panpawn': 'FF9933'
+}
 
 // Mains custom username colors
 var mainCustomColors = {

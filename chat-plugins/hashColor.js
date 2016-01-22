@@ -11,6 +11,7 @@ var colorCache = {};
 function hashColor(name) {
 	name = toId(name);
 	if (mainCustomColors[name]) name = mainCustomColors[name];
+	if (name === 'panpawn') return '#FF9933';
 	if (colorCache[name]) return colorCache[name];
 	var hash = MD5(name);
 	var H = parseInt(hash.substr(4, 4), 16) % 360;
@@ -104,7 +105,6 @@ var mainCustomColors = {
 	'blitzamirin': 'hikaruhitachii',
 	'skitty': 'shckieei',
 	'sweep': 'jgjjfgdfg', // second color change
-	'panpawn': 'crowt',
 	'val': 'pleasegivemecolorr',
 	'valentine': 'pleasegivemecolorr',
 	'briayan': 'haxorusxi',
@@ -148,6 +148,7 @@ var mainCustomColors = {
 	'strength': '0v0tqpnu',
 	'iplaytennislol': 'nsyncluvr67',
 	'snow': 'ekqi2oxb',
+	'quote': 'quotecs',
 	'cathy': '' //{color: '#ff5cb6'}
 };
 

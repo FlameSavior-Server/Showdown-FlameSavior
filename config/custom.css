@@ -235,6 +235,9 @@
 .dark .notice {
 	color:#fff;
 }
+.dark .userlist li button:hover {
+	background:rgba(255,235,153,0.4)
+}
 
 
 

@@ -173,9 +173,6 @@
 	font-size:8pt;
 	color:#000
 }
-.dark .chat small {
-	color:#FFFFFF
-}
 .userlist li button {
 	display:block;
 	background:transparent;
@@ -205,6 +202,19 @@
 	text-shadow: none !important;
 	font-style: italic;
 	color: black;
+}
+/* dark color theme handling */
+.dark .chat small {
+	color:#FFFFFF
+}
+.dark .userlist li em.group {
+	color:#FFFFFF
+}
+.dark .header {
+	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
+}
+.dark .notice {
+	color:#000000;
 }
 
 

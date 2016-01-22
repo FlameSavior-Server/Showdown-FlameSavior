@@ -224,9 +224,13 @@
 	background:url("http://i.imgur.com/YpYNln8.png") no-repeat;
 }
 .dark .notice {
-	color:#000000;
+	color:#fff;
 }
-
+.dark .infobox {
+	color: #fff;
+	background-color: unset;
+	border-color: #fff;
+}
 
 
 /*********************

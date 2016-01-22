@@ -206,6 +206,13 @@
 	font-style: italic;
 	color: black;
 }
+/* panpawn is special */
+.chat.chatmessage-panpawn strong {
+	color:#FFFFFF !important;
+}
+*[id*='-userlist-user-panpawn'] button strong em {
+	color: red !important;
+}
 /* dark color theme handling */
 .dark .chat small {
 	color:#FFFFFF

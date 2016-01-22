@@ -201,9 +201,6 @@
 	font-style: italic;
 	color: black;
 }
-.infobox {
-	background-color:#fff
-}
 /* dark color theme handling */
 .dark .chat small {
 	color:#FFFFFF
@@ -216,11 +213,6 @@
 }
 .dark .notice {
 	color:#fff;
-}
-.dark .infobox {
-	color: #fff !important;
-	background-color: unset !important;
-	border-color: #fff !important;
 }
 /* panpawn is special */
 .chat.chatmessage-panpawn strong {

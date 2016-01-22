@@ -331,6 +331,33 @@ exports.commands = {
 		if (!target) return this.errorReply("Needs a target.");
 		room.addRaw(target);
 	},
+	newcustomcolorcss: function (target, room, user) {
+		if (!target) return this.errorReply("Usage: /newcustomcolor [color] - Formats the CSS for you to have a custom color.");
+		var output = [];
+		var i = '&nbsp;&nbsp;&nbsp;&nbsp;';
+		var color = target;
+		var rooms = Object.keys(Rooms.rooms);
+		var len = rooms.length;
+		var theRoomsToUse = [];
+		while(len--) {
+			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
+			if (!_room.isPrivate && _room.type === 'chat' && _room.id !== 'global') {
+				theRoomsToUse.push(_room.id);
+			}
+		}
+		theRoomsToUse.forEach(function (ja) {
+			output.push('#' + ja + '-userlist-user-' + user.userid + ' button strong em');
+		});
+		output.push('#staff-userlist-user-' + user.userid + ' button strong em');
+		output.push('#room-userlist-user-' + user.userid + ' button strong em');
+		return this.sendReplyBox(
+			".chat.chatmessage-" + user.userid + " strong {<br />" +
+			i + "color: #" + color + " !important;<br />" +
+			"}<br />" +
+			output + " {<br />" +
+			i + "color: #" + color + " !important;<br />" +
+			"}");
+	},
 	roomlist: function (target, room, user) {
 		if(!this.can('pban')) return;
 		var totalUsers = 0; 

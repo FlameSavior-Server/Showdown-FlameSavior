@@ -173,6 +173,9 @@
 	font-size:8pt;
 	color:#000
 }
+.dark .chat small {
+	color:#FFFFFF
+}
 .userlist li button {
 	display:block;
 	background:transparent;

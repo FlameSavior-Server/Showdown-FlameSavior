@@ -210,9 +210,6 @@
 .chat.chatmessage-panpawn strong {
 	color:red !important;
 }
-*[id*='-userlist-user-panpawn'] button strong em {
-	color: red !important;
-}
 /* dark color theme handling */
 .dark .chat small {
 	color:#FFFFFF

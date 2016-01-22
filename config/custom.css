@@ -112,11 +112,6 @@
 	background:#000;
 	margin:-3px
 }
-.infobox {
-	border:1px solid #000;
-	padding:2px 4px;
-	background-color:#fff
-}
 .astext {
 	border:none;
 	background:none;
@@ -206,12 +201,8 @@
 	font-style: italic;
 	color: black;
 }
-/* panpawn is special */
-.chat.chatmessage-panpawn strong {
-	color:#FF9933 !important;
-}
-#lobby-userlist-user-panpawn button strong em,#room-userlist-user-panpawn button strong em,#staff-userlist-user-panpawn button strong em,#silvshangout-userlist-user-panpawn button strong em,#goldenrodradiotower-userlist-user-panpawn button strong em,#french-userlist-user-panpawn button strong em,#gamechamber-userlist-user-panpawn button strong em,#development-userlist-user-panpawn button strong em,#roleplaying-userlist-user-panpawn button strong em,#parukia-userlist-user-panpawn button strong em,#animeandmanga-userlist-user-panpawn button strong em,#scavengers-userlist-user-panpawn button strong em,#wouldyourather-userlist-user-panpawn button strong em,#artshop-userlist-user-panpawn button strong em,#chiuoleague-userlist-user-panpawn button strong em,#thezangviperleague-userlist-user-panpawn button strong em,#uniteddraftingconglomeration-userlist-user-panpawn button strong em,#expeditionsociety-userlist-user-panpawn button strong em,#therainbowroom-userlist-user-panpawn button strong em,#thetriumphleague-userlist-user-panpawn button strong em,#legendary-userlist-user-panpawn button strong em {
-	color:#FF9933 !important;
+.infobox {
+	background-color:#fff
 }
 /* dark color theme handling */
 .dark .chat small {
@@ -230,6 +221,13 @@
 	color: #fff !important;
 	background-color: unset !important;
 	border-color: #fff !important;
+}
+/* panpawn is special */
+.chat.chatmessage-panpawn strong {
+	color:#FF9933 !important;
+}
+#lobby-userlist-user-panpawn button strong em,#room-userlist-user-panpawn button strong em,#staff-userlist-user-panpawn button strong em,#silvshangout-userlist-user-panpawn button strong em,#goldenrodradiotower-userlist-user-panpawn button strong em,#french-userlist-user-panpawn button strong em,#gamechamber-userlist-user-panpawn button strong em,#development-userlist-user-panpawn button strong em,#roleplaying-userlist-user-panpawn button strong em,#parukia-userlist-user-panpawn button strong em,#animeandmanga-userlist-user-panpawn button strong em,#scavengers-userlist-user-panpawn button strong em,#wouldyourather-userlist-user-panpawn button strong em,#artshop-userlist-user-panpawn button strong em,#chiuoleague-userlist-user-panpawn button strong em,#thezangviperleague-userlist-user-panpawn button strong em,#uniteddraftingconglomeration-userlist-user-panpawn button strong em,#expeditionsociety-userlist-user-panpawn button strong em,#therainbowroom-userlist-user-panpawn button strong em,#thetriumphleague-userlist-user-panpawn button strong em,#legendary-userlist-user-panpawn button strong em {
+	color:#FF9933 !important;
 }
 
 

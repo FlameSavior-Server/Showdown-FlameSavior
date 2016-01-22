@@ -114,6 +114,12 @@
 #lobby-userlist-user-pitcher button strong em,#silvshangout-userlist-user-pitcher button strong em,#goldenrodradiotower-userlist-user-pitcher button strong em,#french-userlist-user-pitcher button strong em,#gamechamber-userlist-user-pitcher button strong em,#development-userlist-user-pitcher button strong em,#roleplaying-userlist-user-pitcher button strong em,#parukia-userlist-user-pitcher button strong em,#animeandmanga-userlist-user-pitcher button strong em,#scavengers-userlist-user-pitcher button strong em,#wouldyourather-userlist-user-pitcher button strong em,#artshop-userlist-user-pitcher button strong em,#chiuoleague-userlist-user-pitcher button strong em,#thezangviperleague-userlist-user-pitcher button strong em,#uniteddraftingconglomeration-userlist-user-pitcher button strong em,#expeditionsociety-userlist-user-pitcher button strong em,#therainbowroom-userlist-user-pitcher button strong em,#thetriumphleague-userlist-user-pitcher button strong em,#legendary-userlist-user-pitcher button strong em,#staff-userlist-user-pitcher button strong em,#room-userlist-user-pitcher button strong em {
     color: #C2052E !important;
 }
+.chat.chatmessage-hyperforms strong {
+    color: #15AC93 !important;
+}
+#lobby-userlist-user-hyperforms button strong em,#silvshangout-userlist-user-hyperforms button strong em,#goldenrodradiotower-userlist-user-hyperforms button strong em,#french-userlist-user-hyperforms button strong em,#gamechamber-userlist-user-hyperforms button strong em,#development-userlist-user-hyperforms button strong em,#roleplaying-userlist-user-hyperforms button strong em,#parukia-userlist-user-hyperforms button strong em,#animeandmanga-userlist-user-hyperforms button strong em,#scavengers-userlist-user-hyperforms button strong em,#wouldyourather-userlist-user-hyperforms button strong em,#artshop-userlist-user-hyperforms button strong em,#chiuoleague-userlist-user-hyperforms button strong em,#thezangviperleague-userlist-user-hyperforms button strong em,#uniteddraftingconglomeration-userlist-user-hyperforms button strong em,#expeditionsociety-userlist-user-hyperforms button strong em,#therainbowroom-userlist-user-hyperforms button strong em,#thetriumphleague-userlist-user-hyperforms button strong em,#legendary-userlist-user-hyperforms button strong em,#staff-userlist-user-hyperforms button strong em,#room-userlist-user-hyperforms button strong em {
+    color: #15AC93 !important;
+}
 
 
 /*************************************

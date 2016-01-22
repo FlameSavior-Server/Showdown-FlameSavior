@@ -26,7 +26,8 @@ Gold.hashColor = hashColor;
 var goldCustomColors = {
 	// userid: hex
 	'panpawn': 'FF9933',
-	'pitcher': 'C2052E'
+	'pitcher': 'C2052E',
+	'hyperforms': '15AC93'
 }
 
 // Mains custom username colors

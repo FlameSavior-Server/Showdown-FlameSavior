@@ -101,6 +101,21 @@
 #lobby-userlist-user-snow, #uniteddraftingconglomeration-userlist-user-snow, #staff-userlist-user-snow {
     background:url("http://i.imgur.com/waKfw8e.png") no-repeat right
 }
+/* CUSTOM USER COLORS */
+.chat.chatmessage-panpawn strong {
+	color:#FF9933 !important;
+}
+#lobby-userlist-user-panpawn button strong em,#room-userlist-user-panpawn button strong em,#staff-userlist-user-panpawn button strong em,#silvshangout-userlist-user-panpawn button strong em,#goldenrodradiotower-userlist-user-panpawn button strong em,#french-userlist-user-panpawn button strong em,#gamechamber-userlist-user-panpawn button strong em,#development-userlist-user-panpawn button strong em,#roleplaying-userlist-user-panpawn button strong em,#parukia-userlist-user-panpawn button strong em,#animeandmanga-userlist-user-panpawn button strong em,#scavengers-userlist-user-panpawn button strong em,#wouldyourather-userlist-user-panpawn button strong em,#artshop-userlist-user-panpawn button strong em,#chiuoleague-userlist-user-panpawn button strong em,#thezangviperleague-userlist-user-panpawn button strong em,#uniteddraftingconglomeration-userlist-user-panpawn button strong em,#expeditionsociety-userlist-user-panpawn button strong em,#therainbowroom-userlist-user-panpawn button strong em,#thetriumphleague-userlist-user-panpawn button strong em,#legendary-userlist-user-panpawn button strong em {
+	color:#FF9933 !important;
+}
+.chat.chatmessage-pitcher strong {
+    color: #C2052E !important;
+}
+#lobby-userlist-user-pitcher button strong em,#silvshangout-userlist-user-pitcher button strong em,#goldenrodradiotower-userlist-user-pitcher button strong em,#french-userlist-user-pitcher button strong em,#gamechamber-userlist-user-pitcher button strong em,#development-userlist-user-pitcher button strong em,#roleplaying-userlist-user-pitcher button strong em,#parukia-userlist-user-pitcher button strong em,#animeandmanga-userlist-user-pitcher button strong em,#scavengers-userlist-user-pitcher button strong em,#wouldyourather-userlist-user-pitcher button strong em,#artshop-userlist-user-pitcher button strong em,#chiuoleague-userlist-user-pitcher button strong em,#thezangviperleague-userlist-user-pitcher button strong em,#uniteddraftingconglomeration-userlist-user-pitcher button strong em,#expeditionsociety-userlist-user-pitcher button strong em,#therainbowroom-userlist-user-pitcher button strong em,#thetriumphleague-userlist-user-pitcher button strong em,#legendary-userlist-user-pitcher button strong em,#staff-userlist-user-pitcher button strong em,#room-userlist-user-pitcher button strong em {
+    color: #C2052E !important;
+}
+
+
 /*************************************
  * CONSTANT CSS (DO NOT COMMENT OUT) *
  *************************************/
@@ -214,13 +229,7 @@
 .dark .notice {
 	color:#fff;
 }
-/* panpawn is special */
-.chat.chatmessage-panpawn strong {
-	color:#FF9933 !important;
-}
-#lobby-userlist-user-panpawn button strong em,#room-userlist-user-panpawn button strong em,#staff-userlist-user-panpawn button strong em,#silvshangout-userlist-user-panpawn button strong em,#goldenrodradiotower-userlist-user-panpawn button strong em,#french-userlist-user-panpawn button strong em,#gamechamber-userlist-user-panpawn button strong em,#development-userlist-user-panpawn button strong em,#roleplaying-userlist-user-panpawn button strong em,#parukia-userlist-user-panpawn button strong em,#animeandmanga-userlist-user-panpawn button strong em,#scavengers-userlist-user-panpawn button strong em,#wouldyourather-userlist-user-panpawn button strong em,#artshop-userlist-user-panpawn button strong em,#chiuoleague-userlist-user-panpawn button strong em,#thezangviperleague-userlist-user-panpawn button strong em,#uniteddraftingconglomeration-userlist-user-panpawn button strong em,#expeditionsociety-userlist-user-panpawn button strong em,#therainbowroom-userlist-user-panpawn button strong em,#thetriumphleague-userlist-user-panpawn button strong em,#legendary-userlist-user-panpawn button strong em {
-	color:#FF9933 !important;
-}
+
 
 
 /*********************

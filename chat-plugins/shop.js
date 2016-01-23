@@ -43,7 +43,7 @@ exports.commands = {
 				table("Musicbox", "A command that lists / links up to 8 of your favorite songs", 80) +
 				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", 100) +
 				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 400) +
-				table("Color", "This gives your username a custom color on our <a href=\"http://goldservers.info\" target=\"_blank\">custom client</a>.", 700) +
+				table("Color", "This gives your username a custom color on the userlist and in all rooms (existing at time of purchase)", 900) +
 				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1000) +
 				bottom
 			);
@@ -194,7 +194,7 @@ exports.commands = {
 
 			case 'color':
 			case 'customcolor':
-				price = 700;
+				price = 900;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy color, [hex code OR name of an alt you want the color of]");
 				if (parts[1].length > 20) return this.errorReply("This is not a valid color, try again.");

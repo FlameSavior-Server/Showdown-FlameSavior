@@ -3,25 +3,25 @@
  */
 
 var filepath = 'config/customcolors.json'; 
-Gold.customColors = {};
+customColors = {};
 var fs = require('fs');
 var request = require('request');
 
 function load () {
 	fs.readFile(filepath, 'utf8', function (err, file) {
 		if (err) return;
-		Gold.customColors = JSON.parse(file);
+		customColors = JSON.parse(file);
 	});
 }
 load();
 
 function updateColor() {
-	fs.writeFileSync(filepath, JSON.stringify(Gold.customColors));
+	fs.writeFileSync(filepath, JSON.stringify(customColors));
 
 	var newCss = '/* COLORS START */\n';
 	
-	for (var name in Gold.customColors) {
-		newCss += generateCSS(name, Gold.customColors[name]);
+	for (var name in customColors) {
+		newCss += generateCSS(name, customColors[name]);
 	}
 	newCss += '/* COLORS END */\n';
 	
@@ -59,8 +59,8 @@ exports.commands = {
 		if (!target[1]) return this.parse('/help customcolor');
 		if (toId(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
 		if (target[1] === 'delete') {
-			if (!Gold.customColors[toId(target[0])]) return this.errorReply('/customcolor - ' + target[0] + ' does not have a custom color.');
-			delete Gold.customColors[toId(target[0])];
+			if (!customColors[toId(target[0])]) return this.errorReply('/customcolor - ' + target[0] + ' does not have a custom color.');
+			delete customColors[toId(target[0])];
 			updateColor();
 			this.sendReply("You removed " + target[0] + "'s custom color.");
 			Rooms('staff').add(user.name + " removed " + target[0] + "'s custom color.").update();
@@ -70,10 +70,11 @@ exports.commands = {
 
 		this.sendReply("|raw|You have given <b><font color=" + target[1] + ">" + Tools.escapeHTML(target[0]) + "</font></b> a custom color.");
 		Rooms('staff').add('|raw|' + Tools.escapeHTML(target[0]) + " has recieved a <b><font color=" + target[1] + ">custom color</fon></b> from " + Tools.escapeHTML(user.name) + ".").update();
-		Gold.customColors[toId(target[0])] = target[1];
+		customColors[toId(target[0])] = target[1];
 		updateColor();
 	},
 	customcolorhelp: ["Commands Include:",
 				"/customcolor [user], [hex] - Gives [user] a custom color of [hex]",
 				"/customcolor [user], delete - Deletes a user's custom color"],
 };
+Gold.customColors = customColors;

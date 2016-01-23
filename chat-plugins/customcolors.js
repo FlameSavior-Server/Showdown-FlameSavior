@@ -63,7 +63,7 @@ exports.commands = {
 			delete goldCustomColors[toId(target[0])];
 			updateColor();
 			this.sendReply("You removed " + target[0] + "'s custom color.");
-			Rooms('staff').add(user.name + " removed " + target[0] + "'s custom color.");
+			Rooms('staff').add(user.name + " removed " + target[0] + "'s custom color.").update();
 			if (Users(target[0]) && Users(target[0]).connected) Users(target[0]).popup(user.name + " removed your custom color.");
 			return;
 		}

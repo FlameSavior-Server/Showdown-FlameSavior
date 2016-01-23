@@ -12,7 +12,7 @@ var goldCustomColors = require('../config/customcolors.json');
 function hashColor(name) {
 	name = toId(name);
 	if (mainCustomColors[name]) name = mainCustomColors[name];
-	if (goldCustomColors[name]) return '#' + goldCustomColors[name];
+	if (goldCustomColors[name]) return goldCustomColors[name];
 	if (colorCache[name]) return colorCache[name];
 	var hash = MD5(name);
 	var H = parseInt(hash.substr(4, 4), 16) % 360;

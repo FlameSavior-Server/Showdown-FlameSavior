@@ -116,6 +116,8 @@ global.Rooms = require('./rooms.js');
 delete process.send; // in case we're a child process
 global.Verifier = require('./verifier.js');
 
+global.Gold = {};
+
 global.CommandParser = require('./command-parser.js');
 
 global.Simulator = require('./simulator.js');

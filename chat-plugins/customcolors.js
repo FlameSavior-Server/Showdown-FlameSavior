@@ -53,7 +53,7 @@ function generateCSS(name, color) {
 exports.commands = {
 	customcolour: 'customcolor',
 	customcolor: function (target, room, user) {
-		if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+		if (!this.can('pban')) return this.errorReply("Access denied.");
 		target = target.split(',');
 		for (var u in target) target[u] = target[u].trim();
 		if (!target[1]) return this.parse('/help customcolor');

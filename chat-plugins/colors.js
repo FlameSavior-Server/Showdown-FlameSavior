@@ -76,6 +76,15 @@ exports.commands = {
 	customcolorhelp: ["Commands Include:",
 				"/customcolor [user], [hex] - Gives [user] a custom color of [hex]",
 				"/customcolor [user], delete - Deletes a user's custom color"],
+
+	colorpreview: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		target = target.split(',');
+		for (var u in target) target[u] = target[u].trim();
+		if (!target[1]) return this.parse('/help colorpreview');
+		return this.sendReplyBox('<b><font size="3" color="' +  target[1] + '">' + target[0] + '</font></b>');
+	},
+	colorpreviewhelp: ["Usage: /colorpreview [user], [color] - Previews what that username looks like with [color] as the color."],
 };
 
 

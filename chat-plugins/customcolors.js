@@ -43,9 +43,9 @@ function generateCSS(name, color) {
 	var rooms = [];
 	name = toId(name);
 	for (var room in Rooms.rooms) {
-		if (Rooms.rooms[room].id === 'global' || Rooms.rooms[room].type !== 'chat') continue;
-		rooms.push('#' + Rooms.rooms[room].id + '-userlist-user-' + name + ' button strong em');
-		rooms.push('#' + Rooms.rooms[room].id + '-userlist-user-' + name + ' button span');
+		if (Rooms.rooms[room].id === 'global' || Rooms.rooms[room].type !== 'chat' || Rooms.rooms[room].isPersonal) continue;
+		rooms.push('#' + Rooms.rooms[room].id + '-userlist-user-' + name + ' strong em');
+		rooms.push('#' + Rooms.rooms[room].id + '-userlist-user-' + name + ' span');
 	}
 	css = rooms.join(', ');
 	css += '{\ncolor: ' + color + ' !important;\n}\n';
@@ -62,7 +62,7 @@ exports.commands = {
 		if (!target[1]) return this.parse('/help customcolor');
 		if (toId(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
 
-		this.sendReply("You have given " + Tools.escapeHTML(target[0]) + " a custom color.");
+		this.sendReply("|raw|You have given <b><font color=" + target[1] + ">" + Tools.escapeHTML(target[0]) + "</font></b> a custom color.");
 		Rooms('staff').add(Tools.escapeHTML(target[0]) + " has recieved a custom color from " + Tools.escapeHTML(user.name) + ".").update();
 		updateColor(target[0], target[1]);
 	},

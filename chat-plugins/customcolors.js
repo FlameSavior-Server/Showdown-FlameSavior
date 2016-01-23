@@ -77,4 +77,3 @@ exports.commands = {
 				"/customcolor [user], [hex] - Gives [user] a custom color of [hex]",
 				"/customcolor [user], delete - Deletes a user's custom color"],
 };
-Gold.customColors = customColors;

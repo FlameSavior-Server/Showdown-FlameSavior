@@ -5,12 +5,13 @@
 
 var MD5 = require('MD5');
 var colorCache = {};
+var goldCustomColors = require('../config/customcolors.json');
 
 // hashColor function
 function hashColor(name) {
 	name = toId(name);
 	if (mainCustomColors[name]) name = mainCustomColors[name];
-	if (Gold.customColors[name]) return Gold.customColors[name];
+	if (goldCustomColors[name]) return goldCustomColors[name];
 	if (colorCache[name]) return colorCache[name];
 	var hash = MD5(name);
 	var H = parseInt(hash.substr(4, 4), 16) % 360;

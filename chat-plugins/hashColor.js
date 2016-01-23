@@ -5,6 +5,7 @@
 
 var MD5 = require('MD5');
 var colorCache = {};
+var goldCustomColors = require('../config/customcolors.json');
 
 // hashColor function
 
@@ -23,12 +24,6 @@ function hashColor(name) {
 }
 Gold.hashColor = hashColor;
 
-var goldCustomColors = {
-	// userid: hex
-	'panpawn': 'FF9933',
-	'pitcher': 'C2052E',
-	'hyperforms': '15AC93'
-}
 
 // Mains custom username colors
 var mainCustomColors = {

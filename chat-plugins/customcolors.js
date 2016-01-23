@@ -75,5 +75,5 @@ exports.commands = {
 	},
 	customcolorhelp: ["Commands Include:",
 				"/customcolor [user], [hex] - Gives [user] a custom color of [hex]",
-				"/customcolor [user], [delete] - Deletes a user's custom color"],
+				"/customcolor [user], delete - Deletes a user's custom color"],
 };

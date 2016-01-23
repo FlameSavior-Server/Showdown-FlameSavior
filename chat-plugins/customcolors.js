@@ -51,18 +51,29 @@ function generateCSS(name, color) {
 }
 
 exports.commands = {
+	customcolour: 'customcolor',
 	customcolor: function (target, room, user) {
 		if (!this.can('hotpatch')) return this.errorReply("Access denied.");
 		target = target.split(',');
 		for (var u in target) target[u] = target[u].trim();
 		if (!target[1]) return this.parse('/help customcolor');
 		if (toId(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
-		
+		if (target[1] === 'delete') {
+			if (!goldCustomColors[toId(target[0])]) return this.errorReply('/customcolor - ' + target[0] + ' does not have a custom color.');
+			delete goldCustomColors[toId(target[0])];
+			updateColor();
+			this.sendReply("You removed " + target[0] + "'s custom color.");
+			Rooms('staff').add(user.name + " removed " + target[0] + "'s custom color.");
+			if (Users(target[0]) && Users(target[0]).connected) Users(target[0]).popup(user.name + " removed your custom color.");
+			return;
+		}
 
 		this.sendReply("|raw|You have given <b><font color=" + target[1] + ">" + Tools.escapeHTML(target[0]) + "</font></b> a custom color.");
-		Rooms('staff').add(Tools.escapeHTML(target[0]) + " has recieved a custom color from " + Tools.escapeHTML(user.name) + ".").update();
+		Rooms('staff').add('|raw|' + Tools.escapeHTML(target[0]) + " has recieved a <b><font color=" + target[1] + ">custom color</fon></b> from " + Tools.escapeHTML(user.name) + ".").update();
 		goldCustomColors[toId(target[0])] = target[1];
 		updateColor();
 	},
-	customcolorhelp: ["Usage: /customcolor [user], [hex] - Gives [user] a custom color of [hex]"],
+	customcolorhelp: ["Commands Include:",
+				"/customcolor [user], [hex] - Gives [user] a custom color of [hex]",
+				"/customcolor [user], [delete] - Deletes a user's custom color"],
 };

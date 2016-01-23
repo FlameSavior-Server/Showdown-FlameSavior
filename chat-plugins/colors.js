@@ -1,3 +1,85 @@
+/* Custom color plugin
+ * by jd and panpawn
+ */
+
+var filepath = 'config/customcolors.json'; 
+var customColors = {};
+var fs = require('fs');
+var request = require('request');
+
+function load () {
+	fs.readFile(filepath, 'utf8', function (err, file) {
+		if (err) return;
+		customColors = JSON.parse(file);
+	});
+}
+load();
+
+function updateColor() {
+	fs.writeFileSync(filepath, JSON.stringify(customColors));
+
+	var newCss = '/* COLORS START */\n';
+	
+	for (var name in customColors) {
+		newCss += generateCSS(name, customColors[name]);
+	}
+	newCss += '/* COLORS END */\n';
+	
+	var file = fs.readFileSync('config/custom.css', 'utf8').split('\n');
+	if (~file.indexOf('/* COLORS START */')) file.splice(file.indexOf('/* COLORS START */'), (file.indexOf('/* COLORS END */') - file.indexOf('/* COLORS START */')) + 1);
+	fs.writeFileSync('config/custom.css', file.join('\n') + newCss);
+	request('http://play.pokemonshowdown.com/customcss.php?server=gold&invalidate', function callback(error, res, body) {
+		if (error) return console.log('updateColor error: ' + error);
+	});
+}
+
+function generateCSS(name, color) {
+	var css = '';
+	var rooms = [];
+	name = toId(name);
+	for (var room in Rooms.rooms) {
+		if (Rooms.rooms[room].id === 'global' || Rooms.rooms[room].type !== 'chat' || Rooms.rooms[room].isPersonal) continue;
+		rooms.push('#' + Rooms.rooms[room].id + '-userlist-user-' + name + ' strong em');
+		rooms.push('#' + Rooms.rooms[room].id + '-userlist-user-' + name + ' strong');
+		rooms.push('#' + Rooms.rooms[room].id + '-userlist-user-' + name + ' span');
+	}
+	css = rooms.join(', ');
+	css += '{\ncolor: ' + color + ' !important;\n}\n';
+	css += '.chat.chatmessage-' + name + ' strong {\n';
+	css += 'color: ' + color + ' !important;\n}\n';
+	return css;
+}
+
+exports.commands = {
+	customcolour: 'customcolor',
+	customcolor: function (target, room, user) {
+		if (!this.can('pban')) return this.errorReply("Access denied.");
+		target = target.split(',');
+		for (var u in target) target[u] = target[u].trim();
+		if (!target[1]) return this.parse('/help customcolor');
+		if (toId(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
+		if (target[1] === 'delete') {
+			if (!customColors[toId(target[0])]) return this.errorReply('/customcolor - ' + target[0] + ' does not have a custom color.');
+			delete customColors[toId(target[0])];
+			updateColor();
+			this.sendReply("You removed " + target[0] + "'s custom color.");
+			Rooms('staff').add(user.name + " removed " + target[0] + "'s custom color.").update();
+			if (Users(target[0]) && Users(target[0]).connected) Users(target[0]).popup(user.name + " removed your custom color.");
+			return;
+		}
+
+		this.sendReply("|raw|You have given <b><font color=" + target[1] + ">" + Tools.escapeHTML(target[0]) + "</font></b> a custom color.");
+		Rooms('staff').add('|raw|' + Tools.escapeHTML(target[0]) + " has recieved a <b><font color=" + target[1] + ">custom color</fon></b> from " + Tools.escapeHTML(user.name) + ".").update();
+		customColors[toId(target[0])] = target[1];
+		updateColor();
+	},
+	customcolorhelp: ["Commands Include:",
+				"/customcolor [user], [hex] - Gives [user] a custom color of [hex]",
+				"/customcolor [user], delete - Deletes a user's custom color"],
+};
+
+
+
 /* Pokemon Showdown hashColor function
  * This gives the color of a username
  * based on the userid.
@@ -5,13 +87,12 @@
 
 var MD5 = require('MD5');
 var colorCache = {};
-var goldCustomColors = require('../config/customcolors.json');
 
 // hashColor function
 function hashColor(name) {
 	name = toId(name);
+	if (customColors[name]) return customColors[name];
 	if (mainCustomColors[name]) name = mainCustomColors[name];
-	if (goldCustomColors[name]) return goldCustomColors[name];
 	if (colorCache[name]) return colorCache[name];
 	var hash = MD5(name);
 	var H = parseInt(hash.substr(4, 4), 16) % 360;
@@ -150,7 +231,7 @@ var mainCustomColors = {
 	'iplaytennislol': 'nsyncluvr67',
 	'snow': 'ekqi2oxb',
 	'quote': 'quotecs',
-	'cathy': '' //{color: '#ff5cb6'}
+	'cathy': '', //{color: '#ff5cb6'}
 };
 
 function hslToRgb(h, s, l) {
@@ -197,7 +278,7 @@ function hslToRgb(h, s, l) {
 	return {
 		r: r,
 		g: g,
-		b: b
+		b: b,
 	};
 }
 

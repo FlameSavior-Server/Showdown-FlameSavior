@@ -304,6 +304,7 @@ exports.commands = {
 				if (Rooms.get('upperstaff')) {
 					Rooms.get('upperstaff').add('|raw|<div class="broadcast-green">Private chat room created: <b>' + Tools.escapeHTML(target) + '</b></div>').update();
 				}
+				Gold.updateColor();
 				return this.sendReply("The private chat room '" + target + "' was created.");
 			} else {
 				let defaultIntro = '<h2 style="margin-top:0">' + target + ' <a href="/' + toId(target) + '"><code>&lt;&lt;' + toId(target) + '>></code></a></h2>(DEFAULT ROOMINTRO)<br />- To set a customized roomintro, use <code>/roomintro HTML</code>.<br />- Don\'t know HTML very well? Click <a href="http://www.smogon.com/forums/threads/html-jazz-b.3510885/">here</a> for a brief HTML guide.<br />- Be sure to set a short room description (80 characters or under) with <code>/roomdesc DESC</code><br />- To enable tournaments in your room, do <code>/tour ON</code><br />- Any room owner can view past logs of this room with <code>/viewlogs ' + toId(target) + ', [YYYY-MM-DD]</code><br />- Reminder that this room must maintain 40 messages / 48 hours to be considered "active" to not be automatically deleted.<br />- For any <i>general</i> questions on room management, please do not hesitate to contact a global staff member.<br />- <button name="send" value="/roomhelp">Room management commands</button>';
@@ -315,6 +316,7 @@ exports.commands = {
 				if (Rooms.get('upperstaff')) {
 					Rooms.get('upperstaff').add('|raw|<div class="broadcast-green">Public chat room created: <b>' + Tools.escapeHTML(target) + '</b></div>').update();
 				}
+				Gold.updateColor();
 				return this.sendReply("The chat room '" + target + "' was created.");
 			}
 		}

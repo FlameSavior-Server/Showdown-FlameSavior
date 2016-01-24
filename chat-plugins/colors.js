@@ -32,6 +32,7 @@ function updateColor() {
 		if (error) return console.log('updateColor error: ' + error);
 	});
 }
+Gold.updateColor = updateColor;
 
 function generateCSS(name, color) {
 	var css = '';

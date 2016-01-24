@@ -962,7 +962,7 @@ exports.commands = {
 		let name = this.targetUsername;
 		let userid = toId(name);
 
-		if (this.targetUser.can('pban')) return this.errorReply("Global upper staff cannot be room banned.");
+		if (this.targetUser.can('hotpatch')) return this.errorReply("Administrators cannot be room banned.");
 		if (!userid || !targetUser) return this.errorReply("User '" + name + "' does not exist.");
 
 		if (target.length > MAX_REASON_LENGTH) {

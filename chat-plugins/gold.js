@@ -274,10 +274,6 @@ exports.commands = {
 	hc: function(room, user, cmd) {
 		return this.parse('/hotpatch chat');
 	},
-	css: function(target, room, user, connection) {
-		var css = fs.readFileSync('config/custom.css', 'utf8');
-		return user.send('|popup|' + css);
-	},
 	pbl: 'pbanlist',
 	permabanlist: 'pbanlist',
 	pbanlist: function(target, room, user, connection) {

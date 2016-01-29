@@ -297,9 +297,12 @@ exports.commands = {
 	pollremind: function(target, room, user) {
 		if (!room.poll) return this.errorReply("There is no poll running in this room.");
 		if (!this.canBroadcast()) return;
-		room.update();
-
-		room.poll.display(user, this.broadcasting);
+		if (this.broadcasting) {
+			room.update();
+			room.poll.display(user, this.broadcasting);
+		} else {
+			this.parse('/poll display');
+		}
 	},
 	tierpoll: 'tpoll',
 	tpoll: function(target, room, user) {

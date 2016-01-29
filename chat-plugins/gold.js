@@ -516,11 +516,11 @@ exports.commands = {
 		this.sendReplyBox("<img src=" + parts[0] + " width=" + parts[1] + " height=" + parts[1]);
 	},
 	roomshowimagehelp: ["!rsi [image], [width], [height] - Broadcasts an image to the room"],
-	admins: function (target, room, user) {
-		this.parse('/usersofrank ~');
-	},
+
+	admins: 'usersofrank',
 	uor: 'usersofrank',
-	usersofrank: function(target, room, user) {
+	usersofrank: function(target, room, user, connection, cmd) {
+		if (cmd === 'admins') target = '~';
 		if (!target || !Config.groups[target]) return this.parse('/help usersofrank');
 		if (!this.canBroadcast()) return;
 		var names = [];

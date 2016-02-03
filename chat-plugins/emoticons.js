@@ -1,7 +1,7 @@
 /* Emoticons Plugin
  * This is a chat-plugin for an Emoticons system on PS
- * You will need a line in parser to actually  parse 
- * this so that it works.  Also, you will need need to 
+ * You will need a line in parser to actually  parse
+ * this so that it works.  Also, you will need need to
  * add a few lines to the PM command.
  * Credits: panpawn
  *

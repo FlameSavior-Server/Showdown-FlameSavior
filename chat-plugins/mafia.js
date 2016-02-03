@@ -148,12 +148,17 @@ class MafiaPlayer extends Rooms.RoomGamePlayer {
 			return;
 		}
 
+		let numVotes = 1;
+
+		if (this.class.numVotes) numVotes = this.class.numVotes;
+
 		if (target in this.validVotes || target === 'none') {
 			if (target !== 'none') {
 				if (this.game.currentVote[target]) {
-					this.game.currentVote[target].push(this.name);
+					this.game.currentVote[target].voters.push(this.name);
+					this.game.currentVote[target].votes += numVotes;
 				} else {
-					this.game.currentVote[target] = [this.name];
+					this.game.currentVote[target] = {votes: numVotes, voters: [this.name]};
 				}
 			}
 
@@ -285,9 +290,9 @@ class Mafia extends Rooms.RoomGame {
 
 		if (player in this.players || player === 'none') {
 			if (cmd === 'target') {
-				this.players[user.userid].onReceiveTarget(player);
+				return this.players[user.userid].onReceiveTarget(player);
 			} else if (cmd === 'vote') {
-				this.players[user.userid].onReceiveVote(player);
+				return this.players[user.userid].onReceiveVote(player);
 			}
 		}
 
@@ -368,9 +373,9 @@ class Mafia extends Rooms.RoomGame {
 		for (let i in this.currentVote) {
 			text += Tools.escapeHTML(this.players[i].name) + ': ';
 			if (this.anonVotes) {
-				text += this.currentVote[i] + ' votes.';
+				text += this.currentVote[i].votes + ' votes.';
 			} else {
-				text += this.currentVote[i].join(',');
+				text += this.currentVote[i].voters.join(',');
 			}
 			text += '<br/>';
 		}
@@ -379,7 +384,7 @@ class Mafia extends Rooms.RoomGame {
 
 		for (let i in this.players) {
 			let player = this.players[i];
-			if (this.voters.indexOf(player) > -1) {
+			if (this.voters.indexOf(player) > -1 && !this.voting) {
 				player.sendRoom('|uhtmlchange|mafia' + this.room.gameNumber + 'vote' + this.gamestate + this.day + '|' + this.mafiaWindow(player.class.image, text));
 			}
 		}
@@ -389,9 +394,9 @@ class Mafia extends Rooms.RoomGame {
 		let max = 0;
 		let toKill = null;
 		for (let i in this.currentVote) {
-			if (this.currentVote[i].length > max) {
+			if (this.currentVote[i].votes > max) {
 				toKill = i;
-			} else if (this.currentVote[i].length === max) {
+			} else if (this.currentVote[i].votes === max) {
 				toKill = null;
 			}
 		}
@@ -411,7 +416,7 @@ class Mafia extends Rooms.RoomGame {
 		let rolesLeft = this.roles;
 
 		for (let i in this.players) {
-			let index = Math.floor(Math.random(rolesLeft.length));
+			let index = Math.floor(Math.random() * rolesLeft.length);
 			this.players[i].class = MafiaData.MafiaClasses[rolesLeft[index]];
 			rolesLeft.splice(index, 1);
 			if (!this.players[i].class.atStart) {
@@ -480,6 +485,10 @@ class Mafia extends Rooms.RoomGame {
 				toKill.kill(meetingMsg[this.meeting]);
 			}
 
+			if (this.meeting === 'town' && toKill.class.onLynch) {
+				toKill.class.onLynch();
+			}
+
 			this.meeting = null;
 		}
 
@@ -528,12 +537,11 @@ class Mafia extends Rooms.RoomGame {
 			break;
 		case 'night':
 			this.gamestate = 'day';
-			this.gameEvent('onDay', 0.5);
 			break;
 		case 'day':
 			this.gamestate = 'lynch';
 			this.townMeeting();
-			this.gameEvent('onLynch', 2);
+			this.gameEvent('onDay', 2);
 			break;
 		case 'lynch':
 			this.day++;
@@ -545,7 +553,9 @@ class Mafia extends Rooms.RoomGame {
 
 	setTimer(mins) {
 		this.timer = setTimeout((function () {
-			this.announcementWindow('', '10 seconds left!');
+			for (let i in this.players) {
+				this.players[i].sendRoom("10 seconds left!");
+			}
 			this.timer = setTimeout((function () {
 				this.progress();
 			}).bind(this), 10000);

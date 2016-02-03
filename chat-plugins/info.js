@@ -1760,7 +1760,7 @@ var commands = exports.commands = {
 				};
 				if (pokemon.eggGroups) details["Egg Group(s)"] = pokemon.eggGroups.join(", ");
 				if (!pokemon.evos.length) {
-					details["<font color=#585858>Does Not Evolve</font>"] = "";
+					details['<font color="#686868">Does Not Evolve</font>'] = "";
 				} else {
 					details["Evolution"] = pokemon.evos.map(function(evo) {
 						evo = Tools.getTemplate(evo);
@@ -1774,19 +1774,19 @@ var commands = exports.commands = {
 					"Gen": move.gen,
 				};
 
-				if (move.secondary || move.secondaries) details["<font color=black>&#10003; Secondary effect</font>"] = "";
-				if (move.flags['contact']) details["<font color=black>&#10003; Contact</font>"] = "";
-				if (move.flags['sound']) details["<font color=black>&#10003; Sound</font>"] = "";
-				if (move.flags['bullet']) details["<font color=black>&#10003; Bullet</font>"] = "";
-				if (move.flags['pulse']) details["<font color=black>&#10003; Pulse</font>"] = "";
-				if (!move.flags['protect'] && !/(ally|self)/i.test(move.target)) details["<font color=black>&#10003; Bypasses Protect</font>"] = "";
-				if (move.flags['authentic']) details["<font color=black>&#10003; Bypasses Substitutes</font>"] = "";
-				if (move.flags['defrost']) details["<font color=black>&#10003; Thaws user</font>"] = "";
-				if (move.flags['bite']) details["<font color=black>&#10003; Bite</font>"] = "";
-				if (move.flags['punch']) details["<font color=black>&#10003; Punch</font>"] = "";
-				if (move.flags['powder']) details["<font color=black>&#10003; Powder</font>"] = "";
-				if (move.flags['reflectable']) details["<font color=black>&#10003; Bounceable</font>"] = "";
-				if (move.flags['gravity']) details["<font color=black>&#10007; Suppressed by Gravity</font>"] = "";
+				if (move.secondary || move.secondaries) details["&#10003; Secondary effect"] = "";
+				if (move.flags['contact']) details["&#10003; Contact"] = "";
+				if (move.flags['sound']) details["&#10003; Sound"] = "";
+				if (move.flags['bullet']) details["&#10003; Bullet"] = "";
+				if (move.flags['pulse']) details["&#10003; Pulse"] = "";
+				if (!move.flags['protect'] && !/(ally|self)/i.test(move.target)) details["&#10003; Bypasses Protect"] = "";
+				if (move.flags['authentic']) details["&#10003; Bypasses Substitutes"] = "";
+				if (move.flags['defrost']) details["&#10003; Thaws user"] = "";
+				if (move.flags['bite']) details["&#10003; Bite"] = "";
+				if (move.flags['punch']) details["&#10003; Punch"] = "";
+				if (move.flags['powder']) details["&#10003; Powder"] = "";
+				if (move.flags['reflectable']) details["&#10003; Bounceable"] = "";
+				if (move.flags['gravity']) details["&#10007; Suppressed by Gravity"] = "";
 
 				if (move.id === 'snatch') isSnatch = true;
 				if (move.id === 'mirrormove') isMirrorMove = true;
@@ -1829,8 +1829,9 @@ var commands = exports.commands = {
 				details = {};
 			}
 
-			buffer += '|raw|<font size="1">' + Object.keys(details).map(function(detail) {
-				return '<font color=#585858>' + detail + (details[detail] !== '' ? ':</font> ' + details[detail] : '</font>');
+			buffer += '|raw|<font size="1">' + Object.keys(details).map(function (detail) {
+				if (!details[detail]) return detail;
+				return '<font color="#686868">' + detail + ':</font> ' + details[detail];
 			}).join("&nbsp;|&ThickSpace;") + '</font>';
 
 			if (isSnatch) buffer += '&nbsp;|&ThickSpace;<a href="https://pokemonshowdown.com/dex/moves/snatch"><font size="1">Snatchable Moves</font></a>';
@@ -2913,7 +2914,8 @@ var commands = exports.commands = {
 		let template = Tools.getTemplate(targets[0]);
 		let move = {};
 		let problem;
-		let format = {rby:'gen1ou', gsc:'gen2ou', adv:'gen3ou', dpp:'gen4ou', bw2:'gen5ou'}[cmd.substring(0, 3)];
+		let gen = ({rby:1, gsc:2, adv:3, dpp:4, bw2:5}[cmd.substring(0, 3)] || 6);
+		let format = 'gen' + gen + 'ou';
 		let all = (cmd === 'learnall');
 		if (cmd === 'learn5') lsetData.set.level = 5;
 		if (cmd === 'g6learn') lsetData.format = {
@@ -2928,7 +2930,7 @@ var commands = exports.commands = {
 			return this.errorReply("You must specify at least one move.");
 		}
 
-		for (let i = 1, len = targets.length; i < len; ++i) {
+		for (let i = 1, len = targets.length; i < len; i++) {
 			move = Tools.getMove(targets[i]);
 			if (!move.exists) {
 				return this.errorReply("Move '" + move.id + "' not found.");
@@ -2936,13 +2938,24 @@ var commands = exports.commands = {
 			problem = TeamValidator.checkLearnsetSync(format, move, template.species, lsetData);
 			if (problem) break;
 		}
-		let buffer = template.name + (problem ? " <span class=\"message-learn-cannotlearn\">can't</span> learn " : " <span class=\"message-learn-canlearn\">can</span> learn ") + (targets.length > 2 ? "these moves" : move.name);
-		if (format) buffer += ' on ' + cmd.substring(0, 3).toUpperCase();
+		let buffer = "";
+		if (format) buffer += "In Gen " + gen + ", ";
+		buffer += "" + template.name + (problem ? " <span class=\"message-learn-cannotlearn\">can't</span> learn " : " <span class=\"message-learn-canlearn\">can</span> learn ") + (targets.length > 2 ? "these moves" : move.name);
 		if (!problem) {
-			let sourceNames = {E:"egg", S:"event", D:"dream world"};
-			if (lsetData.sources || lsetData.sourcesBefore) buffer += " only when obtained from:<ul class=\"message-learn-list\">";
+			let sourceNames = {E:"egg", S:"event", D:"dream world", X:"egg, traded back", Y: "event, traded back"};
+			let sourcesBefore = lsetData.sourcesBefore;
+			if (lsetData.sources || sourcesBefore < gen) buffer += " only when obtained";
+			buffer += " from:<ul class=\"message-learn-list\">";
 			if (lsetData.sources) {
-				let sources = lsetData.sources.sort();
+				let sources = lsetData.sources.map(function (source) {
+					if (source.slice(0, 3) === '1ET') {
+						return '2X' + source.slice(3);
+					}
+					if (source.slice(0, 3) === '1ST') {
+						return '2Y' + source.slice(3);
+					}
+					return source;
+				}).sort();
 				let prevSourceType;
 				let prevSourceCount = 0;
 				for (let i = 0, len = sources.length; i < len; ++i) {
@@ -2965,15 +2978,8 @@ var commands = exports.commands = {
 					if (source.substr(2)) buffer += ": " + source.substr(2);
 				}
 			}
-			if (lsetData.sourcesBefore) {
-				if (!(cmd.substring(0, 3) in {
-						'rby': 1,
-						'gsc': 1
-					})) {
-					buffer += "<li>any generation before " + (lsetData.sourcesBefore + 1);
-				} else if (!lsetData.sources) {
-					buffer += "<li>gen " + lsetData.sourcesBefore;
-				}
+			if (sourcesBefore) {
+				buffer += "<li>" + (sourcesBefore < gen ? "gen " + sourcesBefore + " or earlier" : "anywhere") + " (all moves are level-up/tutor/TM/HM in gen " + Math.min(gen, sourcesBefore) + (sourcesBefore < gen ? " to " + gen : "") + ")";
 			}
 			buffer += "</ul>";
 		}
@@ -3296,9 +3302,9 @@ var commands = exports.commands = {
 		"Adding the parameter 'all' or 'table' will display the information with a table of all type combinations."
 	],
 
-	statcalc: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+	statcalc: function (target, room, user) {
 		if (!target) return this.parse("/help statcalc");
+		if (!this.canBroadcast()) return;
 
 		let targets = target.split(' ');
 

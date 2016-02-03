@@ -896,7 +896,7 @@ let BattleRoom = (function () {
 		this.sideTurnTicks = [0, 0];
 		this.disconnectTickDiff = [0, 0];
 
-		if (Config.forcetimer) this.requestKickInactive(false);
+		if (Config.forcetimer || this.format === 'outurbo') this.requestKickInactive(false);
 	}
 	BattleRoom.prototype = Object.create(Room.prototype);
 	BattleRoom.prototype.type = 'battle';
@@ -1133,7 +1133,9 @@ let BattleRoom = (function () {
 			maxTicksLeft = 6;
 		}
 		if (!this.rated && !this.tour) maxTicksLeft = 30;
-
+		if (this.format === "outurbo") {
+			maxTicksLeft = 1;
+		}
 		this.sideTurnTicks = [maxTicksLeft, maxTicksLeft];
 
 		let inactiveSide = this.getInactiveSide();
@@ -1682,3 +1684,4 @@ Rooms.aliases = aliases;
 
 Rooms.RoomGame = require('./room-game.js').RoomGame;
 Rooms.RoomGamePlayer = require('./room-game.js').RoomGamePlayer;
+

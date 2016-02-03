@@ -38,6 +38,20 @@ exports.Formats = [
 		banlist: ['Uber', 'Shadow Tag', 'Soul Dew'],
 	},
 	{
+		name: "OU (Turbo)",
+		desc: [
+			"&bullet; This is basically the same as regular OU, but each player only has 10 seconds to make a move.",
+			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3521201/\">OU Metagame Discussion</a>",
+			"&bullet; <a href=\"https://www.smogon.com/dex/xy/tags/ou/\">OU Banlist</a>",
+			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3553516/\">OU Viability Ranking</a>",
+		],
+		section: "ORAS Singles",
+
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
+		banlist: ['Uber', 'Shadow Tag', 'Soul Dew'],
+		forceTimer: true,
+	},
+	{
 		name: "Ubers",
 		desc: [
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3522911/\">Ubers Metagame Discussion</a>",
@@ -806,25 +820,25 @@ exports.Formats = [
 		maxLevel: 50,
 		defaultLevel: 50,
 		validateSet: function (set) {
-			var template = this.getTemplate(set.species || set.name);
+			let template = this.getTemplate(set.species || set.name);
 			if (!template.evos || template.evos.length === 0 || !template.prevo) {
 				return [set.species + " is not the middle Pokémon in an evolution chain."];
 			}
 		},
 		ruleset: ['Pokemon', 'Standard', 'Team Preview'],
-		banlist: ['Chansey', 'Frogadier', 'Eviolite']
+		banlist: ['Chansey', 'Frogadier', 'Eviolite'],
 	},
 	{
 		name: "Gold Battle",
 		section: "Other Metagames",
-		
-		onValidateSet: function(set) {
-			var template = this.getTemplate(set.species || set.name);
+
+		onValidateSet: function (set) {
+			let template = this.getTemplate(set.species || set.name);
 			if (template.color !== 'Yellow') return [set.species + " is not a yellow / gold Pokémon."];
 			if (set.shiny) return [set.species + " is not allowed to be shiny... This is called Gold Battle, duh."];
 		},
 
-		ruleset: ['Team Preview', 'Sleep Clause Mod', 'Pokemon', 'Standard']
+		ruleset: ['Team Preview', 'Sleep Clause Mod', 'Pokemon', 'Standard'],
 	},
 	{
 		name: "OU Theorymon",

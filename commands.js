@@ -988,8 +988,8 @@ exports.commands = {
 		let name = this.targetUsername;
 		let userid = toId(name);
 
-		if (this.targetUser.can('hotpatch')) return this.errorReply("Administrators cannot be room banned.");
 		if (!userid || !targetUser) return this.errorReply("User '" + name + "' does not exist.");
+		if (this.targetUser.can('hotpatch')) return this.errorReply("Administrators cannot be room banned.");
 
 		if (target.length > MAX_REASON_LENGTH) {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");

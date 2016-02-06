@@ -140,7 +140,8 @@ Gold.hashColor = hashColor;
 
 
 // Mains custom username colors
-var mainCustomColors = {
+// https://play.pokemonshowdown.com/js/config.js
+Config.customcolors = {
 	'theimmortal': 'taco',
 	'bmelts': 'testmelts',
 	'zarel': 'aeo',
@@ -221,6 +222,7 @@ var mainCustomColors = {
 	'blitzamirin': 'hikaruhitachii',
 	'skitty': 'shckieei',
 	'sweep': 'jgjjfgdfg', // second color change
+	'panpawn': 'crowt',
 	'val': 'pleasegivemecolorr',
 	'valentine': 'pleasegivemecolorr',
 	'briayan': 'haxorusxi',
@@ -263,8 +265,8 @@ var mainCustomColors = {
 	'grim': 'grimoiregod',
 	'strength': '0v0tqpnu',
 	'iplaytennislol': 'nsyncluvr67',
-	'snow': 'ekqi2oxb',
 	'quote': 'quotecs',
+	'snow': 'q21yzqgh',
 	'cathy': '', //{color: '#ff5cb6'}
 };
 

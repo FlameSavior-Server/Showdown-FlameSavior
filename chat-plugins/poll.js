@@ -318,7 +318,7 @@ exports.commands = {
 	},
 	tierpoll: 'tpoll',
 	tpoll: function(target, room, user) {
-		var tiers = ['Anything Goes', 'Challenge Cup 1v1', 'Hackmons Cup', 'Monotype', 'OU', 'Random Battle', 'Random Monotype Battle', 'UU'];
+		var tiers = ['Challenge Cup 1v1', 'Monotype', 'OU', 'Random Battle', 'Random Monotype Battle', 'UU', 'NU', 'RU', 'PU', 'Ubers'];
 		this.parse('/poll new Next tournament tier?, ' + tiers.sort());
 	},
 	vote: function(target, room, user) {

@@ -24,7 +24,6 @@
 var fs = require('fs');
 var serialize = require('node-serialize');
 var emotes = {};
-var style = "background:none;border:0;padding-top: 0px;padding-bottom: 0px; padding-right: 0px; padding-left: 0px;font-family:Verdana,Helvetica,Arial,sans-serif;font-size:9pt;cursor:pointer";
 
 if (typeof Gold === 'undefined') global.Gold = {};
 

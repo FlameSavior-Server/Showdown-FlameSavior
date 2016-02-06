@@ -87,7 +87,7 @@ Gold.emoticons = {
 				message = Tools.escapeHTML(message);
 				message = this.processEmoticons(message);
 				user.sendTo(room, '|html|' + 
-					' <small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user) + '</strong><b>' + this.userColor(user, ":") + '</b>  ' + message
+					' <small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user) + '</strong><b>' + this.userColor(user, ":") + '</b> &nbsp;' + message
 				);
 				room.update();
 				Users.ShadowBan.addMessage(user, "To " + room, origmsg);
@@ -108,7 +108,7 @@ Gold.emoticons = {
 					message = message.replace(/\*\*s([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>'); //bold
 					message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<strike>$1</strike>'); //strikethrough
 
-					room.addRaw(' <small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user) + '</strong><b>' + this.userColor(user, ":") + '</b>  ' + message);
+					room.addRaw(' <small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user) + '</strong><b>' + this.userColor(user, ":") + '</b> &nbsp;' + message);
 					room.update();
 					room.messageCount++;
 					return false;

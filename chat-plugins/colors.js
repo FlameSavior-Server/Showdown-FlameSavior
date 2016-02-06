@@ -141,7 +141,7 @@ Gold.hashColor = hashColor;
 
 // Mains custom username colors
 // https://play.pokemonshowdown.com/js/config.js
-Config.customcolors = {
+var mainCustomColors = {
 	'theimmortal': 'taco',
 	'bmelts': 'testmelts',
 	'zarel': 'aeo',

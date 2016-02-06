@@ -782,9 +782,10 @@ exports.commands = {
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
 		let userid = toId(name);
-		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
-		if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room owner.");
-		if (room.founder !== user.userid && !this.can('pban')) return this.sendReply('/deroomowner - Access denied.');
+		if (!userid || userid === '') return this.errorReply("User '" + name + "' not found.");
+
+		if (room.auth[userid] !== '#') return this.errorReply("User '" + name + "' is not a room owner.");
+		if (room.founder !== user.userid && !this.can('pban')) return this.errorReply('/deroomowner - Access denied.');
 
 		delete room.auth[userid];
 		this.sendReply("(" + name + " is no longer Room Owner.)");
@@ -988,7 +989,7 @@ exports.commands = {
 		let name = this.targetUsername;
 		let userid = toId(name);
 
-		if (!userid || !targetUser) return this.errorReply("User '" + name + "' does not exist.");
+		if (!userid || !targetUser) return this.errorReply("User '" + name + "' not found.");
 		if (this.targetUser.can('hotpatch')) return this.errorReply("Administrators cannot be room banned.");
 
 		if (target.length > MAX_REASON_LENGTH) {
@@ -1091,7 +1092,7 @@ exports.commands = {
 
 		target = this.splitTarget(target);
 		let targetUser = this.targetUser;
-		if (!targetUser || !targetUser.connected) return this.errorReply("User '" + this.targetUsername + "' does not exist.");
+		if (!targetUser || !targetUser.connected) return this.errorReply("User '" + this.targetUsername + "' not found.");
 		if (!(targetUser in room.users)) {
 			return this.errorReply("User " + this.targetUsername + " is not in the room " + room.id + ".");
 		}
@@ -1146,7 +1147,7 @@ exports.commands = {
 
 		target = this.splitTarget(target);
 		let targetUser = this.targetUser;
-		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' does not exist.");
+		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' not found.");
 		if (target.length > MAX_REASON_LENGTH) {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}
@@ -1205,7 +1206,7 @@ exports.commands = {
 
 		target = this.splitTarget(target);
 		let targetUser = this.targetUser;
-		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' does not exist.");
+		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' not found.");
 		if (target.length > MAX_REASON_LENGTH) {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}
@@ -1280,7 +1281,7 @@ exports.commands = {
 
 		target = this.splitTarget(target);
 		let targetUser = this.targetUser;
-		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' does not exist.");
+		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' not found.");
 		if (target.length > MAX_REASON_LENGTH) {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}
@@ -1727,7 +1728,7 @@ exports.commands = {
 		this.splitTarget(target);
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
-		if (!targetUser) return this.errorReply("User '" + name + "' does not exist.");
+		if (!targetUser) return this.errorReply("User '" + name + "' not found.");
 		let userid = this.getLastIdOf(targetUser);
 		let hidetype = '';
 		if (!user.can('lock', targetUser) && !user.can('ban', targetUser, room)) {
@@ -2221,9 +2222,7 @@ exports.commands = {
 			this.sendReply('||<< ' + eval(target));
 			/* eslint-enable no-unused-vars */
 		} catch (e) {
-			this.sendReply('||<< error: ' + e.message);
-			let stack = '||' + ('' + e.stack).replace(/\n/g, '\n||');
-			connection.sendTo(room, stack);
+			this.sendReply('|| << ' + ('' + e.stack).replace(/\n *at Context\.exports\.commands\.eval [\s\S]*/m, '').replace(/\n/g, '\n||'));
 		}
 	},
 

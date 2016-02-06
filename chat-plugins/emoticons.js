@@ -24,7 +24,7 @@
 var fs = require('fs');
 var serialize = require('node-serialize');
 var emotes = {};
-var style = "background:none;border:0;padding:0 5px 0 0;font-family:Verdana,Helvetica,Arial,sans-serif;font-size:9pt;cursor:pointer";
+var style = "background:none;border:0;padding-top: 0px;padding-bottom: 0px; padding-right: 0px; padding-left: 0px;font-family:Verdana,Helvetica,Arial,sans-serif;font-size:9pt;cursor:pointer";
 
 if (typeof Gold === 'undefined') global.Gold = {};
 
@@ -66,6 +66,10 @@ Gold.emoticons = {
 		}
 		return false;
 	},
+	userColor: function (color, text) {
+		if (!text) text = color;
+		return '<font color=' + Gold.hashColor(color) + '>' + Tools.escapeHTML(text) + '</font>';
+	},
 	processChatData: function(user, room, connection, message) {
 		var match = false;
 		var parsed_message = this.processEmoticons(message);
@@ -84,8 +88,7 @@ Gold.emoticons = {
 				message = Tools.escapeHTML(message);
 				message = this.processEmoticons(message);
 				user.sendTo(room, '|html|' + 
-					user.getIdentity(room).substr(0,1) + '<button style="' + style + '" name="parseCommand" value="/user ' +
-					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>'
+					' <small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user) + '</strong><b>' + this.userColor(user, ":") + '</b>  ' + message
 				);
 				room.update();
 				Users.ShadowBan.addMessage(user, "To " + room, origmsg);
@@ -103,16 +106,10 @@ Gold.emoticons = {
 
 					//PS formatting
 					message = message.replace(/\_\_([^< ](?:[^<]*?[^< ])?)\_\_(?![^<]*?<\/a)/g, '<i>$1</i>'); //italics
-					message = message.replace(/\*\*([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>'); //bold
+					message = message.replace(/\*\*s([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>'); //bold
 					message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<strike>$1</strike>'); //strikethrough
 
-					if (user.hiding) {
-						room.addRaw(' <button style="' + style + '" name="parseCommand" value="/user ' +
-						user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
-						room.update();
-					}
-					room.addRaw(user.getIdentity(room).substr(0,1) + '<button style="' + style + '" name="parseCommand" value="/user ' +
-					user.name + '">' + '<b><font color="' + Gold.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + ':</font></b></button> ' + message + '</div>');
+					room.addRaw(' <small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user) + '</strong><b>' + this.userColor(user, ":") + '</b>  ' + message);
 					room.update();
 					room.messageCount++;
 					return false;

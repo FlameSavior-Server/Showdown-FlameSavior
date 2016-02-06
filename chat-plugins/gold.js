@@ -110,11 +110,11 @@ exports.commands = {
 			}
 			connection.popup('|html|' +
 				'<h3>Gold Authority List</h3>' +
-				'<b><u>Administrators (~)</u></b>:<br />' + staff['admins'].join(', ') +
-				'<br /><b><u>Leaders (&)</u></b>:<br />' + staff['leaders'].join(', ') +
-				'<br /><b><u>Moderators (@)</u></b>:<br />' + staff['mods'].join(', ') +
-				'<br /><b><u>Drivers (%)</u></b>:<br />' + staff['drivers'].join(', ') +
-				'<br /><b><u>Voices (+)</u></b>:<br />' + staff['voices'].join(', ') +
+				'<b><u>~Administrators (' + staff['admins'].length + ')</u></b>:<br />' + staff['admins'].join(', ') +
+				'<br /><b><u>&Leaders (' + staff['leaders'].length + ')</u></b>:<br />' + staff['leaders'].join(', ') +
+				'<br /><b><u>@Moderators (' + staff['mods'].length + ')</u></b>:<br />' + staff['mods'].join(', ') +
+				'<br /><b><u>%Drivers (' + staff['drivers'].length + ')</u></b>:<br />' + staff['drivers'].join(', ') +
+				'<br /><b><u>+Voices (' + staff['voices'].length + ')</u></b>:<br />' + staff['voices'].join(', ') +
 				'<br /><br />(<b>Bold</b> / <i>italic</i> = currently online)'
 			);
 		});

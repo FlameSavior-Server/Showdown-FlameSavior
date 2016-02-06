@@ -93,6 +93,7 @@ exports.commands = {
 						staff['admins'].push(nameColor(person));
 						break;
 					case '&':
+						if (toId(person) === 'tintins') break;
 						staff['leaders'].push(nameColor(person));
 						break;
 					case '@':

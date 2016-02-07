@@ -65,12 +65,14 @@ exports.commands = {
 			updateColor();
 			this.sendReply("You removed " + target[0] + "'s custom color.");
 			Rooms('staff').add(user.name + " removed " + target[0] + "'s custom color.").update();
+			this.privateModCommand("(" + target[0] + "'s custom color was removed by " + user.name + ".)");
 			if (Users(target[0]) && Users(target[0]).connected) Users(target[0]).popup(user.name + " removed your custom color.");
 			return;
 		}
 
 		this.sendReply("|raw|You have given <b><font color=" + target[1] + ">" + Tools.escapeHTML(target[0]) + "</font></b> a custom color.");
 		Rooms('staff').add('|raw|' + Tools.escapeHTML(target[0]) + " has recieved a <b><font color=" + target[1] + ">custom color</fon></b> from " + Tools.escapeHTML(user.name) + ".").update();
+		this.privateModCommand("(" + target[0] + " has recieved custom color: '" + target[1] + "' from " + user.name + ".)");
 		customColors[toId(target[0])] = target[1];
 		updateColor();
 	},

@@ -108,9 +108,15 @@ Gold.emoticons = {
 					message = message.replace(/\*\*([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>'); // bold
 					message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<strike>$1</strike>'); // strikethrough
 
-					room.add('|uhtml|' + user.userid + '|<small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user.name) + '</strong><b>' + this.userColor(user.name, ":") + '</b> &nbsp;' + message);
-					room.update();
-					room.messageCount++;
+					if (room.type === 'chat') {
+						room.add('|uhtml|' + user.userid + '|<small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user.name) + '</strong><b>' + this.userColor(user.name, ":") + '</b> &nbsp;' + message);
+						room.update();
+						room.messageCount++;
+					} else {
+						room.addRaw(' <small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user.name) + '</strong><b>' + this.userColor(user.name, ":") + '</b> &nbsp;' + message);
+						room.update();
+						room.messageCount++;
+					}
 					return false;
 				}
 				break;

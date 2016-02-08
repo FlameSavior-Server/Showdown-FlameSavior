@@ -1021,7 +1021,11 @@ exports.commands = {
 		}
 		let lastid = this.getLastIdOf(targetUser);
 		this.add('|unlink|roomhide|' + lastid);
-		if (lastid !== toId(this.inputUsername)) this.add('|unlink|roomhide|' + toId(this.inputUsername));
+		this.add('|uhtmlchange|' + lastid + '|');
+		if (lastid !== toId(this.inputUsername)) {
+			this.add('|unlink|roomhide|' + toId(this.inputUsername));
+			this.add('|uhtmlchange|' + toId(this.inputUsername) + '|');
+		}
 	},
 	roombanhelp: ["/roomban [username] - Bans the user from the room you are in. Requires: @ # & ~"],
 
@@ -1243,7 +1247,11 @@ exports.commands = {
 		}
 		let userid = this.getLastIdOf(targetUser);
 		this.add('|unlink|hide|' + userid);
-		if (userid !== toId(this.inputUsername)) this.add('|unlink|hide|' + toId(this.inputUsername));
+		this.add('|uhtmlchange|' + userid + '|');
+		if (userid !== toId(this.inputUsername)) {
+			this.add('|unlink|hide|' + toId(this.inputUsername));
+			this.add('|uhtmlchange|' + toId(this.inputUsername) + '|');
+		}
 
 		this.globalModlog("LOCK", targetUser, " by " + user.name + (target ? ": " + target : ""));
 		targetUser.lock(false, userid);
@@ -1321,6 +1329,7 @@ exports.commands = {
 			this.privateModCommand("(" + targetUser.name + "'s " + (acAccount ? " ac account: " + acAccount + ", " : "") + "banned alts: " + alts.join(", ") + (guests ? " [" + guests + " guests]" : "") + ")");
 			for (let i = 0; i < alts.length; ++i) {
 				this.add('|unlink|' + toId(alts[i]));
+				this.add('|uhtmlchange|' + toId(alts[i]) + '|');
 			}
 		} else if (acAccount) {
 			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
@@ -1328,7 +1337,11 @@ exports.commands = {
 
 		let userid = this.getLastIdOf(targetUser);
 		this.add('|unlink|hide|' + userid);
-		if (userid !== toId(this.inputUsername)) this.add('|unlink|hide|' + toId(this.inputUsername));
+		this.add('|uhtmlchange|' + userid + '|');
+		if (userid !== toId(this.inputUsername)) {
+			this.add('|unlink|hide|' + toId(this.inputUsername));
+			this.add('|uhtmlchange|' + toId(this.inputUsername) + '|');
+		}
 		targetUser.ban(false, userid);
 		this.globalModlog("BAN", targetUser, " by " + user.name + (target ? ": " + target : ""));
 		return true;
@@ -1746,7 +1759,11 @@ exports.commands = {
 
 		this.addModCommand("" + targetUser.name + "'s messages were cleared from room " + room.id + " by " + user.name + ".");
 		this.add('|unlink|' + hidetype + userid);
-		if (userid !== toId(this.inputUsername)) this.add('|unlink|' + hidetype + toId(this.inputUsername));
+		this.add('|uhtmlchange|' + userid + '|');
+		if (userid !== toId(this.inputUsername)) {
+			this.add('|unlink|' + hidetype + toId(this.inputUsername));
+			this.add('|uhtmlchange|' + toId(this.inputUsername) + '|');
+		}
 	},
 	hidetexthelp: ["/hidetext [username] - Removes a locked or banned user's messages from chat (includes users banned from the room). Requires: % (global only), @ # & ~"],
 

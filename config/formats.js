@@ -841,6 +841,14 @@ exports.Formats = [
 		ruleset: ['Team Preview', 'Sleep Clause Mod', 'Pokemon', 'Standard'],
 	},
 	{
+		name: "Alpha Tier",
+		section: "Other Metagames",
+		desc: ["The first step to Gold's tiering process, info about it can be found here: http://goldservers.info/forums/showthread.php?tid=9"],
+
+		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Clause', 'Baton Pass Clause'],
+		banlist: ['Aegislash', 'Arceus', 'Blaziken', 'Darkrai', 'Deoxys-Attack', 'Deoxys-Speed', 'Deoxys', 'Dialga', 'Giratina', 'Giratina-O', 'Greninja', 'Groudon', 'Groudon-Primal', 'Ho-Oh', 'Hoopa-Unbound', 'Kyogre', 'Kyogre-Primal', 'Kyurem-White', 'Lugia', 'Manaphy', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite'],
+	},
+	{
 		name: "OU Theorymon",
 		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3559611/\">OU Theorymon</a>"],
 		section: "Other Metagames",

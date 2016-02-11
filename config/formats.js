@@ -829,26 +829,6 @@ exports.Formats = [
 		banlist: ['Chansey', 'Frogadier', 'Eviolite'],
 	},
 	{
-		name: "Gold Battle",
-		section: "Other Metagames",
-
-		onValidateSet: function (set) {
-			let template = this.getTemplate(set.species || set.name);
-			if (template.color !== 'Yellow') return [set.species + " is not a yellow / gold Pokémon."];
-			if (set.shiny) return [set.species + " is not allowed to be shiny... This is called Gold Battle, duh."];
-		},
-
-		ruleset: ['Team Preview', 'Sleep Clause Mod', 'Pokemon', 'Standard'],
-	},
-	{
-		name: "Alpha Tier",
-		section: "Other Metagames",
-		desc: ["The first step to Gold's tiering process, info about it can be found here: http://goldservers.info/forums/showthread.php?tid=9"],
-
-		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Clause', 'Baton Pass Clause'],
-		banlist: ['Aegislash', 'Arceus', 'Blaziken', 'Darkrai', 'Deoxys-Attack', 'Deoxys-Speed', 'Deoxys', 'Dialga', 'Giratina', 'Giratina-O', 'Greninja', 'Groudon', 'Groudon-Primal', 'Ho-Oh', 'Hoopa-Unbound', 'Kyogre', 'Kyogre-Primal', 'Kyurem-White', 'Lugia', 'Manaphy', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite'],
-	},
-	{
 		name: "OU Theorymon",
 		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3559611/\">OU Theorymon</a>"],
 		section: "Other Metagames",
@@ -873,6 +853,30 @@ exports.Formats = [
 		team: 'randomMonotype',
 		searchShow: false,
 		ruleset: ['Pokemon', 'Same Type Clause', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+
+	// Gold Server Tiers
+	///////////////////////////////////////////////////////////////////
+
+	{
+		name: "Gold Battle",
+		section: "Gold Server Tiers",
+
+		onValidateSet: function (set) {
+			let template = this.getTemplate(set.species || set.name);
+			if (template.color !== 'Yellow') return [set.species + " is not a yellow / gold Pokémon."];
+			if (set.shiny) return [set.species + " is not allowed to be shiny... This is called Gold Battle, duh."];
+		},
+
+		ruleset: ['Team Preview', 'Sleep Clause Mod', 'Pokemon', 'Standard'],
+	},
+	{
+		name: "Alpha Tier",
+		section: "Gold Server Tiers",
+		desc: ["The first step to Gold's tiering process, info about it can be found here: http://goldservers.info/forums/showthread.php?tid=9"],
+
+		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Clause', 'Baton Pass Clause'],
+		banlist: ['Aegislash', 'Arceus', 'Blaziken', 'Darkrai', 'Deoxys-Attack', 'Deoxys-Speed', 'Deoxys', 'Dialga', 'Giratina', 'Giratina-O', 'Greninja', 'Groudon', 'Groudon-Primal', 'Ho-Oh', 'Hoopa-Unbound', 'Kyogre', 'Kyogre-Primal', 'Kyurem-White', 'Lugia', 'Manaphy', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite'],
 	},
 
 	// BW2 Singles

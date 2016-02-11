@@ -861,6 +861,7 @@ exports.Formats = [
 	{
 		name: "Gold Battle",
 		section: "Gold Server Tiers",
+		desc: ["&bullet; Only Gold Pokemon are allowed!  Do <code>/goldbattle</code> to see the list."],
 
 		onValidateSet: function (set) {
 			let template = this.getTemplate(set.species || set.name);
@@ -873,7 +874,7 @@ exports.Formats = [
 	{
 		name: "Alpha Tier",
 		section: "Gold Server Tiers",
-		desc: ["The first step to Gold's tiering process, info about it can be found here: http://goldservers.info/forums/showthread.php?tid=9"],
+		desc: ["&bullet; The first step to Gold's tiering process, info about it can be found <a href=\"http://goldservers.info/forums/showthread.php?tid=9\">here</a>."],
 
 		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Clause', 'Baton Pass Clause'],
 		banlist: ['Aegislash', 'Arceus', 'Blaziken', 'Darkrai', 'Deoxys-Attack', 'Deoxys-Speed', 'Deoxys', 'Dialga', 'Giratina', 'Giratina-O', 'Greninja', 'Groudon', 'Groudon-Primal', 'Ho-Oh', 'Hoopa-Unbound', 'Kyogre', 'Kyogre-Primal', 'Kyurem-White', 'Lugia', 'Manaphy', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite'],

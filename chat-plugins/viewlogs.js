@@ -68,9 +68,12 @@ exports.commands = {
 						newFile.push('<div class="' + div + '"><small>[' + timestamp + ']</small> ' + '<small>' + name.substr(0,1) + '</small><b><font color="' + Gold.hashColor(name.substr(1, name.length)) + '">' + name.substr(1, name.length) + ':</font></b><em>' +
 							Tools.escapeHTML(lineSplit.slice(2).join('|')) + '</em></div>');
 						break;
+					case 'uhtml': // this is mostly for emoticon messages
+						var currentLine = lineSplit.splice(3).join('|').trim();
+						newFile.push('<div class="notice">' + sanitizeHTML(currentLine) + '</div>');
+						break;
 					case 'raw':
 					case 'html':
-					case 'uhtml': // this is mostly for emoticon messages
 						var currentLine = lineSplit.splice(1).join('|').trim();
 						newFile.push('<div class="notice">' + sanitizeHTML(currentLine) + '</div>');
 						break;

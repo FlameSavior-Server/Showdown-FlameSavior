@@ -69,7 +69,7 @@ exports.commands = {
 							Tools.escapeHTML(lineSplit.slice(2).join('|')) + '</em></div>');
 						break;
 					case 'uhtml': // this is mostly for emoticon messages
-						var currentLine = lineSplit.splice(3).join('|').trim();
+						var currentLine = lineSplit.splice(2).join('|').trim();
 						newFile.push('<div class="notice">' + sanitizeHTML(currentLine) + '</div>');
 						break;
 					case 'raw':

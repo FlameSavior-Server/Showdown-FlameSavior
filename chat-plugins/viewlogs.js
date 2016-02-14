@@ -70,6 +70,7 @@ exports.commands = {
 						break;
 					case 'raw':
 					case 'html':
+					case 'uhtml': // this is mostly for emoticon messages
 						var currentLine = lineSplit.splice(1).join('|').trim();
 						newFile.push('<div class="notice">' + sanitizeHTML(currentLine) + '</div>');
 						break;

@@ -4,6 +4,7 @@ var request = require('request');
 var moment = require('moment');
 var closeShop = false;
 var closedShop = 0;
+var regdateCache = {};
 if (typeof Gold === 'undefined') global.Gold = {};
 if (typeof Gold.tells === 'undefined') global.Gold.tells = {};
 var crypto = require('crypto');
@@ -643,31 +644,37 @@ exports.commands = {
 		Gold.pmAll(target);
 	},
 	regdate: function(target, room, user, connection) {
-		if (!this.canBroadcast()) return;
-		if (!target || target === "0") target = toId(user.userid);
-		if (!target || target === "." || target === "," || target === "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
-		var username = toId(target);
-		target = target.replace(/\s+/g, '');
-		var request = require("request");
+		var targetid = toId(target);
 		var self = this;
-		request('http://pokemonshowdown.com/users/~' + target, function(error, response, content) {
-			if (!(!error && response.statusCode == 200)) return;
-			content = content + '';
-			content = content.split("<em");
-			if (content[1]) {
-				content = content[1].split("</p>");
-				if (content[0]) {
-					content = content[0].split("</em>");
-					if (content[1]) {
-						regdate = content[1].split('</small>')[0] + '.';
-						data = Tools.escapeHTML(username) + ' was registered on' + regdate;
+		if (targetid.length < 1 || targetid.length > 19) return this.sendReply("Usernames may not be less than one character or longer than 19");
+		if (!this.canBroadcast()) return;
+		if (regdateCache[targetid]) {
+			reply(regdateCache[targetid]);
+		} else {
+			request('http://pokemonshowdown.com/users/' + targetid + '.json', function (error, response, body) {
+				var data = JSON.parse(body);
+				var date = data['registertime'];
+				if (date !== 0 && date.toString().length < 13) {
+					while (date.toString().length < 13) {
+						date = Number(date.toString() + '0');
 					}
 				}
+				reply(date);
+				if (date !== 0) {
+					regdateCache[targetid] = date;
+					saveRegdateCache();
+				}
+			});
+		}
+
+		function reply(date) {
+			if (date === 0) {
+				self.sendReplyBox("<font color=\"" + Gold.hashColor(targetid) + "\">" + Tools.escapeHTML(target) + "</font> is not registered.");
 			} else {
-				data = Tools.escapeHTML(username) + ' is not registered.';
+				self.sendReplyBox("<font color=\"" + Gold.hashColor(targetid) + "\">" + Tools.escapeHTML(target) + "</font> was registered on " + moment(date).format("dddd, MMMM DD, YYYY HH:mmA ZZ"));
 			}
-			self.sendReplyBox(Tools.escapeHTML(data));
-		});
+			room.update();
+		}
 	},
 	stafffaq: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -1216,6 +1223,17 @@ exports.commands = {
 	},
 	*/
 };
+
+function loadRegdateCache() {
+	try {
+		regdateCache = JSON.parse(fs.readFileSync('config/regdate.json', 'utf8'));
+	} catch (e) {}
+}
+loadRegdateCache();
+
+function saveRegdateCache() {
+	fs.writeFileSync('config/regdate.json', JSON.stringify(regdateCache));
+}
 
 function splint(target) {
 	//splittyDiddles

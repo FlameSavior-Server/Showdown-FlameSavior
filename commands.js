@@ -990,7 +990,7 @@ exports.commands = {
 		let userid = toId(name);
 
 		if (!userid || !targetUser) return this.errorReply("User '" + name + "' not found.");
-		if (this.targetUser.can('hotpatch')) return this.errorReply("Administrators cannot be room banned.");
+		if (this.targetUser.can('pban')) return this.errorReply("Global upper staff cannot be room banned.");
 
 		if (target.length > MAX_REASON_LENGTH) {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");

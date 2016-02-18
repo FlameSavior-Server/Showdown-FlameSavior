@@ -884,7 +884,7 @@ exports.Formats = [
 		section: "Gold Server Tiers",
 		desc: ["&bullet; The second step to Gold's tiering process, information about it can be found <a href=\"http://goldservers.info/forums/showthread.php?tid=9\">here</a>."],
 
-		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Clause', 'Baton Pass Clause'],
+		ruleset: 'Alpha Tier',
 		banlist: ['Azumarill', 'Bisharp', 'Chansey', 'Clefable', 'Diggersby', 'Dragonite', 'Excadrill', 'Ferrothorn', 'Garchomp', 'Gengar', 'Gliscor', 'Heatran', 'Jirachi', 'Kyurem-Black', 'Landorus-Therian', 'Latios', 'Rotom-Wash', 'Scizor', 'Serperior', 'Staraptor', 'Talonflame', 'Terrakion', 'Thundurus', 'Thundurus-Therian', 'Tornadus-Therian', 'Tyranitar', 'Victini', 'Weavile', 'Alakazite', 'Altarianite', 'Charizardite X', 'Charizardite Y', 'Diancite', 'Galladite', 'Gardevoirite', 'Gyaradosite', 'Heracronite', 'Latiasite', 'Lopunnite', 'Medichamite', 'Metagrossite', 'Pidgeotite', 'Pinsirite', 'Sablenite', 'Venusaurite'],
 	},
 

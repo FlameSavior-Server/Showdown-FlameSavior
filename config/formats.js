@@ -874,10 +874,18 @@ exports.Formats = [
 	{
 		name: "Alpha Tier",
 		section: "Gold Server Tiers",
-		desc: ["&bullet; The first step to Gold's tiering process, info about it can be found <a href=\"http://goldservers.info/forums/showthread.php?tid=9\">here</a>."],
+		desc: ["&bullet; The first step to Gold's tiering process, information about it can be found <a href=\"http://goldservers.info/forums/showthread.php?tid=9\">here</a>."],
 
 		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Clause', 'Baton Pass Clause'],
 		banlist: ['Aegislash', 'Arceus', 'Blaziken', 'Darkrai', 'Deoxys-Attack', 'Deoxys-Speed', 'Deoxys', 'Dialga', 'Giratina', 'Giratina-O', 'Greninja', 'Groudon', 'Groudon-Primal', 'Ho-Oh', 'Hoopa-Unbound', 'Kyogre', 'Kyogre-Primal', 'Kyurem-White', 'Lugia', 'Manaphy', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Xerneas', 'Yveltal', 'Zekrom', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Salamencite'],
+	},
+	{
+		name: "Beta Tier",
+		section: "Gold Server Tiers",
+		desc: ["&bullet; The second step to Gold's tiering process, information about it can be found <a href=\"http://goldservers.info/forums/showthread.php?tid=9\">here</a>."],
+
+		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Mega Rayquaza Clause', 'Baton Pass Clause'],
+		banlist: ['Azumarill', 'Bisharp', 'Chansey', 'Clefable', 'Diggersby', 'Dragonite', 'Excadrill', 'Ferrothorn', 'Garchomp', 'Gengar', 'Gliscor', 'Heatran', 'Jirachi', 'Kyurem-Black', 'Landorus-Therian', 'Latios', 'Rotom-Wash', 'Scizor', 'Serperior', 'Staraptor', 'Talonflame', 'Terrakion', 'Thundurus', 'Thundurus-Therian', 'Tornadus-Therian', 'Tyranitar', 'Victini', 'Weavile', 'Alakazite', 'Altarianite', 'Charizardite X', 'Charizardite Y', 'Diancite', 'Galladite', 'Gardevoirite', 'Gyaradosite', 'Heracronite', 'Latiasite', 'Lopunnite', 'Medichamite', 'Metagrossite', 'Pidgeotite', 'Pinsirite', 'Sablenite', 'Venusaurite'],
 	},
 
 	// BW2 Singles

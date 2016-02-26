@@ -85,7 +85,7 @@ try {
 }
 
 if (Config.watchconfig) {
-	fs.watchFile(path.resolve(__dirname, 'config/config.js'), function (curr, prev) {
+	fs.watchFile(path.resolve(__dirname, 'config/config.js'), (curr, prev) => {
 		if (curr.mtime <= prev.mtime) return;
 		try {
 			delete require.cache[require.resolve('./config/config.js')];
@@ -128,14 +128,14 @@ global.Tournaments = require('./tournaments');
 try {
 	global.Dnsbl = require('./dnsbl.js');
 } catch (e) {
-	global.Dnsbl = {query: function () {}, reverse: require('dns').reverse};
+	global.Dnsbl = {query: () => {}, reverse: require('dns').reverse};
 }
 
 global.Cidr = require('./cidr.js');
 
 if (Config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting
-	process.on('uncaughtException', function (err) {
+	process.on('uncaughtException', err => {
 		let crashMessage = require('./crashlogger.js')(err, 'The main process');
 		if (crashMessage !== 'lockdown') return;
 		let stack = ("" + err.stack).escapeHTML().split("\n").slice(0, 2).join("<br />");
@@ -152,7 +152,8 @@ if (Config.crashguard) {
  * Start networking processes to be connected to
  *********************************************************/
 
-global.Sockets = require('./sockets.js');
+// global.Sockets = require('./sockets.js');
+global.Sockets = require('./sockets-nocluster.js');
 
 exports.listen = function (port, bindAddress, workerCount) {
 	Sockets.listen(port, bindAddress, workerCount);
@@ -176,13 +177,10 @@ if (require.main === module) {
 Tools.includeFormats();
 Rooms.global.formatListText = Rooms.global.getFormatListText();
 
-// TODO: support on-demand includeMods()
-Tools.includeMods();
-
 global.TeamValidator = require('./team-validator.js');
 
 // load ipbans at our leisure
-fs.readFile(path.resolve(__dirname, 'config/ipbans.txt'), function (err, data) {
+fs.readFile(path.resolve(__dirname, 'config/ipbans.txt'), (err, data) => {
 	if (err) return;
 	data = ('' + data).split("\n");
 	let rangebans = [];
@@ -219,4 +217,4 @@ try {
  * Start up the REPL server
  *********************************************************/
 
-require('./repl.js').start('app', function (cmd) { return eval(cmd); });
+require('./repl.js').start('app', cmd => eval(cmd));

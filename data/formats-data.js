@@ -275,6 +275,7 @@ exports.BattleFormatsData = {
 			{"generation": 6, "level": 10, "shiny": true, "isHidden": false, "moves":["teeterdance", "playnice", "tailwhip", "nuzzle"], "pokeball": "cherishball"},
 			{"generation": 6, "level": 10, "isHidden": true, "moves":["fakeout", "encore", "volttackle", "endeavor"], "pokeball": "cherishball"},
 			{"generation": 6, "level": 99, "isHidden": false, "moves":["happyhour", "playnice", "holdhands", "flash"], "pokeball": "cherishball"},
+			{"generation": 6, "level": 10, "isHidden": false, "moves":["fly", "surf", "agility", "celebrate"], "pokeball": "cherishball"},
 		],
 		tier: "NFE",
 	},
@@ -2666,7 +2667,7 @@ exports.BattleFormatsData = {
 		eventPokemon: [
 			{"generation": 6, "level": 50, "nature": "Adamant", "isHidden": true, "moves":["aquajet", "crunch", "icefang", "destinybond"], "pokeball": "cherishball"},
 		],
-		tier: "RU",
+		tier: "BL2",
 	},
 	sharpedomega: {
 		randomBattleMoves: ["protect", "icefang", "crunch", "earthquake", "waterfall", "zenheadbutt"],
@@ -2739,7 +2740,7 @@ exports.BattleFormatsData = {
 	},
 	vibrava: {
 		randomBattleMoves: ["substitute", "earthquake", "outrage", "roost", "uturn", "superpower", "defog"],
-		tier: "PU",
+		tier: "NFE",
 	},
 	flygon: {
 		randomBattleMoves: ["earthquake", "outrage", "uturn", "roost", "stoneedge", "firepunch", "fireblast", "defog"],
@@ -3690,7 +3691,7 @@ exports.BattleFormatsData = {
 		randomBattleMoves: ["blizzard", "gigadrain", "woodhammer", "earthquake", "iceshard", "hiddenpowerfire"],
 		randomDoubleBattleMoves: ["blizzard", "iceshard", "gigadrain", "protect", "focusblast", "woodhammer", "earthquake"],
 		requiredItem: "Abomasite",
-		tier: "RU",
+		tier: "BL2",
 	},
 	rotom: {
 		randomBattleMoves: ["thunderbolt", "voltswitch", "shadowball", "substitute", "painsplit", "hiddenpowerice", "trick", "willowisp"],

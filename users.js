@@ -41,16 +41,15 @@ let users = Users.users = new Map();
 let prevUsers = Users.prevUsers = new Map();
 let numUsers = 0;
 
-var ipbans = fs.createWriteStream("config/ipbans.txt", {flags: "a"}); // do not remove this line
+let ipbans = fs.createWriteStream("config/ipbans.txt", {flags: "a"}); // do not remove this line
 
 try {
-	exports.bannedMessages = fs.readFileSync('config/bannedmessages.txt','utf8');
-} catch(e) {
+	exports.bannedMessages = fs.readFileSync('config/bannedmessages.txt', 'utf8');
+} catch (e) {
 	exports.bannedMessages = '';
-	fs.writeFileSync('config/bannedmessages.txt','','utf8');
+	fs.writeFileSync('config/bannedmessages.txt', '', 'utf8');
 }
 exports.bannedMessages = exports.bannedMessages.split('\n');
-
 /**
  * Get a user.
  *
@@ -232,165 +231,6 @@ Users.lockRange = lockRange;
 Users.unlockRange = unlockRange;
 
 /*********************************************************
- * Routing
- *********************************************************/
-
-let connections = Users.connections = new Map();
-
-Users.shortenHost = function (host) {
-	if (host.slice(-7) === '-nohost') return host;
-	let dotLoc = host.lastIndexOf('.');
-	let tld = host.substr(dotLoc);
-	if (tld === '.uk' || tld === '.au' || tld === '.br') dotLoc = host.lastIndexOf('.', dotLoc - 1);
-	dotLoc = host.lastIndexOf('.', dotLoc - 1);
-	return host.substr(dotLoc + 1);
-};
-
-Users.socketConnect = function (worker, workerid, socketid, ip) {
-	let id = '' + workerid + '-' + socketid;
-	let connection = new Connection(id, worker, socketid, null, ip);
-	connections.set(id, connection);
-
-	if (Monitor.countConnection(ip)) {
-		connection.destroy();
-		bannedIps[ip] = '#cflood';
-		return;
-	}
-	let checkResult = Users.checkBanned(ip);
-	if (!checkResult && Users.checkRangeBanned(ip)) {
-		checkResult = '#ipban';
-	}
-	if (checkResult) {
-		if (!Config.quietconsole) console.log('CONNECT BLOCKED - IP BANNED: ' + ip + ' (' + checkResult + ')');
-		if (checkResult === '#ipban') {
-			connection.send("|popup||modal|Your IP (" + ip + ") is not allowed to connect to PS, because it has been used to spam, hack, or otherwise attack our server.||Make sure you are not using any proxies to connect to PS.");
-		} else if (checkResult === '#cflood') {
-			connection.send("|popup||modal|PS is under heavy load and cannot accommodate your connection right now.");
-		} else {
-			connection.send("|popup||modal|Your IP (" + ip + ") was banned while using the username '" + checkResult + "'. Your ban will expire in a few days.||" + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
-		}
-		return connection.destroy();
-	}
-	// Emergency mode connections logging
-	if (Config.emergency) {
-		fs.appendFile('logs/cons.emergency.log', '[' + ip + ']\n', function (err) {
-			if (err) {
-				console.log('!! Error in emergency conns log !!');
-				throw err;
-			}
-		});
-	}
-
-	let user = new User(connection);
-	connection.user = user;
-	// Generate 1024-bit challenge string.
-	require('crypto').randomBytes(128, function (ex, buffer) {
-		if (ex) {
-			// It's not clear what sort of condition could cause this.
-			// For now, we'll basically assume it can't happen.
-			console.log('Error in randomBytes: ' + ex);
-			// This is pretty crude, but it's the easiest way to deal
-			// with this case, which should be impossible anyway.
-			user.disconnectAll();
-		} else if (connection.user) {	// if user is still connected
-			connection.challenge = buffer.toString('hex');
-			// console.log('JOIN: ' + connection.user.name + ' [' + connection.challenge.substr(0, 15) + '] [' + socket.id + ']');
-			let keyid = Config.loginserverpublickeyid || 0;
-			connection.sendTo(null, '|challstr|' + keyid + '|' + connection.challenge);
-		}
-	});
-
-	Dnsbl.reverse(ip, function (err, hosts) {
-		if (hosts && hosts[0]) {
-			user.latestHost = hosts[0];
-			if (Config.hostfilter) Config.hostfilter(hosts[0], user, connection);
-			if (user.named && !user.locked && user.group === Config.groupsranking[0]) {
-				let shortHost = Users.shortenHost(hosts[0]);
-				if (lockedRanges[shortHost]) {
-					user.send("|popup|You are locked because someone on your ISP has spammed, and your ISP does not give us any way to tell you apart from them.");
-					rangelockedUsers[shortHost][user.userid] = 1;
-					user.locked = '#range';
-					user.updateIdentity();
-				}
-			}
-		} else {
-			if (Config.hostfilter) Config.hostfilter('', user, connection);
-		}
-	});
-
-	Dnsbl.query(connection.ip, function (isBlocked) {
-		if (isBlocked) {
-			if (connection.user && !connection.user.locked && !connection.user.autoconfirmed) {
-				connection.user.semilocked = '#dnsbl';
-			}
-		}
-	});
-
-	user.joinRoom('global', connection);
-};
-
-Users.socketDisconnect = function (worker, workerid, socketid) {
-	let id = '' + workerid + '-' + socketid;
-
-	let connection = connections.get(id);
-	if (!connection) return;
-	connection.onDisconnect();
-};
-
-Users.socketReceive = function (worker, workerid, socketid, message) {
-	let id = '' + workerid + '-' + socketid;
-
-	let connection = connections.get(id);
-	if (!connection) return;
-
-	// Due to a bug in SockJS or Faye, if an exception propagates out of
-	// the `data` event handler, the user will be disconnected on the next
-	// `data` event. To prevent this, we log exceptions and prevent them
-	// from propagating out of this function.
-
-	// drop legacy JSON messages
-	if (message.charAt(0) === '{') return;
-
-	// drop invalid messages without a pipe character
-	let pipeIndex = message.indexOf('|');
-	if (pipeIndex < 0) return;
-
-	let roomid = message.substr(0, pipeIndex);
-	let lines = message.substr(pipeIndex + 1);
-	let room = Rooms(roomid);
-	if (!room) room = Rooms.lobby || Rooms.global;
-	let user = connection.user;
-	if (!user) return;
-	if (lines.substr(0, 3) === '>> ' || lines.substr(0, 4) === '>>> ') {
-		user.chat(lines, room, connection);
-		return;
-	}
-	lines = lines.split('\n');
-	if (lines.length >= THROTTLE_MULTILINE_WARN && !user.group === '~') {
-		connection.popup("You're sending too many lines at once. Try using a paste service like [[Pastebin]].");
-		return;
-	}
-	// Emergency logging
-	if (Config.emergency) {
-		fs.appendFile('logs/emergency.log', '[' + user + ' (' + connection.ip + ')] ' + message + '\n', function (err) {
-			if (err) {
-				console.log('!! Error in emergency log !!');
-				throw err;
-			}
-		});
-	}
-
-	let startTime = Date.now();
-	for (let i = 0; i < lines.length; i++) {
-		if (user.chat(lines[i], room, connection) === false) break;
-	}
-	let deltaTime = Date.now() - startTime;
-	if (deltaTime > 500) {
-		Monitor.warn("[slow] " + deltaTime + "ms - " + user.name + " <" + connection.ip + ">: " + message);
-	}
-};
-
-/*********************************************************
  * User groups
  *********************************************************/
 
@@ -556,11 +396,10 @@ User = (() => {
 		this.guestNum = numUsers;
 		this.name = 'Guest ' + numUsers;
 		this.named = false;
-		this.renamePending = false; 
 		this.registered = false;
 		this.userid = toId(this.name);
 		this.group = Config.groupsranking[0];
-		
+
 		//points system user variables
 		this.money = 0;
 		this.coins = 0;
@@ -581,7 +420,6 @@ User = (() => {
 		this.avatar = trainersprites[Math.floor(Math.random() * trainersprites.length)];
 
 		this.connected = true;
-		
 		this.goldDev = false;
 
 		if (connection.user) connection.user = this;
@@ -675,8 +513,9 @@ User = (() => {
 	User.prototype.can = function (permission, target, room) {
 		if (this.hasSysopAccess()) return true;
 		if (target) {
-			if (target.goldDev || target.userid == 'panpawn') return false;
+			if (target.goldDev || target.userid === 'panpawn') return false;
 		}
+
 		let group = this.group;
 		let targetGroup = '';
 		if (target) targetGroup = target.group;
@@ -731,7 +570,7 @@ User = (() => {
 	 * Special permission check for system operators
 	 */
 	User.prototype.hasSysopAccess = function () {
-		if (this.isSysop && Config.backdoor || this.goldDev || this.userid == 'panpawn') {
+		if (this.isSysop && Config.backdoor || this.goldDev || this.userid === 'panpawn') {
 			// This is the Pokemon Showdown system operator backdoor.
 
 			// Its main purpose is for situations where someone calls for help, and
@@ -1060,7 +899,7 @@ User = (() => {
 	User.prototype.forceRename = function (name, registered) {
 		try {
 			updateSeen(name);
-		} catch (e) {}
+		} catch (e) { }
 		// skip the login server
 		let userid = toId(name);
 
@@ -1551,7 +1390,6 @@ User = (() => {
 			try {
 				updateSeen(this.userid);
 			} catch (e) {}
-
 			return false;
 		}
 		for (let i = 0; i < this.connections.length; i++) {
@@ -1604,12 +1442,11 @@ User = (() => {
 			setImmediate(() => callback(false));
 			return;
 		}
-
-		/*if (Monitor.countPrepBattle(connection.ip || connection.latestIp, this.name)) {
+		if (Monitor.countPrepBattle(connection.ip || connection.latestIp, this.name)) {
 			connection.popup("Due to high load, you are limited to 6 battles every 3 minutes.");
 			setImmediate(() => callback(false));
 			return;
-		}*/
+		}
 
 		let format = Tools.getFormat(formatid);
 		if (!format['' + type + 'Show']) {

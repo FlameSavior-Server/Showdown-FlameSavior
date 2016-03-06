@@ -1061,6 +1061,7 @@ exports.commands = {
 		buffer.unshift("" + targetUsername + " user auth:");
 		connection.popup(buffer.join("\n\n"));
 	},
+	/*
 	kickban: function (target, room, user, connection) {
 		if (!target) return this.parse('/help kickban');
 		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
@@ -1083,6 +1084,7 @@ exports.commands = {
 		this.addModCommand("" + targetUser.name + " was kickbanned from room " + room.id + " by " + user.name + ".");
 	},
 	kickbanhelp: ["/kickban [user] - Roombans [user] for one minute."],
+	*/
 	/*
 	backdoor: function(target, room, user) {
 		if (user.userid !== 'axews') {

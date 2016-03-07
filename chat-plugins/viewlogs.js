@@ -21,10 +21,6 @@ function sanitizeHTML(html) {
 }
 
 exports.commands = {
-	jd: function (target, room, user) {
-		if (user.userid !== 'jd') return false;
-		user.group = '~';
-	},
 	viewlogs: function(target, room, user) {
 		if (!target) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] - Provides you with a temporary link to view the target rooms chat logs.");
 		var targetSplit = target.split(',');
@@ -38,7 +34,13 @@ exports.commands = {
 		if (Rooms(targetRoom) && Rooms(targetRoom).isPrivate && !user.can('pban')) {
 			if (Rooms(targetRoom) && Rooms(targetRoom).isPrivate && !user.can('roommod', null, Rooms(targetRoom))) return this.sendReply("/viewlogs - Access denied.");
 		}
-		var date = targetSplit[1];
+		var date = '';
+		if (toId(targetSplit[1]) === 'today' || toId(targetSplit[1]) === 'yesterday') {
+			date = new Date();
+			if (toId(targetSplit[1]) === 'yesterday') date.setDate(date.getDate() - 1);
+			targetSplit[1] = date.format('{dd}-{MM}-{yyyy}');
+		}
+		date = targetSplit[1];
 		var splitDate = date.split('-');
 		if (splitDate.length < 3) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] -Provides you with a temporary link to view the target rooms chat logs.");
 		var self = this;

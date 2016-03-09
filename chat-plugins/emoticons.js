@@ -74,7 +74,7 @@ Gold.emoticons = {
 		var parsed_message = this.processEmoticons(message);
 		for (var i in this.chatEmotes) {
 			if (~message.indexOf(i)) {
-				if ((parsed_message.match(/<img/g) || []).length <= this.maxChatEmotes || (this.adminBypassMaxChatEmotes && user.group === '~')) {
+				if ((parsed_message.match(/<img/g) || []).length <= this.maxChatEmotes || (this.adminBypassMaxChatEmotes && user.can('hotpatch'))) {
 					match = true;
 				} else {
 					match = false;

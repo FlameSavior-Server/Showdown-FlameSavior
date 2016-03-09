@@ -293,7 +293,6 @@ exports.commands = {
 				default:
 					if (!this.canBroadcast()) return;
 					this.sendReplyBox(
-						"<table bgcolor=\"#ADD8E6\" width=\"100%\"><td>" +
 							"<center><b>Emoticon Commands:</b><br />" +
 							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/emoticons.js\">panpawn</a>)</font></i></center><br />" +
 							"/emote <code>add, [emote], [link]</code> - Adds a chat emoticon. Requires ~.<br />" +
@@ -305,8 +304,7 @@ exports.commands = {
 							"/emote <code>view</code> - Shows all of the current chat emoticons with the respected image.<br />" +
 							"/emote <code>object</code> - Shows the object of Gold.emoticons.chatEmotes. (Mostly for development usage)<br />" +
 							"/emote <code>max, [max emotes / message]</code> - Sets the max emoticon messages per chat message.  Requires ~.<br />" +
-							"/emote <code>help</code> - Shows this help command.<br />" +
-						"</td></table>"
+							"/emote <code>help</code> - Shows this help command.<br />"
 					);
 			}
 		} catch (e) {

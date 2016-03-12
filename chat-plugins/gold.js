@@ -584,19 +584,34 @@ exports.commands = {
 	k: 'kick',
 	kick: function(target, room, user) {
 		if (!this.can('lock')) return false;
-		if (!target) return this.sendReply('/help kick');
+		if (Gold.kick === undefined) Gold.kick = true;
+		if (!target) return this.parse('/help kick');
 		if (!this.canTalk()) return false;
+		if (toId(target) === 'disable') {
+			if (!this.can('hotpatch')) return false;
+			if (!Gold.kick) return this.errorReply("Kick is already disabled.");
+			Gold.kick = false;
+			return this.privateModCommand("(" + user.name + " has disabled kick.)");
+		}
+		if (toId(target) === 'enable') {
+			if (!this.can('hotpatch')) return false;
+			if (Gold.kick) return this.errorReply("Kick is already enabled.");
+			Gold.kick = true;
+			return this.privateModCommand("(" + user.name + " has enabled kick.)");
+		}
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser || !targetUser.connected) {
 			return this.sendReply('User ' + this.targetUsername + ' not found.');
 		}
 		if (!this.can('lock', targetUser, room)) return false;
+		if (!Gold.kick) return this.errorReply("Kick is currently disabled.");
 		this.addModCommand(targetUser.name + ' was kicked from the room by ' + user.name + '.');
 		targetUser.popup('You were kicked from ' + room.id + ' by ' + user.name + '.');
 		targetUser.leaveRoom(room.id);
 	},
-	kickhelp: ["Usage: /kick [user] - kicks a user from the room"],
+	kickhelp: ["Usage: /kick [user] - kicks a user from the room",
+				"/kick [enable/disable] - enables or disables kick. Requires ~."],
 	flogout: 'forcelogout',
 	forcelogout: function(target, room, user) {
 		if (!user.can('hotpatch')) return;

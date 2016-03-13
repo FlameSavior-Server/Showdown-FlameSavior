@@ -288,7 +288,7 @@ exports.commands = {
 				price = 1000;
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
-				if (!parts[4]) return this.errorReply("Usage: /buy icon, [32x32 icon image]");
+				if (parts[1].length < 3) return this.errorReply("Usage: /buy icon, [32x32 icon image]");
 				var iconFilepaths = ['.png', '.jpg', '.gif'];
 				if (!~iconFilepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a custom userlist icon must be a PNG, JPG, or GIF.");
 				processPurchase(price, parts[0], 'Image: ' + parts[1]);

@@ -79,7 +79,7 @@ exports.commands = {
                 if (lottery.gameActive) return this.errorReply("There is a game of Lottery already currently running.");
                 if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
                 if (!parts[1]) return this.errorReply("Usage: /lottery create, [ticket cost]");
-                lottery.maxTicketsPerUser = 25; //default max tickets per user
+                lottery.maxTicketsPerUser = 10; //default max tickets per user
                 lottery.maxTicketPrice = 20;
                 if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
                 if (parts[1] > lottery.maxTicketPrice) return this.errorReply("Lottery tickets cannot cost more than " + lottery.maxTicketPrice + " bucks.");

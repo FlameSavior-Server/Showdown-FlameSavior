@@ -63,7 +63,7 @@ exports.commands = {
 		}
 
 		this.sendReply("|raw|You have given <b><font color=" + Gold.hashColor(Tools.escapeHTML(target[0])) + ">" + Tools.escapeHTML(target[0]) + "</font></b> an icon.");
-		Rooms('staff').add('|raw|<b><font color="' + Gold.hashColor(Tools.escapeHTML(target[0])) + '">' + Tools.escapeHTML(target[0]) + ' has received an icon from ' + Tools.escapeHTML(user.name) + '.').update();
+		Rooms('staff').add('|raw|<b><font color="' + Gold.hashColor(Tools.escapeHTML(target[0])) + '">' + Tools.escapeHTML(target[0]) + '</font> has received an icon from ' + Tools.escapeHTML(user.name) + '.</b>').update();
 		this.privateModCommand("(" + target[0] + " has recieved icon: '" + target[1] + "' from " + user.name + ".)");
 		icons[toId(target[0])] = target[1];
 		updateIcons();

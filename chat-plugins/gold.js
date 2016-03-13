@@ -679,7 +679,7 @@ exports.commands = {
 					"<u>Special Thanks:</u><br />" +
 					"- Current staff members<br />" +
 					"- Our regular users<br />" +
-					"- PixelatedPaw (One of the origional administrators)";
+					"- PixelatedPaw (One of the original administrators)";
 		user.popup(popup);
 	},
 	regdate: function(target, room, user, connection) {

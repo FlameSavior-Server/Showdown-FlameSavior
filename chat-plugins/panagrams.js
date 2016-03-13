@@ -2,7 +2,7 @@
  * Created by SilverTactic (Siilver) and panpawn
  * This is a plugin that uses the anagrams 
  * format that is dedicated to Pokemon
- * names. Winners recieve one buck a peice.
+ * names. Winners recieve 0.25 bucks a peice.
  */
 if (!Gold.pGames) Gold.pGames = {};
 var pGames = Gold.pGames;
@@ -60,8 +60,8 @@ var Panagram = (function () {
 	        return '<font color="' + Gold.hashColor(name) + '">' + Tools.escapeHTML(name) + '</font>';
 	    }
 		if (guess.species === this.answer.species) {
-			this.room.add('|html|<b>' + nameColor(user.name) + '</b> guessed <b>' + guess.species + '</b>, which was the correct answer! This user has also won 1 buck!');
-			economy.writeMoney('money', user.userid, +1);
+			this.room.add('|html|<b>' + nameColor(user.name) + '</b> guessed <b>' + guess.species + '</b>, which was the correct answer! This user has also won 0.25 bucks!');
+			economy.writeMoney('money', user.userid, +0.25);
 			this.end();
 		} else {
 			this.room.add('|html|<b>' + nameColor(user.name) + '</b> guessed <b>' + guess.species + '</b>, but was not the correct answer...');

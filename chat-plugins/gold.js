@@ -658,6 +658,30 @@ exports.commands = {
 		if (!this.can('pban')) return false;
 		Gold.pmAll(target);
 	},
+	credits: function (target, room, user) {
+		function name (name, bold) {
+			if (bold) {
+				return "<b><font color=" + Gold.hashColor(name) + ">" + Tools.escapeHTML(name) + "</font></b>";
+			} else {
+				return "<font color=" + Gold.hashColor(name) + ">" + Tools.escapeHTML(name) + "</font>";
+			}
+		}
+		var popup = "|html|" + "<font size=5>Gold Server Credits</font><br />" +
+					"<u>Owners:</u><br />" +
+					"- " + name('panpawn', true) + " (Founder, Sysadmin, Development)<br />" +
+					"- " + name('pitcher', true) + " (Lead policy, Sysadmin)<br />" +
+					"<br />" +
+					"<u>Development:</u><br />" +
+					"- " + name('panpawn', true) + " (Owner of GitHub repository)<br />" +
+					"- " + name('jd', true) + " (Collaborator)<br />" +
+					"- " + name('Silveee', true) + " (Contributor)<br />" +
+					"<br />" +
+					"<u>Special Thanks:</u><br />" +
+					"- Current staff members<br />" +
+					"- Our regular users<br />" +
+					"- PixelatedPaw (One of the origional administrators)";
+		user.popup(popup);
+	},
 	regdate: function(target, room, user, connection) {
 		var targetid = toId(target);
 		var self = this;

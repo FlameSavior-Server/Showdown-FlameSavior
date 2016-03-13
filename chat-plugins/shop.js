@@ -288,22 +288,12 @@ exports.commands = {
 				price = 1000;
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
-				if (!parts[4]) return this.errorReply("Usage: /buy icon, [32x32 icon image], [room1], [room2], [room3]");
+				if (!parts[4]) return this.errorReply("Usage: /buy icon, [32x32 icon image]");
 				var iconFilepaths = ['.png', '.jpg', '.gif'];
 				if (!~iconFilepaths.indexOf(parts[1].substr(-4))) return this.errorReply("Your image for a custom userlist icon must be a PNG, JPG, or GIF.");
-				var room1 = (Rooms(toId(parts[2])) ? toId(parts[2]) : false);
-				var room2 = (Rooms(toId(parts[3])) ? toId(parts[3]) : false);
-				var room3 = (Rooms(toId(parts[4])) ? toId(parts[4]) : false);
-				if (!room1 || !room2 || !room3) return this.errorReply("Sorry, at least one of the rooms you requested to have the icon in does not exist.  Please check spelling and try again.");
-				processPurchase(price, parts[0], 'Image: ' + parts[1] + ' Rooms: ' + room1 + ', ' + room2 + ', ' + room3);
-				alertStaff(nameColor(user.name) + ' has purched a custom userlist icon. (See staff room for CSS)', true);
-				Rooms.get('staff').add('|raw|' +
-					'<div style="border-style: solid;">' +
-					'#' + room1 + '-userlist-user-' + user.userid + ', #' + room2 + '-userlist-user-' + user.userid + ', #' + room3 + '-userlist-user-' + user.userid + ' {<br />' +
-					'&nbsp;&nbsp;&nbsp;&nbsp;background:url("' + parts[1].replace(' ', '') + '") no-repeat right<br />' +
-					'}</div'
-				);
-				Rooms.get('staff').update();
+				processPurchase(price, parts[0], 'Image: ' + parts[1]);
+				alertStaff(nameColor(user.name) + ' has purchased a custom userlist icon. Image: ' + link(parts[1].replace(' ', ''), 'desired icon'), true);
+				alertStaff('<center><button name="send" value="/icon ' + user.userid + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom userlist icon.">Click2Set</button></center>', false);
 				this.sendReply("You have purchased a custom userlist icon.  The staff have been notified and this will be added ASAP.");
 				break;
 

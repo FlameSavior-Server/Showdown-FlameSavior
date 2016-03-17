@@ -254,6 +254,7 @@ exports.commands = {
 							if (!parts[2]) return this.errorReply("Usage: /emote modchat, set, [rank] - Sets modchat for emoticons in the respected room.");
 							if (!Config.groups[parts[2]] && toId(parts[2]) !== 'autoconfirmed' && toId(parts[2]) !== 'ac' || parts[2] === '★') return this.errorReply("ERROR: " + parts[2] + " is not a defined group in Config or is not yet optimized for moderated emoticon chat at this time.");
 							if (room.emoteModChat === parts[2]) return this.errorReply("Emoticon modchat is already enabled in this room for the rank you're trying to set it to.");
+							if (toId(parts[2]) === 'ac') parts[2] === 'autoconfirmed';
 							room.emoteModChat = parts[2];
 							if (room.type === 'chat') room.chatRoomData.emoteModChat = room.emoteModChat;
 							Rooms.global.writeChatRoomData();

@@ -34,9 +34,9 @@ exports.commands = {
 		switch (parts[0]) {
 			case 'add':
 				if (!this.can('pban')) return false;
-				if (!parts[2]) return this.sendReply("Usage: /trainercard add, [command name], [html]");
+				if (!parts[2]) return this.errorReply("Usage: /trainercard add, [command name], [html]");
 				var commandName = toId(parts[1]);
-				if (CommandParser.commands[commandName]) return this.sendReply("/trainercards - The command \"" + commandName + "\" already exists.");
+				if (CommandParser.commands[commandName]) return this.errorReply("/trainercards - The command \"" + commandName + "\" already exists.");
 				try {
 					var html = parts.splice(2, parts.length).join(',');
 					trainerCards[commandName] = new Function('target', 'room', 'user', "if (!room.disableTrainerCards) if (!this.canBroadcast()) return; this.sendReplyBox('" + html.replace(/'/g, "\\'") + "');");
@@ -54,9 +54,9 @@ exports.commands = {
 			case 'delete':
 			case 'remove':
 				if (!this.can('pban')) return false;
-				if (!parts[1]) return this.sendReply("Usage: /trainercard remove, [command name]");
+				if (!parts[1]) return this.errorReply("Usage: /trainercard remove, [command name]");
 				var commandName = toId(parts[1]);
-				if (!trainerCards[commandName]) return this.sendReply("/trainercards - The command \"" + commandName + "\" does not exist, or was added manually.");
+				if (!trainerCards[commandName]) return this.errorReply("/trainercards - The command \"" + commandName + "\" does not exist, or was added manually.");
 				delete CommandParser.commands[commandName];
 				delete trainerCards[commandName];
 				saveTrainerCards();
@@ -79,7 +79,7 @@ exports.commands = {
 			case 'off':
 				if (!this.can('roommod', null, room)) return false;
 				if (room.battle) return this.errorReply("This does not work in battle rooms.");
-				if (room.disableTrainerCards) return this.sendReply("Broadcasting trainer cards is already disabled in this room.");
+				if (room.disableTrainerCards) return this.errorReply("Broadcasting trainer cards is already disabled in this room.");
 				room.disableTrainerCards = true;
 				room.chatRoomData.disableTrainerCards = true;
 				Rooms.global.writeChatRoomData();
@@ -89,7 +89,7 @@ exports.commands = {
 			case 'on':
 				if (!this.can('roommod', null, room)) return false;
 				if (room.battle) return this.errorReply("This does not work in battle rooms.");
-				if (!room.disableTrainerCards) return this.sendReply("Broadcasing trainer cards is already enabled in this room.");
+				if (!room.disableTrainerCards) return this.errorReply("Broadcasing trainer cards is already enabled in this room.");
 				delete room.disableTrainerCards;
 				delete room.chatRoomData.disableTrainerCards;
 				Rooms.global.writeChatRoomData();

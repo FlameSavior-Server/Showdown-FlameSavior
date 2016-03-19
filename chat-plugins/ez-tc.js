@@ -78,6 +78,7 @@ exports.commands = {
 
 			case 'off':
 				if (!this.can('roommod', null, room)) return false;
+				if (room.battle) return this.errorReply("This does not work in battle rooms.");
 				if (room.disableTrainerCards) return this.sendReply("Broadcasting trainer cards is already disabled in this room.");
 				room.disableTrainerCards = true;
 				room.chatRoomData.disableTrainerCards = true;
@@ -87,6 +88,7 @@ exports.commands = {
 
 			case 'on':
 				if (!this.can('roommod', null, room)) return false;
+				if (room.battle) return this.errorReply("This does not work in battle rooms.");
 				if (!room.disableTrainerCards) return this.sendReply("Broadcasing trainer cards is already enabled in this room.");
 				delete room.disableTrainerCards;
 				delete room.chatRoomData.disableTrainerCards;

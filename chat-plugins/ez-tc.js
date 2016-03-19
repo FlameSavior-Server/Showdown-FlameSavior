@@ -43,7 +43,7 @@ exports.commands = {
 					saveTrainerCards();
 					this.sendReply("The trainer card \"" + commandName + "\" has been added.");
 					this.logModCommand(user.name + " added the trainer card " + commandName);
-					Rooms.get('staff').add(user.name + " added the trainer card " + commandName);
+					Rooms.get('staff').add(user.name + " added the trainer card " + commandName).update();
 				} catch (e) {
 					this.errorReply("Something went wrong when trying to add this command.  Did you use a backwards slash mark?  If so, try it again without using this.");
 				}
@@ -63,7 +63,7 @@ exports.commands = {
 				this.sendReply("The trainer card \"" + commandName + "\" has been removed.");
 				this.logModCommand(user.name + " removed the trainer card " + commandName);
 				try {
-					Rooms.rooms.staff.add(user.name + " removed the trainer card " + commandName);
+					Rooms('staff').add(user.name + " removed the trainer card " + commandName).update();
 				} catch (e) {};
 				break;
 

@@ -269,7 +269,7 @@ exports.commands = {
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
 			if (room.poll.timeout) clearTimeout(room.poll.timeout);
-
+	
 			room.poll.end();
 			delete room.poll;
 			return this.privateModCommand("(The poll was ended by " + user.name + ".)");
@@ -306,6 +306,7 @@ exports.commands = {
 	votes: function(target, room, user) {
 		if (!room.poll) return this.errorReply("There is no poll running in this room.");
 		if (!this.canBroadcast()) return;
+		room.poll.update();
 		var votes = room.poll.totalVotes;
 		var lbl = (votes > 1 ? ' VOTES' : ' VOTE');
 		return this.sendReplyBox("TOTAL VOTES: " + votes + lbl);
@@ -318,6 +319,7 @@ exports.commands = {
 	pollremind: function(target, room, user) {
 		if (!room.poll) return this.errorReply("There is no poll running in this room.");
 		if (!this.canBroadcast()) return;
+		room.poll.update();
 		if (this.broadcasting) {
 			room.update();
 			room.poll.display(user, this.broadcasting);

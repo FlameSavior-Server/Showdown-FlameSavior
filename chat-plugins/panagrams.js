@@ -100,7 +100,7 @@ exports.commands = {
 	panagrams: 'panagram',
 	panagram: function (target, room, user, connection, cmd) {
 		if (pGames[room.id]) return this.errorReply("There is currently a game of panagram going on in this room.");
-		if (!this.can('ban', null, room)) return this.errorReply("You must be ranked @ or higher to start a game of panagram in this room.");
+		if (!this.can('declare', null, room)) return this.errorReply("You must be ranked # or higher to start a game of panagram in this room.");
 		if (room.id !== 'gamechamber') return this.sendReply('|html|You can only start a game of Panagram in the <button name = "send" value = "/join gamechamber">Game Chamber</button>');
 		if (!target || isNaN(target)) return this.errorReply("Usage: /panagram [number of sessions]");
 		if (target < 150) return this.errorReply("The minimum number of sessions you can have at a time is 150.");
@@ -140,7 +140,7 @@ exports.commands = {
 	endp: 'panagramend',
 	panagramend: function (target, room, user, connection, cmd) {
 		if (!pGames[room.id]) return this.errorReply("There is no game of panagram going on in this room.");
-		if (!this.can('broadcast', null, room)) return this.sendReply("You must be ranked + or higher to end a game of panagram in this room.");
+		if (!this.can('ban', null, room)) return this.sendReply("You must be ranked @ or higher to end a game of panagram in this room.");
 
 		var skipCmd = ((cmd === 'panagramskip' || cmd === 'pskip') && pGames[room.id].sessions > 1);
 		if (skipCmd) room.add('|html|The current session of panagram has been ended by ' + user.name + '. The answer was <b>' + pGames[room.id].answer.species + '</b>.');

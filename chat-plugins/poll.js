@@ -7,9 +7,10 @@
 
 const permission = 'broadcast';
 const blackbutton = 'padding:2px; background-color:#000; border:1px solid #666; color:white';
+const moment = require('moment');
 
 class Poll {
-	constructor(room, question, options) {
+	constructor(room, question, options, user) {
 		if (room.pollNumber) {
 			room.pollNumber++;
 		} else {
@@ -22,6 +23,8 @@ class Poll {
 		this.totalVotes = 0;
 		this.timeout = null;
 		this.timeoutMins = 0;
+		this.startTime = Date.now();
+		this.startedUser = '<font color=' + Gold.hashColor(user.name) + '>' + Tools.escapeHTML(user.name) + '</font>';
 
 		this.options = new Map();
 		for (let i = 0; i < options.length; i++) {
@@ -72,7 +75,7 @@ class Poll {
 
 	generateResults(ended, option) {
 		let icon = '<span style="border:1px solid #' + (ended ? '777;color:#555' : '6A6;color:#484') + ';border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> ' + (ended ? "Poll ended" : "Poll") + '</span>';
-		let totalVotes = '<p align="left">[Total Votes: ' + this.totalVotes + ']</p>';
+		let totalVotes = '<p align="left">[Total Votes: ' + this.totalVotes + '] <i>(Started by ' + this.startedUser + ' ' + moment(this.startTime).fromNow() + '.)</i></p>';
 		let output = '<div class="infobox"><p style="margin: 2px 0 5px 0">' + icon + ' <strong style="font-size:11pt">' + Tools.escapeHTML(this.question) + '</strong></p>' + totalVotes;
 		let iter = this.options.entries();
 
@@ -193,7 +196,7 @@ exports.commands = {
 				return this.errorReply("Too many options for poll (maximum is 12).");
 			}
 
-			room.poll = new Poll(room, params[0], options);
+			room.poll = new Poll(room, params[0], options, user);
 			room.poll.display();
 
 			this.logEntry("" + user.name + " used " + message);

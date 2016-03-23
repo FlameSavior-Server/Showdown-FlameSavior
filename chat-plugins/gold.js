@@ -227,14 +227,14 @@ exports.commands = {
 	pb: 'permaban',
 	pban: 'permaban',
 	permban: 'permaban',
-	permaban: function(target, room, user) {
+	permaban: function(target, room, user, connection) {
 		if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
-		if (!this.can('pban')) return false;
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) {
 			return this.sendReply('User ' + this.targetUsername + ' not found.');
 		}
+		if (!this.can('pban', targetUser)) return false;
 		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
 			var problem = " but was already banned";
 			return this.privateModCommand('(' + targetUser.name + " would be banned by " + user.name + problem + '.) (' + targetUser.latestIp + ')');

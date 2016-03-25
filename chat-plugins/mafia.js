@@ -5,8 +5,6 @@
 
 let MafiaData = require('./mafia-data.js');
 
-const permission = 'ban';
-
 const deadImage = '<img width="75" height="75" src="//play.pokemonshowdown.com/fx/mafia-dead.png" />';
 const meetingMsg = {town: 'The town has lynched a suspect!', mafia: 'The mafia strikes again!'};
 
@@ -211,10 +209,11 @@ class Mafia extends Rooms.RoomGame {
 		}
 
 		this.roleString = this.roles.reduce((prev, cur, index, array) => {
+			let roleName = MafiaData.MafiaClasses[cur].pregameName || MafiaData.MafiaClasses[cur].name;
 			if (index === array.length - 1) {
-				return prev + MafiaData.MafiaClasses[cur].name;
+				return prev + roleName;
 			} else {
-				return prev + MafiaData.MafiaClasses[cur].name + ', ';
+				return prev + roleName + ', ';
 			}
 		}, '');
 
@@ -673,7 +672,7 @@ exports.commands = {
 	mafia: {
 		create: 'new',
 		new: function (target, room, user) {
-			if (!this.can(permission, null, room)) return false;
+			if (!this.can('game', null, room)) return false;
 			if (!room.mafiaEnabled) return this.errorReply("Mafia is disabled for this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 			if (room.game) return this.errorReply("There is already a game of " + room.game.title + " in progress in this room.");
@@ -720,7 +719,8 @@ exports.commands = {
 			} else {
 				let params = target.split(',').map(param => param.toLowerCase().trim());
 
-				// TODO: make a generator for a default setup.
+				if (params[0] === 'dethy') params = ['goon', 'cop', 'insanecop', 'paranoidcop', 'naivecop'];
+
 				if (!params) return this.errorReply("No roles entered.");
 
 				for (let i = 0; i < params.length; i++) {
@@ -748,7 +748,7 @@ exports.commands = {
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 
 			if (target.toLowerCase() === 'on' || target.toLowerCase() === 'enable') {
-				if (!this.can(permission, null, room)) return false;
+				if (!this.can('game', null, room)) return false;
 				if (room.game.gamestate !== 'pregame') return this.errorReply("The game has started already.");
 
 				if (room.game.allowWills) {
@@ -758,7 +758,7 @@ exports.commands = {
 					room.game.updatePregame();
 				}
 			} else if (target.toLowerCase() === 'off' || target.toLowerCase() === 'disable') {
-				if (!this.can(permission, null, room)) return false;
+				if (!this.can('game', null, room)) return false;
 				if (room.game.gamestate !== 'pregame') return this.errorReply("The game has started already.");
 
 				if (!room.game.allowWills) {
@@ -792,7 +792,7 @@ exports.commands = {
 		anonvotes: function (target, room, user) {
 			if (!room.game || room.game.gameid !== 'mafia') return this.errorReply("There is no game of mafia running in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
-			if (!this.can(permission, null, room)) return false;
+			if (!this.can('game', null, room)) return false;
 			if (room.game.gamestate !== 'pregame') return this.errorReply("The game has started already.");
 
 			if (target === 'on' || target === 'enable') {
@@ -815,7 +815,7 @@ exports.commands = {
 		automodchat: function (target, room, user) {
 			if (!room.game || room.game.gameid !== 'mafia') return this.errorReply("There is no game of mafia running in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
-			if (!this.can(permission, null, room)) return false;
+			if (!this.can('game', null, room)) return false;
 			if (room.game.gamestate !== 'pregame') return this.errorReply("The game has started already.");
 
 			if (target === 'on' || target === 'enable') {
@@ -838,13 +838,13 @@ exports.commands = {
 		export: function (target, room, user) {
 			if (!room.game || room.game.gameid !== 'mafia') return this.errorReply("There is no game of mafia running in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
-			if (!this.can(permission, null, room)) return false;
+			if (!this.can('game', null, room)) return false;
 
 			return this.sendReply("/mafia new " + room.game.exportGame());
 		},
 
 		end: function (target, room, user) {
-			if (!this.can(permission, null, room)) return false;
+			if (!this.can('game', null, room)) return false;
 			if (!room.game || room.game.gameid !== 'mafia') return this.errorReply("There is no game of mafia running in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 

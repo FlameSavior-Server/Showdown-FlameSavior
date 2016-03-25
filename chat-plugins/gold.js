@@ -1369,24 +1369,22 @@ function writeMoney(filename, user, amount, callback) {
 }
 exports.writeMoney = writeMoney;
 
-Object.merge(Gold, {
-	hasBadge: function(user, badge) {
-		var data = fs.readFileSync('badges.txt', 'utf8');
-		var row = data.split('\n');
-		var badges = '';
-		for (var i = row.length; i > -1; i--) {
-			if (!row[i]) continue;
-			var split = row[i].split(':');
-			if (split[0] == toId(user)) {
-				if (split[1].indexOf(badge) > -1) {
-					return true;
-				} else {
-					return false;
-				}
+Gold.hasBadge = function(user, badge) {
+	var data = fs.readFileSync('badges.txt', 'utf8');
+	var row = data.split('\n');
+	var badges = '';
+	for (var i = row.length; i > -1; i--) {
+		if (!row[i]) continue;
+		var split = row[i].split(':');
+		if (split[0] == toId(user)) {
+			if (split[1].indexOf(badge) > -1) {
+				return true;
+			} else {
+				return false;
 			}
 		}
 	}
-});
+};
 
 function getAvatar(user) {
 	if (!user) return false;

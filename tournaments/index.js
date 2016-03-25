@@ -572,7 +572,7 @@ class Tournament {
 		this.purgeGhostUsers();
 		this.update();
 
-		from.prepBattle(this.format, 'tournament', from, result => this.finishChallenge(from, to, output, result));
+		from.prepBattle(this.format, 'tournament', from).then(result => this.finishChallenge(from, to, output, result));
 	}
 	finishChallenge(from, to, output, result) {
 		if (!result) {
@@ -623,7 +623,7 @@ class Tournament {
 		let challenge = this.pendingChallenges.get(user);
 		if (!challenge || !challenge.from) return;
 
-		user.prepBattle(this.format, 'tournament', user, result => this.finishAcceptChallenge(user, challenge, result));
+		user.prepBattle(this.format, 'tournament', user).then(result => this.finishAcceptChallenge(user, challenge, result));
 	}
 	finishAcceptChallenge(user, challenge, result) {
 		if (!result) return;
@@ -780,7 +780,7 @@ function createTournament(room, format, generator, playerCap, isRated, args, out
 	format = Tools.getFormat(format);
 	if (format.effectType !== 'Format' || !format.tournamentShow) {
 		output.errorReply(format.id + " is not a valid tournament format.");
-		output.errorReply("Valid formats: " + Object.values(Tools.data.Formats).filter(f => f.effectType === 'Format' && f.tournamentShow).map('name').join(", "));
+		output.errorReply("Valid formats: " + Object.values(Tools.data.Formats).filter(f => f.effectType === 'Format' && f.tournamentShow).map(format => format.name).join(", "));
 		return;
 	}
 	if (!TournamentGenerators[toId(generator)]) {
@@ -871,14 +871,21 @@ let commands = {
 				this.sendReply("Tournament set to " + generator.name + (playerCap ? " with a player cap of " + tournament.playerCap : "") + ".");
 			}
 		},
+		end: 'delete',
+		stop: 'delete',
+		delete: function (tournament, user) {
+			if (deleteTournament(tournament.room.id, this)) {
+				this.privateModCommand("(" + user.name + " forcibly ended a tournament.)");
+			}
+		},
+	},
+	moderation: {
 		begin: 'start',
 		start: function (tournament, user) {
 			if (tournament.startTournament(this)) {
 				this.sendModCommand("(" + user.name + " started the tournament.)");
 			}
 		},
-	},
-	moderation: {
 		dq: 'disqualify',
 		disqualify: function (tournament, user, params, cmd) {
 			if (params.length < 1) {
@@ -996,13 +1003,6 @@ let commands = {
 				return this.sendReply("Usage: " + cmd + " <allow|disallow>");
 			}
 		},
-		end: 'delete',
-		stop: 'delete',
-		delete: function (tournament, user) {
-			if (deleteTournament(tournament.room.id, this)) {
-				this.privateModCommand("(" + user.name + " forcibly ended a tournament.)");
-			}
-		},
 	},
 };
 
@@ -1048,6 +1048,36 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 			Rooms.global.writeChatRoomData();
 		}
 		return this.sendReply("Tournaments disabled.");
+	} else if (cmd === 'announce' || cmd === 'announcements') {
+		if (!this.can('tournamentsmanagement', null, room)) return;
+		if (Config.tourannouncements.indexOf(room.id) < 0) {
+			return this.sendReply("Tournaments in this room cannot be announced.");
+		}
+		if (params.length < 1) {
+			if (room.tourAnnouncements) {
+				return this.sendReply("Tournament announcements are enabled.");
+			} else {
+				return this.sendReply("Tournament announcements are disabled.");
+			}
+		}
+
+		let option = params[0].toLowerCase();
+		if (option === 'on' || option === 'enable') {
+			if (room.tourAnnouncements) return this.errorReply("Tournament announcements are already enabled.");
+			room.tourAnnouncements = true;
+			this.privateModCommand("(Tournament announcements were enabled by " + user.name + ")");
+		} else if (option === 'off' || option === 'disable') {
+			if (!room.tourAnnouncements) return this.errorReply("Tournament announcements are already disabled.");
+			room.tourAnnouncements = false;
+			this.privateModCommand("(Tournament announcements were disabled by " + user.name + ")");
+		} else {
+			return this.sendReply("Usage: " + cmd + " <on|off>");
+		}
+
+		if (room.chatRoomData) {
+			room.chatRoomData.tourAnnouncements = room.tourAnnouncements;
+			Rooms.global.writeChatRoomData();
+		}
 	} else if (cmd === 'create' || cmd === 'new') {
 		if (room.toursEnabled) {
 			if (!this.can('tournaments', null, room)) return;
@@ -1063,9 +1093,9 @@ CommandParser.commands.tournament = function (paramString, room, user) {
 		let tour = createTournament(room, params.shift(), params.shift(), params.shift(), Config.istournamentsrated, params, this);
 		if (tour) {
 			this.privateModCommand("(" + user.name + " created a tournament in " + tour.format + " format.)");
-			if (Config.tourannouncements && Config.tourannouncements.indexOf(room.id) >= 0) {
+			if (room.tourAnnouncements) {
 				let tourRoom = Rooms.search(Config.tourroom || 'tournaments');
-				if (tourRoom) tourRoom.addRaw('<div class="infobox"><a href="/' + room.id + '" class="ilink"><strong>' + Tools.escapeHTML(Tools.getFormat(tour.format).name) + '</strong> tournament created in <strong>' + Tools.escapeHTML(room.title) + '</strong>.</a></div>');
+				if (tourRoom && tourRoom !== room) tourRoom.addRaw('<div class="infobox"><a href="/' + room.id + '" class="ilink"><strong>' + Tools.escapeHTML(Tools.getFormat(tour.format).name) + '</strong> tournament created in <strong>' + Tools.escapeHTML(room.title) + '</strong>.</a></div>').update();
 			}
 		}
 	} else {
@@ -1119,6 +1149,7 @@ CommandParser.commands.tournamenthelp = function (target, room, user) {
 		"- modjoin &lt;allow|disallow>: Specifies whether players can modjoin their battles.<br />" +
 		"- getusers: Lists the users in the current tournament.<br />" +
 		"- on/off: Enables/disables allowing mods to start tournaments in the current room.<br />" +
+		"- announce/announcements &lt;on|off>: Enables/disables tournament announcements for the current room.<br />" +
 		"More detailed help can be found <a href=\"https://gist.github.com/sirDonovan/130324abcd06254cf501\">here</a>"
 	);
 };

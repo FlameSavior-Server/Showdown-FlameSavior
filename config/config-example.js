@@ -174,10 +174,9 @@ exports.customavatars = {
 	//'userid': 'customavatar.png'
 };
 
-// Tournament announcements
-// When tournaments are created in rooms listed below, they will be announced in
-// the server's main tournament room (either the specified tourroom or by default
-// the room 'tournaments')
+// tourroom - specify a room to receive tournament announcements (defaults to
+// the room 'tournaments').
+// tourannouncements - announcements are only allowed in these rooms
 exports.tourroom = '';
 exports.tourannouncements = [/* roomids */];
 
@@ -240,6 +239,9 @@ exports.replsocketmode = 0o600;
 //     - tournaments: creating tournaments (/tour new, settype etc.)
 //     - tournamentsmoderation: /tour dq, autodq, end etc.
 //     - tournamentsmanagement: enable/disable tournaments.
+//     - minigame: make minigames (hangman, polls, etc.).
+//     - game: make games.
+//     - gamemanagement: enable/disable games and minigames.
 exports.grouplist = [
 	{
 		symbol: '~',
@@ -268,6 +270,7 @@ exports.grouplist = [
 		disableladder: true,
 		globalonly: true,
 		tournamentsmanagement: true,
+		gamemanagement: true,
 	},
 	{
 		symbol: '#',
@@ -282,6 +285,7 @@ exports.grouplist = [
 		modchatall: true,
 		roomonly: true,
 		tournamentsmanagement: true,
+		gamemanagement: true,
 	},
 	{
 		symbol: '\u2605',
@@ -307,6 +311,7 @@ exports.grouplist = [
 		ip: true,
 		alts: '@u',
 		tournaments: true,
+		game: true,
 	},
 	{
 		symbol: '%',
@@ -328,6 +333,7 @@ exports.grouplist = [
 		tournamentsmoderation: true,
 		jeopardy: true,
 		joinbattle: true,
+		minigame: true,
 	},
 	{
 		symbol: '+',

@@ -2927,7 +2927,7 @@ var commands = exports.commands = {
 			if (!move.exists) {
 				return this.errorReply("Move '" + move.id + "' not found.");
 			}
-			problem = TeamValidator.checkLearnsetSync(format, move, template.species, lsetData);
+			problem = TeamValidator(format).checkLearnset(move, template.species, lsetData);
 			if (problem) break;
 		}
 		let buffer = "";
@@ -3133,7 +3133,8 @@ var commands = exports.commands = {
 		}
 
 		for (let i = 0; i < targets.length; i++) {
-			let move = targets[i].trim().capitalize();
+			let move = targets[i].trim();
+			move = move.charAt(0).toUpperCase() + move.slice(1).toLowerCase();
 			if (move === 'Table' || move === 'All') {
 				if (this.broadcasting) return this.sendReplyBox("The full table cannot be broadcast.");
 				dispTable = true;
@@ -3695,7 +3696,9 @@ var commands = exports.commands = {
 		if (!totalMatches) return this.sendReply("No " + (target ? "matched " : "") + "formats found.");
 		if (totalMatches === 1) {
 			let format = Tools.getFormat(Object.values(sections)[0].formats[0]);
-			if (!format.desc) return this.sendReplyBox("No description found for this " + (format.gameType || "singles").capitalize() + " " + format.section + " format.");
+			let formatType = (format.gameType || "singles");
+			formatType = formatType.charAt(0).toUpperCase() + formatType.slice(1).toLowerCase();
+			if (!format.desc) return this.sendReplyBox("No description found for this " + formatType + " " + format.section + " format.");
 			return this.sendReplyBox(format.desc.join("<br />"));
 		}
 
@@ -3786,9 +3789,12 @@ var commands = exports.commands = {
 		}
 		{
 			let i = 0;
-			for (let process of TeamValidator.ValidatorProcess.processes) {
+			for (let process of TeamValidator.PM.processes) {
 				buf += "<strong>" + process.process.pid + "</strong> - Validator " + (i++) + "<br />";
 			}
+		}
+		if (Tools.dexsearchProcess) {
+			buf += "<strong>" + Tools.dexsearchProcess.pid + "</strong> - Dexsearch<br />";
 		}
 		this.sendReplyBox(buf);
 	},
@@ -4198,7 +4204,8 @@ var commands = exports.commands = {
 		let options = target.split(',');
 		if (options.length < 2) return this.parse('/help pick');
 		if (!this.canBroadcast()) return false;
-		return this.sendReplyBox('<em>We randomly picked:</em> ' + Tools.escapeHTML(options.sample().trim()));
+		const pickedOption = options[Math.floor(Math.random() * options.length)];
+		return this.sendReplyBox('<em>We randomly picked:</em> ' + Tools.escapeHTML(pickedOption).trim());
 	},
 	pickrandomhelp: ["/pick [option], [option], ... - Randomly selects an item from a list containing 2 or more elements."],
 
@@ -4258,7 +4265,7 @@ var commands = exports.commands = {
 			if (message.charAt(0) === '!') this.broadcasting = true;
 		} else {
 			if (!this.can('declare', null, room)) return;
-			if (!this.canBroadcast('!htmlbox')) return;
+			if (!this.canBroadcast(false, '!htmlbox')) return;
 		}
 
 		this.sendReplyBox(target);

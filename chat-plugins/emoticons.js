@@ -224,7 +224,7 @@ exports.commands = {
 					while (len--) {
 						emoticons.push((Gold.emoticons.processEmoticons(name[(name.length - 1) - len]) + '&nbsp;' + name[(name.length - 1) - len]));
 					}
-					this.sendReplyBox("<div class=\"infobox-limited\" target=\"_blank\"><b><u>List of emoticons (" + Object.size(emotes) + "):</b></u> <br/><br/>" + emoticons.join(' ').toString() + "</div>");
+					this.sendReplyBox("<div class=\"infobox-limited\" target=\"_blank\"><b><u>List of emoticons (" + Object.keys(emotes).length + "):</b></u> <br/><br/>" + emoticons.join(' ').toString() + "</div>");
 					break;
 
 				case 'max':

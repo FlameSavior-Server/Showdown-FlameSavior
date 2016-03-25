@@ -58,6 +58,7 @@ const path = require('path');
 
 try {
 	require('sugar');
+	require.resolve('sugar');
 } catch (e) {
 	if (require.main !== module) throw new Error("Dependencies unmet");
 
@@ -138,7 +139,7 @@ if (Config.crashguard) {
 	process.on('uncaughtException', err => {
 		let crashMessage = require('./crashlogger.js')(err, 'The main process');
 		if (crashMessage !== 'lockdown') return;
-		let stack = ("" + err.stack).escapeHTML().split("\n").slice(0, 2).join("<br />");
+		let stack = Tools.escapeHTML(err.stack).split("\n").slice(0, 2).join("<br />");
 		if (Rooms.staff) {
 			Rooms.staff.addRaw('<div class="broadcast-red"><b>THE SERVER HAS CRASHED:</b> ' + stack + '<br />Please restart the server.</div>');
 			Rooms.staff.addRaw('<div class="broadcast-red">You will not be able to start new battles until the server restarts.</div>');
@@ -178,6 +179,7 @@ Tools.includeFormats();
 Rooms.global.formatListText = Rooms.global.getFormatListText();
 
 global.TeamValidator = require('./team-validator.js');
+TeamValidator.PM.spawn();
 
 // load ipbans at our leisure
 fs.readFile(path.resolve(__dirname, 'config/ipbans.txt'), (err, data) => {

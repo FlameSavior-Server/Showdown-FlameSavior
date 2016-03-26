@@ -583,7 +583,7 @@ let parse = exports.parse = function (message, room, user, connection, levelsDee
 		}
 	}
 
-	message = canTalk.call(context, user, room, connection, message);
+	message = context.canTalk(message);
 	if (!message) return false;
 
 	if (user.registered && global.Gold.tells) {

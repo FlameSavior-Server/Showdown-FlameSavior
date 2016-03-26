@@ -6,6 +6,7 @@
   "dependencies": {
     "geoip-ultralight": "^0.1.1",
     "sockjs": "0.3.15",
+    "sugar": "1.4.1"
   },
   "optionalDependencies": {
     "cloud-env": "0.1.1",

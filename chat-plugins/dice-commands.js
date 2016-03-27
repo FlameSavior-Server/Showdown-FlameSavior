@@ -1,7 +1,7 @@
 /* Dice commands chat-plugin
  * by jd
 */
-var tax = 0.10 // 10%
+var tax = 0.10; // 10%
 
 function handleWinnings (bet) {
 	return bet - Math.round(bet * tax);

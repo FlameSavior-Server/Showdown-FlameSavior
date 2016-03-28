@@ -1229,6 +1229,10 @@ exports.commands = {
     	}
     	request("http://api.dubtrack.fm/room/goldenrod-radio-tower", callback);
 	},
+	economy: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		return this.sendReplyBox("<b>Total bucks in economy:</b> " + Gold.totalBucks() + "<br /><b>The average user has:</b> " + Gold.averageBucks() + " bucks.");
+	},
 
 	/*
 	pr: 'pollremind',
@@ -1488,3 +1492,46 @@ Gold.pmUpperStaff = function(message, pmName, from) {
 		}
 	});
 };
+
+Gold.totalBucks = function() {
+	try {
+		var data = fs.readFileSync('config/money.csv', 'utf8');
+	} catch (e) {
+		return 0;
+	}
+	var rows = data.split("\n");
+	var total = 0;
+
+	for (var line in rows) {
+		if (rows[line].length < 1) continue;
+		var lineSplit = rows[line].split(',');
+		var number = Number(lineSplit[1]);
+		if (isNaN(number)) continue;
+		console.log('number: ' + number);
+		total += number;
+	}
+	return total;
+}
+
+Gold.averageBucks = function () {
+	var data = '';
+	try {
+		data = fs.readFileSync('config/money.csv', 'utf8');
+	} catch (e) {}
+
+	var lines = data.split('\n');
+	var users = 0;
+	var bucks = 0;
+
+	for (var row in lines) {
+		if (lines[row].length < 1) continue;
+		var lineSplit = lines[row].split(',');
+		if (!lineSplit[1]) continue;
+		var number = Number(lineSplit[1]);
+		if (isNaN(number) || number < 1) continue;
+		users += 1;
+		bucks += number;
+	}
+
+	return Math.round(bucks / users);
+}

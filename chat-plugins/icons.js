@@ -15,12 +15,12 @@ function updateIcons() {
 	fs.writeFileSync('config/icons.json', JSON.stringify(icons));
 
 	var newCss = '/* ICONS START */\n';
-	
+
 	for (var name in icons) {
 		newCss += generateCSS(name, icons[name]);
 	}
 	newCss += '/* ICONS END */\n';
-	
+
 	var file = fs.readFileSync('config/custom.css', 'utf8').split('\n');
 	if (~file.indexOf('/* ICONS START */')) file.splice(file.indexOf('/* ICONS START */'), (file.indexOf('/* ICONS END */') - file.indexOf('/* ICONS START */')) + 1);
 	fs.writeFileSync('config/custom.css', file.join('\n') + newCss);

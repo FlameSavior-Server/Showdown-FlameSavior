@@ -86,7 +86,7 @@ Gold.emoticons = {
 				origmsg = message;
 				message = Tools.escapeHTML(message);
 				message = this.processEmoticons(message);
-				user.sendTo(room, '|html|' + 
+				user.sendTo(room, '|html|' +
 					' <small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user.name) + '</strong><b>' + this.userColor(user.name, ":") + '</b> &nbsp;' + message
 				);
 				room.update();
@@ -277,7 +277,7 @@ exports.commands = {
 							break;
 						default:
 						case 'status':
-							var status = (room.emoteModChat === undefined || !room.emoteModChat ? false : room.emoteModChat); 
+							var status = (room.emoteModChat === undefined || !room.emoteModChat ? false : room.emoteModChat);
 							return this.sendReply("Emoticon moderated chat is currently set to: " + status);
 							break;
 					}

@@ -1,4 +1,4 @@
-/* Profile chat-plugin 
+/* Profile chat-plugin
  * by jd, modified by panpawn
  */
 var serverIp = '167.114.155.242';
@@ -14,9 +14,9 @@ exports.commands = {
 		if (toId(target).length > 19) return this.sendReply("Usernames may not be more than 19 characters long.");
 		if (toId(target).length < 1) return this.sendReply(target + " is not a valid username.");
 		if (!this.canBroadcast()) return;
-		
+
 		var targetUser = Users.get(target);
-		
+
 		if (!targetUser) {
 			var username = target;
 			var userid = toId(target);
@@ -31,7 +31,7 @@ exports.commands = {
 
     	if (Users.usergroups[userid]) {
 			var userGroup = Users.usergroups[userid].substr(0,1);
-			if (Config.groups[userGroup]) userGroup = Config.groups[userGroup].name; 
+			if (Config.groups[userGroup]) userGroup = Config.groups[userGroup].name;
 		} else {
 			var userGroup = 'Regular User';
 		}
@@ -133,7 +133,7 @@ exports.commands = {
 					seenOutput += " (" + days + " " + daysWord + " ago)";
 				}
 			}
-					
+
 			var profile = '';
 			profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
 			if (!getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name:</b></font> <strong class="username"><font color="' + Gold.hashColor(username) + '">' + Tools.escapeHTML(username) + '</font></strong><br />';

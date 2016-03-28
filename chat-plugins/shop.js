@@ -1,10 +1,10 @@
 /* Shop Commands Chat-Plugin
- * 
+ *
  * This is a chat-plugin for PS that
- * enables a server to have a form 
+ * enables a server to have a form
  * of economy in the shape of a shop.
- * COMMANDS: /shop, /buy, /transferbucks, /givebucks, 
- * /takebucks, /atm, /richestuser, /moneylog, /givesymbol, 
+ * COMMANDS: /shop, /buy, /transferbucks, /givebucks,
+ * /takebucks, /atm, /richestuser, /moneylog, /givesymbol,
  * /customsymbol, /resetsymbol
  * Credits: panpawn, chalenged, jd
  */
@@ -416,7 +416,7 @@ exports.commands = {
 		var output = '';
 		var count = 0;
 		var regex = new RegExp(target.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "gi");
- 
+
 		if (word) {
 			output += 'Displaying last 50 lines containing "' + target + '":\n';
 			for (var line in lines) {
@@ -496,7 +496,7 @@ exports.commands = {
 		user.updateIdentity();
 		user.canCustomSymbol = false;
 		user.hasCustomSymbol = true;
-		user.lastCustomSymbol = 
+		user.lastCustomSymbol =
 		return this.sendReply("Merry Christmas, and Happy Holidays! " + symbols);
 	},
 	*/

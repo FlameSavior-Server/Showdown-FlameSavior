@@ -1,5 +1,5 @@
 /*
- * Chat log viewer plugin by jd 
+ * Chat log viewer plugin by jd
  */
 var fs = require('fs');
 var sanitizeHtml = require('sanitize-html');
@@ -95,11 +95,11 @@ exports.commands = {
 					case 'tournament':
 						break;
 					case '':
-						if (lineSplit.slice(1).join('|').substr(0,1) === '(' && !user.can('warn')) break; 
+						if (lineSplit.slice(1).join('|').substr(0,1) === '(' && !user.can('warn')) break;
 						newFile.push('<div class="notice">' + Tools.escapeHTML(lineSplit.slice(1).join('|')) + '</div></b>');
 						break;
 					default:
-						if (lineSplit.join('|').substr(0,1) === '(' && !user.can('warn')) break; 
+						if (lineSplit.join('|').substr(0,1) === '(' && !user.can('warn')) break;
 						newFile.push('<div class="notice"><code>' + Tools.escapeHTML(lineSplit.join('|')) + '</code></div></b>');
 						break;
 				}

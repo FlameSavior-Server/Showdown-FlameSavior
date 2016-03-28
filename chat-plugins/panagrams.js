@@ -1,6 +1,6 @@
 /* Panagrams chat-plugin
  * Created by SilverTactic (Siilver) and panpawn
- * This is a plugin that uses the anagrams 
+ * This is a plugin that uses the anagrams
  * format that is dedicated to Pokemon
  * names. Winners recieve 0.25 bucks a peice.
  */

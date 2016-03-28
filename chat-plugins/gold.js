@@ -1208,6 +1208,27 @@ exports.commands = {
 		Rooms.rooms.room.add('|html|<font size="4"><b>New color guessed!</b></font><br><b>Guessed by:</b> ' + user.userid + '<br><b>Color:</b> ' + target + '');
 		this.sendReply('Thanks, your new color guess has been sent.  We\'ll review your color soon and get back to you. ("' + target + '")');
 	},
+	
+	music: 'dubtrack',
+	radio: 'dubtrack',
+	dubtrackfm: 'dubtrack',
+	dubtrack: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		
+		var nowPlaying = "";
+		var self = this;
+		
+    	function callback(error, response, body) {
+    		if (!error && response.statusCode == 200) {
+    			var data = JSON.parse(body);
+    			if (data['data']['currentSong']) nowPlaying = "<br /><b>Now Playing:</b> " + Tools.escapeHTML(data['data']['currentSong'].name);
+    		}
+    		self.sendReplyBox('Join our dubtrack.fm room <a href="https://www.dubtrack.fm/join/goldenrod-radio-tower">here!</a>' + nowPlaying);
+    		room.update();
+    	}
+    	request("http://api.dubtrack.fm/room/goldenrod-radio-tower", callback);
+	},
+	
 	/*
 	pr: 'pollremind',
 	pollremind: function(target, room, user) {

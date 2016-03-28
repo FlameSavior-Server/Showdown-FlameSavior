@@ -184,7 +184,7 @@ exports.commands = {
 		if (user.ignorePMs && user.ignorePMs !== targetUser.group && !targetUser.can('lock')) {
 			return this.errorReply("You are blocking private messages right now.");
 		}
-		
+
 
 		target = this.canTalk(target, null, targetUser);
 		if (!target) return false;
@@ -1318,7 +1318,7 @@ exports.commands = {
 
 	banlist: function (Target, room, user) {
 		if (!this.can('ban')) return false;
-		
+
 		Users.updateBans();
 
 		if (Object.keys(Users.bans).length < 1) return this.sendReply("The banlist is currently empty.");
@@ -1333,14 +1333,14 @@ exports.commands = {
 
 		let reply = '<div style="max-height: 200px; overflow-y: auto; overflow-x: hidden;">' +
 					'Current issued bans:<br /><br /><table border="1" cellspacing ="0" cellpadding="3">' +
-					'<tr><td>User:</td><td>IP:</td><td>Banned on:</td><td>Banned by:</td><td>Expires in:</td><td>Reason:</td></tr>';
+					'<tr><td><b>User:</b></td><td><b>IP:</b></td><td><b>Banned on:</b></td><td><b>Banned by:</b></td><td><b>Expires in:</b></td><td><b>Reason:</b></td></tr>';
 		for (let obj in Users.bans) {
 			if (~hiddenNames.indexOf(obj)) continue;
 
 			reply += "<tr><td>" + (Users.bans[obj].userid ? "<b><font color=" + Gold.hashColor(Users.bans[obj].userid) + ">" + Users.bans[obj].userid + "</font></b>" : "N/A") + "</td>";
 			reply += "<td>" + (~obj.indexOf('.') ? obj : "N/A") + "</td>";
 			reply += "<td>" + moment(Users.bans[obj].on).format("YYYY-MM-DD h:mmA ") + String(String(new Date(Users.bans[obj].on)).split("(")[1]).split(")")[0] + "</td>";
-			reply += "<td>" + (Users.bans[obj].by ? "<b><font color=" + Gold.hashColor(Users.bans[obj].by) + ">" + Tools.escapeHTML(Users.bans[obj].by) + "</font></b>" : "Unknown") + "</td>"; 
+			reply += "<td>" + (Users.bans[obj].by ? "<b><font color=" + Gold.hashColor(Users.bans[obj].by) + ">" + Tools.escapeHTML(Users.bans[obj].by) + "</font></b>" : "Unknown") + "</td>";
 			reply += "<td>" + (Users.bans[obj].expires ? "In " + moment(Users.bans[obj].expires).fromNow(true) : "Never") + "</td>";
 			reply += "<td>" + (Users.bans[obj].reason ? Tools.escapeHTML(Users.bans[obj].reason) : "Not given") + "</td>";
 			reply += "</tr>";
@@ -1365,7 +1365,7 @@ exports.commands = {
 		let durationNumber = Math.round(Number(duration.substr(0, duration.length - 1)));
 		targets.splice(0,2);
 		let reason = targets.join(',');
-	
+
 		if (!targetUser) return this.errorReply("User '" + targets[0] + "' not found.");
 
 		if (isNaN(durationNumber) || durationNumber < 1 || !~validLetters.indexOf(durationLetter)) return this.errorReply("Invalid ban duration.");
@@ -1397,7 +1397,7 @@ exports.commands = {
 			}
 		}
 
-		targetUser.popup("|modal|" + user.name + " has banned you." + (reason ? "\n\nReason: " + reason : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in " + 
+		targetUser.popup("|modal|" + user.name + " has banned you." + (reason ? "\n\nReason: " + reason : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in " +
 			durationNumber + " " + (durationNumber === 1 ? durations[durationLetter].substr(0, durations[durationLetter].length - 1) : durations[durationLetter]));
 
 		this.addModCommand("" + targetUser.name + " was banned by " + user.name + " for " +

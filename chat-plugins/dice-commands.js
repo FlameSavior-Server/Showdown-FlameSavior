@@ -1,6 +1,11 @@
 /* Dice commands chat-plugin
  * by jd
 */
+var tax = 0.10; // 10%
+
+function handleWinnings (bet) {
+	return bet - Math.round(bet * tax);
+}
 
 exports.commands = {
 	gambledicehelp: function(target, room, user) {
@@ -124,10 +129,10 @@ exports.commands = {
 						}
 						var betMoney = room.dice.bet;
 	 					if (firstNumber > secondNumber) {
-	 						output += '<b><font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font></b> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />'
+	 						output += '<b><font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font></b> has won <font color=#24678d><b>' + handleWinnings(betMoney) + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />'
 	 						output += 'Better luck next time, <font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + '</font>!';
-	 						economy.writeMoney('money', Users.get(firstName).userid, betMoney, function() {
-	 							economy.writeMoney('money', Users.get(secondName).userid,-betMoney,function() {
+	 						economy.writeMoney('money', Users.get(firstName).userid, handleWinnings(betMoney), function() {
+	 							economy.writeMoney('money', Users.get(secondName).userid, -betMoney,function() {
 	 								economy.readMoneyAsync(Users.get(firstName).userid, function(firstMoney){
 	 									economy.readMoneyAsync(Users.get(secondName).userid, function(secondMoney) {
 	 										//logDice(firstName + ' has won ' + betMoney + ' ' + ((betMoney === 1) ? " buck." : " bucks.") + ' from a dice game with ' + secondName + '. They now have ' + firstMoney);
@@ -143,10 +148,10 @@ exports.commands = {
 	 						delete room.dice.startTime;
 	 					}
 	 					if (secondNumber > firstNumber) {
-	 						output += '<b><font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + '</font></b> has won <font color=#24678d><b>' + betMoney + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />';
+	 						output += '<b><font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + '</font></b> has won <font color=#24678d><b>' + handleWinnings(betMoney) + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />';
 	 						output += 'Better luck next time <font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font>!';
-	 						economy.writeMoney('money', Users.get(secondName).userid, betMoney, function() {
-	 							economy.writeMoney('money', Users.get(firstName).userid,-betMoney,function() {
+	 						economy.writeMoney('money', Users.get(secondName).userid, handleWinnings(betMoney), function() {
+	 							economy.writeMoney('money', Users.get(firstName).userid, -betMoney,function() {
 	 								economy.readMoneyAsync(Users.get(firstName).userid, function(firstMoney){
 		 								economy.readMoneyAsync(Users.get(secondName).userid, function(secondMoney){
 	 										//logDice(secondName + ' has won ' + betMoney + ' ' + ((betMoney === 1) ? " buck." : " bucks.") + ' from a dice game with ' + firstName + '. They now have ' + secondMoney);

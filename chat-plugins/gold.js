@@ -1208,7 +1208,8 @@ exports.commands = {
 		Rooms.rooms.room.add('|html|<font size="4"><b>New color guessed!</b></font><br><b>Guessed by:</b> ' + user.userid + '<br><b>Color:</b> ' + target + '');
 		this.sendReply('Thanks, your new color guess has been sent.  We\'ll review your color soon and get back to you. ("' + target + '")');
 	},
-	
+
+	dub: 'dubtrack',
 	music: 'dubtrack',
 	radio: 'dubtrack',
 	dubtrackfm: 'dubtrack',

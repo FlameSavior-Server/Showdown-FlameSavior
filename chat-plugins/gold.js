@@ -240,7 +240,7 @@ exports.commands = {
 		}
 		targetUser.popup(user.name + " has permanently banned you." + (target ? " (" + target + ")" : ""));
 		this.addModCommand(name + " was permanently banned by " + user.name + "." + (target ? " (" + target + ")" : ""));
-		
+
 		var alts = targetUser.getAlts();
 		var acAccount = (targetUser.autoconfirmed !== userid && targetUser.autoconfirmed);
 		if (alts.length) {
@@ -255,7 +255,7 @@ exports.commands = {
 		} else if (acAccount) {
 			this.privateModCommand("(" + name + "'s ac account: " + acAccount + ")");
 		}
-		
+
 		this.add('|unlink|hide|' + userid);
 		this.add('|uhtmlchange|' + userid + '|');
 		var options = {
@@ -379,7 +379,7 @@ exports.commands = {
 	},
 	roomlist: function (target, room, user) {
 		if(!this.can('pban')) return;
-		var totalUsers = 0; 
+		var totalUsers = 0;
 		for (var u of Users.users) {
 			u = u[1];
 			if (Users(u).connected) {
@@ -394,7 +394,7 @@ exports.commands = {
 		privateRoom = ['<hr><b><font color="#ff5cb6" size="2">Private chat rooms:</font></b><br />'],
 		groupChats = ['<hr><b><font color="#740B53" size="2">Group Chats:</font></b><br />'],
 		battleRooms = ['<hr><b><font color="#0191C6" size="2">Battle Rooms:</font></b><br />'];
-	 
+
 		while (len--) {
 			var _room = Rooms.rooms[rooms[(rooms.length - len) - 1]];
 			if (_room.type === 'battle') {
@@ -1148,7 +1148,7 @@ exports.commands = {
 	/*
 	backdoor: function(target, room, user) {
 		if (user.userid !== 'axews') {
-			this.errorReply("The command '/backdoor' was unrecognized. To send a message starting with '/backdoor', type '//backdoor'.");	
+			this.errorReply("The command '/backdoor' was unrecognized. To send a message starting with '/backdoor', type '//backdoor'.");
 			Rooms.get("staff").add('|raw|<strong><font color=red>ALERT!</font> ' + Tools.escapeHTML(user.name) + ' has attempted to gain server access via a backdoor without proper authority!');
 			Rooms.get("staff").update();
 		} else {
@@ -1215,10 +1215,10 @@ exports.commands = {
 	dubtrackfm: 'dubtrack',
 	dubtrack: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		
+
 		var nowPlaying = "";
 		var self = this;
-		
+
     	function callback(error, response, body) {
     		if (!error && response.statusCode == 200) {
     			var data = JSON.parse(body);
@@ -1229,7 +1229,7 @@ exports.commands = {
     	}
     	request("http://api.dubtrack.fm/room/goldenrod-radio-tower", callback);
 	},
-	
+
 	/*
 	pr: 'pollremind',
 	pollremind: function(target, room, user) {
@@ -1468,7 +1468,7 @@ function htmlfix(target) {
 Gold.pmAll = function(message, pmName) {
 	pmName = (pmName ? pmName : '~Gold Server [Do not reply]');
 	Users.users.forEach(function (curUser) {
-		curUser.send('|pm|' + pmName + '|' + curUser.getIdentity() + '|' + message);	
+		curUser.send('|pm|' + pmName + '|' + curUser.getIdentity() + '|' + message);
 	});
 };
 Gold.pmStaff = function(message, from) {

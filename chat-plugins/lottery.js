@@ -48,8 +48,8 @@ exports.commands = {
                         });
                         if (Number(Object.keys(filteredPlayerArray).length) + Number(bought) > lottery.maxTicketsPerUser) return this.errorReply("You cannot get more than " + lottery.maxTicketsPerUser + " tickets for this game of lotto.");
                     }
-                    economy.writeMoney('money', toId(user.name), -bought*lottery.ticketPrice);
-                    lottery.pot = lottery.pot + (lottery.ticketPrice * bought * 2);
+                    economy.writeMoney('money', toId(user.name), -bought * lottery.ticketPrice);
+                    lottery.pot = Math.round(lottery.pot + (lottery.ticketPrice * bought * 1.5));
                     Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(user.name) + ">" + user.name + "</font></b> has bought " + bought + " lottery tickets.");
                     for (var x=bought; x>0; x--) {
                         lottery.players.push(toId(user.name));
@@ -65,7 +65,7 @@ exports.commands = {
                         if (filteredPlayerArray.length >= lottery.maxTicketsPerUser)  return this.errorReply("You cannot get more than " + lottery.maxTicketsPerUser + " tickets for this game of lotto.");
                     }
                     economy.writeMoney('money', toId(user.name), -lottery.ticketPrice);
-                    lottery.pot = lottery.pot + (lottery.ticketPrice * 2);
+                    lottery.pot = Math.round(lottery.pot + (lottery.ticketPrice * 1.5));
                     Rooms.get('gamechamber').add("|raw|<b><font color=" + Gold.hashColor(user.name) + ">" + user.name + "</font></b> has bought a lottery ticket.");
                     lottery.players.push(toId(user.name));
                     lottery.playerIPS.push(user.latestIp);
@@ -120,7 +120,7 @@ exports.commands = {
                     if (jackpot == 100) {
                         Rooms.get("gamechamber").add('|raw|<b><font size="7" color="green"><blink>JACKPOT!</blink></font></b>');
                         Rooms.get("gamechamber").add('|raw|<b><font size="4" color="' + Gold.hashColor(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + (lottery.pot * 2) + '</b> bucks!</font>');
-                        economy.writeMoney('money', toId(winner), lottery.pot*2);
+                        economy.writeMoney('money', toId(winner), lottery.pot * 2);
                         lottery = {};
                         saveLottery();
                     } else {

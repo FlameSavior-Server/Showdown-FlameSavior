@@ -182,7 +182,7 @@ global.TeamValidator = require('./team-validator.js');
 TeamValidator.PM.spawn();
 
 // load ipbans at our leisure
-fs.readFile(path.resolve(__dirname, 'config/ipbans.txt'), (err, data) => {
+/*fs.readFile(path.resolve(__dirname, 'config/ipbans.txt'), (err, data) => {
 	if (err) return;
 	data = ('' + data).split("\n");
 	let rangebans = [];
@@ -196,7 +196,7 @@ fs.readFile(path.resolve(__dirname, 'config/ipbans.txt'), (err, data) => {
 		}
 	}
 	Users.checkRangeBanned = Cidr.checker(rangebans);
-});
+});*/
 
 
 // uptime recording

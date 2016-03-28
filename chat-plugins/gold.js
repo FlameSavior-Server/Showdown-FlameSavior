@@ -8,9 +8,6 @@ var regdateCache = {};
 if (typeof Gold === 'undefined') global.Gold = {};
 if (typeof Gold.tells === 'undefined') global.Gold.tells = {};
 var crypto = require('crypto');
-var ipbans = fs.createWriteStream('config/ipbans.txt', {
-	'flags': 'a'
-});
 var badges = fs.createWriteStream('badges.txt', {
 	'flags': 'a'
 });
@@ -231,19 +228,43 @@ exports.commands = {
 		if (!target) return this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts. Requires: & ~');
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User ' + this.targetUsername + ' not found.');
-		}
+		if (!targetUser) return this.sendReply('User ' + this.targetUsername + ' not found.');
 		if (!this.can('pban', targetUser)) return false;
+
+		var name = targetUser.getLastName();
+		var userid = targetUser.getLastId();
+
 		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
 			var problem = " but was already banned";
-			return this.privateModCommand('(' + targetUser.name + " would be banned by " + user.name + problem + '.) (' + targetUser.latestIp + ')');
+			return this.privateModCommand('(' + name + " would be banned by " + user.name + problem + '.) (' + targetUser.latestIp + ')');
 		}
-		targetUser.popup(user.name + " has permanently banned you.");
-		this.addModCommand(targetUser.name + " was permanently banned by " + user.name + ".");
-		this.add('|unlink|hide|' + this.getLastIdOf(targetUser));
-		targetUser.ban();
-		ipbans.write('\n' + targetUser.latestIp);
+		targetUser.popup(user.name + " has permanently banned you." + (target ? " (" + target + ")" : ""));
+		this.addModCommand(name + " was permanently banned by " + user.name + "." + (target ? " (" + target + ")" : ""));
+		
+		var alts = targetUser.getAlts();
+		var acAccount = (targetUser.autoconfirmed !== userid && targetUser.autoconfirmed);
+		if (alts.length) {
+			var guests = alts.length;
+			alts = alts.filter(alt => alt.substr(0, 6) !== 'Guest ');
+			guests -= alts.length;
+			this.privateModCommand("(" + name + "'s " + (acAccount ? " ac account: " + acAccount + ", " : "") + "banned alts: " + alts.join(", ") + (guests ? " [" + guests + " guests]" : "") + ")");
+			for (var i = 0; i < alts.length; ++i) {
+				this.add('|unlink|hide|' + toId(alts[i]));
+				this.add('|uhtmlchange|' + toId(alts[i]) + '|');
+			}
+		} else if (acAccount) {
+			this.privateModCommand("(" + name + "'s ac account: " + acAccount + ")");
+		}
+		
+		this.add('|unlink|hide|' + userid);
+		this.add('|uhtmlchange|' + userid + '|');
+		var options = {
+			'type': 'pban',
+			'by': user.name,
+			'on': Date.now()
+		}
+		if (target) options.reason = target;
+		targetUser.ban(false, targetUser.userid, options);
 	},
 	clearall: 'clearroom',
 	clearroom: function (target, room, user) {

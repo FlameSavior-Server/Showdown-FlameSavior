@@ -17,6 +17,7 @@
 
 const crypto = require('crypto');
 const fs = require('fs');
+const moment = require('moment');
 
 const MAX_REASON_LENGTH = 300;
 const MUTE_LENGTH = 7 * 60 * 1000;
@@ -1315,26 +1316,77 @@ exports.commands = {
 	},
 	unlockhelp: ["/unlock [username] - Unlocks the user. Requires: % @ & ~"],
 
-	b: 'ban',
-	ban: function (target, room, user, connection, cmd) {
-		if (!target) return this.parse('/help ban');
+	banlist: function (Target, room, user) {
+		if (!this.can('ban')) return false;
+		
+		Users.updateBans();
 
-		target = this.splitTarget(target);
-		let targetUser = this.targetUser;
-		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' not found.");
-		if (target.length > MAX_REASON_LENGTH) {
+		if (Object.keys(Users.bans).length < 1) return this.sendReply("The banlist is currently empty.");
+
+		let hiddenNames = [];
+
+		for (let ip in Users.bans) {
+			if (!~ip.indexOf('.')) continue;
+			if (!Users.bans[ip].userid) continue;
+			hiddenNames.push(Users.bans[ip].userid);
+		}
+
+		let reply = '<div style="max-height: 200px; overflow-y: auto; overflow-x: hidden;">' +
+					'Current issued bans:<br /><br /><table border="1" cellspacing ="0" cellpadding="3">' +
+					'<tr><td>User:</td><td>IP:</td><td>Banned on:</td><td>Banned by:</td><td>Expires in:</td><td>Reason:</td></tr>';
+		for (let obj in Users.bans) {
+			if (~hiddenNames.indexOf(obj)) continue;
+
+			reply += "<tr><td>" + (Users.bans[obj].userid ? "<b><font color=" + Gold.hashColor(Users.bans[obj].userid) + ">" + Users.bans[obj].userid + "</font></b>" : "N/A") + "</td>";
+			reply += "<td>" + (~obj.indexOf('.') ? obj : "N/A") + "</td>";
+			reply += "<td>" + moment(Users.bans[obj].on).format("dddd, MMMM DD, YYYY h:mmA ") + String(String(new Date(Users.bans[obj].on)).split("(")[1]).split(")")[0] + "</td>";
+			reply += "<td>" + (Users.bans[obj].by ? "<b><font color=" + Gold.hashColor(Users.bans[obj].by) + ">" + Tools.escapeHTML(Users.bans[obj].by) + "</font></b>" : "Unknown") + "</td>"; 
+			reply += "<td>" + (Users.bans[obj].expires ? "In " + moment(Users.bans[obj].expires).fromNow(true) : "Never") + "</td>";
+			reply += "<td>" + (Users.bans[obj].reason ? Tools.escapeHTML(Users.bans[obj].reason) : "Not given") + "</td>";
+			reply += "</tr>";
+		}
+		return this.sendReplyBox(reply + "</table></div>");
+	},
+	banlisthelp: ["/banlist - Shows a list of users who are currently banned from the server."],
+
+	tb: 'timeban',
+	timeban: function (target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help timeban');
+
+		let targets = target.split(',');
+		for (let i in targets) targets[i] = targets[i].trim();
+
+		if (!targets[1]) return this.errorReply("Please specify a ban duration");
+
+		let validLetters = ['m', 'h', 'd'];
+		let durations = {'m': 'minutes', 'h': 'hours', 'd': 'days', 'w': 'weeks'};
+		let targetUser = Users.get(targets[0]);
+		let duration = targets[1].toLowerCase();
+		let durationLetter = duration.substr(-1)
+		let durationNumber = Math.round(Number(duration.substr(0, duration.length - 1)));
+		targets.splice(0,2);
+		let reason = targets.join(',');
+	
+		if (!targetUser) return this.errorReply("User '" + targets[0] + "' not found.");
+
+		if (isNaN(durationNumber) || durationNumber < 1 || !~validLetters.indexOf(durationLetter)) return this.errorReply("Invalid ban duration.");
+
+		if (reason.length > MAX_REASON_LENGTH) {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}
 		if (!this.can('ban', targetUser)) return false;
 
+		var name = targetUser.getLastName();
+		var userid = targetUser.getLastId();
+
 		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
 			let problem = " but was already banned";
-			return this.privateModCommand("(" + targetUser.name + " would be banned by " + user.name + problem + ".)");
+			return this.privateModCommand("(" + name + " would be banned by " + user.name + problem + ".)");
 		}
 
 		if (targetUser.confirmed) {
 			let from = targetUser.deconfirm();
-			Monitor.log("[CrisisMonitor] " + targetUser.name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
+			Monitor.log("[CrisisMonitor] " + name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
 		}
 
 		// Destroy personal rooms of the banned user.
@@ -1346,9 +1398,12 @@ exports.commands = {
 			}
 		}
 
-		targetUser.popup("|modal|" + user.name + " has banned you." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in a few days.");
+		targetUser.popup("|modal|" + user.name + " has banned you." + (reason ? "\n\nReason: " + reason : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in " + 
+			durationNumber + " " + (durationNumber === 1 ? durations[durationLetter].substr(0, durations[durationLetter].length - 1) : durations[durationLetter]));
 
-		this.addModCommand("" + targetUser.name + " was banned by " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
+		this.addModCommand("" + targetUser.name + " was banned by " + user.name + " for " +
+			durationNumber + " " + (durationNumber === 1 ? durations[durationLetter].substr(0, durations[durationLetter].length - 1) : durations[durationLetter]) +
+			(reason ? ". (" + reason + ")" : "."), " (" + targetUser.latestIp + ")");
 		let alts = targetUser.getAlts();
 		let acAccount = (targetUser.autoconfirmed !== targetUser.userid && targetUser.autoconfirmed);
 		if (alts.length) {
@@ -1364,14 +1419,82 @@ exports.commands = {
 			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
 		}
 
-		let userid = this.getLastIdOf(targetUser);
+		this.add('|unlink|hide|' + userid);
+		this.add('|uhtmlchange|' + userid + '|');
+
+		let options = {'duration': duration, 'by': user.name};
+		if (reason) options.reason = reason;
+		targetUser.ban(false, userid, options);
+		this.globalModlog("BAN", targetUser, " by " + user.name + (target ? ": " + target : ""));
+		return true;
+	},
+	timebanhelp: [
+		"/timeban OR /tb [username], [duration], [reason] - Kick user from all rooms and ban user's IP address with reason. Requires: @ & ~",
+		"Valid durations: 'm' for minutes, 'h' for hours, 'd' for days",
+		"Example: /timeban user, 1d, spamming - Bans [user] for 1 day with the reason 'spamming'"
+		],
+
+	b: 'ban',
+	ban: function (target, room, user, connection, cmd) {
+		if (!target) return this.parse('/help ban');
+
+		target = this.splitTarget(target);
+		let targetUser = this.targetUser;
+		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' not found.");
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
+		if (!this.can('ban', targetUser)) return false;
+
+		var name = targetUser.getLastName();
+		var userid = targetUser.getLastId();
+
+		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
+			let problem = " but was already banned";
+			return this.privateModCommand("(" + name + " would be banned by " + user.name + problem + ".)");
+		}
+
+		if (targetUser.confirmed) {
+			let from = targetUser.deconfirm();
+			Monitor.log("[CrisisMonitor] " + name + " was banned by " + user.name + " and demoted from " + from.join(", ") + ".");
+		}
+
+		// Destroy personal rooms of the banned user.
+		for (let i in targetUser.roomCount) {
+			if (i === 'global') continue;
+			let targetRoom = Rooms.get(i);
+			if (targetRoom.isPersonal && targetRoom.auth[targetUser.userid] && targetRoom.auth[targetUser.userid] === '#') {
+				targetRoom.destroy();
+			}
+		}
+
+		targetUser.popup("|modal|" + user.name + " has banned you for 2 weeks." + (target ? "\n\nReason: " + target : "") + (Config.appealurl ? "\n\nIf you feel that your ban was unjustified, you can appeal:\n" + Config.appealurl : "") + "\n\nYour ban will expire in 2 weeks.");
+
+		this.addModCommand("" + name + " was banned by " + user.name + " for 2 weeks." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
+		let alts = targetUser.getAlts();
+		let acAccount = (targetUser.autoconfirmed !== targetUser.userid && targetUser.autoconfirmed);
+		if (alts.length) {
+			let guests = alts.length;
+			alts = alts.filter(alt => alt.substr(0, 6) !== 'Guest ');
+			guests -= alts.length;
+			this.privateModCommand("(" + name + "'s " + (acAccount ? " ac account: " + acAccount + ", " : "") + "banned alts: " + alts.join(", ") + (guests ? " [" + guests + " guests]" : "") + ")");
+			for (let i = 0; i < alts.length; ++i) {
+				this.add('|unlink|' + toId(alts[i]));
+				this.add('|uhtmlchange|' + toId(alts[i]) + '|');
+			}
+		} else if (acAccount) {
+			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
+		}
+
 		this.add('|unlink|hide|' + userid);
 		this.add('|uhtmlchange|' + userid + '|');
 		if (userid !== toId(this.inputUsername)) {
 			this.add('|unlink|hide|' + toId(this.inputUsername));
 			this.add('|uhtmlchange|' + toId(this.inputUsername) + '|');
 		}
-		targetUser.ban(false, userid);
+		let options = {duration: '14d', 'by': user.name};
+		if (target) options.reason = target;
+		targetUser.ban(false, userid, options);
 		this.globalModlog("BAN", targetUser, " by " + user.name + (target ? ": " + target : ""));
 		return true;
 	},
@@ -1449,10 +1572,20 @@ exports.commands = {
 			return this.parse('/help banip');
 		}
 		if (!this.can('rangeban')) return false;
-		if (Users.bannedIps[target] === '#ipban') return this.sendReply("The IP " + (target.charAt(target.length - 1) === '*' ? "range " : "") + target + " has already been temporarily banned.");
+		if (Users.bans[target]) return this.errorReply("The IP " + (target.charAt(target.length - 1) === '*' ? "range " : "") + target + " has already been banned.");
 
-		Users.bannedIps[target] = '#ipban';
-		this.addModCommand("" + user.name + " temporarily banned the " + (target.charAt(target.length - 1) === '*' ? "IP range" : "IP") + ": " + target);
+		let expires = new Date();
+		expires.setHours(expires.getHours() + 5 * 24);
+
+		Users.bans[target] = {
+			'type': 'ip',
+			'reason': '#ipban',
+			'by': user.name,
+			'on': Date.now(),
+			'expires': expires.getTime()
+		}
+		Users.saveBans();
+		this.privateModCommand("(" + user.name + " temporarily banned the " + (target.charAt(target.length - 1) === '*' ? "IP range" : "IP") + ": " + target + ")");
 	},
 	baniphelp: ["/banip [ip] - Kick users on this IP or IP range from all rooms and bans it. Accepts wildcards to ban ranges. Requires: & ~"],
 
@@ -1462,10 +1595,11 @@ exports.commands = {
 			return this.parse('/help unbanip');
 		}
 		if (!this.can('rangeban')) return false;
-		if (!Users.bannedIps[target]) {
+		if (!Users.bans[target]) {
 			return this.errorReply("" + target + " is not a banned IP or IP range.");
 		}
-		delete Users.bannedIps[target];
+		delete Users.bans[target];
+		Users.saveBans();
 		this.addModCommand("" + user.name + " unbanned the " + (target.charAt(target.length - 1) === '*' ? "IP range" : "IP") + ": " + target);
 	},
 	unbaniphelp: ["/unbanip [ip] - Kick users on this IP or IP range from all rooms and bans it. Accepts wildcards to ban ranges. Requires: & ~"],
@@ -2166,7 +2300,7 @@ exports.commands = {
 	},
 	killhelp: ["/kill - kills the server. Can't be done unless the server is in lockdown state. Requires: ~"],
 
-	loadbanlist: function (target, room, user, connection) {
+/*	loadbanlist: function (target, room, user, connection) {
 		if (!this.can('hotpatch')) return false;
 
 		connection.sendTo(room, "Loading ipbans.txt...");
@@ -2187,7 +2321,7 @@ exports.commands = {
 			connection.sendTo(room, "ipbans.txt has been reloaded.");
 		});
 	},
-	loadbanlisthelp: ["/loadbanlist - Loads the bans located at ipbans.txt. The command is executed automatically at startup. Requires: ~"],
+	loadbanlisthelp: ["/loadbanlist - Loads the bans located at ipbans.txt. The command is executed automatically at startup. Requires: ~"],*/
 
 	refreshpage: function (target, room, user) {
 		if (!this.can('hotpatch')) return false;

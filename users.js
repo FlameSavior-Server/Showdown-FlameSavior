@@ -29,8 +29,10 @@ const THROTTLE_DELAY = 600;
 const THROTTLE_BUFFER_LIMIT = 6;
 const THROTTLE_MULTILINE_WARN = 3;
 const THROTTLE_MULTILINE_WARN_STAFF = 6;
+const DEFAULT_BAN_DURATION = "5d";
 
 const fs = require('fs');
+const moment = require('moment');
 
 let Users = module.exports = getUser;
 
@@ -38,8 +40,6 @@ let Users = module.exports = getUser;
 let users = Users.users = new Map();
 let prevUsers = Users.prevUsers = new Map();
 let numUsers = 0;
-
-let ipbans = fs.createWriteStream("config/ipbans.txt", {flags: "a"}); // do not remove this line
 
 try {
 	exports.bannedMessages = fs.readFileSync('config/bannedmessages.txt', 'utf8');
@@ -96,12 +96,48 @@ let getExactUser = Users.getExact = function (name) {
  * Locks and bans
  *********************************************************/
 
-let bannedIps = Users.bannedIps = Object.create(null);
-let bannedUsers = Users.bannedUsers = Object.create(null);
+Users.bans = Object.create(null);
+
 let lockedIps = Users.lockedIps = Object.create(null);
 let lockedUsers = Users.lockedUsers = Object.create(null);
 let lockedRanges = Users.lockedRanges = Object.create(null);
 let rangelockedUsers = Users.rangeLockedUsers = Object.create(null);
+
+function loadBans() {
+	try {
+		Users.bans = JSON.parse(fs.readFileSync('config/bans.json', 'utf8'));
+	} catch (e) {}
+}
+loadBans();
+
+function saveBans() {
+	fs.writeFileSync('config/bans.json', JSON.stringify(Users.bans));
+}
+
+Users.saveBans = saveBans;
+
+// check if any bans have expired
+function updateBans() {
+	for (let obj in Users.bans) {
+		if (Users.bans[obj].expires < Date.now()) {
+			Rooms('staff').addRaw("[Ban Notice] Ban against" + (~obj.indexOf('.') ? " IP " : " user ") + Tools.escapeHTML(obj) + " has <font color=\"green\">expired</font>.");
+			Rooms('staff').update();
+			if (Users.bans[obj].type === 'user') unlock(Users.bans[obj].userid);
+			if (Users.bans[obj].userid) {
+				delete lockedUsers[Users.bans[obj].userid];
+			}
+			if (~obj.indexOf('.')) delete lockedIps[obj];
+			delete Users.bans[obj];
+			saveBans();
+		}
+	}
+}
+
+Users.updateBans = updateBans;
+
+let expiredBansCheck = setInterval(function () {
+	updateBans();	
+}, 1000 * 60 * 60);
 
 /**
  * Searches for IP in table.
@@ -121,7 +157,13 @@ function ipSearch(ip, table) {
 }
 function checkBanned(ip) {
 	if (!ip) return false;
-	return ipSearch(ip, bannedIps);
+	if (Users.bans[ip] && Users.bans[ip].type !== 'pban') {
+		if (Users.bans[ip].expires < Date.now()) {
+			updateBans();
+			return false;
+		}
+	}
+	return ipSearch(ip, Users.bans);
 }
 function checkLocked(ip) {
 	if (!ip) return false;
@@ -136,16 +178,14 @@ Users.checkRangeBanned = function () {};
 function unban(name) {
 	let success;
 	let userid = toId(name);
-	for (let ip in bannedIps) {
-		if (bannedIps[ip] === userid) {
-			delete bannedIps[ip];
-			success = true;
-		}
-	}
-	for (let id in bannedUsers) {
-		if (bannedUsers[id] === userid || id === userid) {
-			delete bannedUsers[id];
-			success = true;
+	for (let obj in Users.bans) {
+		if (Users.bans[obj].type === 'user') {
+			if (Users.bans[obj].userid === userid) {
+				unlock(userid);
+				delete Users.bans[obj];
+				saveBans();
+				success = true;
+			}
 		}
 	}
 	if (success) return name;
@@ -858,7 +898,7 @@ class User {
 			} else if (userType === '5') {
 				this.lock(false, userid + '#permalock');
 			} else if (userType === '6') {
-				this.ban(false, userid);
+				this.ban(false, userid, {'reason': 'global banned'});
 			}
 		}
 		let user = users.get(userid);
@@ -930,11 +970,19 @@ class User {
 			this.updateGroup(registered);
 		}
 
-		if (registered && userid in bannedUsers) {
+		if (registered && Users.bans[userid] && Users.bans[userid].type !== 'pban') {
+			if (Users.bans[userid].expires < Date.now()) {
+				updateBans();
+				return false;
+			}
 			let bannedUnder = '';
-			if (bannedUsers[userid] !== userid) bannedUnder = ' because of rule-breaking by your alt account ' + bannedUsers[userid];
-			this.send("|popup|Your username (" + name + ") is banned" + bannedUnder + "'. Your ban will expire in a few days." + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
-			this.ban(true, userid);
+			if (Users.bans[userid] !== userid) bannedUnder = ' because of rule-breaking by your alt account ' + Users.bans[userid].userid;
+			this.send("|popup|Your username (" + name + ") is banned" + bannedUnder + "'.\n" +
+				"Your ban will expire in " + moment(Users.bans[userid].expires).fromNow(true) + "\n" + 
+				(Config.appealurl ? "Or you can appeal at:\n" + Config.appealurl : ""));
+			let options = Object.clone(Users.bans[userid]);
+			options.duration = Math.round((Date.now() - Users.bans[userid].expires) / 1000 / 60) + "m";
+			this.ban(true, userid, options);
 			return;
 		}
 		if (registered && userid in lockedUsers) {
@@ -1252,7 +1300,9 @@ class User {
 		const prevNames = Object.keys(this.prevNames);
 		return (prevNames.length ? prevNames[prevNames.length - 1] : this.userid);
 	}
-	ban(noRecurse, userid) {
+	ban(noRecurse, userid, options) {
+		if (!options) options = {'duration': DEFAULT_BAN_DURATION};
+		if (!options.type) options.type = 'user';
 		// recurse only once; the root for-loop already bans everything with your IP
 		if (!userid) userid = this.userid;
 		if (!noRecurse) {
@@ -1260,7 +1310,7 @@ class User {
 				if (user === this || user.confirmed) return;
 				for (let myIp in this.ips) {
 					if (myIp in user.ips) {
-						user.ban(true, userid);
+						user.ban(true, userid, options);
 						return;
 					}
 				}
@@ -1268,17 +1318,64 @@ class User {
 			lockedUsers[userid] = userid;
 		}
 
-		for (let ip in this.ips) {
-			bannedIps[ip] = userid;
+		let now = Date.now();
+		let expires = new Date();
+
+		if (options.type === 'user' || options.duration) {
+			switch (options.duration.substr(-1).toLowerCase()) {
+				case 'm':
+					expires.setMinutes(expires.getMinutes() + Number(options.duration.substr(0, options.duration.length - 1)));
+					break;
+				case 'h':
+					expires.setHours(expires.getHours() + Number(options.duration.substr(0, options.duration.length - 1)));
+					break;
+				case 'd':
+					expires.setHours(expires.getHours() + Number(options.duration.substr(0, options.duration.length - 1)) * 24);
+					break;
+				case 'w':
+					expires.setHours(expires.getHours() + Number(options.duration.substr(0, options.duration.length - 1) * 24 * 7));
+					break;
+				default:
+					expires.setHours(expires.getHours() + (24 * 5));
+					break;
+			}
 		}
-		if (this.autoconfirmed) bannedUsers[this.autoconfirmed] = userid;
+
+		for (let ip in this.ips) {
+			Users.bans[ip] = {
+				'type': options.type,
+				'userid': userid,
+				'on': now
+			}
+			if (options.type === 'user') Users.bans[ip].expires = expires.getTime();
+			if (options.by) Users.bans[ip].by = options.by;
+			if (options.reason) Users.bans[ip].reason = options.reason;
+		}
+		if (this.autoconfirmed) {
+			Users.bans[this.autoconfirmed] = {
+				'type': options.type,
+				'userid': userid,
+				'on': now
+			}
+			if (options.type === 'user') Users.bans[this.autoconfirmed].expires = expires.getTime()
+			if (options.by) Users.bans[this.autoconfirmed].by = options.by;
+			if (options.reason) Users.bans[this.autoconfirmed].reason = options.reason;
+		}
 		if (this.registered) {
-			bannedUsers[this.userid] = userid;
+			Users.bans[this.userid] = {
+				'type': options.type,
+				'userid': this.userid,
+				'on': now
+			}
+			if (options.type === 'user') Users.bans[this.userid].expires = expires.getTime()
+			if (options.by) Users.bans[this.userid].by = options.by;
+			if (options.reason) Users.bans[this.userid].reason = options.reason;
 			this.autoconfirmed = '';
 		}
 		this.locked = userid; // in case of merging into a recently banned account
 		lockedUsers[this.userid] = userid;
 		this.disconnectAll();
+		saveBans();
 	}
 	lock(noRecurse, userid) {
 		// recurse only once; the root for-loop already locks everything with your IP
@@ -1708,7 +1805,14 @@ Users.socketConnect = function (worker, workerid, socketid, ip) {
 
 	if (Monitor.countConnection(ip)) {
 		connection.destroy();
-		bannedIps[ip] = '#cflood';
+		let expiration = new Date();
+		expiration.setHours(expiration.getHours() + 24);
+		Users.bans[ip] = {
+			'type': 'ip',
+			'on': Date.now(),
+			'reason': '#cflood',
+			'expires': expiration.getTime()
+		}
 		return;
 	}
 	let checkResult = Users.checkBanned(ip);
@@ -1716,13 +1820,26 @@ Users.socketConnect = function (worker, workerid, socketid, ip) {
 		checkResult = '#ipban';
 	}
 	if (checkResult) {
-		if (!Config.quietconsole) console.log('CONNECT BLOCKED - IP BANNED: ' + ip + ' (' + checkResult + ')');
-		if (checkResult === '#ipban') {
-			connection.send("|popup||modal|Your IP (" + ip + ") is not allowed to connect to PS, because it has been used to spam, hack, or otherwise attack our server.||Make sure you are not using any proxies to connect to PS.");
-		} else if (checkResult === '#cflood') {
-			connection.send("|popup||modal|PS is under heavy load and cannot accommodate your connection right now.");
-		} else {
-			connection.send("|popup||modal|Your IP (" + ip + ") was banned while using the username '" + checkResult + "'. Your ban will expire in a few days.||" + (Config.appealurl ? " Or you can appeal at:\n" + Config.appealurl : ""));
+		if (!Config.quietconsole) console.log('CONNECT BLOCKED - IP BANNED: ' + ip + (checkResult.reason ? ' (' + checkResult.reason + ')' : ""));
+		if (checkResult.type === "user") {
+			connection.send(
+				"|popup||modal|Your IP (" + ip + ") was banned while using the username '" + checkResult.userid + "'" + (checkResult.by ? " by " + checkResult.by : "") + " on " +
+				moment(checkResult.on).format("dddd, MMMM DD, YYYY h:mmA ") + String(String(new Date(checkResult.on)).split("(")[1]).split(")")[0] + ".\n\n" + 
+				(checkResult.reason ? "Reason: " + checkResult.reason + "\n" : "" ) +
+				"\nYour ban will expire in " + moment(checkResult.expires).fromNow(true));
+		}
+		if (checkResult.type === "ip") {
+			if (checkResult.reason === '#ipban') {
+				connection.send("|popup||modal|Your IP (" + ip + ") is not allowed to connect to PS, because it has been used to spam, hack, or otherwise attack our server.\n" +
+				(checkResult.expires ? "Your ban will expire in " + moment(checkResult.expires).fromNow(true) : ""));
+			} else if (checkResult.reason === '#cflood') {
+				connection.send("|popup||modal|PS is under heavy load and cannot accommodate your connection right now.");
+			}
+		}
+		if (checkResult.type === "pban") {
+			connection.send("|popup||modal|Your IP (" + ip + ") was permanently banned while using the username '" + checkResult.userid + "'" + (checkResult.by ? " by " + checkResult.by : "") +
+			" on " + moment(checkResult.on).format("dddd, MMMM DD, YYYY h:mmA ") + String(String(new Date(checkResult.on)).split("(")[1]).split(")")[0] + ".\n\n" +
+			(checkResult.reason ? "Reason: " + checkResult.reason : ""));
 		}
 		return connection.destroy();
 	}

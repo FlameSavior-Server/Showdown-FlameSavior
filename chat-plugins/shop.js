@@ -17,27 +17,31 @@ function logTransaction (message) {
 	if (!message) return false;
 	fs.appendFile('logs/transactions.log','['+new Date().toUTCString()+'] '+message+'\n');
 }
-var totalBucks = Gold.totalBucks();
-var prices = {
-	'symbol': Math.round(totalBucks * 0.00005),
-	'declare': Math.round(totalBucks * 0.0003),
-	'fix': Math.round(totalBucks * 0.0003),
-	'custom': Math.round(totalBucks * 0.00025),
-	'animated': Math.round(totalBucks * 0.00038),
-	'room': Math.round(totalBucks * 0.00085),
-	'musicbox': Math.round(totalBucks * 0.00071),
-	'trainer': Math.round(totalBucks * 0.0009),
-	'emote': Math.round(totalBucks * 0.0036),
-	'color': Math.round(totalBucks * 0.0456),
-	'icon': Math.round(totalBucks * 0.0569)
-}
+var prices;
 
+function updatePrices () {
+	var avg = Gold.averageBucks();
+	prices = {
+		'symbol': Math.round(avg * 0.035),
+		'declare': Math.round(avg * 0.19),
+		'fix': Math.round(avg * 0.084),
+		'custom': Math.round(avg * 0.12),
+		'animated': Math.round(avg * 0.2),
+		'room': Math.round(avg * 0.33),
+		'musicbox': Math.round(avg * 0.4),
+		'trainer': Math.round(avg * 0.4),
+		'emote': Math.round(avg * 3),
+		'color': Math.round(avg * 5.3),
+		'icon': Math.round(avg * 10)
+	}
+}
 exports.commands = {
     	shop: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		if (room.id === 'lobby' && this.broadcasting) {
 			return this.sendReplyBox('<center>Click <button name="send" value="/shop" style="background-color: black; font-color: white;" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
 		} else {
+			updatePrices();
 			var buttonStyle = 'border-radius: 5px; background: linear-gradient(-30deg, #fff493, #e8d95a, #fff493); color: black; text-shadow: 0px 0px 5px #d6b600; border-bottom: 2px solid #635b00; border-right: 2px solid #968900;';
 			var topStyle = 'background: linear-gradient(10deg, #FFF8B5, #eadf7c, #FFF8B5); color: black; border: 1px solid #635b00; padding: 2px; border-radius: 5px;';
 			var descStyle = 'border-radius: 5px; border: 1px solid #635b00; background: #fff8b5; color: black;';

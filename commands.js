@@ -1349,7 +1349,6 @@ exports.commands = {
 	},
 	banlisthelp: ["/banlist - Shows a list of users who are currently banned from the server."],
 
-	tb: 'timeban',
 	timeban: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help timeban');
 
@@ -1429,8 +1428,8 @@ exports.commands = {
 		return true;
 	},
 	timebanhelp: [
-		"/timeban OR /tb [username], [duration], [reason] - Kick user from all rooms and ban user's IP address with reason. Requires: @ & ~",
-		"Valid durations: 'm' for minutes, 'h' for hours, 'd' for days",
+		"/timeban [username], [duration], [reason] - Kick user from all rooms and ban user's IP address with reason. Requires: @ & ~",
+		"Valid durations: 'm' for minutes, 'h' for hours, 'd' for days, 'w' for weeks.",
 		"Example: /timeban user, 1d, spamming - Bans [user] for 1 day with the reason 'spamming'"
 		],
 

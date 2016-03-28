@@ -17,6 +17,20 @@ function logTransaction (message) {
 	if (!message) return false;
 	fs.appendFile('logs/transactions.log','['+new Date().toUTCString()+'] '+message+'\n');
 }
+var totalBucks = Gold.totalBucks();
+var prices = {
+	'symbol': Math.round(totalBucks * 0.00005),
+	'declare': Math.round(totalBucks * 0.0003),
+	'fix': Math.round(totalBucks * 0.0003),
+	'custom': Math.round(totalBucks * 0.00025),
+	'animated': Math.round(totalBucks * 0.00038),
+	'room': Math.round(totalBucks * 0.00085),
+	'musicbox': Math.round(totalBucks * 0.00071),
+	'trainer': Math.round(totalBucks * 0.0009),
+	'emote': Math.round(totalBucks * 0.0036),
+	'color': Math.round(totalBucks * 0.0456),
+	'icon': Math.round(totalBucks * 0.0569)
+}
 
 exports.commands = {
     	shop: function(target, room, user) {
@@ -28,23 +42,23 @@ exports.commands = {
 			var topStyle = 'background: linear-gradient(10deg, #FFF8B5, #eadf7c, #FFF8B5); color: black; border: 1px solid #635b00; padding: 2px; border-radius: 5px;';
 			var descStyle = 'border-radius: 5px; border: 1px solid #635b00; background: #fff8b5; color: black;';
 			var top = '<center><h3><b><u>Gold Bucks Shop</u></b></h3><table style="' + topStyle + '" border="1" cellspacing ="2" cellpadding="3"><tr><th>Item</th><th>Description</th><th>Cost</th></tr>';
-			var bottom = '</table><br />To buy an item from the shop, click the respective button for said item.<br>Do /getbucks to learn more about how to obtain bucks. </center>';
+			var bottom = '</table><br /><b>Prices in the shop go up and down automatically depending on the total number of bucks in the economy at that given time.</b><br />To buy an item from the shop, click the respective button for said item.<br>Do /getbucks to learn more about how to obtain bucks. </center>';
 			function table(item, desc, price) {
 				return '<tr><td style="' + descStyle + '"><button title="Click this button to buy a(n) ' + item + ' from the shop." style="' + buttonStyle + '" name="send" value="/buy ' + item + '">' + item + '</button></td><td style="' + descStyle + '">' + desc + '</td><td style="' + descStyle + '">' + price + '</td></tr>';
 			}
 			return this.sendReply('|raw|' +
 				top +
-				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", 5) +
-				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", 20) +
-				table("Fix", "Ability to modify a custom avatar, trainer card, userlist icon, or custom emoticon.", 30) +
-				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", 35) +
-				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", 45) +
-				table("Room", "Buys a public unofficial chat room - will be deleted if inactive. Must have a valid purpose; staff can reject making these.", 75) +
-				table("Musicbox", "A command that lists / links up to 8 of your favorite songs", 80) +
-				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", 100) +
-				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", 400) +
-				table("Color", "This gives your username a custom color on the userlist and in all rooms (existing at time of purchase)", 900) +
-				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", 1000) +
+				table("Symbol", "Buys a custom symbol to go infront of name and puts you towards the top of userlist (lasts 2 hrs from logout)", prices['symbol']) +
+				table("Declare", "Advertisement declare for a room on the server from an Administrator / Leader.", prices['declare']) +
+				table("Fix", "Ability to modify a custom avatar, trainer card, userlist icon, or custom emoticon.", prices['fix']) +
+				table("Custom", "Buys a custom avatar to be applied to your name (you supply)", prices['custom']) +
+				table("Animated", "Buys an animated avatar to be applied to your name (you supply)", prices['animated']) +
+				table("Room", "Buys a public unofficial chat room - will be deleted if inactive. Must have a valid purpose; staff can reject making these.", prices['room']) +
+				table("Musicbox", "A command that lists / links up to 8 of your favorite songs", prices['musicbox']) +
+				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", prices['trainer']) +
+				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", prices['emote']) +
+				table("Color", "This gives your username a custom color on the userlist and in all rooms (existing at time of purchase)", prices['color']) +
+				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", prices['icon']) +
 				bottom
 			);
 		}
@@ -167,7 +181,7 @@ exports.commands = {
 		switch (toId(parts[0])) {
 
 			case 'symbol':
-				price = 5;
+				price = prices['symbol'];
 				if (Gold.hasBadge(user.userid, 'vip')) return this.errorReply("You are a VIP user - you do not need to buy custom symbols from the shop.  Use /customsymbol to change your symbol.");
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
@@ -179,7 +193,7 @@ exports.commands = {
 			case 'custom':
 			case 'avatar':
 			case 'customavatar':
-				price = 35;
+				price = prices['custom'];
 				if (Gold.hasBadge(user.userid, 'vip')) return this.errorReply("You are a VIP user - you do not need to buy avatars from the shop.  Use /customavatar to change your avatar.");
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy avatar, [link to avatar].  Must be a PNG or JPG.");
@@ -194,7 +208,7 @@ exports.commands = {
 
 			case 'color':
 			case 'customcolor':
-				price = 900;
+				price = prices['color'];
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy color, [hex code OR name of an alt you want the color of]");
 				if (parts[1].length > 20) return this.errorReply("This is not a valid color, try again.");
@@ -205,7 +219,7 @@ exports.commands = {
 
 			case 'emote':
 			case 'emoticon':
-				price = 400;
+				price = prices['emote'];
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1] || !parts[2]) return this.errorReply("Usage: /buy emote, [emote code], [image for the emote]");
 				var emoteFilepaths = ['.png', '.jpg', '.gif'];
@@ -218,7 +232,7 @@ exports.commands = {
 				break;
 
 			case 'animated':
-				price = 45;
+				price = prices['animated'];
 				if (Gold.hasBadge(user.userid, 'vip')) return this.errorReply("You are a VIP user - you do not need to buy animated avatars from the shop.  Use /customavatar to change your avatar.");
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy animated, [link to avatar].  Must be a GIF.");
@@ -232,7 +246,7 @@ exports.commands = {
 
 			case 'room':
 			case 'chatroom':
-				price = 75;
+				price = prices['room'];
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1]) return this.errorReply("Usage: /buy room, [room name]");
 				var bannedRoomNames = [',', '|', '[', '-'];
@@ -244,7 +258,7 @@ exports.commands = {
 
 			case 'trainer':
 			case 'trainercard':
-				price = 100;
+				price = prices['trainer'];
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
 				alertStaff(nameColor(user.name) + ' has purchased a trainer card.', true);
@@ -253,7 +267,7 @@ exports.commands = {
 
 			case 'mb':
 			case 'musicbox':
-				price = 80;
+				price = prices['musicbox'];
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!Gold.createMusicBox(user)) return this.errorReply("You already have a music box! There's no need to buy another.");
 				processPurchase(price, parts[0]);
@@ -264,7 +278,7 @@ exports.commands = {
 				break;
 
 			case 'fix':
-				price = 30;
+				price = prices['fix'];
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
@@ -275,7 +289,7 @@ exports.commands = {
 
 			case 'ad':
 			case 'declare':
-				price = 20;
+				price = prices['declare'];
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				processPurchase(price, parts[0]);
@@ -285,7 +299,7 @@ exports.commands = {
 
 			case 'userlisticon':
 			case 'icon':
-				price = 1000;
+				price = prices['icon'];
 				if (Gold.hasBadge(user.userid, 'vip')) price = 0;
 				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
 				if (!parts[1] || parts[1].length < 3) return this.errorReply("Usage: /buy icon, [32x32 icon image]");

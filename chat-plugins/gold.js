@@ -690,7 +690,7 @@ exports.commands = {
 		var popup = "|html|" + "<font size=5>Gold Server Credits</font><br />" +
 					"<u>Owners:</u><br />" +
 					"- " + name('panpawn', true) + " (Founder, Sysadmin, Development)<br />" +
-					"- " + name('pitcher', true) + " (Lead policy, Sysadmin)<br />" +
+					"- " + name('virtuos', true) + " (Lead policy, Sysadmin)<br />" +
 					"<br />" +
 					"<u>Development:</u><br />" +
 					"- " + name('panpawn', true) + " (Owner of GitHub repository)<br />" +

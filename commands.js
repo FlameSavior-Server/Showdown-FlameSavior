@@ -1278,7 +1278,7 @@ exports.commands = {
 		} else if (acAccount) {
 			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
 		}
-		let userid = this.getLastIdOf(targetUser);
+		let userid = targetUser.getLastId();
 		this.add('|unlink|hide|' + userid);
 		this.add('|uhtmlchange|' + userid + '|');
 		if (userid !== toId(this.inputUsername)) {

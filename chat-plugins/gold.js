@@ -1043,7 +1043,7 @@ exports.commands = {
 		}
 	},
 	crashlogs: function (target, room, user) {
-		if (!this.can('hotpatch')) return this.errorReply("Access denied.");
+		if (!this.can('pban')) return false;
 		var crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');
 		user.send('|popup|' + crashes);
 	},

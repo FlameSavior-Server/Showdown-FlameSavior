@@ -27,7 +27,7 @@ function updatePrices () {
 		'fix': Math.round(avg * 0.084),
 		'custom': Math.round(avg * 0.12),
 		'animated': Math.round(avg * 0.2),
-		'room': Math.round(avg * 0.33),
+		'room': Math.round(avg * 0.53),
 		'musicbox': Math.round(avg * 0.4),
 		'trainer': Math.round(avg * 0.4),
 		'emote': Math.round(avg * 3),

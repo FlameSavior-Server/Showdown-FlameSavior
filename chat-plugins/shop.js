@@ -333,7 +333,7 @@ exports.commands = {
 				var goodBad = '';
 				if (randomNumber < 70) {
 					goodBad = 'bad';
-					prize = ['poof', 'meme avatar', 'kick from Lobby', '7 minute mute'].sample();
+					prize = ['poof', 'meme avatar', 'kick from Lobby', '2 minute mute'].sample();
 				} else if (randomNumber > 70) {
 					goodBad = 'good';
 					prize = ['ability to get Dubtrack VIP', 'ability to set the PotD', 'custom color', 'staff room access for the day', 'the cost of the mystery box back', 'ability to have a leader/admin broadcast an iamge to Lobby'].sample();
@@ -364,9 +364,9 @@ exports.commands = {
 							user.popup("You have been kicked from the Lobby by the Mystery Box!");
 						} catch (e) { };
 						break;
-					case '7 minute mute':
+					case '2 minute mute':
 						try {
-							Rooms('lobby').mute(user, 7 * 60 * 1000, false);
+							Rooms('lobby').mute(user, 2 * 60 * 1000, false);
 						} catch (e) { };
 						break;
 					case 'poof':

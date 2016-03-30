@@ -24,17 +24,21 @@ function updatePrices () {
 	prices = {
 		'symbol': Math.round(avg * 0.035),
 		'declare': Math.round(avg * 0.19),
-		'fix': Math.round(avg * 0.084),
-		'custom': Math.round(avg * 0.12),
-		'animated': Math.round(avg * 0.2),
+		'fix': Math.round(avg * 0.55),
+		'custom': Math.round(avg * 0.69),
+		'animated': Math.round(avg * 0.82),
 		'room': Math.round(avg * 0.53),
 		'musicbox': Math.round(avg * 0.4),
 		'trainer': Math.round(avg * 0.4),
 		'emote': Math.round(avg * 3),
 		'color': Math.round(avg * 5.3),
-		'icon': Math.round(avg * 10)
+		'icon': Math.round(avg * 10),
+		'pack': Math.round(avg * 1)
 	}
 }
+updatePrices();
+
+
 exports.commands = {
     	shop: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -60,6 +64,7 @@ exports.commands = {
 				table("Room", "Buys a public unofficial chat room - will be deleted if inactive. Must have a valid purpose; staff can reject making these.", prices['room']) +
 				table("Musicbox", "A command that lists / links up to 8 of your favorite songs", prices['musicbox']) +
 				table("Trainer", "Gives you a custom command - you provide the HTML and command name.", prices['trainer']) +
+				table("Mystery Box", "Gives you a special surprise gift when you open it! (Could be good or bad!)", prices['pack']) +
 				table("Emote", "A custom chat emoticon such as \"Kappa\" - must be 30x30", prices['emote']) +
 				table("Color", "This gives your username a custom color on the userlist and in all rooms (existing at time of purchase)", prices['color']) +
 				table("Icon", "This gives your username a custom userlist icon on our regular client - MUST be a Pokemon and has to be 32x32.", prices['icon']) +
@@ -149,6 +154,7 @@ exports.commands = {
 		if (Users(toId(giveName))) Users(toId(giveName)).popup("|modal|" + user.name + " has given you " + amount + lbl + ".");
 	},
 	buy: function(target, room, user) {
+		updatePrices();
 		if (!target) return this.errorReply("You need to pick an item! Type /buy [item] to buy something.");
 		if (closeShop) return this.errorReply("The shop is currently closed and will open shortly.");
 
@@ -313,6 +319,64 @@ exports.commands = {
 				alertStaff(nameColor(user.name) + ' has purchased a custom userlist icon. Image: ' + link(parts[1].replace(' ', ''), 'desired icon'), true);
 				alertStaff('<center><button name="send" value="/icon ' + user.userid + ', ' + parts[1] + '" target="_blank" title="Click this to set the above custom userlist icon.">Click2Set</button></center>', false);
 				this.sendReply("You have purchased a custom userlist icon.  The staff have been notified and this will be added ASAP.");
+				break;
+
+			case 'mysterybox':
+			case 'pack':
+			case 'magicpack':
+				price = prices['pack'];
+				if (!moneyCheck(price)) return this.errorReply("You do not have enough bucks for this item at this time, sorry.");
+				if (room.id !== 'lobby') return this.errorReply("You must buy this item in the Lobby!");
+				processPurchase(price, parts[0]);
+				var randomNumber = Math.floor((Math.random() * 100) + 1);
+				var prize = '';
+				var goodBad = '';
+				if (randomNumber < 70) {
+					goodBad = 'bad';
+					prize = ['poof', 'meme avatar', 'kick from Lobby', '7 minute mute'].sample();
+				} else if (randomNumber > 70) {
+					goodBad = 'good';
+					prize = ['ability to get Dubtrack VIP', 'ability to set the PotD', 'custom color', 'staff room access for the day', 'the cost of the mystery box back', 'ability to have a leader/admin broadcast an iamge to Lobby'].sample();
+				}
+				switch(prize) {
+					// good
+					case 'the cost of the mystery box back':
+						economy.writeMoney('money', user.userid, +prices['pack']);
+						break;
+					case 'staff room access for the day':
+						user.isStaff = true;
+						user.joinRoom('staff');
+						user.isStaff = false;
+						break;
+					case 'ability to get Dubtrack VIP':
+					case 'ability to have a leader/admin broadcast an iamge to Lobby':
+					case 'custom color':
+					case 'ability to set the PotD':
+						alertStaff(nameColor(user.name) + " has won an " + prize + ". Please PM them to proceed with giving them this.", true);
+						break;
+					// bad
+					case 'meme avatar':
+						user.avatar = 'notpawn.png';
+						break;
+					case 'kick from Lobby':
+						try {
+							user.leaveRoom('lobby');
+							user.popup("You have been kicked from the Lobby by the Mystery Box!");
+						} catch (e) { };
+						break;
+					case '7 minute mute':
+						try {
+							Rooms('lobby').mute(user, 7 * 60 * 1000, false);
+						} catch (e) { };
+						break;
+					case 'poof':
+						this.parse('/poof');
+						break;
+					default:
+						console.log('default');
+						break;
+				}
+				Rooms('lobby').add("|raw|" + nameColor(user.name) + " has bought a Magic Pack from the shop! " + (goodBad === 'good' ? "They have won a(n) <b>" + prize + "</b>!" : "Oh no!  They got a " + prize + " from their pack :(")).update();
 				break;
 
 			default:

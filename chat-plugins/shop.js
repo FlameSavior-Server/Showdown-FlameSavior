@@ -336,7 +336,7 @@ exports.commands = {
 					prize = ['poof', 'meme avatar', 'kick from Lobby', '2 minute mute'].sample();
 				} else if (randomNumber > 70) {
 					goodBad = 'good';
-					prize = ['ability to get Dubtrack VIP', 'ability to set the PotD', 'custom color', 'staff room access until they log out', 'the cost of the mystery box back', 'ability to have a leader/admin broadcast an iamge to Lobby'].sample();
+					prize = ['ability to get Dubtrack VIP', 'ability to set the PotD', 'custom color', 'staff room access until they log out', 'the cost of the mystery box back', 'ability to have a leader/admin broadcast an image to Lobby'].sample();
 				}
 				switch(prize) {
 					// good
@@ -349,7 +349,7 @@ exports.commands = {
 						user.isStaff = false;
 						break;
 					case 'ability to get Dubtrack VIP':
-					case 'ability to have a leader/admin broadcast an iamge to Lobby':
+					case 'ability to have a leader/admin broadcast an image to Lobby':
 					case 'custom color':
 					case 'ability to set the PotD':
 						alertStaff(nameColor(user.name) + " has won an " + prize + ". Please PM them to proceed with giving them this.", true);

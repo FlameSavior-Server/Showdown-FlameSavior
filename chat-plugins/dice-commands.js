@@ -11,9 +11,9 @@ exports.commands = {
 	gambledicehelp: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox(
-			'Dice game commands: <br />' + 
-			'/startdice <bet> - Starts a game.<br />' + 
-			'/joindice - Joins the game.<br />' + 
+			'Dice game commands: <br />' +
+			'/startdice <bet> - Starts a game.<br />' +
+			'/joindice - Joins the game.<br />' +
 			'/enddice - Forcibly ends the game.'
 		);
 	},
@@ -26,7 +26,7 @@ exports.commands = {
 	 	if (isNaN(Number(target))) return this.errorReply('/startdice - <bet> must be a number greater than 0');
 	 	target = Math.round(Number(target));
 	 	if (target < 1) return this.errorReply('/startdice - You can not bet less than one buck.');
-	 	if (target > 1000) return this.errorReply('/startdice - You can\'t bet more than 1,000 bucks.');
+	 	if (target > 5000) return this.errorReply('/startdice - You can\'t bet more than 5
 	 	var self = this;
 
 	 	economy.readMoneyAsync(user.userid, function(userMoney) {
@@ -36,7 +36,7 @@ exports.commands = {
 	 		room.dice.status = 1;
 	 		room.dice.bet = target;
 	 		room.dice.startTime = Date.now();
-	 		room.addRaw('<div class="infobox"><h2><center><font color="' + Gold.hashColor(user.name) + '">' + Tools.escapeHTML(user.name) + '</font> <font color=#24678d>has started a dice game for </font><font color=red>' + target + 
+	 		room.addRaw('<div class="infobox"><h2><center><font color="' + Gold.hashColor(user.name) + '">' + Tools.escapeHTML(user.name) + '</font> <font color=#24678d>has started a dice game for </font><font color=red>' + target +
 	 			' </font><font color=#24678d>' + ((target === 1) ? " buck." : " bucks.") + '</font><br /> <button name="send" value="/joindice">Click to join.</button></center></h2></div>');
 	 		room.update();
 	 	});

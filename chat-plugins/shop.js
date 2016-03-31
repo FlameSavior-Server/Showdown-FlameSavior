@@ -333,7 +333,7 @@ exports.commands = {
 				var goodBad = '';
 				if (randomNumber < 70) {
 					goodBad = 'bad';
-					prize = ['rick rolled', 'poof', 'meme avatar', 'kick from Lobby', '2 minute mute'].sample();
+					prize = ['nothing', 'rick rolled', 'poof', 'meme avatar', 'kick from Lobby', '2 minute mute'].sample();
 				} else if (randomNumber > 70) {
 					goodBad = 'good';
 					prize = ['ability to get Dubtrack VIP', 'ability to set the PotD', 'custom color', 'the cost of the mystery box back', 'ability to have a leader/admin broadcast an image to Lobby'].sample();
@@ -350,6 +350,8 @@ exports.commands = {
 						alertStaff(nameColor(user.name) + " has won an " + prize + ". Please PM them to proceed with giving them this.", true);
 						break;
 					// bad
+					case 'nothing':
+						break;
 					case 'meme avatar':
 						user.avatar = ['notpawn.png', 'notpawn2.png'].sample();
 						break;

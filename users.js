@@ -136,7 +136,7 @@ function updateBans() {
 Users.updateBans = updateBans;
 
 let expiredBansCheck = setInterval(function () {
-	updateBans();	
+	updateBans();
 }, 1000 * 60 * 60);
 
 /**
@@ -534,6 +534,8 @@ class User {
 		if (this.locked) {
 			return '‽' + this.name;
 		}
+		return '~' + this.name;
+		/*
 		if (roomid) {
 			let room = Rooms.rooms[roomid];
 			if (!room) {
@@ -549,7 +551,7 @@ class User {
 				if (room.isPrivate === true) return ' ' + this.name;
 			}
 		}
-		return this.group + this.name;
+		return this.group + this.name; */
 	}
 	can(permission, target, room) {
 		if (this.hasSysopAccess()) return true;
@@ -978,7 +980,7 @@ class User {
 			let bannedUnder = '';
 			if (Users.bans[userid] !== userid) bannedUnder = ' because of rule-breaking by your alt account ' + Users.bans[userid].userid;
 			this.send("|popup|Your username (" + name + ") is banned" + bannedUnder + "'.\n" +
-				"Your ban will expire in " + moment(Users.bans[userid].expires).fromNow(true) + "\n" + 
+				"Your ban will expire in " + moment(Users.bans[userid].expires).fromNow(true) + "\n" +
 				(Config.appealurl ? "Or you can appeal at:\n" + Config.appealurl : ""));
 			let options = Object.clone(Users.bans[userid]);
 			options.duration = Math.round((Date.now() - Users.bans[userid].expires) / 1000 / 60) + "m";
@@ -1824,7 +1826,7 @@ Users.socketConnect = function (worker, workerid, socketid, ip) {
 		if (checkResult.type === "user") {
 			connection.send(
 				"|popup||modal|Your IP (" + ip + ") was banned while using the username '" + checkResult.userid + "'" + (checkResult.by ? " by " + checkResult.by : "") + " on " +
-				moment(checkResult.on).format("dddd, MMMM DD, YYYY h:mmA ") + String(String(new Date(checkResult.on)).split("(")[1]).split(")")[0] + ".\n\n" + 
+				moment(checkResult.on).format("dddd, MMMM DD, YYYY h:mmA ") + String(String(new Date(checkResult.on)).split("(")[1]).split(")")[0] + ".\n\n" +
 				(checkResult.reason ? "Reason: " + checkResult.reason + "\n" : "" ) +
 				"\nYour ban will expire in " + moment(checkResult.expires).fromNow(true));
 		}

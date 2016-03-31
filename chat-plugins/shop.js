@@ -333,7 +333,7 @@ exports.commands = {
 				var goodBad = '';
 				if (randomNumber < 70) {
 					goodBad = 'bad';
-					prize = ['poof', 'meme avatar', 'kick from Lobby', '2 minute mute'].sample();
+					prize = ['rick rolled', 'poof', 'meme avatar', 'kick from Lobby', '2 minute mute'].sample();
 				} else if (randomNumber > 70) {
 					goodBad = 'good';
 					prize = ['ability to get Dubtrack VIP', 'ability to set the PotD', 'custom color', 'staff room access until they log out', 'the cost of the mystery box back', 'ability to have a leader/admin broadcast an image to Lobby'].sample();
@@ -371,6 +371,15 @@ exports.commands = {
 						break;
 					case 'poof':
 						this.parse('/poof');
+						break;
+					case 'rick rolled':
+						Rooms('lobby').add("|raw|<blink>" +
+								"Never gonna give you up<br />" +
+								"Never gonna let you down<br />" +
+								"Never gonna run around and desert you<br />" +
+								"Never gonna make you cry<br />" +
+								"Never gonna say goodbye<br />" +
+								"Never gonna tell a lie and hurt you</blink>").update();
 						break;
 					default:
 						console.log('default');

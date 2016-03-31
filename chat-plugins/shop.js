@@ -356,7 +356,7 @@ exports.commands = {
 						break;
 					// bad
 					case 'meme avatar':
-						user.avatar = ['notpawn.png', 'notpawn2.png'].sample()
+						user.avatar = ['notpawn.png', 'notpawn2.png'].sample();
 						break;
 					case 'kick from Lobby':
 						try {

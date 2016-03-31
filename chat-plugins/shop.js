@@ -336,17 +336,12 @@ exports.commands = {
 					prize = ['rick rolled', 'poof', 'meme avatar', 'kick from Lobby', '2 minute mute'].sample();
 				} else if (randomNumber > 70) {
 					goodBad = 'good';
-					prize = ['ability to get Dubtrack VIP', 'ability to set the PotD', 'custom color', 'staff room access until they log out', 'the cost of the mystery box back', 'ability to have a leader/admin broadcast an image to Lobby'].sample();
+					prize = ['ability to get Dubtrack VIP', 'ability to set the PotD', 'custom color', 'the cost of the mystery box back', 'ability to have a leader/admin broadcast an image to Lobby'].sample();
 				}
 				switch(prize) {
 					// good
 					case 'the cost of the mystery box back':
 						economy.writeMoney('money', user.userid, +prices['pack']);
-						break;
-					case 'staff room access until they log out':
-						user.isStaff = true;
-						user.joinRoom('staff');
-						user.isStaff = false;
 						break;
 					case 'ability to get Dubtrack VIP':
 					case 'ability to have a leader/admin broadcast an image to Lobby':

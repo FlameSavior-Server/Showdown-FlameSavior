@@ -534,8 +534,6 @@ class User {
 		if (this.locked) {
 			return '‽' + this.name;
 		}
-		return '~' + this.name;
-		/*
 		if (roomid) {
 			let room = Rooms.rooms[roomid];
 			if (!room) {
@@ -551,7 +549,7 @@ class User {
 				if (room.isPrivate === true) return ' ' + this.name;
 			}
 		}
-		return this.group + this.name; */
+		return this.group + this.name;
 	}
 	can(permission, target, room) {
 		if (this.hasSysopAccess()) return true;

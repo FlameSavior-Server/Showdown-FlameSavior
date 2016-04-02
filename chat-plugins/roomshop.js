@@ -1,14 +1,14 @@
 /* Room shop system (economy)
- * This plugin gives each room that is allowed, 
+ * This plugin gives each room that is allowed,
  * a custom shop for their room.  Room founders
  * can customize what items they want to be in
- * their shops.  Only certain rooms can have 
+ * their shops.  Only certain rooms can have
  * their own shops.
  * by: panpawn and Siiilver
  */
 
 // OBJECT STRUCTURE:
-// { 'roomid': { 'item1id': ['item1name', 'item1desc', 'item1price'], 'item2id': ['item2name', 'item2desc', 'item2price'] } } 
+// { 'roomid': { 'item1id': ['item1name', 'item1desc', 'item1price'], 'item2id': ['item2name', 'item2desc', 'item2price'] } }
 
 var fs = require('fs');
 
@@ -51,7 +51,7 @@ exports.commands = {
 				var item = target[1], desc = target[2], price = target[3];
 				if (item.lenth > 15) return this.errorReply("Item names cannot exceed 15 characters.");
 				if (desc.length > 200) return this.errorReply("Item descriptions cannot exceed 200 characters.");
-				if (isNaN(Number(price)) || price < 1 || ~price.indexOf('.') || price > 250) return this.errorReply("The price must be a positive integer.");
+				if (isNaN(Number(price)) || price < 1 || ~price.indexOf('.') || price > 1000) return this.errorReply("The price must be a positive integer.");
 				if (!item || !desc || !price) return this.errorReply("Usage: /roomshop add, [item], [description], [price] - Adds an item to the roomshop.");
 				RS[toId(item)] = [item, desc, Number(price)];
 				saveShop();

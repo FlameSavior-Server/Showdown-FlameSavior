@@ -67,18 +67,15 @@ exports.commands = {
 				return this.sendReply("You have successfully removed the item '" + itemName + "' from the room's shop");
 				break;
 			case 'buy':
-				try {
-					var item = toId(target[1]), price = RS[item][2];
-					if (!item) return this.errorReply("Usage: /roomshop buy, [item] - Buys an item from the room's room shop.");
-					if (!RS[item]) return this.errorReply("This item is not in the room shop. Check spelling?");
-					item = RS[item][0];
-					if (economy.readMoney(user.userid) < price) return this.errorReply("You do not have enough bucks to do buy " + item + ". You need " + (price - economy.readMoney(user.userid)) + " more bucks to buy this item.");
-					this.parse('/tb ' + room.founder + ', ' + price);
-					room.add("|raw|<b><u>Room Shop</u>: " + getName(user.name) + "</b> has bought a(n) <u>" + Tools.escapeHTML(item) + "</u> from the room shop for " + price + " buck" + (price > 1 ? "s" : "") + ".").update();
-					this.privateModCommand("(" + user.name + " has bought a(n) " + item + " from the room shop.)");
-				} catch (e) {
-					this.errorReply("This item is not in the roomshop.");
-				}
+				var item = toId(target[1]);
+				if (!item) return this.errorReply("Usage: /roomshop buy, [item] - Buys an item from the room's room shop.");
+				if (!RS[item]) return this.errorReply("This item is not in the room shop. Check spelling?");
+				item = RS[item][0];
+				var price = RS[item][2];
+				if (economy.readMoney(user.userid) < price) return this.errorReply("You do not have enough bucks to do buy " + item + ". You need " + (price - economy.readMoney(user.userid)) + " more bucks to buy this item.");
+				this.parse('/tb ' + room.founder + ', ' + price);
+				room.add("|raw|<b><u>Room Shop</u>: " + getName(user.name) + "</b> has bought a(n) <u>" + Tools.escapeHTML(item) + "</u> from the room shop for " + price + " buck" + (price > 1 ? "s" : "") + ".").update();
+				this.privateModCommand("(" + user.name + " has bought a(n) " + item + " from the room shop.)");
 				break;
 			case 'help':
 				this.parse('/help roomshop');

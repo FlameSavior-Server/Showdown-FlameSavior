@@ -1233,10 +1233,6 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox("<b>Total bucks in economy:</b> " + Gold.totalBucks() + "<br /><b>The average user has:</b> " + Gold.averageBucks() + " bucks.");
 	},
-	goldintro: function (target, room, user) {
-		return this.sendReplyBox("<center><b><u>Welcome to Gold!</u></b></center><br />" +
-				"");
-	},
 
 	/*
 	pr: 'pollremind',

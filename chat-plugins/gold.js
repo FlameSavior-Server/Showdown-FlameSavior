@@ -688,9 +688,8 @@ exports.commands = {
 			}
 		}
 		var popup = "|html|" + "<font size=5>Gold Server Credits</font><br />" +
-					"<u>Owners:</u><br />" +
+					"<u>Owner:</u><br />" +
 					"- " + name('panpawn', true) + " (Founder, Sysadmin, Development)<br />" +
-					"- " + name('virtuos', true) + " (Lead policy, Sysadmin)<br />" +
 					"<br />" +
 					"<u>Development:</u><br />" +
 					"- " + name('panpawn', true) + " (Owner of GitHub repository)<br />" +
@@ -698,9 +697,10 @@ exports.commands = {
 					"- " + name('Silveee', true) + " (Contributor)<br />" +
 					"<br />" +
 					"<u>Special Thanks:</u><br />" +
-					"- Current staff members<br />" +
+					"- Current staff team<br />" +
 					"- Our regular users<br />" +
-					"- PixelatedPaw (One of the original administrators)";
+					"- " + name('virtuos', true) + " (Former Administrator / Co- Owner)<br />" +
+					"- " + name('PixelatedPaw', true) + " (One of the original Administrators)";
 		user.popup(popup);
 	},
 	regdate: function(target, room, user, connection) {
@@ -1232,6 +1232,10 @@ exports.commands = {
 	economy: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		return this.sendReplyBox("<b>Total bucks in economy:</b> " + Gold.totalBucks() + "<br /><b>The average user has:</b> " + Gold.averageBucks() + " bucks.");
+	},
+	goldintro: function (target, room, user) {
+		return this.sendReplyBox("<center><b><u>Welcome to Gold!</u></b></center><br />" +
+				"");
 	},
 
 	/*

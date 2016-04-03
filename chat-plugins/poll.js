@@ -269,7 +269,7 @@ exports.commands = {
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
 			if (room.poll.timeout) clearTimeout(room.poll.timeout);
-	
+
 			room.poll.end();
 			delete room.poll;
 			return this.privateModCommand("(The poll was ended by " + user.name + ".)");

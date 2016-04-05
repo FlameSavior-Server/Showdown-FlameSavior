@@ -1354,7 +1354,7 @@ class User {
 		if (this.autoconfirmed) {
 			Users.bans[this.autoconfirmed] = {
 				'type': options.type,
-				'userid': userid,
+				'userid': this.autoconfirmed,
 				'on': now
 			}
 			if (options.type === 'user') Users.bans[this.autoconfirmed].expires = expires.getTime()

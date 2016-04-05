@@ -10,6 +10,8 @@
 // OBJECT STRUCTURE:
 // { 'roomid': { 'item1id': ['item1name', 'item1desc', 'item1price'], 'item2id': ['item2name', 'item2desc', 'item2price'] } }
 
+
+/*
 var fs = require('fs');
 
 const ITEM_CAP = 8; // maximum items a room shop can have
@@ -92,3 +94,5 @@ exports.commands = {
 		"/roomshop buy, [item] - Buys an item from the shop.",
 		"/roomshop - Displays a room's room shop."],
 };
+
+*/

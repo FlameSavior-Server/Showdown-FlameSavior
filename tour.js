@@ -88,7 +88,7 @@ exports.tour = function(t) {
 				return uid;
 			}
 		},
-		
+
 
 		userauth: function(user, room) {
 			if (!config.tourauth && user.can('broadcast')) return true;
@@ -342,7 +342,7 @@ exports.tour = function(t) {
 					tooSmall += '(this isn\'t an official room)';
 				}
 				//end tour
-				Rooms.rooms[rid].addRaw('<h2><font color="green">Congratulations <font color="black">' + Users.users[w[0]].name + '</font>!  You have won the ' + Tools.data.Formats[tour[rid].tier].name + ' Tournament!<br>You have also won ' + tourMoney + ' Gold ' + p + '! ' + tooSmall + '</font></h2>' + '<br><font color="blue"><b>SECOND PLACE:</b></font> ' + Users.users[l[0]].name + '<hr />');			
+				Rooms.rooms[rid].addRaw('<h2><font color="green">Congratulations <font color="black">' + Users.users[w[0]].name + '</font>!  You have won the ' + Tools.data.Formats[tour[rid].tier].name + ' Tournament!<br>You have also won ' + tourMoney + ' Gold ' + p + '! ' + tooSmall + '</font></h2>' + '<br><font color="blue"><b>SECOND PLACE:</b></font> ' + Users.users[l[0]].name + '<hr />');
 				if (tour[rid].size >= 8) {
 					try {
 						frostcommands.addTourWin(Users.users[w[0]].name, Tools.data.Formats[tour[rid].tier].name); //for recording tour stats
@@ -488,7 +488,7 @@ var cmds = {
 			return this.sendReply('Tournament scripts were updated.');
 		} else
 		if (target === 'bucks') {
-			if (!this.canBroadcast()) return;
+			if (!this.runBroadcast()) return;
 			this.sendReplyBox(
 			'<b>How much is a tour worth, buck wise?</b><br>' +
 			'If it\'s in the lobby or any other official room and has...<br>' +
@@ -540,7 +540,7 @@ var cmds = {
 		tour[rid].size = targets[1];
 		tour[rid].status = 1;
 		tour[rid].players = new Array();
-		
+
 		if (room.id === 'lobby') {
  			for (var u in room.users) {
  				var message = '|pm| Tournament Notification|'+Users.users[u]+'|A(n) '+Tools.data.Formats[tempTourTier].name+' Tournament has started in the lobby.';
@@ -815,7 +815,7 @@ var cmds = {
 
 	remind: function(target, room, user, connection) {
 		if (!this.canTalk()) return;
-		if (!this.can('broadcast')) return this.sendReply('/remind - Access denied.'); 
+		if (!this.can('broadcast')) return this.sendReply('/remind - Access denied.');
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');
 		if (tour[room.id] == undefined || !tour[room.id].status) return this.sendReply('There is no active tournament in this room.');
 		if (tour[room.id].status == 1) {
@@ -876,7 +876,7 @@ var cmds = {
 	},
 
 	viewround: function(target, room, user, connection) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (room.decision) return this.sendReply('Prof. Oak: There is a time and place for everything! You cannot do this in battle rooms.');
 		if (tour[room.id] == undefined) return this.sendReply('There is no active tournament in this room.');
 		if (tour[room.id].status < 2) return this.sendReply('There is no tournament out of its signup phase.');
@@ -1068,7 +1068,7 @@ var cmds = {
 	},
 
 	tours: function(target, room, user, connection) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		var oghtml = "<hr /><h2>Tournaments In Their Signup Phase:</h2>";
 		var html = oghtml;
 		for (var i in tour) {
@@ -1082,7 +1082,7 @@ var cmds = {
 	},
 
 	polls: function(target, room, user, connection){
-		if(!this.canBroadcast()) return;
+		if(!this.runBroadcast()) return;
 		var oghtml = "<hr /><h2>Active Polls:</h2>";
 		var html = oghtml;
 		for(var u in tour){
@@ -1213,7 +1213,7 @@ var cmds = {
 	},
 
 	/* tourdoc: function() {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReplyBox("Click <a href='http://elloworld.dyndns.org/documentation.html'>here</a> to be taken to the documentation for the tournament commands.");
 	}, */
 
@@ -1226,7 +1226,7 @@ var cmds = {
 	},
 
 	votes: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReply('NUMBER OF VOTES: ' + Object.keys(tour[room.id].answers).length);
 	},
 
@@ -1256,7 +1256,7 @@ var cmds = {
 		tour[room.id].answerList = new Array();
 		tour[room.id].answers = new Object();
 	},
-	
+
 	poll: 'poll2',
 	poll2: function(target, room, user) {
 		if (!tour.userauth(user,room)) return this.sendReply('You do not have enough authority to use this command.');
@@ -1268,7 +1268,7 @@ var cmds = {
 		answers.splice(0, 1);
 		var answers = answers.join(',').toLowerCase().split(',');
 		tour[room.id].question = question;
-		tour[room.id].answerList = answers;		
+		tour[room.id].answerList = answers;
 		var output = '';
         	for (var u in tour[room.id].answerList) {
                 	if (!tour[room.id].answerList[u] || tour[room.id].answerList[u].length < 1) continue;
@@ -1276,12 +1276,12 @@ var cmds = {
         	}
         	room.addRaw('<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font size=2 color = "#939393"><small>/vote OPTION<br /><i><font size=1>Poll started by '+user.name+'</font size></i></small></font></h2><hr />' + separacion + separacion + output + '</div>');
 	},
-	
+
 	pr: 'prtest',
 	prtest: function(target, room, user) {
                  var separacion = "&nbsp;&nbsp;";
                  if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
-                 if (!this.canBroadcast()) return;
+                 if (!this.runBroadcast()) return;
                  var output = '';
                  for (var u in tour[room.id].answerList) {
                  	if (!tour[room.id].answerList[u] || tour[room.id].answerList[u].length < 1) continue;
@@ -1289,12 +1289,12 @@ var cmds = {
                  }
                  this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />'+ separacion + " &bull; " + output + '</div>');
          },
-	
+
 	pollremind: 'pr',
 	pr: function(target, room, user) {
 		var separacion = "&nbsp;&nbsp;";
 		if (!tour[room.id].question) return this.sendReply('There is currently no poll going on.');
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReply('|raw|<div class="infobox"><h2>' + tour[room.id].question + separacion + '<font class="closebutton" size=1><small>/vote OPTION</small></font></h2><hr />' + separacion + separacion + " &bull; " + tour[room.id].answerList.join(' &bull; ') + '</div>');
 	},
 	tpolltest: 'tierpoll',

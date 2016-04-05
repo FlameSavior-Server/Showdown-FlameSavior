@@ -175,7 +175,7 @@ var commands = {
 			return this.sendReplyBox(buffer);
 		}
 
-		if (!this.canBroadcast()) return false;
+		if (!this.runBroadcast()) return false;
 		if (!artistOfTheDay.nominations.size) return this.sendReplyBox("No nominations have been submitted yet.");
 
 		let nominations = toArrayOfArrays(artistOfTheDay.nominations).sort((a, b) => a[0].localeCompare(b[0]));
@@ -233,7 +233,7 @@ var commands = {
 		if (room.id !== 'thestudio') return this.sendReply('This command can only be used in The Studio.');
 		if (!room.chatRoomData) return false;
 		if (!target) {
-			if (!this.canBroadcast()) return;
+			if (!this.runBroadcast()) return;
 			if (!room.chatRoomData.artistQuoteOfTheDay) return this.sendReplyBox("The Artist Quote of the Day has not been set.");
 			return this.sendReplyBox(
 				"The current <strong>Artist Quote of the Day</strong> is:<br />" +
@@ -263,14 +263,14 @@ var commands = {
 	],
 
 	'': function (target, room) {
-		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
-		if (!room.chatRoomData || !this.canBroadcast()) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.runBroadcast()) return false;
+		if (!room.chatRoomData || !this.runBroadcast()) return false;
 		this.sendReplyBox("The Artist of the Day " + (room.chatRoomData.artistOfTheDay ? "is " + room.chatRoomData.artistOfTheDay + "." : "has not been set yet."));
 	},
 
 	help: function (target, room) {
-		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.canBroadcast()) return false;
-		if (!room.chatRoomData || !this.canBroadcast()) return false;
+		if (room.id !== 'goldenrodradiotower' || !room.chatRoomData || !this.runBroadcast()) return false;
+		if (!room.chatRoomData || !this.runBroadcast()) return false;
 		this.sendReply("Use /help aotd to view help for all commands, or /help aotd [command] for help on a specific command.");
 	},
 };

@@ -94,7 +94,7 @@ exports.commands = {
 					this.sendReply("If you want to continue, use: /customavatar forceset, " + hash);
 					return;
 				}
-				
+
 			/* falls through */
 			case 'forceset':
 				if (user.avatarCooldown && !this.can('pban')) {

@@ -68,7 +68,7 @@ exports.commands = {
 	ds: 'dexsearch',
 	dsearch: 'dexsearch',
 	dexsearch: function (target, room, user, connection, cmd, message) {
-		if (!this.runBroadcast()) return;
+		if (!this.canBroadcast()) return;
 		if (!target) return this.parse('/help dexsearch');
 
 		return runSearch({
@@ -101,7 +101,7 @@ exports.commands = {
 	rollpokemon: 'randompokemon',
 	randpoke: 'randompokemon',
 	randompokemon: function (target, room, user, connection, cmd, message) {
-		if (!this.runBroadcast()) return;
+		if (!this.canBroadcast()) return;
 		let targets = target.split(",");
 		let targetsBuffer = [];
 		let qty;
@@ -141,7 +141,7 @@ exports.commands = {
 	ms: 'movesearch',
 	msearch: 'movesearch',
 	movesearch: function (target, room, user, connection, cmd, message) {
-		if (!this.runBroadcast()) return;
+		if (!this.canBroadcast()) return;
 		if (!target) return this.parse('/help movesearch');
 
 		return runSearch({
@@ -171,7 +171,7 @@ exports.commands = {
 
 	isearch: 'itemsearch',
 	itemsearch: function (target, room, user, connection, cmd, message) {
-		if (!this.runBroadcast()) return;
+		if (!this.canBroadcast()) return;
 		if (!target) return this.parse('/help itemsearch');
 
 		return runSearch({
@@ -204,7 +204,7 @@ exports.commands = {
 	dpplearn: 'learn',
 	bw2learn: 'learn',
 	learn: function (target, room, user, connection, cmd, message) {
-		if (!this.runBroadcast()) return;
+		if (!this.canBroadcast()) return;
 		if (!target) return this.parse('/help learn');
 
 		return runSearch({
@@ -276,7 +276,7 @@ function runDexsearch(target, cmd, canAll, message) {
 
 	let andGroups = target.split(',');
 	for (let i = 0; i < andGroups.length; i++) {
-		let orGroup = {abilities: {}, tiers: {}, colors: {}, gens: {}, moves: {}, types: {}, stats: {}, skip: false};
+		let orGroup = {abilities: {}, tiers: {}, colors: {}, gens: {}, moves: {}, types: {}, resists: {}, stats: {}, skip: false};
 		let parameters = andGroups[i].split("|");
 		if (parameters.length > 3) return {reply: "No more than 3 alternatives for each parameter may be used."};
 		for (let j = 0; j < parameters.length; j++) {
@@ -382,6 +382,14 @@ function runDexsearch(target, cmd, canAll, message) {
 				}
 				if (isNotSearch) orGroup.skip = true;
 				break;
+			}
+
+			if (target.substr(0, 8) === 'resists ') {
+				let targetResist = target.substr(8, 1).toUpperCase() + target.substr(9);
+				let invalid = validParameter("resists", targetResist, isNotSearch);
+				if (invalid) return {reply: invalid};
+				orGroup.resists[targetResist] = !isNotSearch;
+				continue;
 			}
 
 			let targetMove = Tools.getMove(target);
@@ -497,6 +505,18 @@ function runDexsearch(target, cmd, canAll, message) {
 				if (dex[mon].types.indexOf(type) >= 0 === alts.types[type]) {
 					matched = true;
 					break;
+				}
+			}
+			if (matched) continue;
+
+			for (let type in alts.resists) {
+				let effectiveness = 0;
+				let notImmune = Tools.getImmunity(type, dex[mon]);
+				if (notImmune) effectiveness = Tools.getEffectiveness(type, dex[mon]);
+				if (!alts.resists[type]) {
+					if (notImmune && effectiveness >= 0) matched = true;
+				} else {
+					if (!notImmune || effectiveness < 0) matched = true;
 				}
 			}
 			if (matched) continue;

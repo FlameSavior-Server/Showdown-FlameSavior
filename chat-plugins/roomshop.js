@@ -82,7 +82,7 @@ exports.commands = {
 				break;
 			default:
 				if (!RoomShop[room.id] || Object.keys(RoomShop[room.id]).length < 1) return this.errorReply("This room does not have any items in it's room shop at this time.");
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				return this.sendReplyBox(getRoomShop(room));
 		}
 	},

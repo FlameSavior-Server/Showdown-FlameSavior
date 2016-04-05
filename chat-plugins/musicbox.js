@@ -48,8 +48,8 @@ exports.commands = {
 			}
 
 			switch (toId(command)) {
-				case 'help': 
-					if (!this.canBroadcast()) return;
+				case 'help':
+					if (!this.runBroadcast()) return;
 					this.sendReplyBox('<b>Music Box Commands:</b><br><br><ul>' +
 						'<li>/' + cmd + ' <em>User</em> - View\'s a user\'s music box.<br>' +
 						'<li>/' + cmd + ' add <em>Youtube link</em> - Adds a song into your music box.<br>' +
@@ -102,11 +102,11 @@ exports.commands = {
 					fs.writeFileSync(FILE, JSON.stringify(musicboxes, null, 1));
 					return this.sendReply('|html|The song "<b>' + match.title + '</b>" has been successfully removed from your music box.');
 					break;
-					
+
 				case 'css':
 					var box = musicboxes[user.userid];
 					if (!target || !target.trim()) {
-						if (!this.canBroadcast()) return;
+						if (!this.runBroadcast()) return;
 						if (toId(box.css)) return this.sendReplyBox("Your music box css: <code>" + box.css + "</code>");
 						return this.sendReplyBox("You haven't set button css for your music box yet.");
 					}
@@ -141,7 +141,7 @@ exports.commands = {
 					break;
 			}
 		} else {
-			if (!this.canBroadcast()) return;
+			if (!this.runBroadcast()) return;
 			if (target.length > 18) return this.sendReply("The username \"" + target + "\" is too long.");
 			var targetUser;
 			if (!toId(target)) targetUser = user.name;

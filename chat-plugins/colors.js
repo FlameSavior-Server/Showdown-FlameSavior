@@ -81,7 +81,7 @@ exports.commands = {
 				"/customcolor [user], delete - Deletes a user's custom color"],
 
 	colorpreview: function (target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		target = target.split(',');
 		for (var u in target) target[u] = target[u].trim();
 		if (!target[1]) return this.parse('/help colorpreview');

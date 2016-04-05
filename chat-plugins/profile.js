@@ -13,7 +13,7 @@ exports.commands = {
 		if (!target) target = user.name;
 		if (toId(target).length > 19) return this.sendReply("Usernames may not be more than 19 characters long.");
 		if (toId(target).length < 1) return this.sendReply(target + " is not a valid username.");
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 
 		var targetUser = Users.get(target);
 

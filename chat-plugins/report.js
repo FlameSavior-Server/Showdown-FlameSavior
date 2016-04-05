@@ -58,7 +58,7 @@ exports.commands = {
 		switch (cmd) {
 			case '':
 			case 'view':
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				var output = '|raw|<table border="1" cellspacing ="0" cellpadding="3"><tr><th>ID</th><th>Reporter</th><th>Message</th><th>Report Time</th><th>Status</th></tr>';
 				for (var u in Object.keys(Reports)) {
 					var currentReport = Reports[Object.keys(Reports)[u]];
@@ -116,7 +116,7 @@ exports.commands = {
 				this.sendReply("That report has been deleted.");
 				break;
 			case 'help':
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				this.sendReplyBox("Report commands: <br />" +
 					"/report [message] - Adds a report to the system<br />" +
 					"/reports view - Views all current reports<br />" +

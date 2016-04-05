@@ -242,12 +242,12 @@ exports.commands = {
 					room.poll.end();
 					delete room.poll;
 				}, (timeout * 60000));
-				room.add("The poll timer was turned on: the poll will end in " + timeout + " minutes.");
-				return this.privateModCommand("(The poll timer was set to " + timeout + " minutes by " + user.name + ".)");
+				room.add("The poll timer was turned on: the poll will end in " + timeout + " minute(s).");
+				return this.privateModCommand("(The poll timer was set to " + timeout + " minute(s) by " + user.name + ".)");
 			} else {
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				if (room.poll.timeout) {
-					return this.sendReply("The poll timer is on and will end in " + room.poll.timeoutMins + " minutes.");
+					return this.sendReply("The poll timer is on and will end in " + room.poll.timeoutMins + " minute(s).");
 				} else {
 					return this.sendReply("The poll timer is off.");
 				}
@@ -279,7 +279,7 @@ exports.commands = {
 		show: 'display',
 		display: function (target, room, user, connection) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
-			if (!this.canBroadcast()) return;
+			if (!this.runBroadcast()) return;
 			room.update();
 
 			if (this.broadcasting) {
@@ -305,7 +305,7 @@ exports.commands = {
 
 	votes: function(target, room, user) {
 		if (!room.poll) return this.errorReply("There is no poll running in this room.");
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		room.poll.update();
 		var votes = room.poll.totalVotes;
 		var lbl = (votes > 1 ? ' VOTES' : ' VOTE');
@@ -318,7 +318,7 @@ exports.commands = {
 	pr: 'pollremind',
 	pollremind: function(target, room, user) {
 		if (!room.poll) return this.errorReply("There is no poll running in this room.");
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		room.poll.update();
 		if (this.broadcasting) {
 			room.update();

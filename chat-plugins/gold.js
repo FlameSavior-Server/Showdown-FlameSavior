@@ -300,7 +300,7 @@ exports.commands = {
 	pbl: 'pbanlist',
 	permabanlist: 'pbanlist',
 	pbanlist: function(target, room, user, connection) {
-		if (!this.canBroadcast() || !user.can('lock')) return this.sendReply('/pbanlist - Access Denied.');
+		if (!this.runBroadcast() || !user.can('lock')) return this.sendReply('/pbanlist - Access Denied.');
 		var pban = fs.readFileSync('config/pbanlist.txt', 'utf8');
 		return user.send('|popup|' + pban);
 	},
@@ -317,7 +317,7 @@ exports.commands = {
 	newroomcommands: 'newroomquestions',
 	newroomfaq: 'newroomquestions',
 	newroomquestions: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReplyBox('For our NEW room request system, fill out our application found <a href="http://goo.gl/forms/YHZVb6BvTb">here</a>.');
 	},
 	punt: function(target, room, user) {
@@ -458,7 +458,7 @@ exports.commands = {
 		if (!target) return this.sendReply('Usage: /define <word>');
 		target = toId(target);
 		if (target > 50) return this.sendReply('/define <word> - word can not be longer than 50 characters.');
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		var options = {
 		    url: 'http://api.wordnik.com:80/v4/word.json/'+target+'/definitions?limit=3&sourceDictionaries=all' +
 		    '&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5',
@@ -488,7 +488,7 @@ exports.commands = {
 	u: 'urbandefine',
     ud: 'urbandefine',
     urbandefine: function(target, room, user) {
-    	if (!this.canBroadcast()) return;
+    	if (!this.runBroadcast()) return;
     	if (!target) return this.parse('/help urbandefine');
     	if (target > 50) return this.sendReply('Phrase can not be longer than 50 characters.');
     	var self = this;
@@ -525,7 +525,7 @@ exports.commands = {
     },
 	gethex: 'hex',
 	hex: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (!this.canTalk()) return;
 		if (!target) target = toId(user.name);
 		return this.sendReplyBox('<b><font color="' + Gold.hashColor(target) + '">' + target + '</font></b>.  The hexcode for this name color is: ' + Gold.hashColor(target) + '.');
@@ -535,7 +535,7 @@ exports.commands = {
 		if (!this.can('ban', null, room)) return false;
 		if (!target) return this.parse('/help roomshowimage');
 		var parts = target.split(',');
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReplyBox("<img src=" + parts[0] + " width=" + parts[1] + " height=" + parts[1]);
 	},
 	roomshowimagehelp: ["!rsi [image], [width], [height] - Broadcasts an image to the room"],
@@ -545,7 +545,7 @@ exports.commands = {
 	usersofrank: function(target, room, user, connection, cmd) {
 		if (cmd === 'admins') target = '~';
 		if (!target || !Config.groups[target]) return this.parse('/help usersofrank');
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		var names = [];
 		for (var users of Users.users) {
 			users = users[1];
@@ -648,12 +648,12 @@ exports.commands = {
 		targetUser.resetName();
 	},
 	goldstaff: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');
 	},
 	userid: function(target, room, user) {
 		if (!target) return this.parse('/help userid');
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		return this.sendReplyBox(Tools.escapeHTML(target) + " ID: <b>" + Tools.escapeHTML(toId(target)) + "</b>");
 	},
 	useridhelp: ["/userid [user] - shows the user's ID (removes unicode from name basically)"],
@@ -664,7 +664,7 @@ exports.commands = {
 		Gold.pmUpperStaff(target, false, user.name);
 	},
 	client: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		return this.sendReplyBox('Gold\'s custom client can be found <a href="http://goldservers.info">here</a>.');
 	},
 	pas: 'pmallstaff',
@@ -688,8 +688,9 @@ exports.commands = {
 			}
 		}
 		var popup = "|html|" + "<font size=5>Gold Server Credits</font><br />" +
-					"<u>Owner:</u><br />" +
+					"<u>Owners:</u><br />" +
 					"- " + name('panpawn', true) + " (Founder, Sysadmin, Development)<br />" +
+					"- " + name('virtuos', true) + " (Lead policy, Sysadmin)<br />" +
 					"<br />" +
 					"<u>Development:</u><br />" +
 					"- " + name('panpawn', true) + " (Owner of GitHub repository)<br />" +
@@ -697,17 +698,16 @@ exports.commands = {
 					"- " + name('Silveee', true) + " (Contributor)<br />" +
 					"<br />" +
 					"<u>Special Thanks:</u><br />" +
-					"- Current staff team<br />" +
+					"- Current staff members<br />" +
 					"- Our regular users<br />" +
-					"- " + name('virtuos', true) + " (Former Administrator / Co- Owner)<br />" +
-					"- " + name('PixelatedPaw', true) + " (One of the original Administrators)";
+					"- PixelatedPaw (One of the original administrators)";
 		user.popup(popup);
 	},
 	regdate: function(target, room, user, connection) {
 		var targetid = toId(target);
 		var self = this;
 		if (targetid.length < 1 || targetid.length > 19) return this.sendReply("Usernames may not be less than one character or longer than 19");
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (regdateCache[targetid]) {
 			reply(regdateCache[targetid]);
 		} else {
@@ -737,7 +737,7 @@ exports.commands = {
 		}
 	},
 	stafffaq: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		return this.sendReplyBox('Click <a href="http://goldserver.weebly.com/how-do-i-get-a-rank-on-gold.html">here</a> to find out about Gold\'s ranks and promotion system.');
 	},
 	removebadge: function(target, room, user) {
@@ -830,7 +830,7 @@ exports.commands = {
 		})
 	},
 	badgelist: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		var fgs = '<img src="http://www.smogon.com/media/forums/images/badges/forummod_alum.png" title="Former Gold Staff">';
 		var admin = '<img src="http://www.smogon.com/media/forums/images/badges/sop.png" title="Server Administrator">';
 		var dev = '<img src="http://www.smogon.com/media/forums/images/badges/factory_foreman.png" title="Gold Developer">';
@@ -848,7 +848,7 @@ exports.commands = {
 	},
 	badges: 'badge',
 	badge: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (target == '') target = user.userid;
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
@@ -908,7 +908,7 @@ exports.commands = {
 	helix: 'm8b',
 	magic8ball: 'm8b',
 	m8b: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		var random = Math.floor(20 * Math.random()) + 1;
 		var results = '';
 		if (random == 1) {
@@ -976,7 +976,7 @@ exports.commands = {
 	coins: 'coingame',
 	coin: 'coingame',
 	coingame: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		var random = Math.floor(2 * Math.random()) + 1;
 		var results = '';
 		if (random == 1) {
@@ -990,7 +990,7 @@ exports.commands = {
 	/*
 	one: function(target, room, user) {
 	    if (room.id !== '1v1') return this.sendReply("This command can only be used in 1v1.");
-	    if (!this.canBroadcast()) return;
+	    if (!this.runBroadcast()) return;
 	    var messages = {
 	        onevone: 'Global 1v1 bans are: Focus Sash, Sturdy (if doesnt naturally learn it), Sleep, Imposter/imprison, Parental Bond, and level 100 Pokemon only. You are only allowed to use "3 team preview" in all tiers falling under the "1v1 Elimination" tier. All other tiers must be 1 Pokemon only. No switching',
 	        reg: 'This is regular 1v1, only bans are Sleep, Ubers (except mega gengar), and ditto (imposter/imprison)',
@@ -1030,7 +1030,7 @@ exports.commands = {
 	},
 	*/
 	color: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (target === 'list' || target === 'help' || target === 'options') {
 			return this.sendReplyBox('The random colors are: <b><font color="red">Red</font>, <font color="blue">Blue</font>, <font color="orange">Orange</font>, <font color="green">Green</font>, <font color="teal">Teal</font>, <font color="brown">Brown</font>, <font color="black">Black</font>, <font color="purple">Purple</font>, <font color="pink">Pink</font>, <font color="gray">Gray</font>, <font color="tan">Tan</font>, <font color="gold">Gold</font>, <font color=#CC0000>R</font><font color=#AE1D00>a</font><font color=#913A00>i</font><font color=#745700>n</font><font color=#577400>b</font><font color=#3A9100>o</font><font color=#1DAE00>w</font>.');
 		}
@@ -1048,7 +1048,7 @@ exports.commands = {
 		user.send('|popup|' + crashes);
 	},
 	friendcodehelp: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReplyBox('<b>Friend Code Help:</b> <br><br />' +
 			'/friendcode (/fc) [friendcode] - Sets your Friend Code.<br />' +
 			'/getcode (gc) - Sends you a popup of all of the registered user\'s Friend Codes.<br />' +
@@ -1194,7 +1194,7 @@ exports.commands = {
 		});
 	},
 	facebook: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReplyBox('Gold\'s Facebook page can be found <a href="https://www.facebook.com/pages/Gold-Showdown/585196564960185">here</a>.');
 	},
 	guesscolor: function(target, room, user) {
@@ -1214,7 +1214,7 @@ exports.commands = {
 	radio: 'dubtrack',
 	dubtrackfm: 'dubtrack',
 	dubtrack: function (target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 
 		var nowPlaying = "";
 		var self = this;
@@ -1230,8 +1230,12 @@ exports.commands = {
     	request("http://api.dubtrack.fm/room/goldenrod-radio-tower", callback);
 	},
 	economy: function (target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		return this.sendReplyBox("<b>Total bucks in economy:</b> " + Gold.totalBucks() + "<br /><b>The average user has:</b> " + Gold.averageBucks() + " bucks.");
+	},
+	goldintro: function (target, room, user) {
+		return this.sendReplyBox("<center><b><u>Welcome to Gold!</u></b></center><br />" +
+				"");
 	},
 
 	/*
@@ -1240,7 +1244,7 @@ exports.commands = {
 		var separacion = "&nbsp;&nbsp;";
 		if (!room.question) return this.sendReply('There is currently no poll going on.');
 		if ((user.locked) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		var output = '';
 		for (var u in room.answerList) {
 			if (!room.answerList[u] || room.answerList[u].length < 1) continue;
@@ -1251,7 +1255,7 @@ exports.commands = {
 	votes: function(target, room, user) {
 		if (!room.answers) room.answers = new Object();
 		if (!room.question) return this.sendReply('There is no poll currently going on in this room.');
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReply('NUMBER OF VOTES: ' + Object.keys(room.answers).length);
 	},
 	tpolltest: 'tierpoll',

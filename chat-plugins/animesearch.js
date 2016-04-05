@@ -44,7 +44,7 @@ function search (query) {
 			animeCache.queries[formattedQuery] = info.link;
 			fs.writeFileSync(FILE, JSON.stringify(animeCache, null, 1));
 			return resolve(info.link);
-			
+
 		})
 	})
 	.then(function (name) {
@@ -85,7 +85,7 @@ exports.commands = {
 	animesearch: 'anime',
 	as: 'anime',
 	anime: function (target, room, user, connection, cmd) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (this.broadcasting && room.id === 'lobby') return this.errorReply("This command cannot be broadcasted in the Lobby.");
 		if (!target || !target.trim()) return this.sendReply('/' + cmd + ' [query] - Searches for an anime based on the given search query.');
 

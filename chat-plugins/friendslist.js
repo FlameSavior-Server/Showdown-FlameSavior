@@ -184,7 +184,7 @@ exports.commands = {
 				break;
 
 			default:
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				if (!target[0]) {
 					if (!Friends[user.userid] || Friends[user.userid].length < 1) {
 						this.parse('/help friendslist');

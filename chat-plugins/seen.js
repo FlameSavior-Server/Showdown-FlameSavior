@@ -34,14 +34,14 @@ exports.commands = {
 	lastseen: 'seen',
 	seen: function (target, room, user) {
 		try {
-			var userNameColor = Gold.hashColor(target); 
+			var userNameColor = Gold.hashColor(target);
 			switch (target) {
 				case 'obj':
-					if (!this.canBroadcast()) return;
+					if (!this.runBroadcast()) return;
 					this.sendReplyBox("There have been " + Object.size(seenData) + " user names recorded in this database.");
 					break;
 				default:
-					if (!this.canBroadcast()) return;
+					if (!this.runBroadcast()) return;
 					var userid = toId(target);
 					if (toId(target).length > 18) return this.sendReply("Usernames cannot be over 18 characters.");
 					if (userid.length < 1) return this.sendReply("/seen - Please specify a name.");

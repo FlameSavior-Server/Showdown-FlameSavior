@@ -20,7 +20,7 @@ exports.commands = {
 	anagram: function(target, room, user) {
 		if (!user.can('broadcast', null, room) || !this.canTalk()) return this.sendReply('/anagram - Access denied.');
 		if (!target && !room.anagram) return this.sendReply("Usage: /anagram [normal/pokemon]");
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (room.anagram) return this.sendReplyBox("Word: " + room.anagram.scrambledWord);
 		if (!room.anagram) room.anagram = {};
 

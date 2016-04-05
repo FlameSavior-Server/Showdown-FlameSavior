@@ -153,13 +153,13 @@ exports.commands = {
 				break;
 
 			case 'tickets':
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
 				return this.sendReplyBox("<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\"><b>Current tickets: (" + lottery.players.length + ")</b><br /> " + lottery.players + "</div>");
 				break;
 
 			case 'odds':
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
 				if (!parts[1]) parts[1] = user.name;
 				if (lottery.players.length > 1) {
@@ -178,7 +178,7 @@ exports.commands = {
 				break;
 
 			case 'status':
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
 				return this.sendReplyBox(
 					"<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">" +
@@ -194,13 +194,13 @@ exports.commands = {
 				break;
 
 			case 'uptime':
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
 				return this.sendReplyBox("Lottery Game Uptime: <b>" + moment(lottery.startTime).fromNow() + "</b>");
 				break;
 
 			case 'pot':
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				if (!lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
 				return this.sendReplyBox("The current lottery pot is worth: <b>" + lottery.pot + "</b> bucks.");
 				break;
@@ -211,7 +211,7 @@ exports.commands = {
 				break;
 
 			default:
-				if (!this.canBroadcast()) return;
+				if (!this.runBroadcast()) return;
 				this.sendReplyBox(
 					"<center><b>Lottery Commands</b><br />" +
 					"<i><font color=gray>(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/lottery.js\" class=\"subtle\">panpawn</a>)</font></i></center><br />" +

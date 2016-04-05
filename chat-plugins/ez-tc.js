@@ -39,7 +39,7 @@ exports.commands = {
 				if (CommandParser.commands[commandName]) return this.errorReply("/trainercards - The command \"" + commandName + "\" already exists.");
 				try {
 					var html = parts.splice(2, parts.length).join(',');
-					trainerCards[commandName] = new Function('target', 'room', 'user', "if (!room.disableTrainerCards) if (!this.canBroadcast()) return; this.sendReplyBox('" + html.replace(/'/g, "\\'") + "');");
+					trainerCards[commandName] = new Function('target', 'room', 'user', "if (!room.disableTrainerCards) if (!this.runBroadcast()) return; this.sendReplyBox('" + html.replace(/'/g, "\\'") + "');");
 					saveTrainerCards();
 					this.sendReply("The trainer card \"" + commandName + "\" has been added.");
 					this.logModCommand(user.name + " added the trainer card " + commandName);

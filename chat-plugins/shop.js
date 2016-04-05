@@ -41,7 +41,7 @@ updatePrices();
 
 exports.commands = {
     	shop: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (room.id === 'lobby' && this.broadcasting) {
 			return this.sendReplyBox('<center>Click <button name="send" value="/shop" style="background-color: black; font-color: white;" title="Enter the Shop!"><font color="white"><b>here</button></b></font> to enter our shop!');
 		} else {
@@ -426,7 +426,7 @@ exports.commands = {
 	bag: 'atm',
 	bank: 'atm',
 	atm: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		if (!target) target = user.name;
 		var originalName = Tools.escapeHTML(target);
 		target = toId(target);
@@ -447,7 +447,7 @@ exports.commands = {
 	},
 	whosgotthemoneyz: 'richestuser',
 	richestuser: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		var data = fs.readFileSync('config/money.csv', 'utf8');
 		var row = ('' + data).split("\n");
 		var userids = {

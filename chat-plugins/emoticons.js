@@ -192,7 +192,7 @@ exports.commands = {
 					break;
 
 				case 'list':
-					if (!this.canBroadcast()) return;
+					if (!this.runBroadcast()) return;
 					if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					var output = "<b>There's a total of " + Object.size(emotes) + " emoticons added with this command:</b><br />";
 					for (var e in emotes) {
@@ -202,7 +202,7 @@ exports.commands = {
 					break;
 
 				case 'view':
-					if (!this.canBroadcast()) return;
+					if (!this.runBroadcast()) return;
 					var name = Object.keys(Gold.emoticons.chatEmotes);
 					emoticons = [];
 					var len = name.length;
@@ -224,7 +224,7 @@ exports.commands = {
 					break;
 
 				case 'object':
-					if (!this.canBroadcast()) return;
+					if (!this.runBroadcast()) return;
 					if (this.broadcasting) return this.errorReply("ERROR: this command is too spammy to broadcast.  Use / instead of ! to see it for yourself.");
 					this.sendReplyBox("Gold.emoticons.chatEmotes = " + fs.readFileSync('config/emotes.json','utf8'));
 					break;
@@ -277,7 +277,7 @@ exports.commands = {
 
 				case 'help':
 				default:
-					if (!this.canBroadcast()) return;
+					if (!this.runBroadcast()) return;
 					this.sendReplyBox(
 							"<center><b>Emoticon Commands:</b><br />" +
 							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/emoticons.js\">panpawn</a>)</font></i></center><br />" +

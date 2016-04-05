@@ -9,7 +9,7 @@ function handleWinnings (bet) {
 
 exports.commands = {
 	gambledicehelp: function(target, room, user) {
-		if (!this.canBroadcast()) return;
+		if (!this.runBroadcast()) return;
 		this.sendReplyBox(
 			'Dice game commands: <br />' +
 			'/startdice <bet> - Starts a game.<br />' +

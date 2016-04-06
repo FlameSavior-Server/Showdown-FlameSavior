@@ -71,7 +71,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		if (!target) return this.parse('/help dexsearch');
 
-		return runSearch({
+		runSearch({
 			target: target,
 			cmd: 'dexsearch',
 			canAll: (!this.broadcastMessage || room.isPersonal),
@@ -119,7 +119,7 @@ exports.commands = {
 		}
 		if (!qty) targetsBuffer.push("random1");
 
-		return runSearch({
+		runSearch({
 			target: targetsBuffer.join(","),
 			cmd: 'randpoke',
 			canAll: (!this.broadcastMessage || room.isPersonal),
@@ -144,7 +144,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		if (!target) return this.parse('/help movesearch');
 
-		return runSearch({
+		runSearch({
 			target: target,
 			cmd: 'movesearch',
 			canAll: (!this.broadcastMessage || room.isPersonal),
@@ -174,7 +174,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		if (!target) return this.parse('/help itemsearch');
 
-		return runSearch({
+		runSearch({
 			target: target,
 			cmd: 'itemsearch',
 			canAll: (!this.broadcastMessage || room.isPersonal),
@@ -207,7 +207,7 @@ exports.commands = {
 		if (!this.canBroadcast()) return;
 		if (!target) return this.parse('/help learn');
 
-		return runSearch({
+		runSearch({
 			target: target,
 			cmd: 'learn',
 			message: cmd,

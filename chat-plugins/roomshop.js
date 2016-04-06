@@ -25,13 +25,14 @@ function getName(user) {
 }
 
 function getRoomShop (room) {
-	var output = "<center><b><u>" + room.title + " Room Shop</u></b><br />" +
+	var output = "<center><b><u>" + Tools.escapeHTML(room.title) + " Room Shop</u></b><br />" +
 	    '<table border="1" cellspacing ="0" cellpadding="3">' +
 	    '<tr><th>Item</th><th>Description</th><th>Price</th></tr>';
 	for (var i in RoomShop[room.id]) {
 	    var item = RoomShop[room.id][i];
 	    var name = item[0], desc = item[1], price = item[2];
-		output += '<tr><td><button name="send" value="/roomshop buy, ' + name + '">' + name + '</button></td><td>' + desc + '</td><td>' + price + '</td></tr>';
+		output += '<tr><td><button name="send" value="/roomshop buy, ' + Tools.escapeHTML(name) + '">' + Tools.escapeHTML(name) + '</button></td><td>' + 
+			Tools.escapeHTML(desc) + '</td><td>' + price + '</td></tr>';
 	}
 	return output + '</table><font size=1>Note: As per server rules, global staff are not responsible for scams via a room shop.  However, if severe enough, report it to a global staff and if there was a rule broken, action will be taken.</font></center>';
 }
@@ -73,6 +74,7 @@ exports.commands = {
 				return this.sendReply("You have successfully removed the item '" + itemName + "' from the room's shop.");
 				break;
 			case 'buy':
+				if (room.founder === user.userid) return this.errorReply("You can't buy from your own room shop.");
 				var item = toId(target[1]);
 				if (!item) return this.errorReply("Usage: /roomshop buy, [item] - Buys an item from the room's room shop.");
 				if (!RS[item]) return this.errorReply("This item is not in the room shop. Check spelling?");

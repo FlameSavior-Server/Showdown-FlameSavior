@@ -39,7 +39,8 @@ function getRoomShop (room) {
 
 exports.commands = {
 	roomshop: function(target, room, user, connection, cmd, message) {
-		if (!room.founder || room.isOfficial) return this.errorReply("This room is not designed to have a room shop.");
+		if (!room.founder) return this.errorReply("This room is not designed to have a room shop.");
+		if (!room.isOfficial && !Users.usergroups[room.founder]) return this.errorReply("This room does not qualify to have a room shop.");
 		if (!target || !target.trim()) {
 			if (!RoomShop[room.id] || Object.keys(RoomShop[room.id]).length < 1) return this.errorReply("This room does not have any items in it's room shop at this time.");
 			if (!this.runBroadcast()) return;

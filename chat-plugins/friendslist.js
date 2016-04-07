@@ -92,7 +92,7 @@ function formatList(user, by) {
 			var userLastSeen = moment(Gold.seenData[frens]).fromNow();
 			return userLastSeen;
 		}
-		reply += "<tr><td>" + getName(frens, true, true) + "</td><td>" + lastSeen(frens) + "</td><td>" + (economy.readMoney(frens) == 0 ? "None" : economy.readMoney(frens)) + "</td></tr>";
+		reply += "<tr><td>" + getName(frens, true, true) + "</td><td>" + lastSeen(frens) + "</td><td>" + (Economy.readMoneySync(frens) == 0 ? "None" : Economy.readMoneySync(frens)) + "</td></tr>";
 	});
 	reply += "</table>";
 	var number = getFriendsNumber(user);

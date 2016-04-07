@@ -214,10 +214,6 @@ fs.readFile('./logs/uptime.txt', function (err, uptime) {
 
 //global.tour = require('./tour.js').tour();
 
-try {
-	//global.hangman = require('./hangman.js').hangman();
-	global.economy = require('./economy.js');
-} catch (e) {}
 /*********************************************************
  * Start up the REPL server
  *********************************************************/

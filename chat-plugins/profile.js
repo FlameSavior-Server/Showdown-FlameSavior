@@ -39,10 +39,10 @@ exports.commands = {
 		var self = this;
 		var bucks = function (user) {
 			user = toId(user);
-			if (!economy.readMoney(user)) {
+			if (!Economy.readMoneySync(user)) {
 				return 0;
 			} else {
-				return economy.readMoney(user);
+				return Economy.readMoneySync(user);
 			}
 		};
 		var options = {

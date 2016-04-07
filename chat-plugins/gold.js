@@ -1229,9 +1229,37 @@ exports.commands = {
     	}
     	request("http://api.dubtrack.fm/room/goldenrod-radio-tower", callback);
 	},
-	goldintro: function (target, room, user) {
-		return this.sendReplyBox("<center><b><u>Welcome to Gold!</u></b></center><br />" +
-				"");
+	uptime: (function() {
+		function formatUptime(uptime) {
+			if (uptime > 24 * 60 * 60) {
+				var uptimeText = "";
+				var uptimeDays = Math.floor(uptime / (24 * 60 * 60));
+				uptimeText = uptimeDays + " " + (uptimeDays === 1 ? "day" : "days");
+				var uptimeHours = Math.floor(uptime / (60 * 60)) - uptimeDays * 24;
+				if (uptimeHours) uptimeText += ", " + uptimeHours + " " + (uptimeHours === 1 ? "hour" : "hours");
+				return uptimeText;
+			} else {
+				return uptime.seconds().duration();
+			}
+		}
+
+		return function(target, room, user) {
+			if (!this.canBroadcast()) return;
+			var uptime = process.uptime();
+			this.sendReplyBox("Uptime: <b>" + formatUptime(uptime) + "</b>" +
+				(global.uptimeRecord ? "<br /><font color=\"green\">Record: <b>" + formatUptime(global.uptimeRecord) + "</b></font>" : ""));
+		};
+	})(),
+	declareaotd: function(target, room, user) {
+		if (room.id != 'lobby') return this.sendReply("The command must be used in Lobby.");
+		if (!user.can('broadcast', null, room)) return this.sendReply('You do not have enough authority to use this command.');
+		if (!this.canTalk()) return false;
+		this.add(
+			'|raw|<div class="broadcast-blue"><b>AOTD has begun in GoldenrodRadioTower! ' +
+			'<button name="joinRoom" value="goldenrodradiotower" target="_blank">Join now</button> to nominate your favorite artist for AOTD to be featured on the ' +
+			'official page next to your name for a chance to win the monthly prize at the end of the month!</b></div>'
+		);
+		this.logModCommand(user.name + " used declareaotd.");
 	},
 
 	/*

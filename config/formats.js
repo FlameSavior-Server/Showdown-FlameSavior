@@ -617,7 +617,6 @@ exports.Formats = [
 		onBegin: function () {
 			this.add("raw|Super Staff Bros. <b>MELEEEEEEEEEEEEEE</b>!!");
 			this.add('message', "SURVIVAL! GET READY FOR THE NEXT BATTLE!");
-			this.add('raw|You can find the documentation for this format <a href="https://github.com/Zarel/Pokemon-Showdown/blob/master/mods/seasonal/README.md">here</a>.');
 
 			let globalRenamedMoves = {};
 			let customRenamedMoves = {};
@@ -698,6 +697,10 @@ exports.Formats = [
 				if (name === 'theimmortal' && pokemon.getAbility().id === 'megalauncher') {
 					pokemon.setAbility('cloudnine');
 				}
+			}
+			if (!this.shownTip) {
+				this.add('raw|<div class=\"broadcast-green\">Huh? But what do all these weird moves do??<br><b>Protip: Refer to the <a href="https://github.com/Zarel/Pokemon-Showdown/blob/master/mods/seasonal/README.md">PLAYER\'S MANUAL</a>!</b></div>');
+				this.shownTip = true;
 			}
 		},
 		// Here we treat many things, read comments inside for information.
@@ -941,7 +944,7 @@ exports.Formats = [
 				this.add('c|@Aurora|Best of luck to all competitors!');
 			}
 			if (name === 'awu') {
-				this.add('c|+awu|Fite me irl bruh.');
+				this.add('c|%awu|Fite me irl bruh.');
 			}
 			if (name === 'beowulf') {
 				this.add('c|@Beowulf|Grovel peasant, you are in the presence of the RNGesus');
@@ -970,6 +973,7 @@ exports.Formats = [
 			}
 			if (name === 'bumbadadabum') {
 				this.add('c|@bumbadadabum|Time for card games on motorcycles!');
+				if (pokemon.side.foe.active.length && pokemon.side.foe.active[0].name === 'Scotteh') this.add('c|@bumbadadabum|Also, fuck you Scotteh');
 			}
 			if (name === 'bummer') {
 				this.add("c|&Bummer|Oh hi.");
@@ -1265,6 +1269,7 @@ exports.Formats = [
 			if (name === 'scotteh') {
 				this.add('c|&Scotteh|─────▄▄████▀█▄');
 				this.add('c|&Scotteh|───▄██████████████████▄');
+				if (pokemon.side.foe.active.length && pokemon.side.foe.active[0].name === 'bumbadadabum') this.add('c|@bumbadadabum|Fuck you Scotteh');
 				this.add('c|&Scotteh|─▄█████.▼.▼.▼.▼.▼.▼.▼');
 			}
 			if (name === 'scpinion') {
@@ -1413,9 +1418,13 @@ exports.Formats = [
 				this.add('c|%Zodiax|Introducing 7 time Grand Champion to the battle!');
 			}
 		},
-		// Add here salty tears, that is, custom faint phrases.
 		onFaint: function (pokemon, source, effect) {
 			let name = toId(pokemon.name);
+
+			if (name === 'innovamania') {
+				pokemon.side.addSideCondition('healingwish', pokemon, this);
+			}
+			// Add here salty tears, that is, custom faint phrases.
 			let sentences = [];
 			// This message is different from others, as it triggers when
 			// opponent faints
@@ -1476,7 +1485,7 @@ exports.Formats = [
 				this.add('c|@Aurora|are you serious you\'re so bad oh my god haxed ughhhhh');
 			}
 			if (name === 'awu') {
-				this.add("c|+awu|No need for goodbye. I'll see you on the flip side.");
+				this.add("c|%awu|No need for goodbye. I'll see you on the flip side.");
 			}
 			if (name === 'beowulf') {
 				this.add('c|@Beowulf|There is no need to be mad');
@@ -1553,9 +1562,8 @@ exports.Formats = [
 				this.add('c|+sparkyboTTT|nice 1');
 			}
 			if (name === 'eeveegeneral') {
-				sentences = ["Electrolyte is in charge", "/me secretly cries", "inap!"];
-				this.add("c|~Eevee General|bye room");
-				this.add("c|!Eevee General|" + sentences[this.random(3)]);
+				sentences = ["bye room, Electrolyte is in charge", "/me secretly cries", "inap!"];
+				this.add("c|~Eevee General|" + sentences[this.random(3)]);
 			}
 			if (name === 'eyan') {
 				this.add("c|@Eyan|;-;7");
@@ -1776,6 +1784,10 @@ exports.Formats = [
 			}
 			if (name === 'sirdonovan') {
 				this.add('-message', 'RIP sirDonovan');
+			}
+			if (name === 'skitty') {
+				this.add('c|@Skitty|!learn skitty, roleplay');
+				this.add('raw|<div class="infobox">In Gen 6, Skitty <span class="message-learn-cannotlearn">can\'t</span> learn Role Play</div>');
 			}
 			if (name === 'solarisfox') {
 				this.add('c|%SolarisFox|So long, and thanks for all the fish.');

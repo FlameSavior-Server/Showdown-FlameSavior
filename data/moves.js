@@ -10756,15 +10756,17 @@ exports.BattleMovedex = {
 		flags: {charge: 1, protect: 1, mirror: 1},
 		onTry: function (attacker, defender, move) {
 			if (attacker.volatiles['twoturnmove']) {
-				if (attacker.volatiles['twoturnmove'].duration === 1) {
-					return;
-				} else {
-					return null;
-				}
+				if (attacker.volatiles['twoturnmove'].duration === 2) return null;
+				attacker.removeVolatile(move.id);
+				return;
 			}
 			this.add('-prepare', attacker, move.name, defender);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				this.add('-anim', attacker, move.name, defender);
+				if (move.spreadHit) {
+					attacker.addVolatile('twoturnmove', defender);
+					attacker.volatiles['twoturnmove'].duration = 1;
+				}
 				return;
 			}
 			attacker.addVolatile('twoturnmove', defender);
@@ -13555,7 +13557,7 @@ exports.BattleMovedex = {
 		accuracy: 90,
 		basePower: 0,
 		damageCallback: function (pokemon, target) {
-			return target.hp / 2;
+			return this.clampIntRange(Math.floor(target.hp / 2), 1);
 		},
 		category: "Physical",
 		desc: "Deals damage to the target equal to half of its current HP, rounded down, but not less than 1 HP.",

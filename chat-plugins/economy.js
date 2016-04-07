@@ -267,7 +267,7 @@ exports.commands = {
 						"Never gonna tell a lie and hurt you</blink>").update();
 				break;
 			default:
-				console.log('default');
+				this.sendReply("Oh oh... this shouldn't of happened.  Please message an Administrator and take a screencap of this. (Problem with mysterybox)");
 				break;
 			}
 			Rooms('lobby').add("|raw|" + nameColor(user.name) + " has bought a Magic Pack from the shop! " + (goodBad === 'good' ? "They have won a(n) <b>" + prize + "</b>!" : "Oh no!  They got a " + prize + " from their pack :(")).update();

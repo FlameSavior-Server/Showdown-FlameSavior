@@ -337,3 +337,4 @@ exports.commands = {
 		this.parse('/poll vote ' + target);
 	}
 };
+

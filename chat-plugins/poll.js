@@ -6,7 +6,7 @@
 'use strict';
 
 const permission = 'broadcast';
-const blackbutton = 'padding:2px; background-color:#000; border:1px solid #666; color:white';
+const blackbutton = 'background: black; text-shadow: none; padding: 2px 6px; color: white; tex-align: left;';
 const moment = require('moment');
 
 class Poll {
@@ -65,7 +65,7 @@ class Poll {
 	generateVotes() {
 		let output = '<div class="infobox"><p style="margin: 2px 0 5px 0"><span style="border:1px solid #6A6;color:#484;border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> Poll</span> <strong style="font-size:11pt">' + Tools.escapeHTML(this.question) + '</strong></p>';
 		this.options.forEach(function (option, number) {
-			output += '<div style="margin-top: 3px"><button style="' + blackbutton + '" value="/poll vote ' + number + '" name="send" title="Vote for ' + number + '. ' + Tools.escapeHTML(option.name) + '">' + number + '. <strong>' + Tools.escapeHTML(option.name) + '</strong></button></div>';
+			output += '<div style="margin-top: 3px"><button class="button" style="' + blackbutton + '" value="/poll vote ' + number + '" name="send" title="Vote for ' + number + '. ' + Tools.escapeHTML(option.name) + '">' + number + '. <strong>' + Tools.escapeHTML(option.name) + '</strong></button></div>';
 		});
 		output += '<div style="margin-top: 7px; padding-left: 12px"><button value="/poll results" name="send" title="View results - you will not be able to vote after viewing results"><small>(View results)</small></button></div>';
 		output += '</div>';

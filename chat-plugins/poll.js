@@ -6,7 +6,7 @@
 'use strict';
 
 const permission = 'broadcast';
-const blackbutton = 'background: black; text-shadow: none; padding: 2px 6px; color: white; tex-align: left;';
+const blackbutton = 'background: black; text-shadow: none; padding: 2px 6px; color: white; text-align: left;';
 const moment = require('moment');
 
 class Poll {

@@ -10,7 +10,7 @@ const blackbutton = 'background: black; text-shadow: none; padding: 2px 6px; col
 const moment = require('moment');
 
 class Poll {
-	constructor(room, questionData, options) {
+	constructor(user, room, questionData, options) {
 		if (room.pollNumber) {
 			room.pollNumber++;
 		} else {
@@ -207,7 +207,7 @@ exports.commands = {
 				return this.errorReply("Too many options for poll (maximum is 12).");
 			}
 
-			room.poll = new Poll(room, {source: params[0], supportHTML: supportHTML}, options);
+			room.poll = new Poll(user, room, {source: params[0], supportHTML: supportHTML}, options);
 			room.poll.display();
 
 			this.logEntry("" + user.name + " used " + message);

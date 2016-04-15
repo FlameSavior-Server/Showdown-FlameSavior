@@ -691,18 +691,18 @@ exports.commands = {
 		}
 		var popup = "|html|" + "<font size=5>Gold Server Credits</font><br />" +
 					"<u>Owners:</u><br />" +
-					"- " + name('panpawn', true) + " (Founder, Sysadmin, Development)<br />" +
-					"- " + name('virtuos', true) + " (Lead policy, Sysadmin)<br />" +
+					"- " + name('panpawn', true) + " (Founder, Sysadmin, Development, Lead Policy)<br />" +
 					"<br />" +
 					"<u>Development:</u><br />" +
 					"- " + name('panpawn', true) + " (Owner of GitHub repository)<br />" +
-					"- " + name('jd', true) + " (Collaborator)<br />" +
 					"- " + name('Silveee', true) + " (Contributor)<br />" +
+					"- " + name('jd', true) + " (Past contributor)<br />" +
 					"<br />" +
 					"<u>Special Thanks:</u><br />" +
-					"- Current staff members<br />" +
+					"- Current staff team<br />" +
 					"- Our regular users<br />" +
-					"- PixelatedPaw (One of the original administrators)";
+					"- " + name('virtuos', true) + " (Former co-owner)<br />" +
+					"- " + name('PixelatedPaw', true) + " (One of the original administrators)";
 		user.popup(popup);
 	},
 	regdate: function(target, room, user, connection) {

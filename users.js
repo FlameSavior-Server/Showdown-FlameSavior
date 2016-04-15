@@ -120,8 +120,7 @@ Users.saveBans = saveBans;
 function updateBans() {
 	for (let obj in Users.bans) {
 		if (Users.bans[obj].expires < Date.now()) {
-			Rooms('staff').addRaw("[Ban Notice] Ban against" + (~obj.indexOf('.') ? " IP " : " user ") + Tools.escapeHTML(obj) + " has <font color=\"green\">expired</font>.");
-			Rooms('staff').update();
+			Rooms('staff').addRaw("[Ban Notice] Ban against" + (~obj.indexOf('.') ? " IP " : " user ") + Tools.escapeHTML(obj) + " has <font color=\"green\">expired</font>.").update();
 			if (Users.bans[obj].type === 'user') unlock(Users.bans[obj].userid);
 			if (Users.bans[obj].userid) {
 				delete lockedUsers[Users.bans[obj].userid];

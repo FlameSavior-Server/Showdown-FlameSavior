@@ -680,6 +680,7 @@ exports.commands = {
 		Gold.pmAll(target);
 		Rooms('staff').add("(" + Tools.escapeHTML(user.name) + " has PMed all: " + Tools.escapeHTML(target).replace("&apos;", "'") + ")").update();
 	},
+	credit: 'credits',
 	credits: function (target, room, user) {
 		function name (name, bold) {
 			if (bold) {

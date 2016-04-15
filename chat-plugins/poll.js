@@ -10,14 +10,15 @@ const blackbutton = 'background: black; text-shadow: none; padding: 2px 6px; col
 const moment = require('moment');
 
 class Poll {
-	constructor(room, question, options, user) {
+	constructor(room, questionData, options) {
 		if (room.pollNumber) {
 			room.pollNumber++;
 		} else {
 			room.pollNumber = 1;
 		}
 		this.room = room;
-		this.question = question;
+		this.question = questionData.source;
+		this.supportHTML = questionData.supportHTML;
 		this.voters = {};
 		this.voterIps = {};
 		this.totalVotes = 0;
@@ -92,6 +93,11 @@ class Poll {
 		output += '</div>';
 
 		return output;
+	}
+
+	getQuestionMarkup() {
+		if (this.supportHTML) return this.question;
+		return Tools.escapeHTML(this.question);
 	}
 
 	update() {
@@ -175,17 +181,22 @@ class Poll {
 
 exports.commands = {
 	poll: {
+		htmlcreate: 'new',
 		create: 'new',
 		new: function (target, room, user, connection, cmd, message) {
 			if (!target) return this.parse('/help poll new');
 			if (target.length > 1024) return this.errorReply("Poll too long.");
 			let params = target.split(target.includes('|') ? '|' : ',').map(param => param.trim());
+			const supportHTML = cmd === 'htmlcreate';
 
 			if (!this.can('broadcast', null, room)) return false;
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 			if (room.poll) return this.errorReply("There is already a poll in progress in this room.");
-
 			if (params.length < 3) return this.errorReply("Not enough arguments for /poll new.");
+
+			const questionSource = supportHTML ? this.canHTML(params[0]) : params[0];
+			if (!questionSource) return;
+
 			let options = [];
 
 			for (let i = 1; i < params.length; i++) {
@@ -196,7 +207,7 @@ exports.commands = {
 				return this.errorReply("Too many options for poll (maximum is 12).");
 			}
 
-			room.poll = new Poll(room, params[0], options, user);
+			room.poll = new Poll(room, {source: params[0], supportHTML: supportHTML}, options);
 			room.poll.display();
 
 			this.logEntry("" + user.name + " used " + message);

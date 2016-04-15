@@ -104,7 +104,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -1290,7 +1290,7 @@ exports.BattleItems = {
 				target.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -1399,7 +1399,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -1935,7 +1935,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -2477,9 +2477,9 @@ exports.BattleItems = {
 		fling: {
 			basePower: 40,
 		},
-		onModifyMove: function (move, user) {
+		onModifyCritRatio: function (critRatio, user) {
 			if (user.baseTemplate.species === 'Chansey') {
-				move.critRatio += 2;
+				return critRatio + 2;
 			}
 		},
 		num: 256,
@@ -2602,7 +2602,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -3136,7 +3136,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -3560,8 +3560,8 @@ exports.BattleItems = {
 		fling: {
 			basePower: 80,
 		},
-		onModifyMove: function (move) {
-			move.critRatio++;
+		onModifyCritRatio: function (critRatio) {
+			return critRatio + 1;
 		},
 		num: 326,
 		gen: 4,
@@ -3931,8 +3931,8 @@ exports.BattleItems = {
 		fling: {
 			basePower: 30,
 		},
-		onModifyMove: function (move) {
-			move.critRatio++;
+		onModifyCritRatio: function (critRatio) {
+			return critRatio + 1;
 		},
 		num: 232,
 		gen: 2,
@@ -4104,7 +4104,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -4382,9 +4382,9 @@ exports.BattleItems = {
 			basePower: 60,
 		},
 		spritenum: 475,
-		onModifyMove: function (move, user) {
+		onModifyCritRatio: function (critRatio, user) {
 			if (user.baseTemplate.species === 'Farfetch\'d') {
-				move.critRatio += 2;
+				return critRatio + 2;
 			}
 		},
 		num: 259,
@@ -4770,7 +4770,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -4891,7 +4891,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {
@@ -4976,7 +4976,7 @@ exports.BattleItems = {
 				pokemon.eatItem();
 			}
 		},
-		onEatItem: function (item, pokemon) {
+		onTryEatItem: function (item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat: function (pokemon) {

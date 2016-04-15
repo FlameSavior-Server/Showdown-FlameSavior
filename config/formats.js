@@ -34,31 +34,8 @@ exports.Formats = [
 		],
 		section: "ORAS Singles",
 
-		searchShow: false,
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
 		banlist: ['Uber', 'Shadow Tag', 'Soul Dew'],
-	},
-	{
-		name: "OU (suspect test)",
-		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3568442/\">ORAS OU Suspect Process, Round 6/a>"],
-		section: "ORAS Singles",
-
-		ruleset: ['OU'],
-		banlist: ['Hoopa-Unbound'],
-	},
-	{
-		name: "OU (Turbo)",
-		desc: [
-			"&bullet; This is basically the same as regular OU, but each player only has 10 seconds to make a move.",
-			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3521201/\">OU Metagame Discussion</a>",
-			"&bullet; <a href=\"https://www.smogon.com/dex/xy/tags/ou/\">OU Banlist</a>",
-			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3553516/\">OU Viability Ranking</a>",
-		],
-		section: "ORAS Singles",
-
-		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Swagger Clause', 'Baton Pass Clause'],
-		banlist: ['Uber', 'Shadow Tag', 'Soul Dew'],
-		forceTimer: true,
 	},
 	{
 		name: "Ubers",
@@ -92,15 +69,6 @@ exports.Formats = [
 		],
 		section: "ORAS Singles",
 
-		searchShow: false,
-		ruleset: ['UU'],
-		banlist: ['UU', 'BL2'],
-	},
-	{
-		name: "RU (suspect test)",
-		section: "ORAS Singles",
-
-		challengeShow: false,
 		ruleset: ['UU'],
 		banlist: ['UU', 'BL2'],
 	},
@@ -423,7 +391,7 @@ exports.Formats = [
 		column: 2,
 
 		ruleset: ['OU'],
-		banlist: ['Ignore Illegal Abilities', 'Archeops', 'Regigigas', 'Slaking'],
+		banlist: ['Ignore Illegal Abilities', 'Archeops', 'Chatot', 'Regigigas', 'Slaking'],
 		onValidateTeam: function (team) {
 			let problems = [];
 			let pokedex = Object.keys(Tools.data.Pokedex);
@@ -440,7 +408,7 @@ exports.Formats = [
 					problems.push(template.species + " cannot obtain the ability " + ability + ".");
 					continue;
 				}
-				if (ability in {'Aerilate': 1, 'Arena Trap': 1, 'Fur Coat': 1, 'Huge Power': 1, 'Imposter': 1, 'Parental Bond': 1, 'Pure Power': 1, 'Shadow Tag': 1, 'Simple':1, 'Speed Boost': 1}) {
+				if (ability in {'Aerilate': 1, 'Arena Trap': 1, 'Fur Coat': 1, 'Huge Power': 1, 'Imposter': 1, 'Parental Bond': 1, 'Pure Power': 1, 'Simple':1, 'Speed Boost': 1}) {
 					let legalAbility = false;
 					for (let i in template.abilities) {
 						if (ability === template.abilities[i]) legalAbility = true;
@@ -461,7 +429,7 @@ exports.Formats = [
 		section: "OM of the Month",
 
 		ruleset: ['Species Clause', 'Nickname Clause', 'Moody Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Swagger Clause', 'Mega Rayquaza Clause', 'Sleep Clause Mod', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
-		banlist: ['Unreleased', 'Illegal', 'Gengar-Mega', 'Mewtwo-Mega-X', 'Mewtwo-Mega-Y', 'Rayquaza-Mega'],
+		banlist: ['Unreleased', 'Illegal', 'Gengar-Mega', 'Mewtwo-Mega-X', 'Mewtwo-Mega-Y', 'Rayquaza-Mega', 'Salamence-Mega'],
 		onValidateTeam: function (team) {
 			let problems = [];
 			let kyurems = 0;
@@ -750,11 +718,7 @@ exports.Formats = [
 
 			// Add here special typings, done for flavour mainly.
 			if (name === 'ascriptmaster') {
-				pokemon.typesData = [{
-					type: 'Electric',
-					suppressed: false,
-					isAdded: false,
-				}];
+				pokemon.setType('Electric');
 				pokemon.addVolatile('ascriptinnate', pokemon);
 			}
 
@@ -809,7 +773,7 @@ exports.Formats = [
 				pokemon.addVolatile('arachnophobia', pokemon);
 			}
 			if (name === 'marshmallon') {
-				this.boost({def: 2}, pokemon, pokemon, 'fur coat innate');
+				this.boost({def: 1}, pokemon, pokemon, 'fur coat innate');
 			}
 			if (name === 'mizuhime' || name === 'kalalokki' || name === 'sweep') {
 				this.setWeather('raindance');
@@ -963,7 +927,7 @@ exports.Formats = [
 				this.add('c|+bludz|420 blaze it');
 			}
 			if (name === 'bondie') {
-				this.add('c|+bondie|__(\\/) snip snip (\\/)__');
+				this.add('c|+Bondie|__(\\/) snip snip (\\/)__');
 			}
 			if (name === 'bottt') {
 				this.add('c|boTTT|Beep, boop');
@@ -1067,7 +1031,7 @@ exports.Formats = [
 				this.add("c|%GeoffBruedly|FOR WINRY");
 			}
 			if (name === 'giagantic') {
-				this.add("c|+Giagantic|e.e");
+				this.add("c|%Giagantic|e.e");
 			}
 			if (name === 'golui') {
 				this.add("c|+Golui|Golly gee");
@@ -1126,7 +1090,7 @@ exports.Formats = [
 				this.add("c|+Jasmine|I'm still relevant!");
 			}
 			if (name === 'jdarden') {
-				this.add('c|+jdarden|Did someone call for some BALK?');
+				this.add('c|@jdarden|Did someone call for some BALK?');
 			}
 			if (name === 'jetpack') {
 				this.add('c|+Jetpack|You\'ve met with a terrible fate, haven\'t you?');
@@ -1303,9 +1267,9 @@ exports.Formats = [
 				this.add('c|+Sonired|~');
 			}
 			if (name === 'spacebass') {
-				this.add('c|%SpaceBass|He aims his good ear best he can towards conversation and sometimes leans in awkward toward your seat');
-				this.add('c|%SpaceBass|And if by chance one feels their space too invaded, then try your best to calmly be discreet');
-				this.add('c|%SpaceBass|Because this septic breathed man that stands before you is a champion from days gone by');
+				this.add('c|@SpaceBass|He aims his good ear best he can towards conversation and sometimes leans in awkward toward your seat');
+				this.add('c|@SpaceBass|And if by chance one feels their space too invaded, then try your best to calmly be discreet');
+				this.add('c|@SpaceBass|Because this septic breathed man that stands before you is a champion from days gone by');
 			}
 			if (name === 'sparktrain') {
 				this.add('c|+sparktrain|hi');
@@ -1412,7 +1376,7 @@ exports.Formats = [
 				}
 			}
 			if (name === 'zeroluxgiven') {
-				this.add('c|+Zero Lux Given|This should be an electrifying battle!');
+				this.add('c|%Zero Lux Given|This should be an electrifying battle!');
 			}
 			if (name === 'zodiax') {
 				this.add('c|%Zodiax|Introducing 7 time Grand Champion to the battle!');
@@ -1504,7 +1468,7 @@ exports.Formats = [
 				this.add('c|+bludz|zzz');
 			}
 			if (name === 'bondie') {
-				this.add('c|+bondie|Sigh...');
+				this.add('c|+Bondie|Sigh...');
 			}
 			if (name === 'bottt') {
 				this.add("c| boTTT|No longer being maintained...");
@@ -1602,7 +1566,7 @@ exports.Formats = [
 				this.add("c|%GeoffBruedly|IM SORRY WINRY");
 			}
 			if (name === 'giagantic') {
-				this.add("c|+Giagantic|x.x");
+				this.add("c|%Giagantic|x.x");
 			}
 			if (name === 'golui') {
 				this.add("c|+Golui|Freeze in hell");
@@ -1809,9 +1773,9 @@ exports.Formats = [
 				this.add('c|+Snowy|i never understood this i always hear them be like "yo whats up monica" "u tryna blaze monica"');
 			}
 			if (name === 'spacebass') {
-				this.add('c|%SpaceBass|And the tales of whales and woe off his liquored toungue will flow, the light will soft white twinkle off the cataracts in his eye');
-				this.add("c|%SpaceBass|So if by chance you're cornered near the bathroom, or he blocks you sprawled in his aisle seat");
-				this.add("c|%SpaceBass|Embrace the chance to hear some tales of greatness, 'cause he's the most interesting ball of toxins you're ever apt to meet");
+				this.add('c|@SpaceBass|And the tales of whales and woe off his liquored toungue will flow, the light will soft white twinkle off the cataracts in his eye');
+				this.add("c|@SpaceBass|So if by chance you're cornered near the bathroom, or he blocks you sprawled in his aisle seat");
+				this.add("c|@SpaceBass|Embrace the chance to hear some tales of greatness, 'cause he's the most interesting ball of toxins you're ever apt to meet");
 			}
 			if (name === 'specsmegabeedrill') {
 				this.add('c|+SpecsMegaBeedrill|Tryhard.');
@@ -1901,7 +1865,7 @@ exports.Formats = [
 				}
 			}
 			if (name === 'zeroluxgiven') {
-				this.add('c|+Zero Lux Given|I\'ve been beaten, what a shock!');
+				this.add('c|%Zero Lux Given|I\'ve been beaten, what a shock!');
 			}
 			if (name === 'zodiax') {
 				this.add('c|%Zodiax|We need to go full out again soon...');
@@ -1966,13 +1930,17 @@ exports.Formats = [
 
 							this.add("c|\u2605" + swapmon1.side.name + "|Bye-bye, " + swapmon2.name + "!");
 							this.add("c|\u2605" + swapmon2.side.name + "|Bye-bye, " + swapmon1.name + "!");
-							this.add('-anim', swapmon1.side.active, "Luster Purge", swapmon2.side.active);
-							this.add('-anim', swapmon2.side.active, "Aura Sphere", swapmon2.side.active);
-							this.add('message', swapmon2.side.name + " received " + swapmon2.name + "! Take good care of " + swapmon2.name + "!");
-							this.add('-anim', swapmon2.side.active, "Luster Purge", swapmon1.side.active);
-							this.add('-anim', swapmon1.side.active, "Aura Sphere", swapmon1.side.active);
-							this.add('message', swapmon1.side.name + " received " + swapmon1.name + "! Take good care of " + swapmon1.name + "!");
-
+							if (swapmon1.side.active[0].hp && swapmon2.side.active[0].hp) {
+								this.add('-anim', swapmon1.side.active, "Healing Wish", swapmon1.side.active);
+								this.add('-anim', swapmon2.side.active, "Aura Sphere", swapmon2.side.active);
+								this.add('message', swapmon2.side.name + " received " + swapmon2.name + "! Take good care of " + swapmon2.name + "!");
+								this.add('-anim', swapmon2.side.active, "Healing Wish", swapmon2.side.active);
+								this.add('-anim', swapmon1.side.active, "Aura Sphere", swapmon1.side.active);
+								this.add('message', swapmon1.side.name + " received " + swapmon1.name + "! Take good care of " + swapmon1.name + "!");
+							} else {
+								this.add('message', swapmon2.side.name + " received " + swapmon2.name + "! Take good care of " + swapmon2.name + "!");
+								this.add('message', swapmon1.side.name + " received " + swapmon1.name + "! Take good care of " + swapmon1.name + "!");
+							}
 							swapped = true;
 							break;
 						}
@@ -2306,9 +2274,9 @@ exports.Formats = [
 		onValidateSet: function (set) {
 			const allowed = {
 				'ferroseed':1, 'togetic':1, 'pawniard': 1, 'porygon2': 1, 'farfetchd':1, 'ditto':1, 'unown':1,
-				'corsola':1, 'delibird':1, 'volbeat':1, 'illumise':1, 'spinda':1, 'castform':1, 'luvdisc':1, 'pachirisu':1, 'dedenne':1, 
+				'corsola':1, 'delibird':1, 'volbeat':1, 'illumise':1, 'spinda':1, 'castform':1, 'luvdisc':1, 'pachirisu':1, 'dedenne':1,
 				'smeargle':1, 'pikachu':1, 'pikachucosplay':1, 'pikachurockstar':1, 'pikachulibre':1, 'pikachucosplay':1, 'pikachupopstar':1,
-				'pikachurockstar':1, 'pikachubelle':1, 'pikachuphd':1, 'clefairy':1, 'tangela':1, 'misdreavus':1, 'metang':1, 'monferno':1, 'prinplup':1, 
+				'pikachurockstar':1, 'pikachubelle':1, 'pikachuphd':1, 'clefairy':1, 'tangela':1, 'misdreavus':1, 'metang':1, 'monferno':1, 'prinplup':1,
 				'gabite':1, 'meditite':1, 'murkrow':1, 'swirlix':1, 'yanma':1, 'dunsparce':1, 'gurdurr':1, 'machoke':1, 'emolga':1
 			};
 			const NFEbanlist = {'frogadier':1, 'fraxure':1, 'electabuzz':1, 'magmar':1, 'servine':1};
@@ -2332,7 +2300,7 @@ exports.Formats = [
 		column: 3,
 
 		mod: 'gen5',
-		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Baton Pass Clause', 'Team Preview'],
+		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Baton Pass Clause', 'Swagger Clause', 'Team Preview'],
 		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Drought ++ Chlorophyll', 'Sand Stream ++ Sand Rush', 'Soul Dew'],
 	},
 	{

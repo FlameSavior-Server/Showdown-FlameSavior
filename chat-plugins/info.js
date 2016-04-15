@@ -33,8 +33,13 @@ exports.commands = {
 		}
 
 		let buf = '<strong class="username"><small style="display:none">' + targetUser.group + '</small>' + Tools.escapeHTML(targetUser.name) + '</strong> ' + (!targetUser.connected ? ' <em style="color:gray">(offline)</em>' : '');
+		let roomauth = '';
+		if (room.auth && targetUser.userid in room.auth) roomauth = room.auth[targetUser.userid];
+		if (Config.groups[roomauth] && Config.groups[roomauth].name) {
+			buf += "<br />" + Config.groups[roomauth].name + " (" + roomauth + ")";
+		}
 		if (Config.groups[targetUser.group] && Config.groups[targetUser.group].name) {
-			buf += "<br />" + Config.groups[targetUser.group].name + " (" + targetUser.group + ")";
+			buf += "<br />Global " + Config.groups[targetUser.group].name + " (" + targetUser.group + ")";
 		}
 		if (targetUser.isSysop) {
 			buf += "<br />(Pok&eacute;mon Showdown System Operator)";
@@ -352,7 +357,7 @@ exports.commands = {
 			}
 
 			buffer += '|raw|<font size="1">' + Object.keys(details).map(detail => {
-				if (!details[detail]) return detail;
+				if (details[detail] === '') return detail;
 				return '<font color="#686868">' + detail + ':</font> ' + details[detail];
 			}).join("&nbsp;|&ThickSpace;") + '</font>';
 

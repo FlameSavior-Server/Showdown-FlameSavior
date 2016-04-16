@@ -86,12 +86,13 @@ exports.commands = {
 						return '<font color="' + Gold.hashColor(name) + '">' + Tools.escapeHTML(name) + '</font>';
 					}
 				}
+				var personId = toId(person);
 				switch (rank) {
 					case '~':
 						staff['admins'].push(nameColor(person));
 						break;
 					case '&':
-						if (toId(person) === 'tintins') break;
+						if (personId === 'tintins' || personId === 'amaterasu') break;
 						staff['leaders'].push(nameColor(person));
 						break;
 					case '@':

@@ -1246,7 +1246,7 @@ exports.commands = {
 		}
 
 		return function(target, room, user) {
-			if (!this.canBroadcast()) return;
+			if (!this.runBroadcast()) return;
 			var uptime = process.uptime();
 			this.sendReplyBox("Uptime: <b>" + formatUptime(uptime) + "</b>" +
 				(global.uptimeRecord ? "<br /><font color=\"green\">Record: <b>" + formatUptime(global.uptimeRecord) + "</b></font>" : ""));

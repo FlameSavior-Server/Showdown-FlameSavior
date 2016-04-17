@@ -1523,3 +1523,8 @@ Gold.pmUpperStaff = function(message, pmName, from) {
 		}
 	});
 };
+Gold.pluralFormat = function(length, ending) {
+	if (!ending) ending = 's';
+	if (isNaN(Number(length))) return false;
+	return (length == 1 ? '' : ending);
+}

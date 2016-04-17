@@ -36,7 +36,7 @@ exports.commands = {
 	 		room.dice.bet = target;
 	 		room.dice.startTime = Date.now();
 	 		room.addRaw('<div class="infobox"><h2><center><font color="' + Gold.hashColor(user.name) + '">' + Tools.escapeHTML(user.name) + '</font> <font color=#24678d>has started a dice game for </font><font color=red>' + target +
-	 			' </font><font color=#24678d>' + ((target === 1) ? " buck." : " bucks.") + '</font><br /> <button name="send" value="/joindice">Click to join.</button></center></h2></div>');
+	 			' </font><font color=#24678d> buck' + Gold.pluralFormat(target) + '.</font><br /> <button name="send" value="/joindice">Click to join.</button></center></h2></div>');
 	 		room.update();
 	 	});
 	},
@@ -128,7 +128,7 @@ exports.commands = {
 						}
 						var betMoney = room.dice.bet;
 	 					if (firstNumber > secondNumber) {
-	 						output += '<b><font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font></b> has won <font color=#24678d><b>' + handleWinnings(betMoney) + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />'
+	 						output += '<b><font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font></b> has won <font color=#24678d><b>' + handleWinnings(betMoney) + '</b></font> buck' + Gold.pluralFormat(betMoney) + '.<br />'
 	 						output += 'Better luck next time, <font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + '</font>!';
 	 						Economy.writeMoney(Users.get(firstName).userid, handleWinnings(betMoney), function() {
 	 							Economy.writeMoney(Users.get(secondName).userid, -betMoney,function() {
@@ -147,7 +147,7 @@ exports.commands = {
 	 						delete room.dice.startTime;
 	 					}
 	 					if (secondNumber > firstNumber) {
-	 						output += '<b><font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + '</font></b> has won <font color=#24678d><b>' + handleWinnings(betMoney) + '</b></font> ' + ((betMoney === 1) ? " buck." : " bucks.") + '<br />';
+	 						output += '<b><font color="' + Gold.hashColor(secondName) + '">' + Tools.escapeHTML(secondName) + '</font></b> has won <font color=#24678d><b>' + handleWinnings(betMoney) + '</b></font> buck' + Gold.pluralFormat(betMoney) + '.<br />';
 	 						output += 'Better luck next time <font color="' + Gold.hashColor(firstName) + '">' + Tools.escapeHTML(firstName) + '</font>!';
 	 						Economy.writeMoney(Users.get(secondName).userid, handleWinnings(betMoney), function() {
 	 							Economy.writeMoney(Users.get(firstName).userid, -betMoney,function() {

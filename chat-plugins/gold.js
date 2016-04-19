@@ -1,13 +1,9 @@
-const MAX_REASON_LENGTH = 300;
 var fs = require('fs');
 var request = require('request');
 var moment = require('moment');
-var closeShop = false;
-var closedShop = 0;
 var regdateCache = {};
 if (typeof Gold === 'undefined') global.Gold = {};
 if (typeof Gold.tells === 'undefined') global.Gold.tells = {};
-var crypto = require('crypto');
 var badges = fs.createWriteStream('badges.txt', {
 	'flags': 'a'
 });
@@ -38,7 +34,7 @@ exports.commands = {
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
-		if (target.length > MAX_REASON_LENGTH) {
+		if (target.length > 300) {
 			return this.sendReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}
 

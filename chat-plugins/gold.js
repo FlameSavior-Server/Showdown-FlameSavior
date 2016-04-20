@@ -660,7 +660,7 @@ exports.commands = {
 					"<u>Special Thanks:</u><br />" +
 					"- Current staff team<br />" +
 					"- Our regular users<br />" +
-					"- " + name('virtuos', true) + " (Former co-owner)<br />" +
+					"- " + name('pitcher', true) + " (Former co-owner)<br />" +
 					"- " + name('PixelatedPaw', true) + " (One of the original administrators)";
 		user.popup(popup);
 	},

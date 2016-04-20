@@ -347,7 +347,7 @@ exports.commands = {
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
 		if (!parts[1]) return this.errorReply("Needs a target.");
-		room.addRaw("<b>" + Gold.hashColor(parts[0]) + "</b>", parts[1]);
+		room.addRaw("<b><font color=" + Gold.hashColor(parts[0]) + ">" + parts[0] + "</font></b>", parts[1]);
 	},
 	newcustomcolorcss: function (target, room, user) {
 		if (!target) return this.errorReply("Usage: /newcustomcolor [color] - Formats the CSS for you to have a custom color.");

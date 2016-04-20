@@ -415,7 +415,7 @@ exports.commands = {
 	},
 	halloween: function(target, room, user) {
 		if (!target) return this.sendReply('/halloween needs a target.');
-		return this.parse('/me takes ' + target + '`s pumpkin and smashes it all over the Pok\u00E9mon Stadium!');
+		return this.parse('/me takes ' + target + '\'s pumpkin and smashes it all over the Pok\u00E9mon Stadium!');
 	},
 	barn: function(target, room, user) {
 		if (!target) return this.sendReply('/barn needs a target.');

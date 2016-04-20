@@ -360,6 +360,7 @@ exports.commands = {
 		}
 	},
 
+	balance: 'atm',
 	wallet: 'atm',
 	satchel: 'atm',
 	fannypack: 'atm',

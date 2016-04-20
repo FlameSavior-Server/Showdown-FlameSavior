@@ -697,10 +697,6 @@ exports.commands = {
 			room.update();
 		}
 	},
-	stafffaq: function(target, room, user) {
-		if (!this.runBroadcast()) return;
-		return this.sendReplyBox('Click <a href="http://goldserver.weebly.com/how-do-i-get-a-rank-on-gold.html">here</a> to find out about Gold\'s ranks and promotion system.');
-	},
 	removebadge: function(target, room, user) {
 		if (!this.can('pban')) return false;
 		target = this.splitTarget(target);

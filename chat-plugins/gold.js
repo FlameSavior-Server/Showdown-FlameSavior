@@ -605,20 +605,7 @@ exports.commands = {
 	},
 	kickhelp: ["Usage: /kick [user] - kicks a user from the room",
 				"/kick [enable/disable] - enables or disables kick. Requires ~."],
-	flogout: 'forcelogout',
-	forcelogout: function(target, room, user) {
-		if (!user.can('hotpatch')) return;
-		if (!this.canTalk()) return false;
-		if (!target) return this.sendReply('/forcelogout [username], [reason] OR /flogout [username], [reason] - You do not have to add a reason');
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User ' + this.targetUsername + ' not found.');
-		}
-		if (targetUser.can('hotpatch')) return this.sendReply('You cannot force logout another Admin - nice try. Chump.');
-		this.addModCommand('' + targetUser.name + ' was forcibly logged out by ' + user.name + '.' + (target ? " (" + target + ")" : ""));
-		targetUser.resetName();
-	},
+
 	goldstaff: function(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');

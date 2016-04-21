@@ -1363,15 +1363,6 @@ function getAvatar(user) {
 	return avatar;
 }
 
-function htmlfix(target) {
-    var fixings = ['<3', ':>', ':<'];
-    for (var u in fixings) {
-        while (target.indexOf(fixings[u]) != -1)
-            target = target.substring(0, target.indexOf(fixings[u])) + '< ' + target.substring(target.indexOf(fixings[u]) + 1);
-    }
-    return target;
-}
-
 Gold.pmAll = function(message, pmName) {
 	pmName = (pmName ? pmName : '~Gold Server [Do not reply]');
 	Users.users.forEach(function (curUser) {

@@ -619,6 +619,7 @@ let parse = exports.parse = function (message, room, user, connection, levelsDee
 			if (Gold.tells[user]) {
 				Gold.tells[user].forEach(connection.sendTo.bind(connection, room));
 				delete Gold.tells[user];
+				Gold.saveTells();
 			}
 		});
 	}

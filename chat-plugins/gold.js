@@ -150,26 +150,6 @@ exports.commands = {
 		Rooms.global.writeChatRoomData();
 		room.protect = true; // fairly give new rooms activity a chance
 	},
-	tell: function(target, room, user) {
-		if (!this.canTalk()) return;
-		if (!target) return this.parse("/help tell");
-		var commaIndex = target.indexOf(',');
-		if (commaIndex < 0) return this.sendReply("You forgot the comma.");
-		var targetUser = toId(target.slice(0, commaIndex));
-		var message = target.slice(commaIndex + 1).trim();
-		if (message.replace(/(<([^>]+)>)/ig, "").length > 600) return this.sendReply("Tells must be 600 or fewer characters, excluding HTML.");
-		message = htmlfix(message);
-		if (targetUser.length > 18) {
-			return this.sendReply('The name of user "' + targetUser + '" is too long.');
-		}
-		if (!Gold.tells[targetUser]) Gold.tells[targetUser] = [];
-		if (Gold.tells[targetUser].length === 8) return this.sendReply("User " + targetUser + " has too many tells queued.");
-		var date = moment().format('MMMM Do YYYY, h:mm a');
-		var datelbl = date.substr(-2).toUpperCase(); //AM or PM
-		var messageToSend = '|raw|<u>' + date.substring(0, date.length - 2) + datelbl + "</u><br/ > <b>" + user.group + "<font color=" + Gold.hashColor(user.name) + ">" + user.name + "</b> said: " + Tools.escapeHTML(message);
-		Gold.tells[targetUser].add(messageToSend);
-		return this.sendReply('Message "' + message + '" sent to ' + targetUser + '.');
-	},
 	hide: 'hideauth',
 	hideauth: function(target, room, user) {
 		if (!user.can('lock')) return this.sendReply("/hideauth - access denied.");

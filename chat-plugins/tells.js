@@ -47,7 +47,7 @@ exports.commands = {
         if (target.length > 500) return this.errorReply("This tell is too large, try making it shorter.");
         target = target.split(',');
         for (var u in target) target[u] = target[u].trim();
-        if (target[0].length < 1) return this.errorReply("Usernames cannot be this short.");
+        if (target[0].length < 1 || target[0].length > 18) return this.errorReply("Usernames cannot be this length.  Check spelling?");
         if (!target[1] || target[1].length < 1) return this.errorReply("Tell messages must be at least one character.");
         if (tells[target[0]] && tells[target[0]].length >= maxTells) return this.errorReply("This user has too many tells queued, try again later.");
         createTell(user.name, target[0], target[1]); // function saves when tell is created automatically

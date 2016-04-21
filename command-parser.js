@@ -625,7 +625,7 @@ let parse = exports.parse = function (message, room, user, connection, levelsDee
 	}
 	try {
 		if (!Gold.emoticons.processChatData(user, room, connection, message)) return false;
-		} catch (e) {}
+	} catch (e) {}
 
 	return message || false;
 };

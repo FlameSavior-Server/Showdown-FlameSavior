@@ -55,7 +55,7 @@ exports.commands = {
         if (!message || message.length < 1) return this.errorReply("Tell messages must be at least one character.");
         if (tells[targetUser] && tells[targetUser].length >= maxTells) return this.errorReply("This user has too many tells queued, try again later.");
         createTell(user.name, targetUser, message); // function saves when tell is created automatically
-        return this.sendReply("Your tell to " + origUser + " has been added to their offline messaging queue.");
+        return this.sendReply("|raw|Your tell to " + Tools.escapeHTML(nameColor(origUser)) + " has been added to their offline messaging queue.");
     },
     tellhelp: ["/tell [user], [message] - sends a user an offline message to be recieved when they next log on."],
 };

@@ -44,14 +44,17 @@ function createTell (sender, reciever, message) {
 exports.commands = {
     tell: function (target, room, user) {
         if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
-        if (target.length > 500) return this.errorReply("This tell is too large, try making it shorter.");
-        target = target.split(',');
-        for (var u in target) target[u] = target[u].trim();
-        if (target[0].length < 1 || target[0].length > 18) return this.errorReply("Usernames cannot be this length.  Check spelling?");
-        if (!target[1] || target[1].length < 1) return this.errorReply("Tell messages must be at least one character.");
-        if (tells[target[0]] && tells[target[0]].length >= maxTells) return this.errorReply("This user has too many tells queued, try again later.");
-        createTell(user.name, target[0], target[1]); // function saves when tell is created automatically
-        return this.sendReply("Your tell to " + target[0] + " has been added to their offline messaging queue.");
+        if (!target) return this.parse('/help tell');
+        var commaIndex = target.indexOf(',');
+        if (commaIndex < 0) return this.sendReply("You forgot the comma.");
+        var targetUser = toId(target.slice(0, commaIndex)), origUser = target.slice(0, commaIndex);
+        var message = target.slice(commaIndex + 1).trim();
+        if (message.length > 500) return this.errorReply("This tell is too large, try making it shorter.");
+        if (targetUser.length < 1 || targetUser.length > 18) return this.errorReply("Usernames cannot be this length.  Check spelling?");
+        if (!message || message.length < 1) return this.errorReply("Tell messages must be at least one character.");
+        if (tells[targetUser] && tells[targetUser].length >= maxTells) return this.errorReply("This user has too many tells queued, try again later.");
+        createTell(user.name, targetUser, message); // function saves when tell is created automatically
+        return this.sendReply("Your tell to " + origUser + " has been added to their offline messaging queue.");
     },
     tellhelp: ["/tell [user], [message] - sends a user an offline message to be recieved when they next log on."],
 };

@@ -46,7 +46,7 @@ exports.commands = {
         if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
         if (!target) return this.parse('/help tell');
         var commaIndex = target.indexOf(',');
-        if (commaIndex < 0) return this.sendReply("You forgot the comma.");
+        if (commaIndex < 0) return this.errorReply("You forgot the comma.");
         var targetUser = toId(target.slice(0, commaIndex)), origUser = target.slice(0, commaIndex);
         var message = target.slice(commaIndex + 1).trim();
         if (message.length > 500) return this.errorReply("This tell is too large, try making it shorter.");

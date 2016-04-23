@@ -1136,6 +1136,18 @@ exports.commands = {
 		);
 		this.logModCommand(user.name + " used declareaotd.");
 	},
+	hideadmin: function(target, room, user) {
+		if (!this.can('hotpatch')) return false;
+		user.hidden = true;
+		for (var u in user.roomCount) Rooms(u).add('|L|' + user.getIdentity(room.id)).update();
+		return this.sendReply("You are now hiding.");
+	},
+	showadmin: function(target, room, user) {
+		if (!this.can('hotpatch')) return false;
+		user.hidden = false;
+		for (var u in user.roomCount) Rooms(u).add('|J|' + user.getIdentity(room.id)).update();
+		return this.sendReply("You are no longer hiding.");
+	},
 
 	/*
 	pr: 'pollremind',

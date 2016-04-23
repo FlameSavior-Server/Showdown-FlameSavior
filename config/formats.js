@@ -226,7 +226,7 @@ exports.Formats = [
 			'Gardevoir-Mega', 'Gardevoirite', 'Gengar', 'Greninja', 'Gyarados', 'Heatran', 'Hoopa-Unbound', 'Hydreigon', 'Jirachi',
 			'Kangaskhan-Mega', 'Kangaskhanite', 'Keldeo', 'Kyurem-Black', 'Landorus-Therian', 'Latios', 'Ludicolo', 'Mawile-Mega', 'Mawilite',
 			'Mew', 'Milotic', 'Ninetales', 'Politoed', 'Rotom-Wash', 'Scrafty', 'Shaymin-Sky', 'Suicune', 'Sylveon', 'Talonflame',
-			'Terrakion', 'Thundurus', 'Togekiss', 'Tyranitar', 'Venusaur', 'Victini', 'Weavile', 'Whimsicott', 'Zapdos',
+			'Terrakion', 'Thundurus', 'Togekiss', 'Tyranitar', 'Venusaur', 'Victini', 'Volcanion', 'Weavile', 'Whimsicott', 'Zapdos',
 		],
 	},
 	{
@@ -263,7 +263,7 @@ exports.Formats = [
 		},
 		ruleset: ['Pokemon', 'Species Clause', 'Nickname Clause', 'Item Clause', 'Team Preview', 'Cancel Mod'],
 		banlist: ['Illegal', 'Unreleased', 'Mew', 'Celebi', 'Jirachi', 'Deoxys', 'Deoxys-Attack', 'Deoxys-Defense', 'Deoxys-Speed', 'Phione', 'Manaphy',
-			'Darkrai', 'Shaymin', 'Shaymin-Sky', 'Arceus', 'Victini', 'Keldeo', 'Meloetta', 'Genesect', 'Diancie', 'Hoopa', 'Hoopa-Unbound', 'Soul Dew',
+			'Darkrai', 'Shaymin', 'Shaymin-Sky', 'Arceus', 'Victini', 'Keldeo', 'Meloetta', 'Genesect', 'Diancie', 'Hoopa', 'Hoopa-Unbound', 'Volcanion', 'Soul Dew',
 		],
 		requirePentagon: true,
 		onValidateTeam: function (team) {
@@ -757,6 +757,9 @@ exports.Formats = [
 			if (name === 'giagantic') {
 				pokemon.addVolatile('deltastreaminnate', pokemon);
 			}
+			if (name === 'hashtag') {
+				this.boost({spe:1}, pokemon, pokemon, 'innate ability');
+			}
 			if (name === 'haund') {
 				pokemon.addVolatile('prodigy', pokemon);
 			}
@@ -1085,6 +1088,9 @@ exports.Formats = [
 			}
 			if (name === 'iyarito') {
 				this.add('c|+Iyarito|Welp');
+			}
+			if (name === 'jackhiggins') {
+				this.add("c|+Jack Higgins|Ciran was right, fun deserved to be banned");
 			}
 			if (name === 'jasmine') {
 				this.add("c|+Jasmine|I'm still relevant!");
@@ -1619,6 +1625,9 @@ exports.Formats = [
 			}
 			if (name === 'iyarito') {
 				this.add('c|+Iyarito|Owwnn ;_;');
+			}
+			if (name === 'jackhiggins') {
+				this.add("c|+Jack Higgins|I blame HiMyNamesL");
 			}
 			if (name === 'jasmine') {
 				this.add("raw|<div class=\"broadcast-red\"><b>The server is restarting soon.</b><br />Please finish your battles quickly. No new battles can be started until the server resets in a few minutes.</div>");

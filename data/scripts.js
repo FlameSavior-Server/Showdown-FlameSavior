@@ -375,7 +375,7 @@ exports.BattleScripts = {
 		}
 
 		if (move.recoil && totalDamage) {
-			this.damage(this.clampIntRange(Math.round(totalDamage * move.recoil[0] / move.recoil[1]), 1), pokemon, target, 'recoil');
+			this.damage(this.calcRecoilDamage(totalDamage, move), pokemon, target, 'recoil');
 		}
 
 		if (target && pokemon !== target) target.gotAttacked(move, damage, pokemon);
@@ -613,6 +613,10 @@ exports.BattleScripts = {
 			pokemon.switchFlag = move.selfSwitch;
 		}
 		return damage;
+	},
+
+	calcRecoilDamage: function (damageDealt, move) {
+		return this.clampIntRange(Math.round(damageDealt * move.recoil[0] / move.recoil[1]), 1);
 	},
 
 	canMegaEvo: function (pokemon) {
@@ -1027,7 +1031,7 @@ exports.BattleScripts = {
 		};
 		// Moves that shouldn't be the only STAB moves:
 		let NoStab = {
-			aquajet:1, bounce:1, fakeout:1, flamecharge:1, iceshard:1, pursuit:1, quickattack:1, skyattack:1,
+			aquajet:1, bounce:1, explosion:1, fakeout:1, flamecharge:1, iceshard:1, pursuit:1, quickattack:1, skyattack:1,
 			chargebeam:1, clearsmog:1, eruption:1, vacuumwave:1, waterspout:1,
 		};
 

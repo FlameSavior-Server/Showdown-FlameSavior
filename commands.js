@@ -536,6 +536,7 @@ exports.commands = {
 		}
 
 		if (target === 'off' || !setting) {
+			if (room.isPersonal) return this.errorReply("This room can't be made public.");
 			delete room.isPrivate;
 			this.addModCommand("" + user.name + " made this room public.");
 			if (room.chatRoomData) {
@@ -968,25 +969,25 @@ exports.commands = {
 		if (group) {
 			buffer.push('Global auth: ' + group.charAt(0));
 		}
-		for (let i = 0; i < Rooms.global.chatRooms.length; i++) {
-			let curRoom = Rooms.global.chatRooms[i];
+		for (let id in Rooms.rooms) {
+			let curRoom = Rooms.rooms[id];
 			if (!curRoom.auth || curRoom.isPrivate) continue;
 			group = curRoom.auth[targetId];
 			if (!group) continue;
-			innerBuffer.push(group + curRoom.id);
+			innerBuffer.push(group + id);
 		}
 		if (innerBuffer.length) {
 			buffer.push('Room auth: ' + innerBuffer.join(', '));
 		}
 		if (targetId === user.userid || user.can('lock')) {
 			innerBuffer = [];
-			for (let i = 0; i < Rooms.global.chatRooms.length; i++) {
-				let curRoom = Rooms.global.chatRooms[i];
+			for (let id in Rooms.rooms) {
+				let curRoom = Rooms.rooms[id];
 				if (!curRoom.auth || !curRoom.isPrivate) continue;
 				if (curRoom.isPrivate === true) continue;
 				let auth = curRoom.auth[targetId];
 				if (!auth) continue;
-				innerBuffer.push(auth + curRoom.id);
+				innerBuffer.push(auth + id);
 			}
 			if (innerBuffer.length) {
 				buffer.push('Hidden room auth: ' + innerBuffer.join(', '));
@@ -1275,7 +1276,8 @@ exports.commands = {
 
 		targetUser.popup("|modal|" + user.name + " has locked you from talking in chats, battles, and PMing regular users." + (target ? "\n\nReason: " + target : "") + "\n\nIf you feel that your lock was unjustified, you can still PM staff members (%, @, &, and ~) to discuss it" + (Config.appealurl ? " or you can appeal:\n" + Config.appealurl : ".") + "\n\nYour lock will expire in a few days.");
 
-		this.addModCommand("" + targetUser.name + " was locked from talking by " + user.name + "." + (target ? " (" + target + ")" : ""));
+		this.addModCommand("" + targetUser.name + " was locked from talking by " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
+
 		let alts = targetUser.getAlts();
 		let acAccount = (targetUser.autoconfirmed !== targetUser.userid && targetUser.autoconfirmed);
 		if (alts.length) {
@@ -1672,9 +1674,10 @@ exports.commands = {
 		if (!cmd.startsWith('global')) {
 			let groupid = Config.groups[nextGroup].id;
 			if (!groupid && nextGroup === Config.groupsranking[0]) groupid = 'deauth';
+			if (Config.groups[nextGroup].globalonly) return this.errorReply('Did you mean /global' + groupid + '"?');
 			return this.errorReply('Did you mean "/room' + groupid + '" or "/global' + groupid + '"?');
 		}
-		if (Config.groups[nextGroup].roomonly) {
+		if (Config.groups[nextGroup].roomonly || Config.groups[nextGroup].battleonly) {
 			return this.errorReply("Group '" + nextGroup + "' does not exist as a global rank.");
 		}
 
@@ -1785,7 +1788,6 @@ exports.commands = {
 		case 'off':
 		case 'false':
 		case 'no':
-		case ' ':
 			room.modchat = false;
 			break;
 		case 'ac':
@@ -1951,6 +1953,95 @@ exports.commands = {
 		}
 	},
 	hidetexthelp: ["/hidetext [username] - Removes a locked or banned user's messages from chat (includes users banned from the room). Requires: % (global only), @ # & ~"],
+
+	banwords: 'banword',
+	banword: {
+		add: function (target, room, user) {
+			if (!target) return this.parse('/help banword');
+			if (!user.can('declare', null, room)) return;
+
+			if (!room.banwords) room.banwords = [];
+
+			// Most of the regex code is copied from the client. TODO: unify them?
+			let words = target.match(/[^,]+(,\d*}[^,]*)?/g).map(word => word.replace(/\n/g, '').trim());
+
+			for (let i = 0; i < words.length; i++) {
+				if (/[\\^$*+?()|{}[\]]/.test(words[i])) {
+					if (!user.can('makechatroom')) return this.errorReply("Regex banwords are only allowed for leaders or above.");
+
+					try {
+						let test = new RegExp(words[i]);
+					} catch (e) {
+						return this.errorReply(e.message.substr(0, 28) === 'Invalid regular expression: ' ? e.message : 'Invalid regular expression: /' + words[i] + '/: ' + e.message);
+					}
+				}
+				if (room.banwords.indexOf(words[i]) > -1) {
+					return this.errorReply(words[i] + ' is already a banned phrase.');
+				}
+			}
+
+			room.banwords = room.banwords.concat(words);
+			this.updateBanwords();
+			if (words.length > 1) {
+				this.privateModCommand("(The banwords '" + words.join(', ') + "' were added by " + user.name + ".)");
+				this.sendReply("Banned phrases succesfully added. The list is currently: " + room.banwords.join(', '));
+			} else {
+				this.privateModCommand("(The banword '" + words[0] + "' was added by " + user.name + ".)");
+				this.sendReply("Banned phrase succesfully added. The list is currently: " + room.banwords.join(', '));
+			}
+
+			if (room.chatRoomData) {
+				room.chatRoomData.banwords = room.banwords;
+				Rooms.global.writeChatRoomData();
+			}
+		},
+
+		delete: function (target, room, user) {
+			if (!target) return this.parse('/help banword');
+			if (!user.can('declare', null, room)) return;
+
+			if (!room.banwords) return this.errorReply("This room has no banned phrases.");
+
+			let words = target.match(/[^,]+(,\d*}[^,]*)?/g).map(word => word.replace(/\n/g, '').trim());
+
+			for (let i = 0; i < words.length; i++) {
+				let index = room.banwords.indexOf(words[i]);
+
+				if (index < 0) return this.errorReply(words[i] + " is not a banned phrase in this room.");
+
+				room.banwords.splice(index, 1);
+			}
+
+			this.updateBanwords();
+			if (words.length > 1) {
+				this.privateModCommand("(The banwords '" + words.join(', ') + "' were removed by " + user.name + ".)");
+				this.sendReply("Banned phrases succesfully deleted. The list is currently: " + room.banwords.join(', '));
+			} else {
+				this.privateModCommand("(The banword '" + words[0] + "' was removed by " + user.name + ".)");
+				this.sendReply("Banned phrase succesfully deleted. The list is currently: " + room.banwords.join(', '));
+			}
+
+			if (room.chatRoomData) {
+				room.chatRoomData.banwords = room.banwords;
+				Rooms.global.writeChatRoomData();
+			}
+		},
+
+		list: function (target, room, user) {
+			if (!user.can('ban', null, room)) return;
+
+			if (!room.banwords) return this.sendReply("This room has no banned phrases.");
+
+			return this.sendReply("Banned phrases in room " + room.id + ": " + room.banwords.join(', '));
+		},
+
+		"": function (target, room, user) {
+			return this.parse("/help banword");
+		},
+	},
+	banwordhelp: ["/banword add [words] - Adds the comma-separated list of phrases (& or ~ can also input regex) to the banword list of the current room. Requires: # & ~",
+					"/banword delete [words] - Removes the comma-separated list of phrases from the banword list. Requires: # & ~",
+					"/banword list - Shows the list of banned words in the current room. Requires: @ # & ~"],
 
 	modlog: function (target, room, user, connection) {
 		let lines = 0;

@@ -67,7 +67,7 @@ exports.commands = {
 				publicrooms += output;
 			}
 		}
-		buf += '<br />Rooms: ' + (targetUser.hidden ? '<em>(no public rooms)</em>' : (publicrooms || '<em>(no public rooms)</em>')); //(publicrooms || '<em>(no public rooms)</em>');
+		buf += '<br />Rooms: ' + (targetUser.hidden ? '<em>(no public rooms)</em>' : (publicrooms || '<em>(no public rooms)</em>'));
 
 		if (!showAll) {
 			return this.sendReplyBox(buf);

@@ -67,11 +67,7 @@ exports.commands = {
 				publicrooms += output;
 			}
 		}
-		if (targetUser.hidden && !this.can('hotpatch')) {
-			buf += '<br />Rooms: <em>(no public rooms)</em>';
-		} else {
-			buf += '<br />Rooms: ' + (publicrooms || '<em>(no public rooms)</em>');
-		}
+		buf += '<br />Rooms: ' + (targetUser.hidden && !user.can('hotpatch') ? '<em>(no public rooms)</em>' : (publicrooms || '<em>(no public rooms)</em>'));
 		if (!showAll) {
 			return this.sendReplyBox(buf);
 		}

@@ -2924,7 +2924,7 @@ exports.commands = {
 				userid: targetUser.userid,
 				avatar: targetUser.avatar,
 				group: targetUser.group,
-				rooms: roomList,
+				rooms: (targetUser.hidden ? {} : roomList),
 			};
 			connection.send('|queryresponse|userdetails|' + JSON.stringify(userdetails));
 		} else if (cmd === 'roomlist') {

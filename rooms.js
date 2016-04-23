@@ -1465,7 +1465,7 @@ let ChatRoom = (() => {
 		let buffer = '';
 		let counter = 0;
 		for (let i in this.users) {
-			if (!this.users[i].named) {
+			if (!this.users[i].named || this.users[i].hidden) {
 				continue;
 			}
 			counter++;
@@ -1542,7 +1542,7 @@ let ChatRoom = (() => {
 		if (!user) return false; // ???
 		if (this.users[user.userid]) return user;
 
-		if (user.named) {
+		if (user.named && !user.hidden) {
 			this.reportJoin('j', user.getIdentity(this.id));
 		}
 

@@ -575,7 +575,7 @@ exports.commands = {
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser || !targetUser.connected) {
-			return this.sendReply('User ' + this.targetUsername + ' not found.');
+			return this.errorReply('User ' + this.targetUsername + ' not found.  Check spelling?');
 		}
 		if (!(targetUser in room.users)) return this.errorReply("User '" + targetUser + "' is not in this room.  Check spelling?");
 		if (!this.can('lock', targetUser, room)) return false;

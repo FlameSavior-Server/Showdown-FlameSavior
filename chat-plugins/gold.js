@@ -577,6 +577,7 @@ exports.commands = {
 		if (!targetUser || !targetUser.connected) {
 			return this.sendReply('User ' + this.targetUsername + ' not found.');
 		}
+		if (!(targetUser in room.users)) return this.errorReply("User '" + targetUser + "' is not in this room.  Check spelling?");
 		if (!this.can('lock', targetUser, room)) return false;
 		if (!Gold.kick) return this.errorReply("Kick is currently disabled.");
 		this.addModCommand(targetUser.name + ' was kicked from the room by ' + user.name + '.');

@@ -203,8 +203,8 @@ exports.commands = {
 				options.push(params[i]);
 			}
 
-			if (options.length > 12) {
-				return this.errorReply("Too many options for poll (maximum is 12).");
+			if (options.length > 14) {
+				return this.errorReply("Too many options for poll (maximum is 14).");
 			}
 
 			room.poll = new Poll(user, room, {source: params[0], supportHTML: supportHTML}, options);

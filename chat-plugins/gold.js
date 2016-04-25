@@ -572,11 +572,6 @@ exports.commands = {
 	},
 	kickhelp: ["Usage: /kick [user] - kicks a user from the room",
 				"/kick [enable/disable] - enables or disables kick. Requires ~."],
-
-	goldstaff: function(target, room, user) {
-		if (!this.runBroadcast()) return;
-		this.sendReplyBox('The staff forums can be found <a href="https://groups.google.com/forum/#!forum/gold-staff">here</a>.');
-	},
 	userid: function(target, room, user) {
 		if (!target) return this.parse('/help userid');
 		if (!this.runBroadcast()) return;

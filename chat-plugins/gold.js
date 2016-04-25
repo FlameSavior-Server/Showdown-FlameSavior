@@ -295,13 +295,6 @@ exports.commands = {
 		if (!target) return this.sendReply('/spank needs a target.');
 		return this.parse('/me spanks ' + target + '!');
 	},
-	newroom: 'newroomquestions',
-	newroomcommands: 'newroomquestions',
-	newroomfaq: 'newroomquestions',
-	newroomquestions: function(target, room, user) {
-		if (!this.runBroadcast()) return;
-		this.sendReplyBox('For our NEW room request system, fill out our application found <a href="http://goo.gl/forms/YHZVb6BvTb">here</a>.');
-	},
 	punt: function(target, room, user) {
 		if (!target) return this.sendReply('/punt needs a target.');
 		return this.parse('/me punts ' + target + ' to the moon!');

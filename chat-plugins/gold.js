@@ -338,9 +338,9 @@ exports.commands = {
 	utube: function(target, room, user) {
 		if (user.userid !== 'ponybot') return false;
 		var commaIndex = target.indexOf(',');
-        if (commaIndex < 0) return this.errorReply("You forgot the comma.");
-        var targetUser = toId(target.slice(0, commaIndex)), origUser = target.slice(0, commaIndex);
-        var message = target.slice(commaIndex + 1).trim();
+		if (commaIndex < 0) return this.errorReply("You forgot the comma.");
+		var targetUser = toId(target.slice(0, commaIndex)), origUser = target.slice(0, commaIndex);
+		var message = target.slice(commaIndex + 1).trim();
 		if (!targetUser || !message) return this.errorReply("Needs a target.");
 		if (!Users.get(targetUser).name) return false;
 		room.addRaw('<b><font color=' + Gold.hashColor(targetUser) + '>' + Users.get(targetUser).name + '</font></b>\'s link: <b>"' + message + '"</b>');

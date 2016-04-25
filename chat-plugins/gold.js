@@ -56,6 +56,35 @@ exports.commands = {
 
 		room.mute(targetUser, muteDuration, false);
 	},
+	staffmute: function (target, room, user, connection, cmd) {
+		if (!target) return this.errorReply("Usage: /staffmute [user], [reason].");
+		if (!this.canTalk()) return this.sendReply("You cannot do this while unable to talk.");
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' does not exist.");
+		if (target.length > 300) {
+			return this.sendReply("The reason is too long. It cannot exceed 300 characters.");
+		}
+
+		var muteDuration =  0.45 * 60 * 1000;
+		if (!this.can('mute', targetUser, room)) return false;
+		var canBeMutedFurther = ((room.getMuteTime(targetUser) || 0) <= (muteDuration * 5 / 6));
+		if ((room.isMuted(targetUser) && !canBeMutedFurther) || targetUser.locked || !targetUser.connected) {
+			var problem = " but was already " + (!targetUser.connected ? "offline" : targetUser.locked ? "locked" : "muted");
+			if (!target) {
+				return this.privateModCommand("(" + targetUser.name + " would be muted by " + user.name + problem + ".)");
+			}
+			return this.addModCommand("" + targetUser.name + " would be muted by " + user.name + problem + "." + (target ? " (" + target + ")" : ""));
+		}
+
+		if (targetUser in room.users) targetUser.popup("|modal|" + user.name + " has muted you in " + room.id + " for 45 seconds. " + target);
+		this.addModCommand("" + targetUser.name + " was muted by " + user.name + " for 24 hours." + (target ? " (" + target + ")" : ""));
+		if (targetUser.autoconfirmed && targetUser.autoconfirmed !== targetUser.userid) this.privateModCommand("(" + targetUser.name + "'s ac account: " + targetUser.autoconfirmed + ")");
+		this.add('|unlink|' + toId(this.inputUsername));
+
+		room.mute(targetUser, muteDuration, false);
+	},
 	globalauth: 'gal',
 	stafflist: 'gal',
 	authlist: 'gal',

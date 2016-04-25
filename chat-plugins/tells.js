@@ -35,7 +35,7 @@ function htmlfix (target) {
 function createTell (sender, reciever, message) {
     reciever = toId(reciever);
     if (!tells[reciever]) tells[reciever] = [];
-    var date = moment().format('MMMM Do YYYY, h:mm a');
+    var date = moment().format('MMMM Do YYYY, h:mm a') + " EST";
     var tell = "<u>" + date + "</u><br />" + nameColor(sender) + ' said: ' + Gold.emoticons.processEmoticons(Tools.escapeHTML(htmlfix(message)));
     tells[reciever].push('|raw|' + tell);
     saveTells();

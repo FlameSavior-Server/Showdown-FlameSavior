@@ -29,7 +29,7 @@ exports.commands = {
 	dm: 'daymute',
 	daymute: function (target, room, user, connection, cmd) {
 		if (!target) return this.errorReply("Usage: /dm [user], [reason].");
-		if (room.isMuted(user) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+		if (!this.canTalk()) return this.sendReply("You cannot do this while unable to talk.");
 
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;

@@ -194,12 +194,12 @@ var mainCustomColors = {
 	// 'orphic': 'dmt6922',
 	'kayo': 'endedinariot',
 	'tgmd': 'greatmightydoom',
-	'vacate': 'vaat111111111',
+	'vacate': 'vacatetest',
 	'bean': 'dragonbean',
 	'yunan': 'osiris13',
 	'politoed': 'brosb4hoohs',
 	'scotteh': 'nsyncluvr67',
-	'bumbadadabum': 'puckerluvr69',
+	'bumbadadabum': 'styrofoamboots',
 	'yuihirasawa': 'weeabookiller',
 	'monohearted': 'nighthearted',
 	'prem': 'erinanakiri', // second color change
@@ -266,10 +266,16 @@ var mainCustomColors = {
 	'leftiez': 'xxxxnbbhiojll',
 	'grim': 'grimoiregod',
 	'strength': '0v0tqpnu',
-	'iplaytennislol': 'nsyncluvr67',
+	'advantage': 'nsyncluvr67',
 	'quote': 'quotecs',
 	'snow': 'q21yzqgh',
-	'cathy': '', //{color: '#ff5cb6'}
+	'omegaxis': 'omegaxis14',
+	'paradise': 'rnxvzwpwtz',
+	'sailorcosmos': 'goldmedalpas',
+	'dontlose': 'dhcli22h',
+	'tatsumaki': 'developmentary',
+	'starry': 'starryblanket',
+	'cathy': '' //{color: '#ff5cb6'}
 };
 
 function hslToRgb(h, s, l) {

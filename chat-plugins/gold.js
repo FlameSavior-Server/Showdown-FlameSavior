@@ -62,6 +62,7 @@ exports.commands = {
 	auth: 'gal',
 	goldauthlist: 'gal',
 	gal: function(target, room, user, connection) {
+		var ignoreUsers = ['tintins', 'amaterasu'];
 		fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
 			var staff = {
 				"admins": [],
@@ -85,19 +86,23 @@ exports.commands = {
 				var personId = toId(person);
 				switch (rank) {
 					case '~':
+						if (~ignoreUsers.indexOf(personId)) break;
 						staff['admins'].push(nameColor(person));
 						break;
 					case '&':
-						if (personId === 'tintins' || personId === 'amaterasu') break;
+						if (~ignoreUsers.indexOf(personId)) break;
 						staff['leaders'].push(nameColor(person));
 						break;
 					case '@':
+						if (~ignoreUsers.indexOf(personId)) break;
 						staff['mods'].push(nameColor(person));
 						break;
 					case '%':
+						if (~ignoreUsers.indexOf(personId)) break;
 						staff['drivers'].push(nameColor(person));
 						break;
 					case '+':
+						if (~ignoreUsers.indexOf(personId)) break;
 						staff['voices'].push(nameColor(person));
 						break;
 					default:

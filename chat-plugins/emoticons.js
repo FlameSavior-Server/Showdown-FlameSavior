@@ -152,6 +152,7 @@ exports.commands = {
 		if (!target) target = "help";
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
+		if (!parts[0]) return this.parse('/help ezemote');
 
 		try {
 			switch (toId(parts[0])) {
@@ -276,27 +277,28 @@ exports.commands = {
 					break;
 
 				case 'help':
+					this.parse('/help ezemote');
+					break;
+
 				default:
-					if (!this.runBroadcast()) return;
-					this.sendReplyBox(
-							"<center><b>Emoticon Commands:</b><br />" +
-							"<i><font color=\"gray\">(By: <a href=\"https://github.com/panpawn/Pokemon-Showdown/blob/master/chat-plugins/emoticons.js\">panpawn</a>)</font></i></center><br />" +
-							"/emote <code>add, [emote], [link]</code> - Adds a chat emoticon. Requires ~.<br />" +
-							"/emote <code>remove, [emote]</code> - Removes a chat emoticon. Requires ~.<br />" +
-							"/emote <code>modchat, set, [rank symbol / disable]</code> - Sets moderated chat for chat emoticons in the respected room to the respected rank. Requires @, #, &, ~.<br />" +
-							"/emote <code>modchat, disable</code> - Disables moderated chat for chat emoticons (enabled by default.) Requires @, #, &, ~.<br />" +
-							"/emote <code>modchat</code> - Views the current moderated chat status of chat emoticons.<br />" +
-							"/emote <code>list</code> - Shows the chat emoticons in a list form.<br />" +
-							"/emote <code>view</code> - Shows all of the current chat emoticons with the respected image.<br />" +
-							"/emote <code>object</code> - Shows the object of Gold.emoticons.chatEmotes. (Mostly for development usage)<br />" +
-							"/emote <code>max, [max emotes / message]</code> - Sets the max emoticon messages per chat message.  Requires ~.<br />" +
-							"/emote <code>help</code> - Shows this help command.<br />"
-					);
+					this.errorReply("Emoticon command '" + parts[0] + "' not found.  Check spelling?");
 			}
 		} catch (e) {
 			console.log("ERROR!  The Emoticon script has crashed!\n" + e.stack);
 		}
 	},
+	ezemotehelp: ["Gold's custom emoticons script commands:",
+				"/emote <code>add, [emote], [link]</code> - Adds a chat emoticon. Requires ~.",
+				"/emote <code>remove, [emote]</code> - Removes a chat emoticon. Requires ~.",
+				"/emote <code>modchat, set, [rank symbol / disable]</code> - Sets moderated chat for chat emoticons in the respected room to the respected rank. Requires @, #, &, ~.",
+				"/emote <code>modchat, disable</code> - Disables moderated chat for chat emoticons (enabled by default.) Requires @, #, &, ~.",
+				"/emote <code>modchat</code> - Views the current moderated chat status of chat emoticons.",
+				"/emote <code>list</code> - Shows the chat emoticons in a list form.",
+				"/emote <code>view</code> - Shows all of the current chat emoticons with the respected image.",
+				"/emote <code>object</code> - Shows the object of Gold.emoticons.chatEmotes. (Mostly for development usage)",
+				"/emote <code>max, [max emotes / message]</code> - Sets the max emoticon messages per chat message.  Requires ~.",
+				"/emote <code>help</code> - Shows this help command."],
+
 	emoticonlist: 'emotelist',
 	emotelist: function(target, room, user) {
 		return this.errorReply("Try /emote view instead.");

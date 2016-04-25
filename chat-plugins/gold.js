@@ -250,7 +250,7 @@ exports.commands = {
 	},
 	clearall: 'clearroom',
 	clearroom: function (target, room, user) {
-		if (!this.can('hotpatch')) return false;
+		if (!this.can('pban')) return false;
 		if (room.battle) return this.sendReply("You cannot clearall in battle rooms.");
 
 		var len = room.log.length;

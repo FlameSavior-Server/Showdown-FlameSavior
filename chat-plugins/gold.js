@@ -269,13 +269,6 @@ exports.commands = {
 			}
 		}, 1000);
 	},
-	bc: 'battlecount',
-	battlecount: function (target, room, user) {
-		if (!this.can('hotpatch')) return false;
-		if (isNaN(Number(target)) || !target || target < 0 || ~target.indexOf('.')) return this.errorReply("Not a valid target.");
-		Rooms('global').battleCount = Number(target);
-		return this.sendReply("The global room's battle count has been forcibly set to: " + Number(target));
-	},
 	hc: function(room, user, cmd) {
 		return this.parse('/hotpatch chat');
 	},

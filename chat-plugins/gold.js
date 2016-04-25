@@ -279,13 +279,6 @@ exports.commands = {
 	hc: function(room, user, cmd) {
 		return this.parse('/hotpatch chat');
 	},
-	pbl: 'pbanlist',
-	permabanlist: 'pbanlist',
-	pbanlist: function(target, room, user, connection) {
-		if (!this.runBroadcast() || !user.can('lock')) return this.sendReply('/pbanlist - Access Denied.');
-		var pban = fs.readFileSync('config/pbanlist.txt', 'utf8');
-		return user.send('|popup|' + pban);
-	},
 	vault: function(target, room, user, connection) {
 		var money = fs.readFileSync('config/money.csv', 'utf8');
 		return user.send('|popup|' + money);

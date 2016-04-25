@@ -342,7 +342,7 @@ exports.commands = {
         var targetUser = toId(target.slice(0, commaIndex)), origUser = target.slice(0, commaIndex);
         var message = target.slice(commaIndex + 1).trim();
 		if (!targetUser || !message) return this.errorReply("Needs a target.");
-		if (!Users.get(parts[0]).name) return false;
+		if (!Users.get(targetUser).name) return false;
 		room.addRaw('<b><font color=' + Gold.hashColor(targetUser) + '>' + Users.get(targetUser).name + '</font></b>\'s link: <b>"' + message + '"</b>');
 	},
 	roomlist: function (target, room, user) {

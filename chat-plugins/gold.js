@@ -337,11 +337,13 @@ exports.commands = {
 	},
 	utube: function(target, room, user) {
 		if (user.userid !== 'ponybot') return false;
-		var parts = target.split(',');
-		for (var u in parts) parts[u] = parts[u].trim();
-		if (!parts[1]) return this.errorReply("Needs a target.");
+		var commaIndex = target.indexOf(',');
+        if (commaIndex < 0) return this.errorReply("You forgot the comma.");
+        var targetUser = toId(target.slice(0, commaIndex)), origUser = target.slice(0, commaIndex);
+        var message = target.slice(commaIndex + 1).trim();
+		if (!targetUser || !message) return this.errorReply("Needs a target.");
 		if (!Users.get(parts[0]).name) return false;
-		room.addRaw('<b><font color=' + Gold.hashColor(parts[0]) + '>' + Users.get(parts[0]).name + '</font></b>\'s link: <b>"' + parts[1] + '"</b>');
+		room.addRaw('<b><font color=' + Gold.hashColor(targetUser) + '>' + Users.get(targetUser).name + '</font></b>\'s link: <b>"' + message + '"</b>');
 	},
 	roomlist: function (target, room, user) {
 		if(!this.can('pban')) return;

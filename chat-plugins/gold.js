@@ -332,7 +332,8 @@ exports.commands = {
 		var parts = target.split(',');
 		for (var u in parts) parts[u] = parts[u].trim();
 		if (!parts[1]) return this.errorReply("Needs a target.");
-		room.addRaw('<b><font color=' + Gold.hashColor(parts[0]) + '>' + parts[0].substr(1, parts[0].length) + '</font></b>\'s link: <b>"' + parts[1] + '"</b>');
+		if (!Users.get(parts[0]).name) return false;
+		room.addRaw('<b><font color=' + Gold.hashColor(parts[0]) + '>' + Users.get(parts[0]).name + '</font></b>\'s link: <b>"' + parts[1] + '"</b>');
 	},
 	roomlist: function (target, room, user) {
 		if(!this.can('pban')) return;

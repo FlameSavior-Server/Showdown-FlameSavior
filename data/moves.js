@@ -4861,7 +4861,6 @@ exports.BattleMovedex = {
 			onFoeRedirectTarget: function (target, source, source2, move) {
 				if (this.validTarget(this.effectData.target, source, move.target)) {
 					this.debug("Follow Me redirected target of move");
-					this.retargetLastMove(this.effectData.target);
 					return this.effectData.target;
 				}
 			},
@@ -5623,7 +5622,8 @@ exports.BattleMovedex = {
 			},
 			onStart: function () {
 				this.add('-fieldstart', 'move: Gravity');
-				for (let side of this.sides) for (let pokemon of side.pokemon) {
+				const allActivePokemon = this.sides[0].active.concat(this.sides[1].active);
+				for (let pokemon of allActivePokemon) {
 					let applies = false;
 					if (pokemon.removeVolatile('bounce') || pokemon.removeVolatile('fly')) {
 						applies = true;
@@ -8259,7 +8259,7 @@ exports.BattleMovedex = {
 				}
 				let newMove = this.getMoveCopy(move.id);
 				newMove.hasBounced = true;
-				this.useMove(newMove, target, source);
+				this.useMove(newMove, this.effectData.target, source);
 				return null;
 			},
 		},
@@ -11080,7 +11080,6 @@ exports.BattleMovedex = {
 			onFoeRedirectTarget: function (target, source, source2, move) {
 				if (source.runStatusImmunity('powder') && this.validTarget(this.effectData.target, source, move.target)) {
 					this.debug("Rage Powder redirected target of move");
-					this.retargetLastMove(this.effectData.target);
 					return this.effectData.target;
 				}
 			},

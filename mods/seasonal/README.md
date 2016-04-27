@@ -5,7 +5,7 @@ Roster
 ------------------------------------------------------------------------
 
 ### Acast
-Gourgeist @ Light Clay
+Gourgeist-Super @ Mental Herb
 
 Ability: Prankster
 
@@ -13,8 +13,8 @@ EVs: 248 HP, 8 Def, 252 SpD, Nature: Careful
 
 - Will-O-Wisp
 - Recover
-- Seed Bomb
-- Needs More Screens - 5 (no boosts) PP, uses Magic Coat, Safeguard, Reflect and Light Screen.
+- Seed Bomb \ Shadow Strike
+- Needs More Screens - 5 (no boosts) PP, uses Magic Coat, Safeguard, Reflect (50% chance) and Light Screen (50% chance).
 
 ### Ace
 Salamence @ Salamencite
@@ -145,10 +145,10 @@ EVs: 252 SpA, 4 SpD, 252 Spe, Nature: Modest
 - Roost
 - Tri Attack
 - Searing Shot
-- Hax - 10 PP. 
- - (10%) User damages itself in confusion. 
- - (40%) User gains 2 Quiver Dance boosts. 
- - (10%) Everyone gets parafusion. 
+- Hax - 10 PP.
+ - (10%) User damages itself in confusion.
+ - (40%) User gains 2 Quiver Dance boosts.
+ - (10%) Everyone gets parafusion.
  - (40%) Normal\Special 60\90%. This attack always crits. 30% flinch.
 
 ### Anty
@@ -240,7 +240,7 @@ EVs: 252 Atk, 4 Def, 252 Spe, Nature: Jolly
 - Rock Polish
 - Aerial Fury - 10 PP Flying\Physical 100\100%. Makes contact.
 
-### awu
+### Reisen
 Mawile @ Mawilite - Mega Ability: Tough Claws
 
 Ability: Adaptability
@@ -271,7 +271,7 @@ Ability: Fur Coat
 
 EVs: 4 HP, 252 Atk, 252 SpD, Nature: Adamant
 
-- Food Rush - 5 PP Normal\Physical 90\90% prio -6. Forces switch. Makes contact.
+- Food Rush - 5 (no boosts) PP Normal\Physical 75\90% prio -6. Forces switch. Makes contact.
 
 Other Possible Moves:
 
@@ -399,7 +399,7 @@ EVs: 4 HP, 252 Atk, 252 Spe, Nature: Adamant
 Other Possible Moves:
 
 - Precipice Blades
-- Recover 
+- Recover
 - Stockpile
 - Swords Dance
 - Explosion
@@ -491,7 +491,7 @@ Ability: Wonder Guard
 
 EVs: 252 Atk, 4 SpA, 252 Spe, Nature: Adamant
 
-- Protect
+- Rapid Spin
 - Shadow Sneak
 - X-Scissor
 - Really Big Swords Dance - 20 PP. Boosts Atk by 4 stages.
@@ -802,8 +802,8 @@ Ability: Fur Coat
 
 EVs: 252 HP, 4 Def, 252 SpA, IVs: 0 Atk, Nature: Modest
 
-- Quiver Dance
-- Heal Order
+- Calm Mind
+- Heal Bell
 - Seed Flare
 - Boober's Oblivion - 10 PP Fire\Special 80\100%. Heals user by 2/3 of damage dealt. User faints if used 3 times in a row.
 
@@ -937,9 +937,9 @@ Innate Ability: Drought
 EVs: 4 HP, 252 SpA, 252 Spe, Nature: Timid
 
 - Eruption \ Blue Flare
-- Seed Flare
+- Leaf Storm
 - Volt Switch \ Synthesis \ Destiny Bond \ Growth \ Healing Wish
-- Splinters - 10 PP Rock\Physical 90\100%. 3 hits, each hit setting either Spikes or Toxic Spikes randomly. Causes the target to get splinters, losing 1/16 HP each turn.
+- Splinters - 10 PP Rock\Physical 80\100%. 3 hits, each hit setting either Spikes or Toxic Spikes randomly. Causes the target to get splinters, losing 1/16 HP each turn.
 
 ### Jasmine
 Mew @ Focus Sash
@@ -1025,7 +1025,7 @@ EVs: 252 SpA, 4 SpD, 252 Spe, Nature: Timid
 - Protect
 - Stored Power
 - Energy Ball \ Flamethrower \ Scald
-- Broken Wand - 10 PP. May fail and half user's HP (14%). Uses Thunderbolt, Ice Beam, Calm Mind and Spikes. Recovers 10% HP.
+- Broken Wand - 10 PP. May fail and half user's HP (14%). Uses Thunderbolt, Ice Beam, Calm Mind and Spikes.
 
 ### Layell
 Sneasel @ King's Rock
@@ -1290,7 +1290,7 @@ EVs: 4 HP, 252 SpA, 252 Spe, IVs: 0 Atk, Nature: Timid
 ### qtrx
 Unown @ Keyboard - Item is the equivalent of a mega stone and therefore inviolable.
 
-- Mega evolves into Missingno. 
+- Mega evolves into Missingno.
  - Type: Normal\Bird
  - Base Stats: HP 48, Atk 136, Def 0, SpA 6, SpD 255, Spe 29
  - Ability: Oblivious
@@ -1303,7 +1303,7 @@ EVs: 252 HP, 4 Atk, 252 SpA, IVs: 0 Spe, Nature: Quiet
 
 - Learns no natural moves.
 - Hidden Power Normal - 65 PP. Uses random Hidden Power. Hits 3 - 6 times.
- - When Mega-evolved: forces opponent out, then user switches out. After the turn, the user and the original opponent are traded for each other. If opponent is anchored, uses Perish Song. If either team has less than 2 Pokemon left, uses Explosion. 
+ - When Mega-evolved: forces opponent out, then user switches out. After the turn, the user and the original opponent are traded for each other. If opponent is anchored, uses Perish Song. If either team has less than 2 Pokemon left, uses Explosion.
 
 ### Quite Quiet
 Heliolisk @ Life Orb
@@ -1569,9 +1569,11 @@ EVs: 252 HP, 128 Def, 128 SpD, Nature: Sassy
 ### sparktrain
 Seel @ Life Orb
 
+Type: Water \ Ice
+
 Ability: Regenerator
 
-Innate Ability: Refrigerate
+Innate Ability: Refrigerate; SpD is boosted by 60%.
 
 EVs: 232 HP, 252 Atk, 24 SpD, Nature: Adamant
 
@@ -1898,7 +1900,7 @@ EVs: 4 Atk, 252 SpA, 252 Spe, Nature: Hasty
 
 - Thunder
 - Fire Blast \ Focus Blast \ High Jump Kick \ Head Smash
-- Blizzard \ Icicle Crash \ Sleep Powder
+- Blizzard \ Icicle Crash \ Lovely Kiss
 - bzzt - 5 (no boosts) PP, Protect-based move. Boosts offenses. Sound-based.
 
 ### Zero Lux Given
@@ -1910,7 +1912,7 @@ EVs: 252 Atk, 4 Def, 252 Spe, IVs: 0 SpA, Nature: Adamant
 
 - Fusion Bolt
 - Facade
-- Icicle Spear
+- Icicle Spear \ Petal Blizzard
 - Pun Ray - 20 PP Flying\Physical 80\100%, 100% confusion.
 
 ### Zodiax

@@ -15,6 +15,8 @@
 
 'use strict';
 
+/* eslint no-else-return: "error" */
+
 const crypto = require('crypto');
 const fs = require('fs');
 const moment = require('moment');
@@ -356,8 +358,11 @@ exports.commands = {
 				Gold.updateColor();
 				return this.sendReply("The chat room '" + target + "' was created.");
 			}
+			if (Rooms.get('upperstaff')) {
+				Rooms.get('upperstaff').add('|raw|<div class="broadcast-green">Public chat room created: <b>' + Tools.escapeHTML(target) + '</b></div>').update();
+			}
+			this.sendReply("The chat room '" + target + "' was created.");
 		}
-		return this.errorReply("An error occurred while trying to create the room '" + target + "'.");
 	},
 	makechatroomhelp: ["/makechatroom [roomname] - Creates a new room named [roomname]. Requires: & ~"],
 
@@ -403,7 +408,6 @@ exports.commands = {
 		if (Rooms.search(roomid)) return this.errorReply("A group chat named '" + title + "' already exists.");
 		// Tab title is prefixed with '[G]' to distinguish groupchats from
 		// registered chatrooms
-		title = title;
 
 		if (Monitor.countGroupChat(connection.ip)) {
 			this.errorReply("Due to high load, you are limited to creating 4 group chats every hour.");
@@ -1198,8 +1202,8 @@ exports.commands = {
 		let muteDuration = ((cmd === 'hm' || cmd === 'hourmute') ? HOURMUTE_LENGTH : MUTE_LENGTH);
 		if (!this.can('mute', targetUser, room)) return false;
 		let canBeMutedFurther = ((room.getMuteTime(targetUser) || 0) <= (muteDuration * 5 / 6));
-		if ((room.isMuted(targetUser) && !canBeMutedFurther) || targetUser.locked) {
-			let problem = " but was already " + (targetUser.locked ? "locked" : "muted");
+		if (targetUser.locked || (room.isMuted(targetUser) && !canBeMutedFurther) || room.isRoomBanned(targetUser)) {
+			let problem = " but was already " + (targetUser.locked ? "locked" : room.isMuted(targetUser) ? "muted" : "room banned");
 			if (!target) {
 				return this.privateModCommand("(" + targetUser.name + " would be muted by " + user.name + problem + ".)");
 			}
@@ -1921,6 +1925,50 @@ exports.commands = {
 	},
 	forcerenamehelp: ["/forcerename OR /fr [username], [reason] - Forcibly change a user's name and shows them the [reason]. Requires: % @ & ~"],
 
+	nl: 'namelock',
+	namelock: function (target, room, user) {
+		if (!target) return this.parse('/help namelock');
+
+		let reason = this.splitTarget(target, true);
+		let targetUser = this.targetUser;
+
+		if (!targetUser) {
+			return this.errorReply("User '" + this.targetUsername + "' not found.");
+		}
+		if (!this.can('forcerename', targetUser)) return false;
+
+		let entry = targetUser.name + " was namelocked by " + user.name + (reason ? ": " + reason : "");
+		this.privateModCommand("(" + entry + ")");
+		Rooms.global.cancelSearch(targetUser);
+		targetUser.lockName();
+		targetUser.popup("|modal|" + user.name + " has locked your name and you can't change names anymore" + (reason ? ": " + reason : "."));
+		return true;
+	},
+	namelockhelp: ["/namelock OR /nl [username], [reason] - Name locks a user and shows them the [reason]. Requires: % @ & ~"],
+
+	unl: 'unnamelock',
+	unnamelock: function (target, room, user) {
+		if (!target) return this.parse('/help unnamelock');
+		if (!this.can('forcerename')) return false;
+
+		let targetUser = Users.get(target);
+		let reason = '';
+		if (targetUser && targetUser.namelocked) {
+			reason = ' (' + targetUser.namelocked + ')';
+		}
+
+		let unlocked = Users.unnamelock(target);
+
+		if (unlocked) {
+			this.addModCommand(unlocked + " was unnamelocked by " + user.name + "." + reason);
+			if (!reason) this.globalModlog("UNNAMELOCK", target, " by " + user.name);
+			if (targetUser) targetUser.popup("" + user.name + " has unnamelocked you.");
+		} else {
+			this.errorReply("User '" + target + "' is not namelocked.");
+		}
+	},
+	unnamelockhelp: ["/unnamelock [username] - Unnamelocks the user. Requires: % @ & ~"],
+
 	hideuser: 'hidetext',
 	hidetext: function (target, room, user) {
 		if (!target) return this.parse('/help hidetext');
@@ -1970,7 +2018,7 @@ exports.commands = {
 					if (!user.can('makechatroom')) return this.errorReply("Regex banwords are only allowed for leaders or above.");
 
 					try {
-						let test = new RegExp(words[i]);
+						let test = new RegExp(words[i]); // eslint-disable-line no-unused-vars
 					} catch (e) {
 						return this.errorReply(e.message.substr(0, 28) === 'Invalid regular expression: ' ? e.message : 'Invalid regular expression: /' + words[i] + '/: ' + e.message);
 					}
@@ -2346,7 +2394,7 @@ exports.commands = {
 		}
 		if (Rooms.global.lockdown === true) {
 			for (let id in Rooms.rooms) {
-				if (id !== 'global') Rooms.rooms[id].addRaw("<div class=\"broadcast-green\"><b>The server shutdown was canceled.</b></div>");
+				if (id !== 'global') Rooms.rooms[id].addRaw("<div class=\"broadcast-green\"><b>The server restart was canceled.</b></div>");
 			}
 		} else {
 			this.sendReply("Preparation for the server shutdown was canceled.");
@@ -3108,13 +3156,9 @@ exports.commands = {
 					if (!namespace[targets[i]]) return this.errorReply("Help for the command '" + target + "' was not found. Try /help for general help");
 					namespace = namespace[targets[i]];
 				}
-				if (typeof namespace[helpCmd] === 'object') {
-					return this.sendReply(namespace[helpCmd].join('\n'));
-				} else if (typeof namespace[helpCmd] === 'function') {
-					return this.parse('/' + targets.slice(0, targets.length - 1).concat(helpCmd).join(' '));
-				} else {
-					return this.errorReply("Help for the command '" + target + "' was not found. Try /help for general help");
-				}
+				if (typeof namespace[helpCmd] === 'object') return this.sendReply(namespace[helpCmd].join('\n'));
+				if (typeof namespace[helpCmd] === 'function') return this.parse('/' + targets.slice(0, targets.length - 1).concat(helpCmd).join(' '));
+				return this.errorReply("Help for the command '" + target + "' was not found. Try /help for general help");
 			} else {
 				helpCmd = target + 'help';
 			}

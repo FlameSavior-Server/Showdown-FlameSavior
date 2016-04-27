@@ -398,23 +398,25 @@ exports.Formats = [
 			let usedPokemon = [];
 			for (let i = 0; i < team.length; i++) {
 				let template = this.getTemplate(team[i].species);
-				let ability = team[i].ability;
-				if (!ability) {
+				if (!template.exists) continue;
+				let ability = this.getAbility(team[i].ability);
+				if (!ability.name) {
 					problems.push(template.species + " needs to have an ability.");
 					continue;
 				}
-				let sources = pokedex.filter(pokemon => usedPokemon.indexOf(pokemon) < 0 && Tools.data.Pokedex[pokemon].num > 0 && template.types.sort().toString() === Tools.data.Pokedex[pokemon].types.sort().toString() && Object.values(Tools.data.Pokedex[pokemon].abilities).indexOf(ability) >= 0);
+				if (!ability.exists) continue;
+				let sources = pokedex.filter(pokemon => usedPokemon.indexOf(pokemon) < 0 && Tools.data.Pokedex[pokemon].num > 0 && template.types.sort().toString() === Tools.data.Pokedex[pokemon].types.sort().toString() && Object.values(Tools.data.Pokedex[pokemon].abilities).indexOf(ability.name) >= 0);
 				if (!sources.length) {
-					problems.push(template.species + " cannot obtain the ability " + ability + ".");
+					problems.push(template.species + " cannot obtain the ability " + ability.name + ".");
 					continue;
 				}
-				if (ability in {'Aerilate': 1, 'Arena Trap': 1, 'Fur Coat': 1, 'Huge Power': 1, 'Imposter': 1, 'Parental Bond': 1, 'Pure Power': 1, 'Simple':1, 'Speed Boost': 1}) {
+				if (ability.id in {aerilate:1, arenatrap:1, furcoat:1, hugepower:1, imposter:1, parentalbond:1, purepower:1, simple:1, speedboost:1}) {
 					let legalAbility = false;
 					for (let i in template.abilities) {
-						if (ability === template.abilities[i]) legalAbility = true;
+						if (ability.name === template.abilities[i]) legalAbility = true;
 					}
 					if (!legalAbility) {
-						problems.push("The ability " + ability + " is banned on Pok\u00e9mon that do not naturally have it.");
+						problems.push("The ability " + ability.name + " is banned on Pok\u00e9mon that do not naturally have it.");
 						continue;
 					}
 				}
@@ -429,7 +431,7 @@ exports.Formats = [
 		section: "OM of the Month",
 
 		ruleset: ['Species Clause', 'Nickname Clause', 'Moody Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Swagger Clause', 'Mega Rayquaza Clause', 'Sleep Clause Mod', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
-		banlist: ['Unreleased', 'Illegal', 'Gengar-Mega', 'Mewtwo-Mega-X', 'Mewtwo-Mega-Y', 'Rayquaza-Mega', 'Salamence-Mega'],
+		banlist: ['Unreleased', 'Illegal', 'Gengar-Mega', 'Mewtwo-Mega-X', 'Mewtwo-Mega-Y', 'Rayquaza-Mega'],
 		onValidateTeam: function (team) {
 			let problems = [];
 			let kyurems = 0;
@@ -642,7 +644,7 @@ exports.Formats = [
 					pokemon.setAbility('adaptability');
 					this.add('-ability', pokemon, 'Adaptability');
 				}
-				if (name === 'awu' && pokemon.getAbility().id === 'hugepower') {
+				if (name === 'reisen' && pokemon.getAbility().id === 'hugepower') {
 					pokemon.setAbility('adaptability');
 					this.add('-ability', pokemon, 'Tough Claws');
 				}
@@ -688,7 +690,7 @@ exports.Formats = [
 					pokemon.setAbility('adaptability');
 					this.add('-ability', pokemon, 'Adaptability');
 				}
-				if (name === 'awu' && pokemon.getAbility().id === 'hugepower') {
+				if (name === 'reisen' && pokemon.getAbility().id === 'hugepower') {
 					pokemon.setAbility('adaptability');
 					this.add('-ability', pokemon, 'Tough Claws');
 				}
@@ -716,13 +718,10 @@ exports.Formats = [
 				pokemon.canMegaEvo = this.canMegaEvo(pokemon);
 			}
 
-			// Add here special typings, done for flavour mainly.
+			// Innate effects.
 			if (name === 'ascriptmaster') {
-				pokemon.setType('Electric');
 				pokemon.addVolatile('ascriptinnate', pokemon);
 			}
-
-			// Innate effects.
 			if (name === 'atomicllamas') {
 				pokemon.addVolatile('baddreamsinnate', pokemon);
 			}
@@ -910,8 +909,8 @@ exports.Formats = [
 			if (name === 'aurora') {
 				this.add('c|@Aurora|Best of luck to all competitors!');
 			}
-			if (name === 'awu') {
-				this.add('c|%awu|Fite me irl bruh.');
+			if (name === 'reisen') {
+				this.add('c|%Reisen|Fite me irl bruh.');
 			}
 			if (name === 'beowulf') {
 				this.add('c|@Beowulf|Grovel peasant, you are in the presence of the RNGesus');
@@ -1454,8 +1453,8 @@ exports.Formats = [
 			if (name === 'aurora') {
 				this.add('c|@Aurora|are you serious you\'re so bad oh my god haxed ughhhhh');
 			}
-			if (name === 'awu') {
-				this.add("c|%awu|No need for goodbye. I'll see you on the flip side.");
+			if (name === 'reisen') {
+				this.add("c|%Reisen|No need for goodbye. I'll see you on the flip side.");
 			}
 			if (name === 'beowulf') {
 				this.add('c|@Beowulf|There is no need to be mad');

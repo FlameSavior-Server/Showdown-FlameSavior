@@ -385,194 +385,56 @@ exports.Formats = [
 	///////////////////////////////////////////////////////////////////
 
 	{
-		name: "Ability Unity",
-		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3507278/\">Ability Unity</a>"],
+		name: "Extreme Tier Shift",
+		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3540047/\">Extreme Tier Shift</a>"],
 		section: "OM of the Month",
 		column: 2,
 
-		ruleset: ['OU'],
-		banlist: ['Ignore Illegal Abilities', 'Archeops', 'Chatot', 'Regigigas', 'Slaking'],
-		onValidateTeam: function (team) {
-			let problems = [];
-			let pokedex = Object.keys(Tools.data.Pokedex);
-			let usedPokemon = [];
-			for (let i = 0; i < team.length; i++) {
-				let template = this.getTemplate(team[i].species);
-				if (!template.exists) continue;
-				let ability = this.getAbility(team[i].ability);
-				if (!ability.name) {
-					problems.push(template.species + " needs to have an ability.");
-					continue;
-				}
-				if (!ability.exists) continue;
-				let sources = pokedex.filter(pokemon => usedPokemon.indexOf(pokemon) < 0 && Tools.data.Pokedex[pokemon].num > 0 && template.types.sort().toString() === Tools.data.Pokedex[pokemon].types.sort().toString() && Object.values(Tools.data.Pokedex[pokemon].abilities).indexOf(ability.name) >= 0);
-				if (!sources.length) {
-					problems.push(template.species + " cannot obtain the ability " + ability.name + ".");
-					continue;
-				}
-				if (ability.id in {aerilate:1, arenatrap:1, furcoat:1, hugepower:1, imposter:1, parentalbond:1, purepower:1, simple:1, speedboost:1}) {
-					let legalAbility = false;
-					for (let i in template.abilities) {
-						if (ability.name === template.abilities[i]) legalAbility = true;
-					}
-					if (!legalAbility) {
-						problems.push("The ability " + ability.name + " is banned on Pok\u00e9mon that do not naturally have it.");
-						continue;
-					}
-				}
-				usedPokemon.push(sources[0]);
-			}
-			return problems;
-		},
+		mod: 'extremets',
+		ruleset: ['Ubers'],
+		banlist: ['Eviolite'],
 	},
 	{
-		name: "Megamons",
-		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3566648/\">Megamons</a>"],
+		name: "Type Reflector",
+		desc: ["&bullet; <a href=\"https://www.smogon.com/forums/threads/3567348/\">Type Reflector</a>"],
 		section: "OM of the Month",
 
-		ruleset: ['Species Clause', 'Nickname Clause', 'Moody Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Swagger Clause', 'Mega Rayquaza Clause', 'Sleep Clause Mod', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
-		banlist: ['Unreleased', 'Illegal', 'Gengar-Mega', 'Mewtwo-Mega-X', 'Mewtwo-Mega-Y', 'Rayquaza-Mega'],
-		onValidateTeam: function (team) {
-			let problems = [];
-			let kyurems = 0;
-			for (let i = 0; i < team.length; i++) {
-				if (team[i].species === 'Kyurem-White' || team[i].species === 'Kyurem-Black') {
-					if (kyurems > 0) {
-						problems.push('You cannot have more than one Kyurem-Black/Kyurem-White.');
-						break;
-					}
-					kyurems++;
-				}
+		ruleset: ['OU'],
+		banlist: ['Shedinja'],
+		onBegin: function () {
+			for (let i = 0; i < this.sides.length; i++) {
+				this.sides[i].pokemon[0].isReflector = true;
+				this.sides[i].reflectedType = this.sides[i].pokemon[0].types[0];
 			}
-			return problems;
 		},
-		onChangeSet: function (set, format) {
-			let item = this.getItem(set.item);
-			let template = this.getTemplate(set.species);
-			let problems = [];
-			let totalEV = 0;
-
-			if (set.species === set.name) delete set.name;
-			if (set.moves) {
-				for (let i = 0; i < set.moves.length; i++) {
-					let move = this.getMove(set.moves[i]);
-					if (move.isNonstandard) {
-						problems.push(move.name + ' does not exist.');
-					}
-				}
-			}
-			if (set.moves && set.moves.length > 4) {
-				problems.push((set.name || set.species) + ' has more than four moves.');
-			}
-			if (set.level && set.level > 100) {
-				problems.push((set.name || set.species) + ' is higher than level 100.');
-			}
-
-			if (template.isNonstandard) {
-				problems.push(set.species + ' does not exist.');
-			}
-			if (this.getAbility(set.ability).isNonstandard) {
-				problems.push(set.ability + ' does not exist.');
-			}
-			if (item.isNonstandard) {
-				if (item.isNonstandard === 'gen2') {
-					problems.push(item.name + ' does not exist outside of gen 2.');
-				} else {
-					problems.push(item.name + ' does not exist.');
-				}
-			}
-			for (let k in set.evs) {
-				if (typeof set.evs[k] !== 'number' || set.evs[k] < 0) {
-					set.evs[k] = 0;
-				}
-				totalEV += set.evs[k];
-			}
-			if (totalEV > 510) {
-				problems.push((set.name || set.species) + " has more than 510 total EVs.");
-			}
-
-			if (template.gender) {
-				if (set.gender !== template.gender) {
-					set.gender = template.gender;
-				}
-			} else {
-				if (set.gender !== 'M' && set.gender !== 'F') {
-					set.gender = undefined;
-				}
-			}
-
-			let baseTemplate = this.getTemplate(template.baseSpecies);
-			if (set.ivs && baseTemplate.gen >= 6 && (template.eggGroups[0] === 'Undiscovered' || template.species === 'Manaphy') && !template.prevo && !template.nfe && template.species !== 'Unown' && template.baseSpecies !== 'Pikachu' && (template.baseSpecies !== 'Diancie' || !set.shiny)) {
-				let perfectIVs = 0;
-				for (let i in set.ivs) {
-					if (set.ivs[i] >= 31) perfectIVs++;
-				}
-				if (perfectIVs < 3) problems.push((set.name || set.species) + " must have at least three perfect IVs because it's a legendary in gen 6.");
-			}
-
-			let moves = [];
-			if (set.moves) {
-				let hasMove = {};
-				for (let i = 0; i < set.moves.length; i++) {
-					let move = this.getMove(set.moves[i]);
-					let moveid = move.id;
-					if (hasMove[moveid]) continue;
-					hasMove[moveid] = true;
-					moves.push(set.moves[i]);
-				}
-			}
-			set.moves = moves;
-
-			let battleForme = template.battleOnly && template.species;
-			if (battleForme && !template.isMega) {
-				if (template.requiredAbility && set.ability !== template.requiredAbility) {
-					problems.push("" + template.species + " transforms in-battle with " + template.requiredAbility + "."); // Darmanitan-Zen
-				}
-				if (template.requiredItem && item.name !== template.requiredItem) {
-					problems.push("" + template.species + " transforms in-battle with " + template.requiredItem + '.'); // Primal
-				}
-				if (template.requiredMove && set.moves.indexOf(toId(template.requiredMove)) < 0) {
-					problems.push("" + template.species + " transforms in-battle with " + template.requiredMove + "."); // Meloetta-Pirouette
-				}
-				if (!format.noChangeForme) set.species = template.baseSpecies; // Fix forme for Aegislash, Castform, etc.
-			} else {
-				if (template.requiredItem && item.name !== template.requiredItem && !template.isMega) {
-					problems.push("" + (set.name || set.species) + " needs to hold " + template.requiredItem + '.'); // Plate/Drive/Griseous Orb
-				}
-				if (template.requiredMove && set.moves.indexOf(toId(template.requiredMove)) < 0 && !template.isMega) {
-					problems.push("" + (set.name || set.species) + " needs to have the move " + template.requiredMove + "."); // Keldeo-Resolute
-				}
-
-				if (item.forcedForme && template.species === this.getTemplate(item.forcedForme).baseSpecies && !format.noChangeForme) {
-					set.species = item.forcedForme;
-				}
-			}
-
-			if (set.species !== template.species) {
-				template = this.getTemplate(set.species);
-				if (!format.noChangeAbility) {
-					let legalAbility = false;
-					for (let i in template.abilities) {
-						if (template.abilities[i] !== set.ability) continue;
-						legalAbility = true;
-						break;
-					}
-					if (!legalAbility) {
-						set.ability = template.abilities['0'];
-					}
-				}
-			}
-
-			if (set.shiny && template.unobtainableShiny) {
-				problems.push("It's currently not possible to get a shiny " + template.species + ".");
-			}
-
-			return problems;
-		},
+		onSwitchInPriority: 2,
 		onSwitchIn: function (pokemon) {
-			let item = pokemon.getItem();
-			if (item.megaEvolves && pokemon.template.species === item.megaEvolves) {
-				pokemon.canMegaEvo = item.megaStone;
+			if (pokemon.isReflector) return;
+			let type = pokemon.side.reflectedType;
+			if (pokemon.types.indexOf(type) > 0) return;
+			if (pokemon.template.isMega && pokemon.types.join() !== this.getTemplate(pokemon.template.baseSpecies).types.join()) return;
+			if (pokemon.types.length > 1 && pokemon.types[0] === type) {
+				pokemon.setType(pokemon.types[0]);
+				this.add('-start', pokemon, 'typechange', pokemon.types[0], null);
+			} else {
+				pokemon.setType(pokemon.types[0]);
+				pokemon.addType(type);
+				this.add('-start', pokemon, 'typechange', pokemon.types[0], null);
+				this.add('-start', pokemon, 'typeadd', type, null);
+			}
+		},
+		onAfterMega: function (pokemon) {
+			if (pokemon.isReflector) return;
+			let type = pokemon.side.reflectedType;
+			if (pokemon.types.indexOf(type) > 0 || pokemon.types.join() !== this.getTemplate(pokemon.template.baseSpecies).types.join()) return;
+			if (pokemon.types.length > 1 && pokemon.types[0] === type) {
+				pokemon.setType(pokemon.types[0]);
+				this.add('-start', pokemon, 'typechange', pokemon.types[0], null);
+			} else {
+				pokemon.setType(pokemon.types[0]);
+				pokemon.addType(type);
+				this.add('-start', pokemon, 'typechange', pokemon.types[0], null);
+				this.add('-start', pokemon, 'typeadd', type, null);
 			}
 		},
 	},
@@ -902,6 +764,9 @@ exports.Formats = [
 			}
 			if (name === 'astara') {
 				this.add('c|%Ast☆arA|I\'d rather take a nap, I hope you won\'t be a petilil shit, Eat some rare candies and get on my level.');
+			}
+			if (name === 'asty') {
+				this.add('c|@Asty|Top kek :^)');
 			}
 			if (name === 'atomicllamas') {
 				this.add('c|&atomicllamas|(celebrate)(dog)(celebrate)');
@@ -1304,6 +1169,9 @@ exports.Formats = [
 			if (name === 'talkingtree') {
 				this.add('c|+talkingtree|I am Groot n_n');
 			}
+			if (name === 'teg') {
+				this.add("c|+TEG|It's __The__ Eevee General");
+			}
 			if (name === 'temporaryanonymous') {
 				sentences = ['Hey, hey, can I gently scramble your insides (just for laughs)? ``hahahaha``', 'check em', 'If you strike me down, I shall become more powerful than you can possibly imagine! I have a strong deathrattle effect and I cannot be silenced!'];
 				this.add('c|@Temporaryanonymous|' + sentences[this.random(3)]);
@@ -1361,7 +1229,7 @@ exports.Formats = [
 				}
 			}
 			if (name === 'xjoelituh') {
-				this.add("c|+xJoelituh|I won't be haxed again, you will be the next one. UUUUUU");
+				this.add("c|%xJoelituh|I won't be haxed again, you will be the next one. UUUUUU");
 			}
 			if (name === 'xshiba') { // dd
 				this.add("c|+xShiba|LINDA IS INDA");
@@ -1446,6 +1314,9 @@ exports.Formats = [
 			if (name === 'astara') {
 				sentences = ['/me twerks into oblivion', 'good night ♥', 'Astara Vista Baby'];
 				this.add('c|%Ast☆arA|' + sentences[this.random(3)]);
+			}
+			if (name === 'asty') {
+				this.add('c|@Asty|Bottom kek :^(');
 			}
 			if (name === 'atomicllamas') {
 				this.add('c|&atomicllamas|(puke)');
@@ -1806,6 +1677,10 @@ exports.Formats = [
 			if (name === 'talkingtree') {
 				this.add('c|+talkingtree|I am Groot u_u');
 			}
+			if (name === 'teg') {
+				sentences = ['Save me, Joim!', 'Arcticblast is the worst OM leader in history'];
+				this.add('c|+TEG|' + sentences[this.random(2)]);
+			}
 			if (name === 'temporaryanonymous') {
 				sentences = [';_;7', 'This kills the tempo', 'I\'m kill. rip.', 'S-senpai! Y-you\'re being too rough! >.<;;;;;;;;;;;;;;;;;', 'A-at least you checked my dubs right?', 'B-but that\'s impossible! This can\'t be! AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHGH'];
 				this.add('c|@Temporaryanonymous|' + sentences[this.random(6)]);
@@ -1852,7 +1727,7 @@ exports.Formats = [
 				}
 			}
 			if (name === 'xjoelituh') {
-				this.add("c|+xJoelituh|THAT FOR SURE MATTERED. Blame Nayuki. I'm going to play CSGO then.");
+				this.add("c|%xJoelituh|THAT FOR SURE MATTERED. Blame Nayuki. I'm going to play CSGO then.");
 			}
 			if (name === 'xshiba') {
 				this.add("c|+xShiba|Lol that feeling when you just win but get haxed..");

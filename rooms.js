@@ -1264,7 +1264,6 @@ let BattleRoom = (() => {
 		}
 		delete this.users[oldid];
 		this.users[user.userid] = user;
-		if (this.game && this.game.onRename) this.game.onRename(user, oldid, joining);
 		this.update();
 		return user;
 	};
@@ -1566,7 +1565,6 @@ let ChatRoom = (() => {
 			return;
 		}
 		if (this.poll && user.userid in this.poll.voters) this.poll.updateFor(user);
-		if (this.game && this.game.onRename) this.game.onRename(user, oldid, joining);
 		return user;
 	};
 	/**

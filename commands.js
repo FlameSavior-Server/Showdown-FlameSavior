@@ -188,6 +188,7 @@ exports.commands = {
 		target = this.canTalk(target, null, targetUser);
 		if (!target) return false;
 
+		let message;
 		if (target.charAt(0) === '/' && target.charAt(1) !== '/') {
 			// PM command
 			let innerCmdIndex = target.indexOf(' ');
@@ -197,6 +198,10 @@ exports.commands = {
 			case 'me':
 			case 'mee':
 			case 'announce':
+				break;
+			case 'ME':
+			case 'MEE':
+				message = '|pm|' + user.getIdentity().toUpperCase() + '|' + targetUser.getIdentity() + '|/' + innerCmd.toLowerCase() + ' ' + innerTarget;
 				break;
 			case 'invite':
 			case 'inv': {

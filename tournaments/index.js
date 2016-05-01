@@ -710,15 +710,15 @@ class Tournament {
 	onUpdateConnection(user, connection) {
 		this.updateFor(user, connection);
 	}
-	onRename(user, oldid, joining) {
-		if (oldid in this.players) {
-			if (user.userid === oldid) {
+	onRename(user, oldUserid) {
+		if (oldUserid in this.players) {
+			if (user.userid === oldUserid) {
 				this.players[user.userid].name = user.name;
 			} else {
-				this.players[user.userid] = this.players[oldid];
+				this.players[user.userid] = this.players[oldUserid];
 				this.players[user.userid].userid = user.userid;
 				this.players[user.userid].name = user.name;
-				delete this.players[oldid];
+				delete this.players[oldUserid];
 			}
 		}
 
@@ -764,7 +764,7 @@ class Tournament {
 		let error = this.generator.setMatchResult([from, to], result, room.battle.score);
 		if (error) {
 			// Should never happen
-			return this.room.add("Unexpected " + error + " from setMatchResult([" + from.userid + ", " + to.userid + "], " + result + ", " + room.battle.score + ") in onBattleWin(" + room.id + ", " + winnerid + "). Please report this to an admin.").update();
+			return this.room.add("Unexpected " + error + " from setMatchResult([" + room.p1.userid + ", " + room.p2.userid + "], " + result + ", " + room.battle.score + ") in onBattleWin(" + room.id + ", " + winnerid + "). Please report this to an admin.").update();
 		}
 
 		this.room.add('|tournament|battleend|' + from.name + '|' + to.name + '|' + result + '|' + room.battle.score.join(','));
@@ -1219,7 +1219,7 @@ CommandParser.commands.tournamenthelp = function (target, room, user) {
 		"- getusers: Lists the users in the current tournament.<br />" +
 		"- on/off: Enables/disables allowing mods to start tournaments in the current room.<br />" +
 		"- announce/announcements &lt;on|off>: Enables/disables tournament announcements for the current room.<br />" +
-		"More detailed help can be found <a href=\"https://gist.github.com/sirDonovan/130324abcd06254cf501\">here</a>"
+		"More detailed help can be found <a href=\"https://www.smogon.com/forums/threads/3570628/#post-6777489\">here</a>"
 	);
 };
 

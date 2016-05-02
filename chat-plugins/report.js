@@ -64,12 +64,8 @@ exports.commands = {
 				for (var u in Object.keys(Reports)) {
 					var currentReport = Reports[Object.keys(Reports)[u]];
 					var date = currentReport.reportTime;
-					var hours = date.getUTCHours();
-					if (hours.toString() === "0") hours = "00";
-					var minutes = date.getUTCMinutes();
-					if (minutes < 10) minutes = '0' + minutes;
 					output += '<tr><td>' + currentReport.id + '</td><td>' + Tools.escapeHTML(currentReport.reporter) + '</td><td>' +
-						Tools.escapeHTML(currentReport.message) + '</td><td>' + hours + ':' + minutes + ' (GMT)</td><td>' + (currentReport.status === 'Pending Staff' ? '<font color=blue>Pending Staff</font>' : (~currentReport.status.indexOf('Accepted by') ? '<font color=green>' + Tools.escapeHTML(currentReport.status) + '</font>' : Tools.escapeHTML(currentReport.status))) + '</td></tr>';
+						Tools.escapeHTML(currentReport.message) + '</td><td>' + date + ' (GMT)</td><td>' + (currentReport.status === 'Pending Staff' ? '<font color=blue>Pending Staff</font>' : (~currentReport.status.indexOf('Accepted by') ? '<font color=green>' + Tools.escapeHTML(currentReport.status) + '</font>' : Tools.escapeHTML(currentReport.status))) + '</td></tr>';
 				}
 				this.sendReply(output);
 				break;

@@ -245,7 +245,7 @@ exports.commands = {
 			target = '/html ' + sender + msg;
 			var processing = true;
 		}
-		let message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
+		if (!message) message = '|pm|' + user.getIdentity() + '|' + targetUser.getIdentity() + '|' + target;
 		user.send(message);
 		if (targetUser !== user) {
 			if (Users.ShadowBan.checkBanned(user)) {

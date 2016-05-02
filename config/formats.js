@@ -411,31 +411,26 @@ exports.Formats = [
 		onSwitchIn: function (pokemon) {
 			if (pokemon.isReflector) return;
 			let type = pokemon.side.reflectedType;
-			if (pokemon.types.indexOf(type) > 0) return;
+			if (pokemon.types.indexOf(type) > 0 || pokemon.types.length === 1 && pokemon.types[0] === type) return;
 			if (pokemon.template.isMega && pokemon.types.join() !== this.getTemplate(pokemon.template.baseSpecies).types.join()) return;
 			if (pokemon.types.length > 1 && pokemon.types[0] === type) {
-				pokemon.setType(pokemon.types[0]);
-				this.add('-start', pokemon, 'typechange', pokemon.types[0], null);
+				pokemon.setType(type);
 			} else {
-				pokemon.setType(pokemon.types[0]);
-				pokemon.addType(type);
-				this.add('-start', pokemon, 'typechange', pokemon.types[0], null);
-				this.add('-start', pokemon, 'typeadd', type, null);
+				pokemon.setType([pokemon.types[0], type]);
 			}
+			this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), null);
 		},
 		onAfterMega: function (pokemon) {
 			if (pokemon.isReflector) return;
 			let type = pokemon.side.reflectedType;
-			if (pokemon.types.indexOf(type) > 0 || pokemon.types.join() !== this.getTemplate(pokemon.template.baseSpecies).types.join()) return;
+			if (pokemon.types.indexOf(type) > 0 || pokemon.types.length === 1 && pokemon.types[0] === type) return;
+			if (pokemon.types.join() !== this.getTemplate(pokemon.template.baseSpecies).types.join()) return;
 			if (pokemon.types.length > 1 && pokemon.types[0] === type) {
-				pokemon.setType(pokemon.types[0]);
-				this.add('-start', pokemon, 'typechange', pokemon.types[0], null);
+				pokemon.setType(type);
 			} else {
-				pokemon.setType(pokemon.types[0]);
-				pokemon.addType(type);
-				this.add('-start', pokemon, 'typechange', pokemon.types[0], null);
-				this.add('-start', pokemon, 'typeadd', type, null);
+				pokemon.setType([pokemon.types[0], type]);
 			}
+			this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), null);
 		},
 	},
 	{
@@ -1899,7 +1894,7 @@ exports.Formats = [
 		desc: [
 			"All Pok&eacute;mon on a team must share a type.",
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3544507/\">Monotype</a>",
-			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3550310/\">Monotype Resources</a>",
+			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3565113/\">Monotype Viability Ranking</a>",
 		],
 		section: "Other Metagames",
 

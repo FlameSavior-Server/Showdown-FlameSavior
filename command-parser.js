@@ -331,7 +331,7 @@ class CommandContext {
 			}
 
 			if (!this.room.banwordRegex) this.updateBanwords();
-			if (this.room.banwordRegex !== true && this.room.banwordRegex.test(message) && !user.can('mute', null, this.room)) {
+			if (this.room.banwordRegex !== true && this.room.banwordRegex.test(message) && !user.can('mute', null, this.room) && room) {
 				if (this.room.id === 'lobby') {
 					this.errorReply("Your message contained banned words.  You have been muted for 3 minutes as a result.");
 					this.privateModCommand("(" + user.name + " was automatically muted for saying: " + message + ")");

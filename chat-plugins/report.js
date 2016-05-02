@@ -3,6 +3,7 @@
 * Credits: jd    *
 *****************/
 var fs = require('fs');
+var moment = require('moment');
 
 var Reports = {};
 function loadReports() {
@@ -39,7 +40,7 @@ exports.commands = {
 		Reports[reportId].message = target.trim();
 		Reports[reportId].id = reportId;
 		Reports[reportId].status = 'Pending Staff';
-		Reports[reportId].reportTime = Date.now();
+		Reports[reportId].reportTime = moment().format('MMMM Do YYYY, h:mm A') + " EST";
 		saveReports();
 		pmUpperStaff('A new report has been submitted by ' + user.name + '. ID: ' + reportId + ' Message: ' + target.trim());
 		Rooms('upperstaff').add('A new report has been submitted by ' + user.name + '. ID: ' + reportId + ' Message: ' + target.trim());
@@ -62,7 +63,7 @@ exports.commands = {
 				var output = '|raw|<table border="1" cellspacing ="0" cellpadding="3"><tr><th>ID</th><th>Reporter</th><th>Message</th><th>Report Time</th><th>Status</th></tr>';
 				for (var u in Object.keys(Reports)) {
 					var currentReport = Reports[Object.keys(Reports)[u]];
-					var date = new Date(currentReport.reportTime);
+					var date = currentReport.reportTime;
 					var hours = date.getUTCHours();
 					if (hours.toString() === "0") hours = "00";
 					var minutes = date.getUTCMinutes();

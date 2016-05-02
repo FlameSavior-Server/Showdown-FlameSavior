@@ -65,7 +65,7 @@ exports.commands = {
 					var currentReport = Reports[Object.keys(Reports)[u]];
 					var date = currentReport.reportTime;
 					output += '<tr><td>' + currentReport.id + '</td><td>' + Tools.escapeHTML(currentReport.reporter) + '</td><td>' +
-						Tools.escapeHTML(currentReport.message) + '</td><td>' + date + ' (GMT)</td><td>' + (currentReport.status === 'Pending Staff' ? '<font color=blue>Pending Staff</font>' : (~currentReport.status.indexOf('Accepted by') ? '<font color=green>' + Tools.escapeHTML(currentReport.status) + '</font>' : Tools.escapeHTML(currentReport.status))) + '</td></tr>';
+						Tools.escapeHTML(currentReport.message) + '</td><td>' + date + ' </td><td>' + (currentReport.status === 'Pending Staff' ? '<font color=blue>Pending Staff</font>' : (~currentReport.status.indexOf('Accepted by') ? '<font color=green>' + Tools.escapeHTML(currentReport.status) + '</font>' : Tools.escapeHTML(currentReport.status))) + '</td></tr>';
 				}
 				this.sendReply(output);
 				break;

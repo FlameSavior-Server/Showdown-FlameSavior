@@ -648,11 +648,12 @@ exports.commands = {
 					"<u>Development:</u><br />" +
 					"- " + name('panpawn', true) + " (Owner of GitHub repository)<br />" +
 					"- " + name('Silveee', true) + " (Contributor)<br />" +
-					"- " + name('jd', true) + " (Past contributor)<br />" +
+					"- " + name('jd', true) + " (Collaborator)<br />" +
 					"<br />" +
 					"<u>Special Thanks:</u><br />" +
 					"- Current staff team<br />" +
 					"- Our regular users<br />" +
+					"- " + name('snow', true) + " (Policy administrator)<br />" +
 					"- " + name('pitcher', true) + " (Former co-owner)<br />" +
 					"- " + name('PixelatedPaw', true) + " (One of the original administrators)";
 		user.popup(popup);

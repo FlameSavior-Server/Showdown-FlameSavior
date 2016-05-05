@@ -9,6 +9,7 @@
 var fs = require('fs');
 var serialize = require('node-serialize');
 var emotes = {};
+var Autolinker = require('autolinker');
 
 if (typeof Gold === 'undefined') global.Gold = {};
 
@@ -85,13 +86,14 @@ Gold.emoticons = {
 					return;
 				} else if (this.checkEmoteModchat(user, room)) {
 					if (!match || message.charAt(0) === '!') return true;
-					message = Tools.escapeHTML(message);
+					message = Tools.escapeHTML(message).replace(/&#x2f;/g, '/');
 					message = this.processEmoticons(message);
 
 					//PS formatting
 					message = message.replace(/\_\_([^< ](?:[^<]*?[^< ])?)\_\_(?![^<]*?<\/a)/g, '<i>$1</i>'); // italics
 					message = message.replace(/\*\*([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>'); // bold
 					message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<strike>$1</strike>'); // strikethrough
+					message = Autolinker.link(message, {stripPrefix: false, phone: false, twitter: false});
 
 					if (room.type === 'chat') {
 						room.add('|uhtml|' + user.userid + '|<small>' + user.getIdentity(room).substr(0,1) + '</small><strong class="username">' + this.userColor(user.name) + '</strong><b>' + this.userColor(user.name, ":") + '</b> &nbsp;' + message);

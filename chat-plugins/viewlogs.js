@@ -38,7 +38,7 @@ exports.commands = {
 		if (toId(targetSplit[1]) === 'today' || toId(targetSplit[1]) === 'yesterday') {
 			date = new Date();
 			if (toId(targetSplit[1]) === 'yesterday') date.setDate(date.getDate() - 1);
-			targetSplit[1] = date.format('{dd}-{MM}-{yyyy}');
+			targetSplit[1] = date.format('{yyyy}-{MM}-{dd}');
 		}
 		date = targetSplit[1];
 		var splitDate = date.split('-');

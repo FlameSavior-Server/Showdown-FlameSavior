@@ -95,12 +95,20 @@ class CommandContext {
 		this.targetUser = null;
 	}
 
-	updateBanwords() {
-		if (this.room.banwords && this.room.banwords.length) {
-			this.room.banwordRegex = new RegExp('(?:\\b|(?!\\w))(?:' + this.room.banwords.join('|') + ')(?:\\b|\\B(?!\\w))', 'i');
-		} else {
-			this.room.banwordRegex = true;
+	checkBanwords(room, message) {
+		if (!room) return true;
+		if (!room.banwordRegex) {
+			if (room.banwords && room.banwords.length) {
+				room.banwordRegex = new RegExp('(?:\\b|(?!\\w))(?:' + room.banwords.join('|') + ')(?:\\b|\\B(?!\\w))', 'i');
+			} else {
+				room.banwordRegex = true;
+			}
 		}
+		if (!message) return true;
+		if (room.banwordRegex !== true && room.banwordRegex.test(message)) {
+			return false;
+		}
+		return true;
 	}
 	sendReply(data) {
 		if (this.broadcasting) {
@@ -285,6 +293,13 @@ class CommandContext {
 				this.errorReply("You are muted and cannot talk in this room.");
 				return false;
 			}
+			if ((!room || !room.battle) && (!targetUser || " +".includes(targetUser.group))) {
+				// in a chat room, or PMing non-staff
+				if (user.namelocked) {
+					this.errorReply("You are namelocked and cannot talk except in battles and to global staff.");
+					return false;
+				}
+			}
 			if (room && room.modchat) {
 				let userGroup = user.group;
 				if (room.auth) {
@@ -330,8 +345,7 @@ class CommandContext {
 				return false;
 			}
 
-			if (!this.room.banwordRegex) this.updateBanwords();
-			if (this.room.banwordRegex !== true && this.room.banwordRegex.test(message) && !user.can('mute', null, this.room) && room) {
+			if (!this.checkBanwords(room, message) && !user.can('mute', null, room)) {
 				if (this.room.id === 'lobby') {
 					this.errorReply("Your message contained banned words.  You have been muted for 3 minutes as a result.");
 					this.privateModCommand("(" + user.name + " was automatically muted for saying: " + message + ")");
@@ -339,8 +353,8 @@ class CommandContext {
 					room.add(user.name + " was automatically muted by the server for 3 minutes. (Your message contained a banned word.)").update();
 				} else {
 					this.errorReply("Your message contained banned words.");
+					return false;
 				}
-				return false;
 			}
 
 			if (room && room.id === 'lobby') {

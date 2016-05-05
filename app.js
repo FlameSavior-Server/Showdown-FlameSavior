@@ -114,6 +114,8 @@ global.Ladders = require(Config.remoteladder ? './ladders-remote.js' : './ladder
 
 global.Users = require('./users.js');
 
+global.Cidr = require('./cidr.js');
+
 global.Rooms = require('./rooms.js');
 
 delete process.send; // in case we're a child process
@@ -134,8 +136,6 @@ try {
 } catch (e) {
 	global.Dnsbl = {query: () => {}, reverse: require('dns').reverse};
 }
-
-global.Cidr = require('./cidr.js');
 
 if (Config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting

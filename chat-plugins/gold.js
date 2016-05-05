@@ -105,34 +105,34 @@ exports.commands = {
 				if (!row[i]) continue;
 				var rank = row[i].split(',')[1].replace("\r", '');
 				var person = row[i].split(',')[0];
-				function nameColor (name) {
+				function formatName (name) {
 					if (Users.getExact(name) && Users(name).connected) {
-						return '<b><i><font color="' + Gold.hashColor(name) + '">' + Tools.escapeHTML(Users.getExact(name).name) + '</font></i></b>';
+						return '<i>' + Gold.nameColor(Users.getExact(name).name, true) + '</i>';
 					} else {
-						return '<font color="' + Gold.hashColor(name) + '">' + Tools.escapeHTML(name) + '</font>';
+						return Gold.nameColor(name, false);
 					}
 				}
 				var personId = toId(person);
 				switch (rank) {
 					case '~':
 						if (~ignoreUsers.indexOf(personId)) break;
-						staff['admins'].push(nameColor(person));
+						staff['admins'].push(formatName(person));
 						break;
 					case '&':
 						if (~ignoreUsers.indexOf(personId)) break;
-						staff['leaders'].push(nameColor(person));
+						staff['leaders'].push(formatName(person));
 						break;
 					case '@':
 						if (~ignoreUsers.indexOf(personId)) break;
-						staff['mods'].push(nameColor(person));
+						staff['mods'].push(formatName(person));
 						break;
 					case '%':
 						if (~ignoreUsers.indexOf(personId)) break;
-						staff['drivers'].push(nameColor(person));
+						staff['drivers'].push(formatName(person));
 						break;
 					case '+':
 						if (~ignoreUsers.indexOf(personId)) break;
-						staff['voices'].push(nameColor(person));
+						staff['voices'].push(formatName(person));
 						break;
 					default:
 						continue;
@@ -1348,4 +1348,7 @@ Gold.pluralFormat = function(length, ending) {
 	if (!ending) ending = 's';
 	if (isNaN(Number(length))) return false;
 	return (length == 1 ? '' : ending);
+}
+Gold.nameColor = function(name, bold) {
+	return (bold ? "<b>" : "") + "<font color=" + Gold.hashColor(name) + ">" + Tools.escapeHTML(name) + "</font>" + (bold ? "</b>" : "");
 }

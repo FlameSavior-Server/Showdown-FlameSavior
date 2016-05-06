@@ -138,6 +138,7 @@ function hashColor(name) {
 	colorCache[name] = "#" + rgbToHex(rgb.r, rgb.g, rgb.b);
 	return colorCache[name];
 }
+exports.hashColor = hashColor;
 Gold.hashColor = hashColor;
 
 

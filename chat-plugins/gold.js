@@ -344,7 +344,7 @@ exports.commands = {
 		var message = target.slice(commaIndex + 1).trim();
 		if (!targetUser || !message) return this.errorReply("Needs a target.");
 		if (!Users.get(targetUser).name) return false;
-		room.addRaw('<b><font color=' + Gold.hashColor(targetUser) + '>' + Users.get(targetUser).name + '</font></b>\'s link: <b>"' + message + '"</b>');
+		room.addRaw(Gold.nameColor(Users.get(targetUser).name, true) + '\'s link: <b>"' + message + '"</b>');
 	},
 	roomlist: function (target, room, user) {
 		if(!this.can('pban')) return;
@@ -497,7 +497,7 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		if (!this.canTalk()) return;
 		if (!target) target = toId(user.name);
-		return this.sendReplyBox('<b><font color="' + Gold.hashColor(target) + '">' + target + '</font></b>.  The hexcode for this name color is: ' + Gold.hashColor(target) + '.');
+		return this.sendReplyBox(Gold.nameColor(target, true) + '.  The hexcode for this name color is: ' + Gold.hashColor(target) + '.');
 	},
 	rsi: 'roomshowimage',
 	roomshowimage: function(target, room, user) {
@@ -635,28 +635,21 @@ exports.commands = {
 	},
 	credit: 'credits',
 	credits: function (target, room, user) {
-		function name (name, bold) {
-			if (bold) {
-				return "<b><font color=" + Gold.hashColor(name) + ">" + Tools.escapeHTML(name) + "</font></b>";
-			} else {
-				return "<font color=" + Gold.hashColor(name) + ">" + Tools.escapeHTML(name) + "</font>";
-			}
-		}
 		var popup = "|html|" + "<font size=5>Gold Server Credits</font><br />" +
 					"<u>Owners:</u><br />" +
-					"- " + name('panpawn', true) + " (Founder, Sysadmin, Development, Lead Policy)<br />" +
+					"- " + Gold.nameColor('panpawn', true) + " (Founder, Sysadmin, Development, Lead Policy)<br />" +
 					"<br />" +
 					"<u>Development:</u><br />" +
-					"- " + name('panpawn', true) + " (Owner of GitHub repository)<br />" +
-					"- " + name('Silveee', true) + " (Contributor)<br />" +
-					"- " + name('jd', true) + " (Collaborator)<br />" +
+					"- " + Gold.nameColor('panpawn', true) + " (Owner of GitHub repository)<br />" +
+					"- " + Gold.nameColor('Silveee', true) + " (Contributor)<br />" +
+					"- " + Gold.nameColor('jd', true) + " (Collaborator)<br />" +
 					"<br />" +
 					"<u>Special Thanks:</u><br />" +
 					"- Current staff team<br />" +
 					"- Our regular users<br />" +
-					"- " + name('snow', true) + " (Policy administrator)<br />" +
-					"- " + name('pitcher', true) + " (Former co-owner)<br />" +
-					"- " + name('PixelatedPaw', true) + " (One of the original administrators)";
+					"- " + Gold.nameColor('snow', true) + " (Policy administrator)<br />" +
+					"- " + Gold.nameColor('pitcher', true) + " (Former co-owner)<br />" +
+					"- " + Gold.nameColor('PixelatedPaw', true) + " (One of the original administrators)";
 		user.popup(popup);
 	},
 	regdate: function(target, room, user, connection) {
@@ -665,7 +658,7 @@ exports.commands = {
 		if (targetid.length < 1 || targetid.length > 19) return this.sendReply("Usernames may not be less than one character or longer than 19");
 		if (!this.runBroadcast()) return;
 		Gold.regdate(target, (date) => {
-				this.sendReplyBox("<font color=\"" + Gold.hashColor(targetid) + "\">" + Tools.escapeHTML(target) + "</font>" +
+				this.sendReplyBox(Gold.nameColor(target, false) +
 				(date ? " was registered on " + moment(date).format("dddd, MMMM DD, YYYY HH:mmA ZZ") : " is not registered."));
 			room.update();
 		});

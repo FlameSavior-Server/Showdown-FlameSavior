@@ -1,6 +1,7 @@
 var fs = require('fs');
 var request = require('request');
 var moment = require('moment');
+var http = require('http');
 var regdateCache = {};
 if (typeof Gold === 'undefined') global.Gold = {};
 if (typeof Gold.tells === 'undefined') global.Gold.tells = {};
@@ -663,33 +664,11 @@ exports.commands = {
 		var self = this;
 		if (targetid.length < 1 || targetid.length > 19) return this.sendReply("Usernames may not be less than one character or longer than 19");
 		if (!this.runBroadcast()) return;
-		if (regdateCache[targetid]) {
-			reply(regdateCache[targetid]);
-		} else {
-			request('http://pokemonshowdown.com/users/' + targetid + '.json', function (error, response, body) {
-				var data = JSON.parse(body);
-				var date = data['registertime'];
-				if (date !== 0 && date.toString().length < 13) {
-					while (date.toString().length < 13) {
-						date = Number(date.toString() + '0');
-					}
-				}
-				reply(date);
-				if (date !== 0) {
-					regdateCache[targetid] = date;
-					saveRegdateCache();
-				}
-			});
-		}
-
-		function reply(date) {
-			if (date === 0) {
-				self.sendReplyBox("<font color=\"" + Gold.hashColor(targetid) + "\">" + Tools.escapeHTML(target) + "</font> is not registered.");
-			} else {
-				self.sendReplyBox("<font color=\"" + Gold.hashColor(targetid) + "\">" + Tools.escapeHTML(target) + "</font> was registered on " + moment(date).format("dddd, MMMM DD, YYYY HH:mmA ZZ"));
-			}
+		Gold.regdate(target, (date) => {
+				this.sendReplyBox("<font color=\"" + Gold.hashColor(targetid) + "\">" + Tools.escapeHTML(target) + "</font>" +
+				(date ? " was registered on " + moment(date).format("dddd, MMMM DD, YYYY HH:mmA ZZ") : " is not registered."));
 			room.update();
-		}
+		});
 	},
 	removebadge: function(target, room, user) {
 		if (!this.can('pban')) return false;
@@ -1352,3 +1331,36 @@ Gold.pluralFormat = function(length, ending) {
 Gold.nameColor = function(name, bold) {
 	return (bold ? "<b>" : "") + "<font color=" + Gold.hashColor(name) + ">" + Tools.escapeHTML(name) + "</font>" + (bold ? "</b>" : "");
 }
+
+Gold.regdate = function(target, callback) {
+  target = toId(target);
+  if (regdateCache[target]) return callback(regdateCache[target]);
+
+  var options = {
+    host: 'pokemonshowdown.com',
+    port: 80,
+    path: '/users/' + target + '.json',
+    method: 'GET'
+  };
+
+  var req = http.get(options, function(res) {
+    var data = '';
+
+    res.on('data', function(chunk) {
+      data += chunk;
+    }).on('end', function() {
+      data = JSON.parse(data);
+      var date = data['registertime'];
+      if (date !== 0 && date.toString().length < 13) {
+        while (date.toString().length < 13) {
+          date = Number(date.toString() + '0');
+        }
+      }
+      if (date !== 0) {
+        regdateCache[target] = date;
+        saveRegdateCache();
+      }
+      callback((date === 0 ? false : date));
+    });
+  });
+};

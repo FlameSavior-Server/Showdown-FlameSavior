@@ -45,37 +45,15 @@ exports.commands = {
 				return Economy.readMoneySync(user);
 			}
 		};
-		var options = {
-			host: "pokemonshowdown.com",
-			port: 80,
-			path: "/users/" + userid
-		};
+		var regdate = "(Unregistered)";
 
-		var content = "";
-		var req = http.request(options, function(res) {
-
-			res.setEncoding("utf8");
-			res.on("data", function (chunk) {
-				content += chunk;
-			});
-			res.on("end", function () {
-				content = content.split("<em");
-				if (content[1]) {
-					content = content[1].split("</p>");
-					if (content[0]) {
-						content = content[0].split("</em>");
-						if (content[1]) {
-							regdate = content[1].trim();
-							showProfile();
-						}
-					}
-				} else {
-					regdate = '(Unregistered)';
-					showProfile();
-				}
-			});
+		Gold.regdate(userid, function (date) {
+			if (date) {
+				regdate = moment(date).format("dddd, MMMM DD, YYYY HH:mmA ZZ");
+			}
+			showProfile();
 		});
-		req.end();
+
 		function getFlag (flagee) {
 			if (!Users(flagee)) return false;
 			if (Users(flagee)) {

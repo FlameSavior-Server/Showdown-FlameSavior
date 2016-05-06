@@ -1121,6 +1121,13 @@ class User {
 		oldUser.markInactive();
 	}
 	mergeConnection(connection) {
+		if (this.lastPoof && (Date.now() - this.lastPoof < 1000 * 60 * 5) && !this.can('hotpatch')) {
+			connection.popup("You /poof'd less than 5 minutes ago. Don't poof if you're going to come back this soon" +
+				'\n\n"' + this.lastPoofMessage + '" was your poof message, if that\'s what you came back for');
+			connection.destroy();
+			return;
+		}
+
 		// the connection has changed name to this user's username, and so is
 		// being merged into this account
 		this.connected = true;

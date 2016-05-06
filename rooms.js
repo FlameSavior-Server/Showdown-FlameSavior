@@ -1678,4 +1678,3 @@ Rooms.aliases = aliases;
 
 Rooms.RoomGame = require('./room-game.js').RoomGame;
 Rooms.RoomGamePlayer = require('./room-game.js').RoomGamePlayer;
-

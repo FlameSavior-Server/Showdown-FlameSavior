@@ -3,18 +3,16 @@
  */
 'use strict';
 
-var fs = require('fs');
+const fs = require('fs');
 
 exports.commands = {
-	viewlogs: function(target, room, user) {
+	viewlogs: function (target, room, user) {
 		if (!target) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] - Provides you with a temporary link to view the target rooms chat logs.");
 		let targetSplit = target.split(',');
 		if (!targetSplit[1]) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] -Provides you with a temporary link to view the target rooms chat logs.");
-		for (var u in targetSplit) targetSplit[u] = targetSplit[u].trim();
+		for (let u in targetSplit) targetSplit[u] = targetSplit[u].trim();
 		let targetRoom = targetSplit[0];
-		if (!user.can('lock') && !user.can('warn', null, Rooms(targetRoom))) {
-			if (room.bannedUsers && room.bannedUsers[user.userid]) return this.errorReply("/viewlogs - Access denied.");
-		}
+		if (!user.can('lock') && !user.can('warn', null, Rooms(targetRoom))) return this.errorReply("/viewlogs - Access denied.");
 		if (toId(targetRoom) === 'staff' && !user.can('warn')) return this.errorReply("/viewlogs - Access denied.");
 		if (toId(targetRoom) === 'administrators' && !user.can('hotpatch')) return this.errorReply("/viewlogs - Access denied.");
 		if (toId(targetRoom) === 'upperstaff' && !user.can('pban')) return this.errorReply("/viewlogs - Access denied.");
@@ -37,7 +35,7 @@ exports.commands = {
 
 			if (!user.can('warn', null, Rooms(targetRoom))) {
 				let lines = data.split('\n');
-				for (var line in lines) {
+				for (let line in lines) {
 					if (lines[line].substr(9).trim().charAt(0) === '(') lines.slice(line, 1);
 				}
 				data = lines.join('\n');
@@ -45,16 +43,16 @@ exports.commands = {
 
 			data = targetRoom + "|" + date + "|" + fs.readFileSync('config/customcolors.json', 'utf8') + "\n" + data;
 
-			fs.writeFile('static/logs/' + filename, data, (err) => {
+			fs.writeFile('static/logs/' + filename, data, err => {
 				if (err) return this.errorReply("/viewlogs - " + err);
 				this.sendReply(
 					"|raw|You can view the logs at <a href=\"http://goldservers.info:" + Config.port +
 					"/logs/logviewer.html?file=" + filename + "\">http://goldservers.info:" + Config.port +
 					"/logs/logviewer?file=" + filename + "</a>"
 				);
-				let deleteFile = setTimeout(function() {
+				setTimeout(function () {
 					fs.unlink('static/logs/' + filename);
-				}, 1*1000*60);
+				}, 1 * 1000 * 60);
 			});
 		});
 	},

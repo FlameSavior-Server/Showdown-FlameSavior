@@ -529,12 +529,12 @@ global.Economy = {
 				let result = data.replace(re, toId(user) + ',' + userMoney);
 				fs.writeFile('config/money.csv', result, 'utf8', function (err) {
 					if (err) return false;
-					if (callback) callback(true);
+					if (callback) return callback(true);
 					return;
 				});
 			} else {
 				fs.appendFile('config/money.csv', '\n' + toId(user) + ',' + userMoney);
-				if (callback) callback(true);
+				if (callback) return callback(true);
 				return;
 			}
 		});

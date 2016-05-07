@@ -3,58 +3,77 @@
 * By: jd                              *
 **************************************/
 
-var fs = require('fs');
-var request = require('request');
-var anagramWords = ['pokemon'];
-try {
-	anagramWords = fs.readFileSync('config/wordlist.txt','utf8').split('\n');
-} catch (e) {
-	request('http://pastebin.com/raw.php?i=5yQ8MLG2', function callback(error, response, body) {
-	    if (!error && response.statusCode === 200) {
-	    	fs.writeFileSync('config/wordlist.txt', body, 'utf8');
-	    }
+'use strict';
+
+const fs = require('fs');
+const http = require('http');
+
+let anagramWords = ['pokemon'];
+
+fs.readFile('config/wordlist.txt', 'utf8', function (err, data) {
+	if (!err) {
+		anagramWords = data.split('\n');
+		return;
+	}
+
+	let options = {
+		host: 'pastebin.com',
+		port: 80,
+		path: '/raw/5yQ8MLG2',
+		method: 'GET',
+	};
+
+	http.get(options, function (res) {
+		let data = '';
+
+		res.on('data', function (chunk) {
+			data += chunk;
+		}).on('end', function () {
+			if (data.length < 1) return console.log("Error downloading wordlist.txt.");
+			fs.writeFile('config/wordlist.txt', data);
+			anagramWords = data.split('\n');
+		});
 	});
-}
+});
 
 exports.commands = {
-	anagram: function(target, room, user) {
-		if (!user.can('broadcast', null, room) || !this.canTalk()) return this.sendReply('/anagram - Access denied.');
+	anagram: function (target, room, user) {
+		if (!user.can('broadcast', null, room) || !this.canTalk()) return this.errorReply('/anagram - Access denied.');
 		if (!target && !room.anagram) return this.sendReply("Usage: /anagram [normal/pokemon]");
 		if (!this.runBroadcast()) return;
 		if (room.anagram) return this.sendReplyBox("Word: " + room.anagram.scrambledWord);
 		if (!room.anagram) room.anagram = {};
 
 		target = toId(target);
-		var theme = '';
+		let theme = '';
 
 		switch (target) {
-
-			case 'pokemon':
-				theme = 'Pokemon';
-				var pokemon = Tools.dataSearch(Object.keys(Tools.data.Pokedex).sample().trim())[0];
+		case 'pokemon':
+			theme = 'Pokemon';
+			let pokemon = Tools.getTemplate(Object.keys(Tools.data.Pokedex).sample().trim());
+			room.anagram.word = pokemon.name;
+			while (toId(pokemon.name).indexOf('mega') > -1 || pokemon.tier === 'CAP') {
+				pokemon = Tools.getTemplate(Object.keys(Tools.data.Pokedex).sample().trim());
 				room.anagram.word = pokemon.name;
-				while (pokemon.id.indexOf('mega') > -1 || pokemon.tier === 'CAP') {
-					pokemon = Tools.dataSearch(Object.keys(Tools.data.Pokedex).sample().trim())[0];
-					room.anagram.word = pokemon.name;
-				}
-				break;
+			}
+			break;
 
-			case 'info':
-			case 'credits':
-				this.sendReplyBox("Anagram plugin by <a href=\"https://gist.github.com/jd4564/194c045bec24e137de92\">jd</a>");
-				delete room.anagram;
-				break;
+		case 'info':
+		case 'credits':
+			this.sendReplyBox("Anagram plugin by <a href=\"https://gist.github.com/jd4564/194c045bec24e137de92\">jd</a>");
+			delete room.anagram;
+			break;
 
-			default:
-			case 'normal':
-				theme = 'Normal';
-				room.anagram.word = anagramWords.sample().trim();
-				while (room.anagram.word.length < 4 || room.anagram.word.length > 8) room.anagram.word = anagramWords.sample().trim();
-				break;
+		default:
+		case 'normal':
+			theme = 'Normal';
+			room.anagram.word = anagramWords.sample().trim();
+			while (room.anagram.word.length < 4 || room.anagram.word.length > 8) room.anagram.word = anagramWords.sample().trim();
+			break;
 		}
 
-		room.anagram.scrambledWord = toId(room.anagram.word.split('').sort(function(){return 0.5-Math.random();}).join(''));
-		while (room.anagram.scrambledWord === toId(room.anagram.word)) room.anagram.scrambledWord = toId(room.anagram.word.split('').sort(function(){return 0.5-Math.random();}).join(''));
+		room.anagram.scrambledWord = toId(room.anagram.word.split('').sort(function () {return 0.5 - Math.random();}).join(''));
+		while (room.anagram.scrambledWord === toId(room.anagram.word)) room.anagram.scrambledWord = toId(room.anagram.word.split('').sort(function () {return 0.5 - Math.random();}).join(''));
 
 		room.chat = function (user, message, connection) {
 			message = CommandParser.parse(message, this, user, connection);
@@ -66,12 +85,12 @@ exports.commands = {
 					delete room.chat;
 				}
 			}
-		this.update();
+			this.update();
 		};
 		return this.add('|raw|<div class="infobox">' + Tools.escapeHTML(user.name) + ' has started an anagram. Letters: <b>' + room.anagram.scrambledWord + '</b> Theme: <b>' + theme + '</b></div>');
 	},
 
-	endanagram: function(target, room, user) {
+	endanagram: function (target, room, user) {
 		if (!user.can('broadcast', null, room)) return this.sendReply('/endanagram - Access denied.');
 		if (!room.anagram) return this.sendReply('There is no anagram running in here.');
 		delete room.anagram;

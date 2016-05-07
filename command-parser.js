@@ -650,7 +650,7 @@ let parse = exports.parse = function (message, room, user, connection, levelsDee
 	if (!message) return false;
 
 	if (user.registered && global.Gold.tells) {
-		var alts = user.getAlts();
+		let alts = user.getAlts();
 		alts.push(user.name);
 		alts.map(toId).forEach(function (user) {
 			if (Gold.tells[user]) {

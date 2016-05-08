@@ -797,10 +797,10 @@ class Tournament {
 		}));
 		this.isEnded = true;
 
-		var data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
+		let data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
 		data = data['results'].toString();
 
-		var winner = '';
+		let winner = '';
 
 		if (data.indexOf(',') >= 0) {
 			data = data.split(',');
@@ -810,9 +810,9 @@ class Tournament {
 			winner = data;
 		}
 
-		var tourSize = this.generator.users.size;
+		let tourSize = this.generator.users.size;
 		if (this.room.isOfficial && tourSize >= 3) {
-			var money = (tourSize < 50 ? tourSize : 50);
+			let money = (tourSize < 50 ? tourSize : 50);
 
 			try {
 				this.room.add('|raw|<b><font color=' + Gold.hashColor(toId(winner)) + '>' + Tools.escapeHTML(winner) + '</font> has won <font color=#24678d>' + money + '</font> bucks for winning the tournament!</b>');

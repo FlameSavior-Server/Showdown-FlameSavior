@@ -31,17 +31,13 @@ function get (url, callback) {
 }
 
 function toggleTheme () {
-	console.log('toggle theme');
 	var status = localStorage.getItem('theme') || 'light';
-	console.log('status: ' + status);
 	if (status === 'dark') {
-		console.log('toggle true');
 		$('html').toggleClass('dark', false);
 		localStorage.setItem('theme', 'light');
 		return;
 	}
 	if (status === 'light'){
-		console.log('toggle false');
 		$('html').toggleClass('dark', true);
 		localStorage.setItem('theme', 'dark');
 	}
@@ -56,7 +52,6 @@ function onLoad () {
 	((localStorage.getItem('theme') && localStorage.getItem('theme') !== 'light') ? 'Light mode' : 'Dark mode') + '</button>';
 
 	get('/logs/' + parts['file'], function (res, status) {
-		console.log("res: '" + res + "'");
 		if (status !== 200) return document.getElementById('room').innerHTML = "Logs expired";
 		var lines = res.split('\n');
 		// room|date|customcolors

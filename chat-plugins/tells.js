@@ -47,13 +47,12 @@ exports.commands = {
         if (commaIndex < 0) return this.errorReply("You forgot the comma.");
         var targetUser = toId(target.slice(0, commaIndex)), origUser = target.slice(0, commaIndex);
         var message = target.slice(commaIndex + 1).trim();
-        if (Users(targetUser) && Users(targetUser).connected && targetUser !== user.userid && !user.can('hotpatch')) return this.parse("/msg " + targetUser + ", " + message);
         if (message.length > 500) return this.errorReply("This tell is too large, try making it shorter.");
         if (targetUser.length < 1 || targetUser.length > 18) return this.errorReply("Usernames cannot be this length.  Check spelling?");
         if (!message || message.length < 1) return this.errorReply("Tell messages must be at least one character.");
         if (tells[targetUser] && tells[targetUser].length >= maxTells) return this.errorReply("This user has too many tells queued, try again later.");
         createTell(user.name, targetUser, message); // function saves when tell is created automatically
-        return this.sendReply("|raw|Your tell to " + Gold.nameColor(origUser, true) + " has been added to their offline messaging queue.");
+        return this.sendReply("|raw|Your tell to " + Gold.nameColor(origUser, true) + " has been added to their offline messaging queue." (Users(targetUser) && Users(targetUser).connected && targetUser !== user.userid ? "<br /><b>However, this user is currently online if you would like to message them.</b>" : ""));
     },
     tellhelp: ["/tell [user], [message] - sends a user an offline message to be recieved when they next log on."],
 };

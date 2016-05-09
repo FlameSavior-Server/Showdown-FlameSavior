@@ -53,7 +53,7 @@ exports.commands = {
 		if (message.length > MAX_TELL_LENGTH && !user.can('hotpatch')) return this.errorReply("This tell is too large, it cannot exceed " + MAX_TELL_LENGTH + " characters.");
 		if (targetUser.length < 1 || targetUser.length > 18) return this.errorReply("Usernames cannot be this length.  Check spelling?");
 		if (!message || message.length < 1) return this.errorReply("Tell messages must be at least one character.");
-		if (tells[targetUser] && tells[targetUser].length >= MAX_TELLS_IN_QUEUE) return this.errorReply("This user has too many tells queued, try again later.");
+		if (tells[targetUser] && tells[targetUser].length >= MAX_TELLS_IN_QUEUE && !user.can('hotpatch')) return this.errorReply("This user has too many tells queued, try again later.");
 		createTell(user.name, targetUser, message); // function saves when tell is created automatically
 		return this.sendReply("|raw|Your tell to " + Gold.nameColor(origUser, true) + " has been added to their offline messaging queue." + (Users(targetUser) && Users(targetUser).connected && user.userid !== targetUser ? "<br /><b>However, this user is currently online if you would like to private message them.</b>" : ""));
 	},

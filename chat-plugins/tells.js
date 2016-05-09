@@ -50,6 +50,7 @@ exports.commands = {
 		if (commaIndex < 0) return this.errorReply("You forgot the comma.");
 		let targetUser = toId(target.slice(0, commaIndex)), origUser = target.slice(0, commaIndex);
 		let message = target.slice(commaIndex + 1).trim();
+		if (Users(targetUser) && Users(targetUser).ignorePMs && !user.can('hotpatch')) return this.errorReply("Because this user is currently blocking PMs, this tell has failed to be added to their offline messaging queue.");
 		if (message.length > MAX_TELL_LENGTH && !user.can('hotpatch')) return this.errorReply("This tell is too large, it cannot exceed " + MAX_TELL_LENGTH + " characters.");
 		if (targetUser.length < 1 || targetUser.length > 18) return this.errorReply("Usernames cannot be this length.  Check spelling?");
 		if (!message || message.length < 1) return this.errorReply("Tell messages must be at least one character.");

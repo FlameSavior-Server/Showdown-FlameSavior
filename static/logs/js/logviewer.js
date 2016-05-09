@@ -84,7 +84,7 @@ function onLoad () {
 				break;
 				case 'raw':
 				case 'html':
-				lines[line] = '<div class="notice">' + sanitizeHTML(lineSplit.slice(2).join('|').trim());
+				lines[line] = '<div class="notice">' + sanitizeHTML(lineSplit.slice(2).join('|').trim()) + '</div>';
 				break;
 				case '':
 				lines[line] = '<div class="notice">' + escapeHTML(lineSplit.slice(1).join('|')) + '</div>';
@@ -96,6 +96,7 @@ function onLoad () {
 				case 'unlink':
 				case 'userstats':
 				case 'tournament':
+				case 'uhtmlchange':
 				lines[line] = "";
 				break;
 				default:
@@ -266,11 +267,6 @@ function MD5 (f){function i(b,c){var d,e,f,g,h;f=b&2147483648;g=c&2147483648;d=b
 
 			for (var i = 0; i < attribs.length - 1; i += 2) {
 				switch (attribs[i]) {
-					case 'href':
-					if (!Tools.interstice.isWhitelisted(attribs[i + 1])) {
-						attribs[i + 1] = Tools.interstice.getURI(attribs[i + 1]);
-					}
-					break;
 					case 'target':
 					targetIdx = i + 1;
 					break;

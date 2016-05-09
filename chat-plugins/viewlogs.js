@@ -48,7 +48,7 @@ exports.commands = {
 				this.sendReply(
 					"|raw|You can view the logs at <a href=\"http://goldservers.info:" + Config.port +
 					"/logs/logviewer.html?file=" + filename + "\">http://goldservers.info:" + Config.port +
-					"/logs/logviewer?file=" + filename + "</a>"
+					"/logs/logviewer.html?file=" + filename + "</a>"
 				);
 				setTimeout(function () {
 					fs.unlink('static/logs/' + filename);

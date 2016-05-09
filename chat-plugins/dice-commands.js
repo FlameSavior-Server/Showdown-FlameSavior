@@ -2,7 +2,7 @@
 
 'use strict';
 
-const INACTIVE_END_TIME = 60 * 1000; //1 minute
+const INACTIVE_END_TIME = 1 * 60 * 1000; // 1 minute
 const TAX = 0.10; // 10%
 
 function diceImg(num) {
@@ -34,11 +34,11 @@ class Dice {
 		}, INACTIVE_END_TIME);
 
 		let buck = (this.bet === 1 ? 'buck' : 'bucks');
-		this.startMessage = '<div class = "infobox"><b style = "font-size: 14pt; color: #24678d"><center><span style = "color: ' + Gold.hashColor(starter) + '">' + Tools.escapeHTML(starter) + '</span> has started a game of dice for <span style = "color: green">' + amount + '</span> ' + buck + '!</center></b><br>' +
-			'<center><img style = "margin-right: 30px;" src = "http://i.imgur.com/eywnpqX.png" width = "80" height = "80">' +
-			'<img style = "transform:rotateY(180deg); margin-left: 30px;" src = "http://i.imgur.com/eywnpqX.png" width = "80" height = "80"><br>' +
-			'<button name = "send" value = "/joindice">Click to join!</button></center>';
-		this.room.add('|uhtml|' + (++this.room.diceCount) + '|' + this.startMessage + '</div>');
+		this.startMessage = '<div class="infobox"><b style="font-size: 14pt; color: #24678d"><center><span style="color: ' + Gold.hashColor(starter) + '">' + Tools.escapeHTML(starter) + '</span> has started a game of dice for <span style = "color: green">' + amount + '</span> ' + buck + '!</center></b><br>' +
+			'<center><img style="margin-right: 30px;" src = "http://i.imgur.com/eywnpqX.png" width="80" height="80">' +
+			'<img style="transform:rotateY(180deg); margin-left: 30px;" src="http://i.imgur.com/eywnpqX.png" width="80" height="80"><br>' +
+			'<button name="send" value="/joindice">Click to join!</button></center>';
+		this.room.add('|uhtml|' + (++this.room.diceCount) + '|' + this.startMessage + '</div>').update();
 	}
 
 	join(user, self) {
@@ -53,7 +53,7 @@ class Dice {
 				if (p1.getAlts(true).map(toId).includes(user.userid)) return self.errorReply("Your alt '" + p1.name + "' has already joined this game of dice.");
 			}
 			this.players.push(user);
-			this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + Tools.escapeHTML(user.name) + ' has joined the game!</center></div>').update();
+			this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + Gold.nameColor(user.name, false) + ' has joined the game!</center></div>').update();
 			if (this.players.length === 2) this.play();
 		});
 	}
@@ -74,10 +74,10 @@ class Dice {
 					user.sendTo(this.room, 'You have been removed from this game of dice, as you do not have enough money.');
 					other.sendTo(this.room, user.name + ' has been removed from this game of dice, as they do not have enough money. Wait for another user to join.');
 					this.players.remove(user);
-					this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + this.players.map(user => Tools.escapeHTML(user.name)) + ' has joined the game!</center>').update();
+					this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + this.players.map(user => Gold.nameColor(user.name, false)) + ' has joined the game!</center>').update();
 					return;
 				}
-				let players = this.players.map(user => Tools.escapeHTML(user.name)).join(' and ');
+				let players = this.players.map(user => Gold.nameColor(user.name)).join(' and ');
 				this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + players + ' have joined the game!</center></div>').update();
 				let roll1, roll2;
 				do {
@@ -90,12 +90,12 @@ class Dice {
 				let taxedAmt = Math.round(this.bet * TAX);
 				setTimeout(() => {
 					let buck = (this.bet === 1 ? 'buck' : 'bucks');
-					this.room.add('|uhtmlchange|' + this.room.diceCount + '|<div class="infobox"><center>' + players + ' have joined the game!<br><br>' +
+					this.room.add('|uhtmlchange|' + this.room.diceCount + '|<div class="infobox"><center>' + players + ' have joined the game!<br /><br />' +
 						'The game has been started! Rolling the dice...<br />' +
-						'<img src = "' + diceImg(roll1) + '" align = "left" title = "' + Tools.escapeHTML(p1.name) + '\'s roll"><img src = "' + diceImg(roll2) + '" align = "right" title = "' + p2.name + '\'s roll"><br/>' +
-						'<b style = "color:' + Gold.hashColor(p1.userid) + '">' + Tools.escapeHTML(p1.name) + '</b> rolled ' + (roll1 + 1) + '!<br />' +
-						'<b style = "color:' + Gold.hashColor(p2.userid) + '">' + Tools.escapeHTML(p2.name) + '</b> rolled ' + (roll2 + 1) + '!<br />' +
-						'<b style = "color:' + Gold.hashColor(winner.userid) + '">' + Tools.escapeHTML(winner.name) + '</b> has won <b style = "color:green">' + (this.bet - taxedAmt) + '</b> ' + buck + '!<br/>' +
+						'<img src = "' + diceImg(roll1) + '" align = "left" title = "' + Tools.escapeHTML(p1.name) + '\'s roll"><img src = "' + diceImg(roll2) + '" align = "right" title = "' + p2.name + '\'s roll"><br />' +
+						Gold.nameColor(p1.name, true) + ' rolled ' + (roll1 + 1) + '!<br />' +
+						Gold.nameColor(p2.name, true) + ' rolled ' + (roll2 + 1) + '!<br />' +
+						Gold.nameColor(winner.name, true) + ' has won <b style="color:green">' + (this.bet - taxedAmt) + '</b> ' + buck + '!<br />' +
 						'Better luck next time, ' + Tools.escapeHTML(loser.name) + '!'
 					).update();
 					Economy.writeMoney(winner.userid, (this.bet - taxedAmt), () => {
@@ -109,7 +109,7 @@ class Dice {
 	}
 
 	end(user) {
-		if (user) this.room.add('|uhtmlchange|' + this.room.diceCount + '|<div class = "infobox">(This game of dice has been forcibly ended by ' + Tools.escapeHTML(user.name) + '.)</div>');
+		if (user) this.room.add('|uhtmlchange|' + this.room.diceCount + '|<div class = "infobox">(This game of dice has been forcibly ended by ' + Tools.escapeHTML(user.name) + '.)</div>').update();
 		clearTimeout(this.timer);
 		delete this.room.dice;
 	}

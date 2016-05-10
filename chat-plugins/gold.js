@@ -1120,14 +1120,24 @@ exports.commands = {
 	},
 	hideadmin: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
+		if (user.hidden) return this.errorReply("You are already hiding yourself on the userlist.");
 		user.hidden = true;
-		for (var u in user.roomCount) Rooms(u).add('|L|' + user.getIdentity(room.id)).update();
+		for (var u in user.roomCount) {
+			if (Rooms(u).id !== 'global') {
+				Rooms(u).add('|L|' + user.getIdentity(Rooms(u))).update();
+			}
+		}
 		return this.sendReply("You are now hiding.");
 	},
 	showadmin: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
+		if (!user.hidden) return this.errorReply("You are already showing yourself on the userlist.");
 		user.hidden = false;
-		for (var u in user.roomCount) Rooms(u).add('|J|' + user.getIdentity(room.id)).update();
+		for (var u in user.roomCount) {
+			if (Rooms(u).id !== 'global') {
+				Rooms(u).add('|J|' + user.getIdentity(Rooms(u))).update();
+			}
+		}
 		return this.sendReply("You are no longer hiding.");
 	},
 

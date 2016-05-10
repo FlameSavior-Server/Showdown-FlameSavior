@@ -6,6 +6,7 @@
 
 const fs = require('fs');
 const moment = require('moment');
+const Autolinker = require('autolinker');
 const MAX_TELLS_IN_QUEUE = 10;
 const MAX_TELL_LENGTH = 600;
 let tells = {};
@@ -24,20 +25,19 @@ function saveTells() {
 }
 Gold.saveTells = saveTells;
 
-function htmlfix(target) {
-	let fixings = ['<3', ':>', ':<'];
-	for (let u in fixings) {
-		while (target.indexOf(fixings[u]) !== -1) {
-			target = target.substring(0, target.indexOf(fixings[u])) + '< ' + target.substring(target.indexOf(fixings[u]) + 1);
-		}
-	}
-	return target;
-}
 function createTell(sender, reciever, message) {
 	reciever = toId(reciever);
+	message = Gold.emoticons.processEmoticons(Tools.escapeHTML(message)).replace(/&#x2f;/g, '/');
 	if (!tells[reciever]) tells[reciever] = [];
+
+	//  PS formatting
+	message = Autolinker.link(message, {stripPrefix: false, phone: false, twitter: false}); // hyperlinking
+	message = message.replace(/\_\_([^< ](?:[^<]*?[^< ])?)\_\_(?![^<]*?<\/a)/g, '<i>$1</i>'); // italics
+	message = message.replace(/\*\*([^< ](?:[^<]*?[^< ])?)\*\*/g, '<b>$1</b>'); // bold
+	message = message.replace(/\~\~([^< ](?:[^<]*?[^< ])?)\~\~/g, '<strike>$1</strike>'); // strikethrough
+
 	let date = moment().format('MMMM Do YYYY, h:mm A') + " EST";
-	let tell = "<u>" + date + "</u><br />" + Gold.nameColor(sender, true) + ' said: ' + Gold.emoticons.processEmoticons(Tools.escapeHTML(htmlfix(message)));
+	let tell = "<u>" + date + "</u><br />" + Gold.nameColor(sender, true) + ' said: ' + message;
 	tells[reciever].push('|raw|' + tell);
 	saveTells();
 }

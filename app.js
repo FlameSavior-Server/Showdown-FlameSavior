@@ -116,6 +116,8 @@ global.Users = require('./users.js');
 
 global.Cidr = require('./cidr.js');
 
+global.Punishments = require('./punishments.js');
+
 global.Rooms = require('./rooms.js');
 
 delete process.send; // in case we're a child process
@@ -156,8 +158,7 @@ if (Config.crashguard) {
  * Start networking processes to be connected to
  *********************************************************/
 
-// global.Sockets = require('./sockets.js');
-global.Sockets = require('./sockets-nocluster.js');
+global.Sockets = require('./sockets.js');
 
 exports.listen = function (port, bindAddress, workerCount) {
 	Sockets.listen(port, bindAddress, workerCount);

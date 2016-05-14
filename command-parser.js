@@ -347,10 +347,13 @@ class CommandContext {
 
 			if (!this.checkBanwords(room, message)) {
 				if (room.id === 'lobby' && !user.can('hotpatch')) {
-					this.errorReply("Your message contained banned words.  You have been muted for 3 minutes as a result.");
+					if (!user.banwordInfractions) user.banwordInfractions = 0;
+					user.banwordInfractions++;
+					let muteTime = (user.banwordInfractions == 1 ? 3 : 6 + (user.banwordInfractions * 2));
+					this.errorReply("Your message contained banned words.  You have been muted for " + muteTime + "  minutes as a result.");
 					this.privateModCommand("(" + user.name + " was automatically muted for saying: " + message + ")");
-					room.mute(user, 3 * 60 * 1000);
-					room.add(user.name + " was automatically muted by the server for 3 minutes. (Your message contained a banned word.)").update();
+					room.mute(user, muteTime * 60 * 1000);
+					room.add(user.name + " was automatically muted by the server for " + muteTime + " minutes. (Your message contained a banned word.)").update();
 					return false;
 				} else if (!user.can('mute', null, room)) {
 					this.errorReply("Your message contained banned words.");

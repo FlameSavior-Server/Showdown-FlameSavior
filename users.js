@@ -202,7 +202,7 @@ function lockRange(range, ip) {
 		if (ip) {
 			if (!curUser.latestIp.startsWith(ip)) return;
 		} else {
-			if (range !== Users.shortenHost(curUser.latestHost)) return;
+			if (range !== Punishments.shortenHost(curUser.latestHost)) return;
 		}
 		rangelockedUsers[range][curUser.userid] = 1;
 		curUser.locked = '#range';
@@ -1869,7 +1869,7 @@ Users.socketConnect = function (worker, workerid, socketid, ip) {
 			user.latestHost = hosts[0];
 			if (Config.hostfilter) Config.hostfilter(hosts[0], user, connection);
 			if (user.named && !user.locked && user.group === Config.groupsranking[0]) {
-				let shortHost = Users.shortenHost(hosts[0]);
+				let shortHost = Punishments.shortenHost(hosts[0]);
 				if (lockedRanges[shortHost]) {
 					user.send("|popup|You are locked because someone on your ISP has spammed, and your ISP does not give us any way to tell you apart from them.");
 					rangelockedUsers[shortHost][user.userid] = 1;

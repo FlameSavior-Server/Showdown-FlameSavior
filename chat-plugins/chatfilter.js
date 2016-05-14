@@ -21,17 +21,13 @@ Config.chatfilter = function (message, user, room, connection) {
 			' was automatically locked for trying to say "' + message + '"').update();
 			fs.appendFile('logs/modlog/modlog_staff.txt', '[' + (new Date().toJSON()) + '] (staff) ' + user.name + ' was locked from talking by the Server (' +
 			bannedMessages[x] + ') (' + connection.ip + ')\n');
-			Gold.pmUpperStaff(user.name + ' has been automatically locked for sending a message containing a banned word **Room:** ' + room.id +
-			' **Message:** ' + message, '~Server');
+			Gold.pmUpperStaff(user.name + ' has been automatically locked for sending a message containing a banned word' +
+			(room ? ". **Room:**" + room.id : " in a private message.") + ' **Message:** ' + message, '~Server');
 			return false;
 		}
 	}
 
-	let advMessage = message.replace(/^http:\/\//i, '');
-	advMessage = message.replace(/^https:\/\//i, '');
-	advMessage = message.replace(/^www./i, '');
-
-	if (!user.can('hotpatch') && (advMessage.replace(/gold/gi, '').match(adRegex) || advMessage.match(adRegex2))) {
+	if (!user.can('hotpatch') && (message.replace(/(gold|http:\/\/|https:\/\/)/gi, '').match(adRegex) || message.match(adRegex2))) {
 		if (user.locked) return false;
 		if (!user.advWarns) user.advWarns = 0;
 		user.advWarns++;
@@ -46,7 +42,7 @@ Config.chatfilter = function (message, user, room, connection) {
 		}
 
 		Gold.pmUpperStaff(user.name + " has attempted to advertise" + (room ? ". **Room:** " + room.id : " in a private message.") +
-			" **Message:** " + message);
+			" **Message:** " + message, "~Server");
 		connection.sendTo(room, '|raw|<strong class="message-throttle-notice">Advertising detected, your message has not been sent and upper staff has been notified.' +
 			'<br />Further attempts to advertise will result in being locked</strong>');
 		connection.user.popup("Advertising detected, your message has not been sent and upper staff has been notified.\n" +

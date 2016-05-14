@@ -1140,6 +1140,60 @@ exports.commands = {
 		}
 		return this.sendReply("You are no longer hiding.");
 	},
+	permalock: function (target, room, user) {
+		if (!target) return this.parse('/help permalock');
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' not found.");
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		}
+		if (!this.can('ban', targetUser)) return false;
+
+		if ((targetUser.locked || Users.checkBanned(targetUser.latestIp)) && !target) {
+			var problem = " but was already " + (targetUser.locked ? "locked" : "banned");
+			return this.privateModCommand("(" + targetUser.name + " would be locked by " + user.name + problem + ".)");
+		}
+
+		if (targetUser.confirmed) {
+			var from = targetUser.deconfirm();
+			Monitor.log("[CrisisMonitor] " + targetUser.name + " was permalocked by " + user.name + " and demoted from " + from.join(", ") + ".");
+		}
+
+		// Destroy personal rooms of the locked user.
+		for (var i in targetUser.roomCount) {
+			if (i === 'global') continue;
+			var targetRoom = Rooms.get(i);
+			if (targetRoom.isPersonal && targetRoom.auth[targetUser.userid] && targetRoom.auth[targetUser.userid] === '#') {
+				targetRoom.destroy();
+			}
+		}
+
+		targetUser.popup("|modal|" + user.name + " has permalocked you from talking in chats, battles, and PMing regular users." + (target ? "\n\nReason: " + target : "") + "\n\nIf you feel that your lock was unjustified, you can still PM staff members (%, @, &, and ~) to discuss it" + (Config.appealurl ? " or you can appeal:\n" + Config.appealurl : ".") + "\n\nYour lock will expire in six months.");
+
+		this.addModCommand("" + targetUser.name + " was permalocked from talking by " + user.name + "." + (target ? " (" + target + ")" : ""), " (" + targetUser.latestIp + ")");
+
+		var alts = targetUser.getAlts();
+		var acAccount = (targetUser.autoconfirmed !== targetUser.userid && targetUser.autoconfirmed);
+		if (alts.length) {
+			this.privateModCommand("(" + targetUser.name + "'s " + (acAccount ? " ac account: " + acAccount + ", " : "") + "locked alts: " + alts.join(", ") + ")");
+		} else if (acAccount) {
+			this.privateModCommand("(" + targetUser.name + "'s ac account: " + acAccount + ")");
+		}
+		var userid = targetUser.getLastId();
+		this.add('|unlink|hide|' + userid);
+		this.add('|uhtmlchange|' + userid + '|');
+		if (userid !== toId(this.inputUsername)) {
+			this.add('|unlink|hide|' + toId(this.inputUsername));
+			this.add('|uhtmlchange|' + toId(this.inputUsername) + '|');
+		}
+
+		this.globalModlog("LOCK", targetUser, " by " + user.name + (target ? ": " + target : ""));
+		Punishments.lock(targetUser, Date.now() + 6 * 4 * 7 * 24 * 60 * 60 * 1000);
+		return true;
+	},
+	permalockhelp: ["/permalock [username], [reason] - Locks the user from talking in all chats for six months. Requires: @ & ~"],
 
 	/*
 	pr: 'pollremind',

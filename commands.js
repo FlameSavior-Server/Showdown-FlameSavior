@@ -2294,12 +2294,12 @@ exports.commands = {
 	hotpatch: function (target, room, user) {
 		if (!target) return this.parse('/help hotpatch');
 		if (!this.can('hotpatch')) return false;
+		if (Monitor.hotpatchLock) return this.errorReply("Hotpatch is currently been disabled. (" + Monitor.hotpatchLock + ")");
 
 		let staff = Rooms('staff');
 		if (staff) staff.add("(" + user.name + " used /hotpatch " + target + ")").update();
 
 		if (target === 'chat' || target === 'commands') {
-			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			try {
 				const ProcessManagers = require('./process-manager').cache;
 				for (let PM of ProcessManagers.keys()) {
@@ -2324,7 +2324,6 @@ exports.commands = {
 				return this.errorReply("Something failed while trying to hotpatch chat: \n" + e.stack);
 			}
 		} else if (target === 'tournaments') {
-			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			try {
 				let runningTournaments = Tournaments.tournaments;
 				CommandParser.uncacheTree('./tournaments');
@@ -2335,11 +2334,9 @@ exports.commands = {
 				return this.errorReply("Something failed while trying to hotpatch tournaments: \n" + e.stack);
 			}
 		} else if (target === 'battles') {
-			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			Simulator.SimulatorProcess.respawn();
 			return this.sendReply("Battles have been hotpatched. Any battles started after now will use the new code; however, in-progress battles will continue to use the old code.");
 		} else if (target === 'formats') {
-			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch has been disabled. (" + Monitor.hotpatchLock + ")");
 			try {
 				let toolsLoaded = !!Tools.isLoaded;
 				// uncache the tools.js dependency tree
@@ -2372,7 +2369,6 @@ exports.commands = {
 			global.Punishments = require('./punishments.js');
 			return this.sendReply("Punishments have been hotpatched.");
 		} else if (target.startsWith('disable')) {
-			if (Monitor.hotpatchLock) return this.errorReply("Hotpatch is already disabled.");
 			let reason = target.split(', ')[1];
 			if (!reason) return this.errorReply("Usage: /hotpatch disable, [reason]");
 			Monitor.hotpatchLock = reason;

@@ -1303,11 +1303,11 @@ exports.commands = {
 		}
 
 		this.globalModlog("LOCK", targetUser, " by " + user.name + (target ? ": " + target : ""));
-		Punishments.lock(targetUser);
+		Punishments.lock(targetUser, Date.now() + 7 * 24 * 60 * 60 * 1000);
 		return true;
 	},
 	lockhelp: ["/lock OR /l [username], [reason] - Locks the user from talking in all chats. Requires: % @ & ~"],
-
+	/*
 	wl: 'weeklock',
 	weeklock: function (target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help weeklock');
@@ -1369,7 +1369,7 @@ exports.commands = {
 		return true;
 	},
 	weeklockhelp: ["/weeklock OR /wl [username], [reason] - Locks the user from talking in all chats for one week. Requires: % @ & ~"],
-
+	*/
 	unlock: function (target, room, user) {
 		if (!target) return this.parse('/help unlock');
 		if (!this.can('lock')) return false;
@@ -2006,7 +2006,7 @@ exports.commands = {
 		this.addModCommand("" + targetUser.name + " was namelocked by " + user.name + "." + (reason ? " (" + reason + ")" : ""));
 		this.globalModlog("NAMELOCK", targetUser, " by " + user.name + (reason ? ": " + reason : ""));
 		Rooms.global.cancelSearch(targetUser);
-		Punishments.namelock(targetUser);
+		Punishments.namelock(targetUser, Date.now() + 7 * 24 * 60 * 60 * 1000);
 		targetUser.popup("|modal|" + user.name + " has locked your name and you can't change names anymore" + (reason ? ": " + reason : "."));
 		return true;
 	},

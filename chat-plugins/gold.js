@@ -1146,8 +1146,8 @@ exports.commands = {
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' not found.");
-		if (target.length > MAX_REASON_LENGTH) {
-			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		if (target.length > 300) {
+			return this.errorReply("The reason is too long. It cannot exceed 300 characters.");
 		}
 		if (!this.can('ban', targetUser)) return false;
 

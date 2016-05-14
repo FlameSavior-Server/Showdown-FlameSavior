@@ -185,6 +185,20 @@ exports.tourannouncements = [/* roomids */];
 // which case users won't be given any information on how to appeal.
 exports.appealurl = '';
 
+// chat filter - filter out server advertisements and banned messages
+exports.adWhitelist = adWhitelist = []; // what serverids should not be considered 'advertising'
+for (var u in adWhitelist) adWhitelist[u] = '.*' + adWhitelist[u];
+
+try {
+	exports.bannedMessages = fs.readFileSync('config/bannedmessages.txt', 'utf8').toLowerCase().split('\n');
+} catch (e) {
+	exports.bannedMessages = [];
+}
+try {
+	CommandParser.uncacheTree('./chat-plugins/chatfilter.js');
+	setTimeout(function(){require('../chat-plugins/chatfilter.js');}, 500);
+} catch (e) {}
+
 // replsocketprefix - the prefix for the repl sockets to be listening on
 // replsocketmode - the file mode bits to use for the repl sockets
 exports.replsocketprefix = './logs/repl/';

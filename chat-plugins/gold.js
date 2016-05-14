@@ -92,7 +92,7 @@ exports.commands = {
 	auth: 'gal',
 	goldauthlist: 'gal',
 	gal: function(target, room, user, connection) {
-		var ignoreUsers = ['axews', 'tintins', 'amaterasu'];
+		var ignoreUsers = ['ponybot', 'axews', 'tintins', 'amaterasu'];
 		fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
 			var staff = {
 				"admins": [],

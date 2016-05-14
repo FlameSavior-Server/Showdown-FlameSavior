@@ -27,7 +27,11 @@ Config.chatfilter = function (message, user, room, connection) {
 		}
 	}
 
-	if (!user.can('hotpatch') && (message.replace(/gold/gi, '').match(adRegex) || message.match(adRegex2))) {
+	let advMessage = message.replace(/^http:\/\//i, '');
+	advMessage = message.replace(/^https:\/\//i, '');
+	advMessage = message.replace(/^www./i, '');
+
+	if (!user.can('hotpatch') && (advMessage.replace(/gold/gi, '').match(adRegex) || advMessage.match(adRegex2))) {
 		if (user.locked) return false;
 		if (!user.advWarns) user.advWarns = 0;
 		user.advWarns++;

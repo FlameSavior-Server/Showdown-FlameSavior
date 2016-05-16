@@ -653,13 +653,10 @@ exports.commands = {
 		user.popup(popup);
 	},
 	regdate: function(target, room, user, connection) {
-		var targetid = toId(target);
-		var self = this;
-		if (targetid.length < 1 || targetid.length > 19) return this.sendReply("Usernames may not be less than one character or longer than 19");
+		if (toId(target).length < 1 || toId(target).length > 19) return this.sendReply("Usernames may not be less than one character or longer than 19");
 		if (!this.runBroadcast()) return;
 		Gold.regdate(target, (date) => {
-				this.sendReplyBox(Gold.nameColor(target, false) +
-				(date ? " was registered on " + moment(date).format("dddd, MMMM DD, YYYY HH:mmA ZZ") : " is not registered."));
+			this.sendReplyBox(Gold.nameColor(target, false) + (date ? " was registered on " + moment(date).format("dddd, MMMM DD, YYYY HH:mmA ZZ") : " is not registered."));
 			room.update();
 		});
 	},
@@ -1146,8 +1143,8 @@ exports.commands = {
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) return this.errorReply("User '" + this.targetUsername + "' not found.");
-		if (target.length > MAX_REASON_LENGTH) {
-			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
+		if (target.length > 300) {
+			return this.errorReply("The reason is too long. It cannot exceed 300 characters.");
 		}
 		if (!this.can('ban', targetUser)) return false;
 
@@ -1329,33 +1326,6 @@ Gold.hasBadge = function(user, badge) {
 		}
 	}
 };
-
-function getAvatar(user) {
-	if (!user) return false;
-	var user = toId(user);
-	var data = fs.readFileSync('config/avatars.csv', 'utf8');
-	var line = data.split('\n');
-	var count = 0;
-	var avatar = 1;
-	for (var u = 1; u > line.length; u++) {
-		if (line[u].length < 1) continue;
-		column = line[u].split(',');
-		if (column[0] == user) {
-			avatar = column[1];
-			break;
-		}
-	}
-	for (var u in line) {
-		count++;
-		if (line[u].length < 1) continue;
-		column = line[u].split(',');
-		if (column[0] == user) {
-			avatar = column[1];
-			break;
-		}
-	}
-	return avatar;
-}
 
 Gold.pmAll = function(message, pmName) {
 	pmName = (pmName ? pmName : '~Gold Server [Do not reply]');

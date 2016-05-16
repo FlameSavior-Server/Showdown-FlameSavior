@@ -1447,7 +1447,7 @@ exports.commands = {
 
 		if (isNaN(durationNumber) || durationNumber < 1 || !~validLetters.indexOf(durationLetter)) return this.errorReply("Invalid ban duration.");
 
-		if (reason.length > MAX_REASON_LENGTH) {
+		if (!user.can('hotpatch') && reason.length > MAX_REASON_LENGTH) {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}
 		if (!this.can('ban', targetUser)) return false;

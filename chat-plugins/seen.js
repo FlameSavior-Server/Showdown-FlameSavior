@@ -49,9 +49,8 @@ exports.commands = {
 				let userName = '<strong class="username">' + Gold.nameColor(target, false) + '</strong>';
 				if (Users(target) && Users(target).connected) return this.sendReplyBox(userName + ' is currently <font color="green">online</font>.');
 				if (!seenData[userid]) return this.sendReplyBox(userName + ' has <font color=\"red\">never</font> been seen online on this server.');
-				let userLastSeen = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss a");
-				let userLastSeenLabel = userLastSeen.substr(-2).toUpperCase(); //AM or PM
-				this.sendReplyBox(userName + ' was last seen online on ' + userLastSeen.substring(0, userLastSeen.length - 2) + userLastSeenLabel + ' EST. (' + moment(seenData[userid]).fromNow() + ')');
+				let userLastSeen = moment(seenData[userid]).format("MMMM Do YYYY, h:mm:ss A");
+				this.sendReplyBox(userName + ' was last seen online on ' + userLastSeen + ' EST. (' + moment(seenData[userid]).fromNow() + ')');
 				break;
 			}
 		} catch (e) {

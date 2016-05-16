@@ -62,7 +62,7 @@ exports.commands = {
 		}
 		function processPurchase(price, item, desc) {
 			if (!desc) desc = '';
-			Economy.readMoney(user.userid, function (amount) {
+			Economy.readMoney(user.userid, amount => {
 				if (amount < price) return false; //this should never happen
 				Economy.writeMoney(user.userid, -price);
 				Economy.logTransaction(user.name + ' has purchased a(n) ' + item + '. ' + desc);
@@ -294,10 +294,10 @@ exports.commands = {
 		Economy.writeMoney(toId(targetUser), amount);
 
 		//send replies
-		let lbl = (amount === 1 ? ' Gold buck' : ' Gold bucks');
-		Economy.logTransaction(user.name + " has given " + amount + lbl + " to " + targetUser + ".");
-		this.sendReply("You have given " + amount + lbl + " to " + targetUser + ".");
-		if (Users(toId(targetUser))) Users(toId(targetUser)).popup("|modal|" + user.name + " has given " + amount + lbl + " to you.");
+		amount += " Gold buck" + Gold.pluralFormat(amount, 's');
+		Economy.logTransaction(user.name + " has given " + amount + " to " + targetUser + ".");
+		this.sendReply("You have given " + amount + " to " + targetUser + ".");
+		if (Users(targetUser)) Users(targetUser).popup("|modal|" + user.name + " has given " + amount + " to you.");
 	},
 
 	takebucks: 'removebucks',
@@ -318,10 +318,10 @@ exports.commands = {
 		Economy.writeMoney(toId(targetUser), -amount);
 
 		//send replies
-		let lbl = (amount === 1 ? ' Gold buck' : ' Gold bucks');
-		Economy.logTransaction(user.name + " has removed " + amount + lbl + " from " + targetUser + ".");
-		this.sendReply("You have removed " + amount + lbl + " from " + targetUser + ".");
-		if (Users(toId(targetUser))) Users(toId(targetUser)).popup("|modal|" + user.name + " has removed " + amount + lbl + " from you.");
+		amount += amount + " Gold buck" + Gold.pluralFormat(amount, 's');
+		Economy.logTransaction(user.name + " has removed " + amount + " from " + targetUser + ".");
+		this.sendReply("You have removed " + amount + " from " + targetUser + ".");
+		if (Users(targetUser)) Users(targetUser).popup("|modal|" + user.name + " has removed " + amount + " from you.");
 	},
 
 	tb: 'transferbucks',
@@ -344,16 +344,16 @@ exports.commands = {
 		});
 
 		//log the transaction
-		let lbl = (amount === 1 ? ' Gold buck' : ' Gold bucks');
-		Economy.logTransaction(user.name + " has transfered " + amount + lbl + " to " + parts[0]);
+		amount += amount + " Gold buck" + Gold.pluralFormat(amount, 's');
+		Economy.logTransaction(user.name + " has transfered " + amount + " to " + parts[0]);
 
 		//send return messages
-		this.sendReply("You have transfered " + amount + lbl + " to " + parts[0] + ".");
+		this.sendReply("You have transfered " + amount + " to " + parts[0] + ".");
 
 		let targetUser = Users(parts[0]);
 		if (targetUser) {
-			targetUser.popup("|modal|" + user.name + " has transferred " + amount + lbl + " to you.");
-			targetUser.sendTo(room, "|raw|<b>" + Tools.escapeHTML(user.name) + " has transferred " + amount + lbl + " to you.</b>");
+			targetUser.popup("|modal|" + user.name + " has transferred " + amount  + " to you.");
+			targetUser.sendTo(room, "|raw|<b>" + Gold.nameColor(user.name, false) + " has transferred " + amount + " to you.</b>");
 		}
 	},
 
@@ -367,12 +367,9 @@ exports.commands = {
 	atm: function (target, room, user) {
 		if (!this.runBroadcast()) return;
 		if (!target) target = user.name;
-		let originalName = Tools.escapeHTML(target);
-		target = toId(target);
-		Economy.readMoney(target, bucks => {
-			let label = (bucks === 1 ? ' Gold buck' : ' Gold bucks');
+		Economy.readMoney(toId(target), bucks => {
 			let output = "<u>Gold Wallet:</u><br />";
-			output += "<b><font color=\"" + Gold.hashColor(target) + "\">" + originalName + "</font></b> " + (bucks === 0 ? "does not have any Gold bucks." : "has " + bucks + label + ".");
+			output += Gold.nameColor(target, true) + (bucks === 0 ? "does not have any Gold bucks." : "has " + bucks + " Gold buck" + Gold.pluralFormat(bucks, 's') + ".");
 			this.sendReplyBox(output);
 			room.update();
 		});

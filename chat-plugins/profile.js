@@ -47,9 +47,9 @@ exports.commands = {
 		};
 		var regdate = "(Unregistered)";
 
-		Gold.regdate(userid, function (date) {
+		Gold.regdate(userid, (date) => {
 			if (date) {
-				regdate = moment(date).format("dddd, MMMM DD, YYYY HH:mmA ZZ");
+				regdate = moment(date).format("MMMM DD, YYYY");
 			}
 			showProfile();
 		});
@@ -79,39 +79,11 @@ exports.commands = {
 			var time = Users(user).lastActive;
 			if (!time) return "hasn't talked yet";
 			if (Users(user)) {
-				var active = moment(time).fromNow();
+				return moment(time).fromNow();
 			}
-			return active;
 		}
 		function showProfile() {
-			var seenOutput = '';
-			if (!Gold.seenData[userid]) seenOutput = "Never";
-			var date = new Date(Gold.seenData[userid]);
-			if (Gold.seenData[userid]) {
-				seenOutput = date.toUTCString() + " ";
-				var seconds = Math.floor(((Date.now() - Gold.seenData[userid]) / 1000));
-				var minutes = Math.floor((seconds / 60));
-				var hours = Math.floor((minutes / 60));
-				var days = Math.floor((hours / 24));
-				var secondsWord = (((seconds % 60) > 1 || (seconds % 60) == 0) ? 'seconds' : 'second');
-				var minutesWord = (((minutes % 60) > 1 || (minutes % 60) == 0) ? 'minutes' : 'minute');
-				var hoursWord = ((hours > 1 || hours == 0) ? 'hours' : 'hour');
-				var daysWord = ((days === 1) ? 'day' : 'days');
-
-				if (minutes < 1) {
-					seenOutput += " (" + seconds + " " + secondsWord + " ago)";
-				}
-				if (minutes > 0 && minutes < 60) {
-					seenOutput += " (" + minutes + " " + minutesWord + " ago)";
-				}
-				if (hours > 0 && days < 1) {
-					seenOutput += " (" + hours + " " + hoursWord + " " + (minutes % 60) + " " + minutesWord + " ago)";
-				}
-				if (days > 0) {
-					seenOutput += " (" + days + " " + daysWord + " ago)";
-				}
-			}
-
+			var seenOutput = (Gold.seenData[userid] ? moment(Gold.seenData[userid]).format("MMMM DD, YYYY h:mm A") + ' EST (' + moment(Gold.seenData[userid]).fromNow() + ')' : "Never");
 			var profile = '';
 			profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
 			if (!getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name:</b></font> <strong class="username">' + Gold.nameColor(username, false) + '</strong><br />';

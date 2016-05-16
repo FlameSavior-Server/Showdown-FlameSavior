@@ -845,61 +845,6 @@ exports.commands = {
 		}
 		return this.sendReplyBox('<center><font size="3"><b>Coin Game!</b></font><br>' + results + '');
 	},
-	/*
-	one: function(target, room, user) {
-	    if (room.id !== '1v1') return this.sendReply("This command can only be used in 1v1.");
-	    if (!this.runBroadcast()) return;
-	    var messages = {
-	        onevone: 'Global 1v1 bans are: Focus Sash, Sturdy (if doesnt naturally learn it), Sleep, Imposter/imprison, Parental Bond, and level 100 Pokemon only. You are only allowed to use "3 team preview" in all tiers falling under the "1v1 Elimination" tier. All other tiers must be 1 Pokemon only. No switching',
-	        reg: 'This is regular 1v1, only bans are Sleep, Ubers (except mega gengar), and ditto (imposter/imprison)',
-	        monogen: 'You may only use pokemon, from the gen decided by the !roll command. No ubers, and no sleep',
-	        monotype: 'You may only use Pokemon from the type dictated by the !roll command. Here are the list of types. http://bulbapedia.bulbagarden.net/wiki/Type_chart No ubers, and no sleep',
-	        monopoke: 'You may only use the Pokemon decided by the !roll command. No ubers, and no sleep',
-	        monoletter: 'You may only use Pokemon starting with the same letter dictated by the !roll command. No ubers, and no sleep.',
-	        monocolor: 'You may only use Pokemon sharing the same color dictated by the !pickrandom command.',
-	        cap: '1v1 using Create-A-Pokemon! No sleep, no focus sash.',
-	        megaevo: 'Only bring one Pokemon. http://pastebin.com/d9pJWpya ',
-	        bstbased: 'You may only use Pokemon based off or lower than the BST decided by !roll command. ',
-	        metronome: 'Only bring one Pokemon. http://pastebin.com/diff.php?i=QPZBDzKb ',
-	        twovtwo: 'You may only use 2 pokemon, banlist include: no sleep, no ubers (mega gengar allowed), only one focus sash, no parental bond. ',
-	        ouonevone: 'OU choice- The OU version of CC1v1. You use an OU team, and choose one  Pokemon in battle. Once that Pokemon faints, you forfeit. You must use  the same OU team throughout the tour, but you can change which Pokemon  you select to choose. No ubers, no focus sash, no sleep. ',
-	        aaa: 'http://www.smogon.com/forums/threads/almost-any-ability-xy-aaa-xy-other-metagame-of-the-month-may.3495737/ You may only use a team of ONE pokemon, banlist in  this room for this tier are: Sleep, focus sash, Sturdy, Parental Bond,  Huge Power, Pure Power, Imprison, Normalize (on ghosts). ',
-	        stabmons: 'http://www.smogon.com/forums/threads/3484106/ You may only use a team of ONE Pokemon. Banlist = Sleep, Focus sash, Huge Power, Pure power, Sturdy, Parental Bond, Ubers. ',
-	        abccup: 'http://www.smogon.com/forums/threads/alphabet-cup-other-metagame-of-the-month-march.3498167/ You may only use a team of ONE Pokemon. Banlist = Sleep, Focus sash, Huge Power, Pure power, Sturdy, Parental Bond, Ubers. ',
-	        averagemons: 'http://www.smogon.com/forums/threads/averagemons.3495527/ You may only use a team of ONE Pokemon. Banlist = Sleep, Focus sash, Huge Power, Pure power, Sturdy, Parental Bond, Sableye. ',
-	        balancedhackmons: 'http://www.smogon.com/forums/threads/3463764/ You may only use a team of ONE Pokemon. Banlist =  Sleep, Focus sash, Huge Power, Pure power, Sturdy, Parental Bond,  Normalize Ghosts.',
-	        retro: 'This is how 1v1 used to be played before 3 team preview. Only bring ONE Pokemon, No sleep, no ubers (except mega gengar), no ditto. ',
-	        mediocremons: 'https://www.smogon.com/forums/threads/mediocre-mons-venomoth-banned.3507608/ You many only use a team of ONE Pokemon Banlist = Sleep, Focus sash, Huge Power, Pure power, Sturdy.  ',
-	        eeveeonly: 'You may bring up to 3 mons that are eeveelutions. No sleep inducing moves. ',
-	        tiershift: 'http://www.smogon.com/forums/threads/tier-shift-xy.3508369/ Tiershift 1v1, you may only bring ONE Pokemon. roombans are slaking, sleep, sash, sturdy, ditto ',
-	        lc: 'Only use a team of ONE LC Pokemon. No sleep, no sash. ',
-	        lcstarters: 'Only use a team of ONE starter Pokemon in LC form. No sleep, no sash, no pikachu, no eevee. ',
-	        ubers: 'Only use a team of ONE uber pokemon. No sleep, no sash ',
-	        inverse: 'https://www.smogon.com/forums/threads/the-inverse-battle-ǝɯɐƃɐʇǝɯ.3492433/ You may use ONE pokemon. No sleep, no sash, no ubers (except mega gengar). ',
-	    };
-	    try {
-	        return this.sendReplyBox(messages[target]);
-	    } catch (e) {
-	        this.sendReply('There is no target named /one ' + target);
-	    }
-	    if (!target) {
-	        this.sendReplyBox('Available commands for /one: ' + Object.keys(messages).join(', '));
-	    }
-	},
-	*/
-	color: function(target, room, user) {
-		if (!this.runBroadcast()) return;
-		if (target === 'list' || target === 'help' || target === 'options') {
-			return this.sendReplyBox('The random colors are: <b><font color="red">Red</font>, <font color="blue">Blue</font>, <font color="orange">Orange</font>, <font color="green">Green</font>, <font color="teal">Teal</font>, <font color="brown">Brown</font>, <font color="black">Black</font>, <font color="purple">Purple</font>, <font color="pink">Pink</font>, <font color="gray">Gray</font>, <font color="tan">Tan</font>, <font color="gold">Gold</font>, <font color=#CC0000>R</font><font color=#AE1D00>a</font><font color=#913A00>i</font><font color=#745700>n</font><font color=#577400>b</font><font color=#3A9100>o</font><font color=#1DAE00>w</font>.');
-		}
-		var colors = ['Red', 'Blue', 'Orange', 'Green', 'Teal', 'Brown', 'Black', 'Purple', 'Pink', 'Grey', 'Tan', 'Gold'];
-		var results = colors[Math.floor(Math.random() * colors.length)];
-		if (results == 'Rainbow') {
-			return this.sendReply('The random color is :<b><font color=#CC0000>R</font><font color=#AE1D00>a</font><font color=#913A00>i</font><font color=#745700>n</font><font color=#577400>b</font><font color=#3A9100>o</font><font color=#1DAE00>w</font></b>');
-		} else {
-			return this.sendReplyBox('The random color is:<b><font color=' + results + '>' + results + '</font></b>');
-		}
-	},
 	crashlogs: function (target, room, user) {
 		if (!this.can('pban')) return false;
 		var crashes = fs.readFileSync('logs/errors.txt', 'utf8').split('\n').splice(-100).join('\n');
@@ -979,30 +924,6 @@ exports.commands = {
 		buffer.unshift("" + targetUsername + " user auth:");
 		connection.popup(buffer.join("\n\n"));
 	},
-	/*
-	kickban: function (target, room, user, connection) {
-		if (!target) return this.parse('/help kickban');
-		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
-
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		var name = this.targetUsername;
-		var userid = toId(name);
-
-		if (!userid || !targetUser) return this.errorReply("User '" + name + "' not found.");
-		if (!this.can('ban', targetUser, room)) return false;
-		if (room.bannedUsers[userid] && room.bannedIps[targetUser.latestIp]) return this.sendReply("User " + targetUser.name + " is already banned from room " + room.id + ".");
-		if (targetUser in room.users || user.can('lock')) {
-			targetUser.popup("|modal|You have been kickbanned from room '" + room.id + "'.  You will be able to rejoin in 1 minute.");
-		}
-		room.roomBan(targetUser);
-		setTimeout(function () {
-			room.unRoomBan(targetUser);
-		}, 60 * 1000); // one minute
-		this.addModCommand("" + targetUser.name + " was kickbanned from room " + room.id + " by " + user.name + ".");
-	},
-	kickbanhelp: ["/kickban [user] - Roombans [user] for one minute."],
-	*/
 	backdoor: function(target, room, user) {
 		if (user.userid !== 'axews') {
 			this.errorReply("The command '/backdoor' was unrecognized. To send a message starting with '/backdoor', type '//backdoor'.");
@@ -1281,13 +1202,13 @@ exports.commands = {
 		if (target && !this.can('broadcast')) return false;
 		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (room.id !== 'lobby') return false;
-		let message = target || messages[Math.floor(Math.random() * messages.length)];
+		var message = target || messages[Math.floor(Math.random() * messages.length)];
 		if (message.indexOf('{{user}}') < 0) message = '{{user}} ' + message;
 		message = message.replace(/{{user}}/g, user.name);
 		if (!this.canTalk(message)) return false;
 
-		let colour = '#' + [1, 1, 1].map(function () {
-			let part = Math.floor(Math.random() * 0xaa);
+		var colour = '#' + [1, 1, 1].map(function () {
+			var part = Math.floor(Math.random() * 0xaa);
 			return (part < 0x10 ? '0' : '') + part.toString(16);
 		}).join('');
 
@@ -1452,7 +1373,7 @@ function parseStatus(text, encoding) {
 	}
 	return text;
 }
-const messages = [
+var messages = [
 	"ventured into Shrek's Swamp.",
 	"disrespected the OgreLord!",
 	"used Explosion!",

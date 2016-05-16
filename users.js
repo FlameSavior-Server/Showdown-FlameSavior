@@ -124,9 +124,11 @@ Users.saveBans = saveBans;
 
 // check if any bans have expired
 function updateBans() {
+	let now = Date.now();
 	for (let obj in Users.bans) {
-		if (Users.bans[obj].expires < Date.now()) {
-			Rooms('staff').addRaw("[Ban Notice] Ban against" + (~obj.indexOf('.') ? " IP " : " user ") + Tools.escapeHTML(obj) + " has <font color=\"green\">expired</font>.").update();
+		if (Users.bans[obj].expires < now) {
+			Rooms('staff').addRaw("[Ban Notice] Ban against" + (~obj.indexOf('.') ? " IP " : " user ") + Tools.escapeHTML(obj) + " has <font color=\"green\">expired</font>." +
+				" DEBUG: Ban issued at (" + Users.bans[obj].expires + ") current time (" + now + ")").update();
 			if (Users.bans[obj].type === 'user') Punishments.unlock(Users.bans[obj].userid);
 			if (Users.bans[obj].userid) {
 				delete lockedUsers[Users.bans[obj].userid];

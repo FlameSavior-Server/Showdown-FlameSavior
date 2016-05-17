@@ -56,14 +56,8 @@ exports.commands = {
 
 		function getFlag (flagee) {
 			if (!Users(flagee)) return false;
-			if (Users(flagee)) {
-				var geo = geoip.lookupCountry(Users(flagee).latestIp);
-				if (!geo) {
-					return false;
-				} else {
-					return ' <img src="https://github.com/kevogod/cachechu/blob/master/flags/' + geo.toLowerCase() + '.png?raw=true" height=10 title="' + geo + '">';
-				}
-			}
+			var geo = geoip.lookupCountry(Users(flagee).latestIp);
+			return (Users(flagee) && geo ? ' <img src="https://github.com/kevogod/cachechu/blob/master/flags/' + geo.toLowerCase() + '.png?raw=true" height=10 title="' + geo + '">' : false);
 		}
 		/*
 		function getStatus (user) {

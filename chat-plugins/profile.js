@@ -76,11 +76,8 @@ exports.commands = {
 		*/
 		function lastActive (user) {
 			if (!Users(user)) return false;
-			var time = Users(user).lastActive;
-			if (!time) return "hasn't talked yet";
-			if (Users(user)) {
-				return moment(time).fromNow();
-			}
+			user = Users(user);
+			return (user && user.lastActive ? moment(user.lastActive).fromNow() : "hasn't talked yet");
 		}
 		function showProfile() {
 			var seenOutput = (Gold.seenData[userid] ? moment(Gold.seenData[userid]).format("MMMM DD, YYYY h:mm A") + ' EST (' + moment(Gold.seenData[userid]).fromNow() + ')' : "Never");

@@ -793,7 +793,7 @@ exports.commands = {
 			if (err) console.log(err);
 			let row = ('' + data).split('\n');
 			let match = false;
-			let badges;
+			let badges, currentbadges;
 			for (let i = row.length; i > -1; i--) {
 				if (!row[i]) continue;
 				let split = row[i].split(':');

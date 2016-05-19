@@ -369,7 +369,7 @@ exports.commands = {
 		if (!target) target = user.name;
 		Economy.readMoney(toId(target), bucks => {
 			let output = "<u>Gold Wallet:</u><br />";
-			output += Gold.nameColor(target, true) + (bucks === 0 ? "does not have any Gold bucks." : "has " + bucks + " Gold buck" + Gold.pluralFormat(bucks, 's') + ".");
+			output += Gold.nameColor(target, true) + ' ' + (bucks === 0 ? "does not have any Gold bucks." : "has " + bucks + " Gold buck" + Gold.pluralFormat(bucks, 's') + ".");
 			this.sendReplyBox(output);
 			room.update();
 		});

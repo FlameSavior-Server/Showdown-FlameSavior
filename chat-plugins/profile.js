@@ -19,24 +19,13 @@ exports.commands = {
 
 		let targetUser = Users.get(target);
 
-		if (!targetUser) {
-			let username = target;
-			let userid = toId(target);
-			let online = false;
-			let avatar = (Config.customavatars[userid] ? "http://" + serverIp + ":" + Config.port + "/avatars/" + Config.customavatars[userid] : "http://play.pokemonshowdown.com/sprites/trainers/167.png");
-		} else {
-			let username = targetUser.name;
-			let userid = targetUser.userid;
-			let online = targetUser.connected;
-			let avatar = (isNaN(targetUser.avatar) ? "http://" + serverIp + ":" + Config.port + "/avatars/" + targetUser.avatar : "http://play.pokemonshowdown.com/sprites/trainers/" + targetUser.avatar + ".png");
-		}
+		let username = (targetUser ? targetUser.name : target);
+		let userid = (targetUser ? targetUser.userid : toId(target));
+		let avatar = (targetUser ? (isNaN(targetUser.avatar) ? "http://" + serverIp + ":" + Config.port + "/avatars/" + targetUser.avatar : "http://play.pokemonshowdown.com/sprites/trainers/" + targetUser.avatar + ".png") : (Config.customavatars[userid] ? "http://" + serverIp + ":" + Config.port + "/avatars/" + Config.customavatars[userid] : "http://play.pokemonshowdown.com/sprites/trainers/167.png"));
+		let online = (targetUser ? targetUser.connected : false);
 
-    	if (Users.usergroups[userid]) {
-			let userGroup = Users.usergroups[userid].substr(0,1);
-			if (Config.groups[userGroup]) userGroup = Config.groups[userGroup].name;
-		} else {
-			let userGroup = 'Regular User';
-		}
+    	let userSymbol = (Users.usergroups[userid] ? Users.usergroups[userid].substr(0, 1) : "Regular User");
+    	let userGroup = (Config.groups[userSymbol] ? Config.groups[userSymbol].name : "Regular User");
 
 		let self = this;
 		let bucks = function (user) {

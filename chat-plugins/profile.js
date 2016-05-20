@@ -1,11 +1,13 @@
 /* Profile chat-plugin
  * by jd, modified by panpawn
  */
-var serverIp = '167.114.155.242';
-var http = require('http');
-var formatHex = '#566'; //hex code for the formatting of the command
-var geoip = require('geoip-ultralight');
-var moment = require('moment');
+ 'use strict';
+
+const serverIp = '167.114.155.242';
+const http = require('http');
+const formatHex = '#566'; //hex code for the formatting of the command
+const geoip = require('geoip-ultralight');
+const moment = require('moment');
 geoip.startWatchingDataUpdate();
 
 exports.commands = {
@@ -15,34 +17,33 @@ exports.commands = {
 		if (toId(target).length < 1) return this.sendReply(target + " is not a valid username.");
 		if (!this.runBroadcast()) return;
 
-		var targetUser = Users.get(target);
+		let targetUser = Users.get(target);
 
 		if (!targetUser) {
-			var username = target;
-			var userid = toId(target);
-			var online = false;
-			var avatar = (Config.customavatars[userid] ? "http://" + serverIp + ":" + Config.port + "/avatars/" + Config.customavatars[userid] : "http://play.pokemonshowdown.com/sprites/trainers/167.png");
+			let username = target;
+			let userid = toId(target);
+			let online = false;
+			let avatar = (Config.customavatars[userid] ? "http://" + serverIp + ":" + Config.port + "/avatars/" + Config.customavatars[userid] : "http://play.pokemonshowdown.com/sprites/trainers/167.png");
 		} else {
-			var username = targetUser.name;
-			var userid = targetUser.userid;
-			var online = targetUser.connected;
-			var avatar = (isNaN(targetUser.avatar) ? "http://" + serverIp + ":" + Config.port + "/avatars/" + targetUser.avatar : "http://play.pokemonshowdown.com/sprites/trainers/" + targetUser.avatar + ".png");
+			let username = targetUser.name;
+			let userid = targetUser.userid;
+			let online = targetUser.connected;
+			let avatar = (isNaN(targetUser.avatar) ? "http://" + serverIp + ":" + Config.port + "/avatars/" + targetUser.avatar : "http://play.pokemonshowdown.com/sprites/trainers/" + targetUser.avatar + ".png");
 		}
 
     	if (Users.usergroups[userid]) {
-			var userGroup = Users.usergroups[userid].substr(0,1);
+			let userGroup = Users.usergroups[userid].substr(0,1);
 			if (Config.groups[userGroup]) userGroup = Config.groups[userGroup].name;
 		} else {
-			var userGroup = 'Regular User';
+			let userGroup = 'Regular User';
 		}
 
-		var self = this;
-		var bucks = function (user) {
+		let self = this;
+		let bucks = function (user) {
 			user = toId(user);
 			return (Economy.readMoneySync(user) ? Economy.readMoneySync(user) : 0);
 		};
-		var regdate = "(Unregistered)";
-
+		let regdate = "(Unregistered)";
 		Gold.regdate(userid, (date) => {
 			if (date) {
 				regdate = moment(date).format("MMMM DD, YYYY");
@@ -52,14 +53,14 @@ exports.commands = {
 
 		function getFlag (flagee) {
 			if (!Users(flagee)) return false;
-			var geo = geoip.lookupCountry(Users(flagee).latestIp);
+			let geo = geoip.lookupCountry(Users(flagee).latestIp);
 			return (Users(flagee) && geo ? ' <img src="https://github.com/kevogod/cachechu/blob/master/flags/' + geo.toLowerCase() + '.png?raw=true" height=10 title="' + geo + '">' : false);
 		}
 		/*
 		function getStatus (user) {
 			if (!Users(user)) return false;
 			if (Users(user)) {
-				var status = Users(users).status;
+				let status = Users(users).status;
 			}
 			return status;
 		}
@@ -70,8 +71,8 @@ exports.commands = {
 			return (user && user.lastActive ? moment(user.lastActive).fromNow() : "hasn't talked yet");
 		}
 		function showProfile() {
-			var seenOutput = (Gold.seenData[userid] ? moment(Gold.seenData[userid]).format("MMMM DD, YYYY h:mm A") + ' EST (' + moment(Gold.seenData[userid]).fromNow() + ')' : "Never");
-			var profile = '';
+			let seenOutput = (Gold.seenData[userid] ? moment(Gold.seenData[userid]).format("MMMM DD, YYYY h:mm A") + ' EST (' + moment(Gold.seenData[userid]).fromNow() + ')' : "Never");
+			let profile = '';
 			profile += '<img src="' + avatar + '" height=80 width=80 align=left>';
 			if (!getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name:</b></font> <strong class="username">' + Gold.nameColor(username, false) + '</strong><br />';
 			if (getFlag(toId(username))) profile += '&nbsp;<font color=' + formatHex + '><b>Name:</b></font> <strong class="username">' + Gold.nameColor(username, false) + '</strong>' + getFlag(toId(username)) + '<br />';
@@ -89,7 +90,7 @@ exports.commands = {
 	/*
 	status: function(target, room, user) {
 		if (!this.canTalk()) return;
-		var status = Tools.escapeHTML(target);
+		let status = Tools.escapeHTML(target);
 		if (status.length > 75) return this.errorReply("Your status cannot be longer than 75 characters.");
 		user.status = status;
 		this.logModCommand(user.name + ' set their status to: ' + status);

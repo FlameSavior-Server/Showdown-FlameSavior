@@ -45,15 +45,6 @@ exports.commands = {
 			let geo = geoip.lookupCountry(Users(flagee).latestIp);
 			return (Users(flagee) && geo ? ' <img src="https://github.com/kevogod/cachechu/blob/master/flags/' + geo.toLowerCase() + '.png?raw=true" height=10 title="' + geo + '">' : false);
 		}
-		/*
-		function getStatus (user) {
-			if (!Users(user)) return false;
-			if (Users(user)) {
-				let status = Users(users).status;
-			}
-			return status;
-		}
-		*/
 		function lastActive (user) {
 			if (!Users(user)) return false;
 			user = Users(user);
@@ -76,20 +67,4 @@ exports.commands = {
 			room.update();
 		}
 	},
-	/*
-	status: function(target, room, user) {
-		if (!this.canTalk()) return;
-		let status = Tools.escapeHTML(target);
-		if (status.length > 75) return this.errorReply("Your status cannot be longer than 75 characters.");
-		user.status = status;
-		this.logModCommand(user.name + ' set their status to: ' + status);
-	},
-	clearstatus: function(target, room, user) {
-		if (!this.can('pban')) return false;
-		if (!Users(target)) return this.errorReply("User '" + target + "' not found.  Check spelling?");
-		if (!Users(target).status) return this.errorReply("Users '" + target + "' does not have a status currently set to clear.");
-		Users(target).status = false;
-		this.logModCommand(user.name + ' has reset ' + target + '\'s status.');
-	}
-	*/
 };

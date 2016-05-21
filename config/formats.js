@@ -63,14 +63,23 @@ exports.Formats = [
 	{
 		name: "RU",
 		desc: [
-			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3568052/\">np: RU Stage 15</a>",
+			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3572877/\">np: RU Stage 17</a>",
 			"&bullet; <a href=\"https://www.smogon.com/dex/xy/tags/ru/\">RU Banlist</a>",
 			"&bullet; <a href=\"https://www.smogon.com/forums/threads/3558546/\">RU Viability Ranking</a>",
 		],
 		section: "ORAS Singles",
 
+		searchShow: false,
 		ruleset: ['UU'],
 		banlist: ['UU', 'BL2'],
+	},
+	{
+		name: "RU (current)",
+		section: "ORAS Singles",
+
+		challengeShow: false,
+		ruleset: ['RU'],
+		banlist: [],
 	},
 	{
 		name: "NU",
@@ -743,7 +752,7 @@ exports.Formats = [
 				this.add('c|+AM|Lucky and Bad');
 			}
 			if (name === 'andy') {
-				this.add('c|%AndrewGoncel|:I');
+				this.add('c|%Andy|:I');
 			}
 			if (name === 'antemortem') {
 				this.add('c|&antemortem|I Am Here To Oppress Users');
@@ -1292,7 +1301,7 @@ exports.Formats = [
 				this.add('c|+AM|RIP');
 			}
 			if (name === 'andy') {
-				this.add('c|%AndrewGoncel|wow r00d! :c');
+				this.add('c|%Andy|wow r00d! :c');
 			}
 			if (name === 'antemortem') {
 				this.add('c|&antemortem|FUCKING CAMPAIGNERS');
@@ -1994,7 +2003,7 @@ exports.Formats = [
 		section: "Other Metagames",
 
 		ruleset: ['OU'],
-		banlist: ['Ignore STAB Moves', 'Diggersby', 'Aerodactylite', 'Altarianite', "King's Rock", 'Metagrossite', 'Razor Fang'],
+		banlist: ['Ignore STAB Moves', 'Diggersby', 'Kyurem-Black', 'Porygon-Z', 'Aerodactylite', 'Altarianite', "King's Rock", 'Metagrossite', 'Razor Fang'],
 	},
 	{
 		name: "LC UU",

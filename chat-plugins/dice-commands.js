@@ -77,7 +77,7 @@ class Dice {
 					this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + this.players.map(user => Gold.nameColor(user.name, false)) + ' has joined the game!</center>').update();
 					return;
 				}
-				let players = this.players.map(user => Gold.nameColor(user.name)).join(' and ');
+				let players = this.players.map(user => Gold.nameColor(user.name, false)).join(' and ');
 				this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + players + ' have joined the game!</center></div>').update();
 				let roll1, roll2;
 				do {

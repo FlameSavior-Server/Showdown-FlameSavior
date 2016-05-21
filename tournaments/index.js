@@ -815,7 +815,7 @@ class Tournament {
 			let money = (tourSize < 50 ? tourSize : 50);
 
 			try {
-				this.room.add('|raw|<b><font color=' + Gold.hashColor(toId(winner)) + '>' + Tools.escapeHTML(winner) + '</font> has won <font color=#24678d>' + money + '</font> bucks for winning the tournament!</b>');
+				this.room.add('|raw|<b>' + Gold.nameColor(winner, false) + ' has won <font color=#24678d>' + money + '</font> bucks for winning the tournament!</b>');
 				Economy.writeMoney(toId(winner), money);
 			} catch (e) {}
 		}

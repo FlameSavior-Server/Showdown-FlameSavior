@@ -294,10 +294,10 @@ exports.commands = {
 		Economy.writeMoney(toId(targetUser), amount);
 
 		//send replies
-		amount += " Gold buck" + Gold.pluralFormat(amount, 's');
-		Economy.logTransaction(user.name + " has given " + amount + " to " + targetUser + ".");
-		this.sendReply("You have given " + amount + " to " + targetUser + ".");
-		if (Users(targetUser)) Users(targetUser).popup("|modal|" + user.name + " has given " + amount + " to you.");
+		let amountLbl = " Gold buck" + Gold.pluralFormat(amount, 's');
+		Economy.logTransaction(user.name + " has given " + amountLbl + " to " + targetUser + ".");
+		this.sendReply("You have given " + amountLbl + " to " + targetUser + ".");
+		if (Users(targetUser)) Users(targetUser).popup("|modal|" + user.name + " has given " + amountLbl + " to you.");
 	},
 
 	takebucks: 'removebucks',
@@ -318,10 +318,10 @@ exports.commands = {
 		Economy.writeMoney(toId(targetUser), -amount);
 
 		//send replies
-		amount += amount + " Gold buck" + Gold.pluralFormat(amount, 's');
-		Economy.logTransaction(user.name + " has removed " + amount + " from " + targetUser + ".");
-		this.sendReply("You have removed " + amount + " from " + targetUser + ".");
-		if (Users(targetUser)) Users(targetUser).popup("|modal|" + user.name + " has removed " + amount + " from you.");
+		let amountLbl = amount + " Gold buck" + Gold.pluralFormat(amount, 's');
+		Economy.logTransaction(user.name + " has removed " + amountLbl + " from " + targetUser + ".");
+		this.sendReply("You have removed " + amountLbl + " from " + targetUser + ".");
+		if (Users(targetUser)) Users(targetUser).popup("|modal|" + user.name + " has removed " + amountLbl + " from you.");
 	},
 
 	tb: 'transferbucks',
@@ -344,16 +344,16 @@ exports.commands = {
 		});
 
 		//log the transaction
-		amount += amount + " Gold buck" + Gold.pluralFormat(amount, 's');
-		Economy.logTransaction(user.name + " has transfered " + amount + " to " + parts[0]);
+		let amountLbl = amount + " Gold buck" + Gold.pluralFormat(amount, 's');
+		Economy.logTransaction(user.name + " has transfered " + amountLbl + " to " + parts[0]);
 
 		//send return messages
-		this.sendReply("You have transfered " + amount + " to " + parts[0] + ".");
+		this.sendReply("You have transfered " + amountLbl + " to " + parts[0] + ".");
 
 		let targetUser = Users(parts[0]);
 		if (targetUser) {
-			targetUser.popup("|modal|" + user.name + " has transferred " + amount  + " to you.");
-			targetUser.sendTo(room, "|raw|<b>" + Gold.nameColor(user.name, false) + " has transferred " + amount + " to you.</b>");
+			targetUser.popup("|modal|" + user.name + " has transferred " + amountLbl + " to you.");
+			targetUser.sendTo(room, "|raw|<b>" + Gold.nameColor(user.name, false) + " has transferred " + amountLbl + " to you.</b>");
 		}
 	},
 

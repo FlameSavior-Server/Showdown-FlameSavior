@@ -1,12 +1,16 @@
 'use strict';
 
+// modules
 const fs = require('fs');
 const request = require('request');
 const moment = require('moment');
 const http = require('http');
+const geoip = require('geoip-ultralight');
+const forever = require('forever');
+
+// misc
 const serverIp = '167.114.155.242';
 const formatHex = '#566'; //hex code for the formatting of the command
-const geoip = require('geoip-ultralight');
 
 let regdateCache = {};
 let badges = fs.createWriteStream('badges.txt', {
@@ -18,20 +22,19 @@ exports.commands = {
 
 	restart: function(target, room, user) {
 		if (!this.can('lockdown')) return false;
-		try {
-			let forever = require('forever');
-		} catch (e) {
-			return this.sendReply("/restart requires the \"forever\" module.");
-		}
 		if (!Rooms.global.lockdown) {
-			return this.sendReply("For safety reasons, /restart can only be used during lockdown.");
+			return this.errorReply("For safety reasons, /restart can only be used during lockdown.");
 		}
 		if (CommandParser.updateServerLock) {
-			return this.sendReply("Wait for /updateserver to finish before using /restart.");
+			return this.errorReply("Wait for /updateserver to finish before using /restart.");
 		}
 		this.logModCommand(user.name + ' used /restart');
-		Rooms.global.send('|refresh|');
-		forever.restart('app.js');
+		try {
+			Rooms.global.send('|refresh|');
+			forever.restart('app.js');
+		} catch (e) {
+			return this.errorReply("Something went wrong while trying to restart.  Are you sure the server is started with the 'forever' module?");
+		}
 	},
 	dm: 'daymute',
 	daymute: function (target, room, user, connection, cmd) {

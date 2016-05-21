@@ -45,7 +45,7 @@ exports.commands = {
 				let userid = toId(target);
 				if (userid.length > 18) return this.errorReply("Usernames cannot be over 18 characters.");
 				if (userid.length < 1) return this.errorReply("/seen - Please specify a name.");
-				let userName = '<strong class="username">' + (Users(target) && Users(target).connected ? Gold.nameColor(Users.getExact(target).name, false) : Gold.nameColor(target, false)) + '</strong>';
+				let userName = '<strong class="username">' + Gold.nameColor(target, false) + '</strong>';
 				if (userid === user.userid) return this.sendReplyBox(userName + ", have you looked in a mirror lately?");
 				if (Users(target) && Users(target).connected) return this.sendReplyBox(userName + ' is currently <font color="green">online</font>.');
 				if (!seenData[userid]) return this.sendReplyBox(userName + ' has <font color=\"red\">never</font> been seen online on this server.');

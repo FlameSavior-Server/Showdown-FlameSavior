@@ -1518,7 +1518,7 @@ Gold.pluralFormat = function(length, ending) {
 	return (length == 1 ? '' : ending);
 }
 Gold.nameColor = function(name, bold) {
-	return (bold ? "<b>" : "") + "<font color=" + Gold.hashColor(name) + ">" + Tools.escapeHTML(name) + "</font>" + (bold ? "</b>" : "");
+	return (bold ? "<b>" : "") + "<font color=" + Gold.hashColor(name) + ">" + (Users(name) && Users(name).connected ? Tools.escapeHTML(Users.getExact(name).name) : Tools.escapeHTML(name)) + "</font>" + (bold ? "</b>" : "");
 }
 
 Gold.regdate = function(target, callback) {

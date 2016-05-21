@@ -39,7 +39,7 @@ fs.readFile('config/wordlist.txt', 'utf8', function (err, data) {
 exports.commands = {
 	anagram: function (target, room, user) {
 		if (!user.can('broadcast', null, room) || !this.canTalk()) return this.errorReply('/anagram - Access denied.');
-		if (!target && !room.anagram) return this.sendReply("Usage: /anagram [normal/pokemon]");
+		if (!target && !room.anagram) return this.parse("/help anagram");
 		if (!this.runBroadcast()) return;
 		if (room.anagram) return this.sendReplyBox("Word: " + room.anagram.scrambledWord);
 		if (!room.anagram) room.anagram = {};
@@ -89,11 +89,13 @@ exports.commands = {
 		};
 		return this.add('|raw|<div class="infobox">' + Tools.escapeHTML(user.name) + ' has started an anagram. Letters: <b>' + room.anagram.scrambledWord + '</b> Theme: <b>' + theme + '</b></div>');
 	},
+	anagramhelp: ["Usage: /anagram [normal/pokemon] - Creates an anagram game in the respected room.  Requires +, %, @, #, &, ~"],
 
 	endanagram: function (target, room, user) {
-		if (!user.can('broadcast', null, room)) return this.sendReply('/endanagram - Access denied.');
+		if (!user.can('broadcast', null, room)) return this.parse("/help endanagram");
 		if (!room.anagram) return this.sendReply('There is no anagram running in here.');
 		delete room.anagram;
 		this.add('|raw|<div class="infobox">The anagram game was ended by <b>' + Tools.escapeHTML(user.name) + '</b></div>');
 	},
+	endanagramhelp: ["/endanagram - Ends the current game of anagrams in the respected room.  Requires +, %, @, #, &, ~"],
 };

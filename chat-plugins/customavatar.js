@@ -165,7 +165,9 @@ exports.commands = {
 				break;
 
 			default:
-				return this.sendReply("Invalid command. Valid commands are `/customavatar set, user, avatar` and `/customavatar delete, user`.");
+				return this.parse("/help customavatar");
 		}
-	}
+	},
+	customavatarhelp: ["/customavatar [set/delete], [user] - Sets to deletes a users custom avatar.  Requires VIP, &, ~",
+		"/customavatar reload - Reloads all current set custom avatars on the server. Requires ~"],
 };

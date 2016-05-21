@@ -294,7 +294,7 @@ exports.commands = {
 		Economy.writeMoney(toId(targetUser), amount);
 
 		//send replies
-		let amountLbl = " Gold buck" + Gold.pluralFormat(amount, 's');
+		let amountLbl = amount + " Gold buck" + Gold.pluralFormat(amount, 's');
 		Economy.logTransaction(user.name + " has given " + amountLbl + " to " + targetUser + ".");
 		this.sendReply("You have given " + amountLbl + " to " + targetUser + ".");
 		if (Users(targetUser)) Users(targetUser).popup("|modal|" + user.name + " has given " + amountLbl + " to you.");

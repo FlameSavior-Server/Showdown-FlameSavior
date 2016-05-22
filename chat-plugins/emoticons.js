@@ -304,5 +304,8 @@ exports.commands = {
 	emoticonlist: 'emotelist',
 	emotelist: function(target, room, user) {
 		return this.errorReply("Try /emote view instead.");
-	}
+	},
+	ev: function(target, room, user) {
+		return this.parse("/emote view");
+	},
 };

@@ -340,7 +340,7 @@ exports.commands = {
 	},
 	tierpoll: 'tpoll',
 	tpoll: function(target, room, user) {
-		var tiers = ['Challenge Cup 1v1', 'OMotM', 'OU', 'Random Battle', 'Random Monotype Battle', 'UU', 'NU', 'RU', 'PU', 'Ubers'];
+		var tiers = ['Challenge Cup 1v1', 'OMotM', 'OU', 'Random Battle', 'Random Monotype Battle', 'UU', 'NU', 'RU', 'PU', 'Ubers', 'Monotype'];
 		this.parse('/poll new Next tournament tier?, ' + tiers.sort());
 	},
 	vote: function(target, room, user) {
